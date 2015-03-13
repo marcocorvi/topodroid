@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+   					  
+    <TextView android:id="@+id/td_symbol" 
+       android:layout_marginTop="2dp"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content" 
+       android:text="@string/td_symbol_text"
+       />
+
+    <CheckBox android:id="@+id/td_symbol_ask"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="10dp"
+       android:text="@string/td_symbol_ask"
+       />
+    
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:layout_marginTop="10dp"
+       android:orientation="horizontal"
+       >
+
+      <Button android:id="@+id/td_symbol_yes"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:singleLine="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/button_yes"
+        />
+      <Button android:id="@+id/td_symbol_no"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:singleLine="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/button_no"
+        />
+    </LinearLayout>
+</LinearLayout>

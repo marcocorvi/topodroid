@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="25dip"
+         android:orientation="horizontal"
+         >
+        <Button android:id="@+id/plot_new"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:background="@drawable/button"
+            style="@style/button_default"
+            android:text="@string/plot_new"
+            />
+
+        <!-- FIXME_SKETCH_3D -->
+
+       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content"
+         android:gravity="right"
+         android:orientation="horizontal"
+         >
+        <Button android:id="@+id/sketch3d_new"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:background="@drawable/button"
+           style="@style/button_default"
+           android:text="@string/sketch3d_new"
+        />
+
+      </LinearLayout>
+    </LinearLayout>
+   
+    <GridView android:id="@+id/list"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:stackFromBottom="false"
+       android:transcriptMode="alwaysScroll"
+       android:layout_weight="1"
+       android:textSize="12sp"
+       android:numColumns="2"
+    />  
+
+    <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content"
+         android:layout_marginTop="25dip"
+         android:layout_gravity="left"
+         android:orientation="horizontal"
+         >
+
+      <Button android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+      />
+
+    </LinearLayout -->
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+symbol point
+name pillar
+name-es columna
+name-pt pilar
+name-it colonna
+name-fr pilier
+name-de Säule
+name-ru колонна
+th_name pillar
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -3 -7
+  lineTo 0 -4
+  lineTo 0 4
+  lineTo -3 7
+  moveTo 0 4
+  lineTo 3 7
+  moveTo 0 -4
+  lineTo 3 -7
+endpath
+endsymbol

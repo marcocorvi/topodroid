@@ -1,0 +1,19 @@
+symbol point
+name ice
+name-es hielo
+name-pt gelo
+name-it ghiaccio
+name-fr glace
+name-de Eis
+name-ru лед
+th_name ice
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo -5 0
+  lineTo 5 0
+  moveTo 0 -5
+  lineTo 0 5
+endpath
+endsymbol

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <string-array name="extend_name">
+     <item>Gauche</item>
+     <item>Vertical</item>
+     <item>Droite</item>
+     <item>--</item>
+  </string-array>
+
+  <!-- TODO string-array name="logStream">
+     <item name="android">System log</item>
+     <item name="file">File log</item>
+  </string-array>
+  <string-array name="logStreamValue">
+     <item name="android">0</item>
+     <item name="file">1</item>
+  </string-array -->
+
+  <!-- TODO string-array name="connMode">
+     <item name="batch">Batch</item>
+     <item name="continuous">Continuous</item>
+  </string-array>
+  <string-array name="connModeValue">
+     <item name="batch">0</item>
+     <item name="continuous">1</item>
+  </string-array -->
+
+  <string-array name="altitudeType">
+    <item name="wgs84">ellipsoïde WGS84</item>
+    <item name="asl">Orthometrique</item>
+  </string-array>
+  <string-array name="altitudeTypeValue">
+    <item name="wgs84">0</item>
+    <item name="asl">1</item>
+  </string-array>
+
+  <string-array name="sockType">
+     <item name="default">Par défaut</item>
+     <item name="Insecure">Non sécurisé</item>
+  </string-array>
+  <string-array name="sockTypeValue">
+     <item name="default">0</item>
+     <item name="Insecure">1</item>
+  </string-array>
+
+  <string-array name="surveyStations">
+     <item name="no">Désactivé</item>
+     <item name="for">Visée normale, visée latérales en premier</item>
+     <item name="back">Visée inverse, visée latérales en premier</item>
+     <item name="for2">Visée normale, cheminement en premier</item>
+     <item name="back2">Visée inverse, cheminement en premier</item>
+  </string-array>
+  <string-array name="surveyStationsValue">
+     <item name="no">0</item>
+     <item name="for">1</item>
+     <item name="back">2</item>
+     <item name="for2">3</item>
+     <item name="back2">4</item>
+  </string-array>
+
+  <string-array name="pickerType">
+     <item name="list">Liste</item>
+     <item name="grid">Grille</item>
+  </string-array>
+  <string-array name="pickerTypeValue">
+     <item name="list">0</item>
+     <item name="grid">1</item>
+  </string-array>
+
+  <!-- string-array name="deviceType">
+     <item name="none">None</item>
+     <item name="A3">A3</item>
+     <item name="X310">X310</item>
+  </string-array>
+  <string-array name="deviceTypeValue">
+     <item name="none">0</item>
+     <item name="A3">1</item>
+     <item name="X310">2</item>
+  </string-array -->
+
+  <string-array name="deviceBT">
+     <item name="0">Désactivé</item>
+     <item name="1">Vérifier au démarrage</item>
+     <item name="2">Activé</item>
+  </string-array>
+  <string-array name="deviceBTValue">
+     <item name="0">0</item>
+     <item name="1">1</item>
+     <item name="2">2</item>
+  </string-array>
+
+  <string-array name="exportType">
+     <item name="th">Therion</item>
+     <item name="dat">Compass</item>
+     <item name="svx">Survex</item>
+     <item name="tro">VisualTopo</item>
+     <!-- item name="tlx">TopoLinux</item -->
+  </string-array>
+  <string-array name="exportTypeValue">
+     <item name="th">th</item>
+     <item name="dat">dat</item>
+     <item name="svx">svx</item>
+     <item name="tro">tro</item>
+     <!-- item name="tlx">tlx</item -->
+  </string-array>
+
+  <string-array name="lineStyle">
+     <item name="none">Fine</item>
+     <item name="two">Normale</item>
+     <item name="two">Grossière</item>
+     <item name="bezier">Bézier</item>
+  </string-array>
+  <string-array name="lineStyleValue">
+     <item name="none">1</item>
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="bezier">0</item>
+  </string-array>
+
+  <string-array name="groupBy">
+     <item name="distance">Distance</item>
+     <item name="four">Quatre en même temps</item>
+     <item name="only16">Seize premier</item>
+  </string-array>
+  <string-array name="groupByValue">
+     <item name="distance">0</item>
+     <item name="four">1</item>
+     <item name="only16">2</item>
+  </string-array>
+
+  <string-array name="unitLength">
+     <item name="meters">Mètres</item>
+     <item name="feet">Pieds</item>
+  </string-array>
+  <string-array name="unitLengthValue">
+     <item name="meters">Mètres</item>
+     <item name="feet">Pieds</item>
+  </string-array>
+
+  <string-array name="unitAngle">
+     <item name="degrees">degrés décimaux</item>
+     <item name="grads">grades décimaux</item>
+  </string-array>
+  <string-array name="unitAngleValue">
+     <item name="degrees">degrés</item>
+     <item name="grads">grades</item>
+  </string-array>
+
+  <string-array name="unitLocation">
+     <item name="degrees">degrés décimaux</item>
+     <item name="ddmmss">degrés, minutes, secondes</item>
+  </string-array>
+  <string-array name="unitLocationValue">
+     <item name="degrees">degrés</item>
+     <item name="ddmmss">ddmmss</item>
+  </string-array>
+
+<!-- TODO
+  <string-array name="calibAlgo">
+     <item name="auto">auto</item>
+     <item name="linear">linear</item>
+     <item name="nonlinear">non-linear</item>
+  </string-array>
+  <string-array name="calibAlgoValue">
+     <item name="auto">0</item>
+     <item name="linear">1</item>
+     <item name="nonlinear">2</item>
+  </string-array>
+-->
+
+</resources>

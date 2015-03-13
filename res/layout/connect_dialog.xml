@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+  >
+
+  <TextView android:id="@+id/conn_state"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:textSize="16dip"
+        />
+
+  <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="15dp" 
+      >
+        <Button android:id="@+id/button_start"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_start"
+          />
+        <Button android:id="@+id/button_stop"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_stop"
+          />
+    </LinearLayout -->
+
+  <TextView android:id="@+id/device_address"
+        android:layout_marginTop="25dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:textSize="16dip"
+        android:hint="@string/no_device_address"
+        />
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="10dp" 
+      >
+        <Button android:id="@+id/button_connect"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/menu_attach"
+          />
+        <Button android:id="@+id/button_disconnect"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/menu_detach"
+          />
+        <Button android:id="@+id/button_sync"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/menu_sync"
+          />
+  </LinearLayout>
+
+  <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginBottom="15dp" 
+      android:layout_marginTop="10dp" 
+      >
+      <Button android:id="@+id/button_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_back"
+        />
+  </LinearLayout -->
+
+  <ListView android:id="@+id/dev_list"
+          android:layout_width="match_parent"
+          android:layout_height="fill_parent"
+          android:stackFromBottom="true"
+          android:transcriptMode="alwaysScroll"
+          android:layout_weight="1"
+          android:textSize="12sp"
+  />  
+
+
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+symbol point
+name section
+name-es sección 
+name-it sezione
+name-fr section
+name-de Schnitt
+name-ru сечение
+th_name section
+orientation no
+color 0xcccccc
+csurvey 6 6 80
+path
+  moveTo -5 -5 
+  lineTo -5 5
+  lineTo 5 5
+  lineTo 5 -5
+  lineTo -5 -5
+endpath
+endsymbol

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="menu_foreground">#ff33ccff</color>
+    <color name="menu_background">#ff333333</color>
+    <color name="button_background">#ff33ccff</color>
+    <color name="bg_grey">#ff999999</color>
+    <color name="bg_white">#ffffffff</color>
+    <color name="textdelete">#ffcc0000</color>
+</resources>

@@ -1,0 +1,17 @@
+symbol point
+name sink
+name-es sumidero
+name-pt sumidouro
+name-it perdita_d'acqua
+name-fr perte
+name-de Schluckloch
+name-ru провал
+th_name sink
+orientation no
+color 0x6666ff
+csurvey 6 6 80
+path
+  moveTo -5 -3
+  cubicTo -5 1 5 1 5 -3
+endpath
+endsymbol

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<!-- TOOL SCREEN -->
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_LINE_STYLE"
+       android:summary="@string/pref_linestyle_summary"
+       android:title="@string/pref_linestyle_title"
+       android:defaultValue="2"
+       android:entries="@array/lineStyle"
+       android:entryValues="@array/lineStyleValue" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LINE_SEGMENT"
+       android:title="@string/pref_segment_title"
+       android:summary="@string/pref_segment_summary"
+       android:dialogTitle="@string/pref_segment_title"
+       android:dialogMessage="@string/pref_segment_message"
+       android:inputType="number"
+       android:defaultValue="5" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LINE_ACCURACY"
+       android:title="@string/pref_lineacc_title"
+       android:summary="@string/pref_lineacc_summary"
+       android:dialogTitle="@string/pref_lineacc_title"
+       android:dialogMessage="@string/pref_lineacc_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1.0" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LINE_CORNER"
+       android:title="@string/pref_linecorner_title"
+       android:summary="@string/pref_linecorner_summary"
+       android:dialogTitle="@string/pref_linecorner_title"
+       android:dialogMessage="@string/pref_linecorner_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="20.0" />
+
+</PreferenceScreen>

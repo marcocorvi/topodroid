@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory 
+     android:title="@string/pref_cat_log"
+     android:key="log_category">
+
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_LOG_STREAM"
+       android:summary="@string/pref_log_stream_summary"
+       android:title="@string/pref_log_stream_title"
+       android:defaultValue="0"
+       android:entries="@array/logStream"
+       android:entryValues="@array/logStreamValue"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_DEBUG"
+       android:title="@string/pref_log_debug"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_ERR"
+       android:title="@string/pref_log_err"
+       android:defaultValue="true"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_INPUT"
+       android:title="@string/pref_log_input"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_BT"
+       android:summary="@string/pref_log_bt"
+       android:title="@string/pref_log_bt"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_COMM"
+       android:title="@string/pref_log_comm"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_PROTO"
+       android:title="@string/pref_log_proto"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_DISTOX"
+       android:title="@string/pref_log_distox"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_DEVICE"
+       android:title="@string/pref_log_device"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_DATA"
+       android:title="@string/pref_log_data"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_DB"
+       android:title="@string/pref_log_db"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_CALIB"
+       android:title="@string/pref_log_calib"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_FIXED"
+       android:title="@string/pref_log_fixed"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_LOC"
+       android:title="@string/pref_log_loc"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_PHOTO"
+       android:title="@string/pref_log_photo"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_SENSOR"
+       android:title="@string/pref_log_sensor"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_SHOT"
+       android:title="@string/pref_log_shot"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_SURVEY"
+       android:title="@string/pref_log_survey"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_NUM"
+       android:title="@string/pref_log_num"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_THERION"
+       android:title="@string/pref_log_therion"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_PLOT"
+       android:title="@string/pref_log_plot"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_BEZIER"
+       android:title="@string/pref_log_bezier"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_CSURVEY"
+       android:title="@string/pref_log_csurvey"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_PTOPO"
+       android:title="@string/pref_log_ptopo"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_ZIP"
+       android:title="@string/pref_log_zip"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_UNITS"
+       android:title="@string/pref_log_units"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOG_SYNC"
+       android:title="@string/pref_log_sync"
+       android:defaultValue="false"
+     />
+
+
+
+<!--
+  static final boolean LOG_NOTE   = false;   // annotation
+  static final boolean LOG_MAIN   = false;   // main app
+  static final boolean LOG_NAME   = false;   // names
+  static final boolean LOG_PATH   = false;
+  static final boolean LOG_PREFS  = false;   // preferences
+  static final boolean LOG_STATS  = false;
+  static final boolean LOG_ZIP    = false;   // archive
+-->
+
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

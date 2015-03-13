@@ -1,0 +1,26 @@
+symbol point
+name popcorn
+name-es palomitas_maнz
+name-pt couve-flor
+name-it cavolfiore
+name-fr choux-fleur
+name-de Blumenkohlsinter
+name-ru попкорн
+th_name popcorn
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -7 4
+  lineTo 7 4
+  moveTo -6 4
+  lineTo -6 -1
+  addCircle -6 -2 1
+  moveTo 0 4
+  lineTo 0 -1
+  addCircle 0 -2 1
+  moveTo 6 4
+  lineTo 6 -1
+  addCircle 6 -2 1
+endpath
+endsymbol

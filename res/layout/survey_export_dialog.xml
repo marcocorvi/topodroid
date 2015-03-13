@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="10dp" 
+       >
+   					  
+      <Button android:id="@+id/btn_zip"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_zip"
+        android:textStyle="bold"
+        />
+   					  
+      <Button android:id="@+id/btn_therion"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_therion"
+        />
+
+      <Button android:id="@+id/btn_pockettopo"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_pockettopo"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="10dp" 
+       >
+
+      <Button android:id="@+id/btn_csv"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_csv"
+        />
+
+      <Button android:id="@+id/btn_csurvey"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_csurvey"
+        />
+
+      <Button android:id="@+id/btn_compass"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_compass"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="10dp" 
+       >
+
+      <Button android:id="@+id/btn_dxf"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_dxf"
+        />
+
+      <Button android:id="@+id/btn_survex"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_survex"
+        />
+
+      <Button android:id="@+id/btn_vtopo"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_vtopo"
+        />
+    
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="10dp" 
+       >
+
+      <Button android:id="@+id/btn_walls"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_walls"
+        />
+
+      <!-- Button android:id="@+id/btn_survex"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_survex"
+        / -->
+
+      <!-- Button android:id="@+id/btn_vtopo"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_vtopo"
+        / -->
+    
+    </LinearLayout>
+
+    <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_gravity="left"
+       android:layout_marginTop="25dip"
+       >
+      <Button android:id="@+id/button_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        />
+     </LinearLayout -->
+
+</LinearLayout>

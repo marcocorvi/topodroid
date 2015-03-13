@@ -1,0 +1,21 @@
+symbol point
+name helictite
+name-es helictitas
+name-pt helectites
+name-it eccentrica
+name-fr excentrique
+name-de Excentrique
+name-ru гелликтиты
+th_name helictite
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo 0 -7
+  lineTo 0 7
+  moveTo -3 -5
+  lineTo -3 0
+  lineTo 3 0
+  lineTo 3 5
+endpath
+endsymbol

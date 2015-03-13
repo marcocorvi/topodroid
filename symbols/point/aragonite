@@ -1,0 +1,22 @@
+symbol point
+name aragonite
+name-es aragonito
+name-it aragonite
+name-fr aragonite
+name-de Aragonit
+name-ru арагонит
+th_name aragonite
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo  0 -5
+  lineTo  0  7
+  moveTo -2 -7
+  lineTo  0 -5
+  lineTo  2 -7
+  moveTo -3 -4
+  lineTo  0 -1
+  lineTo  3 -4
+endpath
+endsymbol

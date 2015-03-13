@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- string name="topodroid_man">topodroid.txt</string -->
+    <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
+
+    <!-- OK string name="app_name">TopoDroid</string -->
+
+    <string name="version_ask">Installation einer neuen Version von TopoDroid.\n.Wollen Sie die Zeichenwerkzeuge neu installieren?</string>
+    <!-- TODO string name="version_title">Version update</string -->
+
+    <string name="POINT">PUNKT</string>
+    <string name="LINE">LINIE</string>
+    <string name="AREA">FLÄCHE</string>
+    <string name="HELP">HILFE</string>
+    <string name="STATION">MESSPUNKT</string>
+
+    <string name="memoryA3">DistoX A3 Speicherkarte</string>
+    <string name="memoryX310">DistoX X310 Speicherkarte</string>
+    <string name="memory_data">DistoX Daten</string>
+
+    <!-- OK string name="td_symbol_text">Do you need to install drawing tools?\nYou can do it later with the app TdSymbol</string -->
+    <!-- OK string name="td_symbol_ask">Don\'t ask me again</string -->
+
+<!-- names of therion items -->
+    <string name="thp_user">user</string>
+    <string name="thp_label">Beschriftung</string>
+    <!-- string name="thp_danger">danger</string -->
+    <string name="thl_user">user</string>
+    <string name="thl_wall">Wand</string>
+    <string name="tha_user">user</string>
+    <string name="tha_water">Wasser</string>
+
+<!-- STRINGS ABOUT MISSING ITEMS ARE NO LONGER USED -->
+    <string name="missing_area">FLÄCHE</string>
+    <!-- OK string name="missing_hint">Please, enable the missing tools or install them</string -->
+    <string name="missing_line">LINIE</string>
+    <string name="missing_point">PUNKT</string>
+    <!-- OK string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
+    <string name="missing_station">Kein Messpunkt</string>
+    <!-- OK string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
+    <!-- OK string name="missing_title">MISSING SYMBOLS</string -->
+    <!-- OK string name="missing_warning">The following drawing tools are missing.\n</string -->
+
+<!-- DRAWING POINT EDITING -->
+    <string name="failed_snap_to_line">Keine enge Linie Punkt, um die Gegend zu schnappen Grenze</string>
+    <string name="failed_snap_to_point">Kein Punkt in der Nähe, um den Punkt zu schnappen</string>
+
+<!-- CALIBRATION -->
+    <string name="calib_new">Neue Kalibrierung</string>
+    <string name="calib_exists">Kalibrierung bereits vorhanden</string>
+    <string name="calib_delete">Kalibrierung löschen</string>
+    <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
+    <string name="calib_no_name">Name erforderlich</string>
+    <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
+    <string name="calib_saved">Kalibrierung gespeichert</string>
+    <string name="calib_updated">Kalibrierung aktualisiert</string>
+    <string name="calib_compute_groups">Kalibrierung Datengruppen berechnen ...</string>
+    <string name="calib_compute_coeffs">Kalibrierung Koeffizienten berechnen ...</string>
+    <!-- TODO string name="calib_read_coeffs">Kalibrierung Koeffizienten READING ...</string -->
+    <string name="calib_write_coeffs">Kalibrierung Koeffizienten speichern ...</string>
+    <string name="connect_failed">Verbindung fehlgeschlagen</string>
+    <string name="data"> Daten</string>
+    <string name="using">%1$s %2$s benutzen</string>
+    <string name="calib_error">Ungleichheit: %1$.4f Grad</string>
+    <string name="calib_max_error">Max. Ungleichheit: %1$.4f Grad</string>
+    <string name="calib_iter">Iterationen: %1$d</string>
+    <string name="calib_saturated_values">WARNUNG: %1$d gesättigter Daten</string>
+    <string name="algorithm">Algorithmus:</string>
+    <string name="auto">automatisch</string>
+    <!-- TODO TRANSLATION: gender: masc/femin/neutr (der/die/das) or singular/plural must be known -->
+    <!-- TODO TRANSLATION: below used feminin (der) for Algorithmus --> 
+    <string name="linear">linearer</string>
+    <string name="non_linear">nicht-linearer</string>
+   
+<!-- DistoX DEVICE STUFF -->
+    <string name="device_algo_failed">Selbstbestimmung fehlgeschlagen.\nVerwendung vom linearen Algorithmus</string>
+    <string name="device_busy">Gerät besetzt</string>
+    <!-- TODO string name="device_illegal_addr">Illegal memory address</string -->
+    <string name="device_info">Gerät-Info</string>
+    <!-- FIXME string name="device_model_set">Do you really want to change the model of the device</string -->
+    <string name="device_none">Kein DistoX ausgewählt</string>
+    <string name="device_pairing">Paaren: Benachrichtigungen überprüfen</string>
+    <string name="device_reset">DistoX Memory zurücksetzen</string>
+    <!-- OK string name="device_code">DistoX code %1$4d</string -->
+    <!-- OK string name="device_firmware">Firmware  %1$d.%2$d</string -->
+    <!-- OK string name="device_hardware">Hardware  %1$d.%2$d</string -->
+    <string name="device_status_angle">Winkeleinheiten %1$s</string>
+    <string name="device_status_compass">Kompass/Steigungs %1$s</string>
+    <string name="device_status_calib">Mode %1$s</string>
+    <string name="device_status_silent">Silent %1$s</string>
+    <string name="bt_reset">Bluetooth-Verbindung zurückgesetzt</string>
+    <string name="save_as">Speichern als</string>
+
+<!-- SURVEY DATA STRINGS:
+  each data is the measure of distance, azimuth, and clino between a FROM station and a TO station.
+  if the TO station is not explicited the data is "splay"
+  LRUD are left-right-up-down dimensions
+-->
+    <string name="comment">Anmerkung</string>
+    <!-- string name="flag">Flag</string -->
+    <string name="duplicate">Dupliziert</string>
+    <!-- UNUSED string name="regular">regulär</string -->
+    <string name="surface">Oberfläche</string>
+    <!-- string name="extend">Extend</string -->
+    <string name="extend_ignore">Kein</string> <!-- Keiner -->
+    <string name="extend_left">Links</string>
+    <string name="extend_right">Recht</string>
+    <string name="extend_vert">Vertikal</string> <!-- vertikal -->
+    <string name="external_prompt">Vermessung</string>
+    <string name="splay_at_to">LRUD bei BIS Messpunkt</string>
+
+    <string name="few_data">Nicht genügend Daten</string>
+
+<!-- IMPORTING A SURVEY or A ZIP -->
+    <string name="import_title">Daten Importieren</string>
+    <string name="import_wait">Importieren ... bitte warten ...</string>
+    <string name="import_already">Vermessung bereits importiert</string>
+    <string name="import_none">Keine Daten importieren</string>
+    <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
+    <string name="import_zip_wait">Importieren Zip-Datei ... bitte warten ...</string>
+    <string name="sketch_loading">Skizze laden... bitte warten ...</string>
+    <string name="sketch_saving">Skizze sichern ... bitte warten ...</string>
+    <!-- string name="lookup_wait">Internet lookup ... bitte warten...</string -->
+
+<!-- MORE DEVICE STRINGS -->
+    <!-- OK string name="head_tail">Memory: </string -->
+    <string name="head_tail_failed">Fehler beim DistoX Speicherindex lesen</string>
+    <string name="head_tail_store_failed">Fehler beim DistoX Speicherindex speichern</string>
+    <string name="illegal_data_value">Illegaler Datenwert</string>
+
+<!-- MISC STRINGS -->
+    <string name="label_title">BESCHRIFTUNG</string>
+    <string name="label_text">Geben Sie den Beschriftungstext ein</string>
+    <string name="altitude">Höhe </string>
+    <string name="latitude">Breite </string>
+    <string name="longitude">Länge </string>
+    <string name="altitude_hint">Höhe [meters]</string>
+    <string name="altitude_wgs84">WGS84 Höhe</string>
+    <string name="latitude_hint">Breite dd:mm:ss.sss</string>
+    <string name="longitude_hint">Länge dd:mm:ss.sss</string>
+    <string name="loop_closure_errors">Kreisschlussfehler</string>
+    <string name="loop_none">Kein Kreis</string>
+    <string name="line_delete">Linie löschern</string>
+
+<!-- INPUT FIELDS ERROR STRINGS: BAD VALUE or MISSING VALUE -->
+    <string name="error_azimuth_required">Azimut erforderlich</string>
+    <string name="error_length_required">Länge erforderlich</string>
+    <string name="error_clino_required">Neigung erforderlich</string>
+    <string name="error_comment_required">Kommentar erforderlich</string>
+    <string name="error_begin_required">Startaddresse erforderlich</string>
+    <string name="error_declination_number">Deklination muss eine Zahl sein</string>
+    <string name="error_end_required">Letzte Adresse erforderlich</string>
+    <string name="error_from_required">Erster Messpunkt erforderlich</string>
+    <string name="error_group_required">Gruppennummer erforderlich</string>
+    <string name="error_group_non_integer">Gruppennummer muss eine ganze Zahl sein</string>
+    <string name="error_alt_required">Höhe erforderlich</string>
+    <string name="error_invalid_number">Ungültige Anzahl</string>
+    <string name="error_lat_required">Breite erforderlich</string>
+    <string name="error_long_required">Länge erforderlich</string>
+    <string name="error_name_required">Namen erforderlich</string>
+    <string name="error_start_required">Referenzmesspunkt erforderlich</string>
+    <string name="error_station_already_fixed">Dauerhafter Messpunkt</string>
+    <string name="error_station_required">Messpunkt erforderlich</string>
+    <string name="error_station_non_existing">Messpunkt existiert nicht</string>
+    <string name="error_sensor_required">Sensor erforderlich</string>
+    <string name="error_value_required">Wert erforderlich</string>
+    
+    <!-- TODO string name="group_title">Assign calibration data groups</string -->
+    <!-- TODO string name="group_policy_four">Policy: group by four</string -->
+    <!-- TODO string name="group_policy_sixteen">Policy: four groups of four, other single</string -->
+    <!-- TODO string name="group_policy_distance">Policy: group by angular distance</string -->
+    <!-- TODO string name="group_reset">Reset groups</string -->
+
+    <string name="scale">Ausmaß</string>
+    <string name="reversed">umkehren</string>
+    <string name="options">Einstellungen</string>
+    <!-- UNUSED string name="outline">Umriss</string -->
+    <string name="out">heraus</string>
+    <string name="in">herein</string>
+    <string name="none">kein</string>
+    <string name="barrier_add">Brechen Mittellinie Anzeige?</string>
+    <string name="barrier_del">Weiter Mittellinie Anzeige?</string>
+
+<!-- ERRORS: MISSING SOMETHING -->
+    <string name="no_calib">Keine Kalibrierung</string>
+    <string name="no_calibration">Keine Kalibrierung gewählt</string>
+    <string name="no_capture_app">Keine Kamera-App vorhanden</string>
+    <string name="no_cave3d">Cave3D nicht installiert</string>
+    <string name="no_db">Keine Datenbank</string>
+    <string name="no_device_address">Kein Gerät gewählt</string>
+    <string name="no_device_found">Kein Gerät gefunden</string>
+    <string name="no_geomag">Fehler beim Geomag</string>
+    <string name="no_gms">Kalibrierung mit keinen Daten</string>
+    <!-- TODO string name="no_leg_intersection">Schnittlinie kreuzt kein Vermessung</string -->
+    <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
+    <string name="no_photos">Vermessung hat kein Foto</string>
+    <string name="no_plots">Vermessung hat keine Skizze</string>
+    <string name="no_proj4">Proj4 nicht installiert</string>
+    <string name="no_sensors">Vermessung hat keine Sensormessung</string>
+    <string name="no_shots">Vermessung hat keine Messung</string>
+    <string name="no_survey">Keine Vermessung ausgewählt</string>
+    <string name="no_undelete">Nichts wiederherzustellen</string>
+
+<!-- MENUS 
+ detach: disconnect from the DistoX device
+ palette: drawing tools dialog
+ scan: BlueTooth scan
+ survey: sorvey metadata interface
+-->
+    <string name="menu_about">ÜBER</string>
+    <string name="menu_attach">VERBINDEN</string>
+    <string name="menu_calib">KALIBRIERUNG</string>
+    <string name="menu_delete">LÖSCHEN</string>
+    <string name="menu_detach">TRENNEN</string>
+    <string name="menu_display">ANZEIGEN</string>
+    <string name="menu_export">EXPORTIEREN</string>
+    <!-- OK string name="menu_firmware">FIRMWARE</string -->
+    <string name="menu_recover">WIEDERHERSTELLEN</string>
+    <string name="menu_reload">WIEDERLADEN</string>
+    <string name="menu_help">HILFE</string>
+    <!-- string name="menu_join_survey">Co-survey</string -->
+    <string name="menu_logs">LOGS</string>
+    <!-- string name="menu_manual">HANDBUCH</string -->
+    <string name="menu_options">EINSTELLUNGEN</string>
+    <string name="menu_palette">PALETTE</string>
+    <string name="menu_photo">FOTO</string>
+    <string name="menu_sensor">SENSOR</string>
+    <string name="menu_scan">SCAN</string>
+    <string name="menu_station">MESSPUNKTEN</string>
+    <!-- TODO string name="menu_stats">STATS</string -->
+    <string name="menu_survey">INFO</string>
+
+<!-- LINE POINT EDITING ACTIONS -->
+    <string name="popup_join_pt">Bewegen um Nähepunkt</string>
+    <string name="popup_snap_ln">Bewegen um Nahlinie</string>
+    <string name="popup_split_pt">Doppelter Punkt</string>
+    <string name="popup_split_ln">Linienschnittpunkt</string>
+    <string name="popup_sharp_pt">Sharfen</string>
+    <string name="popup_curve_pt">Glätten</string>
+    <string name="popup_remove_pt">Löschen Punkt</string>
+
+    <string name="not_available">BT nicht verfügbar</string>
+    <!-- UNUSED string name="not_connected">Nicth verbinden</string -->
+    <string name="not_enabled">BT nicht aktiviert</string>
+    <string name="not_implemented">Noch nicht implementiert</string>
+    <string name="null_bitmap">Null Bitmap [OOM error]</string>
+    <string name="photo">Foto</string>
+    <string name="photo_comment_prompt">Kommentar</string>
+    <string name="photo_name">Messpunkt/Name</string>
+    <string name="photo_photo">Foto</string>
+    <string name="photo_sensor">Sensoren</string>
+    <string name="photo_external">Messung</string>
+    <string name="photo_sensor_prompt">Foto oder Sensor auswählen</string>
+    <string name="photo_shot">Messung hinzufügen</string>
+    <string name="photo_survey">Vermessung teilen</string>
+    <string name="picture_no_station">Name erforderlich</string>
+    <string name="plot_delete">Skizze löschen?</string>
+    <string name="plot_duplicate_name">Doppelter Name</string>
+    <string name="plot_name">Name der Skizze</string>
+    <string name="plot_new">Neu Skizze</string>
+    <string name="plot_not_found">Skizze nicht gefunden</string>
+    <string name="plot_recover">Skizze aus dem Backup laden?</string>
+    <string name="plot_start">Basismesspunkt</string>
+    <string name="read_">Lesen </string>
+    <string name="read_fail_with_code">Lesefehler: Fehlercode</string>
+    <string name="read_failed">Failed DistoX-read</string>
+    <string name="saved_file_">Gespeicherte Datei</string>
+    <string name="saving_">Speichern </string>
+    <string name="saving_file_failed">Datei konnten nicht gespeichert werden</string>
+    <string name="scrap_name">Name der Skizze</string>
+    <string name="splay">Hilfsmessung</string>
+    <string name="too_many_leg_intersection">Schnittlinie durchquert zuviele Messstrecken</string>
+
+    <string name="sensor">Sensor</string>
+    <!-- string name="sensor_accelerometer">Beschleunigungsmesser</string -->
+    <string name="sensor_gravity">Schwerkraft</string>
+    <!-- string name="sensor_humidity">Luftfeuchtigkeit</string -->
+    <string name="sensor_light">Licht</string>
+    <string name="sensor_magnetic_field">Magnetisches Feld</string>
+    <!-- string name="sensor_orientation">Orientierung</string -->
+    <string name="sensor_pressure">Druck</string>
+    <string name="sensor_proximity">Nähe</string>
+    <string name="sensor_temperature">Temperatur</string>
+    <string name="sensor_extern">Äußerlich</string>
+    <string name="sensor_type">Art</string>
+    <string name="sensor_value">Messung</string>
+    <string name="sensor_comment">Anmerkung</string>
+
+    <!-- NO string name="shot_clino">Neigung</string -->
+    <!-- NO string name="shot_compass">Kompass</string -->
+    <string name="shot_from">von</string>
+    <string name="shot_info">Info</string>
+    <!-- string name="shot_leg">Wiederholen Messstrecke</string -->
+    <string name="shot_leg">Wiedermessung</string>
+    <!-- string name="shot_length">Länge</string -->
+    <string name="shot_note">Anmerkung</string>
+    <string name="shot_reverse">umkehren</string>
+    <string name="shot_to">bis</string>
+
+<!-- NOT USED
+    <string name="make_surface">Surface exists. Replace it?</string>
+
+    <string name="sketch3d_name">Namen</string>
+    <string name="sketch3d_new">New 3D sketch</string>
+    <string name="sketch3d_next">next station</string>
+    <string name="sketch3d_null_name">Missing 3D sketch name</string>
+    <string name="sketch3d_null_next">Missing 3D sketch next station</string>
+    <string name="sketch3d_null_start">Missing 3D sketch base station</string>
+    <string name="sketch3d_start">base station</string>
+-->
+
+    <string name="station">Messpunkt</string>
+    <string name="station_ask">Messpunkt in Skizze anlegen?</string>
+    <string name="station_set">Messpunkt setzen?</string>
+    <!-- NO string name="station_base">Bezugsmesspunkt</string -->
+    <!-- NO string name="station_next">Nächste Messpunkt</string -->
+    <string name="station_viewed">Bereits gesehener Messpunkt</string>
+    <string name="survey_exists">Vermessung bereits vorhanden</string>
+    <string name="survey_date">jjjj.mm.tt</string>
+    <string name="survey_delete">Vermessung löschen?</string>
+    <!-- TODO string name="survey_split">Vermessung split ?</string -->
+    <string name="survey_not_attached">WARNUNG: ungebundene Messungen</string>
+    <string name="declination">Magn. Dekl.</string>
+    <string name="description">Beschreibung</string>
+    <string name="name">Namen</string>
+    <string name="team">Team</string>
+    <!-- UNUSED string name="toggle_device">Die DistoX Betriebsmodus schalten</string -->
+    <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
+    <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
+    <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
+    <string name="visible_border">Sichtbare Grenze</string>
+    <string name="vthreshold">Vertikale Schwelle</string>
+    <string name="wait_scan">Scannen: warten ...</string>
+    <string name="write_failed">DistoX Schreiben fehgeschlagen</string>
+    <string name="write_ok">DistoX Schreiben erfolgreich</string>
+    <string name="zip_saved">Zip-Datei gespeichert</string>
+    <string name="zip_failed">Fehler beim sichern der Zip-Datei</string>
+    <string name="unzip_fail">Fehler beim entpacken der Zip-Datei</string>
+    <!-- string name="zoom_in_out">Zoom in/out</string -->
+
+    <string name="survey_info">Vermessungsinfo</string>
+    <string name="stat_component">Komponenten %1$d</string>
+    <string name="stat_depth">Tiefe %1$.1f %2$.1f"</string>
+    <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f</string>
+    <string name="stat_leg">Messstrecke %1$d %2$.1f</string>
+    <string name="stat_length">Länge %1$.1f</string>
+    <string name="stat_loop">Kreis %1$d</string>
+    <string name="stat_shot">Messungen  %1$d,   Doppelte %2$d,   Oberfläche %3$d</string>
+    <string name="stat_splay">Hilfsmessungen %1$d</string>
+    <string name="stat_station">Messpunkten %1$d</string>
+    <string name="stat_surface">Oberflächenmessungen %1$d %2$.1f</string>
+    <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f"</string>
+
+<!-- there are four kinds of measurements, depending on whether they have stations:
+     blank: with no station assigned yet
+     leg: with both FROM and TO station 
+     splay: with only the FROM station or the TO station (usually it's the FROM one)
+     repeated-leg: no station, but values close to immediately preceeding shot which is a leg
+                   or a repeated-leg
+-->
+    <string name="hide_blank">Ohne Messpunkten</string>
+    <string name="hide_leg">Wiedermessungen</string>
+    <string name="hide_ids">Messung ID</string>
+    <string name="hide_splay">Hilfsmessungen</string>
+
+    <string name="surveys">VERMESSUNG</string>
+    <string name="calibs">KALIBRIERUNG</string>
+
+    <string name="plan">GRUNDRISS</string>
+    <string name="extended">LÄNGSSCHNITT</string>
+    <string name="v_section">V-PROFIL</string> <!-- Querschnitt -->
+    <string name="h_section">H-PROFIL</string>
+
+    <!-- OK string name="distox_err_ok">OK</string -->
+    <!-- OK string name="distox_err_headtail">Failed DistoX memory-read</string -->
+    <!-- OK string name="distox_err_headtail_io">DistoX memory I/O error</string -->
+    <!-- OK string name="distox_err_headtail_eof">DistoX memory EOF error</string -->
+    <string name="distox_err_connected">Gerät bereits verbunden</string>
+
+    <string name="ask_close">TopoDroid beenden?</string>
+    <string name="ask_reset">DistoX zurücksetzen?</string>
+    <string name="ask_close_survey">Vermessung schließen?</string>
+
+    <string name="button_add"       >Neu       </string> <!-- or: Erstellen -->
+    <string name="button_back"      >Zurück    </string>
+    <string name="button_cancel"    >Abbrechen </string>
+    <string name="button_convert"   >Umwandeln </string> <!-- or: Konvertieren -->
+    <string name="button_delete"    >Löschen    </string>
+    <string name="button_eval"      >Auswerten </string>
+    <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
+    <!-- OK string name="button_geomag"    >GeoMag    </string -->
+    <!-- OK string name="button_gps_start" >GPS       </string -->
+    <!-- NO string name="button_gps_stop"  >Anhalten      </string -->
+    <!-- NO string name="button_manual"    >Bedienungsanleitung </string -->
+    <!-- NO string name="button_measure"   >Messung   </string -->
+    <string name="button_photo"   >Foto</string>
+    <string name="button_sensor"  >Messung</string>
+    <string name="button_direction">Azimut/Neigung</string>
+    <string name="button_plot"    >Zeichnung</string>
+    <!-- OK string name="button_ok"        >OK        </string -->
+    <string name="button_no"        >Nein      </string>
+    <string name="button_open"      >Offen     </string>
+    <string name="button_read"      >Lesen      </string>
+    <!-- TODO string name="button_dump"      >Dump     </string -->
+    <string name="button_reset"     >Zurücksetzen</string>
+    <!-- TODO string name="button_clear"     >Clear     </string -->
+    <string name="button_save"      >Sichern  </string>
+    <string name="button_select"    >Wählen     </string>
+    <string name="button_store"     >Aufbewahren </string>
+    <!-- string name="button_start"     >Start</string -->
+    <!-- string name="button_stop"      >Stop</string -->
+    <string name="button_upload"    >Laden    </string>
+    <string name="button_yes"       >Ja       </string>
+
+    <!-- TODO string name="button_sharp"     >Sharp</string -->
+    <!-- TODO string name="button_rock"      >Rock</string -->
+<!--
+    <string name="button_close"     >Beenden   </string>
+    <string name="button_erase"     >Löschen   </string>
+    <string name="button_next"      >Nächste   </string>
+    <string name="button_prev"      >Früher    </string>
+    <string name="button_split"     >Split     </string>
+    <string name="button_toggle"    >Toggle CAL mode  </string>
+-->
+    <string name="button_write"     >Hochladen</string>
+
+    <string name="mode_leg">Messstrecke</string>
+    <string name="mode_splay">Hilfsmessung</string>
+    <string name="mode_station">Messpunkten</string>
+    <string name="mode_grid">Gitter</string>
+    <!-- TODO string name="mode_fixed">Fix refs</string -->
+
+    <string name="remote_title">DistoX Fernbedienung</string>
+    <string name="remote_on">Laser AN</string>
+    <string name="remote_off">Laser AUS</string>
+    <string name="remote_measure">Messung</string>
+    <string name="remote_reset">BT zurücksetzen</string>
+    <string name="download">Daten herunterladen</string>
+
+<!--
+    <string name="btn_3d">3D</string>
+-->
+<!-- THESE ARE NAMES OF PROGRAMS/FILE FORMATS: DO NOT TRANSLATE -->
+    <!-- OK string name="btn_compass">Compass</string -->
+    <!-- OK string name="btn_csurvey">cSurvey</string -->
+    <!-- OK string name="btn_csv">CSV</string -->
+    <!-- OK string name="btn_dxf">DXF</string -->
+    <!-- OK string name="btn_man">Manual</string -->
+    <!-- OK string name="btn_symbol">Drawing tools</string -->
+    <!-- OK string name="btn_png">PNG</string -->
+    <!-- OK string name="btn_pockettopo">PocketTopo</string -->
+    <!-- OK string name="btn_survex">Survex</string -->
+    <!-- OK string name="btn_therion">Therion</string -->
+    <!-- OK string name="btn_vtopo">VisualTopo</string -->
+    <!-- OK string name="btn_zip">Zip</string -->
+
+<!-- HELP STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
+<!-- zu + dat
+     um + acc 
+     durch + acc
+     zwischen + dat
+     letzen
+     früher Punkt
+     nächste Punkt
+-->
+    <string name="help_help">Diese Hilfe</string>
+    <string name="help_manual">Handbuch</string>
+    <string name="help_more">Die sekundären Aktionen zeigen</string>
+    <string name="help_less">Zu den primären Aktionen zurückgehen</string>
+    <string name="help_coeff">Die Kalibrierung Koeffizienten zeigen</string>
+    <string name="help_current_station">Gespeichert Messpunkten</string>
+    <string name="help_device">Zu der Gerätaktivität gehen</string>
+    <string name="help_add_topodroid">Neuen Vermessung/Kalibrierung schaffen</string>
+    <string name="help_import">Zip oder Datei importieren</string>
+    <string name="help_symbol">Die Zeichenwerkzeugen (de)aktivieren</string>
+    <string name="help_therion">Therion Manager App</string>
+    <string name="help_database">Databanken App (SQliteViewer)</string>
+    <string name="help_prefs">Einstellungen bearbeiten</string>
+    <!-- FIXME string name="help_log">logging Erstellungen aktivieren</string -->
+    <!-- FIXME string name="help_join_survey">Join surveying</string -->
+
+    <string name="help_info_topodroid">TopoDroid Nachrichten</string>
+    <string name="help_download">Daten herunterladen</string>
+    <string name="help_splay">Die Messpunkten automatisch zuweisen</string> <!-- FIXME for splays -->
+    <string name="help_display">Den Anzeigemodus wählen</string>
+    <!-- TODO string name="help_display_calib">Toggle display of deleted shots</string -->
+    <string name="help_plot">Zu der Skizzeaktivität gehen</string>
+    <string name="help_note">Um die Vermessung Anmerkung bearbeiten</string>
+    <string name="help_bluetooth">Die Bluetooth-Verbindung zurücksetzen</string>
+    <string name="help_remote">DistoX Fernbedienung</string>
+    <string name="help_add_shot">Durch die manuelle Eingabe der Messungdaten hinzufügen</string>
+    <string name="help_info_shot">Vermessung Statistiken</string>
+    <string name="help_survey_info">Vermessung Notizen</string>
+    <string name="help_undelete">Gelöschte Objekte wiederherstellen</string>
+    <string name="help_photo">Fotos Dialog</string>
+    <string name="help_sensor">Sensormessungen Dialog</string>
+    <string name="help_3d">3D-Modell App (Cave3D)</string>
+    <string name="help_draw">Um den Zeichnungmodus eingeben</string>
+    <string name="help_eraser">Um den Löschmodus eingeben</string>
+    <string name="help_edit">Um den Bearbeitungsmodus eingeben</string>
+    <string name="help_refs">Die Skizzersreferenzen wählen</string>
+    <string name="help_stats">Vermessung Statistiken</string>
+    <string name="help_save_plot">Die Skizze speichern</string>
+    <string name="help_toggle_plot">Zwischen der Draufsicht und Seitenansicht wechseln</string>
+    <string name="help_trash">Die Skizze löschen</string>
+    <string name="help_undo">Das letz Zeichen rückgängigmachen</string>
+    <string name="help_redo">Das letz Zeichen wiederholen</string>
+    <string name="help_symbol_plot">Das Zeichenwerkzeuge wählen</string>
+    <!-- string name="help_clear">Die Auswahl löschen</string -->
+
+    <string name="help_previous">Früher ausgeählten Punkt</string>
+    <string name="help_next">Nächste ausgewählten Punkt</string>
+    <string name="help_recover">Die Skizze wiederherstellen</string>
+   
+    <!-- FIXME string name="help_line_point">Line point actions: join, split, cut, remove</string -->
+    <string name="help_line_point">Liniepunkt Aktionen: ...</string>
+
+<!--
+    <string name="help_to_point">Move selected point to join with the nearest point</string>
+    <string name="help_split_point">Split the point into two [line/area]</string>
+    <string name="help_split_line">Split the line into two at the point</string>
+    <string name="help_kink">Use a straight line at the point [line/area]</string>
+-->
+    <string name="help_note_plot">Um den Eigenshaften des ausgewählten Objekte bearbeiten</string>
+    <string name="help_save">Die Änderungen der Vermessung speichern</string>
+    <string name="help_save_calib">Die Änderungen der Kalibrierung speichern</string>
+    <string name="help_export_survey">Die Vermessung speichern</string>
+    <string name="help_loc">GPS-Position</string>
+    <string name="help_delete_survey">Die Vermessung löschen</string>
+    <string name="help_delete_calib">Die Kalibrierung löschen</string>
+    <string name="help_detach">Das aktuelle Geräteauswahl deaktivieren</string>
+    <!-- OK string name="help_firmware">DistoX2 firmware updater</string -->
+
+    <string name="help_toggle">Den DistoX Betriebsmodus schalten</string>
+    <string name="help_sdcard">DistoX Speicherfunktionen</string>
+    <string name="help_read">Kalibrierung Koeffizienten auf den DistoX</string>
+    <string name="help_info_device">Gerät-Nachrichten</string>
+    <string name="help_scan">Neuen DistoX Geräte finden</string>
+    <string name="help_open_calib">Zu der Kalibrierungsdatenaktivität gehen</string>
+    <string name="help_export_calib">Die Kalibrierung speichern</string>
+    <string name="help_group">Die Grouppenummern automatisch zuweisen</string>
+    <string name="help_cover">Die Winkelvertailung der Kalibrierungsdaten</string>
+    <string name="help_compute">Die Kalibrierung Koeffizienten berechnen</string>
+    <string name="help_write">Die Kalibrierung Koeffizienten zu den DistoX hochladen</string> <!-- speichern -->
+
+<!-- TITLES -->
+    <string name="title_calib">Kalibrierung</string>
+    <string name="title_coverage">Kalibrierungsdaten</string>
+    <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
+    <string name="title_current_station">Gespeichert Messpunkten</string>
+    <string name="title_device">DistoX Geräte</string>
+    <string name="title_discover">DistoX Geräte finden ... warten</string>
+    <string name="title_draw_area">FLÄCHE %1$s</string>
+    <string name="title_draw_line">LINIE %1$s</string>
+    <string name="title_draw_point">PUNKT %1$s</string>
+    <string name="title_edit">Bearbeiten</string>
+    <string name="title_erase">Löschen</string>
+    <string name="title_location">Position</string>
+    <string name="title_location_gps">GPS-Position</string>
+    <string name="title_mode">Anzeigemodus</string>
+    <string name="title_move">Verlagerung</string>
+    <string name="title_note">Anmerkung</string>
+    <string name="title_photo">Foto/Messungen</string>
+    <string name="title_photo_comment">Foto Kommentar</string>
+    <string name="title_plot_save">Skizze Speichern als</string>
+    <string name="title_refs">Skizze Referenzen</string>
+    <string name="title_scraps">Skizzen</string>
+    <string name="title_shift">Verschieben</string>
+
+<!-- SKETCH_3D titles
+    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <string name="title_sketch_edit">Edit 3D surface</string>
+    <string name="title_sketch_shot">New shot</string>
+    <string name="title_sketch_section_type">Sections type</string>
+    <string name="title_sketch_select">Select item</string>
+-->
+    <string name="title_stats">Statistik</string>
+    <string name="title_survey">Vermessungs-Info</string>
+    <string name="title_survey_export">Vermessung Speichern als</string>
+    <string name="title_calib_export">Kalibrierung Speichern als</string>
+    <!-- string name="title_zoom">Zoom</string -->
+
+<!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
+  <string name="pref_cat_survey">Messung Einstellungen</string>
+  <string name="pref_cat_drawing">Skizze Einstellungen</string>
+  <string name="pref_cat_calib">Kalibrierung Einstellungen</string>
+  <string name="pref_cat_device">Geräte Einstellungen</string>
+  <string name="pref_cat_sketch">3D-Modell Einstellungen</string>
+  <!-- TODO string name="pref_cat_log">Log options</string -->
+
+  <string name="pref_locale_title">Sprache</string>
+  <string name="pref_locale_summary">Sprache</string>
+
+  <!-- TODO string name="pref_raw_data_title">Raw data</string -->
+  <!-- TODO string name="pref_raw_data_summary">Raw data zeigen</string -->
+  <!-- OK string name="pref_bootloader_title">Bootloader</string -->
+  <string name="pref_bootloader_summary">Die Bootloader ermöglichen</string>
+  <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
+  <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
+  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
+  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+  <!-- OK string name="pref_extra_buttons_title">Optional buttons</string -->
+  <!-- OK string name="pref_extra_buttons_summary">Enable main window optional buttons</string -->
+  <!-- TODO string name="pref_size_buttons_title">Buttons size</string -->
+  <!-- TODO string name="pref_size_buttons_summary">Size of action-bar buttons</string -->
+  <!-- TODO string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
+  <!-- TODO string name="pref_leg_shots_title">Leg shots</string -->
+  <!-- TODO string name="pref_leg_shots_summary">Minimum number of shots per leg</string -->
+
+  <!-- TODO string name="pref_sock_type_title">Socket</string -->
+  <!-- TODO string name="pref_sock_type_summary">Socket create</string -->
+  <!-- string name="pref_device_type_title">DistoX type</string -->
+  <!-- string name="pref_device_type_summary">DistoX Modell type</string -->
+  <!-- TODO string name="pref_comm_retry_title">Connection retry</string -->
+  <!-- TODO string name="pref_comm_retry_summary">Connection retries number</string -->
+  <!-- TODO string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
+  <!-- TODO string name="pref_comm_retry_message">Connection retries number</string -->
+  <!-- FIXME string name="pref_conn_mode_title">Verbindung-Art</string -->
+  <!-- FIXME string name="pref_conn_mode_summary">Die Art von Verbindung mit DistoX</string -->
+  <!-- TODO string name="pref_auto_reconnect_title">Auto reconnect</string -->
+  <!-- TODO string name="pref_auto_reconnect_summary">Reconnect when connection is lostX</string -->
+  <!-- OK string name="pref_crs_title">C R S </string -->
+  <!-- TODO string name="pref_crs_summary">CRS Name</string -->
+  <!-- TODO string name="pref_crs_message">Enter the CRS name as in Proj4</string -->
+  <!-- OK string name="pref_gps_averaging_title">GPS Averaging</string -->
+  <string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string>
+  <!-- TODO string name="pref_plot_screen_title">Sketch screen settings</string -->
+  <!-- TODO string name="pref_tool_screen_title">Sketch drawing settings</string -->
+  <!-- TODO string name="pref_location_title">Location settings</string -->
+  <!-- TODO string name="pref_shot_data_title">SHOT DATA SETTINGS</string -->
+  <string name="pref_cwd_title">TopoDroid Ordner</string>
+  <string name="pref_cwd_summary">TopoDroid Ordner</string>
+  <string name="pref_cwd_message">Die TopoDroid Ordner stellen</string>
+  <string name="pref_text_size_title">Shriftgröße</string>
+  <!-- TODO string name="pref_text_size_summary">List items text size</string -->
+  <!-- TODO string name="pref_text_size_message">Size of text in lists</string -->
+  <!-- TODO string name="pref_closeness_title">Selection radius</string -->
+  <!-- TODO string name="pref_closeness_summary">Sketch item selection radius</string -->
+  <!-- TODO string name="pref_closeness_message">Sketch item selection radius</string -->
+  <string name="pref_altitude_title">Höhe</string>
+  <!-- TODO string name="pref_altitude_summary">Select altitude type</string -->
+  <!-- TODO string name="pref_altimetric_title">Orthometric atitude</string -->
+  <!-- TODO string name="pref_altimetric_summary">Orthometric altitude lookup</string -->
+  <!-- TODO string name="pref_survey_stations_title">Vermessung Massungpunkten</string -->
+  <!-- TODO string name="pref_survey_stations_summary">Automatisch Vermessung Messpunkten</string -->
+  <!-- TODO string name="pref_accel_thr_title">Acceleration tolerance</string -->
+  <!-- TODO string name="pref_accel_thr_summary">Tolerance over the shots accelerations</string -->
+  <!-- TODO string name="pref_accel_thr_message">Tolerance over the shots accelerations</string -->
+  <!-- TODO string name="pref_mag_thr_title">Magnetic tolerance</string -->
+  <!-- TODO string name="pref_mag_thr_summary">Tolerance over the shots magnetic field</string -->
+  <!-- TODO string name="pref_mag_thr_message">Tolerance over the shots magnetic field</string -->
+  <!-- TODO string name="pref_dip_thr_title">Magnetic dip tolerance</string -->
+  <!-- TODO string name="pref_dip_thr_summary">Tolerance over the shots magnetic dip</string -->
+  <!-- TODO string name="pref_dip_thr_message">Tolerance over the shots magnetic dip</string -->
+
+  <!-- TODO string name="pref_leg_title">Leg tolerance</string -->
+  <!-- TODO string name="pref_leg_summary">Tolerance among the shots of a leg</string -->
+  <!-- TODO string name="pref_leg_message">Tolerance among the shots of a leg</string -->
+
+  <!-- TODO string name="pref_team_title">Equipo</string -->
+  <!-- TODO string name="pref_team_summary">Surveying team</string -->
+  <!-- TODO string name="pref_team_message">Default surveying team</string -->
+  <!-- TODO string name="pref_ethr_title">Extend threshold</string -->
+  <!-- TODO string name="pref_ethr_summary">Splay shot extend threshold</string -->
+  <!-- TODO string name="pref_ethr_message">Threshold to compute splay shot extend</string -->
+  <!-- TODO string name="pref_vthr_title">Shot vertical threshold</string -->
+  <!-- TODO string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string -->
+  <!-- TODO string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string -->
+  <!-- TODO string name="pref_hthr_title">Cross-section hthreshold</string -->
+  <!-- TODO string name="pref_hthr_summary">Threshold for horizontal cross-sections</string -->
+  <!-- TODO string name="pref_hthr_message">Shot clino over which cross-sections are horizontal</string -->
+  <!-- TODO string name="pref_bitmap_scale_title">PNG scale</string -->
+  <!-- TODO string name="pref_bitmap_scale_summary">Scale factor in sketch PNG export</string -->
+  <!-- TODO string name="pref_bitmap_scale_message">Scale factor in sketch PNG export</string -->
+  <!-- TODO string name="pref_thumbnail_title">Thumbnails size</string -->
+  <!-- TODO string name="pref_thumbnail_summary">Size of thumbnail images</string -->
+  <!-- TODO string name="pref_thumbnail_message">Size of thumbnail images</string -->
+  <!-- TODO string name="pref_shot_timer_title">Shot direction timer</string -->
+  <!-- TODO string name="pref_shot_timer_summary">Seconds before the shot direction is measured</string -->
+  <!-- TODO string name="pref_shot_timer_message">Seconds before the shot direction is measured</string -->
+  <!-- TODO string name="pref_beep_volume_title">Timer-beep volume</string -->
+  <!-- TODO string name="pref_beep_volume_summary">Percent timer-beep volume</string -->
+  <!-- TODO string name="pref_beep_volume_message">Percent timer-beep volume</string -->
+  <!-- TODO string name="pref_drawing_unit_title">Point tools scale</string -->
+  <!-- TODO string name="pref_drawing_unit_summary">Scale of the point tools</string -->
+  <!-- TODO string name="pref_drawing_unit_message">Scale of the point drawing tools</string -->
+  <!-- TODO string name="pref_segment_title">Line-point spacing</string -->
+  <!-- TODO string name="pref_segment_summary">Minimum line-point distance</string -->
+  <!-- TODO string name="pref_segment_message">Minimum distance between points on a line</string -->
+  <!-- TODO string name="pref_linestyle_title">Line style</string -->
+  <!-- TODO string name="pref_linestyle_summary">Line drawing style</string -->
+  <!-- TODO string name="pref_lineacc_title">Bezier accuracy</string -->
+  <!-- TODO string name="pref_lineacc_summary">Bezier interpolation accuracy</string -->
+  <!-- TODO string name="pref_lineacc_message">Bezier cubic interpolation accuracy</string -->
+  <!-- TODO string name="pref_linecorner_title">Bezier corner</string -->
+  <!-- TODO string name="pref_linecorner_summary">Bezier corner threshold</string -->
+  <!-- TODO string name="pref_linecorner_message">Bezier corner detection threshold</string -->
+  <string name="pref_calib_algo_title">Algorithmus</string>
+  <string name="pref_calib_algo_summary">Kalibrierung-Algorithmus</string>
+  <!-- TODO string name="pref_group_by_title">Group policy</string -->
+  <!-- TODO string name="pref_group_by_summary">Policy to group calibration data</string -->
+  <!-- TODO string name="pref_group_title">Group tolerance</string -->
+  <!-- TODO string name="pref_group_summary">Tolerance among shots in the same group</string -->
+  <!-- TODO string name="pref_group_message">Tolerance among shots in the same group</string -->
+  <!-- TODO string name="pref_error_title">Error</string -->
+  <!-- TODO string name="pref_error_summary">Minimum calibration error</string -->
+  <!-- TODO string name="pref_error_dialogtitle">Calibration error</string -->
+  <!-- TODO string name="pref_error_message">Minimum calibration error</string -->
+  <!-- TODO string name="pref_iter_title">Iterations</string -->
+  <!-- TODO string name="pref_iter_summary">Maximum number of iterations</string -->
+  <!-- TODO string name="pref_iter_dialogtitle">Kalibrierung- iterations</string -->
+  <!-- TODO string name="pref_iter_message">Kalibrierung- iterations</string -->
+  <string name="pref_label_size_title">Beschriftung Schriftgröße</string>
+  <string name="pref_label_size_summary">Beschriftung Schriftgröße</string>
+  <string name="pref_label_size_message">Beschriftung Schriftgröße</string>
+  <!-- TODO string name="pref_arrow_length_title">Section tick</string -->
+  <!-- TODO string name="pref_arrow_length_summary">Size of the section line tick</string -->
+  <!-- TODO string name="pref_arrow_length_message">Size of the section line tick</string -->
+  <!-- TODO string name="pref_dot_radius_title">Dots radius</string -->
+  <!-- TODO string name="pref_dot_radius_summary">Green dots size</string -->
+  <!-- TODO string name="pref_dot_radius_message">Size of the green dots</string -->
+  <!-- TODO string name="pref_line_thickness_title">Line thickness</string -->
+  <!-- TODO string name="pref_line_thickness_summary">Drawing line thickness</string -->
+  <!-- TODO string name="pref_line_thickness_message">Drawing line thickness</string -->
+  <!-- TODO string name="pref_fixed_thickness_title">Survey line thickness</string -->
+  <!-- TODO string name="pref_fixed_thickness_summary">Survey line thickness</string -->
+  <!-- TODO string name="pref_fixed_thickness_message">Survey line thickness</string -->
+  <!-- TODO string name="pref_device_title">Device</string -->
+  <!-- TODO string name="pref_device_summary">DistoX address name</string -->
+  <!-- TODO string name="pref_device_message">DistoX address name</string -->
+  <!-- OK string name="pref_checkBT_title">Bluetooth</string -->
+  <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
+  <!-- TODO string name="pref_checkAttached_title">Midline check</string -->
+  <!-- TODO string name="pref_checkAttached_summary">Check if stations are attached</string -->
+  <string name="pref_autoStations_title">Skizze-Messpunkten</string>
+  <!-- TODO string name="pref_autoStations_summary">Add stations automatically</string -->
+  <!-- FIXME string name="pref_loopClosure_title">Kreisschluss</string -->
+  <!-- FIXME string name="pref_loopClosure_summary">Kreisschlussfehler compensation</string -->
+  <!-- TODO string name="pref_splayExtend_title">Splay extend</string -->
+  <!-- TODO string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
+  <string name="pref_picker_type_title">Zeichenwerkzeuge wählen</string>
+  <!-- TODO string name="pref_picker_type_summary">Drawing tool picker type</string -->
+  <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
+  <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
+  <string name="pref_station_size_message">Messpunkt Beschriftung Schriftgröße</string>
+
+  <!-- TODO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
+  <!-- TODO string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
+  <!-- TODO string name="pref_sketchLineStep_title">Line step</string -->
+  <!-- TODO string name="pref_sketchLineStep_summary">Distance between line points</string -->
+  <!-- TODO string name="pref_sketchLineStep_message">Distance between line points</string -->
+  <!-- TODO string name="pref_sketchBorderStep_title">Border step</string -->
+  <!-- TODO string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
+  <!-- TODO string name="pref_sketchBorderStep_message">Distance between edit-line points</string -->
+  <!-- TODO string name="pref_sketchSectionStep_title">Section step</string -->
+  <!-- TODO string name="pref_sketchSectionStep_summary">Distance between sections</string -->
+  <!-- TODO string name="pref_sketchSectionStep_message">Distance between intermediate sections</string -->
+  <!-- TODO string name="pref_sketchDeltaExtrude_title">Extrude delta</string -->
+  <!-- TODO string name="pref_sketchDeltaExtrude_summary">Extrude delta</string -->
+  <!-- TODO string name="pref_sketchDeltaExtrude_message">Extrude delta</string -->
+  <!-- TODO string name="pref_sketchCompassReadings_title">Compass readings</string -->
+  <!-- TODO string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
+  <!-- TODO string name="pref_sketchCompassReadings_message">Number of compass readings to average</string -->
+
+  <!-- TODO string name="pref_unit_length_title">Length units</string -->
+  <!-- TODO string name="pref_unit_length_summary">Display units for lengths</string -->
+  <!-- TODO string name="pref_unit_angle_title">Angle units</string -->
+  <!-- TODO string name="pref_unit_angle_summary">Display units for angles</string -->
+  <!-- TODO string name="pref_unit_location_title">Location units</string -->
+  <!-- TODO string name="pref_unit_location_summary">Display units for locations</string -->
+
+  <!-- TODO string name="pref_log_stream_summary">Log output stream</string -->
+  <!-- TODO string name="pref_log_stream_title">Log stream</string -->
+  <!-- OK string name="pref_log_bt">Bluetooth</string -->
+  <!-- TODO string name="pref_log_bezier">Bezier curves</string -->
+  <!-- TODO string name="pref_log_calib">Calibration</string -->
+  <!-- TODO string name="pref_log_comm">BT communication</string -->
+  <!-- TODO string name="pref_log_csurvey">cSurvey</string -->
+  <!-- TODO string name="pref_log_data">Survey data</string -->
+  <!-- TODO string name="pref_log_db">Database</string -->
+  <!-- TODO string name="pref_log_debug">Debug</string -->
+  <!-- TODO string name="pref_log_device">Device window</string -->
+  <!-- TODO string name="pref_log_distox">DistoX</string -->
+  <!-- TODO string name="pref_log_err">Error</string -->
+  <!-- string name="pref_log_fixed">GPS Punkt</string -->
+  <!-- TODO string name="pref_log_input">User input</string -->
+  <!-- TODO string name="pref_log_loc">Location</string -->
+  <!-- TODO string name="pref_log_num">Data reduction</string -->
+  <!-- TODO string name="pref_log_photo">Photo</string -->
+  <!-- TODO string name="pref_log_plot">Sketches</string -->
+  <!-- TODO string name="pref_log_proto">DistoX protocol</string -->
+  <!-- TODO string name="pref_log_ptopo">PocketTopo</string -->
+  <!-- TODO string name="pref_log_sensor">Sensors</string -->
+  <!-- TODO string name="pref_log_shot">Shots</string -->
+  <!-- TODO string name="pref_log_survey">Surveys</string -->
+  <!-- TODO string name="pref_log_therion">Therion</string -->
+  <!-- TODO string name="pref_log_units">Units</string -->
+  <!-- TODO string name="pref_log_zip">ZIP</string -->
+
+  <!-- OK string name="line_bezier">Bezier</string -->
+  <!-- TODO string name="line_fine">fine</string -->
+  <!-- TODO string name="line_normal">normale</string -->
+  <!-- TODO string name="line_coarse">grossolana</string -->
+
+<!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
+    <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
+<!-- OK 
+   <string name="welcome_text">
+\nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
+\n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
+\n\nVisit http://sites.google.com/site/speleoapps for complementary apps and docs.
+\nSend comments, bug reports, feature requests, to marco.corvi@gmail.com
+\n
+    </string>
+-->
+
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
+  <!-- OK string name="firmware_title">Firmware Updater</string -->
+  <!-- OK string name="firmware_file_title">Firmware Files</string -->
+  <!-- OK string name="firmware_text">
+\n[1] Select either to upload a firmware or to dump the firmware to a file.
+\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
+\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
+\n[5] Tap the OK button and wait till the process is done.
+\n[6] Wait while the DistoX bluetooth icon flashes.
+\n[7] Turn off the DistoX2 with the CLR key.
+\n
+   </string -->
+   <!-- OK string name="firmware_none">no firmware file</string -->
+   <!-- OK string name="firmware_file">firmware file</string -->
+   <!-- OK string name="firmware_file_exists">Existing firmware file</string -->
+   <!-- OK string name="firmware_file_missing">Missing firmware file</string -->
+   <!-- OK string name="ask_upload">Upload firmware?</string -->
+   <!-- OK string name="ask_upload_not_compatible">Unable to check hw/fw compatibility.\nUpload firmware?</string -->
+   <!-- OK string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string -->
+   <!-- OK string name="firmware_file_uploaded">Uploaded firmware file %1$s size %2$d</string -->
+   
+
+</resources>

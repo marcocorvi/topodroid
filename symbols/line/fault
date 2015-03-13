@@ -1,0 +1,13 @@
+symbol line
+name fault
+name-es falla  
+name-it faglia
+name-fr faute
+name-ru разлом
+th_name fault
+color 0xffffff 0x99
+width 1
+csurvey 5 1 2 2
+dash 10 5 3 5
+endsymbol
+

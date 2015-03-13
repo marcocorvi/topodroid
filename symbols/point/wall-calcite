@@ -1,0 +1,19 @@
+symbol point
+name wall-calcite
+name-es reconstrucci�n
+name-it colata_a_parete
+name-fr coul�e_de_calcite
+name-de Wandsinter
+name-ru кальцитовая_корка
+th_name wall-calcite
+orientation yes
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -6 2
+  lineTo -3 -2
+  lineTo 0 2
+  lineTo 3 -2
+  lineTo 6 2
+endpath
+endsymbol

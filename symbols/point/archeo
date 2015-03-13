@@ -1,0 +1,20 @@
+symbol point
+name archeo
+name-es arqueologico
+name-it archeo
+name-fr archéologie
+name-de archäologischer_Fund
+name-ru археология
+th_name archeo
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo -3.5 3.5
+  lineTo 0 0
+  moveTo -3.5 -3.5
+  lineTo 0 0
+  lineTo 5 0
+  addCircle 0 0 5
+endpath
+endsymbol

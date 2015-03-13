@@ -1,0 +1,34 @@
+<html><body>
+<h3>[10] SURVEY INFO</h3>
+
+Before we get to take measurements let's look at the survey informations dialog. You open it by long tapping on the survey entry in the main window, or with the appropriate menu of the shot window.<br><p>
+
+<h4>BUTTONS</h4>
+<ulist>
+<li><u>Notes</u>: to edit the survey annotations. Use the annotation to write down anythink that can be useful later.  You can edit the global survey annotations also from the shot window and from the sketch window</li>
+<li><u>Stats</u> displays some statistics: the number of (regular) legs and their total length, the number of duplicate legs, and that of surface leg. The number of splay shots, that of stations, the number of loops and the number of disconnected surveys (this is 1 if the legs are all attached together in one survey)</li>
+<li><u>3D</u>: the 3D display. This is the same as the <u>3D</u> menu of the shot-list activity</li>
+<li><u>GPS</u>: to enter (or get with the GPS) the coordinates of a fixed station, eg, the entrance. The fixed points coordinates that have already been defined, are listed.</li>
+<li><u>Camera</u> lists the pictures of the survey. Tapping one of them you get a dialog to edit the description or delete the photo</li>
+<li><u>Sensors</u>: shows the list of sensor measurements of the survey. At the moment these are not editable.</li>
+</ulist><br><p>
+
+<h4>LOCATION DIALOG</h4>
+To locate a station (GPS button), you must first specify the station name. Next enter the coordinate manually ("Add" button), or get them with the Android GPS ("GPS" button). While searching for satellites the button displays the number of satellites in sight. You should wait till this number becomes green and the coordinates are displayed underneath. Then stop the GPS tapping the button again, and tap the "Add" button. If the orthometric altitude lookup is enable, TopoDroid connects to the web to get the geodetic height; this may take a while.<br><p>
+
+In the coordinates dialog you can write latitude and longitude either in the format "dd:mm:ss.ss" or as decimal degrees. If your keyboard does not show the semicolon ':' use the space instead. If your keyboard does not have the decimal point '.' use the slash '/' instead.<br>
+You can tap the "E" and "N" buttons to change the East/West and North/South hemisphere for the coordinates if needed.<br><p>
+
+The coordinates of all fixed point are listed in the dialog, as "station longitude latitude altitude". Tapping any of them opens another dialog where you can get the magnetic declination at the point (through internet), convert the coordinates to another coordinate reference system (using <i>Proj4</i>), change the station name, or delete the fixed point<br><p>
+
+<h4>MENUS</h4>
+<ulist>
+<li><u>Export</u> exports the survey data in the format for your favourite PC program. You have the following choices: <i>Compass</i>, <i>cSurvey</i>, <i>Survex</i>, <i>PocketTopo</i>, <i>Therion</i>, <i>VisualTopo</i>, and <i>Walls</i>. Furthermore the data can be exported as DXF, and CSV text file. Finally you can export a ZIP archive with all the data of the survey.</li>
+<li><u>Delete</u> deletes the survey and all associated data (photos, notes, sketch files, etc. ) except the zip archive. There is a confirmation dialog. Make sure to export a ZIP archive before you do it as this is non-recoverable action.</li>
+<li><u>Settings</u> (same as the shot window settings)</li>
+<li><u>Help</u></li>
+</ulist><br><p>
+
+<hr>
+<i>Now you can go and take measurements in your cave, download the data to TopoDroid, assign the stations, and so on. After a few shots you probably need to do some sketching of the cave. Here comes the <u>Sketch</u> button. It displays the list of sketches for the survey. Unless you are very lucky and the cave is simple and straightforward you will need more than one sketch for the survey.</i>
+</body></html>

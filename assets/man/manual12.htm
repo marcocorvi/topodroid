@@ -1,0 +1,47 @@
+<html><body>
+<h3>[12] SKETCH DRAWING</h3>
+
+The canvas shows the midline with the splay shots.  You can move it around dragging it with one (or two) finger(s), zoom in/out with two fingers. It is not possible to rotate the canvas; the plan has the North upward, and the extended elevation is oriented with the vertical. Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still move and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn objects and put them back again. Of course you can go back with <u>undo</u> until the canvas is empty.<br><p>
+
+By default you are drawing "wall" (red) lines. The sketch would be very boring if you had only one line style to use. The <u>tool picker</u> button allows you to pick another line style, or an "area" style (a closed region), or iconic symbols.  Tap the button, select the tab (POINT, LINE or AREA) and pick the drawing tool you need. Press the Android "Back" button to return to the canvas. The current drawing tool is the last you chose before closing the dialog.<br>
+You can adjust the line thickness in the <u>Settings</u> dialog. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
+
+You can also correct mistakes in the drawing.The <u>Undo</u> button lets you remove the last item. What if you need to erase a line or a symbol that you drew long ago, but do not want to loose all the intermediate work? You have two choices: the <u>Erase</u> and the <u>Edit</u> button.  The former is very intuitive: it cancels everything you pass your finger over. It is just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines).<br><p>
+
+The <u>Edit</u> button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. You have to select the item to edit by tapping on it. If there are several items close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). It may not be what you wanted, but never mind: move among the selected point with the <u>Prev</u>-<u>Next</u> button.<br>
+You can adjust the size of the green dots and the selection radius in the <u>Settings</u> dialog.<br><p>
+
+To clear the selection tap somewhere else in the canvas. To move the editing point, drag it with the finger. To change the properties of the sketch item tap the <u>note</u> button (the rightmost one). You can delete (remove) the item or change its Therion properties:
+<ulist>
+<li>point symbols: the "scale", the "orientation", the "text" (for labels), and generic "options"</li>
+<li>lines: "reverse", "outline", and "options". Lines can also be made more "rocky" (with fewer points) and ...</li>
+<li>areas: border "visibility"</li>
+</ulist><br><p>
+
+Point editing applies also to shots and stations.
+<ulist>
+<li>shots: stations, "extend", and flags</li>
+<li>stations: can be made the "current" station, toggle the "barrier" mark, and add as Therion "station point" to the scrap (if the autostation option of TopoDroid is not enabled)</li>
+</ulist><br>
+The "current" station is where the next downloaded shots will be attached. When a leg is downloaded (or inserted) the new station becomes the "current" station. By changing the "current" station you can continue surveying from a station in the middle of the survey.<br>
+The "barrier" station limits the reduction of the midline (for the sketch). This is useful when the survey goes over itself and you must draw two or more sketches. Having only the relevant shots on the canvas makes drawing easier.<br>
+<i>Therion</i> scraps must have a scale defined or at least two stations (so that <i>Therion</i> can compute the scale). TopoDroid has an option to automatically add all the stations that fall in the convex hull of the sketch to the scrap. This is enabled by default. However this may not be convenient if you work with xtherion and stations from other portions of the survey fall inside the scrap so that you get many "spurious" point stations. In this case you might want to disable this option and decide by yourself which station to add to the scrap.<br><p>
+
+The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions.
+<ulist>
+<li><i>Snap to nearby point</i>: move the point to coincide with the closest nearby point (no action if there is no nearby point) [points, lines, areas]</li>
+<li><i>Snap to nearby line</i> move to point to coincide with the closest line point, and replace the pieces of the area border before and after it, with pieces that follow the line path [areas]</li>
+<li><i>Split the point in two</i>, actually duplicating it and inserting a point in the line/area [lines, areas]</li>
+<li><i>Cut the line at the point</i>, thus making two lines [lines]</li>
+<li><i>Straighten the line segment</i> removes the control points [lines, areas]</li>
+<li><i>Smooth the line segment</i> inserts control points. These are put at 1/3 and 2/3 along the segment. Further editing can move them and give any wanted curvature to the segment. [lines, areas]</li>
+<li><i>Remove the line/area point</i> [lines, areas]</li>
+</ulist><br><p>
+
+The default drawing tools include several points, lines, and areas. It is likely you do not need many of them, and removing the unnecessary tools from the palette makes picking the tool you want to use easier. The <u>palette</u> menu comes for this purpose. It shows the list of the drawing tools with checkboxes that denote the enabled tools. You switch on and off the tools to your need then close the dialog (with the <u>back</u> button) to save the changes. You have to do this independently for points, lines and areas.<br><p>
+
+Each sketch carries its own palette.  When you close the sketch it is saved with a header listing the enabled tools. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
+
+<hr>
+<i>Do not forget to export the drawings in <i>cSurvey</i> format.  This is a special export, because it includes both plan and extended section is a single file, and it adds also the survey data. If your survey is simple and has a single sketch you can easily get a final map from this file.</i><br><p>
+</body></html>

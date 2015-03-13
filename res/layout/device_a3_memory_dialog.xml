@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="10dp">
+       >
+   					  
+      <Button android:id="@+id/button_store"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_store"
+        />
+
+      <TextView android:id="@+id/tv_stored_tail" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+      />
+      <TextView android:id="@+id/tv_stored_head" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+      />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="10dp">
+       >
+   					  
+      <Button android:id="@+id/button_read"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_read"
+        />
+
+      <TextView android:id="@+id/tv_read_tail" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:text="0000"
+      />
+      <TextView android:id="@+id/tv_read_head" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:text="0000"
+      />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="10dp">
+       >
+   					  
+      <Button android:id="@+id/button_dump"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_dump"
+        />
+
+      <EditText android:id="@+id/et_dumpfrom" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:inputType="number"
+        android:hint="0"
+      />
+      <EditText android:id="@+id/et_dumpto" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:inputType="number"
+        android:hint="4096"
+      />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="10dp">
+       >
+   					  
+      <EditText android:id="@+id/et_dumpfile" 
+        android:layout_marginTop="2dp"
+      	android:ems="25"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:hint="@string/save_as"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="10dp">
+       >
+   					  
+      <Button android:id="@+id/button_reset"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_reset"
+        android:textColor="@color/textdelete"
+        />
+
+      <EditText android:id="@+id/et_from" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:inputType="number"
+      />
+      <EditText android:id="@+id/et_to" 
+        android:layout_marginTop="2dp"
+        android:layout_width="100dp"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:inputType="number"
+      />
+    </LinearLayout>
+
+   					  
+    <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="15dp" 
+       android:paddingBottom="10dp">
+      >
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
+      <Button android:id="@+id/button_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_back"
+        />
+      </LinearLayout>
+    </LinearLayout -->
+
+</LinearLayout>

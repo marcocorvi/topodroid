@@ -1,0 +1,19 @@
+symbol point
+name disc
+name-es disco
+name-it disco
+name-fr disque_stalagmitique
+name-de Diskus
+name-ru диск
+th_name disc
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  addCircle 0 -3 3
+  moveTo -2 3
+  lineTo 0 0
+  lineTo 2 3
+endpath
+endsymbol
+

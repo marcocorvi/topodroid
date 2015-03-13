@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.topodroid.DistoX"
+      android:versionCode="205000"
+      android:versionName="2.5.0" 
+    >
+    <uses-sdk
+       android:minSdkVersion="8"
+       android:targetSdkVersion="8"
+    />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" / -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- uses-permission android:name="android.permission.DISABLE_KEYGUARD"/ -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
+    <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
+
+    <application
+          android:name=".TopoDroidApp"
+          android:label="@string/app_name"
+          android:screenOrientation="portrait"
+          android:debuggable="false"
+          android:icon="@drawable/icon" >
+
+        <activity android:name=".TopoDroidActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".GMActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+
+        <activity android:name=".CalibActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".SurveyActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".ShotActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".SensorActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateHidden|adjustResize"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".DeviceActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".DeviceList"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".DrawingActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+           <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+           </intent-filter>
+        </activity>
+
+        <activity android:name=".SketchActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+           <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+           </intent-filter>
+        </activity>
+
+        <activity android:name=".DistoXManualDialog"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+           <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+           </intent-filter>
+        </activity>
+
+        <activity android:name=".TopoDroidPreferences"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".CWDActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+
+        <activity android:name=".PhotoActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".SensorListActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
+    </application>
+</manifest> 

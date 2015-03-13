@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+   
+    <ListView android:id="@+id/list"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:stackFromBottom="false"
+       android:transcriptMode="alwaysScroll"
+       android:layout_weight="1"
+       android:textSize="12sp"
+    />  
+
+   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="horizontal"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="15dp"
+      >
+
+      <EditText android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      />
+
+     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+      >
+
+      <Button android:id="@+id/button_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_clear"
+        android:layout_gravity="right"
+      />
+
+      <Button android:id="@+id/button_push"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        android:layout_gravity="right"
+      />
+
+      <Button android:id="@+id/button_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+        android:layout_gravity="right"
+      />
+
+      <Button android:id="@+id/button_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_delete"
+        android:layout_gravity="right"
+      />
+
+    </LinearLayout>
+  </LinearLayout>
+
+  <EditText android:id="@+id/comment"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:hint="@string/comment"
+  />
+
+
+  <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content"
+         android:layout_marginTop="25dip"
+         android:layout_gravity="left"
+         >
+      <Button android:id="@+id/button_cancel"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:background="@drawable/button"
+            style="@style/button_default"
+            android:text="@string/button_cancel"
+      />
+  </LinearLayout -->
+
+</LinearLayout>

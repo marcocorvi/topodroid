@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:background="#ff000000"
+      >
+      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+      >
+        <Button android:id="@+id/item_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/POINT"
+                android:textSize="14sp"
+        />
+        <Button android:id="@+id/item_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/LINE"
+                android:textSize="14sp"
+        />
+        <Button android:id="@+id/item_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AREA"
+                android:textSize="14sp"
+        />
+        <LinearLayout 
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="right"
+          >
+          <Button android:id="@+id/item_left"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_undo"
+          />
+          <Button android:id="@+id/item_right"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_redo"
+          />
+        </LinearLayout>
+
+      </LinearLayout>
+      <GridView android:id="@+id/item_grid"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:transcriptMode="alwaysScroll"
+          android:layout_weight="1"
+          android:background="#ff000000"
+          android:numColumns="auto_fit"
+          android:gravity="center"
+          android:stretchMode="columnWidth"
+          android:columnWidth="80dp"
+      />  
+  </LinearLayout>
+
+

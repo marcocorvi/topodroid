@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="fill_parent"
+      android:orientation="vertical"
+      >
+
+    <RelativeLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+    >
+      <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/right"
+      >
+      <com.topodroid.DistoX.HorizontalListView android:id="@+id/listview"
+          android:layout_width="fill_parent"
+          android:layout_height="50dp"
+      />
+      </LinearLayout>
+     
+      <LinearLayout android:id="@+id/right"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          >
+          <Button android:id="@+id/handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_menu"
+          />
+      </LinearLayout>
+    </RelativeLayout>
+   					  
+  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+     android:layout_width="match_parent" 
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+     android:paddingLeft="6dp"
+     android:paddingRight="6dp"
+     android:paddingBottom="3dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="fill_parent"
+      android:orientation="vertical"
+      >
+    <!-- TextView android:id="@+id/text_survey"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/survey_info"
+        android:textSize="18sp"
+        / -->
+   					  
+    <EditText android:id="@+id/survey_name" 
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
+        android:scrollHorizontally="true"
+        android:editable="false"
+        />
+   		
+    <EditText android:id="@+id/survey_date" 
+        android:maxLines="1" 
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:inputType="date"
+        android:singleLine="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:scrollHorizontally="true" />
+   		
+    <EditText android:id="@+id/survey_team" 
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:hint="@string/team"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:scrollHorizontally="true" />
+   		
+    <EditText android:id="@+id/survey_decl" 
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:inputType="numberDecimal|numberSigned"
+        android:scrollHorizontally="true" />
+
+    <EditText android:id="@+id/survey_comment" 
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:hint="@string/description"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:scrollHorizontally="true" />
+
+    </LinearLayout>
+
+    <ListView android:id="@+id/menu"
+      android:layout_width="150dp"
+      android:layout_height="wrap_content"
+      android:choiceMode="singleChoice"
+      android:divider="@android:color/transparent"
+      android:dividerHeight="10dp"
+      android:background="#111"
+      android:orientation="vertical"
+      android:layout_gravity="right"
+      android:gravity="right"
+    />
+   		
+  </FrameLayout>
+
+</LinearLayout>

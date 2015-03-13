@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!-- DISTOX_SHOT_DATA -->
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_CLOSE_DISTANCE"
+       android:title="@string/pref_leg_title"
+       android:summary="@string/pref_leg_summary"
+       android:dialogTitle="@string/pref_leg_title"
+       android:dialogMessage="@string/pref_leg_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.1" />
+
+    <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_LEG_SHOTS"
+       android:title="@string/pref_leg_shots_title"
+       android:summary="@string/pref_leg_shots_summary"
+       android:defaultValue="2"
+       android:entries="@array/legShots"
+       android:entryValues="@array/legShotsValue"
+       />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_EXTEND_THR2"
+       android:title="@string/pref_ethr_title"
+       android:summary="@string/pref_ethr_summary"
+       android:dialogTitle="@string/pref_ethr_title"
+       android:dialogMessage="@string/pref_ethr_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.2" />
+
+     <CheckBoxPreference
+       android:key="DISTOX_SPLAY_EXTEND"
+       android:summary="@string/pref_splayExtend_summary"
+       android:title="@string/pref_splayExtend_title"
+       android:defaultValue="true"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_LOOP_CLOSURE"
+       android:summary="@string/pref_loopClosure_summary"
+       android:title="@string/pref_loopClosure_title"
+       android:defaultValue="false"
+     />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SHOT_TIMER"
+       android:title="@string/pref_shot_timer_title"
+       android:summary="@string/pref_shot_timer_summary"
+       android:dialogTitle="@string/pref_shot_timer_title"
+       android:dialogMessage="@string/pref_shot_timer_message"
+       android:inputType="number"
+       android:defaultValue="10" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_BEEP_VOLUME"
+       android:title="@string/pref_beep_volume_title"
+       android:summary="@string/pref_beep_volume_summary"
+       android:dialogTitle="@string/pref_beep_volume_title"
+       android:dialogMessage="@string/pref_beep_volume_message"
+       android:inputType="number"
+       android:defaultValue="50" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_VTHRESHOLD"
+       android:title="@string/pref_vthr_title"
+       android:summary="@string/pref_vthr_summary"
+       android:dialogTitle="@string/pref_vthr_title"
+       android:dialogMessage="@string/pref_vthr_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="80.0" />
+
+</PreferenceScreen>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+   					  
+
+    <CheckBox android:id="@+id/cb_mode_ids"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/hide_ids"
+        />
+   					  
+    <CheckBox android:id="@+id/cb_mode_splay"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/hide_splay"
+        />
+   					  
+    <CheckBox android:id="@+id/cb_mode_blank"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/hide_blank"
+        />
+
+    <CheckBox android:id="@+id/cb_mode_leg"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/hide_leg"
+        />
+   					  
+   					  
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="25dip"
+      >
+      <!-- Button android:id="@+id/button_mode_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        android:text="@string/button_cancel"
+        style="@style/button_default"
+        / -->
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
+      <Button android:id="@+id/button_mode_ok"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="right"
+        android:background="@drawable/button"
+        android:text="@string/button_ok"
+        style="@style/button_default"
+        />
+      </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+

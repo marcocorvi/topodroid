@@ -1,0 +1,36 @@
+<html><body>
+<h3>[2] DATABASE</h3>
+
+It is useful to have a rough idea about the organization of the information and the data in the database. The units of work in TopoDroid are the surveys and the calibrations. A survey is a single survey session of a piece of cave.  A calibration is a single DistoX calibration.<br><p>
+Accordingly, the most important database tables are:
+<ulist>
+<li><b>surveys</b>: survey informations</li>
+<li><b>calibs</b>: calibrations informations</li>
+</ulist><br>
+The surveys records store the survey name, date, team, magnetic declination,  and possibly a comment.<br>
+The calibs records contain the calibration name, date, DistoX device, algorithm, and the results of the last computation: coefficients, average error, maximum error, number of iterations.<br><p>
+
+Related to the surveys are the tables for:
+<ulist>
+<li><b>shots</b>: survey data</li>
+<li><b>stations</b>: saved stations</li>
+<li><b>plots</b>: 2D sketches; plans, extended sections, cross sections</li>
+<li><b>photos</b>; pictures associated to survey shots</li>
+<li><b>sensors</b>: measurements associated to survey shots</li>
+<li><b>fixeds</b>: (geolocalized stations)</li>
+<li><b>sketches</b>: 3D models</li>
+</ulist><br><p>
+
+Related to the calibrations is the data table
+<ulist>
+<li><b>gms</b>: calibration data</li>
+</ulist><br><p>
+
+Finally there are the tables
+<ulist>
+<li><b>devices</b>: the DistoX devices</li>
+<li><b>configs</b>: configuration values</li>
+</ulist><br><p>
+
+You can learn more about the data organization in the database by looking at it with a SQLite viewer.
+</body></html>

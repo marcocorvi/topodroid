@@ -1,0 +1,23 @@
+symbol point
+name air-draught
+name-es corriente_de_aire
+name-pt corrente_de_ar
+name-it corrente_d'aria
+name-fr courant_d'air
+name-de Luftzug
+name-ru тяга_воздуха
+th_name air-draught
+orientation yes
+color 0x00ccff
+csurvey 6 6 80
+path
+  moveTo -4 7
+  lineTo 0 3
+  lineTo 0 -10
+  lineTo 4 -6
+  moveTo 0 -10
+  lineTo -4 -6
+  moveTo -4 4
+  lineTo 0 0
+endpath
+endsymbol

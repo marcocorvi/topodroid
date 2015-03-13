@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_DEVICE"
+       android:title="@string/pref_device_title"
+       android:summary="@string/pref_device_summary"
+       android:dialogTitle="@string/pref_device_title"
+       android:dialogMessage="@string/pref_device_message"
+       android:enabled="false"
+       android:defaultValue="" />
+
+     <!-- com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_DEVICE_TYPE"
+       android:summary="@string/pref_device_type_summary"
+       android:title="@string/pref_device_type_title"
+       android:defaultValue="1"
+       android:entries="@array/deviceType"
+       android:entryValues="@array/deviceTypeValue"
+     / -->
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_BLUETOOTH"
+       android:summary="@string/pref_checkBT_summary"
+       android:title="@string/pref_checkBT_title"
+       android:defaultValue="1"
+       android:entries="@array/deviceBT"
+       android:entryValues="@array/deviceBTValue"
+     />
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_CONN_MODE"
+       android:summary="@string/pref_conn_mode_summary"
+       android:title="@string/pref_conn_mode_title"
+       android:defaultValue="0"
+       android:entries="@array/connMode"
+       android:entryValues="@array/connModeValue"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_AUTO_RECONNECT"
+       android:summary="@string/pref_auto_reconnect_summary"
+       android:title="@string/pref_auto_reconnect_title"
+       android:defaultValue="false"
+     />
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_SOCK_TYPE"
+       android:summary="@string/pref_sock_type_summary"
+       android:title="@string/pref_sock_type_title"
+       android:defaultValue="0"
+       android:entries="@array/sockType"
+       android:entryValues="@array/sockTypeValue"
+     />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_COMM_RETRY"
+       android:title="@string/pref_comm_retry_title"
+       android:summary="@string/pref_comm_retry_summary"
+       android:dialogTitle="@string/pref_comm_retry_dialogtitle"
+       android:dialogMessage="@string/pref_comm_retry_message"
+       android:inputType="number"
+       android:defaultValue="1" />
+
+</PreferenceScreen>

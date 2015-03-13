@@ -1,0 +1,23 @@
+symbol point
+name soda-straw
+name-es macaron
+name-pt canudos
+name-it tubolari
+name-fr fistuleuse
+name-de Makkaroni
+name-ru макароны
+th_name soda-straw
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -6 -2
+  lineTo 6 -2
+  moveTo -4 -2
+  lineTo -4 2
+  moveTo 0 -2
+  lineTo 0 6
+  moveTo 4 -2
+  lineTo 4 4
+endpath
+endsymbol

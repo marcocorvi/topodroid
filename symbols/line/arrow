@@ -1,0 +1,23 @@
+symbol line
+name arrow
+name-es desnivel
+name-pt seta
+name-it freccia
+name-fr flèche
+name-de Pfeil
+name-ru стрелка
+th_name arrow
+color 0xcccccc 0xff
+width 1
+csurvey 5 1 2 2
+effect
+  moveTo 0 0
+  lineTo 10 0
+  lineTo 10 3
+  lineTo 13 0
+  lineTo 13 -1
+  lineTo 10 -4
+  lineTo 10 -1
+  lineTo 0 -1
+endeffect
+endsymbol

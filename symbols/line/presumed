@@ -1,0 +1,13 @@
+symbol line
+name presumed 
+name-es contorno_estimado
+name-it parete_stimata
+name-fr supposé
+name-de Wand_geschätzt
+name-ru предположительный
+th_name wall:presumed
+color 0xff0000 0xff
+width 1
+csurvey 5 8 3 1
+dash 15 5
+endsymbol

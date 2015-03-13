@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+     <!-- CheckBoxPreference
+       android:key="DISTOX_SKETCH_USES_SPLAYS"
+       android:summary="@string/pref_sketchUsesSplays_summary"
+       android:title="@string/pref_sketchUsesSplays_title"
+       android:defaultValue="false"
+     / -->
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SKETCH_LINE_STEP"
+       android:summary="@string/pref_sketchLineStep_summary"
+       android:title="@string/pref_sketchLineStep_title"
+       android:dialogTitle="@string/pref_sketchLineStep_title"
+       android:dialogMessage="@string/pref_sketchLineStep_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.5"
+     />
+
+     <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SKETCH_BORDER_STEP"
+       android:summary="@string/pref_sketchBorderStep_summary"
+       android:title="@string/pref_sketchBorderStep_title"
+       android:dialogTitle="@string/pref_sketchBorderStep_title"
+       android:dialogMessage="@string/pref_sketchBorderStep_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.2"
+     / -->
+
+     <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SKETCH_SECTION_STEP"
+       android:summary="@string/pref_sketchSectionStep_summary"
+       android:title="@string/pref_sketchSectionStep_title"
+       android:dialogTitle="@string/pref_sketchSectionStep_title"
+       android:dialogMessage="@string/pref_sketchSectionStep_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.5"
+     / -->
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_DELTA_EXTRUDE"
+       android:summary="@string/pref_sketchDeltaExtrude_summary"
+       android:title="@string/pref_sketchDeltaExtrude_title"
+       android:dialogTitle="@string/pref_sketchDeltaExtrude_title"
+       android:dialogMessage="@string/pref_sketchDeltaExtrude_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="50"
+     />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_COMPASS_READINGS"
+       android:summary="@string/pref_sketchCompassReadings_summary"
+       android:title="@string/pref_sketchCompassReadings_title"
+       android:dialogTitle="@string/pref_sketchCompassReadings_title"
+       android:dialogMessage="@string/pref_sketchCompassReadings_message"
+       android:inputType="number"
+       android:defaultValue="4"
+     />
+
+</PreferenceScreen>

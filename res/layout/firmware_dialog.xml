@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="5dp"
+>
+
+
+  <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:id="@+id/firmware_action"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+        <RadioButton android:id="@+id/firmware_upload"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:text="@string/button_upload"
+          />
+        <RadioButton android:id="@+id/firmware_dump"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:text="@string/button_dump"
+          />
+  </RadioGroup>
+
+  <EditText 
+        android:id="@+id/firmware_file"
+        android:hint="@string/firmware_file"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+      />
+
+  <Button
+        android:id="@+id/firmware_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
+
+  <ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/firmware_action"
+    android:orientation="vertical"
+  >
+      <TextView android:id="@+id/firmware_text"
+        android:text="@string/firmware_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:autoLink="all"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+      />
+  </ScrollView>
+
+</LinearLayout>

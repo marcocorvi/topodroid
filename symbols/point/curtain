@@ -1,0 +1,22 @@
+symbol point
+name curtain
+name-es cortina
+name-it cortina
+name-fr draperie
+name-de Sinterfahne
+name-ru занавесь
+th_name curtain
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -4 -4
+  lineTo 0 0
+  lineTo 4 -4
+  moveTo 0 0
+  lineTo 0 2
+  cubicTo -1 2 -2 3 -2 4
+  cubicTo -2 5 -1 6 0 6
+  lineTo 0 8
+endpath
+endsymbol

@@ -1,0 +1,20 @@
+symbol point
+name clay
+name-es arcilla
+name-pt argila
+name-it argilla
+name-fr argile
+name-de Lehm
+name-ru глина
+th_name clay
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  moveTo -6 0
+  cubicTo -6 -1 -4 -3 -3 -3
+  cubicTo -2 -3 0 -1 0 0
+  cubicTo 0 1 2 3 3 3
+  cubicTo 4 3 6 1 6 0
+endpath
+endsymbol

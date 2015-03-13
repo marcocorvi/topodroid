@@ -1,0 +1,25 @@
+symbol point
+name water
+name-es agua
+name-pt בgua
+name-it acqua
+name-fr eau
+name-de Wasser
+name-ru вода
+th_name water
+orientation no
+color 0x6666ff
+csurvey 6 6 80
+path
+  moveTo -6 -3
+  lineTo -1 -3
+  moveTo 2 -3
+  lineTo 6 -3
+  moveTo -4 0
+  lineTo 1 0
+  moveTo 3 0
+  lineTo 7 0
+  moveTo -3 3
+  lineTo 5 3
+endpath
+endsymbol

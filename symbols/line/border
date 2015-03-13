@@ -1,0 +1,13 @@
+symbol line
+name border  
+name-es borde
+name-pt borda
+name-it bordo
+name-fr bordure
+name-de Begrenzung
+name-ru граница
+th_name border
+color 0x00cc00 0xff
+width 1
+csurvey 5 1 2 2
+endsymbol

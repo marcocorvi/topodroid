@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       >
+
+      <Button android:id="@+id/btn_csv"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_csv"
+        />
+   					  
+    </LinearLayout>
+
+
+    <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_gravity="left"
+       android:layout_marginTop="40dp" 
+       >
+      <Button android:id="@+id/button_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        />
+     </LinearLayout -->
+
+</LinearLayout>

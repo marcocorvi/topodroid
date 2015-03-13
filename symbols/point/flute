@@ -1,0 +1,21 @@
+symbol point
+name flute
+name-es concrecciones
+name-it scanellatura
+name-fr flute_(eng)
+name-de Kolk
+name-ru флейта
+th_name flute
+orientation no
+color 0x6666ff
+csurvey 6 6 80
+path
+  moveTo -6 0
+  lineTo 6 0
+  moveTo -3 0 
+  cubicTo -3 -1.5 -1.5 -3 0 -3
+  cubicTo 1.5 -3 3 -1.5 3 0
+endpath
+endsymbol
+
+

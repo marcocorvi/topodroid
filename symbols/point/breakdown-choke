@@ -1,0 +1,19 @@
+symbol point
+name breakdown-choke
+name-es ostruido
+name-pt estrangulamento
+name-it ostruzione
+name-fr trémie
+name-de Verstürzt
+name-ru нежданчик
+th_name breakdown-choke
+orientation no
+color 0xff6666
+csurvey 6 6 80
+path
+  moveTo -4 4
+  lineTo 4 -4
+  moveTo -4 -4
+  lineTo 4 4
+endpath
+endsymbol

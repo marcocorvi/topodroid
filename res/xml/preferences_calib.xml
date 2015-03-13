@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_GROUP_BY"
+       android:summary="@string/pref_group_by_summary"
+       android:title="@string/pref_group_by_title"
+       android:defaultValue="2"
+       android:entries="@array/groupBy"
+       android:entryValues="@array/groupByValue"
+     />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_GROUP_DISTANCE"
+       android:title="@string/pref_group_title"
+       android:summary="@string/pref_group_summary"
+       android:dialogTitle="@string/pref_group_title"
+       android:dialogMessage="@string/pref_group_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="40.0" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_CALIB_EPS"
+       android:title="@string/pref_error_title"
+       android:summary="@string/pref_error_summary"
+       android:dialogTitle="@string/pref_error_dialogtitle"
+       android:dialogMessage="@string/pref_error_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.000001" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_CALIB_MAX_IT"
+       android:title="@string/pref_iter_title"
+       android:summary="@string/pref_iter_summary"
+       android:dialogTitle="@string/pref_iter_dialogtitle"
+       android:dialogMessage="@string/pref_iter_message"
+       android:inputType="number"
+       android:defaultValue="200" />
+
+     <CheckBoxPreference
+       android:key="DISTOX_RAW_DATA"
+       android:summary="@string/pref_raw_data_summary"
+       android:title="@string/pref_raw_data_title"
+       android:defaultValue="false"
+     />
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_CALIB_ALGO"
+       android:summary="@string/pref_calib_algo_summary"
+       android:title="@string/pref_calib_algo_title"
+       android:defaultValue="0"
+       android:entries="@array/calibAlgo"
+       android:entryValues="@array/calibAlgoValue"
+     />
+
+</PreferenceScreen>

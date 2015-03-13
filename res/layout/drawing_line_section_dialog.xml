@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+   					  
+    <TextView android:id="@+id/line_options"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      />
+
+    <!-- CheckBox android:id="@+id/line_reversed"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/reversed"
+      / -->
+
+    <ImageView android:id="@+id/line_image"
+        android:layout_width="fill_parent"
+        android:layout_height="80sp" 
+        android:scaleType="fitCenter"
+        />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+
+      <Button android:id="@+id/button_foto"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_photo"
+      />
+
+      <Button android:id="@+id/button_draw"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_plot"
+      />
+
+      <Button android:id="@+id/button_erase"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_delete"
+      />
+
+    </LinearLayout>
+
+    <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="25dp"
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/button_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        />
+   </LinearLayout -->
+
+</LinearLayout>

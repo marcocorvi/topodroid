@@ -1,0 +1,13 @@
+symbol line
+name section
+name-es sección 
+name-it sezione
+name-fr section
+name-de Schnitt
+name-ru сечение
+th_name section
+color 0xffffff 0x99
+width 1
+csurvey 5 1 2 3
+dash 5 10
+endsymbol

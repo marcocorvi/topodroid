@@ -1,0 +1,33 @@
+<html><body>
+<h3>[13] CROSS-SECTIONS</h3>
+
+Cross-sections are kind of special. To tell TopoDroid that you want to draw a cross-section you have to draw a "section" line, either in the plan view or in the extended elevation view. The section line defines the position of the cross-section and its orientation.<br><p>
+
+A cross-section is the shape of the cave in a plane that cuts it. The orientation of the cross-section is the orientation of this plane, ie, the orientation of the line perpendicular to the plane, and pointing in the direction of sight. You define the orientation of the cross-section by the way you trace the section line. As an indicator the section line has a tick pointing from the line to the direction of view of the cross-section.<br>
+The size of this "tick" can be adjusted in the <u>Settings</u> dialog.<br><p>
+
+You can choose between a photo cross-section (taken with the camera), and a sketch cross-section. In the first case just take a photo that will remind you of the shape of the gallery when you will be drafting the cave map. Make sure to have a fellow caver in the picture who will serve as a size reference.<br><p>
+
+In the second case you sketch the cross section on a canvas with the usual drawing tools of TopoDroid. As a reference TopoDroid displays the leg shot traversed by the cross section and the splay shots at its endpoints. The station in front(the one that the cross-section is looking at) is centred in the grid. The splay shots in front are light grey, those behind are thinner darker grey. All the shots are displayed projected on the plane of the cross section.
+Once closed, cross-sections can be opened again and modified by selecting the relative section line in "edit" mode and tapping the <u>Edit</u> button.<br><p>
+
+A cross-section can be either "vertical" or "horizontal", depending on how the plane intersects the cave passage.<br><p>
+
+<b>Cross-sections in the plan view</b><br>
+Cross-sections defined in the plan view are always "vertical" (zero inclination). Their orientation (ie, the azimuth of the cross-section plane) is determined by the angle of the section line. Very often they are perpendicular to the gallery, but can be drawn at any angle needed. For example, a section line drawn from left to right(e.g. horizontal, angle 90 degrees from the vertical) has a direction of view to the North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30 degrees.<br>
+The crossed leg is displayed vertical when the cross-section has the same azimuth as the leg. Otherwise it is tilted right or left.<br><p>
+
+<b>Cross-sections in the extended profile</b><br>
+Cross-sections in the extended profile view can be either "horizontal"(on vertical shots in pits) or "vertical"(on more or less horizontal galleries). They are considered "horizontal" if their inclination exceeds the value of the H-threshold setting.<br>
+Furthermore, a reference line 5 m long, oriented to the North, is added if the cross-section is "horizontal".<br><p>
+
+Cross-sections in the extended profile always have the azimuth of the crossed leg (or the opposite one if the direction of the section line is the opposite of that of the leg). Their inclination is determined by that of the the section line.<br><p>
+
+If the section line traced from the right to left, the cross-section is oriented downwards and has -90 degrees inclination. This is a "horizontal" cross-section as seen from above and. Most of the times you will want to draw "horizontal" cross-sections this way, as it is more natural to lay a map on a surface and look down at it.If you trace the section line from left to right the cross-section is oriented upwards (inclination +90 degrees).<br><p>
+ 
+The crossed leg is always displayed vertical as the cross-section has the same azimuth as the leg. Consequently, the north line, in "horizontal" cross-sections, is displayed at an angle with the vertical.<br><p>
+
+<b>Cross-section files</b><br>
+Each cross-section is saved in a separate Therion file in the "th2" subfolder. The files get consecutive names "MySurvey-xx0.th2", "MySurvey-xx1.th2", etc. The "xx0" numbering part of the name is also displayed in the Section dialog that pops up when you create or edit a section.<br>
+The file is deleted when a cross-section is deleted.
+</body></html>

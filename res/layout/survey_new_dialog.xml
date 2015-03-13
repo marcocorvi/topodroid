@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+   					  
+    <!-- TextView android:id="@+id/text_survey"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/survey_info"
+        android:textSize="18sp"
+        / -->
+   					  
+    <EditText android:id="@+id/survey_name" 
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:hint="@string/name"
+        android:scrollHorizontally="true" />
+   		
+    <EditText android:id="@+id/survey_date" 
+        android:maxLines="1" 
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:inputType="date"
+        android:singleLine="true"
+        android:scrollHorizontally="true" />
+   		
+    <EditText android:id="@+id/survey_team" 
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:hint="@string/team"
+        android:scrollHorizontally="true" />
+   		
+    <EditText android:id="@+id/survey_decl" 
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:hint="@string/declination"
+        android:inputType="numberDecimal|numberSigned"
+        android:scrollHorizontally="true" />
+   		
+    <EditText android:id="@+id/survey_comment" 
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:hint="@string/description"
+        android:scrollHorizontally="true" />
+
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="horizontal"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="25dip"
+      >
+          <!-- Button android:id="@+id/surveyBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/button"
+                style="@style/button_default"
+                android:text="@string/button_cancel"
+          / -->
+      <LinearLayout 
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="right"
+          >
+      <Button android:id="@+id/surveySave"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dip"
+              android:layout_marginRight="10dip"
+              android:background="@drawable/button"
+              style="@style/button_default"
+              android:text="@string/button_save"
+      />
+      <Button android:id="@+id/surveyOpen"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dip"
+              android:background="@drawable/button"
+              style="@style/button_default"
+              android:text="@string/button_open"
+      />
+      </LinearLayout>
+  </LinearLayout>
+
+   		
+</LinearLayout>
+

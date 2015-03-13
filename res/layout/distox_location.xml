@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+ 
+    <EditText android:id="@+id/station"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:hint="@string/station"
+        android:singleLine="true"
+        android:imeActionId="6"
+        android:imeActionLabel="OK"
+        android:imeOptions="actionDone"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp" 
+        >
+      <!-- Button android:id="@+id/button_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        / -->
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
+      <Button android:id="@+id/button_loc"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_gps_start"
+        />
+
+      <!-- Button android:id="@+id/status"
+        android:layout_width="40dp" 
+        android:layout_height="40dp"
+        android:layout_gravity="left"
+        android:text=" 0 "
+        android:background="@drawable/button"
+        style="@style/button_default"
+        / -->
+
+      <Button android:id="@+id/button_manual"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="right"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_add"
+        />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView android:id="@+id/longitude"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/longitude"
+        />
+   					  
+    <TextView android:id="@+id/latitude"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/latitude"
+        />
+   					  
+    <TextView android:id="@+id/altitude"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/altitude"
+        />
+   					  
+    <ListView android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:transcriptMode="alwaysScroll"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        />  
+
+</LinearLayout>

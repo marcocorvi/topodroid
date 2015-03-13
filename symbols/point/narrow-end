@@ -1,0 +1,19 @@
+symbol point
+name narrow-end
+name-es gatera
+name-pt t�rmino_estreito
+name-it termine
+name-fr passage_imp�n�trable
+name-de schmal_Engstelle
+name-ru узкий_ход
+th_name narrow-end
+orientation no
+color 0xff6666
+csurvey 6 6 80
+path
+  moveTo -2 -6
+  lineTo -2 6
+  moveTo 2 -6
+  lineTo 2 6
+endpath
+endsymbol

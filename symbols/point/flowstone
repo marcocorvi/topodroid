@@ -1,0 +1,21 @@
+symbol point
+name flowstone
+name-es flujo
+name-pt concreção
+name-it colata
+name-fr coulée_de_calcite
+name-de flächiger_Sinter
+name-ru Ð½Ð°Ñ‚ÐµÑ‡ÐºÐ°
+th_name flowstone
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -6 -2
+  lineTo -1 -2
+  moveTo 2 -2
+  lineTo 7 -2
+  moveTo -3 2
+  lineTo 3 2
+endpath
+endsymbol

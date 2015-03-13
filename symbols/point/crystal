@@ -1,0 +1,23 @@
+symbol point
+name crystal
+name-es cristal
+name-pt cristal
+name-it cristallo
+name-fr cristal
+name-de Kristall
+name-ru кристалл
+th_name crystal
+orientation no
+color 0xcccccc
+csurvey 6 6 80
+path
+  moveTo -5 0
+  lineTo 5 0
+  moveTo 0 -5
+  lineTo 0 5
+  lineTo 5 0
+  lineTo 0 -5
+  lineTo -5 0
+  lineTo 0 5
+endpath
+endsymbol

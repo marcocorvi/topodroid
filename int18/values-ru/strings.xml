@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
+    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+
+    <string name="app_name">TopoDroid</string>
+
+    <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить объекты рисунков?</string>
+    <string name="version_title">Обновление приложения</string>
+
+    <string name="POINT">ТОЧКА</string>
+    <string name="LINE">ЛИНИЯ</string>
+    <string name="AREA">ОБЛАСТЬ</string>
+    <string name="HELP">ПОМОЩ</string>
+    <string name="STATION">ПИКЕТ </string>
+
+    <string name="memoryA3">Память DistoX A3</string>
+    <string name="memoryX310">Память DistoX X310</string>
+    <string name="memory_data">DistoX данные</string>
+
+    <string name="td_symbol_text">Вы хотите установить инструменты для рисования?\nМожно сделать это позже, установив приложение TdSymbol</string>
+    <string name="td_symbol_ask">Не спрашивать снова</string>
+
+	<!-- string name="thp_danger">опасность</string -->
+    <string name="thp_user">пользовательский</string>
+    <string name="thp_label">лейбл</string>
+	<!-- string name="thl_danger">опасность</string -->
+    <string name="thl_user">пользовательский</string>
+    <string name="thl_wall">стена</string>
+	<!-- string name="tha_danger">опасность</string -->
+    <string name="tha_user">пользовательский</string>
+    <string name="tha_water">вода</string>
+
+    <string name="missing_area">ОБЛАСТЬ</string>
+    <string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string>
+    <string name="missing_line">ЛИНИЯ</string>
+    <string name="missing_point">ТОЧКА</string>
+    <!-- OK string name="missing_save">В абрисе присутстсвуют неизвестные элементы.\nНе сохранено.</string -->
+    <string name="missing_station">Отсутствует пикет</string>
+    <string name="missing_symbols">Отсутствуют инструменты для рисования.\nВы хотите сохранить?</string>
+    <string name="missing_title">ОТСУТСТВУЮТ СИМВОЛЫ</string>
+    <string name="missing_warning">Отсутствуют следующие инструменты для рисования.\n</string>
+    <string name="failed_snap_to_line">Отсутствует ближайшая точка-линии для закрепления границы зоны</string>
+    <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
+
+    <string name="calib_new">Новая калибровка</string>
+    <string name="calib_exists">Калибровка уже существует</string>
+    <string name="calib_delete">Удалить калибровку </string>
+    <string name="calib_device_mismatch">ВНИМАНИЕ: Несоответствие калибровчных данных и прибора</string>
+    <string name="calib_no_name">Необходимо задать имя</string>
+    <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
+    <string name="calib_saved">Сохранить калибровку</string>
+    <string name="calib_updated">Обновить калибровку</string>
+    <string name="calib_compute_groups">Вычисление групп данных калибровки ...</string>
+    <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки ...</string>
+    <!-- OK string name="calib_read_coeffs">Считание коэфицентов калибровки ...</string -->
+    <string name="calib_write_coeffs">Запись коэфицентов калибровки ...</string>
+    <string name="connect_failed">Ошибка соединения</string>
+    <string name="data">данные</string>
+    <string name="using">Использую %1$s %2$s</string>
+    <string name="calib_error">Ошибка: %1$.4f градусов</string>
+    <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
+    <string name="calib_iter">Итерации: %1$d</string>
+    <string name="calib_saturated_values">ВНИМАНИЕ: %1$d saturated data</string>
+    <string name="algorithm">Алгоритм:</string>
+    <string name="auto">авто</string>
+    <string name="linear">линейный</string>
+    <string name="non_linear">не-линейный</string>
+   
+    <string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string>
+    <string name="device_busy">Устройство занято</string>
+    <string name="device_illegal_addr">Недопустимый адрес памяти</string>
+    <string name="device_info">Информация об устройстве</string>
+    <string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string>
+    <string name="device_none">DistoX не выбран</string>
+    <string name="device_pairing">Соединение: проверьте уведомления</string>
+    <string name="device_reset">Сброс памяти DistoX</string>
+    <string name="device_code">DistoX код %1$4d</string>
+    <string name="device_firmware">Прошивка  %1$d.%2$d</string>
+    <string name="device_hardware">Чип  %1$d.%2$d</string>
+    <string name="device_status_angle">Единицы угол %1$s</string>
+    <string name="device_status_compass">Компас/клинометр %1$s</string>
+    <string name="device_status_calib">Режим %1$s</string>
+    <string name="device_status_silent">Тихий %1$s</string>
+    <string name="bt_reset">Сброс соединения bluetooth</string>
+    <string name="save_as">сохранить как</string>
+
+    <string name="comment">комментарий</string>
+    <string name="flag">Флаг</string>
+    <string name="duplicate">дубликат</string>
+    <!-- OK string name="regular">обычный</string -->
+    <string name="surface">поверхность</string>
+    <string name="extend">расширенный</string>
+    <string name="extend_ignore">Игнорировать</string>
+    <string name="extend_left">РРвЛево</string>
+    <string name="extend_right">РРвПраво</string>
+    <string name="extend_vert">РРвВерх</string>
+    <string name="external_prompt">Ввод измерения</string>
+    <string name="splay_at_to">Л:П:В:Н на следующем пикете</string>
+
+    <string name="few_data">Не достаточно данных</string>
+
+    <string name="import_title">Импорт файла</string>
+    <string name="import_wait">Импорт файла... обождите...</string>
+    <string name="import_already">съёмка уже импортирована</string>
+    <string name="import_none">Отсутствует файл для импортирта</string>
+    <string name="import_zip_ok">Успешно импортирован zip файл</string>
+    <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите ...</string>
+    <string name="sketch_loading">Загрузка абриса... обождите...</string>
+    <string name="sketch_saving">Сохранение абриса ... обождите...</string>
+    <string name="lookup_wait">Интернет поиск ... обождите...</string>
+ 
+
+    <string name="head_tail">Память: </string>
+    <string name="head_tail_failed">Ошибка чтения индекса памяти DistoX</string>
+    <string name="head_tail_store_failed">Не удалось сохранить индекс памяти DistoX</string>
+    <string name="illegal_data_value">Недопустимое значение</string>
+    <string name="label_title">ПОДПИСЬ</string>
+    <string name="label_text">Введите текст подписи</string>
+    <string name="altitude">Alt. </string>
+    <string name="latitude">Lat. </string>
+    <string name="longitude">Long. </string>
+    <string name="altitude_hint">Алт. [метры]</string>
+    <string name="altitude_wgs84">Альтитуда WGS84 </string>
+    <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
+    <string name="longitude_hint">Long. dd:mm:ss.sss</string>
+    <string name="loop_closure_errors">Ошибки закрытия петли</string>
+    <string name="loop_none">нет петли</string>
+    <!-- OK string name="line_delete">Удалить линию</string -->
+
+    <string name="error_azimuth_required">Требуется азимут</string>
+    <string name="error_length_required">Требуется длинна</string>
+    <string name="error_clino_required">Требуется угол</string>
+    <string name="error_comment_required">Требуется комментарий</string>
+    <string name="error_begin_required">Требуется начальный адрес</string>
+    <string name="error_declination_number">Наклон должен быть задан числом</string>
+    <string name="error_end_required">Требуется конечный адрес</string>
+    <string name="error_from_required">Требуется начальный пикет</string>
+    <string name="error_group_required">Требуется номер группы</string>
+    <string name="error_group_non_integer">Номер группы должен быть целым числом</string>
+    <string name="error_alt_required">Требуется альтитуда</string>
+    <string name="error_invalid_number">Недопустимое значение</string>
+    <string name="error_lat_required">Требуется широта</string>
+    <string name="error_long_required">Требуется долгота</string>
+    <string name="error_name_required">Требуется имя</string>
+    <string name="error_start_required">Требуется привязка к пикету</string>
+    <string name="error_station_already_fixed">Пикет уже имеет координаты</string>
+    <string name="error_station_required">Требуется прикет</string>
+    <string name="error_station_non_existing">Несуществующий прикет</string>
+    <string name="error_sensor_required">Требуется датчик</string>
+    <string name="error_value_required">Требуется значение</string>
+    
+    <string name="group_title">Присвоить калибровку к группе данных</string>
+    <string name="group_policy_four">Правило: группировать по четыре</string>
+    <string name="group_policy_sixteen">Правило: четыре группы по четыре, остальные по одному</string>
+    <string name="group_policy_distance">Правило: группировать по угловому расстоянию</string>
+    <string name="group_reset">Сбросить группы</string>
+
+    <string name="scale">масштаб</string>
+    <string name="reversed">обратный</string>
+    <string name="options">опции</string>
+    <string name="outline">контур</string>
+    <string name="out">из</string>
+    <string name="in">в</string>
+    <string name="none">none</string>
+    <string name="barrier_add">Прервать показ средней линии?</string>
+    <string name="barrier_del">Продолжить показ средней линии?</string>
+
+    <string name="no_calib">Отсутствует калибровка</string>
+    <string name="no_calibration">Калибровка не выбрана</string>
+    <string name="no_capture_app">Отсутствует приложение для фото</string>
+    <string name="no_cave3d">Cave3D не установлен</string>
+    <string name="no_db">Отсутствует база данных</string>
+    <string name="no_device_address">Прибор не выбран</string>
+    <string name="no_device_found">Прибор не обнаружен</string>
+    <string name="no_geomag">Невозможно считать GeoMag</string>
+    <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
+    <string name="no_leg_intersection">Разрез не пересекает пикет</string>
+    <string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string>
+    <string name="no_photos">В съёмке нет фото</string>
+    <string name="no_plots">В съёмке нет абрисов \nДля создания используйте кнопку Добавить</string>
+    <string name="no_proj4">Proj4 не установлен</string>
+    <string name="no_sensors">В съёмке отсутствуют измерения</string>
+    <string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string>
+    <string name="no_survey">Съёмка не аыбрана.</string>
+    <string name="no_tdsymbol">TdSymbol не установлен</string>
+    <string name="no_thmanager">ThManager не установлен</string>
+    <string name="no_undelete">Нечего восстанавливать</string>
+
+    <!-- NO string name="menu_3d">3 D</string -->
+    <string name="menu_about">Описание</string>
+    <string name="menu_attach">СОЕДИНИТЬ</string>
+    <string name="menu_calib">КАЛИБРОВКИ</string>
+    <string name="menu_delete">Удалить</string>
+    <string name="menu_detach">Отсоединить</string>
+    <string name="menu_display">Показать</string>
+    <string name="menu_distox">DISTOX</string>
+    <string name="menu_export">Экспорт</string>
+    <string name="menu_firmware">Прошивка</string>
+    <string name="menu_recover">Восстановить</string>
+    <string name="menu_reload">Перезагрузить</string>
+    <string name="menu_help">Помощь</string>
+    <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
+    <string name="menu_logs">Журнал</string>
+    <!-- OK string name="menu_manual">Вручную</string -->
+    <string name="menu_options">Настройки</string>
+    <string name="menu_palette">Палитра</string>
+    <string name="menu_photo">фото</string>
+    <string name="menu_sensor">датчик</string>
+    <string name="menu_scan">Сканировать</string>
+    <string name="menu_station">ПИКЕТЫ</string>
+    <!-- TODO string name="menu_stats">СТАТИСТИКА</string -->
+    <string name="menu_survey">Метаданные</string>
+    <string name="menu_sync">СИНХР.</string>
+
+    <string name="popup_join_pt">Привязать к ближайшей точке</string>
+    <string name="popup_snap_ln">Привязать к ближайшей линии</string>
+    <string name="popup_split_pt">Дублировать точку</string>
+    <string name="popup_split_ln">Разорвать линию на точке</string>
+    <string name="popup_sharp_pt">Выровнить сегмент</string>
+    <string name="popup_curve_pt">Сгладить сегмент</string>
+    <string name="popup_remove_pt">Удалить точку</string>
+
+    <string name="connected_none">Не соединено</string>
+    <string name="connected_already">Уже соединено</string>
+
+    <string name="not_available">Блютуф недоступен</string>
+    <!-- OK string name="not_connected">Нет соединения</string -->
+    <string name="not_enabled">Блютуф выключен</string>
+    <string name="not_implemented">Пока не реализовано</string>
+    <string name="null_bitmap">null bitmap [OOM error]</string>
+    <string name="photo">фото</string>
+    <string name="photo_comment_prompt">Введите комментарий к фото</string>
+    <string name="photo_name">Пикет/имя</string>
+    <string name="photo_photo">фото</string>
+    <string name="photo_sensor">датчик</string>
+    <string name="photo_external">измерение</string>
+    <string name="photo_sensor_prompt">Выберите фото либо датчик</string>
+    <string name="photo_shot">добавить пикет</string>
+    <string name="photo_survey">разорвать съёмку</string>
+    <string name="picture_no_station">Требуется номер пикета</string>
+    <string name="plot_delete">Удалить абрис ?</string>
+    <string name="plot_duplicate_name">Дублировать название абриса</string>
+    <string name="plot_name">Название абриса</string>
+    <string name="plot_new">Новый абрис</string>
+    <string name="plot_not_found">Абрис не обнаружен</string>
+    <!-- OK string name="plot_null_name">Отсутствует имя абриса</string -->
+    <!-- OK string name="plot_null_start">Отсутствует базовый пикет</string -->
+    <string name="plot_recover">Перезагрузить абрис из бекапа?</string>
+    <string name="plot_start">Начальный пикет</string>
+    <!-- OK string name="plot_view">Просмотренный пикет</string -->
+    <string name="read_">Считать </string>
+    <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
+    <string name="read_failed">Ошибка чтения DistoX</string>
+    <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
+    <string name="saved_file_">Сохраненный файл\ </string>
+    <string name="saving_">Сохранение </string>
+    <string name="saving_file_failed">Ошибка сохранения файла</string>
+    <string name="scrap_name">имя абриса</string>
+    <string name="splay">боковой замер</string>
+    <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
+
+    <string name="sensor">датчик</string>
+    <!-- OK string name="sensor_accelerometer">акселерометр</string -->
+    <string name="sensor_gravity">ускорение</string>
+    <!-- OK string name="sensor_humidity">влажность</string -->
+    <string name="sensor_light">освещенность</string>
+    <string name="sensor_magnetic_field">магнитное поле</string>
+    <!-- OK string name="sensor_orientation">ориентация</string -->
+    <string name="sensor_pressure">атм. давление</string>
+    <string name="sensor_proximity">сближение</string>
+    <string name="sensor_temperature">температура</string>
+    <string name="sensor_extern">внешний</string>
+    <string name="sensor_type">тип</string>
+    <string name="sensor_value">значение</string>
+    <string name="sensor_comment">комментарий</string>
+
+    <!-- OK string name="shot_clino">угол</string -->
+    <!-- OK string name="shot_compass">азимут</string -->
+    <string name="shot_from">№ ОТ</string>
+    <string name="shot_info">Введите данные пикета</string>
+    <string name="shot_leg">повторный замер</string>
+    <string name="shot_all_splay">группа боковых замеров</string>
+    <!-- OK string name="shot_length">длинна</string -->
+    <string name="shot_note">заметки</string>
+    <string name="shot_reverse">обратный</string>
+    <string name="shot_to">№ НА</string>
+
+    <string name="make_surface">Поверхность существует. Заменить?</string>
+
+    <string name="sketch3d_name">Название</string>
+    <string name="sketch3d_new">Новая 3D модель</string>
+    <string name="sketch3d_next">следующий пикет</string>
+    <string name="sketch3d_null_name">Отсутствует название 3D абриса</string>
+    <string name="sketch3d_null_next">Отсутствует следующий пикет 3D абриса</string>
+    <string name="sketch3d_null_start">Отсутствует начальный пикет 3D абриса</string>
+    <string name="sketch3d_start">начальный пикет</string>
+
+    <string name="station">пикет</string>
+    <string name="station_ask">Добавить пикет в абрис?</string>
+    <string name="station_set">Продолжить съёмку отсюда?</string>
+    <!-- OK string name="station_base">пикет привязки</string -->
+    <!-- OK string name="station_next">следующий пикет</string -->
+    <string name="station_viewed">просмотренные пикеты</string>
+    <string name="survey_exists">Съёмка уже существует</string>
+    <string name="survey_date">ггг.мм.дд</string>
+    <string name="survey_delete">Удалить съёмку?</string>
+    <string name="survey_split">Разорвать съёмку ?</string>
+    <string name="survey_not_attached">ВНИМАНИЕ: неасоциированный пикет</string>
+    <string name="declination">Магн. скл.</string>
+    <string name="description">описание</string>
+    <string name="name">имя</string>
+    <string name="team">группа съёмемки</string>
+    <!-- OK string name="toggle_device">Переключить устройство в режим калибровки</string -->
+    <string name="toggle_failed">Не удалось переключить DistoX</string>
+    <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
+    <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
+    <string name="visible_border">видимая граница</string>
+    <string name="vthreshold">верт. порог</string>
+    <string name="wait_scan">Сканирование: ждите ...</string>
+    <string name="write_failed">Ошибка записи DistoX</string>
+    <string name="write_ok">Запись калибровки в DistoX</string>
+    <string name="zip_saved">Сохранено </string>
+    <string name="zip_failed">Ошибка survey-zip</string>
+    <string name="unzip_fail">Ошибка survey-unzip</string>
+    <!-- OK string name="zoom_in_out">Увеличить/уменьшить/string -->
+
+    <string name="survey_info">Статистика съёмки</string>
+    <string name="stat_component">Компоненты %1$d</string>
+    <string name="stat_depth">Глубина %1$.1f %2$.1f"</string>
+    <string name="stat_duplicate">Дублированные пикеты %1$d %2$.1f</string>
+    <string name="stat_leg">Отрезки %1$d %2$.1f</string>
+    <string name="stat_length">Длинна %1$.1f</string>
+    <string name="stat_loop">Петли %1$d</string>
+    <string name="stat_shot">Пикеты  %1$d,   Дублированные %2$d,   Поверхность %3$d</string>
+    <string name="stat_splay">Боковых замеров %1$d</string>
+    <string name="stat_station">Пикеты %1$d</string>
+    <string name="stat_surface">Поверхн. пикеты %1$d %2$.1f</string>
+    <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f"</string>
+
+    <string name="hide_blank">Пустые пикеты</string>
+    <string name="hide_leg">Повторные измерения</string>
+    <string name="hide_ids">ID пикетов</string>
+    <string name="hide_splay">Боковые замеры</string>
+
+    <string name="surveys">СЪЕМКИ</string>
+    <string name="calibs">КАЛИБ.</string>
+
+    <string name="plan">ПЛАН</string>
+    <string name="extended">РАЗРЕЗ-Р</string>
+    <string name="v_section">Верт-СЕЧЕНИЕ</string>
+    <string name="h_section">Гор-СЕЧЕНИЕ</string>
+
+    <string name="distox_err_ok">OK</string>
+    <string name="distox_err_headtail">Ошибка чтения памяти DistoX</string>
+    <string name="distox_err_headtail_io">DistoX ошибка I/O </string>
+    <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
+    <string name="distox_err_connected">Прибор уже подключен</string>
+
+    <string name="ask_close">Закрыть TopoDroid?</string>
+    <string name="ask_reset">Сбросить память DistoX?</string>
+    <string name="ask_close_survey">Закрыть съёмку?</string>
+    
+
+    <string name="button_add"       >Добавить  </string>
+    <string name="button_back"      >Назад     </string>
+    <string name="button_cancel"    >Отмена    </string>
+    <string name="button_convert"   >Конвертир.</string>
+    <string name="button_delete"    >Удалить   </string>
+    <string name="button_eval"      >Расчет    </string>
+    <string name="button_eval_cal"  >Расчет w. калиб.</string>
+    <string name="button_geomag"    >GeoMag    </string>
+    <string name="button_gps_start" >GPS       </string>
+    <!-- OK string name="button_gps_stop"  >Стоп      </string -->
+    <!-- OK string name="button_manual"    >Вручную    </string -->
+    <!-- OK string name="button_measure"   >Изменить   </string -->
+    <string name="button_photo"   >Фото</string>
+    <string name="button_sensor"  >Датчики</string>
+    <string name="button_direction">Азимут/угол</string>
+    <string name="button_ok"        >OK        </string>
+    <string name="button_no"        >Нет       </string>
+    <string name="button_open"      >Откр      </string>
+    <string name="button_read"      >Считать   </string>
+    <!-- TODO string name="button_dump"      >Dump      </string -->
+    <string name="button_reset"     >Сброс     </string>
+    <string name="button_clear"     >Очистить  </string>
+    <string name="button_save"      >Сохр.     </string>
+    <string name="button_select"    >Выбрать   </string>
+    <string name="button_store"     >Store     </string>
+    <string name="button_upload"    >Загрузить </string>
+    <string name="button_yes"       >Да       </string>
+
+    <string name="button_sharp"     >Острый</string>
+    <string name="button_rock"      >Камень</string>
+<!-- OK
+    <string name="button_close"     >Закрыть   </string>
+    <string name="button_erase"     >Стереть   </string>
+    <string name="button_next"      >Следующий </string>
+    <string name="button_prev"      >Предыдущий</string>
+    <string name="button_split"     >Разделить </string>
+    <string name="button_toggle"    >Режим КАЛИБ  </string>
+-->
+    <string name="button_write"     >Записать</string>
+
+    <string name="mode_leg">Нитка</string>
+    <string name="mode_splay">Бок. замер</string>
+    <string name="mode_station">Пикеты</string>
+    <string name="mode_grid">Сетка</string>
+    <string name="mode_fixed">Фиксир. точки.</string>
+
+    <string name="remote_title">Пульт дистанционного управления</string>
+    <string name="remote_on">Лазер ВКЛ</string>
+    <string name="remote_off">Лазер ВЫКЛ</string>
+    <string name="remote_measure">Замер</string>
+    <string name="remote_reset">Сброс БT</string>
+    <string name="download">Скачать</string>
+
+<!-- OK
+    <string name="btn_3d">3D</string>
+-->
+    <string name="btn_compass">Compass</string>
+    <string name="btn_csurvey">cSurvey</string>
+    <string name="btn_csv">CSV</string>
+    <string name="btn_dxf">DXF</string>
+    <string name="btn_man">Ручной</string>
+    <string name="btn_symbol">Инстр Рисования</string>
+    <string name="btn_png">PNG</string>
+    <string name="btn_pockettopo">PocketTopo</string>
+    <string name="btn_survex">Survex</string>
+    <string name="btn_therion">Therion</string>
+    <string name="btn_vtopo">VisualTopo</string>
+    <string name="btn_zip">Zip</string>
+
+<!-- FIXME_SKETCH_3D -->    
+    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <string name="title_sketch_edit">Изменить 3D поверхность</string>
+    <string name="title_sketch_shot">Новый пикет</string>
+    <string name="title_sketch_refs">Режим показа</string>
+    <string name="title_sketch_section_type">Типы разрезов</string>
+    <string name="title_sketch_select">Выбрать</string>
+
+    <string name="sketch_mode_single">Отдельный пикет</string>
+    <string name="sketch_mode_ngbh">Соединение пикеты</string>
+    <string name="sketch_mode_all">Все пикеты</string>
+    <string name="sketch_delete">Удалить 3D модель ?</string>
+    <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
+
+    <string name="btn_head">head</string>
+    <string name="btn_stretch">Растянуть</string>
+    <string name="btn_extrude">Вырезать</string>
+    <string name="btn_erase">Стереть</string>
+    <string name="btn_cut">Вырезать</string>
+    <string name="btn_vertical">Вертикальный</string>
+    <string name="btn_horizontal">Горизонтальный</string>
+
+    <!-- select buttin labels -->
+    <string name="btn_section">Сечение</string>
+    <string name="btn_step">Шаг</string>
+    <string name="btn_shot">Пикет</string>
+    <string name="btn_join">Сцепить</string>
+
+    <string name="button_redraw">Перерисовать</string>
+    <string name="button_erase">Стереть</string>
+    <string name="btn_surface">Поверхность</string>
+
+    <string name="station_next">СЛЕД.</string>
+    <string name="no_shot_between_stations">no_shot_between_stations</string>
+    <string name="few_line_points">Слишком мало точек в линии</string>
+    <string name="line_delete">удалить_линию</string>
+
+    <string name="menu_head">Head</string>
+    <string name="menu_save_th2">сохр th2</string>
+<!-- END_SKETCH_3D -->    
+
+    <string name="help_help">Помощь</string>
+    <string name="help_manual">Инструкция</string>
+    <string name="help_more">Показать вторичные функции</string>
+    <string name="help_less">Показать первичные функции</string>
+    
+    <string name="help_coeff">Показать коэфиценты калибровки</string>
+    <string name="help_current_station">Сохраненные пикеты</string>
+    <string name="help_device">Введите активность устройства</string>
+    <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
+    <string name="help_import">Импорт zip архива или Therion файла</string>
+    <string name="help_symbol">Вкл/Выкл инструменты рисования</string>
+    <string name="help_therion">Therion менеджер</string>
+    <string name="help_database">Просмотр базы данных (SQliteViewer)</string>
+    <string name="help_prefs">Изменить настройки</string>
+    <string name="help_log">Вкл/Выкл настройки журнала</string>
+    <string name="help_join_survey">Совместная топосъёмка</string>
+    <string name="help_info_topodroid">Сведения о TopoDroid</string>
+    <string name="help_download">Скачивание данных</string>
+    <string name="help_splay">Автоматически присваивать номер пикет боковым измерениям</string>
+    <string name="help_display">Выберать режим просмотра</string>
+    <string name="help_display_calib">Режим показа удаленных пикетов</string>
+    <string name="help_plot">Ввод абрисов</string>
+    <string name="help_note">Реждактировать заметки съёмки</string>
+    <string name="help_bluetooth">Сброс соединения Bluetooth</string>
+    <string name="help_remote">Дистанционное управление DistoX</string>
+    <string name="help_add_shot">Добавить пикет в ручную</string>
+    <string name="help_info_shot">Статистика съёмки</string>
+    <string name="help_survey_info">Информация о съёмке</string>
+    <string name="help_undelete">Восстановить удаленные элементы</string>
+    <string name="help_photo">Инструмент Фото</string>
+    <string name="help_sensor">Инструмент Измерения</string>
+    <string name="help_3d">3D просмотр (Cave3D)</string>
+    <string name="help_draw">Перейти в режим рисования</string>
+    <string name="help_edit">Перейти в режим редактирования</string>
+    <string name="help_refs">Выбрать привязку абриса</string>
+    <string name="help_stats">Инструмент статистики по съёмке</string>
+    <string name="help_save_plot">Экспорт абрисов</string>
+    <string name="help_toggle_plot">Переключить план разрез-разв.</string>
+    <string name="help_trash">Удалить абрис</string>
+    <string name="help_undo">Отмена последнего действия</string>
+    <string name="help_redo">Повтор последнего действия</string>
+    <string name="help_symbol_plot">Выбрать инструмент рисования </string>
+    <!-- OK string name="help_clear">Очистить выбор</string -->
+    <string name="help_eraser">Стереть рисунки</string>
+    <string name="help_previous">Предыдущий выбранный элемент</string>
+    <string name="help_next">Следующий элемент в выборке</string>
+    <string name="help_recover">Восстановить абрис из Бекапа</string>
+   
+    <string name="help_line_point">Действия с линиями и точками: соединить, разорвать, обрезать, удалить</string>
+<!-- OK
+    <string name="help_to_point">Притянуть выбранную точку к ближайшей точке</string>
+    <string name="help_split_point">Разбить в этой точке на две [линии/области]</string>
+    <string name="help_split_line">Разбить линию на две в этой точке</string>
+    <string name="help_kink">Использовать прямую линию в точке [линия/область]</string>
+-->
+    <string name="help_note_plot">Редактировать свойства выбранного абриса</string>
+    <string name="help_save">Сохранить нзменения информации о съёмемке</string>
+    <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
+    <string name="help_export_survey">Экспорт съёмемки</string>
+    <string name="help_loc">GPS местоположение</string>
+    <string name="help_delete_survey">Удалить съёмку</string>
+    <string name="help_delete_calib">Удалить калибровку</string>
+    <string name="help_detach">Очистить текущий выбор DistoX</string>
+    <string name="help_firmware">DistoX2 обновление прошивки</string>
+    <string name="help_toggle">Переключить DistoX калибровка/нормальный режим</string>
+    <string name="help_sdcard">DistoX управление памятью</string>
+    <string name="help_read">Считать и вывсти коэфиценты калибровки DistoX</string>
+    <string name="help_info_device">Информация об устройстве</string>
+    <string name="help_scan">Найти новые устройства DistoX</string>
+    <string name="help_open_calib">Открыть калибровку</string>
+    <string name="help_export_calib">Экспорт калибровки</string>
+    <string name="help_group">Присваивать номер групп автоматически</string>
+    <string name="help_cover">Показать угловое распределение данных калибровки</string>
+    <string name="help_compute">Рассчитать калибровку</string>
+    <string name="help_write">Записать коэфиценты калибровки в DistoX</string>
+<!-- FIXME_SKETCH_3D -->
+    <string name="help_refs_model">Режим просмотра</string>
+    <string name="help_one_model">Вместить 3d модель в экран</string>
+    <string name="help_surface">Создать поверхность</string>
+    <string name="help_save_model">Экспорт 3D модели</string>
+    <string name="help_trash_model">Удалить 3D модель</string>
+    <string name="help_head_model">Ориентироапть 3D модель</string>
+    <string name="help_erase_model">Удалить область</string>
+    <string name="help_cut_model">Обрезать область</string>
+    <string name="help_stretch_model">Растянуть область</string>
+    <string name="help_extrude_model">Вырезать область</string>
+    <string name="help_refine_center">Уточнить поверхность в центре треугольников</string>
+    <string name="help_refine_sides">Уточнить поверхность в сторонах треугольников</string>
+    <string name="help_refine_point">Уточнить поверхность в точке</string>
+    <string name="help_refine_triangle">Уточнить поверхность вдоль длинной стороны</string>
+  
+
+    <string name="title_calib">Калибровки</string>
+    <string name="title_coverage">Калибровка и распределение данных</string>
+    <string name="title_coeff">Калибровочные коэфиценты</string>
+    <string name="title_current_station">Зафиксировать пикеты</string>
+    <string name="title_device">Устройства DistoX</string>
+    <string name="title_discover">Поиск устройств DistoX ... обождите</string>
+    <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
+    <string name="title_draw_line">ЛИНИЯ %1$s</string>
+    <string name="title_draw_point">ТОЧКА %1$s</string>
+    <string name="title_edit">Редактировать</string>
+    <string name="title_erase">Удалить</string>
+    <string name="title_location">Расположение</string>
+    <string name="title_location_gps">Расположение *</string>
+    <string name="title_manual">TopoDroid Инструкция</string>
+    <string name="title_mode">Режим просмотра</string>
+    <string name="title_move">Подвижный</string>
+    <string name="title_note">Заметки</string>
+    <string name="title_photo">Фото/Измерения</string>
+    <string name="title_photo_comment">Описание Фото</string>
+    <string name="title_plot_save">Сохранить абрис как</string>
+    <string name="title_refs">Привязки абриса</string>
+    <string name="title_scraps">Абрисы в съёмке</string>
+    <string name="title_shift">Сдвиг</string>
+    <string name="title_stats">Статистика</string>
+    <string name="title_survey">Описание съёмки</string>
+    <string name="title_survey_export">Экспорт съёмки как</string>
+    <string name="title_calib_export">Экспорт калибровки как</string>
+    <!-- OK string name="title_zoom">Зум</string -->
+
+  <string name="pref_cat_survey">Настройки съёмки </string>
+  <string name="pref_cat_drawing">Настройки Рисования </string>
+  <string name="pref_cat_calib">Настройки Калибровки</string>
+  <string name="pref_cat_device">Настройки Устройства</string>
+  <string name="pref_cat_sketch">Настройки Абриса</string>
+  <string name="pref_cat_log">настройки журнала</string>
+
+  <!-- NO string name="pref_hide_help_title">Скрыть помощь</string -->
+  <!-- NO string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
+  <!-- TODO string name="pref_locale_title">Language</string -->
+  <!-- TODO string name="pref_locale_summary">Language</string -->
+
+  <string name="pref_raw_data_title">Сырые данные</string>
+  <string name="pref_raw_data_summary">Показать сырые данные</string>
+  <string name="pref_bootloader_title">Загрузчик</string>
+  <string name="pref_bootloader_summary">Вкл Загрузчик</string>
+  <string name="pref_cosurvey_title">Совм. съёмка</string>
+  <string name="pref_cosurvey_summary">Вкл/Выкл Совм. съёмку</string>
+  <string name="pref_export_shots_title">Формат экспорта данных</string>
+  <string name="pref_export_shots_summary">Формат экспорта данных по умолчанию</string>
+  <string name="pref_extra_buttons_title">Уровень функционала</string>
+  <string name="pref_extra_buttons_summary">Уровень подключенного функционала</string>
+  <string name="pref_size_buttons_title">Размер кнопок</string>
+  <string name="pref_size_buttons_summary">Размер кнопок панели инструментов</string>
+  <string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string>
+  <string name="pref_leg_shots_title">Пикеты отрезка</string>
+  <string name="pref_leg_shots_summary">Минимальное кол-во пикетов на отрезке</string>
+
+  <string name="pref_sock_type_title">Socket</string>
+  <string name="pref_sock_type_summary">Socket создать</string>
+  <!-- OK string name="pref_device_type_title">Тип Disto</string -->
+  <!-- OK string name="pref_device_type_summary">Модель DistoX</string -->
+  <string name="pref_comm_retry_title">Попыток подключения</string >
+  <string name="pref_comm_retry_summary">Число попыток подключения</string>
+  <string name="pref_comm_retry_dialogtitle">Кол-во попыток подключения</string>
+  <string name="pref_comm_retry_message">Кол-во попыток подключения</string>
+  <string name="pref_conn_mode_title">Типы подключения</string>
+  <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
+  <string name="pref_auto_reconnect_title">Авто соединение</string>
+  <string name="pref_auto_reconnect_summary">Переподключиться при потере соединенияX</string>
+  <string name="pref_crs_title">C R S система координат </string>
+  <string name="pref_crs_summary">CRS имя</string>
+  <string name="pref_crs_message">Введите имя CRS как в Proj4</string>
+  <string name="pref_gps_averaging_title">Осреднение данных GPS </string>
+  <string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string>
+  <string name="pref_plot_screen_title">Настройки экрана абриса</string>
+  <string name="pref_tool_screen_title">Настройки рисования абриса</string>
+  <string name="pref_location_title">Настройки местоположения</string>
+  <string name="pref_shot_data_title">НАСТРОЙКА ДАННЫХ ПИКЕТОВ</string>
+  <string name="pref_cwd_title">Корневой каталог</string>
+  <string name="pref_cwd_summary">TopoDroid корневой каталог</string>
+  <string name="pref_cwd_message">Введите корневой каталог TopoDroid</string>
+  <string name="pref_text_size_title">Размер текста</string>
+  <string name="pref_text_size_summary">Размер текста в списках</string>
+  <string name="pref_text_size_message">Размер текста в списках</string>
+  <string name="pref_closeness_title">Радиус выбора</string>
+  <string name="pref_closeness_summary">Радиус выбора элемента абриса</string>
+  <string name="pref_closeness_message">Радиус выбора элемента абриса</string>
+  <string name="pref_altitude_title">Альтитуда</string>
+  <string name="pref_altitude_summary">Выберите тип альтитуды</string>
+  <string name="pref_altimetric_title">Вертикальная координата</string>
+  <string name="pref_altimetric_summary">Поиск вертикальной координаты в интернете</string>
+  <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
+  <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->
+  <string name="pref_survey_stations_title">Настройки пикетов</string>
+  <string name="pref_survey_stations_summary">Авто нумерация пикетов</string>
+  <string name="pref_accel_thr_title">Максимальное допустимое ускорение</string>
+  <string name="pref_accel_thr_summary">Максимальное допустимое ускорение на пикете</string>
+  <string name="pref_accel_thr_message">Максимальное допустимое ускорение на пикете</string>
+  <string name="pref_mag_thr_title">Максимальная допустимая намагниченность</string>
+  <string name="pref_mag_thr_summary">Максимальное допустимое магнитное поле на пикете</string>
+  <string name="pref_mag_thr_message">Максимальное допустимое магнитное поле на пикете</string>
+  <string name="pref_dip_thr_title">Максимально допустимый магн угол</string>
+  <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие магн угла на пикете</string>
+  <string name="pref_dip_thr_message">Максимальное допустимое отклонениие магн угла на пикете</string>
+
+  <string name="pref_leg_title">Допустимое отклонениие в измерении отрезков</string>
+  <string name="pref_leg_summary">Точновсть измерений пикетов отрезка</string>
+  <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
+
+  <string name="pref_team_title">Группа съёмемки</string>
+  <string name="pref_team_summary">Группа съёмемки</string>
+  <string name="pref_team_message">Группа съёмемки по умолчанию</string>
+  <string name="pref_ethr_title">Порог расчета проэкции</string>
+  <string name="pref_ethr_summary">Допустимое отклонениие в бок. замере</string>
+  <string name="pref_ethr_message">Порог расчета бокового измерения как проэкции</string>
+  <string name="pref_vthr_title">Вертикальный порог для пикетов</string>
+  <string name="pref_vthr_summary">Верт. порог ЛПВН/ЗВСЮ</string>
+  <string name="pref_vthr_message">Допустимый наклон отрезка между ЛПВН/ЗВСЮ</string>
+  <string name="pref_hthr_title">Порог горизонтальности разрезов</string>
+  <string name="pref_hthr_summary">Порог  для горизонтальных разрезов</string>
+  <string name="pref_hthr_message">Угол на пикете выше которонро разрез считается горизонтальным</string>
+  <string name="pref_bitmap_scale_title">масштаб PNG</string>
+  <string name="pref_bitmap_scale_summary">Масштабный коэфицент абриса при экспорте в PNG</string>
+  <string name="pref_bitmap_scale_message">Масштабный коэфицент абриса при экспорте в PNG</string>
+  <string name="pref_thumbnail_title">Размер миниатюры</string>
+  <string name="pref_thumbnail_summary">Размер картинки миниатюры</string>
+  <string name="pref_thumbnail_message">Размер картинки миниатюры</string>
+  <string name="pref_shot_timer_title">Таймер замера направления</string>
+  <string name="pref_shot_timer_summary">Секунд до замера направления на пикет</string>
+  <string name="pref_shot_timer_message">Секунд до замера направления на пикет</string>
+  <string name="pref_beep_volume_title">Громкость сигнала таймера</string>
+  <string name="pref_beep_volume_summary">Проценты громкости сигнала таймера</string>
+  <string name="pref_beep_volume_message">Проценты громкости сигнала таймера</string>
+  <string name="pref_drawing_unit_title">Размер значков для точек</string>
+  <string name="pref_drawing_unit_summary">Размер значков для точек</string>
+  <string name="pref_drawing_unit_message">Размер значков для рисования точек [требуется перезапуск программы]</string>
+  <string name="pref_segment_title">Шаг точек на линии</string>
+  <string name="pref_segment_summary">Шаг точек на линии</string>
+  <string name="pref_segment_message">Минимальное расстояние между точками в линии</string>
+  <string name="pref_linestyle_title">Стиль рисования линий</string>
+  <string name="pref_linestyle_summary">Способ отрисовки линий</string>
+  <string name="pref_lineacc_title">Точность кривых Безье</string>
+  <string name="pref_lineacc_summary">Точность кривых Безье</string>
+  <string name="pref_lineacc_message">Точность кубической интерполяции в отрисовке кривых Безье</string>
+  <string name="pref_linecorner_title">Угол Безье</string>
+  <string name="pref_linecorner_summary">Порог угла Безье</string>
+  <string name="pref_linecorner_message">Порог чувствительности угла Безье</string>
+  <string name="pref_calib_algo_title">Алгоритм</string>
+  <string name="pref_calib_algo_summary">Алгоритм калибровки</string>
+  <string name="pref_group_by_title">Формирование групп калибровки</string>
+  <string name="pref_group_by_summary">Группирование данных калибровки</string>
+  <string name="pref_group_title">Допуск в группе</string>
+  <string name="pref_group_summary">Допуск для измерений в одной группе</string>
+  <string name="pref_group_message">Допуск для измерений в одной группе</string>
+  <string name="pref_error_title">Ошибка</string>
+  <string name="pref_error_summary">Минимальная ошибка калибровки</string>
+  <string name="pref_error_dialogtitle">Ошибка калибровки</string>
+  <string name="pref_error_message">Минимальная ошибка калибровки</string>
+  <string name="pref_iter_title">Итерации</string>
+  <string name="pref_iter_summary">Минимальное число итераций</string>
+  <string name="pref_iter_dialogtitle">Число итераций калибровки</string>
+  <string name="pref_iter_message">Число итераций калибровки</string>
+  <string name="pref_label_size_title">Размер значков</string>
+  <string name="pref_label_size_summary">Размер значков</string>
+  <string name="pref_label_size_message">Размер значков</string>
+  <string name="pref_arrow_length_title">Бергштрих сечений</string>
+  <string name="pref_arrow_length_summary">Размер бергштриха линии сечений</string>
+  <string name="pref_arrow_length_message">Размер бергштриха линии сечений</string>
+  <string name="pref_dot_radius_title">Радиус точек</string>
+  <string name="pref_dot_radius_summary">Размер зеленых точек</string>
+  <string name="pref_dot_radius_message">Размер зеленых точек</string>
+  <string name="pref_line_thickness_title">Толщина линии</string>
+  <string name="pref_line_thickness_summary">Толщина линий</string>
+  <string name="pref_line_thickness_message">Толщина линий</string>
+  <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
+  <string name="pref_fixed_thickness_summary">Толщина нитки хода</string>
+  <string name="pref_fixed_thickness_message">Толщина нитки хода</string>
+  <string name="pref_device_title">Устройство</string>
+  <string name="pref_device_summary">DistoX наименование адреса</string>
+  <string name="pref_device_message">DistoX наименование адреса</string>
+  <string name="pref_checkBT_title">Bluetooth</string>
+  <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
+  <string name="pref_checkAttached_title">Проверка нитки хода</string>
+  <string name="pref_checkAttached_summary">Проверить принадлежность пикетов</string>
+  <string name="pref_autoStations_title">Пикеты абриса</string>
+  <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
+  <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
+  <string name="pref_loopClosure_summary">Разбрасывание невязок в петле</string>
+  <string name="pref_splayExtend_title">Развертка бокового замера</string>
+  <string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string>
+  <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
+  <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
+  <string name="pref_station_size_title">Размер номера пикетов</string>
+  <string name="pref_station_size_summary">Размер номера пикетов</string>
+  <string name="pref_station_size_message">Размер подписи пикетов</string>
+
+  <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
+  <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
+  <string name="pref_sketchLineStep_title">Max side</string>
+  <string name="pref_sketchLineStep_summary">Макс размер стороны треугольников</string>
+  <string name="pref_sketchLineStep_message">Макс размер стороны треугольников [m]</string>
+  <string name="pref_sketchBorderStep_title">Шаг границы</string>
+  <string name="pref_sketchBorderStep_summary">Расстоние между точками редактирования линии</string>
+  <string name="pref_sketchBorderStep_message">Расстоние между точками редактирования линии</string>
+  <string name="pref_sketchSectionStep_title">Шаг сечений</string>
+  <string name="pref_sketchSectionStep_summary">Расстоние между сечениями</string>
+  <string name="pref_sketchSectionStep_message">Расстоние между промежуточными сечениями</string>
+  <string name="pref_sketchDeltaExtrude_title">Масштаб вырезки</string>
+  <string name="pref_sketchDeltaExtrude_summary">Масштаб вырезок</string>
+  <string name="pref_sketchDeltaExtrude_message">Масштаб вырезок</string>
+  <string name="pref_sketchCompassReadings_title">Значения азимута</string>
+  <string name="pref_sketchCompassReadings_summary">Кол-во осредняемых значений азимутов</string>
+  <string name="pref_sketchCompassReadings_message">Кол-во осредняемых значений азимутов</string>
+
+  <string name="pref_unit_length_title">Единицы измерения длинны</string>
+  <string name="pref_unit_length_summary">Показать единицы длинны</string>
+  <string name="pref_unit_angle_title">Единицы измерения углов</string>
+  <string name="pref_unit_angle_summary">Показать единицы углов</string>
+  <string name="pref_unit_location_title">Единицы координат</string>
+  <string name="pref_unit_location_summary">Показать единицы координат</string>
+
+  <string name="pref_log_stream_summary">Лог потока вывода</string>
+  <string name="pref_log_stream_title">Лог потока</string>
+  <string name="pref_log_bt">Bluetooth</string>
+  <string name="pref_log_bezier">Кривые Безье</string>
+  <string name="pref_log_calib">Калибровка</string>
+  <string name="pref_log_comm">BT соединение</string>
+  <string name="pref_log_csurvey">cSurvey</string>
+  <string name="pref_log_data">Данные съёмки</string>
+  <string name="pref_log_db">База данных</string>
+  <string name="pref_log_debug">Debug</string>
+  <string name="pref_log_device">Окно прибора</string>
+  <string name="pref_log_distox">DistoX</string>
+  <string name="pref_log_err">Ошибка</string>
+  <string name="pref_log_fixed">Точки GPS</string>
+  <string name="pref_log_input">Входные данные</string>
+  <string name="pref_log_loc">Местоположение</string>
+  <string name="pref_log_num">Сжатие данных</string>
+  <string name="pref_log_photo">Фото</string>
+  <string name="pref_log_plot">Абрисы</string>
+  <string name="pref_log_proto">Протокол DistoX</string>
+  <string name="pref_log_ptopo">PocketTopo</string>
+  <string name="pref_log_sensor">Датчики</string>
+  <string name="pref_log_shot">Пикеты</string>
+  <string name="pref_log_survey">Съёмки</string>
+  <string name="pref_log_therion">Therion</string>
+  <string name="pref_log_units">Единицы</string>
+  <string name="pref_log_zip">ZIP</string>
+
+  <string name="line_bezier">Безье</string>
+  <string name="line_fine">точный</string>
+  <string name="line_normal">нормальный</string>
+  <string name="line_coarse">грубый</string>
+
+    <string name="welcome_title">Вас приветствует TopoDroid %1$s</string>
+    <string name="welcome_text">
+\nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер при помощи прибора DistoX.
+\n\nНет гарантий: используя данное ПО вы соглашаетесть с тем что автор не несет ответственность за потерю данных.
+\n\nПосетите http://sites.google.com/site/speleoapps с инструкцией и доп приложениями.
+\nПрисылайте ваши предложения, вопросы, сообщения об ошибках, на marco.corvi@gmail.com
+\nПеревод на Русский язык - Коженков Андрей, пишите письма akozhenkov@gmail.com
+\n
+    </string>
+
+  <string name="firmware_title">Обновление прошивки</string>
+  <string name="firmware_file_title">Файлы Прошвок</string>
+  <string name="firmware_text">
+\n[1] Выберите либо загрузить прошивку на устройсто, либо скачать прошивку в файл.
+\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[3] Убедитесь в том что версия прошивки совместима с версией аппаратуры DistoX.
+\n[4] Переключите DistoX2 в режим загрузчика: удерживайте ПЛЮС и МИНУС в момент включения кнопки DIST.
+\n[5] Нажмите кнопку OK и дожитесь завершения процесса.
+\n[6] Подождите пока на DistoX не замигает значек блютуф.
+\n[7] Выключите DistoX2 используя кнопку CLR.
+\n
+   </string>
+   <string name="firmware_none">отсутствует файл прошивки</string>
+   <string name="firmware_file">файл прошивки</string>
+   <string name="firmware_file_exists">Существующий файл прошивки</string>
+   <string name="firmware_file_missing">отсутствует файл прошивки</string>
+   <string name="ask_upload">Загрузить прошивку?</string>
+   <string name="ask_upload_not_compatible">Невозможно проверить совместимость ПО.\nЗагрузить прошивку?</string>
+   <string name="firmware_file_dumped">Сохраненный файл прошивки %1$s size %2$d</string>
+   <string name="firmware_file_uploaded">Загруженный файл прошивки %1$s size %2$d</string>
+   
+
+</resources>

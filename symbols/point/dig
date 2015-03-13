@@ -1,0 +1,23 @@
+symbol point
+name dig
+name-es excavar
+name-pt escava��o
+name-it scavo
+name-fr d�sobstruction
+name-de Grabung
+name-ru раскоп
+th_name dig
+orientation no
+color 0xff6666
+csurvey 6 6 80
+path
+  moveTo -5 -2
+  lineTo -1 -6
+  moveTo -3 -4
+  lineTo 4 3
+  moveTo 5 -2
+  lineTo 1 -6
+  moveTo 3 -4
+  lineTo -4 3
+endpath
+endsymbol

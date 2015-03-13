@@ -1,0 +1,18 @@
+symbol point
+name anchor
+name-es pilar
+name-pt ancoragem
+name-it ancoraggio
+name-fr amarrage
+name-de Seilbefestigung
+name-ru крюк
+th_name anchor
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  moveTo 5 0
+  lineTo -5 0
+  addCircle 0 0 5
+endpath
+endsymbol

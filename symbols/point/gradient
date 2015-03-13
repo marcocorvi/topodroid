@@ -1,0 +1,20 @@
+symbol point
+name gradient
+name-es inclinaci�n
+name-pt linhas_gradiente
+name-it pendenza
+name-fr pente
+name-de Gef�lle
+name-ru градиент
+th_name gradient
+orientation yes
+color 0x33ff66
+csurvey 6 6 80
+path
+  moveTo 0 8
+  lineTo 0 -4
+  lineTo -2 -2
+  lineTo 2 -2
+  lineTo 0 -4
+endpath
+endsymbol

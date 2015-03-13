@@ -1,0 +1,19 @@
+symbol point
+name entrance
+name-es entrada
+name-pt entrada
+name-it ingresso
+name-fr entrée
+name-de Eingang
+name-ru вход
+th_name entrance
+orientation yes
+color 0xff3333
+csurvey 6 6 80
+path
+  moveTo 0 -6
+  lineTo -3 3
+  lineTo 3 3
+  lineTo 0 -6
+endpath
+endsymbol

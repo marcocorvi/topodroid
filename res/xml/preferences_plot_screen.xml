@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<!-- PLOT SCREEN -->
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_DRAWING_UNIT"
+       android:title="@string/pref_drawing_unit_title"
+       android:summary="@string/pref_drawing_unit_summary"
+       android:dialogTitle="@string/pref_drawing_unit_title"
+       android:dialogMessage="@string/pref_drawing_unit_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1.2" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LINE_THICKNESS"
+       android:title="@string/pref_line_thickness_title"
+       android:summary="@string/pref_line_thickness_summary"
+       android:dialogTitle="@string/pref_line_thickness_title"
+       android:dialogMessage="@string/pref_line_thickness_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_FIXED_THICKNESS"
+       android:title="@string/pref_fixed_thickness_title"
+       android:summary="@string/pref_fixed_thickness_summary"
+       android:dialogTitle="@string/pref_fixed_thickness_title"
+       android:dialogMessage="@string/pref_fixed_thickness_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_STATION_SIZE"
+       android:title="@string/pref_station_size_title"
+       android:summary="@string/pref_station_size_summary"
+       android:dialogTitle="@string/pref_station_size_title"
+       android:dialogMessage="@string/pref_station_size_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="14" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LABEL_SIZE"
+       android:title="@string/pref_label_size_title"
+       android:summary="@string/pref_label_size_summary"
+       android:dialogTitle="@string/pref_label_size_title"
+       android:dialogMessage="@string/pref_label_size_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="14" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_ARROW_LENGTH"
+       android:title="@string/pref_arrow_length_title"
+       android:summary="@string/pref_arrow_length_summary"
+       android:dialogTitle="@string/pref_arrow_length_title"
+       android:dialogMessage="@string/pref_arrow_length_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="5" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_DOT_RADIUS"
+       android:title="@string/pref_dot_radius_title"
+       android:summary="@string/pref_dot_radius_summary"
+       android:dialogTitle="@string/pref_dot_radius_title"
+       android:dialogMessage="@string/pref_dot_radius_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="5" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_CLOSENESS"
+       android:title="@string/pref_closeness_title"
+       android:summary="@string/pref_closeness_summary"
+       android:dialogTitle="@string/pref_closeness_title"
+       android:dialogMessage="@string/pref_closeness_message"
+       android:inputType="number"
+       android:defaultValue="16" />
+
+
+</PreferenceScreen>

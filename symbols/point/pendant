@@ -1,0 +1,20 @@
+symbol point
+name pendant
+name-es pendente
+name-it pendente
+name-fr pendant
+name-de Anhänger
+name-ru подвеска
+th_name pendant
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -4 -6
+  cubicTo -2 -4 -2 -4 -4 -2
+  cubicTo -6 0 -4 6 0 6
+  cubicTo 4 6 6 0 4 -2
+  cubicTo 2 -4 2 -4 4 -6
+endpath
+endsymbol
+

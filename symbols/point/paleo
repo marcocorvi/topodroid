@@ -1,0 +1,22 @@
+symbol point
+name paleo
+name-es paleolítico
+name-it paleo
+name-fr paléolitique
+name-de paläontologischer_Fund
+name-ru Ð¿Ð°Ð»ÐµÐ¾
+th_name paleo-material
+orientation no
+color 0xcc6633
+csurvey 6 6 80
+path
+  addCircle -5  2 1
+  addCircle -4  4 1
+  addCircle  4 -4 1
+  addCircle  5 -2 1
+  moveTo -4.2  1.8
+  lineTo  3.5 -3.5
+  moveTo  4.2 -1.8
+  lineTo -3.5  3.5
+endpath
+endsymbol

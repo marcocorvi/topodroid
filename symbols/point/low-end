@@ -1,0 +1,19 @@
+symbol point
+name low-end
+name-es techo_bajo
+name-pt tйrmino
+name-it termine
+name-fr passage_bas
+name-de flach_Engstelle
+name-ru низкий_ход
+th_name low-end
+orientation no
+color 0xff6666
+csurvey 6 6 80
+path
+  moveTo -6 -2
+  lineTo 6 -2
+  moveTo -6 2
+  lineTo 6 2
+endpath
+endsymbol

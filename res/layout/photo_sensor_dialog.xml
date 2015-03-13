@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+  <LinearLayout
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    >
+    <TextView android:id="@+id/photo_shot_stations" 
+        android:maxLines="1" 
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+      	android:ems="25"
+        />
+
+    <TextView android:id="@+id/photo_shot_data" 
+        android:maxLines="1" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+      	android:ems="25"
+        />
+  </LinearLayout>
+
+  <Button android:id="@+id/photo_shot"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginBottom="10dp"
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/photo_shot"
+      />
+  <Button android:id="@+id/photo_survey"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginBottom="10dp"
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/photo_survey"
+      />
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content"
+          android:layout_gravity="right"
+          android:orientation="horizontal"
+        >
+
+    <Button android:id="@+id/photo_photo"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="10dp"
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_photo"
+      />
+    <Button android:id="@+id/photo_sensor"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_marginRight="10dp"
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_sensor"
+      />
+    <Button android:id="@+id/photo_delete"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_delete"
+      android:textColor="@color/textdelete"
+      />
+
+  </LinearLayout>
+   		
+
+  <!-- LinearLayout
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="25dip"
+    >
+           <Button android:id="@+id/button_cancel"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@drawable/button"
+                style="@style/button_default"
+                android:text="@string/button_cancel"
+           />
+  </LinearLayout -->
+</LinearLayout>

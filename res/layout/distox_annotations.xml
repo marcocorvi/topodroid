@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <!-- TextView android:id="@+id/note_title"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:text=""
+        / -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        >
+      <EditText android:id="@+id/note_text"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minLines="8"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:minWidth="10.0dp" 
+        android:maxWidth="5.0dp" 
+      	android:ems="25"
+        android:scrollHorizontally="true"
+        />
+    </ScrollView>
+   					  
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="25dp" 
+      >
+      <!-- Button android:id="@+id/button_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        / -->
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/button_ok"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          />
+      </LinearLayout>
+    </LinearLayout>
+   		
+</LinearLayout>

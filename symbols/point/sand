@@ -1,0 +1,27 @@
+symbol point
+name sand
+name-es arena
+name-pt areia
+name-it sabbia
+name-fr sable
+name-de Sand
+name-ru песок
+th_name sand
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  moveTo -7 3 
+  lineTo -5 3
+  lineTo -6 1
+  lineTo -7 3
+  moveTo 7 3
+  lineTo 5 3
+  lineTo 6 1
+  lineTo 7 3
+  moveTo -1 -3
+  lineTo  1 -3
+  lineTo 0 -5
+  lineTo -1 -3
+endpath
+endsymbol

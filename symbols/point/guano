@@ -1,0 +1,21 @@
+symbol point
+name guano
+name-es guano
+name-es guano
+name-pt guano
+name-it guano
+name-fr guano
+name-de Guano
+name-ru гуано
+th_name guano
+orientation no
+color 0xcc6633
+csurvey 6 6 80
+path
+  moveTo -5 0
+  cubicTo -4 -2 -1 -2 0 0
+  lineTo 0 6
+  moveTo 5 0
+  cubicTo 4 -2 1 -2 0 0
+endpath
+endsymbol

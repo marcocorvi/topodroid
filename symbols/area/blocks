@@ -1,0 +1,12 @@
+symbol area
+name blocks
+name-es bloques
+name-pt blocos
+name-it blocchi
+name-fr blocs
+name-de Blöcke
+name-ru блоки
+th_name blocks
+color 0xff3333 0x66
+csurvey 1 48 0 9
+endsymbol

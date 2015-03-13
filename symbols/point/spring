@@ -1,0 +1,17 @@
+symbol point
+name spring
+name-es surgencia
+name-pt nascente
+name-it venuta_d'acqua
+name-fr source
+name-de Quelle
+name-ru родник
+th_name spring
+orientation no
+color 0x6666ff
+csurvey 6 6 80
+path
+  moveTo -5 3
+  cubicTo -5 -1 5 -1 5 3
+endpath
+endsymbol

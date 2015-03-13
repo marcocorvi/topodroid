@@ -1,0 +1,13 @@
+symbol line
+name rock-border
+name-es borde_roca
+name-pt rebordo_rocha
+name-it masso
+name-fr bordure_rocheuse
+name-de Felsenumriss
+name-ru граница_пород
+th_name rock-border
+color 0x66ffcc 0xff
+width 1
+csurvey 3 1 2 2
+endsymbol

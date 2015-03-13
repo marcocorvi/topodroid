@@ -1,0 +1,22 @@
+symbol point
+name continuation
+name-es continuaciyn
+name-pt continuaзгo
+name-it prosecuzione
+name-fr continuation
+name-de Fortsetzung
+name-ru продолжение
+th_name continuation
+orientation no
+color 0xff3333
+csurvey 6 6 80
+path
+  moveTo 0 3
+  lineTo 0 0
+  cubicTo 0 -1 1 -2 2 -3
+  cubicTo 3 -4 1 -6 0 -6
+  cubicTo -1 -6 -3 -3 -3 -4
+  moveTo 0 7
+  lineTo 0 5
+endpath
+endsymbol

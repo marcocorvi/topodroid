@@ -1,0 +1,18 @@
+symbol point
+name pebbles
+name-es cantos_rodados
+name-pt seixos
+name-it ciotoli
+name-fr galets
+name-de Kies
+name-ru галька
+th_name pebbles
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  addCircle -3 1 2
+  addCircle 4 3 2
+  addCircle 3 -3 2
+endpath
+endsymbol

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id"
+    android:layout_weight="80"
+    android:layout_width="0dip"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:typeface="monospace"
+    android:paddingRight="1dp"
+    android:gravity="left"
+  />
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/from"
+    android:layout_weight="20"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textSize="14sp"
+    android:typeface="monospace"
+    android:padding="1dp"
+    android:gravity="right"
+  />
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/to"
+    android:layout_weight="20"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textSize="14sp"
+    android:typeface="monospace"
+    android:padding="1dp"
+    android:gravity="right"
+  />
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/length"
+    android:layout_weight="150"
+    android:layout_width="0dip"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:singleLine="true"
+    android:typeface="monospace"
+    android:padding="1dp"
+    android:gravity="right"
+  />
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/compass"
+    android:layout_weight="130"
+    android:layout_width="0dip"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:singleLine="true"
+    android:typeface="monospace"
+    android:padding="1dp"
+    android:gravity="right"
+  />
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/clino"
+    android:layout_weight="130"
+    android:layout_width="0dip"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:singleLine="true"
+    android:typeface="monospace"
+    android:padding="1dp"
+    android:gravity="right"
+  />
+
+  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/note"
+    android:layout_weight="100"
+    android:layout_width="0dip"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:singleLine="true"
+    android:typeface="monospace"
+    android:paddingLeft="1dp"
+  />
+
+</LinearLayout>

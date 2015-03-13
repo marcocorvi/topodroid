@@ -1,0 +1,20 @@
+symbol point
+name stalactite
+name-es estalactita
+name-pt estalactite
+name-it stalattite
+name-fr stalagtite
+name-de Stalaktit
+name-ru сталактит
+th_name stalactite
+orientation no
+color 0xccff66
+csurvey 6 6 80
+path
+  moveTo -4 -4
+  lineTo 0 0
+  lineTo 4 -4
+  moveTo 0 0
+  lineTo 0 6
+endpath
+endsymbol

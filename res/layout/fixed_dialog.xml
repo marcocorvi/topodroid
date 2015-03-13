@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <!-- TextView android:id="@+id/fix_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:textSize="18sp"
+        / -->
+
+    <LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="3dp"
+     >  
+      <Button android:id="@+id/fix_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/station"
+        android:enabled="false"
+        />
+      <EditText android:id="@+id/fix_station_value" 
+        android:singleLine="true" 
+        android:layout_width="80dp"
+        android:layout_height="wrap_content" 
+        />
+      <Button android:id="@+id/fix_save_station"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="10dp" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        />
+    </LinearLayout>
+     					  
+    <LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="3dp"
+    >
+      <Button android:id="@+id/fix_geomag"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_geomag"
+        />
+      <EditText android:id="@+id/fix_decl" 
+        android:singleLine="true" 
+        android:layout_width="80dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal|numberSigned"
+        />
+      <Button android:id="@+id/fix_save_decl"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="10dp" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        />
+    </LinearLayout>
+     					  
+    <LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="3dp"
+    >  
+      <Button android:id="@+id/fix_convert"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_convert"
+        />
+      <TextView android:id="@+id/fix_crs" 
+        android:singleLine="true" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:hint="Long-Lat"
+        />
+    </LinearLayout>
+     					  
+
+    <LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="25dip"
+    > 
+      <!-- Button android:id="@+id/fix_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_back"
+        / -->
+      
+      <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        > 
+        <!-- Button android:id="@+id/fix_ok"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_gravity="right"
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          / -->
+        <Button android:id="@+id/fix_drop"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_gravity="right" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_delete"
+          android:textColor="@color/textdelete"
+          />
+      </LinearLayout>
+    </LinearLayout>
+   		
+</LinearLayout>

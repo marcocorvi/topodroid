@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+   					  
+    <TextView
+        android:id="@+id/shot_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:textSize="14sp"
+     />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingLeft="6dp"
+      android:paddingRight="6dp" 
+      android:paddingBottom="3dp">
+
+      <EditText android:id="@+id/shot_from"
+          android:layout_marginTop="2dp"
+          android:layout_width="100dip"
+          android:layout_height="wrap_content" 
+          android:text="-"
+          />
+      <EditText android:id="@+id/shot_to"
+          android:layout_marginTop="2dp"
+          android:layout_width="100dip"
+          android:layout_height="wrap_content" 
+          android:text="-"
+          />
+    </LinearLayout>
+
+    <EditText android:id="@+id/shot_comment"
+      android:layout_marginTop="2dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_left" />
+      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_vert" />
+      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_right" />
+      <!-- RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ignore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_ignore" / -->
+    </LinearLayout>
+   					  
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <!-- RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/survey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/regular" / -->
+      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/duplicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/duplicate" />
+      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/surface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/surface" />
+    </LinearLayout>
+
+    <!-- TODO comment -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="25dip"
+      >
+      <!-- Button android:id="@+id/button_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        / -->
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
+      <Button android:id="@+id/btn_ok"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        />
+      </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

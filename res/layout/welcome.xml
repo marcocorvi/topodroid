@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="5dp"
+>
+
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/footer"
+    android:orientation="vertical"
+  >
+    <!-- LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+    -->
+      <TextView android:id="@+id/TextView01"
+        android:text="@string/welcome_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:autoLink="all"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+      />
+    <!-- /LinearLayout -->
+  </ScrollView>
+
+  <!-- LinearLayout android:id="@+id/footer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+  >
+      <!Button
+        android:text="@string/btn_man"
+        android:id="@+id/btn_man"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      />
+      <!Button
+        android:text="@string/btn_symbol"
+        android:id="@+id/btn_symbol"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      />
+      <Button
+        android:id="@+id/btn_ok"
+        android:text="@string/button_ok"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      />
+  </LinearLayout -->
+
+</LinearLayout>

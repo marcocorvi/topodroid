@@ -1,0 +1,22 @@
+symbol point
+name debris
+name-es escombros
+name-pt entulho
+name-it detrito
+name-fr débris
+name-de Schutt
+name-ru мусор
+th_name debris
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  moveTo 0 0
+  lineTo 4 1
+  lineTo 2 -3
+  lineTo 0 0
+  lineTo -4 0
+  lineTo -2 -4
+  lineTo 0 0
+endpath
+endsymbol

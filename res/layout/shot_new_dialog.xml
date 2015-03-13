@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <!-- TextView android:id="@+id/shot_info" 
+        android:layout_marginBottom="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shot_info"
+        android:textSize="18sp"
+      / -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <EditText android:id="@+id/shot_from" 
+        android:maxLines="1" 
+        android:layout_width="140dp"
+        android:layout_height="wrap_content" 
+        android:scrollHorizontally="true"
+        android:hint="@string/shot_from"
+        android:nextFocusDown="@+id/shot_to"
+        />
+      <EditText android:id="@+id/shot_to" 
+        android:maxLines="1" 
+        android:layout_width="140dp"
+        android:layout_height="wrap_content" 
+        android:scrollHorizontally="true"
+        android:hint="@string/shot_to"
+        />
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal" 
+      >
+    <EditText android:id="@+id/shot_distance" 
+        android:maxLines="1" 
+        android:layout_width="95dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal"
+        android:hint="&#x2190;&#x2192;"
+        android:nextFocusDown="@+id/shot_bearing"
+        />
+    <EditText android:id="@+id/shot_bearing" 
+        android:maxLines="1" 
+        android:layout_width="95dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal"
+        android:hint="&#x2191;N"
+        android:nextFocusDown="@+id/shot_clino"
+        />
+    <EditText android:id="@+id/shot_clino" 
+        android:maxLines="1" 
+        android:layout_width="95dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal|numberSigned"
+        android:hint="/_"
+        />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal" 
+      >
+      <EditText android:id="@+id/shot_left" 
+        android:maxLines="1" 
+        android:layout_width="70dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal"
+        android:hint="&#x21A4;"
+        android:nextFocusDown="@+id/shot_right"
+        />
+      <EditText android:id="@+id/shot_right" 
+        android:maxLines="1" 
+        android:layout_width="70dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal"
+        android:hint="&#x21A6;"
+        android:nextFocusDown="@+id/shot_up"
+        />
+      <EditText android:id="@+id/shot_up" 
+        android:maxLines="1" 
+        android:layout_width="70dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal"
+        android:hint="&#x21A5;"
+        android:nextFocusDown="@+id/shot_down"
+        />
+      <EditText android:id="@+id/shot_down" 
+        android:maxLines="1" 
+        android:layout_width="70dp"
+        android:layout_height="wrap_content" 
+        android:inputType="numberDecimal"
+        android:hint="&#x21A7;"
+        />
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/button_sensor"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_direction"
+          />
+      <CheckBox android:id="@+id/splay_at_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splay_at_to"
+        />
+    </LinearLayout>
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal" 
+      >
+      <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radio_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_left" />
+      <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radio_vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_vert" />
+      <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radio_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extend_right" />
+    </RadioGroup>
+    
+    <!-- Spinner  android:id="@+id/extend"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:prompt="@string/extend"/ -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="25dip"
+      >
+        <!-- Button android:id="@+id/button_back_shot_name"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+          / -->
+   		
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        >
+   		
+      <Button android:id="@+id/button_save_shot_name"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_save"
+      />
+
+      <Button android:id="@+id/button_ok_shot_name"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="right"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
+   		
+      </LinearLayout>
+   		
+    </LinearLayout>
+   					  
+</LinearLayout>

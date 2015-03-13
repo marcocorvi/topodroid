@@ -1,0 +1,77 @@
+<html><body>
+<h3>[6] CALIBRATION WINDOW</h3>
+
+Tapping the <u>Calibration</u> menu in the Device activity window you go to the Calibrations dialog, which lists the calibrations of the selected DistoX. To create a new calibration tap on the <u>New Calibration</u> button in the dialog. This brings you to the window for the calibration informations. The "date" field is prefilled with the current date. The "device" field is prefilled with the address of the DistoX, and cannot be modified. You must give a "name" to the calibration. The name is what appears in the list of calibrations. You can optionally enter a brief "description". By default TopoDroid will pick automatically the calibration algorithm based on the DistoX model and firmware. However you can force it to use either the linear or the non-linear algorithm. When you are done tap the <u>Save</u> button (the leftmost) to save the calibration info to the database.</i><br><p>
+
+<b>WARNING. The name of the calibration must not contain the character '/' (slash), which is the pathname separator.</b><br><p>
+
+<h4>MENUS</h4>
+<ulist>
+<li><u>Export</u> The calibration data can be exported as a CSV text file that can be imported in a spreadsheet program</li>
+<li><u>Delete</u> removes the calibration informations and its data from the database.</li>
+<li><u>Settings</u></li>
+<li><u>Help</u></li>
+</ulist><br><p>
+
+<h4>BUTTONS</h4>
+<ulist>
+<li><u>Save</u> saves the calibration informations to the database</li>
+<li><u>Open</u> opens the calibration data window</li>
+<li><u>Read</u> displays the calibration coefficients. This shows the values of the calibration coefficients previouly computed, and stored in the database</li>
+<ulist><br><p>
+
+
+<h4>CALIBRATION SETTINGS</h4>
+<ulist>
+<li><i>Group policy</i>: how to split the calibration data into groups. The three policies are described in the section about calibration data</li>
+<li><i>Group tolerance</i>: the maximum angular distance between consecutive data to be in the same group when the "distance-based" group-policy is used</li>
+<li><i>Error</i>: the error below which the computation of the coefficients teminates</li>
+<li><i>Iterations</i>: the maximum number of iteration for the calibration algorithm</li>
+<li><i>Raw data</i>: whether to display also the raw data. By default TopoDroid displays the azimuth, inclination, and roll. Check this option if you want to see also the raw calibration data</li>
+<li><i>Algorithm</i>: can be 0 (auto), 1 (linear), 2 (non-linear). If a calibration algo is left "auto", and this setting is not "auto", then the setting algorithm is used to calculate the calibration. If they are both "auto" the "linear" algorithm is used</li>
+<ulist><br><p>
+
+When you open an existing calibration (tapping the calibration name in the list of the calibration of a DistoX), you get the same interface.  The only difference is that the name of the calibration is no more editable.<br><p>
+
+<h4>HOW TO CALIBRATE A DISTOX</h4>
+The DistoX needs to be calibrated before using. The calibration is a transformation of the data that accounts for
+the non-exact orthogonality of the axis of the sensors and effects of the electronics on the magnetic field.
+To compute the coefficients of this transformation, you must take a number of shots covering all the directions,
+and recording the raw readings 
+of the sensors. This occurs when the DistoX is in "calibration mode".
+<br>
+At a minimum you must take four shots (with different roll) in four directions at 90 degrees in the horizontal plane,
+as if these directions were going from the center of a cube towards the center of four side-faces, and eight shots from the center
+of the cube to the eight vertices.
+With TopoDroid it is possible to take four shots (at different rolls) also for the other directions besides the first four,
+and even take more than four shots.
+<br>
+Before computing the calibration you must tell the program the groups of shots for each direction, ie, you must assign a
+group to each shot. The groups are denoted with positive integers. A shot with group "0" (zero) or no group, is not used to
+compute the calibration. Deleted shot have negative group number.
+<br>
+TopoDroid implements three policies to assign groups automatically:
+<ulist>
+<li>"four groups of four shots, followed by single shots": this is the default</li>
+<li>"each group with four shots"</li>
+<li>"shot group assignment based on the angular discrepancy between shots"</li>
+</ulist>
+<br>
+
+To summarize, to calibrate the DistoX you need:
+<ulist>
+<li>turn the DistoX in calibration mode</li>
+<li>take the shots of the calibration data</li>
+<li>download the shots to the app</li>
+<li>assign the groups to the shots (automatically or manually)</li>
+<li>compute the calibration coefficients</li>
+<li>upload the coefficients to the DistoX</li>
+<li>revert the DistoX to normal mode</li>
+</ulist>
+<br><p>
+
+
+<hr>
+<i>Now fill the necessary fields, save the calibration info to the database, and open it.
+You are in the calibration data window, ready to take the calibration shots.</i>
+</body></html>

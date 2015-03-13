@@ -1,0 +1,18 @@
+<html><body>
+<h3>[14] THE FINAL MAP</h3>
+
+When you are done, export the survey as <i>Therion</i> file and make a zip archive.  Next download the zip to your PC and unzip it.  You can complete the cave map either with <i>Therion</i> or <i>cSurvey</i>.<br><p>
+
+You will find, among other things, the survey notes (a text file), the sketch files (therion th2 files), and the survey therion th file.  In this file the inclusion of the sketches is written but it is commented.  To get the drawing in the exported PDF files you must uncomment them.  It is a good idea to add a map for each sketch (scrap); actually two maps one for the plan the other for the extended section.<br><p>
+
+If you want to compile the <i>Therion</i> project you must supply a <i>thconfig</i> file which can be as simple as<br>
+<code>
+   source my_survey.th
+<br>
+   export map -proj plan -o my_cave_p.pdf 
+<br>
+   export map -proj extended -o my_cave_s.pdf
+</code><br><p>
+  
+Alternatively you may work with <i>cSurvey</i>. Open the csx exported sketch file with <i>cSurvey</i>: you will have the data sheet filled with survey data and the sketches properly aligned in the drawing canvas of <i>cSurvey</i>.
+</body></html>

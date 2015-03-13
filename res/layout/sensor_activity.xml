@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:orientation="vertical" 
+      >
+        <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_light"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sensor_light" />
+        <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_magnetic_field"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sensor_magnetic_field" />
+        <!-- RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_proximity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sensor_proximity" / -->
+        <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_temperature"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sensor_temperature" />
+        <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_pressure"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sensor_pressure" />
+        <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_gravity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sensor_gravity" />
+        <!-- RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_humidity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sensor_humidity" / -->
+        <RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/sensor_extern"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textStyle="bold"
+          android:text="@string/sensor_extern" />
+    </RadioGroup>
+
+
+    <EditText 
+        android:id="@+id/sensor_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sensor_type"
+        />
+   		
+    <EditText 
+      android:id="@+id/sensor_value"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/sensor_value"
+      />
+
+    <EditText 
+      android:id="@+id/sensor_comment"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/sensor_comment"
+      />
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="25dip"
+      >
+   		
+      <Button android:id="@+id/sensor_cancel"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dip"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_back"
+        />
+
+      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:gravity="right"
+        >
+        <Button android:id="@+id/sensor_ok"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          />
+
+      </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
