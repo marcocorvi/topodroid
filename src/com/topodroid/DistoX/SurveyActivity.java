@@ -552,6 +552,9 @@ public class SurveyActivity extends Activity
             filename = mApp.exportSurveyAsDxf( num );
           }
           break;
+        case TopoDroidConst.DISTOX_EXPORT_KML:
+          filename = mApp.exportSurveyAsKml( );
+          break;
         case TopoDroidConst.DISTOX_EXPORT_CSX:
           filename = mApp.exportSurveyAsCsx( null, null );
           break;

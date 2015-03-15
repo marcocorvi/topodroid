@@ -1136,6 +1136,13 @@ public class TopoDroidApp extends Application
     return TopoDroidExporter.exportSurveyAsDxf( mSID, mData, info, num, filename );
   }
 
+  public String exportSurveyAsKml( )
+  {
+    SurveyInfo info = mData.selectSurveyInfo( mSID );
+    String filename = TopoDroidPath.getSurveyKmlFile( mySurvey );
+    return TopoDroidExporter.exportSurveyAsKml( mSID, mData, info, filename );
+  }
+
   public String exportSurveyAsDat()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );

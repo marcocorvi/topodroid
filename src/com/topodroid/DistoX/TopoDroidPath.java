@@ -51,6 +51,7 @@ public class TopoDroidPath
   private static String APP_DAT_PATH ; //  = APP_BASE_PATH + "dat/";   // Compass
   private static String APP_DUMP_PATH ; //  = APP_BASE_PATH + "dump/"; // DistoX memory dumps
   private static String APP_DXF_PATH ; //  = APP_BASE_PATH + "dxf/";
+  private static String APP_KML_PATH ; //  = APP_BASE_PATH + "kml/";
   private static String APP_FOTO_PATH; //  = APP_BASE_PATH + "photo/";
   private static String APP_IMPORT_PATH; //  = APP_BASE_PATH + "import/";
   private static String APP_NOTE_PATH;   //  = APP_BASE_PATH + "note/";
@@ -132,6 +133,9 @@ public class TopoDroidPath
 
     APP_DXF_PATH = APP_BASE_PATH + "dxf/";
     checkDirs( APP_DXF_PATH );
+
+    APP_KML_PATH = APP_BASE_PATH + "kml/";
+    checkDirs( APP_KML_PATH );
 
     APP_SVG_PATH = APP_BASE_PATH + "svg/";
     checkDirs( APP_SVG_PATH );
@@ -220,6 +224,7 @@ public class TopoDroidPath
   static boolean hasTh3Dir() { return (new File( APP_TH3_PATH )).exists(); }
   static boolean hasPngDir() { return (new File( APP_PNG_PATH )).exists(); }
   static boolean hasDxfDir() { return (new File( APP_DXF_PATH )).exists(); }
+  static boolean hasKmlDir() { return (new File( APP_KML_PATH )).exists(); }
   static boolean hasSvgDir() { return (new File( APP_SVG_PATH )).exists(); }
 
   static String getDirFile( String name )    { return APP_BASE_PATH + name; }
@@ -231,6 +236,7 @@ public class TopoDroidPath
   static String getThFile( String name )     { return APP_TH_PATH + name; }
   static String getDatFile( String name )    { return APP_DAT_PATH + name; }
   static String getDxfFile( String name )    { return APP_DXF_PATH + name; }
+  static String getKmlFile( String name )    { return APP_KML_PATH + name; }
   static String getSrvFile( String name )    { return APP_SRV_PATH + name; }
   static String getSvgFile( String name )    { return APP_SVG_PATH + name; }
   static String getSvxFile( String name )    { return APP_SVX_PATH + name; }
@@ -275,6 +281,7 @@ public class TopoDroidPath
   static String getSurveyThFile( String survey ) { return getFile( APP_TH_PATH, survey, "th" ); }
   static String getSurveyTroFile( String survey ) { return getFile( APP_TRO_PATH, survey, "tro" ); }
   static String getSurveyDxfFile( String survey ) { return getFile( APP_DXF_PATH, survey, "dxf" ); }
+  static String getSurveyKmlFile( String survey ) { return getFile( APP_KML_PATH, survey, "kml" ); }
   static String getSurveySrvFile( String survey ) { return getFile( APP_SRV_PATH, survey, "srv" ); }
   static String getSurveySvxFile( String survey ) { return getFile( APP_SVX_PATH, survey, "svx" ); }
   static String getSurveyCsvFile( String survey ) { return getFile( APP_CSV_PATH, survey, "csv" ); }

@@ -2561,7 +2561,7 @@ public class DrawingActivity extends ItemDrawer
     }
 
     // ext file extension (--> saving class)
-    void doSaveWithExt( long type, final String filename, final String ext )
+    private void doSaveWithExt( long type, final String filename, final String ext )
     {
       final Activity currentActivity  = this;
       Handler saveHandler = new Handler(){

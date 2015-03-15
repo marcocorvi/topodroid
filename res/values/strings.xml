@@ -425,6 +425,7 @@
     <string name="btn_csurvey">cSurvey</string>
     <string name="btn_csv">CSV</string>
     <string name="btn_dxf">DXF</string>
+    <string name="btn_kml">KML</string>
     <string name="btn_man">Manual</string>
     <string name="btn_symbol">Drawing tools</string>
     <string name="btn_png">PNG</string>

@@ -14,6 +14,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.text.SimpleDateFormat;
 
+import android.util.FloatMath;
+import android.util.Log;
+
 class TopoDroidExporter
 {
   final static int EXPORT_THERION    = 0;
@@ -321,14 +324,26 @@ class TopoDroidExporter
   static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
-  static String exportSurveyAsKML( long sid, DataHelper data, SurveyInfo info, String filename )
+  static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     if ( fixeds.size() == 0 ) return null;
     FixedInfo origin = fixeds.get(0);
+    float lat = (float)origin.lat;
+    float lng = (float)origin.lng;
+    float alt = (float)origin.alt;
+    float alat = (float)Math.abs( lat );
 
-    float s_radius = ((90 - origin.lat) * EARTH_RADIUS1 + origin.lat) * EARTH_RADIUS2)/90;
-    float e_radius = s_radius * FloatMath.cos( origin.lat * Math.PI / 180 );
+    float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
+    float e_radius = s_radius * FloatMath.cos( alat * (float)Math.PI / 180 );
+
+    s_radius = 1 / s_radius;
+    e_radius = 1 / e_radius;
+
+    // float emin = lng;
+    // float emax = lng;
+    // Log.v("DistoX", "N Deg/Km " + (1000*s_radius) );
+    // Log.v("DistoX", "E Deg/Km " + (1000*e_radius) );
 
     List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
     DistoXNum num = new DistoXNum( shots_data, origin.name, null );
@@ -338,10 +353,14 @@ class TopoDroidExporter
     List<NumSplay>   splays = num.getSplays();
 
     for ( NumStation st : stations ) {
-      st.s = origin.lat + st.s / s_radius;
-      st.e = origin.lng + st.e / e_radius;
-      st.v += origin.alt;
+      st.s = lat + st.s * s_radius;
+      st.e = lng + st.e * e_radius;
+      st.v = alt + st.v;
+      // if ( st.e < emin ) emin = st.e;
+      // if ( st.e > emax ) emax = st.e;
     }
+
+    // Log.v("DistoX", "E " + emin + " " + emax );
 
     // now write the KML
     try {
@@ -352,17 +371,34 @@ class TopoDroidExporter
       pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
       pw.format("<kml xmlnx=\"http://www.opengis.net/kml/2.2\">\n");
       pw.format("<Document>\n");
+
+      SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
+      pw.format("<name>%s</name>\n", info.name );
+      pw.format("<description>%s - TopoDroid v %s</description>\n",  sdf.format( new Date() ), TopoDroidApp.VERSION );
+
       pw.format("<Placemark>\n");
-      pw.format("<altitudeMode>absolute</altitudeMode>\n");
+      pw.format("<Style>\n");
+      pw.format("  <LineStyle>\n");
+      pw.format("  <color>ff0000ff</color>\n"); // AABBGGRR
+      pw.format("  <width>1</width>\n");
+      pw.format("  </LineStyle>\n");
+      pw.format("</Style>\n");
+
+      pw.format("<MultiGeometry>\n");
+      // pw.format("<altitudeMode>absolute</altitudeMode>\n");
       for ( NumShot sh : shots ) {
         NumStation from = sh.from;
-        
-      pw.format("<LineString>
-      pw.format("<coordinates>\n");
+        NumStation to   = sh.to;
+        pw.format("<LineString>\n");
+        pw.format("  <coordinates>\n");
+        pw.format("    %f,%f,%f\n", from.e, from.s, from.v );
+        pw.format("    %f,%f,%f\n", to.e, to.s, to.v );
+        pw.format("  </coordinates>\n");
+        pw.format("</LineString>\n");
+      }
+      pw.format("</MultiGeometry>\n");
 
-
-      pw.format("</coordinates>\n");
-      pw.format("<Placemark>\n");
+      pw.format("</Placemark>\n");
       pw.format("</Document>\n");
       pw.format("</kml>\n");
       fw.flush();

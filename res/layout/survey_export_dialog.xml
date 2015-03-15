@@ -121,6 +121,15 @@
        android:layout_marginTop="10dp" 
        >
 
+      <Button android:id="@+id/btn_kml"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/btn_kml"
+        />
+
       <Button android:id="@+id/btn_walls"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 

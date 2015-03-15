@@ -24,10 +24,11 @@ class TopoDroidConst
   static final int DISTOX_EXPORT_CSX = 7;
   static final int DISTOX_EXPORT_TOP = 8;
   static final int DISTOX_EXPORT_SRV = 9;
-  static final int DISTOX_EXPORT_MAX = 10;   // placeholder 
+  static final int DISTOX_EXPORT_KML = 10;
+  static final int DISTOX_EXPORT_MAX = 11;   // placeholder 
 
-  static final int DISTOX_EXPORT_PNG = 11;
-  static final int DISTOX_EXPORT_SVG = 12;
+  static final int DISTOX_EXPORT_PNG = 12;
+  static final int DISTOX_EXPORT_SVG = 13;
 
   static final int DDMMSS = 0;
   static final int DEGREE = 1;
