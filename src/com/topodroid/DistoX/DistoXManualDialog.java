@@ -53,32 +53,11 @@ import android.util.Log;
 public class DistoXManualDialog extends Activity
                                 implements OnItemClickListener, OnClickListener
 {
-  // private TextView mTVtitle;
-  // private TextView mTVtext;
   private WebView mTVtext;
-
-  // private Button   mButtonOK;
-  // private Button   mButtonCancel;
-  // private String   mTitle;
 
   private void load( String filename )
   {
     StringBuilder html = new StringBuilder();
-    // try {
-    //   FileReader fr = new FileReader( filename );
-    //   BufferedReader br = new BufferedReader( fr );
-    //   String line = br.readLine();
-    //   while ( line != null ) {
-    //     html.append( line );
-    //     html.append( " " );
-    //     // mTVtext.append( line + "\n" );
-    //     line = br.readLine();
-    //   }
-    //   fr.close();
-    //   mTVtext.loadData( html.toString(), "text/html", null );
-    // } catch ( IOException e ) {
-    //   TopoDroidLog.Log(  TopoDroidLog.LOG_ERR, "load IOexception " + e.toString() );
-    // }
     mTVtext.loadUrl("file:///android_asset/man/" + filename );
   }
 
@@ -86,7 +65,6 @@ public class DistoXManualDialog extends Activity
   {
     if ( TopoDroidApp.mManual.startsWith("http") ) {
       try {
-        // TopoDroidHelp.show( this, R.string.help_topodroid );
         startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( TopoDroidApp.mManual )));
       } catch ( ActivityNotFoundException e ) {
         Toast.makeText( this, "Cannot retrieve user manual from the web", Toast.LENGTH_SHORT ).show();
@@ -105,25 +83,10 @@ public class DistoXManualDialog extends Activity
     super.onCreate(savedInstanceState);
 
     setContentView(R.layout.distox_manual_dialog);
-    // mTVtitle  = (TextView) findViewById(R.id.manual_title );
     mTVtext   = (WebView) findViewById(R.id.manual_text );
-    // mButtonOK = (Button) findViewById(R.id.button_ok );
-    // mButtonCancel = (Button) findViewById(R.id.button_cancel );
-
-    // Bundle extras = getIntent().getExtras();
-    // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
-    // mTVtitle.setText( mTitle );
 
     setTitle( R.string.title_manual );
-    // load( TopoDroidPath.getManFile( "manual00.txt" ) );
     load( "manual00.htm" );
-
-    // mButtonOK.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
-
-
-    // mDrawer = (SlidingDrawer) findViewById( R.id.drawer );
-    // mDrawer.unlock();
 
     mImage  = (ImageView) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -162,7 +125,6 @@ public class DistoXManualDialog extends Activity
     // onPause will be called, and we save our data there.
     ImageView b = (ImageView) v;
     if ( b == mImage ) {
-      // Log.v("DistoX", "clicked image" );
       if ( mList.getVisibility() == View.VISIBLE ) {
         mList.setVisibility( View.GONE );
       } else {
@@ -181,8 +143,6 @@ public class DistoXManualDialog extends Activity
     if ( pos <= max ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter( sw );
-      // pw.format( "manual%02d.txt", pos );
-      // load( TopoDroidPath.getManFile( sw.getBuffer().toString() ) );
       pw.format( "manual%02d.htm", pos );
       load( sw.getBuffer().toString() );
     } else {

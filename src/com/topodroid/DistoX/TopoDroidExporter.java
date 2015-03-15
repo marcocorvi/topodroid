@@ -27,6 +27,7 @@ class TopoDroidExporter
   final static int EXPORT_DXF        = 11;
   final static int EXPORT_PNG        = 12;
   final static int EXPORT_SVG        = 13;
+  final static int EXPORT_KML        = 14;
   final static int EXPORT_ZIP        = 20;
 
   // =======================================================================
@@ -314,6 +315,64 @@ class TopoDroidExporter
     }
   }
 
+  // =======================================================================
+  // KML export
+
+  static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
+  static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
+
+  static String exportSurveyAsKML( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
+    if ( fixeds.size() == 0 ) return null;
+    FixedInfo origin = fixeds.get(0);
+
+    float s_radius = ((90 - origin.lat) * EARTH_RADIUS1 + origin.lat) * EARTH_RADIUS2)/90;
+    float e_radius = s_radius * FloatMath.cos( origin.lat * Math.PI / 180 );
+
+    List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
+    DistoXNum num = new DistoXNum( shots_data, origin.name, null );
+
+    List<NumStation> stations = num.getStations();
+    List<NumShot>    shots = num.getShots();
+    List<NumSplay>   splays = num.getSplays();
+
+    for ( NumStation st : stations ) {
+      st.s = origin.lat + st.s / s_radius;
+      st.e = origin.lng + st.e / e_radius;
+      st.v += origin.alt;
+    }
+
+    // now write the KML
+    try {
+      TopoDroidApp.checkPath( filename );
+      FileWriter fw = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+
+      pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+      pw.format("<kml xmlnx=\"http://www.opengis.net/kml/2.2\">\n");
+      pw.format("<Document>\n");
+      pw.format("<Placemark>\n");
+      pw.format("<altitudeMode>absolute</altitudeMode>\n");
+      for ( NumShot sh : shots ) {
+        NumStation from = sh.from;
+        
+      pw.format("<LineString>
+      pw.format("<coordinates>\n");
+
+
+      pw.format("</coordinates>\n");
+      pw.format("<Placemark>\n");
+      pw.format("</Document>\n");
+      pw.format("</kml>\n");
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed cSurvey export: " + e.getMessage() );
+      return null;
+    }
+  }
 
   // =======================================================================
   // POCKETTOPO EXPORT PocketTopo

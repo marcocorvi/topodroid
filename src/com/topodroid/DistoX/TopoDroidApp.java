@@ -1163,14 +1163,6 @@ public class TopoDroidApp extends Application
     firmwareUncompress( is, overwrite );
   }
  
-  // FIXME MANUAL
-  // private void installManual( )
-  // {
-  //   // Log.v( TopoDroidApp.TAG, "Uncompress Manual ");
-  //   InputStream is = getResources().openRawResource( R.raw.manual );
-  //   manualUncompress( is );
-  // }
-
   // -------------------------------------------------------------
   // SYMBOLS
 
@@ -1307,35 +1299,6 @@ public class TopoDroidApp extends Application
     } catch ( IOException e ) {
     }
     return cnt;
-  }
-
-  private void manualUncompress( InputStream fis )
-  {
-    // Log.v(TAG, "manual uncompress ...");
-    TopoDroidPath.checkManDir( );
-    try {
-      byte buffer[] = new byte[4096];
-      ZipEntry ze = null;
-      ZipInputStream zin = new ZipInputStream( fis );
-      while ( ( ze = zin.getNextEntry() ) != null ) {
-        String filepath = ze.getName();
-        if ( ze.isDirectory() ) continue;
-        String pathname =  TopoDroidPath.getManFile( filepath );
-        
-        TopoDroidApp.checkPath( pathname );
-        File file = new File( pathname );
-        FileOutputStream fout = new FileOutputStream( pathname );
-        int c;
-        while ( ( c = zin.read( buffer ) ) != -1 ) {
-          fout.write(buffer, 0, c); // offset 0 in buffer
-        }
-        fout.close();
-        zin.closeEntry();
-      }
-      zin.close();
-    } catch ( FileNotFoundException e ) {
-    } catch ( IOException e ) {
-    }
   }
 
   /** insert manual-data shot
