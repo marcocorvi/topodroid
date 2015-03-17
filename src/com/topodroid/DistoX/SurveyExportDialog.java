@@ -39,6 +39,7 @@ public class SurveyExportDialog extends Dialog
   private Button   mBtnCsv;
   private Button   mBtnDxf;
   private Button   mBtnKml;
+  private Button   mBtnPlt;
   private Button   mBtnSrv;
   private Button   mBtnZip;
   // private Button   mBtnCancel;
@@ -68,6 +69,7 @@ public class SurveyExportDialog extends Dialog
     mBtnDxf = (Button) findViewById(R.id.btn_dxf );
     mBtnKml = (Button) findViewById(R.id.btn_kml );
     mBtnSrv = (Button) findViewById(R.id.btn_walls );
+    mBtnPlt = (Button) findViewById(R.id.btn_oziexplorer );
     mBtnZip = (Button) findViewById(R.id.btn_zip );
     // mBtnCancel = (Button) findViewById(R.id.button_cancel );
 
@@ -84,8 +86,10 @@ public class SurveyExportDialog extends Dialog
     mBtnDxf.setOnClickListener( this );
     if ( TopoDroidSetting.mLevelOverNormal ) {
       mBtnKml.setOnClickListener( this );
+      mBtnPlt.setOnClickListener( this );
     } else {
       mBtnKml.setVisibility( View.GONE );
+      mBtnPlt.setVisibility( View.GONE );
     }
     mBtnSrv.setOnClickListener( this );
     mBtnZip.setOnClickListener( this );
@@ -115,6 +119,8 @@ public class SurveyExportDialog extends Dialog
       mParent.doExport( TopoDroidConst.DISTOX_EXPORT_DXF, true );
     } else if ( b == mBtnKml ) {
       mParent.doExport( TopoDroidConst.DISTOX_EXPORT_KML, true );
+    } else if ( b == mBtnPlt ) {
+      mParent.doExport( TopoDroidConst.DISTOX_EXPORT_PLT, true );
     } else if ( b == mBtnCsv ) {
       mParent.doExport( TopoDroidConst.DISTOX_EXPORT_CSV, true );
     } else if ( b == mBtnSrv ) {

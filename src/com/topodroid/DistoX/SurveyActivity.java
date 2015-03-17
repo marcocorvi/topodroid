@@ -555,6 +555,9 @@ public class SurveyActivity extends Activity
         case TopoDroidConst.DISTOX_EXPORT_KML:
           filename = mApp.exportSurveyAsKml( );
           break;
+        case TopoDroidConst.DISTOX_EXPORT_PLT:
+          filename = mApp.exportSurveyAsPlt( );
+          break;
         case TopoDroidConst.DISTOX_EXPORT_CSX:
           filename = mApp.exportSurveyAsCsx( null, null );
           break;
@@ -585,74 +588,22 @@ public class SurveyActivity extends Activity
     if ( mApp.mSID < 0 ) return;
     String survey = mApp.mySurvey;
 
-    File imagedir = new File( TopoDroidPath.getSurveyPhotoDir( survey ) );
-    if ( imagedir.exists() ) {
-      File[] fs = imagedir.listFiles();
-      for ( File f : fs ) f.delete();
-      imagedir.delete();
-    }
+    TopoDroidPath.deleteSurveyFiles( survey );
 
-    File t = new File( TopoDroidPath.getSurveyNoteFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    // t = new File( TopoDroidPath.getSurveyTlxFile( survey ) );
-    // if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveyThFile( survey ) );
-    if ( t.exists() ) t.delete();
-
-    t = new File( TopoDroidPath.getSurveyCsvFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveyCsxFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveyDatFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveyDxfFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveySvxFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveySrvFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveyTopFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
-    t = new File( TopoDroidPath.getSurveyTroFile( survey ) );
-    if ( t.exists() ) t.delete();
-    
     for ( int status = 0; status < 2; ++status ) {
       List< PlotInfo > plots = mApp.mData.selectAllPlots( mApp.mSID, status );
-      if ( TopoDroidPath.hasTh2Dir() ) {
-        for ( PlotInfo p : plots ) {
-          t = new File( TopoDroidPath.getSurveyPlotTh2File( survey, p.name ) );
-          if ( t.exists() ) t.delete();
-        }
-      }
-      if ( TopoDroidPath.hasPngDir() ) {
-        for ( PlotInfo p : plots ) {
-          t = new File( TopoDroidPath.getSurveyPlotPngFile( survey, p.name ) );
-          if ( t.exists() ) t.delete();
-        }
-      }
-      if ( TopoDroidPath.hasDxfDir() ) {
-        for ( PlotInfo p : plots ) {
-          t = new File( TopoDroidPath.getSurveyPlotDxfFile( survey, p.name ) );
-          if ( t.exists() ) t.delete();
-        }
-      }
-      if ( TopoDroidPath.hasSvgDir() ) {
-        for ( PlotInfo p : plots ) {
-          t = new File( TopoDroidPath.getSurveyPlotSvgFile( survey, p.name ) );
-          if ( t.exists() ) t.delete();
-        }
+      if ( plots.size() > 0 ) {
+        TopoDroidPath.deleteSurveyPlotFiles( survey, plots );
       }
     }
 
+    // TODO delete 3D-files
+    for ( int status = 0; status < 2; ++status ) {
+      List< Sketch3dInfo > sketches = mApp.mData.selectAllSketches( mApp.mSID, status );
+      if ( sketches.size() > 0 ) {
+        TopoDroidPath.deleteSurvey3dFiles( survey, sketches );
+      }
+    }
 
     mApp.mData.doDeleteSurvey( mApp.mSID );
     mApp.setSurveyFromName( null, false ); // tell app to clear survey name and id

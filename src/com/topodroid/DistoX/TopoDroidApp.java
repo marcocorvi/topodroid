@@ -495,6 +495,7 @@ public class TopoDroidApp extends Application
       // FIXME MANUAL installManual( );  // must come before installSymbols
       installSymbols( false ); // this updates symbol_version in the database
       installFirmware( false );
+      updateDefaultPreferences();
     }
 
     {
@@ -793,6 +794,18 @@ public class TopoDroidApp extends Application
 
   // -----------------------------------------------------------------
   // PREFERENCES
+
+  private void updateDefaultPreferences()
+  {
+    if ( mPrefs != null ) {
+      String g = mPrefs.getString( "DISTOX_GROUP_BY", "1" );
+      if ( g.equals("2") ) {
+        Editor editor = mPrefs.edit();
+        editor.putString( "DISTOX_GROUP_BY", "1" ); 
+        editor.commit();
+      }
+    }
+  }
 
   void setCWDPreference( String cwd )
   { 
@@ -1141,6 +1154,13 @@ public class TopoDroidApp extends Application
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     String filename = TopoDroidPath.getSurveyKmlFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsKml( mSID, mData, info, filename );
+  }
+
+  public String exportSurveyAsPlt( )
+  {
+    SurveyInfo info = mData.selectSurveyInfo( mSID );
+    String filename = TopoDroidPath.getSurveyPltFile( mySurvey );
+    return TopoDroidExporter.exportSurveyAsPlt( mSID, mData, info, filename );
   }
 
   public String exportSurveyAsDat()

@@ -6,7 +6,7 @@
        android:key="DISTOX_GROUP_BY"
        android:summary="@string/pref_group_by_summary"
        android:title="@string/pref_group_by_title"
-       android:defaultValue="2"
+       android:defaultValue="1"
        android:entries="@array/groupBy"
        android:entryValues="@array/groupByValue"
      />

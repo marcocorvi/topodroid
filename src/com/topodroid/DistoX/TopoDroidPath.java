@@ -17,6 +17,8 @@ import java.io.FileFilter;
 // import java.io.IOException;
 // import java.io.FileNotFoundException;
 
+import java.util.List;
+
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -52,6 +54,7 @@ public class TopoDroidPath
   private static String APP_DUMP_PATH ; //  = APP_BASE_PATH + "dump/"; // DistoX memory dumps
   private static String APP_DXF_PATH ; //  = APP_BASE_PATH + "dxf/";
   private static String APP_KML_PATH ; //  = APP_BASE_PATH + "kml/";
+  private static String APP_PLT_PATH ; //  = APP_BASE_PATH + "plt/";
   private static String APP_FOTO_PATH; //  = APP_BASE_PATH + "photo/";
   private static String APP_IMPORT_PATH; //  = APP_BASE_PATH + "import/";
   private static String APP_NOTE_PATH;   //  = APP_BASE_PATH + "note/";
@@ -136,6 +139,9 @@ public class TopoDroidPath
 
     APP_KML_PATH = APP_BASE_PATH + "kml/";
     checkDirs( APP_KML_PATH );
+
+    APP_PLT_PATH = APP_BASE_PATH + "plt/";
+    checkDirs( APP_PLT_PATH );
 
     APP_SVG_PATH = APP_BASE_PATH + "svg/";
     checkDirs( APP_SVG_PATH );
@@ -225,6 +231,7 @@ public class TopoDroidPath
   static boolean hasPngDir() { return (new File( APP_PNG_PATH )).exists(); }
   static boolean hasDxfDir() { return (new File( APP_DXF_PATH )).exists(); }
   static boolean hasKmlDir() { return (new File( APP_KML_PATH )).exists(); }
+  static boolean hasPltDir() { return (new File( APP_PLT_PATH )).exists(); }
   static boolean hasSvgDir() { return (new File( APP_SVG_PATH )).exists(); }
 
   static String getDirFile( String name )    { return APP_BASE_PATH + name; }
@@ -237,6 +244,7 @@ public class TopoDroidPath
   static String getDatFile( String name )    { return APP_DAT_PATH + name; }
   static String getDxfFile( String name )    { return APP_DXF_PATH + name; }
   static String getKmlFile( String name )    { return APP_KML_PATH + name; }
+  static String getPltFile( String name )    { return APP_PLT_PATH + name; }
   static String getSrvFile( String name )    { return APP_SRV_PATH + name; }
   static String getSvgFile( String name )    { return APP_SVG_PATH + name; }
   static String getSvxFile( String name )    { return APP_SVX_PATH + name; }
@@ -276,18 +284,20 @@ public class TopoDroidPath
   static String getPngFileWithExt( String name ) { return getFile( APP_PNG_PATH, name, "png" ); }
 
   static String getSurveyZipFile( String survey ) { return getFile( APP_ZIP_PATH, survey, "zip" ); }
-  static String getSurveyDatFile( String survey ) { return getFile( APP_DAT_PATH, survey, "dat" ); }
+
   // static String getSurveyTlxFile( String survey ) { return getFile( APP_TLX_PATH, survey, "tlx" ); }
   static String getSurveyThFile( String survey ) { return getFile( APP_TH_PATH, survey, "th" ); }
-  static String getSurveyTroFile( String survey ) { return getFile( APP_TRO_PATH, survey, "tro" ); }
-  static String getSurveyDxfFile( String survey ) { return getFile( APP_DXF_PATH, survey, "dxf" ); }
-  static String getSurveyKmlFile( String survey ) { return getFile( APP_KML_PATH, survey, "kml" ); }
-  static String getSurveySrvFile( String survey ) { return getFile( APP_SRV_PATH, survey, "srv" ); }
-  static String getSurveySvxFile( String survey ) { return getFile( APP_SVX_PATH, survey, "svx" ); }
   static String getSurveyCsvFile( String survey ) { return getFile( APP_CSV_PATH, survey, "csv" ); }
   static String getSurveyCsxFile( String survey ) { return getFile( APP_CSX_PATH, survey, "csx" ); }
   static String getSurveyCsxFile( String survey, String name ) { return getFile( APP_CSX_PATH, survey + "-" + name, "csx" ); }
+  static String getSurveyDatFile( String survey ) { return getFile( APP_DAT_PATH, survey, "dat" ); }
+  static String getSurveyDxfFile( String survey ) { return getFile( APP_DXF_PATH, survey, "dxf" ); }
+  static String getSurveyKmlFile( String survey ) { return getFile( APP_KML_PATH, survey, "kml" ); }
+  static String getSurveyPltFile( String survey ) { return getFile( APP_PLT_PATH, survey, "plt" ); }
+  static String getSurveySrvFile( String survey ) { return getFile( APP_SRV_PATH, survey, "srv" ); }
+  static String getSurveySvxFile( String survey ) { return getFile( APP_SVX_PATH, survey, "svx" ); }
   static String getSurveyTopFile( String survey ) { return getFile( APP_TOP_PATH, survey, "top" ); }
+  static String getSurveyTroFile( String survey ) { return getFile( APP_TRO_PATH, survey, "tro" ); }
 
   private static File[] getFiles( String dirname, final String[] ext )
   {
@@ -380,4 +390,65 @@ public class TopoDroidPath
   static void checkManDir() { checkDirs( APP_MAN_PATH ); }
   
 
+  static void deleteSurveyFiles( String survey )
+  {
+    File imagedir = new File( getSurveyPhotoDir( survey ) );
+    if ( imagedir.exists() ) {
+      File[] fs = imagedir.listFiles();
+      for ( File f : fs ) f.delete();
+      imagedir.delete();
+    }
+
+    File t = new File( getSurveyNoteFile( survey ) ); if ( t.exists() ) t.delete();
+    
+    // t = new File( getSurveyTlxFile( survey ) ); // if ( t.exists() ) t.delete();
+    
+    t = new File( getSurveyThFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyCsvFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyCsxFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyDatFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyDxfFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyKmlFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyPltFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveySvxFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveySrvFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyTopFile( survey ) ); if ( t.exists() ) t.delete();
+    t = new File( getSurveyTroFile( survey ) ); if ( t.exists() ) t.delete();
+    
+  }
+
+
+  static void deleteSurveyPlotFiles( String survey, List<PlotInfo> plots )
+  {
+    File t;
+    if ( hasTh2Dir() ) {
+      for ( PlotInfo p : plots ) {
+        t = new File( getSurveyPlotTh2File( survey, p.name ) ); if ( t.exists() ) t.delete();
+      }
+    }
+    if ( hasPngDir() ) {
+      for ( PlotInfo p : plots ) {
+        t = new File( getSurveyPlotPngFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      }
+    }
+    if ( hasDxfDir() ) {
+      for ( PlotInfo p : plots ) {
+        t = new File( getSurveyPlotDxfFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      }
+    }
+    if ( hasSvgDir() ) {
+      for ( PlotInfo p : plots ) {
+        t = new File( getSurveyPlotSvgFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      }
+    }
+  }
+
+  static void deleteSurvey3dFiles( String survey, List< Sketch3dInfo > sketches )
+  {
+    if ( hasTh3Dir() ) {
+      for ( Sketch3dInfo s : sketches ) {
+        File t = new File( getTh3FileWithExt( survey + "-" + s.name + ".th3" ) ); if ( t.exists() ) t.delete();
+      }
+    }
+  }
 }

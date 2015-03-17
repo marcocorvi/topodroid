@@ -139,22 +139,14 @@
         android:text="@string/btn_walls"
         />
 
-      <!-- Button android:id="@+id/btn_survex"
+      <Button android:id="@+id/btn_oziexplorer"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp" 
         android:background="@drawable/button"
         style="@style/button_default"
-        android:text="@string/btn_survex"
-        / -->
-
-      <!-- Button android:id="@+id/btn_vtopo"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/btn_vtopo"
-        / -->
+        android:text="@string/btn_oziexplorer"
+        />
     
     </LinearLayout>
 
