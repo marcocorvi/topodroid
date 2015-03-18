@@ -21,21 +21,21 @@
        android:entryValues="@array/unitLocationValue"
      />
 
-     <com.topodroid.DistoX.MyListPreference
+     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_ALTITUDE"
        android:summary="@string/pref_altitude_summary"
        android:title="@string/pref_altitude_title"
        android:defaultValue="0"
        android:entries="@array/altitudeType"
        android:entryValues="@array/altitudeTypeValue"
-     />
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
         android:key="DISTOX_ALTIMETRIC"
         android:title="@string/pref_altimetric_title"
         android:summary="@string/pref_altimetric_summary"
         android:defaultValue="false"
-     />
+     / -->
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_CRS"

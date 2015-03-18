@@ -39,7 +39,7 @@ class TopoDroidSetting
     "DISTOX_CHECK_ATTACHED",      // 13
 
     "DISTOX_UNIT_LOCATION",       // 14 
-    "DISTOX_ALTITUDE",            // 15
+    // "DISTOX_ALTITUDE",            // 15
     "DISTOX_CRS",                 // 16
     "DISTOX_GPS_AVERAGING",       // 17
 
@@ -71,7 +71,7 @@ class TopoDroidSetting
     "DISTOX_LINE_THICKNESS",      // 41
 
     "DISTOX_TEAM",                   // 42
-    "DISTOX_ALTIMETRIC",             // 43
+    // "DISTOX_ALTIMETRIC",             // 43
     "DISTOX_SHOT_TIMER",             // 44
     "DISTOX_BEEP_VOLUME",            // 45
     "DISTOX_LEG_SHOTS",              // 46
@@ -148,13 +148,12 @@ class TopoDroidSetting
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
 
-  static final int ALT_WGS84 = 0; // WGS84 altitude
-  static final int ALT_ASL = 1;   // altimetric altitude
+  // static final int ALT_WGS84 = 0; // WGS84 altitude
+  // static final int ALT_ASL = 1;   // altimetric altitude
+  // static final String ALTITUDE = "0";  
+  // static int mAltitude = ALT_WGS84;     // location altitude type
 
-  static final String ALTITUDE = "0";  
-  static int mAltitude = ALT_WGS84;     // location altitude type
-
-  static boolean mAltimetricLookup = false; // whether to lookup altimetric atitude
+  // static boolean mAltimetricLookup = false; // whether to lookup altimetric atitude
 
   static String mCRS = "Long-Lat";    // default coord ref systen 
 
@@ -364,11 +363,11 @@ class TopoDroidSetting
 
     mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TopoDroidConst.DDMMSS 
                                                                             : TopoDroidConst.DEGREE;
-    try {
-      mAltitude = Integer.parseInt( prefs.getString( key[k++], ALTITUDE ) );      // DISTOX_ALTITUDE
-    } catch ( NumberFormatException e ) {
-      mAltitude = Integer.parseInt( ALTITUDE );
-    }
+    // try {
+    //   mAltitude = Integer.parseInt( prefs.getString( key[k++], ALTITUDE ) );      // DISTOX_ALTITUDE
+    // } catch ( NumberFormatException e ) {
+    //   mAltitude = ALT_WGS84;
+    // }
     mCRS           = prefs.getString( key[k++], "Long-Lat" );                        // DISTOX_CRS
     mUseGPSAveraging = prefs.getBoolean( key[k++], USE_GPSAVERAGING );               // DISTOX_GPS_AVERAGING 17
 
@@ -475,7 +474,7 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) { }
 
     mDefaultTeam = prefs.getString( key[k++], "" );                      // DISTOX_TEAM
-    mAltimetricLookup = prefs.getBoolean( key[k++], false );               // DISTOX_ALTIMETRIC
+    // mAltimetricLookup = prefs.getBoolean( key[k++], false );               // DISTOX_ALTIMETRIC
     try {
       int t = Integer.parseInt( prefs.getString( key[k++], "10") );  // DISTOX_SHOT_TIMER
       if ( t > 0 ) mTimerCount = t;
@@ -635,10 +634,10 @@ class TopoDroidSetting
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TopoDroidConst.DDMMSS
                                                                        : TopoDroidConst.DEGREE;
       // TopoDroidLog.Log( TopoDroidLog.LOG_UNITS, "mUnitLocation changed " + mUnitLocation );
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      try {
-        mAltitude = Integer.parseInt( prefs.getString( k, ALTITUDE ) ); // DISTOX_ALTITUDE 15
-      } catch ( NumberFormatException e ) { mAltitude = Integer.parseInt( ALTITUDE ); }
+    // } else if ( k.equals( key[ nk++ ] ) ) {
+    //   try {
+    //     mAltitude = Integer.parseInt( prefs.getString( k, ALTITUDE ) ); // DISTOX_ALTITUDE 15
+    //   } catch ( NumberFormatException e ) { mAltitude = _WGS84; }
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCRS = prefs.getString( k, "Long-Lat" );     // DISTOX_CRS 16
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -759,8 +758,8 @@ class TopoDroidSetting
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mDefaultTeam = prefs.getString( k, "" );              // DISTOX_TEAM
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mAltimetricLookup = prefs.getBoolean( k, false );     // DISTOX_ALTIMETRIC
+    // } else if ( k.equals( key[ nk++ ] ) ) {
+    //   mAltimetricLookup = prefs.getBoolean( k, false );     // DISTOX_ALTIMETRIC
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         i = Integer.parseInt( prefs.getString( k, "10") );  // DISTOX_SHOT_TIMER

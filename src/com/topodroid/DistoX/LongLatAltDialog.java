@@ -56,7 +56,8 @@ public class LongLatAltDialog extends Dialog
   private Button   mBtnOK;
   // private Button   mBtnBack;
   // private Button   mBtnCancel;
-  private CheckBox mWGS84; // checked if alt is wgs84
+
+  // private CheckBox mWGS84; // checked if alt is wgs84
 
   public LongLatAltDialog( Context context, DistoXLocation parent )
   {
@@ -76,13 +77,13 @@ public class LongLatAltDialog extends Dialog
     mEditLong  = (EditText) findViewById(R.id.edit_long );
     mEditLat   = (EditText) findViewById(R.id.edit_lat );
     mEditAlt   = (EditText) findViewById(R.id.edit_alt );
-    mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
+    // mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
     if ( mParent.mHasLocation ) {
       mEditLong.setText( FixedInfo.double2ddmmss( mParent.mLongitude ) );
       mEditLat.setText(  FixedInfo.double2ddmmss( mParent.mLatitude ) );
       mEditAlt.setText(  Integer.toString( (int)(mParent.mAltitude) )  );
-      mWGS84.setChecked( true );
+      // mWGS84.setChecked( true );
     }
 
     mBtnNS = (Button) findViewById(R.id.button_NS);
@@ -167,25 +168,38 @@ public class LongLatAltDialog extends Dialog
         return;
       }
       double alt = -1000.0;
-      double asl = -1000.0;
+      // double asl = -1000.0;
+      double asl = 0.0;
       altit = altit.replace(",", ".");
       try {
-        if ( mWGS84.isChecked() ) {
-          alt = Double.parseDouble( altit );
-        } else {
-          asl = Double.parseDouble( altit );
-        }
+        // if ( mWGS84.isChecked() ) {
+        //   alt = Double.parseDouble( altit );
+        // } else {
+        //   asl = Double.parseDouble( altit );
+        // }
+        alt = Double.parseDouble( altit );
       } catch ( NumberFormatException e ) {
         mEditAlt.setError( mContext.getResources().getString( R.string.error_invalid_number) );
         return;
       }
-      if ( alt < -999 ) {
-        alt = asl + GeodeticHeight.geodeticHeight( latit, longit );
-      } else if ( asl < -999 ) {
-        asl = alt - GeodeticHeight.geodeticHeight( latit, longit );
-      }
+
+      // if ( TopoDroidSetting.mAltimetricLookup ) {
+      //   Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
+      //   if ( alt < -999 ) {
+      //     alt = asl + GeodeticHeight.geodeticHeight( latit, longit );
+      //   } else if ( asl < -999 ) {
+      //     asl = alt - GeodeticHeight.geodeticHeight( latit, longit );
+      //   }
+      // } else { // use same value for both altitudes
+      //   if ( alt < -999 ) alt = 0;
+      //   if ( asl < -999 ) asl = 0;
+      // }
+
       if ( ! north ) lat = -lat;
       if ( ! east )  lng = -lng;
+
+      // Log.v("DistoX", "Long-Lat dialog add fixed " + lng + " " + lat + " " + alt + " " + asl );
+
       mParent.addFixedPoint( lng, lat, alt, asl );
     }
     dismiss();

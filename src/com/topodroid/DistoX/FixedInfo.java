@@ -9,12 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120516 cstr
- * 20120522 rename FixedInfo
- * 20120531 added toString 
- * 20120603 added toLocString
- * 20121205 location units
- * 20130520 altimetric altitude
  */
 package com.topodroid.DistoX;
 
@@ -33,39 +27,39 @@ class FixedInfo
   double lng;      // longitude [decimal deg]
   double lat;      // latitude [decimal deg]
   double alt;      // wgs84 altitude [m]
-  double asl;      // altimetric altitude [m]
+  double asl;      // altimetric altitude [m] NOT USED
   String comment;
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double altitude, double altimetric, String cmt )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double alt_wgs84, double alt_ortho, String cmt )
   {
     id = _id;
     name = n;
     lng = longitude;
     lat = latitude;
-    alt = altitude;
-    asl = altimetric;
+    alt = alt_wgs84;
+    asl = alt_ortho;
     comment = cmt;
   }
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double altitude, double altimetric )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double alt_wgs84, double alt_ortho )
   {
     id = _id;
     name = n;
     lng = longitude;
     lat = latitude;
-    alt = altitude;
-    asl = altimetric;
+    alt = alt_wgs84;
+    asl = alt_ortho;
     comment = "";
   }
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double altitude )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double alt_wgs84 )
   {
     id = _id;
     name = n;
     lng = longitude;
     lat = latitude;
-    alt = altitude;
-    asl = -1.0;
+    alt = alt_wgs84;
+    asl = 0;
     comment = "";
   }
 
@@ -74,8 +68,8 @@ class FixedInfo
     return ( ( TopoDroidSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ?
                double2ddmmss( lng ) + " " + double2ddmmss( lat ) : 
                double2degree( lng ) + " " + double2degree( lat ) )
-         + " " + Integer.toString( (int)(alt) )
-         + " " + Integer.toString( (int)(asl) );
+         + " " + Integer.toString( (int)(alt) );
+         // + "* " + Integer.toString( (int)(asl) );
   }
 
   public String toString()
@@ -84,7 +78,8 @@ class FixedInfo
          + ( ( TopoDroidSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ?
                double2ddmmss( lng ) + " " + double2ddmmss( lat ) :
                double2degree( lng ) + " " + double2degree( lat ) )
-         + " " + ( (asl < 0 )? Integer.toString( (int)(alt) ) + " wgs84" : Integer.toString( (int)(asl) ) );
+         + " " + Integer.toString( (int)(alt) );
+         // + " " + ( (asl <= 0 )? Integer.toString( (int)(alt) ) + "*" : Integer.toString( (int)(asl) ) );
   }
 
   static String double2ddmmss( double x )

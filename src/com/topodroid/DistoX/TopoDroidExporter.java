@@ -381,27 +381,30 @@ class TopoDroidExporter
       pw.format("<name>%s</name>\n", info.name );
       pw.format("<description>%s - TopoDroid v %s</description>\n",  getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
-      pw.format("<Placemark>\n");
-      pw.format("<Style>\n");
+      pw.format("<Style id=\"centerline\">\n");
       pw.format("  <LineStyle>\n");
-      pw.format("  <color>ff0000ff</color>\n"); // AABBGGRR
-      pw.format("  <width>1</width>\n");
+      pw.format("    <color>ff0000ff</color>\n"); // AABBGGRR
+      pw.format("    <width>2</width>\n");
       pw.format("  </LineStyle>\n");
       pw.format("</Style>\n");
 
-      pw.format("<MultiGeometry>\n");
-      // pw.format("<altitudeMode>absolute</altitudeMode>\n");
+      pw.format("<Placemark>\n");
+      pw.format("  <styleUrl>#centerline</styleUrl>\n");
+      pw.format("  <MultiGeometry>\n");
+      pw.format("    <altitudeMode>absolute</altitudeMode>\n");
       for ( NumShot sh : shots ) {
         NumStation from = sh.from;
         NumStation to   = sh.to;
-        pw.format("<LineString>\n");
-        pw.format("  <coordinates>\n");
-        pw.format("    %f,%f,%f\n", from.e, from.s, from.v );
-        pw.format("    %f,%f,%f\n", to.e, to.s, to.v );
-        pw.format("  </coordinates>\n");
-        pw.format("</LineString>\n");
+        pw.format("    <LineString>\n");
+        // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
+        // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
+        pw.format("      <coordinates>\n");
+        pw.format("        %f,%f,%f\n", from.e, from.s, from.v );
+        pw.format("        %f,%f,%f\n", to.e, to.s, to.v );
+        pw.format("      </coordinates>\n");
+        pw.format("    </LineString>\n");
       }
-      pw.format("</MultiGeometry>\n");
+      pw.format("  </MultiGeometry>\n");
 
       pw.format("</Placemark>\n");
       pw.format("</Document>\n");
@@ -450,18 +453,17 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("OziExplorer Track Point File Version 2.1\n");
-      pw.format("WGS 84\n");
-      pw.format("Altitude is in feet\n");
-      pw.format("Reserved\n");
+      pw.format("OziExplorer Track Point File Version 2.1\r\n");
+      pw.format("WGS 84\r\n");
+      pw.format("Altitude is in Feet\r\n");
+      pw.format("Reserved 3\r\n");
 
-      pw.format("", info.name );
       // skip-value: 0 (usually 1)
       // track-type: 0=normal, 10=closed_polygon, 20=alarm_zone
       // fill-style: 0=solid, 1=clear, 2=Bdiag, 3=Fdiag, 4=cross, 5=diag_cross, 6=horiz, 7=vert
       //
-      pw.format("0,2,1677690,%s - TopoDroid v %s,0,0,0,8421376\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
-      pw.format("%d\n", stations.size() );
+      pw.format("0,2,1677690,%s - TopoDroid v %s,0,0,0,8421376,-1,0\r\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("%d\r\n", stations.size() );
       
 
       // date should be "days_since_12/30/1899.time_of_the_day"
@@ -471,14 +473,16 @@ class TopoDroidExporter
       long diff = System.currentTimeMillis() - cal.getTimeInMillis();
       long days = 35065 + diff / 86400000L; // 24*60*60*1000 // FIXME +33 ?
 
+      // String date = getDateString( "dd-MMM-yy" );
+
       NumStation last = null;
       for ( NumShot sh : shots ) {
         NumStation from = sh.from;
         NumStation to   = sh.to;
         if ( from != last ) {
-          pw.format("%f,%f,1,%f,%d,,\n", from.e, from.s, from.v, days );
+          pw.format("%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
         }
-        pw.format("%f,%f,0,%f,%d,,\n", to.e, to.s, to.v, days );
+        pw.format("%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
         last = to;
       }
       fw.flush();

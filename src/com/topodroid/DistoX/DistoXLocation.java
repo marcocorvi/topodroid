@@ -190,8 +190,10 @@ public class DistoXLocation extends Dialog
                              double asl
                            )
   {
-    // TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "addFixedPoint " + lng + " " + lat + " " + alt );
+    // Log.v("DistoX", "addFixedPoint " + lng + " " + lat + " " + alt );
+
     // FIXME TODO try to get altimetric altitude
+
     String name = mETstation.getText().toString();
     if ( name.length() == 0 ) {
       String error = mContext.getResources().getString( R.string.error_station_required );
@@ -201,8 +203,10 @@ public class DistoXLocation extends Dialog
     FixedInfo f = mParent.addLocation( name, lng, lat, alt, asl );
     // no need to update the adatper: fixeds are not many and can just request
     // the list to the database 
-    // mFixedAdapter.add( f );
-    refreshList();
+
+    mFixedAdapter.add( f );
+    mList.invalidate();
+    // refreshList();
     mHasLocation = false;
     // mBtnAdd.setEnabled( false );
   }
@@ -273,17 +277,6 @@ public class DistoXLocation extends Dialog
     // if ( b == mBtnCancel ) {
     //   dismiss();
     // }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Location onClick button " + b.getText().toString() );
-    // if ( b == mBtnAdd ) {
-    //   double geo_height = GeodeticHeight.geodeticHeight( mLatitude, mLongitude );
-    //   if ( geo_height > -999 ) {
-    //     mAltimetric = mAltitude - geo_height;
-    //     addFixedPoint( mLongitude, mLatitude, mAltitude, mAltimetric );
-    //   } else {
-    //     addFixedPoint( mLongitude, mLatitude, mAltitude, geo_height/1000 );
-    //     
-    //   }
-    // } else
     String station = mETstation.getText().toString();
     if ( station == null || station.length() == 0 ) {
       String error = mContext.getResources().getString( R.string.error_station_required );
@@ -296,13 +289,15 @@ public class DistoXLocation extends Dialog
         setGPSoff();
       }
       if ( mHasLocation ) {
-        if ( TopoDroidSetting.mAltimetricLookup ) {
-          Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
-          double geo_height = GeodeticHeight.geodeticHeight( mLatitude, mLongitude );
-          mAltimetric = ( geo_height > -999 )? mAltitude - geo_height : geo_height/1000;
-        } else {
-          mAltimetric = 0;
-        }
+        // if ( TopoDroidSetting.mAltimetricLookup ) {
+        //   Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
+        //   double geo_height = GeodeticHeight.geodeticHeight( mLatitude, mLongitude );
+        //   mAltimetric = ( geo_height > -999 )? mAltitude - geo_height : geo_height/1000;
+        // } else {
+        //   mAltimetric = 0;
+        // }
+        // NOTE replaced with 
+        mAltimetric = 0;
       }
       new LongLatAltDialog( mContext, this ).show();
       // mHasLocation = false;
