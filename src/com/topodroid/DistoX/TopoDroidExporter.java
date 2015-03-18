@@ -330,11 +330,23 @@ class TopoDroidExporter
   static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
-  static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
+  static private DistoXNum getGeolocalizedData( long sid, DataHelper data, float alt_factor )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     if ( fixeds.size() == 0 ) return null;
-    FixedInfo origin = fixeds.get(0);
+
+    DistoXNum num = null;
+    FixedInfo origin = null;
+    List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
+    for ( FixedInfo fixed : fixeds ) {
+      num = new DistoXNum( shots_data, fixed.name, null );
+      if ( num.getShots().size() > 0 ) {
+        origin = fixed;
+        break;
+      }
+    }
+    if ( origin == null || num == null ) return null;
+
     float lat = (float)origin.lat;
     float lng = (float)origin.lng;
     float alt = (float)origin.alt;
@@ -346,27 +358,21 @@ class TopoDroidExporter
     s_radius = 1 / s_radius;
     e_radius = 1 / e_radius;
 
-    // float emin = lng;
-    // float emax = lng;
-    // Log.v("DistoX", "N Deg/Km " + (1000*s_radius) );
-    // Log.v("DistoX", "E Deg/Km " + (1000*e_radius) );
-
-    List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
-    DistoXNum num = new DistoXNum( shots_data, origin.name, null );
-
-    List<NumStation> stations = num.getStations();
-    List<NumShot>    shots = num.getShots();
-    List<NumSplay>   splays = num.getSplays();
-
-    for ( NumStation st : stations ) {
+    for ( NumStation st : num.getStations() ) {
       st.s = lat - st.s * s_radius;
       st.e = lng + st.e * e_radius;
-      st.v = alt - st.v;
-      // if ( st.e < emin ) emin = st.e;
-      // if ( st.e > emax ) emax = st.e;
+      st.v = (alt - st.v)*alt_factor;
     }
+    return num;
+  }
 
-    // Log.v("DistoX", "E " + emin + " " + emax );
+  static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    DistoXNum num = getGeolocalizedData( sid, data, 1.0f );
+    if ( num == null ) return null;
+    List<NumStation> stations = num.getStations();
+    List<NumShot>    shots = num.getShots();
+    // List<NumSplay>   splays = num.getSplays();
 
     // now write the KML
     try {
@@ -420,32 +426,11 @@ class TopoDroidExporter
 
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
-    if ( fixeds.size() == 0 ) return null;
-    FixedInfo origin = fixeds.get(0);
-    float lat = (float)origin.lat;
-    float lng = (float)origin.lng;
-    float alt = (float)origin.alt;
-    float alat = (float)Math.abs( lat );
-
-    float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
-    float e_radius = s_radius * FloatMath.cos( alat * (float)Math.PI / 180 );
-
-    s_radius = 1 / s_radius;
-    e_radius = 1 / e_radius;
-
-    List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
-    DistoXNum num = new DistoXNum( shots_data, origin.name, null );
-
+    DistoXNum num = getGeolocalizedData( sid, data, TopoDroidUtil.M2FT );
+    if ( num == null ) return null;
     List<NumStation> stations = num.getStations();
     List<NumShot>    shots = num.getShots();
-    List<NumSplay>   splays = num.getSplays();
-
-    for ( NumStation st : stations ) {
-      st.s = lat - st.s * s_radius;
-      st.e = lng + st.e * e_radius;
-      st.v = (alt - st.v)*TopoDroidUtil.M2FT;
-    }
+    // List<NumSplay>   splays = num.getSplays();
 
     // now write the PLT file
     try {
