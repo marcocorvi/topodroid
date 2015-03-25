@@ -15,7 +15,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
 // import java.util.regex.Pattern;
 import java.util.Locale;
 
@@ -62,12 +61,14 @@ public class FixedDialog extends Dialog
   private EditText mETstation;
   private EditText mETdecl;
   private TextView mTVcrs;
+  private TextView mTVorthometric;
   private TextView mTVfix_station;
   private Button   mButtonDrop;
   private Button   mButtonDecl;
   private Button   mButtonGeomag;
   private Button   mButtonStation;
   private Button   mButtonConvert;
+  private Button   mButtonOrthometric;
   private Button   mButtonCancel;
 
   public FixedDialog( Context context, SurveyActivity parent, DistoXLocation sub_parent, FixedInfo fxd )
@@ -101,6 +102,9 @@ public class FixedDialog extends Dialog
     mButtonConvert = (Button) findViewById( R.id.fix_convert );
     mTVcrs = (TextView) findViewById( R.id.fix_crs );
 
+    mButtonOrthometric = (Button) findViewById( R.id.fix_orthometric );
+    mTVorthometric     = (TextView) findViewById( R.id.fix_alt );
+
     // mBTstation    = (Button) findViewById( R.id.fix_station );
     mETstation    = (EditText) findViewById( R.id.fix_station_value );
     mETstation.setText( mFxd.name );
@@ -117,6 +121,7 @@ public class FixedDialog extends Dialog
     mButtonDecl.setOnClickListener( this );
     mButtonStation.setOnClickListener( this );
     mButtonConvert.setOnClickListener( this );
+    mButtonOrthometric.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
   }
 
@@ -144,6 +149,12 @@ public class FixedDialog extends Dialog
       if ( mTVcrs.getText() != null ) {
         mParent.tryProj4( this, mTVcrs.getText().toString(), mFxd );
       }
+      return;
+    } else if ( b == mButtonOrthometric ) {
+      double gh = GeodeticHeight.geodeticHeight( mFxd.lat, mFxd.lng );
+      mFxd.asl = ( gh > -999 )? mFxd.alt - gh : gh/1000;
+      mTVorthometric.setText( Integer.toString( (int)mFxd.asl ) );
+      mParent.updateFixedAsl( mFxd );
       return;
     } else if ( b == mButtonGeomag ) {
       float decl = GeodeticHeight.getGeomag( mFxd );

@@ -103,6 +103,29 @@
         />
     </LinearLayout>
      					  
+    <LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android" 
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="3dp"
+    >  
+      <Button android:id="@+id/fix_orthometric"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_altitude"
+        />
+      <TextView android:id="@+id/fix_alt" 
+        android:singleLine="true" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:hint="@string/altitude"
+        />
+    </LinearLayout>
 
     <LinearLayout
        xmlns:android="http://schemas.android.com/apk/res/android" 

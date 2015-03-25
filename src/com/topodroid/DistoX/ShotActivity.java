@@ -115,7 +115,6 @@ public class ShotActivity extends Activity
 
   private static int menus[] = {
                         R.string.menu_survey,
-                        // R.string.menu_station,
                         R.string.menu_recover,
                         R.string.menu_photo,
                         R.string.menu_sensor,
@@ -1415,7 +1414,6 @@ public class ShotActivity extends Activity
     }
     return true;
   }
-
   */
 
   private void setMenuAdapter()
@@ -1423,15 +1421,14 @@ public class ShotActivity extends Activity
     int k = 0;
     Resources res = getResources();
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter.add( res.getString( menus[k++] ) );
-    if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k++] ) );
-    // if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k++] ) );
-    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k++] ) );
-    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k++] ) );
-    if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k++] ) );
-    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k++] ) );
-    mMenuAdapter.add( res.getString( menus[k++] ) );
-    mMenuAdapter.add( res.getString( menus[k++] ) );
+    mMenuAdapter.add( res.getString( menus[k++] ) );                                             // menu_survey
+    if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
+    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
+    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
+    if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
+    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
+    mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options
+    mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_help
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }

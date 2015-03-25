@@ -84,7 +84,7 @@ public class SurveyExportDialog extends Dialog
     mBtnCsx.setOnClickListener( this );
     mBtnCsv.setOnClickListener( this );
     mBtnDxf.setOnClickListener( this );
-    if ( TopoDroidSetting.mLevelOverNormal ) {
+    if ( TopoDroidSetting.mLevelOverAdvanced ) {
       mBtnKml.setOnClickListener( this );
       mBtnPlt.setOnClickListener( this );
     } else {

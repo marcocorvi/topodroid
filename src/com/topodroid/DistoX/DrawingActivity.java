@@ -134,54 +134,6 @@ public class DrawingActivity extends ItemDrawer
   BitmapDrawable mBMcontinue;
   BitmapDrawable mBMadd;
                       
-  // private static int icons[] = { 
-  //                       R.drawable.ic_edit,          // 0
-  //                       R.drawable.ic_eraser,
-  //                       R.drawable.ic_select,
-  //                       R.drawable.ic_download,      // 3 ic_download
-  //                       R.drawable.ic_bt,
-  //                       R.drawable.ic_mode,          // 5
-  //                       R.drawable.ic_plan,
-  //                       R.drawable.ic_note,
-  //                       R.drawable.ic_undo,
-  //                       R.drawable.ic_redo,
-  //                       R.drawable.ic_list,          // 10
-  //                       R.drawable.ic_continue_no,
-  //                       R.drawable.ic_back,          // 12
-  //                       R.drawable.ic_forw,
-  //                       R.drawable.ic_join,
-  //                       R.drawable.ic_note,          // 15
-  //                       0,
-  //                       R.drawable.ic_menu,          // 17
-  //                       R.drawable.ic_extended,
-  //                       R.drawable.ic_join_no,
-  //                       R.drawable.ic_continue,   // 20
-  //                       R.drawable.ic_add,
-  //                     };
-  // private static int ixons[] = { 
-  //                       R.drawable.ix_edit, // 0
-  //                       R.drawable.ix_eraser,
-  //                       R.drawable.ix_select,
-  //                       R.drawable.ix_download,      // 3 <-- updateBlockList
-  //                       R.drawable.ix_bt,
-  //                       R.drawable.ix_mode,          // 5
-  //                       R.drawable.ix_plan,          // 6 <-- switchPlotType
-  //                       R.drawable.ix_note,
-  //                       R.drawable.ix_undo,
-  //                       R.drawable.ix_redo,
-  //                       R.drawable.ix_list,          // 10
-  //                       R.drawable.ix_continue,
-  //                       R.drawable.ix_back,
-  //                       R.drawable.ix_forw,
-  //                       R.drawable.ix_join,          // 14 <-- setButton3
-  //                       R.drawable.ix_note,          // 15
-  //                       0,
-  //                       R.drawable.ix_menu,          // 17
-  //                       R.drawable.ix_extended,
-  //                       R.drawable.ix_join_no,
-  //                       R.drawable.ix_continue_no,
-  //                       R.drawable.ix_add,
-  //                     };
   private static int izons[] = { 
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,

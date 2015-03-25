@@ -12,8 +12,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
-
 import android.app.Dialog;
 import android.os.Bundle;
 

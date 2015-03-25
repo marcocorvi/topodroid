@@ -329,6 +329,7 @@ public class GMActivity extends Activity
     }
   }
     
+  @Override
   public void updateBlockList( DistoXDBlock blk )
   {
   }

@@ -12,8 +12,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
-
 // import android.widget.Toast;
 import android.os.AsyncTask;
 

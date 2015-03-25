@@ -16,15 +16,6 @@ import java.util.ArrayList;
 
 public interface DataListener 
 {
-  /**
-   * @param nr    number of new shots
-   * @param toast whether to toast feedbacks
-   *
-  public void refreshDisplay( int nr, boolean toast );
-
-  public void updateBlockList( DistoXDBlock blk );
-   */
-
   static final byte SHUTDOWN = (byte)0;
   static final byte SYNC     = (byte)0xfd;
   static final byte ACK = (byte)0xfe;

@@ -18,8 +18,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
-
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.Locale;

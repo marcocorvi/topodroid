@@ -13,8 +13,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
-
 import java.util.ArrayList;
 
 import android.widget.Toast;

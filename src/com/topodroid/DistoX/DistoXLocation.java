@@ -8,20 +8,9 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120517 comments
- * 20120521 parented with SurveyActivity
- * 20120603 fixed-info list
- * 20120726 TopoDroid log
- * 20121114 manual fixed station
- * 20121205 location units
- * 20130910 using GPSAveraging
- * 20140415 using GPSAveraging optional
- * 20140416 setError for required EditText inputs
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
 import java.util.Iterator;
 
 import java.io.StringWriter;
@@ -57,7 +46,7 @@ import android.location.GpsSatellite;
 // import android.location.GpsStatus.Listener;
 
 
-// import android.util.Log;
+import android.util.Log;
 
 public class DistoXLocation extends Dialog
                             implements View.OnClickListener
@@ -190,7 +179,7 @@ public class DistoXLocation extends Dialog
                              double asl
                            )
   {
-    // Log.v("DistoX", "addFixedPoint " + lng + " " + lat + " " + alt );
+    // Log.v("DistoX", "Location addFixedPoint " + lng + " " + lat + " " + alt );
 
     // FIXME TODO try to get altimetric altitude
 

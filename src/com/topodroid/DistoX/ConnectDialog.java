@@ -19,7 +19,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;

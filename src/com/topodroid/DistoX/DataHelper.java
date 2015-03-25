@@ -133,6 +133,7 @@ public class DataHelper extends DataSetObservable
 
   private SQLiteStatement updateFixedStationStmt;
   private SQLiteStatement updateFixedStatusStmt;
+  private SQLiteStatement updateFixedAslStmt;
 
 //these are real database "delete"
   private SQLiteStatement deletePhotoStmt;
@@ -249,6 +250,7 @@ public class DataHelper extends DataSetObservable
  
         updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
         updateFixedStatusStmt = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
+        updateFixedAslStmt = myDB.compileStatement( "UPDATE fixeds set altimetric=? WHERE surveyId=? AND id=?" );
 
         resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND status=0" );
         deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
@@ -2737,6 +2739,14 @@ public class DataHelper extends DataSetObservable
      updateFixedStatusStmt.bindLong( 2, sid );
      updateFixedStatusStmt.bindLong( 3, id );
      updateFixedStatusStmt.execute();
+   }
+
+   public void updateFixedAsl( long id, long sid, double asl )
+   {
+     updateFixedAslStmt.bindDouble( 1, asl );
+     updateFixedAslStmt.bindLong( 2, sid );
+     updateFixedAslStmt.bindLong( 3, id );
+     updateFixedAslStmt.execute();
    }
 
    public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }

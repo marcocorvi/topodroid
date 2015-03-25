@@ -57,7 +57,7 @@ public class LongLatAltDialog extends Dialog
   // private Button   mBtnBack;
   // private Button   mBtnCancel;
 
-  // private CheckBox mWGS84; // checked if alt is wgs84
+  private CheckBox mWGS84; // checked if alt is wgs84
 
   public LongLatAltDialog( Context context, DistoXLocation parent )
   {
@@ -77,14 +77,14 @@ public class LongLatAltDialog extends Dialog
     mEditLong  = (EditText) findViewById(R.id.edit_long );
     mEditLat   = (EditText) findViewById(R.id.edit_lat );
     mEditAlt   = (EditText) findViewById(R.id.edit_alt );
-    // mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
+    mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
     if ( mParent.mHasLocation ) {
       mEditLong.setText( FixedInfo.double2ddmmss( mParent.mLongitude ) );
       mEditLat.setText(  FixedInfo.double2ddmmss( mParent.mLatitude ) );
       mEditAlt.setText(  Integer.toString( (int)(mParent.mAltitude) )  );
-      // mWGS84.setChecked( true );
     }
+    mWGS84.setChecked( true );
 
     mBtnNS = (Button) findViewById(R.id.button_NS);
     mBtnNS.setOnClickListener( this );
@@ -172,12 +172,13 @@ public class LongLatAltDialog extends Dialog
       double asl = 0.0;
       altit = altit.replace(",", ".");
       try {
-        // if ( mWGS84.isChecked() ) {
-        //   alt = Double.parseDouble( altit );
-        // } else {
-        //   asl = Double.parseDouble( altit );
-        // }
-        alt = Double.parseDouble( altit );
+        if ( ! mWGS84.isChecked() ) {
+          asl = Double.parseDouble( altit );
+          Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
+          alt = asl + GeodeticHeight.geodeticHeight( latit, longit );
+        } else {
+          alt = Double.parseDouble( altit );
+        }
       } catch ( NumberFormatException e ) {
         mEditAlt.setError( mContext.getResources().getString( R.string.error_invalid_number) );
         return;
@@ -198,7 +199,7 @@ public class LongLatAltDialog extends Dialog
       if ( ! north ) lat = -lat;
       if ( ! east )  lng = -lng;
 
-      // Log.v("DistoX", "Long-Lat dialog add fixed " + lng + " " + lat + " " + alt + " " + asl );
+      // Log.v("DistoX", "Long-Lat dialog add LNG " + lng + " LAT " + lat + " ALT " + alt + " " + asl );
 
       mParent.addFixedPoint( lng, lat, alt, asl );
     }

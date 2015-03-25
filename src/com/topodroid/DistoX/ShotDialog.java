@@ -17,7 +17,6 @@
  */
 package com.topodroid.DistoX;
 
-// import java.Thread;
 import java.util.regex.Pattern;
 
 import android.app.Dialog;

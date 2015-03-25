@@ -69,13 +69,13 @@
          android:numeric="decimal"
          android:scrollHorizontally="true" />
 
-    <!-- CheckBox android:id="@+id/edit_wgs84"
+    <CheckBox android:id="@+id/edit_wgs84"
          android:layout_marginTop="2dp"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content" 
       	 android:ems="25"
          android:text="@string/altitude_wgs84"
-         / -->
+         />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
       android:layout_width="fill_parent" 

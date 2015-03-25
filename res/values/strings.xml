@@ -106,7 +106,7 @@
     <string name="import_zip_wait">Imported zip file may take long. Please wait ...</string>
     <string name="sketch_loading">Loading sketch ... please wait...</string>
     <string name="sketch_saving">Saving sketch ... please wait...</string>
-    <!-- string name="lookup_wait">Internet lookup ... please wait...</string -->
+    <string name="lookup_wait">Internet lookup ... please wait...</string>
  
 
     <string name="head_tail">Memory: </string>
@@ -119,7 +119,7 @@
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
     <string name="altitude_hint">WGS84 alt. [meters]</string>
-    <!-- string name="altitude_wgs84">WGS84 altitude</string -->
+    <string name="altitude_wgs84">WGS84 altitude</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Loop closure errors</string>
@@ -370,6 +370,7 @@
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_geomag"    >GeoMag    </string>
+    <string name="button_altitude">Ortometric Alt.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
