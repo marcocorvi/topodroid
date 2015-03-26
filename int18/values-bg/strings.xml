@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
+    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+
+    <string name="app_name">TopoDroid</string>
+
+    <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате на елементите за рисуване?</string>
+    <string name="version_title">Обновяване на версията</string>
+
+    <string name="POINT">ТОЧКА</string>
+    <string name="LINE">ЛИНИЯ</string>
+    <string name="AREA">ПЛОЩ</string>
+    <string name="HELP">ПОМОЩ</string>
+    <string name="STATION">РЕПЕР </string>
+
+    <string name="memoryA3">DistoX A3 памет</string>
+    <string name="memoryX310">DistoX X310 памет</string>
+    <string name="memory_data">DistoX данни</string>
+
+    <string name="td_symbol_text">Искате ли да инсталирате символите за рисуване?\nМожете да го направите по-късно с програмата TdSymbol</string>
+    <string name="td_symbol_ask">Не питай повече</string>
+
+    <string name="thp_user">друго</string>
+    <string name="thp_label">надпис</string>
+    <!-- string name="thp_danger">danger</string -->
+    <string name="thl_user">друго</string>
+    <string name="thl_wall">стена</string>
+    <string name="tha_user">друго</string>
+    <string name="tha_water">вода</string>
+
+    <string name="missing_area">ПЛОЩ</string>
+    <string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string>
+    <string name="missing_line">ЛИНИЯ</string>
+    <string name="missing_point">ТОЧКА</string>
+    <!-- string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
+    <string name="missing_station">Липсващ репер</string>
+    <string name="missing_symbols">Има липсващи символи.\nЗаписване независимо от това?</string>
+    <string name="missing_title">ЛИПСВАЩИ СИМВОЛИ</string>
+    <string name="missing_warning">Следните символи за рисуване липсват\n</string>
+    <string name="failed_snap_to_line">Няма близка точка за прикачане на границата на площта</string>
+    <string name="failed_snap_to_point">Няма близка точка за прикачане на избраната точка</string>
+
+    <string name="calib_new">Нова калибрация</string>
+    <string name="calib_exists">Калибрацията вече съществува</string>
+    <string name="calib_delete">Изтриване на калибрация </string>
+    <string name="calib_device_mismatch">Предупреждение: Различно устройство за тази калибрация</string>
+    <string name="calib_no_name">Името е задължително</string>
+    <string name="calib_gm_undelete">Възстановяване на данни за калибрацията?</string>
+    <string name="calib_saved">Калибрацията е записана</string>
+    <string name="calib_updated">Калибрацията е обновена</string>
+    <string name="calib_compute_groups">Изчисляване на калибр. групи...</string>
+    <string name="calib_compute_coeffs">Изчисляване на калибр. коефициенти...</string>
+    <!-- string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
+    <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
+    <string name="connect_failed">Невъзможна връзка</string>
+    <string name="data"> данни</string>
+    <string name="using">Използва %1$s %2$s</string>
+    <string name="calib_error">Грешка: %1$.4f градуси</string>
+    <string name="calib_max_error">Макс. грешка: %1$.4f градуси</string>
+    <string name="calib_iter">Повторения: %1$d</string>
+    <string name="calib_saturated_values">ПРЕДУПРЕЖДЕНИЕ: %1$d наситени данни</string>
+    <string name="algorithm">Алгоритъм:</string>
+    <string name="auto">автоматичен</string>
+    <string name="linear">линеен</string>
+    <string name="non_linear">нелинеен</string>
+   
+    <string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string>
+    <string name="device_busy">Устройството е заето</string>
+    <string name="device_illegal_addr">Грешен адрес в паметта</string>
+    <string name="device_info">Информация за устройството</string>
+    <string name="device_model_set">Наистина ли искате да промените модела на устройството?</string>
+    <string name="device_none">Не е избрано DistoX устройство</string>
+    <string name="device_pairing">Свързване: проверка на съобщения</string>
+    <string name="device_reset">Изчистване на DistoX паметта</string>
+    <string name="device_code">DistoX код %1$4d</string>
+    <string name="device_firmware">Фърмуер  %1$d.%2$d</string>
+    <string name="device_hardware">Хардуер  %1$d.%2$d</string>
+    <string name="device_status_angle">Единици за ъгли %1$s</string>
+    <string name="device_status_compass">Азимут/наклон %1$s</string>
+    <string name="device_status_calib">Режим %1$s</string>
+    <string name="device_status_silent">Тих %1$s</string>
+    <string name="bt_reset">Рестарт. на Bluetooth връзката</string>
+    <string name="save_as">запис като</string>
+
+    <string name="comment">Коментар</string>
+    <string name="flag">Флаг</string>
+    <string name="duplicate">Дублирана</string>
+    <!-- string name="regular">regular</string -->
+    <string name="surface">Повърхностна</string>
+    <string name="extend">Разгъване</string>
+    <string name="extend_ignore">Без</string>
+    <string name="extend_left">Наляво</string>
+    <string name="extend_right">Надясно</string>
+    <string name="extend_vert">Вертикално</string>
+    <string name="external_prompt">Въведете измервания</string>
+    <string name="splay_at_to">"&lt;,&gt;,Г,Д" в репер "ДО"</string>
+
+    <string name="few_data">Няма достатъчно данни</string>
+
+    <string name="import_title">Импортиране на файл</string>
+    <string name="import_wait">Импортиране... Моля изчакайте...</string>
+    <string name="import_already">Картировката е вече импортирана</string>
+    <string name="import_none">Няма файлове за импортиране</string>
+    <string name="import_zip_ok">Успешно импортиране на zip файл</string>
+    <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте ...</string>
+    <string name="sketch_loading">Зарежда не на скица... Моля изчакайте...</string>
+    <string name="sketch_saving">Записване на скица... Моля изчакайте...</string>
+    <!-- string name="lookup_wait">Internet lookup ... please wait...</string -->
+ 
+
+    <string name="head_tail">Памет: </string>
+    <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
+    <string name="head_tail_store_failed">Неуспешен запис на индекс от DistoX паметта</string>
+    <string name="illegal_data_value">Невалидни данни</string>
+    <string name="label_title">надпис</string>
+    <string name="label_text">Въведете текст за надписа</string>
+    <string name="altitude">Вис. </string>
+    <string name="latitude">Шир. </string>
+    <string name="longitude">Дълж. </string>
+    <string name="altitude_hint">WGS84 вис. [метри]</string>
+    <!-- string name="altitude_wgs84">WGS84 altitude</string -->
+    <string name="latitude_hint">Шир. гг:мм:сс.ссс</string>
+    <string name="longitude_hint">Дълж. гг:мм:сс.ссс</string>
+    <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
+    <string name="loop_none">няма полигон loop</string>
+    <!-- string name="line_delete">Delete line</string -->
+
+    <string name="error_azimuth_required">Необходим азимут</string>
+    <string name="error_length_required">Необходима дължина</string>
+    <string name="error_clino_required">Необходим наклон</string>
+    <string name="error_comment_required">Необходим коментар</string>
+    <string name="error_begin_required">Необходим начален адрес</string>
+    <string name="error_declination_number">Деклинацията трябва да е число</string>
+    <string name="error_end_required">Необходим краен адрес</string>
+    <string name="error_from_required">Необходим репер "ОТ"</string>
+    <string name="error_group_required">Необходим номер на група</string>
+    <string name="error_group_non_integer">Номерът на група трябва да е цяло число</string>
+    <string name="error_alt_required">Необходима височина</string>
+    <string name="error_invalid_number">Невалидно число</string>
+    <string name="error_lat_required">Необходима геогр. шир.</string>
+    <string name="error_long_required">Необходима геогр. дълж.</string>
+    <string name="error_name_required">Необходимо име</string>
+    <string name="error_start_required">Необходим репер</string>
+    <string name="error_station_already_fixed">Репера вече има координати</string>
+    <string name="error_station_required">Необходим репер</string>
+    <string name="error_station_non_existing">Несъществуващ репер</string>
+    <string name="error_sensor_required">Необходим сензор</string>
+    <string name="error_value_required">Необходима стойност</string>
+    
+    <string name="group_title">Групиране на данните за калибрация</string>
+    <string name="group_policy_four">Вид групиране: по четворки</string>
+    <string name="group_policy_sixteen">Вид групиране: четири групи по четири, останалите единични</string>
+    <string name="group_policy_distance">Вид групиране: групиране по ъглово разстояние</string>
+    <string name="group_reset">Изчистване на групите</string>
+
+    <string name="scale">мащаб</string>
+    <string name="reversed">обръщане</string>
+    <string name="options">опции</string>
+    <string name="outline">контур</string>
+    <string name="out">вън</string>
+    <string name="in">във</string>
+    <string name="none">няма</string>
+    <string name="barrier_add">Прекъсване на антената?</string>
+    <string name="barrier_del">Продължаване на антената?</string>
+
+    <string name="no_bt">Липсва Bluetooth</string>
+    <string name="no_calib">Липсва калибрация</string>
+    <string name="no_calibration">Не е избрана калибрация</string>
+    <string name="no_capture_app">Липсва програма за камера</string>
+    <string name="no_cave3d">Cave3D не е инсталирана</string>
+    <string name="no_db">Липсва база данни</string>
+    <string name="no_device_address">Липсва избрано устройство</string>
+    <string name="no_device_found">Не е намерено устройство</string>
+    <string name="no_geomag">Не е намерена GeoMag</string>
+    <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
+    <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
+    <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
+    <string name="no_photos">Картировката не съдържа снимка</string>
+    <string name="no_plots">Картировката не съдържа скици\nИзползвайте бутона Добавяне</string>
+    <string name="no_proj4">Proj4 не е инсталирана</string>
+    <string name="no_sensors">Картировката не съдържа измервания</string>
+    <string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string>
+    <string name="no_survey">Не е избрана картировка</string>
+    <string name="no_tdsymbol">TdSymbol не е инсталирана</string>
+    <string name="no_thmanager">ThManager не е инсталирана</string>
+    <string name="no_undelete">Няма елементи за възстановяване</string>
+
+    <string name="menu_3d">3 D</string>
+    <string name="menu_about">ЗА ПРОГРАМАТА</string>
+    <string name="menu_attach">СВЪРЗВАНЕ</string>
+    <string name="menu_calib">КАЛИБРАЦИЯ</string>
+    <!-- UNUSED string name="menu_attached">Connected</string -->
+    <!-- UNUSED string name="menu_ready">Ready</string -->
+    <string name="menu_delete">ИЗТРИВАНЕ</string>
+    <string name="menu_detach">ПРЕК. НА ВРЪЗКАТА</string>
+    <string name="menu_display">DISPLAY</string>
+    <string name="menu_distox">DISTOX</string>
+    <string name="menu_export">ЕКСПОРТИРАНЕ</string>
+    <string name="menu_firmware">ФЪРМУЕР</string>
+    <string name="menu_recover">ВЪЗСТАНОВЯВАНЕ</string>
+    <string name="menu_reload">ПРЕПРОЧИТАНЕ</string>
+    <string name="menu_help">ПОМОЩ</string>
+    <string name="menu_join_survey">КО-КАРТИРАНЕ</string>
+    <string name="menu_logs">ЛОГ ФАЙЛОВЕ</string>
+    <!-- string name="menu_manual">Manual</string -->
+    <string name="menu_options">НАСТРОЙКИ</string>
+    <string name="menu_palette">ПАЛИТРА</string>
+    <string name="menu_photo">СНИМКИ</string>
+    <string name="menu_sensor">СЕНЗОРИ</string>
+    <string name="menu_scan">СКАНИРАНЕ</string>
+    <string name="menu_station">РЕПЕРИ</string>
+    <string name="menu_stats">СТАТИСТИКА</string>
+    <string name="menu_survey">ИНФО ЗА КАРТИРОВКАТА</string>
+    <string name="menu_sync">СИНХРОНИЗИРАНЕ</string>
+
+    <string name="popup_join_pt">Прикачване към близка точка</string>
+    <string name="popup_snap_ln">Прикачване към близка линия</string>
+    <string name="popup_split_pt">Дублирана точка</string>
+    <string name="popup_split_ln">Разделяне на линията в точката</string>
+    <string name="popup_sharp_pt">Изправяне на сегмента</string>
+    <string name="popup_curve_pt">Изглаждане на сегмента</string>
+    <string name="popup_remove_pt">Изтриване на точката</string>
+
+    <string name="connected_none">Няма връзка</string>
+    <string name="connected_already">Вече има връзка</string>
+
+    <string name="not_available">Bluetooth не е достъпен</string>
+    <string name="not_enabled">Bluetooth не е разрешен</string>
+    <string name="not_implemented">Тази функционалност не достъпна все още</string>
+    <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
+    <string name="photo">снимка</string>
+    <string name="photo_comment_prompt">Въведете коментар към снимката</string>
+    <string name="photo_name">репер/име</string>
+    <string name="photo_photo">снимка</string>
+    <string name="photo_sensor">сензор</string>
+    <string name="photo_external">измерване</string>
+    <string name="photo_sensor_prompt">Изберете снимка или сензор</string>
+    <string name="photo_shot">добавяне на измерване</string>
+    <string name="photo_survey">Раделяне на картировка</string>
+    <string name="picture_no_station">Необходимо е име на репер</string>
+    <string name="plot_delete">Изтриване на скица?</string>
+    <string name="plot_duplicate_name">Дублирано име на скица</string>
+    <string name="plot_name">Име на скица</string>
+    <string name="plot_new">Нова скица</string>
+    <string name="plot_not_found">Скицата не е намерена</string>
+    <!-- string name="plot_null_name">Missing sketch name</string -->
+    <!-- string name="plot_null_start">Missing base station</string -->
+    <string name="plot_recover">Възстановяване на скицата от резервното копие?</string>
+    <string name="plot_start">Начален репер</string>
+    <!-- string name="plot_view">Viewed station</string -->
+    <string name="read_">Четене </string>
+    <string name="read_fail_with_code">Грешка при четене: код </string>
+    <string name="read_failed">Грешка при четене от DistoX</string>
+    <!-- string name="reading_file_failed">Failed file-read</string -->
+    <string name="saved_file_">Файлът е записан\ </string>
+    <string name="saving_">Записване</string>
+    <string name="saving_file_failed">Грешка при запис на файл</string>
+    <string name="scrap_name">Име на скица</string>
+    <string name="splay">странично измервание</string>
+    <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
+
+    <string name="sensor">сензор</string>
+    <!-- string name="sensor_accelerometer">accelerometer</string -->
+    <string name="sensor_gravity">гравитация</string>
+    <!-- string name="sensor_humidity">humidity</string -->
+    <string name="sensor_light">осветеност</string>
+    <string name="sensor_magnetic_field">магнитно поле</string>
+    <!-- string name="sensor_orientation">orientation</string -->
+    <string name="sensor_pressure">налягане</string>
+    <string name="sensor_proximity">близост</string>
+    <string name="sensor_temperature">температура</string>
+    <string name="sensor_extern">външен</string>
+    <string name="sensor_type">тип</string>
+    <string name="sensor_value">стойност</string>
+    <string name="sensor_comment">коментар</string>
+
+    <!-- string name="shot_clino">clino</string -->
+    <!-- string name="shot_compass">compass</string -->
+    <string name="shot_from">от</string>
+    <string name="shot_info">Въведете данни за отсечката</string>
+    <string name="shot_leg">Повтаряще се отсечка</string>
+    <string name="shot_all_splay">Група странични изм.</string>
+    <!-- string name="shot_length">length</string -->
+    <string name="shot_note">бележка</string>
+    <string name="shot_reverse">обратен</string>
+    <string name="shot_to">до</string>
+
+    <string name="make_surface">Повърхността съществува. Заместване?</string>
+
+    <string name="sketch3d_name">Име</string>
+    <string name="sketch3d_new">Нов 3D модел</string>
+    <string name="sketch3d_next">Следващ репер</string>
+    <string name="sketch3d_null_name">Липсва име на 3D модела</string>
+    <string name="sketch3d_null_next">Липсва следващ репер на 3D модела</string>
+    <string name="sketch3d_null_start">Липсва начален репер на 3D модела</string>
+    <string name="sketch3d_start">Начален репер</string>
+
+    <string name="station">репер/string>
+    <string name="station_ask">Вмъкване на репер в скицата?</string>
+    <string name="station_set">Продължаване на картировката от тук?</string>
+    <!-- string name="station_base">reference station</string -->
+    <!-- string name="station_next">next station</string -->
+    <string name="station_viewed">избран репер</string>
+    <string name="survey_exists">Картировката вече съществува</string>
+    <string name="survey_date">гггг.мм.дд</string>
+    <string name="survey_delete">Изтриване на картировката?</string>
+    <string name="survey_split">Разделяне на картировката?</string>
+    <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
+    <string name="declination">Магн. деклинация</string>
+    <string name="description">описание</string>
+    <string name="name">име</string>
+    <string name="team">картировачи</string>
+    <!-- string name="toggle_device">Toggle device calibration mode</string -->
+    <string name="toggle_failed">Грешка при превключване на DistoX</string>
+    <string name="toggle_ok">Включен режим на калибрация на DistoX</string>
+    <string name="undelete_text">Изберете какво искате да възстановите</string>
+    <string name="visible_border">видима граница</string>
+    <string name="vthreshold">вертикална граница</string>
+    <string name="wait_scan">Сканиране, моля изчакайте...</string>
+    <string name="write_failed">Грешка при запис в DistoX</string>
+    <string name="write_ok">Калибрацията е записана в DistoX</string>
+    <string name="zip_saved">Записан </string>
+    <string name="zip_failed">Грешка при архивиране</string>
+    <string name="unzip_fail">Грешка при разархивиране</string>
+    <!-- string name="zoom_in_out">Zoom in/out</string -->
+
+    <string name="survey_info">Информация за картировката</string>
+    <string name="stat_component">Компоненти %1$d</string>
+    <string name="stat_depth">Дълбочина %1$.1f %2$.1f"</string>
+    <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f</string>
+    <string name="stat_leg">Legs %1$d %2$.1f</string>
+    <string name="stat_length">Дължина %1$.1f</string>
+    <string name="stat_loop">Полигони %1$d</string>
+    <string name="stat_shot">Отсечки  %1$d,   Дублирани %2$d,   Повърхностни %3$d</string>
+    <string name="stat_splay">Странични %1$d</string>
+    <string name="stat_station">Репери %1$d</string>
+    <string name="stat_surface">Повърхн. отсечки %1$d %2$.1f</string>
+    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+
+    <string name="hide_blank">Празни отсечки</string>
+    <string name="hide_leg">Повтарящи се отсечки</string>
+    <string name="hide_ids">Номера на отсечки</string>
+    <string name="hide_splay">Странични измервания</string>
+
+    <string name="surveys">КАРТИРОВКИ</string>
+    <string name="calibs">КАЛИБРИРАНИЯ</string>
+
+    <string name="plan">ПЛАН</string>
+    <string name="extended">РАЗРЕЗ</string>
+    <string name="v_section">ВЕРТ. СЕЧЕНИЕ</string>
+    <string name="h_section">ХОР. СЕЧЕНИЕ</string>
+
+    <string name="distox_err_ok">OK</string>
+    <string name="distox_err_headtail">Грешка при четене от паметта на DistoX</string>
+    <string name="distox_err_headtail_io">Вх/Изх грешка в DistoX паметта</string>
+    <string name="distox_err_headtail_eof">Грешка в DistoX паметта: EOF</string>
+    <string name="distox_err_connected">Устройството е вече свързано</string>
+
+    <string name="ask_close">Затваряне на TopoDroid?</string>
+    <string name="ask_reset">Изчистване на паметта на DistoX?</string>
+    <string name="ask_close_survey">Затваряне на картировката?</string>
+    
+
+    <string name="button_add"       >Добавяне  </string>
+    <string name="button_back"      >Обратно   </string>
+    <string name="button_cancel"    >Отказ     </string>
+    <string name="button_convert"   >Конверт.  </string>
+    <string name="button_delete"    >Изтриване </string>
+    <string name="button_eval"      >Оценка    </string>
+    <string name="button_eval_cal"  >Оц./кал.  </string>
+    <string name="button_geomag"    >GeoMag    </string>
+    <string name="button_gps_start" >GPS       </string>
+    <!-- string name="button_gps_stop"  >Stop      </string -->
+    <!-- string name="button_manual"    >Manual    </string -->
+    <!-- string name="button_measure"   >Measure   </string -->
+    <string name="button_photo"   >Снимка</string>
+    <string name="button_sensor"  >Сензори</string>
+    <string name="button_direction">Азимут/Наклон</string>
+    <string name="button_plot"    >Скица</string>
+    <string name="button_ok"        >OK        </string>
+    <string name="button_no"        >Не        </string>
+    <string name="button_open"      >Отваряне  </string>
+    <string name="button_read"      >Четене    </string>
+    <string name="button_dump"      >Запис     </string>
+    <string name="button_reset"     >Нулиране   </string>
+    <string name="button_clear"     >Изчистване</string>
+    <string name="button_save"      >Запис     </string>
+    <string name="button_select"    >Избор     </string>
+    <string name="button_store"     >Съхраняване</string>
+    <string name="button_start"     >Старт     </string>
+    <string name="button_stop"      >Стоп      </string>
+    <string name="button_upload"    >Качване   </string>
+    <string name="button_yes"       >Да       </string>
+
+    <string name="button_sharp"     >Изострям</string>
+    <string name="button_rock"      >Скала</string>
+<!--
+    <string name="button_close"     >Close     </string>
+    <string name="button_erase"     >Erase     </string>
+    <string name="button_next"      >Next      </string>
+    <string name="button_prev"      >Previous  </string>
+    <string name="button_split"     >Split     </string>
+    <string name="button_toggle"    >Toggle CAL mode  </string>
+-->
+    <string name="button_write"     >Качване</string>
+
+    <string name="mode_leg">Отсечки</string>
+    <string name="mode_splay">Странични</string>
+    <string name="mode_station">Репери</string>
+    <string name="mode_grid">Таблица</string>
+    <string name="mode_fixed">Фикс. точки</string>
+
+    <string name="remote_title">Дист. управление</string>
+    <string name="remote_on">Вкл. лазер</string>
+    <string name="remote_off">Изкл. лазер</string>
+    <string name="remote_measure">Измерване</string>
+    <string name="remote_reset">Рестарт. Bluetooth</string>
+    <string name="download">Сваляне</string>
+
+<!--
+    <string name="btn_3d">3D</string>
+-->
+    <string name="btn_compass">Compass</string>
+    <string name="btn_csurvey">cSurvey</string>
+    <string name="btn_csv">CSV</string>
+    <string name="btn_dxf">DXF</string>
+    <string name="btn_kml">KML</string>
+    <string name="btn_oziexplorer">OziExplorer</string>
+    <string name="btn_man">Manual</string>
+    <string name="btn_symbol">Инструменти за рисуване</string>
+    <string name="btn_png">PNG</string>
+    <string name="btn_pockettopo">PocketTopo</string>
+    <string name="btn_survex">Survex</string>
+    <string name="btn_therion">Therion</string>
+    <string name="btn_vtopo">VisualTopo</string>
+    <string name="btn_walls">Walls</string>
+    <string name="btn_svg">SVG</string>
+    <string name="btn_zip">Zip</string>
+
+<!-- FIXME_SKETCH_3D -->    
+    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <string name="title_sketch_edit">Редакт. 3D повърхност</string>
+    <string name="title_sketch_shot">Нова отсечка</string>
+    <string name="title_sketch_refs">Изглед</string>
+    <string name="title_sketch_section_type">Тип сечение</string>
+    <string name="title_sketch_select">Избор на елемент</string>
+
+    <string name="sketch_mode_single">Единична отсечка</string>
+    <string name="sketch_mode_ngbh">Близки отсечки</string>
+    <string name="sketch_mode_all">Всички отсечки</string>
+    <string name="sketch_delete">Изтриване на 3D модел?</string>
+    <string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string>
+
+    <string name="btn_head">head</string>
+    <string name="btn_stretch">Разтягане</string>
+    <string name="btn_extrude">Избутване</string>
+    <string name="btn_erase">Изтриване</string>
+    <string name="btn_cut">cut</string>
+    <string name="btn_vertical">Вертикално</string>
+    <string name="btn_horizontal">Хоризонтално</string>
+
+    <!-- select buttin labels -->
+    <string name="btn_section">Сечение</string>
+    <string name="btn_step">Стъпка</string>
+    <string name="btn_shot">Отсечка</string>
+    <string name="btn_join">Свързване</string>
+
+    <string name="button_redraw">Прерисуване</string>
+    <string name="button_erase">Изтриване</string>
+    <string name="btn_surface">Повърхност</string>
+
+    <string name="station_next">СЛЕДВАЩ</string>
+    <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
+    <string name="few_line_points">Линията има твърде малко точки</string>
+    <string name="line_delete">Изтр. на линия</string>
+
+    <string name="menu_head">НАЧАЛО</string>
+    <string name="menu_save_th2">ЗАПИС НА TH2</string>
+<!-- END_SKETCH_3D -->    
+
+    <string name="help_help">Помощ</string>
+    <string name="help_manual">Ръководство</string>
+    <string name="help_more">Показване на допълнителни команди</string>
+    <string name="help_less">Връщане към основните команди</string>
+    
+    <string name="help_coeff">Показване на коеф. на калибрация</string>
+    <string name="help_continue">Продължаване на линия</string>
+    <string name="help_current_station">Записани репери</string>
+    <string name="help_device">Управление на устройството</string>
+    <string name="help_add_topodroid">Нова картировка/калибрация</string>
+    <string name="help_import">Импортиране на архив/картировка</string>
+    <string name="help_symbol">Включване/изключване на инструменти за рисуване</string>
+    <string name="help_therion">Програма Therion мениджър</string>
+    <string name="help_database">Програма за преглеждане на базата данни (SQliteViewer)</string>
+    <string name="help_prefs">Настройки</string>
+    <string name="help_log">Включване/изключване на лог файловете</string>
+    <string name="help_join_survey">Присъединяване към картировката</string>
+    <string name="help_info_topodroid">TopoDroid информация</string>
+    <string name="help_download">Сваляне на данни</string>
+    <string name="help_splay">Автоматично определяне на репери за страничните отсечки</string>
+    <string name="help_display">Режим на показване</string>
+    <string name="help_display_calib">Показване на изтрити отсечки</string>
+    <string name="help_plot">Режим на скициране</string>
+    <string name="help_note">Редактиране на бележки</string>
+    <string name="help_bluetooth">Рестарт. на Bluetooth</string>
+    <string name="help_remote">Контрол на DistoX</string>
+    <string name="help_add_shot">Добавяне на отсечка ръчно</string>
+    <string name="help_info_shot">Статистика на картировката</string>
+    <string name="help_survey_info">Информация за картировката</string>
+    <string name="help_undelete">Възстановяване на изтрити данни</string>
+    <string name="help_photo">Снимки</string>
+    <string name="help_sensor">Измервания</string>
+    <string name="help_3d">3D програма (Cave3D)</string>
+    <string name="help_draw">Вкл. на режим на скициране</string>
+    <string name="help_edit">Вкл. на режим на редактиране</string>
+    <string name="help_refs">Избор на база за скициране</string>
+    <string name="help_stats">Статистика на картировката</string>
+    <string name="help_save_plot">Експортиране на скица</string>
+    <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>
+    <string name="help_trash">Изтриване на скица</string>
+    <string name="help_undo">Изтриване на действие от скицата</string>
+    <string name="help_redo">Възстановяване на действие от скицата</string>
+    <string name="help_symbol_plot">Избор на елемент за рисуване</string>
+    <!-- string name="help_clear">Clear selection</string -->
+    <string name="help_eraser">Изтриване на елемент</string>
+    <string name="help_previous">Предишен избран елемент</string>
+    <string name="help_next">Следващ избран елемент</string>
+    <string name="help_recover">Възстановяване на скица от резервно копие</string>
+   
+    <string name="help_line_point">Действия за точка от линия: съединяване, разделяне, премахване</string>
+<!--
+    <string name="help_to_point">Move selected point to join with the nearest point</string>
+    <string name="help_split_point">Split the point into two [line/area]</string>
+    <string name="help_split_line">Split the line into two at the point</string>
+    <string name="help_kink">Use a straight line at the point [line/area]</string>
+-->
+    <string name="help_note_plot">Редактиране на настройки на избрания елемент</string>
+    <string name="help_save">Запис на промените в информацията за картитовката</string>
+    <string name="help_save_calib">Запис на промените в информацията за калибрацията</string>
+    <string name="help_export_survey">Експортиране на картировката</string>
+    <string name="help_loc">GPS координати</string>
+    <string name="help_delete_survey">Изтриване на картировката</string>
+    <string name="help_delete_calib">Изтриване на калибрация</string>
+    <string name="help_detach">Изчистване на текушия избор на DistoX choice</string>
+    <string name="help_firmware">Обновяване на DistoX2 фърмуер</string>
+    <string name="help_toggle">Вкл./изкл. на режим калибрация</string>
+    <string name="help_sdcard">Управление не паметта на DistoX</string>
+    <string name="help_read">Прочитане и показване на калибр. коефициенти от DistoX</string>
+    <string name="help_info_device">Информация за устройството</string>
+    <string name="help_scan">Сканиране за DistoX устройства</string>
+    <string name="help_open_calib">Отваряне на калибрация</string>
+    <string name="help_export_calib">Експорт на калибрация</string>
+    <string name="help_group">Автоматично определяне на групи отсечки</string>
+    <string name="help_cover">Показване на ъгловото разпределение на калибрацията</string>
+    <string name="help_compute">Изчисляване на калибрация</string>
+    <string name="help_write">Запис на калибр. коефициенти в DistoX</string>
+<!-- FIXME_SKETCH_3D -->
+    <string name="help_refs_model">Режим преглед</string>
+    <string name="help_one_model">Оразмеряване на 3d модела към екрана</string>
+    <string name="help_surface">Повърхност</string>
+    <string name="help_save_model">Експортиране на 3D модел</string>
+    <string name="help_trash_model">Изтриване на 3D модел</string>
+    <string name="help_head_model">Ориентиране на 3D модел</string>
+    <string name="help_erase_model">Изтриване на регион</string>
+    <string name="help_cut_model">Отрязване на регион</string>
+    <string name="help_stretch_model">Разтягане на регион</string>
+    <string name="help_extrude_model">Екструд. на регион</string>
+    <string name="help_refine_center">Изчистване на повърхност в центровете на триъгълниците</string>
+    <string name="help_refine_sides">Изчистване на повърхност в страните на триъгълниците</string>
+    <string name="help_refine_point">Изчистване на повърхност в точка</string>
+    <string name="help_refine_triangle">Изчистване на повърхност в дългите страни</string>
+  
+
+    <string name="title_calib">Калибрации</string>
+    <string name="title_coverage">Разпределение на данните от калибрацията</string>
+    <string name="title_coeff">Коефициенти на калибрацията</string>
+    <string name="title_current_station">Записани репери</string>
+    <string name="title_device">DistoX устройства</string>
+    <string name="title_discover">Сканиране на DistoX устройства...</string>
+    <string name="title_draw_area">ПЛОЩ %1$s</string>
+    <string name="title_draw_line">ЛИНИЯ %1$s</string>
+    <string name="title_draw_point">ТОЧКА %1$s</string>
+    <string name="title_edit">Редкция</string>
+    <string name="title_erase">Изтриване</string>
+    <string name="title_location">Местоположение</string>
+    <string name="title_location_gps">Местоположение *</string>
+    <string name="title_manual">TopoDroid ръководство</string>
+    <string name="title_mode">Режим на показване</string>
+    <string name="title_move">Преместване</string>
+    <string name="title_note">Бележки за картировката</string>
+    <string name="title_photo">Снимки/Измервания</string>
+    <string name="title_photo_comment">Коментар за снимка</string>
+    <string name="title_plot_save">Запис на скица като</string>
+    <string name="title_refs">Бази на скици</string>
+    <string name="title_scraps">Скици от картировката</string>
+    <string name="title_shift">Изместване</string>
+    <string name="title_stats">Статистика</string>
+    <string name="title_survey">Информация за картировката</string>
+    <string name="title_survey_export">Експортиране на картировка като</string>
+    <string name="title_calib_export">Експортиране на калибрация като</string>
+    <!-- string name="title_zoom">Приближаване</string -->
+
+  <string name="pref_cat_survey">НАСТРОЙКИ КАРТИРОВКА</string>
+  <string name="pref_cat_drawing">НАСТРОЙКИ СКИЦИ</string>
+  <string name="pref_cat_calib">НАСТРОЙКИ КАЛИБРАЦИЯ</string>
+  <string name="pref_cat_device">НАСТРОЙКИ DISTOX</string>
+  <string name="pref_cat_sketch">НАСТРОЙКИ 3D МОДЕЛ</string>
+  <string name="pref_cat_log">НАСТРОЙКИ ЛОГ ФАЙЛ</string>
+
+  <string name="pref_locale_title">Език</string>
+  <string name="pref_locale_summary">Език</string>
+
+  <string name="pref_raw_data_title">Необработени данни</string>
+  <string name="pref_raw_data_summary">Показване на необработени данни</string>
+  <string name="pref_bootloader_title">Зареждане на фърмуер</string>
+  <string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string>
+  <string name="pref_cosurvey_title">Ко-картиране</string>
+  <string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string>
+  <string name="pref_export_shots_title">Формат на експортираните данни</string>
+  <string name="pref_export_shots_summary">Формат на експортираните данни по подразбиране</string>
+  <string name="pref_extra_buttons_title">Ниво на функциите</string>
+  <string name="pref_extra_buttons_summary">Ниво на показваните менюта: основни, нормални, пълни...</string>
+  <string name="pref_size_buttons_title">Размер бутони</string>
+  <string name="pref_size_buttons_summary">Размер на бутоните за главните функции</string>
+  <string name="pref_size_buttons_message">Въведете размер на бутоните (в пиксели)</string>
+
+  <string name="pref_leg_shots_title">Брой измервания за антена</string>
+  <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
+
+  <string name="pref_sock_type_title">Socket</string>
+  <string name="pref_sock_type_summary">Socket create</string>
+  <!-- string name="pref_device_type_title">DistoX тип</string -->
+  <!-- string name="pref_device_type_summary">Модел на DistoX</string -->
+  <string name="pref_comm_retry_title">Опити за връзка</string>
+  <string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string>
+  <string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string>
+  <string name="pref_comm_retry_message">Брой опити за връзка при грешка</string>
+  <string name="pref_conn_mode_title">Тип на връзката за данни</string>
+  <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
+  <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
+  <string name="pref_auto_reconnect_summary">Автоматично свързване при загуба на връзката</string>
+  <string name="pref_crs_title">C R S </string>
+  <string name="pref_crs_summary">CRS име</string>
+  <string name="pref_crs_message">Въведете CRS име както в Proj4</string>
+  <string name="pref_gps_averaging_title">GPS усредняване</string>
+  <string name="pref_gps_averaging_summary">Да се използва ли усредняване на GPS координати</string>
+
+  <string name="pref_plot_screen_title">ЕКРАН ЗА РИСУВАНЕ</string>
+  <string name="pref_tool_screen_title">ИНСТРУМЕНТИ ЗА РИСУВАНЕ</string>
+  <string name="pref_location_title">КООРДИНАТИ</string>
+  <string name="pref_accuracy_title">ТОЧНОСТ</string>
+  <string name="pref_shot_data_title">ДАННИ ЗА ОТСЕЧКА</string>
+  <string name="pref_shot_units_title">МЕРНИ ЕДИНИЦИ</string>
+  <string name="pref_cwd_title">РАБОТНА ДИРЕКТОРИЯ</string>
+  <string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string>
+  <string name="pref_cwd_message">Въведете директория на TopoDroid</string>
+  <string name="pref_text_size_title">Размер на текста</string>
+  <string name="pref_text_size_summary">Размер на шрифта в текстове</string>
+  <string name="pref_text_size_message">Размер на шрифта в текстове</string>
+  <string name="pref_closeness_title">Радиус при избиране</string>
+  <string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string>
+  <string name="pref_closeness_message">Радиус за избиране на елемент от скицата</string>
+  <string name="pref_altitude_title">Надморска височина</string>
+  <string name="pref_altitude_summary">Тип на надморската височина</string>
+  <string name="pref_altimetric_title">Ортометрична справка за височината</string>
+  <string name="pref_altimetric_summary">Ортометрична справка за височината в интернет</string>
+  <string name="pref_survey_stations_title">Репери</string>
+  <string name="pref_survey_stations_summary">Автоматични репери</string>
+  <string name="pref_accel_thr_title">Толеранс на акселерометъра</string>
+  <string name="pref_accel_thr_summary">Толеранс на акселерометричните данни за отсечките</string>
+  <string name="pref_accel_thr_message">Толеранс на акселерометричните данни за отсечките</string>
+  <string name="pref_mag_thr_title">Магнитен толеранс</string>
+  <string name="pref_mag_thr_summary">Толеранс на магнитното поле на отсечките</string>
+  <string name="pref_mag_thr_message">Толеранс на магнитното поле на отсечките</string>
+  <string name="pref_dip_thr_title">Толеранс на магнитния наклон</string>
+  <string name="pref_dip_thr_summary">Толеранс на наклона на магн. поле за отсечките</string>
+  <string name="pref_dip_thr_message">Толеранс на наклона на магн. поле за отсечките</string>
+
+  <string name="pref_leg_title">Толеранс на отсечките</string>
+  <string name="pref_leg_summary">Толеранс между измерванията за отсечка на антената</string>
+  <string name="pref_leg_message">Толеранс между измерванията за отсечка на антената</string>
+
+  <string name="pref_team_title">Картировачи</string>
+  <string name="pref_team_summary">Екип картировачи</string>
+  <string name="pref_team_message">Екип картировачи по подразбиране</string>
+
+  <string name="pref_ethr_title">Граница за разгъване</string>
+  <string name="pref_ethr_summary">Граница за верт. разгъване на странични отсечки</string>
+  <string name="pref_ethr_message">Граница, над която да се изчислява разгъване</string>
+  <string name="pref_vthr_title">Вертикална граница на отсечка</string>
+  <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Запад/Изт/Сев/Юг</string>
+  <string name="pref_vthr_message">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Запад/Изт/Сев/Юг</string>
+
+  <string name="pref_hthr_title">Граница за хор. сечения</string>
+  <string name="pref_hthr_summary">Граница, за считане на сечение за хоризонтално или вертикално</string>
+  <string name="pref_hthr_message">Наклон, над който сеч. във вертикалния план са хоризонтални</string>
+  <string name="pref_bitmap_scale_title">PNG резолюция</string>
+  <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
+  <string name="pref_bitmap_scale_message">Резолюция на експортирани скици в PNG формат</string>
+  <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
+  <string name="pref_thumbnail_summary">Резолюция на мини-картинки</string>
+  <string name="pref_thumbnail_message">Резолюция на мини-картинки</string>
+  <string name="pref_shot_timer_title">Таймер на измерването</string>
+  <string name="pref_shot_timer_summary">Секунди за изчакване преди измерване на отсечка</string>
+  <string name="pref_shot_timer_message">Секунди за изчакване преди измерване на отсечка</string>
+  <string name="pref_beep_volume_title">Сила на звука при таймер-измерване</string>
+  <string name="pref_beep_volume_summary">Сила на звука в проценти при измерване с таймер</string>
+  <string name="pref_beep_volume_message">Сила на звука в проценти при измерване с таймер</string>
+  <string name="pref_drawing_unit_title">Размер на инструмент "точка"</string>
+  <string name="pref_drawing_unit_summary">Размер на инструмента за рисуване тип "точка"</string>
+  <string name="pref_drawing_unit_message">Размер на инструмента за рисуване тип "точка"</string>
+  <string name="pref_segment_title">Отстояния между точки на линия</string>
+  <string name="pref_segment_summary">Минимално разстояние м/у точките в "линия"</string>
+  <string name="pref_segment_message">Минимално разстояние м/у точките в "линия"</string>
+  <string name="pref_linestyle_title">Стил на линия</string>
+  <string name="pref_linestyle_summary">Стил на линията за рисуване</string>
+  <string name="pref_lineacc_title">"Безие" точност</string>
+  <string name="pref_lineacc_summary">Точност на интерполация на криви "Безие"</string>
+  <string name="pref_lineacc_message">Точност на кубична интерполация на криви "Безие"</string>
+  <string name="pref_linecorner_title">Граница на ъгъл "Безие"</string>
+  <string name="pref_linecorner_summary">Граница на ъгъл при криви "Безие"</string>
+  <string name="pref_linecorner_message">Граница на отчитане на ъгъл при криви "Безие"</string>
+  <string name="pref_calib_algo_title">Алгоритъм</string>
+  <string name="pref_calib_algo_summary">Алгоритъм за калибрация</string>
+  <string name="pref_group_by_title">Метод на групиране</string>
+  <string name="pref_group_by_summary">Метод за групиране на измерванията в калибрацията</string>
+  <string name="pref_group_title">Толеранс на групата tolerance</string>
+  <string name="pref_group_summary">Толеранс между отсечките в една и съща група</string>
+  <string name="pref_group_message">Толеранс между отсечките в една и съща група</string>
+  <string name="pref_error_title">Грешка</string>
+  <string name="pref_error_summary">Минимална грешка при калибрация</string>
+  <string name="pref_error_dialogtitle">Грешка при калибрация</string>
+  <string name="pref_error_message">Минимална грешка при калибрация</string>
+  <string name="pref_iter_title">Повторения</string>
+  <string name="pref_iter_summary">Макс. брой повторения</string>
+  <string name="pref_iter_dialogtitle">Повторения при калибрация</string>
+  <string name="pref_iter_message">Повторения при калибрация</string>
+  <string name="pref_label_size_title">Размер на надписи</string>
+  <string name="pref_label_size_summary">Размер на надписи в скиците</string>
+  <string name="pref_label_size_message">Размер на надписи в скиците</string>
+  <string name="pref_arrow_length_title">Размер на стрелка в сечение</string>
+  <string name="pref_arrow_length_summary">Размер на помощната стрелка за посока на сечение</string>
+  <string name="pref_arrow_length_message">Размер на помощната стрелка за посока на сечение</string>
+  <string name="pref_dot_radius_title">Размер на зелена точка</string>
+  <string name="pref_dot_radius_summary">Размер на зелена точка</string>
+  <string name="pref_dot_radius_message">Размер на зелена точка при избор на елементи в скицата</string>
+  <string name="pref_line_thickness_title">Широчина на линия</string>
+  <string name="pref_line_thickness_summary">Широчина на линията за рисуване</string>
+  <string name="pref_line_thickness_message">Широчина на линията за рисуване</string>
+  <string name="pref_fixed_thickness_title">Широчина на линия от антената</string>
+  <string name="pref_fixed_thickness_summary">Широчина на линия от антената</string>
+  <string name="pref_fixed_thickness_message">Широчина на линия от антената</string>
+  <string name="pref_device_title">Устройство</string>
+  <string name="pref_device_summary">Адрес на DistoX</string>
+  <string name="pref_device_message">Адрес на DistoX</string>
+  <string name="pref_checkBT_title">Bluetooth</string>
+  <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
+  <string name="pref_checkAttached_title">Проверка на антена</string>
+  <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
+  <string name="pref_autoStations_title">Репери в скицата</string>
+  <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
+  <string name="pref_loopClosure_title">Затваряне на полигони</string>
+  <string name="pref_loopClosure_summary">Дали да се корегира грешката при затваряне на полигони</string>
+  <string name="pref_splayExtend_title">Разгъване на странични отсечки</string>
+  <string name="pref_splayExtend_summary">Разгъване на странични отсечки(измервания) наляво/надясно във вертикалния разрез</string>
+
+  <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
+  <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>
+  <string name="pref_station_size_title">Размер на име на репер</string>
+  <string name="pref_station_size_summary">Размер на име на репер</string>
+  <string name="pref_station_size_message">Размер на име на репер в скицата</string>
+
+  <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
+  <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>
+  <string name="pref_sketchLineStep_title">Максимална страна</string>
+  <string name="pref_sketchLineStep_summary">Максимален размер на страна на триъгълник (метри)</string>
+  <string name="pref_sketchLineStep_message">Максимален размер на страна на триъгълник (метри)</string>
+  <string name="pref_sketchBorderStep_title">Стъпка</string>
+  <string name="pref_sketchBorderStep_summary">Разстояние между точки в линията</string>
+  <string name="pref_sketchBorderStep_message">Разстояние между точки в линията</string>
+  <string name="pref_sketchSectionStep_title">Стъпка в секцията</string>
+  <string name="pref_sketchSectionStep_summary">Разстояние между секциите</string>
+  <string name="pref_sketchSectionStep_message">Разстояние между междинните секции</string>
+  <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
+  <string name="pref_sketchDeltaExtrude_summary">Мащабираща фактор за екструдиране</string>
+  <string name="pref_sketchDeltaExtrude_message">Мащабираща фактор за екструдиране</string>
+  <string name="pref_sketchCompassReadings_title">Отчет на компаса</string>
+  <string name="pref_sketchCompassReadings_summary">Брой отчитания за усредняване</string>
+  <string name="pref_sketchCompassReadings_message">Брой отчитания на азимут за усредняване</string>
+
+  <string name="pref_unit_length_title">Мерни единици за дължина</string>
+  <string name="pref_unit_length_summary">Мерни единици за дължина</string>
+  <string name="pref_unit_angle_title">Мерни единици за ъгли</string>
+  <string name="pref_unit_angle_summary">Мерни единици за ъгли</string>
+  <string name="pref_unit_location_title">Формат на координати</string>
+  <string name="pref_unit_location_summary">Формат на координати</string>
+
+  <string name="pref_log_stream_summary">Лог файл</string>
+  <string name="pref_log_stream_title">Лог файл</string>
+  <string name="pref_log_bt">Bluetooth</string>
+  <string name="pref_log_bezier">"Безие" криви</string>
+  <string name="pref_log_calib">Калибрация</string>
+  <string name="pref_log_comm">Bluetooth комуникация</string>
+  <string name="pref_log_csurvey">cSurvey</string>
+  <string name="pref_log_data">Данни за картировка</string>
+  <string name="pref_log_db">База данни</string>
+  <string name="pref_log_debug">Пров. грешки</string>
+  <string name="pref_log_device">Устройство</string>
+  <string name="pref_log_distox">DistoX</string>
+  <string name="pref_log_err">Грешка</string>
+  <string name="pref_log_fixed">GPS точки</string>
+  <string name="pref_log_input">Входни данни</string>
+  <string name="pref_log_loc">Местоположение</string>
+  <string name="pref_log_num">Редуциране на данни</string>
+  <string name="pref_log_photo">Снимки</string>
+  <string name="pref_log_plot">Скици</string>
+  <string name="pref_log_proto">DistoX протокол</string>
+  <string name="pref_log_ptopo">PocketTopo</string>
+  <string name="pref_log_sensor">Сензори</string>
+  <string name="pref_log_shot">Отсечки</string>
+  <string name="pref_log_sync">Ко-картиране</string>
+  <string name="pref_log_survey">Картировки</string>
+  <string name="pref_log_therion">Therion</string>
+  <string name="pref_log_units">Мерни единици</string>
+  <string name="pref_log_zip">ZIP</string>
+
+  <string name="line_bezier">"Безие"</string>
+  <string name="line_fine">фини</string>
+  <string name="line_normal">нормални</string>
+  <string name="line_coarse">груби</string>
+  <string name="units_ddmmss">ггммсс</string>
+  <string name="units_dd">градуси</string>
+  <string name="units_grads">гради</string>
+  <string name="units_meters">метри</string>
+  <string name="units_feet">футове</string>
+  <string name="alt_wgs">елипсоидна</string>
+  <string name="alt_ortho">ортометрична</string>
+  <string name="splay_extend">Разгъване на странични отсечки</string>
+
+    <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>
+    <string name="welcome_text">
+\nTopoDroid е Андроид приложение с отворен код за картиране на пещери с помощта на на DistoX лазерна рулетка.
+\n\nБез гаранция: с използването му, вие се съгласявате, че авторът не носи отговорност за загуба на данни или други проблеми, които може да срещнете при използване на програмата.
+\n\nПосетете http://sites.google.com/site/speleoapps за допълнителни програми и документация.
+\nИзпращайте коментари, описания на проблеми и предложение на marco.corvi@gmail.com
+\n
+    </string>
+
+  <string name="firmware_title">Обновяване на фърмуер</string>
+  <string name="firmware_file_title">Файлове фърмуер</string>
+  <string name="firmware_text">
+\n[1] Изберете да обновите фърмуер-а или да го запишете като файл.
+\n[2] Изберете файл за обновяване или запис. Фърмуер файловете са в директория "bin".
+\n[3] Проверете дали версията на фърмуер-а, който качвате, е съвместима с хардуерната версия на DistoX.
+\n[4] Включете DistoX2 в режим на фърмуер: натиснете Плюс и Минус докато го включвате с бутона On.
+\n[5] Натиснете OK.
+\n[6] Потвърдете продължението и изчакайте процеса да приключи.
+\n[7] Изключете DistoX2 с CLR бутона.
+\n
+   </string>
+   <string name="firmware_none">Няма файл с фърмуер</string>
+   <string name="firmware_file">файл с фърмуер</string>
+   <string name="firmware_file_exists">Съществуващ файл с фърмуер</string>
+   <string name="firmware_file_missing">Липсващ файл с фърмуер</string>
+   <string name="ask_dump">Запис на фърмуер?</string>
+   <string name="ask_upload">Качване на фърмуер?</string>
+   <string name="ask_upload_not_compatible">Файлът с фърмуер не изглежда коректен.\nПродължаване с качването?</string>
+   <string name="firmware_file_dumped">Записан файл %1$s с размер %2$d</string>
+   <string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d</string>
+   
+
+</resources>
