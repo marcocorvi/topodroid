@@ -406,14 +406,19 @@ public class ShotActivity extends Activity
     updateDisplay( );
   }
 
-  // add a block to the adapter
+  // add a block to the adapter (ILister interface)
+  // called by the RFcommThread after receiving a data packet
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    // Log.v( "DistoX", "updateDisplay blk " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     if ( mDataAdapter != null ) {
-      mDataAdapter.addBlock( blk );
+      mDataAdapter.addDataBlock( blk );
       mApp.assignStations( mDataAdapter.mItems );
+      mList.post( new Runnable() {
+        @Override public void run() {
+          mDataAdapter.notifyDataSetChanged();
+        }
+      } );
 
       Message msg = Message.obtain();
       msg.what = MSG_ADD_BLK;
@@ -846,9 +851,6 @@ public class ShotActivity extends Activity
     setMenuAdapter();
     closeMenu();
     mMenu.setOnItemClickListener( this );
-
-    // updateDisplay( );
-
   }
 
   void enableSketchButton( boolean enabled )

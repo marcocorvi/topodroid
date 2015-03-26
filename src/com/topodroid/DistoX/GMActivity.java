@@ -311,6 +311,7 @@ public class GMActivity extends Activity
     }
   }
 
+  // ILister interface
   @Override
   public void refreshDisplay( int nr, boolean toast )
   {
@@ -329,6 +330,7 @@ public class GMActivity extends Activity
     }
   }
     
+  // ILister interface
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {

@@ -2612,11 +2612,13 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
+  // forward adding data to the ShotActivity
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
     mApp.mShotActivity.updateBlockList( blk );
     // mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload );
+    // recomputing the whole reference is inefficient: an incremental data reduction would be more efficient
     updateDisplay( true );
   }
 

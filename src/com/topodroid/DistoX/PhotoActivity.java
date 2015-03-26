@@ -87,6 +87,8 @@ public class PhotoActivity extends Activity
   long   mPhotoId;
 
   // -------------------------------------------------------------------
+  // ILister interface
+
   @Override
   public void refreshDisplay( int nr, boolean toast )
   {

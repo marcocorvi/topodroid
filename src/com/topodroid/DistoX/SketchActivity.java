@@ -1954,6 +1954,7 @@ public class SketchActivity extends ItemDrawer
 
   // ----------------- ILister interface --------------------------------------------
   
+  // forward to the ShotActivity
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {

@@ -83,10 +83,13 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     return ret;
   }
 
-  void addBlock( DistoXDBlock blk ) 
+  // called only by ShotActivity updateBlockList( blk )
+  // this method changes the ArrayList of DistoxDBlock's
+  //
+  void addDataBlock( DistoXDBlock blk ) 
   {
     mItems.add( blk );
-    notifyDataSetChanged();
+    // notifyDataSetChanged();
   }
 
   // called by ShotActivity::updateShotlist

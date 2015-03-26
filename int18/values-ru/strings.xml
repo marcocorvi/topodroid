@@ -209,7 +209,7 @@
     <string name="menu_sensor">датчик</string>
     <string name="menu_scan">Сканировать</string>
     <string name="menu_station">ПИКЕТЫ</string>
-    <!-- TODO string name="menu_stats">СТАТИСТИКА</string -->
+    <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Метаданные</string>
     <string name="menu_sync">СИНХР.</string>
 
@@ -381,7 +381,7 @@
     <string name="button_no"        >Нет       </string>
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
-    <!-- TODO string name="button_dump"      >Dump      </string -->
+    <string name="button_dump"      >Дамп      </string>
     <string name="button_reset"     >Сброс     </string>
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
@@ -602,8 +602,8 @@
 
   <!-- NO string name="pref_hide_help_title">Скрыть помощь</string -->
   <!-- NO string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
-  <!-- TODO string name="pref_locale_title">Language</string -->
-  <!-- TODO string name="pref_locale_summary">Language</string -->
+  <string name="pref_locale_title">Язык</string>
+  <string name="pref_locale_summary">Язык</string>
 
   <string name="pref_raw_data_title">Сырые данные</string>
   <string name="pref_raw_data_summary">Показать сырые данные</string>
