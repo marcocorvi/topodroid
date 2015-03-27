@@ -296,14 +296,16 @@
     <string name="sketch3d_null_start">Липсва начален репер на 3D модела</string>
     <string name="sketch3d_start">Начален репер</string>
 
-    <string name="station">репер/string>
+    <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата?</string>
     <string name="station_set">Продължаване на картировката от тук?</string>
+
     <!-- string name="station_base">reference station</string -->
     <!-- string name="station_next">next station</string -->
     <string name="station_viewed">избран репер</string>
     <string name="survey_exists">Картировката вече съществува</string>
     <string name="survey_date">гггг.мм.дд</string>
+
     <string name="survey_delete">Изтриване на картировката?</string>
     <string name="survey_split">Разделяне на картировката?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
@@ -311,6 +313,7 @@
     <string name="description">описание</string>
     <string name="name">име</string>
     <string name="team">картировачи</string>
+
     <!-- string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
     <string name="toggle_ok">Включен режим на калибрация на DistoX</string>
@@ -691,6 +694,12 @@
   <string name="pref_vthr_title">Вертикална граница на отсечка</string>
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Запад/Изт/Сев/Юг</string>
   <string name="pref_vthr_message">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Запад/Изт/Сев/Юг</string>
+  <!-- TODO string name="pref_plan_vthr_title">Splay vertical threshold</string -->
+  <!-- TODO string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string -->
+  <!-- TODO string name="pref_plan_vthr_message">Vertical threshold for splays in plan</string -->
+  <!-- TODO string name="pref_init_station_title">Initial station</string -->
+  <!-- TODO string name="pref_init_station_summary">Default initial station</string -->
+  <!-- TODO string name="pref_init_station_message">Default initial station</string -->
 
   <string name="pref_hthr_title">Граница за хор. сечения</string>
   <string name="pref_hthr_summary">Граница, за считане на сечение за хоризонтално или вертикално</string>

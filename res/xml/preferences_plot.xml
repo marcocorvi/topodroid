@@ -11,6 +11,15 @@
        android:entryValues="@array/pickerTypeValue"
      />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SPLAY_VERT_THRS"
+       android:title="@string/pref_plan_vthr_title"
+       android:summary="@string/pref_plan_vthr_summary"
+       android:dialogTitle="@string/pref_plan_vthr_title"
+       android:dialogMessage="@string/pref_plan_vthr_message"
+       android:inputType="number"
+       android:defaultValue="80"/>
+
      <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DRAWING_UNIT"
        android:title="@string/pref_drawing_unit_title"

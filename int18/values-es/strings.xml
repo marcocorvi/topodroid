@@ -617,6 +617,12 @@
   <string name="pref_vthr_title">Toma límite</string>
   <string name="pref_vthr_summary">límite visual vertical por LRUD/WENS</string>
   <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
+  <!-- TODO string name="pref_plan_vthr_title">Splay vertical threshold</string -->
+  <!-- TODO string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string -->
+  <!-- TODO string name="pref_plan_vthr_message">Vertical threshold for splays in plan</string -->
+  <!-- TODO string name="pref_init_station_title">Initial station</string -->
+  <!-- TODO string name="pref_init_station_summary">Default initial station</string -->
+  <!-- TODO string name="pref_init_station_message">Default initial station</string -->
 
   <string name="pref_hthr_title">Tolerancia de las secciones Transversales</string>
   <string name="pref_hthr_summary">Tolerancia de las secciones transversales horizontales</string>

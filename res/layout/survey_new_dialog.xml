@@ -44,6 +44,14 @@
         android:hint="@string/team"
         android:scrollHorizontally="true" />
    		
+    <EditText android:id="@+id/survey_station" 
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content" 
+        android:singleLine="true"
+        android:scrollHorizontally="true" />
+   		
     <EditText android:id="@+id/survey_decl" 
         android:layout_marginTop="2dp"
         android:layout_width="wrap_content"

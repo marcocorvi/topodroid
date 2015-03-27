@@ -597,9 +597,11 @@ public class DrawingActivity extends ItemDrawer
         //   "add line " + (float)(st1.e) + " " + (float)(st1.s) + " " + (float)(st2.e) + " " + (float)(st2.s) );
       }
       for ( NumSplay sp : splays ) {
-        NumStation st = sp.from;
-        addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), 
-                      xoff, yoff, true, true );
+        if ( Math.abs( sp.getBlock().mClino ) < TopoDroidSetting.mSplayVertThrs ) {
+          NumStation st = sp.from;
+          addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), 
+                        xoff, yoff, true, true );
+        }
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;

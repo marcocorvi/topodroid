@@ -65,6 +65,7 @@ public class SurveyNewDialog extends Dialog
   private EditText mEditDate;
   private EditText mEditTeam;
   private EditText mEditDecl;
+  private EditText mEditStation;
   private EditText mEditComment;
 
   private Button mBTsave;
@@ -101,8 +102,11 @@ public class SurveyNewDialog extends Dialog
     mEditName    = (EditText) findViewById(R.id.survey_name);
     mEditDate    = (EditText) findViewById(R.id.survey_date);
     mEditTeam    = (EditText) findViewById(R.id.survey_team);
+    mEditStation = (EditText) findViewById(R.id.survey_station);
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
+
+    mEditStation.setText( TopoDroidSetting.mInitStation );
 
     if ( TopoDroidSetting.mDefaultTeam.length() > 0 ) {
       mEditTeam.setText( TopoDroidSetting.mDefaultTeam );
@@ -185,6 +189,12 @@ public class SurveyNewDialog extends Dialog
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse Double error: declination " + decl_str );
         }
       }
+    }
+
+    if ( mEditStation.getText() != null ) {
+      DistoXStationName.setInitialStation( mEditStation.getText().toString().replaceAll("\\s+", "") );
+    } else {
+      DistoXStationName.setInitialStation( TopoDroidSetting.mInitStation );
     }
       
     if ( date != null ) { date = date.trim(); }

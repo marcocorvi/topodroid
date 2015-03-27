@@ -985,8 +985,11 @@ public class TopoDroidApp extends Application
     // Log.v( "DistoX", "assignStations() policy " + mSurveyStations + "/" + mShotAfterSplays + " nr. shots " + list.size() );
     // assign stations
     DistoXDBlock prev = null;
-    String from = (TopoDroidSetting.mSurveyStations == 1 )? "0" : "1";
-    String to   = (TopoDroidSetting.mSurveyStations == 1 )? "1" : "0";
+    String from = (TopoDroidSetting.mSurveyStations == 1 )? DistoXStationName.mInitialStation 
+                                                          : DistoXStationName.mSecondStation;
+    String to   = (TopoDroidSetting.mSurveyStations == 1 )? DistoXStationName.mSecondStation 
+                                                          : DistoXStationName.mInitialStation;
+
     String station = TopoDroidSetting.mShotAfterSplays? from : "";  // splays station
     // Log.v("DistoX", "station [0] " + station );
 

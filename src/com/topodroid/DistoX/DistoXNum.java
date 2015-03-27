@@ -27,7 +27,7 @@ import java.util.Locale;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 
-// import android.util.Log;
+import android.util.Log;
 
 class DistoXNum
 {
@@ -576,6 +576,8 @@ class DistoXNum
     // for ( TmpShot ts : tmpshots ) ts.Dump();
 
     NumStation start_station = new NumStation( start );
+    start_station.mHasCoords = true;
+
     NumShot sh;
     mStations.add( start_station );
     boolean repeat = true;
@@ -588,16 +590,18 @@ class DistoXNum
         NumStation sf = getStation( ts.from );
         NumStation st = getStation( ts.to );
         if ( sf != null && ! sf.mBarrier ) {
-          if ( st != null && ! st.mBarrier ) { // close loop
-            if ( /* TopoDroidSetting.mAutoStations || */ ! TopoDroidSetting.mLoopClosure ) {
+          if ( st != null && ! st.mBarrier ) { // loop-closure
+            if ( /* TopoDroidSetting.mAutoStations || */ ! TopoDroidSetting.mLoopClosure ) { // do not close loop
               // keep loop open: new station( id=ts.to, from=sf, ... )
               NumStation st1 = new NumStation( ts.to, sf, ts.d(), ts.b(), ts.c(), ts.extend );
+              updateBBox( st );
               if ( isBarrier( ts.to ) ) st1.mBarrier = true;
-
               st1.mDuplicate = true;
+              mStations.add( st1 );
+
               sh =  makeShotFromTmp( sf, st1, ts );
               addShotToStations( sh, st1, sf );
-            } else { // loop-closure
+            } else { // close loop
               sh =  makeShotFromTmp( sf, st, ts );
               addShotToStations( sh, sf, st );
             }
@@ -611,12 +615,11 @@ class DistoXNum
             ts.used = true;
             repeat = true;
           }
-          else
+          else // st null || st isBarrier
           { // normal shot: from --> to
             // new station( id=ts.to  from=sf 
             st = new NumStation( ts.to, sf, ts.d(), ts.b(), ts.c(), ts.extend );
             if ( isBarrier( ts.to ) ) st.mBarrier = true;
-
             updateBBox( st );
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
             mStations.add( st );
@@ -659,6 +662,7 @@ class DistoXNum
         st.mHasCoords = false;
       }
       start_station.mHasCoords = true;
+
       repeat = true;
       while ( repeat ) {
         repeat = false;

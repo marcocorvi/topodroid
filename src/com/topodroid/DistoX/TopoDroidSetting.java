@@ -90,7 +90,9 @@ class TopoDroidSetting
     "DISTOX_ARROW_LENGTH",           // 57
     "DISTOX_EXPORT_SHOTS",           // 58
 
-    "DISTOX_LOCALE",                 // 59
+    "DISTOX_SPLAY_VERT_THRS",
+    "DISTOX_INIT_STATION",
+    "DISTOX_LOCALE",                 // 61
     "DISTOX_CWD",                    // must be last 
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
@@ -120,7 +122,9 @@ class TopoDroidSetting
   // static final String CLOSE_DISTANCE = "0.05"; // 50 cm / 1000 cm
   static float mCloseDistance = 1.0f; // FIXME kludge
 
-  static int   mMinNrLegShots = 2;
+  static int    mMinNrLegShots = 2;
+  static String mInitStation = "0";
+  static float  mSplayVertThrs = 80;
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -544,6 +548,14 @@ class TopoDroidSetting
       mExportShotsFormat = Integer.parseInt( prefs.getString( key[k++], "0") );  // DISTOX_EXPORT_SHOTS (choice)
     } catch ( NumberFormatException e ) { }
 
+    try {
+      mSplayVertThrs = Integer.parseInt( prefs.getString( key[k++], "80") ); // DISTOX_SPLAY_VERT_THRS
+    } catch ( NumberFormatException e ) { }
+
+    mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION
+    if ( mInitStation.length() == 0 ) mInitStation = "0";
+    DistoXStationName.setInitialStation( mInitStation );
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -832,6 +844,15 @@ class TopoDroidSetting
       try {
         mExportShotsFormat = Integer.parseInt( prefs.getString( k, "0") );  // DISTOX_EXPORT_SHOTS (choice)
       } catch ( NumberFormatException e ) { }
+
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_SPLAY_VERT_THRS
+      try {
+        mSplayVertThrs = Integer.parseInt( prefs.getString( k, "80") );
+      } catch ( NumberFormatException e ) { }
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_INIT_STATION
+      mInitStation = prefs.getString( k, "0" ).replaceAll("\\s+", "");
+      if ( mInitStation.length() == 0 ) mInitStation = "0";
+      DistoXStationName.setInitialStation( mInitStation );
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

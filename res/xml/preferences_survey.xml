@@ -21,6 +21,15 @@
        android:entryValues="@array/surveyStationsValue"
      />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_INIT_STATION"
+       android:title="@string/pref_init_station_title"
+       android:summary="@string/pref_init_station_summary"
+       android:dialogTitle="@string/pref_init_station_title"
+       android:dialogMessage="@string/pref_init_station_message"
+       android:defaultValue="0"
+     />
+
   <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_EXPORT_SHOTS"
        android:title="@string/pref_export_shots_title"

@@ -666,6 +666,12 @@
   <!-- TODO string name="pref_vthr_title">Shot vertical threshold</string -->
   <!-- TODO string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string -->
   <!-- TODO string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string -->
+  <!-- TODO string name="pref_plan_vthr_title">Splay vertical threshold</string -->
+  <!-- TODO string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string -->
+  <!-- TODO string name="pref_plan_vthr_message">Vertical threshold for splays in plan</string -->
+  <!-- TODO string name="pref_init_station_title">Initial station</string -->
+  <!-- TODO string name="pref_init_station_summary">Default initial station</string -->
+  <!-- TODO string name="pref_init_station_message">Default initial station</string -->
   <!-- TODO string name="pref_hthr_title">Cross-section hthreshold</string -->
   <!-- TODO string name="pref_hthr_summary">Threshold for horizontal cross-sections</string -->
   <!-- TODO string name="pref_hthr_message">Shot clino over which cross-sections are horizontal</string -->

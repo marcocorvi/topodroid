@@ -8,15 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120517 length and angle units
- * 20120711 added dataString
- * 20120726 TopoDroid log
- * 20130104 EXTEND enum
- * 20130108 extend :ignore"
- * 20131022 blank-leg color (violet)
- * 20131116 added fields: accel., magn., dip
- * 20140414 added isRecent()
  */
 package com.topodroid.DistoX;
 

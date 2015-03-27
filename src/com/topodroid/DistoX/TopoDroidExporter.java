@@ -392,27 +392,93 @@ class TopoDroidExporter
       pw.format("    <color>ff0000ff</color>\n"); // AABBGGRR
       pw.format("    <width>2</width>\n");
       pw.format("  </LineStyle>\n");
+      pw.format("  <LabelStyle>\n");
+      pw.format("     <color>ff0000ff</color>\n"); // AABBGGRR
+      pw.format("     <colorMode>normal</colorMode>\n");
+      pw.format("     <scale>1.0</scale>\n");
+      pw.format("  </LabelStyle>\n");
       pw.format("</Style>\n");
 
+      pw.format("<Style id=\"splay\">\n");
+      pw.format("  <LineStyle>\n");
+      pw.format("    <color>ffffff00</color>\n"); // AABBGGRR
+      pw.format("    <width>1</width>\n");
+      pw.format("  </LineStyle>\n");
+      pw.format("  <LabelStyle>\n");
+      pw.format("     <color>ffffff00</color>\n"); // AABBGGRR
+      pw.format("     <colorMode>normal</colorMode>\n");
+      pw.format("     <scale>0.5</scale>\n");
+      pw.format("  </LabelStyle>\n");
+      pw.format("</Style>\n");
+
+      pw.format("<Style id=\"station\">\n");
+      pw.format("  <LabelStyle>\n");
+      pw.format("     <color>ffff00ff</color>\n"); // AABBGGRR
+      pw.format("     <colorMode>normal</colorMode>\n");
+      pw.format("     <scale>1.0</scale>\n");
+      pw.format("  </LabelStyle>\n");
+      pw.format("  <LineStyle>\n");
+      pw.format("    <color>ffff00ff</color>\n"); // AABBGGRR
+      pw.format("    <width>1</width>\n");
+      pw.format("  </LineStyle>\n");
+      pw.format("</Style>\n");
+      
+      for ( NumStation st : stations ) {
+        pw.format("<Placemark>\n");
+        pw.format("  <name>%s</name>\n", st.name );
+        pw.format("  <styleUrl>#station</styleUrl>\n");
+        pw.format("  <MultiGeometry>\n");
+          pw.format("  <Point id=\"%s\">\n", st.name );
+          pw.format("    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
+          pw.format("  </Point>\n");
+        pw.format("  </MultiGeometry>\n");
+        pw.format("</Placemark>\n");
+      }
+
       pw.format("<Placemark>\n");
+      pw.format("  <name>centerline</name>\n" );
       pw.format("  <styleUrl>#centerline</styleUrl>\n");
       pw.format("  <MultiGeometry>\n");
       pw.format("    <altitudeMode>absolute</altitudeMode>\n");
       for ( NumShot sh : shots ) {
         NumStation from = sh.from;
         NumStation to   = sh.to;
-        pw.format("    <LineString>\n");
-        // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
-        // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-        pw.format("      <coordinates>\n");
-        pw.format("        %f,%f,%f\n", from.e, from.s, from.v );
-        pw.format("        %f,%f,%f\n", to.e, to.s, to.v );
-        pw.format("      </coordinates>\n");
-        pw.format("    </LineString>\n");
+        if ( from.mHasCoords && to.mHasCoords ) {
+          pw.format("    <LineString id=\"%s-%s\">\n", from.name, to.name );
+          // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
+          // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
+          pw.format("      <coordinates>\n");
+          pw.format("        %f,%f,%f\n", from.e, from.s, from.v );
+          pw.format("        %f,%f,%f\n", to.e, to.s, to.v );
+          pw.format("      </coordinates>\n");
+          pw.format("    </LineString>\n");
+        } else {
+          Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords 
+                                      + " " + to.name + " " + to.mHasCoords );
+        }
       }
       pw.format("  </MultiGeometry>\n");
-
       pw.format("</Placemark>\n");
+
+      // pw.format("<Placemark>\n");
+      // pw.format("  <name>splays</name>\n" );
+      // pw.format("  <styleUrl>#splay</styleUrl>\n");
+      // pw.format("  <MultiGeometry>\n");
+      // pw.format("    <altitudeMode>absolute</altitudeMode>\n");
+      // for ( NumSplay sp : splays ) {
+      //   NumStation from = sp.from;
+      //   pw.format("    <LineString id=\"%s-\">\n", from.name );
+      //   // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
+      //   // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
+      //   pw.format("      <coordinates>\n");
+      //   pw.format("        %f,%f,%f\n", from.e, from.s, from.v );
+      //   pw.format("        %f,%f,%f\n", to.e, to.s, to.v );
+      //   pw.format("      </coordinates>\n");
+      //   pw.format("    </LineString>\n");
+      // }
+      // pw.format("  </MultiGeometry>\n");
+      // pw.format("</Placemark>\n");
+
       pw.format("</Document>\n");
       pw.format("</kml>\n");
       fw.flush();

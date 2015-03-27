@@ -116,6 +116,14 @@ public class ShotNewDialog extends Dialog
     if ( mPrevBlk != null ) {
       mETfrom.setHint( mPrevBlk.mTo );
       mETto.setHint( DistoXStationName.increment( mPrevBlk.mTo ) );
+    } else {
+      if ( TopoDroidSetting.mSurveyStations == 1 ) {
+        mETfrom.setHint( DistoXStationName.mInitialStation );
+        mETto.setHint( DistoXStationName.mSecondStation );
+      } else {
+        mETfrom.setHint( DistoXStationName.mSecondStation );
+        mETto.setHint( DistoXStationName.mInitialStation );
+      }
     }
     String current_name = mApp.getCurrentStationName();
     if ( current_name != null ) {

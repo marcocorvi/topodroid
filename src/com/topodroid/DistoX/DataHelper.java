@@ -1467,7 +1467,7 @@ public class DataHelper extends DataSetObservable
        null,  // having
        "id DESC" // order by
      );
-     String ret = "0";
+     String ret = DistoXStationName.mInitialStation;
      if (cursor.moveToFirst()) {
        do {
          String from = cursor.getString(0);

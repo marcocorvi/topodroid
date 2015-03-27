@@ -618,6 +618,12 @@
   <string name="pref_vthr_title">Soglia vert.</string>
   <string name="pref_vthr_summary">Soglia inclinazione LRUD/WENS</string>
   <string name="pref_vthr_message">Soglia inclinazione battuta per LRUD/WENS</string>
+  <string name="pref_plan_vthr_title">Splay soglia verticale</string>
+  <string name="pref_plan_vthr_summary">soglia verticale per splay in pianta</string>
+  <string name="pref_plan_vthr_message">Soglia verticale per splay in pianta</string>
+  <string name="pref_init_station_title">Caposaldo iniziale</string>
+  <string name="pref_init_station_summary">Caposaldo iniziale di default</string>
+  <string name="pref_init_station_message">Caposaldo iniziale di default</string>
 
   <string name="pref_hthr_title">Soglia sezione orizzontale</string>
   <string name="pref_hthr_summary">Soglia inclinazione per sezioni orizzontali</string>
