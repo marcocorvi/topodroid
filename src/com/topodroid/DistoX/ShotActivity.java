@@ -778,7 +778,7 @@ public class ShotActivity extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    setContentView(R.layout.shot_activity);
+    setContentView( R.layout.shot_activity );
     mApp = (TopoDroidApp) getApplication();
     mApp.mShotActivity = this; // FIXME
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
@@ -800,13 +800,9 @@ public class ShotActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00no = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
     mNrButton1 = TopoDroidSetting.mLevelOverBasic ? 7 : 5;
-    // mNrButton2 = 7;
     mButton1 = new Button[ mNrButton1 ];
-    // mButton2 = new Button[ mNrButton2 ];
     int k;
     for ( k=0; k<mNrButton1; ++k ) {
       mButton1[k] = new Button( this );

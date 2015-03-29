@@ -8,12 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120726 TopoDroid log
- * 20130205 swapHotBit
- * 20131116 X310 ready
- * 20140115 X310 memory read
- * 20140420 X310 memory functions
  */
 package com.topodroid.DistoX;
 

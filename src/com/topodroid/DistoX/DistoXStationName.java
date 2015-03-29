@@ -27,7 +27,7 @@ public class DistoXStationName
 
   static void setInitialStation( String init )
   {
-    if ( init == null || init.length() == 0 ) init = "0";
+    if ( init == null || init.length() == 0 ) init = TopoDroidSetting.mInitStation;
     mInitialStation = init;
     mSecondStation  = increment( init );
   }

@@ -8,32 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120516 survey team and survey info unpdate
- * 20120518 db path from TopoDroid app
- * 20120521 methods for CalibInfo
- * 20120522 photo support
- * 20120603 fixed update and delete support
- * 20120610 archive (zip)
- * 20120722 put table create in a transaction
- * 20120725 TopoDroidApp log
- * 20121001 restored updateShotExtend
- * 20121114 getLastShotId
- * 20121114 allowed multiple locations for a station (commented check at insertFixed)
- * 20121215 InsertHelper for bulk insert (survey insertShots)
- * 20121215 bulk splay shot name+extend update:  updateShotNameAndExtend
- * 20121224 added field xoffset yoffset zoom to table plots
- * 20130111 photo date
- * 20130324 zip export of 3D sketches
- * 20130621 selectLastLegShot()
- * 20130629 database version 11
- * 20130910 shiftShotsId and insertShotAt statement
- * 20130910 transferShot to implement split-survey
- * 20131116 added acc. mag. dip to shot
- * 201312   cross-sections 
- * 201401   min database compatible version (for import)
- * 20140328 "azimuth" column in plots table
- * 20140803 enforce one location per station
  */
 package com.topodroid.DistoX;
 
@@ -66,8 +40,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "22";
-  static final int DATABASE_VERSION = 22;
+  static final String DB_VERSION = "23";
+  static final int DATABASE_VERSION = 23;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -219,7 +193,7 @@ public class DataHelper extends DataSetObservable
         updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
         updateShotAMDRStmt  = myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
 
-        updateSurveyInfoStmt = myDB.compileStatement( "UPDATE surveys SET day=?, team=?, declination=?, comment=? WHERE id=?" );
+        updateSurveyInfoStmt = myDB.compileStatement( "UPDATE surveys SET day=?, team=?, declination=?, comment=?, init_station=? WHERE id=?" );
         updateSurveyStmt = myDB.compileStatement( "UPDATE surveys SET day=?, comment=? WHERE id=?" );
         updateSurveyTeamStmt = myDB.compileStatement( "UPDATE surveys SET team=? WHERE id=?" );
         updateSurveyDeclinationStmt = myDB.compileStatement( "UPDATE surveys SET declination=? WHERE id=?" );
@@ -301,6 +275,27 @@ public class DataHelper extends DataSetObservable
 
    // ----------------------------------------------------------------------
    // SURVEY DATA
+
+  public String getSurveyInitailStation( long id )
+  {
+    String ret = "";
+    Cursor cursor = myDB.query( SURVEY_TABLE,
+			        new String[] { "init_station" },
+                                "id=? ", 
+                                new String[] { Long.toString(id) },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if ( cursor != null ) {
+      if (cursor.moveToFirst()) {
+        ret = cursor.getString(0);
+      }
+      if ( ! cursor.isClosed() ) {
+        cursor.close();
+      }
+    }
+    return ret;
+  }
 
   public SurveyStat getSurveyStat( long sid )
   {
@@ -413,13 +408,15 @@ public class DataHelper extends DataSetObservable
   // --------------------------------------------------------------------
   // SURVEY
    
-  public void updateSurveyInfo( long id, String date, String team, double decl, String comment, boolean forward )
+  public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
+                                String init_station, boolean forward )
   {
     updateSurveyInfoStmt.bindString( 1, date );
     updateSurveyInfoStmt.bindString( 2, team );
     updateSurveyInfoStmt.bindDouble( 3, decl );
     updateSurveyInfoStmt.bindString( 4, (comment != null)? comment : "" );
-    updateSurveyInfoStmt.bindLong( 5, id );
+    updateSurveyInfoStmt.bindString( 5, (init_station != null)? init_station : "" );
+    updateSurveyInfoStmt.bindLong( 6, id );
     updateSurveyInfoStmt.execute();
     if ( forward ) {
       // synchronized( mListeners )
@@ -1780,7 +1777,7 @@ public class DataHelper extends DataSetObservable
      SurveyInfo info = null;
      // if ( myDB == null ) return null;
      Cursor cursor = myDB.query( SURVEY_TABLE,
-                                new String[] { "name", "day", "team", "declination", "comment" }, // columns
+                                new String[] { "name", "day", "team", "declination", "comment", "init_station" }, // columns
                                 "id=?",
                                 new String[] { Long.toString(sid) },
                                 null,  // groupBy
@@ -1794,6 +1791,7 @@ public class DataHelper extends DataSetObservable
        info.team    = cursor.getString( 2 );
        info.declination = (float)(cursor.getDouble( 3 ));
        info.comment = cursor.getString( 4 );
+       info.initStation = cursor.getString( 5 );
      }
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
@@ -2905,20 +2903,22 @@ public class DataHelper extends DataSetObservable
        FileWriter fw = new FileWriter( filename );
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
-                            new String[] { "name", "day", "team", "declination", "comment" },
+                            new String[] { "name", "day", "team", "declination", "comment", "init_station" },
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.ENGLISH,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\" );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\" );\n",
                      SURVEY_TABLE,
                      sid,
                      cursor.getString(0),
                      cursor.getString(1),
                      cursor.getString(2),
                      cursor.getDouble(3),     // declination
-                     cursor.getString(4) );   // comment
+                     cursor.getString(4),     // comment
+                     cursor.getString(5)      // init_station
+           );
          } while (cursor.moveToNext());
        }
        if (cursor != null && !cursor.isClosed()) {
@@ -3216,13 +3216,14 @@ public class DataHelper extends DataSetObservable
        skipSpaces( v );
        if ( table.equals(SURVEY_TABLE) ) {
          long skip_sid = longValue( v );
-         name        = stringValue( v );
-         String day  = stringValue( v );
-         String team = stringValue( v );
-         double decl = doubleValue( v );
-         comment     = stringValue( v );
+         name          = stringValue( v );
+         String day    = stringValue( v );
+         String team   = stringValue( v );
+         double decl   = doubleValue( v );
+         comment       = stringValue( v );
+         String init_station = stringValue( v );
          sid = setSurvey( name, false );
-         updateSurveyInfo( sid, day, team, decl, comment, false );
+         updateSurveyInfo( sid, day, team, decl, comment, init_station, false );
          while ( (line = br.readLine()) != null ) {
            // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile: " + line );
            vals = line.split(" ", 4);
@@ -3437,7 +3438,8 @@ public class DataHelper extends DataSetObservable
              +   " day TEXT, "
              +   " team TEXT, "
              +   " comment TEXT, "
-             +   " declination REAL "
+             +   " declination REAL, "
+             +   " init_station TEXT "
              +   ")"
            );
 
@@ -3663,6 +3665,8 @@ public class DataHelper extends DataSetObservable
            case 21:
              db.execSQL( "ALTER TABLE shots ADD COLUMN type INTEGER default 0" );
            case 22:
+             db.execSQL( "ALTER TABLE surveys ADD COLUMN init_station TEXT default \"0\"" );
+           case 23:
              /* current version */
            default:
              break;

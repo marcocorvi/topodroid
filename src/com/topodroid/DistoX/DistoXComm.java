@@ -245,7 +245,7 @@ public class DistoXComm
           }
         }
       }
-      // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcomm thread run() exiting");
+      TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcomm thread run() exiting");
       mRfcommThread = null;
 
       // FIXME_COMM
@@ -290,10 +290,11 @@ public class DistoXComm
     TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "close socket()" );
     if ( mBTSocket != null ) {
       try {
-        mBTSocket.close();
+        doWork = false;
         if ( mRfcommThread != null ) {
           mRfcommThread.join();
         }
+        mBTSocket.close();
       } catch ( InterruptedException e ) {
         TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close socket interrupt " + e.getMessage() );
       } catch ( IOException e ) {
@@ -473,7 +474,7 @@ public class DistoXComm
 
   public void disconnectRemoteDevice( )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "disconnect remote device ");
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "disconnect remote device ");
     if ( mBTSocket != null ) {
       destroySocket( );
       if ( mRfcommThread != null ) {

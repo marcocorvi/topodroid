@@ -321,7 +321,7 @@ class ConnectionHandler extends Handler
          }
          break; 
        case DataListener.SURVEY_INFO:
-         mApp.mData.updateSurveyInfo( mSID, data[0], data[1], Double.parseDouble( data[2] ), data[3], false );
+         mApp.mData.updateSurveyInfo( mSID, data[0], data[1], Double.parseDouble( data[2] ), data[3], data[4], false );
          break;
        case DataListener.SURVEY_DATE:
          mApp.mData.updateSurveyDayAndComment( mSID, data[0], data[1], false );

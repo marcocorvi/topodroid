@@ -20,4 +20,5 @@ class SurveyInfo
   public String team;
   public float  declination;
   public String comment;
+  public String initStation;
 }

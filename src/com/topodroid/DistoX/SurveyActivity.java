@@ -8,23 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120520 created from DistoX.java
- * 20120524 fixed station management
- * 20120524 changing to dialog / menu buttons
- * 20120531 implementing survey delete
- * 20120603 fixed-info update/delete methods
- * 20120607 added 3D button / rearranged buttons layout
- * 20120610 archive (zip) button
- * 20120619 handle "mustOpen" (immediate) request
- * 20130213 unified export and zip (export dialog)
- * 20130307 made Annotations into a dialog
- * 20130910 populate survey with old-survey data (oldSid and oldId)
- * 20130921 handling return from Proj4 request (coord. conversion only on-demand for now)
- * 20130921 bug-fix long/lat swapped in add FixedInfo
- * 20131201 button bar new interface. reorganized actions
- * 20140221 if geodetic height fails, altimetric height is negative
- * 20140526 removed oldSid oldId
  */
 package com.topodroid.DistoX;
 
@@ -82,22 +65,6 @@ public class SurveyActivity extends Activity
                             implements OnItemClickListener
                             , View.OnClickListener
 {
-  // private static int icons[] = {
-  //                       R.drawable.ic_note,
-  //                       R.drawable.ic_info, // ic_details,
-  //                       R.drawable.ic_3d,
-  //                       R.drawable.ic_gps,
-  //                       R.drawable.ic_camera,
-  //                       R.drawable.ic_sensor 
-  //                   };
-  // private static int ixons[] = { 
-  //                       R.drawable.ix_note,
-  //                       R.drawable.ix_info, // ic_details,
-  //                       R.drawable.ix_3d,
-  //                       R.drawable.ix_gps,
-  //                       R.drawable.ix_camera,
-  //                       R.drawable.ix_sensor
-  //                    };
   private static int izons[] = { 
                         R.drawable.iz_note,
                         R.drawable.iz_info, // ic_details,
@@ -146,26 +113,12 @@ public class SurveyActivity extends Activity
   Button     mImage;
   ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
+  String mInitStation;
 
   private TopoDroidApp mApp;
-  // private SurveyInfo mInfo; // FIXME this is local to updateDisplay()
-  // private DistoX mDistoX;
   private boolean mustOpen;
-  // private long oldSid;   // old survey id
-  // private long oldId;    // old shot id
-
-  // private ArrayList< FixedInfo > mFixed; // fixed stations
-  // private ArrayList< PhotoInfo > mPhoto; // photoes
 
 // -------------------------------------------------------------------
-  // public SurveyActivity( Context context, ShotActivity parent )
-  // {
-  //   super( context );
-  //   mContext = context;
-  //   mParent  = parent;
-  //   mApp = (TopoDroidApp)mParent.getApplication();
-  // }
-
   private final static int LOCATION_REQUEST = 1;
   private static int CRS_CONVERSION_REQUEST = 2; // not final ?
   private DistoXLocation mLocation;
@@ -252,6 +205,7 @@ public class SurveyActivity extends Activity
     if ( mApp.mSID < 0 ) return false;
     SurveyInfo info = mApp.getSurveyInfo();
     mTextName.setText( info.name );
+    mInitStation = info.initStation;
 
     mEditDate.setText( info.date );
     if ( info.comment != null && info.comment.length() > 0 ) {
@@ -521,7 +475,7 @@ public class SurveyActivity extends Activity
 
     // TopoDroidLog.Log( TopoDroidLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
     if ( team == null ) team = "";
-    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, true );
+    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, true );
   }
   
   void doExport( int exportType, boolean warn )

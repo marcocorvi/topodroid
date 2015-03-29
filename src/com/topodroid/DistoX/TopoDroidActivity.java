@@ -403,18 +403,6 @@ public class TopoDroidActivity extends Activity
       return;
     }
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onItemClick() " + item.toString() );
-    // switch ( mStatus ) {
-    //   case STATUS_SURVEY:
-    //     // startSurvey( item.toString(), 1); // , -1, -1 ); // start survey and open it
-    //     mApp.setSurveyFromName( item.toString(), true ); 
-    //     Intent openIntent = new Intent( this, ShotActivity.class );
-    //     startActivity( openIntent );
-    //     break;
-    //   case STATUS_CALIB:
-    //     startCalib( item.toString(), 1 );
-    //     break;
-    // }
     mApp.setSurveyFromName( item.toString(), true ); 
     Intent openIntent = new Intent( this, ShotActivity.class );
     startActivity( openIntent );

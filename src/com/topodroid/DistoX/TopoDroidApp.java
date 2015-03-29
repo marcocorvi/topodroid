@@ -725,16 +725,17 @@ public class TopoDroidApp extends Application
     clearCurrentStations();
 
     if ( survey != null && mData != null ) {
-      // Log.v( "DistoX", "setSurveyFromName <" + survey + "> forward " + forward );
+      // Log.v( "DistoX", "set SurveyFromName <" + survey + "> forward " + forward );
 
       mSID = mData.setSurvey( survey, forward );
       // mFixed.clear();
       mySurvey = null;
       if ( mSID > 0 ) {
+        DistoXStationName.setInitialStation( mData.getSurveyInitailStation( mSID ) );
         mySurvey = survey;
         mSecondLastShotId = lastShotId();
         // restoreFixed();
-        if ( mShotActivity  != null) {
+        if ( mShotActivity != null) {
           mShotActivity.setTheTitle();
           mShotActivity.updateDisplay();
         }

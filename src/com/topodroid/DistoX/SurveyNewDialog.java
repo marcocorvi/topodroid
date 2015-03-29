@@ -191,10 +191,12 @@ public class SurveyNewDialog extends Dialog
       }
     }
 
+    String init_station = TopoDroidSetting.mInitStation;
     if ( mEditStation.getText() != null ) {
-      DistoXStationName.setInitialStation( mEditStation.getText().toString().replaceAll("\\s+", "") );
-    } else {
-      DistoXStationName.setInitialStation( TopoDroidSetting.mInitStation );
+      String station = mEditStation.getText().toString().replaceAll("\\s+", "");
+      if ( station.length() > 0 ) {
+        init_station = station;
+      }
     }
       
     if ( date != null ) { date = date.trim(); }
@@ -204,7 +206,7 @@ public class SurveyNewDialog extends Dialog
     mApp.setSurveyFromName( name, true ); // save survey name: tell app to set it into the database
     
     if ( team == null ) team = "";
-    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, true );
+    mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, true );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY
       mApp.mData.transferShots( mApp.mSID, mOldSid, mOldId );
