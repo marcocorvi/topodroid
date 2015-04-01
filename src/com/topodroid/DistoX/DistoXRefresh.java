@@ -22,10 +22,10 @@ import android.os.AsyncTask;
 public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
 {
   private TopoDroidApp mApp;
-  private ArrayList<ILister> mLister;                       // list display
   private static DistoXRefresh running = null;
+  private ListerSet mLister;
 
-  DistoXRefresh( TopoDroidApp app, ArrayList<ILister> lister )
+  DistoXRefresh( TopoDroidApp app, ListerSet lister )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DistoXRefresh cstr" );
     mApp = app;
@@ -39,7 +39,6 @@ public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
     if ( ! lock() ) return null;
     int nRead = mApp.downloadData( mLister );
     // if ( nRead < 0 ) {
-    //   TopoDroidApp mApp = (TopoDroidApp) getApplication();
     //   Toast.makeText( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ], Toast.LENGTH_SHORT ).show();
     // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "doInBackground read " + nRead );
     return nRead;
@@ -58,10 +57,10 @@ public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "onPostExecute res " + res );
     if ( res != null ) {
       int r = res.intValue();
-      for ( ILister lister : mLister ) {
-        lister.refreshDisplay( r, true );
-      }
+      mLister.refreshDisplay( r, true );
     }
+    mApp.mDataDownloader.mDownload = false;
+    mApp.mDataDownloader.notifyConnectionStatus( false );
     unlock();
   }
 

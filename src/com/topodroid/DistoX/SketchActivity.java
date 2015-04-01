@@ -828,7 +828,7 @@ public class SketchActivity extends ItemDrawer
   {
     super.onStart();
     if ( mDataDownloader != null ) {
-      mDataDownloader.registerLister( this );
+      mApp.registerLister( this );
     }
   }
 
@@ -863,7 +863,7 @@ public class SketchActivity extends ItemDrawer
   protected synchronized void onStop() 
   {   
     if ( mDataDownloader != null ) {
-      mDataDownloader.unregisterLister( this );
+      mApp.unregisterLister( this );
       mDataDownloader.onPause();
       mApp.disconnectRemoteDevice( false );
     }
@@ -1660,8 +1660,8 @@ public class SketchActivity extends ItemDrawer
           //      with the Asynch task that download the data.
           //      if there is an empty shot assign it
           setTitleColor( TopoDroidConst.COLOR_CONNECTED );
-          ArrayList<ILister> listers = new ArrayList<ILister>();
-          listers.add( this );
+          ListerSet listers = new ListerSet();
+          listers.registerLister( this );
           new DistoXRefresh( mApp, listers ).execute();
         } else {
           Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
@@ -1977,13 +1977,10 @@ public class SketchActivity extends ItemDrawer
     }
   }
    
-  public void setConnectionStatus( boolean connected )
+  public void setConnectionStatus( int status )
   {
     /* TODO */
   }
 
-  public void notifyDisconnected()
-  {
-  }
 
 }

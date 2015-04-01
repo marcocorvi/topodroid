@@ -601,8 +601,8 @@ public class GMActivity extends Activity
             }
             mApp.updateCalibAlgo( mAlgo );
           }
-          ArrayList<ILister> listers = new ArrayList<ILister>();
-          listers.add( this );
+          ListerSet listers = new ListerSet();
+          listers.registerLister( this );
           new DistoXRefresh( mApp, listers ).execute();
         }
       } else if ( b == mButton1[1] ) { // toggle
@@ -838,13 +838,13 @@ public class GMActivity extends Activity
     onMenu = false;
   }
 
-  public void setConnectionStatus( boolean connected )
+  public void setConnectionStatus( int status )
   {
     /* nothing : GM data are downloaded only on-demand */
   }
 
-  public void notifyDisconnected()
-  {
-  }
+  // public void notifyDisconnected()
+  // {
+  // }
 
 }

@@ -206,8 +206,9 @@ class TopoDroidSetting
 
   static final int TOPODROID_SOCK_DEFAULT      = 0;    // BT socket type
   static final int TOPODROID_SOCK_INSEC        = 1;
-  // static final int TOPODROID_SOCK_INSEC_RECORD = 2;
-  // static final int TOPODROID_SOCK_INSEC_INVOKE = 3;
+  static final int TOPODROID_SOCK_PORT         = 2;
+  static final int TOPODROID_SOCK_INSEC_PORT   = 3;
+  // static final int TOPODROID_SOCK_INSEC_INVOKE = 4;
   static int mSockType = TOPODROID_SOCK_DEFAULT; // FIXME static
   static int mCommRetry = 1;
   static int mCommType  = 0; // 0: on-demand, 1: continuous

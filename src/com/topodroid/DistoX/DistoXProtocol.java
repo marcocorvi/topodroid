@@ -124,6 +124,18 @@ public class DistoXProtocol
     }
   }
 
+  public void closeIOstreams()
+  {
+    if ( mIn != null ) {
+      try { mIn.close(); } catch ( IOException e ) { }
+      mIn = null;
+    }
+    if ( mOut != null ) {
+      try { mOut.close(); } catch ( IOException e ) { }
+      mOut = null;
+    }
+  }
+
   public int handlePacket( ) 
   {
     // StringWriter sw = new StringWriter();
@@ -290,10 +302,11 @@ public class DistoXProtocol
       int ret = ( head >= tail )? (head-tail)/8 : ((0x8000 - tail) + head)/8; 
 
       // DEBUG
-      // StringWriter sw = new StringWriter();
-      // PrintWriter pw = new PrintWriter( sw );
-      // pw.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "readToRead Head-Tail " + sw.getBuffer().toString() + " " + head + " - " + tail + " = " + ret);
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter( sw );
+      pw.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
+      TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, 
+        "readToRead Head-Tail " + sw.getBuffer().toString() + " " + head + " - " + tail + " = " + ret);
 
       return ret;
     } catch ( EOFException e ) {

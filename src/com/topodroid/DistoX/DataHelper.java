@@ -1202,10 +1202,10 @@ public class DataHelper extends DataSetObservable
                                   cursor.getString(6) ) );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "seletAllFixed list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
      return list;
    }
 

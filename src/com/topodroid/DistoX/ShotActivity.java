@@ -354,8 +354,7 @@ public class ShotActivity extends Activity
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
-    // mDataDownloader.setConnectionStatus( false );
-    setConnectionStatus( false );
+    setConnectionStatus( mDataDownloader.getStatus() );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         // mLastShotId = mApp.mData.getLastShotId( mApp.mSID );
@@ -767,6 +766,7 @@ public class ShotActivity extends Activity
 
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
+  BitmapDrawable mBMdownload_wait;
   // BitmapDrawable mBMadd;
   BitmapDrawable mBMplot;
   BitmapDrawable mBMplot_no;
@@ -817,6 +817,7 @@ public class ShotActivity extends Activity
     }
     mBMplot_no = mApp.setButtonBackground( null, size, R.drawable.iz_plot_no );
     mBMdownload_on = mApp.setButtonBackground( null, size, R.drawable.iz_download_on );
+    mBMdownload_wait = mApp.setButtonBackground( null, size, R.drawable.iz_download_wait );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -863,7 +864,7 @@ public class ShotActivity extends Activity
     // Debug.startMethodTracing( "distox" );
     // Log.v( "DistoX", "Shot Activity onStart() " );
     if ( mDataDownloader != null ) {
-      mDataDownloader.registerLister( this );
+      mApp.registerLister( this );
     }
   }
 
@@ -874,7 +875,7 @@ public class ShotActivity extends Activity
     super.onStop();
     // Log.v( "DistoX", "Shot Activity onStop() " + ((mDataDownloader!=null)? "with DataDownloader":"") );
     if ( mDataDownloader != null ) {
-      mDataDownloader.unregisterLister( this );
+      mApp.unregisterLister( this );
       mDataDownloader.onPause();
     }
     mApp.disconnectRemoteDevice( false );
@@ -907,7 +908,7 @@ public class ShotActivity extends Activity
     if ( mDataDownloader != null ) mDataDownloader.onResume();
 
     // mApp.registerConnListener( mHandler );
-    setConnectionStatus( mDataDownloader.mConnected );
+    setConnectionStatus( mDataDownloader.getStatus() );
   }
 
   // @Override
@@ -965,10 +966,13 @@ public class ShotActivity extends Activity
       int k1 = 0;
       // int k2 = 0;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // mBtnDownload
-        setConnectionStatus( ! mDataDownloader.mConnected );  // immediate button feedback ? FIXME
-        mDataDownloader.downloadData( );
+        mDataDownloader.toggleDownload();
+        setConnectionStatus( mDataDownloader.getStatus() );
+        mDataDownloader.doDataDownload( );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnReset
-        mDataDownloader.disconnect();
+        mDataDownloader.mDownload = false;
+        mDataDownloader.stopDownloadData();
+        setConnectionStatus( mDataDownloader.getStatus() );
         switch ( mApp.distoType() ) {
           case Device.DISTO_A3:
             mApp.resetComm();
@@ -1454,32 +1458,22 @@ public class ShotActivity extends Activity
   }
 
 
-  public void setConnectionStatus( boolean connected )
+  public void setConnectionStatus( int status )
   { 
     if ( mApp.mDevice == null ) {
       mButton1[ 0 ].setVisibility( View.GONE );
     } else {
       mButton1[ 0 ].setVisibility( View.VISIBLE );
-      if ( connected ) {
-        mButton1[0].setBackgroundDrawable( mBMdownload_on );
-      } else {
-        mButton1[0].setBackgroundDrawable( mBMdownload );
+      switch ( status ) {
+        case 1:
+          mButton1[0].setBackgroundDrawable( mBMdownload_on );
+          break;
+        case 2:
+          mButton1[0].setBackgroundDrawable( mBMdownload_wait );
+          break;
+        default:
+          mButton1[0].setBackgroundDrawable( mBMdownload );
       }
-    }
-  }
-
-  public void notifyDisconnected()
-  {
-    if ( TopoDroidSetting.mAutoReconnect && TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS ) {
-      // Log.v("DistoX", "notify disconnected: auto reconnect ");
-      try {
-        do {
-          Thread.sleep( 100 );
-          // Log.v("DistoX", "notify disconnected: try reconnect " + mDataDownloader.mConnected );
-          mDataDownloader.downloadData( ); 
-        } while ( mDataDownloader.mConnected == false );
-      } catch ( InterruptedException e ) { }
-      // Log.v("DistoX", "notify disconnected: reconnected " + mDataDownloader.mConnected );
     }
   }
 

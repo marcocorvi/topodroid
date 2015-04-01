@@ -114,6 +114,17 @@ class TopoDroidLog
     }
   }
 
+  static void LogStackTrace( Exception e )
+  {
+    StackTraceElement[] trace = e.getStackTrace();
+    if ( trace == null ) return;
+    if ( mLogStream == 0 ) {
+      for ( StackTraceElement st : trace ) Log.v( TAG, st.toString() );
+    } else {
+      for ( StackTraceElement st : trace ) mLog.format( "%s\n", st.toString() );
+    }
+  }
+
   static void setLogTarget()
   {
     if ( mLog == null ) {

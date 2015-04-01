@@ -22,9 +22,9 @@ public interface ILister
 
   public void updateBlockList( DistoXDBlock blk );
 
-  public void setConnectionStatus( boolean connected );
+  public void setConnectionStatus( int status ); // 0 off, 1 on, 2 wait
 
-  public void notifyDisconnected();
+  // public void notifyDisconnected();
 
 }
 

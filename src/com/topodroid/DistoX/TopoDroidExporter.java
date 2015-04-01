@@ -412,6 +412,7 @@ class TopoDroidExporter
       pw.format("</Style>\n");
 
       pw.format("<Style id=\"station\">\n");
+      pw.format("  <IconStyle><Icon></Icon></IconStyle>\n");
       pw.format("  <LabelStyle>\n");
       pw.format("     <color>ffff00ff</color>\n"); // AABBGGRR
       pw.format("     <colorMode>normal</colorMode>\n");

@@ -120,8 +120,29 @@ public class TopoDroidApp extends Application
 
   static boolean isTracing = false;
 
+
+
   // ----------------------------------------------------------------------
-  // DataListener
+  // data lister
+  ListerSet mLister;
+
+  void registerLister( ILister lister ) { mLister.registerLister( lister ); }
+  void unregisterLister( ILister lister ) { mLister.unregisterLister( lister ); }
+
+  void notifyStatus( )
+  { 
+    mLister.setConnectionStatus( mDataDownloader.getStatus() );
+  }
+
+  void notifyDisconnected()
+  {
+    if ( mLister.size() > 0 ) {
+      new ReconnectTask( mDataDownloader ).execute();
+    }
+  }
+
+  // ----------------------------------------------------------------------
+  // DataListener (co-surveying)
   private ArrayList< DataListener > mDataListeners;
 
   // synchronized( mDataListener )
@@ -398,24 +419,24 @@ public class TopoDroidApp extends Application
 
   void disconnectRemoteDevice( boolean force )
   {
-    // Log.v("DistoX", "App disconnect RemoteDevice listers " + mDataDownloader.mLister.size() );
-    if ( force || mDataDownloader.mLister.size() == 0 ) {
+    // Log.v("DistoX", "App disconnect RemoteDevice listers " + mLister.size() );
+    if ( force || mLister.size() == 0 ) {
       if ( mComm != null && mComm.mBTConnected ) mComm.disconnectRemoteDevice( );
     }
   }
 
-  // void connectRemoteDevice( String address, ArrayList<ILister> listers )
+  // void connectRemoteDevice( String address )
   // {
-  //   if ( mComm != null ) mComm.connectRemoteDevice( address, listers );
+  //   if ( mComm != null ) mComm.connectRemoteDevice( address, mLister );
   // }
 
   // FIXME_COMM
-  public boolean connect( String address, ArrayList<ILister> listers ) 
+  public boolean connect( String address ) 
   {
-    return mComm != null && mComm.connect( address, listers );
+    return mComm != null && mComm.connect( address, mLister );
   }
 
-  public void disconnect()
+  public void disconnectComm()
   {
     if ( mComm != null ) mComm.disconnect();
   }
@@ -485,8 +506,7 @@ public class TopoDroidApp extends Application
     mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
 
     mEnableZip = true;
-    
-    mDataListeners = new ArrayList<DataListener>();
+    mDataListeners = new ArrayList< DataListener >( );
     mData = new DataHelper( this, mDataListeners );
 
     String version = mData.getValue( "version" );
@@ -530,6 +550,7 @@ public class TopoDroidApp extends Application
 
     mComm = new DistoXComm( this );
 
+    mLister = new ListerSet();
     mDataDownloader = new DataDownloader( this, this );
 
     DistoXConnectionError = new String[5];
@@ -912,14 +933,13 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // DATA DOWNLOAD
 
-  public int downloadData( ArrayList<ILister> listers )
+  public int downloadData( ListerSet lister )
   {
     mSecondLastShotId = lastShotId();
     TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "downloadData() device " + mDevice + " comm " + mComm.toString() );
     int ret = 0;
     if ( mComm != null && mDevice != null ) {
-      ret = mComm.downloadData( mDevice.mAddress, listers );
-      // Log.v( TAG, "TopoDroidApp.downloadData() result " + ret );
+      ret = mComm.downloadData( mDevice.mAddress, lister );
       if ( ret > 0 && TopoDroidSetting.mSurveyStations > 0 ) {
         // FIXME TODO select only shots after the last leg shots
         List<DistoXDBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
@@ -1508,9 +1528,9 @@ public class TopoDroidApp extends Application
     return 1; // CALIB_ALGO_LINEAR
   }  
 
-  void setX310Laser( int what, ArrayList<ILister> listers ) // 0: off, 1: on, 2: measure
+  void setX310Laser( int what, ListerSet lister ) // 0: off, 1: on, 2: measure
   {
-    mComm.setX310Laser( mDevice.mAddress, what, listers );
+    mComm.setX310Laser( mDevice.mAddress, what, lister );
   }
 
   // int readFirmwareHardware()

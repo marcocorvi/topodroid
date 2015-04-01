@@ -134,10 +134,14 @@
   <string-array name="sockType">
      <item name="default">Default</item>
      <item name="Insecure">Insecure</item>
+     <!-- item name="Port">Port</item -->
+     <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
   <string-array name="sockTypeValue">
      <item name="default">0</item>
      <item name="Insecure">1</item>
+     <!-- item name="Port">2</item -->
+     <!-- item name="InsecurePort">3</item -->
   </string-array>
 
   <string-array name="surveyStations">

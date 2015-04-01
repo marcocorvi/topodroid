@@ -241,13 +241,13 @@ public class PhotoActivity extends Activity
     }
   }
 
-  public void setConnectionStatus( boolean connected )
+  public void setConnectionStatus( int status )
   {
     /* nothing */
   }
 
-  public void notifyDisconnected()
-  {
-  }
+  // public void notifyDisconnected()
+  // {
+  // }
 
 }

@@ -126,6 +126,7 @@ public class DrawingActivity extends ItemDrawer
 
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
+  BitmapDrawable mBMdownload_wait;
   BitmapDrawable mBMjoin;
   BitmapDrawable mBMjoin_no;
   BitmapDrawable mBMplan;
@@ -767,6 +768,9 @@ public class DrawingActivity extends ItemDrawer
       }
       mBMextend  = mApp.setButtonBackground( null, size, izons[IC_EXTEND] ); 
       mBMdownload_on = mApp.setButtonBackground( null, size, R.drawable.iz_download_on );
+      mBMdownload_wait = mApp.setButtonBackground( null, size, R.drawable.iz_download_wait );
+      // assert( mBMdownload != null );
+      // assert( mBMplan != null );
 
       mButton2 = new Button[ mNrButton2 ];
       for ( int k=0; k<mNrButton2; ++k ) {
@@ -830,7 +834,7 @@ public class DrawingActivity extends ItemDrawer
       }
 
       // set button1[download] icon
-      setConnectionStatus( mDataDownloader != null && mDataDownloader.mConnected );
+      setConnectionStatus( mDataDownloader.getStatus() );
 
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mButtonView2 = new HorizontalButtonView( mButton2 );
@@ -891,7 +895,7 @@ public class DrawingActivity extends ItemDrawer
       doResume();
       // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       if ( mDataDownloader != null ) mDataDownloader.onResume();
-      setConnectionStatus( mDataDownloader.mConnected );
+      setConnectionStatus( mDataDownloader.getStatus() );
     }
 
     @Override
@@ -908,7 +912,7 @@ public class DrawingActivity extends ItemDrawer
       super.onStart();
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       if ( mDataDownloader != null ) {
-        mDataDownloader.registerLister( this );
+        mApp.registerLister( this );
       }
     }
 
@@ -918,7 +922,7 @@ public class DrawingActivity extends ItemDrawer
       super.onStop();
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       if ( mDataDownloader != null ) {
-        mDataDownloader.unregisterLister( this );
+        mApp.unregisterLister( this );
         mDataDownloader.onPause();
         mApp.disconnectRemoteDevice( false );
       }
@@ -2128,7 +2132,6 @@ public class DrawingActivity extends ItemDrawer
         mPid  = mPid2;
         mName = mName2;
         mType = (int)PlotInfo.PLOT_EXTENDED;
-        // mButton1[ BTN_PLOT ].setBackgroundResource( icons00[ IC_EXTEND ] );
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
         mDrawingSurface.setManager( mType );
         resetReference( mPlot2 );
@@ -2137,7 +2140,6 @@ public class DrawingActivity extends ItemDrawer
         mPid  = mPid1;
         mName = mName1;
         mType = (int)PlotInfo.PLOT_PLAN;
-        // mButton1[ BTN_PLOT ].setBackgroundResource(  icons00[ IC_PLAN ] );
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
         mDrawingSurface.setManager( mType );
         resetReference( mPlot1 );
@@ -2204,7 +2206,9 @@ public class DrawingActivity extends ItemDrawer
           // DistoXDBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
           (new ShotNewDialog( this, mApp, this, null, -1L )).show();
         } else {
-          mDataDownloader.downloadData( );
+          mDataDownloader.toggleDownload();
+          setConnectionStatus( mDataDownloader.getStatus() );
+          mDataDownloader.doDataDownload( );
         }
       } else if ( b == mButton1[4] ) { // bluetooth
         new DeviceRemote( this, this, mApp ).show();
@@ -2780,36 +2784,25 @@ public class DrawingActivity extends ItemDrawer
     pw.format("  </profile>\n");
   }
 
-  public void setConnectionStatus( boolean connected )
+  public void setConnectionStatus( int status )
   { 
     if ( mApp.mDevice == null ) {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
       mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMadd );
     } else {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
-      if ( connected ) {
-        // setTitleColor( TopoDroidConst.COLOR_CONNECTED );
-        mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
-      } else {
-        // setTitleColor( TopoDroidConst.COLOR_NORMAL );
-        mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload );
+      switch ( status ) {
+        case 1:
+          mButton1[0].setBackgroundDrawable( mBMdownload_on );
+          break;
+        case 2:
+          mButton1[0].setBackgroundDrawable( mBMdownload_wait );
+          break;
+        default:
+          mButton1[0].setBackgroundDrawable( mBMdownload );
       }
     }
   }
 
-  public void notifyDisconnected()
-  {
-    if ( TopoDroidSetting.mAutoReconnect && TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS ) {
-      // Log.v("DistoX", "auto reconnect ");
-      try {
-        do {
-          Thread.sleep( 1000 );
-          // Log.v("DistoX", "try reconnect " + mDataDownloader.mConnected );
-          mDataDownloader.downloadData( );
-        } while ( mDataDownloader.mConnected == false );
-      } catch ( InterruptedException e ) { }
-      // Log.v("DistoX", "reconnected " + mDataDownloader.mConnected );
-    }
-  }
 
 }
