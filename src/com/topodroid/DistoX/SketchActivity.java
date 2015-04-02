@@ -864,7 +864,7 @@ public class SketchActivity extends ItemDrawer
   {   
     if ( mDataDownloader != null ) {
       mApp.unregisterLister( this );
-      mDataDownloader.onPause();
+      mDataDownloader.onStop();
       mApp.disconnectRemoteDevice( false );
     }
     super.onStop();

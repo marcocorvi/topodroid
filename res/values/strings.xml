@@ -182,8 +182,9 @@
     <string name="no_sensors">Survey has no measurement</string>
     <string name="no_shots">Survey has no shots.\nUse Download button to get some</string>
     <string name="no_survey">No survey selected.</string>
-    <string name="no_tdsymbol">TdSymbol not installed</string>
-    <string name="no_thmanager">ThManager not installed</string>
+    <!-- UNUSED string name="no_tdsymbol">TdSymbol not installed</string -->
+    <string name="no_thmanager">ThManager app not installed</string>
+    <string name="no_db_viewer">DB_viewer app not found</string>
     <string name="no_undelete">No item to recover</string>
 
     <string name="menu_3d">3 D</string>
@@ -337,6 +338,8 @@
     <string name="stat_station">Stations %1$d</string>
     <string name="stat_surface">Surface shots %1$d %2$.1f</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <string name="shot_title">SHOT %1$s - %2$s"</string>
+    <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 
     <string name="hide_blank">Blank shots</string>
     <string name="hide_leg">Repeated leg shots</string>

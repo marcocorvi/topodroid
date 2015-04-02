@@ -199,6 +199,9 @@
     <string name="no_sensors">Vermessung hat keine Sensormessung</string>
     <string name="no_shots">Vermessung hat keine Messung</string>
     <string name="no_survey">Keine Vermessung ausgewählt</string>
+    <!-- UNUSED string name="no_tdsymbol">Keine TdSymbol App</string -->
+    <string name="no_thmanager">Keine ThManager App</string>
+    <string name="no_db_viewer">Keine DB_viewer App</string>
     <string name="no_undelete">Nichts wiederherzustellen</string>
 
 <!-- MENUS 
@@ -350,6 +353,8 @@
     <string name="stat_station">Messpunkten %1$d</string>
     <string name="stat_surface">Oberflächenmessungen %1$d %2$.1f</string>
     <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <string name="shot_title">MESSUNG %1$s - %2$s"</string>
+    <string name="shot_data">L %1$.2f  A %2$.1f  N %3$.1f"</string>
 
 <!-- there are four kinds of measurements, depending on whether they have stations:
      blank: with no station assigned yet

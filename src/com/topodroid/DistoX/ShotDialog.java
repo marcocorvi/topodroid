@@ -117,7 +117,7 @@ public class ShotDialog extends Dialog
     mParent = parent;
     mPos = pos;
     loadDBlock( blk, prev, next );
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "ShotDialog " + blk.toString(true) );
+    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
   }
 
 
@@ -126,7 +126,7 @@ public class ShotDialog extends Dialog
     mPrevBlk     = prev;
     mNextBlk     = next;
     mBlk         = blk;
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "ShotDialog LOAD " + blk.toString(true) );
+    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog LOAD " + blk.toString(true) );
     if ( prev != null ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "           prev " + prev.toString(true) );
     }
@@ -240,7 +240,7 @@ public class ShotDialog extends Dialog
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "ShotDialog::onCreate" );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog::onCreate" );
     setContentView(R.layout.shot_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 

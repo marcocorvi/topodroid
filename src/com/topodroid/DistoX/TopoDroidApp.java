@@ -407,6 +407,7 @@ public class TopoDroidApp extends Application
     mComm.disconnectRemoteDevice( );
     mComm = null;
     mComm = new DistoXComm( this );
+    mDataDownloader.onStop(); // mDownload = false;
   }
 
   // called by DeviceActivity::setState()

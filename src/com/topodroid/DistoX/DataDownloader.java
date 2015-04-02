@@ -31,8 +31,15 @@ import android.util.Log;
 
 class DataDownloader
 {
-  boolean mConnected = false;  // whetehr it is "connected"
-  boolean mDownload  = false;  // whether it is "downloading"
+  private boolean mConnected = false;  // whetehr it is "connected"
+  private boolean mDownload  = false;  // whether it is "downloading"
+
+  boolean isConnected() { return mConnected; }
+  boolean isDownloading() { return mDownload; }
+  boolean needReconnect() { return mDownload && ! mConnected; }
+  void setConnected( boolean connected ) { mConnected = connected; }
+  void setDownload( boolean download ) { mDownload = download; }
+
   // int mStatus = 0; // 0 disconnected, 1 connecting, 2 connected
   int getStatus()
   {
@@ -137,8 +144,13 @@ class DataDownloader
 
   // static boolean mConnectedSave = false;
 
-  void onPause()
+  void onStop()
   {
+    mDownload = false;
+    if ( mConnected ) {
+      stopDownloadData();
+      mConnected = false;
+    }
   }
 
   void onResume()

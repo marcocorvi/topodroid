@@ -176,8 +176,9 @@
     <string name="no_sensors">Topografía sin mediciones</string>
     <string name="no_shots">Topografía sin mediciones.\nUse botón para descargar mediciones</string>
     <string name="no_survey">Topografía no seleccionada.</string>
-    <string name="no_tdsymbol">TdSymbol no instalado</string>
+    <!-- UNUSED string name="no_tdsymbol">TdSymbol no instalado</string -->
     <string name="no_thmanager">ThManager no instalado</string>
+    <!-- TODO string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
 
     <string name="menu_about">ACERCA DE</string>
@@ -326,6 +327,8 @@
     <string name="stat_station">Estaciones %1$d</string>
     <string name="stat_surface">mediciones Superficie %1$d %2$.1f</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <!-- TODO string name="shot_title">SHOT %1$s - %2$s"</string -->
+    <!-- TODO string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string -->
 
     <string name="hide_blank">Mediciones en blanco</string>
     <string name="hide_leg">Mediciones repetidas</string>

@@ -33,10 +33,10 @@ public class ReconnectTask extends AsyncTask< String, Integer, Integer >
   {
     if ( ! lock() ) return null;
     if ( TopoDroidSetting.mAutoReconnect && TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS ) {
-      while ( mDownloader.mDownload && ! mDownloader.mConnected ) {
+      while ( mDownloader.needReconnect() ) {
         try {
           Thread.sleep( 500 );
-          // Log.v("DistoX", "notify disconnected: try reconnect status " + mDataDownloader.mDownload );
+          // Log.v("DistoX", "notify disconnected: try reconnect status " + mDataDownloader.isDownloading() );
           mDownloader.tryConnect( ); 
         } catch ( InterruptedException e ) { }
       }
@@ -56,7 +56,7 @@ public class ReconnectTask extends AsyncTask< String, Integer, Integer >
     // if ( res != null ) {
     //   int r = res.intValue();
     // }
-    mDownloader.notifyConnectionStatus( mDownloader.mConnected );
+    mDownloader.notifyConnectionStatus( mDownloader.isConnected() );
     unlock();
   }
 

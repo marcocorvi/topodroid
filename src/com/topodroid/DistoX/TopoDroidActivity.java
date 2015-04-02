@@ -294,7 +294,7 @@ public class TopoDroidActivity extends Activity
           intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( this, "DB_viewer mApp not found", Toast.LENGTH_SHORT ).show();
+          Toast.makeText( this, R.string.no_db_viewer, Toast.LENGTH_SHORT ).show();
         }
       }
     }

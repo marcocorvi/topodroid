@@ -255,14 +255,11 @@ public class DistoXDBlock
     return sw.getBuffer().toString();
   }
 
-  public String dataString()
+  public String dataString( String fmt )
   {
     float ul = TopoDroidSetting.mUnitLength;
     float ua = TopoDroidSetting.mUnitAngle;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "L %.2f  N %.1f  I %.1f", mLength*ul, mBearing*ua, mClino*ua );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, fmt, mLength*ul, mBearing*ua, mClino*ua );
   }
 
   public String distanceString()

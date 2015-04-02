@@ -59,7 +59,7 @@ public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
       int r = res.intValue();
       mLister.refreshDisplay( r, true );
     }
-    mApp.mDataDownloader.mDownload = false;
+    mApp.mDataDownloader.setDownload( false );
     mApp.mDataDownloader.notifyConnectionStatus( false );
     unlock();
   }

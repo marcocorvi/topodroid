@@ -29,6 +29,7 @@ import android.view.KeyEvent;
 public class PhotoSensorsDialog extends Dialog
                                 implements View.OnClickListener
 {
+  private Context mContext;
   private ShotActivity mParent;
   private DistoXDBlock mBlk;
 
@@ -52,7 +53,8 @@ public class PhotoSensorsDialog extends Dialog
   PhotoSensorsDialog( Context context, ShotActivity parent, DistoXDBlock blk )
   {
     super( context );
-    mParent = parent;
+    mContext = context;
+    mParent  = parent;
     mBlk = blk;
     // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "PhotoSensorDialog");
   }
@@ -79,7 +81,7 @@ public class PhotoSensorsDialog extends Dialog
     mTVstations = (TextView) findViewById( R.id.photo_shot_stations );
     mTVdata = (TextView) findViewById( R.id.photo_shot_data );
     mTVstations.setText( mBlk.Name() );
-    mTVdata.setText( mBlk.dataString() );
+    mTVdata.setText( mBlk.dataString( mContext.getResources().getString(R.string.shot_data) ) );
 
     mButtonPhoto.setOnClickListener( this );
     mButtonSensor.setOnClickListener( this );

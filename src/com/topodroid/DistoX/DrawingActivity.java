@@ -923,7 +923,7 @@ public class DrawingActivity extends ItemDrawer
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       if ( mDataDownloader != null ) {
         mApp.unregisterLister( this );
-        mDataDownloader.onPause();
+        mDataDownloader.onStop();
         mApp.disconnectRemoteDevice( false );
       }
       doStop();

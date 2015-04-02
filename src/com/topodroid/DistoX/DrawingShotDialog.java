@@ -31,6 +31,8 @@ import android.widget.CheckBox;
 public class DrawingShotDialog extends Dialog 
                                implements View.OnClickListener
 {
+    private Context mContext;
+
     private TextView mLabel;
     private Button mBtnOK;
     // private Button mBtnCancel;
@@ -53,8 +55,9 @@ public class DrawingShotDialog extends Dialog
     public DrawingShotDialog( Context context, DrawingActivity activity, DrawingPath shot )
     {
       super(context);
+      mContext  = context;
       mActivity = activity;
-      mBlock  = shot.mBlock;
+      mBlock    = shot.mBlock;
     }
 
     @Override
@@ -87,7 +90,7 @@ public class DrawingShotDialog extends Dialog
       //   mRBignore.setTextColor( 0xff999999 );
       // }
 
-      mLabel.setText( mBlock.dataString() );
+      mLabel.setText( mBlock.dataString( mContext.getResources().getString(R.string.shot_data) ) );
 
       mRBleft.setOnClickListener( this );
       mRBvert.setOnClickListener( this );
@@ -130,10 +133,7 @@ public class DrawingShotDialog extends Dialog
             break;
         }
       }
-      StringBuilder sb = new StringBuilder();
-      // FIXME STRING
-      sb.append( "SHOT  " ).append( mBlock.mFrom ).append( "-" ).append( mBlock.mTo );
-      setTitle( sb.toString() );
+      setTitle( String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
     }
 
     public void onClick(View view)

@@ -183,8 +183,9 @@
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string>
     <string name="no_survey">Съёмка не аыбрана.</string>
-    <string name="no_tdsymbol">TdSymbol не установлен</string>
+    <!-- UNUSED string name="no_tdsymbol">TdSymbol не установлен</string -->
     <string name="no_thmanager">ThManager не установлен</string>
+    <!-- TODO string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Нечего восстанавливать</string>
 
     <!-- NO string name="menu_3d">3 D</string -->
@@ -337,6 +338,8 @@
     <string name="stat_station">Пикеты %1$d</string>
     <string name="stat_surface">Поверхн. пикеты %1$d %2$.1f</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f"</string>
+    <!-- TODO string name="shot_title">SHOT %1$s - %2$s"</string -->
+    <!-- TODO string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string -->
 
     <string name="hide_blank">Пустые пикеты</string>
     <string name="hide_leg">Повторные измерения</string>

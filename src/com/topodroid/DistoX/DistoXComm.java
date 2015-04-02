@@ -97,20 +97,20 @@ public class DistoXComm
         // } else if ( BluetoothDevice.ACTION_FOUND.equals( action ) ) {
         if ( BluetoothDevice.ACTION_ACL_CONNECTED.equals( action ) ) {
           TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_CONNECTED");
-          mApp.mDataDownloader.mConnected = true;
+          mApp.mDataDownloader.setConnected( true );
           mApp.notifyStatus();
         } else if ( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
           TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECT_REQUESTED");
-          closeSocket( );
-          mApp.mDataDownloader.mConnected = false;
+          mApp.mDataDownloader.setConnected( false );
           mApp.notifyStatus();
+          closeSocket( );
         } else if ( BluetoothDevice.ACTION_ACL_DISCONNECTED.equals( action ) ) {
           Bundle extra = data.getExtras();
           String device = (extra!=null)? extra.getString( BluetoothDevice.EXTRA_DEVICE ) : "undefined";
           TopoDroidLog.Log( TopoDroidLog.LOG_BT, "DistoXComm received ACL_DISCONNECTED from " + device );
-          closeSocket( );
-          mApp.mDataDownloader.mConnected = false;
+          mApp.mDataDownloader.setConnected( false );
           mApp.notifyStatus();
+          closeSocket( );
           mApp.notifyDisconnected();
         }
       }
@@ -306,24 +306,23 @@ public class DistoXComm
   /** close the socket (and the RFcomm thread) but don't delete it
    * alwasy called with wait_thread
    */
-  private void closeSocket( )
+  private synchronized void closeSocket( )
   {
+    if ( mBTSocket == null ) return;
+
     TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "close socket()" );
-    boolean closed = false;
-    for ( int k=0; k<1 && ! closed; ++k ) {
-      if ( mBTSocket != null ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "try close socket nr " + k );
-        cancelRfcommThread();
-        closeProtocol();
-        try {
-          mBTSocket.close();
-          closed = true;
-        } catch ( IOException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close socket IOexception " + e.getMessage() );
-          TopoDroidLog.LogStackTrace( e );
-        } finally {
-          mBTConnected = false;
-        }
+    for ( int k=0; k<1 && mBTSocket != null; ++k ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "try close socket nr " + k );
+      cancelRfcommThread();
+      closeProtocol();
+      try {
+        mBTSocket.close();
+        mBTSocket = null;
+      } catch ( IOException e ) {
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close socket IOexception " + e.getMessage() );
+        TopoDroidLog.LogStackTrace( e );
+      } finally {
+        mBTConnected = false;
       }
     }
     mBTConnected = false;
@@ -345,7 +344,7 @@ public class DistoXComm
     TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "destroy socket()" );
     // closeProtocol(); // already in closeSocket()
     closeSocket();
-    mBTSocket = null;
+    // mBTSocket = null;
     resetBTReceiver();
   }
 
@@ -496,7 +495,7 @@ public class DistoXComm
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "connect socket() (port " + port + ") IO error " + e.getMessage() );
             TopoDroidLog.LogStackTrace( e );
             closeSocket();
-            mBTSocket = null;
+            // mBTSocket = null;
           }
         }
         if ( mBTSocket == null && port < TopoDroidSetting.mCommRetry ) {

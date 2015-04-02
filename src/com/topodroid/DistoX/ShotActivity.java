@@ -873,10 +873,9 @@ public class ShotActivity extends Activity
   {
     // Debug.stopMethodTracing( );
     super.onStop();
-    // Log.v( "DistoX", "Shot Activity onStop() " + ((mDataDownloader!=null)? "with DataDownloader":"") );
     if ( mDataDownloader != null ) {
       mApp.unregisterLister( this );
-      mDataDownloader.onPause();
+      mDataDownloader.onStop();
     }
     mApp.disconnectRemoteDevice( false );
   }
@@ -885,7 +884,6 @@ public class ShotActivity extends Activity
   public synchronized void onPause() 
   {
     super.onPause();
-    // Log.v( "DistoX", "Shot Activity onPause() " + ((mDataDownloader!=null)? "with DataDownloader":"") );
     saveInstanceToData();
 
     // mApp.unregisterConnListener( mHandler );
@@ -970,7 +968,7 @@ public class ShotActivity extends Activity
         setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnReset
-        mDataDownloader.mDownload = false;
+        mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         switch ( mApp.distoType() ) {
