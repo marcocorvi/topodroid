@@ -6,6 +6,7 @@ name-it masso
 name-fr bordure_rocheuse
 name-de Felsenumriss
 name-ru граница_пород
+name-bg контур на камък
 th_name rock-border
 color 0x66ffcc 0xff
 width 1

@@ -6,6 +6,7 @@ name-it ingresso
 name-fr entrée
 name-de Eingang
 name-ru вход
+name-bg вход
 th_name entrance
 orientation yes
 color 0xff3333

@@ -6,6 +6,7 @@ name-it flusso_d'acqua
 name-fr circulation_d'eau
 name-de Gerinne
 name-ru водоток
+name-bg течаща вода
 th_name water-flow
 orientation yes
 color 0x6666ff

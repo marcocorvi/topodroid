@@ -81,7 +81,7 @@
   </string-array>
 
   <string-array name="extraButtons">
-     <item name="basic">Основни</item>
+     <item name="basic">Базови</item>
      <item name="normal">Нормални</item>
      <item name="advanced">Пълни</item>
      <item name="experimental">Експериментални</item>
@@ -114,8 +114,8 @@
   </string-array>
 
   <string-array name="connMode">
-     <item name="batch">Ръчен</item>
-     <item name="continuous">Постоянен</item>
+     <item name="batch">Ръчна</item>
+     <item name="continuous">Постоянна</item>
   </string-array>
   <string-array name="connModeValue">
      <item name="batch">0</item>
@@ -141,7 +141,7 @@
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">No</item>
+     <item name="no">Няма</item>
      <item name="for">Странични, права отсечка</item>
      <item name="back">Странични, обратна отсечка</item>
      <item name="for2">Права отсечка, странични</item>

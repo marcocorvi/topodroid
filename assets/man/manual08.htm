@@ -1,7 +1,7 @@
 <html><body>
 <h3>[8] SURVEY DATA</h3>
 
-<i>Back to the main window. The list of surveys is empty, but you are finally ready for your first survey. Tap on the <u>Add</u> button (the "plus" sign). You get a dialog to specify the survey informations: <u>name</u>, <u>date</u>, <u>team</u>, magnetic <u>declination</u>, and a brief <u>description</u>.</i><br><p>
+<i>Back to the main window. The list of surveys is empty, but you are finally ready for your first survey. Tap on the <u>Add</u> button (the "plus" sign). You get a dialog to specify the survey informations: <u>name</u>, <u>date</u>, <u>team</u>, <u>initial</u> survey station, magnetic <u>declination</u>, and a brief <u>description</u>.</i><br><p>
 
 The survey name is mandatory. It must be unique in the database. The survey names are used to list surveys in the main window and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database). The date is pre-filled with the current date. Team and description are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them. The magnetic declination is 0.0 by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS.<br><p>
 
@@ -49,6 +49,7 @@ Each kind of shots is displayed with a different color: "legs" are white, "repea
 <ulist>
 <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the <u>Team</u> field when you create a new survey. You can write your name and that of the cavers you usually survey with.</li>
 <li><i>Survey stations</i>: this tells the program how to automatically assign survey stations to the shots. (This is further explained below).</li>
+<li><i>Initial station name</i>: The default first station name for new surveys. Can be also changed in the New survey dialog.</li>
 <li><i>Leg tolerance</i>: the angular tolerance (radians) between consecutive shots to belong to the same leg</li>
 <li><i>Extend threshold</i>: splay shots are assigned an "extend" direction depending on the angle they make with the leg(s). When the angle is less than the threshold they get a "vertical extend".</li>
 <li><i>Shot vertical threshold</i>. this is like Therion vthreshold: the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>

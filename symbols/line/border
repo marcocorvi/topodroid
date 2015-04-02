@@ -6,6 +6,7 @@ name-it bordo
 name-fr bordure
 name-de Begrenzung
 name-ru граница
+name-bg граница
 th_name border
 color 0x00cc00 0xff
 width 1
