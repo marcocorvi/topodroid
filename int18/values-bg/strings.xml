@@ -185,7 +185,7 @@
     <string name="no_survey">Не е избрана картировка</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol не е инсталирана</string -->
     <string name="no_thmanager">ThManager не е инсталирана</string>
-    <!-- TODO string name="no_db_viewer">DB_viewer app not found</string -->
+    <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
     <string name="no_undelete">Няма елементи за възстановяване</string>
 
     <string name="menu_3d">3D</string>
@@ -343,8 +343,8 @@
     <string name="stat_station">Репери %1$d</string>
     <string name="stat_surface">Повърхн. отсечки %1$d %2$.1f</string>
     <string name="stat_wens">З %1$.0f  И %2$.0f  С %3$.0f  Ю %4$.0f"</string>
-    <!-- TODO string name="shot_title">SHOT %1$s - %2$s"</string -->
-    <!-- TODO string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string -->
+    <string name="shot_title">Отсечка %1$s - %2$s"</string>
+    <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
 
     <string name="hide_blank">Празни отсечки</string>
     <string name="hide_leg">Повтарящи се отсечки</string>
