@@ -93,6 +93,7 @@
     <string name="splay_at_to">LRUD à la station Vers</string>
 
     <string name="few_data">Pas assez de données</string>
+    <!-- TODO string name="few_plots">Not enough sketches</string -->
 
     <string name="import_title">Import fichier</string>
     <string name="import_wait">Importation de fichier... Patientez...</string>
@@ -196,6 +197,7 @@
     <string name="menu_logs">JOURNALISATION</string>
     <!-- string name="menu_manual">MANUEL</string -->
     <string name="menu_options">OPTIONS</string>
+    <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETTE</string>
     <!-- OK string name="menu_photo">PHOTO</string -->
     <string name="menu_sensor">CAPTEUR</string>
@@ -451,6 +453,7 @@
     <string name="help_splay">Affecte automatiquement les stations aux visées latérales</string>
     <string name="help_display">Choisit un mode d\'affichage</string>
     <!-- TODO string name="help_display_calib">Toggle display of deleted shots</string -->
+    <!-- TODO string name="help_overview">Overview activity</string -->
     <string name="help_plot">Passe en mode croquis</string>
     <string name="help_note">Modifie les notes du relevé</string>
     <string name="help_bluetooth">Reinitialise la connexion Bluetooth</string>

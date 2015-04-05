@@ -182,8 +182,7 @@ class SymbolAreaLibrary
 
   void loadUserAreas()
   {
-    // Log.v( TopoDroidApp.TAG, "load user areas");
-    String locale = "name-" + Locale.getDefault().toString().substring(0,2);
+    String locale = "name-" + TopoDroidApp.mLocale.toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";

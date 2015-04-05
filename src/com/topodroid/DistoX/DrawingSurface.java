@@ -63,7 +63,7 @@ public class DrawingSurface extends SurfaceView
     public DrawingPath previewPath;
     private SurfaceHolder mHolder; // canvas holder
     private Context mContext;
-    private DrawingActivity mActivity;
+    private IZoomer mZoomer;
     private AttributeSet mAttrs;
     private int mWidth;            // canvas width
     private int mHeight;           // canvas height
@@ -80,7 +80,7 @@ public class DrawingSurface extends SurfaceView
 
     boolean isSelectable() { return commandManager.isSelectable(); }
 
-    void setActivity( DrawingActivity act ) { mActivity = act; }
+    void setZoomer( IZoomer zoomer ) { mZoomer = zoomer; }
 
     public DrawingSurface(Context context, AttributeSet attrs) 
     {
@@ -183,7 +183,7 @@ public class DrawingSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mActivity.zoom(), previewDoneHandler );
+        commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler );
         if ( previewPath != null ) {
           previewPath.draw(canvas);
         }
@@ -271,6 +271,17 @@ public class DrawingSurface extends SurfaceView
     {
       commandManager.setNorth( path );
     }
+
+    public void setFirstReference( DrawingPath path )
+    {
+      commandManager.setFirstReference( path );
+    }
+
+    public void setSecondReference( DrawingPath path )
+    {
+      commandManager.setSecondReference( path );
+    }
+
 
     public void addGridPath( DrawingPath path )
     {
@@ -447,22 +458,35 @@ public class DrawingSurface extends SurfaceView
     return line;
   } 
 
-  public boolean loadTherion( String filename1, String filename2, SymbolsPalette missingSymbols )
+  private SymbolsPalette preparePalette()
   {
-    SymbolsPalette localPalette = new SymbolsPalette();
+    SymbolsPalette palette = new SymbolsPalette();
     // populate local palette with default symbols
-    localPalette.addPoint("user"); // make sure local palette contains "user" symnbols
-    localPalette.addLine("user");
-    localPalette.addArea("user");
+    palette.addPoint("user"); // make sure local palette contains "user" symnbols
+    palette.addLine("user");
+    palette.addArea("user");
     for ( SymbolPoint p : DrawingBrushPaths.mPointLib.mAnyPoint ) {
-      if ( p.isEnabled() && ! p.getThName().equals("user") ) localPalette.addPoint( p.getThName( ) );
+      if ( p.isEnabled() && ! p.getThName().equals("user") ) palette.addPoint( p.getThName( ) );
     }
     for ( SymbolLine p : DrawingBrushPaths.mLineLib.mAnyLine ) {
-      if ( p.isEnabled() && ! p.getThName().equals("user") ) localPalette.addLine( p.getThName( ) );
+      if ( p.isEnabled() && ! p.getThName().equals("user") ) palette.addLine( p.getThName( ) );
     }
     for ( SymbolArea p : DrawingBrushPaths.mAreaLib.mAnyArea ) {
-      if ( p.isEnabled() && ! p.getThName().equals("user") ) localPalette.addArea( p.getThName( ) );
+      if ( p.isEnabled() && ! p.getThName().equals("user") ) palette.addArea( p.getThName( ) );
     }
+    return palette;
+  }
+
+  public boolean loadTherion( String filename1, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  {
+    SymbolsPalette localPalette = preparePalette();
+    commandManager = mCommandManager1;
+    return doLoadTherion( filename1, xdelta, ydelta, missingSymbols, localPalette );
+  }
+
+  public boolean loadTherion( String filename1, String filename2, SymbolsPalette missingSymbols )
+  {
+    SymbolsPalette localPalette = preparePalette();
 
     missingSymbols.resetSymbolLists();
     boolean ret = true;
@@ -482,10 +506,17 @@ public class DrawingSurface extends SurfaceView
 
   public boolean doLoadTherion( String filename, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
   {
+    return doLoadTherion( filename, 0, 0, missingSymbols, localPalette );
+  }
+
+  public boolean doLoadTherion( String filename, float dx, float dy, 
+                                SymbolsPalette missingSymbols, SymbolsPalette localPalette )
+  {
     float x, y, x1, y1, x2, y2;
     boolean is_not_section = true;
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doLoadTherion file " + filename );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doLoadTherion file " + filename + " delta " + dx + " " + dy );
+    Log.v( "DistoX", "Load file " + filename + " delta " + dx + " " + dy );
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
 
@@ -558,8 +589,8 @@ public class DrawingSurface extends SurfaceView
           String options = null;
 
           try {
-            x =   Float.parseFloat( vals[1] ) / TopoDroidConst.TO_THERION;
-            y = - Float.parseFloat( vals[2] ) / TopoDroidConst.TO_THERION;
+            x = dx + Float.parseFloat( vals[1] ) / TopoDroidConst.TO_THERION;
+            y = dy - Float.parseFloat( vals[2] ) / TopoDroidConst.TO_THERION;
           } catch ( NumberFormatException e ) {
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Point X-Y error " + vals[1] + " " + vals[2] );
             continue;
@@ -685,13 +716,14 @@ public class DrawingSurface extends SurfaceView
             if ( ! line.equals( "endline" ) ) { 
               String[] pt = line.split( "\\s+" );
               try {
-                x =   Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
-                y = - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
+                x = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
+                y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
               } catch ( NumberFormatException e ) {
                 TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt[0] + " " + pt[1] );
                 continue;
               }
               path.addStartPoint( x, y );
+
               while ( (line = readLine( br )) != null ) {
                 if ( line.equals( "endline" ) ) {
                   line = readLine( br ); // area statement
@@ -719,8 +751,8 @@ public class DrawingSurface extends SurfaceView
                 String[] pt2 = line.split( " " );
                 if ( pt2.length == 2 ) {
                   try {
-                    x  =   Float.parseFloat( pt2[0] ) / TopoDroidConst.TO_THERION;
-                    y  = - Float.parseFloat( pt2[1] ) / TopoDroidConst.TO_THERION;
+                    x = dx + Float.parseFloat( pt2[0] ) / TopoDroidConst.TO_THERION;
+                    y = dy - Float.parseFloat( pt2[1] ) / TopoDroidConst.TO_THERION;
                     path.addPoint( x, y );
                     // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x + " " + y);
                   } catch ( NumberFormatException e ) {
@@ -732,12 +764,12 @@ public class DrawingSurface extends SurfaceView
                   }
                 } else if ( pt2.length == 6 ) {
                   try {
-                    x1 =   Float.parseFloat( pt2[0] ) / TopoDroidConst.TO_THERION;
-                    y1 = - Float.parseFloat( pt2[1] ) / TopoDroidConst.TO_THERION;
-                    x2 =   Float.parseFloat( pt2[2] ) / TopoDroidConst.TO_THERION;
-                    y2 = - Float.parseFloat( pt2[3] ) / TopoDroidConst.TO_THERION;
-                    x  =   Float.parseFloat( pt2[4] ) / TopoDroidConst.TO_THERION;
-                    y  = - Float.parseFloat( pt2[5] ) / TopoDroidConst.TO_THERION;
+                    x1 = dx + Float.parseFloat( pt2[0] ) / TopoDroidConst.TO_THERION;
+                    y1 = dy - Float.parseFloat( pt2[1] ) / TopoDroidConst.TO_THERION;
+                    x2 = dx + Float.parseFloat( pt2[2] ) / TopoDroidConst.TO_THERION;
+                    y2 = dy - Float.parseFloat( pt2[3] ) / TopoDroidConst.TO_THERION;
+                    x  = dx + Float.parseFloat( pt2[4] ) / TopoDroidConst.TO_THERION;
+                    y  = dy - Float.parseFloat( pt2[5] ) / TopoDroidConst.TO_THERION;
                     path.addPoint3( x1, y1, x2, y2, x, y );
                     // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
                   } catch ( NumberFormatException e ) {
@@ -811,8 +843,8 @@ public class DrawingSurface extends SurfaceView
                 // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line start point: >>" + line + "<<");
                 String[] pt0 = line.split( "\\s+" );
                 try {
-                  x =   Float.parseFloat( pt0[0] ) / TopoDroidConst.TO_THERION;
-                  y = - Float.parseFloat( pt0[1] ) / TopoDroidConst.TO_THERION;
+                  x = dx + Float.parseFloat( pt0[0] ) / TopoDroidConst.TO_THERION;
+                  y = dy - Float.parseFloat( pt0[1] ) / TopoDroidConst.TO_THERION;
                   path.addStartPoint( x, y );
                 } catch ( NumberFormatException e ) {
                   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt0[0] + " " + pt0[1] );
@@ -841,8 +873,8 @@ public class DrawingSurface extends SurfaceView
                   String[] pt = line.split( " " );
                   if ( pt.length == 2 ) {
                     try {
-                      x  =   Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
-                      y  = - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
+                      x = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
+                      y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
                       path.addPoint( x, y );
                     } catch ( NumberFormatException e ) {
                       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt[0] + " " + pt[1] );
@@ -853,12 +885,12 @@ public class DrawingSurface extends SurfaceView
                     }
                   } else if ( pt.length == 6 ) {
                     try {
-                      x1 =   Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
-                      y1 = - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
-                      x2 =   Float.parseFloat( pt[2] ) / TopoDroidConst.TO_THERION;
-                      y2 = - Float.parseFloat( pt[3] ) / TopoDroidConst.TO_THERION;
-                      x  =   Float.parseFloat( pt[4] ) / TopoDroidConst.TO_THERION;
-                      y  = - Float.parseFloat( pt[5] ) / TopoDroidConst.TO_THERION;
+                      x1 = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
+                      y1 = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
+                      x2 = dx + Float.parseFloat( pt[2] ) / TopoDroidConst.TO_THERION;
+                      y2 = dy - Float.parseFloat( pt[3] ) / TopoDroidConst.TO_THERION;
+                      x  = dx + Float.parseFloat( pt[4] ) / TopoDroidConst.TO_THERION;
+                      y  = dy - Float.parseFloat( pt[5] ) / TopoDroidConst.TO_THERION;
                       path.addPoint3( x1, y1, x2, y2, x, y );
                     } catch ( NumberFormatException e ) {
                       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt[0] + " " + pt[1] + " ..." );

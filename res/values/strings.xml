@@ -97,6 +97,7 @@
     <string name="splay_at_to">LRUD at TO station</string>
 
     <string name="few_data">Not enough data</string>
+    <string name="few_plots">Not enough sketches</string>
 
     <string name="import_title">File Import</string>
     <string name="import_wait">Importing file... please wait...</string>
@@ -206,6 +207,7 @@
     <string name="menu_logs">LOGS</string>
     <!-- string name="menu_manual">Manual</string -->
     <string name="menu_options">SETTINGS</string>
+    <string name="menu_overview">OVERVIEW</string>
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
@@ -505,6 +507,7 @@
     <string name="help_splay">Assign stations to splays automatically</string>
     <string name="help_display">Choose display mode</string>
     <string name="help_display_calib">Toggle display of deleted shots</string>
+    <string name="help_overview">Overview activity</string>
     <string name="help_plot">Enter sketch activity</string>
     <string name="help_note">Edit survey notes</string>
     <string name="help_bluetooth">Reset bluetooth connection</string>

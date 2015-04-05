@@ -1082,7 +1082,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(6) ) ); // value
       } while (cursor.moveToNext());
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllSensors list size " + list.size() );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Sensors list size " + list.size() );
     if (cursor != null && !cursor.isClosed()) {
       cursor.close();
     }
@@ -1122,7 +1122,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(4) ) );
       } while (cursor.moveToNext());
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllPhotos list size " + list.size() );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Photos list size " + list.size() );
     if (cursor != null && !cursor.isClosed()) {
       cursor.close();
     }
@@ -1247,7 +1247,7 @@ public class DataHelper extends DataSetObservable
          list.add( sketch );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllPlots list size " + list.size() );
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Sketch list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1356,7 +1356,44 @@ public class DataHelper extends DataSetObservable
          // Log.v( TopoDroidApp.TAG, "plot " + plot.name + " azimuth " + plot.azimuth );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllPlots list size " + list.size() );
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Plots list size " + list.size() );
+     if (cursor != null && !cursor.isClosed()) {
+       cursor.close();
+     }
+     return list;
+   }
+
+   public List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
+   {
+     List<  PlotInfo  > list = new ArrayList<  PlotInfo  >();
+     // if ( myDB == null ) return list;
+     Cursor cursor = myDB.query(PLOT_TABLE,
+			        new String[] { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino" }, // columns
+                                "surveyId=? and status=? and type=?",
+                                new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }, 
+                                null,  // groupBy
+                                null,  // having
+                                "id" ); // order by
+     if (cursor.moveToFirst()) {
+       do {
+         PlotInfo plot = new  PlotInfo ();
+         // plot.setId( cursor.getLong(0), sid );
+         plot.surveyId = sid;
+         plot.id    = cursor.getLong(0);
+         plot.name = cursor.getString(1);
+         plot.type = cursor.getInt(2);
+         plot.start = cursor.getString(3);
+         plot.view  = cursor.getString(4);
+         plot.xoffset = (float)(cursor.getDouble(5));
+         plot.yoffset = (float)(cursor.getDouble(6));
+         plot.zoom    = (float)(cursor.getDouble(7));
+         plot.azimuth = (float)(cursor.getDouble(8));
+         plot.clino   = (float)(cursor.getDouble(9));
+         list.add( plot );
+         // Log.v( TopoDroidApp.TAG, "plot " + plot.name + " azimuth " + plot.azimuth );
+       } while (cursor.moveToNext());
+     }
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Plots list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1614,7 +1651,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllShotsAtStation list size " + list.size() );
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots At Station list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1640,7 +1677,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllShotsAtStation list size " + list.size() );
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots At Station list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1666,7 +1703,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllShotsToStation list size " + list.size() );
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots To Station list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1691,12 +1728,39 @@ public class DataHelper extends DataSetObservable
          list.add( block );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllShots list size " + list.size() );
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
      return list;
    }
+
+   public List<DistoXDBlock> selectAllLegShots( long sid, long status )
+   {
+     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     // if ( myDB == null ) return list;
+     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
+       "surveyId=? and status=?",
+       new String[] { Long.toString(sid), Long.toString(status) },
+       null,  // groupBy
+       null,  // having
+       "id" ); // order by
+     if (cursor.moveToFirst()) {
+       do {
+         if ( cursor.getString(1).length() > 0 && cursor.getString(2).length() > 0 ) {
+           DistoXDBlock block = new DistoXDBlock();
+           fillBlock( sid, block, cursor );
+           list.add( block );
+         }
+       } while (cursor.moveToNext());
+     }
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots list size " + list.size() );
+     if (cursor != null && !cursor.isClosed()) {
+       cursor.close();
+     }
+     return list;
+   }
+
 
    public void resetAllGMs( long cid )
    {

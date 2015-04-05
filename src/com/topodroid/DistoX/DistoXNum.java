@@ -779,17 +779,17 @@ class DistoXNum
     return cycle;
   }
 
-  private void  makeCycles( ArrayList<NumCycle> cycles, ArrayList<NumBranch> branches ) 
+  private void makeCycles( ArrayList<NumCycle> cycles, ArrayList<NumBranch> branches ) 
   {
     int bs = branches.size();
     NumStack stack = new NumStack( bs );
     for ( int k0 = 0; k0 < bs; ++k0 ) {
       NumBranch b0 = branches.get(k0);
       if ( b0.use == 2 ) continue;
-      NumNode n0 = b0.n1;
-      b0.use = 1;
-      b0.use = 0;
-      stack.push( new NumStep(b0, b0.n2, k0 ) );
+      NumNode n0 = b0.n1; // start-node for the cycle
+      b0.use = 1;         // start-branch is used
+      n0.use = 0;         // but start-node is not used
+      stack.push( new NumStep(b0, b0.n2, k0 ) ); // step with b0 to the second node (k0 = where start scan branches
       while ( ! stack.empty() ) {
         NumStep s1 = stack.top();
         NumNode n1 = s1.n;

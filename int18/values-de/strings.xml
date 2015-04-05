@@ -110,6 +110,7 @@
     <string name="splay_at_to">LRUD bei BIS Messpunkt</string>
 
     <string name="few_data">Nicht genügend Daten</string>
+    <string name="few_plots">Nicht genügend Skizze</string>
 
 <!-- IMPORTING A SURVEY or A ZIP -->
     <string name="import_title">Daten Importieren</string>
@@ -225,6 +226,7 @@
     <string name="menu_logs">LOGS</string>
     <!-- string name="menu_manual">HANDBUCH</string -->
     <string name="menu_options">EINSTELLUNGEN</string>
+    <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
@@ -489,6 +491,7 @@
     <string name="help_splay">Die Messpunkten automatisch zuweisen</string> <!-- FIXME for splays -->
     <string name="help_display">Den Anzeigemodus wählen</string>
     <!-- TODO string name="help_display_calib">Toggle display of deleted shots</string -->
+    <!-- TODO string name="help_overview">Overview activity</string -->
     <string name="help_plot">Zu der Skizzeaktivität gehen</string>
     <string name="help_note">Um die Vermessung Anmerkung bearbeiten</string>
     <string name="help_bluetooth">Die Bluetooth-Verbindung zurücksetzen</string>

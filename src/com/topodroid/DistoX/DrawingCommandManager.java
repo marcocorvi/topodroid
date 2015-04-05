@@ -73,7 +73,10 @@ public class DrawingCommandManager
   // private static final int DISPLAY_MAX     = 4;
   static int mDisplayMode = DISPLAY_ALL;
 
-  DrawingPath                  mNorthLine;
+  DrawingPath mNorthLine;
+  DrawingPath mFirstReference;
+  DrawingPath mSecondReference;
+
   private List<DrawingPath>    mGridStack;
   List<DrawingPath>            mFixedStack;
   List<DrawingPath>            mCurrentStack;
@@ -115,7 +118,9 @@ public class DrawingCommandManager
 
   public DrawingCommandManager()
   {
-    mNorthLine    = null;
+    mNorthLine       = null;
+    mFirstReference  = null;
+    mSecondReference = null;
     mGridStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mFixedStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<DrawingPath>());
@@ -157,6 +162,8 @@ public class DrawingCommandManager
   {
     synchronized( mGridStack ) {
       mNorthLine = null;
+      mFirstReference = null;
+      mSecondReference = null;
       mGridStack.clear();
     }
     synchronized( mFixedStack ) {
@@ -175,11 +182,23 @@ public class DrawingCommandManager
   void clearDrawing()
   {
     mNorthLine = null;
+    mFirstReference = null;
+    mSecondReference = null;
     mGridStack.clear();
     mFixedStack.clear();
     mStations.clear();
     mSelection.clearPoints();
     clearSketchItems();
+  }
+
+  void setFirstReference( DrawingPath path ) 
+  { 
+    synchronized( mGridStack ) { mFirstReference = path; }
+  }
+
+  void setSecondReference( DrawingPath path )
+  { 
+    synchronized( mGridStack ) { mSecondReference = path; }
   }
 
   void clearSketchItems()
@@ -834,6 +853,10 @@ public class DrawingCommandManager
           }
         }
       } 
+    }
+    synchronized( mGridStack ) {
+      if ( mFirstReference != null ) mFirstReference.draw( canvas, mMatrix );
+      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix );
     }
   }
 

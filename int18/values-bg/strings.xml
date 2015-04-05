@@ -97,6 +97,7 @@
     <string name="splay_at_to">"&lt;,&gt;,Г,Д" в репер "ДО"</string>
 
     <string name="few_data">Няма достатъчно данни</string>
+    <!-- TODO string name="few_plots">Not enough sketches</string -->
 
     <string name="import_title">Импортиране на файл</string>
     <string name="import_wait">Импортиране... Моля изчакайте...</string>
@@ -206,6 +207,7 @@
     <string name="menu_logs">Лог файлове</string>
     <!-- string name="menu_manual">manual</string -->
     <string name="menu_options">Настройки</string>
+    <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
@@ -507,6 +509,7 @@
     <string name="help_splay">Автоматично определяне на репери за страничните отсечки</string>
     <string name="help_display">Избор на данни за показване в таблицата</string>
     <string name="help_display_calib">Показване на изтрити отсечки</string>
+    <!-- TODO string name="help_overview">Overview activity</string -->
     <string name="help_plot">Режим на скициране</string>
     <string name="help_note">Редактиране на бележки</string>
     <string name="help_bluetooth">Рестарт. на Bluetooth</string>

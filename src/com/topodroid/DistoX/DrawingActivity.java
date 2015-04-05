@@ -30,9 +30,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
+// import android.view.Menu;
 // import android.view.SubMenu;
-import android.view.MenuItem;
+// import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -75,10 +75,6 @@ import java.util.TimerTask;
 
 import android.util.Log;
 
-// import android.view.MenuInflater;
-// import android.support.v7.app.ActionBar;
-// import android.support.v7.app.ActionBarActivity;
-
 /**
  */
 public class DrawingActivity extends ItemDrawer
@@ -90,19 +86,8 @@ public class DrawingActivity extends ItemDrawer
                                       , OnZoomListener
                                       , ILabelAdder
                                       , ILister
+                                      , IZoomer
 {
-  // nr. 8 6 7 3
-  // private static int icons00[];
-  // private static int icons00ok[];
-
-  // private static int iconsok[] = { 
-  //                       R.drawable.ic_edit_ok, // 0
-  //                       R.drawable.ic_eraser_ok,
-  //                       R.drawable.ic_select_ok };
-  // private static int ixonsok[] = { 
-  //                       R.drawable.ix_edit_ok, // 0
-  //                       R.drawable.ix_eraser_ok,
-  //                       R.drawable.ix_select_ok };
   private static int izonsok[] = { 
                         R.drawable.iz_edit_ok, // 0
                         R.drawable.iz_eraser_ok,
@@ -165,6 +150,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.menu_reload,
                         R.string.menu_delete,
                         R.string.menu_palette,
+                        R.string.menu_overview,
                         R.string.menu_options,
                         R.string.menu_help
                      };
@@ -192,6 +178,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_recover,
                         R.string.help_trash,
                         R.string.help_symbol,
+                        R.string.help_overview,
                         R.string.help_prefs,
                         R.string.help_help
                       };
@@ -661,7 +648,7 @@ public class DrawingActivity extends ItemDrawer
   int mHotItemType = -1;
   private boolean inLinePoint = false;
 
-  float zoom() { return mZoom; }
+  public float zoom() { return mZoom; }
 
   // set the button3 by the type of the hot-item
   private void setButton3( int type )
@@ -728,7 +715,7 @@ public class DrawingActivity extends ItemDrawer
       mCurrentBrush = new DrawingPenBrush();
 
       mDrawingSurface = (DrawingSurface) findViewById(R.id.drawingSurface);
-      mDrawingSurface.setActivity( this );
+      mDrawingSurface.setZoomer( this );
       mDrawingSurface.previewPath = new DrawingPath( DrawingPath.DRAWING_PATH_LINE );
       mDrawingSurface.previewPath.mPath = new Path();
       mDrawingSurface.previewPath.setPaint( getPreviewPaint() );
@@ -2689,7 +2676,7 @@ public class DrawingActivity extends ItemDrawer
       askRecover();
     } else if ( item == mMIhelp ) { // HELP DIALOG
       int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 3 + ( TopoDroidApp.mLevelOverBasic? mNrButton3 - 3: 0 );
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 7 ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 8 ) ).show();
     } else {
       return super.onOptionsItemSelected(item);
     }
@@ -2709,6 +2696,7 @@ public class DrawingActivity extends ItemDrawer
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
     mMenuAdapter.add( res.getString( menus[6] ) );
+    mMenuAdapter.add( res.getString( menus[7] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -2738,13 +2726,20 @@ public class DrawingActivity extends ItemDrawer
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
+      } else if ( p++ == pos ) { // OVERVIEW
+        Intent intent = new Intent( this, OverviewActivity.class );
+        intent.putExtra( TopoDroidApp.TOPODROID_SURVEY_ID, mSid );
+        intent.putExtra( TopoDroidApp.TOPODROID_PLOT_FROM, mFrom );
+        intent.putExtra( TopoDroidApp.TOPODROID_PLOT_ZOOM, mZoom );
+        intent.putExtra( TopoDroidApp.TOPODROID_PLOT_TYPE, mType );
+        startActivity( intent );
       } else if ( p++ == pos ) { // OPTIONS
         Intent intent = new Intent( this, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 3 + ( TopoDroidSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 7 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 8 ) ).show();
       }
     }
   }
@@ -2793,16 +2788,15 @@ public class DrawingActivity extends ItemDrawer
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
       switch ( status ) {
         case 1:
-          mButton1[0].setBackgroundDrawable( mBMdownload_on );
+          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
           break;
         case 2:
-          mButton1[0].setBackgroundDrawable( mBMdownload_wait );
+          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_wait );
           break;
         default:
-          mButton1[0].setBackgroundDrawable( mBMdownload );
+          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload );
       }
     }
   }
-
 
 }

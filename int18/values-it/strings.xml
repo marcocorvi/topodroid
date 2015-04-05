@@ -93,6 +93,7 @@
     <string name="splay_at_to">LRUD al caposaldo di arrivo</string>
 
     <string name="few_data">Dati insufficienti</string>
+    <string name="few_plots">Troppo pochi disegni</string>
 
     <string name="import_title">Importazione file</string>
     <string name="import_wait">Importazione file... attendi...</string>
@@ -196,6 +197,7 @@
     <string name="menu_logs">LOGS</string>
     <!-- string name="menu_manual">MANUALE</string -->
     <string name="menu_options">OPZIONI</string>
+    <!-- OK string name="menu_overview">OVERVIEW</string -->
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORI</string>
@@ -446,6 +448,7 @@
     <string name="help_splay">Assegna capisaldi agli splay automaticamente</string>
     <string name="help_display">Scegli modalità display</string>
     <string name="help_display_calib">Mostra/Nascondi i tiri cancellati</string>
+    <string name="help_overview">Vista globale</string>
     <string name="help_plot">Finestra disegno</string>
     <string name="help_note">Annotazioni rilievo</string>
     <string name="help_bluetooth">Resetta connessione bluetooth</string>

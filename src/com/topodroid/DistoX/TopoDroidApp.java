@@ -97,7 +97,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "07"; 
+  static String SYMBOL_VERSION = "08"; 
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -260,6 +260,7 @@ public class TopoDroidApp extends Application
   public static final String TOPODROID_PLOT_TYPE   = "topodroid.plot_type";
   public static final String TOPODROID_PLOT_FROM   = "topodroid.plot_from";
   public static final String TOPODROID_PLOT_TO     = "topodroid.plot_to";
+  public static final String TOPODROID_PLOT_ZOOM   = "topodroid.plot_zoom";
   public static final String TOPODROID_PLOT_AZIMUTH = "topodroid.plot_azimuth";
   public static final String TOPODROID_PLOT_CLINO  = "topodroid.plot_clino";
 
@@ -493,6 +494,8 @@ public class TopoDroidApp extends Application
     // } catch ( SettingNotFoundException e ) {
     // }
 
+    mDataListeners = new ArrayList< DataListener >( );
+    mData = new DataHelper( this, mDataListeners );  // DATABASE MUST COME BEFORE PREFERENCES
 
     // Log.v(TAG, "onCreate app");
     this.mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
@@ -507,8 +510,6 @@ public class TopoDroidApp extends Application
     mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
 
     mEnableZip = true;
-    mDataListeners = new ArrayList< DataListener >( );
-    mData = new DataHelper( this, mDataListeners );
 
     String version = mData.getValue( "version" );
     if ( version == null || ( ! version.equals(VERSION) ) ) {
@@ -594,6 +595,9 @@ public class TopoDroidApp extends Application
     Configuration conf = res.getConfiguration();
     conf.locale = mLocale;
     res.updateConfiguration( conf, dm );
+    DrawingBrushPaths.reloadPointLibrary( res ); // reload symbols
+    DrawingBrushPaths.reloadLineLibrary( res );
+    DrawingBrushPaths.reloadAreaLibrary( res );
     if ( mActivity != null ) mActivity.setMenuAdapter( res );
   }
 
@@ -723,7 +727,8 @@ public class TopoDroidApp extends Application
       }
       
       if ( ! ( db_version >= DataHelper.DATABASE_VERSION_MIN && db_version <= DataHelper.DATABASE_VERSION ) ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ZIP, "TopDroid DB version mismatch: found " + line + " expected " + DataHelper.DB_VERSION );
+        TopoDroidLog.Log( TopoDroidLog.LOG_ZIP, "TopDroid DB version mismatch: found " + db_version + " expected " + 
+                          + DataHelper.DATABASE_VERSION_MIN + "-" + DataHelper.DATABASE_VERSION );
         return -3;
       }
       line = br.readLine().trim();

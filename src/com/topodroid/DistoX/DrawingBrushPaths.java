@@ -184,6 +184,13 @@ public class DrawingBrushPaths
     mLineLib.loadUserLines();
   }
 
+  static void reloadAreaLibrary( Resources res )
+  {
+    mAreaLib = new SymbolAreaLibrary( res );
+    mAreaLib.loadUserAreas();
+  }
+
+
   static void doMakePaths()
   {
     highlightPaint = new Paint();

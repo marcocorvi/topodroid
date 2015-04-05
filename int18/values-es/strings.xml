@@ -93,6 +93,7 @@
     <!-- TODO string name="splay_at_to">LRUD at To station</string -->
 
     <string name="few_data">No hay suficientes datos</string>
+    <!-- TODO string name="few_plots">Not enough sketches</string -->
 
     <string name="import_title">Importar archivo</string>
     <string name="import_wait">Importando archivo, espere...</string>
@@ -196,6 +197,7 @@
     <string name="menu_logs">REGISTROS</string>
     <!-- string name="menu_manual">MANUAL</string -->
     <string name="menu_options">OPCIONES</string>
+    <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETA</string>
     <string name="menu_photo">FOTO</string>
     <!-- OK string name="menu_sensor">SENSOR</string -->
@@ -446,6 +448,7 @@
     <string name="help_splay">Asignar estaciones laterales automáticamente</string>
     <string name="help_display">Seleccione modo de visualización</string>
     <!-- TODO string name="help_display_calib">Toggle display of deleted shots</string -->
+    <!-- TODO string name="help_overview">Overview activity</string -->
     <string name="help_plot">Introducir datos en dibujo</string>
     <string name="help_note">Editar notas Topografía</string>
     <string name="help_bluetooth">Reinicio conexión bluetooth</string>

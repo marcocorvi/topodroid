@@ -14,6 +14,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.content.res.Resources;
+
 // import android.util.Log;
 
 class PlotInfo
@@ -27,23 +29,50 @@ class PlotInfo
   public static final long PLOT_SECTION   = 5;
   public static final long PLOT_SKETCH_3D = 6;
 
-  public static final String[] plotType = {
-    "V-SECTION",  // vertical cross section
-    "PLAN",       // plan
-    "EXTENDED",   // extended elevation
-    "H-SECTION",  // horizontal cross-section
-    "PHOTO",      // photo section
-    "SECTION",
-    "SKETCH-3D"
-  };
+  // public static final String[] plotType = {
+  //   "V-SECTION",  // vertical cross section
+  //   "PLAN",       // plan
+  //   "EXTENDED",   // extended elevation
+  //   "H-SECTION",  // horizontal cross-section
+  //   "PHOTO",      // photo section
+  //   "SECTION",
+  //   "SKETCH-3D"
+  // };
 
-  static long toPlotType( String type ) 
+  static String plotTypeString( int type, Resources res )
   {
-    for ( int k=0; k<7; ++k ) {
-      if ( type.equals( plotType[k] ) ) return k;
+    switch (type) {
+      case 0:
+        // return "V-SECTION";
+        return res.getString( R.string.v_section );
+      case 1:
+        // return "PLAN";
+        return res.getString( R.string.plan );
+      case 2:
+        // return "EXTENDED";
+        return res.getString( R.string.extended );
+      case 3:
+        // return "H-SECTION";
+        return res.getString( R.string.h_section );
+      case 4:
+        // return "PHOTO";
+        return res.getString( R.string.menu_photo );
+      case 5:
+        return "SECTION";
+      case 6:
+        return "SKETCH-3D";
     }
-    return PLOT_PLAN;
+    return "Unknown type";
   }
+       
+   
+  // static long toPlotType( String type ) 
+  // {
+  //   for ( int k=0; k<7; ++k ) {
+  //     if ( type.equals( plotType[k] ) ) return k;
+  //   }
+  //   return PLOT_PLAN;
+  // }
 
   static final String[] projName = { // therion projection names
     "none", "plan", "extended", "none", "none", "none", "sketch_3d"
@@ -81,16 +110,16 @@ class PlotInfo
     return projName[ type ];
   }
 
-  public static int getTypeValue( String type )
-  {
-    // if ( type.equals("V-SECTION") ) return (int)PLOT_V_SECTION;
-    if ( type.equals("PLAN") )      return (int)PLOT_PLAN;
-    if ( type.equals("EXTENDED") )  return (int)PLOT_EXTENDED;
-    if ( type.equals("H-SECTION") ) return (int)PLOT_H_SECTION;
-    if ( type.equals("PHOTO") )     return (int)PLOT_PHOTO;
-    if ( type.equals("SECTION") )   return (int)PLOT_SECTION;
-    if ( type.equals("SKETCH-3D") ) return (int)PLOT_SKETCH_3D;
-    return (int)PLOT_PLAN;
-  }
+  // public static int getTypeValue( String type )
+  // {
+  //    // if ( type.equals("V-SECTION") ) return (int)PLOT_V_SECTION;
+  //    if ( type.equals("PLAN") )      return (int)PLOT_PLAN;
+  //    if ( type.equals("EXTENDED") )  return (int)PLOT_EXTENDED;
+  //    if ( type.equals("H-SECTION") ) return (int)PLOT_H_SECTION;
+  //    if ( type.equals("PHOTO") )     return (int)PLOT_PHOTO;
+  //    if ( type.equals("SECTION") )   return (int)PLOT_SECTION;
+  //    if ( type.equals("SKETCH-3D") ) return (int)PLOT_SKETCH_3D;
+  //    return (int)PLOT_PLAN;
+  // }
 
 }

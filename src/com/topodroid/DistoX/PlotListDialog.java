@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.app.Dialog;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -109,6 +110,8 @@ public class PlotListDialog extends Dialog
     if ( mApp.mData != null && mApp.mSID >= 0 ) {
       setTitle( R.string.title_scraps );
 
+      Resources res = mApp.getResources();
+
       List< PlotInfo > list = mApp.mData.selectAllPlots( mApp.mSID, TopoDroidApp.STATUS_NORMAL ); 
       List< Sketch3dInfo > slist = null;
       // FIXME_SKETCH_3D
@@ -122,20 +125,20 @@ public class PlotListDialog extends Dialog
       }
       // mList.setAdapter( mArrayAdapter );
       mArrayAdapter.clear();
-      // mArrayAdapter.add( getResources().getString(R.string.back_to_survey) );
+      // mArrayAdapter.add( res.getString(R.string.back_to_survey) );
       for ( PlotInfo item : list ) {
         if ( item.type == PlotInfo.PLOT_PLAN /* || item.type == PlotInfo.PLOT_EXTENDED */ ) {
           String name = item.name.substring( 0, item.name.length() - 1 );
 
           StringWriter sw1 = new StringWriter();
           PrintWriter pw1  = new PrintWriter(sw1);
-          pw1.format("<%s> %s", name, PlotInfo.plotType[ (int)PlotInfo.PLOT_PLAN ] );
+          pw1.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) );
           // pw1.format("<%s> %s", name, item.getTypeString() );
           mArrayAdapter.add( sw1.getBuffer().toString() );
 
           StringWriter sw2 = new StringWriter();
           PrintWriter pw2  = new PrintWriter(sw2);
-          pw2.format("<%s> %s", name, PlotInfo.plotType[ (int)PlotInfo.PLOT_EXTENDED ] );
+          pw2.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_EXTENDED, res ) );
           // pw2.format("<%s> %s", name, item.getTypeString() );
           mArrayAdapter.add( sw2.getBuffer().toString() );
           // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Data " + result );
@@ -146,7 +149,7 @@ public class PlotListDialog extends Dialog
           for ( Sketch3dInfo sketch : slist ) {
             StringWriter sw = new StringWriter();
             PrintWriter pw  = new PrintWriter(sw);
-            pw.format("<%s> SKETCH-3D", sketch.name );
+            pw.format("<%s> %s", sketch.name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_SKETCH_3D, res ) );
             mArrayAdapter.add( sw.getBuffer().toString() );
           }
         }
@@ -207,7 +210,8 @@ public class PlotListDialog extends Dialog
     int to = value.lastIndexOf('>');
     String plot_name = value.substring( from+1, to );
     String type = value.substring( to+2 );
-    long plot_type = PlotInfo.toPlotType( type );
+    // long plot_type = PlotInfo.toPlotType( type );
+    long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
     mParent.startExistingPlot( plot_name, plot_type ); // context of current SID
     dismiss();
   }
