@@ -512,16 +512,6 @@ public class DrawingActivity extends ItemDrawer
           AlertMissingSymbols();
         }
         if ( mAllSymbols ) {
-          String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-          File f1 = new File( p1 );
-          File b1 = new File( p1 + ".bck" );
-          f1.renameTo( b1 );
-          if ( mFullName2 != null ) {
-            String p2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
-            File f2 = new File( p2 );
-            File b2 = new File( p2 + ".bck" );
-            f2.renameTo( b2 );
-          }
 
           // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
 
@@ -542,7 +532,6 @@ public class DrawingActivity extends ItemDrawer
               }
             }
           } ;
-
           mApp.mShotActivity.enableSketchButton( false );
           (new SaveTh2File(this, saveHandler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
         } else { // mAllSymbols is false

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
-      android:versionCode="205017"
-      android:versionName="2.5.1g"
+      android:versionCode="205018"
+      android:versionName="2.5.1h"
     >
     <uses-sdk
        android:minSdkVersion="8"

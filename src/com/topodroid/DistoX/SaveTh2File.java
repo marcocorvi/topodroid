@@ -50,55 +50,73 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
     @Override
     protected Boolean doInBackground(Intent... arg0)
     {
-      try {
-        if ( mFullName2 != null ) {
-          String filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
-          File file2 = new File( filename2 + "tmp" );
-          TopoDroidApp.checkPath( filename2 + "tmp" );
-          FileWriter writer2 = new FileWriter( file2 );
-          
-          BufferedWriter out2 = new BufferedWriter( writer2 );
-          mSurface.exportTherion( (int)PlotInfo.PLOT_EXTENDED, out2, mFullName2, PlotInfo.projName[ (int)PlotInfo.PLOT_EXTENDED ] );
-          out2.flush();
-          out2.close();
-          file2.renameTo( new File( filename2 ) );
-
-          String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-          File file1 = new File( filename1 + "tmp" );
-          TopoDroidApp.checkPath( filename1 + "tmp" );
-          FileWriter writer1 = new FileWriter( file1 );
-          BufferedWriter out1 = new BufferedWriter( writer1 );
-          mSurface.exportTherion( (int)PlotInfo.PLOT_PLAN, out1, mFullName1, PlotInfo.projName[ (int)PlotInfo.PLOT_PLAN ] );
-          out1.flush();
-          out1.close();
-          file1.renameTo( new File( filename1 ) );
-        } else {
-          String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-          TopoDroidApp.checkPath( filename + "tmp" );
-          File file = new File( filename + "tmp" );
-          FileWriter writer = new FileWriter( file );
-          BufferedWriter out = new BufferedWriter( writer );
-          mSurface.exportTherion( (int)PlotInfo.PLOT_SECTION, out, mFullName1, PlotInfo.projName[ (int)PlotInfo.PLOT_SECTION ] );
-          out.flush();
-          out.close();
-          file.renameTo( new File( filename ) );
+      boolean ret = false;
+      synchronized( TopoDroidPath.mTherionLock ) {
+        try {
+          if ( mFullName2 != null ) {
+            String filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
+            File file2 = new File( filename2 + "tmp" );
+            TopoDroidApp.checkPath( filename2 + "tmp" );
+            FileWriter writer2 = new FileWriter( file2 );
+            
+            BufferedWriter out2 = new BufferedWriter( writer2 );
+            mSurface.exportTherion( (int)PlotInfo.PLOT_EXTENDED, out2, mFullName2, PlotInfo.projName[ (int)PlotInfo.PLOT_EXTENDED ] );
+            out2.flush();
+            out2.close();
+            {
+              String p2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
+              File f2 = new File( p2 );
+              File b2 = new File( p2 + ".bck" );
+              f2.renameTo( b2 );
+              file2.renameTo( new File( filename2 ) );
+            }
+            String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+            File file1 = new File( filename1 + "tmp" );
+            TopoDroidApp.checkPath( filename1 + "tmp" );
+            FileWriter writer1 = new FileWriter( file1 );
+            BufferedWriter out1 = new BufferedWriter( writer1 );
+            mSurface.exportTherion( (int)PlotInfo.PLOT_PLAN, out1, mFullName1, PlotInfo.projName[ (int)PlotInfo.PLOT_PLAN ] );
+            out1.flush();
+            out1.close();
+            {
+              String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+              File f1 = new File( p1 );
+              File b1 = new File( p1 + ".bck" );
+              f1.renameTo( b1 );
+              file1.renameTo( new File( filename1 ) );
+            }
+          } else {
+            String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+            TopoDroidApp.checkPath( filename + "tmp" );
+            File file = new File( filename + "tmp" );
+            FileWriter writer = new FileWriter( file );
+            BufferedWriter out = new BufferedWriter( writer );
+            mSurface.exportTherion( (int)PlotInfo.PLOT_SECTION, out, mFullName1, PlotInfo.projName[ (int)PlotInfo.PLOT_SECTION ] );
+            out.flush();
+            out.close();
+            {
+              String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+              File f1 = new File( p1 );
+              File b1 = new File( p1 + ".bck" );
+              f1.renameTo( b1 );
+              file.renameTo( new File( filename ) );
+            }
+          }
+          ret = true;
+        } catch (Exception e) {
+          e.printStackTrace();
         }
-        return true;
-      } catch (Exception e) {
-        e.printStackTrace();
       }
-      if ( mHandler != null ) {
-        // mHandler.post( completeRunnable );
-      }
-      return false;
+      return ret;
     }
 
     @Override
-    protected void onPostExecute(Boolean bool) {
-        super.onPostExecute(bool);
-        if ( mHandler != null ) {
-          mHandler.sendEmptyMessage( bool? 1 : 0 );
-        }
+    protected void onPostExecute(Boolean bool)
+    {
+      super.onPostExecute(bool);
+      if ( mHandler != null ) {
+        mHandler.sendEmptyMessage( bool? 1 : 0 );
+      }
     }
 }
 

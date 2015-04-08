@@ -70,6 +70,8 @@ public class TopoDroidPath
   private static String APP_ZIP_PATH; //  = APP_BASE_PATH + "zip/";
   // private static String APP_TLX_PATH ; //  = APP_BASE_PATH + "tlx/";
 
+  static String mTherionLock = new String("Therion Lock");
+
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   
 
