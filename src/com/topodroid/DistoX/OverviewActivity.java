@@ -74,10 +74,10 @@ public class OverviewActivity extends ItemDrawer
                                       , IZoomer
 {
   private static int izons[] = { 
-                        R.drawable.iz_select,        // 0
+                        R.drawable.iz_measure,        // 0
                         // R.drawable.iz_plan,
                         R.drawable.iz_menu,          // 1
-                        R.drawable.iz_select_ok,
+                        R.drawable.iz_measure_on,
                       };
   private static int menus[] = {
                         R.string.menu_options,
@@ -410,7 +410,7 @@ public class OverviewActivity extends ItemDrawer
         BitmapDrawable bm = mApp.setButtonBackground( mButton1[k], size, izons[k] );
         if ( k == 0 ) mBMselect = bm;
       }
-      mBMselectOn = mApp.setButtonBackground( null, size, R.drawable.iz_select_ok );
+      mBMselectOn = mApp.setButtonBackground( null, size, R.drawable.iz_measure_on );
 
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );

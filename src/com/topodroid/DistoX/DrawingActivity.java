@@ -2716,6 +2716,10 @@ public class DrawingActivity extends ItemDrawer
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
       } else if ( p++ == pos ) { // OVERVIEW
+        immediateSaveTh2(); 
+        try {
+          Thread.sleep(100);
+        } catch ( InterruptedException e ) { /* ignore */ }
         Intent intent = new Intent( this, OverviewActivity.class );
         intent.putExtra( TopoDroidApp.TOPODROID_SURVEY_ID, mSid );
         intent.putExtra( TopoDroidApp.TOPODROID_PLOT_FROM, mFrom );
