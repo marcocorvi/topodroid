@@ -252,7 +252,8 @@
     <string name="plot_recover">Възстановяване на скицата от резервното копие?</string>
     <string name="plot_start">Начален репер</string>
     <!-- string name="plot_view">Viewed station</string -->
-    <string name="read_">Четене </string>
+    <!-- UNUSED string name="read_">Четене </string -->
+    <!-- TODO string name="read_data">Read %1$d data</string -->
     <string name="read_fail_with_code">Грешка при четене: код </string>
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- string name="reading_file_failed">Failed file-read</string -->

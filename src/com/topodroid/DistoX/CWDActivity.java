@@ -66,7 +66,7 @@ public class CWDActivity extends Activity
     // Log.v("DistoX", "dir name <" + dir_name + ">" );
     mApp.setCWDPreference( dir_name );
     Intent intent = new Intent();
-    intent.putExtra( TopoDroidApp.TOPODROID_CWD, dir_name );
+    intent.putExtra( TopoDroidTag.TOPODROID_CWD, dir_name );
     setResult( RESULT_OK, intent );
   }
     

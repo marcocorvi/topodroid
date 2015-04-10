@@ -266,7 +266,8 @@
     <string name="plot_not_found">Skizze nicht gefunden</string>
     <string name="plot_recover">Skizze aus dem Backup laden?</string>
     <string name="plot_start">Basismesspunkt</string>
-    <string name="read_">Lesen </string>
+    <!-- UNUSED string name="read_">Lesen </string -->
+    <string name="read_data">%1$d Messungen gelesen</string>
     <string name="read_fail_with_code">Lesefehler: Fehlercode</string>
     <string name="read_failed">Failed DistoX-read</string>
     <string name="saved_file_">Gespeicherte Datei</string>

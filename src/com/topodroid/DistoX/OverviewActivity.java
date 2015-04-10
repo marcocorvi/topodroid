@@ -420,10 +420,10 @@ public class OverviewActivity extends ItemDrawer
 
       mData        = mApp.mData; // new DataHelper( this ); 
       Bundle extras = getIntent().getExtras();
-      mSid         = extras.getLong( mApp.TOPODROID_SURVEY_ID );
-      mFrom        = extras.getString( mApp.TOPODROID_PLOT_FROM );
-      mZoom        = extras.getFloat( mApp.TOPODROID_PLOT_ZOOM );
-      mType = (int)extras.getLong( mApp.TOPODROID_PLOT_TYPE );
+      mSid         = extras.getLong( TopoDroidTag.TOPODROID_SURVEY_ID );
+      mFrom        = extras.getString( TopoDroidTag.TOPODROID_PLOT_FROM );
+      mZoom        = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_ZOOM );
+      mType = (int)extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE );
 
       // mBezierInterpolator = new BezierInterpolator( );
 
@@ -436,6 +436,10 @@ public class OverviewActivity extends ItemDrawer
       mMenu.setOnItemClickListener( this );
 
       doStart();
+
+      mOffset.x   += extras.getFloat( TopoDroidTag.TOPODROID_PLOT_XOFF );
+      mOffset.y   += extras.getFloat( TopoDroidTag.TOPODROID_PLOT_YOFF );
+      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
     }
 
     @Override

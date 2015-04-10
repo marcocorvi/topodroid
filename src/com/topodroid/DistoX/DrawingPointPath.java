@@ -120,10 +120,10 @@ public class DrawingPointPath extends DrawingPath
         case SCALE_L:  f = 1.41f; break;
         case SCALE_XL: f = 2.00f; break;
       }
+      m.postScale(f,f);
       makePath( DrawingBrushPaths.getPointOrigPath( mPointType ), m, cx, cy );
     }
   }
-      
 
   // public void setPos( float x, float y ) 
   // {

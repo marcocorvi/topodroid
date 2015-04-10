@@ -320,7 +320,8 @@ public class GMActivity extends Activity
     if ( nr >= 0 ) {
       if ( nr > 0 ) updateDisplay( );
       if ( toast ) {
-        Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, String.format( getString(R.string.read_data), nr ), Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {

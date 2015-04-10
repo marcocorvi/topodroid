@@ -826,10 +826,10 @@ public class DrawingActivity extends ItemDrawer
 
       mData        = mApp.mData; // new DataHelper( this ); 
       Bundle extras = getIntent().getExtras();
-      mSid         = extras.getLong(   mApp.TOPODROID_SURVEY_ID );
-      mName1       = extras.getString( mApp.TOPODROID_PLOT_NAME );
-      mName2       = extras.getString( mApp.TOPODROID_PLOT_NAME2 );
-      mFrom        = extras.getString( mApp.TOPODROID_PLOT_FROM );
+      mSid         = extras.getLong(   TopoDroidTag.TOPODROID_SURVEY_ID );
+      mName1       = extras.getString( TopoDroidTag.TOPODROID_PLOT_NAME );
+      mName2       = extras.getString( TopoDroidTag.TOPODROID_PLOT_NAME2 );
+      mFrom        = extras.getString( TopoDroidTag.TOPODROID_PLOT_FROM );
       mAzimuth = 0.0f;
       mClino   = 0.0f;
       mFullName1   = mApp.mySurvey + "-" + mName1;
@@ -841,12 +841,12 @@ public class DrawingActivity extends ItemDrawer
       }
       mName = mName1;
 
-      mType = (int)extras.getLong( mApp.TOPODROID_PLOT_TYPE );
+      mType = (int)extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE );
       if ( ! isSection() ) { 
       } else {
-        mAzimuth = (float)extras.getLong( mApp.TOPODROID_PLOT_AZIMUTH );
-        mClino   = (float)extras.getLong( mApp.TOPODROID_PLOT_CLINO );
-        mTo = extras.getString( mApp.TOPODROID_PLOT_TO );
+        mAzimuth = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
+        mClino   = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_CLINO );
+        mTo = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );
         // Log.v("AZIMUTH", mFrom + "-" + mTo + " azimuth " + mAzimuth + " clino " + mClino  );
       }
 
@@ -2329,13 +2329,13 @@ public class DrawingActivity extends ItemDrawer
       }
       if ( pid >= 0 ) {
         Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingActivity.class );
-        drawIntent.putExtra( TopoDroidApp.TOPODROID_SURVEY_ID, mApp.mSID );
-        drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_NAME, mSectionName );
-        drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_TYPE, type );
-        drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_FROM, from );
-        drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_TO,   to );
-        drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_AZIMUTH, (long)azimuth );
-        drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_CLINO, (long)clino );
+        drawIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mApp.mSID );
+        drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME, mSectionName );
+        drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, type );
+        drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, from );
+        drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TO,   to );
+        drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_AZIMUTH, (long)azimuth );
+        drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO, (long)clino );
         startActivity( drawIntent );
       }
     }
@@ -2569,7 +2569,8 @@ public class DrawingActivity extends ItemDrawer
         }
       }
       if ( toast ) {
-        Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, String.format( getString(R.string.read_data), nr ), Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {
@@ -2721,10 +2722,12 @@ public class DrawingActivity extends ItemDrawer
           Thread.sleep(100);
         } catch ( InterruptedException e ) { /* ignore */ }
         Intent intent = new Intent( this, OverviewActivity.class );
-        intent.putExtra( TopoDroidApp.TOPODROID_SURVEY_ID, mSid );
-        intent.putExtra( TopoDroidApp.TOPODROID_PLOT_FROM, mFrom );
-        intent.putExtra( TopoDroidApp.TOPODROID_PLOT_ZOOM, mZoom );
-        intent.putExtra( TopoDroidApp.TOPODROID_PLOT_TYPE, mType );
+        intent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mSid );
+        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, mFrom );
+        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_ZOOM, mZoom );
+        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, mType );
+        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_XOFF, mOffset.x );
+        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_YOFF, mOffset.y );
         startActivity( intent );
       } else if ( p++ == pos ) { // OPTIONS
         Intent intent = new Intent( this, TopoDroidPreferences.class );

@@ -692,8 +692,8 @@ public class SketchActivity extends ItemDrawer
 
     mData        = mApp.mData; // new DataHelper( this ); 
     Bundle extras = getIntent().getExtras();
-    mSid         = extras.getLong(   mApp.TOPODROID_SURVEY_ID );
-    String name  = extras.getString( mApp.TOPODROID_SKETCH_NAME );
+    mSid         = extras.getLong(   TopoDroidTag.TOPODROID_SURVEY_ID );
+    String name  = extras.getString( TopoDroidTag.TOPODROID_SKETCH_NAME );
     mFullName    = mApp.mySurvey + "-" + name;
     // mCompass     = null;
 
@@ -1971,7 +1971,8 @@ public class SketchActivity extends ItemDrawer
         List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
         recreateNum( list );
       }
-      Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
+      Toast.makeText( this, String.format( getString(R.string.read_data), nr ), Toast.LENGTH_SHORT ).show();
+      // Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
     } else if ( nr < 0 ) {
       Toast.makeText( this, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
     }

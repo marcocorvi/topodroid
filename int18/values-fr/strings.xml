@@ -239,7 +239,8 @@
     <!-- TODO string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Station d\'origne</string>
     <!-- string name="plot_view">Station consulté</string -->
-    <string name="read_">Lecture </string>
+    <!-- UNUSED string name="read_">Lecture </string -->
+    <string name="read_data">Lecture %1$d données</string>
     <string name="read_fail_with_code">Echec de lecture : code d\'erreur </string>
     <string name="read_failed">Echec lors de lecture du DistoX</string>
     <!-- string name="reading_file_failed">Echec lors de la lecture du fichier</string -->

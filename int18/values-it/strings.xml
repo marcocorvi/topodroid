@@ -239,7 +239,8 @@
     <string name="plot_recover">Ricaricare il disegno dal backup?</string>
     <string name="plot_start">Caposaldo di origine</string>
     <!-- string name="plot_view">Caposaldo puntato</string -->
-    <string name="read_">Letti </string>
+    <!-- UNUSED string name="read_">Letti </string -->
+    <string name="read_data">Letti %1sd dati</string>
     <string name="read_fail_with_code">Lettura fallita. Codice </string>
     <string name="read_failed">Lettura dati DistoX fallita</string>
     <!-- string name="reading_file_failed">Lettura file fallita</string -->

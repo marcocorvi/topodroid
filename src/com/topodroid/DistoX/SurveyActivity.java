@@ -237,9 +237,9 @@ public class SurveyActivity extends Activity
     // oldId  = -1L;
     Bundle extras = getIntent().getExtras();
     if ( extras != null ) {
-      if ( extras.getInt( TopoDroidApp.TOPODROID_SURVEY ) == 1 ) mustOpen = true;
-      // oldSid = extras.getLong( TopoDroidApp.TOPODROID_OLDSID );
-      // oldId  = extras.getLong( TopoDroidApp.TOPODROID_OLDID );
+      if ( extras.getInt( TopoDroidTag.TOPODROID_SURVEY ) == 1 ) mustOpen = true;
+      // oldSid = extras.getLong( TopoDroidTag.TOPODROID_OLDSID );
+      // oldId  = extras.getLong( TopoDroidTag.TOPODROID_OLDID );
     }
 
     setContentView(R.layout.survey_activity);

@@ -61,37 +61,12 @@ public class CalibActivity extends Activity
                            implements OnItemClickListener
                            , View.OnClickListener
 {
-  // private static int icons00no[];
-  // private static int iconsno[] = {
-  //                       0, // R.drawable.ic_save_no,
-  //                       R.drawable.ic_open_no,
-  //                       R.drawable.ic_read_no
-  //                       // R.drawable.ic_export0_no,
-  //                    };
-  // private static int ixonsno[] = {
-  //                       0, // R.drawable.ix_save_no,
-  //                       R.drawable.ix_open_no,
-  //                       R.drawable.ix_read_no
-  //                       // R.drawable.ix_export0_no
-  //                    };
   private static int izonsno[] = {
                         0, // R.drawable.iz_save_no,
                         R.drawable.iz_open_no,
                         R.drawable.iz_read_no
                         // R.drawable.iz_export0_no
                      };
-                      
-  // private static int icons00[];
-  // private static int icons[] = {
-  //                       R.drawable.ic_save,
-  //                       R.drawable.ic_open,
-  //                       R.drawable.ic_read
-  //                    };
-  // private static int ixons[] = {
-  //                       R.drawable.ix_save,
-  //                       R.drawable.ix_open,
-  //                       R.drawable.ix_read
-  //                     };
   private static int izons[] = {
                         R.drawable.iz_save,
                         R.drawable.iz_open,

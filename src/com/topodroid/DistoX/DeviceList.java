@@ -66,7 +66,7 @@ public class DeviceList extends Activity
 
     // setTitleColor( 0x006d6df6 );
 
-    int command = getIntent().getExtras().getInt( TopoDroidApp.TOPODROID_DEVICE_ACTION );
+    int command = getIntent().getExtras().getInt( TopoDroidTag.TOPODROID_DEVICE_ACTION );
     // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "command " + command );
     switch ( command )
     {
@@ -97,7 +97,7 @@ public class DeviceList extends Activity
       // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "onItemClick Address " + address );
       // Log.v( TopoDroidApp.TAG, "onItemClick Address " + address );
       Intent intent = new Intent();
-      intent.putExtra( TopoDroidApp.TOPODROID_DEVICE_ACTION, address );
+      intent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, address );
       setResult( RESULT_OK, intent );
     } else {
       setResult( RESULT_CANCELED );

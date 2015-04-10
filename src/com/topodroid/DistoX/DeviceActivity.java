@@ -237,7 +237,7 @@ public class DeviceActivity extends Activity
     mDevice  = mApp.mDevice;
     // mAddress = mDevice.mAddress;
 
-    // mAddress = getIntent().getExtras().getString(   TopoDroidApp.TOPODROID_DEVICE_ADDR );
+    // mAddress = getIntent().getExtras().getString(   TopoDroidTag.TOPODROID_DEVICE_ADDR );
 
     setContentView(R.layout.device_activity);
     mTvAddress = (TextView) findViewById( R.id.device_address );
@@ -333,7 +333,7 @@ public class DeviceActivity extends Activity
       int p = 0;
       if ( p++ == pos ) { // SCAN
         Intent scanIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceList.class );
-        scanIntent.putExtra( TopoDroidApp.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
+        scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
         startActivityForResult( scanIntent, REQUEST_DEVICE );
         Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
       } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DETACH
@@ -653,7 +653,7 @@ public class DeviceActivity extends Activity
     switch ( request ) {
       case REQUEST_DEVICE:
         if ( result == RESULT_OK ) {
-          String address = extras.getString( TopoDroidApp.TOPODROID_DEVICE_ACTION );
+          String address = extras.getString( TopoDroidTag.TOPODROID_DEVICE_ACTION );
           TopoDroidLog.Log(TopoDroidLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "onActivityResult REQUEST_DEVICE: null address");
@@ -731,7 +731,7 @@ public class DeviceActivity extends Activity
       }
     } else if ( item == mMIscan ) {     // SCAN
       Intent scanIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceList.class );
-      scanIntent.putExtra( TopoDroidApp.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
+      scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, REQUEST_DEVICE );
       Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
     } else if ( item == mMIhelp  ) {    // HELP DIALOG
@@ -809,7 +809,7 @@ public class DeviceActivity extends Activity
     int mustOpen = 0;
     mApp.setCalibFromName( name );
     Intent calibIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, CalibActivity.class );
-    calibIntent.putExtra( TopoDroidApp.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
+    calibIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
     startActivity( calibIntent );
   }
 

@@ -307,7 +307,7 @@ public class Archiver
               fout.close();
               if ( sql ) {
                 TopoDroidLog.Log( TopoDroidLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\"" );
-                app.mData.loadFromFile( pathname );
+                app.mData.loadFromFile( pathname, app.mManifestDbVersion );
                 File f = new File( pathname );
                 f.delete();
               }

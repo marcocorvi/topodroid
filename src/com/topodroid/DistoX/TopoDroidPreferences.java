@@ -161,7 +161,7 @@ public class TopoDroidPreferences extends PreferenceActivity
     switch ( request ) {
       case REQUEST_CWD:
         if ( extras != null ) {
-          String cwd = extras.getString( TopoDroidApp.TOPODROID_CWD );
+          String cwd = extras.getString( TopoDroidTag.TOPODROID_CWD );
           mCwdPreference.setSummary( cwd );
           // Log.v("DistoX", "got CWD " + cwd );
         }

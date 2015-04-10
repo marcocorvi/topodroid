@@ -268,9 +268,9 @@ public class SensorActivity extends Activity
       }
       // TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "sensor " + type + " " + value );
       Intent intent = new Intent();
-      intent.putExtra( TopoDroidApp.TOPODROID_SENSOR_TYPE, type );
-      intent.putExtra( TopoDroidApp.TOPODROID_SENSOR_VALUE, value );
-      intent.putExtra( TopoDroidApp.TOPODROID_SENSOR_COMMENT, comment );
+      intent.putExtra( TopoDroidTag.TOPODROID_SENSOR_TYPE, type );
+      intent.putExtra( TopoDroidTag.TOPODROID_SENSOR_VALUE, value );
+      intent.putExtra( TopoDroidTag.TOPODROID_SENSOR_COMMENT, comment );
       setResult( RESULT_OK, intent );
       finish();
     } else if ( b == mBTcancel ) {

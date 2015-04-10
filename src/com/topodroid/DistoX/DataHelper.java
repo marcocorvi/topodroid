@@ -3260,7 +3260,7 @@ public class DataHelper extends DataSetObservable
    /** load survey data from a sql file
     * @param filename  name of the sql file
     */
-   long loadFromFile( String filename )
+   long loadFromFile( String filename, int db_version )
    {
      long sid = -1;
      long id, status, shotid;
@@ -3283,9 +3283,10 @@ public class DataHelper extends DataSetObservable
          name          = stringValue( v );
          String day    = stringValue( v );
          String team   = stringValue( v );
-         double decl   = doubleValue( v );
+         double decl   = 0; if ( db_version > 14 ) doubleValue( v );
          comment       = stringValue( v );
-         String init_station = stringValue( v );
+         String init_station = "0"; if ( db_version > 22) init_station = stringValue( v );
+
          sid = setSurvey( name, false );
          updateSurveyInfo( sid, day, team, decl, comment, init_station, false );
          while ( (line = br.readLine()) != null ) {
@@ -3299,8 +3300,7 @@ public class DataHelper extends DataSetObservable
            // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loafFromFile " + table + " " + v );
            skip_sid = longValue( v );
            id = longValue( v );
-           if ( table.equals(PHOTO_TABLE) ) {
-             // FIXME PHOTO
+           if ( table.equals(PHOTO_TABLE) ) { // FIXME PHOTO
              shotid  = longValue( v );
              title   = stringValue( v );
              date    = stringValue( v );
@@ -3309,9 +3309,9 @@ public class DataHelper extends DataSetObservable
                insertPhoto( sid, id, shotid, title, date, comment );
                // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
              }
-           } else if ( table.equals(PLOT_TABLE) ) {
+           } else if ( table.equals(PLOT_TABLE) ) { // ***** PLOTS
              name         = stringValue( v );
-             long type    = longValue( v );
+             long type    = longValue( v ); if ( db_version <= 20 ) if ( type == 3 ) type = 5;
              status       = longValue( v );
              String start = stringValue( v );
              String view  = stringValue( v );
@@ -3319,12 +3319,12 @@ public class DataHelper extends DataSetObservable
              double yoffset = doubleValue( v );
              double zoom  = doubleValue( v );
              double azimuth = doubleValue( v );
-             double clino = doubleValue( v );
+             double clino = 0; if ( db_version > 20 ) clino = doubleValue( v );
              insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, false );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
    
            // FIXME_SKETCH_3D
-           } else if ( table.equals(SKETCH_TABLE) ) {
+           } else if ( table.equals(SKETCH_TABLE) ) { // ***** SKETCHES
              name         = stringValue( v );
              status       = longValue( v );
              String start = stringValue( v );
@@ -3346,7 +3346,7 @@ public class DataHelper extends DataSetObservable
              double clino  = doubleValue( v );
              insertSketch3d( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt, xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino );
            // END_SKETCH_3D
-           } else if ( table.equals(SHOT_TABLE) ) {
+           } else if ( table.equals(SHOT_TABLE) ) { // ***** SHOTS
              String from = stringValue( v );
              String to   = stringValue( v );
              double d    = doubleValue( v );
@@ -3361,7 +3361,9 @@ public class DataHelper extends DataSetObservable
              long leg    = longValue( v );
              status      = longValue( v );
              comment     = stringValue( v );
-             // long type = 0;
+             // FIXME N.B. type is not saved
+             // long type = 0; if ( db_version > 21 ) type = longValue( v );
+
              insertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, 0, comment, false );
              updateShotAMDR( id, sid, acc, mag, dip, r, false );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertShot " + sid + " " + id + " " + from + " " + to );
@@ -3376,6 +3378,7 @@ public class DataHelper extends DataSetObservable
              insertFixed( sid, id, station, lng, lat, alt, asl, comment, status );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
            } else if ( table.equals(STATION_TABLE) ) {
+             // N.B. ONLY IF db_version > 19
              // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "v <" + v + ">" );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment  );
              name    = stringValue( v );

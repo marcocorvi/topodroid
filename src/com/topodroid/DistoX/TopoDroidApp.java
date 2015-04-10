@@ -252,39 +252,6 @@ public class TopoDroidApp extends Application
   // private static final byte char0C = 0x0c;
 
 
-  // intent extra-names
-  public static final String TOPODROID_PLOT_ID     = "topodroid.plot_id";
-  public static final String TOPODROID_PLOT_ID2    = "topodroid.plot_id2";
-  public static final String TOPODROID_PLOT_NAME   = "topodroid.plot_name";
-  public static final String TOPODROID_PLOT_NAME2  = "topodroid.plot_name2";
-  public static final String TOPODROID_PLOT_TYPE   = "topodroid.plot_type";
-  public static final String TOPODROID_PLOT_FROM   = "topodroid.plot_from";
-  public static final String TOPODROID_PLOT_TO     = "topodroid.plot_to";
-  public static final String TOPODROID_PLOT_ZOOM   = "topodroid.plot_zoom";
-  public static final String TOPODROID_PLOT_AZIMUTH = "topodroid.plot_azimuth";
-  public static final String TOPODROID_PLOT_CLINO  = "topodroid.plot_clino";
-
-  // FIXME_SKETCH_3D
-  public static final String TOPODROID_SKETCH_ID   = "topodroid.sketch_id";
-  public static final String TOPODROID_SKETCH_NAME = "topodroid.sketch_name";
-  // END_SKETCH_3D
-
-  public static final String TOPODROID_SURVEY      = "topodroid.survey";
-  public static final String TOPODROID_OLDSID      = "topodroid.old_sid";    // SurveyActivity
-  public static final String TOPODROID_OLDID       = "topodroid.old_id";
-  public static final String TOPODROID_SURVEY_ID   = "topodroid.survey_id";  // DrawingActivity
-  
-  public static final String TOPODROID_DEVICE_ACTION = "topodroid.device_action";
-  // public static final String TOPODROID_DEVICE_ADDR   = "topodroid.device_addr";
-  // public static final String TOPODROID_DEVICE_CNCT   = "topodroid.device_cnct";
-
-  public static final String TOPODROID_SENSOR_TYPE  = "topodroid.sensor_type";
-  public static final String TOPODROID_SENSOR_VALUE = "topodroid.sensor_value";
-  public static final String TOPODROID_SENSOR_COMMENT = "topodroid.sensor_comment";
-
-  public static final String TOPODROID_CWD = "topodroid.cwd";
-
-
   // ---------------------------------------------------------------
   // ConnListener
   ArrayList< Handler > mConnListener;
@@ -683,8 +650,11 @@ public class TopoDroidApp extends Application
     }
   }
 
+  int mManifestDbVersion = 0;
+
   public int checkManifestFile( String filename, String surveyname )
   {
+    mManifestDbVersion = 0;
     String line;
     if ( mData.hasSurveyName( surveyname ) ) {
       return -1;
@@ -719,15 +689,16 @@ public class TopoDroidApp extends Application
         return -2;
       }
       line = br.readLine().trim();
-      int db_version = 0;
       try {
-        db_version = Integer.parseInt( line );
+        mManifestDbVersion = Integer.parseInt( line );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse error: db_version " + line );
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse error: db version " + line );
       }
       
-      if ( ! ( db_version >= DataHelper.DATABASE_VERSION_MIN && db_version <= DataHelper.DATABASE_VERSION ) ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ZIP, "TopDroid DB version mismatch: found " + db_version + " expected " + 
+      if ( ! (    mManifestDbVersion >= DataHelper.DATABASE_VERSION_MIN
+               && mManifestDbVersion <= DataHelper.DATABASE_VERSION ) ) {
+        TopoDroidLog.Log( TopoDroidLog.LOG_ZIP,
+                          "TopDroid DB version mismatch: found " + mManifestDbVersion + " expected " + 
                           + DataHelper.DATABASE_VERSION_MIN + "-" + DataHelper.DATABASE_VERSION );
         return -3;
       }

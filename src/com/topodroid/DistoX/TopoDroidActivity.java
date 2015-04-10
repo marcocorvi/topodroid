@@ -309,9 +309,9 @@ public class TopoDroidActivity extends Activity
   {
     mApp.setSurveyFromName( value, false ); // open survey activity: tell app to update survey name+id, no forward
     Intent surveyIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, SurveyActivity.class );
-    surveyIntent.putExtra( TopoDroidApp.TOPODROID_SURVEY, mustOpen );
-    // surveyIntent.putExtra( TopoDroidApp.TOPODROID_OLDSID, old_sid );
-    // surveyIntent.putExtra( TopoDroidApp.TOPODROID_OLDID,  old_id );
+    surveyIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen );
+    // surveyIntent.putExtra( TopoDroidTag.TOPODROID_OLDSID, old_sid );
+    // surveyIntent.putExtra( TopoDroidTag.TOPODROID_OLDID,  old_id );
     startActivity( surveyIntent );
   }
 
@@ -325,7 +325,7 @@ public class TopoDroidActivity extends Activity
   {
     mApp.setCalibFromName( value );
     Intent calibIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, CalibActivity.class );
-    calibIntent.putExtra( TopoDroidApp.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
+    calibIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
     startActivity( calibIntent );
   }
 

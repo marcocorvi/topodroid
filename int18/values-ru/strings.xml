@@ -252,7 +252,8 @@
     <string name="plot_recover">Перезагрузить абрис из бекапа?</string>
     <string name="plot_start">Начальный пикет</string>
     <!-- OK string name="plot_view">Просмотренный пикет</string -->
-    <string name="read_">Считать </string>
+    <!-- UNUSED string name="read_">Считать </string -->
+    <!-- TODO string name="read_data">Read %1$d data</string -->
     <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->

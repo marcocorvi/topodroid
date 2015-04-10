@@ -361,7 +361,8 @@ public class ShotActivity extends Activity
         updateDisplay( );
       }
       if ( toast ) {
-        Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, String.format( getString(R.string.read_data), nr ), Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {
@@ -543,9 +544,9 @@ public class ShotActivity extends Activity
       int p = 0;
       if ( p++ == pos ) { // SURVEY ACTIVITY
         Intent intent = new Intent( this, SurveyActivity.class );
-        intent.putExtra( TopoDroidApp.TOPODROID_SURVEY,  0 ); // mustOpen 
-        intent.putExtra( TopoDroidApp.TOPODROID_OLDSID, -1 ); // old_sid 
-        intent.putExtra( TopoDroidApp.TOPODROID_OLDID,  -1 ); // old_id 
+        intent.putExtra( TopoDroidTag.TOPODROID_SURVEY,  0 ); // mustOpen 
+        intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
+        intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
         startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
       // } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
       //   (new CurrentStationDialog( this, this, mApp )).show();
@@ -732,9 +733,9 @@ public class ShotActivity extends Activity
       // case EXTERNAL_ACTIVITY_REQUEST_CODE:
         if ( resCode == Activity.RESULT_OK ) {
           Bundle extras = data.getExtras();
-          String type  = extras.getString( TopoDroidApp.TOPODROID_SENSOR_TYPE );
-          String value = extras.getString( TopoDroidApp.TOPODROID_SENSOR_VALUE );
-          String comment = extras.getString( TopoDroidApp.TOPODROID_SENSOR_COMMENT );
+          String type  = extras.getString( TopoDroidTag.TOPODROID_SENSOR_TYPE );
+          String value = extras.getString( TopoDroidTag.TOPODROID_SENSOR_VALUE );
+          String comment = extras.getString( TopoDroidTag.TOPODROID_SENSOR_COMMENT );
           TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
 
           SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
@@ -1021,9 +1022,9 @@ public class ShotActivity extends Activity
       //   (new ShotNewDialog( this, mApp, this, last_blk, -1L )).show();
       // // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnInfo
       // //   intent = new Intent( this, SurveyActivity.class );
-      // //   intent.putExtra( TopoDroidApp.TOPODROID_SURVEY,  0 ); // mustOpen 
-      // //   intent.putExtra( TopoDroidApp.TOPODROID_OLDSID, -1 ); // old_sid 
-      // //   intent.putExtra( TopoDroidApp.TOPODROID_OLDID,  -1 ); // old_id 
+      // //   intent.putExtra( TopoDroidTag.TOPODROID_SURVEY,  0 ); // mustOpen 
+      // //   intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
+      // //   intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
       // //   startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
 
       // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnUndelete
@@ -1156,8 +1157,8 @@ public class ShotActivity extends Activity
 
     // TODO
     Intent sketchIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SketchActivity.class );
-    sketchIntent.putExtra( TopoDroidApp.TOPODROID_SURVEY_ID, mApp.mSID );
-    sketchIntent.putExtra( TopoDroidApp.TOPODROID_SKETCH_NAME, name );
+    sketchIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mApp.mSID );
+    sketchIntent.putExtra( TopoDroidTag.TOPODROID_SKETCH_NAME, name );
     startActivity( sketchIntent );
   }
   // END_SKETCH_3D
@@ -1174,13 +1175,13 @@ public class ShotActivity extends Activity
     // FIXME mApp.disconnectRemoteDevice();
 
     Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingActivity.class );
-    drawIntent.putExtra( TopoDroidApp.TOPODROID_SURVEY_ID, mApp.mSID );
-    drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_NAME, plot1_name );
-    drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_NAME2, plot2_name );
-    drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_TYPE, type );
-    drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_FROM, start );
-    // drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_ID, plot1_id ); // not necessary
-    // drawIntent.putExtra( TopoDroidApp.TOPODROID_PLOT_ID2, plot2_id ); // not necessary
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mApp.mSID );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME, plot1_name );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME2, plot2_name );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, type );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, start );
+    // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_ID, plot1_id ); // not necessary
+    // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_ID2, plot2_id ); // not necessary
 
     startActivity( drawIntent );
   }
@@ -1398,9 +1399,9 @@ public class ShotActivity extends Activity
     // } else 
     if ( item == mMIsurvey ) { // SURVEY ACTIVITY 
       Intent intent = new Intent( this, SurveyActivity.class );
-      intent.putExtra( TopoDroidApp.TOPODROID_SURVEY,  0 ); // mustOpen 
-      intent.putExtra( TopoDroidApp.TOPODROID_OLDSID, -1 ); // old_sid 
-      intent.putExtra( TopoDroidApp.TOPODROID_OLDID,  -1 ); // old_id 
+      intent.putExtra( TopoDroidTag.TOPODROID_SURVEY,  0 ); // mustOpen 
+      intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
+      intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
       startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
     } else if ( item == mMIoptions ) { // OPTIONS DIALOG
       Intent intent = new Intent( this, TopoDroidPreferences.class );
