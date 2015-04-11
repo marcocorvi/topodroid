@@ -314,7 +314,7 @@
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
     <string name="name">имя</string>
-    <string name="team">группа съёмемки</string>
+    <string name="team">группа топосъёмки</string>
     <!-- OK string name="toggle_device">Переключить устройство в режим калибровки</string -->
     <string name="toggle_failed">Не удалось переключить DistoX</string>
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
