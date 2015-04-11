@@ -99,7 +99,7 @@
     <string name="splay_at_to">Л:П:В:Н на следующем пикете</string>
 
     <string name="few_data">Не достаточно данных</string>
-    <!-- TODO string name="few_plots">Not enough sketches</string -->
+    <string name="few_plots">Не достаточно абрисов</string>
 
     <string name="import_title">Импорт файла</string>
     <string name="import_wait">Импорт файла... обождите...</string>
@@ -186,7 +186,7 @@
     <string name="no_survey">Съёмка не аыбрана.</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol не установлен</string -->
     <string name="no_thmanager">ThManager не установлен</string>
-    <!-- TODO string name="no_db_viewer">DB_viewer app not found</string -->
+    <string name="no_db_viewer">Приложение просмотра баз данных не найдено</string>
     <string name="no_undelete">Нечего восстанавливать</string>
 
     <!-- NO string name="menu_3d">3 D</string -->
@@ -206,7 +206,7 @@
     <string name="menu_logs">Журнал</string>
     <!-- OK string name="menu_manual">Вручную</string -->
     <string name="menu_options">Настройки</string>
-    <!-- TODO string name="menu_overview">OVERVIEW</string -->
+    <string name="menu_overview">ОБЗОР</string>
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">фото</string>
     <string name="menu_sensor">датчик</string>
@@ -253,7 +253,7 @@
     <string name="plot_start">Начальный пикет</string>
     <!-- OK string name="plot_view">Просмотренный пикет</string -->
     <!-- UNUSED string name="read_">Считать </string -->
-    <!-- TODO string name="read_data">Read %1$d data</string -->
+    <string name="read_data">Считать %1$d данных</string>
     <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
@@ -341,7 +341,7 @@
     <string name="stat_station">Пикеты %1$d</string>
     <string name="stat_surface">Поверхн. пикеты %1$d %2$.1f</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f"</string>
-    <!-- TODO string name="shot_title">SHOT %1$s - %2$s"</string -->
+    <string name="shot_title">ПИКЕТ %1$s - %2$s"</string>
     <!-- TODO string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string -->
 
     <string name="hide_blank">Пустые пикеты</string>
@@ -499,7 +499,7 @@
     <string name="help_splay">Автоматически присваивать номер пикет боковым измерениям</string>
     <string name="help_display">Выберать режим просмотра</string>
     <string name="help_display_calib">Режим показа удаленных пикетов</string>
-    <!-- TODO string name="help_overview">Overview activity</string -->
+    <string name="help_overview">Обзор активности</string>
     <string name="help_plot">Ввод абрисов</string>
     <string name="help_note">Реждактировать заметки съёмки</string>
     <string name="help_bluetooth">Сброс соединения Bluetooth</string>
