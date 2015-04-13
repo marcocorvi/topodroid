@@ -5,7 +5,7 @@
 
     <string name="app_name">TopoDroid</string>
 
-    <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате на елементите за рисуване?</string>
+    <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string>
     <string name="version_title">Обновяване на версията</string>
 
     <string name="POINT">Точка</string>
@@ -54,7 +54,7 @@
     <!-- string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
     <string name="connect_failed">Невъзможна връзка</string>
-    <string name="data"> данни</string>
+    <string name="data"> измервания</string>
     <string name="using">Използва се %1$s %2$s</string>
     <string name="calib_error">Грешка: %1$.4f градуси</string>
     <string name="calib_max_error">Макс. грешка: %1$.4f градуси</string>
@@ -97,7 +97,7 @@
     <string name="splay_at_to">"&lt;,&gt;,Г,Д" в репер "ДО"</string>
 
     <string name="few_data">Няма достатъчно данни</string>
-    <!-- TODO string name="few_plots">Not enough sketches</string -->
+    <string name="few_plots">Няма достатъчно скици</string>
 
     <string name="import_title">Импортиране на файл</string>
     <string name="import_wait">Импортиране... Моля изчакайте...</string>
@@ -207,7 +207,7 @@
     <string name="menu_logs">Лог файлове</string>
     <!-- string name="menu_manual">manual</string -->
     <string name="menu_options">Настройки</string>
-    <!-- TODO string name="menu_overview">OVERVIEW</string -->
+    <string name="menu_overview">Общ изглед</string>
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
@@ -252,8 +252,8 @@
     <string name="plot_recover">Възстановяване на скицата от резервното копие?</string>
     <string name="plot_start">Начален репер</string>
     <!-- string name="plot_view">Viewed station</string -->
-    <!-- UNUSED string name="read_">Четене </string -->
-    <!-- TODO string name="read_data">Read %1$d data</string -->
+    <!-- UNUSED string name="read_">Прочетени </string -->
+    <string name="read_data">Прочетени %1$d измервания</string>
     <string name="read_fail_with_code">Грешка при четене: код </string>
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- string name="reading_file_failed">Failed file-read</string -->
@@ -510,7 +510,7 @@
     <string name="help_splay">Автоматично определяне на репери за страничните отсечки</string>
     <string name="help_display">Избор на данни за показване в таблицата</string>
     <string name="help_display_calib">Показване на изтрити отсечки</string>
-    <!-- TODO string name="help_overview">Overview activity</string -->
+    <string name="help_overview">Общ изглед на всички скици</string>
     <string name="help_plot">Режим на скициране</string>
     <string name="help_note">Редактиране на бележки</string>
     <string name="help_bluetooth">Рестарт. на Bluetooth</string>
