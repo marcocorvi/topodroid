@@ -107,8 +107,9 @@ public class DistoXManualDialog extends Activity
     adapter.add("11. Sketch window");
     adapter.add("12. Sketch drawing");
     adapter.add("13. Cross-sections");
-    adapter.add("14. The final map");
-    if ( TopoDroidApp.mCosurvey ) adapter.add("15. Co-surveying");
+    adapter.add("14. Overview window");
+    adapter.add("15. The final map");
+    if ( TopoDroidApp.mCosurvey ) adapter.add("16. Co-surveying");
     adapter.add("* Website");
  
     mList.setAdapter( adapter );
@@ -139,7 +140,7 @@ public class DistoXManualDialog extends Activity
     CharSequence item = ((TextView) view).getText();
     // Log.v("DistoX", "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
-    int max = ( TopoDroidApp.mCosurvey )? 15 : 14;
+    int max = ( TopoDroidApp.mCosurvey )? 16 : 15;
     if ( pos <= max ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter( sw );
