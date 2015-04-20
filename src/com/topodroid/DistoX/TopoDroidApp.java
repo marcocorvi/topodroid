@@ -571,6 +571,7 @@ public class TopoDroidApp extends Application
   void setCWD( String cwd )
   {
     if ( cwd == null || cwd.length() == 0 || cwd.equals( mCWD ) ) return;
+    mData.closeDatabase();
     mCWD = cwd;
     TopoDroidPath.setPaths( mCWD );
     mData.openDatabase();
@@ -1119,7 +1120,7 @@ public class TopoDroidApp extends Application
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     String filename = TopoDroidPath.getSurveySvxFile( mySurvey );
-    return TopoDroidExporter.exportSurveyAsSvx( mSID, mData, info, filename );
+    return TopoDroidExporter.exportSurveyAsSvx( mSID, mData, info, mDevice, filename );
   }
 
   public String exportSurveyAsTro()

@@ -85,6 +85,7 @@
 
     <string name="comment">comment</string>
     <string name="flag">Flag</string>
+    <string name="backshot">backshot</string>
     <string name="duplicate">duplicate</string>
     <!-- string name="regular">regular</string -->
     <string name="surface">surface</string>
@@ -164,6 +165,8 @@
     <string name="none">none</string>
     <string name="barrier_add">Break midline display?</string>
     <string name="barrier_del">Continue midline display?</string>
+
+    <string name="bad_cwd">Project name cannot be path</string>
 
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">No calibration</string>
@@ -688,6 +691,8 @@
   <string name="pref_leg_title">Leg tolerance</string>
   <string name="pref_leg_summary">Tolerance among the shots of a leg</string>
   <string name="pref_leg_message">Tolerance among the shots of a leg</string>
+  <string name="pref_backsight_title">Backsight</string>
+  <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Surveying team</string>

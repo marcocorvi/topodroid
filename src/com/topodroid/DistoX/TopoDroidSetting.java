@@ -92,7 +92,8 @@ class TopoDroidSetting
 
     "DISTOX_SPLAY_VERT_THRS",
     "DISTOX_INIT_STATION",
-    "DISTOX_LOCALE",                 // 61
+    "DISTOX_BACKSIGHT",
+    "DISTOX_LOCALE",                 // 62
     "DISTOX_CWD",                    // must be last 
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
@@ -124,6 +125,7 @@ class TopoDroidSetting
 
   static int    mMinNrLegShots = 2;
   static String mInitStation = "0";
+  static boolean mBacksight = false;
   static float  mSplayVertThrs = 80;
 
   // selection_radius = cutoff + closeness / zoom
@@ -556,6 +558,8 @@ class TopoDroidSetting
     mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION
     if ( mInitStation.length() == 0 ) mInitStation = "0";
     DistoXStationName.setInitialStation( mInitStation );
+    
+    mBacksight = prefs.getBoolean( key[k++], false ); // DISTOX_BACKSIGHT
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -854,6 +858,8 @@ class TopoDroidSetting
       mInitStation = prefs.getString( k, "0" ).replaceAll("\\s+", "");
       if ( mInitStation.length() == 0 ) mInitStation = "0";
       DistoXStationName.setInitialStation( mInitStation );
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_BACKSIGHT
+      mBacksight = prefs.getBoolean( k, false );
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

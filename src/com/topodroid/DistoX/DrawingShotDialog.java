@@ -48,6 +48,7 @@ public class DrawingShotDialog extends Dialog
     // private RadioButton mRBsurvey;
     private CheckBox mRBduplicate;
     private CheckBox mRBsurface;
+    // private CheckBox mRBbackshot;
 
     private DrawingActivity mActivity;
     private DistoXDBlock mBlock;
@@ -84,6 +85,7 @@ public class DrawingShotDialog extends Dialog
       // mRBsurvey    = (RadioButton) findViewById( R.id.survey );
       mRBduplicate = (CheckBox) findViewById( R.id.duplicate );
       mRBsurface   = (CheckBox) findViewById( R.id.surface );
+      // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
 
       // if ( ! TopoDroidApp.mLoopClosure ) {
       //   mRBignore.setClickable( false );
@@ -98,6 +100,7 @@ public class DrawingShotDialog extends Dialog
 
       mRBduplicate.setOnClickListener( this );
       mRBsurface.setOnClickListener( this );
+      // mRBbackshot.setOnClickListener( this );
 
       mBtnOK.setOnClickListener( this );
       // mBtnCancel.setOnClickListener( this );
@@ -131,6 +134,9 @@ public class DrawingShotDialog extends Dialog
           case DistoXDBlock.BLOCK_SURFACE:
             mRBsurface.setChecked( true );
             break;
+          // case DistoXDBlock.BLOCK_BACKSHOT:
+          //   mRBbackshot.setChecked( true );
+          //   break;
         }
       }
       setTitle( String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
@@ -154,8 +160,13 @@ public class DrawingShotDialog extends Dialog
 
       } else if ( b == mRBsurface ) {
         mRBduplicate.setChecked( false );
+        // mRBbackshot.setChecked( false );
       } else if ( b == mRBduplicate ) {
         mRBsurface.setChecked( false );
+        // mRBbackshot.setChecked( false );
+      // } else if ( b == mRBbackshot ) {
+      //   mRBduplicate.setChecked( false );
+      //   mRBsurface.setChecked( false );
 
       } else if ( b == mBtnOK ) {
         long extend = mBlock.mExtend;
@@ -175,6 +186,8 @@ public class DrawingShotDialog extends Dialog
           flag = DistoXDBlock.BLOCK_DUPLICATE;
         } else if ( mRBsurface.isChecked() ) {
           flag = DistoXDBlock.BLOCK_SURFACE;
+        // } else if ( mRBbackshot.isChecked() ) {
+        //   flag = DistoXDBlock.BLOCK_BACKSHOT;
         } else { // if ( mRBsurvey.isChecked() )
           flag = DistoXDBlock.BLOCK_SURVEY;
         }

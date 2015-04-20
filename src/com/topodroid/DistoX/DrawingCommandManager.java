@@ -504,7 +504,9 @@ public class DrawingCommandManager
         final Iterator i = mFixedStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
-          path.setPaint( paint );
+          if ( path.mBlock == null || ! path.mBlock.mMultiBad ) {
+            path.setPaint( paint );
+          }
         }
       }
     }

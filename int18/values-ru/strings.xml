@@ -87,6 +87,7 @@
 
     <string name="comment">комментарий</string>
     <string name="flag">Флаг</string>
+    <!-- TODO string name="backshot">backshot</string -->
     <string name="duplicate">дубликат</string>
     <!-- OK string name="regular">обычный</string -->
     <string name="surface">поверхность</string>
@@ -166,6 +167,8 @@
     <string name="none">none</string>
     <string name="barrier_add">Прервать показ средней линии?</string>
     <string name="barrier_del">Продолжить показ средней линии?</string>
+
+    <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
 
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calibration">Калибровка не выбрана</string>
@@ -679,6 +682,8 @@
   <string name="pref_leg_title">Допустимое отклонениие в измерении отрезков</string>
   <string name="pref_leg_summary">Точновсть измерений пикетов отрезка</string>
   <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
+  <!-- TODO string name="pref_backsight_title">Backsight</string -->
+  <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
 
   <string name="pref_team_title">Группа съёмемки</string>
   <string name="pref_team_summary">Группа съёмемки</string>

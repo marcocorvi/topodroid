@@ -37,6 +37,7 @@ import android.view.WindowManager.LayoutParams;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 import android.util.Log;
 
@@ -51,18 +52,17 @@ public class CWDActivity extends Activity
   private void setPreference()
   {
     String dir_name = mETcwd.getText().toString();
-    if ( dir_name == null ) {
-      dir_name = "TopoDroid";
-    } else {
-      dir_name.trim();
-      if ( ! dir_name.startsWith( "TopoDroid" ) ) {
-        dir_name = "TopoDroid" + dir_name;
-      }
+    if ( dir_name == null ) return;
+    dir_name.trim();
+    if ( dir_name.length() == 0 ) return;
+    if ( dir_name.indexOf("/") >= 0 ) {
+      Toast.makeText( this, R.string.bad_cwd, Toast.LENGTH_SHORT ).show();
+      return;
     }
-    File dir = new File( dir_name );
-    if ( ! dir.exists() ) {
-      dir.mkdir( );
+    if ( ! dir_name.startsWith( "TopoDroid" ) ) {
+      dir_name = "TopoDroid-" + dir_name;
     }
+    TopoDroidPath.checkBasePath( dir_name );
     // Log.v("DistoX", "dir name <" + dir_name + ">" );
     mApp.setCWDPreference( dir_name );
     Intent intent = new Intent();

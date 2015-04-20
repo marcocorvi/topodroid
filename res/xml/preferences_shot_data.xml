@@ -45,6 +45,13 @@
        android:defaultValue="false"
      />
 
+     <CheckBoxPreference
+       android:key="DISTOX_BACKSIGHT"
+       android:summary="@string/pref_backsight_summary"
+       android:title="@string/pref_backsight_title"
+       android:defaultValue="false"
+     />
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SHOT_TIMER"
        android:title="@string/pref_shot_timer_title"

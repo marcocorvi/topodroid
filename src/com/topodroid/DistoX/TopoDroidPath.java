@@ -74,6 +74,14 @@ public class TopoDroidPath
 
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
   
+  static void checkBasePath( String path )
+  {
+    String cwd = EXTERNAL_STORAGE_PATH + "/" + path;
+    File dir = new File( cwd );
+    if ( ! dir.exists() ) {
+      dir.mkdir();
+    }
+  }
 
   // FIXME BASEPATH 
   // remove comments when ready to swicth to new Android app path system
@@ -81,9 +89,6 @@ public class TopoDroidPath
   static void setPaths( String path )
   {
     File dir = null;
-    // String old_path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/TopoDroid/";
-    // APP_BASE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.topodroid.DistoX/";
-
     if ( path != null ) {
       String cwd = EXTERNAL_STORAGE_PATH + "/" + path;
       dir = new File( cwd );

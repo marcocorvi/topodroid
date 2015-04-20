@@ -28,6 +28,7 @@ class Device
   final static int DISTO_A3   = 1;
   final static int DISTO_X310 = 2;
   final static String[] typeString = { "Unknown", "A3", "X310" };
+  final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2" };
   
   static String typeToString( int type ) { return typeString[ type ]; }
 
@@ -70,6 +71,8 @@ class Device
   }
 
   public String toString() { return typeString[ mType ] + " " + mName + " " + mAddress; }
+
+  public String toSimpleString() { return typeSimpleString[ mType ] + " " + mName; }
   
   
 }

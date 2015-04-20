@@ -415,7 +415,7 @@ public class TherionParser
                       to = vals[j]; // + "@" + path;
                     }
                     shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
-                                         0.0f, 0.0f, 0.0f, 0.0f, 0, true, false, "" ) );
+                                         0.0f, 0.0f, 0.0f, 0.0f, 0, true, false, false, "" ) );
                   }
                 }
               } else if ( cmd.startsWith("explo") ) { // explo-date explo-team
@@ -508,14 +508,14 @@ public class TherionParser
                     // from = from + "@" + path;
                     splays.add( new ParserShot( state.mPrefix + from + state.mSuffix, null,
                                           len, ber, cln, 0.0f,
-                                          state.mExtend, state.mDuplicate, state.mSurface, "" ) );
+                                          state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
                   } else {
                     // from = from + "@" + path;
                     // to   = to + "@" + path;
                     // Log.v( TopoDroidApp.TAG, "add shot " + from + " -- " + to);
                     shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
                                          len, ber, cln, 0.0f,
-                                         state.mExtend, state.mDuplicate, state.mSurface, "" ) );
+                                         state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
                   }
                 } catch ( NumberFormatException e ) {
                   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "therion parser error: data " + line );

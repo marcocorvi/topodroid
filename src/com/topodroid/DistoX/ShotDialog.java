@@ -74,6 +74,7 @@ public class ShotDialog extends Dialog
   // private CheckBox mRBreg;
   private CheckBox mRBdup;
   private CheckBox mRBsurf;
+  // private CheckBox mRBback;
 
   private CheckBox mCBleg;
   private CheckBox mCBall_splay;
@@ -203,6 +204,7 @@ public class ShotDialog extends Dialog
     // if ( shot_flag == DistoXDBlock.BLOCK_SURVEY ) { mRBreg.setChecked( true ); }
     if ( shot_flag == DistoXDBlock.BLOCK_DUPLICATE ) { mRBdup.setChecked( true ); }
     else if ( shot_flag == DistoXDBlock.BLOCK_SURFACE ) { mRBsurf.setChecked( true ); }
+    // else if ( shot_flag == DistoXDBlock.BLOCK_BACKSHOT ) { mRBback.setChecked( true ); }
 
     mCBleg.setChecked( shot_leg );
 
@@ -262,6 +264,7 @@ public class ShotDialog extends Dialog
     // mRBreg  = (CheckBox) findViewById( R.id.shot_reg );
     mRBdup  = (CheckBox) findViewById( R.id.shot_dup );
     mRBsurf = (CheckBox) findViewById( R.id.shot_surf );
+    // mRBback = (CheckBox) findViewById( R.id.shot_back );
 
     mCBleg = (CheckBox)  findViewById(R.id.shot_leg );
     mCBall_splay = (CheckBox)  findViewById(R.id.shot_all_splay );
@@ -306,6 +309,7 @@ public class ShotDialog extends Dialog
 
     mRBdup.setOnClickListener( this );
     mRBsurf.setOnClickListener( this );
+    // mRBback.setOnClickListener( this );
 
     mButtonPrev.setOnClickListener( this );
     mButtonNext.setOnClickListener( this );
@@ -340,7 +344,8 @@ public class ShotDialog extends Dialog
     shot_flag = DistoXDBlock.BLOCK_SURVEY;
     if ( mRBdup.isChecked() )       { shot_flag = DistoXDBlock.BLOCK_DUPLICATE; }
     else if ( mRBsurf.isChecked() ) { shot_flag = DistoXDBlock.BLOCK_SURFACE; }
-    else                               { shot_flag = DistoXDBlock.BLOCK_SURVEY; }
+    // else if ( mRBback.isChecked() ) { shot_flag = DistoXDBlock.BLOCK_BACKSHOT; }
+    // else                            { shot_flag = DistoXDBlock.BLOCK_SURVEY; }
 
     shot_extend = mBlk.mExtend;
     if ( mRBleft.isChecked() )       { shot_extend = DistoXDBlock.EXTEND_LEFT; }
@@ -393,9 +398,13 @@ public class ShotDialog extends Dialog
 
     } else if ( b == mRBdup ) {
       mRBsurf.setChecked( false );
+      // mRBback.setChecked( false );
     } else if ( b == mRBsurf ) {
       mRBdup.setChecked( false );
-
+      // mRBback.setChecked( false );
+    // } else if ( b == mRBback ) {
+    //   mRBdup.setChecked( false );
+    //   mRBsurf.setChecked( false );
 
     } else if ( b == mButtonOK ) {
       saveDBlock();

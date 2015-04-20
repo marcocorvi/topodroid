@@ -81,6 +81,7 @@
 
     <string name="comment">commentaire</string>
     <!-- string name="flag">Flag</string -->
+    <!-- TODO string name="backshot">backshot</string -->
     <string name="duplicate">double</string>
     <!-- string name="regular">régulier</string -->
     <string name="surface">surface</string>
@@ -159,6 +160,8 @@
     <string name="none">aucun</string>
     <string name="barrier_add">Arréter l\'affichage du cheminement ?</string>
     <string name="barrier_del">Continuer l\'affichage du cheminement ?</string>
+
+    <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
 
     <string name="no_calib">Pas d\'étalonnage</string>
     <string name="no_calibration">Aucun d\'étalonnage sélectionné</string>
@@ -619,6 +622,8 @@
   <string name="pref_leg_title">Tolérance du cheminement</string>
   <string name="pref_leg_summary">Tolérance au long des visées de cheminement</string>
   <string name="pref_leg_message">Tolérance au long des visées de cheminement</string>
+  <!-- TODO string name="pref_backsight_title">Backsight</string -->
+  <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
 
   <string name="pref_team_title">Équipe</string>
   <!-- TODO string name="pref_team_summary">Surveying team</string -->

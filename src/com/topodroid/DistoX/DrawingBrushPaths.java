@@ -139,6 +139,7 @@ public class DrawingBrushPaths
   static Paint highlightPaint3 = null;
   static Paint fixedShotPaint  = null;
   static Paint fixedBluePaint  = null;
+  static Paint fixedRedPaint  = null;
   static Paint fixedSplayPaint = null;
   static Paint fixedSplay2Paint = null;  // cross-section splay2 (at viewed station)
   static Paint fixedGridPaint  = null;
@@ -231,6 +232,13 @@ public class DrawingBrushPaths
     fixedBluePaint.setStrokeJoin(Paint.Join.ROUND);
     fixedBluePaint.setStrokeCap(Paint.Cap.ROUND);
     fixedBluePaint.setColor(0xFF9999ff); // light blue
+
+    fixedRedPaint = new Paint();
+    fixedRedPaint.setDither(true);
+    fixedRedPaint.setStyle(Paint.Style.STROKE);
+    fixedRedPaint.setStrokeJoin(Paint.Join.ROUND);
+    fixedRedPaint.setStrokeCap(Paint.Cap.ROUND);
+    fixedRedPaint.setColor(0xFFff3333); // RED
 
     fixedSplayPaint = new Paint();
     fixedSplayPaint.setDither(true);

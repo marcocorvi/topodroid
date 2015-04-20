@@ -132,7 +132,7 @@ public class PocketTopoParser extends ImportParser
           ext_flag = DistoXDBlock.EXTEND_NONE;
         }
       }
-      shots.add( new ParserShot( from, to,  da, ba, ca, ra, extend, false, false, 
+      shots.add( new ParserShot( from, to,  da, ba, ca, ra, extend, false, false, false,
                                  shot.hasComment()? shot.comment() : "" ) );
       if ( mStartFrom == null && from.length() > 0 && to.length() > 0 ) {
         mStartFrom = from;

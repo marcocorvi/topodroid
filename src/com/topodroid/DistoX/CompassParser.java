@@ -52,6 +52,14 @@ public class CompassParser extends ImportParser
     return false;
   }
 
+  private boolean isBackshot( String flag )
+  {
+    if ( flag == null ) return false;
+    return false;
+  }
+
+  /** read input file
+   * @param filename name of the file to parse
   /** read input file
    * @param filename name of the file to parse
    */
@@ -137,7 +145,7 @@ public class CompassParser extends ImportParser
                         if ( TopoDroidSetting.mSplayExtend ) {
                           extend = ( ber < 90 || ber > 270 )? 1 : -1;
                         }
-                        splays.add( new ParserShot( mFrom, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, "" ) );
+                        splays.add( new ParserShot( mFrom, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                       }
                       if ( mRight > 0 ) {
                         float ber = mBearing + 90;
@@ -145,17 +153,17 @@ public class CompassParser extends ImportParser
                         if ( TopoDroidSetting.mSplayExtend ) {
                           extend = ( ber < 90 || ber > 270 )? 1 : -1;
                         }
-                        splays.add( new ParserShot( mFrom, null, mRight, ber, 0.0f, 0.0f, extend, false, false, "" ) );
+                        splays.add( new ParserShot( mFrom, null, mRight, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                       }
                       if ( mUp > 0 ) {
-                        splays.add( new ParserShot( mFrom, null, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, "" ) );
+                        splays.add( new ParserShot( mFrom, null, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
                       }
                       if ( mDown > 0 ) {
-                        splays.add( new ParserShot( mFrom, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, "" ) );
+                        splays.add( new ParserShot( mFrom, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
                       }
                       extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                       shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
-                      extend, isDuplicate( mFlag ), isSurface(mFlag), mComment ) );
+                        extend, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
                     }
                   }
                 }
@@ -163,7 +171,7 @@ public class CompassParser extends ImportParser
               // got only shot
               int extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
               shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
-                                 extend, isDuplicate( mFlag ), isSurface(mFlag), mComment ) );
+                                 extend, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
             } catch ( NumberFormatException e ) {
               TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
               TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + e );

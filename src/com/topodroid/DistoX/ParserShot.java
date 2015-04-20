@@ -22,9 +22,11 @@ class ParserShot
     int extend;
     boolean duplicate;
     boolean surface;
+    boolean backshot;
     String comment;
 
-    public ParserShot( String f, String t, float l, float b, float c, float r, int e, boolean d, boolean s, String cmnt )
+    public ParserShot( String f, String t, float l, float b, float c, float r, int e,
+                       boolean d, boolean s, boolean bs, String cmnt )
     {
       from = f;
       to   = t;
@@ -35,6 +37,7 @@ class ParserShot
       extend = e;
       duplicate = d;
       surface = s;
+      backshot = bs;
       comment = cmnt;
     }
 }

@@ -88,6 +88,7 @@ public class VisualTopoParser extends ImportParser
     int shot_extend = 1;
     boolean duplicate = false;
     boolean surface   = false;
+    boolean backshot  = false;
 
     String line = null;
     try {
@@ -194,7 +195,7 @@ public class VisualTopoParser extends ImportParser
                     if ( TopoDroidSetting.mSplayExtend ) {
                       extend = ( ber < 90 || ber > 270 )? 1 : -1;
                     }
-                    splays.add( new ParserShot( station, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, "" ) );
+                    splays.add( new ParserShot( station, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                   }
                   if ( mRight > 0 ) {
                     float ber = mBearing + 180 - 90 * dirw;
@@ -202,18 +203,18 @@ public class VisualTopoParser extends ImportParser
                     if ( TopoDroidSetting.mSplayExtend ) {
                       extend = ( ber < 90 || ber > 270 )? 1 : -1;
                     }
-                    splays.add( new ParserShot( station, null, mRight, ber, 0.0f, 0.0f, -extend, false, false, "" ) );
+                    splays.add( new ParserShot( station, null, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );
                   } 
                   if ( mUp > 0 ) {
-                    splays.add( new ParserShot( station, null, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, "" ) );
+                    splays.add( new ParserShot( station, null, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
                   }
                   if ( mDown > 0 ) {
-                    splays.add( new ParserShot( station, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, "" ) );
+                    splays.add( new ParserShot( station, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
                   }
                 }
                 extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
-                                           shot_extend, duplicate, surface, comment ) );
+                                           shot_extend, duplicate, surface, backshot, comment ) );
               } catch ( NumberFormatException e ) {
                 TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
                 TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + e );

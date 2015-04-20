@@ -37,12 +37,13 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
-// import android.util.Log;
+import android.util.Log;
 
 
 public class ShotNewDialog extends Dialog
@@ -61,6 +62,10 @@ public class ShotNewDialog extends Dialog
   private EditText mETdistance;
   private EditText mETbearing;
   private EditText mETclino;
+  private LinearLayout mLbacksight;
+  private EditText mETbackdistance;
+  private EditText mETbackbearing;
+  private EditText mETbackclino;
   // private Spinner  mExtend;
   private RadioButton mRadioLeft;
   private RadioButton mRadioVert;
@@ -101,9 +106,22 @@ public class ShotNewDialog extends Dialog
 
     mETfrom = (EditText) findViewById(R.id.shot_from );
     mETto   = (EditText) findViewById(R.id.shot_to );
+
     mETdistance = (EditText) findViewById(R.id.shot_distance );
     mETbearing  = (EditText) findViewById(R.id.shot_bearing );
     mETclino    = (EditText) findViewById(R.id.shot_clino );
+
+    mLbacksight = (LinearLayout) findViewById(R.id.shot_backsight );
+    mETbackdistance = (EditText) findViewById(R.id.shot_backdistance );
+    mETbackbearing  = (EditText) findViewById(R.id.shot_backbearing );
+    mETbackclino    = (EditText) findViewById(R.id.shot_backclino );
+
+    if ( ! TopoDroidSetting.mBacksight ) {
+      TextView forsight = (TextView) findViewById(R.id.shot_forsight );
+      forsight.setVisibility( View.GONE );
+      mLbacksight.setVisibility( View.GONE );
+    }
+
     mETleft     = (EditText) findViewById(R.id.shot_left );
     mETright    = (EditText) findViewById(R.id.shot_right );
     mETup       = (EditText) findViewById(R.id.shot_up );
@@ -164,6 +182,9 @@ public class ShotNewDialog extends Dialog
     mETdistance.setText("");
     mETbearing.setText("");
     mETclino.setText("");
+    mETbackdistance.setText("");
+    mETbackbearing.setText("");
+    mETbackclino.setText("");
     mETleft.setText("");
     mETright.setText("");
     mETup.setText("");
@@ -216,17 +237,20 @@ public class ShotNewDialog extends Dialog
         }
 
         String distance = mETdistance.getText().toString().trim();
-        if ( distance.length() == 0 ) { 
+        String backdistance = mETbackdistance.getText().toString().trim();
+        if ( distance.length() == 0 && backdistance.length() == 0 ) { 
           mETdistance.setError( mContext.getResources().getString( R.string.error_length_required ) );
           return;
         }
         String bearing = mETbearing.getText().toString().trim();
-        if ( bearing.length() == 0 ) {
+        String backbearing = mETbackbearing.getText().toString().trim();
+        if ( bearing.length() == 0 && backbearing.length() == 0 ) {
           mETbearing.setError( mContext.getResources().getString( R.string.error_azimuth_required ) );
           return;
         }
         String clino = mETclino.getText().toString().trim();
-        if ( clino.length() == 0 ) {
+        String backclino = mETbackclino.getText().toString().trim();
+        if ( clino.length() == 0 && backclino.length() == 0 ) {
           mETclino.setError( mContext.getResources().getString( R.string.error_clino_required ) );
           return;
         }
@@ -237,6 +261,8 @@ public class ShotNewDialog extends Dialog
         long shot_extend = 1;
         if ( mRadioLeft.isChecked() ) { shot_extend = -1; }
         else if ( mRadioVert.isChecked() ) { shot_extend = 0; }
+
+        long back_extend = - shot_extend;
 
         // switch ( mExtend.getSelectedItemPosition() ) {
         //   case 0: shot_extend = -1; break;
@@ -249,7 +275,21 @@ public class ShotNewDialog extends Dialog
         try {
           if ( shot_to.length() > 0 ) {
             String splay_station = mCBsplayAtTo.isChecked() ? shot_to : shot_from;
-            blk = mApp.insertManualShot( mAt, shot_from, shot_to,
+            if ( distance.length() == 0 ) {
+              distance = backdistance;
+            } else if ( backdistance.length() == 0 ) {
+              backdistance = distance;
+            }
+            if ( bearing.length() > 0 && clino.length() > 0 ) {
+              if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+                blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+                               Float.parseFloat(backdistance.replace(',','.') ),
+                               Float.parseFloat(backbearing.replace(',','.') ),
+                               Float.parseFloat(backclino.replace(',','.') ),
+                               back_extend,
+                               null, null, null, null, null );
+              }
+              blk = mApp.insertManualShot( mAt, shot_from, shot_to,
                                Float.parseFloat( distance.replace(',','.') ),
                                Float.parseFloat( bearing.replace(',','.') ),
                                Float.parseFloat( clino.replace(',','.') ),
@@ -259,13 +299,36 @@ public class ShotNewDialog extends Dialog
                                mETup.getText().toString().replace(',','.') ,
                                mETdown.getText().toString().replace(',','.') ,
                                splay_station );
-          } else {
-            blk = mApp.insertManualShot( mAt, shot_from, shot_to,
+            } else {
+              if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+                blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+                               Float.parseFloat( backdistance.replace(',','.') ),
+                               Float.parseFloat( backbearing.replace(',','.') ),
+                               Float.parseFloat( backclino.replace(',','.') ),
+                               back_extend,
+                               mETleft.getText().toString().replace(',','.') ,
+                               mETright.getText().toString().replace(',','.') ,
+                               mETup.getText().toString().replace(',','.') ,
+                               mETdown.getText().toString().replace(',','.') ,
+                               splay_station );
+              }
+            }
+          } else { // SPLAY SHOT
+            if ( bearing.length() > 0 && clino.length() > 0 ) {
+              blk = mApp.insertManualShot( mAt, shot_from, shot_to,
                                Float.parseFloat(distance.replace(',','.') ),
                                Float.parseFloat(bearing.replace(',','.') ),
                                Float.parseFloat(clino.replace(',','.') ),
                                shot_extend,
                                null, null, null, null, null );
+            } else if ( backbearing.length() > 0 && backclino.length() > 0 ) {
+              blk = mApp.insertManualShot( mAt, shot_to, shot_from,
+                               Float.parseFloat(backdistance.replace(',','.') ),
+                               Float.parseFloat(backbearing.replace(',','.') ),
+                               Float.parseFloat(backclino.replace(',','.') ),
+                               back_extend,
+                               null, null, null, null, null );
+            }
           }
           mApp.setCurrentStationName( null );
         } catch ( NumberFormatException e ) {

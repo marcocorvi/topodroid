@@ -98,6 +98,7 @@
 -->
     <string name="comment">Anmerkung</string>
     <!-- string name="flag">Flag</string -->
+    <!-- TODO string name="backshot">backshot</string -->
     <string name="duplicate">Dupliziert</string>
     <!-- UNUSED string name="regular">regulär</string -->
     <string name="surface">Oberfläche</string>
@@ -181,6 +182,8 @@
     <string name="none">kein</string>
     <string name="barrier_add">Brechen Mittellinie Anzeige?</string>
     <string name="barrier_del">Weiter Mittellinie Anzeige?</string>
+
+    <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
 
 <!-- ERRORS: MISSING SOMETHING -->
     <string name="no_calib">Keine Kalibrierung</string>
@@ -665,6 +668,8 @@
   <!-- TODO string name="pref_leg_title">Leg tolerance</string -->
   <!-- TODO string name="pref_leg_summary">Tolerance among the shots of a leg</string -->
   <!-- TODO string name="pref_leg_message">Tolerance among the shots of a leg</string -->
+  <!-- TODO string name="pref_backsight_title">Backsight</string -->
+  <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
 
   <!-- TODO string name="pref_team_title">Equipo</string -->
   <!-- TODO string name="pref_team_summary">Surveying team</string -->

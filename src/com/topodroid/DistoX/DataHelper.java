@@ -148,6 +148,13 @@ public class DataHelper extends DataSetObservable
     openDatabase();
   }
 
+  public void closeDatabase()
+  {
+    if ( myDB == null ) return;
+    myDB.close();
+    myDB = null;
+  }
+
   public void openDatabase() 
   {
     String database_name = TopoDroidPath.getDatabase();
@@ -755,7 +762,10 @@ public class DataHelper extends DataSetObservable
         ih.bind( magneticCol, 0.0);
         ih.bind( dipCol, 0.0);
         ih.bind( extendCol, s.extend );
-        ih.bind( flagCol, s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE : s.surface ? DistoXDBlock.BLOCK_SURFACE : 0 );
+        ih.bind( flagCol, s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE 
+                        : s.surface ? DistoXDBlock.BLOCK_SURFACE 
+                        // : s.backshot ? DistoXDBlock.BLOCK_BACKSHOT
+                        : 0 );
         ih.bind( legCol, 0 );
         ih.bind( statusCol, 0 );
         ih.bind( commentCol, s.comment );
@@ -775,7 +785,10 @@ public class DataHelper extends DataSetObservable
     for ( DataListener listener : mListeners ) {
       for ( ParserShot s : shots ) {
         listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
-                          s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE : s.surface ? DistoXDBlock.BLOCK_SURFACE : 0,
+                          s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE 
+                          : s.surface ? DistoXDBlock.BLOCK_SURFACE 
+                          // : s.backshot ? DistoXDBlock.BLOCK_BACKSHOT
+                          : 0,
                           0, 0, s.comment );
       }
     }
@@ -1608,6 +1621,29 @@ public class DataHelper extends DataSetObservable
    //   return ret;
    // }
 
+   public List<DistoXDBlock> selectShotsBetweenStations( long sid, String st1, String st2, long status )
+   {
+     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     // if ( myDB == null ) return list;
+     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
+       "surveyId=? and status=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )",
+       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), st1, st2, st2, st1 },
+       null,  // groupBy
+       null,  // having
+       "id" ); // order by
+     if (cursor.moveToFirst()) {
+       do {
+         DistoXDBlock block = new DistoXDBlock();
+         fillBlock( sid, block, cursor );
+         list.add( block );
+       } while (cursor.moveToNext());
+     }
+     if (cursor != null && !cursor.isClosed()) {
+       cursor.close();
+     }
+     return list;
+   }
+
    public List<DistoXDBlock> selectShotsAfterId( long sid, long id , long status )
    {
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
@@ -1629,7 +1665,6 @@ public class DataHelper extends DataSetObservable
        cursor.close();
      }
      return list;
-
    }
 
    public List<DistoXDBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
@@ -1637,7 +1672,7 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
-       "surveyId=? and status=? and ( fStation=? or fStation=? )", 
+       "surveyId=? and status=? and ( fStation=? or tStation=? )", 
        new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station1, station2 },
        null,  // groupBy
        null,  // having
@@ -2105,11 +2140,12 @@ public class DataHelper extends DataSetObservable
      if ( enabled != null ) {
        return enabled.equals("1");
      }
-     // if ( myDB == null ) return true;
-     ContentValues cv = new ContentValues();
-     cv.put( "key",     name );
-     cv.put( "value",   "1" );     // symbols are enabled by default
-     myDB.insert( CONFIG_TABLE, null, cv );
+     if ( myDB != null ) {
+       ContentValues cv = new ContentValues();
+       cv.put( "key",     name );
+       cv.put( "value",   "1" );     // symbols are enabled by default
+       myDB.insert( CONFIG_TABLE, null, cv );
+     }
      return true;
    }
 

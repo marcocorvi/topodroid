@@ -392,8 +392,9 @@ public class DrawingActivity extends ItemDrawer
         dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
       } else {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-        dpath.setPaint( ( blk.isRecent( mApp.mSecondLastShotId ) )? DrawingBrushPaths.fixedBluePaint 
-                                    : DrawingBrushPaths.fixedShotPaint );
+        dpath.setPaint( blk.isMultiBad() ? DrawingBrushPaths.fixedRedPaint
+                        : blk.isRecent( mApp.mSecondLastShotId )? DrawingBrushPaths.fixedBluePaint 
+                        : DrawingBrushPaths.fixedShotPaint );
       }
       makePath( dpath, x1, y1, x2, y2, xoff, yoff );
       mDrawingSurface.addFixedPath( dpath, selectable );
@@ -560,7 +561,7 @@ public class DrawingActivity extends ItemDrawer
     //                  + " " + mNum.surveySmin() + " " + mNum.surveySmax() );
 
     List< NumStation > stations = mNum.getStations();
-    List< NumShot > shots = mNum.getShots();
+    List< NumShot > shots   = mNum.getShots();
     List< NumSplay > splays = mNum.getSplays();
     // Log.v( TopoDroidApp.TAG, "stations " + stations.size() + " legs " + shots.size() );
     // Log.v( TopoDroidApp.TAG, "compute refs. offs " + xoff + " " + yoff + " zoom " + zoom );
@@ -1202,6 +1203,7 @@ public class DrawingActivity extends ItemDrawer
       // mZoom = z;    
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       // mDrawingSurface.refresh();
+
     }
  
     void updateBlockComment( DistoXDBlock block, String comment ) 

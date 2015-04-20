@@ -53,6 +53,7 @@ public class DistoXDBlock
   long   mFlag;     
   int    mType;    // shot type
   boolean mWithPhoto;
+  boolean mMultiBad;
 
   public static final int BLOCK_BLANK      = 0;
   public static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
@@ -67,10 +68,12 @@ public class DistoXDBlock
   public static final int BLOCK_SURVEY     = 0; // flags
   public static final int BLOCK_SURFACE    = 1;
   public static final int BLOCK_DUPLICATE  = 2;
+  // public static final int BLOCK_BACKSHOT   = 3;
 
   public boolean isSurvey() { return mFlag == BLOCK_SURVEY; }
   public boolean isSurface() { return mFlag == BLOCK_SURFACE; }
   public boolean isDuplicate() { return mFlag == BLOCK_DUPLICATE; }
+  // public boolean isBackshot() { return mFlag == BLOCK_BACKSHOT; }
 
   int mShotType;  // 0: DistoX, 1: manual
 
@@ -97,6 +100,7 @@ public class DistoXDBlock
     mType   = type;
     mShotType = shot_type;
     mWithPhoto = false;
+    mMultiBad = false;
   }
 
   public DistoXDBlock()
@@ -121,6 +125,7 @@ public class DistoXDBlock
     mType   = BLOCK_BLANK;
     mShotType = 0;
     mWithPhoto = false;
+    mMultiBad = false;
   }
 
   public void setId( long shot_id, long survey_id )
@@ -212,29 +217,41 @@ public class DistoXDBlock
     float dist = (v1.minus(v2)).Length();
     return dist/mLength + dist/b.mLength; 
   }
+  
+  private void formatFlag( PrintWriter pw )
+  {
+    if ( mFlag == BLOCK_DUPLICATE ) {
+      pw.format( "*" );
+    } else if ( mFlag == BLOCK_SURFACE ) {
+      pw.format( "-" );
+    // } else if ( mFlag == BLOCK_BACKSHOT ) {
+    //   pw.format( "+" );
+    }
+  }
+
+  private void formatComment( PrintWriter pw )
+  {
+    if ( mComment == null || mComment.length() == 0 ) return;
+    pw.format(" N");
+  }
 
   public String toString( boolean show_id )
   {
     float ul = TopoDroidSetting.mUnitLength;
     float ua = TopoDroidSetting.mUnitAngle;
 
-    TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "DBlock::toString From " + mFrom + " To " + mTo + " data " + mLength + " " + mBearing + " " + mClino );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DATA,
+    //   "DBlock::toString From " + mFrom + " To " + mTo + " data " + mLength + " " + mBearing + " " + mClino );
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     if ( show_id ) pw.format("%d ", mId );
     pw.format(Locale.ENGLISH, "<%s-%s> %.2f %.1f %.1f [%c]",
       mFrom, mTo,
       mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ (int)(mExtend) + 1 ] );
-    if ( mFlag == BLOCK_DUPLICATE ) {
-      pw.format( "*" );
-    } else if ( mFlag == BLOCK_SURFACE ) {
-      pw.format( "-" );
-    }
-    if ( mComment != null && mComment.length() > 0 ) {
-      pw.format(" N");
-    } 
+    formatFlag( pw );
+    formatComment( pw );
     if ( mWithPhoto ) { pw.format(" #"); }
-    TopoDroidLog.Log( TopoDroidLog.LOG_DATA, sw.getBuffer().toString() );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DATA, sw.getBuffer().toString() );
     return sw.getBuffer().toString();
   }
 
@@ -243,14 +260,8 @@ public class DistoXDBlock
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("[%c]", mExtendTag[ (int)(mExtend) + 1 ] );
-    if ( mFlag == BLOCK_DUPLICATE ) {
-      pw.format( "*" );
-    } else if ( mFlag == BLOCK_SURFACE ) {
-      pw.format( "-" );
-    }
-    if ( mComment != null && mComment.length() > 0 ) {
-      pw.format(" N");
-    } 
+    formatFlag( pw );
+    formatComment( pw );
     if ( mWithPhoto ) { pw.format(" #"); }
     return sw.getBuffer().toString();
   }
@@ -308,6 +319,8 @@ public class DistoXDBlock
   }
 
   boolean isRecent( long id ) { return mId >= id; }
+
+  boolean isMultiBad() { return mMultiBad; }
 
 }
 
