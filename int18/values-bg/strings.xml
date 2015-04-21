@@ -85,7 +85,7 @@
 
     <string name="comment">Коментар</string>
     <string name="flag">Флаг</string>
-    <!-- TODO string name="backshot">backshot</string -->
+    <string name="backshot">Обратна отсечка</string>
     <string name="duplicate">Дублирана</string>
     <!-- string name="regular">regular</string -->
     <string name="surface">Повърхностна</string>
@@ -166,7 +166,7 @@
     <string name="barrier_add">Прекъсване на антената?</string>
     <string name="barrier_del">Продължаване на антената?</string>
 
-    <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
+    <string name="bad_cwd">Името на проекта не може да бъде директория</string>
 
     <string name="no_bt">Липсва Bluetooth</string>
     <string name="no_calib">Липсва калибрация</string>
@@ -693,8 +693,8 @@
   <string name="pref_leg_title">Толеранс на отсечките</string>
   <string name="pref_leg_summary">Толеранс между измерванията за отсечка на антената</string>
   <string name="pref_leg_message">Толеранс между измерванията за отсечка на антената</string>
-  <!-- TODO string name="pref_backsight_title">Backsight</string -->
-  <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
+  <string name="pref_backsight_title">Обратна отсечка</string>
+  <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
 
   <string name="pref_team_title">Картировачи</string>
   <string name="pref_team_summary">Екип картировачи</string>
