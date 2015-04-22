@@ -230,8 +230,8 @@
      <item name="feet">футове</item>
   </string-array>
   <string-array name="unitLengthValue">
-     <item name="meters">метри</item>
-     <item name="feet">футове</item>
+     <item name="meters">meters</item>
+     <item name="feet">feet</item>
   </string-array>
 
   <string-array name="unitAngle">
@@ -239,8 +239,8 @@
      <item name="grads">гради</item>
   </string-array>
   <string-array name="unitAngleValue">
-     <item name="degrees">градуси</item>
-     <item name="grads">гради</item>
+     <item name="degrees">degrees</item>
+     <item name="grads">grads</item>
   </string-array>
 
   <string-array name="unitLocation">
@@ -248,8 +248,8 @@
      <item name="ddmmss">градуси, минути, секунди</item>
   </string-array>
   <string-array name="unitLocationValue">
-     <item name="degrees">градуси</item>
-     <item name="ddmmss">ггммсс</item>
+     <item name="degrees">degrees</item>
+     <item name="ddmmss">ddmmss</item>
   </string-array>
 
   <string-array name="calibAlgo">

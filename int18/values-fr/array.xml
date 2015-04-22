@@ -134,8 +134,8 @@
      <item name="feet">Pieds</item>
   </string-array>
   <string-array name="unitLengthValue">
-     <item name="meters">Mètres</item>
-     <item name="feet">Pieds</item>
+     <item name="meters">meters</item>
+     <item name="feet">feet</item>
   </string-array>
 
   <string-array name="unitAngle">
@@ -143,8 +143,8 @@
      <item name="grads">grades décimaux</item>
   </string-array>
   <string-array name="unitAngleValue">
-     <item name="degrees">degrés</item>
-     <item name="grads">grades</item>
+     <item name="degrees">degrees</item>
+     <item name="grads">grads</item>
   </string-array>
 
   <string-array name="unitLocation">
@@ -152,7 +152,7 @@
      <item name="ddmmss">degrés, minutes, secondes</item>
   </string-array>
   <string-array name="unitLocationValue">
-     <item name="degrees">degrés</item>
+     <item name="degrees">degrees</item>
      <item name="ddmmss">ddmmss</item>
   </string-array>
 
