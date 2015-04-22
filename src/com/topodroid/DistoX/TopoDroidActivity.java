@@ -92,9 +92,6 @@ import android.preference.PreferenceManager;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 
 import android.util.Log;
 
