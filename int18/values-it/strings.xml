@@ -580,6 +580,8 @@
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>
   <string name="pref_auto_reconnect_summary">Reconnetti al DistoX quando viene persa</string>
+  <string name="pref_z6_workaround_title">Dati modo Z6</string>
+  <string name="pref_z6_workaround_summary">Scaricamento dati modo Z6</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nome CRS</string>
   <string name="pref_crs_message">Scrivi il CRS come in Proj4</string>

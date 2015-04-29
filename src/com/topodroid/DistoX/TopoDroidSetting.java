@@ -93,7 +93,8 @@ class TopoDroidSetting
     "DISTOX_SPLAY_VERT_THRS",
     "DISTOX_INIT_STATION",
     "DISTOX_BACKSIGHT",
-    "DISTOX_LOCALE",                 // 62
+    "DISTOX_Z6_WORKAROUND",          // 62
+    "DISTOX_LOCALE",                 // 63
     "DISTOX_CWD",                    // must be last 
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
@@ -117,6 +118,7 @@ class TopoDroidSetting
   final static int CONN_MODE_BATCH = 0; // DistoX connection mode
   final static int CONN_MODE_CONTINUOUS = 1;
   static int mConnectionMode = CONN_MODE_BATCH; 
+  static boolean mZ6Workaround = false;
 
   static int mCompassReadings = 4; // number of compass readings to average
 
@@ -561,6 +563,8 @@ class TopoDroidSetting
     
     mBacksight = prefs.getBoolean( key[k++], false ); // DISTOX_BACKSIGHT
 
+    mZ6Workaround = prefs.getBoolean( key[k++], false ); // DISTOX_Z6_WORKAROUND
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -860,6 +864,8 @@ class TopoDroidSetting
       DistoXStationName.setInitialStation( mInitStation );
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_BACKSIGHT
       mBacksight = prefs.getBoolean( k, false );
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_Z6_WORKAROUND
+      mZ6Workaround = prefs.getBoolean( k, false );
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

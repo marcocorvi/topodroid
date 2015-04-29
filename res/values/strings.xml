@@ -651,6 +651,8 @@
   <string name="pref_conn_mode_summary">Type of the connection with DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnect</string>
   <string name="pref_auto_reconnect_summary">Reconnect when connection is lostX</string>
+  <string name="pref_z6_workaround_title">Z6 workaround</string>
+  <string name="pref_z6_workaround_summary">Z6 workaround data download</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS name</string>
   <string name="pref_crs_message">Enter the CRS name as in Proj4</string>

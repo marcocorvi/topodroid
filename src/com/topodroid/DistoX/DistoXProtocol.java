@@ -14,7 +14,9 @@ package com.topodroid.DistoX;
 import java.io.IOException;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
+import java.io.FilterInputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.DataInputStream;
@@ -23,10 +25,14 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.UUID;
 import java.util.List;
-// import java.util.Locale;
+import java.util.Locale;
+import java.lang.reflect.Field;
+
+import android.os.CountDownTimer;
 
 // import java.Thread;
 import java.nio.channels.ClosedByInterruptException;
+import java.nio.ByteBuffer;
 
 // import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothServerSocket;
@@ -50,7 +56,6 @@ public class DistoXProtocol
   private byte[] mRequestBuffer;   // request buffer
   private byte[] mReplyBuffer;     // reply data
   private byte[] mAcknowledge;
-  private byte[] mBuffer;
   private byte   mSeqBit;          // sequence bit: 0x00 or 0x80
 
   private static final UUID MY_UUID = UUID.fromString( "00001101-0000-1000-8000-00805F9B34FB" );
@@ -86,6 +91,69 @@ public class DistoXProtocol
   // boolean writtenCalib = false;
   // public void setWrittenCalib( boolean b ) { writtenCalib = b; } 
 
+//------------------------------------------------------
+
+  private InputStream extractCoreInputStream( InputStream in )
+  {
+    try {
+      Field f = FilterInputStream.class.getDeclaredField("in");
+      f.setAccessible( true );
+      while ( in instanceof FilterInputStream ) {
+        in = (InputStream) f.get( (FilterInputStream)in );
+      }
+    } catch ( NoSuchFieldException e ) {
+      return in;
+    } catch( IllegalAccessException e ) {
+      return in;
+    }
+    return in;
+  }
+
+  final byte[] mBuffer = new byte[8];
+  
+  private int getAvailable( final InputStream in, long timeout, int maxtimeout ) throws IOException
+  {
+    final IOException[] maybeException = { null };
+    final int[] count = {0};
+    final int[] dataRead = {0};
+    final int[] toRead = {8};
+    final Thread reader = new Thread() {
+      public void run() {
+        try {
+          count[0] = in.read( mBuffer, dataRead[0], toRead[0] );
+          toRead[0] -= count[0];
+          dataRead[0] += count[0];
+        } catch ( ClosedByInterruptException e ) {
+        } catch ( IOException e ) {
+          maybeException[0] = e;
+        }
+      }
+    };
+
+
+    reader.start();
+    for ( int k=0; k<maxtimeout; ++k) {
+      Log.v("DistoX", "interrupt loop " + dataRead[0] );
+      try {
+        reader.join( timeout );
+      } catch ( InterruptedException e ) { Log.v("DistoX", "reader join-1 interrupted"); }
+      if ( ! reader.isAlive() ) break;
+      Thread interruptor = new Thread() { public void run() { reader.interrupt(); } };
+      interruptor.start();
+      try {
+        interruptor.join( 200 );
+      } catch ( InterruptedException e ) { Log.v("DistoX", "interruptor join interrupted"); }
+      try {
+        reader.join( 200 );
+      } catch ( InterruptedException e ) { Log.v("DistoX", "reader join-2 interrupted"); }
+      if ( ! reader.isAlive() ) break; 
+    }
+    if ( maybeException[0] != null ) throw maybeException[0];
+    return dataRead[0];
+  }
+
+//-----------------------------------------------------
+
   public DistoXProtocol( BluetoothSocket socket, Device device )
   {
  
@@ -111,16 +179,17 @@ public class DistoXProtocol
     mAcknowledge = new byte[1];
     // mAcknowledge[0] = ( b & 0x80 ) | 0x55;
 
-    mBuffer = new byte[8];
+    // mBuffer = new byte[8];
   
     try {
       if ( mSocket != null ) {
+        // mIn  = new DataInputStream( extractCoreInputStream( mSocket.getInputStream() ) );
         mIn  = new DataInputStream( mSocket.getInputStream() );
         mOut = new DataOutputStream( mSocket.getOutputStream() );
       }
     } catch ( IOException e ) {
       // NOTE socket is null there is nothing we can do
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Protocol cstr conn failed " + e.getMessage() );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Proto cstr conn failed " + e.getMessage() );
     }
   }
 
@@ -138,11 +207,11 @@ public class DistoXProtocol
 
   public int handlePacket( ) 
   {
-    // StringWriter sw = new StringWriter();
-    // PrintWriter pw = new PrintWriter( sw );
-    // pw.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
-    //     mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "handlePacket " + sw.getBuffer().toString() );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
+      mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] );
+    TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto handle packet " + sw.getBuffer().toString() );
 
     byte type = (byte)(mBuffer[0] & 0x3f);
 
@@ -174,8 +243,10 @@ public class DistoXProtocol
         mClino    = c * 90.0  / 16384.0; // 90/0x4000;
         if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
         mRoll = r * 180.0 / 128.0;
-        // pw.format(Locale.ENGLISH, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "handlePacket " + sw.getBuffer().toString() );
+
+        pw.format(Locale.ENGLISH, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino );
+        TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto packet data " + sw.getBuffer().toString() );
+
         return DISTOX_PACKET_DATA;
       case 0x02: // g
         mGX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
@@ -229,43 +300,55 @@ public class DistoXProtocol
 
   public int readPacket( boolean no_timeout ) 
   {
-    // Log.v( TopoDroidApp.TAG, "readPacket no-timeout " + no_timeout );
+    TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet no-timeout " + no_timeout );
     try {
       int timeout = 0;
       int maxtimeout = 8;
       int available = 0;
+
       if ( no_timeout ) {
         available = 8;
       } else { // do timeout
-        while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) {
-          ++ timeout;
-          Thread.sleep( 250 );
+        if ( TopoDroidSetting.mZ6Workaround ) {
+          available = getAvailable( mIn, 200, maxtimeout );
+        } else {
+          while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) {
+            ++ timeout;
+            try {
+              TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
+              Thread.sleep( 100 );
+            } catch (InterruptedException e ) {
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Proto read packet InterruptedException" + e.toString() );
+            }
+          }
         }
       }
+      TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet available " + available );
       if ( available > 0 ) {
-        mIn.readFully( mBuffer, 0, 8 );
+        if ( no_timeout || ! TopoDroidSetting.mZ6Workaround ) {
+          mIn.readFully( mBuffer, 0, 8 );
+        }
         byte seq  = (byte)(mBuffer[0] & 0x80); // sequence bit
         boolean ok = ( seq != mSeqBit );
         mSeqBit = seq;
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet
         { 
           mAcknowledge[0] = (byte)(( mBuffer[0] & 0x80 ) | 0x55);
-          // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "readPacket byte ... writing ack");
+          StringWriter sw0 = new StringWriter();
+          PrintWriter pw0 = new PrintWriter( sw0 );
+          pw0.format(" %02x", mBuffer[0] );
+          TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "read packet byte " + sw0.getBuffer().toString() + " ... writing ack");
           mOut.write( mAcknowledge, 0, 1 );
         }
         if ( ok ) return handlePacket();
       } // else timedout with no packet
-    } catch (InterruptedException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "readPacket InterruptedException" + e.toString() );
     } catch ( EOFException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "readPacket EOFException" + e.toString() );
+      TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet EOFException" + e.toString() );
     } catch (ClosedByInterruptException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "readPacket ClosedByInterruptException" + e.toString() );
-    // } catch (InterruptedException e ) {
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "readPacket InterruptedException" + e.toString() );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Proto read packet ClosedByInterruptException" + e.toString() );
     } catch (IOException e ) {
       // this is OK: the DistoX has been turned off
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "readPacket IOException " + e.toString() + " OK distox turned off" );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Proto read packet IOException " + e.toString() + " OK distox turned off" );
       return DISTOX_ERR_OFF;
     }
     return DISTOX_PACKET_NONE;
@@ -306,14 +389,14 @@ public class DistoXProtocol
       PrintWriter pw = new PrintWriter( sw );
       pw.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
       TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, 
-        "readToRead Head-Tail " + sw.getBuffer().toString() + " " + head + " - " + tail + " = " + ret);
+        "Proto readToRead Head-Tail " + sw.getBuffer().toString() + " " + head + " - " + tail + " = " + ret);
 
       return ret;
     } catch ( EOFException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "readToRead Head-Tail read() failed" );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Proto readToRead Head-Tail read() failed" );
       return DISTOX_ERR_HEADTAIL_EOF;
     } catch (IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "readToRead Head-Tail read() failed" );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Proto readToRead Head-Tail read() failed" );
       return DISTOX_ERR_HEADTAIL_IO;
     }
   }

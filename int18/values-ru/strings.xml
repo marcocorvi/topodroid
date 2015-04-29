@@ -643,6 +643,8 @@
   <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
   <string name="pref_auto_reconnect_title">Авто соединение</string>
   <string name="pref_auto_reconnect_summary">Переподключиться при потере соединенияX</string>
+  <!-- TODO string name="pref_z6_workaround_title">Z6 workaround</string -->
+  <!-- TODO string name="pref_z6_workaround_summary">Z6 workaround data download</string -->
   <string name="pref_crs_title">C R S система координат </string>
   <string name="pref_crs_summary">CRS имя</string>
   <string name="pref_crs_message">Введите имя CRS как в Proj4</string>

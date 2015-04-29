@@ -585,6 +585,8 @@
   <!-- TODO string name="pref_conn_mode_summary">How to connect to the DistoX</string -->
   <!-- TODO string name="pref_auto_reconnect_title">Auto reconnect</string -->
   <!-- TODO string name="pref_auto_reconnect_summary">Reconnect when connection is lostX</string -->
+  <!-- TODO string name="pref_z6_workaround_title">Z6 workaround</string -->
+  <!-- TODO string name="pref_z6_workaround_summary">Z6 workaround data download</string -->
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nom CRS</string>
   <string name="pref_crs_message">Saisissez le nom CRS tel que dans Proj4</string>

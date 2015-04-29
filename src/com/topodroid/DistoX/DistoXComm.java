@@ -157,7 +157,7 @@ public class DistoXComm
       toRead = to_read;
       mProto = protocol;
       mLister = lister;
-      // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcommThread cstr ToRead " + toRead );
+      TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcommThread cstr ToRead " + toRead );
     }
 
     public void run()
@@ -167,6 +167,7 @@ public class DistoXComm
 
       TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcomm thread running ... to_read " + toRead );
       while ( doWork && nReadPackets != toRead ) {
+        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcomm loop: read " + nReadPackets + " to-read " + toRead );
         
         int res = mProto.readPacket( toRead >= 0 );
         TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcomm readPacket returns " + res );
@@ -177,6 +178,7 @@ public class DistoXComm
             try {
               Thread.sleep( 500 );
             } catch (InterruptedException e) {
+              TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcomm thread sleep interrupt");
             }
           }
         } else if ( res == DistoXProtocol.DISTOX_ERR_OFF ) {
@@ -287,15 +289,18 @@ public class DistoXComm
   private void cancelRfcommThread()
   {
     if ( mRfcommThread != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "cancel Rfcomm thread" );
+      TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "cancel Rfcomm thread: thread is active");
       doWork = false;
       try {
         mRfcommThread.join();
       } catch ( InterruptedException e ) {
         TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "cancel thread interrupt " + e.getMessage() );
       } finally {
+        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "cancel Rfcomm thread: nulling thread");
         mRfcommThread = null;
       }
+    } else {
+      TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "cancel Rfcomm thread: no thread");
     }
   }
 
@@ -411,6 +416,7 @@ public class DistoXComm
 
       if ( mBTSocket != null ) {
         TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket OK");
+        // mBTSocket.setSoTimeout( 200 ); // BlueToothSocket does not have timeout 
         mProtocol = new DistoXProtocol( mBTSocket, mApp.mDevice );
         mAddress = address;
       } else {

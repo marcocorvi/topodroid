@@ -388,7 +388,7 @@ public class TopoDroidApp extends Application
 
   void disconnectRemoteDevice( boolean force )
   {
-    // Log.v("DistoX", "App disconnect RemoteDevice listers " + mLister.size() );
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "App disconnect RemoteDevice listers " + mLister.size() + " force " + force );
     if ( force || mLister.size() == 0 ) {
       if ( mComm != null && mComm.mBTConnected ) mComm.disconnectRemoteDevice( );
     }

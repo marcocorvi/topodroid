@@ -64,4 +64,11 @@
        android:inputType="number"
        android:defaultValue="1" />
 
+     <CheckBoxPreference
+       android:key="DISTOX_Z6_WORKAROUND"
+       android:summary="@string/pref_z6_workaround_summary"
+       android:title="@string/pref_z6_workaround_title"
+       android:defaultValue="false"
+     />
+
 </PreferenceScreen>
