@@ -181,7 +181,7 @@
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
     <string name="no_photos">Картировката не съдържа снимка</string>
-    <string name="no_plots">Картировката не съдържа скици\nИзползвайте бутона Добавяне</string>
+    <string name="no_plots">Картировката не съдържа скици\nДобавете нова</string>
     <string name="no_proj4">Proj4 не е инсталирана</string>
     <string name="no_sensors">Картировката не съдържа сензорни измервания</string>
     <string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string>
@@ -290,7 +290,7 @@
     <string name="shot_all_splay">Група странични изм.</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
-    <string name="shot_reverse">обратен</string>
+    <string name="shot_reverse">обръщане</string>
     <string name="shot_to">до</string>
 
     <string name="make_surface">Повърхността съществува. Заместване?</string>
@@ -419,7 +419,7 @@
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>
-    <string name="mode_station">Последователност на измерванията</string>
+    <string name="mode_station">Реперни точки</string>
     <string name="mode_grid">Мащабна мрежа</string>
     <string name="mode_fixed">Фикс. точки</string>
 
@@ -736,8 +736,8 @@
   <string name="pref_segment_title">Отстояния между точки на линия</string>
   <string name="pref_segment_summary">Минимално разстояние м/у точките в "линия"</string>
   <string name="pref_segment_message">Минимално разстояние м/у точките в "линия"</string>
-  <string name="pref_linestyle_title">Стил на линия</string>
-  <string name="pref_linestyle_summary">Стил на линията за рисуване</string>
+  <string name="pref_linestyle_title">Стил на линии</string>
+  <string name="pref_linestyle_summary">Стил на линиите за рисуване</string>
   <string name="pref_lineacc_title">"Безие" точност</string>
   <string name="pref_lineacc_summary">Точност на интерполация на криви "Безие"</string>
   <string name="pref_lineacc_message">Точност на кубична интерполация на криви "Безие"</string>
@@ -806,8 +806,8 @@
   <string name="pref_sketchSectionStep_summary">Разстояние между секциите</string>
   <string name="pref_sketchSectionStep_message">Разстояние между междинните секции</string>
   <string name="pref_sketchDeltaExtrude_title">Екструд. мащаб</string>
-  <string name="pref_sketchDeltaExtrude_summary">Мащабираща фактор за екструдиране</string>
-  <string name="pref_sketchDeltaExtrude_message">Мащабираща фактор за екструдиране</string>
+  <string name="pref_sketchDeltaExtrude_summary">Мащабиращ фактор за екструдиране</string>
+  <string name="pref_sketchDeltaExtrude_message">Мащабиращ фактор за екструдиране</string>
   <string name="pref_sketchCompassReadings_title">Отчет на компаса</string>
   <string name="pref_sketchCompassReadings_summary">Брой отчитания за усредняване</string>
   <string name="pref_sketchCompassReadings_message">Брой отчитания на азимут за усредняване</string>
