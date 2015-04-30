@@ -402,4 +402,9 @@ class ItemPickerDialog extends Dialog
   //    Log.v( "DistoX", "ItemPicker onItemCLick()" );
   //    if ( mAdapter != null ) mAdapter.doClick( view );
   // }
+
+  public void closeDialog()
+  {  
+    dismiss();
+  }
 }

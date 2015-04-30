@@ -123,15 +123,21 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     doClick( v );
   }
 
+  private long mClickMillis = 0;
+  static final int DOUBLE_CLICK_TIME = 400;
+
   public void doClick( View v )
   {
     // Log.v("DistoX", "--> ItemAdapter doClick()");
+    long millis = System.currentTimeMillis();
+    boolean doubleclick = false;
     try {
       CheckBox cb = (CheckBox)v;
       if ( cb != null ) {
         int pos = 0;
         for ( ItemSymbol item : mItems ) {
           if ( cb == item.mCheckBox ) {
+            if ( mPos == pos && Math.abs(millis - mClickMillis) < DOUBLE_CLICK_TIME ) doubleclick = true;
             mPos = pos; // item.mIndex;
             mParent.setTypeAndItem( mPos );
             item.setChecked( true );
@@ -146,6 +152,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
       ItemButton ib = (ItemButton)v;
       for ( ItemSymbol item : mItems ) {
         if ( ib == item.mButton ) {
+          if ( mPos == pos && Math.abs(millis - mClickMillis) < DOUBLE_CLICK_TIME ) doubleclick = true;
           mPos = pos; // item.mIndex;
           mParent.setTypeAndItem( mPos );
           item.setChecked( true );
@@ -155,6 +162,8 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
         ++ pos;
       }
     }
+    if ( doubleclick ) mParent.closeDialog();
+    mClickMillis = millis;
   }
 
 }

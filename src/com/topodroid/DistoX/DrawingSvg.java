@@ -83,8 +83,10 @@ class DrawingSvg
       out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
       out.write( "    </marker>\n"); 
       out.write( "  </defs>\n");
-      out.write( "<g transform=\"translate(" + (int)( 100 + ((xmin < 0)? -xmin : 0) ) + ","
-                 + (int)( 100 + ((ymin < 0)? -ymin : 0) ) + ")\" >\n" );
+
+      // out.write( "<g transform=\"translate(" + (int)( 100 + ((xmin < 0)? -xmin : 0) ) + ","
+      //            + (int)( 100 + ((ymin < 0)? -ymin : 0) ) + ")\" >\n" );
+      out.write( "<g>\n");
 
       // ***** FIXME TODO POINT SYMBOLS
       // {
