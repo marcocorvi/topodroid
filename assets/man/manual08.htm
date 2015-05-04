@@ -40,7 +40,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <ulist>
 <li><u>Download</u>: it will download the data from the DistoX as in the calibration data window. If no DistoX is selected this button is hidden.</li>
 <li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
-<li><u>Display</u>: to decide the display mode (what to show)</li>
+<li><u>Display</u>: to decide the display mode (see below)</li>
 <li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in extended-profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modeling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches.</li>
 <li><u>Notes</u> opens the dialog to edit the annotations of the survey</li>
 <li><u>Stations</u>: this buttons opens the dialog for the saved stations</li>
@@ -54,11 +54,11 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><i>Initial station name</i>: The default first station name for new surveys. Can be also changed in the New survey dialog.</li>
 <li><i>Leg tolerance</i>: the angular tolerance (radians) between consecutive shots to belong to the same leg</li>
 <li><i>Extend threshold</i>: splay shots are assigned an "extend" direction depending on the angle they make with the leg(s). When the angle is less than the threshold they get a "vertical extend".</li>
+<li><i>Splay extend</i>: whether to assign the extend direction to splay shots or set "vertical" extend to them</li> 
 <li><i>Shot vertical threshold</i>. this is like Therion vthreshold: the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
 <li><i>Timer</i> is the number of seconds before measuring the direction with the Android sensors (for manual data-input)</li>
 <li><i>Beep volume</i> is the volume of the timer beep</li>
 <li><i>Loop closure</i>: whether to do the loop closure error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors</li>
-<li><i>Splay extend</i>: whether to assign the extend direction to splay shots or set "vertical" extend to them</li> 
 <li><i>Length units</i>: either meters or feet</li>
 <li><i>Angle units</i>: either degrees or grads</li>
 <li><i>GSP Averaging</i>: whether to use the app GPSaveraging to locate fixed points. By default this app is not used and the location is carried out by TopoDroid.</li>
@@ -66,7 +66,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><i>C.R.S.</i> coordinate reference system [default is long-lat]</li>
 <li><i>Acceleration tolerance</i>: tolerance on acceleration values above which a shot is signalled anomalous (only DistoX2)</li>
 <li><i>Magnetic tolerance</i>: tolerance on magnetic field values above which a shot is signalled anomalous (only DistoX2)</li>
-<li><i>Magnetic dip tolerance</i>: tolerance on magnetic dip angle values above which a shot is signalled anomalous (only DistoX2)</li>
+<li><i>Magnetic dip tolerance</i>: tolerance on magnetic dip angle values above which a shot is signalled anomalous (only DistoX2) {units degrees]</li>
 </ulist><br><p>
 
 <h4>DISPLAY MODE</h4>
@@ -107,7 +107,7 @@ the dialog. If LRUD are specified the respective splay shots are also inserted.<
 <hr>
 The <u>Download</u> button starts a connection with the DistoX to download data.  While the connection is active it stays red. If you are using the "on-demand" download-mode the connection is closed when there are no more data to retrieve. With the "continuous" download-mode the connection remains open (and data are continuously downloaded as soon as the measurements are taken) until the DistoX and the Android lose the Bluetooth connection.  Which mode is best suited for you depends on your habits. With the on-demand mode you can concentrate on sketching and other tasks without being bothered by incoming data, and when you download the data you can focus on them (they are highlighted blue). On the other hand on-demand download requires pauses to get the data, and these are especially long if you took several shots in the between.<br><p>
 
-In the Bluetooth connection with the DistoX is broken (eg. the DistoX gets too far from the Android, or it is switched off) the data download is interrupted. In continuous-mode, if the "Auto reconnect" setting is selected, TopoDroid retries to connect to the DistoX every second.<br><p>
+In the Bluetooth connection with the DistoX is broken (eg. the DistoX gets too far from the Android, or it is switched off) the data download is interrupted. In continuous-mode, if the "Auto reconnect" setting is selected, TopoDroid retries to connect to the DistoX every few seconds.<br><p>
 
 When the Shot activity is closed the data download connection is terminated. The download connection is not interrupted when the activity is paused (the display switches off). If you open a sketch while the download connection is active in "continuous" mode, the connection is maintained and the data are downloaded (and displayed in the sketch).<br><p>
 

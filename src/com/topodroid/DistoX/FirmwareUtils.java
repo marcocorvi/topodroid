@@ -23,9 +23,9 @@ class FirmwareUtils
     (byte)0x35, (byte)0xf8, (byte)0x00, (byte)0xf0, (byte)0x34, (byte)0xf8, (byte)0x24, (byte)0x4e,
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
-  //                                    2.1    2.2    2.3
-  // signatures differ in bytes 6-7    f834   f83a   f990
-  //                           16-17   0c40   0c40   0c50
+  //                                    2.1    2.2    2.3   2.4
+  // signatures differ in bytes 7- 6   f834   f83a   f990  fa0a
+  //                           17-16   0c40   0c40   0c50  0c30
 
   // static boolean areCompatible( int hw, int fw )
   // {
@@ -68,6 +68,10 @@ class FirmwareUtils
       } else if ( buf[7] == (byte)0xf9 ) {
         if ( buf[6] == (byte)0x90 ) {
           return 23;
+        }
+      } else if ( buf[7] == (byte)0xfa ) {
+        if ( buf[6] == (byte)0x0a ) {
+          return 24;
         }
       }
     } catch ( IOException e ) {

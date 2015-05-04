@@ -1,7 +1,7 @@
 <html><body>
 <h3>[12] SKETCH DRAWING</h3>
 
-The canvas shows the midline with the splay shots.  You can move it around dragging it with one (or two) finger(s), zoom in/out with two fingers. It is not possible to rotate the canvas; the plan has the North upward, and the extended elevation is oriented with the vertical. Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still move and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn objects and put them back again. Of course you can go back with <u>undo</u> until the canvas is empty.<br><p>
+The canvas shows the midline with the splay shots.  You can move it around dragging it with one (or two) finger(s), zoom in/out with two fingers. It is not possible to rotate the canvas; the plan has the North upward, and the extended profile is oriented with the vertical. Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still move and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn objects and put them back again. Of course you can go back with <u>undo</u> until the canvas is empty.<br><p>
 
 By default you are drawing "wall" (red) lines. The sketch would be very boring if you had only one line style to use. The <u>tool picker</u> button allows you to pick another line style, or an "area" style (a closed region), or iconic symbols.  Tap the button, select the tab (POINT, LINE or AREA) and pick the drawing tool you need. Press the Android "Back" button to return to the canvas. The current drawing tool is the last you chose before closing the dialog.<br>
 You can adjust the line thickness in the <u>Settings</u> dialog. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
@@ -11,10 +11,12 @@ You can also correct mistakes in the drawing.The <u>Undo</u> button lets you rem
 The <u>Edit</u> button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. You have to select the item to edit by tapping on it. If there are several items close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). It may not be what you wanted, but never mind: move among the selected point with the <u>Prev</u>-<u>Next</u> button.<br>
 You can adjust the size of the green dots and the selection radius in the <u>Settings</u> dialog.<br><p>
 
+Segments of bezier lines have two control points. These are stored with the segment end-point and when this is the selected editing point the two control points are shown as pink circles. Each of them can be moved around by dragging it with the finger.<br><p>
+
 To clear the selection tap somewhere else in the canvas. To move the editing point, drag it with the finger. To change the properties of the sketch item tap the <u>note</u> button (the rightmost one). You can delete (remove) the item or change its Therion properties:
 <ulist>
 <li>point symbols: the "scale", the "orientation", the "text" (for labels), and generic "options"</li>
-<li>lines: "reverse", "outline", and "options". Lines can also be made more "rocky" (with fewer points) and ...</li>
+<li>lines: "reverse", "outline", and "options". Lines can also be made more "rocky" (with fewer points).</li>
 <li>areas: border "visibility"</li>
 </ulist><br><p>
 
@@ -43,5 +45,5 @@ The default drawing tools include several points, lines, and areas. It is likely
 Each sketch carries its own palette.  When you close the sketch it is saved with a header listing the enabled tools. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
 
 <hr>
-<i>Do not forget to export the drawings in <i>cSurvey</i> format.  This is a special export, because it includes both plan and extended section is a single file, and it adds also the survey data. If your survey is simple and has a single sketch you can easily get a final map from this file.</i><br><p>
+<i>Do not forget to export the drawings in <i>cSurvey</i> format.  This is a special export, because it includes both plan and extended profile in a single file, and it adds also the survey data. If your survey is simple and has a single sketch you can easily get a final map from this file.</i><br><p>
 </body></html>

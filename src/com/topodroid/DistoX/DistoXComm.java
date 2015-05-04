@@ -846,34 +846,34 @@ public class DistoXComm
     
     int ret = -1; // failure
     if ( connectSocket( address ) ) {
-      if ( mApp.distoType() == Device.DISTO_A3 ) {
-        int prev_read = -1;
-        int to_read = mProtocol.readToReadA3();
-        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download data: A3 to-read " + to_read );
-        if ( to_read <= 0 ) {
-          ret = to_read;
-        } else {
-          // FIXME asyncTask ?
-          // nReadPackets = 0; // done in RfcommThread cstr
-          startRfcommThread( to_read, lister );
-          while ( mRfcommThread != null && nReadPackets < to_read ) {
-            if ( nReadPackets != prev_read ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download data: A3 read " + nReadPackets + " / " + to_read );
-              prev_read = nReadPackets;
-            }
-            try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
-          }
-          TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download done: A3 read " + nReadPackets );
-        }
-      } else if ( mApp.distoType() == Device.DISTO_X310 ) {
+      // if ( mApp.distoType() == Device.DISTO_A3 ) {
+      //   int prev_read = -1;
+      //   int to_read = mProtocol.readToReadA3();
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download data: A3 to-read " + to_read );
+      //   if ( to_read <= 0 ) {
+      //     ret = to_read;
+      //   } else {
+      //     // FIXME asyncTask ?
+      //     // nReadPackets = 0; // done in RfcommThread cstr
+      //     startRfcommThread( to_read, lister );
+      //     while ( mRfcommThread != null && nReadPackets < to_read ) {
+      //       if ( nReadPackets != prev_read ) {
+      //         TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download data: A3 read " + nReadPackets + " / " + to_read );
+      //         prev_read = nReadPackets;
+      //       }
+      //       try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
+      //     }
+      //     TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download done: A3 read " + nReadPackets );
+      //   }
+      // } else if ( mApp.distoType() == Device.DISTO_X310 ) {
         startRfcommThread( -1, lister );
         while ( mRfcommThread != null ) {
           try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
         }
-        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download done: X310 read " + nReadPackets );
-      } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: unknown DistoType " + mApp.distoType() );
-      }
+        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download done: read " + nReadPackets );
+      // } else {
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: unknown DistoType " + mApp.distoType() );
+      // }
       // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
       ret = nReadPackets;
     } else {

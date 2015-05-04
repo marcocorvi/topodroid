@@ -153,12 +153,13 @@ class FirmwareDialog extends Dialog
             return;    
           }
           int fw = FirmwareUtils.readFirmwareFirmware( fp );
+          TopoDroidLog.LogFile( "Detected Firmware version " + fw );
           // int hw = mApp.readFirmwareHardware();
           // TopoDroidLog.LogFile( "Firmware version " + fw + " Hardware version " + hw );
           // // Log.v( "DistoX", "HW " + hw + " FW " + fw );
           // // Toast.makeText( mParent, "HARDWARE " + hw, Toast.LENGTH_LONG ).show();
           // askUpload( filename, areCompatible(hw,fw) );
-          askUpload( filename, (fw == 21 || fw == 22 || fw == 23) );
+          askUpload( filename, (fw == 21 || fw == 22 || fw == 23 || fw == 24 ) );
         }
         break;
     }

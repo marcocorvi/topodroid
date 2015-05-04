@@ -414,7 +414,7 @@ public class TopoDroidActivity extends Activity
     String title = getResources().getString( R.string.app_name );
     setTitle( mApp.getConnectionStateTitleStr() + title );
     setTitleColor( TopoDroidConst.COLOR_NORMAL );
-    Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
+    // Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
 
   // ---------------------------------------------------------------

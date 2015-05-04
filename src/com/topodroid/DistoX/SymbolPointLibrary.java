@@ -244,7 +244,6 @@ class SymbolPointLibrary
     } else {
       dir.mkdirs( );
     }
-    // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadUserPoints() size " + mPointNr + " " + mAnyPointNr );
   }
 
 

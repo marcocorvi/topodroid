@@ -52,7 +52,7 @@ public class DrawingBrushPaths
   static SymbolLineLibrary  mLineLib = null;
   static SymbolAreaLibrary  mAreaLib = null;
   static SymbolPoint mStationSymbol = null;
-  static boolean mReloadSymbols = false; // whether to reload symbols
+  static boolean mReloadSymbols = true; // whether to reload symbols
 
   static String getPointName( int idx ) { return mPointLib.getAnyPointName( idx ); }
 

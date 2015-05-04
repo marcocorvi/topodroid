@@ -119,14 +119,18 @@ public class DistoXProtocol
     final int[] toRead = {8};
     final Thread reader = new Thread() {
       public void run() {
+        Log.v("DistoX", "reader run " + this.toString() );
         try {
-          count[0] = in.read( mBuffer, dataRead[0], toRead[0] );
-          toRead[0] -= count[0];
-          dataRead[0] += count[0];
+          // synchronized( dataRead[0] ) {
+            count[0] = in.read( mBuffer, dataRead[0], toRead[0] );
+            toRead[0] -= count[0];
+            dataRead[0] += count[0];
+          // }
         } catch ( ClosedByInterruptException e ) {
         } catch ( IOException e ) {
           maybeException[0] = e;
         }
+        Log.v("DistoX", "reader done " + this.toString() );
       }
     };
 
@@ -138,11 +142,27 @@ public class DistoXProtocol
         reader.join( timeout );
       } catch ( InterruptedException e ) { Log.v("DistoX", "reader join-1 interrupted"); }
       if ( ! reader.isAlive() ) break;
-      Thread interruptor = new Thread() { public void run() { reader.interrupt(); } };
-      interruptor.start();
-      try {
-        interruptor.join( 200 );
-      } catch ( InterruptedException e ) { Log.v("DistoX", "interruptor join interrupted"); }
+      {
+        Thread interruptor = new Thread() { public void run() {
+          Log.v("DistoX", "interruptor run " + this.toString() );
+          boolean done = false;
+          while ( ! done ) {
+            // synchronized ( dataRead[0] ) {
+              if ( dataRead[0] > 0 && toRead[0] > 0 ) { // FIXME
+                try { wait( 100 ); } catch ( InterruptedException e ) { }
+              } else {
+                reader.interrupt(); 
+                done = true;
+              }
+            // }
+          }
+          Log.v("DistoX", "interruptor done " + this.toString() );
+        } };
+        interruptor.start();
+        try {
+          interruptor.join( 200 );
+        } catch ( InterruptedException e ) { Log.v("DistoX", "interruptor join interrupted"); }
+      }
       try {
         reader.join( 200 );
       } catch ( InterruptedException e ) { Log.v("DistoX", "reader join-2 interrupted"); }

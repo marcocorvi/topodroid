@@ -11,7 +11,7 @@ The first time you start the app a welcome message is shown: read it! It is impo
 <li><u>Palette</u> allows to choose the drawing tools that are enabled. TopoDroid has many drawing tools, several of which you might not need. Having only the relevant tools enabled in the palette, makes easier to switch from one to the other in the tool picker dialog.</li>
 <li><u>Cosurvey</u> opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying [experimental level only].</li>
 <li><u>Settings</u>. With this you can choose all the program settings: the global ones and those of surveying, sketching, calibrating, and devices. There are many adjustable settings. The default values should be reasonable enough. One thing you might want to change are the "display units" for lengths; you can choose between meters (default) and feet. Beware that this is just a unit conversion in the display; internally, in the database, TopoDroid stores lengths in meters. Other settings you might want to change are the buttons and texts sizes, and the drawing units</li>
-<li><u>Logs</u> allows to edit what to log and whether to save to the system log or to a file (in the TopoDroid directory). By default logs are sent to the system log and only error messages are logged. Logging is mostly for debugging [experimental level only]</li>
+<li><u>Logs</u> allows to decide what to log and whether to save to the system log or to a file (in the TopoDroid directory). By default logs are sent to the system log and only error messages are logged. Logging is mostly for debugging [experimental level only]</li>
 <li><u>About</u>: the program welcome message and disclaimer</li>
 <li><u>Help</u> shows a brief descriptions of buttons and menus. At the top-right corner there is a button that opens this user manual. Other TopoDroid windows have similar <u>Help</u> menus</li>
 </ulist><br><p>
@@ -51,7 +51,7 @@ Zip archives are searched in the "zip" directory (that is where TopoDroid saves 
 <h4>Logging</h4>
 Logging is important to solve problems where the program does not behave as expected. For example when the outcome of a computation does not agree with that obtained by other means, or a user input is not properly parsed. There are several log-flags to limit the logs to those necessary to find the cause of the problem. By default only "error" (ie, when the program detects something that should not have happened) are logged.<br><p>
 
-Logs are different from software crashes. Crashes are due to the program misbehaving in the system, and are detected by the system, that ends the program. You should report crashes (and ANR) vie Google Play so that they can be taken into account and fixed. Please, take the time to add a comment about what the program was doing when it crashed.<br><p>
+Logs are different from software crashes. Crashes are due to the program misbehaving in the system, and are detected by the system, that ends the program. You should report crashes (and ANR) via Google Play so that a stack trace is attached and they can be fixed more easily. Please, take the time to add a comment about what the program was doing when it crashed.<br><p>
 
 <hr>
 If <b>bluetooth</b> is not on, the app asks whether to turn it on. Without bluetooth it cannot communicate with the DistoX and the survey data can only be entered manually. In this case the "Download" button in the Shot window is hidden, and that in the Sketch window is replaced by the "Add" button.<br><p>

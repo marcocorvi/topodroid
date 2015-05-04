@@ -7,14 +7,14 @@ Before surveying you need to calibrate the DistoX. Tap the <u>Device activity</u
 <ulist>
 <li><u>Scan</u> searches for new DistoX devices. Note: the search may not show the DistoX if the Android Bluetooth scan fails to report it. You may tray again a few times, or you may try with the "Settongs" app. You can also use this app to pair the DistoX.</li>
 <li><u>Disconnect</u> detaches the current device</li>
-<li><u>Calibrations</u> displays the list of calibrations of this device, recorded in the database. If no calibration is found the list is empty. A new calibration is added with the "New Calibration" button.</li>
+<li><u>Calibrations</u> displays the list of calibrations of the current device, recorded in the database. If no calibration is found the list is empty. A new calibration is added with the "New Calibration" button.</li>
 <li><u>Firmware</u>: used to dump and upload firmwares to the DistoX2. This menu is present only if you checked the "bootloader" global option in the main window</li>
 <li><u>Settings</u>: with this menu you change the preferences related to the Device activity</li>
 <li><u>Help</u></li>
 <ulist><br>
 
 <h4>Firmware</h4>
-The <u>Firmware</u> menu is shown only if you enabled the global <i>Bootloader</i> option. TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2 and 2.3, which are all compatible with hardware 1.0. Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file. Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version. Unfortunately there is no sure way to read the firmware version from the file content, so TopoDroid relies on the signature in the file after the bootloader blocks.  The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
+The <u>Firmware</u> menu is shown only if you enabled the global <i>Bootloader</i> option. TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2, 2.3 and 2.4, which are all compatible with hardware 1.0. Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file. Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version. Unfortunately there is no sure way to read the firmware version from the file content, so TopoDroid relies on the signature in the file after the bootloader blocks.  The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
 <b>WARNING. UPLOADING AN INCOMPATIBLE FIRMWARE MAKES YOUR DistoX UNUSABLE.</b><br><p>
 
 <h4>BUTTONS</h4>
@@ -31,10 +31,11 @@ Except for the first, you need the DistoX turned on for all the other button act
 <ulist>
 <li><i>Device</i>: current active DistoX</li>
 <li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default]</li>
-<li><i>Data connection</i> type: whether to stay connected to the DistoX or download data only when the button is pressed [default]. More on this below when we talk about downloading the data from the DistoX. This connection mode applies only to data download. DistoX functions use a one-shot query mode</li>
+<li><i>Data connection</i> type: whether to stay connected to the DistoX or download data only when the "download" button is pressed [default]. More on this below when we talk about downloading the data from the DistoX. This connection mode applies only to data download. DistoX functions use a one-shot query mode</li>
 <li><i>Auto reconnect</i>: whether to reconnect automatically if the connection is lost while in "continuous" download-mode</li>
 <li><i>Socket</i> type: this can be either the default type or "insecure". The default type should be ok, however if you experience problems with it you may try the insecure socket</li>
 <li>the number of <i>Connection attempts</i>: usually 1 is enough, if you have problems establishing the connection you may try with 3 or 5 (more than that means there is a problem with the code, and you should report it)</li>
+<li><i>Z6-workaround</i> how to manage the download timeout.</li>
 </ulist><br><p>
 
 <hr>

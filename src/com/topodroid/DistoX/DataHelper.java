@@ -2083,9 +2083,9 @@ public class DataHelper extends DataSetObservable
      }
      String value = null;
      Cursor cursor = myDB.query( CONFIG_TABLE,
-                                   new String[] { "value" }, // columns
-                                   "key = ?", new String[] { key },
-                                   null, null, null );
+                                 new String[] { "value" }, // columns
+                                 "key = ?", new String[] { key },
+                                 null, null, null );
      if ( cursor != null ) {
        if (cursor.moveToFirst()) {
          value = cursor.getString( 0 );
@@ -2149,8 +2149,6 @@ public class DataHelper extends DataSetObservable
      return true;
    }
 
-
-     
    // ----------------------------------------------------------------------
    /* Set the current survey/calib name.
     * If the survey/calib name does not exists a new record is inserted in the table
