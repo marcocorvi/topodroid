@@ -988,19 +988,23 @@ public class TopoDroidApp extends Application
                                                           : DistoXStationName.mSecondStation;
     String to   = (TopoDroidSetting.mSurveyStations == 1 )? DistoXStationName.mSecondStation 
                                                           : DistoXStationName.mInitialStation;
+    String oldFrom = "empty"; // FIXME
 
     String station = TopoDroidSetting.mShotAfterSplays? from : "";  // splays station
     // Log.v("DistoX", "station [0] " + station );
 
     int atStation = 0;
+    int splayCnt = 0; // number of splays between legs
+
     for ( DistoXDBlock blk : list ) {
       if ( blk.mFrom.length() == 0 ) {
-        // Log.v( "DistoX", "Id " + blk.mId + " FROM is empty ");
+        splayCnt ++;
+        // Log.v( "DistoX", blk.mId + " FROM is empty ");
 
         if ( prev == null ) {
           prev = blk;
           blk.mFrom = station;
-          // Log.v( "DistoX", "Id " + blk.mId + " null prev. FROM " + blk.mFrom );
+          // Log.v( "DistoX", blk.mId + " null prev. FROM " + blk.mFrom );
           mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true );  // SPLAY
         } else {
           if ( prev.relativeDistance( blk ) < TopoDroidSetting.mCloseDistance ) {
@@ -1019,33 +1023,39 @@ public class TopoDroidApp extends Application
               atStation ++;
             }
             if ( atStation == TopoDroidSetting.mMinNrLegShots ) {
-              prev.mFrom = from;                             // forward-shot from--to
-              prev.mTo   = to;
-              // Log.v( "DistoX", "Id " + prev.mId + " setting prev. FROM " + from + " TO " + to );
-              mData.updateShotName( prev.mId, mSID, from, to, true ); // LEG
-              if ( ! TopoDroidSetting.mSplayExtend ) {
-                long extend = ( prev.mBearing < 180.0 )? 1L : -1L;
-                mData.updateShotExtend( prev.mId, mSID, extend, true );
+              if ( TopoDroidSetting.mMagAnomaly && atStation == splayCnt ) {
+                prev.mFrom = from;                            // backsight shot from--old_from
+                prev.mTo   = oldFrom;
+              } else {
+                prev.mFrom = from;                             // forward-shot from--to
+                prev.mTo   = to;
+                // Log.v( "DistoX", prev.mId + " setting prev. FROM " + from + " TO " + to );
+                mData.updateShotName( prev.mId, mSID, from, to, true ); // LEG
+                if ( ! TopoDroidSetting.mSplayExtend ) {
+                  long extend = ( prev.mBearing < 180.0 )? 1L : -1L;
+                  mData.updateShotExtend( prev.mId, mSID, extend, true );
+                }
+                if ( TopoDroidSetting.mSurveyStations == 1 ) {                  // forward-shot
+                  station = TopoDroidSetting.mShotAfterSplays ? to : from;      // splay-station = this-shot-to if splays before shot
+                  // Log.v("DistoX", "station [1] " + station + " from " + from + " to " + to );
+                                                               //                 this-shot-from if splays after shot
+                  from = to;                                   // next-shot-from = this-shot-to
+                  
+                  do {
+                    to   = DistoXStationName.increment( to );  // next-shot-to   = increment next-shot-from
+                  } while ( DistoXStationName.listHasName( list, to ) );
+                } else {                                       // backward-shot 
+                  to   = from;                                 // next-shot-to   = this-shot-from
+                  do {
+                    from = DistoXStationName.increment( from );    // next-shot-from = increment this-shot-from
+                  } while ( DistoXStationName.listHasName( list, from ) );
+                  station = TopoDroidSetting.mShotAfterSplays ? from : to;      // splay-station  = next-shot-from if splay before shot
+                  // Log.v("DistoX", "station [2] " + station + " from " + from + " to " + to );
+                }                                              //                = this-shot-from if splay after shot
               }
-              if ( TopoDroidSetting.mSurveyStations == 1 ) {                  // forward-shot
-                station = TopoDroidSetting.mShotAfterSplays ? to : from;      // splay-station = this-shot-to if splays before shot
-                // Log.v("DistoX", "station [1] " + station + " from " + from + " to " + to );
-                                                             //                 this-shot-from if splays after shot
-                from = to;                                   // next-shot-from = this-shot-to
-                
-                do {
-                  to   = DistoXStationName.increment( to );  // next-shot-to   = increment next-shot-from
-                } while ( DistoXStationName.listHasName( list, to ) );
-              } else {                                       // backward-shot 
-                to   = from;                                 // next-shot-to   = this-shot-from
-                do {
-                  from = DistoXStationName.increment( from );    // next-shot-from = increment this-shot-from
-                } while ( DistoXStationName.listHasName( list, from ) );
-                station = TopoDroidSetting.mShotAfterSplays ? from : to;      // splay-station  = next-shot-from if splay before shot
-                // Log.v("DistoX", "station [2] " + station + " from " + from + " to " + to );
-              }                                              //                = thsi-shot-from if splay after shot
+              splayCnt = 0;
             }
-          } else {
+          } else { // distance from prev > "closeness" setting
             atStation = 0;
             blk.mFrom = station;
             // Log.v( "DistoX", "Id " + blk.mId + " " + blk.mFrom );
@@ -1054,11 +1064,11 @@ public class TopoDroidApp extends Application
           }
         }
       } else { // blk.mFrom.length > 0
-        // Log.v("DistoX", " FROM is not empty: " + blk.mFrom );
-
         if ( blk.mTo.length() > 0 ) {
-          // Log.v("DistoX", " TO is not empty: " + blk.mTo );
+          splayCnt = 0;
+          // Log.v("DistoX", blk.mId + " FROM not empty " + blk.mFrom + " TO is not empty: " + blk.mTo );
           if ( TopoDroidSetting.mSurveyStations == 1 ) { // forward shot
+            oldFrom = blk.mFrom;
             from = blk.mTo;
             to   = from;
             do {
@@ -1070,6 +1080,7 @@ public class TopoDroidApp extends Application
                                                     // 1-2, 1, 1, ..., 2-3, 2, 2, ...
             // Log.v("DistoX", "station [3] " + station + " from " + from + " to " + to );
           } else { // backward shot
+            oldFrom = blk.mTo;
             to   = blk.mFrom;
             from = to;
             do {
@@ -1083,7 +1094,8 @@ public class TopoDroidApp extends Application
           }
           atStation = TopoDroidSetting.mMinNrLegShots;
         } else {
-          // Log.v("DistoX", " TO is empty " );
+          ++ splayCnt;
+          // Log.v("DistoX", blk.mId + " FROM not empty " + blk.mFrom + " TO empty " );      
           atStation = 0;
         }
         prev = blk;

@@ -119,53 +119,55 @@ public class DistoXProtocol
     final int[] toRead = {8};
     final Thread reader = new Thread() {
       public void run() {
-        Log.v("DistoX", "reader run " + this.toString() );
+        // Log.v("DistoX", "reader run " + this.toString() );
         try {
-          // synchronized( dataRead[0] ) {
+          // synchronized( dataRead ) 
+          {
             count[0] = in.read( mBuffer, dataRead[0], toRead[0] );
             toRead[0] -= count[0];
             dataRead[0] += count[0];
-          // }
+          }
         } catch ( ClosedByInterruptException e ) {
         } catch ( IOException e ) {
           maybeException[0] = e;
         }
-        Log.v("DistoX", "reader done " + this.toString() );
+        // Log.v("DistoX", "reader done " + this.toString() );
       }
     };
 
 
     reader.start();
     for ( int k=0; k<maxtimeout; ++k) {
-      Log.v("DistoX", "interrupt loop " + dataRead[0] );
+      // Log.v("DistoX", "interrupt loop " + dataRead[0] );
       try {
         reader.join( timeout );
-      } catch ( InterruptedException e ) { Log.v("DistoX", "reader join-1 interrupted"); }
+      } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "reader join-1 interrupted"); }
       if ( ! reader.isAlive() ) break;
       {
         Thread interruptor = new Thread() { public void run() {
-          Log.v("DistoX", "interruptor run " + this.toString() );
+          // Log.v("DistoX", "interruptor run " + this.toString() );
           boolean done = false;
           while ( ! done ) {
-            // synchronized ( dataRead[0] ) {
+            // synchronized ( dataRead ) 
+            {
               if ( dataRead[0] > 0 && toRead[0] > 0 ) { // FIXME
                 try { wait( 100 ); } catch ( InterruptedException e ) { }
               } else {
                 reader.interrupt(); 
                 done = true;
               }
-            // }
+            }
           }
-          Log.v("DistoX", "interruptor done " + this.toString() );
+          // Log.v("DistoX", "interruptor done " + this.toString() );
         } };
         interruptor.start();
         try {
           interruptor.join( 200 );
-        } catch ( InterruptedException e ) { Log.v("DistoX", "interruptor join interrupted"); }
+        } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "interruptor join interrupted"); }
       }
       try {
         reader.join( 200 );
-      } catch ( InterruptedException e ) { Log.v("DistoX", "reader join-2 interrupted"); }
+      } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "reader join-2 interrupted"); }
       if ( ! reader.isAlive() ) break; 
     }
     if ( maybeException[0] != null ) throw maybeException[0];

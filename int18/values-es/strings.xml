@@ -621,6 +621,8 @@
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
   <!-- TODO string name="pref_backsight_title">Backsight</string -->
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
+  <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
+  <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
   <string name="pref_team_title">Equipo</string>
   <!-- string name="pref_team_summary">Surveying team</string -->
   <!-- string name="pref_team_message">Default surveying team</string -->

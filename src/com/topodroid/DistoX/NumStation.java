@@ -25,6 +25,7 @@ public class NumStation extends NumSurveyPoint
   NumShot s1;
   NumShot s2;
   NumNode node;
+  float   mMagAnomaly; // anomalia magnetica locale
   boolean mBarrier; // whether this station is barrier to data reduction
 
   NumStation( String id )
@@ -36,6 +37,7 @@ public class NumStation extends NumSurveyPoint
     s1 = null;
     s2 = null;
     node = null;
+    mMagAnomaly = 0.0f;
     mBarrier = false;
   }
 
@@ -53,6 +55,7 @@ public class NumStation extends NumSurveyPoint
     s1 = null;
     s2 = null;
     node = null;
+    mMagAnomaly = 0.0f;
     mBarrier = false;
   }
 }

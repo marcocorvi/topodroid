@@ -52,6 +52,14 @@
        android:defaultValue="false"
      />
 
+     <CheckBoxPreference
+       android:key="DISTOX_MAG_ANOMALY"
+       android:summary="@string/pref_mag_anomaly_summary"
+       android:title="@string/pref_mag_anomaly_title"
+       android:defaultValue="false"
+     />
+
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SHOT_TIMER"
        android:title="@string/pref_shot_timer_title"

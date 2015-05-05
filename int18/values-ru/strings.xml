@@ -686,6 +686,8 @@
   <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
+  <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
+  <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
 
   <string name="pref_team_title">Группа съёмемки</string>
   <string name="pref_team_summary">Группа съёмемки</string>

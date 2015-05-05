@@ -94,7 +94,8 @@ class TopoDroidSetting
     "DISTOX_INIT_STATION",
     "DISTOX_BACKSIGHT",
     "DISTOX_Z6_WORKAROUND",          // 62
-    "DISTOX_LOCALE",                 // 63
+    "DISTOX_MAG_ANOMALY",            // 63
+    "DISTOX_LOCALE",                 // 64
     "DISTOX_CWD",                    // must be last 
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
@@ -128,6 +129,7 @@ class TopoDroidSetting
   static int    mMinNrLegShots = 2;
   static String mInitStation = "0";
   static boolean mBacksight = false;
+  static boolean mMagAnomaly = false;
   static float  mSplayVertThrs = 80;
 
   // selection_radius = cutoff + closeness / zoom
@@ -319,7 +321,7 @@ class TopoDroidSetting
 
 
     mActivityLevel = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS
-    setActivityBooleans();
+    setActivityBooleans( prefs );
 
     try {
       mSizeButtons = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // choice: cannot fail
@@ -565,6 +567,9 @@ class TopoDroidSetting
 
     mZ6Workaround = prefs.getBoolean( key[k++], true ); // DISTOX_Z6_WORKAROUND
 
+    mMagAnomaly = prefs.getBoolean( key[k++], false ); // DISTOX_MAG_ANOMALY
+    if ( ! mLevelOverAdvanced ) mMagAnomaly = false;
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -575,12 +580,15 @@ class TopoDroidSetting
     // }
   }
 
-  static void setActivityBooleans()
+  static void setActivityBooleans( SharedPreferences prefs )
   {
     mLevelOverBasic        = mActivityLevel > LEVEL_BASIC;
     mLevelOverNormal       = mActivityLevel > LEVEL_NORMAL;
     mLevelOverAdvanced     = mActivityLevel > LEVEL_ADVANCED;
     mLevelOverExperimental = mActivityLevel > LEVEL_EXPERIMENTAL;
+    if ( ! mLevelOverAdvanced ) {
+      mMagAnomaly = prefs.getBoolean( "DISTOX_MAG_ANOMALY", false );
+    }
   }
 
   static void checkPreference( SharedPreferences prefs, String k, TopoDroidActivity activity, TopoDroidApp app )
@@ -594,7 +602,7 @@ class TopoDroidSetting
       int level = Integer.parseInt( prefs.getString( k, "1" ) );
       if ( level != mActivityLevel ) {
         mActivityLevel = level;
-        setActivityBooleans();
+        setActivityBooleans( prefs );
         if ( activity != null ) {
           activity.resetButtonBar();
           activity.setMenuAdapter( app.getResources() );
@@ -866,6 +874,9 @@ class TopoDroidSetting
       mBacksight = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_Z6_WORKAROUND
       mZ6Workaround = prefs.getBoolean( k, true );
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_MAG_ANOMALY
+      mMagAnomaly = prefs.getBoolean( k, false );
+      if ( ! mLevelOverAdvanced ) mMagAnomaly = false;
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

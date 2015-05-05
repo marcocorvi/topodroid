@@ -430,7 +430,7 @@ class DistoXNum
                           // this is checked only in makeShotFromTmp to detect errors
     public boolean duplicate;
     public boolean surface;
-    public boolean backshot;
+    public int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
     public TmpShot sibling;  // sibling shot with same stations
     private ArrayList<DistoXDBlock> blocks;
 
@@ -443,7 +443,7 @@ class DistoXNum
       reversed = r;
       duplicate = false;
       surface   = false;
-      backshot  = false;
+      backshot  = 0;
       sibling = null;
       blocks = new ArrayList<DistoXDBlock>();
       blocks.add( blk );
@@ -509,12 +509,12 @@ class DistoXNum
    * @param st    to station
    * @param ts    temp shot
    */
-  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TmpShot ts )
+  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TmpShot ts, float anomaly )
   {
     if ( ts.reversed != 1 ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "making shot from reversed temp " + sf.name + " " + st.name );
     }
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1 );
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly );
     for ( DistoXDBlock blk : ts.getBlocks() ) {
       sh.addBlock( blk );
     }
@@ -559,7 +559,7 @@ class DistoXNum
           lastLeg = new TmpShot( blk, blk.mFrom, blk.mTo, (int)(blk.mExtend), +1 );
           lastLeg.duplicate = ( blk.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
           lastLeg.surface   = ( blk.mFlag == DistoXDBlock.BLOCK_SURFACE );
-          // lastLeg.backshot  = ( blk.mFlag == DistoXDBlock.BLOCK_BACKSHOT );
+          // lastLeg.backshot  = ( blk.mFlag == DistoXDBlock.BLOCK_BACKSHOT ); // FIXME
           tmpshots.add( lastLeg );
           break;
 
@@ -586,25 +586,25 @@ class DistoXNum
       TmpShot ts0 = tmpshots.get( i );
       DistoXDBlock blk0 = ts0.getFirstBlock();
       blk0.mMultiBad = false;
-      if ( ts0.sibling == null ) {
+      if ( ts0.sibling == null ) { // (1) check if ts0 has siblings
         String from = ts0.from;
         String to   = ts0.to;
         TmpShot ts1 = ts0;
-        ts0.backshot = false;
+        ts0.backshot = 0;
         for ( int j=i+1; j < tmpshots.size(); ++j ) {
           TmpShot ts2 = tmpshots.get( j );
           if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) {
             ts1.sibling = ts2;
             ts1 = ts2;
-            ts2.backshot = false;
+            ts2.backshot = +1;
           } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) {
-            ts2.backshot = true;
             ts1.sibling = ts2;
             ts1 = ts2;
+            ts2.backshot = -1;
           }
         }
-        if ( ts0.sibling != null ) {
-          // check sibling shots agreement
+      
+        if ( ts0.sibling != null ) { // (2) check sibling shots agreement
           float dmax = 0.0f;
           float cc = (float)Math.cos(blk0.mClino * grad2rad);
           float sc = (float)Math.sin(blk0.mClino * grad2rad);
@@ -619,7 +619,7 @@ class DistoXNum
             cb = (float)Math.cos(blk1.mBearing * grad2rad); 
             sb = (float)Math.sin(blk1.mBearing * grad2rad); 
             Vector v2 = new Vector( blk1.mLength * cc * sb, blk1.mLength * cc * cb, blk1.mLength * sc );
-            float d = ( ( ts1.backshot )? v1.plus(v2) : v1.minus(v2) ).Length();
+            float d = ( ( ts1.backshot == -1 )? v1.plus(v2) : v1.minus(v2) ).Length();
             d = d/blk0.mLength + d/blk1.mLength; 
             if ( d > dmax ) dmax = d;
             ts1 = ts1.sibling;
@@ -627,12 +627,13 @@ class DistoXNum
           blk0.mMultiBad = ( dmax > TopoDroidSetting.mCloseDistance );
           // Log.v( "DistoX", "DMAX " + from + "-" + to + " " + dmax );
           
-          // remove siblings
-          ts1 = ts0.sibling;
-          while ( ts1 != null ) {
-            TmpShot ts2 = ts1.sibling;
-            tmpshots.remove( ts1 );
-            ts1 = ts2;
+          if ( ! TopoDroidSetting.mMagAnomaly ) { // (3) remove siblings
+            ts1 = ts0.sibling;
+            while ( ts1 != null ) {
+              TmpShot ts2 = ts1.sibling;
+              tmpshots.remove( ts1 );
+              ts1 = ts2;
+            }
           }
         }
       }
@@ -651,7 +652,46 @@ class DistoXNum
     while ( repeat ) {
       repeat = false;
       for ( TmpShot ts : tmpshots ) {
-        if ( ts.used ) continue;
+        if ( ts.used || ts.backshot != 0 ) continue;
+
+        float anomaly = 0;
+        if ( TopoDroidSetting.mMagAnomaly ) {
+          if ( ts.backshot == 0 ) {
+            int   nfwd = 1;
+            float bfwd = ts.b();
+            int   nbck = 0;
+            float bbck = 0;
+            for ( TmpShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
+              if ( ts1.backshot == 1 ) {
+                if ( ts1.b() > ts.b() + 180 ) {
+                  bfwd += ts1.b() - 360;
+                } else if ( ts.b() > ts1.b() + 180 ) {
+                  bfwd += ts1.b() + 360;
+                } else {
+                  bfwd += ts1.b();
+                }
+                ++ nfwd;
+              } else {
+                if ( nbck > 0 ) {
+                  if ( ts1.b() > ts.b() + 180 ) {
+                    bbck += ts1.b() - 360;
+                  } else if ( ts.b() > ts1.b() + 180 ) {
+                    bbck += ts1.b() + 360;
+                  } else {
+                    bbck += ts1.b();
+                  }
+                } else {
+                  bbck += ts1.b();
+                }
+                ++ nbck;
+              }
+            }
+            if ( nbck > 0 ) {
+              anomaly = bfwd/nfwd + 180 - bbck/nbck;
+              if ( anomaly > 180 ) anomaly -= 360;
+            }
+          }
+        } 
 
         // try to see if any temp-shot station is on the list of stations
         NumStation sf = getStation( ts.from );
@@ -664,17 +704,17 @@ class DistoXNum
             if ( /* TopoDroidSetting.mAutoStations || */ ! TopoDroidSetting.mLoopClosure ) { // do not close loop
               // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "do not close loop");
               // keep loop open: new station( id=ts.to, from=sf, ... )
-              NumStation st1 = new NumStation( ts.to, sf, ts.d(), ts.b(), ts.c(), ts.extend );
+              NumStation st1 = new NumStation( ts.to, sf, ts.d(), ts.b()+anomaly, ts.c(), ts.extend );
               updateBBox( st );
               if ( isBarrier( ts.to ) ) st1.mBarrier = true;
               st1.mDuplicate = true;
               mStations.add( st1 );
 
-              sh = makeShotFromTmp( sf, st1, ts );
+              sh = makeShotFromTmp( sf, st1, ts, anomaly );
               addShotToStations( sh, st1, sf );
             } else { // close loop
               // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "close loop");
-              sh = makeShotFromTmp( sf, st, ts );
+              sh = makeShotFromTmp( sf, st, ts, anomaly );  // FIXME is anomaly OK ?
               addShotToStations( sh, sf, st );
             }
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ) ); // NOTE Math.abs is not necessary
@@ -688,15 +728,15 @@ class DistoXNum
             repeat = true;
           }
           else // st null || st isBarrier
-          { // normal shot: from --> to
+          { // forward shot: from --> to
             // new station( id=ts.to  from=sf 
-            st = new NumStation( ts.to, sf, ts.d(), ts.b(), ts.c(), ts.extend );
+            st = new NumStation( ts.to, sf, ts.d(), ts.b()+anomaly, ts.c(), ts.extend );
             if ( isBarrier( ts.to ) ) st.mBarrier = true;
             updateBBox( st );
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
             mStations.add( st );
 
-            sh = makeShotFromTmp( sf, st, ts );
+            sh = makeShotFromTmp( sf, st, ts, anomaly );
             addShotToStations( sh, st, sf );
             ts.used = true;
             repeat = true;
@@ -707,14 +747,14 @@ class DistoXNum
            // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "reversed shot " + ts.from + " " + ts.to );
           
           // new station( id=ts.from from=st, ... )
-          sf = new NumStation( ts.from, st, - ts.d(), ts.b(), ts.c(), ts.extend );
+          sf = new NumStation( ts.from, st, - ts.d(), ts.b()-anomaly, ts.c(), ts.extend );
           if ( isBarrier( ts.from ) ) sf.mBarrier = true;
 
           updateBBox( sf );
           addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), sf.v );
           mStations.add( sf );
 
-          sh = makeShotFromTmp( sf, st, ts ); // N.B. was new NumShot( st, sf, ts.block, -1)
+          sh = makeShotFromTmp( sf, st, ts, -anomaly ); // N.B. was new NumShot(st, sf, ts.block, -1); // FIXME check -anomaly
           addShotToStations( sh, sf, st );
           ts.used = true;
           repeat = true;

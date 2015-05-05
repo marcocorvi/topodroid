@@ -621,6 +621,8 @@
   <string name="pref_leg_message">Tolleranza tra tiri di una battuta</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
+  <string name="pref_mag_anomaly_title">Anomalia magnetica</string>
+  <string name="pref_mag_anomaly_summary">Compensazione anomalia magnetica locale</string>
 
   <string name="pref_team_title">Squadra</string>
   <string name="pref_team_summary">Squadra topo</string>

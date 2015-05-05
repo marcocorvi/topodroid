@@ -672,6 +672,8 @@
   <!-- TODO string name="pref_leg_message">Tolerance among the shots of a leg</string -->
   <!-- TODO string name="pref_backsight_title">Backsight</string -->
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
+  <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
+  <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
 
   <!-- TODO string name="pref_team_title">Equipo</string -->
   <!-- TODO string name="pref_team_summary">Surveying team</string -->

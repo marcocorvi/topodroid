@@ -30,10 +30,11 @@ public class NumShot
   float mLength;
   float mBearing;
   float mClino;
+  float mAnomaly;  // local magnetic anomaly
 
   DistoXDBlock getFirstBlock() { return blocks.get(0); }
 
-  NumShot( NumStation f, NumStation t, DistoXDBlock blk, int dir )
+  NumShot( NumStation f, NumStation t, DistoXDBlock blk, int dir, float anomaly )
   {
     from = f;
     to   = t;
@@ -48,6 +49,7 @@ public class NumShot
     mLength  = blk.mLength;
     mBearing = blk.mBearing;
     mClino   = blk.mClino;
+    mAnomaly = anomaly;
     mExtend  = (int)(blk.mExtend);
   }
 
@@ -83,8 +85,8 @@ public class NumShot
     float dh = mLength * (float)Math.cos( mClino * TopoDroidUtil.M_PI / 180 );
     st.v = sf.v - dv; // v is downward
     st.h = sf.h + mExtend * dh;
-    float dn = dh * (float)Math.cos( mBearing * TopoDroidUtil.M_PI / 180 );
-    float de = dh * (float)Math.sin( mBearing * TopoDroidUtil.M_PI / 180 );
+    float dn = dh * (float)Math.cos( (mBearing+mAnomaly) * TopoDroidUtil.M_PI / 180 );
+    float de = dh * (float)Math.sin( (mBearing+mAnomaly) * TopoDroidUtil.M_PI / 180 );
     st.e = sf.e + de;
     st.s = sf.s - dn;
   }
