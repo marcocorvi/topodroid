@@ -1282,8 +1282,9 @@ class TopoDroidExporter
   // -----------------------------------------------------------------------
   // COMPASS EXPORT 
 
-  static private void computeLRUD( LRUD lrud, DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
+  static private LRUD computeLRUD( DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
   {
+    LRUD lrud = new LRUD();
     float grad2rad = TopoDroidUtil.GRAD2RAD;
     float n0 = (float)Math.cos( b.mBearing * grad2rad );
     float e0 = (float)Math.sin( b.mBearing * grad2rad );
@@ -1325,6 +1326,8 @@ class TopoDroidExporter
         else            { if ( -rl > lrud.l ) lrud.l = -rl; }
       }
     }
+    // Log.v("DistoX", "<" + b.mFrom + "-" + b.mTo + "> at " + station + ": " + lrud.l + " " + lrud.r );
+    return lrud;
   }
 
   /** Centerline data are exported in Compass format as follows
@@ -1411,7 +1414,7 @@ class TopoDroidExporter
       int extra_cnt = 0;
       boolean in_splay = false;
       boolean duplicate = false;
-      LRUD lrud = new LRUD();
+      LRUD lrud;
 
       for ( DistoXDBlock item : list ) {
         String from = item.mFrom;
@@ -1428,7 +1431,7 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( n > 0 && ref_item != null ) {
-              computeLRUD( lrud, ref_item, list, true );
+              lrud = computeLRUD( ref_item, list, true );
               pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
               printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
               duplicate = false;
@@ -1439,7 +1442,7 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( n > 0 && ref_item != null ) { // write pervious leg shot
-              computeLRUD( lrud, ref_item, list, true );
+              lrud = computeLRUD( ref_item, list, true );
               pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
               printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
               duplicate = false;
@@ -1448,7 +1451,7 @@ class TopoDroidExporter
             }
           } else {
             if ( n > 0 && ref_item != null ) {
-              computeLRUD( lrud, ref_item, list, true );
+              lrud = computeLRUD( ref_item, list, true );
               pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
               printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
             }
@@ -1463,7 +1466,7 @@ class TopoDroidExporter
         }
       }
       if ( n > 0 && ref_item != null ) {
-        computeLRUD( lrud, ref_item, list, true );
+        lrud = computeLRUD( ref_item, list, true );
         pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
         printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
       }
@@ -1823,8 +1826,7 @@ class TopoDroidExporter
    */
   static private void printStartShotToTro( PrintWriter pw, DistoXDBlock item, List< DistoXDBlock > list )
   {
-    LRUD lrud = new LRUD();
-    computeLRUD( lrud, item, list, true );
+    LRUD lrud = computeLRUD( item, list, true );
     pw.format(Locale.ENGLISH, "%s %s 0.00 0.00 0.00 ", item.mFrom, item.mFrom );
     pw.format(Locale.ENGLISH, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
     if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -1886,7 +1888,7 @@ class TopoDroidExporter
       boolean in_splay = false;
       boolean duplicate = false;
       boolean start = true;
-      LRUD lrud = new LRUD();
+      LRUD lrud;
 
       for ( DistoXDBlock item : list ) {
         String from = item.mFrom;
@@ -1908,7 +1910,7 @@ class TopoDroidExporter
                 printStartShotToTro( pw, ref_item, list );
                 start = false;
               }
-              computeLRUD( lrud, ref_item, list, false );
+              lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, l, b, c, n, lrud );
               duplicate = false;
               n = 0;
@@ -1922,7 +1924,7 @@ class TopoDroidExporter
                 printStartShotToTro( pw, ref_item, list );
                 start = false;
               }
-              computeLRUD( lrud, ref_item, list, false );
+              lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, l, b, c, n, lrud );
               duplicate = false;
               n = 0;
@@ -1934,7 +1936,7 @@ class TopoDroidExporter
                 printStartShotToTro( pw, ref_item, list );
                 start = false;
               }
-              computeLRUD( lrud, ref_item, list, false );
+              lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, l, b, c, n, lrud );
             }
             n = 1;
@@ -1953,7 +1955,7 @@ class TopoDroidExporter
           printStartShotToTro( pw, ref_item, list );
           start = false;
         }
-        computeLRUD( lrud, ref_item, list, false );
+        lrud = computeLRUD( ref_item, list, false );
         printShotToTro( pw, ref_item, l, b, c, n, lrud );
       }
 
