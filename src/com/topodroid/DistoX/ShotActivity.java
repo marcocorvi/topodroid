@@ -964,13 +964,13 @@ public class ShotActivity extends Activity
 
       int k1 = 0;
       // int k2 = 0;
-      if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // mBtnDownload
-        TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Download button, mode " + TopoDroidSetting.mConnectionMode );
+      if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
+        // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Download button, mode " + TopoDroidSetting.mConnectionMode );
         mDataDownloader.toggleDownload();
         setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnReset
-        TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Reset button, mode " + TopoDroidSetting.mConnectionMode );
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
+        // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Reset button, mode " + TopoDroidSetting.mConnectionMode );
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
@@ -983,15 +983,15 @@ public class ShotActivity extends Activity
             (new DeviceRemote( this, this, mApp )).show();
             break;
         }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnDisplay 
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
         new ShotDisplayDialog( this, this ).show();
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnSketch
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SKETCH
         new PlotListDialog( this, this, mApp ).show();
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnNote
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // NOTE
         if ( mApp.mySurvey != null ) {
           (new DistoXAnnotations( this, mApp.mySurvey )).show();
         }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnSplays mBtnStations
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
         // ArrayList<DistoXDBlock> list = numberSplays(); // SPLAYS
         // if ( list != null && list.size() > 0 ) {
         //   updateDisplay( );

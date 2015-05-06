@@ -110,57 +110,59 @@ public class DistoXProtocol
   }
 
   final byte[] mBuffer = new byte[8];
+  int mMaxTimeout = 8;
   
   private int getAvailable( final InputStream in, long timeout, int maxtimeout ) throws IOException
   {
-    final IOException[] maybeException = { null };
-    final int[] count = {0};
+    mMaxTimeout = maxtimeout;
     final int[] dataRead = {0};
     final int[] toRead = {8};
+    final int[] count = {0};
+    final IOException[] maybeException = { null };
     final Thread reader = new Thread() {
       public void run() {
-        // Log.v("DistoX", "reader run " + this.toString() );
+        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "reader run " + dataRead[0] + "/" + toRead[0] );
         try {
           // synchronized( dataRead ) 
           {
             count[0] = in.read( mBuffer, dataRead[0], toRead[0] );
-            toRead[0] -= count[0];
+            toRead[0]   -= count[0];
             dataRead[0] += count[0];
           }
         } catch ( ClosedByInterruptException e ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "reader closed by interrupt");
         } catch ( IOException e ) {
           maybeException[0] = e;
         }
-        // Log.v("DistoX", "reader done " + this.toString() );
+        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "reader done " + dataRead[0] + "/" + toRead[0] );
       }
     };
-
-
     reader.start();
-    for ( int k=0; k<maxtimeout; ++k) {
-      // Log.v("DistoX", "interrupt loop " + dataRead[0] );
+
+    for ( int k=0; k<mMaxTimeout; ++k) {
+      // Log.v("DistoX", "interrupt loop " + k + " " + dataRead[0] + "/" + toRead[0] );
       try {
         reader.join( timeout );
       } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "reader join-1 interrupted"); }
       if ( ! reader.isAlive() ) break;
       {
         Thread interruptor = new Thread() { public void run() {
-          // Log.v("DistoX", "interruptor run " + this.toString() );
-          boolean done = false;
-          while ( ! done ) {
+          // Log.v("DistoX", "interruptor run " + dataRead[0] );
+          for ( ; ; ) {
             // synchronized ( dataRead ) 
             {
               if ( dataRead[0] > 0 && toRead[0] > 0 ) { // FIXME
                 try { wait( 100 ); } catch ( InterruptedException e ) { }
               } else {
-                reader.interrupt(); 
-                done = true;
+                if ( reader.isAlive() ) reader.interrupt(); 
+                break;
               }
             }
           }
-          // Log.v("DistoX", "interruptor done " + this.toString() );
+          // Log.v("DistoX", "interruptor done " + dataRead[0] );
         } };
         interruptor.start();
+
         try {
           interruptor.join( 200 );
         } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "interruptor join interrupted"); }
@@ -324,15 +326,15 @@ public class DistoXProtocol
   {
     TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet no-timeout " + no_timeout );
     try {
+      final int maxtimeout = 8;
       int timeout = 0;
-      int maxtimeout = 8;
       int available = 0;
 
       if ( no_timeout ) {
         available = 8;
       } else { // do timeout
         if ( TopoDroidSetting.mZ6Workaround ) {
-          available = getAvailable( mIn, 200, maxtimeout );
+          available = getAvailable( mIn, 200, 2*maxtimeout );
         } else {
           while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) {
             ++ timeout;

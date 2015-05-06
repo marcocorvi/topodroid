@@ -515,8 +515,7 @@ public class DrawingSurface extends SurfaceView
     float x, y, x1, y1, x2, y2;
     boolean is_not_section = true;
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doLoadTherion file " + filename + " delta " + dx + " " + dy );
-    Log.v( "DistoX", "Load file " + filename + " delta " + dx + " " + dy );
+    TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
 

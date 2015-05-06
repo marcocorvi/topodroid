@@ -85,8 +85,8 @@ public class NumShot
     float dh = mLength * (float)Math.cos( mClino * TopoDroidUtil.M_PI / 180 );
     st.v = sf.v - dv; // v is downward
     st.h = sf.h + mExtend * dh;
-    float dn = dh * (float)Math.cos( (mBearing+mAnomaly) * TopoDroidUtil.M_PI / 180 );
-    float de = dh * (float)Math.sin( (mBearing+mAnomaly) * TopoDroidUtil.M_PI / 180 );
+    float dn = dh * (float)Math.cos( (mBearing-mAnomaly) * TopoDroidUtil.M_PI / 180 );
+    float de = dh * (float)Math.sin( (mBearing-mAnomaly) * TopoDroidUtil.M_PI / 180 );
     st.e = sf.e + de;
     st.s = sf.s - dn;
   }

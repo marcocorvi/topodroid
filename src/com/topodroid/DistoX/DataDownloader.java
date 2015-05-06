@@ -107,7 +107,7 @@ class DataDownloader
         return;
       }
       if ( ! mConnected ) {
-        mConnected = mApp.connect( mApp.mDevice.mAddress );
+        mConnected = mApp.connectDevice( mApp.mDevice.mAddress );
         // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** tryConnect status 0 --> " + mStatus );
       } else {
         mConnected = false;

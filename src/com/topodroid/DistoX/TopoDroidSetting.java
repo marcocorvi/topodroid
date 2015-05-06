@@ -94,7 +94,7 @@ class TopoDroidSetting
     "DISTOX_INIT_STATION",
     "DISTOX_BACKSIGHT",
     "DISTOX_Z6_WORKAROUND",          // 62
-    "DISTOX_MAG_ANOMALY",            // 63
+    "DISTOX_MAG_ANOMALY",
     "DISTOX_LOCALE",                 // 64
     "DISTOX_CWD",                    // must be last 
 
@@ -128,8 +128,9 @@ class TopoDroidSetting
 
   static int    mMinNrLegShots = 2;
   static String mInitStation = "0";
-  static boolean mBacksight = false;
-  static boolean mMagAnomaly = false;
+  static boolean mBacksight = false;     // whether to check backsight
+  static boolean mBacksightShot = false; // backsight shooting policy
+  static boolean mMagAnomaly = false;    // local magnetic anomaly survey
   static float  mSplayVertThrs = 80;
 
   // selection_radius = cutoff + closeness / zoom
@@ -311,6 +312,16 @@ class TopoDroidSetting
   //     editor.commit();
   //   }
   // }
+
+  static private void setMagAnomaly( boolean val )
+  {
+    mMagAnomaly = val;
+    if ( mMagAnomaly && mSurveyStations > 0 ) {
+      mBacksightShot = true;
+      mSurveyStations = 1;
+      mShotAfterSplays = true;
+    }
+  }
 
   static void loadPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
@@ -563,12 +574,11 @@ class TopoDroidSetting
     if ( mInitStation.length() == 0 ) mInitStation = "0";
     DistoXStationName.setInitialStation( mInitStation );
     
-    mBacksight = prefs.getBoolean( key[k++], false ); // DISTOX_BACKSIGHT
+    mBacksight = prefs.getBoolean( key[k++], false );     // DISTOX_BACKSIGHT
 
-    mZ6Workaround = prefs.getBoolean( key[k++], true ); // DISTOX_Z6_WORKAROUND
+    mZ6Workaround = prefs.getBoolean( key[k++], true );   // DISTOX_Z6_WORKAROUND
 
-    mMagAnomaly = prefs.getBoolean( key[k++], false ); // DISTOX_MAG_ANOMALY
-    if ( ! mLevelOverAdvanced ) mMagAnomaly = false;
+    setMagAnomaly( prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -587,7 +597,7 @@ class TopoDroidSetting
     mLevelOverAdvanced     = mActivityLevel > LEVEL_ADVANCED;
     mLevelOverExperimental = mActivityLevel > LEVEL_EXPERIMENTAL;
     if ( ! mLevelOverAdvanced ) {
-      mMagAnomaly = prefs.getBoolean( "DISTOX_MAG_ANOMALY", false );
+      mMagAnomaly = false;
     }
   }
 
@@ -875,8 +885,7 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_Z6_WORKAROUND
       mZ6Workaround = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_MAG_ANOMALY
-      mMagAnomaly = prefs.getBoolean( k, false );
-      if ( ! mLevelOverAdvanced ) mMagAnomaly = false;
+      setMagAnomaly( prefs.getBoolean( k, false ) );
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );
@@ -934,8 +943,15 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) {
       mSurveyStations = Integer.parseInt( SURVEY_STATION );
     }
-    mShotAfterSplays = ( mSurveyStations <= 2 );
-    if ( mSurveyStations > 2 ) mSurveyStations -= 2;
+    if ( mSurveyStations == 5 ) { // local magnetic anomaly
+      mBacksightShot = true;
+      mSurveyStations = 1;
+      mShotAfterSplays = true;
+    } else {
+      mBacksightShot = false;
+      mShotAfterSplays = ( mSurveyStations <= 2 );
+      if ( mSurveyStations > 2 ) mSurveyStations -= 2;
+    }
     // Log.v("DistoX", "mSurveyStations " + mSurveyStations + " mShotAfterSplays " + mShotAfterSplays );
   }
 

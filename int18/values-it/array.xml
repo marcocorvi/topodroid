@@ -50,6 +50,7 @@
      <item name="back">Splay, battuta inversa</item>
      <item name="for2">Battuta diretta, splay</item>
      <item name="back2">Battuta inversa, splay</item>
+     <item name="anomaly">Doppia battuta</item>
   </string-array>
   <string-array name="surveyStationsValue">
      <item name="no">0</item>
@@ -57,6 +58,7 @@
      <item name="back">2</item>
      <item name="for2">3</item>
      <item name="back2">4</item>
+     <item name="anomaly">5</item>
   </string-array>
 
   <string-array name="pickerType">

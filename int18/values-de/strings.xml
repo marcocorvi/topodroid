@@ -51,6 +51,7 @@
     <string name="calib_delete">Kalibrierung löschen</string>
     <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
     <string name="calib_no_name">Name erforderlich</string>
+
     <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
     <string name="calib_saved">Kalibrierung gespeichert</string>
     <string name="calib_updated">Kalibrierung aktualisiert</string>

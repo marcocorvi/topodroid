@@ -17,18 +17,21 @@ Blank shots, and repeated-legs can be hidden. Splay shots can also be hidden to 
 
 When you download data TopoDroid can assign automatically station numbers to them. A repeated measurement is considered a leg shot, the others are splay shots.  If you stick to a convention taking measurements TopoDroid automatic station assignment can be very handy. There are four conventions to automatically assign stations to shots. You can select the one that fits your habits through the settings.
 <ulist>
-<li>at the "From" station; take splays first and then forward leg shot(s). This is the default convention.</li>
-<li>at the "From" station you take the forward leg shot(s) first, and then the splays</li>
-<li>at the "To" station you take splays first and then backward leg shot(s)</li>
-<li>at the "To" station you take backward leg shot(s) first and then splays</li>
+<li>at the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
+<li>at the "From" station: you take the forward leg shot(s) first, and then the splays</li>
+<li>at the "To" station: you take splays first and then backward leg shot(s)</li>
+<li>at the "To" station: you take backward leg shot(s) first and then splays</li>
+<li>at a station: you take the backshot to the previous station, next the splay shots, and finally the forward shot to the next station.</li>
 </ulist><br><p>
 
+A survey with compensation of the local magnetic anomaly must use the last policy.<br>
 Examples of the four conventions (shots takes at the same station are grouped in parenthesis):
 <ulist>
 <li> ... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... </li>
 <li> ... (1-2 1-. 1-. 1-.) (2-3 2-. 2-.) ... </li>
 <li> ... (2-. 2-. 2-. 2-1) (3-. 3-. 3-2) ... </li>
-<li> ... (2-1 2-. 2-. 2-.) (3-2 2-. 2-.) ... </li>
+<li> ... (2-1 2-. 2-. 2-.) (3-2 3-. 3-.) ... </li>
+<li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... </li>
 </ulist><br><p>
 
 If you choose not to have the station assigned automatically, you must set them manually. Tapping on a shot data brings up the shot edit dialog. With it you can set the station(s) (if the shot is blank TopoDroid suggest them for you incrementing those of the previous leg), the direction of extend for the extended section (either left, right, vertical; if none is checked the shot is ignored in the extended profile), and the shot flag (whether it is a regular shot, or duplicate or surface: if no flag is set the shot is "regular").  Finally you can add a brief comment to the shot.  The values of length, azimuth and inclination of shots downloaded from the DistoX or of an imported survey cannot be modified.  For manually entered shots they are editable.  The <u>Reverse</u> button swaps the stations.  The arrow buttons let you move forward and backward over the leg shots.  The <u>OK</u> button save the changes and closes the dialog.  The <u>Save</u> button saves the changes but does not closes the dialog.<br><p>

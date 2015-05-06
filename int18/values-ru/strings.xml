@@ -21,13 +21,13 @@
     <string name="td_symbol_text">Вы хотите установить инструменты для рисования?\nМожно сделать это позже, установив приложение TdSymbol</string>
     <string name="td_symbol_ask">Не спрашивать снова</string>
 
-	<!-- string name="thp_danger">опасность</string -->
+    <!-- string name="thp_danger">опасность</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">лейбл</string>
-	<!-- string name="thl_danger">опасность</string -->
+    <!-- string name="thl_danger">опасность</string -->
     <string name="thl_user">пользовательский</string>
     <string name="thl_wall">стена</string>
-	<!-- string name="tha_danger">опасность</string -->
+    <!-- string name="tha_danger">опасность</string -->
     <string name="tha_user">пользовательский</string>
     <string name="tha_water">вода</string>
 
