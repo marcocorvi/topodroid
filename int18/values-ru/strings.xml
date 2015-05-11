@@ -84,7 +84,7 @@
     <string name="device_status_silent">Тихий %1$s</string>
     <string name="bt_reset">Сброс соединения bluetooth</string>
     <string name="save_as">сохранить как</string>
-    <!-- TODO string name="nickname">Nickname</string -->
+    <string name="nickname">Псевдоним</string>
 
     <string name="comment">комментарий</string>
     <string name="flag">Флаг</string>
@@ -598,7 +598,7 @@
     <string name="title_refs">Привязки абриса</string>
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_shift">Сдвиг</string>
-    <!-- TODO string name="title_shot_delete">Delete shot ?</string -->
+    <string name="title_shot_delete">Удалить отрезок ?</string>
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Описание съёмки</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
@@ -645,8 +645,8 @@
   <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
   <string name="pref_auto_reconnect_title">Авто соединение</string>
   <string name="pref_auto_reconnect_summary">Переподключиться при потере соединенияX</string>
-  <!-- TODO string name="pref_z6_workaround_title">Z6 workaround</string -->
-  <!-- TODO string name="pref_z6_workaround_summary">Z6 workaround data download</string -->
+  <string name="pref_z6_workaround_title"> Решение для Z6</string>
+  <string name="pref_z6_workaround_summary">Z6 решение выгрузка данных</string>
   <string name="pref_crs_title">C R S система координат </string>
   <string name="pref_crs_summary">CRS имя</string>
   <string name="pref_crs_message">Введите имя CRS как в Proj4</string>
@@ -688,8 +688,8 @@
   <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
-  <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
-  <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
+  <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
+  <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
 
   <string name="pref_team_title">Группа съёмемки</string>
   <string name="pref_team_summary">Группа съёмемки</string>
