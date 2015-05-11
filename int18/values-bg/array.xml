@@ -146,7 +146,7 @@
      <item name="back">Странични, обратна отсечка</item>
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
-     <item name="anomaly">Backsight</item> <!-- TODO -->
+     <item name="anomaly">Обратна отсечка, странични, права</item>
   </string-array>
   <string-array name="surveyStationsValue">
      <item name="no">0</item>

@@ -243,8 +243,8 @@
     <string name="photo_sensor">сензор</string>
     <string name="photo_external">измерване</string>
     <string name="photo_sensor_prompt">Изберете снимка или сензор</string>
-    <string name="photo_shot">добавяне на измерване</string>
-    <string name="photo_survey">Раделяне на картировка</string>
+    <string name="photo_shot">Добавяне на измерване</string>
+    <string name="photo_survey">Разделяне на картировка</string>
     <string name="picture_no_station">Необходимо е име на репер</string>
     <string name="plot_delete">Изтриване на скица?</string>
     <string name="plot_duplicate_name">Дублирано име на скица</string>
@@ -287,7 +287,7 @@
     <!-- string name="shot_compass">compass</string -->
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
-    <string name="shot_leg">Повтаряще се отсечка</string>
+    <string name="shot_leg">Повтаряща се отсечка</string>
     <string name="shot_all_splay">Група странични изм.</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
@@ -655,8 +655,8 @@
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
   <string name="pref_auto_reconnect_summary">Автоматично свързване при загуба на връзката</string>
-  <!-- TODO string name="pref_z6_workaround_title">Z6 workaround</string -->
-  <!-- TODO string name="pref_z6_workaround_summary">Z6 workaround data download</string -->
+  <string name="pref_z6_workaround_title">Z6 корекция</string>
+  <string name="pref_z6_workaround_summary">Корекция на блокиране при сваляне на данни от някои устройства</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS име</string>
   <string name="pref_crs_message">Въведете CRS име както в Proj4</string>
@@ -699,8 +699,8 @@
   <string name="pref_leg_message">Толеранс между измерванията за отсечка на антената</string>
   <string name="pref_backsight_title">Обратна отсечка</string>
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
-  <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
-  <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
+  <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
+  <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
 
   <string name="pref_team_title">Картировачи</string>
   <string name="pref_team_summary">Екип картировачи</string>
