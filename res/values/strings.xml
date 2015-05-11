@@ -82,6 +82,7 @@
     <string name="device_status_silent">Silent %1$s</string>
     <string name="bt_reset">Reset bluetooth connection</string>
     <string name="save_as">save as</string>
+    <string name="nickname">Nickname</string>
 
     <string name="comment">comment</string>
     <string name="flag">Flag</string>
@@ -606,6 +607,7 @@
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
     <string name="title_shift">Shift</string>
+    <string name="title_shot_delete">Delete shot ?</string>
     <string name="title_stats">Statistics</string>
     <string name="title_survey">Survey Info</string>
     <string name="title_survey_export">Export survey as</string>

@@ -65,8 +65,8 @@ public class DrawingLineSectionDialog extends Dialog
     super( context );
     mParent = context;
     mApp  = app;
-    mExists = exists; // whether the section exists or it is being created
-    mHSection = h_section;
+    mExists = exists;      // whether the section exists or it is being created
+    mHSection = h_section; // if the line has "-id" the h_section is taken from the PlotInfo
     mLine = line;
     mFrom = from;
     mTo   = to;
@@ -82,7 +82,7 @@ public class DrawingLineSectionDialog extends Dialog
         break;
       }
     } 
-    if ( mId == null ) {
+    if ( mId == null ) {  // line does not have ID yet 
       mId = TopoDroidApp.mData.getNextSectionId( mParent.getSID() );
       String option = "-id " + mId;
       mLine.addOption( option );
@@ -182,6 +182,7 @@ public class DrawingLineSectionDialog extends Dialog
   public void onBackPressed()
   {
     if ( ! mExists ) {
+      // if pressed BACK and the section did not exist, tell the parent to delete the "section" line
       mParent.deleteLine( mLine, mId );
     }
     dismiss();

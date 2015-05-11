@@ -1292,8 +1292,8 @@ class TopoDroidExporter
     float sc0 = (float)Math.sin( b.mClino * grad2rad );
     float cb0 = n0;
     float sb0 = e0;
-    float sc02 = sc0 * sc0;
-    float cc02 = 1.0f - sc02;
+    // float sc02 = sc0 * sc0;
+    // float cc02 = 1.0f - sc02;
     String station = ( at_from ) ? b.mFrom : b.mTo;
     
     for ( DistoXDBlock item : list ) {
@@ -1311,16 +1311,28 @@ class TopoDroidExporter
         float cc = (float)Math.cos( item.mClino * grad2rad );
         float sc = (float)Math.sin( item.mClino * grad2rad );
         float len = item.mLength;
+        float cbb0 = sb*sb0 + cb*cb0; // cosine of angle between block and item
+
+
+        // skip splays too close to shot direction // FIXME setting
+        if ( Math.abs( cbb0 ) > 0.90 ) continue;  // 0.90 = cos( 25 deg )
+
+        // version [1]
         // float z1 = sc02 * sc;      // first point: horizontal projection [times sc02]
         // float n1 = sc02 * cc * cb;
         // float e1 = sc02 * cc * sb;
-        float cbb0 = sb*sb0 + cb*cb0;
-        // len * ( second_point - first_point )
-        float z1 = len * ( sc * cc02 - cc * cc0 * sc0 * cbb0 + sc02 * sc);
-        float n1 = len * cc * ( cc02 * ( cb - cb0 * cbb0 )   + sc02 * cb);
-        float e1 = len * cc * ( cc02 * ( sb - sb0 * cbb0 )   + sc02 * sb);
+        // version [2]
+        // // len * ( second_point - first_point )
+        // float z1 = len * ( sc * cc02 - cc * cc0 * sc0 * cbb0 + sc02 * sc);
+        // float n1 = len * cc * ( cc02 * ( cb - cb0 * cbb0 )   + sc02 * cb);
+        // float e1 = len * cc * ( cc02 * ( sb - sb0 * cbb0 )   + sc02 * sb);
+        // version [3]
+        float z1 = len * sc;
+        float n1 = len * cc * cb;
+        float e1 = len * cc * sb;
         if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
         else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
+
         float rl = e1 * n0 - n1 * e0;
         if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
         else            { if ( -rl > lrud.l ) lrud.l = -rl; }

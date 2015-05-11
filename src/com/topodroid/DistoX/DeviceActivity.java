@@ -65,7 +65,7 @@ public class DeviceActivity extends Activity
                             implements View.OnClickListener
                             , OnItemClickListener
                             , IEnableButtons
-                            // , OnItemLongClickListener
+                            , OnItemLongClickListener
                             // , RadioGroup.OnCheckedChangeListener
 {
   private static final int REQUEST_DEVICE    = 1;
@@ -74,23 +74,6 @@ public class DeviceActivity extends Activity
 
   private TextView mTvAddress;
 
-  // private static int icons00no[];
-  // private static int iconsno[] = {
-  //                       0,
-  //                       R.drawable.ic_toggle_no,
-  //                       0,
-  //                       R.drawable.ic_read_no,
-  //                       0,
-  //                       // R.drawable.ic_remote_no
-  //                    };
-  // private static int ixonsno[] = {
-  //                       0,
-  //                       R.drawable.ix_toggle_no,
-  //                       0,
-  //                       R.drawable.ix_read_no,
-  //                       0,
-  //                       // R.drawable.ix_remote_no
-  //                     };
   private static int izonsno[] = {
                         0,
                         R.drawable.iz_toggle_no,
@@ -100,23 +83,6 @@ public class DeviceActivity extends Activity
                         // R.drawable.iz_remote_no
                      };
 
-  // private static int icons00[];
-  // private static int icons[] = {
-  //                       R.drawable.ic_bt,
-  //                       R.drawable.ic_toggle,
-  //                       R.drawable.ic_sdcard,
-  //                       R.drawable.ic_read,
-  //                       R.drawable.ic_info
-  //                       // R.drawable.ic_remote,
-  //                    };
-  // private static int ixons[] = {
-  //                       R.drawable.ix_bt,
-  //                       R.drawable.ix_toggle,
-  //                       R.drawable.ix_sdcard,
-  //                       R.drawable.ix_read,
-  //                       R.drawable.ix_info
-  //                       // R.drawable.ix_remote,
-  //                     };
   private static int izons[] = {
                         R.drawable.iz_bt,
                         R.drawable.iz_toggle,
@@ -168,13 +134,6 @@ public class DeviceActivity extends Activity
   // private String mAddress;
   private Device mDevice;
 
-  private MenuItem mMIscan;
-  private MenuItem mMIdetach;
-  private MenuItem mMIcalibs = null;
-  private MenuItem mMIfirmware = null;
-  private MenuItem mMIoptions;
-  private MenuItem mMIhelp;
-
 // -------------------------------------------------------------------
   private void setState()
   {
@@ -182,16 +141,10 @@ public class DeviceActivity extends Activity
     if ( mDevice != null ) { // mAddress.length() > 0 ) {
       mTvAddress.setTextColor( 0xffffffff );
       mTvAddress.setText( String.format( getResources().getString( R.string.using ), mDevice.mName, mDevice.mAddress ) );
-      if ( mMIfirmware != null ) {
-        mMIfirmware.setEnabled( true );
-      }
       // setButtonRemote();
     } else {
       mTvAddress.setTextColor( 0xffff0000 );
       mTvAddress.setText( R.string.no_device_address );
-      if ( mMIfirmware != null ) {
-        mMIfirmware.setEnabled( false );
-      }
     }
 
     updateList();
@@ -225,6 +178,13 @@ public class DeviceActivity extends Activity
   void setDeviceModel( Device device, int model )
   {
     mApp.setDeviceModel( device, model );
+    updateList();
+  }
+
+  void setDeviceName( Device device, String nickname )
+  {
+    mApp.setDeviceName( device, nickname );
+    updateList();
   }
 
 
@@ -273,7 +233,7 @@ public class DeviceActivity extends Activity
     mList.setAdapter( mArrayAdapter );
     mList.setOnItemClickListener( this );
     // mList.setLongClickable( true );
-    // mList.setOnItemLongClickListener( this );
+    mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
 
     setState();
@@ -311,14 +271,15 @@ public class DeviceActivity extends Activity
             }
           }
           if ( dev != null ) {
-            // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "device " + name );
-            if ( dev.mModel.startsWith("DistoX-") ) {      // DistoX2 X310
-              mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
-            } else if ( dev.mModel.equals("DistoX") ) {    // DistoX A3
-              mArrayAdapter.add( " A3 " + dev.mName + " " + addr );
-            } else {
-              // do not add
-            }
+            // // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "device " + name );
+            // if ( dev.mModel.startsWith("DistoX-") ) {      // DistoX2 X310
+            //   mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
+            // } else if ( dev.mModel.equals("DistoX") ) {    // DistoX A3
+            //   mArrayAdapter.add( " A3 " + dev.mName + " " + addr );
+            // } else {
+            //   // do not add
+            // }
+            mArrayAdapter.add( dev.toString() );
           }
         }
       }
@@ -336,6 +297,10 @@ public class DeviceActivity extends Activity
         scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
         startActivityForResult( scanIntent, REQUEST_DEVICE );
         Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
+      // } else if ( p++ == pos ) { // NAME
+      //   if ( mApp.mDevice != null ) {
+      //     (new DeviceNameDialog( this, this, mApp.mDevice )).show();
+      //   }
       } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DETACH
         detachDevice();
       } else if ( mApp.VERSION30 && p++ == pos ) { // CALIB
@@ -374,8 +339,10 @@ public class DeviceActivity extends Activity
     {
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
-      String address = buf.substring(k+1);
-      if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) {
+      String[] vals = item.toString().split(" ", 3 );
+      // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
+      String address = vals[2]; // buf.substring(k+1);
+      if ( mDevice == null || ! ( address.equals( mDevice.mAddress ) || address.equals( mDevice.mNickname ) ) ) {
         mApp.setDevice( address );
         mDevice = mApp.mDevice;
         // mAddress = address;
@@ -688,6 +655,13 @@ public class DeviceActivity extends Activity
   // ---------------------------------------------------------
   /* MENU
 
+  private MenuItem mMIscan;
+  private MenuItem mMIdetach;
+  private MenuItem mMIcalibs = null;
+  private MenuItem mMIfirmware = null;
+  private MenuItem mMIoptions;
+  private MenuItem mMIhelp;
+
   @Override
   public boolean onCreateOptionsMenu(Menu menu) 
   {
@@ -752,7 +726,7 @@ public class DeviceActivity extends Activity
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[0] ) );
     if ( TopoDroidSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( mApp.VERSION30 )   mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( mApp.VERSION30 ) mMenuAdapter.add( res.getString( menus[2] ) );
     if ( TopoDroidSetting.mBootloader ) mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
@@ -795,14 +769,18 @@ public class DeviceActivity extends Activity
     return ( ret == null )? 0 : ret[0];
   }
 
-  // @Override 
-  // public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
-  // {
-  //   String item_str = (String) mArrayAdapter.getItem(pos); // "model name addr"
-  //   String val[] = item_str.split(" ");
-
-  //   return true;
-  // }
+  @Override 
+  public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    String item_str = (String) mArrayAdapter.getItem(pos); // "model name addr"
+    String vals[] = item_str.split(" ", 3);
+    String address = vals[2]; // address or nickname
+    Device device = mApp.mData.getDevice( address );
+    if ( device != null ) {
+      (new DeviceNameDialog( this, this, device )).show();
+    }
+    return true;
+  }
 
   void openCalibration( String name )
   {

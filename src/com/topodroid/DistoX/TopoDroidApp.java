@@ -359,6 +359,14 @@ public class TopoDroidApp extends Application
     }
   }
 
+  void setDeviceName( Device device, String nickname )
+  {
+    if ( device != null /* && device == mDevice */ ) {
+      mData.updateDeviceNickname( device.mAddress, nickname );
+      device.mNickname = nickname;
+    }
+  }
+
   // called by DeviceActivity::onResume()
   public void resumeComm()
   {

@@ -17,10 +17,11 @@ import android.util.Log;
 
 class Device
 {
-  String mAddress; // device mac address
-  String mModel;   // device model (type string)
-  String mName;    // device name (X310 only)
-  int mType;       // device type
+  String mAddress;  // device mac address
+  String mModel;    // device model (type string)
+  String mName;     // device name (X310 only)
+  String mNickname; // device nickname
+  int mType;        // device type
   int mHead;
   int mTail;
 
@@ -48,29 +49,39 @@ class Device
     return DISTO_NONE;
   }
 
-  Device( String addr, String model, int h, int t, String name )
+  // nickname can be null
+  Device( String addr, String model, int h, int t, String name, String nickname )
   {
     mAddress = addr;
     mModel = model;
     mType = stringToType( model );
     mName = ( name == null )? "-" : name;
     if ( mName.equals("null") ) mName = "-";
+    mNickname = nickname;
     mHead = h;
     mTail = t;
   }
 
-  Device( String addr, String model, String name )
+  // nickname can be null
+  Device( String addr, String model, String name, String nickname )
   {
     mAddress = addr;
     mModel = model;
     mType = stringToType( model );
     mName = ( name == null )? "-" : name;
     if ( mName.equals("null") ) mName = "-";
+    mNickname = nickname;
     mHead = 0;
     mTail = 0;
   }
 
-  public String toString() { return typeString[ mType ] + " " + mName + " " + mAddress; }
+  public String toString() 
+  { 
+    if ( mNickname != null && mNickname.length() > 0 ) {
+      return typeString[ mType ] + " " + mName + " " + mNickname;
+    }
+    return typeString[ mType ] + " " + mName + " " + mAddress;
+  }
 
   public String toSimpleString() { return typeSimpleString[ mType ] + " " + mName; }
   

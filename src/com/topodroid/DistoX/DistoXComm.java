@@ -342,7 +342,7 @@ public class DistoXComm
 
   private void closeProtocol()
   {
-    if ( mProtocol != null ) mProtocol.closeIOstreams();
+    // if ( mProtocol != null ) mProtocol.closeIOstreams();
     mProtocol = null;
   }
 

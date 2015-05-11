@@ -9,9 +9,9 @@ The first time you start the app a welcome message is shown: read it! It is impo
 <h4>MENUS</h4>
 <ulist>
 <li><u>Palette</u> allows to choose the drawing tools that are enabled. TopoDroid has many drawing tools, several of which you might not need. Having only the relevant tools enabled in the palette, makes easier to switch from one to the other in the tool picker dialog.</li>
-<li><u>Cosurvey</u> opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying [experimental level only].</li>
+<li><u>Cosurvey</u> [E] opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying [experimental level only].</li>
 <li><u>Settings</u>. With this you can choose all the program settings: the global ones and those of surveying, sketching, calibrating, and devices. There are many adjustable settings. The default values should be reasonable enough. One thing you might want to change are the "display units" for lengths; you can choose between meters (default) and feet. Beware that this is just a unit conversion in the display; internally, in the database, TopoDroid stores lengths in meters. Other settings you might want to change are the buttons and texts sizes, and the drawing units</li>
-<li><u>Logs</u> allows to decide what to log and whether to save to the system log or to a file (in the TopoDroid directory). By default logs are sent to the system log and only error messages are logged. Logging is mostly for debugging [experimental level only]</li>
+<li><u>Logs</u> [E] allows to decide what to log and whether to save to the system log or to a file (in the TopoDroid directory). By default logs are sent to the system log and only error messages are logged. Logging is mostly for debugging [experimental level only]</li>
 <li><u>About</u>: the program welcome message and disclaimer</li>
 <li><u>Help</u> shows a brief descriptions of buttons and menus. At the top-right corner there is a button that opens this user manual. Other TopoDroid windows have similar <u>Help</u> menus</li>
 </ulist><br><p>
@@ -21,7 +21,7 @@ The first time you start the app a welcome message is shown: read it! It is impo
 <li><u>Device activity</u> (DistoX icon): switches to the Device (management) window</li>
 <li><u>Add</u> (a plus sign): used to create a new survey</li>
 <li><u>Import</u> (a vertical arrow): used to import ZIP archives created with TopoDroid or survey files (Therion, Compass, VisualTopo, or PocketTopo).</li>
-<li>The optional buttons (shown only at the highest activity level) are for the <i>ThManager</i> (Therion manager) and the <i>SQLite viewer</i>; both require external apps</li>
+<li>The optional buttons [E] are for the <i>ThManager</i> (Therion manager) and the <i>SQLite viewer</i>; both require external apps</li>
 </ulist><br><p>
 
 <h4>SETTINGS</h4>
@@ -31,7 +31,7 @@ The first time you start the app a welcome message is shown: read it! It is impo
 <li><i>Text size</i> of items in the lists</li>
 <li><i>Buttons size</i>, either "small" or "large". The small buttons are suitablke to a 5" screen. You might want to switch to large buttons if you use a 7" tablet.</li>
 <li><i>Bootloader</i>: whether to show the bootloader menu in the Device window. You need it only when you have to upgrade your DistoX2 firmware. So leave it unchecked, and save one menu on the Device window</li>
-<li><i>Cosurveying</i> activate/deactivate the cosurveying service</li>
+<li><i>Cosurveying</i> [E] activate/deactivate the cosurveying service</li>
 <li><i>Activity level</i>: TopoDroid has four activity levels, differing in the amount of functions that are enabled. The default level ("normal") provides the most common functions. In this way the interface can be kept free of unnecessary buttons (and menus). </li>
 </ulist><br><p>
 
@@ -42,7 +42,7 @@ TopoDroid can import the survey files in the followng formats:
 <li>Therion: ".th" data files, with simple data format ("normal from to length compass clino" and optionally LRUD).
 Therion scrap are not imported.</li>
 <li>Compass ".dat" files (not fully tested)</li>
-<li>VisualTopo ".tro" files (experimental)</li>
+<li>VisualTopo ".tro" files (not fully tested)</li>
 <li>PocketTopo ".top" files. Data and drawings are imported (not fully tested)</li>
 <li>TopoDroid ZIP archives. These are special zip files with tke informations to repopulate the database, the drawings (".th2" files), the annotation file, and the photoes.</li>
 </ulist><br>
@@ -51,7 +51,7 @@ Zip archives are searched in the "zip" directory (that is where TopoDroid saves 
 <h4>Logging</h4>
 Logging is important to solve problems where the program does not behave as expected. For example when the outcome of a computation does not agree with that obtained by other means, or a user input is not properly parsed. There are several log-flags to limit the logs to those necessary to find the cause of the problem. By default only "error" (ie, when the program detects something that should not have happened) are logged.<br><p>
 
-Logs are different from software crashes. Crashes are due to the program misbehaving in the system, and are detected by the system, that ends the program. You should report crashes (and ANR) via Google Play so that a stack trace is attached and they can be fixed more easily. Please, take the time to add a comment about what the program was doing when it crashed.<br><p>
+Logs [E] are different from software crashes. Crashes are due to the program misbehaving in the system, and are detected by the system, that ends the program. You should report crashes (and ANR) via Google Play so that a stack trace is attached and they can be fixed more easily. Please, take the time to add a comment about what the program was doing when it crashed.<br><p>
 
 <hr>
 If <b>bluetooth</b> is not on, the app asks whether to turn it on. Without bluetooth it cannot communicate with the DistoX and the survey data can only be entered manually. In this case the "Download" button in the Shot window is hidden, and that in the Sketch window is replaced by the "Add" button.<br><p>

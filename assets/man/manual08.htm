@@ -3,7 +3,7 @@
 
 <i>Back to the main window. The list of surveys is empty, but you are finally ready for your first survey. Tap on the <u>Add</u> button (the "plus" sign). You get a dialog to specify the survey informations: <u>name</u>, <u>date</u>, <u>team</u>, <u>initial</u> survey station, magnetic <u>declination</u>, and a brief <u>description</u>.</i><br><p>
 
-The survey name is mandatory. It must be unique in the database. The survey names are used to list surveys in the main window and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database). The date is pre-filled with the current date. Team and description are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them. The magnetic declination is 0.0 by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS.<br><p>
+The survey name is mandatory. It must be unique in the database. The survey names are used to list surveys in the main window and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database). The date is pre-filled with the current date. Team and description are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them. The magnetic declination is 0.0 by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].<br><p>
 
 <b>WARNING.<br>
 The name of the survey cannot contain the character '/' (slash), which is the pathname separator.<br>
@@ -28,10 +28,10 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <ulist>
 <li><u>Survey info</u>: to open the survey information window</li>
 <li><u>Recover</u>: to recover a deleted item (shot or sketch)</li>
-<li><u>Photo</u>: lists the pictures taken for this survey</li>
-<li><u>Sensor</u>: lists the sensor data taken for this survey</li>
+<li><u>Photo</u> [A]: lists the pictures taken for this survey</li>
+<li><u>Sensor</u> [A]: lists the sensor data taken for this survey</li>
 <li><u>3D</u>: to display the survey in 3D (need the app </i>Cave3D</i>)</li>
-<li><u>DistoX</u>: opens the Device window</li>
+<li><u>DistoX</u> [A]: opens the Device window</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ulist><br>
@@ -94,9 +94,16 @@ The buttons acts on the selected station:
 <li>delete the saved station</li>
 </ulist><br><p>
 
+<h4>DISTOX DATA DOWNLOAD</h4>
+The <u>Download</u> button starts a connection with the DistoX to download data.  While the connection is active it stays red. If you are using the "on-demand" download-mode the connection is closed when there are no more data to retrieve. With the "continuous" download-mode the connection remains open (and data are continuously downloaded as soon as the measurements are taken) until the DistoX and the Android lose the Bluetooth connection.  Which mode is best suited for you depends on your habits. With the on-demand mode you can concentrate on sketching and other tasks without being bothered by incoming data, and when you download the data you can focus on them (they are highlighted blue). On the other hand on-demand download requires pauses to get the data, and these are especially long if you took several shots in the between.<br><p>
+
+In the Bluetooth connection with the DistoX is broken (eg. the DistoX gets too far from the Android, or it is switched off) the data download is interrupted. In continuous-mode, if the "Auto reconnect" setting is selected, TopoDroid retries to connect to the DistoX every few seconds.<br><p>
+
+When the Shot activity is closed the data download connection is terminated. The download connection is not interrupted when the activity is paused (the display switches off). If you open a sketch while the download connection is active in "continuous" mode, the connection is maintained and the data are downloaded (and displayed in the sketch).<br><p>
+
 <h4>MANUAL DATA INPUT</h4>
 If you do not have a DistoX you can still enter the shot data manually. 
-Tapping the "Add" button opens the dialog for the shot data input. 
+Tapping the <u>Add</u> button opens the dialog for the shot data input. 
 You must enter the station names and the shot data (length, azimuth, and clino).
 Additionally you can type the LRUD, and select whether these refer to the FROM station or to the TO station.
 There is a button to take the direction (azimuth and clino) with the Android sensors.
@@ -105,13 +112,5 @@ Another button allow to switch the stations, ie, reverse the shot.<br><p>
 
 The "Save" button at the bottom inserts the shot into the survey, and updates the station names incrementing them so that the dialog is ready to input the next shot. The "OK" button inserts the shot in the survey, and closes
 the dialog. If LRUD are specified the respective splay shots are also inserted.<br><p>
-
-<hr>
-The <u>Download</u> button starts a connection with the DistoX to download data.  While the connection is active it stays red. If you are using the "on-demand" download-mode the connection is closed when there are no more data to retrieve. With the "continuous" download-mode the connection remains open (and data are continuously downloaded as soon as the measurements are taken) until the DistoX and the Android lose the Bluetooth connection.  Which mode is best suited for you depends on your habits. With the on-demand mode you can concentrate on sketching and other tasks without being bothered by incoming data, and when you download the data you can focus on them (they are highlighted blue). On the other hand on-demand download requires pauses to get the data, and these are especially long if you took several shots in the between.<br><p>
-
-In the Bluetooth connection with the DistoX is broken (eg. the DistoX gets too far from the Android, or it is switched off) the data download is interrupted. In continuous-mode, if the "Auto reconnect" setting is selected, TopoDroid retries to connect to the DistoX every few seconds.<br><p>
-
-When the Shot activity is closed the data download connection is terminated. The download connection is not interrupted when the activity is paused (the display switches off). If you open a sketch while the download connection is active in "continuous" mode, the connection is maintained and the data are downloaded (and displayed in the sketch).<br><p>
-
 
 </body></html>

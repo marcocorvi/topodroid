@@ -63,9 +63,9 @@ class ItemPickerDialog extends Dialog
   //* private ListView    mList = null;
   private GridView    mList = null;
   private GridView    mGrid = null;
-  private ItemAdapter mPointAdapter;
-  private ItemAdapter mLineAdapter;
-  private ItemAdapter mAreaAdapter;
+  private ItemAdapter mPointAdapter = null;
+  private ItemAdapter mLineAdapter  = null;
+  private ItemAdapter mAreaAdapter  = null;
   private boolean mUseText = false;
   private ItemAdapter mAdapter = null;
 
@@ -159,13 +159,13 @@ class ItemPickerDialog extends Dialog
     int index = 0;
     switch ( mItemType ) {
       case DrawingActivity.SYMBOL_POINT:
-        index = mPointAdapter.getSelectedPos();
+        if ( mPointAdapter != null ) index = mPointAdapter.getSelectedPos();
         break;
       case DrawingActivity.SYMBOL_LINE:
-        index = mLineAdapter.getSelectedPos();
+        if ( mLineAdapter != null ) index = mLineAdapter.getSelectedPos();
         break;
       case DrawingActivity.SYMBOL_AREA:
-        index = mAreaAdapter.getSelectedPos();
+        if ( mAreaAdapter != null ) index = mAreaAdapter.getSelectedPos();
         break;
     }
     return index;
@@ -173,11 +173,9 @@ class ItemPickerDialog extends Dialog
 
   void createAdapters()
   {
-    mPointAdapter = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
-    mLineAdapter  = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
-    mAreaAdapter  = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
 
     if ( TopoDroidSetting.mLevelOverBasic ) {
+      mPointAdapter = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
       int np = mPointLib.mAnyPointNr;
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = mPointLib.getAnyPoint( i );
@@ -185,8 +183,10 @@ class ItemPickerDialog extends Dialog
           mPointAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_POINT, i, p, mUseText ) );
         }
       }
+      mPointAdapter.setSelectedItem( mParent.mCurrentPoint );
     }
 
+    mLineAdapter  = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
     int nl = mLineLib.mAnyLineNr;
     for ( int j=0; j<nl; ++j ) {
       SymbolLine l = mLineLib.getAnyLine( j );
@@ -194,8 +194,10 @@ class ItemPickerDialog extends Dialog
         mLineAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_LINE, j, l, mUseText ) );
       }
     }
+    mLineAdapter.setSelectedItem( mParent.mCurrentLine ); 
 
     if ( TopoDroidSetting.mLevelOverBasic ) {
+      mAreaAdapter  = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
       int na = mAreaLib.mAnyAreaNr;
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = mAreaLib.getAnyArea( k );
@@ -203,11 +205,8 @@ class ItemPickerDialog extends Dialog
           mAreaAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_AREA, k, a, mUseText ) );
         }
       }
+      mAreaAdapter.setSelectedItem( mParent.mCurrentArea );
     }
-
-    mPointAdapter.setSelectedItem( mParent.mCurrentPoint );
-    mLineAdapter.setSelectedItem( mParent.mCurrentLine ); 
-    mAreaAdapter.setSelectedItem( mParent.mCurrentArea );
   }
 
   private void updateList()
@@ -257,35 +256,33 @@ class ItemPickerDialog extends Dialog
     String title = "";
     switch ( mItemType ) {
       case DrawingActivity.SYMBOL_POINT: 
-        if ( TopoDroidSetting.mLevelOverBasic ) {
+        if ( mPointAdapter != null && TopoDroidSetting.mLevelOverBasic ) {
           is = mPointAdapter.get( index );
           // Log.v( TopoDroidLog.TAG, "setTypeAndItem type point pos " + index + " index " + is.mIndex );
           mParent.mCurrentPoint = is.mIndex;
           mParent.pointSelected( is.mIndex ); // mPointAdapter.getSelectedItem() );
-          title = mContext.getResources().getString( R.string.POINT ) + " " +
-                  mPointLib.getAnyPointName( is.mIndex );
+          title = mContext.getResources().getString( R.string.POINT ) + " " + mPointLib.getAnyPointName( is.mIndex );
         }
         break;
       case DrawingActivity.SYMBOL_LINE: 
-        // mLinePos = index;
-        is = mLineAdapter.get( index );
-        // Log.v( TopoDroidLog.TAG, "setTypeAndItem type line pos " + index + " index " + is.mIndex );
-        if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-          mParent.mCurrentLine = is.mIndex;
-          mParent.lineSelected( is.mIndex ); // mLineAdapter.getSelectedItem() );
-        } else {
+        if ( mLineAdapter != null ) {
+          is = mLineAdapter.get( index );
+          // Log.v( TopoDroidLog.TAG, "setTypeAndItem type line pos " + index + " index " + is.mIndex );
+          if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+            mParent.mCurrentLine = is.mIndex;
+            mParent.lineSelected( is.mIndex ); // mLineAdapter.getSelectedItem() );
+          } else {
+          }
+          title = mContext.getResources().getString( R.string.LINE ) + " " + mLineLib.getLineName( is.mIndex );
         }
-        title = mContext.getResources().getString( R.string.LINE ) + " " +
-                mLineLib.getLineName( is.mIndex );
         break;
       case DrawingActivity.SYMBOL_AREA: 
-        if ( TopoDroidSetting.mLevelOverBasic ) {
+        if ( mAreaAdapter != null && TopoDroidSetting.mLevelOverBasic ) {
           // mAreaPos = index;
           is = mAreaAdapter.get( index );
           mParent.mCurrentArea = is.mIndex;
           mParent.areaSelected( is.mIndex ); // mAreaAdapter.getSelectedItem() );
-          title = mContext.getResources().getString( R.string.AREA ) + " " +
-                  mAreaLib.getAreaName( is.mIndex );
+          title = mContext.getResources().getString( R.string.AREA ) + " " + mAreaLib.getAreaName( is.mIndex );
         }
         break;
     }
@@ -318,6 +315,7 @@ class ItemPickerDialog extends Dialog
 
   void rotatePoint( int angle )
   {
+    if ( mPointAdapter == null ) return;
     if ( TopoDroidSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
       // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
       mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );

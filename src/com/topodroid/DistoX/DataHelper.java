@@ -40,8 +40,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "23";
-  static final int DATABASE_VERSION = 23;
+  static final String DB_VERSION = "24";
+  static final int DATABASE_VERSION = 24;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -125,6 +125,7 @@ public class DataHelper extends DataSetObservable
 
   private SQLiteStatement updateDeviceHeadTailStmt;
   private SQLiteStatement updateDeviceModelStmt;
+  private SQLiteStatement updateDeviceNicknameStmt;
 
   private String[] mShotFields; // select shot fields
 
@@ -249,6 +250,7 @@ public class DataHelper extends DataSetObservable
         dropFixedStmt  = myDB.compileStatement( "DELETE FROM fixeds where surveyId=? and station=? and status=1" );
         updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
         updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
+        updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
 
      } catch ( SQLiteException e ) {
        myDB = null;
@@ -1672,8 +1674,8 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
-       "surveyId=? and status=? and ( fStation=? or tStation=? )", 
-       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station1, station2 },
+       "surveyId=? and status=? and ( fStation=? or tStation=? or fStation=? or tStation=? )",
+       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station1, station2, station2, station1 },
        null,  // groupBy
        null,  // having
        "id" ); // order by
@@ -2606,7 +2608,7 @@ public class DataHelper extends DataSetObservable
   {
     ArrayList<Device> ret = new ArrayList<Device>();
     // if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name" }, 
+    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
                                 null, null, null, null, null );
     if (cursor != null ) {
       if ( cursor.moveToFirst() ) {
@@ -2615,7 +2617,8 @@ public class DataHelper extends DataSetObservable
                                cursor.getString(1),
                                (int)cursor.getLong(2),
                                (int)cursor.getLong(3),
-                               cursor.getString(4)
+                               cursor.getString(4),
+                               cursor.getString(5)
                   ) );
         } while (cursor.moveToNext());
       }
@@ -2624,11 +2627,41 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  // get device by address or by nickname
   public Device getDevice( String addr )
   {
+    // if ( myDB == null ) return null;
+    Device ret = getDeviceByAddress( addr );
+    if ( ret == null ) {
+      ret = getDeviceByNickname( addr );
+    }
+    return ret;
+  }
+       
+  private Device getDeviceByNickname( String nickname )
+  {
     Device ret = null;
-    // if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name" }, 
+    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
+                                "nickname=?", new String[] { nickname }, null, null, null );
+    if (cursor != null ) {
+      if ( cursor.moveToFirst() ) {
+        ret = new Device( cursor.getString(0), 
+                          cursor.getString(1),
+                          (int)cursor.getLong(2),
+                          (int)cursor.getLong(3),
+                          cursor.getString(4),
+                          cursor.getString(5)
+                        );
+      }
+      if (!cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
+
+  private Device getDeviceByAddress( String addr )
+  {
+    Device ret = null;
+    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
                                 "address=?", new String[] { addr }, null, null, null );
     if (cursor != null ) {
       if ( cursor.moveToFirst() ) {
@@ -2636,14 +2669,15 @@ public class DataHelper extends DataSetObservable
                           cursor.getString(1),
                           (int)cursor.getLong(2),
                           (int)cursor.getLong(3),
-                          cursor.getString(4)
+                          cursor.getString(4),
+                          cursor.getString(5)
                         );
       }
       if (!cursor.isClosed()) cursor.close();
     }
     return ret;
   }
-    
+
   public int getDeviceTail( String address )
   { 
     int ret = 0;
@@ -2699,6 +2733,7 @@ public class DataHelper extends DataSetObservable
         cv.put( "head",    0 );
         cv.put( "tail",    0 );
         cv.put( "name",    name );
+        cv.put( "nickname", "" );  // FIXME empty nickname
         myDB.insert( DEVICE_TABLE, null, cv );
       }
       if (!cursor.isClosed()) cursor.close(); 
@@ -2715,6 +2750,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "head",    head_tail[0] );
     cv.put( "tail",    head_tail[1] );
     cv.put( "name",    name );
+    cv.put( "nickname", "" );  // FIXME empty nickname
     myDB.insert( DEVICE_TABLE, null, cv );
   }
 
@@ -2723,6 +2759,13 @@ public class DataHelper extends DataSetObservable
     updateDeviceModelStmt.bindString( 1, model );
     updateDeviceModelStmt.bindString( 2, address );
     updateDeviceModelStmt.execute();
+  }
+
+  public void updateDeviceNickname( String address, String nickname )
+  {
+    updateDeviceNicknameStmt.bindString( 1, nickname );
+    updateDeviceNicknameStmt.bindString( 2, address );
+    updateDeviceNicknameStmt.execute();
   }
 
   public boolean updateDeviceHeadTail( String address, int[] head_tail )
@@ -3506,7 +3549,7 @@ public class DataHelper extends DataSetObservable
       DistoXOpenHelper(Context context, String database_name ) 
       {
          super(context, database_name, null, DATABASE_VERSION);
-         Log.v("DistoX", "DB NAME " + database_name );
+         // Log.v("DistoX", "DB NAME " + database_name );
          // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
       }
 
@@ -3708,7 +3751,8 @@ public class DataHelper extends DataSetObservable
              +   " model TEXT, "
              +   " head INTEGER, "
              +   " tail INTEGER, "
-             +   " name TEXT "
+             +   " name TEXT, "
+             +   " nickname TEXT "
              +   ")"
            );
 
@@ -3768,6 +3812,8 @@ public class DataHelper extends DataSetObservable
            case 22:
              db.execSQL( "ALTER TABLE surveys ADD COLUMN init_station TEXT default \"0\"" );
            case 23:
+             db.execSQL( "ALTER TABLE devices ADD COLUMN nickname TEXT default \"\"" );
+           case 24:
              /* current version */
            default:
              break;

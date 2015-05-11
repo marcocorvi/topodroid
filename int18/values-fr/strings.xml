@@ -78,6 +78,7 @@
     <string name="device_status_silent">Silencieux %1$s</string>
     <string name="bt_reset">Redémarrer connexion Bluetooth</string>
     <!-- string name="save_as">save as</string -->
+    <!-- TODO string name="nickname">Nickname</string -->
 
     <string name="comment">commentaire</string>
     <!-- string name="flag">Flag</string -->
@@ -534,6 +535,7 @@
     <string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>
     <string name="title_shift">Décaler</string>
+    <!-- TODO string name="title_shot_delete">Delete shot ?</string -->
 <!--
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <string name="title_sketch_edit">Edit 3D surface</string>

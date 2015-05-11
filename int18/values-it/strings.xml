@@ -78,6 +78,7 @@
     <string name="device_status_silent">Silent %1$s</string>
     <string name="bt_reset">Resettare la connessione bluetooth</string>
     <string name="save_as">salva come</string>
+    <string name="nickname">Nome</string>
 
     <string name="comment">commento</string>
     <!-- string name="flag">Flag</string -->
@@ -529,6 +530,7 @@
     <string name="title_refs">Referimenti grafici</string>
     <string name="title_scraps">Disegni</string>
     <string name="title_shift">Sposta</string>
+    <string name="title_shot_delete">Rimuovi battuta ?</string>
 <!--
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <string name="title_sketch_edit">Edit 3D surface</string>

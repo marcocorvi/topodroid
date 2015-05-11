@@ -843,12 +843,11 @@ public class DrawingActivity extends ItemDrawer
       mName = mName1;
 
       mType = (int)extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE );
-      if ( ! isSection() ) { 
-      } else {
+      if ( isSection() ) { 
+        mTo      = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );
         mAzimuth = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
         mClino   = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_CLINO );
-        mTo = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );
-        // Log.v("AZIMUTH", mFrom + "-" + mTo + " azimuth " + mAzimuth + " clino " + mClino  );
+        // Log.v("DistoX", "X-Section " + mFrom + "-" + mTo + " azimuth " + mAzimuth + " clino " + mClino  );
       }
 
       // mBezierInterpolator = new BezierInterpolator( );
@@ -945,11 +944,12 @@ public class DrawingActivity extends ItemDrawer
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doStart " + mName1 + " " + mName2 );
       resetCurrentIndices();
 
-      if ( ! isSection() ) { 
-        mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      } else {
+      if ( isSection() ) { 
         mList = mData.selectAllShotsAtStations( mSid, mFrom, mTo );
         TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "nr shots at " + mFrom + " " + mTo + " = " + mList.size() );
+        // Log.v( "DistoX", "section nr shots at " + mFrom + "-" + mTo + " = " + mList.size() );
+      } else {
+        mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       }
 
       loadFiles( mType ); 
@@ -998,10 +998,13 @@ public class DrawingActivity extends ItemDrawer
           float Z = FloatMath.sin( bc );
           xfrom = -dist * (float)(X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
           yfrom =  dist * (float)(X2 * X + Y2 * Y + Z2 * Z);
+           
           addFixedLine( blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
           mDrawingSurface.addDrawingStation( mFrom, toSceneX(xfrom), toSceneY(yfrom) );
           mDrawingSurface.addDrawingStation( mTo, toSceneX(xto), toSceneY(yto) );
-          // Log.v("AZIMUTH", "Block " + xfrom + " " + yfrom );
+          // Log.v("DistoX", "Block " + xfrom + " " + yfrom );
+          // Log.v("DistoX", " station from " + toSceneX(xfrom) + " " + toSceneY(yfrom) );
+          // Log.v("DistoX", " station to " + toSceneX(xto) + " " + toSceneY(yto) );
         }
         for ( DistoXDBlock b : mList ) { // repeat for splays
           if ( b.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
@@ -1017,12 +1020,12 @@ public class DrawingActivity extends ItemDrawer
             x += xto;
             y += yto;
             addFixedSectionSplay( b, xto, yto, x, y, 0, 0, true );
-            // Log.v("AZIMUTH", "Splay(T) " + x + " " + y );
+            // Log.v("DistoX", "Splay(T) " + x + " " + y );
           } else {
             x += xfrom;
             y += yfrom;
             addFixedSectionSplay( b, xfrom, yfrom, x, y, 0, 0, false );
-            // Log.v("AZIMUTH", "Splay(F) " + x + " " + y );
+            // Log.v("DistoX", "Splay(F) " + x + " " + y );
           }
         }
 
@@ -2314,8 +2317,17 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
+    // @param line   "section" line
+    // @param id     section ID
+    // @param type   either PLOT_SECTION or PLOT_H_SECTION
+    // @param from   from station
+    // @param to     to station
+    // @param azimuth
+    // @param clino
     void makeSectionDraw( DrawingLinePath line, String id, long type, String from, String to, float azimuth, float clino )
     {
+      // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino );
+
       mCurrentLine = DrawingBrushPaths.mLineLib.mLineWallIndex;
       if ( ! DrawingBrushPaths.mLineLib.hasLine( "wall" ) ) mCurrentLine = 0;
       setTheTitle();

@@ -526,7 +526,11 @@ public class ShotActivity extends Activity
     TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "ShotActivity onItemLongClick id " + id);
     DistoXDBlock blk = mDataAdapter.get(pos);
     mShotId = blk.mId;
-    (new PhotoSensorsDialog(this, this, blk ) ).show();
+    if ( TopoDroidSetting.mLevelOverNormal ) {
+      (new PhotoSensorsDialog(this, this, blk ) ).show();
+    } else {
+      (new ShotDeleteDialog( this, this, blk ) ).show();
+    }
     return true;
   }
 
@@ -694,9 +698,9 @@ public class ShotActivity extends Activity
     mApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
   }
 
-  void askDelete( )
+  void doDeleteShot( long id )
   {
-    mApp.mData.deleteShot( mShotId, mApp.mSID, true );
+    mApp.mData.deleteShot( id, mApp.mSID, true );
     updateDisplay( ); 
   }
 
@@ -827,9 +831,7 @@ public class ShotActivity extends Activity
     mList.setAdapter( mDataAdapter );
     mList.setOnItemClickListener( this );
     mList.setLongClickable( true );
-    if ( TopoDroidSetting.mLevelOverNormal ) {
-      mList.setOnItemLongClickListener( this );
-    }
+    mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
     // mList.setSmoothScrollbarEnabled( true );
 

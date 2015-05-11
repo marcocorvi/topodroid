@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+  <LinearLayout
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    >
+    <TextView android:id="@+id/shot_shot_stations" 
+        android:maxLines="1" 
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+      	android:ems="25"
+        />
+
+    <TextView android:id="@+id/shot_shot_data" 
+        android:maxLines="1" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+      	android:ems="25"
+        />
+  </LinearLayout>
+
+  <Button android:id="@+id/shot_delete"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:background="@drawable/button"
+      style="@style/button_default"
+      android:text="@string/button_delete"
+      android:textColor="@color/textdelete"
+  />
+
+</LinearLayout>

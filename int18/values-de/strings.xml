@@ -91,6 +91,7 @@
     <string name="device_status_silent">Silent %1$s</string>
     <string name="bt_reset">Bluetooth-Verbindung zurückgesetzt</string>
     <string name="save_as">Speichern als</string>
+    <!-- TODO string name="nickname">Nickname</string -->
 
 <!-- SURVEY DATA STRINGS:
   each data is the measure of distance, azimuth, and clino between a FROM station and a TO station.
@@ -579,6 +580,7 @@
     <string name="title_refs">Skizze Referenzen</string>
     <string name="title_scraps">Skizzen</string>
     <string name="title_shift">Verschieben</string>
+    <string name="title_shot_delete">Messung löschen ?</string>
 
 <!-- SKETCH_3D titles
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
