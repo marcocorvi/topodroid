@@ -43,7 +43,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><u>Undo</u> removes the last items you have drawn, one at a time.</li>
 <li><u>Redo</u> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
 <li><u>Drawing tool</u> picker. By default the tool picker lists the tool graphics and the name. Once you are used to the graphics, you can switch to the more compact grid view without the names, with the appropriate setting. You can farther limit the displayed tools, by disabling the ones you do not need through the "palette" menu.</li>
-<li><u>Continuation</u>. When this button is pressed a "wall" line started close to the end of another is considerd as its continuation and is attached to that.</li> 
+<li><u>Continuation</u> [N]. When this button is pressed a "wall" line started close to the end of another is considerd as its continuation and is attached to that.</li> 
 </ulist><br><p>
 
 The <b>erase</b> mode has no additional button.<br><p>
@@ -64,7 +64,7 @@ PNG resolution can be increased if you get a too coarse image. You will get a la
 <li><u>Reload</u>: to reload the sketch from the backup copy</li>
 <li><u>Delete</u>: this marks the sketch as deleted. It can be later recovered as the sketch files are not actually deleted, nor the sketch record is dropped from the database table</li>
 <li><u>Palette</u>: to choose the active drawing tools</li>
-<li><u>Overview</u>: opens the overview window which shows all the survey sketches together. Only if there is more than one sketch.</li>
+<li><u>Overview</u>: opens the overview window which shows all the survey sketches together.</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ulist><br><p>
@@ -73,13 +73,13 @@ PNG resolution can be increased if you get a too coarse image. You will get a la
 <ulist>
 <li><i>Drawing tool picker</i>: either list view or grid view. At the beginning it may be helpful to have a tool picker listing the drawing tool names [default]. After you get used to the tool icons you are likely to prefer the more compact view of the grid picker.</li>
 <li><i>Splay vertical threshold</i>: Splay shots that are almost vertical or with high inclination are not useful for plan drawing and can be hidden by setting the threshold</li>
-<li><i>Point tools scale</i>: the base scale of point symbols</li>
+<li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
 <li><i>Line thickness</i>: the base thickness of drawing lines</li>
 <li><i>Survey line thickness</i>: the base thickness of midline/splay lines</li>
-<li><i>Station label size</i>: size of stations names [default 18 pt]</li>
+<li><i>Station label size</i>: size of stations names [default 18 pt] [N]</li>
 <li><i>Labels size</i>: size of label texts [default 24 pt]</li>
 <li><i>Section tick</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
-<li><i>Dots radius</i>: size of the green dots displayed in <b>draw</b> mode [default 5 pxl]</li>
+<li><i>Dots radius</i>: size of the green dots displayed in <b>draw</b> mode [default 5 pxl] [N]</li>
 <li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
 <li><i>Line style</i>. TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.</li>
 <li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
@@ -90,6 +90,9 @@ PNG resolution can be increased if you get a too coarse image. You will get a la
 <li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
 <li><i>PNG resolution</i>: the resolution of the PNG files for sketch exports. It can be a number between 1 and 10. The higher the bigger the image (if you set it too high the system may not have enough memory to create the PNG).</li> 
 </ulist><br><p>
+
+<h4>SHIFTING THE SKETCH [E]</h4>
+You can shift the drawing as a whole by selecting the "Fix ref" checkbox in the sketch reference dialog. Then in "move/zoom" mode the drawing can be shifted by dragging it with two fingers.<br><p>
 
 <hr>
 <i>To start drawing select the <b>draw</b> mode (green pencil button) and trace lines with your finger. If you make a mistake you can cancel the whole line with the <u>undo</u> button, or switch to the <u>erase</u> mode.  The drawing is saved in a pair of <i>Therion</i> files when you exit the sketch window. Each cross-section is saved in a single separate Therion file.</i>
