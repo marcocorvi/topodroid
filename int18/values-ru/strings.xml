@@ -212,6 +212,7 @@
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_palette">Палитра</string>
+    <!-- TODO string name="menu_references">REFERENCES</string -->
     <string name="menu_photo">фото</string>
     <string name="menu_sensor">датчик</string>
     <string name="menu_scan">Сканировать</string>
@@ -393,6 +394,8 @@
     <string name="button_read"      >Считать   </string>
     <string name="button_dump"      >Дамп      </string>
     <string name="button_reset"     >Сброс     </string>
+    <!-- TODO string name="button_left"      >LEFT</string -->
+    <!-- TODO string name="button_right"     >RIGHT</string -->
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <string name="button_select"    >Выбрать   </string>
@@ -489,6 +492,7 @@
     
     <string name="help_coeff">Показать коэфиценты калибровки</string>
     <string name="help_current_station">Сохраненные пикеты</string>
+    <!-- TODO string name="help_azimuth">Extend reference-azimuth</string -->
     <string name="help_device">Введите активность устройства</string>
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или Therion файла</string>
@@ -690,6 +694,8 @@
   <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
   <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
 
   <string name="pref_team_title">Группа съёмемки</string>
   <string name="pref_team_summary">Группа съёмемки</string>

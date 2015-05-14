@@ -121,7 +121,6 @@ public class TopoDroidApp extends Application
   static boolean isTracing = false;
 
 
-
   // ----------------------------------------------------------------------
   // data lister
   ListerSet mLister;
@@ -238,12 +237,16 @@ public class TopoDroidApp extends Application
   static float mMagneticMean     = 0.0f;
   static float mDipMean          = 0.0f;
 
+  static float deltaAcc( float acc ) { return (float)Math.abs( acc - mAccelerationMean ); }
+  static float deltaMag( float mag ) { return (float)Math.abs( mag - mMagneticMean ); }
+  static float deltaDip( float dip ) { return (float)Math.abs( dip - mDipMean ); }
+
   static boolean isBlockAcceptable( float acc, float mag, float dip )
   {
     return true
-        && Math.abs( acc - TopoDroidApp.mAccelerationMean ) < TopoDroidSetting.mAccelerationThr
-        && Math.abs( mag - TopoDroidApp.mMagneticMean ) < TopoDroidSetting.mMagneticThr
-        && Math.abs( dip - TopoDroidApp.mDipMean ) < TopoDroidSetting.mDipThr
+        && deltaAcc( acc ) < TopoDroidSetting.mAccelerationThr
+        && deltaMag( mag ) < TopoDroidSetting.mMagneticThr
+        && deltaDip( dip ) < TopoDroidSetting.mDipThr
     ;
   }
 
@@ -981,7 +984,47 @@ public class TopoDroidApp extends Application
   }
 
   // ----------------------------------------------------------------
+  static float mRefAzimuth = 90; // west to east
+  static long  mFixedExtend = 0;
 
+  static void resetRefAzimuth()
+  {
+    mRefAzimuth = 90;
+    mFixedExtend = ( TopoDroidSetting.mAzimuthManual )? 1L : 0L;
+  }
+
+  static long computeLegExtend( double bearing )
+  {
+    if ( mFixedExtend == 0 ) {
+      double ref = mRefAzimuth;
+      while ( bearing < ref ) bearing += 360;
+      bearing -= ref;
+      return ( bearing > 90 && bearing < 270 )? -1L : 1L;
+    } else if ( mFixedExtend == -1L ) {
+      bearing += 180; 
+      if ( bearing >= 360 ) bearing -= 360;
+    }
+    mRefAzimuth = (float)bearing;
+    return mFixedExtend;
+  }
+
+  static long computeSplayExtend( double bearing )
+  {
+    double ref = mRefAzimuth;
+    while ( bearing < ref ) bearing += 360;
+    bearing -= ref;
+    if ( bearing > 90+15 && bearing < 270-15 ) return -1L;
+    if ( bearing < 90-15 || bearing > 270+15 ) return 1L;
+    return 0L;
+  }
+
+  private void setLegExtend( DistoXDBlock prev )
+  {
+    if ( ! TopoDroidSetting.mSplayExtend ) {
+      long extend = computeLegExtend( prev.mBearing );
+      mData.updateShotExtend( prev.mId, mSID, extend, true );
+    }
+  }
 
 
   // called also by ShotActivity::updataBlockList
@@ -1051,19 +1094,14 @@ public class TopoDroidApp extends Application
                   flip = true;
                 }
                 mData.updateShotName( prev.mId, mSID, from, oldFrom, true ); // LEG
-                if ( ! TopoDroidSetting.mSplayExtend ) {
-                  long extend = ( prev.mBearing < 180.0 )? 1L : -1L;
-                  mData.updateShotExtend( prev.mId, mSID, extend, true );
-                }
+                setLegExtend( prev );
               } else {
                 prev.mFrom = from;                             // forward-shot from--to
                 prev.mTo   = to;
                 // Log.v( "DistoX", prev.mId + " setting prev. FROM " + from + " TO " + to );
                 mData.updateShotName( prev.mId, mSID, from, to, true ); // LEG
-                if ( ! TopoDroidSetting.mSplayExtend ) {
-                  long extend = ( prev.mBearing < 180.0 )? 1L : -1L;
-                  mData.updateShotExtend( prev.mId, mSID, extend, true );
-                }
+                setLegExtend( prev );
+
                 if ( survey_stations == 1 ) {                  // forward-shot
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
                   // Log.v("DistoX", "station [1] " + station + " from " + from + " to " + to );
@@ -1379,7 +1417,7 @@ public class TopoDroidApp extends Application
    * @param at   id of the shot before which to insert the new shot (and LRUD)
    */
   public DistoXDBlock insertManualShot( long at, String from, String to,
-                           float distance, float bearing, float clino, long extend,
+                           float distance, float bearing, float clino, long extend0,
                            String left, String right, String up, String down,
                            String splay_station )
   {
@@ -1404,6 +1442,7 @@ public class TopoDroidApp extends Application
         // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "manual-shot Data " + distance + " " + bearing + " " + clino );
         boolean horizontal = ( Math.abs( clino ) > TopoDroidSetting.mVThreshold );
         // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "manual-shot SID " + mSID + " LRUD " + left + " " + right + " " + up + " " + down);
+        long extend = 0L;
         if ( left != null && left.length() > 0 ) {
           float l = -1.0f;
           try {
@@ -1413,19 +1452,21 @@ public class TopoDroidApp extends Application
           }
           if ( l >= 0.0f ) {
             if ( horizontal ) {
+              extend = computeSplayExtend( 270 );
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, l, 270.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, l, 270.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
               }
             } else {
               float b = bearing - 90.0f;
               if ( b < 0.0f ) b += 360.0f;
+              extend = computeSplayExtend( b );
               // b = in360( b );
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, l, b, 0.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, l, b, 0.0f, 0.0f, extend, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, l, b, 0.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, l, b, 0.0f, 0.0f, extend, 1, true );
               }
             }
             mData.updateShotName( id, mSID, splay_station, "", true );
@@ -1441,18 +1482,20 @@ public class TopoDroidApp extends Application
           }
           if ( r >= 0.0f ) {
             if ( horizontal ) {
+              extend = computeSplayExtend( 90 );
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, r, 90.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, r, 90.0f, 0.0f, 0.0f, extend, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, r, 90.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, r, 90.0f, 0.0f, 0.0f, extend, 1, true );
               }
             } else {
               float b = bearing + 90.0f;
               if ( b >= 360.0f ) b -= 360.0f;
+              extend = computeSplayExtend( b );
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, r, b, 0.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, r, b, 0.0f, 0.0f, extend, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, r, b, 0.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, r, b, 0.0f, 0.0f, extend, 1, true );
               }
             }
             mData.updateShotName( id, mSID, splay_station, "", true );
@@ -1469,15 +1512,15 @@ public class TopoDroidApp extends Application
           if ( u >= 0.0f ) {
             if ( horizontal ) {
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, u, 0.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, u, 0.0f, 0.0f, 0.0f, 0L, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, u, 0.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, u, 0.0f, 0.0f, 0.0f, 0L, 1, true );
               }
             } else {
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, u, 0.0f, 90.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, u, 0.0f, 90.0f, 0.0f, 0L, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, u, 0.0f, 90.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, u, 0.0f, 90.0f, 0.0f, 0L, 1, true );
               }
             }
             mData.updateShotName( id, mSID, splay_station, "", true );
@@ -1494,15 +1537,15 @@ public class TopoDroidApp extends Application
           if ( d >= 0.0f ) {
             if ( horizontal ) {
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, d, 180.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, d, 180.0f, 0.0f, 0.0f, 0L, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, d, 180.0f, 0.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, d, 180.0f, 0.0f, 0.0f, 0L, 1, true );
               }
             } else {
               if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, d, 0.0f, -90.0f, 0.0f, 1, true );
+                id = mData.insertShotAt( mSID, at, d, 0.0f, -90.0f, 0.0f, 0L, 1, true );
               } else {
-                id = mData.insertShot( mSID, -1L, d, 0.0f, -90.0f, 0.0f, 1, true );
+                id = mData.insertShot( mSID, -1L, d, 0.0f, -90.0f, 0.0f, 0L, 1, true );
               }
             }
             mData.updateShotName( id, mSID, splay_station, "", true );
@@ -1510,13 +1553,13 @@ public class TopoDroidApp extends Application
           }
         }
         if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, distance, bearing, clino, 0.0f, 1, true );
+          id = mData.insertShotAt( mSID, at, distance, bearing, clino, 0.0f, extend0, 1, true );
         } else {
-          id = mData.insertShot( mSID, -1L, distance, bearing, clino, 0.0f, 1, true );
+          id = mData.insertShot( mSID, -1L, distance, bearing, clino, 0.0f, extend0, 1, true );
         }
         // String name = from + "-" + to;
         mData.updateShotName( id, mSID, from, to, true );
-        mData.updateShotExtend( id, mSID, extend, true );
+        mData.updateShotExtend( id, mSID, extend0, true ); // FIXME-EXTEND maybe not needed
         // FIXME updateDisplay( );
 
         ret = mData.selectShot( id, mSID );

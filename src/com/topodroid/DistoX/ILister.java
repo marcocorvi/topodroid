@@ -26,5 +26,7 @@ public interface ILister
 
   // public void notifyDisconnected();
 
+  public void setRefAzimuth( float azimuth, long fixed_extend );
+
 }
 

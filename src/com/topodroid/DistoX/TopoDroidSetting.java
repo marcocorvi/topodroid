@@ -95,7 +95,8 @@ class TopoDroidSetting
     "DISTOX_BACKSIGHT",
     "DISTOX_Z6_WORKAROUND",          // 62
     "DISTOX_MAG_ANOMALY",
-    "DISTOX_LOCALE",                 // 64
+    "DISTOX_AZIMUTH_MANUAL",         // 64
+    "DISTOX_LOCALE",                 // 65
     "DISTOX_CWD",                    // must be last 
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
@@ -132,6 +133,7 @@ class TopoDroidSetting
   static boolean mBacksightShot = false; // backsight shooting policy
   static boolean mMagAnomaly = false;    // local magnetic anomaly survey
   static float  mSplayVertThrs = 80;
+  static boolean mAzimuthManual = false; // whether to manually set extend / or use reference azimuth
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -580,6 +582,9 @@ class TopoDroidSetting
 
     setMagAnomaly( prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
+    mAzimuthManual = prefs.getBoolean( key[k++], false ); // DISTOX_AZIMUTH_MANUAL
+    app.resetRefAzimuth();
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -886,6 +891,9 @@ class TopoDroidSetting
       mZ6Workaround = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_MAG_ANOMALY
       setMagAnomaly( prefs.getBoolean( k, false ) );
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AZIMUTH_MANUAL
+      mAzimuthManual = prefs.getBoolean( k, false ); 
+      app.resetRefAzimuth();
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

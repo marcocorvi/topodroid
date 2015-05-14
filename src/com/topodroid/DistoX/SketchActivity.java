@@ -1953,6 +1953,10 @@ public class SketchActivity extends ItemDrawer
   // }
 
   // ----------------- ILister interface --------------------------------------------
+
+  public void setRefAzimuth( float azimuth, long fixed_extend )
+  {
+  }
   
   // forward to the ShotActivity
   @Override

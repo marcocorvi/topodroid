@@ -379,7 +379,8 @@ class ConnectionHandler extends Handler
        case DataListener.SHOT_INSERTAT:
          mApp.mData.insertShotAt( mSID, Integer.parseInt(data[1]), 
            Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]), Double.parseDouble(data[5]),
-           Integer.parseInt(data[6]),
+           Long.parseLong(data[6]),
+           Integer.parseInt(data[7]),
            false );
          break;
 
@@ -553,12 +554,12 @@ class ConnectionHandler extends Handler
     enqueue( DataListener.SHOT_INSERT, sw.getBuffer().toString() );
   }
 
-  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r ) 
+  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, int t ) 
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%d|%d||%.2f|%.1f|%.1f|%.1f|", (int)sid, (int)at, d, b, c, r );
-    enqueue( DataListener.SHOT_INSERT, sw.getBuffer().toString() );
+    pw.format(Locale.ENGLISH, "%d|%d||%.2f|%.1f|%.1f|%.1f|%d|%d", (int)sid, (int)at, d, b, c, r, (int)e, t );
+    enqueue( DataListener.SHOT_INSERTAT, sw.getBuffer().toString() );
   }
 
   // public void transferShots( long sid, long old_sid, long old_id ) { }

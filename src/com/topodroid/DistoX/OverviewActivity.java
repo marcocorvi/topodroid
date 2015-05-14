@@ -505,11 +505,11 @@ public class OverviewActivity extends ItemDrawer
       List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TopoDroidApp.STATUS_NORMAL, type );
       // Log.v( "DistoX", "plots " + plots.size() );
 
-      if ( plots.size() <= 1 ) {
-        Toast.makeText( this, R.string.few_plots, Toast.LENGTH_SHORT ).show();
-        finish();
-        return;
-      }
+      // if ( plots.size() < 1 ) { // N.B. this should never happpen
+      //   Toast.makeText( this, R.string.few_plots, Toast.LENGTH_SHORT ).show();
+      //   finish();
+      //   return;
+      // }
       mAllSymbols  = true; // by default there are all the symbols
       SymbolsPalette missingSymbols = new SymbolsPalette(); 
 

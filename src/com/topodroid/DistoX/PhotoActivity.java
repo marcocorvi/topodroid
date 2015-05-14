@@ -66,7 +66,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 
 public class PhotoActivity extends Activity
-                          implements OnItemClickListener, ILister
+                           implements OnItemClickListener, ILister
 {
   private TopoDroidApp app;
   // FIXME PHOTO
@@ -97,6 +97,10 @@ public class PhotoActivity extends Activity
 
   @Override
   public void updateBlockList( DistoXDBlock blk )
+  {
+  }
+  
+  public void setRefAzimuth( float azimuth, long fixed_extend )
   {
   }
 

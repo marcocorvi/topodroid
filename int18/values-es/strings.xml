@@ -203,6 +203,7 @@
     <string name="menu_options">OPCIONES</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETA</string>
+    <!-- TODO string name="menu_references">REFERENCES</string -->
     <string name="menu_photo">FOTO</string>
     <!-- OK string name="menu_sensor">SENSOR</string -->
     <!-- string name="menu_scan">SCAN</string -->
@@ -382,6 +383,8 @@
     <string name="button_read"      >Leer      </string>
     <string name="button_dump"      >Enviar    </string>
     <string name="button_reset"     >Reset     </string>
+    <!-- TODO string name="button_left"      >LEFT</string -->
+    <!-- TODO string name="button_right"     >RIGHT</string -->
     <!-- TODO string name="button_clear"     >Clear     </string -->
     <string name="button_save"      >Guardar   </string>
     <string name="button_select"    >Seleccionar </string>
@@ -439,6 +442,7 @@
     
     <!-- string name="help_coeff">Show calibration coefficients</string -->
     <!-- TODO string name="help_current_station">Saved stations</string -->
+    <!-- TODO string name="help_azimuth">Extend reference-azimuth</string -->
     <string name="help_device">Cambiar a opciones del dispositivo</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
@@ -625,6 +629,8 @@
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
   <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
   <string name="pref_team_title">Equipo</string>
   <!-- string name="pref_team_summary">Surveying team</string -->
   <!-- string name="pref_team_message">Default surveying team</string -->

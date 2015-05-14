@@ -47,7 +47,8 @@ import android.util.Log;
 
 
 public class ShotNewDialog extends Dialog
-                           implements View.OnClickListener, IBearingAndClino
+                           implements View.OnClickListener
+                           , IBearingAndClino
 {
   // private ShotActivity mParent;
   private Context mContext;
@@ -128,8 +129,8 @@ public class ShotNewDialog extends Dialog
     mETdown     = (EditText) findViewById(R.id.shot_down );
     mCBsplayAtTo = (CheckBox) findViewById( R.id.splay_at_to );
 
-    mETfrom.setRawInputType( InputType.TYPE_CLASS_NUMBER );
-    mETto.setRawInputType( InputType.TYPE_CLASS_NUMBER );
+    // mETfrom.setRawInputType( InputType.TYPE_CLASS_NUMBER );
+    // mETto.setRawInputType( InputType.TYPE_CLASS_NUMBER );
 
     if ( mPrevBlk != null ) {
       mETfrom.setHint( mPrevBlk.mTo );
@@ -261,6 +262,12 @@ public class ShotNewDialog extends Dialog
         long shot_extend = 1;
         if ( mRadioLeft.isChecked() ) { shot_extend = -1; }
         else if ( mRadioVert.isChecked() ) { shot_extend = 0; }
+        else if ( mRadioRight.isChecked() ) { shot_extend = 1; }
+        else { // FIXME-EXTEND let TopoDroid choose
+          try {
+            shot_extend = mApp.computeLegExtend( Float.parseFloat(bearing.replace(',','.') ) );
+          } catch ( NumberFormatException e ) { }
+        }
 
         long back_extend = - shot_extend;
 

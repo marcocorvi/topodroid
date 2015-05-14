@@ -213,6 +213,7 @@
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">Общ изглед</string>
     <string name="menu_palette">Палитра</string>
+    <!-- TODO string name="menu_references">REFERENCES</string -->
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
     <string name="menu_scan">Сканиране</string>
@@ -397,6 +398,8 @@
     <string name="button_read"      >Четене    </string>
     <string name="button_dump"      >Запис     </string>
     <string name="button_reset"     >Нулиране   </string>
+    <!-- TODO string name="button_left"      >LEFT</string -->
+    <!-- TODO string name="button_right"     >RIGHT</string -->
     <string name="button_clear"     >Изчистване</string>
     <string name="button_save"      >Запис     </string>
     <string name="button_select"    >Избор     </string>
@@ -500,6 +503,7 @@
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
     <string name="help_current_station">Записани репери</string>
+    <!-- TODO string name="help_azimuth">Extend reference-azimuth</string -->
     <string name="help_device">Управление на устройството</string>
     <string name="help_add_topodroid">Нова картировка/калибрация</string>
     <string name="help_import">Импортиране на архив/картировка</string>
@@ -701,6 +705,8 @@
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
+  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
 
   <string name="pref_team_title">Картировачи</string>
   <string name="pref_team_summary">Екип картировачи</string>

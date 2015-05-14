@@ -231,8 +231,9 @@
     <string name="menu_logs">LOGS</string>
     <!-- string name="menu_manual">HANDBUCH</string -->
     <string name="menu_options">EINSTELLUNGEN</string>
-    <!-- TODO string name="menu_overview">OVERVIEW</string -->
+    <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_palette">PALETTE</string>
+    <string name="menu_references">BEZUGRAHMENS</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SCAN</string>
@@ -329,7 +330,7 @@
     <string name="survey_exists">Vermessung bereits vorhanden</string>
     <string name="survey_date">jjjj.mm.tt</string>
     <string name="survey_delete">Vermessung löschen?</string>
-    <!-- TODO string name="survey_split">Vermessung split ?</string -->
+    <string name="survey_split">Vermessung teilen ?</string>
     <string name="survey_not_attached">WARNUNG: ungebundene Messungen</string>
     <string name="declination">Magn. Dekl.</string>
     <string name="description">Beschreibung</string>
@@ -416,6 +417,8 @@
     <string name="button_read"      >Lesen      </string>
     <!-- TODO string name="button_dump"      >Dump     </string -->
     <string name="button_reset"     >Zurücksetzen</string>
+    <string name="button_left"      >LINKS</string>
+    <string name="button_right"     >RECHTS</string>
     <!-- TODO string name="button_clear"     >Clear     </string -->
     <string name="button_save"      >Sichern  </string>
     <string name="button_select"    >Wählen     </string>
@@ -425,8 +428,8 @@
     <string name="button_upload"    >Laden    </string>
     <string name="button_yes"       >Ja       </string>
 
-    <!-- TODO string name="button_sharp"     >Sharp</string -->
-    <!-- TODO string name="button_rock"      >Rock</string -->
+    <string name="button_sharp"     >Sharfen</string>
+    <string name="button_rock"      >Stein</string>
 <!--
     <string name="button_close"     >Beenden   </string>
     <string name="button_erase"     >Löschen   </string>
@@ -441,7 +444,7 @@
     <string name="mode_splay">Hilfsmessung</string>
     <string name="mode_station">Messpunkten</string>
     <string name="mode_grid">Gitter</string>
-    <!-- TODO string name="mode_fixed">Fix refs</string -->
+    <string name="mode_fixed">Festen Rahmen</string>
 
     <string name="remote_title">DistoX Fernbedienung</string>
     <string name="remote_on">Laser AN</string>
@@ -482,6 +485,7 @@
     <string name="help_less">Zu den primären Aktionen zurückgehen</string>
     <string name="help_coeff">Die Kalibrierung Koeffizienten zeigen</string>
     <string name="help_current_station">Gespeichert Messpunkten</string>
+    <string name="help_azimuth">Extend Referenzazimut</string>
     <string name="help_device">Zu der Gerätaktivität gehen</string>
     <string name="help_add_topodroid">Neuen Vermessung/Kalibrierung schaffen</string>
     <string name="help_import">Zip oder Datei importieren</string>
@@ -496,8 +500,8 @@
     <string name="help_download">Daten herunterladen</string>
     <string name="help_splay">Die Messpunkten automatisch zuweisen</string> <!-- FIXME for splays -->
     <string name="help_display">Den Anzeigemodus wählen</string>
-    <!-- TODO string name="help_display_calib">Toggle display of deleted shots</string -->
-    <!-- TODO string name="help_overview">Overview activity</string -->
+    <string name="help_display_calib">Schalten die Anzeige der geloscht Vermessungen</string>
+    <string name="help_overview">Überblickaktivität</string>
     <string name="help_plot">Zu der Skizzeaktivität gehen</string>
     <string name="help_note">Um die Vermessung Anmerkung bearbeiten</string>
     <string name="help_bluetooth">Die Bluetooth-Verbindung zurücksetzen</string>
@@ -606,14 +610,14 @@
   <string name="pref_locale_title">Sprache</string>
   <string name="pref_locale_summary">Sprache</string>
 
-  <!-- TODO string name="pref_raw_data_title">Raw data</string -->
-  <!-- TODO string name="pref_raw_data_summary">Raw data zeigen</string -->
+  <string name="pref_raw_data_title">Rohdaten</string>
+  <string name="pref_raw_data_summary">Rohdaten zeigen</string>
   <!-- OK string name="pref_bootloader_title">Bootloader</string -->
   <string name="pref_bootloader_summary">Die Bootloader ermöglichen</string>
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+  <string name="pref_export_shots_title">Datenexportformat</string>
+  <string name="pref_export_shots_summary">Standarddatenexportformat</string>
   <!-- OK string name="pref_extra_buttons_title">Optional buttons</string -->
   <!-- OK string name="pref_extra_buttons_summary">Enable main window optional buttons</string -->
   <!-- TODO string name="pref_size_buttons_title">Buttons size</string -->
@@ -677,6 +681,8 @@
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
   <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
 
   <!-- TODO string name="pref_team_title">Equipo</string -->
   <!-- TODO string name="pref_team_summary">Surveying team</string -->

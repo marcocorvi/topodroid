@@ -94,19 +94,21 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_select_ok };
 
   private static int IC_DOWNLOAD = 3;
-  private static int IC_JOIN     = 14;
-  private static int IC_JOIN_NO  = 19;
+  private static int IC_JOIN     = 15;
+  private static int IC_JOIN_NO  = 20;
   private static int IC_PLAN     = 6;
-  private static int IC_MENU     = 17;
-  private static int IC_EXTEND   = 18;
-  private static int IC_CONTINUE_NO = 11;      // index of mButton1 plot button
-  private static int IC_CONTINUE = 20;   // index of mButton1 plot button
-  private static int IC_ADD = 21;
+  private static int IC_DIAL     = 7;
+  private static int IC_MENU     = 18;
+  private static int IC_EXTEND   = 19;
+  private static int IC_CONTINUE_NO = 12;  // index of continue-no icon
+  private static int IC_CONTINUE = 21;     // index of continue icon
+  private static int IC_ADD = 22;
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4;
   private static int BTN_JOIN = 5;
   private static int BTN_PLOT = 6;      // index of mButton1 plot button
+  private static int BTN_DIAL = 7;      // index of mButton1 azimuth button
   private static int BTN_CONTINUE = 6;  // index of mButton2 continue button
 
   BitmapDrawable mBMdownload;
@@ -119,6 +121,10 @@ public class DrawingActivity extends ItemDrawer
   BitmapDrawable mBMcontinue_no;
   BitmapDrawable mBMcontinue;
   BitmapDrawable mBMadd;
+
+  BitmapDrawable mBMleft;
+  BitmapDrawable mBMright;
+  Bitmap mBMdial;
                       
   private static int izons[] = { 
                         R.drawable.iz_edit,          // 0
@@ -127,21 +133,22 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_download,      // 3 ic_download
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,          // 5
-                        R.drawable.iz_plan,
-                        R.drawable.iz_note,
+                        R.drawable.iz_plan,          // 6
+                        R.drawable.iz_dial,          // 7
+                        R.drawable.iz_note,          // 8
                         R.drawable.iz_undo,
                         R.drawable.iz_redo,
-                        R.drawable.iz_tools,          // 10
+                        R.drawable.iz_tools,          // 11
                         R.drawable.iz_continue_no,
-                        R.drawable.iz_back,          // 12
+                        R.drawable.iz_back,          // 13
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
-                        R.drawable.iz_note,          // 15
+                        R.drawable.iz_note,          // 16
                         0,
-                        R.drawable.iz_menu,          // 17
+                        R.drawable.iz_menu,          // 18
                         R.drawable.iz_extended,
                         R.drawable.iz_join_no,
-                        R.drawable.iz_continue,   // 20
+                        R.drawable.iz_continue,   // 21
                         R.drawable.iz_plus,
                       };
   private static int menus[] = {
@@ -162,6 +169,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_remote,
                         R.string.help_refs,
                         R.string.help_toggle_plot,
+                        R.string.help_azimuth,
                         R.string.help_note,
                         R.string.help_undo,
                         R.string.help_redo,
@@ -614,11 +622,12 @@ public class DrawingActivity extends ItemDrawer
     
 
   // private Button mButtonHelp;
+  private int mButtonSize;
   private Button[] mButton1; // primary
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  private int mNrButton1 = 8;          // main-primary
+  private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
   private int mNrButton3 = 7;          // edit
   private int mNrButton5 = 3;          // erase
@@ -639,6 +648,25 @@ public class DrawingActivity extends ItemDrawer
   private boolean inLinePoint = false;
 
   public float zoom() { return mZoom; }
+
+  // --------------------------------------------------------------
+
+  public void setRefAzimuth( float azimuth, long fixed_extend )
+  {
+    mApp.mFixedExtend = fixed_extend;
+    mApp.mRefAzimuth = azimuth;
+    if ( mApp.mFixedExtend == 0 ) {
+      android.graphics.Matrix m = new android.graphics.Matrix();
+      m.postRotate( azimuth - 90 );
+      Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
+      Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+      mButton1[BTN_DIAL].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+    } else if ( mApp.mFixedExtend == -1L ) {
+      mButton1[BTN_DIAL].setBackgroundDrawable( mBMleft );
+    } else {
+      mButton1[BTN_DIAL].setBackgroundDrawable( mBMright );
+    } 
+  }
 
   // set the button3 by the type of the hot-item
   private void setButton3( int type )
@@ -726,9 +754,7 @@ public class DrawingActivity extends ItemDrawer
       }
 
       mListView = (HorizontalListView) findViewById(R.id.listview);
-      int size = mApp.setListViewHeight( mListView );
-      // icons00   = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
-      // icons00ok = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsok : iconsok;
+      mButtonSize = mApp.setListViewHeight( mListView );
 
       mButton1 = new Button[ mNrButton1 ];
       for ( int k=0; k<mNrButton1; ++k ) {
@@ -736,71 +762,68 @@ public class DrawingActivity extends ItemDrawer
         mButton1[k].setPadding(0,0,0,0);
         mButton1[k].setOnClickListener( this );
         // mButton1[k].setBackgroundResource( icons00[k] );
-        BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], size, izons[k] );
+        BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[k] );
         if ( k == IC_DOWNLOAD ) {
           mBMdownload = bm2;
         } else if ( k == IC_PLAN ) {
           mBMplan = bm2;
         }
       }
-      mBMextend  = mApp.setButtonBackground( null, size, izons[IC_EXTEND] ); 
-      mBMdownload_on = mApp.setButtonBackground( null, size, R.drawable.iz_download_on );
-      mBMdownload_wait = mApp.setButtonBackground( null, size, R.drawable.iz_download_wait );
-      // assert( mBMdownload != null );
-      // assert( mBMplan != null );
+      mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
+      mBMextend  = mApp.setButtonBackground( null, mButtonSize, izons[IC_EXTEND] ); 
+      mBMdownload_on = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_on );
+      mBMdownload_wait = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_wait );
+      mBMleft  = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_left );
+      mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
+      setRefAzimuth( mApp.mRefAzimuth, mApp.mFixedExtend );
 
       mButton2 = new Button[ mNrButton2 ];
+      int off = mNrButton1 - 3; // starts at mNrButton1
       for ( int k=0; k<mNrButton2; ++k ) {
         mButton2[k] = new Button( this );
         mButton2[k].setPadding(0,0,0,0);
         mButton2[k].setOnClickListener( this );
         if ( k == 0 ) {
-          // mButton2[k].setBackgroundResource( icons00ok[k] );
-          mApp.setButtonBackground( mButton2[k], size, izonsok[k] );
+          mApp.setButtonBackground( mButton2[k], mButtonSize, izonsok[k] );
         } else if ( k < 3 ) {
-          // mButton2[k].setBackgroundResource( icons00[k] );
-          mApp.setButtonBackground( mButton2[k], size, izons[k] );
+          mApp.setButtonBackground( mButton2[k], mButtonSize, izons[k] );
         } else {
-          // mButton2[k].setBackgroundResource( icons00[8-3+k] ); // starts at 8
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], size, izons[8-3+k] );
-          if ( 8-3+k == IC_CONTINUE_NO ) mBMcontinue_no = bm2;
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons[off+k] );
+          if ( off+k == IC_CONTINUE_NO ) mBMcontinue_no = bm2;
         }
       }
-      mBMcontinue  = mApp.setButtonBackground( null, size, izons[IC_CONTINUE] );
+      mBMcontinue  = mApp.setButtonBackground( null, mButtonSize, izons[IC_CONTINUE] );
 
       mButton3 = new Button[ mNrButton3 ];
+      off = mNrButton1 + mNrButton2 - 2*3; 
       for ( int k=0; k<mNrButton3; ++k ) {
         mButton3[k] = new Button( this );
         mButton3[k].setPadding(0,0,0,0);
         mButton3[k].setOnClickListener( this );
         if ( k == 2 ) {
-          // mButton3[k].setBackgroundResource( icons00ok[k] );
-          mApp.setButtonBackground( mButton3[k], size, izonsok[k] );
+          mApp.setButtonBackground( mButton3[k], mButtonSize, izonsok[k] );
         } else if ( k < 3 ) {
-          // mButton3[k].setBackgroundResource( icons00[k] );
-          mApp.setButtonBackground( mButton3[k], size, izons[k] );
+          mApp.setButtonBackground( mButton3[k], mButtonSize, izons[k] );
         } else {
-          // mButton3[k].setBackgroundResource( icons00[12-3+k] ); // starts at 12
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], size, izons[12-3+k] );
-          if ( 12-3+k == IC_JOIN ) mBMjoin = bm2;
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons[off+k] );
+          if ( off+k == IC_JOIN ) mBMjoin = bm2;
         }
       }
-      mBMjoin_no = mApp.setButtonBackground( null, size, izons[IC_JOIN_NO] );
-      mBMadd     = mApp.setButtonBackground( null, size, izons[IC_ADD] );
+      mBMjoin_no = mApp.setButtonBackground( null, mButtonSize, izons[IC_JOIN_NO] );
+      mBMadd     = mApp.setButtonBackground( null, mButtonSize, izons[IC_ADD] );
 
       mButton5 = new Button[ mNrButton5 ];
+      off = mNrButton1 + mNrButton2 + mNrButton3 - 3*3;
       for ( int k=0; k<mNrButton5; ++k ) {
         mButton5[k] = new Button( this );
         mButton5[k].setPadding(0,0,0,0);
         mButton5[k].setOnClickListener( this );
         if ( k == 1 ) {
-          // mButton5[k].setBackgroundResource( icons00ok[k] );
-          mApp.setButtonBackground( mButton5[k], size, izonsok[k] );
+          mApp.setButtonBackground( mButton5[k], mButtonSize, izonsok[k] );
         } else if ( k < 3 ) {
-          // mButton5[k].setBackgroundResource( icons00[k] );
-          mApp.setButtonBackground( mButton5[k], size, izons[k] );
+          mApp.setButtonBackground( mButton5[k], mButtonSize, izons[k] );
         } else {
-          // mButton5[k].setBackgroundResource( icons00[8-3+k] ); // nothing else
+          // mButton5[k].setBackgroundResource( icons00[off+k] ); // nothing else
         }
       }
       if ( TopoDroidSetting.mActivityLevel < 1 ) {
@@ -855,7 +878,7 @@ public class DrawingActivity extends ItemDrawer
       mImage = (Button) findViewById( R.id.handle );
       mImage.setOnClickListener( this );
       // mImage.setBackgroundResource( icons00[ IC_MENU ] );
-      mApp.setButtonBackground( mImage, size, izons[IC_MENU] );
+      mApp.setButtonBackground( mImage, mButtonSize, izons[IC_MENU] );
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter();
       closeMenu();
@@ -2191,33 +2214,34 @@ public class DrawingActivity extends ItemDrawer
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
-      } else if ( b == mButton1[4] ) { // bluetooth
+      } else if ( b == mButton1[4] ) { // BLUETOOTH
         new DeviceRemote( this, this, mApp ).show();
-      } else if ( b == mButton1[5] ) { // display mode 
+      } else if ( b == mButton1[5] ) { // DISPLAY MODE 
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
-      } else if ( b == mButton1[6] ) { // toggle plan/extended
+      } else if ( b == mButton1[6] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
           immediateSaveTh2( ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
-      } else if ( b == mButton1[7] ) { //  noteBtn
-        (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
-      // } else if ( b == mButton1[7] ) { // more --> info
-      //   // mListView.setAdapter( mButtonView4.mAdapter );
-      //   // mListView.invalidate();
-      //   if ( mNum != null ) {
-      //     new DistoXStatDialog( mDrawingSurface.getContext(), mNum ).show();
-      //   }
+      } else if ( b == mButton1[7] ) { //  AZIMUTH
+        if ( TopoDroidSetting.mAzimuthManual ) {
+          setRefAzimuth( 0, - mApp.mFixedExtend );
+        } else {
+          (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
+        }
 
-      } else if ( b == mButton2[3] ) { // undoBtn
+      } else if ( b == mButton1[8] ) { //  NOTE
+        (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
+
+      } else if ( b == mButton2[3] ) { // UNDO
         mDrawingSurface.undo();
         if ( mDrawingSurface.hasMoreUndo() == false ) {
           // undoBtn.setEnabled( false );
         }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
-      } else if ( b == mButton2[4] ) { // redoBtn
+      } else if ( b == mButton2[4] ) { // REDO
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
         }

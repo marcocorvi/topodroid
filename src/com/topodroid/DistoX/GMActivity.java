@@ -61,7 +61,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
 public class GMActivity extends Activity
-                        implements OnItemClickListener, ILister, IEnableButtons
+                        implements OnItemClickListener
+                        , ILister
+                        , IEnableButtons
                         , OnClickListener
 {
   private TopoDroidApp mApp;
@@ -334,6 +336,10 @@ public class GMActivity extends Activity
   // ILister interface
   @Override
   public void updateBlockList( DistoXDBlock blk )
+  {
+  }
+
+  public void setRefAzimuth( float azimuth, long fixed_extend )
   {
   }
 

@@ -203,6 +203,7 @@
     <string name="menu_options">OPTIONS</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETTE</string>
+    <!-- TODO string name="menu_references">REFERENCES</string -->
     <!-- OK string name="menu_photo">PHOTO</string -->
     <string name="menu_sensor">CAPTEUR</string>
     <!-- string name="menu_scan">SCAN</string -->
@@ -387,6 +388,8 @@
     <string name="button_read"      >Lecture      </string>
     <string name="button_dump"      >Dump     </string>
     <string name="button_reset"     >Reset      </string>
+    <!-- TODO string name="button_left"      >LEFT</string -->
+    <!-- TODO string name="button_right"     >RIGHT</string -->
     <!-- TODO string name="button_clear"     >Clear     </string -->
     <string name="button_save"      >Enregistrer      </string>
     <string name="button_select"    >Sélectionner    </string>
@@ -444,6 +447,7 @@
     
     <!-- string name="help_coeff">Show calibration coefficients</string -->
     <!-- TODO string name="help_current_station">Saved stations</string -->
+    <!-- TODO string name="help_azimuth">Extend reference-azimuth</string -->
     <string name="help_device">Périphériques DistoX</string>
     <string name="help_add_topodroid">Crée un nouveau relevé/étalonnage</string>
     <string name="help_import">Importe une archive Zip ou un fichier Therion</string>
@@ -630,6 +634,8 @@
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
   <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
 
   <string name="pref_team_title">Équipe</string>
   <!-- TODO string name="pref_team_summary">Surveying team</string -->

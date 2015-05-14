@@ -797,12 +797,13 @@ public class DataHelper extends DataSetObservable
     return id;
   }
   
-  public long insertShot( long sid, long id, double d, double b, double c, double r, int type, boolean forward )
+  public long insertShot( long sid, long id, double d, double b, double c, double r, long extend, int type, boolean forward )
   {
-    long extend = 0L;
-    if ( TopoDroidSetting.mSplayExtend ) { // FIXME DataHelper should not do this 
-      extend = ( b < 180.0 )? 1L : -1L;
-    }
+    // long extend = 0L;
+    // if ( TopoDroidSetting.mSplayExtend ) { // FIXME DataHelper should not do this 
+    //   extend = TopoDroidApp.computeExtend( b );
+    //   // extend = ( b < 180.0 )? 1L : -1L;
+    // }
     return insertShot( sid, id, "", "",  d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY, 0L, 0L, type, "", forward );
   }
 
@@ -838,7 +839,7 @@ public class DataHelper extends DataSetObservable
     }
   }
 
-  public long insertShotAt( long sid, long at, double d, double b, double c, double r, int type, boolean forward )
+  public long insertShotAt( long sid, long at, double d, double b, double c, double r, long extend, int type, boolean forward )
   {
     // if ( myDB == null ) return -1;
     shiftShotsId( sid, at );
@@ -855,7 +856,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "acceleration", 0.0 );
     cv.put( "magnetic", 0.0 );
     cv.put( "dip",      0.0 );
-    cv.put( "extend",   (b < 180.0)? 1L : -1L ); // extend );
+    cv.put( "extend",   extend );
     cv.put( "flag",     DistoXDBlock.BLOCK_SURVEY ); // flag );
     cv.put( "leg",      0L ); // leg );
     cv.put( "status",   0L ); // status );
@@ -865,7 +866,7 @@ public class DataHelper extends DataSetObservable
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
-        listener.onInsertShotAt( sid, at, d, b, c, r );
+        listener.onInsertShotAt( sid, at, d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY );
       }
     }
     return at;

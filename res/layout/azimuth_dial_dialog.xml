@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="3dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="2dp"
+      >
+
+      <Button android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="left"
+        android:background="@drawable/ic_back"
+        android:layout_marginRight="20dp"
+        />
+
+      <Button
+        android:id="@+id/btn_azimuth"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:background="@drawable/iz_dial"
+        style="@style/button_default"
+        />
+
+      <Button android:id="@+id/btn_fore"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="right"
+        android:background="@drawable/ic_forw"
+        android:layout_marginLeft="20dp"
+        />
+    </LinearLayout>				  
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/btn_sensor"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_direction"
+          />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="25dip"
+      >
+      <Button android:id="@+id/btn_left"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_left"
+        android:layout_marginRight="20dp"
+      />
+      <Button android:id="@+id/btn_ok"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
+      <Button android:id="@+id/btn_right"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_right"
+        android:layout_marginLeft="20dp"
+      />
+   		
+    </LinearLayout>
+   					  
+</LinearLayout>

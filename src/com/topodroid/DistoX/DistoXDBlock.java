@@ -156,7 +156,7 @@ public class DistoXDBlock
 
   public String Name() { return mFrom + "-" + mTo; }
   
-  public void setBearing( float x ) {
+  public void setBearing( float x ) { // FIXME-EXTEND
     mBearing = x;
     if ( mBearing < 3.14 ) {  // east to the right, west to the left
       mExtend = EXTEND_RIGHT;
@@ -305,7 +305,10 @@ public class DistoXDBlock
     float ua = TopoDroidSetting.mUnitAngle;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "A %.2f  M %.1f  D %.1f", mAcceleration, mMagnetic, mDip*ua );
+    pw.format(Locale.ENGLISH, "A %.2f  M %.1f  D %.1f", 
+      TopoDroidApp.deltaAcc( mAcceleration ), 
+      TopoDroidApp.deltaMag( mMagnetic ), 
+      TopoDroidApp.deltaDip( mDip ) * ua );
     return sw.getBuffer().toString();
   }
 

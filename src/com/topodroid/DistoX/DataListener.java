@@ -89,7 +89,9 @@ public interface DataListener
                           double d, double b, double c, double r, 
                           long extend, long flag, long leg, long status, String comment );
 
-  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r );
+  // @param e extend
+  // @param t type
+  public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, int t );
 
   // public void transferShots( long sid, long old_sid, long old_id );
 

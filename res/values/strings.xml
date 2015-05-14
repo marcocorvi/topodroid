@@ -213,6 +213,7 @@
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
     <string name="menu_palette">PALETTE</string>
+    <string name="menu_references">REFERENCES</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SCAN</string>
@@ -395,6 +396,8 @@
     <string name="button_read"      >Read      </string>
     <string name="button_dump"      >Dump     </string>
     <string name="button_reset"     >Reset     </string>
+    <string name="button_left"      >LEFT</string>
+    <string name="button_right"     >RIGHT</string>
     <string name="button_clear"     >Clear     </string>
     <string name="button_save"      >Save      </string>
     <string name="button_select"    >Select    </string>
@@ -498,6 +501,7 @@
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_continue">Continue drawing a line</string>
     <string name="help_current_station">Saved stations</string>
+    <string name="help_azimuth">Extend reference-azimuth</string>
     <string name="help_device">Enter device activity</string>
     <string name="help_add_topodroid">Create new survey/calibration</string>
     <string name="help_import">Import zip archive or survey file</string>
@@ -699,6 +703,8 @@
   <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
   <string name="pref_mag_anomaly_title">Magnetic Anomaly</string>
   <string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string>
+  <string name="pref_azimuth_manual_title">Extend by azimuth</string>
+  <string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string>
 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Surveying team</string>

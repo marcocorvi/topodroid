@@ -203,6 +203,7 @@
     <string name="menu_options">OPZIONI</string>
     <!-- OK string name="menu_overview">OVERVIEW</string -->
     <!-- OK string name="menu_palette">PALETTE</string -->
+    <string name="menu_references">RIFERIMENTI</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORI</string>
     <string name="menu_scan">CERCA</string>
@@ -382,6 +383,8 @@
     <string name="button_read"      >Leggi     </string>
     <!-- string name="button_dump"      >Scarica   </string -->
     <string name="button_reset"     >Resetta   </string>
+    <string name="button_left"      >SINISTRA</string>
+    <string name="button_right"     >DESTRA</string>
     <string name="button_clear"     >Cancella  </string>
     <string name="button_save"      >Salva     </string>
     <string name="button_select"    >Seleziona </string>
@@ -439,6 +442,7 @@
     
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_current_station">Capisaldi salvati</string>
+    <string name="help_azimuth">Azimuth di riferimento per il profilo</string>
     <string name="help_device">Finestra DistoX</string>
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
@@ -625,6 +629,8 @@
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
   <string name="pref_mag_anomaly_title">Anomalia magnetica</string>
   <string name="pref_mag_anomaly_summary">Compensazione anomalia magnetica locale</string>
+  <string name="pref_azimuth_manual_title">"extend" con azimuth</string>
+  <string name="pref_azimuth_manual_summary">Azimuth per "extend" delle battute</string>
 
   <string name="pref_team_title">Squadra</string>
   <string name="pref_team_summary">Squadra topo</string>

@@ -199,9 +199,10 @@ public class DistoXComm
           double b = mProto.mBearing;
           double c = mProto.mClino;
           double r = mProto.mRoll;
+          long extend = mApp.computeLegExtend( b ); // FIXME-EXTEND
           TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
-          mLastShotId = mApp.mData.insertShot( mApp.mSID, -1L, d, b, c, r, 0, true );
+          mLastShotId = mApp.mData.insertShot( mApp.mSID, -1L, d, b, c, r, extend, 0, true );
           if ( mLister != null && mLister.size() > 0 ) {
             DistoXDBlock blk = new DistoXDBlock( );
             blk.setId( mLastShotId, mApp.mSID );

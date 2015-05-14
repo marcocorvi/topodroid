@@ -53,6 +53,13 @@
      />
 
      <CheckBoxPreference
+       android:key="DISTOX_AZIMUTH_MANUAL"
+       android:summary="@string/pref_azimuth_manual_summary"
+       android:title="@string/pref_azimuth_manual_title"
+       android:defaultValue="false"
+     />
+
+     <CheckBoxPreference
        android:key="DISTOX_MAG_ANOMALY"
        android:summary="@string/pref_mag_anomaly_summary"
        android:title="@string/pref_mag_anomaly_title"

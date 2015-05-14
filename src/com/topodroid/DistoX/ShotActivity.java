@@ -99,6 +99,7 @@ public class ShotActivity extends Activity
                         R.drawable.iz_mode,
                         R.drawable.iz_plot,
                         R.drawable.iz_note,
+                        R.drawable.iz_dial,
                         R.drawable.iz_station,
                         R.drawable.iz_plus
                       };
@@ -130,9 +131,8 @@ public class ShotActivity extends Activity
                           R.string.help_display,
                           R.string.help_plot,
                           R.string.help_note,
-                          R.string.help_current_station, // R.string.help_splay,
-                          // R.string.help_more,
-                          // R.string.help_less,
+                          R.string.help_azimuth,
+                          R.string.help_current_station,
                           R.string.help_add_shot,
                         };
    private static int help_menus[] = {
@@ -165,6 +165,27 @@ public class ShotActivity extends Activity
   // long mSecondLastShotId = 0L;
   // long mLastShotId;
 
+  int mButtonSize = 42;
+  private Button[] mButton1;
+  private int mNrButton1 = 0;
+
+  public void setRefAzimuth( float azimuth, long fixed_extend )
+  {
+    mApp.mFixedExtend = fixed_extend;
+    mApp.mRefAzimuth = azimuth;
+    if ( mApp.mFixedExtend == 0 ) {
+      android.graphics.Matrix m = new android.graphics.Matrix();
+      m.postRotate( azimuth - 90 );
+      Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
+      Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+      mButton1[5].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+    } else if ( mApp.mFixedExtend == -1L ) {
+      mButton1[5].setBackgroundDrawable( mBMleft );
+    } else {
+      mButton1[5].setBackgroundDrawable( mBMright );
+    } 
+  }
+
   long secondLastShotId() { return mApp.mSecondLastShotId; }
 
   private ListView mList;
@@ -185,9 +206,6 @@ public class ShotActivity extends Activity
   private int mNextPos  = 0;   // next shot entry position
   // private TextView mSaveTextView = null;
 
-  private Button[] mButton1;
-  private int mNrButton1 = 0;;
-
   static long   mSensorId;
   static long   mPhotoId;
   static String mComment;
@@ -204,7 +222,7 @@ public class ShotActivity extends Activity
   //   return mApp.mData.getNextStationName( mApp.mSID );
   // }
 
-  // called by numberSplays
+  // called by numberSplays // FIXME-EXTEND
   private void tryExtendSplay( DistoXDBlock splay, float bearing, long extend, boolean flip )
   {
     if ( extend == 0 ) return;
@@ -344,7 +362,7 @@ public class ShotActivity extends Activity
 
       // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "numberSplays() updatelist size " + updatelist.size() );
       if ( updatelist.size() > 0 ) {
-        mApp.mData.updateShotNameAndExtend( sid, updatelist );
+        mApp.mData.updateShotNameAndExtend( sid, updatelist ); // FIXME-EXTEND
         // FIXME NOTIFY
       }
     }
@@ -774,7 +792,10 @@ public class ShotActivity extends Activity
   BitmapDrawable mBMdownload_wait;
   // BitmapDrawable mBMadd;
   BitmapDrawable mBMplot;
+  Bitmap mBMdial;
   BitmapDrawable mBMplot_no;
+  BitmapDrawable mBMleft;
+  BitmapDrawable mBMright;
 
   private Handler mListItemsHandler;
   static final int MSG_ADD_BLK = 1;
@@ -787,6 +808,7 @@ public class ShotActivity extends Activity
     mApp = (TopoDroidApp) getApplication();
     mApp.mShotActivity = this; // FIXME
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
+    mApp.resetRefAzimuth();
 
     mShowSplay   = new ArrayList< String >();
     mDataAdapter = new DistoXDBlockAdapter( this, this, R.layout.row, new ArrayList<DistoXDBlock>() );
@@ -804,9 +826,9 @@ public class ShotActivity extends Activity
     };
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
-    int size = mApp.setListViewHeight( mListView );
+    mButtonSize = mApp.setListViewHeight( mListView );
 
-    mNrButton1 = TopoDroidSetting.mLevelOverBasic ? 7 : 5;
+    mNrButton1 = TopoDroidSetting.mLevelOverBasic ? 8 : 6;
     mButton1 = new Button[ mNrButton1 ];
     int k;
     for ( k=0; k<mNrButton1; ++k ) {
@@ -815,14 +837,18 @@ public class ShotActivity extends Activity
       mButton1[k].setOnClickListener( this );
       // mButton1[k].setBackgroundResource(  icons00[k] );
 
-      BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], size, izons[k] );
+      BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[k] );
       if ( k == 0 ) mBMdownload = bm2;
       if ( k == 3 ) mBMplot = bm2;
-      // if ( k == 6 ) mBMadd  = bm2;
+      // if ( k == 7 ) mBMadd  = bm2;
     }
-    mBMplot_no = mApp.setButtonBackground( null, size, R.drawable.iz_plot_no );
-    mBMdownload_on = mApp.setButtonBackground( null, size, R.drawable.iz_download_on );
-    mBMdownload_wait = mApp.setButtonBackground( null, size, R.drawable.iz_download_wait );
+    mBMdial = BitmapFactory.decodeResource( getResources(), R.drawable.iz_dial );
+    mBMplot_no = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_plot_no );
+    mBMdownload_on = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_on );
+    mBMdownload_wait = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_wait );
+    mBMleft  = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_left );
+    mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
+    setRefAzimuth( mApp.mRefAzimuth, mApp.mFixedExtend );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -845,7 +871,7 @@ public class ShotActivity extends Activity
 
     // mImage.setBackgroundResource( 
     //   ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    mApp.setButtonBackground( mImage, size, R.drawable.iz_menu);
+    mApp.setButtonBackground( mImage, mButtonSize, R.drawable.iz_menu);
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
@@ -993,6 +1019,12 @@ public class ShotActivity extends Activity
         if ( mApp.mySurvey != null ) {
           (new DistoXAnnotations( this, mApp.mySurvey )).show();
         }
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
+        if ( TopoDroidSetting.mAzimuthManual ) {
+          setRefAzimuth( 0, - mApp.mFixedExtend );
+        } else {
+          (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
+        }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
         // ArrayList<DistoXDBlock> list = numberSplays(); // SPLAYS
         // if ( list != null && list.size() > 0 ) {
@@ -1001,7 +1033,7 @@ public class ShotActivity extends Activity
 
         // STATIONS
         (new CurrentStationDialog( this, this, mApp )).show();
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnAdd was mBtnMore
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnAdd 
         // mSecondLastShotId = mApp.lastShotId( );
         DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
         // Log.v( "DistoX", "last blk: " + last_blk.toString() );
