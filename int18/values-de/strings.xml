@@ -249,6 +249,10 @@
     <string name="popup_sharp_pt">Sharfen</string>
     <string name="popup_curve_pt">Glätten</string>
     <string name="popup_remove_pt">Löschen Punkt</string>
+    <!-- TODO string name="popup_mode_move">MOVE</string -->
+    <!-- TODO string name="popup_mode_draw">DRAW</string -->
+    <!-- TODO string name="popup_mode_erase">ERASE</string -->
+    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="not_available">BT nicht verfügbar</string>
     <!-- UNUSED string name="not_connected">Nicth verbinden</string -->
@@ -410,6 +414,7 @@
     <string name="button_photo"   >Foto</string>
     <string name="button_sensor"  >Messung</string>
     <string name="button_direction">Azimut/Neigung</string>
+    <string name="button_azimuth">Azimut</string>
     <string name="button_plot"    >Zeichnung</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_no"        >Nein      </string>
@@ -513,9 +518,10 @@
     <string name="help_photo">Fotos Dialog</string>
     <string name="help_sensor">Sensormessungen Dialog</string>
     <string name="help_3d">3D-Modell App (Cave3D)</string>
-    <string name="help_draw">Um den Zeichnungmodus eingeben</string>
-    <string name="help_eraser">Um den Löschmodus eingeben</string>
-    <string name="help_edit">Um den Bearbeitungsmodus eingeben</string>
+    <!-- TODO string name="help_move">Move/zoom mode</string -->
+    <string name="help_draw">Zeichnungmodus</string>
+    <string name="help_eraser">Löschmodus</string>
+    <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Die Skizzersreferenzen wählen</string>
     <string name="help_stats">Vermessung Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
@@ -681,15 +687,15 @@
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
   <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
-  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
-  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string -->
 
   <!-- TODO string name="pref_team_title">Equipo</string -->
   <!-- TODO string name="pref_team_summary">Surveying team</string -->
   <!-- TODO string name="pref_team_message">Default surveying team</string -->
-  <!-- TODO string name="pref_ethr_title">Extend threshold</string -->
-  <!-- TODO string name="pref_ethr_summary">Splay shot extend threshold</string -->
-  <!-- TODO string name="pref_ethr_message">Threshold to compute splay shot extend</string -->
+  <!-- TODO string name="pref_ethr_title">Vert Extend Angle</string -->
+  <!-- TODO string name="pref_ethr_summary">Splay shot vert extend angle</string -->
+  <!-- TODO string name="pref_ethr_message">Angle of splay vert extend</string -->
   <!-- TODO string name="pref_vthr_title">Shot vertical threshold</string -->
   <!-- TODO string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string -->
   <!-- TODO string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string -->

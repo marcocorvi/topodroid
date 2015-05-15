@@ -218,6 +218,10 @@
     <!-- string name="popup_sharp_pt">Angle aigu</string -->
     <!-- string name="popup_curve_pt">Curved segment</string -->
     <string name="popup_remove_pt">Supprimer le point</string>
+    <!-- TODO string name="popup_mode_move">MOVE</string -->
+    <!-- TODO string name="popup_mode_draw">DRAW</string -->
+    <!-- TODO string name="popup_mode_erase">ERASE</string -->
+    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="not_available">Bluetooth indisponible</string>
     <!-- string name="not_connected">Non connecté</string -->
@@ -381,6 +385,7 @@
     <string name="button_photo"   >Photos</string>
     <string name="button_sensor"  >Mesures</string>
     <!-- TODO string name="button_direction">Azimuth/Clino</string -->
+    <!-- TODO string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Non        </string>
@@ -474,8 +479,9 @@
     <string name="help_photo">Photos</string>
     <string name="help_sensor">Mesures</string>
     <string name="help_3d">Visionneuse 3D (Application Cave3D)</string>
-    <string name="help_draw">Entre en mode dessin</string>
-    <string name="help_edit">Entre en mode d\'édition</string>
+    <!-- TODO string name="help_move">Move/zoom mode</string -->
+    <string name="help_draw">Mode dessin</string>
+    <string name="help_edit">Mode d\'édition</string>
     <string name="help_refs">Choix des références de dessin</string>
     <string name="help_stats">Statistiques du relevé</string>
     <string name="help_save_plot">Exporte le croquis</string>
@@ -634,15 +640,15 @@
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
   <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
-  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
-  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string -->
 
   <string name="pref_team_title">Équipe</string>
   <!-- TODO string name="pref_team_summary">Surveying team</string -->
   <!-- TODO string name="pref_team_message">Default surveying team</string -->
-  <string name="pref_ethr_title">Seuil extension</string>
-  <string name="pref_ethr_summary">Seuil extension visée latérales</string>
-  <string name="pref_ethr_message">Seuil de calcul des visées étendues</string>
+  <!-- FIXME string name="pref_ethr_title">Seuil extension</string -->
+  <!-- FIXME string name="pref_ethr_summary">Seuil extension visée latérales</string -->
+  <!-- FIXME string name="pref_ethr_message">Seuil de calcul des visées étendues</string -->
   <string name="pref_vthr_title">Seuil visées verticales</string>
   <string name="pref_vthr_summary">Seuil vertical LRUD/WENS</string>
   <string name="pref_vthr_message">Seuil inclinaison cheminement entre LRUD/WENS</string>

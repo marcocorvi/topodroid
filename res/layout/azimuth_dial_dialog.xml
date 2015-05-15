@@ -51,7 +51,7 @@
           android:layout_height="wrap_content" 
           android:background="@drawable/button"
           style="@style/button_default"
-          android:text="@string/button_direction"
+          android:text="@string/button_azimuth"
           />
     </LinearLayout>
 

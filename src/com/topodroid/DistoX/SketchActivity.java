@@ -115,46 +115,42 @@ public class SketchActivity extends ItemDrawer
   HorizontalButtonView mButtonView2;
   HorizontalButtonView mButtonView3;
   HorizontalButtonView mButtonView4;
-  private int mNrButton1 = 9;          // main-primary
-  private int mNrButton2 = 6;          // draw
-  private int mNrButton3 = 8;          // edit
-  private int mNrButton4 = 7;          // select
+  private int mNrButton1 = 7;          // main-primary
+  private int mNrButton2 = 4;          // draw
+  private int mNrButton3 = 6;          // edit
+  private int mNrButton4 = 5;          // select
   HorizontalListView mListView;
   ListView   mMenu;
   Button     mImage;
   ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
 
-  private static int izonsok[] = { 
-                        R.drawable.iz_edit_ok, // 0
-                        R.drawable.iz_eraser_ok,
-                        R.drawable.iz_select_ok };
-                      
   private static int izons[] = { 
-                        R.drawable.iz_edit, // 0
+                        R.drawable.iz_move, // 0
+                        R.drawable.iz_edit, // 1
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
-                        R.drawable.iz_one,           // 3
-                        R.drawable.iz_mode,          // 4
+                        R.drawable.iz_one,           // 4
+                        R.drawable.iz_mode,          // 5
                         R.drawable.iz_plan,          // 
                         R.drawable.iz_download,      // 
                         R.drawable.iz_note,
-                        R.drawable.iz_info,          // 8 
+                        R.drawable.iz_info,          // 9 
 
-                        R.drawable.iz_undo,          // 9 <--
+                        R.drawable.iz_undo,          // 10<--
                         R.drawable.iz_redo,
-                        R.drawable.iz_list,          // 11
+                        R.drawable.iz_list,          // 12
 
-                        R.drawable.iz_refinet,       // 12
-                        R.drawable.iz_refinec,       // 13
+                        R.drawable.iz_refinet,       // 13
+                        R.drawable.iz_refinec,       // 14
                         R.drawable.iz_refines,       
                         R.drawable.iz_cut,
-                        R.drawable.iz_stretch,       // 15
+                        R.drawable.iz_stretch,       // 16
 
-                        R.drawable.iz_back,          // 17
+                        R.drawable.iz_back,          // 18
                         R.drawable.iz_forw,
                         R.drawable.iz_refinep,
-                        R.drawable.iz_note           // 20 Point: delete(cut), Leg: step
+                        R.drawable.iz_note           // 21 Point: delete(cut), Leg: step
                      };
 
   private static int menus[] = {
@@ -167,23 +163,24 @@ public class SketchActivity extends ItemDrawer
                       };
 
   private static int help_icons[] = {
-                        R.string.help_draw, // 0
+                        R.string.help_move,
+                        R.string.help_draw,
                         R.string.help_eraser,
                         R.string.help_edit,
-                        R.string.help_one_model,     // 3
-                        R.string.help_refs,          // 4
+                        R.string.help_one_model,   
+                        R.string.help_refs,       
                         R.string.help_surface,
                         R.string.help_download,
-                        R.string.help_note,          // 7
-                        R.string.help_stats,         // 8 ---------------
+                        R.string.help_note,      
+                        R.string.help_stats,         // ---------------
                         R.string.help_undo,
                         R.string.help_redo,          // 
-                        R.string.help_symbol_plot,   // 11 ----------------
-                        R.string.help_refine_triangle, // 12
+                        R.string.help_symbol_plot,   // ----------------
+                        R.string.help_refine_triangle, 
                         R.string.help_refine_center,
                         R.string.help_refine_sides,
-                        R.string.help_cut_model,     // 15
-                        R.string.help_stretch_model, // 16
+                        R.string.help_cut_model,    
+                        R.string.help_stretch_model,
                         R.string.help_previous,
                         R.string.help_next,
                         R.string.help_refine_point,
@@ -738,64 +735,45 @@ public class SketchActivity extends ItemDrawer
     // icons00ok = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsok : iconsok;
 
     mButton1 = new Button[ mNrButton1 ];
+    int off = 3;
+    int ic  = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = new Button( this );
       mButton1[k].setPadding(0,0,0,0);
       mButton1[k].setOnClickListener( this );
-      // mButton1[k].setBackgroundResource( icons00[k] );
-      mApp.setButtonBackground( mButton1[k], size, izons[k] );
+      ic = ( k == 0 )? 0 : off+k;
+      mApp.setButtonBackground( mButton1[k], size, izons[ic] );
     }
 
 
     mButton2 = new Button[ mNrButton2 ];
+    off = 2 + mNrButton1;
     for ( int k=0; k<mNrButton2; ++k ) {
       mButton2[k] = new Button( this );
       mButton2[k].setPadding(0,0,0,0);
       mButton2[k].setOnClickListener( this );
-      if ( k == 0 ) {
-        // mButton2[k].setBackgroundResource( icons00ok[k] );
-        mApp.setButtonBackground( mButton2[k], size, izonsok[k] );
-      } else if ( k < 3 ) {
-        // mButton2[k].setBackgroundResource( icons00[k] );
-        mApp.setButtonBackground( mButton2[k], size, izons[k] );
-      } else {
-        // mButton2[k].setBackgroundResource( icons00[9-3+k] );
-        mApp.setButtonBackground( mButton2[k], size, izons[9-3+k] );
-      }
+      ic = ( k == 0 )? 1 : off+k;
+      mApp.setButtonBackground( mButton2[k], size, izons[ic] );
     }
 
     mButton3 = new Button[ mNrButton3 ];
+    off = 1 + mNrButton1 + mNrButton2;
     for ( int k=0; k<mNrButton3; ++k ) {
       mButton3[k] = new Button( this );
       mButton3[k].setPadding(0,0,0,0);
       mButton3[k].setOnClickListener( this );
-      if ( k == 1 ) {
-        // mButton3[k].setBackgroundResource( icons00ok[k] );
-        mApp.setButtonBackground( mButton3[k], size, izonsok[k] );
-      } else if ( k < 3 ) {
-        // mButton3[k].setBackgroundResource( icons00[k] );
-        mApp.setButtonBackground( mButton3[k], size, izons[k] );
-      } else {
-        // mButton3[k].setBackgroundResource( icons00[12-3+k] );
-        mApp.setButtonBackground( mButton3[k], size, izons[12-3+k] );
-      }
+      ic = ( k == 0 )? 2 : off+k;
+      mApp.setButtonBackground( mButton3[k], size, izons[ic] );
     }
 
     mButton4 = new Button[ mNrButton4 ];
+    off = 0 + mNrButton1 + mNrButton2 + mNrButton3;
     for ( int k=0; k<mNrButton4; ++k ) {
       mButton4[k] = new Button( this );
       mButton4[k].setPadding(0,0,0,0);
       mButton4[k].setOnClickListener( this );
-      if ( k == 2 ) {
-        // mButton4[k].setBackgroundResource( icons00ok[k] );
-        mApp.setButtonBackground( mButton4[k], size, izonsok[k] );
-      } else if ( k < 3 ) {
-        // mButton4[k].setBackgroundResource( icons00[k] );
-        mApp.setButtonBackground( mButton4[k], size, izons[k] );
-      } else {
-        // mButton4[k].setBackgroundResource( icons00[17-3+k] );
-        mApp.setButtonBackground( mButton4[k], size, izons[17-3+k] );
-      }
+      ic = ( k == 0 )? 3 : off+k;
+      mApp.setButtonBackground( mButton4[k], size, izons[ic] );
     }
     mButtonView1 = new HorizontalButtonView( mButton1 );  // MOVE
     mButtonView2 = new HorizontalButtonView( mButton2 );  // DRAW
@@ -1630,31 +1608,23 @@ public class SketchActivity extends ItemDrawer
       //   // FIXME (new SketchSelectDialog(this, this)).show();
       // } else 
 
-      if ( ( b == mButton2[0] && mMode == SketchDef.MODE_DRAW ) || 
-                  ( b == mButton3[1] && mMode == SketchDef.MODE_EDIT ) ||
-                  ( b == mButton4[2] && mMode == SketchDef.MODE_SELECT ) ) { 
-        setMode( SketchDef.MODE_MOVE );
-      } else if ( b == mButton1[0] || b == mButton3[0] ||  b == mButton4[0] ) { // 0 --> DRAW
-        setMode( SketchDef.MODE_DRAW );
-      } else if ( b == mButton1[1] || b == mButton2[1] ||  b == mButton4[1] ) { // 1--> EDIT
-        setMode( SketchDef.MODE_EDIT ); 
-      } else if ( b == mButton1[2] || b == mButton2[2] ||  b == mButton3[2] ) { // 2--> SELECT
-        setMode( SketchDef.MODE_SELECT );
+      if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton4[0] ) {
+        // makeModePopup( b ); 
 
-      } else if ( b == mButton1[3] ) { // one
+      } else if ( b == mButton1[1] ) { // one
         mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
         resetZoom();
         // doSaveTh3AndReload( ); // save to th3
         // mSketchSurface.isDrawing = true;
-      } else if ( b == mButton1[4] ) { // display mode. cycle (NGBH, SINGLE, ALL)
+      } else if ( b == mButton1[2] ) { // display mode. cycle (NGBH, SINGLE, ALL)
         (new SketchModeDialog( this, mModel )).show();
-      } else if ( b == mButton1[5] ) { // surface
+      } else if ( b == mButton1[3] ) { // surface
         if ( mModel.mCurrentSurface != null ) {
           alertMakeSurface( );
         } else {
           doMakeSurface( );
         }
-      } else if ( b == mButton1[6] ) { // download
+      } else if ( b == mButton1[4] ) { // download
         if ( mApp.mDevice != null ) {
           // TODO if there is an empty shot use it, else try to download the data
           //      with the Asynch task that download the data.
@@ -1666,41 +1636,41 @@ public class SketchActivity extends ItemDrawer
         } else {
           Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[7] ) { // notes
+      } else if ( b == mButton1[5] ) { // notes
         (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
-      } else if ( b == mButton1[8] ) { // info
+      } else if ( b == mButton1[6] ) { // info
         new DistoXStatDialog( mSketchSurface.getContext(), mNum ).show();
 
-      } else if ( b == mButton2[3] ) { // undo
+      } else if ( b == mButton2[1] ) { // undo
         mModel.undo();
-      } else if ( b == mButton2[4] ) { // redo
+      } else if ( b == mButton2[2] ) { // redo
         mModel.redo();
-      } else if ( b == mButton2[5] ) { // symbols
+      } else if ( b == mButton2[3] ) { // symbols
         new ItemPickerDialog(this, this, mType ).show();
 
-      } else if ( b == mButton3[3] ) { // refine triangles
+      } else if ( b == mButton3[1] ) { // refine triangles
         //   extrudeRegion();
         // Log.v("DistoX", "refine to max side ");
         int split = mModel.refineToMaxSide( TopoDroidSetting.mSketchSideSize );
         if ( split == 0 ) { 
           Toast.makeText( this, getString(R.string.sketch_no_split), Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton3[4] ) { // refine_center
+      } else if ( b == mButton3[2] ) { // refine_center
         mModel.refineSurfaceAtCenters();
-      } else if ( b == mButton3[5] ) { // refine_sides
+      } else if ( b == mButton3[3] ) { // refine_sides
         mModel.refineSurfaceAtSides();
-      } else if ( b == mButton3[6] && mCurrentLinePath != null ) { // cut
+      } else if ( b == mButton3[4] && mCurrentLinePath != null ) { // cut
         cutRegion();
-      } else if ( b == mButton3[7] && mCurrentLinePath != null ) { // stretch
+      } else if ( b == mButton3[5] && mCurrentLinePath != null ) { // stretch
         stretchRegion();
 
-      } else if ( b == mButton4[3] ) { 
+      } else if ( b == mButton4[1] ) { 
         // TODO previous
-      } else if ( b == mButton4[4] ) { 
+      } else if ( b == mButton4[2] ) { 
         // TODO next
-      } else if ( b == mButton4[5] ) { 
+      } else if ( b == mButton4[3] ) { 
         mModel.refineSurfaceAtSelectedVertex();
-      } else if ( b == mButton4[6] ) { 
+      } else if ( b == mButton4[4] ) { 
         // TODO edit item
       }
     }

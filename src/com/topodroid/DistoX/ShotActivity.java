@@ -172,13 +172,21 @@ public class ShotActivity extends Activity
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
     mApp.mFixedExtend = fixed_extend;
-    mApp.mRefAzimuth = azimuth;
+    mApp.mRefAzimuth  = azimuth;
+    setRefAzimuthButton();
+  }
+
+  public void setRefAzimuthButton()
+  {
     if ( mApp.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
-      m.postRotate( azimuth - 90 );
-      Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
-      Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
-      mButton1[5].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+      m.postRotate( mApp.mRefAzimuth - 90 );
+      // if ( mBMdial != null ) // extra care !!!
+      {
+        Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
+        Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+        mButton1[5].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+      }
     } else if ( mApp.mFixedExtend == -1L ) {
       mButton1[5].setBackgroundDrawable( mBMleft );
     } else {
@@ -222,24 +230,24 @@ public class ShotActivity extends Activity
   //   return mApp.mData.getNextStationName( mApp.mSID );
   // }
 
-  // called by numberSplays // FIXME-EXTEND
+/* called only by numberSplays // it may go away ... FIXME-EXTEND
   private void tryExtendSplay( DistoXDBlock splay, float bearing, long extend, boolean flip )
   {
     if ( extend == 0 ) return;
     // double db = Math.cos( (bearing - splay.mBearing)*Math.PI/180 );
     // long ext = ( db > TopoDroidApp.mExtendThr )? extend : ( db < -TopoDroidApp.mExtendThr )? -extend : 0;
     if ( TopoDroidSetting.mSplayExtend ) { 
-      double db = bearing - splay.mBearing;
-      while ( db < -180 ) db += 360;
-      while ( db > 180 ) db -= 360;
-      db = Math.abs( db );
-      long ext = ( db < 90-TopoDroidSetting.mExtendThr )? extend : ( db > 90+TopoDroidSetting.mExtendThr )? -extend : 0;
+      double ber = splay.mBearing;
+      while ( ber < bearing ) ber += 360;
+      ber -= bearing;
+      long ext = TopoDroidApp.computeAbsoluteExtendSplay( ber );
       if ( flip ) ext = -ext;
       splay.mExtend = ext;
     } else {
       splay.mExtend = 0;
     }
   }
+*/
 
   // private boolean extendSplays()
   // { 
@@ -304,11 +312,11 @@ public class ShotActivity extends Activity
     }
   }
 
-  // called after mBtnSplays and by SketchNewShotDialog
+/* called only by SketchNewShotDialog ... it may go away FIXME-EXTEND
   ArrayList<DistoXDBlock> numberSplays()
   { 
     ArrayList<DistoXDBlock> updatelist = null;
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "numberSplays() ");
+    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "number Splays() ");
     long sid = mApp.mSID;
     if ( sid < 0 ) {
       // Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
@@ -360,7 +368,7 @@ public class ShotActivity extends Activity
         }
       }
 
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "numberSplays() updatelist size " + updatelist.size() );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "number Splays() updatelist size " + updatelist.size() );
       if ( updatelist.size() > 0 ) {
         mApp.mData.updateShotNameAndExtend( sid, updatelist ); // FIXME-EXTEND
         // FIXME NOTIFY
@@ -368,6 +376,7 @@ public class ShotActivity extends Activity
     }
     return updatelist;
   }
+*/
 
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
@@ -808,7 +817,6 @@ public class ShotActivity extends Activity
     mApp = (TopoDroidApp) getApplication();
     mApp.mShotActivity = this; // FIXME
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
-    mApp.resetRefAzimuth();
 
     mShowSplay   = new ArrayList< String >();
     mDataAdapter = new DistoXDBlockAdapter( this, this, R.layout.row, new ArrayList<DistoXDBlock>() );
@@ -848,7 +856,9 @@ public class ShotActivity extends Activity
     mBMdownload_wait = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_wait );
     mBMleft  = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_left );
     mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
-    setRefAzimuth( mApp.mRefAzimuth, mApp.mFixedExtend );
+
+    mApp.resetRefAzimuth( 90 );
+    // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -1026,13 +1036,13 @@ public class ShotActivity extends Activity
           (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
-        // ArrayList<DistoXDBlock> list = numberSplays(); // SPLAYS
+        (new CurrentStationDialog( this, this, mApp )).show();
+
+        // ArrayList<DistoXDBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
         // if ( list != null && list.size() > 0 ) {
         //   updateDisplay( );
         // }
 
-        // STATIONS
-        (new CurrentStationDialog( this, this, mApp )).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnAdd 
         // mSecondLastShotId = mApp.lastShotId( );
         DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );

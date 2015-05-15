@@ -229,6 +229,10 @@
     <string name="popup_sharp_pt">Изправяне на сегмента</string>
     <string name="popup_curve_pt">Изглаждане на сегмента</string>
     <string name="popup_remove_pt">Изтриване на точката</string>
+    <!-- TODO string name="popup_mode_move">MOVE</string -->
+    <!-- TODO string name="popup_mode_draw">DRAW</string -->
+    <!-- TODO string name="popup_mode_erase">ERASE</string -->
+    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="connected_none">Няма връзка</string>
     <string name="connected_already">Вече има връзка</string>
@@ -391,6 +395,7 @@
     <string name="button_photo"   >Снимка</string>
     <string name="button_sensor"  >Сензори</string>
     <string name="button_direction">Азимут/Наклон</string>
+    <string name="button_azimuth">Азимут</string>
     <string name="button_plot"    >Скица</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Не        </string>
@@ -530,6 +535,7 @@
     <string name="help_photo">Снимки</string>
     <string name="help_sensor">Сензорни измервания</string>
     <string name="help_3d">3D програма (Cave3D)</string>
+    <!-- TODO string name="help_move">Enter move/zoom mode</string -->
     <string name="help_draw">Вкл. на режим на скициране</string>
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
@@ -705,16 +711,16 @@
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
-  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
-  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string -->
 
   <string name="pref_team_title">Картировачи</string>
   <string name="pref_team_summary">Екип картировачи</string>
   <string name="pref_team_message">Екип картировачи по подразбиране</string>
 
-  <string name="pref_ethr_title">Граница за разгъване</string>
-  <string name="pref_ethr_summary">Граница за верт. разгъване на странични отсечки</string>
-  <string name="pref_ethr_message">Граница, над която да се изчислява разгъване</string>
+  <!-- FIXME string name="pref_ethr_title">Граница за разгъване</string -->
+  <!-- FIXME string name="pref_ethr_summary">Граница за верт. разгъване на странични отсечки</string -->
+  <!-- FIXME string name="pref_ethr_message">Граница, над която да се изчислява разгъване</string -->
   <string name="pref_vthr_title">Вертикална граница на отсечка</string>
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
   <string name="pref_vthr_message">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>

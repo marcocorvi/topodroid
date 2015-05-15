@@ -143,7 +143,7 @@ public class CompassParser extends ImportParser
                         float ber = mBearing + 270;
                         if ( ber > 360 ) ber -= 360;
                         if ( TopoDroidSetting.mSplayExtend ) {
-                          extend = ( ber < 90 || ber > 270 )? 1 : -1;
+                          extend = (int)TopoDroidApp.computeSplayExtend( ber );
                         }
                         splays.add( new ParserShot( mFrom, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                       }
@@ -151,7 +151,7 @@ public class CompassParser extends ImportParser
                         float ber = mBearing + 90;
                         if ( ber > 360 ) ber -= 360;
                         if ( TopoDroidSetting.mSplayExtend ) {
-                          extend = ( ber < 90 || ber > 270 )? 1 : -1;
+                          extend = (int)TopoDroidApp.computeSplayExtend( ber );
                         }
                         splays.add( new ParserShot( mFrom, null, mRight, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                       }

@@ -173,8 +173,9 @@ public class TopoDroidApp extends Application
   DataDownloader mDataDownloader = null;  // data downloader
   static DataHelper mData = null;         // database 
 
-  SurveyActivity mSurveyActivity = null;
-  ShotActivity mShotActivity  = null;
+  static SurveyActivity mSurveyActivity = null;
+  static ShotActivity mShotActivity     = null;
+  static DrawingActivity mDrawingActivity = null;
   TopoDroidActivity mActivity = null; 
 
   // static final int DISTO_NONE = 0;  // supported Disto types
@@ -987,10 +988,12 @@ public class TopoDroidApp extends Application
   static float mRefAzimuth = 90; // west to east
   static long  mFixedExtend = 0;
 
-  static void resetRefAzimuth()
+  static void resetRefAzimuth( float azimuth )
   {
-    mRefAzimuth = 90;
+    mRefAzimuth  = azimuth;
     mFixedExtend = ( TopoDroidSetting.mAzimuthManual )? 1L : 0L;
+    if ( mShotActivity != null ) mShotActivity.setRefAzimuthButton();
+    // DrawingActivity does not have the RefAzimuth setting
   }
 
   static long computeLegExtend( double bearing )
@@ -1008,13 +1011,20 @@ public class TopoDroidApp extends Application
     return mFixedExtend;
   }
 
+  // used for manually entered shots, and by Compass parser
   static long computeSplayExtend( double bearing )
   {
-    double ref = mRefAzimuth;
-    while ( bearing < ref ) bearing += 360;
-    bearing -= ref;
-    if ( bearing > 90+15 && bearing < 270-15 ) return -1L;
-    if ( bearing < 90-15 || bearing > 270+15 ) return 1L;
+    while ( bearing < mRefAzimuth ) bearing += 360;
+    bearing -= mRefAzimuth;
+    return computeAbsoluteExtendSplay( bearing );
+  }
+
+
+  // @param b bearing [deg] in 0 .. 360
+  static long computeAbsoluteExtendSplay( double b )
+  {
+    if ( b > 90 + TopoDroidSetting.mExtendThr && b < 270 - TopoDroidSetting.mExtendThr ) return -1L;
+    if ( b < 90 - TopoDroidSetting.mExtendThr || b > 270 + TopoDroidSetting.mExtendThr ) return 1L;
     return 0L;
   }
 
@@ -1036,7 +1046,7 @@ public class TopoDroidApp extends Application
     boolean shot_after_splay = TopoDroidSetting.mShotAfterSplays;
 
     boolean flip = false;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "assignStations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
     DistoXDBlock prev = null;
     String from = (survey_stations == 1 )? DistoXStationName.mInitialStation 
@@ -1451,7 +1461,7 @@ public class TopoDroidApp extends Application
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: left " + left );
           }
           if ( l >= 0.0f ) {
-            if ( horizontal ) {
+            if ( horizontal ) { // WENS
               extend = computeSplayExtend( 270 );
               if ( at >= 0L ) {
                 id = mData.insertShotAt( mSID, at, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
@@ -1481,7 +1491,7 @@ public class TopoDroidApp extends Application
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: right " + right );
           }
           if ( r >= 0.0f ) {
-            if ( horizontal ) {
+            if ( horizontal ) { // WENS
               extend = computeSplayExtend( 90 );
               if ( at >= 0L ) {
                 id = mData.insertShotAt( mSID, at, r, 90.0f, 0.0f, 0.0f, extend, 1, true );

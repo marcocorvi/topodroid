@@ -229,6 +229,10 @@
     <string name="popup_sharp_pt">Straighten segment</string>
     <string name="popup_curve_pt">Smoothen segment</string>
     <string name="popup_remove_pt">Remove point</string>
+    <string name="popup_mode_move">MOVE</string>
+    <string name="popup_mode_draw">DRAW</string>
+    <string name="popup_mode_erase">ERASE</string>
+    <string name="popup_mode_edit">EDIT</string>
 
     <string name="connected_none">Not connected</string>
     <string name="connected_already">Already connected</string>
@@ -389,6 +393,7 @@
     <string name="button_photo"   >Photo</string>
     <string name="button_sensor"  >Sensors</string>
     <string name="button_direction">Azimuth/Clino</string>
+    <string name="button_azimuth">Azimuth</string>
     <string name="button_plot"    >Sketch</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >No        </string>
@@ -501,7 +506,7 @@
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_continue">Continue drawing a line</string>
     <string name="help_current_station">Saved stations</string>
-    <string name="help_azimuth">Extend reference-azimuth</string>
+    <string name="help_azimuth">"Extend" reference</string>
     <string name="help_device">Enter device activity</string>
     <string name="help_add_topodroid">Create new survey/calibration</string>
     <string name="help_import">Import zip archive or survey file</string>
@@ -528,8 +533,9 @@
     <string name="help_photo">Photos dialog</string>
     <string name="help_sensor">Measurements dialog</string>
     <string name="help_3d">3D viewer app (Cave3D)</string>
-    <string name="help_draw">Enter drawing mode</string>
-    <string name="help_edit">Enter editing mode</string>
+    <string name="help_move">Move/zoom mode</string>
+    <string name="help_draw">Drawing mode</string>
+    <string name="help_edit">Editing mode</string>
     <string name="help_refs">Choose sketching references</string>
     <string name="help_stats">Survey statistics dialog</string>
     <string name="help_save_plot">Export sketch</string>
@@ -539,7 +545,7 @@
     <string name="help_redo">Redo last drawing action</string>
     <string name="help_symbol_plot">Select the current drawing tool</string>
     <!-- string name="help_clear">Clear selection</string -->
-    <string name="help_eraser">Erase drawings</string>
+    <string name="help_eraser">Erasing mode</string>
     <string name="help_previous">Previous item in the selection</string>
     <string name="help_next">Next item in the selection</string>
     <string name="help_recover">Reload sketch from backup</string>
@@ -703,16 +709,16 @@
   <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
   <string name="pref_mag_anomaly_title">Magnetic Anomaly</string>
   <string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string>
-  <string name="pref_azimuth_manual_title">Extend by azimuth</string>
-  <string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string>
+  <string name="pref_azimuth_manual_title">Manual "extend"</string>
+  <string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string>
 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Surveying team</string>
   <string name="pref_team_message">Default surveying team</string>
 
-  <string name="pref_ethr_title">Extend threshold</string>
-  <string name="pref_ethr_summary">Splay shot extend threshold</string>
-  <string name="pref_ethr_message">Threshold to compute splay shot extend</string>
+  <string name="pref_ethr_title">Vert. extend angle</string>
+  <string name="pref_ethr_summary">Angle of splay "vertical" extend</string>
+  <string name="pref_ethr_message">Angle of "vertical" extend for splays [deg]</string>
   <string name="pref_vthr_title">Shot vertical threshold</string>
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
   <string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string>

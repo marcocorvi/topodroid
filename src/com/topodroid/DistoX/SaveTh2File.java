@@ -23,10 +23,11 @@ import android.os.AsyncTask;
 // import android.os.Bundle;
 import android.os.Handler;
 
-// import android.util.Log;
+import android.util.Log;
 
 class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
 {
+  final static int NR_BACKUP = 5;
     private Context mContext;
     private Handler mHandler;
     private TopoDroidApp mApp;
@@ -45,6 +46,28 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
        mFullName1 = fullname1;
        mFullName2 = fullname2;
        // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveTh2File " + mFilename1 + " " + mFilename2 );
+       // Log.v( "DistoX", "SaveTh2File " + mFullName1 + " " + mFullName2 );
+    }
+
+    private void rotateBackups( String filename )
+    {
+      // Log.v("DistoX", "rotate " + filename );
+      File file2;
+      File file1;
+      for ( int i=NR_BACKUP-1; i>0; --i ) { 
+        file2 = new File( filename + Integer.toString(i) );
+        file1 = new File( filename + Integer.toString(i-1) );
+        if ( file1.exists() ) {
+          // Log.v("DistoX", "rename " + (i-1) + "->" + i + " size " + file1.length() + " " + file2.length() );
+          file1.renameTo( file2 );
+        }
+      }
+      file2 = new File( filename + "0" );
+      file1 = new File( filename );
+      if ( file1.exists() ) {
+        // Log.v("DistoX", "rename .->0 size " + file1.length() + " " + file2.length() );
+        file1.renameTo( file2 );
+      }
     }
 
     @Override
@@ -54,6 +77,10 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
       synchronized( TopoDroidPath.mTherionLock ) {
         try {
           if ( mFullName2 != null ) {
+            String filename = TopoDroidPath.getTh2FileWithExt( mFullName2 ) + ".bck";
+            // Log.v("DistoX", "save th2 files " + mFullName2 );
+            rotateBackups( filename );
+
             String filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
             File file2 = new File( filename2 + "tmp" );
             TopoDroidApp.checkPath( filename2 + "tmp" );
@@ -70,6 +97,11 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
               f2.renameTo( b2 );
               file2.renameTo( new File( filename2 ) );
             }
+
+            filename = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+            // Log.v("DistoX", "save th2 files " + mFullName1 );
+            rotateBackups( filename );
+
             String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
             File file1 = new File( filename1 + "tmp" );
             TopoDroidApp.checkPath( filename1 + "tmp" );
@@ -115,7 +147,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
     {
       super.onPostExecute(bool);
       if ( mHandler != null ) {
-        mHandler.sendEmptyMessage( bool? 1 : 0 );
+        mHandler.sendEmptyMessage( bool? 661 : 660 );
       }
     }
 }

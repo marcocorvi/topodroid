@@ -583,7 +583,7 @@ class TopoDroidSetting
     setMagAnomaly( prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
     mAzimuthManual = prefs.getBoolean( key[k++], false ); // DISTOX_AZIMUTH_MANUAL
-    app.resetRefAzimuth();
+    app.resetRefAzimuth( app.mRefAzimuth );
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -893,7 +893,7 @@ class TopoDroidSetting
       setMagAnomaly( prefs.getBoolean( k, false ) );
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AZIMUTH_MANUAL
       mAzimuthManual = prefs.getBoolean( k, false ); 
-      app.resetRefAzimuth();
+      app.resetRefAzimuth( app.mRefAzimuth );
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

@@ -228,6 +228,10 @@
     <string name="popup_sharp_pt">Выровнить сегмент</string>
     <string name="popup_curve_pt">Сгладить сегмент</string>
     <string name="popup_remove_pt">Удалить точку</string>
+    <!-- TODO string name="popup_mode_move">MOVE</string -->
+    <!-- TODO string name="popup_mode_draw">DRAW</string -->
+    <!-- TODO string name="popup_mode_erase">ERASE</string -->
+    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="connected_none">Не соединено</string>
     <string name="connected_already">Уже соединено</string>
@@ -388,6 +392,7 @@
     <string name="button_photo"   >Фото</string>
     <string name="button_sensor"  >Датчики</string>
     <string name="button_direction">Азимут/угол</string>
+    <string name="button_azimuth">Азимут</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Нет       </string>
     <string name="button_open"      >Откр      </string>
@@ -519,6 +524,7 @@
     <string name="help_photo">Инструмент Фото</string>
     <string name="help_sensor">Инструмент Измерения</string>
     <string name="help_3d">3D просмотр (Cave3D)</string>
+    <!-- TODO string name="help_move">Enter move/zoom mode</string -->
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Выбрать привязку абриса</string>
@@ -694,15 +700,15 @@
   <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
   <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
-  <!-- TODO string name="pref_azimuth_manual_title">Extend by azimuth</string -->
-  <!-- TODO string name="pref_azimuth_manual_summary">Extend legs by reference azimuth</string -->
+  <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->
+  <!-- TODO string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string -->
 
   <string name="pref_team_title">Группа съёмемки</string>
   <string name="pref_team_summary">Группа съёмемки</string>
   <string name="pref_team_message">Группа съёмемки по умолчанию</string>
-  <string name="pref_ethr_title">Порог расчета проэкции</string>
-  <string name="pref_ethr_summary">Допустимое отклонениие в бок. замере</string>
-  <string name="pref_ethr_message">Порог расчета бокового измерения как проэкции</string>
+  <!-- FIXME string name="pref_ethr_title">Порог расчета проэкции</string -->
+  <!-- FIXME string name="pref_ethr_summary">Допустимое отклонениие в бок. замере</string -->
+  <!-- FIXME string name="pref_ethr_message">Порог расчета бокового измерения как проэкции</string -->
   <string name="pref_vthr_title">Вертикальный порог для пикетов</string>
   <string name="pref_vthr_summary">Верт. порог ЛПВН/ЗВСЮ</string>
   <string name="pref_vthr_message">Допустимый наклон отрезка между ЛПВН/ЗВСЮ</string>

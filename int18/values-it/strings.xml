@@ -218,6 +218,10 @@
     <string name="popup_sharp_pt">Rendi diritto</string>
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
+    <string name="popup_mode_move">MUOVI</string>
+    <string name="popup_mode_draw">DISEGNA</string>
+    <string name="popup_mode_erase">CANCELLA</string>
+    <string name="popup_mode_edit">MODIFICA</string>
 
     <string name="not_available">Bluetooth non disponibile</string>
     <!-- string name="not_connected">Non connesso</string -->
@@ -376,6 +380,7 @@
     <string name="button_photo"   >Foto</string>
     <string name="button_sensor"  >Misure</string>
     <!-- OK string name="button_direction">Azimuth/Clino</string -->
+    <!-- OK string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >No        </string>
@@ -442,7 +447,7 @@
     
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_current_station">Capisaldi salvati</string>
-    <string name="help_azimuth">Azimuth di riferimento per il profilo</string>
+    <string name="help_azimuth">Riferimento per "extend"</string>
     <string name="help_device">Finestra DistoX</string>
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
@@ -469,6 +474,7 @@
     <string name="help_photo">Foto</string>
     <string name="help_sensor">Misurazioni</string>
     <string name="help_3d">3D app (Cave3D)</string>
+    <string name="help_move">Modalità muovi/zoom</string>
     <string name="help_draw">Modalità disegno</string>
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
@@ -629,16 +635,16 @@
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
   <string name="pref_mag_anomaly_title">Anomalia magnetica</string>
   <string name="pref_mag_anomaly_summary">Compensazione anomalia magnetica locale</string>
-  <string name="pref_azimuth_manual_title">"extend" con azimuth</string>
-  <string name="pref_azimuth_manual_summary">Azimuth per "extend" delle battute</string>
+  <string name="pref_azimuth_manual_title">"extend" manuale</string>
+  <string name="pref_azimuth_manual_summary">Fissa "extend" delle battute manualmente</string>
 
   <string name="pref_team_title">Squadra</string>
   <string name="pref_team_summary">Squadra topo</string>
   <string name="pref_team_message">Squadra di topografia</string>
 
-  <string name="pref_ethr_title">Soglia extend</string>
-  <string name="pref_ethr_summary">Soglia computo extend per tiri splay</string>
-  <string name="pref_ethr_message">Soglia computo extend per tiri splay</string>
+  <string name="pref_ethr_title">Angolo vert. extend</string>
+  <string name="pref_ethr_summary">Angolo di vert. extend per splay</string>
+  <string name="pref_ethr_message">Angolo di vert. extend per splay</string>
   <string name="pref_vthr_title">Soglia vert.</string>
   <string name="pref_vthr_summary">Soglia inclinazione LRUD/WENS</string>
   <string name="pref_vthr_message">Soglia inclinazione battuta per LRUD/WENS</string>

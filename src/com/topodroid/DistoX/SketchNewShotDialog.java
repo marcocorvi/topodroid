@@ -143,7 +143,7 @@ public class SketchNewShotDialog extends Dialog
         mShots.updateShot( mFrom, to, 1, 0, false, null, mBlk ); // null comment ?
         mBlk.setName( mFrom, to ); // reset block name/type
         if ( ! splay ) {
-          updateList = mShots.numberSplays();
+          /* updateList = mShots.numberSplays(); // FIXME-EXTEND in may go away ... */
         } else {
           updateList = new ArrayList<DistoXDBlock>();
         }

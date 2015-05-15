@@ -9,16 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120623 handle line attributes in loadTherion
- * 20120705 hadle point attributes in loadTherion
- * 20121113 sink/spring points from Therion
- * 20121122 overloaded point snow/ice, flowstone/moonmilk dig/choke crystal/gypsum
- * 20121206 symbol libraries
- * 20130826 split line path
- * 20130828 shift point path (change position of symbol point)
- * 201311   new editing action forwarded to the commandManager
- * 20140328 line-leg intersection (forwarded to CommandManager)
- * 20140513 export as cSurvey
  */
 package com.topodroid.DistoX;
 
@@ -486,19 +476,23 @@ public class DrawingSurface extends SurfaceView
 
   public boolean loadTherion( String filename1, String filename2, SymbolsPalette missingSymbols )
   {
-    SymbolsPalette localPalette = preparePalette();
+    SymbolsPalette localPalette1 = preparePalette();
+    SymbolsPalette localPalette2 = null;
 
     missingSymbols.resetSymbolLists();
     boolean ret = true;
-
-    commandManager = mCommandManager1;
-    commandManager.clearSketchItems();
-    ret = ret && doLoadTherion( filename1, missingSymbols, localPalette );
+    if ( filename1 != null ) {
+      commandManager = mCommandManager1;
+      commandManager.clearSketchItems();
+      ret = ret && doLoadTherion( filename1, missingSymbols, localPalette1 );
+    } else {
+      localPalette2 = localPalette1;
+    }
     if ( filename2 != null ) {
       commandManager = mCommandManager2;
       commandManager.clearSketchItems();
       // use palette from PLAN file
-      ret = ret && doLoadTherion( filename2, missingSymbols, null );
+      ret = ret && doLoadTherion( filename2, missingSymbols, localPalette2 );
     }
     commandManager = mCommandManager1;
     return ret;

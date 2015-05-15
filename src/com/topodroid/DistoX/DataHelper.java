@@ -799,11 +799,6 @@ public class DataHelper extends DataSetObservable
   
   public long insertShot( long sid, long id, double d, double b, double c, double r, long extend, int type, boolean forward )
   {
-    // long extend = 0L;
-    // if ( TopoDroidSetting.mSplayExtend ) { // FIXME DataHelper should not do this 
-    //   extend = TopoDroidApp.computeExtend( b );
-    //   // extend = ( b < 180.0 )? 1L : -1L;
-    // }
     return insertShot( sid, id, "", "",  d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY, 0L, 0L, type, "", forward );
   }
 

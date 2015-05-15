@@ -88,28 +88,28 @@ public class DrawingActivity extends ItemDrawer
                                       , ILister
                                       , IZoomer
 {
-  private static int izonsok[] = { 
-                        R.drawable.iz_edit_ok, // 0
-                        R.drawable.iz_eraser_ok,
-                        R.drawable.iz_select_ok };
+  // private static int izonsok[] = { 
+  //                       R.drawable.iz_edit_ok, // 0
+  //                       R.drawable.iz_eraser_ok,
+  //                       R.drawable.iz_select_ok };
 
-  private static int IC_DOWNLOAD = 3;
-  private static int IC_JOIN     = 15;
-  private static int IC_JOIN_NO  = 20;
-  private static int IC_PLAN     = 6;
-  private static int IC_DIAL     = 7;
-  private static int IC_MENU     = 18;
-  private static int IC_EXTEND   = 19;
-  private static int IC_CONTINUE_NO = 12;  // index of continue-no icon
-  private static int IC_CONTINUE = 21;     // index of continue icon
-  private static int IC_ADD = 22;
+  private static int IC_DOWNLOAD = 4;
+  private static int IC_JOIN     = 16;
+  private static int IC_JOIN_NO  = 21;
+  private static int IC_PLAN     = 7;
+  private static int IC_DIAL     = 8;
+  private static int IC_MENU     = 19;
+  private static int IC_EXTEND   = 20;
+  private static int IC_CONTINUE_NO = 13;  // index of continue-no icon
+  private static int IC_CONTINUE = 22;     // index of continue icon
+  private static int IC_ADD = 23;
 
-  private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
-  private static int BTN_BLUETOOTH = 4;
-  private static int BTN_JOIN = 5;
-  private static int BTN_PLOT = 6;      // index of mButton1 plot button
-  private static int BTN_DIAL = 7;      // index of mButton1 azimuth button
-  private static int BTN_CONTINUE = 6;  // index of mButton2 continue button
+  private static int BTN_DOWNLOAD = 1;  // index of mButton1 download button
+  private static int BTN_BLUETOOTH = 2;
+  private static int BTN_JOIN = 3;
+  private static int BTN_PLOT = 4;      // index of mButton1 plot button
+  private static int BTN_DIAL = 5;      // index of mButton1 azimuth button
+  private static int BTN_CONTINUE = 4;  // index of mButton2 continue button
 
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
@@ -125,8 +125,9 @@ public class DrawingActivity extends ItemDrawer
   BitmapDrawable mBMleft;
   BitmapDrawable mBMright;
   Bitmap mBMdial;
-                      
+
   private static int izons[] = { 
+                        R.drawable.iz_move,
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
@@ -162,7 +163,9 @@ public class DrawingActivity extends ItemDrawer
                         R.string.menu_help
                      };
 
-  private static int help_icons[] = { R.string.help_draw,
+  private static int help_icons[] = { 
+                        R.string.help_move,
+                        R.string.help_draw,
                         R.string.help_eraser,
                         R.string.help_edit,
                         R.string.help_download,
@@ -212,6 +215,7 @@ public class DrawingActivity extends ItemDrawer
     // private Paint mCurrentPaint;
     LinearLayout popup_layout = null;
     PopupWindow popup_window = null;
+    PopupWindow popup_mode_window = null;
 
     // private boolean canRedo;
     private DistoXNum mNum;
@@ -245,7 +249,7 @@ public class DrawingActivity extends ItemDrawer
     public static final int MODE_DRAW  = 1;
     public static final int MODE_MOVE  = 2;
     public static final int MODE_EDIT  = 3;
-    public static final int MODE_ZOOM = 4;  // used only for touchMode
+    public static final int MODE_ZOOM  = 4; // used only for touchMode
     public static final int MODE_SHIFT = 5; // change point symbol position
     public static final int MODE_ERASE = 6;
 
@@ -486,20 +490,20 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    private void AlertMissingSymbols()
-    {
-      new TopoDroidAlertDialog( this, getResources(),
-                        getResources().getString( R.string.missing_symbols ),
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick( DialogInterface dialog, int btn ) {
-            mAllSymbols = true;
-          }
-        }
-      );
-    }
+    // private void AlertMissingSymbols()
+    // {
+    //   new TopoDroidAlertDialog( this, getResources(),
+    //                     getResources().getString( R.string.missing_symbols ),
+    //     new DialogInterface.OnClickListener() {
+    //       @Override
+    //       public void onClick( DialogInterface dialog, int btn ) {
+    //         mAllSymbols = true;
+    //       }
+    //     }
+    //   );
+    // }
 
-    private void immediateSaveTh2( )
+    void immediateSaveTh2( )
     {
       // Log.v( TopoDroidApp.TAG, " savingTh2 " + mFullName1 + " " + mFullName2 + " do save ");
       Handler handler = new Handler(){
@@ -512,43 +516,41 @@ public class DrawingActivity extends ItemDrawer
       (new SaveTh2File(this, handler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
     }
 
-    private void doSaveTh2( boolean not_all_symbols )
+    private void doSaveTh2( ) 
     {
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT,
-                        " doSaveTh2 " + mFullName1 + " " + mFullName2 + " not all symbols " + not_all_symbols );
+      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
-        if ( not_all_symbols ) {
-          AlertMissingSymbols();
-        }
+        // if ( not_all_symbols ) AlertMissingSymbols();
         if ( mAllSymbols ) {
 
           // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-
-          final boolean alert = not_all_symbols;
-          final Activity currentActivity  = this;
-          Handler saveHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-              mApp.mShotActivity.enableSketchButton( true );
-              if ( alert ) {
-                if (msg.what == 1 ) { // FIXME mFullName
-                  Toast.makeText( currentActivity, 
-                        getString(R.string.saved_file_) + " " + mFullName1 + ".th2", Toast.LENGTH_SHORT ).show();
-                } else {
-                  Toast.makeText( currentActivity, 
-                        getString(R.string.saving_file_failed), Toast.LENGTH_SHORT ).show();
-                }
-              }
-            }
-          } ;
-          mApp.mShotActivity.enableSketchButton( false );
-          (new SaveTh2File(this, saveHandler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
+          startSaveTh2Task();
         } else { // mAllSymbols is false
           // FIXME what to do ?
          Toast.makeText( this,
            "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
         }
       }
+    }
+
+    private void startSaveTh2Task()
+    {
+      // final Activity currentActivity = this; // if Toast
+      Handler saveHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+          // Log.v("DistoX", "handle message " + msg.what );
+          if ( msg.what == 660 ) {
+            mApp.mShotActivity.enableSketchButton( true );
+          } else if ( msg.what == 661 ) {
+            mApp.mShotActivity.enableSketchButton( true );
+          } else {
+            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "handle save th2 message " + msg.what);
+          }
+        }
+      };
+      mApp.mShotActivity.enableSketchButton( false );
+      (new SaveTh2File(this, saveHandler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
     }
 
   private void computeReferences( int type, float xoff, float yoff, float zoom )
@@ -627,10 +629,10 @@ public class DrawingActivity extends ItemDrawer
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  private int mNrButton1 = 9;          // main-primary
-  private int mNrButton2 = 7;          // draw
-  private int mNrButton3 = 7;          // edit
-  private int mNrButton5 = 3;          // erase
+  private int mNrButton1 = 7;          // main-primary
+  private int mNrButton2 = 5;          // draw
+  private int mNrButton3 = 5;          // edit
+  private int mNrButton5 = 1;          // erase
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
   HorizontalButtonView mButtonView2;
@@ -649,6 +651,19 @@ public class DrawingActivity extends ItemDrawer
 
   public float zoom() { return mZoom; }
 
+
+  // private class SaveTimerTask extends java.util.TimerTask
+  // {
+  //     @Override
+  //     public void run() {
+  //       (new SaveTh2File(this, null, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
+  //       // immediateSaveTh2( );
+  //     }
+  // }
+
+  // SaveTimerTask mSaveTask = null;
+  // Timer mSaveTimer = null;
+                      
   // --------------------------------------------------------------
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
@@ -757,15 +772,17 @@ public class DrawingActivity extends ItemDrawer
       mButtonSize = mApp.setListViewHeight( mListView );
 
       mButton1 = new Button[ mNrButton1 ];
+      int off = 0 + 3;
+      int ic = 0;
       for ( int k=0; k<mNrButton1; ++k ) {
         mButton1[k] = new Button( this );
         mButton1[k].setPadding(0,0,0,0);
         mButton1[k].setOnClickListener( this );
-        // mButton1[k].setBackgroundResource( icons00[k] );
-        BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[k] );
-        if ( k == IC_DOWNLOAD ) {
+        ic = ( k == 0 )? 0 : off+k;
+        BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[ ic ] );
+        if ( ic == IC_DOWNLOAD ) {
           mBMdownload = bm2;
-        } else if ( k == IC_PLAN ) {
+        } else if ( ic == IC_PLAN ) {
           mBMplan = bm2;
         }
       }
@@ -778,61 +795,39 @@ public class DrawingActivity extends ItemDrawer
       setRefAzimuth( mApp.mRefAzimuth, mApp.mFixedExtend );
 
       mButton2 = new Button[ mNrButton2 ];
-      int off = mNrButton1 - 3; // starts at mNrButton1
+      off = mNrButton1 + 2; 
       for ( int k=0; k<mNrButton2; ++k ) {
         mButton2[k] = new Button( this );
         mButton2[k].setPadding(0,0,0,0);
         mButton2[k].setOnClickListener( this );
-        if ( k == 0 ) {
-          mApp.setButtonBackground( mButton2[k], mButtonSize, izonsok[k] );
-        } else if ( k < 3 ) {
-          mApp.setButtonBackground( mButton2[k], mButtonSize, izons[k] );
-        } else {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons[off+k] );
-          if ( off+k == IC_CONTINUE_NO ) mBMcontinue_no = bm2;
-        }
+        ic = ( k == 0 )? 1 : off+k;
+        BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons[ic] );
+        if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = bm2;
       }
       mBMcontinue  = mApp.setButtonBackground( null, mButtonSize, izons[IC_CONTINUE] );
 
       mButton3 = new Button[ mNrButton3 ];
-      off = mNrButton1 + mNrButton2 - 2*3; 
+      off = mNrButton1 + mNrButton2 + 1; 
       for ( int k=0; k<mNrButton3; ++k ) {
         mButton3[k] = new Button( this );
         mButton3[k].setPadding(0,0,0,0);
         mButton3[k].setOnClickListener( this );
-        if ( k == 2 ) {
-          mApp.setButtonBackground( mButton3[k], mButtonSize, izonsok[k] );
-        } else if ( k < 3 ) {
-          mApp.setButtonBackground( mButton3[k], mButtonSize, izons[k] );
-        } else {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons[off+k] );
-          if ( off+k == IC_JOIN ) mBMjoin = bm2;
-        }
+        ic = ( k == 0 )? 3 : off+k;
+        BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons[ic] );
+        if ( ic == IC_JOIN ) mBMjoin = bm2;
       }
       mBMjoin_no = mApp.setButtonBackground( null, mButtonSize, izons[IC_JOIN_NO] );
       mBMadd     = mApp.setButtonBackground( null, mButtonSize, izons[IC_ADD] );
 
       mButton5 = new Button[ mNrButton5 ];
-      off = mNrButton1 + mNrButton2 + mNrButton3 - 3*3;
+      off = mNrButton1 + mNrButton2 + mNrButton3 + 0;
       for ( int k=0; k<mNrButton5; ++k ) {
         mButton5[k] = new Button( this );
         mButton5[k].setPadding(0,0,0,0);
         mButton5[k].setOnClickListener( this );
-        if ( k == 1 ) {
-          mApp.setButtonBackground( mButton5[k], mButtonSize, izonsok[k] );
-        } else if ( k < 3 ) {
-          mApp.setButtonBackground( mButton5[k], mButtonSize, izons[k] );
-        } else {
-          // mButton5[k].setBackgroundResource( icons00[off+k] ); // nothing else
-        }
+        ic = ( k == 0 )? 2 : off+k;
+        BitmapDrawable bm2 = mApp.setButtonBackground( mButton5[k], mButtonSize, izons[ic] );
       }
-      if ( TopoDroidSetting.mActivityLevel < 1 ) {
-        mButton1[2].setVisibility( View.GONE );
-        mButton2[2].setVisibility( View.GONE );
-        mButton3[2].setVisibility( View.GONE );
-        mButton5[2].setVisibility( View.GONE );
-      }
-
       // set button1[download] icon
       setConnectionStatus( mDataDownloader.getStatus() );
 
@@ -913,6 +908,10 @@ public class DrawingActivity extends ItemDrawer
       if ( mDataDownloader != null ) {
         mApp.registerLister( this );
       }
+      // if ( mSaveTask != null ) mSaveTask.cancel();
+      // mSaveTask = new SaveTimerTask();
+      // mSaveTimer = new Timer();
+      // mSaveTimer.schedule( mSaveTask, 10000, 60000 );
     }
 
     @Override
@@ -946,7 +945,11 @@ public class DrawingActivity extends ItemDrawer
 
     private void doStop()
     {
-      doSaveTh2( false ); // do not alert-dialog on mAllSymbols
+      // if ( mSaveTimer != null ) mSaveTimer.cancel();
+      // mSaveTimer =  null;
+      // if ( mSaveTask != null ) mSaveTask.cancel();
+      // mSaveTask = null;
+      doSaveTh2( ); // do not alert-dialog on mAllSymbols
     }
 
 // ----------------------------------------------------------------------------
@@ -1287,9 +1290,15 @@ public class DrawingActivity extends ItemDrawer
         File file = new File( filename );
         if ( file.exists() ) file.delete(); 
         // Log.v("DistoX", "delete th2 file " + filename );
-        filename = filename + ".bck";
-        file = new File( filename );
+
+        String filepath = filename + ".bck";
+        file = new File( filepath );
         if ( file.exists() ) file.delete(); 
+        for ( int i=0; i<SaveTh2File.NR_BACKUP; ++i ) {
+          filepath = filename + ".bck" + Integer.toString(i);
+          file = new File( filepath );
+          if ( file.exists() ) file.delete(); 
+        }
 
         filename = TopoDroidPath.getJpgFile( mApp.mySurvey, name + ".jpg" );
         file = new File( filename );
@@ -1405,6 +1414,7 @@ public class DrawingActivity extends ItemDrawer
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
       dismissPopup();
+      dismissModePopup();
 
       float d0 = TopoDroidSetting.mCloseCutoff + TopoDroidSetting.mCloseness / mZoom;
 
@@ -1911,14 +1921,14 @@ public class DrawingActivity extends ItemDrawer
       );
     }
 
-    private Button makeButton( String text )
+    private Button makeButton( String text, int color, int size )
     {
       Button myTextView = new Button( this );
-      myTextView.setHeight( 42 );
+      myTextView.setHeight( 3*size );
 
       myTextView.setText( text );
-      myTextView.setTextColor( 0xffffffff );
-      myTextView.setTextSize( TypedValue.COMPLEX_UNIT_DIP, 16 );
+      myTextView.setTextColor( color );
+      myTextView.setTextSize( TypedValue.COMPLEX_UNIT_DIP, size );
       myTextView.setBackgroundColor( 0xff333333 );
       myTextView.setSingleLine( true );
       myTextView.setGravity( 0x03 ); // left
@@ -1931,12 +1941,122 @@ public class DrawingActivity extends ItemDrawer
     {
       if ( popup_window != null ) {
         dismissPopup();
+        dismissModePopup();
         return;
       } 
       // finish();
       super.onBackPressed();
     }
 
+    private void setMode( int mode )
+    {
+      mMode = mode;
+      switch ( mMode ) {
+        case MODE_MOVE:
+          setTheTitle();
+          mDrawingSurface.setDisplayPoints( false );
+          mListView.setAdapter( mButtonView1.mAdapter );
+          mListView.invalidate();
+          break;
+        case MODE_DRAW:
+          setTheTitle();
+          mDrawingSurface.setDisplayPoints( false );
+          mListView.setAdapter( mButtonView2.mAdapter );
+          mListView.invalidate();
+          break;
+        case MODE_ERASE:
+          setTheTitle();
+          mDrawingSurface.setDisplayPoints( false );
+          mListView.setAdapter( mButtonView5.mAdapter );
+          mListView.invalidate();
+          break;
+        case MODE_EDIT:
+          setTheTitle();
+          mDrawingSurface.setDisplayPoints( true );
+          mListView.setAdapter( mButtonView3.mAdapter );
+          mListView.invalidate();
+          break;
+        default:
+          break;
+      }
+    }
+  
+    private void makeModePopup( View b )
+    {
+      final Context context = this;
+      popup_layout = new LinearLayout(this);
+      popup_layout.setOrientation(LinearLayout.VERTICAL);
+      int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+      int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+      // ===== MOVE
+      String text = getString(R.string.popup_mode_move );
+      int len = text.length();
+      Button myTextView0 = makeButton( text, 0xff00ff00, 24 );
+      popup_layout.addView(myTextView0, new LinearLayout.LayoutParams(lHeight, lWidth));
+      myTextView0.setOnClickListener( new View.OnClickListener( ) {
+        public void onClick(View v) {
+          setMode( MODE_MOVE );
+          dismissModePopup();
+        }
+      } );
+      // ===== DRAW
+      text = getString(R.string.popup_mode_draw);
+      if ( len < text.length() ) len = text.length();
+      Button myTextView1 = makeButton( text, 0xff00ff00, 24 );
+      popup_layout.addView(myTextView1, new LinearLayout.LayoutParams(lHeight, lWidth));
+      myTextView1.setOnClickListener( new View.OnClickListener( ) {
+        public void onClick(View v) {
+          setMode( MODE_DRAW );
+          dismissModePopup();
+        }
+      } );
+      // ===== ERASE
+      text = getString(R.string.popup_mode_erase);
+      if ( len < text.length() ) len = text.length();
+      Button myTextView2 = makeButton( text, 0xff00ff00, 24 );
+      popup_layout.addView(myTextView2, new LinearLayout.LayoutParams(lHeight, lWidth));
+      myTextView2.setOnClickListener( new View.OnClickListener( ) {
+        public void onClick(View v) {
+          setMode( MODE_ERASE );
+          dismissModePopup();
+        }
+      } );
+      // ===== EDIT
+      Button myTextView3 = null;
+      if ( TopoDroidSetting.mLevelOverBasic ) {
+        text = getString(R.string.popup_mode_edit);
+        if ( len < text.length() ) len = text.length();
+        myTextView3 = makeButton( text, 0xff00ff00, 24 );
+        popup_layout.addView(myTextView3, new LinearLayout.LayoutParams(lHeight, lWidth));
+        myTextView3.setOnClickListener( new View.OnClickListener( ) {
+          public void onClick(View v) {
+            setMode( MODE_EDIT );
+            dismissModePopup();
+          }
+        } );
+      } 
+
+      FontMetrics fm = myTextView0.getPaint().getFontMetrics();
+      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.30);
+      myTextView0.setWidth( w );
+      myTextView1.setWidth( w );
+      myTextView2.setWidth( w );
+      if ( myTextView3 != null ) myTextView3.setWidth( w );
+      // Log.v( TopoDroidApp.TAG, "popup width " + w );
+      popup_mode_window = new PopupWindow( popup_layout, w, h ); // popup_layout.getHeight(), popup_layout.getWidth() );
+      popup_mode_window.showAsDropDown(b); 
+    }
+
+    private void dismissModePopup()
+    {
+      if ( popup_mode_window != null ) {
+        popup_mode_window.dismiss();
+        popup_mode_window = null;
+      }
+    }
+ 
     /** line/area editing
      * @param b button
      */
@@ -1952,7 +2072,7 @@ public class DrawingActivity extends ItemDrawer
         //
         String text = getString(R.string.popup_join_pt);
         int len = text.length();
-        Button myTextView0 = makeButton( text );
+        Button myTextView0 = makeButton( text, 0xffffffff, 16 );
         popup_layout.addView(myTextView0, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView0.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -1971,7 +2091,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_snap_ln);
         if ( len < text.length() ) len = text.length();
-        Button myTextView1 = makeButton( text );
+        Button myTextView1 = makeButton( text, 0xffffffff, 16 );
         popup_layout.addView(myTextView1, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView1.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -1997,7 +2117,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_split_pt);
         if ( len > text.length() ) len = text.length();
-        Button myTextView2 = makeButton( text );
+        Button myTextView2 = makeButton( text, 0xffffffff, 16 );
         popup_layout.addView(myTextView2, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView2.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2012,7 +2132,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_split_ln);
         if ( len < text.length() ) len = text.length();
-        Button myTextView3 = makeButton( text );
+        Button myTextView3 = makeButton( text, 0xffffffff, 16 );
         popup_layout.addView(myTextView3, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView3.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2030,7 +2150,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_sharp_pt);
         if ( len < text.length() ) len = text.length();
-        Button myTextView4 = makeButton( text );
+        Button myTextView4 = makeButton( text, 0xffffffff, 16 );
         popup_layout.addView(myTextView4, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView4.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2052,7 +2172,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_curve_pt);
         if ( len < text.length() ) len = text.length();
-        Button myTextView5 = makeButton( text );
+        Button myTextView5 = makeButton( text, 0xffffffff, 16 );
         popup_layout.addView(myTextView5, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView5.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2086,7 +2206,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_remove_pt);
         if ( len < text.length() ) len = text.length();
-        Button myTextView6 = makeButton( text );
+        Button myTextView6 = makeButton( text, 0xffffffff, 16 );
         popup_layout.addView(myTextView6, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView6.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2133,23 +2253,33 @@ public class DrawingActivity extends ItemDrawer
     {
       if ( mType == PlotInfo.PLOT_PLAN ) {
         saveReference( mPlot1, mPid1 );
-        mPid  = mPid2;
-        mName = mName2;
-        mType = (int)PlotInfo.PLOT_EXTENDED;
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
-        mDrawingSurface.setManager( mType );
-        resetReference( mPlot2 );
+        setPlotType2();
       } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
         saveReference( mPlot2, mPid2 );
-        mPid  = mPid1;
-        mName = mName1;
-        mType = (int)PlotInfo.PLOT_PLAN;
-        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
-        mDrawingSurface.setManager( mType );
-        resetReference( mPlot1 );
+        setPlotType1();
       }
     }
-  
+
+    private void setPlotType2( )
+    {
+      mPid  = mPid2;
+      mName = mName2;
+      mType = (int)PlotInfo.PLOT_EXTENDED;
+      mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
+      mDrawingSurface.setManager( mType );
+      resetReference( mPlot2 );
+    } 
+
+    private void setPlotType1()
+    {
+      mPid  = mPid1;
+      mName = mName1;
+      mType = (int)PlotInfo.PLOT_PLAN;
+      mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
+      mDrawingSurface.setManager( mType );
+      resetReference( mPlot1 );
+    }
+
     public void onClick(View view)
     {
       if ( onMenu ) {
@@ -2159,6 +2289,7 @@ public class DrawingActivity extends ItemDrawer
       // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingActivity onClick() " + view.toString() );
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingActivity onClick() point " + mCurrentPoint + " symbol " + mSymbol );
       dismissPopup();
+      dismissModePopup();
 
       Button b = (Button)view;
       if ( b == mImage ) {
@@ -2171,35 +2302,9 @@ public class DrawingActivity extends ItemDrawer
         }
         return;
       }
-      if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
-           ( b == mButton5[1] && mMode == MODE_ERASE ) || 
-           ( b == mButton3[2] && ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) ) ) { 
-        mMode = MODE_MOVE;
-        setTheTitle();
-        mDrawingSurface.setDisplayPoints( false );
-        mListView.setAdapter( mButtonView1.mAdapter );
-        mListView.invalidate();
-      } else if ( b == mButton1[0] || b == mButton3[0] || b == mButton5[0] ) { // 0 --> DRAW
-        mMode = MODE_DRAW;
-        setTheTitle();
-        mDrawingSurface.setDisplayPoints( false );
-        mListView.setAdapter( mButtonView2.mAdapter );
-        mListView.invalidate();
-      } else if ( b == mButton1[1] || b == mButton2[1] || b == mButton3[1] ) { // 1--> ERASE
-        mMode = MODE_ERASE;
-        setTheTitle();
-        mDrawingSurface.setDisplayPoints( false );
-        mListView.setAdapter( mButtonView5.mAdapter );
-        mListView.invalidate();
-      } else if ( b == mButton1[2] || b == mButton2[2] || b == mButton5[2] ) { // 2 --> EDIT
-        if ( TopoDroidSetting.mLevelOverBasic ) {
-          mMode = MODE_EDIT;
-          setTheTitle();
-          mDrawingSurface.setDisplayPoints( true );
-          mListView.setAdapter( mButtonView3.mAdapter );
-          mListView.invalidate();
-        }
-      } else if ( b == mButton1[3] ) { // download
+      if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton5[0] ) {
+        makeModePopup( b );
+      } else if ( b == mButton1[1] ) { // download
         resetFixedPaint();
         if ( mType == (int)PlotInfo.PLOT_PLAN ) {
           saveReference( mPlot1, mPid1 );
@@ -2214,51 +2319,51 @@ public class DrawingActivity extends ItemDrawer
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
-      } else if ( b == mButton1[4] ) { // BLUETOOTH
+      } else if ( b == mButton1[2] ) { // BLUETOOTH
         new DeviceRemote( this, this, mApp ).show();
-      } else if ( b == mButton1[5] ) { // DISPLAY MODE 
+      } else if ( b == mButton1[3] ) { // DISPLAY MODE 
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
-      } else if ( b == mButton1[6] ) { // TOGGLE PLAN/EXTENDED
+      } else if ( b == mButton1[4] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
           immediateSaveTh2( ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
-      } else if ( b == mButton1[7] ) { //  AZIMUTH
+      } else if ( b == mButton1[5] ) { //  AZIMUTH
         if ( TopoDroidSetting.mAzimuthManual ) {
           setRefAzimuth( 0, - mApp.mFixedExtend );
         } else {
           (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
         }
 
-      } else if ( b == mButton1[8] ) { //  NOTE
+      } else if ( b == mButton1[6] ) { //  NOTE
         (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
 
-      } else if ( b == mButton2[3] ) { // UNDO
+      } else if ( b == mButton2[1] ) { // UNDO
         mDrawingSurface.undo();
         if ( mDrawingSurface.hasMoreUndo() == false ) {
           // undoBtn.setEnabled( false );
         }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
-      } else if ( b == mButton2[4] ) { // REDO
+      } else if ( b == mButton2[2] ) { // REDO
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
         }
-      } else if ( b == mButton2[5] ) { // pointBtn
+      } else if ( b == mButton2[3] ) { // pointBtn
         new ItemPickerDialog(this, this, mType ).show();
-      } else if ( b == mButton2[6] ) { //  continueBtn
+      } else if ( b == mButton2[4] ) { //  continueBtn
         setButtonContinue( ! mContinueLine );
 
-      } else if ( b == mButton3[3] ) { // prev
+      } else if ( b == mButton3[1] ) { // prev
         mMode = MODE_SHIFT;
         SelectionPoint pt = mDrawingSurface.prevHotItem();
         if ( pt != null ) setButton3( pt.type() );
-      } else if ( b == mButton3[4] ) { // next
+      } else if ( b == mButton3[2] ) { // next
         mMode = MODE_SHIFT;
         SelectionPoint pt = mDrawingSurface.nextHotItem();
         if ( pt != null ) setButton3( pt.type() );
-      } else if ( b == mButton3[5] ) { // item/point editing: move, split, remove, etc.
+      } else if ( b == mButton3[3] ) { // item/point editing: move, split, remove, etc.
         // Log.v( TopoDroidApp.TAG, "Button3[5] inLinePoint " + inLinePoint );
         if ( inLinePoint ) {
           makePopup( b );
@@ -2269,7 +2374,7 @@ public class DrawingActivity extends ItemDrawer
           //   new DrawingBarrierDialog( this, this, sn.mName, mNum.isBarrier( sn.mName ) ).show();
           // }
         }
-      } else if ( b == mButton3[6] ) { // edit item properties
+      } else if ( b == mButton3[4] ) { // edit item properties
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           switch ( sp.type() ) {
@@ -2555,16 +2660,31 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    // called by PlotSaveDialog: save as th2 even if there are missing symbols
+    // private rotateBackups( String filename )
+    // {
+    //   String filename2 = filename + "4"; // last backup
+    //   File file2 = new File( filename2 );
+    //   for ( int i=3; i>=0; --i ) { 
+    //     File file1 = new File( filename + Integer.toString(i) );
+    //     if ( file1.exists() ) file1.renameTo( file2 );
+    //     file2 = file1;
+    //   }
+    //   File file = new File( filename );
+    //   if ( file.exists() ) file.renameTo( file2 );
+    // }
+
+    // called only by PlotSaveDialog: save as th2 even if there are missing symbols
     void saveTh2()
     {
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
-      String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
-      String filename2 = null;
-      if ( mFullName2 != null ) {
-        filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 ) + ".bck";
-      }
-      doSaveTh2( ! mAllSymbols );
+      // String filename  = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+      // rotateBackup( filename );
+      // if ( mFullName2 != null ) {
+      //   filename = TopoDroidPath.getTh2FileWithExt( mFullName2 ) + ".bck";
+      //   rotateBackup( filename );
+      // }
+      // doSaveTh2( ! mAllSymbols );
+      startSaveTh2Task();
     }
 
   
@@ -2644,74 +2764,7 @@ public class DrawingActivity extends ItemDrawer
   }
 
   // ---------------------------------------------------------
-  /* MENU
-
-  // private MenuItem mMIrefs;
-  private MenuItem mMIsymbol;
-  private MenuItem mMIsave;
-  private MenuItem mMIdelete;
-  private MenuItem mMIoptions;
-  private MenuItem mMIrecover;
-  private MenuItem mMIhelp;
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) 
-  {
-    super.onCreateOptionsMenu( menu );
-
-    mMIsave    = menu.add( R.string.menu_export );
-    mMIsave.setIcon(    icons[15] );
-
-    if ( TopoDroidApp.mLevelOverNormal ) {
-      mMIrecover   = menu.add( R.string.menu_reload );
-      mMIrecover.setIcon( icons[16] );
-
-      mMIdelete  = menu.add( R.string.menu_delete );
-      mMIdelete.setIcon(  icons[17] );
-
-      mMIsymbol  = menu.add( R.string.menu_palette );
-      mMIsymbol.setIcon(  icons[18] );
-    }
-
-    mMIoptions = menu.add( R.string.menu_options );
-    mMIoptions.setIcon( icons[19] );
-
-    mMIhelp    = menu.add( R.string.menu_help  );
-    mMIhelp.setIcon(    icons[20] );
-
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) 
-  {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
-    // Handle item selection
-    // if ( item == mMIrefs ) { // REFERENCES DIALOG
-    //   new DrawingModeDialog( this, mDrawingSurface ).show();
-    if ( item == mMIsymbol ) { // PALETTE
-      DrawingBrushPaths.makePaths( getResources() );
-      (new SymbolEnableDialog( this, this )).show();
-    } else if ( item == mMIsave ) { // SAVE DIALOG
-      new PlotSaveDialog( this, this ).show();
-    } else if ( item == mMIdelete ) { // DELETE DIALOG
-      askDelete();
-    } else if ( item == mMIoptions ) { // OPTIONS DIALOG
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
-      startActivity( intent );
-    } else if ( item == mMIrecover ) { // RECOVER FROM BACKUP
-      askRecover();
-    } else if ( item == mMIhelp ) { // HELP DIALOG
-      int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 3 + ( TopoDroidApp.mLevelOverBasic? mNrButton3 - 3: 0 );
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 8 ) ).show();
-    } else {
-      return super.onOptionsItemSelected(item);
-    }
-    return true;
-  }
-
-  */
+  // MENU
 
   private void setMenuAdapter()
   {
@@ -2748,14 +2801,19 @@ public class DrawingActivity extends ItemDrawer
           new DistoXStatDialog( mDrawingSurface.getContext(), mNum ).show();
         }
       } else if ( p++ == pos ) { // RECOVER
-        askRecover();
+        // askRecover();
+        if ( mType == PlotInfo.PLOT_EXTENDED ) {
+          ( new PlotRecoverDialog( this, this, mFullName2, 2 ) ).show();
+        } else {
+          ( new PlotRecoverDialog( this, this, mFullName1, 1 ) ).show();
+        }
       } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DELETE
         askDelete();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
       } else if ( p++ == pos ) { // OVERVIEW
-        immediateSaveTh2(); 
+        immediateSaveTh2( );
         try {
           Thread.sleep(100);
         } catch ( InterruptedException e ) { /* ignore */ }
@@ -2778,27 +2836,33 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
-  private void askRecover()
-  {
-    new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.plot_recover ),
-      new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick( DialogInterface dialog, int btn ) {
-          doRecover();
-        }
-      }
-    );
-  }
+  // private void askRecover()
+  // {
+  //   new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.plot_recover ),
+  //     new DialogInterface.OnClickListener() {
+  //       @Override
+  //       public void onClick( DialogInterface dialog, int btn ) {
+  //         doRecover( mFullName1, mFullName2 );
+  //       }
+  //     }
+  //   );
+  // }
 
-  private void doRecover()
+  // FIXME BACKUP
+  void doRecover( String filename, int type )
   {
-    String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
-    String filename2 = null;
-    if ( mFullName2 != null ) {
-      filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 ) + ".bck";
-    }
+    // Log.v("DistoX", "recover " + type + " " + filename );
+
+    String filename1 = TopoDroidPath.getTh2File( filename );
     SymbolsPalette missingSymbols = new SymbolsPalette();
-    mDrawingSurface.loadTherion( filename1, filename2, missingSymbols );
+    if ( type == 1 ) {
+      mDrawingSurface.loadTherion( filename1, null, missingSymbols );
+      setPlotType1();
+    } else {
+      mDrawingSurface.loadTherion( null, filename1, missingSymbols );
+      // TODO now switch to extended view FIXME-VIEW
+      setPlotType2();
+    }
   }
 
   void exportAsCsx( PrintWriter pw )
