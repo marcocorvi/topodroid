@@ -688,6 +688,9 @@
   <string name="pref_closeness_title">Радиус при избиране</string>
   <string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string>
   <string name="pref_closeness_message">Радиус за избиране на елемент от скицата</string>
+  <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
+  <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
+  <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
   <string name="pref_altitude_title">Надморска височина</string>
   <string name="pref_altitude_summary">Тип на надморската височина</string>
   <string name="pref_altimetric_title">Ортометрична справка за височината</string>

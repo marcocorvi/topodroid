@@ -29,7 +29,7 @@
        android:dialogTitle="@string/pref_ethr_title"
        android:dialogMessage="@string/pref_ethr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="0.2" />
+       android:defaultValue="10" />
 
      <CheckBoxPreference
        android:key="DISTOX_SPLAY_EXTEND"

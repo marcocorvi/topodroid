@@ -612,6 +612,9 @@
   <string name="pref_closeness_title">Selección radio</string>
   <string name="pref_closeness_summary">Selección dibujo de elementos radio</string>
   <string name="pref_closeness_message">dibujo selección radio</string>
+  <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
+  <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
+  <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
   <string name="pref_altitude_title">Altimetría</string>
   <string name="pref_altitude_summary">Seleccione el tipo de exportación</string>
   <!-- TODO string name="pref_altimetric_title">Orthometric atitude</string -->

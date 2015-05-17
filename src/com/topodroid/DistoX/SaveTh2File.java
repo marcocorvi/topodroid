@@ -33,20 +33,22 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
     private TopoDroidApp mApp;
     private DrawingSurface mSurface;
     private String mFullName1;
-    private String mFullName2;
+    // private String mFullName2;
+    private int mType; // plot type
 
     public SaveTh2File( Context context, Handler handler,
                         TopoDroidApp app, DrawingSurface surface, 
-                        String fullname1, String fullname2 )
+                        String fullname1, /* String fullname2, */ long type )
     {
        mContext  = context;
        mHandler  = handler;
        mApp      = app;
        mSurface  = surface;
        mFullName1 = fullname1;
-       mFullName2 = fullname2;
+       // mFullName2 = fullname2;
+       mType = (int)type;
        // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveTh2File " + mFilename1 + " " + mFilename2 );
-       // Log.v( "DistoX", "SaveTh2File " + mFullName1 + " " + mFullName2 );
+       Log.v( "DistoX", "SaveTh2File " + mFullName1 + " type " + mType );
     }
 
     private void rotateBackups( String filename )
@@ -76,29 +78,29 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
       boolean ret = false;
       synchronized( TopoDroidPath.mTherionLock ) {
         try {
-          if ( mFullName2 != null ) {
-            String filename = TopoDroidPath.getTh2FileWithExt( mFullName2 ) + ".bck";
-            // Log.v("DistoX", "save th2 files " + mFullName2 );
-            rotateBackups( filename );
+          // if ( mFullName2 != null ) {
+          //   String filename = TopoDroidPath.getTh2FileWithExt( mFullName2 ) + ".bck";
+          //   // Log.v("DistoX", "save th2 files " + mFullName2 );
+          //   rotateBackups( filename );
 
-            String filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
-            File file2 = new File( filename2 + "tmp" );
-            TopoDroidApp.checkPath( filename2 + "tmp" );
-            FileWriter writer2 = new FileWriter( file2 );
-            
-            BufferedWriter out2 = new BufferedWriter( writer2 );
-            mSurface.exportTherion( (int)PlotInfo.PLOT_EXTENDED, out2, mFullName2, PlotInfo.projName[ (int)PlotInfo.PLOT_EXTENDED ] );
-            out2.flush();
-            out2.close();
-            {
-              String p2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
-              File f2 = new File( p2 );
-              File b2 = new File( p2 + ".bck" );
-              f2.renameTo( b2 );
-              file2.renameTo( new File( filename2 ) );
-            }
+          //   String filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
+          //   File file2 = new File( filename2 + "tmp" );
+          //   TopoDroidApp.checkPath( filename2 + "tmp" );
+          //   FileWriter writer2 = new FileWriter( file2 );
+          //   
+          //   BufferedWriter out2 = new BufferedWriter( writer2 );
+          //   mSurface.exportTherion( (int)PlotInfo.PLOT_EXTENDED, out2, mFullName2, PlotInfo.projName[ (int)PlotInfo.PLOT_EXTENDED ] );
+          //   out2.flush();
+          //   out2.close();
+          //   {
+          //     String p2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
+          //     File f2 = new File( p2 );
+          //     File b2 = new File( p2 + ".bck" );
+          //     f2.renameTo( b2 );
+          //     file2.renameTo( new File( filename2 ) );
+          //   }
 
-            filename = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+            String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
             // Log.v("DistoX", "save th2 files " + mFullName1 );
             rotateBackups( filename );
 
@@ -107,7 +109,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
             TopoDroidApp.checkPath( filename1 + "tmp" );
             FileWriter writer1 = new FileWriter( file1 );
             BufferedWriter out1 = new BufferedWriter( writer1 );
-            mSurface.exportTherion( (int)PlotInfo.PLOT_PLAN, out1, mFullName1, PlotInfo.projName[ (int)PlotInfo.PLOT_PLAN ] );
+            mSurface.exportTherion( mType, out1, mFullName1, PlotInfo.projName[mType] );
             out1.flush();
             out1.close();
             {
@@ -117,23 +119,25 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
               f1.renameTo( b1 );
               file1.renameTo( new File( filename1 ) );
             }
-          } else {
-            String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-            TopoDroidApp.checkPath( filename + "tmp" );
-            File file = new File( filename + "tmp" );
-            FileWriter writer = new FileWriter( file );
-            BufferedWriter out = new BufferedWriter( writer );
-            mSurface.exportTherion( (int)PlotInfo.PLOT_SECTION, out, mFullName1, PlotInfo.projName[ (int)PlotInfo.PLOT_SECTION ] );
-            out.flush();
-            out.close();
-            {
-              String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-              File f1 = new File( p1 );
-              File b1 = new File( p1 + ".bck" );
-              f1.renameTo( b1 );
-              file.renameTo( new File( filename ) );
-            }
-          }
+
+
+          // } else {
+          //   String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+          //   TopoDroidApp.checkPath( filename + "tmp" );
+          //   File file = new File( filename + "tmp" );
+          //   FileWriter writer = new FileWriter( file );
+          //   BufferedWriter out = new BufferedWriter( writer );
+          //   mSurface.exportTherion( (int)PlotInfo.PLOT_SECTION, out, mFullName1, PlotInfo.projName[ (int)PlotInfo.PLOT_SECTION ] );
+          //   out.flush();
+          //   out.close();
+          //   {
+          //     String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+          //     File f1 = new File( p1 );
+          //     File b1 = new File( p1 + ".bck" );
+          //     f1.renameTo( b1 );
+          //     file.renameTo( new File( filename ) );
+          //   }
+          // }
           ret = true;
         } catch (Exception e) {
           e.printStackTrace();

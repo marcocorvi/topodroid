@@ -96,6 +96,7 @@ class TopoDroidSetting
     "DISTOX_Z6_WORKAROUND",          // 62
     "DISTOX_MAG_ANOMALY",
     "DISTOX_AZIMUTH_MANUAL",         // 64
+    "DISTOX_VERT_SPLAY",             //
     "DISTOX_LOCALE",                 // 65
     "DISTOX_CWD",                    // must be last 
 
@@ -134,6 +135,7 @@ class TopoDroidSetting
   static boolean mMagAnomaly = false;    // local magnetic anomaly survey
   static float  mSplayVertThrs = 80;
   static boolean mAzimuthManual = false; // whether to manually set extend / or use reference azimuth
+  static float mVertSplay = 50;
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -351,9 +353,9 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) { }
 
     try {
-      setExtendThr( Float.parseFloat( prefs.getString( key[k++], "30" ) ) );    // DISTOX_EXTEND_THR2
+      setExtendThr( Float.parseFloat( prefs.getString( key[k++], "10" ) ) );    // DISTOX_EXTEND_THR2
     } catch ( NumberFormatException e ) {
-      setExtendThr( 30 );
+      setExtendThr( 10 );
     }
 
     try {
@@ -569,7 +571,8 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) { }
 
     try {
-      mSplayVertThrs = Integer.parseInt( prefs.getString( key[k++], "80") ); // DISTOX_SPLAY_VERT_THRS
+      f = Integer.parseInt( prefs.getString( key[k++], "80") ); // DISTOX_SPLAY_VERT_THRS
+      if ( f >= 0 && f <= 91 ) mSplayVertThrs = f;
     } catch ( NumberFormatException e ) { }
 
     mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION
@@ -584,6 +587,11 @@ class TopoDroidSetting
 
     mAzimuthManual = prefs.getBoolean( key[k++], false ); // DISTOX_AZIMUTH_MANUAL
     app.resetRefAzimuth( app.mRefAzimuth );
+
+    try {                                                 // DISTOX_VERT_SPLAY
+      f = Float.parseFloat( prefs.getString( key[k++], "50" ) );
+      if ( f >= 0 && f <= 91 ) mVertSplay = f;
+    } catch ( NumberFormatException e  ) { }
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -639,8 +647,8 @@ class TopoDroidSetting
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) { 
       try {
-        setExtendThr( Float.parseFloat( prefs.getString( k, "30" ) ) );   // DISTOX_EXTEND_THR2 4
-      } catch ( NumberFormatException e ) { setExtendThr( 30 ); }
+        setExtendThr( Float.parseFloat( prefs.getString( k, "10" ) ) );   // DISTOX_EXTEND_THR2 4
+      } catch ( NumberFormatException e ) { setExtendThr( 10 ); }
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         f = Float.parseFloat( prefs.getString( k, "80" ) );
@@ -894,6 +902,12 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AZIMUTH_MANUAL
       mAzimuthManual = prefs.getBoolean( k, false ); 
       app.resetRefAzimuth( app.mRefAzimuth );
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      try {                                 // DISTOX_VERT_SPLAY
+        f = Float.parseFloat( prefs.getString( k, "50" ) );
+        if ( f >= 0 && f <= 91 ) mVertSplay = f;
+      } catch ( NumberFormatException e  ) { }
+   
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

@@ -1023,8 +1023,8 @@ public class TopoDroidApp extends Application
   // @param b bearing [deg] in 0 .. 360
   static long computeAbsoluteExtendSplay( double b )
   {
-    if ( b > 90 + TopoDroidSetting.mExtendThr && b < 270 - TopoDroidSetting.mExtendThr ) return -1L;
-    if ( b < 90 - TopoDroidSetting.mExtendThr || b > 270 + TopoDroidSetting.mExtendThr ) return 1L;
+    if ( b >= 90 + TopoDroidSetting.mExtendThr && b <= 270 - TopoDroidSetting.mExtendThr ) return -1L;
+    if ( b <= 90 - TopoDroidSetting.mExtendThr || b >= 270 + TopoDroidSetting.mExtendThr ) return 1L;
     return 0L;
   }
 

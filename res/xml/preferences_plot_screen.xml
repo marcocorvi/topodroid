@@ -77,5 +77,13 @@
        android:inputType="number"
        android:defaultValue="16" />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_VERT_SPLAY"
+       android:title="@string/pref_vert_splay_title"
+       android:summary="@string/pref_vert_splay_summary"
+       android:dialogTitle="@string/pref_vert_splay_title"
+       android:dialogMessage="@string/pref_vert_splay_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="50" />
 
 </PreferenceScreen>

@@ -12,10 +12,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES 
- * 20120725 TopoDroidApp log
- * 20121210 symbol area lib
- * 20121225 added "visible" border attribute
- * 201312   method to make the path sharp, straight (section line) and insert point
  */
 package com.topodroid.DistoX;
 

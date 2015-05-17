@@ -145,5 +145,12 @@
                   android:label="@string/app_name">
         </activity>
 
+        <receiver android:name=".PairingRequest">
+           <intent-filter>
+               <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" /> 
+               <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" /> 
+           </intent-filter>
+        </receiver>
+
     </application>
 </manifest> 

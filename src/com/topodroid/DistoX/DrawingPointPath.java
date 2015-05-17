@@ -10,12 +10,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120706 Therion "scale" option
- * 20121113 sink/spring points toTherion
- * 20121122 points snow/ice flowstone/moonmilk dig/choke crystal/gypsum
- * 20130829 (re)set orientation
- * 201311   removed the flag for overloaded point symbols
- * 20140526 point scale bug fix
  */
 
 package com.topodroid.DistoX;

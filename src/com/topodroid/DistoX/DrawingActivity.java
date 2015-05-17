@@ -279,6 +279,7 @@ public class DrawingActivity extends ItemDrawer
     private String mTo;   // TO station for sections
     private float mAzimuth = 0.0f;
     private float mClino   = 0.0f;
+    private boolean mModified; // whether the sketch has been modified 
 
     private boolean mAllSymbols; // whether the library has all the symbols of the plot
 
@@ -401,7 +402,11 @@ public class DrawingActivity extends ItemDrawer
       DrawingPath dpath = null;
       if ( splay ) {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-        dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
+        if ( Math.abs(blk.mClino) > TopoDroidSetting.mVertSplay ) {
+          dpath.setPaint( DrawingBrushPaths.fixedSplay3Paint );
+        } else {
+          dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
+        }
       } else {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
         dpath.setPaint( blk.isMultiBad() ? DrawingBrushPaths.fixedRedPaint
@@ -503,26 +508,14 @@ public class DrawingActivity extends ItemDrawer
     //   );
     // }
 
-    void immediateSaveTh2( )
-    {
-      // Log.v( TopoDroidApp.TAG, " savingTh2 " + mFullName1 + " " + mFullName2 + " do save ");
-      Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-          mApp.mShotActivity.enableSketchButton( true );
-        }
-      };
-      mApp.mShotActivity.enableSketchButton( false );
-      (new SaveTh2File(this, handler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
-    }
-
+    // called by doStop (which is called by onStop)
     private void doSaveTh2( ) 
     {
+      Log.v("DistoX", "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         // if ( not_all_symbols ) AlertMissingSymbols();
         if ( mAllSymbols ) {
-
           // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
           startSaveTh2Task();
         } else { // mAllSymbols is false
@@ -533,8 +526,11 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
+
+    // called by doSaveTh2 and saveTh2
     private void startSaveTh2Task()
     {
+      if ( ! mModified ) return;
       // final Activity currentActivity = this; // if Toast
       Handler saveHandler = new Handler(){
         @Override
@@ -542,7 +538,8 @@ public class DrawingActivity extends ItemDrawer
           // Log.v("DistoX", "handle message " + msg.what );
           if ( msg.what == 660 ) {
             mApp.mShotActivity.enableSketchButton( true );
-          } else if ( msg.what == 661 ) {
+          } else if ( msg.what == 661 ) { // saving return true
+            mModified = false;
             mApp.mShotActivity.enableSketchButton( true );
           } else {
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "handle save th2 message " + msg.what);
@@ -550,8 +547,34 @@ public class DrawingActivity extends ItemDrawer
         }
       };
       mApp.mShotActivity.enableSketchButton( false );
-      (new SaveTh2File(this, saveHandler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
+      if ( mType == PlotInfo.PLOT_EXTENDED ) {
+        (new SaveTh2File(this, saveHandler, mApp, mDrawingSurface, mFullName2, mType )).execute();
+      } else {
+        (new SaveTh2File(this, saveHandler, mApp, mDrawingSurface, mFullName1, mType )).execute();
+      }
     }
+
+    // private void immediateSaveTh2( )
+    // {
+    //   Log.v("DistoX", "immSaveTh2() type " + mType + " modified " + mModified );
+    //   // if ( mModifed )  FIXME-MODIFIED
+    //   {
+    //     // Log.v( TopoDroidApp.TAG, " savingTh2 " + mFullName1 + " " + mFullName2 + " do save ");
+    //     Handler handler = new Handler(){
+    //       @Override
+    //       public void handleMessage(Message msg) {
+    //         mApp.mShotActivity.enableSketchButton( true );
+    //       }
+    //     };
+    //     mApp.mShotActivity.enableSketchButton( false );
+    //     // if ( mType = PlotInfo.PLOT_EXTENDED ) {
+    //     //   (new SaveTh2File(this, handler, mApp, mDrawingSurface, null, mFullName2 )).execute();
+    //     // } else {
+    //     //   (new SaveTh2File(this, handler, mApp, mDrawingSurface, mFullName1, null )).execute();
+    //     // }
+    //     (new SaveTh2File(this, handler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
+    //   }
+    // }
 
   private void computeReferences( int type, float xoff, float yoff, float zoom )
   {
@@ -657,7 +680,6 @@ public class DrawingActivity extends ItemDrawer
   //     @Override
   //     public void run() {
   //       (new SaveTh2File(this, null, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
-  //       // immediateSaveTh2( );
   //     }
   // }
 
@@ -736,6 +758,7 @@ public class DrawingActivity extends ItemDrawer
       mSectionName = null;
       mShiftDrawing = false;
       mContinueLine = false;
+      mModified = false;
 
       setContentView(R.layout.drawing_activity);
       mApp = (TopoDroidApp)getApplication();
@@ -945,6 +968,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void doStop()
     {
+      Log.v("DistoX", "doStop type " + mType + " modified " + mModified );
       // if ( mSaveTimer != null ) mSaveTimer.cancel();
       // mSaveTimer =  null;
       // if ( mSaveTask != null ) mSaveTask.cancel();
@@ -1201,6 +1225,7 @@ public class DrawingActivity extends ItemDrawer
     private void doEraseAt( float x_scene, float y_scene )
     {
       int ret = mDrawingSurface.eraseAt( x_scene, y_scene, mZoom );
+      mModified = true;
       // if ( ret > 0 ) {
       //   Log.v( TopoDroidApp.TAG, "erase at " + x_scene + " " + y_scene + " = " + ret );
       // }
@@ -1214,6 +1239,7 @@ public class DrawingActivity extends ItemDrawer
       if ( ( ( block.mFrom == null && from == null ) || block.mFrom.equals(from) ) && 
            ( ( block.mTo == null && to == null ) || block.mTo.equals(to) ) ) return;
 
+      mModified = true;
       block.mFrom = from;
       block.mTo   = to;
       mData.updateShotName( block.mId, mSid, from, to, true );
@@ -1232,7 +1258,6 @@ public class DrawingActivity extends ItemDrawer
       // mZoom = z;    
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       // mDrawingSurface.refresh();
-
     }
  
     void updateBlockComment( DistoXDBlock block, String comment ) 
@@ -1256,6 +1281,7 @@ public class DrawingActivity extends ItemDrawer
       block.mExtend = extend;
       mData.updateShotExtend( block.mId, mSid, extend, true );
       if ( mType == PlotInfo.PLOT_EXTENDED ) {
+        mModified = true;
         // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "updateBlockExtend off " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
         // float x = mOffset.x; 
         // float y = mOffset.y; 
@@ -1274,16 +1300,28 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    void deletePoint( DrawingPointPath point ) { mDrawingSurface.deletePath( point ); }
+    void deletePoint( DrawingPointPath point ) 
+    {
+      mModified = true;
+      mDrawingSurface.deletePath( point ); 
+    }
 
-    void splitLine( DrawingLinePath line, LinePoint point ) { mDrawingSurface.splitLine( line, point ); }
+    void splitLine( DrawingLinePath line, LinePoint point )
+    {
+      mModified = true;
+      mDrawingSurface.splitLine( line, point );
+    }
 
     boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
-    { return mDrawingSurface.removeLinePoint(line, point, sp); }
+    {
+      mModified = true;
+      return mDrawingSurface.removeLinePoint(line, point, sp); 
+    }
 
     // @param name  section-line name 
     void deleteLine( DrawingLinePath line, String name ) 
     { 
+      mModified = true;
       mDrawingSurface.deletePath( line );
       if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
         String filename = TopoDroidPath.getTh2File( mApp.mySurvey + "-" + name + ".th2" );
@@ -1310,9 +1348,17 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    void sharpenLine( DrawingLinePath line, boolean reduce ) { mDrawingSurface.sharpenLine( line, reduce ); }
+    void sharpenLine( DrawingLinePath line, boolean reduce )
+    {
+      mModified = true;
+      mDrawingSurface.sharpenLine( line, reduce );
+    }
 
-    void deleteArea( DrawingAreaPath area ) { mDrawingSurface.deletePath( area ); }
+    void deleteArea( DrawingAreaPath area )
+    {
+      mModified = true;
+      mDrawingSurface.deletePath( area );
+    }
 
     // void refreshSurface()
     // {
@@ -1538,6 +1584,7 @@ public class DrawingActivity extends ItemDrawer
                    || (mMode == MODE_SHIFT && mShiftMove) ) {
             moveCanvas( x_shift, y_shift );
           } else if ( mMode == MODE_SHIFT ) {
+            mModified = true;
             mDrawingSurface.shiftHotItem( x_scene - mStartX, y_scene - mStartY );
             mStartX = x_scene;
             mStartY = y_scene;
@@ -1562,6 +1609,7 @@ public class DrawingActivity extends ItemDrawer
             float y_shift = y_canvas - mSaveY;
             if ( TopoDroidSetting.mLevelOverNormal ) {
               if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+                mModified = true;
                 mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom );
               }
             // } else {
@@ -1588,6 +1636,7 @@ public class DrawingActivity extends ItemDrawer
           float x_shift = x_canvas - mSaveX; // compute shift
           float y_shift = y_canvas - mSaveY;
           if ( mMode == MODE_DRAW ) {
+            mModified = true;
             if ( mSymbol == SYMBOL_LINE || mSymbol == SYMBOL_AREA ) {
               // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "onTouch ACTION_UP line style " + mApp.mLineStyle );
               // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, 
@@ -1837,6 +1886,7 @@ public class DrawingActivity extends ItemDrawer
     public void addLabel( String label, float x, float y )
     {
       if ( label != null && label.length() > 0 ) {
+        mModified = true;
         DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, DrawingPointPath.SCALE_M, null );
         mDrawingSurface.addDrawingPath( label_path );
       } 
@@ -1898,6 +1948,7 @@ public class DrawingActivity extends ItemDrawer
     // add a therion station point
     public void addStationPoint( DrawingStationName st )
     {
+      mModified = true;
       mDrawingSurface.addDrawingPath( new DrawingStationPath( st, DrawingPointPath.SCALE_M ) );
     }
 
@@ -2079,7 +2130,9 @@ public class DrawingActivity extends ItemDrawer
             if ( mHotItemType == DrawingPath.DRAWING_PATH_POINT ||
                  mHotItemType == DrawingPath.DRAWING_PATH_LINE ||
                  mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // move to nearest point POINT/LINE/AREA
-              if ( ! mDrawingSurface.moveHotItemToNearestPoint() ) {
+              if ( mDrawingSurface.moveHotItemToNearestPoint() ) {
+                mModified = true;
+              } else {
                 Toast.makeText( context, R.string.failed_snap_to_point, Toast.LENGTH_SHORT ).show();
               }
             }
@@ -2101,6 +2154,7 @@ public class DrawingActivity extends ItemDrawer
                 case 0:  // normal
                 case -1: // no hot point
                 case -2: // not snapping area border
+                  mModified = true;
                   break;
                 case -3: // no line close enough
                   Toast.makeText( context, R.string.failed_snap_to_line, Toast.LENGTH_SHORT ).show();
@@ -2122,6 +2176,7 @@ public class DrawingActivity extends ItemDrawer
         myTextView2.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // split point LINE/AREA
+              mModified = true;
               mDrawingSurface.splitHotItem();
             }
             dismissPopup();
@@ -2139,6 +2194,7 @@ public class DrawingActivity extends ItemDrawer
             if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // split-line LINE
               SelectionPoint sp = mDrawingSurface.hotItem();
               if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_LINE ) {
+                mModified = true;
                 splitLine( (DrawingLinePath)(sp.mItem), sp.mPoint );
               }
             }
@@ -2158,6 +2214,7 @@ public class DrawingActivity extends ItemDrawer
               // make segment straight LINE/AREA
               SelectionPoint sp = mDrawingSurface.hotItem();
               if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                mModified = true;
                 sp.mPoint.has_cp = false;
                 DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
                 line.retracePath();
@@ -2180,6 +2237,7 @@ public class DrawingActivity extends ItemDrawer
               // make segment curved LINE/AREA
               SelectionPoint sp = mDrawingSurface.hotItem();
               if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
+                mModified = true;
                 LinePoint lp0 = sp.mPoint;
                 LinePoint lp2 = lp0.mPrev; 
                 if ( ! lp0.has_cp && lp2 != null ) {
@@ -2214,9 +2272,8 @@ public class DrawingActivity extends ItemDrawer
               SelectionPoint sp = mDrawingSurface.hotItem();
               if ( sp != null && ( sp.type() == DrawingPath.DRAWING_PATH_LINE || sp.type() == DrawingPath.DRAWING_PATH_AREA ) ) {
                 DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
-                // if ( line.mPoints.size() > 2 ) 
-                if ( line.size() > 2 ) 
-                {
+                if ( line.size() > 2 ) {
+                  mModified = true;
                   removeLinePoint( line, sp.mPoint, sp );
                   line.retracePath();
                 }
@@ -2258,6 +2315,7 @@ public class DrawingActivity extends ItemDrawer
         saveReference( mPlot2, mPid2 );
         setPlotType1();
       }
+      mModified = false;
     }
 
     private void setPlotType2( )
@@ -2325,7 +2383,7 @@ public class DrawingActivity extends ItemDrawer
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[4] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
-          immediateSaveTh2( ); 
+          startSaveTh2Task(); // immediateSaveTh2( ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
@@ -2676,6 +2734,7 @@ public class DrawingActivity extends ItemDrawer
     // called only by PlotSaveDialog: save as th2 even if there are missing symbols
     void saveTh2()
     {
+      Log.v("DistoX", "saveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
       // String filename  = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
       // rotateBackup( filename );
@@ -2813,7 +2872,7 @@ public class DrawingActivity extends ItemDrawer
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
       } else if ( p++ == pos ) { // OVERVIEW
-        immediateSaveTh2( );
+        startSaveTh2Task(); // immediateSaveTh2( ); 
         try {
           Thread.sleep(100);
         } catch ( InterruptedException e ) { /* ignore */ }

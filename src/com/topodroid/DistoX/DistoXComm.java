@@ -112,27 +112,45 @@ public class DistoXComm
           mApp.notifyStatus();
           closeSocket( );
           mApp.notifyDisconnected();
+        } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) {
+          final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
+          final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
+          if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
+            Log.v("DistoX", "BOND STATE CHANGED paired" );
+          } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
+            Log.v("DistoX", "BOND STATE CHANGED unpaired" );
+          } else {
+            Log.v("DistoX", "BOND STATE CHANGED ");
+          }
+        // } else if ( BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action) ) {
+        //   Log.v("DistoX", "PAIRING REQUEST");
+        //   // BluetoothDevice device = getDevice();
+        //   // //To avoid the popup notification:
+        //   // device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
+        //   // device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);
+        //   // byte[] pin = ByteBuffer.allocate(4).putInt(0000).array();
+        //   // //Entering pin programmatically:  
+        //   // Method ms = device.getClass().getMethod("setPin", byte[].class);
+        //   // //Method ms = device.getClass().getMethod("setPasskey", int.class);
+        //   // ms.invoke(device, pin);
+        //     
+        //   //Bonding the device:
+        //   // Method mm = device.getClass().getMethod("createBond", (Class[]) null);
+        //   // mm.invoke(device, (Object[]) null);
         }
       }
     };
 
-    // IntentFilter foundFilter = new IntentFilter( BluetoothDevice.ACTION_FOUND );
-    // IntentFilter startFilter = new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_STARTED );
-    // IntentFilter finishFilter = new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_FINISHED );
-    IntentFilter connectedFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_CONNECTED );
-    IntentFilter disconnectRequestFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED );
-    IntentFilter disconnectedFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECTED );
-    // IntentFilter uuidFilter  = new IntentFilter( myUUIDaction );
-    // IntentFilter bondFilter  = new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED );
 
-    // mApp.registerReceiver( mBTReceiver, foundFilter );
-    // mApp.registerReceiver( mBTReceiver, startFilter );
-    // mApp.registerReceiver( mBTReceiver, finishFilter );
-    mApp.registerReceiver( mBTReceiver, connectedFilter );
-    mApp.registerReceiver( mBTReceiver, disconnectRequestFilter );
-    mApp.registerReceiver( mBTReceiver, disconnectedFilter );
-    // mApp.registerReceiver( mBTReceiver, uuidFilter );
-    // mApp.registerReceiver( mBTReceiver, bondFilter );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_FOUND ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_STARTED ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_FINISHED ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_CONNECTED ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECTED ) );
+    // mApp.registerReceiver( mBTReceiver, uuidFilter  = new IntentFilter( myUUIDaction ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST ) );
   }
 
 // --------------------------------------------------

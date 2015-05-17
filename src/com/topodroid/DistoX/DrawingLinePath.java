@@ -12,8 +12,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120621 attribute "outline" and "options"
- * 20130829 line point(s) shift
  */
 package com.topodroid.DistoX;
 

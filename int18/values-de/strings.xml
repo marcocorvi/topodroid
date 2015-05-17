@@ -664,6 +664,9 @@
   <!-- TODO string name="pref_closeness_title">Selection radius</string -->
   <!-- TODO string name="pref_closeness_summary">Sketch item selection radius</string -->
   <!-- TODO string name="pref_closeness_message">Sketch item selection radius</string -->
+  <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
+  <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
+  <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
   <string name="pref_altitude_title">Höhe</string>
   <!-- TODO string name="pref_altitude_summary">Select altitude type</string -->
   <!-- TODO string name="pref_altimetric_title">Orthometric atitude</string -->

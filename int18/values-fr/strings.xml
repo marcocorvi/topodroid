@@ -617,6 +617,9 @@
   <string name="pref_closeness_title">Radius de sélection</string>
   <string name="pref_closeness_summary">Portée de la zone de sélection</string>
   <string name="pref_closeness_message">Portée de la zone de sélection</string>
+  <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
+  <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
+  <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
   <string name="pref_altitude_title">Altitude</string>
   <string name="pref_altitude_summary">Sélectionner le type d\'altitude</string>
   <!-- TODO string name="pref_altimetric_title">Orthometric atitude</string -->

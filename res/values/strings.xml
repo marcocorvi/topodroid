@@ -686,6 +686,9 @@
   <string name="pref_closeness_title">Selection radius</string>
   <string name="pref_closeness_summary">Sketch item selection radius</string>
   <string name="pref_closeness_message">Sketch item selection radius</string>
+  <string name="pref_vert_splay_title">Dashed splay clino thr.</string>
+  <string name="pref_vert_splay_summary">Dashed splay clino threshold</string>
+  <string name="pref_vert_splay_message">Dashed splay clino threshold</string>
   <string name="pref_altitude_title">Altitude</string>
   <string name="pref_altitude_summary">Select altitude type</string>
   <string name="pref_altimetric_title">Orthometric atitude lookup</string>

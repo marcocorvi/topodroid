@@ -12,9 +12,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES 
- * 20120725 TopoDroidApp log
- * 20121210 symbol area lib
- * 20121225 added "visible" border attribute
  */
 package com.topodroid.DistoX;
 
@@ -58,6 +55,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     }
   }
 
+  // @param id   string "area id" ('x' + mAreaCnt )
   public DrawingAreaPath( int type, String id, boolean visible )
   {
     // visible = ?,   closed = true
