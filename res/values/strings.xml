@@ -650,6 +650,8 @@
 
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
+  <string name="pref_station_prefix_title">Export station prefix</string>
+  <string name="pref_station_prefix_summary">Export cSurvey station prefix</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket create</string>

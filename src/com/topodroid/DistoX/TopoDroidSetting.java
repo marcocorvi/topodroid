@@ -97,6 +97,7 @@ class TopoDroidSetting
     "DISTOX_MAG_ANOMALY",
     "DISTOX_AZIMUTH_MANUAL",         // 64
     "DISTOX_VERT_SPLAY",             //
+    "DISTOX_STATION_PREFIX",
     "DISTOX_LOCALE",                 // 65
     "DISTOX_CWD",                    // must be last 
 
@@ -136,6 +137,7 @@ class TopoDroidSetting
   static float  mSplayVertThrs = 80;
   static boolean mAzimuthManual = false; // whether to manually set extend / or use reference azimuth
   static float mVertSplay = 50;
+  static boolean mExportStationsPrefix = false; // whether to prepend cave name to station in cSurvey export
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -593,6 +595,8 @@ class TopoDroidSetting
       if ( f >= 0 && f <= 91 ) mVertSplay = f;
     } catch ( NumberFormatException e  ) { }
 
+    mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -907,7 +911,8 @@ class TopoDroidSetting
         f = Float.parseFloat( prefs.getString( k, "50" ) );
         if ( f >= 0 && f <= 91 ) mVertSplay = f;
       } catch ( NumberFormatException e  ) { }
-   
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mExportStationsPrefix =  prefs.getBoolean( k, false ); // DISTOX_STATION_PREFIX
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

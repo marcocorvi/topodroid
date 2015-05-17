@@ -579,6 +579,8 @@
   <string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string>
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
+  <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
+  <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>

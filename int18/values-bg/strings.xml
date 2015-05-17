@@ -652,6 +652,8 @@
 
   <string name="pref_leg_shots_title">Брой измервания за антена</string>
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
+  <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
+  <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>

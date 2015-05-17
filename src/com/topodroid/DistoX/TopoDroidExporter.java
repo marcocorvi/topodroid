@@ -41,7 +41,7 @@ class TopoDroidExporter
   }
 
   // =======================================================================
-  // CSUREVY EXPORT cSurvey
+  // CSURVEY EXPORT cSurvey
 
   static String[] therion_extend = { "left", "vertical", "right", "ignore" };
   static String   therion_flags_duplicate     = "   flags duplicate\n";
@@ -83,6 +83,9 @@ class TopoDroidExporter
   {
     String cave = info.name.toUpperCase();
 
+    String prefix = "";
+    if ( TopoDroidSetting.mExportStationsPrefix ) prefix = cave + "-";
+
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
@@ -97,7 +100,7 @@ class TopoDroidExporter
 
 // ++++++++++++++++ PROPERTIES
       // FIXME origin = origin of Num
-      pw.format("  <properties id=\"\" name=\"\" origin=\"%s-%s\" ", cave, origin );
+      pw.format("  <properties id=\"\" name=\"\" origin=\"%s%s\" ", prefix, origin );
       // pw.format(      "name=\"\" description=\"\" club=\"\" team=\"\" ");
       pw.format(      "calculatemode=\"1\" calculatetype=\"2\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
@@ -130,8 +133,8 @@ class TopoDroidExporter
 
    // ============== ORIGIN
       if ( origin != null )  {
-        pw.format("    <gps enabled=\"0\" refpointonorigin=\"%s-%s\" geo=\"WGS84\" format=\"\" sendtotherion=\"0\" />\n",
-                  cave,  origin );
+        pw.format("    <gps enabled=\"0\" refpointonorigin=\"%s%s\" geo=\"WGS84\" format=\"\" sendtotherion=\"0\" />\n",
+                  prefix,  origin );
       }
 
       pw.format("  </properties>\n");
@@ -168,7 +171,8 @@ class TopoDroidExporter
           } else { // only TO station
             if ( n > 0 && ref_item != null ) {
               b = TopoDroidUtil.in360( b/n );
-              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s-%s\" to=\"%s-%s\"", cave, cave, f, cave, t );
+              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\"", cave, prefix, f, prefix, t );
+
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -190,7 +194,7 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            pw.format("<segment id=\"\" cave=\"%s\" from=\"%s-%s(%d)\" to=\"%s-%s\"", cave, cave, to, cntSplay, cave, to );
+            pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s(%d)\" to=\"%s%s\"", cave, prefix, to, cntSplay, prefix, to );
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -205,7 +209,7 @@ class TopoDroidExporter
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( n > 0 && ref_item != null ) { // finish writing previous leg shot
               b = TopoDroidUtil.in360( b/n );
-              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s-%s\" to=\"%s-%s\"", cave, cave, f, cave, t );
+              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\"", cave, prefix, f, prefix, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -227,7 +231,7 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            pw.format("<segment id=\"\" cave=\"%s\" from=\"%s-%s\" to=\"%s-%s(%d)\"", cave, cave, from, cave, from, cntSplay );
+            pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s(%d)\"", cave, prefix, from, prefix, from, cntSplay );
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -240,7 +244,7 @@ class TopoDroidExporter
           } else { // BOTH FROM AND TO STATIONS
             if ( n > 0 && ref_item != null ) {
               b = TopoDroidUtil.in360( b/n );
-              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s-%s\" to=\"%s-%s\" ", cave, cave, f, cave, t );
+              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\" ", cave, prefix, f, prefix, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -280,7 +284,7 @@ class TopoDroidExporter
       }
       if ( n > 0 && ref_item != null ) {
         b = TopoDroidUtil.in360( b/n );
-        pw.format("<segment id=\"\" cave=\"%s\" from=\"%s-%s\" to=\"%s-%s\" ", cave, cave, f, cave, t );
+        pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\" ", cave, prefix, f, prefix, t );
         if ( extend == -1 ) pw.format(" direction=\"1\"");
         if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");
@@ -301,7 +305,7 @@ class TopoDroidExporter
       pw.format("  <trigpoints>\n");
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
-          pw.format("     <trigpoint name=\"%s\" labelsymbol\"0\" >\n", fix.name );
+          pw.format("     <trigpoint name=\"%s\" labelsymbol=\"0\" >\n", fix.name );
           pw.format(Locale.ENGLISH, "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
              fix.lat, fix.lng, fix.alt, fix.lat, fix.lng, fix.alt );
           pw.format("     </trigpoint>\n");

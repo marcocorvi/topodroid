@@ -631,6 +631,8 @@
   <!-- TODO string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
   <!-- TODO string name="pref_leg_shots_title">Leg shots</string -->
   <!-- TODO string name="pref_leg_shots_summary">Minimum number of shots per leg</string -->
+  <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
+  <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
 
   <!-- TODO string name="pref_sock_type_title">Socket</string -->
   <!-- TODO string name="pref_sock_type_summary">Socket create</string -->

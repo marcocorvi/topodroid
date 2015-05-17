@@ -88,28 +88,28 @@ public class DrawingActivity extends ItemDrawer
                                       , ILister
                                       , IZoomer
 {
-  // private static int izonsok[] = { 
-  //                       R.drawable.iz_edit_ok, // 0
-  //                       R.drawable.iz_eraser_ok,
-  //                       R.drawable.iz_select_ok };
+  private static int izons_ok[] = { 
+                        R.drawable.iz_edit_ok, // 0
+                        R.drawable.iz_eraser_ok,
+                        R.drawable.iz_select_ok };
 
-  private static int IC_DOWNLOAD = 4;
-  private static int IC_JOIN     = 16;
-  private static int IC_JOIN_NO  = 21;
-  private static int IC_PLAN     = 7;
-  private static int IC_DIAL     = 8;
-  private static int IC_MENU     = 19;
-  private static int IC_EXTEND   = 20;
-  private static int IC_CONTINUE_NO = 13;  // index of continue-no icon
-  private static int IC_CONTINUE = 22;     // index of continue icon
-  private static int IC_ADD = 23;
+  private static int IC_DOWNLOAD = 3;
+  private static int IC_JOIN     = 15;
+  private static int IC_JOIN_NO  = 20;
+  private static int IC_PLAN     = 6;
+  private static int IC_DIAL     = 7;
+  private static int IC_MENU     = 18;
+  private static int IC_EXTEND   = 19;
+  private static int IC_CONTINUE_NO = 12;  // index of continue-no icon
+  private static int IC_CONTINUE = 21;     // index of continue icon
+  private static int IC_ADD = 22;
 
-  private static int BTN_DOWNLOAD = 1;  // index of mButton1 download button
-  private static int BTN_BLUETOOTH = 2;
-  private static int BTN_JOIN = 3;
-  private static int BTN_PLOT = 4;      // index of mButton1 plot button
-  private static int BTN_DIAL = 5;      // index of mButton1 azimuth button
-  private static int BTN_CONTINUE = 4;  // index of mButton2 continue button
+  private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
+  private static int BTN_BLUETOOTH = 4;
+  private static int BTN_JOIN = 5;
+  private static int BTN_PLOT = 6;      // index of mButton1 plot button
+  private static int BTN_DIAL = 7;      // index of mButton1 azimuth button
+  private static int BTN_CONTINUE = 6;  // index of mButton2 continue button
 
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
@@ -127,21 +127,20 @@ public class DrawingActivity extends ItemDrawer
   Bitmap mBMdial;
 
   private static int izons[] = { 
-                        R.drawable.iz_move,
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
-                        R.drawable.iz_download,      // 3 ic_download
+                        R.drawable.iz_download,      // 3 MOVE Nr 9
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,          // 5
                         R.drawable.iz_plan,          // 6
                         R.drawable.iz_dial,          // 7
                         R.drawable.iz_note,          // 8
-                        R.drawable.iz_undo,
+                        R.drawable.iz_undo,          // 9 DRAW Nr 7
                         R.drawable.iz_redo,
-                        R.drawable.iz_tools,          // 11
+                        R.drawable.iz_tools,         // 11
                         R.drawable.iz_continue_no,
-                        R.drawable.iz_back,          // 13
+                        R.drawable.iz_back,          // 13 EDIT Nr 7
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
                         R.drawable.iz_note,          // 16
@@ -164,7 +163,6 @@ public class DrawingActivity extends ItemDrawer
                      };
 
   private static int help_icons[] = { 
-                        R.string.help_move,
                         R.string.help_draw,
                         R.string.help_eraser,
                         R.string.help_edit,
@@ -215,7 +213,7 @@ public class DrawingActivity extends ItemDrawer
     // private Paint mCurrentPaint;
     LinearLayout popup_layout = null;
     PopupWindow popup_window = null;
-    PopupWindow popup_mode_window = null;
+    // PopupWindow popup_mode_window = null;
 
     // private boolean canRedo;
     private DistoXNum mNum;
@@ -652,10 +650,10 @@ public class DrawingActivity extends ItemDrawer
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  private int mNrButton1 = 7;          // main-primary
-  private int mNrButton2 = 5;          // draw
-  private int mNrButton3 = 5;          // edit
-  private int mNrButton5 = 1;          // erase
+  private int mNrButton1 = 9;          // main-primary
+  private int mNrButton2 = 7;          // draw
+  private int mNrButton3 = 7;          // edit
+  private int mNrButton5 = 3;          // erase
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
   HorizontalButtonView mButtonView2;
@@ -794,14 +792,14 @@ public class DrawingActivity extends ItemDrawer
       mListView = (HorizontalListView) findViewById(R.id.listview);
       mButtonSize = mApp.setListViewHeight( mListView );
 
-      mButton1 = new Button[ mNrButton1 ];
-      int off = 0 + 3;
+      mButton1 = new Button[ mNrButton1 ]; // MOVE
+      int off = 0;
       int ic = 0;
       for ( int k=0; k<mNrButton1; ++k ) {
         mButton1[k] = new Button( this );
         mButton1[k].setPadding(0,0,0,0);
         mButton1[k].setOnClickListener( this );
-        ic = ( k == 0 )? 0 : off+k;
+        ic = ( k <3 )? k : off+k;
         BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[ ic ] );
         if ( ic == IC_DOWNLOAD ) {
           mBMdownload = bm2;
@@ -817,40 +815,59 @@ public class DrawingActivity extends ItemDrawer
       mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
       setRefAzimuth( mApp.mRefAzimuth, mApp.mFixedExtend );
 
-      mButton2 = new Button[ mNrButton2 ];
-      off = mNrButton1 + 2; 
+      mButton2 = new Button[ mNrButton2 ]; // DRAW
+      off = (mNrButton1 - 3); 
       for ( int k=0; k<mNrButton2; ++k ) {
         mButton2[k] = new Button( this );
         mButton2[k].setPadding(0,0,0,0);
         mButton2[k].setOnClickListener( this );
-        ic = ( k == 0 )? 1 : off+k;
-        BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons[ic] );
-        if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = bm2;
+        ic = ( k < 3 )? k : off+k;
+        if ( k == 0 ) {
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons_ok[ic] );
+        } else {
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons[ic] );
+          if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = bm2;
+        }
       }
       mBMcontinue  = mApp.setButtonBackground( null, mButtonSize, izons[IC_CONTINUE] );
 
-      mButton3 = new Button[ mNrButton3 ];
-      off = mNrButton1 + mNrButton2 + 1; 
+      mButton3 = new Button[ mNrButton3 ];      // EDIT
+      off = (mNrButton1-3) + (mNrButton2-3); 
       for ( int k=0; k<mNrButton3; ++k ) {
         mButton3[k] = new Button( this );
         mButton3[k].setPadding(0,0,0,0);
         mButton3[k].setOnClickListener( this );
-        ic = ( k == 0 )? 3 : off+k;
-        BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons[ic] );
-        if ( ic == IC_JOIN ) mBMjoin = bm2;
+        ic = ( k < 3 )? k : off+k;
+        if ( k == 2 ) {
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons_ok[ic] );
+        } else {
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons[ic] );
+          if ( ic == IC_JOIN ) mBMjoin = bm2;
+        }
       }
       mBMjoin_no = mApp.setButtonBackground( null, mButtonSize, izons[IC_JOIN_NO] );
       mBMadd     = mApp.setButtonBackground( null, mButtonSize, izons[IC_ADD] );
 
-      mButton5 = new Button[ mNrButton5 ];
-      off = mNrButton1 + mNrButton2 + mNrButton3 + 0;
+      mButton5 = new Button[ mNrButton5 ];    // ERASE
+      off = (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
       for ( int k=0; k<mNrButton5; ++k ) {
         mButton5[k] = new Button( this );
         mButton5[k].setPadding(0,0,0,0);
         mButton5[k].setOnClickListener( this );
-        ic = ( k == 0 )? 2 : off+k;
-        BitmapDrawable bm2 = mApp.setButtonBackground( mButton5[k], mButtonSize, izons[ic] );
+        ic = ( k < 3 )? k : off+k;
+        if ( k == 1 ) {
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton5[k], mButtonSize, izons_ok[ic] );
+        } else {
+          BitmapDrawable bm2 = mApp.setButtonBackground( mButton5[k], mButtonSize, izons[ic] );
+        }
       }
+      if ( ! TopoDroidSetting.mLevelOverNormal ) {
+         mButton1[2].setVisibility( View.GONE );
+         mButton2[2].setVisibility( View.GONE );
+         mButton3[2].setVisibility( View.GONE );
+         mButton5[2].setVisibility( View.GONE );
+       }
+ 
       // set button1[download] icon
       setConnectionStatus( mDataDownloader.getStatus() );
 
@@ -1460,7 +1477,7 @@ public class DrawingActivity extends ItemDrawer
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
       dismissPopup();
-      dismissModePopup();
+      // dismissModePopup();
 
       float d0 = TopoDroidSetting.mCloseCutoff + TopoDroidSetting.mCloseness / mZoom;
 
@@ -1992,7 +2009,7 @@ public class DrawingActivity extends ItemDrawer
     {
       if ( popup_window != null ) {
         dismissPopup();
-        dismissModePopup();
+        // dismissModePopup();
         return;
       } 
       // finish();
@@ -2032,81 +2049,81 @@ public class DrawingActivity extends ItemDrawer
       }
     }
   
-    private void makeModePopup( View b )
-    {
-      final Context context = this;
-      popup_layout = new LinearLayout(this);
-      popup_layout.setOrientation(LinearLayout.VERTICAL);
-      int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
-      int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+    // private void makeModePopup( View b )
+    // {
+    //   final Context context = this;
+    //   popup_layout = new LinearLayout(this);
+    //   popup_layout.setOrientation(LinearLayout.VERTICAL);
+    //   int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+    //   int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
 
-      // ===== MOVE
-      String text = getString(R.string.popup_mode_move );
-      int len = text.length();
-      Button myTextView0 = makeButton( text, 0xff00ff00, 24 );
-      popup_layout.addView(myTextView0, new LinearLayout.LayoutParams(lHeight, lWidth));
-      myTextView0.setOnClickListener( new View.OnClickListener( ) {
-        public void onClick(View v) {
-          setMode( MODE_MOVE );
-          dismissModePopup();
-        }
-      } );
-      // ===== DRAW
-      text = getString(R.string.popup_mode_draw);
-      if ( len < text.length() ) len = text.length();
-      Button myTextView1 = makeButton( text, 0xff00ff00, 24 );
-      popup_layout.addView(myTextView1, new LinearLayout.LayoutParams(lHeight, lWidth));
-      myTextView1.setOnClickListener( new View.OnClickListener( ) {
-        public void onClick(View v) {
-          setMode( MODE_DRAW );
-          dismissModePopup();
-        }
-      } );
-      // ===== ERASE
-      text = getString(R.string.popup_mode_erase);
-      if ( len < text.length() ) len = text.length();
-      Button myTextView2 = makeButton( text, 0xff00ff00, 24 );
-      popup_layout.addView(myTextView2, new LinearLayout.LayoutParams(lHeight, lWidth));
-      myTextView2.setOnClickListener( new View.OnClickListener( ) {
-        public void onClick(View v) {
-          setMode( MODE_ERASE );
-          dismissModePopup();
-        }
-      } );
-      // ===== EDIT
-      Button myTextView3 = null;
-      if ( TopoDroidSetting.mLevelOverBasic ) {
-        text = getString(R.string.popup_mode_edit);
-        if ( len < text.length() ) len = text.length();
-        myTextView3 = makeButton( text, 0xff00ff00, 24 );
-        popup_layout.addView(myTextView3, new LinearLayout.LayoutParams(lHeight, lWidth));
-        myTextView3.setOnClickListener( new View.OnClickListener( ) {
-          public void onClick(View v) {
-            setMode( MODE_EDIT );
-            dismissModePopup();
-          }
-        } );
-      } 
+    //   // ===== MOVE
+    //   String text = getString(R.string.popup_mode_move );
+    //   int len = text.length();
+    //   Button myTextView0 = makeButton( text, 0xff00ff00, 24 );
+    //   popup_layout.addView(myTextView0, new LinearLayout.LayoutParams(lHeight, lWidth));
+    //   myTextView0.setOnClickListener( new View.OnClickListener( ) {
+    //     public void onClick(View v) {
+    //       setMode( MODE_MOVE );
+    //       dismissModePopup();
+    //     }
+    //   } );
+    //   // ===== DRAW
+    //   text = getString(R.string.popup_mode_draw);
+    //   if ( len < text.length() ) len = text.length();
+    //   Button myTextView1 = makeButton( text, 0xff00ff00, 24 );
+    //   popup_layout.addView(myTextView1, new LinearLayout.LayoutParams(lHeight, lWidth));
+    //   myTextView1.setOnClickListener( new View.OnClickListener( ) {
+    //     public void onClick(View v) {
+    //       setMode( MODE_DRAW );
+    //       dismissModePopup();
+    //     }
+    //   } );
+    //   // ===== ERASE
+    //   text = getString(R.string.popup_mode_erase);
+    //   if ( len < text.length() ) len = text.length();
+    //   Button myTextView2 = makeButton( text, 0xff00ff00, 24 );
+    //   popup_layout.addView(myTextView2, new LinearLayout.LayoutParams(lHeight, lWidth));
+    //   myTextView2.setOnClickListener( new View.OnClickListener( ) {
+    //     public void onClick(View v) {
+    //       setMode( MODE_ERASE );
+    //       dismissModePopup();
+    //     }
+    //   } );
+    //   // ===== EDIT
+    //   Button myTextView3 = null;
+    //   if ( TopoDroidSetting.mLevelOverBasic ) {
+    //     text = getString(R.string.popup_mode_edit);
+    //     if ( len < text.length() ) len = text.length();
+    //     myTextView3 = makeButton( text, 0xff00ff00, 24 );
+    //     popup_layout.addView(myTextView3, new LinearLayout.LayoutParams(lHeight, lWidth));
+    //     myTextView3.setOnClickListener( new View.OnClickListener( ) {
+    //       public void onClick(View v) {
+    //         setMode( MODE_EDIT );
+    //         dismissModePopup();
+    //       }
+    //     } );
+    //   } 
 
-      FontMetrics fm = myTextView0.getPaint().getFontMetrics();
-      int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
-      int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.30);
-      myTextView0.setWidth( w );
-      myTextView1.setWidth( w );
-      myTextView2.setWidth( w );
-      if ( myTextView3 != null ) myTextView3.setWidth( w );
-      // Log.v( TopoDroidApp.TAG, "popup width " + w );
-      popup_mode_window = new PopupWindow( popup_layout, w, h ); // popup_layout.getHeight(), popup_layout.getWidth() );
-      popup_mode_window.showAsDropDown(b); 
-    }
+    //   FontMetrics fm = myTextView0.getPaint().getFontMetrics();
+    //   int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+    //   int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.30);
+    //   myTextView0.setWidth( w );
+    //   myTextView1.setWidth( w );
+    //   myTextView2.setWidth( w );
+    //   if ( myTextView3 != null ) myTextView3.setWidth( w );
+    //   // Log.v( TopoDroidApp.TAG, "popup width " + w );
+    //   popup_mode_window = new PopupWindow( popup_layout, w, h ); // popup_layout.getHeight(), popup_layout.getWidth() );
+    //   popup_mode_window.showAsDropDown(b); 
+    // }
 
-    private void dismissModePopup()
-    {
-      if ( popup_mode_window != null ) {
-        popup_mode_window.dismiss();
-        popup_mode_window = null;
-      }
-    }
+    // private void dismissModePopup()
+    // {
+    //   if ( popup_mode_window != null ) {
+    //     popup_mode_window.dismiss();
+    //     popup_mode_window = null;
+    //   }
+    // }
  
     /** line/area editing
      * @param b button
@@ -2347,7 +2364,7 @@ public class DrawingActivity extends ItemDrawer
       // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingActivity onClick() " + view.toString() );
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingActivity onClick() point " + mCurrentPoint + " symbol " + mSymbol );
       dismissPopup();
-      dismissModePopup();
+      // dismissModePopup();
 
       Button b = (Button)view;
       if ( b == mImage ) {
@@ -2360,9 +2377,28 @@ public class DrawingActivity extends ItemDrawer
         }
         return;
       }
-      if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton5[0] ) {
-        makeModePopup( b );
-      } else if ( b == mButton1[1] ) { // download
+      int k1 = 3;
+      int k2 = 3;
+      int k3 = 3;
+      // int k5 = 3; // no normal mButton5
+      if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
+           ( b == mButton5[1] && mMode == MODE_ERASE ) || 
+           ( b == mButton3[2] && ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) ) ) { 
+        setMode( MODE_MOVE );
+      } else if ( b == mButton1[0] || b == mButton3[0] || b == mButton5[0] ) { // 0 --> DRAW
+        setMode( MODE_DRAW );
+      } else if ( b == mButton1[1] || b == mButton2[1] || b == mButton3[1] ) { // 1--> ERASE
+        setMode( MODE_ERASE );
+        mListView.invalidate();
+      } else if ( b == mButton1[2] || b == mButton2[2] || b == mButton5[2] ) { // 2 --> EDIT
+        if ( TopoDroidSetting.mLevelOverBasic ) {
+          setMode( MODE_EDIT );
+        }
+      
+      // if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton5[0] ) {
+      //   makeModePopup( b );
+
+      } else if ( b == mButton1[k1++] ) { // download
         resetFixedPaint();
         if ( mType == (int)PlotInfo.PLOT_PLAN ) {
           saveReference( mPlot1, mPid1 );
@@ -2377,51 +2413,51 @@ public class DrawingActivity extends ItemDrawer
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
-      } else if ( b == mButton1[2] ) { // BLUETOOTH
+      } else if ( b == mButton1[k1++] ) { // BLUETOOTH
         new DeviceRemote( this, this, mApp ).show();
-      } else if ( b == mButton1[3] ) { // DISPLAY MODE 
+      } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
-      } else if ( b == mButton1[4] ) { // TOGGLE PLAN/EXTENDED
+      } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
           startSaveTh2Task(); // immediateSaveTh2( ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
-      } else if ( b == mButton1[5] ) { //  AZIMUTH
+      } else if ( b == mButton1[k1++] ) { //  AZIMUTH
         if ( TopoDroidSetting.mAzimuthManual ) {
           setRefAzimuth( 0, - mApp.mFixedExtend );
         } else {
           (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
         }
 
-      } else if ( b == mButton1[6] ) { //  NOTE
+      } else if ( b == mButton1[k1++] ) { //  NOTE
         (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
 
-      } else if ( b == mButton2[1] ) { // UNDO
+      } else if ( b == mButton2[k2++] ) { // UNDO
         mDrawingSurface.undo();
         if ( mDrawingSurface.hasMoreUndo() == false ) {
           // undoBtn.setEnabled( false );
         }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
-      } else if ( b == mButton2[2] ) { // REDO
+      } else if ( b == mButton2[k2++] ) { // REDO
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
         }
-      } else if ( b == mButton2[3] ) { // pointBtn
+      } else if ( b == mButton2[k2++] ) { // pointBtn
         new ItemPickerDialog(this, this, mType ).show();
-      } else if ( b == mButton2[4] ) { //  continueBtn
+      } else if ( b == mButton2[k2++] ) { //  continueBtn
         setButtonContinue( ! mContinueLine );
 
-      } else if ( b == mButton3[1] ) { // prev
+      } else if ( b == mButton3[k3++] ) { // prev
         mMode = MODE_SHIFT;
         SelectionPoint pt = mDrawingSurface.prevHotItem();
         if ( pt != null ) setButton3( pt.type() );
-      } else if ( b == mButton3[2] ) { // next
+      } else if ( b == mButton3[k3++] ) { // next
         mMode = MODE_SHIFT;
         SelectionPoint pt = mDrawingSurface.nextHotItem();
         if ( pt != null ) setButton3( pt.type() );
-      } else if ( b == mButton3[3] ) { // item/point editing: move, split, remove, etc.
+      } else if ( b == mButton3[k3++] ) { // item/point editing: move, split, remove, etc.
         // Log.v( TopoDroidApp.TAG, "Button3[5] inLinePoint " + inLinePoint );
         if ( inLinePoint ) {
           makePopup( b );
@@ -2432,7 +2468,7 @@ public class DrawingActivity extends ItemDrawer
           //   new DrawingBarrierDialog( this, this, sn.mName, mNum.isBarrier( sn.mName ) ).show();
           // }
         }
-      } else if ( b == mButton3[4] ) { // edit item properties
+      } else if ( b == mButton3[k3++] ) { // edit item properties
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           switch ( sp.type() ) {

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.nio.ByteBuffer;
+
 import java.io.IOException;
 import java.io.EOFException;
 import java.io.StringWriter;
@@ -113,15 +115,17 @@ public class DistoXComm
           closeSocket( );
           mApp.notifyDisconnected();
         } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) {
-          final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
-          final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
-          if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
-            Log.v("DistoX", "BOND STATE CHANGED paired" );
-          } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
-            Log.v("DistoX", "BOND STATE CHANGED unpaired" );
-          } else {
-            Log.v("DistoX", "BOND STATE CHANGED ");
-          }
+          // final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
+          // final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
+          // if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
+          //   Log.v("DistoX", "BOND STATE CHANGED paired" );
+          // } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
+          //   Log.v("DistoX", "BOND STATE CHANGED unpaired" );
+          // } else {
+          //   Log.v("DistoX", "BOND STATE CHANGED ");
+          // }
+
+          // bind2Device( data );
         // } else if ( BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action) ) {
         //   Log.v("DistoX", "PAIRING REQUEST");
         //   // BluetoothDevice device = getDevice();
@@ -454,6 +458,34 @@ public class DistoXComm
       mBTConnected = false; // socket is created but not connected
     }
   }
+
+  // private void bind2Device( Intent intent )
+  // {
+  //   BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+  //   Log.v("DistoX", "PAIRING: " + device.getName() + " " + device.getAddress() );
+  //   try { 
+  //     device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
+  //     Log.v("DistoX", "done setPairingConfirmation");
+  //     // device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);
+  //     byte[] pin = ByteBuffer.allocate(4).putInt(0000).array();
+  //     // byte[] pinBytes = BluetoothDevice.convertPinToBytes("0000");
+  //     //Entering pin programmatically:  
+  //     Method ms = device.getClass().getMethod("setPin", byte[].class);
+  //     // Method ms = device.getClass().getMethod("setPasskey", int.class);
+  //     ms.invoke( device, pin );
+  //     Log.v("DistoX", "done setPin");
+  //     Class[] classes3 = new Class[ 0 ];
+  //     Method m3 = mBTDevice.getClass().getMethod( "createBond", classes3 );
+  //     m3.invoke( mBTDevice );
+  //     Log.v("DistoX", "done createBond");
+  //   } catch ( NoSuchMethodException e ) {
+  //     Log.v("DistoX", "No Such method: " + e.getMessage() );
+  //   } catch ( IllegalAccessException e ) {
+  //     Log.v("DistoX", "Illegal access: " + e.getMessage() );
+  //   } catch ( InvocationTargetException e ) {
+  //     Log.v("DistoX", "Invocation target: " + e.getMessage() );
+  //   }
+  // }
 
   private void bindDevice()
   {
