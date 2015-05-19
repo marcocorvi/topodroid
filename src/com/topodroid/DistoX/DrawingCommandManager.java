@@ -8,21 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120621 item editoing: getPointAt getLineAt
- * 20120726 TopoDroidApp log
- * 20121225 getAreaAt and deletePath
- * 20130108 getStationAt getShotAt
- * 20130204 using Selection class to speed up item selection
- * 20130627 SelectionException
- * 20130828 shift point path (change position of symbol point)
- * 201311   revised selection management to keep into account new point actions
- * 201312   synch bug fixes 
- * ...
- * 20140117 added date/version to export
- * 20140328 line-legs intersection
- * 20140513 export as cSurvey
- * 20140521 1-point line bug
  */
 package com.topodroid.DistoX;
 
@@ -1444,6 +1429,7 @@ public class DrawingCommandManager
 
   public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )
   {
+    Log.v("DistoX", "export Therion");
     try { 
       out.write("encoding utf-8");
       out.newLine();
@@ -1461,31 +1447,22 @@ public class DrawingCommandManager
       DrawingBrushPaths.mAreaLib.writePalette( pw );
       pw.format("\n");
 
-      if ( type == PlotInfo.PLOT_SECTION || type == PlotInfo.PLOT_H_SECTION ) {
-        float toTherion = TopoDroidConst.TO_THERION;
-        if ( mNorthLine != null ) {
+      float toTherion = TopoDroidConst.TO_THERION;
+      float oneMeter  = DrawingActivity.SCALE_FIX * toTherion;
+
+      if ( type == PlotInfo.PLOT_SECTION
+        || type == PlotInfo.PLOT_H_SECTION 
+        || type == PlotInfo.PLOT_X_SECTION ) {
+
+        if ( mNorthLine != null ) { // H_SECTION (horizontal section)
+          // north line is 5 m long
           pw.format("scrap %s -projection %s -scale [%.0f %.0f %.0f %.0f 0 5 0 0 m]", scrap_name, proj_name, 
             mNorthLine.x1*toTherion, -mNorthLine.y1*toTherion, mNorthLine.x2*toTherion, -mNorthLine.y2*toTherion );
         } else {
-          // float x1 = 0 * toTherion;
-          // float x2 = 5 * toTherion;
-          // final Iterator i = mCurrentStack.iterator();
-          // while ( i.hasNext() ) {
-          //   final DrawingPath p = (DrawingPath) i.next();
-          //   if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-          //     DrawingLinePath lp = (DrawingLinePath)p;
-          //     if ( lp.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-          //       x1 = lp.mFirst.mX * toTherion;
-          //       x2 = lp.mLast.mX  * toTherion;
-          //       break;
-          //     }
-          //   }
-          // }
-          float dx = 100 * toTherion;
-          pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 5 0 m]", scrap_name, proj_name, dx );
+          pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
         }
       } else {
-        pw.format("scrap %s -projection %s -scale [0 0 1 0 0.0 0.0 1 0.0 m]", scrap_name, proj_name );
+        pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
       }
       out.write( sw.getBuffer().toString() );
       out.newLine();

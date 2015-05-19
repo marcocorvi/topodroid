@@ -8,22 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120614 new points: end (narrow-end, low-end) pebbles, snow
- * 20120614 new area: snow
- * 20120619 new line: overhang
- * 20120725 TopoDroidApp log
- * 20121109 new point: dig
- * 20121113 new point: sink/spring
- * 20121115 new point: crystal, merged together points ice/snow
- * 20121122 new points: moonmilk (overloaded to flowstone), choke (overloaded to dig)
- * 20121201 using SymbolPoint class
- * 20121212 clearPaths()
- * 20121220 reload symbols (to add new symbols)
- * 20120108 station symbol (a red dot)
- * 20131119 area color getter
- * 20131210 second grid paint
- * 20140305 symbol units changes take immadiate effect (N.B. old symbols must still redrawn)
  */
 package com.topodroid.DistoX;
 

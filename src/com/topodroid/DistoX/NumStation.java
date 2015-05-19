@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130108 created fron DistoXNum
- ( 20140513 added mBarrier field
  */
 package com.topodroid.DistoX;
 

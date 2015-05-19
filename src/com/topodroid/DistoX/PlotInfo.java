@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120522 renamed PlotInfo
- * 20140328 field azimuth (for the vertical cross-sections)
  */
 package com.topodroid.DistoX;
 
@@ -21,30 +18,31 @@ import android.content.res.Resources;
 class PlotInfo
 {
   // sketch types
-  // public static final long PLOT_V_SECTION = 0;
-  public static final long PLOT_PLAN      = 1;
-  public static final long PLOT_EXTENDED  = 2;
-  public static final long PLOT_H_SECTION = 3; // leave the place but do not use
-  public static final long PLOT_PHOTO     = 4;
-  public static final long PLOT_SECTION   = 5;
-  public static final long PLOT_SKETCH_3D = 6;
+  public static final long PLOT_X_SECTION  = 0; // X-section at a station (defined in PLAN plot)
+  public static final long PLOT_PLAN       = 1;
+  public static final long PLOT_EXTENDED   = 2;
+  public static final long PLOT_H_SECTION  = 3; // leave the place but do not use
+  public static final long PLOT_PHOTO      = 4;
+  public static final long PLOT_SECTION    = 5;
+  public static final long PLOT_SKETCH_3D  = 6;
+  public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defiened in EXT plot)
 
   // public static final String[] plotType = {
-  //   "V-SECTION",  // vertical cross section
+  //   "X-SECTION",  // vertical cross section
   //   "PLAN",       // plan
   //   "EXTENDED",   // extended elevation
   //   "H-SECTION",  // horizontal cross-section
   //   "PHOTO",      // photo section
   //   "SECTION",
-  //   "SKETCH-3D"
+  //   "SKETCH-3D",
+  //   "XH-SECTION"
   // };
 
   static String plotTypeString( int type, Resources res )
   {
     switch (type) {
       case 0:
-        // return "V-SECTION";
-        return res.getString( R.string.v_section );
+        return "X-SECTION";
       case 1:
         // return "PLAN";
         return res.getString( R.string.plan );
@@ -61,6 +59,8 @@ class PlotInfo
         return "SECTION";
       case 6:
         return "SKETCH-3D";
+      case 7:
+        return "XH-SECTION";
     }
     return "Unknown type";
   }
@@ -75,10 +75,10 @@ class PlotInfo
   // }
 
   static final String[] projName = { // therion projection names
-    "none", "plan", "extended", "none", "none", "none", "sketch_3d"
+    "none", "plan", "extended", "none", "none", "none", "sketch_3d", "none"
   };
   // static final String[] plotName = { // plot list names
-  //   "+", "==", "||", "x", "[o]", "<>", "3d"
+  //   "+", "==", "||", "x", "[o]", "<>", "3d", "><"
   // };
 
 
@@ -112,13 +112,14 @@ class PlotInfo
 
   // public static int getTypeValue( String type )
   // {
-  //    // if ( type.equals("V-SECTION") ) return (int)PLOT_V_SECTION;
+  //    if ( type.equals("X-SECTION") ) return (int)PLOT_X_SECTION;
   //    if ( type.equals("PLAN") )      return (int)PLOT_PLAN;
   //    if ( type.equals("EXTENDED") )  return (int)PLOT_EXTENDED;
   //    if ( type.equals("H-SECTION") ) return (int)PLOT_H_SECTION;
   //    if ( type.equals("PHOTO") )     return (int)PLOT_PHOTO;
   //    if ( type.equals("SECTION") )   return (int)PLOT_SECTION;
   //    if ( type.equals("SKETCH-3D") ) return (int)PLOT_SKETCH_3D;
+  //    if ( type.equals("XH-SECTION") ) return (int)PLOT_XH_SECTION;
   //    return (int)PLOT_PLAN;
   // }
 

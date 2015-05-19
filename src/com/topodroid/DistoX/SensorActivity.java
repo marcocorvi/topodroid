@@ -8,10 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120826 created
- * 20121212 using SensorEvent
- * 20140416 setError for required EditText inputs
  */
 package com.topodroid.DistoX;
 

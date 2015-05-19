@@ -9,9 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120517 angle units
- * 20120725 TopoDroidApp log
- * 20140329 raw data (optionally)
  */
 package com.topodroid.DistoX;
 

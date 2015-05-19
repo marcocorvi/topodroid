@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -425,6 +424,7 @@ public class DrawingSurface extends SurfaceView
 
     public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name )
     {
+      // Log.v("DistoX", "drawing surface export type " + type );
       if ( type == PlotInfo.PLOT_EXTENDED ) {
         mCommandManager2.exportTherion( type, out, sketch_name, plot_name );
       } else {

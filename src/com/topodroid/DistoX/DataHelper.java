@@ -1665,8 +1665,39 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
+   public List<DistoXDBlock> selectShotsAt( long sid, String station, boolean leg )
+   {
+     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     if ( station == null || station.length() == 0 ) return list;
+     // if ( myDB == null ) return list;
+     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
+       "surveyId=? and status=? and (fStation=? or tStation=?)",
+       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station, station },
+       null,  // groupBy
+       null,  // having
+       "id" ); // order by
+     if (cursor.moveToFirst()) {
+       do {
+         int fl = cursor.getString(1).length();
+         int tl = cursor.getString(2).length();
+         if ( ( leg && fl > 0 && tl > 0 )                                       // legs only
+           || ( !leg && ( ( fl > 0 && tl ==0 ) || ( fl == 0 && tl > 0 ) ) ) ) { // splay only
+           DistoXDBlock block = new DistoXDBlock();
+           fillBlock( sid, block, cursor );
+           list.add( block );
+         }
+       } while (cursor.moveToNext());
+     }
+     if (cursor != null && !cursor.isClosed()) {
+       cursor.close();
+     }
+     return list;
+   }
+
    public List<DistoXDBlock> selectAllShotsAtStations( long sid, String station1, String station2 )
    {
+     if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
+
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,

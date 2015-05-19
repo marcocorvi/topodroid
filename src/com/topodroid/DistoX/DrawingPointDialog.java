@@ -8,10 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20121225 implemented erase
- * 20130825 added a field to edit the point text (for labels)
- * 20130829 added the buttons for the point orientation
  */
 package com.topodroid.DistoX;
 

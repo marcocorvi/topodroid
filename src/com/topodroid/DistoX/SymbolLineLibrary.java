@@ -8,10 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20121201 created
- * 20121211 locale
- * 20140422 iso
  */
 package com.topodroid.DistoX;
 

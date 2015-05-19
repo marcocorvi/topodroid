@@ -12,8 +12,6 @@
  * which, in turns, is based on PocketTopo implementation.
  * --------------------------------------------------------
  * CHANGES
- * 20120725 TopoDroidApp log
- * 20140408 added enforce max to 2.0
  */
 package com.topodroid.DistoX;
 

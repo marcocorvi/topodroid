@@ -8,14 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120530 loop closures
- * 20120601 more loop closure
- * 20120702 surface shots
- * 20120719 added check whether survey is attached
- * 20120726 TopoDroid log
- * 20130110 loop closure-error compensation
- * 20140513 barrier
  */
 package com.topodroid.DistoX;
 

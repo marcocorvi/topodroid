@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 201312   created to distinguish from X310 memory dialog
- * 20140416 setError for required EditText inputs
  */
 package com.topodroid.DistoX;
 

@@ -4,6 +4,7 @@
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
+    <string name="double_back">Drücken Sie ZURÜCK erneut zu verlassen</string>
 
     <string name="version_ask">Installation einer neuen Version von TopoDroid.\n.Wollen Sie die Zeichenwerkzeuge neu installieren?</string>
     <!-- TODO string name="version_title">Version update</string -->
@@ -169,7 +170,7 @@
     <string name="error_sensor_required">Sensor erforderlich</string>
     <string name="error_value_required">Wert erforderlich</string>
     
-    <!-- TODO string name="group_title">Assign calibration data groups</string -->
+    <string name="group_title">Der Kalinrierungsdaten Gruppen zuweisen</string>
     <!-- TODO string name="group_policy_four">Policy: group by four</string -->
     <!-- TODO string name="group_policy_sixteen">Policy: four groups of four, other single</string -->
     <!-- TODO string name="group_policy_distance">Policy: group by angular distance</string -->
@@ -444,6 +445,7 @@
     <string name="button_toggle"    >Toggle CAL mode  </string>
 -->
     <string name="button_write"     >Hochladen</string>
+    <!-- TODO string name="button_xsection"  >X-Section</string -->
 
     <string name="mode_leg">Messstrecke</string>
     <string name="mode_splay">Hilfsmessung</string>

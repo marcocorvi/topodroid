@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120726 TopoDroid log
- * 201401   management of devices A3 and X310
  */
 package com.topodroid.DistoX;
 

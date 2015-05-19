@@ -4,6 +4,7 @@
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
 
     <string name="app_name">TopoDroid</string>
+    <string name="double_back">Click BACK again to exit</string>
 
     <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing items?</string>
     <string name="version_title">Version update</string>
@@ -423,6 +424,7 @@
     <string name="button_toggle"    >Toggle CAL mode  </string>
 -->
     <string name="button_write"     >Upload</string>
+    <string name="button_xsection"  >X-Section</string>
 
     <string name="mode_leg">Legs</string>
     <string name="mode_splay">Splays</string>

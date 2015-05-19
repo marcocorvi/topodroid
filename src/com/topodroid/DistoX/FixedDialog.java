@@ -8,10 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120603 created 
- * 20130131 intent: Proj4 coord conversion
- * 20140609 geomag
  */
 package com.topodroid.DistoX;
 

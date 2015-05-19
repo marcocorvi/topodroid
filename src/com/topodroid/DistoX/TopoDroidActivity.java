@@ -8,19 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120520 created from DistoX.java
- * 20120606 import survey (therion format)
- * 20120610 import zip (unarchive)
- * 20120619 added "long-press" for immediate survey opening
- * 20121211 thconfig-manager and symbol-manager menus
- * 20121212 AsyncTask to import therion files
- * 20130307 made Annotations into a dialog
- * 20130910 startSurvey takes old sid/id to populate new survey
- * 20131201 button bar new interface. reorganized actions
- * 20140415 commented TdSymbol stuff
- * 20140416 menus: palette options help logs about
- * 20140526 removed oldSID and oldID from startSurvey 
  */
 package com.topodroid.DistoX;
 
@@ -52,7 +39,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 // import android.content.res.ColorStateList;
 import android.os.Bundle;
-// import android.os.Handler;
+import android.os.Handler;
 // import android.os.Message;
 // import android.os.Parcelable;
 
@@ -187,24 +174,6 @@ public class TopoDroidActivity extends Activity
   boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
   // -------------------------------------------------------------------
-
-  @Override
-  public void onBackPressed () // askClose
-  {
-    if ( onMenu ) {
-      closeMenu();
-      return;
-    }
-    new TopoDroidAlertDialog( this, getResources(),
-                              getResources().getString( R.string.ask_close ),
-      new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick( DialogInterface dialog, int btn ) {
-          finish(); // doClose()
-        }
-      }
-    );
-  }
 
 
     
@@ -977,14 +946,59 @@ public class TopoDroidActivity extends Activity
     }
   }
 
-  // @Override
-  // public synchronized void onDestroy() 
-  // {
-  //   super.onDestroy();
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onDestroy " );
-  //   // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
-  //   saveInstanceToData();
-  // }
+  @Override
+  public synchronized void onDestroy() 
+  {
+    super.onDestroy();
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
+    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onDestroy " );
+    // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
+    // saveInstanceToData();
+  }
+
+  private boolean doubleBack = false;
+  private Handler doubleBackHandler = new Handler();
+  private Toast   doubleBackToast = null;
+
+  private final Runnable doubleBackRunnable = new Runnable() {
+    @Override 
+    public void run() {
+      doubleBack = false;
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+    }
+  };
+
+  @Override
+  public void onBackPressed () // askClose
+  {
+    if ( onMenu ) {
+      closeMenu();
+      return;
+    }
+    if ( doubleBack ) {
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+      super.onBackPressed();
+      return;
+    }
+    doubleBack = true;
+    doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+    doubleBackToast.show();
+    doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+    
+    // new TopoDroidAlertDialog( this, getResources(),
+    //                           getResources().getString( R.string.ask_close ),
+    //   new DialogInterface.OnClickListener() {
+    //     @Override
+    //     public void onClick( DialogInterface dialog, int btn ) {
+    //       finish(); // doClose()
+    //     }
+    //   }
+    // );
+  }
 
   // ------------------------------------------------------------------
 

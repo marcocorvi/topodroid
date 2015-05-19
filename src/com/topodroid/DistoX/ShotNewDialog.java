@@ -8,13 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130621 set hint for FROM field
- * 20130910 added "at" field
- * 20131022 dismiss only to the "close" button
- * 20140220 N.B. insertManualShot keeps into account current units
- * 20140221 auto update of stations names: three buttons, OK, Save, Back
- * 20140416 setError for required EditText inputs
  */
 package com.topodroid.DistoX;
 

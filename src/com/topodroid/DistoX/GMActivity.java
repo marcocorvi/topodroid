@@ -8,12 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120517 angle units
- * 20120715 per-category preferences
- * 20121124 check device-calibration consistency before download and write
- * 20131201 button bar new interface. reorganized actions
- * 20140609 enableWrite: two state write button
  */
 package com.topodroid.DistoX;
 

@@ -9,9 +9,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130108 created
- * 20140526 point scale bug fix
  */
 
 package com.topodroid.DistoX;
@@ -34,7 +31,7 @@ public class DrawingStationPath extends DrawingPath
 {
   private static float toTherion = TopoDroidConst.TO_THERION;
 
-  float mXpos;
+  float mXpos;                // X-Y station position (scene)
   float mYpos;
   protected int mScale;       //! symbol scale
   String mName;               // station name
@@ -61,7 +58,7 @@ public class DrawingStationPath extends DrawingPath
     super( DrawingPath.DRAWING_PATH_STATION );
     // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     // mType = DRAWING_PATH_STATION;
-    mXpos = st.cx;
+    mXpos = st.cx;  // st.cx : scene coords
     mYpos = st.cy;
     mName = st.mName;
 

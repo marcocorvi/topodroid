@@ -11,8 +11,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130108 created
  */
 package com.topodroid.DistoX;
 
@@ -38,6 +36,7 @@ public class DrawingStationDialog extends Dialog
     private Button mBtnOK;
     private Button mBtnSet;
     private Button mBtnBreak;
+    private Button mBtnXSection;
     // private Button mBtnCancel;
 
     private Context mContext;
@@ -71,6 +70,7 @@ public class DrawingStationDialog extends Dialog
       mCoords.setText( mStation.getCoordsString() );
 
       mBtnBreak  = (Button) findViewById(R.id.btn_break );
+      mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
       // mBtnCancel = (Button) findViewById(R.id.button_cancel);
@@ -83,6 +83,7 @@ public class DrawingStationDialog extends Dialog
       }
       mBtnSet.setOnClickListener( this );
       mBtnBreak.setOnClickListener( this );
+      mBtnXSection.setOnClickListener( this );
       // mBtnCancel.setOnClickListener( this );
 
       if ( mIsBarrier ) {
@@ -101,6 +102,8 @@ public class DrawingStationDialog extends Dialog
         mActivity.setCurrentStationName( mStation.mName );
       } else if (view.getId() == R.id.btn_break ) {
         mActivity.toggleStationBarrier( mStationName, mIsBarrier );
+      } else if (view.getId() == R.id.btn_xsection ) {
+        mActivity.openXSection( mStationName );
       }
       dismiss();
     }

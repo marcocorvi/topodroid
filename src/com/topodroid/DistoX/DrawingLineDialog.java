@@ -8,11 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20121225 implemented erase
- * 20130826 added splitLine
- * 201312   button to make the line sharp
- * 201401   button to make the line like a "rock" path
  */
 package com.topodroid.DistoX;
 

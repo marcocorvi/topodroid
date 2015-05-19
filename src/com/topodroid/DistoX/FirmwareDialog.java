@@ -8,10 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 201312   created to distinguish from A3 memory dialog
- * 20140416 setError for required EditText inputs
- * 20140719 save dump to file
  */
 package com.topodroid.DistoX;
 

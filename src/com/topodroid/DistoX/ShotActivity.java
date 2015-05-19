@@ -948,12 +948,55 @@ public class ShotActivity extends Activity
     setConnectionStatus( mDataDownloader.getStatus() );
   }
 
-  // @Override
-  // public synchronized void onDestroy() 
-  // {
-  //   super.onDestroy();
-  //   saveInstanceToData();
-  // }
+  @Override
+  public synchronized void onDestroy() 
+  {
+    super.onDestroy();
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
+    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onDestroy " );
+    // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
+    // saveInstanceToData();
+  }
+
+  private boolean doubleBack = false;
+  private Handler doubleBackHandler = new Handler();
+  private Toast   doubleBackToast = null;
+
+  private final Runnable doubleBackRunnable = new Runnable() {
+    @Override 
+    public void run() {
+      doubleBack = false;
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+    }
+  };
+
+  @Override
+  public void onBackPressed () // askClose
+  {
+    if ( doubleBack ) {
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+      super.onBackPressed();
+      return;
+    }
+    doubleBack = true;
+    doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+    doubleBackToast.show();
+    doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+    
+    // new TopoDroidAlertDialog( this, getResources(),
+    //                           getResources().getString( R.string.ask_close ),
+    //   new DialogInterface.OnClickListener() {
+    //     @Override
+    //     public void onClick( DialogInterface dialog, int btn ) {
+    //       finish(); // doClose()
+    //     }
+    //   }
+    // );
+  }
 
   // FIXME NOTIFY: the display mode is local - do not notify
   private void restoreInstanceFromData()
@@ -1392,20 +1435,6 @@ public class ShotActivity extends Activity
   }
 
   // ------------------------------------------------------------------------
-
-  @Override
-  public void onBackPressed () // askClose
-  {
-    new TopoDroidAlertDialog( this, getResources(),
-                      getResources().getString( R.string.ask_close_survey ),
-      new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick( DialogInterface dialog, int btn ) {
-          finish();
-        }
-      }
-    );
-  }
 
   // ---------------------------------------------------------
   /* MENU

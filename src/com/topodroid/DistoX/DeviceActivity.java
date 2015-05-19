@@ -8,14 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120523 radio buttons: batch - continuous
- * 20120525 using mApp.mConnectionMode
- * 20120715 per-category preferences
- * 20120726 TopoDroid log
- * 20121121 bug-fix check that device is "DistoX" to put it on the list
- * 20131201 button bar new interface. reorganized actions
- * 20140719 write memory dump to file (X310 only)
  */
 package com.topodroid.DistoX;
 

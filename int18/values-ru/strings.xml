@@ -4,6 +4,7 @@
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
 
     <string name="app_name">TopoDroid</string>
+    <!-- TODO string name="double_back">Click BACK again to exit</string -->
 
     <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить объекты рисунков?</string>
     <string name="version_title">Обновление приложения</string>
@@ -419,6 +420,7 @@
     <string name="button_toggle"    >Режим КАЛИБ  </string>
 -->
     <string name="button_write"     >Записать</string>
+    <!-- TODO string name="button_xsection"  >X-Section</string -->
 
     <string name="mode_leg">Нитка</string>
     <string name="mode_splay">Бок. замер</string>

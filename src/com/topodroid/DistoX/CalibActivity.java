@@ -9,13 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120520 created
- * 20120524 added device in CalibInfo
- * 20120531 activated doDelete with askDelete first
- * 20120725 TopoDroidApp log
- * 20121124 calibration-device consistency check
- * 20131201 button bar new interface. reorganized actions
- * 20140416 setError for required EditText inputs
  */
 package com.topodroid.DistoX;
 

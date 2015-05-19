@@ -13,10 +13,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130204 type DRAWING_PATH_NAME
- * 20140328 endpoints scene coords re-enabled
- * 20140328 check if this path intersects a segment
  */
 package com.topodroid.DistoX;
 

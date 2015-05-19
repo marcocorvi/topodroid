@@ -9,13 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120611 created
- * 20120619 added therion export to the zip
- * 20120720 added manifest
- * 20120725 TopoDroidApp log
- * 20130324 zip export of 3D sketches
- * 201311   commented 3d sketches
- * 201401   added files CSV
  */
 package com.topodroid.DistoX;
 

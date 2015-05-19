@@ -3,6 +3,7 @@
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2-es.pdf</string>
 
     <string name="app_name">TopoDroid</string>
+    <!-- TODO string name="double_back">Click BACK again to exit</string -->
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
     <string name="version_title">Versión de actualización</string>
@@ -410,6 +411,7 @@
     <string name="button_toggle"    >Cambiar Modo CAL </string>
 -->
     <string name="button_write"     >Escribir calibración</string>
+    <!-- TODO string name="button_xsection"  >X-Section</string -->
 
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Laterales</string>

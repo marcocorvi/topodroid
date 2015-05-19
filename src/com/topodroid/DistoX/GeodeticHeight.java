@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130520 altimetric altitude
- * 20140220 failure notification with negative return values (multiple of -1000)
  */
 package com.topodroid.DistoX;
 

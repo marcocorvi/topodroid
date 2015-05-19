@@ -9,7 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20130730 bug fix: use hint when no text entered in the edit box
  */
 package com.topodroid.DistoX;
 

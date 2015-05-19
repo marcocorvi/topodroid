@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2014
  *
- * @brief TopoDroid application settings (preferenceces)
+ * @brief TopoDroid numerical constants
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.

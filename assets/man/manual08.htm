@@ -53,8 +53,8 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><i>Survey stations</i>: this tells the program how to automatically assign survey stations to the shots. (This is further explained below).</li>
 <li><i>Initial station name</i>: The default first station name for new surveys. Can be also changed in the New survey dialog.</li>
 <li><i>Leg tolerance</i>: the angular tolerance (radians) between consecutive shots to belong to the same leg</li>
-<li><i>Extend threshold</i>: splay shots are assigned an "extend" direction depending on the angle they make with the leg(s). When the angle is less than the threshold they get a "vertical extend".</li>
 <li><i>Splay extend</i>: whether to assign the extend direction to splay shots or set "vertical" extend to them</li> 
+<li><i>Vertical extend angle</i>: the "extend" direction iassigned to a splay shot depends on the angle it makes with the leg(s). When the angle is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, depending whether it makes with the leg and angle smaller or larger than 90 degrees.</li>
 <li><i>Shot vertical threshold</i>. this is like Therion vthreshold: the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
 <li><i>Timer</i> is the number of seconds before measuring the direction with the Android sensors (for manual data-input [N])</li>
 <li><i>Beep volume</i> is the volume of the timer beep [N]</li>

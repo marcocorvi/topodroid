@@ -9,7 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20140720 created
  */
 package com.topodroid.DistoX;
 

@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20140303 symbol picker mode, list or grid
- * 20140417 bug-fix: onClick not reported timely. replaced List with Grid
  */
 package com.topodroid.DistoX;
 

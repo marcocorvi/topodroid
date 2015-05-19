@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20131118 background color for non-acceptable shots 
- * 20140515 added parent
  */
 package com.topodroid.DistoX;
 

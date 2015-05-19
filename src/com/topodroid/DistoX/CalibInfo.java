@@ -9,8 +9,6 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES
- * 20120520 created
- * 20120524 added device 
  */
 package com.topodroid.DistoX;
 
