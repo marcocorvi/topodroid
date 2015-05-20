@@ -126,6 +126,7 @@
     <string name="sketch_loading">Skizze laden... bitte warten ...</string>
     <string name="sketch_saving">Skizze sichern ... bitte warten ...</string>
     <!-- TODO string name="lookup_wait">Internet lookup ... bitte warten...</string -->
+    <!-- TODO string name="lookup_fail">Failed lookup</string -->
 
 <!-- MORE DEVICE STRINGS -->
     <!-- OK string name="head_tail">Memory: </string -->
@@ -234,7 +235,6 @@
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_palette">PALETTE</string>
-    <string name="menu_references">BEZUGRAHMENS</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SCAN</string>
@@ -250,10 +250,6 @@
     <string name="popup_sharp_pt">Sharfen</string>
     <string name="popup_curve_pt">Glätten</string>
     <string name="popup_remove_pt">Löschen Punkt</string>
-    <!-- TODO string name="popup_mode_move">MOVE</string -->
-    <!-- TODO string name="popup_mode_draw">DRAW</string -->
-    <!-- TODO string name="popup_mode_erase">ERASE</string -->
-    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="not_available">BT nicht verfügbar</string>
     <!-- UNUSED string name="not_connected">Nicth verbinden</string -->

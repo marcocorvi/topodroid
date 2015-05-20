@@ -139,6 +139,17 @@ public class DrawingCommandManager
     return ret;
   }
 
+  DrawingStationName getStationAt( float x, float y ) // x,y canvas coords
+  {
+    // Log.v("DistoX", "get station at " + x + " " + y );
+    for ( DrawingStationName st : mStations ) {
+      // Log.v("DistoX", "station at " + st.cx + " " + st.cy );
+      if ( Math.abs( x - st.cx ) < TopoDroidSetting.mCloseness
+        && Math.abs( y - st.cy ) < TopoDroidSetting.mCloseness ) return st;
+    }
+    return null;
+  }
+
   void setDisplayPoints( boolean display ) { mDisplayPoints = display; }
 
   boolean isSelectable() { return mSelection != null; }

@@ -111,6 +111,7 @@
     <string name="sketch_loading">Зарежда не на скица... Моля изчакайте...</string>
     <string name="sketch_saving">Записване на скица... Моля изчакайте...</string>
     <!-- string name="lookup_wait">Internet lookup ... please wait...</string -->
+    <!-- TODO string name="lookup_fail">Failed lookup</string -->
  
 
     <string name="head_tail">Памет: </string>
@@ -214,7 +215,6 @@
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">Общ изглед</string>
     <string name="menu_palette">Палитра</string>
-    <!-- TODO string name="menu_references">REFERENCES</string -->
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
     <string name="menu_scan">Сканиране</string>
@@ -230,10 +230,6 @@
     <string name="popup_sharp_pt">Изправяне на сегмента</string>
     <string name="popup_curve_pt">Изглаждане на сегмента</string>
     <string name="popup_remove_pt">Изтриване на точката</string>
-    <!-- TODO string name="popup_mode_move">MOVE</string -->
-    <!-- TODO string name="popup_mode_draw">DRAW</string -->
-    <!-- TODO string name="popup_mode_erase">ERASE</string -->
-    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="connected_none">Няма връзка</string>
     <string name="connected_already">Вече има връзка</string>

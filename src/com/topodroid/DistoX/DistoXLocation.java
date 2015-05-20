@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date dec 2011
  *
- * @brief TopoDroid GPS-location for fixed stations
+ * @brief TopoDroid GPS-location for fixed stations: new-entry and listing
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -96,7 +96,6 @@ public class DistoXLocation extends Dialog
     mStatus = locManager.getGpsStatus( null );
     // mLocating = false;
     // mHasLocation = false;
-
     // Log.v(  TopoDroidApp.TAG, "UnitLocation " + TopoDroidApp.mUnitLocation + " ddmmss " + TopoDroidApp.DDMMSS );
   }
 
@@ -179,25 +178,27 @@ public class DistoXLocation extends Dialog
                              double asl
                            )
   {
-    // Log.v("DistoX", "Location addFixedPoint " + lng + " " + lat + " " + alt );
+    // Log.v("DistoX", "Location add Fixed Point " + lng + " " + lat + " " + alt );
 
     // FIXME TODO try to get altimetric altitude
-
     String name = mETstation.getText().toString();
     if ( name.length() == 0 ) {
-      String error = mContext.getResources().getString( R.string.error_station_required );
-      mETstation.setError( error );
+      mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+      return;
+    }
+    if ( mParent.hasLocation( name ) ) {
+      mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
       return;
     }
     FixedInfo f = mParent.addLocation( name, lng, lat, alt, asl );
-    // no need to update the adatper: fixeds are not many and can just request
-    // the list to the database 
-
-    mFixedAdapter.add( f );
-    mList.invalidate();
-    // refreshList();
-    mHasLocation = false;
-    // mBtnAdd.setEnabled( false );
+    if ( f != null ) {
+      // no need to update the adatper: fixeds are not many and can just request the list to the database 
+      mFixedAdapter.add( f );
+      mList.invalidate();
+      // refreshList();
+      mHasLocation = false;
+      // mBtnAdd.setEnabled( false );
+    }
   }
 
   private void setGPSoff()
@@ -268,8 +269,11 @@ public class DistoXLocation extends Dialog
     // }
     String station = mETstation.getText().toString();
     if ( station == null || station.length() == 0 ) {
-      String error = mContext.getResources().getString( R.string.error_station_required );
-      mETstation.setError( error );
+      mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+      return;
+    }
+    if ( mParent.hasLocation( station ) ) {
+      mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
       return;
     }
     if ( b == mBtnMan ) {
@@ -339,13 +343,8 @@ public class DistoXLocation extends Dialog
 
   void showLocation()
   {
-    if ( TopoDroidSetting.mUnitLocation == TopoDroidConst.DDMMSS ) {
-      mTVlong.setText( mContext.getResources().getString( R.string.longitude ) + " " + FixedInfo.double2ddmmss( mLongitude ) );
-      mTVlat.setText( mContext.getResources().getString( R.string.latitude ) + " " + FixedInfo.double2ddmmss( mLatitude ) );
-    } else {
-      mTVlong.setText( mContext.getResources().getString( R.string.longitude ) + " " + FixedInfo.double2degree( mLongitude ) );
-      mTVlat.setText( mContext.getResources().getString( R.string.latitude ) + " " + FixedInfo.double2degree( mLatitude ) );
-    }
+    mTVlong.setText( mContext.getResources().getString( R.string.longitude ) + " " + FixedInfo.double2string( mLongitude ) );
+    mTVlat.setText( mContext.getResources().getString( R.string.latitude ) + " " + FixedInfo.double2string( mLatitude ) );
     mTValt.setText( mContext.getResources().getString( R.string.altitude ) + " " + Integer.toString( (int)(mAltitude) ) );
   }
 

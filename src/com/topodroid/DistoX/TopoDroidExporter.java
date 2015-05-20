@@ -441,7 +441,7 @@ class TopoDroidExporter
         pw.format("  <styleUrl>#station</styleUrl>\n");
         pw.format("  <MultiGeometry>\n");
           pw.format("  <Point id=\"%s\">\n", st.name );
-          pw.format("    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
+          pw.format(Locale.ENGLISH, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
           pw.format("  </Point>\n");
         pw.format("  </MultiGeometry>\n");
         pw.format("</Placemark>\n");
@@ -460,8 +460,8 @@ class TopoDroidExporter
           // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
           // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
           pw.format("      <coordinates>\n");
-          pw.format("        %f,%f,%f\n", from.e, from.s, from.v );
-          pw.format("        %f,%f,%f\n", to.e, to.s, to.v );
+          pw.format(Locale.ENGLISH, "        %f,%f,%f\n", from.e, from.s, from.v );
+          pw.format(Locale.ENGLISH, "        %f,%f,%f\n", to.e, to.s, to.v );
           pw.format("      </coordinates>\n");
           pw.format("    </LineString>\n");
         } else {
@@ -483,8 +483,8 @@ class TopoDroidExporter
       //   // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
       //   // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
       //   pw.format("      <coordinates>\n");
-      //   pw.format("        %f,%f,%f\n", from.e, from.s, from.v );
-      //   pw.format("        %f,%f,%f\n", to.e, to.s, to.v );
+      //   pw.format(Locale.ENGLISH, "        %f,%f,%f\n", from.e, from.s, from.v );
+      //   pw.format(Locale.ENGLISH, "        %f,%f,%f\n", to.e, to.s, to.v );
       //   pw.format("      </coordinates>\n");
       //   pw.format("    </LineString>\n");
       // }
@@ -543,9 +543,9 @@ class TopoDroidExporter
         NumStation from = sh.from;
         NumStation to   = sh.to;
         if ( from != last ) {
-          pw.format("%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
+          pw.format(Locale.ENGLISH, "%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
         }
-        pw.format("%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
+        pw.format(Locale.ENGLISH, "%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
         last = to;
       }
       fw.flush();

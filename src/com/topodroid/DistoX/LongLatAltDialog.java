@@ -80,8 +80,8 @@ public class LongLatAltDialog extends Dialog
     mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
     if ( mParent.mHasLocation ) {
-      mEditLong.setText( FixedInfo.double2ddmmss( mParent.mLongitude ) );
-      mEditLat.setText(  FixedInfo.double2ddmmss( mParent.mLatitude ) );
+      mEditLong.setText( FixedInfo.double2string( mParent.mLongitude ) );
+      mEditLat.setText(  FixedInfo.double2string( mParent.mLatitude ) );
       mEditAlt.setText(  Integer.toString( (int)(mParent.mAltitude) )  );
     }
     mWGS84.setChecked( true );
@@ -94,34 +94,6 @@ public class LongLatAltDialog extends Dialog
     mBtnOK.setOnClickListener( this );
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
     // mBtnCancel.setOnClickListener( this );
-  }
-
-  double string2decdegrees( String str )
-  {
-    // tokenize str on ':'
-    str = str.trim();
-    str = str.replace( " ", ":" );
-    str = str.replace( "/", "." );
-    String[] token = str.split( ":" );
-    // Log.v("DistoX", "STRING <" + str + "> tokens " + token.length );
-    try {
-      if ( token.length == 3 ) {
-        double ret = Integer.parseInt( token[0] );
-        if ( token.length > 1 && token[1] != null ) {
-          ret += Integer.parseInt( token[1] ) / 60.0;
-          if ( token.length > 2 && token[2] != null ) {
-            String t = token[2].replace(",", ".");
-            ret += Double.parseDouble( t ) / 3600.0;
-          }
-        }
-        return ret;
-      } else if ( token.length == 1 ) {
-        return Double.parseDouble( str );
-      }
-    } catch (NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "string2decdegrees parse error: " + str );
-    }
-    return -1111.0; // more neg than -1000
   }
 
   @Override
@@ -157,25 +129,32 @@ public class LongLatAltDialog extends Dialog
         mEditAlt.setError( mContext.getResources().getString( R.string.error_alt_required) );
         return;
       }
-      double lng = string2decdegrees( longit );
+      double lng = FixedInfo.string2double( longit );
       if ( lng < -1000 ) {
         mEditLong.setError( mContext.getResources().getString( R.string.error_long_required ) );
         return;
       } 
-      double lat = string2decdegrees( latit );
+      double lat = FixedInfo.string2double( latit );
       if ( lat < -1000 ) {
         mEditLat.setError( mContext.getResources().getString( R.string.error_lat_required) );
         return;
       }
       double alt = -1000.0;
-      // double asl = -1000.0;
-      double asl = 0.0;
+      double asl = -1000.0;
       altit = altit.replace(",", ".");
       try {
         if ( ! mWGS84.isChecked() ) {
           asl = Double.parseDouble( altit );
-          Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
-          alt = asl + GeodeticHeight.geodeticHeight( latit, longit );
+          // if ( TopoDroidSetting.mAltimetricLookup ) 
+          {
+            Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
+            double gh = GeodeticHeight.geodeticHeight( latit, longit );
+            if ( gh > -999 ) {
+              alt = asl + gh;
+            } else {
+              Toast.makeText( mContext, R.string.lookup_fail, Toast.LENGTH_SHORT ).show();
+            }
+          }
         } else {
           alt = Double.parseDouble( altit );
         }

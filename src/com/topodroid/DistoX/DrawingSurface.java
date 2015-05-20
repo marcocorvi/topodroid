@@ -354,10 +354,11 @@ public class DrawingSurface extends SurfaceView
     //   return commandManager.getAreaAt( x, y );
     // }
 
-    // public SelectionPoint  getStationAt( float x, float y )
-    // {
-    //   return commandManager.getStationAt( x, y );
-    // }
+    DrawingStationName getStationAt( float x, float y ) // x,y canvas coords
+    {
+      return commandManager.getStationAt( x, y );
+    }
+      
 
     // public SelectionPoint getShotAt( float x, float y )
     // {

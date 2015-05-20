@@ -65,24 +65,22 @@ class FixedInfo
 
   public String toLocString()
   {
-    return ( ( TopoDroidSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ?
-               double2ddmmss( lng ) + " " + double2ddmmss( lat ) : 
-               double2degree( lng ) + " " + double2degree( lat ) )
-         + " " + Integer.toString( (int)(alt) );
-         // + "* " + Integer.toString( (int)(asl) );
+    return double2string( lng ) + " " + double2string( lat ) + " " 
+         + ( (alt < -999)? Integer.toString( (int)asl ) + "*" : Integer.toString( (int)(alt) ) );
   }
 
   public String toString()
   {
-    return name + " "
-         + ( ( TopoDroidSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ?
-               double2ddmmss( lng ) + " " + double2ddmmss( lat ) :
-               double2degree( lng ) + " " + double2degree( lat ) )
-         + " " + Integer.toString( (int)(alt) );
-         // + " " + ( (asl <= 0 )? Integer.toString( (int)(alt) ) + "*" : Integer.toString( (int)(asl) ) );
+    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " 
+                + ( (alt < -999)? Integer.toString( (int)asl ) + "*" : Integer.toString( (int)(alt) ) );
   }
 
-  static String double2ddmmss( double x )
+  static String double2string( double x )
+  {
+    return ( TopoDroidSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
+  }
+
+  static private String double2ddmmss( double x )
   {
     int dp = (int)x;
     x = 60*(x - dp);
@@ -96,11 +94,34 @@ class FixedInfo
     return swp.getBuffer().toString();
   }
 
-  static String double2degree( double x )
+  static private String double2degree( double x )
   {
     StringWriter swp = new StringWriter();
     PrintWriter pwp = new PrintWriter( swp );
     pwp.format(Locale.ENGLISH, "%.6f", x );
     return swp.getBuffer().toString();
   }
+
+
+  static double string2double( String str )
+  {
+    str = str.trim();                  // drop initial and final spaces
+    str = str.replace( " ", ":" );     // replace separators
+    str = str.replace( "/", "." );
+    str = str.replace( ",", "." );
+    String[] token = str.split( ":" ); // tokenize str on ':'
+    try {
+      if ( token.length == 3 ) {
+        return Integer.parseInt( token[0] )
+             + Integer.parseInt( token[1] ) / 60.0
+             + Double.parseDouble( token[2] ) / 3600.0;
+      } else if ( token.length == 1 ) {
+        return Double.parseDouble( str );
+      }
+    } catch (NumberFormatException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "string2double parse error: " + str );
+    }
+    return -1111.0; // more neg than -1000
+  }        
+
 }
