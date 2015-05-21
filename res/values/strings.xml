@@ -111,6 +111,7 @@
     <string name="sketch_loading">Loading sketch ... please wait...</string>
     <string name="sketch_saving">Saving sketch ... please wait...</string>
     <string name="lookup_wait">Internet lookup ... please wait...</string>
+    <string name="lookup_fail">Failed lookup</string>
  
 
     <string name="head_tail">Memory: </string>
@@ -214,7 +215,6 @@
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
     <string name="menu_palette">PALETTE</string>
-    <string name="menu_references">REFERENCES</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SCAN</string>
@@ -230,10 +230,6 @@
     <string name="popup_sharp_pt">Straighten segment</string>
     <string name="popup_curve_pt">Smoothen segment</string>
     <string name="popup_remove_pt">Remove point</string>
-    <string name="popup_mode_move">MOVE</string>
-    <string name="popup_mode_draw">DRAW</string>
-    <string name="popup_mode_erase">ERASE</string>
-    <string name="popup_mode_edit">EDIT</string>
 
     <string name="connected_none">Not connected</string>
     <string name="connected_already">Already connected</string>
@@ -386,7 +382,8 @@
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_geomag"    >GeoMag    </string>
-    <string name="button_altitude">Ortometric Alt.</string>
+    <string name="button_altitude">Orthometric Alt.</string>
+    <string name="button_ellipsoidic">Ellipsoidic Alt.</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->

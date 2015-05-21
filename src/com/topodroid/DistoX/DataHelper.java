@@ -107,7 +107,8 @@ public class DataHelper extends DataSetObservable
 
   private SQLiteStatement updateFixedStationStmt;
   private SQLiteStatement updateFixedStatusStmt;
-  private SQLiteStatement updateFixedAslStmt;
+  private SQLiteStatement updateFixedAltStmt;
+  private SQLiteStatement updateFixedDataStmt;
 
 //these are real database "delete"
   private SQLiteStatement deletePhotoStmt;
@@ -232,7 +233,8 @@ public class DataHelper extends DataSetObservable
  
         updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
         updateFixedStatusStmt = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
-        updateFixedAslStmt = myDB.compileStatement( "UPDATE fixeds set altimetric=? WHERE surveyId=? AND id=?" );
+        updateFixedAltStmt = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
+        updateFixedDataStmt = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
 
         resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND status=0" );
         deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
@@ -2508,6 +2510,11 @@ public class DataHelper extends DataSetObservable
      updateSensorStmt.execute();
      return true;
    }
+
+   public boolean hasFixed( long sid, String station )
+   {
+     return ( getFixedId( sid, station ) != -1 );
+   }
    
    /** N.B. only one location per station
     *       Before inserting a location drop existing deleted fixeds for the station
@@ -2907,12 +2914,23 @@ public class DataHelper extends DataSetObservable
      updateFixedStatusStmt.execute();
    }
 
-   public void updateFixedAsl( long id, long sid, double asl )
+   public void updateFixedAltitude( long id, long sid, double alt, double asl )
    {
-     updateFixedAslStmt.bindDouble( 1, asl );
-     updateFixedAslStmt.bindLong( 2, sid );
-     updateFixedAslStmt.bindLong( 3, id );
-     updateFixedAslStmt.execute();
+     updateFixedAltStmt.bindDouble( 1, alt );
+     updateFixedAltStmt.bindDouble( 2, asl );
+     updateFixedAltStmt.bindLong( 3, sid );
+     updateFixedAltStmt.bindLong( 4, id );
+     updateFixedAltStmt.execute();
+   }
+
+   public void updateFixedData( long id, long sid, double lng, double lat, double alt )
+   {
+     updateFixedDataStmt.bindDouble( 1, lng );
+     updateFixedDataStmt.bindDouble( 2, lat );
+     updateFixedDataStmt.bindDouble( 3, alt );
+     updateFixedDataStmt.bindLong( 4, sid );
+     updateFixedDataStmt.bindLong( 5, id );
+     updateFixedDataStmt.execute();
    }
 
    public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }

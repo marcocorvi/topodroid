@@ -107,6 +107,7 @@
     <string name="sketch_loading">Importation de dessin ... Patientez ...</string>
     <string name="sketch_saving">Exportation de dessin ... Patientez ...</string>
     <!-- TODO string name="lookup_wait">Internet lookup ... please wait...</string -->
+    <!-- TODO string name="lookup_fail">Failed lookup</string -->
 
     <string name="head_tail">Mémoire : </string>
     <string name="head_tail_failed">Echec de lecture de la mémoire du DistoX</string>
@@ -204,7 +205,6 @@
     <string name="menu_options">OPTIONS</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETTE</string>
-    <!-- TODO string name="menu_references">REFERENCES</string -->
     <!-- OK string name="menu_photo">PHOTO</string -->
     <string name="menu_sensor">CAPTEUR</string>
     <!-- string name="menu_scan">SCAN</string -->
@@ -219,10 +219,6 @@
     <!-- string name="popup_sharp_pt">Angle aigu</string -->
     <!-- string name="popup_curve_pt">Curved segment</string -->
     <string name="popup_remove_pt">Supprimer le point</string>
-    <!-- TODO string name="popup_mode_move">MOVE</string -->
-    <!-- TODO string name="popup_mode_draw">DRAW</string -->
-    <!-- TODO string name="popup_mode_erase">ERASE</string -->
-    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="not_available">Bluetooth indisponible</string>
     <!-- string name="not_connected">Non connecté</string -->

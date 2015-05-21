@@ -103,7 +103,7 @@ public class DrawingStationDialog extends Dialog
       } else if (view.getId() == R.id.btn_break ) {
         mActivity.toggleStationBarrier( mStationName, mIsBarrier );
       } else if (view.getId() == R.id.btn_xsection ) {
-        mActivity.openXSection( mStationName );
+        mActivity.openXSection( mStationName, mActivity.getPlotType() );
       }
       dismiss();
     }

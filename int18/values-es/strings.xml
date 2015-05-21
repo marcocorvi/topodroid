@@ -107,6 +107,7 @@
     <string name="sketch_loading">Importando dibujo, espere ...</string>
     <string name="sketch_saving">Exportando dibujo ... espere ...</string>
     <!-- TODO string name="lookup_wait">Internet lookup ... please wait...</string -->
+    <!-- TODO string name="lookup_fail">Failed lookup</string -->
 
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
@@ -204,7 +205,6 @@
     <string name="menu_options">OPCIONES</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETA</string>
-    <!-- TODO string name="menu_references">REFERENCES</string -->
     <string name="menu_photo">FOTO</string>
     <!-- OK string name="menu_sensor">SENSOR</string -->
     <!-- string name="menu_scan">SCAN</string -->
@@ -219,10 +219,6 @@
     <!-- string name="popup_sharp_pt">Ángulo agudo</string -->
     <!-- string name="popup_curve_pt">Curved segment</string -->
     <string name="popup_remove_pt">Eliminar punto</string>
-    <!-- TODO string name="popup_mode_move">MOVE</string -->
-    <!-- TODO string name="popup_mode_draw">DRAW</string -->
-    <!-- TODO string name="popup_mode_erase">ERASE</string -->
-    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="not_available">BT no disponible</string>
     <!-- string name="not_connected">No conectado</string -->

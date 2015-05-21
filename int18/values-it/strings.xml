@@ -107,6 +107,7 @@
     <string name="sketch_loading">Caricamento disegno ... attendi ...</string>
     <string name="sketch_saving">Salvataggio disegno ... attendi ...</string>
     <string name="lookup_wait">Ricerca in internet ... attendi ...</string>
+    <!-- TODO string name="lookup_fail">Failed lookup</string -->
 
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Lettura memoria DistoX fallita</string>
@@ -204,7 +205,6 @@
     <string name="menu_options">OPZIONI</string>
     <!-- OK string name="menu_overview">OVERVIEW</string -->
     <!-- OK string name="menu_palette">PALETTE</string -->
-    <string name="menu_references">RIFERIMENTI</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORI</string>
     <string name="menu_scan">CERCA</string>
@@ -219,10 +219,6 @@
     <string name="popup_sharp_pt">Rendi diritto</string>
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
-    <string name="popup_mode_move">MUOVI</string>
-    <string name="popup_mode_draw">DISEGNA</string>
-    <string name="popup_mode_erase">CANCELLA</string>
-    <string name="popup_mode_edit">MODIFICA</string>
 
     <string name="not_available">Bluetooth non disponibile</string>
     <!-- string name="not_connected">Non connesso</string -->

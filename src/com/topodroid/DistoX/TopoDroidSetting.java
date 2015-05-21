@@ -28,14 +28,14 @@ class TopoDroidSetting
     // ------------------- SURVEY PREFERENCES
     "DISTOX_CLOSE_DISTANCE",      //  3
     "DISTOX_EXTEND_THR2",         //  4
-    "DISTOX_VTHRESHOLD",          //  5
+    "DISTOX_VTHRESHOLD",          //  5 // LRUD vertical threshold
     "DISTOX_SURVEY_STATION",      //  6 // DISTOX_SURVEY_STATIONS must not be used
     "DISTOX_UNIT_LENGTH",
     "DISTOX_UNIT_ANGLE",
-    "DISTOX_ACCEL_THR",           //  9
+    "DISTOX_ACCEL_THR",           //  9 // shot quality thresholds
     "DISTOX_MAG_THR",
     "DISTOX_DIP_THR",             // 11
-    "DISTOX_LOOP_CLOSURE",        // 12
+    "DISTOX_LOOP_CLOSURE",        // 12 // whether to close loop
     "DISTOX_CHECK_ATTACHED",      // 13
 
     "DISTOX_UNIT_LOCATION",       // 14 
@@ -72,16 +72,16 @@ class TopoDroidSetting
 
     "DISTOX_TEAM",                   // 42
     // "DISTOX_ALTIMETRIC",             // 43
-    "DISTOX_SHOT_TIMER",             // 44
+    "DISTOX_SHOT_TIMER",             // 44 // bearing-clino timer
     "DISTOX_BEEP_VOLUME",            // 45
-    "DISTOX_LEG_SHOTS",              // 46
+    "DISTOX_LEG_SHOTS",              // 46 // nr. of shots to make a leg
     "DISTOX_COSURVEY",
 
     "DISTOX_SKETCH_LINE_STEP",       // 48
     "DISTOX_DELTA_EXTRUDE",          // 49
     "DISTOX_COMPASS_READINGS",       // 50
 
-    "DISTOX_SPLAY_EXTEND",           // 51
+    "DISTOX_SPLAY_EXTEND",           // 51 // whether to set extend to splay shots
     "DISTOX_AUTO_RECONNECT",         // 52
     "DISTOX_BITMAP_SCALE",           // 53
     "DISTOX_THUMBNAIL",              // 54
@@ -90,14 +90,14 @@ class TopoDroidSetting
     "DISTOX_ARROW_LENGTH",           // 57
     "DISTOX_EXPORT_SHOTS",           // 58
 
-    "DISTOX_SPLAY_VERT_THRS",
-    "DISTOX_INIT_STATION",
+    "DISTOX_SPLAY_VERT_THRS",        // over mSplayVertThrs splays are not displayed in plan view
+    "DISTOX_INIT_STATION",           // default initial station for sketches
     "DISTOX_BACKSIGHT",
     "DISTOX_Z6_WORKAROUND",          // 62
-    "DISTOX_MAG_ANOMALY",
+    "DISTOX_MAG_ANOMALY",            // whether to compensate magnetic anomaly
     "DISTOX_AZIMUTH_MANUAL",         // 64
-    "DISTOX_VERT_SPLAY",             //
-    "DISTOX_STATION_PREFIX",
+    "DISTOX_VERT_SPLAY",             // over this splay are shown with dashed line
+    "DISTOX_STATION_PREFIX",         // whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_LOCALE",                 // 65
     "DISTOX_CWD",                    // must be last 
 

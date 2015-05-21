@@ -124,11 +124,6 @@ public class SurveyActivity extends Activity
   private DistoXLocation mLocation;
   private FixedDialog mFixedDialog;
 
-  void updateFixedAsl( FixedInfo fxd )
-  {
-    mApp.mData.updateFixedAsl( fxd.id, mApp.mSID, fxd.asl );
-  }
-
   void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
   {
     if ( cs_to == null ) return;
@@ -570,25 +565,31 @@ public class SurveyActivity extends Activity
     finish();
     // dismiss();
   }
+
+  public boolean hasLocation( String station )
+  {
+    return mApp.mData.hasFixed( mApp.mSID, station );
+  }
  
   public FixedInfo addLocation( String station, double longitude, double latitude, double altitude, double altimetric )
   {
-    // mApp.addFixed( station, longitude, latitude, altitude );
-    // addFixed( station, longitude, latitude, altitude );
     long id = mApp.mData.insertFixed( mApp.mSID, -1L, station, longitude, latitude, altitude, altimetric, "", 0L );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_LOC, "addLocation mSID " + mApp.mSID + " id " + id );
-
-    // StringWriter sw = new StringWriter();
-    // PrintWriter pw = new PrintWriter( sw );
-    // pw.format("\nfix %s %f %f %f m\n", station, latitude, longitude, altitude );
-    // DistoXAnnotations.append( mApp.mySurvey, sw.getBuffer().toString() );
-
     return new FixedInfo( id, station, longitude, latitude, altitude, altimetric, "" ); // FIXME comment
   }
 
-  public boolean updateFixed( FixedInfo fxd, String station )
+  boolean updateFixed( FixedInfo fxd, String station )
   {
     return mApp.mData.updateFixedStation( fxd.id, mApp.mSID, station );
+  }
+
+  void updateFixedData( FixedInfo fxd )
+  {
+    mApp.mData.updateFixedData( fxd.id, mApp.mSID, fxd.lng, fxd.lat, fxd.alt );
+  }
+
+  void updateFixedAltitude( FixedInfo fxd )
+  {
+    mApp.mData.updateFixedAltitude( fxd.id, mApp.mSID, fxd.alt, fxd.asl );
   }
 
   public void dropFixed( FixedInfo fxd )

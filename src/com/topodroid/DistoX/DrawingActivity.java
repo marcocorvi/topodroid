@@ -254,6 +254,8 @@ public class DrawingActivity extends ItemDrawer
     public int mMode   = MODE_MOVE;
     private int mTouchMode = MODE_MOVE;
     private boolean mContinueLine = false;
+    private float mDownX;
+    private float mDownY;
     private float mSaveX;
     private float mSaveY;
     private float mSave0X;
@@ -280,6 +282,8 @@ public class DrawingActivity extends ItemDrawer
     private boolean mModified; // whether the sketch has been modified 
 
     private boolean mAllSymbols; // whether the library has all the symbols of the plot
+
+    long getPlotType() { return mType; }
 
     boolean isSection() { return mType == PlotInfo.PLOT_SECTION || mType == PlotInfo.PLOT_H_SECTION; }
     boolean isXSection() { return mType == PlotInfo.PLOT_X_SECTION || mType == PlotInfo.PLOT_XH_SECTION; }
@@ -1578,6 +1582,8 @@ public class DrawingActivity extends ItemDrawer
           setTheTitle( );
           mSaveX = x_canvas; // FIXME-000
           mSaveY = y_canvas;
+          mDownX = x_canvas;
+          mDownY = y_canvas;
           return false;
         }
 
@@ -1903,9 +1909,18 @@ public class DrawingActivity extends ItemDrawer
             }
             mShiftMove = false;
           } else { // MODE_MOVE 
-            //   return false; // long click
-            // }
-            /* nothing */
+/* FIXME for the moment do not create X-Sections
+            if ( Math.abs(x_canvas - mDownX) < 10 && Math.abs(y_canvas - mDownY) < 10 ) {
+              // check if there is a station: only PLAN and EXTENDED
+              if ( mType == PlotInfo.PLOT_PLAN || mType == PlotInfo.PLOT_EXTENDED ) {
+                DrawingStationName sn = mDrawingSurface.getStationAt( x_scene, y_scene );
+                if ( sn != null ) {
+                  // new DrawingStationDialog( this, this, sn, mNum.isBarrier( sn.mName ) ).show();
+                  openXSection( sn.mName, mType );
+                }
+              }
+            }
+*/
           }
         }
       }
@@ -1927,34 +1942,50 @@ public class DrawingActivity extends ItemDrawer
     void setCurrentStationName( String name ) { mApp.setCurrentStationName( name ); }
 
     // @param name station name
-    void openXSection( String name ) 
+    void openXSection( String name, long type ) 
     {
-      Log.v("DistoX", "start X section");
+      if ( type != PlotInfo.PLOT_PLAN && type != PlotInfo.PLOT_EXTENDED ) return;
       String xsname = "xs-" + name;
+      // if ( type == PlotInfo.PLOT_PLAN ) {
+      //   xsname = "xs-" + name;
+      // } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+      //   xsname = "xh-" + name;
+      // } else {
+      //   return;
+      // }
+
       PlotInfo plot = mData.getPlotInfo( mApp.mSID, xsname );
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         float azimuth = 0;
-        float clino = 0;
+        float clino   = 0;
         List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, name, true ); // select legs
         if ( legs.size() == 1 ) {
           azimuth = legs.get(0).mBearing; 
+          clino   = legs.get(0).mClino;
         } else if ( legs.size() == 2 ) {
           float b0 = legs.get(0).mBearing;
           float b1 = legs.get(1).mBearing;
           azimuth = (b1 + b0);
           if ( Math.abs( b0 - b1 ) > 180 ) azimuth += 180; // (b1 + b0+360)/2 = (b1 + b0)/2 + 180
           if ( azimuth >= 360 ) azimuth -= 360;
+          clino = ( legs.get(0).mClino + legs.get(1).mClino ) / 2;
         } else {
           Log.v("DistoX", "X_SECTION Too many legs" );
           // Toast
           return;
         }
-        Log.v("DistoX", "new X section " + azimuth );
+        // if ( type == PlotInfo.PLOT_PLAN ) {
+        //   clino = 0;
+        // } else { // type == PlotInfo.PLOT_EXTENDED
+          clino = ( clino >  TopoDroidSetting.mVertSplay )?  90
+                : ( clino < -TopoDroidSetting.mVertSplay )? -90 : 0;
+        // }
+        // Log.v("DistoX", "new X section azimuth " + azimuth + " clino " + clino );
         long pid = mApp.insert2dSection( mApp.mSID, xsname, PlotInfo.PLOT_X_SECTION, name, "", azimuth, clino );
         plot = mData.getPlotInfo( mApp.mSID, xsname );
       }
       if ( plot != null ) {
-        Log.v("DistoX", "invoke X section " + plot.name + " <" + plot.start + "> " + plot.azimuth );
+        // Log.v("DistoX", "invoke X section " + plot.name + " <" + plot.start + "> " + plot.azimuth + " " + plot.clino );
         Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingActivity.class );
         drawIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mApp.mSID );
         drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME, plot.name );

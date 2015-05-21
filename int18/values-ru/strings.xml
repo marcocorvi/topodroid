@@ -113,6 +113,7 @@
     <string name="sketch_loading">Загрузка абриса... обождите...</string>
     <string name="sketch_saving">Сохранение абриса ... обождите...</string>
     <string name="lookup_wait">Интернет поиск ... обождите...</string>
+    <!-- TODO string name="lookup_fail">Failed lookup</string -->
  
 
     <string name="head_tail">Память: </string>
@@ -213,7 +214,6 @@
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_palette">Палитра</string>
-    <!-- TODO string name="menu_references">REFERENCES</string -->
     <string name="menu_photo">фото</string>
     <string name="menu_sensor">датчик</string>
     <string name="menu_scan">Сканировать</string>
@@ -229,10 +229,6 @@
     <string name="popup_sharp_pt">Выровнить сегмент</string>
     <string name="popup_curve_pt">Сгладить сегмент</string>
     <string name="popup_remove_pt">Удалить точку</string>
-    <!-- TODO string name="popup_mode_move">MOVE</string -->
-    <!-- TODO string name="popup_mode_draw">DRAW</string -->
-    <!-- TODO string name="popup_mode_erase">ERASE</string -->
-    <!-- TODO string name="popup_mode_edit">EDIT</string -->
 
     <string name="connected_none">Не соединено</string>
     <string name="connected_already">Уже соединено</string>
