@@ -216,6 +216,7 @@ public class FixedDialog extends Dialog
         mFxd.asl = asl;
         mSubParent.refreshList();
         mParent.updateFixedData( mFxd );
+        mSubParent.refreshList();
       } else {
         mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
         return;
@@ -239,6 +240,7 @@ public class FixedDialog extends Dialog
           mFxd.alt = mFxd.asl + gh;
           mParent.updateFixedAltitude( mFxd );
           setETalt( mFxd.alt );
+          mSubParent.refreshList();
         } else {
           Toast.makeText( mParent, R.string.lookup_fail, Toast.LENGTH_SHORT).show();
         }
@@ -257,6 +259,7 @@ public class FixedDialog extends Dialog
           mFxd.asl = mFxd.alt - gh;
           mParent.updateFixedAltitude( mFxd );
           setETasl( mFxd.asl );
+          mSubParent.refreshList();
         } else {
           Toast.makeText( mParent, R.string.lookup_fail, Toast.LENGTH_SHORT).show();
         }

@@ -2916,8 +2916,8 @@ public class DataHelper extends DataSetObservable
 
    public void updateFixedAltitude( long id, long sid, double alt, double asl )
    {
-     updateFixedAltStmt.bindDouble( 1, asl );
-     updateFixedAltStmt.bindDouble( 2, alt );
+     updateFixedAltStmt.bindDouble( 1, alt );
+     updateFixedAltStmt.bindDouble( 2, asl );
      updateFixedAltStmt.bindLong( 3, sid );
      updateFixedAltStmt.bindLong( 4, id );
      updateFixedAltStmt.execute();
