@@ -6,7 +6,7 @@ A long tap on a device allows to enter a nickname for it, which makes it easier 
 
 <h4>MENUS</h4>
 <ulist>
-<li><u>Scan</u> searches for new DistoX devices. Note: the search may not show the DistoX if the Android Bluetooth scan fails to report it. You may tray again a few times, or you may try with the "Settings" app. You can also use this app to pair the DistoX.</li>
+<li><u>Scan</u> searches for new DistoX devices.</li>
 <li><u>Disconnect</u> detaches the current device</li>
 <li><u>Calibrations</u> displays the list of calibrations of the current device, recorded in the database. If no calibration is found the list is empty. A new calibration is added with the "New Calibration" button.</li>
 <li><u>Firmware</u>: used to dump and upload firmwares to the DistoX2. This menu is present only if you checked the "bootloader" global option in the main window</li>
@@ -34,10 +34,17 @@ Except for the first, you need the DistoX turned on for all the other button act
 <li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default]</li>
 <li><i>Data connection</i> type: whether to stay connected to the DistoX or download data only when the "download" button is pressed [default]. More on this below when we talk about downloading the data from the DistoX. This connection mode applies only to data download. DistoX functions use a one-shot query mode</li>
 <li><i>Auto reconnect</i>: whether to reconnect automatically if the connection is lost while in "continuous" download-mode</li>
-<li><i>Socket</i> type: this can be either the default type or "insecure". <b>The default type should be ok, however if you experience problems with it you may try the insecure socketi</b></li>
+<li><i>Socket</i> type: this can be either the default type or "insecure". The default type should be ok, however if you experience problems with it you may try the insecure socketi</li>
 <li>the number of <i>Connection attempts</i>: usually 1 is enough, if you have problems establishing the connection you may try with 3 or 5 (more than that means there is a problem with the code, and you should report it)</li>
 <li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone or possibly other devices. It is safe to leave this enabled.</li>
 </ulist><br><p>
+
+<h4>DistoX troubleshooting</h4>
+If the scan for new DistoX devices fails to show your DistoX, you may try a scan with the "Settings" app. If this app too fails to find the DistoX, there is some problem with the bluetooth on your Android, and you will not be able to use TopoDroid with a DistoX.<br>
+You can also use the "Settings" app to pair the DistoX.<br>
+Once paired with the DistoX, the Android should keep the pairing, and not request the PIN again. If it keeps requesting the PIN every time you download data from the DistoX, try to use the "insecure" socket.<br>
+If you have problem connecting and downloading the data try to enable the "Z6 workaround".<br>
+<p>
 
 <hr>
 At a minimum you need to scan to find your DistoX, and select it as the one TopoDroid should use by tapping its address in the list at the bottom.  Now you are ready to go ahead and calibrate the DistoX with the "Calibration" menu.
