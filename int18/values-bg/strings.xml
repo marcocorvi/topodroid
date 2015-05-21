@@ -4,7 +4,7 @@
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
 
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="double_back">Click BACK again to exit</string -->
+    <string name="double_back">Натиснете "обратно" за да излезете</string>
 
     <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string>
     <string name="version_title">Обновяване на версията</string>
@@ -83,7 +83,7 @@
     <string name="device_status_silent">Тих %1$s</string>
     <string name="bt_reset">Рестарт. на Bluetooth връзката</string>
     <string name="save_as">запис като</string>
-    <!-- TODO string name="nickname">Nickname</string -->
+    <string name="nickname">Име на устройство</string>
 
     <string name="comment">Коментар</string>
     <string name="flag">Флаг</string>
@@ -108,10 +108,10 @@
     <string name="import_none">Няма файлове за импортиране</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте ...</string>
-    <string name="sketch_loading">Зарежда не на скица... Моля изчакайте...</string>
+    <string name="sketch_loading">Зареждане на скица... Моля изчакайте...</string>
     <string name="sketch_saving">Записване на скица... Моля изчакайте...</string>
-    <!-- string name="lookup_wait">Internet lookup ... please wait...</string -->
-    <!-- TODO string name="lookup_fail">Failed lookup</string -->
+    <string name="lookup_wait">Търсене в интернет. Моля изчакайте...</string>
+    <string name="lookup_fail">Неуспешно търсене</string>
  
 
     <string name="head_tail">Памет: </string>
@@ -400,8 +400,8 @@
     <string name="button_read"      >Четене    </string>
     <string name="button_dump"      >Запис     </string>
     <string name="button_reset"     >Нулиране   </string>
-    <!-- TODO string name="button_left"      >LEFT</string -->
-    <!-- TODO string name="button_right"     >RIGHT</string -->
+    <string name="button_left"      >Наляво</string>
+    <string name="button_right"     >Надясно</string>
     <string name="button_clear"     >Изчистване</string>
     <string name="button_save"      >Запис     </string>
     <string name="button_select"    >Избор     </string>
@@ -422,7 +422,7 @@
     <string name="button_toggle"    >Toggle CAL mode  </string>
 -->
     <string name="button_write"     >Качване</string>
-    <!-- TODO string name="button_xsection"  >X-Section</string -->
+    <string name="button_xsection"  >Сечение</string>
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>
@@ -506,7 +506,7 @@
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
     <string name="help_current_station">Записани репери</string>
-    <!-- TODO string name="help_azimuth">Extend reference-azimuth</string -->
+    <string name="help_azimuth">Референтен азимут за разгъване</string>
     <string name="help_device">Управление на устройството</string>
     <string name="help_add_topodroid">Нова картировка/калибрация</string>
     <string name="help_import">Импортиране на архив/картировка</string>
@@ -533,7 +533,7 @@
     <string name="help_photo">Снимки</string>
     <string name="help_sensor">Сензорни измервания</string>
     <string name="help_3d">3D програма (Cave3D)</string>
-    <!-- TODO string name="help_move">Enter move/zoom mode</string -->
+    <string name="help_move">Режим на преместване/приближаване</string>
     <string name="help_draw">Вкл. на режим на скициране</string>
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
@@ -617,7 +617,7 @@
     <string name="title_refs">Показване в скицата на:</string>
     <string name="title_scraps">Скици в картировката</string>
     <string name="title_shift">Изместване</string>
-    <!-- TODO string name="title_shot_delete">Delete shot ?</string -->
+    <string name="title_shot_delete">Изтриване на отсечката?</string>
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Информация за картировката</string>
     <string name="title_survey_export">Експортиране на картировка като</string>
@@ -650,8 +650,8 @@
 
   <string name="pref_leg_shots_title">Брой измервания за антена</string>
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
-  <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
-  <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
+  <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
+  <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
@@ -688,9 +688,9 @@
   <string name="pref_closeness_title">Радиус при избиране</string>
   <string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string>
   <string name="pref_closeness_message">Радиус за избиране на елемент от скицата</string>
-  <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
-  <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
-  <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
+  <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
+  <string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string>
+  <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
   <string name="pref_altitude_title">Надморска височина</string>
   <string name="pref_altitude_summary">Тип на надморската височина</string>
   <string name="pref_altimetric_title">Ортометрична справка за височината</string>
@@ -714,8 +714,8 @@
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
-  <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->
-  <!-- TODO string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string -->
+  <string name="pref_azimuth_manual_title">Ръчно разгъване на отсечки</string>
+  <string name="pref_azimuth_manual_summary">Ръчно разгъване на отсечки в плана</string>
 
   <string name="pref_team_title">Картировачи</string>
   <string name="pref_team_summary">Екип картировачи</string>
