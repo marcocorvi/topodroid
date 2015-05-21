@@ -4,7 +4,7 @@
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
 
     <string name="app_name">TopoDroid</string>
-    <!-- TODO string name="double_back">Click BACK again to exit</string -->
+    <string name="double_back">Нажмте "НАЗАД" еще раз для выхода</string>
 
     <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить объекты рисунков?</string>
     <string name="version_title">Обновление приложения</string>
@@ -113,7 +113,7 @@
     <string name="sketch_loading">Загрузка абриса... обождите...</string>
     <string name="sketch_saving">Сохранение абриса ... обождите...</string>
     <string name="lookup_wait">Интернет поиск ... обождите...</string>
-    <!-- TODO string name="lookup_fail">Failed lookup</string -->
+    <string name="lookup_fail">Не удалось найти</string>
  
 
     <string name="head_tail">Память: </string>
@@ -396,8 +396,8 @@
     <string name="button_read"      >Считать   </string>
     <string name="button_dump"      >Дамп      </string>
     <string name="button_reset"     >Сброс     </string>
-    <!-- TODO string name="button_left"      >LEFT</string -->
-    <!-- TODO string name="button_right"     >RIGHT</string -->
+    <string name="button_left"      >ЛЕВО</string>
+    <string name="button_right"     >ПРАВО</string>
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <string name="button_select"    >Выбрать   </string>
@@ -416,7 +416,7 @@
     <string name="button_toggle"    >Режим КАЛИБ  </string>
 -->
     <string name="button_write"     >Записать</string>
-    <!-- TODO string name="button_xsection"  >X-Section</string -->
+    <string name="button_xsection"  >Сечение</string>
 
     <string name="mode_leg">Нитка</string>
     <string name="mode_splay">Бок. замер</string>
@@ -522,7 +522,7 @@
     <string name="help_photo">Инструмент Фото</string>
     <string name="help_sensor">Инструмент Измерения</string>
     <string name="help_3d">3D просмотр (Cave3D)</string>
-    <!-- TODO string name="help_move">Enter move/zoom mode</string -->
+    <string name="help_move">Включть режим перемещения/зума</string>
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Выбрать привязку абриса</string>
@@ -640,8 +640,8 @@
   <string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string>
   <string name="pref_leg_shots_title">Пикеты отрезка</string>
   <string name="pref_leg_shots_summary">Минимальное кол-во пикетов на отрезке</string>
-  <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
-  <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
+  <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
+  <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket создать</string>
@@ -675,9 +675,9 @@
   <string name="pref_closeness_title">Радиус выбора</string>
   <string name="pref_closeness_summary">Радиус выбора элемента абриса</string>
   <string name="pref_closeness_message">Радиус выбора элемента абриса</string>
-  <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
-  <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
-  <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
+  <string name="pref_vert_splay_title">Угловой прог для прерывистой линии луча</string>
+  <string name="pref_vert_splay_summary">Угловой прог для прерывистой линии луча</string>
+  <string name="pref_vert_splay_message">Угловой прог для прерывистой линии луча</string>
   <string name="pref_altitude_title">Альтитуда</string>
   <string name="pref_altitude_summary">Выберите тип альтитуды</string>
   <string name="pref_altimetric_title">Вертикальная координата</string>
@@ -703,8 +703,8 @@
   <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
   <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
-  <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->
-  <!-- TODO string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string -->
+  <string name="pref_azimuth_manual_title">Вручную установить "развертку"</string>
+  <string name="pref_azimuth_manual_summary">Вручную установить "развертку" отрезков </string>
 
   <string name="pref_team_title">Группа съёмемки</string>
   <string name="pref_team_summary">Группа съёмемки</string>
