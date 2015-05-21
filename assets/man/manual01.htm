@@ -4,14 +4,14 @@
 TopoDroid has a main window from which you can move to other app activities.  The main activities are:
 <ulist>
 <li><b>Survey</b> data management (survey and shot-list windows).</li>
-<li><b>Sketch</b> drafting (drawing window) is a subactivity of the Survey activity.</li>
+<li><b>Sketch</b> drafting (drawing window) is a sub-activity of the Survey activity.</li>
 <li><b>DistoX</b> functions (device window)</li>
-<li><b>Calibration</b> of DistoX (calibration and calibration-data windows) is a subactivity of the Device activity.</li>
+<li><b>Calibration</b> of DistoX (calibration and calibration-data windows) is a sub-activity of the Device activity.</li>
 </ulist><br><p>
 
 Topodroid windows have a scrollable button bar at the top, for the most frequent actions, and a menu button at the top-right.
 The dialogs usually have a confirmation button (<i>OK</i> or <i>Save</i>). If you want to close the dialog, or cancel whatever you have done, tap the Android "BACK" button. If there are both the <i>OK</i> and the <i>Save</i> button, the former save the input data and closes the dialog, while the latter saves the input data and keep the dialog open for a new input. 
-Information dialogs have no button.<br><p>
+Information dialogs have no buttons.<br><p>
 
 Here is some background about how the survey data, the calibration data, and the sketches are stored. You can safely skip this and the next two sections, and come back to them later if needed.<br><p>
 
@@ -45,7 +45,7 @@ Some of these subdirectories are used only to store exported files (csv, csx, da
 The subdirectory "zip" is used to store zipped archives as well to read them and uncompress in TopoDroid. When you want to import a survey made with another program (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, or <i>PocketTopo</i>) you must place it in the subdirectory "import". Finally "bin" is used to store firmware files, both the factory files included in TopoDroid and the firmware dumps read from a DistoX.<br><p>
 
 <h4>Current Work directory</h4>
-TopoDroid does not manage complex survey projects. However it is posssible to specify a different current work directory (CWD) for the data files. Each CWD is a subdirectory of the primary external memory, and it is created if it does not exists. In this way you can use different directories for different cave survey projects. The firmware files and the drawing symbol files are installed only in the default directory.<br><p>
+TopoDroid does not manage complex survey projects. However it is possible to specify a different current work directory (CWD) for the data files. Each CWD is a subdirectory of the primary external memory, and it is created if it does not exists. In this way you can use different directories for different cave survey projects. The firmware files and the drawing symbol files are installed only in the default directory.<br><p>
 Alternatively you can have one "TopoDroid" directory for each project and switch to the one you must work on when you need by renaming directories with a file manager. However in this way the common utility files are replicated.<br><p>
 
 The choice of the current work directory is one of the general settings of the app.<br><p>

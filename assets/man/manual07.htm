@@ -5,7 +5,7 @@ The calibration data window displays the list of calibration data. If the
 calibration has no data, the list is empty and the window shows only the top
 buttons. Each data line contains the following data informations:
 <ulist>
-<li>index: incremental index that identifies tha data</li>
+<li>index: incremental index that identifies the data</li>
 <li>group: number of the group the data belongs to</li>
 <li>azimuth, inclination, and roll, computed from the raw values without any
 calibration correction</li>
@@ -15,7 +15,7 @@ group average direction, in degrees</li>
 
 <h4>MENUS</h4>
 <ulist>
-<li><u>Display</u>. This menu toggle whether to display all data including the deleted ones</li>
+<li><u>Display</u>. This menu toggles whether to display all data including the deleted measurements.</li>
 <li><u>Settings</u>. These are the same as for the calibration window.</li>
 <li><u>Help</u></li>
 <ulist><br><p>
@@ -23,13 +23,12 @@ group average direction, in degrees</li>
 <h4>BUTTONS</h4>
 <ulist>
 <li><u>Download</u>: this is the button you use to get the data from the DistoX.  At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data.  Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
-disabled data are not used in the computation of calibration coefficients), 
-or deleted (usually not shown in the list of data)</li>
+disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data)</li>
 <li><u>Mode-toggle</u>: it is the same as in the Device window. Use it to toggle the DistoX calibration mode on and off</li>
 <li><u>Groups</u> divides the calibration data into groups automatically.  The data in each group should have the same azimuth and inclination and differ only by the roll angle. There are three automatic grouping policies: four data at a time for each group; four-at-a-time for the first 16 data (four groups), then each data is a group by itself; grouping based on the relative angular distance (direction difference). The groups are identified by an integer number starting with "1" (one). Tapping on a data brings up a dialog where you can change the data group number. If you want to exclude a data from the computation of the calibration enter the number "0" (zero). If you delete the data it is marked with a negative number (-1) and it is not usually shown in the list. You can toggle the display of deleted data with the <u>display</u> menu. This is necessary in case you need to recover a deleted data (to recover it, just edit it setting its group number non-negative)</li>
 <li><u>Distribution</u> displays the angular data distribution. The sphere is opened up as an ellipsis: the north in the middle, east to the right, west to the left and south on the outer border. Positive inclination in the upper hemisphere, negative in the lower one. It can show either the angular distribution of the raw data, or that of the data corrected with the calibration</li>
-<li><u>Compute</u> computes the calibration coefficients and shows the result in a dialog. The calibration coefiicients dialog displays the 24 coefficients of the calibration linear transformations for the <b>G</b> and the <b>M</b> vectors (12 coefficients each) and 3 coeficients of the non-linear terms (only DistoX2 v. 2.3 or higher). Next there are the average and the maximum data errors, and the number of iterations taken by the calibration computation. The error of a calibration data is the angle between the data and the average vector of the group the data belongs to, after having taken the calibration correction into account. The errors are reported in degrees. Finally, the dialog has a button to write the coefficient to the DistoX</li>
-<li><u>Read</u> reads the coefficients from the DistoX, shows them in a calibrarion coefficients dialog. (Just like the same button in the Device window)</li>
+<li><u>Compute</u> computes the calibration coefficients and shows the result in a dialog. The calibration coefficients dialog displays the 24 coefficients of the calibration linear transformations for the <b>G</b> and the <b>M</b> vectors (12 coefficients each) and 3 coefficients of the non-linear terms (only DistoX2 v. 2.3 or higher). Next there are the average and the maximum data errors, and the number of iterations taken by the calibration computation. The error of a calibration data is the angle between the data and the average vector of the group the data belongs to, after having taken the calibration correction into account. The errors are reported in degrees. Finally, the dialog has a button to write the coefficient to the DistoX</li>
+<li><u>Read</u> reads the coefficients from the DistoX, shows them in a calibration coefficients dialog. (Just like the same button in the Device window)</li>
 <li><u>Write</u> writes the calibration coefficients to the DistoX</li>
 <ulist><br><p>
 
