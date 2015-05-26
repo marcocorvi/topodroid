@@ -38,6 +38,11 @@
     <!-- string name="failed_snap_to_line">No close line to snap area border to</string -->
     <!-- string name="failed_snap_to_point">No close point to snap the point to</string -->
 
+    <!-- TODO string name="calibration_title">Instruments calibration</string -->
+    <!-- TODO string name="calibration_length">Tape</string -->
+    <!-- TODO string name="calibration_azimuth">Compass</string -->
+    <!-- TODO string name="calibration_clino">Clino</string -->
+
     <string name="calib_new">Nouve étalonnage</string>
     <string name="calib_exists">L\'étalonnage existe déjà</string>
     <string name="calib_delete">Supprimer l\'étalonnage </string>
@@ -202,6 +207,7 @@
     <!-- TODO string name="menu_join_survey">Co-survey</string -->
     <string name="menu_logs">JOURNALISATION</string>
     <!-- string name="menu_manual">MANUEL</string -->
+    <!-- TODO string name="menu_manual_calibration">Calibration</string -->
     <string name="menu_options">OPTIONS</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETTE</string>
@@ -501,6 +507,7 @@
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
+    <!-- TODO string name="help_manual_calibration">Manual instruments calibration</string -->
     <string name="help_note_plot">Edite les propriétés de l\'élément dessiné</string>
     <string name="help_save">Enregistre les modifications du relevé/info d\'étalonnage</string>
     <string name="help_export_survey">Exporte le relevé</string>

@@ -38,6 +38,11 @@
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
 
+    <!-- TODO string name="calibration_title">Instruments calibration</string -->
+    <!-- TODO string name="calibration_length">Tape</string -->
+    <!-- TODO string name="calibration_azimuth">Compass</string -->
+    <!-- TODO string name="calibration_clino">Clino</string -->
+
     <string name="calib_new">Nuova calibrazione</string>
     <string name="calib_exists">Calibrazione già presente</string>
     <string name="calib_delete">Eliminare calibrazione </string>
@@ -202,6 +207,7 @@
     <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
     <!-- string name="menu_manual">MANUALE</string -->
+    <!-- TODO string name="menu_manual_calibration">Calibration</string -->
     <string name="menu_options">OPZIONI</string>
     <!-- OK string name="menu_overview">OVERVIEW</string -->
     <!-- OK string name="menu_palette">PALETTE</string -->
@@ -496,6 +502,7 @@
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
+    <!-- TODO string name="help_manual_calibration">Manual instruments calibration</string -->
     <string name="help_note_plot">Edita le propertà dell\'oggetto</string>
     <string name="help_save">Salva le modifiche al rilievo/calibr.</string>
     <string name="help_export_survey">Esporta rilievo</string>

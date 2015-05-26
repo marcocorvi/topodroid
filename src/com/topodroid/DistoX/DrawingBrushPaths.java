@@ -127,6 +127,7 @@ public class DrawingBrushPaths
   static Paint fixedSplayPaint = null;
   static Paint fixedSplay2Paint = null;  // cross-section splay2 (at viewed station)
   static Paint fixedSplay3Paint = null;  // dash splay
+  static Paint fixedSplay4Paint = null;  // dot splay
   static Paint fixedGridPaint  = null;
   static Paint fixedGrid10Paint  = null;
   static Paint fixedStationPaint  = null;
@@ -246,10 +247,22 @@ public class DrawingBrushPaths
     fixedSplay3Paint.setStrokeCap(Paint.Cap.ROUND);
     fixedSplay3Paint.setColor(0xFFAAAAAA); // gray
     float[] x = new float[2];
-    x[0] = 10; // FIXME
+    x[0] = 12; // FIXME
     x[1] =  8; 
-    DashPathEffect dash = new DashPathEffect( x, 0 );
-    fixedSplay3Paint.setPathEffect( dash );
+    DashPathEffect dash3 = new DashPathEffect( x, 0 );
+    fixedSplay3Paint.setPathEffect( dash3 );
+
+    fixedSplay4Paint = new Paint();
+    fixedSplay4Paint.setDither(true);
+    fixedSplay4Paint.setStyle(Paint.Style.STROKE);
+    fixedSplay4Paint.setStrokeJoin(Paint.Join.ROUND);
+    fixedSplay4Paint.setStrokeCap(Paint.Cap.ROUND);
+    fixedSplay4Paint.setColor(0xFFAAAAAA); // gray
+    // float[] x = new float[2];
+    x[0] = 5; // FIXME
+    x[1] = 4; 
+    DashPathEffect dash4 = new DashPathEffect( x, 0 );
+    fixedSplay4Paint.setPathEffect( dash4 );
 
     fixedGridPaint = new Paint();
     fixedGridPaint.setDither(true);

@@ -367,7 +367,7 @@ public class DeviceActivity extends Activity
     if ( enable ) {
       setTitleColor( TopoDroidConst.COLOR_NORMAL );
       // mButton1[1].setBackgroundResource( icons00[1] );
-      mButton1[3].setBackgroundDrawable( mBMtoggle );
+      mButton1[1].setBackgroundDrawable( mBMtoggle );
       if ( TopoDroidSetting.mLevelOverNormal ) {
         // mButton1[3].setBackgroundResource( icons00[3] );
         mButton1[3].setBackgroundDrawable( mBMread);
@@ -376,7 +376,7 @@ public class DeviceActivity extends Activity
     } else {
       setTitleColor( TopoDroidConst.COLOR_CONNECTED );
       // mButton1[1].setBackgroundResource( icons00no[1] );
-      mButton1[3].setBackgroundDrawable( mBMtoggle_no );
+      mButton1[1].setBackgroundDrawable( mBMtoggle_no );
       if ( TopoDroidSetting.mLevelOverNormal ) {
         // mButton1[3].setBackgroundResource( icons00no[3] );
         mButton1[3].setBackgroundDrawable( mBMread_no );

@@ -736,6 +736,11 @@ public class DrawingCommandManager
 
   public void executeAll( Canvas canvas, float zoom, Handler doneHandler)
   {
+    if ( canvas == null ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "drawing executeAll null canvas");
+      return;
+    }
+
     boolean legs   = (mDisplayMode & DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DISPLAY_SPLAY ) != 0;
     boolean stations = (mDisplayMode & DISPLAY_STATION ) != 0;

@@ -1086,7 +1086,7 @@ public class ShotActivity extends Activity
         //   updateDisplay( );
         // }
 
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // mBtnAdd 
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
         // mSecondLastShotId = mApp.lastShotId( );
         DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
         // Log.v( "DistoX", "last blk: " + last_blk.toString() );

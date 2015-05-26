@@ -120,6 +120,16 @@ public class TopoDroidApp extends Application
 
   static boolean isTracing = false;
 
+  static float mManualCalibrationLength  = 0; // calibration of manually inputed data: length
+  static float mManualCalibrationAzimuth = 0;
+  static float mManualCalibrationClino   = 0;
+
+  static private void resetManualCalibrations() 
+  {
+    mManualCalibrationLength  = 0; 
+    mManualCalibrationAzimuth = 0;
+    mManualCalibrationClino   = 0;
+  }
 
   // ----------------------------------------------------------------------
   // data lister
@@ -734,6 +744,7 @@ public class TopoDroidApp extends Application
     mSID = -1;       // no survey by default
     mySurvey = null;
     clearCurrentStations();
+    resetManualCalibrations();
 
     if ( survey != null && mData != null ) {
       // Log.v( "DistoX", "set SurveyFromName <" + survey + "> forward " + forward );
@@ -1425,6 +1436,9 @@ public class TopoDroidApp extends Application
 
   /** insert manual-data shot
    * @param at   id of the shot before which to insert the new shot (and LRUD)
+   * 
+   * NOTE manual shots take into account the instruents calibrations
+   *      LRUD are not affected
    */
   public DistoXDBlock insertManualShot( long at, String from, String to,
                            float distance, float bearing, float clino, long extend0,
@@ -1434,9 +1448,11 @@ public class TopoDroidApp extends Application
     mSecondLastShotId = lastShotId();
     DistoXDBlock ret = null;
     long id;
-    distance /= TopoDroidSetting.mUnitLength;
-    bearing  /= TopoDroidSetting.mUnitAngle;
-    clino    /= TopoDroidSetting.mUnitAngle;
+
+    distance = (distance - mManualCalibrationLength)  / TopoDroidSetting.mUnitLength;
+    bearing  = (bearing  - mManualCalibrationAzimuth) / TopoDroidSetting.mUnitAngle;
+    clino    = (clino    - mManualCalibrationClino)   / TopoDroidSetting.mUnitAngle;
+
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
          ( bearing < 0.0f || bearing >= 360.0f ) ) {

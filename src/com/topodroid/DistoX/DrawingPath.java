@@ -183,6 +183,7 @@ public class DrawingPath implements ICanvasCommand
     }
   }
 
+  // N.B. canvas is guaranteed ! null
   public void draw( Canvas canvas, Matrix matrix )
   {
     // if ( mType == DRAWING_PATH_AREA ) {

@@ -46,6 +46,11 @@
     <string name="failed_snap_to_line">Keine enge Linie Punkt, um die Gegend zu schnappen Grenze</string>
     <string name="failed_snap_to_point">Kein Punkt in der Nähe, um den Punkt zu schnappen</string>
 
+    <!-- TODO string name="calibration_title">Instruments calibration</string -->
+    <!-- TODO string name="calibration_length">Tape</string -->
+    <!-- TODO string name="calibration_azimuth">Compass</string -->
+    <!-- TODO string name="calibration_clino">Clino</string -->
+
 <!-- CALIBRATION -->
     <string name="calib_new">Neue Kalibrierung</string>
     <string name="calib_exists">Kalibrierung bereits vorhanden</string>
@@ -232,6 +237,7 @@
     <!-- string name="menu_join_survey">Co-survey</string -->
     <string name="menu_logs">LOGS</string>
     <!-- string name="menu_manual">HANDBUCH</string -->
+    <!-- TODO string name="menu_manual_calibration">Calibration</string -->
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_palette">PALETTE</string>
@@ -543,6 +549,7 @@
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
+    <!-- TODO string name="help_manual_calibration">Manual instruments calibration</string -->
     <string name="help_note_plot">Um den Eigenshaften des ausgewählten Objekte bearbeiten</string>
     <string name="help_save">Die Änderungen der Vermessung speichern</string>
     <string name="help_save_calib">Die Änderungen der Kalibrierung speichern</string>

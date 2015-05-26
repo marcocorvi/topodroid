@@ -76,6 +76,7 @@ public class SurveyActivity extends Activity
   private static int menus[] = {
                         R.string.menu_export,
                         R.string.menu_delete,
+                        R.string.menu_manual_calibration,
                         R.string.menu_options,
                         R.string.menu_help
                       };
@@ -90,6 +91,7 @@ public class SurveyActivity extends Activity
   private static int help_menus[] = { 
                         R.string.help_export_survey,
                         R.string.help_delete_survey,
+                        R.string.help_manual_calibration,
                         R.string.help_prefs,
                         R.string.help_help
                       };
@@ -115,7 +117,7 @@ public class SurveyActivity extends Activity
   boolean onMenu;
   String mInitStation;
 
-  private TopoDroidApp mApp;
+  TopoDroidApp mApp;
   private boolean mustOpen;
 
 // -------------------------------------------------------------------
@@ -656,6 +658,7 @@ public class SurveyActivity extends Activity
     mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
+    mMenuAdapter.add( res.getString( menus[4] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -676,12 +679,14 @@ public class SurveyActivity extends Activity
         new SurveyExportDialog( this, this ).show();
       } else if ( p++ == pos ) { // DELETE
         askDelete();
+      } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
+        new SurveyCalibrationDialog( this, this ).show();
       } else if ( p++ == pos ) { // OPTIONS
         Intent intent = new Intent( this, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 5 ) ).show();
       }
       // updateDisplay();
       return;

@@ -38,6 +38,11 @@
     <!-- string name="failed_snap_to_line">No close line to snap area border to</string -->
     <!-- string name="failed_snap_to_point">No close point to snap the point to</string -->
 
+    <!-- TODO string name="calibration_title">Instruments calibration</string -->
+    <!-- TODO string name="calibration_length">Tape</string -->
+    <!-- TODO string name="calibration_azimuth">Compass</string -->
+    <!-- TODO string name="calibration_clino">Clino</string -->
+
     <string name="calib_new">Nueva calibración</string>
     <string name="calib_exists">La calibración ya existe</string>
     <string name="calib_delete">Eliminar calibración </string>
@@ -202,6 +207,7 @@
     <!-- string name="menu_join_survey">CO-SURVEY</string -->
     <string name="menu_logs">REGISTROS</string>
     <!-- string name="menu_manual">MANUAL</string -->
+    <!-- TODO string name="menu_manual_calibration">Calibration</string -->
     <string name="menu_options">OPCIONES</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_palette">PALETA</string>
@@ -496,6 +502,7 @@
     <string name="help_split_line">Dividir la línea en dos punto</string>
     <string name="help_kink">Utilice una línea recta en el punto [línea / área]</string>
 -->
+    <!-- TODO string name="help_manual_calibration">Manual instruments calibration</string -->
     <string name="help_note_plot">Edite las propiedades del elemento de dibujo</string>
     <string name="help_save">Guardar cambios de la Topografía o calibración</string>
     <string name="help_export_survey">Exportar Topografía</string>

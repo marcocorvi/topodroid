@@ -406,7 +406,9 @@ public class DrawingActivity extends ItemDrawer
       DrawingPath dpath = null;
       if ( splay ) {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-        if ( Math.abs(blk.mClino) > TopoDroidSetting.mVertSplay ) {
+        if ( blk.mClino > TopoDroidSetting.mVertSplay ) {
+          dpath.setPaint( DrawingBrushPaths.fixedSplay4Paint );
+        } else if ( blk.mClino < -TopoDroidSetting.mVertSplay ) {
           dpath.setPaint( DrawingBrushPaths.fixedSplay3Paint );
         } else {
           dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
