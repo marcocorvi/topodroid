@@ -44,10 +44,10 @@
     <string name="failed_snap_to_line">Отсутствует ближайшая точка-линии для закрепления границы зоны</string>
     <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
 
-    <!-- TODO string name="calibration_title">Instruments calibration</string -->
-    <!-- TODO string name="calibration_length">Tape</string -->
-    <!-- TODO string name="calibration_azimuth">Compass</string -->
-    <!-- TODO string name="calibration_clino">Clino</string -->
+    <string name="calibration_title">Калибровка инструментов</string>
+    <string name="calibration_length">Рулетка</string>
+    <string name="calibration_azimuth">Компас</string>
+    <string name="calibration_clino">Клинометр</string>
 
     <string name="calib_new">Новая калибровка</string>
     <string name="calib_exists">Калибровка уже существует</string>
@@ -216,7 +216,7 @@
     <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
     <string name="menu_logs">Журнал</string>
     <!-- OK string name="menu_manual">Вручную</string -->
-    <!-- TODO string name="menu_manual_calibration">Calibration</string -->
+    <string name="menu_manual_calibration">Калибровка</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_palette">Палитра</string>
@@ -552,7 +552,7 @@
     <string name="help_split_line">Разбить линию на две в этой точке</string>
     <string name="help_kink">Использовать прямую линию в точке [линия/область]</string>
 -->
-    <!-- TODO string name="help_manual_calibration">Manual instruments calibration</string -->
+    <string name="help_manual_calibration">Ручная калибровка инструментов</string>
     <string name="help_note_plot">Редактировать свойства выбранного абриса</string>
     <string name="help_save">Сохранить нзменения информации о съёмемке</string>
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
@@ -595,7 +595,7 @@
     <string name="title_coeff">Калибровочные коэфиценты</string>
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
-    <string name="title_discover">Поиск устройств DistoX ... обождите</string>
+    <string name="title_discover">Поиск устройств DistoX ... подождите</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
