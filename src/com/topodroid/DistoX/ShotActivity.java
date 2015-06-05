@@ -68,6 +68,7 @@ import android.widget.Button;
 import android.view.WindowManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -164,6 +165,8 @@ public class ShotActivity extends Activity
   // private Bundle mSavedState = null;
   // long mSecondLastShotId = 0L;
   // long mLastShotId;
+  String mRecentPlot     = null;
+  long   mRecentPlotType = PlotInfo.PLOT_PLAN;
 
   int mButtonSize = 42;
   private Button[] mButton1;
@@ -857,6 +860,21 @@ public class ShotActivity extends Activity
     mBMleft  = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_left );
     mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
 
+
+    mButton1[3].setOnLongClickListener( new OnLongClickListener() {
+      @Override 
+      public boolean onLongClick( View view )
+      {
+        // Log.v("DistoX", "long click button 3: " + mRecentPlot );
+        if ( onMenu ) {
+          closeMenu();
+        } else if ( mRecentPlot != null ) {
+          startExistingPlot( mRecentPlot, mRecentPlotType );
+        }
+        return true;
+      }
+    } );
+
     mApp.resetRefAzimuth( 90 );
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
 
@@ -1225,9 +1243,13 @@ public class ShotActivity extends Activity
     // END_SKETCH_3D
       PlotInfo plot1 =  mApp.mData.getPlotInfo( mApp.mSID, name+"p" );
       if ( plot1 != null ) {
+        mRecentPlot     = name;
+        mRecentPlotType = type;
         PlotInfo plot2 =  mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
         startDrawingActivity( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type );
         return;
+      } else {
+        mRecentPlot = null;
       }
     }
     Toast.makeText( this, R.string.plot_not_found, Toast.LENGTH_SHORT).show();
@@ -1551,4 +1573,11 @@ public class ShotActivity extends Activity
     }
   }
 
+  void renumberShotsAfter( DistoXDBlock blk )
+  {
+    // NEED TO FORWARD to the APP to change the stations accordingly
+    List< DistoXDBlock > shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    mApp.assignStationsAfter( blk, shots );
+    updateDisplay();
+  }
 }

@@ -7,6 +7,11 @@
     android:paddingRight="6dp"
     android:paddingBottom="3dp">
    					  
+    <TextView android:id="@+id/text_stat_origin"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        />
 
     <TextView android:id="@+id/text_stat_length"
         android:layout_marginTop="2dp"

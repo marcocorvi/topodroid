@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <resources>
+
+  <string-array name="stationNames">
+     <item name="alpha">Alfabetico</item>
+     <item name="number">Numerico</item>
+  </string-array>
+  <string-array name="stationNamesValue">
+     <item name="alpha">alpha</item>
+     <item name="number">number</item>
+  </string-array>
+
   <string-array name="extend_name">
      <item>Sinistra</item>
      <item>Verticale</item>

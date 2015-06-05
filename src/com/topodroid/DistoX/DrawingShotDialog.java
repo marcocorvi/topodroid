@@ -26,6 +26,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.CheckBox;
 
+import android.text.InputType;
+
 public class DrawingShotDialog extends Dialog 
                                implements View.OnClickListener
 {
@@ -71,6 +73,11 @@ public class DrawingShotDialog extends Dialog
       mETfrom    = (EditText) findViewById(R.id.shot_from );
       mETto      = (EditText) findViewById(R.id.shot_to );
       mETcomment = (EditText) findViewById(R.id.shot_comment );
+
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+        mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+      }
 
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       // mBtnCancel = (Button) findViewById(R.id.button_cancel);

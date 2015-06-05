@@ -311,6 +311,7 @@
     <string name="shot_info">Info</string>
     <!-- string name="shot_leg">Wiederholen Messstrecke</string -->
     <string name="shot_leg">Wiedermessung</string>
+    <!-- TODO string name="shot_renumber">renumber</string -->
     <!-- string name="shot_length">Länge</string -->
     <string name="shot_note">Anmerkung</string>
     <string name="shot_reverse">umkehren</string>
@@ -364,6 +365,7 @@
     <string name="stat_leg">Messstrecke %1$d %2$.1f</string>
     <string name="stat_length">Länge %1$.1f</string>
     <string name="stat_loop">Kreis %1$d</string>
+    <!-- TODO string name="stat_origin">Zero station: %1$s</string -->
     <string name="stat_shot">Messungen  %1$d,   Doppelte %2$d,   Oberfläche %3$d</string>
     <string name="stat_splay">Hilfsmessungen %1$d</string>
     <string name="stat_station">Messpunkten %1$d</string>
@@ -715,6 +717,8 @@
   <!-- TODO string name="pref_init_station_title">Initial station</string -->
   <!-- TODO string name="pref_init_station_summary">Default initial station</string -->
   <!-- TODO string name="pref_init_station_message">Default initial station</string -->
+  <string name="pref_station_names_title">Messpunktnamen</string>
+  <!-- TODO string name="pref_station_names_summary">Type of station names</string -->
   <!-- TODO string name="pref_hthr_title">Cross-section hthreshold</string -->
   <!-- TODO string name="pref_hthr_summary">Threshold for horizontal cross-sections</string -->
   <!-- TODO string name="pref_hthr_message">Shot clino over which cross-sections are horizontal</string -->
@@ -792,6 +796,8 @@
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
   <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
   <string name="pref_station_size_message">Messpunkt Beschriftung Schriftgröße</string>
+  <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
+  <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
 
   <!-- TODO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
   <!-- TODO string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->

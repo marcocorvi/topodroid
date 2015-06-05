@@ -283,6 +283,7 @@
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
     <string name="shot_leg">battuta ripetuta</string>
+    <string name="shot_renumber">rinumera</string>
     <string name="shot_all_splay">gruppo splay</string>
     <!-- string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
@@ -337,6 +338,7 @@
     <string name="stat_leg">Battute %1$d %2$.1f</string>
     <string name="stat_length">Sviluppo %1$.1f</string>
     <string name="stat_loop">Anelli %1$d</string>
+    <string name="stat_origin">Caposaldo zero: %1$s</string>
     <string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string>
     <string name="stat_splay">Splay %1$d</string>
     <string name="stat_station">Capisaldi %1$d</string>
@@ -664,6 +666,8 @@
   <string name="pref_init_station_title">Caposaldo iniziale</string>
   <string name="pref_init_station_summary">Caposaldo iniziale di default</string>
   <string name="pref_init_station_message">Caposaldo iniziale di default</string>
+  <string name="pref_station_names_title">Nomi capisaldi</string>
+  <string name="pref_station_names_summary">Tipo nomi capisaldi</string>
 
   <string name="pref_hthr_title">Soglia sezione orizzontale</string>
   <string name="pref_hthr_summary">Soglia inclinazione per sezioni orizzontali</string>
@@ -742,6 +746,8 @@
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>
   <string name="pref_station_size_summary">Dimensione nome capisaldi</string>
   <string name="pref_station_size_message">Size of the station labels</string>
+  <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
+  <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
 
   <string name="pref_sketchUsesSplays_title">Sketch splays</string>
   <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>

@@ -43,7 +43,10 @@ public class DistoXStatDialog extends Dialog
                               // implements View.OnClickListener
 {
     private Context mContext;
+    private DistoXNum mNum;
+    private String mOrigin;
 
+    private TextView mTextOrigin;
     private TextView mTextLength;
     private TextView mTextWENS;
     private TextView mTextZminmax;
@@ -51,15 +54,16 @@ public class DistoXStatDialog extends Dialog
     private TextView mTextShots;
     private TextView mTextSplays;
     private ListView mList;
+    
 
     // private Button mBtnCancel;
 
-    private DistoXNum mNum;
-    public DistoXStatDialog( Context context, DistoXNum num )
+    public DistoXStatDialog( Context context, DistoXNum num, String origin )
     {
       super(context);
       mContext = context;
       mNum = num;
+      mOrigin = origin;
     }
 
     @Override
@@ -69,13 +73,14 @@ public class DistoXStatDialog extends Dialog
         setContentView(R.layout.distox_stat_dialog);
         getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
+        mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
         mTextLength   = (TextView) findViewById(R.id.text_stat_length);
         mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
         mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
         mTextStations = (TextView) findViewById(R.id.text_stat_stations);
         mTextShots    = (TextView) findViewById(R.id.text_stat_shots);
         mTextSplays   = (TextView) findViewById(R.id.text_stat_splays);
-
+   
         // mList.setOnItemClickListener( this );
         List< String > cls = mNum.getClosures();
         if ( cls.size() == 0 ) {
@@ -89,6 +94,8 @@ public class DistoXStatDialog extends Dialog
         // mBtnCancel.setOnClickListener( this );
 
         Resources res = mContext.getResources();
+
+        mTextOrigin.setText( String.format( res.getString(R.string.stat_origin), mOrigin ) );
 
         mTextLength.setText( String.format( res.getString(R.string.stat_length),
                                             mNum.surveyLength() ) );

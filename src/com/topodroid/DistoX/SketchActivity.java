@@ -1639,7 +1639,7 @@ public class SketchActivity extends ItemDrawer
       } else if ( b == mButton1[5] ) { // notes
         (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
       } else if ( b == mButton1[6] ) { // info
-        new DistoXStatDialog( mSketchSurface.getContext(), mNum ).show();
+        new DistoXStatDialog( mSketchSurface.getContext(), mNum, mInfo.start ).show();
 
       } else if ( b == mButton2[1] ) { // undo
         mModel.undo();

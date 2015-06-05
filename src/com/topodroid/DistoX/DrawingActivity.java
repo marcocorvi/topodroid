@@ -786,7 +786,7 @@ public class DrawingActivity extends ItemDrawer
       // mDrawingSurface.setBuiltInZoomControls(true);
 
 
-      if ( mIsNotMultitouch ) {
+      if ( mIsNotMultitouch || TopoDroidSetting.mZoomControls ) {
         mZoomView = (View) findViewById(R.id.zoomView );
         mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
         mZoomBtnsCtrl.setOnZoomListener( this );
@@ -990,7 +990,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void doPause()
     {
-      if ( mIsNotMultitouch ) mZoomBtnsCtrl.setVisible(false);
+      if ( mIsNotMultitouch || TopoDroidSetting.mZoomControls ) mZoomBtnsCtrl.setVisible(false);
       mDrawingSurface.isDrawing = false;
       if ( mPid >= 0 ) mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
     }
@@ -1510,7 +1510,7 @@ public class DrawingActivity extends ItemDrawer
       float y_canvas = event.getY();
       // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
 
-      if ( mIsNotMultitouch && y_canvas > CENTER_Y*2-20 ) {
+      if ( ( mIsNotMultitouch || TopoDroidSetting.mZoomControls ) && y_canvas > mApp.mDisplayHeight - 40 ) {
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
       }
@@ -2432,6 +2432,7 @@ public class DrawingActivity extends ItemDrawer
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
       mDrawingSurface.setManager( mType );
       resetReference( mPlot2 );
+      mApp.mShotActivity.mRecentPlotType = PlotInfo.PLOT_EXTENDED;
     } 
 
     private void setPlotType1()
@@ -2442,6 +2443,7 @@ public class DrawingActivity extends ItemDrawer
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
       mDrawingSurface.setManager( mType );
       resetReference( mPlot1 );
+      mApp.mShotActivity.mRecentPlotType = PlotInfo.PLOT_PLAN;
     }
 
     public void onClick(View view)
@@ -2982,7 +2984,7 @@ public class DrawingActivity extends ItemDrawer
         new PlotSaveDialog( this, this ).show();
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
-          new DistoXStatDialog( mDrawingSurface.getContext(), mNum ).show();
+          new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start ).show();
         }
       } else if ( p++ == pos ) { // RECOVER
         // askRecover();

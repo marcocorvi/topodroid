@@ -296,6 +296,7 @@
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
     <string name="shot_leg">Повтаряща се отсечка</string>
+    <!-- TODO string name="shot_renumber">renumber</string -->
     <string name="shot_all_splay">Група странични изм.</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
@@ -351,6 +352,7 @@
     <string name="stat_leg">Отсечки %1$d %2$.1f</string>
     <string name="stat_length">Дължина %1$.1f</string>
     <string name="stat_loop">Полигони %1$d</string>
+    <!-- TODO string name="stat_origin">Zero station: %1$s</string -->
     <string name="stat_shot">Отсечки  %1$d,   Дублирани %2$d,   Повърхностни %3$d</string>
     <string name="stat_splay">Странични %1$d</string>
     <string name="stat_station">Репери %1$d</string>
@@ -740,6 +742,8 @@
   <string name="pref_init_station_title">Начален репер</string>
   <string name="pref_init_station_summary">Име на първия репер в картировката</string>
   <string name="pref_init_station_message">Име на първия репер в картировката</string>
+  <!-- TODO string name="pref_station_names_title">Station names</string -->
+  <!-- TODO string name="pref_station_names_summary">Type of station names</string -->
 
   <string name="pref_hthr_title">Граница за хор. сечения</string>
   <string name="pref_hthr_summary">Граница, за считане на сечение за хоризонтално или вертикално</string>
@@ -819,6 +823,8 @@
   <string name="pref_station_size_title">Размер на име на репер</string>
   <string name="pref_station_size_summary">Размер на име на репер</string>
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>
+  <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
+  <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
 
   <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
   <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>

@@ -101,6 +101,11 @@ public class ShotNewDialog extends Dialog
     mETfrom = (EditText) findViewById(R.id.shot_from );
     mETto   = (EditText) findViewById(R.id.shot_to );
 
+    if ( TopoDroidSetting.mStationNames == 1 ) {
+      mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+      mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+    }
+
     mETdistance = (EditText) findViewById(R.id.shot_distance );
     mETbearing  = (EditText) findViewById(R.id.shot_bearing );
     mETclino    = (EditText) findViewById(R.id.shot_clino );

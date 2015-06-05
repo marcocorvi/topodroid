@@ -33,6 +33,8 @@ import android.view.ViewGroup.LayoutParams;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
+import android.text.InputType;
+
 
 public class SketchNewShotDialog extends Dialog
                                  implements View.OnClickListener
@@ -85,6 +87,11 @@ public class SketchNewShotDialog extends Dialog
     mETlength  = (EditText) findViewById(R.id.et_length );
     mETazimuth = (EditText) findViewById(R.id.et_azimuth );
     mETclino   = (EditText) findViewById(R.id.et_clino );
+
+    if ( TopoDroidSetting.mStationNames == 1 ) {
+      mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+      mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+    }
 
     // TextView station = (TextView) findViewById(R.id.tv_station );
 

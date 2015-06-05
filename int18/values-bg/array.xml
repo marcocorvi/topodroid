@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
+  <!-- TODO 
+  <string-array name="stationNames">
+     <item name="alpha">Alphanumeric</item>
+     <item name="number">Numeric</item>
+  </string-array>
+  <string-array name="stationNamesValue">
+     <item name="alpha">alpha</item>
+     <item name="number">number</item>
+  </string-array>
+  -->
   
   <string-array name="extend_name">
      <item>Наляво</item>

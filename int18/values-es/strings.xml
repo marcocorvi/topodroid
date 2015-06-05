@@ -283,6 +283,7 @@
     <string name="shot_from">Desde</string>
     <string name="shot_info">Introducir datos Toma</string>
     <string name="shot_leg">Toma repetida</string>
+    <!-- TODO string name="shot_renumber">renumber</string -->
     <!-- string name="shot_all_splay">splay group</string -->
     <!-- string name="shot_length">Longitud</string -->
     <string name="shot_note">Nota</string>
@@ -337,6 +338,7 @@
     <string name="stat_leg">Visual %1$d %2$.1f</string>
     <string name="stat_length">Longitud %1$.1f</string>
     <string name="stat_loop">Bucle %1$d</string>
+    <!-- TODO string name="stat_origin">Zero station: %1$s</string -->
     <string name="stat_shot">Toma  %1$d,   Duplicada %2$d,   Superficie %3$d</string>
     <string name="stat_splay">Secundaria %1$d</string>
     <string name="stat_station">Estaciones %1$d</string>
@@ -663,6 +665,8 @@
   <!-- TODO string name="pref_init_station_title">Initial station</string -->
   <!-- TODO string name="pref_init_station_summary">Default initial station</string -->
   <!-- TODO string name="pref_init_station_message">Default initial station</string -->
+  <!-- TODO string name="pref_station_names_title">Station names</string -->
+  <!-- TODO string name="pref_station_names_summary">Type of station names</string -->
 
   <string name="pref_hthr_title">Tolerancia de las secciones Transversales</string>
   <string name="pref_hthr_summary">Tolerancia de las secciones transversales horizontales</string>
@@ -741,6 +745,8 @@
   <string name="pref_station_size_title">Tamaño de la etiqueta de la estación</string>
   <string name="pref_station_size_summary">Tamaño de la etiqueta de la estación</string>
   <string name="pref_station_size_message">Tamaño de la etiqueta de la estación</string>
+  <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
+  <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
 
   <string name="pref_sketchUsesSplays_title">Tomas laterales en el dibujo</string>
   <string name="pref_sketchUsesSplays_summary">Utilizar superficie laterales en el dibujo</string>

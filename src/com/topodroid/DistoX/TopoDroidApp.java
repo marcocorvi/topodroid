@@ -1049,6 +1049,59 @@ public class TopoDroidApp extends Application
 
 
   // called also by ShotActivity::updataBlockList
+  public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
+  { 
+    // Log.v("DistoX", "assign stations nr. " + list.size() );
+    int survey_stations = TopoDroidSetting.mSurveyStations;
+    if ( survey_stations <= 0 ) return;
+    boolean shot_after_splays = TopoDroidSetting.mShotAfterSplays;
+
+
+    boolean flip = false;
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
+
+    DistoXDBlock prev = null;
+    String from = blk0.mFrom;
+    String to   = blk0.mTo;
+    String next;
+    String station;
+    if ( survey_stations == 1 ) {
+      next = DistoXStationName.increment( to );
+      station = shot_after_splays ? to : from;
+    } else {
+      next = DistoXStationName.increment( from );
+      station = shot_after_splays ? next : from;
+    }
+    // Log.v("DistoX", "station [0] " + station );
+
+    int atStation = 0;
+
+    for ( DistoXDBlock blk : list ) {
+      if ( blk.mType == DistoXDBlock.BLOCK_SPLAY ) {
+        blk.mFrom = station;
+        mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true );  // SPLAY
+      } else if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+        if ( blk.mId != blk0.mId ) {
+          if ( survey_stations == 1 ) {
+            from = to;
+            to   = next;
+            next = DistoXStationName.increment( to );
+            station = shot_after_splays ? to : from;
+          } else {
+            to   = from;
+            from = next;
+            next = DistoXStationName.increment( from );
+            station = shot_after_splays ? next : from;
+          }
+          blk.mFrom = from;
+          blk.mTo   = to;
+          mData.updateShotName( blk.mId, mSID, from, to, true );  // SPLAY
+        }
+      }
+    }
+  }
+
+  // called also by ShotActivity::updataBlockList
   public void assignStations( List<DistoXDBlock> list )
   { 
     // Log.v("DistoX", "assign stations nr. " + list.size() );

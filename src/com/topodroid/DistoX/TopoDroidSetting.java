@@ -98,6 +98,8 @@ class TopoDroidSetting
     "DISTOX_AZIMUTH_MANUAL",         // 64
     "DISTOX_VERT_SPLAY",             // over this splay are shown with dashed line
     "DISTOX_STATION_PREFIX",         // whether to add cave-name prefix to stations (cSurvey)
+    "DISTOX_STATION_NAMES",
+    "DISTOX_ZOOM_CONTROLS",
     "DISTOX_LOCALE",                 // 65
     "DISTOX_CWD",                    // must be last 
 
@@ -138,6 +140,8 @@ class TopoDroidSetting
   static boolean mAzimuthManual = false; // whether to manually set extend / or use reference azimuth
   static float mVertSplay = 50;
   static boolean mExportStationsPrefix = false; // whether to prepend cave name to station in cSurvey export
+  static int mStationNames = 0;          // type of station names (0: alpha, 1: number)
+  static boolean mZoomControls = false;
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -597,6 +601,10 @@ class TopoDroidSetting
 
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
 
+    mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
+
+    mZoomControls =  prefs.getBoolean( key[k++], false ); // DISTOX_ZOOM_CONTROLS
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -913,6 +921,10 @@ class TopoDroidSetting
       } catch ( NumberFormatException e  ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       mExportStationsPrefix =  prefs.getBoolean( k, false ); // DISTOX_STATION_PREFIX
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mZoomControls = prefs.getBoolean( k, false ); // DISTOX_ZOOM_CONTROLS
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

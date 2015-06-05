@@ -69,6 +69,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updateShotStmt;
   private SQLiteStatement updateShotStmtFull;
   private SQLiteStatement updateShotDBCStmt;
+  // private SQLiteStatement clearStationsStmt;
   private SQLiteStatement updateShotLegStmt;
   private SQLiteStatement updateStationCommentStmt;
   private SQLiteStatement deleteStationStmt;
@@ -193,6 +194,8 @@ public class DataHelper extends DataSetObservable
                              "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
         updateShotDBCStmt = myDB.compileStatement(
                             "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
+        // clearStationsStmt = myDB.compileStatement(
+        //                     "UPDATE shots SET fStation=\"\", tStation=\"\" where id>? and surveyId=?" );
 
         updateShotLegStmt = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
         updateShotLegStmt = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
@@ -513,6 +516,18 @@ public class DataHelper extends DataSetObservable
   
   // --------------------------------------------------------------------
   // SHOTS
+
+  // void clearStationsAfter( long id, long sid, boolean forward ) 
+  // {
+  //   // update shots set fStation="", tStation="" where id>id and surveyId=sid
+  //   clearStationsStmt.bindLong( 1, id );
+  //   clearStationsStmt.bindLong( 2, sid );
+  //   clearStationsStmt.execute();
+  //   if ( forward ) {
+  //     // no need to forward ?
+  //   }
+  // }
+
 
   void updateShotDistanceBearingClino( long id, long sid, float d, float b, float c, boolean forward )
   {
@@ -1776,6 +1791,28 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
+   public List<DistoXDBlock> selectAllShotsAfter( long id, long sid, long status )
+   {
+     List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
+       "id>=? and surveyId=? and status=?",
+       new String[] { Long.toString(id), Long.toString(sid), Long.toString(status) },
+       null,  // groupBy
+       null,  // having
+       "id" ); // order by
+     if (cursor.moveToFirst()) {
+       do {
+         DistoXDBlock block = new DistoXDBlock();
+         fillBlock( sid, block, cursor );
+         list.add( block );
+       } while (cursor.moveToNext());
+     }
+     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
+     if (cursor != null && !cursor.isClosed()) {
+       cursor.close();
+     }
+     return list;
+   }
 
    public List<DistoXDBlock> selectAllShots( long sid, long status )
    {

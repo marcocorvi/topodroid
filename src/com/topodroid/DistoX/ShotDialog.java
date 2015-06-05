@@ -8,12 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120702 shot surface flag
- * 20120711 back-next buttons
- * 20120725 TopoDroidApp log
- * 20121118 compare stations of prev shot to increment the "bigger"
- * 20130108 extend "ignore"
  */
 package com.topodroid.DistoX;
 
@@ -24,11 +18,11 @@ import android.os.Bundle;
 import android.widget.RadioButton;
 
 import android.text.method.KeyListener;
+import android.text.InputType;
 
 // import android.widget.Spinner;
 // import android.widget.ArrayAdapter;
 
-// import android.text.InputType;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -78,6 +72,7 @@ public class ShotDialog extends Dialog
 
   private CheckBox mCBleg;
   private CheckBox mCBall_splay;
+  private CheckBox mCBrenumber;
   private Button mButtonReverse;
 
   private CheckBox mRBleft;
@@ -154,7 +149,7 @@ public class ShotDialog extends Dialog
     shot_clino    = blk.clinoString();
     shot_manual   = (blk.mShotType > 0);
 
-    Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
+    // Log.v("DistoX", "shot is manual " + shot_manual + " length " + shot_distance );
 
     shot_extra   = blk.extraString();
     shot_extend  = blk.mExtend;
@@ -261,6 +256,11 @@ public class ShotDialog extends Dialog
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
     
+    if ( TopoDroidSetting.mStationNames == 1 ) {
+      mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+      mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+    }
+
     // mRBreg  = (CheckBox) findViewById( R.id.shot_reg );
     mRBdup  = (CheckBox) findViewById( R.id.shot_dup );
     mRBsurf = (CheckBox) findViewById( R.id.shot_surf );
@@ -268,6 +268,7 @@ public class ShotDialog extends Dialog
 
     mCBleg = (CheckBox)  findViewById(R.id.shot_leg );
     mCBall_splay = (CheckBox)  findViewById(R.id.shot_all_splay );
+    mCBrenumber  = (CheckBox)  findViewById(R.id.shot_renumber  );
     mButtonReverse = (Button)  findViewById(R.id.shot_reverse );
 
     mRBleft   = (CheckBox) findViewById(R.id.left );
@@ -360,7 +361,9 @@ public class ShotDialog extends Dialog
     String comment = mETcomment.getText().toString();
     if ( comment != null ) mBlk.mComment = comment;
 
+    boolean renumber = false;
     if ( shot_from.length() > 0 && shot_to.length() > 0 ) {
+      renumber = mCBrenumber.isChecked();
       all_splay = false;
     }
     if ( all_splay ) {
@@ -378,6 +381,10 @@ public class ShotDialog extends Dialog
         float c = Float.parseFloat( mETclino.getText().toString() )    / TopoDroidSetting.mUnitAngle;
         mParent.updateShotDistanceBearingClino( d, b, c, mBlk );
       } catch (NumberFormatException e ) { }
+    }
+
+    if ( renumber ) {
+      mParent.renumberShotsAfter( mBlk );
     }
   }
 

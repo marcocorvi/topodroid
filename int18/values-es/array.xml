@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <resources>
+
+  <!-- TODO 
+  <string-array name="stationNames">
+     <item name="alpha">Alphanumeric</item>
+     <item name="number">Numeric</item>
+  </string-array>
+  <string-array name="stationNamesValue">
+     <item name="alpha">alpha</item>
+     <item name="number">number</item>
+  </string-array>
+  -->
+
   <string-array name="extend_name">
      <item>Izq.</item>
      <item>Vert.</item>

@@ -284,6 +284,7 @@
     <string name="shot_info">Saisir les infos de visée</string>
     <!-- TOO LONG string name="shot_leg">Ligne de cheminement répétée</string -->
     <string name="shot_leg">Visée répétée</string>
+    <!-- TODO string name="shot_renumber">renumber</string -->
     <!-- string name="shot_all_splay">splay group</string -->
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">note</string>
@@ -341,6 +342,7 @@
     <string name="stat_leg">Cheminements %1$d %2$.1f</string>
     <string name="stat_length">Longueur %1$.1f</string>
     <string name="stat_loop">Boucle %1$d</string>
+    <!-- TODO string name="stat_origin">Zero station: %1$s</string -->
     <string name="stat_shot">Visées  %1$d,   Dupliquées %2$d,   Surface %3$d</string>
     <string name="stat_splay">Visées latérales %1$d</string>
     <string name="stat_station">Stations %1$d</string>
@@ -668,6 +670,9 @@
   <!-- TODO string name="pref_init_station_title">Initial station</string -->
   <!-- TODO string name="pref_init_station_summary">Default initial station</string -->
   <!-- TODO string name="pref_init_station_message">Default initial station</string -->
+  <!-- TODO string name="pref_station_names_title">Station names</string -->
+  <!-- TODO string name="pref_station_names_summary">Type of station names</string -->
+
   <string name="pref_hthr_title">Seuil horizontal croisement de section</string>
   <string name="pref_hthr_summary">Seuil pour les sections croisées horizontales</string>
   <string name="pref_hthr_message">Visée de pente pour laquelle les sections croisées sont à l\'horizontale</string>
@@ -745,6 +750,8 @@
   <string name="pref_station_size_title">Taille nom de station</string>
   <string name="pref_station_size_summary">Taille du texte des stations</string>
   <string name="pref_station_size_message">Taille du texte des stations</string>
+  <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
+  <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
 
   <string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string>
   <string name="pref_sketchUsesSplays_summary">Dessiner les surface en utilisant les visées latérales</string>

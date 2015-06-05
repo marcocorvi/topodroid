@@ -296,6 +296,7 @@
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные пикета</string>
     <string name="shot_leg">повторный замер</string>
+    <!-- TODO string name="shot_renumber">renumber</string -->
     <string name="shot_all_splay">группа боковых замеров</string>
     <!-- OK string name="shot_length">длинна</string -->
     <string name="shot_note">заметки</string>
@@ -348,6 +349,7 @@
     <string name="stat_leg">Отрезки %1$d %2$.1f</string>
     <string name="stat_length">Длинна %1$.1f</string>
     <string name="stat_loop">Петли %1$d</string>
+    <!-- TODO string name="stat_origin">Zero station: %1$s</string -->
     <string name="stat_shot">Пикеты  %1$d,   Дублированные %2$d,   Поверхность %3$d</string>
     <string name="stat_splay">Боковых замеров %1$d</string>
     <string name="stat_station">Пикеты %1$d</string>
@@ -728,6 +730,9 @@
   <string name="pref_init_station_title">Начальный пикет</string>
   <string name="pref_init_station_summary">Начальный пикет по умолчаниию</string>
   <string name="pref_init_station_message">Начальный пикет по умолчаниию</string>
+  <!-- TODO string name="pref_station_names_title">Station names</string -->
+  <!-- TODO string name="pref_station_names_summary">Type of station names</string -->
+
   <string name="pref_hthr_title">Порог горизонтальности разрезов</string>
   <string name="pref_hthr_summary">Порог  для горизонтальных разрезов</string>
   <string name="pref_hthr_message">Угол на пикете выше которонро разрез считается горизонтальным</string>
@@ -805,6 +810,8 @@
   <string name="pref_station_size_title">Размер номера пикетов</string>
   <string name="pref_station_size_summary">Размер номера пикетов</string>
   <string name="pref_station_size_message">Размер подписи пикетов</string>
+  <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
+  <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
