@@ -86,7 +86,7 @@
      <item name="back">Бок. замер, обратный ход</item>
      <item name="for2">Прямой ход, Бок. замер</item>
      <item name="back2">Обратный ход, Бок. замер</item>
-     <item name="anomaly">Backsight</item> <!-- TODO -->
+     <item name="anomaly">Обратный замер</item>
   </string-array>
   <string-array name="surveyStationsValue">
      <item name="no">0</item>
