@@ -130,6 +130,7 @@
     <string name="loop_closure_errors">Errori chiusura anelli</string>
     <string name="loop_none">Nessun anello</string>
     <!-- string name="line_delete">Elimina linea</string -->
+    <!-- TODO string name="flip_shots">Flip shots</string -->
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -544,6 +545,7 @@
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
+    <!-- TODO string name="title_profile_flip">Flip profile sketch ?</string -->
     <string name="title_refs">Referimenti grafici</string>
     <string name="title_scraps">Disegni</string>
     <string name="title_shift">Sposta</string>

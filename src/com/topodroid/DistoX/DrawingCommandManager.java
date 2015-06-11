@@ -76,6 +76,42 @@ public class DrawingCommandManager
 
   private Matrix mMatrix;
 
+  void flipXAxis()
+  {
+    synchronized( mGridStack ) {
+      final Iterator i = mGridStack.iterator();
+      while ( i.hasNext() ){
+        final DrawingPath drawingPath = (DrawingPath) i.next();
+        drawingPath.flipXAxis();
+      }
+      if ( mNorthLine != null ) mNorthLine.flipXAxis();
+    }
+
+    synchronized( mFixedStack ) {
+      final Iterator i = mFixedStack.iterator();
+      while ( i.hasNext() ){
+        final DrawingPath path = (DrawingPath) i.next();
+        path.flipXAxis();
+      }
+    }
+ 
+    synchronized( mStations ) {
+      for ( DrawingStationName st : mStations ) {
+        st.flipXAxis();
+      }
+    }
+
+    if ( mCurrentStack != null ){
+      synchronized( mCurrentStack ) {
+        final Iterator i = mCurrentStack.iterator();
+        while ( i.hasNext() ){
+          final DrawingPath drawingPath = (DrawingPath) i.next();
+          drawingPath.flipXAxis();
+        }
+      }
+    }
+  }
+
   void shiftDrawing( float x, float y )
   {
     // if ( mStations != null ) {
@@ -171,7 +207,7 @@ public class DrawingCommandManager
     clearSelected();
     synchronized( mSelection ) {
       // Log.v("DistoX", "clear selection");
-      mSelection.clearPoints();
+      mSelection.clearReferencePoints();
     }
   }
 
@@ -183,7 +219,7 @@ public class DrawingCommandManager
     mGridStack.clear();
     mFixedStack.clear();
     mStations.clear();
-    mSelection.clearPoints();
+    mSelection.clearSelectionPoints();
     clearSketchItems();
   }
 
@@ -1416,32 +1452,20 @@ public class DrawingCommandManager
     return ret;
   }
 
-  SelectionPoint hotItem()
-  {
-    return mSelected.mHotItem;
-  }
+  SelectionPoint hotItem() { return mSelected.mHotItem; }
 
-  void shiftHotItem( float dx, float dy )
-  {
-    mSelected.shiftHotItem( dx, dy );
-  }
+  void shiftHotItem( float dx, float dy ) { mSelected.shiftHotItem( dx, dy ); }
 
-  SelectionPoint nextHotItem()
-  {
-    return mSelected.nextHotItem();
-  }
+  SelectionPoint nextHotItem() { return mSelected.nextHotItem(); }
 
-    SelectionPoint prevHotItem()
-    {
-      return mSelected.prevHotItem();
+  SelectionPoint prevHotItem() { return mSelected.prevHotItem(); }
+
+  void clearSelected()
+  {
+    synchronized( mSelected ) {
+      mSelected.clear();
     }
-
-    void clearSelected()
-    {
-      synchronized( mSelected ) {
-        mSelected.clear();
-      }
-    }
+  }
 
   public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )
   {

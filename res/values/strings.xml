@@ -500,6 +500,7 @@
     <string name="no_shot_between_stations">no_shot_between_stations</string>
     <string name="few_line_points">Line has too few points</string>
     <string name="line_delete">line_delete</string>
+    <string name="flip_shots">Flip shots</string>
 
     <string name="menu_head">HEAD</string>
     <string name="menu_save_th2">SAVE TH2</string>
@@ -622,6 +623,7 @@
     <string name="title_photo">Photo/Measurements</string>
     <string name="title_photo_comment">Photo comment</string>
     <string name="title_plot_save">Save sketch as</string>
+    <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
     <string name="title_shift">Shift</string>

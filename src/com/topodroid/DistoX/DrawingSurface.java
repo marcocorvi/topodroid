@@ -162,6 +162,12 @@ public class DrawingSurface extends SurfaceView
       }
     }
 
+    void flipProfile()
+    {
+      if ( mCommandManager2 == null ) return;
+      mCommandManager2.flipXAxis();
+    }
+
     void refresh()
     {
       Canvas canvas = null;

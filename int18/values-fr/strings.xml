@@ -129,7 +129,8 @@
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Erreurs de bouclage</string>
     <string name="loop_none">Pas de bouclage</string>
-    <!-- string name="line_delete">Supprimer ligne</string -->
+    <!-- TODO string name="line_delete">Supprimer ligne</string -->
+    <!-- TODO string name="flip_shots">Flip shots</string -->
 
     <string name="error_azimuth_required">Azimut nécessaire</string>
     <string name="error_length_required">Longueur nécessaire</string>
@@ -549,6 +550,7 @@
     <string name="title_photo">Photo/Mesures</string>
     <string name="title_photo_comment">Commentaire photo</string>
     <string name="title_plot_save">Enregistrer le croquis sous</string>
+    <!-- TODO string name="title_profile_flip">Flip profile sketch ?</string -->
     <string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>
     <string name="title_shift">Décaler</string>

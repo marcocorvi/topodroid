@@ -80,7 +80,7 @@ import android.util.Log;
 public class DrawingActivity extends ItemDrawer
                              implements View.OnTouchListener
                                       , View.OnClickListener
-                                      // , View.OnLongClickListener
+                                      , View.OnLongClickListener
                                       , OnItemClickListener
                                       , OnItemSelectedListener
                                       , OnZoomListener
@@ -224,8 +224,8 @@ public class DrawingActivity extends ItemDrawer
     private DrawingBrush mCurrentBrush;
     private Path  mCurrentPath;
 
-    private String mName;
-    String mName1;  // first name (PLAN)
+    private String mName;   // current-plot name
+    String mName1;          // first name (PLAN)
     private String mName2;  // second name (EXTENDED)
     private String mFullName1;
     private String mFullName2;
@@ -517,7 +517,7 @@ public class DrawingActivity extends ItemDrawer
     // called by doStop (which is called by onStop)
     private void doSaveTh2( ) 
     {
-      Log.v("DistoX", "doSaveTh2() type " + mType + " modified " + mModified );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         // if ( not_all_symbols ) AlertMissingSymbols();
@@ -815,6 +815,7 @@ public class DrawingActivity extends ItemDrawer
           mBMplan = bm2;
         }
       }
+      mButton1[BTN_PLOT].setOnLongClickListener( this );
       mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
       mBMextend  = mApp.setButtonBackground( null, mButtonSize, izons[IC_EXTEND] ); 
       mBMdownload_on = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_on );
@@ -997,7 +998,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void doStop()
     {
-      Log.v("DistoX", "doStop type " + mType + " modified " + mModified );
+      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doStop type " + mType + " modified " + mModified );
       // if ( mSaveTimer != null ) mSaveTimer.cancel();
       // mSaveTimer =  null;
       // if ( mSaveTask != null ) mSaveTask.cancel();
@@ -1281,19 +1282,16 @@ public class DrawingActivity extends ItemDrawer
       block.mFrom = from;
       block.mTo   = to;
       mData.updateShotName( block.mId, mSid, from, to, true );
-      // float x = mOffset.x; 
-      // float y = mOffset.y; 
-      // float z = mZoom;    
-      // mOffset.x = 0.0f;
-      // mOffset.y = 0.0f;
-      // mZoom = mApp.mScaleFactor;    // canvas zoom
-      mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
-      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-      // mOffset.x = x; 
-      // mOffset.y = y; 
-      // mZoom = z;    
+      doComputeReferences();
+      // mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      // mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
+      // if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+      //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+      // } else {
+      //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+      //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+      // }      
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       // mDrawingSurface.refresh();
     }
@@ -1318,21 +1316,16 @@ public class DrawingActivity extends ItemDrawer
       if ( block.mExtend == extend ) return;
       block.mExtend = extend;
       mData.updateShotExtend( block.mId, mSid, extend, true );
+      recomputeProfileReference();
+    }
+
+    private void recomputeProfileReference()
+    {
       if ( mType == PlotInfo.PLOT_EXTENDED ) {
         mModified = true;
-        // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "updateBlockExtend off " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
-        // float x = mOffset.x; 
-        // float y = mOffset.y; 
-        // float z = mZoom;    
-        // mOffset.x = 0.0f;
-        // mOffset.y = 0.0f;
-        // mZoom = mApp.mScaleFactor;    // canvas zoom
         mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
         mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
         computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-        // mOffset.x = x; 
-        // mOffset.y = y; 
-        // mZoom = z;    
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         // mDrawingSurface.refresh();
       }
@@ -1541,7 +1534,7 @@ public class DrawingActivity extends ItemDrawer
             mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
           } else if ( mSymbol == SYMBOL_AREA ) {
             // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
-            mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), true );
+            mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", true );
             mCurrentAreaPath.addStartPoint( x_scene, y_scene );
             mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
           } else { // SYMBOL_POINT
@@ -1718,14 +1711,14 @@ public class DrawingActivity extends ItemDrawer
                       BezierCurve c = curves.get(0);
                       BezierPoint p0 = c.getPoint(0);
                       if ( mSymbol == SYMBOL_LINE ) {
-                        DrawingLinePath bezier_path = new DrawingLinePath( mCurrentLine );
-                        bezier_path.addStartPoint( p0.mX, p0.mY );
+                        DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
+                        lp1.addStartPoint( p0.mX, p0.mY );
                         for (int k=0; k<k0; ++k) {
                           c = curves.get(k);
                           BezierPoint p1 = c.getPoint(1);
                           BezierPoint p2 = c.getPoint(2);
                           BezierPoint p3 = c.getPoint(3);
-                          bezier_path.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
+                          lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
                         if ( mContinueLine ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
@@ -1734,24 +1727,24 @@ public class DrawingActivity extends ItemDrawer
                             if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) line.reversePath();
                             mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                           } else {
-                            mDrawingSurface.addDrawingPath( bezier_path );
+                            mDrawingSurface.addDrawingPath( lp1 );
                           }
                           // setButtonContinue();
                         } else {
-                          mDrawingSurface.addDrawingPath( bezier_path );
+                          mDrawingSurface.addDrawingPath( lp1 );
                         }
                       } else { //  mSymbol == SYMBOL_AREA
-                        DrawingAreaPath bezier_path = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), true ); 
-                        bezier_path.addStartPoint( p0.mX, p0.mY );
+                        DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", true ); 
+                        ap.addStartPoint( p0.mX, p0.mY );
                         for (int k=0; k<k0; ++k) {
                           c = curves.get(k);
                           BezierPoint p1 = c.getPoint(1);
                           BezierPoint p2 = c.getPoint(2);
                           BezierPoint p3 = c.getPoint(3);
-                          bezier_path.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
+                          ap.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
-                        bezier_path.close();
-                        mDrawingSurface.addDrawingPath( bezier_path );
+                        ap.close();
+                        mDrawingSurface.addDrawingPath( ap );
                       }
                     }
                   }
@@ -2022,6 +2015,7 @@ public class DrawingActivity extends ItemDrawer
         new_view.trim();
         add = ! drop;
       }
+      boolean compute_ref = false;
       if ( add && ! is_barrier ) {
         if ( view == null || view.length() == 0 ) {
           view = name;
@@ -2033,21 +2027,36 @@ public class DrawingActivity extends ItemDrawer
         mData.updatePlotView( mPid2, mSid, view );
         mPlot1.view = view;
         mPlot2.view = view;
-        // FIXME recompute num
-        mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
-        computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-        computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+        compute_ref = true;
+        // // FIXME factorized out
+        // mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        // mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
+        // if ( mType == PlotInfo.PLOT_EXTENDED ) {
+        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+        // } else {
+        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+        // }
       } else if ( drop && is_barrier ) {
         mData.updatePlotView( mPid1, mSid, new_view );
         mData.updatePlotView( mPid2, mSid, new_view );
         mPlot1.view = new_view;
         mPlot2.view = new_view;
-        // FIXME recompute num
-        mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
-        computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-        computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+        compute_ref = true;
+        // // FIXME recompute num
+        // mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        // mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
+        // if ( mType == PlotInfo.PLOT_EXTENDED ) {
+        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+        // } else {
+        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+        // }
+      }
+      if ( compute_ref ) {
+        doComputeReferences();
       }
     }
    
@@ -2444,6 +2453,43 @@ public class DrawingActivity extends ItemDrawer
       mDrawingSurface.setManager( mType );
       resetReference( mPlot1 );
       mApp.mShotActivity.mRecentPlotType = PlotInfo.PLOT_PLAN;
+    }
+
+    private void flipBlock( DistoXDBlock blk )
+    {
+      if ( blk != null ) {
+        if ( blk.mExtend == -1 ) {
+          blk.mExtend = 1;
+          mData.updateShotExtend( blk.mId, mSid, blk.mExtend, true );
+        } else if ( blk.mExtend == 1 ) {
+          blk.mExtend = -1;
+          mData.updateShotExtend( blk.mId, mSid, blk.mExtend, true );
+        }
+      }
+    }
+
+    public void flipProfile( boolean flip_shots )
+    {
+      mDrawingSurface.flipProfile( );
+      if ( flip_shots ) {
+        DistoXDBlock blk;
+        for ( NumShot sh : mNum.getShots() ) {
+          flipBlock( sh.getFirstBlock() );
+        }
+        for ( NumSplay sp : mNum.getSplays() ) {
+          flipBlock( sp.getBlock() );
+        }
+      }
+      recomputeProfileReference();
+    }
+
+    public boolean onLongClick( View view ) 
+    {
+      Button b = (Button)view;
+      if ( b == mButton1[BTN_PLOT] ) {
+        new DrawingProfileFlipDialog( this, this ).show();
+      }
+      return true;
     }
 
     public void onClick(View view)
@@ -2861,7 +2907,7 @@ public class DrawingActivity extends ItemDrawer
     // called only by PlotSaveDialog: save as th2 even if there are missing symbols
     void saveTh2()
     {
-      Log.v("DistoX", "saveTh2() type " + mType + " modified " + mModified );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
       // String filename  = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
       // rotateBackup( filename );
@@ -2895,22 +2941,27 @@ public class DrawingActivity extends ItemDrawer
   //   return super.onOptionsItemSelected( item );
   // }
 
+  private void doComputeReferences()
+  {
+    mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+    mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
+    if ( mType == (int)PlotInfo.PLOT_PLAN ) {
+      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+      resetReference( mPlot1 );
+    } else if ( mType == (int)PlotInfo.PLOT_EXTENDED ) {
+      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+      resetReference( mPlot2 );
+    }
+  }
+
   public void refreshDisplay( int nr, boolean toast )
   {
     setTitleColor( TopoDroidConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
-        mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
-        if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-          computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-          computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-          resetReference( mPlot1 );
-        } else if ( mType == (int)PlotInfo.PLOT_EXTENDED ) {
-          computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-          computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-          resetReference( mPlot2 );
-        }
+        doComputeReferences();
       }
       if ( toast ) {
         Toast.makeText( this, String.format( getString(R.string.read_data), nr ), Toast.LENGTH_SHORT ).show();

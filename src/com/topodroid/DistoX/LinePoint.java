@@ -31,6 +31,14 @@ public class LinePoint extends BezierPoint
   LinePoint mPrev;  // previous LinePoint on the line
   LinePoint mNext;  // next LinePoint on the line
 
+  void flipXAxis()
+  {
+    float dx = 2 * DrawingActivity.CENTER_X;
+    mX1 = dx - mX1;
+    mX2 = dx - mX2;
+    mX  = dx - mX;
+  }
+
   void shiftCP1By( float dx, float dy )
   {
      mX1 += dx;

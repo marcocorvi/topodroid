@@ -129,7 +129,8 @@
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Errores de cierre de bucle</string>
     <string name="loop_none">No hay Bucle</string>
-    <!-- string name="line_delete">Eliminar línea</string -->
+    <!-- TODO string name="line_delete">Eliminar línea</string -->
+    <!-- TODO string name="flip_shots">Flip shots</string -->
 
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
@@ -544,6 +545,7 @@
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
+    <!-- TODO string name="title_profile_flip">Flip profile sketch ?</string -->
     <!-- TODO string name="title_refs">Sketch References</string -->
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>

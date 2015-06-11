@@ -40,6 +40,16 @@ public class DrawingPath implements ICanvasCommand
   public static final int DRAWING_PATH_NAME    = 7; // station name
   public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
 
+  static boolean isReferenceType( int type ) 
+  {
+    return type < DrawingPath.DRAWING_PATH_STATION || type >= DrawingPath.DRAWING_PATH_NAME;
+  }
+
+  static boolean isDrawingType( int type ) 
+  {
+    return type >= DrawingPath.DRAWING_PATH_STATION && type < DrawingPath.DRAWING_PATH_NAME;
+  }
+
   Path mPath;
   Path mTransformedPath;
   Paint mPaint;
@@ -50,6 +60,35 @@ public class DrawingPath implements ICanvasCommand
   float cx, cy; // midpoint scene coords
                  
   DistoXDBlock mBlock;
+
+  void flipXAxis()
+  {
+    float offx = 2 * ( DrawingActivity.CENTER_X + cx );
+    float offc = 2 * ( DrawingActivity.CENTER_X - cx );
+    float dx = 2 * DrawingActivity.CENTER_X;
+    cx = dx - cx;
+    x1 = dx - x1;
+    x2 = dx - x2;
+    boolean flip_path = false;
+    if ( mType != DRAWING_PATH_POINT ) return;
+    DrawingPointPath dpp = (DrawingPointPath)this;
+    if ( dpp.mOrientation != 0 ) {
+      dpp.mOrientation = 360 - dpp.mOrientation;
+      flip_path = true;
+      offx = 2 * ( DrawingActivity.CENTER_X );
+    } else {
+      offx = offc;
+    }
+    if ( flip_path && mPath != null ) {
+      float m[] = new float[9]; // { -1, 0, 0, 0, 1, 0, 0, 0, 1 };
+      android.graphics.Matrix mat = new android.graphics.Matrix();
+      mat.getValues( m );
+      m[0] = -m[0];
+      mat.setValues( m );
+      mPath.transform( mat );
+    }
+    mPath.offset( offx, 0 );
+  }
 
   // get the path color (or white)
   int color() { return ( mPaint != null )? mPaint.getColor() : 0xffffffff; }

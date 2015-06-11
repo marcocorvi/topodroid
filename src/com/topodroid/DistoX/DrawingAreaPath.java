@@ -42,30 +42,35 @@ public class DrawingAreaPath extends DrawingPointLinePath
 
   int mAreaType;
   int mAreaCnt;
+  String mPrefix;      // border/area name prefix (= scrap name)
   // boolean mVisible; // visible border in DrawingPointLinePath
 
-  public DrawingAreaPath( int type, int index, boolean visible )
+  public DrawingAreaPath( int type, int index, String prefix, boolean visible )
   {
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
     mAreaType = type;
     mAreaCnt  = index;
+    mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
     if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
       setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
     }
   }
 
-  // @param id   string "area id" ('x' + mAreaCnt )
+  // @param id   string "area id" (mPrefix + mAreaCnt )
   public DrawingAreaPath( int type, String id, boolean visible )
   {
     // visible = ?,   closed = true
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingAreaPath cstr type " + type + " id " + id );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Drawing Area Path cstr type " + type + " id " + id );
     mAreaType = type;
     mAreaCnt = 1;
+    mPrefix  = "a";
     try {
-      mAreaCnt = Integer.parseInt( id.substring(1) );
+      int pos = id.lastIndexOf("a") + 1;
+      mPrefix  = id.substring(0, pos);
+      mAreaCnt = Integer.parseInt( id.substring(pos) );
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DrawingAreaPath AreaCnt parse Int error: " + id.substring(1) );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
     if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
       setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
@@ -87,7 +92,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line border -id a%d -close on ", mAreaCnt );
+    pw.format("line border -id %s%d -close on ", mPrefix, mAreaCnt );
     if ( ! mVisible ) pw.format("-visibility off ");
     pw.format("\n");
     // for ( LinePoint pt : mPoints ) 
@@ -97,7 +102,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     }
     pw.format("endline\n");
     pw.format("area %s\n", DrawingBrushPaths.getAreaThName( mAreaType ) );
-    pw.format("  a%d\n", mAreaCnt );
+    pw.format("  %s%d\n", mPrefix, mAreaCnt );
     pw.format("endarea\n");
     return sw.getBuffer().toString();
   }

@@ -83,7 +83,13 @@ public class DrawingStationDialog extends Dialog
       }
       mBtnSet.setOnClickListener( this );
       mBtnBreak.setOnClickListener( this );
-      mBtnXSection.setOnClickListener( this );
+    
+      if ( TopoDroidSetting.mLevelOverAdvanced ) {
+        mBtnXSection.setOnClickListener( this );
+      } else {
+        mBtnXSection.setVisibility( View.GONE );
+      }
+
       // mBtnCancel.setOnClickListener( this );
 
       if ( mIsBarrier ) {

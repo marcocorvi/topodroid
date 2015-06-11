@@ -42,15 +42,70 @@ class Selection
     }
   }
 
-  void clearPoints()
+  void clearSelectionPoints()
   {
     // Log.v("DistoX", "Selection clear" );
     mPoints.clear();
   }
 
+  // private void dumpPointsTypes()
+  // {
+  //   int nfxd = 0;
+  //   int nspl = 0;
+  //   int ngrd = 0;
+  //   int nsta = 0;
+  //   int npnt = 0;
+  //   int nlin = 0;
+  //   int nare = 0;
+  //   int nnam = 0;
+  //   int nnrt = 0;
+  //   int noth = 0;
+  //   for ( SelectionPoint p : mPoints ) {
+  //     switch ( p.mItem.mType ) {
+  //       case DrawingPath.DRAWING_PATH_FIXED:   nfxd++; break;
+  //       case DrawingPath.DRAWING_PATH_SPLAY:   nspl++; break;
+  //       case DrawingPath.DRAWING_PATH_GRID:    ngrd++; break;
+  //       case DrawingPath.DRAWING_PATH_STATION: nsta++; break;
+  //       case DrawingPath.DRAWING_PATH_POINT:   npnt++; break;
+  //       case DrawingPath.DRAWING_PATH_LINE:    nlin++; break;
+  //       case DrawingPath.DRAWING_PATH_AREA:    nare++; break;
+  //       case DrawingPath.DRAWING_PATH_NAME:    nnam++; break;
+  //       case DrawingPath.DRAWING_PATH_NORTH:   nnrt++; break;
+  //       default: noth ++;
+  //     }
+  //   }
+  //   Log.v("DistoX", "Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
+  //                   + " " + npnt + " " + nlin + " " + nare + " " + nnam + " " + nnrt + " " + noth  );
+  // }
+
+  void clearReferencePoints()
+  {
+    synchronized ( mPoints ) {
+      Iterator< SelectionPoint > it = mPoints.iterator();
+      while( it.hasNext() ) {
+        SelectionPoint sp1 = (SelectionPoint)it.next();
+        if ( sp1.isReferenceType() ) {
+          it.remove( );
+        }
+      }
+    }
+  }
+
+  void clearDrawingPoints()
+  {
+    synchronized ( mPoints ) {
+      Iterator< SelectionPoint > it = mPoints.iterator();
+      while( it.hasNext() ) {
+        SelectionPoint sp1 = (SelectionPoint)it.next();
+        if ( sp1.isDrawingType() ) {
+          it.remove( );
+        }
+      }
+    }
+  }
+
   void insertStationName( DrawingStationName st )
   {
-    // Log.v("DistoX", "Selection insert station name" );
     insertItem( st, null );
   }
 
@@ -69,12 +124,6 @@ class Selection
   
   void insertLinePath( DrawingLinePath path )
   {
-    // Log.v("DistoX", "Selection insert line path" );
-    // for (int k = 0; k < path.mPoints.size(); ++k ) {
-    //   LinePoint p2 = path.mPoints.get(k);
-    //   // Log.v(TopoDroidApp.TAG, "sel. insert " + p2.mX + " " + p2.mY );
-    //   insertItem( path, p2 );
-    // }
     for ( LinePoint p2 = path.mFirst; p2 != null; p2 = p2.mNext ) {
       insertItem( path, p2 );
     }
@@ -101,20 +150,12 @@ class Selection
         break;
       case DrawingPath.DRAWING_PATH_LINE:
         DrawingLinePath lp = (DrawingLinePath)path;
-        // for (int k = 0; k < lp.mPoints.size(); ++k ) {
-        //   p2 = lp.mPoints.get(k);
-        //   insertItem( path, p2 );
-        // }
         for ( p2 = lp.mFirst; p2 != null; p2 = p2.mNext ) {
           insertItem( path, p2 );
         }
         break;
       case DrawingPath.DRAWING_PATH_AREA:
         DrawingAreaPath ap = (DrawingAreaPath)path;
-        // for (int k = 0; k < ap.mPoints.size(); ++k ) {
-        //   p2 = ap.mPoints.get(k);
-        //   insertItem( path, p2 );
-        // }
         for ( p2 = ap.mFirst; p2 != null; p2 = p2.mNext ) {
           insertItem( path, p2 );
         }

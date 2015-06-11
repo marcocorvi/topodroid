@@ -34,7 +34,7 @@ The remaining buttons differ by the mode. In the <b>move</b> mode they are
 <li><u>Download</u> downloads data from the DistoX. The latest downloaded shot are bluish to help you distinguish them from the others. If no DistoX is selected, this button is hidden.</li>
 <li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
 <li><u>Reference</u>: to choose which reference to display. The drawing references are the midline, the splay shots, the station names, and the metric grid.</li>
-<li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the extended profile</li>
+<li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the extended profile. Profile flip (long tap) [E].</li>
 <li><u>Notes</u>: to edit the survey annotations</li>
 </ulist><br><p>
 
@@ -100,6 +100,10 @@ The "sketch statistics dialog" displays the origin station (zero station), the s
 
 <h4>SHIFTING THE SKETCH [E]</h4>
 You can shift the drawing as a whole by selecting the "Fix ref" checkbox in the sketch reference dialog. Then in "move/zoom" mode the drawing can be shifted by dragging it with two fingers.<br><p>
+
+
+<h4>PROFILE FLIP [E]</h4>
+When viewing the profile, a long tap on the "Plan/Profile" button opens a confirmation dialog to flip the profile sketch horizontally. The dialog has a checkbox to reverse the extend direction of the shots as well. This is enabled by default. Only the shots included in the data reduction for the sketch are reversed. Therefore if you want to reverse only a portion of the shots you should first set station "barriers" to limit the extent of the data reduction.<br><p>
 
 <hr>
 <i>To start drawing select the <b>draw</b> mode (green pencil button) and trace lines with your finger. If you make a mistake you can cancel the whole line with the <u>undo</u> button, or switch to the <u>erase</u> mode.  The drawing is saved in a pair of <i>Therion</i> files when you exit the sketch window. Each cross-section is saved in a single separate Therion file.</i>

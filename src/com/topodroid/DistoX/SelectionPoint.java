@@ -41,6 +41,11 @@ class SelectionPoint
   // DRAWING_PATH_LINE    = 5;
   // DRAWING_PATH_AREA    = 6;
   // DRAWING_PATH_NAME    = 7; // station name
+  // DRAWING_PATH_NORTH   = 8
+
+  boolean isReferenceType() { return DrawingPath.isReferenceType( mItem.mType ); }
+
+  boolean isDrawingType() { return DrawingPath.isDrawingType( mItem.mType ); }
 
   SelectionPoint( DrawingPath it, LinePoint pt )
   {

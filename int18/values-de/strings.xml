@@ -152,6 +152,7 @@
     <string name="loop_closure_errors">Kreisschlussfehler</string>
     <string name="loop_none">Kein Kreis</string>
     <string name="line_delete">Linie löschern</string>
+    <!-- TODO string name="flip_shots">Flip shots</string -->
 
 <!-- INPUT FIELDS ERROR STRINGS: BAD VALUE or MISSING VALUE -->
     <string name="error_azimuth_required">Azimut erforderlich</string>
@@ -594,6 +595,7 @@
     <string name="title_photo">Foto/Messungen</string>
     <string name="title_photo_comment">Foto Kommentar</string>
     <string name="title_plot_save">Skizze Speichern als</string>
+    <!-- TODO string name="title_profile_flip">Flip profile sketch ?</string -->
     <string name="title_refs">Skizze Referenzen</string>
     <string name="title_scraps">Skizzen</string>
     <string name="title_shift">Verschieben</string>

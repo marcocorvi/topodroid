@@ -44,6 +44,16 @@ public class DrawingPointLinePath extends DrawingPath
 
   int size() { return mSize; }
 
+  @Override
+  void flipXAxis()
+  {
+    super.flipXAxis();
+    for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
+      lp.flipXAxis();
+    }
+    retracePath();
+  }
+
   void recount() // throws Exception
   {
     if ( mFirst == null ) {
