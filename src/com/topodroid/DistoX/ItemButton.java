@@ -32,8 +32,8 @@ class ItemButton extends Button
     super(context);
     setBackgroundColor( Color.BLACK );
     setPadding(5, 5, 5, 5 );
-    setMinimumWidth( 60 );
-    setMinimumHeight( 40 );
+    setMinimumWidth( (int)(40*sx) );
+    setMinimumHeight( (int)(30*sy) );
     mPaint = paint;
     resetPath( path, sx, sy );
   }
@@ -44,7 +44,7 @@ class ItemButton extends Button
     Matrix m = new Matrix();
     m.postScale( sx, sy );
     mPath.transform( m );
-    mPath.offset( 30, 20 );
+    mPath.offset( 20*sx, 15*sy );
   }
 
   public void onDraw(Canvas canvas) 

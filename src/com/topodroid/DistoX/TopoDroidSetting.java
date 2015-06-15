@@ -143,6 +143,12 @@ class TopoDroidSetting
   static int mStationNames = 0;          // type of station names (0: alpha, 1: number)
   static boolean mZoomControls = false;
 
+  static void setZoomControls( boolean ctrl )
+  {
+    mZoomControls = ctrl;
+    // FIXME forward setting to DrawingActivity
+  }
+
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
 
@@ -603,7 +609,7 @@ class TopoDroidSetting
 
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
 
-    mZoomControls =  prefs.getBoolean( key[k++], false ); // DISTOX_ZOOM_CONTROLS
+    setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -924,7 +930,7 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mZoomControls = prefs.getBoolean( k, false ); // DISTOX_ZOOM_CONTROLS
+      setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

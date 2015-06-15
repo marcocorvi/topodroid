@@ -83,6 +83,7 @@ public class TopoDroidPreferences extends PreferenceActivity
       addPreferencesFromResource(R.xml.preferences_survey);
     } else if (mPrefCategory == PREF_CATEGORY_PLOT ) {
       addPreferencesFromResource(R.xml.preferences_plot);
+      // TODO handle ZOOM_CONTROLS separatedly
     } else if (mPrefCategory == PREF_CATEGORY_CALIB ) {
       addPreferencesFromResource(R.xml.preferences_calib);
     } else if (mPrefCategory == PREF_CATEGORY_DEVICE ) {

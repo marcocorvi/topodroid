@@ -43,8 +43,8 @@ class ItemSymbol
   TextView     mTextView = null;
   LinearLayout mView;
   SymbolInterface mSymbol;
-  float sx = 1.0f;
-  float sy = 1.0f;
+  float sx = TopoDroidSetting.mUnit;
+  float sy = TopoDroidSetting.mUnit;
   boolean mUseText;
 
   // private Context mContext;
@@ -59,8 +59,8 @@ class ItemSymbol
     if ( mType == DrawingActivity.SYMBOL_POINT ) {
       sx *= 1.5f; // 2.0f;
       sy *= 1.5f; // 2.0f;
-    } else if ( mType == DrawingActivity.SYMBOL_AREA ) {
-      sx *= 2.5f;
+    } else { // if ( mType == DrawingActivity.SYMBOL_AREA ) 
+      sx *= 2.2f;
       sy *= 1.7f;
     }
     // Log.v( TopoDroidApp.TAG, "Item " + mType + "/" + mIndex + " " + mSymbol.getName() );
@@ -153,7 +153,7 @@ class ItemSymbol
     if ( mUseText ) {
       mCheckBox.setChecked( checked );
     } else {
-      mButton.setBackgroundColor( checked? Color.GRAY : Color.BLACK );
+      mButton.setBackgroundColor( checked? 0x99333333 /* Color.DKGRAY */ : Color.BLACK );
     }
   }
 

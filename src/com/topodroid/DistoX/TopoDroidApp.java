@@ -185,7 +185,7 @@ public class TopoDroidApp extends Application
 
   static SurveyActivity mSurveyActivity = null;
   static ShotActivity mShotActivity     = null;
-  static DrawingActivity mDrawingActivity = null;
+  // static DrawingActivity mDrawingActivity = null; // FIXME currently not used
   TopoDroidActivity mActivity = null; 
 
   // static final int DISTO_NONE = 0;  // supported Disto types
