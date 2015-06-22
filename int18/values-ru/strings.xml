@@ -137,7 +137,7 @@
     <string name="loop_closure_errors">Ошибки закрытия петли</string>
     <string name="loop_none">нет петли</string>
     <!-- OK string name="line_delete">Удалить линию</string -->
-    <!-- TODO string name="flip_shots">Flip shots</string -->
+    <string name="flip_shots">Развернуть пикеты</string>
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длинна</string>
@@ -613,7 +613,7 @@
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_plot_save">Сохранить абрис как</string>
-    <!-- TODO string name="title_profile_flip">Flip profile sketch ?</string -->
+    <string name="title_profile_flip">Развернуть разрез ?</string>
     <string name="title_refs">Привязки абриса</string>
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_shift">Сдвиг</string>
