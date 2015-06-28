@@ -116,9 +116,11 @@ public class DistoXStationName
 
   static boolean listHasName( List<DistoXDBlock> list, String name )
   {
-    for ( DistoXDBlock b : list ) {
-      if ( b.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
-      if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
+    if ( name != null ) {
+      for ( DistoXDBlock b : list ) {
+        if ( b.mType != DistoXDBlock.BLOCK_MAIN_LEG ) continue;
+        if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
+      }
     }
     return false;
   }

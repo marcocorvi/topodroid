@@ -112,7 +112,9 @@ class DistoXNum
 
   boolean isBarrier( String b )
   {
-    for ( int k=0; k<mBarrier.length; ++k ) if ( b.equals( mBarrier[k] ) ) return true;
+    if ( b != null ) {
+      for ( int k=0; k<mBarrier.length; ++k ) if ( b.equals( mBarrier[k] ) ) return true;
+    }
     return false;
   }
 
@@ -185,14 +187,15 @@ class DistoXNum
   // FIXME use hashmap
   NumStation getStation( String id ) 
   {
-    for (NumStation st : mStations ) {
-      if ( id.equals(st.name) ) { return st; }
+    if ( id != null ) {
+      for (NumStation st : mStations ) if ( id.equals(st.name) ) return st;
     }
     return null;
   }
 
   NumShot getShot( String s1, String s2 )
   {
+    if ( s1 == null || s2 == null ) return null;
     for (NumShot sh : mShots ) {
       if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) return sh;
       if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) return sh;
@@ -584,6 +587,7 @@ class DistoXNum
       // (1) check if ts0 has siblings
       String from = ts0.from;
       String to   = ts0.to;
+      // if ( from == null || to == null ) continue; // FIXME
       TmpShot ts1 = ts0;
       ts0.backshot = 0;
       for ( int j=i+1; j < tmpshots.size(); ++j ) {

@@ -39,7 +39,7 @@ public class DistoXDBlock
   long   mId;
   long   mSurveyId;
   // private String mName;
-  String mFrom;
+  String mFrom;    // N.B. mfrom and mTo must be not null
   String mTo;
   float mLength;   // meters
   float mBearing;  // degrees
@@ -80,6 +80,7 @@ public class DistoXDBlock
   // used by PocketTopo parser only
   public DistoXDBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
   {
+    // assert( f != null && t != null );
     mView = null; // view is set by the DistoXDBlockAdapter
     mVisible = View.VISIBLE;
     mId = 0;

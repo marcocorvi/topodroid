@@ -2433,6 +2433,7 @@ public class DataHelper extends DataSetObservable
    // public String getPlotFieldAsString( long sid, long pid, String field )
    // {
    //   String ret = null;
+   //   if ( field == null ) return ret;
    //   // if ( myDB == null ) return ret;
    //   Cursor cursor = myDB.query( PLOT_TABLE, new String[] { field },
    //                        "surveyId=? and id=?", 
@@ -3345,7 +3346,8 @@ public class DataHelper extends DataSetObservable
      }
    }
 
-   private int pos, len;
+   private int pos,  // string position
+               len;  // string length
 
    private void skipSpaces( String val )
    {
@@ -3365,6 +3367,8 @@ public class DataHelper extends DataSetObservable
      return next;
    }
 
+   // return the position of next comma or space
+   // the return value is guaranteed >= pos
    private int nextCommaOrSpace( String val )
    {
      int next = pos;
@@ -3388,7 +3392,7 @@ public class DataHelper extends DataSetObservable
      long ret = -1;
      int next_pos = nextCommaOrSpace( val );
      // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "longValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
-     String toParse = val.substring( pos, next_pos );
+     String toParse = val.substring( pos, next_pos ); // N.B. next_pos >= pos --> toParse != null
      if ( ! toParse.equals("\"null\"") ) {
        try {
          ret = Long.parseLong( val.substring( pos, next_pos ) );
@@ -3431,13 +3435,14 @@ public class DataHelper extends DataSetObservable
        // first line is survey
        line = br.readLine();
        // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile: " + line );
-       String[] vals = line.split(" ", 4);
+       String[] vals = line.split(" ", 4); 
+       // if ( vals.length != 4 ) { TODO } // FIXME
        String table = vals[2];
        String v = vals[3];
        pos = v.indexOf( '(' ) + 1;
        len = v.lastIndexOf( ')' );
        skipSpaces( v );
-       if ( table.equals(SURVEY_TABLE) ) {
+       if ( table.equals(SURVEY_TABLE) ) { 
          long skip_sid = longValue( v );
          name          = stringValue( v );
          String day    = stringValue( v );

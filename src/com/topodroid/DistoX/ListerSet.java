@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-import android.util.Log;
+// import android.util.Log;
 
 public class ListerSet
 {
@@ -28,7 +28,7 @@ public class ListerSet
 
   void updateList( DistoXDBlock blk ) 
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister updateBlock " + size() );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister updateBlock " + size() );
     for ( ILister lister : mLister ) lister.updateBlockList( blk );
   }
 
@@ -47,13 +47,13 @@ public class ListerSet
 
   void setConnectionStatus( int status )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister set conn. status " + size() + " " + status );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister set conn. status " + size() + " " + status );
     for ( ILister lister : mLister ) lister.setConnectionStatus( status );
   }
 
   void refreshDisplay( int r, boolean b )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister refresh display " + size() + " R " + r + " " + b );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister refresh display " + size() + " R " + r + " " + b );
     for ( ILister lister : mLister ) lister.refreshDisplay( r, b );
   }
 

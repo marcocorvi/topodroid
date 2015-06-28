@@ -1022,6 +1022,7 @@ public class ShotActivity extends Activity
     String shots = mApp.mData.getValue( "DISTOX_SHOTS" );
     if ( shots != null ) {
       String[] vals = shots.split( " " );
+      // FIXME assert( vals.length > 3 );
       mSplay  = vals[0].equals("1");
       mLeg    = vals[1].equals("1");
       mBlank  = vals[2].equals("1");

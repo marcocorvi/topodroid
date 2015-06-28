@@ -204,7 +204,7 @@ public class DrawingShotDialog extends Dialog
         String to   = mETto.getText().toString().trim();
         String comment = mETcomment.getText().toString().trim();
 
-        if ( ! from.equals( mBlock.mFrom ) || ! to.equals( mBlock.mTo ) ) {
+        if ( ! from.equals( mBlock.mFrom ) || ! to.equals( mBlock.mTo ) ) { // FIXME revert equals
           mActivity.updateBlockName( mBlock, from, to );
         }
 

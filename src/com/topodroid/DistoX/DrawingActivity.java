@@ -1289,6 +1289,7 @@ public class DrawingActivity extends ItemDrawer
     {
       // if ( mFullName2 == null ) return; // nothing for PLOT_SECTION or PLOT_H_SECTION
       if ( isSection() )  return;
+      // FIXME if ( from == null || to == null ) return;
 
       if ( ( ( block.mFrom == null && from == null ) || block.mFrom.equals(from) ) && 
            ( ( block.mTo == null && to == null ) || block.mTo.equals(to) ) ) return;
@@ -2021,7 +2022,7 @@ public class DrawingActivity extends ItemDrawer
         String[] barrier = view.split( " " );
         int k = 0;
         for (; k < barrier.length; ++k ) {
-          if ( barrier[k].equals( name ) ) {
+          if ( barrier[k].equals( name ) ) { // N.B. barrier[k] != null
             drop = true;
           } else {
             new_view = new_view + " " + barrier[k];
@@ -2785,6 +2786,7 @@ public class DrawingActivity extends ItemDrawer
         public ExportToFile( Context context, Handler handler, DrawingCommandManager command,
                              DistoXNum num, long type, String name, String ext )
         {
+           // FIXME assert( ext != null );
            mContext  = context;
            mCommand  = command;
            mNum = num;

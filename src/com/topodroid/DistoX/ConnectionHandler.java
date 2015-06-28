@@ -176,7 +176,7 @@ class ConnectionHandler extends Handler
    void disconnect( BluetoothDevice device )
    {
      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler disconnect() ");
-     // if ( device.getName().equals( mDevice.getName() ) {
+     // if ( device.getName() != null && device.getName().equals( mDevice.getName() ) {
        stopSendThread();
        mSyncService.disconnect();
        mDevice = null;
@@ -186,7 +186,7 @@ class ConnectionHandler extends Handler
    void syncDevice( BluetoothDevice device )
    {
      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler syncDevice() ");
-     // if ( device.getName().equals( mDevice.getName() ) {
+     // if ( device.getName() != null && device.getName().equals( mDevice.getName() ) {
        doSyncCounter();
      // }
    }
@@ -314,7 +314,7 @@ class ConnectionHandler extends Handler
 
      switch ( key ) {
        case DataListener.SURVEY_SET:
-         if ( ! data[0].equals( mApp.mySurvey ) ) {
+         if ( ! data[0].equals( mApp.mySurvey ) ) { // N.B. data[0] not null
            mSID = mApp.setSurveyFromName( data[0], false );
          } else {
            mSID = mApp.mSID;

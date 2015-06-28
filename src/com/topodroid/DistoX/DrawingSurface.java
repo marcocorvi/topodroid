@@ -573,13 +573,16 @@ public class DrawingSurface extends SurfaceView
 
           // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line: >>" + line + "<<");
           String[] vals = line.split( " " );
+          // FIXME assert( vals.length > 0 );
           if ( vals[0].equals( "scrap" ) ) {
+            // FIXME assert( vals.length > 3 );
             // String name = vals[1];
             // skip "-projection" vals[2]
             String type = vals[3];
             is_not_section = ! type.equals("none");
           } else if ( vals[0].equals( "point" ) ) {
             // ****** THERION POINT **********************************
+            // FIXME assert( vals.length > 3 );
             int ptType = DrawingBrushPaths.mPointLib.mAnyPointNr;
             boolean has_orientation = false;
             float orientation = 0.0f;
@@ -620,6 +623,7 @@ public class DrawingSurface extends SurfaceView
                 }
                 k += 2;
               } else if ( vals[k].equals( "-scale" ) ) {
+                // FIXME assert (vals.length > k+1 );
                 if ( vals[k+1].equals("xs") ) {
                   scale = DrawingPointPath.SCALE_XS;
                 } else if ( vals[k+1].equals("s") ) {
@@ -631,6 +635,7 @@ public class DrawingSurface extends SurfaceView
                 } 
                 k += 2;
               } else if ( vals[k].equals( "-text" ) ) {
+                // FIXME assert (vals.length > k+1 );
                 label_text = vals[k+1];
                 k += 2;
                 if ( label_text.startsWith( "\"" ) ) {
@@ -700,6 +705,7 @@ public class DrawingSurface extends SurfaceView
 
           } else if ( vals[0].equals( "line" ) ) {
             // ********* THERION LINES ************************************************************
+            // FIXME assert( vals.length > 1 );
             if ( vals.length >= 6 && vals[1].equals( "border" ) && vals[2].equals( "-id" ) ) { // THERION AREAS
               boolean visible = true;
               // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "area id " + vals[3] );
@@ -781,6 +787,7 @@ public class DrawingSurface extends SurfaceView
                 }
               }
             } else { // ********* regular lines
+              // FIXME assert (vals.length > 1 );
               // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "line type " + vals[1] );
               boolean closed = false;
               boolean reversed = false;

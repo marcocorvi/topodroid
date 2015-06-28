@@ -389,6 +389,7 @@ public class DistoXComm
    */
   private void createSocket( String address, int port )
   {
+    if ( address == null ) return;
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() addr " + address + " mAddress " + mAddress);
     if ( mProtocol == null || ! address.equals( mAddress ) ) {
       if ( mProtocol != null && ! address.equals( mAddress ) ) {

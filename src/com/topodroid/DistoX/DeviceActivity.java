@@ -256,7 +256,9 @@ public class DeviceActivity extends Activity
           Device dev = mApp.mData.getDevice( addr );
           if ( dev == null ) {
             String model = device.getName();
-            if ( model.startsWith( "DistoX", 0 ) ) {
+            if ( model == null ) {
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "WARNING. Null name for device " + addr );
+            } else if ( model.startsWith( "DistoX", 0 ) ) {
               String name  = Device.modelToName( model );
               mApp.mData.insertDevice( addr, model, name );
               dev = mApp.mData.getDevice( addr );
@@ -332,6 +334,7 @@ public class DeviceActivity extends Activity
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String[] vals = item.toString().split(" ", 3 );
+      // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
       String address = vals[2]; // buf.substring(k+1);
       if ( mDevice == null || ! ( address.equals( mDevice.mAddress ) || address.equals( mDevice.mNickname ) ) ) {
@@ -616,7 +619,7 @@ public class DeviceActivity extends Activity
           TopoDroidLog.Log(TopoDroidLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "onActivityResult REQUEST_DEVICE: null address");
-          } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) {
+          } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true );
             Toast.makeText(this, R.string.device_pairing, Toast.LENGTH_LONG).show();
             mApp.setDevice( address );

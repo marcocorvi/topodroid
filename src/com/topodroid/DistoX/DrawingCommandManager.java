@@ -901,13 +901,14 @@ public class DrawingCommandManager
 
   boolean hasStationName( String name )
   {
+    if ( name == null ) return false;
     synchronized( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
       while ( i.hasNext() ){
         final DrawingPath p = (DrawingPath) i.next();
         if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
           DrawingStationPath sp = (DrawingStationPath)p;
-          if ( sp.mName.equals( name ) ) return true;
+          if ( name.equals( sp.mName ) ) return true;
         }
       }
     }

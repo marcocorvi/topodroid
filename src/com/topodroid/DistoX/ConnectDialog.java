@@ -66,7 +66,7 @@ public class ConnectDialog extends Dialog
   private Context mContext;
   private TopoDroidApp mApp;
 
-  private String mName;
+  private String mName = null;
   Set<BluetoothDevice> mDevices;
 
   // void setButtons( int state ) 
@@ -182,7 +182,7 @@ public class ConnectDialog extends Dialog
   {
     // Log.v("DistoX", "connectDevice state " + mApp.getConnectionStateStr() );
     for ( BluetoothDevice device : mDevices ) {
-      if ( mName.equals( device.getName() ) ) {
+      if ( mName != null && mName.equals( device.getName() ) ) {
         mApp.connectRemoteTopoDroid( device );
         break;
       }
@@ -195,7 +195,7 @@ public class ConnectDialog extends Dialog
     // Let the user choose which device to disconnect from
     // if ( mName == null ) return false; // <-- mName != null is guaranteed
     for ( BluetoothDevice device : mDevices ) {
-      if ( mName.equals( device.getName() ) ) {
+      if ( mName != null && mName.equals( device.getName() ) ) {
         // Log.v("DistoX", "disconnectDevice " + mName );
         mApp.disconnectRemoteTopoDroid( device );
         return true;
@@ -207,7 +207,7 @@ public class ConnectDialog extends Dialog
   private void syncDevice()
   {
     for ( BluetoothDevice device : mDevices ) {
-      if ( mName.equals( device.getName() ) ) {
+      if ( mName != null && mName.equals( device.getName() ) ) {
         // Log.v("DistoX", "syncDevice " + mName );
         mApp.syncRemoteTopoDroid( device );
       }
