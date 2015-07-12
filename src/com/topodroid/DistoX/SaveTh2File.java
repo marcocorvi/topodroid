@@ -38,7 +38,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
 
     public SaveTh2File( Context context, Handler handler,
                         TopoDroidApp app, DrawingSurface surface, 
-                        String fullname1, /* String fullname2, */ long type )
+                        String fullname1, long type )
     {
        mContext  = context;
        mHandler  = handler;
@@ -47,8 +47,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
        mFullName1 = fullname1;
        // mFullName2 = fullname2;
        mType = (int)type;
-       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveTh2File " + mFilename1 + " " + mFilename2 );
-       Log.v( "DistoX", "SaveTh2File " + mFullName1 + " type " + mType );
+       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveTh2File " + mFullName1 + " type " + mType );
     }
 
     private void rotateBackups( String filename )

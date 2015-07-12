@@ -76,6 +76,37 @@ public class DrawingCommandManager
 
   private Matrix mMatrix;
 
+  // void checkLines()
+  // {
+  //   synchronized( mCurrentStack ) {
+  //     int size = mCurrentStack.size();
+  //     for ( int i1 = 0; i1 < size; ++i1 ) {
+  //       DrawingPath path1 = mCurrentStack.get( i1 );
+  //       if ( path1.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+  //       DrawingLinePath line1 = (DrawingLinePath)path1;
+  //       for ( int i2 = i1+1; i2 < size; ++i2 ) {
+  //         DrawingPath path2 = mCurrentStack.get( i2 );
+  //         if ( path2.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+  //         DrawingLinePath line2 = (DrawingLinePath)path2;
+  //         if ( line1.overlap( line2 ) > 1 ) {
+  //           Log.v("DistoX", "LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
+  //           // for ( int i=0; i<size; ++i ) {
+  //           //   DrawingPath path = mCurrentStack.get( i );
+  //           //   if ( path.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+  //           //   DrawingLinePath line = (DrawingLinePath)path;
+  //           //   line.dump();
+  //           // }
+  //           Log.v("DistoX", "LINE1 ");
+  //           line1.dump();
+  //           Log.v("DistoX", "LINE2 ");
+  //           line2.dump();
+  //           throw new RuntimeException();
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
   void flipXAxis()
   {
     synchronized( mGridStack ) {
@@ -310,17 +341,15 @@ public class DrawingCommandManager
             LinePoint first = line.mFirst;
             LinePoint last  = line.mLast;
             int size = line.size();
-            // if ( size <= 2 || ( size == 3 && pt.mPoint == points.get(1) ) ) 
-            if ( size <= 2 || ( size == 3 && pt.mPoint == first.mNext ) ) 
+            if ( size <= 2 || ( size == 3 && pt.mPoint == first.mNext ) ) // 2-point line OR erase midpoint of a 3-point line 
             {
-              ret = 2;
+              ret = 2; 
               mCurrentStack.remove( path );
               synchronized( mSelection ) {
                 mSelection.removePath( path );
               }
             } 
-            // else if ( pt.mPoint == points.get(1) ) 
-            else if ( pt.mPoint == first.mNext ) 
+            else if ( pt.mPoint == first.mNext ) // erase second point of the multi-point line
             {
               ret = 3;
               // LinePoint lp = points.get(0);
@@ -333,8 +362,7 @@ public class DrawingCommandManager
               }
               line.retracePath();
             } 
-            // else if ( pt.mPoint == points.get(size-2) ) 
-            else if ( pt.mPoint == last.mPrev ) 
+            else if ( pt.mPoint == last.mPrev ) // erase second-to-last of multi-point line
             {
               ret = 4;
               // LinePoint lp = points.get(size-1);
@@ -346,9 +374,10 @@ public class DrawingCommandManager
                 mSelection.mPoints.remove( pt );        // size -2
               }
               line.retracePath();
-            } else {
+            } else { // erase a point in the middle of multi-point line
               ret = 5;
               doSplitLine( line, pt.mPoint );
+              break; // IMPORTANT break the for-loop
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath)path;
@@ -376,6 +405,7 @@ public class DrawingCommandManager
         }
       }
     }
+    // checkLines();
     return ret;
   }
 
@@ -383,18 +413,30 @@ public class DrawingCommandManager
   // called only by eraseAt
   private void doSplitLine( DrawingLinePath line, LinePoint lp )
   {
+    Log.v("DistoX", "do split at " + lp.mX + " " + lp.mY );
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType );
     if ( line.splitAt( lp, line1, line2, true ) ) {
-      mCurrentStack.remove( line );
-      if ( line1.size() > 1 ) mCurrentStack.add( line1 );
-      if ( line2.size() > 1 ) mCurrentStack.add( line2 );
+      // synchronized( mCurrentStack ) // not neceessary: called in synchronized context
+      {
+        mCurrentStack.remove( line );
+        if ( line1.size() > 1 ) mCurrentStack.add( line1 );
+        if ( line2.size() > 1 ) mCurrentStack.add( line2 );
+      }
       synchronized( mSelection ) {
         mSelection.removePath( line ); 
         if ( line1.size() > 1 ) mSelection.insertLinePath( line1 );
         if ( line2.size() > 1 ) mSelection.insertLinePath( line2 );
       }
+      // Log.v("DistoX", "splitAt LINE1 ");
+      // line1.dump();
+      // Log.v("DistoX", "splitAt LINE2 ");
+      // line2.dump();
+    } else {
+      TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "FAILED splitAt " + lp.mX + " " + lp.mY );
+      // line.dump();
     }
+    // checkLines();
   }
 
   void splitLine( DrawingLinePath line, LinePoint lp )
@@ -433,6 +475,7 @@ public class DrawingCommandManager
         mSelection.insertLinePath( line2 );
       }
     }
+    // checkLines();
   }
 
   // called from synchronized( mCurrentStack )
@@ -453,6 +496,7 @@ public class DrawingCommandManager
     synchronized( mSelection ) {
       mSelection.removePoint( sp );
     }
+    // checkLines();
   }
 
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp )
@@ -475,10 +519,12 @@ public class DrawingCommandManager
           synchronized( mSelection ) {
             mSelection.removePoint( sp );
           }
+          // checkLines();
           return true;
         }
       }
     }
+    // checkLines();
     return false;
   }
 
@@ -491,6 +537,7 @@ public class DrawingCommandManager
       mSelection.removePath( path );
       clearSelected();
     }
+    // checkLines();
   }
 
   void sharpenLine( DrawingLinePath line, boolean reduce ) 
@@ -509,6 +556,7 @@ public class DrawingCommandManager
         mSelection.insertPath( line );
       }
     }
+    // checkLines();
   }
 
   // ooooooooooooooooooooooooooooooooooooooooooooooooooooo
@@ -622,6 +670,7 @@ public class DrawingCommandManager
     synchronized( mSelection ) {
       mSelection.insertPath( path );
     }
+    // checkLines();
   }
 
   // called by DrawingSurface.getBitmap()
@@ -712,6 +761,7 @@ public class DrawingCommandManager
         }
       }
     }
+    // checkLines();
     return bitmap;
   }
 
@@ -729,6 +779,7 @@ public class DrawingCommandManager
       undoCommand.undo();
       mRedoStack.add( undoCommand );
     }
+    // checkLines();
   }
 
   public int currentStackLength()
@@ -756,6 +807,7 @@ public class DrawingCommandManager
       }
     }
     if ( ret != null ) mSelection.removePath( ret );
+    // checkLines();
     return ret;
   }
         
@@ -767,6 +819,7 @@ public class DrawingCommandManager
       line0.append( line );
       mSelection.insertPath( line0 );
     }
+    // checkLines();
   }
 
 
@@ -938,6 +991,7 @@ public class DrawingCommandManager
         mSelection.insertPath( redoCommand );
       }
     }
+    // checkLines();
   }
 
   public SelectionSet getItemsAt( float x, float y, float zoom )
@@ -1450,6 +1504,7 @@ public class DrawingCommandManager
       }
       clearSelected();
     }
+    // checkLines();
     return ret;
   }
 
@@ -1470,7 +1525,7 @@ public class DrawingCommandManager
 
   public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )
   {
-    Log.v("DistoX", "export Therion");
+    // Log.v("DistoX", "export Therion");
     try { 
       out.write("encoding utf-8");
       out.newLine();
@@ -1594,6 +1649,7 @@ public class DrawingCommandManager
     } catch ( IOException e ) {
       e.printStackTrace();
     }
+    // checkLines();
   }
 
   void exportAsCsx( PrintWriter pw )

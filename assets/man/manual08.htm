@@ -1,5 +1,5 @@
 <html><body>
-<h3>[8] SURVEY DATA</h3>
+<h3>[8] SURVEY DATA WINDOW</h3>
 
 <i>Back to the main window. The list of surveys is empty, but you are finally ready for your first survey. Tap on the <u>Add</u> button (the "plus" sign). You get a dialog to specify the survey information: <u>name</u>, <u>date</u>, <u>team</u>, <u>initial</u> survey station, magnetic <u>declination</u>, and a brief <u>description</u>.</i><br><p>
 
@@ -18,12 +18,12 @@ TopoDroid differentiates among four kinds of shots:
 <li>"blank" shots, ie, shots with the stations not set yet</li>
 <li>"splay": it has only one station, usually the "From" station</li>
 <li>"leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
-<li>"repeated-leg" (the following shots of a group of leg shots): these shots do not need to have stations set</li>
+<li>"repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
 </olist><p>
 Each kind of shots is displayed with a different color: "legs" are white, "repeated-legs" grey, "splays" blue, "blank" red. Furthermore the background color is blueish for the last downloaded shots, and reddish for "unreliable" shots, ie. shots with "abnormal" field intensities (only DistoX2).</br>
 <img src="shots_list.png" alt="shots list"/><p>
 
-The "reliability" of a shot is estimated by comparing the intensities of the magnetic and gravtiational fields and the dip angle of the magnetic field with their averege values, respectively. If any of these differs from the average by more that a specified threshold, the shot is deemed "unreliable". The thresholds are among the app settings.<br><p>
+The "reliability" of a shot is estimated by comparing the intensities of the magnetic and gravitational fields and the dip angle of the magnetic field with their averege values, respectively. If any of these differs from the average by more that a specified threshold, the shot is deemed "unreliable". The thresholds are among the app settings.<br><p>
 
 <h4>MENUS</h4>
 <ulist>
@@ -41,9 +41,10 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <ulist>
 <li><u>Download</u>: it will download the data from the DistoX as in the calibration data window. If no DistoX is selected this button is hidden.</li>
 <li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
-<li><u>Display</u>: to decide the display mode (see below)</li>
-<li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in extended-profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches. A long tap on this button opens immediately the most recent sketch, without going through the sketch list dialog.</li>
+<li><u>Display</u>: to choose the display mode (see below)</li>
+<li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in extended-profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches. A long tap on the <u>Sketch</u> button opens immediately the most recent sketch, without going through the sketch list dialog.</li>
 <li><u>Notes</u> opens the dialog to edit the annotations of the survey</li>
+<li><u>Extend</u> defines how to set the "extend" for the coming shots (either downloaded or manually entered).</li>
 <li><u>Stations</u> [N]: this buttons opens the dialog for the saved stations</li>
 <li><u>Add</u> [N] adds a shot. In the coming dialog you must enter the shot stations and data (length, azimuth, and clino). You can specify also the direction of "extend", and values for LRUD. By default these are assumed at the FROM station, unless you check the box for the TO station.</li>
 </ulidt><br><p>
@@ -70,7 +71,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><i>C.R.S.</i> coordinate reference system [default is long-lat]</li>
 <li><i>Acceleration tolerance</i>: tolerance on acceleration values above which a shot is signalled anomalous (only DistoX2)</li>
 <li><i>Magnetic tolerance</i>: tolerance on magnetic field values above which a shot is signalled anomalous (only DistoX2)</li>
-<li><i>Magnetic dip tolerance</i>: tolerance on magnetic dip angle values above which a shot is signalled anomalous (only DistoX2) {units degrees]</li>
+<li><i>Magnetic dip tolerance</i>: tolerance on magnetic dip angle values above which a shot is signalled anomalous (only DistoX2) [units degrees]</li>
 </ulist><br><p>
 
 <h4>DISPLAY MODE</h4>
@@ -78,6 +79,10 @@ The "Display" button opens a dialog with choices for "shot id", "splay shots", "
 
 If the splay shots are hidden it is still possible to show the splay shots for an individual station. Tapping on the station name in a leg shot, makes the splay shots at that station visible. Tapping again on the station name (even in a splay shot) hides them.<br><p>
 
+<h4>EXTEND REFERENCE [N]</h4>
+When a new shot is downloaded TopoDroid sets its "extend" automatically. This holds also for shots entered manually, without specifying the "extend" in the shot dialog. By default the "extend" is either LEFT, RIGHT, or VERT (vertical), depending on the angle the shot makes with a reference azimuth. The "Extend Reference" dialog allows to change the reference azimuth, by rotating it clockwise or counterclockwise. Alternatively, the reference azimuth can be set using the Android compass sensors.<br><p>
+
+It is also possible to fix the "extend" for coming shots to either LEFT or RIGHT, by selecting the appropriate buttons in the dialog.<br><p>
 
 <h4>SAVED STATIONS [N]</h4>
 The "Stations" button brings up the "Saved Stations" dialog.

@@ -1588,6 +1588,7 @@ public class DrawingActivity extends ItemDrawer
           mSaveY = y_canvas;
           // return false;
         } else if ( mMode == MODE_ERASE ) {
+          // Log.v("DistoX", "Erase at " + x_scene + " " + y_scene );
           doEraseAt(  x_scene, y_scene );
         } else if ( mMode == MODE_MOVE ) {
           setTheTitle( );
@@ -2587,6 +2588,7 @@ public class DrawingActivity extends ItemDrawer
         (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
 
       } else if ( b == mButton2[k2++] ) { // UNDO
+        mModified = true;
         mDrawingSurface.undo();
         if ( mDrawingSurface.hasMoreUndo() == false ) {
           // undoBtn.setEnabled( false );

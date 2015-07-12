@@ -35,6 +35,7 @@ The remaining buttons differ by the mode. In the <b>move</b> mode they are
 <li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
 <li><u>Reference</u>: to choose which reference to display. The drawing references are the midline, the splay shots, the station names, and the metric grid.</li>
 <li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the extended profile. Profile flip (long tap) [E].</li>
+<li><u>Extend</u>: this is the same as the <u>Extend</u> button of the Survey Data window</li>
 <li><u>Notes</u>: to edit the survey annotations</li>
 </ulist><br><p>
 
@@ -98,12 +99,20 @@ The "sketch statistics dialog" displays the origin station (zero station), the s
 <li><i>PNG resolution</i>: the resolution of the PNG files for sketch exports. It can be a number between 1 and 10. The higher the bigger the image (if you set it too high the system may not have enough memory to create the PNG).</li> 
 </ulist><br><p>
 
-<h4>SHIFTING THE SKETCH [E]</h4>
+<h4>SKETCH SHIFT [E]</h4>
 You can shift the drawing as a whole by selecting the "Fix ref" checkbox in the sketch reference dialog. Then in "move/zoom" mode the drawing can be shifted by dragging it with two fingers.<br><p>
 
 
 <h4>PROFILE FLIP [E]</h4>
 When viewing the profile, a long tap on the "Plan/Profile" button opens a confirmation dialog to flip the profile sketch horizontally. The dialog has a checkbox to reverse the extend direction of the shots as well. This is enabled by default. Only the shots included in the data reduction for the sketch are reversed. Therefore if you want to reverse only a portion of the shots you should first set station "barriers" to limit the extent of the data reduction.<br><p>
+
+<h4>BACKUP COPIES</h4>
+TopoDroid keep a log of six backup copies for each sketch file. These are named with suffixes "bck", "bck0", ... "bck4" and are stored in the <i>th2</i> subdirectory. Whenever a sketch is saved the backup copies are rotated (ie, "bck3" is renamed "bck4", and so on, until "bck" is renamed "bck0"), the old "th2" file is renamed with suffix "bck", and the sketch is saved to a new "th2" file.<br><p>
+
+The sketch is saved only if you have made changes to it, otherwise it is not saved and the backup copies are not rotated.<br><p>
+
+When you need to recover a sketch you can choose which copy to load. The dialog displays the backup files and their sizes. Select the backup copy and tap the "OK" button.<br><p>
+
 
 <hr>
 <i>To start drawing select the <b>draw</b> mode (green pencil button) and trace lines with your finger. If you make a mistake you can cancel the whole line with the <u>undo</u> button, or switch to the <u>erase</u> mode.  The drawing is saved in a pair of <i>Therion</i> files when you exit the sketch window. Each cross-section is saved in a single separate Therion file.</i>
