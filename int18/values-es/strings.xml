@@ -262,7 +262,8 @@
     <string name="saving_file_failed">Fallo al guardar archivo</string>
     <string name="scrap_name">Nombre de dibujo</string>
     <string name="splay">Secundaria</string>
-<string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
+    <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
+    <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
 
     <string name="sensor">Sensor</string>
     <!-- string name="sensor_accelerometer">Acelerometro</string -->

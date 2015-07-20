@@ -263,6 +263,7 @@
     <string name="scrap_name">nome del disegno</string>
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
+    <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
 
     <string name="sensor">sensore</string>
     <!-- string name="sensor_accelerometer">accelerometro</string -->

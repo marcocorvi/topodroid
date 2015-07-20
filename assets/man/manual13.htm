@@ -33,6 +33,20 @@ The crossed leg is always displayed vertical as the cross-section has the same a
 <img src="profile-xsection.png" caption="Profile view cross section">
 <br><p>
 
+<b>At-station cross-sections</b> [E]<br>
+The "Station" dialog, that you get by tapping on a station point in <i>Edit</i> mode, displays the station coordinates
+and has two or three buttons:
+<
+<li>"Continue the survey from here" sets the station as that to which the next shot will be attached</li>
+<li>"Break midline display" marks (or unmarks) the station as a terminal point in the survey centerline data reduction</li>
+<li>"X-Section" [E] opens a sketch window to draw a cross section at the station.</li>
+</ul>
+
+If the average shot clino is smaller than the "vertical threshold", the cross section at a station is drawn in a vertical plane passing through the station, otherwise it is horizontal.
+The cross-section at a station is useful when you take several splay shots around the station to describe the shape of the gallery. 
+If there are two shots at the station the section plane is oriented along the bisectant of the angles formed by the (horizontal projections of the) shots. If there is only one shot it is oriented ortogonal to that. If there are more than two shots ToipoDroid cannot orient the section plane, and the button for the cross-section is inhibited.
+<br><p>
+
 <b>Cross-section files</b><br>
 Each cross-section is saved in a separate Therion file in the "th2" subfolder. The files get consecutive names "MySurvey-xx0.th2", "MySurvey-xx1.th2", etc. The "xx0" numbering part of the name is also displayed in the Section dialog that pops up when you create or edit a section.<br>
 The file is deleted when a cross-section is deleted.<br><p>

@@ -276,6 +276,7 @@
     <string name="scrap_name">имя абриса</string>
     <string name="splay">боковой замер</string>
     <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
+    <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
 
     <string name="sensor">датчик</string>
     <!-- OK string name="sensor_accelerometer">акселерометр</string -->

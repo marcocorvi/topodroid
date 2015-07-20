@@ -263,6 +263,7 @@
     <string name="scrap_name">Nom du croquis</string>
     <string name="splay">*splay*</string>
     <string name="too_many_leg_intersection">La ligne de section croise plus d\'une ligne de cheminement.</string>
+    <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
 
     <string name="sensor">capteur</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->

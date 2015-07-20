@@ -2712,6 +2712,7 @@ public class DataHelper extends DataSetObservable
        
   private Device getDeviceByNickname( String nickname )
   {
+    if ( myDB == null ) return null;
     Device ret = null;
     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
                                 "nickname=?", new String[] { nickname }, null, null, null );
@@ -2732,6 +2733,7 @@ public class DataHelper extends DataSetObservable
 
   private Device getDeviceByAddress( String addr )
   {
+    if ( myDB == null ) return null;
     Device ret = null;
     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
                                 "address=?", new String[] { addr }, null, null, null );

@@ -276,6 +276,7 @@
     <string name="scrap_name">Име на скица</string>
     <string name="splay">странично измервание</string>
     <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
+    <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
 
     <string name="sensor">сензор</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->

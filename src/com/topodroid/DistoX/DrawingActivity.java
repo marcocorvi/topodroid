@@ -1982,8 +1982,8 @@ public class DrawingActivity extends ItemDrawer
           if ( azimuth >= 360 ) azimuth -= 360;
           clino = ( legs.get(0).mClino + legs.get(1).mClino ) / 2;
         } else {
-          Log.v("DistoX", "X_SECTION Too many legs" );
-          // Toast
+          // Log.v("DistoX", "X_SECTION Too many legs" );
+          Toast.makeText( this, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
           return;
         }
         // if ( type == PlotInfo.PLOT_PLAN ) {

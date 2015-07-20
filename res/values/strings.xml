@@ -275,6 +275,7 @@
     <string name="scrap_name">sketch name</string>
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">Section line crosses many legs</string>
+    <string name="too_many_legs_xsection">Too many legs for X-section</string>
 
     <string name="sensor">sensor</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->

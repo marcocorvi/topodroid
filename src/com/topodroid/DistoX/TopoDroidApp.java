@@ -483,18 +483,18 @@ public class TopoDroidApp extends Application
     // } catch ( SettingNotFoundException e ) {
     // }
 
-    mDataListeners = new ArrayList< DataListener >( );
-    mData = new DataHelper( this, mDataListeners );  // DATABASE MUST COME BEFORE PREFERENCES
-
     // Log.v(TAG, "onCreate app");
     this.mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
     this.mPrefs.registerOnSharedPreferenceChangeListener( this );
 
-    TopoDroidSetting.loadPreferences( this, mPrefs );
-
     TopoDroidPath.setDefaultPaths();
     mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
     TopoDroidPath.setPaths( mCWD );
+
+    mDataListeners = new ArrayList< DataListener >( );
+    mData = new DataHelper( this, mDataListeners );  // DATABASE MUST COME BEFORE PREFERENCES
+
+    TopoDroidSetting.loadPreferences( this, mPrefs );
 
     mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
 
