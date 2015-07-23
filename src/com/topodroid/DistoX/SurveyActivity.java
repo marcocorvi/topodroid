@@ -39,8 +39,7 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 
 import android.app.Application;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.KeyEvent;
 
 import android.content.Context;
 import android.content.Intent;
@@ -599,56 +598,35 @@ public class SurveyActivity extends Activity
     mApp.mData.updateFixedStatus( fxd.id, mApp.mSID, TopoDroidApp.STATUS_DELETED );
   }
 
-  // ---------------------------------------------------------
-  /* MENU
-
-  private MenuItem mMIexport;
-  private MenuItem mMIoptions;
-  private MenuItem mMIdelete;
-  private MenuItem mMIhelp;
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) 
+  public boolean onSearchRequested()
   {
-    super.onCreateOptionsMenu( menu );
-
-    mMIexport  = menu.add( R.string.menu_export );
-    mMIdelete  = menu.add( R.string.menu_delete );
-    mMIoptions = menu.add( R.string.menu_options );
-    mMIhelp    = menu.add( R.string.menu_help  );
-
-    mMIexport.setIcon(  icons[6] );
-    mMIdelete.setIcon(  icons[7] );
-    mMIoptions.setIcon( icons[8] );
-    mMIhelp.setIcon(    icons[9] );
-
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+    startActivity( intent );
     return true;
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) 
+  public boolean onKeyDown( int code, KeyEvent event )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
-    // Handle item selection
-    Intent intent;
-    if ( item == mMIoptions ) { // OPTIONS DIALOG
-      intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-      startActivity( intent );
-    } else if ( item == mMIexport  ) { // EXPORT
-      new SurveyExportDialog( this, this ).show();
-    } else if ( item == mMIdelete  ) { // DELETE DIALOG
-      askDelete();
-    } else if ( item == mMIhelp  ) { // HELP DIALOG
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
-    } else {
-      return super.onOptionsItemSelected(item);
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
     }
-    return true;
+    return false;
   }
-
-  */
-
+  // ---------------------------------------------------------
 
   private void setMenuAdapter()
   {

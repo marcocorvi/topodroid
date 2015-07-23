@@ -42,6 +42,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -781,46 +782,36 @@ public class GMActivity extends Activity
     updateDisplay( );
   }
 
-  // ---------------------------------------------------------
-  /* MENU
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) 
+  public boolean onSearchRequested()
   {
-    super.onCreateOptionsMenu( menu );
-
-    mMIoptions = menu.add( R.string.menu_options );
-    mMIdisplay = menu.add( R.string.menu_display );
-    mMIhelp    = menu.add( R.string.menu_help  );
-
-    mMIoptions.setIcon( R.drawable.ic_pref );
-    mMIdisplay.setIcon( R.drawable.ic_logs );
-    mMIhelp.setIcon( R.drawable.ic_help );
-
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
+    startActivity( intent );
     return true;
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) 
+  public boolean onKeyDown( int code, KeyEvent event )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
-    // Handle item selection
-    if ( item == mMIoptions ) { // OPTIONS DIALOG
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
-      startActivity( intent );
-    } else if ( item == mMIdisplay  ) { // DISPLAY
-      mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
-      updateDisplay( );
-    } else if ( item == mMIhelp  ) { // HELP DIALOG
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 3 ) ).show();
-    } else {
-      return super.onOptionsItemSelected(item);
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
     }
-    return true;
+    return false;
   }
 
-  */
+  // ---------------------------------------------------------
 
   private void setMenuAdapter()
   {

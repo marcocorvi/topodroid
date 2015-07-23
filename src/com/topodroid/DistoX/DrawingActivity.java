@@ -33,6 +33,7 @@ import android.os.Message;
 // import android.view.Menu;
 // import android.view.SubMenu;
 // import android.view.MenuItem;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -3017,6 +3018,35 @@ public class DrawingActivity extends ItemDrawer
     // mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload );
     // recomputing the whole reference is inefficient: an incremental data reduction would be more efficient
     updateDisplay( true );
+  }
+
+
+  @Override
+  public boolean onSearchRequested()
+  {
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
+    startActivity( intent );
+    return true;
+  }
+
+  @Override
+  public boolean onKeyDown( int code, KeyEvent event )
+  {
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+    }
+    return false;
   }
 
   // ---------------------------------------------------------

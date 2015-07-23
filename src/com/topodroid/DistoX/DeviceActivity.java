@@ -34,14 +34,12 @@ import android.widget.ListView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.view.View;
+import android.view.KeyEvent;
 // import android.widget.RadioGroup;
 // import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-
-import android.view.Menu;
-import android.view.MenuItem;
 
 import android.widget.Toast;
 
@@ -647,73 +645,35 @@ public class DeviceActivity extends Activity
     }
   }
 
-  // ---------------------------------------------------------
-  /* MENU
-
-  private MenuItem mMIscan;
-  private MenuItem mMIdetach;
-  private MenuItem mMIcalibs = null;
-  private MenuItem mMIfirmware = null;
-  private MenuItem mMIoptions;
-  private MenuItem mMIhelp;
-
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) 
+  public boolean onSearchRequested()
   {
-    super.onCreateOptionsMenu( menu );
-
-    mMIscan    = menu.add( R.string.menu_scan );
-    mMIdetach  = menu.add( R.string.menu_detach );
-    if ( mApp.VERSION30 ) mMIcalibs  = menu.add( R.string.title_calib );
-    if ( mApp.mBootloader ) mMIfirmware = menu.add( R.string.menu_firmware );
-    mMIoptions = menu.add( R.string.menu_options );
-    mMIhelp    = menu.add( R.string.menu_help  );
-
-    mMIscan.setIcon(    icons[6] );
-    mMIdetach.setIcon(  icons[7] );
-    if ( mApp.VERSION30 ) mMIcalibs.setIcon(  icons[8] );
-    if ( mApp.mBootloader ) mMIfirmware.setIcon( icons[9] );
-    mMIoptions.setIcon( icons[10] );
-    mMIhelp.setIcon(    icons[11] );
-
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
+    startActivity( intent );
     return true;
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) 
+  public boolean onKeyDown( int code, KeyEvent event )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
-    // Handle item selection
-    if ( item == mMIoptions ) {         // OPTIONS DIALOG
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
-      startActivity( intent );
-    } else if ( item == mMIdetach  ) {  // DETACH DEVICE
-      detachDevice();
-    } else if ( mApp.VERSION30 && item == mMIcalibs  ) {  // CALIBRATIONS
-      if ( mApp.mDevice == null ) {
-        Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
-      } else {
-        // List<String> calibs = mApp.mData.selectDeviceCalibs( mApp.mDevice.mAddress );
-        // Log.v("DistoX", "calibs " + calibs.size() );
-        (new CalibListDialog( this, this, mApp )).show();
-      }
-    } else if ( item == mMIscan ) {     // SCAN
-      Intent scanIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceList.class );
-      scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
-      startActivityForResult( scanIntent, REQUEST_DEVICE );
-      Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
-    } else if ( item == mMIhelp  ) {    // HELP DIALOG
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
-    } else if ( item == mMIfirmware ) { // FIRMWARE
-      (new FirmwareDialog( this, this, mApp )).show();
-    } else {
-      return super.onOptionsItemSelected(item);
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
     }
-    return true;
+    return false;
   }
 
-  */
+  // ---------------------------------------------------------
 
   private void setMenuAdapter()
   {

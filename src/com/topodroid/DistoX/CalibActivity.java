@@ -31,8 +31,6 @@ import android.widget.RadioButton;
 import android.view.View;
 
 import android.app.Application;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +39,8 @@ import android.content.res.Resources;
 import android.widget.Toast;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.KeyEvent;
+
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -98,11 +98,6 @@ public class CalibActivity extends Activity
   private RadioButton mCBAlgoAuto;
   private RadioButton mCBAlgoLinear;
   private RadioButton mCBAlgoNonLinear;
-
-  private MenuItem mMIexport;
-  private MenuItem mMIdelete;
-  private MenuItem mMIoptions;
-  private MenuItem mMIhelp;
 
   private TopoDroidApp mApp;
   private boolean isSaved;
@@ -379,57 +374,35 @@ public class CalibActivity extends Activity
     finish();
   }
 
-  // ---------------------------------------------------------
-  /* MENU
-
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) 
+  public boolean onSearchRequested()
   {
-    super.onCreateOptionsMenu( menu );
-
-    mMIexport  = menu.add( R.string.menu_export );
-    mMIdelete  = menu.add( R.string.menu_delete );
-    mMIoptions = menu.add( R.string.menu_options );
-    mMIhelp    = menu.add( R.string.menu_help  );
-
-    mMIexport.setIcon(  icons[3] );
-    mMIdelete.setIcon(  icons[4] );
-    mMIoptions.setIcon( icons[5] );
-    mMIhelp.setIcon(    icons[6] );
-
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
+    startActivity( intent );
     return true;
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) 
+  public boolean onKeyDown( int code, KeyEvent event )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
-    // Handle item selection
-    if ( item == mMIoptions ) { // OPTIONS DIALOG
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
-      startActivity( intent );
-    } else if ( item == mMIexport  ) { // EXPORT
-      if ( mApp.myCalib != null ) {
-        new CalibExportDialog( this, this ).show();
-      } else {
-        // TODO Toast
-      }
-    } else if ( item == mMIdelete  ) { // DELETE DIALOG
-      if ( mApp.myCalib != null ) {
-        askDelete();
-      } else {
-        // TODO Toast
-      }
-    } else if ( item == mMIhelp  ) { // HELP DIALOG
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
-    } else {
-      return super.onOptionsItemSelected(item);
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
     }
-    return true;
+    return false;
   }
 
-  */
+  // ---------------------------------------------------------
 
   private void setMenuAdapter()
   {

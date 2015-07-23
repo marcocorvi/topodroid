@@ -69,6 +69,7 @@ import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
+import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -988,16 +989,6 @@ public class TopoDroidActivity extends Activity
     doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
     doubleBackToast.show();
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
-    
-    // new TopoDroidAlertDialog( this, getResources(),
-    //                           getResources().getString( R.string.ask_close ),
-    //   new DialogInterface.OnClickListener() {
-    //     @Override
-    //     public void onClick( DialogInterface dialog, int btn ) {
-    //       finish(); // doClose()
-    //     }
-    //   }
-    // );
   }
 
   // ------------------------------------------------------------------
@@ -1025,6 +1016,34 @@ public class TopoDroidActivity extends Activity
 
     }
     // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onActivityResult() done " );
+  }
+
+  @Override
+  public boolean onSearchRequested()
+  {
+    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+    startActivity( intent );
+    return true;
+  }
+
+  @Override
+  public boolean onKeyDown( int code, KeyEvent event )
+  {
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+    }
+    return false;
   }
 
   // ---------------------------------------------------------------

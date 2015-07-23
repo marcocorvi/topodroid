@@ -38,6 +38,7 @@ import android.widget.LinearLayout;
 import android.view.ViewGroup;
 import android.view.Display;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 // import android.view.ContextMenu;
 // import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
@@ -863,6 +864,34 @@ public class OverviewActivity extends ItemDrawer
       }
     }
 
+
+  @Override
+  public boolean onSearchRequested()
+  {
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
+    startActivity( intent );
+    return true;
+  }
+
+  @Override
+  public boolean onKeyDown( int code, KeyEvent event )
+  {
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+    }
+    return false;
+  }
 
 
   private void setMenuAdapter()

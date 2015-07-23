@@ -69,6 +69,7 @@ import android.view.WindowManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.KeyEvent;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -1004,16 +1005,6 @@ public class ShotActivity extends Activity
     doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
     doubleBackToast.show();
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
-    
-    // new TopoDroidAlertDialog( this, getResources(),
-    //                           getResources().getString( R.string.ask_close ),
-    //   new DialogInterface.OnClickListener() {
-    //     @Override
-    //     public void onClick( DialogInterface dialog, int btn ) {
-    //       finish(); // doClose()
-    //     }
-    //   }
-    // );
   }
 
   // FIXME NOTIFY: the display mode is local - do not notify
@@ -1459,61 +1450,35 @@ public class ShotActivity extends Activity
 
   // ------------------------------------------------------------------------
 
-  // ---------------------------------------------------------
-  /* MENU
-
-  // private MenuItem mMIsymbol;
-  private MenuItem mMIsurvey;
-  private MenuItem mMIoptions;
-  private MenuItem mMIhelp;
-
-
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) 
+  public boolean onSearchRequested()
   {
-    super.onCreateOptionsMenu( menu );
-
-    // mMIsymbol  = menu.add( R.string.menu_palette );
-    mMIsurvey  = menu.add( R.string.menu_survey );
-    mMIoptions = menu.add( R.string.menu_options );
-    mMIhelp    = menu.add( R.string.menu_help  );
-
-    // mMIsymbol.setIcon( R.drawable.ic_symbol );
-    mMIsurvey.setIcon(  icons[14] );
-    mMIoptions.setIcon( icons[15] );
-    mMIhelp.setIcon(    icons[16] );
-
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+    startActivity( intent );
     return true;
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) 
+  public boolean onKeyDown( int code, KeyEvent event )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
-    // Handle item selection
-    // if ( item == mMIsymbol ) { 
-    //   DrawingBrushPaths.makePaths( getResources() );
-    //   (new SymbolEnableDialog( this, this )).show();
-    // } else 
-    if ( item == mMIsurvey ) { // SURVEY ACTIVITY 
-      Intent intent = new Intent( this, SurveyActivity.class );
-      intent.putExtra( TopoDroidTag.TOPODROID_SURVEY,  0 ); // mustOpen 
-      intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
-      intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
-      startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
-    } else if ( item == mMIoptions ) { // OPTIONS DIALOG
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-      startActivity( intent );
-    } else if ( item == mMIhelp  ) { // HELP DIALOG
-      int nn = mNrButton1; // + ( TopoDroidApp.mLevelOverNormal ?  mNrButton2 : 0 );
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 3 ) ).show();
-    } else {
-      return super.onOptionsItemSelected(item);
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
     }
-    return true;
+    return false;
   }
-  */
+
+  // ---------------------------------------------------------
 
   private void setMenuAdapter()
   {
