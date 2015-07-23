@@ -8,7 +8,7 @@
     android:paddingBottom="3dp">
    					  
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <TableLayout 
       android:id="@+id/layout_items"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
 
     </TableLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

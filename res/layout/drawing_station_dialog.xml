@@ -12,7 +12,7 @@
         android:layout_height="wrap_content" 
         />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
@@ -36,7 +36,7 @@
    					  
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
@@ -61,7 +61,7 @@
 
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
@@ -85,7 +85,7 @@
         />
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
@@ -107,7 +107,7 @@
         / -->
     </LinearLayout>
 
-    <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <!-- LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

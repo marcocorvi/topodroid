@@ -14,7 +14,7 @@
         android:textSize="14sp"
      />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout 
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -42,54 +42,54 @@
       android:layout_height="wrap_content" 
       />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
-      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+      <CheckBox 
         android:id="@+id/left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/extend_left" />
-      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+      <CheckBox 
         android:id="@+id/vert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/extend_vert" />
-      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+      <CheckBox 
         android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/extend_right" />
-      <!-- RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+      <!-- RadioButton 
         android:id="@+id/ignore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/extend_ignore" / -->
     </LinearLayout>
    					  
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
-      <!-- RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+      <!-- RadioButton 
         android:id="@+id/survey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/regular" / -->
-      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+      <CheckBox 
         android:id="@+id/duplicate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/duplicate" />
-      <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+      <CheckBox 
         android:id="@+id/surface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/surface" />
-      <!-- CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+      <!-- CheckBox 
         android:id="@+id/backshot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
 
     <!-- TODO comment -->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

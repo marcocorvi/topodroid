@@ -8,7 +8,7 @@
     android:paddingBottom="3dp">
 
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android" 
+    <RadioGroup 
       android:id="@+id/sketch_mode"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
           />
     </RadioGroup>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

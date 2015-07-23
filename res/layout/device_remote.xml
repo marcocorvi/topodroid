@@ -27,7 +27,7 @@
         android:text="@string/remote_off"
         />
 
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dip"
@@ -62,7 +62,7 @@
         android:text="@string/remote_reset"
         />
 
-    <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    <!-- LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

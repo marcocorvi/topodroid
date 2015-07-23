@@ -5,17 +5,17 @@
   android:orientation="horizontal"
   android:background="#ff000000"
   >
-  <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+  <CheckBox 
     android:id="@+id/symbol_chek"
     android:layout_width="60dip"
     android:layout_height="14dip"
     />
-  <!-- Button xmlns:android="http://schemas.android.com/apk/res/android"
+  <!-- Button 
     android:id="@+id/item_button"
     android:layout_width="60dip"
     android:layout_height="14dip"
     / -->
-  <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  <TextView 
     android:id="@+id/symbol_text"
     android:layout_width="60dip"
     android:layout_height="14dip"
