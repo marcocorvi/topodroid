@@ -579,6 +579,7 @@
     <string name="title_calib">Kalibrierung</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Gespeichert Messpunkten</string>
     <string name="title_device">DistoX Geräte</string>
     <string name="title_discover">DistoX Geräte finden ... warten</string>

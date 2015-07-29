@@ -86,12 +86,15 @@ public class DistoXLocation extends Dialog
   private GpsStatus mStatus;
   private boolean mLocating; // whether is locating
 
+  // MyKeyboard mKeyboard;
+
   public DistoXLocation( Context context, SurveyActivity parent, TopoDroidApp app, LocationManager lm )
   {
     super(context);
     mContext = context;
     mParent = parent;
     mApp = app;
+    // mKeyboard = ne MyKeyboard( parent );
     locManager = lm;
     mStatus = locManager.getGpsStatus( null );
     // mLocating = false;
@@ -265,7 +268,7 @@ public class DistoXLocation extends Dialog
   {
     Button b = (Button) v;
     // if ( b == mBtnCancel ) {
-    //   dismiss();
+    //   onBackPressed();
     // }
     String station = mETstation.getText().toString();
     if ( station == null || station.length() == 0 ) {
@@ -320,6 +323,8 @@ public class DistoXLocation extends Dialog
       locManager.removeGpsStatusListener( this );
       mLocating = false;
     }
+    // mKeyboard.hide();
+    // mKeyboard.dismiss();
     dismiss();
   }
 

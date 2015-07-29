@@ -37,6 +37,7 @@ import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
+import android.inputmethodservice.KeyboardView;
 import android.widget.Toast;
 
 import android.util.Log;
@@ -47,6 +48,7 @@ public class LongLatAltDialog extends Dialog
   private Context mContext;
   private DistoXLocation mParent;
 
+  private MyKeyboard mKeyboard;
   private EditText mEditLong;
   private EditText mEditLat;
   private EditText mEditAlt; // altitude
@@ -79,6 +81,12 @@ public class LongLatAltDialog extends Dialog
     mEditAlt   = (EditText) findViewById(R.id.edit_alt );
     mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
+
+    MyKeyboard.registerEditText( mKeyboard, mEditLong, MyKeyboard.FLAG_DEGREE | MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mEditLat,  MyKeyboard.FLAG_DEGREE | MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mEditAlt,  MyKeyboard.FLAG_POINT  );
+
     if ( mParent.mHasLocation ) {
       mEditLong.setText( FixedInfo.double2string( mParent.mLongitude ) );
       mEditLat.setText(  FixedInfo.double2string( mParent.mLatitude ) );
@@ -94,6 +102,8 @@ public class LongLatAltDialog extends Dialog
     mBtnOK.setOnClickListener( this );
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
     // mBtnCancel.setOnClickListener( this );
+
+    setTitle( R.string.title_coord );
   }
 
   @Override
@@ -182,7 +192,17 @@ public class LongLatAltDialog extends Dialog
 
       mParent.addFixedPoint( lng, lat, alt, asl );
     }
-    dismiss();
+    onBackPressed();
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mKeyboard.isVisible() ) {
+      mKeyboard.hide();
+    } else {
+      dismiss();
+    }
   }
 
 }

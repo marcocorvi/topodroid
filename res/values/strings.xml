@@ -128,7 +128,7 @@
     <string name="altitude">Alt. </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="altitude_hint">WGS84 alt. [meters]</string>
+    <string name="altitude_hint">Alt. [meters]</string>
     <string name="altitude_wgs84">WGS84 altitude</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
@@ -607,6 +607,7 @@
     <string name="title_calib">Calibrations</string>
     <string name="title_coverage">Calibration data distibution</string>
     <string name="title_coeff">Calibration coefficients</string>
+    <string name="title_coord">Enter the point coordinates:</string>
     <string name="title_current_station">Saved stations</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_discover">Scanning for DistoX devices ... wait</string>

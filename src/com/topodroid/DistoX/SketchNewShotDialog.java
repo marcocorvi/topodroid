@@ -8,8 +8,9 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130326 created
+ *
+ * WARNING 
+ * The Keyboard has not been tested
  */
 package com.topodroid.DistoX;
 
@@ -34,11 +35,13 @@ import android.view.ViewGroup.LayoutParams;
 // import android.view.KeyEvent;
 
 import android.text.InputType;
+import android.inputmethodservice.KeyboardView;
 
 
 public class SketchNewShotDialog extends Dialog
                                  implements View.OnClickListener
 {
+  private Context  mContext;
   private Button   mBtnOk;
   // private Button   mBtnCancel;
   private CheckBox mCBsplay;
@@ -56,9 +59,12 @@ public class SketchNewShotDialog extends Dialog
   boolean manual_shot;
   DistoXDBlock mBlk;
 
+  private MyKeyboard mKeyboard;
+
   SketchNewShotDialog( Context context, SketchActivity parent, TopoDroidApp app, String name )
   {
     super( context );
+    mContext = context;
     mParent = parent;
     mApp    = app;
     mData   = app.mData;
@@ -88,12 +94,30 @@ public class SketchNewShotDialog extends Dialog
     mETazimuth = (EditText) findViewById(R.id.et_azimuth );
     mETclino   = (EditText) findViewById(R.id.et_clino );
 
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
+                                R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
+
     if ( TopoDroidSetting.mStationNames == 1 ) {
-      mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
-      mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+      // mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+      // mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT );
+    } else {
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
     }
 
+    MyKeyboard.registerEditText( mKeyboard, mETlength,  MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETazimuth, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETclino,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN );
+
     // TextView station = (TextView) findViewById(R.id.tv_station );
+
+    // TODO LRUD
+    // MyKeyboard.registerEditText( mKeyboard, mETleft, MyKeyboard.FLAG_POINT );
+    // MyKeyboard.registerEditText( mKeyboard, mETright, MyKeyboard.FLAG_POINT );
+    // MyKeyboard.registerEditText( mKeyboard, mETup, MyKeyboard.FLAG_POINT );
+    // MyKeyboard.registerEditText( mKeyboard, mETdown, MyKeyboard.FLAG_POINT );
 
     mBlk = mShots.getNextBlankLegShot( null );
     if ( mBlk != null ) {
@@ -162,6 +186,16 @@ public class SketchNewShotDialog extends Dialog
     }
     mParent.setMode( SketchDef.MODE_MOVE );
     dismiss();
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mKeyboard.isVisible() ) {
+      mKeyboard.hide();
+    } else {
+      dismiss();
+    }
   }
 
 }

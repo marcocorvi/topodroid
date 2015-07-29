@@ -535,6 +535,7 @@
     <string name="title_calib">Etalonnage</string>
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnages</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <!-- TODO string name="title_current_station">Saved stations</string -->
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX... Patientez</string>

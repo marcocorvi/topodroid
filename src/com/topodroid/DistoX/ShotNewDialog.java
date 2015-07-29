@@ -25,6 +25,7 @@ import android.widget.RadioButton;
 
 import android.content.Context;
 import android.text.InputType;
+import android.inputmethodservice.KeyboardView;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -76,6 +77,7 @@ public class ShotNewDialog extends Dialog
   private Button   mBtnSensor;
 
   TimerTask mTimer;
+  private MyKeyboard mKeyboard;
 
   public ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DistoXDBlock last_blk, long at )
   {
@@ -101,19 +103,34 @@ public class ShotNewDialog extends Dialog
     mETfrom = (EditText) findViewById(R.id.shot_from );
     mETto   = (EditText) findViewById(R.id.shot_to );
 
-    if ( TopoDroidSetting.mStationNames == 1 ) {
-      mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
-      mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
-    }
-
     mETdistance = (EditText) findViewById(R.id.shot_distance );
     mETbearing  = (EditText) findViewById(R.id.shot_bearing );
     mETclino    = (EditText) findViewById(R.id.shot_clino );
+
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
+                                R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
+
+    if ( TopoDroidSetting.mStationNames == 1 ) {
+      // mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+      // mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT );
+    } else {
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
+    }
+    MyKeyboard.registerEditText( mKeyboard, mETdistance, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETbearing, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETclino, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN );
 
     mLbacksight = (LinearLayout) findViewById(R.id.shot_backsight );
     mETbackdistance = (EditText) findViewById(R.id.shot_backdistance );
     mETbackbearing  = (EditText) findViewById(R.id.shot_backbearing );
     mETbackclino    = (EditText) findViewById(R.id.shot_backclino );
+
+    MyKeyboard.registerEditText( mKeyboard, mETbackdistance, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETbackbearing, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETbackclino, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN );
 
     if ( ! TopoDroidSetting.mBacksight ) {
       TextView forsight = (TextView) findViewById(R.id.shot_forsight );
@@ -126,6 +143,11 @@ public class ShotNewDialog extends Dialog
     mETup       = (EditText) findViewById(R.id.shot_up );
     mETdown     = (EditText) findViewById(R.id.shot_down );
     mCBsplayAtTo = (CheckBox) findViewById( R.id.splay_at_to );
+
+    MyKeyboard.registerEditText( mKeyboard, mETleft, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETright, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETup, MyKeyboard.FLAG_POINT );
+    MyKeyboard.registerEditText( mKeyboard, mETdown, MyKeyboard.FLAG_POINT );
 
     // mETfrom.setRawInputType( InputType.TYPE_CLASS_NUMBER );
     // mETto.setRawInputType( InputType.TYPE_CLASS_NUMBER );
@@ -171,6 +193,7 @@ public class ShotNewDialog extends Dialog
     mBtnSensor.setOnClickListener( this );
 
     setTitle( R.string.shot_info );
+    mKeyboard.hide();
   }
 
   private void resetData( String from )
@@ -358,5 +381,16 @@ public class ShotNewDialog extends Dialog
     //   dismiss();
     }
   }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mKeyboard.isVisible() ) {
+      mKeyboard.hide();
+    } else {
+      dismiss();
+    }
+  }
+
 }
 

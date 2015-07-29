@@ -123,7 +123,7 @@
     <string name="altitude">Alt. </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="altitude_hint">Alt. WGS84 [m]</string>
+    <string name="altitude_hint">Quota [m]</string>
     <string name="altitude_wgs84">Quota WGS84</string>
     <string name="latitude_hint">Lat. gg:mm:ss.sss</string>
     <string name="longitude_hint">Long. gg:mm:ss.sss</string>
@@ -530,6 +530,7 @@
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_discover">Ricerca dispositivi DistoX ... attendi</string>

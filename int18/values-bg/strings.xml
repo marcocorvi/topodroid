@@ -608,6 +608,7 @@
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
     <string name="title_discover">Сканиране на DistoX устройства...</string>

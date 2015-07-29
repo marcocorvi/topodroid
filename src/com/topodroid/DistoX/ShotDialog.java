@@ -26,6 +26,7 @@ import android.text.InputType;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.inputmethodservice.KeyboardView;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ import android.util.Log;
 public class ShotDialog extends Dialog
                               implements View.OnClickListener
 {
+  private Context mContext;
   private ShotActivity mParent;
   private DistoXDBlock mBlk;
   private DistoXDBlock mPrevBlk;
@@ -106,10 +108,13 @@ public class ShotDialog extends Dialog
   long shot_flag;
   String shot_comment;
 
+  MyKeyboard mKeyboard;
+
   public ShotDialog( Context context, ShotActivity parent, int pos,
                      DistoXDBlock blk, DistoXDBlock prev, DistoXDBlock next )
   {
     super(context);
+    mContext = context;
     mParent = parent;
     mPos = pos;
     loadDBlock( blk, prev, next );
@@ -158,17 +163,17 @@ public class ShotDialog extends Dialog
     shot_comment = blk.mComment;
   }
 
-  private void setEditable( EditText et, KeyListener kl, boolean editable )
+  private void setEditable( EditText et, boolean editable, int flag )
   {
+    et.setKeyListener( null );
+    et.setClickable( true );
+    et.setFocusable( editable );
     if ( editable ) {
-      et.setKeyListener( kl );
+      MyKeyboard.registerEditText( mKeyboard, et, flag );
+      // et.setKeyListener( mKeyboard );
       et.setBackgroundResource( android.R.drawable.edit_text );
-      et.setClickable( true );
-      et.setFocusable( true );
     } else {
-      // et.setFocusable( false );
-      // et.setClickable( false );
-      et.setKeyListener( null );
+      MyKeyboard.registerEditText( mKeyboard, et, flag | MyKeyboard.FLAG_NOEDIT );
       et.setBackgroundColor( 0xff999999 );
     }
   }
@@ -179,9 +184,6 @@ public class ShotDialog extends Dialog
     mETdistance.setText( shot_distance );
     mETbearing.setText( shot_bearing );
     mETclino.setText( shot_clino );
-    setEditable( mETdistance, mKLdistance, shot_manual );
-    setEditable( mETbearing,  mKLbearing,  shot_manual );
-    setEditable( mETclino,    mKLclino,    shot_manual );
 
     mTVextra.setText( shot_extra );
     if ( shot_from.length() > 0 ) {
@@ -222,13 +224,28 @@ public class ShotDialog extends Dialog
 
     mButtonNext.setEnabled( mNextBlk != null );
     mButtonPrev.setEnabled( mPrevBlk != null );
+
+    // do at the very end
+    setEditable( mETdistance, shot_manual, flagDistance );
+    setEditable( mETbearing,  shot_manual, flagBearing );
+    setEditable( mETclino,    shot_manual, flagClino );
   }
 
 
 // -------------------------------------------------------------------
-  private KeyListener mKLdistance;
-  private KeyListener mKLbearing;
-  private KeyListener mKLclino;
+  // private KeyListener mKLdistance;
+  // private KeyListener mKLbearing;
+  // private KeyListener mKLclino;
+
+  private static int flagDistance = MyKeyboard.FLAG_POINT;
+  private static int flagBearing  = MyKeyboard.FLAG_POINT;
+  private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
+
+  // @Override
+  // public void onRestoreInstanceState( Bundle icicle )
+  // {
+  //   // FIXME DIALOG mKeyboard.hide();
+  // }
  
   @Override
   protected void onCreate(Bundle savedInstanceState) 
@@ -241,14 +258,17 @@ public class ShotDialog extends Dialog
     setContentView(R.layout.shot_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
+                                R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
+
     // mTVdata    = (TextView) findViewById(R.id.shot_data );
     mETdistance = (EditText) findViewById(R.id.shot_distance);
     mETbearing  = (EditText) findViewById(R.id.shot_bearing);
     mETclino    = (EditText) findViewById(R.id.shot_clino);
 
-    mKLdistance = mETdistance.getKeyListener();
-    mKLbearing  = mETbearing .getKeyListener();
-    mKLclino    = mETclino   .getKeyListener();
+    // mKLdistance = mETdistance.getKeyListener();
+    // mKLbearing  = mETbearing .getKeyListener();
+    // mKLclino    = mETclino   .getKeyListener();
 
     mTVextra   = (TextView) findViewById(R.id.shot_extra );
     // mETname = (EditText) findViewById(R.id.shot_name );
@@ -256,11 +276,6 @@ public class ShotDialog extends Dialog
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
     
-    if ( TopoDroidSetting.mStationNames == 1 ) {
-      mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
-      mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
-    }
-
     // mRBreg  = (CheckBox) findViewById( R.id.shot_reg );
     mRBdup  = (CheckBox) findViewById( R.id.shot_dup );
     mRBsurf = (CheckBox) findViewById( R.id.shot_surf );
@@ -322,6 +337,16 @@ public class ShotDialog extends Dialog
     // mRBignore.setOnClickListener( this );
 
     updateView();
+    if ( TopoDroidSetting.mStationNames == 1 ) {
+      // mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+      // mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT );
+    } else {
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
+    }
+    mKeyboard.hide();
   }
 
   private void saveDBlock()
@@ -415,8 +440,9 @@ public class ShotDialog extends Dialog
 
     } else if ( b == mButtonOK ) {
       saveDBlock();
-      dismiss();
+      onBackPressed();
     } else if ( b == mButtonSave ) {
+      // FIXME DIALOG mKeyboard.hide();
       saveDBlock();
     } else if ( b == mButtonPrev ) {
       // shift:
@@ -459,9 +485,19 @@ public class ShotDialog extends Dialog
       }
     // } else if ( b == mButtonDrop ) {
     //   mParent.dropShot( mBlk );
-    //   dismiss();
+    //   onBackPressed();
     // } else if ( b == mButtonBack ) {
-    //   dismiss();
+    //   onBackPressed();
+    }
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mKeyboard.isVisible() ) {
+      mKeyboard.hide();
+    } else {
+      dismiss();
     }
   }
 

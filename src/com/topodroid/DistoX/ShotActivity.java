@@ -173,6 +173,8 @@ public class ShotActivity extends Activity
   private Button[] mButton1;
   private int mNrButton1 = 0;
 
+  // private MyKeyboard mKeyboard;
+
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
     mApp.mFixedExtend = fixed_extend;
@@ -906,6 +908,8 @@ public class ShotActivity extends Activity
     setMenuAdapter();
     closeMenu();
     mMenu.setOnItemClickListener( this );
+
+    // mKeyboard = new MyKeyboard( this );
   }
 
   void enableSketchButton( boolean enabled )

@@ -117,6 +117,7 @@ public class SurveyActivity extends Activity
   String mInitStation;
 
   TopoDroidApp mApp;
+  // private MyKeyboard mKeyboard;
   private boolean mustOpen;
 
 // -------------------------------------------------------------------
@@ -225,6 +226,7 @@ public class SurveyActivity extends Activity
 
     mApp = (TopoDroidApp)getApplication();
     mApp.mSurveyActivity = this;
+    // mKeyboard = new MyKeyboard( this );
     mFixedDialog = null;
 
     mContext = this;
