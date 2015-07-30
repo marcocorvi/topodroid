@@ -12,6 +12,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.text.InputType;
+
 class TopoDroidConst
 {
   static final int DISTOX_EXPORT_TH  = 0;
@@ -40,5 +42,10 @@ class TopoDroidConst
   static final int COLOR_NORMAL2   = 0xffffcc99; // title color nr. 2
   static final int COLOR_CONNECTED = 0xffff6666; 
   static final int COLOR_COMPUTE   = 0xffff33cc;
+
+  static final int NUMBER                 = InputType.TYPE_CLASS_NUMBER;
+  static final int NUMBER_DECIMAL         = NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+  static final int NUMBER_SIGNED          = NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED;
+  static final int NUMBER_DECIMAL_SIGNED  = NUMBER_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
 
 }

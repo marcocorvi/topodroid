@@ -61,6 +61,11 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
   static final int FLAG_LCASE  = 0x08;
   static final int FLAG_NOEDIT = 0x10;
   static final int FLAG_2ND    = 0x20;
+  static final int FLAG_POINT_SIGN        = 0x03; // FLAG_POINT | FLAG_SIGN
+  static final int FLAG_POINT_DEGREE      = 0x06; // FLAG_POINT | FLAG_DEGREE
+  static final int FLAG_POINT_SIGN_DEGREE = 0x07; // FLAG_POINT | FLAG_SIGN | FLAG_DEGREE
+  static final int FLAG_POINT_LCASE       = 0x0a; // FLAG_POINT | FLAG_LCASE
+  static final int FLAG_POINT_LCASE_2ND   = 0x2a; // FLAG_POINT | FLAG_LCASE | FLAG_2ND
 
   boolean hasDegree;
   boolean hasPoint;
@@ -227,6 +232,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     mEdit = null;
     mFlags = new HashMap< EditText, Integer >();
 
+    Log.v("DistoX", "id1 " + kbdid1 + " " + kbdid2 );
     mKeyboardView = view;
     mKeyboard1 = new Keyboard( mContext, kbdid1 );
     mKeyboard2 = ( kbdid2 == -1 )? null : new Keyboard( mContext, kbdid2 );

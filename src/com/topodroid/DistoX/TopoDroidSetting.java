@@ -100,6 +100,7 @@ class TopoDroidSetting
     "DISTOX_STATION_PREFIX",         // whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
     "DISTOX_ZOOM_CONTROLS",
+    "DISTOX_MKEYBOARD",
     "DISTOX_LOCALE",                 // 65
     "DISTOX_CWD",                    // must be last 
 
@@ -142,6 +143,7 @@ class TopoDroidSetting
   static boolean mExportStationsPrefix = false; // whether to prepend cave name to station in cSurvey export
   static int mStationNames = 0;          // type of station names (0: alpha, 1: number)
   static boolean mZoomControls = false;
+  static boolean mKeyboard = true;
 
   static void setZoomControls( boolean ctrl )
   {
@@ -611,6 +613,9 @@ class TopoDroidSetting
 
     setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
 
+    mKeyboard = prefs.getBoolean( key[k++], true ); // DISTOX_MKEYBOARD
+
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -931,6 +936,8 @@ class TopoDroidSetting
       mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     } else if ( k.equals( key[ nk++ ] ) ) {
       setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mKeyboard = prefs.getBoolean( k, true ); // DISTOX_MKEYBOARD
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

@@ -57,7 +57,7 @@
         android:layout_weight="30"
         android:layout_height="wrap_content"
         android:hint="Clino [deg]"
-        android:nextFocusDown="@+id/top"
+        android:nextFocusDown="@id/top"
         />
     </LinearLayout>
 

@@ -34,6 +34,7 @@
         android:scrollHorizontally="true"
         android:hint="@string/shot_from"
         android:nextFocusDown="@+id/shot_to"
+        android:singleLine="true"
         />
       <EditText android:id="@+id/shot_to" 
         android:maxLines="1" 
@@ -43,6 +44,7 @@
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/shot_distance"
         android:hint="@string/shot_to"
+        android:singleLine="true"
         />
     </LinearLayout>
 
@@ -61,21 +63,25 @@
         android:layout_height="wrap_content" 
         android:hint="&#x2190;&#x2192;"
         android:nextFocusDown="@+id/shot_bearing"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_bearing" 
+      <EditText android:id="@id/shot_bearing" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="&#x2191;N"
         android:nextFocusDown="@+id/shot_clino"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_clino" 
+      <EditText android:id="@id/shot_clino" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="/_"
+        android:nextFocusDown="@+id/shot_left"
+        android:singleLine="true"
         />
       <TextView 
         android:id="@+id/shot_forsight"
@@ -102,21 +108,24 @@
         android:layout_height="wrap_content" 
         android:hint="&#x2190;&#x2192;"
         android:nextFocusDown="@+id/shot_backbearing"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_backbearing" 
+      <EditText android:id="@id/shot_backbearing" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="&#x2191;N"
         android:nextFocusDown="@+id/shot_backclino"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_backclino" 
+      <EditText android:id="@id/shot_backclino" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="/_"
+        android:singleLine="true"
         />
       <TextView 
         android:layout_width="0dp"
@@ -135,37 +144,41 @@
       android:layout_marginTop="10dp"
       android:orientation="horizontal" 
       >
-      <EditText android:id="@+id/shot_left" 
+      <EditText android:id="@id/shot_left" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
         android:hint="&#x21A4;"
         android:nextFocusDown="@+id/shot_right"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_right" 
+      <EditText android:id="@id/shot_right" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
         android:hint="&#x21A6;"
         android:nextFocusDown="@+id/shot_up"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_up" 
+      <EditText android:id="@id/shot_up" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
         android:hint="&#x21A5;"
         android:nextFocusDown="@+id/shot_down"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_down" 
+      <EditText android:id="@id/shot_down" 
         android:maxLines="1" 
         android:layout_width="0dp"
         android:layout_weight="25"
         android:layout_height="wrap_content" 
-        android:nextFocusDown="@id/top"
         android:hint="&#x21A7;"
+        android:nextFocusDown="@+id/top"
+        android:singleLine="true"
         />
     </LinearLayout>
 

@@ -584,6 +584,8 @@
   <string name="pref_raw_data_summary">Afficher les données brutes</string>
   <string name="pref_bootloader_title">Chargeur de démarrage</string>
   <string name="pref_bootloader_summary">Activer le chargeur de démarrage</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <!-- TODO string name="pref_export_shots_title">Data export format</string -->

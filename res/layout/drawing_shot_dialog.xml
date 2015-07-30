@@ -27,21 +27,23 @@
       >
 
       <EditText android:id="@+id/shot_from"
-          android:layout_marginTop="2dp"
-          android:layout_width="0dp"
-          android:layout_weight="50"
-          android:layout_height="wrap_content" 
-          android:text="-"
-          android:nextFocusDown="@+id/shot_to"
-          />
+        android:layout_marginTop="2dp"
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content" 
+        android:text="-"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/shot_to"
+        />
       <EditText android:id="@+id/shot_to"
-          android:layout_marginTop="2dp"
-          android:layout_width="0dip"
-          android:layout_weight="50"
-          android:layout_height="wrap_content" 
-          android:text="-"
-          android:nextFocusDown="@+id/shot_comment"
-          />
+        android:layout_marginTop="2dp"
+        android:layout_width="0dip"
+        android:layout_weight="50"
+        android:layout_height="wrap_content" 
+        android:text="-"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/shot_comment"
+        />
     </LinearLayout>
 
     <EditText
@@ -50,6 +52,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
       android:layout_below="@id/layout1"
+      android:singleLine="true"
       />
 
     <LinearLayout 

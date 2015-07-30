@@ -642,6 +642,8 @@
   <string name="pref_raw_data_summary">Показать сырые данные</string>
   <string name="pref_bootloader_title">Загрузчик</string>
   <string name="pref_bootloader_summary">Вкл Загрузчик</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <string name="pref_cosurvey_title">Совм. съёмка</string>
   <string name="pref_cosurvey_summary">Вкл/Выкл Совм. съёмку</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>

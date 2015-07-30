@@ -97,27 +97,34 @@ public class SketchNewShotDialog extends Dialog
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
-    if ( TopoDroidSetting.mStationNames == 1 ) {
-      // mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
-      // mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
-      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT );
-      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT );
+    if ( TopoDroidSetting.mKeyboard ) {
+      int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
+      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, flag );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   flag );
+
+      MyKeyboard.registerEditText( mKeyboard, mETlength,  MyKeyboard.FLAG_POINT );
+      MyKeyboard.registerEditText( mKeyboard, mETazimuth, MyKeyboard.FLAG_POINT );
+      MyKeyboard.registerEditText( mKeyboard, mETclino,   MyKeyboard.FLAG_POINT_SIGN );
+
+      // TODO LRUD
+      // MyKeyboard.registerEditText( mKeyboard, mETleft,  MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mETright, MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mETup,    MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mETdown,  MyKeyboard.FLAG_POINT );
+
     } else {
-      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
-      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
+      mKeyboard.hide();
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      }
+      mETlength.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      mETazimuth.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      mETclino.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
     }
 
-    MyKeyboard.registerEditText( mKeyboard, mETlength,  MyKeyboard.FLAG_POINT );
-    MyKeyboard.registerEditText( mKeyboard, mETazimuth, MyKeyboard.FLAG_POINT );
-    MyKeyboard.registerEditText( mKeyboard, mETclino,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN );
-
     // TextView station = (TextView) findViewById(R.id.tv_station );
-
-    // TODO LRUD
-    // MyKeyboard.registerEditText( mKeyboard, mETleft, MyKeyboard.FLAG_POINT );
-    // MyKeyboard.registerEditText( mKeyboard, mETright, MyKeyboard.FLAG_POINT );
-    // MyKeyboard.registerEditText( mKeyboard, mETup, MyKeyboard.FLAG_POINT );
-    // MyKeyboard.registerEditText( mKeyboard, mETdown, MyKeyboard.FLAG_POINT );
 
     mBlk = mShots.getNextBlankLegShot( null );
     if ( mBlk != null ) {
@@ -191,11 +198,13 @@ public class SketchNewShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( mKeyboard.isVisible() ) {
-      mKeyboard.hide();
-    } else {
-      dismiss();
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
     }
+    dismiss();
   }
 
 }

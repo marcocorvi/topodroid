@@ -26,19 +26,25 @@
         android:layout_height="wrap_content" 
         android:textSize="18sp"
         android:layout_marginRight="10dp"
+        android:nextFocusDown="@+id/shot_bearing"
+        android:singleLine="true"
         />
-    <EditText android:id="@+id/shot_bearing"
+    <EditText android:id="@id/shot_bearing"
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
         android:layout_marginRight="10dp"
+        android:nextFocusDown="@+id/shot_clino"
+        android:singleLine="true"
         />
-    <EditText android:id="@+id/shot_clino"
+    <EditText android:id="@id/shot_clino"
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
+        android:nextFocusDown="@+id/shot_from"
+        android:singleLine="true"
         />
   </LinearLayout>
 
@@ -59,20 +65,21 @@
       android:layout_marginTop="2dp"
       >
 
-      <EditText android:id="@+id/shot_from" 
-        android:singleLine="true" 
+      <EditText android:id="@id/shot_from" 
         android:layout_width="0dp"
         android:layout_weight="50"
         android:layout_height="wrap_content" 
         android:text=""
         android:nextFocusDown="@+id/shot_to"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_to" 
-        android:singleLine="true" 
+      <EditText android:id="@id/shot_to" 
         android:layout_width="0dp"
         android:layout_weight="50"
         android:layout_height="wrap_content" 
         android:text=""
+        android:nextFocusDown="@+id/shot_comment"
+        android:singleLine="true"
         />
 
   </LinearLayout>
@@ -113,7 +120,7 @@
     </LinearLayout>				  
 
     <EditText
-        android:id="@+id/shot_comment" 
+        android:id="@id/shot_comment" 
         android:maxLines="1" 
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"

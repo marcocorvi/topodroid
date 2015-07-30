@@ -54,7 +54,7 @@ public class DrawingShotDialog extends Dialog
   private DrawingActivity mActivity;
   private DistoXDBlock mBlock;
 
-  MyKeyboard mKeyboard;
+  MyKeyboard mKeyboard = null;
 
   public DrawingShotDialog( Context context, DrawingActivity activity, DrawingPath shot )
   {
@@ -146,16 +146,21 @@ public class DrawingShotDialog extends Dialog
       }
     }
     setTitle( String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
-    if ( TopoDroidSetting.mStationNames == 1 ) {
-      // mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
-      // mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
-      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT );
-      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT );
+
+    if ( TopoDroidSetting.mKeyboard ) {
+      int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
+      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, flag );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   flag );
+      mKeyboard.hide();
     } else {
-      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
-      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
+      mKeyboard.hide();
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      }
     }
-    mKeyboard.hide();
+
   }
 
   public void onClick(View view)
@@ -231,11 +236,13 @@ public class DrawingShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( mKeyboard.isVisible() ) {
-      mKeyboard.hide();
-    } else {
-      dismiss();
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
     }
+    dismiss();
   }
 
 }

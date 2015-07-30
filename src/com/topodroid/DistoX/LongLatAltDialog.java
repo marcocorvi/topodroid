@@ -48,7 +48,7 @@ public class LongLatAltDialog extends Dialog
   private Context mContext;
   private DistoXLocation mParent;
 
-  private MyKeyboard mKeyboard;
+  private MyKeyboard mKeyboard = null;
   private EditText mEditLong;
   private EditText mEditLat;
   private EditText mEditAlt; // altitude
@@ -82,10 +82,17 @@ public class LongLatAltDialog extends Dialog
     mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
-
-    MyKeyboard.registerEditText( mKeyboard, mEditLong, MyKeyboard.FLAG_DEGREE | MyKeyboard.FLAG_POINT );
-    MyKeyboard.registerEditText( mKeyboard, mEditLat,  MyKeyboard.FLAG_DEGREE | MyKeyboard.FLAG_POINT );
-    MyKeyboard.registerEditText( mKeyboard, mEditAlt,  MyKeyboard.FLAG_POINT  );
+    if ( TopoDroidSetting.mKeyboard ) {
+      int flag = MyKeyboard.FLAG_POINT_DEGREE;
+      MyKeyboard.registerEditText( mKeyboard, mEditLong, flag );
+      MyKeyboard.registerEditText( mKeyboard, mEditLat,  flag );
+      MyKeyboard.registerEditText( mKeyboard, mEditAlt,  MyKeyboard.FLAG_POINT  );
+    } else {
+      mKeyboard.hide();
+      mEditLong.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      mEditLat.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      mEditAlt.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+    }
 
     if ( mParent.mHasLocation ) {
       mEditLong.setText( FixedInfo.double2string( mParent.mLongitude ) );
@@ -198,11 +205,13 @@ public class LongLatAltDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( mKeyboard.isVisible() ) {
-      mKeyboard.hide();
-    } else {
-      dismiss();
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
     }
+    dismiss();
   }
 
 }

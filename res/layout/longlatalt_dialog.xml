@@ -90,7 +90,7 @@
         android:singleLine="true"
         android:hint="@string/altitude_hint"
         android:scrollHorizontally="true"
-        android:nextFocusDown="@+id/top"
+        android:nextFocusDown="@id/top"
         />
   </LinearLayout>
 

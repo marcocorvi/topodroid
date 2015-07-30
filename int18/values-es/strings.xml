@@ -579,6 +579,8 @@
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
   <!-- TODO string name="pref_bootloader_title">Bootloader</string -->
   <!-- TODO string name="pref_bootloader_summary">Enable bootloader</string -->
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <!-- TODO string name="pref_export_shots_title">Data export format</string -->

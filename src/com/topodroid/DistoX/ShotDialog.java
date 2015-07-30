@@ -62,7 +62,6 @@ public class ShotDialog extends Dialog
 
   private TextView mTVextra;
 
-  // private EditText mETname;
   private EditText mETfrom;
   private EditText mETto;
   private EditText mETcomment;
@@ -108,8 +107,15 @@ public class ShotDialog extends Dialog
   long shot_flag;
   String shot_comment;
 
-  MyKeyboard mKeyboard;
+  MyKeyboard mKeyboard = null;
 
+  private KeyListener mKLdistance;
+  private KeyListener mKLbearing;
+  private KeyListener mKLclino;
+
+  private static int flagDistance = MyKeyboard.FLAG_POINT;
+  private static int flagBearing  = MyKeyboard.FLAG_POINT;
+  private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
   public ShotDialog( Context context, ShotActivity parent, int pos,
                      DistoXDBlock blk, DistoXDBlock prev, DistoXDBlock next )
   {
@@ -163,18 +169,32 @@ public class ShotDialog extends Dialog
     shot_comment = blk.mComment;
   }
 
-  private void setEditable( EditText et, boolean editable, int flag )
+  private void setEditable( EditText et, KeyListener kl, boolean editable, int flag )
   {
-    et.setKeyListener( null );
-    et.setClickable( true );
-    et.setFocusable( editable );
-    if ( editable ) {
-      MyKeyboard.registerEditText( mKeyboard, et, flag );
-      // et.setKeyListener( mKeyboard );
-      et.setBackgroundResource( android.R.drawable.edit_text );
+    if ( TopoDroidSetting.mKeyboard ) {
+      et.setKeyListener( null );
+      et.setClickable( true );
+      et.setFocusable( editable );
+      if ( editable ) {
+        MyKeyboard.registerEditText( mKeyboard, et, flag );
+        // et.setKeyListener( mKeyboard );
+        et.setBackgroundResource( android.R.drawable.edit_text );
+      } else {
+        MyKeyboard.registerEditText( mKeyboard, et, flag | MyKeyboard.FLAG_NOEDIT );
+        et.setBackgroundColor( 0xff999999 );
+      }
     } else {
-      MyKeyboard.registerEditText( mKeyboard, et, flag | MyKeyboard.FLAG_NOEDIT );
-      et.setBackgroundColor( 0xff999999 );
+      if ( editable ) {
+        et.setKeyListener( kl );
+        et.setBackgroundResource( android.R.drawable.edit_text );
+        et.setClickable( true );
+        et.setFocusable( true );
+      } else {
+        // et.setFocusable( false );
+        // et.setClickable( false );
+        et.setKeyListener( null );
+        et.setBackgroundColor( 0xff999999 );
+      }
     }
   }
 
@@ -226,20 +246,13 @@ public class ShotDialog extends Dialog
     mButtonPrev.setEnabled( mPrevBlk != null );
 
     // do at the very end
-    setEditable( mETdistance, shot_manual, flagDistance );
-    setEditable( mETbearing,  shot_manual, flagBearing );
-    setEditable( mETclino,    shot_manual, flagClino );
+    setEditable( mETdistance, mKLdistance, shot_manual, flagDistance );
+    setEditable( mETbearing,  mKLbearing,  shot_manual, flagBearing );
+    setEditable( mETclino,    mKLclino,    shot_manual, flagClino );
   }
 
 
 // -------------------------------------------------------------------
-  // private KeyListener mKLdistance;
-  // private KeyListener mKLbearing;
-  // private KeyListener mKLclino;
-
-  private static int flagDistance = MyKeyboard.FLAG_POINT;
-  private static int flagBearing  = MyKeyboard.FLAG_POINT;
-  private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
   // @Override
   // public void onRestoreInstanceState( Bundle icicle )
@@ -258,23 +271,37 @@ public class ShotDialog extends Dialog
     setContentView(R.layout.shot_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
-                                R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
     // mTVdata    = (TextView) findViewById(R.id.shot_data );
     mETdistance = (EditText) findViewById(R.id.shot_distance);
     mETbearing  = (EditText) findViewById(R.id.shot_bearing);
     mETclino    = (EditText) findViewById(R.id.shot_clino);
 
-    // mKLdistance = mETdistance.getKeyListener();
-    // mKLbearing  = mETbearing .getKeyListener();
-    // mKLclino    = mETclino   .getKeyListener();
+    mKLdistance = mETdistance.getKeyListener();
+    mKLbearing  = mETbearing .getKeyListener();
+    mKLclino    = mETclino   .getKeyListener();
 
     mTVextra   = (TextView) findViewById(R.id.shot_extra );
     // mETname = (EditText) findViewById(R.id.shot_name );
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
+
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
+                                R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
+    if ( TopoDroidSetting.mKeyboard ) {
+      int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
+      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      MyKeyboard.registerEditText( mKeyboard, mETfrom, flag );
+      MyKeyboard.registerEditText( mKeyboard, mETto,   flag );
+      // mKeyboard.hide();
+    } else {
+      mKeyboard.hide();
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
+        mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
+      }
+    }
     
     // mRBreg  = (CheckBox) findViewById( R.id.shot_reg );
     mRBdup  = (CheckBox) findViewById( R.id.shot_dup );
@@ -337,16 +364,7 @@ public class ShotDialog extends Dialog
     // mRBignore.setOnClickListener( this );
 
     updateView();
-    if ( TopoDroidSetting.mStationNames == 1 ) {
-      // mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
-      // mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
-      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT );
-      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT );
-    } else {
-      MyKeyboard.registerEditText( mKeyboard, mETfrom, MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
-      MyKeyboard.registerEditText( mKeyboard, mETto,   MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_2ND | MyKeyboard.FLAG_LCASE );
-    }
-    mKeyboard.hide();
+
   }
 
   private void saveDBlock()
@@ -494,11 +512,13 @@ public class ShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( mKeyboard.isVisible() ) {
-      mKeyboard.hide();
-    } else {
-      dismiss();
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
     }
+    dismiss();
   }
 
 }

@@ -25,6 +25,7 @@ import android.content.Context;
 
 import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
+import android.view.ViewGroup.LayoutParams;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ import android.widget.TextView.OnEditorActionListener;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.inputmethodservice.KeyboardView;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -86,7 +88,7 @@ public class DistoXLocation extends Dialog
   private GpsStatus mStatus;
   private boolean mLocating; // whether is locating
 
-  // MyKeyboard mKeyboard;
+  private MyKeyboard mKeyboard;
 
   public DistoXLocation( Context context, SurveyActivity parent, TopoDroidApp app, LocationManager lm )
   {
@@ -94,7 +96,6 @@ public class DistoXLocation extends Dialog
     mContext = context;
     mParent = parent;
     mApp = app;
-    // mKeyboard = ne MyKeyboard( parent );
     locManager = lm;
     mStatus = locManager.getGpsStatus( null );
     // mLocating = false;
@@ -109,6 +110,8 @@ public class DistoXLocation extends Dialog
     super.onCreate(savedInstanceState);
     // TopoDroidLog.Log( TopoDroidLog.LOG_LOC, "Location onCreate" );
     setContentView(R.layout.distox_location);
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
     mTVlong = (TextView) findViewById(R.id.longitude );
     mTVlat  = (TextView) findViewById(R.id.latitude  );
     mTValt  = (TextView) findViewById(R.id.altitude  );
@@ -145,6 +148,21 @@ public class DistoXLocation extends Dialog
     setTitle( R.string.title_location );
 
     refreshList();
+
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
+                                R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT );
+      } else {
+        MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT_LCASE_2ND );
+      }
+    } else {
+      mKeyboard.hide();
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mETstation.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      }
+    }
   }
 
   public void refreshList()
@@ -281,6 +299,7 @@ public class DistoXLocation extends Dialog
     }
     if ( b == mBtnMan ) {
       // stop GPS location and start dialog for lat/long/alt data
+      if ( TopoDroidSetting.mKeyboard ) mKeyboard.hide();
       if ( mLocating ) {
         setGPSoff();
       }
@@ -298,6 +317,7 @@ public class DistoXLocation extends Dialog
       new LongLatAltDialog( mContext, this ).show();
       // mHasLocation = false;
     } else if ( b == mBtnLoc ) {
+      if ( TopoDroidSetting.mKeyboard ) mKeyboard.hide();
       if ( mLocating ) {
         setGPSoff();
       } else {
@@ -317,14 +337,17 @@ public class DistoXLocation extends Dialog
   @Override
   public void onBackPressed()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Location onBackPressed");
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
+    }
     if ( mLocating ) {
       locManager.removeUpdates( this );
       locManager.removeGpsStatusListener( this );
       mLocating = false;
     }
-    // mKeyboard.hide();
-    // mKeyboard.dismiss();
     dismiss();
   }
 

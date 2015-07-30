@@ -579,6 +579,8 @@
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
   <string name="pref_bootloader_title">Bootloader</string>
   <string name="pref_bootloader_summary">Bootloader abilitiato</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- NO string name="pref_cosurvey_title">Co-surveying</string -->
   <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
   <string name="pref_export_shots_title">Formato esportazione dati</string>

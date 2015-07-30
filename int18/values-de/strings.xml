@@ -630,6 +630,8 @@
   <string name="pref_raw_data_summary">Rohdaten zeigen</string>
   <!-- OK string name="pref_bootloader_title">Bootloader</string -->
   <string name="pref_bootloader_summary">Die Bootloader ermöglichen</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <string name="pref_export_shots_title">Datenexportformat</string>
