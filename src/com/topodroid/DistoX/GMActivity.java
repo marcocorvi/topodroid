@@ -172,7 +172,7 @@ public class GMActivity extends Activity
                         R.string.help_help
                       };
   // -------------------------------------------------------------------
-  // forward survey name to DataHelper
+  // forward survey name to DeviceHelper
 
   // -------------------------------------------------------------
 
@@ -183,7 +183,7 @@ public class GMActivity extends Activity
   {
     long cid = mApp.mCID;
     if ( cid < 0 ) return -2;
-    List<CalibCBlock> list = mApp.mData.selectAllGMs( cid, 0 ); 
+    List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 ); 
     if ( list.size() < 16 ) {
       return -1;
     }
@@ -201,7 +201,7 @@ public class GMActivity extends Activity
       float max_error = 0.0f;
       int k = 0;
       for ( CalibCBlock cb : list ) {
-        mApp.mData.updateGMError( cb.mId, cid, errors[k] );
+        mApp.mDData.updateGMError( cb.mId, cid, errors[k] );
         // cb.setError( errors[k] );
         if ( errors[k] > max_error ) max_error = errors[k];
         ++k;
@@ -209,15 +209,15 @@ public class GMActivity extends Activity
       calibration.mMaxError = max_error;
 
       byte[] coeff = calibration.GetCoeff();
-      mApp.mData.updateCalibCoeff( cid, Calibration.coeffToString( coeff ) );
-      mApp.mData.updateCalibError( cid, 
+      mApp.mDData.updateCalibCoeff( cid, Calibration.coeffToString( coeff ) );
+      mApp.mDData.updateCalibError( cid, 
              calibration.Delta(),
              calibration.mMaxError * TopoDroidUtil.RAD2GRAD,
              iter );
 
       // DEBUG:
       // Calibration.logCoeff( coeff );
-      // coeff = Calibration.stringToCoeff( mApp.mData.selectCalibCoeff( cid ) );
+      // coeff = Calibration.stringToCoeff( mApp.mDData.selectCalibCoeff( cid ) );
       // Calibration.logCoeff( coeff );
     }
     // Log.v( TopoDroidApp.TAG, "iteration " + iter );
@@ -253,7 +253,7 @@ public class GMActivity extends Activity
 
   void doResetGroups( )
   {
-    mApp.mData.resetAllGMs( mApp.mCID ); // reset all groups where status=0
+    mApp.mDData.resetAllGMs( mApp.mCID ); // reset all groups where status=0
   }
 
   void doComputeGroups( )
@@ -261,7 +261,7 @@ public class GMActivity extends Activity
     long cid = mApp.mCID;
     if ( cid < 0 ) return;
     float thr = (float)Math.cos( TopoDroidSetting.mGroupDistance * TopoDroidUtil.GRAD2RAD);
-    List<CalibCBlock> list = mApp.mData.selectAllGMs( cid, 0 );
+    List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );
     if ( list.size() < 4 ) {
       Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
       return;
@@ -279,7 +279,7 @@ public class GMActivity extends Activity
             c = item.mClino;
           }
           item.setGroup( group );
-          mApp.mData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
+          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
           // N.B. item.calibId == cid
         }
         break;
@@ -288,7 +288,7 @@ public class GMActivity extends Activity
         group = 1;
         for ( CalibCBlock item : list ) {
           item.setGroup( group );
-          mApp.mData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
+          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
           ++ cnt;
           if ( (cnt%4) == 0 ) {
             ++group;
@@ -300,7 +300,7 @@ public class GMActivity extends Activity
         group = 1;
         for ( CalibCBlock item : list ) {
           item.setGroup( group );
-          mApp.mData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
+          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
           ++ cnt;
           if ( (cnt%4) == 0 || cnt >= 16 ) ++group;
         }
@@ -343,9 +343,8 @@ public class GMActivity extends Activity
     // Log.v( TopoDroidApp.TAG, "updateDisplay CID " + mApp.mCID );
     resetTitle( );
     mDataAdapter.clear();
-    DataHelper data = mApp.mData;
-    if ( data != null && mApp.mCID >= 0 ) {
-      List<CalibCBlock> list = data.selectAllGMs( mApp.mCID, mBlkStatus );
+    if ( mApp.mDData != null && mApp.mCID >= 0 ) {
+      List<CalibCBlock> list = mApp.mDData.selectAllGMs( mApp.mCID, mBlkStatus );
       // Log.v( TopoDroidApp.TAG, "updateDisplay GMs " + list.size() );
       updateGMList( list );
       setTitle( mCalibName );
@@ -612,7 +611,7 @@ public class GMActivity extends Activity
         new CalibToggleTask( this, this, mApp ).execute();
       } else if ( b == mButton1[2] ) { // group
         if ( mApp.mCID >= 0 ) {
-          List< CalibCBlock > list = mApp.mData.selectAllGMs( mApp.mCID, 0 );
+          List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
           if ( list.size() >= 16 ) {
             setTitle( R.string.calib_compute_groups );
             setTitleColor( TopoDroidConst.COLOR_COMPUTE );
@@ -636,7 +635,7 @@ public class GMActivity extends Activity
       } else if ( b == mButton1[3] ) { // cover
         Calibration calib = mApp.mCalibration;
         if ( calib != null ) {
-          List< CalibCBlock > list = mApp.mData.selectAllGMs( mApp.mCID, 0 );
+          List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
           if ( list.size() >= 16 ) {
             ( new CalibCoverage( this, list, calib ) ).show();
           } else {
@@ -753,7 +752,7 @@ public class GMActivity extends Activity
   // {
   //   long id = setCalibFromName( name );
   //   if ( id > 0 ) {
-  //     mApp.mData.updateCalibDayAndComment( id, date, comment );
+  //     mApp.mDData.updateCalibDayAndComment( id, date, comment );
   //     setStatus( STATUS_GM );
   //     // updateDisplay( );
   //   }
@@ -761,9 +760,9 @@ public class GMActivity extends Activity
  
   void updateGM( long value, String name )
   {
-    mApp.mData.updateGMName( mCIDid, mApp.mCID, name );
+    mApp.mDData.updateGMName( mCIDid, mApp.mCID, name );
     String id = (new Long(mCIDid)).toString();
-    // CalibCBlock blk = mApp.mData.selectGM( mCIDid, mApp.mCID );
+    // CalibCBlock blk = mApp.mDData.selectGM( mCIDid, mApp.mCID );
     mSaveCBlock.setGroup( value );
 
     // if ( mApp.mListRefresh ) {
@@ -778,7 +777,7 @@ public class GMActivity extends Activity
 
   void deleteGM( boolean delete )
   {
-    mApp.mData.deleteGM( mApp.mCID, mCIDid, delete );
+    mApp.mDData.deleteGM( mApp.mCID, mCIDid, delete );
     updateDisplay( );
   }
 

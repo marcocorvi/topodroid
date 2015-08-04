@@ -87,8 +87,8 @@ public class CalibListDialog extends Dialog
 
   private void updateList()
   {
-    if ( mApp.mData != null && mApp.mDevice != null ) {
-      List< String > list = mApp.mData.selectDeviceCalibs( mApp.mDevice.mAddress );
+    if ( mApp.mDData != null && mApp.mDevice != null ) {
+      List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
       // mList.setAdapter( mArrayAdapter );
       mArrayAdapter.clear();
       for ( String item : list ) {

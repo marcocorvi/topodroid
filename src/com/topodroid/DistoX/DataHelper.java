@@ -87,11 +87,12 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updateSurveyDeclinationStmt;
   // private SQLiteStatement updateSurveyNameStmt;
 
-  private SQLiteStatement updateCalibStmt;
-  private SQLiteStatement updateCalibAlgoStmt;
-  private SQLiteStatement updateCalibCoeffStmt;
-  private SQLiteStatement updateCalibErrorStmt;
-  private SQLiteStatement resetAllGMStmt;
+  // FIXME DEVICE_DB
+  // private SQLiteStatement updateCalibStmt;
+  // private SQLiteStatement updateCalibAlgoStmt;
+  // private SQLiteStatement updateCalibCoeffStmt;
+  // private SQLiteStatement updateCalibErrorStmt;
+  // private SQLiteStatement resetAllGMStmt;
 
   private SQLiteStatement deleteShotStmt;
   private SQLiteStatement undeleteShotStmt;
@@ -116,8 +117,6 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement deleteSensorStmt;
   private SQLiteStatement dropPlotStmt;
   private SQLiteStatement dropFixedStmt;
-  private SQLiteStatement doDeleteGMStmt;
-  private SQLiteStatement doDeleteCalibStmt;
   private SQLiteStatement doDeletePhotoStmt;
   private SQLiteStatement doDeletePlotStmt;
   private SQLiteStatement doDeleteFixedStmt;
@@ -125,9 +124,12 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement doDeleteStationStmt;
   private SQLiteStatement doDeleteSurveyStmt;
 
-  private SQLiteStatement updateDeviceHeadTailStmt;
-  private SQLiteStatement updateDeviceModelStmt;
-  private SQLiteStatement updateDeviceNicknameStmt;
+  // FIXME DEVICE_DB
+  // private SQLiteStatement doDeleteGMStmt;
+  // private SQLiteStatement doDeleteCalibStmt;
+  // private SQLiteStatement updateDeviceHeadTailStmt;
+  // private SQLiteStatement updateDeviceModelStmt;
+  // private SQLiteStatement updateDeviceNicknameStmt;
 
   private String[] mShotFields; // select shot fields
 
@@ -177,8 +179,10 @@ public class DataHelper extends DataSetObservable
         }
 
         updateConfig       = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
-        updateGMGroupStmt  = myDB.compileStatement( "UPDATE gms SET grp=? WHERE calibId=? AND id=?" );
-        updateGMErrorStmt  = myDB.compileStatement( "UPDATE gms SET error=? WHERE calibId=? AND id=?" );
+        // FIXME DEVICE_DB
+        // updateGMGroupStmt  = myDB.compileStatement( "UPDATE gms SET grp=? WHERE calibId=? AND id=?" );
+        // updateGMErrorStmt  = myDB.compileStatement( "UPDATE gms SET error=? WHERE calibId=? AND id=?" );
+
         updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=? WHERE surveyId=? AND name=?" );
         deleteStationStmt  = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
         updateShotNameStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
@@ -210,10 +214,12 @@ public class DataHelper extends DataSetObservable
         updateSurveyTeamStmt = myDB.compileStatement( "UPDATE surveys SET team=? WHERE id=?" );
         updateSurveyDeclinationStmt = myDB.compileStatement( "UPDATE surveys SET declination=? WHERE id=?" );
         // updateSurveyNameStmt = myDB.compileStatement( "UPDATE surveys SET name=? WHERE id=?" );
-        updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
-        updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
-        updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
-        updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, max_error=?, iterations=? WHERE id=?" );
+
+        // FIXME DEVICE_DB
+        // updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
+        // updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
+        // updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
+        // updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, max_error=?, iterations=? WHERE id=?" );
 
         deleteShotStmt   = myDB.compileStatement( "UPDATE shots set status=1 WHERE surveyId=? AND id=?" );
         undeleteShotStmt = myDB.compileStatement( "UPDATE shots set status=0 WHERE surveyId=? AND id=?" );
@@ -239,11 +245,11 @@ public class DataHelper extends DataSetObservable
         updateFixedAltStmt = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
         updateFixedDataStmt = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
 
-        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND status=0" );
-        deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
-
-        doDeleteGMStmt    = myDB.compileStatement( "DELETE FROM gms where calibId=?" );
-        doDeleteCalibStmt = myDB.compileStatement( "DELETE FROM calibs where id=?" );
+        // FIXME DEVICE_DB
+        // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND status=0" );
+        // deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
+        // doDeleteGMStmt    = myDB.compileStatement( "DELETE FROM gms where calibId=?" );
+        // doDeleteCalibStmt = myDB.compileStatement( "DELETE FROM calibs where id=?" );
 
         doDeletePhotoStmt   = myDB.compileStatement( "DELETE FROM photos where surveyId=?" );
         doDeletePlotStmt    = myDB.compileStatement( "DELETE FROM plots where surveyId=?" );
@@ -251,11 +257,12 @@ public class DataHelper extends DataSetObservable
         doDeleteShotStmt    = myDB.compileStatement( "DELETE FROM shots where surveyId=?" );
         doDeleteStationStmt = myDB.compileStatement( "DELETE FROM stations where surveyId=?" );
         doDeleteSurveyStmt  = myDB.compileStatement( "DELETE FROM surveys where id=?" );
-
         dropFixedStmt  = myDB.compileStatement( "DELETE FROM fixeds where surveyId=? and station=? and status=1" );
-        updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
-        updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
-        updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
+
+        // FIXME DEVICE_DB
+        // updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
+        // updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
+        // updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
 
      } catch ( SQLiteException e ) {
        myDB = null;
@@ -1024,64 +1031,65 @@ public class DataHelper extends DataSetObservable
   
   // ----------------------------------------------------------------------
   // CALIBRATION DATA
-
-  void deleteGM( long cid, long id, boolean delete )
-  {
-    // if ( myDB == null ) return;
-    deleteGMStmt.bindLong( 1, delete? 1 : 0 );
-    deleteGMStmt.bindLong( 2, cid );
-    deleteGMStmt.bindLong( 3, id );
-    deleteGMStmt.execute();
-  }
-
-  public void doDeleteCalib( long cid ) 
-  {
-    // if ( myDB == null ) return;
-    doDeleteGMStmt.bindLong( 1, cid );
-    doDeleteGMStmt.execute();
-    doDeleteCalibStmt.bindLong( 1, cid );
-    doDeleteCalibStmt.execute();
-  }
-
-  public long updateGMName( long id, long cid, String grp )
-  {
-    // if ( myDB == null ) return -1;
-    updateGMGroupStmt.bindString( 1, grp );
-    updateGMGroupStmt.bindLong( 2, cid );
-    updateGMGroupStmt.bindLong( 3, id );
-    updateGMGroupStmt.execute();
-    return 0;
-  }
-
-  public long updateGMError( long id, long cid, double error )
-  {
-    // if ( myDB == null ) return -1;
-    updateGMErrorStmt.bindDouble( 1, error );
-    updateGMErrorStmt.bindLong( 2, cid );
-    updateGMErrorStmt.bindLong( 3, id );
-    updateGMErrorStmt.execute();
-    return 0;
-  }
-
-  public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
-  {
-    // if ( myDB == null ) return -1;
-    ++ myNextCId;
-    ContentValues cv = new ContentValues();
-    cv.put( "calibId", cid );
-    cv.put( "id",      myNextCId );
-    cv.put( "gx", gx );
-    cv.put( "gy", gy );
-    cv.put( "gz", gz );
-    cv.put( "mx", mx );
-    cv.put( "my", my );
-    cv.put( "mz", mz );
-    cv.put( "grp", 0 );
-    cv.put( "error", 0.0 );
-    cv.put( "status", 0 );
-    long ret= myDB.insert( GM_TABLE, null, cv );
-    return ret;
-  }
+// FIXME DEVICE_DB
+// 
+//   void deleteGM( long cid, long id, boolean delete )
+//   {
+//     // if ( myDB == null ) return;
+//     deleteGMStmt.bindLong( 1, delete? 1 : 0 );
+//     deleteGMStmt.bindLong( 2, cid );
+//     deleteGMStmt.bindLong( 3, id );
+//     deleteGMStmt.execute();
+//   }
+// 
+//   public void doDeleteCalib( long cid ) 
+//   {
+//     // if ( myDB == null ) return;
+//     doDeleteGMStmt.bindLong( 1, cid );
+//     doDeleteGMStmt.execute();
+//     doDeleteCalibStmt.bindLong( 1, cid );
+//     doDeleteCalibStmt.execute();
+//   }
+// 
+//   public long updateGMName( long id, long cid, String grp )
+//   {
+//     // if ( myDB == null ) return -1;
+//     updateGMGroupStmt.bindString( 1, grp );
+//     updateGMGroupStmt.bindLong( 2, cid );
+//     updateGMGroupStmt.bindLong( 3, id );
+//     updateGMGroupStmt.execute();
+//     return 0;
+//   }
+// 
+//   public long updateGMError( long id, long cid, double error )
+//   {
+//     // if ( myDB == null ) return -1;
+//     updateGMErrorStmt.bindDouble( 1, error );
+//     updateGMErrorStmt.bindLong( 2, cid );
+//     updateGMErrorStmt.bindLong( 3, id );
+//     updateGMErrorStmt.execute();
+//     return 0;
+//   }
+// 
+//   public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
+//   {
+//     // if ( myDB == null ) return -1;
+//     ++ myNextCId;
+//     ContentValues cv = new ContentValues();
+//     cv.put( "calibId", cid );
+//     cv.put( "id",      myNextCId );
+//     cv.put( "gx", gx );
+//     cv.put( "gy", gy );
+//     cv.put( "gz", gz );
+//     cv.put( "mx", mx );
+//     cv.put( "my", my );
+//     cv.put( "mz", mz );
+//     cv.put( "grp", 0 );
+//     cv.put( "error", 0.0 );
+//     cv.put( "status", 0 );
+//     long ret= myDB.insert( GM_TABLE, null, cv );
+//     return ret;
+//   }
   
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
@@ -1864,80 +1872,80 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-
-   public void resetAllGMs( long cid )
-   {
-     resetAllGMStmt.bindLong( 1, cid );
-     resetAllGMStmt.execute();
-   }
-
-   public List<CalibCBlock> selectAllGMs( long cid, int status )
-   {
-     List< CalibCBlock > list = new ArrayList< CalibCBlock >();
-     // if ( myDB == null ) return list;
-     Cursor cursor = myDB.query(GM_TABLE,
-                                new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
-                                "calibId=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
-     if (cursor.moveToFirst()) {
-       do {
-         if ( status >= (int)cursor.getLong(9) ) { // status == 0 --> only good shots
-                                                   // status == 1 --> all shots
-           CalibCBlock block = new CalibCBlock();
-           block.setId( cursor.getLong(0), cid );
-           block.setData( 
-             cursor.getLong(1),
-             cursor.getLong(2),
-             cursor.getLong(3),
-             cursor.getLong(4),
-             cursor.getLong(5),
-             cursor.getLong(6) );
-           block.setGroup( cursor.getLong(7) );
-           block.setError( (float)( cursor.getDouble(8) ) );
-           block.setStatus( cursor.getLong(9) );
-           list.add( block );
-         }
-       } while (cursor.moveToNext());
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return list;
-   }
-
-   public CalibCBlock selectGM( long id, long cid )
-   {
-     CalibCBlock block = null;
-     // if ( myDB == null ) return null;
-     Cursor cursor = myDB.query(GM_TABLE,
-                                new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
-                                "calibId=? and id=?", 
-                                new String[] { Long.toString(cid), Long.toString(id) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       block = new CalibCBlock();
-       block.setId( cursor.getLong(0), cid );
-       block.setData( 
-         cursor.getLong(1),
-         cursor.getLong(2),
-         cursor.getLong(3),
-         cursor.getLong(4),
-         cursor.getLong(5),
-         cursor.getLong(6) );
-       block.setGroup( cursor.getLong(7) );
-       block.setError( (float)( cursor.getDouble(8) ) );
-       block.setStatus( cursor.getLong(9) );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return block;
-   }
+// FIXME DEVICE_DB
+//    public void resetAllGMs( long cid )
+//    {
+//      resetAllGMStmt.bindLong( 1, cid );
+//      resetAllGMStmt.execute();
+//    }
+// 
+//    public List<CalibCBlock> selectAllGMs( long cid, int status )
+//    {
+//      List< CalibCBlock > list = new ArrayList< CalibCBlock >();
+//      // if ( myDB == null ) return list;
+//      Cursor cursor = myDB.query(GM_TABLE,
+//                                 new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
+//                                 "calibId=?",
+//                                 new String[] { Long.toString(cid) },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 "id" ); // order by
+//      if (cursor.moveToFirst()) {
+//        do {
+//          if ( status >= (int)cursor.getLong(9) ) { // status == 0 --> only good shots
+//                                                    // status == 1 --> all shots
+//            CalibCBlock block = new CalibCBlock();
+//            block.setId( cursor.getLong(0), cid );
+//            block.setData( 
+//              cursor.getLong(1),
+//              cursor.getLong(2),
+//              cursor.getLong(3),
+//              cursor.getLong(4),
+//              cursor.getLong(5),
+//              cursor.getLong(6) );
+//            block.setGroup( cursor.getLong(7) );
+//            block.setError( (float)( cursor.getDouble(8) ) );
+//            block.setStatus( cursor.getLong(9) );
+//            list.add( block );
+//          }
+//        } while (cursor.moveToNext());
+//      }
+//      if (cursor != null && !cursor.isClosed()) {
+//        cursor.close();
+//      }
+//      return list;
+//    }
+// 
+//    public CalibCBlock selectGM( long id, long cid )
+//    {
+//      CalibCBlock block = null;
+//      // if ( myDB == null ) return null;
+//      Cursor cursor = myDB.query(GM_TABLE,
+//                                 new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
+//                                 "calibId=? and id=?", 
+//                                 new String[] { Long.toString(cid), Long.toString(id) },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 null ); // order by
+//      if (cursor.moveToFirst()) {
+//        block = new CalibCBlock();
+//        block.setId( cursor.getLong(0), cid );
+//        block.setData( 
+//          cursor.getLong(1),
+//          cursor.getLong(2),
+//          cursor.getLong(3),
+//          cursor.getLong(4),
+//          cursor.getLong(5),
+//          cursor.getLong(6) );
+//        block.setGroup( cursor.getLong(7) );
+//        block.setError( (float)( cursor.getDouble(8) ) );
+//        block.setStatus( cursor.getLong(9) );
+//      }
+//      if (cursor != null && !cursor.isClosed()) {
+//        cursor.close();
+//      }
+//      return block;
+//    }
 
    public SurveyInfo selectSurveyInfo( long sid )
    {
@@ -1966,99 +1974,100 @@ public class DataHelper extends DataSetObservable
      return info;
    }
 
-   public int selectCalibAlgo( long cid )
-   {
-     int algo = 0; // default CALIB_ALGO_AUTO
-     // if ( myDB == null ) return 0;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "algo" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       algo = (int)cursor.getLong( 0 );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return algo;
-   }
- 
-   public CalibInfo selectCalibInfo( long cid )
-   {
-     CalibInfo info = null;
-     // if ( myDB == null ) return null;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "name", "day", "device", "comment", "algo" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       info = new CalibInfo( 
-               cid,
-               cursor.getString( 0 ),
-               cursor.getString( 1 ),
-               cursor.getString( 2 ),
-               cursor.getString( 3 ),
-               (int)cursor.getLong( 4 ) );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return info;
-   }
-
-   public void selectCalibError( long cid, CalibResult res )
-   {
-     // if ( myDB == null ) return;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "error", "max_error", "iterations" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       // Log.v( "DistoX", "select calib error " + cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2) );
-       try {
-         String str = cursor.getString(0);
-         if ( str != null ) res.error = Float.parseFloat( str );
-         str = cursor.getString(1);
-         if ( str != null ) res.max_error = Float.parseFloat( str );
-         str = cursor.getString(2);
-         if ( str != null ) res.iterations = Integer.parseInt( str );
-       } catch ( NumberFormatException e ) {
-         TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "selectCalibError parse Float error: calib ID " + cid );
-       }
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-   }
-
-   public String selectCalibCoeff( long cid )
-   {
-     String coeff = null;
-     // if ( myDB == null ) return null;
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "coeff" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(cid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
-     if (cursor.moveToFirst()) {
-       coeff = cursor.getString( 0 );
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return coeff;
-   }
+// FIXME DEVICE_DB
+//    public int selectCalibAlgo( long cid )
+//    {
+//      int algo = 0; // default CALIB_ALGO_AUTO
+//      // if ( myDB == null ) return 0;
+//      Cursor cursor = myDB.query( CALIB_TABLE,
+//                                 new String[] { "algo" }, // columns
+//                                 "id=?",
+//                                 new String[] { Long.toString(cid) },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 null ); // order by
+//      if (cursor.moveToFirst()) {
+//        algo = (int)cursor.getLong( 0 );
+//      }
+//      if (cursor != null && !cursor.isClosed()) {
+//        cursor.close();
+//      }
+//      return algo;
+//    }
+//  
+//    public CalibInfo selectCalibInfo( long cid )
+//    {
+//      CalibInfo info = null;
+//      // if ( myDB == null ) return null;
+//      Cursor cursor = myDB.query( CALIB_TABLE,
+//                                 new String[] { "name", "day", "device", "comment", "algo" }, // columns
+//                                 "id=?",
+//                                 new String[] { Long.toString(cid) },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 null ); // order by
+//      if (cursor.moveToFirst()) {
+//        info = new CalibInfo( 
+//                cid,
+//                cursor.getString( 0 ),
+//                cursor.getString( 1 ),
+//                cursor.getString( 2 ),
+//                cursor.getString( 3 ),
+//                (int)cursor.getLong( 4 ) );
+//      }
+//      if (cursor != null && !cursor.isClosed()) {
+//        cursor.close();
+//      }
+//      return info;
+//    }
+// 
+//    public void selectCalibError( long cid, CalibResult res )
+//    {
+//      // if ( myDB == null ) return;
+//      Cursor cursor = myDB.query( CALIB_TABLE,
+//                                 new String[] { "error", "max_error", "iterations" }, // columns
+//                                 "id=?",
+//                                 new String[] { Long.toString(cid) },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 null ); // order by
+//      if (cursor.moveToFirst()) {
+//        // Log.v( "DistoX", "select calib error " + cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2) );
+//        try {
+//          String str = cursor.getString(0);
+//          if ( str != null ) res.error = Float.parseFloat( str );
+//          str = cursor.getString(1);
+//          if ( str != null ) res.max_error = Float.parseFloat( str );
+//          str = cursor.getString(2);
+//          if ( str != null ) res.iterations = Integer.parseInt( str );
+//        } catch ( NumberFormatException e ) {
+//          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "selectCalibError parse Float error: calib ID " + cid );
+//        }
+//      }
+//      if (cursor != null && !cursor.isClosed()) {
+//        cursor.close();
+//      }
+//    }
+// 
+//    public String selectCalibCoeff( long cid )
+//    {
+//      String coeff = null;
+//      // if ( myDB == null ) return null;
+//      Cursor cursor = myDB.query( CALIB_TABLE,
+//                                 new String[] { "coeff" }, // columns
+//                                 "id=?",
+//                                 new String[] { Long.toString(cid) },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 null ); // order by
+//      if (cursor.moveToFirst()) {
+//        coeff = cursor.getString( 0 );
+//      }
+//      if (cursor != null && !cursor.isClosed()) {
+//        cursor.close();
+//      }
+//      return coeff;
+//    }
     
    // ----------------------------------------------------------------------
    // SELECT: LIST SURVEY / CABIL NAMES
@@ -2086,55 +2095,56 @@ public class DataHelper extends DataSetObservable
 
    public List<String> selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
        
-   public List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
-
-   public List<String> selectDeviceCalibs( String device ) 
-   {
-     List<String> ret = new ArrayList<String>();
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "name" }, // columns
-                                "device=?",
-                                new String[] { device },
-                                null,  // groupBy
-                                null,  // having
-                                null );
-     if (cursor != null ) {
-       if ( cursor.moveToFirst() ) {
-         do {
-           ret.add( new String(cursor.getString(0)) );
-         } while (cursor.moveToNext());
-       }
-       if ( !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
-
-   public List<CalibInfo> selectDeviceCalibsInfo( String device ) 
-   {
-     List<CalibInfo> ret = new ArrayList<CalibInfo>();
-     Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "id", "name", "day", "comment", "algo" }, // columns
-                                "device=?",
-                                new String[] { device },
-                                null,  // groupBy
-                                null,  // having
-                                null );
-     if (cursor != null ) {
-       if ( cursor.moveToFirst() ) {
-         do {
-           ret.add( new CalibInfo(
-             cursor.getLong(0),
-             cursor.getString(1),
-             cursor.getString(2),
-             device,
-             cursor.getString(3),
-             (int)cursor.getLong(4) ) );
-         } while (cursor.moveToNext());
-       }
-       if ( !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
+// FIXME DEVICE_DB
+//    public List<String> selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
+// 
+//    public List<String> selectDeviceCalibs( String device ) 
+//    {
+//      List<String> ret = new ArrayList<String>();
+//      Cursor cursor = myDB.query( CALIB_TABLE,
+//                                 new String[] { "name" }, // columns
+//                                 "device=?",
+//                                 new String[] { device },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 null );
+//      if (cursor != null ) {
+//        if ( cursor.moveToFirst() ) {
+//          do {
+//            ret.add( new String(cursor.getString(0)) );
+//          } while (cursor.moveToNext());
+//        }
+//        if ( !cursor.isClosed()) cursor.close();
+//      }
+//      return ret;
+//    }
+// 
+//    public List<CalibInfo> selectDeviceCalibsInfo( String device ) 
+//    {
+//      List<CalibInfo> ret = new ArrayList<CalibInfo>();
+//      Cursor cursor = myDB.query( CALIB_TABLE,
+//                                 new String[] { "id", "name", "day", "comment", "algo" }, // columns
+//                                 "device=?",
+//                                 new String[] { device },
+//                                 null,  // groupBy
+//                                 null,  // having
+//                                 null );
+//      if (cursor != null ) {
+//        if ( cursor.moveToFirst() ) {
+//          do {
+//            ret.add( new CalibInfo(
+//              cursor.getLong(0),
+//              cursor.getString(1),
+//              cursor.getString(2),
+//              device,
+//              cursor.getString(3),
+//              (int)cursor.getLong(4) ) );
+//          } while (cursor.moveToNext());
+//        }
+//        if ( !cursor.isClosed()) cursor.close();
+//      }
+//      return ret;
+//    }
 
    // ----------------------------------------------------------------------
    // CONFIG DATA
@@ -2676,197 +2686,198 @@ public class DataHelper extends DataSetObservable
     return maxId( SHOT_TABLE, sid );
   }
 
-  public ArrayList< Device > getDevices( ) 
-  {
-    ArrayList<Device> ret = new ArrayList<Device>();
-    // if ( myDB == null ) return ret;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
-                                null, null, null, null, null );
-    if (cursor != null ) {
-      if ( cursor.moveToFirst() ) {
-        do {
-          ret.add( new Device( cursor.getString(0), 
-                               cursor.getString(1),
-                               (int)cursor.getLong(2),
-                               (int)cursor.getLong(3),
-                               cursor.getString(4),
-                               cursor.getString(5)
-                  ) );
-        } while (cursor.moveToNext());
-      }
-      if ( !cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
-
-  // get device by address or by nickname
-  public Device getDevice( String addr )
-  {
-    // if ( myDB == null ) return null;
-    Device ret = getDeviceByAddress( addr );
-    if ( ret == null ) {
-      ret = getDeviceByNickname( addr );
-    }
-    return ret;
-  }
-       
-  private Device getDeviceByNickname( String nickname )
-  {
-    if ( myDB == null ) return null;
-    Device ret = null;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
-                                "nickname=?", new String[] { nickname }, null, null, null );
-    if (cursor != null ) {
-      if ( cursor.moveToFirst() ) {
-        ret = new Device( cursor.getString(0), 
-                          cursor.getString(1),
-                          (int)cursor.getLong(2),
-                          (int)cursor.getLong(3),
-                          cursor.getString(4),
-                          cursor.getString(5)
-                        );
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
-
-  private Device getDeviceByAddress( String addr )
-  {
-    if ( myDB == null ) return null;
-    Device ret = null;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
-                                "address=?", new String[] { addr }, null, null, null );
-    if (cursor != null ) {
-      if ( cursor.moveToFirst() ) {
-        ret = new Device( cursor.getString(0), 
-                          cursor.getString(1),
-                          (int)cursor.getLong(2),
-                          (int)cursor.getLong(3),
-                          cursor.getString(4),
-                          cursor.getString(5)
-                        );
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
-
-  public int getDeviceTail( String address )
-  { 
-    int ret = 0;
-    // if ( myDB == null ) return 0;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "tail" },
-                         "address=?", 
-                         new String[] { address },
-                         null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        ret = (int)( cursor.getLong(0) );
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
-
-  public boolean getDeviceHeadTail( String address, int[] head_tail )
-  {
-    boolean ret = false;
-    // if ( myDB == null ) return false;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "head", "tail" },
-                         "address=?", 
-                         new String[] { address },
-                         null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        head_tail[0] = (int)( cursor.getLong(0) );
-        head_tail[1] = (int)( cursor.getLong(1) );
-        ret = true;
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
-
-  boolean insertDevice( String address, String model, String name )
-  {
-    boolean ret = true;
-    // if ( myDB == null ) return false;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "model" },
-                         "address=?", 
-                         new String[] { address },
-                         null, null, null );
-    if ( cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        // TODO address already in the database: check model
-        ret = false;
-      } else {
-        ContentValues cv = new ContentValues();
-        cv.put( "address", address );
-        cv.put( "model",   model );
-        cv.put( "head",    0 );
-        cv.put( "tail",    0 );
-        cv.put( "name",    name );
-        cv.put( "nickname", "" );  // FIXME empty nickname
-        myDB.insert( DEVICE_TABLE, null, cv );
-      }
-      if (!cursor.isClosed()) cursor.close(); 
-    }
-    return ret;
-  }
-
-  private void insertDeviceHeadTail( String address, String model, int[] head_tail, String name )
-  {
-    // if ( myDB == null ) return;
-    ContentValues cv = new ContentValues();
-    cv.put( "address", address );
-    cv.put( "model",   model );
-    cv.put( "head",    head_tail[0] );
-    cv.put( "tail",    head_tail[1] );
-    cv.put( "name",    name );
-    cv.put( "nickname", "" );  // FIXME empty nickname
-    myDB.insert( DEVICE_TABLE, null, cv );
-  }
-
-  public void updateDeviceModel( String address, String model )
-  {
-    updateDeviceModelStmt.bindString( 1, model );
-    updateDeviceModelStmt.bindString( 2, address );
-    updateDeviceModelStmt.execute();
-  }
-
-  public void updateDeviceNickname( String address, String nickname )
-  {
-    updateDeviceNicknameStmt.bindString( 1, nickname );
-    updateDeviceNicknameStmt.bindString( 2, address );
-    updateDeviceNicknameStmt.execute();
-  }
-
-  public boolean updateDeviceHeadTail( String address, int[] head_tail )
-  {
-    // if ( myDB == null ) return false;
-    boolean ret = false;
-    Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "head" },
-                         "address=?", 
-                         new String[] { address },
-                         null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        // Log.v(TopoDroidApp.TAG, "update Head Tail " + address + " " + head_tail[0] + " " + head_tail[1] );
-        long head = head_tail[0];
-        long tail = head_tail[1];
-        updateDeviceHeadTailStmt.bindLong( 1, head );
-        updateDeviceHeadTailStmt.bindLong( 2, tail );
-        updateDeviceHeadTailStmt.bindString( 3, address );
-        updateDeviceHeadTailStmt.execute();
-        ret = true;
-      } else {
-        // insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
+// FIXME DEVICE_DB
+//   public ArrayList< Device > getDevices( ) 
+//   {
+//     ArrayList<Device> ret = new ArrayList<Device>();
+//     // if ( myDB == null ) return ret;
+//     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
+//                                 null, null, null, null, null );
+//     if (cursor != null ) {
+//       if ( cursor.moveToFirst() ) {
+//         do {
+//           ret.add( new Device( cursor.getString(0), 
+//                                cursor.getString(1),
+//                                (int)cursor.getLong(2),
+//                                (int)cursor.getLong(3),
+//                                cursor.getString(4),
+//                                cursor.getString(5)
+//                   ) );
+//         } while (cursor.moveToNext());
+//       }
+//       if ( !cursor.isClosed()) cursor.close();
+//     }
+//     return ret;
+//   }
+// 
+//   // get device by address or by nickname
+//   public Device getDevice( String addr )
+//   {
+//     // if ( myDB == null ) return null;
+//     Device ret = getDeviceByAddress( addr );
+//     if ( ret == null ) {
+//       ret = getDeviceByNickname( addr );
+//     }
+//     return ret;
+//   }
+//        
+//   private Device getDeviceByNickname( String nickname )
+//   {
+//     if ( myDB == null ) return null;
+//     Device ret = null;
+//     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
+//                                 "nickname=?", new String[] { nickname }, null, null, null );
+//     if (cursor != null ) {
+//       if ( cursor.moveToFirst() ) {
+//         ret = new Device( cursor.getString(0), 
+//                           cursor.getString(1),
+//                           (int)cursor.getLong(2),
+//                           (int)cursor.getLong(3),
+//                           cursor.getString(4),
+//                           cursor.getString(5)
+//                         );
+//       }
+//       if (!cursor.isClosed()) cursor.close();
+//     }
+//     return ret;
+//   }
+// 
+//   private Device getDeviceByAddress( String addr )
+//   {
+//     if ( myDB == null ) return null;
+//     Device ret = null;
+//     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "address", "model", "head", "tail", "name", "nickname" }, 
+//                                 "address=?", new String[] { addr }, null, null, null );
+//     if (cursor != null ) {
+//       if ( cursor.moveToFirst() ) {
+//         ret = new Device( cursor.getString(0), 
+//                           cursor.getString(1),
+//                           (int)cursor.getLong(2),
+//                           (int)cursor.getLong(3),
+//                           cursor.getString(4),
+//                           cursor.getString(5)
+//                         );
+//       }
+//       if (!cursor.isClosed()) cursor.close();
+//     }
+//     return ret;
+//   }
+// 
+//   public int getDeviceTail( String address )
+//   { 
+//     int ret = 0;
+//     // if ( myDB == null ) return 0;
+//     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "tail" },
+//                          "address=?", 
+//                          new String[] { address },
+//                          null, null, null );
+//     if (cursor != null ) {
+//       if (cursor.moveToFirst() ) {
+//         ret = (int)( cursor.getLong(0) );
+//       }
+//       if (!cursor.isClosed()) cursor.close();
+//     }
+//     return ret;
+//   }
+// 
+//   public boolean getDeviceHeadTail( String address, int[] head_tail )
+//   {
+//     boolean ret = false;
+//     // if ( myDB == null ) return false;
+//     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "head", "tail" },
+//                          "address=?", 
+//                          new String[] { address },
+//                          null, null, null );
+//     if (cursor != null ) {
+//       if (cursor.moveToFirst() ) {
+//         head_tail[0] = (int)( cursor.getLong(0) );
+//         head_tail[1] = (int)( cursor.getLong(1) );
+//         ret = true;
+//       }
+//       if (!cursor.isClosed()) cursor.close();
+//     }
+//     return ret;
+//   }
+// 
+//   boolean insertDevice( String address, String model, String name )
+//   {
+//     boolean ret = true;
+//     // if ( myDB == null ) return false;
+//     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "model" },
+//                          "address=?", 
+//                          new String[] { address },
+//                          null, null, null );
+//     if ( cursor != null ) {
+//       if (cursor.moveToFirst() ) {
+//         // TODO address already in the database: check model
+//         ret = false;
+//       } else {
+//         ContentValues cv = new ContentValues();
+//         cv.put( "address", address );
+//         cv.put( "model",   model );
+//         cv.put( "head",    0 );
+//         cv.put( "tail",    0 );
+//         cv.put( "name",    name );
+//         cv.put( "nickname", "" );  // FIXME empty nickname
+//         myDB.insert( DEVICE_TABLE, null, cv );
+//       }
+//       if (!cursor.isClosed()) cursor.close(); 
+//     }
+//     return ret;
+//   }
+// 
+//   private void insertDeviceHeadTail( String address, String model, int[] head_tail, String name )
+//   {
+//     // if ( myDB == null ) return;
+//     ContentValues cv = new ContentValues();
+//     cv.put( "address", address );
+//     cv.put( "model",   model );
+//     cv.put( "head",    head_tail[0] );
+//     cv.put( "tail",    head_tail[1] );
+//     cv.put( "name",    name );
+//     cv.put( "nickname", "" );  // FIXME empty nickname
+//     myDB.insert( DEVICE_TABLE, null, cv );
+//   }
+// 
+//   public void updateDeviceModel( String address, String model )
+//   {
+//     updateDeviceModelStmt.bindString( 1, model );
+//     updateDeviceModelStmt.bindString( 2, address );
+//     updateDeviceModelStmt.execute();
+//   }
+// 
+//   public void updateDeviceNickname( String address, String nickname )
+//   {
+//     updateDeviceNicknameStmt.bindString( 1, nickname );
+//     updateDeviceNicknameStmt.bindString( 2, address );
+//     updateDeviceNicknameStmt.execute();
+//   }
+// 
+//   public boolean updateDeviceHeadTail( String address, int[] head_tail )
+//   {
+//     // if ( myDB == null ) return false;
+//     boolean ret = false;
+//     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "head" },
+//                          "address=?", 
+//                          new String[] { address },
+//                          null, null, null );
+//     if (cursor != null ) {
+//       if (cursor.moveToFirst() ) {
+//         // Log.v(TopoDroidApp.TAG, "update Head Tail " + address + " " + head_tail[0] + " " + head_tail[1] );
+//         long head = head_tail[0];
+//         long tail = head_tail[1];
+//         updateDeviceHeadTailStmt.bindLong( 1, head );
+//         updateDeviceHeadTailStmt.bindLong( 2, tail );
+//         updateDeviceHeadTailStmt.bindString( 3, address );
+//         updateDeviceHeadTailStmt.execute();
+//         ret = true;
+//       } else {
+//         // insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
+//       }
+//       if (!cursor.isClosed()) cursor.close();
+//     }
+//     return ret;
+//   }
 
   /** check if there is already a fixed record for the given station
    * @param id       do not consider record with this fixed ID
@@ -3002,47 +3013,48 @@ public class DataHelper extends DataSetObservable
    //   return true;
    // }
 
-   public boolean updateCalibInfo( long id, String date, String device, String comment )
-   {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
-     if ( date == null ) return false;
-     updateCalibStmt.bindString( 1, date );
-     updateCalibStmt.bindString( 2, (device != null)? device : "" );
-     updateCalibStmt.bindString( 3, (comment != null)? comment : "" );
-     updateCalibStmt.bindLong( 4, id );
-     updateCalibStmt.execute();
-     return true;
-   }
-
-   public boolean updateCalibAlgo( long id, long algo )
-   {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
-     updateCalibAlgoStmt.bindLong( 1, algo );
-     updateCalibAlgoStmt.bindLong( 2, id );
-     updateCalibAlgoStmt.execute();
-     return true;
-   }
-
-   public boolean updateCalibCoeff( long id, String coeff )
-   {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
-     if ( coeff == null ) return false;
-     updateCalibCoeffStmt.bindString( 1, coeff );
-     updateCalibCoeffStmt.bindLong( 2, id );
-     updateCalibCoeffStmt.execute();
-     return true;
-   }
-
-   public boolean updateCalibError( long id, double error, double max_error, int iterations )
-   {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
-     updateCalibErrorStmt.bindDouble( 1, error );
-     updateCalibErrorStmt.bindDouble( 2, max_error );
-     updateCalibErrorStmt.bindLong( 3, iterations );
-     updateCalibErrorStmt.bindLong( 4, id );
-     updateCalibErrorStmt.execute();
-     return true;
-   }
+// FIXME DEVICE_DB
+//    public boolean updateCalibInfo( long id, String date, String device, String comment )
+//    {
+//      // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
+//      if ( date == null ) return false;
+//      updateCalibStmt.bindString( 1, date );
+//      updateCalibStmt.bindString( 2, (device != null)? device : "" );
+//      updateCalibStmt.bindString( 3, (comment != null)? comment : "" );
+//      updateCalibStmt.bindLong( 4, id );
+//      updateCalibStmt.execute();
+//      return true;
+//    }
+// 
+//    public boolean updateCalibAlgo( long id, long algo )
+//    {
+//      // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
+//      updateCalibAlgoStmt.bindLong( 1, algo );
+//      updateCalibAlgoStmt.bindLong( 2, id );
+//      updateCalibAlgoStmt.execute();
+//      return true;
+//    }
+// 
+//    public boolean updateCalibCoeff( long id, String coeff )
+//    {
+//      // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
+//      if ( coeff == null ) return false;
+//      updateCalibCoeffStmt.bindString( 1, coeff );
+//      updateCalibCoeffStmt.bindLong( 2, id );
+//      updateCalibCoeffStmt.execute();
+//      return true;
+//    }
+// 
+//    public boolean updateCalibError( long id, double error, double max_error, int iterations )
+//    {
+//      // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
+//      updateCalibErrorStmt.bindDouble( 1, error );
+//      updateCalibErrorStmt.bindDouble( 2, max_error );
+//      updateCalibErrorStmt.bindLong( 3, iterations );
+//      updateCalibErrorStmt.bindLong( 4, id );
+//      updateCalibErrorStmt.execute();
+//      return true;
+//    }
 
    public long setSurvey( String name, boolean forward )
    {
@@ -3067,22 +3079,23 @@ public class DataHelper extends DataSetObservable
      return sid;
    }
 
-   public long setCalib( String calib ) 
-   {
-     myNextCId = 0;
-     // if ( myDB == null ) return 0L;
-     long cid = setName( CALIB_TABLE, calib );
-     Cursor cursor = myDB.query( GM_TABLE, new String[] { "max(id)" },
-                          "calibId=?", new String[] { Long.toString(cid) },
-                          null, null, null );
-     if (cursor.moveToFirst() ) {
-       myNextCId = cursor.getLong(0);
-     }
-     if (cursor != null && !cursor.isClosed()) { cursor.close(); }
-     return cid;
-   }
-
-   public String getCalibFromId( long cid ) { return getNameFromId( CALIB_TABLE, cid ); }
+// FIXME DEVICE_DB
+//    public long setCalib( String calib ) 
+//    {
+//      myNextCId = 0;
+//      // if ( myDB == null ) return 0L;
+//      long cid = setName( CALIB_TABLE, calib );
+//      Cursor cursor = myDB.query( GM_TABLE, new String[] { "max(id)" },
+//                           "calibId=?", new String[] { Long.toString(cid) },
+//                           null, null, null );
+//      if (cursor.moveToFirst() ) {
+//        myNextCId = cursor.getLong(0);
+//      }
+//      if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+//      return cid;
+//    }
+// 
+//    public String getCalibFromId( long cid ) { return getNameFromId( CALIB_TABLE, cid ); }
 
    public String getSurveyFromId( long sid ) { return getNameFromId( SURVEY_TABLE, sid ); }
 
@@ -3348,80 +3361,6 @@ public class DataHelper extends DataSetObservable
      }
    }
 
-   private int pos,  // string position
-               len;  // string length
-
-   private void skipSpaces( String val )
-   {
-     while ( pos < len && val.charAt(pos) == ' ' ) ++ pos;
-   }
-
-   private void skipCommaAndSpaces( String val )
-   {
-     if ( pos < len && val.charAt(pos) == ',' ) ++pos;
-     while ( pos < len && val.charAt(pos) == ' ' ) ++ pos;
-   }
-   
-   private int nextQuote( String val )
-   {
-     int next = pos;
-     while ( next < len && val.charAt(next) != '"' ) ++next; 
-     return next;
-   }
-
-   // return the position of next comma or space
-   // the return value is guaranteed >= pos
-   private int nextCommaOrSpace( String val )
-   {
-     int next = pos;
-     while ( next < len && val.charAt(next) != ',' && val.charAt(next) != ' ' ) ++next; 
-     return next;
-   }
-
-   private String stringValue( String val ) 
-   {
-     ++pos; // skip '"'
-     int next_pos = nextQuote( val );
-     String ret = (pos == next_pos )? "" : val.substring(pos, next_pos );
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "stringValue <" + ret + ">" );
-     pos = next_pos + 1;
-     skipCommaAndSpaces( val );
-     return ret;
-   }
-
-   private long longValue( String val )
-   {
-     long ret = -1;
-     int next_pos = nextCommaOrSpace( val );
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "longValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
-     String toParse = val.substring( pos, next_pos ); // N.B. next_pos >= pos --> toParse != null
-     if ( ! toParse.equals("\"null\"") ) {
-       try {
-         ret = Long.parseLong( val.substring( pos, next_pos ) );
-       } catch ( NumberFormatException e ) {
-         TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "longValue error: " + val.substring( pos, next_pos ) );
-       }
-     }
-     pos = next_pos;
-     skipCommaAndSpaces( val );
-     return ret;
-   }
-
-   private double doubleValue( String val )
-   {
-     int next_pos = nextCommaOrSpace( val );
-     double ret = 0.0;
-     try {
-       ret = Double.parseDouble( val.substring(pos, next_pos ) );
-       // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "doubleValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
-     } catch ( NumberFormatException e ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "doubleValue error: " + val.substring(pos, next_pos) );
-     }
-     pos = next_pos;
-     skipCommaAndSpaces( val );
-     return ret;
-   }
-
    /** load survey data from a sql file
     * @param filename  name of the sql file
     */
@@ -3441,17 +3380,18 @@ public class DataHelper extends DataSetObservable
        // if ( vals.length != 4 ) { TODO } // FIXME
        String table = vals[2];
        String v = vals[3];
-       pos = v.indexOf( '(' ) + 1;
-       len = v.lastIndexOf( ')' );
-       skipSpaces( v );
+       Scanline scanline0 = new Scanline( v, v.indexOf('(')+1, v.lastIndexOf(')') );
+       // pos = v.indexOf( '(' ) + 1;
+       // len = v.lastIndexOf( ')' );
+       // scanline0.skipSpaces( );
        if ( table.equals(SURVEY_TABLE) ) { 
-         long skip_sid = longValue( v );
-         name          = stringValue( v );
-         String day    = stringValue( v );
-         String team   = stringValue( v );
-         double decl   = 0; if ( db_version > 14 ) doubleValue( v );
-         comment       = stringValue( v );
-         String init_station = "0"; if ( db_version > 22) init_station = stringValue( v );
+         long skip_sid = scanline0.longValue( );
+         name          = scanline0.stringValue( );
+         String day    = scanline0.stringValue( );
+         String team   = scanline0.stringValue( );
+         double decl   = 0; if ( db_version > 14 ) scanline0.doubleValue( );
+         comment       = scanline0.stringValue( );
+         String init_station = "0"; if ( db_version > 22) init_station = scanline0.stringValue( );
 
          sid = setSurvey( name, false );
          updateSurveyInfo( sid, day, team, decl, comment, init_station, false );
@@ -3460,95 +3400,96 @@ public class DataHelper extends DataSetObservable
            vals = line.split(" ", 4);
            table = vals[2];
            v = vals[3];
-           pos = v.indexOf( '(' ) + 1;
-           len = v.lastIndexOf( ')' );
-           skipSpaces( v );
+           Scanline scanline1 = new Scanline( v, v.indexOf('(')+1, v.lastIndexOf(')') );
+           // pos = v.indexOf( '(' ) + 1;
+           // len = v.lastIndexOf( ')' );
+           // scanline1.skipSpaces( );
            // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loafFromFile " + table + " " + v );
-           skip_sid = longValue( v );
-           id = longValue( v );
+           skip_sid = scanline1.longValue( );
+           id = scanline1.longValue( );
            if ( table.equals(PHOTO_TABLE) ) { // FIXME PHOTO
-             shotid  = longValue( v );
-             title   = stringValue( v );
-             date    = stringValue( v );
-             comment = stringValue( v );
+             shotid  = scanline1.longValue( );
+             title   = scanline1.stringValue( );
+             date    = scanline1.stringValue( );
+             comment = scanline1.stringValue( );
              if ( shotid >= 0 ) {
                insertPhoto( sid, id, shotid, title, date, comment );
                // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
              }
            } else if ( table.equals(PLOT_TABLE) ) { // ***** PLOTS
-             name         = stringValue( v );
-             long type    = longValue( v ); if ( db_version <= 20 ) if ( type == 3 ) type = 5;
-             status       = longValue( v );
-             String start = stringValue( v );
-             String view  = stringValue( v );
-             double xoffset = doubleValue( v );
-             double yoffset = doubleValue( v );
-             double zoom  = doubleValue( v );
-             double azimuth = doubleValue( v );
-             double clino = 0; if ( db_version > 20 ) clino = doubleValue( v );
+             name         = scanline1.stringValue( );
+             long type    = scanline1.longValue( ); if ( db_version <= 20 ) if ( type == 3 ) type = 5;
+             status       = scanline1.longValue( );
+             String start = scanline1.stringValue( );
+             String view  = scanline1.stringValue( );
+             double xoffset = scanline1.doubleValue( );
+             double yoffset = scanline1.doubleValue( );
+             double zoom  = scanline1.doubleValue( );
+             double azimuth = scanline1.doubleValue( );
+             double clino = 0; if ( db_version > 20 ) clino = scanline1.doubleValue( );
              insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, false );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
    
            // FIXME_SKETCH_3D
            } else if ( table.equals(SKETCH_TABLE) ) { // ***** SKETCHES
-             name         = stringValue( v );
-             status       = longValue( v );
-             String start = stringValue( v );
-             String st1   = stringValue( v );
-             String st2   = stringValue( v );
-             double xofft  = doubleValue( v );
-             double yofft  = doubleValue( v );
-             double zoomt  = doubleValue( v );
-             double xoffs  = doubleValue( v );
-             double yoffs  = doubleValue( v );
-             double zooms  = doubleValue( v );
-             double xoff3  = doubleValue( v );
-             double yoff3  = doubleValue( v );
-             double zoom3  = doubleValue( v );
-             double east   = doubleValue( v );
-             double south  = doubleValue( v );
-             double vert   = doubleValue( v );
-             double azimuth= doubleValue( v );
-             double clino  = doubleValue( v );
+             name         = scanline1.stringValue( );
+             status       = scanline1.longValue( );
+             String start = scanline1.stringValue( );
+             String st1   = scanline1.stringValue( );
+             String st2   = scanline1.stringValue( );
+             double xofft  = scanline1.doubleValue( );
+             double yofft  = scanline1.doubleValue( );
+             double zoomt  = scanline1.doubleValue( );
+             double xoffs  = scanline1.doubleValue( );
+             double yoffs  = scanline1.doubleValue( );
+             double zooms  = scanline1.doubleValue( );
+             double xoff3  = scanline1.doubleValue( );
+             double yoff3  = scanline1.doubleValue( );
+             double zoom3  = scanline1.doubleValue( );
+             double east   = scanline1.doubleValue( );
+             double south  = scanline1.doubleValue( );
+             double vert   = scanline1.doubleValue( );
+             double azimuth= scanline1.doubleValue( );
+             double clino  = scanline1.doubleValue( );
              insertSketch3d( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt, xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino );
            // END_SKETCH_3D
            } else if ( table.equals(SHOT_TABLE) ) { // ***** SHOTS
-             String from = stringValue( v );
-             String to   = stringValue( v );
-             double d    = doubleValue( v );
-             double b    = doubleValue( v );
-             double c    = doubleValue( v );
-             double r    = doubleValue( v );
-             double acc  = doubleValue( v );
-             double mag  = doubleValue( v );
-             double dip  = doubleValue( v );
-             long extend = longValue( v );
-             long flag   = longValue( v );
-             long leg    = longValue( v );
-             status      = longValue( v );
-             comment     = stringValue( v );
+             String from = scanline1.stringValue( );
+             String to   = scanline1.stringValue( );
+             double d    = scanline1.doubleValue( );
+             double b    = scanline1.doubleValue( );
+             double c    = scanline1.doubleValue( );
+             double r    = scanline1.doubleValue( );
+             double acc  = scanline1.doubleValue( );
+             double mag  = scanline1.doubleValue( );
+             double dip  = scanline1.doubleValue( );
+             long extend = scanline1.longValue( );
+             long flag   = scanline1.longValue( );
+             long leg    = scanline1.longValue( );
+             status      = scanline1.longValue( );
+             comment     = scanline1.stringValue( );
              // FIXME N.B. type is not saved
-             // long type = 0; if ( db_version > 21 ) type = longValue( v );
+             // long type = 0; if ( db_version > 21 ) type = longValue( );
 
              insertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, 0, comment, false );
              updateShotAMDR( id, sid, acc, mag, dip, r, false );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertShot " + sid + " " + id + " " + from + " " + to );
            } else if ( table.equals(FIXED_TABLE) ) {
-             station    = stringValue( v );
-             double lng = doubleValue( v );
-             double lat = doubleValue( v );
-             double alt = doubleValue( v );
-             double asl = doubleValue( v );
-             comment    = stringValue( v );
-             status     = longValue( v );
+             station    = scanline1.stringValue( );
+             double lng = scanline1.doubleValue( );
+             double lat = scanline1.doubleValue( );
+             double alt = scanline1.doubleValue( );
+             double asl = scanline1.doubleValue( );
+             comment    = scanline1.stringValue( );
+             status     = scanline1.longValue( );
              insertFixed( sid, id, station, lng, lat, alt, asl, comment, status );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
            } else if ( table.equals(STATION_TABLE) ) {
              // N.B. ONLY IF db_version > 19
              // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "v <" + v + ">" );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment  );
-             name    = stringValue( v );
-             comment = stringValue( v );
+             name    = scanline1.stringValue( );
+             comment = scanline1.stringValue( );
              insertStation( sid, name, comment );
            }
          }
@@ -3724,38 +3665,39 @@ public class DataHelper extends DataSetObservable
              +   ")"
            );
             
-           db.execSQL(
-               create_table + CALIB_TABLE
-             + " ( id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
-             +   " name TEXT, "
-             +   " day TEXT, "
-             +   " device TEXT, "
-             +   " comment TEXT, "
-             +   " error REAL default 0, "
-             +   " max_error REAL default 0, "
-             +   " iterations INTEGER default 0, "
-             +   " coeff BLOB, "
-             +   " algo INTEGER default 0 "
-             +   ")"
-           );
-
-           db.execSQL(
-               create_table + GM_TABLE 
-             + " ( calibId INTEGER, "
-             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
-             +   " gx INTEGER, "
-             +   " gy INTEGER, "
-             +   " gz INTEGER, "
-             +   " mx INTEGER, "
-             +   " my INTEGER, "
-             +   " mz INTEGER, "
-             +   " grp INTEGER, "
-             +   " error REAL default 0, "
-             +   " status INTEGER default 0"
-             // +   " calibId REFERENCES " + CALIB_TABLE + "(id)"
-             // +   " ON DELETE CASCADE "
-             +   ")"
-           );
+// FIXME DEVICE_DB
+//            db.execSQL(
+//                create_table + CALIB_TABLE
+//              + " ( id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+//              +   " name TEXT, "
+//              +   " day TEXT, "
+//              +   " device TEXT, "
+//              +   " comment TEXT, "
+//              +   " error REAL default 0, "
+//              +   " max_error REAL default 0, "
+//              +   " iterations INTEGER default 0, "
+//              +   " coeff BLOB, "
+//              +   " algo INTEGER default 0 "
+//              +   ")"
+//            );
+// 
+//            db.execSQL(
+//                create_table + GM_TABLE 
+//              + " ( calibId INTEGER, "
+//              +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+//              +   " gx INTEGER, "
+//              +   " gy INTEGER, "
+//              +   " gz INTEGER, "
+//              +   " mx INTEGER, "
+//              +   " my INTEGER, "
+//              +   " mz INTEGER, "
+//              +   " grp INTEGER, "
+//              +   " error REAL default 0, "
+//              +   " status INTEGER default 0"
+//              // +   " calibId REFERENCES " + CALIB_TABLE + "(id)"
+//              // +   " ON DELETE CASCADE "
+//              +   ")"
+//            );
 
            db.execSQL(
                create_table + PLOT_TABLE 
@@ -3834,16 +3776,17 @@ public class DataHelper extends DataSetObservable
              +   ")"
            );
 
-           db.execSQL(
-               create_table + DEVICE_TABLE
-             + " ( address TEXT, "
-             +   " model TEXT, "
-             +   " head INTEGER, "
-             +   " tail INTEGER, "
-             +   " name TEXT, "
-             +   " nickname TEXT "
-             +   ")"
-           );
+// FIXME DEVICE_DB
+//            db.execSQL(
+//                create_table + DEVICE_TABLE
+//              + " ( address TEXT, "
+//              +   " model TEXT, "
+//              +   " head INTEGER, "
+//              +   " tail INTEGER, "
+//              +   " name TEXT, "
+//              +   " nickname TEXT "
+//              +   ")"
+//            );
 
            // db.execSQL(
            //     " CREATE TRIGGER fk_insert_shot BEFORE "
@@ -3883,14 +3826,15 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
            case 15:
              db.execSQL( "ALTER TABLE devices ADD COLUMN name TEXT" );
-           case 16:
-             db.execSQL( "ALTER TABLE calibs ADD COLUMN coeff BLOB" );
-           case 17:
-             db.execSQL( "ALTER TABLE calibs ADD COLUMN error REAL default 0" );
-             db.execSQL( "ALTER TABLE calibs ADD COLUMN max_error REAL default 0" );
-             db.execSQL( "ALTER TABLE calibs ADD COLUMN iterations INTEGER default 0" );
-           case 18:
-             db.execSQL( "ALTER TABLE calibs ADD COLUMN algo INTEGER default 1" );
+// FIXME DEVICE_DB
+//            case 16:
+//              db.execSQL( "ALTER TABLE calibs ADD COLUMN coeff BLOB" );
+//            case 17:
+//              db.execSQL( "ALTER TABLE calibs ADD COLUMN error REAL default 0" );
+//              db.execSQL( "ALTER TABLE calibs ADD COLUMN max_error REAL default 0" );
+//              db.execSQL( "ALTER TABLE calibs ADD COLUMN iterations INTEGER default 0" );
+//            case 18:
+//              db.execSQL( "ALTER TABLE calibs ADD COLUMN algo INTEGER default 1" );
            case 19:
              db.execSQL( "CREATE TABLE stations ( surveyId INTEGER, name TEXT, comment TEXT )" );
            case 20:
@@ -3900,8 +3844,9 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE shots ADD COLUMN type INTEGER default 0" );
            case 22:
              db.execSQL( "ALTER TABLE surveys ADD COLUMN init_station TEXT default \"0\"" );
-           case 23:
-             db.execSQL( "ALTER TABLE devices ADD COLUMN nickname TEXT default \"\"" );
+// FIXME DEVICE_DB
+//            case 23:
+//              db.execSQL( "ALTER TABLE devices ADD COLUMN nickname TEXT default \"\"" );
            case 24:
              /* current version */
            default:

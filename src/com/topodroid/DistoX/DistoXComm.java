@@ -242,7 +242,7 @@ public class DistoXComm
           // TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "M PACKET" );
           ++nReadPackets;
           // get G and M from mProto and save them to store
-          mApp.mData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
           hasG = false;
         } else if ( res == DistoXProtocol.DISTOX_PACKET_REPLY ) {
           

@@ -182,6 +182,7 @@ public class TopoDroidApp extends Application
   private DistoXComm mComm = null;        // BT communication
   DataDownloader mDataDownloader = null;  // data downloader
   static DataHelper mData = null;         // database 
+  static DeviceHelper mDData = null;      // device/calib database
 
   static SurveyActivity mSurveyActivity = null;
   static ShotActivity mShotActivity     = null;
@@ -308,7 +309,7 @@ public class TopoDroidApp extends Application
 
   boolean checkCalibrationDeviceMatch() 
   {
-    CalibInfo info = mData.selectCalibInfo( mCID  );
+    CalibInfo info = mDData.selectCalibInfo( mCID  );
     TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "info.device " + ((info == null)? "null" : info.device) );
     TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "device " + ((mDevice == null)? "null" : mDevice.mAddress) );
     return ( mDevice == null || ( info != null && info.device.equals( mDevice.mAddress ) ) );
@@ -345,8 +346,8 @@ public class TopoDroidApp extends Application
   public CalibInfo getCalibInfo()
   {
     if ( mCID <= 0 ) return null;
-    if ( mData == null ) return null;
-    return mData.selectCalibInfo( mCID );
+    if ( mDData == null ) return null;
+    return mDData.selectCalibInfo( mCID );
   }
 
   // ----------------------------------------------------------------
@@ -363,10 +364,10 @@ public class TopoDroidApp extends Application
     if ( device != null && device == mDevice ) {
       if ( device.mType != model ) {
         if ( model == Device.DISTO_A3 ) {
-          mData.updateDeviceModel( device.mAddress, "DistoX" );
+          mDData.updateDeviceModel( device.mAddress, "DistoX" );
           device.mType = model;
         } else if ( model == Device.DISTO_X310 ) {
-          mData.updateDeviceModel( device.mAddress, "DistoX-0000" );
+          mDData.updateDeviceModel( device.mAddress, "DistoX-0000" );
           device.mType = model;
         }
       }
@@ -376,7 +377,7 @@ public class TopoDroidApp extends Application
   void setDeviceName( Device device, String nickname )
   {
     if ( device != null /* && device == mDevice */ ) {
-      mData.updateDeviceNickname( device.mAddress, nickname );
+      mDData.updateDeviceNickname( device.mAddress, nickname );
       device.mNickname = nickname;
     }
   }
@@ -493,6 +494,7 @@ public class TopoDroidApp extends Application
 
     mDataListeners = new ArrayList< DataListener >( );
     mData = new DataHelper( this, mDataListeners );  // DATABASE MUST COME BEFORE PREFERENCES
+    mDData = new DeviceHelper( this, null ); 
 
     TopoDroidSetting.loadPreferences( this, mPrefs );
 
@@ -500,9 +502,9 @@ public class TopoDroidApp extends Application
 
     mEnableZip = true;
 
-    String version = mData.getValue( "version" );
+    String version = mDData.getValue( "version" );
     if ( version == null || ( ! version.equals(VERSION) ) ) {
-      mData.setValue( "version", VERSION );
+      mDData.setValue( "version", VERSION );
       // FIXME MANUAL installManual( );  // must come before installSymbols
       installSymbols( false ); // this updates symbol_version in the database
       installFirmware( false );
@@ -510,13 +512,13 @@ public class TopoDroidApp extends Application
     }
 
     {
-      String value = mData.getValue("sketch");
+      String value = mDData.getValue("sketch");
       mSketches =  value != null 
                 && value.equals("on")
                 && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
       // Log.v("DistoX", "Sketch value <" + value + ">");
 
-      value = mData.getValue("cosurvey");
+      value = mDData.getValue("cosurvey");
       mCosurvey =  value != null && value.equals("on");
       // Log.v("DistoX", "Cosurvey value <" + value + ">");
       setCoSurvey( false );
@@ -525,7 +527,7 @@ public class TopoDroidApp extends Application
 
     mSyncConn = new ConnectionHandler( this );
 
-    mDevice = mData.getDevice( mPrefs.getString( TopoDroidSetting.keyDeviceName(), DEVICE_NAME ) );
+    mDevice = mDData.getDevice( mPrefs.getString( TopoDroidSetting.keyDeviceName(), DEVICE_NAME ) );
 
     // DrawingBrushPaths.makePaths( getResources() );
 
@@ -778,15 +780,15 @@ public class TopoDroidApp extends Application
 
   public boolean hasCalibName( String name ) 
   {
-    return ( mData == null ) || mData.hasCalibName( name );
+    return ( mDData == null ) || mDData.hasCalibName( name );
   }
 
   public long setCalibFromName( String calib ) 
   {
     mCID = -1;
     myCalib = null;
-    if ( calib != null && mData != null ) {
-      mCID = mData.setCalib( calib );
+    if ( calib != null && mDData != null ) {
+      mCID = mDData.setCalib( calib );
       myCalib = (mCID > 0)? calib : null;
       return mCID;
     }
@@ -809,8 +811,8 @@ public class TopoDroidApp extends Application
 
   // public void setCalibFromId( long id )
   // {
-  //  if ( mData != null ) {
-  //     myCalib = mData.getCalibFromId( id );
+  //  if ( mDData != null ) {
+  //     myCalib = mDData.getCalibFromId( id );
   //     mCID = ( myCalib == null )? 0 : id;
   //   }
   // }
@@ -922,7 +924,7 @@ public class TopoDroidApp extends Application
       mDevice = null;
       address = "";
     } else {
-      mDevice = mData.getDevice( address );
+      mDevice = mDData.getDevice( address );
     }
     if ( mPrefs != null ) {
       Editor editor = mPrefs.edit();
@@ -1334,10 +1336,10 @@ public class TopoDroidApp extends Application
   public String exportCalibAsCsv( )
   {
     if ( mCID < 0 ) return null;
-    CalibInfo ci = mData.selectCalibInfo( mCID );
+    CalibInfo ci = mDData.selectCalibInfo( mCID );
     if ( ci == null ) return null;
     String filename = TopoDroidPath.getCsvFile( ci.name );
-    return TopoDroidExporter.exportCalibAsCsv( mCID, mData, ci, filename );
+    return TopoDroidExporter.exportCalibAsCsv( mCID, mDData, ci, filename );
   }
 
   // ----------------------------------------------
@@ -1357,7 +1359,7 @@ public class TopoDroidApp extends Application
     boolean install = overwrite;
     askSymbolUpdate = false;
     if ( ! overwrite ) { // check whether to install
-      String version = mData.getValue( "symbol_version" );
+      String version = mDData.getValue( "symbol_version" );
       // Log.v("DistoX", "symbol version <" + version + "> SYMBOL_VERSION <" + SYMBOL_VERSION + ">" );
       if ( version == null ) {
         install = true;
@@ -1366,7 +1368,7 @@ public class TopoDroidApp extends Application
       } else { // version .equals SYMBOL_VERSION
         return;
       }
-      mData.setValue( "symbol_version", SYMBOL_VERSION );
+      mDData.setValue( "symbol_version", SYMBOL_VERSION );
     }
     if ( install ) {
       InputStream is = getResources().openRawResource( R.raw.symbols );
@@ -1651,12 +1653,12 @@ public class TopoDroidApp extends Application
 
   int getCalibAlgoFromDB()
   {
-    return mData.selectCalibAlgo( mCID );
+    return mDData.selectCalibAlgo( mCID );
   }
 
   void updateCalibAlgo( int algo ) 
   {
-    mData.updateCalibAlgo( mCID, algo );
+    mDData.updateCalibAlgo( mCID, algo );
   }
   
   int getCalibAlgoFromDevice()
