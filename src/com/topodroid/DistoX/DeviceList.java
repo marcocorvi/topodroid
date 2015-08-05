@@ -166,9 +166,9 @@ public class DeviceList extends Activity
         } else if ( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
           TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECT_REQUESTED");
         } else if ( BluetoothDevice.ACTION_ACL_DISCONNECTED.equals( action ) ) {
-          Bundle extra = data.getExtras();
-          String device = extra.getString( BluetoothDevice.EXTRA_DEVICE ).toString();
-          Log.v("DistoX", "DeviceList ACL_DISCONNECTED from " + device );
+          // Bundle extra = data.getExtras();
+          // String device = extra.getString( BluetoothDevice.EXTRA_DEVICE ).toString();
+          // Log.v("DistoX", "DeviceList ACL_DISCONNECTED from " + device );
           TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECTED");
         }
       }
