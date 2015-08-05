@@ -659,7 +659,7 @@ public class GMActivity extends Activity
         }
       } else if ( b == mButton1[5] ) { // read
         enableButtons( false );
-        new CalibReadTask( this, this, mApp ).execute();
+        new CalibReadTask( this, this, mApp, "GMActivity" ).execute();
 
       } else if ( b == mButton1[6] ) { // write
         // if ( mEnableWrite ) {

@@ -206,7 +206,10 @@ public class ShotNewDialog extends Dialog
   // FIXME synchronized ?
   public void onClick(View v) 
   {
-    if ( mTimer != null ) mTimer.mRun = false;
+    if ( mTimer != null ) {
+      mTimer.cancel( true );
+      mTimer = null;
+    }
 
     Button b = (Button) v;
     String val;
@@ -358,5 +361,16 @@ public class ShotNewDialog extends Dialog
     //   dismiss();
     }
   }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mTimer != null ) {
+      mTimer.cancel( true );
+      mTimer = null;
+    }
+    dismiss();
+  }
+
 }
 
