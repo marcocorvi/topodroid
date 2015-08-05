@@ -12,11 +12,18 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.List;
+
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.os.AsyncTask;
+import android.content.Context;
 
 import android.widget.Button;
 import android.widget.Toast;
+
+import android.util.Log;
 
 class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 {
@@ -24,13 +31,15 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   Activity mActivity;
   IEnableButtons mEnableButtons;
   TopoDroidApp mApp;
+  String comp_name;
 
-  CalibReadTask( Activity activity, IEnableButtons eb, TopoDroidApp app )
+  CalibReadTask( Activity activity, IEnableButtons eb, TopoDroidApp app, String act_name )
   {
     mActivity = activity;
     mApp      = app;
     mEnableButtons = eb;
     coeff = new byte[52]; // always read 52 bytes
+    comp_name = "ComponentInfo{com.topodroid.DistoX/com.topodroid.DistoX." + act_name + "}";
   }
 
   @Override
@@ -57,9 +66,21 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
       Calibration.coeffToG( coeff, bg, ag );
       Calibration.coeffToM( coeff, bm, am );
       Calibration.coeffToNL( coeff, nL );
-      (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, 0.0f, 0.0f, 0, null ) ).show();
+      ActivityManager act_man = (ActivityManager)mApp.getSystemService( Context.ACTIVITY_SERVICE );
+      List< RunningTaskInfo > acts = act_man.getRunningTasks( Integer.MAX_VALUE );
+      boolean found = false;
+      for ( RunningTaskInfo act : acts ) {
+        if ( act.topActivity.toString().equalsIgnoreCase( comp_name ) ) {
+          found = true;
+          break;
+        }
+      }
+      // Log.v("DistoX", comp_name + (found? " " : " not ") + "found" );
+      if ( found ) {
+        (new CalibCoeffDialog( mActivity, mApp, bg, ag, bm, am, nL, 0.0f, 0.0f, 0, null ) ).show();
+      }
     } else {
-      Toast.makeText( mActivity, R.string.read_failed, Toast.LENGTH_SHORT).show();
+      Toast.makeText( mApp, R.string.read_failed, Toast.LENGTH_SHORT).show();
     }
     mEnableButtons.enableButtons( true );
   }

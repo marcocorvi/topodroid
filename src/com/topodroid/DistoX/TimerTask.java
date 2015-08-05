@@ -42,6 +42,10 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
         Thread.sleep( 1000 - duration );
       } catch ( InterruptedException e ) {
       }
+      if ( isCancelled() ) {
+        mRun = false;
+        break;
+      }
     }
     if ( mRun ) {
       mCntAcc = 0;

@@ -445,7 +445,7 @@ public class DeviceActivity extends Activity
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
         enableButtons( false );
-        new CalibReadTask( this, this, mApp ).execute();
+        new CalibReadTask( this, this, mApp, "DeviceActivity" ).execute();
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // 3: DISTOX INFO

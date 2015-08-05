@@ -110,7 +110,10 @@ public class AzimuthDialDialog extends Dialog
 
   public void onClick(View v) 
   {
-    if ( mTimer != null ) mTimer.mRun = false;
+    if ( mTimer != null ) {
+      mTimer.cancel( true );
+      mTimer = null;
+    }
 
     Button b = (Button) v;
     // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "AzimuthDialDialog onClick button " + b.getText().toString() );
@@ -142,6 +145,16 @@ public class AzimuthDialDialog extends Dialog
     } else {
       dismiss();
     }
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( mTimer != null ) {
+      mTimer.cancel( true );
+      mTimer = null;
+    }
+    dismiss();
   }
 
 }
