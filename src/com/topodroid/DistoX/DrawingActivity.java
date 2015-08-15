@@ -986,13 +986,19 @@ public class DrawingActivity extends ItemDrawer
     {
       super.onStop();
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-      if ( mDataDownloader != null ) {
-        mApp.unregisterLister( this );
-        mDataDownloader.onStop();
-        mApp.disconnectRemoteDevice( false );
-      }
       doStop();
     }
+
+    // @Override
+    // protected synchronized void onDestroy()
+    // {
+    //   super.onDestroy();
+    //   if ( mDataDownloader != null ) { // data-download management is left to ShotActivity
+    //     mApp.unregisterLister( this );
+    //     mDataDownloader.onStop();
+    //     mApp.disconnectRemoteDevice( false );
+    //   }
+    // }
 
     private void doResume()
     {
@@ -1738,7 +1744,7 @@ public class DrawingActivity extends ItemDrawer
                           BezierPoint p3 = c.getPoint(3);
                           lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
-                        if ( mContinueLine ) {
+                        if ( mContinueLine && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                           if ( line != null ) {
                             // Log.v( "DistoX", "continuing line ");

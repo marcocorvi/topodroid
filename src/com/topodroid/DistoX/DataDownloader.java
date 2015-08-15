@@ -89,7 +89,7 @@ class DataDownloader
 
   void stopDownloadData()
   {
-    // Log.v("DistoX", "disconnect() status was " + mStatus );
+    // Log.v("DistoX", "stopDownloadData() connected " + mConnected );
     // if ( ! mConnected ) return;
     if ( TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS ) {
       mApp.disconnectComm();
@@ -100,6 +100,7 @@ class DataDownloader
   // called also by ReconnectTask
   void tryConnect()
   {
+    // Log.v("DistoX", "tryConnect() download " + mDownload + " connected " + mConnected );
     if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
@@ -146,6 +147,7 @@ class DataDownloader
 
   void onStop()
   {
+    // Log.v("DistoX", "DataDownloader onStop()");
     mDownload = false;
     if ( mConnected ) {
       stopDownloadData();
@@ -155,6 +157,7 @@ class DataDownloader
 
   void onResume()
   {
+    // Log.v("DistoX", "DataDownloader onResume()");
   }
 
 }

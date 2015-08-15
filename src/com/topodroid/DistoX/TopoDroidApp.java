@@ -741,6 +741,49 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------------------
   // SURVEY AND CALIBRATION
 
+  boolean renameCurrentSurvey( long sid, String name, boolean forward )
+  {
+    if ( name == null || name.length() == 0 ) return false;
+    if ( name.equals( mySurvey ) ) return true;
+    if ( mData == null ) return false;
+    if ( mData.renameSurvey( sid, name, forward ) ) {  
+      File old = null;
+      File nev = null;
+      { // rename plot/sketch files: th3
+        List< PlotInfo > plots = mData.selectAllPlots( sid );
+        for ( PlotInfo p : plots ) {
+          old = new File( TopoDroidPath.getSurveyPlotTh2File( mySurvey, p.name ) );
+          nev = new File( TopoDroidPath.getSurveyPlotTh2File( name, p.name ) );
+          if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        }
+      }
+      { // rename sketch files: th3
+        List< Sketch3dInfo > sketches = mData.selectAllSketches( sid );
+        for ( Sketch3dInfo s : sketches ) {
+          old = new File( TopoDroidPath.getSurveyPlotTh2File( mySurvey, s.name ) );
+          nev = new File( TopoDroidPath.getSurveyPlotTh2File( name, s.name ) );
+          if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        }
+      }
+      // TODO rename exported files: csv csx dat dxf kml plt srv svx th top tro 
+      // TODO rename exported plots: dxf png svg
+      { // rename note file: note
+        old = new File( TopoDroidPath.getSurveyNoteFile( mySurvey ) );
+        nev = new File( TopoDroidPath.getSurveyNoteFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+      }
+      { // rename photo folder: photo
+        old = new File( TopoDroidPath.getSurveyPhotoDir( mySurvey ) );
+        nev = new File( TopoDroidPath.getSurveyPhotoDir( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+      }
+      mySurvey = name;
+      return true;
+    }
+    return false;
+  }
+    
+
   public long setSurveyFromName( String survey, boolean forward ) 
   { 
     mSID = -1;       // no survey by default

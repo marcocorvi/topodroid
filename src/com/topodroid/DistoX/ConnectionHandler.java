@@ -257,6 +257,7 @@ class ConnectionHandler extends Handler
    // SURVEY_DATE = 3;
    // SURVEY_TEAM = 4;
    // SURVEY_DECL = 5;
+   // SURVEY_NAME = 6;
    //
    void onRecv( int bytes, byte[] buffer ) 
    {
@@ -331,6 +332,9 @@ class ConnectionHandler extends Handler
          break;
        case DataListener.SURVEY_DECL:
          mApp.mData.updateSurveyDeclination( mSID, Double.parseDouble( data[0] ), false );
+         break;
+       case DataListener.SURVEY_NAME:
+         mApp.renameCurrentSurvey( mSID, data[0], false );
          break;
 
        case DataListener.SHOT_UPDATE:
@@ -424,6 +428,14 @@ class ConnectionHandler extends Handler
   {
     String data = name + "|";
     enqueue( DataListener.SURVEY_SET, data );
+  }
+
+  public void onUpdateSurveyName( long id, String name )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter( sw );
+    pw.format(Locale.ENGLISH, "%s|", name );
+    enqueue( DataListener.SURVEY_NAME, sw.getBuffer().toString() );
   }
 
   public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment ) 

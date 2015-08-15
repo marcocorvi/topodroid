@@ -82,6 +82,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement shiftShotsIdStmt;
   private SQLiteStatement transferShotStmt;
   private SQLiteStatement updateSurveyStmt;
+  private SQLiteStatement updateSurveyNameStmt;
   private SQLiteStatement updateSurveyInfoStmt;
   private SQLiteStatement updateSurveyTeamStmt;
   private SQLiteStatement updateSurveyDeclinationStmt;
@@ -132,6 +133,8 @@ public class DataHelper extends DataSetObservable
   // private SQLiteStatement updateDeviceNicknameStmt;
 
   private String[] mShotFields; // select shot fields
+  private String[] mPlotFields; // select plot fields
+  private String[] mSketchFields; // select sketch fields
 
   private ArrayList<DataListener> mListeners;
   // ----------------------------------------------------------------------
@@ -148,6 +151,17 @@ public class DataHelper extends DataSetObservable
          "id", "fStation", "tStation", "distance", "bearing",
          "clino", "acceleration", "magnetic", "dip", "extend",
          "flag", "leg", "comment", "type"
+    };
+    mPlotFields = new String[] {
+         "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino"
+    };
+    mSketchFields =
+    new String[] {
+         "id", "name", "start", "st1", "st2",
+         "xoffsettop", "yoffsettop", "zoomtop",
+         "xoffsetside", "yoffsetside", "zoomside",
+         "xoffset3d", "yoffset3d", "zoom3d",
+         "east", "south", "vert", "azimuth", "clino" 
     };
     mListeners = listeners;
     openDatabase();
@@ -209,6 +223,7 @@ public class DataHelper extends DataSetObservable
         updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
         updateShotAMDRStmt  = myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
 
+        updateSurveyNameStmt = myDB.compileStatement( "UPDATE surveys SET name=? WHERE id=?" );
         updateSurveyInfoStmt = myDB.compileStatement( "UPDATE surveys SET day=?, team=?, declination=?, comment=?, init_station=? WHERE id=?" );
         updateSurveyStmt = myDB.compileStatement( "UPDATE surveys SET day=?, comment=? WHERE id=?" );
         updateSurveyTeamStmt = myDB.compileStatement( "UPDATE surveys SET team=? WHERE id=?" );
@@ -428,6 +443,20 @@ public class DataHelper extends DataSetObservable
 
   // --------------------------------------------------------------------
   // SURVEY
+   
+  public boolean renameSurvey( long id, String name, boolean forward )
+  {
+    updateSurveyNameStmt.bindString( 1, name );
+    updateSurveyNameStmt.bindLong( 2, id );
+    updateSurveyNameStmt.execute();
+    if ( forward ) {
+      // synchronized( mListeners )
+      for ( DataListener listener : mListeners ) {
+        listener.onUpdateSurveyName( id, name );
+      }
+    }
+    return true;
+  }
    
   public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, boolean forward )
@@ -1246,17 +1275,17 @@ public class DataHelper extends DataSetObservable
    }
 
    // FIXME_SKETCH_3D
-   public List< Sketch3dInfo > selectAllSketches( long sid, long status )
+   private List< Sketch3dInfo > doSelectAllSketches( long sid, String where, String[] wheres )
    {
      List<  Sketch3dInfo  > list = new ArrayList<  Sketch3dInfo  >();
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query( SKETCH_TABLE,
-                 new String[] { "id", "name", "start", "st1", "st2", "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d", "east", "south", "vert", "azimuth", "clino" },
-                                "surveyId=? and status=?", 
-                                new String[] { Long.toString(sid), Long.toString(status) }, 
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
+                                 mSketchFields,
+                                 where,
+                                 wheres,
+                                 null,  // groupBy
+                                 null,  // having
+                                 "id" ); // order by
      if (cursor.moveToFirst()) {
        do {
          Sketch3dInfo sketch = new  Sketch3dInfo ();
@@ -1288,6 +1317,22 @@ public class DataHelper extends DataSetObservable
        cursor.close();
      }
      return list;
+   }
+
+   public List< Sketch3dInfo > selectAllSketches( long sid )
+   {
+     return doSelectAllSketches( sid, 
+                                 "surveyId=?",
+                                 new String[] { Long.toString(sid) } 
+     );
+   }
+
+   public List< Sketch3dInfo > selectAllSketches( long sid, long status )
+   {
+     return doSelectAllSketches( sid, 
+                                 "surveyId=? and status=?",
+                                 new String[] { Long.toString(sid), Long.toString(status) }
+     );
    }
    // END_SKETCH_3D
 
@@ -1362,14 +1407,28 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
-   public List< PlotInfo > selectAllPlots( long sid, long status )
+   private void fillPlotInfo( PlotInfo plot, Cursor cursor )
+   {
+     plot.id    = cursor.getLong(0);
+     plot.name = cursor.getString(1);
+     plot.type = cursor.getInt(2);
+     plot.start = cursor.getString(3);
+     plot.view  = cursor.getString(4);
+     plot.xoffset = (float)(cursor.getDouble(5));
+     plot.yoffset = (float)(cursor.getDouble(6));
+     plot.zoom    = (float)(cursor.getDouble(7));
+     plot.azimuth = (float)(cursor.getDouble(8));
+     plot.clino   = (float)(cursor.getDouble(9));
+   }
+
+   private List< PlotInfo > doSelectAllPlots( long sid, String where, String[] wheres )
    {
      List<  PlotInfo  > list = new ArrayList<  PlotInfo  >();
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query(PLOT_TABLE,
-			        new String[] { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino" }, // columns
-                                "surveyId=? and status=?", 
-                                new String[] { Long.toString(sid), Long.toString(status) }, 
+                                mPlotFields,
+                                where,
+                                wheres,
                                 null,  // groupBy
                                 null,  // having
                                 "id" ); // order by
@@ -1378,18 +1437,8 @@ public class DataHelper extends DataSetObservable
          PlotInfo plot = new  PlotInfo ();
          // plot.setId( cursor.getLong(0), sid );
          plot.surveyId = sid;
-         plot.id    = cursor.getLong(0);
-         plot.name = cursor.getString(1);
-         plot.type = cursor.getInt(2);
-         plot.start = cursor.getString(3);
-         plot.view  = cursor.getString(4);
-         plot.xoffset = (float)(cursor.getDouble(5));
-         plot.yoffset = (float)(cursor.getDouble(6));
-         plot.zoom    = (float)(cursor.getDouble(7));
-         plot.azimuth = (float)(cursor.getDouble(8));
-         plot.clino   = (float)(cursor.getDouble(9));
+         fillPlotInfo( plot, cursor );
          list.add( plot );
-         // Log.v( TopoDroidApp.TAG, "plot " + plot.name + " azimuth " + plot.azimuth );
        } while (cursor.moveToNext());
      }
      // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Plots list size " + list.size() );
@@ -1399,42 +1448,32 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
+   public List< PlotInfo > selectAllPlots( long sid )
+   {
+     return doSelectAllPlots( sid, 
+                              "surveyId=?", 
+                              new String[] { Long.toString(sid) }
+     );
+   }
+
+
+   public List< PlotInfo > selectAllPlots( long sid, long status )
+   {
+     return doSelectAllPlots( sid, 
+                              "surveyId=? and status=?", 
+                              new String[] { Long.toString(sid), Long.toString(status) }
+     );
+   }
+
    public List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
    {
-     List<  PlotInfo  > list = new ArrayList<  PlotInfo  >();
-     // if ( myDB == null ) return list;
-     Cursor cursor = myDB.query(PLOT_TABLE,
-			        new String[] { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino" }, // columns
-                                "surveyId=? and status=? and type=?",
-                                new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }, 
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
-     if (cursor.moveToFirst()) {
-       do {
-         PlotInfo plot = new  PlotInfo ();
-         // plot.setId( cursor.getLong(0), sid );
-         plot.surveyId = sid;
-         plot.id    = cursor.getLong(0);
-         plot.name = cursor.getString(1);
-         plot.type = cursor.getInt(2);
-         plot.start = cursor.getString(3);
-         plot.view  = cursor.getString(4);
-         plot.xoffset = (float)(cursor.getDouble(5));
-         plot.yoffset = (float)(cursor.getDouble(6));
-         plot.zoom    = (float)(cursor.getDouble(7));
-         plot.azimuth = (float)(cursor.getDouble(8));
-         plot.clino   = (float)(cursor.getDouble(9));
-         list.add( plot );
-         // Log.v( TopoDroidApp.TAG, "plot " + plot.name + " azimuth " + plot.azimuth );
-       } while (cursor.moveToNext());
-     }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Plots list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return list;
+     return doSelectAllPlots( sid, 
+                              "surveyId=? and status=? and type=?",
+                              new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
+     );
    }
+
+
 
    public boolean hasShot( long sid, String fStation, String tStation )
    {

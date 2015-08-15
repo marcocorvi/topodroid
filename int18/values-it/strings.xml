@@ -204,6 +204,7 @@
     <!-- OK ENGLISH string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_reload">RICARICA</string>
+    <string name="menu_rename">RENOMINA</string>
     <string name="menu_help">AIUTO</string>
     <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
@@ -315,6 +316,7 @@
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_split">Dividi rilievo?</string>
     <string name ="survey_not_attached">ATTENZIONE: dati scollegati</string>
+    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
     <string name="name">nome</string>
@@ -486,6 +488,7 @@
     <string name="help_draw">Modalità disegno</string>
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
+    <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
     <string name="help_toggle_plot">Passa tra pianta e sezione long.</string>
@@ -562,6 +565,7 @@
     <string name="title_stats">Statistiche</string>
     <string name="title_survey">Info rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
+    <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- string name="title_zoom">Zoom</string -->
 

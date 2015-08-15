@@ -927,21 +927,34 @@ public class ShotActivity extends Activity
   }
 
   @Override
-  public synchronized void onStop() 
+  public synchronized void onDestroy() 
   {
-    // Debug.stopMethodTracing( );
-    super.onStop();
+    super.onDestroy();
+    // Log.v("DistoX", "ShotActivity onDestroy()" );
     if ( mDataDownloader != null ) {
       mApp.unregisterLister( this );
       mDataDownloader.onStop();
     }
     mApp.disconnectRemoteDevice( false );
+
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
+  }
+
+  @Override
+  public synchronized void onStop() 
+  {
+    // Debug.stopMethodTracing( );
+    super.onStop();
+    // Log.v("DistoX", "ShotActivity onStop()" );
   }
 
   @Override
   public synchronized void onPause() 
   {
     super.onPause();
+    // Log.v("DistoX", "ShotActivity onPause()" );
     saveInstanceToData();
 
     // mApp.unregisterConnListener( mHandler );
@@ -953,6 +966,7 @@ public class ShotActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    // Log.v("DistoX", "ShotActivity onResume()" );
 
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
@@ -967,17 +981,6 @@ public class ShotActivity extends Activity
     setConnectionStatus( mDataDownloader.getStatus() );
   }
 
-  @Override
-  public synchronized void onDestroy() 
-  {
-    super.onDestroy();
-    if ( doubleBackHandler != null ) {
-      doubleBackHandler.removeCallbacks( doubleBackRunnable );
-    }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onDestroy " );
-    // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
-    // saveInstanceToData();
-  }
 
   private boolean doubleBack = false;
   private Handler doubleBackHandler = new Handler();

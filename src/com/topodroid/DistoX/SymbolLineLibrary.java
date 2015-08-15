@@ -178,6 +178,10 @@ class SymbolLineLibrary
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), locale, iso );
+        if ( symbol.mThName == null ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "line with null ThName" );
+          continue;
+        }
         if ( ! hasAnyLine( symbol.mThName ) ) {
           mAnyLine.add( symbol );
           symbol.setEnabled( TopoDroidApp.mData.isSymbolEnabled( "l_" + symbol.mThName ) );
