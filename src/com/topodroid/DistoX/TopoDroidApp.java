@@ -979,7 +979,7 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // DATA DOWNLOAD
 
-  public int downloadData( ListerSet lister )
+  public int downloadData( ILister lister )
   {
     mSecondLastShotId = lastShotId();
     TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "downloadData() device " + mDevice + " comm " + mComm.toString() );
@@ -1718,7 +1718,7 @@ public class TopoDroidApp extends Application
     return 1; // CALIB_ALGO_LINEAR
   }  
 
-  void setX310Laser( int what, ListerSet lister ) // 0: off, 1: on, 2: measure
+  void setX310Laser( int what, ILister lister ) // 0: off, 1: on, 2: measure
   {
     mComm.setX310Laser( mDevice.mAddress, what, lister );
   }

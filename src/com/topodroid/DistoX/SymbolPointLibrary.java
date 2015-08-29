@@ -80,7 +80,7 @@ class SymbolPointLibrary
     return false;
   }
 
-  boolean hasAnyPoint( String th_name )
+  private boolean hasAnyPoint( String th_name )
   {
     for ( SymbolPoint p : mAnyPoint ) {
       if ( p.hasThName( th_name ) ) {

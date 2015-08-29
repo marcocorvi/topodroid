@@ -154,8 +154,8 @@ class TopoDroidSetting
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
 
-  static final String CLOSENESS   = "16";    // drawing closeness threshold
-  static float mCloseness = 16f;             // selection radius
+  static final String CLOSENESS   = "24";    // drawing closeness threshold
+  static float mCloseness = 24f;             // selection radius
   static int mThumbSize = 200;               // thumbnail size
 
   static final int LEVEL_BASIC    = 0;
@@ -171,7 +171,7 @@ class TopoDroidSetting
 
   static int mSizeButtons = 1;   // action bar buttons scale (either 1 or 2)
 
-  static int mTextSize = 14;     // list text size 
+  static int mTextSize = 16;     // list text size 
 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -204,7 +204,7 @@ class TopoDroidSetting
   static final String CALIB_EPS      = "0.000001";
   static float mCalibEps = 0.000001f; // calibartion epsilon
 
-  static final int DISTOX_MIN_ITER   = 50;  // hard limit
+  static final int CALIB_MIN_ITER   = 50;  // hard limit
   static final String CALIB_MAX_ITER = "200";
   static int   mCalibMaxIt = 200;     // calibration max nr of iterations
 
@@ -212,22 +212,19 @@ class TopoDroidSetting
   static final int GROUP_BY_DISTANCE = 0;
   static final int GROUP_BY_FOUR     = 1;
   static final int GROUP_BY_ONLY_16  = 2;
-  static final String GROUP_BY  = "2";     // GROUP_BY_ONLY_16
-  static int mGroupBy = GROUP_BY_ONLY_16;  // how to group calib data
+  static final String GROUP_BY  = "1";     // GROUP_BY_FOUR
+  static int mGroupBy = GROUP_BY_FOUR;  // how to group calib data
 
-  static boolean mRawData;   // whether to display calibration raw data as well
-  static int   mCalibAlgo;   // calibration algorithm: 0 auto, 1 linear, 2 non-linear
+  static boolean mRawData = false;   // whether to display calibration raw data as well
+  static int   mCalibAlgo = 0;   // calibration algorithm: 0 auto, 1 linear, 2 non-linear
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DEVICE
-  static boolean mBootloader;  // whether to show bootloader menu
+  static boolean mBootloader = false;  // whether to show bootloader menu
   static boolean mAutoReconnect = false;
 
-  // private boolean mSaveOnDestroy = SAVE_ON_DESTROY;
-  // int   mDefaultConnectionMode;
-
-  static final boolean CHECK_BT = true;
-  static int mCheckBT;        // BT: 0 disabled, 1 check on start, 2 enabled
+  // static final boolean CHECK_BT = true;
+  static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled
 
   static final int TOPODROID_SOCK_DEFAULT      = 0;    // BT socket type
   static final int TOPODROID_SOCK_INSEC        = 1;
@@ -288,12 +285,12 @@ class TopoDroidSetting
 
   static int mLineType;        // line type:  1       1     2    3
 
-  static float mStationSize;          // size of station names [pt]
-  static float mLabelSize;            // size of labels [pt]
+  static float mStationSize = 20;     // size of station names [pt]
+  static float mLabelSize = 24;       // size of labels [pt]
   static float mFixedThickness = 1;   // width of fixed lines
   static float mLineThickness = 1;    // witdh of drawing lines
   static float mDotRadius = 5;
-  static float mArrowLength = 5;
+  static float mArrowLength = 8;
 
   static float mUnit = 1.2f; // drawing unit
 
@@ -315,9 +312,9 @@ class TopoDroidSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DATA ACCURACY
-  static float mAccelerationThr = 300; // acceleration threshold (shot quality)
-  static float mMagneticThr     = 200; // magnetic threshold
-  static float mDipThr          = 2;  // dip threshold
+  static float mAccelerationThr = 400; // acceleration threshold (shot quality)
+  static float mMagneticThr     = 300; // magnetic threshold
+  static float mDipThr          = 3;  // dip threshold
 
   // void clearPreferences()
   // {
@@ -383,17 +380,17 @@ class TopoDroidSetting
     mUnitAngle  = prefs.getString( key[k++], UNIT_ANGLE ).equals(UNIT_ANGLE) ?  1.0f : TopoDroidUtil.DEG2GRAD;
   
     try {
-      f = Float.parseFloat( prefs.getString( key[k++], "300.0" ) );  // DISTOX_ACCEL_THR 9
+      f = Float.parseFloat( prefs.getString( key[k++], "400.0" ) );  // DISTOX_ACCEL_THR 9
       if ( f > 0 ) mAccelerationThr = f;
     } catch ( NumberFormatException e ) { }
 
     try {
-      f = Float.parseFloat( prefs.getString( key[k++], "200.0" ) );     // DISTOX_MAG_THR
+      f = Float.parseFloat( prefs.getString( key[k++], "300.0" ) );     // DISTOX_MAG_THR
       if ( f > 0 ) mMagneticThr = f;
     } catch ( NumberFormatException e ) { }
 
     try {
-      f = Float.parseFloat( prefs.getString( key[k++], "2.0" ) );            // DISTOX_DIP_THR
+      f = Float.parseFloat( prefs.getString( key[k++], "3.0" ) );            // DISTOX_DIP_THR
       if ( f > 0 ) mDipThr = f;
     } catch ( NumberFormatException e ) { }
 
@@ -418,7 +415,7 @@ class TopoDroidSetting
     // ------------------- CALIBRATION PREFERENCES
     try {
       mGroupBy = Integer.parseInt( prefs.getString( key[k++], GROUP_BY ) );       // DISTOX_GROUP_BY (choice)
-    } catch ( NumberFormatException e ) { mGroupBy = GROUP_BY_ONLY_16; }
+    } catch ( NumberFormatException e ) { mGroupBy = GROUP_BY_FOUR; }
 
     try {
       mGroupDistance = Float.parseFloat( prefs.getString( key[k++], GROUP_DISTANCE ) ); // DISTOX_GROUP_DISTANCE
@@ -429,14 +426,15 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) { mCalibEps = 0.000001f; }
 
     try {
-      mCalibMaxIt    = Integer.parseInt( prefs.getString( key[k++], CALIB_MAX_ITER ) ); // DISTOX_CALIB_MAX_IT
+      i = Integer.parseInt( prefs.getString( key[k++], CALIB_MAX_ITER ) ); // DISTOX_CALIB_MAX_IT
+      if ( i >= CALIB_MIN_ITER ) mCalibMaxIt = i;
     } catch ( NumberFormatException e ) { mCalibMaxIt = 200; }
 
     mRawData       = prefs.getBoolean( key[k++], false );                             // DISTOX_RAW_DATA 22
       
     try {
-      mCalibAlgo    = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_CALIB_MAX_IT
-    } catch ( NumberFormatException e ) { mCalibAlgo = 1; }
+      mCalibAlgo    = Integer.parseInt( prefs.getString( key[k++], "0" ) ); // DISTOX_CALIB_MAX_IT
+    } catch ( NumberFormatException e ) { mCalibAlgo = 0; }
 
     // ------------------- DEVICE PREFERENCES
     k++; // DISTOX_DEVICE  24
@@ -462,7 +460,7 @@ class TopoDroidSetting
     
     try {
       mCloseness = Float.parseFloat( prefs.getString( key[k++], CLOSENESS ) );   // DISTOX_CLOSENESS
-    } catch ( NumberFormatException e ) { mCloseness = 16; }
+    } catch ( NumberFormatException e ) { mCloseness = 24; }
 
     try {
       mLineSegment = Integer.parseInt( prefs.getString( key[k++], "10" ) );  // DISTOX_LINE_SEGMENT
@@ -496,9 +494,9 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) { mHThreshold = 70.0f; }
 
     try {
-      f = Float.parseFloat( prefs.getString( key[k++], "24.0" ) );   // DISTOX_STATION_SIZE 39
+      f = Float.parseFloat( prefs.getString( key[k++], "20.0" ) );   // DISTOX_STATION_SIZE 39
       if ( f > 0 ) mStationSize = f;
-    } catch ( NumberFormatException e ) { mStationSize = 24.0f; }
+    } catch ( NumberFormatException e ) { mStationSize = 20.0f; }
 
     try {
       f = Float.parseFloat( prefs.getString( key[k++], "24.0" ) );     // DISTOX_LABEL_SIZE 40
@@ -577,7 +575,7 @@ class TopoDroidSetting
       }
     } catch ( NumberFormatException e ) { }
     try {
-      f = Float.parseFloat( prefs.getString( key[k++], "5" ) ); // DISTOX_ARROW_LENGTH
+      f = Float.parseFloat( prefs.getString( key[k++], "8" ) ); // DISTOX_ARROW_LENGTH
       if ( f > 1 && f <= 20 ) mArrowLength = f;
     } catch ( NumberFormatException e ) { }
     try {
@@ -659,7 +657,7 @@ class TopoDroidSetting
       if ( activity != null ) activity.resetButtonBar();
     } else if ( k.equals( key[ nk++ ] ) ) {   // DISTOX_TEXT_SIZE
       try {
-        i = Integer.parseInt( prefs.getString( k, "14" ) );
+        i = Integer.parseInt( prefs.getString( k, "16" ) );
         if ( i > 0 ) mTextSize = i;
       } catch ( NumberFormatException e ) { }
   
@@ -687,17 +685,17 @@ class TopoDroidSetting
       // TopoDroidLog.Log( TopoDroidLog.LOG_UNITS, "mUnitAngle changed " + mUnitAngle );
     } else if ( k.equals( key[ nk++ ] ) ) {                        // DISTOX_ACCEL_THR 9
       try {
-        f = Float.parseFloat( prefs.getString( k, "300.0" ) );
+        f = Float.parseFloat( prefs.getString( k, "400.0" ) );
         if ( f > 0.0f ) mAccelerationThr = f;
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {                       // DISTOX_MAG_THR
       try {
-        f = Float.parseFloat( prefs.getString( k, "200.0" ) );
+        f = Float.parseFloat( prefs.getString( k, "300.0" ) );
         if ( f > 0.0f ) mMagneticThr = f;
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {                       // DISTOX_DIP_THR 11
       try {
-        f = Float.parseFloat( prefs.getString( k, "2.0" ) );
+        f = Float.parseFloat( prefs.getString( k, "3.0" ) );
         if ( f > 0.0f ) mDipThr = f;
       } catch ( NumberFormatException e ) { }
   
@@ -721,7 +719,7 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         mGroupBy = Integer.parseInt( prefs.getString( k, GROUP_BY ) );  // DISTOX_GROUP_BY 18 (choice)
-      } catch ( NumberFormatException e ) { mGroupBy = GROUP_BY_ONLY_16; }
+      } catch ( NumberFormatException e ) { mGroupBy = GROUP_BY_FOUR; }
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         f = Float.parseFloat( prefs.getString( k, GROUP_DISTANCE ) );
@@ -735,18 +733,18 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         i = Integer.parseInt( prefs.getString( k, CALIB_MAX_ITER ) );
-        if ( i > 0 ) mCalibMaxIt = i;
+        if ( i >= CALIB_MIN_ITER ) mCalibMaxIt = i;
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       mRawData = prefs.getBoolean( k, false );  // DISTOX_RAW_DATA 22
     } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_CALIB_ALGO 23
       try {
-        mCalibAlgo = Integer.parseInt( prefs.getString( k, "1" ) ); // DISTOX_CALIB_MAX_IT (choice)
-      } catch ( NumberFormatException e ) { mCalibAlgo = 1; }
+        mCalibAlgo = Integer.parseInt( prefs.getString( k, "0" ) ); 
+      } catch ( NumberFormatException e ) { mCalibAlgo = 0; }
 
     } else if ( k.equals( key[ nk++ ] ) ) {                         // DISTOX_DEVICE 24
       // mDevice = mData.getDevice( prefs.getString( k, DEVICE_NAME ) );
-    } else if ( k.equals( key[ nk++ ] ) ) {                         // DISTOX_CHECK_B (choice)
+    } else if ( k.equals( key[ nk++ ] ) ) {                         // DISTOX_BLUETOOTH (choice)
       try {
         mCheckBT = Integer.parseInt(prefs.getString( k, "1" ) ); 
       } catch ( NumberFormatException e ) { mCheckBT = 1; }
@@ -806,7 +804,7 @@ class TopoDroidSetting
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "24" ) ); // DISTOX_STATION_SIZE 39
+        f = Float.parseFloat( prefs.getString( k, "20" ) ); // DISTOX_STATION_SIZE 39
         if ( f > 0.0f && f != mStationSize ) {
           mStationSize = f;
           DrawingBrushPaths.setTextSizes( );
@@ -900,7 +898,7 @@ class TopoDroidSetting
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) { 
       try {
-        f = Float.parseFloat( prefs.getString( k, "5" ) ); // DISTOX_ARROW_LENGTH
+        f = Float.parseFloat( prefs.getString( k, "8" ) ); // DISTOX_ARROW_LENGTH
         if ( f > 1 && f <= 20 ) mArrowLength = f;
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) { 

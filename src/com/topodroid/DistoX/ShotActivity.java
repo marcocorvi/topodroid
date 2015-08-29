@@ -442,6 +442,8 @@ public class ShotActivity extends Activity
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
+    // FIXME MULTIPLE LIST
+    Log.v("DistoX", "update block list: " + blk.dataString("%.2f %.1f %.1f") );
     if ( mDataAdapter != null ) {
       mDataAdapter.addDataBlock( blk );
       mApp.assignStations( mDataAdapter.mItems );
@@ -906,6 +908,10 @@ public class ShotActivity extends Activity
     setMenuAdapter();
     closeMenu();
     mMenu.setOnItemClickListener( this );
+
+    if ( mDataDownloader != null ) {
+      mApp.registerLister( this );
+    }
   }
 
   void enableSketchButton( boolean enabled )
@@ -915,16 +921,13 @@ public class ShotActivity extends Activity
     mButton1[3].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
   }
 
-  @Override
-  public synchronized void onStart() 
-  {
-    super.onStart();
-    // Debug.startMethodTracing( "distox" );
-    // Log.v( "DistoX", "Shot Activity onStart() " );
-    if ( mDataDownloader != null ) {
-      mApp.registerLister( this );
-    }
-  }
+  // @Override
+  // public synchronized void onStart() 
+  // {
+  //   super.onStart();
+  //   // Debug.startMethodTracing( "distox" );
+  //   // Log.v( "DistoX", "Shot Activity onStart() " );
+  // }
 
   @Override
   public synchronized void onDestroy() 

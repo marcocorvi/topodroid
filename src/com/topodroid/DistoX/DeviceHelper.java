@@ -40,9 +40,9 @@ import java.util.HashMap;
 public class DeviceHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "10";
-  static final int DATABASE_VERSION = 10;
-  static final int DATABASE_VERSION_MIN = 10; 
+  static final String DB_VERSION = "24";
+  static final int DATABASE_VERSION = 24;
+  static final int DATABASE_VERSION_MIN = 21; 
 
   private static final String CONFIG_TABLE = "configs";
   private static final String CALIB_TABLE  = "calibs";
@@ -1071,7 +1071,17 @@ public class DeviceHelper extends DataSetObservable
          // FIXME this is called at each start when the database file exists
          TopoDroidLog.Log( TopoDroidLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
          switch ( oldVersion ) {
-           case 10:
+           case 16:
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN coeff BLOB" );
+           case 17:
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN error REAL default 0" );
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN max_error REAL default 0" );
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN iterations INTEGER default 0" );
+           case 18:
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN algo INTEGER default 1" );
+           case 23:
+             db.execSQL( "ALTER TABLE devices ADD COLUMN nickname TEXT default \"\"" );
+           case 24:
              /* current version */
            default:
              break;

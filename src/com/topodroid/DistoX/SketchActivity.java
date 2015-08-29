@@ -666,7 +666,7 @@ public class SketchActivity extends ItemDrawer
 
     setContentView(R.layout.sketch_activity);
     mApp = (TopoDroidApp)getApplication();
-    mDataDownloader = null;
+    mDataDownloader = null; // FIXME set the DataDownloader
     // mInfo.zoom = mApp.mScaleFactor;    // canvas zoom
 
     // setCurrentPaint();
@@ -800,16 +800,17 @@ public class SketchActivity extends ItemDrawer
     mMenu.setOnItemClickListener( this );
 
     mTimer   = null;
-  } 
 
-  @Override
-  protected synchronized void onStart()
-  {
-    super.onStart();
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     }
-  }
+  } 
+
+  // @Override
+  // protected synchronized void onStart()
+  // {
+  //   super.onStart();
+  // }
 
   @Override
   protected synchronized void onResume()
@@ -842,13 +843,20 @@ public class SketchActivity extends ItemDrawer
   protected synchronized void onStop() 
   {   
     if ( mDataDownloader != null ) {
-      mApp.unregisterLister( this );
+      // mApp.unregisterLister( this );
       mDataDownloader.onStop();
       mApp.disconnectRemoteDevice( false );
     }
     super.onStop();
   }
 
+  @Override
+  protected synchronized void onDestroy() 
+  {   
+    if ( mDataDownloader != null ) {
+      mApp.unregisterLister( this );
+    }
+  }
 
   // ----------------------------------------------------------------------
   //  ADD ITEMS
@@ -1631,9 +1639,7 @@ public class SketchActivity extends ItemDrawer
           //      with the Asynch task that download the data.
           //      if there is an empty shot assign it
           setTitleColor( TopoDroidConst.COLOR_CONNECTED );
-          ListerSet listers = new ListerSet();
-          listers.registerLister( this );
-          new DistoXRefresh( mApp, listers ).execute();
+          new DistoXRefresh( mApp, this ).execute();
         } else {
           Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
         }

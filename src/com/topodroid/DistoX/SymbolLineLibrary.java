@@ -71,7 +71,7 @@ class SymbolLineLibrary
     return false;
   }
 
-  boolean hasAnyLine( String th_name ) 
+  private boolean hasAnyLine( String th_name ) 
   {
     for ( SymbolLine l : mAnyLine ) {
       if ( th_name.equals( l.mThName ) ) {

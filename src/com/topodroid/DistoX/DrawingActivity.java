@@ -947,6 +947,13 @@ public class DrawingActivity extends ItemDrawer
       mMenu.setOnItemClickListener( this );
 
       doStart();
+      if ( ! ( isSection() || isXSection() ) ) {
+        if ( mDataDownloader != null ) {
+          mApp.registerLister( this );
+        } 
+      } else {
+        mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+      }
     }
 
     @Override
@@ -972,33 +979,32 @@ public class DrawingActivity extends ItemDrawer
     {
       super.onStart();
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-      if ( mDataDownloader != null ) {
-        mApp.registerLister( this );
-      }
       // if ( mSaveTask != null ) mSaveTask.cancel();
       // mSaveTask = new SaveTimerTask();
       // mSaveTimer = new Timer();
       // mSaveTimer.schedule( mSaveTask, 10000, 60000 );
     }
 
-    @Override
-    protected synchronized void onStop()
-    {
-      super.onStop();
-      // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-      doStop();
-    }
-
     // @Override
-    // protected synchronized void onDestroy()
+    // protected synchronized void onStop()
     // {
-    //   super.onDestroy();
-    //   if ( mDataDownloader != null ) { // data-download management is left to ShotActivity
-    //     mApp.unregisterLister( this );
-    //     mDataDownloader.onStop();
-    //     mApp.disconnectRemoteDevice( false );
-    //   }
+    //   super.onStop();
+    //   // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+    //   doStop();
     // }
+
+    @Override
+    protected synchronized void onDestroy()
+    {
+      super.onDestroy();
+      if ( mDataDownloader != null ) {
+        mApp.unregisterLister( this );
+      }
+      // if ( mDataDownloader != null ) { // data-download management is left to ShotActivity
+      //   mDataDownloader.onStop();
+      //   mApp.disconnectRemoteDevice( false );
+      // }
+    }
 
     private void doResume()
     {

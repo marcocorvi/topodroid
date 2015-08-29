@@ -13,7 +13,7 @@
        android:summary="@string/pref_text_size_summary"
        android:dialogTitle="@string/pref_text_size_title"
        android:dialogMessage="@string/pref_text_size_message"
-       android:defaultValue="14"
+       android:defaultValue="16"
        />
 
   <com.topodroid.DistoX.MyListPreference
@@ -38,7 +38,7 @@
        android:key="DISTOX_MKEYBOARD"
        android:summary="@string/pref_mkeyboard_summary"
        android:title="@string/pref_mkeyboard_title"
-       android:defaultValue="false"
+       android:defaultValue="true"
        />
 
   <CheckBoxPreference

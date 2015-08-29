@@ -13,9 +13,9 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-// import android.util.Log;
+import android.util.Log;
 
-public class ListerSet
+public class ListerSet implements ILister
 {
   private ArrayList<ILister> mLister;
 
@@ -26,14 +26,10 @@ public class ListerSet
 
   int size() { return mLister.size(); }
 
-  void updateList( DistoXDBlock blk ) 
-  {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister updateBlock " + size() );
-    for ( ILister lister : mLister ) lister.updateBlockList( blk );
-  }
 
   void registerLister( ILister lister )
   {
+    // Log.v("DistoX", "register lister " + lister.toString() + " size " + size() );
     for ( ILister l : mLister ) {
       if ( l == lister ) return; // already registered
     }
@@ -42,19 +38,30 @@ public class ListerSet
 
   void unregisterLister( ILister lister )
   {
+    // Log.v("DistoX", "unregister lister " + lister.toString() + " size " + size() );
     mLister.remove( lister );
   }
 
-  void setConnectionStatus( int status )
+  public void updateBlockList( DistoXDBlock blk ) 
+  {
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister updateBlock " + size() );
+    for ( ILister lister : mLister ) lister.updateBlockList( blk );
+  }
+  public void setConnectionStatus( int status )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister set conn. status " + size() + " " + status );
     for ( ILister lister : mLister ) lister.setConnectionStatus( status );
   }
 
-  void refreshDisplay( int r, boolean b )
+  public void refreshDisplay( int r, boolean toast )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister refresh display " + size() + " R " + r + " " + b );
-    for ( ILister lister : mLister ) lister.refreshDisplay( r, b );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister refresh display " + size() + " R " + r + " " + toast );
+    for ( ILister lister : mLister ) lister.refreshDisplay( r, toast );
+  }
+
+  public void setRefAzimuth( float azimuth, long fixed_extend )
+  {
+    for ( ILister lister : mLister ) lister.setRefAzimuth( azimuth, fixed_extend );
   }
 
 

@@ -43,7 +43,7 @@ class DeviceRemote extends Dialog
   private CheckBox mCBdownload;
 
   // private DataDowloader mDataDowloader;
-  private ListerSet mLister;
+  private ILister   mLister;
 
   // private Button mBTback;
 
@@ -56,8 +56,7 @@ class DeviceRemote extends Dialog
   {
     super( context );
     mApp    = app;
-    mLister = new ListerSet();
-    mLister.registerLister( lister );
+    mLister = lister;
   }
 
 
@@ -109,5 +108,11 @@ class DeviceRemote extends Dialog
       //   break;
     }
   }
+
+  // @Override
+  // public void onBackPressed()
+  // {
+  //   dismiss();
+  // }
 
 }

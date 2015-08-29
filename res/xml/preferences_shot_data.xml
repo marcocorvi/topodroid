@@ -11,7 +11,7 @@
        android:dialogTitle="@string/pref_leg_title"
        android:dialogMessage="@string/pref_leg_message"
        android:inputType="numberDecimal"
-       android:defaultValue="0.1" />
+       android:defaultValue="0.05" />
 
     <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LEG_SHOTS"

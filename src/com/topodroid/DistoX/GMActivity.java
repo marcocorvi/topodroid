@@ -602,9 +602,7 @@ public class GMActivity extends Activity
             }
             mApp.updateCalibAlgo( mAlgo );
           }
-          ListerSet listers = new ListerSet();
-          listers.registerLister( this );
-          new DistoXRefresh( mApp, listers ).execute();
+          new DistoXRefresh( mApp, this ).execute();
         }
       } else if ( b == mButton1[1] ) { // toggle
         enableButtons( false );

@@ -167,7 +167,7 @@ public class DistoXComm
   {
     private DistoXProtocol mProto;
     private int toRead; // number of packet to read
-    private ListerSet mLister;
+    private ILister mLister;
 
     void cancelWork()
     {
@@ -179,7 +179,7 @@ public class DistoXComm
      * @param protocol    communication protocol
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      */
-    public RfcommThread( DistoXProtocol protocol, int to_read, ListerSet lister )
+    public RfcommThread( DistoXProtocol protocol, int to_read, ILister lister )
     {
       nReadPackets = 0; // reset nr of read packets
       toRead = to_read;
@@ -225,14 +225,14 @@ public class DistoXComm
           TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           mLastShotId = mApp.mData.insertShot( mApp.mSID, -1L, d, b, c, r, extend, 0, true );
-          if ( mLister != null && mLister.size() > 0 ) {
+          if ( mLister != null ) {
             DistoXDBlock blk = new DistoXDBlock( );
             blk.setId( mLastShotId, mApp.mSID );
             blk.mLength  = (float)d;
             blk.mBearing = (float)b;
             blk.mClino   = (float)c;
             blk.mRoll    = (float)r;
-            mLister.updateList( blk );
+            mLister.updateBlockList( blk );
           }
         } else if ( res == DistoXProtocol.DISTOX_PACKET_G ) {
           // TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "G PACKET" );
@@ -575,7 +575,7 @@ public class DistoXComm
     return mBTConnected;
   }
 
-  private boolean startRfcommThread( int to_read, ListerSet lister )
+  private boolean startRfcommThread( int to_read, ILister lister )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
     if ( mBTSocket != null ) {
@@ -644,7 +644,7 @@ public class DistoXComm
   /**
    * nothing to read (only write) --> no AsyncTask
    */
-  void setX310Laser( String address, int what, ListerSet lister )
+  void setX310Laser( String address, int what, ILister lister )
   {
     if ( connectSocket( address ) ) {
       switch ( what ) {
@@ -873,7 +873,7 @@ public class DistoXComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  public boolean connectDevice( String address, ListerSet lister ) 
+  public boolean connectDevice( String address, ILister lister ) 
   {
     if ( mRfcommThread != null ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "DistoXComm connect: already connected");
@@ -896,7 +896,7 @@ public class DistoXComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  public int downloadData( String address, ListerSet lister )
+  public int downloadData( String address, ILister lister )
   {
     if ( ! checkRfcommThreadNull( "download data: address " + address ) ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: RFcomm thread not null");
