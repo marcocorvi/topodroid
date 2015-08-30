@@ -276,7 +276,7 @@
     <string name="scrap_name">Име на скица</string>
     <string name="splay">странично измервание</string>
     <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
-    <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
+    <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
 
     <string name="sensor">сензор</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->
@@ -727,7 +727,7 @@
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
   <string name="pref_azimuth_manual_title">Ръчно разгъване на отсечки</string>
-  <string name="pref_azimuth_manual_summary">Ръчно разгъване на отсечки в плана</string>
+  <string name="pref_azimuth_manual_summary">Ръчно разгъване на отсечки в разреза</string>
 
   <string name="pref_team_title">Картировачи</string>
   <string name="pref_team_summary">Екип картировачи</string>
