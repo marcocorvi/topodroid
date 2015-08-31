@@ -945,13 +945,13 @@ public class ShotActivity extends Activity
     }
   }
 
-  @Override
-  public synchronized void onStop() 
-  {
-    // Debug.stopMethodTracing( );
-    super.onStop();
-    // Log.v("DistoX", "ShotActivity onStop()" );
-  }
+  // @Override
+  // public synchronized void onStop() 
+  // {
+  //   // Debug.stopMethodTracing( );
+  //   super.onStop();
+  //   // Log.v("DistoX", "ShotActivity onStop()" );
+  // }
 
   @Override
   public synchronized void onPause() 

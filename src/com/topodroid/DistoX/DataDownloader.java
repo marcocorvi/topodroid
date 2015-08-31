@@ -81,8 +81,11 @@ class DataDownloader
     if ( TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_BATCH ) {
       tryDownloadData( );
     } else { // TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS
-      // new ReconnectTask( this ).execute();
-      tryConnect();
+      if ( TopoDroidSetting.mAutoReconnect ) {
+        new ReconnectTask( this ).execute();
+      } else {
+        tryConnect();
+      }
       notifyConnectionStatus( mConnected );
     }
   }
