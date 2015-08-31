@@ -19,6 +19,8 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
+// import android.text.InputType;
+import android.inputmethodservice.KeyboardView;
 
 import android.view.Window;
 
@@ -55,6 +57,7 @@ public class PlotNewDialog extends Dialog
   // private Button   mBtnBack;
   // private Button   mBtnCancel;
   private int mIndex;
+  private MyKeyboard mKeyboard = null;
 
   public PlotNewDialog( Context context, INewPlot maker, int index )
   {
@@ -71,9 +74,9 @@ public class PlotNewDialog extends Dialog
   {
     super.onCreate(savedInstanceState);
     requestWindowFeature(Window.FEATURE_NO_TITLE);
+    setContentView(R.layout.plot_new_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    setContentView(R.layout.plot_new_dialog);
     mEditName  = (EditText) findViewById(R.id.edit_plot_name);
     mEditStart = (EditText) findViewById(R.id.edit_plot_start);
     // mEditView  = (EditText) findViewById(R.id.edit_plot_view);
@@ -96,6 +99,19 @@ public class PlotNewDialog extends Dialog
     // mBtnBack.setOnClickListener( this );
     // mBtnCancel = (Button) findViewById(R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
+   
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
+                                R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
+    if ( TopoDroidSetting.mKeyboard ) {
+      MyKeyboard.registerEditText( mKeyboard, mEditName,  MyKeyboard.FLAG_POINT_LCASE_2ND );
+      int flag = ( TopoDroidSetting.mStationNames == 1 ) ? MyKeyboard.FLAG_POINT : MyKeyboard.FLAG_POINT_LCASE_2ND;
+      MyKeyboard.registerEditText( mKeyboard, mEditStart, flag);
+    } else {
+      mKeyboard.hide();
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mEditStart.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      }
+    }
   }
 
   // FIXME synchronized ?
@@ -162,5 +178,16 @@ public class PlotNewDialog extends Dialog
     dismiss();
   }
 
+  @Override
+  public void onBackPressed()
+  {
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
+    }
+    dismiss();
+  }
 }
 

@@ -74,6 +74,7 @@ public class SurveyActivity extends Activity
                      };
   private static int menus[] = {
                         R.string.menu_export,
+                        R.string.menu_rename,
                         R.string.menu_delete,
                         R.string.menu_manual_calibration,
                         R.string.menu_options,
@@ -118,6 +119,18 @@ public class SurveyActivity extends Activity
 
   TopoDroidApp mApp;
   private boolean mustOpen;
+
+  String getSurveyName() { return mApp.mySurvey; }
+
+  void renameSurvey( String name ) 
+  {
+    if ( mApp.renameCurrentSurvey( mApp.mSID, name, true ) ) {
+      mTextName.setText( name );
+    } else {
+      Toast.makeText( this, R.string.cannot_rename, Toast.LENGTH_SHORT).show();
+    }
+  } 
+    
 
 // -------------------------------------------------------------------
   private final static int LOCATION_REQUEST = 1;
@@ -323,12 +336,6 @@ public class SurveyActivity extends Activity
     }
 
     int k = 0;
-    // if ( k < mNrButton1 && b == mButton1[k++] ) {  // save
-    //   doSave();
-    // } else
-    // if ( k < mNrButton1 && b == mButton1[k++] ) {  // export
-    //   new SurveyExportDialog( this, this ).show();
-    // } else
     if ( k < mNrButton1 && b == mButton1[k++] ) {  // note
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // details
@@ -349,7 +356,7 @@ public class SurveyActivity extends Activity
   @Override
   public void onStop()
   {
-    doSave();
+    saveSurvey();
     super.onStop();
   }
 
@@ -391,12 +398,6 @@ public class SurveyActivity extends Activity
     } catch ( ActivityNotFoundException e ) {
       Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT).show();
     }
-  }
-
-  private void doSave()
-  {
-    saveSurvey( );
-    // setMenus();
   }
 
   // private void doOpen()
@@ -447,7 +448,9 @@ public class SurveyActivity extends Activity
 
   private void saveSurvey( )
   {
-    // String name = mTextName.getText().toString();
+    // String name = mTextName.getText().toString(); // RENAME is special
+    // if ( name == null || name.length == 0 ) {
+    // }
     String date = mEditDate.getText().toString();
     String team = mEditTeam.getText().toString();
     String comment = mEditComment.getText().toString();
@@ -637,6 +640,7 @@ public class SurveyActivity extends Activity
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
+    mMenuAdapter.add( res.getString( menus[5] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -655,6 +659,8 @@ public class SurveyActivity extends Activity
       int p = 0;
       if ( p++ == pos ) { // EXPORT
         new SurveyExportDialog( this, this ).show();
+      } else if ( p++ == pos ) { // RENAME
+        new SurveyRenameDialog( this, this ).show();
       } else if ( p++ == pos ) { // DELETE
         askDelete();
       } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION

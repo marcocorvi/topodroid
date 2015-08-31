@@ -37,6 +37,7 @@ import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
+import android.inputmethodservice.KeyboardView;
 import android.widget.Toast;
 
 import android.util.Log;
@@ -47,6 +48,7 @@ public class LongLatAltDialog extends Dialog
   private Context mContext;
   private DistoXLocation mParent;
 
+  private MyKeyboard mKeyboard = null;
   private EditText mEditLong;
   private EditText mEditLat;
   private EditText mEditAlt; // altitude
@@ -79,6 +81,19 @@ public class LongLatAltDialog extends Dialog
     mEditAlt   = (EditText) findViewById(R.id.edit_alt );
     mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
+    if ( TopoDroidSetting.mKeyboard ) {
+      int flag = MyKeyboard.FLAG_POINT_DEGREE;
+      MyKeyboard.registerEditText( mKeyboard, mEditLong, flag );
+      MyKeyboard.registerEditText( mKeyboard, mEditLat,  flag );
+      MyKeyboard.registerEditText( mKeyboard, mEditAlt,  MyKeyboard.FLAG_POINT  );
+    } else {
+      mKeyboard.hide();
+      mEditLong.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      mEditLat.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      mEditAlt.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+    }
+
     if ( mParent.mHasLocation ) {
       mEditLong.setText( FixedInfo.double2string( mParent.mLongitude ) );
       mEditLat.setText(  FixedInfo.double2string( mParent.mLatitude ) );
@@ -94,6 +109,8 @@ public class LongLatAltDialog extends Dialog
     mBtnOK.setOnClickListener( this );
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
     // mBtnCancel.setOnClickListener( this );
+
+    setTitle( R.string.title_coord );
   }
 
   @Override
@@ -181,6 +198,18 @@ public class LongLatAltDialog extends Dialog
       // Log.v("DistoX", "Long-Lat dialog add LNG " + lng + " LAT " + lat + " ALT " + alt + " " + asl );
 
       mParent.addFixedPoint( lng, lat, alt, asl );
+    }
+    onBackPressed();
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
     }
     dismiss();
   }

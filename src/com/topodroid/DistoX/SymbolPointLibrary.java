@@ -80,7 +80,7 @@ class SymbolPointLibrary
     return false;
   }
 
-  boolean hasAnyPoint( String th_name )
+  private boolean hasAnyPoint( String th_name )
   {
     for ( SymbolPoint p : mAnyPoint ) {
       if ( p.hasThName( th_name ) ) {
@@ -235,6 +235,10 @@ class SymbolPointLibrary
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolPoint symbol = new SymbolPoint( file.getPath(), locale, iso );
+        if ( symbol.mThName == null ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "point with null ThName" );
+          continue;
+        }
         if ( ! hasAnyPoint( symbol.getThName() ) ) {
           mAnyPoint.add( symbol );
           symbol.setEnabled( TopoDroidApp.mData.isSymbolEnabled( "p_" + symbol.getThName() ) );

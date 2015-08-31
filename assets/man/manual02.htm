@@ -1,14 +1,16 @@
 <html><body>
-<h3>[2] DATABASE</h3>
+<h3>[2] DATABASES</h3>
 
-It is useful to have a rough idea about the organization of the information and the data in the database. The units of work in TopoDroid are the surveys and the calibrations. A survey is a single survey session of a piece of cave.  A calibration is a single DistoX calibration.<br><p>
-Accordingly, the most important database tables are:
+It is useful to have a rough idea about the organization of the information and the data in the databases. The units of work in TopoDroid are the surveys and the calibrations. A survey is a single survey session of a piece of cave.  A calibration is a single DistoX calibration.<br>
+Surveys are stored in the "distox14.sqlite" database. There is one such database in every work directory.<br>
+Calibrations are stored in the "device10.sqlite" database, together with the DistoX informations. This database is global and is present only in the "TopoDroid" directory.<br>
+<p>
+ 
+Accordingly, the most important table in the survey database is:
 <ulist>
 <li><b>surveys</b>: survey informations</li>
-<li><b>calibs</b>: calibrations informations</li>
 </ulist><br>
 The surveys records store the survey name, date, team, magnetic declination, initial station name and possibly a comment.<br>
-The calibs records contain the calibration name, date, DistoX device, algorithm, and the results of the last computation: coefficients, average error, maximum error, number of iterations.<br><p>
 
 Related to the surveys are the tables for:
 <ulist>
@@ -21,14 +23,21 @@ Related to the surveys are the tables for:
 <li><b>sketches</b>: 3D models</li>
 </ulist><br><p>
 
+The most important tables in the device database are
+<ulist>
+<li><b>devices</b>: devices informations</li>
+<li><b>calibs</b>: calibrations informations</li>
+</ulist><br>
+ 
+The calibs records contain the calibration name, date, DistoX device, algorithm, and the results of the last computation: coefficients, average error, maximum error, number of iterations.<br><p>
+
 Related to the calibrations is the data table
 <ulist>
 <li><b>gms</b>: calibration data</li>
 </ulist><br><p>
 
-Finally there are the tables
+Finally each database has the table
 <ulist>
-<li><b>devices</b>: the DistoX devices</li>
 <li><b>configs</b>: configuration values</li>
 </ulist><br><p>
 

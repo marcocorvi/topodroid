@@ -251,15 +251,15 @@ public class DeviceActivity extends Activity
         setTitle( R.string.title_device );
         for ( BluetoothDevice device : device_set ) {
           String addr  = device.getAddress();
-          Device dev = mApp.mData.getDevice( addr );
+          Device dev = mApp.mDData.getDevice( addr );
           if ( dev == null ) {
             String model = device.getName();
             if ( model == null ) {
               TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "WARNING. Null name for device " + addr );
             } else if ( model.startsWith( "DistoX", 0 ) ) {
               String name  = Device.modelToName( model );
-              mApp.mData.insertDevice( addr, model, name );
-              dev = mApp.mData.getDevice( addr );
+              mApp.mDData.insertDevice( addr, model, name );
+              dev = mApp.mDData.getDevice( addr );
             }
           }
           if ( dev != null ) {
@@ -516,7 +516,7 @@ public class DeviceActivity extends Activity
   void storeDeviceHeadTail( int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    if ( ! mApp.mData.updateDeviceHeadTail( mDevice.mAddress, head_tail ) ) {
+    if ( ! mApp.mDData.updateDeviceHeadTail( mDevice.mAddress, head_tail ) ) {
       Toast.makeText( this, getString(R.string.head_tail_store_failed), Toast.LENGTH_SHORT).show();
     }
   }
@@ -524,7 +524,7 @@ public class DeviceActivity extends Activity
   void retrieveDeviceHeadTail( int[] head_tail )
   {
     // Log.v(TopoDroidApp.TAG, "store HeadTail " + mDevice.mAddress + " : " + head_tail[0] + " " + head_tail[1] );
-    mApp.mData.getDeviceHeadTail( mDevice.mAddress, head_tail );
+    mApp.mDData.getDeviceHeadTail( mDevice.mAddress, head_tail );
   }
 
   private void writeMemoryDumpToFile( String dumpfile, ArrayList< MemoryOctet > memory )
@@ -730,7 +730,7 @@ public class DeviceActivity extends Activity
     String item_str = (String) mArrayAdapter.getItem(pos); // "model name addr"
     String vals[] = item_str.split(" ", 3);
     String address = vals[2]; // address or nickname
-    Device device = mApp.mData.getDevice( address );
+    Device device = mApp.mDData.getDevice( address );
     if ( device != null ) {
       (new DeviceNameDialog( this, this, device )).show();
     }

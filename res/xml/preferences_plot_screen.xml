@@ -39,7 +39,7 @@
        android:dialogTitle="@string/pref_station_size_title"
        android:dialogMessage="@string/pref_station_size_message"
        android:inputType="numberDecimal"
-       android:defaultValue="14" />
+       android:defaultValue="20" />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LABEL_SIZE"
@@ -48,7 +48,7 @@
        android:dialogTitle="@string/pref_label_size_title"
        android:dialogMessage="@string/pref_label_size_message"
        android:inputType="numberDecimal"
-       android:defaultValue="14" />
+       android:defaultValue="24" />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ARROW_LENGTH"
@@ -57,7 +57,7 @@
        android:dialogTitle="@string/pref_arrow_length_title"
        android:dialogMessage="@string/pref_arrow_length_message"
        android:inputType="numberDecimal"
-       android:defaultValue="5" />
+       android:defaultValue="8" />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DOT_RADIUS"
@@ -75,7 +75,7 @@
        android:dialogTitle="@string/pref_closeness_title"
        android:dialogMessage="@string/pref_closeness_message"
        android:inputType="number"
-       android:defaultValue="16" />
+       android:defaultValue="24" />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_VERT_SPLAY"

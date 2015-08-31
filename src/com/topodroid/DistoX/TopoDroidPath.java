@@ -73,6 +73,7 @@ public class TopoDroidPath
   static String mTherionLock = new String("Therion Lock");
 
   static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
+  static String getDeviceDatabase() { return APP_DEFAULT_PATH + "device10.sqlite"; }
   
   static void checkBasePath( String path )
   {

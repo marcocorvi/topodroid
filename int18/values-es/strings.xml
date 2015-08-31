@@ -204,6 +204,7 @@
     <!-- TODO string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">REGISTRO</string>
     <!-- TODO string name="menu_reload">RELOAD</string -->
+    <!-- TODO string name="menu_rename">RENAME</string -->
     <string name="menu_help">AYUDA</string>
     <!-- string name="menu_join_survey">CO-SURVEY</string -->
     <string name="menu_logs">REGISTROS</string>
@@ -315,6 +316,7 @@
     <string name="survey_delete">¿Eliminar Topografía?</string>
     <!-- TODO string name="survey_split">Split survey ?</string -->
     <string name ="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
+    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
     <!-- string name="declination">Declinación magnética </string -->
     <string name="declination">Decl. magn. </string>
     <string name="description">Descripción</string>
@@ -486,6 +488,7 @@
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
     <string name="help_edit">Introducir modo de edición</string>
     <string name="help_refs">Elejir dibujo</string>
+    <!-- TODO string name="help_rename">Change survey name</string -->
     <string name="help_stats">Estadísticas de Topografías</string>
     <string name="help_save_plot">Exportar dibujo</string>
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
@@ -530,6 +533,7 @@
     <string name="title_calib">Calibración</string>
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <!-- TODO string name="title_current_station">Saved stations</string -->
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_discover">Buscar dispositivos DistoX ... espere</string>
@@ -561,6 +565,7 @@
     <string name="title_stats">Estadísticas</string>
     <string name="title_survey">Info Topografía</string>
     <string name="title_survey_export">Exportar Topografías</string>
+    <!-- TODO string name="title_survey_rename">Rename survey as</string -->
     <!-- TODO string name="title_calib_export">Export calibration as</string -->
     <!-- string name="title_zoom">Zoom</string -->
 
@@ -578,6 +583,8 @@
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
   <!-- TODO string name="pref_bootloader_title">Bootloader</string -->
   <!-- TODO string name="pref_bootloader_summary">Enable bootloader</string -->
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <!-- TODO string name="pref_export_shots_title">Data export format</string -->

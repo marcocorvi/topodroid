@@ -22,14 +22,10 @@ import android.widget.ArrayAdapter;
 import android.app.Dialog;
 import android.os.Bundle;
 
-import android.text.InputType;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
-
-import android.text.InputType;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -37,8 +33,9 @@ import android.widget.Button;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.GridView;
-import android.view.View.OnKeyListener;
+// import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
+import android.inputmethodservice.KeyboardView;
 
 import android.widget.Toast;
 
@@ -75,6 +72,8 @@ public class FixedDialog extends Dialog
   private Button   mButtonOrthometric;
   private Button   mButtonEllipsoidic;
   private Button   mButtonCancel;
+
+  private MyKeyboard mKeyboard = null;
 
   public FixedDialog( Context context, SurveyActivity parent, DistoXLocation sub_parent, FixedInfo fxd )
   {
@@ -164,6 +163,30 @@ public class FixedDialog extends Dialog
     mButtonOrthometric.setOnClickListener( this );
     mButtonEllipsoidic.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
+
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
+                                  R.xml.my_keyboard, R.xml.my_keyboard_qwerty );
+
+    if ( TopoDroidSetting.mKeyboard ) {
+      MyKeyboard.registerEditText( mKeyboard, mETlng, MyKeyboard.FLAG_POINT_DEGREE );
+      MyKeyboard.registerEditText( mKeyboard, mETlat, MyKeyboard.FLAG_POINT_DEGREE );
+      MyKeyboard.registerEditText( mKeyboard, mETalt, MyKeyboard.FLAG_POINT  );
+      MyKeyboard.registerEditText( mKeyboard, mETasl, MyKeyboard.FLAG_POINT  );
+      MyKeyboard.registerEditText( mKeyboard, mETdecl, MyKeyboard.FLAG_POINT  );
+      int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
+      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      MyKeyboard.registerEditText( mKeyboard, mETstation, flag );
+    } else {
+      mKeyboard.hide();
+      mETlng.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      mETlat.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      mETalt.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      mETasl.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      mETdecl.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mETstation.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      }
+    }
   }
 
   public void onClick(View v) 
@@ -296,4 +319,17 @@ public class FixedDialog extends Dialog
     //   dismiss();
     }
   }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
+    }
+    dismiss();
+  }
+
 }

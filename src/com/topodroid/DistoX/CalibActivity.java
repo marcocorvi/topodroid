@@ -268,7 +268,7 @@ public class CalibActivity extends Activity
 
   private void showCoeffs()
   {
-    byte[] coeff = Calibration.stringToCoeff( mApp.mData.selectCalibCoeff( mApp.mCID ) );
+    byte[] coeff = Calibration.stringToCoeff( mApp.mDData.selectCalibCoeff( mApp.mCID ) );
     Matrix mG = new Matrix();
     Matrix mM = new Matrix();
     Vector vG = new Vector();
@@ -279,7 +279,7 @@ public class CalibActivity extends Activity
     Calibration.coeffToNL( coeff, nL );
    
     CalibResult res = new CalibResult();
-    mApp.mData.selectCalibError( mApp.mCID, res );
+    mApp.mDData.selectCalibError( mApp.mCID, res );
     (new CalibCoeffDialog( this, mApp, vG, mG, vM, mM, nL, res.error, res.max_error, res.iterations, coeff )).show();
   }
 
@@ -326,7 +326,7 @@ public class CalibActivity extends Activity
     if ( comment != null ) { comment = comment.trim(); }
 
     if ( isSaved ) { // calib already saved
-      mApp.mData.updateCalibInfo( mApp.mCID, date, device, comment );
+      mApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
       Toast.makeText( this, R.string.calib_updated, Toast.LENGTH_SHORT ).show();
     } else { // new calib
       name = TopoDroidApp.noSpaces( name );
@@ -337,7 +337,7 @@ public class CalibActivity extends Activity
           mEditName.setError( error );
         } else {
           mApp.setCalibFromName( name );
-          mApp.mData.updateCalibInfo( mApp.mCID, date, device, comment );
+          mApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
           setNameEditable( true );
           Toast.makeText( this, R.string.calib_saved, Toast.LENGTH_SHORT ).show();
         }
@@ -348,7 +348,7 @@ public class CalibActivity extends Activity
     int algo = 0;
     if ( mCBAlgoLinear.isChecked() ) algo = 1;
     else if ( mCBAlgoNonLinear.isChecked() ) algo = 2;
-    mApp.mData.updateCalibAlgo( mApp.mCID, algo );
+    mApp.mDData.updateCalibAlgo( mApp.mCID, algo );
 
     setButtons();
   }
@@ -369,7 +369,7 @@ public class CalibActivity extends Activity
   public void doDelete()
   {
     if ( mApp.mCID < 0 ) return;
-    mApp.mData.doDeleteCalib( mApp.mCID );
+    mApp.mDData.doDeleteCalib( mApp.mCID );
     mApp.setCalibFromName( null );
     finish();
   }

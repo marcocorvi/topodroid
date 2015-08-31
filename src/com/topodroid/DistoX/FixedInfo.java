@@ -90,7 +90,7 @@ class FixedInfo
     int ds = (int)( 100 * (x-sp) );
     StringWriter swp = new StringWriter();
     PrintWriter pwp = new PrintWriter( swp );
-    pwp.format( "%d:%02d:%02d.%02d", dp, mp, sp, ds );
+    pwp.format( "%d°%02d'%02d.%02d", dp, mp, sp, ds );
     return swp.getBuffer().toString();
   }
 
@@ -107,6 +107,8 @@ class FixedInfo
   {
     str = str.trim();                  // drop initial and final spaces
     str = str.replace( " ", ":" );     // replace separators
+    str = str.replace( "°", ":" );     
+    str = str.replace( "'", ":" );     
     str = str.replace( "/", "." );
     str = str.replace( ",", "." );
     String[] token = str.split( ":" ); // tokenize str on ':'

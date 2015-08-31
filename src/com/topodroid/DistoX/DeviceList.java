@@ -157,7 +157,7 @@ public class DeviceList extends Activity
               String device_addr = device.getAddress();
               String name = Device.modelToName( model );
               // Log.v( "DistoX", "scan receiver <" + name + "> " + device_addr ); 
-              mApp.mData.insertDevice( device_addr, model, name );
+              mApp.mDData.insertDevice( device_addr, model, name );
               mArrayAdapter.add( Device.typeString[ Device.stringToType(model) ] + " " + name + " " + device_addr );
             }
           }

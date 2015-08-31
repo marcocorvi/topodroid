@@ -204,6 +204,7 @@
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPÉRER</string>
     <!-- TODO string name="menu_reload">RELOAD</string -->
+    <!-- TODO string name="menu_rename">RENAME</string -->
     <string name="menu_help">AIDE</string>
     <!-- TODO string name="menu_join_survey">Co-survey</string -->
     <string name="menu_logs">JOURNALISATION</string>
@@ -318,6 +319,7 @@
     <string name="survey_delete">Supprimer le relevé?</string>
     <!-- TODO string name="survey_split">Split survey ?</string -->
     <string name ="survey_not_attached">*ATTENTION: visées non attachées*</string>
+    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
     <!-- string name="declination">Déclination magnétique</string -->
     <string name="declination">Décl. magn.</string>
     <string name="description">description</string>
@@ -491,6 +493,7 @@
     <string name="help_draw">Mode dessin</string>
     <string name="help_edit">Mode d\'édition</string>
     <string name="help_refs">Choix des références de dessin</string>
+    <!-- TODO string name="help_rename">Change survey name</string -->
     <string name="help_stats">Statistiques du relevé</string>
     <string name="help_save_plot">Exporte le croquis</string>
     <string name="help_toggle_plot">Bascule entre plan et section étendue</string>
@@ -535,6 +538,7 @@
     <string name="title_calib">Etalonnage</string>
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnages</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <!-- TODO string name="title_current_station">Saved stations</string -->
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX... Patientez</string>
@@ -566,6 +570,7 @@
     <string name="title_stats">Statistiques</string>
     <string name="title_survey">Info du relevé</string>
     <string name="title_survey_export">Exporter le relevé sous</string>
+    <!-- TODO string name="title_survey_rename">Rename survey as</string -->
     <string name="title_calib_export">Exporter l\'étalonnages sous</string>
     <!-- string name="title_zoom">Zoom</string -->
 
@@ -583,6 +588,8 @@
   <string name="pref_raw_data_summary">Afficher les données brutes</string>
   <string name="pref_bootloader_title">Chargeur de démarrage</string>
   <string name="pref_bootloader_summary">Activer le chargeur de démarrage</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <!-- TODO string name="pref_export_shots_title">Data export format</string -->

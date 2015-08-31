@@ -123,7 +123,7 @@
     <string name="altitude">Alt. </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="altitude_hint">Alt. WGS84 [m]</string>
+    <string name="altitude_hint">Quota [m]</string>
     <string name="altitude_wgs84">Quota WGS84</string>
     <string name="latitude_hint">Lat. gg:mm:ss.sss</string>
     <string name="longitude_hint">Long. gg:mm:ss.sss</string>
@@ -204,6 +204,7 @@
     <!-- OK ENGLISH string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_reload">RICARICA</string>
+    <string name="menu_rename">RENOMINA</string>
     <string name="menu_help">AIUTO</string>
     <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
@@ -315,6 +316,7 @@
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_split">Dividi rilievo?</string>
     <string name ="survey_not_attached">ATTENZIONE: dati scollegati</string>
+    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
     <string name="name">nome</string>
@@ -486,6 +488,7 @@
     <string name="help_draw">Modalità disegno</string>
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
+    <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
     <string name="help_toggle_plot">Passa tra pianta e sezione long.</string>
@@ -530,6 +533,7 @@
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_discover">Ricerca dispositivi DistoX ... attendi</string>
@@ -561,6 +565,7 @@
     <string name="title_stats">Statistiche</string>
     <string name="title_survey">Info rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
+    <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- string name="title_zoom">Zoom</string -->
 
@@ -578,6 +583,8 @@
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
   <string name="pref_bootloader_title">Bootloader</string>
   <string name="pref_bootloader_summary">Bootloader abilitiato</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- NO string name="pref_cosurvey_title">Co-surveying</string -->
   <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
   <string name="pref_export_shots_title">Formato esportazione dati</string>

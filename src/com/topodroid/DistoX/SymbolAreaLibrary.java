@@ -65,7 +65,7 @@ class SymbolAreaLibrary
     return false;
   }
 
-  boolean hasAnyArea( String th_name ) 
+  private boolean hasAnyArea( String th_name ) 
   {
     for ( SymbolArea a : mAnyArea ) {
       if ( th_name.equals( a.mThName ) ) {
@@ -187,6 +187,10 @@ class SymbolAreaLibrary
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), locale, iso );
+        if ( symbol.mThName == null ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "area with null ThName" );
+          continue;
+        }
         if ( ! hasAnyArea( symbol.mThName ) ) {
           mAnyArea.add( symbol );
           symbol.setEnabled( TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );

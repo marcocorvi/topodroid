@@ -519,6 +519,7 @@ public class DrawingActivity extends ItemDrawer
     private void doSaveTh2( ) 
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
+      Log.v( "DistoX ", "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         // if ( not_all_symbols ) AlertMissingSymbols();
@@ -537,7 +538,10 @@ public class DrawingActivity extends ItemDrawer
     // called by doSaveTh2 and saveTh2
     private void startSaveTh2Task()
     {
-      if ( ! mModified ) return;
+      if ( ! mModified ) {
+        // Log.v("DistoX", "drawing not modified: not saving");
+        return;
+      }
       // final Activity currentActivity = this; // if Toast
       Handler saveHandler = new Handler(){
         @Override
@@ -947,14 +951,21 @@ public class DrawingActivity extends ItemDrawer
       mMenu.setOnItemClickListener( this );
 
       doStart();
+      if ( ! ( isSection() || isXSection() ) ) {
+        if ( mDataDownloader != null ) {
+          mApp.registerLister( this );
+        } 
+      } else {
+        mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+      }
     }
 
     @Override
     protected synchronized void onResume()
     {
       super.onResume();
-      doResume();
       // Log.v("DistoX", "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+      doResume();
       if ( mDataDownloader != null ) mDataDownloader.onResume();
       setConnectionStatus( mDataDownloader.getStatus() );
     }
@@ -972,26 +983,32 @@ public class DrawingActivity extends ItemDrawer
     {
       super.onStart();
       // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-      if ( mDataDownloader != null ) {
-        mApp.registerLister( this );
-      }
       // if ( mSaveTask != null ) mSaveTask.cancel();
       // mSaveTask = new SaveTimerTask();
       // mSaveTimer = new Timer();
       // mSaveTimer.schedule( mSaveTask, 10000, 60000 );
     }
 
+    // @Override
+    // protected synchronized void onStop()
+    // {
+    //   super.onStop();
+    //   // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+    //   doStop();
+    // }
+
     @Override
-    protected synchronized void onStop()
+    protected synchronized void onDestroy()
     {
-      super.onStop();
-      // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+      super.onDestroy();
+      // Log.v("DistoX", "Drawing activity onDestroy");
       if ( mDataDownloader != null ) {
         mApp.unregisterLister( this );
-        mDataDownloader.onStop();
-        mApp.disconnectRemoteDevice( false );
       }
-      doStop();
+      // if ( mDataDownloader != null ) { // data-download management is left to ShotActivity
+      //   mDataDownloader.onStop();
+      //   mApp.disconnectRemoteDevice( false );
+      // }
     }
 
     private void doResume()
@@ -1010,17 +1027,17 @@ public class DrawingActivity extends ItemDrawer
       switchZoomCtrl( false );
       mDrawingSurface.isDrawing = false;
       if ( mPid >= 0 ) mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
-    }
-
-    private void doStop()
-    {
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doStop type " + mType + " modified " + mModified );
-      // if ( mSaveTimer != null ) mSaveTimer.cancel();
-      // mSaveTimer =  null;
-      // if ( mSaveTask != null ) mSaveTask.cancel();
-      // mSaveTask = null;
       doSaveTh2( ); // do not alert-dialog on mAllSymbols
     }
+
+    // private void doStop()
+    // {
+    //   TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doStop type " + mType + " modified " + mModified );
+    //   // if ( mSaveTimer != null ) mSaveTimer.cancel();
+    //   // mSaveTimer =  null;
+    //   // if ( mSaveTask != null ) mSaveTask.cancel();
+    //   // mSaveTask = null;
+    // }
 
 // ----------------------------------------------------------------------------
 
@@ -1117,7 +1134,7 @@ public class DrawingActivity extends ItemDrawer
           float Z = FloatMath.sin( bc );
           float x =  d * (float)(X1 * X + Y1 * Y + Z1 * Z);
           float y = -d * (float)(X2 * X + Y2 * Y + Z2 * Z);
-          Log.v("DistoX", "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
+          // Log.v("DistoX", "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
           if ( b.mFrom.equals( mFrom ) ) {
             // N.B. this must be guaranteed for X_SECTION
             x += xfrom;
@@ -1738,7 +1755,7 @@ public class DrawingActivity extends ItemDrawer
                           BezierPoint p3 = c.getPoint(3);
                           lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
-                        if ( mContinueLine ) {
+                        if ( mContinueLine && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                           if ( line != null ) {
                             // Log.v( "DistoX", "continuing line ");
@@ -2129,6 +2146,7 @@ public class DrawingActivity extends ItemDrawer
         return;
       } 
       // finish();
+      doSaveTh2( ); // do not alert-dialog on mAllSymbols
       super.onBackPressed();
     }
 

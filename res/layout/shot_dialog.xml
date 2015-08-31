@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    android:padding="0dp"
+    >
 
     <!-- TextView android:id="@+id/shot_data"
         android:layout_width="fill_parent"
@@ -15,67 +14,81 @@
         / -->
   
   <LinearLayout 
-      android:layout_width="match_parent" 
+      android:id="@+id/layout1"
+      android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
       android:orientation="horizontal"
       >
     <EditText android:id="@+id/shot_distance"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
+        android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
-        android:inputType="numberDecimal"
         android:layout_marginRight="10dp"
+        android:nextFocusDown="@+id/shot_bearing"
+        android:singleLine="true"
         />
-    <EditText android:id="@+id/shot_bearing"
-        android:layout_width="80dp"
+    <EditText android:id="@id/shot_bearing"
+        android:layout_width="0dp"
+        android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
-        android:inputType="numberDecimal"
         android:layout_marginRight="10dp"
+        android:nextFocusDown="@+id/shot_clino"
+        android:singleLine="true"
         />
-    <EditText android:id="@+id/shot_clino"
-        android:layout_width="80dp"
+    <EditText android:id="@id/shot_clino"
+        android:layout_width="0dp"
+        android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
-        android:inputType="numberDecimal|numberSigned"
+        android:nextFocusDown="@+id/shot_from"
+        android:singleLine="true"
         />
   </LinearLayout>
 
-    <TextView android:id="@+id/shot_extra"
+  <TextView android:id="@+id/shot_extra"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
+        android:layout_below="@id/layout1"
         android:textSize="18sp"
         android:text="@string/shot_info"
         />
 
-    <LinearLayout 
+  <LinearLayout 
+      android:id="@+id/layout2"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/shot_extra"
       android:orientation="horizontal" 
       android:layout_marginTop="2dp"
       >
 
-      <EditText android:id="@+id/shot_from" 
-        android:singleLine="true" 
-        android:layout_weight="100"
-        android:layout_width="match_parent"
+      <EditText android:id="@id/shot_from" 
+        android:layout_width="0dp"
+        android:layout_weight="50"
         android:layout_height="wrap_content" 
         android:text=""
         android:nextFocusDown="@+id/shot_to"
+        android:singleLine="true"
         />
-      <EditText android:id="@+id/shot_to" 
-        android:singleLine="true" 
-        android:layout_weight="100"
-        android:layout_width="match_parent"
+      <EditText android:id="@id/shot_to" 
+        android:layout_width="0dp"
+        android:layout_weight="50"
         android:layout_height="wrap_content" 
         android:text=""
+        android:nextFocusDown="@+id/shot_comment"
+        android:singleLine="true"
         />
 
-    </LinearLayout>
+  </LinearLayout>
    					  
-    <LinearLayout 
+  <LinearLayout 
+      android:id="@+id/layout3"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/layout2"
       android:orientation="horizontal" 
       android:layout_marginTop="2dp"
       >
@@ -106,11 +119,13 @@
 
     </LinearLayout>				  
 
-    <EditText android:id="@+id/shot_comment" 
+    <EditText
+        android:id="@id/shot_comment" 
         android:maxLines="1" 
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
+        android:layout_below="@id/layout3"
       	android:ems="25"
         android:scrollHorizontally="true"
         android:autoText="false"
@@ -119,8 +134,10 @@
         />
 
     <LinearLayout 
+      android:id="@+id/layout4"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/shot_comment"
       android:orientation="horizontal" 
       >
       <CheckBox
@@ -147,8 +164,10 @@
     </LinearLayout>
 
     <LinearLayout 
+      android:id="@+id/layout5"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/layout4"
       android:orientation="horizontal" 
       >
       <CheckBox 
@@ -174,8 +193,10 @@
     </LinearLayout>
 
     <LinearLayout 
+      android:id="@+id/layout6"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/layout5"
       android:orientation="horizontal" 
       >
       <!-- RadioButton 
@@ -209,8 +230,10 @@
     </LinearLayout>
 
     <LinearLayout 
+      android:id="@+id/layout7"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/layout6"
       android:orientation="horizontal" 
       >
       <!-- Button android:id="@+id/btn_back"
@@ -248,5 +271,18 @@
       </LinearLayout>
 
     </LinearLayout>
-   		
-</LinearLayout>
+
+  <android.inputmethodservice.KeyboardView
+    android:id="@+id/keyboardview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="bottom"
+    android:visibility="gone"
+  />
+
+</RelativeLayout>
+

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingLeft="6dp"
     android:paddingRight="6dp"
     android:paddingBottom="3dp">
    					  
     <LinearLayout 
+       android:id="@+id/layout1"
        android:layout_marginTop="2dp"
-       android:layout_width="wrap_content" 
+       android:layout_width="fill_parent" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        >
@@ -32,8 +35,10 @@
     </LinearLayout>
 
     <LinearLayout 
-       android:layout_marginTop="2dp"
-       android:layout_width="wrap_content" 
+       android:id="@+id/layout2"
+       android:layout_below="@id/layout1"
+       android:layout_marginTop="10dp"
+       android:layout_width="fill_parent" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        >
@@ -95,10 +100,12 @@
     </RadioGroup -->
 
     <LinearLayout 
+      android:id="@+id/layout3"
+       android:layout_below="@id/layout2"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="25dip"
+      android:layout_marginTop="25dp"
       >
       <!-- Button android:id="@+id/button_back"
         android:layout_width="wrap_content" 
@@ -125,4 +132,17 @@
 
       </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+  <android.inputmethodservice.KeyboardView
+    android:id="@+id/keyboardview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="bottom"
+    android:visibility="gone"
+  />
+
+</RelativeLayout>

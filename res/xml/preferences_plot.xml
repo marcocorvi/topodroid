@@ -165,7 +165,7 @@
        android:dialogTitle="@string/pref_bitmap_scale_title"
        android:dialogMessage="@string/pref_bitmap_scale_message"
        android:inputType="number"
-       android:defaultValue="2" />
+       android:defaultValue="1.5" />
 
     <Preference
        android:key="DISTOX_TOOL_SCREEN"

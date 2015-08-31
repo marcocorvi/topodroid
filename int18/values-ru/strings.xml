@@ -213,6 +213,7 @@
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_recover">Восстановить</string>
     <string name="menu_reload">Перезагрузить</string>
+    <!-- TODO string name="menu_rename">RENAME</string -->
     <string name="menu_help">Помощь</string>
     <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
     <string name="menu_logs">Журнал</string>
@@ -326,6 +327,7 @@
     <string name="survey_delete">Удалить съёмку?</string>
     <string name="survey_split">Разорвать съёмку ?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: неасоциированный пикет</string>
+    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
     <string name="name">имя</string>
@@ -536,6 +538,7 @@
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Выбрать привязку абриса</string>
+    <!-- TODO string name="help_rename">Change survey name</string -->
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
     <string name="help_toggle_plot">Переключить план разрез-разв.</string>
@@ -597,6 +600,7 @@
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэфиценты</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_discover">Поиск устройств DistoX ... подождите</string>
@@ -622,6 +626,7 @@
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Описание съёмки</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
+    <!-- TODO string name="title_survey_rename">Rename survey as</string -->
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- OK string name="title_zoom">Зум</string -->
 
@@ -641,6 +646,8 @@
   <string name="pref_raw_data_summary">Показать сырые данные</string>
   <string name="pref_bootloader_title">Загрузчик</string>
   <string name="pref_bootloader_summary">Вкл Загрузчик</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <string name="pref_cosurvey_title">Совм. съёмка</string>
   <string name="pref_cosurvey_summary">Вкл/Выкл Совм. съёмку</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>

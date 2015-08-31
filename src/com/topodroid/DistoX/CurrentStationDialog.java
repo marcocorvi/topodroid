@@ -30,6 +30,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.inputmethodservice.KeyboardView;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -62,6 +63,8 @@ public class CurrentStationDialog extends Dialog
   // private Button mBtnCancel;
 
   private ListView mList;
+
+  private MyKeyboard mKeyboard = null;
 
   public CurrentStationDialog( Context context, ShotActivity parent, TopoDroidApp app )
   {
@@ -97,6 +100,19 @@ public class CurrentStationDialog extends Dialog
     mBtnOK.setOnClickListener( this );   // OK-SAVE
     mBtnClear.setOnClickListener( this );   // CLEAR
     // mBtnCancel.setOnClickListener( this );
+
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
+                                R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
+    if ( TopoDroidSetting.mKeyboard ) {
+      int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
+      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      MyKeyboard.registerEditText( mKeyboard, mName, flag);
+    } else {
+      mKeyboard.hide();
+      if ( TopoDroidSetting.mStationNames == 1 ) {
+        mName.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      }
+    }
 
     setTitle( R.string.title_current_station );
     updateList();
@@ -197,6 +213,18 @@ public class CurrentStationDialog extends Dialog
 
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
+    }
+    dismiss();
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
     }
     dismiss();
   }

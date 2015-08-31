@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
+import android.view.ViewGroup.LayoutParams;
 
 
 public class SurveyExportDialog extends Dialog
@@ -57,6 +58,7 @@ public class SurveyExportDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setContentView(R.layout.survey_export_dialog);
     mBtnTh  = (Button) findViewById(R.id.btn_therion );

@@ -23,9 +23,9 @@ public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
 {
   private TopoDroidApp mApp;
   private static DistoXRefresh running = null;
-  private ListerSet mLister;
+  private ILister mLister;
 
-  DistoXRefresh( TopoDroidApp app, ListerSet lister )
+  DistoXRefresh( TopoDroidApp app, ILister lister )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DistoXRefresh cstr" );
     mApp = app;

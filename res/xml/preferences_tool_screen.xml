@@ -9,7 +9,7 @@
        android:key="DISTOX_LINE_STYLE"
        android:summary="@string/pref_linestyle_summary"
        android:title="@string/pref_linestyle_title"
-       android:defaultValue="2"
+       android:defaultValue="0"
        android:entries="@array/lineStyle"
        android:entryValues="@array/lineStyleValue" />
 
@@ -20,7 +20,7 @@
        android:dialogTitle="@string/pref_segment_title"
        android:dialogMessage="@string/pref_segment_message"
        android:inputType="number"
-       android:defaultValue="5" />
+       android:defaultValue="10" />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_ACCURACY"

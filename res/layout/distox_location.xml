@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    android:padding="0dp"
+    >
  
     <EditText android:id="@+id/station"
         android:layout_marginTop="2dp"
@@ -19,8 +18,10 @@
         />
 
     <LinearLayout
+        android:id="@+id/layout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
+        android:layout_below="@id/station"
         android:orientation="horizontal"
         android:layout_marginTop="25dp" 
         >
@@ -68,33 +69,55 @@
 
     </LinearLayout>
 
-    <TextView android:id="@+id/longitude"
+    <TextView
+        android:id="@+id/longitude"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
+        android:layout_below="@id/layout1"
         android:text="@string/longitude"
         />
    					  
-    <TextView android:id="@+id/latitude"
+    <TextView
+        android:id="@+id/latitude"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
+        android:layout_below="@id/longitude"
         android:text="@string/latitude"
         />
    					  
-    <TextView android:id="@+id/altitude"
+    <TextView
+        android:id="@+id/altitude"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
+        android:layout_below="@id/latitude"
         android:text="@string/altitude"
         />
    					  
-    <ListView android:id="@+id/list"
+    <ListView
+        android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/altitude"
         android:transcriptMode="alwaysScroll"
         android:layout_weight="1"
         android:textSize="12sp"
         />  
 
-</LinearLayout>
+
+  <android.inputmethodservice.KeyboardView
+    android:id="@+id/keyboardview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="bottom"
+    android:visibility="gone"
+  />
+
+
+</RelativeLayout>

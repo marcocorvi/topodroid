@@ -234,6 +234,7 @@
     <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">WIEDERHERSTELLEN</string>
     <string name="menu_reload">WIEDERLADEN</string>
+    <!-- TODO string name="menu_rename">RENAME</string -->
     <string name="menu_help">HILFE</string>
     <!-- string name="menu_join_survey">Co-survey</string -->
     <string name="menu_logs">LOGS</string>
@@ -341,6 +342,7 @@
     <string name="survey_delete">Vermessung löschen?</string>
     <string name="survey_split">Vermessung teilen ?</string>
     <string name="survey_not_attached">WARNUNG: ungebundene Messungen</string>
+    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
     <string name="declination">Magn. Dekl.</string>
     <string name="description">Beschreibung</string>
     <string name="name">Namen</string>
@@ -530,6 +532,7 @@
     <string name="help_eraser">Löschmodus</string>
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Die Skizzersreferenzen wählen</string>
+    <!-- TODO string name="help_rename">Change survey name</string -->
     <string name="help_stats">Vermessung Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <string name="help_toggle_plot">Zwischen der Draufsicht und Seitenansicht wechseln</string>
@@ -579,6 +582,7 @@
     <string name="title_calib">Kalibrierung</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
+    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Gespeichert Messpunkten</string>
     <string name="title_device">DistoX Geräte</string>
     <string name="title_discover">DistoX Geräte finden ... warten</string>
@@ -611,6 +615,7 @@
     <string name="title_stats">Statistik</string>
     <string name="title_survey">Vermessungs-Info</string>
     <string name="title_survey_export">Vermessung Speichern als</string>
+    <!-- TODO string name="title_survey_rename">Rename survey as</string -->
     <string name="title_calib_export">Kalibrierung Speichern als</string>
     <!-- string name="title_zoom">Zoom</string -->
 
@@ -629,6 +634,8 @@
   <string name="pref_raw_data_summary">Rohdaten zeigen</string>
   <!-- OK string name="pref_bootloader_title">Bootloader</string -->
   <string name="pref_bootloader_summary">Die Bootloader ermöglichen</string>
+  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
+  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <string name="pref_export_shots_title">Datenexportformat</string>

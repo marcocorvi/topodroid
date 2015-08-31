@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:padding="0dp"
+    >
    					  
     <TextView
         android:id="@+id/shot_label"
@@ -15,36 +16,50 @@
      />
 
     <LinearLayout 
+      android:id="@+id/layout1"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
+      android:layout_below="@id/shot_label"
       android:orientation="horizontal"
       android:paddingLeft="6dp"
       android:paddingRight="6dp" 
-      android:paddingBottom="3dp">
+      android:paddingBottom="3dp"
+      >
 
       <EditText android:id="@+id/shot_from"
-          android:layout_marginTop="2dp"
-          android:layout_width="100dip"
-          android:layout_height="wrap_content" 
-          android:text="-"
-          />
+        android:layout_marginTop="2dp"
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content" 
+        android:text="-"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/shot_to"
+        />
       <EditText android:id="@+id/shot_to"
-          android:layout_marginTop="2dp"
-          android:layout_width="100dip"
-          android:layout_height="wrap_content" 
-          android:text="-"
-          />
+        android:layout_marginTop="2dp"
+        android:layout_width="0dip"
+        android:layout_weight="50"
+        android:layout_height="wrap_content" 
+        android:text="-"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/shot_comment"
+        />
     </LinearLayout>
 
-    <EditText android:id="@+id/shot_comment"
+    <EditText
+      android:id="@+id/shot_comment"
       android:layout_marginTop="2dp"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
+      android:layout_below="@id/layout1"
+      android:singleLine="true"
       />
 
     <LinearLayout 
+      android:id="@+id/layout2"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/shot_comment"
       android:orientation="horizontal" 
       >
       <CheckBox 
@@ -70,8 +85,10 @@
     </LinearLayout>
    					  
     <LinearLayout 
+      android:id="@+id/layout3"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/layout2"
       android:orientation="horizontal" 
       >
       <!-- RadioButton 
@@ -99,8 +116,10 @@
     <!-- TODO comment -->
 
     <LinearLayout 
+      android:id="@+id/layout4"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_below="@id/layout3"
       android:orientation="horizontal" 
       android:layout_marginTop="25dip"
       >
@@ -127,4 +146,17 @@
       </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+
+  <android.inputmethodservice.KeyboardView
+    android:id="@+id/keyboardview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="bottom"
+    android:visibility="gone"
+  />
+
+</RelativeLayout>
