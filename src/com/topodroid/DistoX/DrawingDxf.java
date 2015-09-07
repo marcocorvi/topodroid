@@ -28,8 +28,8 @@ import android.util.FloatMath;
 
 class DrawingDxf
 {
-  private static int VERSION = 9;
-  private static String ACAD_VERSION = "AC1009";
+  private static int VERSION = 13; // 9
+  private static String ACAD_VERSION = "AC1012"; // AC1009
 
   private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
 
@@ -102,6 +102,11 @@ class DrawingDxf
   static void printInt(  PrintWriter pw, int code, int val )
   {
     pw.printf( "  %d\n%d\n", code, val );
+  }
+
+  static void printXY( PrintWriter pw, float x, float y )
+  {
+    pw.printf(Locale.ENGLISH, "  10\n%.2f\n  20\n%.2f\n", x, y );
   }
 
   static void printXYZ( PrintWriter pw, float x, float y, float z )
@@ -235,13 +240,28 @@ class DrawingDxf
           int flag = 0;
 
           handle = 40;
-          ++handle; printLayer( pw2, handle, "LEG",     flag, 1, 1, style );
-          ++handle; printLayer( pw2, handle, "SPLAY",   flag, 2, 2, style );
-          ++handle; printLayer( pw2, handle, "STATION", flag, 3, 3, style );
-          ++handle; printLayer( pw2, handle, "LINE",    flag, 4, 4, style );
-          ++handle; printLayer( pw2, handle, "POINT",   flag, 5, 5, style );
-          ++handle; printLayer( pw2, handle, "AREA",    flag, 6, 6, style );
-          ++handle; printLayer( pw2, handle, "REF",     flag, 7, 7, style );
+          int cnt = 1;
+          ++handle; printLayer( pw2, handle, "LEG",     flag, cnt, cnt, style ); ++cnt;
+          ++handle; printLayer( pw2, handle, "SPLAY",   flag, cnt, cnt, style ); ++cnt;
+          ++handle; printLayer( pw2, handle, "STATION", flag, cnt, cnt, style ); ++cnt;
+          ++handle; printLayer( pw2, handle, "LINE",    flag, cnt, cnt, style ); ++cnt;
+          ++handle; printLayer( pw2, handle, "POINT",   flag, cnt, cnt, style ); ++cnt;
+          // ++handle; printLayer( pw2, handle, "AREA",    flag, cnt, cnt, style ); ++cnt;
+          ++handle; printLayer( pw2, handle, "REF",     flag, cnt, cnt, style ); ++cnt;
+          
+          SymbolLineLibrary linelib = DrawingBrushPaths.mLineLib;
+          if ( linelib != null ) { 
+            for ( SymbolLine line : linelib.mAnyLine ) {
+              ++handle; printLayer( pw2, handle, line.getThName(), flag, cnt, cnt, style ); ++cnt;
+            }
+          }
+
+          SymbolAreaLibrary arealib = DrawingBrushPaths.mAreaLib;
+          if ( arealib != null ) { 
+            for ( SymbolArea area : arealib.mAnyArea ) {
+              ++handle; printLayer( pw2, handle, area.getThName(), flag, cnt, cnt, style ); ++cnt;
+            }
+          }
 
           out.write( sw2.getBuffer().toString() );
         }
@@ -432,12 +452,14 @@ class DrawingDxf
             printFloat( pw5, 40, POINT_SCALE );
             printString( pw5, 1, st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            String layer = "LINE";
+            DrawingLinePath line = (DrawingLinePath)path;
+            String layer = DrawingBrushPaths.getLineThName( line.lineType() );
+            // String layer = "LINE";
             int flag = 0;
-            DrawingLinePath line = (DrawingLinePath) path;
             printString( pw5, 0, "POLYLINE" );
             printString( pw5, 8, layer );
             printAcDb( pw5, -1, "AcDbEntity", "AcDbPolyline" );
+            printInt( pw5, 66, 1 ); // group 1
             printInt( pw5, 70, flag );
             // ArrayList< LinePoint > points = line.mPoints;
             // for ( LinePoint p : points ) 
@@ -449,16 +471,57 @@ class DrawingDxf
             printString( pw5, 0, "SEQEND" );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;
-            printString( pw5, 0, "HATCH" );
-            printString( pw5, 8, "AREA" );
-            printInt( pw5, 91, 1 );
-            printInt( pw5, 93, area.size() );
-            // ArrayList< LinePoint > points = area.mPoints;
-            // printInt( pw5, 93, points.size() );
-            // for ( LinePoint p : points ) 
+            String layer = DrawingBrushPaths.getAreaThName( area.areaType() );
+            printString( pw5, 0, "HATCH" );    // entity type HATCH
+            // printString( pw5, 8, "AREA" );     // layer (color BYLAYER)
+            printString( pw5, 8, layer );     // layer (color BYLAYER)
+
+            // printAcDb( pw5, -1, "AcDbEntity", "AcDbHatch" );
+            // printXYZ( pw5, 0f, 0f, 0f );
+            printFloat( pw5, 210, 0f ); // extrusion direction
+            printFloat( pw5, 220, 0f );
+            printFloat( pw5, 230, 1f );
+            printInt( pw5, 70, 1 );            // solid fill
+            printInt( pw5, 71, 1 );            // associative
+            printInt( pw5, 91, 1 );            // nr. boundary paths: 1
+            printInt( pw5, 92, 3 );            // flag: external (bit-0) polyline (bit-1)
+            printInt( pw5, 93, area.size() );  // nr. of edges /  vertices
+            printInt( pw5, 72, 0 );            // edge type (0: default)
+            printInt( pw5, 73, 1 );            // is-closed flag
             for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
-              printXYZ( pw5, p.mX, -p.mY, 0.0f );
+              printXY( pw5, p.mX, -p.mY );
             }
+
+            // printInt( pw5, 97, 0 );            // nr. source boundary objects
+
+            // printInt( pw5, 75, 1 );            // hatch style (normal)
+            // printInt( pw5, 76, 1 );
+            // printFloat( pw5, 52, 1.5708f );    // hatch pattern angle
+	    // printFloat( pw5, 41, 3f );         // hatch pattern scale
+            // printInt( pw5, 77, 0 );            // hatch pattern double flag (0: not double)
+            // printInt( pw5, 78, 1 );            // nr. pattern lines
+
+            // printFloat( pw5, 53, 1.5708f );    // pattern line angle
+            // printFloat( pw5, 43, 0f );         // pattern base point
+            // printFloat( pw5, 44, 0f );
+            // printFloat( pw5, 45, 1f );         // pattern line offset
+            // printFloat( pw5, 46, 1f );         
+            // printInt( pw5, 79, 0 );            // nr. dash length items
+            // // printFloat( pw5, 49, 3f );         // dash length (repeated nr. times)
+
+            // printFloat( pw5, 47, 1f );         // pixel size
+            // printInt( pw5, 98, 2 );            // nr. seed points
+            // printXYZ( pw5, 0f, 0f, 0f );
+            // printXYZ( pw5, 0f, 0f, 0f );
+            // printInt( pw5, 451, 0 );
+            // printFloat( pw5, 460, 0f );
+            // printFloat( pw5, 461, 0f );
+            // printInt( pw5, 452, 1 );
+            // printFloat( pw5, 462, 1f );
+            // printInt( pw5, 453, 2 );
+            // printFloat( pw5, 463, 0f );
+            // printFloat( pw5, 463, 1f );
+            // printString( pw5, 470, "LINEAR" );    
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;

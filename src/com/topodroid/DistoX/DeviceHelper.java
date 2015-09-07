@@ -563,6 +563,26 @@ public class DeviceHelper extends DataSetObservable
      return id;
    }
 
+   // this must be called when the calib name is not yet in the db
+   long insertCalib( String name, String date, String device, String comment, long algo )
+   {
+     if ( hasCalibName( name ) ) return -1L;
+     long id = 1;
+     Cursor cursor = myDB.query( "calibs", new String[] { "max(id)" }, null, null, null, null, null );
+     if (cursor.moveToFirst() ) {
+       id = 1 + cursor.getLong(0);
+     }
+     ContentValues cv = new ContentValues();
+     cv.put( "id",      id );
+     cv.put( "name",    name );
+     cv.put( "day",     date );
+     cv.put( "device",  device );
+     cv.put( "comment", comment );
+     cv.put( "algo",    algo );
+     myDB.insert( "calibs", null, cv );
+     return id;
+   }
+
    private long setName( String table, String name ) 
    {
      long id = -1;
@@ -1037,24 +1057,6 @@ public class DeviceHelper extends DataSetObservable
              +   " nickname TEXT "
              +   ")"
            );
-
-           // db.execSQL(
-           //     " CREATE TRIGGER fk_insert_shot BEFORE "
-           //   + " INSERT on " + SHOT_TABLE 
-           //   + " FOR EACH ROW BEGIN "
-           //   +   " SELECT RAISE "
-           //   +   " (ROLLBACK, 'insert on \"" + SHOT_TABLE + "\" violates foreing key constraint')"
-           //   +   " WHERE ( SELECT id FROM " + SURVEY_TABLE + " WHERE id = NEW.surveyId ) IS NULL; "
-           //   + " END;"
-           // );
-           // db.execSQL(
-           //     "CREATE TRIGGER fk_delete_survey BEFORE DELETE ON " + SURVEY_TABLE
-           //   + " FOR EACH ROW BEGIN "
-           //   +   " SELECT RAISE "
-           //   +   " (ROLLBACK, 'delete from \"" + SURVEY_TABLE + "\" violates constraint')"
-           //   +   " WHERE ( id IS IN ( SELECT DISTINCT surveyId FROM " + SHOT_TABLE + " ) );"
-           //   + " END;"
-           // );
 
            db.setTransactionSuccessful();
          } catch ( SQLException e ) {

@@ -255,15 +255,13 @@ public class ShotNewDialog extends Dialog
         if ( shot_from == null || shot_from.length() == 0 ) {
           shot_from = mETfrom.getHint().toString();
         }
-        String shot_to   = mETto.getText().toString();
+
+        String shot_to = mETto.getText().toString();
         if ( shot_to == null || shot_to.length() == 0 ) {
           shot_to = mETto.getHint().toString();
-        }
-
-        if ( shot_to == null ) {
-          shot_to = "";
         } else {
           shot_to = TopoDroidApp.noSpaces( shot_to );
+          if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";
         }
 
         shot_from = TopoDroidApp.noSpaces( shot_from );

@@ -12,6 +12,8 @@
  */
 package com.topodroid.DistoX;
 
+import android.util.Log;
+
 class CalibInfo
 {
   public long id;           //!< database ID
@@ -29,5 +31,10 @@ class CalibInfo
     device = _device;
     comment = _comment;
     algo = _algo;
+  }
+
+  void debug()
+  {
+    Log.v("DistoX", "CALIB: " + id + " " + name + " " + date + " " + device );
   }
 }

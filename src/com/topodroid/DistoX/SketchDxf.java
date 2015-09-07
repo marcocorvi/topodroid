@@ -33,7 +33,7 @@ class SketchDxf
     // header
     out.printf("999\nDXF created from TopoDroid\n");
     out.printf("0\nSECTION\n2\nHEADER\n");
-      out.printf("9\n$ACADVER\n1\nAC1006\n");
+      out.printf("9\n$ACADVER\n1\nAC1012\n"); // was AC1006
       out.printf("9\n$INSBASE\n");
       out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", 0.0, 0.0, 0.0 ); // FIXME (0,0,0)
       out.printf("9\n$EXTMIN\n");
@@ -115,7 +115,7 @@ class SketchDxf
           SketchLinePath line = (SketchLinePath) path;
           ArrayList< Vector > points = line.mLine.points;
           // ArrayList< Vector > points = line.mPts3D;
-          out.printf("0\nPOLYLINE\n8\n%s\n70\n%d\n", layer, flag );
+          out.printf("0\nPOLYLINE\n8\n%s\n70\n%d\n66\n1\n", layer, flag );
           for ( Vector p : points ) {
             out.printf("0\nVERTEX\n8\n%s\n", layer );
             out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", p.x, p.y, p.z );

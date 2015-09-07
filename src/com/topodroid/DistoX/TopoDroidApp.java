@@ -572,6 +572,26 @@ public class TopoDroidApp extends Application
 
     mManual = getResources().getString( R.string.topodroid_man );
 
+    if ( mDData.getValue( "import" ) == null && mCWD.equals("TopoDroid") ) {
+      // Log.v("DistoX", "importing calibrations");
+      mDData.setValue( "import", "done" );
+      List<CalibInfo> calibs = mData.selectAllCalibsInfo();
+      for ( CalibInfo c : calibs ) {
+        // c.debug();
+        if ( mDData.hasCalibName( c.name ) ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "calib " + c.name + " already in DB " );
+        } else {
+          long id = mDData.insertCalib( c.name, c.date, c.device, c.comment, c.algo );
+          if ( id >= 0 ) {
+            List<CalibCBlock> gms = mData.selectAllGMs( c.id );
+            for ( CalibCBlock b : gms ) {
+              mDData.insertGM( id, b.gx, b.gy, b.gz, b.mx, b.my, b.mz );
+            }
+          }
+        }
+      }
+    }
+
     if ( TopoDroidLog.LOG_DEBUG ) {
       isTracing = true;
       Debug.startMethodTracing("DISTOX");
