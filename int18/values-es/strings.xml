@@ -38,7 +38,10 @@
     <!-- string name="failed_snap_to_line">No close line to snap area border to</string -->
     <!-- string name="failed_snap_to_point">No close point to snap the point to</string -->
 
+    <!-- FIXME probably wrong: original "calibration of instruments" translation "instruments of calibration" -->
     <!-- TODO string name="calibration_title">Instrumentos de calibración</string -->
+    <!-- TODO string name="calibration_title">Instruments calibration</string -->
+
     <!-- TODO string name="calibration_length">Cinta</string -->
     <!-- TODO string name="calibration_azimuth">Brújula</string -->
     <!-- TODO string name="calibration_clino">Clino</string -->
