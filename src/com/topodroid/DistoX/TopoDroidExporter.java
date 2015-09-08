@@ -2064,7 +2064,9 @@ class TopoDroidExporter
                     long my = Long.parseLong( vals[5] );
                     long mz = Long.parseLong( vals[6] );
                     long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
-                    data.updateGMName( gid, cid, vals[7].trim() );
+                    String grp = vals[7];
+                    grp.trim();
+                    data.updateGMName( gid, cid, grp );
                   } catch ( NumberFormatException e ) { }
                 }
                 line = br.readLine();

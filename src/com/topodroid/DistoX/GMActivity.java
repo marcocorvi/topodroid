@@ -252,12 +252,14 @@ public class GMActivity extends Activity
    */
   void doResetGroups( long start_id )
   {
+    // Log.v("DistoX", "Reset CID " + mApp.mCID + " from gid " + start_id );
     mApp.mDData.resetAllGMs( mApp.mCID, start_id ); // reset all groups where status=0, and id >= start_id
   }
 
   void doComputeGroups( long start_id )
   {
     long cid = mApp.mCID;
+    // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return;
     float thr = (float)Math.cos( TopoDroidSetting.mGroupDistance * TopoDroidUtil.GRAD2RAD);
     List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );

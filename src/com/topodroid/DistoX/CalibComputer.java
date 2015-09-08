@@ -18,10 +18,10 @@ import android.os.AsyncTask;
 
 public class CalibComputer extends AsyncTask< String, Integer, Integer >
 {
-  static int CALIB_COMPUTE_CALIB  = 0;
-  static int CALIB_COMPUTE_GROUPS = 1;
-  static int CALIB_RESET_GROUPS   = 2;
-  static int CALIB_RESET_AND_COMPUTE_GROUPS = 3;
+  static final int CALIB_COMPUTE_CALIB  = 0;
+  static final int CALIB_COMPUTE_GROUPS = 1;
+  static final int CALIB_RESET_GROUPS   = 2;
+  static final int CALIB_RESET_AND_COMPUTE_GROUPS = 3;
 
   private GMActivity mParent;
   private static CalibComputer running = null;
@@ -46,7 +46,7 @@ public class CalibComputer extends AsyncTask< String, Integer, Integer >
     } else if ( mJob == CALIB_COMPUTE_GROUPS ) {
       mParent.doComputeGroups( mStartId );
     } else if ( mJob == CALIB_RESET_AND_COMPUTE_GROUPS ) {
-      mParent.doResetGroups( mStartId+1 );
+      mParent.doResetGroups( mStartId );
       mParent.doComputeGroups( mStartId );
     } else if ( mJob == CALIB_COMPUTE_CALIB ) {
       ret = mParent.computeCalib();
@@ -65,10 +65,12 @@ public class CalibComputer extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
-      if ( mJob == CALIB_RESET_GROUPS || mJob == CALIB_COMPUTE_GROUPS ) {
-        mParent.updateDisplay( );
-      } else if ( mJob == CALIB_COMPUTE_CALIB ) {
-        mParent.handleComputeCalibResult( r );
+      switch ( mJob ) {
+        case CALIB_COMPUTE_CALIB:
+          mParent.handleComputeCalibResult( r );
+          break;
+        default:
+          mParent.updateDisplay( );
       }
     }
     unlock();

@@ -121,8 +121,8 @@ public class DeviceHelper extends DataSetObservable
         updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
         updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, max_error=?, iterations=? WHERE id=?" );
 
-        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>=? AND status=0" );
-        // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>=?" );
+        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
+        // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
         deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
 
         doDeleteGMStmt    = myDB.compileStatement( "DELETE FROM gms where calibId=?" );
@@ -159,12 +159,12 @@ public class DeviceHelper extends DataSetObservable
     doDeleteCalibStmt.execute();
   }
 
-  public long updateGMName( long id, long cid, String grp )
+  public long updateGMName( long gid, long cid, String grp )
   {
     // if ( myDB == null ) return -1;
     updateGMGroupStmt.bindString( 1, grp );
     updateGMGroupStmt.bindLong( 2, cid );
-    updateGMGroupStmt.bindLong( 3, id );
+    updateGMGroupStmt.bindLong( 3, gid );
     updateGMGroupStmt.execute();
     return 0;
   }
@@ -195,8 +195,9 @@ public class DeviceHelper extends DataSetObservable
     cv.put( "grp", 0 );
     cv.put( "error", 0.0 );
     cv.put( "status", 0 );
-    long ret= myDB.insert( GM_TABLE, null, cv );
-    return ret;
+    /* long ret = */ myDB.insert( GM_TABLE, null, cv ); // insert returns the nr. of records in the table
+      // this method returns the GM-data ID
+    return myNextCId;
   }
   
   // ----------------------------------------------------------------------
