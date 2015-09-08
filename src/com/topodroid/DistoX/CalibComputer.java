@@ -18,14 +18,21 @@ import android.os.AsyncTask;
 
 public class CalibComputer extends AsyncTask< String, Integer, Integer >
 {
+  static int CALIB_COMPUTE_CALIB  = 0;
+  static int CALIB_COMPUTE_GROUPS = 1;
+  static int CALIB_RESET_GROUPS   = 2;
+  static int CALIB_RESET_AND_COMPUTE_GROUPS = 3;
+
   private GMActivity mParent;
   private static CalibComputer running = null;
+  private long mStartId;
   private int mJob;
 
-  CalibComputer( GMActivity parent, int job )
+  CalibComputer( GMActivity parent, long start, int job )
   {
-    mParent = parent;
-    mJob = job;
+    mParent  = parent;
+    mStartId = start;
+    mJob     = job;
   }
 
 // -------------------------------------------------------------------
@@ -34,11 +41,14 @@ public class CalibComputer extends AsyncTask< String, Integer, Integer >
   {
     if ( ! lock() ) return null;
     int ret = 0;
-    if ( mJob == GMActivity.CALIB_RESET_GROUPS ) {
-      mParent.doResetGroups();
-    } else if ( mJob == GMActivity.CALIB_COMPUTE_GROUPS ) {
-      mParent.doComputeGroups();
-    } else if ( mJob == GMActivity.CALIB_COMPUTE_CALIB ) {
+    if ( mJob == CALIB_RESET_GROUPS ) {
+      mParent.doResetGroups( mStartId );
+    } else if ( mJob == CALIB_COMPUTE_GROUPS ) {
+      mParent.doComputeGroups( mStartId );
+    } else if ( mJob == CALIB_RESET_AND_COMPUTE_GROUPS ) {
+      mParent.doResetGroups( mStartId+1 );
+      mParent.doComputeGroups( mStartId );
+    } else if ( mJob == CALIB_COMPUTE_CALIB ) {
       ret = mParent.computeCalib();
     }
     return ret;
@@ -55,9 +65,9 @@ public class CalibComputer extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
-      if ( mJob == GMActivity.CALIB_RESET_GROUPS || mJob == GMActivity.CALIB_COMPUTE_GROUPS ) {
+      if ( mJob == CALIB_RESET_GROUPS || mJob == CALIB_COMPUTE_GROUPS ) {
         mParent.updateDisplay( );
-      } else if ( mJob == GMActivity.CALIB_COMPUTE_CALIB ) {
+      } else if ( mJob == CALIB_COMPUTE_CALIB ) {
         mParent.handleComputeCalibResult( r );
       }
     }

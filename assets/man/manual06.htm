@@ -1,7 +1,11 @@
 <html><body>
 <h3>[6] CALIBRATION WINDOW</h3>
 
-Tapping the <u>Calibration</u> menu in the Device activity window you go to the Calibrations dialog, which lists the calibrations of the selected DistoX. To create a new calibration tap on the <u>New Calibration</u> button in the dialog. This brings you to the window for the calibration informations. The "date" field is prefilled with the current date. The "device" field is prefilled with the address of the DistoX, and cannot be modified. You must give a "name" to the calibration. The name is what appears in the list of calibrations. You can optionally enter a brief "description". By default TopoDroid will pick automatically the calibration algorithm based on the DistoX model and firmware. However you can force it to use either the linear or the non-linear algorithm. When you are done tap the <u>Save</u> button (the leftmost) to save the calibration info to the database.</i><br><p>
+Tapping the <u>Calibration</u> menu in the Device activity window you go to the Calibrations dialog, which lists the calibrations of the selected DistoX.<br><p>
+
+To import a calibration that has been exported to a csv file, tap the button <u>Import</u>. This opens a dialog listing the files in the "csv" subdirectory. Select the one you want to import or press the Android "BACK" hw button to cancel. A calibration import fails if the calibration name is already present in the database, or if the calibration device is not the current device.<br><p>
+
+To create a new calibration tap on the <u>New Calibration</u> button in the dialog. This brings you to the window for the calibration informations. The "date" field is prefilled with the current date. The "device" field is prefilled with the address of the DistoX, and cannot be modified. You must give a "name" to the calibration. The name is what appears in the list of calibrations. You can optionally enter a brief "description". By default TopoDroid will pick automatically the calibration algorithm based on the DistoX model and firmware. However you can force it to use either the linear or the non-linear algorithm. When you are done tap the <u>Save</u> button (the leftmost) to save the calibration info to the database.<br><p>
 
 <b>WARNING. The name of the calibration must not contain the character '/' (slash), which is the pathname separator.</b><br><p>
 
@@ -14,6 +18,8 @@ When you open an existing calibration (tapping the calibration name in the list 
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ulist><br><p>
+
+The calibration CSV export contains the calibration details (name, date, device BT address, comment, algorithm), followed by the calibration data. Each data line contains: the data index, the G and M values (six integers), the data group, the azimuth, clino and roll of the data, the error, and the status.<br><p>
 
 <h4>BUTTONS</h4>
 <ulist>

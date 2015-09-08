@@ -113,6 +113,8 @@
     <string name="import_wait">Импорт файла... обождите...</string>
     <string name="import_already">съёмка уже импортирована</string>
     <string name="import_none">Отсутствует файл для импортирта</string>
+    <!-- TODO string name="import_failed">File import failed</string -->
+    <!-- TODO string name="file_not_found">File not found</string -->
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
     <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите ...</string>
     <string name="sketch_loading">Загрузка абриса... обождите...</string>
@@ -406,6 +408,7 @@
     <string name="button_no"        >Нет       </string>
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
+    <!-- TODO string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Дамп      </string>
     <string name="button_reset"     >Сброс     </string>
     <string name="button_left"      >ЛЕВО</string>
@@ -446,18 +449,23 @@
 <!-- OK
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_compass">Compass</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
+    <!-- OK string name="btn_compass">Compass</string -->
+    <!-- OK string name="btn_csurvey">cSurvey</string -->
+    <!-- OK string name="btn_csv">CSV</string -->
+    <!-- OK string name="btn_dxf">DXF</string -->
+    <!-- OK string name="btn_kml">KML</string -->
+    <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- TODO string name="btn_import">Import</string -->
     <string name="btn_man">Ручной</string>
     <string name="btn_symbol">Инстр Рисования</string>
     <string name="btn_png">PNG</string>
-    <string name="btn_pockettopo">PocketTopo</string>
-    <string name="btn_survex">Survex</string>
-    <string name="btn_therion">Therion</string>
-    <string name="btn_vtopo">VisualTopo</string>
-    <string name="btn_zip">Zip</string>
+    <!-- OK string name="btn_pockettopo">PocketTopo</string -->
+    <!-- OK string name="btn_survex">Survex</string -->
+    <!-- OK string name="btn_therion">Therion</string -->
+    <!-- OK string name="btn_vtopo">VisualTopo</string -->
+    <!-- OK string name="btn_walls">Walls</string -->
+    <!-- OK string name="btn_svg">SVG</string -->
+    <!-- OK string name="btn_zip">Zip</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>

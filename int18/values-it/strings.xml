@@ -107,6 +107,8 @@
     <string name="import_wait">Importazione file... attendi...</string>
     <string name="import_already">Rilievo già presente</string>
     <string name="import_none">Nessun file da importare</string>
+    <string name="import_failed">Importazione file fallita</string>
+    <string name="file_not_found">File non trovato</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
     <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi...</string>
     <string name="sketch_loading">Caricamento disegno ... attendi ...</string>
@@ -395,6 +397,7 @@
     <string name="button_no"        >No        </string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
+    <!-- TODO string name="button_regroup"   >Regroup   </string -->
     <!-- string name="button_dump"      >Scarica   </string -->
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
@@ -437,18 +440,23 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_compass">Compass</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
+    <!-- OK string name="btn_compass">Compass</string -->
+    <!-- OK string name="btn_csurvey">cSurvey</string -->
+    <!-- OK string name="btn_csv">CSV</string -->
+    <!-- OK string name="btn_dxf">DXF</string -->
+    <!-- OK string name="btn_kml">KML</string -->
+    <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
+    <string name="btn_import">Importa</string>
     <string name="btn_man">Manuale</string>
     <string name="btn_symbol">Prototipi grafici</string>
     <string name="btn_png">PNG</string>
-    <string name="btn_pockettopo">PocketTopo</string>
-    <string name="btn_survex">Survex</string>
-    <string name="btn_therion">Therion</string>
-    <string name="btn_vtopo">VisualTopo</string>
-    <string name="btn_zip">Zip</string>
+    <!-- OK string name="btn_pockettopo">PocketTopo</string -->
+    <!-- OK string name="btn_survex">Survex</string -->
+    <!-- OK string name="btn_therion">Therion</string -->
+    <!-- OK string name="btn_vtopo">VisualTopo</string -->
+    <!-- OK string name="btn_walls">Walls</string -->
+    <!-- OK string name="btn_svg">SVG</string -->
+    <!-- OK string name="btn_zip">Zip</string -->
 
     <string name="help_help">Questo aiuto</string>
     <string name="help_manual">Manuale online</string>

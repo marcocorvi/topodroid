@@ -9,6 +9,9 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.IOException;
 
+import java.io.FileReader;
+import java.io.BufferedReader;
+
 import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
@@ -1997,6 +2000,7 @@ class TopoDroidExporter
       pw.format("# %s\n", ci.date );
       pw.format("# %s\n", ci.device );
       pw.format("# %s\n", ci.comment );
+      pw.format("# %d\n", ci.algo );
 
       List<CalibCBlock> list = data.selectAllGMs( cid, 1 ); // status 1 --> all shots
       for ( CalibCBlock b : list ) {
@@ -2013,4 +2017,67 @@ class TopoDroidExporter
     }
   }
 
+
+  static int importCalibFromCsv( DeviceHelper data, String filename, String device_name )
+  {
+    int ret = 0;
+    try {
+      TopoDroidApp.checkPath( filename );
+      FileReader fr = new FileReader( filename );
+      BufferedReader br = new BufferedReader( fr );
+    
+      String line = br.readLine();
+      if ( line == null || line.indexOf("TopoDroid") < 0 ) {
+        ret = -1; // NOT TOPODROID CSV
+      } else {
+        br.readLine(); // skip empty line
+        String name = br.readLine().substring(2);
+        if ( data.hasCalibName( name ) ) {
+          ret = -2; // CALIB NAME ALREADY EXISTS
+        } else {
+          String date   = br.readLine().substring(2);
+          String device = br.readLine().substring(2);
+          if ( ! device.equals( device_name ) ) {
+            ret = -3; // DEVICE MISMATCH
+          } else {
+            String comment = br.readLine().substring(2);
+            long algo = 0L;
+            line = br.readLine();
+            if ( line != null && line.charAt(0) == '#' ) {
+              try {
+                algo = Long.parseLong( line.substring(2) );
+              } catch ( NumberFormatException e ) { }
+              line = br.readLine();
+            }
+            if ( line == null ) {
+              ret = -4;
+            } else {
+              long cid = data.insertCalib( name, date, device, comment, algo );
+              while ( line != null ) {
+                String[] vals = line.split(", ");
+                if ( vals.length > 7 ) {
+                  try {
+                    long gx = Long.parseLong( vals[1] );
+                    long gy = Long.parseLong( vals[2] );
+                    long gz = Long.parseLong( vals[3] );
+                    long mx = Long.parseLong( vals[4] );
+                    long my = Long.parseLong( vals[5] );
+                    long mz = Long.parseLong( vals[6] );
+                    long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
+                    data.updateGMName( gid, cid, vals[7].trim() );
+                  } catch ( NumberFormatException e ) { }
+                }
+                line = br.readLine();
+              }
+            }
+          }
+        }
+      }
+      fr.close();
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed CSV import: " + e.getMessage() );
+      ret = -5; // IO Exception
+    }
+    return ret;
+  }
 }

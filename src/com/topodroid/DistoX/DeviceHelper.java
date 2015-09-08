@@ -121,7 +121,8 @@ public class DeviceHelper extends DataSetObservable
         updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
         updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, max_error=?, iterations=? WHERE id=?" );
 
-        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND status=0" );
+        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>=? AND status=0" );
+        // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>=?" );
         deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
 
         doDeleteGMStmt    = myDB.compileStatement( "DELETE FROM gms where calibId=?" );
@@ -202,9 +203,10 @@ public class DeviceHelper extends DataSetObservable
   // SELECT STATEMENTS
 
 
-   public void resetAllGMs( long cid )
+   public void resetAllGMs( long cid, long start_id )
    {
      resetAllGMStmt.bindLong( 1, cid );
+     resetAllGMStmt.bindLong( 2, start_id );
      resetAllGMStmt.execute();
    }
 
@@ -580,6 +582,7 @@ public class DeviceHelper extends DataSetObservable
      cv.put( "comment", comment );
      cv.put( "algo",    algo );
      myDB.insert( "calibs", null, cv );
+     myNextCId = 0;
      return id;
    }
 

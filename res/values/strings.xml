@@ -111,6 +111,8 @@
     <string name="import_wait">Importing file... please wait...</string>
     <string name="import_already">Survey already imported</string>
     <string name="import_none">No file to import</string>
+    <string name="import_failed">File import failed</string>
+    <string name="file_not_found">File not found</string>
     <string name="import_zip_ok">Successfully imported zip file</string>
     <string name="import_zip_wait">Imported zip file may take long. Please wait ...</string>
     <string name="sketch_loading">Loading sketch ... please wait...</string>
@@ -408,6 +410,7 @@
     <string name="button_no"        >No        </string>
     <string name="button_open"      >Open      </string>
     <string name="button_read"      >Read      </string>
+    <string name="button_regroup"   >Regroup   </string>
     <string name="button_dump"      >Dump     </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>
@@ -456,6 +459,7 @@
     <string name="btn_dxf">DXF</string>
     <string name="btn_kml">KML</string>
     <string name="btn_oziexplorer">OziExplorer</string>
+    <string name="btn_import">Import</string>
     <string name="btn_man">Manual</string>
     <string name="btn_symbol">Drawing tools</string>
     <string name="btn_png">PNG</string>

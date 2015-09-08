@@ -21,10 +21,14 @@ You have not drawn anything yet, and the canvas will display a grid (each little
 The sketch window has four modes:
 </ulist>
 <li><b>move</b>, the default: you can shift the canvas, and zoom in/out. If the "fixed references" box in the references dialog is set, shifts affect only the drawings [level experimental]</li>
-<li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (filled closed lines). Shift and zoom are possible with two fingers. At the basic level drawing is limited to lines.</li>
-<li><b>erase</b>: to erase drawn items, and lines/areas (or part of them). Shifts and zoom are possible with two fingers.</li>
+<li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (closed regions filled with a color). At the basic level drawing is limited to lines.</li>
+<li><b>erase</b>: to erase drawn items, and lines/areas (or part of them).</li>
 <li><b>edit</b> [N]: for the fine editing. Shift and zoom are still available, as for the "move" mode.</li>
-</ulist><br>
+</ulist><br><p>
+
+Sketch shifting and zooming is possible even in <b>draw</b> and in <b>erase</b> mode using two fingers. If zoom controls are enabled they show up when you tap at the bottom of the canvas in the middle. Finally, in every mode, the sketch can be shifted by "dragging" on the left, right and bottom sides of the canvas.<br><p>
+
+N.B. Erasing is a raster operation. The points of the vector items that come under the erased region are removed. This affects the undo stack in two ways: first erased items are dropped from the stack, second erasing the middle of a line remove the line object from the stack and replaces it with two lines that are added on the top of the stack.<br><p>
 
 <h4>BUTTONS</h4>
 The modes are represented by the three green buttons on the left: <u>draw</u>, <u>erase</u>, and <u>edit</u>. When none of them is "on" (has a white frame around) the mode is "move", otherwise it is that of the button that is "on".<br><p>

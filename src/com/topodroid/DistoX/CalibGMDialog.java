@@ -21,6 +21,7 @@ import android.content.Context;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnKeyListener;
@@ -31,6 +32,7 @@ public class CalibGMDialog extends Dialog
                            implements View.OnClickListener
 {
   private GMActivity mParent;
+  private long   mId;
   private String mGroup;
   private String mData;
 
@@ -38,6 +40,7 @@ public class CalibGMDialog extends Dialog
   private EditText mEditText;  // group number
   private Button   mButtonOK;
   private Button   mButtonDelete;
+  private CheckBox mCBregroup;
   // private Button   mButtonCancel;
 
   /**
@@ -46,10 +49,11 @@ public class CalibGMDialog extends Dialog
    * @param group     data group
    * @param data      calibration data (as string)
    */
-  CalibGMDialog( Context context, GMActivity parent, String group, String data )
+  CalibGMDialog( Context context, GMActivity parent, long id, String group, String data )
   {
     super( context );
     mParent = parent;
+    mId    = id;
     mGroup = group;
     mData  = data;
   }
@@ -80,6 +84,8 @@ public class CalibGMDialog extends Dialog
     // );
     mButtonOK     = (Button) findViewById(R.id.gm_ok );
     mButtonDelete = (Button) findViewById(R.id.gm_delete );
+    mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
+    mCBregroup.setChecked( false );
     // mButtonCancel = (Button) findViewById(R.id.gm_cancel );
 
     mTextView.setText( mData );
@@ -109,6 +115,9 @@ public class CalibGMDialog extends Dialog
           mEditText.setError( mParent.getResources().getString( R.string.error_group_non_integer ) );
           return;
         }
+      }
+      if ( mCBregroup.isChecked() ) {
+        mParent.resetAndComputeGroups( mId );
       }
     } else if ( b == mButtonDelete ) {
       mParent.deleteGM( true );

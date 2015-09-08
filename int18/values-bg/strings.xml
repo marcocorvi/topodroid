@@ -111,6 +111,8 @@
     <string name="import_wait">Импортиране... Моля изчакайте...</string>
     <string name="import_already">Картировката е вече импортирана</string>
     <string name="import_none">Няма файлове за импортиране</string>
+    <!-- TODO string name="import_failed">File import failed</string -->
+    <!-- TODO string name="file_not_found">File not found</string -->
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте ...</string>
     <string name="sketch_loading">Зареждане на скица... Моля изчакайте...</string>
@@ -410,6 +412,7 @@
     <string name="button_no"        >Не        </string>
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
+    <!-- TODO string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Запис     </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
@@ -452,22 +455,25 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_compass">Compass</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
-    <string name="btn_kml">KML</string>
-    <string name="btn_oziexplorer">OziExplorer</string>
+    <!-- OK string name="btn_compass">Compass</string -->
+    <!-- OK string name="btn_csurvey">cSurvey</string -->
+    <!-- OK string name="btn_csv">CSV</string -->
+    <!-- OK string name="btn_dxf">DXF</string -->
+    <!-- OK string name="btn_kml">KML</string -->
+    <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- OK string name="btn_kml">KML</string -->
+    <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- TODO string name="btn_import">Import</string -->
     <string name="btn_man">Manual</string>
     <string name="btn_symbol">Инструменти за рисуване</string>
     <string name="btn_png">PNG</string>
-    <string name="btn_pockettopo">PocketTopo</string>
-    <string name="btn_survex">Survex</string>
-    <string name="btn_therion">Therion</string>
-    <string name="btn_vtopo">VisualTopo</string>
-    <string name="btn_walls">Walls</string>
-    <string name="btn_svg">SVG</string>
-    <string name="btn_zip">Zip</string>
+    <!-- OK string name="btn_pockettopo">PocketTopo</string -->
+    <!-- OK string name="btn_survex">Survex</string -->
+    <!-- OK string name="btn_therion">Therion</string -->
+    <!-- OK string name="btn_vtopo">VisualTopo</string -->
+    <!-- OK string name="btn_walls">Walls</string -->
+    <!-- OK string name="btn_svg">SVG</string -->
+    <!-- OK string name="btn_zip">Zip</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>

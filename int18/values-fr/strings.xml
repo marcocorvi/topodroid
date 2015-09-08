@@ -107,8 +107,10 @@
     <string name="import_wait">Importation de fichier... Patientez...</string>
     <string name="import_already">Relevé déjà importé</string>
     <string name="import_none">Aucun fichier à importer</string>
-    <!-- string name="import_zip_ok">Successfully imported zip file</string -->
-    <!-- string name="import_zip_wait">Imported zip file may take long. Please wait ...</string -->
+    <!-- TODO string name="import_failed">File import failed</string -->
+    <!-- TODO string name="file_not_found">File not found</string -->
+    <!-- TODO string name="import_zip_ok">Successfully imported zip file</string -->
+    <!-- TODO string name="import_zip_wait">Imported zip file may take long. Please wait ...</string -->
     <string name="sketch_loading">Importation de dessin ... Patientez ...</string>
     <string name="sketch_saving">Exportation de dessin ... Patientez ...</string>
     <!-- TODO string name="lookup_wait">Internet lookup ... please wait...</string -->
@@ -400,6 +402,7 @@
     <string name="button_no"        >Non        </string>
     <!-- string name="button_open"      >Open      </string -->
     <string name="button_read"      >Lecture      </string>
+    <!-- TODO string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump     </string>
     <string name="button_reset"     >Reset      </string>
     <!-- TODO string name="button_left"      >LEFT</string -->
@@ -442,10 +445,13 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_compass">Compas</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
+    <!-- string name="btn_compass">Compas</string -->
+    <!-- string name="btn_csurvey">cSurvey</string -->
+    <!-- string name="btn_csv">CSV</string -->
+    <!-- string name="btn_dxf">DXF</string -->
+    <!-- string name="btn_kml">KML</string -->
+    <!-- string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- TODO string name="btn_import">Import</string -->
     <string name="btn_man">Manuel</string>
     <string name="btn_symbol">Symboles</string>
     <string name="btn_png">PNG</string>

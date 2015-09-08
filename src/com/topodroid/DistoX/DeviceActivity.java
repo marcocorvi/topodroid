@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -744,6 +745,27 @@ public class DeviceActivity extends Activity
     Intent calibIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, CalibActivity.class );
     calibIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
     startActivity( calibIntent );
+  }
+
+  void openCalibrationImportDialog()
+  {
+    if ( mDevice != null ){
+      (new CalibImportDialog( this, this )).show();
+    }
+  }
+
+  void importCalibFile( String name )
+  {
+    String filename = TopoDroidPath.getCsvFile( name );
+    File file = new File( filename );
+    if ( ! file.exists() ) {
+      Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
+    } else {
+      int ret = TopoDroidExporter.importCalibFromCsv( mApp.mDData, filename, mDevice.mAddress );
+      if ( ret != 0 ) { 
+        Toast.makeText(this, R.string.import_failed, Toast.LENGTH_SHORT).show();
+      }
+    }
   }
 
 

@@ -81,10 +81,6 @@ public class GMActivity extends Activity
   private String mCalibName;
   // private ConnHandler mHandler;
 
-  static int CALIB_COMPUTE_CALIB  = 0;
-  static int CALIB_COMPUTE_GROUPS = 1;
-  static int CALIB_RESET_GROUPS   = 2;
-
   // static int icons00[];
   // static int icons[] = { 
   //                       R.drawable.ic_download,
@@ -251,12 +247,15 @@ public class GMActivity extends Activity
     updateDisplay( );
   }
 
-  void doResetGroups( )
+  /**
+   * @param start_id id of the GM-data to start with
+   */
+  void doResetGroups( long start_id )
   {
-    mApp.mDData.resetAllGMs( mApp.mCID ); // reset all groups where status=0
+    mApp.mDData.resetAllGMs( mApp.mCID, start_id ); // reset all groups where status=0, and id >= start_id
   }
 
-  void doComputeGroups( )
+  void doComputeGroups( long start_id )
   {
     long cid = mApp.mCID;
     if ( cid < 0 ) return;
@@ -270,9 +269,25 @@ public class GMActivity extends Activity
     int cnt = 0;
     float b = 0.0f;
     float c = 0.0f;
+    if ( start_id >= 0 ) {
+      for ( CalibCBlock item : list ) {
+        if ( item.mId == start_id ) {
+          group = item.mGroup;
+          cnt = 1;
+          b = item.mBearing;
+          c = item.mClino;
+          break;
+        }
+      }
+    } else {
+      if ( TopoDroidSetting.mGroupBy != TopoDroidSetting.GROUP_BY_DISTANCE ) {
+        group = 1;
+      }
+    }
     switch ( TopoDroidSetting.mGroupBy ) {
       case TopoDroidSetting.GROUP_BY_DISTANCE:
         for ( CalibCBlock item : list ) {
+          if ( start_id >= 0 && item.mId <= start_id ) continue;
           if ( group == 0 || item.isFarFrom( b, c, thr ) ) {
             ++ group;
             b = item.mBearing;
@@ -285,8 +300,8 @@ public class GMActivity extends Activity
         break;
       case TopoDroidSetting.GROUP_BY_FOUR:
         // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "group by four");
-        group = 1;
         for ( CalibCBlock item : list ) {
+          if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroup( group );
           mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
           ++ cnt;
@@ -297,8 +312,8 @@ public class GMActivity extends Activity
         }
         break;
       case TopoDroidSetting.GROUP_BY_ONLY_16:
-        group = 1;
         for ( CalibCBlock item : list ) {
+          if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroup( group );
           mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
           ++ cnt;
@@ -416,7 +431,7 @@ public class GMActivity extends Activity
       // String name = st[1];
       mSaveData = st[2];
       if ( mSaveCBlock.mStatus == 0 ) {
-        startGMDialog( st[1] );
+        startGMDialog( mCIDid, st[1] );
       } else { // FIXME TODO ask whether to undelete
         new TopoDroidAlertDialog( this, getResources(),
                           getResources().getString( R.string.calib_gm_undelete ),
@@ -434,17 +449,11 @@ public class GMActivity extends Activity
     }
   }
  
-  private void startGMDialog( String name  )
+  private void startGMDialog( long gmid, String name  )
   {
-     // String msg = mSaveTextView.getText().toString();
-     // String[] st = msg.split( " ", 3 );
-     // // TopoDroidLog.Log(  TopoDroidLog.LOG_CALIB, "TextItem: (" + st[0] + ") (" + st[1] + ") (" + st[2] + ")" );
-     // mCIDid    = Long.parseLong(st[0]);
-     // String name = st[1];
-     // mSaveData = st[2];
      int end = name.length() - 1;
      name = name.substring(1,end);
-     (new CalibGMDialog( this, this, name, mSaveData )).show();
+     (new CalibGMDialog( this, this, gmid, name, mSaveData )).show();
   }
 
   // ---------------------------------------------------------------
@@ -621,7 +630,7 @@ public class GMActivity extends Activity
               : /* TopoDroidSetting.GROUP_BY_ONLY_16 */
                 getResources().getString( R.string.group_policy_sixteen ) 
             )).show();
-            // new CalibComputer( this, CALIB_COMPUTE_GROUPS ).execute();
+            // new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
           } else {
             resetTitle( );
             Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
@@ -650,7 +659,7 @@ public class GMActivity extends Activity
             mAlgo = ( TopoDroidSetting.mCalibAlgo != 0 ) ? TopoDroidSetting.mCalibAlgo : 1; // CALIB_AUTO_LINEAR
             mApp.updateCalibAlgo( mAlgo );
           }
-          new CalibComputer( this, CALIB_COMPUTE_CALIB ).execute();
+          new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
         } else {
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
         }
@@ -681,14 +690,19 @@ public class GMActivity extends Activity
       }
     }
 
-  void computeGroups()
+  void computeGroups( long start_id )
   {
-    new CalibComputer( this, CALIB_COMPUTE_GROUPS ).execute();
+    new CalibComputer( this, start_id, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
   }
 
-  void resetGroups()
+  void resetGroups( long start_id )
   {
-    new CalibComputer( this, CALIB_RESET_GROUPS ).execute();
+    new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_GROUPS ).execute();
+  }
+
+  void resetAndComputeGroups( long start_id )
+  {
+    new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
   }
 
   // ------------------------------------------------------------------

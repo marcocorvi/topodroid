@@ -28,13 +28,13 @@
       android:orientation="horizontal" 
       android:layout_marginTop="40dp" 
       >
-      <!-- Button android:id="@+id/gm_cancel"
+      <CheckBox android:id="@+id/gm_regroup"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:text="@string/button_cancel"
+          android:text="@string/button_regroup"
           android:background="@drawable/button"
           style="@style/button_default"
-          / -->
+          />
       <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

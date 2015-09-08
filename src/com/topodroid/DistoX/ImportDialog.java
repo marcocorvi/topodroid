@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120605 created
- * 20121212 sorted names in alphabetical order
  */
 package com.topodroid.DistoX;
 

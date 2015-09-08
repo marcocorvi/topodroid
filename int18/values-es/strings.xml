@@ -107,6 +107,8 @@
     <string name="import_wait">Importando archivo, espere...</string>
     <string name="import_already">Topografía ya importada</string>
     <string name="import_none">No hay archivo a importar</string>
+    <!-- TODO string name="import_failed">File import failed</string -->
+    <!-- TODO string name="file_not_found">File not found</string -->
     <!-- string name="import_zip_ok">Successfully imported zip file</string -->
     <!-- string name="import_zip_wait">Imported zip file may take long. Please wait ...</string -->
     <string name="sketch_loading">Importando dibujo, espere ...</string>
@@ -395,6 +397,7 @@
     <string name="button_no"        >No        </string>
     <!-- string name="button_open"      >Open      </string -->
     <string name="button_read"      >Leer      </string>
+    <!-- TODO string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
     <string name="button_reset"     >Reset     </string>
     <!-- TODO string name="button_left"      >LEFT</string -->
@@ -437,10 +440,13 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_compass">Rumbo</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
+    <!-- string name="btn_compass">Rumbo</string -->
+    <!-- string name="btn_csurvey">cSurvey</string -->
+    <!-- string name="btn_csv">CSV</string -->
+    <!-- string name="btn_dxf">DXF</string -->
+    <!-- string name="btn_kml">KML</string -->
+    <!-- string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- TODO string name="btn_import">Import</string -->
     <string name="btn_man">Manual</string>
     <string name="btn_symbol">Símbolos</string>
     <string name="btn_png">PNG</string>

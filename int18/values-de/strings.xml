@@ -126,6 +126,8 @@
     <string name="import_wait">Importieren ... bitte warten ...</string>
     <string name="import_already">Vermessung bereits importiert</string>
     <string name="import_none">Keine Daten importieren</string>
+    <!-- TODO string name="import_failed">File import failed</string -->
+    <!-- TODO string name="file_not_found">File not found</string -->
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
     <string name="import_zip_wait">Importieren Zip-Datei ... bitte warten ...</string>
     <string name="sketch_loading">Skizze laden... bitte warten ...</string>
@@ -428,6 +430,7 @@
     <string name="button_no"        >Nein      </string>
     <string name="button_open"      >Offen     </string>
     <string name="button_read"      >Lesen      </string>
+    <!-- TODO string name="button_regroup"   >Regroup   </string -->
     <!-- TODO string name="button_dump"      >Dump     </string -->
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
@@ -475,6 +478,9 @@
     <!-- OK string name="btn_csurvey">cSurvey</string -->
     <!-- OK string name="btn_csv">CSV</string -->
     <!-- OK string name="btn_dxf">DXF</string -->
+    <!-- OK string name="btn_kml">KML</string -->
+    <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- TODO string name="btn_import">Import</string -->
     <!-- OK string name="btn_man">Manual</string -->
     <!-- OK string name="btn_symbol">Drawing tools</string -->
     <!-- OK string name="btn_png">PNG</string -->

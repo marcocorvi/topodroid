@@ -48,6 +48,7 @@ public class CalibListDialog extends Dialog
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnNew;
+  private Button mBtnImport;
   // private Button mBtnCancel;
 
   private ListView mList;
@@ -76,9 +77,11 @@ public class CalibListDialog extends Dialog
     mList.setDividerHeight( 2 );
 
     mBtnNew     = (Button) findViewById(R.id.button_new);
+    mBtnImport  = (Button) findViewById(R.id.button_import);
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
 
     mBtnNew.setOnClickListener( this );
+    mBtnImport.setOnClickListener( this );
     // mBtnCancel.setOnClickListener( this );
 
     setTitle( R.string.title_calib );
@@ -105,6 +108,9 @@ public class CalibListDialog extends Dialog
     if ( b == mBtnNew ) {
       hide();
       mParent.openCalibration( null );
+    } else if ( b == mBtnImport ) {
+      hide();
+      mParent.openCalibrationImportDialog();
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
     }

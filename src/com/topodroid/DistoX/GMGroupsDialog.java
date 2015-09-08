@@ -59,9 +59,9 @@ class GMGroupsDialog extends Dialog
     Button b = (Button)v;
     if ( b == mBtnOK ) {
       if ( mCBreset.isChecked() ) {
-        mParent.resetGroups();
+        mParent.resetGroups( -1L );
       } else {
-        mParent.computeGroups();
+        mParent.computeGroups( -1L );
       }
     }
     dismiss();

@@ -1537,10 +1537,6 @@ public class DrawingActivity extends ItemDrawer
       float y_canvas = event.getY();
       // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
 
-      if ( mZoomBtnsCtrlOn && y_canvas > mApp.mDisplayHeight - 60 ) {
-        mZoomBtnsCtrl.setVisible( true );
-        // mZoomCtrl.show( );
-      }
       float x_scene = x_canvas/mZoom - mOffset.x;
       float y_scene = y_canvas/mZoom - mOffset.y;
       // Log.v("DistoX", "touch scene " + x_scene + " " + y_scene );
@@ -1558,6 +1554,16 @@ public class DrawingActivity extends ItemDrawer
       // ---------------------------------------- DOWN
 
       } else if (action == MotionEvent.ACTION_DOWN) {
+        if ( y_canvas > mApp.mDisplayHeight*7/8 ) {
+          if ( mZoomBtnsCtrlOn && (x_canvas > mApp.mDisplayWidth / 4) && (x_canvas < mApp.mDisplayWidth*3/4) ) {
+            mZoomBtnsCtrl.setVisible( true );
+            // mZoomCtrl.show( );
+          } else {
+            mTouchMode = MODE_ZOOM;
+          }
+        } else if ( x_canvas > mApp.mDisplayWidth*7/8 || x_canvas < mApp.mDisplayWidth/8 ) {
+          mTouchMode = MODE_ZOOM;
+        }
 
         if ( mMode == MODE_DRAW ) {
           // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
