@@ -433,7 +433,8 @@ public class GMActivity extends Activity
       // String name = st[1];
       mSaveData = st[2];
       if ( mSaveCBlock.mStatus == 0 ) {
-        startGMDialog( mCIDid, st[1] );
+        // startGMDialog( mCIDid, st[1] );
+        (new CalibGMDialog( this, this, mSaveCBlock )).show();
       } else { // FIXME TODO ask whether to undelete
         new TopoDroidAlertDialog( this, getResources(),
                           getResources().getString( R.string.calib_gm_undelete ),
@@ -451,13 +452,6 @@ public class GMActivity extends Activity
     }
   }
  
-  private void startGMDialog( long gmid, String name  )
-  {
-     int end = name.length() - 1;
-     name = name.substring(1,end);
-     (new CalibGMDialog( this, this, gmid, name, mSaveData )).show();
-  }
-
   // ---------------------------------------------------------------
 
   private Button[] mButton1;

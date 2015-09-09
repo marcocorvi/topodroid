@@ -44,7 +44,7 @@ import android.util.Log;
 
 
 public class ShotDialog extends Dialog
-                              implements View.OnClickListener
+                        implements View.OnClickListener
 {
   private Context mContext;
   private ShotActivity mParent;

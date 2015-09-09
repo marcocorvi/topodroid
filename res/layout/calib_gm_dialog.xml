@@ -1,20 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    android:padding="0dp"
+    >
 
-    <TextView android:id="@+id/gm_text"
-        android:layout_marginTop="2dp"
+  <LinearLayout 
+      android:id="@+id/layout1"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="30dp"
+      android:orientation="horizontal"
+      >
+    <EditText android:id="@+id/gm_bearing"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+        android:textSize="18sp"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        />
+    <EditText android:id="@+id/gm_clino"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+        android:textSize="18sp"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        />
+    <EditText android:id="@+id/gm_roll"
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+        android:textSize="18sp"
+        android:singleLine="true"
+        />
+  </LinearLayout>
+
+  <TextView android:id="@+id/gm_error"
+        android:layout_below="@id/layout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:text=""
+        android:textSize="18sp"
         />
    					  
-    <EditText android:id="@+id/gm_name" 
+  <EditText android:id="@+id/gm_name" 
+        android:layout_below="@id/gm_error"
         android:maxLines="1" 
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
@@ -22,7 +54,8 @@
         android:inputType="number"
         />
    		
-    <LinearLayout 
+  <LinearLayout android:id="@+id/layout2"
+      android:layout_below="@id/gm_name"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
@@ -32,8 +65,6 @@
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
           android:text="@string/button_regroup"
-          android:background="@drawable/button"
-          style="@style/button_default"
           />
       <LinearLayout 
         android:layout_width="fill_parent"
@@ -57,6 +88,18 @@
           style="@style/button_default"
           />
       </LinearLayout>
-    </LinearLayout>
+  </LinearLayout>
    		
-</LinearLayout>
+  <android.inputmethodservice.KeyboardView
+    android:id="@+id/keyboardview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="bottom"
+    android:visibility="gone"
+  />
+
+</RelativeLayout>
