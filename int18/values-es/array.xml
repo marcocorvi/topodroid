@@ -4,8 +4,8 @@
 
   <!-- TODO 
   <string-array name="stationNames">
-     <item name="alpha">Alphanumeric</item>
-     <item name="number">Numeric</item>
+     <item name="alpha">Alfanum√©ricas</item>
+     <item name="number">Num√©ricas</item>
   </string-array>
   <string-array name="stationNamesValue">
      <item name="alpha">alpha</item>
@@ -40,7 +40,7 @@
 
   <string-array name="altitudeType">
     <item name="wgs84">WGS84</item>
-    <item name="asl">elÌpticas</item>
+    <item name="asl">el√≠pticas</item>
   </string-array>
   <string-array name="altitudeTypeValue">
     <item name="wgs84">0</item>
@@ -135,7 +135,7 @@
   <string-array name="groupBy">
      <item name="distance">Distancia</item>
      <item name="four">De cuatro en cuatro</item>
-     <item name="only16">SÛlo 16 primeros</item>
+     <item name="only16">S√≥lo 16 primeros</item>
   </string-array>
   <string-array name="groupByValue">
      <item name="distance">0</item>
@@ -145,7 +145,7 @@
 
   <string-array name="unitLength">
      <item name="meters">Metros</item>
-     <item name="feet">PiÈs</item>
+     <item name="feet">Pi√©s</item>
   </string-array>
   <string-array name="unitLengthValue">
      <item name="meters">meters</item>
@@ -153,8 +153,8 @@
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">Grados sexagesimal 360∫</item>
-     <item name="grads">Grados centesimal 400∫</item>
+     <item name="degrees">Grados sexagesimal 360≈ü</item>
+     <item name="grads">Grados centesimal 400≈ü</item>
   </string-array>
   <string-array name="unitAngleValue">
      <item name="degrees">degrees</item>
