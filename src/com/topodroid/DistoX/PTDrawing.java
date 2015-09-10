@@ -70,7 +70,7 @@ class PTDrawing
         if ( el != null ) el.read( fs );
         _elements.add( el );
       }
-      // Log.v("PTDistoX", "drawing read " + _elements.size() + " elements " );
+      Log.v("PTDistoX", "drawing read " + _elements.size() + " elements " );
     }
 
     void write( FileOutputStream fs )

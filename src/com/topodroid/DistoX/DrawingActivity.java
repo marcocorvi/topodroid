@@ -292,6 +292,12 @@ public class DrawingActivity extends ItemDrawer
     boolean isSketch2D() { return mType == PlotInfo.PLOT_PLAN || mType == PlotInfo.PLOT_EXTENDED; }
     boolean isSketch3D() { return mType == PlotInfo.PLOT_SKETCH_3D; }
 
+    private float mBorderRight      = 4096;
+    private float mBorderLeft       = 0;
+    private float mBorderInnerRight = 4096;
+    private float mBorderInnerLeft  = 0;
+    private float mBorderBottom     = 4096;
+
     @Override
     public void onVisibilityChanged(boolean visible)
     {
@@ -793,6 +799,11 @@ public class DrawingActivity extends ItemDrawer
       mApp = (TopoDroidApp)getApplication();
       mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
       mZoom = mApp.mScaleFactor;    // canvas zoom
+      mBorderRight  = mApp.mDisplayWidth * 11 / 12;
+      mBorderLeft   = mApp.mDisplayWidth / 12;
+      mBorderInnerRight  = mApp.mDisplayWidth * 3 / 4;
+      mBorderInnerLeft   = mApp.mDisplayWidth / 4;
+      mBorderBottom = mApp.mDisplayHeight * 11 / 12;
 
       mDisplayCenter = new PointF(mApp.mDisplayWidth  / 2, mApp.mDisplayHeight / 2);
 
@@ -1554,14 +1565,14 @@ public class DrawingActivity extends ItemDrawer
       // ---------------------------------------- DOWN
 
       } else if (action == MotionEvent.ACTION_DOWN) {
-        if ( y_canvas > mApp.mDisplayHeight*7/8 ) {
-          if ( mZoomBtnsCtrlOn && (x_canvas > mApp.mDisplayWidth / 4) && (x_canvas < mApp.mDisplayWidth*3/4) ) {
+        if ( y_canvas > mBorderBottom ) {
+          if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
             mZoomBtnsCtrl.setVisible( true );
             // mZoomCtrl.show( );
           } else {
             mTouchMode = MODE_ZOOM;
           }
-        } else if ( x_canvas > mApp.mDisplayWidth*7/8 || x_canvas < mApp.mDisplayWidth/8 ) {
+        } else if ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) {
           mTouchMode = MODE_ZOOM;
         }
 

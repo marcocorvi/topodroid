@@ -246,6 +246,8 @@ public class PocketTopoParser extends ImportParser
         }
       }
       pw.format("endscrap\n");
+      fw.flush();
+      fw.close();
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, mName + " scraps IO error " + e );
     }

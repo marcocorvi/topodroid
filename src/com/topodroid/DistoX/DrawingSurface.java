@@ -593,10 +593,10 @@ public class DrawingSurface extends SurfaceView
               x = dx + Float.parseFloat( vals[1] ) / TopoDroidConst.TO_THERION;
               y = dy - Float.parseFloat( vals[2] ) / TopoDroidConst.TO_THERION;
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Point X-Y error " + vals[1] + " " + vals[2] );
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Point X-Y error (7) <" + line + ">" );
               continue;
             } catch ( ArrayIndexOutOfBoundsException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + line );
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (8) " + line );
               continue;
             }
             String type = vals[3];
@@ -619,7 +619,7 @@ public class DrawingSurface extends SurfaceView
                   has_orientation = true;
                   // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "point orientation " + orientation );
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Point orientation error : " + vals[k+1] );
+                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Point orientation error : " + line );
                 }
                 k += 2;
               } else if ( vals[k].equals( "-scale" ) ) {
@@ -723,7 +723,7 @@ public class DrawingSurface extends SurfaceView
                   x = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
                   y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt[0] + " " + pt[1] );
+                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (9) <" + line + ">" );
                   continue;
                 }
                 path.addStartPoint( x, y );
@@ -760,10 +760,10 @@ public class DrawingSurface extends SurfaceView
                       path.addPoint( x, y );
                       // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x + " " + y);
                     } catch ( NumberFormatException e ) {
-                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt2[0] + " " + pt2[1] );
+                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (10) <" + line + ">" );
                       continue;
                     } catch ( ArrayIndexOutOfBoundsException e ) {
-                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + line );
+                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (11) " + line );
                       continue;
                     }
                   } else if ( pt2.length == 6 ) {
@@ -777,10 +777,10 @@ public class DrawingSurface extends SurfaceView
                       path.addPoint3( x1, y1, x2, y2, x, y );
                       // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
                     } catch ( NumberFormatException e ) {
-                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt2[0] + " " + pt2[1] + " ... " );
+                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (12) <" + line + ">" );
                       continue;
                     } catch ( ArrayIndexOutOfBoundsException e ) {
-                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + line );
+                      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (13) " + line );
                       continue;
                     }
                   }
@@ -845,17 +845,17 @@ public class DrawingSurface extends SurfaceView
                   if ( outline != DrawingLinePath.OUTLINE_UNDEF ) path.mOutline = outline;
                   if ( options != null ) path.setOptions( options );
 
-                  // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line start point: >>" + line + "<<");
+                  // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line start point: <" + line + ">");
                   String[] pt0 = line.split( "\\s+" );
                   try {
                     x = dx + Float.parseFloat( pt0[0] ) / TopoDroidConst.TO_THERION;
                     y = dy - Float.parseFloat( pt0[1] ) / TopoDroidConst.TO_THERION;
                     path.addStartPoint( x, y );
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt0[0] + " " + pt0[1] );
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (1) <" + line + ">" );
                     continue;
                   } catch ( ArrayIndexOutOfBoundsException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + line );
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (2) " + line );
                     continue;
                   }
                   // Log.v( "DistoX", "  line start point: <" + line + "> " + x + " " + y );
@@ -882,10 +882,10 @@ public class DrawingSurface extends SurfaceView
                         y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
                         path.addPoint( x, y );
                       } catch ( NumberFormatException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt[0] + " " + pt[1] );
+                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (3) <" + line + ">" );
                         continue;
                       } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + line );
+                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (4) " + line );
                         continue;
                       }
                     } else if ( pt.length == 6 ) {
@@ -898,10 +898,10 @@ public class DrawingSurface extends SurfaceView
                         y  = dy - Float.parseFloat( pt[5] ) / TopoDroidConst.TO_THERION;
                         path.addPoint3( x1, y1, x2, y2, x, y );
                       } catch ( NumberFormatException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + pt[0] + " " + pt[1] + " ..." );
+                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (5) <" + line + ">" );
                         continue;
                       } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error " + line );
+                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (6) " + line );
                         continue;
                       }
                     }
