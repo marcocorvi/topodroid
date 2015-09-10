@@ -288,7 +288,8 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     } else if ( keyCode == 256 ) {
       hide();
       if ( mEdit != null ) {
-        View next = mEdit.focusSearch( View.FOCUS_FORWARD );
+        // cannot use FOCUS_FORWARD
+        View next = mEdit.focusSearch( View.FOCUS_RIGHT );
         if ( next != null ) next.requestFocus();
       }
     } else if ( mEdit != null ) {

@@ -8,11 +8,16 @@
     android:paddingBottom="3dp">
 
    					  
-  <!-- ScrollView
+  <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    -->
+    >
+    <LinearLayout
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
 
     <!-- TextView android:id="@+id/text_survey"
         android:layout_marginTop="2dp"
@@ -77,6 +82,10 @@
         android:hint="@string/description"
         android:scrollHorizontally="true" />
 
+
+  </LinearLayout>
+  </ScrollView>
+
   <LinearLayout 
       android:orientation="horizontal"
       android:layout_width="fill_parent"
@@ -119,7 +128,6 @@
       </LinearLayout>
   </LinearLayout>
 
-  <!-- /ScrollView -->
    		
 </LinearLayout>
 
