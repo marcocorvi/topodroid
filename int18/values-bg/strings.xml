@@ -259,6 +259,7 @@
     <string name="photo_survey">Разделяне на картировка</string>
     <string name="picture_no_station">Необходимо е име на репер</string>
     <string name="plot_delete">Изтриване на скица?</string>
+    <!-- TODO string name="item_delete">Delete item %1$s ?</string -->
     <string name="plot_duplicate_name">Дублирано име на скица</string>
     <string name="plot_name">Име на скица</string>
     <string name="plot_new">Нова скица</string>
@@ -298,6 +299,7 @@
 
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
+    <!-- TODO string name="shot_delete">Delete shot ?</string -->
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
     <string name="shot_leg">Повтаряща се отсечка</string>
@@ -563,6 +565,7 @@
     <string name="help_undo">Изтриване на действие от скицата</string>
     <string name="help_redo">Възстановяване на действие от скицата</string>
     <string name="help_symbol_plot">Избор на елемент за рисуване</string>
+    <!-- TODO string name="help_delete_item">Delete sketch item</string -->
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Изтриване на елемент</string>
     <string name="help_previous">Предишен избран елемент</string>
@@ -649,6 +652,7 @@
 
   <string name="pref_cat_survey">Настройки Картировка</string>
   <string name="pref_cat_drawing">Настройки Скици</string>
+  <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
   <string name="pref_cat_sketch">Настройки 3D модел</string>
@@ -705,8 +709,9 @@
   <string name="pref_shot_data_title">Данни за отсечка</string>
   <string name="pref_shot_units_title">Мерни единици</string>
   <string name="pref_cwd_title">Работна директория</string>
-  <string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string>
-  <string name="pref_cwd_message">Въведете директория на TopoDroid</string>
+  <!-- unused string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string -->
+  <!-- unused string name="pref_cwd_message">Въведете директория на TopoDroid</string -->
+  <!-- TODO string name="pref_pt_color_map_title">PocketTopo color map</string -->
   <string name="pref_text_size_title">Размер на текста</string>
   <string name="pref_text_size_summary">Размер на шрифта в текстове</string>
   <string name="pref_text_size_message">Размер на шрифта в текстове</string>
@@ -767,6 +772,9 @@
   <string name="pref_bitmap_scale_title">PNG резолюция</string>
   <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
   <string name="pref_bitmap_scale_message">Резолюция на експортирани скици в PNG формат</string>
+  <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
+  <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
+  <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
   <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_summary">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_message">Резолюция на мини-картинки</string>

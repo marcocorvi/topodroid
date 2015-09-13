@@ -45,7 +45,7 @@ class PTPolygonElement extends PTElement
 
     PTPoint point( int k ) { return _points.get(k); }
 
-    byte color() { return _color; }
+    byte getColor() { return _color; }
     void setColor( byte c ) { _color = c; }
 
     /** insert a new point at the end
@@ -98,41 +98,39 @@ class PTPolygonElement extends PTElement
     // }
 
 /*
-void 
-PTpolygon_element::printTherion( FileOutputStream fp, int x0, int y0, // int  scale , 
-                       const char ** points,
-                       const char ** lines )
-{
-  if ( _point_count > 1 ) {
-    fprintf(fp, "    line %s\n", lines[_color] );
-    for (int k=0; k<_point_count; ++k ) {
-      double x =   XTHERION_FACTOR * (double)(_points[k].x() - x0)/1000.0;
-      double y = - XTHERION_FACTOR * (double)(_points[k].y() - y0)/1000.0;
-      fprintf(fp, "      %8.2f %8.2f \n", x, y );
-    }
-    fprintf(fp, "    endline\n\n");
-  } else if ( _point_count == 1 ) {
-    int k = 0;
-    double x =   XTHERION_FACTOR * (double)(_points[k].x() - x0)/1000.0;
-    double y = - XTHERION_FACTOR * (double)(_points[k].y() - y0)/1000.0;
-    fprintf(fp, "    point %.3f %.3f %s\n", x, y, points[_color] );       // Locale ENGLISH
-  }
-}
-
-void 
-PTpolygon_element::xtherionBounds( int x0, int y0, // int scale,
-                     double & xmin, double & ymin,
-                     double & xmax, double & ymax )
-{
-  for ( int k=0; k<_point_count; ++k) {
-    double x =   XTHERION_FACTOR * (double)(_points[k].x() - x0)/1000.0;
-    double y = - XTHERION_FACTOR * (double)(_points[k].y() - y0)/1000.0;
-    if ( x < xmin ) xmin = x;
-    if ( y < ymin ) ymin = y;
-    if ( x > xmax ) xmax = x;
-    if ( y > ymax ) ymax = y;
-  }
-}
+// void 
+// PTpolygon_element::printTherion( FileOutputStream fp, int x0, int y0, // int  scale )
+// {
+//   if ( _point_count > 1 ) {
+//     fprintf(fp, "    line %s\n", PtCmapActivity.getLineThName(_color) );
+//     for (int k=0; k<_point_count; ++k ) {
+//       double x =   XTHERION_FACTOR * (double)(_points[k].x() - x0)/1000.0;
+//       double y = - XTHERION_FACTOR * (double)(_points[k].y() - y0)/1000.0;
+//       fprintf(fp, "      %8.2f %8.2f \n", x, y );
+//     }
+//     fprintf(fp, "    endline\n\n");
+//   } else if ( _point_count == 1 ) {
+//     int k = 0;
+//     double x =   XTHERION_FACTOR * (double)(_points[k].x() - x0)/1000.0;
+//     double y = - XTHERION_FACTOR * (double)(_points[k].y() - y0)/1000.0;
+//     fprintf(fp, "    point %.3f %.3f %s\n", x, y, PtCmapActivity.getPointThName(_color) );       // Locale ENGLISH
+//   }
+// }
+// 
+// void 
+// PTpolygon_element::xtherionBounds( int x0, int y0, // int scale,
+//                      double & xmin, double & ymin,
+//                      double & xmax, double & ymax )
+// {
+//   for ( int k=0; k<_point_count; ++k) {
+//     double x =   XTHERION_FACTOR * (double)(_points[k].x() - x0)/1000.0;
+//     double y = - XTHERION_FACTOR * (double)(_points[k].y() - y0)/1000.0;
+//     if ( x < xmin ) xmin = x;
+//     if ( y < ymin ) ymin = y;
+//     if ( x > xmax ) xmax = x;
+//     if ( y > ymax ) ymax = y;
+//   }
+// }
 */
 
 }

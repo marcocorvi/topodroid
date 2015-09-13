@@ -258,6 +258,7 @@
     <string name="photo_survey">split survey</string>
     <string name="picture_no_station">Station name required</string>
     <string name="plot_delete">Delete sketch ?</string>
+    <string name="item_delete">Delete item %1$s ?</string>
     <string name="plot_duplicate_name">Duplicate sketch name</string>
     <string name="plot_name">Sketch name</string>
     <string name="plot_new">New sketch</string>
@@ -297,6 +298,7 @@
 
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
+    <string name="shot_delete">Delete shot ?</string>
     <string name="shot_from">from</string>
     <string name="shot_info">Enter shot data</string>
     <string name="shot_leg">repeated leg</string>
@@ -560,6 +562,7 @@
     <string name="help_undo">Undo last drawing action</string>
     <string name="help_redo">Redo last drawing action</string>
     <string name="help_symbol_plot">Select the current drawing tool</string>
+    <string name="help_delete_item">Delete sketch item</string>
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erasing mode</string>
     <string name="help_previous">Previous item in the selection</string>
@@ -646,6 +649,7 @@
 
   <string name="pref_cat_survey">SURVEY SETTINGS</string>
   <string name="pref_cat_drawing">SKETCH SETTINGS</string>
+  <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_calib">CALIBRATION SETTINGS</string>
   <string name="pref_cat_device">DEVICE SETTINGS</string>
   <string name="pref_cat_sketch">3D MODEL SETTINGS</string>
@@ -702,8 +706,9 @@
   <string name="pref_shot_data_title">SHOT DATA</string>
   <string name="pref_shot_units_title">DATA UNITS</string>
   <string name="pref_cwd_title">WORK DIRECTORY</string>
-  <string name="pref_cwd_summary">TopoDroid work directory</string>
-  <string name="pref_cwd_message">Enter TopoDroid work directory</string>
+  <!-- NOT USED string name="pref_cwd_summary">TopoDroid work directory</string -->
+  <!-- NOT USED string name="pref_cwd_message">Enter TopoDroid work directory</string -->
+  <string name="pref_pt_color_map_title">PocketTopo color map</string>
   <string name="pref_text_size_title">Text size</string>
   <string name="pref_text_size_summary">List items text size</string>
   <string name="pref_text_size_message">Size of text in lists</string>
@@ -764,6 +769,9 @@
   <string name="pref_bitmap_scale_title">PNG resolution</string>
   <string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string>
   <string name="pref_bitmap_scale_message">Image resolution of sketch PNG export</string>
+  <string name="pref_dxf_scale_title">DXF sketch scale</string>
+  <string name="pref_dxf_scale_summary">DXF sketch scale factor</string>
+  <string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string>
   <string name="pref_thumbnail_title">Thumbnails size</string>
   <string name="pref_thumbnail_summary">Size of thumbnail images</string>
   <string name="pref_thumbnail_message">Size of thumbnail images</string>

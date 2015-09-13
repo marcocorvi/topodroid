@@ -101,7 +101,8 @@ class TopoDroidSetting
     "DISTOX_STATION_NAMES",
     "DISTOX_ZOOM_CONTROLS",
     "DISTOX_MKEYBOARD",
-    "DISTOX_LOCALE",                 // 65
+    "DISTOX_DXF_SCALE", 
+    "DISTOX_LOCALE",                 // 66
     "DISTOX_CWD",                    // must be last 
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
@@ -301,6 +302,7 @@ class TopoDroidSetting
   static boolean mAutoStations = true; // whether to add stations automatically to scrap therion files
 
   static float mBitmapScale = 1.5f;
+  static float mDxfScale = 1.0f;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // 3D
@@ -613,6 +615,10 @@ class TopoDroidSetting
 
     mKeyboard = prefs.getBoolean( key[k++], true ); // DISTOX_MKEYBOARD
 
+    try {
+      f = Float.parseFloat( prefs.getString( key[k++], "1.0") ); // DISTOX_DXF_SCALE
+      if ( f > 0.1f && f < 10.0f ) mDxfScale = f;
+    } catch ( NumberFormatException e) { }
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -936,6 +942,11 @@ class TopoDroidSetting
       setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
     } else if ( k.equals( key[ nk++ ] ) ) {
       mKeyboard = prefs.getBoolean( k, true ); // DISTOX_MKEYBOARD
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      try {
+        f = Float.parseFloat( prefs.getString( k, "1.0") ); // DISTOX_DXF_SCALE
+        if ( f > 0.1f && f < 10.0f ) mDxfScale = f;
+      } catch ( NumberFormatException e) { }
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

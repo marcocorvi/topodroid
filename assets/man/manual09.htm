@@ -38,13 +38,16 @@ Sequence a-b-c-d for the first (forsight) and the third (backsight) policies.<br
 <img src="survey_policy.png">
 <br>
 
+<h4>Shot edit dialog</h4>
 If you choose not to have the station assigned automatically, you must set them manually. Tapping on a shot data brings up the shot edit dialog. With it you can set the station(s) (if the shot is blank TopoDroid suggest them for you incrementing those of the previous leg), the direction of extend for the extended section (either left, right, vertical; if none is checked the shot is ignored in the extended profile), and the shot flag (whether it is a regular shot, or duplicate or surface: if no flag is set the shot is "regular").  Finally you can add a brief comment to the shot.  The values of length, azimuth and inclination of shots downloaded from the DistoX or of an imported survey cannot be modified.  For manually entered shots they are editable.  The <u>Reverse</u> button swaps the stations.  The arrow buttons let you move forward and backward over the leg shots.  The <u>OK</u> button save the changes and closes the dialog.  The <u>Save</u> button saves the changes but does not closes the dialog.<br><p>
 
-This dialog has also three checkboxes.
+The shot flags, duplicate and surface, are selected by checking the first and the second button, respectively.<br><p>
+
+This dialog has also other three checkboxes.
 <olist>
-<li><i>renumber</i> is used to rename subsequant shots; if the editing shot is a leg (ie, the From and To stations are specified) and the box is checked, all subsequent shots are renamed according to the current station assignment policy, their type not being changed (ie, splays remain spolay, legs remain leg, and blank shots remain blank).</li>
 <li><i>repeated leg</i> tells TopoDroid that the shot is a "repeated leg"; the shot stations are blanked out and it is marked as "repeated leg".</li>
 <li><i>splay group</i> is used if only the From station has been entered (and the To station is empty): it changes the From station of all the splay shots of the group. Effectively this assigns the group of splays from one station to another.</li>
+<li><i>renumber</i> is used to rename subsequant shots; if the editing shot is a leg (ie, the From and To stations are specified) and the box is checked, all subsequent shots are renamed according to the current station assignment policy, their type not being changed (ie, splays remain spolay, legs remain leg, and blank shots remain blank).</li>
 </olist>
 <br><p>
 
@@ -52,6 +55,7 @@ If you have set the "current station", TopoDroid will continue numbering station
 
 If you use TopoDroid automatic station assignment, you are likely to need the shot dialog only to enter the comment, and to change the "extend" direction. These two actions can be done also from the drawing window, by selecting the shot in "edit" mode and picking the <u>note</u> button: this is described in the section on the Sketch Activity).<br><p>
 
+<h4>Other shot actions</h4>
 A long tap on a shot line opens another dialog with the following action(s):
 <ulist>
 <li><u>add</u> [A] a shot before it</li>

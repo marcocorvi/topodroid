@@ -141,11 +141,11 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_redo,
                         R.drawable.iz_tools,         // 11
                         R.drawable.iz_continue_no,
-                        R.drawable.iz_back,          // 13 EDIT Nr 7
+                        R.drawable.iz_back,          // 13 EDIT Nr 8
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
-                        R.drawable.iz_note,          // 16
-                        0,
+                        R.drawable.iz_note,          
+                        R.drawable.iz_delete,        // 17
                         R.drawable.iz_menu,          // 18
                         R.drawable.iz_extended,
                         R.drawable.iz_join_no,
@@ -180,7 +180,8 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_previous,
                         R.string.help_next,
                         R.string.help_line_point, // R.string.help_to_point,
-                        R.string.help_note_plot
+                        R.string.help_note_plot,
+                        R.string.help_delete_item
                       };
   private static int help_menus[] = {
                         R.string.help_save_plot,
@@ -525,7 +526,6 @@ public class DrawingActivity extends ItemDrawer
     private void doSaveTh2( ) 
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
-      Log.v( "DistoX ", "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         // if ( not_all_symbols ) AlertMissingSymbols();
@@ -671,7 +671,7 @@ public class DrawingActivity extends ItemDrawer
   private Button[] mButton5; // eraser
   private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
-  private int mNrButton3 = 7;          // edit
+  private int mNrButton3 = 8;          // edit
   private int mNrButton5 = 3;          // erase
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
@@ -803,7 +803,7 @@ public class DrawingActivity extends ItemDrawer
       mBorderLeft   = mApp.mDisplayWidth / 12;
       mBorderInnerRight  = mApp.mDisplayWidth * 3 / 4;
       mBorderInnerLeft   = mApp.mDisplayWidth / 4;
-      mBorderBottom = mApp.mDisplayHeight * 11 / 12;
+      mBorderBottom = mApp.mDisplayHeight * 7 / 8;
 
       mDisplayCenter = new PointF(mApp.mDisplayWidth  / 2, mApp.mDisplayHeight / 2);
 
@@ -1065,7 +1065,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void doStart()
     {
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
       resetCurrentIndices();
 
       if ( isSection() ) {
@@ -1215,7 +1215,7 @@ public class DrawingActivity extends ItemDrawer
       }
 
       // now try to load drawings from therion file
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + mFullName1 + " " + mFullName2 );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + mFullName1 + " " + mFullName2 );
 
       String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
       String filename2 = null;
@@ -1565,6 +1565,8 @@ public class DrawingActivity extends ItemDrawer
       // ---------------------------------------- DOWN
 
       } else if (action == MotionEvent.ACTION_DOWN) {
+        TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DOWN at X " + x_canvas + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
+                                                 + y_canvas + " / " + mBorderBottom );
         if ( y_canvas > mBorderBottom ) {
           if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
             mZoomBtnsCtrl.setVisible( true );
@@ -2694,9 +2696,55 @@ public class DrawingActivity extends ItemDrawer
         }
         mDrawingSurface.clearSelected();
         mMode = MODE_EDIT;
-
+      } else if ( b == mButton3[k3++] ) { // edit item delete
+        SelectionPoint sp = mDrawingSurface.hotItem();
+        if ( sp != null ) {
+          int t = sp.type();
+          if ( t == DrawingPath.DRAWING_PATH_POINT ||
+               t == DrawingPath.DRAWING_PATH_LINE  ||
+               t == DrawingPath.DRAWING_PATH_AREA ) {
+            String name = "";
+            DrawingPath p = sp.mItem;
+            switch ( t ) {
+              case DrawingPath.DRAWING_PATH_POINT:
+                name = DrawingBrushPaths.getPointName( ((DrawingPointPath)p).mPointType );
+                break;
+              case DrawingPath.DRAWING_PATH_LINE:
+                name = DrawingBrushPaths.getLineName( ((DrawingLinePath)p).mLineType );
+                break;
+              case DrawingPath.DRAWING_PATH_AREA:
+                name = DrawingBrushPaths.getAreaName( ((DrawingAreaPath)p).mAreaType );
+                break;
+            }
+            askDeleteItem( p, t, name );
+          }
+        }
       }
+    }
 
+    private void askDeleteItem( final DrawingPath p, final int t, String name )
+    {
+      new TopoDroidAlertDialog( this, getResources(), 
+                                String.format( getResources().getString( R.string.item_delete ), name ), 
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            switch( t ) {
+              case DrawingPath.DRAWING_PATH_POINT:
+                deletePoint( (DrawingPointPath)p );
+                break;
+              case DrawingPath.DRAWING_PATH_LINE:
+                deleteLine( (DrawingLinePath)p, null );
+                break;
+              case DrawingPath.DRAWING_PATH_AREA:
+                deleteArea( (DrawingAreaPath)p );
+                break;
+              default:
+                break;
+            }
+          }
+        }
+      );
     }
 
 

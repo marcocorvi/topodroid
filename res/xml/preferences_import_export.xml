@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <Preference
+       android:key="DISTOX_PT_CMAP"
+       android:title="@string/pref_pt_color_map_title"
+       />
+
+  <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_EXPORT_SHOTS"
+       android:title="@string/pref_export_shots_title"
+       android:summary="@string/pref_export_shots_summary"
+       android:defaultValue="0"
+       android:entries="@array/exportShots"
+       android:entryValues="@array/exportShotsValue"
+       />
+
+   <CheckBoxPreference
+       android:key="DISTOX_STATION_PREFIX"
+       android:summary="@string/pref_station_prefix_summary"
+       android:title="@string/pref_station_prefix_title"
+       android:defaultValue="false"
+     />
+
+
+  <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_BITMAP_SCALE"
+       android:title="@string/pref_bitmap_scale_title"
+       android:summary="@string/pref_bitmap_scale_summary"
+       android:dialogTitle="@string/pref_bitmap_scale_title"
+       android:dialogMessage="@string/pref_bitmap_scale_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1.5" />
+
+  <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_DXF_SCALE"
+       android:title="@string/pref_dxf_scale_title"
+       android:summary="@string/pref_dxf_scale_summary"
+       android:dialogTitle="@string/pref_dxf_scale_title"
+       android:dialogMessage="@string/pref_dxf_scale_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1.0" />
+
+
+</PreferenceScreen>

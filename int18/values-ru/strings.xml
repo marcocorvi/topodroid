@@ -259,6 +259,7 @@
     <string name="photo_survey">разорвать съёмку</string>
     <string name="picture_no_station">Требуется номер пикета</string>
     <string name="plot_delete">Удалить абрис ?</string>
+    <!-- TODO string name="item_delete">Delete item %1$s ?</string -->
     <string name="plot_duplicate_name">Дублировать название абриса</string>
     <string name="plot_name">Название абриса</string>
     <string name="plot_new">Новый абрис</string>
@@ -298,6 +299,7 @@
 
     <!-- OK string name="shot_clino">угол</string -->
     <!-- OK string name="shot_compass">азимут</string -->
+    <!-- TODO string name="shot_delete">Delete shot ?</string -->
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные пикета</string>
     <string name="shot_leg">повторный замер</string>
@@ -554,6 +556,7 @@
     <string name="help_undo">Отмена последнего действия</string>
     <string name="help_redo">Повтор последнего действия</string>
     <string name="help_symbol_plot">Выбрать инструмент рисования </string>
+    <!-- TODO string name="help_delete_item">Delete sketch item</string -->
     <!-- OK string name="help_clear">Очистить выбор</string -->
     <string name="help_eraser">Стереть рисунки</string>
     <string name="help_previous">Предыдущий выбранный элемент</string>
@@ -640,6 +643,7 @@
 
   <string name="pref_cat_survey">Настройки съёмки </string>
   <string name="pref_cat_drawing">Настройки Рисования </string>
+  <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
   <string name="pref_cat_calib">Настройки Калибровки</string>
   <string name="pref_cat_device">Настройки Устройства</string>
   <string name="pref_cat_sketch">Настройки Абриса</string>
@@ -694,8 +698,9 @@
   <string name="pref_location_title">Настройки местоположения</string>
   <string name="pref_shot_data_title">НАСТРОЙКА ДАННЫХ ПИКЕТОВ</string>
   <string name="pref_cwd_title">Корневой каталог</string>
-  <string name="pref_cwd_summary">TopoDroid корневой каталог</string>
-  <string name="pref_cwd_message">Введите корневой каталог TopoDroid</string>
+  <!-- UNUSED string name="pref_cwd_summary">TopoDroid корневой каталог</string -->
+  <!-- UNUSED string name="pref_cwd_message">Введите корневой каталог TopoDroid</string -->
+  <!-- TODO string name="pref_pt_color_map_title">PocketTopo color map</string -->
   <string name="pref_text_size_title">Размер текста</string>
   <string name="pref_text_size_summary">Размер текста в списках</string>
   <string name="pref_text_size_message">Размер текста в списках</string>
@@ -757,6 +762,9 @@
   <string name="pref_bitmap_scale_title">масштаб PNG</string>
   <string name="pref_bitmap_scale_summary">Масштабный коэфицент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_scale_message">Масштабный коэфицент абриса при экспорте в PNG</string>
+  <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
+  <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
+  <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
   <string name="pref_thumbnail_title">Размер миниатюры</string>
   <string name="pref_thumbnail_summary">Размер картинки миниатюры</string>
   <string name="pref_thumbnail_message">Размер картинки миниатюры</string>

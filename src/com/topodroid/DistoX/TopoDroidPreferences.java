@@ -38,6 +38,7 @@ public class TopoDroidPreferences extends PreferenceActivity
   static final int REQUEST_LOCATION    = 4;
   static final int REQUEST_ACCURACY    = 5;
   static final int REQUEST_SHOT_DATA   = 6;
+  static final int REQUEST_PT_CMAP     = 7;
 
   static final String PREF_CATEGORY = "PrefCategory";
   static final int PREF_CATEGORY_ALL    = 0;
@@ -46,6 +47,7 @@ public class TopoDroidPreferences extends PreferenceActivity
   static final int PREF_CATEGORY_CALIB  = 3;
   static final int PREF_CATEGORY_DEVICE = 4;
   static final int PREF_CATEGORY_SKETCH = 5;
+  static final int PREF_CATEGORY_IMPORT_EXPORT = 6;
 
   static final int PREF_SHOT_DATA       = 6; 
   static final int PREF_SHOT_UNITS      = 7; 
@@ -59,6 +61,7 @@ public class TopoDroidPreferences extends PreferenceActivity
   private int mPrefCategory = PREF_CATEGORY_ALL; // preference category
 
   Preference mCwdPreference;
+  Preference mPtCmapPreference;
 
   TopoDroidApp mApp;
 
@@ -90,6 +93,8 @@ public class TopoDroidPreferences extends PreferenceActivity
       addPreferencesFromResource(R.xml.preferences_device);
     } else if (mPrefCategory == PREF_CATEGORY_SKETCH ) {
       addPreferencesFromResource(R.xml.preferences_sketch);
+    } else if (mPrefCategory == PREF_CATEGORY_IMPORT_EXPORT ) {
+      addPreferencesFromResource(R.xml.preferences_import_export);
     } else if (mPrefCategory == PREF_SHOT_DATA ) {
       addPreferencesFromResource(R.xml.preferences_shot_data);
     } else if (mPrefCategory == PREF_SHOT_UNITS ) {
@@ -123,8 +128,24 @@ public class TopoDroidPreferences extends PreferenceActivity
 
       linkPreference( "DISTOX_SURVEY_PREF", PREF_CATEGORY_SURVEY );
       linkPreference( "DISTOX_PLOT_PREF", PREF_CATEGORY_PLOT );
+      linkPreference( "DISTOX_IMPORT_EXPORT_PREF", PREF_CATEGORY_IMPORT_EXPORT );
       linkPreference( "DISTOX_DEVICE_PREF", PREF_CATEGORY_DEVICE );
       linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
+    }
+
+    if (mPrefCategory == PREF_CATEGORY_IMPORT_EXPORT ) {
+      final Intent pt_intent = new Intent( this, PtCmapActivity.class );
+      mPtCmapPreference = (Preference) findPreference( "DISTOX_PT_CMAP" );
+      mPtCmapPreference.setOnPreferenceClickListener( 
+        new Preference.OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick( Preference pref ) 
+          {
+            startActivityForResult( pt_intent, REQUEST_PT_CMAP );
+            return true;
+          }
+        } );
+
     }
 
     if (mPrefCategory == PREF_CATEGORY_PLOT ) {
@@ -172,6 +193,12 @@ public class TopoDroidPreferences extends PreferenceActivity
       case REQUEST_LOCATION:
       case REQUEST_ACCURACY:
       case REQUEST_SHOT_DATA:
+        break;
+      case REQUEST_PT_CMAP:
+        if ( extras != null ) {
+          String cmap = extras.getString( TopoDroidTag.TOPODROID_CMAP );
+          // mPtCmapPreference.
+        }
         break;
     }
   }

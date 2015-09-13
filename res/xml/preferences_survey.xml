@@ -39,35 +39,6 @@
        android:defaultValue="0"
      />
 
-  <com.topodroid.DistoX.MyListPreference
-       android:key="DISTOX_EXPORT_SHOTS"
-       android:title="@string/pref_export_shots_title"
-       android:summary="@string/pref_export_shots_summary"
-       android:defaultValue="0"
-       android:entries="@array/exportShots"
-       android:entryValues="@array/exportShotsValue"
-       />
-
-<!--
-     <com.topodroid.DistoX.MyListPreference
-       android:key="DISTOX_UNIT_LENGTH"
-       android:summary="@string/pref_unit_length_summary"
-       android:title="@string/pref_unit_length_title"
-       android:defaultValue="meters"
-       android:entries="@array/unitLength"
-       android:entryValues="@array/unitLengthValue"
-     />
-
-     <com.topodroid.DistoX.MyListPreference
-       android:key="DISTOX_UNIT_ANGLE"
-       android:summary="@string/pref_unit_angle_summary"
-       android:title="@string/pref_unit_angle_title"
-       android:defaultValue="degrees"
-       android:entries="@array/unitAngle"
-       android:entryValues="@array/unitAngleValue"
-     />
--->
-
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_THUMBNAIL"
        android:title="@string/pref_thumbnail_title"
@@ -76,13 +47,6 @@
        android:dialogMessage="@string/pref_thumbnail_message"
        android:inputType="number"
        android:defaultValue="200" />
-
-     <CheckBoxPreference
-       android:key="DISTOX_STATION_PREFIX"
-       android:summary="@string/pref_station_prefix_summary"
-       android:title="@string/pref_station_prefix_title"
-       android:defaultValue="false"
-     />
 
     <Preference
        android:key="DISTOX_SHOT_UNITS_SCREEN"

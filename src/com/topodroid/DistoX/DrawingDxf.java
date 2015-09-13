@@ -160,9 +160,11 @@ class DrawingDxf
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
+    float scale = TopoDroidSetting.mDxfScale;
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
+    // compute BBox
     for ( DrawingPath p : plot.mCurrentStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
@@ -190,6 +192,10 @@ class DrawingDxf
         if ( st.mYpos > ymax ) ymax = st.mYpos;
       }
     }
+    xmin *= scale;
+    xmax *= scale;
+    ymin *= scale;
+    ymax *= scale;
 
     try {
       // header
@@ -209,7 +215,7 @@ class DrawingDxf
         printString( pw1, 9, "$EXTMIN" );
         printXYZ( pw1, xmin, -ymax, 0.0f );
         printString( pw1, 9, "$EXTMAX" );
-        printXYZ( pw1, xmax, -ymin, 0.0f );
+        printXYZ( pw1, xmax * scale, -ymin * scale, 0.0f );
         out.write( sw1.getBuffer().toString() );
       }
       writeEndSection( out );
@@ -333,8 +339,8 @@ class DrawingDxf
           printString( pw9, 0, "LINE" );
           printString( pw9, 8, "REF" );
           printAcDb( pw9, -1, "AcDbEntity", "AcDbLine" );
-          printXYZ( pw9, xmin, -ymax, 0.0f );
-          printXYZ1( pw9, xmin+10*SCALE_FIX, -ymax, 0.0f );
+          printXYZ(  pw9, xmin, -ymax, 0.0f );
+          printXYZ1( pw9, (xmin+10*SCALE_FIX), -ymax, 0.0f );
           out.write( sw9.getBuffer().toString() );
         }
         {
@@ -343,8 +349,8 @@ class DrawingDxf
           printString( pw8, 0, "LINE" );
           printString( pw8, 8, "REF" );
           printAcDb( pw8, -1, "AcDbEntity", "AcDbLine" );
-          printXYZ( pw8, xmin, -ymax, 0.0f );
-          printXYZ1( pw8,  xmin, -ymax+10*SCALE_FIX, 0.0f );
+          printXYZ(  pw8, xmin, -ymax, 0.0f );
+          printXYZ1( pw8,  xmin, -(ymax+10*SCALE_FIX), 0.0f );
           out.write( sw8.getBuffer().toString() );
         }
         {
@@ -354,7 +360,7 @@ class DrawingDxf
           printString( pw7, 8, "REF" );
           printAcDb( pw7, -1, "AcDbEntity", "AcDbText" );
           // pw7.printf("%s\n  0\n", "\"10\"" );
-          printXYZ( pw7, xmin+10*SCALE_FIX+1, -ymax, 0.0f );
+          printXYZ(   pw7, (xmin+10*SCALE_FIX+1), -ymax, 0.0f );
           printFloat( pw7, 40, 0.3f );
           printString( pw7, 1, "\"10\"" );
           out.write( sw7.getBuffer().toString() );
@@ -366,7 +372,7 @@ class DrawingDxf
           printString( pw6, 8, "REF" );
           printAcDb( pw6, -1, "AcDbEntity", "AcDbText" );
           // pw6.printf("%s\n  0\n", "\"10\"" );
-          printXYZ( pw6, xmin, -ymax+10*SCALE_FIX+1, 0.0f );
+          printXYZ(   pw6, xmin, -(ymax+10*SCALE_FIX+1), 0.0f );
           printFloat( pw6, 40, 0.3f );
           printString( pw6, 1, "\"10\"" );
           out.write( sw6.getBuffer().toString() );
@@ -389,17 +395,17 @@ class DrawingDxf
             printAcDb( pw4, -1, "AcDbEntity", "AcDbLine" );
 
             if ( type == PlotInfo.PLOT_PLAN ) {
-              float x =  DrawingActivity.toSceneX( f.e );
-              float y =  DrawingActivity.toSceneY( f.s );
-              float x1 = DrawingActivity.toSceneX( t.e );
-              float y1 = DrawingActivity.toSceneY( t.s );
+              float x =  scale * DrawingActivity.toSceneX( f.e );
+              float y =  scale * DrawingActivity.toSceneY( f.s );
+              float x1 = scale * DrawingActivity.toSceneX( t.e );
+              float y1 = scale * DrawingActivity.toSceneY( t.s );
               printXYZ( pw4, x, -y, 0.0f );
               printXYZ1( pw4, x1, -y1, 0.0f );
             } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-              float x =  DrawingActivity.toSceneX( f.h );
-              float y =  DrawingActivity.toSceneY( f.v );
-              float x1 = DrawingActivity.toSceneX( t.h );
-              float y1 = DrawingActivity.toSceneY( t.v );
+              float x =  scale * DrawingActivity.toSceneX( f.h );
+              float y =  scale * DrawingActivity.toSceneY( f.v );
+              float x1 = scale * DrawingActivity.toSceneX( t.h );
+              float y1 = scale * DrawingActivity.toSceneY( t.v );
               printXYZ( pw4, x, -y, 0.0f );
               printXYZ1( pw4, x1, -y1, 0.0f );
             } else if ( type == PlotInfo.PLOT_SECTION ) {
@@ -412,20 +418,20 @@ class DrawingDxf
             printString( pw4, 8, "SPLAY" );
             printAcDb( pw4, -1, "AcDbEntity", "AcDbLine" );
 
-            float dh = blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX;
+            float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
             if ( type == PlotInfo.PLOT_PLAN ) {
-              float x = DrawingActivity.toSceneX( f.e );
-              float y = DrawingActivity.toSceneY( f.s );
-              float de =   dh * FloatMath.sin( blk.mBearing * grad2rad);
-              float ds = - dh * FloatMath.cos( blk.mBearing * grad2rad);
+              float x = scale * DrawingActivity.toSceneX( f.e );
+              float y = scale * DrawingActivity.toSceneY( f.s );
+              float de =   dhs * FloatMath.sin( blk.mBearing * grad2rad);
+              float ds = - dhs * FloatMath.cos( blk.mBearing * grad2rad);
               printXYZ( pw4, x, -y, 0.0f );
               printXYZ1( pw4, x + de, -(y+ds), 0.0f );
             } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-              float x = DrawingActivity.toSceneX( f.h );
-              float y = DrawingActivity.toSceneY( f.v );
+              float x = scale * DrawingActivity.toSceneX( f.h );
+              float y = scale * DrawingActivity.toSceneY( f.v );
               float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
               printXYZ( pw4, x, -y, 0.0f );
-              printXYZ1( pw4, x+dh*blk.mExtend, -(y+dv), 0.0f );
+              printXYZ1( pw4, x+dhs*blk.mExtend, -(y+dv), 0.0f );
             } else if ( type == PlotInfo.PLOT_SECTION ) {
               // nothing
             }
@@ -448,7 +454,7 @@ class DrawingDxf
               printAcDb( pw5, -1, "AcDbEntity", "AcDbText" );
               pw5.printf("%s\n  0\n", st.mName );
             }
-            printXYZ( pw5, st.mXpos, -st.mYpos, 0.0f );
+            printXYZ( pw5, st.mXpos * scale, -st.mYpos * scale, 0.0f );
             printFloat( pw5, 40, POINT_SCALE );
             printString( pw5, 1, st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
@@ -466,7 +472,7 @@ class DrawingDxf
             for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
               printString( pw5, 0, "VERTEX" );
               printString( pw5, 8, layer );
-              printXYZ( pw5, p.mX, -p.mY, 0.0f );
+              printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
             }
             printString( pw5, 0, "SEQEND" );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -489,7 +495,7 @@ class DrawingDxf
             printInt( pw5, 72, 0 );            // edge type (0: default)
             printInt( pw5, 73, 1 );            // is-closed flag
             for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
-              printXY( pw5, p.mX, -p.mY );
+              printXY( pw5, p.mX * scale, -p.mY * scale );
             }
 
             // printInt( pw5, 97, 0 );            // nr. source boundary objects
@@ -531,7 +537,7 @@ class DrawingDxf
             printInt( pw5, 2, idx );
             printFloat( pw5, 41, POINT_SCALE );
             printFloat( pw5, 42, POINT_SCALE );
-            printXYZ( pw5, point.cx, -point.cy, 0.0f );
+            printXYZ( pw5, point.cx * scale, -point.cy * scale, 0.0f );
           }
           out.write( sw5.getBuffer().toString() );
           out.flush();

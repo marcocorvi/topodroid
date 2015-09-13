@@ -48,7 +48,7 @@ public class DrawingLineDialog extends Dialog
   private Button mBtnRock;
   // private Button   mBtnSplit;
   // private Button   mBtnCancel;
-  private Button   mBtnErase;
+  // private Button   mBtnErase;
 
   public DrawingLineDialog( DrawingActivity context, DrawingLinePath line, LinePoint lp )
   {
@@ -107,8 +107,8 @@ public class DrawingLineDialog extends Dialog
     // mBtnSplit = (Button) findViewById( R.id.button_split );
     // mBtnSplit.setOnClickListener( this );
 
-    mBtnErase = (Button) findViewById( R.id.button_erase );
-    mBtnErase.setOnClickListener( this );
+    // mBtnErase = (Button) findViewById( R.id.button_erase );
+    // mBtnErase.setOnClickListener( this );
   }
 
   public void onClick(View v) 
@@ -141,8 +141,8 @@ public class DrawingLineDialog extends Dialog
       mParent.sharpenLine( mLine, false );
     } else if ( b == mBtnRock ) {
       mParent.sharpenLine( mLine, true );
-    } else if ( b == mBtnErase ) {
-      mParent.deleteLine( mLine, null );
+    // } else if ( b == mBtnErase ) {
+    //   mParent.deleteLine( mLine, null );
     }
     dismiss();
   }

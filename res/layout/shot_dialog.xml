@@ -133,13 +133,15 @@
         android:hint="@string/shot_note"
         />
 
-    <LinearLayout 
+    <!-- LinearLayout 
       android:id="@+id/layout4"
       android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
+      android:layout_height="50dp"
       android:layout_below="@id/shot_comment"
+      android:paddingLeft="10dp"
+      android:paddingRight="10dp"
       android:orientation="horizontal" 
-      >
+      />
       <CheckBox
         android:id="@+id/shot_renumber"
         android:layout_width="wrap_content"
@@ -161,13 +163,13 @@
         android:text="@string/shot_all_splay"
         android:singleLine="true"
         />
-    </LinearLayout>
+    </LinearLayout -->
 
     <LinearLayout 
       android:id="@+id/layout5"
+      android:layout_below="@id/shot_comment"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout4"
       android:orientation="horizontal" 
       >
       <CheckBox 
@@ -192,20 +194,13 @@
         android:text="@string/extend_ignore" / -->
     </LinearLayout>
 
-    <LinearLayout 
+    <!-- LinearLayout 
       android:id="@+id/layout6"
+      android:layout_below="@id/layout5"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout5"
       android:orientation="horizontal" 
       >
-      <!-- RadioButton 
-        android:id="@+id/shot_reg"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:text="@string/regular"
-        / -->
-
       <CheckBox 
         android:id="@+id/shot_dup"
         android:layout_width="wrap_content" 
@@ -219,21 +214,23 @@
         android:layout_height="wrap_content"
         android:text="@string/surface"
         />
+    </LinearLayout -->
 
-      <!-- CheckBox 
-        android:id="@+id/shot_back"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:text="@string/backshot"
-        / -->
-
-    </LinearLayout>
+    <LinearLayout 
+      android:id="@+id/layout4"
+      android:layout_below="@id/layout5"
+      android:layout_width="fill_parent" 
+      android:layout_height="50dp"
+      android:paddingLeft="10dp"
+      android:paddingRight="10dp"
+      android:orientation="horizontal" 
+      />
 
     <LinearLayout 
       android:id="@+id/layout7"
+      android:layout_below="@id/layout4"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout6"
       android:orientation="horizontal" 
       >
       <!-- Button android:id="@+id/btn_back"

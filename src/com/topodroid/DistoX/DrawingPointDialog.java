@@ -62,7 +62,7 @@ public class DrawingPointDialog extends Dialog
  
   private Button   mBtnOk;
   // private Button   mBtnCancel;
-  private Button   mBtnErase;
+  // private Button   mBtnErase;
 
   public DrawingPointDialog( DrawingActivity context, DrawingPointPath point )
   {
@@ -158,8 +158,8 @@ public class DrawingPointDialog extends Dialog
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
 
-    mBtnErase = (Button) findViewById( R.id.button_erase );
-    mBtnErase.setOnClickListener( this );
+    // mBtnErase = (Button) findViewById( R.id.button_erase );
+    // mBtnErase.setOnClickListener( this );
   }
 
   public boolean onLongClick( View v ) 
@@ -202,9 +202,9 @@ public class DrawingPointDialog extends Dialog
         mPoint.setText( mETtext.getText().toString().trim() );
       }
       dismiss();
-    } else if ( b == mBtnErase ) {
-      mParent.deletePoint( mPoint );
-      dismiss();
+    // } else if ( b == mBtnErase ) {
+    //   mParent.deletePoint( mPoint );
+    //   dismiss();
     // } else if ( b == mBtnCancel ) {
     //   dismiss();
     } else if ( b == mBtnLeft ) {

@@ -201,26 +201,26 @@ class PTFile
     PTDrawing _outline;
     PTDrawing _sideview;
 
-    String[] _color_line; // color --> th_lines
-    String[] _color_point; // color --> th_lines
-    static String _color_default_line[] =
-      { "user", 
-        "wall",         // 1 black
-        "contour",      // 2 gray
-        "rock-border",  // 3 brown
-        "border",       // 4 blue
-        "pit",          // 5 red
-        "arrow"         // 6 green
-      };
-    static String _color_default_point[] =
-      { "clay", 
-        "station",     // 1 black
-        "block",       // 2 gray
-        "stalactite",  // 3 brown
-        "water-flow",  // 4 blue
-        "anchor",      // 5 red
-        "debris"       // 6 green
-      };
+    // String[] _color_line;  // color --> th_line
+    // String[] _color_point; // color --> th_point
+    // static String _color_default_line[] =
+    //   { "user", 
+    //     "wall",         // 1 black
+    //     "contour",      // 2 gray
+    //     "rock-border",  // 3 brown
+    //     "border",       // 4 blue
+    //     "pit",          // 5 red
+    //     "arrow"         // 6 green
+    //   };
+    // static String _color_default_point[] =
+    //   { "clay", 
+    //     "station",     // 1 black
+    //     "block",       // 2 gray
+    //     "stalactite",  // 3 brown
+    //     "water-flow",  // 4 blue
+    //     "anchor",      // 5 red
+    //     "debris"       // 6 green
+    //   };
 
     PTFile()
     {
@@ -230,8 +230,8 @@ class PTFile
       _overview = new PTMapping();
       _outline  = new PTDrawing();
       _sideview = new PTDrawing();
-      _color_line = _color_default_line;
-      _color_point = _color_default_point;
+      // _color_line = _color_default_line;
+      // _color_point = _color_default_point;
     }
 
     // -----------------------------------------------------
@@ -253,8 +253,8 @@ class PTFile
 
     // -----------------------------------------------------
 
-    void setColorLine( String[] line ) { _color_line = line; }
-    void setColorPoint( String[] point ) { _color_point = point; }
+    // void setColorLine( String[] line )   { _color_line = line; }
+    // void setColorPoint( String[] point ) { _color_point = point; }
 
 
     void clear()
@@ -351,76 +351,76 @@ class PTFile
     // }
 
 /*
-void 
-PTfile::printTherion( const char * prefix )
-{
-  if ( prefix == NULL || strlen(prefix) == 0 )
-    prefix = "cave";
-  std::ostringstream oss;
-  std::ostringstream oss_plan;
-  std::ostringstream oss_ext;
-  oss << prefix << ".th";
-  oss_plan << prefix << "-p.th2";
-  oss_ext  << prefix << "-s.th2";
-  const char * outlinefile  = oss_plan.str().c_str();
-  const char * sideviewfile = oss_ext.str().c_str();
-
-  TopoDroidApp.checkPath( oss.str().c_str() );
-  FileOutputStream fp = fopen( oss.str().c_str(), "w" );
-  if ( fp == NULL ) return; // FIXME
-  fprintf(fp, "encoding UTF-8\n");
-  fprintf(fp, "survey survey_name\n\n");
-
-  fprintf(fp, "  centerline\n");
-  for ( int r=0; r < _ref_count; ++r ) {
-    _references[r].printTherion( fp );
-  }
-  fprintf(fp, "  endcenterline\n\n");
-
-  bool no_trip_shot = false;
-  for ( int t=0; t < _trip_count; ++t ) {
-    int extend = 1;
-    _trips[t].printTherion( fp );
-    for ( int s=0; s < _shot_count; ++s ) {
-      if ( _shots[s].tripIndex() == -1 ) no_trip_shot = true;
-      if ( _shots[s].tripIndex() == t ) {
-        _shots[s].printTherion( fp, extend );
-      }
-    }
-    fprintf(fp, "  endcenterline\n\n");
-  }
-  if ( no_trip_shot ) {
-    int extend = 1;
-    fprintf(fp, "  centerline\n");
-    fprintf(fp, "    declination - degrees\n");
-    fprintf(fp, "    data normal from to length compass clino\n");
-    fprintf(fp, "    extend right\n");
-    for ( int s=0; s < _shot_count; ++s ) {
-      if ( _shots[s].tripIndex() == -1 ) {
-        _shots[s].printTherion( fp, extend );
-      }
-    }
-    fprintf(fp, "  endcenterline\n\n");
-  }
-  fprintf(fp, "  input %s\n\n", outlinefile );
-  fprintf(fp, "  input %s\n\n", sideviewfile );
-  // _overview.printTherion( fp );
-  fprintf(fp, "endsurvey\n");
-  fclose( fp );
-
-  fp = fopen( outlinefile, "w" );
-  if ( fp ) {
-    _outline.printTherion( fp, "outline", "plan", _color_point, _color_line );
-    fclose( fp );
-  }
-
-  fp = fopen( sideviewfile, "w" );
-  if ( fp ) {
-    _sideview.printTherion( fp, "sideview", "extended", _color_point, _color_line );
-    fclose( fp );
-  }
-
-}
+// void 
+// PTfile::printTherion( const char * prefix )
+// {
+//   if ( prefix == NULL || strlen(prefix) == 0 )
+//     prefix = "cave";
+//   std::ostringstream oss;
+//   std::ostringstream oss_plan;
+//   std::ostringstream oss_ext;
+//   oss << prefix << ".th";
+//   oss_plan << prefix << "-p.th2";
+//   oss_ext  << prefix << "-s.th2";
+//   const char * outlinefile  = oss_plan.str().c_str();
+//   const char * sideviewfile = oss_ext.str().c_str();
+// 
+//   TopoDroidApp.checkPath( oss.str().c_str() );
+//   FileOutputStream fp = fopen( oss.str().c_str(), "w" );
+//   if ( fp == NULL ) return; // FIXME
+//   fprintf(fp, "encoding UTF-8\n");
+//   fprintf(fp, "survey survey_name\n\n");
+// 
+//   fprintf(fp, "  centerline\n");
+//   for ( int r=0; r < _ref_count; ++r ) {
+//     _references[r].printTherion( fp );
+//   }
+//   fprintf(fp, "  endcenterline\n\n");
+// 
+//   bool no_trip_shot = false;
+//   for ( int t=0; t < _trip_count; ++t ) {
+//     int extend = 1;
+//     _trips[t].printTherion( fp );
+//     for ( int s=0; s < _shot_count; ++s ) {
+//       if ( _shots[s].tripIndex() == -1 ) no_trip_shot = true;
+//       if ( _shots[s].tripIndex() == t ) {
+//         _shots[s].printTherion( fp, extend );
+//       }
+//     }
+//     fprintf(fp, "  endcenterline\n\n");
+//   }
+//   if ( no_trip_shot ) {
+//     int extend = 1;
+//     fprintf(fp, "  centerline\n");
+//     fprintf(fp, "    declination - degrees\n");
+//     fprintf(fp, "    data normal from to length compass clino\n");
+//     fprintf(fp, "    extend right\n");
+//     for ( int s=0; s < _shot_count; ++s ) {
+//       if ( _shots[s].tripIndex() == -1 ) {
+//         _shots[s].printTherion( fp, extend );
+//       }
+//     }
+//     fprintf(fp, "  endcenterline\n\n");
+//   }
+//   fprintf(fp, "  input %s\n\n", outlinefile );
+//   fprintf(fp, "  input %s\n\n", sideviewfile );
+//   // _overview.printTherion( fp );
+//   fprintf(fp, "endsurvey\n");
+//   fclose( fp );
+// 
+//   fp = fopen( outlinefile, "w" );
+//   if ( fp ) {
+//     _outline.printTherion( fp, "outline", "plan", _color_point, _color_line );
+//     fclose( fp );
+//   }
+// 
+//   fp = fopen( sideviewfile, "w" );
+//   if ( fp ) {
+//     _sideview.printTherion( fp, "sideview", "extended", _color_point, _color_line );
+//     fclose( fp );
+//   }
+// 
+// }
 */
 
 
@@ -477,12 +477,12 @@ PTfile::printTherion( const char * prefix )
       return _references.size();
     }
 
-      void initColors( String color_point[], String color_line[] )
-      {
-        for (int k=0; k<7; ++k ) {
-          color_point[k] = _color_default_point[k];
-          color_line[k] = _color_default_line[k];
-        }
-      }
+      // void initColors( String color_point[], String color_line[] )
+      // {
+      //   for (int k=0; k<7; ++k ) {
+      //     color_point[k] = _color_default_point[k];
+      //     color_line[k] = _color_default_line[k];
+      //   }
+      // }
 }
 

@@ -204,12 +204,11 @@ public class PocketTopoParser extends ImportParser
           try {
             PTPolygonElement elem = (PTPolygonElement)drawing.getElement(h);
             int point_count = elem.pointCount();
-            int col = elem.color();
+            int col = elem.getColor();
             if ( point_count > 1 ) {
               PTPoint point = elem.point(0);
-              // FIXME Therion::LineType type = colors.thLine( col );
               // add a line to the plotCanvas
-              pw.format("line user\n");
+              pw.format("line %s\n", PtCmapActivity.getLineThName(col) );
               int k=0;
               int x1 =   (int)( xoff + PT_SCALE*(point.x() - x0));
               int y1 = - (int)( yoff + PT_SCALE*(point.y() - y0));
@@ -234,11 +233,10 @@ public class PocketTopoParser extends ImportParser
               pw.format("endline\n");
             } else if ( point_count == 1 ) {
               PTPoint point = elem.point(0);
-              // FIXME Therion::PointType type = colors.thPoint( col );
               int x =   (int)( xoff + PT_SCALE*(point.x() - x0) );
               int y = - (int)( yoff + PT_SCALE*(point.y() - y0) );
               // FIXME drawer->insertPoint(x, y, type, canvas );
-              pw.format("point %d %d user \n", x, y );
+              pw.format("point %d %d %s \n", x, y, PtCmapActivity.getPointThName(col) );
               // Log.v("PTDistoX", "elem " + h + " single " + x + " " + y );
             }
           } catch( ClassCastException e ) {

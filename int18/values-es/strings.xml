@@ -249,6 +249,7 @@
     <string name="photo_survey">dividir Topografía</string>
     <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>
     <string name="plot_delete">¿Eliminar dibujo?</string>
+    <!-- TODO string name="item_delete">Delete item %1$s ?</string -->
     <!-- string name="plot_duplicate_name">Duplicate sketch name</string -->
     <string name="plot_name">Nombre dibujo</string>
     <string name="plot_new">Nuevo dibujo</string>
@@ -288,6 +289,7 @@
 
     <!-- string name="shot_clino">Clino</string -->
     <!-- string name="shot_compass">Brújula</string -->
+    <!-- TODO string name="shot_delete">Delete shot ?</string -->
     <string name="shot_from">Desde</string>
     <string name="shot_info">Introducir datos Toma</string>
     <string name="shot_leg">Toma repetida</string>
@@ -505,6 +507,7 @@
     <string name="help_undo">Deshacer última acción de dibujo</string>
     <string name="help_redo">Rehacer última acción de dibujo</string>
     <string name="help_symbol_plot">Seleccione el símbolo de dibujo para dibujar</string>
+    <!-- TODO string name="help_delete_item">Delete sketch item</string -->
     <!-- string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujos</string>
     <string name="help_previous">Anterior elemento de la selección</string>
@@ -580,6 +583,7 @@
 
   <string name="pref_cat_survey">Opciones Topografía</string>
   <string name="pref_cat_drawing">Opciones Dibujo</string>
+  <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
   <string name="pref_cat_calib">Opciones calibración</string>
   <string name="pref_cat_device">Opciones DistoX</string>
   <string name="pref_cat_sketch">Opciones dibujo</string>
@@ -632,8 +636,9 @@
   <!-- TODO string name="pref_location_title">Location settings</string -->
   <!-- TODO string name="pref_shot_data_title">SHOT DATA SETTINGS</string -->
   <string name="pref_cwd_title">Directorio principal</string>
-  <string name="pref_cwd_summary">Directorio principal TopoDroid</string>
-  <string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string>
+  <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
+  <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
+  <!-- TODO string name="pref_pt_color_map_title">PocketTopo color map</string -->
   <string name="pref_text_size_title">Tamaño del texto de la lista</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
@@ -693,6 +698,9 @@
   <!-- TODO string name="pref_bitmap_scale_title">PNG scale</string -->
   <!-- TODO string name="pref_bitmap_scale_summary">Scale factor in sketch PNG export</string -->
   <!-- TODO string name="pref_bitmap_scale_message">Scale factor in sketch PNG export</string -->
+  <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
+  <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
+  <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
   <!-- TODO string name="pref_thumbnail_title">Thumbnails size</string -->
   <!-- TODO string name="pref_thumbnail_summary">Size of thumbnail images</string -->
   <!-- TODO string name="pref_thumbnail_message">Size of thumbnail images</string -->

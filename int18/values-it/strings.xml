@@ -246,6 +246,7 @@
     <string name="photo_survey">dividi rilievo</string>
     <string name="picture_no_station">Caposaldo o nome mancante</string>
     <string name="plot_delete">Elimina disegno ?</string>
+    <!-- TODO string name="item_delete">Delete item %1$s ?</string -->
     <string name="plot_duplicate_name">Nome disegno già presente</string>
     <string name="plot_name">Nome del disegno</string>
     <string name="plot_new">Nuovo disegno</string>
@@ -285,6 +286,7 @@
 
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">bussola</string -->
+    <!-- TODO string name="shot_delete">Delete shot ?</string -->
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
     <string name="shot_leg">battuta ripetuta</string>
@@ -504,6 +506,7 @@
     <string name="help_undo">Cancella ultima azione di disegno</string>
     <string name="help_redo">Ripeti ultima azione di disegno</string>
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
+    <!-- TODO string name="help_delete_item">Delete sketch item</string -->
     <!-- string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
@@ -579,6 +582,7 @@
 
   <string name="pref_cat_survey">Opzioni rilievo</string>
   <string name="pref_cat_drawing">Opzioni disegno</string>
+  <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
   <string name="pref_cat_calib">Opzioni calibrazione</string>
   <string name="pref_cat_device">Opzioni DistoX</string>
   <string name="pref_cat_sketch">Opzioni sketch 3D</string>
@@ -631,8 +635,9 @@
   <string name="pref_location_title">IMPOSTAZIONI POSIZIONE</string>
   <string name="pref_shot_data_title">IMPOSTAZIONI DATI POLIGONALE</string>
   <string name="pref_cwd_title">DIRECTORY DI LAVORO</string>
-  <string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string>
-  <string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string>
+  <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
+  <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
+  <!-- TODO string name="pref_pt_color_map_title">PocketTopo color map</string -->
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
   <string name="pref_text_size_message">Dimensione testo liste</string>
@@ -693,6 +698,9 @@
   <string name="pref_bitmap_scale_title">Risoluzione PNG</string>
   <string name="pref_bitmap_scale_summary">Risoluzione nei PNG degli schizzi</string>
   <string name="pref_bitmap_scale_message">Risoluzione nell\'esportazione PNG degli schizzi</string>
+  <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
+  <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
+  <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>
   <string name="pref_thumbnail_summary">Dimensione immagini thumbnail</string>
   <string name="pref_thumbnail_message">Dimensione immagini thumbnail</string>

@@ -54,7 +54,7 @@
         android:text="@string/button_save"
       />
 
-      <Button android:id="@+id/button_erase"
+      <!-- Button android:id="@+id/button_erase"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp"
@@ -62,7 +62,7 @@
         style="@style/button_default"
         android:text="@string/button_delete"
         android:textColor="@color/textdelete"
-        />
+        / -->
 
       </LinearLayout>
 

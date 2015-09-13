@@ -133,6 +133,12 @@
                   android:label="@string/app_name">
         </activity>
 
+        <activity android:name=".PtCmapActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
+
 
         <activity android:name=".PhotoActivity"
                   android:theme="@style/Theme.FullScreen"

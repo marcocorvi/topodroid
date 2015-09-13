@@ -719,7 +719,7 @@ public class ShotActivity extends Activity
   {
     long old_sid = mApp.mSID;
     long old_id  = mShotId;
-    // Log.v( TopoDroidApp.TAG, "askSurvey " + old_sid + " " + old_id );
+    // Log.v( TopoDroidApp.TAG, "split survey " + old_sid + " " + old_id );
     if ( mApp.mShotActivity != null ) {
       mApp.mShotActivity.finish();
       mApp.mShotActivity = null;

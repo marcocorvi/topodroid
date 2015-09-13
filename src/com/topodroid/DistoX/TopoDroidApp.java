@@ -217,12 +217,16 @@ public class TopoDroidApp extends Application
 
   static int setListViewHeight( Context context, HorizontalListView listView )
   {
-    final float scale = context.getResources().getSystem().getDisplayMetrics().density;
+    int size = getScaledSize( context );
     LayoutParams params = listView.getLayoutParams();
-    int size = (int)( 42 * TopoDroidSetting.mSizeButtons * scale );
     params.height = size + 10;
     listView.setLayoutParams( params );
     return size;
+  }
+
+  static int getScaledSize( Context context )
+  {
+    return (int)( 42 * TopoDroidSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
   }
 
   static int getDefaultSize( Context context )
@@ -491,6 +495,9 @@ public class TopoDroidApp extends Application
     TopoDroidPath.setDefaultPaths();
     mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
     TopoDroidPath.setPaths( mCWD );
+
+    String cmap = mPrefs.getString( "DISTOX_PT_CMAP", null );
+    PtCmapActivity.setMap( cmap );
 
     mDataListeners = new ArrayList< DataListener >( );
     mData = new DataHelper( this, mDataListeners );  // DATABASE MUST COME BEFORE PREFERENCES
@@ -905,6 +912,16 @@ public class TopoDroidApp extends Application
       editor.commit();
     }
     setCWD( cwd ); 
+  }
+
+  void setPtCmapPreference( String cmap )
+  {
+    if ( mPrefs != null ) {
+      Editor editor = mPrefs.edit();
+      editor.putString( "DISTOX_PT_CMAP", cmap ); 
+      editor.commit();
+    }
+    PtCmapActivity.setMap( cmap );
   }
 
   void setAccuracyPreference( float acceleration, float magnetic, float dip )

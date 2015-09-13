@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
@@ -41,7 +42,6 @@ import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
 import android.util.Log;
-
 
 public class ShotDialog extends Dialog
                         implements View.OnClickListener
@@ -66,14 +66,12 @@ public class ShotDialog extends Dialog
   private EditText mETto;
   private EditText mETcomment;
   
-  // private CheckBox mRBreg;
-  private CheckBox mRBdup;
-  private CheckBox mRBsurf;
-  // private CheckBox mRBback;
+  private MyCheckBox mRBdup;
+  private MyCheckBox mRBsurf;
+  private MyCheckBox mCBleg;
+  private MyCheckBox mCBall_splay;
+  private MyCheckBox mCBrenumber;
 
-  private CheckBox mCBleg;
-  private CheckBox mCBall_splay;
-  private CheckBox mCBrenumber;
   private Button mButtonReverse;
 
   private CheckBox mRBleft;
@@ -303,30 +301,41 @@ public class ShotDialog extends Dialog
       }
     }
     
-    // mRBreg  = (CheckBox) findViewById( R.id.shot_reg );
-    mRBdup  = (CheckBox) findViewById( R.id.shot_dup );
-    mRBsurf = (CheckBox) findViewById( R.id.shot_surf );
-    // mRBback = (CheckBox) findViewById( R.id.shot_back );
+    // // mRBreg  = (CheckBox) findViewById( R.id.shot_reg );
+    // mRBdup  = (CheckBox) findViewById( R.id.shot_dup );
+    // mRBsurf = (CheckBox) findViewById( R.id.shot_surf );
+    // // mRBback = (CheckBox) findViewById( R.id.shot_back );
+    // mCBleg = (CheckBox)  findViewById(R.id.shot_leg );
+    // mCBall_splay = (CheckBox)  findViewById(R.id.shot_all_splay );
+    // mCBrenumber  = (CheckBox)  findViewById(R.id.shot_renumber  );
 
-    mCBleg = (CheckBox)  findViewById(R.id.shot_leg );
-    mCBall_splay = (CheckBox)  findViewById(R.id.shot_all_splay );
-    mCBrenumber  = (CheckBox)  findViewById(R.id.shot_renumber  );
+    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
+    int size = TopoDroidApp.getScaledSize( mContext );
+    layout4.setMinimumHeight( size + 10 );
+
+    mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
+    mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
+    mCBleg       = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
+    mCBall_splay = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
+    mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
+
+    layout4.addView( mRBdup );
+    layout4.addView( mRBsurf );
+    layout4.addView( mCBleg );
+    layout4.addView( mCBall_splay );
+    layout4.addView( mCBrenumber );
+
+    mCBleg.setOnClickListener( this );
+    mCBall_splay.setOnClickListener( this );
+
+    layout4.invalidate();
+
     mButtonReverse = (Button)  findViewById(R.id.shot_reverse );
 
     mRBleft   = (CheckBox) findViewById(R.id.left );
     mRBvert   = (CheckBox) findViewById(R.id.vert );
     mRBright  = (CheckBox) findViewById(R.id.right );
     // mRBignore = (CheckBox) findViewById(R.id.ignore );
-
-    // mFlag   = (Spinner) findViewById( R.id.flag );
-    // mExtend = (Spinner) findViewById( R.id.extend );
-    // mExtendAdapter = ArrayAdapter.createFromResource( mContext, R.array.extend_name, android.R.layout.simple_spinner_item );   
-    // mExtendAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-    // mExtend.setAdapter( mExtendAdapter );
-    // mFlagAdapter = ArrayAdapter.createFromResource( mContext, R.array.flag_name, android.R.layout.simple_spinner_item );   
-    // mFlagAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
-    // mFlag.setAdapter( mFlagAdapter );
-
 
     // if ( ! TopoDroidApp.mLoopClosure ) {
     //   mRBignore.setClickable( false );
@@ -350,9 +359,8 @@ public class ShotDialog extends Dialog
     mButtonOK.setOnClickListener( this );
     // mButtonBack.setOnClickListener( this );
 
-    mRBdup.setOnClickListener( this );
-    mRBsurf.setOnClickListener( this );
-    // mRBback.setOnClickListener( this );
+    // mRBdup.setOnClickListener( this );
+    // mRBsurf.setOnClickListener( this );
 
     mButtonPrev.setOnClickListener( this );
     mButtonNext.setOnClickListener( this );
@@ -446,16 +454,26 @@ public class ShotDialog extends Dialog
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
 
-    } else if ( b == mRBdup ) {
-      mRBsurf.setChecked( false );
-      // mRBback.setChecked( false );
-    } else if ( b == mRBsurf ) {
-      mRBdup.setChecked( false );
-      // mRBback.setChecked( false );
-    // } else if ( b == mRBback ) {
-    //   mRBdup.setChecked( false );
+    // } else if ( b == mRBdup ) {
     //   mRBsurf.setChecked( false );
+    //   // mRBback.setChecked( false );
+    // } else if ( b == mRBsurf ) {
+    //   mRBdup.setChecked( false );
+    //   // mRBback.setChecked( false );
 
+    } else if ( b == mCBleg ) {
+      Log.v("DistoX", "CB leg clicked ");
+      mCBleg.toggleState();
+      if ( mCBleg.isChecked() ) {
+        mCBall_splay.setState( false );
+      }
+    } else if ( b == mCBall_splay ) {
+      Log.v("DistoX", "CB all_splay clicked ");
+      mCBall_splay.toggleState();
+      if ( mCBall_splay.isChecked() ) {
+        mCBleg.setState( false );
+      }
+    
     } else if ( b == mButtonOK ) {
       saveDBlock();
       onBackPressed();

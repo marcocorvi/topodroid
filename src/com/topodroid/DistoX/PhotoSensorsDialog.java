@@ -15,6 +15,7 @@ import android.os.Bundle;
 
 import android.content.Intent;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import android.widget.TextView;
 // import android.widget.EditText;
@@ -25,6 +26,9 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
+import android.widget.LinearLayout;
+
+import android.util.Log;
 
 public class PhotoSensorsDialog extends Dialog
                                 implements View.OnClickListener
@@ -35,14 +39,19 @@ public class PhotoSensorsDialog extends Dialog
 
   private TextView mTVstations;
   private TextView mTVdata;
-  private Button   mButtonPhoto;
-  private Button   mButtonSensor;
-  // private Button   mButtonExternal;
-  private Button   mButtonShot;     // add shot
-  private Button   mButtonSurvey;   // split survey
 
-  private Button   mButtonDelete;
-  // private Button   mButtonCancel;
+  // private Button   mButtonPhoto;
+  // private Button   mButtonSensor;
+  // // private Button   mButtonExternal;
+  // private Button   mButtonShot;     // add shot
+  // private Button   mButtonSurvey;   // split survey
+  // private Button   mButtonDelete;
+  // // private Button   mButtonCancel;
+  private MyCheckBox mButtonPhoto;
+  private MyCheckBox mButtonSensor;
+  private MyCheckBox mButtonShot;
+  private MyCheckBox mButtonSurvey;
+  private MyCheckBox mButtonDelete;
 
   /**
    * @param context   context
@@ -68,13 +77,32 @@ public class PhotoSensorsDialog extends Dialog
     setContentView(R.layout.photo_sensor_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    mButtonPhoto    = (Button) findViewById(R.id.photo_photo );
-    mButtonSensor   = (Button) findViewById(R.id.photo_sensor );
-    // mButtonExternal = (Button) findViewById(R.id.photo_external );
-    mButtonShot     = (Button) findViewById(R.id.photo_shot );
-    mButtonSurvey   = (Button) findViewById(R.id.photo_survey );
-    mButtonDelete = (Button) findViewById(R.id.photo_delete );
-    // mButtonCancel = (Button) findViewById(R.id.button_cancel );
+    // mButtonPhoto    = (Button) findViewById(R.id.photo_photo );
+    // mButtonSensor   = (Button) findViewById(R.id.photo_sensor );
+    // // mButtonExternal = (Button) findViewById(R.id.photo_external );
+    // mButtonShot     = (Button) findViewById(R.id.photo_shot );
+    // mButtonSurvey   = (Button) findViewById(R.id.photo_survey );
+    // mButtonDelete = (Button) findViewById(R.id.photo_delete );
+    // // mButtonCancel = (Button) findViewById(R.id.button_cancel );
+
+    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
+    int size = TopoDroidApp.getScaledSize( mContext );
+    layout4.setMinimumHeight( size + 10 );
+    
+    mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+    mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
+    mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
+    mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
+    mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
+
+    layout4.addView( mButtonPhoto );
+    layout4.addView( mButtonSensor );
+    layout4.addView( mButtonShot );
+    layout4.addView( mButtonSurvey );
+    layout4.addView( mButtonDelete );
+
+    layout4.invalidate();
+
 
     setTitle( R.string.title_photo );
 
@@ -99,20 +127,41 @@ public class PhotoSensorsDialog extends Dialog
 
     if ( b == mButtonPhoto ) {
       mParent.askPhotoComment( );
+      dismiss();
     } else if ( b == mButtonSensor ) {
       mParent.askSensor( );
+      dismiss();
     // } else if ( b == mButtonExternal ) {
     //   mParent.askExternal( );
     } else if ( b == mButtonShot ) {
       mParent.askShot( );
+      dismiss();
     } else if ( b == mButtonSurvey ) {
-      mParent.askSurvey( );
+      new TopoDroidAlertDialog( mParent, mParent.getResources(),
+                      mParent.getResources().getString( R.string.survey_split ),
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            mParent.doSplitSurvey();
+            dismiss();
+          }
+        } );
+      // mParent.askSurvey( );
     } else if ( b == mButtonDelete ) {
-      mParent.doDeleteShot( mBlk.mId );
+      new TopoDroidAlertDialog( mParent, mParent.getResources(),
+                      mParent.getResources().getString( R.string.shot_delete ),
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            mParent.doDeleteShot( mBlk.mId );
+            dismiss();
+          }
+        } );
+      // mParent.doDeleteShot( mBlk.mId );
+
     // } else if ( b == mButtonCancel ) {
     //   /* nothing */
     }
-    dismiss();
   }
 
 }

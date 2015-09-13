@@ -46,5 +46,6 @@ class TopoDroidTag
   public static final String TOPODROID_SENSOR_COMMENT = "sensor_comment";
 
   public static final String TOPODROID_CWD = "topodroid.cwd";
+  public static final String TOPODROID_CMAP = "topodroid.cmap";
 
 }
