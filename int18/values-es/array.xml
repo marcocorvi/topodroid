@@ -8,8 +8,8 @@
      <item name="number">Numéricas</item>
   </string-array>
   <string-array name="stationNamesValue">
-     <item name="alpha">alpha</item>
-     <item name="number">number</item>
+     <item name="alpha">alfabeto</item>
+     <item name="number">número</item>
   </string-array>
   -->
 
@@ -21,8 +21,8 @@
   </string-array>
 
   <!-- TODO string-array name="logStream">
-     <item name="android">System log</item>
-     <item name="file">File log</item>
+     <item name="android">Registro del sistema</item>
+     <item name="file">Archivo de registro</item>
   </string-array>
   <string-array name="logStreamValue">
      <item name="android">0</item>
@@ -173,8 +173,8 @@
 <!-- TODO
   <string-array name="calibAlgo">
      <item name="auto">auto</item>
-     <item name="linear">linear</item>
-     <item name="nonlinear">non-linear</item>
+     <item name="linear">lineal</item>
+     <item name="nonlinear">no lineal</item>
   </string-array>
   <string-array name="calibAlgoValue">
      <item name="auto">0</item>
