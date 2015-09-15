@@ -17,5 +17,6 @@ public interface IZoomer
   // get the value of the zoom
   public float zoom();
 
+  public void checkZoomBtnsCtrl();
 }
 

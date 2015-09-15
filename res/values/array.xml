@@ -2,6 +2,17 @@
 
 <resources>
 
+  <string-array name="zoomCtrl">
+     <item name="0">Off</item>
+     <item name="1">Temporary</item>
+     <item name="2">Permanent</item>
+  </string-array>
+  <string-array name="zoomCtrlValue">
+     <item name="0">0</item>
+     <item name="1">1</item>
+     <item name="2">2</item>
+  </string-array>
+
   <string-array name="stationNames">
      <item name="alpha">Alphanumeric</item>
      <item name="number">Numeric</item>

@@ -47,12 +47,12 @@ public class DrawingSurface extends SurfaceView
                             implements SurfaceHolder.Callback
 {
     private Boolean _run;
-    protected DrawThread thread;
+    protected DrawThread mDrawThread;
     public boolean isDrawing = true;
     public DrawingPath previewPath;
     private SurfaceHolder mHolder; // canvas holder
     private Context mContext;
-    private IZoomer mZoomer;
+    private IZoomer mZoomer = null;
     private AttributeSet mAttrs;
     private int mWidth;            // canvas width
     private int mHeight;           // canvas height
@@ -77,7 +77,7 @@ public class DrawingSurface extends SurfaceView
       mWidth = 0;
       mHeight = 0;
 
-      thread = null;
+      mDrawThread = null;
       mContext = context;
       mAttrs   = attrs;
       mHolder = getHolder();
@@ -170,10 +170,11 @@ public class DrawingSurface extends SurfaceView
 
     void refresh()
     {
+      // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
       Canvas canvas = null;
       try {
         canvas = mHolder.lockCanvas();
-        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        // canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
@@ -205,7 +206,7 @@ public class DrawingSurface extends SurfaceView
 
       public DrawThread(SurfaceHolder surfaceHolder)
       {
-          mSurfaceHolder = surfaceHolder;
+        mSurfaceHolder = surfaceHolder;
       }
 
       public void setRunning(boolean run)
@@ -406,27 +407,27 @@ public class DrawingSurface extends SurfaceView
     public void surfaceCreated(SurfaceHolder mHolder) 
     {
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceCreated " );
-      if (thread == null ) {
-        thread = new DrawThread(mHolder);
+      if ( mDrawThread == null ) {
+        mDrawThread = new DrawThread(mHolder);
       }
-      thread.setRunning(true);
-      thread.start();
+      mDrawThread.setRunning(true);
+      mDrawThread.start();
     }
 
     public void surfaceDestroyed(SurfaceHolder mHolder) 
     {
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceDestroyed " );
       boolean retry = true;
-      thread.setRunning(false);
+      mDrawThread.setRunning(false);
       while (retry) {
         try {
-          thread.join();
+          mDrawThread.join();
           retry = false;
         } catch (InterruptedException e) {
           // we will try it again and again...
         }
       }
-      thread = null;
+      mDrawThread = null;
     }
 
     public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name )

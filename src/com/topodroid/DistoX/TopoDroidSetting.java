@@ -99,7 +99,7 @@ class TopoDroidSetting
     "DISTOX_VERT_SPLAY",             // over this splay are shown with dashed line
     "DISTOX_STATION_PREFIX",         // whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
-    "DISTOX_ZOOM_CONTROLS",
+    "DISTOX_ZOOM_CTRL",
     "DISTOX_MKEYBOARD",
     "DISTOX_DXF_SCALE", 
     "DISTOX_LOCALE",                 // 66
@@ -143,13 +143,22 @@ class TopoDroidSetting
   static float mVertSplay = 50;
   static boolean mExportStationsPrefix = false; // whether to prepend cave name to station in cSurvey export
   static int mStationNames = 0;          // type of station names (0: alpha, 1: number)
-  static boolean mZoomControls = false;
+  // static boolean mZoomControls = false;
+  static int mZoomCtrl = 0;
   static boolean mKeyboard = true;
 
-  static void setZoomControls( boolean ctrl )
+  // static void setZoomControls( boolean ctrl )
+  // {
+  //   mZoomControls = ctrl;
+  //   // FIXME forward setting to DrawingActivity
+  // }
+  static void setZoomControls( String ctrl, boolean is_multitouch )
   {
-    mZoomControls = ctrl;
-    // FIXME forward setting to DrawingActivity
+    try {
+      int i = Integer.parseInt( ctrl );
+      if ( i >= 0 && i <= 2 ) mZoomCtrl = i;
+      if ( mZoomCtrl == 0 && ! is_multitouch ) mZoomCtrl = 1;
+    } catch ( NumberFormatException e ) { }
   }
 
   // selection_radius = cutoff + closeness / zoom
@@ -611,7 +620,8 @@ class TopoDroidSetting
 
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
 
-    setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
+    // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
+    setZoomControls( prefs.getString( key[k++], "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
 
     mKeyboard = prefs.getBoolean( key[k++], true ); // DISTOX_MKEYBOARD
 
@@ -939,7 +949,8 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     } else if ( k.equals( key[ nk++ ] ) ) {
-      setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
+      // setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
+      setZoomControls( prefs.getString( k, "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
     } else if ( k.equals( key[ nk++ ] ) ) {
       mKeyboard = prefs.getBoolean( k, true ); // DISTOX_MKEYBOARD
     } else if ( k.equals( key[ nk++ ] ) ) {

@@ -462,6 +462,86 @@ class DrawingDxf
             String layer = DrawingBrushPaths.getLineThName( line.lineType() );
             // String layer = "LINE";
             int flag = 0;
+
+            printString( pw5, 0, "SPLINE" );
+            printString( pw5, 8, layer );
+            printAcDb( pw5, -1, "AcDbEntity", "AcDbSpline" );
+            printInt( pw5, 66, 1 ); // group 1
+            printInt( pw5, 70, flag );
+            printInt( pw5, 71, 3 ); // degree
+            printInt( pw5, 210, 0 );
+            printInt( pw5, 220, 0 );
+            printInt( pw5, 230, 1 );
+            float xt2=0, yt2=0, xt1=0, yt1=0, d;
+            int np = 2;
+            LinePoint p = line.mFirst; 
+            LinePoint pn = p.mNext;
+            if ( pn != null ) {
+              if ( pn.has_cp ) {
+                xt1 = pn.mX1 - p.mX;
+                yt1 = pn.mY1 - p.mY;
+              } else {
+                xt1 = pn.mX - p.mX;
+                yt1 = pn.mY - p.mY;
+              }
+              d = (float)Math.sqrt( xt1*xt1 + yt1*yt1 );
+              xt1 /= d;
+              yt1 /= d;
+            }
+            while ( pn.mNext != null ) {
+              p = pn;
+              pn = pn.mNext;
+              ++np;
+            }
+            if ( pn.has_cp ) {
+              xt2 = pn.mX - pn.mX2;
+              yt2 = pn.mY - pn.mY2;
+            } else {
+              xt2 = pn.mX - p.mX;
+              yt2 = pn.mY - p.mY;
+            }
+            d = (float)Math.sqrt( xt2*xt2 + yt2*yt2 );
+            xt2 /= d;
+            yt2 /= d;
+
+            int nk = 3 + 5 * (np - 1);
+            int ncp = nk - 4;
+
+            printInt( pw5, 72, nk ); 
+            printInt( pw5, 73, ncp ); 
+            printInt( pw5, 74, 0 ); 
+            printFloat( pw5, 12, xt1 );
+            printFloat( pw5, 22, yt1 );
+            printFloat( pw5, 32, 0 );
+            printFloat( pw5, 13, xt2 );
+            printFloat( pw5, 23, yt2 );
+            printFloat( pw5, 33, 0 );
+            
+            for ( int k=0; k<=np; ++k ) {
+              if ( k > 0 ) {
+                printInt( pw5, 40, 3*k-2 );
+                printInt( pw5, 40, 3*k-1 );
+              }
+              printInt( pw5, 40, 3*k );
+              printInt( pw5, 40, 3*k );
+              printInt( pw5, 40, 3*k );
+            }
+
+            p = line.mFirst; 
+            printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
+            for ( p = p.mNext; p != null; p = p.mNext ) { 
+              // printString( pw5, 0, "VERTEX" );
+              // printString( pw5, 8, layer );
+              if ( p.has_cp ) {
+                printXYZ( pw5, p.mX1 * scale, -p.mY1 * scale, 0.0f );
+                printXYZ( pw5, p.mX2 * scale, -p.mY2 * scale, 0.0f );
+              } else {
+                printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
+                printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
+              }
+              printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
+            }
+/*
             printString( pw5, 0, "POLYLINE" );
             printString( pw5, 8, layer );
             printAcDb( pw5, -1, "AcDbEntity", "AcDbPolyline" );
@@ -474,6 +554,7 @@ class DrawingDxf
               printString( pw5, 8, layer );
               printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
             }
+*/
             printString( pw5, 0, "SEQEND" );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;

@@ -150,6 +150,11 @@ public class TopoDroidApp extends Application
     }
   }
 
+  boolean isMultitouch()
+  {
+    return getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
+  }
+
   // ----------------------------------------------------------------------
   // DataListener (co-surveying)
   private ArrayList< DataListener > mDataListeners;

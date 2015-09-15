@@ -111,14 +111,13 @@ public class OverviewActivity extends ItemDrawer
     private Path mCrossPath;
     private Path mCirclePath;
 
-    private boolean mIsNotMultitouch;
-
     String mName1;  // first name (PLAN)
     String mName2;  // second name (EXTENDED)
 
-    ZoomButtonsController mZoomBtnsCtrl;
+    boolean mZoomBtnsCtrlOn = false;
+    ZoomButtonsController mZoomBtnsCtrl = null;
     View mZoomView;
-    ZoomControls mZoomCtrl;
+    // ZoomControls mZoomCtrl;
     // ZoomButton mZoomOut;
     // ZoomButton mZoomIn;
 
@@ -145,7 +144,9 @@ public class OverviewActivity extends ItemDrawer
     @Override
     public void onVisibilityChanged(boolean visible)
     {
-      mZoomBtnsCtrl.setVisible( visible );
+      if ( mZoomBtnsCtrlOn && mZoomBtnsCtrl != null ) {
+        mZoomBtnsCtrl.setVisible( visible || ( TopoDroidSetting.mZoomCtrl > 1 ) );
+      }
     }
 
     @Override
@@ -358,6 +359,37 @@ public class OverviewActivity extends ItemDrawer
     public float zoom() { return mZoom; }
 
 
+    // this method is a callback to let other objects tell the activity to use zooms or not
+    private void switchZoomCtrl( int ctrl )
+    {
+      // Log.v("DistoX", "DEBUG switchZoomCtrl " + ctrl + " ctrl is " + ((mZoomBtnsCtrl == null )? "null" : "not null") );
+      if ( mZoomBtnsCtrl == null ) return;
+      mZoomBtnsCtrlOn = (ctrl > 0);
+      switch ( ctrl ) {
+        case 0:
+          mZoomBtnsCtrl.setOnZoomListener( null );
+          mZoomBtnsCtrl.setVisible( false );
+          mZoomBtnsCtrl.setZoomInEnabled( false );
+          mZoomBtnsCtrl.setZoomOutEnabled( false );
+          mZoomView.setVisibility( View.GONE );
+          break;
+        case 1:
+          mZoomView.setVisibility( View.VISIBLE );
+          mZoomBtnsCtrl.setOnZoomListener( this );
+          mZoomBtnsCtrl.setVisible( false );
+          mZoomBtnsCtrl.setZoomInEnabled( true );
+          mZoomBtnsCtrl.setZoomOutEnabled( true );
+          break;
+        case 2:
+          mZoomView.setVisibility( View.VISIBLE );
+          mZoomBtnsCtrl.setOnZoomListener( this );
+          mZoomBtnsCtrl.setVisible( true );
+          mZoomBtnsCtrl.setZoomInEnabled( true );
+          mZoomBtnsCtrl.setZoomOutEnabled( true );
+          break;
+      }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -377,8 +409,6 @@ public class OverviewActivity extends ItemDrawer
       // int width = dm widthPixels;
       int width = getResources().getDisplayMetrics().widthPixels;
 
-      mIsNotMultitouch = ! getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
-
       setContentView(R.layout.overview_activity);
       mApp = (TopoDroidApp)getApplication();
       // mZoom = mApp.mScaleFactor;    // canvas zoom
@@ -389,16 +419,10 @@ public class OverviewActivity extends ItemDrawer
       mOverviewSurface.setZoomer( this );
       mOverviewSurface.setOnTouchListener(this);
 
-      if ( mIsNotMultitouch ) {
-        mZoomView = (View) findViewById(R.id.zoomView );
-        mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
-        mZoomBtnsCtrl.setOnZoomListener( this );
-        mZoomBtnsCtrl.setVisible( true );
-        mZoomBtnsCtrl.setZoomInEnabled( true );
-        mZoomBtnsCtrl.setZoomOutEnabled( true );
-        mZoomCtrl = (ZoomControls) mZoomBtnsCtrl.getZoomControls();
-        // ViewGroup vg = mZoomBtnsCtrl.getContainer();
-      }
+      mZoomView = (View) findViewById(R.id.zoomView );
+      mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
+
+      switchZoomCtrl( TopoDroidSetting.mZoomCtrl );
 
       mListView = (HorizontalListView) findViewById(R.id.listview);
       int size = mApp.setListViewHeight( mListView );
@@ -477,11 +501,12 @@ public class OverviewActivity extends ItemDrawer
       // mOffset.y = info.yoffset;
       // mZoom     = info.zoom;
       mOverviewSurface.isDrawing = true;
+      switchZoomCtrl( TopoDroidSetting.mZoomCtrl );
     }
 
     private void doPause()
     {
-      if ( mIsNotMultitouch ) mZoomBtnsCtrl.setVisible(false);
+      switchZoomCtrl( 0 );
       mOverviewSurface.isDrawing = false;
     }
 
@@ -686,6 +711,7 @@ public class OverviewActivity extends ItemDrawer
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
       float d0 = TopoDroidSetting.mCloseCutoff + TopoDroidSetting.mCloseness / mZoom;
+      checkZoomBtnsCtrl();
 
       WrapMotionEvent event = WrapMotionEvent.wrap(rawEvent);
       // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingActivity onTouch() " );
@@ -695,7 +721,7 @@ public class OverviewActivity extends ItemDrawer
       float y_canvas = event.getY();
       // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
 
-      if ( mIsNotMultitouch && y_canvas > CENTER_Y*2-20 ) {
+      if ( mZoomBtnsCtrlOn && y_canvas > CENTER_Y*2-20 ) {
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
       }
@@ -923,6 +949,14 @@ public class OverviewActivity extends ItemDrawer
       } else if ( p++ == pos ) { // HELP
         (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 2 ) ).show();
       }
+    }
+  }
+
+
+  public void checkZoomBtnsCtrl()
+  {
+    if ( TopoDroidSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
+      mZoomBtnsCtrl.setVisible( true );
     }
   }
 

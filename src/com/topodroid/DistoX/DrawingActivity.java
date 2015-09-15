@@ -127,6 +127,8 @@ public class DrawingActivity extends ItemDrawer
   BitmapDrawable mBMright;
   Bitmap mBMdial;
 
+  private View mZoomView;
+
   private static int izons[] = { 
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
@@ -221,7 +223,7 @@ public class DrawingActivity extends ItemDrawer
     private DistoXNum mNum;
     private int mPointCnt; // counter of points in the currently drawing line
 
-    private boolean mIsNotMultitouch;
+    // private boolean mIsNotMultitouch;
 
     private DrawingBrush mCurrentBrush;
     private Path  mCurrentPath;
@@ -302,7 +304,9 @@ public class DrawingActivity extends ItemDrawer
     @Override
     public void onVisibilityChanged(boolean visible)
     {
-      if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( visible );
+      if ( mZoomBtnsCtrlOn && mZoomBtnsCtrl != null ) {
+        mZoomBtnsCtrl.setVisible( visible || ( TopoDroidSetting.mZoomCtrl > 1 ) );
+      }
     }
 
     @Override
@@ -761,20 +765,33 @@ public class DrawingActivity extends ItemDrawer
   // }
 
   // this method is a callback to let other objects tell the activity to use zooms or not
-  void switchZoomCtrl( boolean on ) 
+  private void switchZoomCtrl( int ctrl )
   {
+    // Log.v("DistoX", "DEBUG switchZoomCtrl " + ctrl + " ctrl is " + ((mZoomBtnsCtrl == null )? "null" : "not null") );
     if ( mZoomBtnsCtrl == null ) return;
-    mZoomBtnsCtrlOn = on;
-    if ( on ) {
-      mZoomBtnsCtrl.setOnZoomListener( this );
-      mZoomBtnsCtrl.setVisible( true );
-      mZoomBtnsCtrl.setZoomInEnabled( true );
-      mZoomBtnsCtrl.setZoomOutEnabled( true );
-    } else if ( ! mIsNotMultitouch ) { // switch off only if device is multitouch
-      mZoomBtnsCtrl.setOnZoomListener( null );
-      mZoomBtnsCtrl.setVisible( false );
-      mZoomBtnsCtrl.setZoomInEnabled( false );
-      mZoomBtnsCtrl.setZoomOutEnabled( false );
+    mZoomBtnsCtrlOn = (ctrl > 0);
+    switch ( ctrl ) {
+      case 0:
+        mZoomBtnsCtrl.setOnZoomListener( null );
+        mZoomBtnsCtrl.setVisible( false );
+        mZoomBtnsCtrl.setZoomInEnabled( false );
+        mZoomBtnsCtrl.setZoomOutEnabled( false );
+        mZoomView.setVisibility( View.GONE );
+        break;
+      case 1:
+        mZoomView.setVisibility( View.VISIBLE );
+        mZoomBtnsCtrl.setOnZoomListener( this );
+        mZoomBtnsCtrl.setVisible( false );
+        mZoomBtnsCtrl.setZoomInEnabled( true );
+        mZoomBtnsCtrl.setZoomOutEnabled( true );
+        break;
+      case 2:
+        mZoomView.setVisibility( View.VISIBLE );
+        mZoomBtnsCtrl.setOnZoomListener( this );
+        mZoomBtnsCtrl.setVisible( true );
+        mZoomBtnsCtrl.setZoomInEnabled( true );
+        mZoomBtnsCtrl.setZoomOutEnabled( true );
+        break;
     }
   }
 
@@ -782,6 +799,7 @@ public class DrawingActivity extends ItemDrawer
     public void onCreate(Bundle savedInstanceState) 
     {
       super.onCreate(savedInstanceState);
+      mZoomBtnsCtrlOn = (TopoDroidSetting.mZoomCtrl > 1);  // do before setting content
 
       // Display display = getWindowManager().getDefaultDisplay();
       // DisplayMetrics dm = new DisplayMetrics();
@@ -789,7 +807,7 @@ public class DrawingActivity extends ItemDrawer
       // int width = dm widthPixels;
       int width = getResources().getDisplayMetrics().widthPixels;
 
-      mIsNotMultitouch = ! getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
+      // mIsNotMultitouch = ! getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
       mSectionName = null;
       mShiftDrawing = false;
       mContinueLine = false;
@@ -819,12 +837,11 @@ public class DrawingActivity extends ItemDrawer
       // mDrawingSurface.setOnLongClickListener(this);
       // mDrawingSurface.setBuiltInZoomControls(true);
 
-      View zoom_view = (View) findViewById(R.id.zoomView );
-      mZoomBtnsCtrl = new ZoomButtonsController( zoom_view );
-      mZoomBtnsCtrlOn = false;
+      mZoomView = (View) findViewById(R.id.zoomView );
+      mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
       // FIXME ZOOM_CTRL mZoomCtrl = (ZoomControls) mZoomBtnsCtrl.getZoomControls();
       // ViewGroup vg = mZoomBtnsCtrl.getContainer();
-      switchZoomCtrl( mIsNotMultitouch || TopoDroidSetting.mZoomControls );
+      // switchZoomCtrl( TopoDroidSetting.mZoomCtrl );
 
       mListView = (HorizontalListView) findViewById(R.id.listview);
       mButtonSize = mApp.setListViewHeight( mListView );
@@ -1004,8 +1021,8 @@ public class DrawingActivity extends ItemDrawer
     // protected synchronized void onStop()
     // {
     //   super.onStop();
-    //   // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-    //   doStop();
+    //   Log.v("DistoX", "Drawing Activity onStop ");
+    //   // doStop();
     // }
 
     @Override
@@ -1029,13 +1046,12 @@ public class DrawingActivity extends ItemDrawer
       mOffset.y = info.yoffset;
       mZoom     = info.zoom;
       mDrawingSurface.isDrawing = true;
-      switchZoomCtrl( mIsNotMultitouch || TopoDroidSetting.mZoomControls );
-      mZoomBtnsCtrl.setVisible( false );
+      switchZoomCtrl( TopoDroidSetting.mZoomCtrl );
     }
 
     private void doPause()
     {
-      switchZoomCtrl( false );
+      switchZoomCtrl( 0 );
       mDrawingSurface.isDrawing = false;
       if ( mPid >= 0 ) mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
       doSaveTh2( ); // do not alert-dialog on mAllSymbols
@@ -1532,11 +1548,19 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
+    public void checkZoomBtnsCtrl()
+    {
+      // if ( mZoomBtnsCtrl == null ) return; // not necessary
+      if ( TopoDroidSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
+        mZoomBtnsCtrl.setVisible( true );
+      }
+    }
+
 
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
       dismissPopup();
-      // dismissModePopup();
+      checkZoomBtnsCtrl();
 
       float d0 = TopoDroidSetting.mCloseCutoff + TopoDroidSetting.mCloseness / mZoom;
 
@@ -2161,7 +2185,6 @@ public class DrawingActivity extends ItemDrawer
     {
       if ( popup_window != null ) {
         dismissPopup();
-        // dismissModePopup();
         return;
       } 
       // finish();
@@ -2202,82 +2225,7 @@ public class DrawingActivity extends ItemDrawer
       }
     }
   
-    // private void makeModePopup( View b )
-    // {
-    //   final Context context = this;
-    //   popup_layout = new LinearLayout(this);
-    //   popup_layout.setOrientation(LinearLayout.VERTICAL);
-    //   int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
-    //   int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
 
-    //   // ===== MOVE
-    //   String text = getString(R.string.popup_mode_move );
-    //   int len = text.length();
-    //   Button myTextView0 = makeButton( text, 0xff00ff00, 24 );
-    //   popup_layout.addView(myTextView0, new LinearLayout.LayoutParams(lHeight, lWidth));
-    //   myTextView0.setOnClickListener( new View.OnClickListener( ) {
-    //     public void onClick(View v) {
-    //       setMode( MODE_MOVE );
-    //       dismissModePopup();
-    //     }
-    //   } );
-    //   // ===== DRAW
-    //   text = getString(R.string.popup_mode_draw);
-    //   if ( len < text.length() ) len = text.length();
-    //   Button myTextView1 = makeButton( text, 0xff00ff00, 24 );
-    //   popup_layout.addView(myTextView1, new LinearLayout.LayoutParams(lHeight, lWidth));
-    //   myTextView1.setOnClickListener( new View.OnClickListener( ) {
-    //     public void onClick(View v) {
-    //       setMode( MODE_DRAW );
-    //       dismissModePopup();
-    //     }
-    //   } );
-    //   // ===== ERASE
-    //   text = getString(R.string.popup_mode_erase);
-    //   if ( len < text.length() ) len = text.length();
-    //   Button myTextView2 = makeButton( text, 0xff00ff00, 24 );
-    //   popup_layout.addView(myTextView2, new LinearLayout.LayoutParams(lHeight, lWidth));
-    //   myTextView2.setOnClickListener( new View.OnClickListener( ) {
-    //     public void onClick(View v) {
-    //       setMode( MODE_ERASE );
-    //       dismissModePopup();
-    //     }
-    //   } );
-    //   // ===== EDIT
-    //   Button myTextView3 = null;
-    //   if ( TopoDroidSetting.mLevelOverBasic ) {
-    //     text = getString(R.string.popup_mode_edit);
-    //     if ( len < text.length() ) len = text.length();
-    //     myTextView3 = makeButton( text, 0xff00ff00, 24 );
-    //     popup_layout.addView(myTextView3, new LinearLayout.LayoutParams(lHeight, lWidth));
-    //     myTextView3.setOnClickListener( new View.OnClickListener( ) {
-    //       public void onClick(View v) {
-    //         setMode( MODE_EDIT );
-    //         dismissModePopup();
-    //       }
-    //     } );
-    //   } 
-
-    //   FontMetrics fm = myTextView0.getPaint().getFontMetrics();
-    //   int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
-    //   int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.30);
-    //   myTextView0.setWidth( w );
-    //   myTextView1.setWidth( w );
-    //   myTextView2.setWidth( w );
-    //   if ( myTextView3 != null ) myTextView3.setWidth( w );
-    //   // Log.v( TopoDroidApp.TAG, "popup width " + w );
-    //   popup_mode_window = new PopupWindow( popup_layout, w, h ); // popup_layout.getHeight(), popup_layout.getWidth() );
-    //   popup_mode_window.showAsDropDown(b); 
-    // }
-
-    // private void dismissModePopup()
-    // {
-    //   if ( popup_mode_window != null ) {
-    //     popup_mode_window.dismiss();
-    //     popup_mode_window = null;
-    //   }
-    // }
- 
     /** line/area editing
      * @param b button
      */
@@ -2556,7 +2504,6 @@ public class DrawingActivity extends ItemDrawer
       // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingActivity onClick() " + view.toString() );
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingActivity onClick() point " + mCurrentPoint + " symbol " + mSymbol );
       dismissPopup();
-      // dismissModePopup();
 
       Button b = (Button)view;
       if ( b == mImage ) {

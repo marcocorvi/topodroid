@@ -11,12 +11,20 @@
        android:entryValues="@array/pickerTypeValue"
      />
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_ZOOM_CONTROLS"
        android:summary="@string/pref_zoom_controls_summary"
        android:title="@string/pref_zoom_controls_title"
        android:defaultValue="false"
-     />
+     / -->
+    <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_ZOOM_CTRL"
+       android:title="@string/pref_zoom_controls_title"
+       android:summary="@string/pref_zoom_controls_summary"
+       android:defaultValue="1"
+       android:entries="@array/zoomCtrl"
+       android:entryValues="@array/zoomCtrlValue"
+       />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SPLAY_VERT_THRS"
