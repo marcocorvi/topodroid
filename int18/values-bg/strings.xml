@@ -407,8 +407,8 @@
     <!-- string name="button_measure"   >Measure   </string -->
     <string name="button_photo"   >Снимка</string>
     <string name="button_sensor"  >Сензори</string>
-    <string name="button_direction">Азимут/Наклон</string>
-    <string name="button_azimuth">Азимут</string>
+    <!-- UNUSED string name="button_direction">Азимут/Наклон</string -->
+    <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Скица</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Не        </string>

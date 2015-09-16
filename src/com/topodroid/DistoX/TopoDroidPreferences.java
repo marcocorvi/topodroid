@@ -49,14 +49,14 @@ public class TopoDroidPreferences extends PreferenceActivity
   static final int PREF_CATEGORY_SKETCH = 5;
   static final int PREF_CATEGORY_IMPORT_EXPORT = 6;
 
-  static final int PREF_SHOT_DATA       = 6; 
-  static final int PREF_SHOT_UNITS      = 7; 
-  static final int PREF_ACCURACY        = 8; 
-  static final int PREF_LOCATION        = 9; 
-  static final int PREF_PLOT_SCREEN     = 10; 
-  static final int PREF_TOOL_SCREEN     = 11; 
+  static final int PREF_SHOT_DATA       = 7; 
+  static final int PREF_SHOT_UNITS      = 8; 
+  static final int PREF_ACCURACY        = 9; 
+  static final int PREF_LOCATION        = 10; 
+  static final int PREF_PLOT_SCREEN     = 11; 
+  static final int PREF_TOOL_SCREEN     = 12; 
 
-  static final int PREF_CATEGORY_LOG    = 12; // this must be the last
+  static final int PREF_CATEGORY_LOG    = 13; // this must be the last
 
   private int mPrefCategory = PREF_CATEGORY_ALL; // preference category
 

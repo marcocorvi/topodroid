@@ -1589,8 +1589,8 @@ public class DrawingActivity extends ItemDrawer
       // ---------------------------------------- DOWN
 
       } else if (action == MotionEvent.ACTION_DOWN) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DOWN at X " + x_canvas + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
-                                                 + y_canvas + " / " + mBorderBottom );
+        // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DOWN at X " + x_canvas + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
+        //                                          + y_canvas + " / " + mBorderBottom );
         if ( y_canvas > mBorderBottom ) {
           if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
             mZoomBtnsCtrl.setVisible( true );
@@ -2231,6 +2231,8 @@ public class DrawingActivity extends ItemDrawer
      */
     private void makePopup( View b )
     {
+      if ( popup_window != null ) return;
+
         final Context context = this;
         popup_layout = new LinearLayout(this);
         popup_layout.setOrientation(LinearLayout.VERTICAL);
@@ -2402,8 +2404,10 @@ public class DrawingActivity extends ItemDrawer
         } );
 
         FontMetrics fm = myTextView0.getPaint().getFontMetrics();
+        // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
         int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
-        int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.30);
+        int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+        // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
         myTextView0.setWidth( w );
         myTextView1.setWidth( w );
         myTextView2.setWidth( w );
@@ -2412,7 +2416,8 @@ public class DrawingActivity extends ItemDrawer
         myTextView5.setWidth( w );
         myTextView6.setWidth( w );
         // Log.v( TopoDroidApp.TAG, "popup width " + w );
-        popup_window = new PopupWindow( popup_layout, w, h ); // popup_layout.getHeight(), popup_layout.getWidth() );
+        popup_window = new PopupWindow( popup_layout, w, h ); 
+        // popup_window = new PopupWindow( popup_layout, popup_layout.getHeight(), popup_layout.getWidth() );
         popup_window.showAsDropDown(b); 
     }
 
@@ -2421,6 +2426,7 @@ public class DrawingActivity extends ItemDrawer
       if ( popup_window != null ) {
         popup_window.dismiss();
         popup_window = null;
+        popup_layout = null;
       }
     }
 
@@ -3066,6 +3072,7 @@ public class DrawingActivity extends ItemDrawer
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        dismissPopup();
         super.onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:

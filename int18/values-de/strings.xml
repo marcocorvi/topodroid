@@ -425,8 +425,8 @@
     <!-- NO string name="button_measure"   >Messung   </string -->
     <string name="button_photo"   >Foto</string>
     <string name="button_sensor"  >Messung</string>
-    <string name="button_direction">Azimut/Neigung</string>
-    <string name="button_azimuth">Azimut</string>
+    <!-- UNUSED Vstring name="button_direction">Azimut/Neigung</string -->
+    <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Zeichnung</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_no"        >Nein      </string>

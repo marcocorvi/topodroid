@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnKeyListener;
@@ -51,7 +52,7 @@ public class CalibGMDialog extends Dialog
   private EditText mETname;  // group number
   private Button   mButtonOK;
   private Button   mButtonDelete;
-  private CheckBox mCBregroup;
+  private MyCheckBox mCBregroup;
   // private Button   mButtonCancel;
 
   private MyKeyboard mKeyboard = null;
@@ -86,12 +87,27 @@ public class CalibGMDialog extends Dialog
     mTVerror   = (TextView) findViewById( R.id.gm_error );
 
     mETname = (EditText) findViewById(R.id.gm_name);
+
+    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout2 );
+    int size = TopoDroidApp.getScaledSize( mContext );
+    layout4.setMinimumHeight( size + 10 );
     
-    mButtonOK     = (Button) findViewById(R.id.gm_ok );
-    mButtonDelete = (Button) findViewById(R.id.gm_delete );
-    mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
-    mCBregroup.setChecked( false );
-    // mButtonCancel = (Button) findViewById(R.id.gm_cancel );
+    mButtonOK = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
+    mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete ); 
+    mCBregroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no ); 
+    mCBregroup.setState( false );
+    layout4.addView( mCBregroup );
+    layout4.addView( mButtonOK );
+    layout4.addView( mButtonDelete );
+    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mCBregroup.getLayoutParams();
+    params.setMargins( 0, 0, 40, 0 );
+    mCBregroup.setLayoutParams( params );
+    
+    // mButtonOK     = (Button) findViewById(R.id.gm_ok );
+    // mButtonDelete = (Button) findViewById(R.id.gm_delete );
+    // mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
+    // mCBregroup.setChecked( false );
+    // // mButtonCancel = (Button) findViewById(R.id.gm_cancel );
 
     mETbearing.setText( String.format( "%.1f", mBlk.mBearing ) );
     mETclino.setText( String.format( "%.1f", mBlk.mClino ) );

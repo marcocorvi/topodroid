@@ -81,54 +81,16 @@ public class GMActivity extends Activity
   private String mCalibName;
   // private ConnHandler mHandler;
 
-  // static int icons00[];
-  // static int icons[] = { 
-  //                       R.drawable.ic_download,
-  //                       R.drawable.ic_toggle,
-  //                       R.drawable.ic_group,
-  //                       R.drawable.ic_cover,
-  //                       R.drawable.ic_compute,
-  //                       R.drawable.ic_read,
-  //                       R.drawable.ic_write
-  //                    };
-  // static int ixons[] = { 
-  //                       R.drawable.ix_download,
-  //                       R.drawable.ix_toggle,
-  //                       R.drawable.ix_group,
-  //                       R.drawable.ix_cover,
-  //                       R.drawable.ix_compute,
-  //                       R.drawable.ix_read,
-  //                       R.drawable.ix_write
-  //                    };
   static int izons[] = { 
                         R.drawable.iz_download,
                         R.drawable.iz_toggle,
-                        R.drawable.iz_group,
+                        R.drawable.iz_numbers_no,
                         R.drawable.iz_cover,
                         R.drawable.iz_compute,
                         R.drawable.iz_read,
                         R.drawable.iz_write
                      };
 
-  // static int icons00no[];
-  // static int iconsno[] = { 
-  //                       0,
-  //                       R.drawable.ic_toggle_no,
-  //                       0,
-  //                       0,
-  //                       0,
-  //                       R.drawable.ic_read_no,
-  //                       R.drawable.ic_write_no
-  //                    };
-  // static int ixonsno[] = { 
-  //                       0,
-  //                       R.drawable.ix_toggle_no,
-  //                       0,
-  //                       0,
-  //                       0,
-  //                       R.drawable.ix_read_no,
-  //                       R.drawable.ix_write_no
-  //                    };
   static int izonsno[] = { 
                         0,
                         R.drawable.iz_toggle_no,
@@ -138,7 +100,6 @@ public class GMActivity extends Activity
                         R.drawable.iz_read_no,
                         R.drawable.iz_write_no
                      };
-
 
   BitmapDrawable mBMtoggle;
   BitmapDrawable mBMtoggle_no;
@@ -616,8 +577,6 @@ public class GMActivity extends Activity
         if ( mApp.mCID >= 0 ) {
           List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
           if ( list.size() >= 16 ) {
-            setTitle( R.string.calib_compute_groups );
-            setTitleColor( TopoDroidConst.COLOR_COMPUTE );
             (new GMGroupsDialog( this, this, 
               ( TopoDroidSetting.mGroupBy == TopoDroidSetting.GROUP_BY_DISTANCE )?
                 getResources().getString( R.string.group_policy_distance )
@@ -688,6 +647,8 @@ public class GMActivity extends Activity
 
   void computeGroups( long start_id )
   {
+    setTitle( R.string.calib_compute_groups );
+    setTitleColor( TopoDroidConst.COLOR_COMPUTE );
     new CalibComputer( this, start_id, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
   }
 
@@ -698,6 +659,8 @@ public class GMActivity extends Activity
 
   void resetAndComputeGroups( long start_id )
   {
+    setTitle( R.string.calib_compute_groups );
+    setTitleColor( TopoDroidConst.COLOR_COMPUTE );
     new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
   }
 

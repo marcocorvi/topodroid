@@ -38,46 +38,50 @@ Sequence a-b-c-d for the first (forsight) and the third (backsight) policies.<br
 <img src="survey_policy.png">
 <br>
 
-<h4>Shot edit dialog</h4>
+<h4>SHOT EDIT DIALOG [B]</h4>
 If you choose not to have the station assigned automatically, you must set them manually. Tapping on a shot data brings up the shot edit dialog. With it you can set the station(s) (if the shot is blank TopoDroid suggest them for you incrementing those of the previous leg), the direction of extend for the extended section (either left, right, vertical; if none is checked the shot is ignored in the extended profile), and the shot flag (whether it is a regular shot, or duplicate or surface: if no flag is set the shot is "regular").  Finally you can add a brief comment to the shot.  The values of length, azimuth and inclination of shots downloaded from the DistoX or of an imported survey cannot be modified.  For manually entered shots they are editable.  The <u>Reverse</u> button swaps the stations.  The arrow buttons let you move forward and backward over the leg shots.  The <u>OK</u> button save the changes and closes the dialog.  The <u>Save</u> button saves the changes but does not closes the dialog.<br><p>
 
-The shot flags, duplicate and surface, are selected by checking the first and the second button, respectively.<br><p>
-
-This dialog has also other three checkboxes.
+This dialog has five checkbox buttons:<br>
+<img src="shot_dialog_btn2.png"><br>
 <olist>
+<li><i>duplicate leg</i>: this checkbox marks the shot as duplicate, so that it does not count towards the cave statistics</li>
+<li><i>surface</i> denotes a surface shot. Surface shots do not count for the cave statistics either.</li>
 <li><i>repeated leg</i> tells TopoDroid that the shot is a "repeated leg"; the shot stations are blanked out and it is marked as "repeated leg".</li>
 <li><i>splay group</i> is used if only the From station has been entered (and the To station is empty): it changes the From station of all the splay shots of the group. Effectively this assigns the group of splays from one station to another.</li>
 <li><i>renumber</i> is used to rename subsequant shots; if the editing shot is a leg (ie, the From and To stations are specified) and the box is checked, all subsequent shots are renamed according to the current station assignment policy, their type not being changed (ie, splays remain spolay, legs remain leg, and blank shots remain blank).</li>
 </olist>
 <br><p>
 
+
 If you have set the "current station", TopoDroid will continue numbering stations from it. If the current station is not set, the last one is used. Thus you can start a branch in the middle of the survey by selecting the station you want to attach as current station. To set the current station long tap on the station name in the shot list (a normal tap toggles the display of the relevant splay shots when the display of splays is globally disabled). The current station is highlighted green. A long tap on another station switches the current station. A long tap on the current station turns it off. Alternatively, you can replace the from station of the first shot of the branch, afterwards.<br><p>
 
-If you use TopoDroid automatic station assignment, you are likely to need the shot dialog only to enter the comment, and to change the "extend" direction. These two actions can be done also from the drawing window, by selecting the shot in "edit" mode and picking the <u>note</u> button: this is described in the section on the Sketch Activity).<br><p>
+If you use TopoDroid automatic station assignment, you are likely to need the shot dialog only to enter the comment, and to change the "extend" direction. These two actions can be done also from the drawing window, by selecting the shot in "edit" mode and picking the <u>Note</u> button: this is described in the section on the <u>Sketch</u> window).<br><p>
 
-<h4>Other shot actions</h4>
-A long tap on a shot line opens another dialog with the following action(s):
+<h4>OTHER SHOT ACTIONS [A]</h4>
+A long tap on a shot line opens another dialog with buttons for the following action(s):<br>
+<img src="shot_dialog_btn1.png"><br>
 <ulist>
-<li><u>add</u> [A] a shot before it</li>
-<li><u>split</u> [A] the survey at the shot. This opens a dialog to enter the info for the new survey. Starting from this shot the survey data are assigned to the new survey. Afterwards the program continues with the new survey. You may need to split surveys when you have data from two (separate) survey pieces stored in the DistoX: these are downloaded to a single survey which must be then split accordingly.</li>
 <li>take a <u>photo</u>: [A] this starts the Camera app, to take a picture. You should add a note to the picture, to remind you later what it is about</li>
 <li>take a <u>measurement</u> [A] with the Android device sensors, or to enter data taken with an external apparatus</li>
+<li><u>add</u> [A] a shot before it</li>
+<li><u>split</u> [A] the survey at the shot. This opens a dialog to enter the info for the new survey. Starting from this shot the survey data are assigned to the new survey. Afterwards the program continues with the new survey. You may need to split surveys when you have data from two (separate) survey pieces stored in the DistoX: these are downloaded to a single survey which must be then split accordingly.</li>
 <li><u>delete</u> the shot (the shot is not really deleted, just marked as such, and can be recovered)</li>
 </ulist><br><p>
 
+
 <h4>PHOTOS [A]</h4>
 When you choose to take a picture at a shot, you must first enter a brief comment of the photo, then you can take the photo (with the Camera app).  The survey photos are stored in the subdirectory of <i>TopoDroid/photo</i> with the name of the survey. Each photo record is automatically timestamped.<br>
-The list of the survey photos is displayed with the "Photo" button of the "survey info" window. Tapping an item on the list a dialog is shown to edit the photo comment, or to delete the photo.<br><p>
+The list of the survey photos is displayed with the <u>Photo</u> button of the <u>Survey Info</u> window. Tapping an item on the list a dialog is shown to edit the photo comment, or to delete the photo.<br><p>
 
 <h4>SENSOR MEASUREMENTS [A]</h4>
-With the "measurement" dialog you can record the value of a measure taken with an Android sensor, and store it associated to the shot, ie, localized with respect to the survey. Each measurement is automatically timestamped. You can also enter values taken with external devices, provided you specify a "type" name.<br>
-The list of measurements is displayed with the "Sensor" button of the "survey" window.<br><p>
+With the <u>Measurement</u> dialog you can record the value of a measure taken with an Android sensor, and store it associated to the shot, ie, localized with respect to the survey. Each measurement is automatically timestamped. You can also enter values taken with external devices, provided you specify a "type" name.<br>
+The list of measurements is displayed with the <u>Sensor</u> button of the <u>Survey Info</u> window.<br><p>
 
 <hr>
 
 This about covers all the actions one can do with shots, but you do not need to master all of them. The important things are really few: they amount to properly assign stations to the shots, maybe flags, and add comments.<br><p>
 
-To exit TopoDroid shot-list window double tap on the "BACK" button of your device.<br><p>
+To exit TopoDroid shot-list window double tap on the <u>BACK</u> button of your device.<br><p>
 
 <a href="manual08.htm"><img src="ic_back.png"></a>
 <a href="manual10.htm"><img src="ic_forw.png"></a>

@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -84,10 +85,20 @@ public class AzimuthDialDialog extends Dialog
     mBTback = (Button) findViewById(R.id.btn_back );
     mBTfore = (Button) findViewById(R.id.btn_fore );
     mBTazimuth = (Button) findViewById(R.id.btn_azimuth );
-    mBTsensor  = (Button) findViewById(R.id.btn_sensor );
+    // mBTsensor  = (Button) findViewById(R.id.btn_sensor );
     mBTok      = (Button) findViewById(R.id.btn_ok );
     mBTleft    = (Button) findViewById(R.id.btn_left );
     mBTright   = (Button) findViewById(R.id.btn_right );
+
+    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
+    int size = TopoDroidApp.getScaledSize( mContext );
+    layout4.setMinimumHeight( size + 10 );
+
+    mBTsensor = new MyCheckBox( mContext, size, R.drawable.iz_compass, R.drawable.iz_compass ); 
+    // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBTsensor.getLayoutParams();
+    // params.setMargins( 10, 0, 0, 10 );
+    // mBTsensor.setLayoutParams( params );
+    layout4.addView( mBTsensor );
 
     mBTback.setOnClickListener( this );
     mBTfore.setOnClickListener( this );

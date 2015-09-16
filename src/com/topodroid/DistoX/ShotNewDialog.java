@@ -122,7 +122,8 @@ public class ShotNewDialog extends Dialog
     mETright    = (EditText) findViewById(R.id.shot_right );
     mETup       = (EditText) findViewById(R.id.shot_up );
     mETdown     = (EditText) findViewById(R.id.shot_down );
-    mCBsplayAtTo = (CheckBox) findViewById( R.id.splay_at_to );
+
+
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
@@ -188,7 +189,23 @@ public class ShotNewDialog extends Dialog
     mBtnOk    = (Button) findViewById(R.id.button_ok_shot_name );
     mBtnSave  = (Button) findViewById(R.id.button_save_shot_name );
     // mBtnBack  = (Button) findViewById(R.id.button_back_shot_name );
-    mBtnSensor = (Button) findViewById(R.id.button_sensor );
+
+    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
+    int size = TopoDroidApp.getScaledSize( mContext );
+    layout4.setMinimumHeight( size + 10 );
+
+    mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass, R.drawable.iz_compass ); 
+    mCBsplayAtTo = new CheckBox( mContext );
+    mCBsplayAtTo.setText( R.string.splay_at_to );
+    layout4.addView( mBtnSensor );
+    layout4.addView( mCBsplayAtTo );
+    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBtnSensor.getLayoutParams();
+    params.setMargins( 0, -10, 40, 10 );
+    mBtnSensor.setLayoutParams( params );
+
+    // mCBsplayAtTo = (CheckBox) findViewById( R.id.splay_at_to );
+    // mBtnSensor = (Button) findViewById(R.id.button_sensor );
+    mBtnSensor.setOnClickListener( this );
 
     mRadioLeft  = (RadioButton) findViewById(R.id.radio_left );
     mRadioVert  = (RadioButton) findViewById(R.id.radio_vert );
@@ -202,7 +219,6 @@ public class ShotNewDialog extends Dialog
     mBtnOk.setOnClickListener( this );
     mBtnSave.setOnClickListener( this );
     // mBtnBack.setOnClickListener( this );
-    mBtnSensor.setOnClickListener( this );
 
     setTitle( R.string.shot_info );
   }

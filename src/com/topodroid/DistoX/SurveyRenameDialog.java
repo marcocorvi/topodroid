@@ -46,9 +46,9 @@ public class SurveyRenameDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setContentView(R.layout.survey_rename_dialog);
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     mBtnOK  = (Button) findViewById(R.id.btn_ok );
     // mBtnCancel = (Button) findViewById(R.id.btn_cancel );
 

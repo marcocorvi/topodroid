@@ -33,7 +33,7 @@
         android:layout_height="wrap_content" 
         android:scrollHorizontally="true"
         android:hint="@string/shot_from"
-        android:nextFocusDown="@+id/shot_to"
+        android:nextFocusRight="@+id/shot_to"
         android:singleLine="true"
         />
       <EditText android:id="@+id/shot_to" 
@@ -42,7 +42,7 @@
         android:layout_weight="50"
         android:layout_height="wrap_content" 
         android:scrollHorizontally="true"
-        android:nextFocusDown="@+id/shot_distance"
+        android:nextFocusRight="@+id/shot_distance"
         android:hint="@string/shot_to"
         android:singleLine="true"
         />
@@ -62,7 +62,7 @@
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="&#x2190;&#x2192;"
-        android:nextFocusDown="@+id/shot_bearing"
+        android:nextFocusRight="@+id/shot_bearing"
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_bearing" 
@@ -71,7 +71,7 @@
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="&#x2191;N"
-        android:nextFocusDown="@+id/shot_clino"
+        android:nextFocusRight="@+id/shot_clino"
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_clino" 
@@ -80,7 +80,7 @@
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="/_"
-        android:nextFocusDown="@+id/shot_left"
+        android:nextFocusRight="@+id/shot_left"
         android:singleLine="true"
         />
       <TextView 
@@ -107,7 +107,7 @@
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="&#x2190;&#x2192;"
-        android:nextFocusDown="@+id/shot_backbearing"
+        android:nextFocusRight="@+id/shot_backbearing"
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_backbearing" 
@@ -116,7 +116,7 @@
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:hint="&#x2191;N"
-        android:nextFocusDown="@+id/shot_backclino"
+        android:nextFocusRight="@+id/shot_backclino"
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_backclino" 
@@ -150,7 +150,7 @@
         android:layout_weight="25"
         android:layout_height="wrap_content" 
         android:hint="&#x21A4;"
-        android:nextFocusDown="@+id/shot_right"
+        android:nextFocusRight="@+id/shot_right"
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_right" 
@@ -159,7 +159,7 @@
         android:layout_weight="25"
         android:layout_height="wrap_content" 
         android:hint="&#x21A6;"
-        android:nextFocusDown="@+id/shot_up"
+        android:nextFocusRight="@+id/shot_up"
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_up" 
@@ -168,7 +168,7 @@
         android:layout_weight="25"
         android:layout_height="wrap_content" 
         android:hint="&#x21A5;"
-        android:nextFocusDown="@+id/shot_down"
+        android:nextFocusRight="@+id/shot_down"
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_down" 
@@ -177,39 +177,16 @@
         android:layout_weight="25"
         android:layout_height="wrap_content" 
         android:hint="&#x21A7;"
-        android:nextFocusDown="@+id/top"
+        android:nextFocusRight="@+id/top"
         android:singleLine="true"
-        />
-    </LinearLayout>
-
-
-    <LinearLayout 
-      android:id="@+id/layout4"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content"
-      android:layout_below="@id/layout3"
-      android:layout_marginTop="10dp"
-      android:orientation="horizontal" 
-      >
-      <Button android:id="@+id/button_sensor"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:background="@drawable/button"
-          style="@style/button_default"
-          android:text="@string/button_direction"
-          />
-      <CheckBox android:id="@+id/splay_at_to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/splay_at_to"
         />
     </LinearLayout>
 
     <RadioGroup 
       android:id="@+id/radio5"
+      android:layout_below="@id/layout3"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout4"
       android:layout_marginTop="10dp"
       android:orientation="horizontal" 
       >
@@ -230,6 +207,46 @@
         android:text="@string/extend_right" />
     </RadioGroup>
     
+
+    <LinearLayout 
+      android:id="@+id/layout4"
+      android:layout_below="@id/radio5"
+      android:layout_width="fill_parent" 
+      android:layout_height="50dp"
+      android:paddingLeft="10dp"
+      android:paddingRight="10dp"
+      android:orientation="horizontal" 
+      />
+
+    <!-- LinearLayout 
+      android:id="@+id/layout4"
+      android:layout_below="@id/radio5"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:orientation="horizontal" 
+      >
+      <!== Button android:id="@+id/button_sensor"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_direction"
+          / ==>
+      <Button android:id="@+id/button_sensor"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/iz_sensor"
+          android:layout_marginRight="10dp"
+          />
+
+      <CheckBox android:id="@+id/splay_at_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splay_at_to"
+        />
+    </LinearLayout -->
+
     <!-- Spinner  android:id="@+id/extend"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
@@ -237,10 +254,11 @@
 
     <LinearLayout 
       android:id="@+id/layout6"
+      android:layout_below="@id/layout4"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/radio5"
       android:orientation="horizontal" 
+      android:layout_gravity="right"
       android:layout_marginTop="25dip"
       >
         <!-- Button android:id="@+id/button_back_shot_name"
@@ -257,6 +275,15 @@
         android:orientation="horizontal"
         android:layout_gravity="right"
         >
+
+      <Button android:id="@+id/button_ok_shot_name"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="right"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
    		
       <Button android:id="@+id/button_save_shot_name"
         android:layout_width="wrap_content" 
@@ -266,15 +293,6 @@
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_save"
-      />
-
-      <Button android:id="@+id/button_ok_shot_name"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_gravity="right"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_ok"
       />
    		
       </LinearLayout>

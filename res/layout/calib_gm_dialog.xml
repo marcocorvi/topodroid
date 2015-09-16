@@ -61,6 +61,7 @@
       android:orientation="horizontal" 
       android:layout_marginTop="40dp" 
       >
+<!--
       <CheckBox android:id="@+id/gm_regroup"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
@@ -88,6 +89,7 @@
           style="@style/button_default"
           />
       </LinearLayout>
+-->
   </LinearLayout>
    		
   <android.inputmethodservice.KeyboardView

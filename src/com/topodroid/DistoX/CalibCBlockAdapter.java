@@ -50,6 +50,7 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
       tw.setText( b.toString() );
       tw.setTextSize( TopoDroidSetting.mTextSize );
       tw.setTextColor( b.color() );
+      tw.setBackgroundColor( (b.mStatus == 0)? 0xff000000 : 0xff666666 );
     }
     return v;
   }

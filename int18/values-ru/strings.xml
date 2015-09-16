@@ -404,8 +404,8 @@
     <!-- OK string name="button_measure"   >Изменить   </string -->
     <string name="button_photo"   >Фото</string>
     <string name="button_sensor"  >Датчики</string>
-    <string name="button_direction">Азимут/угол</string>
-    <string name="button_azimuth">Азимут</string>
+    <!-- UNUESD string name="button_direction">Азимут/угол</string -->
+    <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Нет       </string>
     <string name="button_open"      >Откр      </string>

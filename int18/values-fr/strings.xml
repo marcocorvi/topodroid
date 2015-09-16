@@ -397,8 +397,8 @@
     <!-- string name="button_measure"   >Mesure   </string -->
     <string name="button_photo"   >Photos</string>
     <string name="button_sensor"  >Mesures</string>
-    <!-- TODO string name="button_direction">Azimuth/Clino</string -->
-    <!-- TODO string name="button_azimuth">Azimuth</string -->
+    <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
+    <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Non        </string>

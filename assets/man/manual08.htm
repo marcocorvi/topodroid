@@ -54,7 +54,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the <u>Team</u> field when you create a new survey. You can write your name and that of the cavers you usually survey with.</li>
 <li><i>Survey stations</i>: this tells the program how to automatically assign survey stations to the shots. (This is further explained below).</li>
 <li><i>Station names</i> specifies the type of the station names, either alphanumeric (default) or numeric [B].</li>
-<li><i>Initial station name</i>: the default first station name for new surveys. Can be also changed in the New survey dialog.</li>
+<li><i>Initial station name</i>: the default first station name for new surveys. Can be also changed in the <i>New survey</i> dialog.</li>
 <li><i>Leg tolerance</i>: the angular tolerance (radians) between consecutive shots to belong to the same leg</li>
 <li><i>Splay extend</i>: whether to assign the extend direction to splay shots or set "vertical" extend to them</li> 
 <li><i>Vertical extend angle</i>: the "extend" direction assigned to a splay shot depends on the angle it makes with the leg(s). When the angle is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, depending whether the angle it makes with the leg is smaller or larger than 90 degrees.</li>
@@ -75,7 +75,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 </ulist><br><p>
 
 <h4>DISPLAY MODE</h4>
-The "Display" button opens a dialog with choices for "shot id", "splay shots", "blank shots", and "repeated leg shots". The "shots id" are unique increasing indices assigned by TopoDroid to the shots of the survey. Splay shots can be shown or hidden. Blank shots can be either all shown or hidden. The same for repeated-leg shots.<br><p>
+The <u>Display</u> button opens a dialog with choices for "shot id", "splay shots", "blank shots", and "repeated leg shots". The "shots id" are unique increasing indices assigned by TopoDroid to the shots of the survey. Splay shots can be shown or hidden. Blank shots can be either all shown or hidden. The same for repeated-leg shots.<br><p>
 
 If the splay shots are hidden it is still possible to show the splay shots for an individual station. Tapping on the station name in a leg shot, makes the splay shots at that station visible. Tapping again on the station name (even in a splay shot) hides them.<br><p>
 
@@ -85,7 +85,7 @@ When a new shot is downloaded TopoDroid sets its "extend" automatically. This ho
 It is also possible to fix the "extend" for coming shots to either LEFT or RIGHT, by selecting the appropriate buttons in the dialog.<br><p>
 
 <h4>SAVED STATIONS [N]</h4>
-The "Stations" button brings up the "Saved Stations" dialog.
+The <u>Stations</u> button brings up the <i>Saved Stations</i> dialog.
 The "saved stations" are stations saved for later reference, eg, at a crossway, to go back and continue the
 survey from there, or to mark a possible lead to check in a future trip.
 The dialog displays the list of saved stations. You select one by tapping it. 
@@ -101,7 +101,7 @@ The buttons acts on the selected station:
 <li>delete the saved station</li>
 </ulist><br><p>
 
-<h4>DISTOX DATA DOWNLOAD</h4>
+<h4>DISTOX DATA DOWNLOAD [B]</h4>
 The <u>Download</u> button starts a connection with the DistoX to download data.  While the connection is active it stays red. If you are using the "on-demand" download-mode the connection is closed when there are no more data to retrieve. With the "continuous" download-mode the connection remains open (and data are continuously downloaded as soon as the measurements are taken) until the DistoX and the Android lose the Bluetooth connection.  Which mode is best suited for you depends on your habits. With the on-demand mode you can concentrate on sketching and other tasks without being bothered by incoming data, and when you download the data you can focus on them (they are highlighted blue). On the other hand on-demand download requires pauses to get the data, and these are especially long if you took several shots in the between.<br><p>
 
 In the Bluetooth connection with the DistoX is broken (eg. the DistoX gets too far from the Android, or it is switched off) the data download is interrupted. In continuous-mode, if the "Auto reconnect" setting is selected, TopoDroid retries to connect to the DistoX every few seconds.<br><p>
@@ -121,7 +121,7 @@ To add a splay shot enter "." (period) or "-" (dash) in the "To" station.
 LRUD can be added to a splay shot, thus providing additional splay shots.
 In this case the LRUD refer to the "From" station.<br><p>
 
-The "Save" button at the bottom inserts the shot into the survey, and updates the station names incrementing them so that the dialog is ready to input the next shot. The "OK" button inserts the shot in the survey, and closes
+The <u>Save</u> button at the bottom inserts the shot into the survey, and updates the station names incrementing them so that the dialog is ready to input the next shot. The <u>OK</u> button inserts the shot in the survey, and closes
 the dialog. If LRUD are specified the respective splay shots are also inserted.<br><p>
 
 <a href="manual07.htm"><img src="ic_back.png"></a>
