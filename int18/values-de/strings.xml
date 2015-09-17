@@ -196,6 +196,8 @@
     <string name="barrier_del">Weiter Mittellinie Anzeige?</string>
 
     <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
+    <!-- TODO string name="bad_line">Bad line type</string -->
+    <!-- TODO string name="bad_point">Bad point type</string -->
 
 <!-- ERRORS: MISSING SOMETHING -->
     <string name="no_calib">Keine Kalibrierung</string>

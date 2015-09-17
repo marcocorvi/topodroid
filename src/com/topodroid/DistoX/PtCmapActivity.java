@@ -44,21 +44,8 @@ public class PtCmapActivity extends Activity
   static String mCmapLine[] = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
   static String mCmapPoint[] = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
 
-  private EditText mETline0;
-  private EditText mETline1;
-  private EditText mETline2;
-  private EditText mETline3;
-  private EditText mETline4;
-  private EditText mETline5;
-  private EditText mETline6;
-
-  private EditText mETpoint0;
-  private EditText mETpoint1;
-  private EditText mETpoint2;
-  private EditText mETpoint3;
-  private EditText mETpoint4;
-  private EditText mETpoint5;
-  private EditText mETpoint6;
+  private EditText mETline[];
+  private EditText mETpoint[];
 
   private Button mBtOk;
 
@@ -85,29 +72,34 @@ public class PtCmapActivity extends Activity
     }
   }
 
-  private void setPreference()
+  private boolean setPreference()
   {
     StringBuilder sb = new StringBuilder();
-    sb.append( mETline0.getText().toString().trim() + " " );
-    sb.append( mETline1.getText().toString().trim() + " " );
-    sb.append( mETline2.getText().toString().trim() + " " );
-    sb.append( mETline3.getText().toString().trim() + " " );
-    sb.append( mETline4.getText().toString().trim() + " " );
-    sb.append( mETline5.getText().toString().trim() + " " );
-    sb.append( mETline6.getText().toString().trim() + " " );
-    sb.append( mETpoint0.getText().toString().trim() + " " );
-    sb.append( mETpoint1.getText().toString().trim() + " " );
-    sb.append( mETpoint2.getText().toString().trim() + " " );
-    sb.append( mETpoint3.getText().toString().trim() + " " );
-    sb.append( mETpoint4.getText().toString().trim() + " " );
-    sb.append( mETpoint5.getText().toString().trim() + " " );
-    sb.append( mETpoint6.getText().toString().trim() );
+    for ( int k=0; k<7; ++k ) {
+      String txt = mETline[k].getText().toString().trim();
+      if ( ! DrawingBrushPaths.hasLineThName( txt ) ) {
+        mETline[k].setError( getResources().getString( R.string.bad_line ) );
+        return false;
+      }
+      if ( k > 0 ) sb.append( " " );
+      sb.append( txt );
+    }
+    for ( int k=0; k<7; ++k ) {
+      String txt = mETpoint[k].getText().toString().trim();
+      if ( ! DrawingBrushPaths.hasPointThName( txt ) ) {
+        mETpoint[k].setError( getResources().getString( R.string.bad_point ) );
+        return false;
+      }
+      sb.append( " " );
+      sb.append( txt );
+    }
     String cmap = sb.toString();
 
     mApp.setPtCmapPreference( cmap );
     Intent intent = new Intent();
     intent.putExtra( TopoDroidTag.TOPODROID_CMAP, cmap );
     setResult( RESULT_OK, intent );
+    return true;
   }
     
 
@@ -132,37 +124,40 @@ public class PtCmapActivity extends Activity
     ((Button) findViewById( R.id.btn5 ) ).setBackgroundColor( 0xff00ff00 );
     ((Button) findViewById( R.id.btn6 ) ).setBackgroundColor( 0xffffff00 );
 
-    mETline0 = (EditText) findViewById( R.id.etline0 );
-    mETline1 = (EditText) findViewById( R.id.etline1 );
-    mETline2 = (EditText) findViewById( R.id.etline2 );
-    mETline3 = (EditText) findViewById( R.id.etline3 );
-    mETline4 = (EditText) findViewById( R.id.etline4 );
-    mETline5 = (EditText) findViewById( R.id.etline5 );
-    mETline6 = (EditText) findViewById( R.id.etline6 );
+    mETline  = new EditText[7];
+    mETpoint = new EditText[7];
 
-    mETline0.setText( mCmapLine[0] );
-    mETline1.setText( mCmapLine[1] );
-    mETline2.setText( mCmapLine[2] );
-    mETline3.setText( mCmapLine[3] );
-    mETline4.setText( mCmapLine[4] );
-    mETline5.setText( mCmapLine[5] );
-    mETline6.setText( mCmapLine[6] );
+    mETline[0] = (EditText) findViewById( R.id.etline0 );
+    mETline[1] = (EditText) findViewById( R.id.etline1 );
+    mETline[2] = (EditText) findViewById( R.id.etline2 );
+    mETline[3] = (EditText) findViewById( R.id.etline3 );
+    mETline[4] = (EditText) findViewById( R.id.etline4 );
+    mETline[5] = (EditText) findViewById( R.id.etline5 );
+    mETline[6] = (EditText) findViewById( R.id.etline6 );
 
-    mETpoint0 = (EditText) findViewById( R.id.etpoint0 );
-    mETpoint1 = (EditText) findViewById( R.id.etpoint1 );
-    mETpoint2 = (EditText) findViewById( R.id.etpoint2 );
-    mETpoint3 = (EditText) findViewById( R.id.etpoint3 );
-    mETpoint4 = (EditText) findViewById( R.id.etpoint4 );
-    mETpoint5 = (EditText) findViewById( R.id.etpoint5 );
-    mETpoint6 = (EditText) findViewById( R.id.etpoint6 );
+    mETline[0].setText( mCmapLine[0] );
+    mETline[1].setText( mCmapLine[1] );
+    mETline[2].setText( mCmapLine[2] );
+    mETline[3].setText( mCmapLine[3] );
+    mETline[4].setText( mCmapLine[4] );
+    mETline[5].setText( mCmapLine[5] );
+    mETline[6].setText( mCmapLine[6] );
 
-    mETpoint0.setText( mCmapPoint[0] );
-    mETpoint1.setText( mCmapPoint[1] );
-    mETpoint2.setText( mCmapPoint[2] );
-    mETpoint3.setText( mCmapPoint[3] );
-    mETpoint4.setText( mCmapPoint[4] );
-    mETpoint5.setText( mCmapPoint[5] );
-    mETpoint6.setText( mCmapPoint[6] );
+    mETpoint[0] = (EditText) findViewById( R.id.etpoint0 );
+    mETpoint[1] = (EditText) findViewById( R.id.etpoint1 );
+    mETpoint[2] = (EditText) findViewById( R.id.etpoint2 );
+    mETpoint[3] = (EditText) findViewById( R.id.etpoint3 );
+    mETpoint[4] = (EditText) findViewById( R.id.etpoint4 );
+    mETpoint[5] = (EditText) findViewById( R.id.etpoint5 );
+    mETpoint[6] = (EditText) findViewById( R.id.etpoint6 );
+
+    mETpoint[0].setText( mCmapPoint[0] );
+    mETpoint[1].setText( mCmapPoint[1] );
+    mETpoint[2].setText( mCmapPoint[2] );
+    mETpoint[3].setText( mCmapPoint[3] );
+    mETpoint[4].setText( mCmapPoint[4] );
+    mETpoint[5].setText( mCmapPoint[5] );
+    mETpoint[6].setText( mCmapPoint[6] );
 
     mBtOk = (Button) findViewById( R.id.button_ok );
 
@@ -179,8 +174,9 @@ public class PtCmapActivity extends Activity
   public void onClick( View v )
   {
     if ( (Button)v == mBtOk ) {
-      setPreference();
-      finish();
+      if ( setPreference() ) {
+        finish();
+      }
     }
   }
 

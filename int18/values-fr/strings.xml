@@ -173,6 +173,8 @@
     <string name="barrier_del">Continuer l\'affichage du cheminement ?</string>
 
     <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
+    <!-- TODO string name="bad_line">Bad line type</string -->
+    <!-- TODO string name="bad_point">Bad point type</string -->
 
     <string name="no_calib">Pas d\'étalonnage</string>
     <string name="no_calibration">Aucun d\'étalonnage sélectionné</string>

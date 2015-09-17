@@ -178,6 +178,8 @@
     <string name="barrier_del">Продължаване на антената?</string>
 
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
+    <!-- TODO string name="bad_line">Bad line type</string -->
+    <!-- TODO string name="bad_point">Bad point type</string -->
 
     <string name="no_bt">Липсва Bluetooth</string>
     <string name="no_calib">Липсва калибрация</string>

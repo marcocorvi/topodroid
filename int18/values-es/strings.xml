@@ -171,6 +171,8 @@
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
+    <!-- TODO string name="bad_line">Bad line type</string -->
+    <!-- TODO string name="bad_point">Bad point type</string -->
 
     <string name="no_calib">No hay calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>

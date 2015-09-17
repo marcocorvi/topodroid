@@ -676,7 +676,7 @@ public class DrawingActivity extends ItemDrawer
   private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
   private int mNrButton3 = 8;          // edit
-  private int mNrButton5 = 3;          // erase
+  private int mNrButton5 = 5;          // erase
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
   HorizontalButtonView mButtonView2;
@@ -904,7 +904,7 @@ public class DrawingActivity extends ItemDrawer
       mBMadd     = mApp.setButtonBackground( null, mButtonSize, izons[IC_ADD] );
 
       mButton5 = new Button[ mNrButton5 ];    // ERASE
-      off = (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
+      off = 9 - 3; // FIXME (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
       for ( int k=0; k<mNrButton5; ++k ) {
         mButton5[k] = new Button( this );
         mButton5[k].setPadding(0,0,0,0);
@@ -1568,27 +1568,32 @@ public class DrawingActivity extends ItemDrawer
       // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingActivity onTouch() " );
       // dumpEvent( event );
 
-      float x_canvas = event.getX();
-      float y_canvas = event.getY();
-      // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
-
-      float x_scene = x_canvas/mZoom - mOffset.x;
-      float y_scene = y_canvas/mZoom - mOffset.y;
-      // Log.v("DistoX", "touch scene " + x_scene + " " + y_scene );
-
-      int action = event.getAction() & MotionEvent.ACTION_MASK;
+      int act = event.getAction();
+      int action = act & MotionEvent.ACTION_MASK;
+      int id = 0;
 
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
         mTouchMode = MODE_ZOOM;
         oldDist = spacing( event );
         saveEventPoint( event );
+        return true;
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+        int np = event.getPointerCount();
+        if ( np > 2 ) return true;
         mTouchMode = MODE_MOVE;
-        /* nothing */
+        id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
+        // int idx = rawEvent.findPointerIndex( id );
+        action = MotionEvent.ACTION_DOWN; // force next case
+        /* fall through */
+      }
+      float x_canvas = event.getX(id);
+      float y_canvas = event.getY(id);
+      float x_scene = x_canvas/mZoom - mOffset.x;
+      float y_scene = y_canvas/mZoom - mOffset.y;
+
 
       // ---------------------------------------- DOWN
-
-      } else if (action == MotionEvent.ACTION_DOWN) {
+      if (action == MotionEvent.ACTION_DOWN) {
         // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DOWN at X " + x_canvas + " [" +mBorderInnerLeft + " " + mBorderInnerRight + "] Y " 
         //                                          + y_canvas + " / " + mBorderBottom );
         if ( y_canvas > mBorderBottom ) {
@@ -2525,7 +2530,7 @@ public class DrawingActivity extends ItemDrawer
       int k1 = 3;
       int k2 = 3;
       int k3 = 3;
-      // int k5 = 3; // no normal mButton5
+      int k5 = 3;
       if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
            ( b == mButton5[1] && mMode == MODE_ERASE ) || 
            ( b == mButton3[2] && ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) ) ) { 
@@ -2578,7 +2583,7 @@ public class DrawingActivity extends ItemDrawer
       } else if ( b == mButton1[k1++] ) { //  NOTE
         (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
 
-      } else if ( b == mButton2[k2++] ) { // UNDO
+      } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // UNDO
         mModified = true;
         mDrawingSurface.undo();
         if ( mDrawingSurface.hasMoreUndo() == false ) {
@@ -2586,7 +2591,7 @@ public class DrawingActivity extends ItemDrawer
         }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
-      } else if ( b == mButton2[k2++] ) { // REDO
+      } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // REDO
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
         }
@@ -2594,6 +2599,7 @@ public class DrawingActivity extends ItemDrawer
         new ItemPickerDialog(this, this, mType ).show();
       } else if ( b == mButton2[k2++] ) { //  continueBtn
         setButtonContinue( ! mContinueLine );
+
 
       } else if ( b == mButton3[k3++] ) { // prev
         mMode = MODE_SHIFT;

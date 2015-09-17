@@ -44,6 +44,8 @@ public class DrawingBrushPaths
 
   static Paint getPointPaint( int index ) { return mPointLib.getPointPaint( index ); }
 
+  static boolean hasPointThName( String th_name ) { return mPointLib.hasAnyPoint( th_name ); }
+
   static boolean pointHasText( int index ) { return mPointLib.pointHasText( index ); }
 
   static int getPointCsxLayer( int index ) { return mPointLib.pointCsxLayer( index ); }
@@ -104,6 +106,8 @@ public class DrawingBrushPaths
 
   static Paint getLinePaint( int index, boolean reversed ) { return mLineLib.getLinePaint( index, reversed ); }
 
+  static boolean hasLineThName( String th_name ) { return mLineLib.hasAnyLine( th_name ); }
+
   // -----------------------------------------------------------------------
   // AREAS
 
@@ -115,6 +119,8 @@ public class DrawingBrushPaths
   static Paint getAreaPaint( int index ) { return mAreaLib.getAreaPaint( index ); }
 
   static int getAreaColor( int index ) { return mAreaLib.getAreaColor( index ); }
+
+  static boolean hasAreaThName( String th_name ) { return mAreaLib.hasAnyArea( th_name ); }
 
   // --------------------------------------------------------------------------
 

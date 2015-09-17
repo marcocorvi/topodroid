@@ -173,6 +173,8 @@
     <string name="barrier_del">Continuazione restituzione?</string>
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
+    <!-- TODO string name="bad_line">Bad line type</string -->
+    <!-- TODO string name="bad_point">Bad point type</string -->
 
     <string name="no_calib">Nessuna calibrazione</string>
     <string name="no_calibration">Nessuna calibrazione selezionata</string>

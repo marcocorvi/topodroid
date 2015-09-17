@@ -65,7 +65,7 @@ class SymbolAreaLibrary
     return false;
   }
 
-  private boolean hasAnyArea( String th_name ) 
+  boolean hasAnyArea( String th_name ) 
   {
     for ( SymbolArea a : mAnyArea ) {
       if ( th_name.equals( a.mThName ) ) {

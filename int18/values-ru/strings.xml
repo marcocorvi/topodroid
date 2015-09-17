@@ -180,6 +180,8 @@
     <string name="barrier_del">Продолжить показ средней линии?</string>
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
+    <!-- TODO string name="bad_line">Bad line type</string -->
+    <!-- TODO string name="bad_point">Bad point type</string -->
 
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calibration">Калибровка не выбрана</string>

@@ -177,6 +177,8 @@
     <string name="barrier_del">Continue midline display?</string>
 
     <string name="bad_cwd">Project name cannot be path</string>
+    <string name="bad_line">Bad line type</string>
+    <string name="bad_point">Bad point type</string>
 
     <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">No calibration</string>
