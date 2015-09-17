@@ -1,7 +1,70 @@
 <html><body>
-<h3>[15] THE FINAL MAP</h3>
+<h3>[15] IMPORT EXPORT </h3>
+When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey. You can use it to transfer the survey to another android.<br>
 
-When you are done, export the survey as <i>Therion</i> file and make a zip archive.  Next download the zip to your PC and unzip it.  You can complete the cave map either with <i>Therion</i> or <i>cSurvey</i>.<br><p>
+After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to.  TopoDroid supports a limited syntax of the other cave survey programs.<br><p>
+
+<h4>Therion</h4>
+<i>Therion</i> is the cave map drafting program of choice for TopoDroid. Sketches are "natively" saves as Therion files. Beware that TopoDroid does not add to closed lines (in particular area borders) an extra point coinciding with the first point, as "xtherion" does.<br>
+
+Survey data are exported in <i>Therion</i> format, using the data "normal" form. The team names are commented. Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br>
+
+TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion commands "units", "flag", and "extend" are supported.<br><p>
+
+<h4>Compass</h4>
+<i>Compass</i> data file are supported both in imput and in export.<br><p>
+
+<h4>Walls</h4>
+Survey data can be exported as <i>Walls</i> files.<br><p>
+
+<h4>Survex</h4>
+Survey data can be exported as <i>Survex</i> files.<br><p>
+
+<h4>VisualTopo</h4>
+<i>VisualTopo</i> data file are supported both in imput and in export.<br><p>
+
+<h4>PocketTopo</h4>
+TopoDroid supports <i>PocketTopo</i> bothi in import and in export.
+However, <i>PocketTopo</i> exports contain only the survey data, while, on imoport, "outline" and "profile" sketches are imported as Therion files. As <i>PocketTopo</i> uses only a few colors to differentiate line types, a map from colors to therion_types is used. The line and point types are selected through a setting.<br><p>
+
+It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch [A] in the <i>Sketch</i> window, to fit the centerline.<br><p>
+
+<h4>cSurvey</h4>
+There are two exports as <i>cSurvey</i> files. You can export the survey data, or you can export a sketch. The former contains only the survey data. The latter contains also the plna and extended profile sketches. If your survey has only one sketch this is a complete export of your work (except for the cross-sections), however, if the survey has more than one sketch, only one of them is included in the <i>cSurvey</i> file.<br>
+
+The sketch items are distributed on suitable <i>cSurvey</i> layers.<br><p>
+
+<h4>PLT</h4>
+Survey data can be exported as track file (<i>OziExplorer</i>).<br><p>
+
+<h4>KML</h4>
+Survey data can be exported as KML file (<i>GoogleEarth</i>).<br><p>
+
+<h4>CSV</h4>
+Survey data can be esported as a list of records with comma-separated fields: "from" station, "to" station, distance, azimuth, clino, and if present the flag. Shot comments are not exported. A brief header is prepended to the data list.<br><p>
+
+<h4>DXF</h4>
+There are two kinds of DXF exports. Survey data are exported as 3D DXF. Sketches are exported as 2D DXF (ie, sketch items lie in the Z=0 plane).<br>
+
+The 3D DXF have layers for "stations", "legs", and "splay" shots. The 2D DXF have also layers for each point, line, and area type.<br><p>
+
+<h4>SVG</h4>
+Sketches can be exported as SVG files.<br><p>
+
+<h4>PNG</h4>
+Image file in PNG format is used only to export sketches. The image resolution (pixels per meter) can be changed through a setting. If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds.<br><p>
+
+<h4>Import/Export settings</h4>
+<ulist>
+<li><i>PocketTopo color-map</i>: defines how to map PocketTopo colors on types of sketch items, for import of PocketTopo files.</li> 
+<li><u>Data export format</u>: defines the default format to which data are exported and inserted in the ZIP export.</li>
+<li><u>Station prefix</u>: whether to add the survey prefix to the stations for the cSurvey export.</li>
+<li><i>PNG resolution</i>: the resolution of the PNG files for sketch exports. It can be a number between 1 and 10. The higher the bigger the image (if you set it too high the system may not have enough memory to create the PNG).</li> 
+<li><u>DXF scale</u>: scale of the DXF export of sketches.</li>
+</ulist><br><p>
+
+<h4>THE FINAL MAP</h4>
+This section describes the use of <i>Therion</i> or <i>cSurvey</i> to draft the final map.<br><p>
 
 You will find, among other things, the survey notes (a text file), the sketch files (Therion th2 files), and the survey Therion th file.  In this file the inclusion of the sketches is written but it is commented.  To get the drawing in the exported PDF files you must uncomment them.  It is a good idea to add a map for each sketch (scrap); actually two maps one for the plan the other for the extended section.<br><p>
 

@@ -108,7 +108,7 @@ public class DistoXManualDialog extends Activity
     adapter.add("12. Sketch drawing");
     adapter.add("13. Cross-sections");
     adapter.add("14. Overview window");
-    adapter.add("15. The final map");
+    adapter.add("15. Import/Export");
     if ( TopoDroidApp.mCosurvey ) adapter.add("16. Co-surveying");
     adapter.add("* Website");
  
