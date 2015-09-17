@@ -624,7 +624,9 @@
   <string name="pref_plot_screen_title">OPCIONES DE PANTALLA DEL DIBUJO</string>
   <string name="pref_tool_screen_title">OPCIONES DE PALETA DE DIBUJO</string>
   <string name="pref_location_title">OPCIONES DE UBICACIÓN</string>
+  <!-- TODO string name="pref_accuracy_title">ACCURACY</stringi -->
   <string name="pref_shot_data_title">OPCIONES DATOS DE LA TOMA</string>
+  <!-- TODO string name="pref_shot_units_title">DATA UNITS</string -->
   <string name="pref_cwd_title">Directorio principal</string>
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->

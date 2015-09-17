@@ -20,6 +20,18 @@
      <item>--</item>
   </string-array>
 
+  <!-- TODO string-array name="extraButtons">
+     <item name="basic">Basic</item>
+     <item name="normal">Normal</item>
+     <item name="advanced">Advanced</item>
+     <item name="experimental">Experimental</item>
+  </string-array -->
+
+  <!-- string-array name="sizeButtons">
+     <item name="small1">Small</item>
+     <item name="large">Large</item>
+  </string-array -->
+
   <string-array name="logStream">
      <item name="android">Registro del sistema</item>
      <item name="file">Archivo de registro</item>
