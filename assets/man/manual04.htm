@@ -3,50 +3,50 @@
 
 The main window has three (or five) buttons at the top, and 
 the list of the surveys underneath. This list is empty until you create a survey.
-The first time you start the app a welcome message is shown: read it! It is important: it is a disclaimer. You can go back to it any time later with the <u>About</u> menu.<br><p>
+The first time you start the app a welcome message is shown. You can go back to it any time later with the <u>About</u> menu.<br><p>
 
 To exit TopoDroid main window double tap on the <i>BACK</i> button of your device.<br><p>
 
 
 <h4>MENUS</h4>
 <ulist>
-<li><u>Palette</u> allows to choose the drawing tools that are enabled. TopoDroid has many drawing tools, several of which you might not need. Having only the relevant tools enabled in the palette, makes easier to switch from one to the other in the <u>Tool Picker</u> dialog.</li>
+<li><u>Palette</u> allows to choose the drawing tools that are enabled. TopoDroid has many drawing tools, several of which you might not need. Having only the relevant ones enabled in the palette, makes faster to switch among them in the <u>Tool Picker</u> dialog.</li>
 <li><u>Cosurvey</u> [E] opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying [experimental level only].</li>
-<li><u>Settings</u>. With this you can choose all the program settings: the global ones and those of surveying, sketching, calibrating, and devices. There are many adjustable settings. The default values should be reasonable enough. One thing you might want to change are the "display units" for lengths; you can choose between meters (default) and feet. Beware that this is just a unit conversion in the display; internally, in the database, TopoDroid stores lengths in meters. Other settings you might want to change are the buttons and texts sizes, and the drawing units</li>
+<li><u>Settings</u>. With this you can choose all the program settings: the global ones and those of surveying, sketching, calibrating, and devices. There are many adjustable settings. The default values should be reasonable enough. One thing you might want to change are the "display units" for lengths; you can choose between meters (default) and feet. Beware that this is just a unit conversion in the display; internally, in the database, TopoDroid stores lengths in meters. Other settings you might want to change are the buttons and texts sizes, and the drawing units.</li>
 <li><u>Logs</u> [E] allows to decide what to log and whether to save to the system log or to a file (in the TopoDroid directory). By default logs are sent to the system log and only error messages are logged. Logging is mostly for debugging [experimental level only]</li>
-<li><u>About</u>: the program welcome message and disclaimer</li>
-<li><u>Help</u> shows a brief descriptions of buttons and menus. At the top-right corner there is a button that opens this user manual. Other TopoDroid windows have similar <u>Help</u> menus</li>
+<li><u>About</u>: the program welcome message</li>
+<li><u>Help</u> shows a brief descriptions of buttons and menus. At the top-right corner there is a button that opens this user manual. Each TopoDroid window has a similar <u>Help</u> menu.</li>
 </ulist><br><p>
 
 <h4>BUTTONS</h4>
 <ulist>
 <li><u>Device activity</u> (DistoX icon): switches to the Device (management) window</li>
 <li><u>Add</u> (a plus sign): used to create a new survey</li>
-<li><u>Import</u> (a vertical arrow): used to import ZIP archives created with TopoDroid or survey files (Therion, Compass, VisualTopo, or PocketTopo).</li>
+<li><u>Import</u> (a vertical arrow): used to import ZIP archives created with TopoDroid or survey files (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, or <i>PocketTopo</i>).</li>
 <li>The optional buttons [E] are for the <i>ThManager</i> (Therion manager) and the <i>SQLite viewer</i>; both require external apps</li>
 </ulist><br><p>
 
 <h4>SETTINGS</h4>
 <ulist>
-<li><i>Work directory</i> sets the current work directory. By default this is "TopoDroid", but it can be changed to another directory in the primary external memory. If the directory does not exists it is created. The database and the data files are stored in the work directory. The drawing tools files, and firmware file are stored in the default "TopoDroid" directory.</li>
+<li><i>Work directory</i> sets the current work directory. By default this is "TopoDroid", but it can be changed to another directory in the primary external memory. If the directory does not exists it is created. The survey database and the data files are stored in the work directory. The drawing tools files, and the DistoX-related files are stored only in the default "TopoDroid" directory.</li>
 <li><i>Language</i>. The available languages are: English, French, German, Italian, Russian, Spanish and Bulgarian. If no language is selected the system language is used.</li>
 <li><i>Text size</i> of items in the lists</li>
 <li><i>Buttons size</i>, either "small" or "large". The small buttons are suitable to a 5" screen. You might want to switch to large buttons if you use a 7" tablet.</li>
 <li><i>Keyboard</i>: whether to enable or diasble the custom keypads.</li>
-<li><i>Bootloader</i>: whether to show the bootloader menu in the Device window. You need it only when you have to upgrade your DistoX2 firmware. So leave it unchecked, and save one menu on the Device window</li>
-<li><i>Cosurveying</i> [E] activate/deactivate the cosurveying service</li>
+<li><i>Bootloader</i>: whether to show the bootloader menu in the Device window. You need it only when you have to upgrade your DistoX2 firmware. So leave it unchecked, and save one menu on the Device window.</li>
+<li><i>Cosurveying</i> [E] activate/deactivate the cosurveying service (very experimental).</li>
 <li><i>Activity level</i>: TopoDroid has four activity levels, differing in the amount of functions that are enabled. The default level ("normal") provides the most common functions. In this way the interface can be kept free of unnecessary buttons (and menus). </li>
 </ulist><br><p>
 
 <h4>Survey import</h4>
-The <i>Import</i> button opens a dialog listing files that can be imported in the app.
+The <u>Import</u> button opens a dialog listing files that can be imported in the app.
 TopoDroid can import the survey files in the followng formats:
 <ulist>
-<li>Therion: ".th" data files, with simple data format ("normal from to length compass clino" and optionally LRUD).
+<li><i>Therion</i>: ".th" data files, with simple data format ("normal from to length compass clino" and optionally LRUD).
 Therion scrap are not imported.</li>
-<li>Compass ".dat" files (not fully tested)</li>
-<li>VisualTopo ".tro" files (not fully tested)</li>
-<li>PocketTopo ".top" files. Data and drawings are imported (not fully tested)</li>
+<li><i>Compass</i> ".dat" files (not fully tested)</li>
+<li><i>VisualTopo</i> ".tro" files (not fully tested)</li>
+<li><i>PocketTopo</i> ".top" files. Data and drawings are imported (not fully tested)</li>
 <li>TopoDroid ZIP archives. These are special zip files with tke informations to repopulate the database, the drawings (".th2" files), the annotation file, and the photoes.</li>
 </ulist><br>
 Zip archives are searched in the "zip" directory (that is where TopoDroid saves them). Survey files are searched in the "import" directory. Therefore you must copy the survey file you want to import in this directory. If the survey name of the file to import already exists in the database the file is not imported.<br><p>
@@ -60,7 +60,7 @@ Logs [E] are different from software crashes. Crashes are due to the program mis
 If <b>bluetooth</b> is not on, the app asks whether to turn it on. Without bluetooth it cannot communicate with the DistoX and the survey data can only be entered manually. In this case the <i>Download</i> button in the Shot window is hidden, and that in the Sketch window is replaced by the <i>Add</i> button.<br><p>
 
 When the app starts the first time it installs the drawing tools files in the "symbol" directory. There are files for points (iconic symbols, like "entrance", or "stalagmite"), lines (like "wall", or "pit"), and areas (regions shown with a transparent color). If you have upgraded the app to a new version it asks if you want to reinstall the drawing tools.<br>
-Even if TopoDroid comes with many drawing tools preinstalled (45 points, 15 lines, and 9 areas), it can happen that it does not contains the tools you need (or you do not like the one provided). The tool files are plain text files, and you can write your own tool file(s). After you put them in the symbol subdirectories, TopoDroid will see and use them. The syntax of tool files is described in a page on the speleoapps website.<br><p>
+Even if TopoDroid comes with many drawing tools preinstalled (45 points, 15 lines, and 9 areas), it can happen that it does not contains the tools you need (or you do not like the one provided). The tool files are plain text files, and you can write your own tool file(s). After you put them in the symbol subdirectories, TopoDroid will see and use them. The syntax of the tool files is described in a page on the speleoapps website.<br><p>
 
 <a href="manual03.htm"><img src="ic_back.png"></a>
 <a href="manual05.htm"><img src="ic_forw.png"></a>
