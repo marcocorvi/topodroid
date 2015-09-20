@@ -209,7 +209,7 @@
     <string name="menu_join_survey">CO-TOPOGRAFÍA</string>
     <string name="menu_logs">REGISTROS</string>
     <!-- NO string name="menu_manual">MANUAL</string -->
-    <string name="menu_manual_calibration">Calibración</string>
+    <string name="menu_manual_calibration">CALIBRACIÓN</string>
     <string name="menu_options">OPCIONES</string>
     <string name="menu_overview">DESCRIPCIÓN GENERAL</string>
     <string name="menu_palette">PALETA</string>
@@ -400,7 +400,7 @@
     <string name="button_reset"     >Resetear  </string>
     <!-- TODO string name="button_left"      >Izquierdo</string -->
     <!-- TODO string name="button_right"     >Derecho</string -->
-    <string name="button_clear"     >Limpiar     </string>
+    <string name="button_clear"     >Borrar     </string>
     <string name="button_save"      >Guardar   </string>
     <string name="button_select"    >Seleccionar </string>
     <string name="button_store"     >Recibir   </string>
@@ -624,8 +624,8 @@
   <string name="pref_plot_screen_title">OPCIONES DE PANTALLA DEL DIBUJO</string>
   <string name="pref_tool_screen_title">OPCIONES DE PALETA DE DIBUJO</string>
   <string name="pref_location_title">OPCIONES DE UBICACIÓN</string>
-  <!-- TODO string name="pref_accuracy_title">PRECISIÓN</stringi -->
-  <string name="pref_shot_data_title">OPCIONES DATOS DE LA TOMA</string>
+  <!-- TODO string name="pref_accuracy_title">OPCIONES DE MEDICIÓN</stringi -->
+  <string name="pref_shot_data_title">OPCIONES DE LAS VISUALES</string>
   <!-- TODO string name="pref_shot_units_title">UNIDADES DE DATOS</string -->
   <string name="pref_cwd_title">Directorio principal</string>
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
@@ -650,8 +650,8 @@
   <string name="pref_accel_thr_summary">Precisión sobre las mediciones aceleración</string>
   <string name="pref_accel_thr_message">Precisión sobre las mediciones aceleración</string>
   <string name="pref_mag_thr_title">Tolerancia magnética</string>
-  <string name="pref_mag_thr_summary">Precisión sobre las mediciones de campo magnético</string>
-  <string name="pref_mag_thr_message">Precisión sobre las mediciones de campo magnético</string>
+  <string name="pref_mag_thr_summary">Precisión sobre las mediciones del campo magnético</string>
+  <string name="pref_mag_thr_message">Precisión sobre las mediciones del campo magnético</string>
   <string name="pref_dip_thr_title">Tolerancia magnética de la inclinación</string>
   <string name="pref_dip_thr_summary">Precisión sobre mediciones magnética de la inclinación</string>
   <string name="pref_dip_thr_message">Precisión sobre mediciones magnética de la inclinación</string>
