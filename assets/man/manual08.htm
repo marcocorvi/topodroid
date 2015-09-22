@@ -9,7 +9,7 @@ The survey name is mandatory. It must be unique in the database. The survey name
 The name of the survey cannot contain the character '/' (slash), which is the pathname separator.<br>
 The date must be written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06".</b><br><p>
 
-Save when you are done, and the new survey name will appear in the list of surveys.  A long tap on a survey name opens the survey info dialog again. You can change any information except the survey name, because once the survey has been committed to the database, the name is used to refer to it.<br><p>
+Save when you are done, and the new survey name will appear in the list of surveys.  A long tap on a survey name opens the survey info dialog again. You can change any information. The survey name is special, because once the survey has been committed to the database, the name is used to refer to it. There is a menu to modify the survey name.<br><p>
 
 If you tap shortly on the survey name the survey data activity starts.  This is one of the two most important activities of TopoDroid. The other is the Sketch activity.<br><p>
 
@@ -44,7 +44,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><u>Display</u>: to choose the display mode (see below)</li>
 <li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in extended-profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches. A long tap on the <u>Sketch</u> button opens immediately the most recent sketch, without going through the sketch list dialog.</li>
 <li><u>Notes</u> opens the dialog to edit the annotations of the survey</li>
-<li><u>Extend</u> defines how to set the "extend" for the coming shots (either downloaded or manually entered).</li>
+<li><u>Extend</u> opens the "EXtend reference" dialog that defines how to set the "extend" for the coming shots (either downloaded or manually entered).</li>
 <li><u>Stations</u> [N]: this buttons opens the dialog for the saved stations</li>
 <li><u>Add</u> [N] adds a shot. In the coming dialog you must enter the shot stations and data (length, azimuth, and clino). You can specify also the direction of "extend", and values for LRUD. By default these are assumed at the FROM station, unless you check the box for the TO station.</li>
 </ulidt><br><p>
@@ -59,7 +59,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><i>Splay extend</i>: whether to assign the extend direction to splay shots or set "vertical" extend to them</li> 
 <li><i>Vertical extend angle</i>: the "extend" direction assigned to a splay shot depends on the angle it makes with the leg(s). When the angle is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, depending whether the angle it makes with the leg is smaller or larger than 90 degrees.</li>
 <li><i>Shot vertical threshold</i>. this is like Therion "vthreshold": the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
-<li><i>Timer</i> is the number of seconds before measuring the direction with the Android sensors (for manual data-input [N])</li>
+<li><i>Timer</i> is the number of seconds before measuring the direction with the Android sensors (for "manual data-input" dialog [N], and for the "extend-reference" dialog))</li>
 <li><i>Beep volume</i> is the volume of the timer beep [N]</li>
 <li><i>Loop closure</i>: whether to do the loop closure error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors</li>
 <li><i>Backsight</i>: whether to add a line with fields for the backsight in the shot manual input dialog [N].</li>
@@ -68,7 +68,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><i>Angle units</i>: either degrees or grads</li>
 <li><i>GSP Averaging</i>: whether to use the app GPSaveraging to locate fixed points [A]. By default this app is not used and the location is carried out by TopoDroid.</li>
 <li><i>Location units</i>: either dd.mm.ss or decimal degrees [A]</li>
-<li><i>C.R.S.</i> coordinate reference system [default is long-lat]</li>
+<li><i>C.R.S.</i> coordinate reference system [default is long-lat] (disabled)</li>
 <li><i>Acceleration tolerance</i>: tolerance on acceleration values above which a shot is signalled anomalous (only DistoX2)</li>
 <li><i>Magnetic tolerance</i>: tolerance on magnetic field values above which a shot is signalled anomalous (only DistoX2)</li>
 <li><i>Magnetic dip tolerance</i>: tolerance on magnetic dip angle values above which a shot is signalled anomalous (only DistoX2) [units degrees]</li>
@@ -85,7 +85,6 @@ When a new shot is downloaded TopoDroid sets its "extend" automatically. This ho
 It is also possible to fix the "extend" for coming shots to either LEFT or RIGHT, by selecting the appropriate buttons in the dialog.<br><p>
 
 <h4>SAVED STATIONS [N]</h4>
-The <u>Stations</u> button brings up the <i>Saved Stations</i> dialog.
 The "saved stations" are stations saved for later reference, eg, at a crossway, to go back and continue the
 survey from there, or to mark a possible lead to check in a future trip.
 The dialog displays the list of saved stations. You select one by tapping it. 
@@ -113,9 +112,9 @@ If you do not have a DistoX you can still enter the shot data manually.
 Tapping the <u>Add</u> button opens the dialog for the shot data input. 
 You must enter the station names and the shot data (length, azimuth, and clino).
 Additionally you can type the LRUD, and select whether these refer to the FROM station or to the TO station.
-There is a button to take the direction (azimuth and clino) with the Android sensors.
+The "compass" button sets the direction (azimuth and clino) using the Android sensors.
 It has a timer (10 s by default) to allow you to point the device before measuring.
-Another button allow to switch the stations, ie, reverse the shot.<br><p>
+The "reverse" button allow to swap the stations, ie, reverse the shot.<br><p>
 
 To add a splay shot enter "." (period) or "-" (dash) in the "To" station.
 LRUD can be added to a splay shot, thus providing additional splay shots.

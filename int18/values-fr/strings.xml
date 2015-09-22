@@ -74,6 +74,7 @@
     <string name="device_model_set">Etes vous sur de vouloir changer le modèle du périphérique ?</string>
     <string name="device_none">Aucun DistoX sélectionné</string>
     <string name="device_pairing">Appairage, vérifier les notifications</string>
+    <!-- TODO string name="device_paired">Device is paired</string -->
     <string name="device_reset">Vider mémoire DistoX</string>
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -119,6 +120,8 @@
     <string name="head_tail">Mémoire : </string>
     <string name="head_tail_failed">Echec de lecture de la mémoire du DistoX</string>
     <string name="head_tail_store_failed">Echec de l\'enregistrement des index de mémoire du DistoX</string>
+    <!-- TODO string name="pairing_failed">Pairing failed</string -->
+
     <string name="illegal_data_value">Valeur de donnée incorrecte</string>
     <string name="label_title">ETIQUETTE</string>
     <string name="label_text">Saisissez le texte</string>
@@ -216,6 +219,7 @@
     <!-- TODO string name="menu_manual_calibration">Calibration</string -->
     <string name="menu_options">OPTIONS</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
+    <!-- TODO string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETTE</string>
     <!-- OK string name="menu_photo">PHOTO</string -->
     <string name="menu_sensor">CAPTEUR</string>
@@ -539,6 +543,7 @@
     <string name="help_read">Lit les coefficients de d\'étalonnage du DistoX</string>
     <string name="help_info_device">Information sur l\'appareil</string>
     <string name="help_scan">Recherche de nouveaux DistoX</string>
+    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
     <string name="help_open_calib">Ouvre l\'étalonnage</string>
     <string name="help_export_calib">Exporte l\'étalonnage</string>
     <string name="help_group">Affecte automatiquement les numéros de groupe</string>

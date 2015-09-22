@@ -20,14 +20,19 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.AsyncTask;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.DialogInterface;
+import android.content.BroadcastReceiver;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -94,6 +99,7 @@ public class DeviceActivity extends Activity
 
   private static int menus[] = {
                         R.string.menu_scan,
+                        R.string.menu_pair,
                         R.string.menu_detach,
                         R.string.menu_calib,
                         R.string.menu_firmware,
@@ -111,6 +117,7 @@ public class DeviceActivity extends Activity
                      };
   private static int help_menus[] = {
                         R.string.help_scan,
+                        R.string.help_pair,
                         R.string.help_detach,
                         R.string.title_calib,
                         R.string.help_firmware,
@@ -124,6 +131,21 @@ public class DeviceActivity extends Activity
 
   // private String mAddress;
   private Device mDevice;
+
+  final BroadcastReceiver mPairReceiver = new BroadcastReceiver()
+  {
+    public void onReceive( Context ctx, Intent intent )
+    {
+      if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( intent.getAction() ) ) {
+        final int state = intent.getIntExtra( BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR );
+        final int prev  = intent.getIntExtra( BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR );
+        if ( state == BluetoothDevice.BOND_BONDED && prev == BluetoothDevice.BOND_BONDING ) {
+          // FIXME Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
+          updateList();
+        }
+      }
+    }
+  };
 
 // -------------------------------------------------------------------
   private void setState()
@@ -294,6 +316,8 @@ public class DeviceActivity extends Activity
       //   if ( mApp.mDevice != null ) {
       //     (new DeviceNameDialog( this, this, mApp.mDevice )).show();
       //   }
+      } else if ( p++ == pos ) { // PAIR
+        pairDevice();
       } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DETACH
         detachDevice();
       } else if ( mApp.VERSION30 && p++ == pos ) { // CALIB
@@ -314,7 +338,7 @@ public class DeviceActivity extends Activity
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 7 ) ).show();
       }
       return;
     }
@@ -348,12 +372,32 @@ public class DeviceActivity extends Activity
 
   void detachDevice()
   {
-    if ( mDevice != null ) {
-      mApp.setDevice( null );
-      mDevice = mApp.mDevice;
-      // mAddress = address;
-      mApp.disconnectRemoteDevice( true );
-      setState();
+    if ( mDevice == null ) return;
+    mApp.setDevice( null );
+    mDevice = mApp.mDevice;
+    // mAddress = address;
+    mApp.disconnectRemoteDevice( true );
+    setState();
+  }
+
+
+
+  void pairDevice()
+  {
+    if ( mDevice == null ) return;
+    BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mDevice.mAddress );
+    if ( device == null ) return;
+    int state = device.getBondState();
+    if ( state == BluetoothDevice.BOND_BONDED ) {
+      // already paired
+      Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
+      return;
+    }
+    try {
+      Method m = device.getClass().getMethod( "createBond", (Class[]) null );
+      m.invoke( device, (Object[]) null );
+    } catch ( Exception e ) {
+      Toast.makeText( this, R.string.pairing_failed, Toast.LENGTH_SHORT).show(); // TODO
     }
   }
 
@@ -487,7 +531,15 @@ public class DeviceActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    registerReceiver( mPairReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
+  }
+
+  @Override
+  public void onPause()
+  {
+    super.onPause();
+    unregisterReceiver( mPairReceiver );
   }
 
   // -----------------------------------------------------------------------------
@@ -681,11 +733,12 @@ public class DeviceActivity extends Activity
     Resources res = getResources();
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TopoDroidSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( mApp.VERSION30 ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TopoDroidSetting.mBootloader ) mMenuAdapter.add( res.getString( menus[3] ) );
-    mMenuAdapter.add( res.getString( menus[4] ) );
+    mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TopoDroidSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( mApp.VERSION30 ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TopoDroidSetting.mBootloader ) mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
+    mMenuAdapter.add( res.getString( menus[6] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }

@@ -1,18 +1,18 @@
 <html><body>
 <h3>[15] IMPORT EXPORT </h3>
-When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey. You can use it to transfer the survey to another android.<br>
+When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey, and its exports. You can use it to transfer the survey to another android.<br>
 
-After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to.  TopoDroid supports a limited syntax of the other cave survey programs.<br><p>
+After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to. The support of other cave survey file format in import may not be complete.<br><p>
 
 <h4>Therion</h4>
-<i>Therion</i> is the cave map drafting program of choice for TopoDroid. Sketches are "natively" saves as Therion files. Beware that TopoDroid does not add to closed lines (in particular area borders) an extra point coinciding with the first point, as "xtherion" does.<br>
+<i>Therion</i> is the cave map drafting program of choice for TopoDroid. Sketches are "natively" saved as Therion files. Beware that TopoDroid does not add to closed lines (in particular area borders) an extra point coinciding with the first point, as "xtherion" does.<br>
 
-Survey data are exported in <i>Therion</i> format, using the data "normal" form. The team names are commented. Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br>
+Survey data are exported in <i>Therion</i> format, using the data "normal" form. The team names are listed but the command is commented. Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br>
 
 TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion commands "units", "flag", and "extend" are supported.<br><p>
 
 <h4>Compass</h4>
-<i>Compass</i> data file are supported both in imput and in export.<br><p>
+<i>Compass</i> data file are supported both in input and in export.<br><p>
 
 <h4>Walls</h4>
 Survey data can be exported as <i>Walls</i> files.<br><p>
@@ -21,11 +21,11 @@ Survey data can be exported as <i>Walls</i> files.<br><p>
 Survey data can be exported as <i>Survex</i> files.<br><p>
 
 <h4>VisualTopo</h4>
-<i>VisualTopo</i> data file are supported both in imput and in export.<br><p>
+<i>VisualTopo</i> data file are supported both in input and in export.<br><p>
 
 <h4>PocketTopo</h4>
-TopoDroid supports <i>PocketTopo</i> bothi in import and in export.
-However, <i>PocketTopo</i> exports contain only the survey data, while, on imoport, "outline" and "profile" sketches are imported as Therion files. As <i>PocketTopo</i> uses only a few colors to differentiate line types, a map from colors to therion_types is used. The line and point types are selected through a setting.<br><p>
+TopoDroid supports <i>PocketTopo</i> both in import and in export.
+However, <i>PocketTopo</i> exports contain only the survey data, while, on import, "outline" and "profile" sketches are imported as Therion files. As <i>PocketTopo</i> uses only a few colors to differentiate line types, a map from colors to therion_types is used. The line and point types are selected through a setting.<br><p>
 
 It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch [A] in the <i>Sketch</i> window, to fit the centerline.<br><p>
 
@@ -57,10 +57,10 @@ Image file in PNG format is used only to export sketches. The image resolution (
 <h4>Import/Export settings</h4>
 <ulist>
 <li><i>PocketTopo color-map</i>: defines how to map PocketTopo colors on types of sketch items, for import of PocketTopo files.</li> 
-<li><u>Data export format</u>: defines the default format to which data are exported and inserted in the ZIP export.</li>
-<li><u>Station prefix</u>: whether to add the survey prefix to the stations for the cSurvey export.</li>
+<li><i>Data export format</i>: defines the default format to which data are exported and inserted in the ZIP export.</li>
+<li><i>Station prefix</i>: whether to add the survey prefix to the stations for the cSurvey export.</li>
 <li><i>PNG resolution</i>: the resolution of the PNG files for sketch exports. It can be a number between 1 and 10. The higher the bigger the image (if you set it too high the system may not have enough memory to create the PNG).</li> 
-<li><u>DXF scale</u>: scale of the DXF export of sketches.</li>
+<li><i>DXF scale</i>: scale of the DXF export of sketches.</li>
 </ulist><br><p>
 
 <h4>THE FINAL MAP</h4>

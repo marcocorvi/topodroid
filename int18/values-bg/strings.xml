@@ -78,6 +78,7 @@
     <string name="device_model_set">Наистина ли искате да промените модела на устройството?</string>
     <string name="device_none">Не е избрано DistoX устройство</string>
     <string name="device_pairing">Свързване: проверка на съобщения</string>
+    <!-- TODO string name="device_paired">Device is paired</string -->
     <string name="device_reset">Изчистване на DistoX паметта</string>
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Фърмуер  %1$d.%2$d</string>
@@ -124,6 +125,7 @@
     <string name="head_tail">Памет: </string>
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
     <string name="head_tail_store_failed">Неуспешен запис на индекс от DistoX паметта</string>
+    <!-- TODO string name="pairing_failed">Pairing failed</string -->
     <string name="illegal_data_value">Невалидни данни</string>
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
@@ -226,6 +228,7 @@
     <string name="menu_manual_calibration">Калибрация</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">Общ изглед</string>
+    <!-- TODO string name="menu_pair">PAIR</string -->
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
@@ -596,6 +599,7 @@
     <string name="help_read">Прочитане и показване на калибр. коефициенти от DistoX</string>
     <string name="help_info_device">Информация за устройството</string>
     <string name="help_scan">Сканиране за DistoX устройства</string>
+    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
     <string name="help_open_calib">Отваряне на калибрация</string>
     <string name="help_export_calib">Експорт на калибрация</string>
     <string name="help_group">Автоматично определяне на групи отсечки</string>

@@ -78,6 +78,7 @@
     <string name="device_model_set">Do you really want to change the model of the device</string>
     <string name="device_none">No DistoX selected</string>
     <string name="device_pairing">Pairing: check notifications</string>
+    <string name="device_paired">Device is paired</string>
     <string name="device_reset">Reset DistoX memory</string>
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -124,6 +125,8 @@
     <string name="head_tail">Memory: </string>
     <string name="head_tail_failed">Failed to read DistoX memory index</string>
     <string name="head_tail_store_failed">Failed to store DistoX memory index</string>
+    <string name="pairing_failed">Pairing failed</string>
+
     <string name="illegal_data_value">Illegal data value</string>
     <string name="label_title">LABEL</string>
     <string name="label_text">Enter the label text</string>
@@ -225,6 +228,7 @@
     <string name="menu_manual_calibration">CALIBRATION</string>
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
+    <string name="menu_pair">PAIR</string>
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
@@ -593,6 +597,7 @@
     <string name="help_read">Read and display DistoX calibration coefficients</string>
     <string name="help_info_device">Device info</string>
     <string name="help_scan">Scan for new DistoX devices</string>
+    <string name="help_pair">Pair the current DistoX device</string>
     <string name="help_open_calib">Open calibration</string>
     <string name="help_export_calib">Export calibration</string>
     <string name="help_group">Assign group numbers automatically</string>

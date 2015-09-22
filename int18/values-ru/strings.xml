@@ -80,6 +80,7 @@
     <string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string>
     <string name="device_none">DistoX не выбран</string>
     <string name="device_pairing">Соединение: проверьте уведомления</string>
+    <!-- TODO string name="device_paired">Device is paired</string -->
     <string name="device_reset">Сброс памяти DistoX</string>
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Прошивка  %1$d.%2$d</string>
@@ -126,6 +127,7 @@
     <string name="head_tail">Память: </string>
     <string name="head_tail_failed">Ошибка чтения индекса памяти DistoX</string>
     <string name="head_tail_store_failed">Не удалось сохранить индекс памяти DistoX</string>
+    <!-- TODO string name="pairing_failed">Pairing failed</string -->
     <string name="illegal_data_value">Недопустимое значение</string>
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
@@ -225,6 +227,7 @@
     <string name="menu_manual_calibration">Калибровка</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">ОБЗОР</string>
+    <!-- TODO string name="menu_pair">PAIR</string -->
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">фото</string>
     <string name="menu_sensor">датчик</string>
@@ -587,6 +590,7 @@
     <string name="help_read">Считать и вывсти коэфиценты калибровки DistoX</string>
     <string name="help_info_device">Информация об устройстве</string>
     <string name="help_scan">Найти новые устройства DistoX</string>
+    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
     <string name="help_open_calib">Открыть калибровку</string>
     <string name="help_export_calib">Экспорт калибровки</string>
     <string name="help_group">Присваивать номер групп автоматически</string>

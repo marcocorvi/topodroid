@@ -87,6 +87,7 @@
     <!-- FIXME string name="device_model_set">Do you really want to change the model of the device</string -->
     <string name="device_none">Kein DistoX ausgewählt</string>
     <string name="device_pairing">Paaren: Benachrichtigungen überprüfen</string>
+    <!-- TODO string name="device_paired">Device is paired</string -->
     <string name="device_reset">DistoX Memory zurücksetzen</string>
     <!-- OK string name="device_code">DistoX code %1$4d</string -->
     <!-- OK string name="device_firmware">Firmware  %1$d.%2$d</string -->
@@ -139,6 +140,7 @@
     <!-- OK string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Fehler beim DistoX Speicherindex lesen</string>
     <string name="head_tail_store_failed">Fehler beim DistoX Speicherindex speichern</string>
+    <!-- TODO string name="pairing_failed">Pairing failed</string -->
     <string name="illegal_data_value">Illegaler Datenwert</string>
 
 <!-- MISC STRINGS -->
@@ -246,6 +248,7 @@
     <!-- TODO string name="menu_manual_calibration">Calibration</string -->
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
+    <!-- TODO string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
@@ -582,6 +585,7 @@
     <string name="help_read">Kalibrierung Koeffizienten auf den DistoX</string>
     <string name="help_info_device">Gerät-Nachrichten</string>
     <string name="help_scan">Neuen DistoX Geräte finden</string>
+    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
     <string name="help_open_calib">Zu der Kalibrierungsdatenaktivität gehen</string>
     <string name="help_export_calib">Die Kalibrierung speichern</string>
     <string name="help_group">Die Grouppenummern automatisch zuweisen</string>

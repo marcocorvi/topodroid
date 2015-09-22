@@ -114,7 +114,7 @@ public class DistoXComm
           mApp.notifyStatus();
           closeSocket( );
           mApp.notifyDisconnected();
-        } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) {
+        // } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
           // final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
           // final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
           // if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
@@ -153,7 +153,7 @@ public class DistoXComm
     mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED ) );
     mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECTED ) );
     // mApp.registerReceiver( mBTReceiver, uuidFilter  = new IntentFilter( myUUIDaction ) );
-    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
+    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST ) );
   }
 
@@ -491,6 +491,8 @@ public class DistoXComm
   private void bindDevice()
   {
     TopoDroidLog.Log( TopoDroidLog.LOG_COMM, " bind device ..." );
+    // if ( mBTDevice == null ) return;
+
     String PIN_CODE = "0000";
     // byte[] pin = new byte[] { 0, 0, 0, 0 };
     byte[] pin = PIN_CODE.getBytes();
@@ -515,21 +517,20 @@ public class DistoXComm
    */
   private void getUuids()
   {
-    if ( mBTDevice != null ) {
-      try {
-        Class cl = Class.forName("android.bluetooth.BluetoothDevice");
-        Class[] pars = {};
-        Method m0 = cl.getMethod( "getUuids", pars );
-        Object[] args = {};
-        ParcelUuid[] uuids = (ParcelUuid[]) m0.invoke( mBTDevice, args );
-        // if ( uuids != null ) {
-        //   for ( ParcelUuid uid : uuids ) {
-        //     TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "uuid " + uid.toString() );
-        //   }
-        // }
-      } catch ( Exception e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "get uuids error " + e.getMessage() );
-      }
+    if ( mBTDevice == null ) return;
+    try {
+      Class cl = Class.forName("android.bluetooth.BluetoothDevice");
+      Class[] pars = {};
+      Method m0 = cl.getMethod( "getUuids", pars );
+      Object[] args = {};
+      ParcelUuid[] uuids = (ParcelUuid[]) m0.invoke( mBTDevice, args );
+      // if ( uuids != null ) {
+      //   for ( ParcelUuid uid : uuids ) {
+      //     TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "uuid " + uid.toString() );
+      //   }
+      // }
+    } catch ( Exception e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "get uuids error " + e.getMessage() );
     }
   }
 
