@@ -21,15 +21,15 @@
   </string-array>
 
   <!-- TODO string-array name="extraButtons">
-     <item name="basic">Basic</item>
+     <item name="basic">Básico</item>
      <item name="normal">Normal</item>
-     <item name="advanced">Advanced</item>
+     <item name="advanced">Avanzado</item>
      <item name="experimental">Experimental</item>
   </string-array -->
 
   <!-- string-array name="sizeButtons">
-     <item name="small1">Small</item>
-     <item name="large">Large</item>
+     <item name="small1">Pequeño</item>
+     <item name="large">Grande</item>
   </string-array -->
 
   <string-array name="logStream">
