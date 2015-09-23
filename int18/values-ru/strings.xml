@@ -844,6 +844,8 @@
   <string name="pref_station_size_message">Размер подписи пикетов</string>
   <string name="pref_zoom_controls_title">Управление зумом</string>
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
+  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
+  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>

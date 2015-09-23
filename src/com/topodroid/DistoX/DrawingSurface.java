@@ -151,7 +151,14 @@ public class DrawingSurface extends SurfaceView
 
     void sharpenLine( DrawingLinePath line, boolean reduce ) { commandManager.sharpenLine( line, reduce ); }
 
-    int eraseAt( float x, float y, float zoom ) { return commandManager.eraseAt( x, y, zoom ); }
+    int eraseAt( float x, float y, float zoom, EraseCommand cmd ) 
+    { return commandManager.eraseAt( x, y, zoom, cmd ); }
+    
+    void addEraseCommand( EraseCommand cmd )
+    {
+      isDrawing = true;
+      commandManager.addEraseCommand( cmd );
+    }
     
     void clearReferences( int type ) 
     {

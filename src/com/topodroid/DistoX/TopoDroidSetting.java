@@ -100,6 +100,7 @@ class TopoDroidSetting
     "DISTOX_STATION_PREFIX",         // whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
     "DISTOX_ZOOM_CTRL",
+    "DISTOX_SIDE_DRAG",              // whether to enable side-drag
     "DISTOX_MKEYBOARD",
     "DISTOX_DXF_SCALE", 
     "DISTOX_LOCALE",                 // 66
@@ -145,6 +146,7 @@ class TopoDroidSetting
   static int mStationNames = 0;          // type of station names (0: alpha, 1: number)
   // static boolean mZoomControls = false;
   static int mZoomCtrl = 0;
+  static boolean mSideDrag = false;
   static boolean mKeyboard = true;
 
   // static void setZoomControls( boolean ctrl )
@@ -623,6 +625,8 @@ class TopoDroidSetting
     // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
     setZoomControls( prefs.getString( key[k++], "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
 
+    mSideDrag = prefs.getBoolean( key[k++], false ); // DISTOX_SIDE_DRAG
+
     mKeyboard = prefs.getBoolean( key[k++], true ); // DISTOX_MKEYBOARD
 
     try {
@@ -951,6 +955,8 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       // setZoomControls( prefs.getBoolean( k, false ) ); // DISTOX_ZOOM_CONTROLS
       setZoomControls( prefs.getString( k, "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mSideDrag = prefs.getBoolean( k, false ); // DISTOX_SIDE_DRAG
     } else if ( k.equals( key[ nk++ ] ) ) {
       mKeyboard = prefs.getBoolean( k, true ); // DISTOX_MKEYBOARD
     } else if ( k.equals( key[ nk++ ] ) ) {

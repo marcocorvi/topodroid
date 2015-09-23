@@ -75,7 +75,7 @@ public class DrawingPointLinePath extends DrawingPath
     
 
   @Override
-  void flipXAxis()
+  public void flipXAxis()
   {
     super.flipXAxis();
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
@@ -212,10 +212,10 @@ public class DrawingPointLinePath extends DrawingPath
 
   private void clear()
   {
-    // mPoints.clear();
     mFirst = null;
     mLast  = null;
     mPath = new Path();
+    mSize = 0;
   }
 
 
@@ -308,6 +308,24 @@ public class DrawingPointLinePath extends DrawingPath
       }
     }
   }
+
+  void resetPath( ArrayList<LinePoint> pts )
+  {
+    clear();
+    int size = pts.size();
+    if ( size <= 1 ) return;
+    LinePoint lp = pts.get(0);
+    addStartPoint( lp.mX, lp.mY );
+    for ( int k=1; k<size; ++k ) {
+      lp = pts.get(k);
+      if ( lp.has_cp ) {
+        addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+      } else {
+        addPoint( lp.mX, lp.mY );
+      }
+    }
+  }
+     
 
   LinePoint insertPointAfter( float x, float y, LinePoint lp )
   {

@@ -770,6 +770,8 @@
   <string name="pref_station_size_message">Tamaño de la etiqueta de la estación</string>
   <string name="pref_zoom_controls_title">Control de Zoom</string>
   <string name="pref_zoom_controls_summary">Control de Zoom multitouch</string>
+  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
+  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
 
   <string name="pref_sketchUsesSplays_title">Tomas laterales en el dibujo</string>
   <string name="pref_sketchUsesSplays_summary">Utilizar superficie laterales en el dibujo</string>

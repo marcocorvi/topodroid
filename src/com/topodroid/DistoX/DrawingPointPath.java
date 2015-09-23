@@ -76,7 +76,7 @@ public class DrawingPointPath extends DrawingPath
   }
 
   @Override
-  void shiftPathBy( float dx, float dy ) 
+  public void shiftPathBy( float dx, float dy ) 
   {
     // x1 += dx;
     // y1 += dy;

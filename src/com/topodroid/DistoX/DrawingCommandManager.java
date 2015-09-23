@@ -64,8 +64,8 @@ public class DrawingCommandManager
 
   private List<DrawingPath>    mGridStack;
   List<DrawingPath>            mFixedStack;
-  List<DrawingPath>            mCurrentStack;
-  private List<DrawingPath>    mRedoStack;
+  List<ICanvasCommand>         mCurrentStack;
+  private List<ICanvasCommand> mRedoStack;
   // private List<DrawingPath>    mHighlight;  // highlighted path
   private List<DrawingStationName> mStations;
   private int mMaxAreaIndex;                   // max index of areas in this plot
@@ -81,17 +81,20 @@ public class DrawingCommandManager
   //   synchronized( mCurrentStack ) {
   //     int size = mCurrentStack.size();
   //     for ( int i1 = 0; i1 < size; ++i1 ) {
-  //       DrawingPath path1 = mCurrentStack.get( i1 );
+  //       ICanvasCommand cmd1 = mCurrentStack.get( i1 );
+  //       DrawingPath path1 = (DrawingPath)cmd1;
   //       if ( path1.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
   //       DrawingLinePath line1 = (DrawingLinePath)path1;
   //       for ( int i2 = i1+1; i2 < size; ++i2 ) {
-  //         DrawingPath path2 = mCurrentStack.get( i2 );
+  //         ICanvasCommand cmd2 = mCurrentStack.get( i2 );
+  //         DrawingPath path2 = (DrawingPath)cmd2;
   //         if ( path2.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
   //         DrawingLinePath line2 = (DrawingLinePath)path2;
   //         if ( line1.overlap( line2 ) > 1 ) {
   //           Log.v("DistoX", "LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
   //           // for ( int i=0; i<size; ++i ) {
-  //           //   DrawingPath path = mCurrentStack.get( i );
+  //           //   ICanvasCommand cmd = mCurrentStack.get( i );
+  //           //   DrawingPath path = (DrawingPath)cmd;
   //           //   if ( path.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
   //           //   DrawingLinePath line = (DrawingLinePath)path;
   //           //   line.dump();
@@ -136,8 +139,8 @@ public class DrawingCommandManager
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.flipXAxis();
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          cmd.flipXAxis();
         }
       }
     }
@@ -156,8 +159,8 @@ public class DrawingCommandManager
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.shiftPathBy( x, y );
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          cmd.shiftPathBy( x, y );
         }
       }
     }
@@ -175,8 +178,8 @@ public class DrawingCommandManager
     mSecondReference = null;
     mGridStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mFixedStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mCurrentStack = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mRedoStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
+    mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     // mHighlight    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
     mMatrix = new Matrix(); // identity
@@ -314,6 +317,11 @@ public class DrawingCommandManager
 
   // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
+  void addEraseCommand( EraseCommand cmd )
+  {
+    mCurrentStack.add( cmd );
+  }
+
   /** 
    * @return result code:
    *    0  no erasing
@@ -325,7 +333,7 @@ public class DrawingCommandManager
    *    6  area complete erase
    *    7  area point erase
    */
-  int eraseAt( float x, float y, float zoom ) 
+  int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd ) 
   {
     SelectionSet sel = new SelectionSet();
     mSelection.selectAt( x, y, zoom, sel, false, false, false );
@@ -344,6 +352,7 @@ public class DrawingCommandManager
             if ( size <= 2 || ( size == 3 && pt.mPoint == first.mNext ) ) // 2-point line OR erase midpoint of a 3-point line 
             {
               ret = 2; 
+              eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );
               synchronized( mSelection ) {
                 mSelection.removePath( path );
@@ -352,6 +361,7 @@ public class DrawingCommandManager
             else if ( pt.mPoint == first.mNext ) // erase second point of the multi-point line
             {
               ret = 3;
+              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
               // LinePoint lp = points.get(0);
               LinePoint lp = first;
               doRemoveLinePoint( line, lp, null );
@@ -365,6 +375,7 @@ public class DrawingCommandManager
             else if ( pt.mPoint == last.mPrev ) // erase second-to-last of multi-point line
             {
               ret = 4;
+              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
               // LinePoint lp = points.get(size-1);
               LinePoint lp = last;
               doRemoveLinePoint( line, lp, null );
@@ -376,27 +387,27 @@ public class DrawingCommandManager
               line.retracePath();
             } else { // erase a point in the middle of multi-point line
               ret = 5;
-              doSplitLine( line, pt.mPoint );
+              doSplitLine( line, pt.mPoint, eraseCmd );
               break; // IMPORTANT break the for-loop
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath)path;
-            // if ( area.mPoints.size() <= 3 ) 
-            if ( area.size() <= 3 ) 
-            {
+            if ( area.size() <= 3 ) {
               ret = 6;
+              eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
               mCurrentStack.remove( path );
               synchronized( mSelection ) {
                 mSelection.removePath( path );
               }
             } else {
               ret = 7;
+              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
               doRemoveLinePoint( area, pt.mPoint, pt );
               area.retracePath();
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             ret = 1;
-            // DrawingPointPath point = (DrawingPointPath)path;
+            eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
             mCurrentStack.remove( path );
             synchronized( mSelection ) {
               mSelection.removePath( path );
@@ -411,17 +422,24 @@ public class DrawingCommandManager
 
   // called from synchronized( CurrentStack ) context
   // called only by eraseAt
-  private void doSplitLine( DrawingLinePath line, LinePoint lp )
+  private void doSplitLine( DrawingLinePath line, LinePoint lp, EraseCommand eraseCmd )
   {
-    Log.v("DistoX", "do split at " + lp.mX + " " + lp.mY );
+    // Log.v("DistoX", "do split at " + lp.mX + " " + lp.mY );
+    eraseCmd.addAction( EraseAction.ERASE_REMOVE, line );
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType );
     if ( line.splitAt( lp, line1, line2, true ) ) {
       // synchronized( mCurrentStack ) // not neceessary: called in synchronized context
       {
         mCurrentStack.remove( line );
-        if ( line1.size() > 1 ) mCurrentStack.add( line1 );
-        if ( line2.size() > 1 ) mCurrentStack.add( line2 );
+        if ( line1.size() > 1 ) {
+          eraseCmd.addAction( EraseAction.ERASE_INSERT, line1 );
+          mCurrentStack.add( line1 );
+        }
+        if ( line2.size() > 1 ) {
+          eraseCmd.addAction( EraseAction.ERASE_INSERT, line2 );
+          mCurrentStack.add( line2 );
+        }
       }
       synchronized( mSelection ) {
         mSelection.removePath( line ); 
@@ -433,7 +451,8 @@ public class DrawingCommandManager
       // Log.v("DistoX", "splitAt LINE2 ");
       // line2.dump();
     } else {
-      TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "FAILED splitAt " + lp.mX + " " + lp.mY );
+      // FIXME 
+      // TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "FAILED splitAt " + lp.mX + " " + lp.mY );
       // line.dump();
     }
     // checkLines();
@@ -692,8 +711,8 @@ public class DrawingCommandManager
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.mPath.computeBounds( b, true );
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          cmd.computeBounds( b, true );
           bounds.union( b );
         }
       }
@@ -756,8 +775,8 @@ public class DrawingCommandManager
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat );
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          cmd.draw( c, mat );
         }
       }
     }
@@ -769,15 +788,55 @@ public class DrawingCommandManager
   {
     final int length = currentStackLength();
     if ( length > 0) {
-      final DrawingPath undoCommand = mCurrentStack.get(  length - 1  );
-      synchronized( mSelection ) {
-        mSelection.removePath( undoCommand );
-      }
+      final ICanvasCommand cmd = mCurrentStack.get(  length - 1  );
+
       synchronized( mCurrentStack ) {
         mCurrentStack.remove( length - 1 );
+        // cmd.undoCommand();
       }
-      undoCommand.undo();
-      mRedoStack.add( undoCommand );
+      mRedoStack.add( cmd );
+
+      Log.v("DistoX", "UNDO type " + cmd.commandType() );
+      if ( cmd.commandType() == 0 ) {
+        synchronized( mSelection ) {
+          mSelection.removePath( (DrawingPath)cmd );
+        }
+      } else { // EraseCommand
+        EraseCommand eraseCmd = (EraseCommand)cmd;
+        // eraseCmd.undoCommand();
+        for ( EraseAction action : eraseCmd.mActions ) {
+          DrawingPath path = action.mPath;
+          Log.v("DistoX", "UNDO action " + action.mType );
+          switch ( action.mType ) {
+            case EraseAction.ERASE_REMOVE:
+              synchronized( mCurrentStack ) {
+                action.restorePoints( true ); // true: use old points
+                mCurrentStack.add( path );
+              }
+              synchronized( mSelection ) {
+                mSelection.insertPath( path );
+              }
+              break;
+            case EraseAction.ERASE_INSERT:
+              synchronized( mCurrentStack ) {
+                mCurrentStack.remove( path );
+              }
+              synchronized( mSelection ) {
+                mSelection.removePath( path );
+              }
+              break;
+            case EraseAction.ERASE_MODIFY:
+              synchronized( mCurrentStack ) {
+                action.restorePoints( true );
+              }
+              synchronized( mSelection ) {
+                mSelection.removePath( path );
+                mSelection.insertPath( path );
+              }
+              break;
+          }
+        }
+      }
     }
     // checkLines();
   }
@@ -794,7 +853,10 @@ public class DrawingCommandManager
     synchronized( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
       while ( i.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i.next();
+        final ICanvasCommand cmd = (DrawingPath) i.next();
+        if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
+
+        final DrawingPath drawingPath = (DrawingPath)cmd;
         if ( drawingPath.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath linePath = (DrawingLinePath)drawingPath;
           if ( linePath.mLineType == type ) {
@@ -873,9 +935,10 @@ public class DrawingCommandManager
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( canvas, mMatrix );
-
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          if ( cmd.commandType() == 0 ) {
+            cmd.draw( canvas, mMatrix );
+          }
           //doneHandler.sendEmptyMessage(1);
         }
       }
@@ -958,10 +1021,13 @@ public class DrawingCommandManager
     synchronized( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
       while ( i.hasNext() ){
-        final DrawingPath p = (DrawingPath) i.next();
-        if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
-          DrawingStationPath sp = (DrawingStationPath)p;
-          if ( name.equals( sp.mName ) ) return true;
+        final ICanvasCommand cmd = (ICanvasCommand) i.next();
+        if ( cmd.commandType() == 0 ) {
+          DrawingPath p = (DrawingPath) cmd;
+          if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
+            DrawingStationPath sp = (DrawingStationPath)p;
+            if ( name.equals( sp.mName ) ) return true;
+          }
         }
       }
     }
@@ -982,13 +1048,54 @@ public class DrawingCommandManager
   {
     final int length = mRedoStack.toArray().length;
     if ( length > 0) {
-      final DrawingPath redoCommand = mRedoStack.get(  length - 1  );
+      final ICanvasCommand cmd = mRedoStack.get(  length - 1  );
       mRedoStack.remove( length - 1 );
-      synchronized( mCurrentStack ) {
-        mCurrentStack.add( redoCommand );
-      }
-      synchronized( mSelection ) {
-        mSelection.insertPath( redoCommand );
+
+      Log.v("DistoX", "REDO type " + cmd.commandType() );
+      if ( cmd.commandType() == 0 ) {
+        DrawingPath redoCommand = (DrawingPath)cmd;
+        synchronized( mCurrentStack ) {
+          mCurrentStack.add( redoCommand );
+        }
+        synchronized( mSelection ) {
+          mSelection.insertPath( redoCommand );
+        }
+      } else {
+        EraseCommand eraseCmd = (EraseCommand) cmd;
+        for ( EraseAction action : eraseCmd.mActions ) {
+          DrawingPath path = action.mPath;
+          Log.v("DistoX", "REDO action " + action.mType );
+          switch ( action.mType ) {
+            case EraseAction.ERASE_REMOVE:
+              synchronized( mCurrentStack ) {
+                mCurrentStack.remove( path );
+              }
+              synchronized( mSelection ) {
+                mSelection.removePath( path );
+              }
+              break;
+            case EraseAction.ERASE_INSERT:
+              synchronized( mCurrentStack ) {
+                mCurrentStack.add( path );
+              }
+              synchronized( mSelection ) {
+                mSelection.insertPath( path );
+              }
+              break;
+            case EraseAction.ERASE_MODIFY:
+              synchronized( mCurrentStack ) {
+                action.restorePoints( false ); // false: use new points
+              }
+              synchronized( mSelection ) {
+                mSelection.removePath( path );
+                mSelection.insertPath( path );
+              }
+              break;
+          }
+        }
+        synchronized( mCurrentStack ) {
+          mCurrentStack.add( cmd );
+        }
       }
     }
     // checkLines();
@@ -1121,7 +1228,9 @@ public class DrawingCommandManager
     // find drawing path with minimal distance from (x,y)
     LinePoint pp0 = null;
 
-    for ( DrawingPath p : mCurrentStack ) {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd.commandType() != 0 ) continue;
+      DrawingPath p = (DrawingPath)cmd;
       if ( p == item ) continue;
       if ( p.mType != DrawingPath.DRAWING_PATH_LINE &&
            p.mType != DrawingPath.DRAWING_PATH_AREA ) continue;
@@ -1575,7 +1684,9 @@ public class DrawingCommandManager
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ) {
-          final DrawingPath p = (DrawingPath) i.next();
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath p = (DrawingPath) cmd;
           if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
             DrawingPointPath pp = (DrawingPointPath)p;
             out.write( pp.toTherion() );
@@ -1666,7 +1777,9 @@ public class DrawingCommandManager
       // LAYER 1: soil areas
       pw.format("      <layer name=\"Soil\" type=\"1\">\n");
       pw.format("        <items>\n");
-      for ( DrawingPath p : mCurrentStack ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath) cmd;
         if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath ap = (DrawingAreaPath)p;
           if ( DrawingBrushPaths.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
@@ -1679,7 +1792,10 @@ public class DrawingCommandManager
       // LAYER 2: 
       pw.format("      <layer name=\"Water and floor morphologies\" type=\"2\">\n");
       pw.format("        <items>\n");
-      for ( DrawingPath p : mCurrentStack ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath) cmd;
+
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
@@ -1696,7 +1812,10 @@ public class DrawingCommandManager
       // LAYER 3
       pw.format("      <layer name=\"Rocks and concretions\" type=\"3\">\n");
       pw.format("        <items>\n");
-      for ( DrawingPath p : mCurrentStack ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath) cmd;
+
 	if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
 	  DrawingLinePath lp = (DrawingLinePath)p;
 	  if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
@@ -1709,7 +1828,10 @@ public class DrawingCommandManager
       // LAYER 4
       pw.format("      <layer name=\"Ceiling morphologies\" type=\"4\">\n");
       pw.format("        <items>\n");
-      for ( DrawingPath p : mCurrentStack ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath) cmd;
+
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
@@ -1722,7 +1844,10 @@ public class DrawingCommandManager
       // LAYER 5:
       pw.format("      <layer name=\"Borders\" type=\"5\">\n");
       pw.format("        <items>\n");
-      for ( DrawingPath p : mCurrentStack ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath) cmd;
+
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
@@ -1751,7 +1876,10 @@ public class DrawingCommandManager
       // LAYER 6: signs and texts
       pw.format("      <layer name=\"Signs\" type=\"6\">\n");
       pw.format("        <items>\n");
-      for ( DrawingPath p : mCurrentStack ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue;
+        DrawingPath p = (DrawingPath) cmd;
+
         if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath pp = (DrawingPointPath)p;
           if ( DrawingBrushPaths.getPointCsxLayer( pp.mPointType ) != 6 ) continue;

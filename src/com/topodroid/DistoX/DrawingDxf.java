@@ -165,7 +165,10 @@ class DrawingDxf
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
     // compute BBox
-    for ( DrawingPath p : plot.mCurrentStack ) {
+    for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+      if ( cmd.commandType() != 0 ) continue;
+      DrawingPath p = (DrawingPath)cmd;
+
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
@@ -442,7 +445,10 @@ class DrawingDxf
 
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
-        for ( DrawingPath path : plot.mCurrentStack ) {
+        for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath path = (DrawingPath)cmd;
+
           StringWriter sw5 = new StringWriter();
           PrintWriter pw5  = new PrintWriter(sw5);
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {

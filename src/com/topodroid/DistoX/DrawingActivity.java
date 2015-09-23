@@ -237,6 +237,7 @@ public class DrawingActivity extends ItemDrawer
     private boolean mEditMove;    // whether moving the selected point
     private boolean mShiftMove;   // whether to move the canvas in point-shift mode
     boolean mShiftDrawing;        // whether to shift the drawing
+    EraseCommand mEraseCommand = null;
 
     ZoomButtonsController mZoomBtnsCtrl = null;
     boolean mZoomBtnsCtrlOn = false;
@@ -817,8 +818,8 @@ public class DrawingActivity extends ItemDrawer
       mApp = (TopoDroidApp)getApplication();
       mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
       mZoom = mApp.mScaleFactor;    // canvas zoom
-      mBorderRight  = mApp.mDisplayWidth * 11 / 12;
-      mBorderLeft   = mApp.mDisplayWidth / 12;
+      mBorderRight  = mApp.mDisplayWidth * 15 / 16;
+      mBorderLeft   = mApp.mDisplayWidth / 16;
       mBorderInnerRight  = mApp.mDisplayWidth * 3 / 4;
       mBorderInnerLeft   = mApp.mDisplayWidth / 4;
       mBorderBottom = mApp.mDisplayHeight * 7 / 8;
@@ -1323,7 +1324,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void doEraseAt( float x_scene, float y_scene )
     {
-      int ret = mDrawingSurface.eraseAt( x_scene, y_scene, mZoom );
+      int ret = mDrawingSurface.eraseAt( x_scene, y_scene, mZoom, mEraseCommand );
       mModified = true;
       // if ( ret > 0 ) {
       //   Log.v( TopoDroidApp.TAG, "erase at " + x_scene + " " + y_scene + " = " + ret );
@@ -1598,12 +1599,13 @@ public class DrawingActivity extends ItemDrawer
         //                                          + y_canvas + " / " + mBorderBottom );
         if ( y_canvas > mBorderBottom ) {
           if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
+            mTouchMode = MODE_ZOOM;
             mZoomBtnsCtrl.setVisible( true );
             // mZoomCtrl.show( );
-          } else {
+          } else if ( TopoDroidSetting.mSideDrag ) {
             mTouchMode = MODE_ZOOM;
           }
-        } else if ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) {
+        } else if ( TopoDroidSetting.mSideDrag && ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) ) {
           mTouchMode = MODE_ZOOM;
         }
 
@@ -1655,6 +1657,7 @@ public class DrawingActivity extends ItemDrawer
           // return false;
         } else if ( mMode == MODE_ERASE ) {
           // Log.v("DistoX", "Erase at " + x_scene + " " + y_scene );
+          mEraseCommand =  new EraseCommand();
           doEraseAt(  x_scene, y_scene );
         } else if ( mMode == MODE_MOVE ) {
           setTheTitle( );
@@ -1986,6 +1989,11 @@ public class DrawingActivity extends ItemDrawer
               }
             }
             mShiftMove = false;
+          } else if ( mMode == MODE_ERASE ) {
+            if ( mEraseCommand != null && mEraseCommand.size() > 0 ) {
+              mDrawingSurface.addEraseCommand( mEraseCommand );
+              mEraseCommand = null;
+            }
           } else { // MODE_MOVE 
 /* FIXME for the moment do not create X-Sections
             if ( Math.abs(x_canvas - mDownX) < 10 && Math.abs(y_canvas - mDownY) < 10 ) {

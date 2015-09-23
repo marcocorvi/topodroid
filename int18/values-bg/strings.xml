@@ -855,6 +855,8 @@
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>
   <string name="pref_zoom_controls_title">Бутони за приближение</string>
   <string name="pref_zoom_controls_summary">Показване на контролите за приближение при "мултитъч" екрани</string>
+  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
+  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
 
   <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
   <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>

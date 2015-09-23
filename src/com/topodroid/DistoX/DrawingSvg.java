@@ -36,7 +36,10 @@ class DrawingSvg
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
-    for ( DrawingPath p : plot.mCurrentStack ) {
+    for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+      if ( cmd.commandType() != 0 ) continue;
+      DrawingPath p = (DrawingPath)cmd;
+
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
         if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
@@ -162,7 +165,9 @@ class DrawingSvg
 
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
-        for ( DrawingPath path : plot.mCurrentStack ) {
+        for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath path = (DrawingPath)cmd;
           int color = path.color();
           int red = ( color >> 16 ) & 0xff;
           int grn = ( color >>  8 ) & 0xff;

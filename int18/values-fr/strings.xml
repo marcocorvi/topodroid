@@ -783,6 +783,8 @@
   <string name="pref_station_size_message">Taille du texte des stations</string>
   <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
   <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
+  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
+  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
 
   <string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string>
   <string name="pref_sketchUsesSplays_summary">Dessiner les surface en utilisant les visées latérales</string>

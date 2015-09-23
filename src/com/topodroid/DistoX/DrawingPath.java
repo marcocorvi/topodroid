@@ -22,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;
+import android.graphics.RectF;
 
 // import android.util.FloatMath;
 import android.util.Log;
@@ -61,7 +62,7 @@ public class DrawingPath implements ICanvasCommand
                  
   DistoXDBlock mBlock;
 
-  void flipXAxis()
+  public void flipXAxis()
   {
     float offx = 2 * ( DrawingActivity.CENTER_X + cx );
     float offc = 2 * ( DrawingActivity.CENTER_X - cx );
@@ -182,7 +183,7 @@ public class DrawingPath implements ICanvasCommand
   // DrawingPath by deafult does not shift
   void shiftBy( float dx, float dy ) { }
 
-  void shiftPathBy( float dx, float dy ) 
+  public void shiftPathBy( float dx, float dy ) 
   {
     x1 += dx;
     y1 += dy;
@@ -209,17 +210,8 @@ public class DrawingPath implements ICanvasCommand
     if ( mType == DRAWING_PATH_AREA ) {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingPath::draw area" );
       mPath.close();
-      canvas.save();
-      canvas.clipPath( mPath );
-      canvas.drawPaint( mPaint );
-      canvas.restore();
-    } else {
-      if ( mType == DRAWING_PATH_SPLAY && mBlock != null && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) ) {
-        canvas.drawPath( mPath, DrawingBrushPaths.fixedBluePaint );
-      } else {
-        canvas.drawPath( mPath, mPaint );
-      }
     }
+    drawPath( mPath, canvas );
   }
 
   // N.B. canvas is guaranteed ! null
@@ -232,19 +224,25 @@ public class DrawingPath implements ICanvasCommand
     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingPath::draw[matrix] " + mPaint );
     mTransformedPath = new Path( mPath );
     mTransformedPath.transform( matrix );
+    drawPath( mTransformedPath, canvas );
+  }
+
+  private void drawPath( Path path, Canvas canvas )
+  {
     if ( mType == DRAWING_PATH_AREA ) {
       canvas.save();
-      canvas.clipPath( mTransformedPath );
+      canvas.clipPath( path );
       canvas.drawPaint( mPaint );
       canvas.restore();
     } else {
       if ( mType == DRAWING_PATH_SPLAY && mBlock != null && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) ) {
-        canvas.drawPath( mTransformedPath, DrawingBrushPaths.fixedBluePaint );
+        canvas.drawPath( path, DrawingBrushPaths.fixedBluePaint );
       } else {
-        canvas.drawPath( mTransformedPath, mPaint );
+        canvas.drawPath( path, mPaint );
       }
     }
   }
+
 
   public void setOrientation( double angle ) { }
 
@@ -252,9 +250,18 @@ public class DrawingPath implements ICanvasCommand
 
   public void toCsurvey( PrintWriter pw ) { }
 
-  public void undo()
+  // ICanvasCommand interface
+  //
+  public int  commandType() { return 0; }
+
+  // public void undoCommand()
+  // {
+  //   // TODO this would be changed later
+  // }
+
+  public void computeBounds( RectF bound, boolean b ) 
   {
-    // TODO this would be changed later
+    mPath.computeBounds( bound, b );
   }
 
   // public void transform( Matrix matrix )
