@@ -28,14 +28,14 @@ import android.util.FloatMath;
 
 class DrawingDxf
 {
-  private static int VERSION = 13; // 9
-  private static String ACAD_VERSION = "AC1012"; // AC1009
-
   private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
+  private static int VERSION = 9;
+  private static int objectId;
 
   static void writeComment( BufferedWriter out, String comment ) throws IOException
   {
     out.write( "  999\n" + comment + "\n" );
+    objectId = 1; // set objectId counter
   }
 
   static void writeHex( BufferedWriter out, int code, int handle ) throws IOException
@@ -50,8 +50,22 @@ class DrawingDxf
 
   static void printHex( PrintWriter pw, int code, int handle )
   {
+    // if ( VERSION >= 13 ) {
+    //   pw.printf("  %d\n%d\n", code, handle );
+    // }
+  }
+
+  static void writeObjectId( BufferedWriter out, int hex ) throws IOException
+  {
+    // if ( VERSION >= 13 ) {
+    //   writeHex( out, 330, hex );
+    // }
+  }
+
+  static void printObjectId( PrintWriter pw, int hex )
+  {
     if ( VERSION >= 13 ) {
-      pw.printf("  %d\n%d\n", code, handle );
+      printHex( pw, 330, hex );
     }
   }
 
@@ -75,7 +89,7 @@ class DrawingDxf
   {
     if ( VERSION >= 13 ) {
       if ( hex >= 0 ) printHex( pw, 5, hex );
-      pw.printf("  100\n" + acdb1 + "\n100\n" + acdb2 + "\n" );
+      pw.printf("  100\n" + acdb1 + "\n  100\n" + acdb2 + "\n" );
     }
   }
 
@@ -148,6 +162,7 @@ class DrawingDxf
 
   static void printLayer( PrintWriter pw2, int handle, String name, int flag, int cnt, int color, String style )
   {
+    name = name.replace(":", "-");
     printString( pw2, 0, "LAYER" );
     printAcDb( pw2, handle, "AcDbSymbolTableRecord", "AcDbLayerTableRecord");
     printString( pw2, 2, name );
@@ -160,6 +175,8 @@ class DrawingDxf
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
+    VERSION = TopoDroidSetting.mAcadVersion;
+
     float scale = TopoDroidSetting.mDxfScale;
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
@@ -209,6 +226,7 @@ class DrawingDxf
       ymax += 2f;
 
       writeString( out, 9, "$ACADVER" );
+      String ACAD_VERSION = (VERSION == 13)? "AC1012" : "AC1009";
       writeString( out, 1, ACAD_VERSION );
       writeString( out, 9, "$INSBASE" );
       {
@@ -229,6 +247,7 @@ class DrawingDxf
         {
           // int flag = 64;
           writeString( out, 0, "LTYPE" );
+          writeObjectId( out, objectId++ );
           writeAcDb( out, 14, "AcDbSymbolTableRecord", "AcDbLinetypeTableRecord" );
           writeString( out, 2, "CONTINUOUS" );
           writeInt( out, 70, 64 );
@@ -288,6 +307,7 @@ class DrawingDxf
         writeBeginTable( out, "APPID", 9, 1 );
         {
           writeString( out, 0, "APPID" );
+          writeObjectId( out, objectId++ );
           writeAcDb( out, 12, "AcDbSymbolTableRecord", "AcDbRepAppTableRecord" );
           writeString( out, 2, "ACAD" );
           writeInt( out, 70, 0 );
@@ -306,6 +326,7 @@ class DrawingDxf
           int block = 1+n; // block_name = 1 + therion_code
           writeString( out, 0, "BLOCK" );
           ++handle; 
+          writeObjectId( out, objectId++ );
           writeAcDb( out, handle, "AcDbEntity");
           writeString( out, 8, "POINT" );
           writeComment( out, pt.mName );
@@ -320,12 +341,12 @@ class DrawingDxf
           // out.write( DrawingBrushPaths.mPointLib.getPoint(n).getDxf() );
 
           writeString( out, 0, "ENDBLK" );
-          if ( VERSION >= 13 ) {
-            ++handle; 
-            writeAcDb( out, handle, "AcDbEntity");
-            writeString( out, 8, "POINT" );
-            writeAcDb( out, -1, "AcDbBlockEnd");
-          }
+          // if ( VERSION >= 13 ) {
+          //   ++handle; 
+          //   writeAcDb( out, handle, "AcDbEntity");
+          //   writeString( out, 8, "POINT" );
+          //   writeAcDb( out, -1, "AcDbBlockEnd");
+          // }
         }
       }
       writeEndSection( out );
@@ -341,6 +362,7 @@ class DrawingDxf
           PrintWriter pw9  = new PrintWriter(sw9);
           printString( pw9, 0, "LINE" );
           printString( pw9, 8, "REF" );
+          printObjectId( pw9, objectId );
           printAcDb( pw9, -1, "AcDbEntity", "AcDbLine" );
           printXYZ(  pw9, xmin, -ymax, 0.0f );
           printXYZ1( pw9, (xmin+10*SCALE_FIX), -ymax, 0.0f );
@@ -351,6 +373,7 @@ class DrawingDxf
           PrintWriter pw8  = new PrintWriter(sw8);
           printString( pw8, 0, "LINE" );
           printString( pw8, 8, "REF" );
+          printObjectId( pw8, objectId );
           printAcDb( pw8, -1, "AcDbEntity", "AcDbLine" );
           printXYZ(  pw8, xmin, -ymax, 0.0f );
           printXYZ1( pw8,  xmin, -(ymax+10*SCALE_FIX), 0.0f );
@@ -361,6 +384,7 @@ class DrawingDxf
           PrintWriter pw7  = new PrintWriter(sw7);
           printString( pw7, 0, "TEXT" );
           printString( pw7, 8, "REF" );
+          printObjectId( pw7, objectId );
           printAcDb( pw7, -1, "AcDbEntity", "AcDbText" );
           // pw7.printf("%s\n  0\n", "\"10\"" );
           printXYZ(   pw7, (xmin+10*SCALE_FIX+1), -ymax, 0.0f );
@@ -373,6 +397,7 @@ class DrawingDxf
           PrintWriter pw6  = new PrintWriter(sw6);
           printString( pw6, 0, "TEXT" );
           printString( pw6, 8, "REF" );
+          printObjectId( pw6, objectId );
           printAcDb( pw6, -1, "AcDbEntity", "AcDbText" );
           // pw6.printf("%s\n  0\n", "\"10\"" );
           printXYZ(   pw6, xmin, -(ymax+10*SCALE_FIX+1), 0.0f );
@@ -381,6 +406,7 @@ class DrawingDxf
           out.write( sw6.getBuffer().toString() );
         }
         out.flush();
+        objectId ++;
 
         // centerline data
         for ( DrawingPath sh : plot.mFixedStack ) {
@@ -395,6 +421,7 @@ class DrawingDxf
  
             printString( pw4, 0, "LINE" );
             printString( pw4, 8, "LEG" );
+            printObjectId( pw4, objectId );
             printAcDb( pw4, -1, "AcDbEntity", "AcDbLine" );
 
             if ( type == PlotInfo.PLOT_PLAN ) {
@@ -419,6 +446,7 @@ class DrawingDxf
 
             printString( pw4, 0, "LINE" );
             printString( pw4, 8, "SPLAY" );
+            printObjectId( pw4, objectId+1 );
             printAcDb( pw4, -1, "AcDbEntity", "AcDbLine" );
 
             float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
@@ -443,6 +471,7 @@ class DrawingDxf
           out.flush();
         }
 
+        objectId += 2;
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
         for ( ICanvasCommand cmd : plot.mCurrentStack ) {
@@ -457,6 +486,7 @@ class DrawingDxf
             printString( pw5, 0, "TEXT" );
             printString( pw5, 8, "STATION" );
             if ( VERSION >= 13 ) {
+              printObjectId( pw5, objectId++ );
               printAcDb( pw5, -1, "AcDbEntity", "AcDbText" );
               pw5.printf("%s\n  0\n", st.mName );
             }
@@ -469,15 +499,18 @@ class DrawingDxf
             // String layer = "LINE";
             int flag = 0;
             boolean use_spline = false;
-            for ( LinePoint p = line.mFirst; p != null; p = p.mNext ) {
-              if ( p.has_cp ) {
-                use_spline = true;
-                break;
+            if ( VERSION >= 13 ) {
+              for ( LinePoint p = line.mFirst; p != null; p = p.mNext ) {
+                if ( p.has_cp ) {
+                  use_spline = true;
+                  break;
+                }
               }
             }
             if ( use_spline ) {
               printString( pw5, 0, "SPLINE" );
               printString( pw5, 8, layer );
+              printObjectId( pw5, objectId++ );
               printAcDb( pw5, -1, "AcDbEntity", "AcDbSpline" );
               printInt( pw5, 66, 1 ); // group 1
               printInt( pw5, 210, 0 );
@@ -555,6 +588,7 @@ class DrawingDxf
             } else {
               printString( pw5, 0, "POLYLINE" );
               printString( pw5, 8, layer );
+              printObjectId( pw5, objectId++ );
               printAcDb( pw5, -1, "AcDbEntity", "AcDbPolyline" );
               printInt( pw5, 66, 1 ); // group 1
               printInt( pw5, 70, 0 ); // flag
@@ -571,6 +605,7 @@ class DrawingDxf
             printString( pw5, 0, "HATCH" );    // entity type HATCH
             // printString( pw5, 8, "AREA" );     // layer (color BYLAYER)
             printString( pw5, 8, layer );     // layer (color BYLAYER)
+            printObjectId( pw5, objectId++ );
 
             // printAcDb( pw5, -1, "AcDbEntity", "AcDbHatch" );
             // printXYZ( pw5, 0f, 0f, 0f );

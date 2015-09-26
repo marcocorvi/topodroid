@@ -339,6 +339,7 @@ public class DrawingCommandManager
     mSelection.selectAt( x, y, zoom, sel, false, false, false );
     int ret = 0;
     if ( sel.size() > 0 ) {
+      // Log.v("DistoX", "selection size " + sel.size() );
       synchronized( mCurrentStack ) {
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
@@ -424,13 +425,13 @@ public class DrawingCommandManager
   // called only by eraseAt
   private void doSplitLine( DrawingLinePath line, LinePoint lp, EraseCommand eraseCmd )
   {
-    // Log.v("DistoX", "do split at " + lp.mX + " " + lp.mY );
-    eraseCmd.addAction( EraseAction.ERASE_REMOVE, line );
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType );
     if ( line.splitAt( lp, line1, line2, true ) ) {
+      // Log.v("DistoX", "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
       // synchronized( mCurrentStack ) // not neceessary: called in synchronized context
       {
+        eraseCmd.addAction( EraseAction.ERASE_REMOVE, line );
         mCurrentStack.remove( line );
         if ( line1.size() > 1 ) {
           eraseCmd.addAction( EraseAction.ERASE_INSERT, line1 );
@@ -446,10 +447,6 @@ public class DrawingCommandManager
         if ( line1.size() > 1 ) mSelection.insertLinePath( line1 );
         if ( line2.size() > 1 ) mSelection.insertLinePath( line2 );
       }
-      // Log.v("DistoX", "splitAt LINE1 ");
-      // line1.dump();
-      // Log.v("DistoX", "splitAt LINE2 ");
-      // line2.dump();
     } else {
       // FIXME 
       // TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "FAILED splitAt " + lp.mX + " " + lp.mY );
@@ -784,8 +781,11 @@ public class DrawingCommandManager
     return bitmap;
   }
 
+  static final String actionName[] = { "remove", "insert", "modify" };
+
   public void undo ()
   {
+
     final int length = currentStackLength();
     if ( length > 0) {
       final ICanvasCommand cmd = mCurrentStack.get(  length - 1  );
@@ -796,44 +796,41 @@ public class DrawingCommandManager
       }
       mRedoStack.add( cmd );
 
-      Log.v("DistoX", "UNDO type " + cmd.commandType() );
       if ( cmd.commandType() == 0 ) {
         synchronized( mSelection ) {
           mSelection.removePath( (DrawingPath)cmd );
         }
       } else { // EraseCommand
         EraseCommand eraseCmd = (EraseCommand)cmd;
-        // eraseCmd.undoCommand();
-        for ( EraseAction action : eraseCmd.mActions ) {
+        int na = eraseCmd.mActions.size(); 
+        while ( na > 0 ) {
+          --na;
+          EraseAction action = eraseCmd.mActions.get( na );
           DrawingPath path = action.mPath;
-          Log.v("DistoX", "UNDO action " + action.mType );
-          switch ( action.mType ) {
-            case EraseAction.ERASE_REMOVE:
-              synchronized( mCurrentStack ) {
-                action.restorePoints( true ); // true: use old points
-                mCurrentStack.add( path );
-              }
-              synchronized( mSelection ) {
-                mSelection.insertPath( path );
-              }
-              break;
-            case EraseAction.ERASE_INSERT:
-              synchronized( mCurrentStack ) {
-                mCurrentStack.remove( path );
-              }
-              synchronized( mSelection ) {
-                mSelection.removePath( path );
-              }
-              break;
-            case EraseAction.ERASE_MODIFY:
-              synchronized( mCurrentStack ) {
-                action.restorePoints( true );
-              }
-              synchronized( mSelection ) {
-                mSelection.removePath( path );
-                mSelection.insertPath( path );
-              }
-              break;
+          // Log.v("DistoX", "UNDO " + actionName[action.mType] + " path " + path.toString() );
+          if ( action.mInitialType == EraseAction.ERASE_INSERT ) {
+            synchronized( mCurrentStack ) {
+              mCurrentStack.remove( path );
+            }
+            synchronized( mSelection ) {
+              mSelection.removePath( path );
+            }
+          } else if ( action.mType == EraseAction.ERASE_REMOVE ) {
+            synchronized( mCurrentStack ) {
+              action.restorePoints( true ); // true: use old points
+              mCurrentStack.add( path );
+            }
+            synchronized( mSelection ) {
+              mSelection.insertPath( path );
+            }
+          } else if ( action.mType == EraseAction.ERASE_MODIFY ) {
+            synchronized( mCurrentStack ) {
+              action.restorePoints( true );
+            }
+            synchronized( mSelection ) {
+              mSelection.removePath( path );
+              mSelection.insertPath( path );
+            }
           }
         }
       }
@@ -1051,7 +1048,6 @@ public class DrawingCommandManager
       final ICanvasCommand cmd = mRedoStack.get(  length - 1  );
       mRedoStack.remove( length - 1 );
 
-      Log.v("DistoX", "REDO type " + cmd.commandType() );
       if ( cmd.commandType() == 0 ) {
         DrawingPath redoCommand = (DrawingPath)cmd;
         synchronized( mCurrentStack ) {
@@ -1064,33 +1060,31 @@ public class DrawingCommandManager
         EraseCommand eraseCmd = (EraseCommand) cmd;
         for ( EraseAction action : eraseCmd.mActions ) {
           DrawingPath path = action.mPath;
-          Log.v("DistoX", "REDO action " + action.mType );
-          switch ( action.mType ) {
-            case EraseAction.ERASE_REMOVE:
-              synchronized( mCurrentStack ) {
-                mCurrentStack.remove( path );
-              }
-              synchronized( mSelection ) {
-                mSelection.removePath( path );
-              }
-              break;
-            case EraseAction.ERASE_INSERT:
-              synchronized( mCurrentStack ) {
-                mCurrentStack.add( path );
-              }
-              synchronized( mSelection ) {
-                mSelection.insertPath( path );
-              }
-              break;
-            case EraseAction.ERASE_MODIFY:
-              synchronized( mCurrentStack ) {
-                action.restorePoints( false ); // false: use new points
-              }
-              synchronized( mSelection ) {
-                mSelection.removePath( path );
-                mSelection.insertPath( path );
-              }
-              break;
+          // Log.v("DistoX", "REDO " + actionName[action.mType] + " path " + path.mType );
+          if ( action.mInitialType == EraseAction.ERASE_INSERT ) {
+            synchronized( mCurrentStack ) {
+              mCurrentStack.add( path );
+            }
+            synchronized( mSelection ) {
+              mSelection.insertPath( path );
+            }
+          } else if ( action.mType == EraseAction.ERASE_REMOVE ) {
+            synchronized( mCurrentStack ) {
+              mCurrentStack.remove( path );
+            }
+            synchronized( mSelection ) {
+              mSelection.removePath( path );
+            }
+          } else if ( action.mType == EraseAction.ERASE_MODIFY ) {
+            synchronized( mSelection ) {
+              mSelection.removePath( path );
+            }
+            synchronized( mCurrentStack ) {
+              action.restorePoints( false ); // false: use new points
+            }
+            synchronized( mSelection ) {
+              mSelection.insertPath( path );
+            }
           }
         }
         synchronized( mCurrentStack ) {

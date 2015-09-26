@@ -103,6 +103,7 @@ class TopoDroidSetting
     "DISTOX_SIDE_DRAG",              // whether to enable side-drag
     "DISTOX_MKEYBOARD",
     "DISTOX_DXF_SCALE", 
+    "DISTOX_ACAD_VERSION",
     "DISTOX_LOCALE",                 // 66
     "DISTOX_CWD",                    // must be last 
 
@@ -143,6 +144,8 @@ class TopoDroidSetting
   static boolean mAzimuthManual = false; // whether to manually set extend / or use reference azimuth
   static float mVertSplay = 50;
   static boolean mExportStationsPrefix = false; // whether to prepend cave name to station in cSurvey export
+  static int mAcadVersion = 9; // AutoCAD version 9, or 13
+
   static int mStationNames = 0;          // type of station names (0: alpha, 1: number)
   // static boolean mZoomControls = false;
   static int mZoomCtrl = 0;
@@ -634,6 +637,10 @@ class TopoDroidSetting
       if ( f > 0.1f && f < 10.0f ) mDxfScale = f;
     } catch ( NumberFormatException e) { }
 
+    try {
+      mAcadVersion = Integer.parseInt( prefs.getString( key[k++], "9") ); // DISTOX_ACAD_VERSION
+    } catch ( NumberFormatException e) { }
+
     app.setLocale( prefs.getString( key[k++], "" ) );
 
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
@@ -964,6 +971,11 @@ class TopoDroidSetting
         f = Float.parseFloat( prefs.getString( k, "1.0") ); // DISTOX_DXF_SCALE
         if ( f > 0.1f && f < 10.0f ) mDxfScale = f;
       } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      try {
+        mAcadVersion = Integer.parseInt( prefs.getString( k, "9") ); // DISTOX_ACAD_VERSION
+      } catch ( NumberFormatException e) { }
+
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

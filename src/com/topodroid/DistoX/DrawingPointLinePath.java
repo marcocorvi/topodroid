@@ -312,6 +312,7 @@ public class DrawingPointLinePath extends DrawingPath
   void resetPath( ArrayList<LinePoint> pts )
   {
     clear();
+    // if ( pts == null ) return;
     int size = pts.size();
     if ( size <= 1 ) return;
     LinePoint lp = pts.get(0);

@@ -1991,6 +1991,7 @@ public class DrawingActivity extends ItemDrawer
             mShiftMove = false;
           } else if ( mMode == MODE_ERASE ) {
             if ( mEraseCommand != null && mEraseCommand.size() > 0 ) {
+              mEraseCommand.completeCommand();
               mDrawingSurface.addEraseCommand( mEraseCommand );
               mEraseCommand = null;
             }

@@ -22,7 +22,7 @@ The sketch window has four modes:
 </ulist>
 <li><b>move</b>, the default: you can shift the canvas, and zoom in/out. If the "fixed references" box in the references dialog is set, shifts affect only the drawings [level experimental]</li>
 <li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (closed regions filled with a color). At the basic level drawing is limited to lines.</li>
-<li><b>erase</b>: to erase drawn items, and lines/areas (or part of them).</li>
+<li><b>erase</b>: to erase items, and lines/areas, or portions of them, from the sketch.</li>
 <li><b>edit</b> [N]: for the fine editing. Shift and zoom are still available, as for the "move" mode.</li>
 </ulist><br><p>
 
@@ -51,7 +51,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><u>Continuation</u> [N]. When this button is pressed a "wall" line started close to the end of another is considered as its continuation and is attached to that.</li> 
 </ulist><br><p>
 
-The <b>erase</b> mode has the <u>Undo</u> and <u>Redo</u> buttons. The erasing actions are not put on the undo list, and the undo/redo affects only the drawing actions. However, erasing have two effects on this list. First erased items are dropped from the list. Second, erasing the middle of a line drops the line from the list and puts the two end pieces at the end of the list.<br><p>
+The <b>erase</b> mode has the <u>Undo</u> and <u>Redo</u> buttons. The erasing actions can be un-done and re-done just like any drawing actions. However, erasing can affects the position of a line in the list of undo's. Erasing the middle of a line drops the line from the list and puts the two end pieces at the end of the list. The "undo" removes the two pieces and puts the line at the end of the list.<br><p>
 
 The <b>edit</b> [A] mode has four buttons besides the green ones:
 <ulist>

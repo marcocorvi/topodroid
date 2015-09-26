@@ -212,11 +212,9 @@ class Selection
   {
     // Log.v("DistoX", "Selection remove path" );
     if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+
       DrawingPointLinePath line = (DrawingPointLinePath)path;
-      // for ( LinePoint lp : line.mPoints ) 
-      
-      for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext )
-      {
+      for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {
         for ( SelectionPoint sp : mPoints ) {
           if ( sp.mPoint == lp ) {
             mPoints.remove( sp );
@@ -224,14 +222,12 @@ class Selection
           }
         }
       }
+
       // final ListIterator it = mPoints.listIterator(0);
       // while( it.hasNext() ) {
       //   SelectionPoint sp = (SelectionPoint)it.next();
-      //   DrawingPath item = sp.mItem;
-      //   if ( path.mType == item.mType ) {
-      //     if ( line == (DrawingPointLinePath)item ) {
-      //       it.remove(); // remove selection point
-      //     }
+      //   if ( path == sp.mItem ) {
+      //     it.remove(); // remove selection point
       //   }
       // }
 

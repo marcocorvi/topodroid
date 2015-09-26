@@ -22,7 +22,7 @@ import android.graphics.RectF;
 
 // import android.util.FloatMath;
 import java.util.ArrayList;
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -35,22 +35,31 @@ public class EraseCommand implements ICanvasCommand
     mActions = new ArrayList< EraseAction >();
   }
 
-  void addAction( int type, DrawingPath path )
+  // return true if action has been dropped
+  boolean addAction( int type, DrawingPath path )
   {
-    for ( EraseAction action : mActions ) {
-      if ( action.mPath == path ) {
-        action.mType = type; // update action type
-        return;
+    // if ( type != EraseAction.ERASE_INSERT ) {
+      for ( EraseAction action : mActions ) {
+        if ( action.mPath == path ) {
+          if ( action.mInitialType == EraseAction.ERASE_INSERT && type == EraseAction.ERASE_REMOVE ) {
+            // FIXME: must remove action path from selection
+            mActions.remove( action );
+            return true;
+          }
+          action.mType = type; // update action type
+          return false;
+        }
       }
-    }
+    // }
     mActions.add( new EraseAction( type, path ) );
+    return false;
   }
 
-  void complete()
+  void completeCommand()
   {
     for ( EraseAction action : mActions ) {
       if ( action.mType == EraseAction.ERASE_MODIFY ) {
-        action.complete();
+        action.completeAction();
       }
     }
   }

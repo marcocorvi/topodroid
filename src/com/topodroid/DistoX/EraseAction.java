@@ -21,7 +21,7 @@ import android.graphics.Matrix;
 
 // import android.util.FloatMath;
 import java.util.ArrayList;
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -32,6 +32,7 @@ public class EraseAction // implements ICanvasCommand
   public static final int ERASE_MODIFY = 2; // modify item
 
 
+  int mInitialType;  // action inital type
   int mType;         // action type
   DrawingPath mPath; // affected path
   ArrayList< LinePoint > mOldPoints = null;
@@ -39,6 +40,7 @@ public class EraseAction // implements ICanvasCommand
                  
   EraseAction( int type, DrawingPath path )
   {
+    mInitialType = type;
     mType = type;
     mPath = path;
     mNewPoints = null;
@@ -60,7 +62,7 @@ public class EraseAction // implements ICanvasCommand
     }
   }
 
-  void complete()
+  void completeAction()
   {
     mNewPoints = new ArrayList< LinePoint >();
     DrawingPointLinePath line = (DrawingPointLinePath)mPath;

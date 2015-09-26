@@ -42,5 +42,13 @@
        android:inputType="numberDecimal"
        android:defaultValue="1.0" />
 
+  <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_ACAD_VERSION"
+       android:title="@string/pref_acad_version_title"
+       android:summary="@string/pref_acad_version_summary"
+       android:defaultValue="9"
+       android:entries="@array/acadVersion"
+       android:entryValues="@array/acadVersionValue"
+       />
 
 </PreferenceScreen>

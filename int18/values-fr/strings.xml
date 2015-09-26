@@ -707,6 +707,8 @@
   <!-- TODO string name="pref_bitmap_scale_title">PNG scale</string -->
   <!-- TODO string name="pref_bitmap_scale_summary">Scale factor in sketch PNG export</string -->
   <!-- TODO string name="pref_bitmap_scale_message">Scale factor in sketch PNG export</string -->
+  <!-- TODO string name="pref_acad_version_title">AutoCAD version</string -->
+  <!-- TODO string name="pref_acad_version_summary">AutoCAD version</string -->
   <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
   <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
   <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
