@@ -78,7 +78,7 @@
     <string name="device_model_set">Наистина ли искате да промените модела на устройството?</string>
     <string name="device_none">Не е избрано DistoX устройство</string>
     <string name="device_pairing">Свързване: проверка на съобщения</string>
-    <!-- TODO string name="device_paired">Device is paired</string -->
+    <string name="device_paired">Устройството е свързано</string>
     <string name="device_reset">Изчистване на DistoX паметта</string>
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Фърмуер  %1$d.%2$d</string>
@@ -112,8 +112,8 @@
     <string name="import_wait">Импортиране... Моля изчакайте...</string>
     <string name="import_already">Картировката е вече импортирана</string>
     <string name="import_none">Няма файлове за импортиране</string>
-    <!-- TODO string name="import_failed">File import failed</string -->
-    <!-- TODO string name="file_not_found">File not found</string -->
+    <string name="import_failed">Файлът не е импортиран</string>
+    <string name="file_not_found">Файлът не е намерен</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте ...</string>
     <string name="sketch_loading">Зареждане на скица... Моля изчакайте...</string>
@@ -125,7 +125,7 @@
     <string name="head_tail">Памет: </string>
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
     <string name="head_tail_store_failed">Неуспешен запис на индекс от DistoX паметта</string>
-    <!-- TODO string name="pairing_failed">Pairing failed</string -->
+    <string name="pairing_failed">Неуспешно сдвояване</string>
     <string name="illegal_data_value">Невалидни данни</string>
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
@@ -138,7 +138,7 @@
     <string name="longitude_hint">Дълж. гг:мм:сс.ссс</string>
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
     <string name="loop_none">няма полигон loop</string>
-    <!-- string name="line_delete">Delete line</string -->
+    <!-- string name="line_delete">Изтриване на линия</string -->
     <string name="flip_shots">Обръщане на отсечките</string>
 
     <string name="error_azimuth_required">Необходим азимут</string>
@@ -180,8 +180,8 @@
     <string name="barrier_del">Продължаване на антената?</string>
 
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
-    <!-- TODO string name="bad_line">Bad line type</string -->
-    <!-- TODO string name="bad_point">Bad point type</string -->
+    <string name="bad_line">Невалиден тип линия</string>
+    <string name="bad_point">Невалиден тип точка</string>
 
     <string name="no_bt">Липсва Bluetooth</string>
     <string name="no_calib">Липсва калибрация</string>
@@ -220,7 +220,7 @@
     <string name="menu_firmware">Фърмуер</string>
     <string name="menu_recover">Възстановяване</string>
     <string name="menu_reload">Препрочитане</string>
-    <!-- TODO string name="menu_rename">RENAME</string -->
+    <string name="menu_rename">Преименуване</string>
     <string name="menu_help">Помощ</string>
     <string name="menu_join_survey">Ко-картиране</string>
     <string name="menu_logs">Лог файлове</string>
@@ -228,7 +228,7 @@
     <string name="menu_manual_calibration">Калибрация</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">Общ изглед</string>
-    <!-- TODO string name="menu_pair">PAIR</string -->
+    <string name="menu_pair">Сдвояване</string>
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
@@ -264,7 +264,7 @@
     <string name="photo_survey">Разделяне на картировка</string>
     <string name="picture_no_station">Необходимо е име на репер</string>
     <string name="plot_delete">Изтриване на скица?</string>
-    <!-- TODO string name="item_delete">Delete item %1$s ?</string -->
+    <string name="item_delete">Изтриване на елемент %1$s ?</string>
     <string name="plot_duplicate_name">Дублирано име на скица</string>
     <string name="plot_name">Име на скица</string>
     <string name="plot_new">Нова скица</string>
@@ -304,7 +304,7 @@
 
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">compass</string -->
-    <!-- TODO string name="shot_delete">Delete shot ?</string -->
+    <string name="shot_delete">Изтриване на измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
     <string name="shot_leg">Повтаряща се отсечка</string>
@@ -338,7 +338,7 @@
     <string name="survey_delete">Изтриване на картировката?</string>
     <string name="survey_split">Разделяне на картировката?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
-    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
+    <string name="cannot_rename">Не може да се преименува картировката</string>
     <string name="declination">Магн. деклинация</string>
     <string name="description">описание</string>
     <string name="name">име</string>
@@ -419,7 +419,7 @@
     <string name="button_no"        >Не        </string>
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
-    <!-- TODO string name="button_regroup"   >Regroup   </string -->
+    <string name="button_regroup"   >Прегрупиране</string>
     <string name="button_dump"      >Запис     </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
@@ -470,8 +470,8 @@
     <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
     <!-- OK string name="btn_kml">KML</string -->
     <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
-    <!-- TODO string name="btn_import">Import</string -->
-    <string name="btn_man">Manual</string>
+    <string name="btn_import">Импортиране</string>
+    <string name="btn_man">Ръчно</string>
     <string name="btn_symbol">Инструменти за рисуване</string>
     <string name="btn_png">PNG</string>
     <!-- OK string name="btn_pockettopo">PocketTopo</string -->
@@ -562,7 +562,7 @@
     <string name="help_draw">Вкл. на режим на скициране</string>
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
-    <!-- TODO string name="help_rename">Change survey name</string -->
+    <string name="help_rename">Смяна на името на картировката</string>
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>
@@ -570,7 +570,7 @@
     <string name="help_undo">Изтриване на действие от скицата</string>
     <string name="help_redo">Възстановяване на действие от скицата</string>
     <string name="help_symbol_plot">Избор на елемент за рисуване</string>
-    <!-- TODO string name="help_delete_item">Delete sketch item</string -->
+    <string name="help_delete_item">Изтриване на елемент от скицата</string>
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Изтриване на елемент</string>
     <string name="help_previous">Предишен избран елемент</string>
@@ -599,7 +599,7 @@
     <string name="help_read">Прочитане и показване на калибр. коефициенти от DistoX</string>
     <string name="help_info_device">Информация за устройството</string>
     <string name="help_scan">Сканиране за DistoX устройства</string>
-    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
+    <string name="help_pair">Сдвояване на текущото DistoX устройство</string>
     <string name="help_open_calib">Отваряне на калибрация</string>
     <string name="help_export_calib">Експорт на калибрация</string>
     <string name="help_group">Автоматично определяне на групи отсечки</string>
@@ -626,7 +626,7 @@
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
-    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
+    <string name="title_coord">Въведете координати на точката:</string>
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
     <string name="title_discover">Сканиране на DistoX устройства...</string>
@@ -652,13 +652,13 @@
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Информация за картировката</string>
     <string name="title_survey_export">Експортиране на картировка като</string>
-    <!-- TODO string name="title_survey_rename">Rename survey as</string -->
+    <string name="title_survey_rename">Преименуване като</string>
     <string name="title_calib_export">Експортиране на калибрация като</string>
     <!-- string name="title_zoom">Приближаване</string -->
 
   <string name="pref_cat_survey">Настройки Картировка</string>
   <string name="pref_cat_drawing">Настройки Скици</string>
-  <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
+  <string name="pref_cat_import_export">Настройки Импорт/Експорт</string>
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
   <string name="pref_cat_sketch">Настройки 3D модел</string>
@@ -671,8 +671,8 @@
   <string name="pref_raw_data_summary">Показване на необработени данни</string>
   <string name="pref_bootloader_title">Зареждане на фърмуер</string>
   <string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string>
-  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
-  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
+  <string name="pref_mkeyboard_title">Собствена клавиатура</string>
+  <string name="pref_mkeyboard_summary">Използване на Topodroid клавиатурни подредби</string>
   <string name="pref_cosurvey_title">Ко-картиране</string>
   <string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string>
   <string name="pref_export_shots_title">Формат на експортираните данни</string>
@@ -717,7 +717,7 @@
   <string name="pref_cwd_title">Работна директория</string>
   <!-- unused string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string -->
   <!-- unused string name="pref_cwd_message">Въведете директория на TopoDroid</string -->
-  <!-- TODO string name="pref_pt_color_map_title">PocketTopo color map</string -->
+  <string name="pref_pt_color_map_title">PocketTopo карта на цветовете</string>
   <string name="pref_text_size_title">Размер на текста</string>
   <string name="pref_text_size_summary">Размер на шрифта в текстове</string>
   <string name="pref_text_size_message">Размер на шрифта в текстове</string>
@@ -778,11 +778,11 @@
   <string name="pref_bitmap_scale_title">PNG резолюция</string>
   <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
   <string name="pref_bitmap_scale_message">Резолюция на експортирани скици в PNG формат</string>
-  <!-- TODO string name="pref_acad_version_title">AutoCAD version</string -->
-  <!-- TODO string name="pref_acad_version_summary">AutoCAD version</string -->
-  <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
-  <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
-  <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
+  <string name="pref_acad_version_title">AutoCAD версия</string>
+  <string name="pref_acad_version_summary">AutoCAD версия</string>
+  <string name="pref_dxf_scale_title">Мащаб на DXF скици</string>
+  <string name="pref_dxf_scale_summary">Мащабен фактор на DXF скици</string>
+  <string name="pref_dxf_scale_message">Фактор за мащабиране на експортиране на DXF скици</string>
   <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_summary">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_message">Резолюция на мини-картинки</string>
@@ -857,8 +857,8 @@
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>
   <string name="pref_zoom_controls_title">Бутони за приближение</string>
   <string name="pref_zoom_controls_summary">Показване на контролите за приближение при "мултитъч" екрани</string>
-  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
-  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
+  <string name="pref_side_drag_title">Странично скролиране</string>
+  <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
 
   <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
   <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>
