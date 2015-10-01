@@ -2,11 +2,11 @@
 
 <resources>
 
-  <!-- TODO string-array name="zoomCtrl">
-     <item name="0">Off</item>
-     <item name="1">Temporary</item>
-     <item name="2">Permanent</item>
-  </string-array -->
+  <string-array name="zoomCtrl">
+     <item name="0">Изключени</item>
+     <item name="1">Временни</item>
+     <item name="2">Постоянни</item>
+  </string-array>
 
   <string-array name="stationNames">
      <item name="alpha">С букви и цифри</item>
@@ -106,11 +106,11 @@
      <item name="grid">Таблица</item>
   </string-array>
 
-  <!-- TODO string-array name="deviceType">
-     <item name="none">None</item>
+  <string-array name="deviceType">
+     <item name="none">Няма</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="deviceBT">
      <item name="0">Изключен</item>
