@@ -471,8 +471,9 @@
 
     <string name="help_help">Affiche l\'aide</string>
     <!-- string name="help_manual">Online manual</string -->
-    <string name="help_more">Affiche des options supplémentaires</string>
-    <string name="help_less">Retour aux options précédentes</string>
+    <!-- NO string name="help_more">Affiche des options supplémentaires</string -->
+    <!-- NO string name="help_less">Retour aux options précédentes</string -->
+    <!-- TODO string name="help_measure">Measure distances</string -->
     
     <!-- string name="help_coeff">Show calibration coefficients</string -->
     <!-- TODO string name="help_current_station">Saved stations</string -->

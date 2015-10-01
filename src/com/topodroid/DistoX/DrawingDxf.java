@@ -30,12 +30,14 @@ class DrawingDxf
 {
   private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
   private static int VERSION = 9;
-  private static int objectId;
+
+  static final String zero = "0.0";
+  static final String one  = "1.0";
+  static final String half = "0.5";
 
   static void writeComment( BufferedWriter out, String comment ) throws IOException
   {
     out.write( "  999\n" + comment + "\n" );
-    objectId = 1; // set objectId counter
   }
 
   static void writeHex( BufferedWriter out, int code, int handle ) throws IOException
@@ -43,29 +45,15 @@ class DrawingDxf
     if ( VERSION >= 13 ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw  = new PrintWriter(sw);
-      pw.printf("  %d\n%d\n", code, handle );
+      pw.printf("  %d\n%X\n", code, handle );
       out.write( sw.getBuffer().toString() );
     }
   }
 
   static void printHex( PrintWriter pw, int code, int handle )
   {
-    // if ( VERSION >= 13 ) {
-    //   pw.printf("  %d\n%d\n", code, handle );
-    // }
-  }
-
-  static void writeObjectId( BufferedWriter out, int hex ) throws IOException
-  {
-    // if ( VERSION >= 13 ) {
-    //   writeHex( out, 330, hex );
-    // }
-  }
-
-  static void printObjectId( PrintWriter pw, int hex )
-  {
     if ( VERSION >= 13 ) {
-      printHex( pw, 330, hex );
+      pw.printf("  %d\n%X\n", code, handle );
     }
   }
 
@@ -82,6 +70,15 @@ class DrawingDxf
     if ( VERSION >= 13 ) {
       if ( hex >= 0 ) writeHex( out, 5, hex );
       out.write("  100\n" + acdb1 + "\n  100\n" + acdb2 + "\n" );
+    }
+  }
+
+
+  static void printAcDb( PrintWriter pw, int hex, String acdb1 )
+  {
+    if ( VERSION >= 13 ) {
+      if ( hex >= 0 ) printHex( pw, 5, hex );
+      pw.printf("  100\n" + acdb1 + "\n" );
     }
   }
 
@@ -152,7 +149,7 @@ class DrawingDxf
     writeString(out, 0, "TABLE" );
     writeString(out, 2, name );
     writeAcDb( out, handle, "AcDbSymbolTable" );
-    writeInt(out, 70, num );
+    if ( num >= 0 ) writeInt(out, 70, num );
   }
   
   static void writeEndTable(  BufferedWriter out ) throws IOException
@@ -160,15 +157,15 @@ class DrawingDxf
     writeString( out, 0, "ENDTAB");
   }
 
-  static void printLayer( PrintWriter pw2, int handle, String name, int flag, int cnt, int color, String style )
+  static void printLayer( PrintWriter pw2, int handle, String name, int flag, int color, String linetype )
   {
     name = name.replace(":", "-");
     printString( pw2, 0, "LAYER" );
     printAcDb( pw2, handle, "AcDbSymbolTableRecord", "AcDbLayerTableRecord");
-    printString( pw2, 2, name );
-    printInt( pw2, 70, flag );
-    printInt( pw2, 62, color );
-    printString( pw2, 6, style );
+    printString( pw2, 2, name );  // layer name
+    printInt( pw2, 70, flag );    // layer flag
+    printInt( pw2, 62, color );   // layer color
+    printString( pw2, 6, linetype ); // linetype name
     // printInt( pw2, 370, 100 );
     // printString( pw2, 390, "F" );
   }
@@ -241,78 +238,146 @@ class DrawingDxf
       }
       writeEndSection( out );
       
+      String lt_continuous = "CONTINUOUS";
       writeSection( out, "TABLES" );
       {
-        writeBeginTable( out, "LTYPE", 5, 1 );
+        if ( VERSION >= 13 ) {
+          ++handle; writeBeginTable( out, "VPORT", handle, 1 );
+          {
+            writeString( out, 0, "VPORT" );
+            ++handle; writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbViewportTableRecord" );
+            writeString( out, 2, "MyViewport" );
+            writeInt( out, 70, 0 );
+            writeString( out, 10, zero );
+            writeString( out, 20, zero );
+            writeString( out, 11, one  );
+            writeString( out, 21, one  );
+            writeString( out, 12, zero );
+            writeString( out, 22, zero );
+            writeString( out, 13, zero );
+            writeString( out, 23, zero );
+            writeString( out, 14, half );
+            writeString( out, 24, half );
+            writeString( out, 15, half );
+            writeString( out, 25, half );
+            writeString( out, 16, zero );
+            writeString( out, 26, zero );
+            writeString( out, 36, one  );
+            writeString( out, 17, zero );
+            writeString( out, 27, zero );
+            writeString( out, 37, zero );
+            writeString( out, 40, zero );
+            writeString( out, 41, "2.0" );
+            writeString( out, 42, "50.0" );
+          }
+          writeEndTable( out );
+        }
+
+        ++handle; writeBeginTable( out, "LTYPE", handle, 1 );
         {
           // int flag = 64;
           writeString( out, 0, "LTYPE" );
-          writeObjectId( out, objectId++ );
-          writeAcDb( out, 14, "AcDbSymbolTableRecord", "AcDbLinetypeTableRecord" );
-          writeString( out, 2, "CONTINUOUS" );
+          ++handle; writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbLinetypeTableRecord" );
+          writeString( out, 2, lt_continuous );
           writeInt( out, 70, 64 );
           writeString( out, 3, "Solid line" );
           writeInt( out, 72, 65 );
           writeInt( out, 73, 0 );
-          writeString( out, 40, "0.0" );
+          writeString( out, 40, zero );
         }
         writeEndTable( out );
 
-        writeBeginTable( out, "LAYER", 2, 7 );
+        SymbolLineLibrary linelib = DrawingBrushPaths.mLineLib;
+        SymbolAreaLibrary arealib = DrawingBrushPaths.mAreaLib;
+        int nr_layers = 6 + linelib.mAnyLineNr + arealib.mAnyAreaNr;
+        ++handle; writeBeginTable( out, "LAYER", handle, nr_layers );
         {
           StringWriter sw2 = new StringWriter();
           PrintWriter pw2  = new PrintWriter(sw2);
 
-          // 2 layer name, 70 flag (64), 62 color code, 6 line style
-          String style = "CONTINUOUS";
+          // 2 layer name, 70 flag (64), 62 color code, 6 line type
           int flag = 0;
-
-          handle = 40;
-          int cnt = 1;
-          ++handle; printLayer( pw2, handle, "LEG",     flag, cnt, cnt, style ); ++cnt;
-          ++handle; printLayer( pw2, handle, "SPLAY",   flag, cnt, cnt, style ); ++cnt;
-          ++handle; printLayer( pw2, handle, "STATION", flag, cnt, cnt, style ); ++cnt;
-          ++handle; printLayer( pw2, handle, "LINE",    flag, cnt, cnt, style ); ++cnt;
-          ++handle; printLayer( pw2, handle, "POINT",   flag, cnt, cnt, style ); ++cnt;
-          // ++handle; printLayer( pw2, handle, "AREA",    flag, cnt, cnt, style ); ++cnt;
-          ++handle; printLayer( pw2, handle, "REF",     flag, cnt, cnt, style ); ++cnt;
+          int color = 1;
+          ++handle; printLayer( pw2, handle, "LEG",     flag, color, lt_continuous ); ++color;
+          ++handle; printLayer( pw2, handle, "SPLAY",   flag, color, lt_continuous ); ++color;
+          ++handle; printLayer( pw2, handle, "STATION", flag, color, lt_continuous ); ++color;
+          ++handle; printLayer( pw2, handle, "LINE",    flag, color, lt_continuous ); ++color;
+          ++handle; printLayer( pw2, handle, "POINT",   flag, color, lt_continuous ); ++color;
+          // ++handle; printLayer( pw2, handle, "AREA",    flag, color, lt_continuous ); ++color;
+          ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color;
           
-          SymbolLineLibrary linelib = DrawingBrushPaths.mLineLib;
           if ( linelib != null ) { 
             for ( SymbolLine line : linelib.mAnyLine ) {
-              ++handle; printLayer( pw2, handle, line.getThName(), flag, cnt, cnt, style ); ++cnt;
+              String lname = "L_" + line.getThName().replace(':','-');
+              ++handle; printLayer( pw2, handle, lname, flag, color, lt_continuous ); ++color;
             }
           }
 
-          SymbolAreaLibrary arealib = DrawingBrushPaths.mAreaLib;
-          if ( arealib != null ) { 
+          if ( arealib != null ) {
             for ( SymbolArea area : arealib.mAnyArea ) {
-              ++handle; printLayer( pw2, handle, area.getThName(), flag, cnt, cnt, style ); ++cnt;
+              String aname = "A_" + area.getThName().replace(':','-');
+              ++handle; printLayer( pw2, handle, aname, flag, color, lt_continuous ); ++color;
             }
           }
-
           out.write( sw2.getBuffer().toString() );
         }
         writeEndTable( out );
 
-        writeBeginTable( out, "VIEW", 6, 0 );
+        if ( VERSION >= 13 ) {
+          ++handle; writeBeginTable( out, "STYLE", handle, 1 ); 
+          {
+            writeString( out, 0, "STYLE" );
+            ++handle; writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbTextStyleTableRecord" );
+            writeString( out, 2, "MyStyle" );  // name
+            writeInt( out, 70, 0 );              // flag
+            writeString( out, 40, zero );
+            writeString( out, 41, one  );
+            writeString( out, 42, one  );
+            writeString( out, 3, "arial.ttf" );  // fonts
+          }
+          writeEndTable( out );
+        }
+
+        ++handle; writeBeginTable( out, "VIEW", handle, 0 );
         writeEndTable( out );
 
-        writeBeginTable( out, "UCS", 6, 0 );
+        ++handle; writeBeginTable( out, "UCS", handle, 0 );
         writeEndTable( out );
         
-        writeBeginTable( out, "STYLE", 7, 0 );
-        writeEndTable( out );
+        if ( VERSION >= 13 ) {
+          ++handle; writeBeginTable( out, "STYLE", handle, 0 );
+          writeEndTable( out );
+        }
 
-        writeBeginTable( out, "APPID", 9, 1 );
+        ++handle; writeBeginTable( out, "APPID", handle, 1 );
         {
           writeString( out, 0, "APPID" );
-          writeObjectId( out, objectId++ );
-          writeAcDb( out, 12, "AcDbSymbolTableRecord", "AcDbRepAppTableRecord" );
-          writeString( out, 2, "ACAD" );
-          writeInt( out, 70, 0 );
+          ++handle;
+          writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbRegAppTableRecord" );
+          writeString( out, 2, "ACAD" ); // applic. name
+          writeInt( out, 70, 0 );        // flag
         }
         writeEndTable( out );
+
+        if ( VERSION >= 13 ) {
+          ++handle; writeBeginTable( out, "DIMSTYLE", handle, -1 );
+          writeString( out, 100, "AcDbDimStyleTable" );
+          writeInt( out, 70, 1 );
+          writeEndTable( out );
+
+          ++handle; writeBeginTable( out, "BLOCK_RECORD", handle, DrawingBrushPaths.mPointLib.mAnyPointNr );
+          {
+            for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
+              SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
+              String block = "P_" + pt.mName.replace(':','-');
+              writeString( out, 0, "BLOCK_RECORD" );
+              ++handle; writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbBlockTableRecord" );
+              writeString( out, 2, block );
+              writeInt( out, 70, 0 );              // flag
+            }
+          }
+          writeEndTable( out );
+        }
       }
       writeEndSection( out );
       out.flush();
@@ -322,17 +387,13 @@ class DrawingDxf
         // // 8 layer (0), 2 block name,
         for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
           SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
+          String block = "P_" + pt.mName.replace(':','-');
 
-          int block = 1+n; // block_name = 1 + therion_code
           writeString( out, 0, "BLOCK" );
-          ++handle; 
-          writeObjectId( out, objectId++ );
-          writeAcDb( out, handle, "AcDbEntity");
+          ++handle; writeAcDb( out, handle, "AcDbEntity", "AcDbBlockBegin" );
           writeString( out, 8, "POINT" );
-          writeComment( out, pt.mName );
-          writeAcDb( out, -1, "AcDbBlockBegin");
-          writeInt( out, 2, block );
-          writeInt( out, 70, 64 );
+          writeString( out, 2, block );
+          writeInt( out, 70, 64 );       // flag 64 = this definition is referenced
           writeString( out, 10, "0.0" );
           writeString( out, 20, "0.0" );
           writeString( out, 30, "0.0" );
@@ -341,12 +402,10 @@ class DrawingDxf
           // out.write( DrawingBrushPaths.mPointLib.getPoint(n).getDxf() );
 
           writeString( out, 0, "ENDBLK" );
-          // if ( VERSION >= 13 ) {
-          //   ++handle; 
-          //   writeAcDb( out, handle, "AcDbEntity");
-          //   writeString( out, 8, "POINT" );
-          //   writeAcDb( out, -1, "AcDbBlockEnd");
-          // }
+          if ( VERSION >= 13 ) {
+            ++handle; writeAcDb( out, handle, "AcDbEntity", "AcDbBlockEnd");
+            writeString( out, 8, "POINT" );
+          }
         }
       }
       writeEndSection( out );
@@ -361,9 +420,9 @@ class DrawingDxf
           StringWriter sw9 = new StringWriter();
           PrintWriter pw9  = new PrintWriter(sw9);
           printString( pw9, 0, "LINE" );
+          ++handle; printAcDb( pw9, handle, "AcDbEntity", "AcDbLine" );
           printString( pw9, 8, "REF" );
-          printObjectId( pw9, objectId );
-          printAcDb( pw9, -1, "AcDbEntity", "AcDbLine" );
+          // printInt(  pw9, 39, 0 );         // line thickness
           printXYZ(  pw9, xmin, -ymax, 0.0f );
           printXYZ1( pw9, (xmin+10*SCALE_FIX), -ymax, 0.0f );
           out.write( sw9.getBuffer().toString() );
@@ -372,20 +431,19 @@ class DrawingDxf
           StringWriter sw8 = new StringWriter();
           PrintWriter pw8  = new PrintWriter(sw8);
           printString( pw8, 0, "LINE" );
+          ++handle; printAcDb( pw8, handle, "AcDbEntity", "AcDbLine" );
           printString( pw8, 8, "REF" );
-          printObjectId( pw8, objectId );
-          printAcDb( pw8, -1, "AcDbEntity", "AcDbLine" );
+          // printInt(  pw8, 39, 0 );         // line thickness
           printXYZ(  pw8, xmin, -ymax, 0.0f );
-          printXYZ1( pw8,  xmin, -(ymax+10*SCALE_FIX), 0.0f );
+          printXYZ1( pw8,  xmin, -ymax+10*SCALE_FIX, 0.0f );
           out.write( sw8.getBuffer().toString() );
         }
         {
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
           printString( pw7, 0, "TEXT" );
+          ++handle; printAcDb( pw7, handle, "AcDbEntity", "AcDbText" );
           printString( pw7, 8, "REF" );
-          printObjectId( pw7, objectId );
-          printAcDb( pw7, -1, "AcDbEntity", "AcDbText" );
           // pw7.printf("%s\n  0\n", "\"10\"" );
           printXYZ(   pw7, (xmin+10*SCALE_FIX+1), -ymax, 0.0f );
           printFloat( pw7, 40, 0.3f );
@@ -396,17 +454,16 @@ class DrawingDxf
           StringWriter sw6 = new StringWriter();
           PrintWriter pw6  = new PrintWriter(sw6);
           printString( pw6, 0, "TEXT" );
+          ++handle; printAcDb( pw6, handle, "AcDbEntity", "AcDbText" );
           printString( pw6, 8, "REF" );
-          printObjectId( pw6, objectId );
-          printAcDb( pw6, -1, "AcDbEntity", "AcDbText" );
           // pw6.printf("%s\n  0\n", "\"10\"" );
-          printXYZ(   pw6, xmin, -(ymax+10*SCALE_FIX+1), 0.0f );
+          printXYZ(   pw6, xmin, -ymax+10*SCALE_FIX+1, 0.0f );
           printFloat( pw6, 40, 0.3f );
+          // printFloat( pw6, 50, 90.0f ); // rotation
           printString( pw6, 1, "\"10\"" );
           out.write( sw6.getBuffer().toString() );
         }
         out.flush();
-        objectId ++;
 
         // centerline data
         for ( DrawingPath sh : plot.mFixedStack ) {
@@ -420,9 +477,9 @@ class DrawingDxf
             NumStation t = num.getStation( blk.mTo );
  
             printString( pw4, 0, "LINE" );
+            ++handle; printAcDb( pw4, handle, "AcDbEntity", "AcDbLine" );
             printString( pw4, 8, "LEG" );
-            printObjectId( pw4, objectId );
-            printAcDb( pw4, -1, "AcDbEntity", "AcDbLine" );
+            // printInt( pw4, 39, 2 );         // line thickness
 
             if ( type == PlotInfo.PLOT_PLAN ) {
               float x =  scale * DrawingActivity.toSceneX( f.e );
@@ -445,9 +502,9 @@ class DrawingDxf
             NumStation f = num.getStation( blk.mFrom );
 
             printString( pw4, 0, "LINE" );
+            ++handle; printAcDb( pw4, handle, "AcDbEntity", "AcDbLine" );
             printString( pw4, 8, "SPLAY" );
-            printObjectId( pw4, objectId+1 );
-            printAcDb( pw4, -1, "AcDbEntity", "AcDbLine" );
+            // printInt( pw4, 39, 1 );         // line thickness
 
             float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
             if ( type == PlotInfo.PLOT_PLAN ) {
@@ -471,7 +528,6 @@ class DrawingDxf
           out.flush();
         }
 
-        objectId += 2;
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
         for ( ICanvasCommand cmd : plot.mCurrentStack ) {
@@ -486,8 +542,7 @@ class DrawingDxf
             printString( pw5, 0, "TEXT" );
             printString( pw5, 8, "STATION" );
             if ( VERSION >= 13 ) {
-              printObjectId( pw5, objectId++ );
-              printAcDb( pw5, -1, "AcDbEntity", "AcDbText" );
+              ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbText" );
               pw5.printf("%s\n  0\n", st.mName );
             }
             printXYZ( pw5, st.mXpos * scale, -st.mYpos * scale, 0.0f );
@@ -495,7 +550,7 @@ class DrawingDxf
             printString( pw5, 1, st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath)path;
-            String layer = DrawingBrushPaths.getLineThName( line.lineType() );
+            String layer = "L_" + DrawingBrushPaths.getLineThName( line.lineType() ).replace(':','-');
             // String layer = "LINE";
             int flag = 0;
             boolean use_spline = false;
@@ -509,10 +564,13 @@ class DrawingDxf
             }
             if ( use_spline ) {
               printString( pw5, 0, "SPLINE" );
+              ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbSpline" );
               printString( pw5, 8, layer );
-              printObjectId( pw5, objectId++ );
-              printAcDb( pw5, -1, "AcDbEntity", "AcDbSpline" );
+              printString( pw5, 6, lt_continuous );
+              printFloat( pw5, 48, 1.0f ); // scale 
+              printInt( pw5, 60, 0 ); // visibilty (0: visible, 1: invisible)
               printInt( pw5, 66, 1 ); // group 1
+              // printInt( pw5, 67, 0 ); // in model space [default]
               printInt( pw5, 210, 0 );
               printInt( pw5, 220, 0 );
               printInt( pw5, 230, 1 );
@@ -587,27 +645,33 @@ class DrawingDxf
               }
             } else {
               printString( pw5, 0, "POLYLINE" );
+              ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbPolyline" );
               printString( pw5, 8, layer );
-              printObjectId( pw5, objectId++ );
-              printAcDb( pw5, -1, "AcDbEntity", "AcDbPolyline" );
+              // printInt(  pw5, 39, 1 );         // line thickness
               printInt( pw5, 66, 1 ); // group 1
               printInt( pw5, 70, 0 ); // flag
               for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
                 printString( pw5, 0, "VERTEX" );
+                if ( VERSION >= 13 ) {
+                  ++handle; printAcDb( pw5, handle, "AcDbVertex", "AcDb3dPolylineVertex" );
+                  printInt( pw5, 70, 32 );
+                }
                 printString( pw5, 8, layer );
                 printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
               }
             }
-            printString( pw5, 0, "SEQEND" );
+            pw5.printf("  0\nSEQEND\n");
+            if ( VERSION >= 13 ) {
+              ++handle; printHex( pw5, 5, handle );
+            }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;
-            String layer = DrawingBrushPaths.getAreaThName( area.areaType() );
+            String layer = "A_" + DrawingBrushPaths.getAreaThName( area.areaType() ).replace(':','-');
             printString( pw5, 0, "HATCH" );    // entity type HATCH
-            // printString( pw5, 8, "AREA" );     // layer (color BYLAYER)
-            printString( pw5, 8, layer );     // layer (color BYLAYER)
-            printObjectId( pw5, objectId++ );
+            // ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbHatch" );
+            // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
+            printString( pw5, 8, layer );      // layer (color BYLAYER)
 
-            // printAcDb( pw5, -1, "AcDbEntity", "AcDbHatch" );
             // printXYZ( pw5, 0f, 0f, 0f );
             printFloat( pw5, 210, 0f ); // extrusion direction
             printFloat( pw5, 220, 0f );
@@ -656,12 +720,15 @@ class DrawingDxf
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
-            int idx = 1 + point.mPointType;
+            String block = "P_" + DrawingBrushPaths.getPointThName( point.mPointType ).replace(':','-');
+            // int idx = 1 + point.mPointType;
             printString( pw5, 0, "INSERT" );
+            ++handle; printAcDb( pw5, handle, "AcDbBlockReference" );
             printString( pw5, 8, "POINT" );
-            printInt( pw5, 2, idx );
+            printString( pw5, 2, block );
             printFloat( pw5, 41, POINT_SCALE );
             printFloat( pw5, 42, POINT_SCALE );
+            printFloat( pw5, 50, 360-(float)(point.mOrientation) );
             printXYZ( pw5, point.cx * scale, -point.cy * scale, 0.0f );
           }
           out.write( sw5.getBuffer().toString() );

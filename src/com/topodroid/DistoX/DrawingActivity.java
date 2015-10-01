@@ -375,6 +375,15 @@ public class DrawingActivity extends ItemDrawer
     //   setTheTitle();
     // }
 
+    @Override
+    public void lineSelected( int k ) 
+    {
+      super.lineSelected( k );
+      if ( mCurrentLine == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+        setButtonContinue( false );
+      }
+    }
+
     static final float SCALE_FIX = 20.0f;  // N.B. DO NOT CHANGE (would break backward compat.)
 
     public static final float CENTER_X = 100f;
@@ -496,9 +505,8 @@ public class DrawingActivity extends ItemDrawer
           setTitle( s1 + String.format( res.getString(R.string.title_draw_area),
                                    DrawingBrushPaths.mAreaLib.getAreaName(mCurrentArea) ) );
         }
-        // setButtonContinue( false ); // replaced with these two lines
-        // mContinueLine = mContinueLine && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex;
-        boolean visible = ( mSymbol == SYMBOL_LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
+        // boolean visible = ( mSymbol == SYMBOL_LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
+        boolean visible = ( mSymbol == SYMBOL_LINE );
         mButton2[ BTN_CONTINUE ].setVisibility( visible? View.VISIBLE : View.GONE );
       } else if ( mMode == MODE_MOVE ) {
         setTitle( s1 + res.getString( R.string.title_move ) );
@@ -748,9 +756,8 @@ public class DrawingActivity extends ItemDrawer
   private void setButtonContinue( boolean continue_line )
   {
     mContinueLine = continue_line;
-    if ( mSymbol == SYMBOL_LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
+    if ( mSymbol == SYMBOL_LINE /* && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex */ ) {
       mButton2[ BTN_CONTINUE ].setVisibility( View.VISIBLE );
-      // mButton2[ BTN_CONTINUE ].setBackgroundResource( icons00[ ( mContinueLine ? IC_CONTINUE : IC_CONTINUE_NO ) ] );
       mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mContinueLine ? mBMcontinue : mBMcontinue_no  );
     } else {
       mButton2[ BTN_CONTINUE ].setVisibility( View.GONE );
@@ -1806,7 +1813,7 @@ public class DrawingActivity extends ItemDrawer
                           BezierPoint p3 = c.getPoint(3);
                           lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
-                        if ( mContinueLine && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
+                        if ( mContinueLine && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                           if ( line != null ) {
                             // Log.v( "DistoX", "continuing line ");
@@ -1815,7 +1822,6 @@ public class DrawingActivity extends ItemDrawer
                           } else {
                             mDrawingSurface.addDrawingPath( lp1 );
                           }
-                          // setButtonContinue();
                         } else {
                           mDrawingSurface.addDrawingPath( lp1 );
                         }
@@ -1937,7 +1943,6 @@ public class DrawingActivity extends ItemDrawer
                         } else {
                           mDrawingSurface.addDrawingPath( mCurrentLinePath );
                         }
-                        // setButtonContinue();
                       } else {
                         mDrawingSurface.addDrawingPath( mCurrentLinePath );
                       }
@@ -2557,7 +2562,8 @@ public class DrawingActivity extends ItemDrawer
       // if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton5[0] ) {
       //   makeModePopup( b );
 
-      } else if ( b == mButton1[k1++] ) { // download
+      } else if ( b == mButton1[k1++] ) { // DOWNLOAD
+        setConnectionStatus( 2 );
         resetFixedPaint();
         if ( mType == (int)PlotInfo.PLOT_PLAN ) {
           saveReference( mPlot1, mPid1 );
@@ -2607,8 +2613,9 @@ public class DrawingActivity extends ItemDrawer
       } else if ( b == mButton2[k2++] ) { // pointBtn
         new ItemPickerDialog(this, this, mType ).show();
       } else if ( b == mButton2[k2++] ) { //  continueBtn
-        setButtonContinue( ! mContinueLine );
-
+        if ( mSymbol == SYMBOL_LINE && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+          setButtonContinue( ! mContinueLine );
+        }
 
       } else if ( b == mButton3[k3++] ) { // prev
         mMode = MODE_SHIFT;
@@ -3168,7 +3175,7 @@ public class DrawingActivity extends ItemDrawer
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 3 + ( TopoDroidSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
+        int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 5 + ( TopoDroidSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
         (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 8 ) ).show();
       }
     }

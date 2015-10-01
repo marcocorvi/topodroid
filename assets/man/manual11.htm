@@ -48,7 +48,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><u>Undo</u> removes the last items you have drawn, one at a time.</li>
 <li><u>Redo</u> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
 <li><u>Drawing tool</u> picker. By default the tool picker lists the tool graphics and the name. Once you are used to the graphics, you can switch to the more compact grid view without the names, with the appropriate setting. You can farther limit the displayed tools, by disabling the ones you do not need through the "palette" menu.</li>
-<li><u>Continuation</u> [N]. When this button is pressed a "wall" line started close to the end of another is considered as its continuation and is attached to that.</li> 
+<li><u>Continuation</u> [N]. When this button is pressed a line started close to the end of another line of the same type is considered as its continuation and is attached to that. Note that a new line is not created, and "undoing" the drawing action removes the whole line.</li> 
 </ulist><br><p>
 
 The <b>erase</b> mode has the <u>Undo</u> and <u>Redo</u> buttons. The erasing actions can be un-done and re-done just like any drawing actions. However, erasing can affects the position of a line in the list of undo's. Erasing the middle of a line drops the line from the list and puts the two end pieces at the end of the list. The "undo" removes the two pieces and puts the line at the end of the list.<br><p>
@@ -59,7 +59,7 @@ The <b>edit</b> [A] mode has four buttons besides the green ones:
 <li><u>Next</u> to go to the next point in the selection.</li>
 <li><u>Edit</u> (point-wise edit). Editing the item attributes and moving/editing the item point(s).</li>
 <li><u>Item</u> (item-wise edit): with this button you edit item properties. For example for a label you can change the text.</li>
-<li><u>Delete</u>: deletes the item from the sketch (it asks for confirmation).</li>
+<li><u>Delete</u>: deletes the item from the sketch (it asks for confirmation, and can be "undone").</li>
 </ulist><br><p>
 
 <h4>MENUS</h4>
@@ -98,7 +98,6 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
 <li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
 <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
 <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
-<li><i>Sketch auto-stations</i>: whether to automatically add station points to the saved therion file(s). If you want to use the sketch files in therion they must have station points to define their scale. You can choose manually which point to add (by editing the sketch drawing), or let TopoDroid add the stations. The program will add all the stations that are "inside" the drawing (inside the drawing convex hull).</li>
 <li><i>Midline check</i>: whether to check if all the legs are attached to the midline</li>
 <li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
 

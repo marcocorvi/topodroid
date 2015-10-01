@@ -544,7 +544,7 @@ public class DrawingCommandManager
     return false;
   }
 
-  void deletePath( DrawingPath path )
+  void deletePath( DrawingPath path, EraseCommand eraseCmd )
   {
     synchronized( mCurrentStack ) {
       mCurrentStack.remove( path );
@@ -554,6 +554,7 @@ public class DrawingCommandManager
       clearSelected();
     }
     // checkLines();
+    eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
 
   void sharpenLine( DrawingLinePath line, boolean reduce ) 
@@ -850,7 +851,7 @@ public class DrawingCommandManager
     synchronized( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
       while ( i.hasNext() ){
-        final ICanvasCommand cmd = (DrawingPath) i.next();
+        ICanvasCommand cmd = (ICanvasCommand) i.next();
         if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
 
         final DrawingPath drawingPath = (DrawingPath)cmd;

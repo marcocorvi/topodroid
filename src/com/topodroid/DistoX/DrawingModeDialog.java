@@ -67,8 +67,11 @@ public class DrawingModeDialog extends Dialog
         mCBstation.setChecked( (mode & DrawingCommandManager.DISPLAY_STATION) != 0 );
         mCBgrid.setChecked(    (mode & DrawingCommandManager.DISPLAY_GRID) != 0 );
 
-        mCBfixed.setChecked( mParent.mShiftDrawing );
-        if ( ! TopoDroidSetting.mLevelOverNormal ) mCBfixed.setVisibility( View.GONE );
+        if ( mParent != null && TopoDroidSetting.mLevelOverNormal ) {
+          mCBfixed.setChecked( mParent.mShiftDrawing );
+        } else {
+          mCBfixed.setVisibility( View.GONE );
+        }
 
         setTitle( R.string.title_refs );
     }
@@ -84,7 +87,7 @@ public class DrawingModeDialog extends Dialog
           if ( mCBstation.isChecked() ) mode |= DrawingCommandManager.DISPLAY_STATION;
           if ( mCBgrid.isChecked() ) mode |= DrawingCommandManager.DISPLAY_GRID;
           // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Mode " + mode );
-          if ( TopoDroidSetting.mLevelOverNormal ) {
+          if ( mParent != null && TopoDroidSetting.mLevelOverNormal ) {
             mParent.mShiftDrawing = mCBfixed.isChecked();
           }
           mSurface.setDisplayMode( mode );

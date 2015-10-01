@@ -17,6 +17,13 @@
        />
 
    <CheckBoxPreference
+       android:key="DISTOX_AUTO_STATIONS"
+       android:summary="@string/pref_autoStations_summary"
+       android:title="@string/pref_autoStations_title"
+       android:defaultValue="true"
+     />
+
+   <CheckBoxPreference
        android:key="DISTOX_STATION_PREFIX"
        android:summary="@string/pref_station_prefix_summary"
        android:title="@string/pref_station_prefix_title"

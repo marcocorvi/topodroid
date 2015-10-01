@@ -1700,6 +1700,8 @@ public class DataHelper extends DataSetObservable
      if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
 
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     if ( station1 == null ) return list;
+
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
        "surveyId=? and status=? and ( fStation=? or tStation=? or fStation=? or tStation=? )",
@@ -1726,6 +1728,8 @@ public class DataHelper extends DataSetObservable
    public List<DistoXDBlock> selectAllShotsAtStation( long sid, String station )
    {
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
+     if ( station == null ) return list;
+
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
        "surveyId=? and status=? and fStation=?", 

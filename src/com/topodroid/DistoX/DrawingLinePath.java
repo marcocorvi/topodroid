@@ -215,7 +215,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
     }
     if ( mReversed ) {
-      pw.format(" -reversed on");
+      pw.format(" -reverse on");
     }
     if ( mOptions != null && mOptions.length() > 0 ) {
       pw.format(" %s", mOptions );

@@ -142,7 +142,7 @@ public class SurveyNewDialog extends Dialog
       mEditName.setError( error );
       return;
     }
-    name = TopoDroidApp.noSpaces( name );
+    name = TopoDroidUtil.noSpaces( name );
     if ( ! saveSurvey( name ) ) {
       String error = mContext.getResources().getString( R.string.survey_exists );
       mEditName.setError( error );
@@ -167,7 +167,7 @@ public class SurveyNewDialog extends Dialog
   private boolean saveSurvey( String name )
   {
     // FIXME FORCE NAMES WITHOUT SPACES
-    name = TopoDroidApp.noSpaces( name );
+    name = TopoDroidUtil.noSpaces( name );
     name = name.trim();
     if ( name.length() == 0 ) return false;
     if ( mApp.hasSurveyName( name ) ) { // name already exists

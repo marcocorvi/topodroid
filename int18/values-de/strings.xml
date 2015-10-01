@@ -508,8 +508,10 @@
 -->
     <string name="help_help">Diese Hilfe</string>
     <string name="help_manual">Handbuch</string>
-    <string name="help_more">Die sekundären Aktionen zeigen</string>
-    <string name="help_less">Zu den primären Aktionen zurückgehen</string>
+    <!-- NO string name="help_more">Die sekundären Aktionen zeigen</string -->
+    <!-- NO string name="help_less">Zu den primären Aktionen zurückgehen</string -->
+    <!-- TODO string name="help_measure">Measure distances</string -->
+
     <string name="help_coeff">Die Kalibrierung Koeffizienten zeigen</string>
     <string name="help_current_station">Gespeichert Messpunkten</string>
     <string name="help_azimuth">Extend Referenzazimut</string>

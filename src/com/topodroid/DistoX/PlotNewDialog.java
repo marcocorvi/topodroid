@@ -135,7 +135,7 @@ public class PlotNewDialog extends Dialog
         mEditName.setError( error );
         return;
       } 
-      name = TopoDroidApp.noSpaces( name );
+      name = TopoDroidUtil.noSpaces( name );
       if ( name.length() == 0 ) {
         String error = mContext.getResources().getString( R.string.error_name_required );
         mEditName.setError( error );
@@ -146,7 +146,7 @@ public class PlotNewDialog extends Dialog
         mEditStart.setError( error );
         return;
       } 
-      // start = TopoDroidApp.noSpaces( start );
+      // start = TopoDroidUtil.noSpaces( start );
       start = start.trim();
       if ( start.length() == 0 ) {
         String error = mContext.getResources().getString( R.string.error_start_required );
@@ -169,7 +169,7 @@ public class PlotNewDialog extends Dialog
       // else if ( mBtnExtended.isChecked() ) { type = PlotInfo.PLOT_EXTENDED; }
       // else if ( mBtnVSection.isChecked() ) { type = PlotInfo.PLOT_V_SECTION; }
       // else if ( mBtnHSection.isChecked() ) { type = PlotInfo.PLOT_H_SECTION; }
-      // view = TopoDroidApp.noSpaces( view );
+      // view = TopoDroidUtil.noSpaces( view );
       // mMaker.makeNewPlot( name, type, start, view );
       mMaker.makeNewPlot( name, start );
     // } else if ( b == mBtnBack ) {

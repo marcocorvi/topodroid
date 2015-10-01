@@ -59,4 +59,17 @@ public class TopoDroidUtil
     return (float)( Math.atan( slp/100 ) * RAD2GRAD );
   }
 
+
+  static String noSpaces( String s )
+  {
+    return ( s == null )? null 
+      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "");
+  }
+
+  static String dropSpaces( String s )
+  {
+    return ( s == null )? null 
+      : s.trim().replaceAll("\\s+", "");
+  }
+
 }

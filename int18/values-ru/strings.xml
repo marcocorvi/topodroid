@@ -517,8 +517,9 @@
 
     <string name="help_help">Помощь</string>
     <string name="help_manual">Инструкция</string>
-    <string name="help_more">Показать вторичные функции</string>
-    <string name="help_less">Показать первичные функции</string>
+    <!-- NO string name="help_more">Показать вторичные функции</string -->
+    <!-- NO string name="help_less">Показать первичные функции</string -->
+    <!-- TODO string name="help_measure">Measure distances</string -->
     
     <string name="help_coeff">Показать коэфиценты калибровки</string>
     <string name="help_current_station">Сохраненные пикеты</string>

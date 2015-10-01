@@ -459,8 +459,9 @@
 
     <string name="help_help">Ayuda</string>
     <!-- FIXME string name="help_manual">Manual online</string -->
-    <string name="help_more">Mostrar otras opciones</string>
-    <string name="help_less">Volver a opciones principales</string>
+    <!-- NO string name="help_more">Mostrar otras opciones</string -->
+    <!-- NO string name="help_less">Volver a opciones principales</string -->
+    <!-- TODO string name="help_measure">Measure distances</string -->
     
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_current_station">Estaciones guardadas</string>

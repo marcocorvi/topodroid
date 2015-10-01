@@ -75,9 +75,10 @@ public class OverviewActivity extends ItemDrawer
                                       , IZoomer
 {
   private static int izons[] = { 
-                        R.drawable.iz_measure,        // 0
-                        // R.drawable.iz_plan,
-                        R.drawable.iz_menu,          // 1
+                        R.drawable.iz_measure,       // 0
+                        R.drawable.iz_mode,          // 1
+                        // TODO R.drawable.iz_plan,
+                        R.drawable.iz_menu,          // 2
                         R.drawable.iz_measure_on,
                       };
   private static int menus[] = {
@@ -86,8 +87,9 @@ public class OverviewActivity extends ItemDrawer
                      };
 
   private static int help_icons[] = { 
-                        R.string.help_edit,
-                        R.string.help_toggle_plot,
+                        R.string.help_measure,
+                        R.string.help_refs,
+                        // TODO R.string.help_toggle_plot,
                       };
   private static int help_menus[] = {
                         R.string.help_prefs,
@@ -346,7 +348,7 @@ public class OverviewActivity extends ItemDrawer
     // BUTTON BAR
   
     private Button[] mButton1; // primary
-    private int mNrButton1 = 1;          // main-primary
+    private int mNrButton1 = 2;          // main-primary
     HorizontalListView mListView;
     HorizontalButtonView mButtonView1;
     ListView   mMenu;
@@ -885,8 +887,11 @@ public class OverviewActivity extends ItemDrawer
           mOnMeasure = 1;
           mButton1[0].setBackgroundDrawable( mBMselectOn );
         }
-      } else if ( b == mButton1[1] ) { // toggle plan/extended
-        switchPlotType();
+      } else if ( b == mButton1[1] ) { // references
+        new DrawingModeDialog( this, null, mOverviewSurface ).show();
+
+      // TODO } else if ( b == mButton1[2] ) { // toggle plan/extended
+      // TODO   switchPlotType();
       }
     }
 

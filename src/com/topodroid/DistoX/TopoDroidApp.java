@@ -324,12 +324,6 @@ public class TopoDroidApp extends Application
     return ( mDevice == null || ( info != null && info.device.equals( mDevice.mAddress ) ) );
   }
 
-  static String noSpaces( String s )
-  {
-    return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "");
-  }
-
   static void checkPath( String filename )
   {
     if ( filename == null ) return;

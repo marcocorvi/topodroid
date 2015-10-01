@@ -525,8 +525,9 @@
 
     <string name="help_help">Помощ</string>
     <string name="help_manual">Ръководство</string>
-    <string name="help_more">Показване на допълнителни команди</string>
-    <string name="help_less">Връщане към основните команди</string>
+    <!-- NO string name="help_more">Показване на допълнителни команди</string -->
+    <!-- NO string name="help_less">Връщане към основните команди</string -->
+    <!-- TODO string name="help_measure">Measure distances</string -->
     
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>

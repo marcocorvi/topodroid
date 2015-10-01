@@ -523,8 +523,9 @@
 
     <string name="help_help">This help</string>
     <string name="help_manual">User manual</string>
-    <string name="help_more">Show the secondary actions</string>
-    <string name="help_less">Return to the primary actions</string>
+    <!-- UNUSED string name="help_more">Show the secondary actions</string -->
+    <!-- UNUSED string name="help_less">Return to the primary actions</string -->
+    <string name="help_measure">Measure distances</string>
     
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_continue">Continue drawing a line</string>

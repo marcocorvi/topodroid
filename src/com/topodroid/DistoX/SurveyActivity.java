@@ -124,6 +124,7 @@ public class SurveyActivity extends Activity
 
   void renameSurvey( String name ) 
   {
+    name = TopoDroidUtil.noSpaces( name );
     if ( mApp.renameCurrentSurvey( mApp.mSID, name, true ) ) {
       mTextName.setText( name );
     } else {
@@ -467,7 +468,7 @@ public class SurveyActivity extends Activity
     }
 
     // FIXME FORCE NAMES WITHOUT SPACES
-    // name = TopoDroidApp.noSpaces( name );
+    // name = TopoDroidUtil.noSpaces( name );
     if ( date != null ) { date = date.trim(); }
     if ( team != null ) { team = team.trim(); }
     if ( comment != null ) { comment = comment.trim(); }

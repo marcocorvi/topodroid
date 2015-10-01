@@ -1062,6 +1062,7 @@ public class ShotActivity extends Activity
       int k1 = 0;
       // int k2 = 0;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
+        setConnectionStatus( 2 ); // turn arrow orange
         // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Download button, mode " + TopoDroidSetting.mConnectionMode );
         mDataDownloader.toggleDownload();
         setConnectionStatus( mDataDownloader.getStatus() );

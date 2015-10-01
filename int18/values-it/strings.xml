@@ -467,8 +467,9 @@
 
     <string name="help_help">Questo aiuto</string>
     <string name="help_manual">Manuale online</string>
-    <string name="help_more">Passa ai tasti secondari</string>
-    <string name="help_less">Ritorna ai tasti primari</string>
+    <!-- NO string name="help_more">Passa ai tasti secondari</string -->
+    <!-- NO string name="help_less">Ritorna ai tasti primari</string -->
+    <!-- TODO string name="help_measure">Measure distances</string -->
     
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_current_station">Capisaldi salvati</string>

@@ -147,7 +147,13 @@ public class DrawingSurface extends SurfaceView
     boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
     { return commandManager.removeLinePoint(line, point, sp); }
 
-    void deletePath( DrawingPath path ) { commandManager.deletePath( path ); }
+    void deletePath( DrawingPath path ) 
+    { 
+      isDrawing = true;
+      EraseCommand cmd = new EraseCommand();
+      commandManager.deletePath( path, cmd );
+      commandManager.addEraseCommand( cmd );
+    }
 
     void sharpenLine( DrawingLinePath line, boolean reduce ) { commandManager.sharpenLine( line, reduce ); }
 

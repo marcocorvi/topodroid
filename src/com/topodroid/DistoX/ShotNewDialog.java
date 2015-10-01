@@ -276,11 +276,11 @@ public class ShotNewDialog extends Dialog
         if ( shot_to == null || shot_to.length() == 0 ) {
           shot_to = mETto.getHint().toString();
         } else {
-          shot_to = TopoDroidApp.noSpaces( shot_to );
+          shot_to = TopoDroidUtil.noSpaces( shot_to );
           if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";
         }
 
-        shot_from = TopoDroidApp.noSpaces( shot_from );
+        shot_from = TopoDroidUtil.noSpaces( shot_from );
         if ( shot_from.length() == 0 ) {
           mETfrom.setError( mContext.getResources().getString( R.string.error_from_required ) );
           return;

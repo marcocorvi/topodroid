@@ -311,7 +311,7 @@ public class CalibActivity extends Activity
       mEditName.setError( error );
       return;
     }
-    name = TopoDroidApp.noSpaces( name );
+    name = TopoDroidUtil.noSpaces( name );
     if ( name.length() == 0 ) {
       String error = getResources().getString( R.string.error_name_required );
       mEditName.setError( error );
@@ -329,7 +329,7 @@ public class CalibActivity extends Activity
       mApp.mDData.updateCalibInfo( mApp.mCID, date, device, comment );
       Toast.makeText( this, R.string.calib_updated, Toast.LENGTH_SHORT ).show();
     } else { // new calib
-      name = TopoDroidApp.noSpaces( name );
+      name = TopoDroidUtil.noSpaces( name );
       if ( name != null && name.length() > 0 ) {
         if ( mApp.hasCalibName( name ) ) { // name already exists
           // Toast.makeText( this, R.string.calib_exists, Toast.LENGTH_SHORT ).show();

@@ -82,20 +82,20 @@ public class Sketch3dNewDialog extends Dialog
       String start = mEditStart.getText().toString();
       String next  = mEditNext.getText().toString();
 
-      name = TopoDroidApp.noSpaces( name );
+      name = TopoDroidUtil.noSpaces( name );
       if ( name == null || name.length() == 0 ) {
         error = mContext.getResources().getString( R.string.error_name_required );
         mEditName.setError( error );
         return;
       } else {
-        start = TopoDroidApp.noSpaces( start );
+        start = TopoDroidUtil.noSpaces( start );
         if ( start == null || start.length() == 0 ) {
           error = mContext.getResources().getString( R.string.error_start_required );
           mEditStart.setError( error );
           return;
         } else {
           if ( next != null ) {
-            next = TopoDroidApp.noSpaces( next );
+            next = TopoDroidUtil.noSpaces( next );
             if ( next.length() > 0 ) {
               if ( ! mApp.mData.hasShot( mApp.mSID, start, next ) ) {
                 error = mContext.getResources().getString( R.string.no_shot_between_stations );
