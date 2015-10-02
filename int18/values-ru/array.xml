@@ -117,8 +117,8 @@
 
   <string-array name="calibAlgo">
      <item name="auto">авто</item>
-     <item name="linear">линейено</item>
-     <item name="nonlinear">не-линейено</item>
+     <item name="linear">линейно</item>
+     <item name="nonlinear">не-линейно</item>
   </string-array>
 
 </resources>
