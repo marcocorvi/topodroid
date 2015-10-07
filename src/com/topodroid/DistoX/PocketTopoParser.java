@@ -164,7 +164,7 @@ public class PocketTopoParser extends ImportParser
       writeDrawing( filename2, sideview, PlotInfo.PLOT_EXTENDED, 5*DrawingActivity.CENTER_X, 5*DrawingActivity.CENTER_Y );
       // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
     } else {
-      Log.v("PTDistoX", "PT null StartFrom");
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "PT null StartFrom");
     }
     
   }

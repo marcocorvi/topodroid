@@ -237,16 +237,29 @@ public class OverviewActivity extends ItemDrawer
 
     // splay = false
     // selectable = false
-    private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff )
+    private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff, boolean splay )
     {
-      DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-      dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
+      DrawingPath dpath = null;
+      if ( splay ) {
+        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+        if ( blk.mClino > TopoDroidSetting.mVertSplay ) {
+          dpath.setPaint( DrawingBrushPaths.fixedSplay4Paint );
+        } else if ( blk.mClino < -TopoDroidSetting.mVertSplay ) {
+          dpath.setPaint( DrawingBrushPaths.fixedSplay3Paint );
+        } else {
+          dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
+        }
+      } else {
+        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
+        dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
+      }
       makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mOverviewSurface.addFixedPath( dpath, false );
+      mOverviewSurface.addFixedPath( dpath, false ); // false: non-selectable
     }
 
     public void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff )
     {
+      // Log.v("DistoX", "Overview grid X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " offset " + xoff + " " + yoff );
       xmin -= 10.0f;
       xmax += 10.0f;
       ymin -= 10.0f;
@@ -302,8 +315,10 @@ public class OverviewActivity extends ItemDrawer
 
   private void computeReferences( int type, float xoff, float yoff, float zoom )
   {
-    mOverviewSurface.clearReferences( type );
-    mOverviewSurface.setManager( type );
+    // Log.v("DistoX", "Overview compute reference. Type " + type );
+    // mOverviewSurface.clearReferences( type );
+    // mOverviewSurface.setManager( type );
+    mOverviewSurface.setManager( PlotInfo.PLOT_PLAN ); // MUST use first commandManager
 
     if ( type == PlotInfo.PLOT_PLAN ) {
       addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), xoff, yoff );
@@ -311,14 +326,24 @@ public class OverviewActivity extends ItemDrawer
       addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), xoff, yoff );
     }
 
-
     List< NumStation > stations = mNum.getStations();
     List< NumShot > shots = mNum.getShots();
+    List< NumSplay > splays = mNum.getSplays();
+    // Log.v("DistoX", "Overview stations " + stations.size() + " shots " + shots.size() + " splays " + splays.size() );
+
     if ( type == PlotInfo.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), xoff, yoff );
+        addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s),
+                      xoff, yoff, false );
+      }
+      for ( NumSplay sp : splays ) {
+        if ( Math.abs( sp.getBlock().mClino ) < TopoDroidSetting.mSplayVertThrs ) {
+          NumStation st = sp.from;
+          addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), 
+                        xoff, yoff, true );
+        }
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
@@ -329,18 +354,24 @@ public class OverviewActivity extends ItemDrawer
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), xoff, yoff );
+          addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v),
+                        xoff, yoff, false );
         }
       } 
+      for ( NumSplay sp : splays ) {
+        NumStation st = sp.from;
+        addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), 
+                      xoff, yoff, true );
+      }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
         dst = mOverviewSurface.addDrawingStation( st, toSceneX(st.h) - xoff, toSceneY(st.v) - yoff, true );
       }
     }
 
-    if ( (! mNum.surveyAttached) && TopoDroidSetting.mCheckAttached ) {
-      Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
-    }
+    // if ( (! mNum.surveyAttached) && TopoDroidSetting.mCheckAttached ) {
+    //   Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+    // }
   }
     
 
@@ -356,7 +387,7 @@ public class OverviewActivity extends ItemDrawer
     ArrayAdapter< String > mMenuAdapter;
     boolean onMenu;
   
-    List<DistoXDBlock> mList = null;
+    List<DistoXDBlock> mBlockList = null;
   
     public float zoom() { return mZoom; }
 
@@ -452,6 +483,8 @@ public class OverviewActivity extends ItemDrawer
       mZoom        = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_ZOOM );
       mType = (int)extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE );
 
+      // Log.v("DistoX", "Overview from " + mFrom + " Type " + mType + " Zoom " + mZoom );
+
       // mBezierInterpolator = new BezierInterpolator( );
 
       mImage = (Button) findViewById( R.id.handle );
@@ -463,6 +496,7 @@ public class OverviewActivity extends ItemDrawer
       mMenu.setOnItemClickListener( this );
 
       doStart();
+      // Log.v("DistoX", "Overview offset " + mOffset.x + " " + mOffset.y );
 
       mOffset.x   += extras.getFloat( TopoDroidTag.TOPODROID_PLOT_XOFF );
       mOffset.y   += extras.getFloat( TopoDroidTag.TOPODROID_PLOT_YOFF );
@@ -516,9 +550,10 @@ public class OverviewActivity extends ItemDrawer
 
     private void doStart()
     {
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doStart " + mName1 + " " + mName2 );
-      mList = mData.selectAllLegShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      if ( mList.size() == 0 ) {
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "do Start " + mName1 + " " + mName2 );
+      // mBlockList = mData.selectAllLegShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      mBlockList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      if ( mBlockList.size() == 0 ) {
         Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
         finish();
       } else {
@@ -531,7 +566,8 @@ public class OverviewActivity extends ItemDrawer
     private void loadFiles( long type )
     {
       List<PlotInfo> plots = mApp.mData.selectAllPlotsWithType( mSid, TopoDroidApp.STATUS_NORMAL, type );
-      // Log.v( "DistoX", "plots " + plots.size() );
+
+      // Log.v( "DistoX", "Overview plots " + plots.size() );
 
       // if ( plots.size() < 1 ) { // N.B. this should never happpen
       //   Toast.makeText( this, R.string.few_plots, Toast.LENGTH_SHORT ).show();
@@ -554,10 +590,10 @@ public class OverviewActivity extends ItemDrawer
           String view  = plot.view;
           mPlot1 = plot;
           // mPid = plot.id;
-          mNum = new DistoXNum( mList, start, view );
+          mNum = new DistoXNum( mBlockList, start, view );
           mStartStation = mNum.getStation( start );
           computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
-          // Log.v( "DistoX", "num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );
+          // Log.v( "DistoX", "Overview num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );
         } else {
           NumStation st = mNum.getStation( start );
           if ( type == PlotInfo.PLOT_PLAN ) {
@@ -575,9 +611,12 @@ public class OverviewActivity extends ItemDrawer
         // now try to load drawings from therion file
         String fullName = mApp.mySurvey + "-" + plot.name;
         TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + fullName );
+        // Log.v("DistoX", "Overview load file " + fullName );
 
         String filename = TopoDroidPath.getTh2FileWithExt( fullName );
-        mAllSymbols = mAllSymbols && mOverviewSurface.loadTherion( filename, xdelta, ydelta, missingSymbols );
+        // N.B. this loads the drawing on DrawingSurface.mCommandManager1
+        boolean all_symbols = mOverviewSurface.loadTherion( filename, xdelta, ydelta, missingSymbols );
+        mAllSymbols = mAllSymbols && all_symbols;
       }
 
       if ( ! mAllSymbols ) {

@@ -70,13 +70,13 @@ class PTDrawing
         if ( el != null ) el.read( fs );
         _elements.add( el );
       }
-      Log.v("PTDistoX", "drawing read " + _elements.size() + " elements " );
+      // Log.v("PTDistoX", "drawing read " + _elements.size() + " elements " );
     }
 
     void write( FileOutputStream fs )
     {
       _mapping.write( fs );
-      Log.v( "DistoX", "PT drawing write elements " + _elements.size() );
+      // Log.v( "DistoX", "PT drawing write elements " + _elements.size() );
       for ( PTElement e : _elements ) e.write( fs );
       byte id = PTElement.ID_NO_ELEMENT;
       PTFile.writeByte( fs, id );
@@ -84,7 +84,7 @@ class PTDrawing
 
     // void print()
     // {
-    //   Log.v( TopoDroidApp.TAG,  "drawing: size " + _elements.size() );
+    //   // Log.v( TopoDroidApp.TAG,  "drawing: size " + _elements.size() );
     //   _mapping.print();
     //   for ( PTElement el : _elements ) el.print();
     // }

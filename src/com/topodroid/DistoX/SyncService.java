@@ -455,7 +455,7 @@ public class SyncService
                 mRemoteDevice = null;
                 setConnectState( STATE_NONE );
               } else {
-                Log.v("DistoX", "read <" + data[0] + "|" + data[1] + ">" );
+                // Log.v("DistoX", "read <" + data[0] + "|" + data[1] + ">" );
                 mHandler.obtainMessage( MESSAGE_READ, pos, -1, tmp).sendToTarget();
                 pos = 0;
               }
@@ -493,7 +493,7 @@ public class SyncService
      */
     public void write( byte[] buffer ) 
     {
-      Log.v("DistoX", "sync connected write <" + buffer[0] + "|" + buffer[1] + ">" );
+      // Log.v("DistoX", "sync connected write <" + buffer[0] + "|" + buffer[1] + ">" );
       try {
         mmOutStream.write( buffer );
         // Share the sent message back to the UI Activity: NOT USED .... FIXME

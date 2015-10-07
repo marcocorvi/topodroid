@@ -74,7 +74,7 @@ public class DistoXComm
 // -----------------------------------------------------------
 // Bluetooth receiver
 
-  private BroadcastReceiver mBTReceiver;
+  private BroadcastReceiver mBTReceiver = null;
 
   private void resetBTReceiver()
   {

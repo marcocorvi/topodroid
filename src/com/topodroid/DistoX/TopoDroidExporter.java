@@ -468,8 +468,7 @@ class TopoDroidExporter
           pw.format("      </coordinates>\n");
           pw.format("    </LineString>\n");
         } else {
-          Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords 
-                                      + " " + to.name + " " + to.mHasCoords );
+          // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
         }
       }
       pw.format("  </MultiGeometry>\n");

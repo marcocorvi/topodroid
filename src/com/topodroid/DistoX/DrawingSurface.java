@@ -99,7 +99,7 @@ public class DrawingSurface extends SurfaceView
 
     void setManager( long type ) 
     {
-      // Log.v( TopoDroidApp.TAG, " set manager type " + PlotInfo.plotType[type] );
+      // Log.v( "DistoX", " set manager type " + type );
       if ( type == PlotInfo.PLOT_EXTENDED ) {
         commandManager = mCommandManager2;
       } else if ( type == PlotInfo.PLOT_PLAN ) {

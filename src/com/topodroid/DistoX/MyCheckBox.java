@@ -64,7 +64,7 @@ public class MyCheckBox extends CompoundButton
       @Override
       public void onClick( View v )
       {
-        Log.v("DistoX", "MyCheckBox on click ");
+        // Log.v("DistoX", "MyCheckBox on click ");
         toggleState();
         // setState( isChecked() );
       }

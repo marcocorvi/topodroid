@@ -102,7 +102,7 @@ public class DeviceHelper extends DataSetObservable
     try {
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
-          Log.v("DistoX", "failed get writable database " + database_name );
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "failed get writable database " + database_name );
           return;
         }
 

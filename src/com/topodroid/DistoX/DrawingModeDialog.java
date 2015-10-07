@@ -35,7 +35,7 @@ public class DrawingModeDialog extends Dialog
     // private Button mBtnBack;
 
     private DrawingSurface mSurface;
-    private DrawingActivity mParent;
+    private DrawingActivity mParent; // used only to decide whether display checkbox "Shift"
 
     public DrawingModeDialog( Context context, DrawingActivity parent, DrawingSurface surface )
     {
@@ -62,10 +62,10 @@ public class DrawingModeDialog extends Dialog
         // mBtnBack.setOnClickListener( this );
 
         int mode = mSurface.getDisplayMode();
-        mCBleg.setChecked(     (mode & DrawingCommandManager.DISPLAY_LEG) != 0 );
-        mCBsplay.setChecked(   (mode & DrawingCommandManager.DISPLAY_SPLAY) != 0 );
-        mCBstation.setChecked( (mode & DrawingCommandManager.DISPLAY_STATION) != 0 );
-        mCBgrid.setChecked(    (mode & DrawingCommandManager.DISPLAY_GRID) != 0 );
+        mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
+        mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
+        mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
+        mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
 
         if ( mParent != null && TopoDroidSetting.mLevelOverNormal ) {
           mCBfixed.setChecked( mParent.mShiftDrawing );
@@ -81,11 +81,11 @@ public class DrawingModeDialog extends Dialog
       // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingModeDialog onClick " + view.toString() );
       switch (view.getId()){
         case R.id.button_ok:
-          int mode = DrawingCommandManager.DISPLAY_NONE;
-          if ( mCBleg.isChecked() ) mode |= DrawingCommandManager.DISPLAY_LEG;
-          if ( mCBsplay.isChecked() ) mode |= DrawingCommandManager.DISPLAY_SPLAY;
-          if ( mCBstation.isChecked() ) mode |= DrawingCommandManager.DISPLAY_STATION;
-          if ( mCBgrid.isChecked() ) mode |= DrawingCommandManager.DISPLAY_GRID;
+          int mode = DisplayMode.DISPLAY_NONE;
+          if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
+          if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
+          if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
+          if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
           // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Mode " + mode );
           if ( mParent != null && TopoDroidSetting.mLevelOverNormal ) {
             mParent.mShiftDrawing = mCBfixed.isChecked();
@@ -101,11 +101,11 @@ public class DrawingModeDialog extends Dialog
     // @Override
     // public void onBackPressed ()
     // {
-    //   int mode = DrawingCommandManager.DISPLAY_NONE;
-    //   if ( mCBleg.isChecked() ) mode |= DrawingCommandManager.DISPLAY_LEG;
-    //   if ( mCBsplay.isChecked() ) mode |= DrawingCommandManager.DISPLAY_SPLAY;
-    //   if ( mCBstation.isChecked() ) mode |= DrawingCommandManager.DISPLAY_STATION;
-    //   if ( mCBgrid.isChecked() ) mode |= DrawingCommandManager.DISPLAY_GRID;
+    //   int mode = DisplayMode.DISPLAY_NONE;
+    //   if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
+    //   if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
+    //   if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
+    //   if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
     //   mSurface.setDisplayMode( mode );
     //   cancel();
     // }

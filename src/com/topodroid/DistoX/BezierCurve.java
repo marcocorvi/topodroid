@@ -18,7 +18,7 @@ class BezierCurve
 {
   private BezierPoint c[];      // control points of the cubic spline
   private BezierPoint Vtemp[];  // work vector of four points
-  private int splitPoint;       // Point of maximum error	
+  private int splitIndex;       // Point of split (criteria: maximum error)	
 
   public BezierCurve()
   {
@@ -28,7 +28,7 @@ class BezierCurve
       c[i] = new BezierPoint();
       Vtemp[i] = new BezierPoint();
     }
-    splitPoint = -1;
+    splitIndex = -1;
   }
 
   public BezierCurve( BezierPoint c0, BezierPoint c1, BezierPoint c2, BezierPoint c3 )
@@ -42,14 +42,14 @@ class BezierCurve
     for (int i=0; i<4; ++i ) {
       Vtemp[i] = new BezierPoint();
     }
-    splitPoint = -1;
+    splitIndex = -1;
   }
 
   // control points
   public void setPoint(int k, BezierPoint p ) { c[k].set(p); }
   public BezierPoint getPoint( int k ) { return c[k]; }
 
-  public int getSplitPoint() { return splitPoint; }
+  public int getSplitIndex() { return splitIndex; }
 
   /**  ComputeMaxError: Find max squared distance of digitized points to fitted curve.
       d;		  Array of digitized points	
@@ -59,7 +59,7 @@ class BezierCurve
   */
   public float computeMaxError( ArrayList<BezierPoint> d, int first, int last, float[] u )
   {
-    splitPoint = (last - first + 1)/2;
+    splitIndex = (last - first + 1)/2;
     float maxDist = 0.0f;
     for (int i = first + 1; i < last; i++) {
       BezierPoint P = evaluate( u[i-first] );
@@ -67,7 +67,7 @@ class BezierCurve
       float dist = v.squareLength();
       if ( dist >= maxDist ) {
         maxDist = dist;
-        splitPoint = i;
+        splitIndex = i; 
       }
     }
     return maxDist;

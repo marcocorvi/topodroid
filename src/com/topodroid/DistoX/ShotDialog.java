@@ -462,13 +462,13 @@ public class ShotDialog extends Dialog
     //   // mRBback.setChecked( false );
 
     } else if ( b == mCBleg ) {
-      Log.v("DistoX", "CB leg clicked ");
+      // Log.v("DistoX", "CB leg clicked ");
       mCBleg.toggleState();
       if ( mCBleg.isChecked() ) {
         mCBall_splay.setState( false );
       }
     } else if ( b == mCBall_splay ) {
-      Log.v("DistoX", "CB all_splay clicked ");
+      // Log.v("DistoX", "CB all_splay clicked ");
       mCBall_splay.toggleState();
       if ( mCBall_splay.isChecked() ) {
         mCBleg.setState( false );

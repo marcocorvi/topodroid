@@ -130,18 +130,19 @@ public class BezierInterpolator
   
     /* Finally, derive alpha values	*/
     if ( det_C0_C1 == 0.0f ) {
-      det_C0_C1 = (C[0][0] * C[1][1]) * 0.00000001f ;
+      det_C0_C1 = (C[0][0] * C[1][1]) * 0.00000001f ; // a very small value to avoid NaN
     }
     float alpha_l = det_X_C1 / det_C0_C1;
     float alpha_r = det_C0_X / det_C0_C1;
 
-    if ( Float.isNaN( alpha_l ) || Float.isNaN( alpha_r ) ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "Npts " + nPts + " alpha " + alpha_l + " " + alpha_r );
-      for (int i = 0; i < nPts; i++) {
-        BezierPoint p = d.get(first + i);
-        // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "Pt " + i + ": " + p.mX + " " + p.mY );
-      }
-    }
+    // DEBUG
+    // if ( Float.isNaN( alpha_l ) || Float.isNaN( alpha_r ) ) {
+    //   // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "Npts " + nPts + " alpha " + alpha_l + " " + alpha_r );
+    //   for (int i = 0; i < nPts; i++) {
+    //     BezierPoint p = d.get(first + i);
+    //     // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "Pt " + i + ": " + p.mX + " " + p.mY );
+    //   }
+    // }
   
     /* If alpha negative, use the Wu/Barsky heuristic (see text) 
      * (if alpha is 0, you get coincident control points that lead to
@@ -268,7 +269,7 @@ public class BezierInterpolator
     }
   
     /* Fitting failed -- split at max error point and fit recursively */
-    int split  = bezCurve.getSplitPoint();
+    int split  = bezCurve.getSplitIndex();
     BezierPoint tHatCenter = computeCenterTangent( d, split );
     float err1 = fitCubic( d, first, split, tHat1, tHatCenter, error );
     tHatCenter.negate();

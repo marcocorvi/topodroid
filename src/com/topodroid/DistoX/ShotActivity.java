@@ -443,7 +443,7 @@ public class ShotActivity extends Activity
   public void updateBlockList( DistoXDBlock blk )
   {
     // FIXME MULTIPLE LIST
-    Log.v("DistoX", "update block list: " + blk.dataString("%.2f %.1f %.1f") );
+    // Log.v("DistoX", "update block list: " + blk.dataString("%.2f %.1f %.1f") );
     if ( mDataAdapter != null ) {
       mDataAdapter.addDataBlock( blk );
       mApp.assignStations( mDataAdapter.mItems );
