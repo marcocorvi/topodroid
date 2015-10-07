@@ -12,7 +12,7 @@
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛИНИЯ</string>
     <string name="AREA">ОБЛАСТЬ</string>
-    <string name="HELP">ПОМОЩ</string>
+    <string name="HELP">ПОМОЩЬ</string>
     <string name="STATION">ПИКЕТ </string>
 
     <string name="memoryA3">Память DistoX A3</string>
@@ -127,7 +127,7 @@
     <string name="head_tail">Память: </string>
     <string name="head_tail_failed">Ошибка чтения индекса памяти DistoX</string>
     <string name="head_tail_store_failed">Не удалось сохранить индекс памяти DistoX</string>
-    <!-- TODO string name="pairing_failed">Pairing failed</string -->
+    <string name="pairing_failed">Не удалось соединить устройства</string>
     <string name="illegal_data_value">Недопустимое значение</string>
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
@@ -182,8 +182,8 @@
     <string name="barrier_del">Продолжить показ средней линии?</string>
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
-    <!-- TODO string name="bad_line">Bad line type</string -->
-    <!-- TODO string name="bad_point">Bad point type</string -->
+    <string name="bad_line">Недопустимый тип линии</string>
+    <string name="bad_point">Недопустимый тип точки</string>
 
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calibration">Калибровка не выбрана</string>
@@ -227,7 +227,7 @@
     <string name="menu_manual_calibration">Калибровка</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">ОБЗОР</string>
-    <!-- TODO string name="menu_pair">PAIR</string -->
+    <string name="menu_pair">СОЕДИНИТЬ</string>
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">фото</string>
     <string name="menu_sensor">датчик</string>
@@ -376,7 +376,7 @@
     <string name="hide_ids">ID пикетов</string>
     <string name="hide_splay">Боковые замеры</string>
 
-    <string name="surveys">СЪЕМКИ</string>
+    <string name="surveys">СЪЁМКИ</string>
     <string name="calibs">КАЛИБ.</string>
 
     <string name="plan">ПЛАН</string>
@@ -423,9 +423,9 @@
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <string name="button_select"    >Выбрать   </string>
-    <string name="button_store"     >Store     </string>
+    <string name="button_store"     >Записать  </string>
     <string name="button_upload"    >Загрузить </string>
-    <string name="button_yes"       >Да       </string>
+    <string name="button_yes"       >Да        </string>
 
     <string name="button_sharp"     >Острый</string>
     <string name="button_rock"      >Камень</string>
@@ -507,7 +507,7 @@
     <string name="btn_surface">Поверхность</string>
 
     <string name="station_next">СЛЕД.</string>
-    <string name="no_shot_between_stations">no_shot_between_stations</string>
+    <string name="no_shot_between_stations">нет замера между пикетами</string>
     <string name="few_line_points">Слишком мало точек в линии</string>
     <string name="line_delete">удалить_линию</string>
 
@@ -519,7 +519,7 @@
     <string name="help_manual">Инструкция</string>
     <!-- NO string name="help_more">Показать вторичные функции</string -->
     <!-- NO string name="help_less">Показать первичные функции</string -->
-    <!-- TODO string name="help_measure">Measure distances</string -->
+    <string name="help_measure">Измерить расстояния</string>
     
     <string name="help_coeff">Показать коэфиценты калибровки</string>
     <string name="help_current_station">Сохраненные пикеты</string>
@@ -591,7 +591,7 @@
     <string name="help_read">Считать и вывсти коэфиценты калибровки DistoX</string>
     <string name="help_info_device">Информация об устройстве</string>
     <string name="help_scan">Найти новые устройства DistoX</string>
-    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
+    <string name="help_pair">Присоединить текущее устройство DistoX</string>
     <string name="help_open_calib">Открыть калибровку</string>
     <string name="help_export_calib">Экспорт калибровки</string>
     <string name="help_group">Присваивать номер групп автоматически</string>
@@ -769,8 +769,8 @@
   <string name="pref_bitmap_scale_title">масштаб PNG</string>
   <string name="pref_bitmap_scale_summary">Масштабный коэфицент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_scale_message">Масштабный коэфицент абриса при экспорте в PNG</string>
-  <!-- TODO string name="pref_acad_version_title">AutoCAD version</string -->
-  <!-- TODO string name="pref_acad_version_summary">AutoCAD version</string -->
+  <string name="pref_acad_version_title">Версия AutoCAD</string>
+  <string name="pref_acad_version_summary">Версия AutoCAD</string>
   <string name="pref_dxf_scale_title">Масштаб абриса в DXF</string>
   <string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string>
   <string name="pref_dxf_scale_message">Масштабирующий фактор при экспорте абриса в DXF</string>
@@ -847,8 +847,8 @@
   <string name="pref_station_size_message">Размер подписи пикетов</string>
   <string name="pref_zoom_controls_title">Управление зумом</string>
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
-  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
-  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
+  <string name="pref_side_drag_title">Перетаскивание за сторону</string>
+  <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
