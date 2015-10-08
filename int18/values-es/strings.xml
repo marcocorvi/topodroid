@@ -64,8 +64,8 @@
     <string name="calib_saturated_values">ADVERTENCIA: %1$d exceso de datos</string>
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
-    <string name="linear">linear</string>
-    <string name="non_linear">No linear</string>
+    <string name="linear">lineal</string>
+    <string name="non_linear">No lineal</string>
    
     <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ nUse el algoritmo lineal</string>
     <string name="device_busy">Dispositivo ocupado</string>
@@ -74,7 +74,7 @@
     <string name="device_model_set">Â¿Desea cambiar de dispositivo?</string>
     <string name="device_none">DistoX no seleccionado</string>
     <string name="device_pairing">Emparejado. Compruebe notificaciones</string>
-    <!-- TODO string name="device_paired">Device is paired</string -->
+    <!-- TODO string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
     <string name="device_code">DistoX código %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -118,7 +118,7 @@
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
     <string name="head_tail_store_failed">Error al almacenar en la memoria DistoX</string>
-    <!-- TODO string name="pairing_failed">Pairing failed</string -->
+    <!-- TODO string name="pairing_failed">Falló en el emparejamiento</string -->
 
     <string name="illegal_data_value">Valores de datos no válidos</string>
     <string name="label_title">Texto</string>
@@ -161,7 +161,7 @@
     <string name="group_policy_four">Política: Grupo en cuatro</string>
     <string name="group_policy_sixteen">Política: cuatro grupos de cuatro, otro solo</string>
     <string name="group_policy_distance">Política: Grupo según la distancia angular</string>
-    <string name="group_reset">Reset grupos</string>
+    <string name="group_reset">Resetear grupos</string>
 
     <string name="scale">Escala</string>
     <string name="reversed">inverso</string>
@@ -174,8 +174,8 @@
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
-    <!-- TODO string name="bad_line">Bad line type</string -->
-    <!-- TODO string name="bad_point">Bad point type</string -->
+    <!-- TODO string name="bad_line">Tipo de línea mala</string -->
+    <!-- TODO string name="bad_point">Tipo de punto Malo</string -->
 
     <string name="no_calib">No hay calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
@@ -461,7 +461,7 @@
     <!-- FIXME string name="help_manual">Manual online</string -->
     <!-- NO string name="help_more">Mostrar otras opciones</string -->
     <!-- NO string name="help_less">Volver a opciones principales</string -->
-    <!-- TODO string name="help_measure">Measure distances</string -->
+    <!-- TODO string name="help_measure">Medir distancias</string -->
     
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_current_station">Estaciones guardadas</string>
@@ -532,7 +532,7 @@
     <string name="help_read">Leer coeficientes de calibración DistoX</string>
     <string name="help_info_device">Información del dispositivo</string>
     <string name="help_scan">Buscando nuevos dispositivos DistoX</string>
-    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
+    <!-- TODO string name="help_pair">Emparejar el dispositivo DistoX actual</string -->
     <string name="help_open_calib">Abrir la calibración</string>
     <string name="help_export_calib">Exportar calibración</string>
     <string name="help_group">Asignar automáticamente números grupo</string>
@@ -671,8 +671,8 @@
   <string name="pref_backsight_summary">Desacer a punto anterior en dialogo de la nueva toma</string>
   <string name="pref_mag_anomaly_title">Anomalia magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar Anomalía Local Magnética</string>
-  <string name="pref_azimuth_manual_title">Configurado manualmente "extender"</string>
-  <string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string>
+  <string name="pref_azimuth_manual_title">Configuración manual "extensión"</string>
+  <string name="pref_azimuth_manual_summary">Configurar manualmente "extensión"</string>
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de Topógrafos</string>
   <string name="pref_team_message">Equipo de topógrafos por defecto</string>
@@ -698,11 +698,11 @@
   <string name="pref_bitmap_scale_title">Escala PNG</string>
   <string name="pref_bitmap_scale_summary">Tamaño de escala de exportación del dibujo PNG</string>
   <string name="pref_bitmap_scale_message">Tamaño de escala de exportación del dibujo PNG</string>
-  <!-- TODO string name="pref_acad_version_title">AutoCAD version</string -->
-  <!-- TODO string name="pref_acad_version_summary">AutoCAD version</string -->
-  <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
-  <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
-  <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
+  <!-- TODO string name="pref_acad_version_title">Versión de AutoCAD</string -->
+  <!-- TODO string name="pref_acad_version_summary">Versión de AutoCAD</string -->
+  <!-- TODO string name="pref_dxf_scale_title">Escala de dibujo DXF</string -->
+  <!-- TODO string name="pref_dxf_scale_summary">Factor de escala del dibujo DXF</string -->
+  <!-- TODO string name="pref_dxf_scale_message">Factor de escala exportación del dibujo DXF</string -->
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
   <string name="pref_thumbnail_summary">Tamaño de las imágenes en miniatura</string>
   <string name="pref_thumbnail_message">Tamaño de las imágenes en miniatura</string>
@@ -776,8 +776,8 @@
   <string name="pref_station_size_message">Tamaño de la etiqueta de la estación</string>
   <string name="pref_zoom_controls_title">Control de Zoom</string>
   <string name="pref_zoom_controls_summary">Control de Zoom multitouch</string>
-  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
-  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
+  <!-- TODO string name="pref_side_drag_title">Arrastre lateral</string -->
+  <!-- TODO string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string -->
 
   <string name="pref_sketchUsesSplays_title">Tomas laterales en el dibujo</string>
   <string name="pref_sketchUsesSplays_summary">Utilizar superficie laterales en el dibujo</string>
