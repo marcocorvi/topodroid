@@ -425,7 +425,7 @@
     <string name="button_split"     >División </string>
     <string name="button_toggle"    >Cambiar Modo CAL </string>
 -->
-    <string name="button_write"     >Escribir calibración</string>
+    <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >X-Sección</string>
 
     <string name="mode_leg">Visuales</string>
@@ -438,7 +438,7 @@
     <string name="remote_on">Láser ON</string>
     <string name="remote_off">Láser OFF</string>
     <string name="remote_measure">Medida</string>
-    <string name="remote_reset">Reset BT</string>
+    <string name="remote_reset">Resetear BT</string>
     <string name="download">Descarga</string>
 
 <!--
@@ -529,7 +529,7 @@
     <string name="help_firmware">Actualización del firmware de DistoX2 </string>
     <string name="help_toggle">Cambiar DistoX a modo: Calibración/normal</string>
     <string name="help_sdcard">Funciones de memoria DistoX</string>
-    <string name="help_read">Leer coeficientes de calibración DistoX</string>
+    <string name="help_read">Descargar calibración de DistoX</string>
     <string name="help_info_device">Información del dispositivo</string>
     <string name="help_scan">Buscando nuevos dispositivos DistoX</string>
     <!-- TODO string name="help_pair">Emparejar el dispositivo DistoX actual</string -->
@@ -538,7 +538,7 @@
     <string name="help_group">Asignar automáticamente números grupo</string>
     <string name="help_cover">Distribución del ángulo de visualización de los datos de calibración</string>
     <string name="help_compute">Cálculo de calibración</string>
-    <string name="help_write">Escribir coeficientes de calibración en DistoX</string>
+    <string name="help_write">Enviar calibración a DistoX</string>
 
     <string name="title_calib">Calibración</string>
     <string name="title_coverage">Distibución datos Calibración</string>
@@ -624,7 +624,7 @@
   <string name="pref_auto_reconnect_summary">Vuelva a conectar cuando la conexión es lostX</string>
   <string name="pref_z6_workaround_title">Solución Z6</string>
   <string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string>
-  <string name="pref_crs_title">C R S </string>
+  <string name="pref_crs_title">CRS </string>
   <string name="pref_crs_summary">Nombre CRS</string>
   <string name="pref_crs_message">Introducir el CRS nombrar como en Proj4</string>
   <string name="pref_gps_averaging_title">Promedio GPS</string>
