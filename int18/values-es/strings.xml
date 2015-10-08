@@ -216,7 +216,7 @@
     <!-- NO string name="menu_manual">MANUAL</string -->
     <string name="menu_manual_calibration">CALIBRACIÓN</string>
     <string name="menu_options">OPCIONES</string>
-    <string name="menu_overview">DESCRIPCIÓN GENERAL</string>
+    <string name="menu_overview">VISUALIZACIÓN GENERAL</string>
     <!-- TODO string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETA</string>
     <string name="menu_photo">FOTO</string>
