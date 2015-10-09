@@ -23,7 +23,7 @@ import android.os.AsyncTask;
 // import android.os.Bundle;
 import android.os.Handler;
 
-// import android.util.Log;
+import android.util.Log;
 
 class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
 {
@@ -35,6 +35,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
   private String mFullName1;
   private int mType; // plot type
   private String mSuffix;
+  // private boolean mModified;
 
   public SaveTh2File( Context context, Handler handler,
                       TopoDroidApp app, DrawingSurface surface, 
@@ -47,6 +48,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
      mFullName1 = fullname1;
      mType = (int)type;
      mSuffix = suffix;
+     // mModified = true;
      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveTh2File " + mFullName1 + " type " + mType );
   }
 
@@ -71,40 +73,50 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
     }
   }
 
+  // void setModified( boolean modified )
+  // {
+  //   // Log.v("DistoX", "set modified " + modified );
+  //   mModified = modified;
+  // }
+
   @Override
   protected Boolean doInBackground(Intent... arg0)
   {
     boolean ret = false;
     synchronized( TopoDroidPath.mTherionLock ) {
-      try {
-        String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
-        // Log.v("DistoX", "save th2 files " + mFullName1 + " suffix " + mSuffix );
-        rotateBackups( filename );
+      // while ( mModified ) {
+      //   mModified = false;
+        try {
+          String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+          // Log.v("DistoX", "save th2 files " + mFullName1 + " suffix " + mSuffix );
+          rotateBackups( filename );
 
-        String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-        String tempname1 = filename1 + Long.toString(System.currentTimeMillis()) + mSuffix;
-        File file1 = new File( tempname1 );
-        TopoDroidApp.checkPath( tempname1 );
-        FileWriter writer1 = new FileWriter( file1 );
-        BufferedWriter out1 = new BufferedWriter( writer1 );
-        mSurface.exportTherion( mType, out1, mFullName1, PlotInfo.projName[mType] );
-        out1.flush();
-        out1.close();
-        if ( isCancelled() ) {
-          // Log.v("DistoX", "save cancelled");
-          file1.delete();
-        } else {
-          // Log.v("DistoX", "save completed");
-          String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-          File f1 = new File( p1 );
-          File b1 = new File( p1 + ".bck" );
-          f1.renameTo( b1 );
-          file1.renameTo( new File( filename1 ) );
+          String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+          String tempname1 = filename1 + Long.toString(System.currentTimeMillis()) + mSuffix;
+          File file1 = new File( tempname1 );
+          TopoDroidApp.checkPath( tempname1 );
+          // Log.v("DistoX", "repeating save th2");
+          FileWriter writer1 = new FileWriter( file1 );
+          BufferedWriter out1 = new BufferedWriter( writer1 );
+          mSurface.exportTherion( mType, out1, mFullName1, PlotInfo.projName[mType] );
+          out1.flush();
+          out1.close();
+          if ( isCancelled() ) {
+            // Log.v("DistoX", "save cancelled");
+            file1.delete();
+          } else {
+            // Log.v("DistoX", "save completed");
+            String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+            File f1 = new File( p1 );
+            File b1 = new File( p1 + ".bck" );
+            f1.renameTo( b1 );
+            file1.renameTo( new File( filename1 ) );
+          }
+        } catch (Exception e) {
+          e.printStackTrace();
         }
-        ret = true;
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      // }
+      ret = true;
     }
     return ret;
   }

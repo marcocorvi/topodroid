@@ -35,12 +35,14 @@
        android:inputType="number"
        android:defaultValue="80"/>
 
-     <CheckBoxPreference
-       android:key="DISTOX_CHECK_ATTACHED"
-       android:summary="@string/pref_checkAttached_summary"
-       android:title="@string/pref_checkAttached_title"
-       android:defaultValue="false"
-     />
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_VERT_SPLAY"
+       android:title="@string/pref_vert_splay_title"
+       android:summary="@string/pref_vert_splay_summary"
+       android:dialogTitle="@string/pref_vert_splay_title"
+       android:dialogMessage="@string/pref_vert_splay_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="50" />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_HTHRESHOLD"
@@ -50,6 +52,13 @@
        android:dialogMessage="@string/pref_hthr_message"
        android:inputType="numberDecimal"
        android:defaultValue="70.0" />
+
+     <CheckBoxPreference
+       android:key="DISTOX_CHECK_ATTACHED"
+       android:summary="@string/pref_checkAttached_summary"
+       android:title="@string/pref_checkAttached_title"
+       android:defaultValue="false"
+     />
 
     <Preference
        android:key="DISTOX_TOOL_SCREEN"

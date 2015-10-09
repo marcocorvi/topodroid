@@ -3,7 +3,7 @@
 
 The first time you tap the Sketch button the dialog you get contains only the "New Sketch" button. Tap on it. The coming dialog contains two fields:
 <ulist>
-<li>the sketch <u>name</u>. TopoDroid suggest a number, and you can safely leave it. The sketch filenames are obtained composing the survey name with the name in this field. For example if the survey is "MySurvey" and the sketch is "1", the plan filename is "MySurvey-1p.th2" and the extended profile filename is "MySurvey-1s.th2". They are placed in the directory "th2" of TopoDroid</li>
+<li>the sketch <u>name</u>. TopoDroid suggest a number, and you can safely leave it. The sketch filenames are obtained composing the survey name with the name in this field. For example if the survey is "MySurvey" and the sketch is "1", the plan filename is "MySurvey-1p.th2" and the profile filename is "MySurvey-1s.th2". They are placed in the directory "th2" of TopoDroid</li>
 <li>the sketch <u>origin</u> station. This is very important as all the sketch data will have coordinates relative to this station. You should choose a station that is inside the sketch, because, in order to keep the sketch as clean as possible, you can limit the data reduction for the sketch not to go beyond certain shots (this mechanism is called "barrier". When editing a station you can mark it as a "barrier" to the data reduction for the sketch; the data reduction does not proceed beyond the "barrier" stations)</li>
 </ulist><br><p>
 
@@ -11,7 +11,7 @@ The first time you tap the Sketch button the dialog you get contains only the "N
 
 So type in a station name, and tap the <u>OK</u> button.  And you go to the sketch window.<br><p>
 
-Each sketch is made of two Therion 2D sketch files: one for the plan, the other for the extended profile. Of course you can draw cross sections, but we will get to them later. The sketch window opens with the plan by default.  Afterwards the sketch dialog shows two columns, and you can open a sketch starting either in the plan view or in the extended view. In any case TopoDroid is always opening the two sketch files, and just showing the one you choose.<br><p>
+Each sketch is made of two Therion 2D sketch files: one for the plan, the other for the profile. Of course you can draw cross sections, but we will get to them later. The sketch window opens with the plan by default.  Afterwards the sketch dialog shows two columns, and you can open a sketch starting either in the plan view or in the profile view. In any case TopoDroid is always opening the two sketch files, and just showing the one you choose.<br><p>
 
 <b>NOTE</b><br>
 The first time you open a sketch TopoDroid loads the drawing tools (the palette). This may take some time if your Android is not powerful because the program has to read in many files (one for each tool). Afterwards opening a sketch is usually faster.<br><p>
@@ -38,7 +38,7 @@ The remaining buttons differ by the mode. In the <b>move</b> mode they are
 <li><u>Download</u> downloads data from the DistoX. The latest downloaded shot are bluish to help you distinguish them from the others. If no DistoX is selected, this button is hidden.</li>
 <li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
 <li><u>Reference</u>: to choose which reference to display. The drawing references are the midline, the splay shots, the station names, and the metric grid.</li>
-<li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the extended profile. Profile flip (long tap) [E].</li>
+<li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the profile. Profile flip (long tap) [E].</li>
 <li><u>Extend</u>: this is the same as the <u>Extend</u> button of the Survey Data window</li>
 <li><u>Notes</u>: to edit the survey annotations</li>
 </ulist><br><p>
@@ -83,23 +83,25 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
 <h4>SKETCH SETTINGS</h4>
 <ulist>
 <li><i>Drawing tool picker</i>: either list view or grid view. At the beginning it may be helpful to have a tool picker listing the drawing tool names [default]. After you get used to the tool icons you are likely to prefer the more compact view of the grid picker.</li>
+<li><i>Side drag<i>: whether to enable panning by side-dragging.</li>
 <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time.</li>
+<li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
 <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line</li>
-<li><i>Vertical splay threshold</i>: splay shots with inclination above this threshold are hidden in the plan sketches</li>
-<li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
-<li><i>Line thickness</i>: the base thickness of drawing lines</li>
-<li><i>Survey line thickness</i>: the base thickness of midline/splay lines</li>
-<li><i>Station label size</i>: size of stations names [default 18 pt] [N]</li>
-<li><i>Labels size</i>: size of label texts [default 24 pt]</li>
-<li><i>Section tick</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
-<li><i>Dots radius</i>: size of the green dots displayed in <b>draw</b> mode [default 5 pxl] [N]</li>
-<li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
+<li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
+<li><i>Midline check</i>: whether to check if all the legs are attached to the midline</li>
 <li><i>Line style</i>. TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.</li>
 <li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
 <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
 <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
-<li><i>Midline check</i>: whether to check if all the legs are attached to the midline</li>
-<li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
+<li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
+<li><i>Line width</i>: the base thickness of drawing lines</li>
+<li><i>Survey line width</i>: the base thickness of midline/splay lines</li>
+<li><i>Station name size</i>: size of stations names [default 18 pt] [N]</li>
+<li><i>Labels size</i>: size of label texts [default 24 pt]</li>
+<li><i>Section-line tick size</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
+<li><i>Green dots radius</i>: size of the green dots displayed in <b>draw</b> mode [default 5 pxl] [N]</li>
+<li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
+</ulist>
 
 <h4>SKETCH SHIFT [E]</h4>
 You can shift the drawing as a whole by selecting the "Fix ref" checkbox in the sketch reference dialog. Then in "move/zoom" mode the drawing can be shifted by dragging it with two fingers.<br><p>

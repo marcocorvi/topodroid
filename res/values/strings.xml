@@ -380,7 +380,7 @@
     <string name="calibs">CALIBS</string>
 
     <string name="plan">PLAN</string>
-    <string name="extended">EXTENDED</string>
+    <string name="extended">PROFILE</string>
     <string name="v_section">V-SECTION</string>
     <string name="h_section">H-SECTION</string>
 
@@ -564,7 +564,7 @@
     <string name="help_rename">Change survey name</string>
     <string name="help_stats">Survey statistics dialog</string>
     <string name="help_save_plot">Export sketch</string>
-    <string name="help_toggle_plot">Switch between plan and extended sect.</string>
+    <string name="help_toggle_plot">Switch between plan and profile view</string>
     <string name="help_trash">Delete sketch</string>
     <string name="help_undo">Undo last drawing action</string>
     <string name="help_redo">Redo last drawing action</string>
@@ -674,7 +674,7 @@
   <string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string>
   <string name="pref_cosurvey_title">Co-surveying service</string>
   <string name="pref_cosurvey_summary">Enable/Disable co-surveying service</string>
-  <string name="pref_export_shots_title">Data export format</string>
+  <string name="pref_export_shots_title">Default data export</string>
   <string name="pref_export_shots_summary">Default data export format</string>
   <string name="pref_extra_buttons_title">Level of features</string>
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
@@ -684,7 +684,7 @@
 
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
-  <string name="pref_station_prefix_title">Export station prefix</string>
+  <string name="pref_station_prefix_title">cSurvey station prefix</string>
   <string name="pref_station_prefix_summary">Export cSurvey station prefix</string>
 
   <string name="pref_sock_type_title">Socket</string>
@@ -707,16 +707,17 @@
   <string name="pref_gps_averaging_title">GPS Averaging</string>
   <string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string>
 
-  <string name="pref_plot_screen_title">SKETCH SCREEN</string>
+  <string name="pref_plot_screen_title">SKETCH ITEMS</string>
   <string name="pref_tool_screen_title">DRAWING TOOLS</string>
   <string name="pref_location_title">LOCATION</string>
   <string name="pref_accuracy_title">ACCURACY</string>
   <string name="pref_shot_data_title">SHOT DATA</string>
   <string name="pref_shot_units_title">DATA UNITS</string>
-  <string name="pref_cwd_title">WORK DIRECTORY</string>
+  <string name="pref_cwd_title">Work Directory</string>
   <!-- NOT USED string name="pref_cwd_summary">TopoDroid work directory</string -->
   <!-- NOT USED string name="pref_cwd_message">Enter TopoDroid work directory</string -->
   <string name="pref_pt_color_map_title">PocketTopo color map</string>
+  <string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string>
   <string name="pref_text_size_title">Text size</string>
   <string name="pref_text_size_summary">List items text size</string>
   <string name="pref_text_size_message">Size of text in lists</string>
@@ -730,8 +731,8 @@
   <string name="pref_altitude_summary">Select altitude type</string>
   <string name="pref_altimetric_title">Orthometric atitude lookup</string>
   <string name="pref_altimetric_summary">Internet lookup of orthometric altitude</string>
-  <string name="pref_survey_stations_title">Survey stations</string>
-  <string name="pref_survey_stations_summary">Automatic survey stations</string>
+  <string name="pref_survey_stations_title">Stations policy</string>
+  <string name="pref_survey_stations_summary">Stations automatic naming policy</string>
   <string name="pref_accel_thr_title">Acceleration tolerance</string>
   <string name="pref_accel_thr_summary">Tolerance over the shots accelerations</string>
   <string name="pref_accel_thr_message">Tolerance over the shots accelerations</string>
@@ -749,22 +750,22 @@
   <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
   <string name="pref_mag_anomaly_title">Magnetic Anomaly</string>
   <string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string>
-  <string name="pref_azimuth_manual_title">Manual "extend"</string>
-  <string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string>
+  <string name="pref_azimuth_manual_title">Settable extend reference</string>
+  <string name="pref_azimuth_manual_summary">Settable or fixed extend L/R reference</string>
 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Surveying team</string>
   <string name="pref_team_message">Default surveying team</string>
 
-  <string name="pref_ethr_title">Vert. extend angle</string>
-  <string name="pref_ethr_summary">Angle of splay "vertical" extend</string>
-  <string name="pref_ethr_message">Angle of "vertical" extend for splays [deg]</string>
-  <string name="pref_vthr_title">Shot vertical threshold</string>
+  <string name="pref_ethr_title">Splay vertical threshold</string>
+  <string name="pref_ethr_summary">Region of vert. extend (splays)</string>
+  <string name="pref_ethr_message">Angle around 90 for splay vert. extend [deg]</string>
+  <string name="pref_vthr_title">Leg vertical threshold</string>
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
   <string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string>
-  <string name="pref_plan_vthr_title">Splay vertical threshold</string>
-  <string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string>
-  <string name="pref_plan_vthr_message">Hide in the plan splays with high inclination</string>
+  <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
+  <string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string>
+  <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
   <string name="pref_init_station_title">Initial station name</string>
   <string name="pref_init_station_summary">Default initial station name</string>
   <string name="pref_init_station_message">Default initial station name</string>
@@ -773,7 +774,7 @@
 
   <string name="pref_hthr_title">Cross-section h-threshold</string>
   <string name="pref_hthr_summary">Threshold for horizontal cross-sections</string>
-  <string name="pref_hthr_message">Shot clino over which cross-sections are horizontal</string>
+  <string name="pref_hthr_message">Leg clino over which cross-sections are horizontal</string>
   <string name="pref_bitmap_scale_title">PNG resolution</string>
   <string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string>
   <string name="pref_bitmap_scale_message">Image resolution of sketch PNG export</string>
@@ -783,8 +784,8 @@
   <string name="pref_dxf_scale_summary">DXF sketch scale factor</string>
   <string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string>
   <string name="pref_thumbnail_title">Thumbnails size</string>
-  <string name="pref_thumbnail_summary">Size of thumbnail images</string>
-  <string name="pref_thumbnail_message">Size of thumbnail images</string>
+  <string name="pref_thumbnail_summary">Size of photo thumbnails</string>
+  <string name="pref_thumbnail_message">Size of photo thumbnails</string>
   <string name="pref_shot_timer_title">Shot direction timer</string>
   <string name="pref_shot_timer_summary">Seconds to wait before measuring the shot direction</string>
   <string name="pref_shot_timer_message">Seconds before measuring the shot direction</string>
@@ -842,12 +843,14 @@
   <string name="pref_checkBT_summary">Enable/disable bluetooth</string>
   <string name="pref_checkAttached_title">Midline check</string>
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
-  <string name="pref_autoStations_title">Sketch stations</string>
-  <string name="pref_autoStations_summary">Add stations automatically</string>
+  <string name="pref_autoStations_title">Therion stations</string>
+  <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>
   <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
-  <string name="pref_splayExtend_title">Estimate splay extend</string>
-  <string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string>
+  <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
+  <string name="pref_LRExtend_title">Estimate Left/Right extend</string>
+  <string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string>
 
   <string name="pref_picker_type_title">Drawing tool picker</string>
   <string name="pref_picker_type_summary">Drawing tool picker type</string>

@@ -31,11 +31,20 @@
        android:inputType="numberDecimal"
        android:defaultValue="10" />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_VTHRESHOLD"
+       android:title="@string/pref_vthr_title"
+       android:summary="@string/pref_vthr_summary"
+       android:dialogTitle="@string/pref_vthr_title"
+       android:dialogMessage="@string/pref_vthr_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="80.0" />
+
      <CheckBoxPreference
-       android:key="DISTOX_SPLAY_EXTEND"
-       android:summary="@string/pref_splayExtend_summary"
-       android:title="@string/pref_splayExtend_title"
-       android:defaultValue="true"
+       android:key="DISTOX_AZIMUTH_MANUAL"
+       android:summary="@string/pref_azimuth_manual_summary"
+       android:title="@string/pref_azimuth_manual_title"
+       android:defaultValue="false"
      />
 
      <CheckBoxPreference
@@ -53,19 +62,11 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_AZIMUTH_MANUAL"
-       android:summary="@string/pref_azimuth_manual_summary"
-       android:title="@string/pref_azimuth_manual_title"
-       android:defaultValue="false"
-     />
-
-     <CheckBoxPreference
        android:key="DISTOX_MAG_ANOMALY"
        android:summary="@string/pref_mag_anomaly_summary"
        android:title="@string/pref_mag_anomaly_title"
        android:defaultValue="false"
      />
-
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SHOT_TIMER"
@@ -84,14 +85,5 @@
        android:dialogMessage="@string/pref_beep_volume_message"
        android:inputType="number"
        android:defaultValue="50" />
-
-     <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_VTHRESHOLD"
-       android:title="@string/pref_vthr_title"
-       android:summary="@string/pref_vthr_summary"
-       android:dialogTitle="@string/pref_vthr_title"
-       android:dialogMessage="@string/pref_vthr_message"
-       android:inputType="numberDecimal"
-       android:defaultValue="80.0" />
 
 </PreferenceScreen>

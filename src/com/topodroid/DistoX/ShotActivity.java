@@ -234,62 +234,6 @@ public class ShotActivity extends Activity
   //   return mApp.mData.getNextStationName( mApp.mSID );
   // }
 
-/* called only by numberSplays // it may go away ... FIXME-EXTEND
-  private void tryExtendSplay( DistoXDBlock splay, float bearing, long extend, boolean flip )
-  {
-    if ( extend == 0 ) return;
-    // double db = Math.cos( (bearing - splay.mBearing)*Math.PI/180 );
-    // long ext = ( db > TopoDroidApp.mExtendThr )? extend : ( db < -TopoDroidApp.mExtendThr )? -extend : 0;
-    if ( TopoDroidSetting.mSplayExtend ) { 
-      double ber = splay.mBearing;
-      while ( ber < bearing ) ber += 360;
-      ber -= bearing;
-      long ext = TopoDroidApp.computeAbsoluteExtendSplay( ber );
-      if ( flip ) ext = -ext;
-      splay.mExtend = ext;
-    } else {
-      splay.mExtend = 0;
-    }
-  }
-*/
-
-  // private boolean extendSplays()
-  // { 
-  //   long sid = mApp.mSID;
-  //   if ( sid < 0 ) {
-  //     Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
-  //     return false;
-  //   } else {
-  //     List<DistoXDBlock> list = mApp.mData.selectShotsAfterId( sid, mLastExtend, TopoDroidApp.STATUS_NORMAL );
-  //     int size = list.size();
-  //     String from = ""; // shot "from" station
-  //     String to   = ""; // shot "to" station
-  //     float bearing = 0.0f;    // shot bearing
-  //     long extend   = 0L;
-  //     int k;
-  //     DistoXDBlock prev = null;
-  //     for ( k=size - 1; k>=0; --k ) {
-  //       DistoXDBlock item = list.get( k );
-  //       int t = item.type();
-  //       // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "shot " + k + " type " + t + " <" + item.mFrom + "> <" + item.mTo + ">" );
-  //       if ( t == DistoXDBlock.BLOCK_MAIN_LEG ) {
-  //         from    = item.mFrom;
-  //         to      = item.mTo;  
-  //         bearing = item.mBearing;
-  //         extend  = item.mExtend;
-  //       } else if ( t == DistoXDBlock.BLOCK_SPLAY ) {
-  //         if ( from.equals( item.mFrom ) || to.equals( item.mFrom ) ) {
-  //           tryExtendSplay( item, bearing, extend, to.equals( item.mFrom ) );
-  //           mApp.mData.updateShotExtend( item.mId, mApp.mSID, ext );
-  //           // FIXME NOTIFY
-  //         }
-  //       }
-  //     }
-  //     mLastExtend = mApp.mData.getLastShotId( sid );
-  //   }
-  //   return true;
-  // }
-
   private void computeMeans( List<DistoXDBlock> list )
   {
     TopoDroidApp.mAccelerationMean = 0.0f;
@@ -315,72 +259,6 @@ public class ShotActivity extends Activity
       //                          + " Dip " + TopoDroidApp.mDipMean );
     }
   }
-
-/* called only by SketchNewShotDialog ... it may go away FIXME-EXTEND
-  ArrayList<DistoXDBlock> numberSplays()
-  { 
-    ArrayList<DistoXDBlock> updatelist = null;
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "number Splays() ");
-    long sid = mApp.mSID;
-    if ( sid < 0 ) {
-      // Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
-      return null;
-    } else {
-      String prev_from = "";
-      updatelist = new ArrayList<DistoXDBlock>();
-      List<DistoXDBlock> list = mApp.mData.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
-      computeMeans( list );
-
-      int size = list.size();
-      int from = 0;    // index to start with to assign the from-station
-      int k;
-      // DistoXDBlock current_leg = null;
-      for ( k=0; k<size; ++k ) {
-        DistoXDBlock item = list.get( k );
-        int t = item.type();
-        // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "shot " + k + " type " + t + " <" + item.mFrom + "> <" + item.mTo + ">" );
-        if ( t == DistoXDBlock.BLOCK_MAIN_LEG ) {
-          // current_leg = item;
-          if ( from == k ) { // on a main-leg: move "from" to the next shot
-            prev_from = item.mFrom;
-            from = k+1;
-          } else if ( from < k ) { // on a main-leg and "from" is behind: set splays
-            String name = (TopoDroidSetting.mShotAfterSplays) ? item.mFrom : prev_from;
-            if ( name != null ) {
-              // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "update splays from " + from + " to " + k + " with name: <" + name + ">" );
-              // set the index of the last splay to extend at the smallest from 
-              for ( ; from < k; ++from ) {
-                DistoXDBlock splay = list.get( from );
-                splay.setName( name, "" );
-                tryExtendSplay( splay, item.mBearing, item.mExtend, false );
-                updatelist.add( splay ); 
-                // mLastExtend = item.mId;
-              }
-            }
-          }
-        } else if ( t == DistoXDBlock.BLOCK_SPLAY || t == DistoXDBlock.BLOCK_SEC_LEG ) {
-          // on a splay / sec-leg: jump "from" to the next shot
-          from = k+1;
-        } else if ( DistoXDBlock.isTypeBlank( t ) && k > 1 ) {
-          DistoXDBlock prev = list.get( k-1 );
-          if ( item.relativeDistance( prev ) < TopoDroidSetting.mCloseDistance ) {
-            item.mType = DistoXDBlock.BLOCK_SEC_LEG;
-            // current_leg.setTypeBlankLeg();
-            updatelist.add( item ); 
-            from = k+1;
-          }
-        }
-      }
-
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "number Splays() updatelist size " + updatelist.size() );
-      if ( updatelist.size() > 0 ) {
-        mApp.mData.updateShotNameAndExtend( sid, updatelist ); // FIXME-EXTEND
-        // FIXME NOTIFY
-      }
-    }
-    return updatelist;
-  }
-*/
 
   @Override
   public void refreshDisplay( int nr, boolean toast ) 

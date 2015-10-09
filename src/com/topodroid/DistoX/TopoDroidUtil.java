@@ -31,10 +31,10 @@ public class TopoDroidUtil
   static final float DEG2GRAD = 400.0f/360.0f;
   static final float GRAD2DEG = 360.0f/400.0f;
 
-  static final float M2FT = 3.28083f; // meters to feet 
-  static final float FT2M = 1/M2FT;
+  static final float M2FT = 3.28084f; // meters to feet 
+  static final float FT2M = 0.3048f;
   static final float IN2M = 0.0254f;
-  static final float YD2M = 0.914f;
+  static final float YD2M = 0.9144f;
   static float in360( float f )
   {
     while ( f >= 360 ) f -= 360;

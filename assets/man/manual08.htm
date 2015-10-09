@@ -42,7 +42,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><u>Download</u>: it will download the data from the DistoX as in the calibration data window. If no DistoX is selected this button is hidden.</li>
 <li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
 <li><u>Display</u>: to choose the display mode (see below)</li>
-<li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in extended-profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches. A long tap on the <u>Sketch</u> button opens immediately the most recent sketch, without going through the sketch list dialog.</li>
+<li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches. A long tap on the <u>Sketch</u> button opens immediately the most recent sketch, without going through the sketch list dialog.</li>
 <li><u>Notes</u> opens the dialog to edit the annotations of the survey</li>
 <li><u>Extend</u> opens the "EXtend reference" dialog that defines how to set the "extend" for the coming shots (either downloaded or manually entered).</li>
 <li><u>Stations</u> [N]: this buttons opens the dialog for the saved stations</li>
@@ -52,20 +52,22 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <h4>SURVEY SETTINGS</h4>
 <ulist>
 <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. You can write your name and that of the cavers you usually survey with.</li>
-<li><i>Survey stations</i>: this tells the program how to automatically assign survey stations to the shots. (This is further explained below).</li>
+<li><i>Stations policy</i>: this tells the program how to automatically assign survey stations to the shots. (This is further explained below).</li>
 <li><i>Station names</i> specifies the type of the station names, either alphanumeric (default) or numeric [B].</li>
 <li><i>Initial station name</i>: the default first station name for new surveys. Can be also changed in the <i>New survey</i> dialog.</li>
+<li><i>Thumbnail size</i>: size of the photo thumbnails</li>
+<li><i>Length units</i>: either meters or feet</li>
+<li><i>Angle units</i>: either degrees or grads</li>
 <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots to belong to the same leg</li>
-<li><i>Splay extend</i>: whether to assign the extend direction to splay shots or set "vertical" extend to them</li> 
-<li><i>Vertical extend angle</i>: the "extend" direction assigned to a splay shot depends on the angle it makes with the leg(s). When the angle is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, depending whether the angle it makes with the leg is smaller or larger than 90 degrees.</li>
-<li><i>Shot vertical threshold</i>. this is like Therion "vthreshold": the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
-<li><i>Timer</i> is the number of seconds before measuring the direction with the Android sensors (for "manual data-input" dialog [N], and for the "extend-reference" dialog))</li>
-<li><i>Beep volume</i> is the volume of the timer beep [N]</li>
+<li><i>Minimum leg shots</i>: minimum number of close consecutive shots that are takes as a leg. Further consecutive close shots are taken as belonging to the leg as well.</li>
+<li><i>Splay vertical threshold</i>: the "extend" direction assigned to a splay shot depends on the angle it makes with the leg(s). When the angle is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, depending whether the angle it makes with the leg is smaller or larger than 90 degrees.</li>
+<li><i>Leg vertical threshold</i>. this is like Therion "vthreshold": the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
+<li><i>Settable extend reference</i>. The L/R extend reference can be either fixed (180 degrees) or adjustable.</li>
 <li><i>Loop closure</i>: whether to do the loop closure error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors</li>
 <li><i>Backsight</i>: whether to add a line with fields for the backsight in the shot manual input dialog [N].</li>
 <li><i>Magnetic anomaly</i>: whether to compensate the local magnetic anomaly. It requires backsight auto-station policy.</li>
-<li><i>Length units</i>: either meters or feet</li>
-<li><i>Angle units</i>: either degrees or grads</li>
+<li><i>Timer</i> is the number of seconds before measuring the direction with the Android sensors (for "manual data-input" dialog [N], and for the "extend-reference" dialog))</li>
+<li><i>Beep volume</i> is the volume of the timer beep [N]</li>
 <li><i>GSP Averaging</i>: whether to use the app GPSaveraging to locate fixed points [A]. By default this app is not used and the location is carried out by TopoDroid.</li>
 <li><i>Location units</i>: either dd.mm.ss or decimal degrees [A]</li>
 <li><i>C.R.S.</i> coordinate reference system [default is long-lat] (disabled)</li>

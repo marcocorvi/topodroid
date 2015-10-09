@@ -774,8 +774,11 @@
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
-  <string name="pref_splayExtend_title">Stima extendi per splay</string>
-  <string name="pref_splayExtend_summary">Stima del extend degli splay</string>
+  <!-- UNUSED string name="pref_splayExtend_title">Stima extendi per splay</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
+  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
+  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
+
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>

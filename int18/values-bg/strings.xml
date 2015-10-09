@@ -848,8 +848,10 @@
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>
   <string name="pref_loopClosure_summary">Дали да се корегира грешката при затваряне на полигони</string>
-  <string name="pref_splayExtend_title">Разгъване на странични отсечки</string>
-  <string name="pref_splayExtend_summary">Разгъване на странични отсечки(измервания) наляво/надясно във вертикалния разрез</string>
+  <!-- UNUSED string name="pref_splayExtend_title">Разгъване на странични отсечки</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Разгъване на странични отсечки(измервания) наляво/надясно във вертикалния разрез</string -->
+  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
+  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
 
   <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
   <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>

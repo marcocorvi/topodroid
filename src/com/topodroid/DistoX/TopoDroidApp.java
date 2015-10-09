@@ -1088,6 +1088,7 @@ public class TopoDroidApp extends Application
     // DrawingActivity does not have the RefAzimuth setting
   }
 
+  // called by DistoXComm, ShotNewDialog, and setLegExtend
   static long computeLegExtend( double bearing )
   {
     if ( mFixedExtend == 0 ) {
@@ -1103,7 +1104,7 @@ public class TopoDroidApp extends Application
     return mFixedExtend;
   }
 
-  // used for manually entered shots, and by Compass parser
+  // used for manually entered shots, and by Compass/VisualTopo parser
   static long computeSplayExtend( double bearing )
   {
     while ( bearing < mRefAzimuth ) bearing += 360;
@@ -1113,7 +1114,8 @@ public class TopoDroidApp extends Application
 
 
   // @param b bearing [deg] in 0 .. 360
-  static long computeAbsoluteExtendSplay( double b )
+  // called only by computeSplayExtend
+  static private long computeAbsoluteExtendSplay( double b )
   {
     if ( b >= 90 + TopoDroidSetting.mExtendThr && b <= 270 - TopoDroidSetting.mExtendThr ) return -1L;
     if ( b <= 90 - TopoDroidSetting.mExtendThr || b >= 270 + TopoDroidSetting.mExtendThr ) return 1L;
@@ -1122,7 +1124,9 @@ public class TopoDroidApp extends Application
 
   private void setLegExtend( DistoXDBlock prev )
   {
-    if ( ! TopoDroidSetting.mSplayExtend ) {
+    // FIXME what has "splay extend" to do with "leg extend" ???
+    // if ( ! TopoDroidSetting.mSplayExtend ) 
+    {
       long extend = computeLegExtend( prev.mBearing );
       mData.updateShotExtend( prev.mId, mSID, extend, true );
     }

@@ -269,7 +269,7 @@ class TopoDroidSetting
 
   static boolean mLoopClosure = false;  // whether to do loop closure
 
-  static boolean mSplayExtend = true;  // whether to extend splays or not
+  static boolean mLRExtend = true;  // whether to extend LR or not (Compass/VisualTopo input)
   
   static final  String UNIT_LENGTH    = "meters";
   static final  String UNIT_ANGLE     = "degrees";
@@ -566,7 +566,7 @@ class TopoDroidSetting
       if ( i > 0 ) mCompassReadings = i;
     } catch ( NumberFormatException e ) { }
     
-    mSplayExtend   = prefs.getBoolean( key[k++], true ); 
+    mLRExtend   = prefs.getBoolean( key[k++], true ); 
     mAutoReconnect = prefs.getBoolean( key[k++], false ); 
 
     try {
@@ -897,7 +897,7 @@ class TopoDroidSetting
       } catch ( NumberFormatException e ) { }
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_SPLAY_EXTEND
-      mSplayExtend = prefs.getBoolean( k, true ); 
+      mLRExtend = prefs.getBoolean( k, true ); 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AUTO_RECONNECT
       mAutoReconnect = prefs.getBoolean( k, false ); 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_BITMAP_SCALE

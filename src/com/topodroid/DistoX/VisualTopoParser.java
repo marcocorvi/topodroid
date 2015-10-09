@@ -192,7 +192,7 @@ public class VisualTopoParser extends ImportParser
                   extend = 0;
                   if ( mLeft > 0 ) {
 	            float ber = mBearing + 180 + 90 * dirw;
-                    if ( TopoDroidSetting.mSplayExtend ) {
+                    if ( TopoDroidSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
                     splays.add( new ParserShot( station, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
@@ -200,7 +200,7 @@ public class VisualTopoParser extends ImportParser
                   if ( mRight > 0 ) {
                     float ber = mBearing + 180 - 90 * dirw;
                     if ( ber > 360 ) ber -= 360;
-                    if ( TopoDroidSetting.mSplayExtend ) {
+                    if ( TopoDroidSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
                     splays.add( new ParserShot( station, null, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );

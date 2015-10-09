@@ -71,8 +71,8 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
 
 import android.util.Log;
@@ -306,8 +306,13 @@ public class DrawingActivity extends ItemDrawer
     private void modified()
     {
       if ( ! mModified ) {
+        // Log.v("DistoX", "start Save Th2 Task Nr "+ mNrSaveTh2Task);
         mModified = true;
-        startSaveTh2Task( "modified" );
+        startSaveTh2Task( "modified", MAX_TASK_NORMAL );
+      // } else {
+      //   if ( mSaveTh2File != null ) {
+      //     mSaveTh2File.setModified( true );
+      //   }
       }
     }
 
@@ -547,13 +552,14 @@ public class DrawingActivity extends ItemDrawer
     // called by doPause and onBackPressed
     private void doSaveTh2( ) 
     {
+      Log.v("DistoX", "do Save Th2. Save tasks: " + mNrSaveTh2Task );
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         // if ( not_all_symbols ) AlertMissingSymbols();
         if ( mAllSymbols ) {
           // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-          startSaveTh2Task( "dosave" );
+          startSaveTh2Task( "dosave", MAX_TASK_FINAL );
         } else { // mAllSymbols is false
           // FIXME what to do ?
          Toast.makeText( this,
@@ -563,40 +569,55 @@ public class DrawingActivity extends ItemDrawer
     }
 
 
+    private int mNrSaveTh2Task = 0;
+    private final int MAX_TASK_NORMAL = 4;
+    private final int MAX_TASK_FINAL  = 6;
+
     // called by doSaveTh2 and saveTh2
-    private void startSaveTh2Task( String suffix )
+    private void startSaveTh2Task( String suffix, int maxTasks )
     {
       if ( ! mModified ) {
         // Log.v("DistoX", "drawing not modified: not saving");
         return;
       }
+      if ( mNrSaveTh2Task > maxTasks ) return;
+
       // final Activity currentActivity = this; // if Toast
       Handler saveHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
+          -- mNrSaveTh2Task;
           // Log.v("DistoX", "handle message " + msg.what );
-          if ( msg.what == 660 ) {
-            mApp.mShotActivity.enableSketchButton( true );
-          } else if ( msg.what == 661 ) { // saving return true
-            // mModified = false;
-            mApp.mShotActivity.enableSketchButton( true );
-          } else {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "handle save th2 message " + msg.what);
-          }
+          // if ( msg.what == 660 ) {
+          // } else if ( msg.what == 661 ) { // saving return true
+          // } else {
+          //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "handle save th2 message " + msg.what);
+          // }
           if ( mModified ) {
-            startSaveTh2Task( "handler" ); 
+            // Log.v("DistoX", "start new SaveTh2File");
+            startSaveTh2Task( "handler", MAX_TASK_NORMAL ); 
+          } else {
+            mApp.mShotActivity.enableSketchButton( true );
           }
         }
       };
+      ++ mNrSaveTh2Task;
       mApp.mShotActivity.enableSketchButton( false );
       mModified = false;
       try { Thread.sleep(10); } catch( InterruptedException e ) { }
+      SaveTh2File saveTh2File = null;
+      // Log.v("DistoX", "create SaveTh2File");
       if ( mType == PlotInfo.PLOT_EXTENDED ) {
-        // Log.v("DistoX", "drawing modified: saving " + mFullName2 );
-        (new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix ) ).execute();
+        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix );
       } else {
-        // Log.v("DistoX", "drawing modified: saving " + mFullName1 );
-        (new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix ) ).execute();
+        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix );
+      }
+      try { 
+        // Log.v("DistoX", "exec SaveTh2File");
+        saveTh2File.execute();
+      } catch ( RejectedExecutionException e ) { 
+        // Log.v("DistoX", "Rejected exec exception");
+        -- mNrSaveTh2Task;
       }
     }
 
@@ -723,6 +744,11 @@ public class DrawingActivity extends ItemDrawer
 
   // --------------------------------------------------------------
 
+  /** set the reference azimuth 
+   * and the Extend Button image according to the reference azimuth or fixed one
+   * @param azimuth       reference azimuth value
+   * @param fixed_extend  fixed extend: -1 (left) 1 (right) 0 (use azimuth)
+   */
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
     mApp.mFixedExtend = fixed_extend;
@@ -1056,6 +1082,7 @@ public class DrawingActivity extends ItemDrawer
       mZoom     = info.zoom;
       mDrawingSurface.isDrawing = true;
       switchZoomCtrl( TopoDroidSetting.mZoomCtrl );
+      Log.v("DistoX", "do Resume. Save tasks: " + mNrSaveTh2Task );
     }
 
     private void doPause()
@@ -2582,7 +2609,7 @@ public class DrawingActivity extends ItemDrawer
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
-          startSaveTh2Task( "toggle" ); 
+          startSaveTh2Task( "toggle", MAX_TASK_FINAL ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
@@ -2985,7 +3012,7 @@ public class DrawingActivity extends ItemDrawer
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
-      startSaveTh2Task( "save" );
+      startSaveTh2Task( "save", MAX_TASK_FINAL );
     }
 
   
@@ -3149,7 +3176,7 @@ public class DrawingActivity extends ItemDrawer
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
       } else if ( p++ == pos ) { // OVERVIEW
-        // startSaveTh2Task( "overview" ); // FIXME this is not necessary
+        // startSaveTh2Task( "overview", MAX_TASK_FINAL ); // FIXME this is not necessary
         // try {
         //   Thread.sleep(100);
         // } catch ( InterruptedException e ) { /* ignore */ }

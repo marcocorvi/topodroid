@@ -5,7 +5,15 @@
   <Preference
        android:key="DISTOX_PT_CMAP"
        android:title="@string/pref_pt_color_map_title"
+       android:summary="@string/pref_pt_color_map_summary"
        />
+
+  <CheckBoxPreference
+       android:key="DISTOX_SPLAY_EXTEND"
+       android:summary="@string/pref_LRExtend_summary"
+       android:title="@string/pref_LRExtend_title"
+       android:defaultValue="true"
+     />
 
   <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_EXPORT_SHOTS"

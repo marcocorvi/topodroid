@@ -838,8 +838,11 @@
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
   <string name="pref_loopClosure_summary">Разбрасывание невязок в петле</string>
-  <string name="pref_splayExtend_title">Развертка бокового замера</string>
-  <string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string>
+  <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
+  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
+  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
+
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
   <string name="pref_station_size_title">Размер номера пикетов</string>
