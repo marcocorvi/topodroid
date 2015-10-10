@@ -767,10 +767,10 @@
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
-  <!-- UNUSED string name="pref_splayExtend_title">Extensión de la toma lateral</string -->
-  <!-- UNUSED string name="pref_splayExtend_summary">Extensión estimada de la toma lateral</string -->
-  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
-  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
+  <string name="pref_splayExtend_title">Extensión de la toma lateral</string>
+  <string name="pref_splayExtend_summary">Extensión estimada de la toma lateral</string>
+  <string name="pref_LRExtend_title">Estimate Left/Right extend</string>
+  <string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string>
 
   <string name="pref_picker_type_title">Selector de símbolos</string>
   <string name="pref_picker_type_summary">Tipo de selector de símbolos</string>
