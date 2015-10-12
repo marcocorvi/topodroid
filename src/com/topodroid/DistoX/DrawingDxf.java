@@ -24,7 +24,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 import android.util.FloatMath;
-// import android.util.Log;
+import android.util.Log;
 
 class DrawingDxf
 {
@@ -213,6 +213,8 @@ class DrawingDxf
     xmax *= scale;
     ymin *= scale;
     ymax *= scale;
+
+    // Log.v("DistoX", "DXF X " + xmin + " " + xmax + " Y " + ymin + " " + ymax );
 
     try {
       // header
@@ -466,66 +468,68 @@ class DrawingDxf
         out.flush();
 
         // centerline data
-        for ( DrawingPath sh : plot.mFixedStack ) {
-          DistoXDBlock blk = sh.mBlock;
-          if ( blk == null ) continue;
-
-          StringWriter sw4 = new StringWriter();
-          PrintWriter pw4  = new PrintWriter(sw4);
-          if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-            NumStation f = num.getStation( blk.mFrom );
-            NumStation t = num.getStation( blk.mTo );
+        if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
+          for ( DrawingPath sh : plot.mFixedStack ) {
+            DistoXDBlock blk = sh.mBlock;
+            if ( blk == null ) continue;
+            
+            StringWriter sw4 = new StringWriter();
+            PrintWriter pw4  = new PrintWriter(sw4);
+            if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+              NumStation f = num.getStation( blk.mFrom );
+              NumStation t = num.getStation( blk.mTo );
  
-            printString( pw4, 0, "LINE" );
-            ++handle; printAcDb( pw4, handle, "AcDbEntity", "AcDbLine" );
-            printString( pw4, 8, "LEG" );
-            // printInt( pw4, 39, 2 );         // line thickness
+              printString( pw4, 0, "LINE" );
+              ++handle; printAcDb( pw4, handle, "AcDbEntity", "AcDbLine" );
+              printString( pw4, 8, "LEG" );
+              // printInt( pw4, 39, 2 );         // line thickness
 
-            if ( type == PlotInfo.PLOT_PLAN ) {
-              float x =  scale * DrawingActivity.toSceneX( f.e );
-              float y =  scale * DrawingActivity.toSceneY( f.s );
-              float x1 = scale * DrawingActivity.toSceneX( t.e );
-              float y1 = scale * DrawingActivity.toSceneY( t.s );
-              printXYZ( pw4, x, -y, 0.0f );
-              printXYZ1( pw4, x1, -y1, 0.0f );
-            } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-              float x =  scale * DrawingActivity.toSceneX( f.h );
-              float y =  scale * DrawingActivity.toSceneY( f.v );
-              float x1 = scale * DrawingActivity.toSceneX( t.h );
-              float y1 = scale * DrawingActivity.toSceneY( t.v );
-              printXYZ( pw4, x, -y, 0.0f );
-              printXYZ1( pw4, x1, -y1, 0.0f );
-            } else if ( type == PlotInfo.PLOT_SECTION ) {
-              // nothing
+              if ( type == PlotInfo.PLOT_PLAN ) {
+                float x =  scale * DrawingActivity.toSceneX( f.e );
+                float y =  scale * DrawingActivity.toSceneY( f.s );
+                float x1 = scale * DrawingActivity.toSceneX( t.e );
+                float y1 = scale * DrawingActivity.toSceneY( t.s );
+                printXYZ( pw4, x, -y, 0.0f );
+                printXYZ1( pw4, x1, -y1, 0.0f );
+              } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+                float x =  scale * DrawingActivity.toSceneX( f.h );
+                float y =  scale * DrawingActivity.toSceneY( f.v );
+                float x1 = scale * DrawingActivity.toSceneX( t.h );
+                float y1 = scale * DrawingActivity.toSceneY( t.v );
+                printXYZ( pw4, x, -y, 0.0f );
+                printXYZ1( pw4, x1, -y1, 0.0f );
+              } else if ( type == PlotInfo.PLOT_SECTION ) {
+                // nothing
+              }
+            } else if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
+              NumStation f = num.getStation( blk.mFrom );
+
+              printString( pw4, 0, "LINE" );
+              ++handle; printAcDb( pw4, handle, "AcDbEntity", "AcDbLine" );
+              printString( pw4, 8, "SPLAY" );
+              // printInt( pw4, 39, 1 );         // line thickness
+
+              float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
+              if ( type == PlotInfo.PLOT_PLAN ) {
+                float x = scale * DrawingActivity.toSceneX( f.e );
+                float y = scale * DrawingActivity.toSceneY( f.s );
+                float de =   dhs * FloatMath.sin( blk.mBearing * grad2rad);
+                float ds = - dhs * FloatMath.cos( blk.mBearing * grad2rad);
+                printXYZ( pw4, x, -y, 0.0f );
+                printXYZ1( pw4, x + de, -(y+ds), 0.0f );
+              } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+                float x = scale * DrawingActivity.toSceneX( f.h );
+                float y = scale * DrawingActivity.toSceneY( f.v );
+                float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
+                printXYZ( pw4, x, -y, 0.0f );
+                printXYZ1( pw4, x+dhs*blk.mExtend, -(y+dv), 0.0f );
+              } else if ( type == PlotInfo.PLOT_SECTION ) {
+                // nothing
+              }
             }
-          } else if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
-            NumStation f = num.getStation( blk.mFrom );
-
-            printString( pw4, 0, "LINE" );
-            ++handle; printAcDb( pw4, handle, "AcDbEntity", "AcDbLine" );
-            printString( pw4, 8, "SPLAY" );
-            // printInt( pw4, 39, 1 );         // line thickness
-
-            float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
-            if ( type == PlotInfo.PLOT_PLAN ) {
-              float x = scale * DrawingActivity.toSceneX( f.e );
-              float y = scale * DrawingActivity.toSceneY( f.s );
-              float de =   dhs * FloatMath.sin( blk.mBearing * grad2rad);
-              float ds = - dhs * FloatMath.cos( blk.mBearing * grad2rad);
-              printXYZ( pw4, x, -y, 0.0f );
-              printXYZ1( pw4, x + de, -(y+ds), 0.0f );
-            } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-              float x = scale * DrawingActivity.toSceneX( f.h );
-              float y = scale * DrawingActivity.toSceneY( f.v );
-              float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
-              printXYZ( pw4, x, -y, 0.0f );
-              printXYZ1( pw4, x+dhs*blk.mExtend, -(y+dv), 0.0f );
-            } else if ( type == PlotInfo.PLOT_SECTION ) {
-              // nothing
-            }
+            out.write( sw4.getBuffer().toString() );
+            out.flush();
           }
-          out.write( sw4.getBuffer().toString() );
-          out.flush();
         }
 
         // FIXME station scale is 0.3

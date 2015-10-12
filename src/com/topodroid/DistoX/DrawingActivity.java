@@ -2892,6 +2892,7 @@ public class DrawingActivity extends ItemDrawer
             } else if ( mExt.equals("svg") ) {
               filename = TopoDroidPath.getSvgFileWithExt( mFullName );
             }
+            Log.v("DistoX", "Export to File: " + filename );
             if ( filename != null ) {
               // final FileOutputStream out = new FileOutputStream( filename );
               TopoDroidApp.checkPath( filename );

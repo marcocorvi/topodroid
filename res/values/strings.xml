@@ -778,6 +778,9 @@
   <string name="pref_bitmap_scale_title">PNG resolution</string>
   <string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string>
   <string name="pref_bitmap_scale_message">Image resolution of sketch PNG export</string>
+  <string name="pref_bitmap_bgcolor_title">PNG background color</string>
+  <string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string>
+  <string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string>
   <string name="pref_acad_version_title">AutoCAD version</string>
   <string name="pref_acad_version_summary">AutoCAD version</string>
   <string name="pref_dxf_scale_title">DXF sketch scale</string>

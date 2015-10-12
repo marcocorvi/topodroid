@@ -104,6 +104,7 @@ class TopoDroidSetting
     "DISTOX_MKEYBOARD",
     "DISTOX_DXF_SCALE", 
     "DISTOX_ACAD_VERSION",
+    "DISTOX_BITMAP_BGCOLOR",
     "DISTOX_LOCALE",                 // 66
     "DISTOX_CWD",                    // must be last 
 
@@ -317,6 +318,24 @@ class TopoDroidSetting
 
   static float mBitmapScale = 1.5f;
   static float mDxfScale = 1.0f;
+  static int mBitmapBgcolor = 0x000000;
+
+  private static void setBitmapBgcolor( String color )
+  {
+    String[] vals = color.split("\\s+"); 
+    if ( vals.length == 3 ) {
+      try { 
+        int r = Integer.parseInt( vals[0] );
+        int g = Integer.parseInt( vals[1] );
+        int b = Integer.parseInt( vals[2] );
+        if ( r > 255 ) r = 255; if ( r < 0 ) r = 0;
+        if ( g > 255 ) g = 255; if ( g < 0 ) g = 0;
+        if ( b > 255 ) b = 255; if ( b < 0 ) b = 0;
+        mBitmapBgcolor = ( r << 16 ) | ( g << 8 ) | b;
+      } catch ( NumberFormatException e ) { }
+    }
+  }
+        
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // 3D
@@ -640,6 +659,8 @@ class TopoDroidSetting
     try {
       mAcadVersion = Integer.parseInt( prefs.getString( key[k++], "9") ); // DISTOX_ACAD_VERSION
     } catch ( NumberFormatException e) { }
+
+    setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -975,7 +996,8 @@ class TopoDroidSetting
       try {
         mAcadVersion = Integer.parseInt( prefs.getString( k, "9") ); // DISTOX_ACAD_VERSION
       } catch ( NumberFormatException e) { }
-
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      setBitmapBgcolor( prefs.getString( k, "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

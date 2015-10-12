@@ -779,6 +779,9 @@
   <string name="pref_bitmap_scale_title">PNG резолюция</string>
   <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
   <string name="pref_bitmap_scale_message">Резолюция на експортирани скици в PNG формат</string>
+  <!-- TODO string name="pref_bitmap_bgcolor_title">PNG background color</string -->
+  <!-- TODO string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
+  <!-- TODO string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string -->
   <string name="pref_acad_version_title">AutoCAD версия</string>
   <string name="pref_acad_version_summary">AutoCAD версия</string>
   <string name="pref_dxf_scale_title">Мащаб на DXF скици</string>
