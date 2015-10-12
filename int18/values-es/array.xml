@@ -2,7 +2,7 @@
 
 <resources>
 
-  <!-- TODO string-array name="zoomCtrl">
+  <string-array name="zoomCtrl">
      <item name="0">Off</item>
      <item name="1">Temporal</item>
      <item name="2">Permanente</item>
@@ -20,14 +20,14 @@
      <item>--</item>
   </string-array>
 
-  <!-- TODO string-array name="extraButtons">
+  <string-array name="extraButtons">
      <item name="basic">Básico</item>
      <item name="normal">Normal</item>
      <item name="advanced">Avanzado</item>
      <item name="experimental">Experimental</item>
   </string-array -->
 
-  <!-- string-array name="sizeButtons">
+  <string-array name="sizeButtons">
      <item name="small1">Pequeño</item>
      <item name="large">Grande</item>
   </string-array -->
@@ -78,7 +78,7 @@
      <item name="2">Activar</item>
   </string-array>
 
-  <!-- OK string-array name="exportType">
+  <string-array name="exportType">
      <item name="th">Therion</item>
      <item name="dat">Compass</item>
      <item name="svx">Survex</item>
