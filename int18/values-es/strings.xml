@@ -696,9 +696,9 @@
   <string name="pref_bitmap_scale_title">Escala PNG</string>
   <string name="pref_bitmap_scale_summary">Tamaño de escala de exportación del dibujo PNG</string>
   <string name="pref_bitmap_scale_message">Tamaño de escala de exportación del dibujo PNG</string>
-  <!-- TODO string name="pref_bitmap_bgcolor_title">PNG background color</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string -->
+  <string name="pref_bitmap_bgcolor_title">Color de Fondo PNG</string -->
+  <string name="pref_bitmap_bgcolor_summary">Color de fondo de imagen PNG en dibujos</string>
+  <string name="pref_bitmap_bgcolor_message">Exportar el color de fondo de dibujo a PNG</string>
   <string name="pref_acad_version_title">Versión de AutoCAD</string>
   <string name="pref_acad_version_summary">Versión de AutoCAD</string>
   <string name="pref_dxf_scale_title">Escala de dibujo DXF</string>
