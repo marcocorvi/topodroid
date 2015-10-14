@@ -1785,16 +1785,16 @@ public class TopoDroidApp extends Application
   {
     TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
-                 PlotInfo.PLOT_PLAN, 0L, start, "", 0, 0, mScaleFactor, 0, 0, true );
+                 PlotInfo.PLOT_PLAN, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
     long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                 PlotInfo.PLOT_EXTENDED, 0L, start, "", 0, 0, mScaleFactor, 0, 0, true );
+                 PlotInfo.PLOT_EXTENDED, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
     return pid_p;
   }
   
   long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino )
   {
     // FIXME COSURVEY 2d sections are not forwarded
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, false );
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, TopoDroidApp.mScaleFactor, azimuth, clino, "", false );
   }
 
   // ---------------------------------------------------------------------

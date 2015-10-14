@@ -980,7 +980,7 @@ public class SketchActivity extends ItemDrawer
   private void prepareReferences( List<DistoXDBlock> list )
   {
     // mSketchSurface.clearReferences();
-    mNum = new DistoXNum( list, mInfo.start, null ); // FIXME null: no barrier
+    mNum = new DistoXNum( list, mInfo.start, null, null ); // FIXME null: no barrier no hiding
     if ( (! mNum.surveyAttached) && TopoDroidSetting.mCheckAttached ) {
       Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
@@ -990,7 +990,7 @@ public class SketchActivity extends ItemDrawer
 
   void recreateNum( List<DistoXDBlock> list )
   {
-    mNum = new DistoXNum( list, mInfo.start, null ); // FIXME null: no barrier
+    mNum = new DistoXNum( list, mInfo.start, null, null ); // FIXME null: no barrier no hiding
     mModel.setNum( mNum );
   }
 

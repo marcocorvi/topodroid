@@ -1748,6 +1748,8 @@ public class DrawingCommandManager
         TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "exportTherion auto-stations: nr. " + mStations.size() );
         // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "bbox " + xmin + ".." + xmax + " " + ymin + ".." + ymax );
         for ( DrawingStationName st : mStations ) {
+          if ( st.mStation.barriered() ) continue;
+
           // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "stations " + st.cx + " " + st.cy );
           // FIXME if station is in the convex hull of the lines
           if ( xmin > st.cx || xmax < st.cx ) continue;

@@ -590,7 +590,7 @@ public class OverviewActivity extends ItemDrawer
           String view  = plot.view;
           mPlot1 = plot;
           // mPid = plot.id;
-          mNum = new DistoXNum( mBlockList, start, view );
+          mNum = new DistoXNum( mBlockList, start, null, null );
           mStartStation = mNum.getStation( start );
           computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
           // Log.v( "DistoX", "Overview num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );

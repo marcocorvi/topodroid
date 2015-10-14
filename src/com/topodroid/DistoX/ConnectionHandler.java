@@ -389,9 +389,11 @@ class ConnectionHandler extends Handler
          break;
 
        case DataListener.PLOT_INSERT:
-         mApp.mData.insertPlot( mSID, Integer.parseInt(data[1]), data[2], Integer.parseInt(data[3]), Integer.parseInt(data[4]),
+         mApp.mData.insertPlot( mSID, Integer.parseInt(data[1]), data[2], Integer.parseInt(data[3]),
+           Integer.parseInt(data[4]),
            data[5], data[6], Double.parseDouble(data[7]), Double.parseDouble(data[8]),
-           Double.parseDouble(data[9]), Double.parseDouble(data[10]), Double.parseDouble(data[11]), false ); 
+           Double.parseDouble(data[9]), Double.parseDouble(data[10]), Double.parseDouble(data[11]),
+           data[12], false ); 
          break;
        case DataListener.PLOT_UPDATE:
          break;
@@ -583,12 +585,13 @@ class ConnectionHandler extends Handler
 
 
   public void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
-                            double xoffset, double yoffset, double zoom, double azimuth, double clino ) 
+                            double xoffset, double yoffset, double zoom, double azimuth, double clino,
+                            String hide ) 
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|",
-      (int)sid, (int)id, name, (int)type, (int)status, start, view, xoffset, yoffset, zoom, azimuth, clino );
+    pw.format(Locale.ENGLISH, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|%s|",
+      (int)sid, (int)id, name, (int)type, (int)status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide );
     enqueue( DataListener.PLOT_INSERT, sw.getBuffer().toString() );
   }
 

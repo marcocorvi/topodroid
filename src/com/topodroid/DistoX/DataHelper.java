@@ -40,8 +40,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "24";
-  static final int DATABASE_VERSION = 24;
+  static final String DB_VERSION = "25";
+  static final int DATABASE_VERSION = 25;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -99,6 +99,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement undeleteShotStmt;
   private SQLiteStatement updatePlotStmt;
   private SQLiteStatement updatePlotViewStmt;
+  private SQLiteStatement updatePlotHideStmt;
   private SQLiteStatement deletePlotStmt;
   private SQLiteStatement undeletePlotStmt;
   // FIXME_SKETCH_3D
@@ -153,7 +154,7 @@ public class DataHelper extends DataSetObservable
          "flag", "leg", "comment", "type"
     };
     mPlotFields = new String[] {
-         "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino"
+         "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide"
     };
     mSketchFields =
     new String[] {
@@ -240,6 +241,7 @@ public class DataHelper extends DataSetObservable
         undeleteShotStmt = myDB.compileStatement( "UPDATE shots set status=0 WHERE surveyId=? AND id=?" );
         updatePlotStmt   = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
         updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+        updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
         dropPlotStmt     = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
         deletePlotStmt   = myDB.compileStatement( "UPDATE plots set status=1 WHERE surveyId=? AND id=?" );
         undeletePlotStmt = myDB.compileStatement( "UPDATE plots set status=0 WHERE surveyId=? AND id=?" );
@@ -988,6 +990,16 @@ public class DataHelper extends DataSetObservable
     updatePlotViewStmt.execute();
   }
    
+  public void updatePlotHide( long plot_id, long survey_id, String hide )
+  {
+    // if ( myDB == null ) return;
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updatePlot: " + plot_id + "/" + survey_id + " hide " + hide );
+    updatePlotHideStmt.bindString( 1, hide );
+    updatePlotHideStmt.bindLong( 2, survey_id );
+    updatePlotHideStmt.bindLong( 3, plot_id );
+    updatePlotHideStmt.execute();
+  }
+   
   /** DROP is a real record delete from the database table
    */
   public void dropPlot( long plot_id, long survey_id )
@@ -1356,6 +1368,7 @@ public class DataHelper extends DataSetObservable
      plot.zoom    = (float)(cursor.getDouble(7));
      plot.azimuth = (float)(cursor.getDouble(8));
      plot.clino   = (float)(cursor.getDouble(9));
+     plot.hide    = cursor.getString(10);
    }
 
    private List< PlotInfo > doSelectAllPlots( long sid, String where, String[] wheres )
@@ -2099,7 +2112,7 @@ public class DataHelper extends DataSetObservable
      PlotInfo plot = null;
      if ( myDB != null && name != null ) {
        Cursor cursor = myDB.query( PLOT_TABLE, 
-                 new String[] { "id", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino" },
+                 new String[] { "id", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" },
                  "surveyId=? and name=?", 
                  new String[] { Long.toString(sid), name },
                  null, null, null );
@@ -2117,6 +2130,7 @@ public class DataHelper extends DataSetObservable
            plot.zoom    = (float)( cursor.getDouble(6) );
            plot.azimuth = (float)( cursor.getDouble(7) );
            plot.clino   = (float)( cursor.getDouble(8) );
+           plot.hide  = cursor.getString(9);
            // Log.v( TopoDroidApp.TAG, "plot " + plot.name + " azimuth " + plot.azimuth );
          }
          if (!cursor.isClosed()) cursor.close();
@@ -2355,7 +2369,8 @@ public class DataHelper extends DataSetObservable
    }
 
    public long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
-                           double xoffset, double yoffset, double zoom, double azimuth, double clino, boolean forward )
+                           double xoffset, double yoffset, double zoom, double azimuth, double clino,
+                           String hide, boolean forward )
    {
      // Log.v( TopoDroidApp.TAG, "insertPlot " + name + " start " + start + " azimuth " + azimuth );
      // if ( myDB == null ) return -1L;
@@ -2375,12 +2390,13 @@ public class DataHelper extends DataSetObservable
      cv.put( "zoom",     zoom );
      cv.put( "azimuth",  azimuth );
      cv.put( "clino",    clino );
+     cv.put( "hide",     hide );
      myDB.insert( PLOT_TABLE, null, cv );
      if ( forward ) {
        if ( view == null ) view = "";
        // synchronized( mListeners )
        for ( DataListener listener : mListeners ) {
-         listener.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino );
+         listener.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide );
        }
      }
      return id;
@@ -2694,13 +2710,13 @@ public class DataHelper extends DataSetObservable
          cursor.close();
        }
        cursor = myDB.query( PLOT_TABLE, 
-                            new String[] { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino" },
+                            new String[] { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.ENGLISH,
-                     "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f );\n",
+                     "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\" );\n",
                      PLOT_TABLE,
                      sid,
                      cursor.getLong(0),
@@ -2713,7 +2729,8 @@ public class DataHelper extends DataSetObservable
                      cursor.getDouble(7),
                      cursor.getDouble(8),
                      cursor.getDouble(9),
-                     cursor.getDouble(10)
+                     cursor.getDouble(10),
+                     cursor.getString(11)
                     );
          } while (cursor.moveToNext());
        }
@@ -2934,8 +2951,9 @@ public class DataHelper extends DataSetObservable
              double yoffset = scanline1.doubleValue( );
              double zoom  = scanline1.doubleValue( );
              double azimuth = scanline1.doubleValue( );
-             double clino = 0; if ( db_version > 20 ) clino = scanline1.doubleValue( );
-             insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, false );
+             double clino = ( db_version > 20 )? scanline1.doubleValue( ) : 0;
+             String hide  = ( db_version > 24 )? scanline1.stringValue( ) : "";
+             insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, false );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
    
            // FIXME_SKETCH_3D
@@ -3761,7 +3779,8 @@ public class DataHelper extends DataSetObservable
              +   " yoffset REAL, "
              +   " zoom REAL, "
              +   " azimuth REAL, "
-             +   " clino REAL "
+             +   " clino REAL, "
+             +   " hide TEXT "
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -3897,6 +3916,8 @@ public class DataHelper extends DataSetObservable
 //            case 23:
 //              db.execSQL( "ALTER TABLE devices ADD COLUMN nickname TEXT default \"\"" );
            case 24:
+             db.execSQL( "ALTER TABLE plots ADD COLUMN hide TEXT default \"\"" );
+           case 25:
              /* current version */
            default:
              break;

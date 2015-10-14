@@ -110,7 +110,7 @@ public interface DataListener
   static final byte PLOT_UNDLEETE = (byte)35;
 
   public void onInsertPlot( long sid, long id, String name, long type, long status, String start, String view,
-                            double xoffset, double yoffset, double zoom, double azimuth, double clino );
+                            double xoffset, double yoffset, double zoom, double azimuth, double clino, String hide );
 
   // public void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom );
 

@@ -670,7 +670,7 @@ public class DrawingActivity extends ItemDrawer
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        if ( st1.mHidden == 0 || st2.mHidden == 0 ) {
+        if ( st1.show() && st2.show() ) {
           addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), 
                         xoff, yoff, false, true );
           // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, 
@@ -680,14 +680,14 @@ public class DrawingActivity extends ItemDrawer
       for ( NumSplay sp : splays ) {
         if ( Math.abs( sp.getBlock().mClino ) < TopoDroidSetting.mSplayVertThrs ) {
           NumStation st = sp.from;
-          if ( st.mHidden < 2 ) {
+          if ( st.show() ) {
             addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), 
                           xoff, yoff, true, true );
           }
         }
       }
       for ( NumStation st : stations ) {
-        if ( st.mHidden < 2 ) {
+        if ( st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.e) - xoff, toSceneY(st.s) - yoff, true );
         }
@@ -697,7 +697,7 @@ public class DrawingActivity extends ItemDrawer
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          if ( st1.mHidden == 0 || st2.mHidden == 0 ) {
+          if ( st1.show() && st2.show() ) {
             addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), 
                           xoff, yoff, false, true );
             // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "line " + toSceneX(st1.h) + " " + toSceneY(st1.v) + " - " + toSceneX(st2.h) + " " + toSceneY(st2.v) );
@@ -706,13 +706,13 @@ public class DrawingActivity extends ItemDrawer
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        if ( st.mHidden < 2 ) {
+        if ( st.show() ) {
           addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), 
                         xoff, yoff, true, true );
         }
       }
       for ( NumStation st : stations ) {
-        if ( st.mHidden < 2 ) {
+        if ( st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.h) - xoff, toSceneY(st.v) - yoff, true );
         }
@@ -1266,6 +1266,7 @@ public class DrawingActivity extends ItemDrawer
 
       String start = mPlot1.start;
       String view  = mPlot1.view;
+      String hide  = mPlot1.hide;
       mType        = mPlot1.type;
       // Log.v( TopoDroidApp.TAG, "loadFiles start <" + start + "> view <" + view + ">" );
 
@@ -1282,7 +1283,7 @@ public class DrawingActivity extends ItemDrawer
           if ( mPid2 >= 0 ) mApp.mData.dropPlot( mPid2, mSid );
           finish();
         } else {
-          mNum = new DistoXNum( mList, start, view );
+          mNum = new DistoXNum( mList, start, view, hide );
           computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom );
           computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom );
         }
@@ -1398,15 +1399,6 @@ public class DrawingActivity extends ItemDrawer
       block.mTo   = to;
       mData.updateShotName( block.mId, mSid, from, to, true );
       doComputeReferences();
-      // mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      // mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
-      // if ( mType == PlotInfo.PLOT_EXTENDED ) {
-      //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-      //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-      // } else {
-      //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-      //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-      // }      
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       // mDrawingSurface.refresh();
 
@@ -1440,7 +1432,7 @@ public class DrawingActivity extends ItemDrawer
     {
       if ( mType == PlotInfo.PLOT_EXTENDED ) {
         mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
+        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
         computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         // mDrawingSurface.refresh();
@@ -2143,15 +2135,64 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    void toggleStationHidden( String name, boolean hidden )
+    void toggleStationHidden( String name, boolean is_hidden )
     {
-      mNum.setStationHidden( name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
-      computeReferences( (int)mType, 0, 0, mZoom );
-      // computeReferences( (int)mType, mOffset.x, mOffset.y, mZoom );
+      // Log.v("DistoX", "toggle station " + name + " hidden " + is_hidden );
+
+      String hide = mPlot1.hide;
+      String new_hide = "";
+      boolean add = false;
+      boolean drop = false;
+      if ( hide == null ) {
+        add = true;
+        drop = false;
+      } else {
+        String[] hidden = hide.split( "\\s+" );
+        int k = 0;
+        for (; k < hidden.length; ++k ) {
+          if ( hidden[k].equals( name ) ) { // N.B. hidden[k] != null
+            drop = true;
+          } else {
+            new_hide = new_hide + " " + hidden[k];
+          }
+        }
+        new_hide.trim();
+        add = ! drop;
+      }
+      int h = 0;
+
+      if ( add && ! is_hidden ) {
+        if ( hide == null || hide.length() == 0 ) {
+          hide = name;
+        } else {
+          hide = hide + " " + name;
+        }
+        // Log.v( "DistoX", "addStationHidden " + name + " hide <" + hide + ">" );
+        mData.updatePlotHide( mPid1, mSid, hide );
+        mData.updatePlotHide( mPid2, mSid, hide );
+        mPlot1.hide = hide;
+        mPlot2.hide = hide;
+        h = 1; // hide
+      } else if ( drop && is_hidden ) {
+        mData.updatePlotHide( mPid1, mSid, new_hide );
+        mData.updatePlotHide( mPid2, mSid, new_hide );
+        mPlot1.hide = new_hide;
+        mPlot2.hide = new_hide;
+        h = -1; // un-hide
+        // Log.v( "DistoX", "dropStationHidden " + name + " hide <" + new_hide + ">" );
+      }
+      // Log.v("DistoX", "toggle station hidden: hide " + hide + " H " + h );
+
+      if ( h != 0 ) {
+        mNum.setStationHidden( name, h );
+        computeReferences( (int)mType, 0, 0, mZoom );
+      }
     }
+    //  mNum.setStationHidden( name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
 
     void toggleStationBarrier( String name, boolean is_barrier ) 
     {
+      // Log.v("DistoX", "toggle station " + name + " barrier " + is_barrier );
       String view = mPlot1.view;
       String new_view = "";
       boolean add = false;
@@ -2172,7 +2213,8 @@ public class DrawingActivity extends ItemDrawer
         new_view.trim();
         add = ! drop;
       }
-      boolean compute_ref = false;
+      int h = 0;
+
       if ( add && ! is_barrier ) {
         if ( view == null || view.length() == 0 ) {
           view = name;
@@ -2184,36 +2226,19 @@ public class DrawingActivity extends ItemDrawer
         mData.updatePlotView( mPid2, mSid, view );
         mPlot1.view = view;
         mPlot2.view = view;
-        compute_ref = true;
-        // // FIXME factorized out
-        // mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        // mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
-        // if ( mType == PlotInfo.PLOT_EXTENDED ) {
-        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-        // } else {
-        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-        // }
+        h = 1;
       } else if ( drop && is_barrier ) {
         mData.updatePlotView( mPid1, mSid, new_view );
         mData.updatePlotView( mPid2, mSid, new_view );
         mPlot1.view = new_view;
         mPlot2.view = new_view;
-        compute_ref = true;
-        // // FIXME recompute num
-        // mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        // mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
-        // if ( mType == PlotInfo.PLOT_EXTENDED ) {
-        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-        // } else {
-        //   computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-        //   computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-        // }
+        h = -1;
       }
-      if ( compute_ref ) {
-        doComputeReferences();
+      // Log.v("DistoX", "toggle station barrier: view " + view + " H " + h );
+
+      if ( h != 0 ) {
+        mNum.setStationBarrier( name, h );
+        computeReferences( (int)mType, 0, 0, mZoom );
       }
     }
    
@@ -2556,16 +2581,26 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
+    // flip the profile sketch left/right
+    // @param flip_shots whether to flip also the shots extend
+    // @note barrier shots are not flipped; hiding shots are flipped
     public void flipProfile( boolean flip_shots )
     {
       mDrawingSurface.flipProfile( );
       if ( flip_shots ) {
         DistoXDBlock blk;
         for ( NumShot sh : mNum.getShots() ) {
-          flipBlock( sh.getFirstBlock() );
+          NumStation st1 = sh.from;
+          NumStation st2 = sh.to;
+          if ( st1.unbarriered() && st1.unbarriered() ) {
+            flipBlock( sh.getFirstBlock() );
+          }
         }
         for ( NumSplay sp : mNum.getSplays() ) {
-          flipBlock( sp.getBlock() );
+          NumStation st = sp.from;
+          if ( st.unbarriered() ) {
+            flipBlock( sp.getBlock() );
+          }
         }
       }
       recomputeProfileReference();
@@ -3078,7 +3113,7 @@ public class DrawingActivity extends ItemDrawer
   private void doComputeReferences()
   {
     mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-    mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
+    mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
       computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
@@ -3114,7 +3149,7 @@ public class DrawingActivity extends ItemDrawer
     // Log.v( TopoDroidApp.TAG, "update display: list " + mList.size() );
     if ( compute ) {
       mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view );
+      mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
       computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor );
     }
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {

@@ -77,7 +77,6 @@ class DistoXNum
   private ArrayList<NumSplay>   mSplays;
   private ArrayList<String>     mClosures;
   private ArrayList<NumNode>    mNodes;
-  private String[] mBarrier; // barrier stations
 
 
   public int stationsNr()  { return mStations.size(); }
@@ -134,6 +133,45 @@ class DistoXNum
     }
   }
 
+  void setStationsHide( String hide )
+  {
+    if ( hide == null ) return;
+    String[] names = hide.split(" ");
+    for ( int k=0; k<names.length; ++k ) {
+      if ( names[k].length() > 0 ) setStationHidden( names[k], 1 );
+    }
+  }
+
+  // barrier = +1 (set barrier), -1 (unset barrier)
+  void setStationBarrier( String name, int barrier )
+  {
+    // Log.v("DistoX", "Set Station barrier: " + barrier );
+    NumStation st = getStation( name );
+    if ( st == null ) return;
+    st.mHidden -= barrier;
+    barrier *= 2;
+    Stack<NumStation> stack = new Stack<NumStation>();
+    stack.push( st );
+    while ( ! stack.empty() ) {
+      st = stack.pop();
+      // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
+      for ( NumStation s : mStations ) {
+        if ( s.mParent == st ) {
+          s.mHidden -= barrier;
+          stack.push( s );
+        }
+      }
+    }
+  }
+  void setStationsBarr( String barr )
+  {
+    if ( barr == null ) return;
+    String[] names = barr.split(" ");
+    for ( int k=0; k<names.length; ++k ) {
+      if ( names[k].length() > 0 ) setStationBarrier( names[k], 1 );
+    }
+  }
+
   boolean isHidden( String name )
   {
     NumStation st = getStation( name );
@@ -141,12 +179,11 @@ class DistoXNum
     return st.mHidden > 0;
   }
 
-  boolean isBarrier( String b )
+  boolean isBarrier( String name )
   {
-    if ( b != null ) {
-      for ( int k=0; k<mBarrier.length; ++k ) if ( b.equals( mBarrier[k] ) ) return true;
-    }
-    return false;
+    NumStation st = getStation( name );
+    if ( st == null ) return false;
+    return st.mHidden < 0;
   }
 
   // ================================================================================
@@ -154,14 +191,15 @@ class DistoXNum
    * @param data     list of survey data
    * @param start    start station
    * @param view     barriers list
+   * @param hide     hiding list
    */
-  DistoXNum( List<DistoXDBlock> data, String start, String view )
+  DistoXNum( List<DistoXDBlock> data, String start, String view, String hide )
   {
-    if ( view != null ) {
-      surveyAttached = computeNum( data, start, view.split(" ") );
-    } else {
-      surveyAttached = computeNum( data, start, new String[0] );
-    }
+    surveyAttached = computeNum( data, start );
+
+    setStationsHide( hide );
+    setStationsBarr( view );
+
     // TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum cstr length " + mLength + " depth " + mZmin + " " + mZmax );
     // Log.v( TopoDroidApp.TAG, "DistoXNum cstr data " + data.size() + " start " + start );
     // Log.v( TopoDroidApp.TAG, "DistoXNum cstr length " + mLength + " depth " + mZmin + " " + mZmax );
@@ -551,15 +589,12 @@ class DistoXNum
   /** survey data reduction 
    * return true if all shots are attached
    */
-  private boolean computeNum( List<DistoXDBlock> data, String start, String[] barrier )
+  // private boolean computeNum( List<DistoXDBlock> data, String start, String[] barrier )
+  private boolean computeNum( List<DistoXDBlock> data, String start )
   {
     resetBBox();
     resetStats();
 
-    mBarrier  = barrier;
-    // for ( int k=0; k<barrier.length; ++k ) {
-    //   Log.v( TopoDroidApp.TAG, "Num Barrier " + k + " <" + barrier[k] + ">" );
-    // }
     mStations = new ArrayList< NumStation >();
     mShots    = new ArrayList< NumShot >();
     mSplays   = new ArrayList< NumSplay >();
@@ -747,15 +782,14 @@ class DistoXNum
         // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
         // ts.Dump();
 
-        if ( sf != null && ! sf.mBarrier ) {
-          if ( st != null && ! st.mBarrier ) { // loop-closure
+        if ( sf != null ) {
+          if ( st != null ) { // loop-closure
             if ( /* TopoDroidSetting.mAutoStations || */ ! TopoDroidSetting.mLoopClosure ) { // do not close loop
               // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "do not close loop");
               // keep loop open: new station( id=ts.to, from=sf, ... )
               NumStation st1 = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
               st1.mAnomaly = anomaly;
               updateBBox( st );
-              if ( isBarrier( ts.to ) ) st1.mBarrier = true;
               st1.mDuplicate = true;
               mStations.add( st1 );
 
@@ -782,7 +816,6 @@ class DistoXNum
                               "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
             st = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
             st.mAnomaly = anomaly;
-            if ( isBarrier( ts.to ) ) st.mBarrier = true;
             updateBBox( st );
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
             mStations.add( st );
@@ -793,7 +826,7 @@ class DistoXNum
             repeat = true;
           }
         }
-        else if ( st != null && ! st.mBarrier ) 
+        else if ( st != null ) 
         { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
           // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
           
@@ -801,7 +834,6 @@ class DistoXNum
                             "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
           sf = new NumStation( ts.from, st, - ts.d(), ts.b()-st.mAnomaly, ts.c(), ts.extend );
           sf.mAnomaly = anomaly; // FIXME
-          if ( isBarrier( ts.from ) ) sf.mBarrier = true;
 
           updateBBox( sf );
           addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), sf.v );

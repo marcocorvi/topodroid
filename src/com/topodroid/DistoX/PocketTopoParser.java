@@ -144,7 +144,7 @@ public class PocketTopoParser extends ImportParser
     TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT parser shot count " + shot_count + " size " + shots.size() );
 
     // Log.v("PTDistoX", "start from " + mStartFrom );
-    // DistoXNum num = new DistoXNum( data, mStartFrom, null );
+    // DistoXNum num = new DistoXNum( data, mStartFrom, null, null );
     // Log.v("DistoX", "Num E " + (20*num.surveyEmin()) + " " + (20*num.surveyEmax()) +
     //                 " S " + (20*num.surveySmin()) + " " + (20*num.surveySmax()) +
     //                 " H " + (20*num.surveyHmin()) + " " + (20*num.surveyHmax()) +

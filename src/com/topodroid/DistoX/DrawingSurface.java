@@ -248,7 +248,13 @@ public class DrawingSurface extends SurfaceView
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "addDrawingStation " + num_st.name + " " + x + " " + y );
       DrawingStationName st = new DrawingStationName( num_st, x, y );
-      st.setPaint( DrawingBrushPaths.fixedStationPaint );
+      if ( num_st.mHidden == 1 ) {
+        st.setPaint( DrawingBrushPaths.fixedStationHiddenPaint );
+      } else if ( num_st.mHidden == -1 ) {
+        st.setPaint( DrawingBrushPaths.fixedStationBarrierPaint );
+      } else {
+        st.setPaint( DrawingBrushPaths.fixedStationPaint );
+      }
       commandManager.addStation( st, selectable );
       return st;
     }

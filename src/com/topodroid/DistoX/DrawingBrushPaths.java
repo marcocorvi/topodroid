@@ -137,6 +137,8 @@ public class DrawingBrushPaths
   static Paint fixedGridPaint  = null;
   static Paint fixedGrid10Paint  = null;
   static Paint fixedStationPaint  = null;
+  static Paint fixedStationBarrierPaint  = null;
+  static Paint fixedStationHiddenPaint  = null;
   static Paint labelPaint  = null;
   static Paint duplicateStationPaint = null;
 
@@ -292,6 +294,22 @@ public class DrawingBrushPaths
     fixedStationPaint.setStrokeWidth( WIDTH_FIXED );
     fixedStationPaint.setColor(0xFFFF66cc); // not very dark red
 
+    fixedStationBarrierPaint = new Paint();
+    fixedStationBarrierPaint.setDither(true);
+    fixedStationBarrierPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+    fixedStationBarrierPaint.setStrokeJoin(Paint.Join.ROUND);
+    fixedStationBarrierPaint.setStrokeCap(Paint.Cap.ROUND);
+    fixedStationBarrierPaint.setStrokeWidth( WIDTH_FIXED );
+    fixedStationBarrierPaint.setColor(0xFFFF0000); // very red
+
+    fixedStationHiddenPaint = new Paint();
+    fixedStationHiddenPaint.setDither(true);
+    fixedStationHiddenPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+    fixedStationHiddenPaint.setStrokeJoin(Paint.Join.ROUND);
+    fixedStationHiddenPaint.setStrokeCap(Paint.Cap.ROUND);
+    fixedStationHiddenPaint.setStrokeWidth( WIDTH_FIXED );
+    fixedStationHiddenPaint.setColor(0xFF9966ff); // rather blue
+
     labelPaint = new Paint();
     labelPaint.setDither(true);
     labelPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -342,17 +360,28 @@ public class DrawingBrushPaths
 
   static void setStrokeWidths()
   {
-    /* if (fixedShotPaint != null) */ fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
-    /* if (fixedBluePaint != null) */ fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
-    /* if (fixedSplayPaint != null) */ fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
-    /* if (fixedSplay2Paint != null) */ fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+    // if (fixedShotPaint != null)
+      fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+    // if (fixedBluePaint != null)
+      fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+    // if (fixedSplayPaint != null)
+      fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+    // if (fixedSplay2Paint != null)
+      fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
   }
 
   static void setTextSizes()
   {
-    /* if ( labelPaint != null ) */ labelPaint.setTextSize( TopoDroidSetting.mLabelSize );
-    /* if ( fixedStationPaint != null ) */ fixedStationPaint.setTextSize( TopoDroidSetting.mStationSize );
-    /* if ( duplicateStationPaint != null ) */ duplicateStationPaint.setTextSize( TopoDroidSetting.mStationSize );
+    // if ( labelPaint != null )
+      labelPaint.setTextSize( TopoDroidSetting.mLabelSize );
+    // if ( fixedStationPaint != null )
+      fixedStationPaint.setTextSize( TopoDroidSetting.mStationSize );
+    // if ( fixedStationBarrierPaint != null ) 
+      fixedStationBarrierPaint.setTextSize( TopoDroidSetting.mStationSize );
+    // if ( fixedStationHiddenPaint != null )
+      fixedStationHiddenPaint.setTextSize( TopoDroidSetting.mStationSize );
+    // if ( duplicateStationPaint != null ) 
+      duplicateStationPaint.setTextSize( TopoDroidSetting.mStationSize );
   }
 
 }

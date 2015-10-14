@@ -353,7 +353,7 @@ class TopoDroidExporter
     FixedInfo origin = null;
     List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
     for ( FixedInfo fixed : fixeds ) {
-      num = new DistoXNum( shots_data, fixed.name, null );
+      num = new DistoXNum( shots_data, fixed.name, null, null );
       if ( num.getShots().size() > 0 ) {
         origin = fixed;
         break;
