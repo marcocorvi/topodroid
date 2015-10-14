@@ -180,6 +180,8 @@
     <string name="none">none</string>
     <string name="barrier_add">Прервать показ средней линии?</string>
     <string name="barrier_del">Продолжить показ средней линии?</string>
+    <!-- TODO string name="hidden_add">Hide midline display</string -->
+    <!-- TODO string name="hidden_del">Show midline display</string -->
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
@@ -663,8 +665,8 @@
 
   <string name="pref_raw_data_title">Сырые данные</string>
   <string name="pref_raw_data_summary">Показать сырые данные</string>
-  <string name="pref_bootloader_title">Загрузчик</string>
-  <string name="pref_bootloader_summary">Вкл Загрузчик</string>
+  <!-- UNUSED string name="pref_bootloader_title">Загрузчик</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Вкл Загрузчик</string -->
   <string name="pref_mkeyboard_title">Клавиатура</string>
   <string name="pref_mkeyboard_summary">Вкл\Выкл сторонние клавиатуры </string>
   <string name="pref_cosurvey_title">Совм. съёмка</string>

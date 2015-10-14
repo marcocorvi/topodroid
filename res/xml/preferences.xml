@@ -41,12 +41,12 @@
        android:defaultValue="true"
        />
 
-  <CheckBoxPreference
+  <!-- CheckBoxPreference
        android:key="DISTOX_BOOTLOADER"
        android:summary="@string/pref_bootloader_summary"
        android:title="@string/pref_bootloader_title"
        android:defaultValue="false"
-       />
+       / -->
 
   <CheckBoxPreference
        android:key="DISTOX_COSURVEY"

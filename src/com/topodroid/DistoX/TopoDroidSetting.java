@@ -54,48 +54,48 @@ class TopoDroidSetting
     "DISTOX_BLUETOOTH",           // 25
     "DISTOX_SOCK_TYPE",
     "DISTOX_COMM_RETRY",          // 27
-    "DISTOX_BOOTLOADER",          // 28
-    "DISTOX_CONN_MODE",           // 29
+    // "DISTOX_BOOTLOADER",       // UNUSED
+    "DISTOX_CONN_MODE",           // 28
 
-    "DISTOX_AUTO_STATIONS",       // 30 
-    "DISTOX_CLOSENESS",           // 31
+    "DISTOX_AUTO_STATIONS",       //  
+    "DISTOX_CLOSENESS",           // 30
     "DISTOX_LINE_SEGMENT",
     "DISTOX_LINE_ACCURACY",
-    "DISTOX_LINE_CORNER",         // 34
-    "DISTOX_LINE_STYLE",          // 35
-    "DISTOX_DRAWING_UNIT",        // 36
-    "DISTOX_PICKER_TYPE",         // 37
-    "DISTOX_HTHRESHOLD",          // 38  // NOT USED
-    "DISTOX_STATION_SIZE",        // 39
-    "DISTOX_LABEL_SIZE",          // 40
-    "DISTOX_LINE_THICKNESS",      // 41
+    "DISTOX_LINE_CORNER",         // 33
+    "DISTOX_LINE_STYLE",          // 
+    "DISTOX_DRAWING_UNIT",        // 
+    "DISTOX_PICKER_TYPE",         // 36
+    "DISTOX_HTHRESHOLD",          // UNUSED
+    "DISTOX_STATION_SIZE",        // 
+    "DISTOX_LABEL_SIZE",          // 
+    "DISTOX_LINE_THICKNESS",      // 40
 
-    "DISTOX_TEAM",                   // 42
-    // "DISTOX_ALTIMETRIC",             // 43
-    "DISTOX_SHOT_TIMER",             // 44 // bearing-clino timer
-    "DISTOX_BEEP_VOLUME",            // 45
-    "DISTOX_LEG_SHOTS",              // 46 // nr. of shots to make a leg
+    "DISTOX_TEAM",                   // 41
+    // "DISTOX_ALTIMETRIC",          // UNUSED
+    "DISTOX_SHOT_TIMER",             // 42 // bearing-clino timer
+    "DISTOX_BEEP_VOLUME",            // 43
+    "DISTOX_LEG_SHOTS",              // nr. of shots to make a leg
     "DISTOX_COSURVEY",
 
-    "DISTOX_SKETCH_LINE_STEP",       // 48
-    "DISTOX_DELTA_EXTRUDE",          // 49
-    "DISTOX_COMPASS_READINGS",       // 50
+    "DISTOX_SKETCH_LINE_STEP",       // 46
+    "DISTOX_DELTA_EXTRUDE",          // 
+    "DISTOX_COMPASS_READINGS",       // 
 
-    "DISTOX_SPLAY_EXTEND",           // 51 // whether to set extend to splay shots
-    "DISTOX_AUTO_RECONNECT",         // 52
-    "DISTOX_BITMAP_SCALE",           // 53
-    "DISTOX_THUMBNAIL",              // 54
-    "DISTOX_DOT_RADIUS",             // 55
-    "DISTOX_FIXED_THICKNESS",        // 56
-    "DISTOX_ARROW_LENGTH",           // 57
-    "DISTOX_EXPORT_SHOTS",           // 58
+    "DISTOX_SPLAY_EXTEND",           // 49 // whether to set extend to splay shots
+    "DISTOX_AUTO_RECONNECT",         // 50
+    "DISTOX_BITMAP_SCALE",           // 51
+    "DISTOX_THUMBNAIL",              // 
+    "DISTOX_DOT_RADIUS",             // 
+    "DISTOX_FIXED_THICKNESS",        // 54
+    "DISTOX_ARROW_LENGTH",           // 55
+    "DISTOX_EXPORT_SHOTS",           // 56
 
     "DISTOX_SPLAY_VERT_THRS",        // over mSplayVertThrs splays are not displayed in plan view
     "DISTOX_INIT_STATION",           // default initial station for sketches
     "DISTOX_BACKSIGHT",
-    "DISTOX_Z6_WORKAROUND",          // 62
+    "DISTOX_Z6_WORKAROUND",          // 60
     "DISTOX_MAG_ANOMALY",            // whether to compensate magnetic anomaly
-    "DISTOX_AZIMUTH_MANUAL",         // 64
+    "DISTOX_AZIMUTH_MANUAL",         // 62
     "DISTOX_VERT_SPLAY",             // over this splay are shown with dashed line
     "DISTOX_STATION_PREFIX",         // whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
@@ -105,7 +105,7 @@ class TopoDroidSetting
     "DISTOX_DXF_SCALE", 
     "DISTOX_ACAD_VERSION",
     "DISTOX_BITMAP_BGCOLOR",
-    "DISTOX_LOCALE",                 // 66
+    "DISTOX_LOCALE",                 // 
     "DISTOX_CWD",                    // must be last 
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
@@ -236,7 +236,7 @@ class TopoDroidSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DEVICE
-  static boolean mBootloader = false;  // whether to show bootloader menu
+  // static boolean mBootloader = false;  // whether to show bootloader menu
   static boolean mAutoReconnect = false;
 
   // static final boolean CHECK_BT = true;
@@ -320,6 +320,7 @@ class TopoDroidSetting
   static float mDxfScale = 1.0f;
   static int mBitmapBgcolor = 0x000000;
 
+  // backgroind color RGB_565
   private static void setBitmapBgcolor( String color )
   {
     String[] vals = color.split("\\s+"); 
@@ -331,7 +332,7 @@ class TopoDroidSetting
         if ( r > 255 ) r = 255; if ( r < 0 ) r = 0;
         if ( g > 255 ) g = 255; if ( g < 0 ) g = 0;
         if ( b > 255 ) b = 255; if ( b < 0 ) b = 0;
-        mBitmapBgcolor = ( r << 16 ) | ( g << 8 ) | b;
+        mBitmapBgcolor = 0xff000000 | ( r << 16 ) | ( g << 8 ) | b;
       } catch ( NumberFormatException e ) { }
     }
   }
@@ -486,7 +487,7 @@ class TopoDroidSetting
       setCommRetry( Integer.parseInt( prefs.getString( key[k++], "1" ) ) ); // DISTOX_COMM_RETRY 27
     } catch ( NumberFormatException e ) { setCommRetry( 1 ); }
 
-    mBootloader = prefs.getBoolean( key[k++], false );                      // DISTOX_BOOTLOADER 28
+    // mBootloader = prefs.getBoolean( key[k++], false );                      // DISTOX_BOOTLOADER 28
 
     mConnectionMode = Integer.parseInt( prefs.getString( key[k++], "0" ) ); // DISTOX_CONN_MODE 29
 
@@ -804,8 +805,8 @@ class TopoDroidSetting
       try {
         setCommRetry( Integer.parseInt( prefs.getString( k, "1" ) ) );
       } catch ( NumberFormatException e ) { setCommRetry( 1 ); }
-    } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_BOOTLOADER 28
-      mBootloader = prefs.getBoolean( k, false );     
+    // } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_BOOTLOADER 28
+    //   mBootloader = prefs.getBoolean( k, false );     
     } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_CONN_MODE (choice)
       mConnectionMode = Integer.parseInt( prefs.getString( k, "0" ) ); 
   

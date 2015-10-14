@@ -25,7 +25,7 @@ class PlotInfo
   public static final long PLOT_PHOTO      = 4;
   public static final long PLOT_SECTION    = 5;
   public static final long PLOT_SKETCH_3D  = 6;
-  public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defiened in EXT plot)
+  public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
 
   // public static final String[] plotType = {
   //   "X-SECTION",  // vertical cross section

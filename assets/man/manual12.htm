@@ -23,10 +23,11 @@ To clear the selection tap somewhere else in the canvas. To move the editing poi
 Point editing applies also to shots and stations.
 <ulist>
 <li>shots: stations, "extend", and flags</li>
-<li>stations: can be made the "current" station, toggle the "barrier" mark, and add as Therion "station point" to the scrap (if the autostation option of TopoDroid is not enabled)</li>
+<li>stations: can be made the "current" station, toggle the "barrier" mark [A], toggle the midline "hide/show" attribute [A], and add as Therion "station point" to the scrap (if the autostation option of TopoDroid is not enabled)</li>
 </ulist><br>
 The "current" station is where the next downloaded shots will be attached. When a leg is downloaded (or inserted) the new station becomes the "current" station. By changing the "current" station you can continue surveying from a station in the middle of the survey.<br>
-The "barrier" station limits the reduction of the midline (for the sketch). This is useful when the survey goes over itself and you must draw two or more sketches. Having only the relevant shots on the canvas makes drawing easier.<br>
+A "barrier" station [A] limits the data reduction of the midline (for the sketch). This is useful when the survey goes over itself and you must draw two or more sketches. Having only the relevant shots on the canvas makes drawing easier.<br>
+The midline "hide/show" attribute of a station [A] specifies whether to hide or show the midline up to that station/<br>
 <i>Therion</i> scraps must have a scale defined or at least two stations (so that <i>Therion</i> can compute the scale). TopoDroid has an option to automatically add all the stations that fall in the convex hull of the sketch to the scrap. This is enabled by default. However this may not be convenient if you work with xtherion and stations from other portions of the survey fall inside the scrap so that you get many "spurious" point stations. In this case you might want to disable this option and decide by yourself which station to add to the scrap.<br><p>
 
 The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions.

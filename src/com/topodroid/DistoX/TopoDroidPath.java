@@ -65,6 +65,7 @@ public class TopoDroidPath
   private static String APP_TH_PATH  ; //  = APP_BASE_PATH + "th/";
   private static String APP_TH2_PATH ; //  = APP_BASE_PATH + "th2/";
   private static String APP_TH3_PATH ; //  = APP_BASE_PATH + "th3/";
+  private static String APP_TMP_PATH ; //  = APP_BASE_PATH + "tmp/";
   private static String APP_TOP_PATH ; //  = APP_BASE_PATH + "top/";
   private static String APP_TRO_PATH ; //  = APP_BASE_PATH + "tro/";
   private static String APP_ZIP_PATH; //  = APP_BASE_PATH + "zip/";
@@ -141,6 +142,9 @@ public class TopoDroidPath
 
     APP_TH3_PATH = APP_BASE_PATH + "th3/";
     checkDirs( APP_TH3_PATH );
+
+    APP_TMP_PATH = APP_BASE_PATH + "tmp/";
+    checkDirs( APP_TMP_PATH );
 
     APP_DXF_PATH = APP_BASE_PATH + "dxf/";
     checkDirs( APP_DXF_PATH );
@@ -284,7 +288,10 @@ public class TopoDroidPath
     return directory + name + "." + ext;
   }
 
+  static File getTmpDir() { return new File( APP_TMP_PATH ); }
+
   static String getSurveyNoteFile( String title ) { return getFile( APP_NOTE_PATH, title, "txt" ); }
+  static String getTmpFileWithExt( String name ) { return getFile( APP_TMP_PATH, name, "tmp" ); }
   static String getTh2FileWithExt( String name ) { return getFile( APP_TH2_PATH, name, "th2" ); }
   static String getTh3FileWithExt( String name ) { return getFile( APP_TH3_PATH, name, "th3" ); }
   static String getDxfFileWithExt( String name ) { return getFile( APP_DXF_PATH, name, "dxf" ); }

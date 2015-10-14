@@ -24,6 +24,8 @@ public class NumStation extends NumSurveyPoint
   NumNode node;
   float   mAnomaly; // anomalia magnetica locale
   boolean mBarrier; // whether this station is barrier to data reduction
+  int     mHidden;  // whether the station is "hidden": 0 show, 1 borderline, 2 hidden
+  NumStation mParent; // parent station in the reduction tree
 
   NumStation( String id )
   {
@@ -36,6 +38,8 @@ public class NumStation extends NumSurveyPoint
     node = null;
     mAnomaly = 0.0f;
     mBarrier = false;
+    mHidden  = 0;
+    mParent  = null;
   }
 
   NumStation( String id, NumStation from, float d, float b, float c, int extend )
@@ -54,5 +58,7 @@ public class NumStation extends NumSurveyPoint
     node = null;
     mAnomaly = 0.0f;
     mBarrier = false;
+    mHidden  = 0;
+    mParent  = from;
   }
 }

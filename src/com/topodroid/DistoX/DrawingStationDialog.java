@@ -32,10 +32,12 @@ public class DrawingStationDialog extends Dialog
 {
     private TextView mLabel;
     private TextView mBarrierLabel;
+    private TextView mHiddenLabel;
     private TextView mCoords;
     private Button mBtnOK;
     private Button mBtnSet;
     private Button mBtnBreak;
+    private Button mBtnHidden;
     private Button mBtnXSection;
     // private Button mBtnCancel;
 
@@ -45,9 +47,10 @@ public class DrawingStationDialog extends Dialog
 
     private String mStationName;
     private boolean mIsBarrier;
+    private boolean mIsHidden;
 
     public DrawingStationDialog( Context context, DrawingActivity activity, DrawingStationName station,
-                                 boolean is_barrier )
+                                 boolean is_barrier, boolean is_hidden )
     {
       super(context);
       mContext  = context;
@@ -55,6 +58,7 @@ public class DrawingStationDialog extends Dialog
       mStation  = station;
       mStationName = mStation.mName;
       mIsBarrier = is_barrier; 
+      mIsHidden  = is_hidden; 
     }
 
     @Override
@@ -66,10 +70,12 @@ public class DrawingStationDialog extends Dialog
 
       mLabel     = (TextView) findViewById(R.id.station_text);
       mBarrierLabel = (TextView) findViewById(R.id.barrier_text);
+      mHiddenLabel  = (TextView) findViewById(R.id.hidden_text);
       mCoords    = (TextView) findViewById(R.id.coords);
       mCoords.setText( mStation.getCoordsString() );
 
       mBtnBreak  = (Button) findViewById(R.id.btn_break );
+      mBtnHidden = (Button) findViewById(R.id.btn_hidden );
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
@@ -83,6 +89,7 @@ public class DrawingStationDialog extends Dialog
       }
       mBtnSet.setOnClickListener( this );
       mBtnBreak.setOnClickListener( this );
+      mBtnHidden.setOnClickListener( this );
     
       if ( TopoDroidSetting.mLevelOverAdvanced ) {
         mBtnXSection.setOnClickListener( this );
@@ -94,6 +101,10 @@ public class DrawingStationDialog extends Dialog
 
       if ( mIsBarrier ) {
         mBarrierLabel.setText( mContext.getResources().getString(R.string.barrier_del) );
+      }
+
+      if ( mIsHidden ) {
+        mHiddenLabel.setText( mContext.getResources().getString(R.string.hidden_del) );
       }
 
       setTitle( mContext.getResources().getString(R.string.STATION) + mStationName ); 
@@ -108,6 +119,8 @@ public class DrawingStationDialog extends Dialog
         mActivity.setCurrentStationName( mStation.mName );
       } else if (view.getId() == R.id.btn_break ) {
         mActivity.toggleStationBarrier( mStationName, mIsBarrier );
+      } else if (view.getId() == R.id.btn_hidden ) {
+        mActivity.toggleStationHidden( mStationName, mIsHidden );
       } else if (view.getId() == R.id.btn_xsection ) {
         mActivity.openXSection( mStationName, mActivity.getPlotType() );
       }

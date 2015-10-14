@@ -308,7 +308,7 @@ public class DrawingActivity extends ItemDrawer
       if ( ! mModified ) {
         // Log.v("DistoX", "start Save Th2 Task Nr "+ mNrSaveTh2Task);
         mModified = true;
-        startSaveTh2Task( "modified", MAX_TASK_NORMAL );
+        startSaveTh2Task( "modified", MAX_TASK_NORMAL, 1 );
       // } else {
       //   if ( mSaveTh2File != null ) {
       //     mSaveTh2File.setModified( true );
@@ -552,14 +552,14 @@ public class DrawingActivity extends ItemDrawer
     // called by doPause and onBackPressed
     private void doSaveTh2( ) 
     {
-      Log.v("DistoX", "do Save Th2. Save tasks: " + mNrSaveTh2Task );
+      // Log.v("DistoX", "do Save Th2. Save tasks: " + mNrSaveTh2Task );
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         // if ( not_all_symbols ) AlertMissingSymbols();
         if ( mAllSymbols ) {
           // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-          startSaveTh2Task( "dosave", MAX_TASK_FINAL );
+          startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP );
         } else { // mAllSymbols is false
           // FIXME what to do ?
          Toast.makeText( this,
@@ -574,7 +574,7 @@ public class DrawingActivity extends ItemDrawer
     private final int MAX_TASK_FINAL  = 6;
 
     // called by doSaveTh2 and saveTh2
-    private void startSaveTh2Task( String suffix, int maxTasks )
+    private void startSaveTh2Task( String suffix, int maxTasks, int backup_rotate )
     {
       if ( ! mModified ) {
         // Log.v("DistoX", "drawing not modified: not saving");
@@ -595,7 +595,7 @@ public class DrawingActivity extends ItemDrawer
           // }
           if ( mModified ) {
             // Log.v("DistoX", "start new SaveTh2File");
-            startSaveTh2Task( "handler", MAX_TASK_NORMAL ); 
+            startSaveTh2Task( "handler", MAX_TASK_NORMAL, 0 ); 
           } else {
             mApp.mShotActivity.enableSketchButton( true );
           }
@@ -608,9 +608,9 @@ public class DrawingActivity extends ItemDrawer
       SaveTh2File saveTh2File = null;
       // Log.v("DistoX", "create SaveTh2File");
       if ( mType == PlotInfo.PLOT_EXTENDED ) {
-        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix );
+        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix, backup_rotate );
       } else {
-        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix );
+        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix, backup_rotate );
       }
       try { 
         // Log.v("DistoX", "exec SaveTh2File");
@@ -663,46 +663,59 @@ public class DrawingActivity extends ItemDrawer
     List< NumStation > stations = mNum.getStations();
     List< NumShot > shots   = mNum.getShots();
     List< NumSplay > splays = mNum.getSplays();
-    // Log.v( TopoDroidApp.TAG, "stations " + stations.size() + " legs " + shots.size() );
-    // Log.v( TopoDroidApp.TAG, "compute refs. offs " + xoff + " " + yoff + " zoom " + zoom );
+    // Log.v( "DistoX", "stations " + stations.size() + " legs " + shots.size() );
+    // Log.v( "DistoX", "compute refs. offs " + xoff + " " + yoff + " zoom " + zoom );
+
     if ( type == PlotInfo.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), 
-                      xoff, yoff, false, true );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, 
-        //   "add line " + (float)(st1.e) + " " + (float)(st1.s) + " " + (float)(st2.e) + " " + (float)(st2.s) );
+        if ( st1.mHidden == 0 || st2.mHidden == 0 ) {
+          addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), 
+                        xoff, yoff, false, true );
+          // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, 
+          //   "add line " + (float)(st1.e) + " " + (float)(st1.s) + " " + (float)(st2.e) + " " + (float)(st2.s) );
+        }
       }
       for ( NumSplay sp : splays ) {
         if ( Math.abs( sp.getBlock().mClino ) < TopoDroidSetting.mSplayVertThrs ) {
           NumStation st = sp.from;
-          addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), 
-                        xoff, yoff, true, true );
+          if ( st.mHidden < 2 ) {
+            addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), 
+                          xoff, yoff, true, true );
+          }
         }
       }
       for ( NumStation st : stations ) {
-        DrawingStationName dst;
-        dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.e) - xoff, toSceneY(st.s) - yoff, true );
+        if ( st.mHidden < 2 ) {
+          DrawingStationName dst;
+          dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.e) - xoff, toSceneY(st.s) - yoff, true );
+        }
       }
     } else { // if ( type == PlotInfo.PLOT_EXTENDED && 
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), 
-                      xoff, yoff, false, true );
-          // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "line " + toSceneX(st1.h) + " " + toSceneY(st1.v) + " - " + toSceneX(st2.h) + " " + toSceneY(st2.v) );
+          if ( st1.mHidden == 0 || st2.mHidden == 0 ) {
+            addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), 
+                          xoff, yoff, false, true );
+            // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "line " + toSceneX(st1.h) + " " + toSceneY(st1.v) + " - " + toSceneX(st2.h) + " " + toSceneY(st2.v) );
+          }
         }
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), 
-                      xoff, yoff, true, true );
+        if ( st.mHidden < 2 ) {
+          addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), 
+                        xoff, yoff, true, true );
+        }
       }
       for ( NumStation st : stations ) {
-        DrawingStationName dst;
-        dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.h) - xoff, toSceneY(st.v) - yoff, true );
+        if ( st.mHidden < 2 ) {
+          DrawingStationName dst;
+          dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.h) - xoff, toSceneY(st.v) - yoff, true );
+        }
       }
     }
 
@@ -1082,7 +1095,7 @@ public class DrawingActivity extends ItemDrawer
       mZoom     = info.zoom;
       mDrawingSurface.isDrawing = true;
       switchZoomCtrl( TopoDroidSetting.mZoomCtrl );
-      Log.v("DistoX", "do Resume. Save tasks: " + mNrSaveTh2Task );
+      // Log.v("DistoX", "do Resume. Save tasks: " + mNrSaveTh2Task );
     }
 
     private void doPause()
@@ -1153,7 +1166,21 @@ public class DrawingActivity extends ItemDrawer
 
         float dist = 0;
         DistoXDBlock blk = null;
+        float xn = 0;  // X-North // Rotate as NORTH is upward
+        float yn = -1; // Y-North
         if ( isSection() ) {
+          if ( mType == PlotInfo.PLOT_H_SECTION ) {
+            if ( Math.abs( mClino ) > TopoDroidSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
+              xn =  (float)(X1);
+              yn = -(float)(X2);
+              float d = 5 / FloatMath.sqrt(xn*xn + yn*yn);
+              if ( mClino > 0 ) xn = -xn;
+              // FIXME NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
+              addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
+              // Log.v("AZIMUTH", "North " + xn + " " + yn );
+            }
+          }
+
           for ( DistoXDBlock b : mList ) {
             if ( b.mType == DistoXDBlock.BLOCK_SPLAY ) continue;
             if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
@@ -1174,7 +1201,11 @@ public class DrawingActivity extends ItemDrawer
             float Z = FloatMath.sin( bc );
             xfrom = -dist * (float)(X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
             yfrom =  dist * (float)(X2 * X + Y2 * Y + Z2 * Z);
-             
+            if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
+              float xx = -yn * xfrom + xn * yfrom;
+              yfrom = -xn * xfrom - yn * yfrom;
+              xfrom = xx;
+            }
             addFixedLine( blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
             mDrawingSurface.addDrawingStation( mFrom, toSceneX(xfrom), toSceneY(yfrom) );
             mDrawingSurface.addDrawingStation( mTo, toSceneX(xto), toSceneY(yto) );
@@ -1193,6 +1224,11 @@ public class DrawingActivity extends ItemDrawer
           float Z = FloatMath.sin( bc );
           float x =  d * (float)(X1 * X + Y1 * Y + Z1 * Z);
           float y = -d * (float)(X2 * X + Y2 * Y + Z2 * Z);
+          if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
+            float xx = -yn * x + xn * y;
+            y = -xn * x - yn * y;
+            x = xx;
+          }
           // Log.v("DistoX", "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
           if ( b.mFrom.equals( mFrom ) ) {
             // N.B. this must be guaranteed for X_SECTION
@@ -1210,16 +1246,6 @@ public class DrawingActivity extends ItemDrawer
 
         // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
 
-        if ( mType == PlotInfo.PLOT_H_SECTION ) {
-          if ( Math.abs( mClino ) > TopoDroidSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
-            float x =  (float)(X1);
-            float y = -(float)(X2);
-            float d = 5 / FloatMath.sqrt(x*x + y*y);
-            if ( mClino > 0 ) x = -x;
-            addFixedSpecial( x*d, y*d, 0, 0, 0, 0 ); 
-            // Log.v("AZIMUTH", "North " + x + " " + y );
-          }
-        }
       }
     }
 
@@ -2032,7 +2058,9 @@ public class DrawingActivity extends ItemDrawer
               if ( mType == PlotInfo.PLOT_PLAN || mType == PlotInfo.PLOT_EXTENDED ) {
                 DrawingStationName sn = mDrawingSurface.getStationAt( x_scene, y_scene );
                 if ( sn != null ) {
-                  // new DrawingStationDialog( this, this, sn, mNum.isBarrier( sn.mName ) ).show();
+                  boolean barrier = mNum.isBarrier( sn.mName );
+                  boolean hidden  = mNum.isHidden( sn.mName );
+                  // new DrawingStationDialog( this, this, sn, barrier, hidden ).show();
                   openXSection( sn.mName, mType );
                 }
               }
@@ -2113,6 +2141,13 @@ public class DrawingActivity extends ItemDrawer
         drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO,   plot.clino );
         startActivity( drawIntent );
       }
+    }
+
+    void toggleStationHidden( String name, boolean hidden )
+    {
+      mNum.setStationHidden( name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
+      computeReferences( (int)mType, 0, 0, mZoom );
+      // computeReferences( (int)mType, mOffset.x, mOffset.y, mZoom );
     }
 
     void toggleStationBarrier( String name, boolean is_barrier ) 
@@ -2609,7 +2644,7 @@ public class DrawingActivity extends ItemDrawer
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
-          startSaveTh2Task( "toggle", MAX_TASK_FINAL ); 
+          startSaveTh2Task( "toggle", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
@@ -2667,7 +2702,9 @@ public class DrawingActivity extends ItemDrawer
           switch ( sp.type() ) {
             case DrawingPath.DRAWING_PATH_NAME:
               DrawingStationName sn = (DrawingStationName)(sp.mItem);
-              new DrawingStationDialog( this, this, sn, mNum.isBarrier( sn.mName ) ).show();
+              boolean barrier = mNum.isBarrier( sn.mName );
+              boolean hidden  = mNum.isHidden( sn.mName );
+              new DrawingStationDialog( this, this, sn, barrier, hidden ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               new DrawingPointDialog( this, (DrawingPointPath)(sp.mItem) ).show();
@@ -2892,7 +2929,7 @@ public class DrawingActivity extends ItemDrawer
             } else if ( mExt.equals("svg") ) {
               filename = TopoDroidPath.getSvgFileWithExt( mFullName );
             }
-            Log.v("DistoX", "Export to File: " + filename );
+            // Log.v("DistoX", "Export to File: " + filename );
             if ( filename != null ) {
               // final FileOutputStream out = new FileOutputStream( filename );
               TopoDroidApp.checkPath( filename );
@@ -3013,7 +3050,7 @@ public class DrawingActivity extends ItemDrawer
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
-      startSaveTh2Task( "save", MAX_TASK_FINAL );
+      startSaveTh2Task( "save", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP );
     }
 
   
@@ -3177,7 +3214,7 @@ public class DrawingActivity extends ItemDrawer
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
       } else if ( p++ == pos ) { // OVERVIEW
-        // startSaveTh2Task( "overview", MAX_TASK_FINAL ); // FIXME this is not necessary
+        // startSaveTh2Task( "overview", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP ); // FIXME this is not necessary
         // try {
         //   Thread.sleep(100);
         // } catch ( InterruptedException e ) { /* ignore */ }

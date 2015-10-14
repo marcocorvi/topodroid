@@ -97,18 +97,49 @@ class DistoXNum
   public List<NumShot>    getShots()    { return mShots; }
   public List<NumSplay>   getSplays()   { return mSplays; }
   public List<String>     getClosures() { return mClosures; }
+
   public List<NumSplay>   getSplaysAt( NumStation st ) 
   {
-     ArrayList< NumSplay > ret = new ArrayList< NumSplay >();
-     for ( NumSplay splay : mSplays ) {
-       if ( splay.getBlock().mType == DistoXDBlock.BLOCK_SPLAY && st == splay.from ) {
-         ret.add( splay );
-       }
-     }
-     return ret;
-   }
+    ArrayList< NumSplay > ret = new ArrayList< NumSplay >();
+    for ( NumSplay splay : mSplays ) {
+      if ( splay.getBlock().mType == DistoXDBlock.BLOCK_SPLAY && st == splay.from ) {
+        ret.add( splay );
+      }
+    }
+    return ret;
+  }
 
+  /** FIXME there is a problem here:               ,-----B---
+   * if the reduction tree has a branch, say 0----A
+   *                                               `---C----D
+   * when B, C are both hidden the left side of the tree is not shown.
+   * If B gets un-hidden the line 0--A--B gets shown as well as C---D
+   * and these two pieces remain separated.
+   */
+  // hide = +1 to hide, -1 to show
+  void setStationHidden( String name, int hide )
+  {
+    // Log.v("DistoX", "Set Station Hidden: " + hide );
+    NumStation st = getStation( name );
+    if ( st == null ) return;
+    st.mHidden += hide;
+    // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
+    hide *= 2;
+    st = st.mParent;
+    while ( st != null ) {
+      st.mHidden += hide;
+      if ( st.mHidden < 0 ) st.mHidden = 0;
+      // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
+      st = st.mParent;
+    }
+  }
 
+  boolean isHidden( String name )
+  {
+    NumStation st = getStation( name );
+    if ( st == null ) return false;
+    return st.mHidden > 0;
+  }
 
   boolean isBarrier( String b )
   {

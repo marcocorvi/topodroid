@@ -107,9 +107,6 @@ public class TopoDroidApp extends Application
   static final int MINOR_MIN = 1;
   static final int SUB_MIN   = 1;
   
-  // static boolean mHideHelp = false;
-  static boolean VERSION30 = true;
-
   boolean mWelcomeScreen;  // whether to show the welcome screen
   static String mManual;  // manual url
   static Locale mLocale;

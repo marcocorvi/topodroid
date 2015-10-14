@@ -172,6 +172,8 @@
     <string name="none">Nada</string>
     <string name="barrier_add">Â¿Dividir la visualización de la línea central?</string>
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
+    <!-- TODO string name="hidden_add">Hide midline display</string -->
+    <!-- TODO string name="hidden_del">Show midline display</string -->
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
@@ -590,8 +592,8 @@
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
-  <string name="pref_bootloader_title">Gestor de arranque</string>
-  <string name="pref_bootloader_summary">Habilitar gestor de arranque</string>
+  <!-- UNUSED string name="pref_bootloader_title">Gestor de arranque</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Habilitar gestor de arranque</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Activar / Desactivar los teclados personalizados</string>
   <string name="pref_cosurvey_title">Co-surveying</string>
@@ -768,8 +770,6 @@
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
-  <string name="pref_splayExtend_title">Extensión de la toma lateral</string>
-  <string name="pref_splayExtend_summary">Extensión estimada de la toma lateral</string>
   <string name="pref_LRExtend_title">Estimate Left/Right extend</string>
   <string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string>
 

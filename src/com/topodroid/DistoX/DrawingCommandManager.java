@@ -735,7 +735,9 @@ public class DrawingCommandManager
     }
     if ( bitmap == null ) return null;
     Canvas c = new Canvas (bitmap);
-    c.drawColor(0, PorterDuff.Mode.CLEAR);
+    // c.drawColor(TopoDroidSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
+    c.drawColor( TopoDroidSetting.mBitmapBgcolor );
+
     // commandManager.executeAll(c,previewDoneHandler);
     // previewPath.draw(c);
     c.drawBitmap (bitmap, 0, 0, null);
@@ -762,6 +764,15 @@ public class DrawingCommandManager
         }
       }
     }
+ 
+    if ( mStations != null ) {  
+      synchronized( mStations ) {
+        for ( DrawingStationName st : mStations ) {
+          st.draw( c, mat );
+        }
+      }
+    }
+
     if( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();

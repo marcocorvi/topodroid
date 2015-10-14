@@ -176,8 +176,10 @@
     <string name="out">out</string>
     <string name="in">in</string>
     <string name="none">none</string>
-    <string name="barrier_add">Break midline display?</string>
-    <string name="barrier_del">Continue midline display?</string>
+    <string name="barrier_add">Break midline display</string>
+    <string name="barrier_del">Continue midline display</string>
+    <string name="hidden_add">Hide midline display</string>
+    <string name="hidden_del">Show midline display</string>
 
     <string name="bad_cwd">Project name cannot be path</string>
     <string name="bad_line">Bad line type</string>
@@ -668,8 +670,8 @@
 
   <string name="pref_raw_data_title">Raw data</string>
   <string name="pref_raw_data_summary">Show raw data</string>
-  <string name="pref_bootloader_title">Bootloader</string>
-  <string name="pref_bootloader_summary">Enable/Disable bootloader</string>
+  <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Enable/Disable bootloader</string -->
   <string name="pref_mkeyboard_title">Keyboard</string>
   <string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string>
   <string name="pref_cosurvey_title">Co-surveying service</string>

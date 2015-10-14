@@ -173,6 +173,8 @@
     <string name="none">none</string>
     <string name="barrier_add">Interruzione restituzione?</string>
     <string name="barrier_del">Continuazione restituzione?</string>
+    <!-- TODO string name="hidden_add">Hide midline display</string -->
+    <!-- TODO string name="hidden_del">Show midline display</string -->
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <!-- TODO string name="bad_line">Bad line type</string -->
@@ -600,8 +602,8 @@
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
-  <string name="pref_bootloader_title">Bootloader</string>
-  <string name="pref_bootloader_summary">Bootloader abilitiato</string>
+  <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
   <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- NO string name="pref_cosurvey_title">Co-surveying</string -->

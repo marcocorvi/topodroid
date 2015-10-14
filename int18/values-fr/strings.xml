@@ -174,6 +174,8 @@
     <string name="none">aucun</string>
     <string name="barrier_add">Arréter l\'affichage du cheminement ?</string>
     <string name="barrier_del">Continuer l\'affichage du cheminement ?</string>
+    <!-- TODO string name="hidden_add">Hide midline display</string -->
+    <!-- TODO string name="hidden_del">Show midline display</string -->
 
     <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
     <!-- TODO string name="bad_line">Bad line type</string -->
@@ -604,8 +606,8 @@
 
   <string name="pref_raw_data_title">Données brutes</string>
   <string name="pref_raw_data_summary">Afficher les données brutes</string>
-  <string name="pref_bootloader_title">Chargeur de démarrage</string>
-  <string name="pref_bootloader_summary">Activer le chargeur de démarrage</string>
+  <!-- UNUSED string name="pref_bootloader_title">Chargeur de démarrage</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Activer le chargeur de démarrage</string -->
   <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
   <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->

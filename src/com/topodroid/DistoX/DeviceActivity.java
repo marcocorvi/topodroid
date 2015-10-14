@@ -73,6 +73,7 @@ public class DeviceActivity extends Activity
   private static int izonsno[] = {
                         0,
                         R.drawable.iz_toggle_no,
+                        R.drawable.iz_compute_no,
                         0,
                         R.drawable.iz_read_no,
                         0,
@@ -82,26 +83,28 @@ public class DeviceActivity extends Activity
   private static int izons[] = {
                         R.drawable.iz_bt,
                         R.drawable.iz_toggle,
+                        R.drawable.iz_compute,
                         R.drawable.iz_sdcard,
                         R.drawable.iz_read,
                         R.drawable.iz_info
-                        // R.drawable.iz_remote,
                      };
-
-  private static int indexButtonDownload = 1;
-  private static int indexButtonRead     = 2;
-  // private static int indexButtonRemote   = 5;
 
   BitmapDrawable mBMtoggle;
   BitmapDrawable mBMtoggle_no;
+  BitmapDrawable mBMcalib;
+  BitmapDrawable mBMcalib_no;
   BitmapDrawable mBMread;
   BitmapDrawable mBMread_no;
+
+  final int IDX_TOGGLE = 1;
+  final int IDX_CALIB  = 2;
+  final int IDX_READ   = 4;
 
   private static int menus[] = {
                         R.string.menu_scan,
                         R.string.menu_pair,
                         R.string.menu_detach,
-                        R.string.menu_calib,
+                        // R.string.menu_calib,
                         R.string.menu_firmware,
                         R.string.menu_options,
                         R.string.menu_help
@@ -110,6 +113,7 @@ public class DeviceActivity extends Activity
   private static int help_icons[] = {
                         R.string.help_bluetooth,
                         R.string.help_toggle,
+                        R.string.title_calib,
                         R.string.help_sdcard,
                         R.string.help_read,
                         R.string.help_info_device
@@ -119,7 +123,6 @@ public class DeviceActivity extends Activity
                         R.string.help_scan,
                         R.string.help_pair,
                         R.string.help_detach,
-                        R.string.title_calib,
                         R.string.help_firmware,
                         R.string.help_prefs,
                         R.string.help_help
@@ -166,7 +169,7 @@ public class DeviceActivity extends Activity
   // ---------------------------------------------------------------
   // private Button mButtonHelp;
   private Button[] mButton1;
-  private int mNrButton1 = 5; // 6 if ButtonRemote
+  private int mNrButton1 = 6; // 7 if ButtonRemote
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
   ListView   mMenu;
@@ -220,7 +223,7 @@ public class DeviceActivity extends Activity
     // icons00   = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
     // icons00no = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
-    mNrButton1 = TopoDroidSetting.mLevelOverNormal ? 5 : 2;
+    mNrButton1 = TopoDroidSetting.mLevelOverNormal ? 6 : 3;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = new Button( this );
@@ -228,14 +231,17 @@ public class DeviceActivity extends Activity
       mButton1[k].setOnClickListener( this );
       // mButton1[k].setBackgroundResource( icons00[k] );
       BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], size, izons[k] );
-      if ( k == 1 ) {
+      if ( k == IDX_TOGGLE ) {
         mBMtoggle = bm2;
-      } else if ( k == 3 ) {
+        mBMtoggle_no = mApp.setButtonBackground( null, size, izonsno[k] );
+      } else if ( k == IDX_CALIB ) {
+        mBMcalib = bm2;
+        mBMcalib_no = mApp.setButtonBackground( null, size, izonsno[k] );
+      } else if ( k == IDX_READ ) {
         mBMread = bm2;
+        mBMread_no = mApp.setButtonBackground( null, size, izonsno[k] );
       }
     }
-    mBMtoggle_no = mApp.setButtonBackground( null, size, izonsno[1] );
-    mBMread_no = mApp.setButtonBackground( null, size, izonsno[3] );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -320,13 +326,13 @@ public class DeviceActivity extends Activity
         pairDevice();
       } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DETACH
         detachDevice();
-      } else if ( mApp.VERSION30 && p++ == pos ) { // CALIB
-        if ( mApp.mDevice == null ) {
-          Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
-        } else {
-          (new CalibListDialog( this, this, mApp )).show();
-        }
-      } else if ( TopoDroidSetting.mBootloader && p++ == pos ) { // FIRMWARE
+      // } else if ( p++ == pos ) { // CALIB
+      //   if ( mApp.mDevice == null ) {
+      //     Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+      //   } else {
+      //     (new CalibListDialog( this, this, mApp )).show();
+      //   }
+      } else if ( /* TopoDroidSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
         if ( TopoDroidSetting.mCommType != 0 ) {
           Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
         } else {
@@ -338,7 +344,7 @@ public class DeviceActivity extends Activity
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 7 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
       }
       return;
     }
@@ -412,21 +418,17 @@ public class DeviceActivity extends Activity
     }
     if ( enable ) {
       setTitleColor( TopoDroidConst.COLOR_NORMAL );
-      // mButton1[1].setBackgroundResource( icons00[1] );
-      mButton1[1].setBackgroundDrawable( mBMtoggle );
+      mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle );
+      mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib );
       if ( TopoDroidSetting.mLevelOverNormal ) {
-        // mButton1[3].setBackgroundResource( icons00[3] );
-        mButton1[3].setBackgroundDrawable( mBMread);
-        // mButton1[indexButtonRemote].setBackgroundResource( icons00[5] );
+        mButton1[IDX_READ].setBackgroundDrawable( mBMread);
       }
     } else {
       setTitleColor( TopoDroidConst.COLOR_CONNECTED );
-      // mButton1[1].setBackgroundResource( icons00no[1] );
-      mButton1[1].setBackgroundDrawable( mBMtoggle_no );
+      mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
+      mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib_no );
       if ( TopoDroidSetting.mLevelOverNormal ) {
-        // mButton1[3].setBackgroundResource( icons00no[3] );
-        mButton1[3].setBackgroundDrawable( mBMread_no );
-        // mButton1[indexButtonRemote].setBackgroundResource( icons00no[5] );
+        mButton1[IDX_READ].setBackgroundDrawable( mBMread_no );
       }
     }
   }
@@ -473,6 +475,13 @@ public class DeviceActivity extends Activity
         enableButtons( false );
         new CalibToggleTask( this, this, mApp ).execute();
       }
+    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX CALIBRATIONS
+      if ( mApp.mDevice == null ) {
+        Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+      } else {
+        (new CalibListDialog( this, this, mApp )).show();
+      }
+
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
@@ -735,10 +744,9 @@ public class DeviceActivity extends Activity
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
     if ( TopoDroidSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( mApp.VERSION30 ) mMenuAdapter.add( res.getString( menus[3] ) );
-    if ( TopoDroidSetting.mBootloader ) mMenuAdapter.add( res.getString( menus[4] ) );
+    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[3] ) );
+    mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
-    mMenuAdapter.add( res.getString( menus[6] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }

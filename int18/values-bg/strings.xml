@@ -178,6 +178,8 @@
     <string name="none">няма</string>
     <string name="barrier_add">Прекъсване на антената?</string>
     <string name="barrier_del">Продължаване на антената?</string>
+    <!-- TODO string name="hidden_add">Hide midline display</string -->
+    <!-- TODO string name="hidden_del">Show midline display</string -->
 
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
     <string name="bad_line">Невалиден тип линия</string>
@@ -670,8 +672,8 @@
 
   <string name="pref_raw_data_title">Необработени данни</string>
   <string name="pref_raw_data_summary">Показване на необработени данни</string>
-  <string name="pref_bootloader_title">Зареждане на фърмуер</string>
-  <string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string>
+  <!-- UNUSED string name="pref_bootloader_title">Зареждане на фърмуер</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Разрешаване на инсталирането на фърмуер</string -->
   <string name="pref_mkeyboard_title">Собствена клавиатура</string>
   <string name="pref_mkeyboard_summary">Използване на Topodroid клавиатурни подредби</string>
   <string name="pref_cosurvey_title">Ко-картиране</string>

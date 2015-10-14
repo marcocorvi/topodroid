@@ -196,6 +196,8 @@
     <string name="none">kein</string>
     <string name="barrier_add">Brechen Mittellinie Anzeige?</string>
     <string name="barrier_del">Weiter Mittellinie Anzeige?</string>
+    <!-- TODO string name="hidden_add">Hide midline display</string -->
+    <!-- TODO string name="hidden_del">Show midline display</string -->
 
     <!-- TODO string name="bad_cwd">Project name cannot be path</string -->
     <!-- TODO string name="bad_line">Bad line type</string -->
@@ -650,8 +652,8 @@
 
   <string name="pref_raw_data_title">Rohdaten</string>
   <string name="pref_raw_data_summary">Rohdaten zeigen</string>
-  <!-- OK string name="pref_bootloader_title">Bootloader</string -->
-  <string name="pref_bootloader_summary">Die Bootloader ermöglichen</string>
+  <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Die Bootloader ermöglichen</string -->
   <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
   <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->

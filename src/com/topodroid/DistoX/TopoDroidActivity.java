@@ -681,14 +681,6 @@ public class TopoDroidActivity extends Activity
     // mBtnSurveys = (Button) findViewById( R.id.btn_surveys );
     // mBtnCalibs  = (Button) findViewById( R.id.btn_calibs );
 
-    // if ( mApp.VERSION30 ) {
-    //   mBtnSurveys.setVisibility( View.GONE );
-    //   mBtnCalibs.setVisibility( View.GONE );
-    // } else {
-    //   mBtnSurveys.setOnClickListener( this );
-    //   mBtnCalibs.setOnClickListener( this );
-    // }
-
     // mButtonHelp = (Button)findViewById( R.id.help );
     // mButtonHelp.setOnClickListener( this );
     // if ( TopoDroidApp.mHideHelp ) {

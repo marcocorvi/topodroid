@@ -92,6 +92,30 @@
       android:orientation="horizontal" 
       >
 
+      <Button android:id="@+id/btn_hidden"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
+      <!-- android:background="@drawable/ic_save" -->
+
+      <TextView android:id="@+id/hidden_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/hidden_add"
+        />
+    </LinearLayout>
+
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:orientation="horizontal" 
+      >
+
       <Button android:id="@+id/btn_xsection"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
