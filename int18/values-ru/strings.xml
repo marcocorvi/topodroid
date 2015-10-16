@@ -59,7 +59,7 @@
     <string name="calib_updated">Обновить калибровку</string>
     <string name="calib_compute_groups">Вычисление групп данных калибровки ...</string>
     <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки ...</string>
-    <!-- OK string name="calib_read_coeffs">Считание коэфицентов калибровки ...</string -->
+    <!-- OK string name="calib_read_coeffs">Считывание коэфицентов калибровки ...</string -->
     <string name="calib_write_coeffs">Запись коэфицентов калибровки ...</string>
     <string name="connect_failed">Ошибка соединения</string>
     <string name="data">данные</string>
@@ -80,7 +80,7 @@
     <string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string>
     <string name="device_none">DistoX не выбран</string>
     <string name="device_pairing">Соединение: проверьте уведомления</string>
-    <!-- TODO string name="device_paired">Device is paired</string -->
+    <string name="device_paired">Прибор сопряжен</string>
     <string name="device_reset">Сброс памяти DistoX</string>
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Прошивка  %1$d.%2$d</string>
@@ -180,8 +180,8 @@
     <string name="none">none</string>
     <string name="barrier_add">Прервать показ средней линии?</string>
     <string name="barrier_del">Продолжить показ средней линии?</string>
-    <!-- TODO string name="hidden_add">Hide midline display</string -->
-    <!-- TODO string name="hidden_del">Show midline display</string -->
+    <string name="hidden_add">Скрыть среднюю линию</string>
+    <string name="hidden_del">Показать среднюю линию</string>
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
@@ -771,9 +771,9 @@
   <string name="pref_bitmap_scale_title">масштаб PNG</string>
   <string name="pref_bitmap_scale_summary">Масштабный коэфицент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_scale_message">Масштабный коэфицент абриса при экспорте в PNG</string>
-  <!-- TODO string name="pref_bitmap_bgcolor_title">PNG background color</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string -->
+  <string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string>
+  <string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов</string>
+  <string name="pref_bitmap_bgcolor_message">Цвет фона PNG при экспорте абрисов</string>
   <string name="pref_acad_version_title">Версия AutoCAD</string>
   <string name="pref_acad_version_summary">Версия AutoCAD</string>
   <string name="pref_dxf_scale_title">Масштаб абриса в DXF</string>
@@ -845,8 +845,8 @@
   <string name="pref_loopClosure_summary">Разбрасывание невязок в петле</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
-  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
-  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
+  <string name="pref_LRExtend_title">Оценить размер Лево/Право </string>
+  <string name="pref_LRExtend_summary">Оценить размер Лев/Пр (Compass/VisualTopo импорт)</string>
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
