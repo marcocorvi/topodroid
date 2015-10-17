@@ -84,25 +84,33 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
 
 <h4>SKETCH SETTINGS</h4>
 <ulist>
-<li><i>Drawing tool picker</i>: either list view or grid view. At the beginning it may be helpful to have a tool picker listing the drawing tool names [default]. After you get used to the tool icons you are likely to prefer the more compact view of the grid picker.</li>
-<li><i>Side drag<i>: whether to enable panning by side-dragging.</li>
-<li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time.</li>
-<li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
-<li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line</li>
-<li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
-<li><i>Midline check</i>: whether to check if all the legs are attached to the midline</li>
-<li><i>Line style</i>. TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.</li>
-<li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
-<li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
-<li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
-<li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
-<li><i>Line width</i>: the base thickness of drawing lines</li>
-<li><i>Survey line width</i>: the base thickness of midline/splay lines</li>
-<li><i>Station name size</i>: size of stations names [default 18 pt] [N]</li>
-<li><i>Labels size</i>: size of label texts [default 24 pt]</li>
-<li><i>Section-line tick size</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
-<li><i>Green dots radius</i>: size of the green dots displayed in <b>draw</b> mode [default 5 pxl] [N]</li>
-<li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
+  <li><i>Drawing tool picker</i>: either list view or grid view. At the beginning it may be helpful to have a tool picker listing the drawing tool names [default]. After you get used to the tool icons you are likely to prefer the more compact view of the grid picker.</li>
+  <li><i>Side drag</i>: whether to enable panning by side-dragging.</li>
+  <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time.</li>
+  <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
+  <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line</li>
+  <li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
+  <li><i>Midline check</i>: whether to check if all the legs are attached to the midline</li>
+  <li><i>DRAWING TOOLS >></i>
+    <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Line style</i>. TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.</li>
+    <li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
+    <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
+    <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
+    </li>
+  </ul>
+  <li><i>SKETCH ITEMS >></i>
+    <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
+    <li><i>Line width</i>: the base thickness of drawing lines</li>
+    <li><i>Survey line width</i>: the base thickness of midline/splay lines</li>
+    <li><i>Station name size</i>: size of stations names [default 18 pt] [N]</li>
+    <li><i>Labels size</i>: size of label texts [default 24 pt]</li>
+    <li><i>Section-line tick size</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
+    <li><i>Green dots radius</i>: size of the green dots displayed in <b>draw</b> mode [default 5 pxl] [N]</li>
+    <li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
+    </li>
+  </ul>
 </ulist>
 
 <h4>SKETCH SHIFT [E]</h4>
