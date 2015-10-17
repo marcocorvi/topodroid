@@ -91,6 +91,7 @@ public class TopoDroidPreferences extends PreferenceActivity
       addPreferencesFromResource(R.xml.preferences_calib);
     } else if (mPrefCategory == PREF_CATEGORY_DEVICE ) {
       addPreferencesFromResource(R.xml.preferences_device);
+      linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
     } else if (mPrefCategory == PREF_CATEGORY_SKETCH ) {
       addPreferencesFromResource(R.xml.preferences_sketch);
     } else if (mPrefCategory == PREF_CATEGORY_IMPORT_EXPORT ) {
@@ -130,7 +131,7 @@ public class TopoDroidPreferences extends PreferenceActivity
       linkPreference( "DISTOX_PLOT_PREF", PREF_CATEGORY_PLOT );
       linkPreference( "DISTOX_IMPORT_EXPORT_PREF", PREF_CATEGORY_IMPORT_EXPORT );
       linkPreference( "DISTOX_DEVICE_PREF", PREF_CATEGORY_DEVICE );
-      linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
+      // linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
     }
 
     if (mPrefCategory == PREF_CATEGORY_IMPORT_EXPORT ) {
