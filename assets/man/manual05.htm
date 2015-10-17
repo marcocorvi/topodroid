@@ -18,7 +18,7 @@ At first the DistoX list is probably empty. You need to make Android find your D
 <ulist><br>
 
 <h4>Firmware</h4>
-The <u>Firmware</u> menu is shown only if you enabled the global <i>Bootloader</i> option. TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2, 2.3 and 2.4, which are all compatible with hardware 1.0. Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file. Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version. Unfortunately there is no sure way to read the firmware version from the file content, so TopoDroid relies on the signature in the file after the bootloader blocks.  The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
+TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2, 2.3 and 2.4, which are all compatible with hardware 1.0. Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file. Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version. Unfortunately there is no sure way to read the firmware version from the file content, so TopoDroid relies on the signature in the file after the bootloader blocks.  The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
 <b>WARNING. UPLOADING AN INCOMPATIBLE FIRMWARE MAKES YOUR DistoX UNUSABLE.</b><br><p>
 
 <h4>BUTTONS</h4>
@@ -38,7 +38,7 @@ Except for the first, you need the DistoX turned on for all the other button act
 <li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default]</li>
 <li><i>Data connection</i> type: whether to stay connected to the DistoX or download data only when the "download" button is pressed [default]. More on this below when we talk about downloading the data from the DistoX. This connection mode applies only to data download. DistoX functions use a one-shot query mode</li>
 <li><i>Auto reconnect</i>: whether to reconnect automatically if the connection is lost while in "continuous" download-mode</li>
-<li><i>Socket</i> type: this can be either the default type or "insecure". The default type should be ok, however if you experience problems with it you may try the insecure socketi</li>
+<li><i>Socket</i> type: this can be either the default type or "insecure". The default type should be ok, however if you experience problems with it you may try the insecure socket.</li>
 <li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone or possibly other devices. It is safe to leave this enabled.</li>
 </ulist><br><p>
 
@@ -50,7 +50,7 @@ If you have problem connecting and downloading the data try to enable the "Z6 wo
 <p>
 
 <h4>DistoX memory inspection [A]</h4>
-The <u>Memory</u> button opens the "DistoX memory" dialog. You can retrieve the content of the DistoX memory, and even modify it if you have a DistoX1. The content of the DistoX memory is diplayed in a list. Each line contains the memory location, a letter-code telling whether it is a shot ('d') or a calibration ('g') data, and the values. Entries without values are marked with a question-mark ('?') code. Shot values are shown as length (meters), azimut and clinbo (degrees). The "accuracy" data of the DistoX2 are not shown. For the calibration data, the raw values are shown ('m' data are not shown for the DistoX2).<br>
+The <u>Memory</u> button opens the "DistoX memory" dialog. You can retrieve the content of the DistoX memory, and even modify it if you have a DistoX1. The content of the DistoX memory is displayed in a list. Each line contains the memory location, a letter-code telling whether it is a shot ('d') or a calibration ('g') data, and the values. Entries without values are marked with a question-mark ('?') code. Shot values are shown as length (meters), azimut and clino (degrees). The "accuracy" data of the DistoX2 are not shown. For the calibration data, the raw values are shown ('m' data are not shown for the DistoX2).<br>
 If you have entered a filename it is also saved to a dump file (in the "dump" folder), for analysis with other tools.<br>
 This functionality is for recovery from desperate situations (eg, your android got lost but the data are still in the DistoX). Memory inspection requires some knowledge of the internals of the DistoX: at a minimum the address space, and the way data are stored. You should have read the DistoX documentation before using it.<br>
 Reading the DistoX memory directly is a slow process. As this operation is carried out in the main gui thread, you have to be patient. It is advisable to read a portion of memory, say 100 entries, at a time.<br>

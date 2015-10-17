@@ -77,7 +77,7 @@
     <string name="device_info">Информация за устройството</string>
     <string name="device_model_set">Наистина ли искате да промените модела на устройството?</string>
     <string name="device_none">Не е избрано DistoX устройство</string>
-    <string name="device_pairing">Свързване: проверка на съобщения</string>
+    <string name="device_pairing">Свързване: проверете за Bluetooth съобщения</string>
     <string name="device_paired">Устройството е свързано</string>
     <string name="device_reset">Изчистване на DistoX паметта</string>
     <string name="device_code">DistoX код %1$4d</string>
@@ -244,8 +244,8 @@
     <string name="popup_snap_ln">Прикачване към близка линия</string>
     <string name="popup_split_pt">Дублиране на точката</string>
     <string name="popup_split_ln">Разделяне на линията в точката</string>
-    <string name="popup_sharp_pt">Изправяне на сегмента</string>
-    <string name="popup_curve_pt">Изглаждане на сегмента</string>
+    <string name="popup_sharp_pt">Изправяне (премахване Безие)</string>
+    <string name="popup_curve_pt">Изглаждане (с Безие)</string>
     <string name="popup_remove_pt">Изтриване на точката</string>
 
     <string name="connected_none">Няма връзка</string>
@@ -436,7 +436,7 @@
     <string name="button_yes"       >Да       </string>
 
     <string name="button_sharp"     >Изостряне</string>
-    <string name="button_rock"      >Скала</string>
+    <string name="button_rock"      >Редуц. точки</string>
 <!--
     <string name="button_close"     >Close     </string>
     <string name="button_erase"     >Erase     </string>
@@ -452,7 +452,7 @@
     <string name="mode_splay">Странични</string>
     <string name="mode_station">Реперни точки</string>
     <string name="mode_grid">Мащабна мрежа</string>
-    <string name="mode_fixed">Фикс. точки</string>
+    <string name="mode_fixed">Преместване на скица</string>
 
     <string name="remote_title">Дист. управление</string>
     <string name="remote_on">Вкл. лазер</string>
@@ -632,7 +632,7 @@
     <string name="title_coord">Въведете координати на точката:</string>
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
-    <string name="title_discover">Сканиране на DistoX устройства...</string>
+    <string name="title_discover">Сканиране за DistoX устройства...</string>
     <string name="title_draw_area">Площ %1$s</string>
     <string name="title_draw_line">Линия %1$s</string>
     <string name="title_draw_point">Точка %1$s</string>
