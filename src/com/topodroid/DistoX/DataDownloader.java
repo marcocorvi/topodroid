@@ -16,7 +16,7 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.BroadcastReceiver;
+// import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 
@@ -126,6 +126,7 @@ class DataDownloader
     mApp.notifyStatus( );
   }
 
+  // BATCH ON-DEMAND DOWNLOAD
   private void tryDownloadData( )
   {
     // mSecondLastShotId = mApp.lastShotId( );

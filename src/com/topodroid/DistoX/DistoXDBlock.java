@@ -18,7 +18,7 @@ import java.util.Locale;
 
 import android.view.View;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class DistoXDBlock
 {
@@ -137,7 +137,10 @@ public class DistoXDBlock
 
   public void setName( String from, String to ) 
   {
-    if ( from == null || to == null ) return; // FIXME ERROR
+    if ( from == null || to == null ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "FIXME ERROR DBlock::setName() either from or to is null");
+      return;
+    }
     mFrom = from.trim();
     mTo   = to.trim();
     if ( mFrom.length() > 0 ) {

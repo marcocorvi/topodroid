@@ -250,7 +250,7 @@ public class DrawingSurface extends SurfaceView
       DrawingStationName st = new DrawingStationName( num_st, x, y );
       if ( num_st.mHidden == 1 ) {
         st.setPaint( DrawingBrushPaths.fixedStationHiddenPaint );
-      } else if ( num_st.mHidden == -1 ) {
+      } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
         st.setPaint( DrawingBrushPaths.fixedStationBarrierPaint );
       } else {
         st.setPaint( DrawingBrushPaths.fixedStationPaint );

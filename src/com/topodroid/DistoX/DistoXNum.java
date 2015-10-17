@@ -121,6 +121,7 @@ class DistoXNum
     // Log.v("DistoX", "Set Station Hidden: " + hide );
     NumStation st = getStation( name );
     if ( st == null ) return;
+    st.mBarrierAndHidden = ( st.mHidden == -1 && hide == 1 );
     st.mHidden += hide;
     // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
     hide *= 2;
@@ -148,6 +149,7 @@ class DistoXNum
     // Log.v("DistoX", "Set Station barrier: " + barrier );
     NumStation st = getStation( name );
     if ( st == null ) return;
+    st.mBarrierAndHidden = ( st.mHidden == 1 && barrier == 1 );
     st.mHidden -= barrier;
     barrier *= 2;
     Stack<NumStation> stack = new Stack<NumStation>();
@@ -176,14 +178,14 @@ class DistoXNum
   {
     NumStation st = getStation( name );
     if ( st == null ) return false;
-    return st.mHidden > 0;
+    return st.hidden();
   }
 
   boolean isBarrier( String name )
   {
     NumStation st = getStation( name );
     if ( st == null ) return false;
-    return st.mHidden < 0;
+    return st.barrier();
   }
 
   // ================================================================================

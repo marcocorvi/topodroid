@@ -392,20 +392,18 @@ public class DeviceActivity extends Activity
   {
     if ( mDevice == null ) return;
     BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mDevice.mAddress );
-    if ( device == null ) return;
-    int state = device.getBondState();
-    if ( state == BluetoothDevice.BOND_BONDED ) {
-      // already paired
-      Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
-      return;
-    }
-    try {
-      Method m = device.getClass().getMethod( "createBond", (Class[]) null );
-      m.invoke( device, (Object[]) null );
-    } catch ( Exception e ) {
-      Toast.makeText( this, R.string.pairing_failed, Toast.LENGTH_SHORT).show(); // TODO
+    switch ( DeviceUtil.pairDevice( device ) ) {
+      case -1: // failure
+        Toast.makeText( this, R.string.pairing_failed, Toast.LENGTH_SHORT).show(); // TODO
+        break;
+      case 2: // already paired
+        Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
+        break;
+      default: // 0: null device
+               // 1: paired ok
     }
   }
+
 
   @Override
   public void enableButtons( boolean enable ) 

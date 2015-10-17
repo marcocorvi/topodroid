@@ -132,17 +132,12 @@ public class ShotDialog extends Dialog
     mNextBlk     = next;
     mBlk         = blk;
     TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog LOAD " + blk.toString(true) );
-    if ( prev != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "           prev " + prev.toString(true) );
-    }
-    if ( next != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "           next " + next.toString(true) );
-    }
+    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "  prev " + ((prev != null)? prev.toString(true) : "null") );
+    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "  next " + ((next != null)? next.toString(true) : "null") );
 
     shot_from    = blk.mFrom;
     shot_to      = blk.mTo;
-    if ( (blk.mType == DistoXDBlock.BLOCK_BLANK || blk.mType == DistoXDBlock.BLOCK_BLANK_LEG) 
-         && prev != null && prev.type() == DistoXDBlock.BLOCK_MAIN_LEG ) {
+    if ( blk.isTypeBlank() && prev != null && prev.type() == DistoXDBlock.BLOCK_MAIN_LEG ) {
       if ( DistoXStationName.isLessOrEqual( prev.mFrom, prev.mTo ) ) {
         shot_from = prev.mTo;
         shot_to   = DistoXStationName.increment( prev.mTo );
@@ -384,12 +379,10 @@ public class ShotDialog extends Dialog
       shot_leg = true;
       all_splay = false;
     } else {
-      shot_from = mETfrom.getText().toString();
-      shot_from = TopoDroidUtil.noSpaces( shot_from );
+      shot_from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
       // if ( shot_from == null ) { shot_from = ""; }
 
-      shot_to = mETto.getText().toString();
-      shot_to = TopoDroidUtil.noSpaces( shot_to );
+      shot_to = TopoDroidUtil.noSpaces( mETto.getText().toString() );
       shot_leg = false;
     }
 

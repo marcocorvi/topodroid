@@ -84,9 +84,9 @@
      android:title="@string/pref_cat_device"
      />
 
-  <Preference
+  <!-- Preference
      android:key="DISTOX_CALIB_PREF"
      android:title="@string/pref_cat_calib"
-     />
+     / -->
 
 </PreferenceScreen>

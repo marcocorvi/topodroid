@@ -37,7 +37,7 @@ public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
   protected Integer doInBackground( String... statuses )
   {
     if ( ! lock() ) return null;
-    int nRead = mApp.downloadData( mLister );
+    int nRead = mApp.downloadDataBatch( mLister );
     // if ( nRead < 0 ) {
     //   Toast.makeText( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ], Toast.LENGTH_SHORT ).show();
     // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "doInBackground read " + nRead );

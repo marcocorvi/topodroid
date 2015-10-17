@@ -114,18 +114,18 @@ public class DistoXComm
           mApp.notifyStatus();
           closeSocket( );
           mApp.notifyDisconnected();
-        // } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
-          // final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
-          // final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
-          // if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
-          //   Log.v("DistoX", "BOND STATE CHANGED paired" );
-          // } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
-          //   Log.v("DistoX", "BOND STATE CHANGED unpaired" );
-          // } else {
-          //   Log.v("DistoX", "BOND STATE CHANGED ");
-          // }
+        } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
+          final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
+          final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
+          if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED paired" );
+          } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired" );
+          } else {
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED ");
+          }
 
-          // bind2Device( data );
+          // DeviceUtil.bind2Device( data );
         // } else if ( BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action) ) {
         //   Log.v("DistoX", "PAIRING REQUEST");
         //   // BluetoothDevice device = getDevice();
@@ -153,7 +153,7 @@ public class DistoXComm
     mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED ) );
     mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECTED ) );
     // mApp.registerReceiver( mBTReceiver, uuidFilter  = new IntentFilter( myUUIDaction ) );
-    // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
+    mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     // mApp.registerReceiver( mBTReceiver, new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST ) );
   }
 
@@ -280,6 +280,9 @@ public class DistoXComm
           if ( mApp.distoType() == Device.DISTO_X310 ) {
             mApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
           }
+          try {
+            Thread.sleep( 1000 ); // FIXME SLOWDOWN
+          } catch ( InterruptedException e ) { }
         }
       }
       // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "RFcomm thread run() exiting");
@@ -396,6 +399,13 @@ public class DistoXComm
         disconnectRemoteDevice();
       }
       mBTDevice = mApp.mBTAdapter.getRemoteDevice( address );
+ 
+      // FIXME PAIRING
+      if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
+        int ret = DeviceUtil.pairDevice( mBTDevice );
+        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "pairing device " + ret );
+      }
+
       // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() device " + mBTDevice.getName() );
       try {
         if ( mBTSocket != null ) {
@@ -404,7 +414,7 @@ public class DistoXComm
           mBTSocket = null;
         }
         if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) {
-          bindDevice();
+          DeviceUtil.bindDevice( mBTDevice );
         }
 
         Class[] classes1 = new Class[]{ int.class };
@@ -460,59 +470,6 @@ public class DistoXComm
     }
   }
 
-  // private void bind2Device( Intent intent )
-  // {
-  //   BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-  //   Log.v("DistoX", "PAIRING: " + device.getName() + " " + device.getAddress() );
-  //   try { 
-  //     device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
-  //     Log.v("DistoX", "done setPairingConfirmation");
-  //     // device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);
-  //     byte[] pin = ByteBuffer.allocate(4).putInt(0000).array();
-  //     // byte[] pinBytes = BluetoothDevice.convertPinToBytes("0000");
-  //     //Entering pin programmatically:  
-  //     Method ms = device.getClass().getMethod("setPin", byte[].class);
-  //     // Method ms = device.getClass().getMethod("setPasskey", int.class);
-  //     ms.invoke( device, pin );
-  //     Log.v("DistoX", "done setPin");
-  //     Class[] classes3 = new Class[ 0 ];
-  //     Method m3 = mBTDevice.getClass().getMethod( "createBond", classes3 );
-  //     m3.invoke( mBTDevice );
-  //     Log.v("DistoX", "done createBond");
-  //   } catch ( NoSuchMethodException e ) {
-  //     Log.v("DistoX", "No Such method: " + e.getMessage() );
-  //   } catch ( IllegalAccessException e ) {
-  //     Log.v("DistoX", "Illegal access: " + e.getMessage() );
-  //   } catch ( InvocationTargetException e ) {
-  //     Log.v("DistoX", "Invocation target: " + e.getMessage() );
-  //   }
-  // }
-
-  private void bindDevice()
-  {
-    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, " bind device ..." );
-    // if ( mBTDevice == null ) return;
-
-    String PIN_CODE = "0000";
-    // byte[] pin = new byte[] { 0, 0, 0, 0 };
-    byte[] pin = PIN_CODE.getBytes();
-    try {
-      Class[] classes2 = new Class[ 1 ];
-      classes2[0] = byte[].class;
-      Method m2 = mBTDevice.getClass().getMethod("setPin", classes2 );
-      m2.invoke( mBTDevice, pin );
-      Class[] classes3 = new Class[ 0 ];
-      Method m3 = mBTDevice.getClass().getMethod( "createBond", classes3 );
-      m3.invoke( mBTDevice );
-    } catch ( NoSuchMethodException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed to set PIN: no method " + e.getMessage() );
-    } catch ( InvocationTargetException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed to set PIN: invoke " + e.getMessage() );
-    } catch (IllegalAccessException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed to set PIN: illegal access " + e.getMessage() );
-    }
-  }
-
   /** get the list of UUIDs supported by the remote device (for the DistoX only SPP uuid)
    */
   private void getUuids()
@@ -538,7 +495,7 @@ public class DistoXComm
    */
   private boolean connectSocket( String address )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket(): " + address );
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket(): " + address );
     if ( address == null ) return false;
     createSocket( address, 1 ); // default port == 1
 
@@ -550,10 +507,10 @@ public class DistoXComm
       setupBTReceiver();
 
       int port = 0;
-      while ( ! mBTConnected && port<TopoDroidSetting.mCommRetry ) {
+      while ( ! mBTConnected && port < TopoDroidSetting.mCommRetry ) {
         ++ port;
         if ( mBTSocket != null ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket() try port " + port );
+          TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket() try port " + port );
           try {
             mBTSocket.connect();
             mBTConnected = true;
@@ -567,7 +524,7 @@ public class DistoXComm
         if ( mBTSocket == null && port < TopoDroidSetting.mCommRetry ) {
           createSocket( address, port );
         }
-        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket() port " + port + " connected " + mBTConnected );
+        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket() port " + port + " connected " + mBTConnected );
       }
     } else {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "connect socket() null socket");

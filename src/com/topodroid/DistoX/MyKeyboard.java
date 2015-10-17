@@ -232,7 +232,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     mEdit = null;
     mFlags = new HashMap< EditText, Integer >();
 
-    Log.v("DistoX", "id1 " + kbdid1 + " " + kbdid2 );
+    // Log.v("DistoX", "id1 " + kbdid1 + " " + kbdid2 );
     mKeyboardView = view;
     mKeyboard1 = new Keyboard( mContext, kbdid1 );
     mKeyboard2 = ( kbdid2 == -1 )? null : new Keyboard( mContext, kbdid2 );
@@ -351,7 +351,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
       }
       // setTitle( editable.toString() );
     } else {
-      Log.v( TAG, "Keycode " + keyCode );
+      // Log.d( TAG, "Keycode " + keyCode );
     }
   }
 
@@ -409,31 +409,31 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
   @Override
   public void swipeUp()
   {
-    Log.d(TAG, "swipeUp");
+    // Log.d(TAG, "swipeUp");
   }
 
   @Override
   public void swipeRight() 
   {
-    Log.d(TAG, "swipeRight");
+    // Log.d(TAG, "swipeRight");
   }
 
   @Override
   public void swipeLeft() 
   {
-    Log.d(TAG, "swipeLeft");
+    // Log.d(TAG, "swipeLeft");
   }
 
   @Override
   public void swipeDown() 
   {
-    Log.d(TAG, "swipeDown");
+    // Log.d(TAG, "swipeDown");
   }
 
   @Override
   public void onText(CharSequence text) 
   {
-    Log.d(TAG, "onText? \"" + text + "\"");
+    // Log.d(TAG, "onText? \"" + text + "\"");
   }
 
   @Override

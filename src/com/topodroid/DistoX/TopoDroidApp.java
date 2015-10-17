@@ -599,7 +599,13 @@ public class TopoDroidApp extends Application
       isTracing = true;
       Debug.startMethodTracing("DISTOX");
     }
+
+    // FIXME PAIRING_REQUEST api-19
+    // registerReceiver( mPairingRequest, new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST ) );
   }
+
+  // FIXME PAIRING_REQUEST api-19
+  // final PairingRequest mPairingRequest = new PairingRequest();
 
   void setLocale( String locale )
   {
@@ -1010,20 +1016,21 @@ public class TopoDroidApp extends Application
   }
 
   // -------------------------------------------------------------
-  // DATA DOWNLOAD
+  // DATA BATCH DOWNLOAD
 
-  public int downloadData( ILister lister )
+  public int downloadDataBatch( ILister lister )
   {
     mSecondLastShotId = lastShotId();
-    TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "downloadData() device " + mDevice + " comm " + mComm.toString() );
+    TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "Download Data Batch() device " + mDevice + " comm " + mComm.toString() );
     int ret = 0;
     if ( mComm != null && mDevice != null ) {
       ret = mComm.downloadData( mDevice.mAddress, lister );
-      if ( ret > 0 && TopoDroidSetting.mSurveyStations > 0 ) {
-        // FIXME TODO select only shots after the last leg shots
-        List<DistoXDBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
-        assignStations( list );
-      }
+      // FIXME BATCH
+      // if ( ret > 0 && TopoDroidSetting.mSurveyStations > 0 ) {
+      //   // FIXME TODO select only shots after the last leg shots
+      //   List<DistoXDBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
+      //   assignStations( list );
+      // }
     } else {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Comm or Device is null ");
     }
@@ -1160,7 +1167,8 @@ public class TopoDroidApp extends Application
 
     for ( DistoXDBlock blk : list ) {
       if ( blk.mType == DistoXDBlock.BLOCK_SPLAY ) {
-        blk.mFrom = station;
+        // blk.mFrom = station;
+        blk.setName( station, "" );
         mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true );  // SPLAY
       } else if ( blk.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
         if ( blk.mId != blk0.mId ) {
@@ -1175,8 +1183,9 @@ public class TopoDroidApp extends Application
             next = DistoXStationName.increment( from );
             station = shot_after_splays ? next : from;
           }
-          blk.mFrom = from;
-          blk.mTo   = to;
+          // blk.mFrom = from;
+          // blk.mTo   = to;
+          blk.setName( from, to );
           mData.updateShotName( blk.mId, mSID, from, to, true );  // SPLAY
         }
       }
@@ -1184,6 +1193,7 @@ public class TopoDroidApp extends Application
   }
 
   // called also by ShotActivity::updataBlockList
+  // @param blk block whose stations need to be set in the DB
   public void assignStations( List<DistoXDBlock> list )
   { 
     // Log.v("DistoX", "assign stations nr. " + list.size() );
@@ -1212,9 +1222,10 @@ public class TopoDroidApp extends Application
 
         if ( prev == null ) {
           prev = blk;
-          blk.mFrom = station;
-          // Log.v( "DistoX", blk.mId + " null prev. FROM " + blk.mFrom );
+          // blk.mFrom = station;
+          blk.setName( station, "" );
           mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true );  // SPLAY
+          // Log.v( "DistoX", blk.mId + " null prev. FROM " + blk.mFrom );
         } else {
           if ( prev.relativeDistance( blk ) < TopoDroidSetting.mCloseDistance ) {
             if ( atStation == 0 ) {
@@ -1249,14 +1260,16 @@ public class TopoDroidApp extends Application
                   } while ( DistoXStationName.listHasName( list, to ) );
                   flip = true;
                 }
+                prev.setName( from, oldFrom );
                 mData.updateShotName( prev.mId, mSID, from, oldFrom, true ); // LEG
                 setLegExtend( prev );
               } else {
-                prev.mFrom = from;                             // forward-shot from--to
-                prev.mTo   = to;
-                // Log.v( "DistoX", prev.mId + " setting prev. FROM " + from + " TO " + to );
+                // prev.mFrom = from;                             // forward-shot from--to
+                // prev.mTo   = to;
+                prev.setName( from, to );
                 mData.updateShotName( prev.mId, mSID, from, to, true ); // LEG
                 setLegExtend( prev );
+                // Log.v( "DistoX", prev.mId + " setting prev. FROM " + from + " TO " + to );
 
                 if ( survey_stations == 1 ) {                  // forward-shot
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
@@ -1279,9 +1292,10 @@ public class TopoDroidApp extends Application
           } else { // distance from prev > "closeness" setting
             flip = false;
             atStation = 0;
-            blk.mFrom = station;
-            // Log.v( "DistoX", "Id " + blk.mId + " " + blk.mFrom );
+            // blk.mFrom = station;
+            blk.setName( station, "" );
             mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true ); // SPLAY
+            // Log.v( "DistoX", "Id " + blk.mId + " " + blk.mFrom );
             prev = blk;
           }
         }

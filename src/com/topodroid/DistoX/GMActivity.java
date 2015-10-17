@@ -712,11 +712,11 @@ public class GMActivity extends Activity
 
   // ------------------------------------------------------------------
 
-  // public int downloadData()
+  // public int downloadDataBatch()
   // {
   //   ArrayList<ILister> listers = new ArrayList<ILister>();
   //   listers.add( this );
-  //   return mApp.downloadData( this );
+  //   return mApp.downloadDataBatch( this );
   // }
 
   // public void makeNewCalib( String name, String date, String comment )
