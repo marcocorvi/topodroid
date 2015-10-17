@@ -107,7 +107,7 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
     <li><i>Station name size</i>: size of stations names [default 18 pt] [N]</li>
     <li><i>Labels size</i>: size of label texts [default 24 pt]</li>
     <li><i>Section-line tick size</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
-    <li><i>Green dots radius</i>: size of the green dots displayed in <b>draw</b> mode [default 5 pxl] [N]</li>
+    <li><i>Green dots radius</i>: size of the green dots displayed in <b>edit</b> mode [default 5 pxl] [N]</li>
     <li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
     </li>
   </ul>
@@ -121,7 +121,7 @@ You can shift the drawing as a whole by selecting the "Fix ref" checkbox in the 
 When viewing the profile, a long tap on the "Plan/Profile" button opens a confirmation dialog to flip the profile sketch horizontally. The dialog has a checkbox to reverse the extend direction of the shots as well. This is enabled by default. Only the shots up to the "barrier" stations, are reversed. In particular shots hidden by "hiding" stations are reversed. Therefore if you want to reverse only a portion of the shots you should first set "barrier" stations.<br><p>
 
 <h4>BACKUP COPIES</h4>
-TopoDroid keep a set of four backup copies for each sketch file. These are named with suffixes "bck", "bck0", "bck1", and "bck2" and are stored in the <i>th2</i> subdirectory. Whenever a sketch is saved the backup copies are rotated (ie, "bck1" is renamed "bck2", and so on, until "bck" is renamed "bck0"), the old "th2" file is renamed with suffix "bck", and the sketch is saved to a new "th2" file.<br><p>
+TopoDroid keep a set of four backup copies for each sketch file. These are named with suffixes "bck", "bck0", "bck1", and "bck2" and are stored in the <i>th2</i> subdirectory. Whenever a sketch is saved the backup copies are rotated (eg, "bck1" is renamed "bck2", and so on; "bck" is renamed "bck0"), the old "th2" file is renamed with suffix "bck", and the sketch is saved to a new "th2" file.<br><p>
 
 TopoDroid saves a sketch whenever it is modified (eg, a new item is added, or part of the sketch is erased) while it is open. Only one backup is used in this case: the old saved copy being renamed with suffix "bck".<br><p>
 
