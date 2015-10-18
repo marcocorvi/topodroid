@@ -2,7 +2,7 @@
 <h3>[9] SHOT LIST</h3>
 
 The shots are shown in a list. The list has no header to save space.  The shot informations are
-<ulist>
+<ul>
 <li>Index (optional: it is shown only if the related choice in the <u>Display mode</u> dialog is checked)</li>
 <li>From station</li>
 <li>To station</li>
@@ -10,29 +10,29 @@ The shots are shown in a list. The list has no header to save space.  The shot i
 <li>Azimuth</li>
 <li>Inclination</li>
 <li>Extend direction: either left (&lt;), right (&gt;), vertical (|), or ignore (-)</li>
-</ulist>
+</ul>
 Additional characters denote the presence of a comment (N), a photo (P), and a flag: either duplicate shot (*) or a surface shot (-).<br><p>
 
 Blank shots, and repeated-legs can be hidden. Splay shots can also be hidden to unclutter the list of shots. However, even if splays are not shown, you can see those at a station by tapping on the station name in a leg shot. To hide them tap again on the station name (even a tap on the name in a splay will do).<br><p>
 
 When you download data TopoDroid can automatically assign them station names. A repeated measurement is considered a leg shot, the others are splay shots.  If you stick to a convention taking measurements TopoDroid automatic station assignment can be very handy. TopoDroid supports a number of conventions to automatically assign stations to shots. You can select the one that fits your habits through the settings.
-<ulist>
+<ul>
 <li>at the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
 <li>at the "From" station: you take the forward leg shot(s) first, and then the splays</li>
 <li>at the "To" station: you take splays first and then backward leg shot(s)</li>
 <li>at the "To" station: you take backward leg shot(s) first and then splays</li>
 <li>at a station: you take the backshot to the previous station, next the splay shots, and finally the forward shot to the next station.</li>
-</ulist><br><p>
+</ul><br><p>
 
 A survey with compensation of the local magnetic anomaly must use the last policy.<br>
 Examples of the five conventions (shots takes at the same station are grouped in parenthesis):
-<ulist>
+<ul>
 <li> ... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... </li>
 <li> ... (1-2 1-. 1-. 1-.) (2-3 2-. 2-.) ... </li>
 <li> ... (2-. 2-. 2-. 2-1) (3-. 3-. 3-2) ... </li>
 <li> ... (2-1 2-. 2-. 2-.) (3-2 3-. 3-.) ... </li>
 <li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... </li>
-</ulist><br>
+</ul><br>
 
 Sequence a-b-c-d for the first (forsight) and the third (backsight) policies.<br>
 <img src="survey_policy.png">
@@ -43,13 +43,13 @@ If you choose not to have the station assigned automatically, you must set them 
 
 This dialog has five check buttons:<br>
 <img src="shot_dialog_btn2.png"><br>
-<olist>
+<ol>
 <li><i>duplicate leg</i>: this checkbox marks the shot as duplicate, so that it does not count towards the cave statistics</li>
 <li><i>surface</i> denotes a surface shot. Surface shots do not count for the cave statistics either.</li>
 <li><i>repeated leg</i> tells TopoDroid that the shot is a "repeated leg"; the shot stations are blanked out and it is marked as "repeated leg".</li>
 <li><i>splay group</i> is used if only the From station has been entered (and the To station is empty): it changes the From station of all the splay shots of the group. Effectively this assigns the group of splays from one station to another.</li>
 <li><i>renumber</i> is used to rename subsequent shots; if the editing shot is a leg (ie, the From and To stations are specified) and the box is checked, all subsequent shots are renamed according to the current station assignment policy, their type not being changed (ie, splays remain splay, legs remain leg, and blank shots remain blank).</li>
-</olist>
+</ol>
 <br><p>
 
 
@@ -60,13 +60,13 @@ If you use TopoDroid automatic station assignment, you are likely to need the sh
 <h4>OTHER SHOT ACTIONS [A]</h4>
 A long tap on a shot line opens another dialog with buttons for the following action(s):<br>
 <img src="shot_dialog_btn1.png"><br>
-<ulist>
+<ul>
 <li>take a <u>photo</u>: [A] this starts the Camera app, to take a picture. You should add a note to the picture, to remind you later what it is about</li>
 <li>take a <u>measurement</u> [A] with the Android device sensors, or to enter data taken with an external apparatus</li>
 <li><u>add</u> [A] a shot before it</li>
 <li><u>split</u> [A] the survey at the shot. This opens a dialog to enter the info for the new survey. Starting from this shot the survey data are assigned to the new survey. Afterwards the program continues with the new survey. You may need to split surveys when you have data from two (separate) survey pieces stored in the DistoX: these are downloaded to a single survey which must be then split accordingly.</li>
 <li><u>delete</u> the shot (the shot is not really deleted, just marked as such, and can be recovered)</li>
-</ulist><br><p>
+</ul><br><p>
 
 
 <h4>PHOTOS [A]</h4>

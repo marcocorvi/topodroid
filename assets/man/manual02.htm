@@ -7,13 +7,13 @@ Calibrations are stored in the "device10.sqlite" database, together with the Dis
 <p>
  
 Accordingly, the most important table in the survey database is:
-<ulist>
+<ul>
 <li><b>surveys</b>: survey informations</li>
-</ulist><br>
+</ul><br>
 The surveys records store the survey name, date, team, magnetic declination, initial station name and possibly a comment.<br>
 
 Related to the surveys are the tables for:
-<ulist>
+<ul>
 <li><b>shots</b>: survey data</li>
 <li><b>stations</b>: saved stations</li>
 <li><b>plots</b>: 2D sketches; plans, profiles, cross sections</li>
@@ -21,25 +21,25 @@ Related to the surveys are the tables for:
 <li><b>sensors</b>: measurements associated to survey shots</li>
 <li><b>fixeds</b>: (geolocalized stations)</li>
 <li><b>sketches</b>: 3D models</li>
-</ulist><br><p>
+</ul><br><p>
 
 The most important tables in the device database are
-<ulist>
+<ul>
 <li><b>devices</b>: devices informations</li>
 <li><b>calibs</b>: calibrations informations</li>
-</ulist><br>
+</ul><br>
  
 The calibs records contain the calibration name, date, DistoX device, algorithm, and the results of the last computation: coefficients, average error, maximum error, number of iterations.<br><p>
 
 Related to the calibrations is the data table
-<ulist>
+<ul>
 <li><b>gms</b>: calibration data</li>
-</ulist><br><p>
+</ul><br><p>
 
 Finally each database has the table
-<ulist>
+<ul>
 <li><b>configs</b>: configuration values</li>
-</ulist><br><p>
+</ul><br><p>
 
 You can learn more about the data organization in the database by looking at it with a SQLite viewer.<br><p>
 

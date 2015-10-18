@@ -12,32 +12,32 @@ To create a new calibration tap on the <u>New Calibration</u> button in the dial
 When you open an existing calibration (tapping the calibration name in the list of the calibration of a DistoX), you get the same interface.  The only difference is that the name of the calibration is no more editable.<br><p>
 
 <h4>MENUS</h4>
-<ulist>
+<ul>
 <li><u>Export</u> The calibration data can be exported as a CSV text file that can be imported in a spreadsheet program</li>
 <li><u>Delete</u> removes the calibration informations and its data from the database. This is a non-recoverable action.</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
-</ulist><br><p>
+</ul><br><p>
 
 The calibration CSV export contains the calibration details (name, date, device BT address, comment, algorithm), followed by the calibration data. Each data line contains: the data index, the G and M values (six integers), the data group, the azimuth, clino and roll of the data, the error, and the status.<br><p>
 
 <h4>BUTTONS</h4>
-<ulist>
+<ul>
 <li><u>Save</u> saves the calibration informations to the database</li>
 <li><u>Open</u> opens the calibration data window</li>
 <li><u>Read</u> [A] displays the calibration coefficients. This shows the values of the calibration coefficients previouly computed, and stored in the database</li>
-<ulist><br><p>
+</ul><br><p>
 
 
 <h4>CALIBRATION SETTINGS</h4>
-<ulist>
+<ul>
 <li><i>Group policy</i>: how to split the calibration data into groups. The three policies are described in the section about calibration data</li>
 <li><i>Group tolerance</i>: the maximum angular distance between consecutive data for them to be in the same group when the "distance-based" group-policy is used</li>
 <li><i>Error</i>: the computation of the coefficients terminates when the variation of any calibration coefficient during an iteration step is smaller than this value. A reasonable value is 10<sup>-6</sup>.</li>
 <li><i>Iterations</i>: the maximum number of iteration for the calibration algorithm</li>
 <li><i>Raw data</i>: whether to display the raw data. By default TopoDroid displays the azimuth, inclination, and roll. Check this option if you want to see also the raw calibration data</li>
 <li><i>Algorithm</i>: can be 0 (auto), 1 (linear), 2 (non-linear). If a calibration algorithm is left "auto", and this setting is not "auto", then the algorithm of the settings is used to calculate the calibration. If they are both "auto" the algorithm is chosen automatically by TopoDroid depending on the DistoX model and firmware.</li>
-<ulist><br><p>
+</ul><br><p>
 
 <h4>HOW TO CALIBRATE A DISTOX</h4>
 The DistoX needs to be calibrated before using. The calibration is a transformation of the data that accounts for
@@ -50,11 +50,11 @@ At a minimum you must take four groups of four shots (with different roll) in fo
 Before computing the calibration you must tell the program how the calibration shots are grouped by the direction, ie, you must assign a group to each shot. The groups are denoted with positive integers. A shot with group "0" (zero) or no group, is not used to compute the calibration. Deleted shot are ususally not shown in the list.<br><p>
 
 TopoDroid implements three policies to assign groups automatically:
-<ulist>
+<ul>
 <li>"shot group assignment based on the angular discrepancy between shots"</li>
 <li>"each group with four shots". This is the default policy and corresponds to the second procedure described above.</li>
 <li>"four groups of four shots, followed by single shots"</li>
-</ulist>
+</ul>
 <br>
 The group numbers can be assigned or changed by editing the calibration shots. Tap on a shot entry in the list to open the editing dialog.
 <br>
@@ -63,7 +63,7 @@ The group numbers can be assigned or changed by editing the calibration shots. T
 <br>
 
 To summarize, to calibrate the DistoX you need to:
-<ulist>
+<ul>
 <li>turn the DistoX in calibration mode</li>
 <li>take the shots of the calibration data</li>
 <li>download the shots to the app</li>
@@ -71,7 +71,7 @@ To summarize, to calibrate the DistoX you need to:
 <li>compute the calibration coefficients</li>
 <li>upload the coefficients to the DistoX</li>
 <li>revert the DistoX to normal mode</li>
-</ulist>
+</ul>
 <br><p>
 
 

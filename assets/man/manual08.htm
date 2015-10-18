@@ -14,19 +14,19 @@ Save when you are done, and the new survey name will appear in the list of surve
 If you tap shortly on the survey name the survey data activity starts.  This is one of the two most important activities of TopoDroid. The other is the Sketch activity.<br><p>
 
 TopoDroid differentiates among four kinds of shots:
-<olist>
+<ol>
 <li>"blank" shots, ie, shots with the stations not set yet</li>
 <li>"splay": it has only one station, usually the "From" station</li>
 <li>"leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
 <li>"repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
-</olist><p>
+</ol><p>
 Each kind of shots is displayed with a different color: "legs" are white, "repeated-legs" grey, "splays" blue, "blank" red. Furthermore the background color is blueish for the last downloaded shots, and reddish for "unreliable" shots, ie. shots with "abnormal" field intensities (only DistoX2).</br>
 <img src="shots_list.png" alt="shots list"/><p>
 
 The "reliability" of a shot is estimated by comparing the intensities of the magnetic and gravitational fields and the dip angle of the magnetic field with their averege values, respectively. If any of these differs from the average by more that a specified threshold, the shot is deemed "unreliable". The thresholds are among the app settings.<br><p>
 
 <h4>MENUS</h4>
-<ulist>
+<ul>
 <li><u>Survey info</u>: to open the survey information window</li>
 <li><u>Recover</u>: to recover a deleted item (shot or sketch)</li>
 <li><u>Photo</u> [A]: lists the pictures taken for this survey</li>
@@ -35,10 +35,10 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><u>DistoX</u> [A]: opens the Device window</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
-</ulist><br>
+</ul><br>
 
 <h4>BUTTONS</h4>
-<ulist>
+<ul>
 <li><u>Download</u>: it will download the data from the DistoX as in the calibration data window. If no DistoX is selected this button is hidden.</li>
 <li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
 <li><u>Display</u>: to choose the display mode (see below)</li>
@@ -47,10 +47,10 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><u>Extend</u> opens the "Extend reference" dialog that defines how to set the "extend" for the coming shots (either downloaded or manually entered).</li>
 <li><u>Stations</u> [N]: this buttons opens the dialog for the saved stations</li>
 <li><u>Add</u> [N] adds a shot. In the coming dialog you must enter the shot stations and data (length, azimuth, and clino). You can specify also the direction of "extend", and values for LRUD. By default these are assumed at the FROM station, unless you check the box for the TO station.</li>
-</ulidt><br><p>
+</ul><br><p>
 
 <h4>SURVEY SETTINGS</h4>
-<ulist>
+<ul>
   <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. You can write your name and that of the cavers you usually survey with.</li>
   <li><i>Stations policy</i>: this tells the program how to automatically assign survey stations to the shots. (This is further explained below).</li>
   <li><i>Station names</i> specifies the type of the station names, either alphanumeric (default) or numeric [B].</li>
@@ -90,7 +90,7 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
     <li><i>Magnetic dip tolerance</i>: tolerance on magnetic dip angle values above which a shot is signalled anomalous (only DistoX2) [units degrees]</li>
     </ul>
   </li>
-</ulist><br><p>
+</ul><br><p>
 
 <h4>DISPLAY MODE</h4>
 The <u>Display</u> button opens a dialog with choices for "shot id", "splay shots", "blank shots", and "repeated leg shots". The "shots id" are unique increasing indices assigned by TopoDroid to the shots of the survey. Splay shots can be shown or hidden. Blank shots can be either all shown or hidden. The same for repeated-leg shots.<br><p>
@@ -116,7 +116,7 @@ The buttons acts on the selected station:
 <li>save the station in  the text-box, if not already saved, or update the comment</li>
 <li>set the current station to that in the text-box (or clear it, if the text-box is empty)</li>
 <li>delete the saved station</li>
-</ulist><br><p>
+</ul><br><p>
 
 <h4>DISTOX DATA DOWNLOAD [B]</h4>
 The <u>Download</u> button starts a connection with the DistoX to download data.  While the connection is active it stays red. If you are using the "on-demand" download-mode the connection is closed when there are no more data to retrieve. With the "continuous" download-mode the connection remains open (and data are continuously downloaded as soon as the measurements are taken) until the DistoX and the Android lose the Bluetooth connection.  Which mode is best suited for you depends on your habits. With the on-demand mode you can concentrate on sketching and other tasks without being bothered by incoming data, and when you download the data you can focus on them (they are highlighted blue). On the other hand on-demand download requires pauses to get the data, and these are especially long if you took several shots in the between.<br><p>

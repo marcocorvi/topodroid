@@ -433,7 +433,7 @@ public class DistoXComm
           // mBTSocket = mBTDevice.createInsecureRfcommSocket( port );
           // mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
         } else if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_PORT ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() invoke createInsecureRfcommSocket " );
+          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() invoke createRfcommSocket " );
           Method m2 = mBTDevice.getClass().getMethod( "createRfcommSocket", classes1 );
           mBTSocket = (BluetoothSocket) m2.invoke( mBTDevice, port );
         }
@@ -516,7 +516,7 @@ public class DistoXComm
             mBTConnected = true;
           } catch ( IOException e ) {
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "connect socket() (port " + port + ") IO error " + e.getMessage() );
-            TopoDroidLog.LogStackTrace( e );
+            // TopoDroidLog.LogStackTrace( e );
             closeSocket();
             // mBTSocket = null;
           }

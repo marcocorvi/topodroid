@@ -92,7 +92,7 @@ class DataDownloader
 
   void stopDownloadData()
   {
-    // Log.v("DistoX", "stopDownloadData() connected " + mConnected );
+    // Log.v("DistoX", "stop Download Data() connected " + mConnected );
     // if ( ! mConnected ) return;
     if ( TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS ) {
       mApp.disconnectComm();
@@ -103,7 +103,7 @@ class DataDownloader
   // called also by ReconnectTask
   void tryConnect()
   {
-    // Log.v("DistoX", "tryConnect() download " + mDownload + " connected " + mConnected );
+    // Log.v("DistoX", "try Connect() download " + mDownload + " connected " + mConnected );
     if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
@@ -112,10 +112,10 @@ class DataDownloader
       }
       if ( ! mConnected ) {
         mConnected = mApp.connectDevice( mApp.mDevice.mAddress );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** tryConnect status 0 --> " + mStatus );
+        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** try Connect status 0 --> " + mStatus );
       } else {
         mConnected = false;
-        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** tryConnect status " + mStatus + " --> 0 " );
+        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** try Connect status " + mStatus + " --> 0 " );
       }
     }
   }
