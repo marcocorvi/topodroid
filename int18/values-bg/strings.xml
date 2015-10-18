@@ -176,10 +176,10 @@
     <string name="out">вън</string>
     <string name="in">във</string>
     <string name="none">няма</string>
-    <string name="barrier_add">Прекъсване на антената?</string>
-    <string name="barrier_del">Продължаване на антената?</string>
-    <!-- TODO string name="hidden_add">Hide midline display</string -->
-    <!-- TODO string name="hidden_del">Show midline display</string -->
+    <string name="barrier_add">Скриване на следващи репери</string>
+    <string name="barrier_del">Показване на следващи репери</string>
+    <string name="hidden_add">Скриване на предишни репери</string>
+    <string name="hidden_del">Показване на предишни репери</string>
 
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
     <string name="bad_line">Невалиден тип линия</string>
@@ -529,7 +529,7 @@
     <string name="help_manual">Ръководство</string>
     <!-- NO string name="help_more">Показване на допълнителни команди</string -->
     <!-- NO string name="help_less">Връщане към основните команди</string -->
-    <!-- TODO string name="help_measure">Measure distances</string -->
+    <string name="help_measure">Измерване на разстояния</string>
     
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
@@ -781,9 +781,9 @@
   <string name="pref_bitmap_scale_title">PNG резолюция</string>
   <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
   <string name="pref_bitmap_scale_message">Резолюция на експортирани скици в PNG формат</string>
-  <!-- TODO string name="pref_bitmap_bgcolor_title">PNG background color</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string -->
+  <string name="pref_bitmap_bgcolor_title">PNG фон</string>
+  <string name="pref_bitmap_bgcolor_summary">Цвят на фона на PNG експортирани скици</string>
+  <string name="pref_bitmap_bgcolor_message">Цвят на фона на PNG експортирани скици</string>
   <string name="pref_acad_version_title">AutoCAD версия</string>
   <string name="pref_acad_version_summary">AutoCAD версия</string>
   <string name="pref_dxf_scale_title">Мащаб на DXF скици</string>
@@ -855,8 +855,8 @@
   <string name="pref_loopClosure_summary">Дали да се корегира грешката при затваряне на полигони</string>
   <!-- UNUSED string name="pref_splayExtend_title">Разгъване на странични отсечки</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Разгъване на странични отсечки(измервания) наляво/надясно във вертикалния разрез</string -->
-  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
-  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
+  <string name="pref_LRExtend_title">Приблизително Ляво/Дясно при импорт</string>
+  <string name="pref_LRExtend_summary">Приблизителна оценка на Ляво/Дясно (импорт от Compass/VisualTopo)</string>
 
   <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
   <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>
