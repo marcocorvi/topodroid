@@ -120,6 +120,7 @@
     <string name="sketch_saving">Saving sketch ... please wait...</string>
     <string name="lookup_wait">Internet lookup ... please wait...</string>
     <string name="lookup_fail">Failed lookup</string>
+    <string name="MT_points_none">No MobileTopographer point</string>
  
 
     <string name="head_tail">Memory: </string>
@@ -706,8 +707,8 @@
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS name</string>
   <string name="pref_crs_message">Enter the CRS name as in Proj4</string>
-  <string name="pref_gps_averaging_title">GPS Averaging</string>
-  <string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string>
+  <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
 
   <string name="pref_plot_screen_title">SKETCH ITEMS</string>
   <string name="pref_tool_screen_title">DRAWING TOOLS</string>

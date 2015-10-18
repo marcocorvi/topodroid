@@ -135,6 +135,7 @@
     <string name="sketch_saving">Skizze sichern ... bitte warten ...</string>
     <!-- TODO string name="lookup_wait">Internet lookup ... bitte warten...</string -->
     <!-- TODO string name="lookup_fail">Failed lookup</string -->
+    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
 
 <!-- MORE DEVICE STRINGS -->
     <!-- OK string name="head_tail">Memory: </string -->
@@ -687,8 +688,8 @@
   <!-- OK string name="pref_crs_title">C R S </string -->
   <!-- TODO string name="pref_crs_summary">CRS Name</string -->
   <!-- TODO string name="pref_crs_message">Enter the CRS name as in Proj4</string -->
-  <!-- OK string name="pref_gps_averaging_title">GPS Averaging</string -->
-  <string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string>
+  <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string -->
   <!-- TODO string name="pref_plot_screen_title">Sketch screen settings</string -->
   <!-- TODO string name="pref_tool_screen_title">Sketch drawing settings</string -->
   <!-- TODO string name="pref_location_title">Location settings</string -->

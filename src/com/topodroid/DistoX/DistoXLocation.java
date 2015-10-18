@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.Iterator;
 
+import java.io.File;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 
@@ -69,6 +70,8 @@ public class DistoXLocation extends Dialog
   private Button   mBtnLoc;
   // private Button   mBtnAdd;
   private Button   mBtnMan;
+  private Button   mBtnMobileTopographer;
+
   private Button   mBtnStatus;
   // private Button   mBtnCancel;
 
@@ -127,6 +130,14 @@ public class DistoXLocation extends Dialog
     mBtnStatus = mBtnLoc;
     // mBtnAdd = (Button) findViewById(R.id.button_add );
     mBtnMan = (Button) findViewById(R.id.button_manual );
+    mBtnMobileTopographer = (Button) findViewById( R.id.button_mobile_topographer );
+
+    File MTdir = new File(MobileTopographerDialog.POINTLISTS);
+    if ( ! MTdir.exists() ) {
+      mBtnMobileTopographer.setVisibility( View.GONE );
+    } else {
+      mBtnMobileTopographer.setOnClickListener( this );
+    }
 
     mBtnLoc.setOnClickListener( this );
     // mBtnAdd.setOnClickListener( this );
@@ -259,6 +270,7 @@ public class DistoXLocation extends Dialog
         mHasLocation = false;
         // mBtnAdd.setEnabled( false );
         mBtnMan.setEnabled( false );
+        mBtnMobileTopographer.setEnabled( false );
         CharSequence item = v.getText();
         if ( item == null || item.length() == 0 ) {
           String error = mContext.getResources().getString( R.string.error_station_required );
@@ -276,6 +288,7 @@ public class DistoXLocation extends Dialog
         boolean enabled =  ( str != null && str.length() > 0 );
         mBtnLoc.setEnabled( enabled );
         mBtnMan.setEnabled( enabled );
+        mBtnMobileTopographer.setEnabled( enabled );
       }
     }
     return false;
@@ -316,18 +329,21 @@ public class DistoXLocation extends Dialog
       }
       new LongLatAltDialog( mContext, this ).show();
       // mHasLocation = false;
+    } else if ( b == mBtnMobileTopographer ) {
+      (new MobileTopographerDialog( mParent, this )).show();
     } else if ( b == mBtnLoc ) {
       if ( TopoDroidSetting.mKeyboard ) mKeyboard.hide();
       if ( mLocating ) {
         setGPSoff();
-      } else {
-        if ( TopoDroidSetting.mUseGPSAveraging ) {
-          if ( ! mParent.tryGPSAveraging( this ) ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Location: failed GPSAveraging" );
-          }
-        } else {
+      } else {      
+        // FIXME GPS_AVERAGE NOT USED
+        // if ( TopoDroidSetting.mUseGPSAveraging ) {
+        //   if ( ! mParent.tryGPSAveraging( this ) ) {
+        //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Location: failed GPSAveraging" );
+        //   }
+        // } else {
           setGPSon();
-        }
+        // }
       }
     }
     // refreshList();
@@ -429,11 +445,12 @@ public class DistoXLocation extends Dialog
 
   /** callback fro SurveyActivity on GPS request result
    */
-  void setPosition( double lng, double lat, double alt )
+  void setPosition( double lng, double lat, double alt, double asl )
   {
     mLongitude = lng;
     mLatitude  = lat;
     mAltitude  = alt;
+    mAltimetric = asl;
     showLocation();
     mHasLocation = true;
     // mBtnAdd.setEnabled( true );

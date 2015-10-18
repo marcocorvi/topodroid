@@ -136,7 +136,8 @@ public class SurveyActivity extends Activity
 // -------------------------------------------------------------------
   private final static int LOCATION_REQUEST = 1;
   private static int CRS_CONVERSION_REQUEST = 2; // not final ?
-  private DistoXLocation mLocation;
+  // FIXME GPS_AVERAGE NOT USED
+  // private DistoXLocation mLocation;
   private FixedDialog mFixedDialog;
 
   void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
@@ -161,37 +162,40 @@ public class SurveyActivity extends Activity
     }
   }
 
-  boolean tryGPSAveraging( DistoXLocation loc )
-  {
-    mLocation = null;
-    try {
-      mLocation = loc;
-      Intent intent = new Intent( "cz.destil.gpsaveraging.AVERAGED_LOCATION" );
-      // Intent intent = new Intent( Intent.ACTION_DEFAULT, Uri.parse("cz.destil.gpsaveraging.AVERAGED_LOCATION") );
-      startActivityForResult( intent, LOCATION_REQUEST );
-    } catch ( ActivityNotFoundException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ActivityNotFound " + e.toString() );
-      mLocation = null;
-      return false;
-    }
-    return true;
-  }
+  // FIXME GPS_AVERAGE NOT USED
+  // boolean tryGPSAveraging( DistoXLocation loc )
+  // {
+  //   mLocation = null;
+  //   try {
+  //     mLocation = loc;
+  //     Intent intent = new Intent( "cz.destil.gpsaveraging.AVERAGED_LOCATION" );
+  //     // Intent intent = new Intent( Intent.ACTION_DEFAULT, Uri.parse("cz.destil.gpsaveraging.AVERAGED_LOCATION") );
+  //     startActivityForResult( intent, LOCATION_REQUEST );
+  //   } catch ( ActivityNotFoundException e ) {
+  //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ActivityNotFound " + e.toString() );
+  //     mLocation = null;
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   public void onActivityResult( int reqCode, int resCode, Intent intent )
   {
     if ( resCode == RESULT_OK ) {
       if ( reqCode == LOCATION_REQUEST ) {
-        if ( mLocation != null ) {
-          Bundle bundle = intent.getExtras();
-          mLocation.setPosition( 
-            bundle.getDouble( "longitude" ),
-            bundle.getDouble( "latitude" ),
-            bundle.getDouble( "altitude" ) );
-          // accuracy = bundle.getDouble( "accuracy" );
-          // name = bundle.getStriung( "name" ); waypoint name
+        // FIXME GPS_AVERAGE NOT USED
+        // if ( mLocation != null ) {
+        //   Bundle bundle = intent.getExtras();
+        //   mLocation.setPosition( 
+        //     bundle.getDouble( "longitude" ),
+        //     bundle.getDouble( "latitude" ),
+        //     bundle.getDouble( "altitude" ),
+        //     0.0 );  // orthometric altitude
+        //   // accuracy = bundle.getDouble( "accuracy" );
+        //   // name = bundle.getStriung( "name" ); waypoint name
 
-          mLocation = null;
-        }
+        //   mLocation = null;
+        // }
       } else if ( reqCode == CRS_CONVERSION_REQUEST ) {
         if ( mFixedDialog != null ) {
           Bundle bundle = intent.getExtras();

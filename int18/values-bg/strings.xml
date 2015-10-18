@@ -120,6 +120,7 @@
     <string name="sketch_saving">Записване на скица... Моля изчакайте...</string>
     <string name="lookup_wait">Търсене в интернет. Моля изчакайте...</string>
     <string name="lookup_fail">Неуспешно търсене</string>
+    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
  
 
     <string name="head_tail">Памет: </string>
@@ -708,8 +709,8 @@
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS име</string>
   <string name="pref_crs_message">Въведете CRS име както в Proj4</string>
-  <string name="pref_gps_averaging_title">GPS усредняване</string>
-  <string name="pref_gps_averaging_summary">Да се използва ли усредняване на GPS координати</string>
+  <!-- UNUSED string name="pref_gps_averaging_title">GPS усредняване</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Да се използва ли усредняване на GPS координати</string -->
 
   <string name="pref_plot_screen_title">Екран за рисуване</string>
   <string name="pref_tool_screen_title">Инструменти за рисуване</string>

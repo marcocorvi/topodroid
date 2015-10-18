@@ -205,8 +205,9 @@ class TopoDroidSetting
   // static final  String UNIT_LOCATION  = "ddmmss";
   static int mUnitLocation = 0; // 0 dec-degree, 1 ddmmss
 
-  static final  boolean USE_GPSAVERAGING = false;
-  static boolean mUseGPSAveraging = USE_GPSAVERAGING;
+  // FIXME GPS_AVERAGE NOT USED
+  // static final  boolean USE_GPSAVERAGING = false;
+  // static boolean mUseGPSAveraging = false;
 
   static String  mDefaultTeam = "";
 
@@ -442,7 +443,9 @@ class TopoDroidSetting
     //   mAltitude = ALT_WGS84;
     // }
     mCRS           = prefs.getString( key[k++], "Long-Lat" );                        // DISTOX_CRS
-    mUseGPSAveraging = prefs.getBoolean( key[k++], USE_GPSAVERAGING );               // DISTOX_GPS_AVERAGING 17
+    // FIXME GPS_AVERAGE NOT USED
+    // mUseGPSAveraging = prefs.getBoolean( key[k++], USE_GPSAVERAGING );               // DISTOX_GPS_AVERAGING 17
+    ++k;
 
     // TopoDroidLog.Log( TopoDroidLog.LOG_UNITS, "mUnitLength " + mUnitLength );
     // TopoDroidLog.Log( TopoDroidLog.LOG_UNITS, "mUnitAngle " + mUnitAngle );
@@ -763,8 +766,9 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCRS = prefs.getString( k, "Long-Lat" );     // DISTOX_CRS 16
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mUseGPSAveraging = prefs.getBoolean( k, USE_GPSAVERAGING );   // DISTOX_GPS_AVERAGING
-  
+      // FIXME GPS_AVERAGE NOT USED
+      // mUseGPSAveraging = prefs.getBoolean( k, USE_GPSAVERAGING );   // DISTOX_GPS_AVERAGING
+
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
         mGroupBy = Integer.parseInt( prefs.getString( k, GROUP_BY ) );  // DISTOX_GROUP_BY 18 (choice)

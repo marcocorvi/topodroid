@@ -122,6 +122,7 @@
     <string name="sketch_saving">Сохранение абриса ... обождите...</string>
     <string name="lookup_wait">Интернет поиск ... обождите...</string>
     <string name="lookup_fail">Не удалось найти</string>
+    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
  
 
     <string name="head_tail">Память: </string>
@@ -700,8 +701,8 @@
   <string name="pref_crs_title">C R S система координат </string>
   <string name="pref_crs_summary">CRS имя</string>
   <string name="pref_crs_message">Введите имя CRS как в Proj4</string>
-  <string name="pref_gps_averaging_title">Осреднение данных GPS </string>
-  <string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string>
+  <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
   <string name="pref_plot_screen_title">Настройки экрана абриса</string>
   <string name="pref_tool_screen_title">Настройки рисования абриса</string>
   <string name="pref_location_title">Настройки местоположения</string>

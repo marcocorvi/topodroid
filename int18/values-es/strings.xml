@@ -114,6 +114,7 @@
     <string name="sketch_saving">Exportando dibujo ... espere ...</string>
     <string name="lookup_wait">Buscando en Internet ... Por favor, espere ...</string>
     <string name="lookup_fail">Fallo en la Búsqueda</string>
+    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
 
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
@@ -627,8 +628,8 @@
   <string name="pref_crs_title">CRS </string>
   <string name="pref_crs_summary">Nombre CRS</string>
   <string name="pref_crs_message">Introducir el CRS nombrar como en Proj4</string>
-  <string name="pref_gps_averaging_title">Promedio GPS</string>
-  <string name="pref_gps_averaging_summary">Uso promedio GPS</string>
+  <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
   <string name="pref_plot_screen_title">OPCIONES DE PANTALLA DEL DIBUJO</string>
   <string name="pref_tool_screen_title">OPCIONES DE PALETA DE DIBUJO</string>
   <string name="pref_location_title">OPCIONES DE UBICACIÓN</string>

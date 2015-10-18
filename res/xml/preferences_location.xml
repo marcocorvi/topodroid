@@ -5,12 +5,12 @@
 
 <!-- DISTOX_LOCATION  -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
         android:key="DISTOX_GPS_AVERAGING"
         android:title="@string/pref_gps_averaging_title"
         android:summary="@string/pref_gps_averaging_summary"
         android:defaultValue="false"
-     />
+     / -->
 
      <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_UNIT_LOCATION"
