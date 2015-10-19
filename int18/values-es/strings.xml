@@ -172,7 +172,7 @@
     <string name="none">Nada</string>
     <string name="barrier_add">Â¿Dividir la visualización de la línea central?</string>
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
-    <string name="hidden_add"Oculta pantalla de la línea media</string>
+    <string name="hidden_add">Oculta pantalla de la línea media</string>
     <string name="hidden_del">Mostrar pantalla de la línea media</string>
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
