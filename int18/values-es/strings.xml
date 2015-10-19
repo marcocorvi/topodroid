@@ -172,8 +172,8 @@
     <string name="none">Nada</string>
     <string name="barrier_add">Â¿Dividir la visualización de la línea central?</string>
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
-    <!-- TODO string name="hidden_add">Hide midline display</string -->
-    <!-- TODO string name="hidden_del">Show midline display</string -->
+    <string name="hidden_add"Oculta pantalla de la línea media</string>
+    <string name="hidden_del">Mostrar pantalla de la línea media</string>
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
@@ -218,7 +218,7 @@
     <string name="menu_manual_calibration">CALIBRACIÓN</string>
     <string name="menu_options">OPCIONES</string>
     <string name="menu_overview">VISUALIZACIÓN GENERAL</string>
-    <string name="menu_pair">PAIR</string>
+    <string name="menu_pair">EMPAREJAR</string>
     <string name="menu_palette">PALETA</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
@@ -446,7 +446,7 @@
 -->
     <string name="btn_man">Manual</string>
     <string name="btn_symbol">Símbolos</string>
-    <!-- TODO string name="btn_import">Import</string -->
+    <string name="btn_import">Importar</string>
 
     <string name="help_help">Ayuda</string>
     <string name="help_manual">Manual online</string>
@@ -465,7 +465,7 @@
     <string name="help_database">Aplicación Database viewer(SQliteViewer)</string>
     <string name="help_prefs">Editar preferencias</string>
     <string name="help_log">Activar/desactivar las opciones de registro</string>
-    <string name="help_join_survey">Únir la topografía</string>
+    <string name="help_join_survey">Unir dos topografías</string>
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Descargar datos</string>
     <string name="help_splay">Asignar estaciones laterales automáticamente</string>
@@ -574,7 +574,7 @@
   <string name="pref_cat_drawing">OPCIONES DIBUJO</string>
   <string name="pref_cat_import_export">IMPORTAR / EXPORTAR</string>
   <string name="pref_cat_calib">OPCIONES CALIBRACIÓN</string>
-  <string name="pref_cat_device">OPCIONES DistoX</string>
+  <string name="pref_cat_device">OPCIONES DISTOX</string>
   <string name="pref_cat_sketch">OPCIONES DIBUJO</string>
   <string name="pref_cat_log">OPCIONES DE REGISTRO</string>
 
@@ -587,11 +587,11 @@
   <!-- UNUSED string name="pref_bootloader_summary">Habilitar gestor de arranque</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Activar / Desactivar los teclados personalizados</string>
-  <string name="pref_cosurvey_title">Co-surveying</string>
-  <string name="pref_cosurvey_summary">Activar / Desactivar los teclados personalizados</string>
+  <string name="pref_cosurvey_title">Topografía compartida</string>
+  <string name="pref_cosurvey_summary">Activar / Desactivar topografías compartidas</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
-  <string name="pref_extra_buttons_title">Botones opcionales</string>
+  <string name="pref_extra_buttons_title">Nivel de usuario</string>
   <string name="pref_extra_buttons_summary">Habilitar botones opcionales ventana principal</string>
   <string name="pref_size_buttons_title">Tamaño botones</string>
   <string name="pref_size_buttons_summary">Tamaño de los botones de la barra</string>
@@ -804,7 +804,7 @@
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Curvas Bézier</string>
   <string name="pref_log_calib">Calibración</string>
-  <string name="pref_log_comm">Communicación</string>
+  <string name="pref_log_comm">Communicación BT</string>
   <string name="pref_log_data">Datos</string>
   <string name="pref_log_db">Base de datos</string>
   <string name="pref_log_debug">Depurar</string>
@@ -817,7 +817,7 @@
   <string name="pref_log_num">reducción de datos</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
-  <string name="pref_log_proto">Protocolo</string>
+  <string name="pref_log_proto">Protocolo DistoX</string>
   <string name="pref_log_sensor">Sensores</string>
   <string name="pref_log_shot">Toma</string>
   <string name="pref_log_survey">Topografía</string>
