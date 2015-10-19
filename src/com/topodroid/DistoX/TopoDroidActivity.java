@@ -948,6 +948,7 @@ public class TopoDroidActivity extends Activity
     }
     // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onDestroy " );
     // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
+    // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();
   }
 

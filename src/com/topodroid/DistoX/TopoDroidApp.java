@@ -401,6 +401,12 @@ public class TopoDroidApp extends Application
     mDataDownloader.onStop(); // mDownload = false;
   }
 
+  // FIXME BT_RECEIVER 
+  // void resetCommBTReceiver()
+  // {
+  //   mComm.resetBTReceiver();
+  // }
+
   // called by DeviceActivity::setState()
   //           ShotActivity::onResume()
   public boolean isCommConnected()

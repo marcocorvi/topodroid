@@ -402,19 +402,21 @@ public class DistoXComm
       mBTDevice = mApp.mBTAdapter.getRemoteDevice( address );
  
       // FIXME PAIRING
+      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
         int ret = DeviceUtil.pairDevice( mBTDevice );
         TopoDroidLog.Log( TopoDroidLog.LOG_BT, "pairing device " + ret );
       }
 
-      // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() device " + mBTDevice.getName() );
       try {
         if ( mBTSocket != null ) {
           // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() BTSocket not null ... closing");
           mBTSocket.close();
           mBTSocket = null;
         }
+        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
         if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "bind device " );
           DeviceUtil.bindDevice( mBTDevice );
         }
 
@@ -513,6 +515,7 @@ public class DistoXComm
         if ( mBTSocket != null ) {
           TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket() try port " + port );
           try {
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[3] device state " + mBTDevice.getBondState() );
             mBTSocket.connect();
             mBTConnected = true;
           } catch ( IOException e ) {
