@@ -450,23 +450,9 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <!-- OK string name="btn_compass">Compass</string -->
-    <!-- OK string name="btn_csurvey">cSurvey</string -->
-    <!-- OK string name="btn_csv">CSV</string -->
-    <!-- OK string name="btn_dxf">DXF</string -->
-    <!-- OK string name="btn_kml">KML</string -->
-    <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
-    <string name="btn_import">Importa</string>
     <string name="btn_man">Manuale</string>
-    <string name="btn_symbol">Prototipi grafici</string>
-    <string name="btn_png">PNG</string>
-    <!-- OK string name="btn_pockettopo">PocketTopo</string -->
-    <!-- OK string name="btn_survex">Survex</string -->
-    <!-- OK string name="btn_therion">Therion</string -->
-    <!-- OK string name="btn_vtopo">VisualTopo</string -->
-    <!-- OK string name="btn_walls">Walls</string -->
-    <!-- OK string name="btn_svg">SVG</string -->
-    <!-- OK string name="btn_zip">Zip</string -->
+    <string name="btn_symbol">Strumenti grafici</string>
+    <string name="btn_import">Importa</string>
 
     <string name="help_help">Questo aiuto</string>
     <string name="help_manual">Manuale online</string>

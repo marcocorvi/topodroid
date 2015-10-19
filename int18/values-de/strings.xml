@@ -483,22 +483,9 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-<!-- THESE ARE NAMES OF PROGRAMS/FILE FORMATS: DO NOT TRANSLATE -->
-    <!-- OK string name="btn_compass">Compass</string -->
-    <!-- OK string name="btn_csurvey">cSurvey</string -->
-    <!-- OK string name="btn_csv">CSV</string -->
-    <!-- OK string name="btn_dxf">DXF</string -->
-    <!-- OK string name="btn_kml">KML</string -->
-    <!-- OK string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- TODO string name="btn_man">Manual</string -->
+    <!-- TODO string name="btn_symbol">Drawing tools</string -->
     <!-- TODO string name="btn_import">Import</string -->
-    <!-- OK string name="btn_man">Manual</string -->
-    <!-- OK string name="btn_symbol">Drawing tools</string -->
-    <!-- OK string name="btn_png">PNG</string -->
-    <!-- OK string name="btn_pockettopo">PocketTopo</string -->
-    <!-- OK string name="btn_survex">Survex</string -->
-    <!-- OK string name="btn_therion">Therion</string -->
-    <!-- OK string name="btn_vtopo">VisualTopo</string -->
-    <!-- OK string name="btn_zip">Zip</string -->
 
 <!-- HELP STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
 <!-- zu + dat

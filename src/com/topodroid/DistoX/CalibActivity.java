@@ -53,6 +53,7 @@ import android.graphics.drawable.BitmapDrawable;
 public class CalibActivity extends Activity
                            implements OnItemClickListener
                            , View.OnClickListener
+                           , IExporter
 {
   private static int izonsno[] = {
                         0, // R.drawable.iz_save_no,
@@ -422,6 +423,12 @@ public class CalibActivity extends Activity
     onMenu = false;
   }
 
+  public void doExport( String type )
+  {
+    int index = TopoDroidConst.calibExportIndex( type );
+    if ( index >= 0 ) doExport( index, true );
+  }
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -432,7 +439,8 @@ public class CalibActivity extends Activity
       int p = 0;
       if ( p++ == pos ) { // EXPORT
         if ( mApp.myCalib != null ) {
-          new CalibExportDialog( this, this ).show();
+          // new CalibExportDialog( this, this ).show();
+          new ExportDialog( this, this, TopoDroidConst.mCalibExportTypes, R.string.title_calib_export ).show();
         }
       } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
         if ( mApp.myCalib != null ) {
@@ -448,7 +456,7 @@ public class CalibActivity extends Activity
     }
   }
 
-  void doExport( int exportType, boolean warn )
+  private void doExport( int exportType, boolean warn )
   {
     if ( mApp.mCID < 0 ) {
       if ( warn ) {

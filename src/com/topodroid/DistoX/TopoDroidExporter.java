@@ -23,6 +23,7 @@ import android.util.Log;
 
 class TopoDroidExporter
 {
+
   // final static int EXPORT_THERION    = 0;
   // final static int EXPORT_COMPASS    = 1;
   // final static int EXPORT_CSURVEY    = 2;

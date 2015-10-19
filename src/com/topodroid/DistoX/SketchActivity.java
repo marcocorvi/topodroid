@@ -81,6 +81,7 @@ public class SketchActivity extends ItemDrawer
                                      , ILabelAdder
                                      , ILister
                                      , IBearingAndClino
+                                     , IExporter
 {
   static final String TAG = "DistoX";
 
@@ -1818,6 +1819,15 @@ public class SketchActivity extends ItemDrawer
     } );
   }
 
+  public void doExport( String type )
+  {
+    int index = TopoDroidConst.sketchExportIndex( type );
+    switch ( index ) {
+      case TopoDroidConst.DISTOX_EXPORT_TH3: doSaveTh3( false ); break;
+      case TopoDroidConst.DISTOX_EXPORT_DXF: doSaveDxf(); break;
+    }
+  }
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -1825,7 +1835,8 @@ public class SketchActivity extends ItemDrawer
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
-        new SketchSaveDialog( this, this ).show();
+        // new SketchSaveDialog( this, this ).show();
+        new ExportDialog( this, this, TopoDroidConst.mSketchExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // PALETTE 
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();

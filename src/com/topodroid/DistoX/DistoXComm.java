@@ -84,6 +84,7 @@ public class DistoXComm
     mBTReceiver = null;
   }
 
+  // called only by connectSocket
   private void setupBTReceiver()
   {
     resetBTReceiver();
@@ -118,11 +119,11 @@ public class DistoXComm
           final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
           final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
           if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED paired" );
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED paired (BONDING --> BOND)" );
           } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired" );
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> NONE)" );
           } else {
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED ");
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED " + prevState + " --> " + state );
           }
 
           // DeviceUtil.bind2Device( data );
@@ -379,7 +380,7 @@ public class DistoXComm
   private void destroySocket( ) // boolean wait_thread )
   {
     if ( mBTSocket == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "destroy socket()" );
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "destroy socket()" );
     // closeProtocol(); // already in closeSocket()
     closeSocket();
     // mBTSocket = null;
@@ -393,7 +394,7 @@ public class DistoXComm
   private void createSocket( String address, int port )
   {
     if ( address == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() addr " + address + " mAddress " + mAddress);
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() addr " + address + " mAddress " + mAddress);
     if ( mProtocol == null || ! address.equals( mAddress ) ) {
       if ( mProtocol != null && ! address.equals( mAddress ) ) {
         disconnectRemoteDevice();
@@ -571,7 +572,7 @@ public class DistoXComm
 
   public void disconnectRemoteDevice( )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "disconnect remote device ");
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "disconnect remote device ");
     cancelRfcommThread();
     closeProtocol();
     destroySocket( );
@@ -846,7 +847,7 @@ public class DistoXComm
 
   public void disconnect()
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "disconnect");
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "disconnect");
     cancelRfcommThread();
     destroySocket( );
   }

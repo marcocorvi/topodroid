@@ -464,15 +464,13 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
+<!--
     <string name="btn_compass">Compass</string>
     <string name="btn_csurvey">cSurvey</string>
     <string name="btn_csv">CSV</string>
     <string name="btn_dxf">DXF</string>
     <string name="btn_kml">KML</string>
     <string name="btn_oziexplorer">OziExplorer</string>
-    <string name="btn_import">Import</string>
-    <string name="btn_man">Manual</string>
-    <string name="btn_symbol">Drawing tools</string>
     <string name="btn_png">PNG</string>
     <string name="btn_pockettopo">PocketTopo</string>
     <string name="btn_survex">Survex</string>
@@ -481,6 +479,10 @@
     <string name="btn_walls">Walls</string>
     <string name="btn_svg">SVG</string>
     <string name="btn_zip">Zip</string>
+-->
+    <string name="btn_man">Manual</string>
+    <string name="btn_symbol">Drawing tools</string>
+    <string name="btn_import">Import</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
@@ -645,7 +647,7 @@
     <string name="title_note">Survey notes</string>
     <string name="title_photo">Photo/Measurements</string>
     <string name="title_photo_comment">Photo comment</string>
-    <string name="title_plot_save">Save sketch as</string>
+    <string name="title_plot_save">Export sketch</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
@@ -653,9 +655,9 @@
     <string name="title_shot_delete">Delete shot ?</string>
     <string name="title_stats">Statistics</string>
     <string name="title_survey">Survey Info</string>
-    <string name="title_survey_export">Export survey as</string>
-    <string name="title_survey_rename">Rename survey as</string>
-    <string name="title_calib_export">Export calibration as</string>
+    <string name="title_survey_export">Export survey</string>
+    <string name="title_survey_rename">Rename survey</string>
+    <string name="title_calib_export">Export calibration</string>
     <!-- string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">SURVEY SETTINGS</string>

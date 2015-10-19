@@ -89,6 +89,7 @@ public class DrawingActivity extends ItemDrawer
                                       , ILabelAdder
                                       , ILister
                                       , IZoomer
+                                      , IExporter
 {
   private static int izons_ok[] = { 
                         R.drawable.iz_edit_ok, // 0
@@ -643,7 +644,7 @@ public class DrawingActivity extends ItemDrawer
     //   }
     // }
 
-  private void computeReferences( int type, float xoff, float yoff, float zoom )
+  private void computeReferences( int type, float xoff, float yoff, float zoom, boolean can_toast )
   {
     if ( type != PlotInfo.PLOT_PLAN && type != PlotInfo.PLOT_EXTENDED ) return;
 
@@ -719,10 +720,9 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    if ( (! mNum.surveyAttached) && TopoDroidSetting.mCheckAttached ) {
+    if ( (! mNum.surveyAttached) && TopoDroidSetting.mCheckAttached && can_toast ) {
       Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
-
   }
     
 
@@ -1284,8 +1284,8 @@ public class DrawingActivity extends ItemDrawer
           finish();
         } else {
           mNum = new DistoXNum( mList, start, view, hide );
-          computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom );
-          computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom );
+          computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom, true );
+          computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
         }
       }
 
@@ -1433,7 +1433,7 @@ public class DrawingActivity extends ItemDrawer
       if ( mType == PlotInfo.PLOT_EXTENDED ) {
         mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
         mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
-        computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+        computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         // mDrawingSurface.refresh();
         modified();
@@ -2185,7 +2185,7 @@ public class DrawingActivity extends ItemDrawer
 
       if ( h != 0 ) {
         mNum.setStationHidden( name, h );
-        computeReferences( (int)mType, 0, 0, mZoom );
+        computeReferences( (int)mType, 0, 0, mZoom, true );
       }
     }
     //  mNum.setStationHidden( name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
@@ -2238,7 +2238,7 @@ public class DrawingActivity extends ItemDrawer
 
       if ( h != 0 ) {
         mNum.setStationBarrier( name, h );
-        computeReferences( (int)mType, 0, 0, mZoom );
+        computeReferences( (int)mType, 0, 0, mZoom, true );
       }
     }
    
@@ -2997,7 +2997,7 @@ public class DrawingActivity extends ItemDrawer
 
     // --------------------------------------------------------
 
-    void savePng()
+    private void savePng()
     {
       if ( isSection() ) { 
         doSavePng( mType, mFullName1 ); // FIXME
@@ -3029,12 +3029,12 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    void saveCsx()
+    private void saveCsx()
     {
       mApp.exportSurveyAsCsx( this, mPlot1.start );
     }
 
-    void saveWithExt( String ext )
+    private void saveWithExt( String ext )
     {
       if ( isSection() ) { 
         doSaveWithExt( mType, mFullName1, ext ); // FIXME
@@ -3081,7 +3081,7 @@ public class DrawingActivity extends ItemDrawer
     // }
 
     // called only by PlotSaveDialog: save as th2 even if there are missing symbols
-    void saveTh2()
+    private void saveTh2()
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
@@ -3115,12 +3115,12 @@ public class DrawingActivity extends ItemDrawer
     mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
-      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
+      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor, true );
+      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor, true );
       resetReference( mPlot1 );
     } else if ( mType == (int)PlotInfo.PLOT_EXTENDED ) {
-      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor );
-      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor );
+      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor, true );
+      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor, true );
       resetReference( mPlot2 );
     }
   }
@@ -3150,7 +3150,7 @@ public class DrawingActivity extends ItemDrawer
     if ( compute ) {
       mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
-      computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor );
+      computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
     }
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       resetReference( mPlot1 );
@@ -3224,6 +3224,18 @@ public class DrawingActivity extends ItemDrawer
     onMenu = false;
   }
 
+  public void doExport( String type )
+  {
+    int index = TopoDroidConst.plotExportIndex( type );
+    switch ( index ) {
+      case TopoDroidConst.DISTOX_EXPORT_TH2: saveTh2(); break;
+      case TopoDroidConst.DISTOX_EXPORT_CSX: saveCsx(); break;
+      case TopoDroidConst.DISTOX_EXPORT_PNG: savePng(); break;
+      case TopoDroidConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break;
+      case TopoDroidConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
+    }
+  }
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -3231,7 +3243,8 @@ public class DrawingActivity extends ItemDrawer
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
-        new PlotSaveDialog( this, this ).show();
+        // new PlotSaveDialog( this, this ).show();
+        new ExportDialog( this, this, TopoDroidConst.mPlotExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
           new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start ).show();

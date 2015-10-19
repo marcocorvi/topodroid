@@ -260,7 +260,7 @@ class TopoDroidSetting
 
   static boolean mCheckAttached = false;    // whether to check is there are shots non-attached
 
-  static int mExportShotsFormat = 0; // TopoDroidExport.EXPORT_THERION
+  static int mExportShotsFormat = 5; // TopoDroidExport.EXPORT_THERION
 
   static final String SURVEY_STATION = "1"; 
   static int     mSurveyStations = 1; // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay

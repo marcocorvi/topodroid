@@ -61,7 +61,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 
 public class SurveyActivity extends Activity
-                            implements OnItemClickListener
+                            implements IExporter
+                            , OnItemClickListener
                             , View.OnClickListener
 {
   private static int izons[] = { 
@@ -365,7 +366,7 @@ public class SurveyActivity extends Activity
     super.onStop();
   }
 
-  void doArchive()
+  private void doArchive()
   {
     while ( ! mApp.mEnableZip ) Thread.yield();
 
@@ -481,8 +482,18 @@ public class SurveyActivity extends Activity
     if ( team == null ) team = "";
     mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, true );
   }
+
+  public void doExport( String type )
+  {
+    int index = TopoDroidConst.surveyExportIndex( type );
+    if ( index == TopoDroidConst.DISTOX_EXPORT_ZIP ) {
+      doArchive();
+    } else if ( index >= 0 ) {
+      doExport( index, true );
+    }
+  }
   
-  void doExport( int exportType, boolean warn )
+  private void doExport( int exportType, boolean warn )
   {
     if ( mApp.mSID < 0 ) {
       if ( warn ) {
@@ -663,7 +674,8 @@ public class SurveyActivity extends Activity
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
-        new SurveyExportDialog( this, this ).show();
+        // new SurveyExportDialog( this, this ).show();
+        new ExportDialog( this, this, TopoDroidConst.mSurveyExportTypes, R.string.title_survey_export ).show();
       } else if ( p++ == pos ) { // RENAME
         new SurveyRenameDialog( this, this ).show();
       } else if ( p++ == pos ) { // DELETE

@@ -445,18 +445,9 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_compass">Rumbo</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
     <string name="btn_man">Manual</string>
     <string name="btn_symbol">Símbolos</string>
-    <string name="btn_png">PNG</string>
-    <string name="btn_pockettopo">PocketTopo</string>
-    <string name="btn_survex">Survex</string>
-    <string name="btn_therion">Therion</string>
-    <string name="btn_vtopo">VisualTopo</string>
-    <string name="btn_zip">Zip</string>
+    <!-- TODO string name="btn_import">Import</string -->
 
     <string name="help_help">Ayuda</string>
     <string name="help_manual">Manual online</string>

@@ -84,15 +84,13 @@ public class DeviceList extends Activity
     CharSequence item = ((TextView) view).getText();
     String value = item.toString();
     // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "onItemClick " + mDistoX.StatusName() + " value: " + value + " pos " + position );
-    // Log.v( TopoDroidApp.TAG, "onItemClick value: " + value + " pos " + position );
     if ( value.startsWith( "DistoX", 0 ) || value.startsWith( "A3", 0 ) || value.startsWith( "X310", 0 ) ) 
     {
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String address = buf.substring(k+1);
       // Toast.makeText( mApp.getApplicationContext(), address, Toast.LENGTH_SHORT).show();
-      // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "onItemClick Address " + address );
-      // Log.v( TopoDroidApp.TAG, "onItemClick Address " + address );
+      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "DeviceList item click Address " + address );
       Intent intent = new Intent();
       intent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, address );
       setResult( RESULT_OK, intent );
@@ -130,7 +128,7 @@ public class DeviceList extends Activity
     TopoDroidLog.Log( TopoDroidLog.LOG_BT, "scanBTDevices" );
     // Log.v( "DistoX", "scanBTDevices" );
     mArrayAdapter.clear();
-    resetReceiver();
+    resetReceiver(); // FIXME should not be necessary
     mBTReceiver = new BroadcastReceiver() 
     {
       @Override
@@ -144,9 +142,10 @@ public class DeviceList extends Activity
         } else if ( BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals( action ) ) {
           TopoDroidLog.Log(  TopoDroidLog.LOG_BT, "onReceive BT DISCOVERY FINISHED, found " + mArrayAdapter.getCount() );
           setTitle( R.string.title_device );
+          resetReceiver();
           if ( mArrayAdapter.getCount() < 1 ) { 
             Toast.makeText( mApp.getApplicationContext(), R.string.no_device_found, Toast.LENGTH_SHORT).show();
-            finish();
+            finish(); // no need to keep list of scanned distox open
           }
         } else if ( BluetoothDevice.ACTION_FOUND.equals( action ) ) {
           BluetoothDevice device = data.getParcelableExtra( BluetoothDevice.EXTRA_DEVICE );
@@ -161,33 +160,34 @@ public class DeviceList extends Activity
               mArrayAdapter.add( Device.typeString[ Device.stringToType(model) ] + " " + name + " " + device_addr );
             }
           }
-        } else if ( BluetoothDevice.ACTION_ACL_CONNECTED.equals( action ) ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_CONNECTED");
-        } else if ( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECT_REQUESTED");
-        } else if ( BluetoothDevice.ACTION_ACL_DISCONNECTED.equals( action ) ) {
-          // Bundle extra = data.getExtras();
-          // String device = extra.getString( BluetoothDevice.EXTRA_DEVICE ).toString();
-          // Log.v("DistoX", "DeviceList ACL_DISCONNECTED from " + device );
-          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECTED");
+        // } else if ( BluetoothDevice.ACTION_ACL_CONNECTED.equals( action ) ) {
+        //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_CONNECTED");
+        // } else if ( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
+        //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECT_REQUESTED");
+        // } else if ( BluetoothDevice.ACTION_ACL_DISCONNECTED.equals( action ) ) {
+        //   // Bundle extra = data.getExtras();
+        //   // String device = extra.getString( BluetoothDevice.EXTRA_DEVICE ).toString();
+        //   // Log.v("DistoX", "DeviceList ACL_DISCONNECTED from " + device );
+        //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECTED");
         }
       }
     };
     IntentFilter foundFilter = new IntentFilter( BluetoothDevice.ACTION_FOUND );
     IntentFilter startFilter = new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_STARTED );
     IntentFilter finishFilter = new IntentFilter( BluetoothAdapter.ACTION_DISCOVERY_FINISHED );
-    IntentFilter connectedFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_CONNECTED );
-    IntentFilter disconnectRequestFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED );
-    IntentFilter disconnectedFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECTED );
+    // IntentFilter connectedFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_CONNECTED );
+    // IntentFilter disconnectRequestFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED );
+    // IntentFilter disconnectedFilter = new IntentFilter( BluetoothDevice.ACTION_ACL_DISCONNECTED );
+
     // IntentFilter uuidFilter  = new IntentFilter( myUUIDaction );
     // IntentFilter bondFilter  = new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED );
 
     registerReceiver( mBTReceiver, foundFilter );
     registerReceiver( mBTReceiver, startFilter );
     registerReceiver( mBTReceiver, finishFilter );
-    registerReceiver( mBTReceiver, connectedFilter );
-    registerReceiver( mBTReceiver, disconnectRequestFilter );
-    registerReceiver( mBTReceiver, disconnectedFilter );
+    // registerReceiver( mBTReceiver, connectedFilter );
+    // registerReceiver( mBTReceiver, disconnectRequestFilter );
+    // registerReceiver( mBTReceiver, disconnectedFilter );
     // registerReceiver( mBTReceiver, uuidFilter );
     // registerReceiver( mBTReceiver, bondFilter );
 
@@ -205,7 +205,7 @@ public class DeviceList extends Activity
   private void resetReceiver()
   {
     if ( mBTReceiver != null ) {
-      // TopoDroidLog.Log(  TopoDroidLog.LOG_BT, "resetReceiver");
+      TopoDroidLog.Log(  TopoDroidLog.LOG_BT, "resetReceiver");
       unregisterReceiver( mBTReceiver );
       mBTReceiver = null;
     }

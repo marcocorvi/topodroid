@@ -55,7 +55,7 @@
        android:entryValues="@array/sockTypeValue"
      />
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_COMM_RETRY"
        android:title="@string/pref_comm_retry_title"
        android:summary="@string/pref_comm_retry_summary"
@@ -63,7 +63,7 @@
        android:dialogMessage="@string/pref_comm_retry_message"
        android:inputType="number"
        android:defaultValue="1"
-     />
+     / -->
 
      <CheckBoxPreference
        android:key="DISTOX_Z6_WORKAROUND"

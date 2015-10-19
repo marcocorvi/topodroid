@@ -132,6 +132,7 @@ class TopoDroidLog
         File log_file = TopoDroidPath.getLogFile();
         FileWriter fw = new FileWriter( log_file );
         mLog = new PrintWriter( fw, true ); // true = autoflush
+        mLog.format( "TopoDroid version %s\n", TopoDroidApp.VERSION );
       } catch ( IOException e ) {
         Log.e("DistoX", "cannot create log file" );
       }
