@@ -73,8 +73,7 @@
     <string name="device_info">información del dispositivo</string>
     <string name="device_model_set">Â¿Desea cambiar de dispositivo?</string>
     <string name="device_none">DistoX no seleccionado</string>
-    <string name="device_pairing">Emparejado. Compruebe notificaciones</string>
-    <string name="device_paired">El dispositivo está emparejado</string>
+    <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
     <string name="device_code">DistoX código %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -119,7 +118,7 @@
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
     <string name="head_tail_store_failed">Error al almacenar en la memoria DistoX</string>
-    <string name="pairing_failed">Falló en el emparejamiento</string>
+    <!-- UNUSED string name="pairing_failed">Falló en el emparejamiento</string -->
 
     <string name="illegal_data_value">Valores de datos no válidos</string>
     <string name="label_title">Texto</string>
@@ -836,7 +835,8 @@
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
 \n\nVisite http://sites.google.com/site/speleoapps para las aplicaciones y documentos complementarios. 
-\nEnvíe sus comentarios, informes de errores, peticiones de características, a marco.corvi@gmail.com. Traducción al español manuguerreros@gmail.com
+\nEnvíe sus comentarios, informes de errores, peticiones de características, a marco.corvi@gmail.com.
+\nTraducción al español manuguerreros@gmail.com
 \n
     </string>
 

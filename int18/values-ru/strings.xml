@@ -79,8 +79,7 @@
     <string name="device_info">Информация об устройстве</string>
     <string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string>
     <string name="device_none">DistoX не выбран</string>
-    <string name="device_pairing">Соединение: проверьте уведомления</string>
-    <string name="device_paired">Прибор сопряжен</string>
+    <!-- UNUSED string name="device_paired">Прибор сопряжен</string -->
     <string name="device_reset">Сброс памяти DistoX</string>
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Прошивка  %1$d.%2$d</string>
@@ -128,7 +127,7 @@
     <string name="head_tail">Память: </string>
     <string name="head_tail_failed">Ошибка чтения индекса памяти DistoX</string>
     <string name="head_tail_store_failed">Не удалось сохранить индекс памяти DistoX</string>
-    <string name="pairing_failed">Не удалось соединить устройства</string>
+    <!-- UNUSED string name="pairing_failed">Не удалось соединить устройства</string -->
     <string name="illegal_data_value">Недопустимое значение</string>
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>

@@ -77,8 +77,7 @@
     <string name="device_info">Информация за устройството</string>
     <string name="device_model_set">Наистина ли искате да промените модела на устройството?</string>
     <string name="device_none">Не е избрано DistoX устройство</string>
-    <string name="device_pairing">Свързване: проверете за Bluetooth съобщения</string>
-    <string name="device_paired">Устройството е свързано</string>
+    <!-- UNUSED string name="device_paired">Устройството е свързано</string -->
     <string name="device_reset">Изчистване на DistoX паметта</string>
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Фърмуер  %1$d.%2$d</string>
@@ -126,7 +125,8 @@
     <string name="head_tail">Памет: </string>
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
     <string name="head_tail_store_failed">Неуспешен запис на индекс от DistoX паметта</string>
-    <string name="pairing_failed">Неуспешно сдвояване</string>
+    <!-- UNUSED string name="pairing_failed">Неуспешно сдвояване</string -->
+
     <string name="illegal_data_value">Невалидни данни</string>
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>

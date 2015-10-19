@@ -73,8 +73,7 @@
     <string name="device_info">Dati dispositivo</string>
     <string name="device_model_set">Vuoi davvero cambiare il modello del dispositivo</string>
     <string name="device_none">Nessun DistoX selezionato</string>
-    <string name="device_pairing">Pairing: controlla le notifiche</string>
-    <!-- TODO string name="device_paired">Device is paired</string -->
+    <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Resettare la memoria del DistoX</string>
     <string name="device_code">Codice DistoX %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
@@ -121,7 +120,8 @@
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Lettura memoria DistoX fallita</string>
     <string name="head_tail_store_failed">Memorizzazione memoria DistoX fallita</string>
-    <!-- TODO string name="pairing_failed">Pairing failed</string -->
+    <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
+
     <string name="illegal_data_value">Dati illegali</string>
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>

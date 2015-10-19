@@ -332,7 +332,7 @@ public class DeviceActivity extends Activity
       //   } else {
       //     (new CalibListDialog( this, this, mApp )).show();
       //   }
-      } else if ( /* TopoDroidSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
+      } else if ( TopoDroidSetting.mLevelOverNormal && /* TopoDroidSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
         if ( TopoDroidSetting.mCommType != 0 ) {
           Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
         } else {
@@ -394,10 +394,10 @@ public class DeviceActivity extends Activity
     BluetoothDevice device = mApp.mBTAdapter.getRemoteDevice( mDevice.mAddress );
     switch ( DeviceUtil.pairDevice( device ) ) {
       case -1: // failure
-        Toast.makeText( this, R.string.pairing_failed, Toast.LENGTH_SHORT).show(); // TODO
+        // Toast.makeText( this, R.string.pairing_failed, Toast.LENGTH_SHORT).show(); // TODO
         break;
       case 2: // already paired
-        Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
+        // Toast.makeText( this, R.string.device_paired, Toast.LENGTH_SHORT).show();
         break;
       default: // 0: null device
                // 1: paired ok
@@ -679,11 +679,15 @@ public class DeviceActivity extends Activity
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "onActivityResult REQUEST_DEVICE: null address");
           } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true );
-            Toast.makeText(this, R.string.device_pairing, Toast.LENGTH_LONG).show();
             mApp.setDevice( address );
             // try to get the system ask for the PIN
-            // mApp.connectRemoteDevice( address, null ); // null ILister
-            // mApp.disconnectRemoteDevice( true );
+            BluetoothDevice BTDevice;
+            BTDevice = mApp.mBTAdapter.getRemoteDevice( address );
+            if ( ! DeviceUtil.isPaired( BTDevice ) ) {
+              // DeviceUtil.pairDevice( BTDevice );
+              DeviceUtil.bindDevice( BTDevice );
+            }
+
             mDevice = mApp.mDevice;
             // mAddress = address;
             setState();

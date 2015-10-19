@@ -73,8 +73,7 @@
     <string name="device_info">Informations sur le périphérique</string>
     <string name="device_model_set">Etes vous sur de vouloir changer le modèle du périphérique ?</string>
     <string name="device_none">Aucun DistoX sélectionné</string>
-    <string name="device_pairing">Appairage, vérifier les notifications</string>
-    <!-- TODO string name="device_paired">Device is paired</string -->
+    <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Vider mémoire DistoX</string>
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -121,7 +120,7 @@
     <string name="head_tail">Mémoire : </string>
     <string name="head_tail_failed">Echec de lecture de la mémoire du DistoX</string>
     <string name="head_tail_store_failed">Echec de l\'enregistrement des index de mémoire du DistoX</string>
-    <!-- TODO string name="pairing_failed">Pairing failed</string -->
+    <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
     <string name="illegal_data_value">Valeur de donnée incorrecte</string>
     <string name="label_title">ETIQUETTE</string>

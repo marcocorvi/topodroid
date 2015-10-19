@@ -19,7 +19,7 @@
   <string-array name="extend_name">
      <item>Links</item>
      <item>Vertikal</item>
-     <item>Recht</item>
+     <item>Rechts</item>
      <item>--</item>
   </string-array>
 
@@ -29,8 +29,8 @@
   </string-array>
 
   <string-array name="connMode">
-     <item name="batch">Auf-Anfrage</item>
-     <item name="continuous">Durchgehend</item>
+     <item name="batch">Auf Anfrage</item>
+     <item name="continuous">Fortlaufend</item>
   </string-array>
 
   <string-array name="altitudeType">
@@ -39,17 +39,17 @@
   </string-array>
 
   <string-array name="sockType">
-     <item name="default">Default</item>
-     <item name="Insecure">Insecure</item>
+     <item name="default">Voreinstellung</item>
+     <item name="Insecure">Unsicher</item>
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">No</item>
-     <item name="for">Splays, forward leg</item>
-     <item name="back">Splays, backward leg</item>
-     <item name="for2">Forward leg, splays</item>
-     <item name="back2">Backward leg, splays</item>
-     <item name="anomaly">Backsight</item> <!-- TODO -->
+     <item name="no">Nein</item>
+     <item name="for">Splays, Vorwärtsmessung</item>
+     <item name="back">Splays, Rückwärtsmessung</item>
+     <item name="for2">Vorwärtsmessung, splays</item>
+     <item name="back2">Rückwärtsmessung, splays</item>
+     <item name="anomaly">Zurücksicht</item> <!-- TODO -->
   </string-array>
 
   <string-array name="pickerType">
@@ -64,9 +64,9 @@
   </string-array -->
 
   <string-array name="deviceBT">
-     <item name="0">Disabled</item>
-     <item name="1">Check on start</item>
-     <item name="2">Enabled</item>
+     <item name="0">deaktiviert</item>
+     <item name="1">prüfe beim Start</item>
+     <item name="2">aktiviert</item>
   </string-array>
 
   <string-array name="exportType">
@@ -78,21 +78,21 @@
   </string-array>
 
   <string-array name="lineStyle">
-     <item name="none">Fine</item>
+     <item name="none">Fein</item>
      <item name="two">Normal</item>
-     <item name="two">Coarse</item>
+     <item name="two">Grob</item>
      <item name="bezier">Bezier</item>
   </string-array>
 
   <string-array name="groupBy">
      <item name="distance">Winkelabstand</item>
-     <item name="four">Four at a time</item>
-     <item name="only16">Only first 16</item>
+     <item name="four">gleichzeitig 4</item>
+     <item name="only16">Nur die ersten 16</item>
   </string-array>
 
   <string-array name="unitLength">
-     <item name="meters">meters</item>
-     <item name="feet">feet</item>
+     <item name="meters">Meter</item>
+     <item name="feet">Fuß</item>
   </string-array>
 
   <string-array name="unitAngle">
@@ -101,14 +101,14 @@
   </string-array>
 
   <string-array name="unitLocation">
-     <item name="degrees">decimal degrees</item>
-     <item name="ddmmss">degree, minute, seconds</item>
+     <item name="degrees">Dezimal Grad</item>
+     <item name="ddmmss">Grad, Minute, Sekunde</item>
   </string-array>
 
   <string-array name="calibAlgo">
      <item name="auto">auto</item>
      <item name="linear">linear</item>
-     <item name="nonlinear">non-linear</item>
+     <item name="nonlinear">nicht-linear</item>
   </string-array>
 
 </resources>

@@ -77,8 +77,7 @@
     <string name="device_info">Device info</string>
     <string name="device_model_set">Do you really want to change the model of the device</string>
     <string name="device_none">No DistoX selected</string>
-    <string name="device_pairing">Pairing: check notifications</string>
-    <string name="device_paired">Device is paired</string>
+    <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset DistoX memory</string>
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -126,7 +125,7 @@
     <string name="head_tail">Memory: </string>
     <string name="head_tail_failed">Failed to read DistoX memory index</string>
     <string name="head_tail_store_failed">Failed to store DistoX memory index</string>
-    <string name="pairing_failed">Pairing failed</string>
+    <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
     <string name="illegal_data_value">Illegal data value</string>
     <string name="label_title">LABEL</string>
