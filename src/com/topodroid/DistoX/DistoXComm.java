@@ -402,11 +402,11 @@ public class DistoXComm
       mBTDevice = mApp.mBTAdapter.getRemoteDevice( address );
  
       // FIXME PAIRING
-      // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
-      // if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
-      //   int ret = DeviceUtil.pairDevice( mBTDevice );
-      //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "pairing device " + ret );
-      // }
+      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
+      if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
+        int ret = DeviceUtil.pairDevice( mBTDevice );
+        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "pairing device " + ret );
+      }
 
       if ( mBTSocket != null ) {
         // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() BTSocket not null ... closing");
