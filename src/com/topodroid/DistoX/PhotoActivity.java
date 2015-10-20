@@ -96,13 +96,18 @@ public class PhotoActivity extends Activity
   }
 
   @Override
-  public void updateBlockList( DistoXDBlock blk )
-  {
-  }
+  public void updateBlockList( DistoXDBlock blk ) { }
   
-  public void setRefAzimuth( float azimuth, long fixed_extend )
-  {
-  }
+  @Override
+  public void updateBlockList( long blk_id ) { }
+  
+  @Override
+  public void setConnectionStatus( int status ) { }
+
+  @Override
+  public void setRefAzimuth( float azimuth, long fixed_extend ) { }
+
+  // ----------------------------------------------------------------------
 
   public void updateDisplay( )
   {
@@ -117,6 +122,8 @@ public class PhotoActivity extends Activity
     //   Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
     }
   }
+
+  // -------------------------------------------------------------------
 
   private void updatePhotoList( List< PhotoInfo > list )
   {
@@ -243,11 +250,6 @@ public class PhotoActivity extends Activity
     } else {
       Toast.makeText( this, R.string.no_db, Toast.LENGTH_SHORT ).show();
     }
-  }
-
-  public void setConnectionStatus( int status )
-  {
-    /* nothing */
   }
 
   // public void notifyDisconnected()

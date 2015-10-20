@@ -83,13 +83,6 @@ public class SensorListActivity extends Activity
   long   mSensorId;
 
   // -------------------------------------------------------------------
-/*
-  @Override
-  public void refreshDisplay( int nr )
-  {
-    updateDisplay();
-  }
-*/
 
   public void updateDisplay( )
   {

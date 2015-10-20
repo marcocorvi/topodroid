@@ -32,9 +32,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
+
+// import android.os.Parcelable;
 import android.os.ParcelUuid;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -169,6 +170,7 @@ public class DistoXComm
     private DistoXProtocol mProto;
     private int toRead; // number of packet to read
     private ILister mLister;
+    // private Handler mLister; // FIXME LISTER
 
     void cancelWork()
     {
@@ -180,7 +182,7 @@ public class DistoXComm
      * @param protocol    communication protocol
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      */
-    public RfcommThread( DistoXProtocol protocol, int to_read, ILister lister )
+    public RfcommThread( DistoXProtocol protocol, int to_read, /* Handler */ ILister lister ) // FIXME LISTER
     {
       nReadPackets = 0; // reset nr of read packets
       toRead = to_read;
@@ -226,6 +228,13 @@ public class DistoXComm
           TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           mLastShotId = mApp.mData.insertShot( mApp.mSID, -1L, d, b, c, r, extend, 0, true );
+          // if ( mLister != null ) { // FIXME LISTER sendMessage with mLastShotId only
+          //   Message msg = mLister.obtainMessage( ListerHnadler.LISTER_UPDATE );
+          //   Bundle bundle = new Bundle();
+          //   bundle.putString( ListerHandler.LISTER_DATA_BLOCK_ID, mLastShotId );
+          //   msg.setData(bundle);
+          //   mLister.sendMessage(msg);
+          // }
           if ( mLister != null ) {
             DistoXDBlock blk = new DistoXDBlock( );
             blk.setId( mLastShotId, mApp.mSID );
@@ -554,7 +563,7 @@ public class DistoXComm
     return mBTConnected;
   }
 
-  private boolean startRfcommThread( int to_read, ILister lister )
+  private boolean startRfcommThread( int to_read, /* Handler */ ILister lister )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
     if ( mBTSocket != null ) {
@@ -623,7 +632,7 @@ public class DistoXComm
   /**
    * nothing to read (only write) --> no AsyncTask
    */
-  void setX310Laser( String address, int what, ILister lister )
+  void setX310Laser( String address, int what, /* Handler */ ILister lister )
   {
     if ( connectSocket( address ) ) {
       switch ( what ) {
@@ -852,7 +861,7 @@ public class DistoXComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  public boolean connectDevice( String address, ILister lister ) 
+  public boolean connectDevice( String address, /* Handler */ ILister lister ) // FIXME LISTER
   {
     if ( mRfcommThread != null ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "DistoXComm connect: already connected");
@@ -875,7 +884,7 @@ public class DistoXComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  public int downloadData( String address, ILister lister )
+  public int downloadData( String address, /* Handler */ ILister  lister ) // FIXME LISTER
   {
     if ( ! checkRfcommThreadNull( "download data: address " + address ) ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: RFcomm thread not null");

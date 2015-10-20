@@ -42,11 +42,16 @@ public class ListerSet implements ILister
     mLister.remove( lister );
   }
 
+  public void updateBlockList( long blk_id ) 
+  {
+    for ( ILister lister : mLister ) lister.updateBlockList( blk_id );
+  }
+
   public void updateBlockList( DistoXDBlock blk ) 
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister updateBlock " + size() );
     for ( ILister lister : mLister ) lister.updateBlockList( blk );
   }
+
   public void setConnectionStatus( int status )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister set conn. status " + size() + " " + status );

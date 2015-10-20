@@ -44,12 +44,12 @@ public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
     return nRead;
   }
 
-  @Override
-  protected void onProgressUpdate( Integer... values)
-  {
-    super.onProgressUpdate( values );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "onProgressUpdate " + values );
-  }
+  // @Override
+  // protected void onProgressUpdate( Integer... values)
+  // {
+  //   super.onProgressUpdate( values );
+  //   // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "onProgressUpdate " + values );
+  // }
 
   @Override
   protected void onPostExecute( Integer res )

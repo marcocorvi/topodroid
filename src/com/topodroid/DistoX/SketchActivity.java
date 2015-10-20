@@ -1970,15 +1970,21 @@ public class SketchActivity extends ItemDrawer
   }
   // ----------------- ILister interface --------------------------------------------
 
-  public void setRefAzimuth( float azimuth, long fixed_extend )
-  {
-  }
+  @Override
+  public void setRefAzimuth( float azimuth, long fixed_extend ) { }
   
   // forward to the ShotActivity
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
     mApp.mShotActivity.updateBlockList( blk );
+    // FIXME FIXME updateDisplay( true );
+  }
+
+  @Override
+  public void updateBlockList( long blk_id )
+  {
+    mApp.mShotActivity.updateBlockList( blk_id );
     // FIXME FIXME updateDisplay( true );
   }
 
@@ -1998,6 +2004,7 @@ public class SketchActivity extends ItemDrawer
     }
   }
    
+  @Override
   public void setConnectionStatus( int status )
   {
     /* TODO */

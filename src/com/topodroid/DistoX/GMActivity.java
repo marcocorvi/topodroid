@@ -286,6 +286,7 @@ public class GMActivity extends Activity
     }
   }
 
+  // -----------------------------------------------------------
   // ILister interface
   @Override
   public void refreshDisplay( int nr, boolean toast )
@@ -306,15 +307,22 @@ public class GMActivity extends Activity
     }
   }
     
-  // ILister interface
   @Override
-  public void updateBlockList( DistoXDBlock blk )
+  public void updateBlockList( DistoXDBlock blk ) { }
+
+  @Override
+  public void updateBlockList( long blk_id ) { }
+
+  @Override
+  public void setRefAzimuth( float azimuth, long fixed_extend ) { }
+
+  @Override
+  public void setConnectionStatus( int status )
   {
+    /* nothing : GM data are downloaded only on-demand */
   }
 
-  public void setRefAzimuth( float azimuth, long fixed_extend )
-  {
-  }
+  // --------------------------------------------------------------
 
   public void updateDisplay( )
   {
@@ -798,11 +806,6 @@ public class GMActivity extends Activity
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
-  }
-
-  public void setConnectionStatus( int status )
-  {
-    /* nothing : GM data are downloaded only on-demand */
   }
 
   // public void notifyDisconnected()

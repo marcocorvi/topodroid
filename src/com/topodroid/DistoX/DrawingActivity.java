@@ -3164,10 +3164,16 @@ public class DrawingActivity extends ItemDrawer
   public void updateBlockList( DistoXDBlock blk )
   {
     mApp.mShotActivity.updateBlockList( blk );
-    // mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload );
-    // recomputing the whole reference is inefficient: an incremental data reduction would be more efficient
     updateDisplay( true );
   }
+
+  @Override
+  public void updateBlockList( long blk_id )
+  {
+    mApp.mShotActivity.updateBlockList( blk_id );
+    updateDisplay( true );
+  }
+
 
 
   @Override
@@ -3329,10 +3335,8 @@ public class DrawingActivity extends ItemDrawer
   public void setConnectionStatus( int status )
   { 
     if ( mApp.mDevice == null ) {
-      // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
       mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMadd );
     } else {
-      // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
       switch ( status ) {
         case 1:
           mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );

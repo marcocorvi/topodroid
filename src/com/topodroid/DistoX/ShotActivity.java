@@ -314,6 +314,15 @@ public class ShotActivity extends Activity
   // add a block to the adapter (ILister interface)
   // called by the RFcommThread after receiving a data packet
   @Override
+  public void updateBlockList( long blk_id )
+  {
+    DistoXDBlock blk = mApp.mData.selectShot( blk_id, mApp.mSID );
+    if ( blk != null ) {
+      updateBlockList( blk );
+    }
+  }
+
+  @Override
   public void updateBlockList( DistoXDBlock blk )
   {
     // FIXME MULTIPLE LIST
