@@ -13,10 +13,8 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 
 import java.util.List;
-import java.util.Date;
 import java.util.Calendar;
 import java.util.Locale;
-import java.text.SimpleDateFormat;
 
 import android.util.FloatMath;
 import android.util.Log;
@@ -37,12 +35,6 @@ class TopoDroidExporter
   // final static int EXPORT_SVG        = 13;
   // final static int EXPORT_KML        = 14;
   // final static int EXPORT_ZIP        = 20;
-
-  static String getDateString( String format )
-  {
-    SimpleDateFormat sdf = new SimpleDateFormat( format, Locale.US );
-    return sdf.format( new Date() );
-  }
 
   // =======================================================================
   // CSURVEY EXPORT cSurvey
@@ -98,7 +90,7 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      // pw.format("# %s created by TopoDroid v %s\n\n", getDateString("yyyy-MM-dd"), TopoDroidApp.VERSION );
+      // pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy-MM-dd"), TopoDroidApp.VERSION );
 
       pw.format("<csurvey version=\"1.04\" id=\"\">\n");
 
@@ -400,7 +392,7 @@ class TopoDroidExporter
       pw.format("<Document>\n");
 
       pw.format("<name>%s</name>\n", info.name );
-      pw.format("<description>%s - TopoDroid v %s</description>\n",  getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("<description>%s - TopoDroid v %s</description>\n",  TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
       pw.format("<Style id=\"centerline\">\n");
       pw.format("  <LineStyle>\n");
@@ -528,7 +520,7 @@ class TopoDroidExporter
       // track-type: 0=normal, 10=closed_polygon, 20=alarm_zone
       // fill-style: 0=solid, 1=clear, 2=Bdiag, 3=Fdiag, 4=cross, 5=diag_cross, 6=horiz, 7=vert
       //
-      pw.format("0,2,1677690,%s - TopoDroid v %s,0,0,0,8421376,-1,0\r\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("0,2,1677690,%s - TopoDroid v %s,0,0,0,8421376,-1,0\r\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
       pw.format("%d\r\n", stations.size() );
       
 
@@ -539,7 +531,7 @@ class TopoDroidExporter
       long diff = System.currentTimeMillis() - cal.getTimeInMillis();
       long days = 35065 + diff / 86400000L; // 24*60*60*1000 // FIXME +33 ?
 
-      // String date = getDateString( "dd-MMM-yy" );
+      // String date = TopoDroidUtil.getDateString( "dd-MMM-yy" );
 
       NumStation last = null;
       for ( NumShot sh : shots ) {
@@ -648,7 +640,7 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("# %s created by TopoDroid v %s\n\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
       pw.format("survey %s -title \"%s\"\n", info.name, info.name );
       if ( info.comment != null && info.comment.length() > 0 ) {
         pw.format("    # %s \n", info.comment );
@@ -890,7 +882,7 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("; %s created by TopoDroid v %s\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("; %s created by TopoDroid v %s\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
       pw.format("; %s", info.name );
       if ( info.comment != null && info.comment.length() > 0 ) {
         pw.format(" - %s", info.comment );
@@ -1032,7 +1024,7 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("# %s created by TopoDroid v %s\n\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
       pw.format("# %s\n", info.name );
       // if ( fixed.size() > 0 ) {
       //   pw.format("  ; fix stations as lomg-lat alt\n");
@@ -1170,7 +1162,7 @@ class TopoDroidExporter
   //     FileWriter fw = new FileWriter( filename );
   //     PrintWriter pw = new PrintWriter( fw );
   //     pw.format("tlx2\n");
-  //     pw.format("# %s created by TopoDroid v %s\n\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+  //     pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
   //     pw.format("# date %s \n", mData.getSurveyDate( sid ) );
   //     pw.format("# %s \n", mData.getSurveyComment( sid ) );
   //     int n = 0;
@@ -1391,7 +1383,7 @@ class TopoDroidExporter
       PrintWriter pw = new PrintWriter( fw );
   
       // FIXME 
-      // pw.format("# %s created by TopoDroid v %s\n\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      // pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
       pw.format("%s\r\n", info.name ); // export as single survey
       pw.format("SURVEY NAME: %s\r\n", info.name );
@@ -1511,7 +1503,7 @@ class TopoDroidExporter
       PrintWriter pw = new PrintWriter( fw );
   
       pw.format("; %s\n", info.name );
-      pw.format("; created by TopoDroid v %s - %s \n", TopoDroidApp.VERSION, getDateString("yyyy.MM.dd") );
+      pw.format("; created by TopoDroid v %s - %s \n", TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd") );
       pw.format(Locale.ENGLISH, "#Units Decl=%.1f\n", info.declination );
 
       String date = info.date;
@@ -1724,7 +1716,7 @@ class TopoDroidExporter
       PrintWriter out = new PrintWriter( fw );
       // TODO
       out.printf(Locale.ENGLISH, "999\nDXF created by TopoDroid v %s - %s (declination %.4f)\n",
-        TopoDroidApp.VERSION, getDateString("yyyy.MM.dd"), info.declination );
+        TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd"), info.declination );
       out.printf("0\nSECTION\n2\nHEADER\n");
       out.printf("9\n$ACADVER\n1\nAC1006\n");
       out.printf("9\n$INSBASE\n");
@@ -1880,7 +1872,7 @@ class TopoDroidExporter
       PrintWriter pw = new PrintWriter( fw );
   
       // FIXME 
-      // pw.format("; %s created by TopoDroid v %s\n\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      // pw.format("; %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
       pw.format("Version 5.02\r\n\r\n");
       if ( fixed.size() > 0 ) {
@@ -1994,7 +1986,7 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("# %s created by TopoDroid v %s\n\n", getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
       pw.format("# %s\n", ci.name );
       pw.format("# %s\n", ci.date );

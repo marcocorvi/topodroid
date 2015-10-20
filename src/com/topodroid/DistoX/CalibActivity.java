@@ -12,10 +12,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.Date;
-import java.util.Locale;
-import java.text.SimpleDateFormat;
-
 import android.app.Activity;
 // import android.app.Dialog;
 import android.content.DialogInterface;
@@ -29,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.view.View;
+import android.app.DatePickerDialog;
 
 import android.app.Application;
 
@@ -92,9 +89,11 @@ public class CalibActivity extends Activity
                       };
 
   private EditText mEditName;
-  private EditText mEditDate;
+  private Button mEditDate;
   private EditText mEditDevice;
   private EditText mEditComment;
+
+  MyDateSetListener mDateListener;
 
   private RadioButton mCBAlgoAuto;
   private RadioButton mCBAlgoLinear;
@@ -145,9 +144,12 @@ public class CalibActivity extends Activity
 
     setContentView(R.layout.calib_activity);
     mEditName    = (EditText) findViewById(R.id.calib_name);
-    mEditDate    = (EditText) findViewById(R.id.calib_date);
+    mEditDate    = (Button) findViewById(R.id.calib_date);
     mEditDevice  = (EditText) findViewById(R.id.calib_device);
     mEditComment = (EditText) findViewById(R.id.calib_comment);
+
+    mDateListener = new MyDateSetListener( mEditDate );
+    mEditDate.setOnClickListener( this );
 
     mCBAlgoAuto      = (RadioButton) findViewById( R.id.calib_algo_auto );
     mCBAlgoLinear    = (RadioButton) findViewById( R.id.calib_algo_linear );
@@ -205,8 +207,7 @@ public class CalibActivity extends Activity
       }
     } else {
       mEditName.setHint( R.string.name );
-      SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
-      mEditDate.setText( sdf.format( new Date() ) );
+      mEditDate.setText( TopoDroidUtil.currentDate() );
       mEditDevice.setText( mApp.distoAddress() );
       mEditComment.setHint( R.string.description );
       mCBAlgoAuto.setChecked( true );
@@ -246,6 +247,13 @@ public class CalibActivity extends Activity
         mMenu.setVisibility( View.VISIBLE );
         onMenu = true;
       }
+      return;
+    } else if ( b == mEditDate ) {
+      String date = mEditDate.getText().toString();
+      int y = TopoDroidUtil.dateParseYear( date );
+      int m = TopoDroidUtil.dateParseMonth( date );
+      int d = TopoDroidUtil.dateParseDay( date );
+      new DatePickerDialog( this, mDateListener, y, m, d ).show();
       return;
     }
 

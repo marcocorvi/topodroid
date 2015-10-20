@@ -8,24 +8,8 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120520 created from DistoX.java
- * 20120524 fixed station management
- * 20120524 changing to dialog / menu buttons
- * 20120531 implementing survey delete
- * 20120603 fixed-info update/delete methods
- * 20120607 added 3D button / rearranged buttons layout
- * 20120610 archive (zip) button
- * 20130213 unified export and zip (export dialog)
- * 20130307 made Annotations into a dialog
- * 20130921 handling return from Proj4 request (coord. conversion only on-demand for now)
- * 20130921 bug-fix long/lat swapped in add FixedInfo
  */
 package com.topodroid.DistoX;
-
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import java.util.List;
 
@@ -37,6 +21,7 @@ import java.util.List;
 // import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.app.DatePickerDialog;
 
 import android.content.Context;
 // import android.content.Intent;
@@ -62,11 +47,13 @@ public class SurveyNewDialog extends Dialog
   private Context mContext;
 
   private EditText mEditName;
-  private EditText mEditDate;
+  private Button mEditDate;
   private EditText mEditTeam;
   private EditText mEditDecl;
   private EditText mEditStation;
   private EditText mEditComment;
+
+  MyDateSetListener mDateListener;
 
   private Button mBTsave;
   private Button mBTopen;
@@ -100,11 +87,14 @@ public class SurveyNewDialog extends Dialog
     setTitle( R.string.title_survey );
 
     mEditName    = (EditText) findViewById(R.id.survey_name);
-    mEditDate    = (EditText) findViewById(R.id.survey_date);
+    mEditDate    = (Button) findViewById(R.id.survey_date);
     mEditTeam    = (EditText) findViewById(R.id.survey_team);
     mEditStation = (EditText) findViewById(R.id.survey_station);
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
+
+    mDateListener = new MyDateSetListener( mEditDate );
+    mEditDate.setOnClickListener( this );
 
     mEditStation.setText( TopoDroidSetting.mInitStation );
 
@@ -112,8 +102,7 @@ public class SurveyNewDialog extends Dialog
       mEditTeam.setText( TopoDroidSetting.mDefaultTeam );
     }
 
-    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
-    mEditDate.setText( sdf.format(new Date() ) );
+    mEditDate.setText( TopoDroidUtil.currentDate() );
 
     mBTsave = (Button) findViewById( R.id.surveySave );
     mBTopen = (Button) findViewById( R.id.surveyOpen );
@@ -134,6 +123,14 @@ public class SurveyNewDialog extends Dialog
     //  // Log.v( TopoDroidApp.TAG, "new survey back ");
     //  dismiss();
     //}
+    if ( b == mEditDate ) {
+      String date = mEditDate.getText().toString();
+      int y = TopoDroidUtil.dateParseYear( date );
+      int m = TopoDroidUtil.dateParseMonth( date );
+      int d = TopoDroidUtil.dateParseDay( date );
+      new DatePickerDialog( mContext, mDateListener, y, m, d ).show();
+      return;
+    }
 
     // if ( mEditName.getText() == null ) return;
     String name = mEditName.getText().toString();

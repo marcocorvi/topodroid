@@ -35,9 +35,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.EOFException;
 
-import java.util.Date;
 import java.util.Locale;
-import java.text.SimpleDateFormat;
 
 import android.util.Log;
 
@@ -1675,10 +1673,9 @@ public class DrawingCommandManager
       out.newLine();
       StringWriter sw = new StringWriter();
       PrintWriter pw  = new PrintWriter(sw);
-      SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
       pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n", xmin*6, 400-ymax*6, xmax*6, 400-ymin*6 );
       pw.format("##XTHERION## xth_me_area_zoom_to 25\n\n");
-      pw.format("# %s created by TopoDroid v. %s\n\n", sdf.format( new Date() ), TopoDroidApp.VERSION );
+      pw.format("# %s created by TopoDroid v. %s\n\n", TopoDroidUtil.currentDate(), TopoDroidApp.VERSION );
       // TODO write current palette
       pw.format("#P ");
       DrawingBrushPaths.mPointLib.writePalette( pw );

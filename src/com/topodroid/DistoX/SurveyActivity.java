@@ -11,10 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.List;
+import java.util.Calendar;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.app.DatePickerDialog;
 
 import android.app.Application;
 import android.view.KeyEvent;
@@ -102,10 +102,12 @@ public class SurveyActivity extends Activity
   private Context mContext;
 
   private EditText mTextName;
-  private EditText mEditDate;
+  private Button mEditDate;
   private EditText mEditTeam;
   private EditText mEditDecl;
   private EditText mEditComment;
+
+  MyDateSetListener mDateListener;
 
   // private Button mButtonHelp;
   private Button[] mButton1;
@@ -237,6 +239,8 @@ public class SurveyActivity extends Activity
     return true;
   }
 
+
+
   @Override
   protected void onCreate( Bundle savedInstanceState) 
   {
@@ -260,10 +264,13 @@ public class SurveyActivity extends Activity
     setContentView(R.layout.survey_activity);
     setTitle( R.string.title_survey );
     mTextName    = (EditText) findViewById(R.id.survey_name);
-    mEditDate    = (EditText) findViewById(R.id.survey_date);
+    mEditDate    = (Button) findViewById(R.id.survey_date);
     mEditTeam    = (EditText) findViewById(R.id.survey_team);
     mEditDecl    = (EditText) findViewById(R.id.survey_decl);
     mEditComment = (EditText) findViewById(R.id.survey_comment);
+
+    mDateListener = new MyDateSetListener( mEditDate );
+    mEditDate.setOnClickListener( this );
 
     if ( ! updateDisplay() ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "opening non-existent survey" );
@@ -338,6 +345,13 @@ public class SurveyActivity extends Activity
         mMenu.setVisibility( View.VISIBLE );
         onMenu = true;
       }
+      return;
+    } else if ( b == mEditDate ) {
+      String date = mEditDate.getText().toString();
+      int y = TopoDroidUtil.dateParseYear( date );
+      int m = TopoDroidUtil.dateParseMonth( date );
+      int d = TopoDroidUtil.dateParseDay( date );
+      new DatePickerDialog( this, mDateListener, y, m, d ).show();
       return;
     }
 

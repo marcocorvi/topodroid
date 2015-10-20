@@ -25,10 +25,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import java.util.Date;
-import java.util.Locale;
-import java.text.SimpleDateFormat;
-
 import android.os.Parcelable;
 
 import android.os.Bundle;
@@ -618,8 +614,7 @@ public class ShotActivity extends Activity
   void insertPhoto( )
   {
     // long shotid = 0;
-    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
-    mApp.mData.insertPhoto( mApp.mSID, mPhotoId, mShotId, "", sdf.format( new Date() ), mComment ); // FIXME TITLE has to go
+    mApp.mData.insertPhoto( mApp.mSID, mPhotoId, mShotId, "", TopoDroidUtil.currentDate(), mComment ); // FIXME TITLE has to go
     // FIXME NOTIFY ? no
   }
 
@@ -653,9 +648,8 @@ public class ShotActivity extends Activity
           String comment = extras.getString( TopoDroidTag.TOPODROID_SENSOR_COMMENT );
           TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
 
-          SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
           mApp.mData.insertSensor( mApp.mSID, mSensorId, mShotId, "", 
-                                  sdf.format( new Date() ),
+                                  TopoDroidUtil.currentDate(),
                                   comment,
                                   type,
                                   value );

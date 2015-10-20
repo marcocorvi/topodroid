@@ -23,11 +23,6 @@ import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.regex.Pattern;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-
 // import android.util.Log;
 
 public class CompassParser extends ImportParser
@@ -186,8 +181,7 @@ public class CompassParser extends ImportParser
       throw new ParserException();
     }
     if ( mDate == null ) {
-      SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
-      mDate = sdf.format( new Date() );
+      mDate = TopoDroidUtil.currentDate();
     }
     TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "CompassParser shots "+ shots.size() +" splays "+ splays.size()  );
     // Log.v( TopoDroidApp.TAG, "CompassParser shots "+ shots.size() + " splays "+ splays.size() );

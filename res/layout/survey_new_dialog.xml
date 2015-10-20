@@ -36,15 +36,14 @@
         android:hint="@string/name"
         android:scrollHorizontally="true" />
         	
-    <EditText android:id="@+id/survey_date" 
+    <Button android:id="@+id/survey_date" 
         android:maxLines="1" 
         android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
-        android:inputType="date"
         android:singleLine="true"
-        android:scrollHorizontally="true" />
+    />
         	
     <EditText android:id="@+id/survey_team" 
         android:layout_marginTop="2dp"

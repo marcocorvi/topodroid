@@ -23,11 +23,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-
 // import android.util.Log;
 
 public class VisualTopoParser extends ImportParser

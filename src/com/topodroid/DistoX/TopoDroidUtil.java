@@ -12,6 +12,16 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Calendar;
+
+import java.io.StringWriter;
+import java.io.PrintWriter;
+
+import android.util.Log;
+
 public class TopoDroidUtil
 {
   static final float M_PI  = 3.1415926536f; // Math.PI;
@@ -70,6 +80,53 @@ public class TopoDroidUtil
   {
     return ( s == null )? null 
       : s.trim().replaceAll("\\s+", "");
+  }
+
+  static String currentDate()
+  {
+    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
+    return sdf.format( new Date() );
+  }
+
+  static String getDateString( String format )
+  {
+    SimpleDateFormat sdf = new SimpleDateFormat( format, Locale.US );
+    return sdf.format( new Date() );
+  }
+
+  static int dateParseYear( String date )
+  {
+    try {
+      return Integer.parseInt( date.substring(0, 4) );
+    } catch ( NumberFormatException e ) { }
+    return 2000;
+  }
+
+  static int dateParseMonth( String date )
+  {
+    int ret = 0;
+    if ( date.charAt(5) == '1' ) ret += 10;
+    char ch = date.charAt(6);
+    if ( ch >= '0' && ch <= '9' ) ret += (ch - '0');
+    return (ret > 0)? ret-1 : 0;
+  }
+
+  static int dateParseDay( String date )
+  {
+    int ret = 0;
+    char ch = date.charAt(8);
+    if ( ch >= '1' && ch <= '3' ) ret += 10*(ch - '0');
+    ch = date.charAt(9);
+    if ( ch >= '1' && ch <= '9' ) ret += (ch - '0');
+    return (ret > 0)? ret : 0;
+  }
+
+  static String composeDate( int y, int m, int d )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format("%04d.%02d.%02d", y, m+1, d );
+    return sw.getBuffer().toString();
   }
 
 }

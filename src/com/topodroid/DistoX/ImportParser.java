@@ -20,11 +20,6 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-
 // import android.util.Log;
 
 public class ImportParser
@@ -51,8 +46,7 @@ public class ImportParser
 
   public ImportParser( boolean apply_declination ) throws ParserException
   {
-    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
-    mDate = sdf.format( new Date() );
+    mDate = TopoDroidUtil.currentDate();
     shots  = new ArrayList< ParserShot >();
     splays = new ArrayList< ParserShot >();
     mApplyDeclination = apply_declination;

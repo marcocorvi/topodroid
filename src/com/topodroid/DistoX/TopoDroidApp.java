@@ -32,9 +32,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import java.util.Date;
 import java.util.Locale;
-import java.text.SimpleDateFormat;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -699,8 +697,7 @@ public class TopoDroidApp extends Application
       pw.format( "%s\n", VERSION );
       pw.format( "%s\n", DataHelper.DB_VERSION );
       pw.format( "%s\n", info.name );
-      SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
-      pw.format("%s\n", sdf.format( new Date() ) );
+      pw.format("%s\n", TopoDroidUtil.currentDate() );
       fw.flush();
       fw.close();
     } catch ( FileNotFoundException e ) {

@@ -408,63 +408,80 @@ public class DistoXComm
         TopoDroidLog.Log( TopoDroidLog.LOG_BT, "pairing device " + ret );
       }
 
-      try {
-        if ( mBTSocket != null ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() BTSocket not null ... closing");
+      if ( mBTSocket != null ) {
+        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() BTSocket not null ... closing");
+        try {
           mBTSocket.close();
-          mBTSocket = null;
+        } catch ( IOException e ) { 
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close Socket IO " + e.getMessage() );
         }
-        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
-        if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "bind device " );
-          DeviceUtil.bindDevice( mBTDevice );
-        }
+        mBTSocket = null;
+      }
 
-        Class[] classes1 = new Class[]{ int.class };
-        Class[] classes2 = new Class[]{ UUID.class };
-        if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_DEFAULT ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() createRfcommSocketToServiceRecord " );
-          mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
-        } else if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_INSEC ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() createInsecureRfcommSocketToServiceRecord " );
-          Method m3 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocketToServiceRecord", classes2 );
-          mBTSocket = (BluetoothSocket) m3.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
-        } else if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_INSEC_PORT ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() invoke createInsecureRfcommSocket " );
-          Method m1 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocket", classes1 );
-          mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, port );
-          // mBTSocket = mBTDevice.createInsecureRfcommSocket( port );
-          // mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
-        } else if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_PORT ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() invoke createRfcommSocket " );
-          Method m2 = mBTDevice.getClass().getMethod( "createRfcommSocket", classes1 );
-          mBTSocket = (BluetoothSocket) m2.invoke( mBTDevice, port );
+      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
+      // if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) 
+      if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
+        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "bind device " );
+        DeviceUtil.bindDevice( mBTDevice );
+        for ( int cnt = 0; cnt < 10; ++cnt ) {
+          if ( DeviceUtil.isPaired( mBTDevice ) ) {
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "device paired at time " + cnt );
+            break;
+          }
+          try {
+            Thread.sleep( 300 );
+          } catch ( InterruptedException e ) { }
         }
+      }
 
-      } catch ( InvocationTargetException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket invoke target " + e.getMessage() );
-        if ( mBTSocket != null ) { mBTSocket = null; }
-      } catch ( UnsupportedEncodingException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket encoding " + e.getMessage() );
-        if ( mBTSocket != null ) { mBTSocket = null; }
-      } catch ( NoSuchMethodException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket no method " + e.getMessage() );
-        if ( mBTSocket != null ) { mBTSocket = null; }
-      } catch ( IllegalAccessException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket access " + e.getMessage() );
-        if ( mBTSocket != null ) { mBTSocket = null; }
-      } catch ( IOException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket IO " + e.getMessage() );
-        if ( mBTSocket != null ) { mBTSocket = null; }
+      if ( DeviceUtil.isPaired( mBTDevice ) ) {
+        try {
+          Class[] classes1 = new Class[]{ int.class };
+          Class[] classes2 = new Class[]{ UUID.class };
+          if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_DEFAULT ) {
+            // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() createRfcommSocketToServiceRecord " );
+            mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
+          } else if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_INSEC ) {
+            // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() createInsecureRfcommSocketToServiceRecord " );
+            Method m3 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocketToServiceRecord", classes2 );
+            mBTSocket = (BluetoothSocket) m3.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
+          } else if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_INSEC_PORT ) {
+            // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() invoke createInsecureRfcommSocket " );
+            Method m1 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocket", classes1 );
+            mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, port );
+            // mBTSocket = mBTDevice.createInsecureRfcommSocket( port );
+            // mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
+          } else if ( TopoDroidSetting.mSockType == TopoDroidSetting.TOPODROID_SOCK_PORT ) {
+            // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() invoke createRfcommSocket " );
+            Method m2 = mBTDevice.getClass().getMethod( "createRfcommSocket", classes1 );
+            mBTSocket = (BluetoothSocket) m2.invoke( mBTDevice, port );
+          }
+
+        } catch ( InvocationTargetException e ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket invoke target " + e.getMessage() );
+          if ( mBTSocket != null ) { mBTSocket = null; }
+        } catch ( UnsupportedEncodingException e ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket encoding " + e.getMessage() );
+          if ( mBTSocket != null ) { mBTSocket = null; }
+        } catch ( NoSuchMethodException e ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket no method " + e.getMessage() );
+          if ( mBTSocket != null ) { mBTSocket = null; }
+        } catch ( IllegalAccessException e ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket access " + e.getMessage() );
+          if ( mBTSocket != null ) { mBTSocket = null; }
+        } catch ( IOException e ) {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket IO " + e.getMessage() );
+          if ( mBTSocket != null ) { mBTSocket = null; }
+        }
       }
 
       if ( mBTSocket != null ) {
-        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket OK");
+        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket OK");
         // mBTSocket.setSoTimeout( 200 ); // BlueToothSocket does not have timeout 
         mProtocol = new DistoXProtocol( mBTSocket, mApp.mDevice );
         mAddress = address;
       } else {
-        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket fail");
+        TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket fail");
         if ( mProtocol != null ) mProtocol.closeIOstreams();
         mProtocol = null;
         mAddress = null;

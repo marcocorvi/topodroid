@@ -24,11 +24,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-
 import android.util.Log;
 
 public class PocketTopoParser extends ImportParser
@@ -80,8 +75,7 @@ public class PocketTopoParser extends ImportParser
       // trip.declination(); NOT USED
       // TODO create a survey
     } else {
-      SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd", Locale.US );
-      mDate = sdf.format( new Date() );
+      mDate = TopoDroidUtil.currentDate();
     }
 
     int shot_count = ptfile.shotCount();

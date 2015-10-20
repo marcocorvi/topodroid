@@ -57,16 +57,17 @@
           android:hint="@string/name"
           android:scrollHorizontally="true" />
      		
-    <EditText android:id="@+id/calib_date" 
+    <Button android:id="@+id/calib_date" 
           android:layout_marginTop="2dp"
-          android:layout_width="wrap_content"
+          android:layout_width="fill_parent"
           android:layout_height="wrap_content" 
           android:singleLine="true"
-          android:scrollHorizontally="true" />
+          android:scrollHorizontally="true"
+    />
 
     <EditText android:id="@+id/calib_device" 
           android:layout_marginTop="2dp"
-          android:layout_width="wrap_content"
+          android:layout_width="fill_parent"
           android:layout_height="wrap_content" 
           android:singleLine="true"
           android:editable="false"

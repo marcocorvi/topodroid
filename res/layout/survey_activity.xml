@@ -66,16 +66,14 @@
         android:editable="false"
         />
    		
-    <EditText android:id="@+id/survey_date" 
+    <Button android:id="@+id/survey_date" 
         android:maxLines="1" 
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
-        android:inputType="date"
-        android:singleLine="true"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:scrollHorizontally="true" />
+    />
    		
     <EditText android:id="@+id/survey_team" 
         android:layout_width="wrap_content"
