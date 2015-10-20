@@ -33,7 +33,7 @@
     <!-- string name="missing_save">Sketch has missing symbols.\nNot saving it.</string -->
     <string name="missing_station">Station manquante</string>
     <string name="missing_symbols">Il manque des symboles.\nEnregistrer tout de même ?</string>
-    <string name="missing_title">SYMBOLES MANQUANTS</string>
+    <!-- UNUSED string name="missing_title">SYMBOLES MANQUANTS</string -->
     <string name="missing_warning">Les symboles suivants sont manquants.\n</string>
     <!-- string name="failed_snap_to_line">No close line to snap area border to</string -->
     <!-- string name="failed_snap_to_point">No close point to snap the point to</string -->
@@ -53,7 +53,7 @@
     <string name="calib_updated">Etalonnage mis à jour</string>
     <string name="calib_compute_groups">Calculs des groupes de données d\'étalonnage ...</string>
     <string name="calib_compute_coeffs">Calculs des coeficients d\'étalonnage ...</string>
-    <!-- string name="calib_read_coeffs">Lecture des coéficients d\'étalonnage ...</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Lecture des coéficients d\'étalonnage ...</string -->
     <string name="calib_write_coeffs">Ecriture des coéficients d\'étalonnage ...</string>
     <string name="connect_failed">Echec de la connexion</string>
     <string name="data"> données</string>
@@ -97,7 +97,7 @@
     <string name="extend_left">Gauche</string>
     <string name="extend_right">Droite</string>
     <string name="extend_vert">Vert.</string>
-    <string name="external_prompt">Saisir mesure</string>
+    <!-- UNUSED string name="external_prompt">Saisir mesure</string -->
     <string name="splay_at_to">LRUD à la station Vers</string>
 
     <string name="few_data">Pas assez de données</string>
@@ -225,8 +225,8 @@
     <string name="menu_palette">PALETTE</string>
     <!-- OK string name="menu_photo">PHOTO</string -->
     <string name="menu_sensor">CAPTEUR</string>
-    <!-- string name="menu_scan">SCAN</string -->
-    <!-- TODO string name="menu_station">STATIONS</string -->
+    <!-- TODO string name="menu_scan">SCAN</string -->
+    <!-- UNUSED string name="menu_station">STATIONS</string -->
     <!-- TODO string name="menu_stats">STATS</string -->
     <!-- string name="menu_survey">SURVEY INFO</string -->
 
@@ -239,9 +239,9 @@
     <string name="popup_remove_pt">Supprimer le point</string>
 
     <string name="not_available">Bluetooth indisponible</string>
-    <!-- string name="not_connected">Non connecté</string -->
+    <!-- TODO string name="not_connected">Non connecté</string -->
     <string name="not_enabled">Bluetooth désactivé</string>
-    <string name="not_implemented">Pas encore implémenté</string>
+    <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
     <string name="null_bitmap">null bitmap</string>
     <string name="photo">photo</string>
     <string name="photo_comment_prompt">Saisissez un commentaire pour la photo</string>
@@ -249,7 +249,7 @@
     <string name="photo_photo">photo</string>
     <string name="photo_sensor">capteur</string>
     <string name="photo_external">mesure</string>
-    <string name="photo_sensor_prompt">Sélectionnez photo ou capteur</string>
+    <!-- UNUSED string name="photo_sensor_prompt">Sélectionnez photo ou capteur</string -->
     <string name="photo_shot">ajouter une visée</string>
     <string name="photo_survey">Découper le relevé</string>
     <string name="picture_no_station">Besoin d\'une station/nom pour la photo</string>

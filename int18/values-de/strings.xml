@@ -39,7 +39,7 @@
     <!-- OK string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
     <string name="missing_station">Kein Messpunkt</string>
     <!-- OK string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
-    <!-- OK string name="missing_title">MISSING SYMBOLS</string -->
+    <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
     <!-- OK string name="missing_warning">The following drawing tools are missing.\n</string -->
 
 <!-- DRAWING POINT EDITING -->
@@ -63,7 +63,7 @@
     <string name="calib_updated">Kalibrierung aktualisiert</string>
     <string name="calib_compute_groups">Kalibrierung Datengruppen berechnen ...</string>
     <string name="calib_compute_coeffs">Kalibrierung Koeffizienten berechnen ...</string>
-    <!-- TODO string name="calib_read_coeffs">Kalibrierung Koeffizienten READING ...</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Kalibrierung Koeffizienten READING ...</string -->
     <string name="calib_write_coeffs">Kalibrierung Koeffizienten speichern ...</string>
     <string name="connect_failed">Verbindung fehlgeschlagen</string>
     <string name="data"> Daten</string>
@@ -115,7 +115,7 @@
     <string name="extend_left">Links</string>
     <string name="extend_right">Rechts</string>
     <string name="extend_vert">Vertikal</string> <!-- vertikal -->
-    <string name="external_prompt">Vermessung</string>
+    <!-- UNUSED string name="external_prompt">Vermessung</string -->
     <string name="splay_at_to">LRUD bei BIS Messpunkt</string>
 
     <string name="few_data">Nicht genügend Daten</string>
@@ -255,7 +255,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SCAN</string>
-    <string name="menu_station">MESSPUNKTEN</string>
+    <!-- UNUSED string name="menu_station">MESSPUNKTEN</string -->
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
 
@@ -271,7 +271,7 @@
     <string name="not_available">BT nicht verfügbar</string>
     <!-- UNUSED string name="not_connected">Nicth verbinden</string -->
     <string name="not_enabled">BT nicht aktiviert</string>
-    <string name="not_implemented">Noch nicht implementiert</string>
+    <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
     <string name="null_bitmap">Null Bitmap [OOM error]</string>
     <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Kommentar</string>
@@ -279,7 +279,7 @@
     <string name="photo_photo">Foto</string>
     <string name="photo_sensor">Sensoren</string>
     <string name="photo_external">Messung</string>
-    <string name="photo_sensor_prompt">Foto oder Sensor auswählen</string>
+    <!-- UNUSED string name="photo_sensor_prompt">Foto oder Sensor auswählen</string -->
     <string name="photo_shot">Messung hinzufügen</string>
     <string name="photo_survey">Vermessung teilen</string>
     <string name="picture_no_station">Name erforderlich</string>

@@ -37,7 +37,7 @@
     <!-- string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
     <string name="missing_station">Липсващ репер</string>
     <string name="missing_symbols">Има липсващи символи.\nЗаписване независимо от това?</string>
-    <string name="missing_title">Липсващи символи</string>
+    <!-- UNUSED string name="missing_title">Липсващи символи</string -->
     <string name="missing_warning">Следните символи за рисуване липсват\n</string>
     <string name="failed_snap_to_line">Няма близка точка за прикачане на границата на площта</string>
     <string name="failed_snap_to_point">Няма близка точка за прикачане на избраната точка</string>
@@ -57,7 +57,7 @@
     <string name="calib_updated">Калибрацията е обновена</string>
     <string name="calib_compute_groups">Изчисляване на калибр. групи...</string>
     <string name="calib_compute_coeffs">Изчисляване на калибр. коефициенти...</string>
-    <!-- string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
     <string name="connect_failed">Невъзможна връзка</string>
     <string name="data"> измервания</string>
@@ -101,7 +101,7 @@
     <string name="extend_left">Наляво</string>
     <string name="extend_right">Надясно</string>
     <string name="extend_vert">Вертикално</string>
-    <string name="external_prompt">Въведете измервания</string>
+    <!-- UNUSED string name="external_prompt">Въведете измервания</string -->
     <string name="splay_at_to">"&lt;,&gt;,Г,Д" в репер "ДО"</string>
 
     <string name="few_data">Няма достатъчно данни</string>
@@ -236,7 +236,7 @@
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
     <string name="menu_scan">Сканиране</string>
-    <string name="menu_station">Репери</string>
+    <!-- UNUSED string name="menu_station">Репери</string -->
     <string name="menu_stats">Статистика</string>
     <string name="menu_survey">Инфо за картировката</string>
     <string name="menu_sync">Синхронизиране</string>
@@ -254,7 +254,7 @@
 
     <string name="not_available">Bluetooth не е достъпен</string>
     <string name="not_enabled">Bluetooth не е разрешен</string>
-    <string name="not_implemented">Тази функционалност не достъпна все още</string>
+    <!-- UNUSED string name="not_implemented">Тази функционалност не достъпна все още</string -->
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
     <string name="photo">снимка</string>
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
@@ -262,7 +262,7 @@
     <string name="photo_photo">снимка</string>
     <string name="photo_sensor">сензор</string>
     <string name="photo_external">измерване</string>
-    <string name="photo_sensor_prompt">Изберете снимка или сензор</string>
+    <!-- UNUSED string name="photo_sensor_prompt">Изберете снимка или сензор</string -->
     <string name="photo_shot">Добавяне на измерване</string>
     <string name="photo_survey">Разделяне на картировка</string>
     <string name="picture_no_station">Необходимо е име на репер</string>
@@ -483,13 +483,13 @@
     <string name="sketch_delete">Изтриване на 3D модел?</string>
     <string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string>
 
-    <string name="btn_head">head</string>
+    <!-- UNUSED string name="btn_head">head</string -->
     <string name="btn_stretch">Разтягане</string>
     <string name="btn_extrude">Избутване</string>
     <string name="btn_erase">Изтриване</string>
     <string name="btn_cut">cut</string>
-    <string name="btn_vertical">Вертикално</string>
-    <string name="btn_horizontal">Хоризонтално</string>
+    <!-- UNUSED string name="btn_vertical">Вертикално</string -->
+    <!-- UNUSED string name="btn_horizontal">Хоризонтално</string -->
 
     <!-- select buttin labels -->
     <string name="btn_section">Сечение</string>
@@ -497,9 +497,9 @@
     <string name="btn_shot">Отсечка</string>
     <string name="btn_join">Свързване</string>
 
-    <string name="button_redraw">Прерисуване</string>
+    <!-- UNUSED string name="button_redraw">Прерисуване</string -->
     <string name="button_erase">Изтриване</string>
-    <string name="btn_surface">Повърхност</string>
+    <!-- UNUSED string name="btn_surface">Повърхност</string -->
 
     <string name="station_next">Следваща</string>
     <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
@@ -507,7 +507,7 @@
     <string name="line_delete">Изтр. на линия</string>
 
     <string name="menu_head">Начало</string>
-    <string name="menu_save_th2">Запис на TH2</string>
+    <!-- UNUSED string name="menu_save_th2">Запис на TH2</string -->
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">Помощ</string>

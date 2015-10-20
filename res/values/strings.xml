@@ -24,7 +24,7 @@
 
     <string name="thp_user">user</string>
     <string name="thp_label">label</string>
-    <!-- string name="thp_danger">danger</string -->
+    <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">user</string>
     <string name="thl_wall">wall</string>
     <string name="tha_user">user</string>
@@ -37,7 +37,7 @@
     <!-- string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
     <string name="missing_station">Missing station</string>
     <string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string>
-    <string name="missing_title">MISSING SYMBOLS</string>
+    <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
     <string name="missing_warning">The following drawing tools are missing.\n</string>
     <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
     <string name="failed_snap_to_point">No close point to snap the point to</string>
@@ -57,7 +57,7 @@
     <string name="calib_updated">Updated calibration</string>
     <string name="calib_compute_groups">Computing calibration data groups ...</string>
     <string name="calib_compute_coeffs">Computing calibration coefficients ...</string>
-    <!-- string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">Writing calibration coefficients ...</string>
     <string name="connect_failed">Failed connect</string>
     <string name="data"> data</string>
@@ -101,7 +101,7 @@
     <string name="extend_left">Left</string>
     <string name="extend_right">Right</string>
     <string name="extend_vert">Vert</string>
-    <string name="external_prompt">Enter measurement</string>
+    <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD at TO station</string>
 
     <string name="few_data">Not enough data</string>
@@ -235,7 +235,7 @@
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">SCAN</string>
-    <string name="menu_station">STATIONS</string>
+    <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
     <string name="menu_sync">SYNC</string>
@@ -253,7 +253,7 @@
 
     <string name="not_available">BT not available</string>
     <string name="not_enabled">BT not enabled</string>
-    <string name="not_implemented">Not implemented yet</string>
+    <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Cannot create image [OOM error]</string>
     <string name="photo">photo</string>
     <string name="photo_comment_prompt">Enter the photo comment</string>
@@ -261,7 +261,7 @@
     <string name="photo_photo">photo</string>
     <string name="photo_sensor">sensor</string>
     <string name="photo_external">measurement</string>
-    <string name="photo_sensor_prompt">Select photo or sensor</string>
+    <!-- UNUSED string name="photo_sensor_prompt">Select photo or sensor</string -->
     <string name="photo_shot">add shot</string>
     <string name="photo_survey">split survey</string>
     <string name="picture_no_station">Station name required</string>
@@ -497,13 +497,13 @@
     <string name="sketch_delete">Delete 3D model ?</string>
     <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
 
-    <string name="btn_head">head</string>
+    <!-- UNUSED string name="btn_head">head</string -->
     <string name="btn_stretch">Stretch</string>
     <string name="btn_extrude">Extrude</string>
     <string name="btn_erase">erase</string>
     <string name="btn_cut">cut</string>
-    <string name="btn_vertical">Vertical</string>
-    <string name="btn_horizontal">Horizontal</string>
+    <!-- UNUSED string name="btn_vertical">Vertical</string -->
+    <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
 
     <!-- select buttin labels -->
     <string name="btn_section">Section</string>
@@ -511,9 +511,9 @@
     <string name="btn_shot">Shot</string>
     <string name="btn_join">Join</string>
 
-    <string name="button_redraw">Redraw</string>
+    <!-- UNUSED string name="button_redraw">Redraw</string -->
     <string name="button_erase">Erase</string>
-    <string name="btn_surface">surface</string>
+    <!-- UNUSED string name="btn_surface">surface</string -->
 
     <string name="station_next">NEXT</string>
     <string name="no_shot_between_stations">no_shot_between_stations</string>
@@ -522,7 +522,7 @@
     <string name="flip_shots">Flip shots</string>
 
     <string name="menu_head">HEAD</string>
-    <string name="menu_save_th2">SAVE TH2</string>
+    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">This help</string>

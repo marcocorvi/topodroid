@@ -33,7 +33,7 @@
     <!-- UNUSED string name="missing_save">Faltan símbolos.\nno guardado</string -->
     <string name="missing_station">Falta Estación</string>
     <string name="missing_symbols">Faltan símbolos. \nÂ¿Desea guardar de todos modos?</string>
-    <string name="missing_title">Faltan símbolos</string>
+    <!-- UNUSED string name="missing_title">Faltan símbolos</string -->
     <string name="missing_warning">Faltan los siguientes símbolos en el dibujo.\n</string>
     <string name="failed_snap_to_line">Ninguna línea cercana al borde</string>
     <string name="failed_snap_to_point">Nigún punto cercano al borde</string>
@@ -97,7 +97,7 @@
     <string name="extend_left">izq.</string>
     <string name="extend_right">Drch.</string>
     <string name="extend_vert">Vert.</string>
-    <string name="external_prompt">Introducir medición</string>
+    <!-- UNUSED string name="external_prompt">Introducir medición</string -->
     <string name="splay_at_to">LRUD hacia la estación</string>
 
     <string name="few_data">No hay suficientes datos</string>
@@ -223,7 +223,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
     <string name="menu_scan">ESCANEO</string>
-    <string name="menu_station">ESTACIÓN</string>
+    <!-- UNUSED string name="menu_station">ESTACIÓN</string -->
     <string name="menu_stats">ESTADÍSTICAS</string>
     <string name="menu_survey">INFO TOPOGRAFÍA</string>
 
@@ -238,7 +238,7 @@
     <string name="not_available">BT No disponible</string>
     <!-- UNUSED string name="not_connected">No conectado</string -->
     <string name="not_enabled">BT No habilitado</string>
-    <string name="not_implemented">No implantado</string>
+    <!-- UNUSED string name="not_implemented">No implantado</string -->
     <string name="null_bitmap">Mapa bits nulo</string>
     <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
@@ -246,7 +246,7 @@
     <string name="photo_photo">Foto</string>
     <string name="photo_sensor">Sensor</string>
     <string name="photo_external">Medición</string>
-    <string name="photo_sensor_prompt">Seleccione fotografía o sensor</string>
+    <!-- UNUSED string name="photo_sensor_prompt">Seleccione fotografía o sensor</string -->
     <string name="photo_shot">Añadir toma</string>
     <string name="photo_survey">dividir Topografía</string>
     <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>

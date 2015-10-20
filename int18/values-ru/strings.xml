@@ -39,7 +39,7 @@
     <!-- OK string name="missing_save">В абрисе присутстсвуют неизвестные элементы.\nНе сохранено.</string -->
     <string name="missing_station">Отсутствует пикет</string>
     <string name="missing_symbols">Отсутствуют инструменты для рисования.\nВы хотите сохранить?</string>
-    <string name="missing_title">ОТСУТСТВУЮТ СИМВОЛЫ</string>
+    <!-- UNUSED string name="missing_title">ОТСУТСТВУЮТ СИМВОЛЫ</string -->
     <string name="missing_warning">Отсутствуют следующие инструменты для рисования.\n</string>
     <string name="failed_snap_to_line">Отсутствует ближайшая точка-линии для закрепления границы зоны</string>
     <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
@@ -59,7 +59,7 @@
     <string name="calib_updated">Обновить калибровку</string>
     <string name="calib_compute_groups">Вычисление групп данных калибровки ...</string>
     <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки ...</string>
-    <!-- OK string name="calib_read_coeffs">Считывание коэфицентов калибровки ...</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки ...</string -->
     <string name="calib_write_coeffs">Запись коэфицентов калибровки ...</string>
     <string name="connect_failed">Ошибка соединения</string>
     <string name="data">данные</string>
@@ -103,7 +103,7 @@
     <string name="extend_left">РРвЛево</string>
     <string name="extend_right">РРвПраво</string>
     <string name="extend_vert">РРвВерх</string>
-    <string name="external_prompt">Ввод измерения</string>
+    <!-- UNUSED string name="external_prompt">Ввод измерения</string -->
     <string name="splay_at_to">Л:П:В:Н на следующем пикете</string>
 
     <string name="few_data">Не достаточно данных</string>
@@ -234,7 +234,7 @@
     <string name="menu_photo">фото</string>
     <string name="menu_sensor">датчик</string>
     <string name="menu_scan">Сканировать</string>
-    <string name="menu_station">ПИКЕТЫ</string>
+    <!-- UNUSED string name="menu_station">ПИКЕТЫ</string -->
     <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Метаданные</string>
     <string name="menu_sync">СИНХР.</string>
@@ -253,7 +253,7 @@
     <string name="not_available">Блютуф недоступен</string>
     <!-- OK string name="not_connected">Нет соединения</string -->
     <string name="not_enabled">Блютуф выключен</string>
-    <string name="not_implemented">Пока не реализовано</string>
+    <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <string name="photo">фото</string>
     <string name="photo_comment_prompt">Введите комментарий к фото</string>
@@ -261,7 +261,7 @@
     <string name="photo_photo">фото</string>
     <string name="photo_sensor">датчик</string>
     <string name="photo_external">измерение</string>
-    <string name="photo_sensor_prompt">Выберите фото либо датчик</string>
+    <!-- UNUSED string name="photo_sensor_prompt">Выберите фото либо датчик</string -->
     <string name="photo_shot">добавить пикет</string>
     <string name="photo_survey">разорвать съёмку</string>
     <string name="picture_no_station">Требуется номер пикета</string>
@@ -476,13 +476,13 @@
     <string name="sketch_delete">Удалить 3D модель ?</string>
     <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
 
-    <string name="btn_head">head</string>
+    <!-- UNUSED string name="btn_head">head</string -->
     <string name="btn_stretch">Растянуть</string>
     <string name="btn_extrude">Вырезать</string>
     <string name="btn_erase">Стереть</string>
     <string name="btn_cut">Вырезать</string>
-    <string name="btn_vertical">Вертикальный</string>
-    <string name="btn_horizontal">Горизонтальный</string>
+    <!-- UNUSED string name="btn_vertical">Вертикальный</string -->
+    <!-- UNUSED string name="btn_horizontal">Горизонтальный</string -->
 
     <!-- select buttin labels -->
     <string name="btn_section">Сечение</string>
@@ -490,9 +490,9 @@
     <string name="btn_shot">Пикет</string>
     <string name="btn_join">Сцепить</string>
 
-    <string name="button_redraw">Перерисовать</string>
+    <!-- UNUSED string name="button_redraw">Перерисовать</string -->
     <string name="button_erase">Стереть</string>
-    <string name="btn_surface">Поверхность</string>
+    <!-- UNUSED string name="btn_surface">Поверхность</string -->
 
     <string name="station_next">СЛЕД.</string>
     <string name="no_shot_between_stations">нет замера между пикетами</string>
@@ -500,7 +500,7 @@
     <string name="line_delete">удалить_линию</string>
 
     <string name="menu_head">Head</string>
-    <string name="menu_save_th2">сохр th2</string>
+    <!-- UNUSED string name="menu_save_th2">сохр th2</string -->
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">Помощь</string>

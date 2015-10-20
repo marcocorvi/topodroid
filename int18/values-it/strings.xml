@@ -33,7 +33,7 @@
     <!-- string name="missing_save">Disegno non salvato causa prototipi mancanti</string -->
     <string name="missing_station">Caposaldo assente</string>
     <string name="missing_symbols">Mancano alcuni prototipi grafici.\nSalvare ugualmente?</string>
-    <string name="missing_title">PROTOTIPI MANCANTI</string>
+    <!-- UNUSED string name="missing_title">PROTOTIPI MANCANTI</string -->
     <string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string>
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
@@ -53,7 +53,7 @@
     <string name="calib_updated">Aggiornata calibrazione</string>
     <string name="calib_compute_groups">Raggruppamento dati in corso</string>
     <string name="calib_compute_coeffs">Calcolo coefficienti in corso</string>
-    <!-- string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
     <string name="calib_write_coeffs">Scrittura coefficienti in corso</string>
     <string name="connect_failed">Comunicazione DistoX fallita</string>
     <string name="data"> dati</string>
@@ -97,7 +97,7 @@
     <string name="extend_left">Sx</string>
     <string name="extend_right">Dx</string>
     <string name="extend_vert">Vert.</string>
-    <string name="external_prompt">Scrivi i dati</string>
+    <!-- UNUSED string name="external_prompt">Scrivi i dati</string -->
     <string name="splay_at_to">LRUD al caposaldo di arrivo</string>
 
     <string name="few_data">Dati insufficienti</string>
@@ -226,7 +226,7 @@
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORI</string>
     <string name="menu_scan">CERCA</string>
-    <string name="menu_station">CAPISALDI</string>
+    <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <!-- TODO string name="menu_stats">STATS</string -->
     <string name="menu_survey">INFORMAZIONI</string>
 
@@ -241,7 +241,7 @@
     <string name="not_available">Bluetooth non disponibile</string>
     <!-- string name="not_connected">Non connesso</string -->
     <string name="not_enabled">BT non attivo</string>
-    <string name="not_implemented">Non implementato</string>
+    <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <!-- OK english string name="null_bitmap">null bitmap</string -->
     <string name="photo">foto</string>
     <string name="photo_comment_prompt">Scrivi il commento</string>
@@ -249,7 +249,7 @@
     <string name="photo_photo">foto</string>
     <string name="photo_sensor">sensore</string>
     <string name="photo_external">misurazione</string>
-    <string name="photo_sensor_prompt">Seleziona foto o sensore</string>
+    <!-- UNUSED string name="photo_sensor_prompt">Seleziona foto o sensore</string -->
     <string name="photo_shot">aggiungi battuta</string>
     <string name="photo_survey">dividi rilievo</string>
     <string name="picture_no_station">Caposaldo o nome mancante</string>
