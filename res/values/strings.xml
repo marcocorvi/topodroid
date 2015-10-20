@@ -322,9 +322,9 @@
     <string name="sketch3d_name">name</string>
     <string name="sketch3d_new">New 3D model</string>
     <string name="sketch3d_next">next station</string>
-    <string name="sketch3d_null_name">Missing 3D sketch name</string>
-    <string name="sketch3d_null_next">Missing 3D sketch next station</string>
-    <string name="sketch3d_null_start">Missing 3D sketch base station</string>
+    <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
+    <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
+    <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
     <string name="sketch3d_start">base station</string>
 
     <string name="station">station</string>
@@ -392,9 +392,9 @@
     <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
     <string name="distox_err_connected">Device already connected</string>
 
-    <string name="ask_close">Close TopoDroid?</string>
+    <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
     <string name="ask_reset">Reset DistoX memory?</string>
-    <string name="ask_close_survey">Close survey?</string>
+    <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     
 
     <string name="button_add"       >Add       </string>
@@ -427,7 +427,7 @@
     <string name="button_right"     >RIGHT</string>
     <string name="button_clear"     >Clear     </string>
     <string name="button_save"      >Save      </string>
-    <string name="button_select"    >Select    </string>
+    <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_store"     >Store     </string>
     <string name="button_start"     >Start</string>
     <string name="button_stop"      >Stop</string>
@@ -485,11 +485,11 @@
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_edit">Edit 3D surface</string>
+    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
     <string name="title_sketch_shot">New shot</string>
     <string name="title_sketch_refs">View mode</string>
-    <string name="title_sketch_section_type">Sections type</string>
-    <string name="title_sketch_select">Select item</string>
+    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
+    <!-- UNUSED string name="title_sketch_select">Select item</string -->
 
     <string name="sketch_mode_single">Single shot</string>
     <string name="sketch_mode_ngbh">Nearby shots</string>
@@ -498,10 +498,10 @@
     <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
-    <string name="btn_stretch">Stretch</string>
-    <string name="btn_extrude">Extrude</string>
-    <string name="btn_erase">erase</string>
-    <string name="btn_cut">cut</string>
+    <!-- UNUSED string name="btn_stretch">Stretch</string -->
+    <!-- UNUSED string name="btn_extrude">Extrude</string -->
+    <!-- UNUSED string name="btn_erase">erase</string -->
+    <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
     <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
 
@@ -546,7 +546,7 @@
     <string name="help_join_survey">Join surveying</string>
     <string name="help_info_topodroid">TopoDroid info</string>
     <string name="help_download">Download data</string>
-    <string name="help_splay">Assign stations to splays automatically</string>
+    <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
     <string name="help_display">Choose display mode</string>
     <string name="help_display_calib">Toggle display of deleted shots</string>
     <string name="help_overview">Overview activity</string>
@@ -565,7 +565,7 @@
     <string name="help_draw">Drawing mode</string>
     <string name="help_edit">Editing mode</string>
     <string name="help_refs">Choose sketching references</string>
-    <string name="help_rename">Change survey name</string>
+    <!-- UNUSED string name="help_rename">Change survey name</string -->
     <string name="help_stats">Survey statistics dialog</string>
     <string name="help_save_plot">Export sketch</string>
     <string name="help_toggle_plot">Switch between plan and profile view</string>
@@ -610,16 +610,16 @@
     <string name="help_compute">Compute calibration</string>
     <string name="help_write">Write calibration coefficients to the DistoX</string>
 <!-- FIXME_SKETCH_3D -->
-    <string name="help_refs_model">View mode</string>
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
     <string name="help_one_model">Fit 3d model to view</string>
     <string name="help_surface">Make surface</string>
     <string name="help_save_model">Export 3D model</string>
     <string name="help_trash_model">Delete 3D model</string>
     <string name="help_head_model">Orient 3D model</string>
-    <string name="help_erase_model">Erase region</string>
+    <!-- UNUSED string name="help_erase_model">Erase region</string -->
     <string name="help_cut_model">Cut region</string>
     <string name="help_stretch_model">Stretch region</string>
-    <string name="help_extrude_model">Extrude region</string>
+    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
     <string name="help_refine_center">Refine surface at triangle centers</string>
     <string name="help_refine_sides">Refine surface at triangle sides</string>
     <string name="help_refine_point">Refine surface at point</string>
@@ -664,7 +664,7 @@
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_calib">CALIBRATION SETTINGS</string>
   <string name="pref_cat_device">DEVICE SETTINGS</string>
-  <string name="pref_cat_sketch">3D MODEL SETTINGS</string>
+  <!-- UNUSED string name="pref_cat_sketch">3D MODEL SETTINGS</string -->
   <string name="pref_cat_log">LOG SETTINGS</string>
 
   <string name="pref_locale_title">Language</string>
@@ -684,7 +684,7 @@
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
   <string name="pref_size_buttons_title">Buttons size</string>
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
-  <string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string>
+  <!-- UNUSED string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
 
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
@@ -923,15 +923,15 @@
   <string name="pref_log_units">Units</string>
   <string name="pref_log_zip">ZIP</string>
 
-  <string name="line_bezier">Bezier</string>
-  <string name="line_fine">fine</string>
-  <string name="line_normal">normal</string>
-  <string name="line_coarse">coarse</string>
-  <string name="units_ddmmss">ddmmss</string>
-  <string name="units_dd">degrees</string>
-  <string name="units_grads">grads</string>
-  <string name="units_meters">meters</string>
-  <string name="units_feet">feet</string>
+  <!-- UNUSED string name="line_bezier">Bezier</string -->
+  <!-- UNUSED string name="line_fine">fine</string -->
+  <!-- UNUSED string name="line_normal">normal</string -->
+  <!-- UNUSED string name="line_coarse">coarse</string -->
+  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+  <!-- UNUSED string name="units_dd">degrees</string -->
+  <!-- UNUSED string name="units_grads">grads</string -->
+  <!-- UNUSED string name="units_meters">meters</string -->
+  <!-- UNUSED string name="units_feet">feet</string -->
   <string name="alt_wgs">ellipsoid</string>
   <string name="alt_ortho">orthometric</string>
   <string name="splay_extend">estimate splay extend</string>

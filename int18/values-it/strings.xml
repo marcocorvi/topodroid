@@ -305,16 +305,16 @@
     <string name="shot_reverse">inverso</string>
     <string name="shot_to">a</string>
 
-<!--
-    <string name="make_surface">Surface exists. Replace it?</string>
+<!-- NOT USED -->
+    <!-- UNUSED string name="make_surface">Surface exists. Replace it?</string -->
 
-    <string name="sketch3d_new">New 3D sketch</string>
-    <string name="sketch3d_next">next station</string>
-    <string name="sketch3d_null_name">Missing 3D sketch name</string>
-    <string name="sketch3d_null_next">Missing 3D sketch next station</string>
-    <string name="sketch3d_null_start">Missing 3D sketch base station</string>
-    <string name="sketch3d_start">base station</string>
--->
+    <!-- UNUSED string name="sketch3d_new">New 3D sketch</string -->
+    <!-- UNUSED string name="sketch3d_next">next station</string -->
+    <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
+    <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
+    <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
+    <!-- UNUSED string name="sketch3d_start">base station</string -->
+
     <string name="sketch3d_name">model name</string>
 
     <string name="station">caposaldo</string>
@@ -382,9 +382,9 @@
     <string name="distox_err_headtail_eof">Memoria DistoX EOF</string>
     <string name="distox_err_connected">DistoX già connesso</string>
 
-     <string name="ask_close">Uscire da TopoDroid?</string>
+     <!-- UNUSED string name="ask_close">Uscire da TopoDroid?</string -->
      <string name="ask_reset">Resettare memoria DistoX?</string>
-     <string name="ask_close_survey">Chiudere rilievo?</string>
+     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
 
     <string name="button_add"       >Aggiungi  </string>
     <string name="button_back"      >Indietro  </string>
@@ -414,7 +414,7 @@
     <string name="button_right"     >DESTRA</string>
     <string name="button_clear"     >Cancella  </string>
     <string name="button_save"      >Salva     </string>
-    <string name="button_select"    >Seleziona </string>
+    <!-- UNUSED string name="button_select"    >Seleziona </string -->
     <string name="button_store"     >Scrivi    </string>
     <!-- OK string name="button_start"     >Start</string -->
     <!-- OK string name="button_stop"      >Stop</string -->
@@ -474,7 +474,7 @@
     <!-- OK string name="help_join_survey">Join surveying</string -->
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Scarica dati</string>
-    <string name="help_splay">Assegna capisaldi agli splay automaticamente</string>
+    <!-- UNUSED string name="help_splay">Assegna capisaldi agli splay automaticamente</string -->
     <string name="help_display">Scegli modalità display</string>
     <string name="help_display_calib">Mostra/Nascondi i tiri cancellati</string>
     <string name="help_overview">Vista globale</string>
@@ -493,7 +493,7 @@
     <string name="help_draw">Modalità disegno</string>
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
-    <string name="help_rename">Modifica il nome del rilievo</string>
+    <!-- UNUSED string name="help_rename">Modifica il nome del rilievo</string -->
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
     <string name="help_toggle_plot">Passa tra pianta e sezione long.</string>
@@ -562,13 +562,13 @@
     <string name="title_scraps">Disegni</string>
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
-<!--
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_edit">Edit 3D surface</string>
-    <string name="title_sketch_shot">New shot</string>
-    <string name="title_sketch_section_type">Sections type</string>
-    <string name="title_sketch_select">Select item</string>
--->
+
+    <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
+    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- UNUSED string name="title_sketch_shot">New shot</string -->
+    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
+    <!-- UNUSED string name="title_sketch_select">Select item</string -->
+
     <string name="title_stats">Statistiche</string>
     <string name="title_survey">Info rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
@@ -581,7 +581,7 @@
   <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
   <string name="pref_cat_calib">Opzioni calibrazione</string>
   <string name="pref_cat_device">Opzioni DistoX</string>
-  <string name="pref_cat_sketch">Opzioni sketch 3D</string>
+  <!-- UNUSED string name="pref_cat_sketch">Opzioni sketch 3D</string -->
   <string name="pref_cat_log">Opzioni log</string>
 
   <string name="pref_locale_title">Lingua</string>
@@ -601,7 +601,7 @@
   <string name="pref_extra_buttons_summary">Seleziona il livello di comandi</string>
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore</string>
-  <string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string>
+  <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
@@ -832,10 +832,10 @@
   <string name="pref_log_units">Unità</string>
   <string name="pref_log_zip">ZIP</string>
 
-  <!-- OK string name="line_bezier">Bezier</string -->
-  <string name="line_fine">fine</string>
-  <string name="line_normal">normale</string>
-  <string name="line_coarse">grossolana</string>
+  <!-- UNUSED string name="line_bezier">Bezier</string -->
+  <!-- UNUSED string name="line_fine">fine</string -->
+  <!-- UNUSED string name="line_normal">normale</string -->
+  <!-- UNUSED string name="line_coarse">grossolana</string -->
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">

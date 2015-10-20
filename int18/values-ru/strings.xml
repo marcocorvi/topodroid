@@ -322,9 +322,9 @@
     <string name="sketch3d_name">Название</string>
     <string name="sketch3d_new">Новая 3D модель</string>
     <string name="sketch3d_next">следующий пикет</string>
-    <string name="sketch3d_null_name">Отсутствует название 3D абриса</string>
-    <string name="sketch3d_null_next">Отсутствует следующий пикет 3D абриса</string>
-    <string name="sketch3d_null_start">Отсутствует начальный пикет 3D абриса</string>
+    <!-- UNUSED string name="sketch3d_null_name">Отсутствует название 3D абриса</string -->
+    <!-- UNUSED string name="sketch3d_null_next">Отсутствует следующий пикет 3D абриса</string -->
+    <!-- UNUSED string name="sketch3d_null_start">Отсутствует начальный пикет 3D абриса</string -->
     <string name="sketch3d_start">начальный пикет</string>
 
     <string name="station">пикет</string>
@@ -392,9 +392,9 @@
     <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
     <string name="distox_err_connected">Прибор уже подключен</string>
 
-    <string name="ask_close">Закрыть TopoDroid?</string>
+    <!-- UNUSED string name="ask_close">Закрыть TopoDroid?</string -->
     <string name="ask_reset">Сбросить память DistoX?</string>
-    <string name="ask_close_survey">Закрыть съёмку?</string>
+    <!-- UNUSED string name="ask_close_survey">Закрыть съёмку?</string -->
     
 
     <string name="button_add"       >Добавить  </string>
@@ -424,7 +424,7 @@
     <string name="button_right"     >ПРАВО</string>
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
-    <string name="button_select"    >Выбрать   </string>
+    <!-- UNUSED string name="button_select"    >Выбрать   </string -->
     <string name="button_store"     >Записать  </string>
     <string name="button_upload"    >Загрузить </string>
     <string name="button_yes"       >Да        </string>
@@ -464,11 +464,11 @@
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_edit">Изменить 3D поверхность</string>
+    <!-- UNUSED string name="title_sketch_edit">Изменить 3D поверхность</string -->
     <string name="title_sketch_shot">Новый пикет</string>
     <string name="title_sketch_refs">Режим показа</string>
-    <string name="title_sketch_section_type">Типы разрезов</string>
-    <string name="title_sketch_select">Выбрать</string>
+    <!-- UNUSED string name="title_sketch_section_type">Типы разрезов</string -->
+    <!-- UNUSED string name="title_sketch_select">Выбрать</string -->
 
     <string name="sketch_mode_single">Отдельный пикет</string>
     <string name="sketch_mode_ngbh">Соединение пикеты</string>
@@ -477,10 +477,10 @@
     <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
-    <string name="btn_stretch">Растянуть</string>
-    <string name="btn_extrude">Вырезать</string>
-    <string name="btn_erase">Стереть</string>
-    <string name="btn_cut">Вырезать</string>
+    <!-- UNUSED string name="btn_stretch">Растянуть</string -->
+    <!-- UNUSED string name="btn_extrude">Вырезать</string -->
+    <!-- UNUSED string name="btn_erase">Стереть</string -->
+    <!-- UNUSED string name="btn_cut">Вырезать</string -->
     <!-- UNUSED string name="btn_vertical">Вертикальный</string -->
     <!-- UNUSED string name="btn_horizontal">Горизонтальный</string -->
 
@@ -523,7 +523,7 @@
     <string name="help_join_survey">Совместная топосъёмка</string>
     <string name="help_info_topodroid">Сведения о TopoDroid</string>
     <string name="help_download">Скачивание данных</string>
-    <string name="help_splay">Автоматически присваивать номер пикет боковым измерениям</string>
+    <!-- UNUSED string name="help_splay">Автоматически присваивать номер пикет боковым измерениям</string -->
     <string name="help_display">Выберать режим просмотра</string>
     <string name="help_display_calib">Режим показа удаленных пикетов</string>
     <string name="help_overview">Обзор активности</string>
@@ -542,7 +542,7 @@
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Выбрать привязку абриса</string>
-    <string name="help_rename">Изменить имя съёмки</string>
+    <!-- UNUSED string name="help_rename">Изменить имя съёмки</string -->
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
     <string name="help_toggle_plot">Переключить план разрез-разв.</string>
@@ -587,16 +587,16 @@
     <string name="help_compute">Рассчитать калибровку</string>
     <string name="help_write">Записать коэфиценты калибровки в DistoX</string>
 <!-- FIXME_SKETCH_3D -->
-    <string name="help_refs_model">Режим просмотра</string>
+    <!-- UNUSED string name="help_refs_model">Режим просмотра</string -->
     <string name="help_one_model">Вместить 3d модель в экран</string>
     <string name="help_surface">Создать поверхность</string>
     <string name="help_save_model">Экспорт 3D модели</string>
     <string name="help_trash_model">Удалить 3D модель</string>
     <string name="help_head_model">Ориентироапть 3D модель</string>
-    <string name="help_erase_model">Удалить область</string>
+    <!-- UNUSED string name="help_erase_model">Удалить область</string -->
     <string name="help_cut_model">Обрезать область</string>
     <string name="help_stretch_model">Растянуть область</string>
-    <string name="help_extrude_model">Вырезать область</string>
+    <!-- UNUSED string name="help_extrude_model">Вырезать область</string -->
     <string name="help_refine_center">Уточнить поверхность в центре треугольников</string>
     <string name="help_refine_sides">Уточнить поверхность в сторонах треугольников</string>
     <string name="help_refine_point">Уточнить поверхность в точке</string>
@@ -641,7 +641,7 @@
   <string name="pref_cat_import_export">ИМПОРТ_ЭКСПОРТ</string>
   <string name="pref_cat_calib">Настройки Калибровки</string>
   <string name="pref_cat_device">Настройки Устройства</string>
-  <string name="pref_cat_sketch">Настройки Абриса</string>
+  <!-- UNUSED string name="pref_cat_sketch">Настройки Абриса</string -->
   <string name="pref_cat_log">настройки журнала</string>
 
   <!-- NO string name="pref_hide_help_title">Скрыть помощь</string -->
@@ -663,7 +663,7 @@
   <string name="pref_extra_buttons_summary">Уровень подключенного функционала</string>
   <string name="pref_size_buttons_title">Размер кнопок</string>
   <string name="pref_size_buttons_summary">Размер кнопок панели инструментов</string>
-  <string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string>
+  <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
   <string name="pref_leg_shots_title">Пикеты отрезка</string>
   <string name="pref_leg_shots_summary">Минимальное кол-во пикетов на отрезке</string>
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
@@ -897,10 +897,10 @@
   <string name="pref_log_units">Единицы</string>
   <string name="pref_log_zip">ZIP</string>
 
-  <string name="line_bezier">Безье</string>
-  <string name="line_fine">точный</string>
-  <string name="line_normal">нормальный</string>
-  <string name="line_coarse">грубый</string>
+  <!-- UNUSED string name="line_bezier">Безье</string -->
+  <!-- UNUSED string name="line_fine">точный</string -->
+  <!-- UNUSED string name="line_normal">нормальный</string -->
+  <!-- UNUSED string name="line_coarse">грубый</string -->
 
     <string name="welcome_title">Вас приветствует TopoDroid %1$s</string>
     <string name="welcome_text">

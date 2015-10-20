@@ -323,9 +323,9 @@
     <string name="sketch3d_name">Име</string>
     <string name="sketch3d_new">Нов 3D модел</string>
     <string name="sketch3d_next">Следващ репер</string>
-    <string name="sketch3d_null_name">Липсва име на 3D модела</string>
-    <string name="sketch3d_null_next">Липсва следващ репер на 3D модела</string>
-    <string name="sketch3d_null_start">Липсва начален репер на 3D модела</string>
+    <!-- UNUSED string name="sketch3d_null_name">Липсва име на 3D модела</string -->
+    <!-- UNUSED string name="sketch3d_null_next">Липсва следващ репер на 3D модела</string -->
+    <!-- UNUSED string name="sketch3d_null_start">Липсва начален репер на 3D модела</string -->
     <string name="sketch3d_start">Начален репер</string>
 
     <string name="station">репер</string>
@@ -396,9 +396,9 @@
     <string name="distox_err_headtail_eof">Грешка в DistoX паметта: EOF</string>
     <string name="distox_err_connected">Устройството е вече свързано</string>
 
-    <string name="ask_close">Затваряне на TopoDroid?</string>
+    <!-- UNUSED string name="ask_close">Затваряне на TopoDroid?</string -->
     <string name="ask_reset">Изчистване на паметта на DistoX?</string>
-    <string name="ask_close_survey">Затваряне на картировката?</string>
+    <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     
 
     <string name="button_add"       >Добавяне  </string>
@@ -429,7 +429,7 @@
     <string name="button_right"     >Надясно</string>
     <string name="button_clear"     >Изчистване</string>
     <string name="button_save"      >Запис     </string>
-    <string name="button_select"    >Избор     </string>
+    <!-- UNUSED string name="button_select"    >Избор     </string -->
     <string name="button_store"     >Съхраняване</string>
     <string name="button_start"     >Старт     </string>
     <string name="button_stop"      >Стоп      </string>
@@ -471,11 +471,11 @@
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_edit">Редакт. 3D повърхност</string>
+    <!-- UNUSED string name="title_sketch_edit">Редакт. 3D повърхност</string -->
     <string name="title_sketch_shot">Нова отсечка</string>
     <string name="title_sketch_refs">Изглед</string>
-    <string name="title_sketch_section_type">Тип сечение</string>
-    <string name="title_sketch_select">Избор на елемент</string>
+    <!-- UNUSED string name="title_sketch_section_type">Тип сечение</string -->
+    <!-- UNUSED string name="title_sketch_select">Избор на елемент</string -->
 
     <string name="sketch_mode_single">Единична отсечка</string>
     <string name="sketch_mode_ngbh">Близки отсечки</string>
@@ -484,10 +484,10 @@
     <string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
-    <string name="btn_stretch">Разтягане</string>
-    <string name="btn_extrude">Избутване</string>
-    <string name="btn_erase">Изтриване</string>
-    <string name="btn_cut">cut</string>
+    <!-- UNUSED string name="btn_stretch">Разтягане</string -->
+    <!-- UNUSED string name="btn_extrude">Избутване</string -->
+    <!-- UNUSED string name="btn_erase">Изтриване</string -->
+    <!-- UNUSED string name="btn_cut">cut</string -->
     <!-- UNUSED string name="btn_vertical">Вертикално</string -->
     <!-- UNUSED string name="btn_horizontal">Хоризонтално</string -->
 
@@ -531,7 +531,7 @@
     <string name="help_join_survey">Едновременно картиране с две приложения TopoDroid</string>
     <string name="help_info_topodroid">Информация за TopoDroid</string>
     <string name="help_download">Сваляне на данни</string>
-    <string name="help_splay">Автоматично определяне на репери за страничните отсечки</string>
+    <!-- UNUSED string name="help_splay">Автоматично определяне на репери за страничните отсечки</string -->
     <string name="help_display">Избор на данни за показване в таблицата</string>
     <string name="help_display_calib">Показване на изтрити отсечки</string>
     <string name="help_overview">Общ изглед на всички скици</string>
@@ -550,7 +550,7 @@
     <string name="help_draw">Вкл. на режим на скициране</string>
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
-    <string name="help_rename">Смяна на името на картировката</string>
+    <!-- UNUSED string name="help_rename">Смяна на името на картировката</string -->
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>
@@ -595,16 +595,16 @@
     <string name="help_compute">Изчисляване на калибрация</string>
     <string name="help_write">Запис на калибр. коефициенти в DistoX</string>
 <!-- FIXME_SKETCH_3D -->
-    <string name="help_refs_model">Режим преглед</string>
+    <!-- UNUSED string name="help_refs_model">Режим преглед</string -->
     <string name="help_one_model">Оразмеряване на 3d модела към екрана</string>
     <string name="help_surface">Повърхност</string>
     <string name="help_save_model">Експортиране на 3D модел</string>
     <string name="help_trash_model">Изтриване на 3D модел</string>
     <string name="help_head_model">Ориентиране на 3D модел</string>
-    <string name="help_erase_model">Изтриване на регион</string>
+    <!-- UNUSED string name="help_erase_model">Изтриване на регион</string -->
     <string name="help_cut_model">Отрязване на регион</string>
     <string name="help_stretch_model">Разтягане на регион</string>
-    <string name="help_extrude_model">Екструд. на регион</string>
+    <!-- UNUSED string name="help_extrude_model">Екструд. на регион</string -->
     <string name="help_refine_center">Изчистване на повърхност в центровете на триъгълниците</string>
     <string name="help_refine_sides">Изчистване на повърхност в страните на триъгълниците</string>
     <string name="help_refine_point">Изчистване на повърхност в точка</string>
@@ -649,7 +649,7 @@
   <string name="pref_cat_import_export">Настройки Импорт/Експорт</string>
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
-  <string name="pref_cat_sketch">Настройки 3D модел</string>
+  <!-- UNUSED string name="pref_cat_sketch">Настройки 3D модел</string -->
   <string name="pref_cat_log">Настройки Лог файл</string>
 
   <string name="pref_locale_title">Език</string>
@@ -669,7 +669,7 @@
   <string name="pref_extra_buttons_summary">Ниво на показваните менюта: основни, нормални, пълни...</string>
   <string name="pref_size_buttons_title">Размер бутони</string>
   <string name="pref_size_buttons_summary">Размер на бутоните за главните функции</string>
-  <string name="pref_size_buttons_message">Въведете размер на бутоните (в пиксели)</string>
+  <!-- UNUSED string name="pref_size_buttons_message">Въведете размер на бутоните (в пиксели)</string -->
 
   <string name="pref_leg_shots_title">Брой измервания за антена</string>
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
@@ -907,15 +907,15 @@
   <string name="pref_log_units">Мерни единици</string>
   <string name="pref_log_zip">ZIP</string>
 
-  <string name="line_bezier">"Безие"</string>
-  <string name="line_fine">фини</string>
-  <string name="line_normal">нормални</string>
-  <string name="line_coarse">груби</string>
-  <string name="units_ddmmss">ггммсс</string>
-  <string name="units_dd">градуси</string>
-  <string name="units_grads">гради</string>
-  <string name="units_meters">метри</string>
-  <string name="units_feet">футове</string>
+  <!-- UNUSED string name="line_bezier">"Безие"</string -->
+  <!-- UNUSED string name="line_fine">фини</string -->
+  <!-- UNUSED string name="line_normal">нормални</string -->
+  <!-- UNUSED string name="line_coarse">груби</string -->
+  <!-- UNUSED string name="units_ddmmss">ггммсс</string -->
+  <!-- UNUSED string name="units_dd">градуси</string -->
+  <!-- UNUSED string name="units_grads">гради</string -->
+  <!-- UNUSED string name="units_meters">метри</string -->
+  <!-- UNUSED string name="units_feet">футове</string -->
   <string name="alt_wgs">елипсоидна</string>
   <string name="alt_ortho">ортометрична</string>
   <string name="splay_extend">Разгъване на странични отсечки</string>

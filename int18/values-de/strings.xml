@@ -330,17 +330,16 @@
     <string name="shot_reverse">umkehren</string>
     <string name="shot_to">bis</string>
 
-<!-- NOT USED
-    <string name="make_surface">Oberfläche existiert. Ersetzen?</string>
+<!-- NOT USED -->
+    <!-- UNUSED string name="make_surface">Oberfläche existiert. Ersetzen?</string -->
 
-    <string name="sketch3d_name">Namen</string>
-    <string name="sketch3d_new">Neue 3D Skizze</string>
-    <string name="sketch3d_next">nächster Messpunkt</string>
-    <string name="sketch3d_null_name">Name der 3D-Skizze fehlt</string>
-    <string name="sketch3d_null_next">Name des nächsten 3D-Messpunktes fehlt</string>
-    <string name="sketch3d_null_start">Name des 3D-Skizzen Startmesspunktes fehlt</string>
-    <string name="sketch3d_start">Startmesspunkt</string>
--->
+    <!-- UNUSED string name="sketch3d_name">Namen</string -->
+    <!-- UNUSED string name="sketch3d_new">Neue 3D Skizze</string -->
+    <!-- UNUSED string name="sketch3d_next">nächster Messpunkt</string -->
+    <!-- UNUSED string name="sketch3d_null_name">Name der 3D-Skizze fehlt</string -->
+    <!-- UNUSED string name="sketch3d_null_next">Name des nächsten 3D-Messpunktes fehlt</string -->
+    <!-- UNUSED string name="sketch3d_null_start">Name des 3D-Skizzen Startmesspunktes fehlt</string -->
+    <!-- UNUSED string name="sketch3d_start">Startmesspunkt</string -->
 
     <string name="station">Messpunkt</string>
     <string name="station_ask">Messpunkt in Skizze anlegen?</string>
@@ -414,9 +413,9 @@
     <!-- OK string name="distox_err_headtail_eof">DistoX memory EOF error</string -->
     <string name="distox_err_connected">Gerät bereits verbunden</string>
 
-    <string name="ask_close">TopoDroid beenden?</string>
+    <!-- UNUSED string name="ask_close">TopoDroid beenden?</string -->
     <string name="ask_reset">DistoX zurücksetzen?</string>
-    <string name="ask_close_survey">Vermessung schließen?</string>
+    <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
 
     <string name="button_add"       >Erstellen       </string> <!-- or: Erstellen -->
     <string name="button_back"      >Zurück    </string>
@@ -446,7 +445,7 @@
     <string name="button_right"     >RECHTS</string>
     <string name="button_clear"     >Entfernen     </string>
     <string name="button_save"      >Sichern  </string>
-    <string name="button_select"    >Wählen     </string>
+    <!-- UNUSED string name="button_select"    >Wählen     </string -->
     <string name="button_store"     >Aufbewahren </string>
     <!-- string name="button_start"     >Start</string -->
     <!-- string name="button_stop"      >Stop</string -->
@@ -516,7 +515,7 @@
 
     <string name="help_info_topodroid">TopoDroid Nachrichten</string>
     <string name="help_download">Daten herunterladen</string>
-    <string name="help_splay">Die Messpunkten automatisch zuweisen</string> <!-- FIXME for splays -->
+    <!-- UNUSED string name="help_splay">Die Messpunkten automatisch zuweisen</string -->
     <string name="help_display">Den Anzeigemodus wählen</string>
     <string name="help_display_calib">Anzeige der gelöschten Vermessungen</string>
     <string name="help_overview">Überblickaktivität</string>
@@ -536,7 +535,7 @@
     <string name="help_eraser">Löschmodus</string>
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Die Skizzersreferenzen wählen</string>
-    <string name="help_rename">Ändere Vermessungsnamen</string>
+    <!-- UNUSED string name="help_rename">Ändere Vermessungsnamen</string -->
     <string name="help_stats">Vermessung Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <string name="help_toggle_plot">Zwischen der Draufsicht und Seitenansicht wechseln</string>
@@ -610,13 +609,13 @@
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
 
-<!-- SKETCH_3D titles
-    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_edit">Edit 3D surface</string>
-    <string name="title_sketch_shot">New shot</string>
-    <string name="title_sketch_section_type">Sections type</string>
-    <string name="title_sketch_select">Select item</string>
--->
+<!-- SKETCH_3D titles -->
+    <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
+    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- UNUSED string name="title_sketch_shot">New shot</string -->
+    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
+    <!-- UNUSED string name="title_sketch_select">Select item</string -->
+
     <string name="title_stats">Statistik</string>
     <string name="title_survey">Vermessungs-Info</string>
     <string name="title_survey_export">Vermessung speichern als</string>
@@ -630,7 +629,7 @@
   <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
   <string name="pref_cat_calib">Kalibrierung Einstellungen</string>
   <string name="pref_cat_device">Geräte Einstellungen</string>
-  <string name="pref_cat_sketch">3D-Modell Einstellungen</string>
+  <!-- UNUSED string name="pref_cat_sketch">3D-Modell Einstellungen</string -->
   <string name="pref_cat_log">Log Optionen</string>
 
   <string name="pref_locale_title">Sprache</string>
@@ -650,7 +649,7 @@
   <!-- OK string name="pref_extra_buttons_summary">Aktiviere optionale Buttons Hauptfenster</string -->
   <string name="pref_size_buttons_title">Button-Größe</string>
   <string name="pref_size_buttons_summary">Größe der Action-bar Buttons</string>
-  <string name="pref_size_buttons_message">Eingabe der Größe der Action-bar Buttons [pixels]</string>
+  <!-- UNUSED string name="pref_size_buttons_message">Eingabe der Größe der Action-bar Buttons [pixels]</string -->
   <string name="pref_leg_shots_title">Messzüge</string>
   <string name="pref_leg_shots_summary">Mindesanzahl von Messungen pro Messzug</string>
   <string name="pref_station_prefix_title">Export Messpunkt prefix</string>
@@ -884,10 +883,10 @@
   <!-- TODO string name="pref_log_units">Units</string -->
   <!-- TODO string name="pref_log_zip">ZIP</string -->
 
-  <!-- OK string name="line_bezier">Bezier</string -->
-  <!-- TODO string name="line_fine">fine</string -->
-  <!-- TODO string name="line_normal">normale</string -->
-  <!-- TODO string name="line_coarse">grossolana</string -->
+  <!-- UNUSED string name="line_bezier">Bezier</string -->
+  <!-- UNUSED string name="line_fine">fine</string -->
+  <!-- UNUSED string name="line_normal">normale</string -->
+  <!-- UNUSED string name="line_coarse">grossolana</string -->
 
 <!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
     <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
