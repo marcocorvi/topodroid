@@ -100,7 +100,7 @@ class TopoDroidLog
   static void LogFile( String msg )
   {
     long millis = System.currentTimeMillis() % 600000;
-    mLog.format( "%ld: %s\n", millis, msg );
+    mLog.format( "%d: %s\n", millis, msg );
   }
 
   static void Log( boolean flag, String msg )
@@ -110,7 +110,7 @@ class TopoDroidLog
       if ( mLogStream == 0 ) {
         Log.v( TAG, millis + " " + msg );
       } else {
-        mLog.format( "%ld: %s\n", millis, msg );
+        mLog.format( "%d: %s\n", millis, msg );
         // mLog.flush(); // autoflush ?
       }
     }
