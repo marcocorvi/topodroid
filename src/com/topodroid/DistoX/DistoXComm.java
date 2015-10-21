@@ -96,35 +96,45 @@ public class DistoXComm
       public void onReceive( Context ctx, Intent data )
       {
         String action = data.getAction();
+        BluetoothDevice bt_device = data.getParcelableExtra( BluetoothDevice.EXTRA_DEVICE );
+        String device = ( bt_device != null )? bt_device.getAddress() : "undefined";
+
         // if ( BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals( action ) ) {
         // } else if ( BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals( action ) ) {
         // } else if ( BluetoothDevice.ACTION_FOUND.equals( action ) ) {
         if ( BluetoothDevice.ACTION_ACL_CONNECTED.equals( action ) ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_CONNECTED");
-          mApp.mDataDownloader.setConnected( true );
-          mApp.notifyStatus();
+          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
+          if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
+          {
+            mApp.mDataDownloader.setConnected( true );
+            mApp.notifyStatus();
+          }
         } else if ( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECT_REQUESTED");
-          mApp.mDataDownloader.setConnected( false );
-          mApp.notifyStatus();
-          closeSocket( );
+          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
+          if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
+          {
+            mApp.mDataDownloader.setConnected( false );
+            mApp.notifyStatus();
+            closeSocket( );
+          }
         } else if ( BluetoothDevice.ACTION_ACL_DISCONNECTED.equals( action ) ) {
-          Bundle extra = data.getExtras();
-          String device = (extra!=null)? extra.getString( BluetoothDevice.EXTRA_DEVICE ) : "undefined";
-          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "DistoXComm received ACL_DISCONNECTED from " + device );
-          mApp.mDataDownloader.setConnected( false );
-          mApp.notifyStatus();
-          closeSocket( );
-          mApp.notifyDisconnected();
+          TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
+          if ( device.equals(mAddress) ) // FIXME ACL_DISCONNECT
+          {
+            mApp.mDataDownloader.setConnected( false );
+            mApp.notifyStatus();
+            closeSocket( );
+            mApp.notifyDisconnected();
+          }
         } else if ( BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
           final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
           final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
           if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED paired (BONDING --> BOND)" );
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED paired (BONDING --> BOND) " + device );
           } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> NONE)" );
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> NONE) " + device );
           } else {
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED " + prevState + " --> " + state );
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED " + prevState + " --> " + state + " " + device );
           }
 
           // DeviceUtil.bind2Device( data );
@@ -214,9 +224,13 @@ public class DistoXComm
             }
           }
         } else if ( res == DistoXProtocol.DISTOX_ERR_OFF ) {
-          // tell the user !
-          // Toast.makeText( mApp.getApplicationContext(), R.string.device_off, Toast.LENGTH_SHORT).show()
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "RFcomm readPacket returns ERR_OFF " );
+          // if ( TopoDroidSetting.mCommType == 1 && TopoDroidSetting.mAutoReconnect ) { // FIXME ACL_DISCONNECT
+          //   mApp.mDataDownloader.setConnected( false );
+          //   mApp.notifyStatus();
+          //   closeSocket( );
+          //   mApp.notifyDisconnected();
+          // }
           doWork = false;
         } else if ( res == DistoXProtocol.DISTOX_PACKET_DATA ) {
           ++nReadPackets;
@@ -358,7 +372,7 @@ public class DistoXComm
   {
     if ( mBTSocket == null ) return;
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "close socket()" );
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "close socket() address " + mAddress );
     for ( int k=0; k<1 && mBTSocket != null; ++k ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "try close socket nr " + k );
       cancelRfcommThread();
@@ -389,7 +403,7 @@ public class DistoXComm
   private void destroySocket( ) // boolean wait_thread )
   {
     if ( mBTSocket == null ) return;
-    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "destroy socket()" );
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "destroy socket() address " + mAddress );
     // closeProtocol(); // already in closeSocket()
     closeSocket();
     // mBTSocket = null;
@@ -414,7 +428,7 @@ public class DistoXComm
       TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
         int ret = DeviceUtil.pairDevice( mBTDevice );
-        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "pairing device " + ret );
+        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] pairing device " + ret );
       }
 
       if ( mBTSocket != null ) {
@@ -428,8 +442,9 @@ public class DistoXComm
       }
 
       TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
-      // if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) 
-      if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
+      if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) 
+      // if ( ! DeviceUtil.isPaired( mBTDevice ) ) 
+      {
         TopoDroidLog.Log( TopoDroidLog.LOG_BT, "bind device " );
         DeviceUtil.bindDevice( mBTDevice );
         for ( int cnt = 0; cnt < 10; ++cnt ) {

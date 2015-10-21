@@ -239,6 +239,7 @@ class TopoDroidSetting
   // DEVICE
   // static boolean mBootloader = false;  // whether to show bootloader menu
   static boolean mAutoReconnect = false;
+  static boolean mAutoPair = false;
 
   // static final boolean CHECK_BT = true;
   static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled
