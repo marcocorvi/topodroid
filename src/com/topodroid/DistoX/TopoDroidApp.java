@@ -128,19 +128,20 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------------
   // data lister
-  ListerSet mLister;
+  // ListerSet mListerSet;
+  ListerSetHandler mListerSet; // FIXME LISTER
 
-  void registerLister( ILister lister ) { mLister.registerLister( lister ); }
-  void unregisterLister( ILister lister ) { mLister.unregisterLister( lister ); }
+  void registerLister( ILister lister ) { mListerSet.registerLister( lister ); }
+  void unregisterLister( ILister lister ) { mListerSet.unregisterLister( lister ); }
 
   void notifyStatus( )
   { 
-    mLister.setConnectionStatus( mDataDownloader.getStatus() );
+    mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
   }
 
   void notifyDisconnected()
   {
-    if ( mLister.size() > 0 ) {
+    if ( mListerSet.size() > 0 ) {
       new ReconnectTask( mDataDownloader ).execute();
     }
   }
@@ -415,21 +416,21 @@ public class TopoDroidApp extends Application
 
   void disconnectRemoteDevice( boolean force )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "App disconnect RemoteDevice listers " + mLister.size() + " force " + force );
-    if ( force || mLister.size() == 0 ) {
+    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
+    if ( force || mListerSet.size() == 0 ) {
       if ( mComm != null && mComm.mBTConnected ) mComm.disconnectRemoteDevice( );
     }
   }
 
   // void connectRemoteDevice( String address )
   // {
-  //   if ( mComm != null ) mComm.connectRemoteDevice( address, mLister );
+  //   if ( mComm != null ) mComm.connectRemoteDevice( address, mListerSet );
   // }
 
   // FIXME_COMM
   public boolean connectDevice( String address ) 
   {
-    return mComm != null && mComm.connectDevice( address, mLister );
+    return mComm != null && mComm.connectDevice( address, mListerSet ); // FIXME LISTER
   }
 
   public void disconnectComm()
@@ -550,7 +551,8 @@ public class TopoDroidApp extends Application
 
     mComm = new DistoXComm( this );
 
-    mLister = new ListerSet();
+    // mListerSet = new ListerSet();
+    mListerSet = new ListerSetHandler();
     mDataDownloader = new DataDownloader( this, this );
 
     DistoXConnectionError = new String[5];
@@ -650,6 +652,7 @@ public class TopoDroidApp extends Application
     }
   }
 
+  // called by CalibReadTask.onPostExecute
   boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || mDevice == null ) return false;
@@ -657,6 +660,7 @@ public class TopoDroidApp extends Application
     return true;
   }
 
+  // called by CalibToggleTask.doInBackground
   boolean toggleCalibMode( )
   {
     if ( mComm == null || mDevice == null ) return false;
@@ -1021,7 +1025,7 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // DATA BATCH DOWNLOAD
 
-  public int downloadDataBatch( ILister lister )
+  public int downloadDataBatch( Handler /* ILister */ lister ) // FIXME LISTER
   {
     mSecondLastShotId = lastShotId();
     TopoDroidLog.Log( TopoDroidLog.LOG_DATA, "Download Data Batch() device " + mDevice + " comm " + mComm.toString() );
@@ -1772,7 +1776,7 @@ public class TopoDroidApp extends Application
     return 1; // CALIB_ALGO_LINEAR
   }  
 
-  void setX310Laser( int what, ILister lister ) // 0: off, 1: on, 2: measure
+  void setX310Laser( int what, Handler /* ILister */ lister ) // 0: off, 1: on, 2: measure // FIXME LISTER
   {
     mComm.setX310Laser( mDevice.mAddress, what, lister );
   }

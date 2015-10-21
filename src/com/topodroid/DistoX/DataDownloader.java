@@ -133,7 +133,7 @@ class DataDownloader
     if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {
       notifyConnectionStatus( true );
       // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "shot menu DOWNLOAD" );
-      new DistoXRefresh( mApp, mApp.mLister ).execute();
+      new DistoXRefresh( mApp, mApp.mListerSet ).execute();
     } else {
       mDownload = false;
       notifyConnectionStatus( false );

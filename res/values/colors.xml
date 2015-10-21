@@ -6,4 +6,13 @@
     <color name="bg_grey">#ff999999</color>
     <color name="bg_white">#ffffffff</color>
     <color name="textdelete">#ffcc0000</color>
+
+<!-- MATERIAL
+    <color name="colorPrimary">#33ccff</color>
+    <color name="colorPrimaryDark">#0099cc</color>
+    <color name="textColorPrimary">#ffffff</color>
+    <color name="windowBackground">#000000</color>
+    <color name="navigationBarColor">#666666</color>
+    <color name="colorAccent">#ff33cc</color>
+-->
 </resources>

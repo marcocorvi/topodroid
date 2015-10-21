@@ -17,15 +17,16 @@ import java.util.ArrayList;
 
 import android.widget.Toast;
 import android.os.AsyncTask;
-
+import android.os.Handler;
 
 public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
 {
   private TopoDroidApp mApp;
   private static DistoXRefresh running = null;
-  private ILister mLister;
+  // private ILister mLister;
+  private ListerHandler mLister; // FIXME LISTER
 
-  DistoXRefresh( TopoDroidApp app, ILister lister )
+  DistoXRefresh( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DistoXRefresh cstr" );
     mApp = app;
@@ -57,7 +58,7 @@ public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "onPostExecute res " + res );
     if ( res != null ) {
       int r = res.intValue();
-      mLister.refreshDisplay( r, true );
+      mLister.refreshDisplay( r, true ); 
     }
     mApp.mDataDownloader.setDownload( false );
     mApp.mDataDownloader.notifyConnectionStatus( false );

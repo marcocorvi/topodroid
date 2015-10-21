@@ -135,6 +135,7 @@ public class GMActivity extends Activity
 
   /** called by CalibComputer Task
    * @return nr of iterations (neg. error)
+   * @note run on an AsyncTask
    */
   int computeCalib()
   {
@@ -181,35 +182,52 @@ public class GMActivity extends Activity
     return iter;
   }
 
-  void handleComputeCalibResult( int result )
+  void handleComputeCalibResult( int job, int result )
   {
-    resetTitle( );
-    // ( result == -2 ) not handled
-    if ( result == -1 ) {
-      Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-      return;
-    } else if ( result > 0 ) {
-      enableWrite( true );
-      Calibration calibration = mApp.mCalibration;
-      Vector bg = calibration.GetBG();
-      Matrix ag = calibration.GetAG();
-      Vector bm = calibration.GetBM();
-      Matrix am = calibration.GetAM();
-      Vector nL = calibration.GetNL();
-      byte[] coeff = calibration.GetCoeff();
+    switch ( job ) {
+      case CalibComputer.CALIB_COMPUTE_CALIB:
+        resetTitle( );
+        // ( result == -2 ) not handled
+        if ( result == -1 ) {
+          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+          return;
+        } else if ( result > 0 ) {
+          enableWrite( true );
+          Calibration calibration = mApp.mCalibration;
+          Vector bg = calibration.GetBG();
+          Matrix ag = calibration.GetAG();
+          Vector bm = calibration.GetBM();
+          Matrix am = calibration.GetAM();
+          Vector nL = calibration.GetNL();
+          byte[] coeff = calibration.GetCoeff();
 
-      float error = calibration.mMaxError * TopoDroidUtil.RAD2GRAD;
-      (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, calibration.Delta(), error, result, coeff ) ).show();
-    } else {
-      // Toast.makeText( mApp.getApplicationContext(), R.string.few_data, Toast.LENGTH_SHORT ).show();
-      Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-      return;
+          float error = calibration.mMaxError * TopoDroidUtil.RAD2GRAD;
+          (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, calibration.Delta(), error, result, coeff ) ).show();
+        } else {
+          // Toast.makeText( mApp.getApplicationContext(), R.string.few_data, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+          return;
+        }
+        break;
+      case CalibComputer.CALIB_RESET_GROUPS:
+        break;
+      case CalibComputer.CALIB_COMPUTE_GROUPS:
+      case CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS:
+        if ( result < 0 ) {
+          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+        } else {
+          Toast.makeText( this, "Found " + result + " groups", Toast.LENGTH_SHORT ).show();
+        }
+        break;
+      default:
     }
     updateDisplay( );
+
   }
 
-  /**
+  /** called by CalibComputer Task
    * @param start_id id of the GM-data to start with
+   * @note run on an AsyncTask
    */
   void doResetGroups( long start_id )
   {
@@ -217,16 +235,18 @@ public class GMActivity extends Activity
     mApp.mDData.resetAllGMs( mApp.mCID, start_id ); // reset all groups where status=0, and id >= start_id
   }
 
-  void doComputeGroups( long start_id )
+  /** called by CalibComputer Task
+   * @note run on an AsyncTask
+   */
+  int doComputeGroups( long start_id )
   {
     long cid = mApp.mCID;
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
-    if ( cid < 0 ) return;
+    if ( cid < 0 ) return -2;
     float thr = (float)Math.cos( TopoDroidSetting.mGroupDistance * TopoDroidUtil.GRAD2RAD);
     List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );
     if ( list.size() < 4 ) {
-      Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-      return;
+      return -1;
     }
     long group = 0;
     int cnt = 0;
@@ -284,6 +304,7 @@ public class GMActivity extends Activity
         }
         break;
     }
+    return (int)group-1;
   }
 
   // -----------------------------------------------------------
@@ -576,7 +597,9 @@ public class GMActivity extends Activity
             }
             mApp.updateCalibAlgo( mAlgo );
           }
-          new DistoXRefresh( mApp, this ).execute();
+          ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
+          new DistoXRefresh( mApp, handler ).execute();
+          // new DistoXRefresh( mApp, this ).execute();
         }
       } else if ( b == mButton1[1] ) { // toggle
         enableButtons( false );

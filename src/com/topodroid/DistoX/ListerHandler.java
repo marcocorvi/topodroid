@@ -29,16 +29,25 @@ public class ListerHandler extends Handler
   static final int LISTER_STATUS  = 3;
   static final int LISTER_REF_AZIMUTH = 4;
 
-  ILister mLister;
+  ILister mLister = null;
+
+  // default cstr
+  ListerHandler( ) { mLister = null; }
 
   ListerHandler( ILister lister )
   { 
     mLister = lister;
   }
 
+  void refreshDisplay( int nr, boolean toast )
+  {
+    if ( mLister != null ) mLister.refreshDisplay( nr, toast );
+  }
+
   @Override
   public void handleMessage( Message msg )
   {
+    if ( mLister == null ) return;
     Bundle bundle = msg.getData();
     switch ( msg.what ) {
       case LISTER_REFRESH:

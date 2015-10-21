@@ -30,7 +30,6 @@ import java.lang.reflect.Field;
 
 import android.os.CountDownTimer;
 
-// import java.Thread;
 import java.nio.channels.ClosedByInterruptException;
 import java.nio.ByteBuffer;
 

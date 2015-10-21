@@ -21,8 +21,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 import java.util.List;
 import java.util.ArrayList;
-// import java.Thread;
-
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
@@ -179,8 +177,8 @@ public class DistoXComm
   {
     private DistoXProtocol mProto;
     private int toRead; // number of packet to read
-    private ILister mLister;
-    // private Handler mLister; // FIXME LISTER
+    // private ILister mLister;
+    private Handler mLister; // FIXME LISTER
 
     void cancelWork()
     {
@@ -192,7 +190,7 @@ public class DistoXComm
      * @param protocol    communication protocol
      * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
      */
-    public RfcommThread( DistoXProtocol protocol, int to_read, /* Handler */ ILister lister ) // FIXME LISTER
+    public RfcommThread( DistoXProtocol protocol, int to_read, Handler /* ILister */ lister ) // FIXME LISTER
     {
       nReadPackets = 0; // reset nr of read packets
       toRead = to_read;
@@ -242,22 +240,22 @@ public class DistoXComm
           TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           mLastShotId = mApp.mData.insertShot( mApp.mSID, -1L, d, b, c, r, extend, 0, true );
-          // if ( mLister != null ) { // FIXME LISTER sendMessage with mLastShotId only
-          //   Message msg = mLister.obtainMessage( ListerHnadler.LISTER_UPDATE );
-          //   Bundle bundle = new Bundle();
-          //   bundle.putString( ListerHandler.LISTER_DATA_BLOCK_ID, mLastShotId );
-          //   msg.setData(bundle);
-          //   mLister.sendMessage(msg);
-          // }
-          if ( mLister != null ) {
-            DistoXDBlock blk = new DistoXDBlock( );
-            blk.setId( mLastShotId, mApp.mSID );
-            blk.mLength  = (float)d;
-            blk.mBearing = (float)b;
-            blk.mClino   = (float)c;
-            blk.mRoll    = (float)r;
-            mLister.updateBlockList( blk );
+          if ( mLister != null ) { // FIXME LISTER sendMessage with mLastShotId only
+            Message msg = mLister.obtainMessage( ListerHandler.LISTER_UPDATE );
+            Bundle bundle = new Bundle();
+            bundle.putLong( ListerHandler.LISTER_DATA_BLOCK_ID, mLastShotId );
+            msg.setData(bundle);
+            mLister.sendMessage(msg);
           }
+          // if ( mLister != null ) {
+          //   DistoXDBlock blk = new DistoXDBlock( );
+          //   blk.setId( mLastShotId, mApp.mSID );
+          //   blk.mLength  = (float)d;
+          //   blk.mBearing = (float)b;
+          //   blk.mClino   = (float)c;
+          //   blk.mRoll    = (float)r;
+          //   mLister.updateBlockList( blk );
+          // }
         } else if ( res == DistoXProtocol.DISTOX_PACKET_G ) {
           // TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "G PACKET" );
           ++nReadPackets;
@@ -422,14 +420,6 @@ public class DistoXComm
       if ( mProtocol != null && ! address.equals( mAddress ) ) {
         disconnectRemoteDevice();
       }
-      mBTDevice = mApp.mBTAdapter.getRemoteDevice( address );
- 
-      // FIXME PAIRING
-      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
-      if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
-        int ret = DeviceUtil.pairDevice( mBTDevice );
-        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] pairing device " + ret );
-      }
 
       if ( mBTSocket != null ) {
         // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "create Socket() BTSocket not null ... closing");
@@ -441,21 +431,38 @@ public class DistoXComm
         mBTSocket = null;
       }
 
-      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
-      if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) 
+      mBTDevice = mApp.mBTAdapter.getRemoteDevice( address );
+      // FIXME PAIRING
+      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
+      if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
+        int ret = DeviceUtil.pairDevice( mBTDevice );
+        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[1] pairing device " + ret );
+      // }
+
+      // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
+      // // if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) 
       // if ( ! DeviceUtil.isPaired( mBTDevice ) ) 
-      {
+      // {
         TopoDroidLog.Log( TopoDroidLog.LOG_BT, "bind device " );
         DeviceUtil.bindDevice( mBTDevice );
-        for ( int cnt = 0; cnt < 10; ++cnt ) {
+        for ( int cnt = 0; cnt < 30; ++cnt ) {
           if ( DeviceUtil.isPaired( mBTDevice ) ) {
             TopoDroidLog.Log( TopoDroidLog.LOG_BT, "device paired at time " + cnt );
             break;
           }
           try {
-            Thread.sleep( 300 );
+            Thread.yield();
+            Thread.sleep( 100 );
           } catch ( InterruptedException e ) { }
         }
+      }
+
+      // wait five seconds
+      for ( int n=0; n < 100 && ! DeviceUtil.isPaired( mBTDevice ); ++n ) {
+        try {
+          Thread.yield();
+          Thread.sleep( 100 );
+        } catch ( InterruptedException e ) { }
       }
 
       if ( DeviceUtil.isPaired( mBTDevice ) ) {
@@ -497,6 +504,8 @@ public class DistoXComm
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket IO " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         }
+      } else {
+        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "device not paired. state " + mBTDevice.getBondState() );
       }
 
       if ( mBTSocket != null ) {
@@ -578,7 +587,7 @@ public class DistoXComm
     return mBTConnected;
   }
 
-  private boolean startRfcommThread( int to_read, /* Handler */ ILister lister )
+  private boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) // FIXME LISTER
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
     if ( mBTSocket != null ) {
@@ -599,7 +608,7 @@ public class DistoXComm
 
   // -------------------------------------------------------- 
   
-  // public boolean connectRemoteDevice( String address, ArrayList<ILister> lister )
+  // public boolean connectRemoteDevice( String address, Handler /* ArrayList<ILister> */ lister ) // FIXME LISTER
   // {
   //   // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect remote device: address " + address );
   //   if ( connectSocket( address ) ) {
@@ -647,7 +656,7 @@ public class DistoXComm
   /**
    * nothing to read (only write) --> no AsyncTask
    */
-  void setX310Laser( String address, int what, /* Handler */ ILister lister )
+  void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( connectSocket( address ) ) {
       switch ( what ) {
@@ -700,8 +709,8 @@ public class DistoXComm
    */
   public boolean toggleCalibMode( String address, int type )
   {
-    if ( ! checkRfcommThreadNull( "toggle CalibMode: address " + address + " type " + type ) ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "toggle CalibMode address " + address + " not null RFcomm thread" );
+    if ( ! checkRfcommThreadNull( "toggle Calib Mode: address " + address + " type " + type ) ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "toggle Calib Mode address " + address + " not null RFcomm thread" );
       return false;
     }
     boolean ret = false;
@@ -710,11 +719,11 @@ public class DistoXComm
         case Device.DISTO_A3:
           byte[] result = new byte[4];
           if ( ! mProtocol.read8000( result ) ) { // FIXME ASYNC
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "toggleCalibMode A3 failed read8000" );
+            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "toggle Calib Mode A3 failed read8000" );
             destroySocket( );
             return false;
           }
-          TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "toggleCalibMode A3 result " + result[0] );
+          TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "toggle Calib Mode A3 result " + result[0] );
           if ( (result[0] & CALIB_BIT) == 0 ) {
             ret = mProtocol.sendCommand( (byte)0x31 );  // TOGGLE CALIB ON
           } else {
@@ -723,7 +732,7 @@ public class DistoXComm
           break;
         case Device.DISTO_X310:
           mCalibMode = ! mCalibMode;
-          TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "toggleCalibMode X310 setX310CalibMode " + mCalibMode );
+          TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "toggle Calib Mode X310 setX310CalibMode " + mCalibMode );
           ret = setX310CalibMode( mCalibMode );
           break;
       }
@@ -876,7 +885,7 @@ public class DistoXComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  public boolean connectDevice( String address, /* Handler */ ILister lister ) // FIXME LISTER
+  public boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( mRfcommThread != null ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "DistoXComm connect: already connected");
@@ -899,7 +908,7 @@ public class DistoXComm
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  public int downloadData( String address, /* Handler */ ILister  lister ) // FIXME LISTER
+  public int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( ! checkRfcommThreadNull( "download data: address " + address ) ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: RFcomm thread not null");

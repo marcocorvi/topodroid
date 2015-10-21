@@ -44,10 +44,10 @@ public class CalibComputer extends AsyncTask< String, Integer, Integer >
     if ( mJob == CALIB_RESET_GROUPS ) {
       mParent.doResetGroups( mStartId );
     } else if ( mJob == CALIB_COMPUTE_GROUPS ) {
-      mParent.doComputeGroups( mStartId );
+      ret = mParent.doComputeGroups( mStartId );
     } else if ( mJob == CALIB_RESET_AND_COMPUTE_GROUPS ) {
       mParent.doResetGroups( mStartId );
-      mParent.doComputeGroups( mStartId );
+      ret = mParent.doComputeGroups( mStartId );
     } else if ( mJob == CALIB_COMPUTE_CALIB ) {
       ret = mParent.computeCalib();
     }
@@ -65,13 +65,7 @@ public class CalibComputer extends AsyncTask< String, Integer, Integer >
   {
     if ( res != null ) {
       int r = res.intValue();
-      switch ( mJob ) {
-        case CALIB_COMPUTE_CALIB:
-          mParent.handleComputeCalibResult( r );
-          break;
-        default:
-          mParent.updateDisplay( );
-      }
+      mParent.handleComputeCalibResult( mJob, r );
     }
     unlock();
   }

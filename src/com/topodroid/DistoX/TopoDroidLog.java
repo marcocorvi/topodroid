@@ -99,16 +99,18 @@ class TopoDroidLog
   
   static void LogFile( String msg )
   {
-    mLog.format( "%s\n", msg );
+    long millis = System.currentTimeMillis() % 600000;
+    mLog.format( "%ld: %s\n", millis, msg );
   }
 
   static void Log( boolean flag, String msg )
   {
     if ( flag ) {
+      long millis = System.currentTimeMillis() % 600000;
       if ( mLogStream == 0 ) {
-        Log.v( TAG, msg );
+        Log.v( TAG, millis + " " + msg );
       } else {
-        mLog.format( "%s\n", msg );
+        mLog.format( "%ld: %s\n", millis, msg );
         // mLog.flush(); // autoflush ?
       }
     }
