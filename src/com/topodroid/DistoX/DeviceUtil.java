@@ -31,10 +31,11 @@ import android.bluetooth.BluetoothDevice;
 
 public class DeviceUtil
 {
-  final static String ACTION_PAIRING_REQUEST = "android.bluetooth.device.action.PAIRING_REQUEST";
-  final static String EXTRA_DEVICE = "android.bluetooth.device.extra.DEVICE";
-  final static String EXTRA_PAIRING_VARIANT = "android.bluetooth.device.extra.PAIRING_VARIANT";
-  final static int PAIRING_VARIANT_PIN = 0;
+  // FIXME PAIRING api-19
+  // final static String ACTION_PAIRING_REQUEST = "android.bluetooth.device.action.PAIRING_REQUEST";
+  // final static String EXTRA_DEVICE = "android.bluetooth.device.extra.DEVICE";
+  // final static String EXTRA_PAIRING_VARIANT = "android.bluetooth.device.extra.PAIRING_VARIANT";
+  // final static int PAIRING_VARIANT_PIN = 0;
 
   static boolean isPaired( BluetoothDevice device )
   {

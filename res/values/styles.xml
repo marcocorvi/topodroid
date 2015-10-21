@@ -22,7 +22,8 @@
       <!-- item name="android:windowFrame">@null</item -->
     </style>
 
-    <!-- style name="TDMaterialTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+<!-- MATERIAL
+    <style name="TDMaterialTheme" parent="Theme.AppCompat.Light.DarkActionBar">
       <item name="android:windowFullscreen">true</item>
       <item name="android:screenOrientation">portrait</item>
       <item name="android:windowNoTitle">false</item>
@@ -30,7 +31,8 @@
       <item name="android:colorPrimary">@color/colorPrimary</item>
       <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
       <item name="android:colorAccent">@color/colorAccent</item>
-    </style -->
+    </style>
+-->
 
     <style name="button_default" >
        <item name="android:layout_width">wrap_content</item>
