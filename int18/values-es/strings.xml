@@ -8,11 +8,11 @@
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\nÂ¿Quiere volver a instalar los elementos de dibujo?</string>
     <string name="version_title">Versión de actualización</string>
 
-    <string name="POINT">PUNTO</string>
-    <string name="LINE">LÍNEA</string>
-    <string name="AREA">ÁREA</string>
-    <string name="HELP">AYUDA</string>
-    <string name="STATION">ESTACIÓN </string>
+    <string name="POINT">Punto</string>
+    <string name="LINE">Línea</string>
+    <string name="AREA">Área</string>
+    <string name="HELP">Ayuda</string>
+    <string name="STATION">Estación</string>
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
@@ -28,8 +28,8 @@
 
     <string name="missing_area">ÁREA</string>
     <string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string>
-    <string name="missing_line">LÍNEA</string>
-    <string name="missing_point">PUNTO</string>
+    <string name="missing_line">Línea</string>
+    <string name="missing_point">Punto</string>
     <!-- UNUSED string name="missing_save">Faltan símbolos.\nno guardado</string -->
     <string name="missing_station">Falta Estación</string>
     <string name="missing_symbols">Faltan símbolos. \nÂ¿Desea guardar de todos modos?</string>
@@ -113,7 +113,7 @@
     <string name="sketch_saving">Exportando dibujo ... espere ...</string>
     <string name="lookup_wait">Buscando en Internet ... Por favor, espere ...</string>
     <string name="lookup_fail">Fallo en la Búsqueda</string>
-    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
+    <string name="MT_points_none">No hay punto móvil Topográfico</string>
 
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
@@ -164,9 +164,9 @@
     <string name="group_reset">Resetear grupos</string>
 
     <string name="scale">Escala</string>
-    <string name="reversed">inverso</string>
-    <string name="options">nota</string>
-    <string name="outline">contorno</string>
+    <string name="reversed">Inverso</string>
+    <string name="options">Nota</string>
+    <string name="outline">Contorno</string>
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
     <string name="none">Nada</string>
@@ -195,37 +195,37 @@
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
     <string name="no_shots">Topografía sin mediciones.\nUse botón para descargar mediciones</string>
-    <string name="no_survey">Topografía no seleccionada.</string>
+    <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
     <string name="no_undelete">No hay medida para recuperar</string>
 
-    <string name="menu_about">ACERCA DE</string>
-    <string name="menu_attach">CONECTAR</string>
-    <string name="menu_calib">CALIBRACIÓN</string>
-    <string name="menu_delete">ELIMINAR</string>
-    <string name="menu_detach">DESCONECTAR</string>
-    <string name="menu_display">PANTALLA</string>
-    <string name="menu_export">EXPORTAR</string>
-    <string name="menu_firmware">FIRMWARE</string>
-    <string name="menu_recover">REGISTRO</string>
-    <string name="menu_reload">RECARGAR</string>
-    <string name="menu_rename">RENOMBRAR</string>
-    <string name="menu_help">AYUDA</string>
-    <string name="menu_join_survey">CO-TOPOGRAFÍA</string>
-    <string name="menu_logs">REGISTROS</string>
-    <!-- UNUSED string name="menu_manual">MANUAL</string -->
-    <string name="menu_manual_calibration">CALIBRACIÓN</string>
-    <string name="menu_options">OPCIONES</string>
-    <string name="menu_overview">VISUALIZACIÓN GENERAL</string>
-    <string name="menu_pair">EMPAREJAR</string>
-    <string name="menu_palette">PALETA</string>
-    <string name="menu_photo">FOTO</string>
-    <string name="menu_sensor">SENSOR</string>
-    <string name="menu_scan">ESCANEO</string>
-    <!-- UNUSED string name="menu_station">ESTACIÓN</string -->
-    <string name="menu_stats">ESTADÍSTICAS</string>
-    <string name="menu_survey">INFO TOPOGRAFÍA</string>
+    <string name="menu_about">Acerca de..</string>
+    <string name="menu_attach">Conectar</string>
+    <string name="menu_calib">Calibración</string>
+    <string name="menu_delete">Eliminar</string>
+    <string name="menu_detach">Desconectar</string>
+    <string name="menu_display">Pantalla</string>
+    <string name="menu_export">Exportar</string>
+    <string name="menu_firmware">Firmware</string>
+    <string name="menu_recover">Registro</string>
+    <string name="menu_reload">Recargar</string>
+    <string name="menu_rename">Renombrar</string>
+    <string name="menu_help">Ayuda</string>
+    <string name="menu_join_survey">Topografía comartida</string>
+    <string name="menu_logs">Rgistros</string>
+    <!-- UNUSED string name="menu_manual">Manual</string -->
+    <string name="menu_manual_calibration">Calibración</string>
+    <string name="menu_options">Opciones</string>
+    <string name="menu_overview">Visualización General</string>
+    <string name="menu_pair">Emparejar</string>
+    <string name="menu_palette">Paleta</string>
+    <string name="menu_photo">Foto</string>
+    <string name="menu_sensor">Sensor</string>
+    <string name="menu_scan">Escanear</string>
+    <!-- UNUSED string name="menu_station">Eestación</string -->
+    <string name="menu_stats">Estadísticas</string>
+    <string name="menu_survey">Info. topografía</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -248,7 +248,7 @@
     <string name="photo_external">Medición</string>
     <!-- UNUSED string name="photo_sensor_prompt">Seleccione fotografía o sensor</string -->
     <string name="photo_shot">Añadir toma</string>
-    <string name="photo_survey">dividir Topografía</string>
+    <string name="photo_survey">Dividir topografía</string>
     <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>
     <string name="plot_delete">Â¿Eliminar dibujo?</string>
     <string name="item_delete">Eliminar elemento %1$s ?</string>
@@ -365,10 +365,10 @@
     <string name="surveys">Topografía</string>
     <string name="calibs">Calibración</string>
 
-    <string name="plan">PLANTA</string>
-    <string name="extended">DESARROLLADO</string>
-    <string name="v_section">V-SECCIÓN</string>
-    <string name="h_section">H-SECCIÓN</string>
+    <string name="plan">Planta</string>
+    <string name="extended">Desarrollado</string>
+    <string name="v_section">V-sección</string>
+    <string name="h_section">H-sección</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
@@ -477,7 +477,7 @@
     <string name="help_remote">Control remoto DistoX</string>
     <string name="help_add_shot">Introducir datos de una toma manualmente</string>
     <string name="help_info_shot">Estadísticas de topografía</string>
-    <string name="help_survey_info">Información Topografía</string>
+    <string name="help_survey_info">Información topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
     <string name="help_photo">Opciones de Fotos</string>
     <string name="help_sensor">Opciones de medidas</string>
@@ -537,9 +537,9 @@
     <string name="title_current_station">Estaciones guardadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_discover">Buscar dispositivos DistoX ... espere</string>
-    <string name="title_draw_area">ÁREA %1$s</string>
-    <string name="title_draw_line">LÍNEA %1$s</string>
-    <string name="title_draw_point">PUNTO %1$s</string>
+    <string name="title_draw_area">Área %1$s</string>
+    <string name="title_draw_line">Línea %1$s</string>
+    <string name="title_draw_point">Punto %1$s</string>
     <string name="title_edit">Editar</string>
     <string name="title_erase">Borrar</string>
     <string name="title_location">Posicionamiento</string>
@@ -569,13 +569,13 @@
     <string name="title_calib_export">Exportar topografía como...</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">OPCIONES TOPOGRAFÍA</string>
-  <string name="pref_cat_drawing">OPCIONES DIBUJO</string>
-  <string name="pref_cat_import_export">IMPORTAR / EXPORTAR</string>
-  <string name="pref_cat_calib">OPCIONES CALIBRACIÓN</string>
-  <string name="pref_cat_device">OPCIONES DISTOX</string>
-  <!-- UNUSED string name="pref_cat_sketch">OPCIONES DIBUJO</string -->
-  <string name="pref_cat_log">OPCIONES DE REGISTRO</string>
+  <string name="pref_cat_survey">Opciones de topografía</string>
+  <string name="pref_cat_drawing">Opciones de dibujo</string>
+  <string name="pref_cat_import_export">Importar / Exportar</string>
+  <string name="pref_cat_calib">Opciones de calibración</string>
+  <string name="pref_cat_device">Opciones de distoX</string>
+  <!-- UNUSED string name="pref_cat_sketch">Opciones de dibujo</string -->
+  <string name="pref_cat_log">Opciones de dibujo</string>
 
   <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Idioma</string>
@@ -619,16 +619,16 @@
   <string name="pref_crs_message">Introducir el CRS nombrar como en Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
-  <string name="pref_plot_screen_title">OPCIONES DE PANTALLA DEL DIBUJO</string>
-  <string name="pref_tool_screen_title">OPCIONES DE PALETA DE DIBUJO</string>
-  <string name="pref_location_title">OPCIONES DE UBICACIÓN</string>
-  <string name="pref_accuracy_title">OPCIONES DE MEDICIÓN</string>
-  <string name="pref_shot_data_title">OPCIONES DE LAS VISUALES</string>
-  <string name="pref_shot_units_title">UNIDADES DE DATOS</string>
+  <string name="pref_plot_screen_title">Opciones de pantalla de dibujo</string>
+  <string name="pref_tool_screen_title">Opciones de dibujo</string>
+  <string name="pref_location_title">Opciones de ubicación</string>
+  <string name="pref_accuracy_title">Opciones de medición</string>
+  <string name="pref_shot_data_title">Opciones de visuales</string>
+  <string name="pref_shot_units_title">Unidades de datos</string>
   <string name="pref_cwd_title">Directorio principal</string>
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
-  <string name="pref_pt_color_map_title">PocketTopo color map</string>
+  <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
   <string name="pref_text_size_title">Tamaño del texto de la lista</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
@@ -673,7 +673,7 @@
   <string name="pref_vthr_title">Toma límite</string>
   <string name="pref_vthr_summary">límite visual vertical por LRUD/WENS</string>
   <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
-  <string name="pref_plan_vthr_title">Limite visual vertical</string>
+  <string name="pref_plan_vthr_title">Límite visual vertical</string>
   <string name="pref_plan_vthr_summary">Límite vertical visual en planta</string>
   <string name="pref_plan_vthr_message">límite vertical de la visual en el planta</string>
   <string name="pref_init_station_title">Estación de inicio</string>
