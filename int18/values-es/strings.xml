@@ -8,11 +8,11 @@
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\nÂ¿Quiere volver a instalar los elementos de dibujo?</string>
     <string name="version_title">Versión de actualización</string>
 
-    <string name="POINT">PUNTO</string>
-    <string name="LINE">LÍNEA</string>
-    <string name="AREA">ÁREA</string>
-    <string name="HELP">AYUDA</string>
-    <string name="STATION">ESTACIÓN </string>
+    <string name="POINT">Punto</string>
+    <string name="LINE">Línea</string>
+    <string name="AREA">Área</string>
+    <string name="HELP">Ayuda</string>
+    <string name="STATION">Estación</string>
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
@@ -164,9 +164,9 @@
     <string name="group_reset">Resetear grupos</string>
 
     <string name="scale">Escala</string>
-    <string name="reversed">inverso</string>
-    <string name="options">nota</string>
-    <string name="outline">contorno</string>
+    <string name="reversed">Inverso</string>
+    <string name="options">Nota</string>
+    <string name="outline">Contorno</string>
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
     <string name="none">Nada</string>
@@ -195,7 +195,7 @@
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
     <string name="no_shots">Topografía sin mediciones.\nUse botón para descargar mediciones</string>
-    <string name="no_survey">Topografía no seleccionada.</string>
+    <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
     <string name="no_undelete">No hay medida para recuperar</string>
@@ -222,7 +222,7 @@
     <string name="menu_palette">Paleta</string>
     <string name="menu_photo">Foto</string>
     <string name="menu_sensor">Sensor</string>
-    <string name="menu_scan">Escaneo</string>
+    <string name="menu_scan">Escanear</string>
     <!-- UNUSED string name="menu_station">Eestación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
@@ -248,7 +248,7 @@
     <string name="photo_external">Medición</string>
     <!-- UNUSED string name="photo_sensor_prompt">Seleccione fotografía o sensor</string -->
     <string name="photo_shot">Añadir toma</string>
-    <string name="photo_survey">dividir Topografía</string>
+    <string name="photo_survey">Dividir topografía</string>
     <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>
     <string name="plot_delete">Â¿Eliminar dibujo?</string>
     <string name="item_delete">Eliminar elemento %1$s ?</string>
@@ -365,7 +365,7 @@
     <string name="surveys">Topografía</string>
     <string name="calibs">Calibración</string>
 
-    <string name="plan">PLANTA</string>
+    <string name="plan">Planta</string>
     <string name="extended">Desarrollado</string>
     <string name="v_section">V-sección</string>
     <string name="h_section">H-sección</string>
@@ -477,7 +477,7 @@
     <string name="help_remote">Control remoto DistoX</string>
     <string name="help_add_shot">Introducir datos de una toma manualmente</string>
     <string name="help_info_shot">Estadísticas de topografía</string>
-    <string name="help_survey_info">Información Topografía</string>
+    <string name="help_survey_info">Información topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
     <string name="help_photo">Opciones de Fotos</string>
     <string name="help_sensor">Opciones de medidas</string>
@@ -628,7 +628,7 @@
   <string name="pref_cwd_title">Directorio principal</string>
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
-  <string name="pref_pt_color_map_title">PocketTopo color map</string>
+  <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
   <string name="pref_text_size_title">Tamaño del texto de la lista</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
@@ -673,7 +673,7 @@
   <string name="pref_vthr_title">Toma límite</string>
   <string name="pref_vthr_summary">límite visual vertical por LRUD/WENS</string>
   <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
-  <string name="pref_plan_vthr_title">Limite visual vertical</string>
+  <string name="pref_plan_vthr_title">Límite visual vertical</string>
   <string name="pref_plan_vthr_summary">Límite vertical visual en planta</string>
   <string name="pref_plan_vthr_message">límite vertical de la visual en el planta</string>
   <string name="pref_init_station_title">Estación de inicio</string>
