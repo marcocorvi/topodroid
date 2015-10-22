@@ -69,7 +69,8 @@ public class ShotDialog extends Dialog
   private MyCheckBox mRBdup;
   private MyCheckBox mRBsurf;
   private MyCheckBox mCBleg;
-  private MyCheckBox mCBall_splay;
+  private MyCheckBox mCBlegNext;
+  private MyCheckBox mCBallSplay;
   private MyCheckBox mCBrenumber;
 
   private Button mButtonReverse;
@@ -301,27 +302,30 @@ public class ShotDialog extends Dialog
     // mRBsurf = (CheckBox) findViewById( R.id.shot_surf );
     // // mRBback = (CheckBox) findViewById( R.id.shot_back );
     // mCBleg = (CheckBox)  findViewById(R.id.shot_leg );
-    // mCBall_splay = (CheckBox)  findViewById(R.id.shot_all_splay );
+    // mCBallSplay = (CheckBox)  findViewById(R.id.shot_all_splay );
     // mCBrenumber  = (CheckBox)  findViewById(R.id.shot_renumber  );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 10 );
 
-    mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
-    mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-    mCBleg       = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
-    mCBall_splay = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
-    mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
+    mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
+    mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
+    mCBleg      = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
+    mCBlegNext  = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
+    mCBallSplay = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
+    mCBrenumber = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
 
     layout4.addView( mRBdup );
     layout4.addView( mRBsurf );
     layout4.addView( mCBleg );
-    layout4.addView( mCBall_splay );
+    layout4.addView( mCBlegNext );
+    layout4.addView( mCBallSplay );
     layout4.addView( mCBrenumber );
 
     mCBleg.setOnClickListener( this );
-    mCBall_splay.setOnClickListener( this );
+    mCBlegNext.setOnClickListener( this );
+    mCBallSplay.setOnClickListener( this );
 
     layout4.invalidate();
 
@@ -354,8 +358,8 @@ public class ShotDialog extends Dialog
     mButtonOK.setOnClickListener( this );
     // mButtonBack.setOnClickListener( this );
 
-    // mRBdup.setOnClickListener( this );
-    // mRBsurf.setOnClickListener( this );
+    mRBdup.setOnClickListener( this );
+    mRBsurf.setOnClickListener( this );
 
     mButtonPrev.setOnClickListener( this );
     mButtonNext.setOnClickListener( this );
@@ -372,11 +376,16 @@ public class ShotDialog extends Dialog
 
   private void saveDBlock()
   {
-    boolean all_splay = mCBall_splay.isChecked();
+    boolean all_splay = mCBallSplay.isChecked();
+    boolean leg_next  = false;
     if ( mCBleg.isChecked() ) {
       shot_from = "";
       shot_to = "";
       shot_leg = true;
+      all_splay = false;
+    } else if ( mCBlegNext.isChecked() ) {
+      leg_next  = true;
+      shot_leg  = false;
       all_splay = false;
     } else {
       shot_from = TopoDroidUtil.noSpaces( mETfrom.getText().toString() );
@@ -400,7 +409,16 @@ public class ShotDialog extends Dialog
 
     mBlk.mFlag = shot_flag;
     mBlk.mExtend = shot_extend;
-    if ( shot_leg ) mBlk.mType = DistoXDBlock.BLOCK_SEC_LEG;
+    if ( shot_leg ) {
+      mBlk.mType = DistoXDBlock.BLOCK_SEC_LEG;
+    } else if ( leg_next ) {
+      long id = mParent.mergeToNextLeg( mBlk );
+      if ( id >= 0 ) {
+        shot_from = mBlk.mFrom;
+        shot_to   = mBlk.mTo;
+      }
+    }
+      
 
     String comment = mETcomment.getText().toString();
     if ( comment != null ) mBlk.mComment = comment;
@@ -410,6 +428,7 @@ public class ShotDialog extends Dialog
       renumber = mCBrenumber.isChecked();
       all_splay = false;
     }
+
     if ( all_splay ) {
       mParent.updateSplayShots( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
     } else {
@@ -458,21 +477,41 @@ public class ShotDialog extends Dialog
       // Log.v("DistoX", "CB leg clicked ");
       mCBleg.toggleState();
       if ( mCBleg.isChecked() ) {
-        mCBall_splay.setState( false );
+        mCBallSplay.setState( false );
+        mCBlegNext.setState( false );
       }
-    } else if ( b == mCBall_splay ) {
+    } else if ( b == mCBallSplay ) {
       // Log.v("DistoX", "CB all_splay clicked ");
-      mCBall_splay.toggleState();
-      if ( mCBall_splay.isChecked() ) {
+      mCBallSplay.toggleState();
+      if ( mCBallSplay.isChecked() ) {
         mCBleg.setState( false );
+        mCBlegNext.setState( false );
+      }
+    } else if ( b == mCBlegNext ) {
+      mCBlegNext.toggleState();
+      if ( mCBlegNext.isChecked() ) {
+        mCBleg.setState( false );
+        mCBallSplay.setState( false );
+      }
+    } else if ( b == mRBdup ) {
+      mRBdup.toggleState();
+      if ( mRBdup.isChecked() ) {
+        mRBsurf.setState( false );
+      }
+    } else if ( b == mRBsurf ) {
+      mRBsurf.toggleState();
+      if ( mRBsurf.isChecked() ) {
+        mRBdup.setState( false );
       }
     
-    } else if ( b == mButtonOK ) {
+    } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
+      closeKeyboard();
       saveDBlock();
-      onBackPressed();
+      dismiss();
     } else if ( b == mButtonSave ) {
-      // FIXME DIALOG mKeyboard.hide();
+      closeKeyboard();
       saveDBlock();
+
     } else if ( b == mButtonPrev ) {
       // shift:
       //               prev -- blk -- next
@@ -523,14 +562,19 @@ public class ShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
+    if ( closeKeyboard() ) return;
     dismiss();
   }
 
+  private boolean closeKeyboard()
+  {
+    if ( TopoDroidSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return true;
+      }
+    }
+    return false;
+  }
 }
 

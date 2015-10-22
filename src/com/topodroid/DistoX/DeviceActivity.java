@@ -681,20 +681,19 @@ public class DeviceActivity extends Activity
             mApp.disconnectRemoteDevice( true );
             mApp.setDevice( address );
 
-            if ( true || TopoDroidSetting.mAutoPair ) {
-              // try to get the system ask for the PIN
-              BluetoothDevice BTDevice;
-              BTDevice = mApp.mBTAdapter.getRemoteDevice( address );
-              if ( ! DeviceUtil.isPaired( BTDevice ) ) {
-                int ret = DeviceUtil.pairDevice( BTDevice );
-                if ( ! DeviceUtil.isPaired( BTDevice ) ) {
-                  for (int c=0; c<10; ++c ) {
-                    DeviceUtil.bindDevice( BTDevice );
-                    try {
-                      Thread.sleep( 300 );
-                    } catch ( InterruptedException e ) { }
-                    if ( DeviceUtil.isPaired( BTDevice ) ) break;
-                  }
+            if ( TopoDroidSetting.mAutoPair ) { // try to get the system ask for the PIN
+              BluetoothDevice btDevice = mApp.mBTAdapter.getRemoteDevice( address );
+              TopoDroidLog.Log( TopoDroidLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress()
+                + " status " + btDevice.getBondState() );
+              if ( ! DeviceUtil.isPaired( btDevice ) ) {
+                DeviceUtil.pairDevice( btDevice );
+                DeviceUtil.bindDevice( btDevice );
+                for (int c=0; c<TopoDroidSetting.mConnectSocketDelay; ++c ) {
+                  if ( DeviceUtil.isPaired( btDevice ) ) break;
+                  try {
+                    // Thread.yield();
+                    Thread.sleep( 100 );
+                  } catch ( InterruptedException e ) { }
                 }
               }
             }

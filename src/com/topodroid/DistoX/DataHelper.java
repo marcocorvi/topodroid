@@ -287,7 +287,6 @@ public class DataHelper extends DataSetObservable
      }
    }
 
-
    private void fillBlock( long survey_id, DistoXDBlock block, Cursor cursor )
    {
      block.setId( cursor.getLong(0), survey_id );
@@ -1457,6 +1456,40 @@ public class DataHelper extends DataSetObservable
        do {
          ret = cursor.getString( 0 );
        } while ( ret.length() == 0 && cursor.moveToNext());
+     }
+     if (cursor != null && !cursor.isClosed()) {
+       cursor.close();
+     }
+     return ret;
+   }
+
+   long mergeToNextLeg( DistoXDBlock blk, long sid, boolean forward )
+   {
+     Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "id", "fStation", "tStation" },
+       "surveyId=? and id>=?", 
+       new String[] { Long.toString(sid), Long.toString(blk.mId) },
+       null,  // groupBy
+       null,  // having
+       "id ASC" ); // order by ID
+     long ret = -1;
+     if (cursor.moveToFirst()) {
+       for ( int k = 0; k < 3; ++ k ) {
+         String from = cursor.getString(1);
+         String to   = cursor.getString(2);
+         if ( from.length() > 0 && to.length() > 0 ) {
+           ret = cursor.getLong( 0 );
+           // Log.v("DistoX", blk.mId + " < " + from + " - " + to + " > at k " + k );
+           if ( k > 0 ) {
+             // Log.v("DistoX", blk.mId + " clear shot name " + ret );
+             updateShotName( ret, sid, "", "", forward );
+           }
+           updateShotName( blk.mId, sid, from, to, forward );
+           blk.mFrom = from;
+           blk.mTo   = to;
+           break;
+         }
+         if ( ! cursor.moveToNext() ) break;
+       }
      }
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();

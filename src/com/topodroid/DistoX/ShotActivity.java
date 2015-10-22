@@ -1434,4 +1434,17 @@ public class ShotActivity extends Activity
     mApp.assignStationsAfter( blk, shots );
     updateDisplay();
   }
+
+  // merge this block to the following (or second following) block if this is a leg
+  // if success update FROM/TO of the block
+  long mergeToNextLeg( DistoXDBlock blk )
+  {
+    long id = mApp.mData.mergeToNextLeg( blk, mApp.mSID, false );
+    // Log.v("DistoX", "merge next leg: block " + blk.mId + " leg " + id );
+    if ( id >= 0 && id != blk.mId ) {
+      // mDataAdapter.updateBlockName( id, "", "" ); // name has already been updated in DB
+      updateDisplay(); // FIXME change only block with id
+    }
+    return id;
+  }
 }

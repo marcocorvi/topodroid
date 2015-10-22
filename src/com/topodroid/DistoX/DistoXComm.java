@@ -128,9 +128,19 @@ public class DistoXComm
           final int state     = data.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
           final int prevState = data.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.ERROR);
           if (state == BluetoothDevice.BOND_BONDED && prevState == BluetoothDevice.BOND_BONDING) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED paired (BONDING --> BOND) " + device );
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED paired (BONDING --> BONDED) " + device );
           } else if (state == BluetoothDevice.BOND_NONE && prevState == BluetoothDevice.BOND_BONDED){
             TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> NONE) " + device );
+          } else if (state == BluetoothDevice.BOND_BONDING && prevState == BluetoothDevice.BOND_BONDED) {
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
+            if ( mBTSocket != null ) {
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "[*] socket is not null: close and retry connect ");
+              mApp.mDataDownloader.setConnected( false );
+              mApp.notifyStatus();
+              closeSocket( );
+              mApp.notifyDisconnected();
+              connectSocket( mAddress ); // returns immediately if mAddress == null
+            }
           } else {
             TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED " + prevState + " --> " + state + " " + device );
           }
@@ -443,26 +453,22 @@ public class DistoXComm
       // // if ( mBTDevice.getBondState() == BluetoothDevice.BOND_NONE ) 
       // if ( ! DeviceUtil.isPaired( mBTDevice ) ) 
       // {
-        TopoDroidLog.Log( TopoDroidLog.LOG_BT, "bind device " );
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "bind device " );
         DeviceUtil.bindDevice( mBTDevice );
-        for ( int cnt = 0; cnt < 30; ++cnt ) {
-          if ( DeviceUtil.isPaired( mBTDevice ) ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "device paired at time " + cnt );
-            break;
-          }
+      }
+
+      // wait "delay" seconds
+      if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
+        for ( int n=0; n < TopoDroidSetting.mConnectSocketDelay; ++n ) {
           try {
             Thread.yield();
             Thread.sleep( 100 );
           } catch ( InterruptedException e ) { }
+          if ( DeviceUtil.isPaired( mBTDevice ) ) {
+            TopoDroidLog.Log( TopoDroidLog.LOG_BT, "device paired at time " + n );
+            break;
+          }
         }
-      }
-
-      // wait five seconds
-      for ( int n=0; n < 100 && ! DeviceUtil.isPaired( mBTDevice ); ++n ) {
-        try {
-          Thread.yield();
-          Thread.sleep( 100 );
-        } catch ( InterruptedException e ) { }
       }
 
       if ( DeviceUtil.isPaired( mBTDevice ) ) {
@@ -548,8 +554,8 @@ public class DistoXComm
    */
   private boolean connectSocket( String address )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket(): " + address );
     if ( address == null ) return false;
+    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket(): " + address );
     createSocket( address, 1 ); // default port == 1
 
     // DEBUG

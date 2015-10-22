@@ -105,6 +105,17 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     }
   }
 
+  void updateBlockName( long id, String from, String to ) 
+  {
+    for ( DistoXDBlock b : mItems ) {
+      if ( b.mId == id ) {
+        b.mFrom = from;
+        b.mTo = to;
+        break;
+      }
+    }
+  }
+
   public DistoXDBlock get( int pos ) { return mItems.get(pos); }
  
   private class ViewHolder
