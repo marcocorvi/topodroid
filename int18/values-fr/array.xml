@@ -2,6 +2,11 @@
 
 <resources>
 
+  <!-- TODO string-array name="wallsType">
+     <item name="none">None</item>
+     <item name="convex">Convex</item>
+  </string-array -->
+
   <!-- TODO string-array name="zoomCtrl">
      <item name="0">Off</item>
      <item name="1">Temporary</item>

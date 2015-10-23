@@ -50,18 +50,19 @@ public class DrawingShotDialog extends Dialog
   private CheckBox mRBduplicate;
   private CheckBox mRBsurface;
   // private CheckBox mRBbackshot;
+  private Button mRBwalls;
 
-  private DrawingActivity mActivity;
+  private DrawingActivity mParent;
   private DistoXDBlock mBlock;
 
   MyKeyboard mKeyboard = null;
 
-  public DrawingShotDialog( Context context, DrawingActivity activity, DrawingPath shot )
+  public DrawingShotDialog( Context context, DrawingActivity parent, DrawingPath shot )
   {
     super(context);
-    mContext  = context;
-    mActivity = activity;
-    mBlock    = shot.mBlock;
+    mContext = context;
+    mParent  = parent;
+    mBlock   = shot.mBlock;
   }
 
   @Override
@@ -92,6 +93,7 @@ public class DrawingShotDialog extends Dialog
     mRBduplicate = (CheckBox) findViewById( R.id.duplicate );
     mRBsurface   = (CheckBox) findViewById( R.id.surface );
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
+    mRBwalls  = (Button) findViewById( R.id.walls );
 
     // if ( ! TopoDroidApp.mLoopClosure ) {
     //   mRBignore.setClickable( false );
@@ -107,6 +109,13 @@ public class DrawingShotDialog extends Dialog
     mRBduplicate.setOnClickListener( this );
     mRBsurface.setOnClickListener( this );
     // mRBbackshot.setOnClickListener( this );
+    if ( TopoDroidSetting.mWallsType != TopoDroidSetting.WALLS_NONE 
+      && TopoDroidSetting.mLevelOverAdvanced 
+      && ( mParent.getPlotType() == PlotInfo.PLOT_PLAN || mParent.getPlotType() == PlotInfo.PLOT_EXTENDED ) ) {
+      mRBwalls.setOnClickListener( this );
+    } else {
+      mRBwalls.setVisibility( View.GONE );
+    }
 
     mBtnOK.setOnClickListener( this );
     // mBtnCancel.setOnClickListener( this );
@@ -189,6 +198,10 @@ public class DrawingShotDialog extends Dialog
     //   mRBduplicate.setChecked( false );
     //   mRBsurface.setChecked( false );
 
+    } else if ( b == mRBwalls ) {
+      mParent.drawWallsAt( mBlock );
+      dismiss();
+
     } else if ( b == mBtnOK ) {
       long extend = mBlock.mExtend;
       long flag   = mBlock.mFlag;
@@ -213,18 +226,18 @@ public class DrawingShotDialog extends Dialog
         flag = DistoXDBlock.BLOCK_SURVEY;
       }
 
-      mActivity.updateBlockExtend( mBlock, extend ); // equal extend checked by the method
-      mActivity.updateBlockFlag( mBlock,flag ); // equal flag is checked by the method
+      mParent.updateBlockExtend( mBlock, extend ); // equal extend checked by the method
+      mParent.updateBlockFlag( mBlock,flag ); // equal flag is checked by the method
 
       String from = mETfrom.getText().toString().trim();
       String to   = mETto.getText().toString().trim();
       String comment = mETcomment.getText().toString().trim();
 
       if ( ! from.equals( mBlock.mFrom ) || ! to.equals( mBlock.mTo ) ) { // FIXME revert equals
-        mActivity.updateBlockName( mBlock, from, to );
+        mParent.updateBlockName( mBlock, from, to );
       }
 
-      mActivity.updateBlockComment( mBlock, comment ); // equal comment checked by the method
+      mParent.updateBlockComment( mBlock, comment ); // equal comment checked by the method
 
       // } else if (view.getId() == R.id.button_cancel ) {
       //   /* nothing */

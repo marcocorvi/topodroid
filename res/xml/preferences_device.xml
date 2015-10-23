@@ -72,6 +72,23 @@
        android:defaultValue="true"
      />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SOCKET_DELAY"
+       android:title="@string/pref_socket_delay_title"
+       android:summary="@string/pref_socket_delay_summary"
+       android:dialogTitle="@string/pref_socket_delay_dialogtitle"
+       android:dialogMessage="@string/pref_socket_delay_message"
+       android:inputType="number"
+       android:defaultValue="0"
+     />
+
+     <CheckBoxPreference
+       android:key="DISTOX_AUTO_PAIR"
+       android:summary="@string/pref_auto_pair_summary"
+       android:title="@string/pref_auto_pair_title"
+       android:defaultValue="true"
+     />
+
   <Preference
      android:key="DISTOX_CALIB_PREF"
      android:title="@string/pref_cat_calib"

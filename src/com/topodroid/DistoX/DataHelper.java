@@ -1482,6 +1482,12 @@ public class DataHelper extends DataSetObservable
            if ( k > 0 ) {
              // Log.v("DistoX", blk.mId + " clear shot name " + ret );
              updateShotName( ret, sid, "", "", forward );
+             updateShotLeg( ret, sid, 1L, forward ); 
+             if ( k == 2 ) { // N.B. if k == 2 must set ShotLeg also to intermediate shot
+               if ( cursor.moveToPrevious() ) { // overcautious
+                 updateShotLeg( cursor.getLong(0), sid, 1L, forward ); 
+               }
+             }
            }
            updateShotName( blk.mId, sid, from, to, forward );
            blk.mFrom = from;

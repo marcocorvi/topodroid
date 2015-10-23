@@ -41,12 +41,13 @@ Sequence a-b-c-d for the first (forsight) and the third (backsight) policies.<br
 <h4>SHOT EDIT DIALOG [B]</h4>
 If you choose not to have the station assigned automatically, you must set them manually. Tapping on a shot data brings up the shot edit dialog. With it you can set the station(s) (if the shot is blank TopoDroid suggest them for you incrementing those of the previous leg), the direction of extend for the profile (either left, right, vertical; if none is checked the shot is ignored in the profile), and the shot flag (whether it is a regular shot, or duplicate or surface: if no flag is set the shot is "regular").  Finally you can add a brief comment to the shot.  The values of length, azimuth and inclination of shots downloaded from the DistoX or of an imported survey cannot be modified.  For manually entered shots they are editable.  The <u>Reverse</u> button swaps the stations.  The arrow buttons let you move forward and backward over the leg shots.  The <u>OK</u> button save the changes and closes the dialog.  The <u>Save</u> button saves the changes but does not closes the dialog.<br><p>
 
-This dialog has five check buttons:<br>
+This dialog has six check buttons:<br>
 <img src="shot_dialog_btn2.png"><br>
 <ol>
 <li><i>duplicate leg</i>: this checkbox marks the shot as duplicate, so that it does not count towards the cave statistics</li>
 <li><i>surface</i> denotes a surface shot. Surface shots do not count for the cave statistics either.</li>
 <li><i>repeated leg</i> tells TopoDroid that the shot is a "repeated leg"; the shot stations are blanked out and it is marked as "repeated leg".</li>
+<li><i>merge with leg</i> tells TopoDroid that the shot is the first of a leg that has been assigned to the following shot.</li>
 <li><i>splay group</i> is used if only the From station has been entered (and the To station is empty): it changes the From station of all the splay shots of the group. Effectively this assigns the group of splays from one station to another.</li>
 <li><i>renumber</i> is used to rename subsequent shots; if the editing shot is a leg (ie, the From and To stations are specified) and the box is checked, all subsequent shots are renamed according to the current station assignment policy, their type not being changed (ie, splays remain splay, legs remain leg, and blank shots remain blank).</li>
 </ol>

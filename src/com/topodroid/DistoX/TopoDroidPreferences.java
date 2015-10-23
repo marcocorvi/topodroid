@@ -55,8 +55,9 @@ public class TopoDroidPreferences extends PreferenceActivity
   static final int PREF_LOCATION        = 10; 
   static final int PREF_PLOT_SCREEN     = 11; 
   static final int PREF_TOOL_SCREEN     = 12; 
+  static final int PREF_PLOT_WALLS      = 13; 
 
-  static final int PREF_CATEGORY_LOG    = 13; // this must be the last
+  static final int PREF_CATEGORY_LOG    = 14; // this must be the last
 
   private int mPrefCategory = PREF_CATEGORY_ALL; // preference category
 
@@ -108,6 +109,8 @@ public class TopoDroidPreferences extends PreferenceActivity
       addPreferencesFromResource(R.xml.preferences_plot_screen);
     } else if (mPrefCategory == PREF_TOOL_SCREEN ) {
       addPreferencesFromResource(R.xml.preferences_tool_screen);
+    } else if (mPrefCategory == PREF_PLOT_WALLS ) {
+      addPreferencesFromResource(R.xml.preferences_plot_walls);
     } else if (mPrefCategory == PREF_CATEGORY_LOG ) {
       addPreferencesFromResource(R.xml.preferences_log);
     } else {
@@ -152,6 +155,7 @@ public class TopoDroidPreferences extends PreferenceActivity
     if (mPrefCategory == PREF_CATEGORY_PLOT ) {
       linkPreference( "DISTOX_PLOT_SCREEN", PREF_PLOT_SCREEN );
       linkPreference( "DISTOX_TOOL_SCREEN", PREF_TOOL_SCREEN );
+      linkPreference( "DISTOX_PLOT_WALLS",  PREF_PLOT_WALLS );
     }
 
     if (mPrefCategory == PREF_CATEGORY_SURVEY ) {

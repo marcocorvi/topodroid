@@ -26,17 +26,18 @@
     <string name="thl_wall">mur</string>
     <string name="tha_water">eau</string>
 
+    <!-- TODO string name="make_walls">Walls</string -->
     <string name="missing_area">ZONE</string>
     <string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string>
     <string name="missing_line">LIGNE</string>
     <string name="missing_point">POINT</string>
-    <!-- string name="missing_save">Sketch has missing symbols.\nNot saving it.</string -->
+    <!-- UNUSED string name="missing_save">Sketch has missing symbols.\nNot saving it.</string -->
     <string name="missing_station">Station manquante</string>
     <string name="missing_symbols">Il manque des symboles.\nEnregistrer tout de même ?</string>
     <!-- UNUSED string name="missing_title">SYMBOLES MANQUANTS</string -->
     <string name="missing_warning">Les symboles suivants sont manquants.\n</string>
-    <!-- string name="failed_snap_to_line">No close line to snap area border to</string -->
-    <!-- string name="failed_snap_to_point">No close point to snap the point to</string -->
+    <!-- TODO string name="failed_snap_to_line">No close line to snap area border to</string -->
+    <!-- TODO string name="failed_snap_to_point">No close point to snap the point to</string -->
 
     <!-- TODO string name="calibration_title">Instruments calibration</string -->
     <!-- TODO string name="calibration_length">Tape</string -->
@@ -48,7 +49,7 @@
     <string name="calib_delete">Supprimer l\'étalonnage </string>
     <string name="calib_device_mismatch">ATTENTION : étalonnage-périphérique non correspondant</string>
     <string name="calib_no_name">Vous devez indiquer un nom d\'étalonnage</string>
-    <!-- string name="calib_gm_undelete">Undelete calibration data?</string -->
+    <!-- TODO string name="calib_gm_undelete">Undelete calibration data?</string -->
     <string name="calib_saved">Etalonnage enregistré</string>
     <string name="calib_updated">Etalonnage mis à jour</string>
     <string name="calib_compute_groups">Calculs des groupes de données d\'étalonnage ...</string>
@@ -83,16 +84,16 @@
     <string name="device_status_calib">Mode %1$s</string>
     <string name="device_status_silent">Silencieux %1$s</string>
     <string name="bt_reset">Redémarrer connexion Bluetooth</string>
-    <!-- string name="save_as">save as</string -->
+    <!-- TODO string name="save_as">save as</string -->
     <!-- TODO string name="nickname">Nickname</string -->
 
     <string name="comment">commentaire</string>
-    <!-- string name="flag">Flag</string -->
+    <!-- TODO string name="flag">Flag</string -->
     <!-- TODO string name="backshot">backshot</string -->
     <string name="duplicate">double</string>
-    <!-- string name="regular">régulier</string -->
+    <!-- UNUSED string name="regular">régulier</string -->
     <string name="surface">surface</string>
-    <!-- string name="extend">Extend</string -->
+    <!-- TODO string name="extend">Extend</string -->
     <string name="extend_ignore">Aucun</string>
     <string name="extend_left">Gauche</string>
     <string name="extend_right">Droite</string>
@@ -142,20 +143,20 @@
     <string name="error_clino_required">Pente nécessaire</string>
     <!-- TODO string name="error_comment_required">Comment required</string -->
     <string name="error_begin_required">Adresse de début nécessaire</string>
-    <!-- string name="error_declination_number">Declination must be a number</string -->
+    <!-- TODO string name="error_declination_number">Declination must be a number</string -->
     <string name="error_end_required">Adresse de fin nécessaire</string>
     <string name="error_from_required">Première station nécessaire</string>
     <string name="error_group_required">Numéro de groupe nécessaire</string>
-    <!-- string name="error_group_non_integer">Group must be integer number</string -->
+    <!-- TODO string name="error_group_non_integer">Group must be integer number</string -->
     <string name="error_alt_required">Altitude nécessaire</string>
-    <!-- string name="error_invalid_number">Invalid number</string -->
+    <!-- TODO string name="error_invalid_number">Invalid number</string -->
     <string name="error_lat_required">Latitude nécessaire</string>
     <string name="error_long_required">Longitude nécessaire</string>
     <string name="error_name_required">Nom nécessaire</string>
     <string name="error_start_required">Station de référence nécessaire</string>
-    <!-- string name="error_station_already_fixed">Station already with coordinates</string -->
+    <!-- TODO string name="error_station_already_fixed">Station already with coordinates</string -->
     <string name="error_station_required">Station nécessaire</string>
-    <!-- string name="error_station_non_existing">Non existing station</string -->
+    <!-- TODO string name="error_station_non_existing">Non existing station</string -->
     <string name="error_sensor_required">Capteur nécessaire</string>
     <string name="error_value_required">Valeur nécessaire</string>
     
@@ -208,7 +209,7 @@
     <string name="menu_calib">ETALONNAGE</string>
     <string name="menu_delete">SUPPRIMER</string>
     <string name="menu_detach">DÉCONNECTER</string>
-    <!-- string name="menu_display">DISPLAY</string -->
+    <!-- TODO string name="menu_display">DISPLAY</string -->
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPÉRER</string>
@@ -217,7 +218,7 @@
     <string name="menu_help">AIDE</string>
     <!-- TODO string name="menu_join_survey">Co-survey</string -->
     <string name="menu_logs">JOURNALISATION</string>
-    <!-- string name="menu_manual">MANUEL</string -->
+    <!-- UNUSED string name="menu_manual">MANUEL</string -->
     <!-- TODO string name="menu_manual_calibration">Calibration</string -->
     <string name="menu_options">OPTIONS</string>
     <!-- TODO string name="menu_overview">OVERVIEW</string -->
@@ -228,14 +229,14 @@
     <!-- TODO string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <!-- TODO string name="menu_stats">STATS</string -->
-    <!-- string name="menu_survey">SURVEY INFO</string -->
+    <!-- TODO string name="menu_survey">SURVEY INFO</string -->
 
     <string name="popup_join_pt">Attacher au point le plus proche</string>
     <string name="popup_snap_ln">Attacher à la ligne la plus proche</string>
     <string name="popup_split_pt">Dupliquer point</string>
     <string name="popup_split_ln">Couper la ligne</string>
-    <!-- string name="popup_sharp_pt">Angle aigu</string -->
-    <!-- string name="popup_curve_pt">Curved segment</string -->
+    <!-- TODO string name="popup_sharp_pt">Angle aigu</string -->
+    <!-- TODO string name="popup_curve_pt">Curved segment</string -->
     <string name="popup_remove_pt">Supprimer le point</string>
 
     <string name="not_available">Bluetooth indisponible</string>
@@ -255,20 +256,20 @@
     <string name="picture_no_station">Besoin d\'une station/nom pour la photo</string>
     <string name="plot_delete">Supprimer le croquis ?</string>
     <!-- TODO string name="item_delete">Delete item %1$s ?</string -->
-    <!-- string name="plot_duplicate_name">Duplicate sketch name</string -->
+    <!-- TODO string name="plot_duplicate_name">Duplicate sketch name</string -->
     <string name="plot_name">Nom du croquis</string>
     <string name="plot_new">Nouveau croquis</string>
     <string name="plot_not_found">Dessin introuvable</string>
-    <!-- string name="plot_null_name">Missing sketch name</string -->
-    <!-- string name="plot_null_start">Missing base station</string -->
+    <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
+    <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- TODO string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Station d\'origne</string>
-    <!-- string name="plot_view">Station consulté</string -->
+    <!-- UNUSED string name="plot_view">Station consulté</string -->
     <!-- UNUSED string name="read_">Lecture </string -->
     <string name="read_data">Lecture %1$d données</string>
     <string name="read_fail_with_code">Echec de lecture : code d\'erreur </string>
     <string name="read_failed">Echec lors de lecture du DistoX</string>
-    <!-- string name="reading_file_failed">Echec lors de la lecture du fichier</string -->
+    <!-- UNUSED string name="reading_file_failed">Echec lors de la lecture du fichier</string -->
     <string name="saved_file_">Fichier enregistré\ </string>
     <string name="saving_">Enregistrement </string>
     <string name="saving_file_failed">Echec de l\'enregistrement du fichier</string>
@@ -278,12 +279,12 @@
     <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
 
     <string name="sensor">capteur</string>
-    <!-- string name="sensor_accelerometer">accelerometer</string -->
+    <!-- UNUSED string name="sensor_accelerometer">accelerometer</string -->
     <string name="sensor_gravity">gravité</string>
-    <!-- string name="sensor_humidity">humidity</string -->
+    <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">lumière</string>
     <string name="sensor_magnetic_field">champ magnétique</string>
-    <!-- string name="sensor_orientation">orientation</string -->
+    <!-- UNUSED string name="sensor_orientation">orientation</string -->
     <string name="sensor_pressure">pression</string>
     <string name="sensor_proximity">proximité</string>
     <string name="sensor_temperature">température</string>
@@ -292,16 +293,16 @@
     <string name="sensor_value">valeur</string>
     <string name="sensor_comment">commentaire</string>
 
-    <!-- string name="shot_clino">clino</string -->
-    <!-- string name="shot_compass">compass</string -->
+    <!-- UNUSED string name="shot_clino">clino</string -->
+    <!-- UNUSED string name="shot_compass">compass</string -->
     <!-- TODO string name="shot_delete">Delete shot ?</string -->
     <string name="shot_from">depuis</string>
     <string name="shot_info">Saisir les infos de visée</string>
     <!-- TOO LONG string name="shot_leg">Ligne de cheminement répétée</string -->
     <string name="shot_leg">Visée répétée</string>
     <!-- TODO string name="shot_renumber">renumber</string -->
-    <!-- string name="shot_all_splay">splay group</string -->
-    <!-- string name="shot_length">length</string -->
+    <!-- TODO string name="shot_all_splay">splay group</string -->
+    <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">note</string>
     <string name="shot_reverse">inverse</string>
     <string name="shot_to">à</string>
@@ -320,8 +321,8 @@
     <string name="station">station</string>
     <string name="station_ask">Insérer station ?</string>
     <string name="station_set">Continuer le relevé depuis cette station ?</string>
-    <!-- string name="station_base">Station de référence</string -->
-    <!-- NO string name="station_next">next station</string -->
+    <!-- UNUSED string name="station_base">Station de référence</string -->
+    <!-- UNUSED string name="station_next">next station</string -->
     <string name="station_viewed">station consultée</string>
     <string name="survey_exists">Conflit de nom de relevé</string>
     <string name="survey_date">aaaa/mm/jj</string>
@@ -329,12 +330,12 @@
     <!-- TODO string name="survey_split">Split survey ?</string -->
     <string name ="survey_not_attached">*ATTENTION: visées non attachées*</string>
     <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
-    <!-- string name="declination">Déclination magnétique</string -->
+    <!-- TODO string name="declination">Déclination magnétique</string -->
     <string name="declination">Décl. magn.</string>
     <string name="description">description</string>
     <string name="name">nom</string>
     <string name="team">équipe</string>
-    <!-- string name="toggle_device">Mettre le périphérique en mode étalonnage</string -->
+    <!-- UNUSED string name="toggle_device">Mettre le périphérique en mode étalonnage</string -->
     <string name="toggle_failed">Echec du changement de mode du DistoX</string>
     <string name="toggle_ok">DistoX en mode étalonnage</string>
     <string name="undelete_text">Sélectionner un élément pour le récupérer</string>
@@ -346,7 +347,7 @@
     <string name="zip_saved">Enregistré </string>
     <string name="zip_failed">Echec lors de la compression du relevé</string>
     <string name="unzip_fail">Echec lors la décompression du relevé</string>
-    <!-- string name="zoom_in_out">Zoom +/-</string -->
+    <!-- UNUSED string name="zoom_in_out">Zoom +/-</string -->
 
     <string name="survey_info">Information de relevé</string>
     <string name="stat_component">Composants %1$d</string>
@@ -397,9 +398,9 @@
     <string name="button_eval_cal"  >Eval avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <string name="button_geomag">GeoMag    </string>
-    <!-- string name="button_gps_stop"  >Stop      </string -->
-    <!-- string name="button_manual"    >Manuel    </string -->
-    <!-- string name="button_measure"   >Mesure   </string -->
+    <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
+    <!-- UNUSED string name="button_manual"    >Manuel    </string -->
+    <!-- UNUSED string name="button_measure"   >Mesure   </string -->
     <string name="button_photo"   >Photos</string>
     <string name="button_sensor"  >Mesures</string>
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
@@ -407,7 +408,7 @@
     <string name="button_plot"    >Dessin</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Non        </string>
-    <!-- string name="button_open"      >Open      </string -->
+    <!-- TODO string name="button_open"      >Open      </string -->
     <string name="button_read"      >Lecture      </string>
     <!-- TODO string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump     </string>
@@ -418,8 +419,8 @@
     <string name="button_save"      >Enregistrer      </string>
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
     <string name="button_store"     >Stocker     </string>
-    <!-- string name="button_start"     >Start</string -->
-    <!-- string name="button_stop"      >Stop</string -->
+    <!-- TODO string name="button_start"     >Start</string -->
+    <!-- TODO string name="button_stop"      >Stop</string -->
     <!-- TODO string name="button_upload"    >Upload    </string -->
     <string name="button_yes"       >Oui       </string>
 
@@ -504,11 +505,11 @@
     <string name="help_redo">Rétabli la dernière action</string>
     <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>
     <!-- TODO string name="help_delete_item">Delete sketch item</string -->
-    <!-- string name="help_clear">Clear selection</string -->
+    <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Efface un/des éléments du croquis</string>
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>
     <string name="help_next">Sélectionne l\'élément suivant dans la sélection</string>
-    <!-- string name="help_recover">Recover sketch from backup</string -->
+    <!-- TODO string name="help_recover">Recover sketch from backup</string -->
    
     <string name="help_line_point">Actions sur les points d\'une ligne : joindre, partager, couper, supprimer</string>
 <!--
@@ -576,7 +577,7 @@
     <string name="title_survey_export">Exporter le relevé sous</string>
     <!-- TODO string name="title_survey_rename">Rename survey as</string -->
     <string name="title_calib_export">Exporter l\'étalonnages sous</string>
-    <!-- string name="title_zoom">Zoom</string -->
+    <!-- UNUSED string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">Options du relevé</string>
   <string name="pref_cat_drawing">Options de dessin</string>
@@ -611,8 +612,8 @@
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Créer socket</string>
-  <!-- string name="pref_device_type_title">Disto type</string -->
-  <!-- string name="pref_device_type_summary">Model of the DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
   <string name="pref_comm_retry_title">Tentative de communication</string>
   <string name="pref_comm_retry_summary">Nombre max. de tentatives</string>
   <string name="pref_comm_retry_dialogtitle">Nombre max. de tentatives</string>
@@ -621,6 +622,12 @@
   <!-- TODO string name="pref_conn_mode_summary">How to connect to the DistoX</string -->
   <!-- TODO string name="pref_auto_reconnect_title">Auto reconnect</string -->
   <!-- TODO string name="pref_auto_reconnect_summary">Reconnect when connection is lostX</string -->
+  <!-- TODO string name="pref_auto_pair_title">Auto pairing</string -->
+  <!-- TODO string name="pref_auto_pair_summary">Pair with device after scan</string -->
+  <!-- TODO string name="pref_socket_delay_title">Connection delay</string -->
+  <!-- TODO string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string -->
+  <!-- TODO string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string -->
+  <!-- TODO string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string -->
   <!-- TODO string name="pref_z6_workaround_title">Z6 workaround</string -->
   <!-- TODO string name="pref_z6_workaround_summary">Z6 workaround data download</string -->
   <string name="pref_crs_title">C R S </string>
@@ -806,6 +813,25 @@
   <string name="pref_unit_angle_summary">Afficher les unités d\'angles</string>
   <string name="pref_unit_location_title">Unité de localisation</string>
   <string name="pref_unit_location_summary">Afficher les unités de localisation</string>
+
+  <!-- TODO string name="pref_plot_walls_title">AUTO WALLS</string -->
+  <!-- TODO string name="pref_walls_type_title">Walls type</string -->
+  <!-- TODO string name="pref_walls_type_summary">Walls type</string -->
+  <!-- TODO string name="pref_walls_plan_thr_title">Splay plan clino</string -->
+  <!-- TODO string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls</string -->
+  <!-- TODO string name="pref_walls_plan_thr_message">Maximum splay clino for plan walls [deg]</string -->
+  <!-- TODO string name="pref_walls_extended_thr_title">Splay profile clino</string -->
+  <!-- TODO string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls</string -->
+  <!-- TODO string name="pref_walls_extended_thr_message">Maximum splay clino for profile walls [deg]</string -->
+  <!-- TODO string name="pref_walls_xclose_title">Separation</string -->
+  <!-- TODO string name="pref_walls_xclose_summary">Minimum point-separation along the shot</string -->
+  <!-- TODO string name="pref_walls_xclose_message">Minimum separation of wall points along the shot [m]</string -->
+  <!-- TODO string name="pref_walls_concave_title">Concavity</string -->
+  <!-- TODO string name="pref_walls_concave_summary">Maximum concavity</string -->
+  <!-- TODO string name="pref_walls_concave_message">Maximum concavity [percent]</string -->
+  <!-- TODO string name="pref_walls_xstep_title">Step</string -->
+  <!-- TODO string name="pref_walls_xstep_summary">Point separation along the wall</string -->
+  <!-- TODO string name="pref_walls_xstep_message">Separation of points along the wall [m]</string -->
 
   <string name="pref_log_stream_summary">Flux de journalisation</string>
   <string name="pref_log_stream_title">Flux de journalisation</string>

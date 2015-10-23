@@ -2,6 +2,15 @@
 
 <resources>
 
+  <string-array name="wallsType">
+     <item name="none">None</item>
+     <item name="convex">Convex</item>
+  </string-array>
+  <string-array name="wallsTypeValue">
+     <item name="none">0</item>
+     <item name="convex">1</item>
+  </string-array>
+
   <string-array name="acadVersion">
      <item name="9">AutoCAD 6</item>
      <item name="13">AutoCAD 12</item>

@@ -674,7 +674,7 @@ public class DeviceActivity extends Activity
       case REQUEST_DEVICE:
         if ( result == RESULT_OK ) {
           String address = extras.getString( TopoDroidTag.TOPODROID_DEVICE_ACTION );
-          TopoDroidLog.Log(TopoDroidLog.LOG_DISTOX, "OK " + address );
+          // TopoDroidLog.Log(TopoDroidLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "onActivityResult REQUEST_DEVICE: null address");
           } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) { // N.B. address != null
@@ -683,8 +683,8 @@ public class DeviceActivity extends Activity
 
             if ( TopoDroidSetting.mAutoPair ) { // try to get the system ask for the PIN
               BluetoothDevice btDevice = mApp.mBTAdapter.getRemoteDevice( address );
-              TopoDroidLog.Log( TopoDroidLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress()
-                + " status " + btDevice.getBondState() );
+              // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress()
+              //   + " status " + btDevice.getBondState() );
               if ( ! DeviceUtil.isPaired( btDevice ) ) {
                 DeviceUtil.pairDevice( btDevice );
                 DeviceUtil.bindDevice( btDevice );
@@ -703,7 +703,7 @@ public class DeviceActivity extends Activity
             setState();
           }
         } else if ( result == RESULT_CANCELED ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "CANCELED");
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "CANCELED");
           // finish(); // back to survey
         }
         updateList();

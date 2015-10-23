@@ -105,6 +105,16 @@ class TopoDroidSetting
     "DISTOX_DXF_SCALE", 
     "DISTOX_ACAD_VERSION",
     "DISTOX_BITMAP_BGCOLOR",
+    "DISTOX_AUTO_PAIR",
+    "DISTOX_SOCKET_DELAY",
+
+    "DISTOX_WALLS_TYPE",
+    "DISTOX_WALLS_PLAN_THR",
+    "DISTOX_WALLS_EXTENDED_THR",
+    "DISTOX_WALLS_XCLOSE",
+    "DISTOX_WALLS_XSTEP",
+    "DISTOX_WALLS_CONCAVE",
+
     "DISTOX_LOCALE",                 // 
     "DISTOX_CWD",                    // must be last 
 
@@ -376,6 +386,20 @@ class TopoDroidSetting
       mShotAfterSplays = true;
     }
   }
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // WALLS
+
+  static final int WALLS_NONE = 0;
+  static final int WALLS_CONVEX = 1;
+  static final int WALLS_MAX = 2; // placeholder
+  static int mWallsType = WALLS_NONE;
+  static float mWallsPlanThr = 70;
+  static float mWallsExtendedThr = 45;
+  static float mWallsXClose = 0.1f;
+  static float mWallsXStep  = 1.0f;
+  static float mWallsConcave = 0.1f;
+
+  // ------------------------------------------------------------------
 
   static void loadPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
@@ -667,6 +691,37 @@ class TopoDroidSetting
     } catch ( NumberFormatException e) { }
 
     setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
+
+    mAutoPair = prefs.getBoolean( key[ k++ ], true ); // DISTOX_AUTO_PAIR
+    try {
+      i = Integer.parseInt(prefs.getString( key[ k++ ], "0" ) );  // DISTOX_SOCKET_DELAY
+      if ( i >= 0 && i <= 1000 ) mConnectSocketDelay = i;
+    } catch ( NumberFormatException e ) { }
+
+    try { // DISTOX_WALLS_TYPE
+      i = Integer.parseInt(prefs.getString( key[k++], "0" ) ); 
+      if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
+    } catch ( NumberFormatException e ) { }
+    try { // DISTOX_WALLS_PLAN_THR
+      f = Float.parseFloat( prefs.getString( key[k++], "70") );
+      if ( f > 0 && f <= 90 ) mWallsPlanThr = f;
+    } catch ( NumberFormatException e) { }
+    try { // DISTOX_WALLS_EXTENDED_THR
+      f = Float.parseFloat( prefs.getString( key[k++], "45") ); 
+      if ( f > 0 && f <= 90 ) mWallsExtendedThr = f;
+    } catch ( NumberFormatException e) { }
+    try { // DISTOX_WALLS_XCLOSE
+      f = Float.parseFloat( prefs.getString( key[k++], "0.1") ); 
+      if ( f > 0.0001 ) mWallsXClose = f;
+    } catch ( NumberFormatException e) { }
+    try { // DISTOX_WALLS_XSTEP
+      f = Float.parseFloat( prefs.getString( key[k++], "1.0") ); 
+      if ( f > 0.0001 ) mWallsXStep  = f;
+    } catch ( NumberFormatException e) { }
+    try { // DISTOX_WALLS_CONCAVE
+      f = Float.parseFloat( prefs.getString( key[k++], "0.1") ); 
+      if ( f >= 0 ) mWallsConcave = f;
+    } catch ( NumberFormatException e) { }
 
     app.setLocale( prefs.getString( key[k++], "" ) );
 
@@ -1005,6 +1060,44 @@ class TopoDroidSetting
       } catch ( NumberFormatException e) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       setBitmapBgcolor( prefs.getString( k, "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AUTO_PAIR
+      mAutoPair = prefs.getBoolean( k, true ); // DISTOX_AUTO_PAIR
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_SOCKET_DELAY
+      try {
+        i = Integer.parseInt(prefs.getString( k, "0" ) );  
+        if ( i >= 0 && i <= 1000 ) mConnectSocketDelay = i;
+      } catch ( NumberFormatException e ) { }
+
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
+      try {
+        i = Integer.parseInt(prefs.getString( k, "0" ) ); 
+        if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
+      } catch ( NumberFormatException e ) { }
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_PLAN_THR
+      try {
+        f = Float.parseFloat( prefs.getString( k, "70") );
+        if ( f > 0 && f <= 90 ) mWallsPlanThr = f;
+      } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_EXTENDED_THR
+      try {
+        f = Float.parseFloat( prefs.getString( k, "45") ); 
+        if ( f > 0 && f <= 90 ) mWallsExtendedThr = f;
+      } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_XCLOSE
+      try {
+        f = Float.parseFloat( prefs.getString( k, "0.1") ); 
+        if ( f > 0.0001 ) mWallsXClose = f;
+      } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_XSTEP
+      try {
+        f = Float.parseFloat( prefs.getString( k, "1.0") ); 
+        if ( f > 0.0001 ) mWallsXStep  = f;
+      } catch ( NumberFormatException e) { }
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_CONCAVE
+      try {
+        f = Float.parseFloat( prefs.getString( k, "0.1") ); 
+        if ( f >= 0 ) mWallsConcave = f;
+      } catch ( NumberFormatException e) { }
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

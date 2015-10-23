@@ -97,8 +97,8 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
     <li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
     <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
     <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
-    </li>
-  </ul>
+    </ul>
+  </li>
   <li><i>SKETCH ITEMS >></i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
@@ -109,8 +109,18 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
     <li><i>Section-line tick size</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
     <li><i>Green dots radius</i>: size of the green dots displayed in <b>edit</b> mode [default 5 pxl] [N]</li>
     <li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
-    </li>
-  </ul>
+    </ul>
+  </li>
+  <li><i>AUTO WALLS [E] >></i>
+    <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Walls type</i>: the type of auto-walls. Default is "none" (disabled).</li>
+    <li><i>Splay plan threshold</i>: inclination threshold for using splays in auto-walls in the plan view.</li>
+    <li><i>Splay profile threshold</i>: inclination threshold for using splays in auto-walls in the profile view.</li>
+    <li><i>Point separation</i>: minimum separation of splay points along the shot direction. If two splays are closer than this value only the soplay with largest distance from the shot is used.</li>
+    <li><i>Point step</i>: maximum distance along the walls between two line-points. If a wall segment connecting two splays is too long it is splitted interpolating points</li>
+    <li><i>Concavity</i>: amount of accetped concavity.</li>
+    </ul>
+  </li>
 </ul>
 
 <h4>SKETCH SHIFT [E]</h4>

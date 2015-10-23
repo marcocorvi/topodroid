@@ -31,6 +31,7 @@
     <string name="tha_user">Nutzer</string>
     <string name="tha_water">Wasser</string>
 
+    <!-- TODO string name="make_walls">Walls</string -->
 <!-- STRINGS ABOUT MISSING ITEMS ARE NO LONGER USED -->
     <string name="missing_area">FLÄCHE</string>
     <!-- OK string name="missing_hint">Please, enable the missing tools or install them</string -->
@@ -667,6 +668,12 @@
   <string name="pref_conn_mode_summary">Art der Verbindung mit DistoX</string>
   <string name="pref_auto_reconnect_title">Automatische Wiederverbindung</string>
   <string name="pref_auto_reconnect_summary">Wiederverbindung nach Verbindungsverlust</string>
+  <!-- TODO string name="pref_auto_pair_title">Auto pairing</string -->
+  <!-- TODO string name="pref_auto_pair_summary">Pair with device after scan</string -->
+  <!-- TODO string name="pref_socket_delay_title">Connection delay</string -->
+  <!-- TODO string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string -->
+  <!-- TODO string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string -->
+  <!-- TODO string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string -->
   <string name="pref_z6_workaround_title">Z6 Workaround</string>
   <string name="pref_z6_workaround_summary">Z6 Workaround Daten-Download</string>
   <!-- OK string name="pref_crs_title">C R S </string -->
@@ -854,6 +861,25 @@
   <!-- TODO string name="pref_unit_angle_summary">Display units for angles</string -->
   <!-- TODO string name="pref_unit_location_title">Location units</string -->
   <!-- TODO string name="pref_unit_location_summary">Display units for locations</string -->
+
+  <!-- TODO string name="pref_plot_walls_title">AUTO WALLS</string -->
+  <!-- TODO string name="pref_walls_type_title">Walls type</string -->
+  <!-- TODO string name="pref_walls_type_summary">Walls type</string -->
+  <!-- TODO string name="pref_walls_plan_thr_title">Splay plan clino</string -->
+  <!-- TODO string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls</string -->
+  <!-- TODO string name="pref_walls_plan_thr_message">Maximum splay clino for plan walls [deg]</string -->
+  <!-- TODO string name="pref_walls_extended_thr_title">Splay profile clino</string -->
+  <!-- TODO string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls</string -->
+  <!-- TODO string name="pref_walls_extended_thr_message">Maximum splay clino for profile walls [deg]</string -->
+  <!-- TODO string name="pref_walls_xclose_title">Separation</string -->
+  <!-- TODO string name="pref_walls_xclose_summary">Minimum point-separation along the shot</string -->
+  <!-- TODO string name="pref_walls_xclose_message">Minimum separation of wall points along the shot [m]</string -->
+  <!-- TODO string name="pref_walls_concave_title">Concavity</string -->
+  <!-- TODO string name="pref_walls_concave_summary">Maximum concavity</string -->
+  <!-- TODO string name="pref_walls_concave_message">Maximum concavity [percent]</string -->
+  <!-- TODO string name="pref_walls_xstep_title">Step</string -->
+  <!-- TODO string name="pref_walls_xstep_summary">Point separation along the wall</string -->
+  <!-- TODO string name="pref_walls_xstep_message">Separation of points along the wall [m]</string -->
 
   <!-- TODO string name="pref_log_stream_summary">Log output stream</string -->
   <!-- TODO string name="pref_log_stream_title">Log stream</string -->

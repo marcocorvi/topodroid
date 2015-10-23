@@ -3350,4 +3350,188 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
+// -------------------------------------------------------------
+// AUTO WALLS
+
+  void drawWallsAt( DistoXDBlock blk )
+  {
+    if ( TopoDroidSetting.mWallsType == TopoDroidSetting.WALLS_NONE ) return;
+
+    String station1 = blk.mFrom;
+    String station2 = blk.mTo;
+    NumStation st1 = mNum.getStation( station1 );
+    NumStation st2 = mNum.getStation( station2 );
+    float x0, y0, x1, y1;
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      x0 = (float)(st1.e);
+      y0 = (float)(st1.s);
+      x1 = (float)(st2.e);
+      y1 = (float)(st2.s);
+    } else {
+      x0 = (float)(st1.h);
+      y0 = (float)(st1.v);
+      x1 = (float)(st2.h);
+      y1 = (float)(st2.v);
+    }
+    float x2 = x1 - x0;
+    float y2 = y1 - y0;
+    float len = FloatMath.sqrt( x2 * x2 + y2 * y2 );
+    PointF uu = new PointF( x2 / len, y2 / len );
+    PointF vv = new PointF( -uu.y, uu.x );
+
+    ArrayList< PointF > pos = new ArrayList< PointF >(); // positive v
+    ArrayList< PointF > neg = new ArrayList< PointF >(); // negative v
+    List< NumSplay > splays = mNum.getSplays();
+    if ( mType == PlotInfo.PLOT_PLAN ) {
+      for ( NumSplay sp : splays ) {
+        if ( Math.abs( sp.getBlock().mClino ) < TopoDroidSetting.mWallsPlanThr ) {
+          NumStation st = sp.from;
+          if ( st == st1 || st == st2 ) {
+            x2 = (float)(sp.e) - x0;
+            y2 = (float)(sp.s) - y0;
+            float u = x2 * uu.x + y2 * uu.y;
+            float v = x2 * vv.x + y2 * vv.y;
+            if ( v > 0 ) {
+              pos.add( new PointF(u,v) );
+            } else {
+              neg.add( new PointF(u,v) );
+            }
+          }
+        }
+      }
+    } else {
+      for ( NumSplay sp : splays ) {
+        if ( Math.abs( sp.getBlock().mClino ) > TopoDroidSetting.mWallsExtendedThr ) { // FIXME
+          NumStation st = sp.from;
+          if ( st == st1 || st == st2 ) {
+            x2 = (float)(sp.h) - x0;
+            y2 = (float)(sp.v) - y0;
+            float u = x2 * uu.x + y2 * uu.y;
+            float v = x2 * vv.x + y2 * vv.y;
+            if ( v > 0 ) {
+              pos.add( new PointF(u,v) );
+            } else {
+              neg.add( new PointF(u,v) );
+            }
+          }
+        }
+      }
+    }
+    makeWall( pos, x0, y0, x1, y1, len, uu, vv );
+    makeWall( neg, x0, y0, x1, y1, len, uu, vv );
+  }
+
+  void addPointsToLine( DrawingLinePath line, float x0, float y0, float xx, float yy )
+  {
+    float ll = FloatMath.sqrt( (xx-x0)*(xx-x0) + (yy-y0)*(yy-y0) ) / 20;
+    if ( ll > TopoDroidSetting.mWallsXStep ) {
+      int n = 1 + (int)ll;
+      float dx = (xx-x0) / n;
+      float dy = (yy-y0) / n;
+      for ( int k=1; k<n; ++k ) {
+        line.addPoint( x0+k*dx, y0+k*dy );
+      }
+    }
+    line.addPoint( xx, yy );
+  }
+
+
+  void makeWall( ArrayList<PointF> pts, float x0, float y0, float x1, float y1, float len, PointF uu, PointF vv )
+  {
+    int size = pts.size();
+    float xx, yy;
+    if ( size == 0 ) { // no wall
+      return;
+    } else if ( size == 1 ) {
+      PointF p = pts.get(0);
+      if ( p.x > 0 && p.x < len ) { // wall from--p--to
+        x0 = toSceneX( x0 );
+        y0 = toSceneY( y0 );
+        x1 = toSceneX( x1 );
+        y1 = toSceneY( y1 );
+        xx = toSceneX( x0 + uu.x * p.x + vv.x * p.y );
+        yy = toSceneY( y0 + uu.y * p.x + vv.y * p.y );
+        mCurrentLinePath = new DrawingLinePath( DrawingBrushPaths.mLineLib.mLineWallIndex );
+        mCurrentLinePath.addStartPoint( x0, y0 );
+        addPointsToLine( mCurrentLinePath, x0, y0, xx, yy );
+        addPointsToLine( mCurrentLinePath, xx, yy, x1, y1 );
+        mDrawingSurface.addDrawingPath( mCurrentLinePath );
+      }
+    } else {
+      sortPointsOnX( pts );
+      mCurrentLinePath = new DrawingLinePath( DrawingBrushPaths.mLineLib.mLineWallIndex );
+      PointF p1 = pts.get(0);
+      xx = toSceneX( x0 + uu.x * p1.x + vv.x * p1.y );
+      yy = toSceneY( y0 + uu.y * p1.x + vv.y * p1.y );
+      mCurrentLinePath.addStartPoint( xx, yy );
+      for ( int k=1; k<pts.size(); ++k ) {
+        p1 = pts.get(k);
+        float xx2 = toSceneX( x0 + uu.x * p1.x + vv.x * p1.y );
+        float yy2 = toSceneY( y0 + uu.y * p1.x + vv.y * p1.y );
+        addPointsToLine( mCurrentLinePath, xx, yy, xx2, yy2 );
+        xx = xx2;
+        yy = yy2;
+      }
+      mDrawingSurface.addDrawingPath( mCurrentLinePath );
+    }
+  }
+
+  // sort the points on the list by increasing X
+  // @param pts list of points
+  private void sortPointsOnX( ArrayList<PointF> pts ) 
+  {
+    int size = pts.size();
+    if ( size < 2 ) return;
+    boolean repeat = true;
+    PointF p1, p2;
+    while ( repeat ) {
+      repeat = false;
+      for ( int k = 1; k < size; ++ k ) {
+        p1 = pts.get(k-1);
+        p2 = pts.get(k);
+        if ( p2.x < p1.x ) {
+          float x = p1.x; p1.x = p2.x; p2.x = x;
+          float y = p1.y; p1.y = p2.y; p2.y = y;
+          repeat = true;
+        }
+      }
+    }
+
+    // remove points with X close to a nearby and smaller Y
+    for ( int k = 1; k < pts.size(); ++ k ) {
+      p1 = pts.get(k-1);
+      p2 = pts.get(k);
+      if ( (p2.x - p1.x) < TopoDroidSetting.mWallsXClose ) { 
+        if ( Math.abs(p2.y) < Math.abs(p1.y) ) { // remove p2
+          pts.remove( k );
+        } else {
+          pts.remove( k-1 ); // no need to move k backward
+        }
+      } else {
+        ++k;
+      }
+    }
+    
+    // convex-hull: remove points "inside" (with smaller |Y| )
+    if ( size > 2 ) {
+      float x0 = pts.get(0).x;
+      float y0 = Math.abs( pts.get(0).y );
+      for ( int k = 0; k < pts.size()-1; ++k ) {
+        int hh = k+1;
+        float x1 = pts.get(hh).x;
+        float y1 = Math.abs( pts.get(hh).y );
+        float s0 = (y1-y0)/(x1-x0); // N.B. x1 >= x0 + 0.1
+          for ( int h=hh+1; h<pts.size(); ++h ) {
+          x1 = pts.get(h).x;
+          y1 = Math.abs( pts.get(h).y );
+          float s1 = (y1-y0)/(x1-x0); 
+          if ( s1 > s0 + TopoDroidSetting.mWallsConcave ) { // allow small concavities
+            hh = h;
+          }
+        }
+        for ( int h=hh-1; h>k; --h ) pts.remove(h);
+      }
+    }
+  }
+
 }

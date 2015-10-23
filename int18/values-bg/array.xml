@@ -2,6 +2,11 @@
 
 <resources>
 
+  <!-- TODO string-array name="wallsType">
+     <item name="none">None</item>
+     <item name="convex">Convex</item>
+  </string-array -->
+
   <string-array name="zoomCtrl">
      <item name="0">Изключени</item>
      <item name="1">Временни</item>

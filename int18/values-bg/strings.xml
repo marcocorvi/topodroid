@@ -30,6 +30,7 @@
     <string name="tha_user">друго</string>
     <string name="tha_water">вода</string>
 
+    <!-- TODO string name="make_walls">Walls</string -->
     <string name="missing_area">Площ</string>
     <string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string>
     <string name="missing_line">Линия</string>
@@ -688,6 +689,12 @@
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
   <string name="pref_auto_reconnect_summary">Автоматично свързване при загуба на връзката</string>
+  <!-- TODO string name="pref_auto_pair_title">Auto pairing</string -->
+  <!-- TODO string name="pref_auto_pair_summary">Pair with device after scan</string -->
+  <!-- TODO string name="pref_socket_delay_title">Connection delay</string -->
+  <!-- TODO string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string -->
+  <!-- TODO string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string -->
+  <!-- TODO string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string -->
   <string name="pref_z6_workaround_title">Z6 корекция</string>
   <string name="pref_z6_workaround_summary">Корекция на блокиране при сваляне на данни от някои устройства</string>
   <string name="pref_crs_title">C R S </string>
@@ -877,6 +884,25 @@
   <string name="pref_unit_angle_summary">Мерни единици за ъгли</string>
   <string name="pref_unit_location_title">Формат на координати</string>
   <string name="pref_unit_location_summary">Формат на координати</string>
+
+  <!-- TODO string name="pref_plot_walls_title">AUTO WALLS</string -->
+  <!-- TODO string name="pref_walls_type_title">Walls type</string -->
+  <!-- TODO string name="pref_walls_type_summary">Walls type</string -->
+  <!-- TODO string name="pref_walls_plan_thr_title">Splay plan clino</string -->
+  <!-- TODO string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls</string -->
+  <!-- TODO string name="pref_walls_plan_thr_message">Maximum splay clino for plan walls [deg]</string -->
+  <!-- TODO string name="pref_walls_extended_thr_title">Splay profile clino</string -->
+  <!-- TODO string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls</string -->
+  <!-- TODO string name="pref_walls_extended_thr_message">Maximum splay clino for profile walls [deg]</string -->
+  <!-- TODO string name="pref_walls_xclose_title">Separation</string -->
+  <!-- TODO string name="pref_walls_xclose_summary">Minimum point-separation along the shot</string -->
+  <!-- TODO string name="pref_walls_xclose_message">Minimum separation of wall points along the shot [m]</string -->
+  <!-- TODO string name="pref_walls_concave_title">Concavity</string -->
+  <!-- TODO string name="pref_walls_concave_summary">Maximum concavity</string -->
+  <!-- TODO string name="pref_walls_concave_message">Maximum concavity [percent]</string -->
+  <!-- TODO string name="pref_walls_xstep_title">Step</string -->
+  <!-- TODO string name="pref_walls_xstep_summary">Point separation along the wall</string -->
+  <!-- TODO string name="pref_walls_xstep_message">Separation of points along the wall [m]</string -->
 
   <string name="pref_log_stream_summary">Лог файл</string>
   <string name="pref_log_stream_title">Лог файл</string>
