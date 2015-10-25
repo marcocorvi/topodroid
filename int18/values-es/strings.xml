@@ -27,7 +27,7 @@
     <string name="tha_water">Agua</string>
 
     <!-- TODO string name="make_walls">Walls</string -->
-    <string name="missing_area">ÁREA</string>
+    <string name="missing_area">Área</string>
     <string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string>
     <string name="missing_line">Línea</string>
     <string name="missing_point">Punto</string>
@@ -613,12 +613,12 @@
   <string name="pref_conn_mode_summary">Cómo conectar con el DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconectar</string>
   <string name="pref_auto_reconnect_summary">Vuelva a conectar cuando la conexión es lostX</string>
-  <!-- TODO string name="pref_auto_pair_title">Auto pairing</string -->
-  <!-- TODO string name="pref_auto_pair_summary">Pair with device after scan</string -->
-  <!-- TODO string name="pref_socket_delay_title">Connection delay</string -->
-  <!-- TODO string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string -->
-  <!-- TODO string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string -->
-  <!-- TODO string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string -->
+  <string name="pref_auto_pair_title">Empadronamiento automático</string>
+  <string name="pref_auto_pair_summary">Dispositivo emparejado</string>
+  <string name="pref_socket_delay_title">La conexión tarda más de lo normal</string>
+  <string name="pref_socket_delay_summary">La conexión tarda más de lo normal para emparejarse [0.1 sec]</string>
+  <string name="pref_socket_delay_dialogtitle">La conexión tarda más de lo normal para emparejarse</string>
+  <string name="pref_socket_delay_message">La conexión tarda más de lo normal para emparejarse [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Solución Z6</string>
   <string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string>
   <string name="pref_crs_title">CRS </string>
