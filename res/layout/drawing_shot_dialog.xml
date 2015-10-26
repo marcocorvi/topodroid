@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/regular" / -->
-      <CheckBox 
+      <!-- CheckBox 
         android:id="@+id/duplicate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
         android:id="@+id/surface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/surface" />
+        android:text="@string/surface" / -->
       <!-- CheckBox 
         android:id="@+id/backshot"
         android:layout_width="wrap_content"

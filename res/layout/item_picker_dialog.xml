@@ -34,19 +34,26 @@
           android:orientation="horizontal"
           android:gravity="right"
           >
-          <Button android:id="@+id/item_left"
+          <!-- Button android:id="@+id/item_left"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_undo"
-          />
-          <Button android:id="@+id/item_right"
+          / -->
+          <!-- Button android:id="@+id/item_right"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_redo"
+          / -->
+          <SeekBar android:id="@+id/seekbar"
+             android:layout_width="fill_parent"
+             android:layout_height="20dp" 
+             android:max="360"
+             android:background="#666666"
+             android:progressDrawable="@drawable/progress2"
           />
         </LinearLayout>
         <!-- LinearLayout 

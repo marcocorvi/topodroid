@@ -26,6 +26,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.CheckBox;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 
 public class DrawingLineDialog extends Dialog
                                implements View.OnClickListener
@@ -64,6 +65,7 @@ public class DrawingLineDialog extends Dialog
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.drawing_line_dialog);
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setTitle( String.format( mParent.getResources().getString( R.string.title_draw_line ),
               DrawingBrushPaths.getLineName( mLine.mLineType ) ) );

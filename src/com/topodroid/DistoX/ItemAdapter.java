@@ -61,11 +61,21 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     }
   }
 
-  void rotatePoint( int index, int angle )
+  // void rotatePoint( int index, int angle )
+  // {
+  //   for ( ItemSymbol b : mItems ) {
+  //     if ( b.mIndex == index ) {
+  //       b.rotate( angle );
+  //       return;
+  //     }
+  //   }
+  // }
+
+  void setPointOrientation( int index, int angle )
   {
     for ( ItemSymbol b : mItems ) {
       if ( b.mIndex == index ) {
-        b.rotate( angle );
+        b.setAngle( angle );
         return;
       }
     }
@@ -73,6 +83,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
 
   // ItemSymbol get( int pos ) { return mItems.get(pos); }
   int getSelectedPos() { return mPos; }
+  // ItemSymbol getSelectedItem() { return ( mPos >= 0 && mPos < mItems.size() )? mItems.get(mPos) : null; }
   // public int size() { return mItems.size(); }
 
   // set selected position from the item index

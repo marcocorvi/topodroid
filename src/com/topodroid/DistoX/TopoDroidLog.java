@@ -105,7 +105,7 @@ class TopoDroidLog
 
   static void Log( boolean flag, String msg )
   {
-    if ( flag ) {
+    if ( flag && msg != null ) {
       long millis = System.currentTimeMillis() % 600000;
       if ( mLogStream == 0 ) {
         Log.v( TAG, millis + " " + msg );

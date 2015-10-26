@@ -26,11 +26,14 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 
@@ -43,13 +46,15 @@ public class AzimuthDialDialog extends Dialog
   private float mAzimuth;
   private Bitmap mBMdial;
 
-  private Button mBTback;
-  private Button mBTfore;
+  // private Button mBTback;
+  // private Button mBTfore;
   private Button mBTazimuth;
   private Button mBTsensor;
   private Button mBTok;
   private Button mBTleft;
   private Button mBTright;
+
+  private SeekBar mSeekBar;
 
   public AzimuthDialDialog( Context context, ILister parent, float azimuth, Bitmap dial )
   {
@@ -60,15 +65,19 @@ public class AzimuthDialDialog extends Dialog
     mBMdial  = dial;
   }
 
-  void updateView()
+  private void updateView()
   {
     Matrix m = new Matrix();
     m.preRotate( mAzimuth - 90 );
+    // float s = FloatMath.cos( ((mAzimuth % 90) - 45) * TopoDroidUtil.GRAD2RAD );
+    // m.postScale( s, s );
     int w = 96; // mBMdial.getWidth();
     Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, w, w, true );
     Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, w, w, m, true);
     mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) );
   }
+
+  private void updateSeekBar() { mSeekBar.setProgress( ((int)mAzimuth + 180)%360 ); }
 
 // -------------------------------------------------------------------
   @Override
@@ -82,13 +91,15 @@ public class AzimuthDialDialog extends Dialog
     setContentView(R.layout.azimuth_dial_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    mBTback = (Button) findViewById(R.id.btn_back );
-    mBTfore = (Button) findViewById(R.id.btn_fore );
+    // mBTback = (Button) findViewById(R.id.btn_back );
+    // mBTfore = (Button) findViewById(R.id.btn_fore );
     mBTazimuth = (Button) findViewById(R.id.btn_azimuth );
     // mBTsensor  = (Button) findViewById(R.id.btn_sensor );
     mBTok      = (Button) findViewById(R.id.btn_ok );
     mBTleft    = (Button) findViewById(R.id.btn_left );
     mBTright   = (Button) findViewById(R.id.btn_right );
+
+    mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
@@ -100,14 +111,26 @@ public class AzimuthDialDialog extends Dialog
     // mBTsensor.setLayoutParams( params );
     layout4.addView( mBTsensor );
 
-    mBTback.setOnClickListener( this );
-    mBTfore.setOnClickListener( this );
+    // mBTback.setOnClickListener( this );
+    // mBTfore.setOnClickListener( this );
     mBTazimuth.setOnClickListener( this );
     mBTsensor.setOnClickListener( this );
     mBTok.setOnClickListener( this );
     mBTleft.setOnClickListener( this );
     mBTright.setOnClickListener( this );
 
+    mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+      public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
+        if ( fromUser ) {
+          setBearingAndClino( (progress+180)%360, 0 );
+        }
+      }
+      public void onStartTrackingTouch(SeekBar seekbar) { }
+      public void onStopTrackingTouch(SeekBar seekbar) { }
+    } );
+    mSeekBar.setMax( 360 );
+
+    updateSeekBar();
     updateView();
   }
 
@@ -129,17 +152,21 @@ public class AzimuthDialDialog extends Dialog
     Button b = (Button) v;
     // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "AzimuthDialDialog onClick button " + b.getText().toString() );
 
-    if ( b == mBTback ) {
-      mAzimuth -= 5;
-      if ( mAzimuth < 0 ) mAzimuth += 360;
-      updateView();
-    } else if ( b == mBTfore ) {
-      mAzimuth += 5;
-      if ( mAzimuth >= 360 ) mAzimuth -= 360;
-      updateView();
-    } else if ( b == mBTazimuth ) {
+    // if ( b == mBTback ) {
+    //   mAzimuth -= 5;
+    //   if ( mAzimuth < 0 ) mAzimuth += 360;
+    //   updateSeekBar();
+    //   updateView();
+    // } else if ( b == mBTfore ) {
+    //   mAzimuth += 5;
+    //   if ( mAzimuth >= 360 ) mAzimuth -= 360;
+    //   updateSeekBar();
+    //   updateView();
+    // } else 
+    if ( b == mBTazimuth ) {
       mAzimuth += 90;
       if ( mAzimuth >= 360 ) mAzimuth -= 360;
+      updateSeekBar();
       updateView();
     } else if ( b == mBTsensor ) {
       mTimer = new TimerTask( mContext, this );

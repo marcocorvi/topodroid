@@ -466,13 +466,6 @@ public class ShotDialog extends Dialog
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
 
-    // } else if ( b == mRBdup ) {
-    //   mRBsurf.setChecked( false );
-    //   // mRBback.setChecked( false );
-    // } else if ( b == mRBsurf ) {
-    //   mRBdup.setChecked( false );
-    //   // mRBback.setChecked( false );
-
     } else if ( b == mCBleg ) {
       // Log.v("DistoX", "CB leg clicked ");
       mCBleg.toggleState();

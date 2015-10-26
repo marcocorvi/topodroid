@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20121201 created
- * 20121211 locale
  */
 package com.topodroid.DistoX;
 
@@ -63,8 +60,22 @@ class SymbolPoint extends Symbol
   public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   public void toggleEnabled() { mEnabled = ! mEnabled; }
 
+  // @Override
+  // public void rotate( float angle ) { rotateGrad( angle ); }
+
   @Override
-  public void rotate( float angle ) { rotateGrad( angle ); }
+  public void setAngle( float angle ) // degrees
+  {
+    if ( mOrientable ) {
+      float a = angle - (float)mOrientation;
+      if ( Math.abs(a) > 1 ) {
+        rotateGrad( a );
+      }
+      // Log.v("DistoX", "rotate point by " + a + " orientation " + (int)mOrientation );
+    }
+  }
+  
+  public int getAngle() { return (int)mOrientation; } // degrees
 
   public String getThName( ) { return mThName; }
   public String getName( ) { return mName; }
@@ -126,7 +137,7 @@ class SymbolPoint extends Symbol
   void rotateGrad( double a )
   {
     if ( mOrientable ) {
-      // Log.v(  TopoDroidApp.TAG, "SymbolPoint::rotateGrad orientation " + mOrientation + " rotation " + a );
+      // Log.v( "DistoX", "SymbolPoint::rotateGrad orientation " + mOrientation + " rotation " + a );
       mOrientation += a;
       if ( mOrientation > 360.0 ) mOrientation -= 360.0;
       if ( mOrientation < 0.0 )   mOrientation += 360.0;

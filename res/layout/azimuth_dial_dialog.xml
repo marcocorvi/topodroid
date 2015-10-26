@@ -14,13 +14,13 @@
       android:layout_marginTop="2dp"
       >
 
-      <Button android:id="@+id/btn_back"
+      <!-- Button android:id="@+id/btn_back"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_gravity="left"
         android:background="@drawable/ic_back"
         android:layout_marginRight="20dp"
-        />
+        / -->
 
       <Button
         android:id="@+id/btn_azimuth"
@@ -31,13 +31,23 @@
         style="@style/button_default"
         />
 
-      <Button android:id="@+id/btn_fore"
+      <!-- Button android:id="@+id/btn_fore"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_gravity="right"
         android:background="@drawable/ic_forw"
         android:layout_marginLeft="20dp"
-        />
+        / -->
+
+      <SeekBar android:id="@+id/seekbar"
+         android:layout_gravity="center"
+         android:layout_width="fill_parent"
+         android:layout_height="20dp" 
+         android:max="360"
+         android:background="#666666"
+         android:progressDrawable="@drawable/progress2"
+      />
+
     </LinearLayout>				  
 
     <LinearLayout android:id="@+id/layout4"

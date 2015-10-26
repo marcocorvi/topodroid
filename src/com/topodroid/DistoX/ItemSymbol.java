@@ -32,7 +32,7 @@ import android.view.View.OnTouchListener;
 // import android.text.Layout;
 import android.widget.LinearLayout;
 
-// import android.util.Log;
+import android.util.Log;
 
 class ItemSymbol
 {
@@ -130,10 +130,18 @@ class ItemSymbol
   //   rotate( dx );
   // }
 
-  void rotate( float dx ) 
+  // void rotate( float dx ) 
+  // {
+  //   // Log.v( TopoDroidApp.TAG, "rotate " + dx );
+  //   mSymbol.rotate( dx );
+  //   mButton.resetPath( mSymbol.getPath(), sx, sy );
+  //   mView.invalidate();
+  // }
+
+  void setAngle( float angle )
   {
-    // Log.v( TopoDroidApp.TAG, "rotate " + dx );
-    mSymbol.rotate( dx );
+    // Log.v("DistoX", "item symbol set angle " + angle );
+    mSymbol.setAngle( angle );
     mButton.resetPath( mSymbol.getPath(), sx, sy );
     mView.invalidate();
   }

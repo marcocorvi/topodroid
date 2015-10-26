@@ -52,7 +52,9 @@ public class SymbolLine extends Symbol
   public boolean isEnabled() { return mEnabled; }
   public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   public void toggleEnabled() { mEnabled = ! mEnabled; }
-  public void rotate( float angle ) { }
+  // public void rotate( float angle ) { }
+  public void setAngle( float angle ) { }
+  public int getAngle() { return 0; }
 
   // width = 1;
   // no effect

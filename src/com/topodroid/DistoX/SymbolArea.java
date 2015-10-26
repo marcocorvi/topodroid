@@ -8,10 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20121201 created
- * 20121211 locale
- * 20131119 area color member-field
  */
 package com.topodroid.DistoX;
 
@@ -44,7 +40,9 @@ class SymbolArea extends Symbol
   public boolean isEnabled() { return mEnabled; }
   public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   public void toggleEnabled() { mEnabled = ! mEnabled; }
-  public void rotate( float angle ) { }
+  // public void rotate( float angle ) { } 
+  public void setAngle( float angle ) { }
+  public int getAngle() { return 0; }
 
   /** 
    * color 0xaarrggbb

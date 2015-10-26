@@ -625,7 +625,7 @@ public class DrawingActivity extends ItemDrawer
     // private void immediateSaveTh2( )
     // {
     //   Log.v("DistoX", "immSaveTh2() type " + mType + " modified " + mModified );
-    //   // if ( mModifed )  FIXME-MODIFIED
+    //   // if ( mModified )  FIXME-MODIFIED
     //   {
     //     // Log.v( TopoDroidApp.TAG, " savingTh2 " + mFullName1 + " " + mFullName2 + " do save ");
     //     Handler handler = new Handler(){
@@ -2743,22 +2743,23 @@ public class DrawingActivity extends ItemDrawer
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               new DrawingPointDialog( this, (DrawingPointPath)(sp.mItem) ).show();
+              mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_LINE:
               DrawingLinePath line = (DrawingLinePath)(sp.mItem);
               if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-                // Log.v("DistoX", "edit section line " );
-                // default azimuth = 0
-                // default clino = 0
+                // Log.v("DistoX", "edit section line " ); // default azimuth = 0 clino = 0
                 // cross-section exists already
                 boolean h_section = ( mType == PlotInfo.PLOT_EXTENDED ); // not really necessary
                 new DrawingLineSectionDialog( this, mApp, h_section, true, line, null, null, 0, 0 ).show();
               } else {
                 new DrawingLineDialog( this, line, sp.mPoint ).show();
               }
+              mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_AREA:
               new DrawingAreaDialog( this, (DrawingAreaPath)(sp.mItem) ).show();
+              mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_FIXED:
             case DrawingPath.DRAWING_PATH_SPLAY:
@@ -3379,6 +3380,9 @@ public class DrawingActivity extends ItemDrawer
     PointF uu = new PointF( x2 / len, y2 / len );
     PointF vv = new PointF( -uu.y, uu.x );
 
+    // Log.v("DistoX", "X0 " + x0 + " " + y0 + " X1 " + x1 + " " + y1 );
+    // Log.v("DistoX", "U " + uu.x + " " + uu.y + " V " + vv.x + " " + vv.y );
+
     ArrayList< PointF > pos = new ArrayList< PointF >(); // positive v
     ArrayList< PointF > neg = new ArrayList< PointF >(); // negative v
     List< NumSplay > splays = mNum.getSplays();
@@ -3408,6 +3412,7 @@ public class DrawingActivity extends ItemDrawer
             y2 = (float)(sp.v) - y0;
             float u = x2 * uu.x + y2 * uu.y;
             float v = x2 * vv.x + y2 * vv.y;
+            Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
             if ( v > 0 ) {
               pos.add( new PointF(u,v) );
             } else {
@@ -3419,6 +3424,7 @@ public class DrawingActivity extends ItemDrawer
     }
     makeWall( pos, x0, y0, x1, y1, len, uu, vv );
     makeWall( neg, x0, y0, x1, y1, len, uu, vv );
+    mModified = true;
   }
 
   void addPointsToLine( DrawingLinePath line, float x0, float y0, float xx, float yy )
@@ -3445,12 +3451,12 @@ public class DrawingActivity extends ItemDrawer
     } else if ( size == 1 ) {
       PointF p = pts.get(0);
       if ( p.x > 0 && p.x < len ) { // wall from--p--to
+        xx = toSceneX( x0 + uu.x * p.x + vv.x * p.y );
+        yy = toSceneY( y0 + uu.y * p.x + vv.y * p.y );
         x0 = toSceneX( x0 );
         y0 = toSceneY( y0 );
         x1 = toSceneX( x1 );
         y1 = toSceneY( y1 );
-        xx = toSceneX( x0 + uu.x * p.x + vv.x * p.y );
-        yy = toSceneY( y0 + uu.y * p.x + vv.y * p.y );
         mCurrentLinePath = new DrawingLinePath( DrawingBrushPaths.mLineLib.mLineWallIndex );
         mCurrentLinePath.addStartPoint( x0, y0 );
         addPointsToLine( mCurrentLinePath, x0, y0, xx, yy );

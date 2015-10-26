@@ -16,6 +16,8 @@ public interface SymbolInterface
   boolean isEnabled();
   void setEnabled( boolean enabled );
   void toggleEnabled();
-  void rotate( float angle );
+  // void rotate( float angle );
+  void setAngle( float angle );
+  int getAngle();
 }
 

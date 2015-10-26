@@ -25,6 +25,8 @@ import android.graphics.*;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
@@ -48,10 +50,11 @@ class ItemPickerDialog extends Dialog
   private  Button mBTpoint;
   private  Button mBTline;
   private  Button mBTarea;
-  private  Button mBTleft;
-  private  Button mBTright;
+  // private  Button mBTleft;
+  // private  Button mBTright;
   // private  Button mBTcancel;
   // private  Button mBTok;
+  private SeekBar mSeekBar;
 
   private Context mContext;
   // private DrawingActivity mParent;
@@ -122,8 +125,9 @@ class ItemPickerDialog extends Dialog
     mBTpoint = (Button) findViewById(R.id.item_point);
     mBTline  = (Button) findViewById(R.id.item_line );
     mBTarea  = (Button) findViewById(R.id.item_area );
-    mBTleft  = (Button) findViewById(R.id.item_left );
-    mBTright = (Button) findViewById(R.id.item_right );
+    // mBTleft  = (Button) findViewById(R.id.item_left );
+    // mBTright = (Button) findViewById(R.id.item_right );
+    mSeekBar = (SeekBar) findViewById(R.id.seekbar );
     // mBTcancel  = (Button) findViewById(R.id.item_cancel );
     // mBTok    = (Button) findViewById(R.id.item_ok   );
 
@@ -131,13 +135,23 @@ class ItemPickerDialog extends Dialog
     if ( TopoDroidSetting.mLevelOverBasic ) {
       mBTpoint.setOnClickListener( this );
       mBTarea.setOnClickListener( this );
-      mBTleft.setOnClickListener( this );
-      mBTright.setOnClickListener( this );
+      // mBTleft.setOnClickListener( this );
+      // mBTright.setOnClickListener( this );
+      mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+        public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
+          if ( fromUser ) {
+            setItemAngle( (180 + progress)%360 );
+          }
+        }
+        public void onStartTrackingTouch(SeekBar seekbar) { }
+        public void onStopTrackingTouch(SeekBar seekbar) { }
+      } );
     } else {
       mBTpoint.setVisibility( View.GONE );
       mBTarea.setVisibility( View.GONE );
-      mBTleft.setVisibility( View.GONE );
-      mBTright.setVisibility( View.GONE );
+      // mBTleft.setVisibility( View.GONE );
+      // mBTright.setVisibility( View.GONE );
+      mSeekBar.setVisibility( View.GONE );
     }
     // mBTcancel.setOnClickListener( this );
     // mBTok.setOnClickListener( this );
@@ -149,6 +163,39 @@ class ItemPickerDialog extends Dialog
     updateList();
 
     setTypeAndItem( getAdapterPosition() );
+  }
+
+  private void setSeekBarProgress()
+  {
+    if ( mItemType == DrawingActivity.SYMBOL_POINT &&  mPointAdapter != null ) {
+      int index = mPointAdapter.getSelectedPos();
+      ItemSymbol item = mPointAdapter.get( index );
+      if ( item != null ) {
+        SymbolInterface symbol = item.mSymbol;
+        if ( symbol != null ) {
+          int progress = (180+symbol.getAngle())%360;
+          mSeekBar.setProgress( progress );
+          // Log.v("DistoX", "set progress " + progress );
+        }
+      }
+    }
+  }
+
+  private void setItemAngle( int angle )
+  {
+    if ( mItemType == DrawingActivity.SYMBOL_POINT &&  mPointAdapter != null ) {
+      int index = mPointAdapter.getSelectedPos();
+      // Log.v("DistoX", "set item " + index + " angle " + angle );
+      mPointAdapter.setPointOrientation( index, angle );
+ 
+      // ItemSymbol item = mPointAdapter.get( index );
+      // if ( item != null ) {
+      //   SymbolInterface symbol = item.mSymbol;
+      //   if ( symbol != null && symbol.isOrientable() ) {
+      //     symbol.setAngle( angle );
+      //   }
+      // }
+    }
   }
 
   private int getAdapterPosition()
@@ -216,6 +263,8 @@ class ItemPickerDialog extends Dialog
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
           mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
           mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
+          mSeekBar.setVisibility( View.VISIBLE );
+          setSeekBarProgress();
         }
         break;
       case DrawingActivity.SYMBOL_LINE:
@@ -223,6 +272,7 @@ class ItemPickerDialog extends Dialog
         mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
         mBTline.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
         mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
+        mSeekBar.setVisibility( View.INVISIBLE );
         break;
       case DrawingActivity.SYMBOL_AREA:
         if ( TopoDroidSetting.mLevelOverBasic ) {
@@ -230,6 +280,7 @@ class ItemPickerDialog extends Dialog
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
           mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
           mBTarea.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
+          mSeekBar.setVisibility( View.INVISIBLE );
         }
         break;
     }
@@ -258,6 +309,7 @@ class ItemPickerDialog extends Dialog
           // Log.v( TopoDroidLog.TAG, "setTypeAndItem type point pos " + index + " index " + is.mIndex );
           mParent.mCurrentPoint = is.mIndex;
           mParent.pointSelected( is.mIndex ); // mPointAdapter.getSelectedItem() );
+          setSeekBarProgress();
           title = mContext.getResources().getString( R.string.POINT ) + " " + mPointLib.getAnyPointName( is.mIndex );
         }
         break;
@@ -310,14 +362,29 @@ class ItemPickerDialog extends Dialog
     setTypeAndItem( getAdapterPosition() );
   }
 
-  void rotatePoint( int angle )
+  // void rotatePoint( int angle )
+  // {
+  //   if ( mPointAdapter == null ) return;
+  //   if ( TopoDroidSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
+  //     // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
+  //     mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
+  //   }
+  // }
+
+  void setPointOrientation( int angle )
   {
     if ( mPointAdapter == null ) return;
     if ( TopoDroidSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
       // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
-      mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
+      mPointAdapter.setPointOrientation( mParent.mCurrentPoint, angle );
+      // ItemSymbol item = mPointAdapter.getSelectedItem();
+      // if ( item != null ) {
+      //   angle -= (int) item.mSymbol.getAngle();
+      //   mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
+      // }
     }
   }
+
 
   @Override
   public void onBackPressed ()
@@ -371,12 +438,14 @@ class ItemPickerDialog extends Dialog
           }
         }
         break;
-      case R.id.item_left:
-        if ( TopoDroidSetting.mLevelOverBasic ) rotatePoint( -10 );
-        break;
-      case R.id.item_right:
-        if ( TopoDroidSetting.mLevelOverBasic ) rotatePoint( 10 );
-        break;
+
+      // case R.id.item_left:
+      //   if ( TopoDroidSetting.mLevelOverBasic ) rotatePoint( -10 );
+      //   break;
+      // case R.id.item_right:
+      //   if ( TopoDroidSetting.mLevelOverBasic ) rotatePoint( 10 );
+      //   break;
+
       // case R.id.item_cancel:
       //   dismiss();
       //   break;

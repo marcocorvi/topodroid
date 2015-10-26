@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
@@ -47,8 +48,8 @@ public class DrawingShotDialog extends Dialog
   // private RadioButton mRBignore;
 
   // private RadioButton mRBsurvey;
-  private CheckBox mRBduplicate;
-  private CheckBox mRBsurface;
+  private MyCheckBox mRBdup;
+  private MyCheckBox mRBsurf;
   // private CheckBox mRBbackshot;
   private Button mRBwalls;
 
@@ -90,9 +91,19 @@ public class DrawingShotDialog extends Dialog
     // mRBignore  = (RadioButton) findViewById( R.id.ignore );
 
     // mRBsurvey    = (RadioButton) findViewById( R.id.survey );
-    mRBduplicate = (CheckBox) findViewById( R.id.duplicate );
-    mRBsurface   = (CheckBox) findViewById( R.id.surface );
+    // mRBdup  = (CheckBox) findViewById( R.id.duplicate );
+    // mRBsurf = (CheckBox) findViewById( R.id.surface );
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
+
+    LinearLayout layout3 = (LinearLayout) findViewById( R.id.layout3 );
+    int size = TopoDroidApp.getScaledSize( mContext );
+    layout3.setMinimumHeight( size + 10 );
+
+    mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
+    mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
+    layout3.addView( mRBdup );
+    layout3.addView( mRBsurf );
+
     mRBwalls  = (Button) findViewById( R.id.walls );
 
     // if ( ! TopoDroidApp.mLoopClosure ) {
@@ -106,8 +117,8 @@ public class DrawingShotDialog extends Dialog
     mRBvert.setOnClickListener( this );
     mRBright.setOnClickListener( this );
 
-    mRBduplicate.setOnClickListener( this );
-    mRBsurface.setOnClickListener( this );
+    mRBdup.setOnClickListener( this );
+    mRBsurf.setOnClickListener( this );
     // mRBbackshot.setOnClickListener( this );
     if ( TopoDroidSetting.mWallsType != TopoDroidSetting.WALLS_NONE 
       && TopoDroidSetting.mLevelOverAdvanced 
@@ -144,10 +155,10 @@ public class DrawingShotDialog extends Dialog
         //   mRBsurvey.setChecked( true );
         //   break;
         case DistoXDBlock.BLOCK_DUPLICATE:
-          mRBduplicate.setChecked( true );
+          mRBdup.setChecked( true );
           break;
         case DistoXDBlock.BLOCK_SURFACE:
-          mRBsurface.setChecked( true );
+          mRBsurf.setChecked( true );
           break;
         // case DistoXDBlock.BLOCK_BACKSHOT:
         //   mRBbackshot.setChecked( true );
@@ -188,15 +199,19 @@ public class DrawingShotDialog extends Dialog
       mRBleft.setChecked( false );
       mRBvert.setChecked( false );
 
-    } else if ( b == mRBsurface ) {
-      mRBduplicate.setChecked( false );
-      // mRBbackshot.setChecked( false );
-    } else if ( b == mRBduplicate ) {
-      mRBsurface.setChecked( false );
-      // mRBbackshot.setChecked( false );
+    } else if ( b == mRBdup ) {
+      mRBdup.toggleState();
+      if ( mRBdup.isChecked() ) {
+        mRBsurf.setState( false );
+      }
+    } else if ( b == mRBsurf ) {
+      mRBsurf.toggleState();
+      if ( mRBsurf.isChecked() ) {
+        mRBdup.setState( false );
+      }
     // } else if ( b == mRBbackshot ) {
-    //   mRBduplicate.setChecked( false );
-    //   mRBsurface.setChecked( false );
+    //   mRBdup.setChecked( false );
+    //   mRBsurf.setChecked( false );
 
     } else if ( b == mRBwalls ) {
       mParent.drawWallsAt( mBlock );
@@ -206,25 +221,15 @@ public class DrawingShotDialog extends Dialog
       long extend = mBlock.mExtend;
       long flag   = mBlock.mFlag;
 
-      if ( mRBleft.isChecked() ) {
-        extend = DistoXDBlock.EXTEND_LEFT;
-      } else if ( mRBvert.isChecked() ) {
-        extend = DistoXDBlock.EXTEND_VERT;
-      } else if ( mRBright.isChecked() ) {
-        extend = DistoXDBlock.EXTEND_RIGHT;
-      } else { // if ( mRBignore.isChecked() )
-        extend = DistoXDBlock.EXTEND_IGNORE;
-      }
+      if ( mRBleft.isChecked() ) { extend = DistoXDBlock.EXTEND_LEFT; }
+      else if ( mRBvert.isChecked() ) { extend = DistoXDBlock.EXTEND_VERT; }
+      else if ( mRBright.isChecked() ) { extend = DistoXDBlock.EXTEND_RIGHT; }
+      else /* if ( mRBignore.isChecked() ) */ { extend = DistoXDBlock.EXTEND_IGNORE; }
 
-      if ( mRBduplicate.isChecked() ) {
-        flag = DistoXDBlock.BLOCK_DUPLICATE;
-      } else if ( mRBsurface.isChecked() ) {
-        flag = DistoXDBlock.BLOCK_SURFACE;
-      // } else if ( mRBbackshot.isChecked() ) {
-      //   flag = DistoXDBlock.BLOCK_BACKSHOT;
-      } else { // if ( mRBsurvey.isChecked() )
-        flag = DistoXDBlock.BLOCK_SURVEY;
-      }
+      if ( mRBdup.isChecked() ) { flag = DistoXDBlock.BLOCK_DUPLICATE; }
+      else if ( mRBsurf.isChecked() ) { flag = DistoXDBlock.BLOCK_SURFACE; }
+      // else if ( mRBbackshot.isChecked() ) { flag = DistoXDBlock.BLOCK_BACKSHOT; }
+      else /* if ( mRBsurvey.isChecked() ) */ { flag = DistoXDBlock.BLOCK_SURVEY; }
 
       mParent.updateBlockExtend( mBlock, extend ); // equal extend checked by the method
       mParent.updateBlockFlag( mBlock,flag ); // equal flag is checked by the method

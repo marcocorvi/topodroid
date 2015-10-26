@@ -19,6 +19,7 @@ import android.content.Intent;
 
 import android.graphics.*;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -26,52 +27,53 @@ import android.widget.EditText;
 public class DrawingLabelDialog extends Dialog 
                                 implements View.OnClickListener
 {
-    private Context mContext;
-    private EditText mLabel;
-    private Button mBtnOK;
-    // private Button mBtnCancel;
+  private Context mContext;
+  private EditText mLabel;
+  private Button mBtnOK;
+  // private Button mBtnCancel;
 
-    private ILabelAdder mActivity;
-    private float mX;
-    private float mY;
+  private ILabelAdder mActivity;
+  private float mX;
+  private float mY;
 
-    public DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
-    {
-      super(context);
-      mContext  = context;
-      mActivity = activity;
-      mX = x; 
-      mY = y;
+  public DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
+  {
+    super(context);
+    mContext  = context;
+    mActivity = activity;
+    mX = x; 
+    mY = y;
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.drawing_label_dialog);
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+    mLabel     = (EditText) findViewById(R.id.label_text);
+    mBtnOK     = (Button) findViewById(R.id.label_ok);
+    // mBtnCancel = (Button) findViewById(R.id.button_cancel);
+
+    mBtnOK.setOnClickListener( this );
+    // mBtnCancel.setOnClickListener( this );
+
+    mLabel.setTextSize( TopoDroidSetting.mTextSize );
+
+    String title = mContext.getResources().getString( R.string.label_title );
+
+    setTitle( title );
+  }
+
+  public void onClick(View view)
+  {
+    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
+    if (view.getId() == R.id.label_ok ) {
+      mActivity.addLabel( mLabel.getText().toString(), mX, mY );
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawing_label_dialog);
-
-        mLabel     = (EditText) findViewById(R.id.label_text);
-        mBtnOK     = (Button) findViewById(R.id.label_ok);
-	// mBtnCancel = (Button) findViewById(R.id.button_cancel);
-
-        mBtnOK.setOnClickListener( this );
-        // mBtnCancel.setOnClickListener( this );
-
-        mLabel.setTextSize( TopoDroidSetting.mTextSize );
-
-        String title = mContext.getResources().getString( R.string.label_title );
-
-        setTitle( title );
-    }
-
-    public void onClick(View view)
-    {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
-      if (view.getId() == R.id.label_ok ) {
-        mActivity.addLabel( mLabel.getText().toString(), mX, mY );
-      }
-      dismiss();
-    }
+    dismiss();
+  }
 }
         
 
