@@ -1,4 +1,4 @@
-/** @file CalibCoverage.java
+/** @file CalibCoverageDialog.java
  *
  * @author marco corvi
  * @date jan 2012
@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
-public class CalibCoverage extends Dialog
+public class CalibCoverageDialog extends Dialog
                            implements View.OnClickListener
 {
   private class Direction
@@ -69,7 +69,7 @@ public class CalibCoverage extends Dialog
   // private Button mBtnBack;
   private Context mContext;
 
-  public CalibCoverage( Context context, List< CalibCBlock > list, Calibration cal )
+  public CalibCoverageDialog( Context context, List< CalibCBlock > list, Calibration cal )
   {
     super( context );
     mContext = context;
@@ -89,7 +89,7 @@ public class CalibCoverage extends Dialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-    setContentView(R.layout.calib_coverage);
+    setContentView(R.layout.calib_coverage_dialog);
 
     setTitle( mContext.getResources().getString( R.string.title_coverage ) );
 

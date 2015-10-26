@@ -518,7 +518,7 @@ public class DeviceActivity extends Activity
     //     Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
     //   } else {
     //     if ( mDevice.mType == Device.DISTO_X310 ) {
-    //       ( new DeviceRemote( this, this, mApp )).show();
+    //       ( new DeviceRemoteDialog( this, this, mApp )).show();
     //     } else {
     //       /* nothing */
     //     }

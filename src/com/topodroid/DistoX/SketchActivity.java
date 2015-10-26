@@ -1641,8 +1641,8 @@ public class SketchActivity extends ItemDrawer
           //      if there is an empty shot assign it
           setTitleColor( TopoDroidConst.COLOR_CONNECTED );
           ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
-          new DistoXRefresh( mApp, handler ).execute();
-          // new DistoXRefresh( mApp, this ).execute();
+          new DataDownloadTask( mApp, handler ).execute();
+          // new DataDownloadTask( mApp, this ).execute();
         } else {
           Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
         }

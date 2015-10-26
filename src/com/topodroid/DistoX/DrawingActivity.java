@@ -560,7 +560,7 @@ public class DrawingActivity extends ItemDrawer
         // if ( not_all_symbols ) AlertMissingSymbols();
         if ( mAllSymbols ) {
           // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-          startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP );
+          startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
         } else { // mAllSymbols is false
           // FIXME what to do ?
          Toast.makeText( this,
@@ -595,7 +595,7 @@ public class DrawingActivity extends ItemDrawer
           //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "handle save th2 message " + msg.what);
           // }
           if ( mModified ) {
-            // Log.v("DistoX", "start new SaveTh2File");
+            // Log.v("DistoX", "start new SaveTh2FileTask");
             startSaveTh2Task( "handler", MAX_TASK_NORMAL, 0 ); 
           } else {
             mApp.mShotActivity.enableSketchButton( true );
@@ -606,15 +606,15 @@ public class DrawingActivity extends ItemDrawer
       mApp.mShotActivity.enableSketchButton( false );
       mModified = false;
       try { Thread.sleep(10); } catch( InterruptedException e ) { }
-      SaveTh2File saveTh2File = null;
-      // Log.v("DistoX", "create SaveTh2File");
+      SaveTh2FileTask saveTh2File = null;
+      // Log.v("DistoX", "create SaveTh2FileTask");
       if ( mType == PlotInfo.PLOT_EXTENDED ) {
-        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix, backup_rotate );
+        saveTh2File = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix, backup_rotate );
       } else {
-        saveTh2File = new SaveTh2File( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix, backup_rotate );
+        saveTh2File = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix, backup_rotate );
       }
       try { 
-        // Log.v("DistoX", "exec SaveTh2File");
+        // Log.v("DistoX", "exec SaveTh2FileTask");
         saveTh2File.execute();
       } catch ( RejectedExecutionException e ) { 
         // Log.v("DistoX", "Rejected exec exception");
@@ -636,11 +636,11 @@ public class DrawingActivity extends ItemDrawer
     //     };
     //     mApp.mShotActivity.enableSketchButton( false );
     //     // if ( mType = PlotInfo.PLOT_EXTENDED ) {
-    //     //   (new SaveTh2File(this, handler, mApp, mDrawingSurface, null, mFullName2 )).execute();
+    //     //   (new SaveTh2FileTask(this, handler, mApp, mDrawingSurface, null, mFullName2 )).execute();
     //     // } else {
-    //     //   (new SaveTh2File(this, handler, mApp, mDrawingSurface, mFullName1, null )).execute();
+    //     //   (new SaveTh2FileTask(this, handler, mApp, mDrawingSurface, mFullName1, null )).execute();
     //     // }
-    //     (new SaveTh2File(this, handler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
+    //     (new SaveTh2FileTask(this, handler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
     //   }
     // }
 
@@ -1474,7 +1474,7 @@ public class DrawingActivity extends ItemDrawer
         String filepath = filename + ".bck";
         file = new File( filepath );
         if ( file.exists() ) file.delete(); 
-        for ( int i=0; i<SaveTh2File.NR_BACKUP; ++i ) {
+        for ( int i=0; i<SaveTh2FileTask.NR_BACKUP; ++i ) {
           filepath = filename + ".bck" + Integer.toString(i);
           file = new File( filepath );
           if ( file.exists() ) file.delete(); 
@@ -2674,12 +2674,12 @@ public class DrawingActivity extends ItemDrawer
           mDataDownloader.doDataDownload( );
         }
       } else if ( b == mButton1[k1++] ) { // BLUETOOTH
-        new DeviceRemote( this, this, mApp ).show();
+        new DeviceRemoteDialog( this, this, mApp ).show();
       } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
-          startSaveTh2Task( "toggle", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP ); 
+          startSaveTh2Task( "toggle", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
@@ -3086,7 +3086,7 @@ public class DrawingActivity extends ItemDrawer
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
-      startSaveTh2Task( "save", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP );
+      startSaveTh2Task( "save", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
     }
 
   
@@ -3269,7 +3269,7 @@ public class DrawingActivity extends ItemDrawer
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
       } else if ( p++ == pos ) { // OVERVIEW
-        // startSaveTh2Task( "overview", MAX_TASK_FINAL, SaveTh2File.NR_BACKUP ); // FIXME this is not necessary
+        // startSaveTh2Task( "overview", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP ); // FIXME this is not necessary
         // try {
         //   Thread.sleep(100);
         // } catch ( InterruptedException e ) { /* ignore */ }

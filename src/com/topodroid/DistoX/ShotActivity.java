@@ -959,7 +959,7 @@ public class ShotActivity extends Activity
             Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
             break;
           case Device.DISTO_X310:
-            (new DeviceRemote( this, this, mApp )).show();
+            (new DeviceRemoteDialog( this, this, mApp )).show();
             break;
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 

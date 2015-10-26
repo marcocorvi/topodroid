@@ -1,4 +1,4 @@
-/** @file SaveTh2File.java
+/** @file SaveTh2FileTask.java
  *
  * @author marco corvi
  * @date jan 2014
@@ -25,7 +25,7 @@ import android.os.Handler;
 
 import android.util.Log;
 
-class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
+class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
 {
   final static int NR_BACKUP = 3;
   private Context mContext;
@@ -37,7 +37,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
   private String mSuffix;
   private int mRotate;  // nr. backups to rotate
 
-  public SaveTh2File( Context context, Handler handler,
+  public SaveTh2FileTask( Context context, Handler handler,
                       TopoDroidApp app, DrawingSurface surface, 
                       String fullname1, long type, String suffix, int rotate )
   {
@@ -50,7 +50,7 @@ class SaveTh2File extends AsyncTask<Intent,Void,Boolean>
      mSuffix = suffix;
      mRotate = rotate;
      if ( mRotate > NR_BACKUP ) mRotate = NR_BACKUP;
-     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveTh2File " + mFullName1 + " type " + mType );
+     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 File Task " + mFullName1 + " type " + mType );
   }
 
   private void rotateBackups( String filename )

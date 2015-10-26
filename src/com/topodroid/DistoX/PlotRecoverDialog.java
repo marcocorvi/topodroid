@@ -108,7 +108,7 @@ public class PlotRecoverDialog extends Dialog
     if ( file.exists() ) {
       mAdapter.add( Long.toString(file.length()) + " " +  mFilename + ".th2.bck" );
     }
-    for ( int i=0; i<SaveTh2File.NR_BACKUP; ++i ) {
+    for ( int i=0; i<SaveTh2FileTask.NR_BACKUP; ++i ) {
       filename1 = filename + ".bck" + Integer.toString(i);
       file = new File( filename1 );
       if ( file.exists() ) {

@@ -1,4 +1,4 @@
-/* @file DistoXLocation.java
+/* @file LocationDialog.java
  *
  * @author marco corvi
  * @date dec 2011
@@ -51,7 +51,7 @@ import android.location.GpsSatellite;
 
 import android.util.Log;
 
-public class DistoXLocation extends Dialog
+public class LocationDialog extends Dialog
                             implements View.OnClickListener
                                      , AdapterView.OnItemClickListener
                                      , TextView.OnEditorActionListener
@@ -93,7 +93,7 @@ public class DistoXLocation extends Dialog
 
   private MyKeyboard mKeyboard;
 
-  public DistoXLocation( Context context, SurveyActivity parent, TopoDroidApp app, LocationManager lm )
+  public LocationDialog( Context context, SurveyActivity parent, TopoDroidApp app, LocationManager lm )
   {
     super(context);
     mContext = context;
@@ -112,7 +112,7 @@ public class DistoXLocation extends Dialog
   {
     super.onCreate(savedInstanceState);
     // TopoDroidLog.Log( TopoDroidLog.LOG_LOC, "Location onCreate" );
-    setContentView(R.layout.distox_location);
+    setContentView(R.layout.location_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mTVlong = (TextView) findViewById(R.id.longitude );
