@@ -8,7 +8,7 @@ You can adjust the line thickness in the <u>Settings</u> dialog. There are separ
 
 You can also correct mistakes in the drawing. The <u>Undo</u> button lets you remove the last item. What if you need to erase a line or a symbol that you drew long ago, but do not want to loose all the intermediate work? You have two choices: the <u>Erase</u> and the <u>Edit</u> button.  The former is very intuitive: it cancels everything you pass your finger over. It is just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines).<br><p>
 
-The <u>Edit</u> [N] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. You have to select the item to edit by tapping on it. If there are several items close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). It may not be what you wanted, but never mind: move among the selected point with the <u>Prev</u>-<u>Next</u> button.<br>
+The <u>Edit</u> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. You have to select the item to edit by tapping on it. If there are several items close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). It may not be what you wanted, but never mind: move among the selected point with the <u>Prev</u>-<u>Next</u> button.<br>
 You can adjust the size of the green dots and the selection radius in the <u>Settings</u> dialog.<br><p>
 
 Segments of Bezier lines have two control points. These are stored with the segment end-point and when this is the selected editing point the two control points are shown as pink circles. Each of them can be moved around by dragging it with the finger.<br><p>
@@ -20,18 +20,21 @@ To clear the selection tap somewhere else in the canvas. To move the editing poi
 <li><i>areas:</i> border "visibility"</li>
 </ul><br>
 
-Point editing applies also to shots and stations.
+Editing applies also to shots and stations.
 <ul>
-<li><i>shots:</i> stations, "extend", and flags</li>
+<li><i>shots:</i> stations, "extend", flags, and auto-walls [E].</li>
 <li><i>stations:</i> can be made the "current" station, toggle the midline "hiding" attribute [A], and add as Therion "station point" to the scrap (if the autostation option of TopoDroid is not enabled)</li>
 </ul><br>
 The "current" station is where the next downloaded shots will be attached. When a leg is downloaded (or inserted) the new station becomes the "current" station. By changing the "current" station you can continue surveying from a station in the middle of the survey.<br><p>
 
-Hiding stations [A] can limit the display of the midline for this sketch. This is useful if when the survey is complicated or goes itself. In this case you might want to see only a part of the midline. Select a station end tap the <u>note</u> button. Then you have the option to hide the previous or next stations. Repeat to show them again.
+<h4>Midline hiding</h4>
+
+Hiding stations [A] limits the display of the midline for this sketch. This is useful if when the survey is complicated or goes over itself. In this case you might want to see only a part of the midline. Select a station and tap the <u>note</u> button. Then you have the option to hide the previous or next stations. Repeat to show them again.
 Stations that limit the midline are colored in blue (when the previous are hidden) or red (when the next are hidden).<br>
 <img src="hiding_stations.png" alt="hiding stations"><br><p>
 
-<i>Therion</i> scraps must have a scale defined or at least two stations (so that <i>Therion</i> can compute the scale). TopoDroid has an option to automatically add all the stations that fall in the convex hull of the sketch to the scrap. This is enabled by default. However this may not be convenient if you work with xtherion and stations from other portions of the survey fall inside the scrap so that you get many "spurious" point stations. In this case you might want to disable this option and decide by yourself which station to add to the scrap.<br><p>
+
+<h4>Point-wise edit</h4>
 
 The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions.
 <ul>
@@ -44,9 +47,17 @@ The second to the right button applies only to drawing items and has a drop-down
 <li><i>Remove the line/area point</i> [lines, areas]</li>
 </ul><br><p>
 
+<h4>Drawing tools palette</h4>
+
 The default drawing tools include several points [N], lines, and areas [N]. It is likely you do not need many of them, and removing the unnecessary tools from the palette makes picking the tool you want to use easier. The <u>palette</u> menu comes for this purpose. It shows the list of the drawing tools with checkboxes that denote the enabled tools. You switch on and off the tools to your need then close the dialog (with the <u>back</u> button) to save the changes. You have to do this independently for points, lines and areas.<br><p>
 
 Each sketch carries its own palette.  When you close the sketch it is saved with a header listing the enabled tools. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
+
+<h4>Auto-walls [E]</h4>
+
+With auto-walls you tell TopoDroid to draw walls to the right and left of a shots interpolating through the end-points of the splays. At the moment there is only one mechanism, namely "convex" walls. A polyline is traced connecting the outermost end-points of the splays. To create a wall there must be at least one splay end-point on the side of the shot.<br><p>
+
+Through the settings you can specify a limit to the inclination of the splays to take into account, and the amount of allowed concavity.<br><p>
 
 <hr>
 <i>Do not forget to export the drawings in <i>cSurvey</i> format.  This is a special export, because it includes both plan and profile in a single file, and it adds also the survey data. If your survey is simple and has a single sketch you can easily get a final map from this file.</i><br><p>

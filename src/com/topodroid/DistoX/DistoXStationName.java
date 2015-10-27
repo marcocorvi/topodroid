@@ -8,11 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120520 created
- * 20120726 TopoDroid log
- * 20121118 method isLessOrEqual to compare station names
- * 20121223 bug-fix comparison between 9 and 10
  */
 package com.topodroid.DistoX;
 

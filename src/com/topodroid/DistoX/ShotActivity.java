@@ -472,7 +472,7 @@ public class ShotActivity extends Activity
       //   (new CurrentStationDialog( this, this, mApp )).show();
 
       } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
-        (new DistoXUndelete(this, this, mApp.mData, mApp.mSID ) ).show();
+        (new UndeleteDialog(this, this, mApp.mData, mApp.mSID ) ).show();
         updateDisplay( );
       } else if ( TopoDroidSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
         startActivity( new Intent( this, PhotoActivity.class ) );
@@ -1015,7 +1015,7 @@ public class ShotActivity extends Activity
       // //   startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
 
       // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnUndelete
-      //   (new DistoXUndelete(this, this, mApp.mData, mApp.mSID ) ).show();
+      //   (new UndeleteDialog(this, this, mApp.mData, mApp.mSID ) ).show();
       //   updateDisplay( );
       // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnCamera
       //   startActivity( new Intent( this, PhotoActivity.class ) );

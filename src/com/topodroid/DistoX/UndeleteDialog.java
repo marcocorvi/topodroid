@@ -1,4 +1,4 @@
-/* @file DistoXUndelete.java
+/* @file UndeleteDialog.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -33,7 +33,7 @@ import android.widget.Toast;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class DistoXUndelete extends Dialog
+public class UndeleteDialog extends Dialog
                             implements OnItemClickListener
                             , View.OnClickListener
 {
@@ -45,7 +45,7 @@ public class DistoXUndelete extends Dialog
   ArrayAdapter< String >  mArrayAdapter;
   ListView mList;
 
-  public DistoXUndelete( Context context, ShotActivity parent, DataHelper data, long sid )
+  public UndeleteDialog( Context context, ShotActivity parent, DataHelper data, long sid )
   {
     super( context );
     mParent = parent;
@@ -86,7 +86,7 @@ public class DistoXUndelete extends Dialog
   {
     super.onCreate( savedInstanceState );
 
-    setContentView(R.layout.distox_undelete);
+    setContentView(R.layout.undelete_dialog);
     mArrayAdapter = new ArrayAdapter<String>( mParent, R.layout.message );
     mList = (ListView) findViewById(R.id.list_undelete);
     mList.setAdapter( mArrayAdapter );
