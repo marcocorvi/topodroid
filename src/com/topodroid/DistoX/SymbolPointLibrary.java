@@ -232,6 +232,7 @@ class SymbolPointLibrary
 
     File dir = new File( TopoDroidPath.APP_POINT_PATH );
     if ( dir.exists() ) {
+      int systemNr = mAnyPoint.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolPoint symbol = new SymbolPoint( file.getPath(), locale, iso );
@@ -245,8 +246,24 @@ class SymbolPointLibrary
         }
       }
       mAnyPointNr = mAnyPoint.size();
+      sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
+    }
+  }
+
+  private void sortSymbolByName( int start )
+  {
+    for ( int k=start+1; k<mAnyPointNr; ) {
+      SymbolPoint prev = mAnyPoint.get(k-1);
+      SymbolPoint curr = mAnyPoint.get(k);
+      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
+        mAnyPoint.set( k-1, curr );
+        mAnyPoint.set( k, prev );
+        if ( k > start+1 ) --k;
+      } else {
+        ++k;
+      }
     }
   }
 

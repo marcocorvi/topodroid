@@ -209,6 +209,8 @@
     <string name="no_thmanager">ThManager не е инсталирана</string>
     <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
     <string name="no_undelete">Няма елементи за възстановяване</string>
+    <!-- TODO string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
+    <!-- TODO string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">За програмата</string>
@@ -676,6 +678,10 @@
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
   <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
+  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
+  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
@@ -793,6 +799,8 @@
   <string name="pref_drawing_unit_title">Размер на елемент "точка"</string>
   <string name="pref_drawing_unit_summary">Размер на нарисуван елемент тип "точка"</string>
   <string name="pref_drawing_unit_message">Размер на нарисуван елемент тип "точка"</string>
+  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
+  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
   <string name="pref_segment_title">Отстояния между точки на линия</string>
   <string name="pref_segment_summary">Минимално разстояние м/у точките в "линия"</string>
   <string name="pref_segment_message">Минимално разстояние м/у точките в "линия"</string>

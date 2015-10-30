@@ -53,7 +53,7 @@ public class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public void draw( Canvas canvas, Matrix matrix )
+  public void draw( Canvas canvas, Matrix matrix, float scale )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLabelPath::draw[matrix] " + mText );
     setTextSize();

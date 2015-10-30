@@ -108,6 +108,12 @@ public class DataHelper extends DataSetObservable
   // END_SKETCH_3D
   private SQLiteStatement updatePhotoStmt;
   private SQLiteStatement updateSensorStmt;
+  private SQLiteStatement transferSensorStmt;
+  private SQLiteStatement transferPhotoStmt;
+  private SQLiteStatement transferFixedStmt;
+  private SQLiteStatement transferPlotStmt;
+  private SQLiteStatement transferSketchStmt;
+  private SQLiteStatement transferStationStmt;
 
   private SQLiteStatement updateFixedStationStmt;
   private SQLiteStatement updateFixedStatusStmt;
@@ -256,6 +262,12 @@ public class DataHelper extends DataSetObservable
 
         deleteSensorStmt = myDB.compileStatement( "DELETE FROM sensors WHERE surveyId=? AND id=?" );
         updateSensorStmt = myDB.compileStatement( "UPDATE sensors set comment=? WHERE surveyId=? AND id=?" );
+        transferSensorStmt = myDB.compileStatement( "UPDATE sensors set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+        transferPhotoStmt = myDB.compileStatement( "UPDATE photos set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+        transferFixedStmt = myDB.compileStatement( "UPDATE fixeds set surveyId=? WHERE surveyId=? AND id=?" );
+        transferPlotStmt  = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
+        transferSketchStmt  = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+        transferStationStmt = myDB.compileStatement( "UPDATE stations set surveyId=? WHERE surveyId=? AND name=?" );
  
         updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
         updateFixedStatusStmt = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
@@ -876,13 +888,66 @@ public class DataHelper extends DataSetObservable
 
   public void transferShots( long sid, long old_sid, long old_id )
   {
+    SurveyInfo old_survey = selectSurveyInfo( old_sid );
+    SurveyInfo new_survey = selectSurveyInfo( sid );
     long max_id = maxId( SHOT_TABLE, old_sid );
     while ( old_id < max_id ) {
+      DistoXDBlock blk = selectShot( old_id, old_sid );
+
       transferShotStmt.bindLong(1, sid);
       transferShotStmt.bindLong(2, myNextId);
       transferShotStmt.bindLong(3, old_sid);
       transferShotStmt.bindLong(4, old_id);
       transferShotStmt.execute();
+      
+      // transfer fixeds, stations, plots and sketches
+      if ( blk.mFrom.length() > 0 ) {
+        List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mFrom ); 
+        for ( FixedInfo fixed : fixeds ) {
+          transferFixed( sid, old_sid, fixed.id );
+        }
+        transferStation( sid, old_sid, blk.mFrom );
+        List< PlotInfo > plots = selectPlotsAtStation( old_sid, blk.mFrom );
+        for ( PlotInfo plot : plots ) {
+          transferPlot( sid, old_sid, plot.id );
+        }
+        List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, blk.mFrom );
+        for ( Sketch3dInfo sketch : sketches ) {
+          transferSketch( sid, old_sid, sketch.id );
+        }
+      }
+      if ( blk.mTo.length() > 0 ) {
+        List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mTo );
+        for ( FixedInfo fixed : fixeds ) {
+          transferFixed( sid, old_sid, fixed.id );
+        }
+        transferStation( sid, old_sid, blk.mTo );
+        List< PlotInfo > plots = selectPlotsAtStation( old_sid, blk.mFrom );
+        for ( PlotInfo plot : plots ) {
+          transferPlot( sid, old_sid, plot.id );
+        }
+        List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, blk.mFrom );
+        for ( Sketch3dInfo sketch : sketches ) {
+          transferSketch( sid, old_sid, sketch.id );
+        }
+      }
+      List< SensorInfo > sensors = selectSensorsAtShot( old_sid, old_id ); // transfer sensors
+      for ( SensorInfo sensor : sensors ) {
+        transferSensor( sid, myNextId, old_sid, sensor.id );
+      }
+      List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
+      for ( PhotoInfo photo : photos ) {
+        transferPhoto( sid, myNextId, old_sid, photo.id );
+        // TODO move the photo file !!!
+        File oldfile = new File( TopoDroidPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
+        File newfile = new File( TopoDroidPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
+        if ( oldfile.exists() && ! newfile.exists() ) {
+          oldfile.renameTo( newfile );
+        } else {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename " + old_survey.name + "/" + photo.id + ".jpg" );
+        }
+      }
+
       ++ myNextId;
       ++ old_id;
     }
@@ -1113,6 +1178,48 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  private List< SensorInfo > selectSensorsAtShot( long sid, long shotid )
+  {
+    List< SensorInfo > list = new ArrayList< SensorInfo >();
+    // if ( myDB == null ) return list;
+    Cursor cursor = myDB.query( SENSOR_TABLE,
+       		         new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
+                                "surveyId=? AND shotId=?", 
+                                new String[] { Long.toString(sid), Long.toString(shotid) },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new SensorInfo( sid, 
+                                 cursor.getLong(0), // id
+                                 cursor.getLong(1), // shot-id
+                                 cursor.getString(2), // title
+                                 null,                // shot name
+                                 cursor.getString(3), // date
+                                 cursor.getString(4), // comment
+                                 cursor.getString(5), // type
+                                 cursor.getString(6) ) ); // value
+      } while (cursor.moveToNext());
+    }
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Sensors list size " + list.size() );
+    if (cursor != null && !cursor.isClosed()) {
+      cursor.close();
+    }
+    for ( SensorInfo si : list ) { // set shot-names to the sensor infos
+      cursor = myDB.query( SHOT_TABLE, 
+                           new String[] { "fStation", "tStation" },
+                           "surveyId=? and id=?",
+                           new String[] { Long.toString(sid), Long.toString(si.shotid) },
+                           null, null, null );
+      if (cursor.moveToFirst()) {
+        si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
+      }
+      if (cursor != null && !cursor.isClosed()) cursor.close();
+    }
+    return list;
+  }
+
   public List< PhotoInfo > selectAllPhotos( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList< PhotoInfo >();
@@ -1153,54 +1260,83 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-/* FIXME PHOTO
-   public List< PhotoInfo > selectPhotoAtShot( long sid, long shotid )
-   {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectPhotoAtShot " + shotid + "/" + sid );
-     List< PhotoInfo > list = new ArrayList< PhotoInfo >();
-     // if ( myDB == null ) return list;
-     Cursor cursor = myDB,query( SHOT_TABLE, 
-                                 new String[] { "fStation", "tStation" },
-                                 "surveyId=? and shotId=?",
-                                 new String[] { Long.toString(sid), Long.toString(shotid) },
-                                 null, null, null );
-     if (cursor.moveToFirst()) {
-       String shot_name = cursor.getString(0) + "-" + cursor.getString(1);
-       if (cursor != null && !cursor.isClosed()) cursor.close();
-       cursor = myDB.query( PHOTO_TABLE,
-			    new String[] { "id", "title", "date", "comment" }, // columns
-                            "surveyId=? and shotId=?",  // selection = WHERE clause (without "WHERE")
-                            new String[] { Long.toString(sid), Long.toString(shotid) },     // selectionArgs
-                            null,  // groupBy
-                            null,  // having
-                            null ); // order by
-       if (cursor.moveToFirst()) {
-         do {
-           list.add( new PhotoInfo( sid,
-                                    cursor.getLong(0),
-                                    shotid,
-                                    cursor.getString(1),
-                                    null,
-                                    cursor.getString(2),
-                                    cursor.getString(3) ) );
-         } while (cursor.moveToNext());
-       }
-     }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
-     return list;
-   }
-*/
+  private List< PhotoInfo > selectPhotoAtShot( long sid, long shotid )
+  {
+    List< PhotoInfo > list = new ArrayList< PhotoInfo >();
+    // if ( myDB == null ) return list;
+    Cursor cursor = myDB.query( PHOTO_TABLE,
+       		         new String[] { "id", "shotId", "title", "date", "comment" }, // columns
+                                "surveyId=? AND shtId=?", 
+                                new String[] { Long.toString(sid), Long.toString(shotid) },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new PhotoInfo( sid, 
+                                 cursor.getLong(0), // id
+                                 cursor.getLong(1),
+                                 cursor.getString(2),
+                                 null,              // shot name
+                                 cursor.getString(3),
+                                 cursor.getString(4) ) );
+      } while (cursor.moveToNext());
+    }
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Photos list size " + list.size() );
+    if (cursor != null && !cursor.isClosed()) {
+      cursor.close();
+    }
+    for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
+      cursor = myDB.query( SHOT_TABLE, 
+                           new String[] { "fStation", "tStation" },
+                           "surveyId=? and id=?",
+                           new String[] { Long.toString(sid), Long.toString(pi.shotid) },
+                           null, null, null );
+      if (cursor.moveToFirst()) {
+        pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
+      }
+      if (cursor != null && !cursor.isClosed()) cursor.close();
+    }
+    return list;
+  }
 
-   public List< FixedInfo > selectAllFixed( long sid, int status )
+  public List< FixedInfo > selectAllFixed( long sid, int status )
+  {
+    List<  FixedInfo  > list = new ArrayList<  FixedInfo  >();
+    // if ( myDB == null ) return list;
+    Cursor cursor = myDB.query( FIXED_TABLE,
+			         new String[] { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment" }, // columns
+                                 "surveyId=? and status=?",  // selection = WHERE clause (without "WHERE")
+                                new String[] { Long.toString(sid), Long.toString(status) },     // selectionArgs
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new FixedInfo( cursor.getLong(0),
+                                 cursor.getString(1),
+                                 cursor.getDouble(2),
+                                 cursor.getDouble(3),
+                                 cursor.getDouble(4),
+                                 cursor.getDouble(5),
+                                 cursor.getString(6) ) );
+      } while (cursor.moveToNext());
+    }
+    if (cursor != null && !cursor.isClosed()) {
+      cursor.close();
+    }
+    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
+    return list;
+  }
+
+   private List< FixedInfo > selectFixedAtStation( long sid, String name )
    {
      List<  FixedInfo  > list = new ArrayList<  FixedInfo  >();
      // if ( myDB == null ) return list;
      Cursor cursor = myDB.query( FIXED_TABLE,
 			         new String[] { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment" }, // columns
-                                 "surveyId=? and status=?",  // selection = WHERE clause (without "WHERE")
-                                new String[] { Long.toString(sid), Long.toString(status) },     // selectionArgs
+                                 "surveyId=? and station=?",  // selection = WHERE clause (without "WHERE")
+                                new String[] { Long.toString(sid), name },     // selectionArgs
                                 null,  // groupBy
                                 null,  // having
                                 null ); // order by
@@ -1280,6 +1416,14 @@ public class DataHelper extends DataSetObservable
      return doSelectAllSketches( sid, 
                                  "surveyId=? and status=?",
                                  new String[] { Long.toString(sid), Long.toString(status) }
+     );
+   }
+
+   private List< Sketch3dInfo > selectSketchesAtStation( long sid, String name )
+   {
+     return doSelectAllSketches( sid, 
+                                 "surveyId=? and start=?",
+                                 new String[] { Long.toString(sid), name }
      );
    }
    // END_SKETCH_3D
@@ -1370,6 +1514,7 @@ public class DataHelper extends DataSetObservable
      plot.hide    = cursor.getString(10);
    }
 
+
    private List< PlotInfo > doSelectAllPlots( long sid, String where, String[] wheres )
    {
      List<  PlotInfo  > list = new ArrayList<  PlotInfo  >();
@@ -1422,6 +1567,13 @@ public class DataHelper extends DataSetObservable
      );
    }
 
+   private List< PlotInfo > selectPlotsAtStation( long sid, String name )
+   {
+     return doSelectAllPlots( sid, 
+                              "surveyId=? and start=?",
+                              new String[] { Long.toString(sid), name }
+     );
+   }
 
 
    public boolean hasShot( long sid, String fStation, String tStation )
@@ -2374,6 +2526,57 @@ public class DataHelper extends DataSetObservable
      return true;
    }
 
+   private void transferSensor( long sid, long shot_id, long old_sid, long old_id )
+   {
+     transferSensorStmt.bindLong( 1, sid );
+     transferSensorStmt.bindLong( 2, shot_id );
+     transferSensorStmt.bindLong( 3, old_sid );
+     transferSensorStmt.bindLong( 4, old_id );
+     transferSensorStmt.execute();
+   }
+
+   private void transferPhoto( long sid, long shot_id, long old_sid, long old_id )
+   {
+     transferPhotoStmt.bindLong( 1, sid );
+     transferPhotoStmt.bindLong( 2, shot_id );
+     transferPhotoStmt.bindLong( 3, old_sid );
+     transferPhotoStmt.bindLong( 4, old_id );
+     transferPhotoStmt.execute();
+   }
+
+   private void transferFixed( long sid, long old_sid, long fixed_id )
+   {
+     transferFixedStmt.bindLong( 1, sid );
+     transferFixedStmt.bindLong( 2, old_sid );
+     transferFixedStmt.bindLong( 3, fixed_id );
+     transferFixedStmt.execute();
+   }
+
+   private void transferStation( long sid, long old_sid, String name )
+   {
+     transferStationStmt.bindLong( 1, sid );
+     transferStationStmt.bindLong( 2, old_sid );
+     transferStationStmt.bindString( 3, name );
+     transferStationStmt.execute();
+   }
+       
+   private void transferPlot( long sid, long old_sid, long plot_id )
+   {
+     transferPlotStmt.bindLong( 1, sid );
+     transferPlotStmt.bindLong( 2, old_sid );
+     transferPlotStmt.bindLong( 3, plot_id );
+     transferPlotStmt.execute();
+   }
+
+   private void transferSketch( long sid, long old_sid, long plot_id )
+   {
+     transferSketchStmt.bindLong( 1, sid );
+     transferSketchStmt.bindLong( 2, old_sid );
+     transferSketchStmt.bindLong( 3, plot_id );
+     transferSketchStmt.execute();
+   }
+
+
    public boolean hasFixed( long sid, String station )
    {
      return ( getFixedId( sid, station ) != -1 );
@@ -3106,7 +3309,7 @@ public class DataHelper extends DataSetObservable
      }
      return cs;
    }
-       
+
 
    ArrayList< CurrentStation > getStations( long sid )
    {

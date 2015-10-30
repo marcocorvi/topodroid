@@ -184,6 +184,7 @@ class SymbolAreaLibrary
 
     File dir = new File( TopoDroidPath.APP_AREA_PATH );
     if ( dir.exists() ) {
+      int systemNr = mAnyArea.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), locale, iso );
@@ -197,8 +198,24 @@ class SymbolAreaLibrary
         }
       }
       mAnyAreaNr = mAnyArea.size();
+      sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
+    }
+  }
+
+  private void sortSymbolByName( int start )
+  {
+    for ( int k=start+1; k<mAnyAreaNr; ) {
+      SymbolArea prev = mAnyArea.get(k-1);
+      SymbolArea curr = mAnyArea.get(k);
+      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
+        mAnyArea.set( k-1, curr );
+        mAnyArea.set( k, prev );
+        if ( k > start+1 ) --k;
+      } else {
+        ++k;
+      }
     }
   }
 

@@ -175,6 +175,7 @@ class SymbolLineLibrary
 
     File dir = new File( TopoDroidPath.APP_LINE_PATH );
     if ( dir.exists() ) {
+      int systemNr = mAnyLine.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), locale, iso );
@@ -188,8 +189,24 @@ class SymbolLineLibrary
         }
       }
       mAnyLineNr = mAnyLine.size();
+      sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
+    }
+  }
+
+  private void sortSymbolByName( int start )
+  {
+    for ( int k=start+1; k<mAnyLineNr; ) {
+      SymbolLine prev = mAnyLine.get(k-1);
+      SymbolLine curr = mAnyLine.get(k);
+      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
+        mAnyLine.set( k-1, curr );
+        mAnyLine.set( k, prev );
+        if ( k > start+1 ) --k;
+      } else {
+        ++k;
+      }
     }
   }
 

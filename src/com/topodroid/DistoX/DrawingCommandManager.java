@@ -66,6 +66,7 @@ public class DrawingCommandManager
   private boolean mDisplayPoints;
 
   private Matrix mMatrix;
+  private float  mScale; // current zoom
 
   // void checkLines()
   // {
@@ -304,6 +305,7 @@ public class DrawingCommandManager
     mMatrix = new Matrix();
     mMatrix.postTranslate( dx, dy );
     mMatrix.postScale( s, s );
+    mScale  = 1 / s;
   }
 
   // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
@@ -741,6 +743,7 @@ public class DrawingCommandManager
     c.drawBitmap (bitmap, 0, 0, null);
 
     Matrix mat = new Matrix();
+    float sca = 1 / scale;
     mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
     mat.postScale( scale, scale );
     if ( mGridStack != null ) {
@@ -748,9 +751,9 @@ public class DrawingCommandManager
         final Iterator i = mGridStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat );
+          drawingPath.draw( c, mat, sca );
         }
-        if ( mNorthLine != null ) mNorthLine.draw( c, mat );
+        if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca );
       }
     }
     if ( mFixedStack != null ) {
@@ -758,7 +761,7 @@ public class DrawingCommandManager
         final Iterator i = mFixedStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat );
+          drawingPath.draw( c, mat, sca );
         }
       }
     }
@@ -766,7 +769,7 @@ public class DrawingCommandManager
     if ( mStations != null ) {  
       synchronized( mStations ) {
         for ( DrawingStationName st : mStations ) {
-          st.draw( c, mat );
+          st.draw( c, mat, sca );
         }
       }
     }
@@ -776,7 +779,7 @@ public class DrawingCommandManager
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
           final ICanvasCommand cmd = (ICanvasCommand) i.next();
-          cmd.draw( c, mat );
+          cmd.draw( c, mat, sca );
         }
       }
     }
@@ -901,10 +904,10 @@ public class DrawingCommandManager
         final Iterator i = mGridStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( canvas, mMatrix );
+          drawingPath.draw( canvas, mMatrix, mScale );
           //doneHandler.sendEmptyMessage(1);
         }
-        if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix );
+        if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale );
       }
     }
 
@@ -914,9 +917,9 @@ public class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
           if ( legs && path.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-            path.draw( canvas, mMatrix );
+            path.draw( canvas, mMatrix, mScale );
           } else if ( splays && path.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
-            path.draw( canvas, mMatrix );
+            path.draw( canvas, mMatrix, mScale );
           }
           //doneHandler.sendEmptyMessage(1);
         }
@@ -926,7 +929,7 @@ public class DrawingCommandManager
     if ( mStations != null && stations ) {  
       synchronized( mStations ) {
         for ( DrawingStationName st : mStations ) {
-          st.draw( canvas, mMatrix );
+          st.draw( canvas, mMatrix, mScale );
         }
       }
     }
@@ -937,7 +940,7 @@ public class DrawingCommandManager
         while ( i.hasNext() ){
           final ICanvasCommand cmd = (ICanvasCommand) i.next();
           if ( cmd.commandType() == 0 ) {
-            cmd.draw( canvas, mMatrix );
+            cmd.draw( canvas, mMatrix, mScale );
           }
           //doneHandler.sendEmptyMessage(1);
         }
@@ -1010,8 +1013,8 @@ public class DrawingCommandManager
       } 
     }
     synchronized( mGridStack ) {
-      if ( mFirstReference != null ) mFirstReference.draw( canvas, mMatrix );
-      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix );
+      if ( mFirstReference != null ) mFirstReference.draw( canvas, mMatrix, mScale );
+      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale );
     }
   }
 

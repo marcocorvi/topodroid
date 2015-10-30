@@ -200,6 +200,8 @@
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
     <string name="no_undelete">No hay medida para recuperar</string>
+    <!-- TODO string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
+    <!-- TODO string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
 
     <string name="menu_about">Acerca de..</string>
     <string name="menu_attach">Conectar</string>
@@ -600,6 +602,10 @@
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
+  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
+  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
 
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
@@ -715,6 +721,8 @@
   <string name="pref_drawing_unit_title">Tamaño de los símbolo</string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
   <string name="pref_drawing_unit_message">Escala de los símbolos del dibujo en la pantalla</string>
+  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
+  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
   <string name="pref_segment_title">Precisión de la línea</string>
   <string name="pref_segment_summary">Mínimo distancia línea-punto</string>
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>

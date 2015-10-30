@@ -203,6 +203,8 @@
     <string name="no_thmanager">ThManager non installé</string>
     <!-- TODO string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Aucun élément à récupérer</string>
+    <!-- TODO string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
+    <!-- TODO string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
 
     <string name="menu_about">A PROPOS</string>
     <string name="menu_attach">CONNECTER</string>
@@ -609,6 +611,10 @@
   <!-- TODO string name="pref_leg_shots_summary">Minimum number of shots per leg</string -->
   <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
   <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
+  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
+  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Créer socket</string>
@@ -722,6 +728,8 @@
   <string name="pref_drawing_unit_title">Echelle des symboles</string>
   <string name="pref_drawing_unit_summary">Echelle des symboles de dessin</string>
   <string name="pref_drawing_unit_message">Echelle des symboles de dessin</string>
+  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
+  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
   <string name="pref_segment_title">Espacement des points de ligne</string>
   <string name="pref_segment_summary">Distance mini entre points d\'une ligne</string>
   <string name="pref_segment_message">Distance mini entre les points d\'une ligne</string>

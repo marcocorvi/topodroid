@@ -485,7 +485,8 @@ public class DrawingActivity extends ItemDrawer
       for ( int x = (int)Math.round(xmin); x < xmax; x += 1 ) {
         float x0 = (float)(toSceneX( x ) - xoff);
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(x%10)==5)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
+        dpath.setPaint( (Math.abs(x%100) == 0)? DrawingBrushPaths.fixedGrid100Paint : 
+                        (Math.abs(x%10) == 0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
         dpath.mPath  = new Path();
         dpath.mPath.moveTo( x0, y1 );
         dpath.mPath.lineTo( x0, y2 );
@@ -494,7 +495,8 @@ public class DrawingActivity extends ItemDrawer
       for ( int y = (int)Math.round(ymin); y < ymax; y += 1 ) {
         float y0 = (float)(toSceneY( y ) - yoff);
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(y%10)==5)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
+        dpath.setPaint( (Math.abs(y%100) == 0)? DrawingBrushPaths.fixedGrid100Paint : 
+                        (Math.abs(y%10) == 0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
         dpath.mPath  = new Path();
         dpath.mPath.moveTo( x1, y0 );
         dpath.mPath.lineTo( x2, y0 );
@@ -1607,6 +1609,7 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
+    private boolean pointerDown = false;
 
     public boolean onTouch( View view, MotionEvent rawEvent )
     {
@@ -1627,6 +1630,7 @@ public class DrawingActivity extends ItemDrawer
         mTouchMode = MODE_ZOOM;
         oldDist = spacing( event );
         saveEventPoint( event );
+        pointerDown = true;
         return true;
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
         int np = event.getPointerCount();
@@ -1634,7 +1638,9 @@ public class DrawingActivity extends ItemDrawer
         mTouchMode = MODE_MOVE;
         id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
         // int idx = rawEvent.findPointerIndex( id );
-        action = MotionEvent.ACTION_DOWN; // force next case
+        if ( mSymbol != SYMBOL_POINT ) {
+          action = MotionEvent.ACTION_DOWN; // force next case
+        }
         /* fall through */
       }
       float x_canvas = event.getX(id);
@@ -1747,6 +1753,10 @@ public class DrawingActivity extends ItemDrawer
               } else {
                 save = false;
               }
+            } else if ( mSymbol == SYMBOL_POINT ) {
+              // if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+              //   pointerDown = 0;
+              // }
             }
           } else if (  mMode == MODE_MOVE 
                    || (mMode == MODE_EDIT && mEditMove ) 
@@ -2007,7 +2017,7 @@ public class DrawingActivity extends ItemDrawer
               //   }
               // }
             } else { // SYMBOL_POINT
-              if ( Math.abs( x_shift ) < 16 && Math.abs( y_shift ) < 16 ) {
+              if ( ( ! pointerDown ) && Math.abs( x_shift ) < 16 && Math.abs( y_shift ) < 16 ) {
                 if ( DrawingBrushPaths.mPointLib.pointHasText(mCurrentPoint) ) {
                   DrawingLabelDialog label = new DrawingLabelDialog( mDrawingSurface.getContext(), this, x_scene, y_scene );
                   label.show();
@@ -2021,6 +2031,7 @@ public class DrawingActivity extends ItemDrawer
                 }
               }
             }
+            pointerDown = false;
             modified();
           } else if ( mMode == MODE_EDIT ) {
             if ( Math.abs(mStartX - x_canvas) < 10 && Math.abs(mStartY - y_canvas) < 10 ) {

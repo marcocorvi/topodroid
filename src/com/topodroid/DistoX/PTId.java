@@ -65,7 +65,8 @@ class PTId
     }
   }
 
-  private void setUndef() { _id = ID_UNDEFINED; }
+  void setId( int n ) { setNumber( n + 0x80000001 ); }
+  void setUndef() { _id = ID_UNDEFINED; }
   private void setNumber( int n ) { _id = n - 0x80000001; }
   private void setMajorMinor( int major, int minor ) 
   {

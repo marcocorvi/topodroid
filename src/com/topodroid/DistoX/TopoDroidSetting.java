@@ -107,6 +107,9 @@ class TopoDroidSetting
     "DISTOX_BITMAP_BGCOLOR",
     "DISTOX_AUTO_PAIR",
     "DISTOX_SOCKET_DELAY",
+    "DISTOX_SURVEX_EOL",         // survex end of line
+    "DISTOX_SURVEX_SPLAY",
+    "DISTOX_UNSCALED_POINTS",     // unscaled drawing point items
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -199,6 +202,8 @@ class TopoDroidSetting
 
   static int mTextSize = 16;     // list text size 
 
+  static String mSurvexEol = "\n";
+  static boolean mSurvexSplay = false;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
@@ -320,6 +325,8 @@ class TopoDroidSetting
   static float mLineThickness = 1;    // witdh of drawing lines
   static float mDotRadius = 5;
   static float mArrowLength = 8;
+
+  static boolean mUnscaledPoints = false;
 
   static float mUnit = 1.2f; // drawing unit
 
@@ -698,6 +705,11 @@ class TopoDroidSetting
       if ( i >= 0 && i <= 1000 ) mConnectSocketDelay = i;
     } catch ( NumberFormatException e ) { }
 
+    mSurvexEol = ( prefs.getString( key[ k++ ], "LF" ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
+    mSurvexSplay = prefs.getBoolean( key[k++], false ); // DISTOX_SURVEX_SPLAY
+
+    mUnscaledPoints = prefs.getBoolean( key[k++], false ); // DISTOX_UNSCALED_POINTS
+
     try { // DISTOX_WALLS_TYPE
       i = Integer.parseInt(prefs.getString( key[k++], "0" ) ); 
       if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
@@ -1067,6 +1079,12 @@ class TopoDroidSetting
         i = Integer.parseInt(prefs.getString( k, "0" ) );  
         if ( i >= 0 && i <= 1000 ) mConnectSocketDelay = i;
       } catch ( NumberFormatException e ) { }
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mSurvexEol = ( prefs.getString( k, "LF" ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mSurvexSplay = prefs.getBoolean( k, false ); // DISTOX_SURVEX_SPLAY
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mUnscaledPoints = prefs.getBoolean( k, false ); // DISTOX_UNSCALED_POINTS
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
       try {

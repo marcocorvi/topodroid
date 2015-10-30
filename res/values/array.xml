@@ -2,6 +2,15 @@
 
 <resources>
 
+  <string-array name="survexEol">
+     <item name="lf">Linux</item>
+     <item name="lfcr">Windows</item>
+  </string-array>
+  <string-array name="survexEolValue">
+     <item name="lf">LF</item>
+     <item name="lfcr">LFCR</item>
+  </string-array>
+
   <string-array name="wallsType">
      <item name="none">None</item>
      <item name="convex">Convex</item>
