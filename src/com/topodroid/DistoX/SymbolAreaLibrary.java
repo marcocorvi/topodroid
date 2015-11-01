@@ -41,6 +41,14 @@ class SymbolAreaLibrary
     makeEnabledList();
   }
 
+  int getSymbolIndex( Symbol symbol ) 
+  {
+    for ( int k=0; k<mAnyArea.size(); ++k ) {
+      if ( symbol == mAnyArea.get(k) ) return k;
+    }
+    return -1;
+  }
+
   // int size() { return mArea.size(); }
 
   // SymbolArea getArea( int k ) 
@@ -75,7 +83,7 @@ class SymbolAreaLibrary
     return false;
   }
 
-  private SymbolArea getSymbolAnyArea( String th_name )
+  SymbolArea getSymbolAnyArea( String th_name )
   {
     for ( SymbolArea a : mAnyArea ) {
       if ( th_name.equals( a.mThName ) ) return a;
@@ -256,9 +264,22 @@ class SymbolAreaLibrary
       // if ( symbol.mEnabled ) {
       //   mArea.add( symbol );
       // }
+      if ( symbol.mEnabled ) {
+      }
     }
     // mAreaNr = mArea.size();
     // Log.v( TopoDroidApp.TAG, "make enabled list after: " + mAnyArea.size() );
+  }
+
+  void setRecentAreas( Symbol recent[] )
+  {
+    int k = 0;
+    for ( SymbolArea symbol : mAnyArea ) {
+      if ( symbol.mEnabled ) {
+        recent[k++] = symbol;
+        if ( k >= ItemDrawer.NR_RECENT ) break;
+      }
+    }
   }
 
   void makeEnabledListFromPalette( SymbolsPalette palette )

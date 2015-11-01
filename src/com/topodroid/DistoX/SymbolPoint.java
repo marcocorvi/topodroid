@@ -32,7 +32,6 @@ import android.graphics.Matrix;
 import android.util.Log;
 
 class SymbolPoint extends Symbol
-                  implements SymbolInterface
 {
   static final float dxfScale = 0.05f;
   static final float csxScale = 5.00f;
@@ -53,15 +52,11 @@ class SymbolPoint extends Symbol
   // boolean canRotate() { return mOrientable; }
   // double orientation() { return mOrientation; }
 
-  @Override
-  public boolean isOrientable() { return mOrientable; }
+  @Override public boolean isOrientable() { return mOrientable; }
 
-  public boolean isEnabled() { return mEnabled; }
-  public void setEnabled( boolean enabled ) { mEnabled = enabled; }
-  public void toggleEnabled() { mEnabled = ! mEnabled; }
-
-  // @Override
-  // public void rotate( float angle ) { rotateGrad( angle ); }
+  // @Override public boolean isEnabled() { return mEnabled; }
+  // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
+  // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
   @Override
   public void setAngle( float angle ) // degrees
@@ -75,20 +70,20 @@ class SymbolPoint extends Symbol
     }
   }
   
-  public int getAngle() { return (int)mOrientation; } // degrees
+  @Override public int getAngle() { return (int)mOrientation; } // degrees
 
-  public String getThName( ) { return mThName; }
-  public String getName( ) { return mName; }
+  @Override public String getName( ) { return mName; }
+  @Override public String getThName( ) { return mThName; }
 
   String getDxf( ) { return mDxf; }
 
   boolean hasThName( String th_name ) { return ( th_name.equals( mThName ) ); } 
 
-  public Path getPath( ) { return mPath; }
+  @Override public Path getPath( ) { return mPath; }
 
   Path getOrigPath( ) { return mOrigPath; }
  
-  public Paint getPaint( ) { return mPaint; }
+  @Override public Paint getPaint( ) { return mPaint; }
 
   SymbolPoint( String filename, String locale, String iso )
   {

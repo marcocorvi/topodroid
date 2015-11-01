@@ -52,11 +52,19 @@ class SymbolPointLibrary
     makeEnabledList();
   }
 
+  int getSymbolIndex( Symbol symbol ) 
+  {
+    for ( int k=0; k<mAnyPoint.size(); ++k ) {
+      if ( symbol == mAnyPoint.get(k) ) return k;
+    }
+    return -1;
+  }
+
   // =============================================================
   // int size() { return mNrPoint; }
 
   
-  private SymbolPoint getSymbolAnyPoint( String th_name )
+  SymbolPoint getSymbolAnyPoint( String th_name )
   {
     for ( SymbolPoint p : mAnyPoint ) {
       if ( p.hasThName( th_name ) ) return p;
@@ -312,6 +320,18 @@ class SymbolPointLibrary
       ++ index;
     }
   }
+
+  void setRecentPoints( Symbol recent[] )
+  {
+    int k = 0;
+    for ( SymbolPoint symbol : mAnyPoint ) {
+      if ( symbol.mEnabled ) {
+        recent[k++] = symbol;
+        if ( k >= ItemDrawer.NR_RECENT ) break;
+      }
+    }
+  }
+
 
   void makeEnabledListFromPalette( SymbolsPalette palette )
   {

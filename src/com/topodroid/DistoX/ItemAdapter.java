@@ -45,6 +45,10 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     return ( k < mItems.size() ) ? mItems.get(k) : null ;
   }
 
+  // void doRecent( SymbolInterface symbol ) 
+  // {
+  // }
+
   public ItemAdapter( Context ctx, IItemPicker parent, int id, ArrayList< ItemSymbol > items )
   {
     super( ctx, id, items );
@@ -93,6 +97,25 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     for ( int k=0; k<mItems.size(); ++k ) {
       ItemSymbol item = mItems.get(k);
       if ( index == item.mIndex ) {
+        mPos = k;
+        item.setChecked( true );
+      } else {
+        item.setChecked( false );
+      }
+    }
+    if ( mPos == -1 ) {
+      mPos = ( mItems.size() > 1 )? 1 : 0;
+      mItems.get( mPos ).setChecked( true );
+    }
+  }
+
+  // set selected position from the item symbol
+  void setSelectedItem( Symbol symbol )
+  {
+    mPos = -1;
+    for ( int k=0; k<mItems.size(); ++k ) {
+      ItemSymbol item = mItems.get(k);
+      if ( symbol == item.mSymbol ) {
         mPos = k;
         item.setChecked( true );
       } else {

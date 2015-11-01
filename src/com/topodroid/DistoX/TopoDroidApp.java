@@ -126,6 +126,7 @@ public class TopoDroidApp extends Application
     mManualCalibrationClino   = 0;
   }
 
+
   // ----------------------------------------------------------------------
   // data lister
   // ListerSet mListerSet;

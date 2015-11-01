@@ -56,22 +56,43 @@
              android:progressDrawable="@drawable/progress2"
           />
         </LinearLayout>
-        <!-- LinearLayout 
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="right"
-          >
-          <Button android:id="@+id/item_cancel"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_cancel"
-          />
-        </LinearLayout -->
 
       </LinearLayout>
+
+      <LinearLayout android:id="@+id/layout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+      >
+          <com.topodroid.DistoX.ItemButton android:id="@+id/recent0"
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content" 
+            android:layout_weight="25"
+            android:layout_marginRight="10dp"
+          />
+          <com.topodroid.DistoX.ItemButton android:id="@+id/recent1"
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content" 
+            android:layout_weight="25"
+            android:layout_marginRight="10dp"
+          />
+          <com.topodroid.DistoX.ItemButton android:id="@+id/recent2"
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content" 
+            android:layout_weight="25"
+            android:layout_marginRight="10dp"
+          />
+          <com.topodroid.DistoX.ItemButton android:id="@+id/recent3"
+            android:layout_width="0dp" 
+            android:layout_height="wrap_content" 
+            android:layout_weight="25"
+          />
+      </LinearLayout>
+
       <!-- ListView android:id="@+id/item_list"
           android:layout_width="fill_parent"
           android:layout_height="fill_parent"

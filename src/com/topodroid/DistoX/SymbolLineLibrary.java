@@ -55,6 +55,15 @@ class SymbolLineLibrary
   //   return l.isEnabled() ? l : null;
   // }
 
+  int getSymbolIndex( Symbol symbol ) 
+  {
+    for ( int k=0; k<mAnyLine.size(); ++k ) {
+      if ( symbol == mAnyLine.get(k) ) return k;
+    }
+    return -1;
+  }
+
+
   SymbolLine getAnyLine( int k ) 
   {
     if ( k < 0 || k >= mAnyLineNr ) return null;
@@ -81,7 +90,7 @@ class SymbolLineLibrary
     return false;
   }
 
-  private SymbolLine getSymbolAnyLine( String th_name ) 
+  SymbolLine getSymbolAnyLine( String th_name ) 
   {
     for ( SymbolLine l : mAnyLine ) {
       if ( th_name.equals( l.mThName ) ) return l;
@@ -258,6 +267,17 @@ class SymbolLineLibrary
     }
 
     // Log.v( TopoDroidApp.TAG, "lines " + mAnyLine.size() + " wall " + mLineWallIndex + " slope " + mLineSlopeIndex + " section " + mLineSectionIndex );
+  }
+
+  void setRecentLines( Symbol recent[] )
+  {
+    int k = 0;
+    for ( SymbolLine symbol : mAnyLine ) {
+      if ( symbol.mEnabled ) {
+        recent[k++] = symbol;
+        if ( k >= ItemDrawer.NR_RECENT ) break;
+      }
+    }
   }
  
   void makeEnabledListFromPalette( SymbolsPalette palette )

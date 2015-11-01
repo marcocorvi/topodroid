@@ -25,24 +25,22 @@ import android.graphics.Path;
 // import android.util.Log;
 
 class SymbolArea extends Symbol
-                 implements SymbolInterface
 {
   String mName;
   int mColor;
   Paint mPaint;
   Path mPath;
 
-  public String getName()  { return mName; }
-  public String getThName( ) { return mThName; }
-  public Paint  getPaint() { return mPaint; }
-  public Path   getPath()  { return mPath; }
-  public boolean isOrientable() { return false; }
-  public boolean isEnabled() { return mEnabled; }
-  public void setEnabled( boolean enabled ) { mEnabled = enabled; }
-  public void toggleEnabled() { mEnabled = ! mEnabled; }
-  // public void rotate( float angle ) { } 
-  public void setAngle( float angle ) { }
-  public int getAngle() { return 0; }
+  @Override public String getName()  { return mName; }
+  @Override public String getThName( ) { return mThName; }
+  @Override public Paint  getPaint() { return mPaint; }
+  @Override public Path   getPath()  { return mPath; }
+  // @Override public boolean isOrientable() { return false; }
+  // @Override public boolean isEnabled() { return mEnabled; }
+  // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
+  // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
+  // @Override public void setAngle( float angle ) { }
+  // @Override public int getAngle() { return 0; }
 
   /** 
    * color 0xaarrggbb

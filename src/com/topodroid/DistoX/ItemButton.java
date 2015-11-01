@@ -27,11 +27,48 @@ class ItemButton extends Button
   private Paint mPaint;
   private Path  mPath;
 
+  public ItemButton( Context context )
+  {
+    super( context );
+    setDefault();
+  }
+
+  public ItemButton( Context context, android.util.AttributeSet attr )
+  {
+    super( context, attr );
+    setDefault();
+  }
+
+  public ItemButton( Context context, android.util.AttributeSet attr, int a )
+  {
+    super( context, attr, a );
+    setDefault();
+  }
+
+  // public ItemButton( Context context, android.util.AttributeSet attr, int a, int b )
+  // {
+  //   super( context, attr, a, b );
+  //   setDefault();
+  // }
+
+  private void setDefault()
+  {
+    setBackgroundColor( Color.BLACK );
+    setPadding(5, 5, 5, 5 );
+    mPath  = null;
+    mPaint = null;
+  }
+
   public ItemButton(Context context, Paint paint, Path path, float sx, float sy )
   {
     super(context);
     setBackgroundColor( Color.BLACK );
     setPadding(5, 5, 5, 5 );
+    reset( paint, path, sx, sy );
+  }
+
+  public void reset(Paint paint, Path path, float sx, float sy )
+  {
     setMinimumWidth( (int)(40*sx) );
     setMinimumHeight( (int)(30*sy) );
     mPaint = paint;
@@ -50,7 +87,9 @@ class ItemButton extends Button
   public void onDraw(Canvas canvas) 
   {
     // draw the button background
-    canvas.drawPath( mPath, mPaint );
+    if ( mPath != null ) {
+      canvas.drawPath( mPath, mPaint );
+    }
   }
 }
 

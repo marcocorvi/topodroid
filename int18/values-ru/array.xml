@@ -69,6 +69,7 @@
   </string-array>
 
   <string-array name="pickerType">
+     <!-- TODO item name="recent">Most recent</item -->
      <item name="list">Список</item>
      <item name="grid">Сетка</item>
   </string-array>

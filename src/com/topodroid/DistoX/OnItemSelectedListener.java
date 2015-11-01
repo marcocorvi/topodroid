@@ -16,7 +16,7 @@ package com.topodroid.DistoX;
  */
 public interface OnItemSelectedListener 
 {
-  public void pointSelected( int index );
-  public void lineSelected( int index );
-  public void areaSelected( int index );
+  public void pointSelected( int index, boolean update_recent );
+  public void lineSelected( int index, boolean update_recent );
+  public void areaSelected( int index, boolean update_recent );
 }

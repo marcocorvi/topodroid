@@ -209,12 +209,14 @@
   </string-array>
 
   <string-array name="pickerType">
+     <item name="recent">Most recent</item>
      <item name="list">List</item>
      <item name="grid">Grid</item>
   </string-array>
   <string-array name="pickerTypeValue">
-     <item name="list">0</item>
-     <item name="grid">1</item>
+     <item name="recent">0</item>
+     <item name="list">1</item>
+     <item name="grid">2</item>
   </string-array>
 
   <!-- string-array name="deviceType">

@@ -886,6 +886,42 @@ public class DataHelper extends DataSetObservable
     }
   }
 
+  private void transferPlots( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
+  {
+    List< PlotInfo > plots = selectPlotsAtStation( old_sid, station );
+    for ( PlotInfo plot : plots ) {
+      transferPlot( sid, old_sid, plot.id );
+      String oldname = TopoDroidPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" );
+      String newname = TopoDroidPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" );
+      File oldfile = new File( oldname );
+      File newfile = new File( newname );
+      if ( oldfile.exists() ) {
+        if ( ! newfile.exists() ) {
+          oldfile.renameTo( newfile );
+        } else {
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. New file already exists: " + newname );
+        }
+      // } else { // THIS IS OK
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. Old file does not exist: " + oldname );
+      }
+    }
+  }
+
+  private void transferSketches( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
+  {
+    List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, station );
+    for ( Sketch3dInfo sketch : sketches ) {
+      transferSketch( sid, old_sid, sketch.id );
+      File oldfile = new File( TopoDroidPath.getTh3File( old_survey_name + "-" + sketch.name + ".th3" ) );
+      File newfile = new File( TopoDroidPath.getTh3File( new_survey_name + "=" + sketch.name + ".th3" ) );
+      if ( oldfile.exists() && ! newfile.exists() ) {
+        oldfile.renameTo( newfile );
+      } else {
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename th3 sketch 3d " + sketch.name );
+      }
+    }
+  }
+
   public void transferShots( long sid, long old_sid, long old_id )
   {
     SurveyInfo old_survey = selectSurveyInfo( old_sid );
@@ -893,6 +929,7 @@ public class DataHelper extends DataSetObservable
     long max_id = maxId( SHOT_TABLE, old_sid );
     while ( old_id < max_id ) {
       DistoXDBlock blk = selectShot( old_id, old_sid );
+      if ( blk == null ) continue;
 
       transferShotStmt.bindLong(1, sid);
       transferShotStmt.bindLong(2, myNextId);
@@ -901,20 +938,15 @@ public class DataHelper extends DataSetObservable
       transferShotStmt.execute();
       
       // transfer fixeds, stations, plots and sketches
+      // TODOi FIXME cross-sections 
       if ( blk.mFrom.length() > 0 ) {
         List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mFrom ); 
         for ( FixedInfo fixed : fixeds ) {
           transferFixed( sid, old_sid, fixed.id );
         }
         transferStation( sid, old_sid, blk.mFrom );
-        List< PlotInfo > plots = selectPlotsAtStation( old_sid, blk.mFrom );
-        for ( PlotInfo plot : plots ) {
-          transferPlot( sid, old_sid, plot.id );
-        }
-        List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, blk.mFrom );
-        for ( Sketch3dInfo sketch : sketches ) {
-          transferSketch( sid, old_sid, sketch.id );
-        }
+        transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
+        transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
       }
       if ( blk.mTo.length() > 0 ) {
         List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mTo );
@@ -922,23 +954,17 @@ public class DataHelper extends DataSetObservable
           transferFixed( sid, old_sid, fixed.id );
         }
         transferStation( sid, old_sid, blk.mTo );
-        List< PlotInfo > plots = selectPlotsAtStation( old_sid, blk.mFrom );
-        for ( PlotInfo plot : plots ) {
-          transferPlot( sid, old_sid, plot.id );
-        }
-        List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, blk.mFrom );
-        for ( Sketch3dInfo sketch : sketches ) {
-          transferSketch( sid, old_sid, sketch.id );
-        }
+        transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mTo );
+        transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
       }
       List< SensorInfo > sensors = selectSensorsAtShot( old_sid, old_id ); // transfer sensors
       for ( SensorInfo sensor : sensors ) {
         transferSensor( sid, myNextId, old_sid, sensor.id );
       }
+
       List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
       for ( PhotoInfo photo : photos ) {
         transferPhoto( sid, myNextId, old_sid, photo.id );
-        // TODO move the photo file !!!
         File oldfile = new File( TopoDroidPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
         File newfile = new File( TopoDroidPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
         if ( oldfile.exists() && ! newfile.exists() ) {
@@ -1266,7 +1292,7 @@ public class DataHelper extends DataSetObservable
     // if ( myDB == null ) return list;
     Cursor cursor = myDB.query( PHOTO_TABLE,
        		         new String[] { "id", "shotId", "title", "date", "comment" }, // columns
-                                "surveyId=? AND shtId=?", 
+                                "surveyId=? AND shotId=?", 
                                 new String[] { Long.toString(sid), Long.toString(shotid) },
                                 null,  // groupBy
                                 null,  // having
@@ -1581,7 +1607,7 @@ public class DataHelper extends DataSetObservable
      // if ( myDB == null ) return false;
      Cursor cursor = myDB.query( SHOT_TABLE,
        new String[] { "fStation", "tStation" }, // columns
-       "surveyId=? and ( fStation=? and tStation=? ) or ( fStation=? and tStation=? )", 
+       "surveyId=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )", 
        new String[] { Long.toString(sid), fStation, tStation, tStation, fStation },
        null,   // groupBy
        null,   // having

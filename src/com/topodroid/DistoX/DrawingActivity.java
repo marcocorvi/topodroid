@@ -391,9 +391,9 @@ public class DrawingActivity extends ItemDrawer
     // }
 
     @Override
-    public void lineSelected( int k ) 
+    public void lineSelected( int k, boolean update_recent )
     {
-      super.lineSelected( k );
+      super.lineSelected( k, update_recent );
       if ( mCurrentLine == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
         setButtonContinue( false );
       }
@@ -555,7 +555,7 @@ public class DrawingActivity extends ItemDrawer
     // called by doPause and onBackPressed
     private void doSaveTh2( ) 
     {
-      // Log.v("DistoX", "do Save Th2. Save tasks: " + mNrSaveTh2Task );
+      // Log.v("DistoX", "do Save Th2 " + mFullName1 + " Type " + mType + " Modif. " + mModified + " Save tasks: " + mNrSaveTh2Task );
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
@@ -1060,20 +1060,22 @@ public class DrawingActivity extends ItemDrawer
       doPause();
     }
 
-    // @Override
-    // protected synchronized void onStart()
-    // {
-    //   super.onStart();
-    //   // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-    // }
+    @Override
+    protected synchronized void onStart()
+    {
+      super.onStart();
+      // Log.v("DistoX", "Drawing Activity onStart " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+      loadRecentSymbols( mApp.mData );
+    }
 
-    // @Override
-    // protected synchronized void onStop()
-    // {
-    //   super.onStop();
-    //   Log.v("DistoX", "Drawing Activity onStop ");
-    //   // doStop();
-    // }
+    @Override
+    protected synchronized void onStop()
+    {
+      super.onStop();
+      // Log.v("DistoX", "Drawing Activity onStop ");
+      saveRecentSymbols( mApp.mData );
+      // doStop();
+    }
 
     @Override
     protected synchronized void onDestroy()
@@ -2717,7 +2719,11 @@ public class DrawingActivity extends ItemDrawer
           mDrawingSurface.redo();
         }
       } else if ( b == mButton2[k2++] ) { // pointBtn
-        new ItemPickerDialog(this, this, mType ).show();
+        if ( TopoDroidSetting.mPickerType == TopoDroidSetting.PICKER_RECENT ) { 
+          new ItemRecentDialog(this, this, mType ).show();
+        } else {
+          new ItemPickerDialog(this, this, mType, mSymbol ).show();
+        }
       } else if ( b == mButton2[k2++] ) { //  continueBtn
         if ( mSymbol == SYMBOL_LINE && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
           setButtonContinue( ! mContinueLine );
@@ -3423,7 +3429,7 @@ public class DrawingActivity extends ItemDrawer
             y2 = (float)(sp.v) - y0;
             float u = x2 * uu.x + y2 * uu.y;
             float v = x2 * vv.x + y2 * vv.y;
-            Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
+            // Log.v("WALL", "Splay " + x2 + " " + y2 + " --> " + u + " " + v);
             if ( v > 0 ) {
               pos.add( new PointF(u,v) );
             } else {

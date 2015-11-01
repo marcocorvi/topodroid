@@ -306,8 +306,9 @@ class TopoDroidSetting
 
   // static final String LINE_SHIFT = "20.0";
 
-  static final int PICKER_LIST = 0; // Drawing-tools picker type
-  static final int PICKER_GRID = 1;
+  static final int PICKER_RECENT = 0; // Drawing-tools picker type
+  static final int PICKER_LIST   = 1; 
+  static final int PICKER_GRID   = 2;
   static int mPickerType = PICKER_LIST;
 
   static final int LINE_STYLE_BEZIER = 0;  // drawing line styles

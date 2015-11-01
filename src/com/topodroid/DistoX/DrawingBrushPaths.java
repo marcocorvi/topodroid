@@ -38,6 +38,7 @@ public class DrawingBrushPaths
   static SymbolPoint mStationSymbol = null;
   static boolean mReloadSymbols = true; // whether to reload symbols
 
+  // -----------------------------------------------------------
   static String getPointName( int idx ) { return mPointLib.getAnyPointName( idx ); }
 
   static String getPointThName( int index ) { return mPointLib.getPointThName( index ); }
