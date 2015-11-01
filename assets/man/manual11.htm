@@ -79,14 +79,10 @@ PNG resolution can be increased if you get a too coarse image. You will get a la
 <li><u>Help</u></li>
 </ul><br><p>
 
-<h4>SKETCH STATISTICS [N]</h4>
-The <i>Sketch Statistics</i> dialog displays the origin station (zero station), the survey length, the survey extension (East, West, North and South), the survey depths, both positive (above the zero station) and negative (below the zero station), the  number of stations, the number of shots (regular, duplicate, and surface), the number of splays, and the number of loops.
-<br><p>
-
 
 <h4>SKETCH SETTINGS</h4>
 <ul>
-  <li><i>Drawing tool picker</i>: either list view or grid view. At the beginning it may be helpful to have a tool picker listing the drawing tool names [default]. After you get used to the tool icons you are likely to prefer the more compact view of the grid picker.</li>
+  <li><i>Drawing tool picker</i>: either most-recent [default], or list view or grid view.</li>
   <li><i>Side drag</i>: whether to enable panning by side-dragging.</li>
   <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time.</li>
   <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
@@ -114,16 +110,7 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
     <li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
     </ul>
   </li>
-  <li><i>AUTO WALLS [E] >></i>
-    <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Walls type</i>: the type of auto-walls. Default is "none" (disabled).</li>
-    <li><i>Splay plan threshold</i>: inclination threshold for using splays in auto-walls in the plan view.</li>
-    <li><i>Splay profile threshold</i>: inclination threshold for using splays in auto-walls in the profile view.</li>
-    <li><i>Point separation</i>: minimum separation of splay points along the shot direction. If two splays are closer than this value only the soplay with largest distance from the shot is used.</li>
-    <li><i>Point step</i>: maximum distance along the walls between two line-points. If a wall segment connecting two splays is too long it is splitted interpolating points</li>
-    <li><i>Concavity</i>: amount of accetped concavity.</li>
-    </ul>
-  </li>
+  <li><i>AUTO WALLS [E]</i> settings</li>
 </ul>
 
 <b>Warning. If the sketch disappear from the display, switch between plan and profile to force TopoDroid to reload it.</b><br><p>
@@ -132,6 +119,7 @@ The <i>Sketch Statistics</i> dialog displays the origin station (zero station), 
 <hr>
 <i>To start drawing select the <b>draw</b> mode (green pencil button) and trace lines with your finger. If you make a mistake you can cancel the whole line with the <u>undo</u> button, or switch to the <u>erase</u> mode.  The drawing is saved in a pair of <i>Therion</i> files when you exit the sketch window. Each cross-section is saved in a single separate Therion file.</i><br><p>
 
+<a href="page_stat2.htm">Sketch statistics</a><br>
 <a href="page_shift.htm">Sketch shift and flip</a><br>
 <a href="page_backup.htm">Backup and recovery</a><br>
 <p>
