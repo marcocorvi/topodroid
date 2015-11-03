@@ -22,11 +22,11 @@
     <string name="td_symbol_ask">Non chiederlo piú</string>
 
     <string name="thp_label">testo</string>
-    <!-- string name="thp_danger">pericolo</string -->
+    <!-- string name="thp_danger">pericolo</string>
     <string name="thl_wall">parete</string>
     <string name="tha_water">acqua</string>
 
-    <!-- TODO string name="make_walls">Walls</string -->
+    <string name="make_walls">Pareti</string>
     <string name="missing_area">AREA</string>
     <string name="missing_hint">Installa i prototipi grafici con TdSymbol</string>
     <string name="missing_line">LINEA</string>
@@ -39,10 +39,10 @@
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
 
-    <!-- TODO string name="calibration_title">Instruments calibration</string -->
-    <!-- TODO string name="calibration_length">Tape</string -->
-    <!-- TODO string name="calibration_azimuth">Compass</string -->
-    <!-- TODO string name="calibration_clino">Clino</string -->
+    <string name="calibration_title">Strumenti di calibrazione</string>
+    <string name="calibration_length">Fettuccia</string>
+    <string name="calibration_azimuth">Bussola</string>
+    <string name="calibration_clino">Clinometro</string>
 
     <string name="calib_new">Nuova calibrazione</string>
     <string name="calib_exists">Calibrazione già presente</string>
@@ -115,7 +115,7 @@
     <string name="sketch_loading">Caricamento disegno ... attendi ...</string>
     <string name="sketch_saving">Salvataggio disegno ... attendi ...</string>
     <string name="lookup_wait">Ricerca in internet ... attendi ...</string>
-    <!-- TODO string name="lookup_fail">Failed lookup</string -->
+    <string name="lookup_fail">Ricerca fallita</string>
     <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
 
     <string name="head_tail">Memoria: </string>
@@ -136,7 +136,7 @@
     <string name="loop_closure_errors">Errori chiusura anelli</string>
     <string name="loop_none">Nessun anello</string>
     <!-- string name="line_delete">Elimina linea</string -->
-    <!-- TODO string name="flip_shots">Flip shots</string -->
+    <string name="flip_shots">Capovolgi battute</string>
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -175,12 +175,12 @@
     <string name="none">none</string>
     <string name="barrier_add">Interruzione restituzione?</string>
     <string name="barrier_del">Continuazione restituzione?</string>
-    <!-- TODO string name="hidden_add">Hide midline display</string -->
-    <!-- TODO string name="hidden_del">Show midline display</string -->
+    <string name="hidden_add">Nascondi la linea mediana</string>
+    <string name="hidden_del">Mostra la linea mediana</string>
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
-    <!-- TODO string name="bad_line">Bad line type</string -->
-    <!-- TODO string name="bad_point">Bad point type</string -->
+    <string name="bad_line">Tipo linea errato</string>
+    <string name="bad_point">Tipo punto errato</string>
 
     <string name="no_calib">Nessuna calibrazione</string>
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
@@ -219,16 +219,16 @@
     <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
     <!-- string name="menu_manual">MANUALE</string -->
-    <!-- TODO string name="menu_manual_calibration">Calibration</string -->
+    <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
     <!-- OK string name="menu_overview">OVERVIEW</string -->
-    <!-- TODO string name="menu_pair">PAIR</string -->
+    <string name="menu_pair">ASSOCIA</string>
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORI</string>
     <string name="menu_scan">CERCA</string>
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
-    <!-- TODO string name="menu_stats">STATS</string -->
+    <string name="menu_stats">STATISTICHE</string>
     <string name="menu_survey">INFORMAZIONI</string>
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
@@ -255,7 +255,7 @@
     <string name="photo_survey">dividi rilievo</string>
     <string name="picture_no_station">Caposaldo o nome mancante</string>
     <string name="plot_delete">Elimina disegno ?</string>
-    <!-- TODO string name="item_delete">Delete item %1$s ?</string -->
+    <string name="item_delete">Cancellare elemento %1$s ?</string>
     <string name="plot_duplicate_name">Nome disegno già presente</string>
     <string name="plot_name">Nome del disegno</string>
     <string name="plot_new">Nuovo disegno</string>
@@ -276,7 +276,7 @@
     <string name="scrap_name">nome del disegno</string>
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
-    <!-- TODO string name="too_many_legs_xsection">Too many legs for X-section</string -->
+    <string name="too_many_legs_xsection">Troppe battute per una Cross-section</string>
 
     <string name="sensor">sensore</string>
     <!-- string name="sensor_accelerometer">accelerometro</string -->
@@ -295,7 +295,7 @@
 
     <!-- string name="shot_clino">clino</string -->
     <!-- string name="shot_compass">bussola</string -->
-    <!-- TODO string name="shot_delete">Delete shot ?</string -->
+    <string name="shot_delete">Cancellare la misura?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
     <string name="shot_leg">battuta ripetuta</string>
@@ -329,7 +329,7 @@
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_split">Dividi rilievo?</string>
     <string name ="survey_not_attached">ATTENZIONE: dati scollegati</string>
-    <!-- TODO string name="cannot_rename">Cannot rename survey</string -->
+    <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
     <string name="name">nome</string>
@@ -408,7 +408,7 @@
     <string name="button_no"        >No        </string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
-    <!-- TODO string name="button_regroup"   >Regroup   </string -->
+    <string name="button_regroup"   >Raggruppare   </string>
     <!-- string name="button_dump"      >Scarica   </string -->
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
@@ -433,7 +433,7 @@
     <string name="button_toggle"    >Attiva modo CAL. </string>
 -->
     <string name="button_write"     >Installa</string>
-    <!-- TODO string name="button_xsection"  >X-Section</string -->
+    <string name="button_xsection"  >Cross-Section</string>
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>
@@ -459,7 +459,7 @@
     <string name="help_manual">Manuale online</string>
     <!-- NO string name="help_more">Passa ai tasti secondari</string -->
     <!-- NO string name="help_less">Ritorna ai tasti primari</string -->
-    <!-- TODO string name="help_measure">Measure distances</string -->
+    <string name="help_measure">Misurare le distanze</string>
     
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_current_station">Capisaldi salvati</string>
@@ -502,7 +502,7 @@
     <string name="help_undo">Cancella ultima azione di disegno</string>
     <string name="help_redo">Ripeti ultima azione di disegno</string>
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
-    <!-- TODO string name="help_delete_item">Delete sketch item</string -->
+    <string name="help_delete_item">Cancella elemento del disegno</string>
     <!-- string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
@@ -516,7 +516,7 @@
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
-    <!-- TODO string name="help_manual_calibration">Manual instruments calibration</string -->
+    <string name="help_manual_calibration">Strumenti di calibrazione manuale</string>
     <string name="help_note_plot">Edita le propertà dell\'oggetto</string>
     <string name="help_save">Salva le modifiche al rilievo/calibr.</string>
     <string name="help_export_survey">Esporta rilievo</string>
@@ -530,7 +530,7 @@
     <string name="help_read">Leggi la calibrazione dal DistoX</string>
     <string name="help_info_device">Dati dispositivo DistoX</string>
     <string name="help_scan">Cerca dispositivi DistoX</string>
-    <!-- TODO string name="help_pair">Pair the current DistoX device</string -->
+    <string name="help_pair">Associa il DistoX</string>
     <string name="help_open_calib">Apri calibrazione</string>
     <string name="help_export_calib">Esporta calibrazione</string>
     <string name="help_group">Assegna gruppi automaticamente</string>
@@ -541,7 +541,7 @@
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
-    <!-- TODO string name="title_coord">Enter the point coordinates:</string -->
+    <string name="title_coord">Inserisci le coordinate del punto:</string>
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_discover">Ricerca dispositivi DistoX ... attendi</string>
@@ -558,8 +558,8 @@
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
-    <!-- TODO string name="title_profile_flip">Flip profile sketch ?</string -->
-    <string name="title_refs">Referimenti grafici</string>
+    <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
+    <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
@@ -579,7 +579,7 @@
 
   <string name="pref_cat_survey">Opzioni rilievo</string>
   <string name="pref_cat_drawing">Opzioni disegno</string>
-  <!-- TODO string name="pref_cat_import_export">IMPORT_EXPORT</string -->
+  <string name="pref_cat_import_export">IMPORTA/ESPORTA</string>
   <string name="pref_cat_calib">Opzioni calibrazione</string>
   <string name="pref_cat_device">Opzioni DistoX</string>
   <!-- UNUSED string name="pref_cat_sketch">Opzioni sketch 3D</string -->
@@ -592,8 +592,8 @@
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
-  <!-- TODO string name="pref_mkeyboard_title">Keyboard</string -->
-  <!-- TODO string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string -->
+  <string name="pref_mkeyboard_title">Tastiera</string>
+  <string name="pref_mkeyboard_summary">Abilita/Disabilita tastiere personalizzate</string>
   <!-- NO string name="pref_cosurvey_title">Co-surveying</string -->
   <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
   <string name="pref_export_shots_title">Formato esportazione dati</string>
@@ -605,8 +605,8 @@
   <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
-  <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
-  <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
+  <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
+  <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
@@ -619,13 +619,13 @@
   <string name="pref_conn_mode_title">Tipo connessione</string>
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>
-  <string name="pref_auto_reconnect_summary">Reconnetti al DistoX quando viene persa</string>
-  <!-- TODO string name="pref_auto_pair_title">Auto pairing</string -->
-  <!-- TODO string name="pref_auto_pair_summary">Pair with device after scan</string -->
-  <!-- TODO string name="pref_socket_delay_title">Connection delay</string -->
-  <!-- TODO string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string -->
-  <!-- TODO string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string -->
-  <!-- TODO string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string -->
+  <string name="pref_auto_reconnect_summary">Riconnetti al DistoX quando viene persa</string>
+  <string name="pref_auto_pair_title">Associazione automatica</string>
+  <string name="pref_auto_pair_summary">Associazione a DistoX dopo ricerca dispositivi</string>
+  <string name="pref_socket_delay_title">Ritardo di connessione</string>
+  <string name="pref_socket_delay_summary">Ritardo di connessione per permettere la associazione [0.1 sec]</string>
+  <string name="pref_socket_delay_dialogtitle">Ritardo di connessione durante la associazione</string>
+  <string name="pref_socket_delay_message">Ritardo di connessione per permettere la associazione [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Dati modo Z6</string>
   <string name="pref_z6_workaround_summary">Scaricamento dati modo Z6</string>
   <string name="pref_crs_title">C R S </string>
@@ -640,7 +640,7 @@
   <string name="pref_cwd_title">DIRECTORY DI LAVORO</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
-  <!-- TODO string name="pref_pt_color_map_title">PocketTopo color map</string -->
+  <string name="pref_pt_color_map_title">Mappa di colori di PocketTopo</string>
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
   <string name="pref_text_size_message">Dimensione testo liste</string>
@@ -701,14 +701,14 @@
   <string name="pref_bitmap_scale_title">Risoluzione PNG</string>
   <string name="pref_bitmap_scale_summary">Risoluzione nei PNG degli schizzi</string>
   <string name="pref_bitmap_scale_message">Risoluzione nell\'esportazione PNG degli schizzi</string>
-  <!-- TODO string name="pref_bitmap_bgcolor_title">PNG background color</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
-  <!-- TODO string name="pref_bitmap_bgcolor_message">Background color of sketch PNG export</string -->
-  <!-- TODO string name="pref_acad_version_title">AutoCAD version</string -->
-  <!-- TODO string name="pref_acad_version_summary">AutoCAD version</string -->
-  <!-- TODO string name="pref_dxf_scale_title">DXF sketch scale</string -->
-  <!-- TODO string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
-  <!-- TODO string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string -->
+  <string name="pref_bitmap_bgcolor_title">Colore di sfondo per PNG</string>
+  <string name="pref_bitmap_bgcolor_summary">Colore di sfondo della immagine PNG dei rilievi</string>
+  <string name="pref_bitmap_bgcolor_message">Colore di sfondo per export rilievo in formato PNG</string>
+  <string name="pref_acad_version_title"> Versione di AutoCAD</string>
+  <string name="pref_acad_version_summary">Versione di AutoCAD</string>
+  <string name="pref_dxf_scale_title">Scala rilievo DXF</string>
+  <string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string>
+  <string name="pref_dxf_scale_message">Fattore di scala per export rilievo in formato DXF</string>
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>
   <string name="pref_thumbnail_summary">Dimensione immagini thumbnail</string>
   <string name="pref_thumbnail_message">Dimensione immagini thumbnail</string>
@@ -775,18 +775,18 @@
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extendi per splay</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
-  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
-  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
+  <string name="pref_LRExtend_title">Stima extend Sx/Dx</string>
+  <string name="pref_LRExtend_summary">Stima extend Sx/Dx (Bussola/import VisualTopo)</string>
 
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>
   <string name="pref_station_size_summary">Dimensione nome capisaldi</string>
   <string name="pref_station_size_message">Size of the station labels</string>
-  <!-- TODO string name="pref_zoom_controls_title">Zoom controls</string -->
-  <!-- TODO string name="pref_zoom_controls_summary">Zoom controls on multitouch</string -->
-  <!-- TODO string name="pref_side_drag_title">Side drag</string -->
-  <!-- TODO string name="pref_side_drag_summary">Enable side-drag on the sketch window</string -->
+  <string name="pref_zoom_controls_title">Regolazioni Zoom</string>
+  <string name="pref_zoom_controls_summary">Regolazioni Zoom su multitouch</string>
+  <string name="pref_side_drag_title">Side-drag</string>
+  <string name="pref_side_drag_summary">Abilita side-drag sul rilievo</string>
 
   <string name="pref_sketchUsesSplays_title">Sketch splays</string>
   <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>
@@ -813,24 +813,24 @@
   <string name="pref_unit_location_title">Unità posizioni</string>
   <string name="pref_unit_location_summary">Unità posizioni</string>
 
-  <!-- TODO string name="pref_plot_walls_title">AUTO WALLS</string -->
-  <!-- TODO string name="pref_walls_type_title">Walls type</string -->
-  <!-- TODO string name="pref_walls_type_summary">Walls type</string -->
-  <!-- TODO string name="pref_walls_plan_thr_title">Splay plan clino</string -->
-  <!-- TODO string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls</string -->
-  <!-- TODO string name="pref_walls_plan_thr_message">Maximum splay clino for plan walls [deg]</string -->
-  <!-- TODO string name="pref_walls_extended_thr_title">Splay profile clino</string -->
-  <!-- TODO string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls</string -->
-  <!-- TODO string name="pref_walls_extended_thr_message">Maximum splay clino for profile walls [deg]</string -->
-  <!-- TODO string name="pref_walls_xclose_title">Separation</string -->
-  <!-- TODO string name="pref_walls_xclose_summary">Minimum point-separation along the shot</string -->
-  <!-- TODO string name="pref_walls_xclose_message">Minimum separation of wall points along the shot [m]</string -->
-  <!-- TODO string name="pref_walls_concave_title">Concavity</string -->
-  <!-- TODO string name="pref_walls_concave_summary">Maximum concavity</string -->
-  <!-- TODO string name="pref_walls_concave_message">Maximum concavity [percent]</string -->
-  <!-- TODO string name="pref_walls_xstep_title">Step</string -->
-  <!-- TODO string name="pref_walls_xstep_summary">Point separation along the wall</string -->
-  <!-- TODO string name="pref_walls_xstep_message">Separation of points along the wall [m]</string -->
+  <string name="pref_plot_walls_title">Pareti Automatiche</string>
+  <string name="pref_walls_type_title">Tipo pareti</string>
+  <string name="pref_walls_type_summary">Tipo pareti</string>
+  <string name="pref_walls_plan_thr_title">Inclinazione per Splay in pianta</string>
+  <string name="pref_walls_plan_thr_summary">Massima inclinazione di splay per pareti in pianta</string>
+  <string name="pref_walls_plan_thr_message">Massima inclinazione di splay per pareti in pianta [deg]</string>
+  <string name="pref_walls_extended_thr_title">Inclinazione per Splay in sezione</string>
+  <string name="pref_walls_extended_thr_summary">Massima inclinazione di splay per pareti in sezione</string>
+  <string name="pref_walls_extended_thr_message">Massima inclinazione di splay per pareti in sezione [deg]</string>
+  <string name="pref_walls_xclose_title">Gestione spazio</string>
+  <string name="pref_walls_xclose_summary">Minimo di distanza tra punti lungo il tiro</string>
+  <string name="pref_walls_xclose_message">Minimo di distanza tra punti lungo il tiro [m]</string>
+  <string name="pref_walls_concave_title">Concavita\'</string>
+  <string name="pref_walls_concave_summary">Massima concavita\'</string>
+  <string name="pref_walls_concave_message">Massima concavita\' [percent]</string>
+  <string name="pref_walls_xstep_title">Passo</string>
+  <string name="pref_walls_xstep_summary">Distanza tra punti lungo il tiro</string>
+  <string name="pref_walls_xstep_message">Distanza tra punti lungo il tiro [m]</string>
 
   <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
   <!-- OK string name="pref_log_stream_title">Log stream</string -->
