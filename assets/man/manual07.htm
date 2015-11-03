@@ -36,15 +36,20 @@ Tapping on a calibration item in the list brings up a dialog through which you c
 <li><u>Download</u>: this is the button you use to get the data from the DistoX.  At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data.  Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
 disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data) are not taken into account in the group assignment policy.</li>
 <li><u>Mode-toggle</u>: it is the same as in the Device window. Use it to toggle the DistoX calibration mode on and off</li>
-<li><u>Groups</u> divides the calibration data into groups automatically.  The data in each group should have the same azimuth and inclination and differ only by the roll angle. There are three automatic grouping policies: four data at a time for each group; four-at-a-time for the first 16 data (four groups), then each data is a group by itself; grouping based on the relative angular distance (direction difference). The groups are identified by an integer number starting with "1" (one). Tapping on a data brings up a dialog where you can change the data group number. If you want to exclude a data from the computation of the calibration enter the number "0" (zero). Deleted items are excluded from the computation of the calibration coefficients.</li>
-<li><u>Distribution</u> displays the angular data distribution. The sphere is opened up as an ellipsis: the north in the middle, east to the right, west to the left and south on the outer border. Positive inclination in the upper hemisphere, negative in the lower one. It can show either the angular distribution of the raw data, or that of the data corrected with the calibration</li>
-<li><u>Compute</u> computes the calibration coefficients and shows the result in a dialog. The calibration coefficients dialog displays the 24 coefficients of the calibration linear transformations for the <b>G</b> and the <b>M</b> vectors (12 coefficients each) and 3 coefficients of the non-linear terms (only DistoX2 v. 2.3 or higher). Next there are the average and the maximum data errors, and the number of iterations taken by the calibration computation. The error of a calibration data is the angle between the data and the average vector of the group the data belongs to, after having taken the calibration correction into account. The errors are reported in degrees. Finally, the dialog has a button to write the coefficient to the DistoX</li>
+<li><u>Groups</u> divides the calibration data into groups automatically.</li>
+<li><u>Distribution</u> displays the angular data distribution.</li>
+<li><u>Compute</u> computes the calibration coefficients and shows the result in a dialog.</li>
 <li><u>Read</u> reads the coefficients from the DistoX, shows them in a calibration coefficients dialog. (Just like the same button in the Device window)</li>
 <li><u>Write</u> writes the calibration coefficients to the DistoX. This button is enabled only after the calibration coefficients have been computed.</li>
 </ul><br><p>
 
 <hr>
 <i>Now you can toggle your DistoX calibration mode on. Take the measurements, download them, assign groups, check that the data cover all angles, compute the coefficients and write them to the DistoX. Your device is calibrated and ready for surveying. Turn the calibration mode off, and go back to the main window.</i><br><p>
+
+<a href="page_groups.htm">Calibration data groups</a><br>
+<a href="page_coverage.htm">Calibration data distribution</a><br>
+<a href="page_coeffs.htm">Calibration coefficients</a><br>
+<p>
 
 <a href="manual06.htm">&lt; Calibration window</a> |
 <a href="manual08.htm">Survey data &gt;</a>

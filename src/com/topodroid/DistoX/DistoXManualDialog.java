@@ -151,6 +151,14 @@ public class DistoXManualDialog extends Activity
     }
   }
 
+  @Override
+  public void onBackPressed()
+  {
+    String url = mTVtext.getUrl();
+    if ( url.indexOf("manual") >= 0 ) finish();
+    mTVtext.goBack();
+  }
+
 }
 
 

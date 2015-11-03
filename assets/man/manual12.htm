@@ -1,19 +1,25 @@
 <html><body>
 <h3>[12] SKETCH DRAWING</h3>
 
-The canvas shows the midline with the splay shots.  You can move it around dragging it with one (or two) finger(s), zoom in/out with two fingers. It is not possible to rotate the canvas; the plan has the North upward, and the profile is oriented with the vertical. Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still move and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn or deleted objects and put them back again. Of course you can go back with <u>undo</u> until the canvas is empty.<br><p>
+The canvas shows the midline with the splay shots.  It can be moved around dragging it with one (or two) finger(s), zoom in/out with two fingers. It is not possible to rotate the canvas; the plan has the North upward, and the profile is oriented with the vertical.<br><p>
 
-By default you are drawing "wall" (red) lines. The sketch would be very boring if you had only one line style to use. The <u>tool picker</u> button allows you to pick another line style, or an "area" style (a closed region), or iconic symbols.  Tap the button, select the tab (POINT, LINE or AREA) and double-tap the drawing tool you need. You can also select the tool and press the Android "Back" button to return to the canvas. The current drawing tool will be the last you chose before closing the dialog.<br>
-You can adjust the line thickness in the <u>Settings</u> dialog. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
+Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still move and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn or deleted objects and put them back again. Of course you can go back with <u>undo</u> until the canvas is empty.<br><p>
+
+While in draw mode, the sketch can also be moved by dragging it from the side of the canvas and zoomed with zoom controls if these function have been enabled through the settings. This let's you work with a stylus without the need for two-finger actions.<br><p>
+
+By default you are drawing "wall" (red) lines. The sketch would be very boring if you had only one line style to use. The <u>drawing tool picker</u> button allows you to pick another line style, or an "area" style (a closed region), or iconic symbols. See <a href="page_tools.htm">.<br><p>
+
+The line thickness is one of the <u>Settings</u>. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
 
 You can also correct mistakes in the drawing. The <u>Undo</u> button lets you remove the last item. What if you need to erase a line or a symbol that you drew long ago, but do not want to loose all the intermediate work? You have two choices: the <u>Erase</u> and the <u>Edit</u> button.  The former is very intuitive: it cancels everything you pass your finger over. It is just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines).<br><p>
 
 The <u>Edit</u> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. You have to select the item to edit by tapping on it. If there are several items close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). It may not be what you wanted, but never mind: move among the selected point with the <u>Prev</u>-<u>Next</u> button.<br>
-You can adjust the size of the green dots and the selection radius in the <u>Settings</u> dialog.<br><p>
+
+The size of the green dots and the selection radius are two <u>Settings</u>.<br><p>
 
 Segments of Bezier lines have two control points. These are stored with the segment end-point and when this is the selected editing point the two control points are shown as pink circles. Each of them can be moved around by dragging it with the finger.<br><p>
 
-To clear the selection tap somewhere else in the canvas. To move the editing point, drag it with the finger. To change the properties of the sketch item tap the <u>note</u> button. You can delete (remove) the item or change its Therion properties:
+To clear the selection tap somewhere else in the canvas. To move the editing point, drag it with the finger. To change the properties of the sketch item tap the <u>note</u> button. The item can be deleted (removed) or its Therion properties changed:
 <ul>
 <li><i>point symbols:</i> the "scale", the "orientation", the "text" (for labels), and generic "options"</li>
 <li><i>lines:</i> "reverse", "outline", and "options". Lines can also be made more "rocky" (with fewer points).</li>
@@ -23,16 +29,8 @@ To clear the selection tap somewhere else in the canvas. To move the editing poi
 Editing applies also to shots and stations.
 <ul>
 <li><i>shots:</i> stations, "extend", flags, and auto-walls [E].</li>
-<li><i>stations:</i> can be made the "current" station, toggle the midline "hiding" attribute [A], and add as Therion "station point" to the scrap (if the autostation option of TopoDroid is not enabled)</li>
+<li><i>stations:</i> can be made the "current" station, toggle the midline "hiding" attribute [A], toggle the display of splay shots at the station (even if splay shots are globally not shown), and add as Therion "station point" to the scrap (if the autostation option of TopoDroid is not enabled)</li>
 </ul><br>
-The "current" station is where the next downloaded shots will be attached. When a leg is downloaded (or inserted) the new station becomes the "current" station. By changing the "current" station you can continue surveying from a station in the middle of the survey.<br><p>
-
-<h4>Midline hiding</h4>
-
-Hiding stations [A] limits the display of the midline for this sketch. This is useful if when the survey is complicated or goes over itself. In this case you might want to see only a part of the midline. Select a station and tap the <u>note</u> button. Then you have the option to hide the previous or next stations. Repeat to show them again.
-Stations that limit the midline are colored in blue (when the previous are hidden) or red (when the next are hidden).<br>
-<img src="hiding_stations.png" alt="hiding stations"><br><p>
-
 
 <h4>Point-wise edit</h4>
 
@@ -50,6 +48,7 @@ The second to the right button applies only to drawing items and has a drop-down
 <hr>
 <i>Do not forget to export the drawings in <i>cSurvey</i> format.  This is a special export, because it includes both plan and profile in a single file, and it adds also the survey data. If your survey is simple and has a single sketch you can easily get a final map from this file.</i><br><p>
 
+<a href="page_sketch_station.htm">Sketch station editing</a><br>
 <a href="page_tools.htm">Drawing tools</a><br>
 <a href="page_walls.htm">Auto walls</a><br>
 <p>

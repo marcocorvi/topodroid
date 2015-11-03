@@ -37,24 +37,16 @@ To exit TopoDroid main window double tap on the <i>BACK</i> button of your devic
 <li><i>Cosurveying</i> [E] activate/deactivate the cosurveying service (very experimental).</li>
 </ul><br><p>
 
-<h4>Survey import</h4>
-The <u>Import</u> button opens a dialog listing files that can be imported in the app.
-TopoDroid can import the survey files in the followng formats:
-<ul>
-<li><i>Therion</i>: ".th" data files, with simple data format ("normal from to length compass clino" and optionally LRUD).
-Therion scrap are not imported.</li>
-<li><i>Compass</i> ".dat" files (not fully tested)</li>
-<li><i>VisualTopo</i> ".tro" files (not fully tested)</li>
-<li><i>PocketTopo</i> ".top" files. Data and drawings are imported (not fully tested)</li>
-<li>TopoDroid ZIP archives. These are special zip files with the informations to repopulate the database, the drawings (".th2" files), the annotation file, and the photos.</li>
-</ul><br>
-Zip archives are searched in the "zip" directory (that is where TopoDroid saves them). Survey files are searched in the "import" directory. Therefore you must copy the survey file you want to import in this directory. If the survey name of the file to import already exists in the database the file is not imported.<br><p>
-
 <hr>
 If <b>bluetooth</b> is not on, the app asks whether to turn it on. Without bluetooth it cannot communicate with the DistoX and the survey data can only be entered manually. In this case the <i>Download</i> button in the Shot window is hidden, and that in the Sketch window is replaced by the <i>Add</i> button.<br><p>
 
 When the app starts the first time it installs the drawing tools files in the "symbol" directory. There are files for points (iconic symbols, like "entrance", or "stalagmite"), lines (like "wall", or "pit"), and areas (regions shown with a transparent color). If you have upgraded the app to a new version it asks if you want to reinstall the drawing tools.<br>
 Even if TopoDroid comes with many drawing tools preinstalled (45 points, 15 lines, and 9 areas), it can happen that it does not contains the tools you need (or you do not like the one provided). The tool files are plain text files, and you can write your own tool file(s). After you put them in the symbol subdirectories, TopoDroid will see and use them. The syntax of the tool files is described in a page on the speleoapps website.<br><p>
+
+<a href="page_import.htm">Survey import</a><br>
+<a href="page_language.htm">Language</a><br>
+<a href="page_keypad.htm">TopoDroid keypads</a><br>
+<a href="page_cwd.htm">Current work directory</a><br>
 <a href="page_logging.htm">Logging</a><br>
 <p>
 
