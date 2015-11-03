@@ -175,6 +175,7 @@
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
     <string name="hidden_add">Oculta pantalla de la línea media</string>
     <string name="hidden_del">Mostrar pantalla de la línea media</string>
+    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>

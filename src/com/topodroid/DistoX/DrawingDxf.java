@@ -469,13 +469,13 @@ class DrawingDxf
 
         // centerline data
         if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
-          for ( DrawingPath sh : plot.mFixedStack ) {
+          for ( DrawingPath sh : plot.mLegsStack ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
             
             StringWriter sw4 = new StringWriter();
             PrintWriter pw4  = new PrintWriter(sw4);
-            if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+            // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
               NumStation f = num.getStation( blk.mFrom );
               NumStation t = num.getStation( blk.mTo );
  
@@ -501,13 +501,23 @@ class DrawingDxf
               } else if ( type == PlotInfo.PLOT_SECTION ) {
                 // nothing
               }
-            } else if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
+            // }
+            out.write( sw4.getBuffer().toString() );
+            out.flush();
+          }
+          for ( DrawingPath sh : plot.mSplaysStack ) {
+            DistoXDBlock blk = sh.mBlock;
+            if ( blk == null ) continue;
+            
+            StringWriter sw41 = new StringWriter();
+            PrintWriter pw41  = new PrintWriter(sw41);
+            // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
               NumStation f = num.getStation( blk.mFrom );
 
-              printString( pw4, 0, "LINE" );
-              ++handle; printAcDb( pw4, handle, "AcDbEntity", "AcDbLine" );
-              printString( pw4, 8, "SPLAY" );
-              // printInt( pw4, 39, 1 );         // line thickness
+              printString( pw41, 0, "LINE" );
+              ++handle; printAcDb( pw41, handle, "AcDbEntity", "AcDbLine" );
+              printString( pw41, 8, "SPLAY" );
+              // printInt( pw41, 39, 1 );         // line thickness
 
               float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
               if ( type == PlotInfo.PLOT_PLAN ) {
@@ -515,19 +525,19 @@ class DrawingDxf
                 float y = scale * DrawingActivity.toSceneY( f.s );
                 float de =   dhs * FloatMath.sin( blk.mBearing * grad2rad);
                 float ds = - dhs * FloatMath.cos( blk.mBearing * grad2rad);
-                printXYZ( pw4, x, -y, 0.0f );
-                printXYZ1( pw4, x + de, -(y+ds), 0.0f );
+                printXYZ( pw41, x, -y, 0.0f );
+                printXYZ1( pw41, x + de, -(y+ds), 0.0f );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
                 float x = scale * DrawingActivity.toSceneX( f.h );
                 float y = scale * DrawingActivity.toSceneY( f.v );
                 float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
-                printXYZ( pw4, x, -y, 0.0f );
-                printXYZ1( pw4, x+dhs*blk.mExtend, -(y+dv), 0.0f );
+                printXYZ( pw41, x, -y, 0.0f );
+                printXYZ1( pw41, x+dhs*blk.mExtend, -(y+dv), 0.0f );
               } else if ( type == PlotInfo.PLOT_SECTION ) {
                 // nothing
               }
-            }
-            out.write( sw4.getBuffer().toString() );
+            // }
+            out.write( sw41.getBuffer().toString() );
             out.flush();
           }
         }

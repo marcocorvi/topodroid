@@ -116,13 +116,13 @@ class DrawingSvg
         // centerline data
         if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
-          for ( DrawingPath sh : plot.mFixedStack ) {
+          for ( DrawingPath sh : plot.mLegsStack ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
 
             StringWriter sw4 = new StringWriter();
             PrintWriter pw4  = new PrintWriter(sw4);
-            if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+            // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
               NumStation f = num.getStation( blk.mFrom );
               NumStation t = num.getStation( blk.mTo );
  
@@ -140,24 +140,34 @@ class DrawingSvg
                 float y1 = DrawingActivity.toSceneY( t.v );
                 pw4.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
               }
-            } else if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
+            // }
+            out.write( sw4.getBuffer().toString() );
+            out.flush();
+          }
+          for ( DrawingPath sh : plot.mSplaysStack ) {
+            DistoXDBlock blk = sh.mBlock;
+            if ( blk == null ) continue;
+
+            StringWriter sw41 = new StringWriter();
+            PrintWriter pw41  = new PrintWriter(sw41);
+            // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
               NumStation f = num.getStation( blk.mFrom );
-              pw4.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
+              pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
               float dh = blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX;
               if ( type == PlotInfo.PLOT_PLAN ) {
                 float x = DrawingActivity.toSceneX( f.e ); 
                 float y = DrawingActivity.toSceneY( f.s );
                 float de =   dh * FloatMath.sin( blk.mBearing * grad2rad);
                 float ds = - dh * FloatMath.cos( blk.mBearing * grad2rad);
-                pw4.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x + de, (y+ds) );
+                pw41.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x + de, (y+ds) );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
                 float x = DrawingActivity.toSceneX( f.h );
                 float y = DrawingActivity.toSceneY( f.v );
                 float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
-                pw4.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x+dh*blk.mExtend, (y+dv) );
+                pw41.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x+dh*blk.mExtend, (y+dv) );
               }
-            }
-            out.write( sw4.getBuffer().toString() );
+            // }
+            out.write( sw41.getBuffer().toString() );
             out.flush();
           }
           out.write("</g>\n");

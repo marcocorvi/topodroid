@@ -457,7 +457,7 @@ public class DrawingActivity extends ItemDrawer
                         : DrawingBrushPaths.fixedShotPaint );
       }
       makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mDrawingSurface.addFixedPath( dpath, selectable );
+      mDrawingSurface.addFixedPath( dpath, splay, selectable );
     }
 
     private void addFixedSectionSplay( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff, 
@@ -466,7 +466,7 @@ public class DrawingActivity extends ItemDrawer
       DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
       dpath.setPaint( blue? DrawingBrushPaths.fixedSplay2Paint : DrawingBrushPaths.fixedSplayPaint );
       makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mDrawingSurface.addFixedPath( dpath, false );
+      mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
     }
 
     public void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff )
@@ -2148,6 +2148,11 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
+    void toggleStationSplays( String name )
+    {
+      mDrawingSurface.toggleStationSplays( name );
+    }
+
     void toggleStationHidden( String name, boolean is_hidden )
     {
       // Log.v("DistoX", "toggle station " + name + " hidden " + is_hidden );
@@ -2748,7 +2753,7 @@ public class DrawingActivity extends ItemDrawer
           //   new DrawingBarrierDialog( this, this, sn.mName, mNum.isBarrier( sn.mName ) ).show();
           // }
         }
-      } else if ( b == mButton3[k3++] ) { // edit item properties
+      } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           switch ( sp.type() ) {

@@ -183,6 +183,7 @@
     <string name="barrier_del">Продолжить показ средней линии?</string>
     <string name="hidden_add">Скрыть среднюю линию</string>
     <string name="hidden_del">Показать среднюю линию</string>
+    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
@@ -886,7 +887,7 @@
 
   <string name="pref_plot_walls_title">АВТО СТЕНЫ</string>
   <string name="pref_walls_type_title">Тип стен</string>
-  <string name="pref_walls_type_summary">Тип стен/string>
+  <string name="pref_walls_type_summary">Тип стен</string>
   <string name="pref_walls_plan_thr_title">Угол луча в плане</string>
   <string name="pref_walls_plan_thr_summary">Максимальный угол луча для стен в плане</string>
   <string name="pref_walls_plan_thr_message">Максимальный угол луча для стен в плане [град]</string>

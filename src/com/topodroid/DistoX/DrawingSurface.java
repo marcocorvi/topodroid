@@ -61,6 +61,8 @@ public class DrawingSurface extends SurfaceView
     DrawingCommandManager mCommandManager1; 
     DrawingCommandManager mCommandManager2; 
 
+    ArrayList< String > mSplayStations; // stations where to show splays
+
     public int width()  { return mWidth; }
     public int height() { return mHeight; }
 
@@ -85,6 +87,7 @@ public class DrawingSurface extends SurfaceView
       mCommandManager1 = new DrawingCommandManager();
       mCommandManager2 = new DrawingCommandManager();
       commandManager = mCommandManager1;
+      mSplayStations = new ArrayList<String>();
 
       // setOnLongClickListener(new View.OnLongClickListener() 
       //   {
@@ -192,7 +195,7 @@ public class DrawingSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler );
+        commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler, mSplayStations );
         if ( previewPath != null ) {
           previewPath.draw(canvas);
         }
@@ -277,9 +280,14 @@ public class DrawingSurface extends SurfaceView
     }
 
     // called by DarwingActivity::addFixedLine
-    public void addFixedPath( DrawingPath path, boolean selectable )
+    public void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
     {
-      commandManager.addFixedPath( path, selectable );
+      if ( splay ) {
+        commandManager.addSplayPath( path, selectable );
+      } else {
+        commandManager.addLegPath( path, selectable );
+      }
+      // commandManager.addFixedPath( path, selectable );
     }
 
     public void setNorthPath( DrawingPath path )
@@ -984,6 +992,30 @@ public class DrawingSurface extends SurfaceView
       pw.format("        <items />\n");
       pw.format("      </layer>\n");
       pw.format("    </layers>\n");
+    }
+  }
+
+  // void addSplayStation( String station ) 
+  // {
+  //   if ( station == null ) return;
+  //   if ( mSplayStations.contains( station ) ) return;
+  //   mSplayStations.add( station );
+  // }
+
+  // void removeSplayStation( String station ) 
+  // {
+  //   if ( station == null ) return;
+  //   // if ( ! mSplayStations.contains( station ) ) return;
+  //   mSplayStations.remove( station );
+  // }
+
+  void toggleStationSplays( String station ) 
+  {
+    if ( station == null ) return;
+    if ( mSplayStations.contains( station ) ) {
+      mSplayStations.remove( station );
+    } else {
+      mSplayStations.add( station );
     }
   }
 

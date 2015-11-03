@@ -255,7 +255,7 @@ public class OverviewActivity extends ItemDrawer
         dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
       }
       makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mOverviewSurface.addFixedPath( dpath, false ); // false: non-selectable
+      mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 
     public void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff )

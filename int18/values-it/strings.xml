@@ -177,6 +177,7 @@
     <string name="barrier_del">Continuazione restituzione?</string>
     <!-- TODO string name="hidden_add">Hide midline display</string -->
     <!-- TODO string name="hidden_del">Show midline display</string -->
+    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <!-- TODO string name="bad_line">Bad line type</string -->
