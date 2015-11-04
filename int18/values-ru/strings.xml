@@ -183,7 +183,7 @@
     <string name="barrier_del">Продолжить показ средней линии?</string>
     <string name="hidden_add">Скрыть среднюю линию</string>
     <string name="hidden_del">Показать среднюю линию</string>
-    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
+    <string name="splays_toggle">Переключить отображение лучей</string>
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
