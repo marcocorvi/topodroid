@@ -6,7 +6,7 @@
 The survey name is mandatory. It must be unique in the database. The survey names are used to list surveys in the main window and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database). The date is pre-filled with the current date. Team and description are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them. The magnetic declination is 0.0 by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].<br><p>
 
 <b>WARNING.<br>
-The name of the survey cannot contain the character '/' (slash), which is the pathname separator.</b><br>
+The name of the survey cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
 The date is written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06".<br><p>
 
 Save when you are done, and the new survey name will appear in the list of surveys.  A long tap on a survey name opens the survey info dialog again. You can change any information. The survey name is special, because once the survey has been committed to the database, the name is used to refer to it. There is a menu to modify the survey name.<br><p>
@@ -38,14 +38,20 @@ Each kind of shots is displayed with a different color: "legs" are white, "repea
 <h4>BUTTONS</h4>
 <ul>
 <li><u>Download</u>: it will download the data from the DistoX as in the calibration data window. If no DistoX is selected this button is hidden.</li>
-<li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
-<li><u>Display</u>: to choose the display mode (see below)</li>
-<li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches. A long tap on the <u>Sketch</u> button opens immediately the most recent sketch, without going through the sketch list dialog.</li>
-<li><u>Notes</u> opens the dialog to edit the annotations of the survey</li>
-<li><u>Extend</u> opens the "Extend reference" dialog that defines how to set the "extend" for the coming shots (either downloaded or manually entered).</li>
-<li><u>Stations</u> [N]: <a href="page_stations.htm">saved stations</a> dialog.</li>
+<li><u>Bluetooth</u>: <a href="page_bluetooth.htm">bluetooth dialog</a></li>
+<li><u>Display</u>: to choose the <a href="page_displaymode.htm">display mode</a></li>
+<li><u>Sketch</u>: sketch dialog. A long tap opens immediately the most recent sketch, without going through the sketch dialog.</li>
+<li><u>Notes</u>: survey annotations.</li>
+<li><u>Extend</u>: <a href="page_extend.htm">extend reference</a>.</li>
+<li><u>Stations</u> [N]: <a href="page_stations.htm">saved stations</a>.</li>
 <li><u>Add</u> [N] adds a shot <a href="page_manual.htm">manually</a> entering the shot data.</li>
 </ul><br><p>
+
+<h4>Sketch dialog</h4>
+Through the Sketch dialog you create a new sketch or open an existing one. There is a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in profile view; once open in a view you can switch to the other from within the sketch window).<br><p>
+
+If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches.<br><p>
+
 
 <h4>SURVEY SETTINGS</h4>
 <ul>
@@ -63,33 +69,24 @@ Each kind of shots is displayed with a different color: "legs" are white, "repea
   <li><i>SHOT DATA >></i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots to belong to the same leg</li>
-    <li><i>Minimum leg shots</i>: minimum number of close consecutive shots that are takes as a leg. Further consecutive close shots are taken as belonging to the leg as well.</li>
+    <li><i>Minimum leg shots</i>: minimum number of close consecutive shots that are takes as a leg. Further consecutive close shots belong to the same leg as well.</li>
     <li><i>Splay vertical threshold</i>: the "extend" direction assigned to a splay shot depends on the angle it makes with the leg(s). When the angle is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, depending whether the angle it makes with the leg is smaller or larger than 90 degrees.</li>
     <li><i>Leg vertical threshold</i>. this is like Therion "vthreshold": the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
     <li><i>Settable extend reference</i>. The L/R extend reference can be either fixed (180 degrees) or adjustable.</li>
-    <li><i>Loop closure</i>: whether to do the loop closure error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors</li>
-    <li><i>Backsight</i>: whether to add a line with fields for the backsight in the shot manual input dialog [N].</li>
-    <li><i>Magnetic anomaly</i>: whether to compensate the local magnetic anomaly. It requires backsight auto-station policy.</li>
-    <li><i>Timer</i> is the number of seconds before measuring the direction with the Android sensors (for "manual data-input" dialog [N], and for the "extend-reference" dialog))</li>
-    <li><i>Beep volume</i> is the volume of the timer beep [N]</li>
+    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors</li>
+    <li><i>Backsight</i> fields in the shot manual input dialog [N].</li>
+    <li><i>Magnetic anomaly</i> compensation. This requires backsight auto-station policy.</li>
+    <li><i>Timer</i>: seconds to wait before measuring the direction with the Android sensors ["manual data-input" [N], and "extend-reference" dialogs]</li>
+    <li><i>Beep volume</i>: volume of the timer beep [N]</li>
     </ul>
   </li>  
-  <li><i>LOCATION >></i>
-    <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Location units</i>: either dd.mm.ss or decimal degrees [A]</li>
-    <li><i>C.R.S.</i> coordinate reference system [default is long-lat] (disabled)</li>
-    </ul>
-  </li>  
-  <li><i>ACCURACY settings</i></li>
+  <li><i>LOCATION <a href="page_location.htm">settings</a></i></li>  
+  <li><i>ACCURACY <a href="page_accuracy.htm">settings</a></i></li>
 </ul><br><p>
-
-<h4>DISPLAY MODE</h4>
-The <u>Display</u> button opens a dialog with choices for "shot id", "splay shots", "blank shots", and "repeated leg shots". The "shots id" are unique increasing indices assigned by TopoDroid to the shots of the survey. Splay shots can be shown or hidden. Blank shots can be either all shown or hidden. The same for repeated-leg shots.<br><p>
-
-If the splay shots are hidden it is still possible to show the splay shots for an individual station. Tapping on the station name in a leg shot, makes the splay shots at that station visible. Tapping again on the station name (even in a splay shot) hides them.<br><p>
 
 <a href="page_download.htm">DistoX data download</a><br>
 <a href="page_manual.htm">Manual data input</a><br>
+<a href="page_displaymode.htm">Data display mode</a><br>
 <a href="page_extend.htm">Extend reference</a><br>
 <a href="page_stations.htm">Saved stations</a><br>
 <a href="page_accuracy.htm">Shot accuracy</a><br>
