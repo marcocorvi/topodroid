@@ -116,7 +116,7 @@
     <string name="sketch_saving">Salvataggio disegno ... attendi ...</string>
     <string name="lookup_wait">Ricerca in internet ... attendi ...</string>
     <string name="lookup_fail">Ricerca fallita</string>
-    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
+    <!-- TODO string name="MT_points_none">Punto GPS mancante</string -->
 
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Lettura memoria DistoX fallita</string>
@@ -177,7 +177,7 @@
     <string name="barrier_del">Continuazione restituzione?</string>
     <string name="hidden_add">Nascondi la linea mediana</string>
     <string name="hidden_del">Mostra la linea mediana</string>
-    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
+    <!-- TODO string name="splays_toggle">Mostra o Nascondi gli splay</string -->
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>
