@@ -183,7 +183,7 @@
     <string name="barrier_del">Продолжить показ средней линии?</string>
     <string name="hidden_add">Скрыть среднюю линию</string>
     <string name="hidden_del">Показать среднюю линию</string>
-    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
+    <string name="splays_toggle">Переключить отображение лучей</string>
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
@@ -937,7 +937,7 @@
   <!-- UNUSED string name="line_normal">нормальный</string -->
   <!-- UNUSED string name="line_coarse">грубый</string -->
 
-    <string name="welcome_title">Вас приветствует TopoDroid %1$s</string>
+    <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер при помощи прибора DistoX.
 \n\nНет гарантий: используя данное ПО вы соглашаетесть с тем что автор не несет ответственность за потерю данных.
