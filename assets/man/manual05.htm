@@ -1,7 +1,7 @@
 <html><body>
 <h3>[5] DEVICE WINDOW</h3>
 
-Before surveying you need to calibrate the DistoX. Tap the <u>Device activity</u> button from the Main windows to open the Device window. This has a button bar at the top and the list of known DistoX devices at the bottom. TopoDroid lists all the known DistoX, but it works with one DistoX at a time. To select it tap on its entry in the list. The name of the selected DistoX is shown at the top, just below the buttons. If no DistoX is selected, there is a red message saying "Device not selected".<br><p>
+Before surveying you need to connect and pair the DistoX with the Android and calibrate it. Tap the <u>DistoX</u> button from the Main windows to open the Device window. This has a button bar at the top and the list of known DistoX devices at the bottom. TopoDroid lists all the known DistoX, but it works with one DistoX at a time. To select it tap on its entry in the list. The name of the selected DistoX is shown at the top, just below the buttons. If no DistoX is selected, there is a red message saying "Device not selected".<br><p>
 
 By default TopoDroid uses the BT address as name for a DistoX. However you can assign a nickname to the DistoX to make it easier to distinguish among devices if you work with several of them. Long tap on a device to enter its nickname.<br><p>
 
@@ -11,18 +11,14 @@ At first the DistoX list is probably empty. You need to make Android find your D
 <ul>
 <li><u>Scan</u> searches for new DistoX devices. The DistoX must be on. You might have to try two or three times before TopoDroid finds the DistoX.</li>
 <li><u>Pair</u>: if the current DistoX device is not paired with the Android, pairs them.</li>
-<li><u>Disconnect</u> detaches the current device</li>
-<li><u>Firmware</u>: used to dump and upload firmwares to the DistoX2. This menu is present only if you checked the "bootloader" global option in the main window</li>
+<li><u>Disconnect</u> detaches the current device. This does not destroy the pairing between Android and the DistoX.</li>
+<li><u>Firmware</u> [A]: used to dump and upload firmwares to the DistoX2.</li>
 <li><u>Settings</u>: with this menu you change the preferences related to the Device activity</li>
 <li><u>Help</u></li>
 </ul><br>
 
-<h4>Firmware</h4>
-TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2, 2.3 and 2.4, which are all compatible with hardware 1.0. Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file. Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version. Unfortunately there is no sure way to read the firmware version from the file content, so TopoDroid relies on the signature in the file after the bootloader blocks.  The DistoX2 must be booted in "bootloader mode". Refer to the DistoX2 documentation for details.<br>
-<b>WARNING. UPLOADING AN INCOMPATIBLE FIRMWARE MAKES YOUR DistoX UNUSABLE.</b><br><p>
-
 <h4>BUTTONS</h4>
-Except for the first, you need the DistoX turned on for all the other button actions.
+You need the DistoX turned on for button actions, except for the first and third buttons.
 <ul>
 <li><u>Bluetooth</u> resets the Bluetooth connection. Note that the connection with the DistoX is not established.</li>
 <li><u>Mode-toggle</u> toggles the DistoX calibration mode on and off</li>
@@ -40,27 +36,20 @@ Except for the first, you need the DistoX turned on for all the other button act
 <li><i>Auto reconnect</i>: whether to reconnect automatically if the connection is lost while in "continuous" download-mode</li>
 <li><i>Socket</i> type: this can be either the default type or "insecure". The default type should be ok, however if you experience problems with it you may try the insecure socket.</li>
 <li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone or possibly other devices. It is safe to leave this enabled.</li>
+<li><i>Connection delay</i>: optional delay [1/10 sec] before trying to connect to the DistoX. It is usually safe to leave this to 0 [default]</li>
+<li><i>Auto pairing</i>: whether TopoDorid should try to pair with the DistoX that has been found (and selected) after a scan.</li>
 </ul><br><p>
-
-<h4>DistoX troubleshooting</h4>
-If the scan for new DistoX devices fails to show your DistoX, you may try a scan with the <i>Settings</i> app. If this app too fails to find the DistoX, there is some problem with the bluetooth on your Android, and you will not be able to use TopoDroid with a DistoX.<br>
-You can also use the <i>Settings</i> app to pair the DistoX.<br>
-Once paired with the DistoX, the Android should keep the pairing, and not request the PIN again. If it keeps requesting the PIN every time you download data from the DistoX, try to use the "insecure" socket.<br>
-If you have problem connecting and downloading the data try to enable the "Z6 workaround".<br>
-<p>
-
-<h4>DistoX memory inspection [A]</h4>
-The <u>Memory</u> button opens the "DistoX memory" dialog. You can retrieve the content of the DistoX memory, and even modify it if you have a DistoX1. The content of the DistoX memory is displayed in a list. Each line contains the memory location, a letter-code telling whether it is a shot ('d') or a calibration ('g') data, and the values. Entries without values are marked with a question-mark ('?') code. Shot values are shown as length (meters), azimut and clino (degrees). The "accuracy" data of the DistoX2 are not shown. For the calibration data, the raw values are shown ('m' data are not shown for the DistoX2).<br>
-If you have entered a filename it is also saved to a dump file (in the "dump" folder), for analysis with other tools.<br>
-This functionality is for recovery from desperate situations (eg, your android got lost but the data are still in the DistoX). Memory inspection requires some knowledge of the internals of the DistoX: at a minimum the address space, and the way data are stored. You should have read the DistoX documentation before using it.<br>
-Reading the DistoX memory directly is a slow process. As this operation is carried out in the main gui thread, you have to be patient. It is advisable to read a portion of memory, say 100 entries, at a time.<br>
-<p>
 
 <hr>
 <i>This is a lot of stuff, but you just need to scan to find your DistoX, and select it as the one TopoDroid should use by tapping its address in the list at the bottom.  Now you are ready to go ahead and calibrate the DistoX with the "Calibration" menu.</i><br><p>
 
-<a href="manual04.htm"><img src="ic_back.png"></a>
-<a href="manual06.htm"><img src="ic_forw.png"></a>
+<a href="page_trouble.htm">DistoX troubleshooting</a><br>
+<a href="page_memory.htm">DistoX memory</a><br>
+<a href="page_firmware.htm">DistoX firmware</a><br>
+<p>
+
+<a href="manual04.htm">&lt; Main window</a> |
+<a href="manual06.htm">Calibration window &gt;</a>
 
 </body></html>
 </body></html>

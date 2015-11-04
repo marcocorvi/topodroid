@@ -1,4 +1,4 @@
-/* @file DistoXRefresh.java
+/* @file DataDownloadTask.java
  *
  * @author marco corvi
  * @date feb 2012
@@ -19,16 +19,16 @@ import android.widget.Toast;
 import android.os.AsyncTask;
 import android.os.Handler;
 
-public class DistoXRefresh extends AsyncTask< String, Integer, Integer >
+public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 {
   private TopoDroidApp mApp;
-  private static DistoXRefresh running = null;
+  private static DataDownloadTask running = null;
   // private ILister mLister;
   private ListerHandler mLister; // FIXME LISTER
 
-  DistoXRefresh( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
+  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DistoXRefresh cstr" );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataDownloadTask cstr" );
     mApp = app;
     mLister = lister;
   }

@@ -16,7 +16,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 
-class Symbol // implements View.OnClickListener
+import android.graphics.Paint;
+import android.graphics.Path;
+
+class Symbol implements SymbolInterface
+             // , View.OnClickListener
 {
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   String  mThName;   // therion name
@@ -68,8 +72,18 @@ class Symbol // implements View.OnClickListener
     mCsx = null;
   }
 
-  boolean isEnabled() { return mEnabled; }
 
-  void setEnabled( boolean enabled ) { mEnabled = enabled; }
+  // SymbolInterface methods
+  public String getName()   { return "undefined"; }
+  public String getThName() { return "undefined"; }
+  public Paint  getPaint()  { return null; }
+  public Path   getPath()   { return null; }
+  public boolean isOrientable() { return false; }
 
+  public boolean isEnabled() { return mEnabled; }
+  public void setEnabled( boolean enabled ) { mEnabled = enabled; }
+  public void toggleEnabled() { mEnabled = ! mEnabled; }
+
+  public void setAngle( float angle ) {}
+  public int getAngle() { return 0; }
 }

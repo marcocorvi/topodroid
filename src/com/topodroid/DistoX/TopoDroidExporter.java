@@ -582,6 +582,8 @@ class TopoDroidExporter
 
     int n = 0;
     DistoXDBlock ref_item = null;
+    int fromId, toId;
+
     for ( DistoXDBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
@@ -839,10 +841,20 @@ class TopoDroidExporter
    *      (optional survey commands)
    *    *end survey_name
    */
-  static String   survex_flags_duplicate     = "   *flags duplicate\n";
-  static String   survex_flags_not_duplicate = "   *flags not duplicate\n";
-  static String   survex_flags_surface       = "   *flags surface\n";
-  static String   survex_flags_not_surface   = "   *flags not surface\n";
+  static String   survex_flags_duplicate     = "   *flags duplicate";
+  static String   survex_flags_not_duplicate = "   *flags not duplicate";
+  // static String   survex_flags_surface       = "   *flags surface";
+  // static String   survex_flags_not_surface   = "   *flags not surface";
+
+  static void writeSurvexLine( PrintWriter pw, String str )
+  {
+    pw.format("%s%s", str, TopoDroidSetting.mSurvexEol );
+  }
+
+  static void writeSurvexEOL( PrintWriter pw )
+  {
+    pw.format("%s", TopoDroidSetting.mSurvexEol );
+  }
 
   static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup,
                                  float l, float b, float c, int n, DistoXDBlock blk )
@@ -851,13 +863,12 @@ class TopoDroidExporter
     if ( first ) {
       pw.format(Locale.ENGLISH, "  %.2f %.1f %.1f", l/n, b, c/n );
       if ( blk.mComment != null && blk.mComment.length() > 0 ) {
-        pw.format("  ; %s\n", blk.mComment );
-      } else {
-        pw.format("\n");
-      }
+        pw.format("  ; %s", blk.mComment );
+      } 
+      writeSurvexEOL( pw );
     }
     if ( dup ) {
-      if ( first ) pw.format(survex_flags_not_duplicate);
+      if ( first ) writeSurvexLine(pw, survex_flags_not_duplicate);
       // dup = false;
     }
     return false;
@@ -867,14 +878,15 @@ class TopoDroidExporter
   {
     pw.format(Locale.ENGLISH, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength, blk.mBearing, blk.mClino );
     if ( blk.mComment != null && blk.mComment.length() > 0 ) {
-      pw.format(" ; %s\n", blk.mComment );
-    } else {
-      pw.format("\n");
+      pw.format(" ; %s", blk.mComment );
     }
+    writeSurvexEOL( pw );
   }
 
   static String exportSurveyAsSvx( long sid, DataHelper data, SurveyInfo info, Device device, String filename )
   {
+    char splayChar = 'a';
+
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     try {
@@ -882,43 +894,49 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      pw.format("; %s created by TopoDroid v %s\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      pw.format("; %s created by TopoDroid v %s", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      writeSurvexEOL( pw );
+
       pw.format("; %s", info.name );
       if ( info.comment != null && info.comment.length() > 0 ) {
         pw.format(" - %s", info.comment );
       }
-      pw.format("\n");
+      writeSurvexEOL(pw);
+
       pw.format("; Instrument: ");
       if ( device != null ) {
         pw.format("%s - ", device.toSimpleString() );
       }
-      pw.format(" %s \n", android.os.Build.MODEL );
-      pw.format("\n");
+      writeSurvexLine(pw, android.os.Build.MODEL );
+      writeSurvexEOL(pw);
 
-      pw.format("*begin %s\n", info.name );
-      pw.format("  *date %s \n", info.date );
-      pw.format("  *team \"%s\" \n", info.team );
-      pw.format("  *units tape metres\n");
-      pw.format("  *units compass degrees\n");
-      pw.format("  *units clino degrees\n");
-      pw.format(Locale.ENGLISH, "  *calibrate declination %.2f\n", info.declination );
-      pw.format("  *alias station - ..\n");
+      pw.format("*begin %s ", info.name );      writeSurvexEOL(pw);
+      pw.format("  *date %s ", info.date );     writeSurvexEOL(pw);
+      pw.format("  *team \"%s\" ", info.team ); writeSurvexEOL(pw);
+      writeSurvexLine(pw, "  *units tape metres" );
+      writeSurvexLine(pw, "  *units compass degrees" );
+      writeSurvexLine(pw, "  *units clino degrees" );
+      pw.format(Locale.ENGLISH, "  *calibrate declination %.2f", info.declination ); writeSurvexEOL(pw);
+      if ( ! TopoDroidSetting.mSurvexSplay ) {
+        writeSurvexLine( pw, "  *alias station - .." );
+      }
 
       if ( fixed.size() > 0 ) {
-        pw.format("  ; fix stations as lomg-lat alt\n");
+        writeSurvexLine(pw, "  ; fix stations as lomg-lat alt");
         for ( FixedInfo fix : fixed ) {
-          pw.format("  ; *fix %s\n", fix.toString() );
+          writeSurvexLine(pw, "  ; *fix " + fix.toString() );
         }
       }
 
-      pw.format("  *flags not splay\n");
-      pw.format("  *data normal from to tape compass clino\n");
+      writeSurvexLine( pw, "  *flags not splay");
+      writeSurvexLine( pw, "  *data normal from to tape compass clino");
       
       boolean first = true;
-      for ( int k=0; k<2; ++k ) { // first pass legs, second pass splays
+      // for ( int k=0; k<2; ++k ) 
+      { // first pass legs, second pass splays
         if ( ! first ) {
-          pw.format("\n");
-          pw.format("  *flags splay\n");
+          writeSurvexEOL(pw);
+          writeSurvexLine(pw, "  *flags splay");
         }
         float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
         int n = 0;
@@ -946,11 +964,19 @@ class TopoDroidExporter
               }
 
               if ( ! splays ) {
-                // pw.format("  *flags splay\n" );
+                if ( TopoDroidSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
+                splayChar = 'a';
                 splays = true;
+              } else {
+                splayChar ++;
               }
-              if ( ! first  ) {
-                writeSurvexSplay( pw, "-", to, item );
+              // if ( ! first  ) 
+              {
+                if ( TopoDroidSetting.mSurvexSplay ) {
+                  writeSurvexSplay( pw, to + splayChar, to, item );
+                } else {
+                  writeSurvexSplay( pw, "-", to, item );
+                }
               }
             }
           } else { // with FROM station
@@ -962,11 +988,19 @@ class TopoDroidExporter
               }
 
               if ( ! splays ) {
-                // pw.format("  *flags splay\n" );
+                if ( TopoDroidSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
                 splays = true;
+                splayChar = 'a';
+              } else {
+                splayChar ++;
               }
-              if ( ! first  ) {
-                writeSurvexSplay( pw, from, "-", item );
+              // if ( ! first  )
+              {
+                if ( TopoDroidSetting.mSurvexSplay ) {
+                  writeSurvexSplay( pw, from, from + splayChar, item );
+                } else {
+                  writeSurvexSplay( pw, from, "-", item );
+                }
               }
             } else {
               if ( n > 0 && ref_item != null ) {
@@ -975,13 +1009,13 @@ class TopoDroidExporter
                 ref_item = null; 
               }
               if ( splays ) {
-                // pw.format("  *flags not splay\n");
+                if ( TopoDroidSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags not splay");
                 splays = false;
               }
               n = 1;
               ref_item = item;
               if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
-                if ( first ) pw.format(survex_flags_duplicate);
+                if ( first ) writeSurvexLine(pw, survex_flags_duplicate);
                 duplicate = true;
               }
               if ( first ) pw.format("    %s %s ", from, to );
@@ -999,8 +1033,9 @@ class TopoDroidExporter
         }
         first = false;
       }
+      writeSurvexLine(pw, "  *flags not splay");
 
-      pw.format("*end %s\n", info.name );
+      pw.format("*end %s", info.name ); writeSurvexEOL(pw);
       fw.flush();
       fw.close();
       return filename;

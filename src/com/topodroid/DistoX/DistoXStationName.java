@@ -8,11 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120520 created
- * 20120726 TopoDroid log
- * 20121118 method isLessOrEqual to compare station names
- * 20121223 bug-fix comparison between 9 and 10
  */
 package com.topodroid.DistoX;
 
@@ -123,6 +118,22 @@ public class DistoXStationName
       }
     }
     return false;
+  }
+
+  // used by PocketTopo export
+  static int toInt( String name )
+  {
+    if ( name == null ) return -1;
+    int ret = 0;
+    int len = name.length();
+    for ( int k = 0; k < len; ++k ) {
+      char ch = name.charAt( k );
+      if ( ch >= '0' && ch <= '9' ) { ret = ret*10 + (int)(ch - '0'); }
+      else if ( ch >= 'a' && ch <= 'z') { ret = ret*100 + (int)(ch - 'a'); }
+      else if ( ch >= 'A' && ch <= 'Z') { ret = ret*100 + 50 + (int)(ch - 'A'); }
+      else { ret = ret*100 + 99; }
+    }
+    return ret;
   }
 
 

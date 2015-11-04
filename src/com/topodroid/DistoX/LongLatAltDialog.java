@@ -46,7 +46,7 @@ public class LongLatAltDialog extends Dialog
                               implements View.OnClickListener
 {
   private Context mContext;
-  private DistoXLocation mParent;
+  private LocationDialog mParent;
 
   private MyKeyboard mKeyboard = null;
   private EditText mEditLong;
@@ -61,7 +61,7 @@ public class LongLatAltDialog extends Dialog
 
   private CheckBox mWGS84; // checked if alt is wgs84
 
-  public LongLatAltDialog( Context context, DistoXLocation parent )
+  public LongLatAltDialog( Context context, LocationDialog parent )
   {
     super( context );
     mContext = context;

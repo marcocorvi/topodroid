@@ -47,7 +47,7 @@ public class FixedDialog extends Dialog
 {
   private Context mContext;
   private SurveyActivity mParent;
-  private DistoXLocation mSubParent;
+  private LocationDialog mSubParent;
   private FixedInfo mFxd;
   private boolean mAltIsAsl;
 
@@ -75,7 +75,7 @@ public class FixedDialog extends Dialog
 
   private MyKeyboard mKeyboard = null;
 
-  public FixedDialog( Context context, SurveyActivity parent, DistoXLocation sub_parent, FixedInfo fxd )
+  public FixedDialog( Context context, SurveyActivity parent, LocationDialog sub_parent, FixedInfo fxd )
   {
     super(context);
     mContext     = context;

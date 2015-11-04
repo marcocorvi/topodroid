@@ -38,6 +38,7 @@ public class DrawingBrushPaths
   static SymbolPoint mStationSymbol = null;
   static boolean mReloadSymbols = true; // whether to reload symbols
 
+  // -----------------------------------------------------------
   static String getPointName( int idx ) { return mPointLib.getAnyPointName( idx ); }
 
   static String getPointThName( int index ) { return mPointLib.getPointThName( index ); }
@@ -136,6 +137,7 @@ public class DrawingBrushPaths
   static Paint fixedSplay4Paint = null;  // dot splay
   static Paint fixedGridPaint  = null;
   static Paint fixedGrid10Paint  = null;
+  static Paint fixedGrid100Paint  = null;
   static Paint fixedStationPaint  = null;
   static Paint fixedStationBarrierPaint  = null;
   static Paint fixedStationHiddenPaint  = null;
@@ -285,6 +287,13 @@ public class DrawingBrushPaths
     fixedGrid10Paint.setStrokeJoin(Paint.Join.ROUND);
     fixedGrid10Paint.setStrokeCap(Paint.Cap.ROUND);
     fixedGrid10Paint.setColor(0x99999999); // not so dark gray
+
+    fixedGrid100Paint = new Paint();
+    fixedGrid100Paint.setDither(true);
+    fixedGrid100Paint.setStyle(Paint.Style.STROKE);
+    fixedGrid100Paint.setStrokeJoin(Paint.Join.ROUND);
+    fixedGrid100Paint.setStrokeCap(Paint.Cap.ROUND);
+    fixedGrid100Paint.setColor(0x99cccccc); // almost white
 
     fixedStationPaint = new Paint();
     fixedStationPaint.setDither(true);

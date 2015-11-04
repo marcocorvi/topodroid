@@ -122,6 +122,7 @@ public class DrawingShotDialog extends Dialog
     // mRBbackshot.setOnClickListener( this );
     if ( TopoDroidSetting.mWallsType != TopoDroidSetting.WALLS_NONE 
       && TopoDroidSetting.mLevelOverAdvanced 
+      && mBlock.mType == DistoXDBlock.BLOCK_MAIN_LEG
       && ( mParent.getPlotType() == PlotInfo.PLOT_PLAN || mParent.getPlotType() == PlotInfo.PLOT_EXTENDED ) ) {
       mRBwalls.setOnClickListener( this );
     } else {

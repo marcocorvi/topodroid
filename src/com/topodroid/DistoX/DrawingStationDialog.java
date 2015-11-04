@@ -38,6 +38,7 @@ public class DrawingStationDialog extends Dialog
     private Button mBtnSet;
     private Button mBtnBreak;
     private Button mBtnHidden;
+    private Button mBtnSplays;
     private Button mBtnXSection;
     // private Button mBtnCancel;
 
@@ -76,6 +77,7 @@ public class DrawingStationDialog extends Dialog
 
       mBtnBreak  = (Button) findViewById(R.id.btn_break );
       mBtnHidden = (Button) findViewById(R.id.btn_hidden );
+      mBtnSplays = (Button) findViewById(R.id.btn_splays );
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
@@ -90,6 +92,7 @@ public class DrawingStationDialog extends Dialog
       mBtnSet.setOnClickListener( this );
       mBtnBreak.setOnClickListener( this );
       mBtnHidden.setOnClickListener( this );
+      mBtnSplays.setOnClickListener( this );
     
       if ( TopoDroidSetting.mLevelOverAdvanced ) {
         mBtnXSection.setOnClickListener( this );
@@ -121,6 +124,8 @@ public class DrawingStationDialog extends Dialog
         mActivity.toggleStationBarrier( mStationName, mIsBarrier );
       } else if (view.getId() == R.id.btn_hidden ) {
         mActivity.toggleStationHidden( mStationName, mIsHidden );
+      } else if (view.getId() == R.id.btn_splays ) {
+        mActivity.toggleStationSplays( mStationName );
       } else if (view.getId() == R.id.btn_xsection ) {
         mActivity.openXSection( mStationName, mActivity.getPlotType() );
       }

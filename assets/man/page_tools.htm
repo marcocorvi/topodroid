@@ -1,0 +1,47 @@
+<html><body>
+
+<h4>Drawing tools palette</h4>
+
+The drawing tools bundled in the program include 7 areas, 14 lines and more than 40 points.<br><p>
+
+It is likely you do not need many of them, or maybe you need different ones. You can customize the drawing tools and the way you select them in four ways:
+<ul>
+<li>with the choice of drawing tool dialog</li>
+<li>at the level of the sketch</li>
+<li>at the level of the project (directory</li>
+<li>on the filesystem</li>
+</ul>
+
+The drawing tool dialog is the inteface through which you select the tool with which you draw next. There are three different interfaces,
+<ul>
+<li>most-recently used tools [default]</li>
+<li>a list of the tools with their names</li>
+<li>the tools symbols arranged on a grid</li>
+</ul>
+
+The "most-recent tools" interface displays the symbols of the most recently used points, lines and areas on three rows. You select a tool by tapping its symbol. A long tap on a symbol brings it in front of the list and its name is shown on the title.
+Each row has a button to the right to go to the list of all tools, so that you can choose one of the others.
+There is a slider on top. With it you can adjust the orientation of the first point tool, if it can be oriented. For example a "stalactite" tool will not change because it is not orientable, while the "water-flow" will rotate.<br><p>
+
+The "list" interface displays a scrollable list of the drawing tools, with a checkbox on the left, the symbol, and the name.
+You select a tool by tapping the checkbox. 
+On the top there are three buttons to change among the lists of points, lines, and areas.
+There is also a slider to change the orientation of the selected point if it is orientable.
+Below there is a row with the symbols of the most recently used tools. Tapping on a symbol checks the respective tool.
+The chosen drawing tool is the last selected when you close the dialog (with the Android BACK button).<br><p>
+
+The "grid" interface is similar to the "list" interface, but it displays the only the symbols of the tools arranged
+on a grid.<br><p>
+
+Each sketch carries its own palette.  When you close the sketch it is saved with a header listing the enabled tools. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
+
+The sketch palette is specified through the "PALETTE" menu of the sketch window. This opens a dialog that lets you decide which tool enable in the sketch palette. You switch on and off the tools to your need then close the dialog (with the <u>back</u> button) to save the changes. You have to do this independently for points, lines and areas.<br><p>
+
+Except for the "system" tools, TopoDroid loads the drawing tool from files stored in the "symbols" subdirectory of the base "TopoDroid" home. The system tools are the "user" and "label" points, "user" and "wall" lines, "user" and "water" areas. These are always enabled.<br><p>
+
+The PALETTE menu of the main window defines the drawing tool files to load. In the coming dialog you select the tools that are loaded.  The list of files to load is saved in the project database. As for the sketch-level palette, you have to do this independently for points, lines, and areas<br><p>
+
+At a even higher level, namely that of the base "TopoDroid" directory, you can customize the tool files. You can modify them,
+delete those you do not need, and add new ones (for tools not included in the program). The syntax of the tool files is described on the website.<br><p>
+
+</body></html>

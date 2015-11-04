@@ -140,7 +140,7 @@ public class SurveyActivity extends Activity
   private final static int LOCATION_REQUEST = 1;
   private static int CRS_CONVERSION_REQUEST = 2; // not final ?
   // FIXME GPS_AVERAGE NOT USED
-  // private DistoXLocation mLocation;
+  // private LocationDialog mLocation;
   private FixedDialog mFixedDialog;
 
   void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
@@ -166,7 +166,7 @@ public class SurveyActivity extends Activity
   }
 
   // FIXME GPS_AVERAGE NOT USED
-  // boolean tryGPSAveraging( DistoXLocation loc )
+  // boolean tryGPSAveraging( LocationDialog loc )
   // {
   //   mLocation = null;
   //   try {
@@ -432,7 +432,7 @@ public class SurveyActivity extends Activity
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "doLocation" );
     LocationManager lm = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
-    new DistoXLocation( mContext, this, mApp, lm ).show();
+    new LocationDialog( mContext, this, mApp, lm ).show();
   }
 
   private void doNotes()

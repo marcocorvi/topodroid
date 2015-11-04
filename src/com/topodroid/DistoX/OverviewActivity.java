@@ -28,7 +28,6 @@ import android.graphics.Path.Direction;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Matrix;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -77,10 +76,12 @@ public class OverviewActivity extends ItemDrawer
   private static int izons[] = { 
                         R.drawable.iz_measure,       // 0
                         R.drawable.iz_mode,          // 1
-                        // TODO R.drawable.iz_plan,
-                        R.drawable.iz_menu,          // 2
+                        // FIXME_OVER R.drawable.iz_plan,          // 2
+                        R.drawable.iz_menu,          // 3
                         R.drawable.iz_measure_on,
                       };
+  // FIXME_OVER private static int BTN_PLOT = 2;
+
   private static int menus[] = {
                         R.string.menu_options,
                         R.string.menu_help
@@ -89,14 +90,14 @@ public class OverviewActivity extends ItemDrawer
   private static int help_icons[] = { 
                         R.string.help_measure,
                         R.string.help_refs,
-                        // TODO R.string.help_toggle_plot,
+                        // FIXME_OVER R.string.help_toggle_plot,
                       };
   private static int help_menus[] = {
                         R.string.help_prefs,
                         R.string.help_help
                       };
-  // BitmapDrawable mBMextend;
-  // BitmapDrawable mBMplan;
+  // FIXME_OVER BitmapDrawable mBMextend;
+  // FIXME_OVER BitmapDrawable mBMplan;
   BitmapDrawable mBMselect;
   BitmapDrawable mBMselectOn;
 
@@ -254,7 +255,7 @@ public class OverviewActivity extends ItemDrawer
         dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
       }
       makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mOverviewSurface.addFixedPath( dpath, false ); // false: non-selectable
+      mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 
     public void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff )
@@ -274,7 +275,8 @@ public class OverviewActivity extends ItemDrawer
       for ( int x = (int)Math.round(xmin); x < xmax; x += 1 ) {
         float x0 = (float)(toSceneX( x ) - xoff);
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(x%10)==5)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
+        dpath.setPaint( (Math.abs(x%100)==0)? DrawingBrushPaths.fixedGrid100Paint : 
+                        (Math.abs(x%10)==0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
         dpath.mPath  = new Path();
         dpath.mPath.moveTo( x0, y1 );
         dpath.mPath.lineTo( x0, y2 );
@@ -283,7 +285,8 @@ public class OverviewActivity extends ItemDrawer
       for ( int y = (int)Math.round(ymin); y < ymax; y += 1 ) {
         float y0 = (float)(toSceneY( y ) - yoff);
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(y%10)==5)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
+        dpath.setPaint( (Math.abs(y%100)==0)? DrawingBrushPaths.fixedGrid100Paint : 
+                        (Math.abs(y%10)==0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
         dpath.mPath  = new Path();
         dpath.mPath.moveTo( x1, y0 );
         dpath.mPath.lineTo( x2, y0 );
@@ -316,6 +319,7 @@ public class OverviewActivity extends ItemDrawer
   private void computeReferences( int type, float xoff, float yoff, float zoom )
   {
     // Log.v("DistoX", "Overview compute reference. Type " + type );
+    // FIXME_OVER
     // mOverviewSurface.clearReferences( type );
     // mOverviewSurface.setManager( type );
     mOverviewSurface.setManager( PlotInfo.PLOT_PLAN ); // MUST use first commandManager
@@ -466,9 +470,14 @@ public class OverviewActivity extends ItemDrawer
         mButton1[k].setPadding(0,0,0,0);
         mButton1[k].setOnClickListener( this );
         BitmapDrawable bm = mApp.setButtonBackground( mButton1[k], size, izons[k] );
-        if ( k == 0 ) mBMselect = bm;
+        if ( k == 0 ) { // IC_SELECT = 0;
+          mBMselect = bm;
+        // FIXME_OVER } else if ( k == 2 ) { // IC_PLAN = 2;
+        // FIXME_OVER   mBMplan = bm;
+        }
       }
       mBMselectOn = mApp.setButtonBackground( null, size, R.drawable.iz_measure_on );
+      // FIXME_OVER mBMextend  = mApp.setButtonBackground( null, mButtonSize, izons[IC_EXTEND] ); 
 
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
@@ -614,6 +623,7 @@ public class OverviewActivity extends ItemDrawer
         // Log.v("DistoX", "Overview load file " + fullName );
 
         String filename = TopoDroidPath.getTh2FileWithExt( fullName );
+        // FIXME_OVER 
         // N.B. this loads the drawing on DrawingSurface.mCommandManager1
         boolean all_symbols = mOverviewSurface.loadTherion( filename, xdelta, ydelta, missingSymbols );
         mAllSymbols = mAllSymbols && all_symbols;
@@ -773,10 +783,12 @@ public class OverviewActivity extends ItemDrawer
       int action = event.getAction() & MotionEvent.ACTION_MASK;
 
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
+        if ( mOnMeasure == 2 ) mOnMeasure = 1;
         mTouchMode = MODE_ZOOM;
         oldDist = spacing( event );
         saveEventPoint( event );
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+        if ( mOnMeasure == 1 ) mOnMeasure = 2;
         mTouchMode = MODE_MOVE;
         /* nothing */
 
@@ -800,10 +812,25 @@ public class OverviewActivity extends ItemDrawer
           float y = y_canvas/mZoom - mOffset.y;
           float dx =  (x - mStartX) / DrawingActivity.SCALE_FIX;
           float dy = -(y - mStartY) / DrawingActivity.SCALE_FIX;
-          StringWriter sw = new StringWriter();
-          PrintWriter pw = new PrintWriter( sw );
-          pw.format("%.2f DX %.2f DY %.2f", FloatMath.sqrt( dx * dx + dy * dy ), dx, dy );
-          setTitle( sw.getBuffer().toString() );
+          // StringWriter sw = new StringWriter();
+          // PrintWriter pw = new PrintWriter( sw );
+          double a = Math.atan2( dx, dy ) * 180 / Math.PI;
+          if ( a < 0 ) a += 360;
+          String format;
+          if ( mType == PlotInfo.PLOT_PLAN ) {
+            format = getResources().getString( R.string.format_measure_plan );
+          } else {
+            if ( a <= 180 ) {
+              a = 90 - a;
+            } else {
+              a = a - 270;
+            } 
+            format = getResources().getString( R.string.format_measure_profile );
+          }
+          String msg = String.format( format, FloatMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
+          // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
+          // setTitle( sw.getBuffer().toString() );
+          setTitle( msg );
           // replace target point
           DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH );
           path.setPaint( DrawingBrushPaths.fixedBluePaint );
@@ -878,25 +905,28 @@ public class OverviewActivity extends ItemDrawer
       return myTextView;
     }
 
+    /* FIXME_OVER
     private void switchPlotType()
     {
-      // if ( mType == PlotInfo.PLOT_PLAN ) {
-      //   // saveReference( mPlot1, mPid1 );
-      //   // mPid  = mPid2;
-      //   mType = (int)PlotInfo.PLOT_EXTENDED;
-      //   mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
-      //   mOverviewSurface.setManager( mType );
-      //   resetReference( mPlot2 );
-      // } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
-      //   // saveReference( mPlot2, mPid2 );
-      //   // mPid  = mPid1;
-      //   // mName = mName1;
-      //   mType = (int)PlotInfo.PLOT_PLAN;
-      //   mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
-      //   mOverviewSurface.setManager( mType );
-      //   resetReference( mPlot1 );
-      // }
+      if ( mType == PlotInfo.PLOT_PLAN ) {
+        // saveReference( mPlot1, mPid1 );
+        // mPid  = mPid2;
+        mType = (int)PlotInfo.PLOT_EXTENDED;
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
+
+        mOverviewSurface.setManager( mType );
+        resetReference( mPlot2 );
+      } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+        // saveReference( mPlot2, mPid2 );
+        // mPid  = mPid1;
+        // mName = mName1;
+        mType = (int)PlotInfo.PLOT_PLAN;
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
+        mOverviewSurface.setManager( mType );
+        resetReference( mPlot1 );
+      }
     }
+    */
   
     public void onClick(View view)
     {
@@ -929,8 +959,8 @@ public class OverviewActivity extends ItemDrawer
       } else if ( b == mButton1[1] ) { // references
         new DrawingModeDialog( this, null, mOverviewSurface ).show();
 
-      // TODO } else if ( b == mButton1[2] ) { // toggle plan/extended
-      // TODO   switchPlotType();
+      // FIXME_OVER } else if ( b == mButton1[2] ) { // toggle plan/extended
+      // FIXME_OVER   switchPlotType();
       }
     }
 

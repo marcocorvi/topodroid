@@ -14,67 +14,18 @@ TopoDroid has a main window from which you can move to other app activities.  Th
 Topodroid windows have a scrollable button bar at the top, for the most frequent actions, and a menu button at the top-right.
 The dialogs usually have a confirmation button (<i>OK</i> or <i>Save</i>). If you want to close the dialog, or cancel whatever you have done, tap the Android <i>BACK</i> button. If there are both the <i>OK</i> and the <i>Save</i> button, the former saves the input data and closes the dialog, while the latter saves the input data and keep the dialog open for a new input. 
 Information dialogs have no buttons.<br><p>
-In every TopoDroid activities the hardware MENU key opens the <u>Settings</u> dialog.<br><p>
 
-Here is some background about how the survey data, the calibration data, and the sketches are stored. You can safely skip the following and the next two sections, and come back to them later if needed.<br><p>
-
-The app creates its default base directory, named "TopoDroid", in the primary external memory (usually /sdcard). This directory is not removed when you uninstall the app. In this directory the app creates two SQLite databases. The first is "device10.sqlite", where the calibration data, the DistoX informations, and other data are stored. The second is "distox14sqlite" and stores the surveys data. The app also creates subdirectories for the different types of files:
-<ul>
-<li>bin: DistoX2 firmware files</li>
-<li>csv: CSV text files (exported surveys and calibrations)</li>
-<li>csx: <i>cSurvey</i> files (exported surveys and sketches)</li>
-<li>dat: <i>Compass</i> files (exported surveys)</li>
-<li>dxf: DXF files (exported surveys and sketches)</li>
-<li>dump: DistoX memory dump files</li>
-<li>import: survey files to import (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, and <i>PocketTopo</i> format)</li>
-<li>kml: <i>GoogleEarth</i> exports [A]</li>
-<li>note: text note files (survey annotations)</li>
-<li>photo: survey pictures (each survey with its own subdirectory)</li>
-<li>plt: <i>OziExplorer</i> track file exports [A]</li>
-<li>png: PNG image files (exported sketches)</li>
-<li>srv: <i>Walls</i> files (exported surveys)</li>
-<li>svg: SVG files (exported sketches)</li>
-<li>svx: <i>Survex</i> files (exported surveys)</li>
-<li>symbol with the drawing tools files (points, lines, areas)</li>
-<li>th: <i>Therion</i> files (exported surveys)</li>
-<li>th2 for <i>Therion</i> scrap files (saved sketches)</li>
-<li>th3 for 3D model files</li>
-<li>tmp: for temporary files. Any file leftover in this directory can be safely deleted.</li>
-<li>top: <i>PocketTopo</i> files (exported surveys and sketches)</li>
-<li>tro: <i>VisualTopo</i> files (exported surveys)</li>
-<li>zip: survey ZIP archives (exported and importable)</li>
-</ul><br><p>
-
-Some of these subdirectories are used only to store exported files (csx, dat, dxf, png, svx, th, top, tro). Others are used to store data (th2, th3, note, photo). The subdirectory "symbol" contains data files used by the program.
-The subdirectory "zip" is used to store zipped archives as well to read them and uncompress in TopoDroid. When you want to import a survey made with another program (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, or <i>PocketTopo</i>) you must place it in the subdirectory "import". Finally "bin" is used to store firmware files, both the factory files included in TopoDroid and the firmware dumps read from a DistoX.<br><p>
-
-<h4>Current Work Directory</h4>
-TopoDroid does not manage complex survey projects. However it is possible to specify a different current work directory (CWD) for the data files. Each CWD is a subdirectory of the primary external memory, and it is created if it does not exists. The name of the current work directories must begin with "TopoDroid".<br><p>
-
-You can use different directories for different cave survey projects. The firmware files and the drawing symbol files are installed only in the default directory. Alternatively you can have one "TopoDroid" directory for each project and switch to the one you must work on when you need by renaming directories with a file manager. However in this way the common utility files are replicated.<br><p>
-
-The choice of the current work directory is one of the general settings of the app.<br><p>
-
-<h4>Language</h4>
-By default TopoDroid uses the system default language, if it contains the proper translation, or English. You can override this choice selecting another language among the supported ones: English, Bulgarian, French, German, Italian, Russian, and Spanish.<br><p>
-
-The choice of the language is one of the general settings of the app.<br><p>
+In every TopoDroid window the hardware MENU key opens the <u>Settings</u> dialog.<br><p>
 
 <h4>Text and Buttons size</h4>
 The "Text Size" setting specifies the dimention of the list text entries, in particular the list of surveys, that of shots, and that of calibration data.<br>
 There are two choices for the size of buttons: "small" and "large". The first is suitable for cellphones (5' screen), and is the default. The second is suitable for tablets (7' screen).<br><p>
 
-<h4>Custom Keypads</h4>
-TopoDroid comes with a numerical custom keypad and a simple "qwerty" keyboard. The numerical keypad is used for numerical values (lengths, angles, etc.). It has the ten digits, the decimal point, and the plus/minus sign. For the input of coordinates it has also the "degree" ('d') and "minute" ('m') keys.<br><p>
+<a href="page_subdirs.htm">TopoDroid subdirectories</a><br>
 
-The querty keyboard is used for station names. It has the ten digits, the 26 letters of the latin alphabet (lowercase and uppercase), and the period ('.').<br><p>
+<p>
 
-The custom keypads are enabled by default. They can be enabled/disabled through a settings of the main TopoDroid window.<br><p>
-
-<img src="kbd-ddmmss.png" alt="numerical keypad"><br><p>
-<img src="kbd-qwerty.png" alt="qwerty keypad"><br>
-
-<a href="manual00.htm"><img src="ic_back.png"></a>
-<a href="manual02.htm"><img src="ic_forw.png"></a>
+<a href="manual00.htm">&lt; Preface</a> |
+<a href="manual02.htm">Database &gt;</a>
 
 </body></html>

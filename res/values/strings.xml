@@ -181,6 +181,7 @@
     <string name="barrier_del">Show following shots</string>
     <string name="hidden_add">Hide previous shots</string>
     <string name="hidden_del">Show previous shots</string>
+    <string name="splays_toggle">Toggle splays display</string>
 
     <string name="bad_cwd">Project name cannot be path</string>
     <string name="bad_line">Bad line type</string>
@@ -208,6 +209,8 @@
     <string name="no_thmanager">ThManager app not installed</string>
     <string name="no_db_viewer">DB_viewer app not found</string>
     <string name="no_undelete">No item to recover</string>
+    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
 
     <string name="menu_3d">3 D</string>
     <string name="menu_about">ABOUT</string>
@@ -691,6 +694,10 @@
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
   <string name="pref_station_prefix_title">cSurvey station prefix</string>
   <string name="pref_station_prefix_summary">Export cSurvey station prefix</string>
+  <string name="pref_survex_eol_title">Survex line termination</string>
+  <string name="pref_survex_eol_summary">Survex line termination</string>
+  <string name="pref_survex_splay_title">Survex splays station</string>
+  <string name="pref_survex_splay_summary">Add TO station to splays in Survex</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket create</string>
@@ -809,6 +816,8 @@
   <string name="pref_drawing_unit_title">Point tools scale</string>
   <string name="pref_drawing_unit_summary">Scale of the point tools</string>
   <string name="pref_drawing_unit_message">Scale of the point drawing tools</string>
+  <string name="pref_unscaled_points_title">Non-zoomed point icons</string>
+  <string name="pref_unscaled_points_summary">Point icons are not zoomed</string>
   <string name="pref_segment_title">Line-point spacing</string>
   <string name="pref_segment_summary">Minimum line-point distance</string>
   <string name="pref_segment_message">Minimum distance between points on a line</string>

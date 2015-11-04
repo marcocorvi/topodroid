@@ -78,18 +78,11 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
   </li>  
   <li><i>LOCATION >></i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li><i>GSP Averaging</i>: whether to use the app GPSaveraging to locate fixed points [A]. By default this app is not used and the location is carried out by TopoDroid.</li>
     <li><i>Location units</i>: either dd.mm.ss or decimal degrees [A]</li>
     <li><i>C.R.S.</i> coordinate reference system [default is long-lat] (disabled)</li>
     </ul>
   </li>  
-    <li><i>ACCURACY >></i>
-    <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Acceleration tolerance</i>: tolerance on acceleration values above which a shot is signalled anomalous (only DistoX2)</li>
-    <li><i>Magnetic tolerance</i>: tolerance on magnetic field values above which a shot is signalled anomalous (only DistoX2)</li>
-    <li><i>Magnetic dip tolerance</i>: tolerance on magnetic dip angle values above which a shot is signalled anomalous (only DistoX2) [units degrees]</li>
-    </ul>
-  </li>
+  <li><i>ACCURACY settings</i></li>
 </ul><br><p>
 
 <h4>DISPLAY MODE</h4>
@@ -97,51 +90,14 @@ The <u>Display</u> button opens a dialog with choices for "shot id", "splay shot
 
 If the splay shots are hidden it is still possible to show the splay shots for an individual station. Tapping on the station name in a leg shot, makes the splay shots at that station visible. Tapping again on the station name (even in a splay shot) hides them.<br><p>
 
-<h4>EXTEND REFERENCE [N]</h4>
-When a new shot is downloaded TopoDroid sets its "extend" automatically. This holds also for shots entered manually, without specifying the "extend" in the shot dialog. By default the "extend" is either LEFT, RIGHT, or VERT (vertical), depending on the angle the shot makes with a reference azimuth. The "Extend Reference" dialog allows to change the reference azimuth, by rotating it clockwise or counterclockwise. Alternatively, the reference azimuth can be set using the Android compass sensors.<br><p>
+<a href="page_download.htm">DistoX data download</a><br>
+<a href="page_manual.htm">Manual data input</a><br>
+<a href="page_extend.htm">Extend reference</a><br>
+<a href="page_stations.htm">Saved stations</a><br>
+<a href="page_accuracy.htm">Shot accuracy</a><br>
+<p>
 
-It is also possible to fix the "extend" for coming shots to either LEFT or RIGHT, by selecting the appropriate buttons in the dialog.<br><p>
-
-<h4>SAVED STATIONS [N]</h4>
-The "saved stations" are stations saved for later reference, eg, at a crossway, to go back and continue the
-survey from there, or to mark a possible lead to check in a future trip.
-The dialog displays the list of saved stations. You select one by tapping it. 
-The selected station is shown in the text fields. Initially there is the 
-last station, or the current station if set.
-Each saved station must have a brief description or comment.<br><p>
-
-The buttons acts on the selected station: 
-<ulis>
-<li>clear the text boxes</li>
-<li>save the station in  the text-box, if not already saved, or update the comment</li>
-<li>set the current station to that in the text-box (or clear it, if the text-box is empty)</li>
-<li>delete the saved station</li>
-</ul><br><p>
-
-<h4>DISTOX DATA DOWNLOAD [B]</h4>
-The <u>Download</u> button starts a connection with the DistoX to download data.  While the connection is active it stays red. If you are using the "on-demand" download-mode the connection is closed when there are no more data to retrieve. With the "continuous" download-mode the connection remains open (and data are continuously downloaded as soon as the measurements are taken) until the DistoX and the Android lose the Bluetooth connection.  Which mode is best suited for you depends on your habits. With the on-demand mode you can concentrate on sketching and other tasks without being bothered by incoming data, and when you download the data you can focus on them (they are highlighted blue). On the other hand on-demand download requires pauses to get the data, and these are especially long if you took several shots in the between.<br><p>
-
-If the Bluetooth connection with the DistoX is broken (eg. the DistoX gets too far from the Android, or it is switched off) the data download is interrupted. In continuous-mode, if the "Auto reconnect" setting is selected, TopoDroid retries to connect to the DistoX every few seconds.<br><p>
-
-When the Shot activity is closed the data download connection is terminated. The download connection is not interrupted when the activity is paused (the display switches off). If you open a sketch while the download connection is active in "continuous" mode, the connection is maintained and the data are downloaded (and displayed in the sketch).<br><p>
-
-<h4>MANUAL DATA INPUT [N]</h4>
-If you do not have a DistoX you can still enter the shot data manually. 
-Tapping the <u>Add</u> button opens the dialog for the shot data input. 
-You must enter the station names and the shot data (length, azimuth, and clino).
-Additionally you can type the LRUD, and select whether these refer to the FROM station or to the TO station.
-The "compass" button sets the direction (azimuth and clino) using the Android sensors.
-It has a timer (10 s by default) to allow you to point the device before measuring.
-The "reverse" button allow to swap the stations, ie, reverse the shot.<br><p>
-
-To add a splay shot enter "." (period) or "-" (dash) in the "To" station.
-LRUD can be added to a splay shot, thus providing additional splay shots.
-In this case the LRUD refer to the "From" station.<br><p>
-
-The <u>Save</u> button at the bottom inserts the shot into the survey, and updates the station names incrementing them so that the dialog is ready to input the next shot. The <u>OK</u> button inserts the shot in the survey, and closes
-the dialog. If LRUD are specified the respective splay shots are also inserted.<br><p>
-
-<a href="manual07.htm"><img src="ic_back.png"></a>
-<a href="manual09.htm"><img src="ic_forw.png"></a>
+<a href="manual07.htm">&lt; Calibration data</a> |
+<a href="manual09.htm">Shot list &gt;</a>
 
 </body></html>

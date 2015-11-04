@@ -126,6 +126,7 @@ public class TopoDroidApp extends Application
     mManualCalibrationClino   = 0;
   }
 
+
   // ----------------------------------------------------------------------
   // data lister
   // ListerSet mListerSet;
@@ -581,6 +582,7 @@ public class TopoDroidApp extends Application
 
     mManual = getResources().getString( R.string.topodroid_man );
 
+/* FIXME DEVICE_DB
     if ( mDData.getValue( "import" ) == null && mCWD.equals("TopoDroid") ) {
       // Log.v("DistoX", "importing calibrations");
       mDData.setValue( "import", "done" );
@@ -600,6 +602,7 @@ public class TopoDroidApp extends Application
         }
       }
     }
+*/
 
     if ( TopoDroidLog.LOG_DEBUG ) {
       isTracing = true;

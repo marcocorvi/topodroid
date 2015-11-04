@@ -46,7 +46,7 @@ public class MobileTopographerDialog extends Dialog
   static final String POINTLISTS = "/sdcard/MobileTopographer/pointlists";
 
   private Context mContext;
-  private DistoXLocation mParent;
+  private LocationDialog mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
@@ -59,7 +59,7 @@ public class MobileTopographerDialog extends Dialog
   private double lat, lng, alt, asl;
   private boolean isSet;
 
-  public MobileTopographerDialog( Context context, DistoXLocation parent )
+  public MobileTopographerDialog( Context context, LocationDialog parent )
   {
     super( context );
     mContext = context;

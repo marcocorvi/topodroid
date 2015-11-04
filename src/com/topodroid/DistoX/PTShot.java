@@ -64,8 +64,12 @@ class PTShot
     PTId from() { return _from; }
     PTId to()   { return _to; }
 
-    void setFrom( String from ) { _from.set( from ); }
-    void setTo( String to )     { _to.set( to ); }
+    // void setFrom( String from ) { _from.set( from ); }
+    // void setTo( String to )     { _to.set( to ); }
+    void setFromUndefined() { _from.setUndef(); }
+    void setToUndefined()   { _to.setUndef(); }
+    void setFrom( int from_id ) { _from.setId( from_id ); }
+    void setTo( int to_id )     { _to.setId( to_id ); }
 
     /** get the distance in m */
     float distance() { return (float)(_dist) / 1000.0f; }

@@ -41,6 +41,14 @@ class SymbolAreaLibrary
     makeEnabledList();
   }
 
+  int getSymbolIndex( Symbol symbol ) 
+  {
+    for ( int k=0; k<mAnyArea.size(); ++k ) {
+      if ( symbol == mAnyArea.get(k) ) return k;
+    }
+    return -1;
+  }
+
   // int size() { return mArea.size(); }
 
   // SymbolArea getArea( int k ) 
@@ -75,7 +83,7 @@ class SymbolAreaLibrary
     return false;
   }
 
-  private SymbolArea getSymbolAnyArea( String th_name )
+  SymbolArea getSymbolAnyArea( String th_name )
   {
     for ( SymbolArea a : mAnyArea ) {
       if ( th_name.equals( a.mThName ) ) return a;
@@ -184,6 +192,7 @@ class SymbolAreaLibrary
 
     File dir = new File( TopoDroidPath.APP_AREA_PATH );
     if ( dir.exists() ) {
+      int systemNr = mAnyArea.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), locale, iso );
@@ -197,8 +206,24 @@ class SymbolAreaLibrary
         }
       }
       mAnyAreaNr = mAnyArea.size();
+      sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
+    }
+  }
+
+  private void sortSymbolByName( int start )
+  {
+    for ( int k=start+1; k<mAnyAreaNr; ) {
+      SymbolArea prev = mAnyArea.get(k-1);
+      SymbolArea curr = mAnyArea.get(k);
+      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
+        mAnyArea.set( k-1, curr );
+        mAnyArea.set( k, prev );
+        if ( k > start+1 ) --k;
+      } else {
+        ++k;
+      }
     }
   }
 
@@ -239,9 +264,22 @@ class SymbolAreaLibrary
       // if ( symbol.mEnabled ) {
       //   mArea.add( symbol );
       // }
+      if ( symbol.mEnabled ) {
+      }
     }
     // mAreaNr = mArea.size();
     // Log.v( TopoDroidApp.TAG, "make enabled list after: " + mAnyArea.size() );
+  }
+
+  void setRecentAreas( Symbol recent[] )
+  {
+    int k = 0;
+    for ( SymbolArea symbol : mAnyArea ) {
+      if ( symbol.mEnabled ) {
+        recent[k++] = symbol;
+        if ( k >= ItemDrawer.NR_RECENT ) break;
+      }
+    }
   }
 
   void makeEnabledListFromPalette( SymbolsPalette palette )

@@ -177,6 +177,7 @@
     <string name="barrier_del">Continuazione restituzione?</string>
     <string name="hidden_add">Nascondi la linea mediana</string>
     <string name="hidden_del">Mostra la linea mediana</string>
+    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>
@@ -203,6 +204,8 @@
     <string name="no_thmanager">ThManager non installato</string>
     <string name="no_db_viewer">DB_viewer non installato</string>
     <string name="no_undelete">Nessun oggetto da riprendere</string>
+    <!-- TODO string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
+    <!-- TODO string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
 
     <string name="menu_about">INFO</string>
     <string name="menu_attach">CONNETTI</string>
@@ -607,6 +610,10 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
+  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
+  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
@@ -721,6 +728,8 @@
   <string name="pref_drawing_unit_title">Scala simboli grafici</string>
   <string name="pref_drawing_unit_summary">Scala simboli grafici</string>
   <string name="pref_drawing_unit_message">Scala simboli grafici</string>
+  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
+  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
   <string name="pref_segment_title">Spaziatura punti sulle linee</string>
   <string name="pref_segment_summary">Minima spaziatura dei punti sulle linee</string>
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>

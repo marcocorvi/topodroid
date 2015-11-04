@@ -1,4 +1,4 @@
-/** @file DeviceRemote.java
+/** @file DeviceRemoteDialog.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -33,7 +33,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-class DeviceRemote extends Dialog
+class DeviceRemoteDialog extends Dialog
                    implements View.OnClickListener
 {
   private Button mBTlaserOn;
@@ -51,7 +51,7 @@ class DeviceRemote extends Dialog
   // DeviceActivity mParent;
   TopoDroidApp   mApp;
 
-  DeviceRemote( Context context,
+  DeviceRemoteDialog( Context context,
                 ILister lister,
                 TopoDroidApp app )
   {
@@ -66,7 +66,7 @@ class DeviceRemote extends Dialog
   {
     super.onCreate( bundle );
 
-    setContentView( R.layout.device_remote );
+    setContentView( R.layout.device_remote_dialog );
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setTitle( mApp.getResources().getString( R.string.remote_title ) );

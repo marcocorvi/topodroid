@@ -19,7 +19,7 @@ public interface ILister
    * @param toast whether to toast feedbacks
    * 
    * refreshDisplay is called by
-   *   - DistoXRefresh.onPostExecute
+   *   - DataDownloadTask.onPostExecute
    *   - ShotNewDialog.onClick
    *   - ListerHandler.handleMessage LISTER_REFRESH
    */

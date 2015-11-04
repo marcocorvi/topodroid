@@ -11,6 +11,7 @@
 package com.topodroid.DistoX;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -196,6 +197,7 @@ class PTFile
     ArrayList< PTTrip > _trips;
     ArrayList< PTShot > _shots;
     ArrayList< PTReference > _references;
+    HashMap<String,Integer> stationsId;
 
     PTMapping _overview;
     PTDrawing _outline;
@@ -224,6 +226,8 @@ class PTFile
 
     PTFile()
     {
+      stationsId = new HashMap<String,Integer>();  // indices of stations (for TopoDroid export)
+
       _trips = new ArrayList< PTTrip >();
       _shots = new ArrayList< PTShot >();
       _references = new ArrayList< PTReference >();
@@ -439,6 +443,17 @@ class PTFile
       return _trips.size();
     }
 
+    private int getId( String name )
+    {
+      Integer intId = stationsId.get( name );
+      if ( intId == null ) {
+        int id = DistoXStationName.toInt( name );
+        stationsId.put( name, new Integer( id ) );
+        return id;
+      }
+      return intId.intValue();
+    }
+
     /**
      * @return number of shots
      */
@@ -453,10 +468,18 @@ class PTFile
       TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG,
                         "PT file add shot " + from + " " + to + " " + distance + " " + azimuth + " " + inclination );
       PTShot shot = new PTShot( distance, azimuth, inclination, roll, (extend == -1), trip );
-      if ( from.equals("-") ) from = "";
-      if ( to.equals("-") ) to = "";
-      shot.setFrom( from );
-      shot.setTo( to );
+      int id;
+      if ( from.length() == 0 || from.equals("-") ) {
+        shot.setFromUndefined();
+      } else {
+        shot.setFrom( getId( from ) );
+      }
+      if ( to.length() == 0 || to.equals("-") ) {
+        shot.setToUndefined();
+      } else {
+        shot.setTo( getId( to ) );
+      }
+
       shot.setComment( comment );
     
       _shots.add( shot );

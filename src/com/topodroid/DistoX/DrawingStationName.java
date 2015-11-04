@@ -85,7 +85,7 @@ public class DrawingStationName extends DrawingPointPath
   }
 
   @Override
-  public void draw( Canvas canvas, Matrix matrix )
+  public void draw( Canvas canvas, Matrix matrix, float scale )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingStationName::draw[matrix] LABEL " + mName );
     mTransformedPath = new Path( mPath );

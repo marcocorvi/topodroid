@@ -38,6 +38,21 @@
        android:defaultValue="false"
      />
 
+  <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_SURVEX_EOL"
+       android:title="@string/pref_survex_eol_title"
+       android:summary="@string/pref_survex_eol_summary"
+       android:defaultValue="0"
+       android:entries="@array/survexEol"
+       android:entryValues="@array/survexEolValue"
+       />
+
+   <CheckBoxPreference
+       android:key="DISTOX_SURVEX_SPLAY"
+       android:summary="@string/pref_survex_splay_summary"
+       android:title="@string/pref_survex_splay_title"
+       android:defaultValue="false"
+     />
 
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_BITMAP_SCALE"

@@ -14,6 +14,13 @@
        android:inputType="numberDecimal"
        android:defaultValue="1.2" />
 
+     <CheckBoxPreference
+       android:key="DISTOX_UNSCALED_POINTS"
+       android:summary="@string/pref_unscaled_points_summary"
+       android:title="@string/pref_unscaled_points_title"
+       android:defaultValue="false"
+     />
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_THICKNESS"
        android:title="@string/pref_line_thickness_title"

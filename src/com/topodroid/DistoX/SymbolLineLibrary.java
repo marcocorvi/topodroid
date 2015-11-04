@@ -55,6 +55,15 @@ class SymbolLineLibrary
   //   return l.isEnabled() ? l : null;
   // }
 
+  int getSymbolIndex( Symbol symbol ) 
+  {
+    for ( int k=0; k<mAnyLine.size(); ++k ) {
+      if ( symbol == mAnyLine.get(k) ) return k;
+    }
+    return -1;
+  }
+
+
   SymbolLine getAnyLine( int k ) 
   {
     if ( k < 0 || k >= mAnyLineNr ) return null;
@@ -81,7 +90,7 @@ class SymbolLineLibrary
     return false;
   }
 
-  private SymbolLine getSymbolAnyLine( String th_name ) 
+  SymbolLine getSymbolAnyLine( String th_name ) 
   {
     for ( SymbolLine l : mAnyLine ) {
       if ( th_name.equals( l.mThName ) ) return l;
@@ -175,6 +184,7 @@ class SymbolLineLibrary
 
     File dir = new File( TopoDroidPath.APP_LINE_PATH );
     if ( dir.exists() ) {
+      int systemNr = mAnyLine.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), locale, iso );
@@ -188,8 +198,24 @@ class SymbolLineLibrary
         }
       }
       mAnyLineNr = mAnyLine.size();
+      sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
+    }
+  }
+
+  private void sortSymbolByName( int start )
+  {
+    for ( int k=start+1; k<mAnyLineNr; ) {
+      SymbolLine prev = mAnyLine.get(k-1);
+      SymbolLine curr = mAnyLine.get(k);
+      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
+        mAnyLine.set( k-1, curr );
+        mAnyLine.set( k, prev );
+        if ( k > start+1 ) --k;
+      } else {
+        ++k;
+      }
     }
   }
 
@@ -241,6 +267,17 @@ class SymbolLineLibrary
     }
 
     // Log.v( TopoDroidApp.TAG, "lines " + mAnyLine.size() + " wall " + mLineWallIndex + " slope " + mLineSlopeIndex + " section " + mLineSectionIndex );
+  }
+
+  void setRecentLines( Symbol recent[] )
+  {
+    int k = 0;
+    for ( SymbolLine symbol : mAnyLine ) {
+      if ( symbol.mEnabled ) {
+        recent[k++] = symbol;
+        if ( k >= ItemDrawer.NR_RECENT ) break;
+      }
+    }
   }
  
   void makeEnabledListFromPalette( SymbolsPalette palette )

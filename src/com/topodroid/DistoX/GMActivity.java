@@ -598,8 +598,8 @@ public class GMActivity extends Activity
             mApp.updateCalibAlgo( mAlgo );
           }
           ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
-          new DistoXRefresh( mApp, handler ).execute();
-          // new DistoXRefresh( mApp, this ).execute();
+          new DataDownloadTask( mApp, handler ).execute();
+          // new DataDownloadTask( mApp, this ).execute();
         }
       } else if ( b == mButton1[1] ) { // toggle
         enableButtons( false );
@@ -630,7 +630,7 @@ public class GMActivity extends Activity
         if ( calib != null ) {
           List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
           if ( list.size() >= 16 ) {
-            ( new CalibCoverage( this, list, calib ) ).show();
+            ( new CalibCoverageDialog( this, list, calib ) ).show();
           } else {
             Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
           }

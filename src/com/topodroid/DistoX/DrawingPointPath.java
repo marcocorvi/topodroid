@@ -63,7 +63,7 @@ public class DrawingPointPath extends DrawingPath
     } else {
       mScale = SCALE_M;
     }
-    resetPath( 0 );
+    resetPath( 1.0f );
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }
 
@@ -88,25 +88,36 @@ public class DrawingPointPath extends DrawingPath
   }
 
 
+  // N.B. canvas is guaranteed ! null
+  @Override
+  public void draw( Canvas canvas, Matrix matrix, float scale )
+  {
+    if ( TopoDroidSetting.mUnscaledPoints ) {
+      resetPath( 4 * scale );
+    }
+    mTransformedPath = new Path( mPath );
+    mTransformedPath.transform( matrix );
+    drawPath( mTransformedPath, canvas );
+  }
+
   void setScale( int scale )
   {
     if ( scale != mScale ) {
       mScale = scale;
-      resetPath( 0 );
+      resetPath( 1.0f );
     }
   }
 
   int getScale() { return mScale; }
       
 
-  private void resetPath( int off )
+  private void resetPath( float f )
   {
     Matrix m = new Matrix();
     if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
       if ( DrawingBrushPaths.canRotate( mPointType ) ) {
-        m.postRotate( (float)mOrientation + off );
+        m.postRotate( (float)mOrientation );
       }
-      float f = 1.0f;
       switch ( mScale ) {
         case SCALE_XS: f = 0.50f; break;
         case SCALE_S:  f = 0.72f; break;
@@ -140,7 +151,7 @@ public class DrawingPointPath extends DrawingPath
     mOrientation = angle; 
     while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
     while ( mOrientation < 0.0 ) mOrientation += 360.0;
-    resetPath( 0 );
+    resetPath( 1.0f );
   }
 
   public String getText() { return null; }

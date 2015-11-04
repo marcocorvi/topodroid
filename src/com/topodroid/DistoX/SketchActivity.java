@@ -349,7 +349,7 @@ public class SketchActivity extends ItemDrawer
   // -------------------------------------------------------------------------
   // SYMBOL-CHOICE methods
   
-  public void areaSelected( int k ) 
+  public void areaSelected( int k, boolean update_recent ) 
   {
     if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
       mSymbol = SketchDef.SYMBOL_AREA;
@@ -358,7 +358,7 @@ public class SketchActivity extends ItemDrawer
     setTheTitle();
   }
 
-  public void lineSelected( int k ) 
+  public void lineSelected( int k, boolean update_recent ) 
   {
     if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mAnyLineNr ) {
       mSymbol = SketchDef.SYMBOL_LINE;
@@ -367,7 +367,7 @@ public class SketchActivity extends ItemDrawer
     setTheTitle();
   }
 
-  public void pointSelected( int p )
+  public void pointSelected( int p, boolean update_recent )
   {
     if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mAnyPointNr ) {
       mSymbol = SketchDef.SYMBOL_POINT;
@@ -1641,8 +1641,8 @@ public class SketchActivity extends ItemDrawer
           //      if there is an empty shot assign it
           setTitleColor( TopoDroidConst.COLOR_CONNECTED );
           ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
-          new DistoXRefresh( mApp, handler ).execute();
-          // new DistoXRefresh( mApp, this ).execute();
+          new DataDownloadTask( mApp, handler ).execute();
+          // new DataDownloadTask( mApp, this ).execute();
         } else {
           Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
         }
@@ -1656,7 +1656,11 @@ public class SketchActivity extends ItemDrawer
       } else if ( b == mButton2[2] ) { // redo
         mModel.redo();
       } else if ( b == mButton2[3] ) { // symbols
-        new ItemPickerDialog(this, this, mType ).show();
+        if ( TopoDroidSetting.mPickerType == TopoDroidSetting.PICKER_RECENT ) { 
+          new ItemRecentDialog(this, this, mType ).show();
+        } else {
+          new ItemPickerDialog(this, this, mType, mSymbol ).show();
+        }
 
       } else if ( b == mButton3[1] ) { // refine triangles
         //   extrudeRegion();

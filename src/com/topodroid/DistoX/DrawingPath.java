@@ -215,19 +215,14 @@ public class DrawingPath implements ICanvasCommand
   }
 
   // N.B. canvas is guaranteed ! null
-  public void draw( Canvas canvas, Matrix matrix )
+  public void draw( Canvas canvas, Matrix matrix, float scale )
   {
-    // if ( mType == DRAWING_PATH_AREA ) {
-    //   // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingPath::draw[matrix] area" );
-    //   mPath.close();
-    // }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingPath::draw[matrix] " + mPaint );
     mTransformedPath = new Path( mPath );
     mTransformedPath.transform( matrix );
     drawPath( mTransformedPath, canvas );
   }
 
-  private void drawPath( Path path, Canvas canvas )
+  protected void drawPath( Path path, Canvas canvas )
   {
     if ( mType == DRAWING_PATH_AREA ) {
       canvas.save();

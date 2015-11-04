@@ -2,10 +2,10 @@
 
 <resources>
 
-  <!-- TODO string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
-  </string-array -->
+  <string-array name="wallsType">
+     <item name="none">Нету</item>
+     <item name="convex">Свод</item>
+  </string-array>
 
   <string-array name="zoomCtrl">
      <item name="0">Выкл</item>
@@ -69,6 +69,7 @@
   </string-array>
 
   <string-array name="pickerType">
+     <item name="recent">Недавние</item>
      <item name="list">Список</item>
      <item name="grid">Сетка</item>
   </string-array>
