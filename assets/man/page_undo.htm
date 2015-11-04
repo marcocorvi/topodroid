@@ -1,0 +1,16 @@
+<html><body>
+
+<h4>The undo stack</h4>
+
+TopoDroid implements undo/redo with a stack of draw/erase/edit actions. When you draw something a draw action is put at the top of the stack. Undoing amounts to moving the stack pointer down the stack (beside affecting the sketch drawing). Redoing moves the stack pointer up (and add the drawing to the sketch).<br><p>
+
+The effect of the "continuation" drawing on the undo stack is that a new line is not created, and the line that has been continued is moved on top of the undo stack.<br><p>
+
+Erase and edit actions can also be undone/redone. However their effect on the stack is not as straightforward as for drawing.<br><p>
+
+Erasing is a raster operation while the drawing is made of vector items. The points of the vector items that come under the erased region are removed. This affects the undo stack in two way. Is an item is completely erased (eg, a point item), it is dropped from the stack. Undoing the erase action puts the item back, but at the top of the stack. Erasing the middle of a line remove the line object from the stack and replaces it with two lines that are added on the top of the stack.<br><p>
+For example, erasing can change the position of a line in the undo stack. Erasing the middle of a line drops the line from the stack and puts the two end pieces at the top of the stack. A following "undo" removes the two pieces and puts the line back, however at the top of the stack.<br><p>
+
+
+
+</body></html>

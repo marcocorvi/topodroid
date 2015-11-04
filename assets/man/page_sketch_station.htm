@@ -15,8 +15,19 @@ The sketch station point edit dialog has four actions:
 The "current" station is where the next downloaded shots will be attached. When a leg is downloaded (or inserted) the new station becomes the "current" station. By changing the "current" station you can continue surveying from a station in the middle of the survey.<br><p>
 
 <b>Midline hiding</b><br>
-Hiding stations [A] limits the display of the midline for this sketch. This is useful if when the survey is complicated or goes over itself. In this case you might want to see only a part of the midline. Select a station and tap the <u>note</u> button. Then you have the option to hide the previous or next stations. Repeat to show them again.
-Stations that limit the midline are colored in blue (when the previous are hidden) or red (when the next are hidden).<br>
+The display of the midline can be limited in a number of ways by editing a station properties ("note" buttons in "edit" mode),
+<ul>
+<li>show/hide the splays at the station: with this option the splays at the station are shown event if in general splays are not displayed.</li>
+<li>show/hide stations before the station ("hiding" station): TopoDroid carries out a data reduction for each sketch starting from the sketch origin station. This option hides/shows the piece of midline between the origin station and the station.</li>
+<li>show/hide stations after the station ("barrier" station): this option hides/shows the piece of midline beyod the station.</li>
+</ul>
+
+This feature is useful if when the survey is complicated or goes over itself. In this case you may want to see only a part of the midline.<br><p>
+
+Stations that limit the midline are colored in blue ("hiding" stations) or red ("barrier" stations).<br><p>
+
+Stations beyond a "barrier" station, are not automatically saved as Therion station points. Therefore, by choosing the sketch origin station inside the scrap and marking stations as barrier you can avoid spurious stations in the scrap file.<br><p>
+
 <img src="hiding_stations.png" alt="hiding stations"><br><p>
 
 </body></html>

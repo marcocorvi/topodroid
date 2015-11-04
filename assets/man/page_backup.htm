@@ -1,7 +1,16 @@
 <html><body>
 
-<h4>Sketch backup copies</h4>
-TopoDroid keep a set of four backup copies for each sketch file. These are named with suffixes "bck", "bck0", "bck1", and "bck2" and are stored in the <i>th2</i> subdirectory. Whenever a sketch is saved the backup copies are rotated (eg, "bck1" is renamed "bck2", and so on; "bck" is renamed "bck0"), the old "th2" file is renamed with suffix "bck", and the sketch is saved to a new "th2" file.<br><p>
+<b>Sketch exports</b><br>
+Sketches are stored in therion format. Exporting as <i>Therion</i> will save a new copy.<br><p>
+
+The cSurvey export file contains both the plan and the profile sketches. However it does not has the cross-sections. Cross-sections cannot be exported as cSurvey files, and you need to export as images if you want to use them for postprocessing with cSurvey.<br><p.
+
+The resolution of PNG images is an adjustable setting. However a larger and more detailed image requires more CPU time and may fail due to memory limits. If it fails TopoDroid tries reducing the resolution until it succeeds exporting the sketch as PNG image file.<br><p>
+
+<b>Sketch backup copies</b><br>
+A sketch is saved whenever it is modified. TopoDroid maintains <a href="page_backup.htm">backup</a> copies of sketch files, from which a skatch can be recovered (menu "reload" of the sketch window).</li>
+
+TopoDroid keeps a set of four backup copies for each sketch file. These are named with suffixes "bck", "bck0", "bck1", and "bck2" and are stored in the <i>th2</i> subdirectory. Whenever a sketch is saved the backup copies are rotated (eg, "bck1" is renamed "bck2", and so on; "bck" is renamed "bck0"), the old "th2" file is renamed with suffix "bck", and the sketch is saved to a new "th2" file.<br><p>
 
 TopoDroid saves a sketch whenever it is modified (eg, a new item is added, or part of the sketch is erased) while it is open. Only one backup is used in this case: the old saved copy being renamed with suffix "bck".<br><p>
 

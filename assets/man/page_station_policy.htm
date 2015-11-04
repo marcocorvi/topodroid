@@ -1,0 +1,28 @@
+<html><body>
+
+<h4>Station assignment policies</h4>
+
+When you download data TopoDroid can automatically assign them station names. A repeated measurement is considered a leg shot, the others are splay shots.  If you stick to a convention taking measurements TopoDroid automatic station assignment can be very handy. TopoDroid supports a number of conventions to automatically assign stations to shots. You can select the one that fits your habits through the settings.
+<ul>
+<li>at the "From" station: you take splays first and then forward leg shot(s). This is the default convention.</li>
+<li>at the "From" station: you take the forward leg shot(s) first, and then the splays</li>
+<li>at the "To" station: you take splays first and then backward leg shot(s)</li>
+<li>at the "To" station: you take backward leg shot(s) first and then splays</li>
+<li>at a station: you take the backshot to the previous station, next the splay shots, and finally the forward shot to the next station.</li>
+</ul><br><p>
+
+A survey with compensation of the local magnetic anomaly must use the last policy.<br>
+Examples of the five conventions (shots takes at the same station are grouped in parenthesis):
+<ul>
+<li> ... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... </li>
+<li> ... (1-2 1-. 1-. 1-.) (2-3 2-. 2-.) ... </li>
+<li> ... (2-. 2-. 2-. 2-1) (3-. 3-. 3-2) ... </li>
+<li> ... (2-1 2-. 2-. 2-.) (3-2 3-. 3-.) ... </li>
+<li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... </li>
+</ul><br>
+
+Sequence a-b-c-d for the first (forsight) and the third (backsight) policies.<br>
+<img src="survey_policy.png">
+<br>
+
+</body></html>

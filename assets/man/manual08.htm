@@ -1,13 +1,13 @@
 <html><body>
 <h3>[8] SURVEY DATA WINDOW</h3>
 
-<i>Back to the main window. The list of surveys is empty, but you are finally ready for your first survey. Tap on the <u>Add</u> button (the "plus" sign). You get a dialog to specify the survey information: <u>name</u>, <u>date</u>, <u>team</u>, <u>initial</u> survey station, magnetic <u>declination</u>, and a brief <u>description</u>.</i><br><p>
+<i>At first the list of surveys in the main window is empty. To add a new survey tap on the <u>Add</u> button (the "plus" sign). You get a dialog to specify the survey information: <u>name</u>, <u>date</u>, <u>team</u>, <u>initial</u> survey station, magnetic <u>declination</u>, and a brief <u>description</u>.</i><br><p>
 
 The survey name is mandatory. It must be unique in the database. The survey names are used to list surveys in the main window and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database). The date is pre-filled with the current date. Team and description are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them. The magnetic declination is 0.0 by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].<br><p>
 
 <b>WARNING.<br>
-The name of the survey cannot contain the character '/' (slash), which is the pathname separator.<br>
-The date must be written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06".</b><br><p>
+The name of the survey cannot contain the character '/' (slash), which is the pathname separator.</b><br>
+The date is written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06".<br><p>
 
 Save when you are done, and the new survey name will appear in the list of surveys.  A long tap on a survey name opens the survey info dialog again. You can change any information. The survey name is special, because once the survey has been committed to the database, the name is used to refer to it. There is a menu to modify the survey name.<br><p>
 
@@ -20,10 +20,8 @@ TopoDroid differentiates among four kinds of shots:
 <li>"leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
 <li>"repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
 </ol><p>
-Each kind of shots is displayed with a different color: "legs" are white, "repeated-legs" grey, "splays" blue, "blank" red. Furthermore the background color is blueish for the last downloaded shots, and reddish for "unreliable" shots, ie. shots with "abnormal" field intensities (only DistoX2).</br>
+Each kind of shots is displayed with a different color: "legs" are white, "repeated-legs" grey, "splays" blue, "blank" red. Furthermore the background color is blueish for the last downloaded shots, and reddish for <a href="page_accuracy.htm">unreliable</a> shots, ie. shots with "abnormal" field intensities (only DistoX2).</br>
 <img src="shots_list.png" alt="shots list"/><p>
-
-The "reliability" of a shot is estimated by comparing the intensities of the magnetic and gravitational fields and the dip angle of the magnetic field with their averege values, respectively. If any of these differs from the average by more that a specified threshold, the shot is deemed "unreliable". The thresholds are among the app settings.<br><p>
 
 <h4>MENUS</h4>
 <ul>
@@ -45,16 +43,16 @@ The "reliability" of a shot is estimated by comparing the intensities of the mag
 <li><u>Sketch</u>: opens the Sketch dialog where you can ask the program to create a new sketch or open an existing one. The dialog has a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in profile view; once open in a view you can switch to the other from within the sketch window). If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches. A long tap on the <u>Sketch</u> button opens immediately the most recent sketch, without going through the sketch list dialog.</li>
 <li><u>Notes</u> opens the dialog to edit the annotations of the survey</li>
 <li><u>Extend</u> opens the "Extend reference" dialog that defines how to set the "extend" for the coming shots (either downloaded or manually entered).</li>
-<li><u>Stations</u> [N]: this buttons opens the dialog for the saved stations</li>
-<li><u>Add</u> [N] adds a shot. In the coming dialog you must enter the shot stations and data (length, azimuth, and clino). You can specify also the direction of "extend", and values for LRUD. By default these are assumed at the FROM station, unless you check the box for the TO station.</li>
+<li><u>Stations</u> [N]: <a href="page_stations.htm">saved stations</a> dialog.</li>
+<li><u>Add</u> [N] adds a shot <a href="page_manual.htm">manually</a> entering the shot data.</li>
 </ul><br><p>
 
 <h4>SURVEY SETTINGS</h4>
 <ul>
-  <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. You can write your name and that of the cavers you usually survey with.</li>
-  <li><i>Stations policy</i>: this tells the program how to automatically assign survey stations to the shots. (This is further explained below).</li>
+  <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with.</li>
+  <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station assignment policy.</a></li>
   <li><i>Station names</i> specifies the type of the station names, either alphanumeric (default) or numeric [B].</li>
-  <li><i>Initial station name</i>: the default first station name for new surveys. Can be also changed in the <i>New survey</i> dialog.</li>
+  <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog.</li>
   <li><i>Thumbnail size</i>: size of the photo thumbnails</li>
   <li><i>DATA UNITS >></i>
     <ul style="margin-top:0; margin-bottom:0">

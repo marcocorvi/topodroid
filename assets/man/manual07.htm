@@ -15,36 +15,31 @@ group average direction, in degrees</li>
 
 The calibration data are displayed with red and blue text-color, alternating between even and odd group numbers. Data with no group are grey.<br><p>
 
-Tapping on a calibration item in the list brings up a dialog through which you can set the item group (use positive integers). The dialog has a text field to input the group number, and three buttons:<br>
-<img src="gm_btns.png"><br>
-<ol>
-<li>if the <i>Regroup</i> button is checked, when you save your changes, TopoDroid recomputes the items groups starting at that item, using the current group policy.</li>
-<li>the <i>Save</i> button saves the group number and closes the dialog.</li>
-<li>the <i>Delete</i> button "deletes" the item and closes the dialog. Deleted item, by default, they are not listed in the display. You can toggle their display with the <u>Display</u> menu. Deleted items are shown with a grey background. If you tap on a deleted item you get a dialog to undelete the item.</li>
-</ol><br><p>
-
 
 <h4>MENUS</h4>
 <ul>
-<li><u>Display</u>. This menu toggles whether to display all data including the deleted measurements.</li>
-<li><u>Settings</u>. These are the same as for the calibration window.</li>
+<li><u>Display</u>: whether to display all data including the deleted data.</li>
+<li><u>Settings</u>: same as for the calibration window.</li>
 <li><u>Help</u></li>
 </ul><br><p>
 
 <h4>BUTTONS</h4>
 <ul>
-<li><u>Download</u>: this is the button you use to get the data from the DistoX.  At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data.  Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
-disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data) are not taken into account in the group assignment policy.</li>
-<li><u>Mode-toggle</u>: it is the same as in the Device window. Use it to toggle the DistoX calibration mode on and off</li>
+<li><u>Download</u>: this is the button you use to get the data from the DistoX.</li>
+<li><u>Mode-toggle</u> toggles the DistoX calibration mode on and off</li>
 <li><u>Groups</u> divides the calibration data into groups automatically.</li>
 <li><u>Distribution</u> displays the angular data distribution.</li>
-<li><u>Compute</u> computes the calibration coefficients and shows the result in a dialog.</li>
-<li><u>Read</u> reads the coefficients from the DistoX, shows them in a calibration coefficients dialog. (Just like the same button in the Device window)</li>
+<li><u>Compute</u> computes the calibration coefficients and shows the result.</li>
+<li><u>Read</u> displays the coefficients stored in the DistoX.</li>
 <li><u>Write</u> writes the calibration coefficients to the DistoX. This button is enabled only after the calibration coefficients have been computed.</li>
 </ul><br><p>
 
+At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data.  Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
+disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data).
+Deleted data are not taken into account in the group assignment policy.<br><p>
+
 <hr>
-<i>Now you can toggle your DistoX calibration mode on. Take the measurements, download them, assign groups, check that the data cover all angles, compute the coefficients and write them to the DistoX. Your device is calibrated and ready for surveying. Turn the calibration mode off, and go back to the main window.</i><br><p>
+<i>Basically you toggle your DistoX calibration mode on, take the measurements, download them, assign groups, check that the data cover all angles, compute the coefficients and write them to the DistoX. Your device is calibrated and ready for surveying. Turn the calibration mode off, and go back to the main window.</i><br><p>
 
 <a href="page_groups.htm">Calibration data groups</a><br>
 <a href="page_coverage.htm">Calibration data distribution</a><br>

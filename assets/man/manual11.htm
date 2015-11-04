@@ -4,23 +4,19 @@
 The first time you tap the Sketch button the dialog you get contains only the "New Sketch" button. Tap on it. The coming dialog contains two fields:
 <ul>
 <li>the sketch <u>name</u>. TopoDroid suggest a number, and you can safely leave it. The sketch filenames are obtained composing the survey name with the name in this field. For example if the survey is "MySurvey" and the sketch is "1", the plan filename is "MySurvey-1p.th2" and the profile filename is "MySurvey-1s.th2". They are placed in the directory "th2" of TopoDroid</li>
-<li>the sketch <u>origin</u> station (base station). This is very important as all the sketch data will have coordinates relative to this station. You should choose a station that is inside the sketch, because, in order to keep the sketch as clean as possible, you can limit the midline display for the sketch not to go beyond certain stations (this mechanism is called "barrier". When editing a station you can mark it as a "barrier" to the midline display for the sketch. Stations beyond a "barrier" are not included in the Therion files.</li>
+<li>the sketch <u>origin</u> station (base station). This is very important as all the sketch data will have coordinates relative to this station. You should choose a station that is inside the sketch to benfit of the <a href="page_sketch_station.htm">midline hiding<a> features.</li>
 </ul><br><p>
-
-It is also possible to hide pieces of midline between the origin station and other stations. These are called "hiding" stations.Stations names are shown in pink, barrier stations are red, and hiding stations are violet.<br><p>
 
 <b>WARNING. The name of the sketch cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
 
-So type in a station name, and tap the <u>OK</u> button.  And you go to the sketch window.<br><p>
+So type in the name of the origin station, and tap the <u>OK</u> button.  And you go to the sketch window.<br><p>
 
-Each sketch is made of two Therion 2D sketch files: one for the plan, the other for the profile. Of course you can draw cross sections, but we will get to them later. The sketch window opens with the plan by default.  Afterwards the sketch dialog shows two columns, and you can open a sketch starting either in the plan view or in the profile view. In any case TopoDroid is always opening the two sketch files, and just showing the one you choose.<br><p>
-
-<i>Therion</i> scraps must have a scale defined or at least two stations (so that <i>Therion</i> can compute the scale). TopoDroid has an option to automatically add all the stations that fall in the convex hull of the sketch to the scrap. This is enabled by default. However this may not be convenient if you work with xtherion and stations from other portions of the survey fall inside the scrap so that you get many "spurious" point stations. In this case you might want to disable this option and decide by yourself which station to add to the scrap.<br><p>
+Each sketch is made of two Therion 2D sketch files: one for the plan view, the other for the profile view. Of course you can draw cross sections, but we will get to them later. The sketch window opens with the plan view by default.  Afterwards the sketch dialog shows two columns, and you can open a sketch starting either in the plan or in the profile view. In any case TopoDroid always loads the two sketch files. It just displays the chosen view.<br><p>
 
 <b>NOTE</b><br>
 The first time you open a sketch TopoDroid loads the drawing tools (the palette). This may take some time if your Android is not powerful because the program has to read in many files (one for each tool). Afterwards opening a sketch is usually faster.<br><p>
 
-You have not drawn anything yet, and the canvas will display a grid (each little square is 1 m, the big squares are 10 m), the midline (with both legs and splays), and the stations. These objects are the references to help you drawing the sketch. They are usually very handy however you can choose to hide any of them, if you want to focus on what you have drawn, for editing purposes.<br><p>
+You have not drawn anything yet, and the canvas will display a grid (each little square is 1 m, the big squares are 10 m, and the very big ones 100 m), the midline (with both legs and splays), and the stations. These objects are the references to help you drawing the sketch. They are usually very handy however you can choose to hide any of them, if you want to focus on what you have drawn, for editing purposes.<br><p>
 
 The sketch window has four modes:
 </ul>
@@ -30,9 +26,8 @@ The sketch window has four modes:
 <li><b>edit</b> [A]: for the fine editing. Shift and zoom are still available, as for the "move" mode.</li>
 </ul><br><p>
 
-Sketch shifting and zooming is possible even in <b>draw</b> and in <b>erase</b> mode using two fingers. If zoom controls are enabled they show up when you tap at the bottom of the canvas in the middle. Finally, in every mode, the sketch can be shifted by "dragging" on the left, right and bottom sides of the canvas.<br><p>
+Sketch shifting is possible even in <b>draw</b> and in <b>erase</b> mode using two fingers. Zoom controls can be enabled (either temporarily or permanently). If temporary, they show up when you tap at the bottom of the canvas in the middle. If "side-dragging" is enabled, the sketch can be shifted by "dragging" it from the left, right and bottom sides of the canvas.<br><p>
 
-N.B. Erasing is a raster operation. The points of the vector items that come under the erased region are removed. This affects the undo stack in two ways: first erased items are dropped from the stack, second erasing the middle of a line remove the line object from the stack and replaces it with two lines that are added on the top of the stack.<br><p>
 
 <h4>BUTTONS</h4>
 The modes are represented by the three green buttons on the left: <u>draw</u>, <u>erase</u>, and <u>edit</u>. When none of them is "on" (has a white frame around) the mode is "move", otherwise it is that of the button that is "on".<br><p>
@@ -40,10 +35,10 @@ The modes are represented by the three green buttons on the left: <u>draw</u>, <
 The remaining buttons differ by the mode. In the <b>move</b> mode they are
 <ul>
 <li><u>Download</u> downloads data from the DistoX. The latest downloaded shot are bluish to help you distinguish them from the others. If no DistoX is selected, this button is hidden.</li>
-<li><u>Bluetooth</u>: Opens the Bluetooth dialog that allows you to control the laser, take a measurement and download it, and reset the BT connection. If you experience problems with the DistoX after downloading some data, you may try to reset the bluetooth connection on TopoDroid, switch the DistoX on and off, and retry downloading the data.</li>
-<li><u>Reference</u>: to choose which reference to display. The drawing references are the midline, the splay shots, the station names, and the metric grid.</li>
-<li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the profile. Profile flip (long tap) [E].</li>
-<li><u>Extend</u>: this is the same as the <u>Extend</u> button of the Survey Data window</li>
+<li><u>Bluetooth</u> dialog.</li>
+<li><u>Reference</u>: to choose which reference to display: midline, splay shots, stations, and metric grid.</li>
+<li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the profile.</li>
+<li><u>Extend reference</u>: same as the <u>Extend</u> button of the Survey Data window</li>
 <li><u>Notes</u>: to edit the survey annotations</li>
 </ul><br><p>
 
@@ -51,13 +46,13 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <ul>
 <li><u>Undo</u> removes the last items you have drawn, one at a time.</li>
 <li><u>Redo</u> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
-<li><u>Drawing tool</u> picker. By default the tool picker lists the tool graphics and the name. Once you are used to the graphics, you can switch to the more compact grid view without the names, with the appropriate setting. You can farther limit the displayed tools, by disabling the ones you do not need through the "palette" menu.</li>
-<li><u>Continuation</u> [N]. When this button is pressed a line started close to the end of another line of the same type is considered as its continuation and is attached to that. Note that a new line is not created, and "undoing" the drawing action removes the whole line.</li> 
+<li><u>Drawing tool</u> picker, to select the drawing tool from the <a href="page_tools.htm">palette</a></li>
+<li><u>Continuation</u> [N]. When this button is pressed a line started close to the end of another line of the same type is considered as its continuation and is attached to that. A new line is not created, and the line that has been continued is moved on top of the undo stack.</li> 
 </ul><br><p>
 
-The <b>erase</b> mode has the <u>Undo</u> and <u>Redo</u> buttons. The erasing actions can be un-done and re-done just like any drawing actions. However, erasing can affects the position of a line in the list of undo's. Erasing the middle of a line drops the line from the list and puts the two end pieces at the end of the list. The "undo" removes the two pieces and puts the line at the end of the list.<br><p>
+The <b>erase</b> mode has the <u>Undo</u> and <u>Redo</u> buttons.<br><p>
 
-The <b>edit</b> [A] mode has four buttons besides the green ones:
+The <b>edit</b> [A] mode has, besides the green buttons:
 <ul>
 <li><u>Previous</u> to go to the previous point in the selection. To do some editing you must select a point (either a point, a line/area point, a station, or a shot midpoint). To do this you tap near the point you want; however if there are several points close by the result is a selection set containing several point, only one of them is the active editing point.  You move among them with the "Previous" and "Next" buttons.</li>
 <li><u>Next</u> to go to the next point in the selection.</li>
@@ -68,12 +63,11 @@ The <b>edit</b> [A] mode has four buttons besides the green ones:
 
 <h4>MENUS</h4>
 <ul>
-<li><u>Export</u>: the sketch can be exported as <i>Therion</i> 2D file(s), <i>cSurvey</i> (a single file), PNG (two files), DXF (two files), and SVG (two files). Sketches are stored in therion format. Exporting as <i>Therion</i> will save a backup copy. A backup copy is also made by TopoDroid when you switch sketch type. If you experience a problem with the opened sketch, try to recover it from the backup copy (<u>reload</u> menu). Cross-sections cannot be exported as cSurvey files<br>
-PNG resolution can be increased if you get a too coarse image. You will get a larger and more detailed image, but this requires more CPU time and may fail due to memory limits. If it fails TopoDroid tries reducing the resolution until it succeeds.</li>
+<li><u>Export</u>: the sketch can be exported as <i>Therion</i> 2D file(s), <i>cSurvey</i> (a single file), PNG (two files), DXF (two files), and SVG (two files). See <a href="page_backup.htm">export and backup</a>.</li>
 <li><u>Stats</u> displays some statistics (beware that these are limited to the extent of the data reduction of the sketch)</li>
-<li><u>Reload</u>: to reload the sketch from the backup copy</li>
-<li><u>Delete</u>: this marks the sketch as deleted. It can be later recovered as the sketch files are not actually deleted, nor the sketch record is dropped from the database table</li>
-<li><u>Palette</u>: to choose the active drawing tools</li>
+<li><u>Reload</u>: to reload the sketch from the backup copy. See <a href="page_backup.htm">export and backup</a>.</li>
+<li><u>Delete</u> marks the sketch as deleted. It can be later recovered as the sketch files are not actually deleted, nor the sketch record is dropped from the database table</li>
+<li><u>Palette</u>: to choose the <a href="page_tools.htm">drawing tools</a></li>
 <li><u>Overview</u>: opens the overview window which shows all the survey sketches together.</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
@@ -115,10 +109,12 @@ PNG resolution can be increased if you get a too coarse image. You will get a la
 
 <b>Warning. If the sketch disappear from the display, switch between plan and profile to force TopoDroid to reload it.</b><br><p>
 
-
 <hr>
 <i>To start drawing select the <b>draw</b> mode (green pencil button) and trace lines with your finger. If you make a mistake you can cancel the whole line with the <u>undo</u> button, or switch to the <u>erase</u> mode.  The drawing is saved in a pair of <i>Therion</i> files when you exit the sketch window. Each cross-section is saved in a single separate Therion file.</i><br><p>
 
+<a href="page_therion_stations.htm">Therion station points</a><br>
+<a href="page_bluetooth.htm">Bluetooth dialog</a><br>
+<a href="page_undo.htm">Undo stack</a><br>
 <a href="page_stat2.htm">Sketch statistics</a><br>
 <a href="page_shift.htm">Sketch shift and flip</a><br>
 <a href="page_backup.htm">Backup and recovery</a><br>

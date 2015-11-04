@@ -10,10 +10,10 @@ To exit TopoDroid main window double tap on the <i>BACK</i> button of your devic
 
 <h4>MENUS</h4>
 <ul>
-<li><u>Palette</u> allows to choose the drawing tools that are enabled. TopoDroid has many drawing tools, several of which you might not need. Having only the relevant ones enabled in the palette, makes faster to switch among them in the <u>Tool Picker</u> dialog.</li>
-<li><u>Cosurvey</u> [E] opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying [experimental level only].</li>
-<li><u>Settings</u>. With this you can choose all the program settings: the global ones and those of surveying, sketching, calibrating, and devices. There are many adjustable settings. The default values should be reasonable enough. One thing you might want to change are the "display units" for lengths; you can choose between meters (default) and feet. Beware that this is just a unit conversion in the display; internally, in the database, TopoDroid stores lengths in meters. Other settings you might want to change are the buttons and texts sizes, and the drawing units.</li>
-<li><u>Logs</u> [E] allows to decide what to log and whether to save to the system log or to a file (in the TopoDroid directory). By default logs are sent to the system log and only error messages are logged. Logging is mostly for debugging [experimental level only]</li>
+<li><u>Palette</u> allows to choose the <a href="page_tools">drawing tools</a> that are loaded.</li>
+<li><u>Cosurvey</u> [E] opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying.</li>
+<li><u>Settings</u>: all the program settings.</li>
+<li><u>Logs</u> settings [E]. <a href="page_log.htm">Logging</a> is mostly for debugging app error.</li>
 <li><u>About</u>: the program welcome message</li>
 <li><u>Help</u> shows a brief descriptions of buttons and menus. At the top-right corner there is a button that opens this user manual. Each TopoDroid window has a similar <u>Help</u> menu.</li>
 </ul><br><p>
@@ -22,26 +22,23 @@ To exit TopoDroid main window double tap on the <i>BACK</i> button of your devic
 <ul>
 <li><u>Device activity</u> (DistoX icon): switches to the Device (management) window</li>
 <li><u>Add</u> (a plus sign): used to create a new survey</li>
-<li><u>Import</u> (a vertical arrow): used to import ZIP archives created with TopoDroid or survey files (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, or <i>PocketTopo</i>).</li>
+<li><u>Import</u> (a vertical arrow): used to import TopoDroid ZIP archives or survey files (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, <i>PocketTopo</i>).</li>
 <li>The optional buttons [E] are for the <i>ThManager</i> (Therion manager) and the <i>SQLite viewer</i>; both require external apps</li>
 </ul><br><p>
 
 <h4>SETTINGS</h4>
 <ul>
-<li><i>Work directory</i> sets the current work directory. By default this is "TopoDroid", but it can be changed to another directory in the primary external memory.</li>
-<li><i>Language</i>. The available languages are: English, French, German, Italian, Russian, Spanish and Bulgarian. If no language is selected the system language is used (or English).</li>
+<li><i>Work directory</i> sets the <a href="page_cwd.htm">current work directory</A>. By default this is "TopoDroid".</li>
+<li><i>Language</i> overrides the system default <a href="page_language.htm">language</a> with a built-in language.</li>
 <li><i>Text size</i> of items in the lists</li>
-<li><i>Buttons size</i>, either "small" or "large". The small buttons are suitable to a 5" screen. You might want to switch to large buttons if you use a 7" tablet.</li>
-<li><i>Keyboard</i>: whether to enable or disable the TopoDroid keypads.</li>
-<li><i>Activity level</i>: TopoDroid has four activity levels, differing in the amount of functions that are enabled. The default level ("normal") provides the most common functions. In this way the interface can be kept free of unnecessary buttons (and menus). </li>
+<li><i>Buttons size</i>, either "small" or "large": small buttons for a 5" screen, large buttons for 7" tablets.</li>
+<li><i>Keyboard</i> enables or disables the TopoDroid <a href="page_keypad.htm">keypads</a>.</li>
+<li><i>Activity level</i> selects the activity level [default "normal"].</li>
 <li><i>Cosurveying</i> [E] activate/deactivate the cosurveying service (very experimental).</li>
 </ul><br><p>
 
 <hr>
 If <b>bluetooth</b> is not on, the app asks whether to turn it on. Without bluetooth it cannot communicate with the DistoX and the survey data can only be entered manually. In this case the <i>Download</i> button in the Shot window is hidden, and that in the Sketch window is replaced by the <i>Add</i> button.<br><p>
-
-When the app starts the first time it installs the drawing tools files in the "symbol" directory. There are files for points (iconic symbols, like "entrance", or "stalagmite"), lines (like "wall", or "pit"), and areas (regions shown with a transparent color). If you have upgraded the app to a new version it asks if you want to reinstall the drawing tools.<br>
-Even if TopoDroid comes with many drawing tools preinstalled (45 points, 15 lines, and 9 areas), it can happen that it does not contains the tools you need (or you do not like the one provided). The tool files are plain text files, and you can write your own tool file(s). After you put them in the symbol subdirectories, TopoDroid will see and use them. The syntax of the tool files is described in a page on the speleoapps website.<br><p>
 
 <a href="page_import.htm">Survey import</a><br>
 <a href="page_language.htm">Language</a><br>
