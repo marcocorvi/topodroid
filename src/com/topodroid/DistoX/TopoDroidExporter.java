@@ -178,11 +178,12 @@ class TopoDroidExporter
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
               pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
-              pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\" />\n");
+              pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
-                pw.format("<!-- comment=\"%s\" -->\n", com );
+                pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
+              pw.format(" />\n");
               n = 0;
               ref_item = null; 
             }
@@ -196,10 +197,11 @@ class TopoDroidExporter
             if ( extend == -1 ) pw.format(" direction=\"1\"");
             pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                item.mLength, item.mBearing, item.mClino );
-            pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\" />\n");
+            pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("<!-- comment=\"%s\" -->\n", item.mComment);
+              pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
             }
+            pw.format(" />\n");
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
@@ -215,11 +217,12 @@ class TopoDroidExporter
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
               pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
-              pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\" />\n");
+              pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
-                pw.format("<!-- comment=\"%s\" -->\n", com );
+                pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
+              pw.format(" />\n");
               n = 0;
               ref_item = null; 
             }
@@ -233,10 +236,11 @@ class TopoDroidExporter
             if ( extend == -1 ) pw.format(" direction=\"1\"");
             pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                item.mLength, item.mBearing, item.mClino );
-            pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\" />\n");
+            pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
-              pw.format("<!-- comment=\"%s\" -->\n", item.mComment);
+              pw.format(" note=\"%s\"", item.mComment.replaceAll("\"", "") );
             }
+            pw.format(" />\n");
           } else { // BOTH FROM AND TO STATIONS
             if ( n > 0 && ref_item != null ) {
               b = TopoDroidUtil.in360( b/n );
@@ -249,11 +253,12 @@ class TopoDroidExporter
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
-              pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\" />\n");
+              pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
               if ( com != null && com.length() > 0 ) {
-                pw.format("<!-- comment=\"%s\" -->\n", com);
+                pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
+              pw.format(" />\n");
               // n = 0;
             }
             n = 1;
@@ -289,11 +294,12 @@ class TopoDroidExporter
            // if ( bck ) { pw.format(" backshot=\"1\"");  /* bck = false; */ }
         }
         pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
-        pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\" />\n");
+        pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
         if ( com != null && com.length() > 0 ) {
-          pw.format("<!-- comment=\"%s\" -->\n", com);
+          pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
           // com = null;
         }
+        pw.format(" />\n");
       }
       pw.format("  </segments>\n");
 
