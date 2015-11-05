@@ -1,58 +1,80 @@
 <html><body>
-<h3>[13] CROSS-SECTIONS</h3>
+<h3>[13] IMPORT EXPORT </h3>
+When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey, and its exports. You can use it to transfer the survey to another android.<br>
 
-Cross-sections are kind of special. To tell TopoDroid that you want to draw a cross-section you have to draw a "section" line, either in the plan view or in the profile view. The section line defines the position of the cross-section and its orientation.<br><p>
+After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to. The support of other cave survey file format in import may not be complete.<br><p>
 
-A cross-section is the shape of the cave in a plane that cuts it. The orientation of the cross-section is the orientation of this plane, ie, the orientation of the line perpendicular to the plane, and pointing in the direction of sight. You define the orientation of the cross-section by the way you trace the section line. As an indicator the section line has a tick pointing from the line to the direction of view of the cross-section.<br>
-The size of this "tick" can be adjusted in the <u>Settings</u> dialog.<br><p>
+<h4>Therion</h4>
+<i>Therion</i> is the cave map drafting program of choice for TopoDroid. Sketches are "natively" saved as Therion files. Beware that TopoDroid does not add to closed lines (in particular area borders) an extra point coinciding with the first point, as "xtherion" does.<br>
 
-You can choose between a photo cross-section (taken with the camera), and a sketch cross-section. In the first case just take a photo that will remind you of the shape of the gallery when you will be drafting the cave map. Make sure to have a fellow caver in the picture who will serve as a size reference.<br><p>
+Survey data are exported in <i>Therion</i> format, using the data "normal" form. The team names are listed but the command is commented. Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br>
 
-In the second case you sketch the cross section on a canvas with the usual drawing tools of TopoDroid. As a reference TopoDroid displays the leg shot traversed by the cross section and the splay shots at its endpoints. The station in front(the one that the cross-section is looking at) is centred in the grid. The splay shots in front are light grey, those behind are thinner darker grey. All the shots are displayed projected on the plane of the cross section.
-Once closed, cross-sections can be opened again and modified by selecting the relative section line in "edit" mode and tapping the <u>Edit</u> button.<br><p>
+TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion commands "units", "flag", and "extend" are supported.<br><p>
 
-A cross-section can be either "vertical" or "horizontal", depending on how the plane intersects the cave passage.<br><p>
+<h4>Compass</h4>
+<i>Compass</i> data file are supported both in input and in export.<br><p>
 
-<b>Cross-sections in the plan view</b><br>
-Cross-sections defined in the plan view are always "vertical" (zero inclination). Their orientation (ie, the azimuth of the cross-section plane) is determined by the angle of the section line. Very often they are perpendicular to the gallery, but can be drawn at any angle needed. For example, a section line drawn from left to right(e.g. horizontal, angle 90 degrees from the vertical) has a direction of view to the North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30 degrees.<br>
-The crossed leg is displayed vertical when the cross-section has the same azimuth as the leg. Otherwise it is tilted right or left.<br>
+<h4>Walls</h4>
+Survey data can be exported as <i>Walls</i> files.<br><p>
 
-<img src="plan-xsection.png" caption="Plan view cross section">
-<br><p>
+<h4>Survex</h4>
+Survey data can be exported as <i>Survex</i> files.<br>
+There are two settings, related to Survex export: the line termination can be either Unix or Windows, and the splay shots can be exported with a named TO station. In this case the TO station is named as the FROM station with a letter appended.<br><p>
 
-<b>Cross-sections in the profile</b><br>
-Cross-sections in the profile view can be either "horizontal"(on vertical shots in pits) or "vertical"(on more or less horizontal galleries). They are considered "horizontal" if their inclination exceeds the value of the H-threshold setting.<br>
-The inclination is determined by that of the the section line.<br><p>
+<h4>VisualTopo</h4>
+<i>VisualTopo</i> data file are supported both in input and in export.<br><p>
 
-"Horizontal" cross-sections are displayed always with the North up. Furthermore, a reference line 5 m long, oriented to the North, is added to them. The leg is shown at its azimuth<br>
-"Vertical" cross-sections always have the azimuth of the crossed leg (or the opposite one if the direction of the section line is the opposite of that of the leg). The crossed leg is displayed vertical as the cross-section has the same azimuth as the leg.<br><p>
+<h4>PocketTopo</h4>
+TopoDroid supports <i>PocketTopo</i> both in import and in export.
+However, <i>PocketTopo</i> exports contain only the survey data, while, on import, "outline" and "profile" sketches are imported as Therion files. As <i>PocketTopo</i> uses only a few colors to differentiate line types, a map from colors to therion_types is used. The line and point types are selected through a setting.<br><p>
 
-If the section line is traced from the right to left, the cross-section is oriented downwards and has -90 degrees inclination. This is a "horizontal" cross-section as seen from above. Most of the times you will want to draw "horizontal" cross-sections this way, as it is more natural to lay a map on a surface and look down at it. If you trace the section line from left to right the cross-section is oriented upwards (inclination +90 degrees).<br><p>
- 
-<img src="profile-xsection.png" caption="Profile view cross section">
-<br><p>
+It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch [A] in the <i>Sketch</i> window, to fit the centerline.<br><p>
 
-<b>At-station cross-sections</b> [E]<br>
-The "Station" dialog, that you get by tapping on a station point in <i>Edit</i> mode, displays the station coordinates
-and has two or three buttons:
-<
-<li>"Continue the survey from here" sets the station as that to which the next shot will be attached</li>
-<li>"Break midline display" marks (or unmarks) the station as a terminal point in the survey centerline data reduction</li>
-<li>"X-Section" [E] opens a sketch window to draw a cross section at the station.</li>
-</ul>
+On export station names with alphabetic characters must be converted to integer number. In this case TopoDroid replaces each character with two digits. More precisely 'a' goes to '00', 'b' to '01' and so on, 'A' to '50', 'B' to '51', and so on. Every other character (ie, non-alphanumeric) goes to '99'. 
 
-If the average shot clino is smaller than the "vertical threshold", the cross section at a station is drawn in a vertical plane passing through the station, otherwise it is horizontal.
-The cross-section at a station is useful when you take several splay shots around the station to describe the shape of the gallery. 
-If there are two shots at the station the section plane is oriented along the bisectant of the angles formed by the (horizontal projections of the) shots. If there is only one shot it is oriented ortogonal to that. If there are more than two shots ToipoDroid cannot orient the section plane, and the button for the cross-section is inhibited.
-<br><p>
+<h4>cSurvey</h4>
+There are two exports as <i>cSurvey</i> files. You can export the survey data, or you can export a sketch. The former contains only the survey data. The latter contains also the plna and profile sketches. If your survey has only one sketch this is a complete export of your work (except for the cross-sections), however, if the survey has more than one sketch, only one of them is included in the <i>cSurvey</i> file.<br>
 
-<b>Cross-section files</b><br>
-Each cross-section is saved in a separate Therion file in the "th2" subfolder. The files get consecutive names "MySurvey-xx0.th2", "MySurvey-xx1.th2", etc. The "xx0" numbering part of the name is also displayed in the Section dialog that pops up when you create or edit a section.<br>
-The file is deleted when a cross-section is deleted.<br><p>
+The sketch items are distributed on suitable <i>cSurvey</i> layers.<br><p>
 
-Cross-sections can be exported in other formats just like the other sketches, except in cSurvey format.<br><p>
+<h4>PLT</h4>
+Survey data can be exported as track file (<i>OziExplorer</i>).<br><p>
 
-<a href="manual12.htm">&lt; Sketch drawing</a> |
-<a href="manual14.htm">Overview window &gt;</a>
+<h4>KML</h4>
+Survey data can be exported as KML file (<i>GoogleEarth</i>).<br><p>
+
+<h4>CSV</h4>
+Survey data can be esported as a list of records with comma-separated fields: "from" station, "to" station, distance, azimuth, clino, and if present the flag. Shot comments are not exported. A brief header is prepended to the data list.<br><p>
+
+<h4>DXF</h4>
+There are two kinds of DXF exports. Survey data are exported as 3D DXF. Sketches are exported as 2D DXF (ie, sketch items lie in the Z=0 plane).<br>
+
+The 3D DXF have layers for "stations", "legs", and "splay" shots. The 2D DXF have also layers for each point, line, and area type.<br><p>
+
+<h4>SVG</h4>
+Sketches can be exported as SVG files.<br><p>
+
+<h4>PNG</h4>
+Image file in PNG format is used only to export sketches. The image resolution (pixels per meter) can be changed through a setting. If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds.<br><p>
+
+<h4>IMPORT/EXPORT SETTINGS</h4>
+<ul>
+<li><i>PocketTopo color-map</i>: defines how to map PocketTopo colors on types of sketch items, for import of PocketTopo files.</li> 
+<li><i>Sketch auto-stations</i>: whether to automatically add station points to the saved therion file(s). If you want to use the sketch files in therion they must have station points to define their scale. You can choose manually which point to add (by editing the sketch drawing), or let TopoDroid add the stations. The program will add all the stations that are "inside" the drawing (inside the drawing convex hull).</li>
+<li><i>Data export format</i>: defines the default format to which data are exported. This file is automatically generated and inserted in the ZIP export.</li>
+<li><i>Station prefix</i>: whether to add the survey prefix to the stations for the cSurvey export.</li>
+<li><i>Survex line termination</i>: either Unix or Windows</li>
+<li><i>Survex named splay</i>: whether to name the TO station of splays</li>
+<li><i>PNG resolution</i>: the resolution of the PNG files for sketch exports. It can be a number between 1 and 10. The higher the bigger the image (if you set it too high the system may not have enough memory to create the PNG).</li> 
+<li><i>PNG background color</i>: you can set the background color of PNG images by specifying the RGB values (three integers between 0 and 255).</li>
+<li><i>DXF scale</i>: scale of the DXF export of sketches.</li>
+<li><i>AutoCAD version</i> for the DXF export: either 6 (AutoCAD R9) or 12 (AutoCAD R13). In version 6 DXF export bezier curves are replaced by polylines. Version 12 DXF export uses splines, but is still buggy.</li>
+</ul><br><p>
+
+
+<a href="page_finalmap.htm">The final map</a><br>
+<p>
+
+<a href="manual12.htm">&lt; Overview window</a>
 
 </body></html>

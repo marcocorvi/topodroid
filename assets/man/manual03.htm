@@ -1,31 +1,65 @@
 <html><body>
-<h3>[3] AUXILIARY APPS</h3><p>
+<h3>[3] DEVICE WINDOW</h3>
 
-When working with TopoDroid, you might find useful some complementary and auxiliary apps:
+Before surveying you need to connect and pair the DistoX with the Android and calibrate it. Tap the <u>DistoX</u> button from the Main windows to open the Device window. This has a button bar at the top and the list of known DistoX devices at the bottom. TopoDroid lists all the known DistoX, but it works with one DistoX at a time. To select it tap on its entry in the list. The name of the selected DistoX is shown at the top, just below the buttons. If no DistoX is selected, there is a red message saying "Device not selected".<br><p>
+
+At first the DistoX list is probably empty. You need to make Android find your DistoX and pair with it. You can do this with TopoDroid (<u>Scan</u> and <u>Pair</u> menus); if it does not work try the <i>Settings</i> app.<br><p>
+
+<b>DistoX nickname</b><br>
+By default TopoDroid uses the BT address as name for a DistoX. However you can assign a nickname to the DistoX to make it easier to distinguish among devices if you work with several of them. Long tap on a device to enter its nickname.<br><p>
+
+<h4>ACTIONS</h4>
 <ul>
-<li><i>Cave3D</i> is a 3D viewer for Therion files, and is used by TopoDroid for the 3D display</li>
-<li><i>Proj4</i> is a (very simple) coordinate converter app, used by TopoDroid to convert long-lat values to other coordinate systems</li>
-<li><i>MobileTopographer</i> is a location app. You can use it to take the point coordinates and have TopoDroid read them from the point file in MobileTopographer pointlist.</li>
-<li>an app to take pictures (usually there is a <i>Camera</i> app)</li>
-<li><i>SQLiteViewer</i> (or any other SQLite manager app) can be helpful to inspect the TopoDroid database</li>
-<li>a File Manager (eg. <i>ES FileExplorer</i>) is definitely useful to look at the files (and to make backup copies)</li>
-<li>a Text Editor (eg. <i>Jota</i> Text Editor), can be used to see the text files</li>
+<li>tap on a DistoX makes it the current DistoX</li>
+<li>long tap on a DistoX sets the nickname</li>
 </ul><br><p>
 
-In addition, depending how you process your surveys, you may want to install
+<h4>BUTTONS</h4>
+You need the DistoX turned on for button actions, except for the first and third buttons.
 <ul>
-<li>a image viewer/editor (usually there is a preinstalled image viewer, <i>Gallery</i>)</li>
-<li>a DXF viewer/editor (eg. <i>TurboViewer</i>)</li>
-<li>a spreadsheet viewer/editor (eg. Google <i>Sheets</i>)</li>
-<li>a SVG viewer (eg. <i>SVG viewer</i>)</li>
-<li>a ZIP archiver (eg. included in <i>ES FileExplorer</i> or <i>ZArchiver</i>)</li>
-<li><i>GoogleEarth</i></li>
-<li>a track file viewer (eg, <i>Androzic</i>)</li>
+<li><u>Bluetooth</u> connection reset. No connection with the DistoX is established.</li>
+<li><u>Mode-toggle</u> toggles the DistoX calibration mode on and off</li>
+<li><u>Calibrations</u> of the current device.</li>
+<li><u>Memory</u> [A] inspectis the current DistoX memory buffer. It can reset it (only DistoX1).</li>
+<li><u>Read</u> [A] reads and displays the calibration coefficients stored in the DistoX.</li>
+<li><u>Info</u> [A] reads some DistoX information (hw/fw, etc.). This dialog has also two checkboxes through which you can force the DistoX model to TopoDroid: select the model and press the "save" button. Beware that if you set the wrong model some device function might not work</li>
 </ul><br><p>
 
-Finally a <i>wakeup-touch</i> app turns out to be very convenient during the survey session in the cave. In order to save battery you may want to set the display sleep timeout very short (eg, half a minute). With a wakeup-touch app you do not have to press the power button to wake up your android, but just need to touch the proximity sensor. I use to keep my device in a protective box opening only the cover lid. The power button on the side is therefore not accessible when the device is in the box, and the wakeup-touch app is really handy.<br><p>
+<b>Calibrations dialog</b><br>
+The Calibrations dialog displays the list of calibrations of the current device, that are recorded in the database. If no calibration is found the list is empty. A new calibration is added with the "New Calibration" button. The dialog has also a button to import a calibration from the exported csv file.</li>
 
-<a href="manual02.htm">&lt; Database</a> |
-<a href="manual04.htm">Main window &gt;</a>
+<h4>MENUS</h4>
+<ul>
+<li><u>Scan</u> searches for new DistoX devices. The DistoX must be on. You might have to try two or three times before the DistoX is found.</li>
+<li><u>Pair</u>: pairs the current DistoX device with the Android, if not already paired</li>
+<li><u>Disconnect</u> detaches the current device. The pairing between Android and the DistoX is not broken</li>
+<li><u>Firmware</u> [A]: used to dump and upload <a hre="page_firmware.htm">firmwares</a> to the DistoX2</li>
+<li><u>Settings</u>: with this menu you change the preferences related to the Device activity</li>
+<li><u>Help</u></li>
+</ul><br>
 
+<h4>DEVICE SETTINGS</h4>
+<ul>
+<li><i>Device</i>: current active DistoX</li>
+<li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default]</li>
+<li><i>Data connection</i>: either stay connected to the DistoX to <a href="page_downlaod.htm">download shot data</a> as soon as they are taken, or download the shots in burst, "on-demand" [default]. This applies only to data: other DistoX functions use a one-shot query mode</li>
+<li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode</li>
+<li><i>Socket</i> type: either normal [default] or "insecure". See <a href="page_trouble.htm">DistoX troubleshooting</a></li>
+<li><i>Z6-workaround</i> Fixes a download timeout error on a Z6 phone, and possibly other devices. It is safe to leave this enabled</li>
+<li><i>Connection delay</i>: delay [1/10 sec] before trying to connect to the DistoX [default 0, no delay]</li>
+<li><i>Auto pairing</i>: whether TopoDroid should try to pair with the DistoX selected from a scan</li>
+</ul><br><p>
+
+<hr>
+<i>At a minimum you just need to scan to find your DistoX, and select it as the one TopoDroid should use by tapping its address in the list at the bottom.  Now you are ready to go ahead and calibrate the DistoX with the "Calibration" menu.</i><br><p>
+
+<a href="page_trouble.htm">DistoX troubleshooting</a><br>
+<a href="page_memory.htm">DistoX memory</a><br>
+<a href="page_firmware.htm">DistoX firmware</a><br>
+<p>
+
+<a href="manual02.htm">&lt; Main window</a> |
+<a href="manual04.htm">Calibration window &gt;</a>
+
+</body></html>
 </body></html>

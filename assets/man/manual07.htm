@@ -1,52 +1,49 @@
 <html><body>
-<h3>[7] CALIBRATION DATA</h3>
+<h3>[7] SHOT LIST</h3>
 
-The calibration data window displays the list of calibration data. If the
-calibration has no data, the list is empty and the window shows only the top
-buttons. Each data line contains the following data informations:
+The shots are shown in a list. The list has no header to save space.  The shot informations are
 <ul>
-<li>index: incremental index that identifies the data</li>
-<li>group: number of the group the data belongs to</li>
-<li>azimuth, inclination, and roll, computed from the raw values without any
-calibration correction</li>
-<li>error: the difference between the calibration-corrected direction and the
-group average direction, in degrees</li>
-</ul><br><p>
+<li>Index (optional: it is shown only if the related choice in the <u>Display mode</u> dialog is checked)</li>
+<li>From station</li>
+<li>To station</li>
+<li>Distance</li>
+<li>Azimuth</li>
+<li>Inclination</li>
+<li>Extend direction: either left (&lt;), right (&gt;), vertical (|), or ignore (-)</li>
+</ul>
+Additional characters denote the presence of a comment (N), a photo (P), and a flag: either duplicate shot (*) or a surface shot (-).<br><p>
 
-The calibration data are displayed with red and blue text-color, alternating between even and odd group numbers. Data with no group are grey.<br><p>
+Blank shots, and repeated-legs can be hidden. Splay shots can also be hidden to unclutter the list of shots. However, even if splays are not shown, you can see those at a station by tapping on the station name in a leg shot. To hide them tap again on the station name (even a tap on the name in a splay will do).<br><p>
+
+Topodroid can set the station names automatically according to a <a href="page_station_policy.htm">station assignament policy</a>.<br><p>
+
+<h4>Shot edit dialog</h4>
+If you choose not to have the station assigned automatically, you must set them manually. Tapping on a shot data brings up the shot edit dialog. With it you can set the station(s) (if the shot is blank TopoDroid suggest them for you incrementing those of the previous leg), the direction of extend for the profile (either left, right, vertical; if none is checked the shot is ignored in the profile), and the shot flag (whether it is a regular shot, or duplicate or surface: if no flag is set the shot is "regular").  Finally you can add a brief comment to the shot.  The values of length, azimuth and inclination of shots downloaded from the DistoX or of an imported survey cannot be modified.  For manually entered shots they are editable.  The <u>Reverse</u> button swaps the stations.  The arrow buttons let you move forward and backward over the leg shots.  The <u>OK</u> button save the changes and closes the dialog.  The <u>Save</u> button saves the changes but does not closes the dialog.<br><p>
+
+This dialog has six check buttons:<br>
+<img src="shot_dialog_btn2.png"><br>
+<ol>
+<li><i>duplicate leg</i>: this checkbox marks the shot as duplicate, so that it does not count towards the cave statistics</li>
+<li><i>surface</i> denotes a surface shot. Surface shots do not count for the cave statistics either.</li>
+<li><i>repeated leg</i> tells TopoDroid that the shot is a "repeated leg"; the shot stations are blanked out and it is marked as "repeated leg".</li>
+<li><i>merge with leg</i> tells TopoDroid that the shot is the first of a leg that has been assigned to the following shot.</li>
+<li><i>splay group</i> is used if only the From station has been entered (and the To station is empty): it changes the From station of all the splay shots of the group. Effectively this assigns the group of splays from one station to another.</li>
+<li><i>renumber</i> is used to rename subsequent shots; if the editing shot is a leg (ie, the From and To stations are specified) and the box is checked, all subsequent shots are renamed according to the current station assignment policy, their type not being changed (ie, splays remain splay, legs remain leg, and blank shots remain blank).</li>
+</ol>
+<br><p>
 
 
-<h4>MENUS</h4>
-<ul>
-<li><u>Display</u>: whether to display all data including the deleted data.</li>
-<li><u>Settings</u>: same as for the calibration window.</li>
-<li><u>Help</u></li>
-</ul><br><p>
 
-<h4>BUTTONS</h4>
-<ul>
-<li><u>Download</u>: this is the button you use to get the data from the DistoX.</li>
-<li><u>Mode-toggle</u> toggles the DistoX calibration mode on and off</li>
-<li><u>Groups</u> divides the calibration data into groups automatically.</li>
-<li><u>Distribution</u> displays the angular data distribution.</li>
-<li><u>Compute</u> computes the calibration coefficients and shows the result.</li>
-<li><u>Read</u> displays the coefficients stored in the DistoX.</li>
-<li><u>Write</u> writes the calibration coefficients to the DistoX. This button is enabled only after the calibration coefficients have been computed.</li>
-</ul><br><p>
-
-At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data.  Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
-disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data).
-Deleted data are not taken into account in the group assignment policy.<br><p>
+If you use TopoDroid automatic station assignment, you are likely to need the shot dialog only to enter the comment, and to change the "extend" direction. These two actions can be done also from the drawing window, by selecting the shot in "edit" mode [A] and picking the <u>Note</u> button: this is described in the section on the <u>Sketch</u> window).<br><p>
 
 <hr>
-<i>Basically you toggle your DistoX calibration mode on, take the measurements, download them, assign groups, check that the data cover all angles, compute the coefficients and write them to the DistoX. Your device is calibrated and ready for surveying. Turn the calibration mode off, and go back to the main window.</i><br><p>
 
-<a href="page_groups.htm">Calibration data groups</a><br>
-<a href="page_coverage.htm">Calibration data distribution</a><br>
-<a href="page_coeffs.htm">Calibration coefficients</a><br>
+<i>This about covers all the actions one can do with shots, but you do not need to master all of them. The important things are really few: they amount to properly assign stations to the shots, maybe flags, and add comments.</i><br><p>
+
+<a href="page_shot2.htm">Secondary shot actions</a><br>
 <p>
 
-<a href="manual06.htm">&lt; Calibration window</a> |
-<a href="manual08.htm">Survey data &gt;</a>
+<a href="manual06.htm">&lt; Survey data</a> |
+<a href="manual08.htm">Survey info &gt;</a>
 
 </body></html>

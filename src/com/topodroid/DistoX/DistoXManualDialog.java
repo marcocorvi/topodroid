@@ -95,21 +95,19 @@ public class DistoXManualDialog extends Activity
     ArrayAdapter< String > adapter = new ArrayAdapter<String>(this, R.layout.message );
     adapter.add("Preface");        // manual00
     adapter.add("1. Introducion");
-    adapter.add("2. Database");
-    adapter.add("3. Auxiliary apps");
-    adapter.add("4. Main window");      // manual04
-    adapter.add("5. Device window");
-    adapter.add("6. Calibration window");
-    adapter.add("7. Calibration data");
-    adapter.add("8. Survey data");
-    adapter.add("9. Shot list");
-    adapter.add("10. Survey info");    // manual09
-    adapter.add("11. Sketch window");
-    adapter.add("12. Sketch drawing");
-    adapter.add("13. Cross-sections");
-    adapter.add("14. Overview window");
-    adapter.add("15. Import/Export");
-    if ( TopoDroidApp.mCosurvey ) adapter.add("16. Co-surveying");
+    adapter.add("2. Main window");      // manual04
+    adapter.add("3. Device window");
+    adapter.add("4. Calibration window");
+    adapter.add("5. Calibration data");
+    adapter.add("6. Survey data");
+    adapter.add("7. Shot list");
+    adapter.add("8. Survey info");    // manual09
+    adapter.add("9. Sketch window");
+    adapter.add("10. Sketch drawing");
+    adapter.add("11. Cross-sections");
+    adapter.add("12. Overview window");
+    adapter.add("13. Import/Export");
+    if ( TopoDroidApp.mCosurvey ) adapter.add("14. Co-surveying");
     adapter.add("* Website");
  
     mList.setAdapter( adapter );
@@ -140,7 +138,7 @@ public class DistoXManualDialog extends Activity
     CharSequence item = ((TextView) view).getText();
     // Log.v("DistoX", "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
-    int max = ( TopoDroidApp.mCosurvey )? 16 : 15;
+    int max = ( TopoDroidApp.mCosurvey )? 14 : 13;
     if ( pos <= max ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter( sw );

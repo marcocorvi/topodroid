@@ -1,34 +1,58 @@
 <html><body>
-<h3>[10] SURVEY INFO WINDOW</h3>
+<h3>[10] SKETCH DRAWING</h3>
 
-Before we get to take measurements let's look at the survey informations dialog. You open it by long tapping on the survey entry in the main window, or with the appropriate menu of the shot window.<br><p>
+The canvas shows the midline with the splay shots.  It can be moved around dragging it with one (or two) finger(s), zoom in/out with two fingers. It is not possible to rotate the canvas; the plan has the North upward, and the profile is oriented with the vertical.<br><p>
 
-<h4>BUTTONS</h4>
+Tap the <u>Draw</u> button: the app goes in <b>draw</b> mode and the button is highlighted with a white border. Now you can draw with your finger (two fingers still move and zoom). With the <u>undo</u> and <u>redo</u> button you cancel the last drawn or deleted objects and put them back again. Of course you can go back with <u>undo</u> until the canvas is empty.<br><p>
+
+While in draw mode, the sketch can also be moved by dragging it from the side of the canvas and zoomed with zoom controls if these function have been enabled through the settings. This let's you work with a stylus without the need for two-finger actions.<br><p>
+
+By default you are drawing "wall" (red) lines. The sketch would be very boring if you had only one line style to use. The <u>drawing tool picker</u> button allows you to pick another line style, or an "area" style (a closed region), or iconic symbols. See the <a href="page_tools.htm">drawing tool palette</a>.<br><p>
+
+The line thickness is one of the <u>Settings</u>. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
+
+You can also correct mistakes in the drawing. The <u>Undo</u> button lets you remove the last item. What if you need to erase a line or a symbol that you drew long ago, but do not want to loose all the intermediate work? You have two choices: the <u>Erase</u> and the <u>Edit</u> button.  The former is very intuitive: it cancels everything you pass your finger over. It is just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines).<br><p>
+
+The <u>Edit</u> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. You have to select the item to edit by tapping on it. If there are several items close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). It may not be what you wanted, but never mind: move among the selected point with the <u>Prev</u>-<u>Next</u> button.<br>
+
+The size of the green dots and the selection radius are two <u>Settings</u>.<br><p>
+
+Segments of Bezier lines have two control points. These are stored with the segment end-point and when this is the selected editing point the two control points are shown as pink circles. Each of them can be moved around by dragging it with the finger.<br><p>
+
+To clear the selection tap somewhere else in the canvas. To move the editing point, drag it with the finger. To change the properties of the sketch item tap the <u>note</u> button. The item can be deleted (removed) or its Therion properties changed:
 <ul>
-<li><u>Notes</u>: to edit the survey annotations. Use the annotation to write down anything that can be useful later.  You can edit the global survey annotations also from the shot window and from the sketch window</li>
-<li><u>Stats</u> displays some statistics: the number of (regular) legs and their total length, the number of duplicate legs, and that of surface leg. The number of splay shots, that of stations, the number of loops and the number of disconnected surveys (this is 1 if the legs are all attached together in one survey)</li>
-<li><u>3D</u>: the 3D display. This is the same as the <u>3D</u> menu of the shot-list activity</li>
-<li><u>GPS</u> [A]: to enter (or get with the GPS) the coordinates of a fixed station, eg, the entrance. The fixed points coordinates that have already been defined, are listed.</li>
-<li><u>Photos</u> [A] lists the pictures of the survey. Tapping one of them you get a dialog to edit the description or delete the photo</li>
-<li><u>Sensors</u> [A]: shows the list of sensor measurements of the survey. At the moment these are not editable.</li>
-</ul><br><p>
+<li><i>point symbols:</i> the "scale", the "orientation", the "text" (for labels), and generic "options"</li>
+<li><i>lines:</i> "reverse", "outline", and "options". Lines can also be made more "rocky" (with fewer points).</li>
+<li><i>areas:</i> border "visibility"</li>
+</ul><br>
 
-<h4>MENUS</h4>
+Editing applies also to shots and stations.
 <ul>
-<li><u>Export</u> exports the survey data in the format for your favourite PC program. You have the following choices: <i>Compass</i>, <i>cSurvey</i>, <i>Survex</i>, <i>PocketTopo</i>, <i>Therion</i>, <i>VisualTopo</i>, and <i>Walls</i>. Furthermore the data can be exported as DXF, and CSV text file. If the survey has a fixed station it can be exported as KML, and track file (PLT). This export fails if no the survey station is fixed. Finally you can export a ZIP archive with all the data of the survey. </li>
-<li><u>Delete</u> deletes the survey and all associated data (photos, notes, sketch files, etc. ) except the zip archive. There is a confirmation dialog. Make sure to export a ZIP archive before you do it as this is non-recoverable action.</li>
-<li><u>Calibration</u> lets the user specify the instruments calibration values for manually entered shots. These values are subtracted to the measured values entered in the shot data dialog, and are taken with the same units as the shot data. For example a calibration length of 1.0 means that the tape is 1.0 m short, ie, measurements are taken from the 1 m mark. The calibration is cleared whenever a survey is opened.</li>
-<li><u>Settings</u> (same as the shot window settings)</li>
-<li><u>Help</u></li>
+<li><i>shots:</i> stations, "extend", flags, and auto-walls [E].</li>
+<li><i>stations:</i> can be made the "current" station, toggle the midline "hiding" attribute [A], toggle the display of splay shots at the station (even if splay shots are globally not shown), and add as Therion "station point" to the scrap (if the autostation option of TopoDroid is not enabled)</li>
+</ul><br>
+
+<h4>Point-wise edit</h4>
+
+The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions.
+<ul>
+<li><i>Snap to nearby point</i>: move the point to coincide with the closest nearby point (no action if there is no nearby point) [points, lines, areas]</li>
+<li><i>Snap to nearby line</i> move to point to coincide with the closest line point, and replace the pieces of the area border before and after it, with pieces that follow the line path [areas]</li>
+<li><i>Split the point in two</i>, actually duplicating it and inserting a point in the line/area [lines, areas]</li>
+<li><i>Cut the line at the point</i>, thus making two lines [lines]</li>
+<li><i>Straighten the line segment</i> removes the control points [lines, areas]</li>
+<li><i>Smooth the line segment</i> inserts control points. These are put at 1/3 and 2/3 along the segment. Further editing can move them and give any wanted curvature to the segment. [lines, areas]</li>
+<li><i>Remove the line/area point</i> [lines, areas]</li>
 </ul><br><p>
 
 <hr>
-<i>Now you can go and take measurements in your cave, download the data to TopoDroid, assign the stations, and so on. After a few shots you probably need to do some sketching of the cave. Here comes the <u>Sketch</u> button. It displays the list of sketches for the survey. Unless you are very lucky and the cave is simple and straightforward you will need more than one sketch for the survey.</i><br><p>
+<i>Do not forget to export the drawings in <i>cSurvey</i> format.  This is a special export, because it includes both plan and profile in a single file, and it adds also the survey data. If your survey is simple and has a single sketch you can easily get a final map from this file.</i><br><p>
 
-<a href="page_location.htm">Location</a><br>
+<a href="page_sketch_station.htm">Sketch station editing</a><br>
+<a href="page_tools.htm">Drawing tools</a><br>
+<a href="page_walls.htm">Auto walls</a><br>
 <p>
-
-<a href="manual09.htm">&lt; Shot list</a> |
-<a href="manual11.htm">Sketch window &gt;</a>
+<a href="manual09.htm">&lt; Sketch window</a> |
+<a href="manual11.htm">Cross-sections &gt;</a>
 
 </body></html>

@@ -1,51 +1,124 @@
 <html><body>
-<h3>[9] SHOT LIST</h3>
+<h3>[9] SKETCH WINDOW</h3>
 
-The shots are shown in a list. The list has no header to save space.  The shot informations are
+The first time you tap the Sketch button the dialog you get contains only the "New Sketch" button. Tap on it. The coming dialog contains two fields:
 <ul>
-<li>Index (optional: it is shown only if the related choice in the <u>Display mode</u> dialog is checked)</li>
-<li>From station</li>
-<li>To station</li>
-<li>Distance</li>
-<li>Azimuth</li>
-<li>Inclination</li>
-<li>Extend direction: either left (&lt;), right (&gt;), vertical (|), or ignore (-)</li>
+<li>the sketch <u>name</u>. TopoDroid suggest a number, and you can safely leave it. The sketch filenames are obtained composing the survey name with the name in this field. For example if the survey is "MySurvey" and the sketch is "1", the plan filename is "MySurvey-1p.th2" and the profile filename is "MySurvey-1s.th2". They are placed in the directory "th2" of TopoDroid</li>
+<li>the sketch <u>origin</u> station (base station). This is very important as all the sketch data will have coordinates relative to this station. You should choose a station that is inside the sketch to benfit of the <a href="page_sketch_station.htm">midline hiding<a> features.</li>
+</ul><br><p>
+
+<b>WARNING. The name of the sketch cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
+
+So type in the name of the origin station, and tap the <u>OK</u> button.  And you go to the sketch window.<br><p>
+
+Each sketch is made of two Therion 2D sketch files: one for the plan view, the other for the profile view. Of course you can draw cross sections, but we will get to them later. The sketch window opens with the plan view by default.  Afterwards the sketch dialog shows two columns, and you can open a sketch starting either in the plan or in the profile view. In any case TopoDroid always loads the two sketch files. It just displays the chosen view.<br><p>
+
+<b>NOTE</b><br>
+The first time you open a sketch TopoDroid loads the drawing tools (the palette). This may take some time if your Android is not powerful because the program has to read in many files (one for each tool). Afterwards opening a sketch is usually faster.<br><p>
+
+You have not drawn anything yet, and the canvas will display a grid (each little square is 1 m, the big squares are 10 m, and the very big ones 100 m), the midline (with both legs and splays), and the stations. These objects are the references to help you drawing the sketch. They are usually very handy however you can choose to hide any of them, if you want to focus on what you have drawn, for editing purposes.<br><p>
+
+The sketch window has four modes:
 </ul>
-Additional characters denote the presence of a comment (N), a photo (P), and a flag: either duplicate shot (*) or a surface shot (-).<br><p>
+<li><b>move</b>, the default: you can shift the canvas, and zoom in/out. If the "fixed references" box in the references dialog is set, shifts affect only the drawings [level experimental]</li>
+<li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (closed regions filled with a color). At the basic level drawing is limited to lines.</li>
+<li><b>erase</b>: to erase items, and lines/areas, or portions of them, from the sketch.</li>
+<li><b>edit</b> [A]: for the fine editing. Shift and zoom are still available, as for the "move" mode.</li>
+</ul><br><p>
 
-Blank shots, and repeated-legs can be hidden. Splay shots can also be hidden to unclutter the list of shots. However, even if splays are not shown, you can see those at a station by tapping on the station name in a leg shot. To hide them tap again on the station name (even a tap on the name in a splay will do).<br><p>
-
-Topodroid can set the station names automatically according to a <a href="page_station_policy.htm">station assignament policy</a>.<br><p>
-
-<h4>SHOT EDIT DIALOG [B]</h4>
-If you choose not to have the station assigned automatically, you must set them manually. Tapping on a shot data brings up the shot edit dialog. With it you can set the station(s) (if the shot is blank TopoDroid suggest them for you incrementing those of the previous leg), the direction of extend for the profile (either left, right, vertical; if none is checked the shot is ignored in the profile), and the shot flag (whether it is a regular shot, or duplicate or surface: if no flag is set the shot is "regular").  Finally you can add a brief comment to the shot.  The values of length, azimuth and inclination of shots downloaded from the DistoX or of an imported survey cannot be modified.  For manually entered shots they are editable.  The <u>Reverse</u> button swaps the stations.  The arrow buttons let you move forward and backward over the leg shots.  The <u>OK</u> button save the changes and closes the dialog.  The <u>Save</u> button saves the changes but does not closes the dialog.<br><p>
-
-This dialog has six check buttons:<br>
-<img src="shot_dialog_btn2.png"><br>
-<ol>
-<li><i>duplicate leg</i>: this checkbox marks the shot as duplicate, so that it does not count towards the cave statistics</li>
-<li><i>surface</i> denotes a surface shot. Surface shots do not count for the cave statistics either.</li>
-<li><i>repeated leg</i> tells TopoDroid that the shot is a "repeated leg"; the shot stations are blanked out and it is marked as "repeated leg".</li>
-<li><i>merge with leg</i> tells TopoDroid that the shot is the first of a leg that has been assigned to the following shot.</li>
-<li><i>splay group</i> is used if only the From station has been entered (and the To station is empty): it changes the From station of all the splay shots of the group. Effectively this assigns the group of splays from one station to another.</li>
-<li><i>renumber</i> is used to rename subsequent shots; if the editing shot is a leg (ie, the From and To stations are specified) and the box is checked, all subsequent shots are renamed according to the current station assignment policy, their type not being changed (ie, splays remain splay, legs remain leg, and blank shots remain blank).</li>
-</ol>
-<br><p>
+Sketch shifting is possible even in <b>draw</b> and in <b>erase</b> mode using two fingers. Zoom controls can be enabled (either temporarily or permanently). If temporary, they show up when you tap at the bottom of the canvas in the middle. If "side-dragging" is enabled, the sketch can be shifted by "dragging" it from the left, right and bottom sides of the canvas.<br><p>
 
 
+<h4>BUTTONS</h4>
+The modes are represented by the three green buttons on the left: <u>draw</u>, <u>erase</u>, and <u>edit</u>. When none of them is "on" (has a white frame around) the mode is "move", otherwise it is that of the button that is "on".<br><p>
 
-If you use TopoDroid automatic station assignment, you are likely to need the shot dialog only to enter the comment, and to change the "extend" direction. These two actions can be done also from the drawing window, by selecting the shot in "edit" mode [A] and picking the <u>Note</u> button: this is described in the section on the <u>Sketch</u> window).<br><p>
+The remaining buttons differ by the mode. In the <b>move</b> mode they are
+<ul>
+<li><u>Download</u> downloads data from the DistoX. The latest downloaded shot are bluish to help you distinguish them from the others. If no DistoX is selected, this button is hidden.</li>
+<li><u>Bluetooth</u>: <a href="page_bluetooth.htm">bluetooth dialog</a>.</li>
+<li><u>Reference</u>: to choose which reference to display: midline, splay shots, stations, and metric grid.</li>
+<li><u>Plan/Profile</u> toggles between the sketch of the plan and that of the profile.</li>
+<li><u>Extend</u>: <a href="page_extend.htm">extend reference</a> dialog</li>
+<li><u>Notes</u>: survey annotations</li>
+</ul><br><p>
+
+The <b>draw</b> mode has four buttons besides the green ones:
+<ul>
+<li><u>Undo</u> removes the last items you have drawn, one at a time.</li>
+<li><u>Redo</u> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
+<li><u>Drawing tool</u> picker, to select the drawing tool from the <a href="page_tools.htm">palette</a></li>
+<li><u>Continuation</u> [N]. When this button is pressed a line started close to the end of another line of the same type is considered as its continuation and is attached to that. A new line is not created, and the line that has been continued is moved on top of the undo stack.</li> 
+</ul><br><p>
+
+The <b>erase</b> mode has the <u>Undo</u> and <u>Redo</u> buttons.<br><p>
+
+The <b>edit</b> [A] mode has, besides the green buttons:
+<ul>
+<li><u>Previous</u> to go to the previous point in the selection. To do some editing you must select a point (either a point, a line/area point, a station, or a shot midpoint). To do this you tap near the point you want; however if there are several points close by the result is a selection set containing several point, only one of them is the active editing point.  You move among them with the "Previous" and "Next" buttons.</li>
+<li><u>Next</u> to go to the next point in the selection.</li>
+<li><u>Point</u> (point-wise edit). Editing the item attributes and moving/editing the item point(s).</li>
+<li><u>Item</u> (item-wise edit): with this button you edit item properties. For example for a label you can change the text.</li>
+<li><u>Delete</u>: deletes the item from the sketch (it asks for confirmation, and can be "undone").</li>
+</ul><br><p>
+
+<h4>MENUS</h4>
+<ul>
+<li><u>Export</u>: the sketch can be <a href="page_backup.htm">exported</a> as <i>Therion</i> 2D file(s), <i>cSurvey</i> (a single file), PNG (two files), DXF (two files), and SVG (two files).</li>
+<li><u>Stats</u> displays some <a href="page_stats2.htm">statistics</a>.</li>
+<li><u>Reload</u>: reloads the sketch from a <a href="page_backup.htm">backup copy</a>.</li>
+<li><u>Delete</u> marks the sketch as deleted. It can be later recovered as the sketch files are not actually deleted, nor the sketch record is dropped from the database table</li>
+<li><u>Palette</u>: chooses the <a href="page_tools.htm">drawing tools</a></li>
+<li><u>Overview</u>: opens the overview window which shows all the survey sketches together.</li>
+<li><u>Settings</u></li>
+<li><u>Help</u></li>
+</ul><br><p>
+
+
+<h4>SKETCH SETTINGS</h4>
+<ul>
+  <li><i>Drawing tool picker</i>: either most-recent [default], or list view or grid view.</li>
+  <li><i>Side drag</i>: whether to enable panning by side-dragging.</li>
+  <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time.</li>
+  <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
+  <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line</li>
+  <li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
+  <li><i>Midline check</i>: whether to check if all the legs are attached to the midline</li>
+  <li><i>DRAWING TOOLS >></i>
+    <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Line style</i>. TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.</li>
+    <li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
+    <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
+    <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
+    </ul>
+  </li>
+  <li><i>SKETCH ITEMS >></i>
+    <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
+    <li><i>Line width</i>: the base thickness of drawing lines</li>
+    <li><i>Non-zoomed point</i>: whether point items should remain of fixed size when the drawing is zoomed</li>
+    <li><i>Survey line width</i>: the base thickness of midline/splay lines</li>
+    <li><i>Station name size</i>: size of stations names [default 18 pt] [N]</li>
+    <li><i>Labels size</i>: size of label texts [default 24 pt]</li>
+    <li><i>Section-line tick size</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
+    <li><i>Green dots radius</i>: size of the green dots displayed in <b>edit</b> mode [default 5 pxl] [N]</li>
+    <li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
+    </ul>
+  </li>
+  <li><i>AUTO WALLS [E]</i> settings</li>
+</ul>
+
+<b>Warning. If the sketch disappear from the display, switch between plan and profile to force TopoDroid to reload it.</b><br><p>
 
 <hr>
+<i>To start drawing select the <b>draw</b> mode (green pencil button) and trace lines with your finger. If you make a mistake you can cancel the whole line with the <u>undo</u> button, or switch to the <u>erase</u> mode.  The drawing is saved in a pair of <i>Therion</i> files when you exit the sketch window. Each cross-section is saved in a single separate Therion file.</i><br><p>
 
-<i>This about covers all the actions one can do with shots, but you do not need to master all of them. The important things are really few: they amount to properly assign stations to the shots, maybe flags, and add comments.</i><br><p>
-
-To exit TopoDroid shot-list window double tap on the <u>BACK</u> button of your device.<br><p>
-
-<a href="page_shot2.htm">Secondary shot actions</a><br>
+<a href="page_therion_stations.htm">Therion station points</a><br>
+<a href="page_undo.htm">Undo stack</a><br>
+<a href="page_shift.htm">Sketch shift and flip</a><br>
+<a href="page_backup.htm">Backup and recovery</a><br>
 <p>
 
-<a href="manual08.htm">&lt; Survey data</a> |
-<a href="manual10.htm">Survey info &gt;</a>
+<a href="manual08.htm">&lt; Survey info</a> |
+<a href="manual10.htm">Sketch drawing &gt;</a>
 
 </body></html>

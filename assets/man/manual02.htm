@@ -1,49 +1,72 @@
 <html><body>
-<h3>[2] DATABASES</h3>
+<h3>[2] MAIN WINDOW</h3><p>
 
-It is useful to have a rough idea about the organization of the information and the data in the databases. The units of work in TopoDroid are the surveys and the calibrations. A survey is a single survey session of a piece of cave.  A calibration is a single DistoX calibration.<br>
-Surveys are stored in the "distox14.sqlite" database. There is one such database in every work directory.<br>
-Calibrations are stored in the "device10.sqlite" database, together with the DistoX informations. This database is global and is present only in the "TopoDroid" directory.<br>
+The main window has three (or five) buttons at the top, and 
+the list of the surveys underneath. This list is empty until you create a survey.
+The first time you start the app a welcome message is shown. You can go back to it any time later with the <u>About</u> menu.<br><p>
+
+To exit TopoDroid main window double tap on the <i>BACK</i> button of your device.<br><p>
+
+<h4>ACTIONS</h4>
+<ul>
+<li>tap on a survey: survey data window</li>
+<li>long tap on a survey: survey info window</li>
+</ul><br><p>
+
+<h4>BUTTONS</h4>
+<ul>
+<li><u>Device activity</u> (DistoX icon): switches to the Device window</li>
+<li><u>Add</u> (a plus sign): new survey dialog</li>
+<li><u>Import</u> (a vertical arrow): used to import TopoDroid ZIP archives or survey files (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, <i>PocketTopo</i>).</li>
+<li>The optional buttons [E] are for the <i>ThManager</i> (Therion manager) and the <i>SQLite viewer</i>; both require external apps</li>
+</ul><br><p>
+
+<h4>New survey dialog</h4>
+At first the list of surveys is empty. To add a new survey tap on the <u>Add</u> button (the "plus" sign). You get a dialog to specify the survey information.<br><p>
+
+The survey name is mandatory. It must be unique in the database. The survey names are used to list surveys in the main window and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database).<br>
+<b>The name of the survey cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
+
+The date is written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06". It is preset to the current date.<br><p>
+
+Team and description are empty (unless you have set a default team in the app settings). They can safely be left so, although it is a good practice to take the time to fill them.<br><p>
+
+The magnetic declination is 0.0 by default. If you know it you can enter it here, otherwise you can look it up in the web after you have found the coordinates of a fixed point (say, the cave entrance) with the GPS [A].<br><p>
+
+Save when you are done, and the new survey name will appear in the list of surveys of the mani window.<br><p>
+
+<h4>MENUS</h4>
+<ul>
+<li><u>Palette</u> allows to choose the <a href="page_tools">drawing tools</a> that are loaded.</li>
+<li><u>Cosurvey</u> [E] opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying.</li>
+<li><u>Settings</u>: all the program settings.</li>
+<li><u>Logs</u> settings [E]. <a href="page_log.htm">Logging</a> is mostly for debugging app error.</li>
+<li><u>About</u>: the program welcome message</li>
+<li><u>Help</u> shows a brief descriptions of buttons and menus. At the top-right corner there is a button that opens this user manual. Each TopoDroid window has a similar <u>Help</u> menu.</li>
+</ul><br><p>
+
+<h4>SETTINGS</h4>
+<ul>
+<li><i>Work directory</i> sets the <a href="page_cwd.htm">current work directory</A>. By default this is "TopoDroid".</li>
+<li><i>Language</i> overrides the system default <a href="page_language.htm">language</a> with a built-in language.</li>
+<li><i>Text size</i> of items in the lists</li>
+<li><i>Buttons size</i>, either "small" or "large": small buttons for a 5" screen, large buttons for 7" tablets.</li>
+<li><i>Keyboard</i> enables or disables the TopoDroid <a href="page_keypad.htm">keypads</a>.</li>
+<li><i>Activity level</i> selects the activity level [default "normal"].</li>
+<li><i>Cosurveying</i> [E] activate/deactivate the cosurveying service (very experimental).</li>
+</ul><br><p>
+
+<hr>
+If <b>bluetooth</b> is not on, the app asks whether to turn it on. Without bluetooth it cannot communicate with the DistoX and the survey data can only be entered manually. In this case the <i>Download</i> button in the Shot window is hidden, and that in the Sketch window is replaced by the <i>Add</i> button.<br><p>
+
+<a href="page_import.htm">Survey import</a><br>
+<a href="page_language.htm">Languages</a><br>
+<a href="page_keypad.htm">TopoDroid keypads</a><br>
+<a href="page_cwd.htm">Current work directory</a><br>
+<a href="page_logging.htm">Logging</a><br>
 <p>
- 
-Accordingly, the most important table in the survey database is:
-<ul>
-<li><b>surveys</b>: survey informations</li>
-</ul><br>
-The surveys records store the survey name, date, team, magnetic declination, initial station name and possibly a comment.<br>
-
-Related to the surveys are the tables for:
-<ul>
-<li><b>shots</b>: survey data</li>
-<li><b>stations</b>: saved stations</li>
-<li><b>plots</b>: 2D sketches; plans, profiles, cross sections</li>
-<li><b>photos</b>; pictures associated to survey shots</li>
-<li><b>sensors</b>: measurements associated to survey shots</li>
-<li><b>fixeds</b>: (geolocalized stations)</li>
-<li><b>sketches</b>: 3D models</li>
-</ul><br><p>
-
-The most important tables in the device database are
-<ul>
-<li><b>devices</b>: devices informations</li>
-<li><b>calibs</b>: calibrations informations</li>
-</ul><br>
- 
-The calibs records contain the calibration name, date, DistoX device, algorithm, and the results of the last computation: coefficients, average error, maximum error, number of iterations.<br><p>
-
-Related to the calibrations is the data table
-<ul>
-<li><b>gms</b>: calibration data</li>
-</ul><br><p>
-
-Finally each database has the table
-<ul>
-<li><b>configs</b>: configuration values</li>
-</ul><br><p>
-
-You can learn more about the data organization in the database by looking at it with a SQLite viewer.<br><p>
 
 <a href="manual01.htm">&lt; Introduction</a> |
-<a href="manual03.htm">Auxiliary apps &gt;</a>
+<a href="manual03.htm">Device window &gt;</a>
 
 </body></html>

@@ -1,48 +1,97 @@
 <html><body>
-<h3>[6] CALIBRATION WINDOW</h3>
+<h3>[6] SURVEY DATA WINDOW</h3>
 
-Tapping the <u>Calibration</u> menu in the Device activity window takes to the Calibrations dialog, which lists the calibrations of the current DistoX.<br><p>
+The survey shot window displays the list of the shots of the survey.<br><p>
 
-To create a new calibration tap on the <u>New Calibration</u> button in the dialog. This brings you to the window for the calibration informations. The "date" field is prefilled with the current date. The "device" field is prefilled with the address of the DistoX, and cannot be modified. You must give a "name" to the calibration. The name is what appears in the list of calibrations. You can optionally enter a brief "description". By default TopoDroid will pick automatically the calibration algorithm based on the DistoX model and firmware. However you can force it to use either the linear or the non-linear algorithm. When you are done tap the <u>Save</u> button (the leftmost) to save the calibration info to the database.<br><p>
+TopoDroid differentiates among four kinds of shots:
+<ol>
+<li>"blank" shots, ie, shots with the stations not set yet</li>
+<li>"splay": it has only one station, usually the "From" station</li>
+<li>"leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
+<li>"repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
+</ol><p>
+Each kind of shots is displayed with a different color: "legs" are white, "repeated-legs" grey, "splays" blue, "blank" red. Furthermore the background color is blueish for the last downloaded shots, and reddish for <a href="page_accuracy.htm">unreliable</a> shots, ie. shots with "abnormal" field intensities (only DistoX2).</br>
+<img src="shots_list.png" alt="shots list"/><p>
 
-<b>WARNING. The name of the calibration must not contain the character '/' (slash), which is the pathname separator.</b><br><p>
-
-When you open an existing calibration (tapping the calibration name in the list of the calibration of a DistoX), you get the same interface.  The only difference is that the name of the calibration is no more editable.<br><p>
-
-<h4>MENUS</h4>
+<h4>ACTIONS</h4>
 <ul>
-<li><u>Export</u> The calibration data can be exported as a CSV text file that can be imported in a spreadsheet program</li>
-<li><u>Delete</u> removes the calibration informations and its data from the database. This is a non-recoverable action.</li>
-<li><u>Settings</u></li>
-<li><u>Help</u></li>
+<li>tap on a shot: shot edit dialog</li>
+<li>long tap on a shot: shot secondary actions dialog</li>
+<li>tap on a station: show/hide splays at the station</li>
+<li>long tap on a station: select/deselect the <a href="page_stations.htm">"current" station</a></li>
 </ul><br><p>
 
 <h4>BUTTONS</h4>
 <ul>
-<li><u>Save</u> saves the calibration informations to the database</li>
-<li><u>Open</u> opens the calibration data window</li>
-<li><u>Read</u> [A] displays the calibration coefficients. This shows the values of the calibration coefficients previouly computed, and stored in the database</li>
+<li><u>Download</u>: DistoX data download. Hidden if no DistoX selected</li>
+<li><u>Bluetooth</u>: <a href="page_bluetooth.htm">bluetooth dialog</a></li>
+<li><u>Display</u>: to choose the <a href="page_displaymode.htm">display mode</a></li>
+<li><u>Sketch</u>: sketch dialog. A long tap opens immediately the most recent sketch</li>
+<li><u>Notes</u>: survey annotations</li>
+<li><u>Extend</u>: <a href="page_extend.htm">extend reference</a></li>
+<li><u>Stations</u> [N]: <a href="page_stations.htm">saved stations</a></li>
+<li><u>Add</u> [N] <a href="page_manual.htm">manual</a> shot data dialog</li>
 </ul><br><p>
 
-<h4>CALIBRATION SETTINGS</h4>
+<h4>Sketch dialog</h4>
+Through the Sketch dialog you create a new sketch or open an existing one. There is a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in profile view; once open in a view you can switch to the other from within the sketch window).<br><p>
+
+If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches.<br><p>
+
+<h4>MENUS</h4>
 <ul>
-<li><i>Group policy</i>: how to split the calibration data into <a href="page_groups.htm">groups</a>.</li>
-<li><i>Group tolerance</i>: the maximum angular distance between consecutive data for them to be in the same group when the "distance-based" group-policy is used</li>
-<li><i>Error</i>: the computation of the coefficients ends if the variation of every coefficient during an iteration step is smaller than this value [10<sup>-6</sup>].</li>
-<li><i>Iterations</i>: the maximum number of iteration of the calibration algorithm [200].</li>
-<li><i>Raw data</i>: whether to display the raw data. By default TopoDroid displays the azimuth, inclination, and roll. Check this option if you want to see also the raw calibration data</li>
-<li><i>Algorithm</i>: can be 0 (auto), 1 (linear), 2 (non-linear). If a calibration algorithm is left "auto", and this setting is not "auto", then the algorithm of the settings is used to calculate the calibration. If they are both "auto" the algorithm is chosen automatically by TopoDroid depending on the DistoX model and firmware.</li>
+<li><u>Survey info</u>: survey information window</li>
+<li><u>Recover</u>: deleted item (shot or sketch) recovery</li>
+<li><u>Photo</u> [A]: pictures taken for this survey</li>
+<li><u>Sensor</u> [A]: sensor data taken for this survey</li>
+<li><u>3D</u>: 3D survey display (need </i>Cave3D</i>)</li>
+<li><u>DistoX</u> [A]: device window</li>
+<li><u>Settings</u></li>
+<li><u>Help</u></li>
 </ul><br><p>
 
-<hr>
-<i>Fill the necessary fields, save the calibration info to the database, and open it.
-You are in the calibration data window, ready to take the calibration shots.</i><br><p>
+<h4>SURVEY SETTINGS</h4>
+<ul>
+  <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with.</li>
+  <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station assignment policy.</a></li>
+  <li><i>Station names</i> specifies the type of the station names, either alphanumeric (default) or numeric [B].</li>
+  <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog.</li>
+  <li><i>Thumbnail size</i>: size of the photo thumbnails</li>
+  <li><i>DATA UNITS >></i>
+    <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Length units</i>: either meters or feet</li>
+    <li><i>Angle units</i>: either degrees or grads</li>
+    </ul>
+  </li>
+  <li><i>SHOT DATA >></i>
+    <ul style="margin-top:0; margin-bottom:0">
+    <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg</li>
+    <li><i>Minimum leg shots</i>: minimum number of close consecutive shots for a leg.</li>
+    <li><i>Splay vertical threshold</i>: the "extend" direction assigned to a splay shot depends on the angle it makes with the leg(s). When the angle is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, depending whether the angle it makes with the leg is smaller or larger than 90 degrees.</li>
+    <li><i>Leg vertical threshold</i>. this is like Therion "vthreshold": the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
+    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_extend.htm">extend reference</a></li>
+    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors</li>
+    <li><i>Backsight</i> fields in the shot manual input dialog [N]</li>
+    <li><i>Magnetic anomaly</i> compensation. It requires backsight auto-station policy</li>
+    <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors</li>
+    <li><i>Beep volume</i>: timer beep volume [N]</li>
+    </ul>
+  </li>  
+  <li><i>LOCATION <a href="page_location.htm">settings</a></i></li>  
+  <li><i>ACCURACY <a href="page_accuracy.htm">settings</a></i></li>
+</ul><br><p>
 
-<a href="page_calibration.htm">Calibration howto</a><br>
-<a href="page_calib_impexp.htm">Calibration import/export</a><br>
+To exit the survey data window double tap on the <u>BACK</u> button of your device.<br><p>
+
+<a href="page_download.htm">DistoX data download</a><br>
+<a href="page_manual.htm">Manual data input</a><br>
+<a href="page_displaymode.htm">Data display mode</a><br>
+<a href="page_extend.htm">Extend reference</a><br>
+<a href="page_stations.htm">Saved stations</a><br>
+<a href="page_accuracy.htm">Shot accuracy</a><br>
 <p>
 
-<a href="manual05.htm">&lt; Device window</a> |
-<a href="manual07.htm">Calibration data &gt;</a>
+<a href="manual05.htm">&lt; Calibration data</a> |
+<a href="manual07.htm">Shot list &gt;</a>
 
 </body></html>

@@ -1,53 +1,48 @@
 <html><body>
-<h3>[4] MAIN WINDOW</h3><p>
+<h3>[4] CALIBRATION WINDOW</h3>
 
-The main window has three (or five) buttons at the top, and 
-the list of the surveys underneath. This list is empty until you create a survey.
-The first time you start the app a welcome message is shown. You can go back to it any time later with the <u>About</u> menu.<br><p>
+Tapping the <u>Calibration</u> menu in the Device activity window takes to the Calibrations dialog, which lists the calibrations of the current DistoX.<br><p>
 
-To exit TopoDroid main window double tap on the <i>BACK</i> button of your device.<br><p>
+To create a new calibration tap on the <u>New Calibration</u> button in the dialog. This brings you to the window for the calibration informations. The "date" field is prefilled with the current date. The "device" field is prefilled with the address of the DistoX, and cannot be modified. You must give a "name" to the calibration. The name is what appears in the list of calibrations. You can optionally enter a brief "description". By default TopoDroid will pick automatically the calibration algorithm based on the DistoX model and firmware. However you can force it to use either the linear or the non-linear algorithm. When you are done tap the <u>Save</u> button (the leftmost) to save the calibration info to the database.<br><p>
 
+<b>WARNING. The name of the calibration must not contain the character '/' (slash), which is the pathname separator.</b><br><p>
 
-<h4>MENUS</h4>
-<ul>
-<li><u>Palette</u> allows to choose the <a href="page_tools">drawing tools</a> that are loaded.</li>
-<li><u>Cosurvey</u> [E] opens the dialog to connect with the TopoDroid app on another Android to make a join-surveying.</li>
-<li><u>Settings</u>: all the program settings.</li>
-<li><u>Logs</u> settings [E]. <a href="page_log.htm">Logging</a> is mostly for debugging app error.</li>
-<li><u>About</u>: the program welcome message</li>
-<li><u>Help</u> shows a brief descriptions of buttons and menus. At the top-right corner there is a button that opens this user manual. Each TopoDroid window has a similar <u>Help</u> menu.</li>
-</ul><br><p>
+When you open an existing calibration (tapping the calibration name in the list of the calibration of a DistoX), you get the same interface.  The only difference is that the name of the calibration is no more editable.<br><p>
 
 <h4>BUTTONS</h4>
 <ul>
-<li><u>Device activity</u> (DistoX icon): switches to the Device (management) window</li>
-<li><u>Add</u> (a plus sign): used to create a new survey</li>
-<li><u>Import</u> (a vertical arrow): used to import TopoDroid ZIP archives or survey files (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, <i>PocketTopo</i>).</li>
-<li>The optional buttons [E] are for the <i>ThManager</i> (Therion manager) and the <i>SQLite viewer</i>; both require external apps</li>
+<li><u>Save</u> saves the calibration informations to the database</li>
+<li><u>Open</u> opens the calibration data window</li>
+<li><u>Read</u> [A] displays the calibration coefficients. This shows the values of the calibration coefficients previouly computed, and stored in the database</li>
 </ul><br><p>
 
-<h4>SETTINGS</h4>
+<h4>MENUS</h4>
 <ul>
-<li><i>Work directory</i> sets the <a href="page_cwd.htm">current work directory</A>. By default this is "TopoDroid".</li>
-<li><i>Language</i> overrides the system default <a href="page_language.htm">language</a> with a built-in language.</li>
-<li><i>Text size</i> of items in the lists</li>
-<li><i>Buttons size</i>, either "small" or "large": small buttons for a 5" screen, large buttons for 7" tablets.</li>
-<li><i>Keyboard</i> enables or disables the TopoDroid <a href="page_keypad.htm">keypads</a>.</li>
-<li><i>Activity level</i> selects the activity level [default "normal"].</li>
-<li><i>Cosurveying</i> [E] activate/deactivate the cosurveying service (very experimental).</li>
+<li><u>Export</u> The calibration data can be exported as a CSV text file that can be imported in a spreadsheet program</li>
+<li><u>Delete</u> removes the calibration informations and its data from the database. This is a non-recoverable action.</li>
+<li><u>Settings</u></li>
+<li><u>Help</u></li>
+</ul><br><p>
+
+<h4>CALIBRATION SETTINGS</h4>
+<ul>
+<li><i>Group policy</i>: how to split the calibration data into <a href="page_groups.htm">groups</a>.</li>
+<li><i>Group tolerance</i>: the maximum angular distance between consecutive data for them to be in the same group when the "distance-based" group-policy is used</li>
+<li><i>Error</i>: the computation of the coefficients ends if the variation of every coefficient during an iteration step is smaller than this value [10<sup>-6</sup>].</li>
+<li><i>Iterations</i>: the maximum number of iteration of the calibration algorithm [200].</li>
+<li><i>Raw data</i>: whether to display the raw data. By default TopoDroid displays the azimuth, inclination, and roll. Check this option if you want to see also the raw calibration data</li>
+<li><i>Algorithm</i>: can be 0 (auto), 1 (linear), 2 (non-linear). If a calibration algorithm is left "auto", and this setting is not "auto", then the algorithm of the settings is used to calculate the calibration. If they are both "auto" the algorithm is chosen automatically by TopoDroid depending on the DistoX model and firmware.</li>
 </ul><br><p>
 
 <hr>
-If <b>bluetooth</b> is not on, the app asks whether to turn it on. Without bluetooth it cannot communicate with the DistoX and the survey data can only be entered manually. In this case the <i>Download</i> button in the Shot window is hidden, and that in the Sketch window is replaced by the <i>Add</i> button.<br><p>
+<i>Fill the necessary fields, save the calibration info to the database, and open it.
+You are in the calibration data window, ready to take the calibration shots.</i><br><p>
 
-<a href="page_import.htm">Survey import</a><br>
-<a href="page_language.htm">Language</a><br>
-<a href="page_keypad.htm">TopoDroid keypads</a><br>
-<a href="page_cwd.htm">Current work directory</a><br>
-<a href="page_logging.htm">Logging</a><br>
+<a href="page_calibration.htm">Calibration howto</a><br>
+<a href="page_calib_impexp.htm">Calibration import/export</a><br>
 <p>
 
-<a href="manual03.htm">&lt; Auxiliary apps</a> |
-<a href="manual05.htm">Device window &gt;</a>
+<a href="manual03.htm">&lt; Device window</a> |
+<a href="manual05.htm">Calibration data &gt;</a>
 
 </body></html>
