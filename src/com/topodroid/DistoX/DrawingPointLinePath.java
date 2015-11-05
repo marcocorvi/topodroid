@@ -216,6 +216,10 @@ public class DrawingPointLinePath extends DrawingPath
     mLast  = null;
     mPath = new Path();
     mSize = 0;
+    mBBox.left   = 0;
+    mBBox.right  = 0;
+    mBBox.top    = 0;
+    mBBox.bottom = 0;
   }
 
 
@@ -259,6 +263,8 @@ public class DrawingPointLinePath extends DrawingPath
     ++ mSize;
     mFirst = mLast;
     mPath.moveTo( x, y );
+    mBBox.left = mBBox.right  = x;
+    mBBox.top  = mBBox.bottom = y;
   }
 
   public void addPoint( float x, float y ) 
@@ -272,6 +278,8 @@ public class DrawingPointLinePath extends DrawingPath
       mLast = new LinePoint(x, y, mLast);
       ++ mSize;
       mPath.lineTo( x, y );
+      if ( x < mBBox.left ) { mBBox.left = x; } else if ( x > mBBox.right  ) { mBBox.right  = x; }
+      if ( y < mBBox.top  ) { mBBox.top  = y; } else if ( y > mBBox.bottom ) { mBBox.bottom = y; }
     }
   }
 
@@ -292,6 +300,8 @@ public class DrawingPointLinePath extends DrawingPath
         ++mSize;
         mPath.cubicTo( x1,y1, x2,y2, x,y );
       }
+      if ( x < mBBox.left ) { mBBox.left = x; } else if ( x > mBBox.right  ) { mBBox.right  = x; }
+      if ( y < mBBox.top  ) { mBBox.top  = y; } else if ( y > mBBox.bottom ) { mBBox.bottom = y; }
     }
   }
 

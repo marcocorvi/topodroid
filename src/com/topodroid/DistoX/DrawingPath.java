@@ -59,6 +59,27 @@ public class DrawingPath implements ICanvasCommand
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
 
   float cx, cy; // midpoint scene coords
+  RectF mBBox;   // path boundig box (scene coords)
+
+  void setBBox( float x1, float x2, float y1, float y2 )
+  {
+    mBBox.right  = x1;
+    mBBox.left   = x2;
+    mBBox.top    = y1;
+    mBBox.bottom = y2;
+  }
+
+  protected boolean intersects( RectF bbox )
+  { 
+    // return true;
+    if ( bbox == null ) return true;
+    if ( ( bbox.right  < mBBox.left   ) 
+      || ( bbox.left   > mBBox.right  ) 
+      || ( bbox.top    > mBBox.bottom ) 
+      || ( bbox.bottom < mBBox.top    ) ) return false;
+    return true;
+  }
+  
                  
   DistoXDBlock mBlock;
 
@@ -124,6 +145,7 @@ public class DrawingPath implements ICanvasCommand
   {
     mType = type;
     mBlock = null;
+    mBBox  = new RectF();
     // dir = 4;
     // x1 = y1 = 0.0f;
     // x2 = y2 = 1.0f;
@@ -134,6 +156,7 @@ public class DrawingPath implements ICanvasCommand
   {
     mType = type;
     mBlock = blk; 
+    mBBox  = new RectF();
     // dir = 4;
     // x1 = y1 = 0.0f;
     // x2 = y2 = 1.0f;
@@ -155,6 +178,20 @@ public class DrawingPath implements ICanvasCommand
     // d = FloatMath.sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
     cx = (x20+x10)/2;
     cy = (y20+y10)/2;
+    if ( x1 < x2 ) {
+      mBBox.left  = x1;
+      mBBox.right = x2;
+    } else {
+      mBBox.left  = x2;
+      mBBox.right = x1;
+    }
+    if ( y1 < y2 ) {
+      mBBox.top    = y1;
+      mBBox.bottom = y2;
+    } else {
+      mBBox.top    = y2;
+      mBBox.bottom = y1;
+    }
   }
 
   // intersection of 
@@ -192,6 +229,10 @@ public class DrawingPath implements ICanvasCommand
     cx += dx;
     cy += dy;
     mPath.offset( dx, dy );
+    mBBox.left   += dx;
+    mBBox.right  += dx;
+    mBBox.top    += dy;
+    mBBox.bottom += dy;
   }
 
   float distance( float x, float y )
@@ -205,21 +246,25 @@ public class DrawingPath implements ICanvasCommand
 
   // public int type() { return mType; }
 
-  public void draw( Canvas canvas )
+  public void draw( Canvas canvas, RectF bbox )
   {
-    if ( mType == DRAWING_PATH_AREA ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingPath::draw area" );
-      mPath.close();
+    if ( intersects( bbox ) ) {
+      if ( mType == DRAWING_PATH_AREA ) {
+        // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingPath::draw area" );
+        mPath.close();
+      }
+      drawPath( mPath, canvas );
     }
-    drawPath( mPath, canvas );
   }
 
   // N.B. canvas is guaranteed ! null
-  public void draw( Canvas canvas, Matrix matrix, float scale )
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
-    mTransformedPath = new Path( mPath );
-    mTransformedPath.transform( matrix );
-    drawPath( mTransformedPath, canvas );
+    if ( intersects( bbox ) ) {
+      mTransformedPath = new Path( mPath );
+      mTransformedPath.transform( matrix );
+      drawPath( mTransformedPath, canvas );
+    }
   }
 
   protected void drawPath( Path path, Canvas canvas )

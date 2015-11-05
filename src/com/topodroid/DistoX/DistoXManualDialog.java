@@ -107,7 +107,7 @@ public class DistoXManualDialog extends Activity
     adapter.add("11. Cross-sections");
     adapter.add("12. Overview window");
     adapter.add("13. Import/Export");
-    if ( TopoDroidApp.mCosurvey ) adapter.add("14. Co-surveying");
+    adapter.add("14. Index");
     adapter.add("* Website");
  
     mList.setAdapter( adapter );
@@ -138,8 +138,7 @@ public class DistoXManualDialog extends Activity
     CharSequence item = ((TextView) view).getText();
     // Log.v("DistoX", "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
-    int max = ( TopoDroidApp.mCosurvey )? 14 : 13;
-    if ( pos <= max ) {
+    if ( pos <= 14 ) {
       StringWriter sw = new StringWriter();
       PrintWriter pw = new PrintWriter( sw );
       pw.format( "manual%02d.htm", pos );

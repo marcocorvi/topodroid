@@ -70,8 +70,8 @@ public class EraseCommand implements ICanvasCommand
   public int  commandType() { return 1; }
 
   // nothing to draw
-  public void draw(Canvas canvas) { }
-  public void draw(Canvas canvas, Matrix mat, float scale ) { }
+  public void draw(Canvas canvas, RectF bbox) { }
+  public void draw(Canvas canvas, Matrix mat, float scale, RectF bbox ) { }
 
   public void flipXAxis() { } 
   public void shiftPathBy( float x, float y ) { }

@@ -20,8 +20,8 @@ import android.graphics.RectF;
  */
 public interface ICanvasCommand {
     public int  commandType(); // command type: 0 DrawingPath, 1 EraseCommand
-    public void draw(Canvas canvas);
-    public void draw(Canvas canvas, Matrix mat, float scale );
+    public void draw(Canvas canvas, RectF bbox );
+    public void draw(Canvas canvas, Matrix mat, float scale, RectF bbox );
 
     // public void undoCommand();
 

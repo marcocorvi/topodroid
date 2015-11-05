@@ -101,10 +101,10 @@ public class SketchDrawingSurface extends SurfaceView
         // commandManager.executeAll( c, previewDoneHandler );
         mModel.executeAll( c, null /* previewDoneHandler */ ); // handler is not used
         if ( previewPath != null ) {
-          previewPath.draw(c);
+          previewPath.draw(c, null);
         }
       
-        canvas.drawBitmap (mBitmap, 0,  0,null);
+        canvas.drawBitmap (mBitmap, 0, 0, null);
       } finally {
         if ( canvas != null ) {
           mHolder.unlockCanvasAndPost( canvas );

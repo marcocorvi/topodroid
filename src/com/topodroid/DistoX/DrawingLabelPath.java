@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.graphics.Matrix;
 
 import java.io.PrintWriter;
@@ -46,20 +47,24 @@ public class DrawingLabelPath extends DrawingPointPath
   }
 
   @Override
-  public void draw( Canvas canvas )
+  public void draw( Canvas canvas, RectF bbox )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLabelPath::draw " + mText );
-    canvas.drawTextOnPath( mText, mPath, 0f, 0f, mPaint );
+    if ( intersects( bbox ) ) {
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLabelPath::draw " + mText );
+      canvas.drawTextOnPath( mText, mPath, 0f, 0f, mPaint );
+    }
   }
 
   @Override
-  public void draw( Canvas canvas, Matrix matrix, float scale )
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLabelPath::draw[matrix] " + mText );
-    setTextSize();
-    mTransformedPath = new Path( mPath );
-    mTransformedPath.transform( matrix );
-    canvas.drawTextOnPath( mText, mTransformedPath, 0f, 0f, mPaint );
+    if ( intersects( bbox ) ) {
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLabelPath::draw[matrix] " + mText );
+      setTextSize();
+      mTransformedPath = new Path( mPath );
+      mTransformedPath.transform( matrix );
+      canvas.drawTextOnPath( mText, mTransformedPath, 0f, 0f, mPaint );
+    }
   }
 
   @Override

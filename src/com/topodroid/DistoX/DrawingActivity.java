@@ -317,6 +317,9 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
+    // -------------------------------------------------------------------
+    // ZOOM CONTROLS
+
     @Override
     public void onVisibilityChanged(boolean visible)
     {
@@ -383,6 +386,8 @@ public class DrawingActivity extends ItemDrawer
     //   DrawingZoomDialog zoom = new DrawingZoomDialog( mDrawingSurface.getContext(), this );
     //   zoom.show();
     // }
+
+    // -----------------------------------------------------------------
 
     // void setType( int type )
     // {
@@ -490,6 +495,7 @@ public class DrawingActivity extends ItemDrawer
         dpath.mPath  = new Path();
         dpath.mPath.moveTo( x0, y1 );
         dpath.mPath.lineTo( x0, y2 );
+        dpath.setBBox( x0, x0+1, y1, y2 );
         mDrawingSurface.addGridPath( dpath );
       }
       for ( int y = (int)Math.round(ymin); y < ymax; y += 1 ) {
@@ -500,6 +506,7 @@ public class DrawingActivity extends ItemDrawer
         dpath.mPath  = new Path();
         dpath.mPath.moveTo( x1, y0 );
         dpath.mPath.lineTo( x2, y0 );
+        dpath.setBBox( x1, x2, y0, y0+1 );
         mDrawingSurface.addGridPath( dpath );
       }
     }
@@ -3196,8 +3203,6 @@ public class DrawingActivity extends ItemDrawer
     mApp.mShotActivity.updateBlockList( blk_id );
     updateDisplay( true );
   }
-
-
 
   @Override
   public boolean onSearchRequested()

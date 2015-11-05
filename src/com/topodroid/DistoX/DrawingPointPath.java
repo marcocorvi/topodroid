@@ -16,6 +16,7 @@ package com.topodroid.DistoX;
 import android.graphics.Canvas;
 // import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.graphics.Matrix;
 
 import java.io.PrintWriter;
@@ -49,8 +50,7 @@ public class DrawingPointPath extends DrawingPath
     super( DrawingPath.DRAWING_PATH_POINT );
     // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
-    cx = x;
-    cy = y;
+    setCenter( x, y );
     mOptions = options;
     mScale   = SCALE_NONE;
     mOrientation = 0.0;
@@ -67,12 +67,26 @@ public class DrawingPointPath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }
 
+  protected void setCenter( float x, float y )
+  {
+    cx = x;
+    cy = y;
+    mBBox.left   = x; 
+    mBBox.right  = x+1;
+    mBBox.top    = y;
+    mBBox.bottom = y+1;
+  }
+
   @Override
   void shiftBy( float dx, float dy )
   {
     cx += dx;
     cy += dy;
     mPath.offset( dx, dy );
+    mBBox.left   += dx;
+    mBBox.right  += dx;
+    mBBox.top    += dy;
+    mBBox.bottom += dy;
   }
 
   @Override
@@ -85,19 +99,25 @@ public class DrawingPointPath extends DrawingPath
     // cx += dx;
     // cy += dy;
     // mPath.offset( dx, dy );
+    // mBBox.left   += dx;
+    // mBBox.right  += dx;
+    // mBBox.top    += dy;
+    // mBBox.bottom += dy;
   }
 
 
   // N.B. canvas is guaranteed ! null
   @Override
-  public void draw( Canvas canvas, Matrix matrix, float scale )
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
-    if ( TopoDroidSetting.mUnscaledPoints ) {
-      resetPath( 4 * scale );
+    if ( intersects( bbox ) ) {
+      if ( TopoDroidSetting.mUnscaledPoints ) {
+        resetPath( 4 * scale );
+      }
+      mTransformedPath = new Path( mPath );
+      mTransformedPath.transform( matrix );
+      drawPath( mTransformedPath, canvas );
     }
-    mTransformedPath = new Path( mPath );
-    mTransformedPath.transform( matrix );
-    drawPath( mTransformedPath, canvas );
   }
 
   void setScale( int scale )
@@ -131,8 +151,7 @@ public class DrawingPointPath extends DrawingPath
 
   // public void setPos( float x, float y ) 
   // {
-  //   cx = x;
-  //   cy = y;
+  //   setCenter( x, y );
   // }
 
   // public void setPointType( int t ) { mPointType = t; }
@@ -161,8 +180,7 @@ public class DrawingPointPath extends DrawingPath
   public void shiftTo( float x, float y ) // x,y scene coords
   {
     mPath.offset( x-cx, y-cy );
-    cx = x;
-    cy = y;
+    setCenter( x, y );
   }
 
   float distance( float x, float y )

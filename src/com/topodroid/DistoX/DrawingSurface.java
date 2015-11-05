@@ -197,7 +197,7 @@ public class DrawingSurface extends SurfaceView
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler, mSplayStations );
         if ( previewPath != null ) {
-          previewPath.draw(canvas);
+          previewPath.draw(canvas, null);
         }
       } finally {
         if ( canvas != null ) {

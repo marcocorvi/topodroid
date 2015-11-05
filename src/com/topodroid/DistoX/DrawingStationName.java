@@ -18,6 +18,7 @@ import java.util.Locale;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.graphics.Matrix;
 
 // import android.util.Log;
@@ -45,8 +46,7 @@ public class DrawingStationName extends DrawingPointPath
 
     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + num_st.name + " " + x + " " + y );
     mName = name;
-    cx = x; // scene coordinate
-    cy = y; 
+    setCenter( x, y ); // scene coords
     mDuplicate = false;
     makeStraightPath( 0, 0, 2*TopoDroidSetting.mStationSize*mName.length(), 0, cx, cy );
   }
@@ -63,8 +63,7 @@ public class DrawingStationName extends DrawingPointPath
     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + num_st.name + " " + x + " " + y );
     if ( num_st.mDuplicate ) mPaint = DrawingBrushPaths.duplicateStationPaint;
     mName = num_st.name;
-    cx = x; // scene coordinate
-    cy = y; 
+    setCenter( x, y ); // scene coords
     mDuplicate = num_st.mDuplicate;
     
     makeStraightPath( 0, 0, 2*TopoDroidSetting.mStationSize*mName.length(), 0, cx, cy );
@@ -78,19 +77,23 @@ public class DrawingStationName extends DrawingPointPath
   }
 
   @Override
-  public void draw( Canvas canvas )
+  public void draw( Canvas canvas, RectF bbox )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingStationName::draw LABEL " + mName );
-    canvas.drawTextOnPath( mName, mPath, 0f, 0f, mPaint );
+    if ( intersects( bbox ) ) {
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingStationName::draw LABEL " + mName );
+      canvas.drawTextOnPath( mName, mPath, 0f, 0f, mPaint );
+    }
   }
 
   @Override
-  public void draw( Canvas canvas, Matrix matrix, float scale )
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingStationName::draw[matrix] LABEL " + mName );
-    mTransformedPath = new Path( mPath );
-    mTransformedPath.transform( matrix );
-    canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, mPaint );
+    if ( intersects( bbox ) ) {
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingStationName::draw[matrix] LABEL " + mName );
+      mTransformedPath = new Path( mPath );
+      mTransformedPath.transform( matrix );
+      canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, mPaint );
+    }
   }
   
   String getCoordsString()

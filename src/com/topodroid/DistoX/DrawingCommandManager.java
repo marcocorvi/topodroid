@@ -19,6 +19,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PointF;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 // import android.graphics.Path.Direction;
 import android.os.Handler;
 
@@ -48,6 +49,7 @@ public class DrawingCommandManager
   private static final float mCloseness = TopoDroidSetting.mCloseness;
 
   static int mDisplayMode = DisplayMode.DISPLAY_ALL;
+  RectF mBBox;
 
   DrawingPath mNorthLine;
   DrawingPath mFirstReference;
@@ -183,6 +185,7 @@ public class DrawingCommandManager
 
   public DrawingCommandManager()
   {
+    mBBox = new RectF();
     mNorthLine       = null;
     mFirstReference  = null;
     mSecondReference = null;
@@ -334,6 +337,10 @@ public class DrawingCommandManager
     mMatrix.postTranslate( dx, dy );
     mMatrix.postScale( s, s );
     mScale  = 1 / s;
+    mBBox.left   = - dx;
+    mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
+    mBBox.top    = - dy;
+    mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
   }
 
   // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
@@ -849,9 +856,9 @@ public class DrawingCommandManager
         final Iterator i = mGridStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat, sca );
+          drawingPath.draw( c, mat, sca, null );
         }
-        if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca );
+        if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca, null );
       }
     }
     if ( mSplaysStack != null ) {
@@ -859,7 +866,7 @@ public class DrawingCommandManager
         final Iterator i = mSplaysStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat, sca );
+          drawingPath.draw( c, mat, sca, null );
         }
       }
     }
@@ -868,7 +875,7 @@ public class DrawingCommandManager
         final Iterator i = mLegsStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( c, mat, sca );
+          drawingPath.draw( c, mat, sca, null );
         }
       }
     }
@@ -877,7 +884,7 @@ public class DrawingCommandManager
     //     final Iterator i = mFixedStack.iterator();
     //     while ( i.hasNext() ){
     //       final DrawingPath drawingPath = (DrawingPath) i.next();
-    //       drawingPath.draw( c, mat, sca );
+    //       drawingPath.draw( c, mat, sca, null );
     //     }
     //   }
     // }
@@ -885,7 +892,7 @@ public class DrawingCommandManager
     if ( mStations != null ) {  
       synchronized( mStations ) {
         for ( DrawingStationName st : mStations ) {
-          st.draw( c, mat, sca );
+          st.draw( c, mat, sca, null );
         }
       }
     }
@@ -895,7 +902,7 @@ public class DrawingCommandManager
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
           final ICanvasCommand cmd = (ICanvasCommand) i.next();
-          cmd.draw( c, mat, sca );
+          cmd.draw( c, mat, sca, null );
         }
       }
     }
@@ -1028,10 +1035,10 @@ public class DrawingCommandManager
         final Iterator i = mGridStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath drawingPath = (DrawingPath) i.next();
-          drawingPath.draw( canvas, mMatrix, mScale );
+          drawingPath.draw( canvas, mMatrix, mScale, mBBox );
           //doneHandler.sendEmptyMessage(1);
         }
-        if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale );
+        if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
       }
     }
 
@@ -1040,7 +1047,7 @@ public class DrawingCommandManager
         final Iterator i = mLegsStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
-          path.draw( canvas, mMatrix, mScale );
+          path.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
     }
@@ -1051,7 +1058,7 @@ public class DrawingCommandManager
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
           if ( splays || showStationSplays( path, splay_stations ) ) {
-            path.draw( canvas, mMatrix, mScale );
+            path.draw( canvas, mMatrix, mScale, mBBox );
           }
           //doneHandler.sendEmptyMessage(1);
         }
@@ -1061,7 +1068,7 @@ public class DrawingCommandManager
     if ( mStations != null && stations ) {  
       synchronized( mStations ) {
         for ( DrawingStationName st : mStations ) {
-          st.draw( canvas, mMatrix, mScale );
+          st.draw( canvas, mMatrix, mScale, mBBox );
         }
       }
     }
@@ -1072,7 +1079,7 @@ public class DrawingCommandManager
         while ( i.hasNext() ){
           final ICanvasCommand cmd = (ICanvasCommand) i.next();
           if ( cmd.commandType() == 0 ) {
-            cmd.draw( canvas, mMatrix, mScale );
+            cmd.draw( canvas, mMatrix, mScale, mBBox );
           }
           //doneHandler.sendEmptyMessage(1);
         }
@@ -1145,8 +1152,8 @@ public class DrawingCommandManager
       } 
     }
     synchronized( mGridStack ) {
-      if ( mFirstReference != null ) mFirstReference.draw( canvas, mMatrix, mScale );
-      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale );
+      if ( mFirstReference != null ) mFirstReference.draw( canvas, mMatrix, mScale, mBBox );
+      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale, mBBox );
     }
   }
 
