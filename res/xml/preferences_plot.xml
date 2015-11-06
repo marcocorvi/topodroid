@@ -27,33 +27,6 @@
        android:entryValues="@array/zoomCtrlValue"
        />
 
-     <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_SPLAY_VERT_THRS"
-       android:title="@string/pref_plan_vthr_title"
-       android:summary="@string/pref_plan_vthr_summary"
-       android:dialogTitle="@string/pref_plan_vthr_title"
-       android:dialogMessage="@string/pref_plan_vthr_message"
-       android:inputType="number"
-       android:defaultValue="80"/>
-
-     <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_VERT_SPLAY"
-       android:title="@string/pref_vert_splay_title"
-       android:summary="@string/pref_vert_splay_summary"
-       android:dialogTitle="@string/pref_vert_splay_title"
-       android:dialogMessage="@string/pref_vert_splay_message"
-       android:inputType="numberDecimal"
-       android:defaultValue="50" />
-
-     <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_HTHRESHOLD"
-       android:title="@string/pref_hthr_title"
-       android:summary="@string/pref_hthr_summary"
-       android:dialogTitle="@string/pref_hthr_title"
-       android:dialogMessage="@string/pref_hthr_message"
-       android:inputType="numberDecimal"
-       android:defaultValue="70.0" />
-
      <CheckBoxPreference
        android:key="DISTOX_CHECK_ATTACHED"
        android:summary="@string/pref_checkAttached_summary"
@@ -62,8 +35,14 @@
      />
 
     <Preference
-       android:key="DISTOX_TOOL_SCREEN"
-       android:title="@string/pref_tool_screen_title"
+       android:key="DISTOX_TOOL_POINT"
+       android:title="@string/pref_tool_point_title"
+       android:textColor="#ff9966ff"
+       />
+
+    <Preference
+       android:key="DISTOX_TOOL_LINE"
+       android:title="@string/pref_tool_line_title"
        android:textColor="#ff9966ff"
        />
 

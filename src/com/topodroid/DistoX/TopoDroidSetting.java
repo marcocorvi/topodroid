@@ -50,7 +50,7 @@ class TopoDroidSetting
     "DISTOX_RAW_DATA",            // 22
     "DISTOX_CALIB_ALGO",          // 23
 
-    "DISTOX_DEVICE",              // 24 N.B. indexKeyDeviceName
+    "DISTOX_DEVICE",              // 24 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
     "DISTOX_BLUETOOTH",           // 25
     "DISTOX_SOCK_TYPE",
     "DISTOX_COMM_RETRY",          // 27
@@ -128,9 +128,9 @@ class TopoDroidSetting
 
   };
 
-  static final int indexKeyDeviceName = 24;
-
-  static String keyDeviceName() { return key[indexKeyDeviceName]; }
+  // static final int indexKeyDeviceName = 24;
+  // static String keyDeviceName() { return key[indexKeyDeviceName]; }
+  static String keyDeviceName() { return key[24]; }
 
   // static final  String EXPORT_TYPE    = "th";    // DISTOX_EXPORT_TH
 
@@ -512,7 +512,7 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) { mCalibAlgo = 0; }
 
     // ------------------- DEVICE PREFERENCES
-    k++; // DISTOX_DEVICE  24
+    k++; // DISTOX_DEVICE - UNUSED HERE
 
     try {
       mCheckBT = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_BLUETOOTH 25
@@ -869,8 +869,8 @@ class TopoDroidSetting
         mCalibAlgo = Integer.parseInt( prefs.getString( k, "0" ) ); 
       } catch ( NumberFormatException e ) { mCalibAlgo = 0; }
 
-    } else if ( k.equals( key[ nk++ ] ) ) {                         // DISTOX_DEVICE 24
-      // mDevice = mData.getDevice( prefs.getString( k, DEVICE_NAME ) );
+    } else if ( k.equals( key[ nk++ ] ) ) {                         // DISTOX_DEVICE - UNUSED HERE
+      // mDevice = mData.getDevice( prefs.getString( k, "" ) );
     } else if ( k.equals( key[ nk++ ] ) ) {                         // DISTOX_BLUETOOTH (choice)
       try {
         mCheckBT = Integer.parseInt(prefs.getString( k, "1" ) ); 

@@ -726,7 +726,8 @@
   <!-- string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
 
   <string name="pref_plot_screen_title">SKETCH ITEMS</string>
-  <string name="pref_tool_screen_title">DRAWING TOOLS</string>
+  <string name="pref_tool_line_title">LINE TOOLS</string>
+  <string name="pref_tool_point_title">POINT TOOLS</string>
   <string name="pref_location_title">LOCATION</string>
   <string name="pref_accuracy_title">ACCURACY</string>
   <string name="pref_shot_data_title">SHOT DATA</string>

@@ -641,7 +641,8 @@
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
   <string name="pref_plot_screen_title">IMPOSTAZIONI SCHERMO DISEGNO</string>
-  <string name="pref_tool_screen_title">IMPOSTAZIONI STRUMENTI DISEGNO</string>
+  <!-- FIXME string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI DISEGNO</string -->
+  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
   <string name="pref_location_title">IMPOSTAZIONI POSIZIONE</string>
   <string name="pref_shot_data_title">IMPOSTAZIONI DATI POLIGONALE</string>
   <string name="pref_cwd_title">DIRECTORY DI LAVORO</string>

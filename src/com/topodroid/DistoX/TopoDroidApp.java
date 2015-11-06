@@ -206,7 +206,6 @@ public class TopoDroidApp extends Application
   public long lastShotId( ) { return mData.getLastShotId( mSID ); }
   public long secondLastShotId( ) { return mSecondLastShotId; }
 
-  static final  String DEVICE_NAME    = "";
   Device mDevice = null;
   int    distoType() { return (mDevice == null)? 0 : mDevice.mType; }
   String distoAddress() { return (mDevice == null)? null : mDevice.mAddress; }
@@ -536,7 +535,7 @@ public class TopoDroidApp extends Application
 
     mSyncConn = new ConnectionHandler( this );
 
-    mDevice = mDData.getDevice( mPrefs.getString( TopoDroidSetting.keyDeviceName(), DEVICE_NAME ) );
+    mDevice = mDData.getDevice( mPrefs.getString( TopoDroidSetting.keyDeviceName(), "" ) );
 
     // DrawingBrushPaths.makePaths( getResources() );
 

@@ -689,7 +689,8 @@
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Durchschnitt</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string -->
   <string name="pref_plot_screen_title">Einstellung Skizzenansicht</string>
-  <string name="pref_tool_screen_title">Einstellung Zeichenansicht</string>
+  <!-- FIXME string name="pref_tool_line_title">Einstellung Zeichenansicht</string -->
+  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
   <string name="pref_location_title">Orts-Einstellung</string>
   <string name="pref_shot_data_title">MESSZUG EINSTELLUNGEN</string>
   <string name="pref_cwd_title">TopoDroid Ordner</string>

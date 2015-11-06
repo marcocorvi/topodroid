@@ -3,14 +3,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DEVICE"
        android:title="@string/pref_device_title"
        android:summary="@string/pref_device_summary"
        android:dialogTitle="@string/pref_device_title"
        android:dialogMessage="@string/pref_device_message"
        android:enabled="false"
-       android:defaultValue="" />
+       android:defaultValue="" / -->
 
      <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_DEVICE_TYPE"

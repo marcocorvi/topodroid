@@ -5,31 +5,6 @@
 
 <!-- PLOT SCREEN -->
 
-     <CheckBoxPreference
-       android:key="DISTOX_UNSCALED_POINTS"
-       android:summary="@string/pref_unscaled_points_summary"
-       android:title="@string/pref_unscaled_points_title"
-       android:defaultValue="false"
-     />
-
-     <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_DRAWING_UNIT"
-       android:title="@string/pref_drawing_unit_title"
-       android:summary="@string/pref_drawing_unit_summary"
-       android:dialogTitle="@string/pref_drawing_unit_title"
-       android:dialogMessage="@string/pref_drawing_unit_message"
-       android:inputType="numberDecimal"
-       android:defaultValue="1.2" />
-
-     <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_LINE_THICKNESS"
-       android:title="@string/pref_line_thickness_title"
-       android:summary="@string/pref_line_thickness_summary"
-       android:dialogTitle="@string/pref_line_thickness_title"
-       android:dialogMessage="@string/pref_line_thickness_message"
-       android:inputType="numberDecimal"
-       android:defaultValue="1" />
-
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_FIXED_THICKNESS"
        android:title="@string/pref_fixed_thickness_title"
@@ -49,24 +24,6 @@
        android:defaultValue="20" />
 
      <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_LABEL_SIZE"
-       android:title="@string/pref_label_size_title"
-       android:summary="@string/pref_label_size_summary"
-       android:dialogTitle="@string/pref_label_size_title"
-       android:dialogMessage="@string/pref_label_size_message"
-       android:inputType="numberDecimal"
-       android:defaultValue="24" />
-
-     <com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_ARROW_LENGTH"
-       android:title="@string/pref_arrow_length_title"
-       android:summary="@string/pref_arrow_length_summary"
-       android:dialogTitle="@string/pref_arrow_length_title"
-       android:dialogMessage="@string/pref_arrow_length_message"
-       android:inputType="numberDecimal"
-       android:defaultValue="8" />
-
-     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DOT_RADIUS"
        android:title="@string/pref_dot_radius_title"
        android:summary="@string/pref_dot_radius_summary"
@@ -83,5 +40,32 @@
        android:dialogMessage="@string/pref_closeness_message"
        android:inputType="number"
        android:defaultValue="24" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_SPLAY_VERT_THRS"
+       android:title="@string/pref_plan_vthr_title"
+       android:summary="@string/pref_plan_vthr_summary"
+       android:dialogTitle="@string/pref_plan_vthr_title"
+       android:dialogMessage="@string/pref_plan_vthr_message"
+       android:inputType="number"
+       android:defaultValue="80"/>
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_VERT_SPLAY"
+       android:title="@string/pref_vert_splay_title"
+       android:summary="@string/pref_vert_splay_summary"
+       android:dialogTitle="@string/pref_vert_splay_title"
+       android:dialogMessage="@string/pref_vert_splay_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="50" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_HTHRESHOLD"
+       android:title="@string/pref_hthr_title"
+       android:summary="@string/pref_hthr_summary"
+       android:dialogTitle="@string/pref_hthr_title"
+       android:dialogMessage="@string/pref_hthr_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="70.0" />
 
 </PreferenceScreen>

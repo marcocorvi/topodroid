@@ -5,6 +5,15 @@
 
 <!-- TOOL SCREEN -->
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_LINE_THICKNESS"
+       android:title="@string/pref_line_thickness_title"
+       android:summary="@string/pref_line_thickness_summary"
+       android:dialogTitle="@string/pref_line_thickness_title"
+       android:dialogMessage="@string/pref_line_thickness_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1" />
+
      <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LINE_STYLE"
        android:summary="@string/pref_linestyle_summary"
@@ -21,6 +30,15 @@
        android:dialogMessage="@string/pref_segment_message"
        android:inputType="number"
        android:defaultValue="10" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_ARROW_LENGTH"
+       android:title="@string/pref_arrow_length_title"
+       android:summary="@string/pref_arrow_length_summary"
+       android:dialogTitle="@string/pref_arrow_length_title"
+       android:dialogMessage="@string/pref_arrow_length_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="8" />
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_ACCURACY"

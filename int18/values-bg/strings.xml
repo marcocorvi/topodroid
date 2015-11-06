@@ -711,7 +711,8 @@
   <!-- UNUSED string name="pref_gps_averaging_summary">Да се използва ли усредняване на GPS координати</string -->
 
   <string name="pref_plot_screen_title">Екран за рисуване</string>
-  <string name="pref_tool_screen_title">Инструменти за рисуване</string>
+  <!-- FIXME string name="pref_tool_line_title">Инструменти за рисуване</string -->
+  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
   <string name="pref_location_title">Координати</string>
   <string name="pref_accuracy_title">Точност</string>
   <string name="pref_shot_data_title">Данни за отсечка</string>
