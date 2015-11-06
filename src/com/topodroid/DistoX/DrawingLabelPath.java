@@ -126,8 +126,8 @@ public class DrawingLabelPath extends DrawingPointPath
     pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", mText );
     pw.format("  <pen type=\"10\" />\n");
     pw.format("  <brush type=\"7\" />\n");
-    float x = DrawingActivity.sceneToWorldX( cx ); // convert to world coords.
-    float y = DrawingActivity.sceneToWorldY( cy );
+    float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
+    float y = DrawingUtil.sceneToWorldY( cy );
     pw.format(Locale.ENGLISH, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <font type=\"0\" />\n");
     pw.format("</item>\n");

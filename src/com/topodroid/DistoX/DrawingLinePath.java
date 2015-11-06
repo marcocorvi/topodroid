@@ -183,8 +183,8 @@ public class DrawingLinePath extends DrawingPointLinePath
     // if ( mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
     for ( ; pt != null; pt = pt.mNext ) 
     {
-      float x = DrawingActivity.sceneToWorldX( pt.mX );
-      float y = DrawingActivity.sceneToWorldY( pt.mY );
+      float x = DrawingUtil.sceneToWorldX( pt.mX );
+      float y = DrawingUtil.sceneToWorldY( pt.mY );
       pw.format(Locale.ENGLISH, "%.2f %.2f ", x, y );
       if ( b ) { pw.format("B "); b = false; }
     }

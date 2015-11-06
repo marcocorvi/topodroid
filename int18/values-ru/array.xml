@@ -2,6 +2,11 @@
 
 <resources>
 
+  <!-- TODO string-array name="unitGrid">
+     <item name="meter">meter</item>
+     <item name="yard">yard</item>
+  </string-array -->
+
   <string-array name="wallsType">
      <item name="none">Нету</item>
      <item name="convex">Свод</item>

@@ -306,9 +306,10 @@ public class DrawingSurface extends SurfaceView
     }
 
 
-    public void addGridPath( DrawingPath path )
+    // k : grid type 1, 10, 100
+    public void addGridPath( DrawingPath path, int k )
     {
-      commandManager.addGrid( path );
+      commandManager.addGrid( path, k );
     }
 
     public void addDrawingPath (DrawingPath drawingPath)

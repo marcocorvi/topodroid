@@ -126,8 +126,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
     // for ( LinePoint pt : mPoints ) 
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
     {
-      float x = DrawingActivity.sceneToWorldX( pt.mX );
-      float y = DrawingActivity.sceneToWorldY( pt.mY );
+      float x = DrawingUtil.sceneToWorldX( pt.mX );
+      float y = DrawingUtil.sceneToWorldY( pt.mY );
       pw.format(Locale.ENGLISH, "%.2f %.2f ", x, y );
       if ( b ) { pw.format("B "); b = false; }
     }

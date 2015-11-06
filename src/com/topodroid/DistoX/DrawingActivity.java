@@ -404,41 +404,16 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    static final float SCALE_FIX = 20.0f;  // N.B. DO NOT CHANGE (would break backward compat.)
-
-    public static final float CENTER_X = 100f;
-    public static final float CENTER_Y = 120f;
-
-    // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
-
-    static float toSceneX( float x ) { return CENTER_X + x * SCALE_FIX; }
-    static float toSceneY( float y ) { return CENTER_Y + y * SCALE_FIX; }
-
-    static float sceneToWorldX( float x ) { return (x - CENTER_X)/SCALE_FIX; }
-    static float sceneToWorldY( float y ) { return (y - CENTER_Y)/SCALE_FIX; }
-
     private void resetFixedPaint( )
     {
       mDrawingSurface.resetFixedPaint( DrawingBrushPaths.fixedShotPaint );
     }
     
-    private void makePath( DrawingPath dpath, float x1, float y1, float x2, float y2, float xoff, float yoff )
-    {
-      dpath.mPath = new Path();
-      x1 = toSceneX( x1 );
-      y1 = toSceneY( y1 );
-      x2 = toSceneX( x2 );
-      y2 = toSceneY( y2 );
-      dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
-      dpath.mPath.moveTo( x1 - xoff, y1 - yoff );
-      dpath.mPath.lineTo( x2 - xoff, y2 - yoff );
-    }
-
     private void addFixedSpecial( float x1, float y1, float x2, float y2, float xoff, float yoff )
     {
       DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH );
       dpath.setPaint( DrawingBrushPaths.highlightPaint );
-      makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
       mDrawingSurface.setNorthPath( dpath );
     }
 
@@ -461,7 +436,7 @@ public class DrawingActivity extends ItemDrawer
                         : blk.isRecent( mApp.mSecondLastShotId )? DrawingBrushPaths.fixedBluePaint 
                         : DrawingBrushPaths.fixedShotPaint );
       }
-      makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
       mDrawingSurface.addFixedPath( dpath, splay, selectable );
     }
 
@@ -470,45 +445,8 @@ public class DrawingActivity extends ItemDrawer
     {
       DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
       dpath.setPaint( blue? DrawingBrushPaths.fixedSplay2Paint : DrawingBrushPaths.fixedSplayPaint );
-      makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
       mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
-    }
-
-    public void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff )
-    {
-      xmin -= 10.0f;
-      xmax += 10.0f;
-      ymin -= 10.0f;
-      ymax += 10.0f;
-      float x1 = (float)(toSceneX( xmin ) - xoff);
-      float x2 = (float)(toSceneX( xmax ) - xoff);
-      float y1 = (float)(toSceneY( ymin ) - yoff);
-      float y2 = (float)(toSceneY( ymax ) - yoff);
-      // mDrawingSurface.setBounds( toSceneX( xmin ), toSceneX( xmax ), toSceneY( ymin ), toSceneY( ymax ) );
-
-      DrawingPath dpath = null;
-      for ( int x = (int)Math.round(xmin); x < xmax; x += 1 ) {
-        float x0 = (float)(toSceneX( x ) - xoff);
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(x%100) == 0)? DrawingBrushPaths.fixedGrid100Paint : 
-                        (Math.abs(x%10) == 0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
-        dpath.mPath  = new Path();
-        dpath.mPath.moveTo( x0, y1 );
-        dpath.mPath.lineTo( x0, y2 );
-        dpath.setBBox( x0, x0+1, y1, y2 );
-        mDrawingSurface.addGridPath( dpath );
-      }
-      for ( int y = (int)Math.round(ymin); y < ymax; y += 1 ) {
-        float y0 = (float)(toSceneY( y ) - yoff);
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(y%100) == 0)? DrawingBrushPaths.fixedGrid100Paint : 
-                        (Math.abs(y%10) == 0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
-        dpath.mPath  = new Path();
-        dpath.mPath.moveTo( x1, y0 );
-        dpath.mPath.lineTo( x2, y0 );
-        dpath.setBBox( x1, x2, y0, y0+1 );
-        mDrawingSurface.addGridPath( dpath );
-      }
     }
 
     // --------------------------------------------------------------------------------------
@@ -661,9 +599,11 @@ public class DrawingActivity extends ItemDrawer
     mDrawingSurface.setManager( type );
 
     if ( type == PlotInfo.PLOT_PLAN ) {
-      addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), xoff, yoff );
+      DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(),
+                           xoff, yoff, mDrawingSurface );
     } else {
-      addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), xoff, yoff );
+      DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(),
+                           xoff, yoff, mDrawingSurface );
     }
 
     // Log.v("DistoX", "reference offset " + xoff + " " + yoff );
@@ -699,7 +639,7 @@ public class DrawingActivity extends ItemDrawer
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
-          dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.e) - xoff, toSceneY(st.s) - yoff, true );
+          dst = mDrawingSurface.addDrawingStation( st, DrawingUtil.toSceneX(st.e) - xoff, DrawingUtil.toSceneY(st.s) - yoff, true );
         }
       }
     } else { // if ( type == PlotInfo.PLOT_EXTENDED && 
@@ -710,7 +650,7 @@ public class DrawingActivity extends ItemDrawer
           if ( st1.show() && st2.show() ) {
             addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), 
                           xoff, yoff, false, true );
-            // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "line " + toSceneX(st1.h) + " " + toSceneY(st1.v) + " - " + toSceneX(st2.h) + " " + toSceneY(st2.v) );
+            // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "line " + DrawingUtil.toSceneX(st1.h) + " " + DrawingUtil.toSceneY(st1.v) + " - " + DrawingUtil.toSceneX(st2.h) + " " + DrawingUtil.toSceneY(st2.v) );
           }
         }
       } 
@@ -724,7 +664,7 @@ public class DrawingActivity extends ItemDrawer
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           DrawingStationName dst;
-          dst = mDrawingSurface.addDrawingStation( st, toSceneX(st.h) - xoff, toSceneY(st.v) - yoff, true );
+          dst = mDrawingSurface.addDrawingStation( st, DrawingUtil.toSceneX(st.h) - xoff, DrawingUtil.toSceneY(st.v) - yoff, true );
         }
       }
     }
@@ -1154,7 +1094,7 @@ public class DrawingActivity extends ItemDrawer
       // SECTION and H_SECTION: mFrom != null, mTo != null, splays and leg
       // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
       if ( isSection() || isXSection() ) {
-        addGrid( -10, 10, -10, 10, 0.0f, 0.0f );
+        DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
         float xfrom=0;
         float yfrom=0;
         float xto=0;
@@ -1218,11 +1158,11 @@ public class DrawingActivity extends ItemDrawer
               xfrom = xx;
             }
             addFixedLine( blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
-            mDrawingSurface.addDrawingStation( mFrom, toSceneX(xfrom), toSceneY(yfrom) );
-            mDrawingSurface.addDrawingStation( mTo, toSceneX(xto), toSceneY(yto) );
+            mDrawingSurface.addDrawingStation( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
+            mDrawingSurface.addDrawingStation( mTo, DrawingUtil.toSceneX(xto), DrawingUtil.toSceneY(yto) );
           }
         } else { // if ( isXSection() ) }
-          mDrawingSurface.addDrawingStation( mFrom, toSceneX(xfrom), toSceneY(yfrom) );
+          mDrawingSurface.addDrawingStation( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
         }
 
         for ( DistoXDBlock b : mList ) { // repeat for splays
@@ -3478,12 +3418,12 @@ public class DrawingActivity extends ItemDrawer
     } else if ( size == 1 ) {
       PointF p = pts.get(0);
       if ( p.x > 0 && p.x < len ) { // wall from--p--to
-        xx = toSceneX( x0 + uu.x * p.x + vv.x * p.y );
-        yy = toSceneY( y0 + uu.y * p.x + vv.y * p.y );
-        x0 = toSceneX( x0 );
-        y0 = toSceneY( y0 );
-        x1 = toSceneX( x1 );
-        y1 = toSceneY( y1 );
+        xx = DrawingUtil.toSceneX( x0 + uu.x * p.x + vv.x * p.y );
+        yy = DrawingUtil.toSceneY( y0 + uu.y * p.x + vv.y * p.y );
+        x0 = DrawingUtil.toSceneX( x0 );
+        y0 = DrawingUtil.toSceneY( y0 );
+        x1 = DrawingUtil.toSceneX( x1 );
+        y1 = DrawingUtil.toSceneY( y1 );
         mCurrentLinePath = new DrawingLinePath( DrawingBrushPaths.mLineLib.mLineWallIndex );
         mCurrentLinePath.addStartPoint( x0, y0 );
         addPointsToLine( mCurrentLinePath, x0, y0, xx, yy );
@@ -3494,13 +3434,13 @@ public class DrawingActivity extends ItemDrawer
       sortPointsOnX( pts );
       mCurrentLinePath = new DrawingLinePath( DrawingBrushPaths.mLineLib.mLineWallIndex );
       PointF p1 = pts.get(0);
-      xx = toSceneX( x0 + uu.x * p1.x + vv.x * p1.y );
-      yy = toSceneY( y0 + uu.y * p1.x + vv.y * p1.y );
+      xx = DrawingUtil.toSceneX( x0 + uu.x * p1.x + vv.x * p1.y );
+      yy = DrawingUtil.toSceneY( y0 + uu.y * p1.x + vv.y * p1.y );
       mCurrentLinePath.addStartPoint( xx, yy );
       for ( int k=1; k<pts.size(); ++k ) {
         p1 = pts.get(k);
-        float xx2 = toSceneX( x0 + uu.x * p1.x + vv.x * p1.y );
-        float yy2 = toSceneY( y0 + uu.y * p1.x + vv.y * p1.y );
+        float xx2 = DrawingUtil.toSceneX( x0 + uu.x * p1.x + vv.x * p1.y );
+        float yy2 = DrawingUtil.toSceneY( y0 + uu.y * p1.x + vv.y * p1.y );
         addPointsToLine( mCurrentLinePath, xx, yy, xx2, yy2 );
         xx = xx2;
         yy = yy2;

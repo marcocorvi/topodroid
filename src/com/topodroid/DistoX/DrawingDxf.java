@@ -415,7 +415,7 @@ class DrawingDxf
       
       writeSection( out, "ENTITIES" );
       {
-        float SCALE_FIX = DrawingActivity.SCALE_FIX;
+        float SCALE_FIX = DrawingUtil.SCALE_FIX;
 
         // reference
         {
@@ -485,17 +485,17 @@ class DrawingDxf
               // printInt( pw4, 39, 2 );         // line thickness
 
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x =  scale * DrawingActivity.toSceneX( f.e );
-                float y =  scale * DrawingActivity.toSceneY( f.s );
-                float x1 = scale * DrawingActivity.toSceneX( t.e );
-                float y1 = scale * DrawingActivity.toSceneY( t.s );
+                float x =  scale * DrawingUtil.toSceneX( f.e );
+                float y =  scale * DrawingUtil.toSceneY( f.s );
+                float x1 = scale * DrawingUtil.toSceneX( t.e );
+                float y1 = scale * DrawingUtil.toSceneY( t.s );
                 printXYZ( pw4, x, -y, 0.0f );
                 printXYZ1( pw4, x1, -y1, 0.0f );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-                float x =  scale * DrawingActivity.toSceneX( f.h );
-                float y =  scale * DrawingActivity.toSceneY( f.v );
-                float x1 = scale * DrawingActivity.toSceneX( t.h );
-                float y1 = scale * DrawingActivity.toSceneY( t.v );
+                float x =  scale * DrawingUtil.toSceneX( f.h );
+                float y =  scale * DrawingUtil.toSceneY( f.v );
+                float x1 = scale * DrawingUtil.toSceneX( t.h );
+                float y1 = scale * DrawingUtil.toSceneY( t.v );
                 printXYZ( pw4, x, -y, 0.0f );
                 printXYZ1( pw4, x1, -y1, 0.0f );
               } else if ( type == PlotInfo.PLOT_SECTION ) {
@@ -521,15 +521,15 @@ class DrawingDxf
 
               float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x = scale * DrawingActivity.toSceneX( f.e );
-                float y = scale * DrawingActivity.toSceneY( f.s );
+                float x = scale * DrawingUtil.toSceneX( f.e );
+                float y = scale * DrawingUtil.toSceneY( f.s );
                 float de =   dhs * FloatMath.sin( blk.mBearing * grad2rad);
                 float ds = - dhs * FloatMath.cos( blk.mBearing * grad2rad);
                 printXYZ( pw41, x, -y, 0.0f );
                 printXYZ1( pw41, x + de, -(y+ds), 0.0f );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-                float x = scale * DrawingActivity.toSceneX( f.h );
-                float y = scale * DrawingActivity.toSceneY( f.v );
+                float x = scale * DrawingUtil.toSceneX( f.h );
+                float y = scale * DrawingUtil.toSceneY( f.v );
                 float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
                 printXYZ( pw41, x, -y, 0.0f );
                 printXYZ1( pw41, x+dhs*blk.mExtend, -(y+dv), 0.0f );

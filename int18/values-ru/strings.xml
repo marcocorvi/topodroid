@@ -859,6 +859,8 @@
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
   <string name="pref_side_drag_title">Перетаскивание за сторону</string>
   <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
+  <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
+  <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>

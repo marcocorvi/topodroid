@@ -206,8 +206,8 @@ public class DrawingPointPath extends DrawingPath
     pw.format(Locale.ENGLISH, "dataformat=\"0\" signsize=\"%d\" angle=\"%.2f\" >\n", size, mOrientation );
     pw.format("  <pen type=\"10\" />\n");
     pw.format("  <brush type=\"7\" />\n");
-    float x = DrawingActivity.sceneToWorldX( cx ); // convert to world coords.
-    float y = DrawingActivity.sceneToWorldY( cy );
+    float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
+    float y = DrawingUtil.sceneToWorldY( cy );
     pw.format(Locale.ENGLISH, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <datarow>\n");
     pw.format("  </datarow>\n");

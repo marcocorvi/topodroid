@@ -110,6 +110,7 @@ class TopoDroidSetting
     "DISTOX_SURVEX_EOL",         // survex end of line
     "DISTOX_SURVEX_SPLAY",
     "DISTOX_UNSCALED_POINTS",     // unscaled drawing point items
+    "DISTOX_UNIT_GRID",
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -305,6 +306,7 @@ class TopoDroidSetting
   // SKETCH
 
   // static final String LINE_SHIFT = "20.0";
+  static float mUnitGrid = 1;
 
   static final int PICKER_RECENT = 0; // Drawing-tools picker type
   static final int PICKER_LIST   = 1; 
@@ -711,6 +713,8 @@ class TopoDroidSetting
 
     mUnscaledPoints = prefs.getBoolean( key[k++], false ); // DISTOX_UNSCALED_POINTS
 
+    mUnitGrid = Float.parseFloat( prefs.getString( key[k++], "1" ) );  // DISTOX_UNIT_GRID
+
     try { // DISTOX_WALLS_TYPE
       i = Integer.parseInt(prefs.getString( key[k++], "0" ) ); 
       if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
@@ -1086,6 +1090,8 @@ class TopoDroidSetting
       mSurvexSplay = prefs.getBoolean( k, false ); // DISTOX_SURVEX_SPLAY
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnscaledPoints = prefs.getBoolean( k, false ); // DISTOX_UNSCALED_POINTS
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_UNIT_GRID
+      mUnitGrid = Float.parseFloat( prefs.getString( k, "1" ) ); 
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
       try {

@@ -111,7 +111,7 @@ class DrawingSvg
       // }
       
       {
-        float SCALE_FIX = DrawingActivity.SCALE_FIX;
+        float SCALE_FIX = DrawingUtil.SCALE_FIX;
 
         // centerline data
         if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
@@ -128,16 +128,16 @@ class DrawingSvg
  
               pw4.format("  <path stroke-width=\"1\" stroke=\"black\" d=\"");
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x  = DrawingActivity.toSceneX( f.e ); 
-                float y  = DrawingActivity.toSceneY( f.s );
-                float x1 = DrawingActivity.toSceneX( t.e );
-                float y1 = DrawingActivity.toSceneY( t.s );
+                float x  = DrawingUtil.toSceneX( f.e ); 
+                float y  = DrawingUtil.toSceneY( f.s );
+                float x1 = DrawingUtil.toSceneX( t.e );
+                float y1 = DrawingUtil.toSceneY( t.s );
                 pw4.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-                float x  = DrawingActivity.toSceneX( f.h );
-                float y  = DrawingActivity.toSceneY( f.v );
-                float x1 = DrawingActivity.toSceneX( t.h );
-                float y1 = DrawingActivity.toSceneY( t.v );
+                float x  = DrawingUtil.toSceneX( f.h );
+                float y  = DrawingUtil.toSceneY( f.v );
+                float x1 = DrawingUtil.toSceneX( t.h );
+                float y1 = DrawingUtil.toSceneY( t.v );
                 pw4.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
               }
             // }
@@ -155,14 +155,14 @@ class DrawingSvg
               pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
               float dh = blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX;
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x = DrawingActivity.toSceneX( f.e ); 
-                float y = DrawingActivity.toSceneY( f.s );
+                float x = DrawingUtil.toSceneX( f.e ); 
+                float y = DrawingUtil.toSceneY( f.s );
                 float de =   dh * FloatMath.sin( blk.mBearing * grad2rad);
                 float ds = - dh * FloatMath.cos( blk.mBearing * grad2rad);
                 pw41.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x + de, (y+ds) );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
-                float x = DrawingActivity.toSceneX( f.h );
-                float y = DrawingActivity.toSceneY( f.v );
+                float x = DrawingUtil.toSceneX( f.h );
+                float y = DrawingUtil.toSceneY( f.v );
                 float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
                 pw41.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x+dh*blk.mExtend, (y+dv) );
               }

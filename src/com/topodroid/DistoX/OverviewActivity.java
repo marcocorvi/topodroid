@@ -211,30 +211,6 @@ public class OverviewActivity extends ItemDrawer
     //   zoom.show();
     // }
 
-    static final float SCALE_FIX = 20.0f; 
-    public static final float CENTER_X = 100f;
-    public static final float CENTER_Y = 120f;
-
-    // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
-
-    static float toSceneX( float x ) { return CENTER_X + x * SCALE_FIX; }
-    static float toSceneY( float y ) { return CENTER_Y + y * SCALE_FIX; }
-
-    static float sceneToWorldX( float x ) { return (x - CENTER_X)/SCALE_FIX; }
-    static float sceneToWorldY( float y ) { return (y - CENTER_Y)/SCALE_FIX; }
-
-    
-    private void makePath( DrawingPath dpath, float x1, float y1, float x2, float y2, float xoff, float yoff )
-    {
-      dpath.mPath = new Path();
-      x1 = toSceneX( x1 );
-      y1 = toSceneY( y1 );
-      x2 = toSceneX( x2 );
-      y2 = toSceneY( y2 );
-      dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
-      dpath.mPath.moveTo( x1 - xoff, y1 - yoff );
-      dpath.mPath.lineTo( x2 - xoff, y2 - yoff );
-    }
 
     // splay = false
     // selectable = false
@@ -254,46 +230,8 @@ public class OverviewActivity extends ItemDrawer
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
         dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
       }
-      makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
       mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
-    }
-
-    public void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff )
-    {
-      // Log.v("DistoX", "Overview grid X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " offset " + xoff + " " + yoff );
-      xmin -= 10.0f;
-      xmax += 10.0f;
-      ymin -= 10.0f;
-      ymax += 10.0f;
-      float x1 = (float)(toSceneX( xmin ) - xoff);
-      float x2 = (float)(toSceneX( xmax ) - xoff);
-      float y1 = (float)(toSceneY( ymin ) - yoff);
-      float y2 = (float)(toSceneY( ymax ) - yoff);
-      // mOverviewSurface.setBounds( toSceneX( xmin ), toSceneX( xmax ), toSceneY( ymin ), toSceneY( ymax ) );
-
-      DrawingPath dpath = null;
-      for ( int x = (int)Math.round(xmin); x < xmax; x += 1 ) {
-        float x0 = (float)(toSceneX( x ) - xoff);
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(x%100)==0)? DrawingBrushPaths.fixedGrid100Paint : 
-                        (Math.abs(x%10)==0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
-        dpath.mPath  = new Path();
-        dpath.mPath.moveTo( x0, y1 );
-        dpath.mPath.lineTo( x0, y2 );
-        dpath.setBBox( x0, x0+1, y1, y2 );
-        mOverviewSurface.addGridPath( dpath );
-      }
-      for ( int y = (int)Math.round(ymin); y < ymax; y += 1 ) {
-        float y0 = (float)(toSceneY( y ) - yoff);
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID );
-        dpath.setPaint( (Math.abs(y%100)==0)? DrawingBrushPaths.fixedGrid100Paint : 
-                        (Math.abs(y%10)==0)? DrawingBrushPaths.fixedGrid10Paint : DrawingBrushPaths.fixedGridPaint );
-        dpath.mPath  = new Path();
-        dpath.mPath.moveTo( x1, y0 );
-        dpath.mPath.lineTo( x2, y0 );
-        dpath.setBBox( x1, x2, y0, y0+1 );
-        mOverviewSurface.addGridPath( dpath );
-      }
     }
 
     // --------------------------------------------------------------------------------------
@@ -327,9 +265,11 @@ public class OverviewActivity extends ItemDrawer
     mOverviewSurface.setManager( PlotInfo.PLOT_PLAN ); // MUST use first commandManager
 
     if ( type == PlotInfo.PLOT_PLAN ) {
-      addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), xoff, yoff );
+      DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(),
+                           xoff, yoff, mOverviewSurface );
     } else {
-      addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), xoff, yoff );
+      DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(),
+                           xoff, yoff, mOverviewSurface );
     }
 
     List< NumStation > stations = mNum.getStations();
@@ -353,7 +293,7 @@ public class OverviewActivity extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        dst = mOverviewSurface.addDrawingStation( st, toSceneX(st.e) - xoff, toSceneY(st.s) - yoff, true );
+        dst = mOverviewSurface.addDrawingStation( st, DrawingUtil.toSceneX(st.e) - xoff, DrawingUtil.toSceneY(st.s) - yoff, true );
       }
     } else { // if ( type == PlotInfo.PLOT_EXTENDED && 
       for ( NumShot sh : shots ) {
@@ -371,7 +311,7 @@ public class OverviewActivity extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        dst = mOverviewSurface.addDrawingStation( st, toSceneX(st.h) - xoff, toSceneY(st.v) - yoff, true );
+        dst = mOverviewSurface.addDrawingStation( st, DrawingUtil.toSceneX(st.h) - xoff, DrawingUtil.toSceneY(st.v) - yoff, true );
       }
     }
 
@@ -615,8 +555,8 @@ public class OverviewActivity extends ItemDrawer
             ydelta = st.v - mStartStation.v;
           }
         }
-        xdelta *= DrawingActivity.SCALE_FIX;
-        ydelta *= DrawingActivity.SCALE_FIX;
+        xdelta *= DrawingUtil.SCALE_FIX;
+        ydelta *= DrawingUtil.SCALE_FIX;
         // Log.v( "DistoX", " delta " + xdelta + " " + ydelta );
 
         // now try to load drawings from therion file
@@ -774,7 +714,7 @@ public class OverviewActivity extends ItemDrawer
       float y_canvas = event.getY();
       // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
 
-      if ( mZoomBtnsCtrlOn && y_canvas > CENTER_Y*2-20 ) {
+      if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
       }
@@ -812,12 +752,13 @@ public class OverviewActivity extends ItemDrawer
           // FIXME use scene values
           float x = x_canvas/mZoom - mOffset.x;
           float y = y_canvas/mZoom - mOffset.y;
-          float dx =  (x - mStartX) / DrawingActivity.SCALE_FIX;
-          float dy = -(y - mStartY) / DrawingActivity.SCALE_FIX;
+          float dx = (  (x - mStartX) / DrawingUtil.SCALE_FIX ) / TopoDroidSetting.mUnitGrid;
+          float dy = ( -(y - mStartY) / DrawingUtil.SCALE_FIX ) / TopoDroidSetting.mUnitGrid;
           // StringWriter sw = new StringWriter();
           // PrintWriter pw = new PrintWriter( sw );
           double a = Math.atan2( dx, dy ) * 180 / Math.PI;
           if ( a < 0 ) a += 360;
+
           String format;
           if ( mType == PlotInfo.PLOT_PLAN ) {
             format = getResources().getString( R.string.format_measure_plan );
@@ -829,6 +770,8 @@ public class OverviewActivity extends ItemDrawer
             } 
             format = getResources().getString( R.string.format_measure_profile );
           }
+          a *= TopoDroidSetting.mUnitAngle;
+
           String msg = String.format( format, FloatMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
           // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
           // setTitle( sw.getBuffer().toString() );

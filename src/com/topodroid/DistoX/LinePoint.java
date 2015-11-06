@@ -33,7 +33,7 @@ public class LinePoint extends BezierPoint
 
   void flipXAxis()
   {
-    float dx = 2 * DrawingActivity.CENTER_X;
+    float dx = 2 * DrawingUtil.CENTER_X;
     mX1 = dx - mX1;
     mX2 = dx - mX2;
     mX  = dx - mX;

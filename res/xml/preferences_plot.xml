@@ -17,6 +17,7 @@
        android:title="@string/pref_side_drag_title"
        android:defaultValue="false"
      />
+
     <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_ZOOM_CTRL"
        android:title="@string/pref_zoom_controls_title"

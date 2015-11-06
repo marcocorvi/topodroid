@@ -20,4 +20,13 @@
        android:entryValues="@array/unitAngleValue"
      />
 
+    <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_UNIT_GRID"
+       android:title="@string/pref_unit_grid_title"
+       android:summary="@string/pref_unit_grid_summary"
+       android:defaultValue="1"
+       android:entries="@array/unitGrid"
+       android:entryValues="@array/unitGridValue"
+       />
+
 </PreferenceScreen>

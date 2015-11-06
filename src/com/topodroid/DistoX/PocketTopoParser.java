@@ -151,11 +151,11 @@ public class PocketTopoParser extends ImportParser
 
       PTDrawing outline = ptfile.getOutline();
       String filename1 = TopoDroidPath.getTh2File( mName + "-1p.th2" );
-      writeDrawing( filename1, outline, PlotInfo.PLOT_PLAN, 5*DrawingActivity.CENTER_X, 5*DrawingActivity.CENTER_Y );
+      writeDrawing( filename1, outline, PlotInfo.PLOT_PLAN, 5*DrawingUtil.CENTER_X, 5*DrawingUtil.CENTER_Y );
 
       PTDrawing sideview = ptfile.getSideview();
       String filename2 = TopoDroidPath.getTh2File( mName + "-1s.th2" );
-      writeDrawing( filename2, sideview, PlotInfo.PLOT_EXTENDED, 5*DrawingActivity.CENTER_X, 5*DrawingActivity.CENTER_Y );
+      writeDrawing( filename2, sideview, PlotInfo.PLOT_EXTENDED, 5*DrawingUtil.CENTER_X, 5*DrawingUtil.CENTER_Y );
       // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
     } else {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "PT null StartFrom");

@@ -55,7 +55,9 @@ public class DrawingCommandManager
   DrawingPath mFirstReference;
   DrawingPath mSecondReference;
 
-  private List<DrawingPath>    mGridStack;
+  private List<DrawingPath>    mGridStack1;
+  private List<DrawingPath>    mGridStack10;
+  private List<DrawingPath>    mGridStack100;
   List<DrawingPath>            mLegsStack;
   List<DrawingPath>            mSplaysStack;
   // List<DrawingPath>            mFixedStack;
@@ -70,7 +72,7 @@ public class DrawingCommandManager
   private boolean mDisplayPoints;
 
   private Matrix mMatrix;
-  private float  mScale; // current zoom
+  private float  mScale; // current zoom: value of 1 pl in scene space
 
   // void checkLines()
   // {
@@ -108,13 +110,23 @@ public class DrawingCommandManager
 
   void flipXAxis()
   {
-    synchronized( mGridStack ) {
-      final Iterator i = mGridStack.iterator();
-      while ( i.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i.next();
+    synchronized( mGridStack1 ) {
+      final Iterator i1 = mGridStack1.iterator();
+      while ( i1.hasNext() ){
+        final DrawingPath drawingPath = (DrawingPath) i1.next();
         drawingPath.flipXAxis();
       }
       if ( mNorthLine != null ) mNorthLine.flipXAxis();
+      final Iterator i10 = mGridStack10.iterator();
+      while ( i10.hasNext() ){
+        final DrawingPath drawingPath = (DrawingPath) i10.next();
+        drawingPath.flipXAxis();
+      }
+      final Iterator i100 = mGridStack100.iterator();
+      while ( i100.hasNext() ){
+        final DrawingPath drawingPath = (DrawingPath) i100.next();
+        drawingPath.flipXAxis();
+      }
     }
 
     // synchronized( mFixedStack ) {
@@ -189,7 +201,9 @@ public class DrawingCommandManager
     mNorthLine       = null;
     mFirstReference  = null;
     mSecondReference = null;
-    mGridStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mLegsStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mSplaysStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     // mFixedStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
@@ -241,11 +255,13 @@ public class DrawingCommandManager
 
   void clearReferences()
   {
-    synchronized( mGridStack ) {
+    synchronized( mGridStack1 ) {
       mNorthLine = null;
       mFirstReference = null;
       mSecondReference = null;
-      mGridStack.clear();
+      mGridStack1.clear();
+      mGridStack10.clear();
+      mGridStack100.clear();
     }
     synchronized( mLegsStack ) {
       mLegsStack.clear();
@@ -271,7 +287,9 @@ public class DrawingCommandManager
     mNorthLine = null;
     mFirstReference = null;
     mSecondReference = null;
-    mGridStack.clear();
+    mGridStack1.clear();
+    mGridStack10.clear();
+    mGridStack100.clear();
     mLegsStack.clear();
     mSplaysStack.clear();
     // mFixedStack.clear();
@@ -282,12 +300,12 @@ public class DrawingCommandManager
 
   void setFirstReference( DrawingPath path ) 
   { 
-    synchronized( mGridStack ) { mFirstReference = path; }
+    synchronized( mGridStack1 ) { mFirstReference = path; }
   }
 
   void setSecondReference( DrawingPath path )
   { 
-    synchronized( mGridStack ) { mSecondReference = path; }
+    synchronized( mGridStack1 ) { mSecondReference = path; }
   }
 
   void clearSketchItems()
@@ -337,7 +355,7 @@ public class DrawingCommandManager
     mMatrix.postTranslate( dx, dy );
     mMatrix.postScale( s, s );
     mScale  = 1 / s;
-    mBBox.left   = - dx;
+    mBBox.left   = - dx;      // scene coords
     mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
     mBBox.top    = - dy;
     mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
@@ -708,9 +726,13 @@ public class DrawingCommandManager
     mNorthLine = path;
   }
   
-  public void addGrid( DrawingPath path )
-  {
-    mGridStack.add( path );
+  public void addGrid( DrawingPath path, int k ) 
+  { 
+    switch (k) {
+      case 1:   mGridStack1.add( path );   break;
+      case 10:  mGridStack10.add( path );  break;
+      case 100: mGridStack100.add( path ); break;
+    }
   }
  
   // called by DrawingSurface::addDrawingStation
@@ -851,11 +873,21 @@ public class DrawingCommandManager
     float sca = 1 / scale;
     mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
     mat.postScale( scale, scale );
-    if ( mGridStack != null ) {
-      synchronized( mGridStack ) {
-        final Iterator i = mGridStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
+    if ( mGridStack1 != null ) {
+      synchronized( mGridStack1 ) {
+        final Iterator i1 = mGridStack1.iterator();
+        while ( i1.hasNext() ){
+          final DrawingPath drawingPath = (DrawingPath) i1.next();
+          drawingPath.draw( c, mat, sca, null );
+        }
+        final Iterator i10 = mGridStack10.iterator();
+        while ( i10.hasNext() ){
+          final DrawingPath drawingPath = (DrawingPath) i10.next();
+          drawingPath.draw( c, mat, sca, null );
+        }
+        final Iterator i100 = mGridStack100.iterator();
+        while ( i100.hasNext() ){
+          final DrawingPath drawingPath = (DrawingPath) i100.next();
           drawingPath.draw( c, mat, sca, null );
         }
         if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca, null );
@@ -1030,13 +1062,26 @@ public class DrawingCommandManager
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
 
-    if( mGridStack != null && ( (mDisplayMode & DisplayMode.DISPLAY_GRID) != 0 ) ) {
-      synchronized( mGridStack ) {
-        final Iterator i = mGridStack.iterator();
-        while ( i.hasNext() ){
-          final DrawingPath drawingPath = (DrawingPath) i.next();
+    if( mGridStack1 != null && ( (mDisplayMode & DisplayMode.DISPLAY_GRID) != 0 ) ) {
+      synchronized( mGridStack1 ) {
+        if ( mScale < 1 ) {
+          final Iterator i1 = mGridStack1.iterator();
+          while ( i1.hasNext() ){
+            final DrawingPath drawingPath = (DrawingPath) i1.next();
+            drawingPath.draw( canvas, mMatrix, mScale, mBBox );
+          }
+        }
+        if ( mScale < 10 ) {
+          final Iterator i10 = mGridStack10.iterator();
+          while ( i10.hasNext() ){
+            final DrawingPath drawingPath = (DrawingPath) i10.next();
+            drawingPath.draw( canvas, mMatrix, mScale, mBBox );
+          }
+        }
+        final Iterator i100 = mGridStack100.iterator();
+        while ( i100.hasNext() ){
+          final DrawingPath drawingPath = (DrawingPath) i100.next();
           drawingPath.draw( canvas, mMatrix, mScale, mBBox );
-          //doneHandler.sendEmptyMessage(1);
         }
         if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
       }
@@ -1151,8 +1196,8 @@ public class DrawingCommandManager
         }
       } 
     }
-    synchronized( mGridStack ) {
-      if ( mFirstReference != null ) mFirstReference.draw( canvas, mMatrix, mScale, mBBox );
+    synchronized( mGridStack1 ) {
+      if ( mFirstReference != null )  mFirstReference.draw( canvas, mMatrix, mScale, mBBox );
       if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale, mBBox );
     }
   }
@@ -1828,7 +1873,7 @@ public class DrawingCommandManager
       pw.format("\n");
 
       float toTherion = TopoDroidConst.TO_THERION;
-      float oneMeter  = DrawingActivity.SCALE_FIX * toTherion;
+      float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
 
       if ( type == PlotInfo.PLOT_SECTION
         || type == PlotInfo.PLOT_H_SECTION 

@@ -63,8 +63,8 @@ public class DrawingPath implements ICanvasCommand
 
   void setBBox( float x1, float x2, float y1, float y2 )
   {
-    mBBox.right  = x1;
-    mBBox.left   = x2;
+    mBBox.left   = x1;
+    mBBox.right  = x2;
     mBBox.top    = y1;
     mBBox.bottom = y2;
   }
@@ -85,9 +85,9 @@ public class DrawingPath implements ICanvasCommand
 
   public void flipXAxis()
   {
-    float offx = 2 * ( DrawingActivity.CENTER_X + cx );
-    float offc = 2 * ( DrawingActivity.CENTER_X - cx );
-    float dx = 2 * DrawingActivity.CENTER_X;
+    float offx = 2 * ( DrawingUtil.CENTER_X + cx );
+    float offc = 2 * ( DrawingUtil.CENTER_X - cx );
+    float dx = 2 * DrawingUtil.CENTER_X;
     cx = dx - cx;
     x1 = dx - x1;
     x2 = dx - x2;
@@ -97,7 +97,7 @@ public class DrawingPath implements ICanvasCommand
     if ( dpp.mOrientation != 0 ) {
       dpp.mOrientation = 360 - dpp.mOrientation;
       flip_path = true;
-      offx = 2 * ( DrawingActivity.CENTER_X );
+      offx = 2 * ( DrawingUtil.CENTER_X );
     } else {
       offx = offc;
     }
