@@ -68,28 +68,37 @@
         android:layout_marginLeft="10dp"
         android:orientation="horizontal"
       >
+        <Button android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_weight="10"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button"
+            style="@style/button_default"
+            android:text="-/+"
+        />
           <com.topodroid.DistoX.ItemButton android:id="@+id/recent0"
             android:layout_width="0dp" 
             android:layout_height="wrap_content" 
-            android:layout_weight="25"
+            android:layout_weight="20"
             android:layout_marginRight="10dp"
           />
           <com.topodroid.DistoX.ItemButton android:id="@+id/recent1"
             android:layout_width="0dp" 
             android:layout_height="wrap_content" 
-            android:layout_weight="25"
+            android:layout_weight="20"
             android:layout_marginRight="10dp"
           />
           <com.topodroid.DistoX.ItemButton android:id="@+id/recent2"
             android:layout_width="0dp" 
             android:layout_height="wrap_content" 
-            android:layout_weight="25"
+            android:layout_weight="20"
             android:layout_marginRight="10dp"
           />
           <com.topodroid.DistoX.ItemButton android:id="@+id/recent3"
             android:layout_width="0dp" 
             android:layout_height="wrap_content" 
-            android:layout_weight="25"
+            android:layout_weight="20"
           />
       </LinearLayout>
 

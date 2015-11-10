@@ -1,0 +1,17 @@
+symbol line
+name sand
+th_name wall:sand
+color 0xff0000 0xff
+width 1
+csurvey 5 8 3 1
+effect
+  moveTo 0 0
+  lineTo 27 0
+  lineTo 27 1
+  lineTo 0 1
+  lineTo 0 11
+  lineTo 9 11
+  lineTo 9 12
+  lineTo 0 12
+endeffect
+endsymbol

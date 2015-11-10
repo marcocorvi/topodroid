@@ -547,6 +547,7 @@ public class OverviewActivity extends ItemDrawer
           // Log.v( "DistoX", "Overview num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );
         } else {
           NumStation st = mNum.getStation( start );
+          if ( st == null ) continue;
           if ( type == PlotInfo.PLOT_PLAN ) {
             xdelta = st.e - mStartStation.e; // FIXME SCALE FACTORS ???
             ydelta = st.s - mStartStation.s;

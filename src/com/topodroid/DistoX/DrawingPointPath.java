@@ -37,6 +37,12 @@ public class DrawingPointPath extends DrawingPath
   static final int SCALE_M  = 0;
   static final int SCALE_L  = 1;
   static final int SCALE_XL = 2;
+  static private final String SCALE_STR[] = { "xs", "s", "m", "l", "xl" };
+  static private final String SCALE_STR_UC[] = { "XS", "S", "M", "L", "XL" };
+  static String scaleToString( int scale ) 
+  { return ( scale >= SCALE_XS && scale <= SCALE_XL )? SCALE_STR[ scale+2 ] : "-"; }
+  static String scaleToStringUC( int scale ) 
+  { return ( scale >= SCALE_XS && scale <= SCALE_XL )? SCALE_STR_UC[ scale+2 ] : "-"; }
 
   // float mXpos;             // scene coords
   // float mYpos;
@@ -240,12 +246,13 @@ public class DrawingPointPath extends DrawingPath
   protected void toTherionOptions( PrintWriter pw )
   {
     if ( mScale != SCALE_M ) {
-      switch ( mScale ) {
-        case SCALE_XS: pw.format( " -scale xs" ); break;
-        case SCALE_S:  pw.format( " -scale s" ); break;
-        case SCALE_L:  pw.format( " -scale l" ); break;
-        case SCALE_XL: pw.format( " -scale xl" ); break;
-      }
+      pw.format( " -scale %s", scaleToString( mScale ) );
+      // switch ( mScale ) {
+      //   case SCALE_XS: pw.format( " -scale xs" ); break;
+      //   case SCALE_S:  pw.format( " -scale s" ); break;
+      //   case SCALE_L:  pw.format( " -scale l" ); break;
+      //   case SCALE_XL: pw.format( " -scale xl" ); break;
+      // }
     }
 
     if ( mOptions != null && mOptions.length() > 0 ) {

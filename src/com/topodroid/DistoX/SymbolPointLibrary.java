@@ -157,7 +157,8 @@ class SymbolPointLibrary
   void resetOrientations()
   {
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::resetOrientations()" );
-    for ( int k=0; k < mAnyPointNr; ++k ) mAnyPoint.get(k).resetOrientation();
+    for ( SymbolPoint sp : mAnyPoint ) sp.resetOrientation();
+    // JAVA8 mAnyPoint.stream().forEach( SymbolPoint::resetOrientation );
   }
 
   void rotateGrad( int k, double a )

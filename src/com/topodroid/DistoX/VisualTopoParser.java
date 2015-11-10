@@ -94,8 +94,8 @@ public class VisualTopoParser extends ImportParser
 
         int pos = line.indexOf(";");
         if ( pos >= 0 ) {
-          line = line.substring( 0, pos );
-          comment = line.substring( pos+1 );
+          comment = (pos+1<line.length())? line.substring( pos+1 ) : "";
+          line    = line.substring( 0, pos );
           comment.trim();
         } else {
           comment = "";

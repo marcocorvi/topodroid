@@ -95,7 +95,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "11";
+  static String SYMBOL_VERSION = "12";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -1463,7 +1463,7 @@ public class TopoDroidApp extends Application
     askSymbolUpdate = false;
     if ( ! overwrite ) { // check whether to install
       String version = mDData.getValue( "symbol_version" );
-      // Log.v("DistoX", "symbol version <" + version + "> SYMBOL_VERSION <" + SYMBOL_VERSION + ">" );
+      Log.v("DistoX", "symbol version <" + version + "> SYMBOL_VERSION <" + SYMBOL_VERSION + ">" );
       if ( version == null ) {
         install = true;
       } else if ( ! version.equals(SYMBOL_VERSION) ) {

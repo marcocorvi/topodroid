@@ -801,6 +801,7 @@ public class DrawingActivity extends ItemDrawer
     {
       super.onCreate(savedInstanceState);
       mZoomBtnsCtrlOn = (TopoDroidSetting.mZoomCtrl > 1);  // do before setting content
+      mPointScale = DrawingPointPath.SCALE_M;
 
       // Display display = getWindowManager().getDefaultDisplay();
       // DisplayMetrics dm = new DisplayMetrics();
@@ -1972,7 +1973,7 @@ public class DrawingActivity extends ItemDrawer
                   label.show();
                 } else {
                   mDrawingSurface.addDrawingPath( 
-                    new DrawingPointPath( mCurrentPoint, x_scene, y_scene, DrawingPointPath.SCALE_M, null ) );
+                    new DrawingPointPath( mCurrentPoint, x_scene, y_scene, mPointScale, null ) );
 
                   // undoBtn.setEnabled(true);
                   // redoBtn.setEnabled(false);
@@ -2030,7 +2031,7 @@ public class DrawingActivity extends ItemDrawer
     public void addLabel( String label, float x, float y )
     {
       if ( label != null && label.length() > 0 ) {
-        DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, DrawingPointPath.SCALE_M, null );
+        DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null );
         mDrawingSurface.addDrawingPath( label_path );
         modified();
       } 

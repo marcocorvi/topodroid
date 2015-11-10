@@ -74,6 +74,9 @@ class ItemRecentDialog extends Dialog
   private ItemButton mRecentL[];
   private ItemButton mRecentA[];
 
+  private Button mBTsize;
+  int mScale;
+
   // static int mLinePos;
   // static int mAreaPos;
 
@@ -89,6 +92,7 @@ class ItemRecentDialog extends Dialog
     mParent  = parent;
 
     mPlotType = type;
+    mScale = mParent.getPointScale(); // DrawingPointPath.SCALE_M;
   }
 
   @Override
@@ -131,11 +135,14 @@ class ItemRecentDialog extends Dialog
     mBTpoint = (Button) findViewById(R.id.point);
     mBTline  = (Button) findViewById(R.id.line );
     mBTarea  = (Button) findViewById(R.id.area );
+    mBTsize  = (Button) findViewById(R.id.size );
     mSeekBar = (SeekBar) findViewById(R.id.seekbar );
 
     mBTpoint.setOnClickListener( this );
     mBTline.setOnClickListener( this );
     mBTarea.setOnClickListener( this );
+    mBTsize.setOnClickListener( this );
+    mBTsize.setOnLongClickListener( this );
    
     // FIXME how to use the slider ?
     mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
@@ -155,6 +162,8 @@ class ItemRecentDialog extends Dialog
     updateRecentButtons( );
 
     setSeekBarProgress();
+
+    setTheTitle();
   }
 
   void setItemAngle( int angle ) 
@@ -208,34 +217,47 @@ class ItemRecentDialog extends Dialog
   //   // TODO ???
   // }
 
+  private void setTheTitle()
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append( "[" + DrawingPointPath.scaleToStringUC( mScale ) + "] " );
+    sb.append( (ItemDrawer.mRecentPoint[0] != null)? ItemDrawer.mRecentPoint[0].getName() : "-" );
+    sb.append( " | " + ((ItemDrawer.mRecentLine[0] != null)? ItemDrawer.mRecentLine[0].getName() : "-") );
+    sb.append( " | " + ((ItemDrawer.mRecentArea[0] != null)? ItemDrawer.mRecentArea[0].getName() : "-") );
+    setTitle( sb.toString() );
+  }
+
   private void setFirstPoint( int k )
   {
-    String title = String.format( mContext.getResources().getString( R.string.title_draw_point ),
-      ((ItemDrawer.mRecentPoint[k] != null)? ItemDrawer.mRecentPoint[k].getName() : "-") );
-    setTitle( title );
+    // String title = String.format( mContext.getResources().getString( R.string.title_draw_point ),
+    //   ((ItemDrawer.mRecentPoint[k] != null)? ItemDrawer.mRecentPoint[k].getName() : "-") );
+    // setTitle( title );
     if ( k <= 0 || k >= ItemDrawer.NR_RECENT ) return;
     ItemDrawer.updateRecentPoint( ItemDrawer.mRecentPoint[k] );
     setRecentButtons( mRecentP, ItemDrawer.mRecentPoint, 1.5f, 1.5f ); // sx*1.5f, sy*1.5f
+    setTheTitle();
   }
 
   private void setFirstLine( int k )
   {
-    String title = String.format( mContext.getResources().getString( R.string.title_draw_line ),
-      ((ItemDrawer.mRecentLine[k] != null)? ItemDrawer.mRecentLine[k].getName() : "-") );
-    setTitle( title );
+    // String title = String.format( mContext.getResources().getString( R.string.title_draw_line ),
+    //   ((ItemDrawer.mRecentLine[k] != null)? ItemDrawer.mRecentLine[k].getName() : "-") );
+    // setTitle( title );
     if ( k <= 0 || k >= ItemDrawer.NR_RECENT ) return;
     ItemDrawer.updateRecentLine( ItemDrawer.mRecentLine[k] );
     setRecentButtons( mRecentL, ItemDrawer.mRecentLine, 2.0f, 1.7f ); 
+    setTheTitle();
   }
 
   private void setFirstArea( int k )
   {
-    String title = String.format( mContext.getResources().getString( R.string.title_draw_area ),
-      ((ItemDrawer.mRecentArea[k] != null)? ItemDrawer.mRecentArea[k].getName() : "-") );
-    setTitle( title );
+    // String title = String.format( mContext.getResources().getString( R.string.title_draw_area ),
+    //   ((ItemDrawer.mRecentArea[k] != null)? ItemDrawer.mRecentArea[k].getName() : "-") );
+    // setTitle( title );
     if ( k <= 0 || k >= ItemDrawer.NR_RECENT ) return;
     ItemDrawer.updateRecentArea( ItemDrawer.mRecentArea[k] );
     setRecentButtons( mRecentA, ItemDrawer.mRecentArea, 2.0f, 1.7f ); 
+    setTheTitle();
   }
 
   private void setPoint( int k )
@@ -284,6 +306,14 @@ class ItemRecentDialog extends Dialog
       case R.id.recent2a: setFirstArea(2); return true;
       case R.id.recent3a: setFirstArea(3); return true;
       // case R.id.recent4a: setFirstArea(4); return true;
+
+      case R.id.size:
+        if ( mScale < DrawingPointPath.SCALE_XL ) {
+          ++ mScale;
+          mParent.setPointScale( mScale );
+          setTheTitle();
+        }
+        return true;
     }
     return false;
   }
@@ -319,6 +349,13 @@ class ItemRecentDialog extends Dialog
       case R.id.area:
         new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_AREA ). show();
         break;
+      case R.id.size:
+        if ( mScale > DrawingPointPath.SCALE_XS ) {
+          -- mScale;
+          mParent.setPointScale( mScale );
+          setTheTitle();
+        }
+        return;
       default: 
         break;
     }

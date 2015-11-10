@@ -25,6 +25,7 @@ public class ItemDrawer extends Activity
   int mCurrentPoint;
   int mCurrentLine;
   int mCurrentArea;
+  protected int mPointScale;
 
   int mSymbol = SYMBOL_LINE; // kind of symbol being drawn
 
@@ -34,6 +35,12 @@ public class ItemDrawer extends Activity
   static Symbol mRecentArea[]  = { null, null, null, null };
   static final int NR_RECENT = 4;
 
+  void setPointScale( int scale )
+  {
+    if ( scale >= DrawingPointPath.SCALE_XS && scale <= DrawingPointPath.SCALE_XL ) mPointScale = scale;
+  }
+
+  int getPointScale() { return mPointScale; }
 
   static void updateRecentPoint( int point )
   {
