@@ -30,7 +30,7 @@
     <string name="tha_user">друго</string>
     <string name="tha_water">вода</string>
 
-    <!-- TODO string name="make_walls">Walls</string -->
+    <string name="make_walls">Стени</string>
     <string name="missing_area">Площ</string>
     <string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string>
     <string name="missing_line">Линия</string>
@@ -120,7 +120,7 @@
     <string name="sketch_saving">Записване на скица... Моля изчакайте...</string>
     <string name="lookup_wait">Търсене в интернет. Моля изчакайте...</string>
     <string name="lookup_fail">Неуспешно търсене</string>
-    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
+    <string name="MT_points_none">Няма точки на MobileTopographer</string>
  
 
     <string name="head_tail">Памет: </string>
@@ -182,7 +182,7 @@
     <string name="barrier_del">Показване на следващи репери</string>
     <string name="hidden_add">Скриване на предишни репери</string>
     <string name="hidden_del">Показване на предишни репери</string>
-    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
+    <string name="splays_toggle">Показване/скриване на странични изм.</string>
 
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
     <string name="bad_line">Невалиден тип линия</string>
@@ -210,8 +210,8 @@
     <string name="no_thmanager">ThManager не е инсталирана</string>
     <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
     <string name="no_undelete">Няма елементи за възстановяване</string>
-    <!-- TODO string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
-    <!-- TODO string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
+    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Наклон %4$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">За програмата</string>
@@ -679,10 +679,10 @@
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
   <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
-  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
-  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
+  <string name="pref_survex_eol_title">Край на ред в Survex</string>
+  <string name="pref_survex_eol_summary">Край на ред в Survex експорт</string>
+  <string name="pref_survex_splay_title">Странични измервания в Survex</string>
+  <string name="pref_survex_splay_summary">Добавяне на ДО в края на стран. изм. в Survex</string>
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
@@ -696,12 +696,12 @@
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
   <string name="pref_auto_reconnect_summary">Автоматично свързване при загуба на връзката</string>
-  <!-- TODO string name="pref_auto_pair_title">Auto pairing</string -->
-  <!-- TODO string name="pref_auto_pair_summary">Pair with device after scan</string -->
-  <!-- TODO string name="pref_socket_delay_title">Connection delay</string -->
-  <!-- TODO string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string -->
-  <!-- TODO string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string -->
-  <!-- TODO string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string -->
+  <string name="pref_auto_pair_title">Автоматично сдвояване</string>
+  <string name="pref_auto_pair_summary">Сдвояване с DistoX след сканиране</string>
+  <string name="pref_socket_delay_title">Изчакване преди сдвояване</string>
+  <string name="pref_socket_delay_summary">Изчакване преди опит за сдвояване [0.1 сек]</string>
+  <string name="pref_socket_delay_dialogtitle">Изчакване преди сдвояване</string>
+  <string name="pref_socket_delay_message">Изчакване преди опит за сдвояване [0.1 сек]</string>
   <string name="pref_z6_workaround_title">Z6 корекция</string>
   <string name="pref_z6_workaround_summary">Корекция на блокиране при сваляне на данни от някои устройства</string>
   <string name="pref_crs_title">C R S </string>
@@ -712,7 +712,7 @@
 
   <string name="pref_plot_screen_title">Екран за рисуване</string>
   <!-- FIXME string name="pref_tool_line_title">Инструменти за рисуване</string -->
-  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
+  <string name="pref_tool_point_title">Инструменти Точка</string>
   <string name="pref_location_title">Координати</string>
   <string name="pref_accuracy_title">Точност</string>
   <string name="pref_shot_data_title">Данни за отсечка</string>
@@ -801,8 +801,8 @@
   <string name="pref_drawing_unit_title">Размер на елемент "точка"</string>
   <string name="pref_drawing_unit_summary">Размер на нарисуван елемент тип "точка"</string>
   <string name="pref_drawing_unit_message">Размер на нарисуван елемент тип "точка"</string>
-  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
-  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
+  <string name="pref_unscaled_points_title">Фиксиран размер на точките</string>
+  <string name="pref_unscaled_points_summary">Точките не се променят при приближаване</string>
   <string name="pref_segment_title">Отстояния между точки на линия</string>
   <string name="pref_segment_summary">Минимално разстояние м/у точките в "линия"</string>
   <string name="pref_segment_message">Минимално разстояние м/у точките в "линия"</string>
@@ -865,12 +865,12 @@
   <string name="pref_station_size_title">Размер на име на репер</string>
   <string name="pref_station_size_summary">Размер на име на репер</string>
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>
-  <string name="pref_zoom_controls_title">Бутони за приближение</string>
-  <string name="pref_zoom_controls_summary">Показване на контролите за приближение при "мултитъч" екрани</string>
+  <string name="pref_zoom_controls_title">Бутони за приближаване</string>
+  <string name="pref_zoom_controls_summary">Показване на контролите за приближаване при "мултитъч" екрани</string>
   <string name="pref_side_drag_title">Странично скролиране</string>
   <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
-  <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
-  <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
+  <string name="pref_unit_grid_title">Мерни единици на скицата</string>
+  <string name="pref_unit_grid_summary">Размер на квадрат от мрежата</string>
 
   <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
   <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>
@@ -897,24 +897,24 @@
   <string name="pref_unit_location_title">Формат на координати</string>
   <string name="pref_unit_location_summary">Формат на координати</string>
 
-  <!-- TODO string name="pref_plot_walls_title">AUTO WALLS</string -->
-  <!-- TODO string name="pref_walls_type_title">Walls type</string -->
-  <!-- TODO string name="pref_walls_type_summary">Walls type</string -->
-  <!-- TODO string name="pref_walls_plan_thr_title">Splay plan clino</string -->
-  <!-- TODO string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls</string -->
-  <!-- TODO string name="pref_walls_plan_thr_message">Maximum splay clino for plan walls [deg]</string -->
-  <!-- TODO string name="pref_walls_extended_thr_title">Splay profile clino</string -->
-  <!-- TODO string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls</string -->
-  <!-- TODO string name="pref_walls_extended_thr_message">Maximum splay clino for profile walls [deg]</string -->
-  <!-- TODO string name="pref_walls_xclose_title">Separation</string -->
-  <!-- TODO string name="pref_walls_xclose_summary">Minimum point-separation along the shot</string -->
-  <!-- TODO string name="pref_walls_xclose_message">Minimum separation of wall points along the shot [m]</string -->
-  <!-- TODO string name="pref_walls_concave_title">Concavity</string -->
-  <!-- TODO string name="pref_walls_concave_summary">Maximum concavity</string -->
-  <!-- TODO string name="pref_walls_concave_message">Maximum concavity [percent]</string -->
-  <!-- TODO string name="pref_walls_xstep_title">Step</string -->
-  <!-- TODO string name="pref_walls_xstep_summary">Point separation along the wall</string -->
-  <!-- TODO string name="pref_walls_xstep_message">Separation of points along the wall [m]</string -->
+  <string name="pref_plot_walls_title">Автоматични стени</string>
+  <string name="pref_walls_type_title">Тип стени</string>
+  <string name="pref_walls_type_summary">Тип стени</string>
+  <string name="pref_walls_plan_thr_title">Странични изм. в плана</string>
+  <string name="pref_walls_plan_thr_summary">Макс. наклон на странични изм. за стени в плана</string>
+  <string name="pref_walls_plan_thr_message">Макс. наклон на странични изм. за стени в плана [°]</string>
+  <string name="pref_walls_extended_thr_title">Странични изм. в разреза</string>
+  <string name="pref_walls_extended_thr_summary">Макс. наклон на странични изм. за стени в разреза</string>
+  <string name="pref_walls_extended_thr_message">Макс. наклон на странични изм. за стени в плана [°]</string>
+  <string name="pref_walls_xclose_title">Минимално разстояние</string>
+  <string name="pref_walls_xclose_summary">Минимално разстояние м/у точките по отсечката</string>
+  <string name="pref_walls_xclose_message">Минимално разстояние м/у точките по отсечката [m]</string>
+  <string name="pref_walls_concave_title">Вдлъбнатост</string>
+  <string name="pref_walls_concave_summary">Максимална вдлъбнатост</string>
+  <string name="pref_walls_concave_message">Максимална вдлъбнатост [процент]</string>
+  <string name="pref_walls_xstep_title">Максимално разстояние</string>
+  <string name="pref_walls_xstep_summary">Максимално разстояние м/у точки на стената</string>
+  <string name="pref_walls_xstep_message">Максимално разстояние м/у точки на стената [m]</string>
 
   <string name="pref_log_stream_summary">Лог файл</string>
   <string name="pref_log_stream_title">Лог файл</string>

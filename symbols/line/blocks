@@ -1,5 +1,6 @@
 symbol line
 name blocks
+name-bg стена блокаж
 th_name wall:blocks
 color 0xff0000 0xff
 width 1

@@ -2,15 +2,15 @@
 
 <resources>
 
-  <!-- TODO string-array name="unitGrid">
-     <item name="meter">meter</item>
-     <item name="yard">yard</item>
-  </string-array -->
+  <string-array name="unitGrid">
+     <item name="meter">Метри</item>
+     <item name="yard">Ярдове</item>
+  </string-array>
 
-  <!-- TODO string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
-  </string-array -->
+  <string-array name="wallsType">
+     <item name="none">Изключени</item>
+     <item name="convex">Вдлъбнати</item>
+  </string-array>
 
   <string-array name="zoomCtrl">
      <item name="0">Изключени</item>
@@ -103,7 +103,7 @@
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">Няма</item>
+     <item name="no">Изключени</item>
      <item name="for">Странични, права отсечка</item>
      <item name="back">Странични, обратна отсечка</item>
      <item name="for2">Права отсечка, странични</item>
@@ -112,7 +112,7 @@
   </string-array>
 
   <string-array name="pickerType">
-     <!-- TODO item name="recent">Most recent</item -->
+     <item name="recent">Последни използвани</item>
      <item name="list">Списък</item>
      <item name="grid">Таблица</item>
   </string-array>

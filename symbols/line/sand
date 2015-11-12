@@ -1,5 +1,6 @@
 symbol line
 name sand
+name-bg стена пясък
 th_name wall:sand
 color 0xff0000 0xff
 width 1
