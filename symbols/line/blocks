@@ -5,7 +5,7 @@ th_name wall:blocks
 color 0xff0000 0xff
 width 1
 csurvey 5 8 3 1
-dash 24 12
+dash 24 8
 effect
   moveTo 0 0
   lineTo 24 0
@@ -13,8 +13,8 @@ effect
   lineTo 23 10
   lineTo 23 1
   lineTo 1 1
-  lineTo 1 10
-  lineTo 0 10
+  lineTo 1 8
+  lineTo 0 8
   lineTo 0 0
 endeffect
 endsymbol

@@ -1,0 +1,22 @@
+symbol line
+name clay
+name-bg стена_глина
+th_name wall:clay
+color 0xff0000 0xff
+width 1
+csurvey 5 8 3 1
+effect
+  moveTo 0 0
+  lineTo 27 0
+  lineTo 27 1
+  lineTo 0 1
+  lineTo 5 3
+  lineTo 10 8
+  lineTo 15 3
+  lineTo 20 8
+  lineTo 20 9
+  lineTo 15 4
+  lineTo 10 9
+  lineTo 5 4
+endeffect
+endsymbol

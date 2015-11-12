@@ -1,0 +1,20 @@
+symbol line
+name debris
+name-bg стена_чакъл
+th_name wall:debris
+color 0xff0000 0xff
+width 
+csurvey 5 8 3 1
+dash 10 2
+effect
+  moveTo 0 0
+  lineTo 10 2
+  lineTo 6 8
+  lineTo 0 1
+  lineTo 1 1
+  lineTo 5 6
+  lineTo 6 6
+  lineTo 8 2
+  lineTo 1 1
+endeffect
+endsymbol

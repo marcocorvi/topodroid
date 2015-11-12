@@ -10,9 +10,9 @@ effect
   lineTo 27 0
   lineTo 27 1
   lineTo 0 1
-  lineTo 0 11
-  lineTo 9 11
-  lineTo 9 12
-  lineTo 0 12
+  lineTo 0 8
+  lineTo 9 8
+  lineTo 9 9
+  lineTo 0 9
 endeffect
 endsymbol
