@@ -107,6 +107,26 @@ public class SymbolLine extends Symbol
     mPath.lineTo( 50, 0 );
   }
 
+
+  private int kval;
+  private float nextFloat( String[] vals, int s, float unit ) throws NumberFormatException
+  {
+    ++kval; while ( kval < s && vals[kval].length() == 0 ) ++kval;
+    if ( kval < s ) {
+      return Float.parseFloat( vals[kval] ) * unit;
+    }
+    throw new NumberFormatException();
+  }
+
+  private int nextInt( String[] vals, int s ) throws NumberFormatException
+  {
+    ++kval; while ( kval < s && vals[kval].length() == 0 ) ++kval;
+    if ( kval < s ) {
+      return Integer.parseInt( vals[kval] );
+    }
+    throw new NumberFormatException();
+  }
+
   /** create a symbol reading it from a file
    *  The file syntax is 
    *      symbol line
@@ -133,7 +153,7 @@ public class SymbolLine extends Symbol
     DashPathEffect dash = null;
     PathDashPathEffect effect = null;
     PathDashPathEffect rev_effect = null;
-    boolean moved_to = false;
+    // boolean moved_to = false; // effect can have mane moveTo
     float xmin=0, xmax=0;
 
     try {
@@ -166,22 +186,27 @@ public class SymbolLine extends Symbol
             // syntax: 
             //    csurvey <layer> <type> <category> <pen>
             try {
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxLayer = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxType = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxCategory = Integer.parseInt( vals[k] );
-              }
-              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-              if ( k < s ) {
-                mCsxPen = Integer.parseInt( vals[k] );
-              }
+              kval = k;
+              mCsxLayer    = nextInt( vals, s );
+              mCsxType     = nextInt( vals, s );
+              mCsxCategory = nextInt( vals, s );
+              mCsxPen      = nextInt( vals, s );
+              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              // if ( k < s ) {
+              //   mCsxLayer = Integer.parseInt( vals[k] );
+              // }
+              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              // if ( k < s ) {
+              //   mCsxType = Integer.parseInt( vals[k] );
+              // }
+              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              // if ( k < s ) {
+              //   mCsxCategory = Integer.parseInt( vals[k] );
+              // }
+              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              // if ( k < s ) {
+              //   mCsxPen = Integer.parseInt( vals[k] );
+              // }
             } catch ( NumberFormatException e ) {
               TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse csurvey error: " + line );
             }
@@ -196,10 +221,12 @@ public class SymbolLine extends Symbol
   	    }
   	  } else if ( vals[k].equals("width") ) {
             try {
-  	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;    
-  	      if ( k < s ) {
-  	        width = Integer.parseInt( vals[k] ) * TopoDroidSetting.mLineThickness;
-              }
+              kval = k;
+              width = nextInt( vals, s ) * TopoDroidSetting.mLineThickness;
+  	      // ++k; while ( k < s && vals[k].length() == 0 ) ++k;    
+  	      // if ( k < s ) {
+  	      //   width = Integer.parseInt( vals[k] ) * TopoDroidSetting.mLineThickness;
+              // }
             } catch ( NumberFormatException e ) {
               TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse width error: " + line );
             }
@@ -218,9 +245,11 @@ public class SymbolLine extends Symbol
                 try {
                   float[] x = new float[ndash];
   	          x[0] = Float.parseFloat( vals[k] ) * unit;
+                  kval = k;
                   for (int n=1; n<ndash; ++n ) {
-                    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            x[n] = Float.parseFloat( vals[k] ) * unit;
+  	            x[n] = nextFloat( vals, s, unit );
+                    // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            // x[n] = Float.parseFloat( vals[k] ) * unit;
                   }  
                   dash = new DashPathEffect( x, 0 );
                 } catch ( NumberFormatException e ) {
@@ -231,7 +260,7 @@ public class SymbolLine extends Symbol
   	  } else if ( vals[k].equals("effect") ) {
             path_dir = new Path();
             // path_dir.moveTo(0,0);
-            moved_to = false;
+            // moved_to = false;
             while ( (line = br.readLine() ) != null ) {
               line.trim();
               vals = line.split(" ");
@@ -241,34 +270,103 @@ public class SymbolLine extends Symbol
               if ( k < s ) {
                 if ( vals[k].equals("moveTo") ) {
                   try {
-                    if ( ! moved_to ) {
-  	              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	              if ( k < s ) {
-  	                float x = Float.parseFloat( vals[k] ) * unit;
-  	                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	                if ( k < s ) {
-  	                   float y = Float.parseFloat( vals[k] ) * unit;
-                           path_dir.moveTo( x, y );
-                           xmin = xmax = x;
-                           moved_to = true;
-                        }
-                      }
-                    }
+                    // if ( ! moved_to ) {
+                      kval = k;
+                      float x = nextFloat( vals, s, unit );
+                      float y = nextFloat( vals, s, unit );
+                      path_dir.moveTo( x, y );
+                      xmin = xmax = x;
+                      // moved_to = true;
+  	              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              // if ( k < s ) {
+  	              //   float x = Float.parseFloat( vals[k] ) * unit;
+  	              //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	              //   if ( k < s ) {
+  	              //      float y = Float.parseFloat( vals[k] ) * unit;
+                      //      path_dir.moveTo( x, y );
+                      //      xmin = xmax = x;
+                      //      moved_to = true;
+                      //   }
+                      // }
+                    // }
                   } catch ( NumberFormatException e ) {
                     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse moveTo point error: " + line );
                   }
                 } else if ( vals[k].equals("lineTo") ) { 
                   try {
-  	            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	            if ( k < s ) {
-  	              float x = Float.parseFloat( vals[k] ) * unit;
-  	              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
-  	              if ( k < s ) {
-  	                float y = Float.parseFloat( vals[k] ) * unit;
-                        path_dir.lineTo( x, y );
-                        if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
-                      }
-                    }
+                    kval = k;
+                    float x = nextFloat( vals, s, unit );
+                    float y = nextFloat( vals, s, unit );
+                    path_dir.lineTo( x, y );
+                    if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
+
+  	            // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            // if ( k < s ) {
+  	            //   float x = Float.parseFloat( vals[k] ) * unit;
+  	            //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            //   if ( k < s ) {
+  	            //     float y = Float.parseFloat( vals[k] ) * unit;
+                    //     path_dir.lineTo( x, y );
+                    //     if ( x < xmin ) xmin = x; else if ( x > xmax ) xmax = x;
+                    //   }
+                    // }
+                  } catch ( NumberFormatException e ) {
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                  }
+                } else if ( vals[k].equals("cubicTo") ) { 
+                  try {
+                    kval = k;
+                    float x1 = nextFloat( vals, s, unit );
+                    float y1 = nextFloat( vals, s, unit );
+                    float x2 = nextFloat( vals, s, unit );
+                    float y2 = nextFloat( vals, s, unit );
+                    float x3 = nextFloat( vals, s, unit );
+                    float y3 = nextFloat( vals, s, unit );
+                    path_dir.cubicTo( x1, y1, x2, y2, x3, y3 );
+                    if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
+                    if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
+                    if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
+
+  	            // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            // if ( k < s ) {
+  	            //   float x1 = Float.parseFloat( vals[k] ) * unit;
+  	            //   ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            //   if ( k < s ) {
+  	            //     float y1 = Float.parseFloat( vals[k] ) * unit;
+  	            //     ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            //     if ( k < s ) {
+  	            //       float x2 = Float.parseFloat( vals[k] ) * unit;
+  	            //       ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            //       if ( k < s ) {
+  	            //         float y2 = Float.parseFloat( vals[k] ) * unit;
+  	            //         ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            //         if ( k < s ) {
+  	            //           float x3 = Float.parseFloat( vals[k] ) * unit;
+  	            //           ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	            //           if ( k < s ) {
+  	            //             float y3 = Float.parseFloat( vals[k] ) * unit;
+                    //             path_dir.cubicTo( x1, y1, x2, y2, x3, y3 );
+                    //             if ( x1 < xmin ) xmin = x1; else if ( x1 > xmax ) xmax = x1;
+                    //             if ( x2 < xmin ) xmin = x2; else if ( x2 > xmax ) xmax = x2;
+                    //             if ( x3 < xmin ) xmin = x3; else if ( x3 > xmax ) xmax = x3;
+                    //           }
+                    //         }
+                    //       }
+                    //     }
+                    //   }
+                    // }
+                  } catch ( NumberFormatException e ) {
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                  }
+                } else if ( vals[k].equals("circle") ) { 
+                  try {
+                    kval = k;
+                    float x = nextFloat( vals, s, unit );
+                    float y = nextFloat( vals, s, unit );
+                    float r = nextFloat( vals, s, unit );
+                    path_dir.addCircle( x, y, r, Path.Direction.CCW );
+                    if ( x-r < xmin ) xmin = x-r;
+                    if ( x+r > xmax ) xmax = x+r;
                   } catch ( NumberFormatException e ) {
                     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
                   }
