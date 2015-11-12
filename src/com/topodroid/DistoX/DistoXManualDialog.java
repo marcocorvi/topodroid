@@ -47,6 +47,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import android.util.Log;
 
@@ -84,6 +85,17 @@ public class DistoXManualDialog extends Activity
 
     setContentView(R.layout.distox_manual_dialog);
     mTVtext   = (WebView) findViewById(R.id.manual_text );
+
+    mTVtext.setWebViewClient( new WebViewClient() {
+      @Override 
+      public boolean shouldOverrideUrlLoading( WebView view, String url ) {
+        view.loadUrl( url );
+        return false;
+      }
+    } );
+    // WebSettings ws = mTVtext.getSettings();
+    mTVtext.getSettings().setJavaScriptEnabled( false ); // no JS
+    mTVtext.getSettings().setSupportZoom( true ); 
 
     setTitle( R.string.title_manual );
     load( "manual00.htm" );
