@@ -42,6 +42,8 @@ public class SymbolLine extends Symbol
   Paint  mRevPaint;   // reverse paint
   boolean mHasEffect;
   Path mPath;
+  boolean mStyleStraight;
+  int mStyleX;            // X times (one out of how many point to use)
 
   @Override public String getName()  { return mName; }
   @Override public String getThName( ) { return mThName; }
@@ -92,10 +94,14 @@ public class SymbolLine extends Symbol
     mPaint.setStrokeWidth( width * TopoDroidSetting.mLineThickness );
     mRevPaint = new Paint (mPaint );
     mHasEffect = false;
+    mStyleStraight = false;
+    mStyleX = 1;
   }
 
   SymbolLine( String filepath, String locale, String iso ) 
   {
+    mStyleStraight = false;
+    mStyleX = 1;
     readFile( filepath, locale, iso );
     makePath();
   }
@@ -153,7 +159,6 @@ public class SymbolLine extends Symbol
     DashPathEffect dash = null;
     PathDashPathEffect effect = null;
     PathDashPathEffect rev_effect = null;
-    // boolean moved_to = false; // effect can have mane moveTo
     float xmin=0, xmax=0;
 
     try {
@@ -257,10 +262,21 @@ public class SymbolLine extends Symbol
                 }
               }
             }
+  	  } else if ( vals[k].equals("style") ) { // STYLE
+            for ( ++ k; k < s; ++k ) {
+  	      if ( vals[k].length() == 0 ) continue;
+              if ( vals[k].equals("straight") ) {
+                mStyleStraight = true;
+              } else if ( vals[k].startsWith("x") ) {
+                try {
+                  mStyleX = Integer.parseInt( vals[k].substring(1) );
+                } catch ( NumberFormatException e ) { }
+              }
+            }
   	  } else if ( vals[k].equals("effect") ) {
             path_dir = new Path();
             // path_dir.moveTo(0,0);
-            // moved_to = false;
+            boolean moved_to = false;
             while ( (line = br.readLine() ) != null ) {
               line.trim();
               vals = line.split(" ");
@@ -275,8 +291,10 @@ public class SymbolLine extends Symbol
                       float x = nextFloat( vals, s, unit );
                       float y = nextFloat( vals, s, unit );
                       path_dir.moveTo( x, y );
-                      xmin = xmax = x;
-                      // moved_to = true;
+                      if ( ! moved_to ) {
+                        xmin = xmax = x;
+                        moved_to = true;
+                      }
   	              // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	              // if ( k < s ) {
   	              //   float x = Float.parseFloat( vals[k] ) * unit;
@@ -371,7 +389,7 @@ public class SymbolLine extends Symbol
                     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
                   }
                 } else if ( vals[k].equals("endeffect") ) {
-                  path_dir.close();
+                  // path_dir.close();
                   path_rev = new Path( path_dir );
                   effect = new PathDashPathEffect( path_dir, (xmax-xmin), 0, PathDashPathEffect.Style.MORPH );
                   Matrix m = new Matrix();
@@ -410,10 +428,12 @@ public class SymbolLine extends Symbol
               } else if ( dash != null ) {
                 mPaint.setPathEffect( dash );
                 mRevPaint.setPathEffect( dash );
-              } else {
-                mPaint.setStrokeWidth( width * TopoDroidSetting.mLineThickness );
-                mRevPaint.setStrokeWidth( width * TopoDroidSetting.mLineThickness );
+              // } else {
+              //   mPaint.setStrokeWidth( width * TopoDroidSetting.mLineThickness );
+              //   mRevPaint.setStrokeWidth( width * TopoDroidSetting.mLineThickness );
               }
+              mPaint.setStrokeWidth( width * TopoDroidSetting.mLineThickness );
+              mRevPaint.setStrokeWidth( width * TopoDroidSetting.mLineThickness );
   	    }
           }
         }

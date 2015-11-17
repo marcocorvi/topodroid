@@ -110,6 +110,18 @@ class SymbolLineLibrary
   //   return false;
   // }
 
+  boolean isStyleStraight( int k ) 
+  {
+    if ( k < 0 || k >= mAnyLineNr ) return true;
+    return mAnyLine.get(k).mStyleStraight;
+  }
+
+  int getStyleX( int k ) 
+  {
+    if ( k < 0 || k >= mAnyLineNr ) return 1;
+    return mAnyLine.get(k).mStyleX;
+  }
+
   String getLineName( int k )
   {
     if ( k < 0 || k >= mAnyLineNr ) return null;

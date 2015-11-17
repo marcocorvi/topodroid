@@ -441,7 +441,7 @@
     <string name="button_yes"       >Да       </string>
 
     <string name="button_sharp"     >Изостряне</string>
-    <string name="button_rock"      >Редуц. точки</string>
+    <!-- FIXME string name="button_rock"      >Редуц. точки</string -->
 <!--
     <string name="button_close"     >Close     </string>
     <string name="button_erase"     >Erase     </string>

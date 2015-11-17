@@ -457,7 +457,7 @@
     <string name="button_yes"       >Ja       </string>
 
     <string name="button_sharp"     >Schärfen</string>
-    <string name="button_rock"      >Stein</string>
+    <!-- FIXME string name="button_rock"      >Stein</string -->
 <!--
     <string name="button_close"     >Beenden   </string>
     <string name="button_erase"     >Löschen   </string>

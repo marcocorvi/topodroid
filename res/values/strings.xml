@@ -439,7 +439,7 @@
     <string name="button_yes"       >Yes       </string>
 
     <string name="button_sharp"     >Sharp</string>
-    <string name="button_rock"      >Rock</string>
+    <string name="button_rock"      >Close</string>
 <!--
     <string name="button_close"     >Close     </string>
     <string name="button_erase"     >Erase     </string>

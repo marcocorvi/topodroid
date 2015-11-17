@@ -142,7 +142,7 @@ public class DrawingLineDialog extends Dialog
     } else if ( b == mBtnSharp ) {
       mParent.sharpenLine( mLine, false );
     } else if ( b == mBtnRock ) {
-      mParent.sharpenLine( mLine, true );
+      mParent.closeLine( mLine );
     // } else if ( b == mBtnErase ) {
     //   mParent.deleteLine( mLine, null );
     }

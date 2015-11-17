@@ -426,7 +426,7 @@
     <string name="button_yes"       >Sí        </string>
 
     <string name="button_sharp"     >Spigolosa</string>
-    <string name="button_rock"      >Masso</string>
+    <!-- FIXME string name="button_rock"      >Masso</string -->
 <!--
     <string name="button_close"     >Chiudi    </string>
     <string name="button_erase"     >Cancella  </string>

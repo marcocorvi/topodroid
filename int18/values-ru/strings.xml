@@ -434,7 +434,7 @@
     <string name="button_yes"       >Да        </string>
 
     <string name="button_sharp"     >Острый</string>
-    <string name="button_rock"      >Камень</string>
+    <!-- FIXME string name="button_rock"      >Камень</string -->
 <!-- OK
     <string name="button_close"     >Закрыть   </string>
     <string name="button_erase"     >Стереть   </string>

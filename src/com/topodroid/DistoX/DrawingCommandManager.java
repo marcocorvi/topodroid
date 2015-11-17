@@ -622,6 +622,24 @@ public class DrawingCommandManager
     // checkLines();
   }
 
+  void closeLine( DrawingLinePath line ) 
+  {
+    // if ( reduce ) {
+    //   synchronized( mSelection ) {
+    //     mSelection.removePath( line );
+    //     clearSelected();
+    //   }
+    // }
+    synchronized( mCurrentStack ) {
+      line.makeClose( );
+    }
+    // if ( reduce ) {
+    //   synchronized( mSelection ) {
+    //     mSelection.insertPath( line );
+    //   }
+    // }
+  }
+
   // ooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
   public void setDisplayMode( int mode ) { mDisplayMode = mode; }

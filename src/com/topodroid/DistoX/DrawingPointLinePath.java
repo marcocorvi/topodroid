@@ -155,31 +155,6 @@ public class DrawingPointLinePath extends DrawingPath
 
   void makeSharp( boolean reduce )
   {
-    // for ( LinePoint lp : mPoints ) {
-    //   lp.has_cp = false;
-    // }
-    // if ( reduce ) {
-    //   int size = mPoints.size();
-    //   if ( size > 2 ) {
-    //     ArrayList pts = new ArrayList< LinePoint >();
-    //     LinePoint prev = mPoints.get( 0 );
-    //     pts.add( prev );
-    //     LinePoint next = mPoints.get( 1 );
-    //     for ( int k = 2; k < size; ++k ) {
-    //       LinePoint pt = next;
-    //       next = mPoints.get(k);
-    //       float x1 = pt.mX - prev.mX;
-    //       float y1 = pt.mY - prev.mY;
-    //       float x2 = next.mX - pt.mX;
-    //       float y2 = next.mY - pt.mY;
-    //       float cos = (x1*x2 + y1*y2)/(float)(Math.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2)));
-    //       if ( cos < 0.7 ) pts.add( pt );
-    //     }
-    //     pts.add( next );
-    //     mPoints = pts;
-    //     retracePath();
-    //   }
-    // }
     // FIXME this was here: retracePath();
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
       lp.has_cp = false;
@@ -206,6 +181,23 @@ public class DrawingPointLinePath extends DrawingPath
       }
       ++ size; // for the mLast point
       mSize = size;     
+      retracePath();
+    }    
+  }
+
+  void makeClose( )
+  {
+    if ( mSize > 2 ) {
+      if ( mLast.has_cp ) {
+        float dx = (mFirst.mX - mLast.mX)/3;
+        float dy = (mFirst.mY - mLast.mY)/3;
+        mLast.mX1 += dx;
+        mLast.mY1 += dy;
+        mLast.mX2 += dx*2;
+        mLast.mY2 += dy*2;
+      }
+      mLast.mX = mFirst.mX;
+      mLast.mY = mFirst.mY;
       retracePath();
     }    
   }

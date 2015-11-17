@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="206054"
-      android:versionName="2.6.5d"
+      android:versionCode="206055"
+      android:versionName="2.6.5e"
     >
     <uses-sdk
        android:minSdkVersion="8"

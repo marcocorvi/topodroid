@@ -1449,6 +1449,12 @@ public class DrawingActivity extends ItemDrawer
       modified();
     }
 
+    void closeLine( DrawingLinePath line )
+    {
+      mDrawingSurface.closeLine( line );
+      modified();
+    }
+
     void deleteArea( DrawingAreaPath area )
     {
       mDrawingSurface.deletePath( area );
@@ -1687,7 +1693,7 @@ public class DrawingActivity extends ItemDrawer
           if ( mMode == MODE_DRAW ) {
             if ( mSymbol == SYMBOL_LINE ) {
               if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
-                if ( ++mPointCnt % TopoDroidSetting.mLineType == 0 ) {
+                if ( ++mPointCnt % mLinePointStep == 0 ) {
                   mCurrentLinePath.addPoint( x_scene, y_scene );
                 }
                 mCurrentBrush.mouseMove( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
@@ -1696,7 +1702,7 @@ public class DrawingActivity extends ItemDrawer
               }
             } else if ( mSymbol == SYMBOL_AREA ) {
               if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
-                if ( ++mPointCnt % TopoDroidSetting.mLineType == 0 ) {
+                if ( ++mPointCnt % mLinePointStep == 0 ) {
                   mCurrentAreaPath.addPoint( x_scene, y_scene );
                 }
                 mCurrentBrush.mouseMove( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
@@ -1774,17 +1780,18 @@ public class DrawingActivity extends ItemDrawer
               mDrawingSurface.previewPath.mPath = new Path();
 
               if (    FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment
-                   || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
+                   || ( mPointCnt % mLinePointStep ) > 0 ) {
                 if ( mSymbol == SYMBOL_LINE ) {
                   mCurrentLinePath.addPoint( x_scene, y_scene );
                 } else if ( mSymbol == SYMBOL_AREA ) {
                   mCurrentAreaPath.addPoint( x_scene, y_scene );
                 }
               }
-              if ( mPointCnt > TopoDroidSetting.mLineType ) {
-                // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "Line type " + mCurrentLinePath.mLineType );
+              if ( mPointCnt > mLinePointStep ) {
                 if ( ! ( mSymbol == SYMBOL_LINE && mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) 
-                     &&  ( TopoDroidSetting.mLineStyle == TopoDroidSetting.LINE_STYLE_BEZIER ) ) {
+                     && TopoDroidSetting.mLineStyle == TopoDroidSetting.LINE_STYLE_BEZIER
+                     && ! DrawingBrushPaths.mLineLib.isStyleStraight( mCurrentLinePath.mLineType ) 
+                   ) {
                   int nPts = (mSymbol == SYMBOL_LINE )? mCurrentLinePath.size() : mCurrentAreaPath.size() ;
                   if ( nPts > 1 ) {
                     ArrayList< BezierPoint > pts = new ArrayList< BezierPoint >(); // [ nPts ];

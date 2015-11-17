@@ -26,6 +26,7 @@ public class ItemDrawer extends Activity
   int mCurrentLine;
   int mCurrentArea;
   protected int mPointScale;
+  protected int mLinePointStep = 1;
 
   int mSymbol = SYMBOL_LINE; // kind of symbol being drawn
 
@@ -157,6 +158,7 @@ public class ItemDrawer extends Activity
       if ( update_recent ) {
         updateRecentArea( mCurrentArea );
       }
+      mLinePointStep = TopoDroidSetting.mLineType;
     }
 
     public void lineSelected( int k, boolean update_recent ) 
@@ -169,6 +171,7 @@ public class ItemDrawer extends Activity
       if ( update_recent ) {
         updateRecentLine( mCurrentLine );
       }
+      mLinePointStep = TopoDroidSetting.mLineType * DrawingBrushPaths.mLineLib.getStyleX( mCurrentLine );
     }
 
     public void pointSelected( int p, boolean update_recent )

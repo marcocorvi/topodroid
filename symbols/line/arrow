@@ -8,6 +8,7 @@ name-de Pfeil
 name-ru стрелка
 name-bg стрелка
 th_name arrow
+style straight x4
 color 0xcccccc 0xff
 width 1
 csurvey 5 1 2 2

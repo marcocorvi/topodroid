@@ -419,7 +419,7 @@
     <string name="button_yes"       >Si        </string>
 
     <string name="button_sharp"     >agudo</string>
-    <string name="button_rock"      >Roca</string>
+    <!-- FIXME string name="button_rock"      >Roca</string -->
 <!--
     <string name="button_close"     >Cerrar    </string>
     <string name="button_erase"     >Borrar    </string>
