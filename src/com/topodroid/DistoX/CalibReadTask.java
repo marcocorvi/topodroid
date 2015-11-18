@@ -27,19 +27,24 @@ import android.util.Log;
 
 class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 {
+  static final int PARENT_DEVICE = 1;
+  static final int PARENT_GM     = 2;
+
   byte[]   coeff;
   Activity mActivity;
   IEnableButtons mEnableButtons;
   TopoDroidApp mApp;
-  String comp_name;
+  int mParentType;
+  // String comp_name;
 
-  CalibReadTask( Activity activity, IEnableButtons eb, TopoDroidApp app, String act_name )
+  CalibReadTask( Activity activity, IEnableButtons eb, TopoDroidApp app, int parent_type )
   {
     mActivity = activity;
     mApp      = app;
     mEnableButtons = eb;
     coeff = new byte[52]; // always read 52 bytes
-    comp_name = "ComponentInfo{com.topodroid.DistoX/com.topodroid.DistoX." + act_name + "}";
+    mParentType = parent_type;
+    // comp_name = "ComponentInfo{com.topodroid.DistoX/com.topodroid.DistoX." + act_name + "}";
   }
 
   @Override
@@ -67,18 +72,18 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
       Calibration.coeffToM( coeff, bm, am );
       Calibration.coeffToNL( coeff, nL );
 
-      // ActivityManager act_man = (ActivityManager)mApp.getSystemService( Context.ACTIVITY_SERVICE );
-      // List< RunningTaskInfo > acts = act_man.getRunningTasks( Integer.MAX_VALUE );
-      // boolean found = false;
-      // for ( RunningTaskInfo act : acts ) {
-      //   if ( act.topActivity.toString().equalsIgnoreCase( comp_name ) ) {
-      //     found = true;
-      //     break;
-      //   }
-      // }
-      // // Log.v("DistoX", comp_name + (found? " " : " not ") + "found" );
-      // if ( found ) 
-      (new CalibCoeffDialog( mApp, mApp, bg, ag, bm, am, nL, 0.0f, 0.0f, 0, null ) ).show();
+      switch ( mParentType ) {
+        case PARENT_DEVICE:
+          if ( mApp.mDeviceActivityVisible ) {
+            (new CalibCoeffDialog( mApp, mApp, bg, ag, bm, am, nL, 0.0f, 0.0f, 0, null ) ).show();
+          }
+          break;
+        case PARENT_GM:
+          if ( mApp.mGMActivityVisible ) {
+            (new CalibCoeffDialog( mApp, mApp, bg, ag, bm, am, nL, 0.0f, 0.0f, 0, null ) ).show();
+          }
+          break;
+      }
     } else {
       Toast.makeText( mApp, R.string.read_failed, Toast.LENGTH_SHORT).show();
     }

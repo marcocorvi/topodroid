@@ -97,12 +97,16 @@ public class DrawingShotDialog extends Dialog
 
     LinearLayout layout3 = (LinearLayout) findViewById( R.id.layout3 );
     int size = TopoDroidApp.getScaledSize( mContext );
-    layout3.setMinimumHeight( size + 10 );
+    layout3.setMinimumHeight( size + 20 );
+
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 10, 20, 10 );
 
     mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
     mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-    layout3.addView( mRBdup );
-    layout3.addView( mRBsurf );
+    layout3.addView( mRBdup, lp );
+    layout3.addView( mRBsurf, lp );
 
     mRBwalls  = (Button) findViewById( R.id.walls );
 

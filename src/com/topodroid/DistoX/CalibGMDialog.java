@@ -90,18 +90,24 @@ public class CalibGMDialog extends Dialog
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout2 );
     int size = TopoDroidApp.getScaledSize( mContext );
-    layout4.setMinimumHeight( size + 10 );
+    layout4.setMinimumHeight( size + 20 );
     
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 10, 20, 10 );
+
     mButtonOK = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete ); 
     mCBregroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no ); 
     mCBregroup.setState( false );
-    layout4.addView( mCBregroup );
-    layout4.addView( mButtonOK );
-    layout4.addView( mButtonDelete );
-    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mCBregroup.getLayoutParams();
-    params.setMargins( 0, 0, 40, 0 );
-    mCBregroup.setLayoutParams( params );
+
+    layout4.addView( mCBregroup, lp );
+    layout4.addView( mButtonOK, lp );
+    layout4.addView( mButtonDelete, lp );
+
+    // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mCBregroup.getLayoutParams();
+    // params.setMargins( 0, 0, 40, 0 );
+    // mCBregroup.setLayoutParams( params );
     
     // mButtonOK     = (Button) findViewById(R.id.gm_ok );
     // mButtonDelete = (Button) findViewById(R.id.gm_delete );

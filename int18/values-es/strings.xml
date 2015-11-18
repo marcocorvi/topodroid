@@ -418,10 +418,10 @@
     <string name="button_upload"    >Cargar    </string>
     <string name="button_yes"       >Si        </string>
 
-    <string name="button_sharp"     >agudo</string>
-    <!-- FIXME string name="button_rock"      >Roca</string -->
+    <!-- UNUSED string name="button_sharp"     >agudo</string -->
+    <!-- UNUSED string name="button_rock"      >Roca</string -->
+    <!-- UNUSED string name="button_close"     >Cerrar</string -->
 <!--
-    <string name="button_close"     >Cerrar    </string>
     <string name="button_erase"     >Borrar    </string>
     <string name="button_next"      >Siguiente </string>
     <string name="button_prev"      >Anterior  </string>
@@ -773,6 +773,8 @@
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Comprobación línea media</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
+  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
+  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>

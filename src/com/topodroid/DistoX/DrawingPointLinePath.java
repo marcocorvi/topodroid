@@ -153,13 +153,18 @@ public class DrawingPointLinePath extends DrawingPath
     return lp.mPrev;
   }
 
-  void makeSharp( boolean reduce )
+  void makeSharp( )
   {
     // FIXME this was here: retracePath();
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
       lp.has_cp = false;
     }
-    if ( reduce && mSize > 2 ) {
+    retracePath();
+  }
+
+  void makeReduce()
+  {
+    if ( mSize > 2 ) {
       int size = 1;
       LinePoint prev = mFirst;
       LinePoint pt = mFirst.mNext;
@@ -181,24 +186,26 @@ public class DrawingPointLinePath extends DrawingPath
       }
       ++ size; // for the mLast point
       mSize = size;     
-      retracePath();
     }    
+    retracePath();
   }
 
   void makeClose( )
   {
     if ( mSize > 2 ) {
-      if ( mLast.has_cp ) {
-        float dx = (mFirst.mX - mLast.mX)/3;
-        float dy = (mFirst.mY - mLast.mY)/3;
-        mLast.mX1 += dx;
-        mLast.mY1 += dy;
-        mLast.mX2 += dx*2;
-        mLast.mY2 += dy*2;
+      float dx = (mFirst.mX - mLast.mX)/3;
+      float dy = (mFirst.mY - mLast.mY)/3;
+      if ( dx*dx + dy*dy > 1.0e-7 ) {
+        if ( mLast.has_cp ) {
+          mLast.mX1 += dx;
+          mLast.mY1 += dy;
+          mLast.mX2 += dx*2;
+          mLast.mY2 += dy*2;
+        }
+        mLast.mX = mFirst.mX;
+        mLast.mY = mFirst.mY;
+        retracePath();
       }
-      mLast.mX = mFirst.mX;
-      mLast.mY = mFirst.mY;
-      retracePath();
     }    
   }
 

@@ -111,6 +111,7 @@ class TopoDroidSetting
     "DISTOX_SURVEX_SPLAY",
     "DISTOX_UNSCALED_POINTS",     // unscaled drawing point items
     "DISTOX_UNIT_GRID",
+    "DISTOX_XTHERION_AREAS",      // save areas a-la xtherion
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -307,6 +308,7 @@ class TopoDroidSetting
 
   // static final String LINE_SHIFT = "20.0";
   static float mUnitGrid = 1;
+  static boolean mXTherionAreas = false;
 
   static final int PICKER_RECENT = 0; // Drawing-tools picker type
   static final int PICKER_LIST   = 1; 
@@ -715,6 +717,8 @@ class TopoDroidSetting
 
     mUnitGrid = Float.parseFloat( prefs.getString( key[k++], "1" ) );  // DISTOX_UNIT_GRID
 
+    mXTherionAreas = prefs.getBoolean( key[k++], false );   // DISTOX_XTHERION_AREAS
+
     try { // DISTOX_WALLS_TYPE
       i = Integer.parseInt(prefs.getString( key[k++], "0" ) ); 
       if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
@@ -1092,6 +1096,8 @@ class TopoDroidSetting
       mUnscaledPoints = prefs.getBoolean( k, false ); // DISTOX_UNSCALED_POINTS
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_UNIT_GRID
       mUnitGrid = Float.parseFloat( prefs.getString( k, "1" ) ); 
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_XTHERION_AREAS
+      mXTherionAreas = prefs.getBoolean( k, false );   
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
       try {

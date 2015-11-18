@@ -440,10 +440,10 @@
     <string name="button_upload"    >Качване   </string>
     <string name="button_yes"       >Да       </string>
 
-    <string name="button_sharp"     >Изостряне</string>
-    <!-- FIXME string name="button_rock"      >Редуц. точки</string -->
+    <!-- UNUSED string name="button_sharp"     >Изостряне</string -->
+    <!-- UNUSED string name="button_rock"      >Редуц. точки</string -->
+    <!-- UNUSED string name="button_close"     >Close</string -->
 <!--
-    <string name="button_close"     >Close     </string>
     <string name="button_erase"     >Erase     </string>
     <string name="button_next"      >Next      </string>
     <string name="button_prev"      >Previous  </string>
@@ -851,6 +851,8 @@
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
+  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
+  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>

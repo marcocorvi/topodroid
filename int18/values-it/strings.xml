@@ -425,10 +425,10 @@
     <!-- OK string name="button_upload"    >Upload   </string -->
     <string name="button_yes"       >Sí        </string>
 
-    <string name="button_sharp"     >Spigolosa</string>
-    <!-- FIXME string name="button_rock"      >Masso</string -->
+    <!-- UNUSED string name="button_sharp"     >Spigolosa</string -->
+    <!-- UNUSED string name="button_rock"      >Masso</string -->
+    <!-- UNUSED string name="button_close"     >Chiudi</string -->
 <!--
-    <string name="button_close"     >Chiudi    </string>
     <string name="button_erase"     >Cancella  </string>
     <string name="button_next"      >Prossimo  </string>
     <string name="button_prev"      >Preced.   </string>
@@ -779,6 +779,8 @@
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
+  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
+  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_autoStations_title">Punti th2 station</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>

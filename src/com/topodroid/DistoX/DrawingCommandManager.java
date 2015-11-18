@@ -603,41 +603,34 @@ public class DrawingCommandManager
     eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
 
-  void sharpenLine( DrawingLinePath line, boolean reduce ) 
+  void sharpenLine( DrawingLinePath line ) 
   {
-    if ( reduce ) {
-      synchronized( mSelection ) {
-        mSelection.removePath( line );
-        clearSelected();
-      }
+    synchronized( mCurrentStack ) {
+      line.makeSharp( );
+    }
+    // checkLines();
+  }
+
+  void reduceLine( DrawingLinePath line ) 
+  {
+    synchronized( mSelection ) {
+      mSelection.removePath( line );
+      clearSelected();
     }
     synchronized( mCurrentStack ) {
-      line.makeSharp( reduce );
+      line.makeReduce( );
     }
-    if ( reduce ) {
-      synchronized( mSelection ) {
-        mSelection.insertPath( line );
-      }
+    synchronized( mSelection ) {
+      mSelection.insertPath( line );
     }
     // checkLines();
   }
 
   void closeLine( DrawingLinePath line ) 
   {
-    // if ( reduce ) {
-    //   synchronized( mSelection ) {
-    //     mSelection.removePath( line );
-    //     clearSelected();
-    //   }
-    // }
     synchronized( mCurrentStack ) {
       line.makeClose( );
     }
-    // if ( reduce ) {
-    //   synchronized( mSelection ) {
-    //     mSelection.insertPath( line );
-    //   }
-    // }
   }
 
   // ooooooooooooooooooooooooooooooooooooooooooooooooooooo

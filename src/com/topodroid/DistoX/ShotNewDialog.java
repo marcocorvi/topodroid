@@ -194,11 +194,16 @@ public class ShotNewDialog extends Dialog
     int size = TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 10 );
 
+    // LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+    //   LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    // lp.setMargins( 0, -10, 20, 10 );
+
     mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass, R.drawable.iz_compass ); 
     mCBsplayAtTo = new CheckBox( mContext );
     mCBsplayAtTo.setText( R.string.splay_at_to );
     layout4.addView( mBtnSensor );
     layout4.addView( mCBsplayAtTo );
+
     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBtnSensor.getLayoutParams();
     params.setMargins( 0, -10, 40, 10 );
     mBtnSensor.setLayoutParams( params );

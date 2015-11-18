@@ -307,7 +307,11 @@ public class ShotDialog extends Dialog
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
-    layout4.setMinimumHeight( size + 10 );
+    layout4.setMinimumHeight( size + 20 );
+
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 10, 20, 10 );
 
     mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
     mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
@@ -316,11 +320,11 @@ public class ShotDialog extends Dialog
     mCBallSplay = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
     mCBrenumber = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
 
-    layout4.addView( mRBdup );
-    layout4.addView( mRBsurf );
-    layout4.addView( mCBleg );
-    layout4.addView( mCBlegNext );
-    layout4.addView( mCBallSplay );
+    layout4.addView( mRBdup, lp );
+    layout4.addView( mRBsurf, lp );
+    layout4.addView( mCBleg, lp );
+    layout4.addView( mCBlegNext, lp );
+    layout4.addView( mCBallSplay, lp );
     layout4.addView( mCBrenumber );
 
     mCBleg.setOnClickListener( this );

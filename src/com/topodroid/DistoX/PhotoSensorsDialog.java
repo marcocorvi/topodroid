@@ -87,19 +87,23 @@ public class PhotoSensorsDialog extends Dialog
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
-    layout4.setMinimumHeight( size + 10 );
+    layout4.setMinimumHeight( size + 20 );
     
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 10, 20, 10 );
+
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
     mButtonSurvey = new MyCheckBox( mContext, size, R.drawable.iz_split, R.drawable.iz_split );
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete );
 
-    layout4.addView( mButtonPhoto );
-    layout4.addView( mButtonSensor );
-    layout4.addView( mButtonShot );
-    layout4.addView( mButtonSurvey );
-    layout4.addView( mButtonDelete );
+    layout4.addView( mButtonPhoto, lp );
+    layout4.addView( mButtonSensor, lp );
+    layout4.addView( mButtonShot, lp );
+    layout4.addView( mButtonSurvey, lp );
+    layout4.addView( mButtonDelete, lp );
 
     layout4.invalidate();
 

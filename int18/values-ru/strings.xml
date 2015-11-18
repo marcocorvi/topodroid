@@ -433,10 +433,10 @@
     <string name="button_upload"    >Загрузить </string>
     <string name="button_yes"       >Да        </string>
 
-    <string name="button_sharp"     >Острый</string>
-    <!-- FIXME string name="button_rock"      >Камень</string -->
+    <!-- UNUSED string name="button_sharp"     >Острый</string -->
+    <!-- UNUSED string name="button_rock"      >Камень</string -->
+    <!-- UNUSED string name="button_close"     >Закрыть</string -->
 <!-- OK
-    <string name="button_close"     >Закрыть   </string>
     <string name="button_erase"     >Стереть   </string>
     <string name="button_next"      >Следующий </string>
     <string name="button_prev"      >Предыдущий</string>
@@ -842,6 +842,8 @@
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
+  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
+  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>

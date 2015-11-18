@@ -427,10 +427,10 @@
     <!-- TODO string name="button_upload"    >Upload    </string -->
     <string name="button_yes"       >Oui       </string>
 
-    <!-- TODO string name="button_sharp"     >Sharp</string -->
-    <!-- TODO string name="button_rock"      >Close</string -->
+    <!-- UNUSED string name="button_sharp"     >Sharp</string -->
+    <!-- UNUSED string name="button_rock"      >Rock</string -->
+    <!-- UNUSED string name="button_close"     >Close</string -->
 <!--
-    <string name="button_close"     >Close     </string>
     <string name="button_erase"     >Erase     </string>
     <string name="button_next"      >Next      </string>
     <string name="button_prev"      >Previous  </string>
@@ -780,6 +780,8 @@
   <string name="pref_checkBT_summary">Activer/désactiver Bluetooth</string>
   <string name="pref_checkAttached_title">Vérification cheminement</string>
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
+  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
+  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_autoStations_title">Stations auto</string>
   <string name="pref_autoStations_summary">Ajouter les stations automatiquement</string>
   <string name="pref_loopClosure_title">Bouclage</string>

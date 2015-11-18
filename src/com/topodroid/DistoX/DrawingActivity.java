@@ -1443,9 +1443,15 @@ public class DrawingActivity extends ItemDrawer
       modified();
     }
 
-    void sharpenLine( DrawingLinePath line, boolean reduce )
+    void sharpenLine( DrawingLinePath line )
     {
-      mDrawingSurface.sharpenLine( line, reduce );
+      mDrawingSurface.sharpenLine( line );
+      modified();
+    }
+
+    void reduceLine( DrawingLinePath line )
+    {
+      mDrawingSurface.reduceLine( line );
       modified();
     }
 
@@ -1790,7 +1796,7 @@ public class DrawingActivity extends ItemDrawer
               if ( mPointCnt > mLinePointStep ) {
                 if ( ! ( mSymbol == SYMBOL_LINE && mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) 
                      && TopoDroidSetting.mLineStyle == TopoDroidSetting.LINE_STYLE_BEZIER
-                     && ! DrawingBrushPaths.mLineLib.isStyleStraight( mCurrentLinePath.mLineType ) 
+                     && ( mSymbol == SYMBOL_AREA || ! DrawingBrushPaths.mLineLib.isStyleStraight( mCurrentLinePath.mLineType ) )
                    ) {
                   int nPts = (mSymbol == SYMBOL_LINE )? mCurrentLinePath.size() : mCurrentAreaPath.size() ;
                   if ( nPts > 1 ) {

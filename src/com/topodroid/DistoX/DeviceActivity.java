@@ -497,7 +497,7 @@ public class DeviceActivity extends Activity
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
         enableButtons( false );
-        new CalibReadTask( this, this, mApp, "DeviceActivity" ).execute();
+        new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
       }
 
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // 3: DISTOX INFO
@@ -540,12 +540,14 @@ public class DeviceActivity extends Activity
     super.onResume();
     registerReceiver( mPairReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
+    mApp.mDeviceActivityVisible = true;
   }
 
   @Override
   public void onPause()
   {
     super.onPause();
+    mApp.mDeviceActivityVisible = false;
     unregisterReceiver( mPairReceiver );
   }
 

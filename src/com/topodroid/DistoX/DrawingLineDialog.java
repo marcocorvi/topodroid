@@ -25,12 +25,14 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 public class DrawingLineDialog extends Dialog
                                implements View.OnClickListener
 {
+  private Context mContext;
   private DrawingLinePath mLine;
   private DrawingActivity mParent;
   private LinePoint mPoint;
@@ -42,11 +44,13 @@ public class DrawingLineDialog extends Dialog
   private CheckBox mBtnOutlineIn;
   // private RadioButton mBtnOutlineNone;
 
-  private CheckBox mReversed;
 
   private Button mBtnOk;
-  private Button mBtnSharp;
-  private Button mBtnRock;
+
+  private MyCheckBox mReversed;
+  private MyCheckBox mBtnSharp;
+  private MyCheckBox mBtnRock;
+  private MyCheckBox mBtnClose;
   // private Button   mBtnSplit;
   // private Button   mBtnCancel;
   // private Button   mBtnErase;
@@ -54,8 +58,9 @@ public class DrawingLineDialog extends Dialog
   public DrawingLineDialog( DrawingActivity context, DrawingLinePath line, LinePoint lp )
   {
     super( context );
-    mParent = context;
-    mLine = line;
+    mContext = context;
+    mParent  = context;
+    mLine  = line;
     mPoint = lp;
   }
 
@@ -88,8 +93,7 @@ public class DrawingLineDialog extends Dialog
     //   mBtnOutlineNone.setChecked( true );
     }
 
-    mReversed = (CheckBox) findViewById( R.id.line_reversed );
-    mReversed.setChecked( mLine.mReversed );
+    // mReversed = (CheckBox) findViewById( R.id.line_reversed );
 
     mBtnOutlineOut.setOnClickListener( this );
     mBtnOutlineIn.setOnClickListener( this );
@@ -97,11 +101,30 @@ public class DrawingLineDialog extends Dialog
     mBtnOk = (Button) findViewById( R.id.button_ok );
     mBtnOk.setOnClickListener( this );
 
-    mBtnSharp = (Button) findViewById( R.id.button_sharp );
-    mBtnSharp.setOnClickListener( this );
+    int size = TopoDroidApp.getScaledSize( mContext );
+    mReversed = new MyCheckBox( mContext, size, R.drawable.iz_reverse_ok, R.drawable.iz_reverse_no );
+    mBtnSharp = new MyCheckBox( mContext, size, R.drawable.iz_sharp_ok, R.drawable.iz_sharp_no );
+    mBtnRock  = new MyCheckBox( mContext, size, R.drawable.iz_rock_ok,  R.drawable.iz_rock_no  );
+    mBtnClose = new MyCheckBox( mContext, size, R.drawable.iz_close_ok, R.drawable.iz_close_no );
+    mReversed.setChecked( mLine.mReversed );
 
-    mBtnRock = (Button) findViewById( R.id.button_rock );
-    mBtnRock.setOnClickListener( this );
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
+      LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+    lp.setMargins( 0, 10, 20, 10 );
+
+    LinearLayout layout3 = (LinearLayout)findViewById( R.id.layout3 );
+    layout3.addView( mReversed, lp );
+    layout3.addView( mBtnSharp, lp );
+    layout3.addView( mBtnRock, lp );
+    layout3.addView( mBtnClose, lp );
+
+
+    // mBtnSharp = (Button) findViewById( R.id.button_sharp );
+    // mBtnSharp.setOnClickListener( this );
+    // mBtnRock = (Button) findViewById( R.id.button_rock );
+    // mBtnRock.setOnClickListener( this );
+    // mBtnClose = (Button) findViewById( R.id.button_close );
+    // mBtnClose.setOnClickListener( this );
 
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
@@ -135,16 +158,23 @@ public class DrawingLineDialog extends Dialog
       else /* if ( mBtnOutlineNone.isChecked() ) */ mLine.mOutline = DrawingLinePath.OUTLINE_NONE;
 
       mLine.setReversed( mReversed.isChecked() );
-    // } else if ( b == mBtnSplit   ) {
-    //   mParent.splitLine( mLine, mPoint );
-    // } else if ( b == mBtnCancel ) {
-    //   /* nothing */
-    } else if ( b == mBtnSharp ) {
-      mParent.sharpenLine( mLine, false );
-    } else if ( b == mBtnRock ) {
-      mParent.closeLine( mLine );
-    // } else if ( b == mBtnErase ) {
-    //   mParent.deleteLine( mLine, null );
+
+      if ( mBtnSharp.isChecked() ) {
+        mParent.sharpenLine( mLine );
+      } 
+      if ( mBtnRock.isChecked() ) {
+        mParent.reduceLine( mLine );
+      }
+      if ( mBtnClose.isChecked() ) {
+        mParent.closeLine( mLine );
+      }
+
+    // } else if ( b == mBtnSharp ) {
+    //   mParent.sharpenLine( mLine, false );
+    // } else if ( b == mBtnRock ) {
+    //   mParent.sharpenLine( mLine, true );
+    // } else if ( b == mBtnClose ) {
+    //   mParent.closeLine( mLine );
     }
     dismiss();
   }

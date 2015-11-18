@@ -651,7 +651,7 @@ public class GMActivity extends Activity
         }
       } else if ( b == mButton1[5] ) { // read
         enableButtons( false );
-        new CalibReadTask( this, this, mApp, "GMActivity" ).execute();
+        new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
 
       } else if ( b == mButton1[6] ) { // write
         // if ( mEnableWrite ) {
@@ -718,12 +718,14 @@ public class GMActivity extends Activity
     // Log.v( TopoDroidApp.TAG, "onResume ");
     updateDisplay( );
     // mApp.registerConnListener( mHandler );
+    mApp.mGMActivityVisible = true;
   }
 
   @Override
   protected synchronized void onPause() 
   { 
     super.onPause();
+    mApp.mGMActivityVisible = false;
     // mApp.unregisterConnListener( mHandler );
     // if ( mApp.mComm != null ) { mApp.mComm.suspend(); }
   }

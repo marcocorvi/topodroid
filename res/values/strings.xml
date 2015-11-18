@@ -438,10 +438,10 @@
     <string name="button_upload"    >Upload    </string>
     <string name="button_yes"       >Yes       </string>
 
-    <string name="button_sharp"     >Sharp</string>
-    <string name="button_rock"      >Close</string>
+    <!-- UNUSED string name="button_sharp"     >Sharp</string -->
+    <!-- UNUSED string name="button_rock"      >Rock</string -->
+    <!-- UNUSED string name="button_close"     >Close</string -->
 <!--
-    <string name="button_close"     >Close     </string>
     <string name="button_erase"     >Erase     </string>
     <string name="button_next"      >Next      </string>
     <string name="button_prev"      >Previous  </string>
@@ -867,6 +867,8 @@
   <string name="pref_checkBT_summary">Enable/disable bluetooth</string>
   <string name="pref_checkAttached_title">Midline check</string>
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
+  <string name="pref_xtherion_areas_title">xtherion areas</string>
+  <string name="pref_xtherion_areas_summary">Save areas a la xtherion</string>
   <string name="pref_autoStations_title">Therion stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>

@@ -19,11 +19,11 @@
       android:hint="@string/options"
       />
 
-    <CheckBox android:id="@+id/line_reversed"
+    <!-- CheckBox android:id="@+id/line_reversed"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:text="@string/reversed"
-      />
+      / -->
 
     <LinearLayout 
       android:id="@+id/line_outline"
@@ -53,13 +53,13 @@
           / -->
     </LinearLayout>
 
-    <LinearLayout 
+    <LinearLayout android:id="@+id/layout3"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:orientation="horizontal" 
         android:gravity="right"
       >
-
+<!--
       <Button android:id="@+id/button_sharp"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -72,11 +72,20 @@
       <Button android:id="@+id/button_rock"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_rock"
       />
 
+      <Button android:id="@+id/button_close"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_close"
+      />
+-->
     </LinearLayout>
 
     <LinearLayout 
@@ -107,7 +116,7 @@
           android:layout_marginRight="10dp" 
           android:background="@drawable/button"
           style="@style/button_default"
-          android:text="@string/button_save"
+          android:text="@string/button_ok"
         />
 
         <!-- Button android:id="@+id/button_erase"
