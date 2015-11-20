@@ -803,6 +803,8 @@
   <string name="pref_side_drag_summary">Abilita side-drag sul rilievo</string>
   <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
   <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
+  <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
+  <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
 
   <string name="pref_sketchUsesSplays_title">Sketch splays</string>
   <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>

@@ -31,10 +31,10 @@ public class ItemDrawer extends Activity
   int mSymbol = SYMBOL_LINE; // kind of symbol being drawn
 
   // -----------------------------------------------------------
-  static Symbol mRecentPoint[] = { null, null, null, null };
-  static Symbol mRecentLine[]  = { null, null, null, null };
-  static Symbol mRecentArea[]  = { null, null, null, null };
-  static final int NR_RECENT = 4;
+  static Symbol mRecentPoint[] = { null, null, null, null, null, null };
+  static Symbol mRecentLine[]  = { null, null, null, null, null, null };
+  static Symbol mRecentArea[]  = { null, null, null, null, null, null };
+  static final int NR_RECENT = 6; // max is 6
 
   void setPointScale( int scale )
   {

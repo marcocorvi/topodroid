@@ -3,9 +3,11 @@
 <b>Sketch exports</b><br>
 Sketches are stored in therion format. Exporting as <i>Therion</i> will save a new copy.<br><p>
 
-The cSurvey export file contains both the plan and the profile sketches. However it does not has the cross-sections. Cross-sections cannot be exported as cSurvey files, and you need to export as images if you want to use them for postprocessing with cSurvey.<br><p.
+The <b>cSurvey</b> export file contains both the plan and the profile sketches. However it does not has the cross-sections. Cross-sections cannot be exported as cSurvey files, and you need to export as images if you want to use them for postprocessing with cSurvey.<br><p.
 
-The resolution of PNG images is an adjustable setting. However a larger and more detailed image requires more CPU time and may fail due to memory limits. If it fails TopoDroid tries reducing the resolution until it succeeds exporting the sketch as PNG image file.<br><p>
+The resolution of <b>PNG</b> images is an adjustable setting. However a larger and more detailed image requires more CPU time and may fail due to memory limits. If it fails TopoDroid tries reducing the resolution until it succeeds exporting the sketch as PNG image file.<br><p>
+
+Sketches can be exported as 2D <b>DXF</b> files. The AutoCAD version of the exported DXF files can be either 6 or 12. In the former cubic lines are replaced by polylines. For the latter splines are used, however there are issues loading DXF saved with version 12 in AutoCAD.<br><p>
 
 <b>Sketch backup copies</b><br>
 A sketch is saved whenever it is modified. TopoDroid maintains <a href="page_backup.htm">backup</a> copies of sketch files, from which a skatch can be recovered (menu "reload" of the sketch window).</li>

@@ -11,6 +11,15 @@
        android:entryValues="@array/pickerTypeValue"
      />
 
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_RECENT_NR"
+       android:summary="@string/pref_recent_nr_summary"
+       android:title="@string/pref_recent_nr_title"
+       android:defaultValue="0"
+       android:entries="@array/recentNr"
+       android:entryValues="@array/recentNr"
+     />
+
      <CheckBoxPreference
        android:key="DISTOX_SIDE_DRAG"
        android:summary="@string/pref_side_drag_summary"

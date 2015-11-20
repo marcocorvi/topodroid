@@ -113,6 +113,7 @@ class TopoDroidSetting
     "DISTOX_UNSCALED_POINTS",     // unscaled drawing point items
     "DISTOX_UNIT_GRID",
     "DISTOX_XTHERION_AREAS",      // save areas a-la xtherion
+    "DISTOX_RECENT_NR",           // number of most recent items (item picker)
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -310,6 +311,7 @@ class TopoDroidSetting
 
   // static final String LINE_SHIFT = "20.0";
   static float mUnitGrid = 1;
+  static int mRecentNr = 4;
   static boolean mXTherionAreas = false;
 
   static final int PICKER_RECENT = 0; // Drawing-tools picker type
@@ -722,6 +724,11 @@ class TopoDroidSetting
 
     mXTherionAreas = prefs.getBoolean( key[k++], false );   // DISTOX_XTHERION_AREAS
 
+    try {
+      i = Integer.parseInt( prefs.getString( key[k++], "4" ) ); // DISTOX_RECENT_NR
+      if ( i >= 3 && i < 7 ) mRecentNr = i;
+    } catch ( NumberFormatException e ) { }
+
     try { // DISTOX_WALLS_TYPE
       i = Integer.parseInt(prefs.getString( key[k++], "0" ) ); 
       if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
@@ -1103,6 +1110,12 @@ class TopoDroidSetting
       mUnitGrid = Float.parseFloat( prefs.getString( k, "1" ) ); 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_XTHERION_AREAS
       mXTherionAreas = prefs.getBoolean( k, false );   
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_RECENT_NR
+      try {
+        i = Integer.parseInt( prefs.getString( k, "4" ) );
+        if ( i >= 3 && i < 7 ) mRecentNr = i;
+      } catch ( NumberFormatException e ) { }
+
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
       try {
