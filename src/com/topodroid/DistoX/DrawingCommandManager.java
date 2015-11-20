@@ -707,27 +707,33 @@ public class DrawingCommandManager
   // }  
 
   public void addLegPath( DrawingPath path, boolean selectable )
-  {
-    mLegsStack.add( path );
-    if ( selectable ) {
-      synchronized( mSelection ) {
-        if ( path.mBlock != null ) {
-          // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
+  { 
+    if ( mLegsStack == null ) return;
+    synchronized( mLegsStack ) {
+      mLegsStack.add( path );
+      if ( selectable ) {
+        synchronized( mSelection ) {
+          if ( path.mBlock != null ) {
+            // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
+          }
+          mSelection.insertPath( path );
         }
-        mSelection.insertPath( path );
       }
     }
   }  
 
   public void addSplayPath( DrawingPath path, boolean selectable )
   {
-    mSplaysStack.add( path );
-    if ( selectable ) {
-      synchronized( mSelection ) {
-        if ( path.mBlock != null ) {
-          // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
+    if ( mSplaysStack == null ) return;
+    synchronized( mSplaysStack ) {
+      mSplaysStack.add( path );
+      if ( selectable ) {
+        synchronized( mSelection ) {
+          if ( path.mBlock != null ) {
+            // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
+          }
+          mSelection.insertPath( path );
         }
-        mSelection.insertPath( path );
       }
     }
   }  
@@ -739,10 +745,13 @@ public class DrawingCommandManager
   
   public void addGrid( DrawingPath path, int k ) 
   { 
-    switch (k) {
-      case 1:   mGridStack1.add( path );   break;
-      case 10:  mGridStack10.add( path );  break;
-      case 100: mGridStack100.add( path ); break;
+    if ( mGridStack1 == null ) return;
+    synchronized( mGridStack1 ) {
+      switch (k) {
+        case 1:   mGridStack1.add( path );   break;
+        case 10:  mGridStack10.add( path );  break;
+        case 100: mGridStack100.add( path ); break;
+      }
     }
   }
  
@@ -751,12 +760,13 @@ public class DrawingCommandManager
   {
     // Log.v("PTDistoX", "add station " + st.mName + " scene " + st.cx + " " + st.cy
     //                + " num " + st.mStation.e + " " + st.mStation.s );
-
-    mStations.add( st );
-    if ( selectable ) {
-      synchronized( mSelection ) {
-        // Log.v( "DistoX", "selection add station " + st.mName );
-        mSelection.insertStationName( st );
+    synchronized( mStations ) {
+      mStations.add( st );
+      if ( selectable ) {
+        synchronized( mSelection ) {
+          // Log.v( "DistoX", "selection add station " + st.mName );
+          mSelection.insertStationName( st );
+        }
       }
     }
   }

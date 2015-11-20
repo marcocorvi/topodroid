@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -880,6 +881,14 @@ class TopoDroidExporter
     return false;
   }
 
+  static void writeSurvexLRUD( PrintWriter pw, String st, LRUD lrud )
+  {
+    if ( lrud != null ) {
+      pw.format(Locale.ENGLISH, "%s  %.2f %.2f %.2f %.2f", st, lrud.l, lrud.r, lrud.u, lrud.d );
+      writeSurvexEOL( pw );
+    }
+  }
+
   static void writeSurvexSplay( PrintWriter pw, String from, String to, DistoXDBlock blk )
   {
     pw.format(Locale.ENGLISH, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength, blk.mBearing, blk.mClino );
@@ -895,6 +904,7 @@ class TopoDroidExporter
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+    List<DistoXDBlock> st_blk = new ArrayList<DistoXDBlock>(); // blocks with from station (for LRUD)
     try {
       TopoDroidApp.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -965,6 +975,7 @@ class TopoDroidExporter
             } else { // only TO station
               if ( n > 0 && ref_item != null ) {
                 duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+                if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 n = 0;
                 ref_item = null; 
               }
@@ -989,6 +1000,7 @@ class TopoDroidExporter
             if ( to == null || to.length() == 0 ) { // splay shot
               if ( n > 0 && ref_item != null ) { // write pervious leg shot
                 duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+                if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 n = 0;
                 ref_item = null; 
               }
@@ -1011,6 +1023,7 @@ class TopoDroidExporter
             } else {
               if ( n > 0 && ref_item != null ) {
                 duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+                if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 n = 0;
                 ref_item = null; 
               }
@@ -1034,6 +1047,7 @@ class TopoDroidExporter
         }
         if ( n > 0 && ref_item != null ) {
           duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+          if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
           n = 0;
           ref_item = null;
         }
@@ -1041,6 +1055,30 @@ class TopoDroidExporter
       }
       writeSurvexLine(pw, "  *flags not splay");
 
+      if ( TopoDroidSetting.mSurvexLRUD ) {
+        for ( int k=0; k<st_blk.size(); ++k ) { // remove duplicate FROM stations
+          String from = st_blk.get(k).mFrom;
+          if ( from == null || from.length() == 0 ) {
+            st_blk.remove(k);
+            --k;
+          } else {
+            for ( int j=0; j<k; ++j ) {
+              if ( from.equals( st_blk.get(j).mFrom ) ) {
+                st_blk.remove(k);
+                --k;
+                break;
+              }
+            }
+          }
+        }
+        if ( st_blk.size() > 0 ) {
+          pw.format("*data passage station left right up down");
+          writeSurvexEOL( pw );
+          for ( DistoXDBlock blk : st_blk ) {
+            writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ) );
+          }
+        }
+      }
       pw.format("*end %s", info.name ); writeSurvexEOL(pw);
       fw.flush();
       fw.close();

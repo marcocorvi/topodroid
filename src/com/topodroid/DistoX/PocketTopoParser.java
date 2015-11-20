@@ -164,7 +164,7 @@ public class PocketTopoParser extends ImportParser
   }
 
   final static float FCT = 0.0f;
-  /** return therion buffer with the sketch
+  /** return true if successful
    */
   private boolean writeDrawing( String filename, PTDrawing drawing, long type, float xoff, float yoff )
   {
@@ -173,77 +173,83 @@ public class PocketTopoParser extends ImportParser
     // Log.v( "PTDistoX", "off " + xoff + " " + yoff );
     TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "Therion file " + filename + " elems " + elem_count );
 
-    try {
-      TopoDroidApp.checkPath( filename );
-      FileWriter fw = new FileWriter( filename );
-      PrintWriter pw = new PrintWriter( fw );
+    TopoDroidApp.checkPath( filename );
+    File file = new File( filename );
+    boolean ret = false;
+    synchronized( TopoDroidPath.mTherionLock ) {
+      try {
+        FileWriter fw = new FileWriter( file );
+        PrintWriter pw = new PrintWriter( fw );
 
-      if ( type == PlotInfo.PLOT_PLAN ) {
-        pw.format("scrap 1p -proj plan ");
-      } else {
-        pw.format("scrap 1s -proj extended ");
-      }
-      pw.format("[0 0 1 0 0.0 0.0 1.0 0.0 m]\n");
+        if ( type == PlotInfo.PLOT_PLAN ) {
+          pw.format("scrap 1p -proj plan ");
+        } else {
+          pw.format("scrap 1s -proj extended ");
+        }
+        pw.format("[0 0 1 0 0.0 0.0 1.0 0.0 m]\n");
 
-      PTMapping mapping = drawing.mapping();
-      int scale = mapping.scale();
-      int x0 = (mapping.origin().x());
-      int y0 = (mapping.origin().y());
-      // Log.v("PTDistoX", "map origin " + x0 + " " + y0 + " elements " + elem_count );
-      x0 *= FCT;
-      y0 *= FCT;
+        PTMapping mapping = drawing.mapping();
+        int scale = mapping.scale();
+        int x0 = (mapping.origin().x());
+        int y0 = (mapping.origin().y());
+        // Log.v("PTDistoX", "map origin " + x0 + " " + y0 + " elements " + elem_count );
+        x0 *= FCT;
+        y0 *= FCT;
 
-      if ( elem_count > 0 ) {
-        for (int h=0; h<elem_count; ++h ) {
-          try {
-            PTPolygonElement elem = (PTPolygonElement)drawing.getElement(h);
-            int point_count = elem.pointCount();
-            int col = elem.getColor();
-            if ( point_count > 1 ) {
-              PTPoint point = elem.point(0);
-              // add a line to the plotCanvas
-              pw.format("line %s\n", PtCmapActivity.getLineThName(col) );
-              int k=0;
-              int x1 =   (int)( xoff + PT_SCALE*(point.x() - x0));
-              int y1 = - (int)( yoff + PT_SCALE*(point.y() - y0));
-              // FIXME drawer->insertLinePoint( x1, y1, type, canvas );
-              pw.format("  %d %d \n", x1, y1 );
-              // Log.v("PTDistoX", "elem " + h + ":0 " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
+        if ( elem_count > 0 ) {
+          for (int h=0; h<elem_count; ++h ) {
+            try {
+              PTPolygonElement elem = (PTPolygonElement)drawing.getElement(h);
+              int point_count = elem.pointCount();
+              int col = elem.getColor();
+              if ( point_count > 1 ) {
+                PTPoint point = elem.point(0);
+                // add a line to the plotCanvas
+                pw.format("line %s\n", PtCmapActivity.getLineThName(col) );
+                int k=0;
+                int x1 =   (int)( xoff + PT_SCALE*(point.x() - x0));
+                int y1 = - (int)( yoff + PT_SCALE*(point.y() - y0));
+                // FIXME drawer->insertLinePoint( x1, y1, type, canvas );
+                pw.format("  %d %d \n", x1, y1 );
+                // Log.v("PTDistoX", "elem " + h + ":0 " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
 
-              for (++k; k<point_count; ++k ) {
-                point = elem.point(k);
+                for (++k; k<point_count; ++k ) {
+                  point = elem.point(k);
+                  int x =   (int)( xoff + PT_SCALE*(point.x() - x0) );
+                  int y = - (int)( yoff + PT_SCALE*(point.y() - y0) );
+                  if ( Math.abs(x - x1) >= 4 || Math.abs(y - y1) >= 4 ) {
+                    x1 = x;
+                    y1 = y;
+                    // FIXME drawer->insertLinePoint( x, y, type, canvas );
+                    pw.format("  %d %d \n", x1, y1 );
+                    // Log.v("PTDistoX", "elem " + h + ":" + k + " " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
+                  }
+                }
+                // FIXME drawer->insertLinePoint( x1, y1, type, canvas ); // close the line
+                // FIXME pw.format("  %d %d \n", x1, y1 );
+                pw.format("endline\n");
+              } else if ( point_count == 1 ) {
+                PTPoint point = elem.point(0);
                 int x =   (int)( xoff + PT_SCALE*(point.x() - x0) );
                 int y = - (int)( yoff + PT_SCALE*(point.y() - y0) );
-                if ( Math.abs(x - x1) >= 4 || Math.abs(y - y1) >= 4 ) {
-                  x1 = x;
-                  y1 = y;
-                  // FIXME drawer->insertLinePoint( x, y, type, canvas );
-                  pw.format("  %d %d \n", x1, y1 );
-                  // Log.v("PTDistoX", "elem " + h + ":" + k + " " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
-                }
+                // FIXME drawer->insertPoint(x, y, type, canvas );
+                pw.format("point %d %d %s \n", x, y, PtCmapActivity.getPointThName(col) );
+                // Log.v("PTDistoX", "elem " + h + " single " + x + " " + y );
               }
-              // FIXME drawer->insertLinePoint( x1, y1, type, canvas ); // close the line
-              // FIXME pw.format("  %d %d \n", x1, y1 );
-              pw.format("endline\n");
-            } else if ( point_count == 1 ) {
-              PTPoint point = elem.point(0);
-              int x =   (int)( xoff + PT_SCALE*(point.x() - x0) );
-              int y = - (int)( yoff + PT_SCALE*(point.y() - y0) );
-              // FIXME drawer->insertPoint(x, y, type, canvas );
-              pw.format("point %d %d %s \n", x, y, PtCmapActivity.getPointThName(col) );
-              // Log.v("PTDistoX", "elem " + h + " single " + x + " " + y );
+            } catch( ClassCastException e ) {
             }
-          } catch( ClassCastException e ) {
           }
         }
+        pw.format("endscrap\n");
+        fw.flush();
+        fw.close();
+        ret = true;
+      } catch ( IOException e ) {
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, mName + " scraps IO error " + e );
+        file.delete();
       }
-      pw.format("endscrap\n");
-      fw.flush();
-      fw.close();
-    } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, mName + " scraps IO error " + e );
     }
-    return true;
+    return ret;
   }
 
 

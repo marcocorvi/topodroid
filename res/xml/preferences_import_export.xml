@@ -54,6 +54,13 @@
        android:defaultValue="false"
      />
 
+   <CheckBoxPreference
+       android:key="DISTOX_SURVEX_LRUD"
+       android:summary="@string/pref_survex_lrud_summary"
+       android:title="@string/pref_survex_lrud_title"
+       android:defaultValue="false"
+     />
+
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_BITMAP_SCALE"
        android:title="@string/pref_bitmap_scale_title"

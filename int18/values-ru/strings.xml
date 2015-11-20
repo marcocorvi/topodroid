@@ -676,6 +676,8 @@
   <string name="pref_survex_eol_summary">Прерывание линии Survex</string>
   <string name="pref_survex_splay_title">Survex пикет луча</string>
   <string name="pref_survex_splay_summary">Добавить пикет ДО к лучасм в Survex</string>
+  <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->
+  <!-- TODO string name="pref_survex_lrud_summary">Add LRUD to Survex export</string -->
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket создать</string>

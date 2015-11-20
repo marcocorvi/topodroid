@@ -698,6 +698,8 @@
   <string name="pref_survex_eol_summary">Survex line termination</string>
   <string name="pref_survex_splay_title">Survex splays station</string>
   <string name="pref_survex_splay_summary">Add TO station to splays in Survex</string>
+  <string name="pref_survex_lrud_title">Survex LRUD</string>
+  <string name="pref_survex_lrud_summary">Add LRUD to Survex export</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket create</string>

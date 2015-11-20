@@ -109,6 +109,7 @@ class TopoDroidSetting
     "DISTOX_SOCKET_DELAY",
     "DISTOX_SURVEX_EOL",         // survex end of line
     "DISTOX_SURVEX_SPLAY",
+    "DISTOX_SURVEX_LRUD",  
     "DISTOX_UNSCALED_POINTS",     // unscaled drawing point items
     "DISTOX_UNIT_GRID",
     "DISTOX_XTHERION_AREAS",      // save areas a-la xtherion
@@ -206,6 +207,7 @@ class TopoDroidSetting
 
   static String mSurvexEol = "\n";
   static boolean mSurvexSplay = false;
+  static boolean mSurvexLRUD  = false;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
@@ -712,6 +714,7 @@ class TopoDroidSetting
 
     mSurvexEol = ( prefs.getString( key[ k++ ], "LF" ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
     mSurvexSplay = prefs.getBoolean( key[k++], false ); // DISTOX_SURVEX_SPLAY
+    mSurvexLRUD  = prefs.getBoolean( key[k++], false ); // DISTOX_SURVEX_LRUD 
 
     mUnscaledPoints = prefs.getBoolean( key[k++], false ); // DISTOX_UNSCALED_POINTS
 
@@ -1092,6 +1095,8 @@ class TopoDroidSetting
       mSurvexEol = ( prefs.getString( k, "LF" ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSurvexSplay = prefs.getBoolean( k, false ); // DISTOX_SURVEX_SPLAY
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mSurvexLRUD = prefs.getBoolean( k, false ); // DISTOX_SURVEX_LRUD
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnscaledPoints = prefs.getBoolean( k, false ); // DISTOX_UNSCALED_POINTS
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_UNIT_GRID
