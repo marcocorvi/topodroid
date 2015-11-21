@@ -114,6 +114,7 @@ class TopoDroidSetting
     "DISTOX_UNIT_GRID",
     "DISTOX_XTHERION_AREAS",      // save areas a-la xtherion
     "DISTOX_RECENT_NR",           // number of most recent items (item picker)
+    "DISTOX_AREA_BORDER",         // area border visibility
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -336,6 +337,7 @@ class TopoDroidSetting
   static float mArrowLength = 8;
 
   static boolean mUnscaledPoints = false;
+  static boolean mAreaBorder = true;
 
   static float mUnit = 1.2f; // drawing unit
 
@@ -729,6 +731,8 @@ class TopoDroidSetting
       if ( i >= 3 && i < 7 ) mRecentNr = i;
     } catch ( NumberFormatException e ) { }
 
+    mAreaBorder = prefs.getBoolean( key[k++], true ); // DISTOX_AREA_BORDER
+
     try { // DISTOX_WALLS_TYPE
       i = Integer.parseInt(prefs.getString( key[k++], "0" ) ); 
       if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
@@ -1116,6 +1120,8 @@ class TopoDroidSetting
         if ( i >= 3 && i < 7 ) mRecentNr = i;
       } catch ( NumberFormatException e ) { }
 
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AREA_BOREDR
+      mAreaBorder = prefs.getBoolean( k, true ); 
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
       try {

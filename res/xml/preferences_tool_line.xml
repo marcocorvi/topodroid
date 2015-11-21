@@ -40,6 +40,13 @@
        android:inputType="numberDecimal"
        android:defaultValue="8" />
 
+     <CheckBoxPreference
+       android:key="DISTOX_AREA_BORDER"
+       android:summary="@string/pref_area_border_summary"
+       android:title="@string/pref_area_border_title"
+       android:defaultValue="true"
+       />
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_ACCURACY"
        android:title="@string/pref_lineacc_title"

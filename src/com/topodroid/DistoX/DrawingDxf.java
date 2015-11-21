@@ -227,6 +227,10 @@ class DrawingDxf
       writeString( out, 9, "$ACADVER" );
       String ACAD_VERSION = (VERSION == 13)? "AC1012" : "AC1009";
       writeString( out, 1, ACAD_VERSION );
+
+      // writeString( out, 9, "$DWGCODEPAGE" );
+      // writeString( out, 3, "ANSI_1251" );
+
       writeString( out, 9, "$INSBASE" );
       {
         StringWriter sw1 = new StringWriter();
@@ -371,7 +375,7 @@ class DrawingDxf
           {
             for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
               SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
-              String block = "P_" + pt.mName.replace(':','-');
+              String block = "P_" + pt.getThName().replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               ++handle; writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbBlockTableRecord" );
               writeString( out, 2, block );
@@ -389,7 +393,7 @@ class DrawingDxf
         // // 8 layer (0), 2 block name,
         for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
           SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
-          String block = "P_" + pt.mName.replace(':','-');
+          String block = "P_" + pt.getThName().replace(':','-');
 
           writeString( out, 0, "BLOCK" );
           ++handle; writeAcDb( out, handle, "AcDbEntity", "AcDbBlockBegin" );

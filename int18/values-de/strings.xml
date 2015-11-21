@@ -854,6 +854,8 @@
   <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
   <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
   <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
+  <!-- TODO string name="pref_area_border_title">Area border visibility</string --> 
+  <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
 
   <!-- TODO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
   <!-- TODO string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->

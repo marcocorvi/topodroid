@@ -1636,7 +1636,8 @@ public class DrawingActivity extends ItemDrawer
             mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
           } else if ( mSymbol == SYMBOL_AREA ) {
             // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
-            mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", true );
+            mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
+              mName+"-a", TopoDroidSetting.mAreaBorder );
             mCurrentAreaPath.addStartPoint( x_scene, y_scene );
             mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
           } else { // SYMBOL_POINT
@@ -1841,7 +1842,8 @@ public class DrawingActivity extends ItemDrawer
                           mDrawingSurface.addDrawingPath( lp1 );
                         }
                       } else { //  mSymbol == SYMBOL_AREA
-                        DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", true ); 
+                        DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
+                          mName+"-a", TopoDroidSetting.mAreaBorder ); 
                         ap.addStartPoint( p0.mX, p0.mY );
                         for (int k=0; k<k0; ++k) {
                           c = curves.get(k);
