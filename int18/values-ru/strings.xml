@@ -676,8 +676,8 @@
   <string name="pref_survex_eol_summary">Прерывание линии Survex</string>
   <string name="pref_survex_splay_title">Survex пикет луча</string>
   <string name="pref_survex_splay_summary">Добавить пикет ДО к лучасм в Survex</string>
-  <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->
-  <!-- TODO string name="pref_survex_lrud_summary">Add LRUD to Survex export</string -->
+  <string name="pref_survex_lrud_title">Survex ЛПВН</string>
+  <string name="pref_survex_lrud_summary">Добавить ЛПВН в при экспорте в формат Survex</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket создать</string>
@@ -706,7 +706,7 @@
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
   <string name="pref_plot_screen_title">Настройки экрана абриса</string>
   <!-- FIXME string name="pref_tool_line_title">Настройки рисования абриса</string -->
-  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
+  <string name="pref_tool_point_title">ИНСТРУМЕНТ ТОЧЕК</string>
   <string name="pref_location_title">Настройки местоположения</string>
   <string name="pref_shot_data_title">НАСТРОЙКА ДАННЫХ ПИКЕТОВ</string>
   <string name="pref_cwd_title">Корневой каталог</string>
@@ -844,8 +844,8 @@
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
-  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
-  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <string name="pref_xtherion_areas_title">области xtherion</string>
+  <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
@@ -864,10 +864,10 @@
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
   <string name="pref_side_drag_title">Перетаскивание за сторону</string>
   <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
-  <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
-  <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
-  <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
-  <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
+  <string name="pref_unit_grid_title">Единицы измерения на абрисе</string>
+  <string name="pref_unit_grid_summary">Размер шага сетки на абрисе</string>
+  <string name="pref_recent_nr_title">Кол-во недавних инструментов</string >
+  <string name="pref_recent_nr_summary">Количество недавно использованных инструментов рисования</string>
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
