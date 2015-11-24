@@ -71,7 +71,7 @@
     <string name="auto">автоматичен</string>
     <string name="linear">линеен</string>
     <string name="non_linear">нелинеен</string>
-   
+
     <string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string>
     <string name="device_busy">Устройството е заето</string>
     <string name="device_illegal_addr">Грешен адрес в паметта</string>
@@ -121,7 +121,7 @@
     <string name="lookup_wait">Търсене в интернет. Моля изчакайте...</string>
     <string name="lookup_fail">Неуспешно търсене</string>
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
- 
+
 
     <string name="head_tail">Памет: </string>
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
@@ -164,7 +164,7 @@
     <string name="error_station_non_existing">Несъществуващ репер</string>
     <string name="error_sensor_required">Необходим сензор</string>
     <string name="error_value_required">Необходима стойност</string>
-    
+
     <string name="group_title">Групиране на данните за калибрация</string>
     <string name="group_policy_four">Вид групиране: по четворки</string>
     <string name="group_policy_sixteen">Вид групиране: четири групи по четири, останалите единични</string>
@@ -403,7 +403,7 @@
     <!-- UNUSED string name="ask_close">Затваряне на TopoDroid?</string -->
     <string name="ask_reset">Изчистване на паметта на DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
-    
+
 
     <string name="button_add"       >Добавяне  </string>
     <string name="button_back"      >Обратно   </string>
@@ -473,7 +473,7 @@
     <string name="btn_symbol">Инструменти за рисуване</string>
     <string name="btn_import">Импортиране</string>
 
-<!-- FIXME_SKETCH_3D -->    
+<!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <!-- UNUSED string name="title_sketch_edit">Редакт. 3D повърхност</string -->
     <string name="title_sketch_shot">Нова отсечка</string>
@@ -512,14 +512,14 @@
 
     <string name="menu_head">Начало</string>
     <!-- UNUSED string name="menu_save_th2">Запис на TH2</string -->
-<!-- END_SKETCH_3D -->    
+<!-- END_SKETCH_3D -->
 
     <string name="help_help">Помощ</string>
     <string name="help_manual">Ръководство</string>
     <!-- NO string name="help_more">Показване на допълнителни команди</string -->
     <!-- NO string name="help_less">Връщане към основните команди</string -->
     <string name="help_measure">Измерване на разстояния</string>
-    
+
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
     <string name="help_current_station">Записани репери</string>
@@ -568,7 +568,7 @@
     <string name="help_previous">Предишен избран елемент</string>
     <string name="help_next">Следващ избран елемент</string>
     <string name="help_recover">Възстановяване на скица от резервно копие</string>
-   
+
     <string name="help_line_point">Действия за точка от линия: съединяване, разделяне, премахване</string>
 <!--
     <string name="help_to_point">Move selected point to join with the nearest point</string>
@@ -613,7 +613,7 @@
     <string name="help_refine_sides">Изчистване на повърхност в страните на триъгълниците</string>
     <string name="help_refine_point">Изчистване на повърхност в точка</string>
     <string name="help_refine_triangle">Изчистване на повърхност в дългите страни</string>
-  
+
 
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
@@ -683,8 +683,8 @@
   <string name="pref_survex_eol_summary">Край на ред в Survex експорт</string>
   <string name="pref_survex_splay_title">Странични измервания в Survex</string>
   <string name="pref_survex_splay_summary">Добавяне на ДО в края на стран. изм. в Survex</string>
-  <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->
-  <!-- TODO string name="pref_survex_lrud_summary">Add LRUD to Survex export</string -->
+  <string name="pref_survex_lrud_title">Survex Ляво/Дясно/Горе/Долу</string>
+  <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
@@ -713,7 +713,7 @@
   <!-- UNUSED string name="pref_gps_averaging_summary">Да се използва ли усредняване на GPS координати</string -->
 
   <string name="pref_plot_screen_title">Екран за рисуване</string>
-  <!-- FIXME string name="pref_tool_line_title">Инструменти за рисуване</string -->
+  <string name="pref_tool_line_title">Инструменти Линия</string>
   <string name="pref_tool_point_title">Инструменти Точка</string>
   <string name="pref_location_title">Координати</string>
   <string name="pref_accuracy_title">Точност</string>
@@ -762,9 +762,9 @@
   <string name="pref_team_summary">Екип картировачи</string>
   <string name="pref_team_message">Екип картировачи по подразбиране</string>
 
-  <!-- FIXME string name="pref_ethr_title">Граница за разгъване</string -->
-  <!-- FIXME string name="pref_ethr_summary">Граница за верт. разгъване на странични отсечки</string -->
-  <!-- FIXME string name="pref_ethr_message">Граница, над която да се изчислява разгъване</string -->
+  <string name="pref_ethr_title">Граница на вертикално измерване</string>
+  <string name="pref_ethr_summary">Граница за верт. разгъване на странични отсечки</string>
+  <string name="pref_ethr_message">Отклонение [спрямо 90], в което стран. отсечка се разгъва вертикално</string>
   <string name="pref_vthr_title">Вертикална граница на отсечка</string>
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
   <string name="pref_vthr_message">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
@@ -853,8 +853,8 @@
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
-  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
-  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <string name="pref_xtherion_areas_title">Площи експорт в xtherion</string>
+  <string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string>
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>
@@ -875,8 +875,8 @@
   <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
   <string name="pref_unit_grid_title">Мерни единици на скицата</string>
   <string name="pref_unit_grid_summary">Размер на квадрат от мрежата</string>
-  <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
-  <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
+  <string name="pref_recent_nr_title">Брой последни инструменти</string>
+  <string name="pref_recent_nr_summary">Брой последно използвани инструменти показвани в прозореца</string>
 
   <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
   <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>
@@ -994,6 +994,6 @@
    <string name="ask_upload_not_compatible">Файлът с фърмуер не изглежда коректен.\nПродължаване с качването?</string>
    <string name="firmware_file_dumped">Записан файл %1$s с размер %2$d</string>
    <string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d</string>
-   
+
 
 </resources>
