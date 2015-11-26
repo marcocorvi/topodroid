@@ -1055,29 +1055,85 @@ class TopoDroidExporter
       }
       writeSurvexLine(pw, "  *flags not splay");
 
-      if ( TopoDroidSetting.mSurvexLRUD ) {
-        for ( int k=0; k<st_blk.size(); ++k ) { // remove duplicate FROM stations
-          String from = st_blk.get(k).mFrom;
-          if ( from == null || from.length() == 0 ) {
-            st_blk.remove(k);
-            --k;
-          } else {
-            for ( int j=0; j<k; ++j ) {
-              if ( from.equals( st_blk.get(j).mFrom ) ) {
-                st_blk.remove(k);
-                --k;
-                break;
+      if ( TopoDroidSetting.mSurvexLRUD && st_blk.size() > 0 ) {
+        String from = null;
+        for ( int k=0; k<st_blk.size(); ++k ) { 
+          if ( st_blk.get(k).mFrom != null && st_blk.get(k).mFrom.length() > 0 ) {
+            from = st_blk.get(k).mFrom;
+            break;
+          }
+        }
+        if ( from != null ) {
+          DistoXNum num = new DistoXNum( list, from, null, null );
+          List<NumBranch> branches = num.makeBranches( true );
+          for ( NumBranch branch : branches ) {
+            // ArrayList<String> stations = new ArrayList<String>();
+            ArrayList<NumShot> shots = branch.shots;
+            if ( shots.size() > 0 ) {
+              pw.format("*data passage station left right up down");
+              writeSurvexEOL( pw );
+              NumShot sh = shots.get(0);
+              NumStation s1 = sh.from;
+              NumStation s2 = sh.to;
+              // if ( sh.mBranchDir != 0 ) { s1 = s2; s2 = sh.from; }
+              DistoXDBlock blk0 = sh.getFirstBlock();
+              if ( shots.size() == 1 ) {
+                writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+              } else {
+                String st_name = null;
+                for ( int k = 1; k<shots.size(); ++k ) {
+                  sh = shots.get(k);
+                  DistoXDBlock blk = sh.getFirstBlock();
+                  if ( k == 1 ) {
+                    if ( blk0.mFrom.equals( blk.mFrom ) || blk0.mFrom.equals( blk.mTo ) ) {
+                      st_name = blk0.mFrom;
+                      writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                      writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                    } else if ( blk0.mTo.equals( blk.mFrom ) || blk0.mTo.equals( blk.mTo ) ) {
+                      st_name = blk0.mTo;
+                      writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                      writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                    }
+                  }
+                  if ( st_name.equals( blk.mTo ) ) {
+                    writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ) );
+                    st_name = blk.mFrom;
+                  } else if ( st_name.equals( blk.mFrom ) ) {
+                    writeSurvexLRUD( pw, blk.mTo, computeLRUD( blk, list, false ) );
+                    st_name = blk.mTo;
+                  } else {
+                    Log.e("DistoX", "ERROR unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
+                    break;
+                  }
+                }
               }
+              writeSurvexEOL( pw );
             }
           }
         }
-        if ( st_blk.size() > 0 ) {
-          pw.format("*data passage station left right up down");
-          writeSurvexEOL( pw );
-          for ( DistoXDBlock blk : st_blk ) {
-            writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ) );
-          }
-        }
+        // for ( int k=0; k<st_blk.size(); ++k ) { // remove duplicate FROM stations
+        //   String from = st_blk.get(k).mFrom;
+        //   if ( from == null || from.length() == 0 ) {
+        //     st_blk.remove(k);
+        //     --k;
+        //   } else {
+        //     for ( int j=0; j<k; ++j ) {
+        //       if ( from.equals( st_blk.get(j).mFrom ) ) {
+        //         st_blk.remove(k);
+        //         --k;
+        //         break;
+        //       }
+        //     }
+        //   }
+        // }
+        // if ( st_blk.size() > 0 ) {
+        //   pw.format("*data passage station left right up down");
+        //   writeSurvexEOL( pw );
+        //   for ( DistoXDBlock blk : st_blk ) {
+        //     writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ) );
+        //   }
+        // }
       }
       pw.format("*end %s", info.name ); writeSurvexEOL(pw);
       fw.flush();

@@ -203,7 +203,8 @@ public class GMActivity extends Activity
           byte[] coeff = calibration.GetCoeff();
 
           float error = calibration.mMaxError * TopoDroidUtil.RAD2GRAD;
-          (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, calibration.Delta(), error, result, coeff ) ).show();
+          (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL,
+                                 calibration.Delta(), calibration.Delta2(), error, result, coeff ) ).show();
         } else {
           // Toast.makeText( mApp.getApplicationContext(), R.string.few_data, Toast.LENGTH_SHORT ).show();
           Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();

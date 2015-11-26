@@ -796,14 +796,14 @@ public class Calibration
                                    (float)Math.sin(c0) );
             err[j] = v0.minus(v).Length(); // approx angle with sin/tan
             mDelta  += err[j];
-            mDelta2 += err[j]i * err[j];
+            mDelta2 += err[j] * err[j];
             ++ cnt;
           }
         }
       }
     }
     mDelta  = mDelta / cnt;
-    mDelta2 = Math.sqrt(mDelta2/cnt - mDelta*mDelta);
+    mDelta2 = (float)Math.sqrt(mDelta2/cnt - mDelta*mDelta);
     mDelta  = mDelta * TopoDroidUtil.RAD2GRAD;
     mDelta2 = mDelta2 * TopoDroidUtil.RAD2GRAD;
 

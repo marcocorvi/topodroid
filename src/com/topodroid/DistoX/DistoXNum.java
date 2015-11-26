@@ -1075,13 +1075,22 @@ class DistoXNum
     }
   }
 
+  /* make branches from this num nodes
+   * @param also_cross_end     whether to include branches to end-points
+   */
+  ArrayList<NumBranch> makeBranches( boolean also_cross_end ) { return makeBranches( mNodes, also_cross_end ); }
+  
   /** from the list of nodes make the branches of type cross-cross
    * FIXME there is a flaw:
    * this method does not detect single loops with no hair attached
    */
-  void makeBranches( ArrayList<NumBranch> branches, ArrayList<NumNode> nodes )
+  ArrayList<NumBranch> makeBranches( ArrayList<NumNode> nodes, boolean also_cross_end )
   {
-    for ( NumNode node : mNodes ) {
+    for ( NumNode nd : nodes ) {
+      Log.v("DistoX", "node " + nd.station.name + " branches " + nd.branches.size() );
+    }
+    ArrayList< NumBranch > branches = new ArrayList<NumBranch>();
+    for ( NumNode node : nodes ) {
       for ( NumShot shot : node.shots ) {
         if ( shot.branch != null ) continue;
         NumBranch branch = new NumBranch( NumBranch.BRANCH_CROSS_CROSS, node );
@@ -1107,6 +1116,10 @@ class DistoXNum
           if ( sh1 == sh0 ) { sh1 = st0.s2; }
           if ( sh1 == null ) { // dangling station: CROSS_END branch --> drop
             // mEndBranches.add( branch );
+            if ( also_cross_end ) {
+              branch.setLastNode( st0.node );
+              branches.add( branch );
+            }
             break;
           }
           if ( sh1.from == st0 ) { // move forward
@@ -1119,9 +1132,15 @@ class DistoXNum
           sh0 = sh1;
         }
         if ( st0 == sf0 ) { // closed-loop ???
+          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR closed loop in num branches");
+          if ( also_cross_end ) {
+            branch.setLastNode( st0.node );
+            branches.add( branch );
+          }
         }
       }
     }
+    return branches;
   }
 
   /** matrix inverse: gauss pivoting method
@@ -1177,9 +1196,7 @@ class DistoXNum
 
   void doLoopCompensation( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
   {
-    ArrayList< NumBranch > branches = new ArrayList<NumBranch>();
-    makeBranches( branches, nodes );
-
+    ArrayList<NumBranch> branches = makeBranches( nodes, false );
 
     ArrayList< NumBranch > singleBranches = new ArrayList<NumBranch>();
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
