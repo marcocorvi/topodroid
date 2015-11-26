@@ -63,7 +63,8 @@
     <string name="connect_failed">Failed connect</string>
     <string name="data"> data</string>
     <string name="using">Using %1$s %2$s</string>
-    <string name="calib_error">Error: %1$.4f degrees</string>
+    <string name="calib_error">Average error: %1$.4f degrees</string>
+    <string name="calib_stddev">Error stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Max. error: %1$.4f degrees</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_saturated_values">WARNING: %1$d saturated data</string>

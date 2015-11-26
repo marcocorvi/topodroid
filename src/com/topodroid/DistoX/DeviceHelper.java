@@ -40,8 +40,8 @@ import java.util.HashMap;
 public class DeviceHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "24";
-  static final int DATABASE_VERSION = 24;
+  static final String DB_VERSION = "25";
+  static final int DATABASE_VERSION = 25;
   static final int DATABASE_VERSION_MIN = 21; 
 
   private static final String CONFIG_TABLE = "configs";
@@ -119,7 +119,7 @@ public class DeviceHelper extends DataSetObservable
         updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
         updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
         updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
-        updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, max_error=?, iterations=? WHERE id=?" );
+        updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, stddev=?, max_error=?, iterations=? WHERE id=?" );
 
         resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
         // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
@@ -330,7 +330,7 @@ public class DeviceHelper extends DataSetObservable
    {
      // if ( myDB == null ) return;
      Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "error", "max_error", "iterations" }, // columns
+                                new String[] { "error", "max_error", "iterations", "stddev" }, // columns
                                 "id=?",
                                 new String[] { Long.toString(cid) },
                                 null,  // groupBy
@@ -345,6 +345,8 @@ public class DeviceHelper extends DataSetObservable
          if ( str != null ) res.max_error = Float.parseFloat( str );
          str = cursor.getString(2);
          if ( str != null ) res.iterations = Integer.parseInt( str );
+         str = cursor.getString(3);
+         if ( str != null ) res.stddev = Float.parseFloat( str );
        } catch ( NumberFormatException e ) {
          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "selectCalibError parse Float error: calib ID " + cid );
        }
@@ -880,13 +882,14 @@ public class DeviceHelper extends DataSetObservable
      return true;
    }
 
-   public boolean updateCalibError( long id, double error, double max_error, int iterations )
+   public boolean updateCalibError( long id, double error, double stddev, double max_error, int iterations )
    {
      // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
      updateCalibErrorStmt.bindDouble( 1, error );
-     updateCalibErrorStmt.bindDouble( 2, max_error );
-     updateCalibErrorStmt.bindLong( 3, iterations );
-     updateCalibErrorStmt.bindLong( 4, id );
+     updateCalibErrorStmt.bindDouble( 2, stddev );
+     updateCalibErrorStmt.bindDouble( 3, max_error );
+     updateCalibErrorStmt.bindLong( 4, iterations );
+     updateCalibErrorStmt.bindLong( 5, id );
      updateCalibErrorStmt.execute();
      return true;
    }
@@ -1029,7 +1032,8 @@ public class DeviceHelper extends DataSetObservable
              +   " max_error REAL default 0, "
              +   " iterations INTEGER default 0, "
              +   " coeff BLOB, "
-             +   " algo INTEGER default 0 "
+             +   " algo INTEGER default 0, "
+             +   " stddev REAL default 0 "
              +   ")"
            );
 
@@ -1088,6 +1092,8 @@ public class DeviceHelper extends DataSetObservable
            case 23:
              db.execSQL( "ALTER TABLE devices ADD COLUMN nickname TEXT default \"\"" );
            case 24:
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN stddev REAL default 0" );
+           case 25:
              /* current version */
            default:
              break;

@@ -44,6 +44,7 @@ public class CalibCoeffDialog extends Dialog
   private TextView mTextAMz;
   private TextView mTextNL;
   private TextView mTextDelta;
+  private TextView mTextDelta2;
   private TextView mTextMaxError;
   private TextView mTextIter;
 
@@ -60,13 +61,14 @@ public class CalibCoeffDialog extends Dialog
   private String amz;
   private String nlx;
   private String delta0;
+  private String delta02;
   private String error0;
   private String iter0;
   private byte[] mCoeff;
 
   public CalibCoeffDialog( Context context, TopoDroidApp app,
                            Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl,
-                           float delta, float error, long iter, byte[] coeff )
+                           float delta, float delta2, float error, long iter, byte[] coeff )
   {
     super( context );
     mContext = context;
@@ -120,7 +122,8 @@ public class CalibCoeffDialog extends Dialog
     // PrintWriter  pwD = new PrintWriter( swD );
     // pwD.format(Locale.ENGLISH, "Error %.4f grad", delta );
     // delta0 = swD.getBuffer().toString();
-    delta0 = String.format( mContext.getResources().getString( R.string.calib_error ), delta );
+    delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta );
+    delta02 = String.format( mContext.getResources().getString( R.string.calib_stddev ), delta2 );
     // StringWriter swM = new StringWriter();
     // PrintWriter  pwM = new PrintWriter( swM );
     // pwM.format(Locale.ENGLISH, "Max error %8.4f", error );
@@ -155,6 +158,7 @@ public class CalibCoeffDialog extends Dialog
     mTextNL = (TextView) findViewById(R.id.coeff_nl);
 
     mTextDelta    = (TextView) findViewById(R.id.coeff_delta);
+    mTextDelta2   = (TextView) findViewById(R.id.coeff_delta2);
     mTextMaxError = (TextView) findViewById(R.id.coeff_max_error);
     mTextIter     = (TextView) findViewById(R.id.coeff_iter);
 
@@ -168,6 +172,7 @@ public class CalibCoeffDialog extends Dialog
     mTextNL.setText( nlx );
     mTextAMz.setText( amz );
     mTextDelta.setText( delta0 );
+    mTextDelta2.setText( delta02 );
     mTextMaxError.setText( error0 );
     mTextIter.setText( iter0 );
 

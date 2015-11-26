@@ -322,27 +322,25 @@ class ItemRecentDialog extends Dialog
     int index = -1;
     // Log.v("DistoX", "ItemPicker onClick()" );
     Button b = (Button)view;
-    for ( int k=0; k<nrRecent; ++k ) {
-      if ( b == mRecentP[k] ) { setPoint(k); return; }
-      if ( b == mRecentL[k] ) { setLine(k); return; }
-      if ( b == mRecentA[k] ) { setArea(k); return; }
-    }
-    if ( b == mBTpoint ) {
-      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_POINT ). show();
-      return;
-    } else if ( b == mBTline ) {
-      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_LINE ). show();
-      return;
-    } else if ( b == mBTarea ) {
-      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_AREA ). show();
-      return;
-    } else if ( b == mBTsize ) {
+    if ( b == mBTsize ) {
       if ( mScale > DrawingPointPath.SCALE_XS ) {
         -- mScale;
         mParent.setPointScale( mScale );
         setTheTitle();
       }
       return;
+    } else if ( b == mBTpoint ) {
+      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_POINT ). show();
+    } else if ( b == mBTline ) {
+      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_LINE ). show();
+    } else if ( b == mBTarea ) {
+      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_AREA ). show();
+    } else {
+      for ( int k=0; k<nrRecent; ++k ) {
+        if ( b == mRecentP[k] ) { setPoint(k); break; }
+        if ( b == mRecentL[k] ) { setLine(k);  break; }
+        if ( b == mRecentA[k] ) { setArea(k);  break; }
+      }
     }
     dismiss();
   }

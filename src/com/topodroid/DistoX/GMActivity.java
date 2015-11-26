@@ -170,6 +170,7 @@ public class GMActivity extends Activity
       mApp.mDData.updateCalibCoeff( cid, Calibration.coeffToString( coeff ) );
       mApp.mDData.updateCalibError( cid, 
              calibration.Delta(),
+             calibration.Delta2(),
              calibration.mMaxError * TopoDroidUtil.RAD2GRAD,
              iter );
 

@@ -14,13 +14,15 @@ package com.topodroid.DistoX;
 
 class CalibResult
 {
-  public float error;      
-  public float max_error;      
+  public float error;  // average error [deg]
+  public float stddev; // error stddev [deg]
+  public float max_error;      // [deg]
   public int iterations;  
 
   CalibResult()
   {
     error = 0.0f;
+    stddev = 0.0f;
     max_error = 0.0f;
     iterations = 0;
   }

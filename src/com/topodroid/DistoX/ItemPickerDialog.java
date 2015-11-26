@@ -133,15 +133,11 @@ class ItemPickerDialog extends Dialog
     }
 
     mRecentLayout = (LinearLayout) findViewById( R.id.layout2 );
-    mRecent = new ItemButton[4];
-    mRecent[0] = ( ItemButton ) findViewById( R.id.recent0 );
-    mRecent[0].setOnClickListener( this );
-    mRecent[1] = ( ItemButton ) findViewById( R.id.recent1 );
-    mRecent[1].setOnClickListener( this );
-    mRecent[2] = ( ItemButton ) findViewById( R.id.recent2 );
-    mRecent[2].setOnClickListener( this );
-    mRecent[3] = ( ItemButton ) findViewById( R.id.recent3 );
-    mRecent[3].setOnClickListener( this );
+    mRecent = new ItemButton[ TopoDroidSetting.mRecentNr ];
+    for ( int k=0; k<TopoDroidSetting.mRecentNr; ++k ) {
+      mRecent[k] = new ItemButton( mContext );
+      mRecent[k].setOnClickListener( this );
+    }
     
     mBTpoint = (Button) findViewById(R.id.item_point);
     mBTline  = (Button) findViewById(R.id.item_line );
@@ -253,7 +249,7 @@ class ItemPickerDialog extends Dialog
 
   private void setRecentButtons( Symbol symbols[], float sx, float sy )
   {
-    for ( int k=0; k<ItemDrawer.NR_RECENT; ++k ) {
+    for ( int k=0; k<TopoDroidSetting.mRecentNr; ++k ) {
       Symbol p = symbols[k];
       if ( p == null ) break;
       mRecent[k].reset( p.getPaint(), p.getPath(), sx, sy );

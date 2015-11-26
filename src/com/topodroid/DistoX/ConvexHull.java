@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 
 import java.lang.Math;
 import java.util.ArrayList;
-import java.util.Iterator;
+// import java.util.Iterator;
 
 import android.util.Log;
 

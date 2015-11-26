@@ -70,6 +70,7 @@
     <string name="data"> Daten</string>
     <string name="using">%1$s %2$s benutzen</string>
     <string name="calib_error">Abweichung: %1$.4f Grad</string>
+    <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
     <string name="calib_max_error">Max. Abweichung: %1$.4f Grad</string>
     <string name="calib_iter">Iterationen: %1$d</string>
     <string name="calib_saturated_values">WARNUNG: %1$d gesättigter Daten</string>

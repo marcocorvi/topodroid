@@ -166,47 +166,63 @@ public class VisualTopoParser extends ImportParser
             mTeam = line.substring(5);
           } else if ( vals[0].equals("Couleur") ) {
             // IGNORE
+          } else if ( vals[0].equals("Surface") ) {
+            // IGNORE
           } else { // survey data
             if ( vals.length >= 5 && ! vals[0].equals( vals[1] ) ) {
               int k = 0;
-              mFrom = vals[k]; ++k;
-              mTo   = vals[k]; ++k;
+              mFrom = vals[k]; ++k; // 0
+              mTo   = vals[k]; ++k; // 1
               try {
-                mLength  = Float.parseFloat(vals[k]) * ul; ++k;
-                mBearing = angle( Float.parseFloat(vals[k]), ub, dmb); ++k;
-                mClino   = angle( Float.parseFloat(vals[k]), uc, dmc); ++k;
-                if ( vals.length >= 9 ) {
-                  mLeft  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k;
-                  mRight = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k;
-                  mUp    = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k;
-                  mDown  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k;
+                mLength  = Float.parseFloat(vals[k]) * ul; ++k; // 2
+                mBearing = angle( Float.parseFloat(vals[k]), ub, dmb); ++k; // 3
+                mClino   = angle( Float.parseFloat(vals[k]), uc, dmc); ++k; // 5
+                mLeft = mRight = mUp = mDown = 0;
+                if ( k < vals.length ) {
+                  mLeft  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 5
+                }
+                if ( k < vals.length ) {
+                  mRight = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 6
+                }
+                if ( k < vals.length ) {
+                  mUp    = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 7
+                }
+		if ( k < vals.length ) {
+                  mDown  = vals[k].equals("*")? -1 : Float.parseFloat(vals[k]) * ul; ++k; // 8
+                }
+                shot_extend = 1;
+                if ( k < vals.length ) {
                   shot_extend = vals[k].equals("N")? 1 : -1; ++k; // 'N' or 'I'
+                } 
+                duplicate = false;
+                if ( k < vals.length ) {
                   duplicate = vals[k].equals("E"); ++k;           // 'I' or 'E'
+                }
 
-                  String station = ( splayAtFrom ? mFrom : mTo );
-                  extend = 0;
-                  if ( mLeft > 0 ) {
+                String station = ( splayAtFrom ? mFrom : mTo );
+                extend = 0;
+                if ( mLeft > 0 ) {
 	            float ber = mBearing + 180 + 90 * dirw;
                     if ( TopoDroidSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
                     splays.add( new ParserShot( station, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
-                  }
-                  if ( mRight > 0 ) {
+                }
+                if ( mRight > 0 ) {
                     float ber = mBearing + 180 - 90 * dirw;
                     if ( ber > 360 ) ber -= 360;
                     if ( TopoDroidSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
                     splays.add( new ParserShot( station, null, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );
-                  } 
-                  if ( mUp > 0 ) {
+                } 
+                if ( mUp > 0 ) {
                     splays.add( new ParserShot( station, null, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
-                  }
-                  if ( mDown > 0 ) {
-                    splays.add( new ParserShot( station, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
-                  }
                 }
+                if ( mDown > 0 ) {
+                    splays.add( new ParserShot( station, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
+                }
+                
                 extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
                                            shot_extend, duplicate, surface, backshot, comment ) );

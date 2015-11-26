@@ -52,6 +52,7 @@ public class Calibration
   float b0=0.0f, c0=0.0f; // bearing and clino
 
   private float mDelta;
+  private float mDelta2;
 
   // ==============================================================
 
@@ -88,8 +89,6 @@ public class Calibration
     }
   }
 
-  public float getDelta() { return mDelta; }
-
   public Calibration( int N, TopoDroidApp app, boolean nonLinear )
   {
     num = 0;
@@ -100,7 +99,8 @@ public class Calibration
 
   void setAlgorith( boolean nonLinear ) { mNonLinear = nonLinear; }
 
-  public float Delta() { return mDelta; }
+  public float Delta()  { return mDelta; }
+  public float Delta2() { return mDelta2; }
   public float Error( int k ) { return err[k]; }
   public float[] Errors() { return err; }
 
@@ -752,6 +752,7 @@ public class Calibration
     checkOverflow( bM, aM );
 
     mDelta = 0.0f;
+    mDelta2 = 0.0f;
     for ( int i=0; i<nn; ++i ) {
       if ( group[i] > 0 ) {
         if ( mNonLinear ) { 
@@ -794,13 +795,17 @@ public class Calibration
                                    (float)Math.cos(c0) * (float)Math.sin(b0),
                                    (float)Math.sin(c0) );
             err[j] = v0.minus(v).Length(); // approx angle with sin/tan
-            mDelta += err[j];
+            mDelta  += err[j];
+            mDelta2 += err[j]i * err[j];
             ++ cnt;
           }
         }
       }
     }
-    mDelta = mDelta * TopoDroidUtil.RAD2GRAD / cnt;
+    mDelta  = mDelta / cnt;
+    mDelta2 = Math.sqrt(mDelta2/cnt - mDelta*mDelta);
+    mDelta  = mDelta * TopoDroidUtil.RAD2GRAD;
+    mDelta2 = mDelta2 * TopoDroidUtil.RAD2GRAD;
 
     EnforceMax2( bG, aG );
     EnforceMax2( bM, aM );
@@ -810,7 +815,8 @@ public class Calibration
     //     Vector dg = gx[i].minus( gr[i] );
     //     Vector dm = mx[i].minus( mr[i] );
     //     err[i] = dg.dot(dg) + dm.dot(dm);
-    //     mDelta += err[i];
+    //     mDelta  += err[i];
+    //     mDelta2 += err[i] * err[i];
     //     err[i] = (float)Math.sqrt( err[i] );
     //   } else {
     //     err[i] = 0.0f;
