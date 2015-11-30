@@ -299,6 +299,25 @@ public class DeviceHelper extends DataSetObservable
      }
      return algo;
    }
+
+   public long getCalibCID( String name, String device )
+   {
+     long id = -1L;
+     Cursor cursor = myDB.query( CALIB_TABLE,
+                                new String[] { "id" }, // columns
+                                "name=? and device=?",
+                                new String[] { name, device },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+     if (cursor.moveToFirst()) {
+       id = cursor.getLong( 0 );
+     }
+     if (cursor != null && !cursor.isClosed()) {
+       cursor.close();
+     }
+     return id;
+   }
  
    public CalibInfo selectCalibInfo( long cid )
    {

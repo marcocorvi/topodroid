@@ -89,6 +89,21 @@ public class Calibration
     }
   }
 
+  /** construct a Calibration from the saved coefficients
+   */
+  Calibration( byte[] coeff, boolean nonLinear )
+  {
+    mNonLinear = nonLinear;
+    bG = new Vector();
+    bM = new Vector();
+    aG = new Matrix();
+    aM = new Matrix();
+    nL = new Vector();
+    coeffToG( coeff, bG, aG );
+    coeffToM( coeff, bM, aM );
+    coeffToNL( coeff, nL );
+  }
+
   public Calibration( int N, TopoDroidApp app, boolean nonLinear )
   {
     num = 0;
@@ -534,7 +549,7 @@ public class Calibration
     float ey = e.dot( y );
     float ez = e.dot( g );
     b0 = (float)Math.atan2( -ey, ex );
-    c0   = - (float)Math.atan2( ez, (float)Math.sqrt(ex*ex+ey*ey) );
+    c0 = - (float)Math.atan2( ez, (float)Math.sqrt(ex*ex+ey*ey) );
     // r0    = (float)Math.atan2( g.y, g.z );
     if ( b0 < 0.0f ) b0 += 2*TopoDroidUtil.M_PI;
     // if ( r0 < 0.0f ) r0 += 2*TopoDroidUtil.M_PI;
@@ -824,6 +839,87 @@ public class Calibration
     // }
     // mDelta = 100 * (float)Math.sqrt( mDelta*invNum );
     return it;
+  }
+
+  /** compute the unit vector direction of sensor-data (g,m)
+   */
+  Vector computeDirection( Vector g, Vector m )
+  {
+    Vector gr;
+    Vector mr = m;
+    if ( mNonLinear ) {
+      Matrix gs = new Matrix();
+      gs.x.x = g.x * g.x - 0.5f;
+      gs.y.y = g.y * g.y - 0.5f;
+      gs.z.z = g.z * g.z - 0.5f;
+      gr = bG.plus( aG.timesV( g.plus( gs.timesV( nL ) ) ) );
+    } else {
+      gr = bG.plus( aG.timesV( g ) );
+    }
+    computeBearingAndClinoRad( gr, mr );
+    return new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
+                       (float)Math.cos(c0) * (float)Math.sin(b0),
+                       (float)Math.sin(c0) );
+  }
+
+  int mSumCount;
+  double mSumErrors;
+  double mSumErrorSquared;
+
+  void initErrorStats()
+  {
+    mSumCount = 0;
+    mSumErrors = 0;
+    mSumErrorSquared = 0;
+  }
+
+  /** add the errors for a group of sensor-data to the stats
+   */
+  void addErrorStats( Vector g[], Vector m[] )
+  {
+    int size = g.length;
+    Vector gl[] = new Vector[ size ];
+    if ( mNonLinear ) {
+      Matrix gs = new Matrix();
+      for ( int k=0; k<size; ++k ) {
+        gs.x.x = g[k].x * g[k].x - 0.5f;
+        gs.y.y = g[k].y * g[k].y - 0.5f;
+        gs.z.z = g[k].z * g[k].z - 0.5f;
+        gl[k] = g[k].plus( gs.timesV( nL ) );
+      }
+    } else {
+      for ( int k=0; k<size; ++k ) gl[k] = g[k];
+    }
+    Vector grp = new Vector();
+    Vector mrp = new Vector();
+    Vector gr[] = new Vector[size];
+    Vector mr[] = new Vector[size];
+    for ( int i=0; i<size; ++i ) {
+      if ( mNonLinear ) {
+        gr[i] = bG.plus( aG.timesV(gl[i]) );
+      } else {
+        gr[i] = bG.plus( aG.timesV(g[i]) );
+      }
+      mr[i] = bM.plus( aM.timesV(m[i]) );
+      TurnVectors( gl[i], mr[i], gl[0], mr[0], false );
+      grp.add( gxt );
+      mrp.add( mxt );
+    }
+    computeBearingAndClinoRad( grp, mrp );
+    Vector v0 = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
+                            (float)Math.cos(c0) * (float)Math.sin(b0),
+                            (float)Math.sin(c0) );
+    double err = 0.0;
+    for ( int i=0; i<size; ++i ) {
+      computeBearingAndClinoRad( gr[i], mr[i] );
+      Vector v1 = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
+                              (float)Math.cos(c0) * (float)Math.sin(b0),
+                              (float)Math.sin(c0) );
+      double e = v1.minus(v0).Length();
+      mSumCount += 1;
+      mSumErrors += e;
+      mSumErrorSquared += e*e;
+    }
   }
         
 }

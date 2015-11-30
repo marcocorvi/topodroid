@@ -1086,9 +1086,9 @@ class DistoXNum
    */
   ArrayList<NumBranch> makeBranches( ArrayList<NumNode> nodes, boolean also_cross_end )
   {
-    for ( NumNode nd : nodes ) {
-      Log.v("DistoX", "node " + nd.station.name + " branches " + nd.branches.size() );
-    }
+    // for ( NumNode nd : nodes ) {
+    //   Log.v("DistoX", "node " + nd.station.name + " branches " + nd.branches.size() );
+    // }
     ArrayList< NumBranch > branches = new ArrayList<NumBranch>();
     for ( NumNode node : nodes ) {
       for ( NumShot shot : node.shots ) {

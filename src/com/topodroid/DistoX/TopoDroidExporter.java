@@ -1069,31 +1069,55 @@ class TopoDroidExporter
           for ( NumBranch branch : branches ) {
             // ArrayList<String> stations = new ArrayList<String>();
             ArrayList<NumShot> shots = branch.shots;
-            if ( shots.size() > 0 ) {
+            int size = shots.size();
+            if ( size > 0 ) {
               pw.format("*data passage station left right up down");
               writeSurvexEOL( pw );
               NumShot sh = shots.get(0);
               NumStation s1 = sh.from;
               NumStation s2 = sh.to;
-              // if ( sh.mBranchDir != 0 ) { s1 = s2; s2 = sh.from; }
+              int index = 0;
+              int step = 1;
+              if ( sh.mBranchDir < 0 ) {
+                step = -1;
+                index = size - 1;
+                sh = shots.get( index );
+              }
               DistoXDBlock blk0 = sh.getFirstBlock();
-              if ( shots.size() == 1 ) {
-                writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
-                writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+              if ( size == 1 ) {
+                if ( step > 0 ) {
+                  writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                  writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                } else {
+                  writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                  writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                }
               } else {
                 String st_name = null;
-                for ( int k = 1; k<shots.size(); ++k ) {
-                  sh = shots.get(k);
+                for ( int k = 1; k<size; ++k ) {
+                  index += step;
+                  sh = shots.get(index);
                   DistoXDBlock blk = sh.getFirstBlock();
                   if ( k == 1 ) {
+                    // Log.v("DistoX", blk0.mFrom + "-" + blk0.mTo + " branch dir " + sh.mBranchDir + " blk dir " + sh.mDirection );
                     if ( blk0.mFrom.equals( blk.mFrom ) || blk0.mFrom.equals( blk.mTo ) ) {
                       st_name = blk0.mFrom;
-                      writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
-                      writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                      if ( step > 0 ) {
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                      } else {
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                      }
                     } else if ( blk0.mTo.equals( blk.mFrom ) || blk0.mTo.equals( blk.mTo ) ) {
                       st_name = blk0.mTo;
-                      writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
-                      writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                      if ( step > 0 ) {
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                      } else {
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                      }
                     }
                   }
                   if ( st_name.equals( blk.mTo ) ) {

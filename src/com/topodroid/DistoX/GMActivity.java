@@ -183,6 +183,74 @@ public class GMActivity extends Activity
     return iter;
   }
 
+  /** compute the error stats of the data of this calibration using the 
+   * coeffiecients of another calibration
+   * @param name  the other calibration name
+   */
+  void computeErrorStats( String name )
+  {
+    String device = mApp.distoAddress();
+    if ( device == null ) return;
+    Long cid = mApp.mDData.getCalibCID( name, device );
+    if ( cid < 0 ) {
+      return;
+    }
+    String coeffStr = mApp.mDData.selectCalibCoeff( cid );
+    int algo = mApp.mDData.selectCalibAlgo( cid );
+    boolean nonLinear = false;
+    if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
+    if ( algo == 2 ) nonLinear = true;
+    Calibration calib = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+
+    List<CalibCBlock> list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+    calib.initErrorStats();
+    long group = 0;
+    int k = 0;
+    int cnt = 0;
+    while( k < list.size() && list.get(k).mGroup <= 0 ) ++k;
+    for ( int j=k; j<list.size(); ++j ) {
+      if ( list.get(j).mGroup > 0 ) {
+        if ( list.get(j).mGroup != group ) {
+          if ( cnt > 0 ) {
+            Vector g[] = new Vector[cnt];
+            Vector m[] = new Vector[cnt];
+            int i=0;
+            for ( ; k<j; ++k ) {
+              CalibCBlock b = list.get(k);
+              if ( b.mGroup == group ) {
+                g[i] = new Vector( b.gx, b.gy, b.gz );
+                m[i] = new Vector( b.mx, b.my, b.mz );
+                ++i;
+              }
+            }
+            calib.addErrorStats( g, m );
+          }
+          cnt = 1;
+        } else { 
+          cnt ++;
+        }
+      }
+    } 
+    if ( cnt > 0 ) {
+      Vector g[] = new Vector[cnt];
+      Vector m[] = new Vector[cnt];
+      int i=0;
+      for ( ; k<list.size(); ++k ) {
+        CalibCBlock b = list.get(k);
+        if ( b.mGroup == group ) {
+          g[i] = new Vector( b.gx, b.gy, b.gz );
+          m[i] = new Vector( b.mx, b.my, b.mz );
+          ++i;
+        }
+      }
+      calib.addErrorStats( g, m );
+    }
+    double ave = calib.mSumErrors / calib.mSumCount;
+    double std = Math.sqrt( calib.mSumErrorSquared / calib.mSumCount - ave * ave );
+    Log.v("DistoX", "error stats " + ave + " " + std );
+    // TODO response dialog
+  }
+
   void handleComputeCalibResult( int job, int result )
   {
     switch ( job ) {

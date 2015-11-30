@@ -153,7 +153,7 @@ public class CalibCBlock
     PrintWriter pw  = new PrintWriter(sw);
     computeBearingAndClino();
     pw.format(Locale.ENGLISH, "%d <%d> %5.1f %5.1f %5.1f %6.4f",
-      mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError );
+      mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TopoDroidUtil.RAD2GRAD );
     if ( TopoDroidSetting.mRawData ) {
       pw.format( "  %d %d %d  %d %d %d", gx, gy, gz, mx, my, mz );
     }

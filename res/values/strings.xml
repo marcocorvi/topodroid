@@ -258,6 +258,7 @@
 
     <string name="not_available">BT not available</string>
     <string name="not_enabled">BT not enabled</string>
+
     <!-- string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Cannot create image [OOM error]</string>
     <string name="photo">photo</string>
@@ -657,6 +658,13 @@
     <string name="title_scraps">Survey sketches</string>
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>
+
+ 
+
+
+
+
+
     <string name="title_stats">Statistics</string>
     <string name="title_survey">Survey Info</string>
     <string name="title_survey_export">Export survey</string>
