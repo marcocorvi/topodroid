@@ -2,28 +2,28 @@
 
 <resources>
 
-  <!-- TODO string-array name="unitGrid">
-     <item name="meter">meter</item>
-     <item name="yard">yard</item>
-  </string-array -->
-
-  <!-- TODO string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
-  </string-array -->
-
-  <!-- TODO string-array name="zoomCtrl">
-     <item name="0">Off</item>
-     <item name="1">Temporary</item>
-     <item name="2">Permanent</item>
-  </string-array -->
-
-  <!-- TODO 
-  <string-array name="stationNames">
-     <item name="alpha">Alphanumeric</item>
-     <item name="number">Numeric</item>
+  <string-array name="unitGrid">
+     <item name="meter">Metres</item>
+     <item name="yard">Yards</item>
   </string-array>
-  -->
+
+  <string-array name="wallsType">
+     <item name="none">None</item>
+     <item name="convex">Convexe</item>
+  </string-array>
+
+  <string-array name="zoomCtrl">
+     <item name="0">Desactive</item>
+     <item name="1">Temporaire</item>
+     <item name="2">Permanent</item>
+  </string-array>
+
+  
+  <string-array name="stationNames">
+     <item name="alpha">Alphanumerique</item>
+     <item name="number">Numerique</item>
+  </string-array>
+  
 
   <string-array name="extend_name">
      <item>Gauche</item>
@@ -32,15 +32,15 @@
      <item>--</item>
   </string-array>
 
-  <!-- TODO string-array name="logStream">
-     <item name="android">System log</item>
-     <item name="file">File log</item>
-  </string-array -->
+  <string-array name="logStream">
+     <item name="android">Historique Systeme</item>
+     <item name="file">Historique Fichiers</item>
+  </string-array>
 
-  <!-- TODO string-array name="connMode">
-     <item name="batch">Batch</item>
-     <item name="continuous">Continuous</item>
-  </string-array -->
+  <string-array name="connMode">
+     <item name="batch">Par Lots</item>
+     <item name="continuous">Continu</item>
+  </string-array>
 
   <string-array name="altitudeType">
     <item name="wgs84">ellipsoïde WGS84</item>
@@ -58,20 +58,20 @@
      <item name="back">Visée inverse, visée latérales en premier</item>
      <item name="for2">Visée normale, cheminement en premier</item>
      <item name="back2">Visée inverse, cheminement en premier</item>
-     <item name="anomaly">Backsight</item> <!-- TODO -->
+     <item name="anomaly">Visée Arriere, Backsight</item>
   </string-array>
 
   <string-array name="pickerType">
-     <!-- TODO item name="recent">Most recent</item -->
+     <item name="recent">Plus recents</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
   </string-array>
 
-  <!-- string-array name="deviceType">
-     <item name="none">None</item>
+  <string-array name="deviceType">
+     <item name="none">Aucune</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="deviceBT">
      <item name="0">Désactivé</item>
@@ -79,12 +79,12 @@
      <item name="2">Activé</item>
   </string-array>
 
-  <!-- OK string-array name="exportType">
+  <string-array name="exportType">
      <item name="th">Therion</item>
      <item name="dat">Compass</item>
      <item name="svx">Survex</item>
      <item name="tro">VisualTopo</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="lineStyle">
      <item name="none">Fine</item>
@@ -105,21 +105,20 @@
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">degrés décimaux</item>
-     <item name="grads">grades décimaux</item>
+     <item name="degrees">Degrés décimaux</item>
+     <item name="grads">Grades décimaux</item>
   </string-array>
 
   <string-array name="unitLocation">
-     <item name="degrees">degrés décimaux</item>
-     <item name="ddmmss">degrés, minutes, secondes</item>
+     <item name="degrees">Degrés décimaux</item>
+     <item name="ddmmss">Degrés, minutes, secondes</item>
   </string-array>
 
-<!-- TODO
+
   <string-array name="calibAlgo">
-     <item name="auto">auto</item>
-     <item name="linear">linear</item>
-     <item name="nonlinear">non-linear</item>
+     <item name="auto">Automatique</item>
+     <item name="linear">Lineaire</item>
+     <item name="nonlinear">Non-lineaire</item>
   </string-array>
--->
 
 </resources>

@@ -1,0 +1,87 @@
+Translation howto
+
+TopoDroid internationalization is kept to a minimum level.
+All that is required is to provide a translation for strings in two files: strings.xml and array.xml.
+
+For each translation language these are in the directory int18/values-XX (where XX is the iso code
+of the language). For example int18/values-de/strings.xml is the german translation file for strings.
+
+The master string files (english) are in res/values.
+For the translation languages there are symlinks to the int18/values-XX directory in res.
+
+All the translation files are "aligned", ie the order of the strings is the same in all of them.
+This help maintaining the translations.
+
+I take care of adding a string in the proper place whenever i add the string in the master file.
+However the strings I add (and those I change) are commented, ie, while the master file contains
+a line like
+     <string name="string_name">The string value</string>
+in the translation files i add the line
+     <!-- TODO string name="string_name">The string value</string -->
+     
+The keyword "TODO" is there to mark that the string value need to be translated.
+After providing the proper translation, remove the comment and the "TODO" mark. 
+
+The following keywords are used:
+  TODO    a string that need to be translated
+  OK      a string that is used but does not need translation (eg, "DXF")
+  NO      similar to OK
+  UNUSED  a string that is not used in the program, but i do not remove from the string file, as it might be used in future
+  FIXME   a string that I modified and you should check if the translation needs to be updated
+          also used for a translation i think does not catch the meaning of the master string
+          
+Unfortunately string messages tend to be short and concise, and it is hard to get a good translation
+if taken out of the context. For example "close" in english can be used to mean "closing the dialog"
+or to mean "something that is nearby". The strings and array files do not have context information, and
+this make the translation work a bit harder.
+
+There is a sure way to find the context of a string: track its use through the sources.
+This is not very easy, if you have no (or almost no) idea of how the sources are organized.
+Another way is to play with te program, and see if the string translation make sense:
+this requires that you build an apk using the translation, or wait for the translation to be included in
+the next apk (in this case get the beta apk, they are updated more often).
+If you make a substantial change to the translation, you can also ask me to build an apk
+with you translation, and send it to you by mail.
+
+Finally if you have doubt about the meaning of a string do not hesitate to write me.
+
+-------------------------------------------------------------------------
+IMPORTANT: ENCODING
+The string files are encoded.
+Write the proper encoding in the first line, and use an editor that saves the file with that encoding.
+My suggestion is to use UTF-8 and make life easier for you and me.
+
+-------------------------------------------------------------------------
+HOW TO MANAGE YOUR TRANSLATION WITH THE SOURCE TREE
+
+Make a local copy of the repository.
+Work on int18/values-XX files
+Push your changes to github repo (I will get them automatically).
+
+You can check the files in res/values-XX to see if i made any change. 
+In case pull my changes and merge them in.
+
+-------------------------------------------------------------------------
+SIGN THE TRANSLATION
+
+Add a line to the welcome string saying that you made the translation:
+put your name and mail address.
+If a user has something to complain about messages in your language he/she
+should contact you; no point to write me: might be a language that i do not
+know at all.
+
+-------------------------------------------------------------------------
+DRAWING TOOLS 
+
+strings and array is not the whole story.
+The drawing tools names are also translated.
+These are written in the drawing tool files, which are in the symbol subdirectory.
+(The same files are copyed in the symbol subdirs of topodroid on your android when 
+you install topodroid).
+These are plain text file with one line for each language name.
+If you change these you *must* tell me because I must increase the symbol version 
+in the code, so that the drawing tools areupdated when a user install a new version of
+TopoDroid.
+
+Since this is a bit annoying (to the user that gets a dialog askink if he/she wants to
+update the drawing tools), try to limit it and to do all the changes at once.
