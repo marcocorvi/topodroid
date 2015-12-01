@@ -140,7 +140,7 @@
  
 
    <string-array name="pickerType">
-     <item name="recent">Plus recents</item>
+     <item name="recent">Plus recentes</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
    </string-array>
