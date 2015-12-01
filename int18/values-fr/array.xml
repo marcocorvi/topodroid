@@ -7,50 +7,127 @@
      <item name="yard">Yards</item>
   </string-array>
 
+
+  <string-array name="survexEol">
+     <item name="lf">Linux</item>
+     <item name="lfcr">Windows</item>
+  </string-array>
+
+
   <string-array name="wallsType">
      <item name="none">Aucun</item>
      <item name="convex">Convexe</item>
   </string-array>
 
+
+  <string-array name="acadVersion">
+     <item name="9">AutoCAD 6</item>
+     <item name="13">AutoCAD 12</item>
+  </string-array>
+
+
   <string-array name="zoomCtrl">
-     <item name="0">Desactive</item>
+     <item name="0">OFF, Désactivé</item>
      <item name="1">Temporaire</item>
      <item name="2">Permanent</item>
   </string-array>
-
   
+
   <string-array name="stationNames">
      <item name="alpha">Alphanumerique</item>
      <item name="number">Numerique</item>
   </string-array>
-  
+ 
 
-  <string-array name="extend_name">
-     <item>Gauche</item>
+  <!-- string-array name="extend_name">
+     <item>Left</item>
      <item>Vertical</item>
-     <item>Droite</item>
-     <item>--</item>
+     <item>Right</item>
+     <item>None</item>
+  </string-array -->
+
+  <!-- DISTOX_LOCALE -->
+  <string-array name="locale">
+     <item name="english">English</item>
+     <item name="french">Français</item>
+     <item name="spanish">Español</item>
+     <item name="italian">Italiano</item>
+     <item name="russian">Русский</item>
+     <item name="german">Deutsch</item>
+     <item name="bulgarian">Български</item>
   </string-array>
+
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <string-array name="exportShots">
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="pockettoopo">PocketTopo</item>
+     <item name="survex">Survex</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array>
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array>
+
+
+  <string-array name="legShots">
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="four">4</item>
+  </string-array>
+
+
+  <string-array name="extraButtons">
+     <item name="basic">Basic</item>
+     <item name="normal">Normal</item>
+     <item name="advanced">Avancé</item>
+     <item name="experimental">Experimental</item>
+     <!-- item name="complete">Complete</item -->
+  </string-array>
+ 
+
+  <string-array name="sizeButtons">
+     <item name="small1">Petit</item>
+     <item name="large">Grand</item>
+  </string-array>
+ 
 
   <string-array name="logStream">
-     <item name="android">Historique Systeme</item>
-     <item name="file">Historique Fichiers</item>
+     <item name="android">Journal Systeme</item>
+     <item name="file">Journal Fichiers</item>
   </string-array>
+
 
   <string-array name="connMode">
-     <item name="batch">Par Lots</item>
-     <item name="continuous">Continu</item>
+     <item name="batch">A la Demande, par Lots</item>
+     <item name="continuous">Continue</item>
   </string-array>
+ 
 
   <string-array name="altitudeType">
-    <item name="wgs84">ellipsoïde WGS84</item>
+    <item name="wgs84">Ellipsoide WGS84</item>
     <item name="asl">Orthometrique</item>
   </string-array>
+ 
 
   <string-array name="sockType">
-     <item name="default">Par défaut</item>
+     <item name="default">Par Defaut</item>
      <item name="Insecure">Non sécurisé</item>
+     <!-- item name="Port">Port</item -->
+     <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
+
 
   <string-array name="surveyStations">
      <item name="no">Désactivé</item>
@@ -60,26 +137,29 @@
      <item name="back2">Visée inverse, cheminement en premier</item>
      <item name="anomaly">Visée Arriere, Backsight</item>
   </string-array>
+ 
 
-  <string-array name="pickerType">
+   <string-array name="pickerType">
      <item name="recent">Plus recents</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
-  </string-array>
+   </string-array>
 
-  <string-array name="deviceType">
+
+  <!-- string-array name="deviceType">
      <item name="none">Aucune</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
-  </string-array>
-
+  </string-array -->
+ 
   <string-array name="deviceBT">
      <item name="0">Désactivé</item>
      <item name="1">Vérifier au démarrage</item>
      <item name="2">Activé</item>
   </string-array>
+  
 
-  <string-array name="exportType">
+ <string-array name="exportType">
      <item name="th">Therion</item>
      <item name="dat">Compass</item>
      <item name="svx">Survex</item>
