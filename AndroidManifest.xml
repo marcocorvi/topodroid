@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="206060"
-      android:versionName="2.6.6"
+      android:versionCode="206063"
+      android:versionName="2.6.6c"
     >
     <uses-sdk
        android:minSdkVersion="8"
@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- uses-permission android:name="android.permission.DISABLE_KEYGUARD"/ -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- uses-permission android:name="android.permission.INTERNET"/ -->
     <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
     <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
 

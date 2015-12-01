@@ -137,9 +137,9 @@ public class SurveyActivity extends Activity
     
 
 // -------------------------------------------------------------------
-  private final static int LOCATION_REQUEST = 1;
+  // private final static int LOCATION_REQUEST = 1;
   private static int CRS_CONVERSION_REQUEST = 2; // not final ?
-  // FIXME GPS_AVERAGE NOT USED
+  
   // private LocationDialog mLocation;
   private FixedDialog mFixedDialog;
 
@@ -165,41 +165,10 @@ public class SurveyActivity extends Activity
     }
   }
 
-  // FIXME GPS_AVERAGE NOT USED
-  // boolean tryGPSAveraging( LocationDialog loc )
-  // {
-  //   mLocation = null;
-  //   try {
-  //     mLocation = loc;
-  //     Intent intent = new Intent( "cz.destil.gpsaveraging.AVERAGED_LOCATION" );
-  //     // Intent intent = new Intent( Intent.ACTION_DEFAULT, Uri.parse("cz.destil.gpsaveraging.AVERAGED_LOCATION") );
-  //     startActivityForResult( intent, LOCATION_REQUEST );
-  //   } catch ( ActivityNotFoundException e ) {
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ActivityNotFound " + e.toString() );
-  //     mLocation = null;
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   public void onActivityResult( int reqCode, int resCode, Intent intent )
   {
     if ( resCode == RESULT_OK ) {
-      if ( reqCode == LOCATION_REQUEST ) {
-        // FIXME GPS_AVERAGE NOT USED
-        // if ( mLocation != null ) {
-        //   Bundle bundle = intent.getExtras();
-        //   mLocation.setPosition( 
-        //     bundle.getDouble( "longitude" ),
-        //     bundle.getDouble( "latitude" ),
-        //     bundle.getDouble( "altitude" ),
-        //     0.0 );  // orthometric altitude
-        //   // accuracy = bundle.getDouble( "accuracy" );
-        //   // name = bundle.getStriung( "name" ); waypoint name
-
-        //   mLocation = null;
-        // }
-      } else if ( reqCode == CRS_CONVERSION_REQUEST ) {
+      if ( reqCode == CRS_CONVERSION_REQUEST ) {
         if ( mFixedDialog != null ) {
           Bundle bundle = intent.getExtras();
           String cs = bundle.getString( "cs_to" );
@@ -605,10 +574,10 @@ public class SurveyActivity extends Activity
     return mApp.mData.hasFixed( mApp.mSID, station );
   }
  
-  public FixedInfo addLocation( String station, double longitude, double latitude, double altitude, double altimetric )
+  public FixedInfo addLocation( String station, double longitude, double latitude, double h_ellpsoid, double altimetric )
   {
-    long id = mApp.mData.insertFixed( mApp.mSID, -1L, station, longitude, latitude, altitude, altimetric, "", 0L );
-    return new FixedInfo( id, station, longitude, latitude, altitude, altimetric, "" ); // FIXME comment
+    long id = mApp.mData.insertFixed( mApp.mSID, -1L, station, longitude, latitude, h_ellpsoid, altimetric, "", 0L );
+    return new FixedInfo( id, station, longitude, latitude, h_ellpsoid, altimetric, "" ); // FIXME comment
   }
 
   boolean updateFixed( FixedInfo fxd, String station )

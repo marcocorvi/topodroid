@@ -66,12 +66,14 @@
     <string name="calib_compute_coeffs">Kalibrierung Koeffizienten berechnen ...</string>
     <!-- UNUSED string name="calib_read_coeffs">Kalibrierung Koeffizienten READING ...</string -->
     <string name="calib_write_coeffs">Kalibrierung Koeffizienten speichern ...</string>
+    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
     <string name="connect_failed">Verbindung fehlgeschlagen</string>
     <string name="data"> Daten</string>
     <string name="using">%1$s %2$s benutzen</string>
     <string name="calib_error">Abweichung: %1$.4f Grad</string>
     <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
     <string name="calib_max_error">Max. Abweichung: %1$.4f Grad</string>
+    <!-- TODO string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string -->
     <string name="calib_iter">Iterationen: %1$d</string>
     <string name="calib_saturated_values">WARNUNG: %1$d gesättigter Daten</string>
     <string name="algorithm">Algorithmus:</string>
@@ -122,6 +124,7 @@
 
     <string name="few_data">Nicht genügend Daten</string>
     <string name="few_plots">Nicht genügend Skizze</string>
+    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
 
 <!-- IMPORTING A SURVEY or A ZIP -->
     <string name="import_title">Daten Importieren</string>
@@ -149,10 +152,12 @@
     <string name="label_title">BESCHRIFTUNG</string>
     <string name="label_text">Geben Sie den Beschriftungstext ein</string>
     <string name="altitude">Höhe </string>
+    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
+    <!-- TODO string name="h_geoid">H geoid </string -->
     <string name="latitude">Breite </string>
     <string name="longitude">Länge </string>
-    <string name="altitude_hint">Höhe [meter]</string>
-    <string name="altitude_wgs84">WGS84 Höhe</string>
+    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
+    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
     <string name="latitude_hint">Breite dd:mm:ss.sss</string>
     <string name="longitude_hint">Länge dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ringschlussfehler</string>
@@ -214,7 +219,6 @@
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_found">Kein Gerät gefunden</string>
-    <string name="no_geomag">Fehler beim Geomag</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
     <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
@@ -263,6 +267,8 @@
     <!-- UNUSED string name="menu_station">MESSPUNKTEN</string -->
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
+    <!-- TODO string name="menu_sync">SYNC</string -->
+    <!-- TODO string name="menu_validate">VALIDATE</string -->
 
 <!-- LINE POINT EDITING ACTIONS -->
     <string name="popup_join_pt">Bewegen um Nähepunkt</string>
@@ -429,7 +435,7 @@
     <string name="button_delete"    >Löschen    </string>
     <string name="button_eval"      >Auswerten </string>
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
-    <!-- OK string name="button_geomag"    >GeoMag    </string -->
+    <!-- TODO string name="button_geomag"    >Declination</string -->
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- NO string name="button_gps_stop"  >Anhalten      </string -->
     <!-- NO string name="button_manual"    >Bedienungsanleitung </string -->
@@ -523,6 +529,7 @@
     <!-- UNUSED string name="help_splay">Die Messpunkten automatisch zuweisen</string -->
     <string name="help_display">Den Anzeigemodus wählen</string>
     <string name="help_display_calib">Anzeige der gelöschten Vermessungen</string>
+    <!-- TODO string name="help_validate">Validate calibration</string -->
     <string name="help_overview">Überblickaktivität</string>
     <string name="help_plot">Zu der Skizzeaktivität gehen</string>
     <string name="help_note">Vermessungs-Anmerkung bearbeiten</string>

@@ -56,12 +56,14 @@
     <string name="calib_compute_coeffs">Cálculo de coeficientes de calibración  ...</string>
     <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración ...</string -->
     <string name="calib_write_coeffs">Escribir coeficientes de calibración ...</string>
+    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
     <string name="connect_failed">Fallo de conexión</string>
     <string name="data"> Datos</string>
     <string name="using">Utilizar %1$s %2$s</string>
     <string name="calib_error">Error: %1$.4f grados</string>
     <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
     <string name="calib_max_error">Max. error: %1$.4f grados</string>
+    <!-- TODO string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string -->
     <string name="calib_iter">Iteraciones: %1$d</string>
     <string name="calib_saturated_values">ADVERTENCIA: %1$d exceso de datos</string>
     <string name="algorithm">Algoritmo:</string>
@@ -104,6 +106,7 @@
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_plots">No hay suficientes dibujos</string>
+    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
 
     <string name="import_title">Importar archivo</string>
     <string name="import_wait">Importando archivo, espere...</string>
@@ -126,10 +129,12 @@
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <string name="altitude">Alt. </string>
+    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
+    <!-- TODO string name="h_geoid">H geoid </string -->
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="altitude_hint">Alt. [metros]</string>
-    <string name="altitude_wgs84">Altitud WGS84</string>
+    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
+    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Errores de cierre de bucle</string>
@@ -189,7 +194,6 @@
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
-    <string name="no_geomag">No se pudo obtener Geomag</string>
     <string name="no_gms">Calibración no tiene datos.\nUse botón Descargar</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
@@ -231,6 +235,8 @@
     <!-- UNUSED string name="menu_station">Eestación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
+    <!-- TODO string name="menu_sync">SYNC</string -->
+    <!-- TODO string name="menu_validate">VALIDATE</string -->
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -393,7 +399,7 @@
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
-    <string name="button_geomag"    >GeoMag    </string>
+    <!-- TODO string name="button_geomag"    >Declination</string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
@@ -475,6 +481,7 @@
     <!-- UNUSED string name="help_splay">Asignar estaciones laterales automáticamente</string -->
     <string name="help_display">Seleccione modo de visualización</string>
     <string name="help_display_calib">Cambiar a pantalla de tomas eliminadas</string>
+    <!-- TODO string name="help_validate">Validate calibration</string -->
     <string name="help_overview">Actividad general</string>
     <string name="help_plot">Introducir datos en dibujo</string>
     <string name="help_note">Editar notas Topografía</string>

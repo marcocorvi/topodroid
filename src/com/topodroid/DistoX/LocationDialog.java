@@ -66,6 +66,7 @@ public class LocationDialog extends Dialog
   private TextView mTVlat;
   private TextView mTVlong;
   private TextView mTValt;
+  private TextView mTVasl;
   private EditText mETstation;
   private Button   mBtnLoc;
   // private Button   mBtnAdd;
@@ -85,8 +86,8 @@ public class LocationDialog extends Dialog
 
   double mLatitude;   // decimal degrees
   double mLongitude;  // decimal degrees
-  double mAltitude;   // meters
-  private double mAltimetric; // altimetric altitude
+  double mHEllipsoid;   // meters
+  double mHGeoid; // altimetric altitude
   private SurveyActivity mParent;
   private GpsStatus mStatus;
   private boolean mLocating; // whether is locating
@@ -117,7 +118,8 @@ public class LocationDialog extends Dialog
 
     mTVlong = (TextView) findViewById(R.id.longitude );
     mTVlat  = (TextView) findViewById(R.id.latitude  );
-    mTValt  = (TextView) findViewById(R.id.altitude  );
+    mTValt  = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
+    mTVasl  = (TextView) findViewById(R.id.h_geoid ); // geoid
     mETstation = (EditText) findViewById( R.id.station );
     // mBtnStatus = (Button) findViewById( R.id.status );
 
@@ -212,7 +214,7 @@ public class LocationDialog extends Dialog
   {
     // Log.v("DistoX", "Location add Fixed Point " + lng + " " + lat + " " + alt );
 
-    // FIXME TODO try to get altimetric altitude
+    // FIXME TODO try to get altimetric altitude h_geoid
     String name = mETstation.getText().toString();
     if ( name.length() == 0 ) {
       mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
@@ -317,15 +319,8 @@ public class LocationDialog extends Dialog
         setGPSoff();
       }
       if ( mHasLocation ) {
-        // if ( TopoDroidSetting.mAltimetricLookup ) {
-        //   Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
-        //   double geo_height = GeodeticHeight.geodeticHeight( mLatitude, mLongitude );
-        //   mAltimetric = ( geo_height > -999 )? mAltitude - geo_height : geo_height/1000;
-        // } else {
-        //   mAltimetric = 0;
-        // }
-        // NOTE replaced with 
-        mAltimetric = 0;
+        WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+        mHGeoid = wmm.geoidToEllipsoid( mLatitude, mLongitude, mHEllipsoid ); 
       }
       new LongLatAltDialog( mContext, this ).show();
       // mHasLocation = false;
@@ -379,9 +374,9 @@ public class LocationDialog extends Dialog
    */
   private void displayLocation( Location loc )
   {
-    mLatitude  = loc.getLatitude();
-    mLongitude = loc.getLongitude();
-    mAltitude  = loc.getAltitude();
+    mLatitude    = loc.getLatitude();
+    mLongitude   = loc.getLongitude();
+    mHEllipsoid  = loc.getAltitude();
     showLocation();
   }
 
@@ -389,7 +384,8 @@ public class LocationDialog extends Dialog
   {
     mTVlong.setText( mContext.getResources().getString( R.string.longitude ) + " " + FixedInfo.double2string( mLongitude ) );
     mTVlat.setText( mContext.getResources().getString( R.string.latitude ) + " " + FixedInfo.double2string( mLatitude ) );
-    mTValt.setText( mContext.getResources().getString( R.string.altitude ) + " " + Integer.toString( (int)(mAltitude) ) );
+    mTValt.setText( mContext.getResources().getString( R.string.h_ellipsoid ) + " " + Integer.toString( (int)(mHEllipsoid) ) );
+    mTVasl.setText( mContext.getResources().getString( R.string.h_geoid ) + " " + Integer.toString( (int)(mHGeoid) ) );
   }
 
   public void onProviderDisabled( String provider )
@@ -449,8 +445,8 @@ public class LocationDialog extends Dialog
   {
     mLongitude = lng;
     mLatitude  = lat;
-    mAltitude  = alt;
-    mAltimetric = asl;
+    mHEllipsoid  = alt;
+    mHGeoid = asl;
     showLocation();
     mHasLocation = true;
     // mBtnAdd.setEnabled( true );

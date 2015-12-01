@@ -9,8 +9,7 @@
     android:focusableInTouchMode="true"
     >
 
-  <LinearLayout
-      android:id="@+id/layout1"
+  <LinearLayout android:id="@+id/layout1"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -36,11 +35,10 @@
         />
   </LinearLayout>
 
-  <LinearLayout 
-      android:id="@+id/layout2"
+  <LinearLayout android:id="@+id/layout2"
+      android:layout_below="@id/layout1"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout1"
       android:orientation="horizontal"
       >
       <Button android:id="@+id/button_NS"
@@ -64,23 +62,13 @@
         />
   </LinearLayout>
   		
-  <LinearLayout 
-      android:id="@+id/layout3"
+  <LinearLayout android:id="@+id/layout3a"
+      android:layout_below="@id/layout2"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout2"
       android:orientation="horizontal"
       android:layout_marginTop="2dp"
       >
-      <CheckBox
-        android:id="@+id/edit_wgs84"
-        android:layout_width="0dp"
-        android:layout_weight="40"
-        android:layout_height="wrap_content" 
-      	android:ems="25"
-        android:text="@string/altitude_wgs84"
-        android:layout_marginRight="10dp"
-        />
       <EditText
         android:id="@+id/edit_alt"
         android:layout_width="0dp"
@@ -88,17 +76,36 @@
         android:layout_height="wrap_content" 
       	android:ems="25"
         android:singleLine="true"
-        android:hint="@string/altitude_hint"
+        android:hint="@string/h_ellipsoid_hint"
+        android:scrollHorizontally="true"
+        android:nextFocusDown="@id/top"
+        />
+  </LinearLayout>
+  		
+  <LinearLayout android:id="@+id/layout3b"
+      android:layout_below="@id/layout3a"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="2dp"
+      >
+      <EditText
+        android:id="@+id/edit_asl"
+        android:layout_width="0dp"
+	android:layout_weight="40"
+        android:layout_height="wrap_content" 
+      	android:ems="25"
+        android:singleLine="true"
+        android:hint="@string/h_geoid_hint"
         android:scrollHorizontally="true"
         android:nextFocusDown="@id/top"
         />
   </LinearLayout>
 
-  <LinearLayout 
-      android:id="@+id/layout4"
+  <LinearLayout android:id="@+id/layout4"
+      android:layout_below="@id/layout3b"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_below="@id/layout3"
       android:orientation="horizontal" 
       android:layout_marginTop="25dip"
       >

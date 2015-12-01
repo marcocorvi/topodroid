@@ -16,6 +16,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
@@ -128,5 +129,9 @@ public class TopoDroidUtil
     pw.format("%04d.%02d.%02d", y, m+1, d );
     return sw.getBuffer().toString();
   }
+
+  static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }
+  static int month() { return (new GregorianCalendar()).get( Calendar.MONTH ); }
+  static int day()   { return (new GregorianCalendar()).get( Calendar.DAY_OF_MONTH); }
 
 }

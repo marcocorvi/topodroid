@@ -60,12 +60,14 @@
     <string name="calib_compute_coeffs">Изчисляване на калибр. коефициенти...</string>
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
+    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
     <string name="connect_failed">Невъзможна връзка</string>
     <string name="data"> измервания</string>
     <string name="using">Използва се %1$s %2$s</string>
     <string name="calib_error">Грешка: %1$.4f градуси</string>
     <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
     <string name="calib_max_error">Макс. грешка: %1$.4f градуси</string>
+    <!-- TODO string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string -->
     <string name="calib_iter">Повторения: %1$d</string>
     <string name="calib_saturated_values">ПРЕДУПРЕЖДЕНИЕ: %1$d наситени данни</string>
     <string name="algorithm">Алгоритъм:</string>
@@ -108,6 +110,7 @@
 
     <string name="few_data">Няма достатъчно данни</string>
     <string name="few_plots">Няма достатъчно скици</string>
+    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
 
     <string name="import_title">Импортиране на файл</string>
     <string name="import_wait">Импортиране... Моля изчакайте...</string>
@@ -133,10 +136,12 @@
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
     <string name="altitude">Надм. височина</string>
+    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
+    <!-- TODO string name="h_geoid">H geoid </string -->
     <string name="latitude">Геогр. широчина</string>
     <string name="longitude">Геогр. дължина</string>
-    <string name="altitude_hint">WGS84 височина [метри]</string>
-    <string name="altitude_wgs84">WGS84 височина [метри]</string>
+    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
+    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
     <string name="latitude_hint">Шир. гг:мм:сс.ссс</string>
     <string name="longitude_hint">Дълж. гг:мм:сс.ссс</string>
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
@@ -197,7 +202,6 @@
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Липсва избрано устройство</string>
     <string name="no_device_found">Не е намерено устройство</string>
-    <string name="no_geomag">Не е намерена GeoMag</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
@@ -245,6 +249,7 @@
     <string name="menu_stats">Статистика</string>
     <string name="menu_survey">Инфо за картировката</string>
     <string name="menu_sync">Синхронизиране</string>
+    <!-- TODO string name="menu_validate">VALIDATE</string -->
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
     <string name="popup_snap_ln">Прикачване към близка линия</string>
@@ -413,7 +418,7 @@
     <string name="button_delete"    >Изтриване </string>
     <string name="button_eval"      >Оценка    </string>
     <string name="button_eval_cal"  >Оц./кал.  </string>
-    <string name="button_geomag"    >GeoMag    </string>
+    <!-- TODO string name="button_geomag"    >Declination</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
@@ -539,6 +544,7 @@
     <!-- UNUSED string name="help_splay">Автоматично определяне на репери за страничните отсечки</string -->
     <string name="help_display">Избор на данни за показване в таблицата</string>
     <string name="help_display_calib">Показване на изтрити отсечки</string>
+    <!-- TODO string name="help_validate">Validate calibration</string -->
     <string name="help_overview">Общ изглед на всички скици</string>
     <string name="help_plot">Режим на скициране</string>
     <string name="help_note">Редактиране на бележки</string>

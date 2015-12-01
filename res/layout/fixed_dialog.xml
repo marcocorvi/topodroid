@@ -53,7 +53,7 @@
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp" 
         android:layout_gravity="left"
-        android:text="@string/button_ellipsoidic"
+        android:text="@string/h_ellipsoid"
         />
       <EditText android:id="@id/fix_alt" 
         android:layout_width="0dp"
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp" 
         android:layout_gravity="left"
-        android:text="@string/button_altitude"
+        android:text="@string/h_geoid"
         />
       <EditText android:id="@id/fix_asl" 
         android:layout_width="0dp"

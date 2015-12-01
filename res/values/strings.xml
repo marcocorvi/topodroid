@@ -60,12 +60,14 @@
     <string name="calib_compute_coeffs">Computing calibration coefficients ...</string>
     <!-- string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">Writing calibration coefficients ...</string>
+    <string name="calib_validation">Validation of %1$s vs %2$s</string>
     <string name="connect_failed">Failed connect</string>
     <string name="data"> data</string>
     <string name="using">Using %1$s %2$s</string>
     <string name="calib_error">Average error: %1$.4f degrees</string>
     <string name="calib_stddev">Error stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Max. error: %1$.4f degrees</string>
+    <string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_saturated_values">WARNING: %1$d saturated data</string>
     <string name="algorithm">Algorithm:</string>
@@ -108,6 +110,7 @@
 
     <string name="few_data">Not enough data</string>
     <string name="few_plots">Not enough sketches</string>
+    <string name="few_calibs">Not enough calibrations</string>
 
     <string name="import_title">File Import</string>
     <string name="import_wait">Importing file... please wait...</string>
@@ -133,10 +136,12 @@
     <string name="label_title">LABEL</string>
     <string name="label_text">Enter the label text</string>
     <string name="altitude">Alt. </string>
+    <string name="h_ellipsoid">H ellip. </string>
+    <string name="h_geoid">H geoid </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="altitude_hint">Alt. [meters]</string>
-    <string name="altitude_wgs84">WGS84 altitude</string>
+    <string name="h_ellipsoid_hint">H ellip. [meters]</string>
+    <string name="h_geoid_hint">H geoid [meters]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Loop closure errors</string>
@@ -196,7 +201,6 @@
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
     <string name="no_device_found">No device found</string>
-    <string name="no_geomag">Failed to get GeoMag</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>
@@ -244,6 +248,7 @@
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
     <string name="menu_sync">SYNC</string>
+    <string name="menu_validate">VALIDATE</string>
 
     <string name="popup_join_pt">Snap to nearby point</string>
     <string name="popup_snap_ln">Snap to nearby line</string>
@@ -410,9 +415,7 @@
     <string name="button_delete"    >Delete    </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
-    <string name="button_geomag"    >GeoMag    </string>
-    <string name="button_altitude">Orthometric Alt.</string>
-    <string name="button_ellipsoidic">Ellipsoidic Alt.</string>
+    <string name="button_geomag"    >Declination</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
@@ -555,6 +558,7 @@
     <!-- string name="help_splay">Assign stations to splays automatically</string -->
     <string name="help_display">Choose display mode</string>
     <string name="help_display_calib">Toggle display of deleted shots</string>
+    <string name="help_validate">Validate calibration</string>
     <string name="help_overview">Overview activity</string>
     <string name="help_plot">Enter sketch activity</string>
     <string name="help_note">Edit survey notes</string>

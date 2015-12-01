@@ -111,6 +111,7 @@ public class GMActivity extends Activity
   static int menus[] = {
                         R.string.menu_options,  // 8
                         R.string.menu_display,
+                        R.string.menu_validate,
                         R.string.menu_help
                      };
 
@@ -126,6 +127,7 @@ public class GMActivity extends Activity
   static int help_menus[] = { 
                         R.string.help_prefs,
                         R.string.help_display_calib,
+                        R.string.help_validate,
                         R.string.help_help
                       };
   // -------------------------------------------------------------------
@@ -183,11 +185,9 @@ public class GMActivity extends Activity
     return iter;
   }
 
-  /** compute the error stats of the data of this calibration using the 
-   * coeffiecients of another calibration
-   * @param name  the other calibration name
+  /** validate this calibration against another calibration
    */
-  void computeErrorStats( String name )
+  void validateCalibration( String name )
   {
     String device = mApp.distoAddress();
     if ( device == null ) return;
@@ -195,14 +195,71 @@ public class GMActivity extends Activity
     if ( cid < 0 ) {
       return;
     }
-    String coeffStr = mApp.mDData.selectCalibCoeff( cid );
-    int algo = mApp.mDData.selectCalibAlgo( cid );
-    boolean nonLinear = false;
-    if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
-    if ( algo == 2 ) nonLinear = true;
-    Calibration calib = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+    List<CalibCBlock> list  = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+    List<CalibCBlock> list1 = mApp.mDData.selectAllGMs( cid, 0 );
+    list.addAll( list1 );
+    int size  = list.size();
+    int size1 = list1.size();
+    if ( size < 16 || size1 < 16 ) {
+      Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+      return;
+    }
 
-    List<CalibCBlock> list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+    String coeffStr = mApp.mDData.selectCalibCoeff( cid );
+    // int algo = mApp.mDData.selectCalibAlgo( cid );
+    boolean nonLinear = false;
+    // if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
+    // if ( algo == 2 ) nonLinear = true;
+    Calibration calib1 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+
+    coeffStr = mApp.mDData.selectCalibCoeff( mApp.mCID );
+    // algo = mApp.mDData.selectCalibAlgo( mApp.mCID );
+    // nonLinear = false;
+    // if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
+    // if ( algo == 2 ) nonLinear = true;
+    Calibration calib0 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+
+    computeErrorStats( calib0, list1 );
+    computeErrorStats( calib1, list );
+    double ave0 = calib0.mSumErrors / calib0.mSumCount;
+    double std0 = Math.sqrt( calib0.mSumErrorSquared / calib0.mSumCount - ave0 * ave0 + 1e-8 );
+    double ave1 = calib1.mSumErrors / calib1.mSumCount;
+    double std1 = Math.sqrt( calib1.mSumErrorSquared / calib1.mSumCount - ave1 * ave1 + 1e-8 );
+    ave0 *= TopoDroidUtil.RAD2GRAD;
+    std0 *= TopoDroidUtil.RAD2GRAD;
+    ave1 *= TopoDroidUtil.RAD2GRAD;
+    std1 *= TopoDroidUtil.RAD2GRAD;
+
+    list.addAll( list1 );
+    size = list.size();
+
+    double err1   = 0; // average error [radians]
+    double err2   = 0;
+    double errmax = 0;
+    for ( CalibCBlock b : list ) {
+      Vector g = new Vector( b.gx, b.gy, b.gz );
+      Vector m = new Vector( b.mx, b.my, b.mz );
+      Vector v0 = calib0.computeDirection(g,m);
+      Vector v1 = calib1.computeDirection(g,m);
+      double err = v0.minus( v1 ).Length();
+      err1 += err;
+      err2 += err * err;
+      if ( err > errmax ) errmax = err;
+    }
+    err1 /= size;
+    err2 = Math.sqrt( err2/size - err1 * err1 );
+    err1 *= TopoDroidUtil.RAD2GRAD;
+    err2 *= TopoDroidUtil.RAD2GRAD;
+    errmax *= TopoDroidUtil.RAD2GRAD;
+    new CalibValidateResultDialog( this, ave0, std0, ave1, std1, err1, err2, errmax, name, mApp.myCalib ).show();
+  }
+
+  /** compute the error stats of the data of this calibration using the 
+   * coeffiecients of another calibration
+   * @param name  the other calibration name
+   */
+  private void computeErrorStats( Calibration calib, List<CalibCBlock> list )
+  {
     calib.initErrorStats();
     long group = 0;
     int k = 0;
@@ -225,6 +282,7 @@ public class GMActivity extends Activity
             }
             calib.addErrorStats( g, m );
           }
+          group = list.get(j).mGroup;
           cnt = 1;
         } else { 
           cnt ++;
@@ -245,11 +303,8 @@ public class GMActivity extends Activity
       }
       calib.addErrorStats( g, m );
     }
-    double ave = calib.mSumErrors / calib.mSumCount;
-    double std = Math.sqrt( calib.mSumErrorSquared / calib.mSumCount - ave * ave );
-    Log.v("DistoX", "error stats " + ave + " " + std );
-    // TODO response dialog
   }
+
 
   void handleComputeCalibResult( int job, int result )
   {
@@ -465,8 +520,16 @@ public class GMActivity extends Activity
       } else if ( p++ == pos ) { // DISPLAY
         mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
         updateDisplay( );
+      } else if ( p++ == pos ) { // VALIDATE
+        List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
+        list.remove( mApp.myCalib );
+        if ( list.size() == 0 ) {
+          Toast.makeText( this, R.string.few_calibs, Toast.LENGTH_SHORT ).show();
+        } else {
+          (new CalibValidateListDialog( this, this, list )).show();
+        }
       } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 3 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
       }
       return;
     }
@@ -489,7 +552,7 @@ public class GMActivity extends Activity
     String msg = mSaveTextView.getText().toString();
     String[] st = msg.split( " ", 3 );
     try {    
-      mCIDid    = Long.parseLong(st[0]);
+      mCIDid = Long.parseLong(st[0]);
       // String name = st[1];
       mSaveData = st[2];
       if ( mSaveCBlock.mStatus == 0 ) {
@@ -765,6 +828,7 @@ public class GMActivity extends Activity
     new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
   }
 
+
   // ------------------------------------------------------------------
   // LIFECYCLE
   //
@@ -890,9 +954,9 @@ public class GMActivity extends Activity
   {
     Resources res = getResources();
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
-    mMenuAdapter.add( res.getString( menus[2] ) );
+    for ( int k=0; k<4; ++k ) {
+      mMenuAdapter.add( res.getString( menus[k] ) );
+    }
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }

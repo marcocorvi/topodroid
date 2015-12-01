@@ -27,7 +27,7 @@ class FixedInfo
   double lng;      // longitude [decimal deg]
   double lat;      // latitude [decimal deg]
   double alt;      // wgs84 altitude [m]
-  double asl;      // altimetric altitude [m] NOT USED
+  double asl;      // geoid altitude [m] 
   String comment;
 
   public FixedInfo( long _id, String n, double longitude, double latitude, double alt_wgs84, double alt_ortho, String cmt )
@@ -52,27 +52,9 @@ class FixedInfo
     comment = "";
   }
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double alt_wgs84 )
-  {
-    id = _id;
-    name = n;
-    lng = longitude;
-    lat = latitude;
-    alt = alt_wgs84;
-    asl = 0;
-    comment = "";
-  }
-
-  public String toLocString()
-  {
-    return double2string( lng ) + " " + double2string( lat ) + " " 
-         + ( (alt < -999)? Integer.toString( (int)asl ) + "*" : Integer.toString( (int)(alt) ) );
-  }
-
   public String toString()
   {
-    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " 
-                + ( (alt < -999)? Integer.toString( (int)asl ) + "*" : Integer.toString( (int)(alt) ) );
+    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl) + " " + (int)(alt);
   }
 
   static String double2string( double x )

@@ -33,10 +33,10 @@
         android:text="@string/button_cancel"
         / -->
       <LinearLayout 
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right"
+        android:gravity="left"
         >
       <Button android:id="@+id/button_loc"
         android:layout_width="wrap_content" 
@@ -55,7 +55,14 @@
         android:background="@drawable/button"
         style="@style/button_default"
         />
+      </LinearLayout>
 
+      <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        >
       <Button android:id="@+id/button_manual"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -64,7 +71,6 @@
         style="@style/button_default"
         android:text="@string/button_add"
         />
-
       </LinearLayout>
 
     </LinearLayout>
@@ -78,8 +84,7 @@
         android:text="@string/longitude"
         />
    					  
-    <TextView
-        android:id="@+id/latitude"
+    <TextView android:id="@+id/latitude"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
@@ -87,20 +92,26 @@
         android:text="@string/latitude"
         />
    					  
-    <TextView
-        android:id="@+id/altitude"
+    <TextView android:id="@+id/h_ellipsoid"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:layout_below="@id/latitude"
-        android:text="@string/altitude"
+        android:text="@string/h_ellipsoid"
         />
-   					  
-    <ListView
-        android:id="@+id/list"
+
+    <TextView android:id="@+id/h_geoid"
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/latitude"
+        android:text="@string/h_geoid"
+        />
+
+    <ListView android:id="@+id/list"
+        android:layout_below="@id/h_geoid"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/altitude"
         android:transcriptMode="alwaysScroll"
         android:layout_weight="1"
         android:textSize="12sp"

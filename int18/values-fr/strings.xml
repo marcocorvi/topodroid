@@ -60,11 +60,13 @@
     <string name="calib_compute_coeffs">Calculs des coeficients de Calibration ...</string>
     <!-- UNUSED string name="calib_read_coeffs">Lecture des coéficients de Calibration ...</string -->
     <string name="calib_write_coeffs">Ecriture des coéficients de Calibration ...</string>
+    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
     <string name="connect_failed">Echec de la connexion</string>
     <string name="data"> données</string>
     <string name="using">Utilisation de %1$s %2$s</string>
     <string name="calib_error">Erreur: %1$s degrés</string>
     <string name="calib_max_error">Erreur max : %1$.4f degrés</string>
+    <!-- TODO string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string -->
     <string name="calib_iter">Répétitions : %1$d</string>
     <string name="calib_saturated_values">ATTENTION : %1$d Saturation des données</string>
     <string name="algorithm">Algorithme:</string>
@@ -108,6 +110,7 @@
 
     <string name="few_data">Pas assez de données</string>
     <string name="few_plots">Pas assez de Points</string>
+    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
 
     <string name="import_title">Import fichier</string>
     <string name="import_wait">Importation de fichier... Patientez...</string>
@@ -133,10 +136,12 @@
     <string name="label_title">ETIQUETTE</string>
     <string name="label_text">Saisissez le texte</string>
     <string name="altitude">Alt. </string>
+    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
+    <!-- TODO string name="h_geoid">H geoid </string -->
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="altitude_hint">Alt. [mètres]</string>
-    <string name="altitude_wgs84">Altitude WGS84</string>
+    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
+    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Erreurs de bouclage</string>
@@ -196,7 +201,6 @@
     <string name="no_db">Pas de base de données</string>
     <string name="no_device_address">Adresse de périphérique non sélectionné</string>
     <string name="no_device_found">Pas de périphérique trouvé</string>
-    <string name="no_geomag">Echec de connexion GeoMag</string>
     <string name="no_gms">La Calibration ne contient pas de données.\nUtiliser le bouton Télécharger</string>
     <string name="no_leg_intersection">La ligne de section ne coupe aucune ligne cheminement</string>
     <string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string>
@@ -244,6 +248,7 @@
     <string name="menu_stats">STATS</string>
     <!-- TODO string name="menu_survey">INFO RELEVE</string -->
     <string name="menu_sync">SYNCHRONISATION</string>
+    <!-- TODO string name="menu_validate">VALIDATE</string -->
 
     <string name="popup_join_pt">Attacher au point le plus proche</string>
     <string name="popup_snap_ln">Attacher à la ligne la plus proche</string>
@@ -257,7 +262,7 @@
     <string name="connected_already">Deja Connecté</string>
 
     <string name="not_available">Bluetooth indisponible</string>
-    <string name="not_connected">Non connecté</string>
+    <!-- UNUSED string name="not_connected">Non connecté</string -->
     <string name="not_enabled">Bluetooth désactivé</string>
     <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
     <string name="null_bitmap">creation image impossible</string>
@@ -410,9 +415,7 @@
     <string name="button_eval"      >Evaluation      </string>
     <string name="button_eval_cal"  >Evaluation avec Calibration</string>
     <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
-    <string name="button_geomag">GeoMag    </string>
-    <!-- TODO string name="button_altitude">Orthometric Alt.</string -->
-    <!-- TODO string name="button_ellipsoidic">Ellipsoidic Alt.</string -->
+    <!-- TODO string name="button_geomag">Declination</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manuel    </string -->
@@ -479,11 +482,11 @@
     <!-- NO string name="help_less">Retour aux options précédentes</string -->
     <string name="help_measure">Mesurer les distances</string>
     <string name="flip_shots">Basculer les Visées</string>
-    <string name="btn_therion">Therion</string>
-    <string name="btn_vtopo">VisualTopo</string>
-    <string name="btn_walls">Walls</string>
-    <string name="btn_svg">SVG</string>
-    <string name="btn_zip">Zip</string>
+    <!-- NO string name="btn_therion">Therion</string -->
+    <!-- NO string name="btn_vtopo">VisualTopo</string -->
+    <!-- NO string name="btn_walls">Walls</string -->
+    <!-- NO string name="btn_svg">SVG</string -->
+    <!-- NO string name="btn_zip">Zip</string -->
 
     <!-- TODO string name="btn_man">Manual</string -->
     <!-- TODO string name="btn_symbol">Drawing tools</string -->
@@ -555,6 +558,7 @@
     <!-- UNUSED string name="help_splay">Affecte automatiquement les stations aux visées latérales</string -->
     <string name="help_display">Choisit un mode d\'affichage</string>
     <string name="help_display_calib">Basculer affichage des Visées supprimées</string>
+    <!-- TODO string name="help_validate">Validate calibration</string -->
     <!-- FIXME string name="help_overview">Resumé d'activité</string -->
     <string name="help_plot">Passe en mode croquis</string>
     <string name="help_note">Modifie les notes du relevé</string>

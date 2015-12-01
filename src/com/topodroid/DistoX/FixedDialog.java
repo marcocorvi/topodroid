@@ -37,9 +37,9 @@ import android.widget.GridView;
 // import android.view.KeyEvent;
 import android.inputmethodservice.KeyboardView;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
-// import android.util.Log;
+import android.util.Log;
 
 
 public class FixedDialog extends Dialog
@@ -141,7 +141,6 @@ public class FixedDialog extends Dialog
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
 
-    // setTitle( mFxd.toLocString() );
     StringWriter sw1 = new StringWriter();
     PrintWriter  pw1 = new PrintWriter( sw1 );
     pw1.format( Locale.ENGLISH, "%.6f", mFxd.lng );
@@ -257,17 +256,11 @@ public class FixedDialog extends Dialog
         mETasl.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
         return;
       }
-      if ( mFxd.asl > -999 ) {
-        double gh = GeodeticHeight.geodeticHeight( mFxd.lat, mFxd.lng );
-        if ( gh > -999 ) {
-          mFxd.alt = mFxd.asl + gh;
-          mParent.updateFixedAltitude( mFxd );
-          setETalt( mFxd.alt );
-          mSubParent.refreshList();
-        } else {
-          Toast.makeText( mParent, R.string.lookup_fail, Toast.LENGTH_SHORT).show();
-        }
-      }
+      WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+      mFxd.alt = wmm.geoidToEllipsoid( mFxd.lat, mFxd.lng, mFxd.asl );
+      mParent.updateFixedAltitude( mFxd );
+      setETalt( mFxd.alt );
+      mSubParent.refreshList();
       return;
     } else if ( b == mButtonEllipsoidic ) { // compute Ellipsoidic --> Orthometric
       try {
@@ -276,25 +269,21 @@ public class FixedDialog extends Dialog
         mETalt.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
         return;
       }
-      if ( mFxd.alt > -999 ) {
-        double gh = GeodeticHeight.geodeticHeight( mFxd.lat, mFxd.lng );
-        if ( gh > -999 ) {
-          mFxd.asl = mFxd.alt - gh;
-          mParent.updateFixedAltitude( mFxd );
-          setETasl( mFxd.asl );
-          mSubParent.refreshList();
-        } else {
-          Toast.makeText( mParent, R.string.lookup_fail, Toast.LENGTH_SHORT).show();
-        }
-      }
+      WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+      mFxd.asl = wmm.ellipsoidToGeoid( mFxd.lat, mFxd.lng, mFxd.alt );
+      mParent.updateFixedAltitude( mFxd );
+      setETasl( mFxd.asl );
+      mSubParent.refreshList();
       return;
     } else if ( b == mButtonGeomag ) {
-      float decl = GeodeticHeight.getGeomag( mFxd );
-      if ( decl > -180 ) {
-        mETdecl.setText( String.format(Locale.ENGLISH, "%.4f", decl ) );  // can skip Locale
-      } else {
-        Toast.makeText( mParent, R.string.no_geomag, Toast.LENGTH_SHORT).show();
-      }
+      WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+      int year = TopoDroidUtil.year();
+      int month = TopoDroidUtil.month();
+      int day = TopoDroidUtil.day();
+      Log.v("DistoX", " Date " + year + " " + month + " " + day );
+
+      MagElement elem = wmm.computeMagElement( mFxd.lat, mFxd.lng, mFxd.alt, year, month, day );
+      mETdecl.setText( String.format(Locale.ENGLISH, "%.4f", elem.Decl ) );
       return;
     } else if ( b == mButtonDecl ) {
       if ( mETdecl.getText() != null ) {

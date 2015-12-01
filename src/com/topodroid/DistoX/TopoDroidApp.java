@@ -34,11 +34,6 @@ import java.util.zip.ZipFile;
 
 import java.util.Locale;
 
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
 import java.util.List;
 import java.util.ArrayList;
 // import java.util.Stack;
@@ -1481,32 +1476,6 @@ public class TopoDroidApp extends Application
       symbolsUncompress( is, overwrite );
     }
   }
-
-  /** download symbol zip from internet and store files in save/dirs
-   */
-  // int symbolsSync()
-  // {
-  //   int cnt = 0;
-  //   try {
-  //     URL url = new URL( symbol_urlstr );
-  //     URLConnection url_conn = url.openConnection( );
-  //     HttpURLConnection http_conn = (HttpURLConnection) url_conn;
-  //     int resp_code = http_conn.getResponseCode();
-  //     // Log.v( TAG, "resp code " + resp_code );
-  //     if ( resp_code == HttpURLConnection.HTTP_OK ) {
-  //       InputStream in = http_conn.getInputStream();
-  //       cnt = symbolsUncompress( in );
-  //     } else {
-  //       // Toast.makeText( app, "Engine temporarily not available " + resp_code, Toast.LENGTH_SHORT ).show();
-  //     }
-  //     http_conn.disconnect();
-  //   } catch ( MalformedURLException e ) {
-  //     // Toast.makeText( app, "Bad URL " + urlstr, Toast.LENGTH_LONG ).show();
-  //   } catch ( IOException e ) {
-  //     // Toast.makeText( app, "Failed to get " + urlstr, Toast.LENGTH_LONG ).show();
-  //   }
-  //   return cnt;
-  // }
 
   private int symbolsUncompress( InputStream fis, boolean overwrite )
   {

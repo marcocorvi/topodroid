@@ -51,7 +51,8 @@ public class LongLatAltDialog extends Dialog
   private MyKeyboard mKeyboard = null;
   private EditText mEditLong;
   private EditText mEditLat;
-  private EditText mEditAlt; // altitude
+  private EditText mEditAlt; // altitude ellipsoid
+  private EditText mEditAsl; // altitude geoid
 
   private Button   mBtnNS;
   private Button   mBtnEW;
@@ -59,7 +60,7 @@ public class LongLatAltDialog extends Dialog
   // private Button   mBtnBack;
   // private Button   mBtnCancel;
 
-  private CheckBox mWGS84; // checked if alt is wgs84
+  // private CheckBox mWGS84; // checked if alt is wgs84
 
   public LongLatAltDialog( Context context, LocationDialog parent )
   {
@@ -79,7 +80,8 @@ public class LongLatAltDialog extends Dialog
     mEditLong  = (EditText) findViewById(R.id.edit_long );
     mEditLat   = (EditText) findViewById(R.id.edit_lat );
     mEditAlt   = (EditText) findViewById(R.id.edit_alt );
-    mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
+    mEditAsl   = (EditText) findViewById(R.id.edit_asl );
+    // mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
     if ( TopoDroidSetting.mKeyboard ) {
@@ -87,19 +89,22 @@ public class LongLatAltDialog extends Dialog
       MyKeyboard.registerEditText( mKeyboard, mEditLong, flag );
       MyKeyboard.registerEditText( mKeyboard, mEditLat,  flag );
       MyKeyboard.registerEditText( mKeyboard, mEditAlt,  MyKeyboard.FLAG_POINT  );
+      MyKeyboard.registerEditText( mKeyboard, mEditAsl,  MyKeyboard.FLAG_POINT  );
     } else {
       mKeyboard.hide();
       mEditLong.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
       mEditLat.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
       mEditAlt.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      mEditAsl.setInputType( TopoDroidConst.NUMBER_DECIMAL );
     }
 
     if ( mParent.mHasLocation ) {
       mEditLong.setText( FixedInfo.double2string( mParent.mLongitude ) );
       mEditLat.setText(  FixedInfo.double2string( mParent.mLatitude ) );
-      mEditAlt.setText(  Integer.toString( (int)(mParent.mAltitude) )  );
+      mEditAlt.setText(  Integer.toString( (int)(mParent.mHEllipsoid) )  );
+      mEditAsl.setText(  Integer.toString( (int)(mParent.mHGeoid) )  );
     }
-    mWGS84.setChecked( true );
+    // mWGS84.setChecked( true );
 
     mBtnNS = (Button) findViewById(R.id.button_NS);
     mBtnNS.setOnClickListener( this );
@@ -142,7 +147,8 @@ public class LongLatAltDialog extends Dialog
         return;
       }
       String altit = mEditAlt.getText().toString();
-      if ( altit == null || altit.length() == 0 ) {
+      String aslit = mEditAsl.getText().toString();
+      if ( ( altit == null || altit.length() == 0 ) && (aslit == null || aslit.length() == 0 ) ) {
         mEditAlt.setError( mContext.getResources().getString( R.string.error_alt_required) );
         return;
       }
@@ -158,26 +164,33 @@ public class LongLatAltDialog extends Dialog
       }
       double alt = -1000.0;
       double asl = -1000.0;
-      altit = altit.replace(",", ".");
-      try {
-        if ( ! mWGS84.isChecked() ) {
-          asl = Double.parseDouble( altit );
-          // if ( TopoDroidSetting.mAltimetricLookup ) 
-          {
-            Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
-            double gh = GeodeticHeight.geodeticHeight( latit, longit );
-            if ( gh > -999 ) {
-              alt = asl + gh;
-            } else {
-              Toast.makeText( mContext, R.string.lookup_fail, Toast.LENGTH_SHORT ).show();
-            }
-          }
-        } else {
-          alt = Double.parseDouble( altit );
+      if ( ( altit == null || altit.length() == 0 ) ) {
+        try {
+          asl = Double.parseDouble( aslit.replace(",", ".") );
+        } catch ( NumberFormatException e ) {
+          mEditAsl.setError( mContext.getResources().getString( R.string.error_invalid_number) );
+          return;
         }
-      } catch ( NumberFormatException e ) {
-        mEditAlt.setError( mContext.getResources().getString( R.string.error_invalid_number) );
-        return;
+        WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+        alt = wmm.geoidToEllipsoid( lat, lng, asl );
+      } else {
+        try {
+          alt = Double.parseDouble( altit.replace(",", ".") );
+        } catch ( NumberFormatException e ) {
+          mEditAlt.setError( mContext.getResources().getString( R.string.error_invalid_number) );
+          return;
+        }
+        if ( ( aslit == null || aslit.length() == 0 ) ) {
+          WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+          asl = wmm.ellipsoidToGeoid( lat, lng, alt );
+        } else {
+          try {
+            asl = Double.parseDouble( aslit.replace(",", ".") );
+          } catch ( NumberFormatException e ) {
+            mEditAsl.setError( mContext.getResources().getString( R.string.error_invalid_number) );
+            return;
+          }
+        }
       }
 
       // if ( TopoDroidSetting.mAltimetricLookup ) {

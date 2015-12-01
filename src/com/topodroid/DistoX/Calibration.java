@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 
 // used by logCoeff
-// import android.util.Log;
+import android.util.Log;
 
 public class Calibration
 {
@@ -102,6 +102,9 @@ public class Calibration
     coeffToG( coeff, bG, aG );
     coeffToM( coeff, bM, aM );
     coeffToNL( coeff, nL );
+    // Log.v("DistoX", "G " + bG.x + " " + bG.y + " " + bG.z + " " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
+    // Log.v("DistoX", "M " + bM.x + " " + bM.y + " " + bM.z + " " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
+    // Log.v("DistoX", "NL " + nL.x + " " + nL.y + " " + nL.z );
   }
 
   public Calibration( int N, TopoDroidApp app, boolean nonLinear )
@@ -211,19 +214,15 @@ public class Calibration
     coeff[47] = (byte)((v>>8) & 0xff);
 
     if ( mNonLinear ) {
-      v = (long)(nL.x * TopoDroidUtil.FN); if ( v <= 0 ) v = 0xff + v;
-      coeff[48] = (byte)( (v-1) & 0xff );
-      v = (long)(nL.y * TopoDroidUtil.FN); if ( v <= 0 ) v = 0xff + v;
-      coeff[49] = (byte)( (v-1) & 0xff );
-      v = (long)(nL.z * TopoDroidUtil.FN); if ( v <= 0 ) v = 0xff + v;
-      coeff[50] = (byte)( (v-1) & 0xff );
-      coeff[51] = (byte)( 0xff );
+      coeff[48] = floatToByteNL( nL.x );
+      coeff[49] = floatToByteNL( nL.y );
+      coeff[50] = floatToByteNL( nL.z );
     } else {
       coeff[48] = (byte)( 0xff );
       coeff[49] = (byte)( 0xff );
       coeff[50] = (byte)( 0xff );
-      coeff[51] = (byte)( 0xff );
     }
+    coeff[51] = (byte)( 0xff );
     return coeff;
   }
 
@@ -342,11 +341,13 @@ public class Calibration
   public static void coeffToG( byte[] coeff, Vector b, Matrix a )
   {
     coeffToBA( coeff, b, a, 0 );
+    // Log.v("DistoX", "G " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
   public static void coeffToM( byte[] coeff, Vector b, Matrix a )
   {
     coeffToBA( coeff, b, a, 24 );
+    // Log.v("DistoX", "M " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
   // N.B. map coeff <--> NL
@@ -360,15 +361,37 @@ public class Calibration
   //          254       -1
   //  0xff    255        0     
   //
+  private static float byteToFloatNL( byte b )
+  {
+    int c0 = (int)(b) + 1; if ( c0 >= 128 ) c0 = c0 - 256;
+    return c0 / TopoDroidUtil.FN;
+  }
+
+  private static byte floatToByteNL( float x )
+  {
+    long v = (long)(x * TopoDroidUtil.FN); if ( v <= 0 ) v = 0xff + v;
+    return (byte)( (v-1) & 0xff );
+  }
+
+  // FIXME
+  // private static byte floatToByteV( float x )
+  // {
+  //   long v = (long)(x * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+  //   return (byte)(v & 0xff);
+  // }
+  // 
+  // private static byte floatToByteM( float x )
+  // {
+  //   long v = (long)(x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+  //   return (byte)(v & 0xff);
+  // }
+  
   public static void coeffToNL( byte[] coeff, Vector nl )
   {
     if ( coeff != null && coeff.length >= 51 ) {
-      int c0 = (int)(coeff[48]) + 1; if ( c0 >= 128 ) c0 = c0 - 256;
-      nl.x = c0;
-      c0 = (int)(coeff[49]) + 1; if ( c0 >= 128 ) c0 = c0 - 256;
-      nl.y = c0;
-      c0 = (int)(coeff[50]) + 1; if ( c0 >= 128 ) c0 = c0 - 256;
-      nl.z = c0;
+      nl.x = byteToFloatNL( coeff[48] );
+      nl.y = byteToFloatNL( coeff[49] );
+      nl.z = byteToFloatNL( coeff[50] );
     } else {
       nl.x = 0;
       nl.y = 0;
@@ -525,13 +548,19 @@ public class Calibration
 
   private void saturate( Vector nl )
   {
-    float max = 127.0f / TopoDroidUtil.FN;
-    if ( nl.x >  max ) nl.x =  max;
-    if ( nl.x < -max ) nl.x = -max;
-    if ( nl.y >  max ) nl.y =  max;
-    if ( nl.y < -max ) nl.y = -max;
-    if ( nl.z >  max ) nl.z =  max;
-    if ( nl.z < -max ) nl.z = -max;
+    int x = (int)(nl.x * TopoDroidUtil.FN);
+    int y = (int)(nl.y * TopoDroidUtil.FN);
+    int z = (int)(nl.z * TopoDroidUtil.FN);
+    // float max = 127.0f / TopoDroidUtil.FN;
+    if ( x >  127 ) x =  127;
+    if ( x < -127 ) x = -127;
+    if ( y >  127 ) y =  127;
+    if ( y < -127 ) y = -127;
+    if ( z >  127 ) z =  127;
+    if ( z < -127 ) z = -127;
+    nl.x = x / TopoDroidUtil.FN;
+    nl.y = y / TopoDroidUtil.FN;
+    nl.z = z / TopoDroidUtil.FN;
   }
 
   private void computeBearingAndClinoRad( Vector g0, Vector m0 )
@@ -841,6 +870,9 @@ public class Calibration
     return it;
   }
 
+  // -----------------------------------------------------------------------
+  // ERROR STATS
+
   /** compute the unit vector direction of sensor-data (g,m)
    */
   Vector computeDirection( Vector g, Vector m )
@@ -862,6 +894,7 @@ public class Calibration
                        (float)Math.sin(c0) );
   }
 
+  // error acumulators
   int mSumCount;
   double mSumErrors;
   double mSumErrorSquared;
@@ -874,11 +907,15 @@ public class Calibration
   }
 
   /** add the errors for a group of sensor-data to the stats
+   * each error is the length of the vector-difference between the unit-vector directions.
+   * this approximates the angle between the two directions:
+   *   error = 2 tan(alpha/2) 
    */
   void addErrorStats( Vector g[], Vector m[] )
   {
     int size = g.length;
     Vector gl[] = new Vector[ size ];
+    // Log.v("DistoX", "size " + size );
     if ( mNonLinear ) {
       Matrix gs = new Matrix();
       for ( int k=0; k<size; ++k ) {
@@ -901,7 +938,7 @@ public class Calibration
         gr[i] = bG.plus( aG.timesV(g[i]) );
       }
       mr[i] = bM.plus( aM.timesV(m[i]) );
-      TurnVectors( gl[i], mr[i], gl[0], mr[0], false );
+      TurnVectors( gr[i], mr[i], gr[0], mr[0], false );
       grp.add( gxt );
       mrp.add( mxt );
     }
@@ -916,6 +953,7 @@ public class Calibration
                               (float)Math.cos(c0) * (float)Math.sin(b0),
                               (float)Math.sin(c0) );
       double e = v1.minus(v0).Length();
+      // Log.v("DistoX", e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
       mSumCount += 1;
       mSumErrors += e;
       mSumErrorSquared += e*e;

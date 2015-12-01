@@ -1310,11 +1310,11 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       do {
         list.add( new FixedInfo( cursor.getLong(0),
-                                 cursor.getString(1),
-                                 cursor.getDouble(2),
-                                 cursor.getDouble(3),
-                                 cursor.getDouble(4),
-                                 cursor.getDouble(5),
+                                 cursor.getString(1), // station
+                                 cursor.getDouble(2), // longitude
+                                 cursor.getDouble(3), // latitude
+                                 cursor.getDouble(4), // ellipsoid height
+                                 cursor.getDouble(5), // geoid height
                                  cursor.getString(6) ) );
       } while (cursor.moveToNext());
     }
