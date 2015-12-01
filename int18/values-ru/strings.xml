@@ -760,9 +760,9 @@
   <string name="pref_team_title">Группа съёмемки</string>
   <string name="pref_team_summary">Группа съёмемки</string>
   <string name="pref_team_message">Группа съёмемки по умолчанию</string>
-  <!-- FIXME string name="pref_ethr_title">Порог расчета проэкции</string -->
-  <!-- FIXME string name="pref_ethr_summary">Допустимое отклонениие в бок. замере</string -->
-  <!-- FIXME string name="pref_ethr_message">Порог расчета бокового измерения как проэкции</string -->
+  <string name="pref_ethr_title">Вертикальный порог бокового замера</string>
+  <string name="pref_ethr_summary">Область верт. проэкции (бок. замер)</string>
+  <string name="pref_ethr_message">Угол около 90 для верт. проэкции бок. замера [град]</string>
   <string name="pref_vthr_title">Вертикальный порог для пикетов</string>
   <string name="pref_vthr_summary">Верт. порог ЛПВН/ЗВСЮ</string>
   <string name="pref_vthr_message">Допустимый наклон отрезка между ЛПВН/ЗВСЮ</string>
