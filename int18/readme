@@ -46,6 +46,20 @@ with you translation, and send it to you by mail.
 Finally if you have doubt about the meaning of a string do not hesitate to write me.
 
 -------------------------------------------------------------------------
+MISSING STRINGS
+
+The Android build warns if a string appear in a translation file, that has no default (English)
+value. It does not complain if s translation is not present.
+Therefore it may occur that some strings from the original file do not appear in a translation file.
+That is usually my fault.
+As a translator you should check now and then yout string file against the original (English)
+file, and add the missing strings, possibly commented if there is non need for translation.
+
+The "values" strings in the "array.xml" files must not be translated, so they should be present
+only in the default file. 
+
+
+-------------------------------------------------------------------------
 IMPORTANT: ENCODING
 The string files are encoded.
 Write the proper encoding in the first line, and use an editor that saves the file with that encoding.
