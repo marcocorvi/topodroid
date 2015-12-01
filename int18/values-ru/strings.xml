@@ -712,8 +712,8 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
   <string name="pref_plot_screen_title">Настройки экрана абриса</string>
-  <!-- FIXME string name="pref_tool_line_title">Настройки рисования абриса</string -->
-  <string name="pref_tool_point_title">ИНСТРУМЕНТ ТОЧЕК</string>
+  <string name="pref_tool_line_title">НАСТРОЙКИ ЛИНИЙ</string>
+  <string name="pref_tool_point_title">НАСТРОЙКИ ТОЧЕК</string>
   <string name="pref_location_title">Настройки местоположения</string>
   <string name="pref_shot_data_title">НАСТРОЙКА ДАННЫХ ПИКЕТОВ</string>
   <string name="pref_cwd_title">Корневой каталог</string>
