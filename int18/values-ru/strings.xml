@@ -62,14 +62,14 @@
     <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки ...</string>
     <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки ...</string -->
     <string name="calib_write_coeffs">Запись коэфицентов калибровки ...</string>
-    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
+    <string name="calib_validation">Проверить %1$s относительно %2$s</string>
     <string name="connect_failed">Ошибка соединения</string>
     <string name="data">данные</string>
     <string name="using">Использую %1$s %2$s</string>
     <string name="calib_error">Ошибка: %1$.4f градусов</string>
-    <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
+    <string name="calib_stddev">Ошибка ст-откл: %1$.4f градусов</string>
     <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
-    <!-- TODO string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string -->
+    <string name="calib_ave_std">Точность: %1$.4f %2$.4f градусов</string>
     <string name="calib_iter">Итерации: %1$d</string>
     <string name="calib_saturated_values">ВНИМАНИЕ: %1$d saturated data</string>
     <string name="algorithm">Алгоритм:</string>
@@ -112,7 +112,7 @@
 
     <string name="few_data">Не достаточно данных</string>
     <string name="few_plots">Не достаточно абрисов</string>
-    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
+    <string name="few_calibs">Недостаточно калиб. замеров</string>
 
     <string name="import_title">Импорт файла</string>
     <string name="import_wait">Импорт файла... обождите...</string>
@@ -137,12 +137,12 @@
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <string name="altitude">Alt. </string>
-    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
-    <!-- TODO string name="h_geoid">H geoid </string -->
+    <string name="h_ellipsoid">H элипсоид. </string>
+    <string name="h_geoid">H геоид </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
-    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
+    <string name="h_ellipsoid_hint">H элипсоид. [метры]</string>
+    <string name="h_geoid_hint">H геоид [метры]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ошибки закрытия петли</string>
@@ -247,7 +247,7 @@
     <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Метаданные</string>
     <string name="menu_sync">СИНХР.</string>
-    <!-- TODO string name="menu_validate">VALIDATE</string -->
+    <string name="menu_validate">ПОДТВЕРДИТЬ</string>
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
     <string name="popup_snap_ln">Привязать к ближайшей линии</string>
@@ -412,9 +412,9 @@
     <string name="button_cancel"    >Отмена    </string>
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_delete"    >Удалить   </string>
-    <string name="button_eval"      >Расчет    </string>
-    <string name="button_eval_cal"  >Расчет w. калиб.</string>
-    <!-- TODO string name="button_geomag"    >Declination</string -->
+    <string name="button_eval"      >Вычислить    </string>
+    <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
+    <string name="button_geomag"    >Магнитное склонение</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- OK string name="button_gps_stop"  >Стоп      </string -->
     <!-- OK string name="button_manual"    >Вручную    </string -->
@@ -435,7 +435,7 @@
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
-    <string name="button_store"     >Записать  </string>
+    <string name="button_store"     >Загрузить в Disto  </string>
     <string name="button_upload"    >Загрузить </string>
     <string name="button_yes"       >Да        </string>
 
@@ -536,7 +536,7 @@
     <!-- UNUSED string name="help_splay">Автоматически присваивать номер пикет боковым измерениям</string -->
     <string name="help_display">Выберать режим просмотра</string>
     <string name="help_display_calib">Режим показа удаленных пикетов</string>
-    <!-- TODO string name="help_validate">Validate calibration</string -->
+    <string name="help_validate">Проверить калибровку</string>
     <string name="help_overview">Обзор активности</string>
     <string name="help_plot">Ввод абрисов</string>
     <string name="help_note">Реждактировать заметки съёмки</string>
@@ -871,12 +871,12 @@
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
   <string name="pref_side_drag_title">Перетаскивание за сторону</string>
   <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
-  <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
-  <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
-  <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
-  <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
-  <!-- TODO string name="pref_area_border_title">Area border visibility</string --> 
-  <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
+  <string name="pref_unit_grid_title">Единицы изм. абриса</string>
+  <string name="pref_unit_grid_summary">Шаг сетки абриса</string>
+  <string name="pref_recent_nr_title">Кол-во. недавних инструментов</string>
+  <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
+  <string name="pref_area_border_title">Прозрачность границ области</string> 
+  <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
   <string name="pref_unit_grid_title">Единицы измерения на абрисе</string>
   <string name="pref_unit_grid_summary">Размер шага сетки на абрисе</string>
   <string name="pref_recent_nr_title">Кол-во недавних инструментов</string >
