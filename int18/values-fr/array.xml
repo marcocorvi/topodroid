@@ -169,7 +169,7 @@
   <string-array name="lineStyle">
      <item name="none">Fine</item>
      <item name="two">Normale</item>
-     <item name="two">Grossière</item>
+     <item name="three">Grossière</item>
      <item name="bezier">Bézier</item>
   </string-array>
 
