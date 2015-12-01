@@ -735,7 +735,7 @@
   <string name="pref_altimetric_summary">Поиск вертикальной координаты в интернете</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->
-  <string name="pref_survey_stations_title">Настройки пикетов</string>
+  <string name="pref_survey_stations_title">Настройки нумерации пикетов</string>
   <string name="pref_survey_stations_summary">Авто нумерация пикетов</string>
   <string name="pref_accel_thr_title">Максимальное допустимое ускорение</string>
   <string name="pref_accel_thr_summary">Максимальное допустимое ускорение на пикете</string>
