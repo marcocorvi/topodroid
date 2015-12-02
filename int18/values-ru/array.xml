@@ -66,11 +66,11 @@
 
   <string-array name="surveyStations">
      <item name="no">Нет</item>
-     <item name="for">Бок. замер, прямой ход</item>
-     <item name="back">Бок. замер, обратный ход</item>
-     <item name="for2">Прямой ход, Бок. замер</item>
-     <item name="back2">Обратный ход, Бок. замер</item>
-     <item name="anomaly">Обратный замер</item>
+     <item name="for">ЛПВН потом на след. пикет</item>
+     <item name="back">ЛПВН потом на пред. пикет</item>
+     <item name="for2">На след. пикет потом ЛПВН</item>
+     <item name="back2">На пред. пикет потом ЛПВН</item>
+     <item name="anomaly">На пред. пикет ЛПВН на след. пикет</item>
   </string-array>
 
   <string-array name="pickerType">
