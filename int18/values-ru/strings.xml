@@ -879,10 +879,10 @@
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
   <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
-  <string name="pref_unit_grid_title">Единицы измерения на абрисе</string>
-  <string name="pref_unit_grid_summary">Размер шага сетки на абрисе</string>
-  <string name="pref_recent_nr_title">Кол-во недавних инструментов</string >
-  <string name="pref_recent_nr_summary">Количество недавно использованных инструментов рисования</string>
+  <!-- FIXME REPEATED string name="pref_unit_grid_title">Единицы измерения на абрисе</string -->
+  <!-- FIXME REPEATED string name="pref_unit_grid_summary">Размер шага сетки на абрисе</string -->
+  <!-- FIXME REPEATED string name="pref_recent_nr_title">Кол-во недавних инструментов</string -->
+  <!-- FIXME REPEATED string name="pref_recent_nr_summary">Количество недавно использованных инструментов рисования</string -->
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
