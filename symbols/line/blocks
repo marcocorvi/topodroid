@@ -1,5 +1,5 @@
 symbol line
-name blocks
+name wall_blocks
 name-bg стена_блокаж
 th_name wall:blocks
 group wall
@@ -10,8 +10,8 @@ dash 24 8
 effect
   moveTo 0 0
   lineTo 24 0
-  lineTo 24 10
-  lineTo 23 10
+  lineTo 24 8
+  lineTo 23 8
   lineTo 23 1
   lineTo 1 1
   lineTo 1 8

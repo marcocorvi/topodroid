@@ -1,5 +1,5 @@
 symbol line
-name debris
+name wall_debris
 name-bg стена_чакъл
 th_name wall:debris
 group wall

@@ -1,5 +1,5 @@
 symbol line
-name sand
+name wall_sand
 name-bg стена_пясък
 th_name wall:sand
 group wall

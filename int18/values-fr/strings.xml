@@ -22,15 +22,15 @@
     <string name="td_symbol_text">Avez vous besoin d\'installer les symboles de dessin ?\nVous pourrez le faire plus tard avec l\'application TdSymbol.</string>
     <string name="td_symbol_ask">Ne plus me le proposer</string>
 
-    <string name="thp_user">Utilisateur</string>
+    <string name="thp_user">utilisateur</string>
     <string name="thp_label">étiquette</string>
     <!-- string name="thp_danger">danger</string -->
-    <string name="thl_user">user</string>
-    <string name="thl_wall">mur</string>
+    <string name="thl_user">utilisateur</string>
+    <string name="thl_wall">wall, parois</string>
     <string name="tha_user">utilisateur</string>
     <string name="tha_water">eau</string>
 
-    <string name="make_walls">Habillage</string>
+    <string name="make_walls">Parois</string>
     <string name="missing_area">ZONE</string>
     <string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string>
     <string name="missing_line">LIGNE</string>
@@ -44,9 +44,9 @@
     <string name="failed_snap_to_point">Pas de point a accrocher</string>
 
     <string name="calibration_title">Calibration Instrument</string>
-    <string name="calibration_length">Metre</string>
+    <string name="calibration_length">Métre</string>
     <string name="calibration_azimuth">Compas</string>
-    <string name="calibration_clino">Clinometre</string>
+    <string name="calibration_clino">Clinométre</string>
 
     <string name="calib_new">Nouvelle Calibration</string>
     <string name="calib_exists">Une Calibration existe déjà</string>
@@ -60,20 +60,20 @@
     <string name="calib_compute_coeffs">Calculs des coeficients de Calibration ...</string>
     <!-- UNUSED string name="calib_read_coeffs">Lecture des coéficients de Calibration ...</string -->
     <string name="calib_write_coeffs">Ecriture des coéficients de Calibration ...</string>
-    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
+    <string name="calib_validation">Validation de %1$s vs %2$s</string >
     <string name="connect_failed">Echec de la connexion</string>
     <string name="data"> données</string>
     <string name="using">Utilisation de %1$s %2$s</string>
-    <string name="calib_error">Erreur: %1$s degrés</string>
+    <string name="calib_error">Erreur moyenne : %1$s degrés</string>
+    <string name="calib_stddev">Erreur stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Erreur max : %1$.4f degrés</string>
-    <!-- TODO string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string -->
-    <string name="calib_iter">Répétitions : %1$d</string>
+    <string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string>
+    <string name="calib_iter">itérations : %1$d</string>
     <string name="calib_saturated_values">ATTENTION : %1$d Saturation des données</string>
     <string name="algorithm">Algorithme:</string>
     <string name="auto">automatique</string>
     <string name="linear">linéaire</string>
     <string name="non_linear">non-linéaire</string>
-    <!-- TODO string name="non_linear">non-linear</string -->
    
     <string name="device_algo_failed">Echec de determination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string>
     <string name="device_busy">Périphérique occupé</string>
@@ -110,7 +110,7 @@
 
     <string name="few_data">Pas assez de données</string>
     <string name="few_plots">Pas assez de Points</string>
-    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
+    <string name="few_calibs">Pas assez de Calibrations</string>
 
     <string name="import_title">Import fichier</string>
     <string name="import_wait">Importation de fichier... Patientez...</string>
@@ -136,12 +136,12 @@
     <string name="label_title">ETIQUETTE</string>
     <string name="label_text">Saisissez le texte</string>
     <string name="altitude">Alt. </string>
-    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
-    <!-- TODO string name="h_geoid">H geoid </string -->
+    <string name="h_ellipsoid">H ellip. </string>
+    <string name="h_geoid">H geoid </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
-    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
+    <string name="h_ellipsoid_hint">H ellip. [metres]</string>
+    <string name="h_geoid_hint">H geoid [metres]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Erreurs de bouclage</string>
@@ -166,7 +166,7 @@
     <string name="error_start_required">Station de référence nécessaire</string>
     <string name="error_station_already_fixed">cette Station a deja des coordonées</string>
     <string name="error_station_required">Station nécessaire</string>
-    <!-- FIXME string name="error_station_non_existing">Cette station n'existe pas</stringi -->
+    <string name="error_station_non_existing">Cette station n\'existe pas</string>
     <string name="error_sensor_required">Capteur nécessaire</string>
     <string name="error_value_required">Valeur nécessaire</string>
     
@@ -187,7 +187,7 @@
     <string name="barrier_del">Afficher les visées suivantes</string>
     <string name="hidden_add">Cacher les visées precedentes</string>
     <string name="hidden_del">Afficher les visées precedentes</string>
-    <!-- FIXME string name="splays_toggle">Basculer les Visés d'habillage - Splays</string -->
+    <string name="splays_toggle">Basculer les Visées d\'habillage - Splays</string>
 
     <string name="bad_cwd">Le nom du projet ne peut etre son chemin</string>
     <string name="bad_line">mauvais type de ligne</string>
@@ -196,7 +196,7 @@
     <string name="no_bt">Pas de Bluetooth</string>
     <string name="no_calib">Pas de Calibration</string>
     <string name="no_calibration">Aucune Calibration sélectionnée</string>
-    <string name="no_capture_app">Aucune d\'application de capture d\'image</string>
+    <string name="no_capture_app">Aucune application de capture d\'image</string>
     <string name="no_cave3d">Cave3D n\'est pas installé</string>
     <string name="no_db">Pas de base de données</string>
     <string name="no_device_address">Adresse de périphérique non sélectionné</string>
@@ -246,9 +246,9 @@
     <string name="menu_scan">SCAN</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
-    <!-- TODO string name="menu_survey">INFO RELEVE</string -->
+    <string name="menu_survey">INFO RELEVE</string>
     <string name="menu_sync">SYNCHRONISATION</string>
-    <!-- TODO string name="menu_validate">VALIDATE</string -->
+    <string name="menu_validate">VALIDATION</string>
 
     <string name="popup_join_pt">Attacher au point le plus proche</string>
     <string name="popup_snap_ln">Attacher à la ligne la plus proche</string>
@@ -262,8 +262,8 @@
     <string name="connected_already">Deja Connecté</string>
 
     <string name="not_available">Bluetooth indisponible</string>
-    <!-- UNUSED string name="not_connected">Non connecté</string -->
     <string name="not_enabled">Bluetooth désactivé</string>
+    
     <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
     <string name="null_bitmap">creation image impossible</string>
     <string name="photo">photo</string>
@@ -275,10 +275,10 @@
     <!-- UNUSED string name="photo_sensor_prompt">Sélectionnez photo ou capteur</string -->
     <string name="photo_shot">ajouter une visée</string>
     <string name="photo_survey">Découper le relevé</string>
-    <string name="picture_no_station">Besoin d\'une station/nom pour la photo</string>
+    <string name="picture_no_station">Nom station requis</string>
     <string name="plot_delete">Supprimer le croquis ?</string>
-    <string name="item_delete">Supprimer item %1$s ?</string>
-    <string name="plot_duplicate_name">dupliquer nom du relevé</string>
+    <string name="item_delete">Supprimer object %1$s ?</string>
+    <string name="plot_duplicate_name">dupliquer le nom du relevé</string>
     <string name="plot_name">Nom du croquis</string>
     <string name="plot_new">Nouveau croquis</string>
     <string name="plot_not_found">Dessin introuvable</string>
@@ -328,15 +328,15 @@
     <string name="shot_reverse">inverse</string>
     <string name="shot_to">à</string>
 
-    <!-- UNUSED string name="make_surface">Surface exists. Replace it?</string -->
+    <string name="make_surface">Surface existe. la remplacer?</string>
 
-    <!-- UNUSED string name="sketch3d_name">name</string -->
+    <string name="sketch3d_name">nom</string>
     <string name="sketch3d_new">Nouveau model 3D</string>
-    <!-- UNUSED string name="sketch3d_next">next station</string -->
+    <string name="sketch3d_next">station suivante</string>
     <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
     <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
     <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
-    <!-- UNUSED string name="sketch3d_start">base station</string -->
+    <string name="sketch3d_start">station de base</string>
 
     <string name="station">station</string>
     <string name="station_ask">Insérer station ?</string>
@@ -344,12 +344,12 @@
     <!-- UNUSED string name="station_base">Station de référence</string -->
     <!-- UNUSED string name="station_next">next station</string -->
     <string name="station_viewed">station consultée</string>
-    <string name="survey_exists">Conflit de nom de relevé</string>
+    <string name="survey_exists">Ce nom de relevé existe deja</string>
     <string name="survey_date">aaaa/mm/jj</string>
     <string name="survey_delete">Supprimer le relevé?</string>
     <string name="survey_split">Diviser le relevé?</string>
     <string name ="survey_not_attached">ATTENTION: visées non rattachées</string>
-    <string name="cannot_rename">Impossible renommer le relevé</string>
+    <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
     <string name="description">description</string>
     <string name="name">nom</string>
@@ -407,6 +407,7 @@
      <string name="ask_reset">Reinitialiser mémoire DistoX ?</string>
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
 
+
     <string name="button_add"       >Ajouter       </string>
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
@@ -414,16 +415,15 @@
     <string name="button_delete"    >Supprimer    </string>
     <string name="button_eval"      >Evaluation      </string>
     <string name="button_eval_cal"  >Evaluation avec Calibration</string>
-    <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
-    <!-- TODO string name="button_geomag">Declination</string -->
+    <string name="button_geomag">Declinaison</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manuel    </string -->
     <!-- UNUSED string name="button_measure"   >Mesure   </string -->
     <string name="button_photo"   >Photos</string>
-    <string name="button_sensor"  >Mesures</string>
+    <string name="button_sensor"  >Capteurs</string>
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
-    <!-- UNUSED string name="button_azimuth">Azimuth</string -->
+    <string name="button_azimuth">Azimuth</string>
     <string name="button_plot"    >Dessin</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_no"        >Non        </string>
@@ -472,39 +472,40 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
+<!--
+    <string name="btn_compass">Compass</string>
+    <string name="btn_csurvey">cSurvey</string>
+    <string name="btn_csv">CSV</string>
+    <string name="btn_dxf">DXF</string>
+    <string name="btn_kml">KML</string>
+    <string name="btn_oziexplorer">OziExplorer</string>
+    <string name="btn_png">PNG</string>
+    <string name="btn_pockettopo">PocketTopo</string>
+    <string name="btn_survex">Survex</string>
+    <string name="btn_therion">Therion</string>
+    <string name="btn_vtopo">VisualTopo</string>
+    <string name="btn_walls">Walls</string>
+    <string name="btn_svg">SVG</string>
+    <string name="btn_zip">Zip</string>
+-->
     <string name="btn_man">Manuel</string>
-    <string name="btn_symbol">Symboles</string>
+    <string name="btn_symbol">Outils de dessin</string>
     <string name="btn_import">Importer</string>
 
-    <string name="help_help">Affiche l\'aide</string>
-    <!-- string name="help_manual">Online manual</string -->
-    <!-- NO string name="help_more">Affiche des options supplémentaires</string -->
-    <!-- NO string name="help_less">Retour aux options précédentes</string -->
-    <string name="help_measure">Mesurer les distances</string>
-    <string name="flip_shots">Basculer les Visées</string>
-    <!-- NO string name="btn_therion">Therion</string -->
-    <!-- NO string name="btn_vtopo">VisualTopo</string -->
-    <!-- NO string name="btn_walls">Walls</string -->
-    <!-- NO string name="btn_svg">SVG</string -->
-    <!-- NO string name="btn_zip">Zip</string -->
-
-    <!-- TODO string name="btn_man">Manual</string -->
-    <!-- TODO string name="btn_symbol">Drawing tools</string -->
-    <!-- TODO string name="btn_import">Import</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <!-- string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- string name="title_sketch_shot">New shot</string -->
-    <!-- string name="title_sketch_refs">View mode</string -->
+    <string name="title_sketch_shot">Nouveau Tir</string>
+    <string name="title_sketch_refs">Mode Vue</string>
     <!-- string name="title_sketch_section_type">Sections type</string -->
     <!-- string name="title_sketch_select">Select item</string -->
 
-    <!-- string name="sketch_mode_single">Single shot</string -->
-    <!-- string name="sketch_mode_ngbh">Nearby shots</string -->
-    <!-- string name="sketch_mode_all">All shots</string -->
-    <!-- string name="sketch_delete">Delete 3D model ?</string -->
-    <!-- string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
+    <string name="sketch_mode_single">Simple point</string>
+    <string name="sketch_mode_ngbh">Points autour</string>
+    <string name="sketch_mode_all">tous les points</string>
+    <string name="sketch_delete">Suprimer le model 3D?</string>
+    <!-- TODO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
 
     <!-- string name="btn_head">head</string -->
     <!-- string name="btn_stretch">Stretch</string -->
@@ -515,33 +516,33 @@
     <!-- string name="btn_horizontal">Horizontal</string -->
 
     <!-- select buttin labels -->
-    <!-- string name="btn_section">Section</string -->
-    <!-- string name="btn_step">Step</string -->
-    <!-- string name="btn_shot">Shot</string -->
-    <!-- string name="btn_join">Join</string -->
+    <string name="btn_section">Section</string>
+    <string name="btn_step">Pas</string>
+    <string name="btn_shot">Point</string>
+    <string name="btn_join">Joindre</string>
 
     <!-- string name="button_redraw">Redraw</string -->
-    <!-- string name="button_erase">Erase</string -->
+    <string name="button_erase">Effacer</string>
     <!-- string name="btn_surface">surface</string -->
 
-    <!-- string name="station_next">NEXT</string -->
-    <!-- string name="no_shot_between_stations">no_shot_between_stations</string -->
-    <!-- string name="few_line_points">Line has too few points</string -->
-    <!-- string name="line_delete">line_delete</string -->
-    <!-- string name="flip_shots">Flip shots</string -->
+    <string name="station_next">SUIVANT</string>
+    <string name="no_shot_between_stations">pas de points entre less stations</string>
+    <string name="few_line_points">La ligena trop peu de points</string>
+    <string name="line_delete">supprimer ligne</string>
+    <string name="flip_shots">Inverser les Points</string>
 
-    <!-- string name="menu_head">HEAD</string -->
+    <!-- TODO string name="menu_head">HEAD</string -->
     <!-- string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
-    <!-- TODO string name="help_help">This help</string -->
-    <!-- TODO string name="help_manual">User manual</string -->
-    <!-- UNUSED string name="help_more">Show the secondary actions</string -->
-    <!-- UNUSED string name="help_less">Return to the primary actions</string -->
-    <!-- TODO string name="help_measure">Measure distances</string -->
+    <string name="help_help">Affiche l\'aide</string>
+    <string name="help_manual">Manuel Utilisateur</string>
+    <!-- string name="help_more">Affiche des options supplémentaires</string -->
+    <!-- string name="help_less">Retour aux options précédentes</string -->
+    <string name="help_measure">Mesurer les distances</string>
     
     <string name="help_coeff">Montrer les coefficients de calibration</string>
-    <!-- TODO string name="help_continue">Continue drawing a line</string -->
+    <string name="help_continue">Continuer a dessiner une ligne</string>
     <string name="help_current_station">Stations Sauvées</string>
     <string name="help_azimuth">Azimuth Reference Etendu</string>
     <string name="help_device">Périphériques DistoX</string>
@@ -558,8 +559,8 @@
     <!-- UNUSED string name="help_splay">Affecte automatiquement les stations aux visées latérales</string -->
     <string name="help_display">Choisit un mode d\'affichage</string>
     <string name="help_display_calib">Basculer affichage des Visées supprimées</string>
-    <!-- TODO string name="help_validate">Validate calibration</string -->
-    <!-- FIXME string name="help_overview">Resumé d'activité</string -->
+    <string name="help_validate">Valider la Calibration</string>
+    <string name="help_overview">Resumé d'activité</string>
     <string name="help_plot">Passe en mode croquis</string>
     <string name="help_note">Modifie les notes du relevé</string>
     <string name="help_bluetooth">Reinitialise la connexion Bluetooth</string>
@@ -597,12 +598,12 @@
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
-    <string name="help_manual_calibration">Manual de calibration instrument</string>
+    <string name="help_manual_calibration">Manuel de calibration instrument</string>
     <string name="help_note_plot">Edite les propriétés de l\'élément dessiné</string>
-    <string name="help_save">Enregistre les modifications du relevé/info d\'étalonnage</string>
-    <!-- TODO string name="help_save_calib">Save changes to calibration info</string -->
+    <string name="help_save">Enregistre les modifications d\'infosdu relevé</string>
+    <string name="help_save_calib">Enregistre les modifications d\'infos de Calibration</string>
     <string name="help_export_survey">Exporte le relevé</string>
-    <string name="help_loc">Localisation GPS (GPSaverage)</string>
+    <string name="help_loc">Localisation GPS </string>
     <string name="help_delete_survey">Supprime le relevé</string>
     <string name="help_delete_calib">Supprime l\'étalonnage</string>
     <string name="help_detach">Supprime le choix du DistoX courrant</string>
@@ -619,7 +620,7 @@
     <string name="help_cover">Affiche la distribution des données d\'étalonnage</string>
     <string name="help_compute">Calcule l\'étalonnage</string>
     <string name="help_write">Ecrit les coefficients d\'étalonnage sur le DistoX</string>
-<!-- -->
+<!-- FIXME_SKETCH_3D -->
     <!-- string name="help_refs_model">View mode</string -->
     <!-- string name="help_one_model">Fit 3d model to view</string -->
     <!-- string name="help_surface">Make surface</string -->
@@ -635,12 +636,12 @@
     <!-- string name="help_refine_point">Refine surface at point</string -->
     <!-- string name="help_refine_triangle">Refine surface al the long sides</string -->
   
-
-    <string name="title_calib">Etalonnage</string>
-    <string name="title_coverage">Distributions des données d\'étalonnage</string>
-    <string name="title_coeff">Coefficients d\'étalonnages</string>
+  
+     <string name="title_calib">Calibration</string>
+    <string name="title_coverage">Distributions des données de Calibration</string>
+    <string name="title_coeff">Coefficients de Calibration</string>
     <string name="title_coord">Entrer les Coordonnées du point</string>
-    <string name="title_current_station">stations sauvegardées</string>
+    <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX... Patientez</string>
     <string name="title_draw_area">ZONE %1$s</string>
@@ -649,8 +650,8 @@
     <string name="title_edit">Modifier</string>
     <string name="title_erase">Supprimer</string>
     <string name="title_location">Localisation</string>
-    <string name="title_location_gps">localisation</string>
-    <!-- TODO string name="title_manual">TopoDroid User Manual</string -->
+    <string name="title_location_gps">Localisation</string>
+    <string name="title_manual">TopoDroid Manuel utilisateur</string>
     <string name="title_mode">Mode d\'affichage</string>
     <string name="title_move">Déplacement</string>
     <string name="title_note">Notes du relevé</string>
@@ -663,11 +664,11 @@
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>
 
-    <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- UNUSED string name="title_sketch_shot">New shot</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
-    <!-- UNUSED string name="title_sketch_select">Select item</string -->
+  
+  
+  
+  
+  
 
     <string name="title_stats">Statistiques</string>
     <string name="title_survey">Info du relevé</string>
@@ -675,14 +676,14 @@
     <string name="title_survey_rename">Renommer le relevé sous</string>
     <string name="title_calib_export">Exporter la calibration sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
-
-  <string name="pref_cat_survey">Options du relevé</string>
-  <string name="pref_cat_drawing">Options de dessin</string>
+    
+  <string name="pref_cat_survey">OPTIONS DU RELEVE</string>
+  <string name="pref_cat_drawing">OPTIONS DE DESSIN</string>
   <string name="pref_cat_import_export">IMPORT - EXPORT</string>
-  <string name="pref_cat_calib">Options d\'étalonnage</string>
-  <string name="pref_cat_device">Options du DistoX</string>
-  <!-- UNUSED string name="pref_cat_sketch">Options de dessin</string -->
-  <string name="pref_cat_log">Options de journalisation</string>
+  <string name="pref_cat_calib">OPTIONS DE CALIBRATION</string>
+  <string name="pref_cat_device">OPTIONS DISTOX</string>
+  <!-- UNUSED string name="pref_cat_sketch">OPTIONS 3D</string -->
+  <string name="pref_cat_log">OPTIONS JOURNALISATION</string>
 
   <string name="pref_locale_title">Langue</string>
   <string name="pref_locale_summary">Langue</string>
@@ -692,21 +693,21 @@
   <!-- UNUSED string name="pref_bootloader_title">Chargeur de démarrage</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Activer le chargeur de démarrage</string -->
   <string name="pref_mkeyboard_title">Clavier</string>
-  <string name="pref_mkeyboard_summary">Activer-Desactiver Clavier optionnel</string>
+  <string name="pref_mkeyboard_summary">Activer/Desactiver Clavier optionnel</string>
   <!-- TODO string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <string name="pref_export_shots_title">Format export des données</string>
   <string name="pref_export_shots_summary">Format export des données par defaut</string>
   <string name="pref_extra_buttons_title">Boutons optionels</string>
-  <string name="pref_extra_buttons_summary">Enable main window optional buttons</string>
+  <string name="pref_extra_buttons_summary">Active Boutons suplementaires</string>
   <string name="pref_size_buttons_title">Taille des boutons</string>
   <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons</string>
   <!-- UNUSED string name="pref_size_buttons_message">Entrez la taille de la barre d\'action des boutons [pixels]</string -->
 
-  <!-- TODO string name="pref_leg_shots_title">Leg shots</string -->
-  <!-- TODO string name="pref_leg_shots_summary">Minimum number of shots per leg</string -->
-  <!-- TODO string name="pref_station_prefix_title">Export station prefix</string -->
-  <!-- TODO string name="pref_station_prefix_summary">Export cSurvey station prefix</string -->
+  <string name="pref_leg_shots_title">Nombre Minimum de Tirs</string>
+  <string name="pref_leg_shots_summary">Nombre Minimum de tirs par visées</string>
+  <string name="pref_station_prefix_title">EcSurvey station prefix</string>
+  <string name="pref_station_prefix_summary">Export cSurvey station prefix</string>
   <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
   <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
   <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
@@ -1003,7 +1004,8 @@
 \n\nAucune garantie : en l\'utilisant vous acceptez que l\'auteur ne puisse être responsable d\'une quelconque perte de données, dommages ou quoi que ce soit.
 \n\nConsultez http://sites.google.com/site/speleoapps pour des applications complémentaire et de la documentation.
 \nEnvoyez vos commentaires, rapport de bug, demande de fonctionnalités à : marco.corvi@gmail.com
-\nFrench translation by G. Chardin , updated 29-11-2015 by F. Martin
+\nInitial French translation by G. Chardin 
+\nFrench translation updated 29-11-2015 by F. Martin
     </string>
 <!-- FIXME FIRMWARE
   <string name="firmware_title">Firmware Updater</string>
@@ -1028,5 +1030,4 @@
    <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
    <string name="firmware_file_uploaded">Uploaded firmware file %1$s size %2$d</string>
 -->   
-
 </resources>

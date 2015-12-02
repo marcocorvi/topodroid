@@ -1,5 +1,5 @@
 symbol line
-name clay
+name wall_clay
 name-bg стена_глина
 th_name wall:clay
 group wall
@@ -11,13 +11,11 @@ effect
   lineTo 27 0
   lineTo 27 1
   lineTo 0 1
-  lineTo 5 3
-  lineTo 10 8
-  lineTo 15 3
-  lineTo 20 8
-  lineTo 20 9
-  lineTo 15 4
-  lineTo 10 9
-  lineTo 5 4
+
+  moveTo 2 6
+  cubicTo 2 6 8 -1 12 6
+  cubicTo 12 7 17 14 22 7
+  cubicTo 22 8 17 15 12 8
+  cubicTo 12 7 8 0 2 7
 endeffect
 endsymbol
