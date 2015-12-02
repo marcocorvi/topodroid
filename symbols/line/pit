@@ -8,6 +8,7 @@ name-de Schacht
 name-ru яма
 name-bg отвес
 th_name pit
+group pit
 color 0xff00ff 0xff
 width 8
 csurvey 2 1 3 5

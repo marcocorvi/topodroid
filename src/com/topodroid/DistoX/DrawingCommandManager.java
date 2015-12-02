@@ -1028,6 +1028,9 @@ public class DrawingCommandManager
 
   DrawingLinePath getLineToContinue( LinePoint lp, int type )
   {
+    String group = DrawingBrushPaths.mLineLib.getLineGroup( type );
+    if ( group == null ) return null;
+
     DrawingLinePath ret = null;
     synchronized( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
@@ -1038,30 +1041,32 @@ public class DrawingCommandManager
         final DrawingPath drawingPath = (DrawingPath)cmd;
         if ( drawingPath.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath linePath = (DrawingLinePath)drawingPath;
-          if ( linePath.mLineType == type ) {
+          // if ( linePath.mLineType == type ) 
+          if ( group.equals( DrawingBrushPaths.mLineLib.getLineGroup( linePath.mLineType ) ) )
+          {
             if ( linePath.mFirst.distance( lp ) < 20 || linePath.mLast.distance( lp ) < 20 ) {
-              if ( ret != null ) return null;
+              if ( ret != null ) return null; // ambiguity
               ret = linePath;
             }
           }
         }
       }
     }
-    if ( ret != null ) mSelection.removePath( ret );
+    // if ( ret != null ) mSelection.removePath( ret ); // FIXME do not remove continuation line
     // checkLines();
     return ret;
   }
         
   /** add the points of the first line to the second line
    */
-  void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
-  {
-    synchronized( mCurrentStack ) {
-      line0.append( line );
-      mSelection.insertPath( line0 );
-    }
-    // checkLines();
-  }
+  // void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
+  // {
+  //   synchronized( mCurrentStack ) {
+  //     line0.append( line );
+  //     mSelection.insertPath( line0 );
+  //   }
+  //   // checkLines();
+  // }
 
   private boolean showStationSplays( DrawingPath p, ArrayList<String> splay_stations ) 
   {
@@ -1177,12 +1182,13 @@ public class DrawingCommandManager
           if ( sp != null ) {
             float x, y;
             LinePoint lp = sp.mPoint;
+            DrawingPath item = sp.mItem;
             if ( lp != null ) { // line-point
               x = lp.mX;
               y = lp.mY;
             } else {
-              x = sp.mItem.cx;
-              y = sp.mItem.cy;
+              x = item.cx;
+              y = item.cy;
             }
             path = new Path();
             path.addCircle( x, y, radius, Path.Direction.CCW );
@@ -1197,6 +1203,15 @@ public class DrawingCommandManager
               path.addCircle( lp.mX2, lp.mY2, radius/2, Path.Direction.CCW );
               path.transform( mMatrix );
               canvas.drawPath( path, DrawingBrushPaths.highlightPaint3 );
+            }
+            if ( item.mType == DrawingPath.DRAWING_PATH_LINE ) {
+              DrawingLinePath line = (DrawingLinePath) item;
+              lp = line.mFirst;
+              path = new Path();
+              path.moveTo( lp.mX, lp.mY );
+              path.lineTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
+              path.transform( mMatrix );
+              canvas.drawPath( path, DrawingBrushPaths.fixedYellowPaint );
             }
           }
           radius = radius/3; // 2/zoom;

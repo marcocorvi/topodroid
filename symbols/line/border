@@ -8,6 +8,7 @@ name-de Begrenzung
 name-ru граница
 name-bg граница
 th_name border
+group border
 color 0x00cc00 0xff
 width 1
 csurvey 5 1 2 2

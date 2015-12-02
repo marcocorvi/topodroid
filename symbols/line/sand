@@ -2,6 +2,7 @@ symbol line
 name sand
 name-bg стена_пясък
 th_name wall:sand
+group wall
 color 0xff0000 0xff
 width 1
 csurvey 5 8 3 1

@@ -7,6 +7,7 @@ name-de Wand_geschätzt
 name-ru предположительный
 name-bg предполагаема
 th_name wall:presumed
+group wall
 color 0xff0000 0xff
 width 1
 csurvey 5 8 3 1

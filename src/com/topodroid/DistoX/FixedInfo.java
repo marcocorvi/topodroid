@@ -30,31 +30,31 @@ class FixedInfo
   double asl;      // geoid altitude [m] 
   String comment;
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double alt_wgs84, double alt_ortho, String cmt )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt )
   {
     id = _id;
     name = n;
     lng = longitude;
     lat = latitude;
-    alt = alt_wgs84;
-    asl = alt_ortho;
+    alt = h_ellip;
+    asl = h_geoid;
     comment = cmt;
   }
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double alt_wgs84, double alt_ortho )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid )
   {
     id = _id;
     name = n;
     lng = longitude;
     lat = latitude;
-    alt = alt_wgs84;
-    asl = alt_ortho;
+    alt = h_ellip;
+    asl = h_geoid;
     comment = "";
   }
 
   public String toString()
   {
-    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl) + " " + (int)(alt);
+    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl) + " [wgs " + (int)(alt) + "]";
   }
 
   static String double2string( double x )

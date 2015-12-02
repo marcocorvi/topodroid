@@ -42,6 +42,8 @@ public class DrawingPointLinePath extends DrawingPath
   LinePoint mLast;
   private int mSize;  // number of points
 
+  float mDx, mDy; // unit vector in the direction of this line
+
   int size() { return mSize; }
 
   /* DEBUG
@@ -72,6 +74,13 @@ public class DrawingPointLinePath extends DrawingPath
   //     ++k;
   //   }
   // }
+
+  void moveFirstTo( float x, float y )
+  {
+    mFirst.mX = x;
+    mFirst.mY = y;
+    retracePath();
+  }
     
 
   @Override
@@ -120,6 +129,23 @@ public class DrawingPointLinePath extends DrawingPath
     mFirst   = null;
     mLast    = null;
     mSize    = 0;
+    mDx = mDy = 0;
+  }
+
+  void computeUnitNormal()
+  {
+    mDx = mDy = 0;
+    if ( mFirst != null && mFirst.mNext != null ) {
+      LinePoint second = mFirst.mNext;
+      mDx =   second.mY - mFirst.mY;
+      mDy = - second.mX + mFirst.mX;
+      float d = ( mDx*mDx + mDy*mDy );
+      if ( d > 0 ) {
+        d = (float)Math.sqrt( d );
+        mDx /= d;
+        mDy /= d;
+      }
+    }
   }
 
   /** unlink a line_point
@@ -139,6 +165,7 @@ public class DrawingPointLinePath extends DrawingPath
     lp.mNext = null;
     lp.mPrev = null;
     -- mSize;
+    computeUnitNormal();
   }
 
   LinePoint next( LinePoint lp )
@@ -219,6 +246,8 @@ public class DrawingPointLinePath extends DrawingPath
     mBBox.right  = 0;
     mBBox.top    = 0;
     mBBox.bottom = 0;
+    mDx = 0;
+    mDy = 0;
   }
 
 
@@ -251,6 +280,11 @@ public class DrawingPointLinePath extends DrawingPath
       addStartPoint( first.mX, first.mY );
     }
     addPoint( last.mX, last.mY );
+    if ( with_arrow ) {
+      mDx = mDy = 0;
+    } else {
+      computeUnitNormal();
+    }
     // Log.v( TopoDroidApp.TAG, "make straight final size " + mPoints.size() );
   }
     
@@ -304,19 +338,19 @@ public class DrawingPointLinePath extends DrawingPath
     }
   }
 
-  void append( DrawingPointLinePath line )
-  {
-    if ( line.mSize ==  0 ) return;
-    LinePoint lp = line.mFirst;
-    addPoint( lp.mX, lp.mY );
-    for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-      if ( lp.has_cp ) {
-        addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
-      } else {
-        addPoint( lp.mX, lp.mY );
-      }
-    }
-  }
+  // void append( DrawingPointLinePath line )
+  // {
+  //   if ( line.mSize ==  0 ) return;
+  //   LinePoint lp = line.mFirst;
+  //   addPoint( lp.mX, lp.mY );
+  //   for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+  //     if ( lp.has_cp ) {
+  //       addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+  //     } else {
+  //       addPoint( lp.mX, lp.mY );
+  //     }
+  //   }
+  // }
 
   void resetPath( ArrayList<LinePoint> pts )
   {
@@ -334,6 +368,7 @@ public class DrawingPointLinePath extends DrawingPath
         addPoint( lp.mX, lp.mY );
       }
     }
+    computeUnitNormal();
   }
      
 
@@ -378,6 +413,7 @@ public class DrawingPointLinePath extends DrawingPath
         mPath.lineTo( lp.mX, lp.mY );
       }
     }
+    computeUnitNormal();
   }
 
   void reversePath()
@@ -401,6 +437,7 @@ public class DrawingPointLinePath extends DrawingPath
       lp = prev;
       prev = prev.mPrev;
     }
+    computeUnitNormal(); // FIXME 
   }
 
   float distance( float x, float y )

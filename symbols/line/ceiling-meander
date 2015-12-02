@@ -7,6 +7,7 @@ name-de Deckenmäander
 name-ru меандр_в_потолке
 name-bg меандър_в_тавана
 th_name ceiling-meander
+group ceiling-meander
 color 0xcc00cc 0xff
 width 1
 csurvey 2 1 3 22

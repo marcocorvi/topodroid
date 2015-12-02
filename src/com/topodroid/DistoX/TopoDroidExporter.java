@@ -1170,7 +1170,7 @@ class TopoDroidExporter
   }
 
   // -----------------------------------------------------------------------
-  /** COMMA-SEPARATED VALUES EXPORT 
+  /** CSV COMMA-SEPARATED VALUES EXPORT 
    *  NOTE declination exported in comment only in CSV
    *
    */
@@ -1214,7 +1214,7 @@ class TopoDroidExporter
           } else { // only TO station
             if ( n > 0 && ref_item != null ) {
               b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n, b, c/n );
+              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
@@ -1230,16 +1230,17 @@ class TopoDroidExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.ENGLISH, "-,%s@%s,%.2f,%.1f,%.1f\n", to, info.name, item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.ENGLISH, "-,%s@%s,%.2f,%.1f,%.1f\n", to, info.name,
+              item.mLength * TopoDroidSetting.mCsvLengthUnit, item.mBearing, item.mClino );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
-            //   pw.format("  ; %s\n", item.mComment );
+            //   pw.format(",\"%s\"\n", item.mComment );
             // }
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( n > 0 && ref_item != null ) { // write pervious leg shot
               b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n, b, c/n );
+              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
@@ -1249,20 +1250,21 @@ class TopoDroidExporter
               ref_item = null; 
             }
             // if ( ref_item != null && ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
-            //   pw.format("  ; %s\n", ref_item.mComment );
+            //   pw.format(",\"%s\"\n", ref_item.mComment );
             // }
 
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.ENGLISH, "%s@%s,-,%.2f,%.1f,%.1f\n", from, info.name, item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.ENGLISH, "%s@%s,-,%.2f,%.1f,%.1f\n", from, info.name,
+              item.mLength * TopoDroidSetting.mCsvLengthUnit, item.mBearing, item.mClino );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
-            //   pw.format("  ; %s\n", item.mComment );
+            //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
             if ( n > 0 && ref_item != null ) {
               b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, "%.2f,%.1f,%.1f", l/n, b, c/n );
+              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
@@ -1285,11 +1287,10 @@ class TopoDroidExporter
             c = item.mClino;
           }
         }
-        // pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
       }
       if ( n > 0 && ref_item != null ) {
         b = TopoDroidUtil.in360( b/n );
-        pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n, b, c/n );
+        pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
         if ( duplicate ) {
           pw.format(",L");
           // duplicate = false;

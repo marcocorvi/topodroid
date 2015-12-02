@@ -44,6 +44,7 @@ public class SymbolLine extends Symbol
   Path mPath;
   boolean mStyleStraight;
   int mStyleX;            // X times (one out of how many point to use)
+  String mGroup;          // group of this line (null if no group)
 
   @Override public String getName()  { return mName; }
   @Override public String getThName( ) { return mThName; }
@@ -56,35 +57,38 @@ public class SymbolLine extends Symbol
   // @Override public void setAngle( float angle ) { }
   // @Override public int getAngle() { return 0; }
 
+  public String getGroup() { return mGroup; }
+
   // width = 1;
   // no effect
-  SymbolLine( String name, String th_name, int color )
+  SymbolLine( String name, String th_name, String group, int color )
   {
     super( th_name );
-    init( name, color, 1 );
+    init( name, group, color, 1 );
     makePath();
   }
 
   // no effect
-  SymbolLine( String name, String th_name, int color, float width )
+  SymbolLine( String name, String th_name, String group, int color, float width )
   {
     super( th_name );
-    init( name, color, width );
+    init( name, group, color, width );
     makePath();
   }
 
-  SymbolLine( String name, String th_name, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
+  SymbolLine( String name, String th_name, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
   {
     super( th_name );
-    init( name, color, width );
+    init( name, group, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
     makePath();
   }
 
-  private void init( String name, int color, float width )
+  private void init( String name, String group, int color, float width )
   {
     mName   = name;
+    mGroup  = group;
     mPaint  = new Paint();
     mPaint.setDither(true);
     mPaint.setColor( color );
@@ -150,6 +154,7 @@ public class SymbolLine extends Symbol
     float unit = TopoDroidSetting.mUnit * TopoDroidSetting.mLineThickness;
     String name    = null;
     String th_name = null;
+    String group   = null;
     mHasEffect = false;
     int color  = 0;
     int alpha  = 0xcc;
@@ -176,6 +181,7 @@ public class SymbolLine extends Symbol
   	  if ( vals[k].equals("symbol") ) {
   	    name    = null;
   	    th_name = null;
+            group   = null;
   	    color   = 0x00000000;
   	  } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -186,6 +192,11 @@ public class SymbolLine extends Symbol
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	    if ( k < s ) {
   	      th_name = vals[k];
+  	    }
+  	  } else if ( vals[k].equals("group") ) {
+  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+  	    if ( k < s ) {
+  	      group = vals[k];
   	    }
           } else if ( vals[k].equals("csurvey") ) {
             // syntax: 
@@ -406,6 +417,7 @@ public class SymbolLine extends Symbol
   	    } else {
               mName   = name;
               mThName = th_name;
+              mGroup  = group;
               mPaint  = new Paint();
               mPaint.setDither(true);
               mPaint.setColor( color );

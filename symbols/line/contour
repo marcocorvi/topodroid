@@ -8,6 +8,7 @@ name-de Höhenlinie
 name-ru контур
 name-bg контур
 th_name contour
+group contour
 color 0x33cc66 0xff
 width 1
 csurvey 5 1 2 2

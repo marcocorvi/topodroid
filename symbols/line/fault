@@ -6,6 +6,7 @@ name-fr faute
 name-ru разлом
 name-bg разлом
 th_name fault
+group fault
 color 0xffffff 0x99
 width 1
 csurvey 5 1 2 2

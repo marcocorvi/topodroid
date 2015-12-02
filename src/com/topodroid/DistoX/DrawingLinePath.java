@@ -150,6 +150,8 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
     }
     // Log.v( TopoDroidApp.TAG, "line " + mCnt + " split: " + size() + " --> " + line1.size() + " + " + line2.size() );
+    line1.computeUnitNormal();
+    line2.computeUnitNormal();
     return true;
   }
 
@@ -235,7 +237,6 @@ public class DrawingLinePath extends DrawingPointLinePath
     pw.format("endline\n");
     return sw.getBuffer().toString();
   }
-
 
 }
 

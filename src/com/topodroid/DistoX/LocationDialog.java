@@ -69,8 +69,7 @@ public class LocationDialog extends Dialog
   private TextView mTVasl;
   private EditText mETstation;
   private Button   mBtnLoc;
-  // private Button   mBtnAdd;
-  private Button   mBtnMan;
+  private Button   mBtnAdd;
   private Button   mBtnMobileTopographer;
 
   private Button   mBtnStatus;
@@ -130,8 +129,7 @@ public class LocationDialog extends Dialog
 
     mBtnLoc = (Button) findViewById( R.id.button_loc );
     mBtnStatus = mBtnLoc;
-    // mBtnAdd = (Button) findViewById(R.id.button_add );
-    mBtnMan = (Button) findViewById(R.id.button_manual );
+    mBtnAdd = (Button) findViewById(R.id.button_add );
     mBtnMobileTopographer = (Button) findViewById( R.id.button_mobile_topographer );
 
     File MTdir = new File(MobileTopographerDialog.POINTLISTS);
@@ -142,15 +140,13 @@ public class LocationDialog extends Dialog
     }
 
     mBtnLoc.setOnClickListener( this );
-    // mBtnAdd.setOnClickListener( this );
-    mBtnMan.setOnClickListener( this );
+    mBtnAdd.setOnClickListener( this );
 
     // mBtnCancel = (Button) findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
 
     // mBtnLoc.setEnabled( false );
     // mBtnAdd.setEnabled( false );
-    // mBtnMan.setEnabled( false );
     // mBtnStatus.setBackgroundColor( 0x80ff0000 );
     // mBtnLoc.setText( getResources.getString( R.string.button_gps_start ) );
     
@@ -231,7 +227,6 @@ public class LocationDialog extends Dialog
       mList.invalidate();
       // refreshList();
       mHasLocation = false;
-      // mBtnAdd.setEnabled( false );
     }
   }
 
@@ -248,7 +243,6 @@ public class LocationDialog extends Dialog
   {
     // mBtnLoc.setText( mContext.getResources().getString( R.string.button_gps_stop ) );
     mHasLocation = false;
-    // mBtnAdd.setEnabled( false );
     mBtnStatus.setText( "0" );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
     locManager.addGpsStatusListener( this );
@@ -270,8 +264,7 @@ public class LocationDialog extends Dialog
         }
         mBtnLoc.setEnabled( false );
         mHasLocation = false;
-        // mBtnAdd.setEnabled( false );
-        mBtnMan.setEnabled( false );
+        mBtnAdd.setEnabled( false );
         mBtnMobileTopographer.setEnabled( false );
         CharSequence item = v.getText();
         if ( item == null || item.length() == 0 ) {
@@ -289,7 +282,7 @@ public class LocationDialog extends Dialog
            
         boolean enabled =  ( str != null && str.length() > 0 );
         mBtnLoc.setEnabled( enabled );
-        mBtnMan.setEnabled( enabled );
+        mBtnAdd.setEnabled( enabled );
         mBtnMobileTopographer.setEnabled( enabled );
       }
     }
@@ -308,11 +301,11 @@ public class LocationDialog extends Dialog
       mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
       return;
     }
-    if ( mParent.hasLocation( station ) ) {
-      mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
-      return;
-    }
-    if ( b == mBtnMan ) {
+    // if ( mParent.hasLocation( station ) ) {
+    //   mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
+    //   return;
+    // }
+    if ( b == mBtnAdd ) {
       // stop GPS location and start dialog for lat/long/alt data
       if ( TopoDroidSetting.mKeyboard ) mKeyboard.hide();
       if ( mLocating ) {
@@ -320,7 +313,7 @@ public class LocationDialog extends Dialog
       }
       if ( mHasLocation ) {
         WorldMagneticModel wmm = new WorldMagneticModel( mContext );
-        mHGeoid = wmm.geoidToEllipsoid( mLatitude, mLongitude, mHEllipsoid ); 
+        mHGeoid = wmm.ellipsoidToGeoid( mLatitude, mLongitude, mHEllipsoid ); 
       }
       new LongLatAltDialog( mContext, this ).show();
       // mHasLocation = false;
@@ -430,7 +423,6 @@ public class LocationDialog extends Dialog
         Location loc = locManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
         mHasLocation = (loc != null);
         if ( mHasLocation ) displayLocation( loc );
-        // mBtnAdd.setEnabled( loc != null );
       } catch ( IllegalArgumentException e ) {
         TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "onGpsStatusChanged IllegalArgumentException " );
       } catch ( SecurityException e ) {
@@ -449,7 +441,6 @@ public class LocationDialog extends Dialog
     mHGeoid = asl;
     showLocation();
     mHasLocation = true;
-    // mBtnAdd.setEnabled( true );
   }
 }
 

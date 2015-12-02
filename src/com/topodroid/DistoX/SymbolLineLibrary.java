@@ -134,6 +134,12 @@ class SymbolLineLibrary
     return mAnyLine.get(k).mThName;
   }
 
+  String getLineGroup( int k )
+  {
+    if ( k < 0 || k >= mAnyLineNr ) return null;
+    return mAnyLine.get(k).mGroup;
+  }
+
   Paint getLinePaint( int k, boolean reversed )
   {
     if ( k < 0 || k >= mAnyLineNr ) return null;
@@ -170,14 +176,14 @@ class SymbolLineLibrary
   private void loadSystemLines( Resources res )
   {
     if ( mAnyLine.size() > 0 ) return;
-    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ),  "user", 0xffffffff, 1 );
+    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "user", "user", 0xffffffff, 1 );
     symbol.mCsxLayer = 5;
     symbol.mCsxType  = 4;
     symbol.mCsxCategory = 1;
     symbol.mCsxPen   = 1;
     mAnyLine.add( symbol );
 
-    symbol = new SymbolLine( res.getString( R.string.thl_wall ),  "wall", 0xffff0000, 2 );
+    symbol = new SymbolLine( res.getString( R.string.thl_wall ),  "wall", "wall", 0xffff0000, 2 );
     symbol.mCsxLayer = 5;
     symbol.mCsxType  = 4;
     symbol.mCsxCategory = 1;

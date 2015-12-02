@@ -1832,15 +1832,18 @@ public class DrawingActivity extends ItemDrawer
                         if ( mContinueLine && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                           if ( line != null ) {
-                            // Log.v( "DistoX", "continuing line ");
-                            if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) line.reversePath();
-                            mDrawingSurface.addLineToLine( mCurrentLinePath, line );
-                          } else {
-                            mDrawingSurface.addDrawingPath( lp1 );
+                            // Log.v( "DistoX", "[B] continuing line type " + mCurrentLine );
+                            if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
+                              // line.reversePath();
+                              lp1.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
+                            } else {
+                              lp1.moveFirstTo( line.mLast.mX, line.mLast.mY );
+                            }
+                            // mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                           }
-                        } else {
-                          mDrawingSurface.addDrawingPath( lp1 );
                         }
+                        lp1.computeUnitNormal();
+                        mDrawingSurface.addDrawingPath( lp1 );
                       } else { //  mSymbol == SYMBOL_AREA
                         DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
                           mName+"-a", TopoDroidSetting.mAreaBorder ); 
@@ -1882,6 +1885,7 @@ public class DrawingActivity extends ItemDrawer
 
                       List< DrawingPath > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
                       if ( paths.size() > 0 ) {
+                        mCurrentLinePath.computeUnitNormal();
                         mDrawingSurface.addDrawingPath( mCurrentLinePath );
 
                         String from = "-1";
@@ -1951,18 +1955,22 @@ public class DrawingActivity extends ItemDrawer
                         Toast.makeText( this, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
                       }
                     } else {
-                      if ( mContinueLine ) {
+                      if ( mContinueLine && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+                        // Log.v( "DistoX", "[N] try to continue line type " + mCurrentLine );
                         DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                         if ( line != null ) {
-                          // Log.v( "DistoX", "continuing line ");
-                          if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) line.reversePath();
-                          mDrawingSurface.addLineToLine( mCurrentLinePath, line );
-                        } else {
-                          mDrawingSurface.addDrawingPath( mCurrentLinePath );
+                          // Log.v( "DistoX", "[N] continuing line type " + mCurrentLine );
+                          if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
+                            // line.reversePath();
+                            mCurrentLinePath.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
+                          } else {
+                            mCurrentLinePath.moveFirstTo( line.mLast.mX, line.mLast.mY );
+                          }
+                          // mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                         }
-                      } else {
-                        mDrawingSurface.addDrawingPath( mCurrentLinePath );
                       }
+                      mCurrentLinePath.computeUnitNormal();
+                      mDrawingSurface.addDrawingPath( mCurrentLinePath );
                     }
                   } else { //  mSymbol == SYMBOL_AREA
                     mCurrentAreaPath.close();
@@ -3444,6 +3452,7 @@ public class DrawingActivity extends ItemDrawer
         mCurrentLinePath.addStartPoint( x0, y0 );
         addPointsToLine( mCurrentLinePath, x0, y0, xx, yy );
         addPointsToLine( mCurrentLinePath, xx, yy, x1, y1 );
+        mCurrentLinePath.computeUnitNormal();
         mDrawingSurface.addDrawingPath( mCurrentLinePath );
       }
     } else {
@@ -3461,6 +3470,7 @@ public class DrawingActivity extends ItemDrawer
         xx = xx2;
         yy = yy2;
       }
+      mCurrentLinePath.computeUnitNormal();
       mDrawingSurface.addDrawingPath( mCurrentLinePath );
     }
   }

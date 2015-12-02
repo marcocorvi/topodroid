@@ -275,7 +275,7 @@
   <string-array name="lineStyle">
      <item name="none">Fine</item>
      <item name="two">Normal</item>
-     <item name="two">Coarse</item>
+     <item name="three">Coarse</item>
      <item name="bezier">Bezier</item>
   </string-array>
   <string-array name="lineStyleValue">
@@ -303,6 +303,10 @@
   <string-array name="unitLengthValue">
      <item name="meters">meters</item>
      <item name="feet">feet</item>
+  </string-array>
+  <string-array name="unitLengthNumber">
+     <item name="meters">1</item>
+     <item name="feet">3.28084</item>
   </string-array>
 
   <string-array name="unitAngle">

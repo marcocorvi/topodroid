@@ -20,7 +20,6 @@ import android.util.Log;
 
 class Selection
 {
-  // LinkedList< SelectionPoint > mPoints;
   ArrayList< SelectionPoint > mPoints;
 
   Selection( )

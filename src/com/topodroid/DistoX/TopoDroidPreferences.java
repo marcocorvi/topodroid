@@ -58,7 +58,7 @@ public class TopoDroidPreferences extends PreferenceActivity
   static final int PREF_TOOL_POINT      = 13; 
   static final int PREF_PLOT_WALLS      = 14; 
 
-  static final int PREF_CATEGORY_LOG    = 14; // this must be the last
+  static final int PREF_CATEGORY_LOG    = 15; // this must be the last
 
   private int mPrefCategory = PREF_CATEGORY_ALL; // preference category
 

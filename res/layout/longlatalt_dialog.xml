@@ -69,6 +69,14 @@
       android:orientation="horizontal"
       android:layout_marginTop="2dp"
       >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="40"
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:text="@string/h_ellipsoid"
+        />
       <EditText
         android:id="@+id/edit_alt"
         android:layout_width="0dp"
@@ -89,6 +97,14 @@
       android:orientation="horizontal"
       android:layout_marginTop="2dp"
       >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="40"
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:text="@string/h_geoid"
+        />
       <EditText
         android:id="@+id/edit_asl"
         android:layout_width="0dp"

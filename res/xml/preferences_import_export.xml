@@ -61,6 +61,15 @@
        android:defaultValue="false"
      />
 
+  <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_CSV_LENGTH"
+       android:title="@string/pref_csv_length_title"
+       android:summary="@string/pref_csv_length_summary"
+       android:defaultValue="1"
+       android:entries="@array/unitLength"
+       android:entryValues="@array/unitLengthNumber"
+       />
+
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_BITMAP_SCALE"
        android:title="@string/pref_bitmap_scale_title"

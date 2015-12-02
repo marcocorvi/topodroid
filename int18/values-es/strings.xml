@@ -617,6 +617,8 @@
   <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
   <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->
   <!-- TODO string name="pref_survex_lrud_summary">Add LRUD to Survex export</string -->
+  <!-- TODO string name="pref_csv_length_title">CSV length unit</string -->
+  <!-- TODO string name="pref_csv_length_summary">CSV export length unit</string -->
 
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>

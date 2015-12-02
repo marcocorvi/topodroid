@@ -2,6 +2,7 @@ symbol line
 name debris
 name-bg стена_чакъл
 th_name wall:debris
+group wall
 color 0xff0000 0xff
 width 
 csurvey 5 8 3 1

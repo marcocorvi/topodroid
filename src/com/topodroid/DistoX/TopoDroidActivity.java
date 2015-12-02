@@ -712,6 +712,8 @@ public class TopoDroidActivity extends Activity
     }
     if ( mApp.askSymbolUpdate ) {
       (new TopoDroidVersionDialog(this, mApp)).show();
+      // FIXME SYMBOL is symbol have not been updated TopoDroid exits
+      // if ( mApp.askSymbolUpdate ) finish();
     }
 
     DrawingBrushPaths.doMakePaths( );

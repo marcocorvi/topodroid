@@ -368,10 +368,10 @@ public class DrawingSurface extends SurfaceView
  
     /** add the points of the first line to the second line
      */
-    void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
-    {
-      commandManager.addLineToLine( line, line0 );
-    }
+    // void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
+    // {
+    //   commandManager.addLineToLine( line, line0 );
+    // }
 
     // ---------------------------------------------------------------------
     // SELECT - EDIT
@@ -899,6 +899,8 @@ public class DrawingSurface extends SurfaceView
                         if ( is_not_section ) {
                           path.makeStraight( true );
                         }
+                      } else {
+                        path.computeUnitNormal();
                       }
                       addDrawingPath( path );
                     }

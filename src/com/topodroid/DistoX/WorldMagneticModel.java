@@ -28,6 +28,8 @@ import java.io.IOException;
 
 import android.content.Context;
 
+import android.util.Log;
+
 class WorldMagneticModel
 {
   int nMax;
@@ -75,6 +77,7 @@ class WorldMagneticModel
     geodetic.HeightAboveGeoid = height / 1000; // KM
     geodetic.HeightAboveEllipsoid = -9999;
     mGeoid.convertGeoidToEllipsoidHeight( geodetic );
+    // Log.v("DistoX", "Geoid To Ellipsoid G " + geodetic.HeightAboveGeoid + " E " + geodetic.HeightAboveEllipsoid );
     return geodetic.HeightAboveEllipsoid * 1000; // M
   }
 
@@ -87,6 +90,7 @@ class WorldMagneticModel
     geodetic.HeightAboveGeoid = -9999;
     geodetic.HeightAboveEllipsoid = height / 1000; // KM
     mGeoid.convertEllipsoidToGeoidHeight( geodetic ); 
+    // Log.v("DistoX", "Ellipsoid to Geoid G " + geodetic.HeightAboveGeoid + " E " + geodetic.HeightAboveEllipsoid );
     return geodetic.HeightAboveGeoid * 1000; // M
   }
 

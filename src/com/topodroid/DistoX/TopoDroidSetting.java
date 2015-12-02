@@ -115,6 +115,7 @@ class TopoDroidSetting
     "DISTOX_XTHERION_AREAS",      // save areas a-la xtherion
     "DISTOX_RECENT_NR",           // number of most recent items (item picker)
     "DISTOX_AREA_BORDER",         // area border visibility
+    "DISTOX_CSV_LENGTH",          // CSV export length unit
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -210,6 +211,7 @@ class TopoDroidSetting
   static String mSurvexEol = "\n";
   static boolean mSurvexSplay = false;
   static boolean mSurvexLRUD  = false;
+  static float mCsvLengthUnit = 1; // meters
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
@@ -418,6 +420,21 @@ class TopoDroidSetting
   static float mWallsConcave = 0.1f;
 
   // ------------------------------------------------------------------
+  static private float tryFloat( String value, float cur_value )
+  {
+    try {
+      return Float.parseFloat( value );
+    } catch ( NumberFormatException e ) { }
+    return cur_value;
+  }
+
+  static private int tryInt( String value, int cur_value )
+  {
+    try {
+      return Integer.parseInt( value );
+    } catch ( NumberFormatException e ) { }
+    return cur_value;
+  }
 
   static void loadPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
@@ -733,6 +750,10 @@ class TopoDroidSetting
 
     mAreaBorder = prefs.getBoolean( key[k++], true ); // DISTOX_AREA_BORDER
 
+    try { // DISTOX_CSV_LENGTH
+      f = Float.parseFloat( prefs.getString( key[k++], "1") );
+      if ( f > 0 ) mCsvLengthUnit = f;
+    } catch ( NumberFormatException e ) { }
     try { // DISTOX_WALLS_TYPE
       i = Integer.parseInt(prefs.getString( key[k++], "0" ) ); 
       if ( i >= WALLS_NONE && i < WALLS_MAX ) mWallsType = i;
@@ -1120,9 +1141,14 @@ class TopoDroidSetting
         if ( i >= 3 && i < 7 ) mRecentNr = i;
       } catch ( NumberFormatException e ) { }
 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AREA_BOREDR
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AREA_BORDER
       mAreaBorder = prefs.getBoolean( k, true ); 
 
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_CSV_LENGTH
+      try { 
+        f = Float.parseFloat( prefs.getString( k, "1") );
+        if ( f > 0 ) mCsvLengthUnit = f;
+      } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
       try {
         i = Integer.parseInt(prefs.getString( k, "0" ) ); 
