@@ -685,8 +685,8 @@
   <string name="pref_survex_splay_summary">Добавить пикет ДО к лучасм в Survex</string>
   <string name="pref_survex_lrud_title">Survex ЛПВН</string>
   <string name="pref_survex_lrud_summary">Добавить ЛПВН в при экспорте в формат Survex</string>
-  <!-- TODO string name="pref_csv_length_title">CSV length unit</string -->
-  <!-- TODO string name="pref_csv_length_summary">CSV export length unit</string -->
+  <string name="pref_csv_length_title">Ед. измерения в CSV</string>
+  <string name="pref_csv_length_summary">Единицы измерения при экспорте в CSV</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket создать</string>
@@ -713,12 +713,14 @@
   <string name="pref_crs_message">Введите имя CRS как в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
-  <string name="pref_plot_screen_title">Настройки экрана абриса</string>
+  <string name="pref_plot_screen_title">Настройки экрана абрисов</string>
   <string name="pref_tool_line_title">НАСТРОЙКИ ЛИНИЙ</string>
   <string name="pref_tool_point_title">НАСТРОЙКИ ТОЧЕК</string>
-  <string name="pref_location_title">Настройки местоположения</string>
-  <string name="pref_shot_data_title">НАСТРОЙКА ДАННЫХ ПИКЕТОВ</string>
-  <string name="pref_cwd_title">Корневой каталог</string>
+  <string name="pref_location_title">НАСТРОЙКИ МЕСТОПОЛОЖЕНИЯ</string>
+  <string name="pref_accuracy_title">НАСТРОЙКИ ТОЧНОСТИ</string>
+  <string name="pref_shot_data_title">НАСТРОЙКИ ДАННЫХ ПИКЕТОВ</string>
+  <string name="pref_shot_units_title">ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
+  <string name="pref_cwd_title">Рабочий каталог</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid корневой каталог</string -->
   <!-- UNUSED string name="pref_cwd_message">Введите корневой каталог TopoDroid</string -->
   <string name="pref_pt_color_map_title">Цветовая палитра от PocketTopo</string>
@@ -873,16 +875,12 @@
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
   <string name="pref_side_drag_title">Перетаскивание за сторону</string>
   <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
-  <string name="pref_unit_grid_title">Единицы изм. абриса</string>
+  <string name="pref_unit_grid_title">Единицы изм. в абрисах</string>
   <string name="pref_unit_grid_summary">Шаг сетки абриса</string>
   <string name="pref_recent_nr_title">Кол-во. недавних инструментов</string>
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
   <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
-  <!-- FIXME REPEATED string name="pref_unit_grid_title">Единицы измерения на абрисе</string -->
-  <!-- FIXME REPEATED string name="pref_unit_grid_summary">Размер шага сетки на абрисе</string -->
-  <!-- FIXME REPEATED string name="pref_recent_nr_title">Кол-во недавних инструментов</string -->
-  <!-- FIXME REPEATED string name="pref_recent_nr_summary">Количество недавно использованных инструментов рисования</string -->
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
