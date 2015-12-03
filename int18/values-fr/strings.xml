@@ -67,7 +67,8 @@
     <string name="calib_error">Erreur moyenne : %1$s degrés</string>
     <string name="calib_stddev">Erreur stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Erreur max : %1$.4f degrés</string>
-    <string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string>
+    <!-- TODO string name="calib_ave_std">Accuracy: %1$.4f %2$.4f degrees</string -->
+    <!-- TODO string name="calib_precision">Precision</string -->
     <string name="calib_iter">itérations : %1$d</string>
     <string name="calib_saturated_values">ATTENTION : %1$d Saturation des données</string>
     <string name="algorithm">Algorithme:</string>
@@ -910,6 +911,8 @@
   <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <!-- TODO string name="pref_area_border_title">Area border visibility</string -->
   <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
+  <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
+  <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
 
   <string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string>
   <string name="pref_sketchUsesSplays_summary">Dessiner les surface en utilisant les visées latérales</string>

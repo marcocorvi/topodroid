@@ -67,7 +67,8 @@
     <string name="calib_error">Average error: %1$.4f degrees</string>
     <string name="calib_stddev">Error stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Max. error: %1$.4f degrees</string>
-    <string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string>
+    <string name="calib_ave_std">Accuracy: %1$.4f ± %2$.4f degrees</string>
+    <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_saturated_values">WARNING: %1$d saturated data</string>
     <string name="algorithm">Algorithm:</string>
@@ -909,6 +910,8 @@
   <string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string>
   <string name="pref_area_border_title">Area border visibility</string>
   <string name="pref_area_border_summary">Area border default visibility</string>
+  <string name="pref_cont_join_title">Join continuation</string>
+  <string name="pref_cont_join_summary">Line continuation joins lines</string>
 
   <string name="pref_sketchUsesSplays_title">Sketch splays</string>
   <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>

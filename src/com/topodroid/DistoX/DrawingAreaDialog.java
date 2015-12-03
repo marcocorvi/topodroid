@@ -70,7 +70,7 @@ public class DrawingAreaDialog extends Dialog
     // }
 
     mCBvisible = (CheckBox) findViewById( R.id.area_visible );
-    mCBvisible.setChecked( mArea.mVisible );
+    mCBvisible.setChecked( mArea.isVisible() );
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
     mBtnOk.setOnClickListener( this );
@@ -92,7 +92,7 @@ public class DrawingAreaDialog extends Dialog
       //   String options = mEToptions.getText().toString().trim();
       //   if ( options.length() > 0 ) mArea.mOptions = options;
       // }
-      mArea.mVisible = mCBvisible.isChecked();
+      mArea.setVisible( mCBvisible.isChecked() );
     // } else if ( b == mBtnErase ) {
     //   mParent.deleteArea( mArea );
     // } else if ( b == mBtnCancel ) {

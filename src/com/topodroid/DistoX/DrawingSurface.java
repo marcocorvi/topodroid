@@ -368,10 +368,10 @@ public class DrawingSurface extends SurfaceView
  
     /** add the points of the first line to the second line
      */
-    // void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
-    // {
-    //   commandManager.addLineToLine( line, line0 );
-    // }
+    void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
+    {
+      commandManager.addLineToLine( line, line0 );
+    }
 
     // ---------------------------------------------------------------------
     // SELECT - EDIT
@@ -871,8 +871,8 @@ public class DrawingSurface extends SurfaceView
                   lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME missing line becomes "user"
                 } // else {
                   path = new DrawingLinePath( lnType );
-                  if ( closed ) path.mClosed = true;
-                  if ( reversed ) path.mReversed = true;
+                  path.setClosed( closed );
+                  path.setReversed( reversed );
                   if ( outline != DrawingLinePath.OUTLINE_UNDEF ) path.mOutline = outline;
                   if ( options != null ) path.setOptions( options );
 

@@ -1059,14 +1059,21 @@ public class DrawingCommandManager
         
   /** add the points of the first line to the second line
    */
-  // void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
-  // {
-  //   synchronized( mCurrentStack ) {
-  //     line0.append( line );
-  //     mSelection.insertPath( line0 );
-  //   }
-  //   // checkLines();
-  // }
+  void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
+  {
+    synchronized( mCurrentStack ) {
+      mSelection.removePath( line0 );
+      boolean reverse = line0.mFirst.distance( line.mFirst ) < line0.mLast.distance( line.mFirst );
+      if ( reverse ) line0.reversePath();
+      line0.append( line );
+      if ( reverse ) {
+        line0.reversePath();
+        line0.computeUnitNormal();
+      }
+      mSelection.insertPath( line0 );
+    }
+    // checkLines();
+  }
 
   private boolean showStationSplays( DrawingPath p, ArrayList<String> splay_stations ) 
   {

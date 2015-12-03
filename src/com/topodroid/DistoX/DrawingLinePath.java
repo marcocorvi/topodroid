@@ -41,8 +41,8 @@ public class DrawingLinePath extends DrawingPointLinePath
   // static int mCount = 0;
   // int mCnt;
   int mLineType;
-  boolean mReversed;
   int mOutline; 
+  private boolean mReversed;
   private String mOptions;
 
   public DrawingLinePath( int line_type )
@@ -86,6 +86,23 @@ public class DrawingLinePath extends DrawingPointLinePath
     mOptions = options;
   }
 
+  @Override
+  void computeUnitNormal()
+  {
+    mDx = mDy = 0;
+    if ( mFirst != null && mFirst.mNext != null ) {
+      LinePoint second = mFirst.mNext;
+      mDx =   second.mY - mFirst.mY;
+      mDy = - second.mX + mFirst.mX;
+      float d = ( mDx*mDx + mDy*mDy );
+      if ( d > 0 ) {
+        d = 1 / (float)Math.sqrt( d );
+        if ( mReversed ) d = -d;
+        mDx *= d;
+        mDy *= d;
+      }
+    }
+  }
   /** 
    * @param exclude whether to exclude splitting-point
    */
@@ -161,8 +178,11 @@ public class DrawingLinePath extends DrawingPointLinePath
       mReversed = reversed;
       // retracePath();
       setPaint( DrawingBrushPaths.getLinePaint( mLineType, mReversed ) );
+      computeUnitNormal();
     }
   }
+
+  boolean isReversed() { return mReversed; }
 
   public int lineType() { return mLineType; }
 
@@ -200,7 +220,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("line %s", DrawingBrushPaths.getLineThName(mLineType) );
-    if ( mClosed ) {
+    if ( isClosed() ) {
       pw.format(" -close on");
     }
     if ( mLineType == DrawingBrushPaths.mLineLib.mLineWallIndex ) {

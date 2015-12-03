@@ -67,7 +67,8 @@
     <string name="calib_error">Грешка: %1$.4f градуси</string>
     <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
     <string name="calib_max_error">Макс. грешка: %1$.4f градуси</string>
-    <!-- TODO string name="calib_ave_std">Precision: %1$.4f %2$.4f degrees</string -->
+    <!-- TODO string name="calib_ave_std">Accuracy: %1$.4f %2$.4f degrees</string -->
+    <!-- TODO string name="calib_precision">Precision</string -->
     <string name="calib_iter">Повторения: %1$d</string>
     <string name="calib_saturated_values">ПРЕДУПРЕЖДЕНИЕ: %1$d наситени данни</string>
     <string name="algorithm">Алгоритъм:</string>
@@ -888,6 +889,9 @@
   <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <!-- TODO string name="pref_area_border_title">Area border visibility</string --> 
   <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
+  <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
+  <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
+
   <string name="pref_recent_nr_title">Брой последни инструменти</string>
   <string name="pref_recent_nr_summary">Брой последно използвани инструменти показвани в прозореца</string>
 

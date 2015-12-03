@@ -109,9 +109,9 @@ public class GMActivity extends Activity
   BitmapDrawable mBMwrite_no;
 
   static int menus[] = {
-                        R.string.menu_options,  // 8
                         R.string.menu_display,
                         R.string.menu_validate,
+                        R.string.menu_options, 
                         R.string.menu_help
                      };
 
@@ -125,9 +125,9 @@ public class GMActivity extends Activity
                         R.string.help_write
                       };
   static int help_menus[] = { 
-                        R.string.help_prefs,
                         R.string.help_display_calib,
                         R.string.help_validate,
+                        R.string.help_prefs,
                         R.string.help_help
                       };
   // -------------------------------------------------------------------
@@ -209,7 +209,7 @@ public class GMActivity extends Activity
     int algo = mApp.mDData.selectCalibAlgo( cid );
     boolean nonLinear = false;
     if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
-    // FIXME if ( algo == 2 ) nonLinear = true;
+    if ( algo == 2 ) nonLinear = true;
     Calibration calib1 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
     // Log.v("DistoX", "Calib-1 algo " + algo );
     // calib1.dump();
@@ -218,7 +218,7 @@ public class GMActivity extends Activity
     algo = mApp.mDData.selectCalibAlgo( mApp.mCID );
     nonLinear = false;
     if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
-    // FIXME if ( algo == 2 ) nonLinear = true;
+    if ( algo == 2 ) nonLinear = true;
     Calibration calib0 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
     // Log.v("DistoX", "Calib-0 algo " + algo );
     // calib0.dump();
@@ -517,14 +517,11 @@ public class GMActivity extends Activity
     if ( mMenu == (ListView)parent ) {
       closeMenu();
       int p = 0;
-      if ( p++ == pos ) { // OPTIONS
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
-        startActivity( intent );
-      } else if ( p++ == pos ) { // DISPLAY
+      if ( p++ == pos ) { // DISPLAY
         mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
         updateDisplay( );
       } else if ( p++ == pos ) { // VALIDATE
+        // Toast.makeText( this, "UNDER CONSTRUCTION", Toast.LENGTH_SHORT ).show();
         List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
         list.remove( mApp.myCalib );
         if ( list.size() == 0 ) {
@@ -532,6 +529,10 @@ public class GMActivity extends Activity
         } else {
           (new CalibValidateListDialog( this, this, list )).show();
         }
+      } else if ( p++ == pos ) { // OPTIONS
+        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
+        startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
       }

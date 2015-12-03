@@ -34,8 +34,8 @@ import android.util.Log;
  */
 public class DrawingPointLinePath extends DrawingPath
 {
-  boolean mVisible; // visible line
-  boolean mClosed;
+  private boolean mVisible; // visible line
+  private boolean mClosed;
   // ArrayList< LinePoint > mPoints;      // points (scene coordinates)
   private LinePoint mPrevPoint = null; // previous point while constructing the line
   LinePoint mFirst;
@@ -132,21 +132,13 @@ public class DrawingPointLinePath extends DrawingPath
     mDx = mDy = 0;
   }
 
-  void computeUnitNormal()
-  {
-    mDx = mDy = 0;
-    if ( mFirst != null && mFirst.mNext != null ) {
-      LinePoint second = mFirst.mNext;
-      mDx =   second.mY - mFirst.mY;
-      mDy = - second.mX + mFirst.mX;
-      float d = ( mDx*mDx + mDy*mDy );
-      if ( d > 0 ) {
-        d = (float)Math.sqrt( d );
-        mDx /= d;
-        mDy /= d;
-      }
-    }
-  }
+  void setClosed( boolean closed ) { mClosed = closed; }
+  boolean isClosed() { return mClosed; }
+
+  void setVisible( boolean visible ) { mVisible = visible; }
+  boolean isVisible() { return mVisible; }
+
+  void computeUnitNormal() { mDx = mDy = 0; }
 
   /** unlink a line_point
    */
@@ -338,19 +330,20 @@ public class DrawingPointLinePath extends DrawingPath
     }
   }
 
-  // void append( DrawingPointLinePath line )
-  // {
-  //   if ( line.mSize ==  0 ) return;
-  //   LinePoint lp = line.mFirst;
-  //   addPoint( lp.mX, lp.mY );
-  //   for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-  //     if ( lp.has_cp ) {
-  //       addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
-  //     } else {
-  //       addPoint( lp.mX, lp.mY );
-  //     }
-  //   }
-  // }
+  void append( DrawingPointLinePath line )
+  {
+    if ( line.mSize ==  0 ) return;
+    LinePoint lp = line.mFirst;
+    addPoint( lp.mX, lp.mY );
+    for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+      if ( lp.has_cp ) {
+        addPoint3( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+      } else {
+        addPoint( lp.mX, lp.mY );
+      }
+    }
+    // computeUnitNormal();
+  }
 
   void resetPath( ArrayList<LinePoint> pts )
   {

@@ -115,6 +115,7 @@ class TopoDroidSetting
     "DISTOX_XTHERION_AREAS",      // save areas a-la xtherion
     "DISTOX_RECENT_NR",           // number of most recent items (item picker)
     "DISTOX_AREA_BORDER",         // area border visibility
+    "DISTOX_CONT_JOIN",           // line continuation is join
     "DISTOX_CSV_LENGTH",          // CSV export length unit
 
     "DISTOX_WALLS_TYPE",
@@ -340,6 +341,7 @@ class TopoDroidSetting
 
   static boolean mUnscaledPoints = false;
   static boolean mAreaBorder = true;
+  static boolean mContJoin = false;
 
   static float mUnit = 1.2f; // drawing unit
 
@@ -749,6 +751,7 @@ class TopoDroidSetting
     } catch ( NumberFormatException e ) { }
 
     mAreaBorder = prefs.getBoolean( key[k++], true ); // DISTOX_AREA_BORDER
+    mContJoin = prefs.getBoolean( key[k++], false ); // DISTOX_CONT_JOIN
 
     try { // DISTOX_CSV_LENGTH
       f = Float.parseFloat( prefs.getString( key[k++], "1") );
@@ -1143,6 +1146,8 @@ class TopoDroidSetting
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AREA_BORDER
       mAreaBorder = prefs.getBoolean( k, true ); 
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_CONT_JOIN
+      mContJoin = prefs.getBoolean( k, false ); 
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_CSV_LENGTH
       try { 

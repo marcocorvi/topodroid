@@ -1829,21 +1829,28 @@ public class DrawingActivity extends ItemDrawer
                           BezierPoint p3 = c.getPoint(3);
                           lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
+                        boolean addline = true;
                         if ( mContinueLine && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                           if ( line != null ) {
                             // Log.v( "DistoX", "[B] continuing line type " + mCurrentLine );
-                            if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
-                              // line.reversePath();
-                              lp1.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
+                            if ( TopoDroidSetting.mContJoin && mCurrentLine == line.mLineType ) {
+                              mDrawingSurface.addLineToLine( mCurrentLinePath, line );
+                              addline = false;
                             } else {
-                              lp1.moveFirstTo( line.mLast.mX, line.mLast.mY );
+                              if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
+                                // line.reversePath();
+                                lp1.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
+                              } else {
+                                lp1.moveFirstTo( line.mLast.mX, line.mLast.mY );
+                              }
                             }
-                            // mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                           }
+                        } 
+                        if ( addline ) {
+                          lp1.computeUnitNormal();
+                          mDrawingSurface.addDrawingPath( lp1 );
                         }
-                        lp1.computeUnitNormal();
-                        mDrawingSurface.addDrawingPath( lp1 );
                       } else { //  mSymbol == SYMBOL_AREA
                         DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
                           mName+"-a", TopoDroidSetting.mAreaBorder ); 
@@ -1955,22 +1962,29 @@ public class DrawingActivity extends ItemDrawer
                         Toast.makeText( this, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
                       }
                     } else {
+                      boolean addline= true;
                       if ( mContinueLine && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                         // Log.v( "DistoX", "[N] try to continue line type " + mCurrentLine );
                         DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                         if ( line != null ) {
                           // Log.v( "DistoX", "[N] continuing line type " + mCurrentLine );
-                          if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
-                            // line.reversePath();
-                            mCurrentLinePath.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
+                          if ( TopoDroidSetting.mContJoin && mCurrentLine == line.mLineType ) {
+                            mDrawingSurface.addLineToLine( mCurrentLinePath, line );
+                            addline = false;
                           } else {
-                            mCurrentLinePath.moveFirstTo( line.mLast.mX, line.mLast.mY );
+                            if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
+                              // line.reversePath();
+                              mCurrentLinePath.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
+                            } else {
+                              mCurrentLinePath.moveFirstTo( line.mLast.mX, line.mLast.mY );
+                            }
                           }
-                          // mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                         }
                       }
-                      mCurrentLinePath.computeUnitNormal();
-                      mDrawingSurface.addDrawingPath( mCurrentLinePath );
+                      if ( addline ) {
+                        mCurrentLinePath.computeUnitNormal();
+                        mDrawingSurface.addDrawingPath( mCurrentLinePath );
+                      }
                     }
                   } else { //  mSymbol == SYMBOL_AREA
                     mCurrentAreaPath.close();

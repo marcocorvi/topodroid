@@ -93,7 +93,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("line border -id %s%d -close on ", mPrefix, mAreaCnt );
-    if ( ! mVisible ) pw.format("-visibility off ");
+    if ( ! isVisible() ) pw.format("-visibility off ");
     pw.format("\n");
     // for ( LinePoint pt : mPoints ) 
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 

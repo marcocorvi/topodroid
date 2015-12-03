@@ -75,36 +75,35 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/longitude"
+    <TextView android:id="@+id/longitude"
+        android:layout_below="@id/layout1"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_below="@id/layout1"
         android:text="@string/longitude"
         />
    					  
     <TextView android:id="@+id/latitude"
+        android:layout_below="@id/longitude"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_below="@id/longitude"
         android:text="@string/latitude"
         />
    					  
     <TextView android:id="@+id/h_ellipsoid"
+        android:layout_below="@id/latitude"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_below="@id/latitude"
         android:text="@string/h_ellipsoid"
         />
 
     <TextView android:id="@+id/h_geoid"
+        android:layout_below="@id/h_ellipsoid"
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_below="@id/latitude"
         android:text="@string/h_geoid"
         />
 

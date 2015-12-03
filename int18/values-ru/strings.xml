@@ -69,7 +69,8 @@
     <string name="calib_error">Ошибка: %1$.4f градусов</string>
     <string name="calib_stddev">Ошибка ст-откл: %1$.4f градусов</string>
     <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
-    <string name="calib_ave_std">Точность: %1$.4f %2$.4f градусов</string>
+    <!-- FIXME string name="calib_ave_std">Точность: %1$.4f %2$.4f градусов</string -->
+    <!-- TODO string name="calib_precision">Precision</string -->
     <string name="calib_iter">Итерации: %1$d</string>
     <string name="calib_saturated_values">ВНИМАНИЕ: %1$d saturated data</string>
     <string name="algorithm">Алгоритм:</string>
@@ -881,6 +882,8 @@
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
   <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
+  <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
+  <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>

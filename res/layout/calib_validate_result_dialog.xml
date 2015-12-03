@@ -14,22 +14,28 @@
         android:layout_height="wrap_content" 
         />
     <TextView android:id="@+id/avestd1"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         />
+    <TextView 
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/calib_precision"
+        />
     <TextView android:id="@+id/error1"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         />
     <TextView android:id="@+id/error2"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         />
     <TextView android:id="@+id/error_max"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         />

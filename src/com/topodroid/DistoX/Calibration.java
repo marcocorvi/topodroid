@@ -56,6 +56,13 @@ public class Calibration
 
   // ==============================================================
 
+  static private Vector scaledVector( Vector v ) { return scaledVector( v.x, v.y, v.z ); }
+
+  static private Vector scaledVector( float x, float y, float z )
+  {
+    return new Vector( x/TopoDroidUtil.FV, y/TopoDroidUtil.FV, z/TopoDroidUtil.FV );
+  }
+
   void EnforceMax2( Vector b, Matrix a )
   {
     double max = Math.abs( b.x );
@@ -154,15 +161,17 @@ public class Calibration
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
-  private long roundV( float x )
+  static private long roundV( float x )
   {
-    long v = (long)Math.round(x * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    long v = (long)Math.round(x * TopoDroidUtil.FV);
+    if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
     return v;
   }
 
-  private long roundM( float x )
+  static private long roundM( float x )
   {
-    long v = (long)Math.round(x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    long v = (long)Math.round(x * TopoDroidUtil.FM);
+    if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
     return v;
   }
 
@@ -454,8 +463,10 @@ public class Calibration
     if ( idx >= num ) {
       return;
     }
-    g[idx] = new Vector( gx/TopoDroidUtil.FV, gy/TopoDroidUtil.FV, gz/TopoDroidUtil.FV );
-    m[idx] = new Vector( mx/TopoDroidUtil.FV, my/TopoDroidUtil.FV, mz/TopoDroidUtil.FV );
+    // g[idx] = new Vector( gx/TopoDroidUtil.FV, gy/TopoDroidUtil.FV, gz/TopoDroidUtil.FV );
+    // m[idx] = new Vector( mx/TopoDroidUtil.FV, my/TopoDroidUtil.FV, mz/TopoDroidUtil.FV );
+    g[idx] = scaledVector( gx, gy, gz );
+    m[idx] = scaledVector( mx, my, mz );
     group[idx] = group0;
 
     if ( TopoDroidLog.LOG_CALIB ) {
@@ -602,8 +613,10 @@ public class Calibration
 
   private void computeBearingAndClinoRad( Vector g0, Vector m0 )
   {
-    Vector g = g0.mult( 1.0f / TopoDroidUtil.FV );
-    Vector m = m0.mult( 1.0f / TopoDroidUtil.FV );
+    // Vector g = g0.mult( 1.0f / TopoDroidUtil.FV );
+    // Vector m = m0.mult( 1.0f / TopoDroidUtil.FV );
+    Vector g = scaledVector( g0 );
+    Vector m = scaledVector( m0 );
     g.Normalized();
     m.Normalized();
     Vector e = new Vector( 1.0f, 0.0f, 0.0f );
@@ -899,8 +912,10 @@ public class Calibration
 
   /** compute the unit vector direction of sensor-data (g,m)
    */
-  Vector computeDirection( Vector g, Vector m )
+  Vector computeDirection( Vector g1, Vector m1 )
   {
+    Vector g = scaledVector( g1 );
+    Vector m = scaledVector( m1 );
     Vector gr;
     Vector mr = m;
     if ( mNonLinear ) {
@@ -935,10 +950,16 @@ public class Calibration
    * this approximates the angle between the two directions:
    *   error = 2 tan(alpha/2) 
    */
-  void addErrorStats( Vector g[], Vector m[] )
+  void addErrorStats( Vector g1[], Vector m1[] )
   {
-    int size = g.length;
+    int size = g1.length;
+    Vector g[] = new Vector[ size ];
+    Vector m[] = new Vector[ size ];
     Vector gl[] = new Vector[ size ];
+    for ( int k=0; k<size; ++k ) {
+      g[k] = scaledVector( g1[k] );
+      m[k] = scaledVector( m1[k] );
+    }
     // Log.v("DistoX", "size " + size );
     if ( mNonLinear ) {
       Matrix gs = new Matrix();
