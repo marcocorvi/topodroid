@@ -21,7 +21,7 @@ package com.topodroid.DistoX;
 
 class MagLatLong
 {
-  double lat;
-  double lng;
+  double lat;      // latitude [decimal deg]
+  double lng;      // longitude [decimal deg]
 }
 

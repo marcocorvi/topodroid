@@ -20,12 +20,12 @@ import java.util.Locale;
 /** fixed (GPS) point
  * Note the order of data: LONGITUDE - LATITUDE - ALTITUDE
  */
-class FixedInfo
+class FixedInfo extends MagLatLong
 {
   Long   id;       // fixed id
   String name;     // station name, or whatever
-  double lng;      // longitude [decimal deg]
-  double lat;      // latitude [decimal deg]
+  // double lat;      // latitude [decimal deg]
+  // double lng;      // longitude [decimal deg]
   double alt;      // wgs84 altitude [m]
   double asl;      // geoid altitude [m] 
   String comment;
@@ -34,8 +34,8 @@ class FixedInfo
   {
     id = _id;
     name = n;
-    lng = longitude;
     lat = latitude;
+    lng = longitude;
     alt = h_ellip;
     asl = h_geoid;
     comment = cmt;
@@ -45,8 +45,8 @@ class FixedInfo
   {
     id = _id;
     name = n;
-    lng = longitude;
     lat = latitude;
+    lng = longitude;
     alt = h_ellip;
     asl = h_geoid;
     comment = "";
