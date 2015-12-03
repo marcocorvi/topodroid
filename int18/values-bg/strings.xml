@@ -60,15 +60,15 @@
     <string name="calib_compute_coeffs">Изчисляване на калибр. коефициенти...</string>
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
-    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
+    <string name="calib_validation">Проверка на %1$s срещу %2$s</string>
     <string name="connect_failed">Невъзможна връзка</string>
     <string name="data"> измервания</string>
     <string name="using">Използва се %1$s %2$s</string>
     <string name="calib_error">Грешка: %1$.4f градуси</string>
-    <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
+    <string name="calib_stddev">Грешка ст. откл.: %1$.4f градуси</string>
     <string name="calib_max_error">Макс. грешка: %1$.4f градуси</string>
-    <!-- TODO string name="calib_ave_std">Accuracy: %1$.4f %2$.4f degrees</string -->
-    <!-- TODO string name="calib_precision">Precision</string -->
+    <string name="calib_ave_std">Точност: %1$.4f %2$.4f градуси</string>
+    <string name="calib_precision">Прецизност</string>
     <string name="calib_iter">Повторения: %1$d</string>
     <string name="calib_saturated_values">ПРЕДУПРЕЖДЕНИЕ: %1$d наситени данни</string>
     <string name="algorithm">Алгоритъм:</string>
@@ -111,7 +111,7 @@
 
     <string name="few_data">Няма достатъчно данни</string>
     <string name="few_plots">Няма достатъчно скици</string>
-    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
+    <string name="few_calibs">Няма достатъчно калибрации</string>
 
     <string name="import_title">Импортиране на файл</string>
     <string name="import_wait">Импортиране... Моля изчакайте...</string>
@@ -137,12 +137,12 @@
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
     <string name="altitude">Надм. височина</string>
-    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
-    <!-- TODO string name="h_geoid">H geoid </string -->
+    <string name="h_ellipsoid">Вис. елипсоид.</string>
+    <string name="h_geoid">Вис. геоид</string>
     <string name="latitude">Геогр. широчина</string>
     <string name="longitude">Геогр. дължина</string>
-    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
-    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
+    <string name="h_ellipsoid_hint">Височина по елипсоид [м]</string>
+    <string name="h_geoid_hint">Височина по геоид [м]</string>
     <string name="latitude_hint">Шир. гг:мм:сс.ссс</string>
     <string name="longitude_hint">Дълж. гг:мм:сс.ссс</string>
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
@@ -250,7 +250,7 @@
     <string name="menu_stats">Статистика</string>
     <string name="menu_survey">Инфо за картировката</string>
     <string name="menu_sync">Синхронизиране</string>
-    <!-- TODO string name="menu_validate">VALIDATE</string -->
+    <string name="menu_validate">Проверка</string>
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
     <string name="popup_snap_ln">Прикачване към близка линия</string>
@@ -419,7 +419,7 @@
     <string name="button_delete"    >Изтриване </string>
     <string name="button_eval"      >Оценка    </string>
     <string name="button_eval_cal"  >Оц./кал.  </string>
-    <!-- TODO string name="button_geomag"    >Declination</string -->
+    <string name="button_geomag"    >Деклинация</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
@@ -545,7 +545,7 @@
     <!-- UNUSED string name="help_splay">Автоматично определяне на репери за страничните отсечки</string -->
     <string name="help_display">Избор на данни за показване в таблицата</string>
     <string name="help_display_calib">Показване на изтрити отсечки</string>
-    <!-- TODO string name="help_validate">Validate calibration</string -->
+    <string name="help_validate">Проверка на калибрацията</string>
     <string name="help_overview">Общ изглед на всички скици</string>
     <string name="help_plot">Режим на скициране</string>
     <string name="help_note">Редактиране на бележки</string>
@@ -693,8 +693,8 @@
   <string name="pref_survex_splay_summary">Добавяне на ДО в края на стран. изм. в Survex</string>
   <string name="pref_survex_lrud_title">Survex Ляво/Дясно/Горе/Долу</string>
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
-  <!-- TODO string name="pref_csv_length_title">CSV length unit</string -->
-  <!-- TODO string name="pref_csv_length_summary">CSV export length unit</string -->
+  <string name="pref_csv_length_title">CSV мерни единици</string -->
+  <string name="pref_csv_length_summary">Единици за дължина при експорт CSV</string>
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
@@ -885,12 +885,12 @@
   <string name="pref_side_drag_summary">Скролиране с дърпане на страничната част на скицата</string>
   <string name="pref_unit_grid_title">Мерни единици на скицата</string>
   <string name="pref_unit_grid_summary">Размер на квадрат от мрежата</string>
-  <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
-  <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
-  <!-- TODO string name="pref_area_border_title">Area border visibility</string --> 
-  <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
-  <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
-  <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
+  <string name="pref_recent_nr_title">Брой последни инструменти</string>
+  <string name="pref_recent_nr_summary">Брой показвани последни инструменти в прозореца</string>
+  <string name="pref_area_border_title">Видима граница на площ</string> 
+  <string name="pref_area_border_summary">Дали линията "граница" на площ да е видима</string>
+  <string name="pref_cont_join_title">Свързване на линии при продължаване</string>
+  <string name="pref_cont_join_summary">Опцията "продължаване" на линия свързва еднакви линии</string>
 
   <string name="pref_recent_nr_title">Брой последни инструменти</string>
   <string name="pref_recent_nr_summary">Брой последно използвани инструменти показвани в прозореца</string>
