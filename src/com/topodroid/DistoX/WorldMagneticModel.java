@@ -155,34 +155,110 @@ class WorldMagneticModel
 
   // --------------------------------------------------
 
-  private static int byteToInt( byte[] bval )
-  {
-    int i0 = (int)(bval[0]); if ( i0 < 0 ) i0 = 256 + i0;
-    int i1 = (int)(bval[1]); if ( i1 < 0 ) i1 = 256 + i1;
-    int i2 = (int)(bval[2]); if ( i2 < 0 ) i2 = 256 + i2;
-    int i3 = (int)(bval[3]); if ( i3 < 0 ) i3 = 256 + i3;
-    // System.out.println( "Bytes " + bval[0] + " " + bval[1] + " " + bval[2] + " " + bval[3] );
-    // System.out.println( "Ints " + i0 + " " + i1 + " " + i2 + " " + i3 );
-    // return (i0 | (i1<<8) | (i2<<16) | (i3<<24));
-    return (((i3*256 + i2)*256 + i1)*256 + i0);
-  }
+  // private static int byteToInt( byte[] bval )
+  // {
+  //   int i0 = (int)(bval[0]); if ( i0 < 0 ) i0 = 256 + i0;
+  //   int i1 = (int)(bval[1]); if ( i1 < 0 ) i1 = 256 + i1;
+  //   int i2 = (int)(bval[2]); if ( i2 < 0 ) i2 = 256 + i2;
+  //   int i3 = (int)(bval[3]); if ( i3 < 0 ) i3 = 256 + i3;
+  //   // System.out.println( "Bytes " + bval[0] + " " + bval[1] + " " + bval[2] + " " + bval[3] );
+  //   // System.out.println( "Ints " + i0 + " " + i1 + " " + i2 + " " + i3 );
+  //   // return (i0 | (i1<<8) | (i2<<16) | (i3<<24));
+  //   return (((i3*256 + i2)*256 + i1)*256 + i0);
+  // }
 
+  final static int N = 1038961;
+  final static int ND = 7002;
+
+  // this is correct
+  static int byteToInt( byte b[] )
+  {
+    int i3 = (int)b[3]; 
+    int i2 = (int)b[2]; if ( (b[2] & 0x80) == 0x80 ) i2 = 256+i2;
+    int i1 = (int)b[1]; if ( (b[1] & 0x80) == 0x80 ) i1 = 256+i1;
+    int i0 = (int)b[0]; if ( (b[0] & 0x80) == 0x80 ) i0 = 256+i0;
+    int ret = (i3 << 24) | (i2 << 16) | (i1 << 8) | (i0);
+    return ret;
+  }
+  
+  static int byteToFirst( byte b[] )
+  {
+    int ret = (((int)b[0]) << 4) | (((int)b[1] & 0xF0)>>4);
+    return ret;
+  }
+  
+  static int byteToSecond( byte b[] )
+  {
+    int ret = (((int)b[2]) << 4) | ((int)b[1] & 0x0F);
+    return ret;
+  }
+  
 
   private static void loadEGM9615( Context context )
   {
     if ( mGeoidHeightBuffer != null ) return;
+    mGeoidHeightBuffer = new float[ N ];
     try {
-      byte[] bval = new byte[4];
-      DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615" ) );
-      int N = 1038961;
-      mGeoidHeightBuffer = new float[ (int)N ];
-      for ( int k=0; k < N; ++k ) {
-        fis.read( bval );
-        int ival = byteToInt( bval );
-	float val = ival / 1000.0f;
-	mGeoidHeightBuffer[k] = val;
+      // byte[] bval = new byte[4];
+      // DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615" ) );
+      // for ( int k=0; k < N; ++k ) {
+      //   fis.read( bval );
+      //   int ival = byteToInt( bval );
+      //   float val = ival / 1000.0f;
+      //   mGeoidHeightBuffer[k] = val;
+      // }
+      // fis.close();
+  
+      byte b4[] = new byte[4];
+      byte b3[] = new byte[3];
+      byte b2[] = new byte[2];
+  
+      int res[]   = new int[ N ];
+      int delta[] = new int[ ND ];
+      int dval1, dval2;
+
+      DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615.1024" ) );
+      fis.read( b4 );
+      int kold = 0;
+      res[kold] = byteToInt( b4 );
+      for ( int nk=0; nk<ND; ++nk ) {
+        fis.read( b4 );
+        int oldval = byteToInt( b4 );
+        int dval = oldval >> 18;
+        int dk   = oldval & 0x03ffff; // if ( dval < 0 ) dk ^= 0x03ffff;
+        kold += dk + 1;
+	if ( kold < N ) {
+          res[kold] = dval; // dval is res[kold] - res[kold-1];
+	}
+        delta[nk] = dk;
+      }
+      kold = 0;
+      for ( int nk=0; nk<ND; ++nk ) {
+        int nj = delta[nk];
+        kold ++; // skip one res
+        for ( int j=1; j<nj; j+=2 ) {
+          fis.read( b3 );
+          dval1 = byteToFirst( b3 );
+          if ( dval1 >= 2048 ) dval1 -= 4096;
+          res[kold++] = dval1;
+          dval2 = byteToSecond( b3 );
+          if ( dval2 >= 2048 ) dval2 -= 4096;
+          res[kold++] = dval2;
+        }
+        if ( (nj%2) == 1 ) {
+          fis.read( b2 );
+          dval1 = byteToFirst( b2 );
+          if ( dval1 >= 2048 ) dval1 -= 4096;
+          res[kold++] = dval1;
+        }
       }
       fis.close();
+    
+      mGeoidHeightBuffer[0] = res[0] / 1000.0f;
+      for ( int k=1; k<N; ++k ) {
+        res[k] += res[k-1];
+        mGeoidHeightBuffer[k] = res[k] / 1000.0f;
+      }
     } catch ( IOException e ) {
       // TODO 
     }

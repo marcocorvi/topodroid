@@ -102,9 +102,33 @@ public class Calibration
     coeffToG( coeff, bG, aG );
     coeffToM( coeff, bM, aM );
     coeffToNL( coeff, nL );
-    // Log.v("DistoX", "G " + bG.x + " " + bG.y + " " + bG.z + " " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
-    // Log.v("DistoX", "M " + bM.x + " " + bM.y + " " + bM.z + " " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
-    // Log.v("DistoX", "NL " + nL.x + " " + nL.y + " " + nL.z );
+  }
+
+  void dump()
+  {
+    StringWriter sw1 = new StringWriter();
+    PrintWriter pw1 = new PrintWriter( sw1 );
+    pw1.format("G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z );
+    Log.v("DistoX", sw1.getBuffer().toString() );
+
+    Log.v("DistoX", "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
+    Log.v("DistoX", "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
+    Log.v("DistoX", "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
+
+    StringWriter sw5 = new StringWriter();
+    PrintWriter pw5 = new PrintWriter( sw5 );
+    pw5.format("M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z );
+    Log.v("DistoX", sw5.getBuffer().toString() );
+    
+    Log.v("DistoX", "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
+    Log.v("DistoX", "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
+    Log.v("DistoX", "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
+
+    StringWriter sw9 = new StringWriter();
+    PrintWriter pw9 = new PrintWriter( sw9 );
+    pw9.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z );
+    Log.v("DistoX", sw9.getBuffer().toString() );
+    
   }
 
   public Calibration( int N, TopoDroidApp app, boolean nonLinear )
@@ -130,86 +154,98 @@ public class Calibration
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
+  private long roundV( float x )
+  {
+    long v = (long)Math.round(x * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    return v;
+  }
+
+  private long roundM( float x )
+  {
+    long v = (long)Math.round(x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    return v;
+  }
+
   public byte[] GetCoeff()
   {
     if ( aG == null ) return null;
     byte[] coeff = new byte[ 52 ]; // FIXME nrCoeff()
     long v;
-    v  = (long)(bG.x * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v  = roundV( bG.x );
     coeff[ 0] = (byte)(v & 0xff);
     coeff[ 1] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.x.x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.x.x );
     coeff[ 2] = (byte)(v & 0xff);
     coeff[ 3] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.x.y * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.x.y );
     coeff[ 4] = (byte)(v & 0xff);
     coeff[ 5] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.x.z * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.x.z );
     coeff[ 6] = (byte)(v & 0xff);
     coeff[ 7] = (byte)((v>>8) & 0xff);
 
-    v = (long)(bG.y * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundV( bG.y );
     coeff[ 8] = (byte)(v & 0xff);
     coeff[ 9] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.y.x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.y.x );
     coeff[10] = (byte)(v & 0xff);
     coeff[11] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.y.y * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.y.y );
     coeff[12] = (byte)(v & 0xff);
     coeff[13] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.y.z * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.y.z );
     coeff[14] = (byte)(v & 0xff);
     coeff[15] = (byte)((v>>8) & 0xff);
 
-    v = (long)(bG.z * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundV( bG.z );
     coeff[16] = (byte)(v & 0xff);
     coeff[17] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.z.x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.z.x );
     coeff[18] = (byte)(v & 0xff);
     coeff[19] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.z.y * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.z.y );
     coeff[20] = (byte)(v & 0xff);
     coeff[21] = (byte)((v>>8) & 0xff);
-    v = (long)(aG.z.z * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aG.z.z );
     coeff[22] = (byte)(v & 0xff);
     coeff[23] = (byte)((v>>8) & 0xff);
     
-    v = (long)(bM.x * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundV(bM.x );
     coeff[24] = (byte)(v & 0xff);
     coeff[25] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.x.x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.x.x );
     coeff[26] = (byte)(v & 0xff);
     coeff[27] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.x.y * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.x.y );
     coeff[28] = (byte)(v & 0xff);
     coeff[29] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.x.z * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.x.z );
     coeff[30] = (byte)(v & 0xff);
     coeff[31] = (byte)((v>>8) & 0xff);
 
-    v = (long)(bM.y * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundV( bM.y );
     coeff[32] = (byte)(v & 0xff);
     coeff[33] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.y.x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.y.x );
     coeff[34] = (byte)(v & 0xff);
     coeff[35] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.y.y * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.y.y );
     coeff[36] = (byte)(v & 0xff);
     coeff[37] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.y.z * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = (long)Math.round(aM.y.z );
     coeff[38] = (byte)(v & 0xff);
     coeff[39] = (byte)((v>>8) & 0xff);
 
-    v = (long)(bM.z * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundV( bM.z );
     coeff[40] = (byte)(v & 0xff);
     coeff[41] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.z.x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.z.x );
     coeff[42] = (byte)(v & 0xff);
     coeff[43] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.z.y * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.z.y );
     coeff[44] = (byte)(v & 0xff);
     coeff[45] = (byte)((v>>8) & 0xff);
-    v = (long)(aM.z.z * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
+    v = roundM( aM.z.z );
     coeff[46] = (byte)(v & 0xff);
     coeff[47] = (byte)((v>>8) & 0xff);
 
@@ -217,6 +253,7 @@ public class Calibration
       coeff[48] = floatToByteNL( nL.x );
       coeff[49] = floatToByteNL( nL.y );
       coeff[50] = floatToByteNL( nL.z );
+      // Log.v("DistoX", "NL to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + nL.x + " " + nL.y + " " + nL.z );
     } else {
       coeff[48] = (byte)( 0xff );
       coeff[49] = (byte)( 0xff );
@@ -234,6 +271,7 @@ public class Calibration
     for ( int k=0; k<kk; ++k ) {
       cs.insert(k, (char)(coeff[k]) );
     }
+    // Log.v( "DistoX", "coeff to string " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
     return cs.toString();
   }
 
@@ -262,6 +300,7 @@ public class Calibration
       coeff[50] = (byte)( 0xff );
       coeff[51] = (byte)( 0xff );
       for ( int k=0; k<kk; ++k ) coeff[k] = (byte)( cs.charAt(k) );
+      // Log.v( "DistoX", "string to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
     }
     return coeff;
   }
@@ -363,14 +402,18 @@ public class Calibration
   //
   private static float byteToFloatNL( byte b )
   {
-    int c0 = (int)(b) + 1; if ( c0 >= 128 ) c0 = c0 - 256;
+
+    int c0 = 1 + (int)(b);
+    if ( c0 >= 128 ) c0 = c0 - 256;
     return c0 / TopoDroidUtil.FN;
   }
 
   private static byte floatToByteNL( float x )
   {
-    long v = (long)(x * TopoDroidUtil.FN); if ( v <= 0 ) v = 0xff + v;
-    return (byte)( (v-1) & 0xff );
+    float xf = x * TopoDroidUtil.FN; 
+    int v = (int)Math.round( xf ) - 1; 
+    if ( v <= 0 ) v = 0x100 + v;
+    return (byte)( v & 0xff );
   }
 
   // FIXME
@@ -392,6 +435,7 @@ public class Calibration
       nl.x = byteToFloatNL( coeff[48] );
       nl.y = byteToFloatNL( coeff[49] );
       nl.z = byteToFloatNL( coeff[50] );
+      // Log.v("DistoX", "coeff to NL " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + nl.x + " " + nl.y + " " + nl.z );
     } else {
       nl.x = 0;
       nl.y = 0;
@@ -469,6 +513,7 @@ public class Calibration
     nL = new Vector();   // inittialize to zero vector
   }
 
+  // compute (gxp, mxp)
   private void OptVectors( Vector gr, Vector mr, float s, float c )
   {
     Vector no = gr.cross( mr );
@@ -478,8 +523,8 @@ public class Calibration
     mxp =   (gxp.mult(c)).plus( (no.cross(gxp)).mult(s) );
   }
 
-  private void TurnVectors( Vector gf, Vector mf, Vector gr, Vector mr,
-                            boolean print )
+  // compute (gxt, mxt)  
+  private void TurnVectors( Vector gf, Vector mf, Vector gr, Vector mr )
   {
     float s1 = gr.z * gf.y - gr.y * gf.z + mr.z * mf.y - mr.y * mf.z;
     float c1 = gr.y * gf.y + gr.z * gf.z + mr.y * mf.y + mr.z * mf.z;
@@ -488,11 +533,6 @@ public class Calibration
     c1 /= d1;
     gxt = gf.TurnX( s1, c1 );
     mxt = mf.TurnX( s1, c1 );
-    // if ( print ) {
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "TurnVectors", s1, c1 );
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "TurnVectors", -1, gf, gxt );
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "TurnVectors", -1, mf, mxt );
-    // }
   }
 
 /* ============================================================ */
@@ -537,7 +577,7 @@ public class Calibration
   private void checkOverflow( Vector v, Matrix m )
   {
     float mv = v.maxAbsValue() * TopoDroidUtil.FV;
-    float mm = m.maxAbsValue() * TopoDroidUtil.FV;
+    float mm = m.maxAbsValue() * TopoDroidUtil.FM;
     if ( mv > mm ) mm = mv;
     if ( mm > 256*128 ) {
       mv = 256*128 / mm;
@@ -546,21 +586,18 @@ public class Calibration
     }
   }
 
+  private float saturate( float x )
+  {
+    int ix = (int)(x * TopoDroidUtil.FN);
+    if ( ix > 127 ) { ix = 127; } else if ( ix < -127 ) { ix = -127; }
+    return ix / TopoDroidUtil.FN;
+  }
+
   private void saturate( Vector nl )
   {
-    int x = (int)(nl.x * TopoDroidUtil.FN);
-    int y = (int)(nl.y * TopoDroidUtil.FN);
-    int z = (int)(nl.z * TopoDroidUtil.FN);
-    // float max = 127.0f / TopoDroidUtil.FN;
-    if ( x >  127 ) x =  127;
-    if ( x < -127 ) x = -127;
-    if ( y >  127 ) y =  127;
-    if ( y < -127 ) y = -127;
-    if ( z >  127 ) z =  127;
-    if ( z < -127 ) z = -127;
-    nl.x = x / TopoDroidUtil.FN;
-    nl.y = y / TopoDroidUtil.FN;
-    nl.z = z / TopoDroidUtil.FN;
+    nl.x = saturate( nl.x );
+    nl.y = saturate( nl.y );
+    nl.z = saturate( nl.z );
   }
 
   private void computeBearingAndClinoRad( Vector g0, Vector m0 )
@@ -618,7 +655,7 @@ public class Calibration
       if ( group[i] > 0 ) {
         invNum += 1.0f;
         sa += ( g[i].cross( m[i] )).Length(); // cross product
-        ca += g[i].dot( m[i] );               // dor product
+        ca += g[i].dot( m[i] );               // dot product
         sumG.add( g[i] );
         sumM.add( m[i] );
         sumG2.add( new Matrix(g[i],g[i]) );   // outer product
@@ -644,17 +681,17 @@ public class Calibration
     // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "Number", nn );
     // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "invG", invG, avG );
     // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "invM", invM, avM ); // this is OK
-    LogMatrixVector( "initial inverse|average G", invG, avG );
-    LogMatrixVector( "initial inverse|average M", invM, avM );
+    // LogMatrixVector( "initial inverse|average G", invG, avG );
+    // LogMatrixVector( "initial inverse|average M", invM, avM );
 
-    InitializeAB( avG, avM );
+    InitializeAB( avG, avM ); // nL is also initialized to Vector_Zero
     // LogAB( 0, aG, bG, aM, bM ); // this is OK
 
     int it = 0;
     float da = (float)Math.sqrt( ca*ca + sa*sa );
     float s = sa / da;
     float c = ca / da;
-    LogSC( "sin/cos", s, c ); // this is OK
+    // LogSC( "sin/cos", s, c ); // this is OK
 // FIXME NL
     // float alpha = (float)Math.atan2( sa, ca );
 
@@ -663,14 +700,11 @@ public class Calibration
       for ( int i=0; i<nn; ++i ) {
         if ( group[i] > 0 ) {
           if ( mNonLinear ) {
-            gr[i] = bG.plus( aG.timesV(gl[i]) );
+            gr[i] = bG.plus( aG.timesV(gl[i]) ); // NON_LINEAR: gl instead of g
           } else {
             gr[i] = bG.plus( aG.timesV(g[i]) );
           }
           mr[i] = bM.plus( aM.timesV(m[i]) );
-          // if ( i < 4 ) {
-          //  LogVectors( "GR", i, gr[i], mr[i] ); // this is OK at the first iteration
-          // }
         }
       }
       sa = 0.0f;
@@ -689,32 +723,21 @@ public class Calibration
             // group == 0 means to skip
             //
             if ( group[i] > 0 ) {
-              TurnVectors( gr[i], mr[i], gr[first], mr[first], i<4 ); // output ==> gxt, mxt
-              // if ( i < 4 ) {
-              //   LogVectors( "GR ", i, gr[i], mr[i] );
-              //   LogVectors( "GXT", i, gxt,   mxt );
-              // }
+              TurnVectors( gr[i], mr[i], gr[first], mr[first] ); // output ==> gxt, mxt
               grp.add( gxt );
               mrp.add( mxt );
             }
             ++ i;
           }
           OptVectors( grp, mrp, s, c ); // output ==> gxp, mxp
-          // if ( group0 < 2 ) {
-          //   LogVectors( "grp", group0, grp, mrp );
-          //   LogVectors( "gxp", group0, gxp, mxp );
-          // }
 
           sa += (mrp.cross(gxp)).Length();
           ca += mrp.dot(gxp);
           for (int j = first; j < i; ++j ) {
             if ( group[j] != 0 ) {
-              TurnVectors( gxp, mxp, gr[j], mr[j], j<4 ); // output ==> gxt, mxt
+              TurnVectors( gxp, mxp, gr[j], mr[j] ); // output ==> gxt, mxt
               gx[j] = new Vector( gxt );
               mx[j] = new Vector( mxt );
-              if ( group0 == 1 ) {
-                LogVectors( "gx", group0, gx[j], mx[j] );
-              }
             }
           }
         }
@@ -722,7 +745,7 @@ public class Calibration
       da = (float)Math.sqrt( ca*ca + sa*sa );
       s = sa / da;
       c = ca / da;
-      LogSC( "sin/cos", s, c );
+      // LogSC( "sin/cos", s, c );
       Vector avGx = new Vector();
       Vector avMx = new Vector();
       Matrix sumGxG = new Matrix();
@@ -732,7 +755,7 @@ public class Calibration
           avGx.add( gx[i] );
           avMx.add( mx[i] );
           if ( mNonLinear ) {
-            sumGxG.add( new Matrix( gx[i], gl[i] ) );
+            sumGxG.add( new Matrix( gx[i], gl[i] ) ); // NON_LINEAR gl instead of g
           } else {
             sumGxG.add( new Matrix( gx[i], g[i] ) );
           }
@@ -743,21 +766,23 @@ public class Calibration
       aM0 = new Matrix( aM );
       avGx.scaleBy( invNum );
       avMx.scaleBy( invNum );
-      LogMatrixVector( "average G", sumGxG, avGx );
-      LogMatrixVector( "average M", sumMxM, avMx );
+      // LogMatrixVector( "average G", sumGxG, avGx );
+      // LogMatrixVector( "average M", sumMxM, avMx );
 
       aG = (sumGxG.minus( new Matrix(avGx, sumG) )).timesT( invG ); // multiplication by the transposed
       aM = (sumMxM.minus( new Matrix(avMx, sumM) )).timesT( invM );
-      aG.z.y = (aG.y.z + aG.z.y) / 2.0f;
+
+      aG.z.y = (aG.y.z + aG.z.y) * 0.5f; // enforce symmetric aG(y,z)
       aG.y.z = aG.z.y;
-      bG = avGx.minus( aG.timesV(avG) );
+
+      bG = avGx.minus( aG.timesV(avG) ); // get new bG and bM
       bM = avMx.minus( aM.timesV(avM) );
-      LogMatrixVector( "G", aG, bG );
-      LogMatrixVector( "M", aM, bM );
+      // LogMatrixVector( "G", aG, bG );
+      // LogMatrixVector( "M", aM, bM );
+
       float gmax = aG.MaxDiff(aG0);
       float mmax = aM.MaxDiff(aM0);
-      if ( mNonLinear ) {
-        // get new non-linearity coefficients
+      if ( mNonLinear ) { // get new non-linearity coefficients
         Matrix psum = new Matrix();
         Vector qsum = new Vector();
         for (int ii = 0; ii < nn; ii++) {
@@ -773,14 +798,13 @@ public class Calibration
         }
         nL = ( psum.InverseT()).timesV( qsum );
         saturate( nL );
-        // recalculate linearized g values
-        sumG  = new Vector();
+
+        sumG  = new Vector(); // recalculate linearized g values
         sumG2 = new Matrix();
         for (int ii = 0; ii < nn; ii++) {
           if ( group[ii] > 0 ) {
             gl[ii] = g[ii].plus( gs[ii].timesV( nL ) );
-            // sum up g and g^2
-            sumG.add( gl[ii] );
+            sumG.add( gl[ii] ); // sum up g and g^2
             sumG2.add( new Matrix(gl[ii], gl[ii]) ); // outer product
           }
         }
@@ -795,8 +819,6 @@ public class Calibration
     checkOverflow( bG, aG );
     checkOverflow( bM, aM );
 
-    mDelta = 0.0f;
-    mDelta2 = 0.0f;
     for ( int i=0; i<nn; ++i ) {
       if ( group[i] > 0 ) {
         if ( mNonLinear ) { 
@@ -809,6 +831,8 @@ public class Calibration
     }
     long group0 = -1;
     long cnt = 0;
+    mDelta  = 0.0f;
+    mDelta2 = 0.0f;
     for ( int i=0; i<nn; ) {
       if ( group[i] <= 0 ) {
         ++i;
@@ -819,7 +843,7 @@ public class Calibration
         int first = i;
         while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
           if ( group[i] != 0 ) {
-            TurnVectors( gr[i], mr[i], gr[first], mr[first], i<4 );
+            TurnVectors( gr[i], mr[i], gr[first], mr[first] );
             grp.add( gxt );
             mrp.add( mxt );
           }
@@ -838,7 +862,7 @@ public class Calibration
             Vector v = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
                                    (float)Math.cos(c0) * (float)Math.sin(b0),
                                    (float)Math.sin(c0) );
-            err[j] = v0.minus(v).Length(); // approx angle with sin/tan
+            err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
             mDelta  += err[j];
             mDelta2 += err[j] * err[j];
             ++ cnt;
@@ -848,7 +872,7 @@ public class Calibration
     }
     mDelta  = mDelta / cnt;
     mDelta2 = (float)Math.sqrt(mDelta2/cnt - mDelta*mDelta);
-    mDelta  = mDelta * TopoDroidUtil.RAD2GRAD;
+    mDelta  = mDelta  * TopoDroidUtil.RAD2GRAD;
     mDelta2 = mDelta2 * TopoDroidUtil.RAD2GRAD;
 
     EnforceMax2( bG, aG );
@@ -938,7 +962,7 @@ public class Calibration
         gr[i] = bG.plus( aG.timesV(g[i]) );
       }
       mr[i] = bM.plus( aM.timesV(m[i]) );
-      TurnVectors( gr[i], mr[i], gr[0], mr[0], false );
+      TurnVectors( gr[i], mr[i], gr[0], mr[0] );
       grp.add( gxt );
       mrp.add( mxt );
     }

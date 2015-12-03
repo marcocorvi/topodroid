@@ -206,18 +206,22 @@ public class GMActivity extends Activity
     }
 
     String coeffStr = mApp.mDData.selectCalibCoeff( cid );
-    // int algo = mApp.mDData.selectCalibAlgo( cid );
+    int algo = mApp.mDData.selectCalibAlgo( cid );
     boolean nonLinear = false;
-    // if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
-    // if ( algo == 2 ) nonLinear = true;
+    if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
+    // FIXME if ( algo == 2 ) nonLinear = true;
     Calibration calib1 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+    // Log.v("DistoX", "Calib-1 algo " + algo );
+    // calib1.dump();
 
     coeffStr = mApp.mDData.selectCalibCoeff( mApp.mCID );
-    // algo = mApp.mDData.selectCalibAlgo( mApp.mCID );
-    // nonLinear = false;
-    // if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
-    // if ( algo == 2 ) nonLinear = true;
+    algo = mApp.mDData.selectCalibAlgo( mApp.mCID );
+    nonLinear = false;
+    if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
+    // FIXME if ( algo == 2 ) nonLinear = true;
     Calibration calib0 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+    // Log.v("DistoX", "Calib-0 algo " + algo );
+    // calib0.dump();
 
     computeErrorStats( calib0, list1 );
     computeErrorStats( calib1, list );
