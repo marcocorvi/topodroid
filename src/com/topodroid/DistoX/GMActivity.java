@@ -680,7 +680,7 @@ public class GMActivity extends Activity
     mButton1[5].setEnabled( enable );
     mButton1[6].setEnabled( enable && mEnableWrite );
     if ( enable ) {
-      setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+      setTitleColor( TopoDroidConst.COLOR_NORMAL );
       // mButton1[1].setBackgroundResource( icons00[1] );
       // mButton1[5].setBackgroundResource( icons00[5] );
       mButton1[1].setBackgroundDrawable( mBMtoggle );

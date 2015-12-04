@@ -61,6 +61,7 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected void onPostExecute( Boolean result )
   {
+    mEnableButtons.enableButtons( true );
     if ( result ) {
       String[] items = new String[8];
       Vector bg = new Vector();
@@ -87,6 +88,5 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
     } else {
       Toast.makeText( mApp, R.string.read_failed, Toast.LENGTH_SHORT).show();
     }
-    mEnableButtons.enableButtons( true );
   }
 }

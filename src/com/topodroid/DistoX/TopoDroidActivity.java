@@ -390,7 +390,7 @@ public class TopoDroidActivity extends Activity
   // ---------------------------------------------------------------
   // FILE IMPORT
   
-  private class ImportTherionTask extends AsyncTask<String , Integer, Long >
+  private class ImportTherionTask extends AsyncTask<String, Integer, Long >
   {
     @Override
     protected Long doInBackground( String... str )
@@ -422,7 +422,7 @@ public class TopoDroidActivity extends Activity
     }
   }
  
-  private class ImportCompassTask extends AsyncTask<String , Integer, Long >
+  private class ImportCompassTask extends AsyncTask<String, Integer, Long >
   {
     @Override
     protected Long doInBackground( String... str )
@@ -553,7 +553,7 @@ public class TopoDroidActivity extends Activity
 
    
   
-  private class ImportZipTask extends AsyncTask<String , Integer, Long >
+  private class ImportZipTask extends AsyncTask< String, Integer, Long >
   {
     TopoDroidActivity activity;
 
@@ -716,9 +716,26 @@ public class TopoDroidActivity extends Activity
       // if ( mApp.askSymbolUpdate ) finish();
     }
 
-    DrawingBrushPaths.doMakePaths( );
-
     // setTitleColor( 0x006d6df6 );
+
+    // new AsyncTask<Void,Void,Void>() {
+    //   @Override
+    //   protected Void doInBackground(Void... arg0) 
+    //   { 
+    //     DrawingBrushPaths.doMakePaths( );
+    //     WorldMagneticModel.loadEGM9615( mApp );
+    //     // int n_terms = MagUtil.CALCULATE_NUMTERMS( 12 );
+    //     // WorldMagneticModel.loadWMM( mApp, n_terms );
+    //     return null;
+    //   }
+    // };
+    new Thread() {
+      @Override
+      public void run() {
+        DrawingBrushPaths.doMakePaths( );
+        WorldMagneticModel.loadEGM9615( mApp );
+      }
+    }.start();
 
   }
   

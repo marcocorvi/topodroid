@@ -52,30 +52,30 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 
 <h4>SURVEY SETTINGS</h4>
 <ul>
-  <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with.</li>
-  <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station naming policy.</a></li>
-  <li><i>Station names</i> specifies the type of the station names, either alphanumeric (default) or numeric [B].</li>
-  <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog.</li>
-  <li><i>Thumbnail size</i>: size of the photo thumbnails</li>
+  <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with. [default unset]</li>
+  <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station naming policy.</a> [default "splays+foresight"]</li>
+  <li><i>Station names</i> specifies the type of the station names, either alphanumeric or numeric [default "alphanumeric"]</li>
+  <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog. [default unset]</li>
+  <li><i>Thumbnail size</i>: size of the photo thumbnails [default 200, min 80, max 400]</li>
   <li><i>DATA UNITS >></i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Length units</i>: either meters or feet</li>
-    <li><i>Angle units</i>: either degrees or grads</li>
-    <li><i>Sketch grid-cell unit</i>: either meters ot yards</li>
+    <li><i>Length units</i>: either meters or feet [default meters]</li>
+    <li><i>Angle units</i>: either degrees or grads [default degrees]</li>
+    <li><i>Sketch grid-cell unit</i>: either meters ot yards [default meters]</li>
     </ul>
   </li>
   <li><i>SHOT DATA >></i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg</li>
-    <li><i>Minimum leg shots</i>: minimum number of close consecutive shots for a leg.</li>
-    <li><i>Splay vertical threshold</i> defines how the <a href="page_extend.htm">splay "extend"</a> is set</li>
-    <li><i>Leg vertical threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold</li>
-    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_extend.htm">extend reference</a></li>
-    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors</li>
-    <li><i>Backsight</i> fields in the shot manual input dialog [N]</li>
-    <li><i>Magnetic anomaly</i> compensation. It requires backsight auto-station policy</li>
-    <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors</li>
-    <li><i>Beep volume</i>: timer beep volume [N]</li>
+    <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg [default 0.05, min 0]</li>
+    <li><i>Minimum leg shots</i>: minimum number of close consecutive shots for a leg.[default 2, min 2, max 4]</li>
+    <li><i>Splay vertical threshold</i> defines how the <a href="page_extend.htm">splay "extend"</a> is set [default 10, min 0, max 90]</li>
+    <li><i>Leg vertical threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold [default 80, min 0, max 90]</li>
+    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_extend.htm">extend reference</a> [default ???]</li>
+    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors [default "no"]</li>
+    <li><i>Backsight</i> fields in the shot manual input dialog [N] [default "no"]</li>
+    <li><i>Magnetic anomaly</i> compensation. It requires backsight auto-station policy [default "off"]</li>
+    <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0]</li>
+    <li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100]</li>
     </ul>
   </li>  
   <li><i>LOCATION <a href="page_location.htm">settings</a></i></li>  

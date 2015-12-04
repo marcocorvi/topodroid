@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.Math;
+
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.DashPathEffect;
@@ -19,9 +21,6 @@ import android.graphics.Matrix;
 import android.content.res.Resources;
 
 // import android.util.Log;
-
-import java.lang.Math;
-
 
 /**
  * gereric brush 
@@ -191,6 +190,8 @@ public class DrawingBrushPaths
 
   static void doMakePaths()
   {
+    // Log.v("DistoX", "doMakePaths");
+
     highlightPaint = new Paint();
     highlightPaint.setDither(true);
     highlightPaint.setColor( highlightColor );

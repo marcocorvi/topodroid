@@ -45,6 +45,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.os.Debug;
+import android.os.AsyncTask;
 
 import android.app.Application;
 import android.app.KeyguardManager;
@@ -656,8 +657,7 @@ public class TopoDroidApp extends Application
   boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || mDevice == null ) return false;
-    mComm.readCoeff( mDevice.mAddress, coeff );
-    return true;
+    return mComm.readCoeff( mDevice.mAddress, coeff );
   }
 
   // called by CalibToggleTask.doInBackground

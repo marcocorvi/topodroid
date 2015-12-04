@@ -194,115 +194,121 @@ class WorldMagneticModel
   }
   
 
-  private static void loadEGM9615( Context context )
+  static void loadEGM9615( Context context )
   {
-    if ( mGeoidHeightBuffer != null ) return;
-    mGeoidHeightBuffer = new float[ N ];
-    try {
-      // byte[] bval = new byte[4];
-      // DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615" ) );
-      // for ( int k=0; k < N; ++k ) {
-      //   fis.read( bval );
-      //   int ival = byteToInt( bval );
-      //   float val = ival / 1000.0f;
-      //   mGeoidHeightBuffer[k] = val;
-      // }
-      // fis.close();
+    // Log.v("DistoX", "load EGM9615");
+    {
+      if ( mGeoidHeightBuffer != null ) return;
+      mGeoidHeightBuffer = new float[ N ];
+      try {
+        // byte[] bval = new byte[4];
+        // DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615" ) );
+        // for ( int k=0; k < N; ++k ) {
+        //   fis.read( bval );
+        //   int ival = byteToInt( bval );
+        //   float val = ival / 1000.0f;
+        //   mGeoidHeightBuffer[k] = val;
+        // }
+        // fis.close();
   
-      byte b4[] = new byte[4];
-      byte b3[] = new byte[3];
-      byte b2[] = new byte[2];
+        byte b4[] = new byte[4];
+        byte b3[] = new byte[3];
+        byte b2[] = new byte[2];
   
-      int res[]   = new int[ N ];
-      int delta[] = new int[ ND ];
-      int dval1, dval2;
+        int res[]   = new int[ N ];
+        int delta[] = new int[ ND ];
+        int dval1, dval2;
 
-      DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615.1024" ) );
-      fis.read( b4 );
-      int kold = 0;
-      res[kold] = byteToInt( b4 );
-      for ( int nk=0; nk<ND; ++nk ) {
+        DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615.1024" ) );
         fis.read( b4 );
-        int oldval = byteToInt( b4 );
-        int dval = oldval >> 18;
-        int dk   = oldval & 0x03ffff; // if ( dval < 0 ) dk ^= 0x03ffff;
-        kold += dk + 1;
-	if ( kold < N ) {
-          res[kold] = dval; // dval is res[kold] - res[kold-1];
-	}
-        delta[nk] = dk;
-      }
-      kold = 0;
-      for ( int nk=0; nk<ND; ++nk ) {
-        int nj = delta[nk];
-        kold ++; // skip one res
-        for ( int j=1; j<nj; j+=2 ) {
-          fis.read( b3 );
-          dval1 = byteToFirst( b3 );
-          if ( dval1 >= 2048 ) dval1 -= 4096;
-          res[kold++] = dval1;
-          dval2 = byteToSecond( b3 );
-          if ( dval2 >= 2048 ) dval2 -= 4096;
-          res[kold++] = dval2;
+        int kold = 0;
+        res[kold] = byteToInt( b4 );
+        for ( int nk=0; nk<ND; ++nk ) {
+          fis.read( b4 );
+          int oldval = byteToInt( b4 );
+          int dval = oldval >> 18;
+          int dk   = oldval & 0x03ffff; // if ( dval < 0 ) dk ^= 0x03ffff;
+          kold += dk + 1;
+          if ( kold < N ) {
+            res[kold] = dval; // dval is res[kold] - res[kold-1];
+          }
+          delta[nk] = dk;
         }
-        if ( (nj%2) == 1 ) {
-          fis.read( b2 );
-          dval1 = byteToFirst( b2 );
-          if ( dval1 >= 2048 ) dval1 -= 4096;
-          res[kold++] = dval1;
+        kold = 0;
+        for ( int nk=0; nk<ND; ++nk ) {
+          int nj = delta[nk];
+          kold ++; // skip one res
+          for ( int j=1; j<nj; j+=2 ) {
+            fis.read( b3 );
+            dval1 = byteToFirst( b3 );
+            if ( dval1 >= 2048 ) dval1 -= 4096;
+            res[kold++] = dval1;
+            dval2 = byteToSecond( b3 );
+            if ( dval2 >= 2048 ) dval2 -= 4096;
+            res[kold++] = dval2;
+          }
+          if ( (nj%2) == 1 ) {
+            fis.read( b2 );
+            dval1 = byteToFirst( b2 );
+            if ( dval1 >= 2048 ) dval1 -= 4096;
+            res[kold++] = dval1;
+          }
         }
+        fis.close();
+      
+        mGeoidHeightBuffer[0] = res[0] / 1000.0f;
+        for ( int k=1; k<N; ++k ) {
+          res[k] += res[k-1];
+          mGeoidHeightBuffer[k] = res[k] / 1000.0f;
+        }
+      } catch ( IOException e ) {
+        // TODO 
       }
-      fis.close();
-    
-      mGeoidHeightBuffer[0] = res[0] / 1000.0f;
-      for ( int k=1; k<N; ++k ) {
-        res[k] += res[k-1];
-        mGeoidHeightBuffer[k] = res[k] / 1000.0f;
-      }
-    } catch ( IOException e ) {
-      // TODO 
+      // System.out.println("loaded EGM9615");
     }
-    // System.out.println("loaded EGM9615");
+    // Log.v("DistoX", "load EGM9615 done");
   }
 
-  private static void loadWMM( Context context, int num_terms )
+  static void loadWMM( Context context, int num_terms )
   {
-    if ( mWmmCoeff != null ) return;
-    mWmmCoeff = new WMMcoeff[ num_terms ];
-    for ( int k=0; k<num_terms; ++k ) mWmmCoeff[k] = null;
-    
-    try {
-      InputStreamReader fr = new InputStreamReader( context.getAssets().open( "wmm/wmm.cof" ) );
-      BufferedReader br = new BufferedReader( fr );
-      String line = br.readLine().trim();
-      String[] vals = line.split(" ");
-      float start = Float.parseFloat( vals[0] );
-      // System.out.println("Start Epoch " + start );
-      mStartEpoch = new MagDate( start );
-      for ( ; ; ) {
-        line = br.readLine().trim();
-        if ( line.startsWith("99999") ) break;
-	vals = line.split(" ");
-	int j = 0; while ( vals[j].length() == 0 ) ++j;
-	int n = Integer.parseInt( vals[j] );
-	++j; while ( vals[j].length() == 0 ) ++j;
-	int m = Integer.parseInt( vals[j] );
-	++j; while ( vals[j].length() == 0 ) ++j;
-	float v0 = Float.parseFloat( vals[j] );
-	++j; while ( vals[j].length() == 0 ) ++j;
-	float v1 = Float.parseFloat( vals[j] );
-        ++j; while ( vals[j].length() == 0 ) ++j;
-	float v2 = Float.parseFloat( vals[j] );
-        ++j; while ( vals[j].length() == 0 ) ++j;
-	float v3 = Float.parseFloat( vals[j] );
-        int index = WMMcoeff.index( n, m );
-        // System.out.println(" N,M " + n + " " + m + " " + v0 + " " + v1 );
-	mWmmCoeff[index] = new WMMcoeff( n, m, v0, v1, v2, v3 );
+    {
+      if ( mWmmCoeff != null ) return;
+      mWmmCoeff = new WMMcoeff[ num_terms ];
+      for ( int k=0; k<num_terms; ++k ) mWmmCoeff[k] = null;
+      
+      try {
+        InputStreamReader fr = new InputStreamReader( context.getAssets().open( "wmm/wmm.cof" ) );
+        BufferedReader br = new BufferedReader( fr );
+        String line = br.readLine().trim();
+        String[] vals = line.split(" ");
+        float start = Float.parseFloat( vals[0] );
+        // System.out.println("Start Epoch " + start );
+        mStartEpoch = new MagDate( start );
+        for ( ; ; ) {
+          line = br.readLine().trim();
+          if ( line.startsWith("99999") ) break;
+          vals = line.split(" ");
+          int j = 0; while ( vals[j].length() == 0 ) ++j;
+          int n = Integer.parseInt( vals[j] );
+          ++j; while ( vals[j].length() == 0 ) ++j;
+          int m = Integer.parseInt( vals[j] );
+          ++j; while ( vals[j].length() == 0 ) ++j;
+          float v0 = Float.parseFloat( vals[j] );
+          ++j; while ( vals[j].length() == 0 ) ++j;
+          float v1 = Float.parseFloat( vals[j] );
+          ++j; while ( vals[j].length() == 0 ) ++j;
+          float v2 = Float.parseFloat( vals[j] );
+          ++j; while ( vals[j].length() == 0 ) ++j;
+          float v3 = Float.parseFloat( vals[j] );
+          int index = WMMcoeff.index( n, m );
+          // System.out.println(" N,M " + n + " " + m + " " + v0 + " " + v1 );
+          mWmmCoeff[index] = new WMMcoeff( n, m, v0, v1, v2, v3 );
+        }
+        fr.close();
+      } catch( IOException e ) {
+        // TODO 
       }
-      fr.close();
-    } catch( IOException e ) {
-      // TODO 
+      // System.out.println("loaded WMM");
     }
-    // System.out.println("loaded WMM");
   }
 }

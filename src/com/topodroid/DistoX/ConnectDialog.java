@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 
 import android.content.Context;
 import android.content.Intent;

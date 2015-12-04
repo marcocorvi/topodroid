@@ -25,7 +25,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 
 import android.content.Context;
 import android.content.Intent;
