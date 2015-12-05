@@ -211,7 +211,7 @@
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string>
-    <string name="no_survey">Съёмка не аыбрана.</string>
+    <string name="no_survey">Съёмка не выбрана.</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol не установлен</string -->
     <string name="no_thmanager">ThManager не установлен</string>
     <string name="no_db_viewer">Приложение просмотра баз данных не найдено</string>
@@ -856,7 +856,7 @@
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
-  <string name="pref_xtherion_areas_title">области xtherion</string>
+  <string name="pref_xtherion_areas_title">Области xtherion</string>
   <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
