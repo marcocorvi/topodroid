@@ -698,8 +698,8 @@
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <string name="pref_export_shots_title">Format export des données</string>
   <string name="pref_export_shots_summary">Format export des données par defaut</string>
-  <string name="pref_extra_buttons_title">Boutons optionels</string>
-  <string name="pref_extra_buttons_summary">Active Boutons suplementaires</string>
+  <string name="pref_extra_buttons_title">Niveau d\'Utilisation</string>
+  <string name="pref_extra_buttons_summary">Active des options suplementaires</string>
   <string name="pref_size_buttons_title">Taille des boutons</string>
   <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons</string>
   <!-- UNUSED string name="pref_size_buttons_message">Entrez la taille de la barre d\'action des boutons [pixels]</string -->
