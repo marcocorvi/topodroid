@@ -67,8 +67,8 @@
     <string name="calib_error">Erreur moyenne : %1$s degrés</string>
     <string name="calib_stddev">Erreur stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Erreur max : %1$.4f degrés</string>
-    <!-- TODO string name="calib_ave_std">Accuracy: %1$.4f %2$.4f degrees</string -->
-    <!-- TODO string name="calib_precision">Precision</string -->
+    <string name="calib_ave_std">Précision ave_std: %1$.4f %2$.4f degrees</string>
+    <string name="calib_precision">Précision</string>
     <string name="calib_iter">itérations : %1$d</string>
     <string name="calib_saturated_values">ATTENTION : %1$d Saturation des données</string>
     <string name="algorithm">Algorithme:</string>
