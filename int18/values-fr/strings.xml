@@ -719,19 +719,19 @@
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Créer socket</string>
-  <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
-  <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_title">Type de Disto</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Modele de DistoX</string -->
   <string name="pref_comm_retry_title">Tentative de communication</string>
   <string name="pref_comm_retry_summary">Nombre max. de tentatives</string>
   <string name="pref_comm_retry_dialogtitle">Nombre max. de tentatives</string>
   <string name="pref_comm_retry_message">Nombre max. de tentatives</string>
-  <!-- TODO string name="pref_conn_mode_title">Connection mode</string -->
-  <!-- TODO string name="pref_conn_mode_summary">How to connect to the DistoX</string -->
-  <!-- TODO string name="pref_auto_reconnect_title">Auto reconnect</string -->
-  <!-- TODO string name="pref_auto_reconnect_summary">Reconnect when connection is lostX</string -->
+  <string name="pref_conn_mode_title">Mode de connexion</string>
+  <string name="pref_conn_mode_summary">Comment connecter le DistoX</string>
+  <string name="pref_auto_reconnect_title">Reconnexion automatique</string>
+  <string name="pref_auto_reconnect_summary">Reconnecter quand la connexion est perdue</string>
   <!-- TODO string name="pref_auto_pair_title">Auto pairing</string -->
   <!-- TODO string name="pref_auto_pair_summary">Pair with device after scan</string -->
-  <!-- TODO string name="pref_socket_delay_title">Connection delay</string -->
+  <string name="pref_socket_delay_title">Delai de connexion</string>
   <!-- TODO string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string -->
   <!-- TODO string name="pref_socket_delay_dialogtitle">Connection delay on pairing</string -->
   <!-- TODO string name="pref_socket_delay_message">Connection delay to allow pairing [0.1 sec]</string -->
@@ -743,18 +743,18 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
 
-  <!-- TODO string name="pref_plot_screen_title">Sketch screen settings</string -->
-  <!-- TODO string name="pref_tool_line_title">LINE TOOLS</string -->
-  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
-  <!-- TODO string name="pref_location_title">Location settings</string -->
-  <!-- TODO string name="pref_accuracy_title">ACCURACY</string -->
-  <!-- TODO string name="pref_shot_data_title">SHOT DATA SETTINGS</string -->
-  <!-- TODO string name="pref_shot_units_title">UNITS</string -->
+  <string name="pref_plot_screen_title">OPTIONS ECRAN DESSIN</string>
+  <string name="pref_tool_line_title">OUTILS LIGNE</string>
+  <string name="pref_tool_point_title">OUTILS POINTS</string>
+  <string name="pref_location_title">OPTIONS LOCALISATION</string>
+  <string name="pref_accuracy_title">PRÉCISION</string>
+  <string name="pref_shot_data_title">OPTIONS DONNEES VISEE</string>
+  <string name="pref_shot_units_title">UNITEES</string>
   <string name="pref_cwd_title">Répertoire TopoDroid</string>
   <!-- UNUSED string name="pref_cwd_summary">Répertoire TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Saisissez le répertoire de TopoDroid</string -->
-  <!-- TODO string name="pref_pt_color_map_title">PocketTopo color map</string -->
-  <!-- TODO string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string -->
+  <string name="pref_pt_color_map_title">Couleur carte PocketTopo</string>
+  <string name="pref_pt_color_map_summary">Couleur carte PocketTopo(PocketTopo import)</string>
   <string name="pref_text_size_title">Taille du texte</string>
   <string name="pref_text_size_summary">Taille du texte des éléments de liste</string>
   <string name="pref_text_size_message">Taille du texte dans les listes</string>
@@ -790,9 +790,9 @@
   <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->
   <!-- TODO string name="pref_azimuth_manual_summary">Manually set the legs "extend"</string -->
 
-  <string name="pref_team_title">Équipe</string>
-  <!-- TODO string name="pref_team_summary">Surveying team</string -->
-  <!-- TODO string name="pref_team_message">Default surveying team</string -->
+  <string name="pref_team_title">Equipe Speleo</string>
+  <string name="pref_team_summary">Nom equipe de Speleo</string>
+  <string name="pref_team_message">Nom equipe de topographie</string>
 
   <!-- FIXME string name="pref_ethr_title">Seuil extension</string -->
   <!-- FIXME string name="pref_ethr_summary">Seuil extension visée latérales</string -->
@@ -803,11 +803,11 @@
   <!-- TODO string name="pref_plan_vthr_title">Splay vertical threshold</string -->
   <!-- TODO string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string -->
   <!-- TODO string name="pref_plan_vthr_message">Vertical threshold for splays in plan</string -->
-  <!-- TODO string name="pref_init_station_title">Initial station</string -->
-  <!-- TODO string name="pref_init_station_summary">Default initial station</string -->
-  <!-- TODO string name="pref_init_station_message">Default initial station</string -->
-  <!-- TODO string name="pref_station_names_title">Station names</string -->
-  <!-- TODO string name="pref_station_names_summary">Type of station names</string -->
+  <string name="pref_init_station_title">Nom par defaut de la premiere station</string>
+  <string name="pref_init_station_summary">Nom par defaut de la premiere station</string>
+  <string name="pref_init_station_message"Nom par defaut de la premiere station</string>
+  <string name="pref_station_names_title">Nom des stations</string>
+  <string name="pref_station_names_summary">Methode de nommage des stations</string>
 
   <string name="pref_hthr_title">Seuil horizontal croisement de section</string>
   <string name="pref_hthr_summary">Seuil pour les sections croisées horizontales</string>
@@ -835,8 +835,8 @@
   <string name="pref_drawing_unit_title">Echelle des symboles</string>
   <string name="pref_drawing_unit_summary">Echelle des symboles de dessin</string>
   <string name="pref_drawing_unit_message">Echelle des symboles de dessin</string>
-  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
-  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
+  <string name="pref_unscaled_points_title">Zoom Icones Desactivé</string>
+  <string name="pref_unscaled_points_summary">desactivation du zoom sur les icones</string>
   <string name="pref_segment_title">Espacement des points de ligne</string>
   <string name="pref_segment_summary">Distance mini entre points d\'une ligne</string>
   <string name="pref_segment_message">Distance mini entre les points d\'une ligne</string>
@@ -866,18 +866,18 @@
   <string name="pref_label_size_title">Taille des étiquettes</string>
   <string name="pref_label_size_summary">Taille des étiquettes</string>
   <string name="pref_label_size_message">Taille des étiquettes</string>
-  <!-- TODO string name="pref_arrow_length_title">Section tick</string -->
-  <!-- TODO string name="pref_arrow_length_summary">Size of the section line tick</string -->
-  <!-- TODO string name="pref_arrow_length_message">Size of the section line tick</string -->
-  <!-- TODO string name="pref_dot_radius_title">Dots radius</string -->
-  <!-- TODO string name="pref_dot_radius_summary">Green dots size</string -->
-  <!-- TODO string name="pref_dot_radius_message">Size of the green dots</string -->
+  <string name="pref_arrow_length_title">Ligne de section pointillé</string>
+  <string name="pref_arrow_length_summary">Epaisseur Ligne de section en pointillé</string>
+  <string name="pref_arrow_length_message">Epaisseur Ligne de section en pointillé</string>
+  <string name="pref_dot_radius_title">Points Verts Edition</string>
+  <string name="pref_dot_radius_summary">Taille des points verts</string>
+  <string name="pref_dot_radius_message">Taille des points verts</string>
   <string name="pref_line_thickness_title">Epaisseur de ligne</string>
   <string name="pref_line_thickness_summary">Epaisseur de ligne</string>
   <string name="pref_line_thickness_message">Epaisseur de ligne</string>
-  <!-- TODO string name="pref_fixed_thickness_title">Survey line thickness</string -->
-  <!-- TODO string name="pref_fixed_thickness_summary">Survey line thickness</string -->
-  <!-- TODO string name="pref_fixed_thickness_message">Survey line thickness</string -->
+  <string name="pref_fixed_thickness_title">Epaisseur de ligne du croquis</string>
+  <string name="pref_fixed_thickness_summary">Epaisseur de ligne du croquis</string>
+  <string name="pref_fixed_thickness_message">Epaisseur de ligne du croquis</string>
   <string name="pref_device_title">Périphériques</string>
   <string name="pref_device_summary">Adresse du DistoX</string>
   <string name="pref_device_message">Adresse du DistoX</string>
@@ -885,16 +885,16 @@
   <string name="pref_checkBT_summary">Activer/désactiver Bluetooth</string>
   <string name="pref_checkAttached_title">Vérification cheminement</string>
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
-  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
-  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <string name="pref_xtherion_areas_title">Aire Xtherion</string>
+  <string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string>
   <string name="pref_autoStations_title">Stations auto</string>
   <string name="pref_autoStations_summary">Ajouter les stations automatiquement</string>
   <string name="pref_loopClosure_title">Bouclage</string>
   <string name="pref_loopClosure_summary">Compensation d\'erreur de bouclage</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
-  <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
-  <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
+  <string name="pref_LRExtend_title">Estimer les distances laterales gauche/droite</string>
+  <string name="pref_LRExtend_summary">Estimer extensions G/D(Compass/VisualTopo import)</string>
 
   <string name="pref_picker_type_title">Sélectionneur de symbole</string>
   <string name="pref_picker_type_summary">Type sélectionneur symbole</string>
@@ -966,7 +966,7 @@
   <string name="pref_log_comm">Communications</string>
   <string name="pref_log_data">Données</string>
   <string name="pref_log_db">Base de données</string>
-  <!-- TODO string name="pref_log_db">Database</string -->
+  
   <string name="pref_log_debug">Debug</string>
   <string name="pref_log_device">Périphériques</string>
   <string name="pref_log_distox">DistoX</string>
@@ -996,9 +996,9 @@
   <!-- UNUSED string name="units_grads">grads</string -->
   <!-- UNUSED string name="units_meters">meters</string -->
   <!-- UNUSED string name="units_feet">feet</string -->
-  <!-- TODO string name="alt_wgs">ellipsoid</string -->
-  <!-- TODO string name="alt_ortho">orthometric</string -->
-  <!-- TODO string name="splay_extend">estimate splay extend</string -->
+  <string name="alt_wgs">ellipsoide</string>
+  <string name="alt_ortho">orthometrique</string>
+  <string name="splay_extend">estimer extension visée laterales</string>
 
     <string name="welcome_title">Bienvenue dans TopoDroid %1$s</string>
     <string name="welcome_text">
@@ -1007,7 +1007,7 @@
 \n\nConsultez http://sites.google.com/site/speleoapps pour des applications complémentaire et de la documentation.
 \nEnvoyez vos commentaires, rapport de bug, demande de fonctionnalités à : marco.corvi@gmail.com
 \nInitial French translation by G. Chardin 
-\nFrench translation updated 29-11-2015 by F. Martin
+\nTranslation updated 29-11-2015 by F. Martin
     </string>
 <!-- FIXME FIRMWARE
   <string name="firmware_title">Firmware Updater</string>
