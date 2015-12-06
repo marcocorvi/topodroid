@@ -21,8 +21,6 @@ import android.graphics.Matrix;
 
 import android.util.FloatMath;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Iterator;
 // import java.util.List;
 import java.util.ArrayList;

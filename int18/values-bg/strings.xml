@@ -562,7 +562,7 @@
     <string name="help_draw">Вкл. на режим на скициране</string>
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
-    <!-- UNUSED string name="help_rename">Смяна на името на картировката</string -->
+    <string name="help_rename">Смяна на името на картировката</string>
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>

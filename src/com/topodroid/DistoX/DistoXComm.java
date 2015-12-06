@@ -15,8 +15,6 @@ import java.nio.ByteBuffer;
 
 import java.io.IOException;
 import java.io.EOFException;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 import java.util.List;
@@ -280,10 +278,8 @@ public class DistoXComm
           
           byte[] addr = mProto.getAddress();
           byte[] reply = mProto.getReply();
-          StringWriter sw = new StringWriter();
-          PrintWriter pw  = new PrintWriter(sw);
-          pw.format("%02x %02x %02x %02x at %02x%02x", reply[0], reply[1], reply[2], reply[3], addr[1], addr[0] );
-          String result = sw.getBuffer().toString();
+          String result = String.format("%02x %02x %02x %02x at %02x%02x",
+            reply[0], reply[1], reply[2], reply[3], addr[1], addr[0] );
           TopoDroidLog.Log( TopoDroidLog.LOG_DISTOX, "REPLY PACKET: " + result ); 
 
           if ( addr[0] == (byte)0x00 && addr[1] == (byte)0x80 ) { // 0x8000
@@ -774,11 +770,9 @@ public class DistoXComm
 
         // int k;
         // for ( k=0; k<48; k+=8 ) {
-        //   StringWriter sw = new StringWriter();
-        //   PrintWriter pw = new PrintWriter( sw );
-        //   pw.format( "%02x %02x %02x %02x %02x %02x %02x %02x",
-        //     coeff[k+0], coeff[k+1], coeff[k+2], coeff[k+3], coeff[k+4], coeff[k+5], coeff[k+6], coeff[k+7] );
-        //   Log.v( TopoDroidApp.TAG, sw.getBuffer().toString() );
+        //   Log.v( TopoDroidApp.TAG, 
+        //   String.format( "%02x %02x %02x %02x %02x %02x %02x %02x",
+        //     coeff[k+0], coeff[k+1], coeff[k+2], coeff[k+3], coeff[k+4], coeff[k+5], coeff[k+6], coeff[k+7] ) );
         // }
       }
       destroySocket( );

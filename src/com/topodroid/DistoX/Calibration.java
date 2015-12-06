@@ -16,8 +16,6 @@
 package com.topodroid.DistoX;
 
 import java.lang.Math;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 import java.util.Locale;
 
@@ -113,29 +111,18 @@ public class Calibration
 
   void dump()
   {
-    StringWriter sw1 = new StringWriter();
-    PrintWriter pw1 = new PrintWriter( sw1 );
-    pw1.format("G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z );
-    Log.v("DistoX", sw1.getBuffer().toString() );
-
+    Log.v("DistoX", String.format("G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
     Log.v("DistoX", "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
     Log.v("DistoX", "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
     Log.v("DistoX", "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
 
-    StringWriter sw5 = new StringWriter();
-    PrintWriter pw5 = new PrintWriter( sw5 );
-    pw5.format("M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z );
-    Log.v("DistoX", sw5.getBuffer().toString() );
+    Log.v("DistoX", String.format("M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
     
     Log.v("DistoX", "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
     Log.v("DistoX", "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
     Log.v("DistoX", "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
 
-    StringWriter sw9 = new StringWriter();
-    PrintWriter pw9 = new PrintWriter( sw9 );
-    pw9.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z );
-    Log.v("DistoX", sw9.getBuffer().toString() );
-    
+    Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   }
 
   public Calibration( int N, TopoDroidApp app, boolean nonLinear )
@@ -470,10 +457,8 @@ public class Calibration
     group[idx] = group0;
 
     if ( TopoDroidLog.LOG_CALIB ) {
-      StringWriter sw = new StringWriter();
-      PrintWriter  pw = new PrintWriter( sw );
-      pw.format("Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 );
-      TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, sw.getBuffer().toString() );
+      TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, 
+        String.format("Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 ) );
     }
     idx ++;
   }
@@ -556,31 +541,27 @@ public class Calibration
   private void LogMatrixVector( String msg, Matrix m1, Vector v1 ) 
   {
     if ( ! TopoDroidLog.LOG_CALIB ) return;
-    StringWriter sw = new StringWriter();
-    PrintWriter  pw = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, " M: %8.4f %8.4f %8.4f V: %8.4f\n    %8.4f %8.4f %8.4f   %8.4f\n    %8.4f %8.4f %8.4f   %8.4f",
+    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB,
+      msg + String.format(Locale.ENGLISH,
+       " M: %8.4f %8.4f %8.4f V: %8.4f\n    %8.4f %8.4f %8.4f   %8.4f\n    %8.4f %8.4f %8.4f   %8.4f",
        m1.x.x, m1.x.y, m1.x.z, v1.x, 
        m1.y.x, m1.y.y, m1.y.z, v1.y, 
-       m1.z.x, m1.z.y, m1.z.z, v1.z );
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, msg + sw.getBuffer().toString() );
+       m1.z.x, m1.z.y, m1.z.z, v1.z ) );
   }
 
   private void LogVectors( String msg, long group, Vector v1, Vector v2 )
   {
     if ( ! TopoDroidLog.LOG_CALIB ) return;
-    StringWriter sw = new StringWriter();
-    PrintWriter  pw = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ); 
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, msg + sw.getBuffer().toString() );
+    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB,
+      msg + String.format(Locale.ENGLISH,
+      " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ) ); 
   }
 
   private void LogSC( String msg, float s, float c )
   {
     if ( ! TopoDroidLog.LOG_CALIB ) return;
-    StringWriter sw = new StringWriter();
-    PrintWriter  pw = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, " S %8.4f C %8.4f", s, c ); 
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, msg + sw.getBuffer().toString() );
+    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, 
+      msg + String.format(Locale.ENGLISH, " S %8.4f C %8.4f", s, c ) ); 
   }
 
 /* ============================================================ */

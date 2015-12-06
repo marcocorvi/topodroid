@@ -8,14 +8,12 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130224 created 
  */
 package com.topodroid.DistoX;
 
 import android.graphics.PointF;
 
-import java.io.StringWriter;
+// import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;

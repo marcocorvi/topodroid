@@ -11,8 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.io.File;
 
 import android.app.Dialog;

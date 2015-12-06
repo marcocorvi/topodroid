@@ -12,8 +12,6 @@ package com.topodroid.DistoX;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 // import android.util.Log;
 
@@ -99,10 +97,7 @@ class PTId
       // sprintf(tmp, "%d", _id + 0x80000001 ); // FIXME this is the correct form
       return new String("-");
     }
-    StringWriter sw = new StringWriter();
-    PrintWriter pw = new PrintWriter( sw );
-    pw.printf( "%04d.%d", _id>>16, _id & 0xffff );
-    return sw.getBuffer().toString();
+    return String.format( "%04d.%d", _id>>16, _id & 0xffff );
   }
     
   // -----------------------------------------------------------

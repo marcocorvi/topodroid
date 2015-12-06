@@ -18,7 +18,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -66,11 +65,8 @@ public class PocketTopoParser extends ImportParser
     mComment = "";
     // mTeam = "";
     if ( nr_trip > 0 ) { // use only the first trip
-      StringWriter sw = new StringWriter();
-      PrintWriter pw = new PrintWriter( sw );
       PTTrip trip = ptfile.getTrip(0);
-      pw.format( "%04d-%02d-%02d", trip._year, trip._month, trip._day );
-      mDate = sw.getBuffer().toString();
+      mDate = String.format( "%04d-%02d-%02d", trip._year, trip._month, trip._day );
       if ( trip.hasComment() ) mComment = trip.comment();
       // trip.declination(); NOT USED
       // TODO create a survey

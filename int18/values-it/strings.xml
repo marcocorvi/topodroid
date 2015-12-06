@@ -506,7 +506,7 @@
     <string name="help_draw">Modalità disegno</string>
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
-    <!-- UNUSED string name="help_rename">Modifica il nome del rilievo</string -->
+    <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
     <string name="help_toggle_plot">Passa tra pianta e sezione long.</string>

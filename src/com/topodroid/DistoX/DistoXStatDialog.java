@@ -8,15 +8,8 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120530 loop closures
- * 20120702 shot surface flag
- * 20120726 TopoDroid log
  */
 package com.topodroid.DistoX;
-
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 import java.util.List;
 import java.util.ArrayList;

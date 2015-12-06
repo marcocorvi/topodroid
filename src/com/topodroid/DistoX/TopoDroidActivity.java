@@ -18,7 +18,6 @@ import java.io.FileNotFoundException;
 // import java.io.DataInputStream;
 // import java.io.DataOutputStream;
 import java.io.FileInputStream;
-import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -868,13 +867,10 @@ public class TopoDroidActivity extends Activity
   // {
   //   // TopoDroidLog.Log(TopoDroidLog.LOG_MAIN, "saveInstanceToData");
   //   DataHelper data = mApp.mData;
-  //   StringWriter sw = new StringWriter();
-  //   PrintWriter pw = new PrintWriter( sw );
-  //   pw.format("%d ", 1 ); // mStatus );
+  //   data.setValue( "DISTOX_STATUS", String.format("%d ", 1 ) ); // mStatus ) );
   //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save STATUS " + sw.getBuffer().toString() );
   //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save SURVEY >" + mApp.mySurvey + "<" );
   //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save CALIB >" + mApp.getCalib() + "<" );
-  //   data.setValue( "DISTOX_STATUS", sw.getBuffer().toString() );
   //   // data.setValue( "DISTOX_SURVEY", (mApp.mySurvey == null)? "" : mApp.mySurvey );
   //   data.setValue( "DISTOX_CALIB", (mApp.myCalib == null)? "" : mApp.myCalib );
   // }

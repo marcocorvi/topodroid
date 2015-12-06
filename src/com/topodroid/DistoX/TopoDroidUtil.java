@@ -18,9 +18,6 @@ import java.util.Locale;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import android.util.Log;
 
 public class TopoDroidUtil
@@ -124,10 +121,7 @@ public class TopoDroidUtil
 
   static String composeDate( int y, int m, int d )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw = new PrintWriter( sw );
-    pw.format("%04d.%02d.%02d", y, m+1, d );
-    return sw.getBuffer().toString();
+    return String.format("%04d.%02d.%02d", y, m+1, d );
   }
 
   static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }

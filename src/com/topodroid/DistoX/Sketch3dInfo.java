@@ -7,12 +7,9 @@
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
- * 20130220 created
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.Locale;
 
 import android.graphics.PointF;
@@ -156,18 +153,12 @@ Nx=(-ca,-sa,0) | ,'
 
   String getDirectionString()
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter  pw = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%.0f %.0f", azimuth, clino ); // can skip Locale
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%.0f %.0f", azimuth, clino ); // can skip Locale
   }
 
   String getShotString()
   { 
-    StringWriter sw = new StringWriter();
-    PrintWriter  pw = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%s-%s %.0f %.0f", st1, st2, shotBearing, shotClino ); // can skip Locale
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%s-%s %.0f %.0f", st1, st2, shotBearing, shotClino ); // can skip Locale
   }
   
   void setStations( NumStation s1, NumStation s2, DistoXDBlock blk, boolean set_origin )

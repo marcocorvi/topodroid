@@ -14,9 +14,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 class PhotoInfo
 {
   public long sid;       // survey id
@@ -41,10 +38,7 @@ class PhotoInfo
 
   // String getPhotoName() 
   // {
-  //   StringWriter sw = new StringWriter();
-  //   PrintWriter pw = new PrintWriter( sw );
-  //   pw.format( "%d-%03d", sid, id );
-  //   return sw.getBuffer().toString();
+  //   return String.format( "%d-%03d", sid, id );
   // }
 
   public String toString()

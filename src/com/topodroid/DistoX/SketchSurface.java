@@ -8,15 +8,10 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130224 created 
- * 20130601 started surface-editing ops, mostly determining inner and outer borders
- * 20130804 revised surface-editing ops (cut, stretch, extrude)
- * 20130831 join(s) between surfaces
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
+// import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import java.util.Collections;

@@ -17,8 +17,6 @@ import java.util.Calendar;
 
 import java.io.File;
 import java.io.IOException;
-// import java.io.StringWriter;
-// import java.io.PrintWriter;
 
 import android.app.Activity;
 // import android.app.Dialog;
@@ -91,6 +89,7 @@ public class SurveyActivity extends Activity
                         };
   private static int help_menus[] = { 
                         R.string.help_export_survey,
+                        R.string.help_rename,
                         R.string.help_delete_survey,
                         R.string.help_manual_calibration,
                         R.string.help_prefs,
@@ -670,7 +669,7 @@ public class SurveyActivity extends Activity
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 5 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
       }
       // updateDisplay();
       return;

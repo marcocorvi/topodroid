@@ -835,7 +835,7 @@ public class DrawingSurface extends SurfaceView
                   if ( vals.length > index && vals[index].equals( "on" ) ) {
                     closed = true;
                   }
-                } else if ( vals[index].equals( "-reversed" ) ) {
+                } else if ( vals[index].equals( "-reverse" ) ) {
                   ++ index;
                   if ( vals.length > index && vals[index].equals( "on" ) ) {
                     reversed = true;

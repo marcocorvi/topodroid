@@ -55,8 +55,6 @@ import android.util.FloatMath;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -755,8 +753,6 @@ public class OverviewActivity extends ItemDrawer
           float y = y_canvas/mZoom - mOffset.y;
           float dx = (  (x - mStartX) / DrawingUtil.SCALE_FIX ) / TopoDroidSetting.mUnitGrid;
           float dy = ( -(y - mStartY) / DrawingUtil.SCALE_FIX ) / TopoDroidSetting.mUnitGrid;
-          // StringWriter sw = new StringWriter();
-          // PrintWriter pw = new PrintWriter( sw );
           double a = Math.atan2( dx, dy ) * 180 / Math.PI;
           if ( a < 0 ) a += 360;
 

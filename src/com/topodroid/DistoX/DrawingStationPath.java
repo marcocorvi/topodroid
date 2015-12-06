@@ -18,8 +18,6 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Matrix;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Locale;
 
 // import android.util.Log;
@@ -113,15 +111,11 @@ public class DrawingStationPath extends DrawingPath
   @Override
   public String toTherion()
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-
     // Log.v( TopoDroidApp.TAG, "toTherion() Point " + mPointType + " orientation " + mOrientation + " flip " +
     //                  mFlip + " flippable " +
     //                  DrawingBrushPaths.canFlip( mPointType ) );
 
-    pw.format(Locale.ENGLISH, "point %.2f %.2f station -name %s\n", mXpos*toTherion, -mYpos*toTherion, mName );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "point %.2f %.2f station -name %s\n", mXpos*toTherion, -mYpos*toTherion, mName );
   }
 
 

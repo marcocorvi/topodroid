@@ -14,7 +14,6 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.PrintStream;
 import java.io.FileWriter;

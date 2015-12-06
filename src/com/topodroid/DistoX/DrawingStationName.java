@@ -11,8 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Locale;
 
 import android.graphics.Canvas;
@@ -99,20 +97,14 @@ public class DrawingStationName extends DrawingPointPath
   String getCoordsString()
   {
     if ( mStation == null ) return null;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
     // east north vertical (downward)
-    pw.format(Locale.ENGLISH, "E %.2f N %.2f V %.2f", mStation.e, -mStation.s, mStation.v );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "E %.2f N %.2f V %.2f", mStation.e, -mStation.s, mStation.v );
   }
 
   @Override
   public String toTherion()
   {
     if ( mStation == null ) return ""; // empty string
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
   }
 }

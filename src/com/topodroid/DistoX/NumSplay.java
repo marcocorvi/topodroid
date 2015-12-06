@@ -22,7 +22,7 @@ public class NumSplay extends NumSurveyPoint
 
   DistoXDBlock getBlock() { return block; }
 
-  NumSplay( NumStation f, float d, float b, float c, int extend, DistoXDBlock blk )
+  NumSplay( NumStation f, float d, float b, float c, float extend, DistoXDBlock blk )
   {
     from = f;
     v = from.v - d * (float)Math.sin(c * grad2rad);

@@ -548,7 +548,7 @@
     <string name="help_eraser">Löschmodus</string>
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Die Skizzersreferenzen wählen</string>
-    <!-- UNUSED string name="help_rename">Ändere Vermessungsnamen</string -->
+    <string name="help_rename">Ändere Vermessungsnamen</string>
     <string name="help_stats">Vermessung Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <string name="help_toggle_plot">Zwischen der Draufsicht und Seitenansicht wechseln</string>

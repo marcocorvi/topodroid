@@ -15,8 +15,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-// import java.io.StringWriter;
-// import java.io.PrintWriter;
 
 import android.os.Bundle;
 import android.app.Dialog;

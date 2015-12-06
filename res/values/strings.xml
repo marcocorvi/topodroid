@@ -575,7 +575,7 @@
     <string name="help_draw">Drawing mode</string>
     <string name="help_edit">Editing mode</string>
     <string name="help_refs">Choose sketching references</string>
-    <!-- string name="help_rename">Change survey name</string -->
+    <string name="help_rename">Change survey name</string>
     <string name="help_stats">Survey statistics dialog</string>
     <string name="help_save_plot">Export sketch</string>
     <string name="help_toggle_plot">Switch between plan and profile view</string>

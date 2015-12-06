@@ -12,9 +12,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import java.util.Locale;
 
 /** fixed (GPS) point
@@ -70,18 +67,12 @@ class FixedInfo extends MagLatLong
     x = 60*(x - mp);
     int sp = (int)x;
     int ds = (int)( 100 * (x-sp) );
-    StringWriter swp = new StringWriter();
-    PrintWriter pwp = new PrintWriter( swp );
-    pwp.format( "%d°%02d'%02d.%02d", dp, mp, sp, ds );
-    return swp.getBuffer().toString();
+    return String.format( "%d°%02d'%02d.%02d", dp, mp, sp, ds );
   }
 
   static private String double2degree( double x )
   {
-    StringWriter swp = new StringWriter();
-    PrintWriter pwp = new PrintWriter( swp );
-    pwp.format(Locale.ENGLISH, "%.6f", x );
-    return swp.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%.6f", x );
   }
 
 

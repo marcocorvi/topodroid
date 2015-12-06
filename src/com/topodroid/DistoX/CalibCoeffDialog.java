@@ -12,8 +12,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.Locale;
 
 import android.app.Dialog;
@@ -75,64 +73,25 @@ public class CalibCoeffDialog extends Dialog
     mApp     = app;
     mCoeff   = coeff;
 
-    StringWriter sw1 = new StringWriter();
-    PrintWriter  pw1 = new PrintWriter( sw1 );
-    pw1.format(Locale.ENGLISH, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
-    bg0 = sw1.getBuffer().toString();
-    StringWriter sw2 = new StringWriter();
-    PrintWriter  pw2 = new PrintWriter( sw2 );
-    pw2.format(Locale.ENGLISH, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z );
-    agx = sw2.getBuffer().toString();
-    StringWriter sw3 = new StringWriter();
-    PrintWriter  pw3 = new PrintWriter( sw3 );
-    pw3.format(Locale.ENGLISH, "aGy  %8.4f %8.4f %8.4f", ag.y.x, ag.y.y, ag.y.z );
-    agy = sw3.getBuffer().toString();
-    StringWriter sw4 = new StringWriter();
-    PrintWriter  pw4 = new PrintWriter( sw4 );
-    pw4.format(Locale.ENGLISH, "aGz  %8.4f %8.4f %8.4f", ag.z.x, ag.z.y, ag.z.z );
-    agz = sw4.getBuffer().toString();
+    bg0 = String.format(Locale.ENGLISH, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
+    agx = String.format(Locale.ENGLISH, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z );
+    agy = String.format(Locale.ENGLISH, "aGy  %8.4f %8.4f %8.4f", ag.y.x, ag.y.y, ag.y.z );
+    agz = String.format(Locale.ENGLISH, "aGz  %8.4f %8.4f %8.4f", ag.z.x, ag.z.y, ag.z.z );
 
-    StringWriter sw5 = new StringWriter();
-    PrintWriter  pw5 = new PrintWriter( sw5 );
-    pw5.format(Locale.ENGLISH, "bM   %8.4f %8.4f %8.4f", bm.x, bm.y, bm.z );
-    bm0 = sw5.getBuffer().toString();
-    StringWriter sw6 = new StringWriter();
-    PrintWriter  pw6 = new PrintWriter( sw6 );
-    pw6.format(Locale.ENGLISH, "aMx  %8.4f %8.4f %8.4f", am.x.x, am.x.y, am.x.z );
-    amx = sw6.getBuffer().toString();
-    StringWriter sw7 = new StringWriter();
-    PrintWriter  pw7 = new PrintWriter( sw7 );
-    pw7.format(Locale.ENGLISH, "aMy  %8.4f %8.4f %8.4f", am.y.x, am.y.y, am.y.z );
-    amy = sw7.getBuffer().toString();
-    StringWriter sw8 = new StringWriter();
-    PrintWriter  pw8 = new PrintWriter( sw8 );
-    pw8.format(Locale.ENGLISH, "aMz  %8.4f %8.4f %8.4f", am.z.x, am.z.y, am.z.z );
-    amz = sw8.getBuffer().toString();
+    bm0 = String.format(Locale.ENGLISH, "bM   %8.4f %8.4f %8.4f", bm.x, bm.y, bm.z );
+    amx = String.format(Locale.ENGLISH, "aMx  %8.4f %8.4f %8.4f", am.x.x, am.x.y, am.x.z );
+    amy = String.format(Locale.ENGLISH, "aMy  %8.4f %8.4f %8.4f", am.y.x, am.y.y, am.y.z );
+    amz = String.format(Locale.ENGLISH, "aMz  %8.4f %8.4f %8.4f", am.z.x, am.z.y, am.z.z );
 
     if ( nl != null ) {
-      StringWriter swx = new StringWriter();
-      PrintWriter  pwx = new PrintWriter( swx );
-      pwx.format(Locale.ENGLISH, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z );
-      nlx = swx.getBuffer().toString();
+      nlx = String.format(Locale.ENGLISH, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z );
     } else {
       nlx = new String("");
     }
 
-    // StringWriter swD = new StringWriter();
-    // PrintWriter  pwD = new PrintWriter( swD );
-    // pwD.format(Locale.ENGLISH, "Error %.4f grad", delta );
-    // delta0 = swD.getBuffer().toString();
     delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta );
     delta02 = String.format( mContext.getResources().getString( R.string.calib_stddev ), delta2 );
-    // StringWriter swM = new StringWriter();
-    // PrintWriter  pwM = new PrintWriter( swM );
-    // pwM.format(Locale.ENGLISH, "Max error %8.4f", error );
-    // error0 = swM.getBuffer().toString();
     error0 = String.format( mContext.getResources().getString( R.string.calib_max_error ), error );
-    // StringWriter swI = new StringWriter();
-    // PrintWriter  pwI = new PrintWriter( swI );
-    // pwI.format("Iterations %d", iter );
-    // iter0 = swI.getBuffer().toString();
     iter0 = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );
   }
 

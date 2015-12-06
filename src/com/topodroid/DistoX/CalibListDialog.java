@@ -12,8 +12,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 

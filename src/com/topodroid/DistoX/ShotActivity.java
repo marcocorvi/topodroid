@@ -16,8 +16,6 @@ import java.io.IOException;
 // import java.io.EOFException;
 // import java.io.DataInputStream;
 // import java.io.DataOutputStream;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 // import java.io.FileWriter;
@@ -911,10 +909,8 @@ public class ShotActivity extends Activity
     
   private void saveInstanceToData()
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw = new PrintWriter( sw );
-    pw.format("%d %d %d %d", mSplay?1:0, mLeg?1:0, mBlank?1:0, getShowIds()?1:0 );
-    mApp.mData.setValue( "DISTOX_SHOTS", sw.getBuffer().toString() );
+    mApp.mData.setValue( "DISTOX_SHOTS", 
+      String.format("%d %d %d %d", mSplay?1:0, mLeg?1:0, mBlank?1:0, getShowIds()?1:0 ) );
     // Log.v("DistoX", "save to data mSplay " + mSplay );
   }
 

@@ -65,7 +65,6 @@ import android.net.Uri;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;

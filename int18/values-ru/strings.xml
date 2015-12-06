@@ -554,7 +554,7 @@
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Выбрать привязку абриса</string>
-    <!-- UNUSED string name="help_rename">Изменить имя съёмки</string -->
+    <string name="help_rename">Изменить имя съёмки</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
     <string name="help_toggle_plot">Переключить план разрез-разв.</string>

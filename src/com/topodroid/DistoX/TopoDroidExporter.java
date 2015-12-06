@@ -3,7 +3,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
 import java.io.FileWriter;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;

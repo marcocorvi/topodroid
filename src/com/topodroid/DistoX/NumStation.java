@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.ArrayList;
+
 public class NumStation extends NumSurveyPoint
 {
   private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
@@ -35,6 +37,8 @@ public class NumStation extends NumSurveyPoint
   boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
   boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
 
+  ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot
+
   NumStation( String id )
   {
     super();
@@ -48,6 +52,7 @@ public class NumStation extends NumSurveyPoint
     mHidden  = 0;
     mBarrierAndHidden = false;
     mParent  = null;
+    mLegs = new ArrayList<  NumAzimuth  >();
   }
 
   NumStation( String id, NumStation from, float d, float b, float c, int extend )
@@ -68,5 +73,55 @@ public class NumStation extends NumSurveyPoint
     mHidden  = 0;
     mBarrierAndHidden = false;
     mParent  = from;
+    mLegs = new ArrayList<  NumAzimuth  >();
   }
+
+  void addAzimuth( float azimuth, int extend ) 
+  {
+    NumAzimuth leg = new NumAzimuth( azimuth, extend );
+    for ( int k=0; k<mLegs.size(); ++k ) {
+      if ( azimuth > mLegs.get(k).mAzimuth ) {
+        mLegs.add(k, leg );
+        return;
+      }
+    }
+    mLegs.add( leg );
+  }
+
+  void setAzimuths()
+  {
+    ArrayList< NumAzimuth > temp = new ArrayList< NumAzimuth >();
+    int sz= mLegs.size();
+    if ( sz > 0 ) temp.add( mLegs.get(0) );
+    for (int k=0; k<sz; ++k ) {
+      NumAzimuth a1 = mLegs.get( k );
+      NumAzimuth a2 = mLegs.get( (k+1)%sz );
+      temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, 0 ) ); // bisecant
+      temp.add( a2 );
+    }
+    mLegs = temp;
+  }
+
+  // @param b bearing
+  // @param e original splay extend
+  float computeExtend( float b, int e )
+  {
+    if ( mLegs.size() > 0 ) {
+      NumAzimuth a1 = mLegs.get(0);
+      for (int k=1; k<mLegs.size(); k++ ) {
+        NumAzimuth a2 = mLegs.get(k);
+        if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
+          if ( a1.mExtend == 0 ) {
+            return (float)Math.cos( a2.mAzimuth - b ) * a2.mExtend;
+          } else {
+            return (float)Math.cos( b - a1.mAzimuth ) * a1.mExtend;
+          }
+        }
+        a1 = a2;
+      }
+    }
+    return e;
+  }
+        
+    
 }

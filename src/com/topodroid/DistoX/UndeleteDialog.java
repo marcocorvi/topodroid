@@ -14,8 +14,6 @@ package com.topodroid.DistoX;
 
 import java.util.List;
 import java.util.Locale;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -102,18 +100,11 @@ public class UndeleteDialog extends Dialog
       // finish();
     }
     for ( DistoXDBlock b : shots ) {
-      StringWriter sw = new StringWriter();
-      PrintWriter pw  = new PrintWriter(sw);
-      pw.format(Locale.ENGLISH, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino );
-      String result = sw.getBuffer().toString();
-      mArrayAdapter.add( result );
+      mArrayAdapter.add( 
+        String.format(Locale.ENGLISH, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
     }
     for ( PlotInfo p : plots ) {
-      StringWriter sw = new StringWriter();
-      PrintWriter pw  = new PrintWriter(sw);
-      pw.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() );
-      String result = sw.getBuffer().toString();
-      mArrayAdapter.add( result );
+      mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
     }
     // mBtnCancel = (Button) findViewById(R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );

@@ -16,9 +16,6 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import android.util.Log;
 
 class DistoXNum
@@ -378,6 +375,7 @@ class DistoXNum
   //             if ( /* TopoDroidApp.mAutoStations || */ ! TopoDroidApp.mLoopClosure ) {
   //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino,
   //                                                (int)(block.mExtend) );
+  //               st1.addAzimuth( (block.mBearing+180)%360, -block.mExtend );
   //               st1.mDuplicate = true;
   //               mStations.add( st1 );
   //               lastLeg = new NumShot( sf, st1, block, 1 );
@@ -402,6 +400,7 @@ class DistoXNum
   //             // FIXME temporary "st" coordinates
   //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino,
   //                                  (int)(block.mExtend) );
+  //             st.addAzimuth( (block.mBearing+180)%360, -(int)block.mExtend );
   //             updateBBox( st );
   //             // if ( ts.duplicate ) { // FIXME
   //             //   ++mDupNr;
@@ -420,6 +419,7 @@ class DistoXNum
   //         { // sf == null && st != null
   //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing, block.mClino,
   //                                (int)(block.mExtend) );
+  //           sf.addLeg( block.mBearing, (int)block.mExtend );
   //           updateBBox( sf );
   //           // if ( ts.duplicate ) {
   //           //   ++mDupNr;
@@ -790,6 +790,7 @@ class DistoXNum
               // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "do not close loop");
               // keep loop open: new station( id=ts.to, from=sf, ... )
               NumStation st1 = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
+              st1.addAzimuth( (ts.b()+180)%360, -ts.extend );
               st1.mAnomaly = anomaly;
               updateBBox( st );
               st1.mDuplicate = true;
@@ -817,6 +818,7 @@ class DistoXNum
             TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
                               "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
             st = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
+            st.addAzimuth( (ts.b()+180)%360, -ts.extend );
             st.mAnomaly = anomaly;
             updateBBox( st );
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
@@ -835,6 +837,7 @@ class DistoXNum
           TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
                             "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
           sf = new NumStation( ts.from, st, - ts.d(), ts.b()-st.mAnomaly, ts.c(), ts.extend );
+          sf.addAzimuth( ts.b(), ts.extend );
           sf.mAnomaly = anomaly; // FIXME
 
           updateBBox( sf );
@@ -905,17 +908,30 @@ class DistoXNum
       }
     }
 
-    for ( TmpShot ts : tmpsplays ) {
-      NumStation sf = getStation( ts.from );
-      if ( sf != null ) {
-        // TopoDroidLog.Log( TopoDroiaLog.LOG_NUM,
-        //   "DistoXNum::compute splay from " + ts.from + " " + ts.d + " " + ts.b + " " + ts.c + " (extend " + ts.extend + ")" );
-        mSplays.add( new NumSplay( sf, ts.d(), ts.b(), ts.c(), ts.extend, ts.getFirstBlock() ) );
+    for ( NumStation st : mStations ) {
+      st.setAzimuths();
+      for ( TmpShot ts : tmpsplays ) {
+        if ( getStation( ts.from ) == st ) {
+          float extend = st.computeExtend( ts.b(), ts.extend ); 
+          mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.getFirstBlock() ) );
+        }
       }
     }
 
+    // for ( TmpShot ts : tmpsplays ) {
+    //   NumStation sf = getStation( ts.from );
+    //   if ( sf != null ) {
+    //     // TopoDroidLog.Log( TopoDroiaLog.LOG_NUM,
+    //     //   "DistoXNum::compute splay from " + ts.from + " " + ts.d + " " + ts.b + " " + ts.c +
+    //     //   " (extend " + ts.extend + ")" );
+    //     mSplays.add( new NumSplay( sf, ts.d(), ts.b(), ts.c(), ts.extend, ts.getFirstBlock() ) );
+    //   }
+    // }
+
     return (mShots.size() == tmpshots.size() );
   }
+
+  
 
   // =============================================================================
   // loop closure-error compensation
@@ -1308,11 +1324,7 @@ class DistoXNum
     float dl = (float)Math.sqrt( dh + dv*dv );
     dh = (float)Math.sqrt( dh );
     float error = (dl*100) / len;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%s-%s %.2f [%.2f %.2f] %.2f%%", fr.name, at.name,  dl, dh, dv, error );
-    // Log.v( TopoDroidApp.TAG, sw.getBuffer().toString() );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%s-%s %.2f [%.2f %.2f] %.2f%%", fr.name, at.name,  dl, dh, dv, error );
   }
 }
 

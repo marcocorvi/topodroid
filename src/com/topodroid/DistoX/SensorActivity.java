@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -212,26 +209,25 @@ public class SensorActivity extends Activity
       if ( event.sensor.getType() == mSensorType ) {
         mValues = event.values;
         // TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "sensorChanged (" + mValues[0] + ", " + mValues[1] + ", " + mValues[2] + ")");
-        StringWriter sw = new StringWriter();
-        PrintWriter  pw = new PrintWriter( sw );
+        String value = "";
         switch ( mSensorType ) {
           case Sensor.TYPE_LIGHT:
           // case Sensor.TYPE_PROXIMITY:
           case Sensor.TYPE_TEMPERATURE:
           case Sensor.TYPE_PRESSURE:
           // case Sensor.TYPE_RELATIVE_HUMIDITY:
-            pw.format(Locale.ENGLISH, "%.2f", mValues[0] );
+            value = String.format(Locale.ENGLISH, "%.2f", mValues[0] );
             break;
           case Sensor.TYPE_MAGNETIC_FIELD:
           case Sensor.TYPE_ORIENTATION:
           // case Sensor.TYPE_ACCELEROMETER:
-            pw.format(Locale.ENGLISH, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
+            value = String.format(Locale.ENGLISH, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
             break;
           default:
-            pw.format(Locale.ENGLISH, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
+            value = String.format(Locale.ENGLISH, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
             break;
         }
-        mETvalue.setText( sw.getBuffer().toString() );
+        mETvalue.setText( value );
       }
     }
 

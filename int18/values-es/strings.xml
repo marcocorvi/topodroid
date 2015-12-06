@@ -499,7 +499,7 @@
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
     <string name="help_edit">Introducir modo de edición</string>
     <string name="help_refs">Elejir dibujo</string>
-    <!-- UNUSED string name="help_rename">Cambio nombre topografía</string -->
+    <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_stats">Estadísticas de Topografías</string>
     <string name="help_save_plot">Exportar dibujo</string>
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
