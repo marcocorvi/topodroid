@@ -70,10 +70,10 @@
     <string name="calib_stddev">Ошибка ст-откл: %1$.4f градусов</string>
     <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
     <!-- FIXME string name="calib_ave_std">Точность: %1$.4f %2$.4f градусов</string -->
-    <!-- TODO string name="calib_precision">Precision</string -->
+    <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итерации: %1$d</string>
     <string name="calib_saturated_values">ВНИМАНИЕ: %1$d saturated data</string>
-    <string name="algorithm">Алгоритм:</string>
+    <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
     <string name="linear">линейный</string>
     <string name="non_linear">не-линейный</string>
@@ -211,7 +211,7 @@
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string>
-    <string name="no_survey">Съёмка не аыбрана.</string>
+    <string name="no_survey">Съёмка не выбрана.</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol не установлен</string -->
     <string name="no_thmanager">ThManager не установлен</string>
     <string name="no_db_viewer">Приложение просмотра баз данных не найдено</string>
@@ -240,7 +240,7 @@
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_pair">СОЕДИНИТЬ</string>
-    <string name="menu_palette">Палитра</string>
+    <string name="menu_palette">Рисование</string>
     <string name="menu_photo">фото</string>
     <string name="menu_sensor">датчик</string>
     <string name="menu_scan">Сканировать</string>
@@ -578,9 +578,9 @@
 -->
     <string name="help_manual_calibration">Ручная калибровка инструментов</string>
     <string name="help_note_plot">Редактировать свойства выбранного абриса</string>
-    <string name="help_save">Сохранить нзменения информации о съёмемке</string>
+    <string name="help_save">Сохранить нзменения информации о съёмке</string>
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
-    <string name="help_export_survey">Экспорт съёмемки</string>
+    <string name="help_export_survey">Экспорт съёмки</string>
     <string name="help_loc">GPS местоположение</string>
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>
@@ -648,7 +648,7 @@
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- OK string name="title_zoom">Зум</string -->
 
-  <string name="pref_cat_survey">Настройки съёмки </string>
+  <string name="pref_cat_survey">Настройки топосъёмки </string>
   <string name="pref_cat_drawing">Настройки Рисования </string>
   <string name="pref_cat_import_export">Импорт-Экспорт</string>
   <string name="pref_cat_calib">Настройки Калибровки</string>
@@ -762,9 +762,9 @@
   <string name="pref_azimuth_manual_title">Вручную установить "развертку"</string>
   <string name="pref_azimuth_manual_summary">Вручную установить "развертку" отрезков </string>
 
-  <string name="pref_team_title">Группа съёмемки</string>
-  <string name="pref_team_summary">Группа съёмемки</string>
-  <string name="pref_team_message">Группа съёмемки по умолчанию</string>
+  <string name="pref_team_title">Группа съёмки</string>
+  <string name="pref_team_summary">Группа съёмки</string>
+  <string name="pref_team_message">Группа съёмки по умолчанию</string>
   <string name="pref_ethr_title">Вертикальный порог бокового замера</string>
   <string name="pref_ethr_summary">Область верт. проэкции (бок. замер)</string>
   <string name="pref_ethr_message">Угол около 90 для верт. проэкции бок. замера [град]</string>
@@ -837,7 +837,7 @@
   <string name="pref_label_size_title">Размер значков</string>
   <string name="pref_label_size_summary">Размер значков</string>
   <string name="pref_label_size_message">Размер значков</string>
-  <string name="pref_arrow_length_title">Бергштрих сечений</string>
+  <string name="pref_arrow_length_title">Бергштрихи сечений</string>
   <string name="pref_arrow_length_summary">Размер бергштриха линии сечений</string>
   <string name="pref_arrow_length_message">Размер бергштриха линии сечений</string>
   <string name="pref_dot_radius_title">Радиус точек</string>
@@ -856,7 +856,7 @@
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
-  <string name="pref_xtherion_areas_title">области xtherion</string>
+  <string name="pref_xtherion_areas_title">Области xtherion</string>
   <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
@@ -882,8 +882,8 @@
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
   <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
-  <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
-  <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
+  <string name="pref_cont_join_title">Продолжать для соединения</string>
+  <string name="pref_cont_join_summary">Продолжить линию до соединения с другой линией</string>
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
@@ -916,7 +916,7 @@
   <string name="pref_walls_plan_thr_title">Угол луча в плане</string>
   <string name="pref_walls_plan_thr_summary">Максимальный угол луча для стен в плане</string>
   <string name="pref_walls_plan_thr_message">Максимальный угол луча для стен в плане [град]</string>
-  <string name="pref_walls_extended_thr_title">Угол луча в плане</string>
+  <string name="pref_walls_extended_thr_title">Угол луча в разрезе</string>
   <string name="pref_walls_extended_thr_summary">Максимальный угол луча для стен в разрезе</string>
   <string name="pref_walls_extended_thr_message">Максимальный угол луча для стен в разрезе [град]</string>
   <string name="pref_walls_xclose_title">Интервалы</string>
