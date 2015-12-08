@@ -49,6 +49,12 @@ class FixedInfo extends MagLatLong
     comment = "";
   }
 
+  // get the string "name long lat alt" for the exports
+  public String toExportString()
+  {
+    return String.format("%s %.6f %.6f %.0f", name, lng, lat, asl );
+  }
+
   public String toString()
   {
     return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl) + " [wgs " + (int)(alt) + "]";

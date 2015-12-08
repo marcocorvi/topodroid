@@ -51,7 +51,8 @@ public class DistoXDBlock
   String mComment;
   long   mExtend;
   long   mFlag;     
-  int    mType;    // shot type
+  int    mType;   
+  int mShotType;  // 0: DistoX, 1: manual
   boolean mWithPhoto;
   boolean mMultiBad;
 
@@ -75,7 +76,6 @@ public class DistoXDBlock
   public boolean isDuplicate() { return mFlag == BLOCK_DUPLICATE; }
   // public boolean isBackshot() { return mFlag == BLOCK_BACKSHOT; }
 
-  int mShotType;  // 0: DistoX, 1: manual
 
   // used by PocketTopo parser only
   public DistoXDBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )

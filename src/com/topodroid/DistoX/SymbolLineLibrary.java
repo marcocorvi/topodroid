@@ -24,6 +24,10 @@ import android.util.Log;
 
 class SymbolLineLibrary
 {
+  static final String DefaultLines[] = {
+    "arrow", "border", "pit", "rock-border", "slope"
+  };
+
   // ArrayList< SymbolLine > mLine;
   ArrayList< SymbolLine > mAnyLine;
   int mLineUserIndex;
@@ -212,7 +216,18 @@ class SymbolLineLibrary
         }
         if ( ! hasAnyLine( symbol.mThName ) ) {
           mAnyLine.add( symbol );
-          symbol.setEnabled( TopoDroidApp.mData.isSymbolEnabled( "l_" + symbol.mThName ) );
+          String thname = symbol.mThName;
+          String name = "l_" + thname;
+          boolean enable = false;
+          if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
+            for ( int k=0; k<DefaultLines.length; ++k ) { 
+              if ( DefaultLines[k].equals( thname ) ) { enable = true; break; }
+            }
+            TopoDroidApp.mData.setSymbolEnabled( name, enable );
+          } else {
+            enable = TopoDroidApp.mData.getSymbolEnabled( name );
+          }
+          symbol.setEnabled( enable );
         }
       }
       mAnyLineNr = mAnyLine.size();

@@ -440,17 +440,19 @@ public class DataHelper extends DataSetObservable
   public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, boolean forward )
   {
+    String stn = (init_station != null)? init_station : "";
+    String cmt = (comment != null)? comment : "";
     updateSurveyInfoStmt.bindString( 1, date );
     updateSurveyInfoStmt.bindString( 2, team );
     updateSurveyInfoStmt.bindDouble( 3, decl );
-    updateSurveyInfoStmt.bindString( 4, (comment != null)? comment : "" );
-    updateSurveyInfoStmt.bindString( 5, (init_station != null)? init_station : "" );
+    updateSurveyInfoStmt.bindString( 4, cmt );
+    updateSurveyInfoStmt.bindString( 5, stn );
     updateSurveyInfoStmt.bindLong( 6, id );
     updateSurveyInfoStmt.execute();
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
-        listener.onUpdateSurveyInfo( id, date, team, decl, comment );
+        listener.onUpdateSurveyInfo( id, date, team, decl, cmt, stn );
       }
     }
   }
@@ -820,19 +822,22 @@ public class DataHelper extends DataSetObservable
     for ( DataListener listener : mListeners ) {
       for ( ParserShot s : shots ) {
         listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
-                          s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE 
+                          s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE    // flag
                           : s.surface ? DistoXDBlock.BLOCK_SURFACE 
                           // : s.backshot ? DistoXDBlock.BLOCK_BACKSHOT
                           : 0,
-                          0, 0, s.comment );
+                          0, 0, // leg, status
+                          0,    // shot_type: parser-shots are not modifiable
+                          s.comment );
       }
     }
     return id;
   }
   
-  public long insertShot( long sid, long id, double d, double b, double c, double r, long extend, int type, boolean forward )
+  public long insertShot( long sid, long id, double d, double b, double c, double r, long extend,
+                          int shot_type, boolean forward )
   {
-    return insertShot( sid, id, "", "",  d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY, 0L, 0L, type, "", forward );
+    return insertShot( sid, id, "", "",  d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY, 0L, 0L, shot_type, "", forward );
   }
 
   public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
@@ -985,7 +990,7 @@ public class DataHelper extends DataSetObservable
   // return the new-shot id
   public long insertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, int type,
+                          long extend, long flag, long leg, long status, int shot_type,
                           String comment, boolean forward )
   {
     TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertShot <" + id + "> " + from + "-" + to + " extend " + extend );
@@ -1013,12 +1018,12 @@ public class DataHelper extends DataSetObservable
     cv.put( "leg",      leg );
     cv.put( "status",   status );
     cv.put( "comment",  comment );
-    cv.put( "type",     type );
+    cv.put( "type",     shot_type );
     myDB.insert( SHOT_TABLE, null, cv );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
-        listener.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, comment );
+        listener.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
       }
     }
     return id;
@@ -1152,7 +1157,7 @@ public class DataHelper extends DataSetObservable
                                  null,                // shot name
                                  cursor.getString(3), // date
                                  cursor.getString(4), // comment
-                                 cursor.getString(5), // type
+                                 cursor.getString(5), // shot_type
                                  cursor.getString(6) ) ); // value
       } while (cursor.moveToNext());
     }
@@ -1194,7 +1199,7 @@ public class DataHelper extends DataSetObservable
                                  null,                // shot name
                                  cursor.getString(3), // date
                                  cursor.getString(4), // comment
-                                 cursor.getString(5), // type
+                                 cursor.getString(5), // shot_type
                                  cursor.getString(6) ) ); // value
       } while (cursor.moveToNext());
     }
@@ -2177,20 +2182,26 @@ public class DataHelper extends DataSetObservable
 
    void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? "1" : "0" ); }
 
-   boolean isSymbolEnabled( String name )
+   boolean getSymbolEnabled( String name )
    { 
      String enabled = getValue( name );
      if ( enabled != null ) {
        return enabled.equals("1");
      }
+     return false;
+   }
+
+   void addSymbolEnabled( String name )
+   {
      if ( myDB != null ) {
        ContentValues cv = new ContentValues();
        cv.put( "key",     name );
-       cv.put( "value",   "1" );     // symbols are enabled by default
+       cv.put( "value",   "0" );     // symbols are enabled by default
        myDB.insert( CONFIG_TABLE, null, cv );
      }
-     return true;
    }
+
+   boolean hasSymbolName( String name ) { return ( getValue( name ) != null ); }
 
    // ----------------------------------------------------------------------
    /* Set the current survey/calib name.
@@ -3245,7 +3256,7 @@ public class DataHelper extends DataSetObservable
              long leg    = scanline1.longValue( );
              status      = scanline1.longValue( );
              comment     = scanline1.stringValue( );
-             // FIXME N.B. type is not saved
+             // FIXME N.B. shot_type is not saved
              // long type = 0; if ( db_version > 21 ) type = longValue( );
 
              insertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, 0, comment, false );

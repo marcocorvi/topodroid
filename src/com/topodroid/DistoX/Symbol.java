@@ -86,4 +86,5 @@ class Symbol implements SymbolInterface
 
   public void setAngle( float angle ) {}
   public int getAngle() { return 0; }
+
 }

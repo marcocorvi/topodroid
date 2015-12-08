@@ -54,6 +54,8 @@ public class SyncService
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
 
+    static final String mStateName[] = { "none", "listen", "connecting", "connected" };
+
     static final int MESSAGE_CONNECT_STATE  = 1;
     static final int MESSAGE_DEVICE = 2;
     static final int MESSAGE_READ   = 3;
@@ -81,7 +83,8 @@ public class SyncService
 
   private synchronized void setConnectState(int state)
   {
-    // Log.v("DistoX", "sync connect state " + mConnectState + " --> " + state );
+    TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync connect state: " 
+      + mStateName[mConnectState] + " --> " + mStateName[state] );
     // if ( state == STATE_NONE ) mRemoteDevice = null;
     mConnectState = state;
     mHandler.obtainMessage( MESSAGE_CONNECT_STATE, state, -1).sendToTarget();
@@ -89,7 +92,8 @@ public class SyncService
 
   private synchronized void setAcceptState(int state)
   {
-    // Log.v("DistoX", "sync accept state " + mAcceptState + " --> " + state );
+    TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync accept state "
+      + mStateName[mAcceptState] + " --> " + mStateName[state] );
     mAcceptState = state;
     mHandler.obtainMessage( MESSAGE_ACCEPT_STATE, state, -1).sendToTarget();
   }
@@ -117,7 +121,7 @@ public class SyncService
 
   public synchronized void start() 
   {
-    // Log.v("DistoX", "sync start() ");
+    TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync start()" );
     mAcceptRun = false;
 
     mConnectRun = false;
@@ -128,7 +132,7 @@ public class SyncService
 
   private synchronized void startAccept()
   {
-    // Log.v("DistoX", "sync startAccept() ");
+    TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync startAccept()" );
     if (mAcceptThread != null) {
       mAcceptRun = false;
       setAcceptState(STATE_NONE);
@@ -214,31 +218,37 @@ public class SyncService
       shutdown[1] = DataListener.SHUTDOWN;
       shutdown[2] = 0;
       shutdown[3] = DataListener.EOL;
-      write( shutdown );
+      writeBuffer( shutdown ); // FIXME if failure ? nothing: connectedThread already closed
     }
     if ( mConnectedThread != null ) { mConnectedThread.cancel(); mConnectedThread = null; }
-
     mRemoteDevice = null;
     setConnectState( STATE_NONE );
   }
 
   public synchronized void stop() 
   {
-    // Log.v("DistoX", "sync stop");
+    TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync stop");
     if ( mAcceptThread    != null ) { mAcceptThread.cancel();    mAcceptThread    = null; }
     setAcceptState( STATE_NONE );
     mType = STATE_NONE;
   }
 
-  public void write( byte[] buffer ) 
+  public boolean writeBuffer( byte[] buffer ) 
   {
-    // Log.v("DistoX", "sync write (conn state " + mConnectState + " length " + buffer.length + ") " + buffer[0] + " " + buffer[1] + " ... "); 
+    Log.v("DistoX", "sync write (conn state " + mConnectState + " length " + buffer.length + ") " + buffer[0] + " " + buffer[1] + " ... "); 
     ConnectedThread r;    // Create temporary object
     synchronized (this) { // Synchronize a copy of the ConnectedThread
-      if ( mConnectState != STATE_CONNECTED ) return;
+      if ( mConnectState != STATE_CONNECTED ) return false;
       r = mConnectedThread;
     }
-    r.write( buffer );         // Perform the write unsynchronized
+    if ( r.doWriteBuffer( buffer ) ) {  // Perform the write unsynchronized
+      return true;
+    } // else {
+    mConnectedThread.cancel();
+    mConnectedThread = null;
+    mRemoteDevice = null;
+    setConnectState( STATE_NONE );
+    return false;
   }
 
   // called by the Connect-Thread
@@ -288,6 +298,7 @@ public class SyncService
 
     public void run()
     {
+      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync AcceptThread run");
       setName("AcceptThread");
       BluetoothSocket socket = null;
 
@@ -321,7 +332,7 @@ public class SyncService
           socket = null;
         }
       }
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync AcceptThread done");
+      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync AcceptThread done");
     }
 
     public void cancel()
@@ -367,7 +378,7 @@ public class SyncService
 
     public void run()
     {
-      // Log.v("DistoX", "sync ConnectingThread run");
+      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync ConnectingThread run");
       setName("ConnectingThread");
       mAdapter.cancelDiscovery(); // Always cancel discovery because it will slow down a connection
 
@@ -389,7 +400,7 @@ public class SyncService
       }
 
       connected( mmSocket, mmDevice ); // Start the connected thread
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync connecting thread done");
+      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync connecting thread done");
     }
 
     public void cancel()
@@ -431,7 +442,7 @@ public class SyncService
 
     public void run() 
     {
-      // Log.v("DistoX", "sync ConnectedThread run() " + mConnectRun );
+      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "sync connected thread run");
 
       byte[] buffer = new byte[512];
       byte[] data = new byte[4096];
@@ -491,16 +502,19 @@ public class SyncService
      * Write to the connected OutStream.
      * @param buffer  The bytes to write
      */
-    public void write( byte[] buffer ) 
+    public boolean doWriteBuffer( byte[] buffer ) 
     {
-      // Log.v("DistoX", "sync connected write <" + buffer[0] + "|" + buffer[1] + ">" );
+      Log.v("DistoX", "sync connected write " + buffer.length + ": <" + buffer[0] + "|" + buffer[1] + ">" );
+
       try {
         mmOutStream.write( buffer );
         // Share the sent message back to the UI Activity: NOT USED .... FIXME
         // mHandler.obtainMessage( MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
       } catch (IOException e) {
         TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Exception during write " + e );
+        return false;
       }
+      return true;
     }
 
     public void cancel() 

@@ -805,7 +805,7 @@
   <!-- TODO string name="pref_plan_vthr_message">Vertical threshold for splays in plan</string -->
   <string name="pref_init_station_title">Nom par defaut de la premiere station</string>
   <string name="pref_init_station_summary">Nom par defaut de la premiere station</string>
-  <string name="pref_init_station_message"Nom par defaut de la premiere station</string>
+  <string name="pref_init_station_message">Nom par defaut de la premiere station</string>
   <string name="pref_station_names_title">Nom des stations</string>
   <string name="pref_station_names_summary">Methode de nommage des stations</string>
 

@@ -153,7 +153,7 @@ class ConnectionHandler extends Handler
        mSyncService.connect( mDevice );
      }
      if ( mSyncService.getConnectState() == SyncService.STATE_CONNECTED ) {
-       doSyncCounter();
+       doSyncCounter(); // FIXME what if sync-counter fail
      }
    }
   
@@ -188,10 +188,10 @@ class ConnectionHandler extends Handler
      // }
    }
 
-   void write( byte[] buffer ) 
+   boolean writeBytes( byte[] buffer ) 
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler write CNT " + buffer[0] + " key " + buffer[1] );
-     mSyncService.write( buffer );
+     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler write CNT " + buffer[0] + " key " + buffer[1] );
+     return mSyncService.writeBuffer( buffer );
    }
 
    void startSendThread()
@@ -224,24 +224,24 @@ class ConnectionHandler extends Handler
    }
 
 
-   void doAcknowledge( int cnt )
+   boolean doAcknowledge( int cnt )
    {
      // Log.v("DistoX", "ACK count " + cnt );
      mAck[0] = (byte)cnt;
      mAck[1] = DataListener.ACK; // 0
      mAck[2] = DataListener.EOL;
      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ACK write <" + cnt + ">" );
-     write( mAck );
+     return writeBytes( mAck );
    }
 
    // tell the peer my send counter
-   void doSyncCounter( )
+   boolean doSyncCounter( )
    {
      mAck[0] = (byte)mSendCounter;
      mAck[1] = DataListener.SYNC;
      mAck[2] = DataListener.EOL;
      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "SYNC write <" + mSendCounter + ">" );
-     write( mAck );
+     return writeBytes( mAck );
    }
 
 
@@ -258,7 +258,7 @@ class ConnectionHandler extends Handler
    //
    void onRecv( int bytes, byte[] buffer ) 
    {
-     // Log.v("DistoX", "ConnectionHandler onRecv() len " + buffer.length );
+     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "recv " + bytes + " length " + + buffer.length );
      if ( buffer.length < 2 ) {
        return;
      }
@@ -288,7 +288,7 @@ class ConnectionHandler extends Handler
        return;
      }
 
-     doAcknowledge( cnt );
+     doAcknowledge( cnt ); // FIXME if fails ?
      mRecvCounter = increaseCounter( mRecvCounter );
 
      String data_str = (new String( buffer )).substring( 2 );
@@ -434,9 +434,10 @@ class ConnectionHandler extends Handler
     enqueue( DataListener.SURVEY_NAME, String.format(Locale.ENGLISH, "%s|", name ) );
   }
 
-  public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment ) 
+  public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment, String station ) 
   {
-    enqueue( DataListener.SURVEY_INFO, String.format(Locale.ENGLISH, "%s|%s|%.2f|%s|", date, team, decl, comment ) );
+    enqueue( DataListener.SURVEY_INFO, String.format(Locale.ENGLISH, "%s|%s|%.2f|%s|%s|",
+      date, team, decl, comment, station ) );
   }
 
   public void onUpdateSurveyDayAndComment( long id, String date, String comment )
@@ -512,11 +513,11 @@ class ConnectionHandler extends Handler
 
   public void onInsertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, String comment ) 
+                          long extend, long flag, long leg, long status, int shot_type, String comment ) 
   {
     enqueue( DataListener.SHOT_INSERT, 
-      String.format(Locale.ENGLISH, "%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%s|", 
-      (int)sid, (int)id, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, comment ) );
+      String.format(Locale.ENGLISH, "%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|", 
+      (int)sid, (int)id, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, shot_type, comment ) );
   }
 
   public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, int t ) 
@@ -615,14 +616,17 @@ class ConnectionHandler extends Handler
                 ++ cnt;
               }
               TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "lastByte " + lastByte + " cnt " + cnt );
-              if ( cnt > 10 ) {
+              if ( cnt > 4 ) {
                 // bail-out
                 disconnect( mDevice );
               } else {
-                cnt = 0;
                 lastByte = buffer[0];
                 TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "data write <" + buffer[0] + "|" + buffer[1] + ">" );
-                write( item.mData );
+                if ( writeBytes( item.mData ) ) {
+                  cnt = 0;
+                } else {
+                  ++ cnt;
+                }
               }
             }
             Thread.sleep( SLEEP_DEQUE );   
@@ -637,7 +641,7 @@ class ConnectionHandler extends Handler
   @Override
   public void handleMessage( Message msg )
   {
-    // Log.v("DistoX", "handle message: " + msg.arg1 );
+    TopoDroidLog.Log(TopoDroidLog.LOG_SYNC, "handle message: " + msg.arg1 );
     Bundle bundle; 
     switch (msg.what) {
       case SyncService.MESSAGE_LOST_CONN: // 5

@@ -30,6 +30,10 @@ import android.util.Log;
 
 class SymbolPointLibrary
 {
+  static final String DefaultPoints[] = {
+    "air-draught", "blocks", "clay", "continuation", "debris", "entrance", "sand", "stalactite", "stalagmite", "water-flow"
+  };
+
   // ArrayList< SymbolPoint > mPoint;    // enabled points
   ArrayList< SymbolPoint > mAnyPoint; // all points
   int mPointUserIndex;
@@ -251,7 +255,18 @@ class SymbolPointLibrary
         }
         if ( ! hasAnyPoint( symbol.getThName() ) ) {
           mAnyPoint.add( symbol );
-          symbol.setEnabled( TopoDroidApp.mData.isSymbolEnabled( "p_" + symbol.getThName() ) );
+          String thname = symbol.mThName;
+          String name = "p_" + thname;
+          boolean enable = false;
+          if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
+            for ( int k=0; k<DefaultPoints.length; ++k ) { 
+              if ( DefaultPoints[k].equals( thname ) ) { enable = true; break; }
+            }
+            TopoDroidApp.mData.setSymbolEnabled( name, enable );
+          } else {
+            enable = TopoDroidApp.mData.getSymbolEnabled( name );
+          }
+          symbol.setEnabled( enable );
         }
       }
       mAnyPointNr = mAnyPoint.size();

@@ -24,6 +24,9 @@ import android.util.Log;
 
 class SymbolAreaLibrary
 {
+  static final String DefaultAreas[] = {
+    "blocks", "clay", "debris", "sand"
+  };
   // ArrayList< SymbolArea > mArea;
   ArrayList< SymbolArea > mAnyArea;
   int mAreaUserIndex;
@@ -202,7 +205,18 @@ class SymbolAreaLibrary
         }
         if ( ! hasAnyArea( symbol.mThName ) ) {
           mAnyArea.add( symbol );
-          symbol.setEnabled( TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
+          String thname = symbol.mThName;
+          String name = "a_" + thname;
+          boolean enable = false;
+          if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
+            for ( int k=0; k<DefaultAreas.length; ++k ) { 
+              if ( DefaultAreas[k].equals( thname ) ) { enable = true; break; }
+            }
+            TopoDroidApp.mData.setSymbolEnabled( name, enable );
+          } else {
+            enable = TopoDroidApp.mData.getSymbolEnabled( name );
+          }
+          symbol.setEnabled( enable );
         }
       }
       mAnyAreaNr = mAnyArea.size();
