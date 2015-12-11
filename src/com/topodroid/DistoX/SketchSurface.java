@@ -765,7 +765,7 @@ class SketchSurface extends SketchShot
       retn.y -= p * unit.y;
       retn.z -= p * unit.z;
       retn.Normalized();
-      angle[n] = (float)Math.atan2( retn.dot(dir1), retn.dot(dir2) );
+      angle[n] = TopoDroidUtil.atan2( retn.dot(dir1), retn.dot(dir2) );
     }
     float a = angle[0] - angle[ns-1];
     for ( int n=1; n<ns; ++n ) {

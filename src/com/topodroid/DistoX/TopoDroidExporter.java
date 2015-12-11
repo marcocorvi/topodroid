@@ -366,10 +366,10 @@ class TopoDroidExporter
     float lat = (float)origin.lat;
     float lng = (float)origin.lng;
     float alt = (float)origin.alt;
-    float alat = (float)Math.abs( lat );
+    float alat = TopoDroidUtil.abs( lat );
 
     float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
-    float e_radius = s_radius * FloatMath.cos( alat * (float)Math.PI / 180 );
+    float e_radius = s_radius * FloatMath.cos( alat * TopoDroidUtil.GRAD2RAD );
 
     s_radius = 1 / s_radius;
     e_radius = 1 / e_radius;
@@ -1415,10 +1415,10 @@ class TopoDroidExporter
   {
     LRUD lrud = new LRUD();
     float grad2rad = TopoDroidUtil.GRAD2RAD;
-    float n0 = (float)Math.cos( b.mBearing * grad2rad );
-    float e0 = (float)Math.sin( b.mBearing * grad2rad );
-    float cc0 = (float)Math.cos( b.mClino * grad2rad );
-    float sc0 = (float)Math.sin( b.mClino * grad2rad );
+    float n0 = FloatMath.cos( b.mBearing * grad2rad );
+    float e0 = FloatMath.sin( b.mBearing * grad2rad );
+    float cc0 = FloatMath.cos( b.mClino * grad2rad );
+    float sc0 = FloatMath.sin( b.mClino * grad2rad );
     float cb0 = n0;
     float sb0 = e0;
     // float sc02 = sc0 * sc0;
@@ -1435,10 +1435,10 @@ class TopoDroidExporter
         if ( to != null && to.length() > 0 ) continue;
       }
       if ( station.equals( from ) ) {
-        float cb = (float)Math.cos( item.mBearing * grad2rad );
-        float sb = (float)Math.sin( item.mBearing * grad2rad );
-        float cc = (float)Math.cos( item.mClino * grad2rad );
-        float sc = (float)Math.sin( item.mClino * grad2rad );
+        float cb = FloatMath.cos( item.mBearing * grad2rad );
+        float sb = FloatMath.sin( item.mBearing * grad2rad );
+        float cc = FloatMath.cos( item.mClino * grad2rad );
+        float sc = FloatMath.sin( item.mClino * grad2rad );
         float len = item.mLength;
         float cbb0 = sb*sb0 + cb*cb0; // cosine of angle between block and item
 

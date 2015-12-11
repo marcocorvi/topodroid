@@ -10,6 +10,8 @@ import android.hardware.SensorManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+
+import android.util.FloatMath;
   
 public class TimerTask extends AsyncTask<String, Integer, Long >
                        implements SensorEventListener
@@ -122,8 +124,8 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
     Vector n = g.cross( w ); // north
     w.Normalized();
     n.Normalized();
-    float b0 = (float)Math.atan2( -w.y, n.y );
-    float c0 = - (float)Math.atan2( g.y, (float)Math.sqrt(w.y*w.y+n.y*n.y) );
+    float b0 = TopoDroidUtil.atan2( -w.y, n.y );
+    float c0 = - TopoDroidUtil.atan2( g.y, FloatMath.sqrt(w.y*w.y+n.y*n.y) );
     if ( b0 < 0.0f ) b0 += TopoDroidUtil.M_2PI;
     // if ( r0 < 0.0f ) r0 += TopoDroidUtil.M_2PI;
     b0 = 360 - b0 * 360.0f / TopoDroidUtil.M_2PI;

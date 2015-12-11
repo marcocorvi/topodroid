@@ -246,7 +246,7 @@ class SketchTriangle
       if ( Math.abs(x2) < 0.001 && Math.abs(y2) < 0.001 ) return TopoDroidUtil.M_PI;
       float s = x1*y2 - y1*x2;
       float c = x1*x2 + y1*y2;
-      a += (float)Math.atan2( s, c );
+      a += TopoDroidUtil.atan2( s, c );
       x1 = x2;
       y1 = y2;
     }

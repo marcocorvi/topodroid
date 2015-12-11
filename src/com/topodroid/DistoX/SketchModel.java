@@ -74,7 +74,7 @@ class SketchModel
   public static final int highlightColor = 0xffff9999;
   int cnt;
 
-  private float pi4 = (float)Math.PI/4;
+  private float pi4 = (float)(Math.PI/4);
   private float pi2 = pi4 * 2;
 
   private Selection mSelection;

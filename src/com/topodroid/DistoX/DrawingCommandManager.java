@@ -60,7 +60,6 @@ public class DrawingCommandManager
   private List<DrawingPath>    mGridStack100;
   List<DrawingPath>            mLegsStack;
   List<DrawingPath>            mSplaysStack;
-  // List<DrawingPath>            mFixedStack;
   List<ICanvasCommand>         mCurrentStack;
   private List<ICanvasCommand> mRedoStack;
   // private List<DrawingPath>    mHighlight;  // highlighted path
@@ -108,58 +107,32 @@ public class DrawingCommandManager
   //   }
   // }
 
+  private void flipXAxis( List<DrawingPath> paths )
+  {
+    final Iterator i1 = paths.iterator();
+    while ( i1.hasNext() ){
+      final DrawingPath drawingPath = (DrawingPath) i1.next();
+      drawingPath.flipXAxis();
+    }
+  }
+
   void flipXAxis()
   {
     synchronized( mGridStack1 ) {
-      final Iterator i1 = mGridStack1.iterator();
-      while ( i1.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i1.next();
-        drawingPath.flipXAxis();
-      }
+      flipXAxis( mGridStack1 );
       if ( mNorthLine != null ) mNorthLine.flipXAxis();
-      final Iterator i10 = mGridStack10.iterator();
-      while ( i10.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i10.next();
-        drawingPath.flipXAxis();
-      }
-      final Iterator i100 = mGridStack100.iterator();
-      while ( i100.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i100.next();
-        drawingPath.flipXAxis();
-      }
+      flipXAxis( mGridStack10 );
+      flipXAxis( mGridStack100 );
     }
-
-    // synchronized( mFixedStack ) {
-    //   final Iterator i = mFixedStack.iterator();
-    //   while ( i.hasNext() ){
-    //     final DrawingPath path = (DrawingPath) i.next();
-    //     path.flipXAxis();
-    //   }
-    // }
-
-    synchronized( mLegsStack ) {
-      final Iterator i = mLegsStack.iterator();
-      while ( i.hasNext() ){
-        final DrawingPath path = (DrawingPath) i.next();
-        path.flipXAxis();
-      }
-    }
-
-    synchronized( mSplaysStack ) {
-      final Iterator i = mSplaysStack.iterator();
-      while ( i.hasNext() ){
-        final DrawingPath path = (DrawingPath) i.next();
-        path.flipXAxis();
-      }
-    }
+    synchronized( mLegsStack )   { flipXAxis( mLegsStack ); }
+    synchronized( mSplaysStack ) { flipXAxis( mSplaysStack ); }
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) {
         st.flipXAxis();
       }
     }
-
-    if ( mCurrentStack != null ){
+    if ( mCurrentStack != null ) {
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
@@ -206,7 +179,6 @@ public class DrawingCommandManager
     mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mLegsStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mSplaysStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    // mFixedStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     // mHighlight    = Collections.synchronizedList(new ArrayList<DrawingPath>());
@@ -229,8 +201,6 @@ public class DrawingCommandManager
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
         if ( p.intersect( p1.mX, p1.mY, p2.mX, p2.mY, null ) ) {
-          // Log.v( TopoDroidApp.TAG, "intersect " + p.mBlock.toString(false) );
-          // if ( ret != null ) return null;
           ret.add( p );
         }
       }
@@ -269,9 +239,6 @@ public class DrawingCommandManager
     synchronized( mSplaysStack ) {
       mSplaysStack.clear();
     }
-    // synchronized( mFixedStack ) {
-    //   mFixedStack.clear();
-    // }
     synchronized( mStations ) {
       mStations.clear();
     }
@@ -292,7 +259,6 @@ public class DrawingCommandManager
     mGridStack100.clear();
     mLegsStack.clear();
     mSplaysStack.clear();
-    // mFixedStack.clear();
     mStations.clear();
     mSelection.clearSelectionPoints();
     clearSketchItems();
@@ -334,15 +300,6 @@ public class DrawingCommandManager
   //   if ( plot_type != PlotInfo.PLOT_PLAN && plot_type != PlotInfo.PLOT_EXTENDED ) return null;
   //   boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
   //   boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY) != 0;
-  //   for ( DrawingPath p : mFixedStack ) { // FIXME mLegsStack mSplaysStack
-  //     if (    ( p.mType == DrawingPath.DRAWING_PATH_FIXED && legs )
-  //          || ( p.mType == DrawingPath.DRAWING_PATH_SPLAY && splays ) ) {
-  //       if ( p.isCloseTo( x, y ) ) {
-  //         p.mPaint = DrawingBrushPaths.highlightPaint;
-  //         mHighlight.add( p );
-  //       }
-  //     }
-  //   }
   //   if ( mHighlight.size() == 1 ) {
   //     return mHighlight.get(0).mBlock;
   //   }
@@ -378,6 +335,10 @@ public class DrawingCommandManager
    *    5  line split
    *    6  area complete erase
    *    7  area point erase
+   *
+   * x    X scene
+   * y    Y scene
+   * zoom canvas display zoom
    */
   int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd ) 
   {
@@ -385,7 +346,6 @@ public class DrawingCommandManager
     mSelection.selectAt( x, y, zoom, sel, false, false, false );
     int ret = 0;
     if ( sel.size() > 0 ) {
-      // Log.v("DistoX", "selection size " + sel.size() );
       synchronized( mCurrentStack ) {
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
@@ -654,17 +614,6 @@ public class DrawingCommandManager
   // FIXME LEGS_SPLAYS
   void resetFixedPaint( Paint paint )
   {
-    // if( mFixedStack != null ) { 
-    //   synchronized( mFixedStack ) {
-    //     final Iterator i = mFixedStack.iterator();
-    //     while ( i.hasNext() ){
-    //       final DrawingPath path = (DrawingPath) i.next();
-    //       if ( path.mBlock == null || ! path.mBlock.mMultiBad ) {
-    //         path.setPaint( paint );
-    //       }
-    //     }
-    //   }
-    // }
     if( mLegsStack != null ) { 
       synchronized( mLegsStack ) {
         final Iterator i = mLegsStack.iterator();
@@ -688,23 +637,6 @@ public class DrawingCommandManager
       }
     }
   }
-
-  /** add a fixed path (called by DrawingSurface::addFixedPath)
-   * @param path       path
-   * @param selectable whether the path is selectable
-   */
-  // public void addFixedPath( DrawingPath path, boolean selectable )
-  // {
-  //   mFixedStack.add( path );
-  //   if ( selectable ) {
-  //     synchronized( mSelection ) {
-  //       if ( path.mBlock != null ) {
-  //         // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
-  //       }
-  //       mSelection.insertPath( path );
-  //     }
-  //   }
-  // }  
 
   public void addLegPath( DrawingPath path, boolean selectable )
   { 
@@ -815,16 +747,6 @@ public class DrawingCommandManager
   {
     RectF bounds = new RectF();
     RectF b = new RectF();
-    // if( mFixedStack != null ) { 
-    //   synchronized( mFixedStack ) {
-    //     final Iterator i = mFixedStack.iterator();
-    //     while ( i.hasNext() ){
-    //       final DrawingPath drawingPath = (DrawingPath) i.next();
-    //       drawingPath.mPath.computeBounds( b, true );
-    //       bounds.union( b );
-    //     }
-    //   }
-    // }
     if( mSplaysStack != null ) { 
       synchronized( mSplaysStack ) {
         final Iterator i = mSplaysStack.iterator();
@@ -932,15 +854,6 @@ public class DrawingCommandManager
         }
       }
     }
-    // if ( mFixedStack != null ) {
-    //   synchronized( mFixedStack ) {
-    //     final Iterator i = mFixedStack.iterator();
-    //     while ( i.hasNext() ){
-    //       final DrawingPath drawingPath = (DrawingPath) i.next();
-    //       drawingPath.draw( c, mat, sca, null );
-    //     }
-    //   }
-    // }
  
     if ( mStations != null ) {  
       synchronized( mStations ) {
@@ -1166,20 +1079,39 @@ public class DrawingCommandManager
     if ( mDisplayPoints ) {
       synchronized( mSelection ) {
         float radius = TopoDroidSetting.mDotRadius/zoom;
-        for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
-          float x, y;
-          if ( pt.mPoint != null ) { // line-point
-            x = pt.mPoint.mX;
-            y = pt.mPoint.mY;
-          } else {  
-            x = pt.mItem.cx;
-            y = pt.mItem.cy;
+        for ( SelectionBucket bucket : mSelection.mBuckets ) {
+          if ( bucket.intersects( mBBox ) ) {
+            for ( SelectionPoint pt : bucket.mPoints ) { 
+              float x, y;
+              if ( pt.mPoint != null ) { // line-point
+                x = pt.mPoint.mX;
+                y = pt.mPoint.mY;
+              } else {  
+                x = pt.mItem.cx;
+                y = pt.mItem.cy;
+              }
+              Path path = new Path();
+              path.addCircle( x, y, radius, Path.Direction.CCW );
+              path.transform( mMatrix );
+              canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
+            }
           }
-          Path path = new Path();
-          path.addCircle( x, y, radius, Path.Direction.CCW );
-          path.transform( mMatrix );
-          canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
         }
+        // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
+        //   float x, y;
+        //   if ( pt.mPoint != null ) { // line-point
+        //     x = pt.mPoint.mX;
+        //     y = pt.mPoint.mY;
+        //   } else {  
+        //     x = pt.mItem.cx;
+        //     y = pt.mItem.cy;
+        //   }
+        //   Path path = new Path();
+        //   path.addCircle( x, y, radius, Path.Direction.CCW );
+        //   path.transform( mMatrix );
+        //   canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
+        // }
+
       }
       synchronized( mSelected ) {
         if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTIOM

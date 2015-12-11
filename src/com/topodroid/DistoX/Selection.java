@@ -16,17 +16,20 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 class Selection
 {
+  final static int BSIZE = 40; // bucket size factor
+
   ArrayList< SelectionPoint > mPoints;
+  ArrayList< SelectionBucket > mBuckets;
 
   Selection( )
   {
-    // Log.v("DistoX", "Selection cstr" );
-    // mPoints = new LinkedList< SelectionPoint >();
-    mPoints = new ArrayList< SelectionPoint >();
+    mPoints  = new ArrayList< SelectionPoint >();
+    mBuckets = new ArrayList< SelectionBucket >();
   }
 
   void shiftSelectionBy( float x, float y )
@@ -37,6 +40,15 @@ class Selection
         || t == DrawingPath.DRAWING_PATH_LINE
         || t == DrawingPath.DRAWING_PATH_AREA ) {
         sp.shiftSelectionBy(x, y);
+        float x1 = sp.X();
+        float y1 = sp.Y();
+        if ( sp.mBucket != null ) {
+          if ( ! sp.mBucket.contains( x1, y1 ) ) {
+            sp.setBucket( getBucket( x1, y1 ) );
+          }
+        } else {
+          sp.setBucket( getBucket( x1, y1 ) );
+        }
       }
     }
   }
@@ -45,37 +57,8 @@ class Selection
   {
     // Log.v("DistoX", "Selection clear" );
     mPoints.clear();
+    mBuckets.clear();
   }
-
-  // private void dumpPointsTypes()
-  // {
-  //   int nfxd = 0;
-  //   int nspl = 0;
-  //   int ngrd = 0;
-  //   int nsta = 0;
-  //   int npnt = 0;
-  //   int nlin = 0;
-  //   int nare = 0;
-  //   int nnam = 0;
-  //   int nnrt = 0;
-  //   int noth = 0;
-  //   for ( SelectionPoint p : mPoints ) {
-  //     switch ( p.mItem.mType ) {
-  //       case DrawingPath.DRAWING_PATH_FIXED:   nfxd++; break;
-  //       case DrawingPath.DRAWING_PATH_SPLAY:   nspl++; break;
-  //       case DrawingPath.DRAWING_PATH_GRID:    ngrd++; break;
-  //       case DrawingPath.DRAWING_PATH_STATION: nsta++; break;
-  //       case DrawingPath.DRAWING_PATH_POINT:   npnt++; break;
-  //       case DrawingPath.DRAWING_PATH_LINE:    nlin++; break;
-  //       case DrawingPath.DRAWING_PATH_AREA:    nare++; break;
-  //       case DrawingPath.DRAWING_PATH_NAME:    nnam++; break;
-  //       case DrawingPath.DRAWING_PATH_NORTH:   nnrt++; break;
-  //       default: noth ++;
-  //     }
-  //   }
-  //   Log.v("DistoX", "Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
-  //                   + " " + npnt + " " + nlin + " " + nare + " " + nnam + " " + nnrt + " " + noth  );
-  // }
 
   void clearReferencePoints()
   {
@@ -84,6 +67,7 @@ class Selection
       while( it.hasNext() ) {
         SelectionPoint sp1 = (SelectionPoint)it.next();
         if ( sp1.isReferenceType() ) {
+          sp1.setBucket( null );
           it.remove( );
         }
       }
@@ -97,6 +81,7 @@ class Selection
       while( it.hasNext() ) {
         SelectionPoint sp1 = (SelectionPoint)it.next();
         if ( sp1.isDrawingType() ) {
+          sp1.setBucket( null );
           it.remove( );
         }
       }
@@ -115,9 +100,12 @@ class Selection
    */
   SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt )
   {
-    // Log.v("DistoX", "Selection insert path point" );
-    SelectionPoint sp = new SelectionPoint( path, pt );
+    SelectionPoint sp = new SelectionPoint( path, pt, null );
     mPoints.add( sp );
+    sp.setBucket( getBucket( sp.X(), sp.Y() ) );
+
+    // Log.v("DistoX", "Selection insert path point " + pt.mX + " " + pt.mY );
+    // sp.mBucket.dump();
     return sp;
   }
   
@@ -173,14 +161,47 @@ class Selection
 
   private void insertItem( DrawingPath path, LinePoint pt )
   {
-    mPoints.add( new SelectionPoint( path, pt ) );
-    // Log.v("DistoX", "selection inserted path type " + path.mType + " pts " + mPoints.size() );
+    SelectionPoint sp = new SelectionPoint( path, pt, null );
+    mPoints.add( sp );
+    sp.setBucket( getBucket( sp.X(), sp.Y() ) );
+
+    // if ( pt != null ) {
+    //   Log.v("DistoX", "insert item path type " + path.mType + " pt " + pt.mX + " " + pt.mY );
+    // } else {
+    //   Log.v("DistoX", "insert item path type " + path.mType + " null pt ");
+    // }
+    // sp.mBucket.dump();
+    // dumpBuckets();
+  }
+
+  // FIXME this is called with dmin = 10f
+  SelectionPoint getBucketNearestPoint( SelectionPoint sp, float x, float y, float dmin )
+  {
+    SelectionPoint spmin = null;
+    float x0 = sp.X();
+    float y0 = sp.Y();
+    for ( SelectionBucket bucket : mBuckets ) {
+      if ( bucket.contains( x0, y0, dmin, dmin ) ) {
+        final Iterator jt = bucket.mPoints.iterator();
+        while( jt.hasNext() ) {
+          SelectionPoint sp2 = (SelectionPoint)jt.next();
+          if ( sp == sp2 ) continue;
+          float d = sp2.distance( x, y );
+          if ( d < dmin ) {
+            dmin = d;
+            spmin = sp2;
+          }
+        }
+      }
+    }
+    return spmin;
   }
 
   SelectionPoint getNearestPoint( SelectionPoint sp, float x, float y, float dmin )
   {
-    SelectionPoint spmin = null;
-    // final ListIterator it = mPoints.listIterator(0);
+    SelectionPoint spmin = getBucketNearestPoint( sp, x, y, dmin );
+    if ( spmin != null ) return spmin;
+
     final Iterator it = mPoints.iterator();
     while( it.hasNext() ) {
       SelectionPoint sp1 = (SelectionPoint)it.next();
@@ -196,44 +217,26 @@ class Selection
 
   void removePoint( SelectionPoint sp )
   {
-    // Log.v("DistoX", "Selection remove point" );
+    sp.setBucket( null );
     mPoints.remove( sp ); 
-    // final ListIterator it = mPoints.listIterator(0);
-    // while( it.hasNext() ) {
-    //   if ( sp == (SelectionPoint)it.next() ) {
-    //     it.remove();
-    //     return;
-    //   }
-    // }
   }
 
   void removePath( DrawingPath path )
   {
-    // Log.v("DistoX", "Selection remove path" );
     if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-
       DrawingPointLinePath line = (DrawingPointLinePath)path;
       for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {
         for ( SelectionPoint sp : mPoints ) {
           if ( sp.mPoint == lp ) {
-            mPoints.remove( sp );
+            removePoint( sp );
             break;
           }
         }
       }
-
-      // final ListIterator it = mPoints.listIterator(0);
-      // while( it.hasNext() ) {
-      //   SelectionPoint sp = (SelectionPoint)it.next();
-      //   if ( path == sp.mItem ) {
-      //     it.remove(); // remove selection point
-      //   }
-      // }
-
     } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {  
       for ( SelectionPoint sp : mPoints ) {
         if ( sp.mItem == path ) {
-          mPoints.remove( sp );
+          removePoint( sp );
           break;
         }
       }
@@ -242,44 +245,104 @@ class Selection
 
   void removeLinePoint( DrawingPointLinePath path, LinePoint lp )
   {
-    // Log.v("DistoX", "Selection remove line point" );
     if ( path.mType != DrawingPath.DRAWING_PATH_LINE && path.mType != DrawingPath.DRAWING_PATH_AREA ) return;
-    // final Iterator i = mPoints.iterator();
     for ( SelectionPoint sp : mPoints ) {
       if ( sp.mPoint == lp ) {
-        mPoints.remove( sp );
+        removePoint( sp );
         return;
       }
     }
   }
 
-  // void removeLinePath( DrawingLinePath path )
-  // {
-  //   final Iterator i = mPoints.iterator();
-  //   while ( i.hasNext() ) {
-  //     final SelectionPoint sp = (SelectionPoint) i.next();
-  //     if ( sp.mItem == path ) {
-  //       // Log.v(TopoDroidApp.TAG, "sel. remove " + sp.mPoint.mX + " " + sp.mPoint.mY );
-  //       mPoints.remove( i ); // FIXME
-  //     }
-  //   }
-  // }
+  void bucketSelectAt( float x, float y, float radius, SelectionSet sel, boolean legs, boolean splays, boolean stations )
+  {
+    // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
+    for ( SelectionBucket bucket : mBuckets ) {
+      // bucket.dump();
+      if ( bucket.contains( x, y, radius, radius ) ) {
+        for ( SelectionPoint sp : bucket.mPoints ) {
+          if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
+          if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
+          if ( !stations && ( sp.type() == DrawingPath.DRAWING_PATH_STATION || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
+       
+          sp.mDistance = sp.distance( x, y );
+          if ( sp.mDistance < radius ) {
+            sel.addPoint( sp );
+            // sp.mBucket.dump();
+          }
+        }
+      }
+    }
+  }
 
   void selectAt( float x, float y, float zoom, SelectionSet sel, boolean legs, boolean splays, boolean stations )
   {
     float radius = TopoDroidSetting.mCloseCutoff + TopoDroidSetting.mCloseness / zoom;
     // Log.v( "DistoX", "selection select at " + x + " " + y + " pts " + mPoints.size() + " " + legs + " " + splays + " " + stations + " radius " + radius );
-    for ( SelectionPoint sp : mPoints ) {
-      if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
-      if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
-      if ( !stations && ( sp.type() == DrawingPath.DRAWING_PATH_STATION || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
-      sp.mDistance = sp.distance(x, y);
-      // Log.v("DistoX", "sp " + sp.name() + " distance " + sp.mDistance );
-      if ( sp.mDistance < radius ) {
-        sel.addPoint( sp );
-      }
-    }
-    // Log.v(TopoDroidApp.TAG, "selectAt " + sel.size() );
+
+    bucketSelectAt( x, y, radius, sel, legs, splays, stations );
+    // Log.v("DistoX", "bucketSelect size " + sel.size() );
+
+    if ( sel.size() > 0 ) return;
+
+    // for ( SelectionPoint sp : mPoints ) {
+    //   if ( !legs && sp.type() == DrawingPath.DRAWING_PATH_FIXED ) continue;
+    //   if ( !splays && sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) continue;
+    //   if ( !stations && ( sp.type() == DrawingPath.DRAWING_PATH_STATION || sp.type() == DrawingPath.DRAWING_PATH_NAME ) ) continue;
+    //   sp.mDistance = sp.distance(x, y);
+    //   // Log.v("DistoX", "sp " + sp.name() + " distance " + sp.mDistance );
+    //   if ( sp.mDistance < radius ) {
+    //     sel.addPoint( sp );
+    //   }
+    // }
   }
 
+  private SelectionBucket getBucket( float x, float y )
+  {
+    for ( SelectionBucket bucket : mBuckets ) {
+      if ( bucket.contains( x, y ) ) return bucket;
+    }
+    float x0 = BSIZE * FloatMath.floor(x / BSIZE);
+    float y0 = BSIZE * FloatMath.floor(y / BSIZE);
+    SelectionBucket ret = new SelectionBucket( x0, y0, x0+BSIZE, y0+BSIZE );
+    mBuckets.add( ret );
+    return ret;
+  }
+
+  // private void dumpBuckets()
+  // {
+  //   for ( SelectionBucket bucket : mBuckets ) {
+  //     bucket.dump();
+  //   }
+  // }
+
+  // private void dumpPointsTypes()
+  // {
+  //   int nfxd = 0;
+  //   int nspl = 0;
+  //   int ngrd = 0;
+  //   int nsta = 0;
+  //   int npnt = 0;
+  //   int nlin = 0;
+  //   int nare = 0;
+  //   int nnam = 0;
+  //   int nnrt = 0;
+  //   int noth = 0;
+  //   for ( SelectionPoint p : mPoints ) {
+  //     switch ( p.mItem.mType ) {
+  //       case DrawingPath.DRAWING_PATH_FIXED:   nfxd++; break;
+  //       case DrawingPath.DRAWING_PATH_SPLAY:   nspl++; break;
+  //       case DrawingPath.DRAWING_PATH_GRID:    ngrd++; break;
+  //       case DrawingPath.DRAWING_PATH_STATION: nsta++; break;
+  //       case DrawingPath.DRAWING_PATH_POINT:   npnt++; break;
+  //       case DrawingPath.DRAWING_PATH_LINE:    nlin++; break;
+  //       case DrawingPath.DRAWING_PATH_AREA:    nare++; break;
+  //       case DrawingPath.DRAWING_PATH_NAME:    nnam++; break;
+  //       case DrawingPath.DRAWING_PATH_NORTH:   nnrt++; break;
+  //       default: noth ++;
+  //     }
+  //   }
+  //   Log.v("DistoX", "Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
+  //                   + " " + npnt + " " + nlin + " " + nare + " " + nnam + " " + nnrt + " " + noth  );
+  // }
 }

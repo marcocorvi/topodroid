@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.lang.Math;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -42,12 +44,17 @@ public class TopoDroidUtil
   static final float FT2M = 0.3048f;
   static final float IN2M = 0.0254f;
   static final float YD2M = 0.9144f;
+
   static float in360( float f )
   {
     while ( f >= 360 ) f -= 360;
     while ( f < 0 )    f += 360;
     return f;
   }
+
+  static float abs( float x ) { return (float)( Math.abs(x) ); }
+  static float atan2( float y, float x ) { return (float)( Math.atan2( y, x ) ); }
+  static float acos( float x ) { return (float)( Math.acos( x ) ); }
 
   static float around( float f, float f0 ) 
   {

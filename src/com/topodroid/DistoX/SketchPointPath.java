@@ -136,8 +136,8 @@ public class SketchPointPath extends SketchPath
       float d = FloatMath.sqrt( q1.x*q1.x + q1.y*q1.y );
       if ( Math.abs(d) > 0.01 ) {
         Matrix matrix1 = new Matrix();
-        // float angle = (float)Math.atan2( q1.y/d, q1.x/d );
-        // matrix1.preRotate( angle * (float)Math.PI/180 );
+        // float angle = FloatMath.atan2( q1.y/d, q1.x/d );
+        // matrix1.preRotate( angle * FloatMath.PI/180 );
         matrix1.setSinCos( q1.x/d, -q1.y/d ); // android rotation is counterclockwise ?
         path.transform( matrix1 );
       }

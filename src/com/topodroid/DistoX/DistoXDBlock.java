@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import android.view.View;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 public class DistoXDBlock
@@ -208,15 +209,15 @@ public class DistoXDBlock
   public float relativeDistance( DistoXDBlock b )
   {
     if ( b == null ) return 10000.0f; // a large distance
-    float cc = (float)Math.cos(mClino * grad2rad);
-    float sc = (float)Math.sin(mClino * grad2rad);
-    float cb = (float)Math.cos(mBearing * grad2rad); 
-    float sb = (float)Math.sin(mBearing * grad2rad); 
+    float cc = FloatMath.cos(mClino * grad2rad);
+    float sc = FloatMath.sin(mClino * grad2rad);
+    float cb = FloatMath.cos(mBearing * grad2rad); 
+    float sb = FloatMath.sin(mBearing * grad2rad); 
     Vector v1 = new Vector( mLength * cc * sb, mLength * cc * cb, mLength * sc );
-    cc = (float)Math.cos(b.mClino * grad2rad);
-    sc = (float)Math.sin(b.mClino * grad2rad);
-    cb = (float)Math.cos(b.mBearing * grad2rad); 
-    sb = (float)Math.sin(b.mBearing * grad2rad); 
+    cc = FloatMath.cos(b.mClino * grad2rad);
+    sc = FloatMath.sin(b.mClino * grad2rad);
+    cb = FloatMath.cos(b.mBearing * grad2rad); 
+    sb = FloatMath.sin(b.mBearing * grad2rad); 
     Vector v2 = new Vector( b.mLength * cc * sb, b.mLength * cc * cb, b.mLength * sc );
     float dist = (v1.minus(v2)).Length();
     return dist/mLength + dist/b.mLength; 

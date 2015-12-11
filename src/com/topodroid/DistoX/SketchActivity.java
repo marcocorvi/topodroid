@@ -1118,7 +1118,7 @@ public class SketchActivity extends ItemDrawer
   //   if ( np < 2 ) return 0.0f;
   //   float x = ev.getX(1) - ev.getX(0);
   //   float y = ev.getY(1) - ev.getY(0);
-  //   return (float)Math.atan2( y, x );
+  //   return FloatMath.atan2( y, x );
   // }
 
   // private float position( WrapMotionEvent ev ) // vertical position
@@ -1249,7 +1249,7 @@ public class SketchActivity extends ItemDrawer
         float y_shift = y_canvas - mSaveY;
         if ( mMode == SketchDef.MODE_DRAW || mMode == SketchDef.MODE_EDIT ) {
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
-            if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+            if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
               // mSketchSurface.isDrawing = true;
               if ( ++mPointCnt % TopoDroidSetting.mLineType == 0 ) {
                 mCurrentLinePath.addPoint( x_scene, y_scene );
@@ -1310,7 +1310,7 @@ public class SketchActivity extends ItemDrawer
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
-            if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
+            if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
               mCurrentLinePath.addPoint( x_scene, y_scene );
             }
             if ( mPointCnt > TopoDroidSetting.mLineType ) {

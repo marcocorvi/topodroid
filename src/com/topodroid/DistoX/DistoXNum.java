@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 class DistoXNum
@@ -673,18 +674,18 @@ class DistoXNum
       
       if ( ts0.sibling != null ) { // (2) check sibling shots agreement
         float dmax = 0.0f;
-        float cc = (float)Math.cos(blk0.mClino * grad2rad);
-        float sc = (float)Math.sin(blk0.mClino * grad2rad);
-        float cb = (float)Math.cos(blk0.mBearing * grad2rad); 
-        float sb = (float)Math.sin(blk0.mBearing * grad2rad); 
+        float cc = FloatMath.cos(blk0.mClino * grad2rad);
+        float sc = FloatMath.sin(blk0.mClino * grad2rad);
+        float cb = FloatMath.cos(blk0.mBearing * grad2rad); 
+        float sb = FloatMath.sin(blk0.mBearing * grad2rad); 
         Vector v1 = new Vector( blk0.mLength * cc * sb, blk0.mLength * cc * cb, blk0.mLength * sc );
         ts1 = ts0.sibling;
         while ( ts1 != null ) {
           DistoXDBlock blk1 = ts1.getFirstBlock();
-          cc = (float)Math.cos(blk1.mClino * grad2rad);
-          sc = (float)Math.sin(blk1.mClino * grad2rad);
-          cb = (float)Math.cos(blk1.mBearing * grad2rad); 
-          sb = (float)Math.sin(blk1.mBearing * grad2rad); 
+          cc = FloatMath.cos(blk1.mClino * grad2rad);
+          sc = FloatMath.sin(blk1.mClino * grad2rad);
+          cb = FloatMath.cos(blk1.mBearing * grad2rad); 
+          sb = FloatMath.sin(blk1.mBearing * grad2rad); 
           Vector v2 = new Vector( blk1.mLength * cc * sb, blk1.mLength * cc * cb, blk1.mLength * sc );
           float d = ( ( ts1.backshot == -1 )? v1.plus(v2) : v1.minus(v2) ).Length();
           d = d/blk0.mLength + d/blk1.mLength; 
@@ -877,10 +878,10 @@ class DistoXNum
           if ( s1.mHasCoords && ! s2.mHasCoords ) {
             // reset s2 values from the shot
             float d = sh2.mLength * sh2.mDirection;
-            float v = - d * (float)Math.sin( sh2.mClino * grad2rad );
-            float h = d * (float)Math.cos( sh2.mClino * grad2rad );
-            float e = h * (float)Math.sin( sh2.mBearing * grad2rad );
-            float s = - h * (float)Math.cos( sh2.mBearing * grad2rad );
+            float v = - d * FloatMath.sin( sh2.mClino * grad2rad );
+            float h = d * FloatMath.cos( sh2.mClino * grad2rad );
+            float e = h * FloatMath.sin( sh2.mBearing * grad2rad );
+            float s = - h * FloatMath.cos( sh2.mBearing * grad2rad );
             s2.e = s1.e + e;
             s2.s = s1.s + s;
             s2.v = s1.v + v;
@@ -891,10 +892,10 @@ class DistoXNum
           } else if ( s2.mHasCoords && ! s1.mHasCoords ) {
             // reset s1 values from the shot
             float d = - sh2.mLength * sh2.mDirection;
-            float v = - d * (float)Math.sin( sh2.mClino * grad2rad );
-            float h = d * (float)Math.cos( sh2.mClino * grad2rad );
-            float e = h * (float)Math.sin( sh2.mBearing * grad2rad );
-            float s = - h * (float)Math.cos( sh2.mBearing * grad2rad );
+            float v = - d * FloatMath.sin( sh2.mClino * grad2rad );
+            float h = d * FloatMath.cos( sh2.mClino * grad2rad );
+            float e = h * FloatMath.sin( sh2.mBearing * grad2rad );
+            float s = - h * FloatMath.cos( sh2.mBearing * grad2rad );
             s1.e = s2.e + e;
             s1.s = s2.s + s;
             s1.v = s2.v + v;
@@ -1316,13 +1317,13 @@ class DistoXNum
    */
   private String getClosureError( NumStation at, NumStation fr, float d, float b, float c, float len )
   {
-    float dv = (float)Math.abs( fr.v - d * (float)Math.sin(c * grad2rad) - at.v );
-    float h0 = d * (float)Math.abs( Math.cos(c * grad2rad) );
-    float ds = (float)Math.abs( fr.s - h0 * (float)Math.cos( b * grad2rad ) - at.s );
-    float de = (float)Math.abs( fr.e + h0 * (float)Math.sin( b * grad2rad ) - at.e );
+    float dv = TopoDroidUtil.abs( fr.v - d * FloatMath.sin(c * grad2rad) - at.v );
+    float h0 = d * TopoDroidUtil.abs( FloatMath.cos(c * grad2rad) );
+    float ds = TopoDroidUtil.abs( fr.s - h0 * FloatMath.cos( b * grad2rad ) - at.s );
+    float de = TopoDroidUtil.abs( fr.e + h0 * FloatMath.sin( b * grad2rad ) - at.e );
     float dh = ds*ds + de*de;
-    float dl = (float)Math.sqrt( dh + dv*dv );
-    dh = (float)Math.sqrt( dh );
+    float dl = FloatMath.sqrt( dh + dv*dv );
+    dh = FloatMath.sqrt( dh );
     float error = (dl*100) / len;
     return String.format(Locale.ENGLISH, "%s-%s %.2f [%.2f %.2f] %.2f%%", fr.name, at.name,  dl, dh, dv, error );
   }

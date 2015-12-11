@@ -607,7 +607,7 @@ class DrawingDxf
                   xt = pn.mX - p.mX;
                   yt = pn.mY - p.mY;
                 }
-                float d = (float)Math.sqrt( xt*xt + yt*yt );
+                float d = FloatMath.sqrt( xt*xt + yt*yt );
                 printFloat( pw5, 12, xt/d );
                 printFloat( pw5, 22, -yt/d );
                 printFloat( pw5, 32, 0 );
@@ -624,7 +624,7 @@ class DrawingDxf
                   xt = pn.mX - p.mX;
                   yt = pn.mY - p.mY;
                 }
-                d = (float)Math.sqrt( xt*xt + yt*yt );
+                d = FloatMath.sqrt( xt*xt + yt*yt );
                 printFloat( pw5, 13, xt/d );
                 printFloat( pw5, 23, -yt/d );
                 printFloat( pw5, 33, 0 );

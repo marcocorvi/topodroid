@@ -24,7 +24,6 @@ import java.util.Locale;
 import android.util.FloatMath;
 import android.util.Log;
 
-
 public class Vector
 {
   public float x,y,z;
@@ -57,9 +56,9 @@ public class Vector
 
   float maxAbsValue()
   {
-    double mx = Math.abs(x);
-    double my = Math.abs(y);
-    double mz = Math.abs(z);
+    float mx = TopoDroidUtil.abs(x);
+    float my = TopoDroidUtil.abs(y);
+    float mz = TopoDroidUtil.abs(z);
     return (float)( ( mx > my )? ( ( mx > mz )? mx : mz )
                                : ( ( my > mz )? my : mz ) );
   }
@@ -81,7 +80,7 @@ public class Vector
 
   public float Length()
   {
-    return (float)Math.sqrt( x*x + y*y + z*z );
+    return FloatMath.sqrt( x*x + y*y + z*z );
   }
 
   public float Abs( ) { return Length(); }
@@ -115,9 +114,9 @@ public class Vector
 
   public float MaxDiff( Vector b )
   {
-    float dx = (float)Math.abs( x - b.x );
-    float dy = (float)Math.abs( y - b.y );
-    float dz = (float)Math.abs( z - b.z );
+    float dx = TopoDroidUtil.abs( x - b.x );
+    float dy = TopoDroidUtil.abs( y - b.y );
+    float dz = TopoDroidUtil.abs( z - b.z );
     if ( dx < dy ) { dx = dy; }
     if ( dx < dz ) { dx = dz; }
     return dx;
@@ -181,7 +180,7 @@ public class Vector
   }
 
   // dot-product of two Vectors
-  static double dot_product( Vector p1, Vector p2 )
+  static float dot_product( Vector p1, Vector p2 )
   {
     return p1.x * p2.x + p1.y * p2.y + p1.z * p2.z;
   }
@@ -209,8 +208,8 @@ public class Vector
   // arc-distance = arccos of the dot-product ( range in [0, PI] )
   static double arc_distance( Vector p1, Vector p2 )
   {
-    double ca1 = dot_product( p1, p2 );
-    return Math.acos( ca1 );
+    float ca1 = dot_product( p1, p2 );
+    return TopoDroidUtil.acos( ca1 );
   }
 
   // cosine of the spherical angle
@@ -359,7 +358,7 @@ public class Vector
       // w2.Normalized();
       float s = normal.dot( w0.cross(w2) );
       float c = w0.dot(w2);
-      a += (float)Math.atan2( s, c );
+      a += TopoDroidUtil.atan2( s, c );
       w0 = w2;
     }
     return a;

@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
+import android.util.FloatMath;
+
 public class NumStation extends NumSurveyPoint
 {
   private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
@@ -59,11 +61,11 @@ public class NumStation extends NumSurveyPoint
   {
     // TopoDroidLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
     name = id;
-    v = from.v - d * (float)Math.sin(c * grad2rad);
-    float h0 = d * (float)Math.abs( Math.cos(c * grad2rad) );
+    v = from.v - d * FloatMath.sin(c * grad2rad);
+    float h0 = d * TopoDroidUtil.abs( FloatMath.cos(c * grad2rad) );
     h = from.h + extend * h0;
-    s = from.s - h0 * (float)Math.cos( b * grad2rad );
-    e = from.e + h0 * (float)Math.sin( b * grad2rad );
+    s = from.s - h0 * FloatMath.cos( b * grad2rad );
+    e = from.e + h0 * FloatMath.sin( b * grad2rad );
     mDuplicate = false;
     mHasCoords = true;
     s1 = null;
@@ -112,9 +114,9 @@ public class NumStation extends NumSurveyPoint
         NumAzimuth a2 = mLegs.get(k);
         if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
           if ( a1.mExtend == 0 ) {
-            return (float)Math.cos( a2.mAzimuth - b ) * a2.mExtend;
+            return FloatMath.cos( a2.mAzimuth - b ) * a2.mExtend;
           } else {
-            return (float)Math.cos( b - a1.mAzimuth ) * a1.mExtend;
+            return FloatMath.cos( b - a1.mAzimuth ) * a1.mExtend;
           }
         }
         a1 = a2;

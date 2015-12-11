@@ -51,6 +51,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 public class GMActivity extends Activity
@@ -370,7 +371,7 @@ public class GMActivity extends Activity
     long cid = mApp.mCID;
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
-    float thr = (float)Math.cos( TopoDroidSetting.mGroupDistance * TopoDroidUtil.GRAD2RAD);
+    float thr = FloatMath.cos( TopoDroidSetting.mGroupDistance * TopoDroidUtil.GRAD2RAD);
     List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );
     if ( list.size() < 4 ) {
       return -1;

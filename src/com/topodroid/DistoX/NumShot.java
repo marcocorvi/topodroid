@@ -15,6 +15,8 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
+import android.util.FloatMath;
+
 public class NumShot 
 {
   NumStation from;
@@ -81,12 +83,12 @@ public class NumShot
   // compute the coords of "st" from those of "sf"
   void compute( NumStation st, NumStation sf )
   {
-    float dv = mLength * (float)Math.sin( mClino * TopoDroidUtil.M_PI / 180 );
-    float dh = mLength * (float)Math.cos( mClino * TopoDroidUtil.M_PI / 180 );
+    float dv = mLength * FloatMath.sin( mClino * TopoDroidUtil.M_PI / 180 );
+    float dh = mLength * FloatMath.cos( mClino * TopoDroidUtil.M_PI / 180 );
     st.v = sf.v - dv; // v is downward
     st.h = sf.h + mExtend * dh;
-    float dn = dh * (float)Math.cos( (mBearing-mAnomaly) * TopoDroidUtil.M_PI / 180 );
-    float de = dh * (float)Math.sin( (mBearing-mAnomaly) * TopoDroidUtil.M_PI / 180 );
+    float dn = dh * FloatMath.cos( (mBearing-mAnomaly) * TopoDroidUtil.M_PI / 180 );
+    float de = dh * FloatMath.sin( (mBearing-mAnomaly) * TopoDroidUtil.M_PI / 180 );
     st.e = sf.e + de;
     st.s = sf.s - dn;
   }
