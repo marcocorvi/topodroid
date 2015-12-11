@@ -60,7 +60,7 @@ public class DrawingPointPath extends DrawingPath
     mOptions = options;
     mScale   = SCALE_NONE;
     mOrientation = 0.0;
-    if ( DrawingBrushPaths.canRotate( type ) ) {
+    if ( DrawingBrushPaths.canRotatePoint( type ) ) {
       mOrientation = DrawingBrushPaths.getPointOrientation(type);
     }
     setPaint( DrawingBrushPaths.getPointPaint( mPointType ) );
@@ -141,7 +141,7 @@ public class DrawingPointPath extends DrawingPath
   {
     Matrix m = new Matrix();
     if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
-      if ( DrawingBrushPaths.canRotate( mPointType ) ) {
+      if ( DrawingBrushPaths.canRotatePoint( mPointType ) ) {
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {

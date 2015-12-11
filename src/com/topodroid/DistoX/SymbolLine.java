@@ -224,7 +224,7 @@ public class SymbolLine extends Symbol
               //   mCsxPen = Integer.parseInt( vals[k] );
               // }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse csurvey error: " + line );
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse csurvey error: " + line );
             }
   	  } else if ( vals[k].equals("color") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -244,7 +244,7 @@ public class SymbolLine extends Symbol
   	      //   width = Integer.parseInt( vals[k] ) * TopoDroidSetting.mLineThickness;
               // }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse width error: " + line );
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse width error: " + line );
             }
   	  } else if ( vals[k].equals("dash") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -269,7 +269,7 @@ public class SymbolLine extends Symbol
                   }  
                   dash = new DashPathEffect( x, 0 );
                 } catch ( NumberFormatException e ) {
-                 TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse dash error: " + line );
+                 TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse dash error: " + line );
                 }
               }
             }
@@ -319,7 +319,7 @@ public class SymbolLine extends Symbol
                       // }
                     // }
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse moveTo point error: " + line );
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse moveTo point error: " + line );
                   }
                 } else if ( vals[k].equals("lineTo") ) { 
                   try {
@@ -340,7 +340,7 @@ public class SymbolLine extends Symbol
                     //   }
                     // }
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse lineTo point error: " + line );
                   }
                 } else if ( vals[k].equals("cubicTo") ) { 
                   try {
@@ -385,7 +385,7 @@ public class SymbolLine extends Symbol
                     //   }
                     // }
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse lineTo point error: " + line );
                   }
                 } else if ( vals[k].equals("circle") ) { 
                   try {
@@ -397,7 +397,7 @@ public class SymbolLine extends Symbol
                     if ( x-r < xmin ) xmin = x-r;
                     if ( x+r > xmax ) xmax = x+r;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse lineTo point error: " + line );
                   }
                 } else if ( vals[k].equals("endeffect") ) {
                   // path_dir.close();

@@ -18,6 +18,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Shader.TileMode;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -26,7 +29,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -42,6 +45,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
 
   int mAreaType;
   int mAreaCnt;
+  double mOrientation;
   String mPrefix;      // border/area name prefix (= scrap name)
   // boolean mVisible; // visible border in DrawingPointLinePath
 
@@ -50,6 +54,10 @@ public class DrawingAreaPath extends DrawingPointLinePath
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
     mAreaType = type;
     mAreaCnt  = index;
+    mOrientation = 0.0;
+    if ( DrawingBrushPaths.canRotateArea( mAreaType ) ) {
+      mOrientation = DrawingBrushPaths.getAreaOrientation( type );
+    }
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
     if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
       setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
@@ -85,17 +93,52 @@ public class DrawingAreaPath extends DrawingPointLinePath
     }
   }
 
+  @Override
+  public void setPaint( Paint paint ) 
+  { 
+    mPaint = new Paint( paint );
+  }
+
   public int areaType() { return mAreaType; }
+
+  @Override
+  public void setOrientation( double angle ) 
+  { 
+    // Log.v( "DistoX", "Area path set orientation " + angle );
+    if ( ! DrawingBrushPaths.canRotateArea( mAreaType ) ) return;
+    mOrientation = angle; 
+    while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
+    while ( mOrientation < 0.0 ) mOrientation += 360.0;
+    resetPaint();
+  }
+
+  private void resetPaint()
+  {
+    // Log.v("DistoX", "arae path reset paint orientation " + mOrientation );
+    Bitmap bitmap = DrawingBrushPaths.getAreaBitmap( mAreaType );
+    if ( bitmap != null ) {
+      Matrix mat = new Matrix();
+      int w = bitmap.getWidth();
+      int h = bitmap.getHeight();
+      mat.postRotate( (float)mOrientation );
+      Bitmap bitmap1 = Bitmap.createBitmap( bitmap, 0, 0, w, h, mat, true );
+      Bitmap bitmap2 = Bitmap.createBitmap( bitmap1, w/4, h/4, w/2, h/2 );
+      BitmapShader shader = new BitmapShader( bitmap2,
+        DrawingBrushPaths.getAreaXMode( mAreaType ), DrawingBrushPaths.getAreaYMode( mAreaType ) );
+      mPaint.setShader( shader );
+    }
+  }
 
   @Override
   public String toTherion()
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line border -id %s%d -close on ", mPrefix, mAreaCnt );
-    if ( ! isVisible() ) pw.format("-visibility off ");
-    pw.format("\n");
+    pw.format("line border -id %s%d -close on", mPrefix, mAreaCnt );
+    if ( ! isVisible() ) pw.format(" -visibility off");
     // for ( LinePoint pt : mPoints ) 
+    pw.format("\n");
+
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
     {
       pt.toTherion( pw );
@@ -108,7 +151,11 @@ public class DrawingAreaPath extends DrawingPointLinePath
       }
     }
     pw.format("endline\n");
-    pw.format("area %s\n", DrawingBrushPaths.getAreaThName( mAreaType ) );
+    pw.format("area %s", DrawingBrushPaths.getAreaThName( mAreaType ) );
+    if ( DrawingBrushPaths.canRotateArea( mAreaType ) ) {
+      pw.format(Locale.ENGLISH, " #orientation %.1f", mOrientation );
+    }
+    pw.format("\n");
     pw.format("  %s%d\n", mPrefix, mAreaCnt );
     pw.format("endarea\n");
     return sw.getBuffer().toString();

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2012
  *
- * @brief TopoDroid manual location dialog
+ * @brief TopoDroid dialog to confirm/enter long-lat data
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -57,10 +57,6 @@ public class LongLatAltDialog extends Dialog
   private Button   mBtnNS;
   private Button   mBtnEW;
   private Button   mBtnOK;
-  // private Button   mBtnBack;
-  // private Button   mBtnCancel;
-
-  // private CheckBox mWGS84; // checked if alt is wgs84
 
   public LongLatAltDialog( Context context, LocationDialog parent )
   {
@@ -81,7 +77,6 @@ public class LongLatAltDialog extends Dialog
     mEditLat   = (EditText) findViewById(R.id.edit_lat );
     mEditAlt   = (EditText) findViewById(R.id.edit_alt );
     mEditAsl   = (EditText) findViewById(R.id.edit_asl );
-    // mWGS84     = (CheckBox) findViewById(R.id.edit_wgs84 );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
     if ( TopoDroidSetting.mKeyboard ) {
@@ -104,7 +99,6 @@ public class LongLatAltDialog extends Dialog
       mEditAlt.setText(  Integer.toString( (int)(mParent.mHEllipsoid) )  );
       mEditAsl.setText(  Integer.toString( (int)(mParent.mHGeoid) )  );
     }
-    // mWGS84.setChecked( true );
 
     mBtnNS = (Button) findViewById(R.id.button_NS);
     mBtnNS.setOnClickListener( this );
@@ -112,8 +106,6 @@ public class LongLatAltDialog extends Dialog
     mBtnEW.setOnClickListener( this );
     mBtnOK = (Button) findViewById(R.id.button_ok);
     mBtnOK.setOnClickListener( this );
-    // mBtnCancel = (Button) findViewById(R.id.button_cancel);
-    // mBtnCancel.setOnClickListener( this );
 
     setTitle( R.string.title_coord );
   }
@@ -193,22 +185,8 @@ public class LongLatAltDialog extends Dialog
         }
       }
 
-      // if ( TopoDroidSetting.mAltimetricLookup ) {
-      //   Toast.makeText( mContext, R.string.lookup_wait, Toast.LENGTH_LONG ).show();
-      //   if ( alt < -999 ) {
-      //     alt = asl + GeodeticHeight.geodeticHeight( latit, longit );
-      //   } else if ( asl < -999 ) {
-      //     asl = alt - GeodeticHeight.geodeticHeight( latit, longit );
-      //   }
-      // } else { // use same value for both altitudes
-      //   if ( alt < -999 ) alt = 0;
-      //   if ( asl < -999 ) asl = 0;
-      // }
-
       if ( ! north ) lat = -lat;
       if ( ! east )  lng = -lng;
-
-      // Log.v("DistoX", "Long-Lat dialog add LNG " + lng + " LAT " + lat + " ALT " + alt + " " + asl );
 
       mParent.addFixedPoint( lng, lat, alt, asl );
     }

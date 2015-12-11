@@ -22,16 +22,15 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-// import android.graphics.drawable.Drawable;
-// import android.graphics.Rect;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
+
+// import android.widget.SeekBar;
+// import android.widget.SeekBar.OnSeekBarChangeListener;
+// import android.graphics.Bitmap;
+// import android.graphics.Canvas;
+
 import android.graphics.Paint;
-import android.graphics.Matrix;
 
 import android.util.FloatMath;
 
@@ -41,7 +40,6 @@ public class DrawingPointDialog extends Dialog
 {
   private DrawingPointPath mPoint;
   private DrawingActivity  mParent;
-  private int mOrient;
   private boolean mOrientable;
 
   // private TextView mTVtype;
@@ -53,53 +51,45 @@ public class DrawingPointDialog extends Dialog
   private RadioButton mBtnScaleL;
   private RadioButton mBtnScaleXL;
 
-  // private Button   mBtnLeft;
-  // private Button   mBtnRight;
-  private SeekBar  mSeekBar;
-  // private TextView mTVorientation;
-  private ImageView mIVorientation;
-  // private Drawable mDrawable;
-  private Bitmap mBitmap;
-  private Canvas mCanvas;
+  private OrientationWidget mOrientationWidget;
+  // private SeekBar  mSeekBar;
+  // private ImageView mIVorientation;
+  // private Bitmap mBitmap;
+  // private Canvas mCanvas;
  
   private Button   mBtnOk;
-  // private Button   mBtnCancel;
-  // private Button   mBtnErase;
 
   public DrawingPointDialog( DrawingActivity context, DrawingPointPath point )
   {
     super( context );
     mParent = context;
     mPoint  = point;
-    mOrient = (int)mPoint.mOrientation;
-    mOrientable = DrawingBrushPaths.canRotate( mPoint.mPointType );
-    // mDrawable = new Drawable();
-    // mDrawable.setBounds( new Rect( -10, -10, 10, 10 ) );
-    mBitmap = Bitmap.createBitmap( 40, 40, Bitmap.Config.ARGB_8888);
-    mCanvas = new Canvas( mBitmap );
+    mOrientable = DrawingBrushPaths.canRotatePoint( mPoint.mPointType );
+    // mBitmap = Bitmap.createBitmap( 40, 40, Bitmap.Config.ARGB_8888);
+    // mCanvas = new Canvas( mBitmap );
   }
 
-  private void drawOrientation()
-  {
-    if ( ! mOrientable ) return;
-    int d = 20;
-    // mTVorientation.setText( Integer.toString(mOrient) );
-    mCanvas.drawColor( 0xff000000 );
-    float c = FloatMath.cos( mOrient * TopoDroidUtil.GRAD2RAD);
-    float s = FloatMath.sin( mOrient * TopoDroidUtil.GRAD2RAD);
-    float c135 = FloatMath.cos( (mOrient+135) * TopoDroidUtil.GRAD2RAD);
-    float s135 = FloatMath.sin( (mOrient+135) * TopoDroidUtil.GRAD2RAD);
-    float c225 = FloatMath.cos( (mOrient+225) * TopoDroidUtil.GRAD2RAD);
-    float s225 = FloatMath.sin( (mOrient+225) * TopoDroidUtil.GRAD2RAD);
-    float x1 = d+d*s;
-    float y1 = d-d*c;
-    Paint paint = DrawingBrushPaths.fixedBluePaint;
-    mCanvas.drawLine( d-d*s, d+d*c, x1, y1, paint );
-    mCanvas.drawLine( x1, y1, x1+10*s135, y1-10*c135, paint );
-    mCanvas.drawLine( x1, y1, x1+10*s225, y1-10*c225, paint );
-    mIVorientation.setImageBitmap( mBitmap );
-    mIVorientation.invalidate();
-  }
+  // private void drawOrientation()
+  // {
+  //   if ( ! mOrientable ) return;
+  //   int d = 20;
+  //   // mTVorientation.setText( Integer.toString(mOrient) );
+  //   mCanvas.drawColor( 0xff000000 );
+  //   float c = FloatMath.cos( mOrient * TopoDroidUtil.GRAD2RAD);
+  //   float s = FloatMath.sin( mOrient * TopoDroidUtil.GRAD2RAD);
+  //   float c135 = FloatMath.cos( (mOrient+135) * TopoDroidUtil.GRAD2RAD);
+  //   float s135 = FloatMath.sin( (mOrient+135) * TopoDroidUtil.GRAD2RAD);
+  //   float c225 = FloatMath.cos( (mOrient+225) * TopoDroidUtil.GRAD2RAD);
+  //   float s225 = FloatMath.sin( (mOrient+225) * TopoDroidUtil.GRAD2RAD);
+  //   float x1 = d+d*s;
+  //   float y1 = d-d*c;
+  //   Paint paint = DrawingBrushPaths.fixedBluePaint;
+  //   mCanvas.drawLine( d-d*s, d+d*c, x1, y1, paint );
+  //   mCanvas.drawLine( x1, y1, x1+10*s135, y1-10*c135, paint );
+  //   mCanvas.drawLine( x1, y1, x1+10*s225, y1-10*c225, paint );
+  //   mIVorientation.setImageBitmap( mBitmap );
+  //   mIVorientation.invalidate();
+  // }
 
 // -------------------------------------------------------------------
   @Override
@@ -121,42 +111,30 @@ public class DrawingPointDialog extends Dialog
       mETtext.setEnabled( false );
     }
 
-    // mBtnLeft  = (Button) findViewById( R.id.left );
-    // mBtnRight = (Button) findViewById( R.id.right );
-    mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
-    // mTVorientation = (TextView) findViewById( R.id.value );
+    mOrientationWidget = new OrientationWidget( this, mOrientable, mPoint.mOrientation );
 
-    mIVorientation = (ImageView) findViewById( R.id.image );
-    // mIVorientation.setImageDrawable( mDrawable );
-
-    if ( mOrientable ) {
-      mIVorientation.setImageBitmap( mBitmap );
-      drawOrientation();
-      mSeekBar.setProgress( (mOrient+180)%360 );
-
-      // mBtnLeft.setOnClickListener( this );
-      // mBtnRight.setOnClickListener( this );
-      // mBtnLeft.setOnLongClickListener( this );
-      // mBtnRight.setOnLongClickListener( this );
-      mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
-        public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
-          if ( fromUser ) {
-            mOrient = 180 + progress;
-            if ( mOrient >= 360 ) mOrient -= 360;
-            drawOrientation();
-          }
-        }
-        public void onStartTrackingTouch(SeekBar seekbar) { }
-        public void onStopTrackingTouch(SeekBar seekbar) { }
-      } );
-      mSeekBar.setMax( 360 );
-    } else {
-      // mBtnLeft.setVisibility( View.GONE );
-      // mBtnRight.setVisibility( View.GONE );
-      // mTVorientation.setVisibility( View.GONE );
-      mIVorientation.setVisibility( View.GONE );
-      mSeekBar.setVisibility( View.GONE );
-    }
+    // mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
+    // mIVorientation = (ImageView) findViewById( R.id.image );
+    // if ( mOrientable ) {
+    //   mIVorientation.setImageBitmap( mBitmap );
+    //   drawOrientation();
+    //   mSeekBar.setProgress( (mOrient+180)%360 );
+    //   mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+    //     public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
+    //       if ( fromUser ) {
+    //         mOrient = 180 + progress;
+    //         if ( mOrient >= 360 ) mOrient -= 360;
+    //         drawOrientation();
+    //       }
+    //     }
+    //     public void onStartTrackingTouch(SeekBar seekbar) { }
+    //     public void onStopTrackingTouch(SeekBar seekbar) { }
+    //   } );
+    //   mSeekBar.setMax( 360 );
+    // } else {
+    //   mIVorientation.setVisibility( View.GONE );
+    //   mSeekBar.setVisibility( View.GONE );
+    // }
 
     if ( mPoint.mOptions != null ) {
       mEToptions.setText( mPoint.mOptions );
@@ -177,32 +155,7 @@ public class DrawingPointDialog extends Dialog
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
     mBtnOk.setOnClickListener( this );
-
-    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
-
-    // mBtnErase = (Button) findViewById( R.id.button_erase );
-    // mBtnErase.setOnClickListener( this );
   }
-
-  // public boolean onLongClick( View v ) 
-  // {
-  //   if ( mOrientable ) {
-  //     Button b = (Button)v;
-  //     if ( b == mBtnLeft ) {
-  //       mOrient -= 10;
-  //       if ( mOrient < 0 ) mOrient += 360;
-  //       drawOrientation();
-  //       return true;
-  //     } else if ( b == mBtnRight ) {
-  //       mOrient += 10;
-  //       if ( mOrient >= 360 ) mOrient -= 360;
-  //       drawOrientation();
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // } 
 
   public void onClick(View v) 
   {
@@ -221,30 +174,13 @@ public class DrawingPointDialog extends Dialog
       else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( DrawingPointPath.SCALE_XL );
 
       if ( mOrientable ) {
-        mPoint.setOrientation( mOrient );
+        mPoint.setOrientation( mOrientationWidget.mOrient );
       }
       if ( DrawingBrushPaths.mPointLib.pointHasText( mPoint.mPointType ) ) {
         mPoint.setText( mETtext.getText().toString().trim() );
       }
-      dismiss();
-    // } else if ( b == mBtnErase ) {
-    //   mParent.deletePoint( mPoint );
-    //   dismiss();
-    // } else if ( b == mBtnCancel ) {
-    //   dismiss();
-
-    // } else if ( b == mBtnLeft ) {
-    //   mOrient --;
-    //   if ( mOrient < 0 ) mOrient += 360;
-    //   drawOrientation();
-    // } else if ( b == mBtnRight ) {
-    //   mOrient ++;
-    //   if ( mOrient >= 360 ) mOrient -= 360;
-    //   drawOrientation();
-
-    } else {
-      dismiss();
     }
+    dismiss();
   }
 
 }

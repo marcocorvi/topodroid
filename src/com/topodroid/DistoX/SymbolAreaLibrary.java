@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.PrintWriter;
 
 import android.graphics.Paint;
+import android.graphics.Bitmap;
+import android.graphics.Shader.TileMode;
 import android.content.res.Resources;
 
 import android.util.Log;
@@ -65,6 +67,45 @@ class SymbolAreaLibrary
     if ( k < 0 || k >= mAnyAreaNr ) return null;
     return mAnyArea.get( k );
   }
+
+  boolean canRotate( int k )
+  {
+    if ( k < 0 || k >= mAnyAreaNr ) return false;
+    return mAnyArea.get( k ).mOrientable;
+  }
+
+  double getAreaOrientation( int k )
+  {
+    if ( k < 0 || k >= mAnyAreaNr ) return 0;
+    return mAnyArea.get( k ).mOrientation;
+  }
+
+  void resetOrientations() { for ( SymbolArea area : mAnyArea ) area.mOrientation = 0; }
+
+  void rotateGrad( int k, double a ) 
+  {
+    if ( k < 0 || k >= mAnyAreaNr ) return;
+    mAnyArea.get( k ).rotateGrad( a );
+  }
+
+  Bitmap getAreaBitmap( int k ) 
+  { 
+    if ( k < 0 || k >= mAnyAreaNr ) return null;
+    return mAnyArea.get( k ).mBitmap;
+  }
+  
+  TileMode getAreaXMode( int k ) 
+  { 
+    if ( k < 0 || k >= mAnyAreaNr ) return TileMode.REPEAT;
+    return mAnyArea.get( k ).mXMode;
+  }
+  
+  TileMode getAreaYMode( int k )
+  { 
+    if ( k < 0 || k >= mAnyAreaNr ) return TileMode.REPEAT;
+    return mAnyArea.get( k ).mYMode;
+  }
+  
 
   boolean hasArea( String th_name ) 
   {
@@ -167,7 +208,7 @@ class SymbolAreaLibrary
     // Log.v( TopoDroidApp.TAG, "load system areas");
     if ( mAnyArea.size() > 0 ) return;
 
-    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user",  0x66ffffff );
+    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user",  0x66ffffff, null, TileMode.REPEAT, TileMode.REPEAT );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;
@@ -175,7 +216,7 @@ class SymbolAreaLibrary
     symbol.mCsxBrush = 2;
     mAnyArea.add( symbol );
 
-    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water",  0x660000ff );
+    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water",  0x660000ff, null, TileMode.REPEAT, TileMode.REPEAT );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;

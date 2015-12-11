@@ -1357,7 +1357,7 @@ public class SketchActivity extends ItemDrawer
                 // Log.v("DistoX", "new point " + mCurrentPoint + " at " + p.x + " " + p.y + " " + p.z );
                 SketchPointPath path = new SketchPointPath( mCurrentPoint, mInfo.st1, mInfo.st2, p.x, p.y, p.z );
                 SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
-                if ( point_lib.canRotate(mCurrentPoint) ) {
+                if ( point_lib.canRotate( mCurrentPoint ) ) {
                   float angle = (float)( point_lib.getPointOrientation( mCurrentPoint ) );
                   // Log.v("DistoX", "point " + mCurrentPoint + " angle " + angle );
                   angle *= (float)(Math.PI/180.0);
