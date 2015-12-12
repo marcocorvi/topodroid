@@ -1,6 +1,7 @@
 symbol line
 name wall_debris
 name-bg стена_чакъл
+name-ru стена_мусор_осадки
 th_name wall:debris
 group wall
 color 0xff0000 0xff
