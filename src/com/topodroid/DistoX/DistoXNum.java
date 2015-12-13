@@ -16,13 +16,10 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Locale;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class DistoXNum
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
-
   /* bounding box */
   private float mSmin; // south
   private float mSmax;
@@ -163,6 +160,7 @@ class DistoXNum
       }
     }
   }
+
   void setStationsBarr( String barr )
   {
     if ( barr == null ) return;
@@ -234,14 +232,14 @@ class DistoXNum
       NumStation s = stack.pop();
       for ( NumShot e : mShots ) {
         if ( e.from == s && e.to != null ) {
-          float d = s.mShortpathDist + e.mLength;
+          float d = s.mShortpathDist + e.length();
           if ( d < e.to.mShortpathDist ) {
             e.to.mShortpathDist = d;
             // e.to.path = from;
             stack.push( e.to );
           }
         } else if ( e.to == s && e.from != null ) {
-          float d = s.mShortpathDist + e.mLength;
+          float d = s.mShortpathDist + e.length();
           if ( d < e.from.mShortpathDist ) {
             e.from.mShortpathDist = d;
             // e.from.path = from;
@@ -500,6 +498,7 @@ class DistoXNum
     public int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
     public TmpShot sibling;  // sibling shot with same stations
     public ArrayList<DistoXDBlock> blocks;
+    AverageLeg mAvgLeg;
 
     public TmpShot( DistoXDBlock blk, String f, String t, int e, int r )
     { 
@@ -514,9 +513,15 @@ class DistoXNum
       sibling = null;
       blocks = new ArrayList<DistoXDBlock>();
       blocks.add( blk );
+      mAvgLeg = new AverageLeg();
+      mAvgLeg.set( blk );
     }
 
-    void addBlock( DistoXDBlock blk ) { blocks.add( blk ); }
+    void addBlock( DistoXDBlock blk )
+    {
+      blocks.add( blk );
+      mAvgLeg.add( blk );
+    }
 
     DistoXDBlock getFirstBlock( ) { return blocks.get(0); }
 
@@ -527,35 +532,42 @@ class DistoXNum
      */
     float d()
     {
-      float ret = 0.0f;
-      for ( DistoXDBlock b : blocks ) ret += b.mLength; 
-      return ret / blocks.size();
+      // float ret = 0.0f;
+      // for ( DistoXDBlock b : blocks ) ret += b.mLength; 
+      // return ret / blocks.size();
+      return mAvgLeg.length();
     }
 
     float b()
     {
-      DistoXDBlock blk = blocks.get(0);
-      int size = blocks.size();
-      float b0 = blk.mBearing;
-      if ( size == 1 ) {
-        return (reversed == -1)? TopoDroidUtil.in360(b0+180) : b0;
-      }
-      float ret = b0;
-      for ( int k=1; k<size; ++k ) {
-        blk = blocks.get(k);
-        ret += TopoDroidUtil.around( blk.mBearing, b0 );
-      }
-      return TopoDroidUtil.in360( ret/size );
+      // DistoXDBlock blk = blocks.get(0);
+      // int size = blocks.size();
+      // float b0 = blk.mBearing;
+      // if ( size == 1 ) {
+      //   return (reversed == -1)? TDMath.in360(b0+180) : b0;
+      // }
+      // float ret = b0;
+      // for ( int k=1; k<size; ++k ) {
+      //   blk = blocks.get(k);
+      //   ret += TDMath.around( blk.mBearing, b0 );
+      // }
+      // return TDMath.in360( ret/size );
+
+      float ret = mAvgLeg.bearing();
+      if ( reversed == -1 ) { ret += 180; if (ret >= 360) ret -= 360; }
+      return ret;
     }
 
     float c()
     {
-      float ret = 0.0f;
-      if ( blocks.size() == 1 ) {
-        return reversed * blocks.get(0).mClino;
-      }
-      for ( DistoXDBlock b : blocks ) ret += b.mClino;
-      return ret / blocks.size();
+      // float ret = 0.0f;
+      // if ( blocks.size() == 1 ) {
+      //   return reversed * blocks.get(0).mClino;
+      // }
+      // for ( DistoXDBlock b : blocks ) ret += b.mClino;
+      // return ret / blocks.size();
+
+      return reversed * mAvgLeg.clino(); 
     }
 
     // void Dump()
@@ -566,6 +578,38 @@ class DistoXNum
     //   }
     // }
 
+  }
+
+  public class TmpSplay
+  {
+    boolean used;
+    public String from;   // splay station (usually "from")
+    public int extend;
+    public int reversed;  // -1 reversed, +1 normal 
+                          // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
+                          // this is checked only in makeShotFromTmp to detect errors
+    public DistoXDBlock block;
+
+    public TmpSplay( DistoXDBlock blk, String f, int e, int r )
+    { 
+      used = false;
+      from = f;
+      extend = e;
+      reversed = r;
+      block = blk;
+    }
+
+    float d() { return block.mLength; }
+
+    float b()
+    {
+      if ( reversed == 1 ) return block.mBearing;
+      float ret = block.mBearing + 180;
+      if ( ret >= 360 ) ret -= 360;
+      return ret;
+    }
+
+    float c() { return reversed * block.mClino; }
   }
 
   // ================================================================
@@ -583,8 +627,9 @@ class DistoXNum
     }
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() );
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly );
-    for ( DistoXDBlock blk : ts.getBlocks() ) {
-      sh.addBlock( blk );
+    ArrayList<DistoXDBlock> blks = ts.getBlocks();
+    for ( int k = 1; k < blks.size(); ++k ) {
+      sh.addBlock( blks.get(k) );
     }
     return sh;
   }
@@ -598,6 +643,8 @@ class DistoXNum
     resetBBox();
     resetStats();
 
+    long millis_start = System.currentTimeMillis();
+    
     mStations = new ArrayList< NumStation >();
     mShots    = new ArrayList< NumShot >();
     mSplays   = new ArrayList< NumSplay >();
@@ -606,7 +653,7 @@ class DistoXNum
 
     TmpShot lastLeg = null;
     List<TmpShot> tmpshots  = new ArrayList< TmpShot >();
-    List<TmpShot> tmpsplays = new ArrayList< TmpShot >();
+    List<TmpSplay> tmpsplays = new ArrayList< TmpSplay >();
 
     for ( DistoXDBlock blk : data ) {
       switch ( blk.type() ) {
@@ -614,9 +661,9 @@ class DistoXNum
         case DistoXDBlock.BLOCK_SPLAY:
           lastLeg = null;  // clear last-leg
           if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
-            tmpsplays.add( new TmpShot( blk, blk.mFrom, null, (int)(blk.mExtend), +1 ) );
+            tmpsplays.add( new TmpSplay( blk, blk.mFrom, (int)(blk.mExtend), +1 ) );
           } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
-            tmpsplays.add( new TmpShot( blk, blk.mTo, null, (int)(blk.mExtend), -1 ) );
+            tmpsplays.add( new TmpSplay( blk, blk.mTo, (int)(blk.mExtend), -1 ) );
           }
           break;
 
@@ -645,8 +692,6 @@ class DistoXNum
     //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     // for ( TmpShot ts : tmpshots ) ts.Dump();
 
-    float grad2rad = TopoDroidUtil.GRAD2RAD;
-
     for ( int i = 0; i < tmpshots.size(); ++i ) {
       TmpShot ts0 = tmpshots.get( i );
       DistoXDBlock blk0 = ts0.getFirstBlock();
@@ -674,18 +719,18 @@ class DistoXNum
       
       if ( ts0.sibling != null ) { // (2) check sibling shots agreement
         float dmax = 0.0f;
-        float cc = FloatMath.cos(blk0.mClino * grad2rad);
-        float sc = FloatMath.sin(blk0.mClino * grad2rad);
-        float cb = FloatMath.cos(blk0.mBearing * grad2rad); 
-        float sb = FloatMath.sin(blk0.mBearing * grad2rad); 
+        float cc = TDMath.cosd( blk0.mClino );
+        float sc = TDMath.sind( blk0.mClino );
+        float cb = TDMath.cosd( blk0.mBearing ); 
+        float sb = TDMath.sind( blk0.mBearing ); 
         Vector v1 = new Vector( blk0.mLength * cc * sb, blk0.mLength * cc * cb, blk0.mLength * sc );
         ts1 = ts0.sibling;
         while ( ts1 != null ) {
           DistoXDBlock blk1 = ts1.getFirstBlock();
-          cc = FloatMath.cos(blk1.mClino * grad2rad);
-          sc = FloatMath.sin(blk1.mClino * grad2rad);
-          cb = FloatMath.cos(blk1.mBearing * grad2rad); 
-          sb = FloatMath.sin(blk1.mBearing * grad2rad); 
+          cc = TDMath.cosd( blk1.mClino );
+          sc = TDMath.sind( blk1.mClino );
+          cb = TDMath.cosd( blk1.mBearing ); 
+          sb = TDMath.sind( blk1.mBearing ); 
           Vector v2 = new Vector( blk1.mLength * cc * sb, blk1.mLength * cc * cb, blk1.mLength * sc );
           float d = ( ( ts1.backshot == -1 )? v1.plus(v2) : v1.minus(v2) ).Length();
           d = d/blk0.mLength + d/blk1.mLength; 
@@ -786,6 +831,8 @@ class DistoXNum
         // ts.Dump();
 
         if ( sf != null ) {
+          sf.addAzimuth( ts.b(), ts.extend );
+
           if ( st != null ) { // loop-closure
             if ( /* TopoDroidSetting.mAutoStations || */ ! TopoDroidSetting.mLoopClosure ) { // do not close loop
               // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "do not close loop");
@@ -834,6 +881,7 @@ class DistoXNum
         else if ( st != null ) 
         { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
           // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+          st.addAzimuth( (ts.b()+180)%360, -ts.extend );
           
           TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
                             "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
@@ -875,13 +923,15 @@ class DistoXNum
           if ( sh2.mUsed ) continue;
           NumStation s1 = sh2.from;
           NumStation s2 = sh2.to;
+          float c2 = sh2.clino();
+          float b2 = sh2.bearing();
           if ( s1.mHasCoords && ! s2.mHasCoords ) {
             // reset s2 values from the shot
-            float d = sh2.mLength * sh2.mDirection;
-            float v = - d * FloatMath.sin( sh2.mClino * grad2rad );
-            float h = d * FloatMath.cos( sh2.mClino * grad2rad );
-            float e = h * FloatMath.sin( sh2.mBearing * grad2rad );
-            float s = - h * FloatMath.cos( sh2.mBearing * grad2rad );
+            float d = sh2.length() * sh2.mDirection;
+            float v = - d * TDMath.sind( c2 );
+            float h =   d * TDMath.cosd( c2 );
+            float e =   h * TDMath.sind( b2 );
+            float s = - h * TDMath.cosd( b2 );
             s2.e = s1.e + e;
             s2.s = s1.s + s;
             s2.v = s1.v + v;
@@ -891,11 +941,11 @@ class DistoXNum
             // Log.v( TopoDroidApp.TAG, "reset " + s1.name + "->" + s2.name + " " + e + " " + s + " " + v );
           } else if ( s2.mHasCoords && ! s1.mHasCoords ) {
             // reset s1 values from the shot
-            float d = - sh2.mLength * sh2.mDirection;
-            float v = - d * FloatMath.sin( sh2.mClino * grad2rad );
-            float h = d * FloatMath.cos( sh2.mClino * grad2rad );
-            float e = h * FloatMath.sin( sh2.mBearing * grad2rad );
-            float s = - h * FloatMath.cos( sh2.mBearing * grad2rad );
+            float d = - sh2.length() * sh2.mDirection;
+            float v = - d * TDMath.sind( c2 );
+            float h =   d * TDMath.cosd( c2 );
+            float e =   h * TDMath.sind( b2 );
+            float s = - h * TDMath.cosd( b2 );
             s1.e = s2.e + e;
             s1.s = s2.s + s;
             s1.v = s2.v + v;
@@ -911,23 +961,16 @@ class DistoXNum
 
     for ( NumStation st : mStations ) {
       st.setAzimuths();
-      for ( TmpShot ts : tmpsplays ) {
+      for ( TmpSplay ts : tmpsplays ) {
         if ( getStation( ts.from ) == st ) {
           float extend = st.computeExtend( ts.b(), ts.extend ); 
-          mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.getFirstBlock() ) );
+          mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.block ) );
         }
       }
     }
 
-    // for ( TmpShot ts : tmpsplays ) {
-    //   NumStation sf = getStation( ts.from );
-    //   if ( sf != null ) {
-    //     // TopoDroidLog.Log( TopoDroiaLog.LOG_NUM,
-    //     //   "DistoXNum::compute splay from " + ts.from + " " + ts.d + " " + ts.b + " " + ts.c +
-    //     //   " (extend " + ts.extend + ")" );
-    //     mSplays.add( new NumSplay( sf, ts.d(), ts.b(), ts.c(), ts.extend, ts.getFirstBlock() ) );
-    //   }
-    // }
+    long millis_end = System.currentTimeMillis() - millis_start;
+    Log.v("DistoX", "Data reduction " + millis_end + " msec" );
 
     return (mShots.size() == tmpshots.size() );
   }
@@ -1317,13 +1360,13 @@ class DistoXNum
    */
   private String getClosureError( NumStation at, NumStation fr, float d, float b, float c, float len )
   {
-    float dv = TopoDroidUtil.abs( fr.v - d * FloatMath.sin(c * grad2rad) - at.v );
-    float h0 = d * TopoDroidUtil.abs( FloatMath.cos(c * grad2rad) );
-    float ds = TopoDroidUtil.abs( fr.s - h0 * FloatMath.cos( b * grad2rad ) - at.s );
-    float de = TopoDroidUtil.abs( fr.e + h0 * FloatMath.sin( b * grad2rad ) - at.e );
+    float dv = TDMath.abs( fr.v - d * TDMath.sind(c) - at.v );
+    float h0 = d * TDMath.abs( TDMath.cosd(c) );
+    float ds = TDMath.abs( fr.s - h0 * TDMath.cosd( b ) - at.s );
+    float de = TDMath.abs( fr.e + h0 * TDMath.sind( b ) - at.e );
     float dh = ds*ds + de*de;
-    float dl = FloatMath.sqrt( dh + dv*dv );
-    dh = FloatMath.sqrt( dh );
+    float dl = TDMath.sqrt( dh + dv*dv );
+    dh = TDMath.sqrt( dh );
     float error = (dl*100) / len;
     return String.format(Locale.ENGLISH, "%s-%s %.2f [%.2f %.2f] %.2f%%", fr.name, at.name,  dl, dh, dv, error );
   }

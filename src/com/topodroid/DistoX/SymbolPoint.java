@@ -382,41 +382,41 @@ class SymbolPoint extends Symbol
             x00 /= dxfScale;
             y00 /= dxfScale;
 
-            float dx = (float)( Math.abs( x00 - x2 ) );
-            float dy = (float)( Math.abs( y00 - y2 ) );
+            float dx = TDMath.abs( x00 - x2 );
+            float dy = TDMath.abs( y00 - y2 );
 
             float a1 = 0.0f;
             float a2 = 0.0f;
             // float zz = 1.0f;
             float cx = 0.0f;
             float cy = 0.0f;
-            float r  = (float)( Math.abs(x00-x2) );
-            float e = (float)( Math.abs( r /(y00-y2) ) );
+            float r = TDMath.abs( x00-x2 );
+            float e = TDMath.abs( r /(y00-y2) );
 
             if ( x00 > x2 ) {
               if ( y00 > y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // clockwise
                   cx = x00;
                   cy = y2;
-                  a1 = TopoDroidUtil.M_PI;
-                  a2 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI;
+                  a2 = 3 * TDMath.M_PI2;
                 } else { // counter-clockwise
                   cx = x2;
                   cy = y00;
                   a1 = 0.0f;
-                  a2 = TopoDroidUtil.M_PI2;
+                  a2 = TDMath.M_PI2;
                 }
               } else if ( y00 < y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
                   cx = x00;
                   cy = y2;
-                  a1 = TopoDroidUtil.M_PI2;
-                  a2 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI2;
+                  a2 = TDMath.M_PI;
                 } else {
                   cx = x2;
                   cy = y00;
-                  a1 = 3 * TopoDroidUtil.M_PI2;
-                  a2 = 2 * TopoDroidUtil.M_PI;
+                  a1 = 3 * TDMath.M_PI2;
+                  a2 = 2 * TDMath.M_PI;
                 }
               } else { // y00 == y2 : semicircle
                 cx = ( x00 + x2 ) /2;
@@ -424,36 +424,36 @@ class SymbolPoint extends Symbol
                 r /= 2;
                 e = 1.0f;
                 if ( y1 > y00 ) { // down
-                  a1 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI;
                 } else {
                   a1 = 0.0f;
                 }
-                a2 = a1 + TopoDroidUtil.M_PI;
+                a2 = a1 + TDMath.M_PI;
               }
             } else if ( x00 < x2 ) {
               if ( y00 > y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
                   cx = x00;
                   cy = y2;
-                  a1 = 3 * TopoDroidUtil.M_PI2;
-                  a2 = 2 * TopoDroidUtil.M_PI;
+                  a1 = 3 * TDMath.M_PI2;
+                  a2 = 2 * TDMath.M_PI;
                 } else {
                   cx = x2;
                   cy = y00;                   
-                  a1 = TopoDroidUtil.M_PI2;
-                  a2 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI2;
+                  a2 = TDMath.M_PI;
                 }
               } else if ( y00 < y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
                   cx = x00;
                   cy = y2;
                   a1 = 0.0f;
-                  a2 = TopoDroidUtil.M_PI2;
+                  a2 = TDMath.M_PI2;
                 } else {
                   cx = x2;
                   cy = y00;
-                  a1 = TopoDroidUtil.M_PI;
-                  a2 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI;
+                  a2 = 3 * TDMath.M_PI2;
                 }
               } else { // y00 == y2 : semicircle
                 cx = ( x00 + x2 ) / 2;
@@ -461,31 +461,31 @@ class SymbolPoint extends Symbol
                 r /= 2;
                 e = 1.0f;
                 if ( y1 > y00 ) { // down
-                  a1 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI;
                 } else {
                   a1 = 0.0f;
                 }
-                a2 = a1 + TopoDroidUtil.M_PI;
+                a2 = a1 + TDMath.M_PI;
               }
             } else { // x00 == x2 : semicircle
               cx = x00;
               cy = ( y00 + y2 ) / 2;
-              r = (float)( Math.abs(y00-y2) ) / 2;
+              r = TDMath.abs( y00-y2 ) / 2;
               e = 1.0f;
               if ( y00 > y2 ) {
                 if ( x1 < x00 ) { // left
-                  a1 = TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI2;
                 } else {
-                  a1 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = 3 * TDMath.M_PI2;
                 }
               } else {
                 if ( x1 < x00 ) {
-                  a1 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = 3 * TDMath.M_PI2;
                 } else {
-                  a1 = TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI2;
                 }
               }
-              a2 = a1 + TopoDroidUtil.M_PI;
+              a2 = a1 + TDMath.M_PI;
             }
 
             // Log.v(TopoDroidApp.TAG, mName + " cubic " + x00 + " " + y00 + " " + x0 + " " + y0 + " " + x1 + " " + y1 + " " + x2 + " " + y2 );
@@ -505,8 +505,8 @@ class SymbolPoint extends Symbol
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbEllipse" );
             DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f );
             DrawingDxf.printFloat( pw, 40, r*dxfScale );
-            DrawingDxf.printFloat( pw, 50, a1 * TopoDroidUtil.RAD2GRAD );
-            DrawingDxf.printFloat( pw, 51, a2 * TopoDroidUtil.RAD2GRAD );
+            DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2GRAD );
+            DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2GRAD );
     
             x00 = x2 * dxfScale;
             y00 = y2 * dxfScale;
@@ -590,7 +590,7 @@ class SymbolPoint extends Symbol
             //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER
             //           x1*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                        // ENDPOINT OF MAJOR AXIS
             //           (y1-y0)/(x1-x0),                                              // RATIO MINOR/MAJOR
-            //           x2*TopoDroidUtil.GRAD2RAD, (x2+y2)*TopoDroidUtil.GRAD2RAD );  // START and END PARAMS
+            //           x2*TDMath.GRAD2RAD, (x2+y2)*TDMath.GRAD2RAD );  // START and END PARAMS
             DrawingDxf.printString( pw, 0, "ARC" );
             DrawingDxf.printString( pw, 8, "POINT" );
             DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbEllipse" );
@@ -604,10 +604,10 @@ class SymbolPoint extends Symbol
             float rx = (x1-x0)/2;
             float ry = (y1-y0)/2;
     
-            float x0i = (cx + rx * (float)(Math.cos((x2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale; // initial point
-            float y0i = (cy + ry * (float)(Math.sin((x2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale;
-            x00 = (cx + rx * (float)(Math.cos((x2+y2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale;    // final point
-            y00 = (cy + ry * (float)(Math.sin((x2+y2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale;
+            float x0i = (cx + rx * TDMath.cosd( x2 ) )* dxfScale; // initial point
+            float y0i = (cy + ry * TDMath.sind( x2 ) )* dxfScale;
+            x00 = (cx + rx * TDMath.cosd( x2+y2 ) )* dxfScale;    // final point
+            y00 = (cy + ry * TDMath.sind( x2+y2 ) )* dxfScale;
             
             // mode to (x00, y00)
             pv1.format(Locale.ENGLISH, "M %.2f %.2f ", x0i*csxScale, y0i*csxScale );

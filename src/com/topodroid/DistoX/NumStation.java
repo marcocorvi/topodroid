@@ -13,12 +13,10 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-import android.util.FloatMath;
+import android.util.Log;
 
 public class NumStation extends NumSurveyPoint
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
-
   String name;  // station name
   float   mShortpathDist; // loop closure distance (shortest-path algo)
   boolean mDuplicate; // whether this is a duplicate station
@@ -61,11 +59,11 @@ public class NumStation extends NumSurveyPoint
   {
     // TopoDroidLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
     name = id;
-    v = from.v - d * FloatMath.sin(c * grad2rad);
-    float h0 = d * TopoDroidUtil.abs( FloatMath.cos(c * grad2rad) );
+    v = from.v - d * TDMath.sind( c );
+    float h0 = d * TDMath.abs( TDMath.cosd( c ) );
     h = from.h + extend * h0;
-    s = from.s - h0 * FloatMath.cos( b * grad2rad );
-    e = from.e + h0 * FloatMath.sin( b * grad2rad );
+    s = from.s - h0 * TDMath.cosd( b );
+    e = from.e + h0 * TDMath.sind( b );
     mDuplicate = false;
     mHasCoords = true;
     s1 = null;
@@ -78,11 +76,14 @@ public class NumStation extends NumSurveyPoint
     mLegs = new ArrayList<  NumAzimuth  >();
   }
 
+  // azimuth [degrees]
+  // extend  [-1,0,+1]
   void addAzimuth( float azimuth, int extend ) 
   {
+    // Log.v("DistoX", "Station " + name + " add azimuth " + azimuth + " extend " + extend );
     NumAzimuth leg = new NumAzimuth( azimuth, extend );
     for ( int k=0; k<mLegs.size(); ++k ) {
-      if ( azimuth > mLegs.get(k).mAzimuth ) {
+      if ( azimuth < mLegs.get(k).mAzimuth ) {
         mLegs.add(k, leg );
         return;
       }
@@ -92,35 +93,53 @@ public class NumStation extends NumSurveyPoint
 
   void setAzimuths()
   {
-    ArrayList< NumAzimuth > temp = new ArrayList< NumAzimuth >();
     int sz= mLegs.size();
-    if ( sz > 0 ) temp.add( mLegs.get(0) );
-    for (int k=0; k<sz; ++k ) {
-      NumAzimuth a1 = mLegs.get( k );
-      NumAzimuth a2 = mLegs.get( (k+1)%sz );
+    if ( sz == 0 ) return;
+
+    ArrayList< NumAzimuth > temp = new ArrayList< NumAzimuth >();
+    NumAzimuth a1 = mLegs.get( 0 );
+    NumAzimuth a3 = mLegs.get( sz-1 );
+    float azimuth = (a1.mAzimuth + a3.mAzimuth + 360)/2; 
+
+    if ( azimuth > 360 ) { // make sure to start with a negative azimuth
+      temp.add( new NumAzimuth( a3.mAzimuth-360, a3.mExtend ) );
+    }
+    temp.add( new NumAzimuth( azimuth-360, 0 ) ); // bisecant
+    temp.add( a1 );
+    for (int k=1; k<sz; ++k ) {
+      NumAzimuth a2 = mLegs.get( k );
       temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, 0 ) ); // bisecant
       temp.add( a2 );
+      a1 = a2;
     }
+    temp.add( new NumAzimuth( azimuth, 0 ) ); // bisecant (sz-1)..0
+    if ( azimuth < 360 ) {
+      a1 = mLegs.get( 0 );
+      temp.add( new NumAzimuth( a1.mAzimuth+360, a1.mExtend ) );
+    }
+
     mLegs = temp;
+    // for ( NumAzimuth a : mLegs ) {
+    //   Log.v("DistoX", "Station " + name + " Azimuth " + a.mAzimuth + " extend " + a.mExtend );
+    // }
   }
 
-  // @param b bearing
+  // @param b bearing [degrees]
   // @param e original splay extend
   float computeExtend( float b, int e )
   {
-    if ( mLegs.size() > 0 ) {
-      NumAzimuth a1 = mLegs.get(0);
-      for (int k=1; k<mLegs.size(); k++ ) {
-        NumAzimuth a2 = mLegs.get(k);
-        if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
-          if ( a1.mExtend == 0 ) {
-            return FloatMath.cos( a2.mAzimuth - b ) * a2.mExtend;
-          } else {
-            return FloatMath.cos( b - a1.mAzimuth ) * a1.mExtend;
-          }
+    if ( mLegs.size() == 0 ) return e;
+    NumAzimuth a1 = mLegs.get(0);
+    for (int k=1; k<mLegs.size(); k++ ) {
+      NumAzimuth a2 = mLegs.get(k);
+      if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
+        if ( a1.mExtend == 0 ) {
+          return TDMath.cosd( a2.mAzimuth - b ) * a2.mExtend;
+        } else {
+          return TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
         }
-        a1 = a2;
       }
+      a1 = a2;
     }
     return e;
   }

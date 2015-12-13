@@ -46,6 +46,17 @@ public class Vector
     z = z0;
   }
 
+  // cstr a unit vector from bearing and clino (as used by the calibration class)
+  // b   bearing [radians]
+  // c   clino [radians]
+  public Vector( float b, float c )
+  {
+    float h = FloatMath.cos( c );
+    x = h * FloatMath.cos( b );
+    y = h * FloatMath.sin( b );
+    z = FloatMath.sin( c );
+  }
+
   // copy cstr
   public Vector( Vector a )
   {
@@ -56,9 +67,9 @@ public class Vector
 
   float maxAbsValue()
   {
-    float mx = TopoDroidUtil.abs(x);
-    float my = TopoDroidUtil.abs(y);
-    float mz = TopoDroidUtil.abs(z);
+    float mx = TDMath.abs(x);
+    float my = TDMath.abs(y);
+    float mz = TDMath.abs(z);
     return (float)( ( mx > my )? ( ( mx > mz )? mx : mz )
                                : ( ( my > mz )? my : mz ) );
   }
@@ -114,9 +125,9 @@ public class Vector
 
   public float MaxDiff( Vector b )
   {
-    float dx = TopoDroidUtil.abs( x - b.x );
-    float dy = TopoDroidUtil.abs( y - b.y );
-    float dz = TopoDroidUtil.abs( z - b.z );
+    float dx = TDMath.abs( x - b.x );
+    float dy = TDMath.abs( y - b.y );
+    float dz = TDMath.abs( z - b.z );
     if ( dx < dy ) { dx = dy; }
     if ( dx < dz ) { dx = dz; }
     return dx;
@@ -206,10 +217,11 @@ public class Vector
   }
 
   // arc-distance = arccos of the dot-product ( range in [0, PI] )
+  // p1 and p2 unit vectors
   static double arc_distance( Vector p1, Vector p2 )
   {
     float ca1 = dot_product( p1, p2 );
-    return TopoDroidUtil.acos( ca1 );
+    return TDMath.acos( ca1 );
   }
 
   // cosine of the spherical angle
@@ -358,7 +370,7 @@ public class Vector
       // w2.Normalized();
       float s = normal.dot( w0.cross(w2) );
       float c = w0.dot(w2);
-      a += TopoDroidUtil.atan2( s, c );
+      a += TDMath.atan2( s, c );
       w0 = w2;
     }
     return a;

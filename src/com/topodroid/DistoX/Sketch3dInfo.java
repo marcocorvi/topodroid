@@ -15,13 +15,12 @@ import java.util.Locale;
 import android.graphics.PointF;
 import android.graphics.Path;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class Sketch3dInfo extends SketchShot
 {
   static final float mXScale = 1.0f;
-  static final float DEG2RAD = (float)(Math.PI / 180);
+
   long   surveyId;
   long   id;
   String name;   // sketch name
@@ -136,10 +135,10 @@ Nx=(-ca,-sa,0) | ,'
    */
   void setDirection()
   {
-    float cc = FloatMath.cos( clino * DEG2RAD ); // cos and sin of clino and azimuth
-    float sc = FloatMath.sin( clino * DEG2RAD );
-    float ca = FloatMath.cos( (azimuth+180) * DEG2RAD );
-    float sa = FloatMath.sin( (azimuth+180) * DEG2RAD );
+    float cc = TDMath.cosd( clino ); // cos and sin of clino and azimuth
+    float sc = TDMath.sind( clino );
+    float ca = TDMath.cosd( (azimuth+180) );
+    float sa = TDMath.sind( (azimuth+180) );
     ne = - sa * cc;
     ns =   ca * cc;
     nv =   sc;
@@ -191,13 +190,13 @@ Nx=(-ca,-sa,0) | ,'
     de1 = station2.e - station1.e;
     ds1 = station2.s - station1.s;
     dv1 = station2.v - station1.v;
-    float dh1 = FloatMath.sqrt( de1*de1 + ds1*ds1 );
+    float dh1 = TDMath.sqrt( de1*de1 + ds1*ds1 );
     if ( dh1 < 0.01f ) dh1 += 0.01f; // regularize by adding 1 cm
     // sin_alpha = de1/dh1;
     // cos_alpha = ds1/dh1;
     // dvdh = dv1 / dh1;
     // len is guaranteed non-zero (since dh1 >= 0.01)
-    float len = FloatMath.sqrt( dh1*dh1 + dv1*dv1 );
+    float len = TDMath.sqrt( dh1*dh1 + dv1*dv1 );
     // sin_gamma = dv1 / len; // == uz
     // cos_gamma = dh1 / len;
     azimuth = 0.0f;
@@ -224,7 +223,7 @@ Nx=(-ca,-sa,0) | ,'
     float x = v.x - ux * c;
     float y = v.y - uy * c;
     float z = v.z - uz * c;
-    return FloatMath.sqrt( x*x + y*y + z*z );
+    return TDMath.sqrt( x*x + y*y + z*z );
   }
 
 
@@ -250,7 +249,7 @@ Nx=(-ca,-sa,0) | ,'
     float det = a*a + b*b;
     
     // distance form the line:
-    float d = Math.abs( a * x + b * y + c )/FloatMath.sqrt(det); 
+    float d = Math.abs( a * x + b * y + c )/TDMath.sqrt(det); 
     xx2 -= xx1;
     yy2 -= yy1;
     if ( d > 0.1f * (Math.abs(xx2) + Math.abs(yy2)) ) return -2.0f;

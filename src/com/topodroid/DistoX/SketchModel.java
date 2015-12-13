@@ -37,8 +37,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Handler;
 
-import android.util.FloatMath;
-
 import android.util.Log;
 
 class SketchModel

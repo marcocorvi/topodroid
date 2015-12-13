@@ -29,7 +29,7 @@ import android.util.FloatMath;
 
 class DrawingSvg
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
+  private static final float grad2rad = TDMath.GRAD2RAD;
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {

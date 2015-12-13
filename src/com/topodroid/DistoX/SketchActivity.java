@@ -49,8 +49,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.hardware.SensorManager;
 
-import android.util.FloatMath;
-
 import java.io.File;
 import java.io.FileWriter;
 // import java.io.StringWriter;
@@ -1109,7 +1107,7 @@ public class SketchActivity extends ItemDrawer
     if ( np < 2 ) return 0.0f;
     float x = ev.getX(1) - ev.getX(0);
     float y = ev.getY(1) - ev.getY(0);
-    return FloatMath.sqrt(x*x + y*y);
+    return TDMath.sqrt(x*x + y*y);
   }
 
   // private float direction( WrapMotionEvent ev )
@@ -1118,7 +1116,7 @@ public class SketchActivity extends ItemDrawer
   //   if ( np < 2 ) return 0.0f;
   //   float x = ev.getX(1) - ev.getX(0);
   //   float y = ev.getY(1) - ev.getY(0);
-  //   return FloatMath.atan2( y, x );
+  //   return TDMath.atan2( y, x );
   // }
 
   // private float position( WrapMotionEvent ev ) // vertical position
@@ -1249,7 +1247,7 @@ public class SketchActivity extends ItemDrawer
         float y_shift = y_canvas - mSaveY;
         if ( mMode == SketchDef.MODE_DRAW || mMode == SketchDef.MODE_EDIT ) {
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
-            if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
               // mSketchSurface.isDrawing = true;
               if ( ++mPointCnt % TopoDroidSetting.mLineType == 0 ) {
                 mCurrentLinePath.addPoint( x_scene, y_scene );
@@ -1310,7 +1308,7 @@ public class SketchActivity extends ItemDrawer
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
-            if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
+            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
               mCurrentLinePath.addPoint( x_scene, y_scene );
             }
             if ( mPointCnt > TopoDroidSetting.mLineType ) {
@@ -1338,7 +1336,7 @@ public class SketchActivity extends ItemDrawer
               if ( mSymbol == SketchDef.SYMBOL_LINE ) {
                 p1 = pts.get(0);
                 p2 = pts.get(pts.size()-1);
-                float len = FloatMath.sqrt( (p2.mX-p1.mX)*(p2.mX-p1.mX) + (p2.mY-p1.mY)*(p2.mY-p1.mY) );
+                float len = TDMath.sqrt( (p2.mX-p1.mX)*(p2.mX-p1.mX) + (p2.mY-p1.mY)*(p2.mY-p1.mY) );
                 if ( len < SketchDef.CLOSE_GAP ) {
                   line.close();
                 }
@@ -1358,14 +1356,13 @@ public class SketchActivity extends ItemDrawer
                 SketchPointPath path = new SketchPointPath( mCurrentPoint, mInfo.st1, mInfo.st2, p.x, p.y, p.z );
                 SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
                 if ( point_lib.canRotate( mCurrentPoint ) ) {
-                  float angle = (float)( point_lib.getPointOrientation( mCurrentPoint ) );
+                  float angle = (float)( point_lib.getPointOrientation( mCurrentPoint ) ); // degrees
                   // Log.v("DistoX", "point " + mCurrentPoint + " angle " + angle );
-                  angle *= (float)(Math.PI/180.0);
                   // angles 0:upward 90;rightward 180:downward 270:leftward
                   // scene: x is rightward, y downward
                   // p1 is the 3D point of the orientation (from p to p1)
-                  Vector p1 = tri.get3dPoint( x_scene + 0.1f * FloatMath.sin(angle),
-                                              y_scene - 0.1f * FloatMath.cos(angle) );
+                  Vector p1 = tri.get3dPoint( x_scene + 0.1f * TDMath.sind(angle),
+                                              y_scene - 0.1f * TDMath.cosd(angle) );
                   path.setOrientation( p1, mInfo );
                 }
                 mModel.addPoint( path );

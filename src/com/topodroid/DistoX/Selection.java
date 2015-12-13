@@ -21,7 +21,7 @@ import android.util.Log;
 
 class Selection
 {
-  final static int BSIZE = 40; // bucket size factor
+  final static int BSIZE = 100; // bucket size factor
 
   ArrayList< SelectionPoint > mPoints;
   ArrayList< SelectionBucket > mBuckets;

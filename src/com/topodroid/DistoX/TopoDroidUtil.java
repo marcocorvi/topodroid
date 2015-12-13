@@ -23,13 +23,13 @@ import android.util.Log;
 
 public class TopoDroidUtil
 {
-  static final float M_PI  = 3.1415926536f; // Math.PI;
-  static final float M_2PI = 6.283185307f;  // 2*Math.PI;
-  static final float M_PI2 = M_PI/2;        // Math.PI/2
-  static final float M_PI4 = M_PI/4;        // Math.PI/4
-  static final float M_PI8 = M_PI/8;        // Math.PI/8
-  static final float RAD2GRAD = (180.0f/M_PI);
-  static final float GRAD2RAD = (M_PI/180.0f);
+  // static final float M_PI  = 3.1415926536f; // Math.PI;
+  // static final float M_2PI = 6.283185307f;  // 2*Math.PI;
+  // static final float M_PI2 = M_PI/2;        // Math.PI/2
+  // static final float M_PI4 = M_PI/4;        // Math.PI/4
+  // static final float M_PI8 = M_PI/8;        // Math.PI/8
+  // static final float RAD2GRAD = (180.0f/M_PI);
+  // static final float GRAD2RAD = (M_PI/180.0f);
 
   static final long ZERO = 32768;
   static final long NEG  = 65536;
@@ -45,33 +45,27 @@ public class TopoDroidUtil
   static final float IN2M = 0.0254f;
   static final float YD2M = 0.9144f;
 
-  static float in360( float f )
-  {
-    while ( f >= 360 ) f -= 360;
-    while ( f < 0 )    f += 360;
-    return f;
-  }
+  // static float in360( float f )
+  // {
+  //   while ( f >= 360 ) f -= 360;
+  //   while ( f < 0 )    f += 360;
+  //   return f;
+  // }
 
-  static float abs( float x ) { return (float)( Math.abs(x) ); }
-  static float atan2( float y, float x ) { return (float)( Math.atan2( y, x ) ); }
-  static float acos( float x ) { return (float)( Math.acos( x ) ); }
+  // static float abs( float x ) { return (float)( Math.abs(x) ); }
+  // static float atan2( float y, float x ) { return (float)( Math.atan2( y, x ) ); }
+  // static float acos( float x ) { return (float)( Math.acos( x ) ); }
 
-  static float around( float f, float f0 ) 
-  {
-    if ( f - f0 > 180 ) return f - 360;
-    if ( f0 - f > 180 ) return f + 360;
-    return f;
-  }
+  // static float around( float f, float f0 ) 
+  // {
+  //   if ( f - f0 > 180 ) return f - 360;
+  //   if ( f0 - f > 180 ) return f + 360;
+  //   return f;
+  // }
 
-  static float degree2slope( float deg )
-  {
-    return (float)(100 * Math.tan( deg * GRAD2RAD ) );
-  }
+  // static float degree2slope( float deg ) { return (float)(100 * Math.tan( deg * GRAD2RAD ) ); }
 
-  static float slope2degree( float slp )
-  {
-    return (float)( Math.atan( slp/100 ) * RAD2GRAD );
-  }
+  // static float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2GRAD ); }
 
 
   static String noSpaces( String s )

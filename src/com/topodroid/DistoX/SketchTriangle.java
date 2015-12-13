@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class SketchTriangle 
@@ -238,15 +237,15 @@ class SketchTriangle
     PointF q = border.get(nb-1);
     float x1 = q.x - p.x;
     float y1 = q.y - p.y;
-    if ( Math.abs(x1) < 0.001 && Math.abs(y1) < 0.001 ) return TopoDroidUtil.M_PI;
+    if ( Math.abs(x1) < 0.001 && Math.abs(y1) < 0.001 ) return TDMath.M_PI;
     for ( int k=0; k<nb; ++k ) {
       q = border.get(k);
       float x2 = q.x - p.x;
       float y2 = q.y - p.y;
-      if ( Math.abs(x2) < 0.001 && Math.abs(y2) < 0.001 ) return TopoDroidUtil.M_PI;
+      if ( Math.abs(x2) < 0.001 && Math.abs(y2) < 0.001 ) return TDMath.M_PI;
       float s = x1*y2 - y1*x2;
       float c = x1*x2 + y1*y2;
-      a += TopoDroidUtil.atan2( s, c );
+      a += TDMath.atan2( s, c );
       x1 = x2;
       y1 = y2;
     }

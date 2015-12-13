@@ -11,8 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.FloatMath;
-
 class AverageLeg
 {
   Vector mAverage;
@@ -31,13 +29,15 @@ class AverageLeg
     mCnt = 0;
   }
 
+  void set( DistoXDBlock blk ) { set( blk.mLength, blk.mBearing, blk.mClino ); }
+  void add( DistoXDBlock blk ) { add( blk.mLength, blk.mBearing, blk.mClino ); }
+
   void set( float l, float b, float c ) 
   {
-    float g2r = TopoDroidUtil.GRAD2RAD;
-    float cc = FloatMath.cos( c*g2r );
-    mAverage.x = (l * FloatMath.sin(b*g2r) * cc );
-    mAverage.y = (l * FloatMath.cos(b*g2r) * cc );
-    mAverage.z = (l * FloatMath.sin(c*g2r) );
+    float cc = TDMath.cosd( c );
+    mAverage.x = (l * TDMath.sind(b) * cc );
+    mAverage.y = (l * TDMath.cosd(b) * cc );
+    mAverage.z = (l * TDMath.sind(c) );
     mCnt = 1;
   }
 
@@ -46,11 +46,10 @@ class AverageLeg
   // c clino
   void add( float l, float b, float c ) 
   {
-    float g2r = TopoDroidUtil.GRAD2RAD;
-    float cc = FloatMath.cos( c*g2r );
-    mAverage.x += (l * FloatMath.sin(b*g2r) * cc );
-    mAverage.y += (l * FloatMath.cos(b*g2r) * cc );
-    mAverage.z += (l * FloatMath.sin(c*g2r) );
+    float cc = TDMath.cosd( c );
+    mAverage.x += (l * TDMath.sind(b) * cc );
+    mAverage.y += (l * TDMath.cosd(b) * cc );
+    mAverage.z += (l * TDMath.sind(c) );
     mCnt ++;
   }
 
@@ -58,7 +57,7 @@ class AverageLeg
 
   float bearing() 
   {
-    float a = TopoDroidUtil.RAD2GRAD * TopoDroidUtil.atan2( mAverage.x, mAverage.y );
+    float a = TDMath.atan2d( mAverage.x, mAverage.y );
     if ( a < 0 ) a += 360;
     return a;
   }
@@ -67,8 +66,7 @@ class AverageLeg
   {
     float h = mAverage.x * mAverage.x + mAverage.y * mAverage.y;
     if ( h == 0 ) return ( mAverage.z > 0 )? 90 : -90;
-    h = FloatMath.sqrt( h );
-    return TopoDroidUtil.RAD2GRAD * TopoDroidUtil.atan2( mAverage.z, h );
+    return TDMath.atan2d( mAverage.z, TDMath.sqrt( h ) );
   }
 
 }

@@ -11,7 +11,6 @@
  * This software is adapted from TopoLinux implementation,
  * which, in turns, is based on PocketTopo implementation.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -35,8 +34,8 @@ public class Calibration
   private Vector[] g = null;
   private Vector[] m = null;
   private long[] group = null;
-  private float[] err = null;
-  float mMaxError = 0.0f;
+  private float[] err = null;  // errors of the data [radians] 
+  // float mMaxError = 0.0f;
 
   private int idx;
   private int num;
@@ -50,8 +49,8 @@ public class Calibration
   private Vector mxt;
   float b0=0.0f, c0=0.0f; // bearing and clino
 
-  private float mDelta;
-  private float mDelta2;
+  private float mDelta;   // average data error [degrees]
+  private float mDelta2;  // std-dev data error [degrees]
 
   // ==============================================================
 
@@ -229,7 +228,7 @@ public class Calibration
     v = roundM( aM.y.y );
     coeff[36] = (byte)(v & 0xff);
     coeff[37] = (byte)((v>>8) & 0xff);
-    v = (long)Math.round(aM.y.z );
+    v = roundM( aM.y.z );
     coeff[38] = (byte)(v & 0xff);
     coeff[39] = (byte)((v>>8) & 0xff);
 
@@ -310,16 +309,19 @@ public class Calibration
     v = c0 + (c1<<8 );
     if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
     b.x = v / TopoDroidUtil.FV;
+
     c0 = (int)(coeff[off+ 2]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+ 3]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
     if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
     a.x.x = v / TopoDroidUtil.FM;
+
     c0 = (int)(coeff[off+ 4]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+ 5]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
     if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
     a.x.y = v / TopoDroidUtil.FM;
+
     c0 = (int)(coeff[off+ 6]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+ 7]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
@@ -357,16 +359,19 @@ public class Calibration
     v = c0 + (c1<<8 );
     if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
     b.z = v / TopoDroidUtil.FV;
+
     c0 = (int)(coeff[off+18]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+19]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
     if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
     a.z.x = v / TopoDroidUtil.FM;
+
     c0 = (int)(coeff[off+20]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+21]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
     if ( v > TopoDroidUtil.ZERO ) v = v - TopoDroidUtil.NEG;
     a.z.y = v / TopoDroidUtil.FM;
+
     c0 = (int)(coeff[off+22]); if ( c0 < 0 ) c0 = 256+c0;
     c1 = (int)(coeff[off+23]); if ( c1 < 0 ) c1 = 256+c1;
     v = c0 + (c1<<8 );
@@ -399,7 +404,6 @@ public class Calibration
   //
   private static float byteToFloatNL( byte b )
   {
-
     int c0 = 1 + (int)(b);
     if ( c0 >= 128 ) c0 = c0 - 256;
     return c0 / TopoDroidUtil.FN;
@@ -572,8 +576,8 @@ public class Calibration
     float mv = v.maxAbsValue() * TopoDroidUtil.FV;
     float mm = m.maxAbsValue() * TopoDroidUtil.FM;
     if ( mv > mm ) mm = mv;
-    if ( mm > 256*128 ) {
-      mv = 256*128 / mm;
+    if ( mm > 32768 ) { // 32768 = 256*128 = 1<<15 = 0x010000
+      mv = 32768 / mm;
       m.scaleBy( mv );
       v.scaleBy( mv );
     }
@@ -609,11 +613,11 @@ public class Calibration
     float ex = e.dot( x );
     float ey = e.dot( y );
     float ez = e.dot( g );
-    b0 = TopoDroidUtil.atan2( -ey, ex );
-    c0 = - TopoDroidUtil.atan2( ez, FloatMath.sqrt(ex*ex+ey*ey) );
-    // r0    = TopoDroidUtil.atan2( g.y, g.z );
-    if ( b0 < 0.0f ) b0 += 2*TopoDroidUtil.M_PI;
-    // if ( r0 < 0.0f ) r0 += 2*TopoDroidUtil.M_PI;
+    b0 =   TDMath.atan2( -ey, ex );
+    c0 = - TDMath.atan2( ez, FloatMath.sqrt(ex*ex+ey*ey) );
+    // r0    = TDMath.atan2( g.y, g.z );
+    if ( b0 < 0.0f ) b0 += TDMath.M_2PI;
+    // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
   }
 
 // ----------------------------------------------------------------
@@ -688,7 +692,7 @@ public class Calibration
     float c = ca / da;
     // LogSC( "sin/cos", s, c ); // this is OK
 // FIXME NL
-    // float alpha = TopoDroidUtil.atan2( sa, ca );
+    // float alpha = TDMath.atan2( sa, ca );
 
 
     do {
@@ -846,17 +850,19 @@ public class Calibration
         }
         OptVectors( grp, mrp, s, c );
         computeBearingAndClinoRad( gxp, mxp );
-        Vector v0 = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
-                                FloatMath.cos(c0) * FloatMath.sin(b0),
-                                FloatMath.sin(c0) );
+        Vector v0 = new Vector( b0, c0 );
+        // Vector v0 = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
+        //                         FloatMath.cos(c0) * FloatMath.sin(b0),
+        //                         FloatMath.sin(c0) );
         for (int j=first; j<i; ++j ) {
           if ( group[j] == 0 ) {
             err[j] = 0.0f;
           } else {
             computeBearingAndClinoRad( gr[j], mr[j] );
-            Vector v = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
-                                   FloatMath.cos(c0) * FloatMath.sin(b0),
-                                   FloatMath.sin(c0) );
+            Vector v = new Vector( b0, c0 );
+            // Vector v = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
+            //                        FloatMath.cos(c0) * FloatMath.sin(b0),
+            //                        FloatMath.sin(c0) );
             err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
             mDelta  += err[j];
             mDelta2 += err[j] * err[j];
@@ -867,8 +873,8 @@ public class Calibration
     }
     mDelta  = mDelta / cnt;
     mDelta2 = FloatMath.sqrt(mDelta2/cnt - mDelta*mDelta);
-    mDelta  = mDelta  * TopoDroidUtil.RAD2GRAD;
-    mDelta2 = mDelta2 * TopoDroidUtil.RAD2GRAD;
+    mDelta  = mDelta  * TDMath.RAD2GRAD; // convert avg and std0-dev from radians to degrees
+    mDelta2 = mDelta2 * TDMath.RAD2GRAD;
 
     EnforceMax2( bG, aG );
     EnforceMax2( bM, aM );
@@ -910,9 +916,10 @@ public class Calibration
       gr = bG.plus( aG.timesV( g ) );
     }
     computeBearingAndClinoRad( gr, mr );
-    return new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
-                       FloatMath.cos(c0) * FloatMath.sin(b0),
-                       FloatMath.sin(c0) );
+    return new Vector( b0, c0 );
+    // return new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
+    //                    FloatMath.cos(c0) * FloatMath.sin(b0),
+    //                    FloatMath.sin(c0) );
   }
 
   // error acumulators
@@ -970,15 +977,17 @@ public class Calibration
       mrp.add( mxt );
     }
     computeBearingAndClinoRad( grp, mrp );
-    Vector v0 = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
-                            FloatMath.cos(c0) * FloatMath.sin(b0),
-                            FloatMath.sin(c0) );
+    Vector v0 = new Vector( b0, c0 );
+    // Vector v0 = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
+    //                         FloatMath.cos(c0) * FloatMath.sin(b0),
+    //                         FloatMath.sin(c0) );
     double err = 0.0;
     for ( int i=0; i<size; ++i ) {
       computeBearingAndClinoRad( gr[i], mr[i] );
-      Vector v1 = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
-                              FloatMath.cos(c0) * FloatMath.sin(b0),
-                              FloatMath.sin(c0) );
+      Vector v1 = new Vector( b0, c0 );
+      // Vector v1 = new Vector( FloatMath.cos(c0) * FloatMath.cos(b0),
+      //                         FloatMath.cos(c0) * FloatMath.sin(b0),
+      //                         FloatMath.sin(c0) );
       double e = v1.minus(v0).Length();
       // Log.v("DistoX", e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
       mSumCount += 1;

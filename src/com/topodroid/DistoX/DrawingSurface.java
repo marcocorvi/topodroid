@@ -547,6 +547,8 @@ public class DrawingSurface extends SurfaceView
     float x, y, x1, y1, x2, y2;
     boolean is_not_section = true;
 
+    // long millis_start = System.currentTimeMillis();
+
     TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
@@ -949,6 +951,9 @@ public class DrawingSurface extends SurfaceView
       }
     }
     // remove repeated names
+    // long millis = System.currentTimeMillis() - millis_start;
+    // Log.v("DistoX", "load " + filename + " " + millis + " msec ");
+
     return missingSymbols.isOK();
   }
 

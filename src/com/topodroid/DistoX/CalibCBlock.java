@@ -20,7 +20,7 @@ import android.util.FloatMath;
 
 public class CalibCBlock
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
+  private static final float grad2rad = TDMath.GRAD2RAD;
 
   private static int[] colors = { 0xffcccccc, 0xffffcccc, 0xffccccff };
 
@@ -137,14 +137,14 @@ public class CalibCBlock
     float ex = e.dot( x );
     float ey = e.dot( y );
     float ez = e.dot( g );
-    mBearing =   TopoDroidUtil.atan2( -ey, ex );
-    mClino   = - TopoDroidUtil.atan2( ez, FloatMath.sqrt(ex*ex+ey*ey) );
-    mRoll    =   TopoDroidUtil.atan2( g.y, g.z );
-    if ( mBearing < 0.0f ) mBearing += 2*TopoDroidUtil.M_PI;
-    if ( mRoll < 0.0f ) mRoll += 2*TopoDroidUtil.M_PI;
-    mClino   *= TopoDroidUtil.RAD2GRAD;
-    mBearing *= TopoDroidUtil.RAD2GRAD;
-    mRoll    *= TopoDroidUtil.RAD2GRAD;
+    mBearing =   TDMath.atan2( -ey, ex );
+    mClino   = - TDMath.atan2( ez, FloatMath.sqrt(ex*ex+ey*ey) );
+    mRoll    =   TDMath.atan2( g.y, g.z );
+    if ( mBearing < 0.0f ) mBearing += TDMath.M_2PI;
+    if ( mRoll < 0.0f ) mRoll += TDMath.M_2PI;
+    mClino   *= TDMath.RAD2GRAD;
+    mBearing *= TDMath.RAD2GRAD;
+    mRoll    *= TDMath.RAD2GRAD;
   }
 
   public String toString()
@@ -155,7 +155,7 @@ public class CalibCBlock
     PrintWriter pw  = new PrintWriter(sw);
     computeBearingAndClino();
     pw.format(Locale.ENGLISH, "%d <%d> %5.1f %5.1f %5.1f %6.4f",
-      mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TopoDroidUtil.RAD2GRAD );
+      mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TDMath.RAD2GRAD );
     if ( TopoDroidSetting.mRawData ) {
       pw.format( "  %d %d %d  %d %d %d", gx, gy, gz, mx, my, mz );
     }

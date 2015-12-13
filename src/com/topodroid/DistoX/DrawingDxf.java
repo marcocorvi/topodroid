@@ -28,7 +28,7 @@ import android.util.Log;
 
 class DrawingDxf
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
+  private static final float grad2rad = TDMath.GRAD2RAD;
   private static int VERSION = 9;
 
   static final String zero = "0.0";

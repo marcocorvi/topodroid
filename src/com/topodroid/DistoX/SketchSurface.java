@@ -27,7 +27,6 @@ import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class SketchSurface extends SketchShot
@@ -649,7 +648,7 @@ class SketchSurface extends SketchShot
 
   // --------------------------------------------------------
   // triangles
-  final float r2_2 = FloatMath.sqrt( 0.5f ); // sqrt(2)/2
+  // final float r2_2 = TDMath.sqrt( 0.5f ); // sqrt(2)/2
 
   /**
    * @return the new vertex index
@@ -657,7 +656,7 @@ class SketchSurface extends SketchShot
   // private int interpolateVertices( SketchVertex v1, SketchVertex v2, float a, float r, Sketch3dInfo info )
   // {
   //   float b = 1 - a;
-  //   // float r = 1/FloatMath.sqrt( a*a + b*b );
+  //   // float r = 1/TDMath.sqrt( a*a + b*b );
   //   Vector v = new Vector( a*v1.x+b*v2.x - info.station1.e,
   //                          a*v1.y+b*v2.y - info.station1.s,
   //                          a*v1.z+b*v2.z - info.station1.v );
@@ -765,7 +764,7 @@ class SketchSurface extends SketchShot
       retn.y -= p * unit.y;
       retn.z -= p * unit.z;
       retn.Normalized();
-      angle[n] = TopoDroidUtil.atan2( retn.dot(dir1), retn.dot(dir2) );
+      angle[n] = TDMath.atan2( retn.dot(dir1), retn.dot(dir2) );
     }
     float a = angle[0] - angle[ns-1];
     for ( int n=1; n<ns; ++n ) {

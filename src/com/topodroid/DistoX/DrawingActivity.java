@@ -1100,8 +1100,8 @@ public class DrawingActivity extends ItemDrawer
         float xto=0;
         float yto=0;
         // normal, horizontal and cross-product
-        float mc = mClino * TopoDroidUtil.GRAD2RAD;
-        float ma = mAzimuth * TopoDroidUtil.GRAD2RAD;
+        float mc = mClino * TDMath.GRAD2RAD;
+        float ma = mAzimuth * TDMath.GRAD2RAD;
         float X0 = FloatMath.cos( mc ) * FloatMath.cos( ma );  // X = North
         float Y0 = FloatMath.cos( mc ) * FloatMath.sin( ma );  // Y = East
         float Z0 = FloatMath.sin( mc );                        // Z = Up
@@ -1145,8 +1145,8 @@ public class DrawingActivity extends ItemDrawer
             }
           }
           if ( blk != null ) {
-            float bc = blk.mClino * TopoDroidUtil.GRAD2RAD;
-            float bb = blk.mBearing * TopoDroidUtil.GRAD2RAD;
+            float bc = blk.mClino * TDMath.GRAD2RAD;
+            float bb = blk.mBearing * TDMath.GRAD2RAD;
             float X = FloatMath.cos( bc ) * FloatMath.cos( bb );
             float Y = FloatMath.cos( bc ) * FloatMath.sin( bb );
             float Z = FloatMath.sin( bc );
@@ -1168,8 +1168,8 @@ public class DrawingActivity extends ItemDrawer
         for ( DistoXDBlock b : mList ) { // repeat for splays
           if ( b.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
           float d = b.mLength;
-          float bc = b.mClino * TopoDroidUtil.GRAD2RAD;
-          float bb = b.mBearing * TopoDroidUtil.GRAD2RAD;
+          float bc = b.mClino * TDMath.GRAD2RAD;
+          float bb = b.mBearing * TDMath.GRAD2RAD;
           float X = FloatMath.cos( bc ) * FloatMath.cos( bb );
           float Y = FloatMath.cos( bc ) * FloatMath.sin( bb );
           float Z = FloatMath.sin( bc );
@@ -1234,6 +1234,7 @@ public class DrawingActivity extends ItemDrawer
           if ( mPid2 >= 0 ) mApp.mData.dropPlot( mPid2, mSid );
           finish();
         } else {
+          // new DataReduction( this, start, view, hide ).execute();
           mNum = new DistoXNum( mList, start, view, hide );
           computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom, true );
           computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
@@ -1898,7 +1899,7 @@ public class DrawingActivity extends ItemDrawer
                         String to   = "-1";
                         float clino = 0;
 
-                        float azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TopoDroidUtil.RAD2GRAD );
+                        float azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TDMath.RAD2GRAD );
                         if ( azimuth >= 360.0f ) azimuth -= 360;
                         if ( azimuth < 0.0f ) azimuth += 360;
 
@@ -1950,7 +1951,7 @@ public class DrawingActivity extends ItemDrawer
                             }
                           }
                         } else { // null block
-                          azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TopoDroidUtil.RAD2GRAD );
+                          azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TDMath.RAD2GRAD );
                           if ( azimuth >= 360.0f ) azimuth -= 360;
                           if ( azimuth < 0.0f ) azimuth += 360;
                         }
@@ -2894,6 +2895,35 @@ public class DrawingActivity extends ItemDrawer
         startActivity( drawIntent );
       }
     }
+
+    // private class DataReduction extends AsyncTask< Intent, Void, Integer >
+    // {
+    //   String mStart;
+    //   String mView;
+    //   String mHide;
+
+    //   public DataReduction( Context context, String start, String view, String hide )
+    //   {
+    //     mStart = start;
+    //     mView  = view;
+    //     mHide  = hide;
+    //   }
+
+    //   @Override
+    //   protected Integer doInBackground(Intent... arg0)
+    //   {
+    //     mNum = new DistoXNum( mList, mStart, mView, mHide );
+    //     return 0;
+    //   }
+
+    //   @Override
+    //   protected void onPostExecute( Integer i )
+    //   {
+    //     // super.onPostExecute(bool);
+    //     computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom, true );
+    //     computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
+    //   }
+    // }
 
     private class ExportBitmapToFile extends AsyncTask<Intent,Void,Boolean> 
     {

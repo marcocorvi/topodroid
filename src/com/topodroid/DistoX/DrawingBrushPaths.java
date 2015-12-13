@@ -83,7 +83,7 @@ public class DrawingBrushPaths
   static double getPointOrientation( int index ) { return mPointLib.getPointOrientation( index ); }
   static void resetPointOrientations( ) { mPointLib.resetOrientations(); }
   static void rotateGradPoint( int index, double a ) { mPointLib.rotateGrad( index, a ); }
-  // static void rotateRadPoint( int index, double a ) { rotateGradPoint( index, a * TopoDroidUtil.RAD2GRAD ); }
+  // static void rotateRadPoint( int index, double a ) { rotateGradPoint( index, a * TDMath.RAD2GRAD ); }
 
   static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
 

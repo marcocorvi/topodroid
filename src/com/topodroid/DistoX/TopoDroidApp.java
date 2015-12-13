@@ -77,7 +77,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.util.FloatMath;
 import android.util.Log;
 import android.util.DisplayMetrics;
 
@@ -253,9 +252,9 @@ public class TopoDroidApp extends Application
   static float mMagneticMean     = 0.0f;
   static float mDipMean          = 0.0f;
 
-  static float deltaAcc( float acc ) { return TopoDroidUtil.abs( acc - mAccelerationMean ); }
-  static float deltaMag( float mag ) { return TopoDroidUtil.abs( mag - mMagneticMean ); }
-  static float deltaDip( float dip ) { return TopoDroidUtil.abs( dip - mDipMean ); }
+  static float deltaAcc( float acc ) { return TDMath.abs( acc - mAccelerationMean ); }
+  static float deltaMag( float mag ) { return TDMath.abs( mag - mMagneticMean ); }
+  static float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 
   static boolean isBlockAcceptable( float acc, float mag, float dip )
   {

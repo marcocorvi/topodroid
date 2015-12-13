@@ -316,6 +316,19 @@ public class DrawingCommandManager
     mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
     mBBox.top    = - dy;
     mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
+
+    // FIXME 
+    // TUNING this is to see how many buckets are on the canvas and how many points they contain
+    //
+    // if ( mSelection != null ) {
+    //   int cnt = 0;
+    //   float pts = 0;
+    //   for ( SelectionBucket bucket : mSelection.mBuckets ) {
+    //     if ( bucket.intersects( mBBox ) ) { ++ cnt; pts += bucket.size(); }
+    //   }
+    //   pts /= cnt;
+    //   Log.v("DistoX", "visible buckets " + cnt + " avg pts/bucket " + pts );
+    // }
   }
 
   // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo

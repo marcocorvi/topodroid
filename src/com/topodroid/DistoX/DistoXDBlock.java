@@ -18,13 +18,10 @@ import java.util.Locale;
 
 import android.view.View;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 public class DistoXDBlock
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
-
   public static final char[] mExtendTag = { '<', '|', '>', 'o', '-', '.' };
   public static final int EXTEND_LEFT = -1;
   public static final int EXTEND_VERT =  0;
@@ -209,15 +206,15 @@ public class DistoXDBlock
   public float relativeDistance( DistoXDBlock b )
   {
     if ( b == null ) return 10000.0f; // a large distance
-    float cc = FloatMath.cos(mClino * grad2rad);
-    float sc = FloatMath.sin(mClino * grad2rad);
-    float cb = FloatMath.cos(mBearing * grad2rad); 
-    float sb = FloatMath.sin(mBearing * grad2rad); 
+    float cc = TDMath.cosd( mClino );
+    float sc = TDMath.sind( mClino );
+    float cb = TDMath.cosd( mBearing ); 
+    float sb = TDMath.sind( mBearing ); 
     Vector v1 = new Vector( mLength * cc * sb, mLength * cc * cb, mLength * sc );
-    cc = FloatMath.cos(b.mClino * grad2rad);
-    sc = FloatMath.sin(b.mClino * grad2rad);
-    cb = FloatMath.cos(b.mBearing * grad2rad); 
-    sb = FloatMath.sin(b.mBearing * grad2rad); 
+    cc = TDMath.cosd( b.mClino );
+    sc = TDMath.sind( b.mClino );
+    cb = TDMath.cosd( b.mBearing ); 
+    sb = TDMath.sind( b.mBearing ); 
     Vector v2 = new Vector( b.mLength * cc * sb, b.mLength * cc * cb, b.mLength * sc );
     float dist = (v1.minus(v2)).Length();
     return dist/mLength + dist/b.mLength; 

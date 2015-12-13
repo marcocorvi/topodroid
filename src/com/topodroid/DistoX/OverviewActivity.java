@@ -51,8 +51,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.util.FloatMath;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
@@ -632,7 +630,7 @@ public class OverviewActivity extends ItemDrawer
       if ( np < 2 ) return 0.0f;
       float x = ev.getX(1) - ev.getX(0);
       float y = ev.getY(1) - ev.getY(0);
-      return FloatMath.sqrt(x*x + y*y);
+      return TDMath.sqrt(x*x + y*y);
     }
 
     void saveEventPoint( WrapMotionEvent ev )
@@ -769,7 +767,7 @@ public class OverviewActivity extends ItemDrawer
           }
           a *= TopoDroidSetting.mUnitAngle;
 
-          String msg = String.format( format, FloatMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
+          String msg = String.format( format, TDMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
           // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
           // setTitle( sw.getBuffer().toString() );
           setTitle( msg );

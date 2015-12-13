@@ -172,7 +172,7 @@ public class GMActivity extends Activity
       mApp.mDData.updateCalibError( cid, 
              calibration.Delta(),
              calibration.Delta2(),
-             calibration.mMaxError * TopoDroidUtil.RAD2GRAD,
+             calibration.mMaxError * TDMath.RAD2GRAD,
              iter );
 
       // DEBUG:
@@ -228,10 +228,10 @@ public class GMActivity extends Activity
     double std0 = Math.sqrt( calib0.mSumErrorSquared / calib0.mSumCount - ave0 * ave0 + 1e-8 );
     double ave1 = calib1.mSumErrors / calib1.mSumCount;
     double std1 = Math.sqrt( calib1.mSumErrorSquared / calib1.mSumCount - ave1 * ave1 + 1e-8 );
-    ave0 *= TopoDroidUtil.RAD2GRAD;
-    std0 *= TopoDroidUtil.RAD2GRAD;
-    ave1 *= TopoDroidUtil.RAD2GRAD;
-    std1 *= TopoDroidUtil.RAD2GRAD;
+    ave0 *= TDMath.RAD2GRAD;
+    std0 *= TDMath.RAD2GRAD;
+    ave1 *= TDMath.RAD2GRAD;
+    std1 *= TDMath.RAD2GRAD;
 
     list.addAll( list1 );
     size = list.size();
@@ -251,9 +251,9 @@ public class GMActivity extends Activity
     }
     err1 /= size;
     err2 = Math.sqrt( err2/size - err1 * err1 );
-    err1 *= TopoDroidUtil.RAD2GRAD;
-    err2 *= TopoDroidUtil.RAD2GRAD;
-    errmax *= TopoDroidUtil.RAD2GRAD;
+    err1 *= TDMath.RAD2GRAD;
+    err2 *= TDMath.RAD2GRAD;
+    errmax *= TDMath.RAD2GRAD;
     new CalibValidateResultDialog( this, ave0, std0, ave1, std1, err1, err2, errmax, name, mApp.myCalib ).show();
   }
 
@@ -328,7 +328,7 @@ public class GMActivity extends Activity
           Vector nL = calibration.GetNL();
           byte[] coeff = calibration.GetCoeff();
 
-          float error = calibration.mMaxError * TopoDroidUtil.RAD2GRAD;
+          float error = calibration.mMaxError * TDMath.RAD2GRAD;
           (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL,
                                  calibration.Delta(), calibration.Delta2(), error, result, coeff ) ).show();
         } else {
@@ -371,7 +371,7 @@ public class GMActivity extends Activity
     long cid = mApp.mCID;
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
-    float thr = FloatMath.cos( TopoDroidSetting.mGroupDistance * TopoDroidUtil.GRAD2RAD);
+    float thr = TDMath.cosd( TopoDroidSetting.mGroupDistance );
     List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );
     if ( list.size() < 4 ) {
       return -1;

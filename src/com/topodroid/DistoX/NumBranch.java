@@ -15,13 +15,10 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-import android.util.FloatMath;
 // import android.util.Log;
 
 public class NumBranch 
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
-
   static final int BRANCH_UNKNOWN = 0; // branch types
   static final int BRANCH_END_END = 1;
   static final int BRANCH_CROSS_END = 2;
@@ -61,7 +58,7 @@ public class NumBranch
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Br add shot(" + shot.from.name + "-" + shot.to.name + ") bdir " + shot.mBranchDir + " sdir " + shot.mDirection );
     shots.add( shot );
-    // float d = shot.mLength;
+    // float d = shot.length();
     // len += d;
   }
 
@@ -72,55 +69,44 @@ public class NumBranch
     v = 0.0f;
     len = 0.0f;
     for ( NumShot sh : shots ) {
-      float d = sh.mLength;
-      float b = sh.mBearing * grad2rad;
-      float c = sh.mClino * grad2rad;
+      float d = sh.length();
+      float b = sh.bearing(); // degrees
+      float c = sh.clino(); // degrees
       len += d;
       d *= sh.mDirection * sh.mBranchDir;
-      v -= d * FloatMath.sin(c);
-      float h0 = d * TopoDroidUtil.abs( FloatMath.cos(c) );
-      s -= h0 * FloatMath.cos(b);
-      e += h0 * FloatMath.sin(b);
+      v -= d * TDMath.sind(c);
+      float h0 = d * TDMath.abs( TDMath.cosd(c) );
+      s -= h0 * TDMath.cosd(b);
+      e += h0 * TDMath.sind(b);
       // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Br sh " + sh.from.name + "-" + sh.to.name + " Br Err " + e + " " + s );
     }
-    
-    // NumStation st = ( n1 == null )? shots.get(0).from : n1.station;
-    // NumStation sf = ( n2 == null )? st : n2.station;     // Log only
-    // dump();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Br " + st.name + "=" + sf.name + " delta " + e + " " + s + " " + v );
   }
 
   void compensateError( float e0, float s0, float v0 )
   {
-    // NumStation st = ( n1 == null )? shots.get(0).from : n1.station;
-    // NumStation sf = ( n2 == null )? st : n2.station;     // Log only
-    // dump();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Br " + st.name + "=" + sf.name + " compensate error " + e0 + " " + s0 + " " + v0 );
-
     e0 /= len;
     s0 /= len;
     v0 /= len;
     for ( NumShot sh : shots ) {
       // block displacement vector (absolute, not in the branch)
-      float d = sh.mLength;
-      float b = sh.mBearing * grad2rad;
-      float c = sh.mClino * grad2rad;
-      float v1 = -d * FloatMath.sin(c);
-      float h1 =  d * TopoDroidUtil.abs( FloatMath.cos(c) );
-      float s1 = -h1 * FloatMath.cos(b);
-      float e1 =  h1 * FloatMath.sin(b);
+      float d = sh.length();
+      float b = sh.bearing(); // degrees
+      float c = sh.clino();
+      float v1 = -d * TDMath.sind(c);
+      float h1 =  d * TDMath.abs( TDMath.cosd(c) );
+      float s1 = -h1 * TDMath.cosd(b);
+      float e1 =  h1 * TDMath.sind(b);
       float l = d * sh.mDirection * sh.mBranchDir;
       e1 += e0*l;
       s1 += s0*l;
       v1 += v0*l;
      
-      h1 = FloatMath.sqrt( e1*e1 + s1*s1 );
-      sh.mBearing = TopoDroidUtil.atan2( e1, -s1 ) / grad2rad; // + 90.0f * (1 - sh.mDirection);
-      if ( sh.mBearing >= 360.0f) sh.mBearing -= 360.0f;
-      sh.mClino   = TopoDroidUtil.atan2( -v1, h1 ) / grad2rad; // * sh.mDirection;
-      sh.mLength  = FloatMath.sqrt( h1*h1 + v1*v1 );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "shift shot " + sh.from.name + "-" + sh.to.name + " shift " + e1 + " " + s1 + "  " + v1 );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "corrected block " + sh.from.name + "-" + sh.to.name + " " + sh.mLength + " " + sh.mBearing + " " + sh.mClino );
+      h1 = TDMath.sqrt( e1*e1 + s1*s1 );
+      b = TDMath.atan2d( e1, -s1 ); // + 90.0f * (1 - sh.mDirection);
+      if ( b < 0 ) b += 360;
+      c = TDMath.atan2d( -v1, h1 ); // * sh.mDirection;
+      d = TDMath.sqrt( h1*h1 + v1*v1 );
+      sh.reset( d, b, c );
     }
   }
 

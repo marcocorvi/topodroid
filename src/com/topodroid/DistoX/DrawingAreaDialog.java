@@ -125,12 +125,12 @@ public class DrawingAreaDialog extends Dialog
   //   int d = 20;
   //   // mTVorientation.setText( Integer.toString(mOrient) );
   //   mCanvas.drawColor( 0xff000000 );
-  //   float c = FloatMath.cos( mOrient * TopoDroidUtil.GRAD2RAD);
-  //   float s = FloatMath.sin( mOrient * TopoDroidUtil.GRAD2RAD);
-  //   float c135 = FloatMath.cos( (mOrient+135) * TopoDroidUtil.GRAD2RAD);
-  //   float s135 = FloatMath.sin( (mOrient+135) * TopoDroidUtil.GRAD2RAD);
-  //   float c225 = FloatMath.cos( (mOrient+225) * TopoDroidUtil.GRAD2RAD);
-  //   float s225 = FloatMath.sin( (mOrient+225) * TopoDroidUtil.GRAD2RAD);
+  //   float c = TDMath.cosd( mOrient );
+  //   float s = TDMath.sind( mOrient );
+  //   float c135 = TDMath.cosd( mOrient+135 );
+  //   float s135 = TDMath.sind( mOrient+135 );
+  //   float c225 = TDMath.cosd( mOrient+225 );
+  //   float s225 = TDMath.sind( mOrient+225 );
   //   float x1 = d+d*s;
   //   float y1 = d-d*c;
   //   Paint paint = DrawingBrushPaths.fixedBluePaint;

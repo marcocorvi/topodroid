@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class TopoDroidExporter
@@ -366,10 +365,10 @@ class TopoDroidExporter
     float lat = (float)origin.lat;
     float lng = (float)origin.lng;
     float alt = (float)origin.alt;
-    float alat = TopoDroidUtil.abs( lat );
+    float alat = TDMath.abs( lat );
 
     float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
-    float e_radius = s_radius * FloatMath.cos( alat * TopoDroidUtil.GRAD2RAD );
+    float e_radius = s_radius * TDMath.cosd( alat );
 
     s_radius = 1 / s_radius;
     e_radius = 1 / e_radius;
@@ -1414,11 +1413,10 @@ class TopoDroidExporter
   static private LRUD computeLRUD( DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
   {
     LRUD lrud = new LRUD();
-    float grad2rad = TopoDroidUtil.GRAD2RAD;
-    float n0 = FloatMath.cos( b.mBearing * grad2rad );
-    float e0 = FloatMath.sin( b.mBearing * grad2rad );
-    float cc0 = FloatMath.cos( b.mClino * grad2rad );
-    float sc0 = FloatMath.sin( b.mClino * grad2rad );
+    float n0  = TDMath.cosd( b.mBearing );
+    float e0  = TDMath.sind( b.mBearing );
+    float cc0 = TDMath.cosd( b.mClino );
+    float sc0 = TDMath.sind( b.mClino );
     float cb0 = n0;
     float sb0 = e0;
     // float sc02 = sc0 * sc0;
@@ -1435,10 +1433,10 @@ class TopoDroidExporter
         if ( to != null && to.length() > 0 ) continue;
       }
       if ( station.equals( from ) ) {
-        float cb = FloatMath.cos( item.mBearing * grad2rad );
-        float sb = FloatMath.sin( item.mBearing * grad2rad );
-        float cc = FloatMath.cos( item.mClino * grad2rad );
-        float sc = FloatMath.sin( item.mClino * grad2rad );
+        float cb = TDMath.cosd( item.mBearing );
+        float sb = TDMath.sind( item.mBearing );
+        float cc = TDMath.cosd( item.mClino );
+        float sc = TDMath.sind( item.mClino );
         float len = item.mLength;
         float cbb0 = sb*sb0 + cb*cb0; // cosine of angle between block and item
 
