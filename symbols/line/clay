@@ -1,6 +1,7 @@
 symbol line
 name wall_clay
 name-bg стена_глина
+name-ru стена_в_глине
 th_name wall:clay
 group wall
 color 0xff0000 0xff
