@@ -157,22 +157,18 @@ public class GMActivity extends Activity
     int iter = calibration.Calibrate();
     if ( iter > 0 ) {
       float[] errors = calibration.Errors();
-      float max_error = 0.0f;
-      int k = 0;
-      for ( CalibCBlock cb : list ) {
+      for ( int k = 0; k < list.size(); ++k ) {
+        CalibCBlock cb = list.get( k );
         mApp.mDData.updateGMError( cb.mId, cid, errors[k] );
         // cb.setError( errors[k] );
-        if ( errors[k] > max_error ) max_error = errors[k];
-        ++k;
       }
-      calibration.mMaxError = max_error;
 
       byte[] coeff = calibration.GetCoeff();
       mApp.mDData.updateCalibCoeff( cid, Calibration.coeffToString( coeff ) );
       mApp.mDData.updateCalibError( cid, 
              calibration.Delta(),
              calibration.Delta2(),
-             calibration.mMaxError * TDMath.RAD2GRAD,
+             calibration.MaxError(),
              iter );
 
       // DEBUG:
@@ -328,9 +324,9 @@ public class GMActivity extends Activity
           Vector nL = calibration.GetNL();
           byte[] coeff = calibration.GetCoeff();
 
-          float error = calibration.mMaxError * TDMath.RAD2GRAD;
           (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL,
-                                 calibration.Delta(), calibration.Delta2(), error, result, coeff ) ).show();
+                                 calibration.Delta(), calibration.Delta2(), calibration.MaxError(), 
+                                 result, coeff ) ).show();
         } else {
           // Toast.makeText( mApp.getApplicationContext(), R.string.few_data, Toast.LENGTH_SHORT ).show();
           Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();

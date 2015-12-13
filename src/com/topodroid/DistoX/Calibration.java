@@ -35,7 +35,6 @@ public class Calibration
   private Vector[] m = null;
   private long[] group = null;
   private float[] err = null;  // errors of the data [radians] 
-  // float mMaxError = 0.0f;
 
   private int idx;
   private int num;
@@ -51,6 +50,7 @@ public class Calibration
 
   private float mDelta;   // average data error [degrees]
   private float mDelta2;  // std-dev data error [degrees]
+  private float mMaxError = 0.0f; // max error [degrees]
 
   // ==============================================================
 
@@ -139,6 +139,7 @@ public class Calibration
   public float Delta2() { return mDelta2; }
   public float Error( int k ) { return err[k]; }
   public float[] Errors() { return err; }
+  public float MaxError( ) { return mMaxError; }
 
   public Matrix GetAG() { return aG; }
   public Matrix GetAM() { return aM; }
@@ -829,9 +830,10 @@ public class Calibration
       }
     }
     long group0 = -1;
-    long cnt = 0;
-    mDelta  = 0.0f;
-    mDelta2 = 0.0f;
+    long cnt  = 0;
+    mDelta    = 0.0f;
+    mDelta2   = 0.0f;
+    mMaxError = 0.0f;
     for ( int i=0; i<nn; ) {
       if ( group[i] <= 0 ) {
         ++i;
@@ -866,6 +868,7 @@ public class Calibration
             err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
             mDelta  += err[j];
             mDelta2 += err[j] * err[j];
+            if ( err[j] > mMaxError ) mMaxError = err[j];
             ++ cnt;
           }
         }
@@ -873,8 +876,9 @@ public class Calibration
     }
     mDelta  = mDelta / cnt;
     mDelta2 = FloatMath.sqrt(mDelta2/cnt - mDelta*mDelta);
-    mDelta  = mDelta  * TDMath.RAD2GRAD; // convert avg and std0-dev from radians to degrees
-    mDelta2 = mDelta2 * TDMath.RAD2GRAD;
+    mDelta    *= TDMath.RAD2GRAD; // convert avg and std0-dev from radians to degrees
+    mDelta2   *= TDMath.RAD2GRAD;
+    mMaxError *= TDMath.RAD2GRAD;
 
     EnforceMax2( bG, aG );
     EnforceMax2( bM, aM );
