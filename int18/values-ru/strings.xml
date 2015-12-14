@@ -436,8 +436,8 @@
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
-    <string name="button_store"     >Загрузить в Disto  </string>
-    <string name="button_upload"    >Загрузить </string>
+    <string name="button_store"     >Загрузить</string>
+    <string name="button_upload"    >Загрузить в Disto </string>
     <string name="button_yes"       >Да        </string>
 
     <!-- UNUSED string name="button_sharp"     >Острый</string -->
