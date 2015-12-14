@@ -508,7 +508,7 @@ public class OverviewActivity extends ItemDrawer
       }
     }
 
-    boolean mAllSymbols = true;
+    // boolean mAllSymbols = true;
 
     private void loadFiles( long type )
     {
@@ -521,8 +521,8 @@ public class OverviewActivity extends ItemDrawer
       //   finish();
       //   return;
       // }
-      mAllSymbols  = true; // by default there are all the symbols
-      SymbolsPalette missingSymbols = new SymbolsPalette(); 
+      // mAllSymbols  = true; // by default there are all the symbols
+      // SymbolsPalette missingSymbols = new SymbolsPalette(); 
 
       NumStation mStartStation = null;
 
@@ -564,17 +564,18 @@ public class OverviewActivity extends ItemDrawer
         String filename = TopoDroidPath.getTh2FileWithExt( fullName );
         // FIXME_OVER 
         // N.B. this loads the drawing on DrawingSurface.mCommandManager1
-        boolean all_symbols = mOverviewSurface.loadTherion( filename, xdelta, ydelta, missingSymbols );
-        mAllSymbols = mAllSymbols && all_symbols;
+        // boolean all_symbols =
+          mOverviewSurface.loadTherion( filename, xdelta, ydelta, null /* missingSymbols */ );
+        // mAllSymbols = mAllSymbols && all_symbols;
       }
 
-      if ( ! mAllSymbols ) {
-        String msg = missingSymbols.getMessage( getResources() );
-        TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Missing " + msg );
-        Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
-        // (new MissingDialog( this, this, msg )).show();
-        // finish();
-      }
+      // if ( ! mAllSymbols ) {
+      //   String msg = missingSymbols.getMessage( getResources() );
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Missing " + msg );
+      //   Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
+      //   // (new MissingDialog( this, this, msg )).show();
+      //   // finish();
+      // }
 
       // // resetZoom();
       // resetReference( mPlot1 );

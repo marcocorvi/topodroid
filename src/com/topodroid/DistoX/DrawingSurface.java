@@ -517,7 +517,7 @@ public class DrawingSurface extends SurfaceView
     SymbolsPalette localPalette1 = preparePalette();
     SymbolsPalette localPalette2 = null;
 
-    missingSymbols.resetSymbolLists();
+    if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     boolean ret = true;
     if ( filename1 != null ) {
       commandManager = mCommandManager1;
@@ -541,8 +541,7 @@ public class DrawingSurface extends SurfaceView
     return doLoadTherion( filename, 0, 0, missingSymbols, localPalette );
   }
 
-  public boolean doLoadTherion( String filename, float dx, float dy, 
-                                SymbolsPalette missingSymbols, SymbolsPalette localPalette )
+  public boolean doLoadTherion( String filename, float dx, float dy, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
   {
     float x, y, x1, y1, x2, y2;
     boolean is_not_section = true;
@@ -698,7 +697,7 @@ public class DrawingSurface extends SurfaceView
               }
 
               if ( ptType >= DrawingBrushPaths.mPointLib.mAnyPointNr ) {
-                missingSymbols.addPoint( type ); // insert "type" in the list of missing point types
+                if ( missingSymbols != null ) missingSymbols.addPoint( type ); // add "type" to the missing point-types
                 ptType = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
                 // continue;
               }
@@ -770,7 +769,7 @@ public class DrawingSurface extends SurfaceView
                           }
                         }
                         if ( arType >= DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
-                          missingSymbols.addArea( vals2[1] );
+                          if ( missingSymbols != null ) missingSymbols.addArea( vals2[1] );
                           arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
                         } 
                         path.setAreaType( arType );
@@ -866,7 +865,7 @@ public class DrawingSurface extends SurfaceView
                 line = readLine( br );
                 if ( ! line.equals( "endline" ) ) { 
                   if ( lnType >= lnTypeMax ) {
-                    missingSymbols.addLine( type );
+                    if ( missingSymbols != null ) missingSymbols.addLine( type );
                     lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME missing line becomes "user"
                   } // else {
                     path = new DrawingLinePath( lnType );
@@ -954,7 +953,7 @@ public class DrawingSurface extends SurfaceView
     // long millis = System.currentTimeMillis() - millis_start;
     // Log.v("DistoX", "load " + filename + " " + millis + " msec ");
 
-    return missingSymbols.isOK();
+    return (missingSymbols != null )? missingSymbols.isOK() : true;
   }
 
   void exportAsCsx( PrintWriter pw, long type )

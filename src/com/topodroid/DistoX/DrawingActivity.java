@@ -485,8 +485,7 @@ public class DrawingActivity extends ItemDrawer
 
     // private void AlertMissingSymbols()
     // {
-    //   new TopoDroidAlertDialog( this, getResources(),
-    //                     getResources().getString( R.string.missing_symbols ),
+    //   new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.missing_symbols ),
     //     new DialogInterface.OnClickListener() {
     //       @Override
     //       public void onClick( DialogInterface dialog, int btn ) {
@@ -503,15 +502,16 @@ public class DrawingActivity extends ItemDrawer
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
+        startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
         // if ( not_all_symbols ) AlertMissingSymbols();
-        if ( mAllSymbols ) {
-          // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-          startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
-        } else { // mAllSymbols is false
-          // FIXME what to do ?
-         Toast.makeText( this,
-           "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
-        }
+
+        // if ( mAllSymbols ) {
+        //   // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
+        //   startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
+        // } else { // mAllSymbols is false: FIXME what to do ?
+        //  Toast.makeText( this,
+        //    "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
+        // }
       }
     }
 
@@ -1223,6 +1223,18 @@ public class DrawingActivity extends ItemDrawer
 
       mAllSymbols  = true; // by default there are all the symbols
 
+      String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+      String filename2 = null;
+      if ( mFullName2 != null ) {
+        filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
+      }
+
+      long millis_start = System.currentTimeMillis();
+      long millis_end;
+      // data reduction 4200 msec
+      // references      300 msec
+      // sketch loading 9500 msec
+
       if ( isSection() ) {
         mTo = view;
       } else if ( isXSection() ) { 
@@ -1234,32 +1246,30 @@ public class DrawingActivity extends ItemDrawer
           if ( mPid2 >= 0 ) mApp.mData.dropPlot( mPid2, mSid );
           finish();
         } else {
-          // new DataReduction( this, start, view, hide ).execute();
           mNum = new DistoXNum( mList, start, view, hide );
+          millis_end = System.currentTimeMillis() - millis_start;
+          Log.v("DistoX", "Data reduction " + millis_end + " msec" );
           computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom, true );
           computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
         }
       }
+      millis_end = System.currentTimeMillis() - millis_start;
+      Log.v("DistoX", "References " + millis_end + " msec" );
 
       // now try to load drawings from therion file
       // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + mFullName1 + " " + mFullName2 );
 
-      String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-      String filename2 = null;
-      if ( mFullName2 != null ) {
-        filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
-      }
-
-      // Toast.makeText( this, R.string.sketch_loading, Toast.LENGTH_SHORT ).show();
       SymbolsPalette missingSymbols = new SymbolsPalette(); 
-      //
       // missingSymbols = palette of missing symbols
       // if there are missing symbols mAllSymbols is false and the MissingDialog is shown
       //    (the dialog just warns the user about missing symbols, maybe a Toast would be enough)
       // when the sketch is saved, mAllSymbols is checked ( see doSaveTh2 )
       // if there are not all symbols the user is asked if he/she wants to save anyways
-      //
+
       mAllSymbols = mDrawingSurface.loadTherion( filename1, filename2, missingSymbols );
+
+      millis_end = System.currentTimeMillis() - millis_start;
+      Log.v("DistoX", "Sketch load " + millis_end + " msec" );
 
       if ( ! mAllSymbols ) {
         String msg = missingSymbols.getMessage( getResources() );
@@ -1269,9 +1279,7 @@ public class DrawingActivity extends ItemDrawer
         // finish();
       }
 
-      // resetZoom();
       resetReference( mPlot1 );
-
       if ( type == PlotInfo.PLOT_EXTENDED ) {
         switchPlotType();
       }
@@ -2896,35 +2904,8 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    // private class DataReduction extends AsyncTask< Intent, Void, Integer >
-    // {
-    //   String mStart;
-    //   String mView;
-    //   String mHide;
 
-    //   public DataReduction( Context context, String start, String view, String hide )
-    //   {
-    //     mStart = start;
-    //     mView  = view;
-    //     mHide  = hide;
-    //   }
-
-    //   @Override
-    //   protected Integer doInBackground(Intent... arg0)
-    //   {
-    //     mNum = new DistoXNum( mList, mStart, mView, mHide );
-    //     return 0;
-    //   }
-
-    //   @Override
-    //   protected void onPostExecute( Integer i )
-    //   {
-    //     // super.onPostExecute(bool);
-    //     computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom, true );
-    //     computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
-    //   }
-    // }
-
+    // --------------------------------------------------------------------------
     private class ExportBitmapToFile extends AsyncTask<Intent,Void,Boolean> 
     {
         private Context mContext;
@@ -3344,12 +3325,12 @@ public class DrawingActivity extends ItemDrawer
     // Log.v("DistoX", "recover " + type + " " + filename );
 
     String filename1 = TopoDroidPath.getTh2File( filename );
-    SymbolsPalette missingSymbols = new SymbolsPalette();
+    // SymbolsPalette missingSymbols = new SymbolsPalette();
     if ( type == 1 ) {
-      mDrawingSurface.loadTherion( filename1, null, missingSymbols );
+      mDrawingSurface.loadTherion( filename1, null, null /* missingSymbols */ );
       setPlotType1();
     } else {
-      mDrawingSurface.loadTherion( null, filename1, missingSymbols );
+      mDrawingSurface.loadTherion( null, filename1, null /* missingSymbols */ );
       // TODO now switch to extended view FIXME-VIEW
       setPlotType2();
     }

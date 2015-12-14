@@ -67,7 +67,8 @@ class DistoXNum
   // --------------------------------------------------------
 
   // FIXME make mStations a hashmap (key station name)
-  private ArrayList<NumStation> mStations;
+  // private ArrayList<NumStation> mStations;
+  NumStationSet mStations;
   private ArrayList<NumShot>    mShots;
   private ArrayList<NumSplay>   mSplays;
   private ArrayList<String>     mClosures;
@@ -87,7 +88,7 @@ class DistoXNum
 
   public boolean surveyAttached; //!< whether the survey is attached
 
-  public List<NumStation> getStations() { return mStations; }
+  public List<NumStation> getStations() { return mStations.getStations(); }
   public List<NumShot>    getShots()    { return mShots; }
   public List<NumSplay>   getSplays()   { return mSplays; }
   public List<String>     getClosures() { return mClosures; }
@@ -152,12 +153,14 @@ class DistoXNum
     while ( ! stack.empty() ) {
       st = stack.pop();
       // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
-      for ( NumStation s : mStations ) {
-        if ( s.mParent == st ) {
-          s.mHidden -= barrier;
-          stack.push( s );
-        }
-      }
+      mStations.updateHidden( st, -barrier, stack );
+
+      // for ( NumStation s : mStations ) {
+      //   if ( s.mParent == st ) {
+      //     s.mHidden -= barrier;
+      //     stack.push( s );
+      //   }
+      // }
     }
   }
 
@@ -222,10 +225,12 @@ class DistoXNum
   private float shortestPath( NumStation s1, NumStation s2 )
   {
     Stack<NumStation> stack = new Stack<NumStation>();
-    for ( NumStation s : mStations ) {
-      s.mShortpathDist = 100000.0f;
-      // s.path = null;
-    }
+    mStations.setShortestPath( 100000.0f );
+    // for ( NumStation s : mStations ) {
+    //   s.mShortpathDist = 100000.0f;
+    //   // s.path = null;
+    // }
+
     s1.mShortpathDist = 0.0f;
     stack.push( s1 );
     while ( ! stack.empty() ) {
@@ -254,10 +259,10 @@ class DistoXNum
   // FIXME use hashmap
   NumStation getStation( String id ) 
   {
-    if ( id != null ) {
-      for (NumStation st : mStations ) if ( id.equals(st.name) ) return st;
-    }
-    return null;
+    if ( id == null ) return null;
+    return mStations.getStation( id );
+    // for (NumStation st : mStations ) if ( id.equals(st.name) ) return st;
+    // return null;
   }
 
   NumShot getShot( String s1, String s2 )
@@ -643,9 +648,10 @@ class DistoXNum
     resetBBox();
     resetStats();
 
-    long millis_start = System.currentTimeMillis();
+    // long millis_start = System.currentTimeMillis();
     
-    mStations = new ArrayList< NumStation >();
+    // mStations = new ArrayList< NumStation >();
+    mStations = new NumStationSet();
     mShots    = new ArrayList< NumShot >();
     mSplays   = new ArrayList< NumSplay >();
     mClosures = new ArrayList< String >();
@@ -763,9 +769,11 @@ class DistoXNum
     NumStation start_station = new NumStation( start );
     start_station.mHasCoords = true;
     // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "start station " + start );
+    // Log.v( "DistoX", "start station " + start + " shots " + tmpshots.size() );
 
     NumShot sh;
-    mStations.add( start_station );
+    mStations.addStation( start_station );
+
     boolean repeat = true;
     while ( repeat ) {
       repeat = false;
@@ -829,6 +837,8 @@ class DistoXNum
         NumStation st = getStation( ts.to );
         // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
         // ts.Dump();
+        // Log.v("DistoX", "shot " + ts.from + "-" + ts.to + " stations " +
+        //   ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
 
         if ( sf != null ) {
           sf.addAzimuth( ts.b(), ts.extend );
@@ -842,7 +852,7 @@ class DistoXNum
               st1.mAnomaly = anomaly;
               updateBBox( st );
               st1.mDuplicate = true;
-              mStations.add( st1 );
+              mStations.addStation( st1 );
 
               sh = makeShotFromTmp( sf, st1, ts, sf.mAnomaly );
               addShotToStations( sh, st1, sf );
@@ -863,14 +873,16 @@ class DistoXNum
           }
           else // st null || st isBarrier
           { // forward shot: from --> to
-            TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
-                              "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
+            // TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
+            //                   "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
+            // Log.v( "DistoX", "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
+
             st = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
             st.addAzimuth( (ts.b()+180)%360, -ts.extend );
             st.mAnomaly = anomaly;
             updateBBox( st );
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
-            mStations.add( st );
+            mStations.addStation( st );
 
             sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly );
             addShotToStations( sh, st, sf );
@@ -883,15 +895,17 @@ class DistoXNum
           // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
           st.addAzimuth( (ts.b()+180)%360, -ts.extend );
           
-          TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
-                            "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
+          // TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
+          //                   "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
+          // Log.v("DistoX", "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
+
           sf = new NumStation( ts.from, st, - ts.d(), ts.b()-st.mAnomaly, ts.c(), ts.extend );
           sf.addAzimuth( ts.b(), ts.extend );
           sf.mAnomaly = anomaly; // FIXME
 
           updateBBox( sf );
           addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), sf.v );
-          mStations.add( sf );
+          mStations.addStation( sf );
 
           // FIXME is st.mAnomaly OK ?
           sh = makeShotFromTmp( sf, st, ts, st.mAnomaly ); // N.B. was new NumShot(st, sf, ts.block, -1); // FIXME check -anomaly
@@ -902,18 +916,20 @@ class DistoXNum
       }
     }
     // TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum::compute done leg shots ");
+    // Log.v( "DistoX", "DistoXNum::compute done leg shots: stations " + mStations.size() );
 
     if ( TopoDroidSetting.mLoopClosure ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "loop compensation");
+      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "loop compensation");
       doLoopCompensation( mNodes, mShots );
   
       // recompute station positions
       for ( NumShot sh1 : mShots ) {
         sh1.mUsed = false;
       }
-      for ( NumStation st : mStations ) { // mark stations as unset
-        st.mHasCoords = false;
-      }
+      mStations.setCoords( false );
+      // for ( NumStation st : mStations ) { // mark stations as unset
+      //   st.mHasCoords = false;
+      // }
       start_station.mHasCoords = true;
 
       repeat = true;
@@ -959,18 +975,20 @@ class DistoXNum
       }
     }
 
-    for ( NumStation st : mStations ) {
-      st.setAzimuths();
-      for ( TmpSplay ts : tmpsplays ) {
-        if ( getStation( ts.from ) == st ) {
-          float extend = st.computeExtend( ts.b(), ts.extend ); 
-          mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.block ) );
-        }
+    mStations.setAzimuths();
+    // for ( NumStation st : mStations ) {
+    //   st.setAzimuths();
+    // }
+    for ( TmpSplay ts : tmpsplays ) {
+      NumStation st = getStation( ts.from );
+      if ( st != null ) {
+        float extend = st.computeExtend( ts.b(), ts.extend ); 
+        mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.block ) );
       }
     }
 
-    long millis_end = System.currentTimeMillis() - millis_start;
-    Log.v("DistoX", "Data reduction " + millis_end + " msec" );
+    // long millis_end = System.currentTimeMillis() - millis_start;
+    // Log.v("DistoX", "Data reduction " + millis_end + " msec" );
 
     return (mShots.size() == tmpshots.size() );
   }
@@ -1192,7 +1210,7 @@ class DistoXNum
           sh0 = sh1;
         }
         if ( st0 == sf0 ) { // closed-loop ???
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR closed loop in num branches");
+          // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR closed loop in num branches");
           if ( also_cross_end ) {
             branch.setLastNode( st0.node );
             branches.add( branch );

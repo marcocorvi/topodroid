@@ -198,7 +198,7 @@ public class ShotActivity extends Activity
   // private int mListPos = -1;
   // private int mListTop = 0;
   private DistoXDBlockAdapter   mDataAdapter;
-  ArrayList< String > mShowSplay;
+  private ArrayList< String > mShowSplay;
 
 
   // private long mLastExtend; // id of the last-extend-ed splay 
@@ -412,11 +412,12 @@ public class ShotActivity extends Activity
         } else if ( t == DistoXDBlock.BLOCK_SPLAY ) {
           prev = null;
           if ( mSplay ) { // do hide splays, except those that are shown.
-            boolean skip = true;
-            for ( String st : mShowSplay ) {
-              if ( st.equals( cur.mFrom ) ) { skip = false; break; }
-            }
-            if ( skip ) continue;
+            // boolean skip = true;
+            // for ( String st : mShowSplay ) {
+            //   if ( st.equals( cur.mFrom ) ) { skip = false; break; }
+            // }
+            // if ( skip ) continue;
+            if ( ! showSplaysContains( cur.mFrom ) ) continue;
           }
         } else { // t == DistoXDBlock.BLOCK_MAIN_LEG
           prev = cur;
@@ -1401,6 +1402,14 @@ public class ShotActivity extends Activity
       mShowSplay.add( st );
     }
     updateDisplay( );
+  }
+
+  private boolean showSplaysContains( String name ) 
+  {
+    for ( String st : mShowSplay ) {
+      if ( st.equals( name ) ) return true;
+    }
+    return false;
   }
 
 

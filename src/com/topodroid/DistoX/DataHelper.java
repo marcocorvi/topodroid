@@ -270,10 +270,11 @@ public class DataHelper extends DataSetObservable
      block.setId( cursor.getLong(0), survey_id );
      // Log.v( TopoDroidApp.TAG, survey_id + "/" + cursor.getLong(0) + " name <" + cursor.getString(1) + "> <" + cursor.getString(2) );
 
-     block.setName(    cursor.getString(1), cursor.getString(2) );
-     block.mLength  = (float)( cursor.getDouble(3) );
-     block.setBearing( (float)( cursor.getDouble(4) ) );
-     block.mClino   = (float)( cursor.getDouble(5) );
+     block.setName( cursor.getString(1), cursor.getString(2) );  // from - to
+     block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+     // block.setBearing( (float)( cursor.getDouble(4) ) ); 
+     block.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
+     block.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees]
      block.mAcceleration = (float)( cursor.getDouble(6) );
      block.mMagnetic     = (float)( cursor.getDouble(7) );
      block.mDip          = (float)( cursor.getDouble(8) );
