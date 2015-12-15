@@ -15,6 +15,9 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 import android.content.Intent;
 import android.content.Context;
@@ -96,16 +99,24 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
             f.delete();
           }
         }
+
         String tempname1 = TopoDroidPath.getTmpFileWithExt( mSuffix + Long.toString(now) );
         File file1 = new File( tempname1 );
-        // Log.v("DistoX", "create temp file " + file1.getAbsolutePath() );
+        if ( TopoDroidSetting.mBinaryTh2 ) {
+          filename1 = filename1.replace( ".th2", ".tdr" );
+          FileOutputStream fos = new FileOutputStream( file1 );
+          DataOutputStream dos = new DataOutputStream( fos );
+          mSurface.exportDataStream( mType, dos, mFullName1 );
+          dos.close();
+          fos.close();
+        } else {
+          FileWriter writer1 = new FileWriter( file1 );
+          BufferedWriter out1 = new BufferedWriter( writer1 );
+          mSurface.exportTherion( mType, out1, mFullName1, PlotInfo.projName[mType] );
+          out1.flush();
+          out1.close();
+        }
 
-        // Log.v("DistoX", "repeating save th2");
-        FileWriter writer1 = new FileWriter( file1 );
-        BufferedWriter out1 = new BufferedWriter( writer1 );
-        mSurface.exportTherion( mType, out1, mFullName1, PlotInfo.projName[mType] );
-        out1.flush();
-        out1.close();
         if ( isCancelled() ) {
           // Log.v("DistoX", "save cancelled");
           file1.delete();
@@ -117,7 +128,7 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
           f1.renameTo( b1 );
           file1.renameTo( new File( filename1 ) );
         }
-      } catch (Exception e) {
+      } catch ( IOException e ) {
         e.printStackTrace();
       }
       ret = true;

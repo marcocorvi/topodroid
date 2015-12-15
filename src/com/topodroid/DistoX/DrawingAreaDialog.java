@@ -57,7 +57,7 @@ public class DrawingAreaDialog extends Dialog
     super( context );
     mParent = context;
     mArea = line;
-    mOrientable = DrawingBrushPaths.canRotateArea( mArea.mAreaType );
+    mOrientable = DrawingBrushPaths.mAreaLib.isSymbolOrientable( mArea.mAreaType );
     // mBitmap = Bitmap.createBitmap( 40, 40, Bitmap.Config.ARGB_8888);
     // mCanvas = new Canvas( mBitmap );
   }
@@ -71,7 +71,7 @@ public class DrawingAreaDialog extends Dialog
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setTitle( String.format( mParent.getResources().getString( R.string.title_draw_area ),
-              DrawingBrushPaths.getAreaName( mArea.mAreaType ) ) );
+              DrawingBrushPaths.mAreaLib.getSymbolName( mArea.mAreaType ) ) );
 
     mOrientationWidget = new OrientationWidget( this, mOrientable, mArea.mOrientation );
 

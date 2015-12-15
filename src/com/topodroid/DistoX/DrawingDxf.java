@@ -297,7 +297,7 @@ class DrawingDxf
 
         SymbolLineLibrary linelib = DrawingBrushPaths.mLineLib;
         SymbolAreaLibrary arealib = DrawingBrushPaths.mAreaLib;
-        int nr_layers = 6 + linelib.mAnyLineNr + arealib.mAnyAreaNr;
+        int nr_layers = 6 + linelib.mSymbolNr + arealib.mSymbolNr;
         ++handle; writeBeginTable( out, "LAYER", handle, nr_layers );
         {
           StringWriter sw2 = new StringWriter();
@@ -315,15 +315,15 @@ class DrawingDxf
           ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color;
           
           if ( linelib != null ) { 
-            for ( SymbolLine line : linelib.mAnyLine ) {
+            for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, lname, flag, color, lt_continuous ); ++color;
             }
           }
 
           if ( arealib != null ) {
-            for ( SymbolArea area : arealib.mAnyArea ) {
-              String aname = "A_" + area.getThName().replace(':','-');
+            for ( Symbol s : arealib.getSymbols() ) {
+              String aname = "A_" + s.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, aname, flag, color, lt_continuous ); ++color;
             }
           }
@@ -373,11 +373,10 @@ class DrawingDxf
           writeInt( out, 70, 1 );
           writeEndTable( out );
 
-          ++handle; writeBeginTable( out, "BLOCK_RECORD", handle, DrawingBrushPaths.mPointLib.mAnyPointNr );
+          ++handle; writeBeginTable( out, "BLOCK_RECORD", handle, DrawingBrushPaths.mPointLib.mSymbolNr );
           {
-            for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
-              SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
-              String block = "P_" + pt.getThName().replace(':','-');
+            for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
+              String block = "P_" + DrawingBrushPaths.mPointLib.getSymbolThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               ++handle; writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbBlockTableRecord" );
               writeString( out, 2, block );
@@ -393,8 +392,8 @@ class DrawingDxf
       writeSection( out, "BLOCKS" );
       {
         // // 8 layer (0), 2 block name,
-        for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
-          SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
+        for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
+          SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbol(n);
           String block = "P_" + pt.getThName().replace(':','-');
 
           writeString( out, 0, "BLOCK" );
@@ -570,7 +569,7 @@ class DrawingDxf
             printString( pw5, 1, st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath)path;
-            String layer = "L_" + DrawingBrushPaths.getLineThName( line.lineType() ).replace(':','-');
+            String layer = "L_" + DrawingBrushPaths.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
             // String layer = "LINE";
             int flag = 0;
             boolean use_spline = false;
@@ -686,7 +685,7 @@ class DrawingDxf
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;
-            String layer = "A_" + DrawingBrushPaths.getAreaThName( area.areaType() ).replace(':','-');
+            String layer = "A_" + DrawingBrushPaths.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
             printString( pw5, 0, "HATCH" );    // entity type HATCH
             // ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbHatch" );
             // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
@@ -740,7 +739,7 @@ class DrawingDxf
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
-            String block = "P_" + DrawingBrushPaths.getPointThName( point.mPointType ).replace(':','-');
+            String block = "P_" + DrawingBrushPaths.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
             // int idx = 1 + point.mPointType;
             printString( pw5, 0, "INSERT" );
             ++handle; printAcDb( pw5, handle, "AcDbBlockReference" );

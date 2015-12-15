@@ -33,6 +33,9 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.FileInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.EOFException;
 
@@ -470,6 +473,16 @@ public class DrawingSurface extends SurfaceView
       }
     }
 
+    public void exportDataStream( int type, DataOutputStream dos, String sketch_name )
+    {
+      // Log.v("DistoX", "drawing surface export type " + type );
+      if ( type == PlotInfo.PLOT_EXTENDED ) {
+        mCommandManager2.exportDataStream( type, dos, sketch_name );
+      } else {
+        mCommandManager1.exportDataStream( type, dos, sketch_name );
+      }
+    }
+
   private String readLine( BufferedReader br )
   {
     String line = null;
@@ -493,18 +506,22 @@ public class DrawingSurface extends SurfaceView
     palette.addPoint("user"); // make sure local palette contains "user" symnbols
     palette.addLine("user");
     palette.addArea("user");
-    for ( SymbolPoint p : DrawingBrushPaths.mPointLib.mAnyPoint ) {
-      if ( p.isEnabled() && ! p.getThName().equals("user") ) palette.addPoint( p.getThName( ) );
+    for ( Symbol p : DrawingBrushPaths.mPointLib.getSymbols() ) if ( p.isEnabled() ) {
+      String th_name = p.getThName();
+      if ( ! th_name.equals("user") ) palette.addPoint( th_name );
     }
-    for ( SymbolLine p : DrawingBrushPaths.mLineLib.mAnyLine ) {
-      if ( p.isEnabled() && ! p.getThName().equals("user") ) palette.addLine( p.getThName( ) );
+    for ( Symbol p : DrawingBrushPaths.mLineLib.getSymbols() ) if ( p.isEnabled() ) {
+      String th_name = p.getThName();
+      if ( ! th_name.equals("user") ) palette.addLine( th_name );
     }
-    for ( SymbolArea p : DrawingBrushPaths.mAreaLib.mAnyArea ) {
-      if ( p.isEnabled() && ! p.getThName().equals("user") ) palette.addArea( p.getThName( ) );
+    for ( Symbol p : DrawingBrushPaths.mAreaLib.getSymbols() ) if ( p.isEnabled() ) {
+      String th_name = p.getThName();
+      if ( ! th_name.equals("user") ) palette.addArea( th_name );
     }
     return palette;
   }
 
+  // called by OverviewActivity
   public boolean loadTherion( String filename1, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
@@ -522,15 +539,20 @@ public class DrawingSurface extends SurfaceView
     if ( filename1 != null ) {
       commandManager = mCommandManager1;
       commandManager.clearSketchItems();
-      ret = ret && doLoadTherion( filename1, missingSymbols, localPalette1 );
+      String filename1bin = filename1.replace( ".th2", ".tdr" );
+      if ( ! doLoadDataStream( filename1bin, missingSymbols, localPalette1 ) ) {
+        ret = ret && doLoadTherion( filename1, missingSymbols, localPalette1 );
+      }
     } else {
       localPalette2 = localPalette1;
     }
     if ( filename2 != null ) {
       commandManager = mCommandManager2;
       commandManager.clearSketchItems();
-      // use palette from PLAN file
-      ret = ret && doLoadTherion( filename2, missingSymbols, localPalette2 );
+      String filename2bin = filename2.replace( ".th", ".tdr" );
+      if ( ! doLoadDataStream( filename2bin, missingSymbols, localPalette2 ) ) {
+        ret = ret && doLoadTherion( filename2, missingSymbols, localPalette2 );
+      }
     }
     commandManager = mCommandManager1;
     return ret;
@@ -539,6 +561,73 @@ public class DrawingSurface extends SurfaceView
   public boolean doLoadTherion( String filename, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
   {
     return doLoadTherion( filename, 0, 0, missingSymbols, localPalette );
+  }
+
+  public boolean doLoadDataStream( String filename, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
+  {
+    boolean ret = false;
+    long millis_start = System.currentTimeMillis();
+
+    // DrawingBrushPaths.makePaths( );
+    DrawingBrushPaths.resetPointOrientations();
+
+    synchronized( TopoDroidPath.mTherionLock ) {
+      try {
+        FileInputStream fis = new FileInputStream( filename );
+        DataInputStream dis = new DataInputStream( fis );
+        int what = dis.read();
+        if ( what != 'S' ) {
+          ret = false;
+        } else {
+          int nam_len = dis.readInt();
+          String name = dis.readUTF();
+          int type = dis.readInt();
+
+          // read palettes
+          int np = dis.readInt();
+          String points = dis.readUTF();
+          int nl = dis.readInt();
+          String lines = dis.readUTF();
+          int na = dis.readInt();
+          String areas = dis.readUTF();
+
+          boolean todo = true;
+          while ( todo ) {
+            what = dis.read();
+            switch ( what ) {
+              case 'P':
+                addDrawingPath( new DrawingPointPath( dis, missingSymbols ) );
+                break;
+              case 'T':
+                addDrawingPath( new DrawingLabelPath( dis ) );
+                break;
+              case 'L':
+                addDrawingPath( new DrawingLinePath( dis, missingSymbols ) );
+                break;
+              case 'A':
+                addDrawingPath( new DrawingAreaPath( dis, missingSymbols ) );
+                break;
+              case 'E':
+                todo = false;
+                break;
+            } 
+          }
+        }
+        ret = true;
+        dis.close();
+        fis.close();
+      } catch ( FileNotFoundException e ) {
+        // this is OK
+      } catch ( IOException e ) {
+        e.printStackTrace();
+      }
+    }
+
+    long millis = System.currentTimeMillis() - millis_start;
+    Log.v("DistoX", "load data stream " + filename + " " + millis + " msec ");
+
+    // return (missingSymbols != null )? missingSymbols.isOK() : true;
+    return ret;
   }
 
   public boolean doLoadTherion( String filename, float dx, float dy, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
@@ -619,7 +708,7 @@ public class DrawingSurface extends SurfaceView
             if ( vals.length < 4 ) {
               TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "bad point cmd: " + line );
             } else {
-              int ptType = DrawingBrushPaths.mPointLib.mAnyPointNr;
+              int ptType = DrawingBrushPaths.mPointLib.mSymbolNr;
               boolean has_orientation = false;
               float orientation = 0.0f;
               int scale = DrawingPointPath.SCALE_M;
@@ -690,19 +779,19 @@ public class DrawingSurface extends SurfaceView
               }
 
               DrawingBrushPaths.mPointLib.tryLoadMissingPoint( type );
-              for ( ptType = 0; ptType < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ptType ) {
-                if ( type.equals( DrawingBrushPaths.getPointThName( ptType ) ) ) {
+              for ( ptType = 0; ptType < DrawingBrushPaths.mPointLib.mSymbolNr; ++ptType ) {
+                if ( type.equals( DrawingBrushPaths.mPointLib.getSymbolThName( ptType ) ) ) {
                   break;
                 }
               }
 
-              if ( ptType >= DrawingBrushPaths.mPointLib.mAnyPointNr ) {
+              if ( ptType >= DrawingBrushPaths.mPointLib.mSymbolNr ) {
                 if ( missingSymbols != null ) missingSymbols.addPoint( type ); // add "type" to the missing point-types
                 ptType = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
                 // continue;
               }
 
-              if ( has_orientation && DrawingBrushPaths.canRotatePoint(ptType) ) {
+              if ( has_orientation && DrawingBrushPaths.mPointLib.isSymbolOrientable(ptType) ) {
                 // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
                 DrawingBrushPaths.rotateGradPoint( ptType, orientation );
                 DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
@@ -734,7 +823,7 @@ public class DrawingSurface extends SurfaceView
                 if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
                   visible = false;
                 }
-                int arType = DrawingBrushPaths.mAreaLib.mAnyAreaNr;
+                int arType = DrawingBrushPaths.mAreaLib.mSymbolNr;
                 DrawingAreaPath path = new DrawingAreaPath( arType, vals[3], visible );
 
                 // TODO insert new area-path
@@ -756,8 +845,8 @@ public class DrawingSurface extends SurfaceView
                       String[] vals2 = line.split( " " );
                       if ( vals2.length >= 2 ) {
                         DrawingBrushPaths.mAreaLib.tryLoadMissingArea( vals2[1] );
-                        for ( arType=0; arType < DrawingBrushPaths.mAreaLib.mAnyAreaNr; ++arType ) {
-                          if ( vals2[1].equals( DrawingBrushPaths.getAreaThName( arType ) ) ) break;
+                        for ( arType=0; arType < DrawingBrushPaths.mAreaLib.mSymbolNr; ++arType ) {
+                          if ( vals2[1].equals( DrawingBrushPaths.mAreaLib.getSymbolThName( arType ) ) ) break;
                         }
                         // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "set area type " + arType + " " + vals2[1]);
                         double orientation = 0;
@@ -768,7 +857,7 @@ public class DrawingSurface extends SurfaceView
                             TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Area orientation error <" + line + ">" );
                           }
                         }
-                        if ( arType >= DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
+                        if ( arType >= DrawingBrushPaths.mAreaLib.mSymbolNr ) {
                           if ( missingSymbols != null ) missingSymbols.addArea( vals2[1] );
                           arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
                         } 
@@ -854,12 +943,12 @@ public class DrawingSurface extends SurfaceView
                   } 
                 }
                 
-                int lnTypeMax = DrawingBrushPaths.mLineLib.mAnyLineNr;
+                int lnTypeMax = DrawingBrushPaths.mLineLib.mSymbolNr;
                 int lnType = lnTypeMax;
                 DrawingLinePath path = null;
                 DrawingBrushPaths.mLineLib.tryLoadMissingLine( type );
                 for ( lnType=0; lnType < lnTypeMax; ++lnType ) {
-                  if ( type.equals( DrawingBrushPaths.getLineThName( lnType ) ) ) break;
+                  if ( type.equals( DrawingBrushPaths.mLineLib.getSymbolThName( lnType ) ) ) break;
                 }
                 // TODO insert new line-path
                 line = readLine( br );

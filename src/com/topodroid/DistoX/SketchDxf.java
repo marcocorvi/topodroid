@@ -73,10 +73,10 @@ class SketchDxf
     out.printf("0\nSECTION\n2\nBLOCKS\n");
     {
       // // 8 layer (0), 2 block name,
-      for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
+      for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
         int block = 1+n; // block_name = 1 + therion_code
         out.printf("0\nBLOCK\n8\nPOINT\n2\n%d\n70\n64\n10\n0.0\n20\n0.0\n30\n0.0\n", block );
-        out.printf( DrawingBrushPaths.mPointLib.getAnyPoint(n).getDxf() );
+        out.printf( ((SymbolPoint)DrawingBrushPaths.mPointLib.getSymbol(n)).getDxf() );
         out.printf("0\nENDBLK\n");
       }
     }

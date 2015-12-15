@@ -19,7 +19,12 @@ import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Locale;
+
+// import android.util.Log;
 
 /**
  */
@@ -44,6 +49,36 @@ public class DrawingLabelPath extends DrawingPointPath
     // paint.setStrokeWidth( WIDTH_CURRENT );
 
     makeStraightPath( 0, 0, 20*mText.length(), 0, cx, cy );
+  }
+
+  public DrawingLabelPath( DataInputStream dis )
+  {
+    super( DrawingBrushPaths.mPointLib.mPointLabelIndex, 0, 0, 1, "");
+    try {
+      cx = dis.readFloat( );
+      cy = dis.readFloat( );
+      // String th_name = dis.readUTF( );
+      mPointType = DrawingBrushPaths.getPointLabelIndex();
+      // mOrientation = dis.readFloat( )
+      mScale = dis.readInt( );
+      int txt_len = dis.readInt( );
+      if ( txt_len > 0 ) {
+        mText = dis.readUTF();
+      } else {
+        mText = "";
+      }
+      int opt_len = dis.readInt( );
+      if ( opt_len > 0 ) {
+        mOptions = dis.readUTF();
+      } else {
+        mOptions = null;
+      }
+      setCenter( cx, cy );
+      setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
+      makeStraightPath( 0, 0, 20*mText.length(), 0, cx, cy );
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LABEL in error " + e.toString() );
+    }
   }
 
   @Override
@@ -131,6 +166,38 @@ public class DrawingLabelPath extends DrawingPointPath
     pw.format(Locale.ENGLISH, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <font type=\"0\" />\n");
     pw.format("</item>\n");
+  }
+
+  @Override
+  void toDataStream( DataOutputStream dos )
+  {
+    // Log.v("DistoX", "Label to stream <" + mText + "> " + cx + " " + cy );
+    try {
+      dos.write( 'T' );
+      dos.writeFloat( cx );
+      dos.writeFloat( cy );
+      // dos.writeUTF( DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
+      // dos.writeFloat( (float)mOrientation );
+      dos.writeInt( mScale );
+      int txt_len = 0;
+      if ( mText != null ) {
+        txt_len = mText.length();
+        dos.writeInt( txt_len );
+        dos.writeUTF( mText );
+      } else {
+        dos.writeInt( txt_len );
+      }
+      int opt_len = 0;
+      if ( mOptions != null ) {
+        opt_len = mOptions.length();
+        dos.writeInt( opt_len );
+        dos.writeUTF( mOptions );
+      } else {
+        dos.writeInt( opt_len );
+      }
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LABEL out error " + e.toString() );
+    }
   }
 }
 

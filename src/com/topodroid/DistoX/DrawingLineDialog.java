@@ -70,12 +70,12 @@ public class DrawingLineDialog extends Dialog
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setTitle( String.format( mParent.getResources().getString( R.string.title_draw_line ),
-              DrawingBrushPaths.getLineName( mLine.mLineType ) ) );
+              DrawingBrushPaths.mLineLib.getSymbolName( mLine.mLineType ) ) );
 
     // mTVtype = (TextView) findViewById( R.id.line_type );
     mEToptions = (EditText) findViewById( R.id.line_options );
 
-    // mTVtype.setText( DrawingBrushPaths.getLineThName( mLine.mLineType ) );
+    // mTVtype.setText( DrawingBrushPaths.mLineLib.getSymbolThName( mLine.mLineType ) );
     mEToptions.setText( mLine.getOptionString() );
 
     mBtnOutlineOut  = (CheckBox) findViewById( R.id.line_outline_out );

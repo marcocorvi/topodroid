@@ -17,6 +17,7 @@
 package com.topodroid.DistoX;
 
 import java.io.PrintWriter;
+import java.io.DataOutputStream;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -28,6 +29,12 @@ import android.graphics.RectF;
 import android.util.Log;
 
 /**
+ * direct/indirect subclasses:
+ *   - DrawingPointLinePath
+ *      - DrawingLinePath
+ *      - DrawingAreaPath
+ *   - DrawingPointPath
+ *   - DrawingStationPath
  */
 public class DrawingPath implements ICanvasCommand
 {
@@ -287,6 +294,11 @@ public class DrawingPath implements ICanvasCommand
   public void setOrientation( double angle ) { }
 
   public String toTherion() { return new String("FIXME"); }
+
+  void toDataStream( DataOutputStream dos ) 
+  { 
+    Log.v("DistoX", "ERROR DrawingPath toDataStream executed");
+  }
 
   public void toCsurvey( PrintWriter pw ) { }
 

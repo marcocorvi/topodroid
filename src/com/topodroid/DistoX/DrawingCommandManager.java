@@ -32,6 +32,8 @@ import java.io.BufferedWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
+import java.io.FileOutputStream;
+import java.io.DataOutputStream;
 // import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.EOFException;
@@ -1801,6 +1803,36 @@ public class DrawingCommandManager
   {
     synchronized( mSelected ) {
       mSelected.clear();
+    }
+  }
+
+  public void exportDataStream( int type, DataOutputStream dos, String scrap_name )
+  {
+    // Log.v("DistoX", "export Therion");
+    try { 
+      dos.write( 'S' );
+      int nam_len = scrap_name.length();
+      dos.writeInt( nam_len );
+      dos.writeUTF( scrap_name );
+      dos.writeInt( type );
+
+      DrawingBrushPaths.mPointLib.toDataStream( dos );
+      DrawingBrushPaths.mLineLib.toDataStream( dos );
+      DrawingBrushPaths.mAreaLib.toDataStream( dos );
+
+      synchronized( mCurrentStack ) {
+        final Iterator i = mCurrentStack.iterator();
+        while ( i.hasNext() ) {
+          final ICanvasCommand cmd = (ICanvasCommand) i.next();
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath p = (DrawingPath) cmd;
+          if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue;
+          p.toDataStream( dos );
+        }
+      }
+      dos.write('E');
+    } catch ( IOException e ) {
+      e.printStackTrace();
     }
   }
 

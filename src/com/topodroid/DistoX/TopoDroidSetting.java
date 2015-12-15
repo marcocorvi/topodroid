@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -148,6 +147,8 @@ class TopoDroidSetting
   final static int CONN_MODE_CONTINUOUS = 1;
   static int mConnectionMode = CONN_MODE_BATCH; 
   static boolean mZ6Workaround = true;
+
+  static boolean mBinaryTh2 = false;
 
   static int mCompassReadings = 4; // number of compass readings to average
 

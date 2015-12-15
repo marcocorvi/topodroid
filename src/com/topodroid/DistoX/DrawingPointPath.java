@@ -21,6 +21,9 @@ import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Locale;
 
 // import android.util.Log;
@@ -60,10 +63,10 @@ public class DrawingPointPath extends DrawingPath
     mOptions = options;
     mScale   = SCALE_NONE;
     mOrientation = 0.0;
-    if ( DrawingBrushPaths.canRotatePoint( type ) ) {
+    if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( type ) ) {
       mOrientation = DrawingBrushPaths.getPointOrientation(type);
     }
-    setPaint( DrawingBrushPaths.getPointPaint( mPointType ) );
+    setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
     if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
       mScale = scale;
     } else {
@@ -71,6 +74,42 @@ public class DrawingPointPath extends DrawingPath
     }
     resetPath( 1.0f );
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
+  }
+
+  public DrawingPointPath( DataInputStream dis, SymbolsPalette missingSymbols ) 
+  {
+    super( DrawingPath.DRAWING_PATH_POINT );
+    try {
+      cx = dis.readFloat();
+      cy = dis.readFloat();
+      int nam_len = dis.readInt();
+      String th_name = dis.readUTF( );
+      // DrawingBrushPaths.mPointLib.tryLoadMissingPoint( th_name );
+      mPointType = DrawingBrushPaths.getPointType( th_name );
+      if ( mPointType < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addPoint( th_name ); 
+        mPointType = 0;
+      }
+
+      mOrientation = dis.readFloat();
+      mScale = dis.readInt();
+      int opt_len = dis.readInt();
+      if ( opt_len > 0 ) {
+        mOptions = dis.readUTF();
+      } else {
+        mOptions = null;
+      }
+      // TODO parse option for "-text"
+      setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
+      setCenter( cx, cy );
+      if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
+        DrawingBrushPaths.rotateGradPoint( mPointType, mOrientation );
+        resetPath( 1.0f );
+        DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
+      }
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "POINT in error " + e.toString() );
+    }
   }
 
   protected void setCenter( float x, float y )
@@ -141,7 +180,7 @@ public class DrawingPointPath extends DrawingPath
   {
     Matrix m = new Matrix();
     if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
-      if ( DrawingBrushPaths.canRotatePoint( mPointType ) ) {
+      if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {
@@ -228,10 +267,8 @@ public class DrawingPointPath extends DrawingPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
 
-    // Log.v( TopoDroidApp.TAG, "toTherion() Point " + mPointType + " orientation " + mOrientation );
-
     pw.format(Locale.ENGLISH, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
-                              DrawingBrushPaths.getPointThName(mPointType) );
+                              DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
     if ( mOrientation != 0.0 ) {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "point.toTherion type " + mPointType + " orientation " + mOrientation );
       pw.format(Locale.ENGLISH, " -orientation %.2f", mOrientation);
@@ -257,6 +294,32 @@ public class DrawingPointPath extends DrawingPath
 
     if ( mOptions != null && mOptions.length() > 0 ) {
       pw.format(" %s", mOptions );
+    }
+  }
+
+  @Override
+  void toDataStream( DataOutputStream dos )
+  {
+    String name = DrawingBrushPaths.mPointLib.getSymbolThName(mPointType);
+    try {
+      dos.write( 'P' );
+      dos.writeFloat( cx );
+      dos.writeFloat( cy );
+      int nam_len = name.length();
+      dos.writeInt( nam_len );
+      dos.writeUTF( name );
+      dos.writeFloat( (float)mOrientation );
+      dos.writeInt( mScale );
+      int opt_len = 0;
+      if ( mOptions != null ) {
+        opt_len = mOptions.length();
+        dos.writeInt( opt_len );
+        dos.writeUTF( mOptions );
+      } else {
+        dos.writeInt( opt_len );
+      }
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "POINT out error " + e.toString() );
     }
   }
 

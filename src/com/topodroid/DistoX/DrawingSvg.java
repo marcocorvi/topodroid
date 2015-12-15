@@ -93,8 +93,8 @@ class DrawingSvg
       // ***** FIXME TODO POINT SYMBOLS
       // {
       //   // // 8 layer (0), 2 block name,
-      //   for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
-      //     SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
+      //   for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
+      //     SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbol(n);
 
       //     int block = 1+n; // block_name = 1 + therion_code
       //     writeString( out, 8, "POINT" );
@@ -106,7 +106,6 @@ class DrawingSvg
       //     writeString( out, 30, "0.0" );
 
       //     out.write( pt.getDxf() );
-      //     // out.write( DrawingBrushPaths.mPointLib.getPoint(n).getDxf() );
       //   }
       // }
       
@@ -194,7 +193,7 @@ class DrawingSvg
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath) path;
             pw5.format("  <path stroke=\"%s\" stroke-width=\"2\" fill=\"none\"", color_str );
-            String th_name = DrawingBrushPaths.getLineThName( line.mLineType ); 
+            String th_name = DrawingBrushPaths.mLineLib.getSymbolThName( line.mLineType ); 
             if ( th_name.equals( "arrow" ) ) pw5.format(" marker-end=\"url(#Triangle)\"");
             else if ( th_name.equals( "section" ) ) pw5.format(" stroke-dasharray=\"5 3 \"");
             else if ( th_name.equals( "fault" ) ) pw5.format(" stroke-dasharray=\"8 4 \"");
@@ -220,7 +219,7 @@ class DrawingSvg
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
             int idx = point.mPointType;
-            String name = DrawingBrushPaths.getPointThName( idx );
+            String name = DrawingBrushPaths.mPointLib.getSymbolThName( idx );
             pw5.format("<!-- point %s -->\n", name );
             if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
@@ -233,7 +232,7 @@ class DrawingSvg
             //   pw5.format(Locale.ENGLISH, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
             //   pw5.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
             } else {
-              SymbolPoint sp = DrawingBrushPaths.mPointLib.getAnyPoint( idx );
+              SymbolPoint sp = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbol( idx );
               if ( sp != null ) {
                 pw5.format(Locale.ENGLISH, "<g transform=\"translate(%.0f,%.0f),scale(10),rotate(%.0f)\" \n", 
                   point.cx, point.cy, point.mOrientation );

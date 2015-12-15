@@ -24,12 +24,15 @@ import android.graphics.Shader.TileMode;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 // import java.util.Iterator;
 // import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -55,12 +58,12 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mAreaType = type;
     mAreaCnt  = index;
     mOrientation = 0.0;
-    if ( DrawingBrushPaths.canRotateArea( mAreaType ) ) {
+    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
       mOrientation = DrawingBrushPaths.getAreaOrientation( type );
     }
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
-      setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
+    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
     }
   }
 
@@ -80,16 +83,67 @@ public class DrawingAreaPath extends DrawingPointLinePath
     } catch ( NumberFormatException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
-      setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
+    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+    }
+  }
+
+  public DrawingAreaPath( DataInputStream dis, SymbolsPalette missingSymbols )
+  {
+    super( DrawingPath.DRAWING_PATH_AREA, true, true );
+    try {
+      int nam_len = dis.readInt();
+      String th_name = dis.readUTF();
+      mAreaType = DrawingBrushPaths.getAreaType( th_name ); 
+      // DrawingBrushPaths.mAreaLib.tryLoadMissingArea( th_name );
+      mAreaType = DrawingBrushPaths.getAreaType( th_name );
+      if ( mAreaType < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addArea( th_name );
+        mAreaType = 0;
+      }
+
+      int pfx_len = dis.readInt();
+      mPrefix = dis.readUTF();
+
+      mAreaCnt = dis.readInt();
+
+      setVisible( dis.read( ) == 1 );
+      mOrientation = dis.readFloat( );
+
+      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+
+      int npt = dis.readInt( );
+      int has_cp;
+      float mX1, mY1, mX2, mY2, mX, mY;
+      mX = dis.readFloat( );
+      mY = dis.readFloat( );
+      has_cp = dis.read();
+      addStartPoint( mX, mY );
+      for ( int k=1; k<npt; ++k ) {
+        mX = dis.readFloat();
+        mY = dis.readFloat();
+        has_cp = dis.read();
+        if ( has_cp == 1 ) {
+          mX1 = dis.readFloat();
+          mY1 = dis.readFloat();
+          mX2 = dis.readFloat();
+          mY2 = dis.readFloat();
+          addPoint3( mX1, mY1, mX2, mY2, mX, mY );
+        } else {
+          addPoint( mX, mY );
+        }
+      }
+      retracePath();
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "AREA in error " + e.toString() );
     }
   }
 
   public void setAreaType( int t ) 
   {
     mAreaType = t;
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
-      setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
+    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
     }
   }
 
@@ -105,7 +159,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   public void setOrientation( double angle ) 
   { 
     // Log.v( "DistoX", "Area path set orientation " + angle );
-    if ( ! DrawingBrushPaths.canRotateArea( mAreaType ) ) return;
+    if ( ! DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) return;
     mOrientation = angle; 
     while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
     while ( mOrientation < 0.0 ) mOrientation += 360.0;
@@ -151,8 +205,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
       }
     }
     pw.format("endline\n");
-    pw.format("area %s", DrawingBrushPaths.getAreaThName( mAreaType ) );
-    if ( DrawingBrushPaths.canRotateArea( mAreaType ) ) {
+    pw.format("area %s", DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType ) );
+    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
       pw.format(Locale.ENGLISH, " #orientation %.1f", mOrientation );
     }
     pw.format("\n");
@@ -204,5 +258,36 @@ public class DrawingAreaPath extends DrawingPointLinePath
     if ( lp.mPrev == null ) return mLast;
     return lp.mPrev;
   }
+
+  @Override
+  void toDataStream( DataOutputStream dos ) 
+  {
+    String name = DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType );
+    try {
+      dos.write( 'A' );
+      int nam_len = name.length();
+      dos.writeInt( nam_len );
+      dos.writeUTF( name );
+      int pfx_len = 0;
+      if ( mPrefix != null && mPrefix.length() > 0 ) {
+        pfx_len = mPrefix.length();
+        dos.writeInt( pfx_len );
+        dos.writeUTF( mPrefix );
+      } else {
+        dos.writeInt( pfx_len );
+      }
+      dos.writeInt( mAreaCnt );
+      dos.write( isVisible()? 1 : 0 );
+      dos.writeFloat( (float)mOrientation );
+      int npt = size(); // number of line points
+      dos.writeInt( npt );
+      for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
+        pt.toDataStream( dos );
+      }
+    } catch ( IOException e ) {
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "AREA out error " + e.toString() );
+    }
+  }
+
 }
 

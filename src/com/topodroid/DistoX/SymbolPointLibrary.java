@@ -8,11 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20121201 created
- * 20121211 locale
- * 20121215 avoid double th-name symbol
- * 20140422 iso
  */
 package com.topodroid.DistoX;
 
@@ -20,7 +15,6 @@ import java.util.Locale;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.io.File;
-import java.io.PrintWriter;
 
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -28,26 +22,21 @@ import android.content.res.Resources;
 
 import android.util.Log;
 
-class SymbolPointLibrary
+class SymbolPointLibrary extends SymbolLibrary
 {
   static final String DefaultPoints[] = {
     "air-draught", "blocks", "clay", "continuation", "debris", "entrance", "sand", "stalactite", "stalagmite", "water-flow"
   };
 
   // ArrayList< SymbolPoint > mPoint;    // enabled points
-  ArrayList< SymbolPoint > mAnyPoint; // all points
   int mPointUserIndex;
   int mPointLabelIndex;
   int mPointDangerIndex;
-  private int mPointNr;
-  int mAnyPointNr;
 
 
   SymbolPointLibrary( Resources res )
   {
-    // Log.v(  TopoDroidApp.TAG, "cstr SymbolPointLibrary()" );
-    // mPoint = new ArrayList< SymbolPoint >();
-    mAnyPoint = new ArrayList< SymbolPoint >();
+    super( "p_" );
     mPointUserIndex   = 0;
     mPointLabelIndex  = -1;
     mPointDangerIndex = -1;
@@ -56,157 +45,40 @@ class SymbolPointLibrary
     makeEnabledList();
   }
 
-  int getSymbolIndex( Symbol symbol ) 
-  {
-    for ( int k=0; k<mAnyPoint.size(); ++k ) {
-      if ( symbol == mAnyPoint.get(k) ) return k;
-    }
-    return -1;
-  }
-
-  // =============================================================
-  // int size() { return mNrPoint; }
-
-  
-  SymbolPoint getSymbolAnyPoint( String th_name )
-  {
-    for ( SymbolPoint p : mAnyPoint ) {
-      if ( p.hasThName( th_name ) ) return p;
-    }
-    return null;
-  }
-
-  boolean pointHasText( int k ) 
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return false;
-    return mAnyPoint.get(k).mHasText;
-  }
-
-  boolean hasPoint( String th_name )
-  {
-    for ( SymbolPoint p : mAnyPoint ) {
-      if ( p.hasThName( th_name ) ) {
-        return p.isEnabled();
-      }
-    }
-    return false;
-  }
-
-  boolean hasAnyPoint( String th_name )
-  {
-    for ( SymbolPoint p : mAnyPoint ) {
-      if ( p.hasThName( th_name ) ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // boolean removePoint( String th_name ) 
-  // {
-  //   for ( SymbolPoint p : mPoint ) {
-  //     if ( p.hasThName( th_name ) ) {
-  //       mPoint.remove( p );
-  //       TopoDroidApp.mData.setSymbolEnabled( "p_" + th_name, false );
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-
-  // SymbolPoint getPoint( int k ) 
-  // {
-  //   if ( k < 0 || k >= mAnyPointNr ) return null;
-  //   SymbolPoint p = mAnyPoint.get( k );
-  //   return p.isEnabled()? p : null;
-  // }
-
-  SymbolPoint getAnyPoint( int k ) 
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return null;
-    return mAnyPoint.get( k );
-  }
-
-  String getAnyPointName( int k )
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return null;
-    return mAnyPoint.get( k ).getName();
-  }
-
-
-  String getPointThName( int k )
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return null;
-    return mAnyPoint.get(k).getThName( );
-  }
-
-  Paint getPointPaint( int k ) 
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return null;
-    return mAnyPoint.get(k).getPaint( );
-  }
-  
-  boolean canRotate( int k )
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return false;
-    return mAnyPoint.get(k).mOrientable;
-  }
+  boolean pointHasText( int k ) { return ( k < 0 || k >= mSymbolNr )? false : ((SymbolPoint)mSymbols.get(k)).mHasText; }
 
   double getPointOrientation( int k )
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return 0.0;
-    return mAnyPoint.get(k).mOrientation;
-  }
+  { return ( k < 0 || k >= mSymbolNr )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
 
+  @Override
   void resetOrientations()
   {
-    // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::resetOrientations()" );
-    for ( SymbolPoint sp : mAnyPoint ) sp.resetOrientation();
-    // JAVA8 mAnyPoint.stream().forEach( SymbolPoint::resetOrientation );
+    for ( Symbol sp : mSymbols ) ((SymbolPoint)sp).resetOrientation();
   }
 
   void rotateGrad( int k, double a )
   {
-    if ( k < 0 || k >= mAnyPointNr ) return;
-    mAnyPoint.get(k).rotateGrad( a );
+    if ( k >= 0 && k < mSymbolNr ) ((SymbolPoint)mSymbols.get(k)).rotateGrad( a );
   }
 
-  Path getPointPath( int k )
+  Path getPointPath( int k ) { 
   {
-    if ( k < 0 || k >= mAnyPointNr ) return null;
-    return mAnyPoint.get(k).getPath( );
+    return ( k < 0 || k >= mSymbolNr )? null : ((SymbolPoint)mSymbols.get(k)).getPath( ); }
   }
 
   Path getPointOrigPath( int k )
   {
-    if ( k < 0 || k >= mAnyPointNr ) return null;
-    return mAnyPoint.get(k).getOrigPath( );
+    return ( k < 0 || k >= mSymbolNr )? null : ((SymbolPoint)mSymbols.get(k)).getOrigPath( );
   }
 
-  int pointCsxLayer( int k )
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return -1;
-    return mAnyPoint.get(k).mCsxLayer;
-  }
-
-  int pointCsxType( int k )
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return -1;
-    return mAnyPoint.get(k).mCsxType;
-  }
-
-  int pointCsxCategory( int k )
-  {
-    if ( k < 0 || k >= mAnyPointNr ) return -1;
-    return mAnyPoint.get(k).mCsxCategory;
-  }
+  int pointCsxLayer( int k ) { return getSymbolCsxLayer( k ); }
+  int pointCsxType( int k )  { return getSymbolCsxType( k ); }
+  int pointCsxCategory( int k ) { return getSymbolCsxCategory( k ); }
 
   String pointCsx( int k )
   {
-    if ( k < 0 || k >= mAnyPointNr ) return "";
-    return mAnyPoint.get(k).mCsx;
+    return ( k < 0 || k >= mSymbolNr )? "" : ((SymbolPoint)mSymbols.get(k)).mCsx;
   }
-
 
   // ========================================================================
 
@@ -218,21 +90,19 @@ class SymbolPointLibrary
     SymbolPoint symbol;
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadSystemPoints()" );
 
-    mPointUserIndex = mAnyPoint.size();
+    mPointUserIndex = mSymbols.size();
     symbol = new SymbolPoint( res.getString(R.string.thp_user), "user", 0xffffffff, p_user, false, false );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
-    mAnyPoint.add( symbol );
+    addSymbol( symbol );
 
-    mPointLabelIndex = mAnyPoint.size();
+    mPointLabelIndex = mSymbols.size();
     symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", 0xffffffff, p_label, false, true );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
-    mAnyPoint.add( symbol );
-
-    mAnyPointNr = mAnyPoint.size();
+    addSymbol( symbol );
   }
 
   void loadUserPoints()
@@ -245,7 +115,7 @@ class SymbolPointLibrary
 
     File dir = new File( TopoDroidPath.APP_POINT_PATH );
     if ( dir.exists() ) {
-      int systemNr = mAnyPoint.size();
+      int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolPoint symbol = new SymbolPoint( file.getPath(), locale, iso );
@@ -253,8 +123,8 @@ class SymbolPointLibrary
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "point with null ThName" );
           continue;
         }
-        if ( ! hasAnyPoint( symbol.getThName() ) ) {
-          mAnyPoint.add( symbol );
+        if ( ! hasSymbol( symbol.getThName() ) ) {
+          addSymbol( symbol );
           String thname = symbol.mThName;
           String name = "p_" + thname;
           boolean enable = false;
@@ -269,28 +139,11 @@ class SymbolPointLibrary
           symbol.setEnabled( enable );
         }
       }
-      mAnyPointNr = mAnyPoint.size();
       sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
     }
   }
-
-  private void sortSymbolByName( int start )
-  {
-    for ( int k=start+1; k<mAnyPointNr; ) {
-      SymbolPoint prev = mAnyPoint.get(k-1);
-      SymbolPoint curr = mAnyPoint.get(k);
-      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
-        mAnyPoint.set( k-1, curr );
-        mAnyPoint.set( k, prev );
-        if ( k > start+1 ) --k;
-      } else {
-        ++k;
-      }
-    }
-  }
-
 
   boolean tryLoadMissingPoint( String p )
   {
@@ -299,15 +152,15 @@ class SymbolPointLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    if ( hasPoint( p ) ) return true;
-    SymbolPoint symbol = getSymbolAnyPoint( p );
+    if ( isSymbolEnabled( p ) ) return true;
+    Symbol symbol = getSymbol( p );
     if ( symbol == null ) {
       // Log.v( TopoDroidApp.TAG, "load missing point " + p );
       File file = new File( TopoDroidPath.APP_SAVE_POINT_PATH + p );
       if ( ! file.exists() ) return false;
 
       symbol = new SymbolPoint( file.getPath(), locale, iso );
-      mAnyPoint.add( symbol );
+      addSymbol( symbol );
     } else {
       // Log.v( TopoDroidApp.TAG, "enabling missing point " + p );
     }
@@ -319,54 +172,20 @@ class SymbolPointLibrary
   }
 
 // ------------------------------------------------------------------
-     
-  void makeEnabledList()
+  
+  @Override
+  protected void makeEnabledList()
   {
-    // mPoint.clear();
-    mPointNr = 0;
-    int index = 0;
-    for ( SymbolPoint symbol : mAnyPoint ) {
-      if ( symbol.mEnabled ) {
-        if ( symbol.getThName().equals("user") )    mPointUserIndex   = index; // mPoint.size();
-        if ( symbol.getThName().equals("label") )   mPointLabelIndex  = index; // mPoint.size();
-        if ( symbol.getThName().equals("danger" ) ) mPointDangerIndex = index; // mPoint.size();
-        // mPoint.add( symbol );
-        ++ mPointNr;
-      }
-      ++ index;
-    }
-  }
-
-  void setRecentPoints( Symbol recent[] )
-  {
-    int k = 0;
-    for ( SymbolPoint symbol : mAnyPoint ) {
-      if ( symbol.mEnabled ) {
-        recent[k++] = symbol;
-        if ( k >= ItemDrawer.NR_RECENT ) break;
-      }
-    }
+    super.makeEnabledList();
+    mPointUserIndex   = getSymbolIndex( "user" );
+    mPointLabelIndex  = getSymbolIndex( "label" );
+    mPointDangerIndex = getSymbolIndex( "danger" );
   }
 
 
   void makeEnabledListFromPalette( SymbolsPalette palette )
   {
-    for ( SymbolPoint symbol : mAnyPoint ) {
-      symbol.setEnabled( symbol.getThName().equals("user") || symbol.getThName().equals("label") );
-      // symbol.setEnabled( false );
-    }
-    for ( String p : palette.mPalettePoint ) {
-      SymbolPoint symbol = getSymbolAnyPoint( p );
-      if ( symbol != null ) symbol.setEnabled( true );
-    }
-    makeEnabledList();
-  }
-
-  void writePalette( PrintWriter pw ) 
-  {
-    for ( SymbolPoint symbol : mAnyPoint ) {
-      if ( symbol.isEnabled( ) ) pw.format( " %s", symbol.getThName() );
-    }
+    makeEnabledListFromStrings( palette.mPalettePoint );
   }
 
 }    

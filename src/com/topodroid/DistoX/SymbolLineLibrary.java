@@ -16,31 +16,28 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 import android.graphics.Paint;
 import android.content.res.Resources;
 
 import android.util.Log;
 
-class SymbolLineLibrary
+class SymbolLineLibrary extends SymbolLibrary
 {
   static final String DefaultLines[] = {
     "arrow", "border", "pit", "rock-border", "slope"
   };
 
-  // ArrayList< SymbolLine > mLine;
-  ArrayList< SymbolLine > mAnyLine;
   int mLineUserIndex;
   int mLineWallIndex;
   int mLineSlopeIndex;
   int mLineSectionIndex;
-  int mAnyLineNr;
 
   SymbolLineLibrary( Resources res )
   {
-    // Log.v( "TopoDroid", "cstr SymbolLineLibrary()" );
-    // mLine = new ArrayList< SymbolLine >();
-    mAnyLine = new ArrayList< SymbolLine >();
+    super( "l_" );
     mLineUserIndex    =  0;
     mLineWallIndex    = -1;
     mLineSlopeIndex   = -1;
@@ -52,149 +49,44 @@ class SymbolLineLibrary
 
   // int size() { return mLine.size(); }
 
-  // SymbolLine getLine( int k ) 
-  // {
-  //   if ( k < 0 || k >= mAnyLineNr ) return null;
-  //   SymbolLine l =  mAnyLine.get( k );
-  //   return l.isEnabled() ? l : null;
-  // }
+  boolean isStyleStraight( int k ) { return ( k < 0 || k >= mSymbolNr )? true : ((SymbolLine)mSymbols.get(k)).mStyleStraight; }
 
-  int getSymbolIndex( Symbol symbol ) 
-  {
-    for ( int k=0; k<mAnyLine.size(); ++k ) {
-      if ( symbol == mAnyLine.get(k) ) return k;
-    }
-    return -1;
-  }
+  int getStyleX( int k ) { return ( k < 0 || k >= mSymbolNr )? 1 : ((SymbolLine)mSymbols.get(k)).mStyleX; }
 
-
-  SymbolLine getAnyLine( int k ) 
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return null;
-    return mAnyLine.get( k );
-  }
-
-  boolean hasLine( String th_name ) 
-  {
-    for ( SymbolLine l : mAnyLine ) {
-      if ( th_name.equals( l.mThName ) ) {
-        return l.isEnabled();
-      }
-    }
-    return false;
-  }
-
-  boolean hasAnyLine( String th_name ) 
-  {
-    for ( SymbolLine l : mAnyLine ) {
-      if ( th_name.equals( l.mThName ) ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  SymbolLine getSymbolAnyLine( String th_name ) 
-  {
-    for ( SymbolLine l : mAnyLine ) {
-      if ( th_name.equals( l.mThName ) ) return l;
-    }
-    return null;
-  }
-
-  // boolean removeLine( String th_name ) 
-  // {
-  //   for ( SymbolLine l : mAnyLine ) {
-  //     if ( th_name.equals( l.mThName ) ) {
-  //       l.setEnabled( false ); // mAnyLine.remove( l );
-  //       TopoDroidApp.mData.setSymbolEnabled( "l_" + th_name, false );
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-
-  boolean isStyleStraight( int k ) 
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return true;
-    return mAnyLine.get(k).mStyleStraight;
-  }
-
-  int getStyleX( int k ) 
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return 1;
-    return mAnyLine.get(k).mStyleX;
-  }
-
-  String getLineName( int k )
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return null;
-    return mAnyLine.get(k).mName;
-  }
-
-  String getLineThName( int k )
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return null;
-    return mAnyLine.get(k).mThName;
-  }
-
-  String getLineGroup( int k )
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return null;
-    return mAnyLine.get(k).mGroup;
-  }
+  String getLineGroup( int k ) { return ( k < 0 || k >= mSymbolNr )? null : ((SymbolLine)mSymbols.get(k)).mGroup; }
 
   Paint getLinePaint( int k, boolean reversed )
   {
-    if ( k < 0 || k >= mAnyLineNr ) return null;
-    return reversed ? mAnyLine.get(k).mRevPaint : mAnyLine.get(k).mPaint;
+    if ( k < 0 || k >= mSymbolNr ) return null;
+    SymbolLine s = (SymbolLine)mSymbols.get(k);
+    return reversed ? s.mRevPaint : s.mPaint;
   }
 
-  int lineCsxLayer( int k )
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return -1;
-    return mAnyLine.get(k).mCsxLayer;
-  }
-
-  int lineCsxType( int k )
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return -1;
-    return mAnyLine.get(k).mCsxType;
-  }
-
-  int lineCsxCategory( int k )
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return -1;
-    return mAnyLine.get(k).mCsxCategory;
-  }
-
-  int lineCsxPen( int k )
-  {
-    if ( k < 0 || k >= mAnyLineNr ) return -1;
-    return mAnyLine.get(k).mCsxPen;
-  }
-
+  int lineCsxLayer( int k )    { return getSymbolCsxLayer(k); }
+  int lineCsxType( int k )     { return getSymbolCsxType(k); }
+  int lineCsxCategory( int k ) { return getSymbolCsxCategory(k); }
+  int lineCsxPen( int k )      { return getSymbolCsxPen(k); }
   
   // ========================================================================
 
   private void loadSystemLines( Resources res )
   {
-    if ( mAnyLine.size() > 0 ) return;
+    if ( mSymbols.size() > 0 ) return;
     SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "user", "user", 0xffffffff, 1 );
     symbol.mCsxLayer = 5;
     symbol.mCsxType  = 4;
     symbol.mCsxCategory = 1;
     symbol.mCsxPen   = 1;
-    mAnyLine.add( symbol );
+    addSymbol( symbol );
 
     symbol = new SymbolLine( res.getString( R.string.thl_wall ),  "wall", "wall", 0xffff0000, 2 );
     symbol.mCsxLayer = 5;
     symbol.mCsxType  = 4;
     symbol.mCsxCategory = 1;
     symbol.mCsxPen   = 1;
-    mAnyLine.add( symbol );
+    addSymbol( symbol );
 
-    mAnyLineNr = mAnyLine.size();
+    mSymbolNr = mSymbols.size();
   }
 
   void loadUserLines()
@@ -206,7 +98,7 @@ class SymbolLineLibrary
 
     File dir = new File( TopoDroidPath.APP_LINE_PATH );
     if ( dir.exists() ) {
-      int systemNr = mAnyLine.size();
+      int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), locale, iso );
@@ -214,10 +106,10 @@ class SymbolLineLibrary
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "line with null ThName" );
           continue;
         }
-        if ( ! hasAnyLine( symbol.mThName ) ) {
-          mAnyLine.add( symbol );
+        if ( ! hasSymbol( symbol.mThName ) ) {
+          addSymbol( symbol );
           String thname = symbol.mThName;
-          String name = "l_" + thname;
+          String name = mPrefix + thname;
           boolean enable = false;
           if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
             for ( int k=0; k<DefaultLines.length; ++k ) { 
@@ -230,25 +122,10 @@ class SymbolLineLibrary
           symbol.setEnabled( enable );
         }
       }
-      mAnyLineNr = mAnyLine.size();
+      // mSymbolNr = mSymbols.size();
       sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
-    }
-  }
-
-  private void sortSymbolByName( int start )
-  {
-    for ( int k=start+1; k<mAnyLineNr; ) {
-      SymbolLine prev = mAnyLine.get(k-1);
-      SymbolLine curr = mAnyLine.get(k);
-      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
-        mAnyLine.set( k-1, curr );
-        mAnyLine.set( k, prev );
-        if ( k > start+1 ) --k;
-      } else {
-        ++k;
-      }
     }
   }
 
@@ -259,15 +136,15 @@ class SymbolLineLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    if ( hasLine( p ) ) return true;
-    SymbolLine symbol = getSymbolAnyLine( p );
+    if ( isSymbolEnabled( p ) ) return true;
+    Symbol symbol = getSymbol( p );
     if ( symbol == null ) {
       // Log.v( TopoDroidApp.TAG, "load missing line " + p );
       File file = new File( TopoDroidPath.APP_SAVE_LINE_PATH + p );
       if ( ! file.exists() ) return false;
 
       symbol = new SymbolLine( file.getPath(), locale, iso );
-      mAnyLine.add( symbol );
+      addSymbol( symbol );
     } else {
       // Log.v( TopoDroidApp.TAG, "enabling missing line " + p );
     }
@@ -278,56 +155,21 @@ class SymbolLineLibrary
     makeEnabledList();
     return true;
   }
-      
-  void makeEnabledList()
+  
+  @Override
+  protected void makeEnabledList()
   {
     // mLine.clear();
-    mLineUserIndex    =  0;
-    mLineWallIndex    = -1;
-    mLineSlopeIndex   = -1;
-    mLineSectionIndex = -1;
-    int k = 0;
-    for ( SymbolLine symbol : mAnyLine ) {
-      TopoDroidApp.mData.setSymbolEnabled( "l_" + symbol.mThName, symbol.mEnabled );
-      if ( symbol.mEnabled ) {
-        if ( symbol.mThName.equals("user") )  mLineUserIndex = k;
-        if ( symbol.mThName.equals("wall") )  mLineWallIndex = k;
-        if ( symbol.mThName.equals("slope") ) mLineSlopeIndex = k;
-        if ( symbol.mThName.equals("section") ) mLineSectionIndex = k;
-        // mLine.add( symbol );
-      }
-      ++ k;
-    }
-
-    // Log.v( TopoDroidApp.TAG, "lines " + mAnyLine.size() + " wall " + mLineWallIndex + " slope " + mLineSlopeIndex + " section " + mLineSectionIndex );
+    super.makeEnabledList();
+    mLineUserIndex    = getSymbolIndex( "user" );
+    mLineWallIndex    = getSymbolIndex( "wall" );
+    mLineSlopeIndex   = getSymbolIndex( "slope" );
+    mLineSectionIndex = getSymbolIndex( "section" );
   }
 
-  void setRecentLines( Symbol recent[] )
-  {
-    int k = 0;
-    for ( SymbolLine symbol : mAnyLine ) {
-      if ( symbol.mEnabled ) {
-        recent[k++] = symbol;
-        if ( k >= ItemDrawer.NR_RECENT ) break;
-      }
-    }
-  }
- 
   void makeEnabledListFromPalette( SymbolsPalette palette )
   {
-    for ( SymbolLine symbol : mAnyLine ) symbol.setEnabled( false );
-    for ( String p : palette.mPaletteLine ) {
-      SymbolLine symbol = getSymbolAnyLine( p );
-      if ( symbol != null ) symbol.setEnabled( true );
-    }
-    makeEnabledList();
-  }
-
-  void writePalette( PrintWriter pw ) 
-  {
-    for ( SymbolLine symbol : mAnyLine ) {
-      if ( symbol.isEnabled( ) ) pw.format( " %s", symbol.getThName() );
-    }
+    makeEnabledListFromStrings( palette.mPaletteLine ); 
   }
 
 }    

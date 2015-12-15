@@ -40,46 +40,31 @@ public class DrawingBrushPaths
   static boolean mReloadSymbols = true; // whether to reload symbols
 
   // -----------------------------------------------------------
-  static String getPointName( int idx ) { return mPointLib.getAnyPointName( idx ); }
+  static String getPointName( int idx ) { return mPointLib.getSymbolName( idx ); }
 
-  static String getPointThName( int index ) { return mPointLib.getPointThName( index ); }
-
-  static Paint getPointPaint( int index ) { return mPointLib.getPointPaint( index ); }
-
-  static boolean hasPointThName( String th_name ) { return mPointLib.hasAnyPoint( th_name ); }
+  static int getPointType( String th_name ) { return mPointLib.getSymbolIndex( th_name ); }
+  static int getLineType( String th_name ) { return mLineLib.getSymbolIndex( th_name ); }
+  static int getAreaType( String th_name ) { return mAreaLib.getSymbolIndex( th_name ); }
 
   static boolean pointHasText( int index ) { return mPointLib.pointHasText( index ); }
 
   static int getPointCsxLayer( int index ) { return mPointLib.pointCsxLayer( index ); }
-
   static int getPointCsxType( int index ) { return mPointLib.pointCsxType( index ); }
-
   static int getPointCsxCategory( int index ) { return mPointLib.pointCsxCategory( index ); }
-
   static String getPointCsx( int index ) { return mPointLib.pointCsx( index ); }
 
   static int getLineCsxLayer( int index ) { return mLineLib.lineCsxLayer( index ); }
-
   static int getLineCsxType( int index ) { return mLineLib.lineCsxType( index ); }
-
   static int getLineCsxCategory( int index ) { return mLineLib.lineCsxCategory( index ); }
-
   static int getLineCsxPen( int index ) { return mLineLib.lineCsxPen( index ); }
 
 
   static int getAreaCsxLayer( int index ) { return mAreaLib.areaCsxLayer( index ); }
-
   static int getAreaCsxType( int index ) { return mAreaLib.areaCsxType( index ); }
-
   static int getAreaCsxCategory( int index ) { return mAreaLib.areaCsxCategory( index ); }
-
   static int getAreaCsxPen( int index ) { return mAreaLib.areaCsxPen( index ); }
-
   static int getAreaCsxBrush( int index ) { return mAreaLib.areaCsxBrush( index ); }
 
-
-
-  static boolean canRotatePoint( int index ) { return mPointLib.canRotate( index ); }
   static double getPointOrientation( int index ) { return mPointLib.getPointOrientation( index ); }
   static void resetPointOrientations( ) { mPointLib.resetOrientations(); }
   static void rotateGradPoint( int index, double a ) { mPointLib.rotateGrad( index, a ); }
@@ -87,7 +72,6 @@ public class DrawingBrushPaths
 
   static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
 
-  static boolean canRotateArea( int index ) { return mAreaLib.canRotate( index ); }
   static double getAreaOrientation( int index ) { return mAreaLib.getAreaOrientation( index ); }
   static void resetAreaOrientations( ) { mAreaLib.resetOrientations(); }
   static void rotateGradArea( int index, double a ) { mAreaLib.rotateGrad( index, a ); }
@@ -102,27 +86,10 @@ public class DrawingBrushPaths
   static final int highlightColor = 0xffff9999;
   static final int highlightFill  = 0x6600cc00;
 
-  static String getLineName( int idx ) { return mLineLib.getLineName( idx ); }
-
-  static String getLineThName( int index ) { return mLineLib.getLineThName( index ); }
-
-  static Paint getLinePaint( int index, boolean reversed ) { return mLineLib.getLinePaint( index, reversed ); }
-
-  static boolean hasLineThName( String th_name ) { return mLineLib.hasAnyLine( th_name ); }
-
   // -----------------------------------------------------------------------
   // AREAS
 
-
-  static String getAreaName( int idx ) { return mAreaLib.getAreaName( idx ); }
-
-  static String getAreaThName( int index ) { return mAreaLib.getAreaThName( index ); }
-
-  static Paint getAreaPaint( int index ) { return mAreaLib.getAreaPaint( index ); }
-
   static int getAreaColor( int index ) { return mAreaLib.getAreaColor( index ); }
-
-  static boolean hasAreaThName( String th_name ) { return mAreaLib.hasAnyArea( th_name ); }
 
   // --------------------------------------------------------------------------
 

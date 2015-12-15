@@ -62,7 +62,7 @@ public class DrawingPointDialog extends Dialog
     super( context );
     mParent = context;
     mPoint  = point;
-    mOrientable = DrawingBrushPaths.canRotatePoint( mPoint.mPointType );
+    mOrientable = DrawingBrushPaths.mPointLib.isSymbolOrientable( mPoint.mPointType );
     // mBitmap = Bitmap.createBitmap( 40, 40, Bitmap.Config.ARGB_8888);
     // mCanvas = new Canvas( mBitmap );
   }
@@ -102,7 +102,7 @@ public class DrawingPointDialog extends Dialog
     mETtext    = (EditText) findViewById( R.id.point_text );
 
 
-    setTitle( "POINT " + DrawingBrushPaths.mPointLib.getAnyPointName( mPoint.mPointType ) );
+    setTitle( "POINT " + DrawingBrushPaths.mPointLib.getSymbolName( mPoint.mPointType ) );
     if ( DrawingBrushPaths.mPointLib.pointHasText( mPoint.mPointType ) ) {
       mETtext.setText( mPoint.getText() );
     } else {

@@ -458,13 +458,13 @@ public class DrawingActivity extends ItemDrawer
       if ( mMode == MODE_DRAW ) { 
         if ( mSymbol == SYMBOL_POINT ) {
           setTitle( s1 + String.format( res.getString(R.string.title_draw_point), 
-                                   DrawingBrushPaths.mPointLib.getAnyPointName(mCurrentPoint) ) );
+                                   DrawingBrushPaths.mPointLib.getSymbolName(mCurrentPoint) ) );
         } else if ( mSymbol == SYMBOL_LINE ) {
           setTitle( s1 + String.format( res.getString(R.string.title_draw_line),
-                                   DrawingBrushPaths.getLineName(mCurrentLine) ) );
+                                   DrawingBrushPaths.mLineLib.getSymbolName(mCurrentLine) ) );
         } else  {  // if ( mSymbol == SYMBOL_LINE ) 
           setTitle( s1 + String.format( res.getString(R.string.title_draw_area),
-                                   DrawingBrushPaths.mAreaLib.getAreaName(mCurrentArea) ) );
+                                   DrawingBrushPaths.mAreaLib.getSymbolName(mCurrentArea) ) );
         }
         // boolean visible = ( mSymbol == SYMBOL_LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
         boolean visible = ( mSymbol == SYMBOL_LINE );
@@ -1066,12 +1066,12 @@ public class DrawingActivity extends ItemDrawer
 
     private void resetCurrentIndices()
     {
-      mCurrentPoint = 1; // DrawingBrushPaths.POINT_LABEL;
-      mCurrentLine  = 1; // DrawingBrushPaths.mLineLib.mLineWallIndex;
-      mCurrentArea  = 1; // DrawingBrushPaths.AREA_WATER;
-      if ( ! DrawingBrushPaths.mPointLib.hasPoint( "label" ) ) mCurrentPoint = 0;
-      if ( ! DrawingBrushPaths.mLineLib.hasLine( "wall" ) ) mCurrentLine = 0;
-      if ( ! DrawingBrushPaths.mAreaLib.hasArea( "water" ) ) mCurrentArea = 0;
+      // mCurrentPoint = 1; // DrawingBrushPaths.POINT_LABEL;
+      // mCurrentLine  = 1; // DrawingBrushPaths.mLineLib.mLineWallIndex;
+      // mCurrentArea  = 1; // DrawingBrushPaths.AREA_WATER;
+      mCurrentPoint = ( DrawingBrushPaths.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
+      mCurrentLine  = ( DrawingBrushPaths.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
+      mCurrentArea  = ( DrawingBrushPaths.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
       setButtonContinue( false );
     }
 
@@ -2798,10 +2798,10 @@ public class DrawingActivity extends ItemDrawer
                 name = DrawingBrushPaths.getPointName( ((DrawingPointPath)p).mPointType );
                 break;
               case DrawingPath.DRAWING_PATH_LINE:
-                name = DrawingBrushPaths.getLineName( ((DrawingLinePath)p).mLineType );
+                name = DrawingBrushPaths.mLineLib.getSymbolName( ((DrawingLinePath)p).mLineType );
                 break;
               case DrawingPath.DRAWING_PATH_AREA:
-                name = DrawingBrushPaths.getAreaName( ((DrawingAreaPath)p).mAreaType );
+                name = DrawingBrushPaths.mAreaLib.getSymbolName( ((DrawingAreaPath)p).mAreaType );
                 break;
             }
             askDeleteItem( p, t, name );
@@ -2841,7 +2841,7 @@ public class DrawingActivity extends ItemDrawer
                            String from, String to, float azimuth, float clino )
     {
       mCurrentLine = DrawingBrushPaths.mLineLib.mLineWallIndex;
-      if ( ! DrawingBrushPaths.mLineLib.hasLine( "wall" ) ) mCurrentLine = 0;
+      if ( ! DrawingBrushPaths.mLineLib.isSymbolEnabled( "wall" ) ) mCurrentLine = 0;
       setTheTitle();
 
       if ( id == null || id.length() == 0 ) return;
@@ -2879,7 +2879,7 @@ public class DrawingActivity extends ItemDrawer
       // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino );
 
       mCurrentLine = DrawingBrushPaths.mLineLib.mLineWallIndex;
-      if ( ! DrawingBrushPaths.mLineLib.hasLine( "wall" ) ) mCurrentLine = 0;
+      if ( ! DrawingBrushPaths.mLineLib.isSymbolEnabled( "wall" ) ) mCurrentLine = 0;
       setTheTitle();
 
       if ( id == null || id.length() == 0 ) return;

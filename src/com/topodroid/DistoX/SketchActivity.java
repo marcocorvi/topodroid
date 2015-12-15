@@ -256,9 +256,9 @@ public class SketchActivity extends ItemDrawer
     Resources res = getResources();
     // String dir = mInfo.getDirectionString();
     String symbol_name = // ( mIsInSection) ? "section" :
-        ( mSymbol == SketchDef.SYMBOL_POINT )? res.getString(R.string.POINT) + DrawingBrushPaths.mPointLib.getAnyPointName( mCurrentPoint )
+        ( mSymbol == SketchDef.SYMBOL_POINT )? res.getString(R.string.POINT) + DrawingBrushPaths.mPointLib.getSymbolName( mCurrentPoint )
       : ( mSymbol == SketchDef.SYMBOL_LINE )? res.getString(R.string.LINE)
-      : res.getString(R.string.AREA) + DrawingBrushPaths.mAreaLib.getAreaName( mCurrentArea );
+      : res.getString(R.string.AREA) + DrawingBrushPaths.mAreaLib.getSymbolName( mCurrentArea );
 
     setTitle( String.format( res.getString( R.string.title_sketch), 
       mInfo.getShotString(),
@@ -349,7 +349,7 @@ public class SketchActivity extends ItemDrawer
   
   public void areaSelected( int k, boolean update_recent ) 
   {
-    if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
+    if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
       mSymbol = SketchDef.SYMBOL_AREA;
       mCurrentArea = k;
     }
@@ -358,7 +358,7 @@ public class SketchActivity extends ItemDrawer
 
   public void lineSelected( int k, boolean update_recent ) 
   {
-    if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mAnyLineNr ) {
+    if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mSymbolNr ) {
       mSymbol = SketchDef.SYMBOL_LINE;
       mCurrentLine = k;
     }
@@ -367,7 +367,7 @@ public class SketchActivity extends ItemDrawer
 
   public void pointSelected( int p, boolean update_recent )
   {
-    if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mAnyPointNr ) {
+    if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mSymbolNr ) {
       mSymbol = SketchDef.SYMBOL_POINT;
       mCurrentPoint = p;
     }
@@ -1355,7 +1355,7 @@ public class SketchActivity extends ItemDrawer
                 // Log.v("DistoX", "new point " + mCurrentPoint + " at " + p.x + " " + p.y + " " + p.z );
                 SketchPointPath path = new SketchPointPath( mCurrentPoint, mInfo.st1, mInfo.st2, p.x, p.y, p.z );
                 SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
-                if ( point_lib.canRotate( mCurrentPoint ) ) {
+                if ( point_lib.isSymbolOrientable( mCurrentPoint ) ) {
                   float angle = (float)( point_lib.getPointOrientation( mCurrentPoint ) ); // degrees
                   // Log.v("DistoX", "point " + mCurrentPoint + " angle " + angle );
                   // angles 0:upward 90;rightward 180:downward 270:leftward

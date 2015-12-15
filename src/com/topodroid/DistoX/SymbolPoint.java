@@ -49,7 +49,6 @@ class SymbolPoint extends Symbol
   // SymbolPointBasic mPoint1; // basic point
 
   // boolean hasText() { return mHasText; }
-  // boolean canRotate() { return mOrientable; }
   // double orientation() { return mOrientation; }
 
   @Override public boolean isOrientable() { return mOrientable; }
