@@ -518,6 +518,7 @@ public class TopoDroidActivity extends Activity
         //   if ( extended == null ) extended = "";
         //   TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "SID " + sid + " scraps " + plan.length() + " " + extended.length() );
         //   try {
+        //     FIXME tdr vs. th2
         //     String filename1 = TopoDroidPath.getTh2File( parser.mName + "-1p.th2" );
         //     TopoDroidApp.checkPath( filename1 );
         //     FileWriter fw1 = new FileWriter( filename1 );

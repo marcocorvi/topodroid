@@ -63,57 +63,62 @@ public class DrawingLinePath extends DrawingPointLinePath
     setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
 
-  public DrawingLinePath( DataInputStream dis, SymbolsPalette missingSymbols )
+  static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
   {
-    super( DrawingPath.DRAWING_PATH_LINE, true, false );
+    int type;
+    boolean closed, reversed;
+    int outline;
+    String th_name, options;
     try {
-      int nam_len = dis.readInt();
-      String th_name = dis.readUTF();
+      th_name = dis.readUTF();
+      closed = (dis.read() == 1);
+      // visible= (dis.read() == 1);
+      reversed = (dis.read() == 1);
+      outline = dis.readInt();
+      options = dis.readUTF();
 
       // DrawingBrushPaths.mLineLib.tryLoadMissingArea( th_name );
-      mLineType = DrawingBrushPaths.getLineType( th_name ); 
-      if ( mLineType < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addLine( th_name );
-        mLineType = 0;
+      type = DrawingBrushPaths.getLineType( th_name ); 
+      if ( type < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addLineName( th_name );
+        type = 0;
       }
 
-      setClosed( (dis.read() == 1) );
-      // setVisible( (dis.read() == 1) );
-      mReversed = (dis.read() == 1);
-      mOutline = dis.readInt();
-      int opt_len = dis.readInt();
-      if ( opt_len > 0 ) {
-        mOptions = dis.readUTF();
-      } else {
-        mOptions = null;
-      }
-      setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+      DrawingLinePath ret = new DrawingLinePath( type );
+      ret.mOptions  = options;
+      ret.setReversed( reversed );
 
       int npt = dis.readInt();
       int has_cp;
       float mX1, mY1, mX2, mY2, mX, mY;
-      mX = dis.readFloat();
-      mY = dis.readFloat();
+      mX = x + dis.readFloat();
+      mY = y + dis.readFloat();
       has_cp = dis.read(); // this is 0
-      addStartPoint( mX, mY );
+      ret.addStartPoint( mX, mY );
       for ( int k=1; k<npt; ++k ) {
-        mX = dis.readFloat();
-        mY = dis.readFloat();
+        mX = x + dis.readFloat();
+        mY = y + dis.readFloat();
         has_cp = dis.read();
         if ( has_cp == 1 ) {
-          mX1 = dis.readFloat();
-          mY1 = dis.readFloat();
-          mX2 = dis.readFloat();
-          mY2 = dis.readFloat();
-          addPoint3( mX1, mY1, mX2, mY2, mX, mY );
+          mX1 = x + dis.readFloat();
+          mY1 = y + dis.readFloat();
+          mX2 = x + dis.readFloat();
+          mY2 = y + dis.readFloat();
+          ret.addPoint3( mX1, mY1, mX2, mY2, mX, mY );
         } else {
-          addPoint( mX, mY );
+          ret.addPoint( mX, mY );
         }
       }
-      retracePath();
+      if ( closed ) {
+        ret.setClosed( closed );
+        ret.close();
+      }
+      ret.retracePath();
+      return ret;
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LINE in error " + e.toString() );
     }
+    return null;
   }
 
   void addOption( String option ) 
@@ -313,21 +318,13 @@ public class DrawingLinePath extends DrawingPointLinePath
     String name = DrawingBrushPaths.mLineLib.getSymbolThName( mLineType );
     try {
       dos.write( 'L' );
-      int nam_len = name.length();
-      dos.writeInt( nam_len );
       dos.writeUTF( name );
       dos.write( isClosed()? 1 : 0 );
       // dos.write( isVisible()? 1 : 0 );
       dos.write( mReversed? 1 : 0 );
       dos.writeInt( mOutline );
-      int opt_len = 0;
-      if ( mOptions != null ) {
-        opt_len = mOptions.length();
-        dos.writeInt( opt_len );
-        dos.writeUTF( mOptions );
-      } else {
-        dos.writeInt( opt_len );
-      }
+      dos.writeUTF( ( mOptions != null )? mOptions : "" );
+      
       int npt = size(); // number of line points
       dos.writeInt( npt );
       for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
@@ -336,6 +333,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LINE out error " + e.toString() );
     }
+    // return 'L';
   }
 
 }

@@ -887,6 +887,8 @@
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
   <string name="pref_xtherion_areas_title">Aire Xtherion</string>
   <string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string>
+  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
+  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
   <string name="pref_autoStations_title">Stations auto</string>
   <string name="pref_autoStations_summary">Ajouter les stations automatiquement</string>
   <string name="pref_loopClosure_title">Bouclage</string>

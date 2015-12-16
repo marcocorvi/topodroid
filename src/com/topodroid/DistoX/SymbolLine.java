@@ -63,7 +63,7 @@ public class SymbolLine extends Symbol
   // no effect
   SymbolLine( String name, String th_name, String group, int color )
   {
-    super( th_name );
+    super( th_name, th_name );
     init( name, group, color, 1 );
     makePath();
   }
@@ -71,14 +71,14 @@ public class SymbolLine extends Symbol
   // no effect
   SymbolLine( String name, String th_name, String group, int color, float width )
   {
-    super( th_name );
+    super( th_name, th_name );
     init( name, group, color, width );
     makePath();
   }
 
   SymbolLine( String name, String th_name, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
   {
-    super( th_name );
+    super( th_name, th_name );
     init( name, group, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );

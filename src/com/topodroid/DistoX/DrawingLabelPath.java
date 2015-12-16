@@ -51,34 +51,28 @@ public class DrawingLabelPath extends DrawingPointPath
     makeStraightPath( 0, 0, 20*mText.length(), 0, cx, cy );
   }
 
-  public DrawingLabelPath( DataInputStream dis )
+  static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
-    super( DrawingBrushPaths.mPointLib.mPointLabelIndex, 0, 0, 1, "");
+    float ccx, ccy;
+    int scale;
+    // int type;
+    String text, options;
     try {
-      cx = dis.readFloat( );
-      cy = dis.readFloat( );
+      ccx = x + dis.readFloat( );
+      ccy = y + dis.readFloat( );
       // String th_name = dis.readUTF( );
-      mPointType = DrawingBrushPaths.getPointLabelIndex();
-      // mOrientation = dis.readFloat( )
-      mScale = dis.readInt( );
-      int txt_len = dis.readInt( );
-      if ( txt_len > 0 ) {
-        mText = dis.readUTF();
-      } else {
-        mText = "";
-      }
-      int opt_len = dis.readInt( );
-      if ( opt_len > 0 ) {
-        mOptions = dis.readUTF();
-      } else {
-        mOptions = null;
-      }
-      setCenter( cx, cy );
-      setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
-      makeStraightPath( 0, 0, 20*mText.length(), 0, cx, cy );
+      // type = DrawingBrushPaths.getPointLabelIndex();
+      // orientation = dis.readFloat( )
+      scale = dis.readInt( );
+      text = dis.readUTF();
+      options = dis.readUTF();
+
+      // Log.v("DistoX", "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
+      return new DrawingLabelPath( text, ccx, ccy, scale, options );
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LABEL in error " + e.toString() );
     }
+    return null;
   }
 
   @Override
@@ -171,7 +165,7 @@ public class DrawingLabelPath extends DrawingPointPath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    // Log.v("DistoX", "Label to stream <" + mText + "> " + cx + " " + cy );
+    // Log.v("DistoX", "Label to stream <" + mText + "> " + cx + " " + cy + " options (" + ((mOptions!=null)? mOptions: "null"));
     try {
       dos.write( 'T' );
       dos.writeFloat( cx );
@@ -179,25 +173,12 @@ public class DrawingLabelPath extends DrawingPointPath
       // dos.writeUTF( DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
       // dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
-      int txt_len = 0;
-      if ( mText != null ) {
-        txt_len = mText.length();
-        dos.writeInt( txt_len );
-        dos.writeUTF( mText );
-      } else {
-        dos.writeInt( txt_len );
-      }
-      int opt_len = 0;
-      if ( mOptions != null ) {
-        opt_len = mOptions.length();
-        dos.writeInt( opt_len );
-        dos.writeUTF( mOptions );
-      } else {
-        dos.writeInt( opt_len );
-      }
+      dos.writeUTF( ( mText != null )? mText : "" );
+      dos.writeUTF( ( mOptions != null )? mOptions : "" );
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LABEL out error " + e.toString() );
     }
+    // return 'T';
   }
 }
 

@@ -90,7 +90,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "15";
+  static String SYMBOL_VERSION = "16";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -1454,6 +1454,15 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // SYMBOLS
 
+  private void deleteObsoleteSymbols()
+  {
+    String lines[] = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
+    for ( String line : lines ) {
+      File file = new File( TopoDroidPath.APP_LINE_PATH + line );
+      if ( file.exists() ) file.delete();
+    }
+  }
+
   void installSymbols( boolean overwrite )
   {
     boolean install = overwrite;
@@ -1471,6 +1480,7 @@ public class TopoDroidApp extends Application
       mDData.setValue( "symbol_version", SYMBOL_VERSION );
     }
     if ( install ) {
+      deleteObsoleteSymbols();
       InputStream is = getResources().openRawResource( R.raw.symbols );
       symbolsUncompress( is, overwrite );
     }

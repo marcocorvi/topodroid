@@ -114,6 +114,7 @@ class TopoDroidSetting
     "DISTOX_AREA_BORDER",         // area border visibility
     "DISTOX_CONT_JOIN",           // line continuation is join
     "DISTOX_CSV_LENGTH",          // CSV export length unit
+    "DISTOX_BINARY_STORE",
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -607,6 +608,8 @@ class TopoDroidSetting
     mContJoin = prefs.getBoolean( key[k++], false ); // DISTOX_CONT_JOIN
 
     mCsvLengthUnit = tryFloat( prefs, key[k++], "1", mCsvLengthUnit, 0 ); // DISTOX_CSV_LENGTH
+    mBinaryTh2 = prefs.getBoolean( key[k++], false );                     // DISTOX_BINARY_STORE
+
     mWallsType = tryInt(prefs, key[k++], "0", mWallsType, 0, WALLS_LAST ); // DISTOX_WALLS_TYPE
     mWallsPlanThr = tryFloat( prefs, key[k++], "70", mWallsPlanThr, 0, 90 );  // DISTOX_WALLS_PLAN_THR
     mWallsExtendedThr = tryFloat( prefs, key[k++], "45", mWallsExtendedThr, 0, 90 ); // DISTOX_WALLS_EXTENDED_THR
@@ -867,25 +870,28 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_RECENT_NR
       mRecentNr = tryInt( prefs, k, "4", mRecentNr, 2, 6 );
 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AREA_BORDER
-      mAreaBorder = prefs.getBoolean( k, true ); 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_CONT_JOIN
-      mContJoin = prefs.getBoolean( k, false ); 
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mAreaBorder = prefs.getBoolean( k, true ); // DISTOX_AREA_BORDER
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mContJoin = prefs.getBoolean( k, false ); // DISTOX_CONT_JOIN
 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_CSV_LENGTH
-      mCsvLengthUnit = tryFloat( prefs, k, "1", mCsvLengthUnit, 0 );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_TYPE
-      mWallsType = tryInt(prefs, k, "0", mWallsType, 0, WALLS_LAST );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_PLAN_THR
-      mWallsPlanThr = tryFloat( prefs, k, "70", mWallsPlanThr, 0, 90 );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_EXTENDED_THR
-      mWallsExtendedThr = tryFloat( prefs, k, "45", mWallsExtendedThr, 0, 90 ); 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_XCLOSE
-      mWallsXClose = tryFloat( prefs, k, "0.1", mWallsXClose, 0.0001f ); 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_XSTEP
-      mWallsXStep = tryFloat( prefs, k, "1.0", mWallsXStep, 0.0001f ); 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_WALLS_CONCAVE
-      mWallsConcave = tryFloat( prefs, k, "0.1", mWallsConcave, 0 ); 
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mCsvLengthUnit = tryFloat( prefs, k, "1", mCsvLengthUnit, 0 ); // DISTOX_CSV_LENGTH
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mBinaryTh2 = prefs.getBoolean( k, false );   // DISTOX_BINARY_STORE
+
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mWallsType = tryInt(prefs, k, "0", mWallsType, 0, WALLS_LAST ); // DISTOX_WALLS_TYPE
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWallsPlanThr = tryFloat( prefs, k, "70", mWallsPlanThr, 0, 90 ); // DISTOX_WALLS_PLAN_THR
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWallsExtendedThr = tryFloat( prefs, k, "45", mWallsExtendedThr, 0, 90 ); // DISTOX_WALLS_EXTENDED_THR
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWallsXClose = tryFloat( prefs, k, "0.1", mWallsXClose, 0.0001f ); // DISTOX_WALLS_XCLOSE
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWallsXStep = tryFloat( prefs, k, "1.0", mWallsXStep, 0.0001f ); // DISTOX_WALLS_XSTEP
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWallsConcave = tryFloat( prefs, k, "0.1", mWallsConcave, 0 ); // DISTOX_WALLS_CONCAVE
 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
       app.setLocale( prefs.getString( k, "" ) );

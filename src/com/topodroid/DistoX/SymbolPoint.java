@@ -93,7 +93,7 @@ class SymbolPoint extends Symbol
 
   SymbolPoint( String n1, String tn1, int c1, String path, boolean orientable )
   {
-    super( tn1 );
+    super( tn1, tn1 ); // FIXME filename
     mName = n1;
     mDxf    = null;
     makePaint( c1 );
@@ -111,7 +111,7 @@ class SymbolPoint extends Symbol
 
   SymbolPoint( String n1, String tn1, int c1, String path, boolean orientable, boolean has_text )
   {
-    super( tn1 );
+    super( tn1, tn1 ); // FIXME filename
     mName = n1;
     mDxf    = null;
     makePaint( c1 );

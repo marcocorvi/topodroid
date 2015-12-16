@@ -52,11 +52,11 @@ public class DrawingAreaPath extends DrawingPointLinePath
   String mPrefix;      // border/area name prefix (= scrap name)
   // boolean mVisible; // visible border in DrawingPointLinePath
 
-  public DrawingAreaPath( int type, int index, String prefix, boolean visible )
+  public DrawingAreaPath( int type, int cnt, String prefix, boolean visible )
   {
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
     mAreaType = type;
-    mAreaCnt  = index;
+    mAreaCnt  = cnt;
     mOrientation = 0.0;
     if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
       mOrientation = DrawingBrushPaths.getAreaOrientation( type );
@@ -88,55 +88,59 @@ public class DrawingAreaPath extends DrawingPointLinePath
     }
   }
 
-  public DrawingAreaPath( DataInputStream dis, SymbolsPalette missingSymbols )
+  static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
   {
-    super( DrawingPath.DRAWING_PATH_AREA, true, true );
+    int type, cnt;
+    boolean visible;
+    float orientation;
+    String th_name, prefix;
     try {
-      int nam_len = dis.readInt();
-      String th_name = dis.readUTF();
-      mAreaType = DrawingBrushPaths.getAreaType( th_name ); 
+      th_name = dis.readUTF();
+      prefix = dis.readUTF();
+      cnt = dis.readInt();
+      visible = ( dis.read( ) == 1 );
+      orientation = dis.readFloat( );
+      int npt = dis.readInt( );
+
       // DrawingBrushPaths.mAreaLib.tryLoadMissingArea( th_name );
-      mAreaType = DrawingBrushPaths.getAreaType( th_name );
-      if ( mAreaType < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addArea( th_name );
-        mAreaType = 0;
+      type = DrawingBrushPaths.getAreaType( th_name );
+      // Log.v("DistoX", "A: " + th_name + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
+      if ( type < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addAreaName( th_name );
+        type = 0;
       }
 
-      int pfx_len = dis.readInt();
-      mPrefix = dis.readUTF();
+      DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible );
+      // setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
 
-      mAreaCnt = dis.readInt();
-
-      setVisible( dis.read( ) == 1 );
-      mOrientation = dis.readFloat( );
-
-      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
-
-      int npt = dis.readInt( );
       int has_cp;
       float mX1, mY1, mX2, mY2, mX, mY;
-      mX = dis.readFloat( );
-      mY = dis.readFloat( );
+      mX = x + dis.readFloat( );
+      mY = y + dis.readFloat( );
       has_cp = dis.read();
-      addStartPoint( mX, mY );
+      ret.addStartPoint( mX, mY );
+      // Log.v("DistoX", "A start " + mX + " " + mY );
       for ( int k=1; k<npt; ++k ) {
-        mX = dis.readFloat();
-        mY = dis.readFloat();
+        mX = x + dis.readFloat();
+        mY = y + dis.readFloat();
         has_cp = dis.read();
+        // Log.v("DistoX", "A point " + mX + " " + mY + " " + has_cp );
         if ( has_cp == 1 ) {
-          mX1 = dis.readFloat();
-          mY1 = dis.readFloat();
-          mX2 = dis.readFloat();
-          mY2 = dis.readFloat();
-          addPoint3( mX1, mY1, mX2, mY2, mX, mY );
+          mX1 = x + dis.readFloat();
+          mY1 = y + dis.readFloat();
+          mX2 = x + dis.readFloat();
+          mY2 = y + dis.readFloat();
+          ret.addPoint3( mX1, mY1, mX2, mY2, mX, mY );
         } else {
-          addPoint( mX, mY );
+          ret.addPoint( mX, mY );
         }
       }
-      retracePath();
+      ret.retracePath();
+      return  ( npt < 3 )? null : ret;
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "AREA in error " + e.toString() );
     }
+    return null;
   }
 
   public void setAreaType( int t ) 
@@ -265,28 +269,22 @@ public class DrawingAreaPath extends DrawingPointLinePath
     String name = DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType );
     try {
       dos.write( 'A' );
-      int nam_len = name.length();
-      dos.writeInt( nam_len );
       dos.writeUTF( name );
-      int pfx_len = 0;
-      if ( mPrefix != null && mPrefix.length() > 0 ) {
-        pfx_len = mPrefix.length();
-        dos.writeInt( pfx_len );
-        dos.writeUTF( mPrefix );
-      } else {
-        dos.writeInt( pfx_len );
-      }
+      dos.writeUTF( (mPrefix != null)? mPrefix : "" );
       dos.writeInt( mAreaCnt );
       dos.write( isVisible()? 1 : 0 );
       dos.writeFloat( (float)mOrientation );
+
       int npt = size(); // number of line points
       dos.writeInt( npt );
+      // Log.v("DistoX", "A to stream: " + name + " " + mAreaCnt + " " + isVisible() + " " + mOrientation + " np " + npt );
       for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
         pt.toDataStream( dos );
       }
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "AREA out error " + e.toString() );
     }
+    // return 'A';
   }
 
 }

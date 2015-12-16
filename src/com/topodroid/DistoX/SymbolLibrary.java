@@ -233,8 +233,8 @@ class SymbolLibrary
       if ( symbol.isEnabled( ) ) { sb.append( symbol.getThName() ).append(","); }
     }
     try {
-      int str_len = sb.length();
-      dos.writeInt( str_len );
+      // int str_len = sb.length();
+      // dos.writeInt( str_len );
       dos.writeUTF( sb.toString() );
     } catch ( IOException e ) { }
   }

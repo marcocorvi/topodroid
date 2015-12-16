@@ -886,6 +886,8 @@
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
   <string name="pref_xtherion_areas_title">xtherion areas</string>
   <string name="pref_xtherion_areas_summary">Save areas a la xtherion</string>
+  <string name="pref_binary_store_title">Sketch binary file</string>
+  <string name="pref_binary_store_summary">Save sketches in binary format</string>
   <string name="pref_autoStations_title">Therion stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>

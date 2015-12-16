@@ -441,19 +441,19 @@ public class DataHelper extends DataSetObservable
   public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, boolean forward )
   {
-    String stn = (init_station != null)? init_station : "";
-    String cmt = (comment != null)? comment : "";
+    // String stn = (init_station != null)? init_station : "";
+    // String cmt = (comment != null)? comment : "";
     updateSurveyInfoStmt.bindString( 1, date );
     updateSurveyInfoStmt.bindString( 2, team );
     updateSurveyInfoStmt.bindDouble( 3, decl );
-    updateSurveyInfoStmt.bindString( 4, cmt );
-    updateSurveyInfoStmt.bindString( 5, stn );
+    updateSurveyInfoStmt.bindString( 4, comment );
+    updateSurveyInfoStmt.bindString( 5, init_station );
     updateSurveyInfoStmt.bindLong( 6, id );
     updateSurveyInfoStmt.execute();
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
-        listener.onUpdateSurveyInfo( id, date, team, decl, cmt, stn );
+        listener.onUpdateSurveyInfo( id, date, team, decl, comment, init_station );
       }
     }
   }
@@ -859,25 +859,32 @@ public class DataHelper extends DataSetObservable
     }
   }
 
+  private void renamePlotFile( String oldname, String newname )
+  {
+    File oldfile = new File( oldname );
+    File newfile = new File( newname );
+    if ( oldfile.exists() ) {
+      if ( ! newfile.exists() ) {
+        oldfile.renameTo( newfile );
+      } else {
+        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. New file already exists: " + newname );
+      }
+    // } else { // THIS IS OK
+    //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. Old file does not exist: " + oldname );
+    }
+  }
+
   private void transferPlots( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
   {
     if ( myDB == null ) return;
     List< PlotInfo > plots = selectPlotsAtStation( old_sid, station );
     for ( PlotInfo plot : plots ) {
       transferPlot( sid, old_sid, plot.id );
-      String oldname = TopoDroidPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" );
-      String newname = TopoDroidPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" );
-      File oldfile = new File( oldname );
-      File newfile = new File( newname );
-      if ( oldfile.exists() ) {
-        if ( ! newfile.exists() ) {
-          oldfile.renameTo( newfile );
-        } else {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. New file already exists: " + newname );
-        }
-      // } else { // THIS IS OK
-      //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. Old file does not exist: " + oldname );
-      }
+      renamePlotFile( TopoDroidPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
+                      TopoDroidPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
+
+      renamePlotFile( TopoDroidPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
+                      TopoDroidPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );
     }
   }
 

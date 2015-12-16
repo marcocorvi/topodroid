@@ -1213,7 +1213,8 @@ public class DrawingActivity extends ItemDrawer
         mPid2 = -1;
       }
       mPid = mPid1;
-      // Log.v( TopoDroidApp.TAG, "loadFiles pid " + mName1 + " " + mName2 );
+
+      // Log.v( "DistoX", "loadFiles pid " + mName1 + " " + mName2 );
 
       String start = mPlot1.start;
       String view  = mPlot1.view;
@@ -1223,17 +1224,17 @@ public class DrawingActivity extends ItemDrawer
 
       mAllSymbols  = true; // by default there are all the symbols
 
-      String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-      String filename2 = null;
+      String filename1  = TopoDroidPath.getTh2FileWithExt( mFullName1 );
+      String filename1b = TopoDroidPath.getTdrFileWithExt( mFullName1 );
+      String filename2  = null;
+      String filename2b = null;
       if ( mFullName2 != null ) {
-        filename2 = TopoDroidPath.getTh2FileWithExt( mFullName2 );
+        filename2  = TopoDroidPath.getTh2FileWithExt( mFullName2 );
+        filename2b = TopoDroidPath.getTdrFileWithExt( mFullName2 );
       }
 
-      long millis_start = System.currentTimeMillis();
-      long millis_end;
-      // data reduction 4200 msec
-      // references      300 msec
-      // sketch loading 9500 msec
+      // long millis_start = System.currentTimeMillis();
+      // long millis_end;
 
       if ( isSection() ) {
         mTo = view;
@@ -1247,14 +1248,12 @@ public class DrawingActivity extends ItemDrawer
           finish();
         } else {
           mNum = new DistoXNum( mList, start, view, hide );
-          millis_end = System.currentTimeMillis() - millis_start;
-          Log.v("DistoX", "Data reduction " + millis_end + " msec" );
-          computeReferences( (int)PlotInfo.PLOT_PLAN, mOffset.x, mOffset.y, mZoom, true );
-          computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
+          // Log.v("DistoX", "Data redux " + (System.currentTimeMillis() - millis_start) + " msec");
+          // computeReferences( (int)PlotInfo.PLOT_PLAN,     mOffset.x, mOffset.y, mZoom, true );
+          // computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
+          // Log.v("DistoX", "Refs " + (System.currentTimeMillis() - millis_start) + " msec");
         }
       }
-      millis_end = System.currentTimeMillis() - millis_start;
-      Log.v("DistoX", "References " + millis_end + " msec" );
 
       // now try to load drawings from therion file
       // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + mFullName1 + " " + mFullName2 );
@@ -1266,18 +1265,26 @@ public class DrawingActivity extends ItemDrawer
       // when the sketch is saved, mAllSymbols is checked ( see doSaveTh2 )
       // if there are not all symbols the user is asked if he/she wants to save anyways
 
-      mAllSymbols = mDrawingSurface.loadTherion( filename1, filename2, missingSymbols );
-
-      millis_end = System.currentTimeMillis() - millis_start;
-      Log.v("DistoX", "Sketch load " + millis_end + " msec" );
-
-      if ( ! mAllSymbols ) {
-        String msg = missingSymbols.getMessage( getResources() );
-        TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Missing " + msg );
-        Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
-        // (new MissingDialog( this, this, msg )).show();
-        // finish();
+      if ( TopoDroidSetting.mBinaryTh2 ) {
+        mAllSymbols = mDrawingSurface.loadDataStream( filename1b, filename2b, filename1, filename2, missingSymbols );
+        // Log.v("DistoX", "Streams " + (System.currentTimeMillis() - millis_start) + " msec");
+      } else {
+        mAllSymbols = mDrawingSurface.loadTherion( filename1, filename2, missingSymbols );
+        // Log.v("DistoX", "Th2 " + (System.currentTimeMillis() - millis_start) + " msec");
       }
+      if ( isSketch2D() ) {
+        computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
+        computeReferences( (int)PlotInfo.PLOT_PLAN,     mOffset.x, mOffset.y, mZoom, true );
+      }
+      // Log.v("DistoX", "Sketch load " + (System.currentTimeMillis() - millis_start) + " msec");
+
+      // if ( ! mAllSymbols ) {
+      //   String msg = missingSymbols.getMessage( getResources() );
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Missing " + msg );
+      //   Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
+      //   // (new MissingDialog( this, this, msg )).show();
+      //   // finish();
+      // }
 
       resetReference( mPlot1 );
       if ( type == PlotInfo.PLOT_EXTENDED ) {
@@ -1301,7 +1308,6 @@ public class DrawingActivity extends ItemDrawer
      mZoom     = plot.zoom;    
      // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-     // mDrawingSurface.refresh();
    }
 
     // private void setCurrentPaint()
@@ -1421,29 +1427,38 @@ public class DrawingActivity extends ItemDrawer
       return ret;
     }
 
+
+    private void deletePlotFile( String filename )
+    {
+      File file = new File( filename );
+      if ( file.exists() ) file.delete(); 
+      // Log.v("DistoX", "delete th2 file " + filename );
+    }
+
+    private void deletePlotFileWithBackups( String filename )
+    {
+      File file = new File( filename );
+      if ( file.exists() ) file.delete(); 
+      // Log.v("DistoX", "delete th2 file " + filename );
+
+      String filepath = filename + ".bck";
+      file = new File( filepath );
+      if ( file.exists() ) file.delete(); 
+      for ( int i=0; i<SaveTh2FileTask.NR_BACKUP; ++i ) {
+        filepath = filename + ".bck" + Integer.toString(i);
+        file = new File( filepath );
+        if ( file.exists() ) file.delete(); 
+      }
+    }
+
     // @param name  section-line name 
     void deleteLine( DrawingLinePath line, String name ) 
     { 
       mDrawingSurface.deletePath( line );
       if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-        String filename = TopoDroidPath.getTh2File( mApp.mySurvey + "-" + name + ".th2" );
-        File file = new File( filename );
-        if ( file.exists() ) file.delete(); 
-        // Log.v("DistoX", "delete th2 file " + filename );
-
-        String filepath = filename + ".bck";
-        file = new File( filepath );
-        if ( file.exists() ) file.delete(); 
-        for ( int i=0; i<SaveTh2FileTask.NR_BACKUP; ++i ) {
-          filepath = filename + ".bck" + Integer.toString(i);
-          file = new File( filepath );
-          if ( file.exists() ) file.delete(); 
-        }
-
-        filename = TopoDroidPath.getJpgFile( mApp.mySurvey, name + ".jpg" );
-        file = new File( filename );
-        if ( file.exists() ) file.delete(); 
-        // Log.v("DistoX", "delete jpg file " + filename );
+        deletePlotFileWithBackups( TopoDroidPath.getTh2File( mApp.mySurvey + "-" + name + ".th2" ) );
+        deletePlotFileWithBackups( TopoDroidPath.getTdrFile( mApp.mySurvey + "-" + name + ".tdr" ) );
+        deletePlotFile( TopoDroidPath.getJpgFile( mApp.mySurvey, name + ".jpg" ) );
        
         PlotInfo plot = mData.getPlotInfo( mApp.mSID, name );
         if ( plot != null ) mData.dropPlot( plot.id, mApp.mSID );
@@ -3320,21 +3335,44 @@ public class DrawingActivity extends ItemDrawer
   // }
 
   // FIXME BACKUP
-  void doRecover( String filename, int type )
+  private void doRecoverTh2( String filename, int type )
   {
     // Log.v("DistoX", "recover " + type + " " + filename );
-
-    String filename1 = TopoDroidPath.getTh2File( filename );
-    // SymbolsPalette missingSymbols = new SymbolsPalette();
+    String th2  = TopoDroidPath.getTh2File( filename );
     if ( type == 1 ) {
-      mDrawingSurface.loadTherion( filename1, null, null /* missingSymbols */ );
+      mDrawingSurface.loadTherion( th2, null, null ); // no missing symbols
       setPlotType1();
     } else {
-      mDrawingSurface.loadTherion( null, filename1, null /* missingSymbols */ );
+      mDrawingSurface.loadTherion( null, th2, null );
       // TODO now switch to extended view FIXME-VIEW
       setPlotType2();
     }
   }
+
+  private void doRecoverTdr( String filename, int type )
+  {
+    // Log.v("DistoX", "recover " + type + " " + filename );
+    String tdr  = TopoDroidPath.getTdrFile( filename );
+    String th2  = TopoDroidPath.getTh2File( filename );
+    if ( type == 1 ) {
+      mDrawingSurface.loadDataStream( tdr, null, th2, null, null ); // no missing symbols
+      setPlotType1();
+    } else {
+      mDrawingSurface.loadDataStream( null, tdr, null, th2, null );
+      // TODO now switch to extended view FIXME-VIEW
+      setPlotType2();
+    }
+  }
+
+  void doRecover( String filename, int type )
+  {
+    if ( TopoDroidSetting.mBinaryTh2 ) {
+      doRecoverTdr( filename, type );
+    } else {
+      doRecoverTh2( filename, type );
+    }
+  }
+  
 
   void exportAsCsx( PrintWriter pw )
   {

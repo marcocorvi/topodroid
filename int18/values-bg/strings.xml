@@ -865,6 +865,8 @@
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
   <string name="pref_xtherion_areas_title">Площи експорт в xtherion</string>
   <string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string>
+  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
+  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>

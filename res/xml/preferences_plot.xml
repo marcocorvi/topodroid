@@ -50,6 +50,13 @@
        android:defaultValue="false"
      />
 
+     <CheckBoxPreference
+       android:key="DISTOX_BINARY_STORE"
+       android:summary="@string/pref_binary_store_summary"
+       android:title="@string/pref_binary_store_title"
+       android:defaultValue="false"
+     />
+
     <Preference
        android:key="DISTOX_TOOL_POINT"
        android:title="@string/pref_tool_point_title"

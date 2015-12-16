@@ -141,6 +141,7 @@ public class PocketTopoParser extends ImportParser
     //                 " V " + (20*num.surveyVmin()) + " " + (20*num.surveyVmax()) );
     
  
+    // FIXME PT parser uses therion scrap syntax
     if ( mStartFrom != null ) {
       // NumStation st = num.getStation( mStartFrom );
       // Log.v("PTDistoX", " start " + st.e + " " + st.s );

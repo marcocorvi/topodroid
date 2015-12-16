@@ -161,8 +161,8 @@ public class SurveyNewDialog extends Dialog
 
   private boolean saveSurvey( String name )
   {
-    // FIXME FORCE NAMES WITHOUT SPACES
-    name = TopoDroidUtil.noSpaces( name );
+    if ( name == null ) return false;
+    name = TopoDroidUtil.noSpaces( name ); // FIXME FORCE NAMES WITHOUT SPACES
     name = name.trim();
     if ( name.length() == 0 ) return false;
     if ( mApp.hasSurveyName( name ) ) { // name already exists
@@ -193,14 +193,13 @@ public class SurveyNewDialog extends Dialog
         init_station = station;
       }
     }
+    if ( init_station == null || init_station.length() == 0 ) init_station = "0";
       
-    if ( date != null ) { date = date.trim(); }
-    if ( team != null ) { team = team.trim(); }
-    if ( comment != null ) { comment = comment.trim(); }
+    if ( date != null ) { date = date.trim(); } else { date = ""; }
+    if ( team != null ) { team = team.trim(); } else { team = ""; }
+    if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
 
     mApp.setSurveyFromName( name, true ); // save survey name: tell app to set it into the database
-    
-    if ( team == null ) team = "";
     mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, true );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY

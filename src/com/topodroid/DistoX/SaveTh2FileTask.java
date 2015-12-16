@@ -83,11 +83,11 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
     boolean ret = false;
     synchronized( TopoDroidPath.mTherionLock ) {
       try {
-        String filename = TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
-        // Log.v("DistoX", "save th2 files " + mFullName1 + " suffix " + mSuffix );
+        Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
+        String filename = (TopoDroidSetting.mBinaryTh2)? TopoDroidPath.getTdrFileWithExt( mFullName1 ) + ".bck"
+                                                       : TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
         rotateBackups( filename );
 
-        String filename1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
         long now  = System.currentTimeMillis();
         long time = now - 60000; // one minute before now
         // TopoDroidApp.checkPath( tempname1 );
@@ -103,7 +103,6 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
         String tempname1 = TopoDroidPath.getTmpFileWithExt( mSuffix + Long.toString(now) );
         File file1 = new File( tempname1 );
         if ( TopoDroidSetting.mBinaryTh2 ) {
-          filename1 = filename1.replace( ".th2", ".tdr" );
           FileOutputStream fos = new FileOutputStream( file1 );
           DataOutputStream dos = new DataOutputStream( fos );
           mSurface.exportDataStream( mType, dos, mFullName1 );
@@ -122,10 +121,9 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
           file1.delete();
         } else {
           // Log.v("DistoX", "save completed");
-          String p1 = TopoDroidPath.getTh2FileWithExt( mFullName1 );
-          File f1 = new File( p1 );
-          File b1 = new File( p1 + ".bck" );
-          f1.renameTo( b1 );
+          String filename1 = (TopoDroidSetting.mBinaryTh2)? TopoDroidPath.getTdrFileWithExt( mFullName1 )
+                                                          : TopoDroidPath.getTh2FileWithExt( mFullName1 );
+          (new File( filename1 )).renameTo( new File( filename1 + ".bck" ) );
           file1.renameTo( new File( filename1 ) );
         }
       } catch ( IOException e ) {

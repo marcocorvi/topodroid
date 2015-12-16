@@ -76,40 +76,42 @@ public class DrawingPointPath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }
 
-  public DrawingPointPath( DataInputStream dis, SymbolsPalette missingSymbols ) 
+  static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols ) 
   {
-    super( DrawingPath.DRAWING_PATH_POINT );
+    float ccx, ccy, orientation;
+    int   type;
+    int   scale;
+    String th_name, options;
     try {
-      cx = dis.readFloat();
-      cy = dis.readFloat();
-      int nam_len = dis.readInt();
-      String th_name = dis.readUTF( );
-      // DrawingBrushPaths.mPointLib.tryLoadMissingPoint( th_name );
-      mPointType = DrawingBrushPaths.getPointType( th_name );
-      if ( mPointType < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addPoint( th_name ); 
-        mPointType = 0;
-      }
+      ccx = x + dis.readFloat();
+      ccy = y + dis.readFloat();
+      th_name = dis.readUTF( );
+      orientation = dis.readFloat();
+      scale   = dis.readInt();
+      options = dis.readUTF();
 
-      mOrientation = dis.readFloat();
-      mScale = dis.readInt();
-      int opt_len = dis.readInt();
-      if ( opt_len > 0 ) {
-        mOptions = dis.readUTF();
-      } else {
-        mOptions = null;
+      DrawingBrushPaths.mPointLib.tryLoadMissingPoint( th_name );
+      type = DrawingBrushPaths.getPointType( th_name );
+      // Log.v("DistoX", "P " + th_name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      if ( type < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addPointName( th_name ); 
+        type = 0;
       }
-      // TODO parse option for "-text"
-      setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
-      setCenter( cx, cy );
-      if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
-        DrawingBrushPaths.rotateGradPoint( mPointType, mOrientation );
-        resetPath( 1.0f );
-        DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
-      }
+      DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, options );
+      ret.setOrientation( orientation );
+      return ret;
+
+      // // TODO parse option for "-text"
+      // setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
+      // if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
+      //   DrawingBrushPaths.rotateGradPoint( mPointType, mOrientation );
+      //   resetPath( 1.0f );
+      //   DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
+      // }
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "POINT in error " + e.toString() );
     }
+    return null;
   }
 
   protected void setCenter( float x, float y )
@@ -305,22 +307,14 @@ public class DrawingPointPath extends DrawingPath
       dos.write( 'P' );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
-      int nam_len = name.length();
-      dos.writeInt( nam_len );
       dos.writeUTF( name );
       dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
-      int opt_len = 0;
-      if ( mOptions != null ) {
-        opt_len = mOptions.length();
-        dos.writeInt( opt_len );
-        dos.writeUTF( mOptions );
-      } else {
-        dos.writeInt( opt_len );
-      }
+      dos.writeUTF( ( mOptions != null )? mOptions : "" );
     } catch ( IOException e ) {
       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "POINT out error " + e.toString() );
     }
+    // return 'P';
   }
 
 }

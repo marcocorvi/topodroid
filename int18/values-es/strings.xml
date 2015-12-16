@@ -788,6 +788,8 @@
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
   <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
+  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>

@@ -46,17 +46,17 @@ public class SymbolsPalette
     mPaletteArea.clear();
   }
 
-  void addPoint( String type )
+  void addPointName( String type )
   {
     mPalettePoint.add( type );
   }
 
-  void addLine( String type )
+  void addLineName( String type )
   {
     mPaletteLine.add( type );
   }
 
-  void addArea( String type )
+  void addAreaName( String type )
   {
     mPaletteArea.add( type );
   }

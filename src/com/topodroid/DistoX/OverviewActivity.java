@@ -561,12 +561,16 @@ public class OverviewActivity extends ItemDrawer
         TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + fullName );
         // Log.v("DistoX", "Overview load file " + fullName );
 
-        String filename = TopoDroidPath.getTh2FileWithExt( fullName );
-        // FIXME_OVER 
-        // N.B. this loads the drawing on DrawingSurface.mCommandManager1
-        // boolean all_symbols =
-          mOverviewSurface.loadTherion( filename, xdelta, ydelta, null /* missingSymbols */ );
-        // mAllSymbols = mAllSymbols && all_symbols;
+        String th2 = TopoDroidPath.getTh2FileWithExt( fullName );
+        if ( TopoDroidSetting.mBinaryTh2 ) {
+          String tdr = TopoDroidPath.getTdrFileWithExt( fullName );
+          // FIXME to check
+          mOverviewSurface.loadDataStream( tdr, th2, xdelta, ydelta, null );
+        } else {
+          // FIXME_OVER 
+          // N.B. this loads the drawing on DrawingSurface.mCommandManager1
+          mOverviewSurface.loadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
+        }
       }
 
       // if ( ! mAllSymbols ) {

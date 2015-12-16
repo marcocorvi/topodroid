@@ -1,4 +1,4 @@
-/* @file DrawingSurface.java
+/* @file DrawingSurface.java      dos.writeInt( TopoDroidApp.VERSION_CODE );
  *
  * @author marco corvi
  * @date nov 2011
@@ -50,6 +50,7 @@ public class DrawingSurface extends SurfaceView
                             implements SurfaceHolder.Callback
 {
     private Boolean _run;
+    boolean mSurfaceCreated = false;
     protected DrawThread mDrawThread;
     public boolean isDrawing = true;
     public DrawingPath previewPath;
@@ -189,7 +190,7 @@ public class DrawingSurface extends SurfaceView
       mCommandManager2.flipXAxis();
     }
 
-    void refresh()
+    void refreshSurface()
     {
       // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
       Canvas canvas = null;
@@ -240,7 +241,7 @@ public class DrawingSurface extends SurfaceView
       {
         while ( _run ) {
           if ( isDrawing == true ) {
-            refresh();
+            refreshSurface();
           } else {
             try {
               // Log.v( TopoDroidApp.TAG, "drawing thread sleeps ..." );
@@ -440,16 +441,20 @@ public class DrawingSurface extends SurfaceView
     public void surfaceCreated(SurfaceHolder mHolder) 
     {
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceCreated " );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "surfaceCreated " );
       if ( mDrawThread == null ) {
         mDrawThread = new DrawThread(mHolder);
       }
       mDrawThread.setRunning(true);
       mDrawThread.start();
+      mSurfaceCreated = true;
     }
 
     public void surfaceDestroyed(SurfaceHolder mHolder) 
     {
+      mSurfaceCreated = false;
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceDestroyed " );
+      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "surfaceDestroyed " );
       boolean retry = true;
       mDrawThread.setRunning(false);
       while (retry) {
@@ -465,7 +470,7 @@ public class DrawingSurface extends SurfaceView
 
     public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name )
     {
-      // Log.v("DistoX", "drawing surface export type " + type );
+      // Log.v("DistoX", sketch_name + " export th2 type " + type );
       if ( type == PlotInfo.PLOT_EXTENDED ) {
         mCommandManager2.exportTherion( type, out, sketch_name, plot_name );
       } else {
@@ -475,7 +480,7 @@ public class DrawingSurface extends SurfaceView
 
     public void exportDataStream( int type, DataOutputStream dos, String sketch_name )
     {
-      // Log.v("DistoX", "drawing surface export type " + type );
+      // Log.v("DistoX", sketch_name + " export stream type " + type );
       if ( type == PlotInfo.PLOT_EXTENDED ) {
         mCommandManager2.exportDataStream( type, dos, sketch_name );
       } else {
@@ -503,117 +508,167 @@ public class DrawingSurface extends SurfaceView
   {
     SymbolsPalette palette = new SymbolsPalette();
     // populate local palette with default symbols
-    palette.addPoint("user"); // make sure local palette contains "user" symnbols
-    palette.addLine("user");
-    palette.addArea("user");
+    palette.addPointName("user"); // make sure local palette contains "user" symnbols
+    palette.addLineName("user");
+    palette.addAreaName("user");
     for ( Symbol p : DrawingBrushPaths.mPointLib.getSymbols() ) if ( p.isEnabled() ) {
       String th_name = p.getThName();
-      if ( ! th_name.equals("user") ) palette.addPoint( th_name );
+      if ( ! th_name.equals("user") ) palette.addPointName( th_name );
     }
     for ( Symbol p : DrawingBrushPaths.mLineLib.getSymbols() ) if ( p.isEnabled() ) {
       String th_name = p.getThName();
-      if ( ! th_name.equals("user") ) palette.addLine( th_name );
+      if ( ! th_name.equals("user") ) palette.addLineName( th_name );
     }
     for ( Symbol p : DrawingBrushPaths.mAreaLib.getSymbols() ) if ( p.isEnabled() ) {
       String th_name = p.getThName();
-      if ( ! th_name.equals("user") ) palette.addArea( th_name );
+      if ( ! th_name.equals("user") ) palette.addAreaName( th_name );
     }
     return palette;
   }
 
   // called by OverviewActivity
-  public boolean loadTherion( String filename1, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  // @pre th2 != null
+  public boolean loadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
     commandManager = mCommandManager1;
-    return doLoadTherion( filename1, xdelta, ydelta, missingSymbols, localPalette );
+    if ( (new File(th2)).exists() ) {
+      return doLoadTherion( th2, xdelta, ydelta, missingSymbols, localPalette );
+    }
+    return false;
   }
 
-  public boolean loadTherion( String filename1, String filename2, SymbolsPalette missingSymbols )
+  // called by OverviewActivity
+  // @pre tdr != null
+  public boolean loadDataStream( String tdr, String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
-    SymbolsPalette localPalette1 = preparePalette();
-    SymbolsPalette localPalette2 = null;
+    SymbolsPalette localPalette = preparePalette();
+    commandManager = mCommandManager1;
+    if ( (new File(tdr)).exists() ) {
+      return doLoadDataStream( tdr, xdelta, ydelta, missingSymbols, localPalette );
+    } else if ( th2 != null && (new File(th2)).exists() ) {
+      return doLoadTherion( th2, xdelta, ydelta, missingSymbols, localPalette );
+    }
+    return false;
+  }
 
+  // @note th21 and th22 can be null
+  public boolean loadTherion( String th21, String th22, SymbolsPalette missingSymbols )
+  {
+    SymbolsPalette localPalette = preparePalette();
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     boolean ret = true;
-    if ( filename1 != null ) {
+    if ( th21 != null ) {
       commandManager = mCommandManager1;
       commandManager.clearSketchItems();
-      String filename1bin = filename1.replace( ".th2", ".tdr" );
-      if ( ! doLoadDataStream( filename1bin, missingSymbols, localPalette1 ) ) {
-        ret = ret && doLoadTherion( filename1, missingSymbols, localPalette1 );
-      }
-    } else {
-      localPalette2 = localPalette1;
+      ret = ret && doLoadTherion( th21, 0, 0, missingSymbols, localPalette );
     }
-    if ( filename2 != null ) {
+    if ( th22 != null ) {
       commandManager = mCommandManager2;
       commandManager.clearSketchItems();
-      String filename2bin = filename2.replace( ".th", ".tdr" );
-      if ( ! doLoadDataStream( filename2bin, missingSymbols, localPalette2 ) ) {
-        ret = ret && doLoadTherion( filename2, missingSymbols, localPalette2 );
+      ret = ret && doLoadTherion( th22, 0, 0, missingSymbols, localPalette );
+    }
+    commandManager = mCommandManager1;
+    return ret;
+  }
+
+  // FIXME 
+  // WITH VERSION 3.0 support for TH2 fallback will be dropped
+  // @note tdr1 and tdr2 can be null
+  // @note th21 and th22 can be null, 
+  // @note th21 is not used if tdr1 == null
+  // @note th22 is not used if tdr2 == null
+  public boolean loadDataStream( String tdr1, String tdr2, String th21, String th22, SymbolsPalette missingSymbols )
+  {
+    SymbolsPalette localPalette = preparePalette();
+    if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
+    boolean ret = true;
+    if ( tdr1 != null ) {
+      commandManager = mCommandManager1;
+      commandManager.clearSketchItems();
+      if ( (new File( tdr1 )).exists() ) {
+        ret = ret && doLoadDataStream( tdr1, 0, 0, missingSymbols, localPalette );
+      } else if ( th21 != null && (new File(th21)).exists() ) {
+        ret = ret && doLoadTherion( th21, 0, 0, missingSymbols, localPalette );
+      }
+    }
+    if ( tdr2 != null ) {
+      commandManager = mCommandManager2;
+      commandManager.clearSketchItems();
+      if ( (new File( tdr2 )).exists() ) {
+        ret = ret && doLoadDataStream( tdr2, 0, 0, missingSymbols, localPalette );
+      } else if ( th22 != null && (new File(th22)).exists() ) {
+        ret = ret && doLoadTherion( th22, 0, 0, missingSymbols, localPalette );
       }
     }
     commandManager = mCommandManager1;
     return ret;
   }
 
-  public boolean doLoadTherion( String filename, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
-  {
-    return doLoadTherion( filename, 0, 0, missingSymbols, localPalette );
-  }
 
-  public boolean doLoadDataStream( String filename, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
+  public boolean doLoadDataStream( String filename, float dx, float dy,
+                                   SymbolsPalette missingSymbols, final SymbolsPalette localPalette )
   {
-    boolean ret = false;
-    long millis_start = System.currentTimeMillis();
-
+    int version = 0;
+    boolean in_scrap = false;
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
+    DrawingPath path;
 
     synchronized( TopoDroidPath.mTherionLock ) {
       try {
         FileInputStream fis = new FileInputStream( filename );
         DataInputStream dis = new DataInputStream( fis );
-        int what = dis.read();
-        if ( what != 'S' ) {
-          ret = false;
-        } else {
-          int nam_len = dis.readInt();
-          String name = dis.readUTF();
-          int type = dis.readInt();
-
-          // read palettes
-          int np = dis.readInt();
-          String points = dis.readUTF();
-          int nl = dis.readInt();
-          String lines = dis.readUTF();
-          int na = dis.readInt();
-          String areas = dis.readUTF();
-
-          boolean todo = true;
-          while ( todo ) {
-            what = dis.read();
-            switch ( what ) {
-              case 'P':
-                addDrawingPath( new DrawingPointPath( dis, missingSymbols ) );
-                break;
-              case 'T':
-                addDrawingPath( new DrawingLabelPath( dis ) );
-                break;
-              case 'L':
-                addDrawingPath( new DrawingLinePath( dis, missingSymbols ) );
-                break;
-              case 'A':
-                addDrawingPath( new DrawingAreaPath( dis, missingSymbols ) );
-                break;
-              case 'E':
-                todo = false;
-                break;
-            } 
+        boolean todo = true;
+        while ( todo ) {
+          int what = dis.read();
+          path = null;
+          switch ( what ) {
+            case 'V':
+              version = dis.readInt();
+              break;
+            case 'S':
+              {
+                String name = dis.readUTF();
+                int type = dis.readInt();
+                // read palettes
+                String points = dis.readUTF();
+                String[] vals = points.split(",");
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointName( val );
+                String lines = dis.readUTF();
+                vals = points.split(",");
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineName( val );
+                String areas = dis.readUTF();
+                vals = points.split(",");
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaName( val );
+                in_scrap = true;
+              }
+              break;
+            case 'P':
+              path = DrawingPointPath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              break;
+            case 'T':
+              path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'L':
+              path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              break;
+            case 'A':
+              path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              break;
+            case 'E':
+              todo = false;
+            default:
+              break;
+          } 
+          if ( what == 'V' || what == 'S' || what == 'E' ) continue;
+          if ( path == null ) { // this is an unrecoverable error
+            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR failed to create path " + (char)what );
+            break;
+          } else {
+            if ( in_scrap ) addDrawingPath( path );
           }
         }
-        ret = true;
         dis.close();
         fis.close();
       } catch ( FileNotFoundException e ) {
@@ -621,21 +676,16 @@ public class DrawingSurface extends SurfaceView
       } catch ( IOException e ) {
         e.printStackTrace();
       }
+      // Log.v("DistoX", "read: " + sb.toString() );
     }
-
-    long millis = System.currentTimeMillis() - millis_start;
-    Log.v("DistoX", "load data stream " + filename + " " + millis + " msec ");
-
-    // return (missingSymbols != null )? missingSymbols.isOK() : true;
-    return ret;
+    return (missingSymbols != null )? missingSymbols.isOK() : true;
   }
 
-  public boolean doLoadTherion( String filename, float dx, float dy, SymbolsPalette missingSymbols, SymbolsPalette localPalette )
+  public boolean doLoadTherion( String filename, float dx, float dy,
+                                SymbolsPalette missingSymbols, SymbolsPalette localPalette )
   {
     float x, y, x1, y1, x2, y2;
     boolean is_not_section = true;
-
-    // long millis_start = System.currentTimeMillis();
 
     TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
     // DrawingBrushPaths.makePaths( );
@@ -655,30 +705,30 @@ public class DrawingSurface extends SurfaceView
             if ( line.startsWith( "#P " ) ) { // POINT PALETTE
               if ( localPalette != null ) {
                 localPalette.mPalettePoint.clear();
-                localPalette.addPoint( "user" );
+                localPalette.addPointName( "user" );
                 String[] syms = line.split( " " );
                 for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addPoint( syms[k] );
+                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addPointName( syms[k] );
                 }
                 DrawingBrushPaths.mPointLib.makeEnabledListFromPalette( localPalette );
               }
             } else if ( line.startsWith( "#L " ) ) { // LINE PALETTE
               if ( localPalette != null ) {
                 localPalette.mPaletteLine.clear();
-                localPalette.addLine("user");
+                localPalette.addLineName("user");
                 String[] syms = line.split( " " );
                 for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addLine( syms[k] );
+                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addLineName( syms[k] );
                 }
                 DrawingBrushPaths.mLineLib.makeEnabledListFromPalette( localPalette );
               }
             } else if ( line.startsWith( "#A " ) ) { // AREA PALETTE
               if ( localPalette != null ) {
                 localPalette.mPaletteArea.clear();
-                localPalette.addArea("user");
+                localPalette.addAreaName("user");
                 String[] syms = line.split( " " );
                 for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addArea( syms[k] );
+                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addAreaName( syms[k] );
                 }
                 DrawingBrushPaths.mAreaLib.makeEnabledListFromPalette( localPalette );
               }
@@ -786,7 +836,7 @@ public class DrawingSurface extends SurfaceView
               }
 
               if ( ptType >= DrawingBrushPaths.mPointLib.mSymbolNr ) {
-                if ( missingSymbols != null ) missingSymbols.addPoint( type ); // add "type" to the missing point-types
+                if ( missingSymbols != null ) missingSymbols.addPointName( type ); // add "type" to the missing point-types
                 ptType = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
                 // continue;
               }
@@ -858,7 +908,7 @@ public class DrawingSurface extends SurfaceView
                           }
                         }
                         if ( arType >= DrawingBrushPaths.mAreaLib.mSymbolNr ) {
-                          if ( missingSymbols != null ) missingSymbols.addArea( vals2[1] );
+                          if ( missingSymbols != null ) missingSymbols.addAreaName( vals2[1] );
                           arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
                         } 
                         path.setAreaType( arType );
@@ -954,7 +1004,7 @@ public class DrawingSurface extends SurfaceView
                 line = readLine( br );
                 if ( ! line.equals( "endline" ) ) { 
                   if ( lnType >= lnTypeMax ) {
-                    if ( missingSymbols != null ) missingSymbols.addLine( type );
+                    if ( missingSymbols != null ) missingSymbols.addLineName( type );
                     lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME missing line becomes "user"
                   } // else {
                     path = new DrawingLinePath( lnType );
@@ -1039,8 +1089,6 @@ public class DrawingSurface extends SurfaceView
       }
     }
     // remove repeated names
-    // long millis = System.currentTimeMillis() - millis_start;
-    // Log.v("DistoX", "load " + filename + " " + millis + " msec ");
 
     return (missingSymbols != null )? missingSymbols.isOK() : true;
   }

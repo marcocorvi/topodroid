@@ -530,8 +530,10 @@ public class DrawingCommandManager
 
     //line.mPoints.remove( point );
     line.remove( point );
-    synchronized( mSelection ) {
-      mSelection.removePoint( sp );
+    if ( sp != null ) { // sp can be null 
+      synchronized( mSelection ) {
+        mSelection.removePoint( sp );
+      }
     }
     // checkLines();
   }
@@ -1809,10 +1811,14 @@ public class DrawingCommandManager
   public void exportDataStream( int type, DataOutputStream dos, String scrap_name )
   {
     // Log.v("DistoX", "export Therion");
+    // StringBuilder sb = new StringBuilder();
     try { 
+      dos.write( 'V' ); // version
+      dos.writeInt( TopoDroidApp.VERSION_CODE );
       dos.write( 'S' );
-      int nam_len = scrap_name.length();
-      dos.writeInt( nam_len );
+      // sb.append('S');
+      // int nam_len = scrap_name.length();
+      // dos.writeInt( nam_len );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
 
@@ -1827,13 +1833,16 @@ public class DrawingCommandManager
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath p = (DrawingPath) cmd;
           if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue;
-          p.toDataStream( dos );
+          // char ch =
+            p.toDataStream( dos );
+          // sb.append( ch );
         }
       }
       dos.write('E');
     } catch ( IOException e ) {
       e.printStackTrace();
     }
+    // Log.v("DistoX", "Export Stream: " + sb.toString() );
   }
 
   public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )

@@ -23,6 +23,7 @@ class Symbol implements SymbolInterface
 {
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   String  mThName;   // therion name
+  String  mFilename; // filename
   int     mCsxLayer;    // cSurvey layer
   int     mCsxType;
   int     mCsxCategory;
@@ -36,6 +37,7 @@ class Symbol implements SymbolInterface
   {
     mEnabled = true;
     mThName  = null;
+    mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -44,10 +46,11 @@ class Symbol implements SymbolInterface
     mCsx = null;
   }
 
-  Symbol( String th_name ) 
+  Symbol( String th_name, String filename ) 
   { 
     mEnabled  = true;
     mThName   = th_name;
+    mFilename = filename;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -63,6 +66,7 @@ class Symbol implements SymbolInterface
   { 
     mEnabled  = enabled; 
     mThName   = null;
+    mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -73,10 +77,11 @@ class Symbol implements SymbolInterface
 
 
   // SymbolInterface methods
-  public String getName()   { return "undefined"; }
-  public String getThName() { return "undefined"; }
-  public Paint  getPaint()  { return null; }
-  public Path   getPath()   { return null; }
+  public String getFilename()   { return mFilename; }
+  public String getName()       { return "undefined"; }
+  public String getThName()     { return mThName; }
+  public Paint  getPaint()      { return null; }
+  public Path   getPath()       { return null; }
   public boolean isOrientable() { return false; }
 
   public boolean isEnabled() { return mEnabled; }

@@ -297,7 +297,8 @@ public class DrawingPath implements ICanvasCommand
 
   void toDataStream( DataOutputStream dos ) 
   { 
-    Log.v("DistoX", "ERROR DrawingPath toDataStream executed");
+    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR DrawingPath toDataStream executed");
+    // return '?';
   }
 
   public void toCsurvey( PrintWriter pw ) { }

@@ -843,6 +843,8 @@
   <!-- TODO string name="pref_checkAttached_summary">Check if stations are attached</string -->
   <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
+  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
   <string name="pref_autoStations_title">Skizze-Messpunkten</string>
   <!-- TODO string name="pref_autoStations_summary">Add stations automatically</string -->
   <!-- FIXME string name="pref_loopClosure_title">Kreisschluss</string -->

@@ -70,7 +70,7 @@ class SymbolArea extends Symbol
    */
   SymbolArea( String name, String th_name, int color, Bitmap bitmap, TileMode xmode, TileMode ymode )
   {
-    super( th_name );
+    super( th_name, th_name );
     mName = name;
     mColor = color;
     mBitmap = bitmap;

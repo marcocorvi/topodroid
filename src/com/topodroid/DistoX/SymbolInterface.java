@@ -8,6 +8,7 @@ import android.graphics.Path;
 
 public interface SymbolInterface
 {
+  String getFilename();
   String getName();
   String getThName();
   Paint  getPaint();
