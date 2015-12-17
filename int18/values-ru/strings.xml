@@ -858,8 +858,8 @@
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
   <string name="pref_xtherion_areas_title">Области xtherion</string>
   <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
-  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
-  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
+  <string name="pref_binary_store_title">Бинарный файл абриса</string>
+  <string name="pref_binary_store_summary">Сохранить абрисы в бинарный формат</string>
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
