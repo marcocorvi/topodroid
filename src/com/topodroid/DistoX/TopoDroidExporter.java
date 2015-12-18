@@ -174,7 +174,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -600,7 +600,7 @@ class TopoDroidExporter
         if ( to == null || to.length() == 0 ) {
           to = "";
           if ( ref_item != null 
-            && ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+            && ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
             from = ref_item.mFrom;
             to   = ref_item.mTo;
             extend = ref_item.mExtend;
@@ -690,7 +690,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -954,7 +954,7 @@ class TopoDroidExporter
           if ( from == null || from.length() == 0 ) {
             if ( to == null || to.length() == 0 ) { // no station: not exported
               if ( ref_item != null &&
-                 ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+                 ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
                 leg.add( item.mLength, item.mBearing, item.mClino );
               }
             } else { // only TO station
@@ -1187,7 +1187,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1371,7 +1371,7 @@ class TopoDroidExporter
   //         } else {
   //           // not exported
   //           if ( ref_item != null &&
-  //              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidApp.mCloseDistance ) ) {
+  //              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
   //             float bb = TopoDroidUtil.around( item.mBearing, b0[0] );
   //             l += item.mLength;
   //             b += bb;
@@ -1560,7 +1560,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1683,7 +1683,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2012,7 +2012,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
               // Log.v( TAG, "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
               leg.add( item.mLength, item.mBearing, item.mClino );
             }

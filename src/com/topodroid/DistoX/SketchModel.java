@@ -894,7 +894,7 @@ class SketchModel
               // stations are automatic in the 3D model
               continue;
             } else {
-              int ptindex = DrawingBrushPaths.mPointLib.getSymbolIndex( type );
+              int ptindex = DrawingBrushPaths.mPointLib.getSymbolIndexByThName( type );
               // for ( ; ptindex < DrawingBrushPaths.mPointLib.mSymbolNr; ++ptindex ) {
               //   if ( type.equals( DrawingBrushPaths.mPointLib.getSymbolThName( ptindex ) ) ) break;
               // }
@@ -932,14 +932,14 @@ class SketchModel
           }
           if ( ++k < vals.length ) {
             if ( is_line ) {
-              th_type = DrawingBrushPaths.mLineLib.getSymbolIndex( vals[k] );
+              th_type = DrawingBrushPaths.mLineLib.getSymbolIndexByThName( vals[k] );
               // int lnTypeMax = DrawingBrushPaths.mLineLib.mSymbolNr;
               // for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
               //    if ( vals[k].equals( DrawingBrushPaths.mLineLib.getSymbolThName( th_type ) ) ) break;
               // }
             } else {
               closed = true;
-              th_type = DrawingBrushPaths.mAreaLib.getSymbolIndex( vals[k] );
+              th_type = DrawingBrushPaths.mAreaLib.getSymbolIndexByThName( vals[k] );
               // int lnTypeMax = DrawingBrushPaths.mAreaLib.mSymbolNr;
               // for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
               //    if ( vals[k].equals( DrawingBrushPaths.mAreaLib.getSymbolThName( th_type ) ) ) break;

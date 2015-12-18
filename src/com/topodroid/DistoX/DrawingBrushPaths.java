@@ -41,10 +41,6 @@ public class DrawingBrushPaths
   // -----------------------------------------------------------
   static String getPointName( int idx ) { return mPointLib.getSymbolName( idx ); }
 
-  static int getPointType( String th_name ) { return mPointLib.getSymbolIndex( th_name ); }
-  static int getLineType( String th_name ) { return mLineLib.getSymbolIndex( th_name ); }
-  static int getAreaType( String th_name ) { return mAreaLib.getSymbolIndex( th_name ); }
-
   static boolean pointHasText( int index ) { return mPointLib.pointHasText( index ); }
 
   static int getPointCsxLayer( int index ) { return mPointLib.pointCsxLayer( index ); }
@@ -63,6 +59,7 @@ public class DrawingBrushPaths
   static int getAreaCsxPen( int index ) { return mAreaLib.areaCsxPen( index ); }
   static int getAreaCsxBrush( int index ) { return mAreaLib.areaCsxBrush( index ); }
 
+  static boolean isPointOrientable( int index ) { return mPointLib.isSymbolOrientable( index ); }
   static double getPointOrientation( int index ) { return mPointLib.getPointOrientation( index ); }
   static void resetPointOrientations( ) { mPointLib.resetOrientations(); }
   static void rotateGradPoint( int index, double a ) { mPointLib.rotateGrad( index, a ); }
@@ -119,7 +116,7 @@ public class DrawingBrushPaths
   static void makePaths( Resources res )
   {
     if ( mStationSymbol == null ) {
-      mStationSymbol = new SymbolPoint( "station", "station", 0xffff6633, 
+      mStationSymbol = new SymbolPoint( "station", "station", "station", 0xffff6633, 
         "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false );
     }
 

@@ -393,7 +393,7 @@ class DrawingDxf
       {
         // // 8 layer (0), 2 block name,
         for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
-          SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbol(n);
+          SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex(n);
           String block = "P_" + pt.getThName().replace(':','-');
 
           writeString( out, 0, "BLOCK" );

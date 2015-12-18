@@ -68,9 +68,9 @@ class SymbolArea extends Symbol
   /** 
    * color 0xaarrggbb
    */
-  SymbolArea( String name, String th_name, int color, Bitmap bitmap, TileMode xmode, TileMode ymode )
+  SymbolArea( String name, String th_name, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode )
   {
-    super( th_name, th_name );
+    super( th_name, fname );
     mName = name;
     mColor = color;
     mBitmap = bitmap;
@@ -114,8 +114,9 @@ class SymbolArea extends Symbol
     mPath.addCircle( 0, 0, 10, Path.Direction.CCW );
   }
 
-  SymbolArea( String filepath, String locale, String iso )
+  SymbolArea( String filepath, String fname, String locale, String iso )
   {
+    super( null, fname );
     mOrientable  = false;
     mOrientation = 0;
     readFile( filepath, locale, iso );

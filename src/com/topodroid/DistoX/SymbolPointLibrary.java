@@ -91,14 +91,14 @@ class SymbolPointLibrary extends SymbolLibrary
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadSystemPoints()" );
 
     mPointUserIndex = mSymbols.size();
-    symbol = new SymbolPoint( res.getString(R.string.thp_user), "user", 0xffffffff, p_user, false, false );
+    symbol = new SymbolPoint( res.getString(R.string.thp_user), "user", "user", 0xffffffff, p_user, false, false );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
     addSymbol( symbol );
 
     mPointLabelIndex = mSymbols.size();
-    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", 0xffffffff, p_label, false, true );
+    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, false, true );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
@@ -118,12 +118,12 @@ class SymbolPointLibrary extends SymbolLibrary
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
-        SymbolPoint symbol = new SymbolPoint( file.getPath(), locale, iso );
+        SymbolPoint symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "point with null ThName" );
           continue;
         }
-        if ( ! hasSymbol( symbol.getThName() ) ) {
+        if ( ! hasSymbolByFilename( symbol.mThName ) ) {
           addSymbol( symbol );
           String thname = symbol.mThName;
           String name = "p_" + thname;
@@ -145,24 +145,24 @@ class SymbolPointLibrary extends SymbolLibrary
     }
   }
 
-  boolean tryLoadMissingPoint( String p )
+  boolean tryLoadMissingPoint( String fname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    if ( isSymbolEnabled( p ) ) return true;
-    Symbol symbol = getSymbol( p );
+    if ( isSymbolEnabled( fname ) ) return true;
+    Symbol symbol = getSymbolByFilename( fname );
     if ( symbol == null ) {
-      // Log.v( TopoDroidApp.TAG, "load missing point " + p );
-      File file = new File( TopoDroidPath.APP_SAVE_POINT_PATH + p );
+      // Log.v( TopoDroidApp.TAG, "load missing point " + fname );
+      File file = new File( TopoDroidPath.APP_SAVE_POINT_PATH + fname );
       if ( ! file.exists() ) return false;
 
-      symbol = new SymbolPoint( file.getPath(), locale, iso );
+      symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
     } else {
-      // Log.v( TopoDroidApp.TAG, "enabling missing point " + p );
+      // Log.v( TopoDroidApp.TAG, "enabling missing point " + fname );
     }
     if ( symbol == null ) return false;
 
@@ -177,9 +177,9 @@ class SymbolPointLibrary extends SymbolLibrary
   protected void makeEnabledList()
   {
     super.makeEnabledList();
-    mPointUserIndex   = getSymbolIndex( "user" );
-    mPointLabelIndex  = getSymbolIndex( "label" );
-    mPointDangerIndex = getSymbolIndex( "danger" );
+    mPointUserIndex   = getSymbolIndexByThName( "user" );
+    mPointLabelIndex  = getSymbolIndexByThName( "label" );
+    mPointDangerIndex = getSymbolIndexByThName( "danger" );
   }
 
 

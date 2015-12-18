@@ -3276,7 +3276,7 @@ public class DrawingActivity extends ItemDrawer
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    if ( mMenu == (ListView)parent ) {
+    if ( mMenu == (ListView)parent ) { // MENU
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT

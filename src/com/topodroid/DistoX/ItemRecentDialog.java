@@ -210,7 +210,11 @@ class ItemRecentDialog extends Dialog
     setRecentButtons( mRecentP, ItemDrawer.mRecentPoint, 1.5f, 1.5f ); // sx*1.5f, sy*1.5f
     setRecentButtons( mRecentL, ItemDrawer.mRecentLine, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
     setRecentButtons( mRecentA, ItemDrawer.mRecentArea, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
+    Symbol p = ItemDrawer.mRecentPoint[0];
+    mSeekBar.setEnabled( p != null && p.isOrientable() );
   }
+
+  
         
   // void rotatePoint( int angle )
   // {
@@ -244,6 +248,8 @@ class ItemRecentDialog extends Dialog
     if ( k <= 0 || k >= nrRecent ) return;
     ItemDrawer.updateRecentPoint( ItemDrawer.mRecentPoint[k] );
     setRecentButtons( mRecentP, ItemDrawer.mRecentPoint, 1.5f, 1.5f ); // sx*1.5f, sy*1.5f
+    Symbol p = ItemDrawer.mRecentPoint[0];
+    mSeekBar.setEnabled( p != null && p.isOrientable() );
     setTheTitle();
   }
 

@@ -17,7 +17,7 @@
        android:key="DISTOX_LEG_SHOTS"
        android:title="@string/pref_leg_shots_title"
        android:summary="@string/pref_leg_shots_summary"
-       android:defaultValue="2"
+       android:defaultValue="3"
        android:entries="@array/legShots"
        android:entryValues="@array/legShotsValue"
        />

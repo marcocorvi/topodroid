@@ -43,38 +43,36 @@ public class ItemDrawer extends Activity
 
   int getPointScale() { return mPointScale; }
 
+  // --------------------------------------------------------------
+  // MOST RECENT SYMBOLS
+  // recent symbols are stored with their filenames
+  //
+  // update of the "recent" arrays is done either with symbol index, or with symbol itself
+  // load and save is done using a string of symbol filenames (separated by space)
+
   static void updateRecentPoint( int point )
   {
     // if ( DrawingBrushPaths.mPointLib == null ) return;
-    updateRecent( DrawingBrushPaths.mPointLib.getSymbol( point ), mRecentPoint );
+    updateRecent( DrawingBrushPaths.mPointLib.getSymbolByIndex( point ), mRecentPoint );
   }
 
   static void updateRecentLine( int line )
   {
     // if ( DrawingBrushPaths.mLineLib == null ) return;
-    updateRecent( DrawingBrushPaths.mLineLib.getSymbol( line ), mRecentLine );
+    updateRecent( DrawingBrushPaths.mLineLib.getSymbolByIndex( line ), mRecentLine );
   }
 
   static void updateRecentArea( int area )
   {
     // if ( DrawingBrushPaths.mAreaLib == null ) return;
-    updateRecent( DrawingBrushPaths.mAreaLib.getSymbol( area ), mRecentArea );
+    updateRecent( DrawingBrushPaths.mAreaLib.getSymbolByIndex( area ), mRecentArea );
   }
 
-  static void updateRecentPoint( Symbol point ) 
-  {
-    updateRecent( point, mRecentPoint );
-  }
+  static void updateRecentPoint( Symbol point ) { updateRecent( point, mRecentPoint ); }
 
-  static void updateRecentLine( Symbol line )
-  {
-    updateRecent( line, mRecentLine );
-  }
+  static void updateRecentLine( Symbol line ) { updateRecent( line, mRecentLine ); }
 
-  static void updateRecentArea( Symbol area )
-  {
-    updateRecent( area, mRecentArea );
-  }
+  static void updateRecentArea( Symbol area ) { updateRecent( area, mRecentArea ); }
 
   private static void updateRecent( Symbol symbol, Symbol symbols[] )
   {
@@ -92,6 +90,8 @@ public class ItemDrawer extends Activity
     }
   }
 
+  // recent symbols are stored with their th_names
+  //
   protected void loadRecentSymbols( DataHelper data )
   {
     DrawingBrushPaths.mPointLib.setRecentSymbols( mRecentPoint );
@@ -102,21 +102,21 @@ public class ItemDrawer extends Activity
     if ( names != null ) {
       String points[] = names.split(" ");
       for ( String point : points ) {
-        updateRecent( DrawingBrushPaths.mPointLib.getSymbol( point ), mRecentPoint );
+        updateRecent( DrawingBrushPaths.mPointLib.getSymbolByFilename( point ), mRecentPoint );
       }
     }
     names = data.getValue( "recent_lines" );
     if ( names != null ) {
       String lines[] = names.split(" ");
       for ( String line : lines ) {
-        updateRecent( DrawingBrushPaths.mLineLib.getSymbol( line ), mRecentLine );
+        updateRecent( DrawingBrushPaths.mLineLib.getSymbolByFilename( line ), mRecentLine );
       }
     }
     names = data.getValue( "recent_areas" );
     if ( names != null ) {
       String areas[] = names.split(" ");
       for ( String area : areas ) {
-        updateRecent( DrawingBrushPaths.mAreaLib.getSymbol( area ), mRecentArea );
+        updateRecent( DrawingBrushPaths.mAreaLib.getSymbolByFilename( area ), mRecentArea );
       }
     }
   }

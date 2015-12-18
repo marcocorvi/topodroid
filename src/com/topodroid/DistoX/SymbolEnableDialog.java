@@ -109,7 +109,7 @@ class SymbolEnableDialog extends Dialog
       if ( point_lib == null ) return false;
       int np = point_lib.mSymbolNr;
       for ( int i=0; i<np; ++i ) {
-        mPointAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_POINT, i, point_lib.getSymbol( i ) ) );
+        mPointAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_POINT, i, point_lib.getSymbolByIndex( i ) ) );
       }
     }
 
@@ -117,7 +117,7 @@ class SymbolEnableDialog extends Dialog
     if ( line_lib == null ) return false;
     int nl = line_lib.mSymbolNr;
     for ( int j=0; j<nl; ++j ) {
-      mLineAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_LINE, j, line_lib.getSymbol( j ) ) );
+      mLineAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
 
     if ( TopoDroidSetting.mLevelOverBasic ) {
@@ -125,7 +125,7 @@ class SymbolEnableDialog extends Dialog
       if ( area_lib == null ) return false;
       int na = area_lib.mSymbolNr;
       for ( int k=0; k<na; ++k ) {
-        mAreaAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_AREA, k, area_lib.getSymbol( k ) ) );
+        mAreaAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_AREA, k, area_lib.getSymbolByIndex( k ) ) );
       }
     }
 

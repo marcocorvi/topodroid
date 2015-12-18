@@ -61,24 +61,24 @@ public class SymbolLine extends Symbol
 
   // width = 1;
   // no effect
-  SymbolLine( String name, String th_name, String group, int color )
+  SymbolLine( String name, String th_name, String fname, String group, int color )
   {
-    super( th_name, th_name );
+    super( th_name, fname );
     init( name, group, color, 1 );
     makePath();
   }
 
   // no effect
-  SymbolLine( String name, String th_name, String group, int color, float width )
+  SymbolLine( String name, String th_name, String fname, String group, int color, float width )
   {
-    super( th_name, th_name );
+    super( th_name, fname );
     init( name, group, color, width );
     makePath();
   }
 
-  SymbolLine( String name, String th_name, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
+  SymbolLine( String name, String th_name, String fname, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
   {
-    super( th_name, th_name );
+    super( th_name, fname );
     init( name, group, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
@@ -102,8 +102,9 @@ public class SymbolLine extends Symbol
     mStyleX = 1;
   }
 
-  SymbolLine( String filepath, String locale, String iso ) 
+  SymbolLine( String filepath, String fname, String locale, String iso ) 
   {
+    super( null, fname );
     mStyleStraight = false;
     mStyleX = 1;
     readFile( filepath, locale, iso );

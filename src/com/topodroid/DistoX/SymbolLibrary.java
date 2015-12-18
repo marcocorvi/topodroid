@@ -106,22 +106,30 @@ class SymbolLibrary
     return -1;
   }
 
-  int getSymbolIndex( String th_name )
+  int getSymbolIndexByThName( String th_name )
   {
-    for ( int k=0; k<mSymbolNr; ++k ) {
-      if ( mSymbols.get(k).mThName.equals( th_name) ) return k;
-    }
+    for ( int k=0; k<mSymbolNr; ++k ) if ( mSymbols.get(k).mThName.equals( th_name) ) return k;
     return -1;
   }
 
+  int getSymbolIndexByFilename( String fname )
+  {
+    for ( int k=0; k<mSymbolNr; ++k ) if ( mSymbols.get(k).mThName.equals( fname) ) return k;
+    return -1;
+  }
 
   // ===============================================
   // SymbolInterface
 
-  boolean hasSymbol( String th_name ) { return ( null != get( th_name ) ); }
+  // this is used only by PT Cmap
+  boolean hasSymbolByThName( String th_name ) { return ( null != get( th_name ) ); }
 
-  Symbol getSymbol( String th_name ) { return get( th_name ); }
-  Symbol getSymbol( int k )       { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get( k ); }
+  // this is used by loadUserXXX 
+  protected boolean hasSymbolByFilename( String fname ) { return ( null != get( fname ) ); }
+
+  Symbol getSymbolByFilename( String fname ) { return get( fname ); }
+  // Symbol getSymbolByThName( String th_name ) { return get( th_name ); }
+  Symbol getSymbolByIndex( int k )       { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get( k ); }
 
   String getSymbolName( int k )   { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getName(); }
   String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbolNr )? null : mSymbols.get(k).getThName(); }
@@ -164,15 +172,14 @@ class SymbolLibrary
     }
   }
 
-  // protected boolean tryLoadMissingSymbol( String prefix, String th_name, String filename )
+  // protected boolean tryLoadMissingSymbol( String prefix, String th_name, String fname )
   // {
   //   String locale = "name-" + Locale.getDefault().toString().substring(0,2);
   //   String iso = "ISO-8859-1";
   //   // String iso = "UTF-8";
   //   // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-  //   if ( hasSymbol( th_name ) ) return true;
-  //   Symbol symbol = getSymbol( th_name );
+  //   Symbol symbol = getSymbolByFilename( fname );
   //   if ( symbol == null ) {
   //     File file = new File( filename );
   //     if ( ! file.exists() ) return false;
@@ -196,12 +203,12 @@ class SymbolLibrary
     }
   }
 
-  // symbols = palette.mPaletteAreas etc.
+  // symbols = palette.mPaletteAreas etc. (filenames)
   protected void makeEnabledListFromStrings( TreeSet<String> symbols )
   {
     for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
-    for ( String th_name : symbols ) {
-      Symbol symbol = getSymbol( th_name );
+    for ( String fname : symbols ) {
+      Symbol symbol = getSymbolByFilename( fname );
       if ( symbol != null ) symbol.setEnabled( true );
     }
     makeEnabledList( );
@@ -221,7 +228,7 @@ class SymbolLibrary
   void writePalette( PrintWriter pw ) 
   {
     for ( Symbol symbol : mSymbols ) {
-      if ( symbol.isEnabled( ) ) pw.format( " %s", symbol.getThName() );
+      if ( symbol.isEnabled( ) ) pw.format( " %s", symbol.getFilename() );
     }
   }
 
@@ -230,7 +237,7 @@ class SymbolLibrary
   {
     StringBuilder sb = new StringBuilder();
     for ( Symbol symbol : mSymbols ) {
-      if ( symbol.isEnabled( ) ) { sb.append( symbol.getThName() ).append(","); }
+      if ( symbol.isEnabled( ) ) { sb.append( symbol.getFilename() ).append(","); }
     }
     try {
       // int str_len = sb.length();
@@ -263,7 +270,7 @@ class SymbolLibrary
     SymbolNode left;
     SymbolNode right;
     boolean color;
-    Symbol value;
+    Symbol value;    // the Node value is the Symbol
 
     SymbolNode( Symbol v )
     {
@@ -274,6 +281,7 @@ class SymbolLibrary
       value = v;
     }
 
+    // @param name  query key (symbol filename)
     Symbol get( String name )
     {
       int c = compare( value.mThName, name );

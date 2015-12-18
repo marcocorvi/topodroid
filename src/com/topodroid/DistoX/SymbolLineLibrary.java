@@ -72,14 +72,14 @@ class SymbolLineLibrary extends SymbolLibrary
   private void loadSystemLines( Resources res )
   {
     if ( mSymbols.size() > 0 ) return;
-    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "user", "user", 0xffffffff, 1 );
+    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "user", "user", "user", 0xffffffff, 1 );
     symbol.mCsxLayer = 5;
     symbol.mCsxType  = 4;
     symbol.mCsxCategory = 1;
     symbol.mCsxPen   = 1;
     addSymbol( symbol );
 
-    symbol = new SymbolLine( res.getString( R.string.thl_wall ),  "wall", "wall", 0xffff0000, 2 );
+    symbol = new SymbolLine( res.getString( R.string.thl_wall ),  "wall", "wall", "wall", 0xffff0000, 2 );
     symbol.mCsxLayer = 5;
     symbol.mCsxType  = 4;
     symbol.mCsxCategory = 1;
@@ -101,12 +101,12 @@ class SymbolLineLibrary extends SymbolLibrary
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
-        SymbolLine symbol = new SymbolLine( file.getPath(), locale, iso );
+        SymbolLine symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "line with null ThName" );
           continue;
         }
-        if ( ! hasSymbol( symbol.mThName ) ) {
+        if ( ! hasSymbolByFilename( symbol.mThName ) ) {
           addSymbol( symbol );
           String thname = symbol.mThName;
           String name = mPrefix + thname;
@@ -129,24 +129,24 @@ class SymbolLineLibrary extends SymbolLibrary
     }
   }
 
-  boolean tryLoadMissingLine( String p )
+  boolean tryLoadMissingLine( String fname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    if ( isSymbolEnabled( p ) ) return true;
-    Symbol symbol = getSymbol( p );
+    if ( isSymbolEnabled( fname ) ) return true;
+    Symbol symbol = getSymbolByFilename( fname );
     if ( symbol == null ) {
-      // Log.v( TopoDroidApp.TAG, "load missing line " + p );
-      File file = new File( TopoDroidPath.APP_SAVE_LINE_PATH + p );
+      // Log.v( TopoDroidApp.TAG, "load missing line " + fname );
+      File file = new File( TopoDroidPath.APP_SAVE_LINE_PATH + fname );
       if ( ! file.exists() ) return false;
 
-      symbol = new SymbolLine( file.getPath(), locale, iso );
+      symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
     } else {
-      // Log.v( TopoDroidApp.TAG, "enabling missing line " + p );
+      // Log.v( TopoDroidApp.TAG, "enabling missing line " + fname );
     }
     if ( symbol == null ) return false;
 
@@ -161,10 +161,10 @@ class SymbolLineLibrary extends SymbolLibrary
   {
     // mLine.clear();
     super.makeEnabledList();
-    mLineUserIndex    = getSymbolIndex( "user" );
-    mLineWallIndex    = getSymbolIndex( "wall" );
-    mLineSlopeIndex   = getSymbolIndex( "slope" );
-    mLineSectionIndex = getSymbolIndex( "section" );
+    mLineUserIndex    = getSymbolIndexByThName( "user" );
+    mLineWallIndex    = getSymbolIndexByThName( "wall" );
+    mLineSlopeIndex   = getSymbolIndexByThName( "slope" );
+    mLineSectionIndex = getSymbolIndexByThName( "section" );
   }
 
   void makeEnabledListFromPalette( SymbolsPalette palette )

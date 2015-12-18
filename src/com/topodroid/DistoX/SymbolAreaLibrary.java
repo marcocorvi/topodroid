@@ -46,37 +46,37 @@ class SymbolAreaLibrary extends SymbolLibrary
 
   double getAreaOrientation( int k )
   {
-    SymbolArea s = (SymbolArea)getSymbol(k);
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? 0 : s.mOrientation;
   }
 
   void rotateGrad( int k, double a ) 
   {
-    SymbolArea s = (SymbolArea)getSymbol(k);
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     if ( s != null ) s.rotateGrad( a );
   }
 
   Bitmap getAreaBitmap( int k ) 
   { 
-    SymbolArea s = (SymbolArea)getSymbol(k);
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? null : s.mBitmap; 
   }
   
   TileMode getAreaXMode( int k ) 
   { 
-    SymbolArea s = (SymbolArea)getSymbol(k);
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? TileMode.REPEAT : s.mXMode;
   }
   
   TileMode getAreaYMode( int k )
   { 
-    SymbolArea s = (SymbolArea)getSymbol(k);
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? TileMode.REPEAT : s.mYMode;
   }
   
   int getAreaColor( int k )
   {
-    SymbolArea s = (SymbolArea)getSymbol(k);
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? 0xffffffff : s.mColor;
   }
   
@@ -93,7 +93,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // Log.v( TopoDroidApp.TAG, "load system areas");
     if ( size() > 0 ) return;
 
-    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user",  0x66ffffff, null, TileMode.REPEAT, TileMode.REPEAT );
+    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user", "user", 0x66ffffff, null, TileMode.REPEAT, TileMode.REPEAT );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;
@@ -101,7 +101,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     symbol.mCsxBrush = 2;
     addSymbol( symbol );
 
-    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water",  0x660000ff, null, TileMode.REPEAT, TileMode.REPEAT );
+    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water", "water", 0x660000ff, null, TileMode.REPEAT, TileMode.REPEAT );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;
@@ -122,12 +122,12 @@ class SymbolAreaLibrary extends SymbolLibrary
       int systemNr = size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
-        SymbolArea symbol = new SymbolArea( file.getPath(), locale, iso );
+        SymbolArea symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "area with null ThName" );
           continue;
         }
-        if ( ! hasSymbol( symbol.mThName ) ) {
+        if ( ! hasSymbolByFilename( symbol.mThName ) ) {
           addSymbol( symbol );
           String thname = symbol.mThName;
           String name = mPrefix + thname;
@@ -149,19 +149,19 @@ class SymbolAreaLibrary extends SymbolLibrary
     }
   }
 
-  boolean tryLoadMissingArea( String th_name )
+  boolean tryLoadMissingArea( String fname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    Symbol symbol = getSymbol( th_name );
+    Symbol symbol = getSymbolByFilename( fname );
     if ( symbol == null ) {
-      String filename = TopoDroidPath.APP_SAVE_AREA_PATH + th_name;
+      String filename = TopoDroidPath.APP_SAVE_AREA_PATH + fname;
       File file = new File( filename );
       if ( ! file.exists() ) return false;
-      symbol = new SymbolArea( file.getPath(), locale, iso );
+      symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
       addSymbol( symbol );
     }
     if ( symbol == null ) return false;

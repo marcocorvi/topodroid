@@ -18,7 +18,7 @@
        android:key="DISTOX_LINE_STYLE"
        android:summary="@string/pref_linestyle_summary"
        android:title="@string/pref_linestyle_title"
-       android:defaultValue="0"
+       android:defaultValue="2"
        android:entries="@array/lineStyle"
        android:entryValues="@array/lineStyleValue" />
 

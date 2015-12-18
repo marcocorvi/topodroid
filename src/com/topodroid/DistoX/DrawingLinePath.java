@@ -68,19 +68,19 @@ public class DrawingLinePath extends DrawingPointLinePath
     int type;
     boolean closed, reversed;
     int outline;
-    String th_name, options;
+    String fname, options;
     try {
-      th_name = dis.readUTF();
+      fname = dis.readUTF();
       closed = (dis.read() == 1);
       // visible= (dis.read() == 1);
       reversed = (dis.read() == 1);
       outline = dis.readInt();
       options = dis.readUTF();
 
-      // DrawingBrushPaths.mLineLib.tryLoadMissingArea( th_name );
-      type = DrawingBrushPaths.getLineType( th_name ); 
+      // DrawingBrushPaths.mLineLib.tryLoadMissingArea( fname );
+      type = DrawingBrushPaths.mLineLib.getSymbolIndexByFilename( fname ); 
       if ( type < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addLineName( th_name );
+        if ( missingSymbols != null ) missingSymbols.addLineFilename( fname );
         type = 0;
       }
 

@@ -1144,9 +1144,11 @@ public class TopoDroidApp extends Application
 
 
   // called also by ShotActivity::updataBlockList
+  // this re-assign stations to shots with stationi(s) already set
+  //
   public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
   { 
-    // Log.v("DistoX", "assign stations nr. " + list.size() );
+    Log.v("DistoX", "assign stations after.  size " + list.size() );
     int survey_stations = TopoDroidSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean shot_after_splays = TopoDroidSetting.mShotAfterSplays;
@@ -1199,10 +1201,11 @@ public class TopoDroidApp extends Application
   }
 
   // called also by ShotActivity::updataBlockList
-  // @param blk block whose stations need to be set in the DB
+  // @param list blocks whose stations need to be set in the DB
+  //
   public void assignStations( List<DistoXDBlock> list )
   { 
-    // Log.v("DistoX", "assign stations nr. " + list.size() );
+    Log.v("DistoX", "assign stations. size " + list.size() );
     int survey_stations = TopoDroidSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean shot_after_splay = TopoDroidSetting.mShotAfterSplays;
@@ -1233,7 +1236,7 @@ public class TopoDroidApp extends Application
           mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true );  // SPLAY
           // Log.v( "DistoX", blk.mId + " null prev. FROM " + blk.mFrom );
         } else {
-          if ( prev.relativeDistance( blk ) < TopoDroidSetting.mCloseDistance ) {
+          if ( prev.relativeDistance( blk ) ) {
             if ( atStation == 0 ) {
               // checkCurrentStationName
               if ( mCurrentStationName != null ) {

@@ -136,11 +136,12 @@ public class PlotRecoverDialog extends Dialog
 
     if ( TopoDroidSetting.mBinaryTh2 ) {
       populateAdapter( TopoDroidPath.getTdrFileWithExt( mFilename ), ".tdr" );
+      mTVfilename.setText( mFilename + ".tdr" );
     } else {
       populateAdapter( TopoDroidPath.getTh2FileWithExt( mFilename ), ".th2" );
+      mTVfilename.setText( mFilename + ".th2" );
     }
     mList.setAdapter( mAdapter );
-    mTVfilename.setText( mFilename + ".th2" );
   }
 
 
@@ -149,7 +150,7 @@ public class PlotRecoverDialog extends Dialog
   {
     CharSequence item = ((TextView) view).getText();
     String[] name = item.toString().split(" ");
-    mTVfilename.setText( name[1] );
+    mTVfilename.setText( name[2] );
   }
  
   @Override

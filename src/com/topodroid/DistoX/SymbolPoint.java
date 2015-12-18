@@ -83,17 +83,18 @@ class SymbolPoint extends Symbol
  
   @Override public Paint getPaint( ) { return mPaint; }
 
-  SymbolPoint( String filename, String locale, String iso )
+  SymbolPoint( String pathname, String fname, String locale, String iso )
   {
+    super( null, fname );
     mOrientable = false;
     mHasText = false;
     mOrientation = 0.0;
-    readFile( filename, locale, iso );
+    readFile( pathname, locale, iso );
   }
 
-  SymbolPoint( String n1, String tn1, int c1, String path, boolean orientable )
+  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable )
   {
-    super( tn1, tn1 ); // FIXME filename
+    super( tn1, fname );
     mName = n1;
     mDxf    = null;
     makePaint( c1 );
@@ -109,9 +110,9 @@ class SymbolPoint extends Symbol
     mOrientation = 0.0;
   }
 
-  SymbolPoint( String n1, String tn1, int c1, String path, boolean orientable, boolean has_text )
+  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, boolean has_text )
   {
-    super( tn1, tn1 ); // FIXME filename
+    super( tn1, fname ); // FIXME fname
     mName = n1;
     mDxf    = null;
     makePaint( c1 );
@@ -162,9 +163,9 @@ class SymbolPoint extends Symbol
    *      endpath
    *      endsymbol
    */
-  void readFile( String filename, String locale, String iso )
+  void readFile( String pathname, String locale, String iso )
   {
-    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + filename + " locale " + locale );
+    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + pathname + " locale " + locale );
  
     String name    = null;
     String th_name = null;
@@ -173,8 +174,8 @@ class SymbolPoint extends Symbol
     int cnt = 0;
 
     try {
-      // FileReader fr = new FileReader( filename );
-      FileInputStream fr = new FileInputStream( filename );
+      // FileReader fr = new FileReader( pathname );
+      FileInputStream fr = new FileInputStream( pathname );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       line = br.readLine();
@@ -235,7 +236,7 @@ class SymbolPoint extends Symbol
                 mCsxCategory = Integer.parseInt( vals[k] );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, filename + " parse csurvey error: " + line );
+              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, pathname + " parse csurvey error: " + line );
             }
           } else if ( vals[k].equals("path") ) {
             path = br.readLine();
@@ -256,12 +257,12 @@ class SymbolPoint extends Symbol
                 makePaint( color );
                 makePath( path );
                 mOrigPath = new Path( mPath );
-                // mPoint1 = new SymbolPointBasic( name, th_name, color, path );
+                // mPoint1 = new SymbolPointBasic( name, th_name, fname, color, path );
               // } else if ( cnt == 1 ) {
               //   if ( mOrientable == true ) {
               //     // ERROR point1 is orientable
               //   } else {
-              //     mPoint2 = new SymbolPointBasic( name, th_name, color, path );
+              //     mPoint2 = new SymbolPointBasic( name, th_name, fname, color, path );
               //     mOrientable = true;
               //   }
               } else {
@@ -279,7 +280,7 @@ class SymbolPoint extends Symbol
       // FIXME
     }
     mOrientation = 0.0;
-    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + filename + " csurvey " + mCsxLayer );
+    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + pathname + " csurvey " + mCsxLayer );
   }
 
   private void makePath()

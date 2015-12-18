@@ -93,20 +93,20 @@ public class DrawingAreaPath extends DrawingPointLinePath
     int type, cnt;
     boolean visible;
     float orientation;
-    String th_name, prefix;
+    String fname, prefix;
     try {
-      th_name = dis.readUTF();
+      fname = dis.readUTF();
       prefix = dis.readUTF();
       cnt = dis.readInt();
       visible = ( dis.read( ) == 1 );
       orientation = dis.readFloat( );
       int npt = dis.readInt( );
 
-      // DrawingBrushPaths.mAreaLib.tryLoadMissingArea( th_name );
-      type = DrawingBrushPaths.getAreaType( th_name );
-      // Log.v("DistoX", "A: " + th_name + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
+      // DrawingBrushPaths.mAreaLib.tryLoadMissingArea( fname );
+      type = DrawingBrushPaths.mAreaLib.getSymbolIndexByFilename( fname );
+      // Log.v("DistoX", "A: " + fname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addAreaName( th_name );
+        if ( missingSymbols != null ) missingSymbols.addAreaFilename( fname );
         type = 0;
       }
 

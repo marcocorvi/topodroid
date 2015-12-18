@@ -19,11 +19,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 class Symbol implements SymbolInterface
-             // , View.OnClickListener
 {
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   String  mThName;   // therion name
-  String  mFilename; // filename
+  // String  mFilename; // filename coincide with therion name
   int     mCsxLayer;    // cSurvey layer
   int     mCsxType;
   int     mCsxCategory;
@@ -37,7 +36,7 @@ class Symbol implements SymbolInterface
   {
     mEnabled = true;
     mThName  = null;
-    mFilename = null;
+    // mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -46,11 +45,12 @@ class Symbol implements SymbolInterface
     mCsx = null;
   }
 
+  // filename not used
   Symbol( String th_name, String filename ) 
   { 
     mEnabled  = true;
     mThName   = th_name;
-    mFilename = filename;
+    // mFilename = filename;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -66,7 +66,7 @@ class Symbol implements SymbolInterface
   { 
     mEnabled  = enabled; 
     mThName   = null;
-    mFilename = null;
+    // mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -77,9 +77,9 @@ class Symbol implements SymbolInterface
 
 
   // SymbolInterface methods
-  public String getFilename()   { return mFilename; }
-  public String getName()       { return "undefined"; }
   public String getThName()     { return mThName; }
+  public String getFilename()   { return mThName; /* mFilename; */ }
+  public String getName()       { return "undefined"; }
   public Paint  getPaint()      { return null; }
   public Path   getPath()       { return null; }
   public boolean isOrientable() { return false; }

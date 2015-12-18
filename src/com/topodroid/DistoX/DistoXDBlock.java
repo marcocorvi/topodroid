@@ -191,21 +191,31 @@ public class DistoXDBlock
 
   public int color() { return colors[ mType ]; }
 
-  public float relativeDistance( DistoXDBlock b )
+  public boolean relativeDistance( DistoXDBlock b )
   {
-    if ( b == null ) return 10000.0f; // a large distance
-    float cc = TDMath.cosd( mClino );
-    float sc = TDMath.sind( mClino );
-    float cb = TDMath.cosd( mBearing ); 
-    float sb = TDMath.sind( mBearing ); 
-    Vector v1 = new Vector( mLength * cc * sb, mLength * cc * cb, mLength * sc );
+    if ( b == null ) return false;
+    float cc, sc, cb, sb, len;
+    len = mLength;
+    cc = TDMath.cosd( mClino );
+    sc = TDMath.sind( mClino );
+    cb = TDMath.cosd( mBearing ); 
+    sb = TDMath.sind( mBearing ); 
+    Vector v1 = new Vector( len * cc * sb, len * cc * cb, len * sc );
+    len = b.mLength;
     cc = TDMath.cosd( b.mClino );
     sc = TDMath.sind( b.mClino );
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
-    Vector v2 = new Vector( b.mLength * cc * sb, b.mLength * cc * cb, b.mLength * sc );
+    Vector v2 = new Vector( len * cc * sb, len * cc * cb, len * sc );
     float dist = (v1.minus(v2)).Length();
-    return dist/mLength + dist/b.mLength; 
+    return ( dist/mLength + dist/b.mLength ) < TopoDroidSetting.mCloseDistance;
+    // if ( ret ) {
+    //   Log.v("DistoX", "dist " + dist + " " + mLength + " " + mBearing + " " + mClino + " " + v1.x + " " + v1.y + " " + v1.z);
+    //   Log.v("DistoX", "  " + b.mLength + " " + b.mBearing + " " + b.mClino + " " + v2.x + " " + v2.y + " " + v2.z);
+    //   Log.v("DistoX", "  " + dist/v1.Length() + " " + dist/v2.Length() );
+    // }
+    // return ret;
+      
   }
   
   private void formatFlag( PrintWriter pw )

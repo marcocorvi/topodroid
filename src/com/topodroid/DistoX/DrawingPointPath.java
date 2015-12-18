@@ -81,20 +81,20 @@ public class DrawingPointPath extends DrawingPath
     float ccx, ccy, orientation;
     int   type;
     int   scale;
-    String th_name, options;
+    String fname, options;
     try {
       ccx = x + dis.readFloat();
       ccy = y + dis.readFloat();
-      th_name = dis.readUTF( );
+      fname = dis.readUTF( );
       orientation = dis.readFloat();
       scale   = dis.readInt();
       options = dis.readUTF();
 
-      DrawingBrushPaths.mPointLib.tryLoadMissingPoint( th_name );
-      type = DrawingBrushPaths.getPointType( th_name );
-      // Log.v("DistoX", "P " + th_name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      DrawingBrushPaths.mPointLib.tryLoadMissingPoint( fname );
+      type = DrawingBrushPaths.mPointLib.getSymbolIndexByFilename( fname );
+      // Log.v("DistoX", "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
-        if ( missingSymbols != null ) missingSymbols.addPointName( th_name ); 
+        if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
         type = 0;
       }
       DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, options );

@@ -440,7 +440,7 @@ class DistoXNum
   //         { // sf == null && st == null
   //           // secondary leg shot ?
   //           if ( lastLeg != null ) {
-  //             if ( block.relativeDistance( lastLeg.getFirstBlock() ) < TopoDroidApp.mCloseDistance ) {
+  //             if ( block.relativeDistance( lastLeg.getFirstBlock() ) )  {
   //               lastLeg.addBlock( block );
   //             } else { // splay
   //               lastLeg = null;
@@ -687,7 +687,7 @@ class DistoXNum
         case DistoXDBlock.BLOCK_BLANK_LEG:
         case DistoXDBlock.BLOCK_BLANK:
           if (lastLeg != null ) {
-            if ( blk.relativeDistance( lastLeg.getFirstBlock() ) < TopoDroidSetting.mCloseDistance ) {
+            if ( blk.relativeDistance( lastLeg.getFirstBlock() ) ) {
               lastLeg.addBlock( blk );
             }
           }

@@ -94,7 +94,7 @@ class DrawingSvg
       // {
       //   // // 8 layer (0), 2 block name,
       //   for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
-      //     SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbol(n);
+      //     SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex(n);
 
       //     int block = 1+n; // block_name = 1 + therion_code
       //     writeString( out, 8, "POINT" );
@@ -232,7 +232,7 @@ class DrawingSvg
             //   pw5.format(Locale.ENGLISH, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
             //   pw5.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
             } else {
-              SymbolPoint sp = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbol( idx );
+              SymbolPoint sp = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex( idx );
               if ( sp != null ) {
                 pw5.format(Locale.ENGLISH, "<g transform=\"translate(%.0f,%.0f),scale(10),rotate(%.0f)\" \n", 
                   point.cx, point.cy, point.mOrientation );

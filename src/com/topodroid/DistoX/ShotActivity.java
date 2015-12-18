@@ -277,7 +277,7 @@ public class ShotActivity extends Activity
     
   public void updateDisplay( )
   {
-    // Log.v( TopoDroidApp.TAG, "updateDisplay() " );
+    // Log.v( "DistoX", "update Display() " );
 
     DataHelper data = mApp.mData;
     if ( data != null && mApp.mSID >= 0 ) {
@@ -324,7 +324,7 @@ public class ShotActivity extends Activity
   public void updateBlockList( DistoXDBlock blk )
   {
     // FIXME MULTIPLE LIST
-    // Log.v("DistoX", "update block list: " + blk.dataString("%.2f %.1f %.1f") );
+    // Log.v("DistoX", "update block list: " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     if ( mDataAdapter != null ) {
       mDataAdapter.addDataBlock( blk );
       mApp.assignStations( mDataAdapter.mItems );
@@ -347,6 +347,7 @@ public class ShotActivity extends Activity
   private void updateShotList( List<DistoXDBlock> list, List< PhotoInfo > photos )
   {
     TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
+    // Log.v( "DistoX", "update Shot List shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
@@ -359,6 +360,7 @@ public class ShotActivity extends Activity
 
   private void processShotList( List<DistoXDBlock> list )
   {
+    // Log.v("DistoX", "process shot list");
     DistoXDBlock prev = null;
     boolean prev_is_leg = false;
     for ( DistoXDBlock item : list ) {
@@ -367,8 +369,8 @@ public class ShotActivity extends Activity
 
       // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
 
-      if ( cur.mType == DistoXDBlock.BLOCK_SEC_LEG || cur.relativeDistance( prev ) < TopoDroidSetting.mCloseDistance ) {
-
+      if ( cur.mType == DistoXDBlock.BLOCK_SEC_LEG || cur.relativeDistance( prev ) ) {
+        // Log.v( "DistoX", "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
         if ( cur.mType == DistoXDBlock.BLOCK_BLANK ) {   // FIXME 20140612
           cur.mType = DistoXDBlock.BLOCK_SEC_LEG;
           mApp.mData.updateShotLeg( cur.mId, mApp.mSID, 1L, true ); // cur.mType ); // FIXME 20140616
@@ -404,6 +406,7 @@ public class ShotActivity extends Activity
           }
         }
       } else {
+        // Log.v( "DistoX", "item not close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
         // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "not close distance");
         prev_is_leg = false;
         if ( DistoXDBlock.isTypeBlank(t) ) {
@@ -424,6 +427,7 @@ public class ShotActivity extends Activity
         }
       }
       // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+      // Log.v( "DistoX", "shot adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
       mDataAdapter.add( cur );
     }
   }
@@ -1197,15 +1201,11 @@ public class ShotActivity extends Activity
     for ( DistoXDBlock b : list ) {
       if ( b.isTypeBlank() ) {
         // Log.v( TopoDroidApp.TAG, "BLANK " + b.mLength + " " + b.mBearing + " " + b.mClino );
-        if ( ret != null ) {
-          if ( ret.relativeDistance( b ) < TopoDroidSetting.mCloseDistance ) return ret;
-        }
+        if ( ret != null && ret.relativeDistance( b ) ) return ret;
         ret = b;
       } else if ( b.mType == DistoXDBlock.BLOCK_SEC_LEG ) {
         // Log.v( TopoDroidApp.TAG, "LEG " + b.mLength + " " + b.mBearing + " " + b.mClino );
-        if ( ret != null ) {
-          if ( ret.relativeDistance( b ) < TopoDroidSetting.mCloseDistance ) return ret;
-        }
+        if ( ret != null &&  ret.relativeDistance( b ) ) return ret;
       } else {
         // Log.v( TopoDroidApp.TAG, "OTHER " + b.mLength + " " + b.mBearing + " " + b.mClino );
         ret = null;
@@ -1238,7 +1238,7 @@ public class ShotActivity extends Activity
         return b;
       } else if (    DistoXDBlock.isTypeBlank( t )
                   && mNextPos+1 < mDataAdapter.size()
-                  && b.relativeDistance( mDataAdapter.get(mNextPos+1) ) < TopoDroidSetting.mCloseDistance ) {
+                  && b.relativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
         return b;
       }
       ++ mNextPos;
@@ -1294,7 +1294,7 @@ public class ShotActivity extends Activity
       // update same shots of the given block
       List< DistoXDBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
       for ( DistoXDBlock blk1 : blk_list ) {
-        if ( blk1.relativeDistance( blk ) > TopoDroidSetting.mCloseDistance ) break;
+        if ( ! blk1.relativeDistance( blk ) ) break;
         mApp.mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
       }
     }
@@ -1321,7 +1321,7 @@ public class ShotActivity extends Activity
           // // update same shots of the given block: SHOULD NOT HAPPEN
           // List< DistoXDBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
           // for ( DistoXDBlock blk1 : blk_list ) {
-          //   if ( blk1.relativeDistance( blk ) > mApp.mCloseDistance ) break;
+          //   if ( ! blk1.relativeDistance( blk ) ) break;
           //   mApp.mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
           // }
         }
@@ -1434,6 +1434,7 @@ public class ShotActivity extends Activity
 
   void renumberShotsAfter( DistoXDBlock blk )
   {
+    // Log.v("DistoX", "renumber shots after " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     // NEED TO FORWARD to the APP to change the stations accordingly
     List< DistoXDBlock > shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
     mApp.assignStationsAfter( blk, shots );
