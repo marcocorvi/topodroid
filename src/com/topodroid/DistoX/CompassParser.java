@@ -166,8 +166,7 @@ public class CompassParser extends ImportParser
                                  extend, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + e );
+              TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
             }
           }
         }
@@ -175,7 +174,7 @@ public class CompassParser extends ImportParser
       }
     } catch ( IOException e ) {
       // TODO
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
+      TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
     if ( mDate == null ) {

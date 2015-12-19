@@ -74,7 +74,7 @@ public class UndeleteDialog extends Dialog
           mData.undeletePlot( Long.parseLong( value[1] ), mSID );
         }
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "undelete parse error: item " + item.toString() );
+        TopoDroidLog.Error( "undelete parse error: item " + item.toString() );
       }
     }
     dismiss();

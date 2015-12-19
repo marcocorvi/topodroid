@@ -20,7 +20,11 @@ import android.graphics.Matrix;
 
 import java.util.Locale;
 
-// import android.util.Log;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import android.util.Log;
 
 /**
  * station points do not shift (!)
@@ -29,8 +33,7 @@ public class DrawingStationPath extends DrawingPath
 {
   private static float toTherion = TopoDroidConst.TO_THERION;
 
-  float mXpos;                // X-Y station position (scene)
-  float mYpos;
+  // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
   protected int mScale;       //! symbol scale
   String mName;               // station name
 
@@ -38,14 +41,17 @@ public class DrawingStationPath extends DrawingPath
   public DrawingStationPath( String name, float x, float y, int scale )
   {
     super( DrawingPath.DRAWING_PATH_STATION );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + mType + " X " + x + " Y " + y );
+    // Log.v( "DistoX", "User Station (1) " + mType + " X " + x + " Y " + y );
     // mType = DRAWING_PATH_STATION;
-    mXpos = x;
-    mYpos = y;
+    // mXpos = x;
+    // mYpos = y;
+    cx = x;
+    cy = y;
     mName = name;
 
     mScale = DrawingPointPath.SCALE_NONE; // scale
-    mPath = null;
+    // mPath = null;
     setScale( scale );
     mPaint = DrawingBrushPaths.mStationSymbol.mPaint;
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
@@ -54,14 +60,17 @@ public class DrawingStationPath extends DrawingPath
   public DrawingStationPath( DrawingStationName st, int scale )
   {
     super( DrawingPath.DRAWING_PATH_STATION );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
+    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + mType + " X " + st.cx + " Y " + st.cy );
+    // Log.v( "DistoX", "User Station (2) " + mType + " X " + st.cx + " Y " + st.cy );
     // mType = DRAWING_PATH_STATION;
-    mXpos = st.cx;  // st.cx : scene coords
-    mYpos = st.cy;
+    // mXpos = st.cx;  // st.cx : scene coords
+    // mYpos = st.cy;
+    cx = st.cx;  // st.cx : scene coords
+    cy = st.cy;
     mName = st.mName;
 
     mScale = DrawingPointPath.SCALE_NONE; // scale
-    mPath = null;
+    // mPath = null;
     setScale( scale );
     mPaint = DrawingBrushPaths.mStationSymbol.mPaint;
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
@@ -70,6 +79,7 @@ public class DrawingStationPath extends DrawingPath
   void setScale( int scale )
   {
     if ( scale != mScale ) {
+      TopoDroidLog.Error( "set scale " + scale );
       mScale = scale;
       // station point does not have text
       float f = 1.0f;
@@ -81,17 +91,11 @@ public class DrawingStationPath extends DrawingPath
       }
       Matrix m = new Matrix();
       m.postScale(f,f);
-      makePath( DrawingBrushPaths.mStationSymbol.mPath, m, mXpos, mYpos );
+      makePath( DrawingBrushPaths.mStationSymbol.mPath, m, cx, cy ); // mXpos, mYpos );
     }  
   }
       
   // int getScale() { return mScale; }
-
-  // public void setPos( float x, float y ) 
-  // {
-  //   mXpos = x;
-  //   mYpos = y;
-  // }
 
   // public void setPointType( int t ) { mPointType = t; }
   // public int pointType() { return mPointType; }
@@ -101,23 +105,41 @@ public class DrawingStationPath extends DrawingPath
 
   // public double orientation() { return mOrientation; }
 
-  float distance( float x, float y )
-  {
-    double dx = x - mXpos;
-    double dy = y - mYpos;
-    return (float)( Math.sqrt( dx*dx + dy*dy ) );
-  }
 
   @Override
   public String toTherion()
   {
-    // Log.v( TopoDroidApp.TAG, "toTherion() Point " + mPointType + " orientation " + mOrientation + " flip " +
-    //                  mFlip + " flippable " +
-    //                  DrawingBrushPaths.canFlip( mPointType ) );
-
-    return String.format(Locale.ENGLISH, "point %.2f %.2f station -name %s\n", mXpos*toTherion, -mYpos*toTherion, mName );
+    // return String.format(Locale.ENGLISH, "point %.2f %.2f station -name %s\n", mXpos*toTherion, -mYpos*toTherion, mName );
+    return String.format(Locale.ENGLISH, "point %.2f %.2f station -name %s\n", cx*toTherion, -cy*toTherion, mName );
   }
 
+  @Override
+  void toDataStream( DataOutputStream dos )
+  {
+    try {
+      dos.write('U');
+      dos.writeFloat( cx );
+      dos.writeFloat( cy );
+      dos.writeInt( mScale );
+      dos.writeUTF( mName );
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "ERROR-dos station " + mName );
+    }
+  }
+
+  static DrawingStationPath loadDataStream( int version, DataInputStream dis )
+  {
+    try {
+      float x = dis.readFloat();
+      float y = dis.readFloat();
+      int scale = dis.readInt();
+      String name = dis.readUTF();
+      return new DrawingStationPath( name, x, y, scale );
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "ERROR-dis station ");
+    }
+    return null;
+  }
 
 }
 

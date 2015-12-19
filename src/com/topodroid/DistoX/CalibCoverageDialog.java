@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import android.widget.Toast;
-
 import android.content.Context;
 
 import android.widget.Button;
@@ -249,7 +248,7 @@ public class CalibCoverageDialog extends Dialog
       float d = (j%10)/10.0f;
       int j1off = t_offset[j1];
       int j2off = t_offset[j2];
-      float amax = 180.0f * (float)( Math.sqrt( 1.0 - (clino/90.0f)*(clino/90.0f) ) );
+      float amax = 180.0f * TDMath.sqrt( 1 - (clino/90.0f)*(clino/90.0f) );
       // if ( amax < 1.0 ) amax = 1.0;
       int ioff = (180 - (int)(amax)) / 2;
       if (ioff < 0 ) ioff = 0;

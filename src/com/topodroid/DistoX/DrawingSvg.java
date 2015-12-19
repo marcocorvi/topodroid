@@ -60,10 +60,10 @@ class DrawingSvg
         if ( pp.cy > ymax ) ymax = pp.cy;
       } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
         DrawingStationPath st = (DrawingStationPath)p;
-        if ( st.mXpos < xmin ) xmin = st.mXpos;
-        if ( st.mXpos > xmax ) xmax = st.mXpos;
-        if ( st.mYpos < ymin ) ymin = st.mYpos;
-        if ( st.mYpos > ymax ) ymax = st.mYpos;
+        if ( st.cx < xmin ) xmin = st.cx;
+        if ( st.cx > xmax ) xmax = st.cx;
+        if ( st.cy < ymin ) ymin = st.cy;
+        if ( st.cy > ymax ) ymax = st.cy;
       }
     }
     int width = (int)(xmax - xmin) + 200;
@@ -188,7 +188,7 @@ class DrawingSvg
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
             DrawingStationPath st = (DrawingStationPath)path;
             pw5.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
-            pw5.format(Locale.ENGLISH, " x=\"%.0f\" y=\"%.0f\">", st.mXpos, st.mYpos );
+            pw5.format(Locale.ENGLISH, " x=\"%.0f\" y=\"%.0f\">", st.cx, st.cy );
             pw5.format("%s</text>\n", st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath) path;
@@ -258,7 +258,7 @@ class DrawingSvg
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "SVG io-exception " + e.toString() );
+      TopoDroidLog.Error( "SVG io-exception " + e.toString() );
     }
   }
 

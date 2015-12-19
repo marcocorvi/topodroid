@@ -254,7 +254,7 @@ public class SyncService
   // called by the Connect-Thread
   private void connectionFailed()  
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "sync connection failed");
+    TopoDroidLog.Error( "sync connection failed");
     mRemoteDevice = null;
     setConnectState(STATE_NONE);
     mType = STATE_NONE;
@@ -265,7 +265,7 @@ public class SyncService
   // called by the connected-Thread
   private void connectionLost() 
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "sync connection lost");
+    TopoDroidLog.Error( "sync connection lost");
     mRemoteDevice = null;
     setConnectState(STATE_NONE);
     Message msg = mHandler.obtainMessage( MESSAGE_LOST_CONN );
@@ -291,7 +291,7 @@ public class SyncService
       try { // Create a new listening server socket
         tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
       } catch (IOException e) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "listen() failed " + e);
+        TopoDroidLog.Error( "listen() failed " + e);
       }
       mmServerSocket = tmp;
     }
@@ -307,7 +307,7 @@ public class SyncService
           // Log.v("DistoX", "sync accept listening ... ");
           socket = mmServerSocket.accept(); // blocking call
         } catch (IOException e) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "accept() failed " + e);
+          TopoDroidLog.Error( "accept() failed " + e);
           break;
         }
 
@@ -323,7 +323,7 @@ public class SyncService
                 try {
                   socket.close();
                 } catch (IOException e) {
-                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Could not close unwanted socket " + e);
+                  TopoDroidLog.Error( "Could not close unwanted socket " + e);
                 }
                 break;
             }
@@ -341,7 +341,7 @@ public class SyncService
         mAcceptRun = false;
         mmServerSocket.close();
       } catch (IOException e) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close() of server failed " + e);
+        TopoDroidLog.Error( "close() of server failed " + e);
       }
     }
   }
@@ -371,7 +371,7 @@ public class SyncService
         //
         tmp = mmDevice.createRfcommSocketToServiceRecord( MY_UUID );
       } catch (IOException e) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ConnectingThread cstr failed " + e);
+        TopoDroidLog.Error( "ConnectingThread cstr failed " + e);
       }
       mmSocket = tmp;
     }
@@ -389,7 +389,7 @@ public class SyncService
         try { // Close the socket
           mmSocket.close();
         } catch (IOException e2) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "unable to close() socket during connection failure " + e2);
+          TopoDroidLog.Error( "unable to close() socket during connection failure " + e2);
         }
         // SyncService.this.start(); // Start the service over to restart listening mode
         return;
@@ -408,7 +408,7 @@ public class SyncService
       try {
         mmSocket.close();
       } catch (IOException e) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close() of connect socket failed " + e);
+        TopoDroidLog.Error( "close() of connect socket failed " + e);
       }
     }
   }
@@ -433,7 +433,7 @@ public class SyncService
         tmpIn = socket.getInputStream();
         tmpOut = socket.getOutputStream();
       } catch (IOException e) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "temp sockets not created " + e);
+        TopoDroidLog.Error( "temp sockets not created " + e);
       }
 
       mmInStream = tmpIn;
@@ -476,11 +476,11 @@ public class SyncService
             }
           }
         } catch (IOException e) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "disconnected " + e);
+          TopoDroidLog.Error( "disconnected " + e);
           try { // Close the socket
             mmSocket.close();
           } catch (IOException e2) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "unable to close() socket during connection failure " + e2);
+            TopoDroidLog.Error( "unable to close() socket during connection failure " + e2);
           }
           connectionLost();
           break;
@@ -511,7 +511,7 @@ public class SyncService
         // Share the sent message back to the UI Activity: NOT USED .... FIXME
         // mHandler.obtainMessage( MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
       } catch (IOException e) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Exception during write " + e );
+        TopoDroidLog.Error( "Exception during write " + e );
         return false;
       }
       return true;
@@ -524,7 +524,7 @@ public class SyncService
         mmInStream.close();
         mmSocket.close();
       } catch (IOException e) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close() of connect socket failed " + e );
+        TopoDroidLog.Error( "close() of connect socket failed " + e );
       }
     }
   }

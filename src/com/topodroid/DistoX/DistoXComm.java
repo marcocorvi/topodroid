@@ -132,7 +132,7 @@ public class DistoXComm
           } else if (state == BluetoothDevice.BOND_BONDING && prevState == BluetoothDevice.BOND_BONDED) {
             TopoDroidLog.Log( TopoDroidLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
             if ( mBTSocket != null ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "[*] socket is not null: close and retry connect ");
+              TopoDroidLog.Error( "[*] socket is not null: close and retry connect ");
               mApp.mDataDownloader.setConnected( false );
               mApp.notifyStatus();
               closeSocket( );
@@ -230,7 +230,7 @@ public class DistoXComm
             }
           }
         } else if ( res == DistoXProtocol.DISTOX_ERR_OFF ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "RFcomm readPacket returns ERR_OFF " );
+          TopoDroidLog.Error( "RFcomm readPacket returns ERR_OFF " );
           // if ( TopoDroidSetting.mCommType == 1 && TopoDroidSetting.mAutoReconnect ) { // FIXME ACL_DISCONNECT
           //   mApp.mDataDownloader.setConnected( false );
           //   mApp.notifyStatus();
@@ -355,7 +355,7 @@ public class DistoXComm
       try {
         mRfcommThread.join();
       } catch ( InterruptedException e ) {
-        // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "cancel thread interrupt " + e.getMessage() );
+        // TopoDroidLog.Error( "cancel thread interrupt " + e.getMessage() );
       } finally {
         // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "cancel Rfcomm thread: nulling thread");
         mRfcommThread = null;
@@ -378,14 +378,14 @@ public class DistoXComm
 
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "close socket() address " + mAddress );
     for ( int k=0; k<1 && mBTSocket != null; ++k ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "try close socket nr " + k );
+      // TopoDroidLog.Error( "try close socket nr " + k );
       cancelRfcommThread();
       closeProtocol();
       try {
         mBTSocket.close();
         mBTSocket = null;
       } catch ( IOException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close socket IOexception " + e.getMessage() );
+        TopoDroidLog.Error( "close socket IOexception " + e.getMessage() );
         // TopoDroidLog.LogStackTrace( e );
       } finally {
         mBTConnected = false;
@@ -432,7 +432,7 @@ public class DistoXComm
         try {
           mBTSocket.close();
         } catch ( IOException e ) { 
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "close Socket IO " + e.getMessage() );
+          TopoDroidLog.Error( "close Socket IO " + e.getMessage() );
         }
         mBTSocket = null;
       }
@@ -491,19 +491,19 @@ public class DistoXComm
           }
 
         } catch ( InvocationTargetException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket invoke target " + e.getMessage() );
+          TopoDroidLog.Error( "create Socket invoke target " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         } catch ( UnsupportedEncodingException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket encoding " + e.getMessage() );
+          TopoDroidLog.Error( "create Socket encoding " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         } catch ( NoSuchMethodException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket no method " + e.getMessage() );
+          TopoDroidLog.Error( "create Socket no method " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         } catch ( IllegalAccessException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket access " + e.getMessage() );
+          TopoDroidLog.Error( "create Socket access " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         } catch ( IOException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket IO " + e.getMessage() );
+          TopoDroidLog.Error( "create Socket IO " + e.getMessage() );
           if ( mBTSocket != null ) { mBTSocket = null; }
         }
       } else {
@@ -516,7 +516,7 @@ public class DistoXComm
         mProtocol = new DistoXProtocol( mBTSocket, mApp.mDevice );
         mAddress = address;
       } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "create Socket fail");
+        TopoDroidLog.Error( "create Socket fail");
         if ( mProtocol != null ) mProtocol.closeIOstreams();
         mProtocol = null;
         mAddress = null;
@@ -542,7 +542,7 @@ public class DistoXComm
       //   }
       // }
     } catch ( Exception e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "get uuids error " + e.getMessage() );
+      TopoDroidLog.Error( "get uuids error " + e.getMessage() );
     }
   }
 
@@ -571,7 +571,7 @@ public class DistoXComm
             mBTSocket.connect();
             mBTConnected = true;
           } catch ( IOException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "connect socket() (port " + port + ") IO error " + e.getMessage() );
+            TopoDroidLog.Error( "connect socket() (port " + port + ") IO error " + e.getMessage() );
             // TopoDroidLog.LogStackTrace( e );
             closeSocket();
             // mBTSocket = null;
@@ -583,7 +583,7 @@ public class DistoXComm
         // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket() port " + port + " connected " + mBTConnected );
       }
     } else {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "connect socket() null socket");
+      TopoDroidLog.Error( "connect socket() null socket");
     }
     // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "connect socket() result " + mBTConnected );
     return mBTConnected;
@@ -598,12 +598,12 @@ public class DistoXComm
         mRfcommThread.start();
         // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "startRFcommThread started");
       } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "startRFcommThread already running");
+        TopoDroidLog.Error( "startRFcommThread already running");
       }
       return true;
     } else {
       mRfcommThread = null;
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "startRFcommThread: null socket");
+      TopoDroidLog.Error( "startRFcommThread: null socket");
       return false;
     }
   }
@@ -617,9 +617,9 @@ public class DistoXComm
   //     if ( mProtocol != null ) {
   //       return startRfcommThread( -1, lister );
   //     }
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "connect RemoteDevice null protocol");
+  //     TopoDroidLog.Error( "connect RemoteDevice null protocol");
   //   } else {
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "connect RemoteDevice failed on connectSocket()" );
+  //     TopoDroidLog.Error( "connect RemoteDevice failed on connectSocket()" );
   //   }
   //   destroySocket( );
   //   return false;
@@ -712,7 +712,7 @@ public class DistoXComm
   public boolean toggleCalibMode( String address, int type )
   {
     if ( ! checkRfcommThreadNull( "toggle Calib Mode: address " + address + " type " + type ) ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "toggle Calib Mode address " + address + " not null RFcomm thread" );
+      TopoDroidLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
       return false;
     }
     boolean ret = false;
@@ -721,7 +721,7 @@ public class DistoXComm
         case Device.DISTO_A3:
           byte[] result = new byte[4];
           if ( ! mProtocol.read8000( result ) ) { // FIXME ASYNC
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "toggle Calib Mode A3 failed read8000" );
+            TopoDroidLog.Error( "toggle Calib Mode A3 failed read8000" );
             destroySocket( );
             return false;
           }
@@ -911,7 +911,7 @@ public class DistoXComm
   public int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( ! checkRfcommThreadNull( "download data: address " + address ) ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: RFcomm thread not null");
+      TopoDroidLog.Error( "download data: RFcomm thread not null");
       return DistoXProtocol.DISTOX_ERR_CONNECTED;
     }
     
@@ -943,12 +943,12 @@ public class DistoXComm
         }
         // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "download done: read " + nReadPackets );
       // } else {
-      //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: unknown DistoType " + mApp.distoType() );
+      //   TopoDroidLog.Error( "download data: unknown DistoType " + mApp.distoType() );
       // }
       // cancelRfcommThread(); // called by closeSocket() which is called by destroySocket()
       ret = nReadPackets;
     } else {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: fail to connect socket");
+      TopoDroidLog.Error( "download data: fail to connect socket");
     }
     destroySocket( );
     

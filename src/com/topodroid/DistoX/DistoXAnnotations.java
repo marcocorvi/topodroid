@@ -66,7 +66,7 @@ public class DistoXAnnotations extends Dialog // Activity
       }
       fr.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Log(  TopoDroidLog.LOG_ERR, "load IOexception " + e.toString() );
+      TopoDroidLog.Error(  "load IOexception " + e.toString() );
     }
   }
 
@@ -80,7 +80,7 @@ public class DistoXAnnotations extends Dialog // Activity
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Log(  TopoDroidLog.LOG_ERR, "save IOexception " + e.toString() );
+      TopoDroidLog.Error(  "save IOexception " + e.toString() );
     }
   }
 
@@ -95,7 +95,7 @@ public class DistoXAnnotations extends Dialog // Activity
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Log(  TopoDroidLog.LOG_ERR, "append IOexception " + e.toString() );
+      TopoDroidLog.Error(  "append IOexception " + e.toString() );
     }
   }
 

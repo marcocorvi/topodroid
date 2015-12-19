@@ -1,4 +1,4 @@
-/* @file DrawingSurface.java      dos.writeInt( TopoDroidApp.VERSION_CODE );
+/* @file DrawingSurface.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -296,42 +296,21 @@ public class DrawingSurface extends SurfaceView
       // commandManager.addFixedPath( path, selectable );
     }
 
-    public void setNorthPath( DrawingPath path )
-    {
-      commandManager.setNorth( path );
-    }
+    public void setNorthPath( DrawingPath path ) { commandManager.setNorth( path ); }
 
-    public void setFirstReference( DrawingPath path )
-    {
-      commandManager.setFirstReference( path );
-    }
+    public void setFirstReference( DrawingPath path ) { commandManager.setFirstReference( path ); }
 
-    public void setSecondReference( DrawingPath path )
-    {
-      commandManager.setSecondReference( path );
-    }
+    public void setSecondReference( DrawingPath path ) { commandManager.setSecondReference( path ); }
 
 
     // k : grid type 1, 10, 100
-    public void addGridPath( DrawingPath path, int k )
-    {
-      commandManager.addGrid( path, k );
-    }
+    public void addGridPath( DrawingPath path, int k ) { commandManager.addGrid( path, k ); }
 
-    public void addDrawingPath (DrawingPath drawingPath)
-    {
-      commandManager.addCommand(drawingPath);
-    }
+    public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
     
-    // void setBounds( float x1, float x2, float y1, float y2 )
-    // {
-    //   commandManager.setBounds( x1, x2, y1, y2 );
-    // }
+    // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
 
-    public boolean hasMoreRedo()
-    {
-      return commandManager.hasMoreRedo();
-    }
+    public boolean hasMoreRedo() { return commandManager.hasMoreRedo(); }
 
     public void redo()
     {
@@ -345,15 +324,14 @@ public class DrawingSurface extends SurfaceView
       commandManager.undo();
     }
 
-    public boolean hasMoreUndo()
-    {
-      return commandManager.hasMoreUndo();
-    }
+    public boolean hasMoreUndo() { return commandManager.hasMoreUndo(); }
 
-    public boolean hasStationName( String name )
-    {
-      return commandManager.hasStationName( name );
-    }
+    // public boolean hasStationName( String name ) { return commandManager.hasUserStation( name ); }
+
+    DrawingStationPath getStationPath( String name ) { return commandManager.getUserStation( name ); }
+
+    void addDrawingStationPath( DrawingStationPath path ) { commandManager.addUserStation( path ); }
+    void removeDrawingStationPath( DrawingStationPath path ) { commandManager.removeUserStation( path ); }
 
     public Bitmap getBitmap( long type )
     {
@@ -365,51 +343,24 @@ public class DrawingSurface extends SurfaceView
 
     // @param lp   point
     // @param type line type
-    DrawingLinePath getLineToContinue( LinePoint lp, int type )
-    {
-      return commandManager.getLineToContinue( lp, type );
-    }
+    DrawingLinePath getLineToContinue( LinePoint lp, int type ) { return commandManager.getLineToContinue( lp, type ); }
  
     /** add the points of the first line to the second line
      */
-    void addLineToLine( DrawingLinePath line, DrawingLinePath line0 )
-    {
-      commandManager.addLineToLine( line, line0 );
-    }
+    void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { commandManager.addLineToLine( line, line0 ); }
 
     // ---------------------------------------------------------------------
     // SELECT - EDIT
 
-    // public SelectionPoint getPointAt( float x, float y )
-    // {
-    //   return commandManager.getPointAt( x, y );
-    // }
+    // public SelectionPoint getPointAt( float x, float y ) { return commandManager.getPointAt( x, y ); }
+    // public SelectionPoint getLineAt( float x, float y ) { return commandManager.getLineAt( x, y ); }
+    // public SelectionPoint getAreaAt( float x, float y ) { return commandManager.getAreaAt( x, y ); }
+    // public SelectionPoint getShotAt( float x, float y ) { return commandManager.getShotAt( x, y ); }
 
-    // public SelectionPoint getLineAt( float x, float y )
-    // {
-    //   return commandManager.getLineAt( x, y );
-    // }
+    // x,y canvas coords
+    DrawingStationName getStationAt( float x, float y ) { return commandManager.getStationAt( x, y ); }
 
-    // public SelectionPoint getAreaAt( float x, float y )
-    // {
-    //   return commandManager.getAreaAt( x, y );
-    // }
-
-    DrawingStationName getStationAt( float x, float y ) // x,y canvas coords
-    {
-      return commandManager.getStationAt( x, y );
-    }
-      
-
-    // public SelectionPoint getShotAt( float x, float y )
-    // {
-    //   return commandManager.getShotAt( x, y );
-    // }
-
-    SelectionSet getItemsAt( float x, float y, float zoom )
-    {
-      return commandManager.getItemsAt( x, y, zoom );
-    }
+    SelectionSet getItemsAt( float x, float y, float zoom ) { return commandManager.getItemsAt( x, y, zoom ); }
 
     boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
     
@@ -441,7 +392,6 @@ public class DrawingSurface extends SurfaceView
     public void surfaceCreated(SurfaceHolder mHolder) 
     {
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceCreated " );
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "surfaceCreated " );
       if ( mDrawThread == null ) {
         mDrawThread = new DrawThread(mHolder);
       }
@@ -454,7 +404,6 @@ public class DrawingSurface extends SurfaceView
     {
       mSurfaceCreated = false;
       TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceDestroyed " );
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "surfaceDestroyed " );
       boolean retry = true;
       mDrawThread.setRunning(false);
       while (retry) {
@@ -488,22 +437,6 @@ public class DrawingSurface extends SurfaceView
       }
     }
 
-  private String readLine( BufferedReader br )
-  {
-    String line = null;
-    try {
-      line = br.readLine();
-    } catch ( IOException e ) {
-      e.printStackTrace();
-    }
-    if ( line != null ) {
-      line = line.trim();
-      line.replaceAll(" *", " ");
-      // line.replaceAll("\\s+", " ");
-    }
-    return line;
-  } 
-
   private SymbolsPalette preparePalette()
   {
     SymbolsPalette palette = new SymbolsPalette();
@@ -533,7 +466,7 @@ public class DrawingSurface extends SurfaceView
     SymbolsPalette localPalette = preparePalette();
     commandManager = mCommandManager1;
     if ( (new File(th2)).exists() ) {
-      return doLoadTherion( th2, xdelta, ydelta, missingSymbols, localPalette );
+      return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
     }
     return false;
   }
@@ -545,9 +478,9 @@ public class DrawingSurface extends SurfaceView
     SymbolsPalette localPalette = preparePalette();
     commandManager = mCommandManager1;
     if ( (new File(tdr)).exists() ) {
-      return doLoadDataStream( tdr, xdelta, ydelta, missingSymbols, localPalette );
+      return DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, missingSymbols, localPalette, null, false );
     } else if ( th2 != null && (new File(th2)).exists() ) {
-      return doLoadTherion( th2, xdelta, ydelta, missingSymbols, localPalette );
+      return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
     }
     return false;
   }
@@ -561,12 +494,12 @@ public class DrawingSurface extends SurfaceView
     if ( th21 != null ) {
       commandManager = mCommandManager1;
       commandManager.clearSketchItems();
-      ret = ret && doLoadTherion( th21, 0, 0, missingSymbols, localPalette );
+      ret = ret && DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
     }
     if ( th22 != null ) {
       commandManager = mCommandManager2;
       commandManager.clearSketchItems();
-      ret = ret && doLoadTherion( th22, 0, 0, missingSymbols, localPalette );
+      ret = ret && DrawingIO.doLoadTherion( this, th22, 0, 0, missingSymbols, localPalette );
     }
     commandManager = mCommandManager1;
     return ret;
@@ -587,503 +520,24 @@ public class DrawingSurface extends SurfaceView
       commandManager = mCommandManager1;
       commandManager.clearSketchItems();
       if ( (new File( tdr1 )).exists() ) {
-        ret = ret && doLoadDataStream( tdr1, 0, 0, missingSymbols, localPalette );
+        ret = ret && DrawingIO.doLoadDataStream( this, tdr1, 0, 0, missingSymbols, localPalette, null, false );
       } else if ( th21 != null && (new File(th21)).exists() ) {
-        ret = ret && doLoadTherion( th21, 0, 0, missingSymbols, localPalette );
+        ret = ret && DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
       }
     }
     if ( tdr2 != null ) {
       commandManager = mCommandManager2;
       commandManager.clearSketchItems();
       if ( (new File( tdr2 )).exists() ) {
-        ret = ret && doLoadDataStream( tdr2, 0, 0, missingSymbols, localPalette );
+        ret = ret && DrawingIO.doLoadDataStream( this, tdr2, 0, 0, missingSymbols, localPalette, null, false );
       } else if ( th22 != null && (new File(th22)).exists() ) {
-        ret = ret && doLoadTherion( th22, 0, 0, missingSymbols, localPalette );
+        ret = ret && DrawingIO.doLoadTherion( this, th22, 0, 0, missingSymbols, localPalette );
       }
     }
     commandManager = mCommandManager1;
     return ret;
   }
 
-
-  public boolean doLoadDataStream( String filename, float dx, float dy,
-                                   SymbolsPalette missingSymbols, final SymbolsPalette localPalette )
-  {
-    int version = 0;
-    boolean in_scrap = false;
-    // DrawingBrushPaths.makePaths( );
-    DrawingBrushPaths.resetPointOrientations();
-    DrawingPath path;
-
-    synchronized( TopoDroidPath.mTherionLock ) {
-      try {
-        FileInputStream fis = new FileInputStream( filename );
-        DataInputStream dis = new DataInputStream( fis );
-        boolean todo = true;
-        while ( todo ) {
-          int what = dis.read();
-          path = null;
-          switch ( what ) {
-            case 'V':
-              version = dis.readInt();
-              break;
-            case 'S':
-              {
-                String name = dis.readUTF();
-                int type = dis.readInt();
-                // read palettes
-                String points = dis.readUTF();
-                String[] vals = points.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
-                String lines = dis.readUTF();
-                vals = points.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
-                String areas = dis.readUTF();
-                vals = points.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
-                in_scrap = true;
-              }
-              break;
-            case 'P':
-              path = DrawingPointPath.loadDataStream( version, dis, dx, dy, missingSymbols );
-              break;
-            case 'T':
-              path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
-              break;
-            case 'L':
-              path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
-              break;
-            case 'A':
-              path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, missingSymbols );
-              break;
-            case 'E':
-              todo = false;
-            default:
-              break;
-          } 
-          if ( what == 'V' || what == 'S' || what == 'E' ) continue;
-          if ( path == null ) { // this is an unrecoverable error
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR failed to create path " + (char)what );
-            break;
-          } else {
-            if ( in_scrap ) addDrawingPath( path );
-          }
-        }
-        dis.close();
-        fis.close();
-      } catch ( FileNotFoundException e ) {
-        // this is OK
-      } catch ( IOException e ) {
-        e.printStackTrace();
-      }
-      // Log.v("DistoX", "read: " + sb.toString() );
-    }
-    return (missingSymbols != null )? missingSymbols.isOK() : true;
-  }
-
-  public boolean doLoadTherion( String filename, float dx, float dy,
-                                SymbolsPalette missingSymbols, SymbolsPalette localPalette )
-  {
-    float x, y, x1, y1, x2, y2;
-    boolean is_not_section = true;
-
-    TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
-    // DrawingBrushPaths.makePaths( );
-    DrawingBrushPaths.resetPointOrientations();
-
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "after reset 0: " + DrawingBrushPaths.mOrientation[0]
-    //                      + " 7: " + DrawingBrushPaths.mOrientation[7] );
-
-    synchronized( TopoDroidPath.mTherionLock ) {
-      try {
-        FileReader fr = new FileReader( filename );
-        BufferedReader br = new BufferedReader( fr );
-        String line = null;
-        while ( (line = readLine(br)) != null ) {
-          int comment = line.indexOf('#');
-          if ( comment == 0 ) {
-            if ( line.startsWith( "#P " ) ) { // POINT PALETTE
-              if ( localPalette != null ) {
-                localPalette.mPalettePoint.clear();
-                localPalette.addPointFilename( "user" );
-                String[] syms = line.split( " " );
-                for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addPointFilename( syms[k] );
-                }
-                DrawingBrushPaths.mPointLib.makeEnabledListFromPalette( localPalette );
-              }
-            } else if ( line.startsWith( "#L " ) ) { // LINE PALETTE
-              if ( localPalette != null ) {
-                localPalette.mPaletteLine.clear();
-                localPalette.addLineFilename("user");
-                String[] syms = line.split( " " );
-                for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addLineFilename( syms[k] );
-                }
-                DrawingBrushPaths.mLineLib.makeEnabledListFromPalette( localPalette );
-              }
-            } else if ( line.startsWith( "#A " ) ) { // AREA PALETTE
-              if ( localPalette != null ) {
-                localPalette.mPaletteArea.clear();
-                localPalette.addAreaFilename("user");
-                String[] syms = line.split( " " );
-                for ( int k=1; k<syms.length; ++k ) {
-                  if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addAreaFilename( syms[k] );
-                }
-                DrawingBrushPaths.mAreaLib.makeEnabledListFromPalette( localPalette );
-              }
-            }
-            continue;
-          } else if (comment > 0 ) {
-            line = line.substring( 0, comment );
-          }
-          if ( line.length() == 0 /* || line.charAt(0) == '#' */ ) {
-            continue;
-          }
-
-          // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line: >>" + line + "<<");
-          line = line.replaceAll("\\s+", " ");
-          String[] vals = line.split( " " );
-          // FIXME assert( vals.length > 0 );
-          if ( vals[0].equals( "scrap" ) ) {
-            if ( vals.length < 4 ) {
-              TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "bad scrap cmd: " + line );
-            } else {
-              // String name = vals[1];
-              // skip "-projection" vals[2]
-              is_not_section = ! vals[3].equals("none");
-            }
-          } else if ( vals[0].equals( "point" ) ) {
-            // ****** THERION POINT ********************************** point X Y type [options]
-            if ( vals.length < 4 ) {
-              TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "bad point cmd: " + line );
-            } else {
-              int ptType = DrawingBrushPaths.mPointLib.mSymbolNr;
-              boolean has_orientation = false;
-              float orientation = 0.0f;
-              int scale = DrawingPointPath.SCALE_M;
-              String options = null;
-
-              try {
-                x = dx + Float.parseFloat( vals[1] ) / TopoDroidConst.TO_THERION;
-                y = dy - Float.parseFloat( vals[2] ) / TopoDroidConst.TO_THERION;
-              } catch ( NumberFormatException e ) {
-                TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Point error (number fmt) <" + line + ">" );
-                continue;
-              }
-              String type = vals[3];
-              String label_text = null;
-              int k = 4;
-              if ( type.equals( "station" ) ) {
-                if ( ! TopoDroidSetting.mAutoStations ) {
-                  if ( vals.length > k+1 && vals[k].equals( "-name" ) ) {
-                    String name = vals[k+1];
-                    DrawingStationPath station_path = new DrawingStationPath( name, x, y, scale );
-                    addDrawingPath( station_path );
-                  }
-                }
-                continue;
-              }
-              while ( vals.length > k ) { 
-                if ( vals[k].equals( "-orientation" ) ) {
-                  try {
-                    orientation = Float.parseFloat( vals[k+1] );
-                    has_orientation = true;
-                  } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Point orientation error : " + line );
-                  }
-                  k += 2;
-                } else if ( vals[k].equals( "-scale" ) ) {
-                  // FIXME assert (vals.length > k+1 );
-                  if ( vals[k+1].equals("xs") ) {
-                    scale = DrawingPointPath.SCALE_XS;
-                  } else if ( vals[k+1].equals("s") ) {
-                    scale = DrawingPointPath.SCALE_S;
-                  } else if ( vals[k+1].equals("l") ) {
-                    scale = DrawingPointPath.SCALE_L;
-                  } else if ( vals[k+1].equals("xl") ) {
-                    scale = DrawingPointPath.SCALE_XL;
-                  } 
-                  k += 2;
-                } else if ( vals[k].equals( "-text" ) ) {
-                  // FIXME assert (vals.length > k+1 );
-                  label_text = vals[k+1];
-                  k += 2;
-                  if ( label_text.startsWith( "\"" ) ) {
-                    while ( k < vals.length ) {
-                      label_text = label_text + " " + vals[k];
-                      if ( vals[k].endsWith( "\"" ) ) break;
-                      ++ k;
-                    }
-                    label_text = label_text.replaceAll( "\"", "" );
-                    ++ k;
-                  }
-                } else {
-                  options = vals[k];
-                  ++ k;
-                  while ( vals.length > k ) {
-                    options += " " + vals[k];
-                    ++ k;
-                  }
-                }
-              }
-
-              DrawingBrushPaths.mPointLib.tryLoadMissingPoint( type );
-              ptType = DrawingBrushPaths.mPointLib.getSymbolIndexByThName( type );
-              if ( ptType < 0 ) {
-                if ( missingSymbols != null ) missingSymbols.addPointFilename( type ); // add "type" to the missing point-types
-                ptType = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
-                // continue;
-              }
-
-              if ( has_orientation && DrawingBrushPaths.mPointLib.isSymbolOrientable(ptType) ) {
-                // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
-                DrawingBrushPaths.rotateGradPoint( ptType, orientation );
-                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
-                addDrawingPath( path );
-                DrawingBrushPaths.rotateGradPoint( ptType, -orientation );
-              } else {
-                if ( ptType != DrawingBrushPaths.mPointLib.mPointLabelIndex ) {
-                  DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
-                  addDrawingPath( path );
-                } else {
-                  if ( label_text.equals( "!" ) ) {    // "danger" point
-                    DrawingPointPath path = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointDangerIndex, x, y, scale, options );
-                    addDrawingPath( path );
-                  } else {                             // regular label
-                    DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
-                    addDrawingPath( path );
-                  }
-                }
-              }
-            }
-          } else if ( vals[0].equals( "line" ) ) {
-            // ********* THERION LINES ************************************************************
-            if ( vals.length < 2 ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "bad line cmd: " + line );
-            } else {
-              if ( vals.length >= 6 && vals[1].equals( "border" ) && vals[2].equals( "-id" ) ) { // THERION AREAS
-                boolean visible = true;
-                // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "area id " + vals[3] );
-                if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
-                  visible = false;
-                }
-                int arType = DrawingBrushPaths.mAreaLib.mSymbolNr;
-                DrawingAreaPath path = new DrawingAreaPath( arType, vals[3], visible );
-
-                // TODO insert new area-path
-                line = readLine( br );
-                if ( ! line.equals( "endline" ) ) { 
-                  String[] pt = line.split( "\\s+" );
-                  try {
-                    x = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
-                    y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
-                  } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line error (number fmt) <" + line + ">" );
-                    continue;
-                  }
-                  path.addStartPoint( x, y );
-
-                  while ( (line = readLine( br )) != null ) {
-                    if ( line.equals( "endline" ) ) {
-                      line = readLine( br ); // area statement
-                      String[] vals2 = line.split( " " );
-                      if ( vals2.length >= 2 ) {
-                        DrawingBrushPaths.mAreaLib.tryLoadMissingArea( vals2[1] );
-                        arType = DrawingBrushPaths.mAreaLib.getSymbolIndexByThName( vals2[1] );
-                        if ( arType < 0 ) {
-                          if ( missingSymbols != null ) missingSymbols.addAreaFilename( vals2[1] );
-                          arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
-                          // continue;
-                        }
-                        // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "set area type " + arType + " " + vals2[1]);
-                        double orientation = 0;
-                        if ( vals2.length >= 4 && vals2[2].equals("#orientation") ) {
-                          try {
-                            orientation = Double.parseDouble( vals2[3] );
-                          } catch ( NumberFormatException e ) { 
-                            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Area orientation error <" + line + ">" );
-                          }
-                        }
-                        path.setAreaType( arType );
-                        path.setOrientation( orientation );
-                        addDrawingPath( path );
-                      }
-                      line = readLine( br ); // skip two lines
-                      line = readLine( br );
-                      break;
-                    }
-                    // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "  line point: >>" + line + "<<");
-                    String[] pt2 = line.split( " " );
-                    if ( pt2.length == 2 ) {
-                      try {
-                        x = dx + Float.parseFloat( pt2[0] ) / TopoDroidConst.TO_THERION;
-                        y = dy - Float.parseFloat( pt2[1] ) / TopoDroidConst.TO_THERION;
-                        path.addPoint( x, y );
-                        // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x + " " + y);
-                      } catch ( NumberFormatException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (10) <" + line + ">" );
-                        continue;
-                      } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (11) " + line );
-                        continue;
-                      }
-                    } else if ( pt2.length == 6 ) {
-                      try {
-                        x1 = dx + Float.parseFloat( pt2[0] ) / TopoDroidConst.TO_THERION;
-                        y1 = dy - Float.parseFloat( pt2[1] ) / TopoDroidConst.TO_THERION;
-                        x2 = dx + Float.parseFloat( pt2[2] ) / TopoDroidConst.TO_THERION;
-                        y2 = dy - Float.parseFloat( pt2[3] ) / TopoDroidConst.TO_THERION;
-                        x  = dx + Float.parseFloat( pt2[4] ) / TopoDroidConst.TO_THERION;
-                        y  = dy - Float.parseFloat( pt2[5] ) / TopoDroidConst.TO_THERION;
-                        path.addPoint3( x1, y1, x2, y2, x, y );
-                        // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
-                      } catch ( NumberFormatException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (12) <" + line + ">" );
-                        continue;
-                      } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (13) " + line );
-                        continue;
-                      }
-                    }
-                  }
-                }
-              } else { // ********* regular lines
-                // FIXME assert (vals.length > 1 );
-                // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "line type " + vals[1] );
-                boolean closed = false;
-                boolean reversed = false;
-                int outline = DrawingLinePath.OUTLINE_UNDEF;
-                String options = null;
-               
-                String type = vals[1];
-                for (int index = 2; index < vals.length; ++index ) {
-                  if ( vals[index] == null || vals[index].length() == 0 ) {
-                    continue;
-                  }
-                  if ( vals[index].equals( "-close" ) ) {
-                    ++ index;
-                    if ( vals.length > index && vals[index].equals( "on" ) ) {
-                      closed = true;
-                    }
-                  } else if ( vals[index].equals( "-reverse" ) ) {
-                    ++ index;
-                    if ( vals.length > index && vals[index].equals( "on" ) ) {
-                      reversed = true;
-                    }
-                  } else if ( vals[index].equals( "-outline" ) ) {
-                    ++ index;
-                    if ( vals.length > index ) {
-                      if ( vals[index].equals( "out" ) ) { outline = DrawingLinePath.OUTLINE_OUT; }
-                      else if ( vals[index].equals( "in" ) ) { outline = DrawingLinePath.OUTLINE_IN; }
-                      else if ( vals[index].equals( "none" ) ) { outline = DrawingLinePath.OUTLINE_NONE; }
-                    }
-                  } else {
-                    if ( options == null ) {
-                      options = vals[index];
-                    } else {
-                      options += " " + vals[index];
-                    }
-                  } 
-                }
-                
-                int lnTypeMax = DrawingBrushPaths.mLineLib.mSymbolNr;
-                int lnType = lnTypeMax;
-                DrawingLinePath path = null;
-                DrawingBrushPaths.mLineLib.tryLoadMissingLine( type );
-                lnType = DrawingBrushPaths.mLineLib.getSymbolIndexByThName( type );
-                if ( lnType < 0 ) {
-                  if ( missingSymbols != null ) missingSymbols.addLineFilename( type );
-                  lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME
-                  // continue;
-                }
-                // TODO insert new line-path
-                line = readLine( br );
-                if ( ! line.equals( "endline" ) ) { 
-                  path = new DrawingLinePath( lnType );
-                  path.setClosed( closed );
-                  path.setReversed( reversed );
-                  if ( outline != DrawingLinePath.OUTLINE_UNDEF ) path.mOutline = outline;
-                  if ( options != null ) path.setOptions( options );
-
-                  // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line start point: <" + line + ">");
-                  String[] pt0 = line.split( "\\s+" );
-                  try {
-                    x = dx + Float.parseFloat( pt0[0] ) / TopoDroidConst.TO_THERION;
-                    y = dy - Float.parseFloat( pt0[1] ) / TopoDroidConst.TO_THERION;
-                    path.addStartPoint( x, y );
-                  } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (1) <" + line + ">" );
-                    continue;
-                  } catch ( ArrayIndexOutOfBoundsException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (2) " + line );
-                    continue;
-                  }
-                  // Log.v( "DistoX", "  line start point: <" + line + "> " + x + " " + y );
-                  while ( (line = readLine( br )) != null ) {
-                    if ( line.indexOf( "l-size" ) >= 0 ) continue;
-                    if ( line.equals( "endline" ) ) {
-                      if ( path != null ) {
-                        if ( type.equals("section") ) { // section line only in non-section scraps
-                          if ( is_not_section ) {
-                            path.makeStraight( true );
-                          }
-                        } else {
-                          path.computeUnitNormal();
-                        }
-                        addDrawingPath( path );
-                      }
-                      break;
-                    }
-                    if ( path != null ) {
-                      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line point: >>" + line + "<<");
-                      String[] pt = line.split( " " );
-                      if ( pt.length == 2 ) {
-                        try {
-                          x = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
-                          y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
-                          path.addPoint( x, y );
-                        } catch ( NumberFormatException e ) {
-                          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (3) <" + line + ">" );
-                          continue;
-                        } catch ( ArrayIndexOutOfBoundsException e ) {
-                          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (4) " + line );
-                          continue;
-                        }
-                      } else if ( pt.length == 6 ) {
-                        try {
-                          x1 = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
-                          y1 = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
-                          x2 = dx + Float.parseFloat( pt[2] ) / TopoDroidConst.TO_THERION;
-                          y2 = dy - Float.parseFloat( pt[3] ) / TopoDroidConst.TO_THERION;
-                          x  = dx + Float.parseFloat( pt[4] ) / TopoDroidConst.TO_THERION;
-                          y  = dy - Float.parseFloat( pt[5] ) / TopoDroidConst.TO_THERION;
-                          path.addPoint3( x1, y1, x2, y2, x, y );
-                        } catch ( NumberFormatException e ) {
-                          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (5) <" + line + ">" );
-                          continue;
-                        } catch ( ArrayIndexOutOfBoundsException e ) {
-                          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Therion Line X-Y error (6) " + line );
-                          continue;
-                        }
-                      }
-                    }
-                  } // end while ( line-points )
-                }
-              }
-            }
-          }
-        }
-      } catch ( FileNotFoundException e ) {
-        // this is OK
-      } catch ( IOException e ) {
-        e.printStackTrace();
-      }
-    }
-    // remove repeated names
-
-    return (missingSymbols != null )? missingSymbols.isOK() : true;
-  }
 
   void exportAsCsx( PrintWriter pw, long type )
   {

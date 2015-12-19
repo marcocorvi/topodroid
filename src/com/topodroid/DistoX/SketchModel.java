@@ -330,7 +330,7 @@ class SketchModel
     List<NumSplay> splay2 = mNum.getSplaysAt( st2 );
     // Log.v("DistoX", "splays at 1: " + splay1.size() + " at 2: " + splay2.size() );
     if ( splay1.size() < 2 || splay2.size() < 2 ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "makeConvexSurface too few spalys " + splay1.size() + " " + splay2.size() );
+      TopoDroidLog.Error( "makeConvexSurface too few spalys " + splay1.size() + " " + splay2.size() );
       return;
     }
 

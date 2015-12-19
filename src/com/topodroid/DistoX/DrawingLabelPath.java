@@ -70,7 +70,7 @@ public class DrawingLabelPath extends DrawingPointPath
       // Log.v("DistoX", "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
       return new DrawingLabelPath( text, ccx, ccy, scale, options );
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LABEL in error " + e.toString() );
+      TopoDroidLog.Error( "LABEL in error " + e.toString() );
     }
     return null;
   }
@@ -165,7 +165,6 @@ public class DrawingLabelPath extends DrawingPointPath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    // Log.v("DistoX", "Label to stream <" + mText + "> " + cx + " " + cy + " options (" + ((mOptions!=null)? mOptions: "null"));
     try {
       dos.write( 'T' );
       dos.writeFloat( cx );
@@ -176,9 +175,8 @@ public class DrawingLabelPath extends DrawingPointPath
       dos.writeUTF( ( mText != null )? mText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LABEL out error " + e.toString() );
+      TopoDroidLog.Error( "LABEL out error " + e.toString() );
     }
-    // return 'T';
   }
 }
 

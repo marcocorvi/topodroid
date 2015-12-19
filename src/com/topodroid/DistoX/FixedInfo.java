@@ -100,7 +100,7 @@ class FixedInfo extends MagLatLong
         return Double.parseDouble( str );
       }
     } catch (NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "string2double parse error: " + str );
+      TopoDroidLog.Error( "string2double parse error: " + str );
     }
     return -1111.0; // more neg than -1000
   }        

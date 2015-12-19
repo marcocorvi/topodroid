@@ -102,7 +102,7 @@ public class DeviceHelper extends DataSetObservable
     try {
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "failed get writable database " + database_name );
+          TopoDroidLog.Error( "failed get writable database " + database_name );
           return;
         }
 
@@ -134,7 +134,7 @@ public class DeviceHelper extends DataSetObservable
 
      } catch ( SQLiteException e ) {
        myDB = null;
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DeviceHelper cstr failed to get DB " + e.getMessage() );
+       TopoDroidLog.Error( "DeviceHelper cstr failed to get DB " + e.getMessage() );
      }
    }
   
@@ -367,7 +367,7 @@ public class DeviceHelper extends DataSetObservable
          str = cursor.getString(3);
          if ( str != null ) res.stddev = Float.parseFloat( str );
        } catch ( NumberFormatException e ) {
-         TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "selectCalibError parse Float error: calib ID " + cid );
+         TopoDroidLog.Error( "selectCalibError parse Float error: calib ID " + cid );
        }
      }
      if (cursor != null && !cursor.isClosed()) {
@@ -475,11 +475,11 @@ public class DeviceHelper extends DataSetObservable
    public String getValue( String key )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DeviceHelper::getValue null DB");
+       TopoDroidLog.Error( "DeviceHelper::getValue null DB");
        return null;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DeviceHelper::getValue null key");
+       TopoDroidLog.Error( "DeviceHelper::getValue null key");
        return null;
      }
      String value = null;
@@ -499,15 +499,15 @@ public class DeviceHelper extends DataSetObservable
    public void setValue( String key, String value )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DeviceHelper::setValue null DB");
+       TopoDroidLog.Error( "DeviceHelper::setValue null DB");
        return;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DeviceHelper::setValue null key");
+       TopoDroidLog.Error( "DeviceHelper::setValue null key");
        return;
      }
      if ( value == null || value.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DeviceHelper::setValue null value");
+       TopoDroidLog.Error( "DeviceHelper::setValue null value");
        return;
      }
 
@@ -1087,7 +1087,7 @@ public class DeviceHelper extends DataSetObservable
 
            db.setTransactionSuccessful();
          } catch ( SQLException e ) {
-           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "createTables exception " + e.toString() );
+           TopoDroidLog.Error( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
            db.setLockingEnabled( true );

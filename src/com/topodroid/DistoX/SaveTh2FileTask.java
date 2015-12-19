@@ -13,11 +13,6 @@
 package com.topodroid.DistoX;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 
 import android.content.Intent;
 import android.content.Context;
@@ -82,52 +77,40 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
   {
     boolean ret = false;
     synchronized( TopoDroidPath.mTherionLock ) {
-      try {
-        Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
-        String filename = (TopoDroidSetting.mBinaryTh2)? TopoDroidPath.getTdrFileWithExt( mFullName1 ) + ".bck"
-                                                       : TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
-        rotateBackups( filename );
+      Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
+      String filename = (TopoDroidSetting.mBinaryTh2)? TopoDroidPath.getTdrFileWithExt( mFullName1 ) + ".bck"
+                                                     : TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+      rotateBackups( filename );
 
-        long now  = System.currentTimeMillis();
-        long time = now - 60000; // one minute before now
-        // TopoDroidApp.checkPath( tempname1 );
-        File tmpDir = TopoDroidPath.getTmpDir();
-        File[] files = tmpDir.listFiles();
-        for ( File f : files ) {
-          if ( f.getName().endsWith("tmp") && f.lastModified() < time ) {
-            // Log.v("DistoX", "delete temp file " + f.getAbsolutePath() );
-            f.delete();
-          }
+      long now  = System.currentTimeMillis();
+      long time = now - 60000; // one minute before now
+      // TopoDroidApp.checkPath( tempname1 );
+      File tmpDir = TopoDroidPath.getTmpDir();
+      File[] files = tmpDir.listFiles();
+      for ( File f : files ) {
+        if ( f.getName().endsWith("tmp") && f.lastModified() < time ) {
+          // Log.v("DistoX", "delete temp file " + f.getAbsolutePath() );
+          f.delete();
         }
+      }
 
-        String tempname1 = TopoDroidPath.getTmpFileWithExt( mSuffix + Long.toString(now) );
-        File file1 = new File( tempname1 );
-        if ( TopoDroidSetting.mBinaryTh2 ) {
-          FileOutputStream fos = new FileOutputStream( file1 );
-          DataOutputStream dos = new DataOutputStream( fos );
-          mSurface.exportDataStream( mType, dos, mFullName1 );
-          dos.close();
-          fos.close();
-        } else {
-          FileWriter writer1 = new FileWriter( file1 );
-          BufferedWriter out1 = new BufferedWriter( writer1 );
-          mSurface.exportTherion( mType, out1, mFullName1, PlotInfo.projName[mType] );
-          out1.flush();
-          out1.close();
-        }
+      String tempname1 = TopoDroidPath.getTmpFileWithExt( mSuffix + Long.toString(now) );
+      File file1 = new File( tempname1 );
+      if ( TopoDroidSetting.mBinaryTh2 ) {
+        DrawingIO.exportDataStream( mSurface, mType, file1, mFullName1 );
+      } else {
+        DrawingIO.exportTherion( mSurface, mType, file1, mFullName1, PlotInfo.projName[mType] );
+      }
 
-        if ( isCancelled() ) {
-          // Log.v("DistoX", "save cancelled");
-          file1.delete();
-        } else {
-          // Log.v("DistoX", "save completed");
-          String filename1 = (TopoDroidSetting.mBinaryTh2)? TopoDroidPath.getTdrFileWithExt( mFullName1 )
-                                                          : TopoDroidPath.getTh2FileWithExt( mFullName1 );
-          (new File( filename1 )).renameTo( new File( filename1 + ".bck" ) );
-          file1.renameTo( new File( filename1 ) );
-        }
-      } catch ( IOException e ) {
-        e.printStackTrace();
+      if ( isCancelled() ) {
+        // Log.v("DistoX", "save cancelled");
+        file1.delete();
+      } else {
+        // Log.v("DistoX", "save completed");
+        String filename1 = (TopoDroidSetting.mBinaryTh2)? TopoDroidPath.getTdrFileWithExt( mFullName1 )
+                                                        : TopoDroidPath.getTh2FileWithExt( mFullName1 );
+        (new File( filename1 )).renameTo( new File( filename1 + ".bck" ) );
+        file1.renameTo( new File( filename1 ) );
       }
       ret = true;
     }

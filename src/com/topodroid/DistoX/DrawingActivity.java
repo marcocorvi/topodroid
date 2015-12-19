@@ -500,7 +500,7 @@ public class DrawingActivity extends ItemDrawer
     {
       // Log.v("DistoX", "do Save Th2 " + mFullName1 + " Type " + mType + " Modif. " + mModified + " Save tasks: " + mNrSaveTh2Task );
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
         // if ( not_all_symbols ) AlertMissingSymbols();
@@ -538,7 +538,7 @@ public class DrawingActivity extends ItemDrawer
           // if ( msg.what == 660 ) {
           // } else if ( msg.what == 661 ) { // saving return true
           // } else {
-          //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "handle save th2 message " + msg.what);
+          //   TopoDroidLog.Error( "handle save th2 message " + msg.what);
           // }
           if ( mModified ) {
             // Log.v("DistoX", "start new SaveTh2FileTask");
@@ -1256,7 +1256,7 @@ public class DrawingActivity extends ItemDrawer
       }
 
       // now try to load drawings from therion file
-      // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + mFullName1 + " " + mFullName2 );
+      // TopoDroidLog.Debug( "load th2 file " + mFullName1 + " " + mFullName2 );
 
       SymbolsPalette missingSymbols = new SymbolsPalette(); 
       // missingSymbols = palette of missing symbols
@@ -1722,7 +1722,7 @@ public class DrawingActivity extends ItemDrawer
           // mSaveY = y_canvas;
           if ( mMode == MODE_DRAW ) {
             if ( mSymbol == SYMBOL_LINE ) {
-              if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+              if ( ( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment2 ) {
                 if ( ++mPointCnt % mLinePointStep == 0 ) {
                   mCurrentLinePath.addPoint( x_scene, y_scene );
                 }
@@ -1731,7 +1731,7 @@ public class DrawingActivity extends ItemDrawer
                 save = false;
               }
             } else if ( mSymbol == SYMBOL_AREA ) {
-              if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+              if ( ( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment2 ) {
                 if ( ++mPointCnt % mLinePointStep == 0 ) {
                   mCurrentAreaPath.addPoint( x_scene, y_scene );
                 }
@@ -1740,7 +1740,7 @@ public class DrawingActivity extends ItemDrawer
                 save = false;
               }
             } else if ( mSymbol == SYMBOL_POINT ) {
-              // if ( FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+              // if ( ( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment2 ) {
               //   pointerDown = 0;
               // }
             }
@@ -1809,7 +1809,7 @@ public class DrawingActivity extends ItemDrawer
               mCurrentBrush.mouseUp( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
               mDrawingSurface.previewPath.mPath = new Path();
 
-              if (    FloatMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment
+              if (    ( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment2
                    || ( mPointCnt % mLinePointStep ) > 0 ) {
                 if ( mSymbol == SYMBOL_LINE ) {
                   mCurrentLinePath.addPoint( x_scene, y_scene );
@@ -2271,9 +2271,16 @@ public class DrawingActivity extends ItemDrawer
     // add a therion station point
     public void addStationPoint( DrawingStationName st )
     {
-      mDrawingSurface.addDrawingPath( new DrawingStationPath( st, DrawingPointPath.SCALE_M ) );
+      mDrawingSurface.addDrawingStationPath( new DrawingStationPath( st, DrawingPointPath.SCALE_M ) );
       modified();
     }
+
+    public void removeStationPoint( DrawingStationName st, DrawingStationPath path )
+    {
+      mDrawingSurface.removeDrawingStationPath( path );
+      modified();
+    }
+
 
     void doDelete()
     {
@@ -2767,9 +2774,10 @@ public class DrawingActivity extends ItemDrawer
           switch ( sp.type() ) {
             case DrawingPath.DRAWING_PATH_NAME:
               DrawingStationName sn = (DrawingStationName)(sp.mItem);
+              DrawingStationPath path = mDrawingSurface.getStationPath( sn.mName );
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
-              new DrawingStationDialog( this, this, sn, barrier, hidden ).show();
+              new DrawingStationDialog( this, this, sn, path, barrier, hidden ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               new DrawingPointDialog( this, (DrawingPointPath)(sp.mItem) ).show();
@@ -3117,7 +3125,7 @@ public class DrawingActivity extends ItemDrawer
     private void saveTh2()
     {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
       startSaveTh2Task( "save", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
     }
 
@@ -3210,7 +3218,7 @@ public class DrawingActivity extends ItemDrawer
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    // TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
     startActivity( intent );
@@ -3231,7 +3239,7 @@ public class DrawingActivity extends ItemDrawer
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

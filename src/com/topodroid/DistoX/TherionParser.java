@@ -234,7 +234,7 @@ public class TherionParser
                     }
                     if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "therion parser error: -declination " + line );
+                    TopoDroidLog.Error( "therion parser error: -declination " + line );
                   }
                 } else if ( vals[j].equals("-title") && j+1 < vals_len ) {
                   for ( ++j; j<vals_len; ++j ) {
@@ -289,7 +289,7 @@ public class TherionParser
                   scale = Float.parseFloat( vals[vals_len-1] );
                   zero  = Float.parseFloat( vals[vals_len-2] );
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "therion parser error: scale/zero " + line );
+                  TopoDroidLog.Error( "therion parser error: scale/zero " + line );
                   zero  = scale;
                 }
                 if ( clen ) {
@@ -317,7 +317,7 @@ public class TherionParser
                 try {
                   factor = Float.parseFloat( vals[vals_len-2] );
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "therion parser error: units " + line );
+                  TopoDroidLog.Error( "therion parser error: units " + line );
                 }
                 if ( ulen ) {
                   state.mUnitLen = factor * parseLengthUnit( vals[vals_len-1] );
@@ -342,7 +342,7 @@ public class TherionParser
                     state.mDeclination = declination;
                     if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "therion parser error: declination " + line );
+                    TopoDroidLog.Error( "therion parser error: declination " + line );
                   }
                 }      
               } else if ( cmd.equals("infer") ) {
@@ -384,7 +384,7 @@ public class TherionParser
                                         Float.parseFloat( vals[3] ),
                                         Float.parseFloat( vals[4] ) ) );
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "therion parser error: fix " + line );
+                    TopoDroidLog.Error( "therion parser error: fix " + line );
                   }
                 }
               } else if ( cmd.equals("equate") ) {
@@ -507,7 +507,7 @@ public class TherionParser
                                          state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
                   }
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "therion parser error: data " + line );
+                  TopoDroidLog.Error( "therion parser error: data " + line );
                 }
               }            
             } else if ( cmd.equals("centerline") || cmd.equals("centreline") ) {

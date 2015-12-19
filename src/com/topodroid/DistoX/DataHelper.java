@@ -175,7 +175,7 @@ public class DataHelper extends DataSetObservable
     try {
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "failed get writable database" );
+          TopoDroidLog.Error( "failed get writable database" );
           return;
         }
 
@@ -261,7 +261,7 @@ public class DataHelper extends DataSetObservable
 
      } catch ( SQLiteException e ) {
        myDB = null;
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper cstr failed to get DB " + e.getMessage() );
+       TopoDroidLog.Error( "DataHelper cstr failed to get DB " + e.getMessage() );
      }
    }
 
@@ -867,10 +867,10 @@ public class DataHelper extends DataSetObservable
       if ( ! newfile.exists() ) {
         oldfile.renameTo( newfile );
       } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. New file already exists: " + newname );
+        TopoDroidLog.Error( "Failed rename. New file already exists: " + newname );
       }
     // } else { // THIS IS OK
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. Old file does not exist: " + oldname );
+    //   TopoDroidLog.Error( "Failed rename. Old file does not exist: " + oldname );
     }
   }
 
@@ -899,7 +899,7 @@ public class DataHelper extends DataSetObservable
       if ( oldfile.exists() && ! newfile.exists() ) {
         oldfile.renameTo( newfile );
       } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename th3 sketch 3d " + sketch.name );
+        TopoDroidLog.Error( "Failed rename th3 sketch 3d " + sketch.name );
       }
     }
   }
@@ -953,7 +953,7 @@ public class DataHelper extends DataSetObservable
         if ( oldfile.exists() && ! newfile.exists() ) {
           oldfile.renameTo( newfile );
         } else {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename " + old_survey.name + "/" + photo.id + ".jpg" );
+          TopoDroidLog.Error( "Failed rename " + old_survey.name + "/" + photo.id + ".jpg" );
         }
       }
 
@@ -1770,8 +1770,7 @@ public class DataHelper extends DataSetObservable
    //           if ( t > ret ) ret = t;
    //         }
    //       } catch ( NumberFormatException e ) {
-   //         TopoDroidLog.Log( TopoDroidLog.LOG_ERR,
-   //           "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
+   //         TopoDroidLog.Error( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
    //       }
    //     } while (cursor.moveToNext());
    //   }
@@ -2130,11 +2129,11 @@ public class DataHelper extends DataSetObservable
    public String getValue( String key )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::getValue null DB");
+       TopoDroidLog.Error( "DataHelper::getValue null DB");
        return null;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::getValue null key");
+       TopoDroidLog.Error( "DataHelper::getValue null key");
        return null;
      }
      String value = null;
@@ -2154,15 +2153,15 @@ public class DataHelper extends DataSetObservable
    public void setValue( String key, String value )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::setValue null DB");
+       TopoDroidLog.Error( "DataHelper::setValue null DB");
        return;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::setValue null key");
+       TopoDroidLog.Error( "DataHelper::setValue null key");
        return;
      }
      if ( value == null || value.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::setValue null value");
+       TopoDroidLog.Error( "DataHelper::setValue null value");
        return;
      }
 
@@ -2306,7 +2305,7 @@ public class DataHelper extends DataSetObservable
                int k = Integer.parseInt( name.substring( prefix_length ) );
                if ( k >= max ) max = k+1;
              } catch ( NumberFormatException e ) {
-               TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "getNextSectionId parse Int error: survey ID " + sid );
+               TopoDroidLog.Error( "getNextSectionId parse Int error: survey ID " + sid );
              }
            }
          } while (cursor.moveToNext());
@@ -3282,7 +3281,7 @@ public class DataHelper extends DataSetObservable
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
            } else if ( table.equals(STATION_TABLE) ) {
              // N.B. ONLY IF db_version > 19
-             // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "v <" + v + ">" );
+             // TopoDroidLog.Error( "v <" + v + ">" );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment  );
              name    = scanline1.stringValue( );
              comment = scanline1.stringValue( );
@@ -3662,7 +3661,7 @@ public class DataHelper extends DataSetObservable
 
            db.setTransactionSuccessful();
          } catch ( SQLException e ) {
-           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "createTables exception " + e.toString() );
+           TopoDroidLog.Error( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
            db.setLockingEnabled( true );

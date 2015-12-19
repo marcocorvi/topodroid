@@ -334,7 +334,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed cSurvey export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -500,7 +500,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed cSurvey export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -555,7 +555,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed cSurvey export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -582,7 +582,7 @@ class TopoDroidExporter
       ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]),
                       info.declination, info.comment );
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "exportSurveyAsTop date parse error " + info.date );
+      TopoDroidLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
@@ -631,7 +631,7 @@ class TopoDroidExporter
       ptfile.write( fos );
       fos.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed PocketTopo export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed PocketTopo export: " + e.getMessage() );
     }
     return filename;
   }
@@ -810,7 +810,7 @@ class TopoDroidExporter
 
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Therion export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Therion export: " + e.getMessage() );
       return null;
     }
   }
@@ -1141,7 +1141,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Survex export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Survex export: " + e.getMessage() );
       return null;
     }
   }
@@ -1270,7 +1270,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed CSV export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed CSV export: " + e.getMessage() );
       return null;
     }
   }
@@ -1402,7 +1402,7 @@ class TopoDroidExporter
   //     fw.close();
   //     return filename;
   //   } catch ( IOException e ) {
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed QTopo export: " + e.getMessage() );
+  //     TopoDroidLog.Error( "Failed QTopo export: " + e.getMessage() );
   //     return null;
   //   }
   // }
@@ -1525,7 +1525,7 @@ class TopoDroidExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "exportSurveyAsDat date parse error " + date );
+          TopoDroidLog.Error( "exportSurveyAsDat date parse error " + date );
         }
       }
       pw.format("SURVEY DATE: %02d %02d %04d", m, d, y ); // format "MM DD YYYY"
@@ -1604,7 +1604,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Compass export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Compass export: " + e.getMessage() );
       return null;
     }
   }
@@ -1639,7 +1639,7 @@ class TopoDroidExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "exportSurveyAsDat date parse error " + date );
+          TopoDroidLog.Error( "exportSurveyAsDat date parse error " + date );
         }
       }
       pw.format("#Date %04d-%02d-%02d\n", y, m, d ); // format "YYYY-MM-DD"
@@ -1804,7 +1804,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Walls export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Walls export: " + e.getMessage() );
       return null;
     }
   }
@@ -1925,7 +1925,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed DXF export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed DXF export: " + e.getMessage() );
       return null;
     }
   }
@@ -2069,7 +2069,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed VisualTopo export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed VisualTopo export: " + e.getMessage() );
       return null;
     }
   }
@@ -2099,7 +2099,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed CSV export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed CSV export: " + e.getMessage() );
       return null;
     }
   }
@@ -2164,7 +2164,7 @@ class TopoDroidExporter
       }
       fr.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed CSV import: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed CSV import: " + e.getMessage() );
       ret = -5; // IO Exception
     }
     return ret;

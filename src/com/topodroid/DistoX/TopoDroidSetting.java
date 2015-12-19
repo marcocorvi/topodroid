@@ -318,8 +318,9 @@ class TopoDroidSetting
   static int   mLineStyle = LINE_STYLE_BEZIER;    
   static int   mLineType;        // line type:  1       1     2    3
   static int   mLineSegment   = 10;
+  static int   mLineSegment2  = 100;   // square of mLineSegment
   static float mLineAccuracy  = 1f;
-  static float mLineCorner    = 20;     // corner threshold
+  static float mLineCorner    = 20;    // corner threshold
 
   static float mStationSize    = 20;   // size of station names [pt]
   static float mLabelSize      = 24;   // size of labels [pt]
@@ -512,6 +513,7 @@ class TopoDroidSetting
     mAutoStations  = prefs.getBoolean( key[k++], true );                         // DISTOX_AUTO_STATIONS 30
     mCloseness     = tryFloat( prefs, key[k++], "24",  24 );                     // DISTOX_CLOSENESS
     mLineSegment   = tryInt(   prefs, key[k++], "10",  10 );                     // DISTOX_LINE_SEGMENT
+    mLineSegment2  = mLineSegment * mLineSegment;
     mLineAccuracy  = tryFloat( prefs, key[k++], "1.0", mLineAccuracy, 0.01f );   // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs, key[k++], "20",  mLineCorner,   0.01f );   // DISTOX_LINE_CORNER
     setLineStyleAndType( prefs.getString( key[k++], LINE_STYLE ) );              // DISTOX_LINE_STYLE
@@ -709,6 +711,7 @@ class TopoDroidSetting
       mCloseness    = tryFloat( prefs, k, "24",  mCloseness,    0 );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mLineSegment  = tryInt( prefs, k, "10",    mLineSegment,  0 );
+      mLineSegment2 = mLineSegment * mLineSegment;
     } else if ( k.equals( key[ nk++ ] ) ) {
       mLineAccuracy = tryFloat( prefs, k, "1.0", mLineAccuracy, 0 );
     } else if ( k.equals( key[ nk++ ] ) ) {

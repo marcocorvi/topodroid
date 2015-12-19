@@ -181,7 +181,7 @@ public class SurveyNewDialog extends Dialog
         try {
           decl = Double.parseDouble( decl_str );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse Double error: declination " + decl_str );
+          TopoDroidLog.Error( "parse Double error: declination " + decl_str );
         }
       }
     }

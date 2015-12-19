@@ -628,7 +628,7 @@ class DistoXNum
   private NumShot makeShotFromTmp( NumStation sf, NumStation st, TmpShot ts, float anomaly )
   {
     if ( ts.reversed != 1 ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "making shot from reversed temp " + sf.name + " " + st.name );
+      TopoDroidLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() );
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly );
@@ -1210,7 +1210,7 @@ class DistoXNum
           sh0 = sh1;
         }
         if ( st0 == sf0 ) { // closed-loop ???
-          // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR closed loop in num branches");
+          // TopoDroidLog.Error( "ERROR closed loop in num branches");
           if ( also_cross_end ) {
             branch.setLastNode( st0.node );
             branches.add( branch );

@@ -266,9 +266,9 @@ public class Archiver
         zin.close();
       }
     } catch ( FileNotFoundException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR File: " + e.toString() );
+      TopoDroidLog.Error( "ERROR File: " + e.toString() );
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR IO: " + e.toString() );
+      TopoDroidLog.Error( "ERROR IO: " + e.toString() );
     }
     return ok_manifest;
   }

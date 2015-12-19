@@ -82,7 +82,7 @@ class PTFile
     try {
       fs.write( b, 0, n );
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "IO error on write " + n + " bytes: " + e.toString() );
+      TopoDroidLog.Error( "IO error on write " + n + " bytes: " + e.toString() );
     }
   }
 
@@ -91,7 +91,7 @@ class PTFile
     try {
       fs.read( b, 0, n );
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "IO error on read " + n + " bytes: " + e.toString() );
+      TopoDroidLog.Error( "IO error on read " + n + " bytes: " + e.toString() );
     }
   }
 
@@ -282,7 +282,7 @@ class PTFile
         fs.read( bytes, 0, 4 );
         // assert bytes == Top3
       } catch( IOException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "IO error on \"Top3\"");
+        TopoDroidLog.Error( "IO error on \"Top3\"");
       }
       TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT ID " + bytes[0] + bytes[1] + bytes[2] );
 

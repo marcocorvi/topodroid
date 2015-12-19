@@ -103,7 +103,7 @@ class SymbolLineLibrary extends SymbolLibrary
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "line with null ThName" );
+          TopoDroidLog.Error( "line with null ThName" );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {

@@ -143,7 +143,7 @@ class FirmwareDialog extends Dialog
           TopoDroidLog.LogFile( "Firmware upload from " + filename );
           File fp = new File( TopoDroidPath.getBinFile( filename ) );
           if ( ! fp.exists() ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "inexistent upload firmware file " + filename );
+            TopoDroidLog.Error( "inexistent upload firmware file " + filename );
             return;    
           }
           int fw = FirmwareUtils.readFirmwareFirmware( fp );

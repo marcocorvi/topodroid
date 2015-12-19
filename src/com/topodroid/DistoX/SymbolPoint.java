@@ -236,7 +236,7 @@ class SymbolPoint extends Symbol
                 mCsxCategory = Integer.parseInt( vals[k] );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, pathname + " parse csurvey error: " + line );
+              TopoDroidLog.Error( pathname + " parse csurvey error: " + line );
             }
           } else if ( vals[k].equals("path") ) {
             path = br.readLine();
@@ -335,7 +335,7 @@ class SymbolPoint extends Symbol
             pv1.format(Locale.ENGLISH, "M %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, path + " parse moveTo error" );
+          TopoDroidLog.Error( path + " parse moveTo error" );
         }
       } else if ( "lineTo".equals( vals[k] ) ) {      
         try {
@@ -357,7 +357,7 @@ class SymbolPoint extends Symbol
             pv1.format(Locale.ENGLISH, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, path + " parse lineTo error" );
+          TopoDroidLog.Error( path + " parse lineTo error" );
         }
       } else if ( "cubicTo".equals( vals[k] ) ) {
         // cp1x cp1y cp2x cp2y p2x p2y
@@ -524,7 +524,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printXYZ1( pw, x00, -y00, 0.0f );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, path + " parse cubicTo error" );
+          TopoDroidLog.Error( path + " parse cubicTo error" );
         }
       } else if ( "addCircle".equals( vals[k] ) ) {
         try {
@@ -550,7 +550,7 @@ class SymbolPoint extends Symbol
               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, path + " parse circle error" );
+          TopoDroidLog.Error( path + " parse circle error" );
         }
       } else if ( "arcTo".equals( vals[k] ) ) {
         // (x0,y0) top-left corner of rect
@@ -614,7 +614,7 @@ class SymbolPoint extends Symbol
             pv1.format(Locale.ENGLISH, "A %.2f %.2f 0 1 %.2f %.2f ", rx*csxdxfScale, ry*csxdxfScale, x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, path + " parse arcTo error" );
+          TopoDroidLog.Error( path + " parse arcTo error" );
         }
       }
     }

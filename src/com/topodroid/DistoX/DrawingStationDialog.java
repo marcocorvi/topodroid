@@ -45,18 +45,21 @@ public class DrawingStationDialog extends Dialog
     private Context mContext;
     private DrawingActivity mActivity;
     private DrawingStationName mStation;
+    private DrawingStationPath mPath;
 
     private String mStationName;
     private boolean mIsBarrier;
     private boolean mIsHidden;
 
     public DrawingStationDialog( Context context, DrawingActivity activity, DrawingStationName station,
+                                 DrawingStationPath path,
                                  boolean is_barrier, boolean is_hidden )
     {
       super(context);
       mContext  = context;
       mActivity = activity;
       mStation  = station;
+      mPath     = path;
       mStationName = mStation.mName;
       mIsBarrier = is_barrier; 
       mIsHidden  = is_hidden; 
@@ -115,9 +118,13 @@ public class DrawingStationDialog extends Dialog
 
     public void onClick(View view)
     {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingStationDialog onClick() " + view.toString() );
+      // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
       if (view.getId() == R.id.btn_ok ) {
-        mActivity.addStationPoint( mStation );
+        if ( mPath == null ) {
+          mActivity.addStationPoint( mStation );
+        } else {
+          mActivity.removeStationPoint( mStation, mPath );
+        }
       } else if (view.getId() == R.id.btn_set ) {
         mActivity.setCurrentStationName( mStation.mName );
       } else if (view.getId() == R.id.btn_break ) {

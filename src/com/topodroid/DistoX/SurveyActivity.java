@@ -241,7 +241,7 @@ public class SurveyActivity extends Activity
     mEditDate.setOnClickListener( this );
 
     if ( ! updateDisplay() ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "opening non-existent survey" );
+      TopoDroidLog.Error( "opening non-existent survey" );
       setResult( RESULT_CANCELED );
       finish();
     }
@@ -449,7 +449,7 @@ public class SurveyActivity extends Activity
         try {
           decl = Float.parseFloat( decl_str );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse Float error: declination " + decl_str );
+          TopoDroidLog.Error( "parse Float error: declination " + decl_str );
         }
       }
     }
@@ -603,7 +603,7 @@ public class SurveyActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    // TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
     startActivity( intent );
@@ -623,7 +623,7 @@ public class SurveyActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

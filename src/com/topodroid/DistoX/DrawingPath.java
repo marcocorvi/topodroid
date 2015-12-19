@@ -41,11 +41,11 @@ public class DrawingPath implements ICanvasCommand
   public static final int DRAWING_PATH_FIXED   = 0; // leg
   public static final int DRAWING_PATH_SPLAY   = 1; // splay
   public static final int DRAWING_PATH_GRID    = 2; // grid
-  public static final int DRAWING_PATH_STATION = 3; // station point
+  public static final int DRAWING_PATH_STATION = 3; // station point (user inserted)
   public static final int DRAWING_PATH_POINT   = 4; // drawing point
   public static final int DRAWING_PATH_LINE    = 5;
   public static final int DRAWING_PATH_AREA    = 6;
-  public static final int DRAWING_PATH_NAME    = 7; // station name
+  public static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
   public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
 
   static boolean isReferenceType( int type ) 
@@ -64,6 +64,7 @@ public class DrawingPath implements ICanvasCommand
   int mType;
   float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
+  DistoXDBlock mBlock;
 
   float cx, cy; // midpoint scene coords
   RectF mBBox;   // path boundig box (scene coords)
@@ -88,7 +89,6 @@ public class DrawingPath implements ICanvasCommand
   }
   
                  
-  DistoXDBlock mBlock;
 
   public void flipXAxis()
   {
@@ -145,6 +145,17 @@ public class DrawingPath implements ICanvasCommand
     mPath = new Path();
     mPath.moveTo( x1, y1 );
     mPath.lineTo( x2, y2 );
+    mPath.offset( off_x, off_y );
+  }
+
+  void makeTrianglePath( float x, float y, float r, float off_x, float off_y )
+  {
+    float r2 = r * 1.732f;
+    mPath = new Path();
+    mPath.moveTo( x1-r, y1 );
+    mPath.lineTo( x1+r, y1 );
+    mPath.lineTo( x1, y1-r2 );
+    mPath.lineTo( x1-r, y1 );
     mPath.offset( off_x, off_y );
   }
 
@@ -242,12 +253,12 @@ public class DrawingPath implements ICanvasCommand
     mBBox.bottom += dy;
   }
 
-  float distance( float x, float y )
+  // this is used only by the Selection 
+  float distanceToPoint( float x, float y )
   {
-    if ( mBlock == null ) return 1000.0f; // a large number
+    // if ( mBlock == null ) return 1000.0f; // a large number
     double dx = x - cx;
     double dy = y - cy;
-    // Log.v("DistoX", "distance from block " + dx + " " + dy );
     return (float)( Math.sqrt( dx*dx + dy*dy ) );
   }
 
@@ -267,7 +278,8 @@ public class DrawingPath implements ICanvasCommand
   // N.B. canvas is guaranteed ! null
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
-    if ( intersects( bbox ) ) {
+    // if ( intersects( bbox ) ) 
+    {
       mTransformedPath = new Path( mPath );
       mTransformedPath.transform( matrix );
       drawPath( mTransformedPath, canvas );
@@ -295,11 +307,7 @@ public class DrawingPath implements ICanvasCommand
 
   public String toTherion() { return new String("FIXME"); }
 
-  void toDataStream( DataOutputStream dos ) 
-  { 
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR DrawingPath toDataStream executed");
-    // return '?';
-  }
+  void toDataStream( DataOutputStream dos ) { TopoDroidLog.Error( "ERROR DrawingPath toDataStream executed"); }
 
   public void toCsurvey( PrintWriter pw ) { }
 
@@ -307,18 +315,9 @@ public class DrawingPath implements ICanvasCommand
   //
   public int  commandType() { return 0; }
 
-  // public void undoCommand()
-  // {
-  //   // TODO this would be changed later
-  // }
+  // public void undoCommand() { // TODO this would be changed later }
 
-  public void computeBounds( RectF bound, boolean b ) 
-  {
-    mPath.computeBounds( bound, b );
-  }
+  public void computeBounds( RectF bound, boolean b ) { mPath.computeBounds( bound, b ); }
 
-  // public void transform( Matrix matrix )
-  // {
-  //   mPath.transform( matrix );
-  // }
+  // public void transform( Matrix matrix ) { mPath.transform( matrix ); }
 }

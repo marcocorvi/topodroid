@@ -326,7 +326,7 @@ public class LocationDialog extends Dialog
         // FIXME GPS_AVERAGE NOT USED
         // if ( TopoDroidSetting.mUseGPSAveraging ) {
         //   if ( ! mParent.tryGPSAveraging( this ) ) {
-        //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Location: failed GPSAveraging" );
+        //     TopoDroidLog.Error( "Location: failed GPSAveraging" );
         //   }
         // } else {
           setGPSon();
@@ -423,9 +423,9 @@ public class LocationDialog extends Dialog
         mHasLocation = (loc != null);
         if ( mHasLocation ) displayLocation( loc );
       } catch ( IllegalArgumentException e ) {
-        TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "onGpsStatusChanged IllegalArgumentException " );
+        TopoDroidLog.Error( "onGpsStatusChanged IllegalArgumentException " );
       } catch ( SecurityException e ) {
-        TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "onGpsStatusChanged SecurityException " );
+        TopoDroidLog.Error( "onGpsStatusChanged SecurityException " );
       }
     }
   }

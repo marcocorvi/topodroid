@@ -137,9 +137,9 @@ class DataDownloader
     } else {
       mDownload = false;
       notifyConnectionStatus( false );
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: no device selected" );
+      TopoDroidLog.Error( "download data: no device selected" );
       if ( mApp.mSID < 0 ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "download data: no survey selected" );
+        TopoDroidLog.Error( "download data: no survey selected" );
       } else {
         // DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
         // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();

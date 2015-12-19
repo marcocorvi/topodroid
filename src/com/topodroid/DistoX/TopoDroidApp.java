@@ -587,7 +587,7 @@ public class TopoDroidApp extends Application
       for ( CalibInfo c : calibs ) {
         // c.debug();
         if ( mDData.hasCalibName( c.name ) ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "calib " + c.name + " already in DB " );
+          TopoDroidLog.Error( "calib " + c.name + " already in DB " );
         } else {
           long id = mDData.insertCalib( c.name, c.date, c.device, c.comment, c.algo );
           if ( id >= 0 ) {
@@ -731,7 +731,7 @@ public class TopoDroidApp extends Application
         major = Integer.parseInt( ver[0] );
         minor = Integer.parseInt( ver[1] );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse error: major/minor " + ver[0] + " " + ver[1] );
+        TopoDroidLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
       }
       int sub   = 0;
       int k = 0;
@@ -752,7 +752,7 @@ public class TopoDroidApp extends Application
       try {
         mManifestDbVersion = Integer.parseInt( line );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse error: db version " + line );
+        TopoDroidLog.Error( "parse error: db version " + line );
       }
       
       if ( ! (    mManifestDbVersion >= DataHelper.DATABASE_VERSION_MIN
@@ -1038,7 +1038,7 @@ public class TopoDroidApp extends Application
       //   assignStations( list );
       // }
     } else {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Comm or Device is null ");
+      TopoDroidLog.Error( "Comm or Device is null ");
     }
     return ret;
   }
@@ -1616,7 +1616,7 @@ public class TopoDroidApp extends Application
           try {
             l = Float.parseFloat( left ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: left " + left );
+            TopoDroidLog.Error( "manual-shot parse error: left " + left );
           }
           if ( l >= 0.0f ) {
             if ( horizontal ) { // WENS
@@ -1646,7 +1646,7 @@ public class TopoDroidApp extends Application
           try {
             r = Float.parseFloat( right ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: right " + right );
+            TopoDroidLog.Error( "manual-shot parse error: right " + right );
           }
           if ( r >= 0.0f ) {
             if ( horizontal ) { // WENS
@@ -1675,7 +1675,7 @@ public class TopoDroidApp extends Application
           try {
             u = Float.parseFloat( up ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: up " + up );
+            TopoDroidLog.Error( "manual-shot parse error: up " + up );
           }
           if ( u >= 0.0f ) {
             if ( horizontal ) {
@@ -1700,7 +1700,7 @@ public class TopoDroidApp extends Application
           try {
             d = Float.parseFloat( down ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: down " + down );
+            TopoDroidLog.Error( "manual-shot parse error: down " + down );
           }
           if ( d >= 0.0f ) {
             if ( horizontal ) {

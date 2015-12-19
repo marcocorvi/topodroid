@@ -93,7 +93,7 @@ class SelectionPoint
       }
       return d;
     }
-    return mItem.distance( xx, yy );
+    return mItem.distanceToPoint( xx, yy );
   }
 
   void shiftBy( float dx, float dy )

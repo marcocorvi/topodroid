@@ -81,7 +81,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       mPrefix  = id.substring(0, pos);
       mAreaCnt = Integer.parseInt( id.substring(pos) );
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
+      TopoDroidLog.Error( "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
     if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
       setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
@@ -138,7 +138,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       ret.retracePath();
       return  ( npt < 3 )? null : ret;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "AREA in error " + e.toString() );
+      TopoDroidLog.Error( "AREA in error " + e.toString() );
     }
     return null;
   }
@@ -282,7 +282,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
         pt.toDataStream( dos );
       }
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "AREA out error " + e.toString() );
+      TopoDroidLog.Error( "AREA out error " + e.toString() );
     }
     // return 'A';
   }

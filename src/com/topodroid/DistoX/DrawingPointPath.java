@@ -109,7 +109,7 @@ public class DrawingPointPath extends DrawingPath
       //   DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
       // }
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "POINT in error " + e.toString() );
+      TopoDroidLog.Error( "POINT in error " + e.toString() );
     }
     return null;
   }
@@ -230,13 +230,6 @@ public class DrawingPointPath extends DrawingPath
     setCenter( x, y );
   }
 
-  float distance( float x, float y )
-  {
-    double dx = x - cx;
-    double dy = y - cy;
-    return (float)( Math.sqrt( dx*dx + dy*dy ) );
-  }
-
   // @Override
   public void toCsurvey( PrintWriter pw )
   { 
@@ -312,9 +305,8 @@ public class DrawingPointPath extends DrawingPath
       dos.writeInt( mScale );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "POINT out error " + e.toString() );
+      TopoDroidLog.Error( "POINT out error " + e.toString() );
     }
-    // return 'P';
   }
 
 }

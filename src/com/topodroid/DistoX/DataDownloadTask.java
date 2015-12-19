@@ -28,7 +28,7 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 
   DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataDownloadTask cstr" );
+    // TopoDroidLog.Error( "DataDownloadTask cstr" );
     mApp = app;
     mLister = lister;
   }
@@ -41,7 +41,7 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     int nRead = mApp.downloadDataBatch( mLister );
     // if ( nRead < 0 ) {
     //   Toast.makeText( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ], Toast.LENGTH_SHORT ).show();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "doInBackground read " + nRead );
+    // TopoDroidLog.Error( "doInBackground read " + nRead );
     return nRead;
   }
 

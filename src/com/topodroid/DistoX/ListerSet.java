@@ -54,13 +54,13 @@ public class ListerSet implements ILister
 
   public void setConnectionStatus( int status )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister set conn. status " + size() + " " + status );
+    // TopoDroidLog.Error( "Lister set conn. status " + size() + " " + status );
     for ( ILister lister : mLister ) lister.setConnectionStatus( status );
   }
 
   public void refreshDisplay( int r, boolean toast )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Lister refresh display " + size() + " R " + r + " " + toast );
+    // TopoDroidLog.Error( "Lister refresh display " + size() + " R " + r + " " + toast );
     for ( ILister lister : mLister ) lister.refreshDisplay( r, toast );
   }
 

@@ -116,7 +116,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       ret.retracePath();
       return ret;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LINE in error " + e.toString() );
+      TopoDroidLog.Error( "LINE in error " + e.toString() );
     }
     return null;
   }
@@ -331,9 +331,8 @@ public class DrawingLinePath extends DrawingPointLinePath
         pt.toDataStream( dos );
       }
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "LINE out error " + e.toString() );
+      TopoDroidLog.Error( "LINE out error " + e.toString() );
     }
-    // return 'L';
   }
 
 }

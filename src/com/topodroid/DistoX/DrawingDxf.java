@@ -203,10 +203,10 @@ class DrawingDxf
         if ( pp.cy > ymax ) ymax = pp.cy;
       } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
         DrawingStationPath st = (DrawingStationPath)p;
-        if ( st.mXpos < xmin ) xmin = st.mXpos;
-        if ( st.mXpos > xmax ) xmax = st.mXpos;
-        if ( st.mYpos < ymin ) ymin = st.mYpos;
-        if ( st.mYpos > ymax ) ymax = st.mYpos;
+        if ( st.cx < xmin ) xmin = st.cx;
+        if ( st.cx > xmax ) xmax = st.cx;
+        if ( st.cy < ymin ) ymin = st.cy;
+        if ( st.cy > ymax ) ymax = st.cy;
       }
     }
     xmin *= scale;
@@ -564,7 +564,7 @@ class DrawingDxf
               ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbText" );
               pw5.printf("%s\n  0\n", st.mName );
             }
-            printXYZ( pw5, st.mXpos * scale, -st.mYpos * scale, 0.0f );
+            printXYZ( pw5, st.cx * scale, -st.cy * scale, 0.0f );
             printFloat( pw5, 40, POINT_SCALE );
             printString( pw5, 1, st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
@@ -760,7 +760,7 @@ class DrawingDxf
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DXF io-exception " + e.toString() );
+      TopoDroidLog.Error( "DXF io-exception " + e.toString() );
     }
   }
 

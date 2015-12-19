@@ -112,7 +112,7 @@ public class DrawingPointLinePath extends DrawingPath
       if ( ++ size > 100 ) break;;
     }
     if ( size != mSize ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "recount size mismatch " + mSize + " " + size );
+      TopoDroidLog.Error( "recount size mismatch " + mSize + " " + size );
       // throw new Exception("size mismatch");
     }
   }
@@ -191,7 +191,7 @@ public class DrawingPointLinePath extends DrawingPath
         float y1 = pt.mY - prev.mY;
         float x2 = next.mX - pt.mX;
         float y2 = next.mY - pt.mY;
-        float cos = (x1*x2 + y1*y2)/(float)(Math.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2)));
+        float cos = (x1*x2 + y1*y2)/FloatMath.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2));
         if ( cos >= 0.7 ) {
           prev.mNext = next;
           next.mPrev = prev; 
@@ -431,19 +431,20 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal(); // FIXME 
   }
 
-  float distance( float x, float y )
+  @Override
+  float distanceToPoint( float x, float y )
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return Float.NaN;
-    float dist = 1000f; // FIXME
+    float dist = 10000000f; // FIXME
     // for ( LinePoint pt : mPoints ) 
     for ( LinePoint pt=mFirst; pt != null; pt = pt.mNext ) 
     {
-      double dx = x - pt.mX;
-      double dy = y - pt.mY;
-      float d = (float)( Math.sqrt( dx*dx + dy*dy ) );
-      if ( d < dist ) dist = d;
+      float dx = x - pt.mX;
+      float dy = y - pt.mY;
+      float d2 = dx*dx + dy*dy;
+      if ( d2 < dist ) dist = d2;
     }
-    return dist;
+    return (dist > 0 )? TDMath.sqrt(dist) : 0;
   }
 
   public void close() 

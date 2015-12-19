@@ -48,7 +48,7 @@ class PTId
         major = Integer.parseInt( vals[0] );
         minor = Integer.parseInt( vals[1] );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "PTId::set major/minor parse error " + vals[0] + " " + vals[1] );
+        TopoDroidLog.Error( "PTId::set major/minor parse error " + vals[0] + " " + vals[1] );
       }
       setMajorMinor( major, minor );
     } else {
@@ -56,7 +56,7 @@ class PTId
         int n = Integer.parseInt( str );
         setNumber( n + 0x80000001 );
       } catch ( NumberFormatException e ) { // should not happen
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "PTId::set setNumber parse error " + str );
+        TopoDroidLog.Error( "PTId::set setNumber parse error " + str );
         setNumber( ID_COUNT + 0x80000001 );
         ++ ID_COUNT;
       }

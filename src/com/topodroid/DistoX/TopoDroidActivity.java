@@ -532,7 +532,7 @@ public class TopoDroidActivity extends Activity
         //     pw2.format("%s", extended );
 
         //   } catch ( IOException e ) {
-        //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "SID " + sid + " scraps IO error " + e );
+        //     TopoDroidLog.Error( "SID " + sid + " scraps IO error " + e );
         //   }
         // }
       } catch ( ParserException e ) {
@@ -770,7 +770,7 @@ public class TopoDroidActivity extends Activity
   // {
   //   Toast.makeText( this, "You must close TopoDroid\nto make change effective", Toast.LENGTH_LONG ).show();
   //   // int size = mApp.setListViewHeight( mListView );
-  //   // // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "scale " + TopoDroidApp.mSizeButtons );
+  //   // // TopoDroidLog.Error( "scale " + TopoDroidApp.mSizeButtons );
   //   // icons00 = ( TopoDroidApp.mSizeButtons == 2 )? ixons : icons;
 
   //   // for (int k=0; k<mNrButton1; ++k ) {
@@ -1030,7 +1030,7 @@ public class TopoDroidActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
     startActivity( intent );
@@ -1050,7 +1050,7 @@ public class TopoDroidActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

@@ -53,11 +53,11 @@ public class PocketTopoParser extends ImportParser
       ptfile.read( fs );
       fs.close();
     } catch ( FileNotFoundException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "File not found: " + filename );
+      TopoDroidLog.Error( "File not found: " + filename );
       // FIXME
       return;
     } catch ( IOException e ) { // on close
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "IO exception: " + e );
+      TopoDroidLog.Error( "IO exception: " + e );
       return;
     }
     int nr_trip = ptfile.tripCount();
@@ -155,7 +155,7 @@ public class PocketTopoParser extends ImportParser
       writeDrawing( filename2, sideview, PlotInfo.PLOT_EXTENDED, 5*DrawingUtil.CENTER_X, 5*DrawingUtil.CENTER_Y );
       // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
     } else {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "PT null StartFrom");
+      TopoDroidLog.Error( "PT null StartFrom");
     }
     
   }
@@ -242,7 +242,7 @@ public class PocketTopoParser extends ImportParser
         fw.close();
         ret = true;
       } catch ( IOException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, mName + " scraps IO error " + e );
+        TopoDroidLog.Error( mName + " scraps IO error " + e );
         file.delete();
       }
     }

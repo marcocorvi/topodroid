@@ -224,8 +224,7 @@ public class VisualTopoParser extends ImportParser
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
                                            shot_extend, duplicate, surface, backshot, comment ) );
               } catch ( NumberFormatException e ) {
-                TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
-                TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + e );
+                TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line + " " + e.getMessage() );
               }
             }
           }
@@ -234,7 +233,7 @@ public class VisualTopoParser extends ImportParser
       }
     } catch ( IOException e ) {
       // TODO
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
+      TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
     TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "VisualTopoParser shots "+ shots.size() +" splays "+ splays.size()  );

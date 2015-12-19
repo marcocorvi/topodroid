@@ -275,14 +275,14 @@ class ConnectionHandler extends Handler
            mBufferQueue.remove( item );
            TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "recv ACK <" + cnt + "> removed. queue size " + mBufferQueue.size() );
          } else {
-           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "recv ACK <" + cnt + "> not found" );
+           TopoDroidLog.Error( "recv ACK <" + cnt + "> not found" );
          }
        }
        return;
      }
 
      if ( mRecvCounter != cnt ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "recv ERROR <" + cnt + "|" + key + "> expected " + mRecvCounter );
+       TopoDroidLog.Error( "recv ERROR <" + cnt + "|" + key + "> expected " + mRecvCounter );
        // should ack again ?
        // doAcknowledge( cnt );
        return;

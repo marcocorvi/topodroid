@@ -389,8 +389,7 @@ public class ShotNewDialog extends Dialog
         }
         mApp.setCurrentStationName( null );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR,
-           "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
+        TopoDroidLog.Error( "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
       }
       if ( blk != null ) {
         resetData( shot_to );

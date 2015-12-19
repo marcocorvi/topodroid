@@ -120,7 +120,7 @@ class SymbolPointLibrary extends SymbolLibrary
       for ( File file : files ) {
         SymbolPoint symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "point with null ThName" );
+          TopoDroidLog.Error( "point with null ThName" );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {

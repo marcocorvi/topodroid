@@ -105,7 +105,7 @@ public class TopoDroidPath
     dir = new File( APP_BASE_PATH );
     if ( ! dir.exists() ) {
       if ( ! dir.mkdir() ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "failed mkdir " + APP_BASE_PATH );
+        TopoDroidLog.Error( "failed mkdir " + APP_BASE_PATH );
         APP_BASE_PATH = APP_DEFAULT_PATH;
       }
     }
