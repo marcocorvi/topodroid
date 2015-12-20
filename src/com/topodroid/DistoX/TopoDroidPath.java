@@ -241,6 +241,7 @@ public class TopoDroidPath
   public static String getManifestFile() { return APP_BASE_PATH + "manifest"; }
 
   static String getSymbolFile( String name ) { return APP_SYMBOL_PATH + name; }
+  static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
 
   static boolean hasTdrDir() { return (new File( APP_TDR_PATH )).exists(); }
   static boolean hasTh2Dir() { return (new File( APP_TH2_PATH )).exists(); }
@@ -446,25 +447,12 @@ public class TopoDroidPath
   static void deleteSurveyPlotFiles( String survey, List<PlotInfo> plots )
   {
     File t;
-    if ( hasTh2Dir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotTh2File( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
-    }
-    if ( hasPngDir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotPngFile( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
-    }
-    if ( hasDxfDir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotDxfFile( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
-    }
-    if ( hasSvgDir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotSvgFile( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
+    for ( PlotInfo p : plots ) {
+      t = new File( getSurveyPlotTh2File( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotTdrFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotPngFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotDxfFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotSvgFile( survey, p.name ) ); if ( t.exists() ) t.delete();
     }
   }
 

@@ -108,8 +108,8 @@ public class DrawingBrushPaths
   static Paint fixedStationBarrierPaint  = null;
   static Paint fixedStationHiddenPaint  = null;
   static Paint labelPaint  = null;
-  static Paint stationPaint = null;
   static Paint duplicateStationPaint = null;
+  // static Paint stationPaint = null;
 
   // ===========================================================================
   static boolean mReloadSymbols = true; // whether to reload symbols
@@ -300,13 +300,13 @@ public class DrawingBrushPaths
       labelPaint.setStrokeWidth( WIDTH_FIXED );
       labelPaint.setColor(0xFFFFFFFF); // white
 
-      stationPaint = new Paint();
-      stationPaint.setDither(true);
-      stationPaint.setStyle(Paint.Style.STROKE);
-      stationPaint.setStrokeJoin(Paint.Join.ROUND);
-      stationPaint.setStrokeCap(Paint.Cap.ROUND);
-      stationPaint.setStrokeWidth( WIDTH_FIXED );
-      stationPaint.setColor(0xFFFF6666); 
+      // stationPaint = new Paint();
+      // stationPaint.setDither(true);
+      // stationPaint.setStyle(Paint.Style.STROKE);
+      // stationPaint.setStrokeJoin(Paint.Join.ROUND);
+      // stationPaint.setStrokeCap(Paint.Cap.ROUND);
+      // stationPaint.setStrokeWidth( WIDTH_FIXED );
+      // stationPaint.setColor(0xFFFF6666); 
 
       duplicateStationPaint = new Paint();
       duplicateStationPaint.setDither(true);

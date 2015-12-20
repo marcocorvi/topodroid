@@ -250,6 +250,7 @@
     <string name="menu_stats">Статистика</string>
     <string name="menu_survey">Инфо за картировката</string>
     <string name="menu_sync">Синхронизиране</string>
+    <!-- TODO string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <string name="menu_validate">Проверка</string>
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
@@ -300,6 +301,8 @@
     <string name="splay">странично измервание</string>
     <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
     <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
+    <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
+    <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
 
     <string name="sensor">сензор</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->
@@ -565,6 +568,7 @@
     <string name="help_rename">Смяна на името на картировката</string>
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
+    <!-- TODO string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>
     <string name="help_trash">Изтриване на скица</string>
     <string name="help_undo">Изтриване на действие от скицата</string>

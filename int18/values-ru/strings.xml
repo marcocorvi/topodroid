@@ -248,6 +248,7 @@
     <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Метаданные</string>
     <string name="menu_sync">СИНХР.</string>
+    <!-- TODO string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <string name="menu_validate">ПОДТВЕРДИТЬ</string>
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
@@ -299,6 +300,8 @@
     <string name="splay">боковой замер</string>
     <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
     <string name="too_many_legs_xsection">Слишком много лучей для разреза</string>
+    <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
+    <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
 
     <string name="sensor">датчик</string>
     <!-- OK string name="sensor_accelerometer">акселерометр</string -->
@@ -557,6 +560,7 @@
     <string name="help_rename">Изменить имя съёмки</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
+    <!-- TODO string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Переключить план разрез-разв.</string>
     <string name="help_trash">Удалить абрис</string>
     <string name="help_undo">Отмена последнего действия</string>

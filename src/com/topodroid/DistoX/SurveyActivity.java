@@ -22,6 +22,8 @@ import android.app.Activity;
 // import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
 import android.content.Context;
 import android.content.Intent;
@@ -73,6 +75,7 @@ public class SurveyActivity extends Activity
                      };
   private static int menus[] = {
                         R.string.menu_export,
+                        R.string.menu_tdr2th2,
                         R.string.menu_rename,
                         R.string.menu_delete,
                         R.string.menu_manual_calibration,
@@ -89,6 +92,7 @@ public class SurveyActivity extends Activity
                         };
   private static int help_menus[] = { 
                         R.string.help_export_survey,
+                        R.string.help_tdr2th2,
                         R.string.help_rename,
                         R.string.help_delete_survey,
                         R.string.help_manual_calibration,
@@ -374,6 +378,18 @@ public class SurveyActivity extends Activity
     } );
   }
 
+  private void askTdr2Th2()
+  {
+    new TopoDroidAlertDialog( this, getResources(),
+                      getResources().getString( R.string.convert_tdr2th2 ),
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          startConvertTdrTh2Task();
+        }
+    } );
+  }
+
   // ===============================================================
 
   private void do3D()
@@ -639,6 +655,7 @@ public class SurveyActivity extends Activity
     mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
+    mMenuAdapter.add( res.getString( menus[6] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -658,6 +675,8 @@ public class SurveyActivity extends Activity
       if ( p++ == pos ) { // EXPORT
         // new SurveyExportDialog( this, this ).show();
         new ExportDialog( this, this, TopoDroidConst.mSurveyExportTypes, R.string.title_survey_export ).show();
+      } else if ( p++ == pos ) { // TDR to TH2 
+        askTdr2Th2();
       } else if ( p++ == pos ) { // RENAME
         new SurveyRenameDialog( this, this ).show();
       } else if ( p++ == pos ) { // DELETE
@@ -669,7 +688,7 @@ public class SurveyActivity extends Activity
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 7 ) ).show();
       }
       // updateDisplay();
       return;
@@ -678,6 +697,18 @@ public class SurveyActivity extends Activity
       closeMenu();
       return;
     }
+  }
+
+  private void startConvertTdrTh2Task()
+  {
+    // final Activity currentActivity = this; 
+    Handler handler = new Handler(){
+      @Override
+      public void handleMessage(Message msg) {
+        Toast.makeText( mApp, R.string.converted_tdr2th2, Toast.LENGTH_SHORT).show();
+      }
+    };
+    (new ConvertTdr2Th2Task( this, handler, mApp )).execute();
   }
 
 }

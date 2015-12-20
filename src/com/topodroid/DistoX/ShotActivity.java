@@ -1436,8 +1436,14 @@ public class ShotActivity extends Activity
   {
     // Log.v("DistoX", "renumber shots after " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     // NEED TO FORWARD to the APP to change the stations accordingly
+ 
     List< DistoXDBlock > shots = mApp.mData.selectAllShotsAfter( blk.mId, mApp.mSID, TopoDroidApp.STATUS_NORMAL );
     mApp.assignStationsAfter( blk, shots );
+
+    // DEBUG re-assign all the stations
+    // List< DistoXDBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
+    // mApp.assignStations( shots );
+
     updateDisplay();
   }
 

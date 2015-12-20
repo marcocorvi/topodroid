@@ -498,11 +498,9 @@ public class DrawingActivity extends ItemDrawer
     // called by doPause and onBackPressed
     private void doSaveTh2( ) 
     {
-      // Log.v("DistoX", "do Save Th2 " + mFullName1 + " Type " + mType + " Modif. " + mModified + " Save tasks: " + mNrSaveTh2Task );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "doSaveTh2() type " + mType + " modified " + mModified );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Save Th2 " + mFullName1 + " " + mFullName2 );
       if ( mFullName1 != null && mDrawingSurface != null ) {
         startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
+
         // if ( not_all_symbols ) AlertMissingSymbols();
 
         // if ( mAllSymbols ) {
@@ -3288,14 +3286,12 @@ public class DrawingActivity extends ItemDrawer
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
-        // new PlotSaveDialog( this, this ).show();
         new ExportDialog( this, this, TopoDroidConst.mPlotExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
           new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start ).show();
         }
-      } else if ( p++ == pos ) { // RECOVER
-        // askRecover();
+      } else if ( p++ == pos ) { // RECOVER RELOAD
         if ( mType == PlotInfo.PLOT_EXTENDED ) {
           ( new PlotRecoverDialog( this, this, mFullName2, 2 ) ).show();
         } else {
@@ -3329,18 +3325,6 @@ public class DrawingActivity extends ItemDrawer
       }
     }
   }
-
-  // private void askRecover()
-  // {
-  //   new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.plot_recover ),
-  //     new DialogInterface.OnClickListener() {
-  //       @Override
-  //       public void onClick( DialogInterface dialog, int btn ) {
-  //         doRecover( mFullName1, mFullName2 );
-  //       }
-  //     }
-  //   );
-  // }
 
   // FIXME BACKUP
   private void doRecoverTh2( String filename, int type )

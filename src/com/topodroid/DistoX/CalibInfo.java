@@ -33,8 +33,8 @@ class CalibInfo
     algo = _algo;
   }
 
-  void debug()
-  {
-    Log.v("DistoX", "CALIB: " + id + " " + name + " " + date + " " + device ); // this is DEBUG
-  }
+  // void debug()
+  // {
+  //   Log.v("DistoX", "CALIB: " + id + " " + name + " " + date + " " + device ); // this is DEBUG
+  // }
 }

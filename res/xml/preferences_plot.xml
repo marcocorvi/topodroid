@@ -44,13 +44,6 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_XTHERION_AREAS"
-       android:summary="@string/pref_xtherion_areas_summary"
-       android:title="@string/pref_xtherion_areas_title"
-       android:defaultValue="false"
-     />
-
-     <CheckBoxPreference
        android:key="DISTOX_BINARY_STORE"
        android:summary="@string/pref_binary_store_summary"
        android:title="@string/pref_binary_store_title"

@@ -710,11 +710,20 @@ public class TopoDroidActivity extends Activity
     // } else if ( mApp.mTdSymbol ) {
     //   startTdSymbolDialog();
     }
+
     if ( mApp.askSymbolUpdate ) {
-      (new TopoDroidVersionDialog(this, mApp)).show();
+      // (new TopoDroidVersionDialog(this, mApp)).show();
       // FIXME SYMBOL is symbol have not been updated TopoDroid exits
       // if ( mApp.askSymbolUpdate ) finish();
+      new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.version_ask ),
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            mApp.installSymbols( true );
+          }
+      } );
     }
+    // mApp.installSymbols( true );
 
     // setTitleColor( 0x006d6df6 );
 
@@ -810,14 +819,6 @@ public class TopoDroidActivity extends Activity
       mTopoDroidAbout = null;
     }
   }
-
-  // private void startTdSymbolDialog()
-  // {
-  //   mTdSymbolDialog = new TdSymbolDialog( this, mApp );
-  //   // mTdSymbolDialog.setOnCancelListener( this );
-  //   mTdSymbolDialog.setOnDismissListener( this );
-  //   mTdSymbolDialog.show();
-  // }
 
   // private void restoreInstanceState(Bundle map )
   // {

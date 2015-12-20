@@ -36,7 +36,7 @@ class DrawingSvg
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
-    for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+    for ( ICanvasCommand cmd : plot.getCommands() ) {
       if ( cmd.commandType() != 0 ) continue;
       DrawingPath p = (DrawingPath)cmd;
 
@@ -115,7 +115,7 @@ class DrawingSvg
         // centerline data
         if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
-          for ( DrawingPath sh : plot.mLegsStack ) {
+          for ( DrawingPath sh : plot.getLegs() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
 
@@ -143,7 +143,7 @@ class DrawingSvg
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
-          for ( DrawingPath sh : plot.mSplaysStack ) {
+          for ( DrawingPath sh : plot.getSplays() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
 
@@ -174,7 +174,7 @@ class DrawingSvg
 
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
-        for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+        for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
           int color = path.color();

@@ -17,7 +17,7 @@ public class PairingRequest extends BroadcastReceiver{
   public void onReceive(Context context, Intent intent){
     if (intent.getAction().equals("ACTION_PAIRING_REQUEST")) {
       BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-      Log.v("DistoX", "PAIRING: " + device.getName() + " " + device.getAddress() );
+      // Log.v("DistoX", "PAIRING: " + device.getName() + " " + device.getAddress() );
       try { 
         device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
         device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);
@@ -28,11 +28,11 @@ public class PairingRequest extends BroadcastReceiver{
         // Method ms = device.getClass().getMethod("setPasskey", int.class);
         ms.invoke( device, pin );
       } catch ( NoSuchMethodException e ) {
-        Log.v("DistoX", "No Such method: " + e.getMessage() );
+        TopoDroidLog.Error( "No Such method: " + e.getMessage() );
       } catch ( IllegalAccessException e ) {
-        Log.v("DistoX", "Illegal access: " + e.getMessage() );
+        TopoDroidLog.Error( "Illegal access: " + e.getMessage() );
       } catch ( InvocationTargetException e ) {
-        Log.v("DistoX", "Invocation target: " + e.getMessage() );
+        TopoDroidLog.Error( "Invocation target: " + e.getMessage() );
       }
     }
   }

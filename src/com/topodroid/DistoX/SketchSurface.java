@@ -132,7 +132,7 @@ class SketchSurface extends SketchShot
   synchronized void refineAtSelectedVertex( )
   { 
     if ( mSelectedVertex == null ) {
-      Log.v("DistoX", "refine at selected vertex: null selected veretex");
+      // Log.v("DistoX", "refine at selected vertex: null selected veretex");
       return;
     }
     ArrayList< SketchTriangle > triangles = mTriangles;
@@ -341,9 +341,9 @@ class SketchSurface extends SketchShot
       Collections.sort( mSides, comp );
       float len = mSides.get(0).length;
       for ( SketchSide s : mSides ) {
-        if ( s.length > len ) {
-          Log.v("DistoX", "not decresing side length " + len + " " + s.length );
-        }
+        // if ( s.length > len ) {
+        //   Log.v("DistoX", "not decresing side length " + len + " " + s.length );
+        // }
         len = s.length;
       }
           
@@ -597,7 +597,7 @@ class SketchSurface extends SketchShot
       // Log.v("DistoX", sw.getBuffer().toString() );
       mBorders.add( brd );
     }
-    Log.v("DistoX", "compute border surface nr. border " + mBorders.size() );
+    // Log.v("DistoX", "compute border surface nr. border " + mBorders.size() );
   }
 
   // --------------------------------------------------------
@@ -1518,7 +1518,7 @@ class SketchSurface extends SketchShot
     synchronized( mTriangles ) {  // mCorners is synchronized on mTriangles
       for ( Integer key : mCorners.keySet() ) {
         PointF p = mCorners.get( key );
-        Log.v("DistoX", "pt " + key + " " + p.x + " " + p.y  );
+        // Log.v("DistoX", "pt " + key + " " + p.x + " " + p.y  );
         if ( Math.abs( p.x - x ) < d && Math.abs( p.y - y ) < d ) {
           return mVertices.get( key );
         }

@@ -52,19 +52,20 @@ public class DrawingCommandManager
   static int mDisplayMode = DisplayMode.DISPLAY_ALL;
   RectF mBBox;
 
-  DrawingPath mNorthLine;
+  private DrawingPath mNorthLine;
   DrawingPath mFirstReference;
   DrawingPath mSecondReference;
 
   private List<DrawingPath>    mGridStack1;
   private List<DrawingPath>    mGridStack10;
   private List<DrawingPath>    mGridStack100;
-  List<DrawingPath>            mLegsStack;
-  List<DrawingPath>            mSplaysStack;
-  List<ICanvasCommand>         mCurrentStack;
-  private List<DrawingStationPath>    mUserStations;  // user-inserted stations
-  private List<ICanvasCommand> mRedoStack;
-  // private List<DrawingPath>    mHighlight;  // highlighted path
+
+  private List<DrawingPath>        mLegsStack;
+  private List<DrawingPath>        mSplaysStack;
+  private List<ICanvasCommand>     mCurrentStack;
+  private List<DrawingStationPath> mUserStations;  // user-inserted stations
+  private List<ICanvasCommand>     mRedoStack;
+  // private List<DrawingPath>     mHighlight;  // highlighted path
   private List<DrawingStationName> mStations;  // survey stations
   private int mMaxAreaIndex;                   // max index of areas in this plot
 
@@ -74,6 +75,13 @@ public class DrawingCommandManager
 
   private Matrix mMatrix;
   private float  mScale; // current zoom: value of 1 pl in scene space
+
+  DrawingPath              getNorth()        { return mNorthLine;    }
+  List<DrawingPath>        getLegs()         { return mLegsStack;    }
+  List<DrawingPath>        getSplays()       { return mSplaysStack;  }
+  List<ICanvasCommand>     getCommands()     { return mCurrentStack; }
+  List<DrawingStationName> getStations()     { return mStations;     } 
+  List<DrawingStationPath> getUserStations() { return mUserStations; }
 
   // void checkLines()
   // {
@@ -1780,61 +1788,6 @@ public class DrawingCommandManager
   SelectionPoint prevHotItem() { return mSelected.prevHotItem(); }
   void clearSelected() { synchronized( mSelected ) { mSelected.clear(); } }
 
-  public void exportDataStream( int type, DataOutputStream dos, String scrap_name )
-  {
-    RectF bbox = computeBBox();
-
-    // Log.v("DistoX", "export Therion");
-    try { 
-      dos.write( 'V' ); // version
-      dos.writeInt( TopoDroidApp.VERSION_CODE );
-      dos.write( 'S' );
-      dos.writeUTF( scrap_name );
-      dos.writeInt( type );
-
-      DrawingBrushPaths.mPointLib.toDataStream( dos );
-      DrawingBrushPaths.mLineLib.toDataStream( dos );
-      DrawingBrushPaths.mAreaLib.toDataStream( dos );
-
-      synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ) {
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath p = (DrawingPath) cmd;
-          if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
-          p.toDataStream( dos );
-        }
-      }
-      synchronized( mUserStations ) { // user stations are always exported to data stream
-        for ( DrawingStationPath p : mUserStations ) {
-          p.toDataStream( dos );
-        }
-      }
-      dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
-
-      dos.write('I');
-      dos.writeFloat( bbox.left );
-      dos.writeFloat( bbox.top );
-      dos.writeFloat( bbox.right );
-      dos.writeFloat( bbox.bottom );
-
-      if ( TopoDroidSetting.mAutoStations ) {
-        synchronized( mStations ) {
-          for ( DrawingStationName st : mStations ) {
-            if ( st.mStation != null && st.mStation.barriered() ) continue;
-            if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
-            if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-            st.toDataStream( dos );
-          }
-        }
-      }
-      dos.write('E'); // end
-    } catch ( IOException e ) {
-      e.printStackTrace();
-    }
-  }
-
   RectF computeBBox() 
   {
     float xmin=1000000f, xmax=-1000000f, 
@@ -1857,160 +1810,14 @@ public class DrawingCommandManager
 
   public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )
   {
-    // Log.v("DistoX", "export Therion");
-    // float xmin=100000f, xmax=-100000f, 
-    //       ymin=100000f, ymax=-100000f;
-    // // float umin=100000f, umax=-100000f,
-    // //       vmin=100000f, vmax=-100000f;
-    // synchronized( mCurrentStack ) {
-    //   final Iterator i = mCurrentStack.iterator();
-    //   while ( i.hasNext() ) {
-    //     final ICanvasCommand cmd = (ICanvasCommand) i.next();
-    //     if ( cmd.commandType() != 0 ) continue;
-    //     DrawingPath p = (DrawingPath) cmd;
-    //     if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-    //       DrawingPointPath pp = (DrawingPointPath)p;
-    //       // TODO
-    //     } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-    //       DrawingLinePath lp = (DrawingLinePath)p;
-    //       if ( lp.size() > 1 ) {
-    //         if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
-    //           for ( LinePoint pt = lp.mFirst; pt != null; pt = pt.mNext )
-    //           {
-    //             if ( pt.mX < xmin ) xmin = pt.mX;
-    //             if ( pt.mX > xmax ) xmax = pt.mX;
-    //             if ( pt.mY < ymin ) ymin = pt.mY;
-    //             if ( pt.mY > ymax ) ymax = pt.mY;
-    //             // float u = pt.mX + pt.mY;
-    //             // float v = pt.mX - pt.mY;
-    //             // if ( u < umin ) umin = u;
-    //             // if ( u > umax ) umax = u;
-    //             // if ( v < vmin ) vmin = v;
-    //             // if ( v > vmax ) vmax = v;
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
     RectF bbox = computeBBox();
-
-    try { 
-      out.write("encoding utf-8");
-      out.newLine();
-      StringWriter sw = new StringWriter();
-      PrintWriter pw  = new PrintWriter(sw);
-      // pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n",
-      //    xmin*6, 400-ymax*6, xmax*6, 400-ymin*6 );
-      pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n", 
-         bbox.left*6, 400-bbox.bottom*6, bbox.right*6, 400-bbox.top*6 );
-      pw.format("##XTHERION## xth_me_area_zoom_to 25\n\n");
-      pw.format("# %s created by TopoDroid v. %s\n\n", TopoDroidUtil.currentDate(), TopoDroidApp.VERSION );
-      // TODO write current palette
-      pw.format("#P ");
-      DrawingBrushPaths.mPointLib.writePalette( pw );
-      pw.format("\n#L ");
-      DrawingBrushPaths.mLineLib.writePalette( pw );
-      pw.format("\n#A ");
-      DrawingBrushPaths.mAreaLib.writePalette( pw );
-      pw.format("\n");
-
-      float toTherion = TopoDroidConst.TO_THERION;
-      float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
-
-      if ( type == PlotInfo.PLOT_SECTION
-        || type == PlotInfo.PLOT_H_SECTION 
-        || type == PlotInfo.PLOT_X_SECTION ) {
-
-        if ( mNorthLine != null ) { // H_SECTION (horizontal section)
-          // north line is 5 m long
-          pw.format("scrap %s -projection %s -scale [%.0f %.0f %.0f %.0f 0 5 0 0 m]", scrap_name, proj_name, 
-            mNorthLine.x1*toTherion, -mNorthLine.y1*toTherion, mNorthLine.x2*toTherion, -mNorthLine.y2*toTherion );
-        } else {
-          pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
-        }
-      } else {
-        pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
-      }
-      out.write( sw.getBuffer().toString() );
-      out.newLine();
-      // out.newLine();
-      // for ( DrawingStationName st : mStations ) {
-      //   out.write( st.toTherion() );
-      //   out.newLine();
-      // }
-      out.newLine();
-      synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ) {
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath p = (DrawingPath) cmd;
-          if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            DrawingPointPath pp = (DrawingPointPath)p;
-            out.write( pp.toTherion() );
-            out.newLine();
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
-            // if ( ! TopoDroidSetting.mAutoStations ) {
-            //   DrawingStationPath st = (DrawingStationPath)p;
-            //   out.write( st.toTherion() );
-            //   out.newLine();
-            // }
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            DrawingLinePath lp = (DrawingLinePath)p;
-            if ( lp.size() > 1 ) {
-              out.write( lp.toTherion() );
-              out.newLine();
-            }
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            DrawingAreaPath ap = (DrawingAreaPath)p;
-            out.write( ap.toTherion() );
-            out.newLine();
-          }
-        }
-      }
-      out.newLine();
-
-      if ( TopoDroidSetting.mAutoStations ) {
-        TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "export Therion: auto-stations: nr. " + mStations.size() );
-        // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "bbox " + xmin + ".." + xmax + " " + ymin + ".." + ymax );
-        for ( DrawingStationName st : mStations ) {
-          if ( st.mStation != null && st.mStation.barriered() ) continue;
-
-          // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "stations " + st.cx + " " + st.cy );
-          // FIXME if station is in the convex hull (bbox) of the lines
-          if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
-          if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
-
-          // if ( xmin > st.cx || xmax < st.cx ) continue;
-          // if ( ymin > st.cy || ymax < st.cy ) continue;
-          // float u = st.cx + st.cy;
-          // float v = st.cx - st.cy;
-          // if ( umin > u || umax < u ) continue;
-          // if ( vmin > v || vmax < v ) continue;
-          // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "writing" );
-          out.write( st.toTherion() );
-          out.newLine();
-        }
-      } else {
-        TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "export Therion: NO auto-stations: nr. " + mStations.size() );
-        synchronized( mUserStations ) {
-          for ( DrawingStationPath p : mUserStations ) {
-            out.write( p.toTherion() );
-            out.newLine();
-          }
-        }
-      }
-      out.newLine();
-      out.newLine();
-      // Log.v( "DistoX", scrap_name + " " + proj_name + " bbox " + xmin + ".." + xmax + " " + ymin + ".." + ymax );
-
-      out.write("endscrap");
-      out.newLine();
-    } catch ( IOException e ) {
-      e.printStackTrace();
-    }
-    // checkLines();
+    DrawingIO.exportTherion( type, out, scrap_name, proj_name, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
+  }
+   
+  public void exportDataStream( int type, DataOutputStream dos, String scrap_name )
+  {
+    RectF bbox = computeBBox();
+    DrawingIO.exportDataStream( type, dos, scrap_name, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
   }
 
   void exportAsCsx( PrintWriter pw )

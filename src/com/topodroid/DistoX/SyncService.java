@@ -235,7 +235,7 @@ public class SyncService
 
   public boolean writeBuffer( byte[] buffer ) 
   {
-    Log.v("DistoX", "sync write (conn state " + mConnectState + " length " + buffer.length + ") " + buffer[0] + " " + buffer[1] + " ... "); 
+    // Log.v("DistoX", "sync write (conn state " + mConnectState + " length " + buffer.length + ") " + buffer[0] + " " + buffer[1] + " ... "); 
     ConnectedThread r;    // Create temporary object
     synchronized (this) { // Synchronize a copy of the ConnectedThread
       if ( mConnectState != STATE_CONNECTED ) return false;

@@ -1148,7 +1148,7 @@ public class TopoDroidApp extends Application
   //
   public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
   { 
-    Log.v("DistoX", "assign stations after.  size " + list.size() );
+    // Log.v("DistoX", "assign stations after.  size " + list.size() );
     int survey_stations = TopoDroidSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean shot_after_splays = TopoDroidSetting.mShotAfterSplays;
@@ -1205,7 +1205,7 @@ public class TopoDroidApp extends Application
   //
   public void assignStations( List<DistoXDBlock> list )
   { 
-    Log.v("DistoX", "assign stations. size " + list.size() );
+    // Log.v("DistoX", "assign stations. size " + list.size() );
     int survey_stations = TopoDroidSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean shot_after_splay = TopoDroidSetting.mShotAfterSplays;
@@ -1221,7 +1221,8 @@ public class TopoDroidApp extends Application
     String oldFrom = "empty"; // FIXME
 
     String station = shot_after_splay ? from : "";  // splays station
-    // Log.v("DistoX", "station [0] " + station );
+    // Log.v("DistoX", "assign stations: From <" + from + "> To <" + to + "> station <" + station + "> MinLeg " + 
+    //    TopoDroidSetting.mMinNrLegShots );
 
     int atStation = 0;
 
@@ -1247,13 +1248,13 @@ public class TopoDroidApp extends Application
                 }
                 mCurrentStationName = null;
               }
-              atStation = 2;
-            } else { /* centerline extra shot */
-              atStation ++;
+              atStation = 2; // prev and this shot
+            } else {
+              atStation ++;  // one more centerline shot
             }
             if ( atStation == TopoDroidSetting.mMinNrLegShots ) {
               if ( TopoDroidSetting.mBacksightShot ) {
-                // Log.v("DistoX", "Shot " + oldFrom + " " + from + " " + to + " station " + station + " flip " + flip );
+                // Log.v("DistoX", atStation + "Shot " + oldFrom + " " + from + " " + to + " station " + station + " flip " + flip );
                 if ( flip ) {
                   prev.mFrom = from;                            // backsight shot from--old_from
                   prev.mTo   = oldFrom;
@@ -1273,12 +1274,12 @@ public class TopoDroidApp extends Application
                 mData.updateShotName( prev.mId, mSID, from, oldFrom, true ); // LEG
                 setLegExtend( prev );
               } else {
+                // Log.v( "DistoX", prev.mId + " " + atStation + " setting prev. FROM " + from + " TO " + to );
                 // prev.mFrom = from;                             // forward-shot from--to
                 // prev.mTo   = to;
                 prev.setName( from, to );
                 mData.updateShotName( prev.mId, mSID, from, to, true ); // LEG
                 setLegExtend( prev );
-                // Log.v( "DistoX", prev.mId + " setting prev. FROM " + from + " TO " + to );
 
                 if ( survey_stations == 1 ) {                  // forward-shot
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
@@ -1457,15 +1458,6 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // SYMBOLS
 
-  private void deleteObsoleteSymbols()
-  {
-    String lines[] = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
-    for ( String line : lines ) {
-      File file = new File( TopoDroidPath.APP_LINE_PATH + line );
-      if ( file.exists() ) file.delete();
-    }
-  }
-
   void installSymbols( boolean overwrite )
   {
     boolean install = overwrite;
@@ -1489,9 +1481,17 @@ public class TopoDroidApp extends Application
     }
   }
 
-  private int symbolsUncompress( InputStream fis, boolean overwrite )
+  private void deleteObsoleteSymbols()
   {
-    int cnt = 0;
+    String lines[] = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
+    for ( String line : lines ) {
+      File file = new File( TopoDroidPath.APP_LINE_PATH + line );
+      if ( file.exists() ) file.delete();
+    }
+  }
+
+  private void symbolsUncompress( InputStream fis, boolean overwrite )
+  {
     // Log.v(TAG, "symbol uncompress ...");
     TopoDroidPath.symbolsCheckDirs();
     try {
@@ -1510,7 +1510,7 @@ public class TopoDroidApp extends Application
           String pathname = TopoDroidPath.getSymbolFile( filepath );
           File file = new File( pathname );
           if ( overwrite || ! file.exists() ) {
-            ++cnt;
+            if ( file.exists() ) file.renameTo( new File( TopoDroidPath.getSymbolSaveFile( filepath ) ) );
             TopoDroidApp.checkPath( pathname );
             FileOutputStream fout = new FileOutputStream( pathname );
             int c;
@@ -1538,12 +1538,10 @@ public class TopoDroidApp extends Application
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
     }
-    return cnt;
   }
 
-  private int firmwareUncompress( InputStream fis, boolean overwrite )
+  private void firmwareUncompress( InputStream fis, boolean overwrite )
   {
-    int cnt = 0;
     // Log.v(TAG, "firmware uncompress ...");
     TopoDroidPath.checkBinDir( );
     try {
@@ -1558,7 +1556,6 @@ public class TopoDroidApp extends Application
         String pathname =  TopoDroidPath.getBinFile( filepath );
         File file = new File( pathname );
         if ( overwrite || ! file.exists() ) {
-          ++cnt;
           TopoDroidApp.checkPath( pathname );
           FileOutputStream fout = new FileOutputStream( pathname );
           int c;
@@ -1573,7 +1570,6 @@ public class TopoDroidApp extends Application
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
     }
-    return cnt;
   }
 
   /** insert manual-data shot

@@ -179,7 +179,7 @@ class DrawingDxf
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
     // compute BBox
-    for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+    for ( ICanvasCommand cmd : plot.getCommands() ) {
       if ( cmd.commandType() != 0 ) continue;
       DrawingPath p = (DrawingPath)cmd;
 
@@ -474,7 +474,7 @@ class DrawingDxf
 
         // centerline data
         if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
-          for ( DrawingPath sh : plot.mLegsStack ) {
+          for ( DrawingPath sh : plot.getLegs() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
             
@@ -510,7 +510,7 @@ class DrawingDxf
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
-          for ( DrawingPath sh : plot.mSplaysStack ) {
+          for ( DrawingPath sh : plot.getSplays() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
             
@@ -549,7 +549,7 @@ class DrawingDxf
 
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
-        for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+        for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
 

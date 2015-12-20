@@ -265,7 +265,7 @@ public class FixedDialog extends Dialog
       int year = TopoDroidUtil.year();
       int month = TopoDroidUtil.month();
       int day = TopoDroidUtil.day();
-      Log.v("DistoX", " Date " + year + " " + month + " " + day );
+      // Log.v("DistoX", " Date " + year + " " + month + " " + day );
 
       MagElement elem = wmm.computeMagElement( mFxd.lat, mFxd.lng, mFxd.alt, year, month, day );
       mETdecl.setText( String.format(Locale.ENGLISH, "%.4f", elem.Decl ) );

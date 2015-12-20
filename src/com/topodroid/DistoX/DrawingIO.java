@@ -20,15 +20,22 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.StringWriter;
+import java.io.PrintWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.EOFException;
 
+import java.util.List;
+
 import android.graphics.RectF;
 
 class DrawingIO
 {
+  private static float toTherion = TopoDroidConst.TO_THERION;
+  private static float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
+
   private static String readLine( BufferedReader br )
   {
     String line = null;
@@ -44,110 +51,6 @@ class DrawingIO
     }
     return line;
   } 
-
-  public static boolean doLoadDataStream( DrawingSurface surface,
-                                   String filename,
-                                   float dx, float dy,
-                                   SymbolsPalette missingSymbols,
-                                   SymbolsPalette localPalette,
-                                   RectF bbox, boolean complete )
-  {
-    int version = 0;
-    boolean in_scrap = false;
-    // DrawingBrushPaths.makePaths( );
-    DrawingBrushPaths.resetPointOrientations();
-    DrawingPath path;
-
-    synchronized( TopoDroidPath.mTherionLock ) {
-      try {
-        FileInputStream fis = new FileInputStream( filename );
-        DataInputStream dis = new DataInputStream( fis );
-        boolean todo = true;
-        while ( todo ) {
-          int what = dis.read();
-          path = null;
-          switch ( what ) {
-            case 'V':
-              version = dis.readInt();
-              break;
-            case 'I': // plot info: bounding box
-              {
-                float xmin = dis.readFloat();
-                float ymin = dis.readFloat();
-                float xmax = dis.readFloat();
-                float ymax = dis.readFloat();
-                if ( bbox != null ) {
-                  bbox.left   = xmin;
-                  bbox.top    = ymin;
-                  bbox.right  = xmax;
-                  bbox.bottom = ymax;
-                }
-              }
-            case 'S':
-              {
-                String name = dis.readUTF();
-                int type = dis.readInt();
-                // read palettes
-                String points = dis.readUTF();
-                String[] vals = points.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
-                String lines = dis.readUTF();
-                vals = points.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
-                String areas = dis.readUTF();
-                vals = points.split(",");
-                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
-                in_scrap = true;
-              }
-              break;
-            case 'P':
-              path = DrawingPointPath.loadDataStream( version, dis, dx, dy, missingSymbols );
-              break;
-            case 'T':
-              path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
-              break;
-            case 'L':
-              path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
-              break;
-            case 'A':
-              path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, missingSymbols );
-              break;
-            case 'U':
-              path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
-              break;
-            case 'X':
-              path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
-              break;
-            case 'F':
-              if ( complete ) break; // continue parsing stations
-            case 'E':
-              todo = false;
-            default:
-              break;
-          } 
-          if ( path == null ) { // this is an unrecoverable error
-            if ( what == 'V' || what == 'S' || what == 'E' || what == 'F' ) continue;
-            TopoDroidLog.Error( "ERROR failed to create path " + (char)what );
-            break;
-          } else if ( in_scrap ) {
-            if ( what == 'U' ) {
-              surface.addDrawingStationPath( (DrawingStationPath)path );
-            } else {
-              surface.addDrawingPath( path );
-            }
-          }
-        }
-        dis.close();
-        fis.close();
-      } catch ( FileNotFoundException e ) {
-        // this is OK
-      } catch ( IOException e ) {
-        e.printStackTrace();
-      }
-      // Log.v("DistoX", "read: " + sb.toString() );
-    }
-    return (missingSymbols != null )? missingSymbols.isOK() : true;
-  }
 
   public static boolean doLoadTherion( DrawingSurface surface,
                                 String filename,
@@ -556,14 +459,17 @@ class DrawingIO
     return (missingSymbols != null )? missingSymbols.isOK() : true;
   }
 
+  // =========================================================================
+  // EXPORT 
+
   static public void exportTherion( DrawingSurface surface, int type, File file, String fullname, String projname )
   {
     try {
       FileWriter fw = new FileWriter( file );
-      BufferedWriter br = new BufferedWriter( fw );
-      surface.exportTherion( type, br, fullname, projname );
-      br.flush();
-      br.close();
+      BufferedWriter bw = new BufferedWriter( fw );
+      surface.exportTherion( type, bw, fullname, projname );
+      bw.flush();
+      bw.close();
     } catch ( IOException e ) {
       TopoDroidLog.Error( "Export Therion i/o: " + e.getMessage() );
     }
@@ -581,6 +487,426 @@ class DrawingIO
       TopoDroidLog.Error( "Export Data file: " + e.getMessage() );
     } catch ( IOException e ) {
       TopoDroidLog.Error( "Export Data i/o: " + e.getMessage() );
+    }
+  }
+
+
+  // =========================================================================
+  // EXPORT details
+
+  static public boolean doLoadDataStream( DrawingSurface surface,
+                                   String filename,
+                                   float dx, float dy,
+                                   SymbolsPalette missingSymbols,
+                                   SymbolsPalette localPalette,
+                                   RectF bbox, boolean complete )
+  {
+    int version = 0;
+    boolean in_scrap = false;
+    // DrawingBrushPaths.makePaths( );
+    DrawingBrushPaths.resetPointOrientations();
+    DrawingPath path;
+    float north_x1, north_y1, north_x2, north_y2;
+
+    synchronized( TopoDroidPath.mTherionLock ) {
+      try {
+        FileInputStream fis = new FileInputStream( filename );
+        DataInputStream dis = new DataInputStream( fis );
+        boolean todo = true;
+        while ( todo ) {
+          int what = dis.read();
+          path = null;
+          switch ( what ) {
+            case 'V':
+              version = dis.readInt();
+              break;
+            case 'I': // plot info: bounding box
+              {
+                float xmin = dis.readFloat();
+                float ymin = dis.readFloat();
+                float xmax = dis.readFloat();
+                float ymax = dis.readFloat();
+                if ( bbox != null ) {
+                  bbox.left   = xmin;
+                  bbox.top    = ymin;
+                  bbox.right  = xmax;
+                  bbox.bottom = ymax;
+                }
+                if ( dis.readInt() == 1 ) {
+                  north_x1 = dis.readFloat();
+                  north_y1 = dis.readFloat();
+                  north_x2 = dis.readFloat();
+                  north_y2 = dis.readFloat();
+                }
+              }
+              break;
+            case 'S':
+              {
+                String name = dis.readUTF();
+                int type = dis.readInt();
+                // read palettes
+                String points = dis.readUTF();
+                String[] vals = points.split(",");
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addPointFilename( val );
+                String lines = dis.readUTF();
+                vals = points.split(",");
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addLineFilename( val );
+                String areas = dis.readUTF();
+                vals = points.split(",");
+                for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
+                in_scrap = true;
+              }
+              break;
+            case 'P':
+              path = DrawingPointPath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              break;
+            case 'T':
+              path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
+              break;
+            case 'L':
+              path = DrawingLinePath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              break;
+            case 'A':
+              path = DrawingAreaPath.loadDataStream( version, dis, dx, dy, missingSymbols );
+              break;
+            case 'U':
+              path = DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+              break;
+            case 'X':
+              path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+              break;
+            case 'F':
+              if ( complete ) break; // continue parsing stations
+            case 'E':
+              todo = false;
+              break;
+            default:
+              todo = false;
+              TopoDroidLog.Error( "ERROR bad input (1) " + (int)what );
+              break;
+          } 
+          if ( path != null && in_scrap ) {
+            if ( what == 'U' ) {
+              surface.addDrawingStationPath( (DrawingStationPath)path );
+            } else {
+              surface.addDrawingPath( path );
+            }
+          }
+        }
+        dis.close();
+        fis.close();
+      } catch ( FileNotFoundException e ) {
+        // this is OK
+      } catch ( IOException e ) {
+        e.printStackTrace();
+      }
+      // Log.v("DistoX", "read: " + sb.toString() );
+    }
+    return (missingSymbols != null )? missingSymbols.isOK() : true;
+  }
+
+  static public void exportDataStream( int type, DataOutputStream dos, String scrap_name, RectF bbox,
+      DrawingPath north,
+      List<ICanvasCommand> cstack,
+      List<DrawingStationPath> userstations,
+      List<DrawingStationName> stations )
+  {
+    try { 
+      dos.write( 'V' ); // version
+      dos.writeInt( TopoDroidApp.VERSION_CODE );
+      dos.write( 'S' );
+      dos.writeUTF( scrap_name );
+      dos.writeInt( type );
+      DrawingBrushPaths.mPointLib.toDataStream( dos );
+      DrawingBrushPaths.mLineLib.toDataStream( dos );
+      DrawingBrushPaths.mAreaLib.toDataStream( dos );
+
+      dos.write('I');
+      dos.writeFloat( bbox.left );
+      dos.writeFloat( bbox.top );
+      dos.writeFloat( bbox.right );
+      dos.writeFloat( bbox.bottom );
+      if ( north != null ) {
+        dos.writeInt( 1 );
+        dos.writeFloat( north.x1 );
+        dos.writeFloat( north.y1 );
+        dos.writeFloat( north.x2 );
+        dos.writeFloat( north.y2 );
+      } else {
+        dos.writeInt( 0 );
+      }
+
+      synchronized( cstack ) {
+        for ( ICanvasCommand cmd : cstack ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath p = (DrawingPath) cmd;
+          if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) continue; // safety check: should not happen
+          p.toDataStream( dos );
+        }
+      }
+      synchronized( userstations ) { // user stations are always exported to data stream
+        for ( DrawingStationPath sp : userstations ) {
+          sp.toDataStream( dos );
+        }
+      }
+      dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
+
+      if ( TopoDroidSetting.mAutoStations ) {
+        synchronized( stations ) {
+          for ( DrawingStationName st : stations ) {
+            if ( st.mStation != null && st.mStation.barriered() ) continue;
+            if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+            if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+            st.toDataStream( dos );
+          }
+        }
+      }
+      dos.write('E'); // end
+    } catch ( IOException e ) {
+      e.printStackTrace();
+    }
+  }
+
+  static private void exportTherionHeader1( BufferedWriter out, int type, RectF bbox ) throws IOException
+  {
+    out.write("encoding utf-8");
+    out.newLine();
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n", 
+       bbox.left*6, 400-bbox.bottom*6, bbox.right*6, 400-bbox.top*6 );
+    pw.format("##XTHERION## xth_me_area_zoom_to 25\n\n");
+    pw.format("# %s created by TopoDroid v. %s\n\n", TopoDroidUtil.currentDate(), TopoDroidApp.VERSION );
+    out.write( sw.getBuffer().toString() );
+  }
+
+  static private void exportTherionHeader2( BufferedWriter out ) throws IOException
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    pw.format("#P ");
+    DrawingBrushPaths.mPointLib.writePalette( pw );
+    pw.format("\n#L ");
+    DrawingBrushPaths.mLineLib.writePalette( pw );
+    pw.format("\n#A ");
+    DrawingBrushPaths.mAreaLib.writePalette( pw );
+    pw.format("\n");
+    out.write( sw.getBuffer().toString() );
+  }
+
+  static private void exportTherionHeader2( BufferedWriter out, String points, String lines, String areas ) throws IOException
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    pw.format("#P");
+    String[] vals = points.split(",");
+    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    pw.format("\n#L");
+    vals = lines.split(",");
+    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    pw.format("\n#A");
+    vals = lines.split(",");
+    for ( int k=0; k<vals.length; ++k ) if ( vals[k].length() > 0 ) pw.format(" %s", vals[k] );
+    pw.format("\n");
+    out.write( sw.getBuffer().toString() );
+  }
+  
+  static private void exportTherionHeader3( BufferedWriter out,
+         int type, String scrap_name, String proj_name,
+         boolean do_north, float x1, float y1, float x2, float y2 ) throws IOException
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw  = new PrintWriter(sw);
+    if (    type == PlotInfo.PLOT_SECTION
+         || type == PlotInfo.PLOT_H_SECTION 
+         || type == PlotInfo.PLOT_X_SECTION ) {
+      if ( do_north ) { // H_SECTION (horizontal section) : north line is 5 m long
+        pw.format("scrap %s -projection %s -scale [%.0f %.0f %.0f %.0f 0 5 0 0 m]", scrap_name, proj_name, 
+          x1*toTherion, -y1*toTherion, x2*toTherion, -y2*toTherion );
+      } else {
+        pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
+      }
+    } else {
+      pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
+    }
+    out.write( sw.getBuffer().toString() );
+    out.newLine();
+    out.newLine();
+  }
+
+  static private void exportTherionClose( BufferedWriter out ) throws IOException
+  {
+    out.newLine();
+    out.newLine();
+    out.write("endscrap");
+    out.newLine();
+  }
+
+  static public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, RectF bbox,
+        DrawingPath north,
+        List<ICanvasCommand> cstack,
+        List<DrawingStationPath> userstations,
+        List<DrawingStationName> stations )
+  {
+    try { 
+      exportTherionHeader1( out, type, bbox );
+      exportTherionHeader2( out );
+      if ( north != null ) { 
+        exportTherionHeader3( out, type, scrap_name, proj_name, true, north.x1, north.y1, north.x2, north.y2 );
+      } else {
+        exportTherionHeader3( out, type, scrap_name, proj_name, false, 0, 0, 0, 0 );
+      }
+        
+      synchronized( cstack ) {
+        for ( ICanvasCommand cmd : cstack ) {
+          if ( cmd.commandType() != 0 ) continue;
+          DrawingPath p = (DrawingPath) cmd;
+          if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+            DrawingPointPath pp = (DrawingPointPath)p;
+            out.write( pp.toTherion() );
+            out.newLine();
+          } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
+            // if ( ! TopoDroidSetting.mAutoStations ) {
+            //   DrawingStationPath st = (DrawingStationPath)p;
+            //   out.write( st.toTherion() );
+            //   out.newLine();
+            // }
+          } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
+            DrawingLinePath lp = (DrawingLinePath)p;
+            if ( lp.size() > 1 ) {
+              out.write( lp.toTherion() );
+              out.newLine();
+            }
+          } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+            DrawingAreaPath ap = (DrawingAreaPath)p;
+            out.write( ap.toTherion() );
+            out.newLine();
+          }
+        }
+      }
+      out.newLine();
+
+      if ( TopoDroidSetting.mAutoStations ) {
+        for ( DrawingStationName st : stations ) {
+          if ( st.mStation != null && st.mStation.barriered() ) continue;
+          // FIXME if station is in the convex hull (bbox) of the lines
+          if ( bbox.left > st.cx || bbox.right  < st.cx ) continue;
+          if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
+          out.write( st.toTherion() );
+          out.newLine();
+        }
+      } else {
+        synchronized( userstations ) {
+          for ( DrawingStationPath sp : userstations ) {
+            out.write( sp.toTherion() );
+            out.newLine();
+          }
+        }
+      }
+      exportTherionClose( out );
+    } catch ( IOException e ) {
+      e.printStackTrace();
+    }
+  }
+
+  static public void dataStream2Therion( File file, BufferedWriter out )
+  {
+    int version = 0;
+    boolean in_scrap = false;
+
+    boolean do_north = false;
+    float north_x1=0, north_y1=0, north_x2=0, north_y2=0;
+    RectF bbox = new RectF();
+
+    String name = "";
+    int type = 0;
+    String points = "";
+    String lines  = "";
+    String areas  = "";
+
+    // synchronized( TopoDroidPath.mTherionLock ) 
+    {
+      try {
+        FileInputStream fis = new FileInputStream( file );
+        DataInputStream dis = new DataInputStream( fis );
+        boolean todo = true;
+        while ( todo ) {
+          int what = dis.read();
+          switch ( what ) {
+            case 'V':
+              version = dis.readInt();
+              break;
+            case 'I': // plot info: bounding box
+              {
+                bbox.left   = dis.readFloat();
+                bbox.top    = dis.readFloat();
+                bbox.right  = dis.readFloat();
+                bbox.bottom = dis.readFloat();
+                if ( dis.readInt() == 1 ) {
+                  do_north = true;
+                  north_x1 = dis.readFloat();
+                  north_y1 = dis.readFloat();
+                  north_x2 = dis.readFloat();
+                  north_y2 = dis.readFloat();
+                }
+                exportTherionHeader1( out, type, bbox );
+                exportTherionHeader2( out, points, lines, areas );
+                String proj = PlotInfo.projName[ type ];
+                if ( do_north ) { 
+                  exportTherionHeader3( out, type, name, proj, true, north_x1, north_y1, north_x2, north_y2 );
+                } else {
+                  exportTherionHeader3( out, type, name, proj, false, 0, 0, 0, 0 );
+                }
+                in_scrap = true;
+              }
+              break;
+            case 'S':
+              {
+                name = dis.readUTF();
+                type = dis.readInt();
+                // read palettes
+                points = dis.readUTF();
+                lines = dis.readUTF();
+                areas = dis.readUTF();
+              }
+              break;
+            case 'P':
+              out.write( DrawingPointPath.loadDataStream( version, dis, 0, 0, null ).toTherion() );
+              break;
+            case 'T':
+              out.write( DrawingLabelPath.loadDataStream( version, dis, 0, 0 ).toTherion() );
+              break;
+            case 'L':
+              out.write( DrawingLinePath.loadDataStream( version, dis, 0, 0, null ).toTherion() );
+              break;
+            case 'A':
+              out.write( DrawingAreaPath.loadDataStream( version, dis, 0, 0, null ).toTherion() );
+              break;
+            case 'U':
+              out.write( DrawingStationPath.loadDataStream( version, dis ).toTherion() );
+              break;
+            case 'X':
+              out.write( DrawingStationName.loadDataStream( version, dis ).toTherion() );
+              break;
+            case 'F':
+              break; // continue parsing stations
+            case 'E':
+              todo = false;
+              break;
+            default:
+              todo = false;
+              TopoDroidLog.Error( "ERROR bad input (2) " + (int)what );
+              break;
+          } 
+        }
+        exportTherionClose( out );
+        dis.close();
+        fis.close();
+      } catch ( FileNotFoundException e ) {
+        // this is OK
+      } catch ( IOException e ) {
+        e.printStackTrace();
+      }
     }
   }
 

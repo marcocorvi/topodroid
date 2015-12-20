@@ -77,7 +77,7 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
   {
     boolean ret = false;
     synchronized( TopoDroidPath.mTherionLock ) {
-      Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
+      // Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
       String filename = (TopoDroidSetting.mBinaryTh2)? TopoDroidPath.getTdrFileWithExt( mFullName1 ) + ".bck"
                                                      : TopoDroidPath.getTh2FileWithExt( mFullName1 ) + ".bck";
       rotateBackups( filename );
