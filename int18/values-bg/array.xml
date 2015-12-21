@@ -150,13 +150,13 @@
   </string-array>
 
   <string-array name="unitLength">
-     <item name="meters">метри</item>
-     <item name="feet">футове</item>
+     <item name="meters">Метри</item>
+     <item name="feet">Футове</item>
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">градуси</item>
-     <item name="grads">гради</item>
+     <item name="degrees">Градуси</item>
+     <item name="grads">Гради</item>
   </string-array>
 
   <string-array name="unitLocation">
