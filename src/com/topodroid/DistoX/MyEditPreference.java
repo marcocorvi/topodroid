@@ -11,7 +11,9 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.preference.PreferenceManager;
 import android.preference.Preference;
 import android.preference.EditTextPreference;
 import android.util.AttributeSet;
@@ -21,16 +23,20 @@ import android.preference.Preference.OnPreferenceChangeListener;
  */
 public class MyEditPreference extends EditTextPreference
 {
+  SharedPreferences sp;
+
   public MyEditPreference( Context c, AttributeSet a ) 
   {
     super(c,a);
     init();
+    sp = PreferenceManager.getDefaultSharedPreferences( c );
   }
 
   public MyEditPreference( Context c )
   {
     super( c );
     init();
+    sp = PreferenceManager.getDefaultSharedPreferences( c );
   }
 
   private void init()
@@ -39,10 +45,16 @@ public class MyEditPreference extends EditTextPreference
       @Override
       public boolean onPreferenceChange( Preference p, Object v ) 
       {
-        p.setSummary( getText() );
-        // String key = p.getKey();
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PREFS, "pref, key " + key + " val " + getText() );
-        return true;
+        String new_value = TopoDroidSetting.enforsePreferenceBounds( p.getKey(), (String)v );
+        // TopoDroidLog.Error( p.getKey() + ": value " + ((String)v) + " -> " + new_value + " text " + getText() );
+        Editor editor = sp.edit();
+        editor.clear();
+        editor.putString( p.getKey(), new_value );
+        editor.commit();
+        EditTextPreference ep = (EditTextPreference)p;
+        ep.setSummary( new_value );
+        ep.setText( new_value );
+        return false; // state of preference has already been updated
       }
     } );
   }
