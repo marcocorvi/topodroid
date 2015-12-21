@@ -56,15 +56,15 @@
     <string name="calib_compute_coeffs">Calcolo coefficienti in corso</string>
     <!-- UNUSED string name="calib_read_coeffs">Lettura coefficienti in corso</string -->
     <string name="calib_write_coeffs">Scrittura coefficienti in corso</string>
-    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
+    <string name="calib_validation">Validatione di %1$s vs %2$s</string>
     <string name="connect_failed">Comunicazione DistoX fallita</string>
     <string name="data"> dati</string>
     <string name="using">Usando %1$s %2$s</string>
     <string name="calib_error">Errore %1$s gradi</string>
-    <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
+    <string name="calib_stddev">Errore stddev: %1$.4f gradi</string>
     <string name="calib_max_error">Errore massimo %1$.4f gradi</string>
-    <!-- TODO string name="calib_ave_std">Accuracy: %1$.4f %2$.4f degrees</string -->
-    <!-- TODO string name="calib_precision">Precision</string -->
+    <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f gradi</string>
+    <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
     <string name="calib_saturated_values">ATTENZIONE: %1$ dati saturati</string>
     <string name="algorithm">Algoritmo:</string>
@@ -107,7 +107,7 @@
 
     <string name="few_data">Dati insufficienti</string>
     <string name="few_plots">Troppo pochi disegni</string>
-    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
+    <string name="few_calibs">Calibrazioni non sufficienti</string>
 
     <string name="import_title">Importazione file</string>
     <string name="import_wait">Importazione file... attendi...</string>
@@ -121,7 +121,7 @@
     <string name="sketch_saving">Salvataggio disegno ... attendi ...</string>
     <string name="lookup_wait">Ricerca in internet ... attendi ...</string>
     <string name="lookup_fail">Ricerca fallita</string>
-    <!-- TODO string name="MT_points_none">Punto GPS mancante</string -->
+    <string name="MT_points_none">Punto GPS mancante</string>
 
     <string name="head_tail">Memoria: </string>
     <string name="head_tail_failed">Lettura memoria DistoX fallita</string>
@@ -132,12 +132,12 @@
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
     <string name="altitude">Alt. </string>
-    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
-    <!-- TODO string name="h_geoid">H geoid </string -->
+    <string name="h_ellipsoid">H ellissoide </string>
+    <string name="h_geoid">H geoide </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
-    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
+    <string name="h_ellipsoid_hint">H ellissoide [metri]</string>
+    <string name="h_geoid_hint">H geoide [metri]</string>
     <string name="latitude_hint">Lat. gg:mm:ss.sss</string>
     <string name="longitude_hint">Long. gg:mm:ss.sss</string>
     <string name="loop_closure_errors">Errori chiusura anelli</string>
@@ -184,7 +184,7 @@
     <string name="barrier_del">Continuazione restituzione?</string>
     <string name="hidden_add">Nascondi la linea mediana</string>
     <string name="hidden_del">Mostra la linea mediana</string>
-    <!-- TODO string name="splays_toggle">Mostra o Nascondi gli splay</string -->
+    <string name="splays_toggle">Mostra o Nascondi gli splay</string>
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>
@@ -210,8 +210,8 @@
     <string name="no_thmanager">ThManager non installato</string>
     <string name="no_db_viewer">DB_viewer non installato</string>
     <string name="no_undelete">Nessun oggetto da riprendere</string>
-    <!-- TODO string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
-    <!-- TODO string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
+    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Posizione %4$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinazione %4$.1f"</string>
 
     <string name="menu_about">INFO</string>
     <string name="menu_attach">CONNETTI</string>
@@ -239,8 +239,8 @@
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <string name="menu_stats">STATISTICHE</string>
     <string name="menu_survey">INFORMAZIONI</string>
-    <!-- TODO string name="menu_sync">SYNC</string -->
-    <!-- TODO string name="menu_validate">VALIDATE</string -->
+    <string name="menu_sync">SINC</string>
+    <string name="menu_validate">CONVALIDA</string>
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
@@ -406,7 +406,7 @@
     <string name="button_eval"      >Calcola   </string>
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
-    <!-- TODO string name="button_geomag"    >Declination</string -->
+    <string name="button_geomag"    >Declinazione</string>
     <!-- NO string name="button_gps_stop"  >Stop      </string -->
     <!-- NO string name="button_manual"    >Manuale   </string -->
     <!-- NO string name="button_measure"   >Misura    </string -->
@@ -489,7 +489,7 @@
     <!-- UNUSED string name="help_splay">Assegna capisaldi agli splay automaticamente</string -->
     <string name="help_display">Scegli modalità display</string>
     <string name="help_display_calib">Mostra/Nascondi i tiri cancellati</string>
-    <!-- TODO string name="help_validate">Validate calibration</string -->
+    <string name="help_validate">Convalida calibrazione</string>
     <string name="help_overview">Vista globale</string>
     <string name="help_plot">Finestra disegno</string>
     <string name="help_note">Annotazioni rilievo</string>
@@ -619,14 +619,14 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
-  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
-  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
-  <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->
-  <!-- TODO string name="pref_survex_lrud_summary">Add LRUD to Survex export</string -->
-  <!-- TODO string name="pref_csv_length_title">CSV length unit</string -->
-  <!-- TODO string name="pref_csv_length_summary">CSV export length unit</string -->
+  <string name="pref_survex_eol_title">Survex terminazione linea</string>
+  <string name="pref_survex_eol_summary">Survex - terminazione linea</string>
+  <string name="pref_survex_splay_title">Survex - stazioni splay</string>
+  <string name="pref_survex_splay_summary">Survex - Aggiungi stazione A agli splay</string>
+  <string name="pref_survex_lrud_title">Survex - LRUD</string>
+  <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
+  <string name="pref_csv_length_title">CSV unità di lunghezza</string>
+  <string name="pref_csv_length_summary">CSV unità di lunghezza nella export</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
@@ -654,8 +654,9 @@
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
   <string name="pref_plot_screen_title">IMPOSTAZIONI SCHERMO DISEGNO</string>
-  <!-- FIXME string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI DISEGNO</string -->
-  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
+  <!-- FIXED string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI DISEGNO</string -->
+  <string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI LINEA</string>
+  <string name="pref_tool_point_title">STRUMENTI PUNTO</string>
   <string name="pref_location_title">IMPOSTAZIONI POSIZIONE</string>
   <string name="pref_shot_data_title">IMPOSTAZIONI DATI POLIGONALE</string>
   <string name="pref_cwd_title">DIRECTORY DI LAVORO</string>
@@ -742,8 +743,8 @@
   <string name="pref_drawing_unit_title">Scala simboli grafici</string>
   <string name="pref_drawing_unit_summary">Scala simboli grafici</string>
   <string name="pref_drawing_unit_message">Scala simboli grafici</string>
-  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
-  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
+  <string name="pref_unscaled_points_title">Punti icona senza zoom</string>
+  <string name="pref_unscaled_points_summary">I punti icona non sono ingranditi</string>
   <string name="pref_segment_title">Spaziatura punti sulle linee</string>
   <string name="pref_segment_summary">Minima spaziatura dei punti sulle linee</string>
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
@@ -792,8 +793,8 @@
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
-  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
-  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <string name="pref_xtherion_areas_title">Aree xtherion</string>
+  <string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string>
   <string name="pref_autoStations_title">Punti th2 station</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
@@ -812,14 +813,14 @@
   <string name="pref_zoom_controls_summary">Regolazioni Zoom su multitouch</string>
   <string name="pref_side_drag_title">Side-drag</string>
   <string name="pref_side_drag_summary">Abilita side-drag sul rilievo</string>
-  <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
-  <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
-  <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
-  <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
-  <!-- TODO string name="pref_area_border_title">Area border visibility</string --> 
-  <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
-  <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
-  <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
+  <string name="pref_unit_grid_title">Unità di misura disegno</string>
+  <string name="pref_unit_grid_summary">Dimensione celle della griglia</string>
+  <string name="pref_recent_nr_title">Numero di strumenti recenti</string>
+  <string name="pref_recent_nr_summary">Numero di strumenti recenti nel raccoglitore</string>
+  <string name="pref_area_border_title">Visibilità bordi area</string> 
+  <string name="pref_area_border_summary">Visibilità di default dei bordi di una area</string>
+  <string name="pref_cont_join_title">Continuazione Unione</string>
+  <string name="pref_cont_join_summary">Continuazione di linea unisce linee</string>
 
   <string name="pref_sketchUsesSplays_title">Sketch splays</string>
   <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>
