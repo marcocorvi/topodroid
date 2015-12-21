@@ -152,7 +152,6 @@ public class TopoDroidPreferences extends PreferenceActivity
             return true;
           }
         } );
-
     }
 
     if (mPrefCategory == PREF_CATEGORY_PLOT ) {
@@ -167,7 +166,6 @@ public class TopoDroidPreferences extends PreferenceActivity
       linkPreference( "DISTOX_ACCURACY_SCREEN", PREF_ACCURACY );
       linkPreference( "DISTOX_SHOT_UNITS_SCREEN", PREF_SHOT_UNITS );
       linkPreference( "DISTOX_SHOT_DATA_SCREEN", PREF_SHOT_DATA );
-
     }
   }
 
@@ -176,14 +174,14 @@ public class TopoDroidPreferences extends PreferenceActivity
     final Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( PREF_CATEGORY, category );
     ((Preference) findPreference( pref_name )).setOnPreferenceClickListener( 
-        new Preference.OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick( Preference pref ) 
-          {
-            startActivity( intent );
-            return true;
-          }
-       } );
+      new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick( Preference pref ) 
+        {
+          startActivity( intent );
+          return true;
+        }
+     } );
   }
 
   public void onActivityResult( int request, int result, Intent intent ) 
@@ -211,5 +209,13 @@ public class TopoDroidPreferences extends PreferenceActivity
         break;
     }
   }
+
+  // public void setPreferenceText( String key, String text )
+  // {
+  //   EditPreference ep = (EditPreference) findPreference( key );
+  //   if ( ep != null ) ep.setText( text );
+  // }
+  // public void setPreferenceText( String key, int i )   { setPreferenceText( key, Integer.toString(i) ); }
+  // public void setPreferenceText( String key, float f ) { setPreferenceText( key, Float.toString(f) ); }
 
 }

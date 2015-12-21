@@ -61,24 +61,24 @@ public class SymbolLine extends Symbol
 
   // width = 1;
   // no effect
-  SymbolLine( String name, String th_name, String group, int color )
+  SymbolLine( String name, String th_name, String fname, String group, int color )
   {
-    super( th_name );
+    super( th_name, fname );
     init( name, group, color, 1 );
     makePath();
   }
 
   // no effect
-  SymbolLine( String name, String th_name, String group, int color, float width )
+  SymbolLine( String name, String th_name, String fname, String group, int color, float width )
   {
-    super( th_name );
+    super( th_name, fname );
     init( name, group, color, width );
     makePath();
   }
 
-  SymbolLine( String name, String th_name, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
+  SymbolLine( String name, String th_name, String fname, String group, int color, float width, PathEffect effect_dir, PathEffect effect_rev )
   {
-    super( th_name );
+    super( th_name, fname );
     init( name, group, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
@@ -102,8 +102,9 @@ public class SymbolLine extends Symbol
     mStyleX = 1;
   }
 
-  SymbolLine( String filepath, String locale, String iso ) 
+  SymbolLine( String filepath, String fname, String locale, String iso ) 
   {
+    super( null, fname );
     mStyleStraight = false;
     mStyleX = 1;
     readFile( filepath, locale, iso );
@@ -224,7 +225,7 @@ public class SymbolLine extends Symbol
               //   mCsxPen = Integer.parseInt( vals[k] );
               // }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse csurvey error: " + line );
+              TopoDroidLog.Error( filename + " parse csurvey error: " + line );
             }
   	  } else if ( vals[k].equals("color") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -244,7 +245,7 @@ public class SymbolLine extends Symbol
   	      //   width = Integer.parseInt( vals[k] ) * TopoDroidSetting.mLineThickness;
               // }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse width error: " + line );
+              TopoDroidLog.Error( filename + " parse width error: " + line );
             }
   	  } else if ( vals[k].equals("dash") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -269,7 +270,7 @@ public class SymbolLine extends Symbol
                   }  
                   dash = new DashPathEffect( x, 0 );
                 } catch ( NumberFormatException e ) {
-                 TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse dash error: " + line );
+                 TopoDroidLog.Error( filename + " parse dash error: " + line );
                 }
               }
             }
@@ -319,7 +320,7 @@ public class SymbolLine extends Symbol
                       // }
                     // }
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse moveTo point error: " + line );
+                    TopoDroidLog.Error( filename + " parse moveTo point error: " + line );
                   }
                 } else if ( vals[k].equals("lineTo") ) { 
                   try {
@@ -340,7 +341,7 @@ public class SymbolLine extends Symbol
                     //   }
                     // }
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                    TopoDroidLog.Error( filename + " parse lineTo point error: " + line );
                   }
                 } else if ( vals[k].equals("cubicTo") ) { 
                   try {
@@ -385,7 +386,7 @@ public class SymbolLine extends Symbol
                     //   }
                     // }
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                    TopoDroidLog.Error( filename + " parse lineTo point error: " + line );
                   }
                 } else if ( vals[k].equals("circle") ) { 
                   try {
@@ -397,7 +398,7 @@ public class SymbolLine extends Symbol
                     if ( x-r < xmin ) xmin = x-r;
                     if ( x+r > xmax ) xmax = x+r;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo point error: " + line );
+                    TopoDroidLog.Error( filename + " parse lineTo point error: " + line );
                   }
                 } else if ( vals[k].equals("endeffect") ) {
                   // path_dir.close();

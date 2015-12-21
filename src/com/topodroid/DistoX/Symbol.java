@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -20,10 +19,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 class Symbol implements SymbolInterface
-             // , View.OnClickListener
 {
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   String  mThName;   // therion name
+  // String  mFilename; // filename coincide with therion name
   int     mCsxLayer;    // cSurvey layer
   int     mCsxType;
   int     mCsxCategory;
@@ -37,6 +36,7 @@ class Symbol implements SymbolInterface
   {
     mEnabled = true;
     mThName  = null;
+    // mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -45,10 +45,12 @@ class Symbol implements SymbolInterface
     mCsx = null;
   }
 
-  Symbol( String th_name ) 
+  // filename not used
+  Symbol( String th_name, String filename ) 
   { 
     mEnabled  = true;
     mThName   = th_name;
+    // mFilename = filename;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -64,6 +66,7 @@ class Symbol implements SymbolInterface
   { 
     mEnabled  = enabled; 
     mThName   = null;
+    // mFilename = null;
     mCsxLayer = -1;
     mCsxType  = -1;
     mCsxCategory = -1;
@@ -74,10 +77,11 @@ class Symbol implements SymbolInterface
 
 
   // SymbolInterface methods
-  public String getName()   { return "undefined"; }
-  public String getThName() { return "undefined"; }
-  public Paint  getPaint()  { return null; }
-  public Path   getPath()   { return null; }
+  public String getThName()     { return mThName; }
+  public String getFilename()   { return mThName; /* mFilename; */ }
+  public String getName()       { return "undefined"; }
+  public Paint  getPaint()      { return null; }
+  public Path   getPath()       { return null; }
   public boolean isOrientable() { return false; }
 
   public boolean isEnabled() { return mEnabled; }
@@ -86,4 +90,5 @@ class Symbol implements SymbolInterface
 
   public void setAngle( float angle ) {}
   public int getAngle() { return 0; }
+
 }

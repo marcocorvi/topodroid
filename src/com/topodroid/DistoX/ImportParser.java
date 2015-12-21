@@ -83,7 +83,7 @@ public class ImportParser
       BufferedReader br = new BufferedReader( fr );
       readFile( br );
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR I/O " + e.toString() );
+      TopoDroidLog.Error( "ERROR I/O " + e.toString() );
       throw new ParserException();
     }
     TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "ImportParser shots "+ shots.size() +" splays "+ splays.size()  );

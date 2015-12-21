@@ -11,9 +11,11 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Locale;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -43,9 +45,10 @@ public class DrawingStationName extends DrawingPointPath
            DrawingPointPath.SCALE_M, null );
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = null;
-
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + num_st.name + " " + x + " " + y );
     mName = name;
+
+    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
+
     setCenter( x, y ); // scene coords
     mDuplicate = false;
     makeStraightPath( 0, 0, 2*TopoDroidSetting.mStationSize*mName.length(), 0, cx, cy );
@@ -59,22 +62,23 @@ public class DrawingStationName extends DrawingPointPath
            DrawingPointPath.SCALE_M, null );
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = num_st;
-
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + num_st.name + " " + x + " " + y );
-    if ( num_st.mDuplicate ) mPaint = DrawingBrushPaths.duplicateStationPaint;
     mName = num_st.name;
+
+    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
+    if ( num_st.mDuplicate ) mPaint = DrawingBrushPaths.duplicateStationPaint;
     setCenter( x, y ); // scene coords
     mDuplicate = num_st.mDuplicate;
     
     makeStraightPath( 0, 0, 2*TopoDroidSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
-  float distance( float x, float y )
-  { 
-    double dx = x - cx;
-    double dy = y - cy;
-    return (float)( Math.sqrt( dx*dx + dy*dy ) );
-  }
+  // defined in DrawingPointPath
+  // float distance( float x, float y )
+  // { 
+  //   double dx = x - cx;
+  //   double dy = y - cy;
+  //   return FloatMath.sqrt( dx*dx + dy*dy );
+  // }
 
   @Override
   public void draw( Canvas canvas, RectF bbox )
@@ -99,20 +103,40 @@ public class DrawingStationName extends DrawingPointPath
   String getCoordsString()
   {
     if ( mStation == null ) return null;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
     // east north vertical (downward)
-    pw.format(Locale.ENGLISH, "E %.2f N %.2f V %.2f", mStation.e, -mStation.s, mStation.v );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "E %.2f N %.2f V %.2f", mStation.e, -mStation.s, mStation.v );
   }
 
   @Override
   public String toTherion()
   {
     if ( mStation == null ) return ""; // empty string
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
+  }
+
+  @Override
+  public void toDataStream( DataOutputStream dos )
+  {
+    try {
+      dos.write('X');
+      dos.writeFloat( cx );
+      dos.writeFloat( cy );
+      dos.writeUTF( mName );
+    } catch ( IOException e ) { }
+  }
+
+  // used to make therion file from binary file
+  //
+  static DrawingStationName loadDataStream( int version, DataInputStream dis )
+  {
+    float ccx, ccy;
+    String name;
+    try {
+      ccx = dis.readFloat();
+      ccy = dis.readFloat();
+      name = dis.readUTF();
+      return new DrawingStationName( name, ccx, ccy );
+    } catch ( IOException e ) { }
+    return null;
   }
 }

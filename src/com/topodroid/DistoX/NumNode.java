@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 public class NumNode 
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
-
   static final int NODE_END = 0; // branch types
   static final int NODE_CROSS = 1;
  

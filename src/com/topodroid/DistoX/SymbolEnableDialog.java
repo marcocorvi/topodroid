@@ -107,25 +107,25 @@ class SymbolEnableDialog extends Dialog
     if ( TopoDroidSetting.mLevelOverBasic ) {
       SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
       if ( point_lib == null ) return false;
-      int np = point_lib.mAnyPointNr;
+      int np = point_lib.mSymbolNr;
       for ( int i=0; i<np; ++i ) {
-        mPointAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_POINT, i, point_lib.getAnyPoint( i ) ) );
+        mPointAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_POINT, i, point_lib.getSymbolByIndex( i ) ) );
       }
     }
 
     SymbolLineLibrary line_lib   = DrawingBrushPaths.mLineLib;
     if ( line_lib == null ) return false;
-    int nl = line_lib.mAnyLineNr;
+    int nl = line_lib.mSymbolNr;
     for ( int j=0; j<nl; ++j ) {
-      mLineAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_LINE, j, line_lib.getAnyLine( j ) ) );
+      mLineAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
 
     if ( TopoDroidSetting.mLevelOverBasic ) {
       SymbolAreaLibrary area_lib   = DrawingBrushPaths.mAreaLib;
       if ( area_lib == null ) return false;
-      int na = area_lib.mAnyAreaNr;
+      int na = area_lib.mSymbolNr;
       for ( int k=0; k<na; ++k ) {
-        mAreaAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_AREA, k, area_lib.getAnyArea( k ) ) );
+        mAreaAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_AREA, k, area_lib.getSymbolByIndex( k ) ) );
       }
     }
 

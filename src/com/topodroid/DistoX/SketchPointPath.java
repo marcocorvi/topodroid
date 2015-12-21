@@ -8,12 +8,7 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120706 Therion "scale" option
- * 20121113 sink/spring points toTherion
- * 20121122 points snow/ice flowstone/moonmilk dig/choke crystal/gypsum
  */
-
 package com.topodroid.DistoX;
 
 import android.graphics.Canvas;
@@ -62,7 +57,7 @@ public class SketchPointPath extends SketchPath
     // mOptions = "";
     mOrientation = null;
     mLabel = null;
-    mPaint = DrawingBrushPaths.getPointPaint( mThType );
+    mPaint = DrawingBrushPaths.mPointLib.getSymbolPaint( mThType );
     mPath = new Path( DrawingBrushPaths.getPointOrigPath( mThType ) );
     Matrix m = new Matrix();
     m.setScale( 0.02f, 0.02f );
@@ -83,7 +78,7 @@ public class SketchPointPath extends SketchPath
     // info.worldToSceneOrigin( mOrientation.x, mOrientation.y, mOrientation.z, q1 );
     // q1.x -= q.x; // cos-rotation
     // q1.y -= q.y; // minus sin-rotation
-    // float d = FloatMath.sqrt( q1.x*q1.x + q1.y*q1.y );
+    // float d = TDMath.sqrt( q1.x*q1.x + q1.y*q1.y );
     // Log.v("DistoX", "orientation y " + (q1.y/d) + " x " + (q1.x/d) );
   }
 
@@ -95,7 +90,7 @@ public class SketchPointPath extends SketchPath
 
     pw.format(Locale.ENGLISH, "point %.2f %.2f %.2f %s -shot %s %s",
               mXpos*toTherion, -mYpos*toTherion, -mZpos*toTherion,
-                              DrawingBrushPaths.getPointThName(mThType), st1, st2 );
+                              DrawingBrushPaths.mPointLib.getSymbolThName(mThType), st1, st2 );
     if ( mOrientation != null ) {
       pw.format(Locale.ENGLISH, " -orientation %.2f %.2f %.2f",
          mOrientation.x*toTherion, -mOrientation.y*toTherion, -mOrientation.z*toTherion );
@@ -136,8 +131,8 @@ public class SketchPointPath extends SketchPath
       float d = FloatMath.sqrt( q1.x*q1.x + q1.y*q1.y );
       if ( Math.abs(d) > 0.01 ) {
         Matrix matrix1 = new Matrix();
-        // float angle = (float)Math.atan2( q1.y/d, q1.x/d );
-        // matrix1.preRotate( angle * (float)Math.PI/180 );
+        // float angle = TDMath.atan2d( q1.y/d, q1.x/d ); // degrees
+        // matrix1.preRotate( angle );
         matrix1.setSinCos( q1.x/d, -q1.y/d ); // android rotation is counterclockwise ?
         path.transform( matrix1 );
       }

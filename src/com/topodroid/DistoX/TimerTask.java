@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-  
+
 public class TimerTask extends AsyncTask<String, Integer, Long >
                        implements SensorEventListener
 {
@@ -122,12 +122,12 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
     Vector n = g.cross( w ); // north
     w.Normalized();
     n.Normalized();
-    float b0 = (float)Math.atan2( -w.y, n.y );
-    float c0 = - (float)Math.atan2( g.y, (float)Math.sqrt(w.y*w.y+n.y*n.y) );
-    if ( b0 < 0.0f ) b0 += TopoDroidUtil.M_2PI;
-    // if ( r0 < 0.0f ) r0 += TopoDroidUtil.M_2PI;
-    b0 = 360 - b0 * 360.0f / TopoDroidUtil.M_2PI;
-    c0 = 0 - c0 * 360.0f / TopoDroidUtil.M_2PI;
+    float b0 = TDMath.atan2( -w.y, n.y );
+    float c0 = - TDMath.atan2( g.y, TDMath.sqrt(w.y*w.y+n.y*n.y) );
+    if ( b0 < 0.0f ) b0 += TDMath.M_2PI;
+    // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
+    b0 = 360 - b0 * 360.0f / TDMath.M_2PI;
+    c0 = 0 - c0 * 360.0f / TDMath.M_2PI;
     mParent.setBearingAndClino( b0, c0 );
   }
 

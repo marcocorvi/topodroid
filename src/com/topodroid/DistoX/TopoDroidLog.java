@@ -103,6 +103,32 @@ class TopoDroidLog
     mLog.format( "%d: %s\n", millis, msg );
   }
 
+  static void Debug( String msg )
+  {
+    if ( LOG_DEBUG && msg != null ) {
+      long millis = System.currentTimeMillis() % 600000;
+      if ( mLogStream == 0 ) {
+        Log.v( TAG, millis + " " + msg );
+      } else {
+        mLog.format( "%d: %s\n", millis, msg );
+        // mLog.flush(); // autoflush ?
+      }
+    }
+  }
+
+  static void Error( String msg )
+  {
+    if ( LOG_ERR && msg != null ) {
+      long millis = System.currentTimeMillis() % 600000;
+      if ( mLogStream == 0 ) {
+        Log.v( TAG, millis + " " + msg );
+      } else {
+        mLog.format( "%d: %s\n", millis, msg );
+        // mLog.flush(); // autoflush ?
+      }
+    }
+  }
+
   static void Log( boolean flag, String msg )
   {
     if ( flag && msg != null ) {

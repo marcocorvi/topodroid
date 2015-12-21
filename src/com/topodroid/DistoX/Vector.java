@@ -24,7 +24,6 @@ import java.util.Locale;
 import android.util.FloatMath;
 import android.util.Log;
 
-
 public class Vector
 {
   public float x,y,z;
@@ -47,6 +46,17 @@ public class Vector
     z = z0;
   }
 
+  // cstr a unit vector from bearing and clino (as used by the calibration class)
+  // b   bearing [radians]
+  // c   clino [radians]
+  public Vector( float b, float c )
+  {
+    float h = FloatMath.cos( c );
+    x = h * FloatMath.cos( b );
+    y = h * FloatMath.sin( b );
+    z = FloatMath.sin( c );
+  }
+
   // copy cstr
   public Vector( Vector a )
   {
@@ -57,9 +67,9 @@ public class Vector
 
   float maxAbsValue()
   {
-    double mx = Math.abs(x);
-    double my = Math.abs(y);
-    double mz = Math.abs(z);
+    float mx = TDMath.abs(x);
+    float my = TDMath.abs(y);
+    float mz = TDMath.abs(z);
     return (float)( ( mx > my )? ( ( mx > mz )? mx : mz )
                                : ( ( my > mz )? my : mz ) );
   }
@@ -81,7 +91,7 @@ public class Vector
 
   public float Length()
   {
-    return (float)Math.sqrt( x*x + y*y + z*z );
+    return FloatMath.sqrt( x*x + y*y + z*z );
   }
 
   public float Abs( ) { return Length(); }
@@ -115,9 +125,9 @@ public class Vector
 
   public float MaxDiff( Vector b )
   {
-    float dx = (float)Math.abs( x - b.x );
-    float dy = (float)Math.abs( y - b.y );
-    float dz = (float)Math.abs( z - b.z );
+    float dx = TDMath.abs( x - b.x );
+    float dy = TDMath.abs( y - b.y );
+    float dz = TDMath.abs( z - b.z );
     if ( dx < dy ) { dx = dy; }
     if ( dx < dz ) { dx = dz; }
     return dx;
@@ -181,7 +191,7 @@ public class Vector
   }
 
   // dot-product of two Vectors
-  static double dot_product( Vector p1, Vector p2 )
+  static float dot_product( Vector p1, Vector p2 )
   {
     return p1.x * p2.x + p1.y * p2.y + p1.z * p2.z;
   }
@@ -207,10 +217,11 @@ public class Vector
   }
 
   // arc-distance = arccos of the dot-product ( range in [0, PI] )
+  // p1 and p2 unit vectors
   static double arc_distance( Vector p1, Vector p2 )
   {
-    double ca1 = dot_product( p1, p2 );
-    return Math.acos( ca1 );
+    float ca1 = dot_product( p1, p2 );
+    return TDMath.acos( ca1 );
   }
 
   // cosine of the spherical angle
@@ -359,7 +370,7 @@ public class Vector
       // w2.Normalized();
       float s = normal.dot( w0.cross(w2) );
       float c = w0.dot(w2);
-      a += (float)Math.atan2( s, c );
+      a += TDMath.atan2( s, c );
       w0 = w2;
     }
     return a;

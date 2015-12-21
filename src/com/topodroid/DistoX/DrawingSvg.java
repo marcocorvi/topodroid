@@ -29,14 +29,14 @@ import android.util.FloatMath;
 
 class DrawingSvg
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
+  private static final float grad2rad = TDMath.GRAD2RAD;
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
-    for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+    for ( ICanvasCommand cmd : plot.getCommands() ) {
       if ( cmd.commandType() != 0 ) continue;
       DrawingPath p = (DrawingPath)cmd;
 
@@ -60,10 +60,10 @@ class DrawingSvg
         if ( pp.cy > ymax ) ymax = pp.cy;
       } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
         DrawingStationPath st = (DrawingStationPath)p;
-        if ( st.mXpos < xmin ) xmin = st.mXpos;
-        if ( st.mXpos > xmax ) xmax = st.mXpos;
-        if ( st.mYpos < ymin ) ymin = st.mYpos;
-        if ( st.mYpos > ymax ) ymax = st.mYpos;
+        if ( st.cx < xmin ) xmin = st.cx;
+        if ( st.cx > xmax ) xmax = st.cx;
+        if ( st.cy < ymin ) ymin = st.cy;
+        if ( st.cy > ymax ) ymax = st.cy;
       }
     }
     int width = (int)(xmax - xmin) + 200;
@@ -93,8 +93,8 @@ class DrawingSvg
       // ***** FIXME TODO POINT SYMBOLS
       // {
       //   // // 8 layer (0), 2 block name,
-      //   for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
-      //     SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
+      //   for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
+      //     SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex(n);
 
       //     int block = 1+n; // block_name = 1 + therion_code
       //     writeString( out, 8, "POINT" );
@@ -106,7 +106,6 @@ class DrawingSvg
       //     writeString( out, 30, "0.0" );
 
       //     out.write( pt.getDxf() );
-      //     // out.write( DrawingBrushPaths.mPointLib.getPoint(n).getDxf() );
       //   }
       // }
       
@@ -116,7 +115,7 @@ class DrawingSvg
         // centerline data
         if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
-          for ( DrawingPath sh : plot.mLegsStack ) {
+          for ( DrawingPath sh : plot.getLegs() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
 
@@ -144,7 +143,7 @@ class DrawingSvg
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
-          for ( DrawingPath sh : plot.mSplaysStack ) {
+          for ( DrawingPath sh : plot.getSplays() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
 
@@ -175,7 +174,7 @@ class DrawingSvg
 
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
-        for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+        for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
           int color = path.color();
@@ -189,12 +188,12 @@ class DrawingSvg
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
             DrawingStationPath st = (DrawingStationPath)path;
             pw5.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
-            pw5.format(Locale.ENGLISH, " x=\"%.0f\" y=\"%.0f\">", st.mXpos, st.mYpos );
+            pw5.format(Locale.ENGLISH, " x=\"%.0f\" y=\"%.0f\">", st.cx, st.cy );
             pw5.format("%s</text>\n", st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath) path;
             pw5.format("  <path stroke=\"%s\" stroke-width=\"2\" fill=\"none\"", color_str );
-            String th_name = DrawingBrushPaths.getLineThName( line.mLineType ); 
+            String th_name = DrawingBrushPaths.mLineLib.getSymbolThName( line.mLineType ); 
             if ( th_name.equals( "arrow" ) ) pw5.format(" marker-end=\"url(#Triangle)\"");
             else if ( th_name.equals( "section" ) ) pw5.format(" stroke-dasharray=\"5 3 \"");
             else if ( th_name.equals( "fault" ) ) pw5.format(" stroke-dasharray=\"8 4 \"");
@@ -220,7 +219,7 @@ class DrawingSvg
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
             int idx = point.mPointType;
-            String name = DrawingBrushPaths.getPointThName( idx );
+            String name = DrawingBrushPaths.mPointLib.getSymbolThName( idx );
             pw5.format("<!-- point %s -->\n", name );
             if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
@@ -233,7 +232,7 @@ class DrawingSvg
             //   pw5.format(Locale.ENGLISH, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
             //   pw5.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
             } else {
-              SymbolPoint sp = DrawingBrushPaths.mPointLib.getAnyPoint( idx );
+              SymbolPoint sp = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex( idx );
               if ( sp != null ) {
                 pw5.format(Locale.ENGLISH, "<g transform=\"translate(%.0f,%.0f),scale(10),rotate(%.0f)\" \n", 
                   point.cx, point.cy, point.mOrientation );
@@ -259,7 +258,7 @@ class DrawingSvg
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "SVG io-exception " + e.toString() );
+      TopoDroidLog.Error( "SVG io-exception " + e.toString() );
     }
   }
 

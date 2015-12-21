@@ -15,8 +15,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-// import java.io.StringWriter;
-// import java.io.PrintWriter;
 
 import android.os.Bundle;
 import android.app.Dialog;
@@ -145,7 +143,7 @@ class FirmwareDialog extends Dialog
           TopoDroidLog.LogFile( "Firmware upload from " + filename );
           File fp = new File( TopoDroidPath.getBinFile( filename ) );
           if ( ! fp.exists() ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "inexistent upload firmware file " + filename );
+            TopoDroidLog.Error( "inexistent upload firmware file " + filename );
             return;    
           }
           int fw = FirmwareUtils.readFirmwareFirmware( fp );

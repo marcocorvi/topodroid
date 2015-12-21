@@ -14,7 +14,6 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.PrintStream;
 import java.io.FileWriter;
@@ -45,6 +44,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.os.Debug;
+import android.os.AsyncTask;
 
 import android.app.Application;
 import android.app.KeyguardManager;
@@ -90,7 +90,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "14";
+  static String SYMBOL_VERSION = "16";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -252,9 +252,9 @@ public class TopoDroidApp extends Application
   static float mMagneticMean     = 0.0f;
   static float mDipMean          = 0.0f;
 
-  static float deltaAcc( float acc ) { return (float)Math.abs( acc - mAccelerationMean ); }
-  static float deltaMag( float mag ) { return (float)Math.abs( mag - mMagneticMean ); }
-  static float deltaDip( float dip ) { return (float)Math.abs( dip - mDipMean ); }
+  static float deltaAcc( float acc ) { return TDMath.abs( acc - mAccelerationMean ); }
+  static float deltaMag( float mag ) { return TDMath.abs( mag - mMagneticMean ); }
+  static float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 
   static boolean isBlockAcceptable( float acc, float mag, float dip )
   {
@@ -587,7 +587,7 @@ public class TopoDroidApp extends Application
       for ( CalibInfo c : calibs ) {
         // c.debug();
         if ( mDData.hasCalibName( c.name ) ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "calib " + c.name + " already in DB " );
+          TopoDroidLog.Error( "calib " + c.name + " already in DB " );
         } else {
           long id = mDData.insertCalib( c.name, c.date, c.device, c.comment, c.algo );
           if ( id >= 0 ) {
@@ -656,8 +656,7 @@ public class TopoDroidApp extends Application
   boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || mDevice == null ) return false;
-    mComm.readCoeff( mDevice.mAddress, coeff );
-    return true;
+    return mComm.readCoeff( mDevice.mAddress, coeff );
   }
 
   // called by CalibToggleTask.doInBackground
@@ -732,7 +731,7 @@ public class TopoDroidApp extends Application
         major = Integer.parseInt( ver[0] );
         minor = Integer.parseInt( ver[1] );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse error: major/minor " + ver[0] + " " + ver[1] );
+        TopoDroidLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
       }
       int sub   = 0;
       int k = 0;
@@ -753,7 +752,7 @@ public class TopoDroidApp extends Application
       try {
         mManifestDbVersion = Integer.parseInt( line );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse error: db version " + line );
+        TopoDroidLog.Error( "parse error: db version " + line );
       }
       
       if ( ! (    mManifestDbVersion >= DataHelper.DATABASE_VERSION_MIN
@@ -1039,7 +1038,7 @@ public class TopoDroidApp extends Application
       //   assignStations( list );
       // }
     } else {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Comm or Device is null ");
+      TopoDroidLog.Error( "Comm or Device is null ");
     }
     return ret;
   }
@@ -1145,9 +1144,11 @@ public class TopoDroidApp extends Application
 
 
   // called also by ShotActivity::updataBlockList
+  // this re-assign stations to shots with stationi(s) already set
+  //
   public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
   { 
-    // Log.v("DistoX", "assign stations nr. " + list.size() );
+    // Log.v("DistoX", "assign stations after.  size " + list.size() );
     int survey_stations = TopoDroidSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean shot_after_splays = TopoDroidSetting.mShotAfterSplays;
@@ -1200,10 +1201,11 @@ public class TopoDroidApp extends Application
   }
 
   // called also by ShotActivity::updataBlockList
-  // @param blk block whose stations need to be set in the DB
+  // @param list blocks whose stations need to be set in the DB
+  //
   public void assignStations( List<DistoXDBlock> list )
   { 
-    // Log.v("DistoX", "assign stations nr. " + list.size() );
+    // Log.v("DistoX", "assign stations. size " + list.size() );
     int survey_stations = TopoDroidSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
     boolean shot_after_splay = TopoDroidSetting.mShotAfterSplays;
@@ -1219,7 +1221,8 @@ public class TopoDroidApp extends Application
     String oldFrom = "empty"; // FIXME
 
     String station = shot_after_splay ? from : "";  // splays station
-    // Log.v("DistoX", "station [0] " + station );
+    // Log.v("DistoX", "assign stations: From <" + from + "> To <" + to + "> station <" + station + "> MinLeg " + 
+    //    TopoDroidSetting.mMinNrLegShots );
 
     int atStation = 0;
 
@@ -1234,7 +1237,7 @@ public class TopoDroidApp extends Application
           mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true );  // SPLAY
           // Log.v( "DistoX", blk.mId + " null prev. FROM " + blk.mFrom );
         } else {
-          if ( prev.relativeDistance( blk ) < TopoDroidSetting.mCloseDistance ) {
+          if ( prev.relativeDistance( blk ) ) {
             if ( atStation == 0 ) {
               // checkCurrentStationName
               if ( mCurrentStationName != null ) {
@@ -1245,13 +1248,13 @@ public class TopoDroidApp extends Application
                 }
                 mCurrentStationName = null;
               }
-              atStation = 2;
-            } else { /* centerline extra shot */
-              atStation ++;
+              atStation = 2; // prev and this shot
+            } else {
+              atStation ++;  // one more centerline shot
             }
             if ( atStation == TopoDroidSetting.mMinNrLegShots ) {
               if ( TopoDroidSetting.mBacksightShot ) {
-                // Log.v("DistoX", "Shot " + oldFrom + " " + from + " " + to + " station " + station + " flip " + flip );
+                // Log.v("DistoX", atStation + "Shot " + oldFrom + " " + from + " " + to + " station " + station + " flip " + flip );
                 if ( flip ) {
                   prev.mFrom = from;                            // backsight shot from--old_from
                   prev.mTo   = oldFrom;
@@ -1271,12 +1274,12 @@ public class TopoDroidApp extends Application
                 mData.updateShotName( prev.mId, mSID, from, oldFrom, true ); // LEG
                 setLegExtend( prev );
               } else {
+                // Log.v( "DistoX", prev.mId + " " + atStation + " setting prev. FROM " + from + " TO " + to );
                 // prev.mFrom = from;                             // forward-shot from--to
                 // prev.mTo   = to;
                 prev.setName( from, to );
                 mData.updateShotName( prev.mId, mSID, from, to, true ); // LEG
                 setLegExtend( prev );
-                // Log.v( "DistoX", prev.mId + " setting prev. FROM " + from + " TO " + to );
 
                 if ( survey_stations == 1 ) {                  // forward-shot
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
@@ -1472,14 +1475,23 @@ public class TopoDroidApp extends Application
       mDData.setValue( "symbol_version", SYMBOL_VERSION );
     }
     if ( install ) {
+      deleteObsoleteSymbols();
       InputStream is = getResources().openRawResource( R.raw.symbols );
       symbolsUncompress( is, overwrite );
     }
   }
 
-  private int symbolsUncompress( InputStream fis, boolean overwrite )
+  private void deleteObsoleteSymbols()
   {
-    int cnt = 0;
+    String lines[] = { "blocks", "debris", "clay", "presumed", "sand", "ice" };
+    for ( String line : lines ) {
+      File file = new File( TopoDroidPath.APP_LINE_PATH + line );
+      if ( file.exists() ) file.delete();
+    }
+  }
+
+  private void symbolsUncompress( InputStream fis, boolean overwrite )
+  {
     // Log.v(TAG, "symbol uncompress ...");
     TopoDroidPath.symbolsCheckDirs();
     try {
@@ -1498,7 +1510,7 @@ public class TopoDroidApp extends Application
           String pathname = TopoDroidPath.getSymbolFile( filepath );
           File file = new File( pathname );
           if ( overwrite || ! file.exists() ) {
-            ++cnt;
+            if ( file.exists() ) file.renameTo( new File( TopoDroidPath.getSymbolSaveFile( filepath ) ) );
             TopoDroidApp.checkPath( pathname );
             FileOutputStream fout = new FileOutputStream( pathname );
             int c;
@@ -1526,12 +1538,10 @@ public class TopoDroidApp extends Application
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
     }
-    return cnt;
   }
 
-  private int firmwareUncompress( InputStream fis, boolean overwrite )
+  private void firmwareUncompress( InputStream fis, boolean overwrite )
   {
-    int cnt = 0;
     // Log.v(TAG, "firmware uncompress ...");
     TopoDroidPath.checkBinDir( );
     try {
@@ -1546,7 +1556,6 @@ public class TopoDroidApp extends Application
         String pathname =  TopoDroidPath.getBinFile( filepath );
         File file = new File( pathname );
         if ( overwrite || ! file.exists() ) {
-          ++cnt;
           TopoDroidApp.checkPath( pathname );
           FileOutputStream fout = new FileOutputStream( pathname );
           int c;
@@ -1561,7 +1570,6 @@ public class TopoDroidApp extends Application
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
     }
-    return cnt;
   }
 
   /** insert manual-data shot
@@ -1604,7 +1612,7 @@ public class TopoDroidApp extends Application
           try {
             l = Float.parseFloat( left ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: left " + left );
+            TopoDroidLog.Error( "manual-shot parse error: left " + left );
           }
           if ( l >= 0.0f ) {
             if ( horizontal ) { // WENS
@@ -1634,7 +1642,7 @@ public class TopoDroidApp extends Application
           try {
             r = Float.parseFloat( right ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: right " + right );
+            TopoDroidLog.Error( "manual-shot parse error: right " + right );
           }
           if ( r >= 0.0f ) {
             if ( horizontal ) { // WENS
@@ -1663,7 +1671,7 @@ public class TopoDroidApp extends Application
           try {
             u = Float.parseFloat( up ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: up " + up );
+            TopoDroidLog.Error( "manual-shot parse error: up " + up );
           }
           if ( u >= 0.0f ) {
             if ( horizontal ) {
@@ -1688,7 +1696,7 @@ public class TopoDroidApp extends Application
           try {
             d = Float.parseFloat( down ) / TopoDroidSetting.mUnitLength;
           } catch ( NumberFormatException e ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "manual-shot parse error: down " + down );
+            TopoDroidLog.Error( "manual-shot parse error: down " + down );
           }
           if ( d >= 0.0f ) {
             if ( horizontal ) {

@@ -8,13 +8,9 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130307 created from DrawingStationName
  */
 package com.topodroid.DistoX;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Locale;
 
 import android.graphics.Canvas;
@@ -84,10 +80,7 @@ public class SketchStationName extends SketchPath
   @Override
   public String toTherion()
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "point %.2f %.2f %.2f station -name \"%s\"", 
+    return String.format(Locale.ENGLISH, "point %.2f %.2f %.2f station -name \"%s\"", 
       x*toTherion, -y*toTherion, -z*toTherion, mName );
-    return sw.getBuffer().toString();
   }
 }

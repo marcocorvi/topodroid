@@ -17,8 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 // import java.util.Stack;
 import java.util.regex.Pattern;
@@ -80,10 +78,10 @@ public class CompassParser extends ImportParser
         } else if ( line.startsWith("SURVEY DATE") ) {
           if ( mDate == null ) {
             String[] vals = splitLine(line); // line.split( "\\s+" );
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter( sw );
-            pw.format( "%04d.%02d.%02d", Integer.parseInt( vals[4] ), Integer.parseInt( vals[2] ), Integer.parseInt( vals[3] ) );
-            mDate = sw.getBuffer().toString();
+            try {
+              mDate = String.format( "%04d.%02d.%02d",
+                Integer.parseInt( vals[4] ), Integer.parseInt( vals[2] ), Integer.parseInt( vals[3] ) );
+            } catch ( NumberFormatException e ) { }
             if ( vals.length >= 6 ) {
               int com = line.indexOf("COMMENT:");
               mComment = line.substring( com+8 );
@@ -168,8 +166,7 @@ public class CompassParser extends ImportParser
                                  extend, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + e );
+              TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
             }
           }
         }
@@ -177,7 +174,7 @@ public class CompassParser extends ImportParser
       }
     } catch ( IOException e ) {
       // TODO
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "ERROR " + mLineCnt + ": " + line );
+      TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
     if ( mDate == null ) {

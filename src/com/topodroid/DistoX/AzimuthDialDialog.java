@@ -33,7 +33,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 
@@ -69,7 +68,7 @@ public class AzimuthDialDialog extends Dialog
   {
     Matrix m = new Matrix();
     m.preRotate( mAzimuth - 90 );
-    // float s = FloatMath.cos( ((mAzimuth % 90) - 45) * TopoDroidUtil.GRAD2RAD );
+    // float s = TDMath.cosd( ((mAzimuth % 90) - 45) );
     // m.postScale( s, s );
     int w = 96; // mBMdial.getWidth();
     Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, w, w, true );

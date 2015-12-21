@@ -1,6 +1,7 @@
 symbol line
 name wall_blocks
 name-bg стена_блокаж
+name-ru стена_из_блоков
 th_name wall:blocks
 group wall
 color 0xff0000 0xff

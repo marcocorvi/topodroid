@@ -8,14 +8,9 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120520 created
- * 20130215 3D sketches button
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -130,27 +125,18 @@ public class PlotListDialog extends Dialog
         if ( item.type == PlotInfo.PLOT_PLAN /* || item.type == PlotInfo.PLOT_EXTENDED */ ) {
           String name = item.name.substring( 0, item.name.length() - 1 );
 
-          StringWriter sw1 = new StringWriter();
-          PrintWriter pw1  = new PrintWriter(sw1);
-          pw1.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) );
-          // pw1.format("<%s> %s", name, item.getTypeString() );
-          mArrayAdapter.add( sw1.getBuffer().toString() );
+          mArrayAdapter.add( 
+           String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) ) );
 
-          StringWriter sw2 = new StringWriter();
-          PrintWriter pw2  = new PrintWriter(sw2);
-          pw2.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_EXTENDED, res ) );
-          // pw2.format("<%s> %s", name, item.getTypeString() );
-          mArrayAdapter.add( sw2.getBuffer().toString() );
-          // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Data " + result );
+          mArrayAdapter.add( 
+            String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_EXTENDED, res ) ) );
         }
       }
       // FIXME_SKETCH_3D
         if ( slist != null ) {
           for ( Sketch3dInfo sketch : slist ) {
-            StringWriter sw = new StringWriter();
-            PrintWriter pw  = new PrintWriter(sw);
-            pw.format("<%s> %s", sketch.name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_SKETCH_3D, res ) );
-            mArrayAdapter.add( sw.getBuffer().toString() );
+            mArrayAdapter.add(
+              String.format("<%s> %s", sketch.name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_SKETCH_3D, res ) ) );
           }
         }
       // END_SKETCH_3D //

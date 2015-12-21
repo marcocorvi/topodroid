@@ -49,11 +49,9 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.hardware.SensorManager;
 
-import android.util.FloatMath;
-
 import java.io.File;
 import java.io.FileWriter;
-import java.io.StringWriter;
+// import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -258,9 +256,9 @@ public class SketchActivity extends ItemDrawer
     Resources res = getResources();
     // String dir = mInfo.getDirectionString();
     String symbol_name = // ( mIsInSection) ? "section" :
-        ( mSymbol == SketchDef.SYMBOL_POINT )? res.getString(R.string.POINT) + DrawingBrushPaths.mPointLib.getAnyPointName( mCurrentPoint )
+        ( mSymbol == SketchDef.SYMBOL_POINT )? res.getString(R.string.POINT) + DrawingBrushPaths.mPointLib.getSymbolName( mCurrentPoint )
       : ( mSymbol == SketchDef.SYMBOL_LINE )? res.getString(R.string.LINE)
-      : res.getString(R.string.AREA) + DrawingBrushPaths.mAreaLib.getAreaName( mCurrentArea );
+      : res.getString(R.string.AREA) + DrawingBrushPaths.mAreaLib.getSymbolName( mCurrentArea );
 
     setTitle( String.format( res.getString( R.string.title_sketch), 
       mInfo.getShotString(),
@@ -351,7 +349,7 @@ public class SketchActivity extends ItemDrawer
   
   public void areaSelected( int k, boolean update_recent ) 
   {
-    if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
+    if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
       mSymbol = SketchDef.SYMBOL_AREA;
       mCurrentArea = k;
     }
@@ -360,7 +358,7 @@ public class SketchActivity extends ItemDrawer
 
   public void lineSelected( int k, boolean update_recent ) 
   {
-    if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mAnyLineNr ) {
+    if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mSymbolNr ) {
       mSymbol = SketchDef.SYMBOL_LINE;
       mCurrentLine = k;
     }
@@ -369,7 +367,7 @@ public class SketchActivity extends ItemDrawer
 
   public void pointSelected( int p, boolean update_recent )
   {
-    if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mAnyPointNr ) {
+    if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mSymbolNr ) {
       mSymbol = SketchDef.SYMBOL_POINT;
       mCurrentPoint = p;
     }
@@ -1109,7 +1107,7 @@ public class SketchActivity extends ItemDrawer
     if ( np < 2 ) return 0.0f;
     float x = ev.getX(1) - ev.getX(0);
     float y = ev.getY(1) - ev.getY(0);
-    return FloatMath.sqrt(x*x + y*y);
+    return TDMath.sqrt(x*x + y*y);
   }
 
   // private float direction( WrapMotionEvent ev )
@@ -1118,7 +1116,7 @@ public class SketchActivity extends ItemDrawer
   //   if ( np < 2 ) return 0.0f;
   //   float x = ev.getX(1) - ev.getX(0);
   //   float y = ev.getY(1) - ev.getY(0);
-  //   return (float)Math.atan2( y, x );
+  //   return TDMath.atan2( y, x );
   // }
 
   // private float position( WrapMotionEvent ev ) // vertical position
@@ -1249,7 +1247,7 @@ public class SketchActivity extends ItemDrawer
         float y_shift = y_canvas - mSaveY;
         if ( mMode == SketchDef.MODE_DRAW || mMode == SketchDef.MODE_EDIT ) {
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
-            if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
               // mSketchSurface.isDrawing = true;
               if ( ++mPointCnt % TopoDroidSetting.mLineType == 0 ) {
                 mCurrentLinePath.addPoint( x_scene, y_scene );
@@ -1310,7 +1308,7 @@ public class SketchActivity extends ItemDrawer
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
-            if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
+            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
               mCurrentLinePath.addPoint( x_scene, y_scene );
             }
             if ( mPointCnt > TopoDroidSetting.mLineType ) {
@@ -1338,7 +1336,7 @@ public class SketchActivity extends ItemDrawer
               if ( mSymbol == SketchDef.SYMBOL_LINE ) {
                 p1 = pts.get(0);
                 p2 = pts.get(pts.size()-1);
-                float len = FloatMath.sqrt( (p2.mX-p1.mX)*(p2.mX-p1.mX) + (p2.mY-p1.mY)*(p2.mY-p1.mY) );
+                float len = TDMath.sqrt( (p2.mX-p1.mX)*(p2.mX-p1.mX) + (p2.mY-p1.mY)*(p2.mY-p1.mY) );
                 if ( len < SketchDef.CLOSE_GAP ) {
                   line.close();
                 }
@@ -1357,15 +1355,14 @@ public class SketchActivity extends ItemDrawer
                 // Log.v("DistoX", "new point " + mCurrentPoint + " at " + p.x + " " + p.y + " " + p.z );
                 SketchPointPath path = new SketchPointPath( mCurrentPoint, mInfo.st1, mInfo.st2, p.x, p.y, p.z );
                 SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
-                if ( point_lib.canRotate(mCurrentPoint) ) {
-                  float angle = (float)( point_lib.getPointOrientation( mCurrentPoint ) );
+                if ( point_lib.isSymbolOrientable( mCurrentPoint ) ) {
+                  float angle = (float)( point_lib.getPointOrientation( mCurrentPoint ) ); // degrees
                   // Log.v("DistoX", "point " + mCurrentPoint + " angle " + angle );
-                  angle *= (float)(Math.PI/180.0);
                   // angles 0:upward 90;rightward 180:downward 270:leftward
                   // scene: x is rightward, y downward
                   // p1 is the 3D point of the orientation (from p to p1)
-                  Vector p1 = tri.get3dPoint( x_scene + 0.1f * FloatMath.sin(angle),
-                                              y_scene - 0.1f * FloatMath.cos(angle) );
+                  Vector p1 = tri.get3dPoint( x_scene + 0.1f * TDMath.sind(angle),
+                                              y_scene - 0.1f * TDMath.cosd(angle) );
                   path.setOrientation( p1, mInfo );
                 }
                 mModel.addPoint( path );
@@ -1950,7 +1947,7 @@ public class SketchActivity extends ItemDrawer
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    // TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
     startActivity( intent );
@@ -1970,7 +1967,7 @@ public class SketchActivity extends ItemDrawer
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

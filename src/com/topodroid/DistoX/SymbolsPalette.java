@@ -8,8 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130219 created (extracted from DrawingSurface)
  */
 package com.topodroid.DistoX;
 
@@ -30,7 +28,7 @@ import android.content.res.Resources;
  */
 public class SymbolsPalette 
 {
-  TreeSet< String > mPalettePoint;
+  TreeSet< String > mPalettePoint;  // filenames == th_names
   TreeSet< String > mPaletteLine;
   TreeSet< String > mPaletteArea;
 
@@ -48,26 +46,13 @@ public class SymbolsPalette
     mPaletteArea.clear();
   }
 
-  void addPoint( String type )
-  {
-    mPalettePoint.add( type );
-  }
+  void addPointFilename( String type ) { mPalettePoint.add( type ); }
 
-  void addLine( String type )
-  {
-    mPaletteLine.add( type );
-  }
+  void addLineFilename( String type ) { mPaletteLine.add( type ); }
 
-  void addArea( String type )
-  {
-    mPaletteArea.add( type );
-  }
+  void addAreaFilename( String type ) { mPaletteArea.add( type ); }
 
-
-  boolean isOK() 
-  {
-    return mPalettePoint.size() == 0 && mPaletteLine.size() == 0 && mPaletteArea.size() == 0;
-  }
+  boolean isOK() { return mPalettePoint.size() == 0 && mPaletteLine.size() == 0 && mPaletteArea.size() == 0; }
 
 
   public String getMessage( Resources res )

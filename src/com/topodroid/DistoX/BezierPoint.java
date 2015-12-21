@@ -72,26 +72,25 @@ class BezierPoint
   float length() 
   { 
     float l2 = mX*mX + mY*mY;
-    if ( l2 > 0.000001f ) return FloatMath.sqrt( l2 );
-    return 0.0f;
+    return ( l2 > 0 )? FloatMath.sqrt( l2 ) : 0;
   }
 
   float squareLength() { return mX*mX + mY*mY; }
 
-  float distance( BezierPoint p )
+  float distance( BezierPoint p ) // { return distance( p.mX, p.mY ); }
   {
-    float x = mX - p.mX;
-    float y = mY - p.mY;
-    float d = x*x + y*y;
-    if ( d > 0.0f ) return FloatMath.sqrt(d);
-    return 0.0f;
+    float dx = mX - p.mX;
+    float dy = mY - p.mY;
+    float d = dx*dx + dy*dy;
+    return ( d > 0 )? FloatMath.sqrt(d) : 0;
   }
 
   float distance( float x, float y )
   { 
-    x -= mX;
-    y -= mY;
-    return FloatMath.sqrt( x*x + y*y + 0.000001f );
+    float dx = x - mX;
+    float dy = y - mY;
+    float d = dx*dx + dy*dy;
+    return ( d > 0 )? FloatMath.sqrt(d) : 0;
   }
 
   void normalize()

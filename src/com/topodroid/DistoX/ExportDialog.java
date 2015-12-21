@@ -88,7 +88,7 @@ public class ExportDialog extends Dialog
 
   public void onClick(View v) 
   {
-    Log.v("DistoX", "Selected " + mSelected );
+    // Log.v("DistoX", "Selected " + mSelected );
     if ( (Button)v == mBtnOk && mSelected != null ) {
       mParent.doExport( mSelected );
     // } else if ( b == mBtnCancel ) {

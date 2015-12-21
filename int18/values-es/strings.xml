@@ -237,6 +237,7 @@
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
     <!-- TODO string name="menu_sync">SYNC</string -->
+    <!-- TODO string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <!-- TODO string name="menu_validate">VALIDATE</string -->
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
@@ -285,6 +286,8 @@
     <string name="splay">Secundaria</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
     <string name="too_many_legs_xsection">Demasiadas tomas de X-sección</string>
+    <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
+    <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
 
     <string name="sensor">Sensor</string>
     <!-- UNUSED string name="sensor_accelerometer">Acelerómetro</string -->
@@ -499,9 +502,10 @@
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
     <string name="help_edit">Introducir modo de edición</string>
     <string name="help_refs">Elejir dibujo</string>
-    <!-- UNUSED string name="help_rename">Cambio nombre topografía</string -->
+    <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_stats">Estadísticas de Topografías</string>
     <string name="help_save_plot">Exportar dibujo</string>
+    <!-- TODO string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
     <string name="help_trash">Eliminar dibujo</string>
     <string name="help_undo">Deshacer última acción de dibujo</string>
@@ -788,6 +792,8 @@
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
   <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
+  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>

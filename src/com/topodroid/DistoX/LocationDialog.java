@@ -14,8 +14,6 @@ package com.topodroid.DistoX;
 import java.util.Iterator;
 
 import java.io.File;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 import java.util.List;
 
@@ -210,19 +208,19 @@ public class LocationDialog extends Dialog
   {
     // Log.v("DistoX", "Location add Fixed Point " + lng + " " + lat + " " + alt );
 
-    // FIXME TODO try to get altimetric altitude h_geoid
     String name = mETstation.getText().toString();
     if ( name.length() == 0 ) {
-      mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+      // mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
       return;
     }
     if ( mParent.hasLocation( name ) ) {
-      mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
+      // mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
       return;
     }
     FixedInfo f = mParent.addLocation( name, lng, lat, alt, asl );
     if ( f != null ) {
       // no need to update the adatper: fixeds are not many and can just request the list to the database 
+      mETstation.setText(name);
       mFixedAdapter.add( f );
       mList.invalidate();
       // refreshList();
@@ -257,8 +255,7 @@ public class LocationDialog extends Dialog
     // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Location onEditorAction " + actionId );
     // if ( actionId == 6 )
     {
-      EditText et = (EditText)v;
-      if ( et == mETstation ) {
+      if ( (EditText)v == mETstation ) {
         if ( mLocating ) {
           setGPSoff();
         }
@@ -266,24 +263,20 @@ public class LocationDialog extends Dialog
         mHasLocation = false;
         mBtnAdd.setEnabled( false );
         mBtnMobileTopographer.setEnabled( false );
-        CharSequence item = v.getText();
-        if ( item == null || item.length() == 0 ) {
-          String error = mContext.getResources().getString( R.string.error_station_required );
-          mETstation.setError( error );
-          return false;
+        CharSequence item = mETstation.getText();
+        if ( item != null && item.length() > 0 ) {
+          String str = item.toString();
+          // check if station has already a location
+          if ( mApp.mData.hasFixedStation( -1L, mApp.mSID, str ) ) {
+            String error = mContext.getResources().getString( R.string.error_station_already_fixed );
+            mETstation.setError( error );
+            return false;
+          }
+          boolean enabled =  ( str != null && str.length() > 0 );
+          mBtnLoc.setEnabled( enabled );
+          mBtnAdd.setEnabled( enabled );
+          mBtnMobileTopographer.setEnabled( enabled );
         }
-        String str = item.toString();
-        // check if station has already a location
-        if ( mApp.mData.hasFixedStation( -1L, mApp.mSID, str ) ) {
-          String error = mContext.getResources().getString( R.string.error_station_already_fixed );
-          et.setError( error );
-          return false;
-        }
-           
-        boolean enabled =  ( str != null && str.length() > 0 );
-        mBtnLoc.setEnabled( enabled );
-        mBtnAdd.setEnabled( enabled );
-        mBtnMobileTopographer.setEnabled( enabled );
       }
     }
     return false;
@@ -301,15 +294,21 @@ public class LocationDialog extends Dialog
       mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
       return;
     }
-    // if ( mParent.hasLocation( station ) ) {
-    //   mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
-    //   return;
-    // }
+    if ( mParent.hasLocation( station ) ) {
+      mETstation.setError( mContext.getResources().getString( R.string.error_station_already_fixed ) );
+      return;
+    }
     if ( b == mBtnAdd ) {
       // stop GPS location and start dialog for lat/long/alt data
       if ( TopoDroidSetting.mKeyboard ) mKeyboard.hide();
       if ( mLocating ) {
         setGPSoff();
+      }
+      CharSequence item = mETstation.getText();
+      if ( item == null || item.length() == 0 ) {
+        String error = mContext.getResources().getString( R.string.error_station_required );
+        mETstation.setError( error );
+        return;
       }
       if ( mHasLocation ) {
         WorldMagneticModel wmm = new WorldMagneticModel( mContext );
@@ -327,7 +326,7 @@ public class LocationDialog extends Dialog
         // FIXME GPS_AVERAGE NOT USED
         // if ( TopoDroidSetting.mUseGPSAveraging ) {
         //   if ( ! mParent.tryGPSAveraging( this ) ) {
-        //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Location: failed GPSAveraging" );
+        //     TopoDroidLog.Error( "Location: failed GPSAveraging" );
         //   }
         // } else {
           setGPSon();
@@ -424,9 +423,9 @@ public class LocationDialog extends Dialog
         mHasLocation = (loc != null);
         if ( mHasLocation ) displayLocation( loc );
       } catch ( IllegalArgumentException e ) {
-        TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "onGpsStatusChanged IllegalArgumentException " );
+        TopoDroidLog.Error( "onGpsStatusChanged IllegalArgumentException " );
       } catch ( SecurityException e ) {
-        TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "onGpsStatusChanged SecurityException " );
+        TopoDroidLog.Error( "onGpsStatusChanged SecurityException " );
       }
     }
   }

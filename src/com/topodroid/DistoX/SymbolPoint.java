@@ -49,7 +49,6 @@ class SymbolPoint extends Symbol
   // SymbolPointBasic mPoint1; // basic point
 
   // boolean hasText() { return mHasText; }
-  // boolean canRotate() { return mOrientable; }
   // double orientation() { return mOrientation; }
 
   @Override public boolean isOrientable() { return mOrientable; }
@@ -69,7 +68,6 @@ class SymbolPoint extends Symbol
       // Log.v("DistoX", "rotate point by " + a + " orientation " + (int)mOrientation );
     }
   }
-  
   @Override public int getAngle() { return (int)mOrientation; } // degrees
 
   @Override public String getName( ) { return mName; }
@@ -85,17 +83,18 @@ class SymbolPoint extends Symbol
  
   @Override public Paint getPaint( ) { return mPaint; }
 
-  SymbolPoint( String filename, String locale, String iso )
+  SymbolPoint( String pathname, String fname, String locale, String iso )
   {
+    super( null, fname );
     mOrientable = false;
     mHasText = false;
     mOrientation = 0.0;
-    readFile( filename, locale, iso );
+    readFile( pathname, locale, iso );
   }
 
-  SymbolPoint( String n1, String tn1, int c1, String path, boolean orientable )
+  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable )
   {
-    super( tn1 );
+    super( tn1, fname );
     mName = n1;
     mDxf    = null;
     makePaint( c1 );
@@ -111,9 +110,9 @@ class SymbolPoint extends Symbol
     mOrientation = 0.0;
   }
 
-  SymbolPoint( String n1, String tn1, int c1, String path, boolean orientable, boolean has_text )
+  SymbolPoint( String n1, String tn1, String fname, int c1, String path, boolean orientable, boolean has_text )
   {
-    super( tn1 );
+    super( tn1, fname ); // FIXME fname
     mName = n1;
     mDxf    = null;
     makePaint( c1 );
@@ -164,9 +163,9 @@ class SymbolPoint extends Symbol
    *      endpath
    *      endsymbol
    */
-  void readFile( String filename, String locale, String iso )
+  void readFile( String pathname, String locale, String iso )
   {
-    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + filename + " locale " + locale );
+    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + pathname + " locale " + locale );
  
     String name    = null;
     String th_name = null;
@@ -175,8 +174,8 @@ class SymbolPoint extends Symbol
     int cnt = 0;
 
     try {
-      // FileReader fr = new FileReader( filename );
-      FileInputStream fr = new FileInputStream( filename );
+      // FileReader fr = new FileReader( pathname );
+      FileInputStream fr = new FileInputStream( pathname );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       line = br.readLine();
@@ -237,7 +236,7 @@ class SymbolPoint extends Symbol
                 mCsxCategory = Integer.parseInt( vals[k] );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse csurvey error: " + line );
+              TopoDroidLog.Error( pathname + " parse csurvey error: " + line );
             }
           } else if ( vals[k].equals("path") ) {
             path = br.readLine();
@@ -258,12 +257,12 @@ class SymbolPoint extends Symbol
                 makePaint( color );
                 makePath( path );
                 mOrigPath = new Path( mPath );
-                // mPoint1 = new SymbolPointBasic( name, th_name, color, path );
+                // mPoint1 = new SymbolPointBasic( name, th_name, fname, color, path );
               // } else if ( cnt == 1 ) {
               //   if ( mOrientable == true ) {
               //     // ERROR point1 is orientable
               //   } else {
-              //     mPoint2 = new SymbolPointBasic( name, th_name, color, path );
+              //     mPoint2 = new SymbolPointBasic( name, th_name, fname, color, path );
               //     mOrientable = true;
               //   }
               } else {
@@ -281,7 +280,7 @@ class SymbolPoint extends Symbol
       // FIXME
     }
     mOrientation = 0.0;
-    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + filename + " csurvey " + mCsxLayer );
+    // Log.v(  TopoDroidApp.TAG, "SymbolPoint::readFile " + pathname + " csurvey " + mCsxLayer );
   }
 
   private void makePath()
@@ -336,7 +335,7 @@ class SymbolPoint extends Symbol
             pv1.format(Locale.ENGLISH, "M %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse moveTo error: " + path );
+          TopoDroidLog.Error( path + " parse moveTo error" );
         }
       } else if ( "lineTo".equals( vals[k] ) ) {      
         try {
@@ -358,7 +357,7 @@ class SymbolPoint extends Symbol
             pv1.format(Locale.ENGLISH, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse lineTo error: " + path );
+          TopoDroidLog.Error( path + " parse lineTo error" );
         }
       } else if ( "cubicTo".equals( vals[k] ) ) {
         // cp1x cp1y cp2x cp2y p2x p2y
@@ -383,41 +382,41 @@ class SymbolPoint extends Symbol
             x00 /= dxfScale;
             y00 /= dxfScale;
 
-            float dx = (float)( Math.abs( x00 - x2 ) );
-            float dy = (float)( Math.abs( y00 - y2 ) );
+            float dx = TDMath.abs( x00 - x2 );
+            float dy = TDMath.abs( y00 - y2 );
 
             float a1 = 0.0f;
             float a2 = 0.0f;
             // float zz = 1.0f;
             float cx = 0.0f;
             float cy = 0.0f;
-            float r  = (float)( Math.abs(x00-x2) );
-            float e = (float)( Math.abs( r /(y00-y2) ) );
+            float r = TDMath.abs( x00-x2 );
+            float e = TDMath.abs( r /(y00-y2) );
 
             if ( x00 > x2 ) {
               if ( y00 > y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // clockwise
                   cx = x00;
                   cy = y2;
-                  a1 = TopoDroidUtil.M_PI;
-                  a2 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI;
+                  a2 = 3 * TDMath.M_PI2;
                 } else { // counter-clockwise
                   cx = x2;
                   cy = y00;
                   a1 = 0.0f;
-                  a2 = TopoDroidUtil.M_PI2;
+                  a2 = TDMath.M_PI2;
                 }
               } else if ( y00 < y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
                   cx = x00;
                   cy = y2;
-                  a1 = TopoDroidUtil.M_PI2;
-                  a2 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI2;
+                  a2 = TDMath.M_PI;
                 } else {
                   cx = x2;
                   cy = y00;
-                  a1 = 3 * TopoDroidUtil.M_PI2;
-                  a2 = 2 * TopoDroidUtil.M_PI;
+                  a1 = 3 * TDMath.M_PI2;
+                  a2 = 2 * TDMath.M_PI;
                 }
               } else { // y00 == y2 : semicircle
                 cx = ( x00 + x2 ) /2;
@@ -425,36 +424,36 @@ class SymbolPoint extends Symbol
                 r /= 2;
                 e = 1.0f;
                 if ( y1 > y00 ) { // down
-                  a1 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI;
                 } else {
                   a1 = 0.0f;
                 }
-                a2 = a1 + TopoDroidUtil.M_PI;
+                a2 = a1 + TDMath.M_PI;
               }
             } else if ( x00 < x2 ) {
               if ( y00 > y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
                   cx = x00;
                   cy = y2;
-                  a1 = 3 * TopoDroidUtil.M_PI2;
-                  a2 = 2 * TopoDroidUtil.M_PI;
+                  a1 = 3 * TDMath.M_PI2;
+                  a2 = 2 * TDMath.M_PI;
                 } else {
                   cx = x2;
                   cy = y00;                   
-                  a1 = TopoDroidUtil.M_PI2;
-                  a2 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI2;
+                  a2 = TDMath.M_PI;
                 }
               } else if ( y00 < y2 ) {
                 if ( Math.abs(x1-x00) > Math.abs(y1-y00) ) { // counter-clockwise
                   cx = x00;
                   cy = y2;
                   a1 = 0.0f;
-                  a2 = TopoDroidUtil.M_PI2;
+                  a2 = TDMath.M_PI2;
                 } else {
                   cx = x2;
                   cy = y00;
-                  a1 = TopoDroidUtil.M_PI;
-                  a2 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI;
+                  a2 = 3 * TDMath.M_PI2;
                 }
               } else { // y00 == y2 : semicircle
                 cx = ( x00 + x2 ) / 2;
@@ -462,31 +461,31 @@ class SymbolPoint extends Symbol
                 r /= 2;
                 e = 1.0f;
                 if ( y1 > y00 ) { // down
-                  a1 = TopoDroidUtil.M_PI;
+                  a1 = TDMath.M_PI;
                 } else {
                   a1 = 0.0f;
                 }
-                a2 = a1 + TopoDroidUtil.M_PI;
+                a2 = a1 + TDMath.M_PI;
               }
             } else { // x00 == x2 : semicircle
               cx = x00;
               cy = ( y00 + y2 ) / 2;
-              r = (float)( Math.abs(y00-y2) ) / 2;
+              r = TDMath.abs( y00-y2 ) / 2;
               e = 1.0f;
               if ( y00 > y2 ) {
                 if ( x1 < x00 ) { // left
-                  a1 = TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI2;
                 } else {
-                  a1 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = 3 * TDMath.M_PI2;
                 }
               } else {
                 if ( x1 < x00 ) {
-                  a1 = 3 * TopoDroidUtil.M_PI2;
+                  a1 = 3 * TDMath.M_PI2;
                 } else {
-                  a1 = TopoDroidUtil.M_PI2;
+                  a1 = TDMath.M_PI2;
                 }
               }
-              a2 = a1 + TopoDroidUtil.M_PI;
+              a2 = a1 + TDMath.M_PI;
             }
 
             // Log.v(TopoDroidApp.TAG, mName + " cubic " + x00 + " " + y00 + " " + x0 + " " + y0 + " " + x1 + " " + y1 + " " + x2 + " " + y2 );
@@ -506,8 +505,8 @@ class SymbolPoint extends Symbol
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbEllipse" );
             DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f );
             DrawingDxf.printFloat( pw, 40, r*dxfScale );
-            DrawingDxf.printFloat( pw, 50, a1 * TopoDroidUtil.RAD2GRAD );
-            DrawingDxf.printFloat( pw, 51, a2 * TopoDroidUtil.RAD2GRAD );
+            DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2GRAD );
+            DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2GRAD );
     
             x00 = x2 * dxfScale;
             y00 = y2 * dxfScale;
@@ -525,7 +524,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printXYZ1( pw, x00, -y00, 0.0f );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse cubicTo error: " + path );
+          TopoDroidLog.Error( path + " parse cubicTo error" );
         }
       } else if ( "addCircle".equals( vals[k] ) ) {
         try {
@@ -551,7 +550,7 @@ class SymbolPoint extends Symbol
               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse circle error: " + path );
+          TopoDroidLog.Error( path + " parse circle error" );
         }
       } else if ( "arcTo".equals( vals[k] ) ) {
         // (x0,y0) top-left corner of rect
@@ -591,7 +590,7 @@ class SymbolPoint extends Symbol
             //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER
             //           x1*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                        // ENDPOINT OF MAJOR AXIS
             //           (y1-y0)/(x1-x0),                                              // RATIO MINOR/MAJOR
-            //           x2*TopoDroidUtil.GRAD2RAD, (x2+y2)*TopoDroidUtil.GRAD2RAD );  // START and END PARAMS
+            //           x2*TDMath.GRAD2RAD, (x2+y2)*TDMath.GRAD2RAD );  // START and END PARAMS
             DrawingDxf.printString( pw, 0, "ARC" );
             DrawingDxf.printString( pw, 8, "POINT" );
             DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbEllipse" );
@@ -605,17 +604,17 @@ class SymbolPoint extends Symbol
             float rx = (x1-x0)/2;
             float ry = (y1-y0)/2;
     
-            float x0i = (cx + rx * (float)(Math.cos((x2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale; // initial point
-            float y0i = (cy + ry * (float)(Math.sin((x2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale;
-            x00 = (cx + rx * (float)(Math.cos((x2+y2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale;    // final point
-            y00 = (cy + ry * (float)(Math.sin((x2+y2)*TopoDroidUtil.GRAD2RAD)) )* dxfScale;
+            float x0i = (cx + rx * TDMath.cosd( x2 ) )* dxfScale; // initial point
+            float y0i = (cy + ry * TDMath.sind( x2 ) )* dxfScale;
+            x00 = (cx + rx * TDMath.cosd( x2+y2 ) )* dxfScale;    // final point
+            y00 = (cy + ry * TDMath.sind( x2+y2 ) )* dxfScale;
             
             // mode to (x00, y00)
             pv1.format(Locale.ENGLISH, "M %.2f %.2f ", x0i*csxScale, y0i*csxScale );
             pv1.format(Locale.ENGLISH, "A %.2f %.2f 0 1 %.2f %.2f ", rx*csxdxfScale, ry*csxdxfScale, x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse arcTo error: " + path );
+          TopoDroidLog.Error( path + " parse arcTo error" );
         }
       }
     }

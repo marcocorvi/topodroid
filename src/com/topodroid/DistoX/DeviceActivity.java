@@ -25,7 +25,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.AsyncTask;
+// import android.os.AsyncTask;
 
 import android.content.Context;
 import android.content.Intent;
@@ -284,7 +284,7 @@ public class DeviceActivity extends Activity
           if ( dev == null ) {
             String model = device.getName();
             if ( model == null ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "WARNING. Null name for device " + addr );
+              TopoDroidLog.Error( "WARNING. Null name for device " + addr );
             } else if ( model.startsWith( "DistoX", 0 ) ) {
               String name  = Device.modelToName( model );
               mApp.mDData.insertDevice( addr, model, name );
@@ -292,7 +292,7 @@ public class DeviceActivity extends Activity
             }
           }
           if ( dev != null ) {
-            // // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "device " + name );
+            // // TopoDroidLog.Error( "device " + name );
             // if ( dev.mModel.startsWith("DistoX-") ) {      // DistoX2 X310
             //   mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
             // } else if ( dev.mModel.equals("DistoX") ) {    // DistoX A3
@@ -678,7 +678,7 @@ public class DeviceActivity extends Activity
           String address = extras.getString( TopoDroidTag.TOPODROID_DEVICE_ACTION );
           // TopoDroidLog.Log(TopoDroidLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "onActivityResult REQUEST_DEVICE: null address");
+            TopoDroidLog.Error( "onActivityResult REQUEST_DEVICE: null address");
           } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true );
             mApp.setDevice( address );
@@ -705,7 +705,7 @@ public class DeviceActivity extends Activity
             setState();
           }
         } else if ( result == RESULT_CANCELED ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "CANCELED");
+          TopoDroidLog.Error( "CANCELED");
           // finish(); // back to survey
         }
         updateList();
@@ -724,7 +724,7 @@ public class DeviceActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    // TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
     startActivity( intent );
@@ -744,7 +744,7 @@ public class DeviceActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

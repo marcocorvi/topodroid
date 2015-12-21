@@ -15,21 +15,19 @@ package com.topodroid.DistoX;
 
 public class NumSplay extends NumSurveyPoint
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
-
   public NumStation from;
   private DistoXDBlock block;
 
   DistoXDBlock getBlock() { return block; }
 
-  NumSplay( NumStation f, float d, float b, float c, int extend, DistoXDBlock blk )
+  NumSplay( NumStation f, float d, float b, float c, float extend, DistoXDBlock blk )
   {
     from = f;
-    v = from.v - d * (float)Math.sin(c * grad2rad);
-    float h0 = d * (float)Math.abs( Math.cos(c * grad2rad) );
+    v = from.v - d * TDMath.sind( c );
+    float h0 = d * TDMath.abs( TDMath.cosd( c ) );
     h = from.h + extend * h0;
-    s = from.s - h0 * (float)Math.cos( b * grad2rad );
-    e = from.e + h0 * (float)Math.sin( b * grad2rad );
+    s = from.s - h0 * TDMath.cosd( b );
+    e = from.e + h0 * TDMath.sind( b );
     block = blk;
   }
 }

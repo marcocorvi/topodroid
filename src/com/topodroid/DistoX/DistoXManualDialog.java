@@ -18,8 +18,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 
 import android.app.Activity;
 // import android.app.Dialog;
@@ -151,10 +149,7 @@ public class DistoXManualDialog extends Activity
     // Log.v("DistoX", "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
     if ( pos <= 14 ) {
-      StringWriter sw = new StringWriter();
-      PrintWriter pw = new PrintWriter( sw );
-      pw.format( "manual%02d.htm", pos );
-      load( sw.getBuffer().toString() );
+      load( String.format( "manual%02d.htm", pos ) );
     } else {
       getManualFromWeb();
     }

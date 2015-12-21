@@ -40,11 +40,11 @@ class MagElement
   double Zdot; /*15. Yearly rate of change in the downward component*/
   double GVdot; /*16. Yearly rate of change in grid variation*/
 
-  void dump()
-  {
-    System.out.println("Decl " + Decl + "/" + Decldot + " Incl " + Incl + "/" + Incldot 
-      + " F " + F + "/" + Fdot + " H " + H + "/" + Hdot );
-  }
+  // void dump()
+  // {
+  //   System.out.println("Decl " + Decl + "/" + Decldot + " Incl " + Incl + "/" + Incldot 
+  //     + " F " + F + "/" + Fdot + " H " + H + "/" + Hdot );
+  // }
 
   MagElement( )
   {

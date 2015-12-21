@@ -131,11 +131,11 @@ public class DeviceUtil
       Method m_createBond = device.getClass().getMethod( "createBond", classes3 );
       m_createBond.invoke( device );
     } catch ( NoSuchMethodException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed to set PIN: no method " + e.getMessage() );
+      TopoDroidLog.Error( "Failed to set PIN: no method " + e.getMessage() );
     } catch ( InvocationTargetException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed to set PIN: invoke " + e.getMessage() );
+      TopoDroidLog.Error( "Failed to set PIN: invoke " + e.getMessage() );
     } catch (IllegalAccessException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed to set PIN: illegal access " + e.getMessage() );
+      TopoDroidLog.Error( "Failed to set PIN: illegal access " + e.getMessage() );
     }
   }
 }

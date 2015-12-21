@@ -28,7 +28,7 @@ import android.util.Log;
 
 class DrawingDxf
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
+  private static final float grad2rad = TDMath.GRAD2RAD;
   private static int VERSION = 9;
 
   static final String zero = "0.0";
@@ -179,7 +179,7 @@ class DrawingDxf
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
     // compute BBox
-    for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+    for ( ICanvasCommand cmd : plot.getCommands() ) {
       if ( cmd.commandType() != 0 ) continue;
       DrawingPath p = (DrawingPath)cmd;
 
@@ -203,10 +203,10 @@ class DrawingDxf
         if ( pp.cy > ymax ) ymax = pp.cy;
       } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
         DrawingStationPath st = (DrawingStationPath)p;
-        if ( st.mXpos < xmin ) xmin = st.mXpos;
-        if ( st.mXpos > xmax ) xmax = st.mXpos;
-        if ( st.mYpos < ymin ) ymin = st.mYpos;
-        if ( st.mYpos > ymax ) ymax = st.mYpos;
+        if ( st.cx < xmin ) xmin = st.cx;
+        if ( st.cx > xmax ) xmax = st.cx;
+        if ( st.cy < ymin ) ymin = st.cy;
+        if ( st.cy > ymax ) ymax = st.cy;
       }
     }
     xmin *= scale;
@@ -297,7 +297,7 @@ class DrawingDxf
 
         SymbolLineLibrary linelib = DrawingBrushPaths.mLineLib;
         SymbolAreaLibrary arealib = DrawingBrushPaths.mAreaLib;
-        int nr_layers = 6 + linelib.mAnyLineNr + arealib.mAnyAreaNr;
+        int nr_layers = 6 + linelib.mSymbolNr + arealib.mSymbolNr;
         ++handle; writeBeginTable( out, "LAYER", handle, nr_layers );
         {
           StringWriter sw2 = new StringWriter();
@@ -315,15 +315,15 @@ class DrawingDxf
           ++handle; printLayer( pw2, handle, "REF",     flag, color, lt_continuous ); ++color;
           
           if ( linelib != null ) { 
-            for ( SymbolLine line : linelib.mAnyLine ) {
+            for ( Symbol line : linelib.getSymbols() ) {
               String lname = "L_" + line.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, lname, flag, color, lt_continuous ); ++color;
             }
           }
 
           if ( arealib != null ) {
-            for ( SymbolArea area : arealib.mAnyArea ) {
-              String aname = "A_" + area.getThName().replace(':','-');
+            for ( Symbol s : arealib.getSymbols() ) {
+              String aname = "A_" + s.getThName().replace(':','-');
               ++handle; printLayer( pw2, handle, aname, flag, color, lt_continuous ); ++color;
             }
           }
@@ -373,11 +373,10 @@ class DrawingDxf
           writeInt( out, 70, 1 );
           writeEndTable( out );
 
-          ++handle; writeBeginTable( out, "BLOCK_RECORD", handle, DrawingBrushPaths.mPointLib.mAnyPointNr );
+          ++handle; writeBeginTable( out, "BLOCK_RECORD", handle, DrawingBrushPaths.mPointLib.mSymbolNr );
           {
-            for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
-              SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
-              String block = "P_" + pt.getThName().replace(':','-');
+            for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
+              String block = "P_" + DrawingBrushPaths.mPointLib.getSymbolThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               ++handle; writeAcDb( out, handle, "AcDbSymbolTableRecord", "AcDbBlockTableRecord" );
               writeString( out, 2, block );
@@ -393,8 +392,8 @@ class DrawingDxf
       writeSection( out, "BLOCKS" );
       {
         // // 8 layer (0), 2 block name,
-        for ( int n = 0; n < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ n ) {
-          SymbolPoint pt = DrawingBrushPaths.mPointLib.getAnyPoint(n);
+        for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
+          SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex(n);
           String block = "P_" + pt.getThName().replace(':','-');
 
           writeString( out, 0, "BLOCK" );
@@ -475,7 +474,7 @@ class DrawingDxf
 
         // centerline data
         if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
-          for ( DrawingPath sh : plot.mLegsStack ) {
+          for ( DrawingPath sh : plot.getLegs() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
             
@@ -511,7 +510,7 @@ class DrawingDxf
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
-          for ( DrawingPath sh : plot.mSplaysStack ) {
+          for ( DrawingPath sh : plot.getSplays() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
             
@@ -550,7 +549,7 @@ class DrawingDxf
 
         // FIXME station scale is 0.3
         float POINT_SCALE = 10.0f;
-        for ( ICanvasCommand cmd : plot.mCurrentStack ) {
+        for ( ICanvasCommand cmd : plot.getCommands() ) {
           if ( cmd.commandType() != 0 ) continue;
           DrawingPath path = (DrawingPath)cmd;
 
@@ -565,12 +564,12 @@ class DrawingDxf
               ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbText" );
               pw5.printf("%s\n  0\n", st.mName );
             }
-            printXYZ( pw5, st.mXpos * scale, -st.mYpos * scale, 0.0f );
+            printXYZ( pw5, st.cx * scale, -st.cy * scale, 0.0f );
             printFloat( pw5, 40, POINT_SCALE );
             printString( pw5, 1, st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath)path;
-            String layer = "L_" + DrawingBrushPaths.getLineThName( line.lineType() ).replace(':','-');
+            String layer = "L_" + DrawingBrushPaths.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
             // String layer = "LINE";
             int flag = 0;
             boolean use_spline = false;
@@ -607,7 +606,7 @@ class DrawingDxf
                   xt = pn.mX - p.mX;
                   yt = pn.mY - p.mY;
                 }
-                float d = (float)Math.sqrt( xt*xt + yt*yt );
+                float d = FloatMath.sqrt( xt*xt + yt*yt );
                 printFloat( pw5, 12, xt/d );
                 printFloat( pw5, 22, -yt/d );
                 printFloat( pw5, 32, 0 );
@@ -624,7 +623,7 @@ class DrawingDxf
                   xt = pn.mX - p.mX;
                   yt = pn.mY - p.mY;
                 }
-                d = (float)Math.sqrt( xt*xt + yt*yt );
+                d = FloatMath.sqrt( xt*xt + yt*yt );
                 printFloat( pw5, 13, xt/d );
                 printFloat( pw5, 23, -yt/d );
                 printFloat( pw5, 33, 0 );
@@ -686,7 +685,7 @@ class DrawingDxf
             }
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;
-            String layer = "A_" + DrawingBrushPaths.getAreaThName( area.areaType() ).replace(':','-');
+            String layer = "A_" + DrawingBrushPaths.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
             printString( pw5, 0, "HATCH" );    // entity type HATCH
             // ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbHatch" );
             // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
@@ -740,7 +739,7 @@ class DrawingDxf
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
-            String block = "P_" + DrawingBrushPaths.getPointThName( point.mPointType ).replace(':','-');
+            String block = "P_" + DrawingBrushPaths.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
             // int idx = 1 + point.mPointType;
             printString( pw5, 0, "INSERT" );
             ++handle; printAcDb( pw5, handle, "AcDbBlockReference" );
@@ -761,7 +760,7 @@ class DrawingDxf
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DXF io-exception " + e.toString() );
+      TopoDroidLog.Error( "DXF io-exception " + e.toString() );
     }
   }
 

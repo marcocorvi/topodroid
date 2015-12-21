@@ -12,8 +12,6 @@
 package com.topodroid.DistoX;
 
 // import java.io.IOException;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -53,6 +51,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
+import android.util.FloatMath;
 import android.util.Log;
 
 public class GMActivity extends Activity
@@ -158,22 +157,18 @@ public class GMActivity extends Activity
     int iter = calibration.Calibrate();
     if ( iter > 0 ) {
       float[] errors = calibration.Errors();
-      float max_error = 0.0f;
-      int k = 0;
-      for ( CalibCBlock cb : list ) {
+      for ( int k = 0; k < list.size(); ++k ) {
+        CalibCBlock cb = list.get( k );
         mApp.mDData.updateGMError( cb.mId, cid, errors[k] );
         // cb.setError( errors[k] );
-        if ( errors[k] > max_error ) max_error = errors[k];
-        ++k;
       }
-      calibration.mMaxError = max_error;
 
       byte[] coeff = calibration.GetCoeff();
       mApp.mDData.updateCalibCoeff( cid, Calibration.coeffToString( coeff ) );
       mApp.mDData.updateCalibError( cid, 
              calibration.Delta(),
              calibration.Delta2(),
-             calibration.mMaxError * TopoDroidUtil.RAD2GRAD,
+             calibration.MaxError(),
              iter );
 
       // DEBUG:
@@ -229,10 +224,10 @@ public class GMActivity extends Activity
     double std0 = Math.sqrt( calib0.mSumErrorSquared / calib0.mSumCount - ave0 * ave0 + 1e-8 );
     double ave1 = calib1.mSumErrors / calib1.mSumCount;
     double std1 = Math.sqrt( calib1.mSumErrorSquared / calib1.mSumCount - ave1 * ave1 + 1e-8 );
-    ave0 *= TopoDroidUtil.RAD2GRAD;
-    std0 *= TopoDroidUtil.RAD2GRAD;
-    ave1 *= TopoDroidUtil.RAD2GRAD;
-    std1 *= TopoDroidUtil.RAD2GRAD;
+    ave0 *= TDMath.RAD2GRAD;
+    std0 *= TDMath.RAD2GRAD;
+    ave1 *= TDMath.RAD2GRAD;
+    std1 *= TDMath.RAD2GRAD;
 
     list.addAll( list1 );
     size = list.size();
@@ -252,9 +247,9 @@ public class GMActivity extends Activity
     }
     err1 /= size;
     err2 = Math.sqrt( err2/size - err1 * err1 );
-    err1 *= TopoDroidUtil.RAD2GRAD;
-    err2 *= TopoDroidUtil.RAD2GRAD;
-    errmax *= TopoDroidUtil.RAD2GRAD;
+    err1 *= TDMath.RAD2GRAD;
+    err2 *= TDMath.RAD2GRAD;
+    errmax *= TDMath.RAD2GRAD;
     new CalibValidateResultDialog( this, ave0, std0, ave1, std1, err1, err2, errmax, name, mApp.myCalib ).show();
   }
 
@@ -329,9 +324,9 @@ public class GMActivity extends Activity
           Vector nL = calibration.GetNL();
           byte[] coeff = calibration.GetCoeff();
 
-          float error = calibration.mMaxError * TopoDroidUtil.RAD2GRAD;
           (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL,
-                                 calibration.Delta(), calibration.Delta2(), error, result, coeff ) ).show();
+                                 calibration.Delta(), calibration.Delta2(), calibration.MaxError(), 
+                                 result, coeff ) ).show();
         } else {
           // Toast.makeText( mApp.getApplicationContext(), R.string.few_data, Toast.LENGTH_SHORT ).show();
           Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
@@ -372,7 +367,7 @@ public class GMActivity extends Activity
     long cid = mApp.mCID;
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
-    float thr = (float)Math.cos( TopoDroidSetting.mGroupDistance * TopoDroidUtil.GRAD2RAD);
+    float thr = TDMath.cosd( TopoDroidSetting.mGroupDistance );
     List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );
     if ( list.size() < 4 ) {
       return -1;
@@ -576,7 +571,7 @@ public class GMActivity extends Activity
         );
       }
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "error: expected a long, got: " + st[0] );
+      TopoDroidLog.Error( "error: expected a long, got: " + st[0] );
     }
   }
  
@@ -680,7 +675,7 @@ public class GMActivity extends Activity
     mButton1[5].setEnabled( enable );
     mButton1[6].setEnabled( enable && mEnableWrite );
     if ( enable ) {
-      setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+      setTitleColor( TopoDroidConst.COLOR_NORMAL );
       // mButton1[1].setBackgroundResource( icons00[1] );
       // mButton1[5].setBackgroundResource( icons00[5] );
       mButton1[1].setBackgroundDrawable( mBMtoggle );
@@ -928,7 +923,7 @@ public class GMActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    // TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
     startActivity( intent );
@@ -948,7 +943,7 @@ public class GMActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

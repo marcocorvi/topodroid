@@ -18,7 +18,6 @@ import java.io.FileNotFoundException;
 // import java.io.DataInputStream;
 // import java.io.DataOutputStream;
 import java.io.FileInputStream;
-import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -390,7 +389,7 @@ public class TopoDroidActivity extends Activity
   // ---------------------------------------------------------------
   // FILE IMPORT
   
-  private class ImportTherionTask extends AsyncTask<String , Integer, Long >
+  private class ImportTherionTask extends AsyncTask<String, Integer, Long >
   {
     @Override
     protected Long doInBackground( String... str )
@@ -422,7 +421,7 @@ public class TopoDroidActivity extends Activity
     }
   }
  
-  private class ImportCompassTask extends AsyncTask<String , Integer, Long >
+  private class ImportCompassTask extends AsyncTask<String, Integer, Long >
   {
     @Override
     protected Long doInBackground( String... str )
@@ -519,6 +518,7 @@ public class TopoDroidActivity extends Activity
         //   if ( extended == null ) extended = "";
         //   TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "SID " + sid + " scraps " + plan.length() + " " + extended.length() );
         //   try {
+        //     FIXME tdr vs. th2
         //     String filename1 = TopoDroidPath.getTh2File( parser.mName + "-1p.th2" );
         //     TopoDroidApp.checkPath( filename1 );
         //     FileWriter fw1 = new FileWriter( filename1 );
@@ -532,7 +532,7 @@ public class TopoDroidActivity extends Activity
         //     pw2.format("%s", extended );
 
         //   } catch ( IOException e ) {
-        //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "SID " + sid + " scraps IO error " + e );
+        //     TopoDroidLog.Error( "SID " + sid + " scraps IO error " + e );
         //   }
         // }
       } catch ( ParserException e ) {
@@ -553,7 +553,7 @@ public class TopoDroidActivity extends Activity
 
    
   
-  private class ImportZipTask extends AsyncTask<String , Integer, Long >
+  private class ImportZipTask extends AsyncTask< String, Integer, Long >
   {
     TopoDroidActivity activity;
 
@@ -710,15 +710,41 @@ public class TopoDroidActivity extends Activity
     // } else if ( mApp.mTdSymbol ) {
     //   startTdSymbolDialog();
     }
+
     if ( mApp.askSymbolUpdate ) {
-      (new TopoDroidVersionDialog(this, mApp)).show();
+      // (new TopoDroidVersionDialog(this, mApp)).show();
       // FIXME SYMBOL is symbol have not been updated TopoDroid exits
       // if ( mApp.askSymbolUpdate ) finish();
+      new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.version_ask ),
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            mApp.installSymbols( true );
+          }
+      } );
     }
-
-    DrawingBrushPaths.doMakePaths( );
+    // mApp.installSymbols( true );
 
     // setTitleColor( 0x006d6df6 );
+
+    // new AsyncTask<Void,Void,Void>() {
+    //   @Override
+    //   protected Void doInBackground(Void... arg0) 
+    //   { 
+    //     DrawingBrushPaths.doMakePaths( );
+    //     WorldMagneticModel.loadEGM9615( mApp );
+    //     // int n_terms = MagUtil.CALCULATE_NUMTERMS( 12 );
+    //     // WorldMagneticModel.loadWMM( mApp, n_terms );
+    //     return null;
+    //   }
+    // };
+    new Thread() {
+      @Override
+      public void run() {
+        DrawingBrushPaths.doMakePaths( );
+        WorldMagneticModel.loadEGM9615( mApp );
+      }
+    }.start();
 
   }
   
@@ -753,7 +779,7 @@ public class TopoDroidActivity extends Activity
   // {
   //   Toast.makeText( this, "You must close TopoDroid\nto make change effective", Toast.LENGTH_LONG ).show();
   //   // int size = mApp.setListViewHeight( mListView );
-  //   // // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "scale " + TopoDroidApp.mSizeButtons );
+  //   // // TopoDroidLog.Error( "scale " + TopoDroidApp.mSizeButtons );
   //   // icons00 = ( TopoDroidApp.mSizeButtons == 2 )? ixons : icons;
 
   //   // for (int k=0; k<mNrButton1; ++k ) {
@@ -793,14 +819,6 @@ public class TopoDroidActivity extends Activity
       mTopoDroidAbout = null;
     }
   }
-
-  // private void startTdSymbolDialog()
-  // {
-  //   mTdSymbolDialog = new TdSymbolDialog( this, mApp );
-  //   // mTdSymbolDialog.setOnCancelListener( this );
-  //   mTdSymbolDialog.setOnDismissListener( this );
-  //   mTdSymbolDialog.show();
-  // }
 
   // private void restoreInstanceState(Bundle map )
   // {
@@ -851,13 +869,10 @@ public class TopoDroidActivity extends Activity
   // {
   //   // TopoDroidLog.Log(TopoDroidLog.LOG_MAIN, "saveInstanceToData");
   //   DataHelper data = mApp.mData;
-  //   StringWriter sw = new StringWriter();
-  //   PrintWriter pw = new PrintWriter( sw );
-  //   pw.format("%d ", 1 ); // mStatus );
+  //   data.setValue( "DISTOX_STATUS", String.format("%d ", 1 ) ); // mStatus ) );
   //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save STATUS " + sw.getBuffer().toString() );
   //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save SURVEY >" + mApp.mySurvey + "<" );
   //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save CALIB >" + mApp.getCalib() + "<" );
-  //   data.setValue( "DISTOX_STATUS", sw.getBuffer().toString() );
   //   // data.setValue( "DISTOX_SURVEY", (mApp.mySurvey == null)? "" : mApp.mySurvey );
   //   data.setValue( "DISTOX_CALIB", (mApp.myCalib == null)? "" : mApp.myCalib );
   // }
@@ -1016,7 +1031,7 @@ public class TopoDroidActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
     startActivity( intent );
@@ -1036,7 +1051,7 @@ public class TopoDroidActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

@@ -250,6 +250,7 @@
     <string name="menu_stats">Статистика</string>
     <string name="menu_survey">Инфо за картировката</string>
     <string name="menu_sync">Синхронизиране</string>
+    <string name="menu_tdr2th2">TH2 скици</string>
     <string name="menu_validate">Проверка</string>
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
@@ -300,6 +301,8 @@
     <string name="splay">странично измервание</string>
     <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
     <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
+    <string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string>
+    <string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string>
 
     <string name="sensor">сензор</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->
@@ -562,9 +565,10 @@
     <string name="help_draw">Вкл. на режим на скициране</string>
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
-    <!-- UNUSED string name="help_rename">Смяна на името на картировката</string -->
+    <string name="help_rename">Смяна на името на картировката</string>
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
+    <string name="help_tdr2th2">Конвертиране на двоични файлове на скици в th2</string>
     <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>
     <string name="help_trash">Изтриване на скица</string>
     <string name="help_undo">Изтриване на действие от скицата</string>
@@ -693,7 +697,7 @@
   <string name="pref_survex_splay_summary">Добавяне на ДО в края на стран. изм. в Survex</string>
   <string name="pref_survex_lrud_title">Survex Ляво/Дясно/Горе/Долу</string>
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
-  <string name="pref_csv_length_title">CSV мерни единици</string -->
+  <string name="pref_csv_length_title">CSV мерни единици</string>
   <string name="pref_csv_length_summary">Единици за дължина при експорт CSV</string>
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
@@ -865,6 +869,8 @@
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
   <string name="pref_xtherion_areas_title">Площи експорт в xtherion</string>
   <string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string>
+  <string name="pref_binary_store_title">Двоичен формат скици</string>
+  <string name="pref_binary_store_summary">Записване на скиците в двоичен формат</string>
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>
@@ -891,9 +897,6 @@
   <string name="pref_area_border_summary">Дали линията "граница" на площ да е видима</string>
   <string name="pref_cont_join_title">Свързване на линии при продължаване</string>
   <string name="pref_cont_join_summary">Опцията "продължаване" на линия свързва еднакви линии</string>
-
-  <string name="pref_recent_nr_title">Брой последни инструменти</string>
-  <string name="pref_recent_nr_summary">Брой последно използвани инструменти показвани в прозореца</string>
 
   <string name="pref_sketchUsesSplays_title">Изобразяване на страничните отсечки</string>
   <string name="pref_sketchUsesSplays_summary">Повърхността използва страничните измервания</string>

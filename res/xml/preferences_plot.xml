@@ -15,7 +15,7 @@
        android:key="DISTOX_RECENT_NR"
        android:summary="@string/pref_recent_nr_summary"
        android:title="@string/pref_recent_nr_title"
-       android:defaultValue="0"
+       android:defaultValue="4"
        android:entries="@array/recentNr"
        android:entryValues="@array/recentNr"
      />
@@ -44,9 +44,9 @@
      />
 
      <CheckBoxPreference
-       android:key="DISTOX_XTHERION_AREAS"
-       android:summary="@string/pref_xtherion_areas_summary"
-       android:title="@string/pref_xtherion_areas_title"
+       android:key="DISTOX_BINARY_STORE"
+       android:summary="@string/pref_binary_store_summary"
+       android:title="@string/pref_binary_store_title"
        android:defaultValue="false"
      />
 

@@ -21,6 +21,9 @@ import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Locale;
 
 // import android.util.Log;
@@ -60,10 +63,10 @@ public class DrawingPointPath extends DrawingPath
     mOptions = options;
     mScale   = SCALE_NONE;
     mOrientation = 0.0;
-    if ( DrawingBrushPaths.canRotate( type ) ) {
+    if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( type ) ) {
       mOrientation = DrawingBrushPaths.getPointOrientation(type);
     }
-    setPaint( DrawingBrushPaths.getPointPaint( mPointType ) );
+    setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
     if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
       mScale = scale;
     } else {
@@ -71,6 +74,44 @@ public class DrawingPointPath extends DrawingPath
     }
     resetPath( 1.0f );
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
+  }
+
+  static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols ) 
+  {
+    float ccx, ccy, orientation;
+    int   type;
+    int   scale;
+    String fname, options;
+    try {
+      ccx = x + dis.readFloat();
+      ccy = y + dis.readFloat();
+      fname = dis.readUTF( );
+      orientation = dis.readFloat();
+      scale   = dis.readInt();
+      options = dis.readUTF();
+
+      DrawingBrushPaths.mPointLib.tryLoadMissingPoint( fname );
+      type = DrawingBrushPaths.mPointLib.getSymbolIndexByFilename( fname );
+      // Log.v("DistoX", "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      if ( type < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
+        type = 0;
+      }
+      DrawingPointPath ret = new DrawingPointPath( type, ccx, ccy, scale, options );
+      ret.setOrientation( orientation );
+      return ret;
+
+      // // TODO parse option for "-text"
+      // setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
+      // if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
+      //   DrawingBrushPaths.rotateGradPoint( mPointType, mOrientation );
+      //   resetPath( 1.0f );
+      //   DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
+      // }
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "POINT in error " + e.toString() );
+    }
+    return null;
   }
 
   protected void setCenter( float x, float y )
@@ -141,7 +182,7 @@ public class DrawingPointPath extends DrawingPath
   {
     Matrix m = new Matrix();
     if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
-      if ( DrawingBrushPaths.canRotate( mPointType ) ) {
+      if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {
@@ -189,13 +230,6 @@ public class DrawingPointPath extends DrawingPath
     setCenter( x, y );
   }
 
-  float distance( float x, float y )
-  {
-    double dx = x - cx;
-    double dy = y - cy;
-    return (float)( Math.sqrt( dx*dx + dy*dy ) );
-  }
-
   // @Override
   public void toCsurvey( PrintWriter pw )
   { 
@@ -228,10 +262,8 @@ public class DrawingPointPath extends DrawingPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
 
-    // Log.v( TopoDroidApp.TAG, "toTherion() Point " + mPointType + " orientation " + mOrientation );
-
     pw.format(Locale.ENGLISH, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
-                              DrawingBrushPaths.getPointThName(mPointType) );
+                              DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
     if ( mOrientation != 0.0 ) {
       // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "point.toTherion type " + mPointType + " orientation " + mOrientation );
       pw.format(Locale.ENGLISH, " -orientation %.2f", mOrientation);
@@ -257,6 +289,23 @@ public class DrawingPointPath extends DrawingPath
 
     if ( mOptions != null && mOptions.length() > 0 ) {
       pw.format(" %s", mOptions );
+    }
+  }
+
+  @Override
+  void toDataStream( DataOutputStream dos )
+  {
+    String name = DrawingBrushPaths.mPointLib.getSymbolThName(mPointType);
+    try {
+      dos.write( 'P' );
+      dos.writeFloat( cx );
+      dos.writeFloat( cy );
+      dos.writeUTF( name );
+      dos.writeFloat( (float)mOrientation );
+      dos.writeInt( mScale );
+      dos.writeUTF( ( mOptions != null )? mOptions : "" );
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "POINT out error " + e.toString() );
     }
   }
 

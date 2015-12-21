@@ -4,19 +4,21 @@
 The Sketch button of the "SHot data" window opens the dialog with the list of sketches, besides the "New Sketch" button. Tap on this button to create a new survey sketch. The coming dialog contains two fields:
 <ul>
 <li>the sketch <u>name</u>. TopoDroid suggest a number, and you can safely leave it. The sketch filenames are obtained composing the survey name with the name in this field. For example if the survey is "MySurvey" and the sketch is "1", the plan filename is "MySurvey-1p.th2" and the profile filename is "MySurvey-1s.th2". They are placed in the directory "th2" of TopoDroid</li>
-<li>the sketch <u>origin</u> station (base station). This is very important as all the sketch data will have coordinates relative to this station. You should choose a station that is inside the sketch to benfit of the <a href="page_sketch_station.htm">midline hiding<a> features.</li>
+<li>the sketch <u>origin</u> station (base station). This is very important as all the sketch data will have coordinates relative to this station. You should choose a station that is inside the sketch to benefit of the <a href="page_sketch_station.htm">midline hiding<a> features.</li>
 </ul><br><p>
 
 <b>WARNING. The name of the sketch cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
 
 So type in the name of the origin station, and tap the <u>OK</u> button.  And you go to the sketch window.<br><p>
 
-Each sketch is made of two Therion 2D sketch files: one for the plan view, the other for the profile view. Cross sections have only one file. A new sketch is opened in the plan view.  Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
+Each sketch is made of two Therion 2D sketch files: one for the plan view, the other for the profile view. Cross sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
 
-<b>NOTE</b><br>
-The first time you open a sketch TopoDroid loads the drawing tools (the palette). This may take some time if your Android is not powerful because the program has to read in many files (one for each tool). Afterwards opening a sketch is usually faster.<br><p>
-
+<b>Sketch references</b><br>
 You have not drawn anything yet, and the canvas will display a grid (each little square is 1 m, the big squares are 10 m, and the very big ones 100 m), the midline (with both legs and splays), and the stations. These objects are the references to help you drawing the sketch. They are usually very handy however you can choose to hide any of them, if you want to focus on what you have drawn, for editing purposes.<br><p>
+
+The plan view displays the projection on the horizontal plane of midline and splay shots. Splays above a certain inclination are shown as dashed lines. The profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". Splays are projected on the vertical plane of the shot that is closest in azimuth. For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
+
+<img src="splay_extend.png"><br><p>
 
 
 The sketch window has four modes:

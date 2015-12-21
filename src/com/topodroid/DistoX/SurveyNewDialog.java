@@ -15,8 +15,6 @@ import java.util.List;
 
 // import java.io.File;
 // import java.io.IOException;
-// import java.io.StringWriter;
-// import java.io.PrintWriter;
 
 // import android.app.Activity;
 import android.app.Dialog;
@@ -163,8 +161,8 @@ public class SurveyNewDialog extends Dialog
 
   private boolean saveSurvey( String name )
   {
-    // FIXME FORCE NAMES WITHOUT SPACES
-    name = TopoDroidUtil.noSpaces( name );
+    if ( name == null ) return false;
+    name = TopoDroidUtil.noSpaces( name ); // FIXME FORCE NAMES WITHOUT SPACES
     name = name.trim();
     if ( name.length() == 0 ) return false;
     if ( mApp.hasSurveyName( name ) ) { // name already exists
@@ -183,7 +181,7 @@ public class SurveyNewDialog extends Dialog
         try {
           decl = Double.parseDouble( decl_str );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse Double error: declination " + decl_str );
+          TopoDroidLog.Error( "parse Double error: declination " + decl_str );
         }
       }
     }
@@ -195,14 +193,13 @@ public class SurveyNewDialog extends Dialog
         init_station = station;
       }
     }
+    if ( init_station == null || init_station.length() == 0 ) init_station = "0";
       
-    if ( date != null ) { date = date.trim(); }
-    if ( team != null ) { team = team.trim(); }
-    if ( comment != null ) { comment = comment.trim(); }
+    if ( date != null ) { date = date.trim(); } else { date = ""; }
+    if ( team != null ) { team = team.trim(); } else { team = ""; }
+    if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
 
     mApp.setSurveyFromName( name, true ); // save survey name: tell app to set it into the database
-    
-    if ( team == null ) team = "";
     mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, init_station, true );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY

@@ -19,7 +19,12 @@ import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Locale;
+
+// import android.util.Log;
 
 /**
  */
@@ -44,6 +49,30 @@ public class DrawingLabelPath extends DrawingPointPath
     // paint.setStrokeWidth( WIDTH_CURRENT );
 
     makeStraightPath( 0, 0, 20*mText.length(), 0, cx, cy );
+  }
+
+  static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
+  {
+    float ccx, ccy;
+    int scale;
+    // int type;
+    String text, options;
+    try {
+      ccx = x + dis.readFloat( );
+      ccy = y + dis.readFloat( );
+      // String th_name = dis.readUTF( );
+      // type = DrawingBrushPaths.getPointLabelIndex();
+      // orientation = dis.readFloat( )
+      scale = dis.readInt( );
+      text = dis.readUTF();
+      options = dis.readUTF();
+
+      // Log.v("DistoX", "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
+      return new DrawingLabelPath( text, ccx, ccy, scale, options );
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "LABEL in error " + e.toString() );
+    }
+    return null;
   }
 
   @Override
@@ -131,6 +160,23 @@ public class DrawingLabelPath extends DrawingPointPath
     pw.format(Locale.ENGLISH, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <font type=\"0\" />\n");
     pw.format("</item>\n");
+  }
+
+  @Override
+  void toDataStream( DataOutputStream dos )
+  {
+    try {
+      dos.write( 'T' );
+      dos.writeFloat( cx );
+      dos.writeFloat( cy );
+      // dos.writeUTF( DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
+      // dos.writeFloat( (float)mOrientation );
+      dos.writeInt( mScale );
+      dos.writeUTF( ( mText != null )? mText : "" );
+      dos.writeUTF( ( mOptions != null )? mOptions : "" );
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "LABEL out error " + e.toString() );
+    }
   }
 }
 

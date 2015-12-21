@@ -8,15 +8,10 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130224 created 
- * 20130601 started surface-editing ops, mostly determining inner and outer borders
- * 20130804 revised surface-editing ops (cut, stretch, extrude)
- * 20130831 join(s) between surfaces
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
+// import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import java.util.Collections;
@@ -32,7 +27,6 @@ import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class SketchSurface extends SketchShot
@@ -138,7 +132,7 @@ class SketchSurface extends SketchShot
   synchronized void refineAtSelectedVertex( )
   { 
     if ( mSelectedVertex == null ) {
-      Log.v("DistoX", "refine at selected vertex: null selected veretex");
+      // Log.v("DistoX", "refine at selected vertex: null selected veretex");
       return;
     }
     ArrayList< SketchTriangle > triangles = mTriangles;
@@ -347,9 +341,9 @@ class SketchSurface extends SketchShot
       Collections.sort( mSides, comp );
       float len = mSides.get(0).length;
       for ( SketchSide s : mSides ) {
-        if ( s.length > len ) {
-          Log.v("DistoX", "not decresing side length " + len + " " + s.length );
-        }
+        // if ( s.length > len ) {
+        //   Log.v("DistoX", "not decresing side length " + len + " " + s.length );
+        // }
         len = s.length;
       }
           
@@ -603,7 +597,7 @@ class SketchSurface extends SketchShot
       // Log.v("DistoX", sw.getBuffer().toString() );
       mBorders.add( brd );
     }
-    Log.v("DistoX", "compute border surface nr. border " + mBorders.size() );
+    // Log.v("DistoX", "compute border surface nr. border " + mBorders.size() );
   }
 
   // --------------------------------------------------------
@@ -654,7 +648,7 @@ class SketchSurface extends SketchShot
 
   // --------------------------------------------------------
   // triangles
-  final float r2_2 = FloatMath.sqrt( 0.5f ); // sqrt(2)/2
+  // final float r2_2 = TDMath.sqrt( 0.5f ); // sqrt(2)/2
 
   /**
    * @return the new vertex index
@@ -662,7 +656,7 @@ class SketchSurface extends SketchShot
   // private int interpolateVertices( SketchVertex v1, SketchVertex v2, float a, float r, Sketch3dInfo info )
   // {
   //   float b = 1 - a;
-  //   // float r = 1/FloatMath.sqrt( a*a + b*b );
+  //   // float r = 1/TDMath.sqrt( a*a + b*b );
   //   Vector v = new Vector( a*v1.x+b*v2.x - info.station1.e,
   //                          a*v1.y+b*v2.y - info.station1.s,
   //                          a*v1.z+b*v2.z - info.station1.v );
@@ -770,7 +764,7 @@ class SketchSurface extends SketchShot
       retn.y -= p * unit.y;
       retn.z -= p * unit.z;
       retn.Normalized();
-      angle[n] = (float)Math.atan2( retn.dot(dir1), retn.dot(dir2) );
+      angle[n] = TDMath.atan2( retn.dot(dir1), retn.dot(dir2) );
     }
     float a = angle[0] - angle[ns-1];
     for ( int n=1; n<ns; ++n ) {
@@ -1524,7 +1518,7 @@ class SketchSurface extends SketchShot
     synchronized( mTriangles ) {  // mCorners is synchronized on mTriangles
       for ( Integer key : mCorners.keySet() ) {
         PointF p = mCorners.get( key );
-        Log.v("DistoX", "pt " + key + " " + p.x + " " + p.y  );
+        // Log.v("DistoX", "pt " + key + " " + p.x + " " + p.y  );
         if ( Math.abs( p.x - x ) < d && Math.abs( p.y - y ) < d ) {
           return mVertices.get( key );
         }

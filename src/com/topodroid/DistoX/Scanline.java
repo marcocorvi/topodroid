@@ -73,7 +73,7 @@ class Scanline
       try {
         ret = Long.parseLong( val.substring( pos, next_pos ) );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "longValue error: " + val.substring( pos, next_pos ) );
+        TopoDroidLog.Error( "longValue error: " + val.substring( pos, next_pos ) );
       }
     }
     pos = next_pos;
@@ -89,7 +89,7 @@ class Scanline
       ret = Double.parseDouble( val.substring(pos, next_pos ) );
       // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "doubleValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "doubleValue error: " + val.substring(pos, next_pos) );
+      TopoDroidLog.Error( "doubleValue error: " + val.substring(pos, next_pos) );
     }
     pos = next_pos;
     skipCommaAndSpaces( );

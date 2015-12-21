@@ -13,9 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.FloatMath;
 // import android.util.Log;
-
 
 class SelectionPoint
 {
@@ -31,6 +29,7 @@ class SelectionPoint
   DrawingPath mItem;
   LinePoint   mPoint;
   private int mMin; // whether to shift the point (0) or a CP (1 or 2)
+  SelectionBucket mBucket = null;
 
   int type() { return mItem.mType; }
   // DRAWING_PATH_FIXED   = 0; // leg
@@ -47,12 +46,13 @@ class SelectionPoint
 
   boolean isDrawingType() { return DrawingPath.isDrawingType( mItem.mType ); }
 
-  SelectionPoint( DrawingPath it, LinePoint pt )
+  SelectionPoint( DrawingPath it, LinePoint pt, SelectionBucket bucket )
   {
     mItem = it;
     mPoint = pt;
     mDistance = 0.0f;
     mMin = 0;
+    setBucket( bucket );
   }
 
   String name()
@@ -65,17 +65,8 @@ class SelectionPoint
   }
 
 
-  float X() 
-  {
-    if ( mPoint != null ) return mPoint.mX;
-    return mItem.cx;
-  }
-
-  float Y() 
-  {
-    if ( mPoint != null ) return mPoint.mY;
-    return mItem.cy;
-  }
+  float X() { return ( mPoint != null )? mPoint.mX : mItem.cx; }
+  float Y() { return ( mPoint != null )? mPoint.mY : mItem.cy; }
 
   // distance from a scene point (xx, yy)
   float distance( float xx, float yy )
@@ -102,7 +93,7 @@ class SelectionPoint
       }
       return d;
     }
-    return mItem.distance( xx, yy );
+    return mItem.distanceToPoint( xx, yy );
   }
 
   void shiftBy( float dx, float dy )
@@ -134,6 +125,14 @@ class SelectionPoint
     } else if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
       mItem.shiftBy( dx, dy );
     }
+  }
+ 
+  void setBucket( SelectionBucket bucket )
+  {
+    if ( mBucket == bucket ) return;
+    if ( mBucket != null ) mBucket.removePoint( this );
+    mBucket = bucket;
+    if ( mBucket != null ) mBucket.addPoint( this );
   }
 
 }

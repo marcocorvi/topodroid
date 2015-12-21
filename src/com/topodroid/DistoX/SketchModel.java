@@ -37,8 +37,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Handler;
 
-import android.util.FloatMath;
-
 import android.util.Log;
 
 class SketchModel
@@ -74,7 +72,7 @@ class SketchModel
   public static final int highlightColor = 0xffff9999;
   int cnt;
 
-  private float pi4 = (float)Math.PI/4;
+  private float pi4 = (float)(Math.PI/4);
   private float pi2 = pi4 * 2;
 
   private Selection mSelection;
@@ -332,7 +330,7 @@ class SketchModel
     List<NumSplay> splay2 = mNum.getSplaysAt( st2 );
     // Log.v("DistoX", "splays at 1: " + splay1.size() + " at 2: " + splay2.size() );
     if ( splay1.size() < 2 || splay2.size() < 2 ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "makeConvexSurface too few spalys " + splay1.size() + " " + splay2.size() );
+      TopoDroidLog.Error( "makeConvexSurface too few spalys " + splay1.size() + " " + splay2.size() );
       return;
     }
 
@@ -666,11 +664,11 @@ class SketchModel
             {
               if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
                 pw2.format("  line %s %s -shot %s %s\n", "3d",
-                                                         DrawingBrushPaths.getLineName( line.mThType ),
+                                                         DrawingBrushPaths.mLineLib.getSymbolName( line.mThType ),
                                                          line.st1, line.st2 );
               } else {
                 pw2.format("  area %s %s -shot %s %s\n", "3d",
-                                                         DrawingBrushPaths.getAreaName( line.mThType ),
+                                                         DrawingBrushPaths.mAreaLib.getSymbolName( line.mThType ),
                                                          line.st1, line.st2 );
               }
             }
@@ -875,7 +873,7 @@ class SketchModel
           }
         } else if ( vals[k].equals( "point" ) ) {
           // ****** THERION POINT **********************************
-          // int ptType = DrawingBrushPaths.mPointLib.mAnyPointNr;
+          // int ptType = DrawingBrushPaths.mPointLib.mSymbolNr;
           // boolean has_orientation = false;
           // float orientation = 0.0f;
           // int scale = DrawingPointPath.SCALE_M;
@@ -896,11 +894,11 @@ class SketchModel
               // stations are automatic in the 3D model
               continue;
             } else {
-              int ptindex = 0;
-              for ( ; ptindex < DrawingBrushPaths.mPointLib.mAnyPointNr; ++ptindex ) {
-                if ( type.equals( DrawingBrushPaths.getPointThName( ptindex ) ) ) break;
-              }
-              if ( ptindex < DrawingBrushPaths.mPointLib.mAnyPointNr ) {
+              int ptindex = DrawingBrushPaths.mPointLib.getSymbolIndexByThName( type );
+              // for ( ; ptindex < DrawingBrushPaths.mPointLib.mSymbolNr; ++ptindex ) {
+              //   if ( type.equals( DrawingBrushPaths.mPointLib.getSymbolThName( ptindex ) ) ) break;
+              // }
+              if ( ptindex >= 0 && ptindex < DrawingBrushPaths.mPointLib.mSymbolNr ) {
                 SketchPointPath path = new SketchPointPath( ptindex, fromStation, toStation, x, y, z );
                 addPoint( path );
                 // parse options
@@ -934,17 +932,22 @@ class SketchModel
           }
           if ( ++k < vals.length ) {
             if ( is_line ) {
-              int lnTypeMax = DrawingBrushPaths.mLineLib.mAnyLineNr;
-              for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
-                 if ( vals[k].equals( DrawingBrushPaths.getLineThName( th_type ) ) ) break;
-              }
+              th_type = DrawingBrushPaths.mLineLib.getSymbolIndexByThName( vals[k] );
+              // int lnTypeMax = DrawingBrushPaths.mLineLib.mSymbolNr;
+              // for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
+              //    if ( vals[k].equals( DrawingBrushPaths.mLineLib.getSymbolThName( th_type ) ) ) break;
+              // }
             } else {
               closed = true;
-              int lnTypeMax = DrawingBrushPaths.mAreaLib.mAnyAreaNr;
-              for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
-                 if ( vals[k].equals( DrawingBrushPaths.getAreaThName( th_type ) ) ) break;
-              }
+              th_type = DrawingBrushPaths.mAreaLib.getSymbolIndexByThName( vals[k] );
+              // int lnTypeMax = DrawingBrushPaths.mAreaLib.mSymbolNr;
+              // for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
+              //    if ( vals[k].equals( DrawingBrushPaths.mAreaLib.getSymbolThName( th_type ) ) ) break;
+              // }
             }
+          }
+          if ( th_type == -1 ) {
+            Log.v("DIstoX", "ERROR symbol not found " + vals[k] );
           }
           
             // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "line type " + vals[1] );

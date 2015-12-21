@@ -21,6 +21,9 @@ import android.graphics.Matrix;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 // import java.util.List;
 import java.util.ArrayList;
@@ -57,7 +60,65 @@ public class DrawingLinePath extends DrawingPointLinePath
     mReversed = false;
     mOutline  = ( mLineType == DrawingBrushPaths.mLineLib.mLineWallIndex )? OUTLINE_OUT : OUTLINE_NONE;
     mOptions  = null;
-    setPaint( DrawingBrushPaths.getLinePaint( line_type, mReversed ) );
+    setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+  }
+
+  static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
+  {
+    int type;
+    boolean closed, reversed;
+    int outline;
+    String fname, options;
+    try {
+      fname = dis.readUTF();
+      closed = (dis.read() == 1);
+      // visible= (dis.read() == 1);
+      reversed = (dis.read() == 1);
+      outline = dis.readInt();
+      options = dis.readUTF();
+
+      // DrawingBrushPaths.mLineLib.tryLoadMissingArea( fname );
+      type = DrawingBrushPaths.mLineLib.getSymbolIndexByFilename( fname ); 
+      if ( type < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addLineFilename( fname );
+        type = 0;
+      }
+
+      DrawingLinePath ret = new DrawingLinePath( type );
+      ret.mOptions  = options;
+      ret.setReversed( reversed );
+
+      int npt = dis.readInt();
+      int has_cp;
+      float mX1, mY1, mX2, mY2, mX, mY;
+      mX = x + dis.readFloat();
+      mY = y + dis.readFloat();
+      has_cp = dis.read(); // this is 0
+      ret.addStartPoint( mX, mY );
+      for ( int k=1; k<npt; ++k ) {
+        mX = x + dis.readFloat();
+        mY = y + dis.readFloat();
+        has_cp = dis.read();
+        if ( has_cp == 1 ) {
+          mX1 = x + dis.readFloat();
+          mY1 = y + dis.readFloat();
+          mX2 = x + dis.readFloat();
+          mY2 = y + dis.readFloat();
+          ret.addPoint3( mX1, mY1, mX2, mY2, mX, mY );
+        } else {
+          ret.addPoint( mX, mY );
+        }
+      }
+      if ( closed ) {
+        ret.setClosed( closed );
+        ret.close();
+      }
+      ret.retracePath();
+      return ret;
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "LINE in error " + e.toString() );
+    }
+    return null;
   }
 
   void addOption( String option ) 
@@ -75,16 +136,9 @@ public class DrawingLinePath extends DrawingPointLinePath
     return mOptions.split(" ");
   }
 
-  String getOptionString()
-  {
-    if ( mOptions == null ) return "";
-    return mOptions;
-  }
+  String getOptionString() { return ( mOptions == null )? "" : mOptions; }
 
-  void setOptions( String options ) 
-  {
-    mOptions = options;
-  }
+  void setOptions( String options ) { mOptions = options; }
 
   @Override
   void computeUnitNormal()
@@ -96,7 +150,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       mDy = - second.mX + mFirst.mX;
       float d = ( mDx*mDx + mDy*mDy );
       if ( d > 0 ) {
-        d = 1 / (float)Math.sqrt( d );
+        d = 1 / FloatMath.sqrt( d );
         if ( mReversed ) d = -d;
         mDx *= d;
         mDy *= d;
@@ -177,7 +231,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     if ( reversed != mReversed ) {
       mReversed = reversed;
       // retracePath();
-      setPaint( DrawingBrushPaths.getLinePaint( mLineType, mReversed ) );
+      setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
       computeUnitNormal();
     }
   }
@@ -219,7 +273,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line %s", DrawingBrushPaths.getLineThName(mLineType) );
+    pw.format("line %s", DrawingBrushPaths.mLineLib.getSymbolThName(mLineType) );
     if ( isClosed() ) {
       pw.format(" -close on");
     }
@@ -256,6 +310,29 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
     pw.format("endline\n");
     return sw.getBuffer().toString();
+  }
+
+  @Override
+  void toDataStream( DataOutputStream dos ) 
+  {
+    String name = DrawingBrushPaths.mLineLib.getSymbolThName( mLineType );
+    try {
+      dos.write( 'L' );
+      dos.writeUTF( name );
+      dos.write( isClosed()? 1 : 0 );
+      // dos.write( isVisible()? 1 : 0 );
+      dos.write( mReversed? 1 : 0 );
+      dos.writeInt( mOutline );
+      dos.writeUTF( ( mOptions != null )? mOptions : "" );
+      
+      int npt = size(); // number of line points
+      dos.writeInt( npt );
+      for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
+        pt.toDataStream( dos );
+      }
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "LINE out error " + e.toString() );
+    }
   }
 
 }

@@ -1,9 +1,16 @@
 /** @file TopoDroidExporter.java
  *
+ * @author marco corvi
+ * @date jan 2014
+ *
+ * @grief numerical utilities
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
 import java.io.FileWriter;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -17,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class TopoDroidExporter
@@ -36,6 +42,7 @@ class TopoDroidExporter
   // final static int EXPORT_SVG        = 13;
   // final static int EXPORT_KML        = 14;
   // final static int EXPORT_ZIP        = 20;
+
 
   // =======================================================================
   // CSURVEY EXPORT cSurvey
@@ -76,6 +83,14 @@ class TopoDroidExporter
      pw.format("    <plot />\n");
   }
 
+  static private void writeCsxLeg( PrintWriter pw, AverageLeg leg )
+  {
+    pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
+      leg.length(), leg.bearing(), leg.clino()
+    );
+    leg.reset();
+  }
+
   static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch, String origin, String filename )
   {
     String cave = info.name.toUpperCase();
@@ -91,9 +106,9 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
-      // pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy-MM-dd"), TopoDroidApp.VERSION );
 
       pw.format("<csurvey version=\"1.04\" id=\"\">\n");
+      pw.format("<!-- %s created by TopoDroid v %s -->\n", TopoDroidUtil.getDateString("yyyy-MM-dd"), TopoDroidApp.VERSION );
 
 // ++++++++++++++++ PROPERTIES
       // FIXME origin = origin of Num
@@ -148,9 +163,10 @@ class TopoDroidExporter
       // boolean bck = false;  // backshot
       String com = null;    // comment
       String f="", t="";          // from to stations
-      float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
-      int n = 0;
       DistoXDBlock ref_item = null;
+      // float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
+      // int n = 0;
+      AverageLeg leg = new AverageLeg();
 
       for ( DistoXDBlock item : list ) {
         String from = item.mFrom;
@@ -158,16 +174,11 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
-              float bb = TopoDroidUtil.around( item.mBearing, b0 );
-              l += item.mLength;
-              b += bb;
-              c += item.mClino;
-              ++n;
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
               pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\"", cave, prefix, f, prefix, t );
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -178,14 +189,13 @@ class TopoDroidExporter
 		// if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
-              pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
+              writeCsxLeg( pw, leg );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
               pw.format(" />\n");
-              n = 0;
               ref_item = null; 
             }
 
@@ -206,8 +216,7 @@ class TopoDroidExporter
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
-            if ( n > 0 && ref_item != null ) { // finish writing previous leg shot
-              b = TopoDroidUtil.in360( b/n );
+            if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\"", cave, prefix, f, prefix, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
@@ -217,14 +226,13 @@ class TopoDroidExporter
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
               // pw.format(" planshowsplayborder=\"1\" profileshowsplayborder=\"1\" ");
-              pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
+              writeCsxLeg( pw, leg );
               pw.format(" l=\"0.0\" r=\"0.0\" u=\"0.0\" d=\"0.0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
               pw.format(" />\n");
-              n = 0;
               ref_item = null; 
             }
 
@@ -243,8 +251,7 @@ class TopoDroidExporter
             }
             pw.format(" />\n");
           } else { // BOTH FROM AND TO STATIONS
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
               pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\" ", cave, prefix, f, prefix, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
@@ -253,16 +260,14 @@ class TopoDroidExporter
                 if ( sur ) { pw.format(" surface=\"1\"");   sur = false; }
                 // if ( bck ) { pw.format(" backshot=\"1\"");   bck = false; }
               }
-              pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
+              writeCsxLeg( pw, leg );
               pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
               if ( com != null && com.length() > 0 ) {
                 pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
                 com = null;
               }
               pw.format(" />\n");
-              // n = 0;
             }
-            n = 1;
             ref_item = item;
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
@@ -276,16 +281,12 @@ class TopoDroidExporter
             }
             f = from;
             t = to;
-            l = item.mLength;
-            b = item.mBearing;
-            b0 = b;
-            c = item.mClino;
+            leg.set( item.mLength, item.mBearing, item.mClino );
             com = item.mComment;
           }
         }
       }
-      if ( n > 0 && ref_item != null ) {
-        b = TopoDroidUtil.in360( b/n );
+      if ( leg.mCnt > 0 && ref_item != null ) {
         pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\" ", cave, prefix, f, prefix, t );
         if ( extend == -1 ) pw.format(" direction=\"1\"");
         if ( dup || sur /* || bck */ ) {
@@ -294,7 +295,7 @@ class TopoDroidExporter
            if ( sur ) { pw.format(" surface=\"1\"");   /* sur = false; */ }
            // if ( bck ) { pw.format(" backshot=\"1\"");  /* bck = false; */ }
         }
-        pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"", l/n, b, c/n );
+        writeCsxLeg( pw, leg );
         pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
         if ( com != null && com.length() > 0 ) {
           pw.format(" note=\"%s\"", com.replaceAll("\"", "") );
@@ -333,7 +334,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed cSurvey export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -364,10 +365,10 @@ class TopoDroidExporter
     float lat = (float)origin.lat;
     float lng = (float)origin.lng;
     float alt = (float)origin.alt;
-    float alat = (float)Math.abs( lat );
+    float alat = TDMath.abs( lat );
 
     float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
-    float e_radius = s_radius * FloatMath.cos( alat * (float)Math.PI / 180 );
+    float e_radius = s_radius * TDMath.cosd( alat );
 
     s_radius = 1 / s_radius;
     e_radius = 1 / e_radius;
@@ -499,7 +500,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed cSurvey export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -554,7 +555,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed cSurvey export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -581,13 +582,12 @@ class TopoDroidExporter
       ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]),
                       info.declination, info.comment );
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "exportSurveyAsTop date parse error " + info.date );
+      TopoDroidLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     long extend = 0;  // current extend
 
-    int n = 0;
     DistoXDBlock ref_item = null;
     int fromId, toId;
 
@@ -600,7 +600,7 @@ class TopoDroidExporter
         if ( to == null || to.length() == 0 ) {
           to = "";
           if ( ref_item != null 
-            && ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+            && ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
             from = ref_item.mFrom;
             to   = ref_item.mTo;
             extend = ref_item.mExtend;
@@ -631,12 +631,18 @@ class TopoDroidExporter
       ptfile.write( fos );
       fos.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed PocketTopo export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed PocketTopo export: " + e.getMessage() );
     }
     return filename;
   }
   // =======================================================================
   // THERION EXPORT Therion
+
+  static private void writeThLeg( PrintWriter pw, AverageLeg leg ) 
+  {
+    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", leg.length(), leg.bearing(), leg.clino() );
+    leg.reset();
+  }
 
   static String exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, String filename )
   {
@@ -660,7 +666,7 @@ class TopoDroidExporter
       if ( fixed.size() > 0 ) {
         pw.format("    cs long-lat\n");
         for ( FixedInfo fix : fixed ) {
-          pw.format("    # fix %s m\n", fix.toString() );
+          pw.format("    # fix %s m\n", fix.toExportString() );
         }
       }
       pw.format("    date %s \n", info.date );
@@ -673,9 +679,8 @@ class TopoDroidExporter
       pw.format("    data normal from to length compass clino\n");
 
       long extend = 0;  // current extend
-      float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
+      AverageLeg leg = new AverageLeg();
 
-      int n = 0;
       DistoXDBlock ref_item = null;
       boolean duplicate = false;
       boolean surface   = false; // TODO
@@ -685,17 +690,12 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
-              float bb = TopoDroidUtil.around( item.mBearing, b0 );
-              l += item.mLength;
-              b += bb;
-              c += item.mClino;
-              ++n;
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", l/n, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              writeThLeg( pw, leg );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -704,7 +704,6 @@ class TopoDroidExporter
                 pw.format(therion_flags_not_surface);
                 surface = false;
               }
-              n = 0;
               ref_item = null; 
             }
             if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -719,9 +718,8 @@ class TopoDroidExporter
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
-            if ( n > 0 && ref_item != null ) { // finish writing previous leg shot
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", l/n, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
+              writeThLeg( pw, leg );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -730,7 +728,6 @@ class TopoDroidExporter
                 pw.format(therion_flags_not_surface);
                 surface = false;
               }
-              n = 0;
               ref_item = null; 
             }
             if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -743,9 +740,8 @@ class TopoDroidExporter
             pw.format("    %s - ", from ); // write splay shot
             pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
           } else {
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", l/n, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              writeThLeg( pw, leg );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -754,9 +750,7 @@ class TopoDroidExporter
                 pw.format(therion_flags_not_surface);
                 surface = false;
               }
-              // n = 0;
             }
-            n = 1;
             ref_item = item;
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
@@ -776,17 +770,13 @@ class TopoDroidExporter
               pw.format("  # %s\n", item.mComment );
             }
             pw.format("    %s %s ", from, to );
-            l = item.mLength;
-            b = item.mBearing;
-            b0 = b;
-            c = item.mClino;
+            leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
         // pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
       }
-      if ( n > 0 && ref_item != null ) {
-        b = TopoDroidUtil.in360( b/n );
-        pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", l/n, b, c/n );
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        writeThLeg( pw, leg );
         if ( duplicate ) {
           pw.format(therion_flags_not_duplicate);
           // duplicate = false;
@@ -820,7 +810,7 @@ class TopoDroidExporter
 
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Therion export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Therion export: " + e.getMessage() );
       return null;
     }
   }
@@ -863,12 +853,11 @@ class TopoDroidExporter
     pw.format("%s", TopoDroidSetting.mSurvexEol );
   }
 
-  static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup,
-                                 float l, float b, float c, int n, DistoXDBlock blk )
+  static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DistoXDBlock blk )
   {
-    b = TopoDroidUtil.in360( b/n );
     if ( first ) {
-      pw.format(Locale.ENGLISH, "  %.2f %.1f %.1f", l/n, b, c/n );
+      pw.format(Locale.ENGLISH, "  %.2f %.1f %.1f", leg.length(), leg.bearing(), leg.clino() );
+      leg.reset();
       if ( blk.mComment != null && blk.mComment.length() > 0 ) {
         pw.format("  ; %s", blk.mComment );
       } 
@@ -905,6 +894,7 @@ class TopoDroidExporter
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List<DistoXDBlock> st_blk = new ArrayList<DistoXDBlock>(); // blocks with from station (for LRUD)
+
     try {
       TopoDroidApp.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -938,9 +928,9 @@ class TopoDroidExporter
       }
 
       if ( fixed.size() > 0 ) {
-        writeSurvexLine(pw, "  ; fix stations as lomg-lat alt");
+        writeSurvexLine(pw, "  ; fix stations as long-lat alt");
         for ( FixedInfo fix : fixed ) {
-          writeSurvexLine(pw, "  ; *fix " + fix.toString() );
+          writeSurvexLine(pw, "  ; *fix " + fix.toExportString() );
         }
       }
 
@@ -954,8 +944,7 @@ class TopoDroidExporter
           writeSurvexEOL(pw);
           writeSurvexLine(pw, "  *flags splay");
         }
-        float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
-        int n = 0;
+        AverageLeg leg = new AverageLeg();
         DistoXDBlock ref_item = null;
         boolean duplicate = false;
         boolean splays = false;
@@ -965,18 +954,13 @@ class TopoDroidExporter
           if ( from == null || from.length() == 0 ) {
             if ( to == null || to.length() == 0 ) { // no station: not exported
               if ( ref_item != null &&
-                 ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
-                float bb = TopoDroidUtil.around( item.mBearing, b0 );
-                l += item.mLength;
-                b += bb;
-                c += item.mClino;
-                ++n;
+                 ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+                leg.add( item.mLength, item.mBearing, item.mClino );
               }
             } else { // only TO station
-              if ( n > 0 && ref_item != null ) {
-                duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+              if ( leg.mCnt > 0 && ref_item != null ) {
+                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
                 if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
-                n = 0;
                 ref_item = null; 
               }
 
@@ -998,10 +982,9 @@ class TopoDroidExporter
             }
           } else { // with FROM station
             if ( to == null || to.length() == 0 ) { // splay shot
-              if ( n > 0 && ref_item != null ) { // write pervious leg shot
-                duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+              if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
                 if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
-                n = 0;
                 ref_item = null; 
               }
 
@@ -1021,34 +1004,28 @@ class TopoDroidExporter
                 }
               }
             } else {
-              if ( n > 0 && ref_item != null ) {
-                duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+              if ( leg.mCnt > 0 && ref_item != null ) {
+                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
                 if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
-                n = 0;
                 ref_item = null; 
               }
               if ( splays ) {
                 if ( TopoDroidSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags not splay");
                 splays = false;
               }
-              n = 1;
               ref_item = item;
               if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
                 if ( first ) writeSurvexLine(pw, survex_flags_duplicate);
                 duplicate = true;
               }
               if ( first ) pw.format("    %s %s ", from, to );
-              l = item.mLength;
-              b = item.mBearing;
-              b0 = b;
-              c = item.mClino;
+              leg.set( item.mLength, item.mBearing, item.mClino );
             }
           }
         }
-        if ( n > 0 && ref_item != null ) {
-          duplicate = writeSurvexLeg( pw, first, duplicate, l, b, c, n, ref_item );
+        if ( leg.mCnt > 0 && ref_item != null ) {
+          duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
           if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
-          n = 0;
           ref_item = null;
         }
         first = false;
@@ -1164,7 +1141,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Survex export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Survex export: " + e.getMessage() );
       return null;
     }
   }
@@ -1174,6 +1151,13 @@ class TopoDroidExporter
    *  NOTE declination exported in comment only in CSV
    *
    */
+  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg )
+  {
+    pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", 
+      leg.length() * TopoDroidSetting.mCsvLengthUnit, leg.bearing(), leg.clino() );
+    leg.reset();
+  }
+
   static String exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
@@ -1186,15 +1170,14 @@ class TopoDroidExporter
       pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
       pw.format("# %s\n", info.name );
       // if ( fixed.size() > 0 ) {
-      //   pw.format("  ; fix stations as lomg-lat alt\n");
+      //   pw.format("  ; fix stations as long-lat alt\n");
       //   for ( FixedInfo fix : fixed ) {
-      //     pw.format("  ; *fix %s\n", fix.toString() );
+      //     pw.format("  ; *fix %s\n", fix.toExportString() );
       //   }
       // }
       pw.format(Locale.ENGLISH, "# from to tape compass clino (declination %.4f)\n", info.declination );
       
-      float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
-      int n = 0;
+      AverageLeg leg = new AverageLeg();
       DistoXDBlock ref_item = null;
       boolean duplicate = false;
       boolean splays = false;
@@ -1204,23 +1187,17 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
-              float bb = TopoDroidUtil.around( item.mBearing, b0 );
-              l += item.mLength;
-              b += bb;
-              c += item.mClino;
-              ++n;
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              writeCsvLeg( pw, leg );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
               }
               pw.format("\n");
-              n = 0;
               ref_item = null; 
             }
             // if ( ref_item != null && ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
@@ -1238,15 +1215,13 @@ class TopoDroidExporter
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
-            if ( n > 0 && ref_item != null ) { // write pervious leg shot
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+              writeCsvLeg( pw, leg );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
               }
               pw.format("\n");
-              n = 0;
               ref_item = null; 
             }
             // if ( ref_item != null && ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
@@ -1262,9 +1237,8 @@ class TopoDroidExporter
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              writeCsvLeg( pw, leg );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
@@ -1275,22 +1249,17 @@ class TopoDroidExporter
             if ( splays ) {
               splays = false;
             }
-            n = 1;
             ref_item = item;
             if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
               duplicate = true;
             }
             pw.format("%s@%s,%s@%s", from, info.name, to, info.name );
-            l = item.mLength;
-            b = item.mBearing;
-            b0 = b;
-            c = item.mClino;
+            leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
       }
-      if ( n > 0 && ref_item != null ) {
-        b = TopoDroidUtil.in360( b/n );
-        pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", l/n * TopoDroidSetting.mCsvLengthUnit, b, c/n );
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        writeCsvLeg( pw, leg );
         if ( duplicate ) {
           pw.format(",L");
           // duplicate = false;
@@ -1301,7 +1270,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed CSV export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed CSV export: " + e.getMessage() );
       return null;
     }
   }
@@ -1402,7 +1371,7 @@ class TopoDroidExporter
   //         } else {
   //           // not exported
   //           if ( ref_item != null &&
-  //              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidApp.mCloseDistance ) ) {
+  //              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
   //             float bb = TopoDroidUtil.around( item.mBearing, b0[0] );
   //             l += item.mLength;
   //             b += bb;
@@ -1433,7 +1402,7 @@ class TopoDroidExporter
   //     fw.close();
   //     return filename;
   //   } catch ( IOException e ) {
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed QTopo export: " + e.getMessage() );
+  //     TopoDroidLog.Error( "Failed QTopo export: " + e.getMessage() );
   //     return null;
   //   }
   // }
@@ -1444,11 +1413,10 @@ class TopoDroidExporter
   static private LRUD computeLRUD( DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
   {
     LRUD lrud = new LRUD();
-    float grad2rad = TopoDroidUtil.GRAD2RAD;
-    float n0 = (float)Math.cos( b.mBearing * grad2rad );
-    float e0 = (float)Math.sin( b.mBearing * grad2rad );
-    float cc0 = (float)Math.cos( b.mClino * grad2rad );
-    float sc0 = (float)Math.sin( b.mClino * grad2rad );
+    float n0  = TDMath.cosd( b.mBearing );
+    float e0  = TDMath.sind( b.mBearing );
+    float cc0 = TDMath.cosd( b.mClino );
+    float sc0 = TDMath.sind( b.mClino );
     float cb0 = n0;
     float sb0 = e0;
     // float sc02 = sc0 * sc0;
@@ -1465,10 +1433,10 @@ class TopoDroidExporter
         if ( to != null && to.length() > 0 ) continue;
       }
       if ( station.equals( from ) ) {
-        float cb = (float)Math.cos( item.mBearing * grad2rad );
-        float sb = (float)Math.sin( item.mBearing * grad2rad );
-        float cc = (float)Math.cos( item.mClino * grad2rad );
-        float sc = (float)Math.sin( item.mClino * grad2rad );
+        float cb = TDMath.cosd( item.mBearing );
+        float sb = TDMath.sind( item.mBearing );
+        float cc = TDMath.cosd( item.mClino );
+        float sc = TDMath.sind( item.mClino );
         float len = item.mLength;
         float cbb0 = sb*sb0 + cb*cb0; // cosine of angle between block and item
 
@@ -1519,12 +1487,12 @@ class TopoDroidExporter
    * Multisurvey file is possible.
    */
 
-  private static void printShotToDat( PrintWriter pw, float l, float b, float c, int n, LRUD lrud,
-                               boolean duplicate, String comment )
+  private static void printShotToDat( PrintWriter pw, AverageLeg leg, LRUD lrud, boolean duplicate, String comment )
   {
-    b = TopoDroidUtil.in360( b/n );
-    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", (l/n)*TopoDroidUtil.M2FT, b, c/n, 
+    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+      leg.length()*TopoDroidUtil.M2FT, leg.bearing(), leg.clino(),
       lrud.l*TopoDroidUtil.M2FT, lrud.u*TopoDroidUtil.M2FT, lrud.d*TopoDroidUtil.M2FT, lrud.r*TopoDroidUtil.M2FT );
+    leg.reset();
     if ( duplicate ) {
       pw.format(" #|L#");
     }
@@ -1557,7 +1525,7 @@ class TopoDroidExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "exportSurveyAsDat date parse error " + date );
+          TopoDroidLog.Error( "exportSurveyAsDat date parse error " + date );
         }
       }
       pw.format("SURVEY DATE: %02d %02d %04d", m, d, y ); // format "MM DD YYYY"
@@ -1578,8 +1546,7 @@ class TopoDroidExporter
       pw.format("FROM TO LENGTH BEARING INC FLAGS COMMENTS\r\n" );
       pw.format( "\r\n" );
 
-      float l=0.0f, b=0.0f, c=0.0f, b0=0.0f; // shot average values
-      int n = 0;
+      AverageLeg leg = new AverageLeg();
       DistoXDBlock ref_item = null;
 
       int extra_cnt = 0;
@@ -1593,53 +1560,43 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
-              float bb = TopoDroidUtil.around( item.mBearing, b0 );
-              l += item.mLength;
-              b += bb;
-              c += item.mClino;
-              ++n;
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
-            if ( n > 0 && ref_item != null ) {
+            if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
               pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
-              printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
+              printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
               duplicate = false;
-              n = 0;
               ref_item = null; 
             }
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
-            if ( n > 0 && ref_item != null ) { // write pervious leg shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
               pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
-              printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
+              printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
               duplicate = false;
-              n = 0;
               ref_item = null; 
             }
           } else {
-            if ( n > 0 && ref_item != null ) {
+            if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
               pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
-              printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
+              printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
             }
-            n = 1;
             ref_item = item;
             duplicate = ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
-            l = item.mLength;
-            b = item.mBearing;
-            b0 = b;
-            c = item.mClino;
+            leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
       }
-      if ( n > 0 && ref_item != null ) {
+      if ( leg.mCnt > 0 && ref_item != null ) {
         lrud = computeLRUD( ref_item, list, true );
         pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
-        printShotToDat( pw, l, b, c, n, lrud, duplicate, ref_item.mComment );
+        printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
       }
       pw.format( "\f\r\n" );
 
@@ -1647,13 +1604,19 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Compass export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Compass export: " + e.getMessage() );
       return null;
     }
   }
 
   // =======================================================================
   // WALLS EXPORT 
+
+  static private void writeSrvLeg( PrintWriter pw, AverageLeg leg )
+  {
+    pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f", leg.length(), leg.bearing(), leg.clino() );
+    leg.reset();
+  }
  
   static String exportSurveyAsSrv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
@@ -1676,7 +1639,7 @@ class TopoDroidExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "exportSurveyAsDat date parse error " + date );
+          TopoDroidLog.Error( "exportSurveyAsDat date parse error " + date );
         }
       }
       pw.format("#Date %04d-%02d-%02d\n", y, m, d ); // format "YYYY-MM-DD"
@@ -1710,9 +1673,7 @@ class TopoDroidExporter
 
       List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       // int extend = 1;
-      float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
-
-      int n = 0;
+      AverageLeg leg = new AverageLeg();
       DistoXDBlock ref_item = null;
       boolean duplicate = false;
       boolean surface   = false; // TODO
@@ -1722,17 +1683,12 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
-              float bb = TopoDroidUtil.around( item.mBearing, b0 );
-              l += item.mLength;
-              b += bb;
-              c += item.mClino;
-              ++n;
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f", l/n, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              writeSrvLeg( pw, leg );
               if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
                 pw.format("\t; %s\n", ref_item.mComment );
               } else {
@@ -1746,7 +1702,6 @@ class TopoDroidExporter
                 // FIXME pw.format(therion_flags_not_surface);
                 surface = false;
               }
-              n = 0;
               ref_item = null; 
             }
             // if ( item.mExtend != extend ) {
@@ -1763,9 +1718,8 @@ class TopoDroidExporter
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
-            if ( n > 0 && ref_item != null ) { // finish writing previous leg shot
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f", l/n, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
+              writeSrvLeg( pw, leg );
               if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
                 pw.format("\t; %s\n", ref_item.mComment );
               } else {
@@ -1779,7 +1733,6 @@ class TopoDroidExporter
                 // FIXME pw.format(therion_flags_not_surface);
                 surface = false;
               }
-              n = 0;
               ref_item = null; 
             }
             // if ( item.mExtend != extend ) {
@@ -1794,9 +1747,8 @@ class TopoDroidExporter
               pw.format("\n");
             }
           } else {
-            if ( n > 0 && ref_item != null ) {
-              b = TopoDroidUtil.in360( b/n );
-              pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f\n", l/n, b, c/n );
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              writeSrvLeg( pw, leg );
               if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
                 pw.format("\t; %s\n", ref_item.mComment );
               } else {
@@ -1810,9 +1762,7 @@ class TopoDroidExporter
                 // FIXME pw.format(therion_flags_not_surface);
                 surface = false;
               }
-              // n = 0;
             }
-            n = 1;
             ref_item = item;
             // if ( item.mExtend != extend ) {
             //   extend = item.mExtend;
@@ -1832,17 +1782,13 @@ class TopoDroidExporter
               pw.format("\t; %s\n", item.mComment );
             }
             pw.format("%s\t%s\t", from, to );
-            l = item.mLength;
-            b = item.mBearing;
-            b0 = b;
-            c = item.mClino;
+            leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
         // pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f\n", item.mLength, item.mBearing, item.mClino );
       }
-      if ( n > 0 && ref_item != null ) {
-        b = TopoDroidUtil.in360( b/n );
-        pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f", l/n, b, c/n );
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        writeSrvLeg( pw, leg );
         if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
           pw.format("\t; %s\n", ref_item.mComment );
         } else {
@@ -1858,7 +1804,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed Walls export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed Walls export: " + e.getMessage() );
       return null;
     }
   }
@@ -1979,7 +1925,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed DXF export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed DXF export: " + e.getMessage() );
       return null;
     }
   }
@@ -2006,12 +1952,12 @@ class TopoDroidExporter
     pw.format("\r\n");
   }
 
-  static private void printShotToTro( PrintWriter pw, DistoXDBlock item, float l, float b, float c, int n, LRUD lrud )
+  static private void printShotToTro( PrintWriter pw, DistoXDBlock item, AverageLeg leg, LRUD lrud )
   {
-    b = TopoDroidUtil.in360( b/n );
     // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     pw.format("%s %s ", item.mFrom, item.mTo );
-    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f ", (l/n), b, c/n );
+    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
+    leg.reset();
     pw.format(Locale.ENGLISH, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
     // if ( duplicate ) {
     //   // pw.format(" #|L#");
@@ -2035,7 +1981,7 @@ class TopoDroidExporter
       // pw.format("; %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
 
       pw.format("Version 5.02\r\n\r\n");
-      if ( fixed.size() > 0 ) {
+      if ( fixed.size() > 0 ) { // FIXME
         // pw.format(Locale.ENGLISH, "Trou %s,%.2f,%.2f,LT2E\r\n", info.name, fix.lat, fix.lng );
         for ( FixedInfo fix : fixed ) {
           // pw.format("Entree %s\r\n", fix.name );
@@ -2051,8 +1997,7 @@ class TopoDroidExporter
       
       pw.format(Locale.ENGLISH, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.declination );
 
-      float l=0.0f, b=0.0f, c=0.0f, b0=0.0f; // shot average values
-      int n = 0;
+      AverageLeg leg = new AverageLeg();
       DistoXDBlock ref_item = null;
 
       int extra_cnt = 0;
@@ -2067,74 +2012,64 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) < TopoDroidSetting.mCloseDistance ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
               // Log.v( TAG, "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
-              float bb = TopoDroidUtil.around( item.mBearing, b0 );
-              l += item.mLength;
-              b += bb;
-              c += item.mClino;
-              ++n;
+              leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
-            if ( n > 0 && ref_item != null ) {
+            if ( leg.mCnt > 0 && ref_item != null ) {
               if ( start ) {
                 printStartShotToTro( pw, ref_item, list );
                 start = false;
               }
               lrud = computeLRUD( ref_item, list, false );
-              printShotToTro( pw, ref_item, l, b, c, n, lrud );
+              printShotToTro( pw, ref_item, leg, lrud );
               duplicate = false;
-              n = 0;
               ref_item = null; 
             }
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
-            if ( n > 0 && ref_item != null ) { // write pervious leg shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               if ( start ) {
                 printStartShotToTro( pw, ref_item, list );
                 start = false;
               }
               lrud = computeLRUD( ref_item, list, false );
-              printShotToTro( pw, ref_item, l, b, c, n, lrud );
+              printShotToTro( pw, ref_item, leg, lrud );
               duplicate = false;
-              n = 0;
               ref_item = null; 
             }
           } else {
-            if ( n > 0 && ref_item != null ) {
+            if ( leg.mCnt > 0 && ref_item != null ) {
               if ( start ) {
                 printStartShotToTro( pw, ref_item, list );
                 start = false;
               }
               lrud = computeLRUD( ref_item, list, false );
-              printShotToTro( pw, ref_item, l, b, c, n, lrud );
+              printShotToTro( pw, ref_item, leg, lrud );
             }
-            n = 1;
             ref_item = item;
             duplicate = ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
             // Log.v( TAG, "first data " + item.mLength + " " + item.mBearing + " " + item.mClino );
-            l = item.mLength;
-            b = item.mBearing;
-            b0 = b;
-            c = item.mClino;
+            leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
       }
-      if ( n > 0 && ref_item != null ) {
+      if ( leg.mCnt > 0 && ref_item != null ) {
         if ( start ) {
           printStartShotToTro( pw, ref_item, list );
           start = false;
         }
         lrud = computeLRUD( ref_item, list, false );
-        printShotToTro( pw, ref_item, l, b, c, n, lrud );
+        printShotToTro( pw, ref_item, leg, lrud );
       }
 
       fw.flush();
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed VisualTopo export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed VisualTopo export: " + e.getMessage() );
       return null;
     }
   }
@@ -2164,7 +2099,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed CSV export: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed CSV export: " + e.getMessage() );
       return null;
     }
   }
@@ -2229,7 +2164,7 @@ class TopoDroidExporter
       }
       fr.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed CSV import: " + e.getMessage() );
+      TopoDroidLog.Error( "Failed CSV import: " + e.getMessage() );
       ret = -5; // IO Exception
     }
     return ret;

@@ -12,20 +12,17 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import java.util.Locale;
 
 /** fixed (GPS) point
  * Note the order of data: LONGITUDE - LATITUDE - ALTITUDE
  */
-class FixedInfo
+class FixedInfo extends MagLatLong
 {
   Long   id;       // fixed id
   String name;     // station name, or whatever
-  double lng;      // longitude [decimal deg]
-  double lat;      // latitude [decimal deg]
+  // double lat;      // latitude [decimal deg]
+  // double lng;      // longitude [decimal deg]
   double alt;      // wgs84 altitude [m]
   double asl;      // geoid altitude [m] 
   String comment;
@@ -34,8 +31,8 @@ class FixedInfo
   {
     id = _id;
     name = n;
-    lng = longitude;
     lat = latitude;
+    lng = longitude;
     alt = h_ellip;
     asl = h_geoid;
     comment = cmt;
@@ -45,11 +42,17 @@ class FixedInfo
   {
     id = _id;
     name = n;
-    lng = longitude;
     lat = latitude;
+    lng = longitude;
     alt = h_ellip;
     asl = h_geoid;
     comment = "";
+  }
+
+  // get the string "name long lat alt" for the exports
+  public String toExportString()
+  {
+    return String.format("%s %.6f %.6f %.0f", name, lng, lat, asl );
   }
 
   public String toString()
@@ -70,18 +73,12 @@ class FixedInfo
     x = 60*(x - mp);
     int sp = (int)x;
     int ds = (int)( 100 * (x-sp) );
-    StringWriter swp = new StringWriter();
-    PrintWriter pwp = new PrintWriter( swp );
-    pwp.format( "%d°%02d'%02d.%02d", dp, mp, sp, ds );
-    return swp.getBuffer().toString();
+    return String.format( "%d°%02d'%02d.%02d", dp, mp, sp, ds );
   }
 
   static private String double2degree( double x )
   {
-    StringWriter swp = new StringWriter();
-    PrintWriter pwp = new PrintWriter( swp );
-    pwp.format(Locale.ENGLISH, "%.6f", x );
-    return swp.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%.6f", x );
   }
 
 
@@ -103,7 +100,7 @@ class FixedInfo
         return Double.parseDouble( str );
       }
     } catch (NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "string2double parse error: " + str );
+      TopoDroidLog.Error( "string2double parse error: " + str );
     }
     return -1111.0; // more neg than -1000
   }        

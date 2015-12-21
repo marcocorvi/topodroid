@@ -21,35 +21,63 @@ import java.io.IOException;
 
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Shader.TileMode;
 
-// import android.util.Log;
+import android.util.Log;
 
 class SymbolArea extends Symbol
 {
   String mName;
   int mColor;
+  boolean mOrientable;
+  double mOrientation;
   Paint mPaint;
   Path mPath;
+  Bitmap       mBitmap;
+  BitmapShader mShader; // paint bitmap shader
+  TileMode mXMode;
+  TileMode mYMode;
 
   @Override public String getName()  { return mName; }
   @Override public String getThName( ) { return mThName; }
   @Override public Paint  getPaint() { return mPaint; }
   @Override public Path   getPath()  { return mPath; }
-  // @Override public boolean isOrientable() { return false; }
+  @Override public boolean isOrientable() { return mOrientable; }
+
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
-  // @Override public void setAngle( float angle ) { }
-  // @Override public int getAngle() { return 0; }
+
+  @Override public void setAngle( float angle ) 
+  {
+    if ( mBitmap == null ) return;
+    TopoDroidLog.Error( "ERROR area symbol set orientation " + angle + " not supported" );
+    // mOrientation = angle;
+    // android.graphics.Matrix m = new android.graphics.Matrix();
+    // int w = mBitmap.getWidth();
+    // int h = mBitmap.getHeight();
+    // m.postRotate( (float)mOrientation );
+    // Bitmap bitmap = Bitmap.createBitmap( mBitmap, 0, 0, w, h, m, true );
+    // makeShader( bitmap, mXMode, mYMode, false );
+  }
+
+  @Override public int getAngle() { return (int)mOrientation; }
 
   /** 
    * color 0xaarrggbb
    */
-  SymbolArea( String name, String th_name, int color )
+  SymbolArea( String name, String th_name, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode )
   {
-    super( th_name );
+    super( th_name, fname );
     mName = name;
     mColor = color;
+    mBitmap = bitmap;
+    mXMode  = xmode;
+    mYMode  = ymode;
+    mOrientable  = false;
+    mOrientation = 0;
     mPaint = new Paint();
     mPaint.setDither(true);
     mPaint.setColor( mColor );
@@ -58,7 +86,26 @@ class SymbolArea extends Symbol
     mPaint.setStrokeJoin(Paint.Join.ROUND);
     mPaint.setStrokeCap(Paint.Cap.ROUND);
     mPaint.setStrokeWidth( TopoDroidSetting.mLineThickness );
+    makeShader( mBitmap, mXMode, mYMode, true );
     makePath();
+  }
+
+  void rotateGrad( double a ) 
+  {
+    if ( mOrientable ) {
+      TopoDroidLog.Error( "ERROR area symbol rotate by " + a + " not implementd" );
+      // mOrientation += a;
+      // while ( mOrientation >= 360 ) mOrientation -= 360;
+      // while ( mOrientation < 0 ) mOrientation += 360;
+      // if ( mBitmap != null ) {
+      //   android.graphics.Matrix m = new android.graphics.Matrix();
+      //   int w = mBitmap.getWidth();
+      //   int h = mBitmap.getHeight();
+      //   m.postRotate( (float)mOrientation );
+      //   Bitmap bitmap = Bitmap.createBitmap( mBitmap, 0, 0, w, h, m, true );
+      //   makeShader( bitmap, mXMode, mYMode, false );
+      // }
+    }
   }
 
   void makePath()
@@ -67,10 +114,51 @@ class SymbolArea extends Symbol
     mPath.addCircle( 0, 0, 10, Path.Direction.CCW );
   }
 
-  SymbolArea( String filepath, String locale, String iso )
+  SymbolArea( String filepath, String fname, String locale, String iso )
   {
+    super( null, fname );
+    mOrientable  = false;
+    mOrientation = 0;
     readFile( filepath, locale, iso );
     makePath();
+  }
+
+  private Bitmap makeBitmap( int[] pxl, int w1, int h1 )
+  {
+    if ( w1 > 0 && h1 > 0 ) {
+      int w2 = w1 * 2;
+      int h2 = h1 * 2;
+      int pxl2[] = new int[ w2 * h2 ];
+      for ( int j=0; j<h1; ++j ) {
+        for ( int i=0; i < w1; ++i ) {
+          pxl2[j*w2+i] = pxl2[j*w2+i+w1] = pxl2[(j+h1)*w2+i] = pxl2[(j+h1)*w2+i+w1] = pxl[j*w1+i];
+        }
+      }
+      Bitmap bitmap = Bitmap.createBitmap( w2, h2, Bitmap.Config.ARGB_8888 );
+      bitmap.setPixels( pxl2, 0, w2, 0,     0,      w2, h2 );
+      // bitmap.setPixels( pxl, 0, width, width, 0,      width, height );
+      // bitmap.setPixels( pxl, 0, width, 0,     height, width, height );
+      // bitmap.setPixels( pxl, 0, width, width, height, width, height );
+      return bitmap;
+    }
+    return null;
+  }
+
+  private void makeShader( Bitmap bitmap0, TileMode xmode, TileMode ymode, boolean subimage ) 
+  {
+    if ( bitmap0 == null ) return;
+    Bitmap bitmap = bitmap0;
+    int width  = bitmap.getWidth();
+    int height = bitmap.getHeight();
+    if ( width > 0 && height > 0 ) {
+      if ( subimage ) {
+        int w1 = width / 2;
+        int h1 = height / 2;
+        bitmap = Bitmap.createBitmap( bitmap0, w1/2, h1/2, w1, h1 );
+      }
+      mShader = new BitmapShader( bitmap, xmode, ymode );
+      mPaint.setShader( mShader );
+    }
   }
 
   /** create a symbol reading it from a file
@@ -89,6 +177,12 @@ class SymbolArea extends Symbol
     String th_name = null;
     int color      = 0;
     int alpha      = 0x66;
+    mBitmap    = null;
+    int width  = 0;
+    int height = 0;
+    mXMode = TileMode.REPEAT;
+    mYMode = TileMode.REPEAT;
+    int pxl[] = null;
 
     try {
       // FileReader fr = new FileReader( filename );
@@ -138,7 +232,7 @@ class SymbolArea extends Symbol
                 mCsxBrush = Integer.parseInt( vals[k] );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "parse error: " + line );
+              TopoDroidLog.Error( filename + " parse error: " + line );
             }
   	  } else if ( vals[k].equals("color") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -149,6 +243,54 @@ class SymbolArea extends Symbol
   	    if ( k < s ) {
   	      alpha = Integer.decode( vals[k] );
   	    }
+  	  } else if ( vals[k].equals("bitmap") ) {
+  	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+            if ( k < s ) {
+              try {
+                width = Integer.parseInt( vals[k] );
+  	        ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  height = Integer.parseInt( vals[k] );
+                  mXMode = TileMode.REPEAT;
+                  mYMode = TileMode.REPEAT;
+  	          ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                  if ( k < s ) {
+                    if ( vals[k].equals("M") ) { mXMode = TileMode.MIRROR; }
+  	            ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                    if ( k < s ) {
+                      if ( vals[k].equals("M") ) { mYMode = TileMode.MIRROR; }
+                    }
+                  }
+                  if ( width > 0 && height > 0 ) {
+                    pxl = new int[ width * height];
+                    int col = (color & 0x00ffffff) | 0x33000000;
+                    for ( int j=0; j<height; ++j ) {
+                      for ( int i=0; i<width; ++i ) pxl[j*width+i] = col;
+                    }
+                    col = (color & 0x00ffffff) | ( alpha << 24 );
+                    // Log.v("DistoX", "bitmap " + width + " " + height );
+                    for ( int j=0; j<height; ++j ) {
+                      line = br.readLine().trim();
+                      // Log.v("DistoX", "bitmap line <" + line + ">" );
+                      if ( line.startsWith("endbitmap") ) {
+                        mBitmap = makeBitmap( pxl, width, height );
+                        pxl = null;
+                        break;
+                      }
+                      for ( int i=0; i<width && i <line.length(); ++i ) if ( line.charAt(i) == '1' ) pxl[j*width+i] = col;
+                    }
+                  }
+                }   
+              } catch ( NumberFormatException e ) {
+                TopoDroidLog.Error( filename + " parse bitmap error: " + line );
+              }
+            }
+  	  } else if ( vals[k].equals("endbitmap") ) {
+            mBitmap = makeBitmap( pxl, width, height );
+            pxl = null;
+  	  } else if ( vals[k].equals("orientable") ) {
+            mOrientable = true;
+
   	  } else if ( vals[k].equals("endsymbol") ) {
   	    if ( name == null ) {
   	    } else if ( th_name == null ) {
@@ -175,5 +317,6 @@ class SymbolArea extends Symbol
     } catch( IOException e ) {
       // FIXME
     }
+    makeShader( mBitmap, mXMode, mYMode, true );
   }
 }

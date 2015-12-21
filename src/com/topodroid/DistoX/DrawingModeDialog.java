@@ -86,7 +86,7 @@ public class DrawingModeDialog extends Dialog
           if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
           if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
           if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
-          // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Mode " + mode );
+          // TopoDroidLog.Error( "Mode " + mode );
           if ( mParent != null && TopoDroidSetting.mLevelOverNormal ) {
             mParent.mShiftDrawing = mCBfixed.isChecked();
           }

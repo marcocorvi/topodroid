@@ -63,6 +63,7 @@ public class TopoDroidPath
   private static String APP_SVG_PATH ;   //  = APP_BASE_PATH + "svg/";
   private static String APP_SVX_PATH ;   //  = APP_BASE_PATH + "svx/";
   private static String APP_TH_PATH  ; //  = APP_BASE_PATH + "th/";
+  private static String APP_TDR_PATH ; //  = APP_BASE_PATH + "tdr/";
   private static String APP_TH2_PATH ; //  = APP_BASE_PATH + "th2/";
   private static String APP_TH3_PATH ; //  = APP_BASE_PATH + "th3/";
   private static String APP_TMP_PATH ; //  = APP_BASE_PATH + "tmp/";
@@ -104,7 +105,7 @@ public class TopoDroidPath
     dir = new File( APP_BASE_PATH );
     if ( ! dir.exists() ) {
       if ( ! dir.mkdir() ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "failed mkdir " + APP_BASE_PATH );
+        TopoDroidLog.Error( "failed mkdir " + APP_BASE_PATH );
         APP_BASE_PATH = APP_DEFAULT_PATH;
       }
     }
@@ -136,6 +137,9 @@ public class TopoDroidPath
 
     APP_TH_PATH  = APP_BASE_PATH + "th/";
     checkDirs( APP_TH_PATH );
+
+    APP_TDR_PATH = APP_BASE_PATH + "tdr/";
+    checkDirs( APP_TDR_PATH );
 
     APP_TH2_PATH = APP_BASE_PATH + "th2/";
     checkDirs( APP_TH2_PATH );
@@ -237,7 +241,9 @@ public class TopoDroidPath
   public static String getManifestFile() { return APP_BASE_PATH + "manifest"; }
 
   static String getSymbolFile( String name ) { return APP_SYMBOL_PATH + name; }
+  static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
 
+  static boolean hasTdrDir() { return (new File( APP_TDR_PATH )).exists(); }
   static boolean hasTh2Dir() { return (new File( APP_TH2_PATH )).exists(); }
   static boolean hasTh3Dir() { return (new File( APP_TH3_PATH )).exists(); }
   static boolean hasPngDir() { return (new File( APP_PNG_PATH )).exists(); }
@@ -249,6 +255,7 @@ public class TopoDroidPath
   static String getDirFile( String name )    { return APP_BASE_PATH + name; }
   static String getImportFile( String name ) { return APP_IMPORT_PATH + name; }
   static String getZipFile( String name )    { return APP_ZIP_PATH + name; }
+  static String getTdrFile( String name )    { return APP_TDR_PATH + name; }
   static String getTh2File( String name )    { return APP_TH2_PATH + name; }
   static String getTh3File( String name )    { return APP_TH3_PATH + name; }
 
@@ -277,6 +284,7 @@ public class TopoDroidPath
 
   static String getSurveyPlotDxfFile( String survey, String name ) { return APP_DXF_PATH + survey + "-" + name + ".dxf"; }
   static String getSurveyPlotSvgFile( String survey, String name ) { return APP_SVG_PATH + survey + "-" + name + ".svg"; }
+  static String getSurveyPlotTdrFile( String survey, String name ) { return APP_TDR_PATH + survey + "-" + name + ".tdr"; }
   static String getSurveyPlotTh2File( String survey, String name ) { return APP_TH2_PATH + survey + "-" + name + ".th2"; }
   static String getSurveyPlotPngFile( String survey, String name ) { return APP_PNG_PATH + survey + "-" + name + ".png"; }
 
@@ -292,6 +300,7 @@ public class TopoDroidPath
 
   static String getSurveyNoteFile( String title ) { return getFile( APP_NOTE_PATH, title, "txt" ); }
   static String getTmpFileWithExt( String name ) { return getFile( APP_TMP_PATH, name, "tmp" ); }
+  static String getTdrFileWithExt( String name ) { return getFile( APP_TDR_PATH, name, "tdr" ); }
   static String getTh2FileWithExt( String name ) { return getFile( APP_TH2_PATH, name, "th2" ); }
   static String getTh3FileWithExt( String name ) { return getFile( APP_TH3_PATH, name, "th3" ); }
   static String getDxfFileWithExt( String name ) { return getFile( APP_DXF_PATH, name, "dxf" ); }
@@ -438,25 +447,12 @@ public class TopoDroidPath
   static void deleteSurveyPlotFiles( String survey, List<PlotInfo> plots )
   {
     File t;
-    if ( hasTh2Dir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotTh2File( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
-    }
-    if ( hasPngDir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotPngFile( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
-    }
-    if ( hasDxfDir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotDxfFile( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
-    }
-    if ( hasSvgDir() ) {
-      for ( PlotInfo p : plots ) {
-        t = new File( getSurveyPlotSvgFile( survey, p.name ) ); if ( t.exists() ) t.delete();
-      }
+    for ( PlotInfo p : plots ) {
+      t = new File( getSurveyPlotTh2File( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotTdrFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotPngFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotDxfFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotSvgFile( survey, p.name ) ); if ( t.exists() ) t.delete();
     }
   }
 

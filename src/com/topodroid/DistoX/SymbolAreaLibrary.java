@@ -16,171 +16,98 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 import android.graphics.Paint;
+import android.graphics.Bitmap;
+import android.graphics.Shader.TileMode;
 import android.content.res.Resources;
 
 import android.util.Log;
 
-class SymbolAreaLibrary
+class SymbolAreaLibrary extends SymbolLibrary
 {
-  // ArrayList< SymbolArea > mArea;
-  ArrayList< SymbolArea > mAnyArea;
+  static final String DefaultAreas[] = {
+    "blocks", "clay", "debris", "sand"
+  };
   int mAreaUserIndex;
-  // int mAreaNr;
-  int mAnyAreaNr;
 
   SymbolAreaLibrary( Resources res )
   {
-    // Log.v(  TopoDroidApp.TAG, "cstr SymbolAreaLibrary()" );
-    // mArea = new ArrayList< SymbolArea >();
-    mAnyArea = new ArrayList< SymbolArea >();
+    super( "a_" );
     mAreaUserIndex = 0;
     loadSystemAreas( res );
     loadUserAreas();
     makeEnabledList();
+    // Log.v("DistoX", "Areas " + mSymbolNr );
+    // for ( Symbol s : mSymbols ) Log.v("DistoX", "area " + s.getName() + " " + s.getThName() );
   }
 
-  int getSymbolIndex( Symbol symbol ) 
+  double getAreaOrientation( int k )
   {
-    for ( int k=0; k<mAnyArea.size(); ++k ) {
-      if ( symbol == mAnyArea.get(k) ) return k;
-    }
-    return -1;
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return ( s == null )? 0 : s.mOrientation;
   }
 
-  // int size() { return mArea.size(); }
-
-  // SymbolArea getArea( int k ) 
-  // {
-  //   if ( k < 0 || k >= mmAnyAreaNr ) return null;
-  //   return mArea.get( k );
-  // }
-
-  SymbolArea getAnyArea( int k ) 
+  void rotateGrad( int k, double a ) 
   {
-    if ( k < 0 || k >= mAnyAreaNr ) return null;
-    return mAnyArea.get( k );
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    if ( s != null ) s.rotateGrad( a );
   }
 
-  boolean hasArea( String th_name ) 
-  {
-    for ( SymbolArea a : mAnyArea ) {
-      if ( th_name.equals( a.mThName ) ) {
-        return a.isEnabled();
-      }
-    }
-    return false;
-  }
-
-  boolean hasAnyArea( String th_name ) 
-  {
-    for ( SymbolArea a : mAnyArea ) {
-      if ( th_name.equals( a.mThName ) ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  SymbolArea getSymbolAnyArea( String th_name )
-  {
-    for ( SymbolArea a : mAnyArea ) {
-      if ( th_name.equals( a.mThName ) ) return a;
-    }
-    return null;
-  }
-
-  // boolean removeArea( String th_name ) 
-  // {
-  //   for ( SymbolArea a : mAnyArea ) {
-  //     if ( th_name.equals( a.mThName ) ) {
-  //       a.setEnabled( false ); // mAnyArea.remove( a );
-  //       TopoDroidApp.mData.setSymbolEnabled( "a_" + th_name, false );
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-
-  String getAreaName( int k )
-  {
-    if ( k < 0 || k >= mAnyAreaNr ) return null;
-    return mAnyArea.get(k).mName;
-  }
-
-  String getAreaThName( int k )
-  {
-    if ( k < 0 || k >= mAnyAreaNr ) return null;
-    return mAnyArea.get(k).mThName;
-  }
-
-  Paint getAreaPaint( int k )
-  {
-    if ( k < 0 || k >= mAnyAreaNr ) return null;
-    return mAnyArea.get(k).mPaint;
-  }
-
-  int getAreaColor( int k )
-  {
-    if ( k < 0 || k >= mAnyAreaNr ) return 0xffffffff; // white
-    return mAnyArea.get(k).mColor;
+  Bitmap getAreaBitmap( int k ) 
+  { 
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return ( s == null )? null : s.mBitmap; 
   }
   
-  int areaCsxLayer( int k )
+  TileMode getAreaXMode( int k ) 
+  { 
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return ( s == null )? TileMode.REPEAT : s.mXMode;
+  }
+  
+  TileMode getAreaYMode( int k )
+  { 
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return ( s == null )? TileMode.REPEAT : s.mYMode;
+  }
+  
+  int getAreaColor( int k )
   {
-    if ( k < 0 || k >= mAnyAreaNr ) return -1;
-    return mAnyArea.get(k).mCsxLayer;
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return ( s == null )? 0xffffffff : s.mColor;
   }
-
-  int areaCsxType( int k )
- {
-    if ( k < 0 || k >= mAnyAreaNr ) return -1;
-    return mAnyArea.get(k).mCsxType;
-  }
-
-  int areaCsxCategory( int k )
-  {
-    if ( k < 0 || k >= mAnyAreaNr ) return -1;
-    return mAnyArea.get(k).mCsxCategory;
-  }
-
-  int areaCsxPen( int k )
-  {
-    if ( k < 0 || k >= mAnyAreaNr ) return -1;
-    return mAnyArea.get(k).mCsxPen;
-  }
-
-  int areaCsxBrush( int k )
-  {
-    if ( k < 0 || k >= mAnyAreaNr ) return -1;
-    return mAnyArea.get(k).mCsxBrush;
-  }
+  
+  int areaCsxLayer( int k )    { return getSymbolCsxLayer(k); }
+  int areaCsxType( int k )     { return getSymbolCsxType(k); }
+  int areaCsxCategory( int k ) { return getSymbolCsxCategory(k); }
+  int areaCsxPen( int k )      { return getSymbolCsxPen(k); }
+  int areaCsxBrush( int k )    { return getSymbolCsxBrush(k); }
 
   // ========================================================================
 
   private void loadSystemAreas( Resources res )
   {
     // Log.v( TopoDroidApp.TAG, "load system areas");
-    if ( mAnyArea.size() > 0 ) return;
+    if ( size() > 0 ) return;
 
-    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user",  0x66ffffff );
+    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user", "user", 0x66ffffff, null, TileMode.REPEAT, TileMode.REPEAT );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;
     symbol.mCsxPen   = 1;
     symbol.mCsxBrush = 2;
-    mAnyArea.add( symbol );
+    addSymbol( symbol );
 
-    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water",  0x660000ff );
+    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water", "water", 0x660000ff, null, TileMode.REPEAT, TileMode.REPEAT );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;
     symbol.mCsxPen   = 1;
     symbol.mCsxBrush = 2;
-    mAnyArea.add( symbol );
-
-    mAnyAreaNr = mAnyArea.size();
+    addSymbol( symbol );
   }
 
   void loadUserAreas()
@@ -192,111 +119,62 @@ class SymbolAreaLibrary
 
     File dir = new File( TopoDroidPath.APP_AREA_PATH );
     if ( dir.exists() ) {
-      int systemNr = mAnyArea.size();
+      int systemNr = size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
-        SymbolArea symbol = new SymbolArea( file.getPath(), locale, iso );
+        SymbolArea symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "area with null ThName" );
+          TopoDroidLog.Error( "area with null ThName" );
           continue;
         }
-        if ( ! hasAnyArea( symbol.mThName ) ) {
-          mAnyArea.add( symbol );
-          symbol.setEnabled( TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
+        if ( ! hasSymbolByFilename( symbol.mThName ) ) {
+          addSymbol( symbol );
+          String thname = symbol.mThName;
+          String name = mPrefix + thname;
+          boolean enable = false;
+          if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
+            for ( int k=0; k<DefaultAreas.length; ++k ) { 
+              if ( DefaultAreas[k].equals( thname ) ) { enable = true; break; }
+            }
+            TopoDroidApp.mData.setSymbolEnabled( name, enable );
+          } else {
+            enable = TopoDroidApp.mData.getSymbolEnabled( name );
+          }
+          symbol.setEnabled( enable );
         }
       }
-      mAnyAreaNr = mAnyArea.size();
       sortSymbolByName( systemNr );
     } else {
       dir.mkdirs( );
     }
   }
 
-  private void sortSymbolByName( int start )
-  {
-    for ( int k=start+1; k<mAnyAreaNr; ) {
-      SymbolArea prev = mAnyArea.get(k-1);
-      SymbolArea curr = mAnyArea.get(k);
-      if ( prev.getName().compareTo(curr.getName()) > 0  ) { // swap
-        mAnyArea.set( k-1, curr );
-        mAnyArea.set( k, prev );
-        if ( k > start+1 ) --k;
-      } else {
-        ++k;
-      }
-    }
-  }
-
-  boolean tryLoadMissingArea( String p )
+  boolean tryLoadMissingArea( String fname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
     String iso = "ISO-8859-1";
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    if ( hasArea( p ) ) return true;
-    SymbolArea symbol = getSymbolAnyArea( p );
+    Symbol symbol = getSymbolByFilename( fname );
     if ( symbol == null ) {
-      // Log.v( TopoDroidApp.TAG, "load missing area " + p );
-      File file = new File( TopoDroidPath.APP_SAVE_AREA_PATH + p );
+      String filename = TopoDroidPath.APP_SAVE_AREA_PATH + fname;
+      File file = new File( filename );
       if ( ! file.exists() ) return false;
-
-      symbol = new SymbolArea( file.getPath(), locale, iso );
-      mAnyArea.add( symbol );
-    } else {
-      // Log.v( TopoDroidApp.TAG, "enabling missing area " + p );
+      symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
+      addSymbol( symbol );
     }
     if ( symbol == null ) return false;
-
-    symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
-    
-    makeEnabledList();
+    if ( ! symbol.isEnabled() ) {
+      symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( mPrefix + symbol.mThName ) );
+      makeEnabledList();
+    }
     return true;
-  }
-
-  void makeEnabledList()
-  {
-    // Log.v( TopoDroidApp.TAG, "make enabled list before: " + mAnyArea.size() );
-    // mArea.clear();
-    for ( SymbolArea symbol : mAnyArea ) {
-      TopoDroidApp.mData.setSymbolEnabled( "a_" + symbol.mThName, symbol.mEnabled );
-      // Log.v( TopoDroidApp.TAG, "area symbol " + symbol.mThName + " enabled " + symbol.mEnabled );
-      // if ( symbol.mEnabled ) {
-      //   mArea.add( symbol );
-      // }
-      if ( symbol.mEnabled ) {
-      }
-    }
-    // mAreaNr = mArea.size();
-    // Log.v( TopoDroidApp.TAG, "make enabled list after: " + mAnyArea.size() );
-  }
-
-  void setRecentAreas( Symbol recent[] )
-  {
-    int k = 0;
-    for ( SymbolArea symbol : mAnyArea ) {
-      if ( symbol.mEnabled ) {
-        recent[k++] = symbol;
-        if ( k >= ItemDrawer.NR_RECENT ) break;
-      }
-    }
   }
 
   void makeEnabledListFromPalette( SymbolsPalette palette )
   {
-    for ( SymbolArea symbol : mAnyArea ) symbol.setEnabled( false );
-    for ( String p : palette.mPaletteArea ) {
-      SymbolArea symbol = getSymbolAnyArea( p );
-      if ( symbol != null ) symbol.setEnabled( true );
-    }
-    makeEnabledList();
-  }
-
-  void writePalette( PrintWriter pw ) 
-  {
-    for ( SymbolArea symbol : mAnyArea ) {
-      if ( symbol.isEnabled( ) ) pw.format( " %s", symbol.getThName() );
-    }
+    makeEnabledListFromStrings( palette.mPaletteArea );
   }
 
 }    

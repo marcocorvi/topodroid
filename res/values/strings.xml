@@ -248,6 +248,7 @@
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
     <string name="menu_sync">SYNC</string>
+    <string name="menu_tdr2th2">TH2 SKETCHES</string>
     <string name="menu_validate">VALIDATE</string>
 
     <string name="popup_join_pt">Snap to nearby point</string>
@@ -299,6 +300,8 @@
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">Section line crosses many legs</string>
     <string name="too_many_legs_xsection">Too many legs for X-section</string>
+    <string name="converted_tdr2th2">Converted sketches binary files to th2</string>
+    <string name="convert_tdr2th2">Overwrite th2 sketch files ?</string>
 
     <string name="sensor">sensor</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->
@@ -575,9 +578,10 @@
     <string name="help_draw">Drawing mode</string>
     <string name="help_edit">Editing mode</string>
     <string name="help_refs">Choose sketching references</string>
-    <!-- string name="help_rename">Change survey name</string -->
+    <string name="help_rename">Change survey name</string>
     <string name="help_stats">Survey statistics dialog</string>
     <string name="help_save_plot">Export sketch</string>
+    <string name="help_tdr2th2">Convert sketch binary files to th2</string>
     <string name="help_toggle_plot">Switch between plan and profile view</string>
     <string name="help_trash">Delete sketch</string>
     <string name="help_undo">Undo last drawing action</string>
@@ -886,6 +890,8 @@
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
   <string name="pref_xtherion_areas_title">xtherion areas</string>
   <string name="pref_xtherion_areas_summary">Save areas a la xtherion</string>
+  <string name="pref_binary_store_title">Sketch binary file</string>
+  <string name="pref_binary_store_summary">Save sketches in binary format</string>
   <string name="pref_autoStations_title">Therion stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>

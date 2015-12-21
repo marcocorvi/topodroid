@@ -13,9 +13,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 class SensorInfo
 {
   public long sid;       // survey id
@@ -45,10 +42,7 @@ class SensorInfo
 
   // String getSensorName() 
   // {
-  //   StringWriter sw = new StringWriter();
-  //   PrintWriter pw = new PrintWriter( sw );
-  //   pw.format( "%d-%03d", sid, id );
-  //   return sw.getBuffer().toString();
+  //   return String1.format( "%d-%03d", sid, id );
   // }
 
   public String toString()

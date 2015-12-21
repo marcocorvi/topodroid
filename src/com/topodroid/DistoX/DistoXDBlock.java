@@ -22,8 +22,6 @@ import android.util.Log;
 
 public class DistoXDBlock
 {
-  private static final float grad2rad = TopoDroidUtil.GRAD2RAD;
-
   public static final char[] mExtendTag = { '<', '|', '>', 'o', '-', '.' };
   public static final int EXTEND_LEFT = -1;
   public static final int EXTEND_VERT =  0;
@@ -51,7 +49,8 @@ public class DistoXDBlock
   String mComment;
   long   mExtend;
   long   mFlag;     
-  int    mType;    // shot type
+  int    mType;   
+  int mShotType;  // 0: DistoX, 1: manual
   boolean mWithPhoto;
   boolean mMultiBad;
 
@@ -75,7 +74,6 @@ public class DistoXDBlock
   public boolean isDuplicate() { return mFlag == BLOCK_DUPLICATE; }
   // public boolean isBackshot() { return mFlag == BLOCK_BACKSHOT; }
 
-  int mShotType;  // 0: DistoX, 1: manual
 
   // used by PocketTopo parser only
   public DistoXDBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
@@ -138,7 +136,7 @@ public class DistoXDBlock
   public void setName( String from, String to ) 
   {
     if ( from == null || to == null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "FIXME ERROR DBlock::setName() either from or to is null");
+      TopoDroidLog.Error( "FIXME ERROR DBlock::setName() either from or to is null");
       return;
     }
     mFrom = from.trim();
@@ -160,32 +158,24 @@ public class DistoXDBlock
 
   public String Name() { return mFrom + "-" + mTo; }
   
-  public void setBearing( float x ) { // FIXME-EXTEND
-    mBearing = x;
-    if ( mBearing < 3.14 ) {  // east to the right, west to the left
-      mExtend = EXTEND_RIGHT;
-    } else {
-      mExtend = EXTEND_LEFT;
-    }
-  }
+  // x bearing [degrees]
+  // public void setBearing( float x ) { // FIXME-EXTEND
+  //   mBearing = x;
+  //   if ( mBearing < 180 ) {  // east to the right, west to the left
+  //     mExtend = EXTEND_RIGHT;
+  //   } else {
+  //     mExtend = EXTEND_LEFT;
+  //   }
+  // }
 
-  void setTypeBlankLeg( )
-  {
-    if ( mType == BLOCK_BLANK ) mType = BLOCK_BLANK_LEG;
-  }
+  void setTypeBlankLeg( ) { if ( mType == BLOCK_BLANK ) mType = BLOCK_BLANK_LEG; }
 
-  boolean isTypeBlank() 
-  {
-    return mType == BLOCK_BLANK || mType == BLOCK_BLANK_LEG;
-  }
+  boolean isTypeBlank() { return mType == BLOCK_BLANK || mType == BLOCK_BLANK_LEG; }
   
-  static boolean isTypeBlank( int t ) 
-  {
-    return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG;
-  }
-
+  static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
 
   public int type() { return mType; }
+
   // {
   //   if ( mFrom == null || mFrom.length() == 0 ) {
   //     if ( mTo == null || mTo.length() == 0 ) {
@@ -199,27 +189,33 @@ public class DistoXDBlock
   //   return BLOCK_MAIN_LEG;
   // }
 
-  public int color()
-  {
-    // Log.v( "DistoX", "block " + mId + " type " + mType );
-    return colors[ mType ];
-  }
+  public int color() { return colors[ mType ]; }
 
-  public float relativeDistance( DistoXDBlock b )
+  public boolean relativeDistance( DistoXDBlock b )
   {
-    if ( b == null ) return 10000.0f; // a large distance
-    float cc = (float)Math.cos(mClino * grad2rad);
-    float sc = (float)Math.sin(mClino * grad2rad);
-    float cb = (float)Math.cos(mBearing * grad2rad); 
-    float sb = (float)Math.sin(mBearing * grad2rad); 
-    Vector v1 = new Vector( mLength * cc * sb, mLength * cc * cb, mLength * sc );
-    cc = (float)Math.cos(b.mClino * grad2rad);
-    sc = (float)Math.sin(b.mClino * grad2rad);
-    cb = (float)Math.cos(b.mBearing * grad2rad); 
-    sb = (float)Math.sin(b.mBearing * grad2rad); 
-    Vector v2 = new Vector( b.mLength * cc * sb, b.mLength * cc * cb, b.mLength * sc );
+    if ( b == null ) return false;
+    float cc, sc, cb, sb, len;
+    len = mLength;
+    cc = TDMath.cosd( mClino );
+    sc = TDMath.sind( mClino );
+    cb = TDMath.cosd( mBearing ); 
+    sb = TDMath.sind( mBearing ); 
+    Vector v1 = new Vector( len * cc * sb, len * cc * cb, len * sc );
+    len = b.mLength;
+    cc = TDMath.cosd( b.mClino );
+    sc = TDMath.sind( b.mClino );
+    cb = TDMath.cosd( b.mBearing ); 
+    sb = TDMath.sind( b.mBearing ); 
+    Vector v2 = new Vector( len * cc * sb, len * cc * cb, len * sc );
     float dist = (v1.minus(v2)).Length();
-    return dist/mLength + dist/b.mLength; 
+    return ( dist/mLength + dist/b.mLength ) < TopoDroidSetting.mCloseDistance;
+    // if ( ret ) {
+    //   Log.v("DistoX", "dist " + dist + " " + mLength + " " + mBearing + " " + mClino + " " + v1.x + " " + v1.y + " " + v1.z);
+    //   Log.v("DistoX", "  " + b.mLength + " " + b.mBearing + " " + b.mClino + " " + v2.x + " " + v2.y + " " + v2.z);
+    //   Log.v("DistoX", "  " + dist/v1.Length() + " " + dist/v2.Length() );
+    // }
+    // return ret;
+      
   }
   
   private void formatFlag( PrintWriter pw )
@@ -279,50 +275,32 @@ public class DistoXDBlock
 
   public String distanceString()
   {
-    float ul = TopoDroidSetting.mUnitLength;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "%.2f", mLength*ul );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%.2f", mLength * TopoDroidSetting.mUnitLength );
   }
 
   public String bearingString()
   {
-    float ua = TopoDroidSetting.mUnitAngle;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "%.1f", mBearing*ua );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%.1f", mBearing * TopoDroidSetting.mUnitAngle );
   }
 
   public String clinoString()
   {
-    float ua = TopoDroidSetting.mUnitAngle;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "%.1f", mClino*ua );
-    return sw.getBuffer().toString();
+    return String.format(Locale.ENGLISH, "%.1f", mClino * TopoDroidSetting.mUnitAngle );
   }
 
   public String extraString()
   {
-    float ua = TopoDroidSetting.mUnitAngle;
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "A %.2f  M %.1f  D %.1f", 
+    return String.format(Locale.ENGLISH, "A %.2f  M %.1f  D %.1f", 
       TopoDroidApp.deltaAcc( mAcceleration ), 
       TopoDroidApp.deltaMag( mMagnetic ), 
-      TopoDroidApp.deltaDip( mDip ) * ua );
-    return sw.getBuffer().toString();
+      TopoDroidApp.deltaDip( mDip ) * TopoDroidSetting.mUnitAngle
+    );
   }
 
   boolean isAcceptable( )
   {
     if ( mAcceleration == 0.0f || mMagnetic == 0.0f ) return true;
     return TopoDroidApp.isBlockAcceptable( mAcceleration, mMagnetic, mDip );
-    // if ( ! ret ) {
-    //   Log.v( TopoDroidApp.TAG, "unacceptable " + mAcceleration + " " + mMagnetic + " " + mDip );
-    // }
   }
 
   boolean isRecent( long id ) { return mId >= id; }

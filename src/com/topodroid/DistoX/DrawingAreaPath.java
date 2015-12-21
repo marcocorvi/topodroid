@@ -18,9 +18,15 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Shader.TileMode;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 // import java.util.Iterator;
 // import java.util.List;
 import java.util.ArrayList;
@@ -42,17 +48,22 @@ public class DrawingAreaPath extends DrawingPointLinePath
 
   int mAreaType;
   int mAreaCnt;
+  double mOrientation;
   String mPrefix;      // border/area name prefix (= scrap name)
   // boolean mVisible; // visible border in DrawingPointLinePath
 
-  public DrawingAreaPath( int type, int index, String prefix, boolean visible )
+  public DrawingAreaPath( int type, int cnt, String prefix, boolean visible )
   {
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
     mAreaType = type;
-    mAreaCnt  = index;
+    mAreaCnt  = cnt;
+    mOrientation = 0.0;
+    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
+      mOrientation = DrawingBrushPaths.getAreaOrientation( type );
+    }
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
-      setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
+    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
     }
   }
 
@@ -70,32 +81,122 @@ public class DrawingAreaPath extends DrawingPointLinePath
       mPrefix  = id.substring(0, pos);
       mAreaCnt = Integer.parseInt( id.substring(pos) );
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
+      TopoDroidLog.Error( "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
-      setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
+    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
     }
+  }
+
+  static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
+  {
+    int type, cnt;
+    boolean visible;
+    float orientation;
+    String fname, prefix;
+    try {
+      fname = dis.readUTF();
+      prefix = dis.readUTF();
+      cnt = dis.readInt();
+      visible = ( dis.read( ) == 1 );
+      orientation = dis.readFloat( );
+      int npt = dis.readInt( );
+
+      // DrawingBrushPaths.mAreaLib.tryLoadMissingArea( fname );
+      type = DrawingBrushPaths.mAreaLib.getSymbolIndexByFilename( fname );
+      // Log.v("DistoX", "A: " + fname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
+      if ( type < 0 ) {
+        if ( missingSymbols != null ) missingSymbols.addAreaFilename( fname );
+        type = 0;
+      }
+
+      DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible );
+      // setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+
+      int has_cp;
+      float mX1, mY1, mX2, mY2, mX, mY;
+      mX = x + dis.readFloat( );
+      mY = y + dis.readFloat( );
+      has_cp = dis.read();
+      ret.addStartPoint( mX, mY );
+      // Log.v("DistoX", "A start " + mX + " " + mY );
+      for ( int k=1; k<npt; ++k ) {
+        mX = x + dis.readFloat();
+        mY = y + dis.readFloat();
+        has_cp = dis.read();
+        // Log.v("DistoX", "A point " + mX + " " + mY + " " + has_cp );
+        if ( has_cp == 1 ) {
+          mX1 = x + dis.readFloat();
+          mY1 = y + dis.readFloat();
+          mX2 = x + dis.readFloat();
+          mY2 = y + dis.readFloat();
+          ret.addPoint3( mX1, mY1, mX2, mY2, mX, mY );
+        } else {
+          ret.addPoint( mX, mY );
+        }
+      }
+      ret.retracePath();
+      return  ( npt < 3 )? null : ret;
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "AREA in error " + e.toString() );
+    }
+    return null;
   }
 
   public void setAreaType( int t ) 
   {
     mAreaType = t;
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mAnyAreaNr ) {
-      setPaint( DrawingBrushPaths.getAreaPaint( mAreaType ) );
+    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
     }
   }
 
+  @Override
+  public void setPaint( Paint paint ) 
+  { 
+    mPaint = new Paint( paint );
+  }
+
   public int areaType() { return mAreaType; }
+
+  @Override
+  public void setOrientation( double angle ) 
+  { 
+    // Log.v( "DistoX", "Area path set orientation " + angle );
+    if ( ! DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) return;
+    mOrientation = angle; 
+    while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
+    while ( mOrientation < 0.0 ) mOrientation += 360.0;
+    resetPaint();
+  }
+
+  private void resetPaint()
+  {
+    // Log.v("DistoX", "arae path reset paint orientation " + mOrientation );
+    Bitmap bitmap = DrawingBrushPaths.getAreaBitmap( mAreaType );
+    if ( bitmap != null ) {
+      Matrix mat = new Matrix();
+      int w = bitmap.getWidth();
+      int h = bitmap.getHeight();
+      mat.postRotate( (float)mOrientation );
+      Bitmap bitmap1 = Bitmap.createBitmap( bitmap, 0, 0, w, h, mat, true );
+      Bitmap bitmap2 = Bitmap.createBitmap( bitmap1, w/4, h/4, w/2, h/2 );
+      BitmapShader shader = new BitmapShader( bitmap2,
+        DrawingBrushPaths.getAreaXMode( mAreaType ), DrawingBrushPaths.getAreaYMode( mAreaType ) );
+      mPaint.setShader( shader );
+    }
+  }
 
   @Override
   public String toTherion()
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line border -id %s%d -close on ", mPrefix, mAreaCnt );
-    if ( ! isVisible() ) pw.format("-visibility off ");
-    pw.format("\n");
+    pw.format("line border -id %s%d -close on", mPrefix, mAreaCnt );
+    if ( ! isVisible() ) pw.format(" -visibility off");
     // for ( LinePoint pt : mPoints ) 
+    pw.format("\n");
+
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) 
     {
       pt.toTherion( pw );
@@ -108,7 +209,11 @@ public class DrawingAreaPath extends DrawingPointLinePath
       }
     }
     pw.format("endline\n");
-    pw.format("area %s\n", DrawingBrushPaths.getAreaThName( mAreaType ) );
+    pw.format("area %s", DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType ) );
+    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
+      pw.format(Locale.ENGLISH, " #orientation %.1f", mOrientation );
+    }
+    pw.format("\n");
     pw.format("  %s%d\n", mPrefix, mAreaCnt );
     pw.format("endarea\n");
     return sw.getBuffer().toString();
@@ -157,5 +262,30 @@ public class DrawingAreaPath extends DrawingPointLinePath
     if ( lp.mPrev == null ) return mLast;
     return lp.mPrev;
   }
+
+  @Override
+  void toDataStream( DataOutputStream dos ) 
+  {
+    String name = DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType );
+    try {
+      dos.write( 'A' );
+      dos.writeUTF( name );
+      dos.writeUTF( (mPrefix != null)? mPrefix : "" );
+      dos.writeInt( mAreaCnt );
+      dos.write( isVisible()? 1 : 0 );
+      dos.writeFloat( (float)mOrientation );
+
+      int npt = size(); // number of line points
+      dos.writeInt( npt );
+      // Log.v("DistoX", "A to stream: " + name + " " + mAreaCnt + " " + isVisible() + " " + mOrientation + " np " + npt );
+      for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
+        pt.toDataStream( dos );
+      }
+    } catch ( IOException e ) {
+      TopoDroidLog.Error( "AREA out error " + e.toString() );
+    }
+    // return 'A';
+  }
+
 }
 

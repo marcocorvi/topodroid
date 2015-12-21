@@ -175,7 +175,7 @@ public class DataHelper extends DataSetObservable
     try {
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "failed get writable database" );
+          TopoDroidLog.Error( "failed get writable database" );
           return;
         }
 
@@ -261,7 +261,7 @@ public class DataHelper extends DataSetObservable
 
      } catch ( SQLiteException e ) {
        myDB = null;
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper cstr failed to get DB " + e.getMessage() );
+       TopoDroidLog.Error( "DataHelper cstr failed to get DB " + e.getMessage() );
      }
    }
 
@@ -270,10 +270,11 @@ public class DataHelper extends DataSetObservable
      block.setId( cursor.getLong(0), survey_id );
      // Log.v( TopoDroidApp.TAG, survey_id + "/" + cursor.getLong(0) + " name <" + cursor.getString(1) + "> <" + cursor.getString(2) );
 
-     block.setName(    cursor.getString(1), cursor.getString(2) );
-     block.mLength  = (float)( cursor.getDouble(3) );
-     block.setBearing( (float)( cursor.getDouble(4) ) );
-     block.mClino   = (float)( cursor.getDouble(5) );
+     block.setName( cursor.getString(1), cursor.getString(2) );  // from - to
+     block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+     // block.setBearing( (float)( cursor.getDouble(4) ) ); 
+     block.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
+     block.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees]
      block.mAcceleration = (float)( cursor.getDouble(6) );
      block.mMagnetic     = (float)( cursor.getDouble(7) );
      block.mDip          = (float)( cursor.getDouble(8) );
@@ -440,17 +441,19 @@ public class DataHelper extends DataSetObservable
   public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, boolean forward )
   {
+    // String stn = (init_station != null)? init_station : "";
+    // String cmt = (comment != null)? comment : "";
     updateSurveyInfoStmt.bindString( 1, date );
     updateSurveyInfoStmt.bindString( 2, team );
     updateSurveyInfoStmt.bindDouble( 3, decl );
-    updateSurveyInfoStmt.bindString( 4, (comment != null)? comment : "" );
-    updateSurveyInfoStmt.bindString( 5, (init_station != null)? init_station : "" );
+    updateSurveyInfoStmt.bindString( 4, comment );
+    updateSurveyInfoStmt.bindString( 5, init_station );
     updateSurveyInfoStmt.bindLong( 6, id );
     updateSurveyInfoStmt.execute();
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
-        listener.onUpdateSurveyInfo( id, date, team, decl, comment );
+        listener.onUpdateSurveyInfo( id, date, team, decl, comment, init_station );
       }
     }
   }
@@ -820,19 +823,22 @@ public class DataHelper extends DataSetObservable
     for ( DataListener listener : mListeners ) {
       for ( ParserShot s : shots ) {
         listener.onInsertShot( sid, id, s.from, s.to, s.len, s.ber, s.cln, s.rol, s.extend, 
-                          s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE 
+                          s.duplicate ? DistoXDBlock.BLOCK_DUPLICATE    // flag
                           : s.surface ? DistoXDBlock.BLOCK_SURFACE 
                           // : s.backshot ? DistoXDBlock.BLOCK_BACKSHOT
                           : 0,
-                          0, 0, s.comment );
+                          0, 0, // leg, status
+                          0,    // shot_type: parser-shots are not modifiable
+                          s.comment );
       }
     }
     return id;
   }
   
-  public long insertShot( long sid, long id, double d, double b, double c, double r, long extend, int type, boolean forward )
+  public long insertShot( long sid, long id, double d, double b, double c, double r, long extend,
+                          int shot_type, boolean forward )
   {
-    return insertShot( sid, id, "", "",  d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY, 0L, 0L, type, "", forward );
+    return insertShot( sid, id, "", "",  d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY, 0L, 0L, shot_type, "", forward );
   }
 
   public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
@@ -853,25 +859,32 @@ public class DataHelper extends DataSetObservable
     }
   }
 
+  private void renamePlotFile( String oldname, String newname )
+  {
+    File oldfile = new File( oldname );
+    File newfile = new File( newname );
+    if ( oldfile.exists() ) {
+      if ( ! newfile.exists() ) {
+        oldfile.renameTo( newfile );
+      } else {
+        TopoDroidLog.Error( "Failed rename. New file already exists: " + newname );
+      }
+    // } else { // THIS IS OK
+    //   TopoDroidLog.Error( "Failed rename. Old file does not exist: " + oldname );
+    }
+  }
+
   private void transferPlots( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
   {
     if ( myDB == null ) return;
     List< PlotInfo > plots = selectPlotsAtStation( old_sid, station );
     for ( PlotInfo plot : plots ) {
       transferPlot( sid, old_sid, plot.id );
-      String oldname = TopoDroidPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" );
-      String newname = TopoDroidPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" );
-      File oldfile = new File( oldname );
-      File newfile = new File( newname );
-      if ( oldfile.exists() ) {
-        if ( ! newfile.exists() ) {
-          oldfile.renameTo( newfile );
-        } else {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. New file already exists: " + newname );
-        }
-      // } else { // THIS IS OK
-      //   TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename. Old file does not exist: " + oldname );
-      }
+      renamePlotFile( TopoDroidPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
+                      TopoDroidPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
+
+      renamePlotFile( TopoDroidPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
+                      TopoDroidPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );
     }
   }
 
@@ -886,7 +899,7 @@ public class DataHelper extends DataSetObservable
       if ( oldfile.exists() && ! newfile.exists() ) {
         oldfile.renameTo( newfile );
       } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename th3 sketch 3d " + sketch.name );
+        TopoDroidLog.Error( "Failed rename th3 sketch 3d " + sketch.name );
       }
     }
   }
@@ -940,7 +953,7 @@ public class DataHelper extends DataSetObservable
         if ( oldfile.exists() && ! newfile.exists() ) {
           oldfile.renameTo( newfile );
         } else {
-          TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "Failed rename " + old_survey.name + "/" + photo.id + ".jpg" );
+          TopoDroidLog.Error( "Failed rename " + old_survey.name + "/" + photo.id + ".jpg" );
         }
       }
 
@@ -985,7 +998,7 @@ public class DataHelper extends DataSetObservable
   // return the new-shot id
   public long insertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, int type,
+                          long extend, long flag, long leg, long status, int shot_type,
                           String comment, boolean forward )
   {
     TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertShot <" + id + "> " + from + "-" + to + " extend " + extend );
@@ -1013,12 +1026,12 @@ public class DataHelper extends DataSetObservable
     cv.put( "leg",      leg );
     cv.put( "status",   status );
     cv.put( "comment",  comment );
-    cv.put( "type",     type );
+    cv.put( "type",     shot_type );
     myDB.insert( SHOT_TABLE, null, cv );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
-        listener.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, comment );
+        listener.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
       }
     }
     return id;
@@ -1152,7 +1165,7 @@ public class DataHelper extends DataSetObservable
                                  null,                // shot name
                                  cursor.getString(3), // date
                                  cursor.getString(4), // comment
-                                 cursor.getString(5), // type
+                                 cursor.getString(5), // shot_type
                                  cursor.getString(6) ) ); // value
       } while (cursor.moveToNext());
     }
@@ -1194,7 +1207,7 @@ public class DataHelper extends DataSetObservable
                                  null,                // shot name
                                  cursor.getString(3), // date
                                  cursor.getString(4), // comment
-                                 cursor.getString(5), // type
+                                 cursor.getString(5), // shot_type
                                  cursor.getString(6) ) ); // value
       } while (cursor.moveToNext());
     }
@@ -1757,8 +1770,7 @@ public class DataHelper extends DataSetObservable
    //           if ( t > ret ) ret = t;
    //         }
    //       } catch ( NumberFormatException e ) {
-   //         TopoDroidLog.Log( TopoDroidLog.LOG_ERR,
-   //           "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
+   //         TopoDroidLog.Error( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
    //       }
    //     } while (cursor.moveToNext());
    //   }
@@ -2117,11 +2129,11 @@ public class DataHelper extends DataSetObservable
    public String getValue( String key )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::getValue null DB");
+       TopoDroidLog.Error( "DataHelper::getValue null DB");
        return null;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::getValue null key");
+       TopoDroidLog.Error( "DataHelper::getValue null key");
        return null;
      }
      String value = null;
@@ -2141,15 +2153,15 @@ public class DataHelper extends DataSetObservable
    public void setValue( String key, String value )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::setValue null DB");
+       TopoDroidLog.Error( "DataHelper::setValue null DB");
        return;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::setValue null key");
+       TopoDroidLog.Error( "DataHelper::setValue null key");
        return;
      }
      if ( value == null || value.length() == 0 ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "DataHelper::setValue null value");
+       TopoDroidLog.Error( "DataHelper::setValue null value");
        return;
      }
 
@@ -2177,20 +2189,26 @@ public class DataHelper extends DataSetObservable
 
    void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? "1" : "0" ); }
 
-   boolean isSymbolEnabled( String name )
+   boolean getSymbolEnabled( String name )
    { 
      String enabled = getValue( name );
      if ( enabled != null ) {
        return enabled.equals("1");
      }
+     return false;
+   }
+
+   void addSymbolEnabled( String name )
+   {
      if ( myDB != null ) {
        ContentValues cv = new ContentValues();
        cv.put( "key",     name );
-       cv.put( "value",   "1" );     // symbols are enabled by default
+       cv.put( "value",   "0" );     // symbols are enabled by default
        myDB.insert( CONFIG_TABLE, null, cv );
      }
-     return true;
    }
+
+   boolean hasSymbolName( String name ) { return ( getValue( name ) != null ); }
 
    // ----------------------------------------------------------------------
    /* Set the current survey/calib name.
@@ -2287,7 +2305,7 @@ public class DataHelper extends DataSetObservable
                int k = Integer.parseInt( name.substring( prefix_length ) );
                if ( k >= max ) max = k+1;
              } catch ( NumberFormatException e ) {
-               TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "getNextSectionId parse Int error: survey ID " + sid );
+               TopoDroidLog.Error( "getNextSectionId parse Int error: survey ID " + sid );
              }
            }
          } while (cursor.moveToNext());
@@ -3245,7 +3263,7 @@ public class DataHelper extends DataSetObservable
              long leg    = scanline1.longValue( );
              status      = scanline1.longValue( );
              comment     = scanline1.stringValue( );
-             // FIXME N.B. type is not saved
+             // FIXME N.B. shot_type is not saved
              // long type = 0; if ( db_version > 21 ) type = longValue( );
 
              insertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, 0, comment, false );
@@ -3263,7 +3281,7 @@ public class DataHelper extends DataSetObservable
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
            } else if ( table.equals(STATION_TABLE) ) {
              // N.B. ONLY IF db_version > 19
-             // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "v <" + v + ">" );
+             // TopoDroidLog.Error( "v <" + v + ">" );
              // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment  );
              name    = scanline1.stringValue( );
              comment = scanline1.stringValue( );
@@ -3643,7 +3661,7 @@ public class DataHelper extends DataSetObservable
 
            db.setTransactionSuccessful();
          } catch ( SQLException e ) {
-           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "createTables exception " + e.toString() );
+           TopoDroidLog.Error( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
            db.setLockingEnabled( true );

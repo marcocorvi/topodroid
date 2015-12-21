@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import android.widget.Toast;
-
 import android.content.Context;
 
 import android.widget.Button;
@@ -150,10 +149,10 @@ public class CalibCoverageDialog extends Dialog
 
     angles = new Direction [ t_dim ];
     for (int k = 0; k<19; ++k ){
-      float clino = clino_angles[k] * TopoDroidUtil.GRAD2RAD;
+      float clino = clino_angles[k] * TDMath.GRAD2RAD;
       for (int j=t_offset[k]; j<t_offset[k]+t_size[k]; ++j ) {
         angles[j] = new Direction(
-                      TopoDroidUtil.M_PI + ( TopoDroidUtil.M_2PI * (j - t_offset[k]) ) / t_size[k],
+                      TDMath.M_PI + ( TDMath.M_2PI * (j - t_offset[k]) ) / t_size[k],
                       clino, 
                       1.0f );
       }
@@ -200,14 +199,14 @@ public class CalibCoverageDialog extends Dialog
       } else {
         b.computeBearingAndClino( transform );
       }
-      float compass = b.mBearing * TopoDroidUtil.GRAD2RAD;
-      float clino   = b.mClino   * TopoDroidUtil.GRAD2RAD;
+      float compass = b.mBearing * TDMath.GRAD2RAD;
+      float clino   = b.mClino   * TDMath.GRAD2RAD;
       if ( b.mGroup == old_grp ) {
-        if ( cnt_avg > 0 && Math.abs( compass - compass_avg / cnt_avg ) > 1.5f * TopoDroidUtil.M_PI ) {
-          if ( compass > TopoDroidUtil.M_PI ) {
-            compass -= TopoDroidUtil.M_2PI; // average around 0
+        if ( cnt_avg > 0 && Math.abs( compass - compass_avg / cnt_avg ) > 1.5f * TDMath.M_PI ) {
+          if ( compass > TDMath.M_PI ) {
+            compass -= TDMath.M_2PI; // average around 0
           } else {
-            compass += TopoDroidUtil.M_2PI; // average around 360
+            compass += TDMath.M_2PI; // average around 360
           }
         }
         clino_avg   += clino;
@@ -249,7 +248,7 @@ public class CalibCoverageDialog extends Dialog
       float d = (j%10)/10.0f;
       int j1off = t_offset[j1];
       int j2off = t_offset[j2];
-      float amax = 180.0f * (float)( Math.sqrt( 1.0 - (clino/90.0f)*(clino/90.0f) ) );
+      float amax = 180.0f * TDMath.sqrt( 1 - (clino/90.0f)*(clino/90.0f) );
       // if ( amax < 1.0 ) amax = 1.0;
       int ioff = (180 - (int)(amax)) / 2;
       if (ioff < 0 ) ioff = 0;

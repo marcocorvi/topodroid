@@ -12,12 +12,9 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
-// import java.io.StringWriter;
-// import java.io.PrintWriter;
 import java.io.File;
 
 import java.util.List;
@@ -94,29 +91,57 @@ public class PlotRecoverDialog extends Dialog
     updateList();
   }
 
-  private void updateList()
+  private String getAge( long age )
   {
-    mAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    age /= 60000;
+    if ( age < 120 ) return Long.toString(age) + "\'";
+    age /= 60;
+    if ( age < 24 ) return Long.toString(age) + "h";
+    age /= 24;
+    if ( age < 60 ) return Long.toString(age) + "d";
+    age /= 30;
+    if ( age < 24 ) return Long.toString(age) + "m";
+    age /= 12;
+    return Long.toString(age) + "y";
+  }
+    
+  private void populateAdapter( String filename, String ext )
+  {
 
-    String filename = TopoDroidPath.getTh2FileWithExt( mFilename );
+    long millis = System.currentTimeMillis();
     File file = new File( filename );
     if ( file.exists() ) {
-      mAdapter.add( Long.toString(file.length()) + " " +  mFilename + ".th2" );
+      String age = getAge( millis - file.lastModified() );
+      mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext );
     }
     String filename1 = filename + ".bck";
-    file = new File( filename );
+    file = new File( filename1 );
     if ( file.exists() ) {
-      mAdapter.add( Long.toString(file.length()) + " " +  mFilename + ".th2.bck" );
+      String age = getAge( millis - file.lastModified() );
+      mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + ".bck" );
     }
     for ( int i=0; i<SaveTh2FileTask.NR_BACKUP; ++i ) {
       filename1 = filename + ".bck" + Integer.toString(i);
       file = new File( filename1 );
       if ( file.exists() ) {
-        mAdapter.add( Long.toString(file.length()) + " " +  mFilename + ".th2.bck" + Integer.toString(i) );
+        String age = getAge( millis - file.lastModified() );
+        mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + ".bck" + Integer.toString(i) );
       }
     }
+  }
+
+  private void updateList()
+  {
+    mAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+
+    if ( TopoDroidSetting.mBinaryTh2 ) {
+      populateAdapter( TopoDroidPath.getTdrFileWithExt( mFilename ), ".tdr" );
+      mTVfilename.setText( mFilename + ".tdr" );
+    } else {
+      populateAdapter( TopoDroidPath.getTh2FileWithExt( mFilename ), ".th2" );
+      mTVfilename.setText( mFilename + ".th2" );
+    }
     mList.setAdapter( mAdapter );
-    mTVfilename.setText( mFilename + ".th2" );
   }
 
 
@@ -125,7 +150,7 @@ public class PlotRecoverDialog extends Dialog
   {
     CharSequence item = ((TextView) view).getText();
     String[] name = item.toString().split(" ");
-    mTVfilename.setText( name[1] );
+    mTVfilename.setText( name[2] );
   }
  
   @Override

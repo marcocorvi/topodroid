@@ -199,18 +199,21 @@ class ItemPickerDialog extends Dialog
 
   private void setSeekBarProgress()
   {
+    boolean orientable = false;
     if ( mItemType == DrawingActivity.SYMBOL_POINT &&  mPointAdapter != null ) {
       int index = mPointAdapter.getSelectedPos();
       ItemSymbol item = mPointAdapter.get( index );
       if ( item != null ) {
         SymbolInterface symbol = item.mSymbol;
-        if ( symbol != null ) {
+        if ( symbol != null && symbol.isOrientable() ) {
           int progress = (180+symbol.getAngle())%360;
           mSeekBar.setProgress( progress );
           // Log.v("DistoX", "set progress " + progress );
+          orientable = true;
         }
       }
     }
+    mSeekBar.setEnabled( orientable );
   }
 
   private void setItemAngle( int angle )
@@ -277,9 +280,9 @@ class ItemPickerDialog extends Dialog
     // if ( TopoDroidSetting.mLevelOverBasic ) 
     {
       mPointAdapter = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
-      int np = mPointLib.mAnyPointNr;
+      int np = mPointLib.mSymbolNr;
       for ( int i=0; i<np; ++i ) {
-        SymbolPoint p = mPointLib.getAnyPoint( i );
+        SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
         if ( p.isEnabled() ) {
           mPointAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_POINT, i, p, mUseText ) );
         }
@@ -288,9 +291,9 @@ class ItemPickerDialog extends Dialog
     }
 
     mLineAdapter  = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
-    int nl = mLineLib.mAnyLineNr;
+    int nl = mLineLib.mSymbolNr;
     for ( int j=0; j<nl; ++j ) {
-      SymbolLine l = mLineLib.getAnyLine( j );
+      SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
       if ( l.isEnabled() ) {
         mLineAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_LINE, j, l, mUseText ) );
       }
@@ -300,9 +303,9 @@ class ItemPickerDialog extends Dialog
     // if ( TopoDroidSetting.mLevelOverBasic )
     {
       mAreaAdapter  = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
-      int na = mAreaLib.mAnyAreaNr;
+      int na = mAreaLib.mSymbolNr;
       for ( int k=0; k<na; ++k ) {
-        SymbolArea a = mAreaLib.getAnyArea( k );
+        SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
         if ( a.isEnabled() ) {
           mAreaAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_AREA, k, a, mUseText ) );
         }
@@ -365,17 +368,17 @@ class ItemPickerDialog extends Dialog
         title.append( "] " );
         title.append( mContext.getResources().getString( R.string.POINT ) );
         title.append( " " );
-        title.append( mPointLib.getAnyPointName( mParent.mCurrentPoint ) );
+        title.append( mPointLib.getSymbolName( mParent.mCurrentPoint ) );
         break;
       case DrawingActivity.SYMBOL_LINE: 
         title.append( mContext.getResources().getString( R.string.LINE ) );
         title.append( " " );
-        title.append( mLineLib.getLineName( mParent.mCurrentLine ) );
+        title.append( mLineLib.getSymbolName( mParent.mCurrentLine ) );
         break;
       case DrawingActivity.SYMBOL_AREA: 
         title.append( mContext.getResources().getString( R.string.AREA ) );
         title.append( " " );
-        title.append( mAreaLib.getAreaName( mParent.mCurrentArea ) );
+        title.append( mAreaLib.getSymbolName( mParent.mCurrentArea ) );
         break;
     }
     setTitle( title.toString() );
@@ -406,6 +409,7 @@ class ItemPickerDialog extends Dialog
             mParent.lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
           } else {
           }
+          mSeekBar.setEnabled( false );
         }
         break;
       case DrawingActivity.SYMBOL_AREA: 
@@ -414,6 +418,7 @@ class ItemPickerDialog extends Dialog
           is = mAreaAdapter.get( index );
           mParent.mCurrentArea = is.mIndex;
           mParent.areaSelected( is.mIndex, false ); // mAreaAdapter.getSelectedItem() );
+          mSeekBar.setEnabled( false );
         }
         break;
     }
@@ -427,6 +432,7 @@ class ItemPickerDialog extends Dialog
         // if ( TopoDroidSetting.mLevelOverBasic ) 
         {
           mParent.pointSelected( mParent.mCurrentPoint, false );
+          // mSeekBar.setEnabled( DrawingBrushPaths.mPointLib.isPointOrientable( mParent.mCurrentPoint ) );
         }
         break;
       case DrawingActivity.SYMBOL_LINE: 

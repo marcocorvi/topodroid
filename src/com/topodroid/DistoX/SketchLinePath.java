@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 import android.util.Log;
-import android.util.FloatMath;
 
 /**
  */
@@ -62,10 +61,10 @@ public class SketchLinePath extends SketchPath
 
     if ( path_type == DrawingPath.DRAWING_PATH_LINE ) {
       mPaint = painter.greenPaint;
-      // mPaint = DrawingBrushPaths.getLinePaint( mThType );
+      // mPaint = DrawingBrushPaths.mLineLib.getSymbolPaint( mThType );
     } else if ( path_type == DrawingPath.DRAWING_PATH_AREA ) {
       // mPaint = painter.areaPaint;
-      mPaint = DrawingBrushPaths.getAreaPaint( mThType );
+      mPaint = DrawingBrushPaths.mAreaLib.getSymbolPaint( mThType );
     } else {
       mPaint = painter.whitePaint;
     }
@@ -188,14 +187,14 @@ public class SketchLinePath extends SketchPath
     PrintWriter pw  = new PrintWriter(sw);
     if ( mType == DrawingPath.DRAWING_PATH_LINE ) {
       pw.format("line %s %s -shot %s %s", 
-        "3d", DrawingBrushPaths.getLineThName(mThType), st1, st2 );
+        "3d", DrawingBrushPaths.mLineLib.getSymbolThName(mThType), st1, st2 );
       if ( mClosed ) {
         pw.format(" -close on");
       }
     } else if ( mType == DrawingPath.DRAWING_PATH_AREA ) {
       // area border is closed by default
       pw.format("area %s %s -shot %s %s", 
-        "3d", DrawingBrushPaths.getAreaThName(mThType), st1, st2 );
+        "3d", DrawingBrushPaths.mAreaLib.getSymbolThName(mThType), st1, st2 );
     }
     if ( mOptions != null && mOptions.length() > 0 ) {
       pw.format(" %s", mOptions );

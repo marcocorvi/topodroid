@@ -11,9 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import android.app.Dialog;
 import android.os.Bundle;
 
@@ -28,26 +25,41 @@ import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
+import android.graphics.Paint;
+
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.graphics.Canvas;
+import android.graphics.Bitmap;
+
+import android.util.FloatMath;
+
 public class DrawingAreaDialog extends Dialog
                                implements View.OnClickListener
 {
   private DrawingAreaPath mArea;
   private DrawingActivity mParent;
+  private boolean mOrientable;
 
-  // private TextView mTVtype;
-  // private EditText mEToptions;
- 
   private CheckBox mCBvisible;
 
+  // private SeekBar  mSeekBar;
+  // private ImageView mIVorientation;
+  // private Bitmap mBitmap;
+  // private Canvas mCanvas;
+  private OrientationWidget mOrientationWidget; 
+
   private Button   mBtnOk;
-  // private Button   mBtnErase;
-  // private Button   mBtnCancel;
 
   public DrawingAreaDialog( DrawingActivity context, DrawingAreaPath line )
   {
     super( context );
     mParent = context;
     mArea = line;
+    mOrientable = DrawingBrushPaths.mAreaLib.isSymbolOrientable( mArea.mAreaType );
+    // mBitmap = Bitmap.createBitmap( 40, 40, Bitmap.Config.ARGB_8888);
+    // mCanvas = new Canvas( mBitmap );
   }
 
 // -------------------------------------------------------------------
@@ -59,14 +71,31 @@ public class DrawingAreaDialog extends Dialog
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setTitle( String.format( mParent.getResources().getString( R.string.title_draw_area ),
-              DrawingBrushPaths.getAreaName( mArea.mAreaType ) ) );
+              DrawingBrushPaths.mAreaLib.getSymbolName( mArea.mAreaType ) ) );
 
-    // mTVtype = (TextView) findViewById( R.id.area_type );
-    // mTVtype.setText( DrawingBrushPaths.getAreaThName( mArea.areaType() ) );
+    mOrientationWidget = new OrientationWidget( this, mOrientable, mArea.mOrientation );
 
-    // mEToptions = (EditText) findViewById( R.id.area_options );
-    // if ( mArea.mOptions != null ) {
-    //   mEToptions.setText( mArea.mOptions );
+    // mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
+    // mIVorientation = (ImageView) findViewById( R.id.image );
+    // if ( mOrientable ) {
+    //   mIVorientation.setImageBitmap( mBitmap );
+    //   drawOrientation();
+    //   mSeekBar.setProgress( (mOrient+180)%360 );
+    //   mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+    //     public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
+    //       if ( fromUser ) {
+    //         mOrient = 180 + progress;
+    //         if ( mOrient >= 360 ) mOrient -= 360;
+    //         drawOrientation();
+    //       }
+    //     }
+    //     public void onStartTrackingTouch(SeekBar seekbar) { }
+    //     public void onStopTrackingTouch(SeekBar seekbar) { }
+    //   } );
+    //   mSeekBar.setMax( 360 );
+    // } else {
+    //   mIVorientation.setVisibility( View.GONE );
+    //   mSeekBar.setVisibility( View.GONE );
     // }
 
     mCBvisible = (CheckBox) findViewById( R.id.area_visible );
@@ -74,12 +103,6 @@ public class DrawingAreaDialog extends Dialog
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
     mBtnOk.setOnClickListener( this );
-
-    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
-
-    // mBtnErase = (Button) findViewById( R.id.button_erase );
-    // mBtnErase.setOnClickListener( this );
   }
 
   public void onClick(View v) 
@@ -88,18 +111,35 @@ public class DrawingAreaDialog extends Dialog
     // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingAreaDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOk ) {
-      // if ( mEToptions.getText() != null ) {
-      //   String options = mEToptions.getText().toString().trim();
-      //   if ( options.length() > 0 ) mArea.mOptions = options;
-      // }
       mArea.setVisible( mCBvisible.isChecked() );
-    // } else if ( b == mBtnErase ) {
-    //   mParent.deleteArea( mArea );
-    // } else if ( b == mBtnCancel ) {
-    //   /* nothing */
+      if ( mOrientable ) {
+        mArea.setOrientation( mOrientationWidget.mOrient );
+      }
     }
     dismiss();
   }
+
+  // private void drawOrientation()
+  // {
+  //   if ( ! mOrientable ) return;
+  //   int d = 20;
+  //   // mTVorientation.setText( Integer.toString(mOrient) );
+  //   mCanvas.drawColor( 0xff000000 );
+  //   float c = TDMath.cosd( mOrient );
+  //   float s = TDMath.sind( mOrient );
+  //   float c135 = TDMath.cosd( mOrient+135 );
+  //   float s135 = TDMath.sind( mOrient+135 );
+  //   float c225 = TDMath.cosd( mOrient+225 );
+  //   float s225 = TDMath.sind( mOrient+225 );
+  //   float x1 = d+d*s;
+  //   float y1 = d-d*c;
+  //   Paint paint = DrawingBrushPaths.fixedBluePaint;
+  //   mCanvas.drawLine( d-d*s, d+d*c, x1, y1, paint );
+  //   mCanvas.drawLine( x1, y1, x1+10*s135, y1-10*c135, paint );
+  //   mCanvas.drawLine( x1, y1, x1+10*s225, y1-10*c225, paint );
+  //   mIVorientation.setImageBitmap( mBitmap );
+  //   mIVorientation.invalidate();
+  // }
 
 }
 

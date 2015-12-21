@@ -8,13 +8,8 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
-
-import java.io.StringWriter;
-import java.io.PrintWriter;
-import java.util.Locale;
 
 import android.app.Dialog;
 import android.os.Bundle;

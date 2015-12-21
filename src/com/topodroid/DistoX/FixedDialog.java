@@ -14,9 +14,6 @@ package com.topodroid.DistoX;
 // import java.util.regex.Pattern;
 import java.util.Locale;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import android.widget.ArrayAdapter;
 
 import android.app.Dialog;
@@ -92,19 +89,13 @@ public class FixedDialog extends Dialog
   private void setETalt( double alt )
   {
     if ( alt <= -999 ) return;
-    StringWriter sw = new StringWriter();
-    PrintWriter  pw = new PrintWriter( sw );
-    pw.format( Locale.ENGLISH, "%.0f", alt );
-    mETalt.setText( sw.getBuffer().toString() );
+    mETalt.setText( String.format( Locale.ENGLISH, "%.0f", alt ) );
   }
 
   private void setETasl( double asl )
   {
     if ( asl <= -999 ) return;
-    StringWriter sw = new StringWriter();
-    PrintWriter  pw = new PrintWriter( sw );
-    pw.format( Locale.ENGLISH, "%.0f", asl );
-    mETasl.setText( sw.getBuffer().toString() );
+    mETasl.setText( String.format( Locale.ENGLISH, "%.0f", asl ) );
   }
 
 // -------------------------------------------------------------------
@@ -141,15 +132,9 @@ public class FixedDialog extends Dialog
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
 
-    StringWriter sw1 = new StringWriter();
-    PrintWriter  pw1 = new PrintWriter( sw1 );
-    pw1.format( Locale.ENGLISH, "%.6f", mFxd.lng );
-    mETlng.setText( sw1.getBuffer().toString() );
+    mETlng.setText( String.format( Locale.ENGLISH, "%.6f", mFxd.lng ) );
 
-    StringWriter sw2 = new StringWriter();
-    PrintWriter  pw2 = new PrintWriter( sw2 );
-    pw2.format( Locale.ENGLISH, "%.6f", mFxd.lat );
-    mETlat.setText( sw2.getBuffer().toString() );
+    mETlat.setText( String.format( Locale.ENGLISH, "%.6f", mFxd.lat ) );
 
     setETalt( mFxd.alt );
     setETasl( mFxd.asl );
@@ -280,7 +265,7 @@ public class FixedDialog extends Dialog
       int year = TopoDroidUtil.year();
       int month = TopoDroidUtil.month();
       int day = TopoDroidUtil.day();
-      Log.v("DistoX", " Date " + year + " " + month + " " + day );
+      // Log.v("DistoX", " Date " + year + " " + month + " " + day );
 
       MagElement elem = wmm.computeMagElement( mFxd.lat, mFxd.lng, mFxd.alt, year, month, day );
       mETdecl.setText( String.format(Locale.ENGLISH, "%.4f", elem.Decl ) );

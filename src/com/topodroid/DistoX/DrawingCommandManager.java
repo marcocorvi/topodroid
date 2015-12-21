@@ -14,7 +14,6 @@ package com.topodroid.DistoX;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
-import android.graphics.RectF;
 import android.graphics.PorterDuff;
 import android.graphics.PointF;
 import android.graphics.Paint;
@@ -32,6 +31,8 @@ import java.io.BufferedWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
+import java.io.FileOutputStream;
+import java.io.DataOutputStream;
 // import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.EOFException;
@@ -51,20 +52,21 @@ public class DrawingCommandManager
   static int mDisplayMode = DisplayMode.DISPLAY_ALL;
   RectF mBBox;
 
-  DrawingPath mNorthLine;
+  private DrawingPath mNorthLine;
   DrawingPath mFirstReference;
   DrawingPath mSecondReference;
 
   private List<DrawingPath>    mGridStack1;
   private List<DrawingPath>    mGridStack10;
   private List<DrawingPath>    mGridStack100;
-  List<DrawingPath>            mLegsStack;
-  List<DrawingPath>            mSplaysStack;
-  // List<DrawingPath>            mFixedStack;
-  List<ICanvasCommand>         mCurrentStack;
-  private List<ICanvasCommand> mRedoStack;
-  // private List<DrawingPath>    mHighlight;  // highlighted path
-  private List<DrawingStationName> mStations;
+
+  private List<DrawingPath>        mLegsStack;
+  private List<DrawingPath>        mSplaysStack;
+  private List<ICanvasCommand>     mCurrentStack;
+  private List<DrawingStationPath> mUserStations;  // user-inserted stations
+  private List<ICanvasCommand>     mRedoStack;
+  // private List<DrawingPath>     mHighlight;  // highlighted path
+  private List<DrawingStationName> mStations;  // survey stations
   private int mMaxAreaIndex;                   // max index of areas in this plot
 
   private Selection mSelection;
@@ -73,6 +75,13 @@ public class DrawingCommandManager
 
   private Matrix mMatrix;
   private float  mScale; // current zoom: value of 1 pl in scene space
+
+  DrawingPath              getNorth()        { return mNorthLine;    }
+  List<DrawingPath>        getLegs()         { return mLegsStack;    }
+  List<DrawingPath>        getSplays()       { return mSplaysStack;  }
+  List<ICanvasCommand>     getCommands()     { return mCurrentStack; }
+  List<DrawingStationName> getStations()     { return mStations;     } 
+  List<DrawingStationPath> getUserStations() { return mUserStations; }
 
   // void checkLines()
   // {
@@ -108,58 +117,32 @@ public class DrawingCommandManager
   //   }
   // }
 
+  private void flipXAxis( List<DrawingPath> paths )
+  {
+    final Iterator i1 = paths.iterator();
+    while ( i1.hasNext() ){
+      final DrawingPath drawingPath = (DrawingPath) i1.next();
+      drawingPath.flipXAxis();
+    }
+  }
+
   void flipXAxis()
   {
     synchronized( mGridStack1 ) {
-      final Iterator i1 = mGridStack1.iterator();
-      while ( i1.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i1.next();
-        drawingPath.flipXAxis();
-      }
+      flipXAxis( mGridStack1 );
       if ( mNorthLine != null ) mNorthLine.flipXAxis();
-      final Iterator i10 = mGridStack10.iterator();
-      while ( i10.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i10.next();
-        drawingPath.flipXAxis();
-      }
-      final Iterator i100 = mGridStack100.iterator();
-      while ( i100.hasNext() ){
-        final DrawingPath drawingPath = (DrawingPath) i100.next();
-        drawingPath.flipXAxis();
-      }
+      flipXAxis( mGridStack10 );
+      flipXAxis( mGridStack100 );
     }
-
-    // synchronized( mFixedStack ) {
-    //   final Iterator i = mFixedStack.iterator();
-    //   while ( i.hasNext() ){
-    //     final DrawingPath path = (DrawingPath) i.next();
-    //     path.flipXAxis();
-    //   }
-    // }
-
-    synchronized( mLegsStack ) {
-      final Iterator i = mLegsStack.iterator();
-      while ( i.hasNext() ){
-        final DrawingPath path = (DrawingPath) i.next();
-        path.flipXAxis();
-      }
-    }
-
-    synchronized( mSplaysStack ) {
-      final Iterator i = mSplaysStack.iterator();
-      while ( i.hasNext() ){
-        final DrawingPath path = (DrawingPath) i.next();
-        path.flipXAxis();
-      }
-    }
+    synchronized( mLegsStack )   { flipXAxis( mLegsStack ); }
+    synchronized( mSplaysStack ) { flipXAxis( mSplaysStack ); }
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) {
         st.flipXAxis();
       }
     }
-
-    if ( mCurrentStack != null ){
+    if ( mCurrentStack != null ) {
       synchronized( mCurrentStack ) {
         final Iterator i = mCurrentStack.iterator();
         while ( i.hasNext() ){
@@ -206,8 +189,8 @@ public class DrawingCommandManager
     mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mLegsStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mSplaysStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    // mFixedStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
+    mUserStations = Collections.synchronizedList( new ArrayList<DrawingStationPath>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     // mHighlight    = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
@@ -229,8 +212,6 @@ public class DrawingCommandManager
     for ( DrawingPath p : mLegsStack ) {
       if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
         if ( p.intersect( p1.mX, p1.mY, p2.mX, p2.mY, null ) ) {
-          // Log.v( TopoDroidApp.TAG, "intersect " + p.mBlock.toString(false) );
-          // if ( ret != null ) return null;
           ret.add( p );
         }
       }
@@ -269,9 +250,6 @@ public class DrawingCommandManager
     synchronized( mSplaysStack ) {
       mSplaysStack.clear();
     }
-    // synchronized( mFixedStack ) {
-    //   mFixedStack.clear();
-    // }
     synchronized( mStations ) {
       mStations.clear();
     }
@@ -292,25 +270,19 @@ public class DrawingCommandManager
     mGridStack100.clear();
     mLegsStack.clear();
     mSplaysStack.clear();
-    // mFixedStack.clear();
     mStations.clear();
     mSelection.clearSelectionPoints();
     clearSketchItems();
   }
 
-  void setFirstReference( DrawingPath path ) 
-  { 
-    synchronized( mGridStack1 ) { mFirstReference = path; }
-  }
+  void setFirstReference( DrawingPath path ) { synchronized( mGridStack1 ) { mFirstReference = path; } }
 
-  void setSecondReference( DrawingPath path )
-  { 
-    synchronized( mGridStack1 ) { mSecondReference = path; }
-  }
+  void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
 
   void clearSketchItems()
   {
     mCurrentStack.clear();
+    mUserStations.clear();
     mRedoStack.clear();
     mSelected.clear();
     mDisplayPoints = false;
@@ -334,15 +306,6 @@ public class DrawingCommandManager
   //   if ( plot_type != PlotInfo.PLOT_PLAN && plot_type != PlotInfo.PLOT_EXTENDED ) return null;
   //   boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
   //   boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY) != 0;
-  //   for ( DrawingPath p : mFixedStack ) { // FIXME mLegsStack mSplaysStack
-  //     if (    ( p.mType == DrawingPath.DRAWING_PATH_FIXED && legs )
-  //          || ( p.mType == DrawingPath.DRAWING_PATH_SPLAY && splays ) ) {
-  //       if ( p.isCloseTo( x, y ) ) {
-  //         p.mPaint = DrawingBrushPaths.highlightPaint;
-  //         mHighlight.add( p );
-  //       }
-  //     }
-  //   }
   //   if ( mHighlight.size() == 1 ) {
   //     return mHighlight.get(0).mBlock;
   //   }
@@ -359,6 +322,19 @@ public class DrawingCommandManager
     mBBox.right  = mScale * TopoDroidApp.mDisplayWidth - dx; 
     mBBox.top    = - dy;
     mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
+
+    // FIXME 
+    // TUNING this is to see how many buckets are on the canvas and how many points they contain
+    //
+    // if ( mSelection != null ) {
+    //   int cnt = 0;
+    //   float pts = 0;
+    //   for ( SelectionBucket bucket : mSelection.mBuckets ) {
+    //     if ( bucket.intersects( mBBox ) ) { ++ cnt; pts += bucket.size(); }
+    //   }
+    //   pts /= cnt;
+    //   Log.v("DistoX", "visible buckets " + cnt + " avg pts/bucket " + pts );
+    // }
   }
 
   // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
@@ -378,6 +354,10 @@ public class DrawingCommandManager
    *    5  line split
    *    6  area complete erase
    *    7  area point erase
+   *
+   * x    X scene
+   * y    Y scene
+   * zoom canvas display zoom
    */
   int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd ) 
   {
@@ -385,7 +365,6 @@ public class DrawingCommandManager
     mSelection.selectAt( x, y, zoom, sel, false, false, false );
     int ret = 0;
     if ( sel.size() > 0 ) {
-      // Log.v("DistoX", "selection size " + sel.size() );
       synchronized( mCurrentStack ) {
         for ( SelectionPoint pt : sel.mPoints ) {
           DrawingPath path = pt.mItem;
@@ -495,7 +474,7 @@ public class DrawingCommandManager
       }
     } else {
       // FIXME 
-      // TopoDroidLog.Log(TopoDroidLog.LOG_ERR, "FAILED splitAt " + lp.mX + " " + lp.mY );
+      // TopoDroidLog.Error( "FAILED splitAt " + lp.mX + " " + lp.mY );
       // line.dump();
     }
     // checkLines();
@@ -555,8 +534,10 @@ public class DrawingCommandManager
 
     //line.mPoints.remove( point );
     line.remove( point );
-    synchronized( mSelection ) {
-      mSelection.removePoint( sp );
+    if ( sp != null ) { // sp can be null 
+      synchronized( mSelection ) {
+        mSelection.removePoint( sp );
+      }
     }
     // checkLines();
   }
@@ -646,7 +627,7 @@ public class DrawingCommandManager
   //     mSelection = new Selection( x1, x2, y1, y2, 5.0f );
   //     mSelected  = new SelectionSet();
   //   } catch ( SelectionException e ) {
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "oversize: unable to select " );
+  //     TopoDroidLog.Error( "oversize: unable to select " );
   //     mSelection = null;
   //   }
   // } 
@@ -654,17 +635,6 @@ public class DrawingCommandManager
   // FIXME LEGS_SPLAYS
   void resetFixedPaint( Paint paint )
   {
-    // if( mFixedStack != null ) { 
-    //   synchronized( mFixedStack ) {
-    //     final Iterator i = mFixedStack.iterator();
-    //     while ( i.hasNext() ){
-    //       final DrawingPath path = (DrawingPath) i.next();
-    //       if ( path.mBlock == null || ! path.mBlock.mMultiBad ) {
-    //         path.setPaint( paint );
-    //       }
-    //     }
-    //   }
-    // }
     if( mLegsStack != null ) { 
       synchronized( mLegsStack ) {
         final Iterator i = mLegsStack.iterator();
@@ -688,23 +658,6 @@ public class DrawingCommandManager
       }
     }
   }
-
-  /** add a fixed path (called by DrawingSurface::addFixedPath)
-   * @param path       path
-   * @param selectable whether the path is selectable
-   */
-  // public void addFixedPath( DrawingPath path, boolean selectable )
-  // {
-  //   mFixedStack.add( path );
-  //   if ( selectable ) {
-  //     synchronized( mSelection ) {
-  //       if ( path.mBlock != null ) {
-  //         // Log.v( "DistoX", "selection add fixed path " + path.mBlock.mFrom + " " + path.mBlock.mTo );
-  //       }
-  //       mSelection.insertPath( path );
-  //     }
-  //   }
-  // }  
 
   public void addLegPath( DrawingPath path, boolean selectable )
   { 
@@ -782,10 +735,40 @@ public class DrawingCommandManager
   //   }
   // }
 
+  DrawingStationPath getUserStation( String name )
+  {
+    for ( DrawingStationPath p : mUserStations ) if ( p.mName.equals( name ) ) return p;
+    return null;
+  }
+
+  void removeUserStation( DrawingStationPath path )
+  {
+    synchronized( mUserStations ) {
+      mUserStations.remove( path );
+    }
+  }
+
+  // boolean hasUserStation( String name )
+  // {
+  //   for ( DrawingStationPath p : mUserStations ) if ( p.mName.equals( name ) ) return true;
+  //   return false;
+  // }
+  
+
+  void addUserStation( DrawingStationPath path )
+  {
+    synchronized( mUserStations ) {
+      mUserStations.add( (DrawingStationPath)path );
+    }
+  }
+
   void addCommand( DrawingPath path )
   {
     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "addCommand stack size  " + mCurrentStack.size() );
     // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "addCommand path " + path.toString() );
+    // Log.v("DistoX", "add command type " + path.mType + " " + path.mBBox.left + " " + path.mBBox.top + " " 
+    //        + mBBox.left + " " + mBBox.top + " " + mBBox.right + " " + mBBox.bottom );
+
     mRedoStack.clear();
 
     if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -807,6 +790,7 @@ public class DrawingCommandManager
     synchronized( mSelection ) {
       mSelection.insertPath( path );
     }
+    
     // checkLines();
   }
 
@@ -815,16 +799,6 @@ public class DrawingCommandManager
   {
     RectF bounds = new RectF();
     RectF b = new RectF();
-    // if( mFixedStack != null ) { 
-    //   synchronized( mFixedStack ) {
-    //     final Iterator i = mFixedStack.iterator();
-    //     while ( i.hasNext() ){
-    //       final DrawingPath drawingPath = (DrawingPath) i.next();
-    //       drawingPath.mPath.computeBounds( b, true );
-    //       bounds.union( b );
-    //     }
-    //   }
-    // }
     if( mSplaysStack != null ) { 
       synchronized( mSplaysStack ) {
         final Iterator i = mSplaysStack.iterator();
@@ -886,7 +860,7 @@ public class DrawingCommandManager
     // c.drawColor(TopoDroidSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
     c.drawColor( TopoDroidSetting.mBitmapBgcolor );
 
-    // commandManager.executeAll(c,previewDoneHandler);
+    // commandManager.execute All(c,previewDoneHandler);
     // previewPath.draw(c);
     c.drawBitmap (bitmap, 0, 0, null);
 
@@ -932,15 +906,6 @@ public class DrawingCommandManager
         }
       }
     }
-    // if ( mFixedStack != null ) {
-    //   synchronized( mFixedStack ) {
-    //     final Iterator i = mFixedStack.iterator();
-    //     while ( i.hasNext() ){
-    //       final DrawingPath drawingPath = (DrawingPath) i.next();
-    //       drawingPath.draw( c, mat, sca, null );
-    //     }
-    //   }
-    // }
  
     if ( mStations != null ) {  
       synchronized( mStations ) {
@@ -1087,7 +1052,7 @@ public class DrawingCommandManager
   public void executeAll( Canvas canvas, float zoom, Handler doneHandler, ArrayList<String> splay_stations )
   {
     if ( canvas == null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "drawing executeAll null canvas");
+      TopoDroidLog.Error( "drawing executeAll null canvas");
       return;
     }
 
@@ -1163,23 +1128,54 @@ public class DrawingCommandManager
         }
       }
     }
+    if ( ! TopoDroidSetting.mAutoStations ) {
+      synchronized( mUserStations ) {
+        for ( DrawingStationPath p : mUserStations ) {
+          p.draw( canvas, mMatrix, mScale, mBBox );
+        }
+      }
+    }
+
     if ( mDisplayPoints ) {
       synchronized( mSelection ) {
         float radius = TopoDroidSetting.mDotRadius/zoom;
-        for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
-          float x, y;
-          if ( pt.mPoint != null ) { // line-point
-            x = pt.mPoint.mX;
-            y = pt.mPoint.mY;
-          } else {  
-            x = pt.mItem.cx;
-            y = pt.mItem.cy;
+        for ( SelectionBucket bucket : mSelection.mBuckets ) {
+          if ( bucket.intersects( mBBox ) ) {
+            for ( SelectionPoint pt : bucket.mPoints ) { 
+              int type = pt.type();
+              if ( ( type == DrawingPath.DRAWING_PATH_FIXED && ! legs ) 
+                || ( type == DrawingPath.DRAWING_PATH_SPLAY && ! splays )
+                || ( type == DrawingPath.DRAWING_PATH_NAME  && ! stations ) ) continue;
+              float x, y;
+              if ( pt.mPoint != null ) { // line-point
+                x = pt.mPoint.mX;
+                y = pt.mPoint.mY;
+              } else {  
+                x = pt.mItem.cx;
+                y = pt.mItem.cy;
+              }
+              Path path = new Path();
+              path.addCircle( x, y, radius, Path.Direction.CCW );
+              path.transform( mMatrix );
+              canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
+            }
           }
-          Path path = new Path();
-          path.addCircle( x, y, radius, Path.Direction.CCW );
-          path.transform( mMatrix );
-          canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
         }
+        // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
+        //   float x, y;
+        //   if ( pt.mPoint != null ) { // line-point
+        //     x = pt.mPoint.mX;
+        //     y = pt.mPoint.mY;
+        //   } else {  
+        //     x = pt.mItem.cx;
+        //     y = pt.mItem.cy;
+        //   }
+        //   Path path = new Path();
+        //   path.addCircle( x, y, radius, Path.Direction.CCW );
+        //   path.transform( mMatrix );
+        //   canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
+        // }
+
       }
       synchronized( mSelected ) {
         if ( mSelected.mPoints.size() > 0 ) { // FIXME SELECTIOM
@@ -1245,24 +1241,24 @@ public class DrawingCommandManager
     }
   }
 
-  boolean hasStationName( String name )
-  {
-    if ( name == null ) return false;
-    synchronized( mCurrentStack ) {
-      final Iterator i = mCurrentStack.iterator();
-      while ( i.hasNext() ){
-        final ICanvasCommand cmd = (ICanvasCommand) i.next();
-        if ( cmd.commandType() == 0 ) {
-          DrawingPath p = (DrawingPath) cmd;
-          if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
-            DrawingStationPath sp = (DrawingStationPath)p;
-            if ( name.equals( sp.mName ) ) return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
+  // boolean hasStationName( String name )
+  // {
+  //   if ( name == null ) return false;
+  //   synchronized( mCurrentStack ) {
+  //     final Iterator i = mCurrentStack.iterator();
+  //     while ( i.hasNext() ){
+  //       final ICanvasCommand cmd = (ICanvasCommand) i.next();
+  //       if ( cmd.commandType() == 0 ) {
+  //         DrawingPath p = (DrawingPath) cmd;
+  //         if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
+  //           DrawingStationPath sp = (DrawingStationPath)p;
+  //           if ( name.equals( sp.mName ) ) return true;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return false;
+  // }
 
   public boolean hasMoreRedo()
   {
@@ -1377,7 +1373,7 @@ public class DrawingCommandManager
   {
     float x01 = p1.mX - p0.mX;
     float y01 = p1.mY - p0.mY;
-    return (float)( Math.abs((q.mX-p0.mX)*y01 - (q.mY-p0.mY)*x01) / Math.sqrt( x01*x01 + y01*y01 ) );
+    return TDMath.abs( (q.mX-p0.mX)*y01 - (q.mY-p0.mY)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
   }
     
       
@@ -1483,27 +1479,15 @@ public class DrawingCommandManager
     if ( lmin == null ) return -3;
     int cmax = area.size() + 1;
     
-    if ( TopoDroidLog.LOG_DEBUG ) { // ===== FIRST SET OF LOGS
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap to line");
-      for ( LinePoint pt = lmin.mFirst; pt!=null; pt=pt.mNext ) TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, pt.mX + " " + pt.mY );
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap area");
-      for ( LinePoint pt = area.mFirst; pt!=null; pt=pt.mNext ) TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, pt.mX + " " + pt.mY );
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap qq0= " + q0.mX + " " + q0.mY + " to pp0= " + pp0.mX + " " + pp0.mY );
-    }
+    // if ( TopoDroidLog.LOG_DEBUG ) { // ===== FIRST SET OF LOGS
+    //   TopoDroidLog.Debug( "snap to line");
+    //   for ( LinePoint pt = lmin.mFirst; pt!=null; pt=pt.mNext ) TopoDroidLog.Debug( pt.mX + " " + pt.mY );
+    //   TopoDroidLog.Debug( "snap area");
+    //   for ( LinePoint pt = area.mFirst; pt!=null; pt=pt.mNext ) TopoDroidLog.Debug( pt.mX + " " + pt.mY );
+    //   TopoDroidLog.Debug( "snap qq0= " + q0.mX + " " + q0.mY + " to pp0= " + pp0.mX + " " + pp0.mY );
+    // }
 
     int ret = 0; // return code
-
-    // ArrayList< LinePoint > pts1 = lmin.mPoints;
-    // LinePoint pp0 = pts1.get( kk0 );
-    // int size1 = pts1.size();
-
-    // // try to follow p1 on the line:
-    // int kk1 = ( kk0+1 < size1 )? kk0 + 1 : (min_is_area)? 0 : -1; // index of next point
-    // int kk2 = ( kk0 > 0 )? kk0 - 1 : (min_is_area)? size1-1 : -1; // index of prev point
-    // int delta1 = 0; 
-    // int delta2 = 0;
-    // int kk10 = kk0;
-    // int kk20 = kk0;
 
     LinePoint pp1 = lmin.next( pp0 );
     LinePoint pp2 = lmin.prev( pp0 );
@@ -1520,13 +1504,13 @@ public class DrawingCommandManager
     int step = 1;
     // if ( kk1 >= 0 ) 
     if ( pp1 != null ) { 
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap pp1 " + pp1.mX + " " + pp1.mY + " FOLLOW LINE FORWARD" );
+      // TopoDroidLog.Debug( "snap pp1 " + pp1.mX + " " + pp1.mY + " FOLLOW LINE FORWARD" );
       // pp1  = pts1.get( kk1 );
       // pp10 = pts1.get( kk0 );
       pp10 = pp0;
       // if ( kk2 >= 0 ) 
       if ( pp2 != null ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap pp2 " + pp2.mX + " " + pp2.mY );
+        // TopoDroidLog.Debug( "snap pp2 " + pp2.mX + " " + pp2.mY );
         // pp2  = pts1.get( kk2 ); 
         // pp20 = pts1.get( kk0 ); 
         pp20 = pp0;
@@ -1534,48 +1518,37 @@ public class DrawingCommandManager
       if ( pp1.distance( q1 ) < pp1.distance( q2 ) ) {
         qq1  = q1; // follow border forward
         qq10 = q0;
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap qq1 " + qq1.mX + " " + qq1.mY + " follow border forward" );
-        // delta1 = 1;
-        // if ( kk2 >= 0 ) 
+        // TopoDroidLog.Debug( "snap qq1 " + qq1.mX + " " + qq1.mY + " follow border forward" );
         if ( pp2 != null ) {
           qq2  = q2;
           qq20 = q0;
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap qq2 " + qq2.mX + " " + qq2.mY );
-          // delta2 = size0-1;
+          // TopoDroidLog.Debug( "snap qq2 " + qq2.mX + " " + qq2.mY );
         }
       } else {
-        // int k = k1; k1 = k2; k2 = k;
         reverse = true;
         qq1  = q2; // follow border backward
         qq10 = q0;
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap reverse qq1 " + qq1.mX + " " + qq1.mY + " follow border backward" );
-        // delta1 = size0-1;
-        // if ( kk2 >= 0 ) 
+        // TopoDroidLog.Debug( "snap reverse qq1 " + qq1.mX + " " + qq1.mY + " follow border backward" );
         if ( pp2 != null ) {
           qq2 = q1;
           qq20 = q0;
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap qq2 " + qq2.mX + " " + qq2.mY + " follow forward");
-          // delta2 = 1;
+          // TopoDroidLog.Debug( "snap qq2 " + qq2.mX + " " + qq2.mY + " follow forward");
         }
       }
-    } else // if ( kk2 >= 0 ) 
-           if ( pp2 != null ) { // pp10 is null
+    } else if ( pp2 != null ) { // pp10 is null
       // pp2  = pts1.get( kk2 ); 
       // pp20 = pts1.get( kk0 ); 
       pp20 = pp0;
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap pp1 null pp2 " + pp2.mX + " " + pp2.mY + " FOLLOW LINE BACKWARD" );
+      // TopoDroidLog.Debug( "snap pp1 null pp2 " + pp2.mX + " " + pp2.mY + " FOLLOW LINE BACKWARD" );
       if ( pp2.distance( q2 ) < pp2.distance( q1 ) ) {
         qq2 = q2;
         qq20 = q0;
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap qq2 " + qq2.mX + " " + qq2.mY + " follow border backward" );
-        // delta2 = size0-1;
+        // TopoDroidLog.Debug( "snap qq2 " + qq2.mX + " " + qq2.mY + " follow border backward" );
       } else {
-        // int k = k1; k1 = k2; k2 = k;
         reverse = true;
         qq2 = q1;
         qq20 = q0;
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap reverse qq2 " + qq2.mX + " " + qq2.mY + " follow border forward" );
-        // delta2 = 1;
+        // TopoDroidLog.Debug( "snap reverse qq2 " + qq2.mX + " " + qq2.mY + " follow border forward" );
       }
     } else {  // pp10 and pp20 are null: nothing to follow
       // copy pp0 to q0
@@ -1585,119 +1558,84 @@ public class DrawingCommandManager
     }
 
     if ( qq1 != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "qq1 not null " + qq1.mX + " " + qq1.mY + " reverse " + reverse );
+      // TopoDroidLog.Debug( "qq1 not null " + qq1.mX + " " + qq1.mY + " reverse " + reverse );
       // follow line pp10 --> pp1 --> ... using step 1
       // with border qq10 --> qq1 --> ... using step delta1
 
       for (int c=0; c<cmax; ++c) { // try to move qq1 forward
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap at qq1 " + qq1.mX + " " + qq1.mY );
+        TopoDroidLog.Debug( "snap at qq1 " + qq1.mX + " " + qq1.mY );
         float s = project( qq1, pp10, pp1 );
         while ( s > 1.0 ) {
-          // kk1 = ( kk1+1 < size1 )? kk1 + 1 : (min_is_area)? 0 : -1;
-          // if ( kk1 < 0 || kk1 == kk0 ) break;
           pp10 = pp1;
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap follow pp10 " + pp10.mX + " " + pp10.mY );
-          // pp1  = pts1.get( kk1 );
+          // TopoDroidLog.Debug( "snap follow pp10 " + pp10.mX + " " + pp10.mY );
           pp1  = lmin.next( pp1 );
           if ( pp1 == null ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap end of line pp1 null, pp10 " + pp10.mX + " " + pp10.mY );
+            // TopoDroidLog.Debug( "snap end of line pp1 null, pp10 " + pp10.mX + " " + pp10.mY );
             break;
           }
           if ( pp1 == pp0 ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap pp1 == pp0, pp10 " + pp10.mX + " " + pp10.mY );
+            // TopoDroidLog.Debug( "snap pp1 == pp0, pp10 " + pp10.mX + " " + pp10.mY );
             break;
           }
           s = project( qq1, pp10, pp1 );
         }
         if ( pp1 == null ) break;
         float d1 = distance( qq1, pp10, pp1 );
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "distance d1 " + d1 + " s " + s );
+        // TopoDroidLog.Debug( "distance d1 " + d1 + " s " + s );
 
         if ( s < 0.0f ) break;
         if ( d1 > thr || d1 < 0.001f ) break; 
         qq10 = qq1;
-        // k1 = (k1+delta1)%size0;
-        // if ( k1 == k0 ) break;
-        // qq1 = pts0.get( k1 );
         qq1 = (reverse)? area.prev(qq1) : area.next( qq1 );
         if ( qq1 == q0 ) break;
       }
     } else {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap qq1 null" );
+      // TopoDroidLog.Debug( "snap qq1 null" );
       qq10 = q0; // FIXME
     }
-    if ( qq10 != null && pp10 != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "QQ10 " + qq10.mX + " " + qq10.mY + " PP10 " + pp10.mX + " " + pp10.mY );
-    }
+    // if ( qq10 != null && pp10 != null ) {
+    //   TopoDroidLog.Debug( "QQ10 " + qq10.mX + " " + qq10.mY + " PP10 " + pp10.mX + " " + pp10.mY );
+    // }
 
     if ( qq2 != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "qq2 not null: " + qq2.mX + " " + qq2.mY + " reverse " + reverse );
+      // TopoDroidLog.Debug( "qq2 not null: " + qq2.mX + " " + qq2.mY + " reverse " + reverse );
       // follow line pp20 --> pp2 --> ... using step size1-1
       // with border qq20 --> qq2 --> ... using step delta2
       for (int c=0; c < cmax; ++c) { // try to move qq2 backward
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap at qq2 " + qq2.mX + " " + qq2.mY );
+        // TopoDroidLog.Debug( "snap at qq2 " + qq2.mX + " " + qq2.mY );
         float s = project( qq2, pp20, pp2 );
         while ( s > 1.0 ) {
-          // kk2 = ( kk2 > 0 )? kk2 - 1 : (min_is_area)? size1-1 : -1;
-          // if ( kk2 < 0 || kk2 == kk0 ) break;
           pp20 = pp2;
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap s>1, follow pp20 " + pp20.mX + " " + pp20.mY );
-          // pp2 = pts1.get( kk2 );
+          // TopoDroidLog.Debug( "snap s>1, follow pp20 " + pp20.mX + " " + pp20.mY );
           pp2 = lmin.prev( pp2 );
           if ( pp2 == null ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap end of line pp2 null, pp20 " + pp20.mX + " " + pp20.mY );
+            // TopoDroidLog.Debug( "snap end of line pp2 null, pp20 " + pp20.mX + " " + pp20.mY );
             break;
           }
           if ( pp2 == pp0 ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap pp2 == pp0, pp20 " + pp20.mX + " " + pp20.mY );
+            // TopoDroidLog.Debug( "snap pp2 == pp0, pp20 " + pp20.mX + " " + pp20.mY );
             break;
           }
           s = project( qq2, pp20, pp2 );
         }
         if ( pp2 == null ) break;
         float d2 = distance( qq2, pp20, pp2 );
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "distance qq2-P_line " + d2 + " s " + s );
+        // TopoDroidLog.Debug( "distance qq2-P_line " + d2 + " s " + s );
 
         if ( s < 0.0f ) break;
         if ( d2 > thr || d2 < 0.001f ) break; 
         qq20 = qq2;
-        // k2 = (k2+delta2)%size0;
-        // if ( k2 == k0 ) break;
-        // qq2 = pts0.get( k2 );
         qq2 = (reverse)? area.next(qq2) : area.prev( qq2 );
         if ( qq2 == q0 ) break;
       }
     } else {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap qq2 null");
+      // TopoDroidLog.Debug( "snap qq2 null");
       qq20 = q0; // FIXME
     }
-    if ( qq20 != null && pp20 != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "QQ20 " + qq20.mX + " " + qq20.mY + " PP20 " + pp20.mX + " " + pp20.mY );
-    }
-
-    // if ( reverse ) { int k=k1; k1=k2; k2=k; }
-    // k2 and k1 are kept
-    // ArrayList< LinePoint > pts2 = new ArrayList< LinePoint >();
-    // LinePoint prev = null;
-    // for (int k=k1; k!=k2; k=(k+1)%size0 ) {
-    //   prev = new LinePoint(pts0.get(k), prev);
-    //   pts2.add( prev );
+    // if ( qq20 != null && pp20 != null ) {
+    //   TopoDroidLog.Debug( "QQ20 " + qq20.mX + " " + qq20.mY + " PP20 " + pp20.mX + " " + pp20.mY );
     // }
-    // prev = new LinePoint(pts0.get(k2), prev );
-    // pts2.add( prev );
 
-    // if ( reverse ) {
-    //   for ( int k = (kk1+size1-1)%size1; k != kk2; k = (k+size1-1)%size1 ) {
-    //     prev = new LinePoint( pts1.get(k), prev );
-    //     pts2.add( prev );
-    //   }
-    // } else {
-    //   for ( int k = (kk2+1)%size1; k != kk1; k=(k+1)%size1 ) {
-    //     prev = new LinePoint( pts1.get(k), prev );
-    //     pts2.add( prev );
-    //   }
-    // }
-    
     if ( qq20 == qq10 || (reverse && pp10 == null) || (!reverse && pp20 == null) ) {
       // should not happen, anyways copy pp0 to q0
       q0.mX = pp0.mX;
@@ -1720,9 +1658,9 @@ public class DrawingCommandManager
 
         if ( prev == null ) {
           area.mFirst = null; // ( reverse )? qq10 : qq20;
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap setting area FIRST null ");
+          // TopoDroidLog.Debug( "snap setting area FIRST null ");
         } else {
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap start prev " + prev.mX + " " + prev.mY );
+          // TopoDroidLog.Debug( "snap start prev " + prev.mX + " " + prev.mY );
           LinePoint q = prev;
           while ( prev != null && prev != next ) {
             q = prev;
@@ -1733,14 +1671,14 @@ public class DrawingCommandManager
             q.mPrev.mNext = null;
             q.mPrev = null;
           }
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap setting area FIRST " + area.mFirst.mX + " " + area.mFirst.mY );
+          // TopoDroidLog.Debug( "snap setting area FIRST " + area.mFirst.mX + " " + area.mFirst.mY );
         }
 
         if ( next == null ) {
           area.mLast = null; // ( reverse )? qq20 : qq10;
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap setting area LAST null ");
+          // TopoDroidLog.Debug( "snap setting area LAST null ");
         } else {
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap start next " + next.mX + " " + next.mY );
+          // TopoDroidLog.Debug( "snap start next " + next.mX + " " + next.mY );
           LinePoint q = next;
           while ( next != null && next != prev ) {
             q = next;
@@ -1751,7 +1689,7 @@ public class DrawingCommandManager
             q.mNext.mPrev = null;
             q.mNext = null;
           }
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap setting area LAST " + area.mLast.mX + " " + area.mLast.mY );
+          // TopoDroidLog.Debug( "snap setting area LAST " + area.mLast.mX + " " + area.mLast.mY );
         }
 
         next = (reverse)? qq20 : qq10;
@@ -1761,12 +1699,12 @@ public class DrawingCommandManager
           LinePoint q = qq10.mPrev;
           LinePoint p = pp10;
           if ( q != null ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap attach at " + q.mX + " " + q.mY );
+            // TopoDroidLog.Debug( "snap attach at " + q.mX + " " + q.mY );
           } else {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap restart area ");
+            // TopoDroidLog.Debug( "snap restart area ");
           }
           q = new LinePoint( p.mX, p.mY, q );
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap first new point " + q.mX + " " + q.mY );
+          // TopoDroidLog.Debug( "snap first new point " + q.mX + " " + q.mY );
           if ( p != pp20 ) {
             p = p.mPrev;
             if ( area.mFirst == null ) area.mFirst = q;
@@ -1777,7 +1715,7 @@ public class DrawingCommandManager
               } else {
                 q = new LinePoint( p.mX, p.mY, q );
               }
-              TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap new point " + q.mX + " " + q.mY );
+              // TopoDroidLog.Debug( "snap new point " + q.mX + " " + q.mY );
             }
             if ( p != null ) { // FIXME add last point
               if ( p.has_cp ) {
@@ -1786,7 +1724,7 @@ public class DrawingCommandManager
               } else {
                 q = new LinePoint( p.mX, p.mY, q );
               }
-              TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap last new point " + q.mX + " " + q.mY );
+              // TopoDroidLog.Debug( "snap last new point " + q.mX + " " + q.mY );
             }
           }
           q.mNext = next;
@@ -1801,22 +1739,22 @@ public class DrawingCommandManager
           LinePoint q = qq20.mPrev;
           LinePoint p = pp20;
           if ( q != null ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap attach at " + q.mX + " " + q.mY );
+            // TopoDroidLog.Debug( "snap attach at " + q.mX + " " + q.mY );
           } else {
-            TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap restart area ");
+            // TopoDroidLog.Debug( "snap restart area ");
           }
           q = new LinePoint( p.mX, p.mY, q );
-          TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap first new point " + q.mX + " " + q.mY );
+          // TopoDroidLog.Debug( "snap first new point " + q.mX + " " + q.mY );
           if ( p != pp10 ) {
             p = p.mNext;
             if ( area.mFirst == null ) area.mFirst = q;
             for ( ; p != null && p != pp10; p = p.mNext ) {
               q = new LinePoint( p, q );
-              TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap new point " + q.mX + " " + q.mY );
+              // TopoDroidLog.Debug( "snap new point " + q.mX + " " + q.mY );
             }
             // if ( p != null ) { // FIXME not add "last" point
             //   q = new LinePoint( p, q );
-            //   TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap last new point " + q.mX + " " + q.mY );
+            //   TopoDroidLog.Debug( "snap last new point " + q.mX + " " + q.mY );
             // }
           }
           q.mNext = next;
@@ -1827,7 +1765,7 @@ public class DrawingCommandManager
           if ( area.mLast == null ) area.mLast = q;
         }
         area.recount(); 
-        TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "snap new size " + area.size() );
+        // TopoDroidLog.Debug( "snap new size " + area.size() );
       }
 
       // area.mPoints = pts2;
@@ -1845,163 +1783,41 @@ public class DrawingCommandManager
   }
 
   SelectionPoint hotItem() { return mSelected.mHotItem; }
-
   void shiftHotItem( float dx, float dy ) { mSelected.shiftHotItem( dx, dy ); }
-
   SelectionPoint nextHotItem() { return mSelected.nextHotItem(); }
-
   SelectionPoint prevHotItem() { return mSelected.prevHotItem(); }
+  void clearSelected() { synchronized( mSelected ) { mSelected.clear(); } }
 
-  void clearSelected()
+  RectF computeBBox() 
   {
-    synchronized( mSelected ) {
-      mSelected.clear();
-    }
-  }
-
-  public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )
-  {
-    // Log.v("DistoX", "export Therion");
-    float xmin=100000f, xmax=-100000f, 
-          ymin=100000f, ymax=-100000f,
-          umin=100000f, umax=-100000f,
-          vmin=100000f, vmax=-100000f;
+    float xmin=1000000f, xmax=-1000000f, 
+          ymin=1000000f, ymax=-1000000f;
     synchronized( mCurrentStack ) {
       final Iterator i = mCurrentStack.iterator();
       while ( i.hasNext() ) {
         final ICanvasCommand cmd = (ICanvasCommand) i.next();
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath p = (DrawingPath) cmd;
-        if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-          DrawingPointPath pp = (DrawingPointPath)p;
-          // TODO
-        } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-          DrawingLinePath lp = (DrawingLinePath)p;
-          if ( lp.size() > 1 ) {
-            if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
-              for ( LinePoint pt = lp.mFirst; pt != null; pt = pt.mNext )
-              {
-                if ( pt.mX < xmin ) xmin = pt.mX;
-                if ( pt.mX > xmax ) xmax = pt.mX;
-                if ( pt.mY < ymin ) ymin = pt.mY;
-                if ( pt.mY > ymax ) ymax = pt.mY;
-                float u = pt.mX + pt.mY;
-                float v = pt.mX - pt.mY;
-                if ( u < umin ) umin = u;
-                if ( u > umax ) umax = u;
-                if ( v < vmin ) vmin = v;
-                if ( v > vmax ) vmax = v;
-              }
-            }
-          }
-        }
+        RectF bbox = p.mBBox;
+        if ( bbox.left   < xmin ) xmin = bbox.left;
+        if ( bbox.right  > xmax ) xmax = bbox.right;
+        if ( bbox.top    < ymin ) ymin = bbox.top;
+        if ( bbox.bottom > ymax ) ymax = bbox.bottom;
       }
     }
+    return new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
+  }
 
-    try { 
-      out.write("encoding utf-8");
-      out.newLine();
-      StringWriter sw = new StringWriter();
-      PrintWriter pw  = new PrintWriter(sw);
-      pw.format("##XTHERION## xth_me_area_adjust %.1f %.1f %.1f %.1f\n", xmin*6, 400-ymax*6, xmax*6, 400-ymin*6 );
-      pw.format("##XTHERION## xth_me_area_zoom_to 25\n\n");
-      pw.format("# %s created by TopoDroid v. %s\n\n", TopoDroidUtil.currentDate(), TopoDroidApp.VERSION );
-      // TODO write current palette
-      pw.format("#P ");
-      DrawingBrushPaths.mPointLib.writePalette( pw );
-      pw.format("\n#L ");
-      DrawingBrushPaths.mLineLib.writePalette( pw );
-      pw.format("\n#A ");
-      DrawingBrushPaths.mAreaLib.writePalette( pw );
-      pw.format("\n");
-
-      float toTherion = TopoDroidConst.TO_THERION;
-      float oneMeter  = DrawingUtil.SCALE_FIX * toTherion;
-
-      if ( type == PlotInfo.PLOT_SECTION
-        || type == PlotInfo.PLOT_H_SECTION 
-        || type == PlotInfo.PLOT_X_SECTION ) {
-
-        if ( mNorthLine != null ) { // H_SECTION (horizontal section)
-          // north line is 5 m long
-          pw.format("scrap %s -projection %s -scale [%.0f %.0f %.0f %.0f 0 5 0 0 m]", scrap_name, proj_name, 
-            mNorthLine.x1*toTherion, -mNorthLine.y1*toTherion, mNorthLine.x2*toTherion, -mNorthLine.y2*toTherion );
-        } else {
-          pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
-        }
-      } else {
-        pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
-      }
-      out.write( sw.getBuffer().toString() );
-      out.newLine();
-      // out.newLine();
-      // for ( DrawingStationName st : mStations ) {
-      //   out.write( st.toTherion() );
-      //   out.newLine();
-      // }
-      out.newLine();
-      synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ) {
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
-          if ( cmd.commandType() != 0 ) continue;
-          DrawingPath p = (DrawingPath) cmd;
-          if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
-            DrawingPointPath pp = (DrawingPointPath)p;
-            out.write( pp.toTherion() );
-            out.newLine();
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
-            if ( ! TopoDroidSetting.mAutoStations ) {
-              DrawingStationPath st = (DrawingStationPath)p;
-              out.write( st.toTherion() );
-              out.newLine();
-            }
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-            DrawingLinePath lp = (DrawingLinePath)p;
-            if ( lp.size() > 1 ) {
-              out.write( lp.toTherion() );
-              out.newLine();
-            }
-          } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
-            DrawingAreaPath ap = (DrawingAreaPath)p;
-            out.write( ap.toTherion() );
-            out.newLine();
-          }
-        }
-      }
-      out.newLine();
-
-      if ( TopoDroidSetting.mAutoStations ) {
-        TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "exportTherion auto-stations: nr. " + mStations.size() );
-        // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "bbox " + xmin + ".." + xmax + " " + ymin + ".." + ymax );
-        for ( DrawingStationName st : mStations ) {
-          if ( st.mStation != null && st.mStation.barriered() ) continue;
-
-          // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "stations " + st.cx + " " + st.cy );
-          // FIXME if station is in the convex hull of the lines
-          if ( xmin > st.cx || xmax < st.cx ) continue;
-          if ( ymin > st.cy || ymax < st.cy ) continue;
-          float u = st.cx + st.cy;
-          float v = st.cx - st.cy;
-          if ( umin > u || umax < u ) continue;
-          if ( vmin > v || vmax < v ) continue;
-          // TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "writing" );
-          out.write( st.toTherion() );
-          out.newLine();
-        }
-        out.newLine();
-        out.newLine();
-      } else {
-        TopoDroidLog.Log(  TopoDroidLog.LOG_PLOT, "exportTherion NO auto-stations: nr. " + mStations.size() );
-      }
-      // Log.v( "DistoX", scrap_name + " " + proj_name + " bbox " + xmin + ".." + xmax + " " + ymin + ".." + ymax );
-
-      out.write("endscrap");
-      out.newLine();
-    } catch ( IOException e ) {
-      e.printStackTrace();
-    }
-    // checkLines();
+  public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )
+  {
+    RectF bbox = computeBBox();
+    DrawingIO.exportTherion( type, out, scrap_name, proj_name, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
+  }
+   
+  public void exportDataStream( int type, DataOutputStream dos, String scrap_name )
+  {
+    RectF bbox = computeBBox();
+    DrawingIO.exportDataStream( type, dos, scrap_name, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
   }
 
   void exportAsCsx( PrintWriter pw )

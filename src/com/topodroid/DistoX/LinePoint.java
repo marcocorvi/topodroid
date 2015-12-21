@@ -13,9 +13,13 @@
 package com.topodroid.DistoX;
 
 import java.io.PrintWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Locale;
 
 import android.util.FloatMath;
+// import android.util.Log;
 
 public class LinePoint extends BezierPoint
 {
@@ -143,4 +147,22 @@ public class LinePoint extends BezierPoint
       pw.format(Locale.ENGLISH, "  %.2f %.2f\n", mX*toTherion, -mY*toTherion );
     }
   }
+
+  void toDataStream( DataOutputStream dos )
+  {
+    try {
+      dos.writeFloat( mX  );
+      dos.writeFloat( mY  );
+      if ( has_cp ) {
+        dos.write( 1 );
+        dos.writeFloat( mX1 );
+        dos.writeFloat( mY1 );
+        dos.writeFloat( mX2 );
+        dos.writeFloat( mY2 );
+      } else {
+        dos.write( 0 );
+      }
+    } catch ( IOException e ) { }
+  }
+
 }

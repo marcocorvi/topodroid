@@ -36,7 +36,7 @@ public interface DataListener
 
   public void onUpdateSurveyName( long id, String name );
 
-  public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment );
+  public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment, String station );
 
   public void onUpdateSurveyDayAndComment( long id, String date, String comment );
 
@@ -90,7 +90,7 @@ public interface DataListener
 
   public void onInsertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, String comment );
+                          long extend, long flag, long leg, long status, int shot_type, String comment );
 
   // @param e extend
   // @param t type

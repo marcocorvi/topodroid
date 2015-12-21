@@ -11,9 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import android.os.Bundle;
 import android.app.Dialog;
 // import android.app.Activity;
@@ -97,14 +94,8 @@ class DeviceA3MemoryDialog extends Dialog
 
   private void setText( TextView h, TextView t, int[] ht )
   {
-    StringWriter swh = new StringWriter();
-    PrintWriter  pwh = new PrintWriter( swh );
-    StringWriter swt = new StringWriter();
-    PrintWriter  pwt = new PrintWriter( swt );
-    pwh.printf("%04d", ht[0] / 8 );
-    pwt.printf("%04d", ht[1] / 8);
-    h.setText( swh.getBuffer().toString() );
-    t.setText( swt.getBuffer().toString() );
+    h.setText( String.format("%04d", ht[0] / 8 ) );
+    t.setText( String.format("%04d", ht[1] / 8 ) );
   }
 
   // int parseInt( EditText et, int scale )

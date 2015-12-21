@@ -51,12 +51,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.util.FloatMath;
-
 import java.io.File;
 import java.io.FileWriter;
-import java.io.StringWriter;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -512,7 +508,7 @@ public class OverviewActivity extends ItemDrawer
       }
     }
 
-    boolean mAllSymbols = true;
+    // boolean mAllSymbols = true;
 
     private void loadFiles( long type )
     {
@@ -525,8 +521,8 @@ public class OverviewActivity extends ItemDrawer
       //   finish();
       //   return;
       // }
-      mAllSymbols  = true; // by default there are all the symbols
-      SymbolsPalette missingSymbols = new SymbolsPalette(); 
+      // mAllSymbols  = true; // by default there are all the symbols
+      // SymbolsPalette missingSymbols = new SymbolsPalette(); 
 
       NumStation mStartStation = null;
 
@@ -565,20 +561,25 @@ public class OverviewActivity extends ItemDrawer
         TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "load th2 file " + fullName );
         // Log.v("DistoX", "Overview load file " + fullName );
 
-        String filename = TopoDroidPath.getTh2FileWithExt( fullName );
-        // FIXME_OVER 
-        // N.B. this loads the drawing on DrawingSurface.mCommandManager1
-        boolean all_symbols = mOverviewSurface.loadTherion( filename, xdelta, ydelta, missingSymbols );
-        mAllSymbols = mAllSymbols && all_symbols;
+        String th2 = TopoDroidPath.getTh2FileWithExt( fullName );
+        if ( TopoDroidSetting.mBinaryTh2 ) {
+          String tdr = TopoDroidPath.getTdrFileWithExt( fullName );
+          // FIXME to check
+          mOverviewSurface.loadDataStream( tdr, th2, xdelta, ydelta, null );
+        } else {
+          // FIXME_OVER 
+          // N.B. this loads the drawing on DrawingSurface.mCommandManager1
+          mOverviewSurface.loadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
+        }
       }
 
-      if ( ! mAllSymbols ) {
-        String msg = missingSymbols.getMessage( getResources() );
-        TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Missing " + msg );
-        Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
-        // (new MissingDialog( this, this, msg )).show();
-        // finish();
-      }
+      // if ( ! mAllSymbols ) {
+      //   String msg = missingSymbols.getMessage( getResources() );
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Missing " + msg );
+      //   Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
+      //   // (new MissingDialog( this, this, msg )).show();
+      //   // finish();
+      // }
 
       // // resetZoom();
       // resetReference( mPlot1 );
@@ -634,7 +635,7 @@ public class OverviewActivity extends ItemDrawer
       if ( np < 2 ) return 0.0f;
       float x = ev.getX(1) - ev.getX(0);
       float y = ev.getY(1) - ev.getY(0);
-      return FloatMath.sqrt(x*x + y*y);
+      return TDMath.sqrt(x*x + y*y);
     }
 
     void saveEventPoint( WrapMotionEvent ev )
@@ -755,8 +756,6 @@ public class OverviewActivity extends ItemDrawer
           float y = y_canvas/mZoom - mOffset.y;
           float dx = (  (x - mStartX) / DrawingUtil.SCALE_FIX ) / TopoDroidSetting.mUnitGrid;
           float dy = ( -(y - mStartY) / DrawingUtil.SCALE_FIX ) / TopoDroidSetting.mUnitGrid;
-          // StringWriter sw = new StringWriter();
-          // PrintWriter pw = new PrintWriter( sw );
           double a = Math.atan2( dx, dy ) * 180 / Math.PI;
           if ( a < 0 ) a += 360;
 
@@ -773,7 +772,7 @@ public class OverviewActivity extends ItemDrawer
           }
           a *= TopoDroidSetting.mUnitAngle;
 
-          String msg = String.format( format, FloatMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
+          String msg = String.format( format, TDMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
           // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
           // setTitle( sw.getBuffer().toString() );
           setTitle( msg );
@@ -914,7 +913,7 @@ public class OverviewActivity extends ItemDrawer
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "search requested" );
+    // TopoDroidLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
     startActivity( intent );
@@ -934,7 +933,7 @@ public class OverviewActivity extends ItemDrawer
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "key down: code " + code );
+        TopoDroidLog.Error( "key down: code " + code );
     }
     return false;
   }

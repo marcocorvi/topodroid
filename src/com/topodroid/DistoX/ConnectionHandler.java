@@ -12,9 +12,6 @@
  */
 package com.topodroid.DistoX;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
-
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -156,7 +153,7 @@ class ConnectionHandler extends Handler
        mSyncService.connect( mDevice );
      }
      if ( mSyncService.getConnectState() == SyncService.STATE_CONNECTED ) {
-       doSyncCounter();
+       doSyncCounter(); // FIXME what if sync-counter fail
      }
    }
   
@@ -191,10 +188,10 @@ class ConnectionHandler extends Handler
      // }
    }
 
-   void write( byte[] buffer ) 
+   boolean writeBytes( byte[] buffer ) 
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler write CNT " + buffer[0] + " key " + buffer[1] );
-     mSyncService.write( buffer );
+     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler write CNT " + buffer[0] + " key " + buffer[1] );
+     return mSyncService.writeBuffer( buffer );
    }
 
    void startSendThread()
@@ -227,24 +224,24 @@ class ConnectionHandler extends Handler
    }
 
 
-   void doAcknowledge( int cnt )
+   boolean doAcknowledge( int cnt )
    {
      // Log.v("DistoX", "ACK count " + cnt );
      mAck[0] = (byte)cnt;
      mAck[1] = DataListener.ACK; // 0
      mAck[2] = DataListener.EOL;
      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ACK write <" + cnt + ">" );
-     write( mAck );
+     return writeBytes( mAck );
    }
 
    // tell the peer my send counter
-   void doSyncCounter( )
+   boolean doSyncCounter( )
    {
      mAck[0] = (byte)mSendCounter;
      mAck[1] = DataListener.SYNC;
      mAck[2] = DataListener.EOL;
      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "SYNC write <" + mSendCounter + ">" );
-     write( mAck );
+     return writeBytes( mAck );
    }
 
 
@@ -261,7 +258,7 @@ class ConnectionHandler extends Handler
    //
    void onRecv( int bytes, byte[] buffer ) 
    {
-     // Log.v("DistoX", "ConnectionHandler onRecv() len " + buffer.length );
+     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "recv " + bytes + " length " + + buffer.length );
      if ( buffer.length < 2 ) {
        return;
      }
@@ -278,20 +275,20 @@ class ConnectionHandler extends Handler
            mBufferQueue.remove( item );
            TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "recv ACK <" + cnt + "> removed. queue size " + mBufferQueue.size() );
          } else {
-           TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "recv ACK <" + cnt + "> not found" );
+           TopoDroidLog.Error( "recv ACK <" + cnt + "> not found" );
          }
        }
        return;
      }
 
      if ( mRecvCounter != cnt ) {
-       TopoDroidLog.Log( TopoDroidLog.LOG_ERR, "recv ERROR <" + cnt + "|" + key + "> expected " + mRecvCounter );
+       TopoDroidLog.Error( "recv ERROR <" + cnt + "|" + key + "> expected " + mRecvCounter );
        // should ack again ?
        // doAcknowledge( cnt );
        return;
      }
 
-     doAcknowledge( cnt );
+     doAcknowledge( cnt ); // FIXME if fails ?
      mRecvCounter = increaseCounter( mRecvCounter );
 
      String data_str = (new String( buffer )).substring( 2 );
@@ -434,42 +431,28 @@ class ConnectionHandler extends Handler
 
   public void onUpdateSurveyName( long id, String name )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%s|", name );
-    enqueue( DataListener.SURVEY_NAME, sw.getBuffer().toString() );
+    enqueue( DataListener.SURVEY_NAME, String.format(Locale.ENGLISH, "%s|", name ) );
   }
 
-  public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment ) 
+  public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment, String station ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%s|%s|%.2f|%s|", date, team, decl, comment );
-    enqueue( DataListener.SURVEY_INFO, sw.getBuffer().toString() );
+    enqueue( DataListener.SURVEY_INFO, String.format(Locale.ENGLISH, "%s|%s|%.2f|%s|%s|",
+      date, team, decl, comment, station ) );
   }
 
   public void onUpdateSurveyDayAndComment( long id, String date, String comment )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%s|%s|", date, comment );
-    enqueue( DataListener.SURVEY_DATE, sw.getBuffer().toString() );
+    enqueue( DataListener.SURVEY_DATE, String.format( "%s|%s|", date, comment ) );
   }
 
   public void onUpdateSurveyTeam( long id, String team )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%s|", team );
-    enqueue( DataListener.SURVEY_TEAM, sw.getBuffer().toString() );
+    enqueue( DataListener.SURVEY_TEAM, String.format( "%s|", team ) );
   }
 
   public void onUpdateSurveyDeclination( long id, double decl )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%.2f|", decl );
-    enqueue( DataListener.SURVEY_DECL, sw.getBuffer().toString() );
+    enqueue( DataListener.SURVEY_DECL, String.format(Locale.ENGLISH, "%.2f|", decl ) );
   }
 
   // -------------------------------------------------------------------------
@@ -477,103 +460,70 @@ class ConnectionHandler extends Handler
 
   public void onUpdateShotDBC( long id, long sid, float d, float b, float c )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|%.2f|%.1f|%.1f|", (int)id, (int)sid, d, b, c );
-    enqueue( DataListener.SHOT_DBC_UPDATE, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_DBC_UPDATE, String.format( "%d|%d|%.2f|%.1f|%.1f|", (int)id, (int)sid, d, b, c ) );
   }
 
   public void onUpdateShot( long id, long sid, String fStation, String tStation,
                             long extend, long flag, long leg, String comment ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|%s|%s|%d|%d|%d|%s|",
-      (int)id, (int)sid, fStation, tStation, (int)extend, (int)flag, (int)leg, comment );
-    enqueue( DataListener.SHOT_UPDATE, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_UPDATE, String.format( "%d|%d|%s|%s|%d|%d|%d|%s|",
+      (int)id, (int)sid, fStation, tStation, (int)extend, (int)flag, (int)leg, comment ) );
   }
 
   public void onUpdateShotName( long id, long sid, String fStation, String tStation )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|%s|%s|", (int)id, (int)sid, fStation, tStation );
-    enqueue( DataListener.SHOT_NAME, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_NAME, String.format( "%d|%d|%s|%s|", (int)id, (int)sid, fStation, tStation ) );
   }
 
   public void onUpdateShotLeg( long id, long sid, long leg ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|%d|", (int)id, (int)sid, (int)leg );
-    enqueue( DataListener.SHOT_LEG, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_LEG, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)leg ) );
   }
 
   public void onUpdateShotExtend( long id, long sid, long extend ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|%d|", (int)id, (int)sid, (int)extend );
-    enqueue( DataListener.SHOT_EXTEND, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_EXTEND, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)extend ) );
   }
 
   public void onUpdateShotFlag( long id, long sid, long flag )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|%d|", (int)id, (int)sid, (int)flag );
-    enqueue( DataListener.SHOT_FLAG, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_FLAG, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)flag ) );
   }
 
   public void onUpdateShotComment( long id, long sid, String comment ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|%s|", (int)id, (int)sid, comment );
-    enqueue( DataListener.SHOT_COMMENT, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_COMMENT, String.format( "%d|%d|%s|", (int)id, (int)sid, comment ) );
   }
 
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double roll ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%d|%d|%.2f|%.2f|%.2f|%.2f|", (int)sid, (int)id, acc, mag, dip, roll );
-    enqueue( DataListener.SHOT_AMDR, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_AMDR, 
+      String.format(Locale.ENGLISH, "%d|%d|%.2f|%.2f|%.2f|%.2f|", (int)sid, (int)id, acc, mag, dip, roll ) );
   }
 
   public void onDeleteShot( long id, long sid )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|", (int)id, (int)sid );
-    enqueue( DataListener.SHOT_DELETE, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_DELETE, String.format( "%d|%d|", (int)id, (int)sid ) );
   }
 
   public void onUndeleteShot( long id, long sid )
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format( "%d|%d|", (int)id, (int)sid );
-    enqueue( DataListener.SHOT_UNDELETE, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_UNDELETE, String.format( "%d|%d|", (int)id, (int)sid ) );
   }
 
   public void onInsertShot( long sid, long id, String from, String to, 
                           double d, double b, double c, double r, 
-                          long extend, long flag, long leg, long status, String comment ) 
+                          long extend, long flag, long leg, long status, int shot_type, String comment ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%s|", 
-      (int)sid, (int)id, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, comment );
-    enqueue( DataListener.SHOT_INSERT, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_INSERT, 
+      String.format(Locale.ENGLISH, "%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|", 
+      (int)sid, (int)id, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, shot_type, comment ) );
   }
 
   public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, int t ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%d|%d||%.2f|%.1f|%.1f|%.1f|%d|%d", (int)sid, (int)at, d, b, c, r, (int)e, t );
-    enqueue( DataListener.SHOT_INSERTAT, sw.getBuffer().toString() );
+    enqueue( DataListener.SHOT_INSERTAT, 
+      String.format(Locale.ENGLISH, "%d|%d||%.2f|%.1f|%.1f|%.1f|%d|%d", (int)sid, (int)at, d, b, c, r, (int)e, t ) );
   }
 
   // public void transferShots( long sid, long old_sid, long old_id ) { }
@@ -588,11 +538,9 @@ class ConnectionHandler extends Handler
                             double xoffset, double yoffset, double zoom, double azimuth, double clino,
                             String hide ) 
   {
-    StringWriter sw = new StringWriter();
-    PrintWriter pw  = new PrintWriter( sw );
-    pw.format(Locale.ENGLISH, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|%s|",
-      (int)sid, (int)id, name, (int)type, (int)status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide );
-    enqueue( DataListener.PLOT_INSERT, sw.getBuffer().toString() );
+    enqueue( DataListener.PLOT_INSERT, 
+      String.format(Locale.ENGLISH, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|%s|",
+      (int)sid, (int)id, name, (int)type, (int)status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide ) );
   }
 
   // public void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom ) { }
@@ -668,14 +616,17 @@ class ConnectionHandler extends Handler
                 ++ cnt;
               }
               TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "lastByte " + lastByte + " cnt " + cnt );
-              if ( cnt > 10 ) {
+              if ( cnt > 4 ) {
                 // bail-out
                 disconnect( mDevice );
               } else {
-                cnt = 0;
                 lastByte = buffer[0];
                 TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "data write <" + buffer[0] + "|" + buffer[1] + ">" );
-                write( item.mData );
+                if ( writeBytes( item.mData ) ) {
+                  cnt = 0;
+                } else {
+                  ++ cnt;
+                }
               }
             }
             Thread.sleep( SLEEP_DEQUE );   
@@ -690,7 +641,7 @@ class ConnectionHandler extends Handler
   @Override
   public void handleMessage( Message msg )
   {
-    // Log.v("DistoX", "handle message: " + msg.arg1 );
+    TopoDroidLog.Log(TopoDroidLog.LOG_SYNC, "handle message: " + msg.arg1 );
     Bundle bundle; 
     switch (msg.what) {
       case SyncService.MESSAGE_LOST_CONN: // 5

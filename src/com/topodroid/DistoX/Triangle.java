@@ -17,7 +17,6 @@ package com.topodroid.DistoX;
 
 import java.lang.Math;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 
