@@ -1783,7 +1783,11 @@ public class DrawingCommandManager
   }
 
   SelectionPoint hotItem() { return mSelected.mHotItem; }
-  void shiftHotItem( float dx, float dy ) { mSelected.shiftHotItem( dx, dy ); }
+  void shiftHotItem( float dx, float dy ) 
+  { 
+    SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
+    mSelection.checkBucket( sp );
+  }
   SelectionPoint nextHotItem() { return mSelected.nextHotItem(); }
   SelectionPoint prevHotItem() { return mSelected.prevHotItem(); }
   void clearSelected() { synchronized( mSelected ) { mSelected.clear(); } }

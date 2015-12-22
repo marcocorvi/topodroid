@@ -309,6 +309,25 @@ class Selection
     return ret;
   }
 
+  // check if the SelectionPoint is still in its bucket
+  // otherwise move it to the new bucket
+  void checkBucket( SelectionPoint sp ) 
+  {
+    if ( sp == null ) return;
+    SelectionBucket sb = sp.mBucket;
+    if ( sb != null && ! sb.contains( sp.X(), sp.Y() ) ) {
+      sb.removePoint( sp );
+      // find the bucket that contains sp and assign it to sp
+      sb = getBucket( sp.X(), sp.Y() );
+      sp.setBucket( sb );
+      if ( sb != null ) { 
+        sb.addPoint( sp );
+      } else {
+        TopoDroidLog.Error("SelectionPoint out of any bucket");
+      }
+    }
+  }
+
   // private void dumpBuckets()
   // {
   //   for ( SelectionBucket bucket : mBuckets ) {

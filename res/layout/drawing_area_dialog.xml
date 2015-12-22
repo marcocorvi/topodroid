@@ -54,14 +54,6 @@
       android:orientation="horizontal" 
       android:layout_marginTop="25dip"
       >
-      <!-- Button android:id="@+id/button_cancel"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_cancel"
-        / -->
-
       <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -76,16 +68,6 @@
         style="@style/button_default"
         android:text="@string/button_save"
       />
-
-      <!-- Button android:id="@+id/button_erase"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_delete"
-        android:textColor="@color/textdelete"
-        / -->
 
       </LinearLayout>
 

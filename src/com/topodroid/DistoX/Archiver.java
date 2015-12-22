@@ -53,24 +53,26 @@ public class Archiver
   private boolean addEntry( ZipOutputStream zos, File name )
   {
     if ( name == null || ! name.exists() ) return false;
-    try {
-      FileInputStream fis = new FileInputStream( name );
-      BufferedInputStream bis = new BufferedInputStream( fis, BUF_SIZE );
+    boolean ret = false;
+    BufferedInputStream bis = null;
+    try { 
+      bis = new BufferedInputStream( new FileInputStream( name ), BUF_SIZE );
       ZipEntry entry = new ZipEntry( name.getName() );
       int cnt;
       zos.putNextEntry( entry );
       while ( (cnt = bis.read( data, 0, BUF_SIZE )) != -1 ) {
-      zos.write( data, 0, cnt );
+        zos.write( data, 0, cnt );
       }
-      bis.close();
       zos.closeEntry( );
+      ret = true;
     } catch (FileNotFoundException e ) {
       // FIXME
-      return false;
     } catch ( IOException e ) {
       // FIXME
+    } finally {
+      if ( bis != null ) try { bis.close(); } catch (IOException e ) { }
     }
-    return true;
+    return ret;
   }
 
   public boolean archive( )
@@ -79,14 +81,15 @@ public class Archiver
     
     File temp = null;
     String survey = app.mySurvey;
+    boolean ret = true;
 
     zipname = TopoDroidPath.getSurveyZipFile( survey );
     TopoDroidPath.checkPath( zipname );
 
+    ZipOutputStream zos = null;
     try {
       String pathname;
-      FileOutputStream fos = new FileOutputStream( zipname );
-      ZipOutputStream zos = new ZipOutputStream( new BufferedOutputStream( fos ) );
+      zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
 
       // FIXME_SKETCH_3D
       List< Sketch3dInfo > sketches  = app.mData.selectAllSketches( app.mSID, TopoDroidApp.STATUS_NORMAL );
@@ -125,7 +128,6 @@ public class Archiver
         addEntry( zos, new File( TopoDroidPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
       }
 
-
       addEntry( zos, new File( TopoDroidPath.getSurveyThFile( survey ) ) );
       addEntry( zos, new File( TopoDroidPath.getSurveyTroFile( survey ) ) );
       addEntry( zos, new File( TopoDroidPath.getSurveyTopFile( survey ) ) );
@@ -144,20 +146,19 @@ public class Archiver
       app.writeManifestFile();
       addEntry( zos, new File(pathname) );
 
-      zos.close();
+      ret = true;
     } catch ( FileNotFoundException e ) {
       // FIXME
-      return false;
     } catch ( IOException e ) {
       // FIXME
-      return false;
     } finally {
       File fp = new File( TopoDroidPath.getSqlFile() );
       if ( fp.exists() ) {
         // fp.delete();
       }
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { }
     }
-    return true;
+    return ret;
   }
 
   public int unArchive( String filename, String surveyname )

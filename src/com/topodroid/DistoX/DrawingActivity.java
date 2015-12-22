@@ -1459,7 +1459,11 @@ public class DrawingActivity extends ItemDrawer
         deletePlotFile( TopoDroidPath.getJpgFile( mApp.mySurvey, name + ".jpg" ) );
        
         PlotInfo plot = mData.getPlotInfo( mApp.mSID, name );
-        if ( plot != null ) mData.dropPlot( plot.id, mApp.mSID );
+        if ( plot != null ) {
+          mData.dropPlot( plot.id, mApp.mSID );
+        } else {
+          TopoDroidLog.Error("No plot " + name + " SID " + mApp.mSID + " in database" );
+        }
       }
       modified();
     }
@@ -2831,7 +2835,7 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    private void askDeleteItem( final DrawingPath p, final int t, String name )
+    private void askDeleteItem( final DrawingPath p, final int t, final String name )
     {
       new TopoDroidAlertDialog( this, getResources(), 
                                 String.format( getResources().getString( R.string.item_delete ), name ), 
@@ -2843,7 +2847,7 @@ public class DrawingActivity extends ItemDrawer
                 deletePoint( (DrawingPointPath)p );
                 break;
               case DrawingPath.DRAWING_PATH_LINE:
-                deleteLine( (DrawingLinePath)p, null );
+                deleteLine( (DrawingLinePath)p, name );
                 break;
               case DrawingPath.DRAWING_PATH_AREA:
                 deleteArea( (DrawingAreaPath)p );

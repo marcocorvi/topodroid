@@ -8,8 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------
- * CHANGES
- * 20131120 created
  */
 package com.topodroid.DistoX;
 
@@ -35,11 +33,12 @@ class SelectionSet
     mHotItem = null;
   }
 
-  void shiftHotItem( float dx, float dy )
+  // shit the hot item and return it (or return null)
+  SelectionPoint shiftHotItem( float dx, float dy )
   {
-    if ( mHotItem != null ) {
-      mHotItem.shiftBy( dx, dy );
-    }
+    if ( mHotItem == null ) return null;
+    mHotItem.shiftBy( dx, dy );
+    return mHotItem;
   }
 
   SelectionPoint nextHotItem()

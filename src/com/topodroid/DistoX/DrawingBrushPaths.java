@@ -352,13 +352,13 @@ public class DrawingBrushPaths
 
   static void setStrokeWidths()
   {
-    // if (fixedShotPaint != null)
+    if (fixedShotPaint != null)
       fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
-    // if (fixedBluePaint != null)
+    if (fixedBluePaint != null)
       fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
-    // if (fixedSplayPaint != null)
+    if (fixedSplayPaint != null)
       fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
-    // if (fixedSplay2Paint != null)
+    if (fixedSplay2Paint != null)
       fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
   }
 

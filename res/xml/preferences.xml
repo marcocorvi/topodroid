@@ -41,6 +41,13 @@
        android:defaultValue="true"
        />
 
+  <CheckBoxPreference
+       android:key="DISTOX_BINARY_STORE"
+       android:summary="@string/pref_binary_store_summary"
+       android:title="@string/pref_binary_store_title"
+       android:defaultValue="false"
+       />
+
   <!-- CheckBoxPreference
        android:key="DISTOX_BOOTLOADER"
        android:summary="@string/pref_bootloader_summary"

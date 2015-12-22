@@ -41,16 +41,12 @@ public class DrawingLineDialog extends Dialog
   private CheckBox mBtnOutlineIn;
   // private RadioButton mBtnOutlineNone;
 
-
   private Button mBtnOk;
 
   private MyCheckBox mReversed;
   private MyCheckBox mBtnSharp;
   private MyCheckBox mBtnRock;
   private MyCheckBox mBtnClose;
-  // private Button   mBtnSplit;
-  // private Button   mBtnCancel;
-  // private Button   mBtnErase;
 
   public DrawingLineDialog( DrawingActivity context, DrawingLinePath line, LinePoint lp )
   {
@@ -114,23 +110,6 @@ public class DrawingLineDialog extends Dialog
     layout3.addView( mBtnSharp, lp );
     layout3.addView( mBtnRock, lp );
     layout3.addView( mBtnClose, lp );
-
-
-    // mBtnSharp = (Button) findViewById( R.id.button_sharp );
-    // mBtnSharp.setOnClickListener( this );
-    // mBtnRock = (Button) findViewById( R.id.button_rock );
-    // mBtnRock.setOnClickListener( this );
-    // mBtnClose = (Button) findViewById( R.id.button_close );
-    // mBtnClose.setOnClickListener( this );
-
-    // mBtnCancel = (Button) findViewById( R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
-
-    // mBtnSplit = (Button) findViewById( R.id.button_split );
-    // mBtnSplit.setOnClickListener( this );
-
-    // mBtnErase = (Button) findViewById( R.id.button_erase );
-    // mBtnErase.setOnClickListener( this );
   }
 
   public void onClick(View v) 
@@ -165,13 +144,6 @@ public class DrawingLineDialog extends Dialog
       if ( mBtnClose.isChecked() ) {
         mParent.closeLine( mLine );
       }
-
-    // } else if ( b == mBtnSharp ) {
-    //   mParent.sharpenLine( mLine, false );
-    // } else if ( b == mBtnRock ) {
-    //   mParent.sharpenLine( mLine, true );
-    // } else if ( b == mBtnClose ) {
-    //   mParent.closeLine( mLine );
     }
     dismiss();
   }

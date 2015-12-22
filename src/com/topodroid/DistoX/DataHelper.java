@@ -1100,6 +1100,11 @@ public class DataHelper extends DataSetObservable
     undeletePlotStmt.bindLong( 1, survey_id );
     undeletePlotStmt.bindLong( 2, plot_id );
     undeletePlotStmt.execute();
+    // long pid = plot_id + 1; // extended  does not need to be marked as normal
+    // TopoDroidLog.Error( "undeletePlot: " + plot_id + "/" + pid + " survey " + survey_id );
+    // undeletePlotStmt.bindLong( 1, survey_id );
+    // undeletePlotStmt.bindLong( 2, plot_id );
+    // undeletePlotStmt.execute();
   }
   
 

@@ -477,19 +477,10 @@ public class TopoDroidApp extends Application
       // FIXME
       e.printStackTrace();
     }
-    // // disable lock
-    // KeyguardManager keyguardManager = (KeyguardManager)getSystemService(Activity.KEYGUARD_SERVICE);
-    // KeyguardLock lock = keyguardManager.newKeyguardLock(KEYGUARD_SERVICE);
-    // lock.disableKeyguard();
-
-    // try {
-    //   mScreenTimeout = System.getInt(getContentResolver(), System.SCREEN_OFF_TIMEOUT );
-    // } catch ( SettingNotFoundException e ) {
-    // }
 
     // Log.v(TAG, "onCreate app");
-    this.mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
-    this.mPrefs.registerOnSharedPreferenceChangeListener( this );
+    mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
+    mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
 
     TopoDroidPath.setDefaultPaths();
     mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
@@ -503,8 +494,8 @@ public class TopoDroidApp extends Application
     mDData = new DeviceHelper( this, null ); 
 
     TopoDroidSetting.loadPreferences( this, mPrefs );
-
-    mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
+    // register pref change listener after having loaded preferences
+    this.mPrefs.registerOnSharedPreferenceChangeListener( this );
 
     mEnableZip = true;
 
@@ -995,6 +986,7 @@ public class TopoDroidApp extends Application
 
   public void onSharedPreferenceChanged( SharedPreferences sp, String k ) 
   {
+    // TopoDroidLog.Error("shared pref changed " + k );
     TopoDroidSetting.checkPreference( sp, k, mActivity, this );
   }
 

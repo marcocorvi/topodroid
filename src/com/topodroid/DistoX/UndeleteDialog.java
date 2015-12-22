@@ -104,10 +104,12 @@ public class UndeleteDialog extends Dialog
         String.format(Locale.ENGLISH, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
     }
     for ( PlotInfo p : plots ) {
-      mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
+      if ( p.type == PlotInfo.PLOT_PLAN ) {
+        mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
+      // } else { // this is OK extended do not show up in this dialog
+      //   TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, " plot " + p.id + " <" + p.name + "> " +  p.getTypeString() );
+      }
     }
-    // mBtnCancel = (Button) findViewById(R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
 
     setTitle( R.string.undelete_text );
   }
