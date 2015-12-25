@@ -1,4 +1,4 @@
-/** @file CompassParser.java
+/** @file ParserCompass.java
  *
  * @author marco corvi
  * @date nov 2014
@@ -23,9 +23,9 @@ import java.util.regex.Pattern;
 
 // import android.util.Log;
 
-public class CompassParser extends ImportParser
+public class ParserCompass extends ImportParser
 {
-  public CompassParser( String filename, boolean apply_declination ) throws ParserException
+  public ParserCompass( String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
     readFile( filename );
@@ -180,8 +180,8 @@ public class CompassParser extends ImportParser
     if ( mDate == null ) {
       mDate = TopoDroidUtil.currentDate();
     }
-    TDLog.Log( TDLog.LOG_THERION, "CompassParser shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( TopoDroidApp.TAG, "CompassParser shots "+ shots.size() + " splays "+ splays.size() );
+    TDLog.Log( TDLog.LOG_THERION, "ParserCompass shots "+ shots.size() +" splays "+ splays.size()  );
+    // Log.v( TopoDroidApp.TAG, "ParserCompass shots "+ shots.size() + " splays "+ splays.size() );
   }
 
   float parseAngleUnit( String unit ) 

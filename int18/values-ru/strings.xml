@@ -300,7 +300,7 @@
     <string name="splay">боковой замер</string>
     <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
     <string name="too_many_legs_xsection">Слишком много лучей для разреза</string>
-    <strung name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string>
+    <string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string>
     <string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string>
 
     <string name="sensor">датчик</string>

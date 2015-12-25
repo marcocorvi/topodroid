@@ -1499,7 +1499,7 @@ public class DrawingActivity extends ItemDrawer
     // }
 
     
-    private void dumpEvent( WrapMotionEvent ev )
+    private void dumpEvent( MotionEventWrap ev )
     {
       String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
       StringBuilder sb = new StringBuilder();
@@ -1520,7 +1520,7 @@ public class DrawingActivity extends ItemDrawer
     }
     
 
-    float spacing( WrapMotionEvent ev )
+    float spacing( MotionEventWrap ev )
     {
       int np = ev.getPointerCount();
       if ( np < 2 ) return 0.0f;
@@ -1529,7 +1529,7 @@ public class DrawingActivity extends ItemDrawer
       return FloatMath.sqrt(x*x + y*y);
     }
 
-    void saveEventPoint( WrapMotionEvent ev )
+    void saveEventPoint( MotionEventWrap ev )
     {
       int np = ev.getPointerCount();
       if ( np >= 1 ) {
@@ -1546,7 +1546,7 @@ public class DrawingActivity extends ItemDrawer
     }
 
     
-    void shiftByEvent( WrapMotionEvent ev )
+    void shiftByEvent( MotionEventWrap ev )
     {
       float x0 = 0.0f;
       float y0 = 0.0f;
@@ -1605,7 +1605,7 @@ public class DrawingActivity extends ItemDrawer
 
       float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mZoom;
 
-      WrapMotionEvent event = WrapMotionEvent.wrap(rawEvent);
+      MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
       // TDLog.Log( TDLog.LOG_INPUT, "DrawingActivity onTouch() " );
       // dumpEvent( event );
 

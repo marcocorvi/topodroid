@@ -1080,7 +1080,7 @@ public class SketchActivity extends ItemDrawer
   // --------------------------------------------------------------------------
   // TOUCH
 
-  // private void dumpEvent( WrapMotionEvent ev )
+  // private void dumpEvent( MotionEventWrap ev )
   // {
   //   String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
   //   StringBuilder sb = new StringBuilder();
@@ -1101,7 +1101,7 @@ public class SketchActivity extends ItemDrawer
   // }
   
 
-  private float spacing( WrapMotionEvent ev )
+  private float spacing( MotionEventWrap ev )
   {
     int np = ev.getPointerCount();
     if ( np < 2 ) return 0.0f;
@@ -1110,7 +1110,7 @@ public class SketchActivity extends ItemDrawer
     return TDMath.sqrt(x*x + y*y);
   }
 
-  // private float direction( WrapMotionEvent ev )
+  // private float direction( MotionEventWrap ev )
   // {
   //   int np = ev.getPointerCount();
   //   if ( np < 2 ) return 0.0f;
@@ -1119,7 +1119,7 @@ public class SketchActivity extends ItemDrawer
   //   return TDMath.atan2( y, x );
   // }
 
-  // private float position( WrapMotionEvent ev ) // vertical position
+  // private float position( MotionEventWrap ev ) // vertical position
   // {
   //   int np = ev.getPointerCount();
   //   if ( np == 0 ) return 0.0f;
@@ -1164,7 +1164,7 @@ public class SketchActivity extends ItemDrawer
 
     float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mInfo.zoom_3d;
 
-    WrapMotionEvent event = WrapMotionEvent.wrap(rawEvent);
+    MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
     // TDLog.Log( TDLog.LOG_INPUT, "SketchActivity onTouch() " );
     // dumpEvent( event );
 

@@ -1,4 +1,4 @@
-/** @file TherionParserState.java
+/** @file ParserTherionState.java
  *
  * @author marco corvi
  * @date may 2012
@@ -9,12 +9,10 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * ----------------------------------------------------------
- * CHANGES
- * 20130104 created 
  */
 package com.topodroid.DistoX;
 
-public class TherionParserState
+public class ParserTherionState
 {
   boolean in_centerline;
   boolean in_data;
@@ -42,7 +40,7 @@ public class TherionParserState
   String mSuffix;
   int mSurveyLevel;
 
-  public TherionParserState()
+  public ParserTherionState()
   {
     mUnitLen = 1.0f;
     mUnitBer = 1.0f;
@@ -70,7 +68,7 @@ public class TherionParserState
     in_area = false;
   }
 
-  public TherionParserState( TherionParserState state )
+  public ParserTherionState( ParserTherionState state )
   {
     mUnitLen = state.mUnitLen;
     mUnitBer = state.mUnitBer;

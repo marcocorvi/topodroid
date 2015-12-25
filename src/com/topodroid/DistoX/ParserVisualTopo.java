@@ -1,4 +1,4 @@
-/** @file VisualTopoParser.java
+/** @file ParserVisualTopo.java
  *
  * @author marco corvi
  * @date mar 2015
@@ -22,9 +22,9 @@ import java.util.regex.Pattern;
 
 // import android.util.Log;
 
-public class VisualTopoParser extends ImportParser
+public class ParserVisualTopo extends ImportParser
 {
-  public VisualTopoParser( String filename, boolean apply_declination ) throws ParserException
+  public ParserVisualTopo( String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
     readFile( filename );
@@ -236,8 +236,8 @@ public class VisualTopoParser extends ImportParser
       TDLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
-    TDLog.Log( TDLog.LOG_THERION, "VisualTopoParser shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( TopoDroidApp.TAG, "VisualTopoParser shots "+ shots.size() + " splays "+ splays.size() );
+    TDLog.Log( TDLog.LOG_THERION, "ParserVisualTopo shots "+ shots.size() +" splays "+ splays.size()  );
+    // Log.v( TopoDroidApp.TAG, "ParserVisualTopo shots "+ shots.size() + " splays "+ splays.size() );
   }
 
   float parseAngleUnit( String unit ) 

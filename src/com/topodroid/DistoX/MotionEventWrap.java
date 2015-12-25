@@ -14,26 +14,26 @@ import android.os.Build;
 import android.view.MotionEvent;
 // import android.util.Log;
 
-public class WrapMotionEvent 
+public class MotionEventWrap 
 {
    protected MotionEvent event;
 
-   protected WrapMotionEvent(MotionEvent event) 
+   protected MotionEventWrap( MotionEvent event ) 
    {
       this.event = event;
    }
 
-   static public WrapMotionEvent wrap(MotionEvent event) 
+   static public MotionEventWrap wrap(MotionEvent event) 
    {
       // FIXME NFE 
 
       // Use Build.VERSION.SDK_INT if you don't have to support Cupcake
       if (Integer.parseInt(Build.VERSION.SDK) >= Build.VERSION_CODES.ECLAIR) {
-         // Log.d("WrapMotionEvent", "Using Eclair version");
-         return new EclairMotionEvent(event);
+         // Log.d("MotionEventWrap", "Using Eclair version");
+         return new MotionEventEclair(event);
       } else {
-         // Log.d("WrapMotionEvent", "Using Cupcake/Donut version");
-         return new WrapMotionEvent(event);
+         // Log.d("MotionEventWrap", "Using Cupcake/Donut version");
+         return new MotionEventWrap(event);
       }
    }
    

@@ -1,4 +1,4 @@
-/** @file PocketTopoParser.java
+/** @file ParserPocketTopo.java
  *
  * @author marco corvi
  * @date nov 2014
@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 import android.util.Log;
 
-public class PocketTopoParser extends ImportParser
+public class ParserPocketTopo extends ImportParser
 {
   String mTitle = "";
   String mComment;
@@ -33,7 +33,7 @@ public class PocketTopoParser extends ImportParser
 
   static final float PT_SCALE = 0.1f; // 100/1000
 
-  public PocketTopoParser( String filename, String surveyname, boolean apply_declination )
+  public ParserPocketTopo( String filename, String surveyname, boolean apply_declination )
                            throws ParserException
   {
     super( apply_declination );

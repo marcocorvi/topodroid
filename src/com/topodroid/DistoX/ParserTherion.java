@@ -1,4 +1,4 @@
-/** @file TherionParser.java
+/** @file ParserTherion.java
  *
  * @author marco corvi
  * @date may 2012
@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 // import android.util.Log;
 
-public class TherionParser
+public class ParserTherion
 {
   public String mName = null;  // survey name
   public String mDate = null;  // survey date
@@ -31,14 +31,14 @@ public class TherionParser
   public float  mDeclination = 0.0f; // one-survey declination
   private boolean mApplyDeclination = false;
  
-  Stack< TherionParserState > mStates; // states stack (LIFO)
+  Stack< ParserTherionState > mStates; // states stack (LIFO)
 
-  void pushState( TherionParserState state )
+  void pushState( ParserTherionState state )
   {
     mStates.push( state );
   }
 
-  TherionParserState popState() 
+  ParserTherionState popState() 
   {
     return mStates.pop();
   }
@@ -73,14 +73,14 @@ public class TherionParser
   public ArrayList< ParserShot > getSplays() { return splays; }
 
 
-  public TherionParser( String filename, boolean apply_declination ) throws ParserException
+  public ParserTherion( String filename, boolean apply_declination ) throws ParserException
   {
     fixes  = new ArrayList< Fix >();
     shots  = new ArrayList< ParserShot >();
     splays = new ArrayList< ParserShot >();
-    mStates = new Stack< TherionParserState >();
+    mStates = new Stack< ParserTherionState >();
     mApplyDeclination = apply_declination;
-    TherionParserState state = new TherionParserState();
+    ParserTherionState state = new ParserTherionState();
     readFile( filename, "", state );
   }
 
@@ -108,7 +108,7 @@ public class TherionParser
    * @param ub units of bearing (as multiple of 1 degree)
    * @param uc units of clino
    */
-  private void readFile( String filename, String basepath, TherionParserState state )
+  private void readFile( String filename, String basepath, ParserTherionState state )
                        throws ParserException
   {
     String path = basepath;   // survey pathname(s)
@@ -213,7 +213,7 @@ public class TherionParser
               path = path + "." + vals[1];    // add survey name to path
               ++ks;
               pushState( state );
-              state = new TherionParserState( state );
+              state = new ParserTherionState( state );
               state.mSurveyLevel ++;
               state.in_survey= true;
 
@@ -416,7 +416,7 @@ public class TherionParser
 
               } else if ( cmd.equals("group") ) {
                 pushState( state );
-                state = new TherionParserState( state );
+                state = new ParserTherionState( state );
               } else if ( cmd.equals("endgroup") ) {
                 state = popState();
 
@@ -512,7 +512,7 @@ public class TherionParser
               }            
             } else if ( cmd.equals("centerline") || cmd.equals("centreline") ) {
               pushState( state );
-              state = new TherionParserState( state );
+              state = new ParserTherionState( state );
               state.in_centerline = true;
               state.in_data = false;
             } else if ( cmd.equals("endsurvey") ) {
@@ -532,8 +532,8 @@ public class TherionParser
     if ( mDate == null ) {
       mDate = TopoDroidUtil.currentDate();
     }
-    TDLog.Log( TDLog.LOG_THERION, "TherionParser shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
-    // Log.v( TopoDroidApp.TAG, "TherionParser shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
+    TDLog.Log( TDLog.LOG_THERION, "ParserTherion shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
+    // Log.v( TopoDroidApp.TAG, "ParserTherion shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
   float parseAngleUnit( String unit ) 

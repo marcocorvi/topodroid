@@ -396,7 +396,7 @@ public class TopoDroidActivity extends Activity
     {
       long sid = 0;
       try {
-        TherionParser parser = new TherionParser( str[0], true ); // apply_declination = true
+        ParserTherion parser = new ParserTherion( str[0], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
         ArrayList< ParserShot > splays = parser.getSplays();
 
@@ -428,7 +428,7 @@ public class TopoDroidActivity extends Activity
     {
       long sid = 0;
       try {
-        CompassParser parser = new CompassParser( str[0], true ); // apply_declination = true
+        ParserCompass parser = new ParserCompass( str[0], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
         ArrayList< ParserShot > splays = parser.getSplays();
 
@@ -460,7 +460,7 @@ public class TopoDroidActivity extends Activity
     {
       long sid = 0;
       try {
-        VisualTopoParser parser = new VisualTopoParser( str[0], true ); // apply_declination = true
+        ParserVisualTopo parser = new ParserVisualTopo( str[0], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
 
         sid = mApp.setSurveyFromName( parser.mName, false );
@@ -492,7 +492,7 @@ public class TopoDroidActivity extends Activity
       long sid = 0;
       try {
         // import PocketTopo (only data for the first trip)
-        PocketTopoParser parser = new PocketTopoParser( str[0], str[1], true ); // apply_declination = true
+        ParserPocketTopo parser = new ParserPocketTopo( str[0], str[1], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
 
         sid = mApp.setSurveyFromName( parser.mName, false );
