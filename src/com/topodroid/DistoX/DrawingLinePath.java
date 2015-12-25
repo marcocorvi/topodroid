@@ -54,7 +54,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     super( DrawingPath.DRAWING_PATH_LINE, true, false );
     // DrawingBrushPaths.makePaths( );
     // mCnt = ++ mCount;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLinePath " + mCnt + " cstr type " + line_type );
+    // TDLog.Log( TDLog.LOG_PATH, "DrawingLinePath " + mCnt + " cstr type " + line_type );
 
     mLineType = line_type;
     mReversed = false;
@@ -116,7 +116,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       ret.retracePath();
       return ret;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "LINE in error " + e.toString() );
+      TDLog.Error( "LINE in error " + e.toString() );
     }
     return null;
   }
@@ -236,6 +236,14 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
+  void flipReversed() 
+  {
+    mReversed = ! mReversed;
+    // retracePath();
+    setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+    computeUnitNormal();
+  }
+
   boolean isReversed() { return mReversed; }
 
   public int lineType() { return mLineType; }
@@ -331,7 +339,7 @@ public class DrawingLinePath extends DrawingPointLinePath
         pt.toDataStream( dos );
       }
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "LINE out error " + e.toString() );
+      TDLog.Error( "LINE out error " + e.toString() );
     }
   }
 

@@ -126,7 +126,7 @@ public class CalibGMDialog extends Dialog
     // mButtonCancel.setOnClickListener( this );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, -1 );
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       MyKeyboard.registerEditText( mKeyboard, mETname, MyKeyboard.FLAG_SIGN );
     } else {
       mETname.setInputType( TopoDroidConst.NUMBER_SIGNED );
@@ -139,7 +139,7 @@ public class CalibGMDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "GM dialog onClick button " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "GM dialog onClick button " + b.getText().toString() );
     if ( b == mButtonOK ) {
       String name = mETname.getText().toString();
       if ( name == null || name.length() == 0 ) {
@@ -171,7 +171,7 @@ public class CalibGMDialog extends Dialog
 
   private void setEditable( EditText et, KeyListener kl, boolean editable, int flag )
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       et.setKeyListener( null );
       et.setClickable( true );
       et.setFocusable( editable );

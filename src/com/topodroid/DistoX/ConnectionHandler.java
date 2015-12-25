@@ -106,7 +106,7 @@ class ConnectionHandler extends Handler
 
    void start()
    {  
-     // TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler start()");
+     // TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler start()");
      mClient = false;
      mDevice = null;
      mSyncService.start();
@@ -114,14 +114,14 @@ class ConnectionHandler extends Handler
 
    void stop() 
    { 
-     // TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler stop()");
+     // TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler stop()");
      stopSendThread();
      mSyncService.stop();
    }
 
    void connect( BluetoothDevice device )
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler connect() " + device.getName() );
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler connect() " + device.getName() );
      if ( mDevice != device ) {
        mRun = false;
        if ( mSendThread != null ) {
@@ -144,7 +144,7 @@ class ConnectionHandler extends Handler
    {
      if ( mDevice == null ) return;
      if ( ! mClient ) return;
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler reconnect() ");
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler reconnect() ");
      if ( mSendThread != null ) stopSendThread();
      while ( mSyncService.getConnectState() == SyncService.STATE_NONE ) {
        try {
@@ -159,7 +159,7 @@ class ConnectionHandler extends Handler
   
    void connectionFailed()
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler connectionFailed() ");
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler connectionFailed() ");
      if ( mClient ) {
        mClient = false;
        mDevice = null;
@@ -172,7 +172,7 @@ class ConnectionHandler extends Handler
    // device will be used when n-n (instead of 1-1)
    void disconnect( BluetoothDevice device )
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler disconnect() ");
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler disconnect() ");
      // if ( device.getName() != null && device.getName().equals( mDevice.getName() ) {
        stopSendThread();
        mSyncService.disconnect();
@@ -182,7 +182,7 @@ class ConnectionHandler extends Handler
 
    void syncDevice( BluetoothDevice device )
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler syncDevice() ");
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler syncDevice() ");
      // if ( device.getName() != null && device.getName().equals( mDevice.getName() ) {
        doSyncCounter();
      // }
@@ -190,13 +190,13 @@ class ConnectionHandler extends Handler
 
    boolean writeBytes( byte[] buffer ) 
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler write CNT " + buffer[0] + " key " + buffer[1] );
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler write CNT " + buffer[0] + " key " + buffer[1] );
      return mSyncService.writeBuffer( buffer );
    }
 
    void startSendThread()
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler startSendThread()");
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler startSendThread()");
      mRun = true;
      mSendThread = new SendThread( mBufferQueue );
      mSendThread.start();
@@ -204,7 +204,7 @@ class ConnectionHandler extends Handler
 
    void stopSendThread()
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ConnectionHandler stopSendThread()");
+     TDLog.Log( TDLog.LOG_SYNC, "ConnectionHandler stopSendThread()");
      mRun = false;
      if ( mSendThread != null ) {
        try {
@@ -230,7 +230,7 @@ class ConnectionHandler extends Handler
      mAck[0] = (byte)cnt;
      mAck[1] = DataListener.ACK; // 0
      mAck[2] = DataListener.EOL;
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "ACK write <" + cnt + ">" );
+     TDLog.Log( TDLog.LOG_SYNC, "ACK write <" + cnt + ">" );
      return writeBytes( mAck );
    }
 
@@ -240,7 +240,7 @@ class ConnectionHandler extends Handler
      mAck[0] = (byte)mSendCounter;
      mAck[1] = DataListener.SYNC;
      mAck[2] = DataListener.EOL;
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "SYNC write <" + mSendCounter + ">" );
+     TDLog.Log( TDLog.LOG_SYNC, "SYNC write <" + mSendCounter + ">" );
      return writeBytes( mAck );
    }
 
@@ -258,7 +258,7 @@ class ConnectionHandler extends Handler
    //
    void onRecv( int bytes, byte[] buffer ) 
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "recv " + bytes + " length " + + buffer.length );
+     TDLog.Log( TDLog.LOG_SYNC, "recv " + bytes + " length " + + buffer.length );
      if ( buffer.length < 2 ) {
        return;
      }
@@ -273,16 +273,16 @@ class ConnectionHandler extends Handler
          ConnectionQueueItem item = mBufferQueue.find( cnt );
          if ( item != null ) {
            mBufferQueue.remove( item );
-           TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "recv ACK <" + cnt + "> removed. queue size " + mBufferQueue.size() );
+           TDLog.Log( TDLog.LOG_SYNC, "recv ACK <" + cnt + "> removed. queue size " + mBufferQueue.size() );
          } else {
-           TopoDroidLog.Error( "recv ACK <" + cnt + "> not found" );
+           TDLog.Error( "recv ACK <" + cnt + "> not found" );
          }
        }
        return;
      }
 
      if ( mRecvCounter != cnt ) {
-       TopoDroidLog.Error( "recv ERROR <" + cnt + "|" + key + "> expected " + mRecvCounter );
+       TDLog.Error( "recv ERROR <" + cnt + "|" + key + "> expected " + mRecvCounter );
        // should ack again ?
        // doAcknowledge( cnt );
        return;
@@ -307,7 +307,7 @@ class ConnectionHandler extends Handler
        k0 = k+1;
        ++kk;
      }
-     TopoDroidLog.Log( TopoDroidLog.LOG_SYNC,
+     TDLog.Log( TDLog.LOG_SYNC,
         "recv <" + cnt + "|" + key + "> len " + buffer.length + " data[" + data.length + "]: " + data_str );
 
      switch ( key ) {
@@ -417,7 +417,7 @@ class ConnectionHandler extends Handler
     buf[2+len] = DataListener.EOL;
     for ( int k=0; k<len; ++k ) buf[2+k] = (byte)data.charAt(k);
     mBufferQueue.add( buf );
-    TopoDroidLog.Log( TopoDroidLog.LOG_SYNC,
+    TDLog.Log( TDLog.LOG_SYNC,
       "enqueue <" + mSendCounter + "|" + key + "> queue " + mBufferQueue.size() + " data[" + len + "]: " + data );
     mSendCounter = increaseCounter( mSendCounter );
   }
@@ -615,13 +615,13 @@ class ConnectionHandler extends Handler
               if ( buffer[0] == lastByte ) {
                 ++ cnt;
               }
-              TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "lastByte " + lastByte + " cnt " + cnt );
+              TDLog.Log( TDLog.LOG_SYNC, "lastByte " + lastByte + " cnt " + cnt );
               if ( cnt > 4 ) {
                 // bail-out
                 disconnect( mDevice );
               } else {
                 lastByte = buffer[0];
-                TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "data write <" + buffer[0] + "|" + buffer[1] + ">" );
+                TDLog.Log( TDLog.LOG_SYNC, "data write <" + buffer[0] + "|" + buffer[1] + ">" );
                 if ( writeBytes( item.mData ) ) {
                   cnt = 0;
                 } else {
@@ -634,14 +634,14 @@ class ConnectionHandler extends Handler
         } catch ( InterruptedException e ) {
         }
       }
-      TopoDroidLog.Log( TopoDroidLog.LOG_SYNC, "SendThread exiting");
+      TDLog.Log( TDLog.LOG_SYNC, "SendThread exiting");
     }
   }
 
   @Override
   public void handleMessage( Message msg )
   {
-    TopoDroidLog.Log(TopoDroidLog.LOG_SYNC, "handle message: " + msg.arg1 );
+    TDLog.Log(TDLog.LOG_SYNC, "handle message: " + msg.arg1 );
     Bundle bundle; 
     switch (msg.what) {
       case SyncService.MESSAGE_LOST_CONN: // 5

@@ -99,13 +99,13 @@ public class CurrentStationDialog extends Dialog
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
-      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
       MyKeyboard.registerEditText( mKeyboard, mName, flag);
     } else {
       mKeyboard.hide();
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mName.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       }
     }
@@ -151,7 +151,7 @@ public class CurrentStationDialog extends Dialog
   @Override
   public void onClick(View v) 
   {
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "CurrentStationDialog onClick() " );
+    // TDLog.Log(  TDLog.LOG_INPUT, "CurrentStationDialog onClick() " );
     Button b = (Button) v;
     String name = mName.getText().toString().trim();
     String error = mContext.getResources().getString( R.string.error_name_required );
@@ -216,7 +216,7 @@ public class CurrentStationDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;

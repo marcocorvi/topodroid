@@ -72,7 +72,7 @@ public class CalibImportDialog extends Dialog
     // setTitleColor( 0x006d6df6 );
     setTitle( R.string.import_title );
 
-    File[] files = TopoDroidPath.getCalibFiles();
+    File[] files = TDPath.getCalibFiles();
     ArrayList<String> names = new ArrayList<String>();
     if ( files != null ) {
       for ( File f : files ) { 
@@ -107,7 +107,7 @@ public class CalibImportDialog extends Dialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     String item = ((TextView) view).getText().toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "CalibImportDialog onItemClick() " + item.toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "CalibImportDialog onItemClick() " + item.toString() );
 
     // hide();
     mList.setOnItemClickListener( null );

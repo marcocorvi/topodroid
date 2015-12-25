@@ -157,10 +157,10 @@ public class CalibActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00no = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsno : iconsno;
+    // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
+    // icons00no = ( TDSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
-    mNrButton1 = 2 + ( TopoDroidSetting.mLevelOverNormal? 1 : 0 );
+    mNrButton1 = 2 + ( TDSetting.mLevelOverNormal? 1 : 0 );
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = new Button( this );
@@ -182,7 +182,7 @@ public class CalibActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mListView.setAdapter( mButtonView1.mAdapter );
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "app mCID " + mApp.mCID );
+    // TDLog.Log( TDLog.LOG_CALIB, "app mCID " + mApp.mCID );
     setNameEditable( mApp.mCID >= 0 );
     if ( isSaved ) {
       CalibInfo info = mApp.getCalibInfo();
@@ -217,7 +217,7 @@ public class CalibActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
+    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
 
     mMenu = (ListView) findViewById( R.id.menu );
@@ -236,7 +236,7 @@ public class CalibActivity extends Activity
       return;
     }
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "onClick(View) " + view.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "onClick(View) " + view.toString() );
     Button b = (Button)view;
 
     if ( b == mImage ) {
@@ -299,7 +299,7 @@ public class CalibActivity extends Activity
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "calib delite" );
+          // TDLog.Log( TDLog.LOG_INPUT, "calib delite" );
           doDelete();
         }
       }
@@ -386,7 +386,7 @@ public class CalibActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Error( "search requested" );
+    // TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
     startActivity( intent );
@@ -406,7 +406,7 @@ public class CalibActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Error( "key down: code " + code );
+        TDLog.Error( "key down: code " + code );
     }
     return false;
   }
@@ -418,7 +418,7 @@ public class CalibActivity extends Activity
     Resources res = getResources();
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
     mMenu.setAdapter( mMenuAdapter );
@@ -450,7 +450,7 @@ public class CalibActivity extends Activity
           // new CalibExportDialog( this, this ).show();
           new ExportDialog( this, this, TopoDroidConst.mCalibExportTypes, R.string.title_calib_export ).show();
         }
-      } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
+      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
         if ( mApp.myCalib != null ) {
           askDelete();
         }

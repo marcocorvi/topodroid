@@ -71,7 +71,7 @@ public class DrawingAreaDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingAreaDialog onClick() " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingAreaDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOk ) {
       mArea.setVisible( mCBvisible.isChecked() );

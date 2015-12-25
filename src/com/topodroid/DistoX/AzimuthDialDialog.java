@@ -86,7 +86,7 @@ public class AzimuthDialDialog extends Dialog
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog::onCreate" );
+    // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
     setContentView(R.layout.azimuth_dial_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -153,7 +153,7 @@ public class AzimuthDialDialog extends Dialog
     }
 
     Button b = (Button) v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "AzimuthDialDialog onClick button " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "AzimuthDialDialog onClick button " + b.getText().toString() );
 
     // if ( b == mBTback ) {
     //   mAzimuth -= 5;

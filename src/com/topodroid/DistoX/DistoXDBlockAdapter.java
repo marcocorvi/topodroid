@@ -167,26 +167,26 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     holder.tvFrom.setText( b.mFrom );
     holder.tvTo.setText( b.mTo );
 
-    holder.tvLength.setText(  String.format(Locale.ENGLISH, "%1$.2f", b.mLength * TopoDroidSetting.mUnitLength ) );
-    holder.tvCompass.setText( String.format(Locale.ENGLISH, "%1$.1f", b.mBearing * TopoDroidSetting.mUnitAngle ) );
-    holder.tvClino.setText(   String.format(Locale.ENGLISH, "%1$.1f", b.mClino * TopoDroidSetting.mUnitAngle ) );
+    holder.tvLength.setText(  String.format(Locale.ENGLISH, "%1$.2f", b.mLength * TDSetting.mUnitLength ) );
+    holder.tvCompass.setText( String.format(Locale.ENGLISH, "%1$.1f", b.mBearing * TDSetting.mUnitAngle ) );
+    holder.tvClino.setText(   String.format(Locale.ENGLISH, "%1$.1f", b.mClino * TDSetting.mUnitAngle ) );
     holder.tvNote.setText( b.toNote() );
 
     holder.tvFrom.setOnClickListener( this );
     holder.tvTo.setOnClickListener( this );
-    if ( TopoDroidSetting.mLevelOverBasic ) {
+    if ( TDSetting.mLevelOverBasic ) {
       holder.tvFrom.setOnLongClickListener( this );
       holder.tvTo.setOnLongClickListener( this );
     }
 
-    if ( holder.tvFrom.getTextSize() != TopoDroidSetting.mTextSize ) {
-      holder.tvId.setTextSize( TopoDroidSetting.mTextSize );
-      holder.tvFrom.setTextSize( TopoDroidSetting.mTextSize );
-      holder.tvTo.setTextSize( TopoDroidSetting.mTextSize );
-      holder.tvLength.setTextSize( TopoDroidSetting.mTextSize );
-      holder.tvCompass.setTextSize( TopoDroidSetting.mTextSize );
-      holder.tvClino.setTextSize( TopoDroidSetting.mTextSize );
-      holder.tvNote.setTextSize( TopoDroidSetting.mTextSize );
+    if ( holder.tvFrom.getTextSize() != TDSetting.mTextSize ) {
+      holder.tvId.setTextSize( TDSetting.mTextSize );
+      holder.tvFrom.setTextSize( TDSetting.mTextSize );
+      holder.tvTo.setTextSize( TDSetting.mTextSize );
+      holder.tvLength.setTextSize( TDSetting.mTextSize );
+      holder.tvCompass.setTextSize( TDSetting.mTextSize );
+      holder.tvClino.setTextSize( TDSetting.mTextSize );
+      holder.tvNote.setTextSize( TDSetting.mTextSize );
     }
 
     if ( show_ids ) {

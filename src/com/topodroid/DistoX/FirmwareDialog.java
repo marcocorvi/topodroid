@@ -132,24 +132,24 @@ class FirmwareDialog extends Dialog
           return;
         }
         if ( mBtnDump.isChecked() ) {
-          TopoDroidLog.LogFile( "Firmware dump to " + filename );
-          File fp = new File( TopoDroidPath.getBinFile( filename ) );
+          TDLog.LogFile( "Firmware dump to " + filename );
+          File fp = new File( TDPath.getBinFile( filename ) );
           if ( fp.exists() ) {
             Toast.makeText( mParent, mParent.getResources().getString(R.string.firmware_file_exists), Toast.LENGTH_SHORT).show();
             return;    
           }
           askDump( filename );
         } else if ( mBtnUpload.isChecked() ) {
-          TopoDroidLog.LogFile( "Firmware upload from " + filename );
-          File fp = new File( TopoDroidPath.getBinFile( filename ) );
+          TDLog.LogFile( "Firmware upload from " + filename );
+          File fp = new File( TDPath.getBinFile( filename ) );
           if ( ! fp.exists() ) {
-            TopoDroidLog.Error( "inexistent upload firmware file " + filename );
+            TDLog.Error( "inexistent upload firmware file " + filename );
             return;    
           }
           int fw = FirmwareUtils.readFirmwareFirmware( fp );
-          TopoDroidLog.LogFile( "Detected Firmware version " + fw );
+          TDLog.LogFile( "Detected Firmware version " + fw );
           // int hw = mApp.readFirmwareHardware();
-          // TopoDroidLog.LogFile( "Firmware version " + fw + " Hardware version " + hw );
+          // TDLog.LogFile( "Firmware version " + fw + " Hardware version " + hw );
           // // Log.v( "DistoX", "HW " + hw + " FW " + fw );
           // // Toast.makeText( mParent, "HARDWARE " + hw, Toast.LENGTH_LONG ).show();
           // askUpload( filename, areCompatible(hw,fw) );
@@ -166,9 +166,9 @@ class FirmwareDialog extends Dialog
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          TopoDroidLog.LogFile( "Firmware dumping to file " + filename );
+          TDLog.LogFile( "Firmware dumping to file " + filename );
           int ret = mApp.dumpFirmware( filename );
-          TopoDroidLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
+          TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
           Toast.makeText( mParent, 
             String.format( mParent.getResources().getString(R.string.firmware_file_dumped), filename, ret ),
             Toast.LENGTH_SHORT).show();
@@ -180,15 +180,15 @@ class FirmwareDialog extends Dialog
 
   void askUpload( final String filename, final boolean compatible )
   {
-    TopoDroidLog.LogFile( "FW/HW compatibility " + (compatible? "yes" : "no") );
+    TDLog.LogFile( "FW/HW compatibility " + (compatible? "yes" : "no") );
     String title = mParent.getResources().getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
     new TopoDroidAlertDialog( mContext, mParent.getResources(), title,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          TopoDroidLog.LogFile( "Firmware uploading from file " + filename );
+          TDLog.LogFile( "Firmware uploading from file " + filename );
           int ret = mApp.uploadFirmware( filename );
-          TopoDroidLog.LogFile( "Firmware upload result " + ret );
+          TDLog.LogFile( "Firmware upload result " + ret );
           Toast.makeText( mParent, 
             String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret ),
             Toast.LENGTH_SHORT).show();

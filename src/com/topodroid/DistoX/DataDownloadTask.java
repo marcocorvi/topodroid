@@ -28,7 +28,7 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 
   DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister ) // FIXME LISTER
   {
-    // TopoDroidLog.Error( "DataDownloadTask cstr" );
+    // TDLog.Error( "DataDownloadTask cstr" );
     mApp = app;
     mLister = lister;
   }
@@ -41,7 +41,7 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     int nRead = mApp.downloadDataBatch( mLister );
     // if ( nRead < 0 ) {
     //   Toast.makeText( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ], Toast.LENGTH_SHORT ).show();
-    // TopoDroidLog.Error( "doInBackground read " + nRead );
+    // TDLog.Error( "doInBackground read " + nRead );
     return nRead;
   }
 
@@ -49,13 +49,13 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   // protected void onProgressUpdate( Integer... values)
   // {
   //   super.onProgressUpdate( values );
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "onProgressUpdate " + values );
+  //   // TDLog.Log( TDLog.LOG_COMM, "onProgressUpdate " + values );
   // }
 
   @Override
   protected void onPostExecute( Integer res )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "onPostExecute res " + res );
+    // TDLog.Log( TDLog.LOG_COMM, "onPostExecute res " + res );
     if ( res != null ) {
       int r = res.intValue();
       mLister.refreshDisplay( r, true ); 

@@ -57,7 +57,7 @@ public class NumStation extends NumSurveyPoint
 
   NumStation( String id, NumStation from, float d, float b, float c, int extend )
   {
-    // TopoDroidLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
+    // TDLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
     name = id;
     v = from.v - d * TDMath.sind( c );
     float h0 = d * TDMath.abs( TDMath.cosd( c ) );

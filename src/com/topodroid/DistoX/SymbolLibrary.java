@@ -76,7 +76,7 @@ class SymbolLibrary
             n0 = n0.right;
           }
         } else {
-          TopoDroidLog.Error( "Double insertion of symbol " + mPrefix + v.mThName );
+          TDLog.Error( "Double insertion of symbol " + mPrefix + v.mThName );
           ret = false;
           break;
         }

@@ -48,7 +48,7 @@ public class ShotDeleteDialog extends Dialog
     mContext = context;
     mParent  = parent;
     mBlk = blk;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "PhotoSensorDialog");
+    // TDLog.Log( TDLog.LOG_PHOTO, "PhotoSensorDialog");
   }
 
 // -------------------------------------------------------------------
@@ -56,7 +56,7 @@ public class ShotDeleteDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_PHOTO, "ShotDeleteDialog onCreate" );
+    // TDLog.Log(  TDLog.LOG_PHOTO, "ShotDeleteDialog onCreate" );
     setContentView(R.layout.shot_delete_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -77,7 +77,7 @@ public class ShotDeleteDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
     if ( b == mButtonDelete ) {
       mParent.doDeleteShot( mBlk.mId );
     // } else if ( b == mButtonCancel ) {

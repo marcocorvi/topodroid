@@ -111,7 +111,7 @@ class ItemPickerDialog extends Dialog
     super.onCreate( savedInstanceState );
     // requestWindowFeature(Window.FEATURE_NO_TITLE);
     
-    if ( TopoDroidSetting.mPickerType == TopoDroidSetting.PICKER_GRID ) {
+    if ( TDSetting.mPickerType == TDSetting.PICKER_GRID ) {
       mUseText = false;
       setContentView(R.layout.item_picker2_dialog);
       getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
@@ -133,8 +133,8 @@ class ItemPickerDialog extends Dialog
     }
 
     mRecentLayout = (LinearLayout) findViewById( R.id.layout2 );
-    mRecent = new ItemButton[ TopoDroidSetting.mRecentNr ];
-    for ( int k=0; k<TopoDroidSetting.mRecentNr; ++k ) {
+    mRecent = new ItemButton[ TDSetting.mRecentNr ];
+    for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       mRecent[k] = new ItemButton( mContext );
       mRecent[k].setOnClickListener( this );
     }
@@ -252,7 +252,7 @@ class ItemPickerDialog extends Dialog
 
   private void setRecentButtons( Symbol symbols[], float sx, float sy )
   {
-    for ( int k=0; k<TopoDroidSetting.mRecentNr; ++k ) {
+    for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       Symbol p = symbols[k];
       if ( p == null ) break;
       mRecent[k].reset( p.getPaint(), p.getPath(), sx, sy );
@@ -277,7 +277,7 @@ class ItemPickerDialog extends Dialog
   private void createAdapters()
   {
 
-    // if ( TopoDroidSetting.mLevelOverBasic ) 
+    // if ( TDSetting.mLevelOverBasic ) 
     {
       mPointAdapter = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
       int np = mPointLib.mSymbolNr;
@@ -300,7 +300,7 @@ class ItemPickerDialog extends Dialog
     }
     mLineAdapter.setSelectedItem( mParent.mCurrentLine ); 
 
-    // if ( TopoDroidSetting.mLevelOverBasic )
+    // if ( TDSetting.mLevelOverBasic )
     {
       mAreaAdapter  = new ItemAdapter( mContext, this, R.layout.item, new ArrayList<ItemSymbol>() );
       int na = mAreaLib.mSymbolNr;
@@ -319,7 +319,7 @@ class ItemPickerDialog extends Dialog
     // Log.v( TopoDroidApp.TAG, "ItemPickerDialog ... updateList type " + mItemType );
     switch ( mItemType ) {
       case DrawingActivity.SYMBOL_POINT:
-        // if ( TopoDroidSetting.mLevelOverBasic )
+        // if ( TDSetting.mLevelOverBasic )
         {
           mAdapter = mPointAdapter;
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
@@ -337,7 +337,7 @@ class ItemPickerDialog extends Dialog
         mSeekBar.setVisibility( View.INVISIBLE );
         break;
       case DrawingActivity.SYMBOL_AREA:
-        // if ( TopoDroidSetting.mLevelOverBasic )
+        // if ( TDSetting.mLevelOverBasic )
         {
           mAdapter = mAreaAdapter;
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
@@ -388,13 +388,13 @@ class ItemPickerDialog extends Dialog
   // pos 
   public void setTypeAndItem( int index )
   {
-    // Log.v( TopoDroidLog.TAG, "setTypeAndItem type " + mItemType  + " item " + index );
+    // Log.v( TDLog.TAG, "setTypeAndItem type " + mItemType  + " item " + index );
     ItemSymbol is;
     switch ( mItemType ) {
       case DrawingActivity.SYMBOL_POINT: 
-        if ( mPointAdapter != null /* && TopoDroidSetting.mLevelOverBasic */ ) {
+        if ( mPointAdapter != null /* && TDSetting.mLevelOverBasic */ ) {
           is = mPointAdapter.get( index );
-          // Log.v( TopoDroidLog.TAG, "setTypeAndItem type point pos " + index + " index " + is.mIndex );
+          // Log.v( TDLog.TAG, "setTypeAndItem type point pos " + index + " index " + is.mIndex );
           mParent.mCurrentPoint = is.mIndex;
           mParent.pointSelected( is.mIndex, false ); // mPointAdapter.getSelectedItem() );
           setSeekBarProgress();
@@ -403,7 +403,7 @@ class ItemPickerDialog extends Dialog
       case DrawingActivity.SYMBOL_LINE: 
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
-          // Log.v( TopoDroidLog.TAG, "setTypeAndItem type line pos " + index + " index " + is.mIndex );
+          // Log.v( TDLog.TAG, "setTypeAndItem type line pos " + index + " index " + is.mIndex );
           if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
             mParent.mCurrentLine = is.mIndex;
             mParent.lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
@@ -413,7 +413,7 @@ class ItemPickerDialog extends Dialog
         }
         break;
       case DrawingActivity.SYMBOL_AREA: 
-        if ( mAreaAdapter != null /* && TopoDroidSetting.mLevelOverBasic */ ) {
+        if ( mAreaAdapter != null /* && TDSetting.mLevelOverBasic */ ) {
           // mAreaPos = index;
           is = mAreaAdapter.get( index );
           mParent.mCurrentArea = is.mIndex;
@@ -429,7 +429,7 @@ class ItemPickerDialog extends Dialog
   {
     switch ( mItemType ) {
       case DrawingActivity.SYMBOL_POINT: 
-        // if ( TopoDroidSetting.mLevelOverBasic ) 
+        // if ( TDSetting.mLevelOverBasic ) 
         {
           mParent.pointSelected( mParent.mCurrentPoint, false );
           // mSeekBar.setEnabled( DrawingBrushPaths.mPointLib.isPointOrientable( mParent.mCurrentPoint ) );
@@ -442,7 +442,7 @@ class ItemPickerDialog extends Dialog
         }
         break;
       case DrawingActivity.SYMBOL_AREA: 
-        // if ( TopoDroidSetting.mLevelOverBasic ) 
+        // if ( TDSetting.mLevelOverBasic ) 
         {
           mParent.areaSelected( mParent.mCurrentArea, false );
         }
@@ -455,7 +455,7 @@ class ItemPickerDialog extends Dialog
   // void rotatePoint( int angle )
   // {
   //   if ( mPointAdapter == null ) return;
-  //   if ( TopoDroidSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
+  //   if ( TDSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
   //     // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
   //     mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
   //   }
@@ -464,7 +464,7 @@ class ItemPickerDialog extends Dialog
   void setPointOrientation( int angle )
   {
     if ( mPointAdapter == null ) return;
-    if ( /* TopoDroidSetting.mLevelOverBasic && */ mItemType == DrawingActivity.SYMBOL_POINT ) {
+    if ( /* TDSetting.mLevelOverBasic && */ mItemType == DrawingActivity.SYMBOL_POINT ) {
       // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
       mPointAdapter.setPointOrientation( mParent.mCurrentPoint, angle );
       // ItemSymbol item = mPointAdapter.getSelectedItem();
@@ -480,9 +480,15 @@ class ItemPickerDialog extends Dialog
   public void onBackPressed ()
   {
     // Log.v( TopoDroidApp.TAG, "onBackPressed type " + mItemType );
+    itemSelected();
+    cancel();
+  }
+
+  private void itemSelected()
+  {
     switch ( mItemType ) {
       case DrawingActivity.SYMBOL_POINT: 
-        // if ( TopoDroidSetting.mLevelOverBasic )
+        // if ( TDSetting.mLevelOverBasic )
         {
           mParent.pointSelected( mParent.mCurrentPoint, true );
         }
@@ -491,13 +497,12 @@ class ItemPickerDialog extends Dialog
         mParent.lineSelected( mParent.mCurrentLine, true ); 
         break;
       case DrawingActivity.SYMBOL_AREA: 
-        // if ( TopoDroidSetting.mLevelOverBasic )
+        // if ( TDSetting.mLevelOverBasic )
         {
           mParent.areaSelected( mParent.mCurrentArea, true );
         }
         break;
     }
-    cancel();
   }
 
   @Override
@@ -518,7 +523,7 @@ class ItemPickerDialog extends Dialog
         setRecent(3);
         break;
       case R.id.item_point:
-        // if ( TopoDroidSetting.mLevelOverBasic )
+        // if ( TDSetting.mLevelOverBasic )
         {
           if ( mItemType != DrawingActivity.SYMBOL_POINT ) {
             mItemType = DrawingActivity.SYMBOL_POINT;
@@ -537,7 +542,7 @@ class ItemPickerDialog extends Dialog
         }
         break;
       case R.id.item_area:
-        // if ( TopoDroidSetting.mLevelOverBasic )
+        // if ( TDSetting.mLevelOverBasic )
         {
           if ( mItemType != DrawingActivity.SYMBOL_AREA ) {
             mItemType = DrawingActivity.SYMBOL_AREA;
@@ -555,22 +560,7 @@ class ItemPickerDialog extends Dialog
         }
         break;
 
-      // case R.id.item_left:
-      //   if ( TopoDroidSetting.mLevelOverBasic ) rotatePoint( -10 );
-      //   break;
-      // case R.id.item_right:
-      //   if ( TopoDroidSetting.mLevelOverBasic ) rotatePoint( 10 );
-      //   break;
-
-      // case R.id.item_cancel:
-      //   dismiss();
-      //   break;
-      // case R.id.item_ok:
-      //   setTypeFromCurrent();
-      //   break;
       default: 
-        // if ( mAdapter != null ) mAdapter.doClick( view );
-        // if ( mList != null ) mList.invalidate();
         break;
     }
     // dismiss();
@@ -601,6 +591,7 @@ class ItemPickerDialog extends Dialog
 
   public void closeDialog()
   {  
+    itemSelected();
     dismiss();
   }
 }

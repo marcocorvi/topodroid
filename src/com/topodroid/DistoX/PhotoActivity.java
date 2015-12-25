@@ -109,11 +109,11 @@ public class PhotoActivity extends Activity
 
   public void updateDisplay( )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
+    // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     DataHelper data = app.mData;
     if ( data != null && app.mSID >= 0 ) {
       List< PhotoInfo > list = data.selectAllPhotos( app.mSID, TopoDroidApp.STATUS_NORMAL );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "update shot list size " + list.size() );
+      // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updatePhotoList( list );
       setTitle( app.mySurvey );
     // } else {
@@ -125,7 +125,7 @@ public class PhotoActivity extends Activity
 
   private void updatePhotoList( List< PhotoInfo > list )
   {
-    // TopoDroidLog.Log(TopoDroidLog.LOG_PHOTO, "updatePhotoList size " + list.size() );
+    // TDLog.Log(TDLog.LOG_PHOTO, "updatePhotoList size " + list.size() );
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
@@ -145,7 +145,7 @@ public class PhotoActivity extends Activity
   {
     // CharSequence item = ((TextView) view).getText();
     // String value = item.toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PhotoDialog onItemClick() " + value );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoDialog onItemClick() " + value );
 
     // if ( value.equals( getResources().getString( R.string.back_to_survey ) ) ) {
     //   updateDisplay( );
@@ -158,7 +158,7 @@ public class PhotoActivity extends Activity
   public void startPhotoDialog( TextView tv, int pos )
   {
      mSavePhoto = mDataAdapter.get(pos);
-     String filename = TopoDroidPath.getSurveyJpgFile( app.mySurvey, Long.toString(mSavePhoto.id) );
+     String filename = TDPath.getSurveyJpgFile( app.mySurvey, Long.toString(mSavePhoto.id) );
      (new PhotoEditDialog( this, this, mSavePhoto, filename )).show();
   }
 
@@ -173,7 +173,7 @@ public class PhotoActivity extends Activity
       mPhotoTitle   = name;
       mPhotoComment = comment;
       File imagefile = new File( app.getSurveyJpgFile( Long.toString(mPhotoId) ) );
-      // TopoDroidLog.Log("DistoX", "photo " + imagefile.toString() );
+      // TDLog.Log("DistoX", "photo " + imagefile.toString() );
 
       Uri outfileuri = Uri.fromFile( imagefile );
       try {
@@ -195,7 +195,7 @@ public class PhotoActivity extends Activity
     switch ( reqCode ) {
       case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
         if ( resCode == Activity.RESULT_OK ) {
-          // TopoDroidLog.Log("DistoX", "insert photo in db " + mPhotoId );
+          // TDLog.Log("DistoX", "insert photo in db " + mPhotoId );
           app.mData.insertPhoto( app.mSID, -1L, mShotId, mPhotoTitle, mPhotoComment );
         }
     }
@@ -228,7 +228,7 @@ public class PhotoActivity extends Activity
   {
     app.mData.deletePhoto( photo.sid, photo.id );
 
-    File imagefile = new File( TopoDroidPath.getSurveyJpgFile( app.mySurvey, Long.toString(photo.id) ) );
+    File imagefile = new File( TDPath.getSurveyJpgFile( app.mySurvey, Long.toString(photo.id) ) );
     imagefile.delete();
 
     updateDisplay( ); // FIXME
@@ -236,7 +236,7 @@ public class PhotoActivity extends Activity
 
   public void updatePhoto( PhotoInfo photo, String comment )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "updatePhoto comment " + comment );
+    // TDLog.Log( TDLog.LOG_PHOTO, "updatePhoto comment " + comment );
     if ( app.mData.updatePhoto( photo.sid, photo.id, comment ) ) {
       // if ( app.mListRefresh ) {
       //   // This works but it refreshes the whole list

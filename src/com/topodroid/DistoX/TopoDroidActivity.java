@@ -209,7 +209,7 @@ public class TopoDroidActivity extends Activity
       closeMenu();
       return;
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onClick() " + view.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "TopoDroidActivity onClick() " + view.toString() );
     Intent intent;
     // int status = mStatus;
     Button b0 = (Button)view;
@@ -256,7 +256,7 @@ public class TopoDroidActivity extends Activity
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
         try {
-          intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + TopoDroidPath.getDatabase() ) );
+          intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + TDPath.getDatabase() ) );
           intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
@@ -303,7 +303,7 @@ public class TopoDroidActivity extends Activity
       return true;
     }
     CharSequence item = ((TextView) view).getText();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onItemLongClick() " + item.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "TopoDroidActivity onItemLongClick() " + item.toString() );
     // switch ( mStatus ) {
     //   case STATUS_SURVEY:
     //     startSurvey( item.toString(), 0 ); // , -1, -1 );
@@ -342,12 +342,12 @@ public class TopoDroidActivity extends Activity
           intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
           startActivity( intent );
         } else { 
-          if ( TopoDroidSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
+          if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
             intent = new Intent( this, TopoDroidPreferences.class );
             intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
             startActivity( intent );
           } else {  
-            if ( TopoDroidSetting.mLevelOverAdvanced && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
+            if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
               (new ConnectDialog( this, mApp )).show();
             } else { 
               if ( p++ == pos ) { // ABOUT
@@ -500,7 +500,7 @@ public class TopoDroidActivity extends Activity
         mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
 
         long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
-        TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "SID " + sid + " inserted shots. return " + id );
+        TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " inserted shots. return " + id );
 
         if ( parser.mStartFrom != null ) {
           mApp.insert2dPlot( sid, "1", parser.mStartFrom );
@@ -516,23 +516,23 @@ public class TopoDroidActivity extends Activity
 
         //   if ( plan == null ) plan = "";
         //   if ( extended == null ) extended = "";
-        //   TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "SID " + sid + " scraps " + plan.length() + " " + extended.length() );
+        //   TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " scraps " + plan.length() + " " + extended.length() );
         //   try {
         //     FIXME tdr vs. th2
-        //     String filename1 = TopoDroidPath.getTh2File( parser.mName + "-1p.th2" );
-        //     TopoDroidApp.checkPath( filename1 );
+        //     String filename1 = TDPath.getTh2File( parser.mName + "-1p.th2" );
+        //     TDPath.checkPath( filename1 );
         //     FileWriter fw1 = new FileWriter( filename1 );
         //     PrintWriter pw1 = new PrintWriter( fw1 );
         //     pw1.format("%s", plan );
         //     
-        //     String filename2 = TopoDroidPath.getTh2File( parser.mName + "-1s.th2" );
-        //     TopoDroidApp.checkPath( filename2 );
+        //     String filename2 = TDPath.getTh2File( parser.mName + "-1s.th2" );
+        //     TDPath.checkPath( filename2 );
         //     FileWriter fw2 = new FileWriter( filename2 );
         //     PrintWriter pw2 = new PrintWriter( fw2 );
         //     pw2.format("%s", extended );
 
         //   } catch ( IOException e ) {
-        //     TopoDroidLog.Error( "SID " + sid + " scraps IO error " + e );
+        //     TDLog.Error( "SID " + sid + " scraps IO error " + e );
         //   }
         // }
       } catch ( ParserException e ) {
@@ -564,7 +564,7 @@ public class TopoDroidActivity extends Activity
     {
       String filename = str[0];
       Archiver archiver = new Archiver( mApp );
-      int ret = archiver.unArchive( TopoDroidPath.getZipFile( filename ), filename.replace(".zip", ""));
+      int ret = archiver.unArchive( TDPath.getZipFile( filename ), filename.replace(".zip", ""));
       return (long)ret;
     }
 
@@ -591,7 +591,7 @@ public class TopoDroidActivity extends Activity
     setTitle( R.string.import_title );
     setTitleColor( TopoDroidConst.COLOR_CONNECTED );
     if ( filename.endsWith(".th") ) {
-      String filepath = TopoDroidPath.getImportFile( filename );
+      String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" );
       if ( mApp.mData.hasSurveyName( name ) ) {
         Toast.makeText(this, R.string.import_already, Toast.LENGTH_SHORT).show();
@@ -600,13 +600,13 @@ public class TopoDroidActivity extends Activity
       // Toast.makeText(this, R.string.import_wait, Toast.LENGTH_SHORT).show();
       new ImportTherionTask().execute( filepath, name );
     } else if ( filename.endsWith(".dat") ) {
-      String filepath = TopoDroidPath.getImportFile( filename );
+      String filepath = TDPath.getImportFile( filename );
       new ImportCompassTask().execute( filepath );
     } else if ( filename.endsWith(".top") ) {
-      String filepath = TopoDroidPath.getImportFile( filename );
+      String filepath = TDPath.getImportFile( filename );
       new ImportPocketTopoTask().execute( filepath, filename ); // TODO pass the drawer as arg
     } else if ( filename.endsWith(".tro") ) {
-      String filepath = TopoDroidPath.getImportFile( filename );
+      String filepath = TDPath.getImportFile( filename );
       new ImportVisualTopoTask().execute( filepath ); 
     } else if ( filename.endsWith(".zip") ) {
       Toast.makeText(this, R.string.import_zip_wait, Toast.LENGTH_LONG).show();
@@ -636,8 +636,8 @@ public class TopoDroidActivity extends Activity
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TopoDroidSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TopoDroidSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
     mMenu.setAdapter( mMenuAdapter );
@@ -693,7 +693,7 @@ public class TopoDroidActivity extends Activity
     resetButtonBar();
 
     // if ( savedInstanceState == null) {
-    //   TopoDroidLog.Log(TopoDroidLog.LOG_MAIN, "onCreate null savedInstanceState" );
+    //   TDLog.Log(TDLog.LOG_MAIN, "onCreate null savedInstanceState" );
     // } else {
     //   Bundle map = savedInstanceState.getBundle(DISTOX_KEY);
     //   restoreInstanceState( map );
@@ -754,11 +754,11 @@ public class TopoDroidActivity extends Activity
   {
     int size = mApp.setListViewHeight( mListView );
 
-    // icons00 = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
-    mNrButton1 = 3 + ( TopoDroidSetting.mLevelOverAdvanced ? 2 : 0 );
+    // icons00 = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
+    mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
     mButton1 = new Button[mNrButton1];
 
-    // mMenuImage.setBackgroundResource( ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
+    // mMenuImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     mApp.setButtonBackground( mMenuImage, size, R.drawable.iz_menu );
 
     for (int k=0; k<mNrButton1; ++k ) {
@@ -779,7 +779,7 @@ public class TopoDroidActivity extends Activity
   // {
   //   Toast.makeText( this, "You must close TopoDroid\nto make change effective", Toast.LENGTH_LONG ).show();
   //   // int size = mApp.setListViewHeight( mListView );
-  //   // // TopoDroidLog.Error( "scale " + TopoDroidApp.mSizeButtons );
+  //   // // TDLog.Error( "scale " + TopoDroidApp.mSizeButtons );
   //   // icons00 = ( TopoDroidApp.mSizeButtons == 2 )? ixons : icons;
 
   //   // for (int k=0; k<mNrButton1; ++k ) {
@@ -823,7 +823,7 @@ public class TopoDroidActivity extends Activity
   // private void restoreInstanceState(Bundle map )
   // {
   //   if ( map != null ) {
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onRestoreInstanceState non-null bundle");
+  //     TDLog.Log( TDLog.LOG_MAIN, "onRestoreInstanceState non-null bundle");
   //     mStatus        = map.getInt( DISTOX_KEY_STATUS );
   //     mOldStatus     = map.getInt( DISTOX_KEY_OLD_STATUS );
   //     mSplay         = map.getBoolean( DISTOX_KEY_SPLAY );
@@ -834,30 +834,30 @@ public class TopoDroidActivity extends Activity
   //     if ( survey != null ) setSurveyFromName( survey, false );
   //     if ( calib  != null ) setCalibFromName( calib );
   //   } else {
-  //     TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onRestoreInstanceState null bundle");
+  //     TDLog.Log( TDLog.LOG_MAIN, "onRestoreInstanceState null bundle");
   //     // mStatus ??
   //   }
   // }
 
   // private void restoreInstanceFromData()
   // { 
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "restoreInstanceFromData ");
+  //   // TDLog.Log( TDLog.LOG_MAIN, "restoreInstanceFromData ");
   //   DataHelper data = mApp.mData;
   //   // String status = data.getValue( "DISTOX_STATUS" );
-  //   // // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "restore STATUS " + status );
+  //   // // TDLog.Log( TDLog.LOG_MAIN, "restore STATUS " + status );
   //   // if ( status != null ) {
   //   //   String[] vals = status.split( " " );
   //   //   // FIXME
   //   // }
   //   String survey = data.getValue( "DISTOX_SURVEY" );
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "restore SURVEY >" + survey + "<" );
+  //   // TDLog.Log( TDLog.LOG_MAIN, "restore SURVEY >" + survey + "<" );
   //   if ( survey != null && survey.length() > 0 ) {
   //     mApp.setSurveyFromName( survey, false );
   //   } else {
   //     mApp.setSurveyFromName( null, false );
   //   }
   //   String calib = data.getValue( "DISTOX_CALIB" );
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "restore CALIB >" + calib + "<" );
+  //   // TDLog.Log( TDLog.LOG_MAIN, "restore CALIB >" + calib + "<" );
   //   if ( calib != null && calib.length() > 0 ) {
   //     mApp.setCalibFromName( calib );
   //   } else {
@@ -867,12 +867,12 @@ public class TopoDroidActivity extends Activity
     
   // private void saveInstanceToData()
   // {
-  //   // TopoDroidLog.Log(TopoDroidLog.LOG_MAIN, "saveInstanceToData");
+  //   // TDLog.Log(TDLog.LOG_MAIN, "saveInstanceToData");
   //   DataHelper data = mApp.mData;
   //   data.setValue( "DISTOX_STATUS", String.format("%d ", 1 ) ); // mStatus ) );
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save STATUS " + sw.getBuffer().toString() );
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save SURVEY >" + mApp.mySurvey + "<" );
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "save CALIB >" + mApp.getCalib() + "<" );
+  //   // TDLog.Log( TDLog.LOG_MAIN, "save STATUS " + sw.getBuffer().toString() );
+  //   // TDLog.Log( TDLog.LOG_MAIN, "save SURVEY >" + mApp.mySurvey + "<" );
+  //   // TDLog.Log( TDLog.LOG_MAIN, "save CALIB >" + mApp.getCalib() + "<" );
   //   // data.setValue( "DISTOX_SURVEY", (mApp.mySurvey == null)? "" : mApp.mySurvey );
   //   data.setValue( "DISTOX_CALIB", (mApp.myCalib == null)? "" : mApp.myCalib );
   // }
@@ -881,7 +881,7 @@ public class TopoDroidActivity extends Activity
   // @Override
   // public void onSaveInstanceState(Bundle outState) 
   // {
-  //   TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onSaveInstanceState");
+  //   TDLog.Log( TDLog.LOG_MAIN, "onSaveInstanceState");
   //   // outState.putBundle(DISTOX_KEY, mList.saveState());
   //   outState.putInt(DISTOX_KEY_STATUS, mStatus );
   //   outState.putInt(DISTOX_KEY_OLD_STATUS, mOldStatus );
@@ -905,14 +905,14 @@ public class TopoDroidActivity extends Activity
   {
     super.onStart();
     // restoreInstanceFromFile();
-    // TopoDroidLog.Log( TopoDroidLoLogOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + mApp.mBTAdapter.isEnabled() );
+    // TDLog.Log( TopoDroidLoLogOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + mApp.mBTAdapter.isEnabled() );
 
     if ( do_check_bt ) {
       do_check_bt = false;
       if ( mApp.mBTAdapter == null ) {
         Toast.makeText( this, R.string.no_bt, Toast.LENGTH_SHORT ).show();
       } else {
-        if ( TopoDroidSetting.mCheckBT == 1 && ! mApp.mBTAdapter.isEnabled() ) {    
+        if ( TDSetting.mCheckBT == 1 && ! mApp.mBTAdapter.isEnabled() ) {    
           Intent enableIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE );
           startActivityForResult( enableIntent, REQUEST_ENABLE_BT );
         } else {
@@ -928,7 +928,7 @@ public class TopoDroidActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onResume " );
+    // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
     mApp.resumeComm();
 
     // restoreInstanceFromFile();
@@ -943,7 +943,7 @@ public class TopoDroidActivity extends Activity
   protected synchronized void onPause() 
   { 
     super.onPause();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onPause " );
+    // TDLog.Log( TDLog.LOG_MAIN, "onPause " );
     mApp.suspendComm();
   }
 
@@ -963,7 +963,7 @@ public class TopoDroidActivity extends Activity
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onDestroy " );
+    // TDLog.Log( TDLog.LOG_MAIN, "onDestroy " );
     // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
     // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();
@@ -1006,7 +1006,7 @@ public class TopoDroidActivity extends Activity
 
   public void onActivityResult( int request, int result, Intent intent ) 
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onActivityResult() request " + mRequestName[request] + " result: " + result );
+    // TDLog.Log( TDLog.LOG_MAIN, "onActivityResult() request " + mRequestName[request] + " result: " + result );
     DataHelper data = mApp.mData;
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
@@ -1025,13 +1025,13 @@ public class TopoDroidActivity extends Activity
         break;
 
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_MAIN, "onActivityResult() done " );
+    // TDLog.Log( TDLog.LOG_MAIN, "onActivityResult() done " );
   }
 
   @Override
   public boolean onSearchRequested()
   {
-    TopoDroidLog.Error( "search requested" );
+    TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
     startActivity( intent );
@@ -1051,7 +1051,7 @@ public class TopoDroidActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Error( "key down: code " + code );
+        TDLog.Error( "key down: code " + code );
     }
     return false;
   }
@@ -1103,7 +1103,7 @@ public class TopoDroidActivity extends Activity
   @Override
   public boolean onOptionsItemSelected(MenuItem item) 
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
     // Handle item selection
     Intent intent;
     if ( item == mMIsymbol ) { 

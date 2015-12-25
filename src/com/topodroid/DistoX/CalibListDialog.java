@@ -101,7 +101,7 @@ public class CalibListDialog extends Dialog
   // @Override
   public void onClick(View v) 
   {
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "CalibListDialog onClick() " );
+    // TDLog.Log(  TDLog.LOG_INPUT, "CalibListDialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnNew ) {
       hide();
@@ -138,7 +138,7 @@ public class CalibListDialog extends Dialog
   {
     CharSequence item = ((TextView) view).getText();
     String name = item.toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "CalibListDialog onItemClick() " + name );
+    // TDLog.Log(  TDLog.LOG_INPUT, "CalibListDialog onItemClick() " + name );
     // TODO open calibration activity
     mParent.openCalibration( name );
     dismiss();

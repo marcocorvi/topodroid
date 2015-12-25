@@ -97,9 +97,9 @@ public class SketchNewShotDialog extends Dialog
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
 
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
-      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
       MyKeyboard.registerEditText( mKeyboard, mETfrom, flag );
       MyKeyboard.registerEditText( mKeyboard, mETto,   flag );
 
@@ -115,7 +115,7 @@ public class SketchNewShotDialog extends Dialog
 
     } else {
       mKeyboard.hide();
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
         mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       }
@@ -198,7 +198,7 @@ public class SketchNewShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;

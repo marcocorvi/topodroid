@@ -96,14 +96,14 @@ class SymbolLineLibrary extends SymbolLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    File dir = new File( TopoDroidPath.APP_LINE_PATH );
+    File dir = new File( TDPath.APP_LINE_PATH );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TopoDroidLog.Error( "line with null ThName" );
+          TDLog.Error( "line with null ThName" );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {
@@ -140,7 +140,7 @@ class SymbolLineLibrary extends SymbolLibrary
     Symbol symbol = getSymbolByFilename( fname );
     if ( symbol == null ) {
       // Log.v( TopoDroidApp.TAG, "load missing line " + fname );
-      File file = new File( TopoDroidPath.APP_SAVE_LINE_PATH + fname );
+      File file = new File( TDPath.APP_SAVE_LINE_PATH + fname );
       if ( ! file.exists() ) return false;
 
       symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );

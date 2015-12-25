@@ -57,7 +57,7 @@ public class DrawingPointPath extends DrawingPath
   public DrawingPointPath( int type, float x, float y, int scale, String options )
   {
     super( DrawingPath.DRAWING_PATH_POINT );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
+    // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );
     mOptions = options;
@@ -109,7 +109,7 @@ public class DrawingPointPath extends DrawingPath
       //   DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
       // }
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "POINT in error " + e.toString() );
+      TDLog.Error( "POINT in error " + e.toString() );
     }
     return null;
   }
@@ -158,7 +158,7 @@ public class DrawingPointPath extends DrawingPath
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      if ( TopoDroidSetting.mUnscaledPoints ) {
+      if ( TDSetting.mUnscaledPoints ) {
         resetPath( 4 * scale );
       }
       mTransformedPath = new Path( mPath );
@@ -212,7 +212,7 @@ public class DrawingPointPath extends DrawingPath
   @Override
   public void setOrientation( double angle ) 
   { 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + mPointType + " setOrientation " + angle );
+    // TDLog.Log( TDLog.LOG_PATH, "Point " + mPointType + " setOrientation " + angle );
     // Log.v( TopoDroidApp.TAG, "Point::setOrientation " + angle );
     mOrientation = angle; 
     while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
@@ -265,7 +265,7 @@ public class DrawingPointPath extends DrawingPath
     pw.format(Locale.ENGLISH, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
                               DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
     if ( mOrientation != 0.0 ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "point.toTherion type " + mPointType + " orientation " + mOrientation );
+      // TDLog.Log( TDLog.LOG_PATH, "point.toTherion type " + mPointType + " orientation " + mOrientation );
       pw.format(Locale.ENGLISH, " -orientation %.2f", mOrientation);
     }
 
@@ -305,7 +305,7 @@ public class DrawingPointPath extends DrawingPath
       dos.writeInt( mScale );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "POINT out error " + e.toString() );
+      TDLog.Error( "POINT out error " + e.toString() );
     }
   }
 

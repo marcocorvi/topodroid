@@ -55,7 +55,7 @@ public class DistoXAnnotations extends Dialog // Activity
 
   private void load( )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_NOTE, "reading from file " + mFilename );
+    // TDLog.Log( TDLog.LOG_NOTE, "reading from file " + mFilename );
     try {
       FileReader fr = new FileReader( mFilename );
       BufferedReader br = new BufferedReader( fr );
@@ -66,36 +66,36 @@ public class DistoXAnnotations extends Dialog // Activity
       }
       fr.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Error(  "load IOexception " + e.toString() );
+      TDLog.Error(  "load IOexception " + e.toString() );
     }
   }
 
   private void save( )
   {
     try {
-      TopoDroidApp.checkPath( mFilename );
+      TDPath.checkPath( mFilename );
       FileWriter fw = new FileWriter( mFilename, false );
       PrintWriter pw = new PrintWriter( fw );
       pw.format( "%s", mETtext.getText() );
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Error(  "save IOexception " + e.toString() );
+      TDLog.Error(  "save IOexception " + e.toString() );
     }
   }
 
   public static void append( String title, String text )
   {
-    String filename = TopoDroidPath.getSurveyNoteFile( title );
+    String filename = TDPath.getSurveyNoteFile( title );
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename, true );
       PrintWriter pw = new PrintWriter( fw );
       pw.format( "%s", text );
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Error(  "append IOexception " + e.toString() );
+      TDLog.Error(  "append IOexception " + e.toString() );
     }
   }
 
@@ -115,7 +115,7 @@ public class DistoXAnnotations extends Dialog // Activity
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
-    mFilename = TopoDroidPath.getSurveyNoteFile( mTitle );
+    mFilename = TDPath.getSurveyNoteFile( mTitle );
     // mTVtitle.setText( mTitle );
     setTitle( R.string.title_note );
 

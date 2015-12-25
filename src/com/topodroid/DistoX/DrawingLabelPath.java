@@ -70,7 +70,7 @@ public class DrawingLabelPath extends DrawingPointPath
       // Log.v("DistoX", "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
       return new DrawingLabelPath( text, ccx, ccy, scale, options );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "LABEL in error " + e.toString() );
+      TDLog.Error( "LABEL in error " + e.toString() );
     }
     return null;
   }
@@ -79,7 +79,7 @@ public class DrawingLabelPath extends DrawingPointPath
   public void draw( Canvas canvas, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLabelPath::draw " + mText );
+      // TDLog.Log( TDLog.LOG_PATH, "DrawingLabelPath::draw " + mText );
       canvas.drawTextOnPath( mText, mPath, 0f, 0f, mPaint );
     }
   }
@@ -88,7 +88,7 @@ public class DrawingLabelPath extends DrawingPointPath
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingLabelPath::draw[matrix] " + mText );
+      // TDLog.Log( TDLog.LOG_PATH, "DrawingLabelPath::draw[matrix] " + mText );
       setTextSize();
       mTransformedPath = new Path( mPath );
       mTransformedPath.transform( matrix );
@@ -115,7 +115,7 @@ public class DrawingLabelPath extends DrawingPointPath
         case SCALE_XL: f = 2.00f; break;
       }
       mPaint = new Paint( DrawingBrushPaths.labelPaint );
-      mPaint.setTextSize( TopoDroidSetting.mLabelSize * f );
+      mPaint.setTextSize( TDSetting.mLabelSize * f );
       makeStraightPath( 0, 0, 20*f*mText.length(), 0, cx, cy );
     }
   }
@@ -130,7 +130,7 @@ public class DrawingLabelPath extends DrawingPointPath
       case SCALE_L:  f = 1.41f; break;
       case SCALE_XL: f = 2.00f; break;
     }
-    mPaint.setTextSize( TopoDroidSetting.mLabelSize * f );
+    mPaint.setTextSize( TDSetting.mLabelSize * f );
   }
 
   @Override
@@ -175,7 +175,7 @@ public class DrawingLabelPath extends DrawingPointPath
       dos.writeUTF( ( mText != null )? mText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "LABEL out error " + e.toString() );
+      TDLog.Error( "LABEL out error " + e.toString() );
     }
   }
 }

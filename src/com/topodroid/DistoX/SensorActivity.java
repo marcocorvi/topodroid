@@ -208,7 +208,7 @@ public class SensorActivity extends Activity
     {
       if ( event.sensor.getType() == mSensorType ) {
         mValues = event.values;
-        // TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "sensorChanged (" + mValues[0] + ", " + mValues[1] + ", " + mValues[2] + ")");
+        // TDLog.Log( TDLog.LOG_SENSOR, "sensorChanged (" + mValues[0] + ", " + mValues[1] + ", " + mValues[2] + ")");
         String value = "";
         switch ( mSensorType ) {
           case Sensor.TYPE_LIGHT:
@@ -242,7 +242,7 @@ public class SensorActivity extends Activity
   public void onClick( View view )
   {
     Button b = (Button) view;
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "SensorActivity onClick() button " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "SensorActivity onClick() button " + b.getText().toString() );
     String error;
     if ( b == mBTok ) {
       String type = mETtype.getText().toString().trim();
@@ -258,7 +258,7 @@ public class SensorActivity extends Activity
         mETvalue.setError( error );
         return;
       }
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "sensor " + type + " " + value );
+      // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + type + " " + value );
       Intent intent = new Intent();
       intent.putExtra( TopoDroidTag.TOPODROID_SENSOR_TYPE, type );
       intent.putExtra( TopoDroidTag.TOPODROID_SENSOR_VALUE, value );

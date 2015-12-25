@@ -74,7 +74,7 @@ public class FirmwareFileDialog extends Dialog
     // setTitleColor( 0x006d6df6 );
     setTitle( R.string.firmware_file_title );
 
-    File[] files = TopoDroidPath.getBinFiles();
+    File[] files = TDPath.getBinFiles();
     ArrayList<String> names = new ArrayList<String>();
     if ( files != null ) {
       for ( File f : files ) { 
@@ -103,7 +103,7 @@ public class FirmwareFileDialog extends Dialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     String item = ((TextView) view).getText().toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "FirmwareFileDialog onItemClick() " + item.toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "FirmwareFileDialog onItemClick() " + item.toString() );
 
     // hide();
     mList.setOnItemClickListener( null );

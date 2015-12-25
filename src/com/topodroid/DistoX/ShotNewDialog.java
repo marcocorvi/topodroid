@@ -94,7 +94,7 @@ public class ShotNewDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "ShotNewDialog onCreate" );
+    // TDLog.Log( TDLog.LOG_SHOT, "ShotNewDialog onCreate" );
     setContentView(R.layout.shot_new_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -110,7 +110,7 @@ public class ShotNewDialog extends Dialog
     mETbackbearing  = (EditText) findViewById(R.id.shot_backbearing );
     mETbackclino    = (EditText) findViewById(R.id.shot_backclino );
 
-    if ( ! TopoDroidSetting.mBacksight ) {
+    if ( ! TDSetting.mBacksight ) {
       TextView forsight = (TextView) findViewById(R.id.shot_forsight );
       forsight.setVisibility( View.GONE );
       mLbacksight.setVisibility( View.GONE );
@@ -125,9 +125,9 @@ public class ShotNewDialog extends Dialog
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
-      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
       MyKeyboard.registerEditText( mKeyboard, mETfrom, flag);
       MyKeyboard.registerEditText( mKeyboard, mETto,   flag);
       
@@ -143,7 +143,7 @@ public class ShotNewDialog extends Dialog
       MyKeyboard.registerEditText( mKeyboard, mETdown,         MyKeyboard.FLAG_POINT );
     } else {
       mKeyboard.hide();
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
         mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       }
@@ -167,7 +167,7 @@ public class ShotNewDialog extends Dialog
       mETfrom.setHint( mPrevBlk.mTo );
       mETto.setHint( DistoXStationName.increment( mPrevBlk.mTo ) );
     } else {
-      if ( TopoDroidSetting.mSurveyStations == 1 ) {
+      if ( TDSetting.mSurveyStations == 1 ) {
         mETfrom.setHint( DistoXStationName.mInitialStation );
         mETto.setHint( DistoXStationName.mSecondStation );
       } else {
@@ -177,7 +177,7 @@ public class ShotNewDialog extends Dialog
     }
     String current_name = mApp.getCurrentStationName();
     if ( current_name != null ) {
-      if ( TopoDroidSetting.isSurveyForward() ) {
+      if ( TDSetting.isSurveyForward() ) {
         mETfrom.setHint( current_name );
       } else {
         mETto.setHint( current_name );
@@ -260,7 +260,7 @@ public class ShotNewDialog extends Dialog
 
     Button b = (Button) v;
     String val;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "ShotNewDialog onClick button " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "ShotNewDialog onClick button " + b.getText().toString() );
 
     if ( b == mBtnOk || b == mBtnSave ) {
       String shot_from =  null;
@@ -389,7 +389,7 @@ public class ShotNewDialog extends Dialog
         }
         mApp.setCurrentStationName( null );
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Error( "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
+        TDLog.Error( "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
       }
       if ( blk != null ) {
         resetData( shot_to );
@@ -417,7 +417,7 @@ public class ShotNewDialog extends Dialog
       mTimer.cancel( true );
       mTimer = null;
     }
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;

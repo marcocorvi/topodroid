@@ -116,7 +116,7 @@ public class DeviceUtil
 
   static void bindDevice( BluetoothDevice device )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_COMM, " bind device ..." );
+    TDLog.Log( TDLog.LOG_COMM, " bind device ..." );
     if ( device == null ) return;
 
     String PIN_CODE = "0000";
@@ -131,11 +131,11 @@ public class DeviceUtil
       Method m_createBond = device.getClass().getMethod( "createBond", classes3 );
       m_createBond.invoke( device );
     } catch ( NoSuchMethodException e ) {
-      TopoDroidLog.Error( "Failed to set PIN: no method " + e.getMessage() );
+      TDLog.Error( "Failed to set PIN: no method " + e.getMessage() );
     } catch ( InvocationTargetException e ) {
-      TopoDroidLog.Error( "Failed to set PIN: invoke " + e.getMessage() );
+      TDLog.Error( "Failed to set PIN: invoke " + e.getMessage() );
     } catch (IllegalAccessException e ) {
-      TopoDroidLog.Error( "Failed to set PIN: illegal access " + e.getMessage() );
+      TDLog.Error( "Failed to set PIN: illegal access " + e.getMessage() );
     }
   }
 }

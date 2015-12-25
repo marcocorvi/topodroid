@@ -67,10 +67,10 @@ class DrawingUtil
 
   static void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
   {
-    xmin = (xmin - 10.0f) / TopoDroidSetting.mUnitGrid;
-    xmax = (xmax + 10.0f) / TopoDroidSetting.mUnitGrid;
-    ymin = (ymin - 10.0f) / TopoDroidSetting.mUnitGrid;
-    ymax = (ymax + 10.0f) / TopoDroidSetting.mUnitGrid;
+    xmin = (xmin - 10.0f) / TDSetting.mUnitGrid;
+    xmax = (xmax + 10.0f) / TDSetting.mUnitGrid;
+    ymin = (ymin - 10.0f) / TDSetting.mUnitGrid;
+    ymax = (ymax + 10.0f) / TDSetting.mUnitGrid;
     float x1 = toSceneX( xmin ) - xoff;
     float x2 = toSceneX( xmax ) - xoff;
     float y1 = toSceneY( ymin ) - yoff;
@@ -79,11 +79,11 @@ class DrawingUtil
 
     DrawingPath dpath = null;
     for ( int x = Math.round(xmin); x <= xmax; x += 1 ) {
-      float x0 = toSceneX( x * TopoDroidSetting.mUnitGrid ) - xoff;
+      float x0 = toSceneX( x * TDSetting.mUnitGrid ) - xoff;
       addGridLine( x, x0, x0, y1, y2, surface );
     }
     for ( int y = Math.round(ymin); y <= ymax; y += 1 ) {
-      float y0 = toSceneY( y * TopoDroidSetting.mUnitGrid ) - yoff;
+      float y0 = toSceneY( y * TDSetting.mUnitGrid ) - yoff;
       addGridLine( y, x1, x2, y0, y0, surface );
     }
   }

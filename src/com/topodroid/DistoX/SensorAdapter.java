@@ -49,7 +49,7 @@ class SensorAdapter extends ArrayAdapter< SensorInfo >
     if ( b != null ) {
       TextView tw = (TextView) v.findViewById( R.id.row_text );
       tw.setText( b.toString() );
-      tw.setTextSize( TopoDroidSetting.mTextSize );
+      tw.setTextSize( TDSetting.mTextSize );
       // tw.setTextColor( b.color() );
     }
     return v;

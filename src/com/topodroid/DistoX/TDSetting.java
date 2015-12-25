@@ -1,4 +1,4 @@
-/** @file TopoDroidSetting.java
+/** @file TDSetting.java
  *
  * @author marco corvi
  * @date jan 2014
@@ -16,7 +16,7 @@ import android.content.SharedPreferences.Editor;
 
 import android.util.Log;
 
-class TopoDroidSetting
+class TDSetting
 {
 
   // ---------------------------------------------------------
@@ -151,7 +151,7 @@ class TopoDroidSetting
   static boolean mLevelOverExperimental = false;
 
   static int mSizeButtons     = 1;      // action bar buttons scale (either 1 or 2)
-  static int mTextSize        = 14;     // list text size 
+  static int mTextSize        = 16;     // list text size 
   static boolean mKeyboard    = true;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -289,7 +289,7 @@ class TopoDroidSetting
   static int mZoomCtrl = 1;
   static boolean mSideDrag = false;
 
-  static float mUnit = 1.2f; // drawing unit
+  static float mUnit = 1.4f; // drawing unit
 
   // selection_radius = cutoff + closeness / zoom
   static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -439,7 +439,7 @@ class TopoDroidSetting
   // static private float tryFloat( SharedPreferences prefs, String key, String def_value,
   //                                float cur_value, float min_value, float max_value )
   // {
-  //   TopoDroidLog.Error("try float. def " + def_value + " cur " + cur_value + " min " + min_value + " max " + max_value );
+  //   TDLog.Error("try float. def " + def_value + " cur " + cur_value + " min " + min_value + " max " + max_value );
   //   float f = cur_value;
   //   try {
   //     f = Float.parseFloat( prefs.getString( key, def_value ) );
@@ -493,7 +493,7 @@ class TopoDroidSetting
     setActivityBooleans( prefs );
 
     mSizeButtons = tryInt( prefs, key[k++], "1" ); // choice: 0, 1 // DISTOX_SIZE_BUTTONS
-    mTextSize    = tryInt( prefs, key[k++], "14" );                // DISTOX_TEXT_SIZE
+    mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
 
     // ------------------- SURVEY PREFERENCES
     mCloseDistance = tryFloat( prefs, key[k++], "0.05" ); // DISTOX_CLOSE_DISTANCE
@@ -541,7 +541,7 @@ class TopoDroidSetting
     mLineAccuracy  = tryFloat( prefs, key[k++], "1" );              // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs, key[k++], "20"  );            // DISTOX_LINE_CORNER
     setLineStyleAndType( prefs.getString( key[k++], LINE_STYLE ) ); // DISTOX_LINE_STYLE
-    mUnit          = tryFloat( prefs, key[k++], "1.2" );            // DISTOX_DRAWING_UNIT 33
+    mUnit          = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 33
     mPickerType    = tryInt(   prefs, key[k++], "0" );              // DISTOX_PICKER_TYPE choice: 0, 1, 2
     mHThreshold    = tryFloat( prefs, key[k++], "70" );             // DISTOX_HTHRESHOLD
     mStationSize   = tryFloat( prefs, key[k++], "20" );             // DISTOX_STATION_SIZE 36
@@ -630,7 +630,7 @@ class TopoDroidSetting
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
     // if ( ! cwd.equals( mCWD ) ) {
     //   mCWD = cwd;
-    //   TopoDroidPath.setPaths( mCWD );
+    //   TDPath.setPaths( mCWD );
     //   mData.openDatabase();
     // }
   }
@@ -667,7 +667,7 @@ class TopoDroidSetting
       mSizeButtons = tryInt( prefs, k, "1" );
       if ( activity != null ) activity.resetButtonBar();
     } else if ( k.equals( key[ nk++ ] ) ) {   // DISTOX_TEXT_SIZE
-      mTextSize = tryInt( prefs, k, "14" );
+      mTextSize = tryInt( prefs, k, "16" );
   
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCloseDistance = tryFloat( prefs, k, "0.05" );
@@ -679,10 +679,10 @@ class TopoDroidSetting
       parseSurveyStations( prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION 6
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLength = prefs.getString( k, UNIT_LENGTH ).equals(UNIT_LENGTH) ?  1.0f : TopoDroidUtil.M2FT;
-      // TopoDroidLog.Log( TopoDroidLog.LOG_UNITS, "mUnitLength changed " + mUnitLength );
+      // TDLog.Log( TDLog.LOG_UNITS, "mUnitLength changed " + mUnitLength );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitAngle  = prefs.getString( k, UNIT_ANGLE ).equals(UNIT_ANGLE) ?  1.0f : TopoDroidUtil.DEG2GRAD;
-      // TopoDroidLog.Log( TopoDroidLog.LOG_UNITS, "mUnitAngle changed " + mUnitAngle );
+      // TDLog.Log( TDLog.LOG_UNITS, "mUnitAngle changed " + mUnitAngle );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAccelerationThr = tryFloat( prefs, k, "400" ); // DISTOX_ACCEL_THR 9
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -697,7 +697,7 @@ class TopoDroidSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TopoDroidConst.DDMMSS
                                                                        : TopoDroidConst.DEGREE;
-      // TopoDroidLog.Log( TopoDroidLog.LOG_UNITS, "mUnitLocation changed " + mUnitLocation );
+      // TDLog.Log( TDLog.LOG_UNITS, "mUnitLocation changed " + mUnitLocation );
     // } else if ( k.equals( key[ nk++ ] ) ) {
     //   try {
     //     mAltitude = Integer.parseInt( prefs.getString( k, ALTITUDE ) ); // DISTOX_ALTITUDE 15
@@ -744,7 +744,7 @@ class TopoDroidSetting
       setLineStyleAndType( prefs.getString( k, LINE_STYLE ) );
     } else if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_DRAWING_UNIT 36
       try {
-        f = Float.parseFloat( prefs.getString( k, "1.2" ) );
+        f = Float.parseFloat( prefs.getString( k, "1.4" ) );
         if ( f > 0 && f != mUnit ) {
           mUnit = f;
           DrawingBrushPaths.reloadPointLibrary( app.getResources() );
@@ -914,7 +914,7 @@ class TopoDroidSetting
     // } else if ( k.equals( key[ nk++ ] ) ) {
     //   mSketchSectionStep = Float.parseFloat( prefs.getString( k, "0.5") );
     } else {
-      TopoDroidLog.checkLogPreferences( prefs, k );
+      TDLog.checkLogPreferences( prefs, k );
     }
   }
 
@@ -1021,7 +1021,7 @@ class TopoDroidSetting
 
   static private String parseFloatValue( String value, float def, float min, float max )
   {
-    TopoDroidLog.Error("parse float " + value + " def " + def + " min " + min + " max " + max );
+    TDLog.Error("parse float " + value + " def " + def + " min " + min + " max " + max );
     float i = def;
     try {
       i = Float.parseFloat( value ); 

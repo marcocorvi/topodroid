@@ -103,7 +103,7 @@ public class SketchLinePath extends SketchPath
 
     // estimate number of points for the triangulated surface
     // FIXME divide by cos(clino)
-    int np = (1 + (int)(len/(cos_clino * TopoDroidSetting.mSketchSideSize)) );
+    int np = (1 + (int)(len/(cos_clino * TDSetting.mSketchSideSize)) );
     if ( np < SketchDef.POINT_MIN ) np = SketchDef.POINT_MIN;
     // if ( np > SketchDef.POINT_MAX ) np = SketchDef.POINT_MAX; 
     float step = len / np;

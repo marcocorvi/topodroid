@@ -113,14 +113,14 @@ class SymbolPointLibrary extends SymbolLibrary
     // if ( locale.equals( "name-de" ) ) iso = "UTF-8";
     // Charset.forName("ISO-8859-1")
 
-    File dir = new File( TopoDroidPath.APP_POINT_PATH );
+    File dir = new File( TDPath.APP_POINT_PATH );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolPoint symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TopoDroidLog.Error( "point with null ThName" );
+          TDLog.Error( "point with null ThName" );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {
@@ -156,7 +156,7 @@ class SymbolPointLibrary extends SymbolLibrary
     Symbol symbol = getSymbolByFilename( fname );
     if ( symbol == null ) {
       // Log.v( TopoDroidApp.TAG, "load missing point " + fname );
-      File file = new File( TopoDroidPath.APP_SAVE_POINT_PATH + fname );
+      File file = new File( TDPath.APP_SAVE_POINT_PATH + fname );
       if ( ! file.exists() ) return false;
 
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );

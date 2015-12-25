@@ -124,8 +124,8 @@ public class DrawingShotDialog extends Dialog
     mRBdup.setOnClickListener( this );
     mRBsurf.setOnClickListener( this );
     // mRBbackshot.setOnClickListener( this );
-    if ( TopoDroidSetting.mWallsType != TopoDroidSetting.WALLS_NONE 
-      && TopoDroidSetting.mLevelOverAdvanced 
+    if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
+      && TDSetting.mLevelOverAdvanced 
       && mBlock.mType == DistoXDBlock.BLOCK_MAIN_LEG
       && ( mParent.getPlotType() == PlotInfo.PLOT_PLAN || mParent.getPlotType() == PlotInfo.PLOT_EXTENDED ) ) {
       mRBwalls.setOnClickListener( this );
@@ -172,15 +172,15 @@ public class DrawingShotDialog extends Dialog
     }
     setTitle( String.format( mContext.getResources().getString( R.string.shot_title ), mBlock.mFrom, mBlock.mTo ) );
 
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
-      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
       MyKeyboard.registerEditText( mKeyboard, mETfrom, flag );
       MyKeyboard.registerEditText( mKeyboard, mETto,   flag );
       mKeyboard.hide();
     } else {
       mKeyboard.hide();
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
         mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       }
@@ -190,7 +190,7 @@ public class DrawingShotDialog extends Dialog
 
   public void onClick(View view)
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingShotDialog onClick() " + view.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingShotDialog onClick() " + view.toString() );
 
     Button b = (Button)view;
 
@@ -259,7 +259,7 @@ public class DrawingShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;

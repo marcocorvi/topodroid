@@ -463,7 +463,7 @@ public class SketchActivity extends ItemDrawer
   //      mBitmap   = bitmap;
   //      mHandler  = handler;
   //      mFullName = name;
-  //      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "ExportBitmapToFile " + mFullName );
+  //      // TDLog.Log( TDLog.LOG_PLOT, "ExportBitmapToFile " + mFullName );
   //   }
 
   //   @Override
@@ -471,7 +471,7 @@ public class SketchActivity extends ItemDrawer
   //   {
   //     try {
   //       String filename = mApp.getPngFileWithExt( mFullName );
-  //       TopoDroidApp.checkPath( filename );
+  //       TDPath.checkPath( filename );
   //       final FileOutputStream out = new FileOutputStream( filename );
   //       mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
   //       out.flush();
@@ -514,15 +514,15 @@ public class SketchActivity extends ItemDrawer
        mHandler  = handler;
        mModel    = model;
        mFullName = name;
-       // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveTh3File " + mFullName );
+       // TDLog.Log( TDLog.LOG_PLOT, "SaveTh3File " + mFullName );
     }
 
     @Override
     protected Boolean doInBackground(Intent... arg0)
     {
       try {
-        String filename = TopoDroidPath.getTh3FileWithExt( mFullName );
-        TopoDroidApp.checkPath( filename );
+        String filename = TDPath.getTh3FileWithExt( mFullName );
+        TDPath.checkPath( filename );
         FileWriter writer = new FileWriter( filename );
         BufferedWriter out = new BufferedWriter( writer );
         mModel.exportTherion( out, mFullName, PlotInfo.projName[ (int)mType ] );
@@ -552,7 +552,7 @@ public class SketchActivity extends ItemDrawer
   //     Handler saveHandler = new Handler(){
   //       @Override
   //       public void handleMessage(Message msg) {
-  //         String filename = TopoDroidPath.getTh3FileWithExt( mFullName );
+  //         String filename = TDPath.getTh3FileWithExt( mFullName );
   //         mModel.loadTh3( filename, null, mPainter );
   //         mSketchSurface.setModel( mModel );
   //         mSketchSurface.isDrawing = true;
@@ -567,7 +567,7 @@ public class SketchActivity extends ItemDrawer
 
   boolean doSaveTh3( boolean not_all_symbols )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, " savingTh3 " + mFullName );
+    // TDLog.Log( TDLog.LOG_PLOT, " savingTh3 " + mFullName );
     if ( mFullName != null && mSketchSurface != null ) {
       // if ( not_all_symbols ) {
       //   alertMissingSymbols();
@@ -603,15 +603,15 @@ public class SketchActivity extends ItemDrawer
          mHandler  = handler;
          mModel    = model;
          mFullName = name;
-         // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "SaveDxfFile " + mFullName );
+         // TDLog.Log( TDLog.LOG_PLOT, "SaveDxfFile " + mFullName );
       }
 
       @Override
       protected Boolean doInBackground(Intent... arg0)
       {
         try {
-          String filename = TopoDroidPath.getDxfFileWithExt( mFullName );
-          TopoDroidApp.checkPath( filename );
+          String filename = TDPath.getDxfFileWithExt( mFullName );
+          TDPath.checkPath( filename );
           FileWriter writer = new FileWriter( filename );
           PrintWriter out = new PrintWriter( writer );
           SketchDxf.write( out, mFullName, mModel );
@@ -710,7 +710,7 @@ public class SketchActivity extends ItemDrawer
       // mAllSymbols  = true; // by default there are all the symbols
 
       // now try to load drawings from therion file
-      String filename = TopoDroidPath.getTh3FileWithExt( mFullName );
+      String filename = TDPath.getTh3FileWithExt( mFullName );
       // SymbolsPalette missingSymbols = new SymbolsPalette();
       // mAllSymbols = 
         mModel.loadTh3( filename, null /* missingSymbols */, mPainter );
@@ -731,8 +731,8 @@ public class SketchActivity extends ItemDrawer
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00ok = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsok : iconsok;
+    // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
+    // icons00ok = ( TDSetting.mSizeButtons == 2 )? ixonsok : iconsok;
 
     mButton1 = new Button[ mNrButton1 ];
     int off = 3;
@@ -791,7 +791,7 @@ public class SketchActivity extends ItemDrawer
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
+    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
@@ -980,7 +980,7 @@ public class SketchActivity extends ItemDrawer
   {
     // mSketchSurface.clearReferences();
     mNum = new DistoXNum( list, mInfo.start, null, null ); // FIXME null: no barrier no hiding
-    if ( (! mNum.surveyAttached) && TopoDroidSetting.mCheckAttached ) {
+    if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
       Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
     mModel = new SketchModel( mInfo, mNum, mPainter );
@@ -1072,7 +1072,7 @@ public class SketchActivity extends ItemDrawer
 
   // void refreshSurface()
   // {
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "refresh surface");
+  //   // TDLog.Log( TDLog.LOG_PLOT, "refresh surface");
   //   mSketchSurface.refresh();
   // }
 
@@ -1162,10 +1162,10 @@ public class SketchActivity extends ItemDrawer
       return true;
     }
 
-    float d0 = TopoDroidSetting.mCloseCutoff + TopoDroidSetting.mCloseness / mInfo.zoom_3d;
+    float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mInfo.zoom_3d;
 
     WrapMotionEvent event = WrapMotionEvent.wrap(rawEvent);
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "SketchActivity onTouch() " );
+    // TDLog.Log( TDLog.LOG_INPUT, "SketchActivity onTouch() " );
     // dumpEvent( event );
 
     float x_canvas = event.getX();
@@ -1198,7 +1198,7 @@ public class SketchActivity extends ItemDrawer
       } else if ( mMode == SketchDef.MODE_DRAW || mMode == SketchDef.MODE_EDIT ) {
         mStartX = x_scene;
         mStartY = y_scene;
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
+        // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
         mPointCnt = 0;
         if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
           // mSketchSurface.isDrawing = true;
@@ -1247,9 +1247,9 @@ public class SketchActivity extends ItemDrawer
         float y_shift = y_canvas - mSaveY;
         if ( mMode == SketchDef.MODE_DRAW || mMode == SketchDef.MODE_EDIT ) {
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
-            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment ) {
+            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment ) {
               // mSketchSurface.isDrawing = true;
-              if ( ++mPointCnt % TopoDroidSetting.mLineType == 0 ) {
+              if ( ++mPointCnt % TDSetting.mLineType == 0 ) {
                 mCurrentLinePath.addPoint( x_scene, y_scene );
                 mSaveX = x_canvas;                 // reset start
                 mSaveY = y_canvas;
@@ -1308,10 +1308,10 @@ public class SketchActivity extends ItemDrawer
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
-            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
+            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment || (mPointCnt % TDSetting.mLineType) > 0 ) {
               mCurrentLinePath.addPoint( x_scene, y_scene );
             }
-            if ( mPointCnt > TopoDroidSetting.mLineType ) {
+            if ( mPointCnt > TDSetting.mLineType ) {
               SketchLinePath line = null;
               if ( mSymbol == SketchDef.SYMBOL_LINE ) {
                 line = new SketchLinePath( DrawingPath.DRAWING_PATH_LINE, mCurrentLine, mInfo.st1, mInfo.st2, mPainter );
@@ -1383,11 +1383,11 @@ public class SketchActivity extends ItemDrawer
           if ( mSymbol == SketchDef.SYMBOL_LINE /* || mSymbol == SketchDef.SYMBOL_AREA */ ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
-            if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TopoDroidSetting.mLineSegment || (mPointCnt % TopoDroidSetting.mLineType) > 0 ) {
+            if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment || (mPointCnt % TDSetting.mLineType) > 0 ) {
               mCurrentLinePath.addPoint( x_scene, y_scene );
             }
 
-            if ( mPointCnt > TopoDroidSetting.mLineType ) {
+            if ( mPointCnt > TDSetting.mLineType ) {
               if ( mEdit == SketchDef.EDIT_NONE ) {
                 // SketchLinePath edit_line =
                 //   new SketchLinePath( DrawingPath.DRAWING_PATH_LINE, mCurrentLine, mInfo.st1, mInfo.st2, mPainter );
@@ -1653,7 +1653,7 @@ public class SketchActivity extends ItemDrawer
       } else if ( b == mButton2[2] ) { // redo
         mModel.redo();
       } else if ( b == mButton2[3] ) { // symbols
-        if ( TopoDroidSetting.mPickerType == TopoDroidSetting.PICKER_RECENT ) { 
+        if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
           new ItemRecentDialog(this, this, mType ).show();
         } else {
           new ItemPickerDialog(this, this, mType, mSymbol ).show();
@@ -1662,7 +1662,7 @@ public class SketchActivity extends ItemDrawer
       } else if ( b == mButton3[1] ) { // refine triangles
         //   extrudeRegion();
         // Log.v("DistoX", "refine to max side ");
-        int split = mModel.refineToMaxSide( TopoDroidSetting.mSketchSideSize );
+        int split = mModel.refineToMaxSide( TDSetting.mSketchSideSize );
         if ( split == 0 ) { 
           Toast.makeText( this, getString(R.string.sketch_no_split), Toast.LENGTH_SHORT ).show();
         }
@@ -1753,7 +1753,7 @@ public class SketchActivity extends ItemDrawer
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "SketchActivity onOptionsItemSelected() " + item.toString() );
+      // TDLog.Log( TDLog.LOG_INPUT, "SketchActivity onOptionsItemSelected() " + item.toString() );
 
       if (item == mMIdelete ) {
         // TODO ask for confirmation: however file th3 is not deleted
@@ -1772,7 +1772,7 @@ public class SketchActivity extends ItemDrawer
         // setMode( SketchDef.MODE_HEAD );
         setMode( SketchDef.MODE_MOVE );
         // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
-        // mCompass = new SketchCompassSensor( this, sm, TopoDroidSetting.mCompassReadings );
+        // mCompass = new SketchCompassSensor( this, sm, TDSetting.mCompassReadings );
         mTimer = new TimerTask( this, this );
         mTimer.execute();
       } else if (item == mMIhelp ) {
@@ -1852,7 +1852,7 @@ public class SketchActivity extends ItemDrawer
       } else if ( p++ == pos ) { // 
         setMode( SketchDef.MODE_MOVE );
         // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
-        // mCompass = new SketchCompassSensor( this, sm, TopoDroidSetting.mCompassReadings );
+        // mCompass = new SketchCompassSensor( this, sm, TDSetting.mCompassReadings );
         mTimer = new TimerTask( this, this );
         mTimer.execute();
       } else if ( p++ == pos ) { // 
@@ -1947,7 +1947,7 @@ public class SketchActivity extends ItemDrawer
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Error( "search requested" );
+    // TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
     startActivity( intent );
@@ -1967,7 +1967,7 @@ public class SketchActivity extends ItemDrawer
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Error( "key down: code " + code );
+        TDLog.Error( "key down: code " + code );
     }
     return false;
   }

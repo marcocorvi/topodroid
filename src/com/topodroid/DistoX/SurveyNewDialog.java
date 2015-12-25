@@ -94,10 +94,10 @@ public class SurveyNewDialog extends Dialog
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
 
-    mEditStation.setText( TopoDroidSetting.mInitStation );
+    mEditStation.setText( TDSetting.mInitStation );
 
-    if ( TopoDroidSetting.mDefaultTeam.length() > 0 ) {
-      mEditTeam.setText( TopoDroidSetting.mDefaultTeam );
+    if ( TDSetting.mDefaultTeam.length() > 0 ) {
+      mEditTeam.setText( TDSetting.mDefaultTeam );
     }
 
     mEditDate.setText( TopoDroidUtil.currentDate() );
@@ -144,7 +144,7 @@ public class SurveyNewDialog extends Dialog
       return;
     }
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "SurveyDialog onClick() " + item.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "SurveyDialog onClick() " + item.toString() );
     if ( b == mBTsave ) {
       // Log.v( TopoDroidApp.TAG, "new survey save ");
       dismiss();
@@ -181,12 +181,12 @@ public class SurveyNewDialog extends Dialog
         try {
           decl = Double.parseDouble( decl_str );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Error( "parse Double error: declination " + decl_str );
+          TDLog.Error( "parse Double error: declination " + decl_str );
         }
       }
     }
 
-    String init_station = TopoDroidSetting.mInitStation;
+    String init_station = TDSetting.mInitStation;
     if ( mEditStation.getText() != null ) {
       String station = mEditStation.getText().toString().replaceAll("\\s+", "");
       if ( station.length() > 0 ) {

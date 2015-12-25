@@ -47,11 +47,11 @@ public class DrawingStationName extends DrawingPointPath
     mStation = null;
     mName = name;
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
+    // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
 
     setCenter( x, y ); // scene coords
     mDuplicate = false;
-    makeStraightPath( 0, 0, 2*TopoDroidSetting.mStationSize*mName.length(), 0, cx, cy );
+    makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
   public DrawingStationName( NumStation num_st, float x, float y )
@@ -64,12 +64,12 @@ public class DrawingStationName extends DrawingPointPath
     mStation = num_st;
     mName = num_st.name;
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
+    // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
     if ( num_st.mDuplicate ) mPaint = DrawingBrushPaths.duplicateStationPaint;
     setCenter( x, y ); // scene coords
     mDuplicate = num_st.mDuplicate;
     
-    makeStraightPath( 0, 0, 2*TopoDroidSetting.mStationSize*mName.length(), 0, cx, cy );
+    makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
   // defined in DrawingPointPath
@@ -84,7 +84,7 @@ public class DrawingStationName extends DrawingPointPath
   public void draw( Canvas canvas, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingStationName::draw LABEL " + mName );
+      // TDLog.Log( TDLog.LOG_PATH, "DrawingStationName::draw LABEL " + mName );
       canvas.drawTextOnPath( mName, mPath, 0f, 0f, mPaint );
     }
   }
@@ -93,7 +93,7 @@ public class DrawingStationName extends DrawingPointPath
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "DrawingStationName::draw[matrix] LABEL " + mName );
+      // TDLog.Log( TDLog.LOG_PATH, "DrawingStationName::draw[matrix] LABEL " + mName );
       mTransformedPath = new Path( mPath );
       mTransformedPath.transform( matrix );
       canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, mPaint );

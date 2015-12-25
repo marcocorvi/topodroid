@@ -102,13 +102,13 @@ public class PlotNewDialog extends Dialog
    
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       MyKeyboard.registerEditText( mKeyboard, mEditName,  MyKeyboard.FLAG_POINT_LCASE_2ND );
-      int flag = ( TopoDroidSetting.mStationNames == 1 ) ? MyKeyboard.FLAG_POINT : MyKeyboard.FLAG_POINT_LCASE_2ND;
+      int flag = ( TDSetting.mStationNames == 1 ) ? MyKeyboard.FLAG_POINT : MyKeyboard.FLAG_POINT_LCASE_2ND;
       MyKeyboard.registerEditText( mKeyboard, mEditStart, flag);
     } else {
       mKeyboard.hide();
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mEditStart.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       }
     }
@@ -121,7 +121,7 @@ public class PlotNewDialog extends Dialog
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "PlotDialog onClick() button " + b.getText().toString() ); 
+    // TDLog.Log( TDLog.LOG_INPUT, "PlotDialog onClick() button " + b.getText().toString() ); 
 
     if ( /* notDone && */ b == mBtnOK ) {
       // notDone = false;
@@ -181,7 +181,7 @@ public class PlotNewDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;

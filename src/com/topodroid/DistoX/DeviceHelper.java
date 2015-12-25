@@ -96,13 +96,13 @@ public class DeviceHelper extends DataSetObservable
 
   public void openDatabase() 
   {
-    String database_name = TopoDroidPath.getDeviceDatabase();
+    String database_name = TDPath.getDeviceDatabase();
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
 
     try {
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
-          TopoDroidLog.Error( "failed get writable database " + database_name );
+          TDLog.Error( "failed get writable database " + database_name );
           return;
         }
 
@@ -134,7 +134,7 @@ public class DeviceHelper extends DataSetObservable
 
      } catch ( SQLiteException e ) {
        myDB = null;
-       TopoDroidLog.Error( "DeviceHelper cstr failed to get DB " + e.getMessage() );
+       TDLog.Error( "DeviceHelper cstr failed to get DB " + e.getMessage() );
      }
    }
   
@@ -367,7 +367,7 @@ public class DeviceHelper extends DataSetObservable
          str = cursor.getString(3);
          if ( str != null ) res.stddev = Float.parseFloat( str );
        } catch ( NumberFormatException e ) {
-         TopoDroidLog.Error( "selectCalibError parse Float error: calib ID " + cid );
+         TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
        }
      }
      if (cursor != null && !cursor.isClosed()) {
@@ -400,7 +400,7 @@ public class DeviceHelper extends DataSetObservable
 
    private List<String> selectAllNames( String table )
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllNames table " + table );
+     TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
 
      List< String > list = new ArrayList< String >();
      // if ( myDB == null ) return list;
@@ -415,7 +415,7 @@ public class DeviceHelper extends DataSetObservable
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
-     TopoDroidLog.Log( TopoDroidLog.LOG_DB, "found " + list.size() + " names " );
+     TDLog.Log( TDLog.LOG_DB, "found " + list.size() + " names " );
      return list;
    }
 
@@ -475,11 +475,11 @@ public class DeviceHelper extends DataSetObservable
    public String getValue( String key )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Error( "DeviceHelper::getValue null DB");
+       TDLog.Error( "DeviceHelper::getValue null DB");
        return null;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Error( "DeviceHelper::getValue null key");
+       TDLog.Error( "DeviceHelper::getValue null key");
        return null;
      }
      String value = null;
@@ -499,15 +499,15 @@ public class DeviceHelper extends DataSetObservable
    public void setValue( String key, String value )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Error( "DeviceHelper::setValue null DB");
+       TDLog.Error( "DeviceHelper::setValue null DB");
        return;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Error( "DeviceHelper::setValue null key");
+       TDLog.Error( "DeviceHelper::setValue null key");
        return;
      }
      if ( value == null || value.length() == 0 ) {
-       TopoDroidLog.Error( "DeviceHelper::setValue null value");
+       TDLog.Error( "DeviceHelper::setValue null value");
        return;
      }
 
@@ -612,7 +612,7 @@ public class DeviceHelper extends DataSetObservable
    {
      long id = -1;
      // if ( myDB == null ) { return 0; }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "setName >" + name + "< table " + table );
+     // TDLog.Log( TDLog.LOG_DB, "setName >" + name + "< table " + table );
      Cursor cursor = myDB.query( table, new String[] { "id" },
                                  "name = ?", new String[] { name },
                                  null, null, null );
@@ -872,7 +872,7 @@ public class DeviceHelper extends DataSetObservable
 
    public boolean updateCalibInfo( long id, String date, String device, String comment )
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
+     // TDLog.Log( TDLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
      if ( date == null ) return false;
      updateCalibStmt.bindString( 1, date );
      updateCalibStmt.bindString( 2, (device != null)? device : "" );
@@ -884,7 +884,7 @@ public class DeviceHelper extends DataSetObservable
 
    public boolean updateCalibAlgo( long id, long algo )
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
+     // TDLog.Log( TDLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
      updateCalibAlgoStmt.bindLong( 1, algo );
      updateCalibAlgoStmt.bindLong( 2, id );
      updateCalibAlgoStmt.execute();
@@ -893,7 +893,7 @@ public class DeviceHelper extends DataSetObservable
 
    public boolean updateCalibCoeff( long id, String coeff )
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
+     // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
      if ( coeff == null ) return false;
      updateCalibCoeffStmt.bindString( 1, coeff );
      updateCalibCoeffStmt.bindLong( 2, id );
@@ -903,7 +903,7 @@ public class DeviceHelper extends DataSetObservable
 
    public boolean updateCalibError( long id, double error, double stddev, double max_error, int iterations )
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
+     // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
      updateCalibErrorStmt.bindDouble( 1, error );
      updateCalibErrorStmt.bindDouble( 2, stddev );
      updateCalibErrorStmt.bindDouble( 3, max_error );
@@ -937,10 +937,10 @@ public class DeviceHelper extends DataSetObservable
 
    // public void dumpToFile( String filename, long sid )
    // {
-   //   // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "dumpToFile " + filename );
+   //   // TDLog.Log( TDLog.LOG_DB, "dumpToFile " + filename );
    //   if ( myDB == null ) return;
    //   try {
-   //     TopoDroidApp.checkPath( filename );
+   //     TDPath.checkPath( filename );
    //     FileWriter fw = new FileWriter( filename );
    //     PrintWriter pw = new PrintWriter( fw );
    //     // Cursor cursor = myDB.query( TABLE, 
@@ -990,7 +990,7 @@ public class DeviceHelper extends DataSetObservable
    //     BufferedReader br = new BufferedReader( fr );
    //     // first line is survey
    //     line = br.readLine();
-   //     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile: " + line );
+   //     // TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
    //     String[] vals = line.split(" ", 4); 
    //     // if ( vals.length != 4 ) { TODO } // FIXME
    //     String table = vals[2];
@@ -1017,14 +1017,14 @@ public class DeviceHelper extends DataSetObservable
       {
          super(context, database_name, null, DATABASE_VERSION);
          // Log.v("DistoX", "DB NAME " + database_name );
-         // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
+         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
       }
 
       @Override
       public void onCreate(SQLiteDatabase db) 
       {
         createTables( db );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
+        // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
       }
 
       private void createTables( SQLiteDatabase db )
@@ -1087,7 +1087,7 @@ public class DeviceHelper extends DataSetObservable
 
            db.setTransactionSuccessful();
          } catch ( SQLException e ) {
-           TopoDroidLog.Error( "createTables exception " + e.toString() );
+           TDLog.Error( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
            db.setLockingEnabled( true );
@@ -1098,7 +1098,7 @@ public class DeviceHelper extends DataSetObservable
       public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
       {  
          // FIXME this is called at each start when the database file exists
-         TopoDroidLog.Log( TopoDroidLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
+         TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
          switch ( oldVersion ) {
            case 16:
              db.execSQL( "ALTER TABLE calibs ADD COLUMN coeff BLOB" );

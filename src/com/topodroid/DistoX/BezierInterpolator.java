@@ -137,10 +137,10 @@ public class BezierInterpolator
 
     // DEBUG
     // if ( Float.isNaN( alpha_l ) || Float.isNaN( alpha_r ) ) {
-    //   // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "Npts " + nPts + " alpha " + alpha_l + " " + alpha_r );
+    //   // TDLog.Log( TDLog.LOG_BEZIER, "Npts " + nPts + " alpha " + alpha_l + " " + alpha_r );
     //   for (int i = 0; i < nPts; i++) {
     //     BezierPoint p = d.get(first + i);
-    //     // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "Pt " + i + ": " + p.mX + " " + p.mY );
+    //     // TDLog.Log( TDLog.LOG_BEZIER, "Pt " + i + ": " + p.mX + " " + p.mY );
     //   }
     // }
   
@@ -226,7 +226,7 @@ public class BezierInterpolator
     BezierPoint bl = d.get( last );
 
     if ( nPts < 2 ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "fitCubic with " + nPts + " points");
+      // TDLog.Log( TDLog.LOG_BEZIER, "fitCubic with " + nPts + " points");
       // bezCurve = new BezierCurve( bf, bf, bl, bl );
       // insertBezierCurve( bezCurve );
       return 0.0f; 
@@ -356,7 +356,7 @@ public class BezierInterpolator
    */
   public float fitCurve( ArrayList<BezierPoint> d, int nPts, float error, float len_thr )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "fitCurve nr. pts " + nPts );
+    // TDLog.Log( TDLog.LOG_BEZIER, "fitCurve nr. pts " + nPts );
     if ( nPts <= 1 ) return 0.0f;
     curves.clear();
     ArrayList<Integer> corners = findCorners( d, nPts, len_thr );
@@ -364,7 +364,7 @@ public class BezierInterpolator
     float err = 0.0f;
     for ( int k=1; k<corners.size(); ++k ) {
       int i2 = corners.get(k).intValue(); // nPts-1
-      // TopoDroidLog.Log( TopoDroidLog.LOG_BEZIER, "fitting from " + i1 + " to " + i2 );
+      // TDLog.Log( TDLog.LOG_BEZIER, "fitting from " + i1 + " to " + i2 );
       /*  Unit tangent vectors at endpoints */
       BezierPoint tHat1 = computeLeftTangent( d, i1 );
       BezierPoint tHat2 = computeRightTangent( d, i2 );

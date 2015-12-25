@@ -255,7 +255,7 @@ public class DrawingSurface extends SurfaceView
     // called by DrawingActivity::computeReference
     public DrawingStationName addDrawingStation( NumStation num_st, float x, float y, boolean selectable )
     {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "addDrawingStation " + num_st.name + " " + x + " " + y );
+      // TDLog.Log( TDLog.LOG_PLOT, "addDrawingStation " + num_st.name + " " + x + " " + y );
       DrawingStationName st = new DrawingStationName( num_st, x, y );
       if ( num_st.mHidden == 1 ) {
         st.setPaint( DrawingBrushPaths.fixedStationHiddenPaint );
@@ -272,7 +272,7 @@ public class DrawingSurface extends SurfaceView
     // note: not selectable
     public DrawingStationName addDrawingStation( String name, float x, float y )
     {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "addDrawingStation " + name + " " + x + " " + y );
+      // TDLog.Log( TDLog.LOG_PLOT, "addDrawingStation " + name + " " + x + " " + y );
       DrawingStationName st = new DrawingStationName( name, x, y );
       st.setPaint( DrawingBrushPaths.fixedStationPaint );
       commandManager.addStation( st, false );
@@ -384,14 +384,14 @@ public class DrawingSurface extends SurfaceView
 
     public void surfaceChanged(SurfaceHolder mHolder, int format, int width,  int height) 
     {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceChanged " );
+      // TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
       // TODO Auto-generated method stub
     }
 
 
     public void surfaceCreated(SurfaceHolder mHolder) 
     {
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceCreated " );
+      TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
       if ( mDrawThread == null ) {
         mDrawThread = new DrawThread(mHolder);
       }
@@ -403,7 +403,7 @@ public class DrawingSurface extends SurfaceView
     public void surfaceDestroyed(SurfaceHolder mHolder) 
     {
       mSurfaceCreated = false;
-      TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "surfaceDestroyed " );
+      TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
       boolean retry = true;
       mDrawThread.setRunning(false);
       while (retry) {

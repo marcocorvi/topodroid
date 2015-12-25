@@ -96,7 +96,7 @@ public class CalibValidateListDialog extends Dialog
   {
     CharSequence item = ((TextView) view).getText();
     String name = item.toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "CalibValidate ListDialog onItemClick() " + name );
+    // TDLog.Log(  TDLog.LOG_INPUT, "CalibValidate ListDialog onItemClick() " + name );
     // TODO open calibration activity
     mParent.validateCalibration( name );
     dismiss();

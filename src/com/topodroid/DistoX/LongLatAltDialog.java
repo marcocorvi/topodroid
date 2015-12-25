@@ -79,7 +79,7 @@ public class LongLatAltDialog extends Dialog
     mEditAsl   = (EditText) findViewById(R.id.edit_asl );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard, -1 );
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_DEGREE;
       MyKeyboard.registerEditText( mKeyboard, mEditLong, flag );
       MyKeyboard.registerEditText( mKeyboard, mEditLat,  flag );
@@ -114,7 +114,7 @@ public class LongLatAltDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "LongLatAltDialog onClick() button " + b.getText().toString() ); 
+    // TDLog.Log( TDLog.LOG_INPUT, "LongLatAltDialog onClick() button " + b.getText().toString() ); 
 
     boolean north = mBtnNS.getText().toString().equals("N");
     boolean east  = mBtnEW.getText().toString().equals("E");
@@ -196,7 +196,7 @@ public class LongLatAltDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;

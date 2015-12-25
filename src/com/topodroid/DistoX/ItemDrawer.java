@@ -158,7 +158,7 @@ public class ItemDrawer extends Activity
       if ( update_recent ) {
         updateRecentArea( mCurrentArea );
       }
-      mLinePointStep = TopoDroidSetting.mLineType;
+      mLinePointStep = TDSetting.mLineType;
     }
 
     public void lineSelected( int k, boolean update_recent ) 
@@ -171,7 +171,7 @@ public class ItemDrawer extends Activity
       if ( update_recent ) {
         updateRecentLine( mCurrentLine );
       }
-      mLinePointStep = TopoDroidSetting.mLineType * DrawingBrushPaths.mLineLib.getStyleX( mCurrentLine );
+      mLinePointStep = TDSetting.mLineType * DrawingBrushPaths.mLineLib.getStyleX( mCurrentLine );
     }
 
     public void pointSelected( int p, boolean update_recent )

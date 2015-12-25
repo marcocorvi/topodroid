@@ -172,9 +172,9 @@ class DrawingDxf
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
-    VERSION = TopoDroidSetting.mAcadVersion;
+    VERSION = TDSetting.mAcadVersion;
 
-    float scale = TopoDroidSetting.mDxfScale;
+    float scale = TDSetting.mDxfScale;
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
@@ -760,7 +760,7 @@ class DrawingDxf
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TopoDroidLog.Error( "DXF io-exception " + e.toString() );
+      TDLog.Error( "DXF io-exception " + e.toString() );
     }
   }
 

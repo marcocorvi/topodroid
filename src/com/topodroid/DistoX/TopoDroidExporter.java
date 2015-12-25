@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -96,13 +97,13 @@ class TopoDroidExporter
     String cave = info.name.toUpperCase();
 
     String prefix = "";
-    if ( TopoDroidSetting.mExportStationsPrefix ) prefix = cave + "-";
+    if ( TDSetting.mExportStationsPrefix ) prefix = cave + "-";
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
@@ -334,7 +335,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
+      TDLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -391,7 +392,7 @@ class TopoDroidExporter
 
     // now write the KML
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
@@ -500,7 +501,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
+      TDLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -515,7 +516,7 @@ class TopoDroidExporter
 
     // now write the PLT file
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
@@ -555,7 +556,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed cSurvey export: " + e.getMessage() );
+      TDLog.Error( "Failed cSurvey export: " + e.getMessage() );
       return null;
     }
   }
@@ -582,7 +583,7 @@ class TopoDroidExporter
       ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]),
                       info.declination, info.comment );
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Error( "exportSurveyAsTop date parse error " + info.date );
+      TDLog.Error( "exportSurveyAsTop date parse error " + info.date );
     }
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
@@ -626,12 +627,12 @@ class TopoDroidExporter
     }
 
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileOutputStream fos = new FileOutputStream( filename );
       ptfile.write( fos );
       fos.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed PocketTopo export: " + e.getMessage() );
+      TDLog.Error( "Failed PocketTopo export: " + e.getMessage() );
     }
     return filename;
   }
@@ -651,7 +652,7 @@ class TopoDroidExporter
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
     List< CurrentStation > stations = data.getStations( sid );
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
@@ -791,14 +792,16 @@ class TopoDroidExporter
       pw.format("  endcenterline\n\n");
 
       for ( PlotInfo plt : plots ) {
-        pw.format("  # input \"%s-%s.th2\"\n", info.name, plt.name );
+        String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
+        pw.format("%s input \"%s-%s.th2\"\n", extra, info.name, plt.name );
       }
       pw.format("\n");
       for ( PlotInfo plt : plots ) {
         if ( plt.type == PlotInfo.PLOT_PLAN || plt.type == PlotInfo.PLOT_EXTENDED ) {
-          pw.format("  # map m%s -projection %s\n", plt.name, PlotInfo.projName[ plt.type ] );
-          pw.format("  #   %s-%s\n", info.name, plt.name );
-          pw.format("  # endmap\n" );
+          String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
+          pw.format("%s map m%s -projection %s\n", extra, plt.name, PlotInfo.projName[ plt.type ] );
+          pw.format("%s   %s-%s\n", extra, info.name, plt.name );
+          pw.format("%s endmap\n", extra );
         }
       }
 
@@ -810,7 +813,7 @@ class TopoDroidExporter
 
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed Therion export: " + e.getMessage() );
+      TDLog.Error( "Failed Therion export: " + e.getMessage() );
       return null;
     }
   }
@@ -845,12 +848,12 @@ class TopoDroidExporter
 
   static void writeSurvexLine( PrintWriter pw, String str )
   {
-    pw.format("%s%s", str, TopoDroidSetting.mSurvexEol );
+    pw.format("%s%s", str, TDSetting.mSurvexEol );
   }
 
   static void writeSurvexEOL( PrintWriter pw )
   {
-    pw.format("%s", TopoDroidSetting.mSurvexEol );
+    pw.format("%s", TDSetting.mSurvexEol );
   }
 
   static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DistoXDBlock blk )
@@ -896,7 +899,7 @@ class TopoDroidExporter
     List<DistoXDBlock> st_blk = new ArrayList<DistoXDBlock>(); // blocks with from station (for LRUD)
 
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
@@ -923,7 +926,7 @@ class TopoDroidExporter
       writeSurvexLine(pw, "  *units compass degrees" );
       writeSurvexLine(pw, "  *units clino degrees" );
       pw.format(Locale.ENGLISH, "  *calibrate declination %.2f", info.declination ); writeSurvexEOL(pw);
-      if ( ! TopoDroidSetting.mSurvexSplay ) {
+      if ( ! TDSetting.mSurvexSplay ) {
         writeSurvexLine( pw, "  *alias station - .." );
       }
 
@@ -960,12 +963,12 @@ class TopoDroidExporter
             } else { // only TO station
               if ( leg.mCnt > 0 && ref_item != null ) {
                 duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
-                if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
+                if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 ref_item = null; 
               }
 
               if ( ! splays ) {
-                if ( TopoDroidSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
+                if ( TDSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
                 splayChar = 'a';
                 splays = true;
               } else {
@@ -973,7 +976,7 @@ class TopoDroidExporter
               }
               // if ( ! first  ) 
               {
-                if ( TopoDroidSetting.mSurvexSplay ) {
+                if ( TDSetting.mSurvexSplay ) {
                   writeSurvexSplay( pw, to + splayChar, to, item );
                 } else {
                   writeSurvexSplay( pw, "-", to, item );
@@ -984,12 +987,12 @@ class TopoDroidExporter
             if ( to == null || to.length() == 0 ) { // splay shot
               if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
                 duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
-                if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
+                if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 ref_item = null; 
               }
 
               if ( ! splays ) {
-                if ( TopoDroidSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
+                if ( TDSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags splay" );
                 splays = true;
                 splayChar = 'a';
               } else {
@@ -997,7 +1000,7 @@ class TopoDroidExporter
               }
               // if ( ! first  )
               {
-                if ( TopoDroidSetting.mSurvexSplay ) {
+                if ( TDSetting.mSurvexSplay ) {
                   writeSurvexSplay( pw, from, from + splayChar, item );
                 } else {
                   writeSurvexSplay( pw, from, "-", item );
@@ -1006,11 +1009,11 @@ class TopoDroidExporter
             } else {
               if ( leg.mCnt > 0 && ref_item != null ) {
                 duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
-                if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
+                if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 ref_item = null; 
               }
               if ( splays ) {
-                if ( TopoDroidSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags not splay");
+                if ( TDSetting.mSurvexSplay ) writeSurvexLine(pw, "  *flags not splay");
                 splays = false;
               }
               ref_item = item;
@@ -1025,14 +1028,14 @@ class TopoDroidExporter
         }
         if ( leg.mCnt > 0 && ref_item != null ) {
           duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
-          if ( TopoDroidSetting.mSurvexLRUD ) st_blk.add( ref_item );
+          if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
           ref_item = null;
         }
         first = false;
       }
       writeSurvexLine(pw, "  *flags not splay");
 
-      if ( TopoDroidSetting.mSurvexLRUD && st_blk.size() > 0 ) {
+      if ( TDSetting.mSurvexLRUD && st_blk.size() > 0 ) {
         String from = null;
         for ( int k=0; k<st_blk.size(); ++k ) { 
           if ( st_blk.get(k).mFrom != null && st_blk.get(k).mFrom.length() > 0 ) {
@@ -1141,7 +1144,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed Survex export: " + e.getMessage() );
+      TDLog.Error( "Failed Survex export: " + e.getMessage() );
       return null;
     }
   }
@@ -1154,7 +1157,7 @@ class TopoDroidExporter
   static private void writeCsvLeg( PrintWriter pw, AverageLeg leg )
   {
     pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", 
-      leg.length() * TopoDroidSetting.mCsvLengthUnit, leg.bearing(), leg.clino() );
+      leg.length() * TDSetting.mCsvLengthUnit, leg.bearing(), leg.clino() );
     leg.reset();
   }
 
@@ -1163,7 +1166,7 @@ class TopoDroidExporter
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
@@ -1208,7 +1211,7 @@ class TopoDroidExporter
               splays = true;
             }
             pw.format(Locale.ENGLISH, "-,%s@%s,%.2f,%.1f,%.1f\n", to, info.name,
-              item.mLength * TopoDroidSetting.mCsvLengthUnit, item.mBearing, item.mClino );
+              item.mLength * TDSetting.mCsvLengthUnit, item.mBearing, item.mClino );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
@@ -1232,7 +1235,7 @@ class TopoDroidExporter
               splays = true;
             }
             pw.format(Locale.ENGLISH, "%s@%s,-,%.2f,%.1f,%.1f\n", from, info.name,
-              item.mLength * TopoDroidSetting.mCsvLengthUnit, item.mBearing, item.mClino );
+              item.mLength * TDSetting.mCsvLengthUnit, item.mBearing, item.mClino );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
@@ -1270,7 +1273,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed CSV export: " + e.getMessage() );
+      TDLog.Error( "Failed CSV export: " + e.getMessage() );
       return null;
     }
   }
@@ -1287,7 +1290,7 @@ class TopoDroidExporter
   //   String filename = TopoDroidApp.APP_TLX_PATH + info.name + ".tlx";
   //   List<DistoXDBlock> list = mData.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
   //   try {
-  //     TopoDroidApp.checkPath( filename );
+  //     TDPath.checkPath( filename );
   //     FileWriter fw = new FileWriter( filename );
   //     PrintWriter pw = new PrintWriter( fw );
   //     pw.format("tlx2\n");
@@ -1402,7 +1405,7 @@ class TopoDroidExporter
   //     fw.close();
   //     return filename;
   //   } catch ( IOException e ) {
-  //     TopoDroidLog.Error( "Failed QTopo export: " + e.getMessage() );
+  //     TDLog.Error( "Failed QTopo export: " + e.getMessage() );
   //     return null;
   //   }
   // }
@@ -1506,7 +1509,7 @@ class TopoDroidExporter
   {
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
   
@@ -1525,7 +1528,7 @@ class TopoDroidExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Error( "exportSurveyAsDat date parse error " + date );
+          TDLog.Error( "exportSurveyAsDat date parse error " + date );
         }
       }
       pw.format("SURVEY DATE: %02d %02d %04d", m, d, y ); // format "MM DD YYYY"
@@ -1604,7 +1607,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed Compass export: " + e.getMessage() );
+      TDLog.Error( "Failed Compass export: " + e.getMessage() );
       return null;
     }
   }
@@ -1621,7 +1624,7 @@ class TopoDroidExporter
   static String exportSurveyAsSrv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
   
@@ -1639,7 +1642,7 @@ class TopoDroidExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Error( "exportSurveyAsDat date parse error " + date );
+          TDLog.Error( "exportSurveyAsDat date parse error " + date );
         }
       }
       pw.format("#Date %04d-%02d-%02d\n", y, m, d ); // format "YYYY-MM-DD"
@@ -1804,7 +1807,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed Walls export: " + e.getMessage() );
+      TDLog.Error( "Failed Walls export: " + e.getMessage() );
       return null;
     }
   }
@@ -1817,7 +1820,7 @@ class TopoDroidExporter
   {
     // Log.v( TAG, "exportSurveyAsDxf " + filename );
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter out = new PrintWriter( fw );
       // TODO
@@ -1925,7 +1928,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed DXF export: " + e.getMessage() );
+      TDLog.Error( "Failed DXF export: " + e.getMessage() );
       return null;
     }
   }
@@ -1973,7 +1976,7 @@ class TopoDroidExporter
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
   
@@ -2069,7 +2072,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed VisualTopo export: " + e.getMessage() );
+      TDLog.Error( "Failed VisualTopo export: " + e.getMessage() );
       return null;
     }
   }
@@ -2077,7 +2080,7 @@ class TopoDroidExporter
   static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String filename )
   {
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
 
@@ -2099,7 +2102,7 @@ class TopoDroidExporter
       fw.close();
       return filename;
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed CSV export: " + e.getMessage() );
+      TDLog.Error( "Failed CSV export: " + e.getMessage() );
       return null;
     }
   }
@@ -2109,7 +2112,7 @@ class TopoDroidExporter
   {
     int ret = 0;
     try {
-      TopoDroidApp.checkPath( filename );
+      TDPath.checkPath( filename );
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );
     
@@ -2164,7 +2167,7 @@ class TopoDroidExporter
       }
       fr.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Failed CSV import: " + e.getMessage() );
+      TDLog.Error( "Failed CSV import: " + e.getMessage() );
       ret = -5; // IO Exception
     }
     return ret;

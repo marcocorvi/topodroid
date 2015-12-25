@@ -48,7 +48,7 @@ public class PhotoCommentDialog extends Dialog
   {
     super( context );
     mParent = parent;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "PhotoCommentDialog");
+    // TDLog.Log( TDLog.LOG_PHOTO, "PhotoCommentDialog");
   }
 
 // -------------------------------------------------------------------
@@ -56,7 +56,7 @@ public class PhotoCommentDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_PHOTO, "PhotoCommentDialog onCreate" );
+    // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoCommentDialog onCreate" );
     // Log.v(  TopoDroidApp.TAG, "PhotoCommentDialog onCreate" );
     setContentView(R.layout.photo_comment_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
@@ -74,11 +74,11 @@ public class PhotoCommentDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PhotoCommentDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoCommentDialog onClick() " + b.getText().toString() );
     // Log.v(  TopoDroidApp.TAG, "PhotoCommentDialog onClick() " + b.getText().toString() );
 
     if ( b == mButtonOK && mETcomment.getText() != null ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
+      // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
       // Log.v( TopoDroidApp.TAG, "set photo comment " + mETcomment.getText().toString() );
       // mParent.insertPhoto( mETcomment.getText().toString() );
       mParent.doTakePhoto( mETcomment.getText().toString() );

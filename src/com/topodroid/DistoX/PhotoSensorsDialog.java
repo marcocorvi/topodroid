@@ -65,7 +65,7 @@ public class PhotoSensorsDialog extends Dialog
     mContext = context;
     mParent  = parent;
     mBlk = blk;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "PhotoSensorDialog");
+    // TDLog.Log( TDLog.LOG_PHOTO, "PhotoSensorDialog");
   }
 
 // -------------------------------------------------------------------
@@ -73,7 +73,7 @@ public class PhotoSensorsDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_PHOTO, "PhotoSensorDialog onCreate" );
+    // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoSensorDialog onCreate" );
     setContentView(R.layout.photo_sensor_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -127,7 +127,7 @@ public class PhotoSensorsDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
 
     if ( b == mButtonPhoto ) {
       mParent.askPhotoComment( );

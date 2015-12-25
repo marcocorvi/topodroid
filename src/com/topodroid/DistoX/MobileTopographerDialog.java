@@ -131,7 +131,7 @@ public class MobileTopographerDialog extends Dialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     String item = ((TextView) view).getText().toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "MobileTopographerDialog onItemClick() " + item.toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "MobileTopographerDialog onItemClick() " + item.toString() );
 
     try {
       FileReader fr = new FileReader( POINTLISTS + "/" + item );

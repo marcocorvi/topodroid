@@ -277,7 +277,7 @@ class Selection
 
   void selectAt( float x, float y, float zoom, SelectionSet sel, boolean legs, boolean splays, boolean stations )
   {
-    float radius = TopoDroidSetting.mCloseCutoff + TopoDroidSetting.mCloseness / zoom;
+    float radius = TDSetting.mCloseCutoff + TDSetting.mCloseness / zoom;
     // Log.v( "DistoX", "selection select at " + x + " " + y + " pts " + mPoints.size() + " " + legs + " " + splays + " " + stations + " radius " + radius );
 
     bucketSelectAt( x, y, radius, sel, legs, splays, stations );
@@ -316,15 +316,9 @@ class Selection
     if ( sp == null ) return;
     SelectionBucket sb = sp.mBucket;
     if ( sb != null && ! sb.contains( sp.X(), sp.Y() ) ) {
-      sb.removePoint( sp );
       // find the bucket that contains sp and assign it to sp
       sb = getBucket( sp.X(), sp.Y() );
-      sp.setBucket( sb );
-      if ( sb != null ) { 
-        sb.addPoint( sp );
-      } else {
-        TopoDroidLog.Error("SelectionPoint out of any bucket");
-      }
+      sp.setBucket( sb ); // this removes sp from its old bucket and add it to the new bucket
     }
   }
 

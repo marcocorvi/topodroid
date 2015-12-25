@@ -128,13 +128,13 @@ public class TherionParser
       int i = filename.lastIndexOf('/');
       if ( i > 0 ) dirname = filename.substring(0, i+1);
       // System.out.println("readFile dir " + dirname + " filename " + filename );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
+      // TDLog.Log( TDLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
 
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );
       String line = nextLine( br );
       while ( line != null ) {
-        // TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "TH " + line );
+        // TDLog.Log( TDLog.LOG_THERION, "TH " + line );
         // Log.v( TopoDroidApp.TAG, "TH " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
         line = line.trim();
         int pos = line.indexOf( '#' );
@@ -234,7 +234,7 @@ public class TherionParser
                     }
                     if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Error( "therion parser error: -declination " + line );
+                    TDLog.Error( "therion parser error: -declination " + line );
                   }
                 } else if ( vals[j].equals("-title") && j+1 < vals_len ) {
                   for ( ++j; j<vals_len; ++j ) {
@@ -289,7 +289,7 @@ public class TherionParser
                   scale = Float.parseFloat( vals[vals_len-1] );
                   zero  = Float.parseFloat( vals[vals_len-2] );
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Error( "therion parser error: scale/zero " + line );
+                  TDLog.Error( "therion parser error: scale/zero " + line );
                   zero  = scale;
                 }
                 if ( clen ) {
@@ -317,7 +317,7 @@ public class TherionParser
                 try {
                   factor = Float.parseFloat( vals[vals_len-2] );
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Error( "therion parser error: units " + line );
+                  TDLog.Error( "therion parser error: units " + line );
                 }
                 if ( ulen ) {
                   state.mUnitLen = factor * parseLengthUnit( vals[vals_len-1] );
@@ -342,7 +342,7 @@ public class TherionParser
                     state.mDeclination = declination;
                     if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Error( "therion parser error: declination " + line );
+                    TDLog.Error( "therion parser error: declination " + line );
                   }
                 }      
               } else if ( cmd.equals("infer") ) {
@@ -384,7 +384,7 @@ public class TherionParser
                                         Float.parseFloat( vals[3] ),
                                         Float.parseFloat( vals[4] ) ) );
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Error( "therion parser error: fix " + line );
+                    TDLog.Error( "therion parser error: fix " + line );
                   }
                 }
               } else if ( cmd.equals("equate") ) {
@@ -507,7 +507,7 @@ public class TherionParser
                                          state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
                   }
                 } catch ( NumberFormatException e ) {
-                  TopoDroidLog.Error( "therion parser error: data " + line );
+                  TDLog.Error( "therion parser error: data " + line );
                 }
               }            
             } else if ( cmd.equals("centerline") || cmd.equals("centreline") ) {
@@ -532,7 +532,7 @@ public class TherionParser
     if ( mDate == null ) {
       mDate = TopoDroidUtil.currentDate();
     }
-    TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "TherionParser shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
+    TDLog.Log( TDLog.LOG_THERION, "TherionParser shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
     // Log.v( TopoDroidApp.TAG, "TherionParser shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 

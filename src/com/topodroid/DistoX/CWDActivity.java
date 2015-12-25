@@ -62,7 +62,7 @@ public class CWDActivity extends Activity
     if ( ! dir_name.startsWith( "TopoDroid" ) ) {
       dir_name = "TopoDroid-" + dir_name;
     }
-    TopoDroidPath.checkBasePath( dir_name );
+    TDPath.checkBasePath( dir_name );
     // Log.v("DistoX", "dir name <" + dir_name + ">" );
     mApp.setCWDPreference( dir_name );
     Intent intent = new Intent();
@@ -72,7 +72,7 @@ public class CWDActivity extends Activity
     
   public void updateDisplay( )
   {
-    File[] dirs = TopoDroidPath.getTopoDroidFiles();
+    File[] dirs = TDPath.getTopoDroidFiles();
     ArrayAdapter<String> adapter = new ArrayAdapter<String>( this, R.layout.menu );
     for ( File item : dirs ) {
       adapter.add( item.getName() );

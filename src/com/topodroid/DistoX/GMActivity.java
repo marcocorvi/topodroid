@@ -367,7 +367,7 @@ public class GMActivity extends Activity
     long cid = mApp.mCID;
     // Log.v("DistoX", "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
-    float thr = TDMath.cosd( TopoDroidSetting.mGroupDistance );
+    float thr = TDMath.cosd( TDSetting.mGroupDistance );
     List<CalibCBlock> list = mApp.mDData.selectAllGMs( cid, 0 );
     if ( list.size() < 4 ) {
       return -1;
@@ -387,12 +387,12 @@ public class GMActivity extends Activity
         }
       }
     } else {
-      if ( TopoDroidSetting.mGroupBy != TopoDroidSetting.GROUP_BY_DISTANCE ) {
+      if ( TDSetting.mGroupBy != TDSetting.GROUP_BY_DISTANCE ) {
         group = 1;
       }
     }
-    switch ( TopoDroidSetting.mGroupBy ) {
-      case TopoDroidSetting.GROUP_BY_DISTANCE:
+    switch ( TDSetting.mGroupBy ) {
+      case TDSetting.GROUP_BY_DISTANCE:
         for ( CalibCBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
           if ( group == 0 || item.isFarFrom( b, c, thr ) ) {
@@ -405,8 +405,8 @@ public class GMActivity extends Activity
           // N.B. item.calibId == cid
         }
         break;
-      case TopoDroidSetting.GROUP_BY_FOUR:
-        // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "group by four");
+      case TDSetting.GROUP_BY_FOUR:
+        // TDLog.Log( TDLog.LOG_CALIB, "group by four");
         for ( CalibCBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroup( group );
@@ -414,11 +414,11 @@ public class GMActivity extends Activity
           ++ cnt;
           if ( (cnt%4) == 0 ) {
             ++group;
-            // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "cnt " + cnt + " new group " + group );
+            // TDLog.Log( TDLog.LOG_CALIB, "cnt " + cnt + " new group " + group );
           }
         }
         break;
-      case TopoDroidSetting.GROUP_BY_ONLY_16:
+      case TDSetting.GROUP_BY_ONLY_16:
         for ( CalibCBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
           item.setGroup( group );
@@ -540,7 +540,7 @@ public class GMActivity extends Activity
 
     CharSequence item = ((TextView) view).getText();
     String value = item.toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "GMActivity onItemClick() " + item.toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "GMActivity onItemClick() " + item.toString() );
 
     // if ( value.equals( getResources().getString( R.string.back_to_calib ) ) ) {
     //   setStatus( STATUS_CALIB );
@@ -564,14 +564,14 @@ public class GMActivity extends Activity
           new DialogInterface.OnClickListener() {
             @Override
             public void onClick( DialogInterface dialog, int btn ) {
-              // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "calib delite" );
+              // TDLog.Log( TDLog.LOG_INPUT, "calib delite" );
               deleteGM( false );
             }
           }
         );
       }
     } catch ( NumberFormatException e ) {
-      TopoDroidLog.Error( "error: expected a long, got: " + st[0] );
+      TDLog.Error( "error: expected a long, got: " + st[0] );
     }
   }
  
@@ -604,8 +604,8 @@ public class GMActivity extends Activity
     // mHandler = new ConnHandler( mApp, this );
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00no = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsno : iconsno;
+    // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
+    // icons00no = ( TDSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
@@ -637,7 +637,7 @@ public class GMActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
+    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
@@ -742,11 +742,11 @@ public class GMActivity extends Activity
           List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
           if ( list.size() >= 16 ) {
             (new GMGroupsDialog( this, this, 
-              ( TopoDroidSetting.mGroupBy == TopoDroidSetting.GROUP_BY_DISTANCE )?
+              ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?
                 getResources().getString( R.string.group_policy_distance )
-              : ( TopoDroidSetting.mGroupBy == TopoDroidSetting.GROUP_BY_FOUR )?
+              : ( TDSetting.mGroupBy == TDSetting.GROUP_BY_FOUR )?
                 getResources().getString( R.string.group_policy_four )
-              : /* TopoDroidSetting.GROUP_BY_ONLY_16 */
+              : /* TDSetting.GROUP_BY_ONLY_16 */
                 getResources().getString( R.string.group_policy_sixteen ) 
             )).show();
             // new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
@@ -775,7 +775,7 @@ public class GMActivity extends Activity
           setTitle( R.string.calib_compute_coeffs );
           setTitleColor( TopoDroidConst.COLOR_COMPUTE );
           if ( mAlgo == 0 ) { // CALIB_ALGO_AUTO
-            mAlgo = ( TopoDroidSetting.mCalibAlgo != 0 ) ? TopoDroidSetting.mCalibAlgo : 1; // CALIB_AUTO_LINEAR
+            mAlgo = ( TDSetting.mCalibAlgo != 0 ) ? TDSetting.mCalibAlgo : 1; // CALIB_AUTO_LINEAR
             mApp.updateCalibAlgo( mAlgo );
           }
           new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
@@ -923,7 +923,7 @@ public class GMActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Error( "search requested" );
+    // TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
     startActivity( intent );
@@ -943,7 +943,7 @@ public class GMActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Error( "key down: code " + code );
+        TDLog.Error( "key down: code " + code );
     }
     return false;
   }

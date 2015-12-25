@@ -1,4 +1,4 @@
-/** @file TopoDroidPath.java
+/** @file TDPath.java
  *
  * @author marco corvi
  * @date jan 2015 
@@ -27,7 +27,7 @@ import android.os.RemoteException;
 
 // import android.util.Log;
 
-public class TopoDroidPath
+public class TDPath
 {
   // ------------------------------------------------------------
   // PATHS
@@ -105,7 +105,7 @@ public class TopoDroidPath
     dir = new File( APP_BASE_PATH );
     if ( ! dir.exists() ) {
       if ( ! dir.mkdir() ) {
-        TopoDroidLog.Error( "failed mkdir " + APP_BASE_PATH );
+        TDLog.Error( "failed mkdir " + APP_BASE_PATH );
         APP_BASE_PATH = APP_DEFAULT_PATH;
       }
     }
@@ -369,9 +369,9 @@ public class TopoDroidPath
 
   static File[] getImportFiles() 
   { 
-    // if ( TopoDroidSetting.mLevelOverAdvanced ) {
+    // if ( TDSetting.mLevelOverAdvanced ) {
     //   return getFiles( APP_IMPORT_PATH, new String[] {".th", ".top", ".dat", ".tro"} );
-    // } else if ( TopoDroidSetting.mLevelOverNormal ) {
+    // } else if ( TDSetting.mLevelOverNormal ) {
     //   return getFiles( APP_IMPORT_PATH, new String[] {".th", ".top", ".dat", ".tro"} );
     // }
     return getFiles( APP_IMPORT_PATH, new String[] {".th", ".top", ".dat", ".tro"} );

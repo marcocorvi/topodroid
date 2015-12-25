@@ -143,7 +143,7 @@ public class ConnectDialog extends Dialog
 
   private void updateList( )
   {
-    // TopoDroidLog.Log(TopoDroidLog.LOG_MAIN, "updateList" );
+    // TDLog.Log(TDLog.LOG_MAIN, "updateList" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
     if ( mApp.mBTAdapter != null ) {

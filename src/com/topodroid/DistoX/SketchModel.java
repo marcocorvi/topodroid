@@ -41,7 +41,7 @@ import android.util.Log;
 
 class SketchModel
 {
-  private static final float mCloseness = TopoDroidSetting.mCloseness;
+  private static final float mCloseness = TDSetting.mCloseness;
   DistoXNum mNum;
 
   Sketch3dInfo mInfo;
@@ -330,7 +330,7 @@ class SketchModel
     List<NumSplay> splay2 = mNum.getSplaysAt( st2 );
     // Log.v("DistoX", "splays at 1: " + splay1.size() + " at 2: " + splay2.size() );
     if ( splay1.size() < 2 || splay2.size() < 2 ) {
-      TopoDroidLog.Error( "makeConvexSurface too few spalys " + splay1.size() + " " + splay2.size() );
+      TDLog.Error( "makeConvexSurface too few spalys " + splay1.size() + " " + splay2.size() );
       return;
     }
 
@@ -950,7 +950,7 @@ class SketchModel
             Log.v("DIstoX", "ERROR symbol not found " + vals[k] );
           }
           
-            // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "line type " + vals[1] );
+            // TDLog.Log( TDLog.LOG_PLOT, "line type " + vals[1] );
            
             for ( ++k; k < vals.length; ++k ) {
               if ( vals[k].length() == 0 ) {

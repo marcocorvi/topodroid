@@ -38,7 +38,7 @@ public class NumBranch
   //   StringBuilder sb = new StringBuilder();
   //   sb.append("Branch ");
   //   for ( NumShot sh : shots ) sb.append( sh.from.name ).append("-").append( sh.to.name ).append(" ");
-  //   TopoDroidLog.Log( TopoDroidLog.LOG_NUM, sb.toString() );
+  //   TDLog.Log( TDLog.LOG_NUM, sb.toString() );
   // }
 
   NumBranch( int t, NumNode n )
@@ -56,7 +56,7 @@ public class NumBranch
 
   void addShot( NumShot shot )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Br add shot(" + shot.from.name + "-" + shot.to.name + ") bdir " + shot.mBranchDir + " sdir " + shot.mDirection );
+    // TDLog.Log( TDLog.LOG_NUM, "Br add shot(" + shot.from.name + "-" + shot.to.name + ") bdir " + shot.mBranchDir + " sdir " + shot.mDirection );
     shots.add( shot );
     // float d = shot.length();
     // len += d;
@@ -78,7 +78,7 @@ public class NumBranch
       float h0 = d * TDMath.abs( TDMath.cosd(c) );
       s -= h0 * TDMath.cosd(b);
       e += h0 * TDMath.sind(b);
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Br sh " + sh.from.name + "-" + sh.to.name + " Br Err " + e + " " + s );
+      // TDLog.Log( TDLog.LOG_NUM, "Br sh " + sh.from.name + "-" + sh.to.name + " Br Err " + e + " " + s );
     }
   }
 

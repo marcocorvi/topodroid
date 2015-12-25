@@ -41,7 +41,7 @@ public class DrawingStationPath extends DrawingPath
   public DrawingStationPath( String name, float x, float y, int scale )
   {
     super( DrawingPath.DRAWING_PATH_STATION );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + mType + " X " + x + " Y " + y );
+    // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + x + " Y " + y );
     // Log.v( "DistoX", "User Station (1) " + mType + " X " + x + " Y " + y );
     // mType = DRAWING_PATH_STATION;
     // mXpos = x;
@@ -60,7 +60,7 @@ public class DrawingStationPath extends DrawingPath
   public DrawingStationPath( DrawingStationName st, int scale )
   {
     super( DrawingPath.DRAWING_PATH_STATION );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PATH, "Point " + mType + " X " + st.cx + " Y " + st.cy );
+    // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + st.cx + " Y " + st.cy );
     // Log.v( "DistoX", "User Station (2) " + mType + " X " + st.cx + " Y " + st.cy );
     // mType = DRAWING_PATH_STATION;
     // mXpos = st.cx;  // st.cx : scene coords
@@ -79,7 +79,7 @@ public class DrawingStationPath extends DrawingPath
   void setScale( int scale )
   {
     if ( scale != mScale ) {
-      TopoDroidLog.Error( "set scale " + scale );
+      TDLog.Error( "set scale " + scale );
       mScale = scale;
       // station point does not have text
       float f = 1.0f;
@@ -123,7 +123,7 @@ public class DrawingStationPath extends DrawingPath
       dos.writeInt( mScale );
       dos.writeUTF( mName );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "ERROR-dos station " + mName );
+      TDLog.Error( "ERROR-dos station " + mName );
     }
   }
 
@@ -136,7 +136,7 @@ public class DrawingStationPath extends DrawingPath
       String name = dis.readUTF();
       return new DrawingStationPath( name, x, y, scale );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "ERROR-dis station ");
+      TDLog.Error( "ERROR-dis station ");
     }
     return null;
   }

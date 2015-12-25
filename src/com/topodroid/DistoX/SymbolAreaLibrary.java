@@ -117,14 +117,14 @@ class SymbolAreaLibrary extends SymbolLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    File dir = new File( TopoDroidPath.APP_AREA_PATH );
+    File dir = new File( TDPath.APP_AREA_PATH );
     if ( dir.exists() ) {
       int systemNr = size();
       File[] files = dir.listFiles();
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TopoDroidLog.Error( "area with null ThName" );
+          TDLog.Error( "area with null ThName" );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {
@@ -158,7 +158,7 @@ class SymbolAreaLibrary extends SymbolLibrary
 
     Symbol symbol = getSymbolByFilename( fname );
     if ( symbol == null ) {
-      String filename = TopoDroidPath.APP_SAVE_AREA_PATH + fname;
+      String filename = TDPath.APP_SAVE_AREA_PATH + fname;
       File file = new File( filename );
       if ( ! file.exists() ) return false;
       symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );

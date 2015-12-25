@@ -52,8 +52,8 @@ class ConvertTdr2Th2Task extends AsyncTask<Intent,Void,Boolean>
     for ( PlotInfo plot : plots ) {
       String fullname = mSurvey + "-" + plot.name;
       // int type = plot.type;
-      String tdr = TopoDroidPath.getTdrFileWithExt( fullname );
-      String th2 = TopoDroidPath.getTh2FileWithExt( fullname );
+      String tdr = TDPath.getTdrFileWithExt( fullname );
+      String th2 = TDPath.getTh2FileWithExt( fullname );
       File tdrfile = new File( tdr );
       File th2file = new File( th2 );
       if ( tdrfile.exists() ) {
@@ -65,10 +65,10 @@ class ConvertTdr2Th2Task extends AsyncTask<Intent,Void,Boolean>
           bw.close();
           fw.close();
         } catch ( IOException e ) {
-          TopoDroidLog.Error("I/O error " + th2 );
+          TDLog.Error("I/O error " + th2 );
         }
       } else {
-        TopoDroidLog.Error("Missing file " + tdr );
+        TDLog.Error("Missing file " + tdr );
       }
 
     }

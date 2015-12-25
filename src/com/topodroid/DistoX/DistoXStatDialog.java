@@ -120,7 +120,7 @@ public class DistoXStatDialog extends Dialog
     // {
     //   Button b = (Button)view;
     //   if ( b == mBtnCancel ) {
-    //     // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "StatDialog onClick()" );
+    //     // TDLog.Log( TDLog.LOG_INPUT, "StatDialog onClick()" );
     //     dismiss();
     //   }
     // }

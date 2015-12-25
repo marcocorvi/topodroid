@@ -62,7 +62,7 @@ class FixedInfo extends MagLatLong
 
   static String double2string( double x )
   {
-    return ( TopoDroidSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
+    return ( TDSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
   }
 
   static private String double2ddmmss( double x )
@@ -100,7 +100,7 @@ class FixedInfo extends MagLatLong
         return Double.parseDouble( str );
       }
     } catch (NumberFormatException e ) {
-      TopoDroidLog.Error( "string2double parse error: " + str );
+      TDLog.Error( "string2double parse error: " + str );
     }
     return -1111.0; // more neg than -1000
   }        

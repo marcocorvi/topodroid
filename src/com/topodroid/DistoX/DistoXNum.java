@@ -201,20 +201,20 @@ class DistoXNum
     setStationsHide( hide );
     setStationsBarr( view );
 
-    // TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum cstr length " + mLength + " depth " + mZmin + " " + mZmax );
+    // TDLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum cstr length " + mLength + " depth " + mZmin + " " + mZmax );
     // Log.v( TopoDroidApp.TAG, "DistoXNum cstr data " + data.size() + " start " + start );
     // Log.v( TopoDroidApp.TAG, "DistoXNum cstr length " + mLength + " depth " + mZmin + " " + mZmax );
   }
 
   // public void dump()
   // {
-  //   TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum Stations:" );
+  //   TDLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum Stations:" );
   //   for ( NumStation st : mStations ) {
-  //     TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "   " + st.name + " S: " + st.s + " E: " + st.e );
+  //     TDLog.Log( TopoDroiaLog.LOG_NUM, "   " + st.name + " S: " + st.s + " E: " + st.e );
   //   }
-  //   TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "Shots:" );
+  //   TDLog.Log( TopoDroiaLog.LOG_NUM, "Shots:" );
   //   for ( NumShot sh : mShots ) {
-  //     TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "   From: " + sh.from.name + " To: " + sh.to.name );
+  //     TDLog.Log( TopoDroiaLog.LOG_NUM, "   From: " + sh.from.name + " To: " + sh.to.name );
   //   }
   // } 
 
@@ -577,9 +577,9 @@ class DistoXNum
 
     // void Dump()
     // {
-    //   Log.v( TopoDroidLog.TAG, "Shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
+    //   Log.v( TDLog.TAG, "Shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
     //   for ( DistoXDBlock b : blocks ) {
-    //     Log.v( TopoDroidLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
+    //     Log.v( TDLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
     //   }
     // }
 
@@ -628,7 +628,7 @@ class DistoXNum
   private NumShot makeShotFromTmp( NumStation sf, NumStation st, TmpShot ts, float anomaly )
   {
     if ( ts.reversed != 1 ) {
-      TopoDroidLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
+      TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() );
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly );
@@ -694,7 +694,7 @@ class DistoXNum
           break;
       }
     }
-    // Log.v( TopoDroidLog.TAG,
+    // Log.v( TDLog.TAG,
     //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     // for ( TmpShot ts : tmpshots ) ts.Dump();
 
@@ -743,11 +743,11 @@ class DistoXNum
           if ( d > dmax ) dmax = d;
           ts1 = ts1.sibling;
         }
-        blk0.mMultiBad = ( ! TopoDroidSetting.mMagAnomaly ) && ( dmax > TopoDroidSetting.mCloseDistance );
+        blk0.mMultiBad = ( ! TDSetting.mMagAnomaly ) && ( dmax > TDSetting.mCloseDistance );
         
         // Log.v( "DistoX", "DMAX " + from + "-" + to + " " + dmax );
         
-        if ( ! TopoDroidSetting.mMagAnomaly ) { // (3) remove siblings
+        if ( ! TDSetting.mMagAnomaly ) { // (3) remove siblings
           ts1 = ts0.sibling;
           while ( ts1 != null ) {
             TmpShot ts2 = ts1.sibling;
@@ -762,13 +762,13 @@ class DistoXNum
         }
       }
     }
-    // Log.v( TopoDroidLog.TAG,
+    // Log.v( TDLog.TAG,
     //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     // for ( TmpShot ts : tmpshots ) ts.Dump();
 
     NumStation start_station = new NumStation( start );
     start_station.mHasCoords = true;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "start station " + start );
+    // TDLog.Log( TDLog.LOG_NUM, "start station " + start );
     // Log.v( "DistoX", "start station " + start + " shots " + tmpshots.size() );
 
     NumShot sh;
@@ -781,16 +781,16 @@ class DistoXNum
         if ( ts.used || ts.backshot != 0 ) continue;
 
         float anomaly = 0;
-        if ( TopoDroidSetting.mMagAnomaly ) {
+        if ( TDSetting.mMagAnomaly ) {
           // if ( ts.backshot == 0 ) 
           {
-            // TopoDroidLog.Log(TopoDroidLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );
+            // TDLog.Log(TDLog.LOG_NUM, "shot " + ts.from + " " + ts.to + " <" + ts.backshot + ">" );
             int   nfwd = 1;
             float bfwd = ts.b();
             int   nbck = 0;
             float bbck = 0;
             for ( TmpShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
-              // TopoDroidLog.Log(TopoDroidLog.LOG_NUM, "sibling " + ts1.from + " " + ts1.to + " <" + ts1.backshot + ">" );
+              // TDLog.Log(TDLog.LOG_NUM, "sibling " + ts1.from + " " + ts1.to + " <" + ts1.backshot + ">" );
               if ( ts1.backshot == 1 ) {
                 if ( ts1.b() > ts.b() + 180 ) {
                   bfwd += ts1.b() - 360;
@@ -835,7 +835,7 @@ class DistoXNum
         // try to see if any temp-shot station is on the list of stations
         NumStation sf = getStation( ts.from );
         NumStation st = getStation( ts.to );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+        // TDLog.Log( TDLog.LOG_NUM, "using shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
         // ts.Dump();
         // Log.v("DistoX", "shot " + ts.from + "-" + ts.to + " stations " +
         //   ( ( sf == null )? "null" : sf.name ) + " " + (( st == null )? "null" : st.name ) );
@@ -844,8 +844,8 @@ class DistoXNum
           sf.addAzimuth( ts.b(), ts.extend );
 
           if ( st != null ) { // loop-closure
-            if ( /* TopoDroidSetting.mAutoStations || */ ! TopoDroidSetting.mLoopClosure ) { // do not close loop
-              // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "do not close loop");
+            if ( /* TDSetting.mAutoStations || */ ! TDSetting.mLoopClosure ) { // do not close loop
+              // TDLog.Log( TDLog.LOG_NUM, "do not close loop");
               // keep loop open: new station( id=ts.to, from=sf, ... )
               NumStation st1 = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
               st1.addAzimuth( (ts.b()+180)%360, -ts.extend );
@@ -857,7 +857,7 @@ class DistoXNum
               sh = makeShotFromTmp( sf, st1, ts, sf.mAnomaly );
               addShotToStations( sh, st1, sf );
             } else { // close loop
-              // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "close loop");
+              // TDLog.Log( TDLog.LOG_NUM, "close loop");
               sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly ); 
               addShotToStations( sh, sf, st );
             }
@@ -873,7 +873,7 @@ class DistoXNum
           }
           else // st null || st isBarrier
           { // forward shot: from --> to
-            // TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
+            // TDLog.Log( TDLog.LOG_NUM,
             //                   "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
             // Log.v( "DistoX", "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
 
@@ -892,10 +892,10 @@ class DistoXNum
         }
         else if ( st != null ) 
         { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
-          // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+          // TDLog.Log( TDLog.LOG_NUM, "reversed shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
           st.addAzimuth( (ts.b()+180)%360, -ts.extend );
           
-          // TopoDroidLog.Log( TopoDroidLog.LOG_NUM,
+          // TDLog.Log( TDLog.LOG_NUM,
           //                   "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
           // Log.v("DistoX", "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
 
@@ -915,11 +915,11 @@ class DistoXNum
         }
       }
     }
-    // TopoDroidLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum::compute done leg shots ");
+    // TDLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum::compute done leg shots ");
     // Log.v( "DistoX", "DistoXNum::compute done leg shots: stations " + mStations.size() );
 
-    if ( TopoDroidSetting.mLoopClosure ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "loop compensation");
+    if ( TDSetting.mLoopClosure ) {
+      // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
       doLoopCompensation( mNodes, mShots );
   
       // recompute station positions
@@ -1114,7 +1114,7 @@ class DistoXNum
       NumStation sf0 = sh0.from;
       NumStation st0 = sh0.to;
       sh0.mBranchDir = 1;
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Start branch from station " + sf0.name );
+      // TDLog.Log( TDLog.LOG_NUM, "Start branch from station " + sf0.name );
       while ( st0 != sf0 ) { // follow the shot 
         branch.addShot( sh0 ); // add shot to branch and find next shot
         sh0.branch = branch;
@@ -1148,7 +1148,7 @@ class DistoXNum
   {
     for ( NumBranch br : branches ) {
       br.computeError();
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "Single loop branch error " + br.e + " " + br.s + " " + br.v );
+      // TDLog.Log( TDLog.LOG_NUM, "Single loop branch error " + br.e + " " + br.s + " " + br.v );
       br.compensateError( br.e, br.s, br.v );
     }
   }
@@ -1210,7 +1210,7 @@ class DistoXNum
           sh0 = sh1;
         }
         if ( st0 == sf0 ) { // closed-loop ???
-          // TopoDroidLog.Error( "ERROR closed loop in num branches");
+          // TDLog.Error( "ERROR closed loop in num branches");
           if ( also_cross_end ) {
             branch.setLastNode( st0.node );
             branches.add( branch );
@@ -1288,7 +1288,7 @@ class DistoXNum
     }
     for ( NumCycle c : cycles ) {
       c.computeError();
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "cycle error " + c.e + " " + c.s + " " + c.v ); 
+      // TDLog.Log( TDLog.LOG_NUM, "cycle error " + c.e + " " + c.s + " " + c.v ); 
     }
 
     ArrayList<NumCycle> indep_cycles = new ArrayList<NumCycle>(); // independent cycles
@@ -1329,7 +1329,7 @@ class DistoXNum
     //   for (int y2=0; y2<ls; ++y2 ) {
     //     sb.append( Float.toString(aa[ y1*ls + y2]) ).append("  ");
     //   }
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "AA " + sb.toString() );
+    //   TDLog.Log( TDLog.LOG_NUM, "AA " + sb.toString() );
     // }
 
     float det = invertMatrix( aa, ls, ls, ls );
@@ -1339,7 +1339,7 @@ class DistoXNum
     //   for (int y2=0; y2<ls; ++y2 ) {
     //     sb.append( Float.toString(aa[ y1*ls + y2]) ).append("  ");
     //   }
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "invAA " + sb.toString() );
+    //   TDLog.Log( TDLog.LOG_NUM, "invAA " + sb.toString() );
     // }
 
 
@@ -1354,7 +1354,7 @@ class DistoXNum
         cy.cs += aa[ y*ls + x] * cx.s;
         cy.cv += aa[ y*ls + x] * cx.v;
       }
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "cycle correction " + cy.ce + " " + cy.cs + " " + cy.cv ); 
+      // TDLog.Log( TDLog.LOG_NUM, "cycle correction " + cy.ce + " " + cy.cs + " " + cy.cv ); 
     }
     
     for (int x=0; x<bs; ++x ) { // correct branches

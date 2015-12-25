@@ -1331,9 +1331,9 @@ class SketchSurface extends SketchShot
         if ( k == kmax ) -- k;
         // Log.v("DistoX", "vector len " + l + "/" + len_max + " shift " + k + "/" + kmax );
         Vector w = pts.get(k);
-        v.x += TopoDroidSetting.mDeltaExtrude*(w.x - w0.x);
-        v.y += TopoDroidSetting.mDeltaExtrude*(w.y - w0.y);
-        v.z += TopoDroidSetting.mDeltaExtrude*(w.z - w0.z);
+        v.x += TDSetting.mDeltaExtrude*(w.x - w0.x);
+        v.y += TDSetting.mDeltaExtrude*(w.y - w0.y);
+        v.z += TDSetting.mDeltaExtrude*(w.z - w0.z);
       }  
     } 
   }

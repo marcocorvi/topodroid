@@ -115,7 +115,7 @@ public class DrawingLineDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingLineDialog onClick() " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingLineDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOutlineIn ) {
       mBtnOutlineOut.setChecked( false );

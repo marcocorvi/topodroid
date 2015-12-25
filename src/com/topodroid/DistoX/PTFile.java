@@ -82,7 +82,7 @@ class PTFile
     try {
       fs.write( b, 0, n );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "IO error on write " + n + " bytes: " + e.toString() );
+      TDLog.Error( "IO error on write " + n + " bytes: " + e.toString() );
     }
   }
 
@@ -91,7 +91,7 @@ class PTFile
     try {
       fs.read( b, 0, n );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "IO error on read " + n + " bytes: " + e.toString() );
+      TDLog.Error( "IO error on read " + n + " bytes: " + e.toString() );
     }
   }
 
@@ -282,9 +282,9 @@ class PTFile
         fs.read( bytes, 0, 4 );
         // assert bytes == Top3
       } catch( IOException e ) {
-        TopoDroidLog.Error( "IO error on \"Top3\"");
+        TDLog.Error( "IO error on \"Top3\"");
       }
-      TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT ID " + bytes[0] + bytes[1] + bytes[2] );
+      TDLog.Log( TDLog.LOG_PTOPO, "PT ID " + bytes[0] + bytes[1] + bytes[2] );
 
       int tc = PTFile.readInt( fs ); 
       // Log.v("PTDistoX", "trip count " + tc );
@@ -305,7 +305,7 @@ class PTFile
       }
     
       int rc = PTFile.readInt( fs );
-      TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT trips " + tc + " shots " + sc + " refs " + rc );
+      TDLog.Log( TDLog.LOG_PTOPO, "PT trips " + tc + " shots " + sc + " refs " + rc );
       // Log.v( "PTDistoX", "PT trips " + tc + " shots " + sc + " refs " + rc );
       for ( int k=0; k<rc; ++k ) {
         PTReference ref = new PTReference();
@@ -369,7 +369,7 @@ class PTFile
 //   const char * outlinefile  = oss_plan.str().c_str();
 //   const char * sideviewfile = oss_ext.str().c_str();
 // 
-//   TopoDroidApp.checkPath( oss.str().c_str() );
+//   TDPath.checkPath( oss.str().c_str() );
 //   FileOutputStream fp = fopen( oss.str().c_str(), "w" );
 //   if ( fp == NULL ) return; // FIXME
 //   fprintf(fp, "encoding UTF-8\n");
@@ -465,7 +465,7 @@ class PTFile
                  int extend,         // -1 left, +1 right
                  String comment )
     {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG,
+      TDLog.Log( TDLog.LOG_DEBUG,
                         "PT file add shot " + from + " " + to + " " + distance + " " + azimuth + " " + inclination );
       PTShot shot = new PTShot( distance, azimuth, inclination, roll, (extend == -1), trip );
       int id;

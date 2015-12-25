@@ -84,11 +84,11 @@ public class SensorListActivity extends Activity
 
   public void updateDisplay( )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
+    // TDLog.Log( TDLog.LOG_SENSOR, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     DataHelper data = app.mData;
     if ( data != null && app.mSID >= 0 ) {
       List< SensorInfo > list = data.selectAllSensors( app.mSID, TopoDroidApp.STATUS_NORMAL );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "update shot list size " + list.size() );
+      // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updateSensorList( list );
       setTitle( app.mySurvey );
     // } else {
@@ -98,7 +98,7 @@ public class SensorListActivity extends Activity
 
   private void updateSensorList( List< SensorInfo > list )
   {
-    // TopoDroidLog.Log(TopoDroidLog.LOG_SENSOR, "updateSensorList size " + list.size() );
+    // TDLog.Log(TDLog.LOG_SENSOR, "updateSensorList size " + list.size() );
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
@@ -117,7 +117,7 @@ public class SensorListActivity extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "SensorListActivity onItemClick id " + id);
+    // TDLog.Log( TDLog.LOG_INPUT, "SensorListActivity onItemClick id " + id);
     startSensorDialog( (TextView)view, position );
   }
 
@@ -156,7 +156,7 @@ public class SensorListActivity extends Activity
 
   public void updateSensor( SensorInfo sensor, String comment )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "updateSensor comment " + comment );
+    // TDLog.Log( TDLog.LOG_SENSOR, "updateSensor comment " + comment );
     if ( app.mData.updateSensor( sensor.sid, sensor.id, comment ) ) {
       // if ( app.mListRefresh ) {
       //   // This works but it refreshes the whole list

@@ -122,13 +122,13 @@ public class DrawingLineSectionDialog extends Dialog
     mBtnDraw.setOnClickListener( this );
     mBtnFoto.setOnClickListener( this );
     if ( mPlotInfo != null ) { // check the photo
-      String filename = TopoDroidPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
+      String filename = TDPath.getSurveyJpgFile( mApp.mySurvey, mPlotInfo.name );
       File imagefile = new File( filename );
       if ( imagefile.exists() ) {
         BitmapFactory.Options bfo = new BitmapFactory.Options();
         bfo.inJustDecodeBounds = true;
         BitmapFactory.decodeFile( filename, bfo );
-        int required_size = TopoDroidSetting.mThumbSize;
+        int required_size = TDSetting.mThumbSize;
         int scale = 1;
         while ( bfo.outWidth/scale/2 > required_size || bfo.outHeight/scale/2 > required_size ) {
           scale *= 2;
@@ -159,7 +159,7 @@ public class DrawingLineSectionDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingLineSectionDialog onClick() " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingLineSectionDialog onClick() " + b.getText().toString() );
     long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
 
     if ( b == mBtnFoto ) {

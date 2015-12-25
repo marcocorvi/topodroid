@@ -169,13 +169,13 @@ public class DataHelper extends DataSetObservable
 
   public void openDatabase() 
   {
-    String database_name = TopoDroidPath.getDatabase();
+    String database_name = TDPath.getDatabase();
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
 
     try {
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
-          TopoDroidLog.Error( "failed get writable database" );
+          TDLog.Error( "failed get writable database" );
           return;
         }
 
@@ -261,7 +261,7 @@ public class DataHelper extends DataSetObservable
 
      } catch ( SQLiteException e ) {
        myDB = null;
-       TopoDroidLog.Error( "DataHelper cstr failed to get DB " + e.getMessage() );
+       TDLog.Error( "DataHelper cstr failed to get DB " + e.getMessage() );
      }
    }
 
@@ -316,7 +316,7 @@ public class DataHelper extends DataSetObservable
 
   public SurveyStat getSurveyStat( long sid )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "getSurveyStat sid " + sid );
+    // TDLog.Log( TDLog.LOG_DB, "getSurveyStat sid " + sid );
     HashMap< String, Integer > map = new HashMap< String, Integer >();
     int n0 = 0;
     int nc = 0;
@@ -402,7 +402,7 @@ public class DataHelper extends DataSetObservable
     stat.countStation = map.size();
     stat.countLoop = nl;
     stat.countComponent = nc;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "getSurveyStats NV " + nv + " NE " + ne + " NL " + nl + " NC " + nc);
+    // TDLog.Log( TDLog.LOG_DB, "getSurveyStats NV " + nv + " NE " + ne + " NL " + nl + " NC " + nc);
    
 
     cursor = myDB.query( SHOT_TABLE,
@@ -471,7 +471,7 @@ public class DataHelper extends DataSetObservable
 
   public boolean updateSurveyDayAndComment( long id, String date, String comment, boolean forward )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB,
+    // TDLog.Log( TDLog.LOG_DB,
     //   "updateSurveyDayAndComment id " + id + " day " + date + " comment \"" + comment + "\"" );
     if ( date == null ) return false;
     updateSurveyStmt.bindString( 1, date );
@@ -489,7 +489,7 @@ public class DataHelper extends DataSetObservable
 
   public void updateSurveyTeam( long id, String team, boolean forward )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateSurveyTeam id " + id + " team \"" + team + "\"" );
+    // TDLog.Log( TDLog.LOG_DB, "updateSurveyTeam id " + id + " team \"" + team + "\"" );
     updateSurveyTeamStmt.bindString( 1, (team != null)? team : "" );
     updateSurveyTeamStmt.bindLong( 2, id );
     updateSurveyTeamStmt.execute();
@@ -503,7 +503,7 @@ public class DataHelper extends DataSetObservable
 
   public void updateSurveyDeclination( long id, double decl, boolean forward )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateSurveyDeclination id " + id + " decl. " + decl );
+    // TDLog.Log( TDLog.LOG_DB, "updateSurveyDeclination id " + id + " decl. " + decl );
     updateSurveyDeclinationStmt.bindDouble( 1, decl );
     updateSurveyDeclinationStmt.bindLong( 2, id );
     updateSurveyDeclinationStmt.execute();
@@ -566,7 +566,7 @@ public class DataHelper extends DataSetObservable
   int updateShot( long id, long sid, String fStation, String tStation,
                   long extend, long flag, long leg, String comment, boolean forward )
   {
-    TopoDroidLog.Log(  TopoDroidLog.LOG_DB, "updateShot " + fStation + "-" + tStation + " " + extend + " " + flag + " <" + comment + ">");
+    TDLog.Log(  TDLog.LOG_DB, "updateShot " + fStation + "-" + tStation + " " + extend + " " + flag + " <" + comment + ">");
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
 
@@ -613,7 +613,7 @@ public class DataHelper extends DataSetObservable
   //   int cnt = 0;
   //   if ( hasShotAtStation( id, sid, f ) ) ++cnt;
   //   if ( hasShotAtStation( id, sid, t ) ) ++cnt;
-  //   TopoDroidLog.Log( TopoDroidLog.LOG_DB, "makesCycle cnt " + cnt );
+  //   TDLog.Log( TDLog.LOG_DB, "makesCycle cnt " + cnt );
   //   return cnt >= 2;
   // }
 
@@ -651,7 +651,7 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotExtend( long id, long sid, long extend, boolean forward )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateShotExtend <" + id + "> " + extend );
+    TDLog.Log( TDLog.LOG_DB, "updateShotExtend <" + id + "> " + extend );
     if ( myDB == null ) return;
     updateShotExtendStmt.bindLong( 1, extend );
     updateShotExtendStmt.bindLong( 2, sid );
@@ -699,7 +699,7 @@ public class DataHelper extends DataSetObservable
   public void deleteShot( long id, long sid, boolean forward ) 
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "deleteShot: " + id + "/" + sid );
+    // TDLog.Log( TDLog.LOG_DB, "deleteShot: " + id + "/" + sid );
     deleteShotStmt.bindLong( 1, sid ); 
     deleteShotStmt.bindLong( 2, id );
     deleteShotStmt.execute();
@@ -714,7 +714,7 @@ public class DataHelper extends DataSetObservable
   public void undeleteShot( long id, long sid, boolean forward ) 
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "undeleteShot: " + id + "/" + sid );
+    // TDLog.Log( TDLog.LOG_DB, "undeleteShot: " + id + "/" + sid );
     undeleteShotStmt.bindLong( 1, sid ); 
     undeleteShotStmt.bindLong( 2, id );
     undeleteShotStmt.execute();
@@ -734,7 +734,7 @@ public class DataHelper extends DataSetObservable
       myDB.setLockingEnabled( false );
       myDB.beginTransaction();
       for ( DistoXDBlock b : updatelist ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateShotNameAndExtend <" + b.mFrom + "-" + b.mTo + "> " + b.mExtend );
+        TDLog.Log( TDLog.LOG_DB, "updateShotNameAndExtend <" + b.mFrom + "-" + b.mTo + "> " + b.mExtend );
         updateShotNameAndExtendStmt.bindString( 1, b.mFrom );
         updateShotNameAndExtendStmt.bindString( 2, b.mTo );
         updateShotNameAndExtendStmt.bindLong(   3, b.mExtend );
@@ -762,7 +762,7 @@ public class DataHelper extends DataSetObservable
   // called by the importXXXTask's
   public long insertShots( long sid, long id, ArrayList< ParserShot > shots )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertShots list size " + shots.size() );
+    // TDLog.Log( TDLog.LOG_DB, "insertShots list size " + shots.size() );
     if ( myDB == null ) return -1L;
     InsertHelper ih = new InsertHelper( myDB, SHOT_TABLE );
     final int surveyIdCol = ih.getColumnIndex( "surveyId" );
@@ -809,7 +809,7 @@ public class DataHelper extends DataSetObservable
         ih.bind( commentCol, s.comment );
         ih.bind( typeCol, 0 );
         ih.execute();
-        // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "shot " + id + ": " + s.from + "-" + s.to );
+        // TDLog.Log( TDLog.LOG_DEBUG, "shot " + id + ": " + s.from + "-" + s.to );
         ++id;
       }
       myDB.setTransactionSuccessful();
@@ -867,10 +867,10 @@ public class DataHelper extends DataSetObservable
       if ( ! newfile.exists() ) {
         oldfile.renameTo( newfile );
       } else {
-        TopoDroidLog.Error( "Failed rename. New file already exists: " + newname );
+        TDLog.Error( "Failed rename. New file already exists: " + newname );
       }
     // } else { // THIS IS OK
-    //   TopoDroidLog.Error( "Failed rename. Old file does not exist: " + oldname );
+    //   TDLog.Error( "Failed rename. Old file does not exist: " + oldname );
     }
   }
 
@@ -880,11 +880,11 @@ public class DataHelper extends DataSetObservable
     List< PlotInfo > plots = selectPlotsAtStation( old_sid, station );
     for ( PlotInfo plot : plots ) {
       transferPlot( sid, old_sid, plot.id );
-      renamePlotFile( TopoDroidPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
-                      TopoDroidPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
+      renamePlotFile( TDPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
+                      TDPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
 
-      renamePlotFile( TopoDroidPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
-                      TopoDroidPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );
+      renamePlotFile( TDPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
+                      TDPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );
     }
   }
 
@@ -894,12 +894,12 @@ public class DataHelper extends DataSetObservable
     List< Sketch3dInfo > sketches = selectSketchesAtStation( old_sid, station );
     for ( Sketch3dInfo sketch : sketches ) {
       transferSketch( sid, old_sid, sketch.id );
-      File oldfile = new File( TopoDroidPath.getTh3File( old_survey_name + "-" + sketch.name + ".th3" ) );
-      File newfile = new File( TopoDroidPath.getTh3File( new_survey_name + "=" + sketch.name + ".th3" ) );
+      File oldfile = new File( TDPath.getTh3File( old_survey_name + "-" + sketch.name + ".th3" ) );
+      File newfile = new File( TDPath.getTh3File( new_survey_name + "=" + sketch.name + ".th3" ) );
       if ( oldfile.exists() && ! newfile.exists() ) {
         oldfile.renameTo( newfile );
       } else {
-        TopoDroidLog.Error( "Failed rename th3 sketch 3d " + sketch.name );
+        TDLog.Error( "Failed rename th3 sketch 3d " + sketch.name );
       }
     }
   }
@@ -948,12 +948,12 @@ public class DataHelper extends DataSetObservable
       List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
       for ( PhotoInfo photo : photos ) {
         transferPhoto( sid, myNextId, old_sid, photo.id );
-        File oldfile = new File( TopoDroidPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
-        File newfile = new File( TopoDroidPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
+        File oldfile = new File( TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
+        File newfile = new File( TDPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
         if ( oldfile.exists() && ! newfile.exists() ) {
           oldfile.renameTo( newfile );
         } else {
-          TopoDroidLog.Error( "Failed rename " + old_survey.name + "/" + photo.id + ".jpg" );
+          TDLog.Error( "Failed rename " + old_survey.name + "/" + photo.id + ".jpg" );
         }
       }
 
@@ -1001,7 +1001,7 @@ public class DataHelper extends DataSetObservable
                           long extend, long flag, long leg, long status, int shot_type,
                           String comment, boolean forward )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertShot <" + id + "> " + from + "-" + to + " extend " + extend );
+    TDLog.Log( TDLog.LOG_DB, "insertShot <" + id + "> " + from + "-" + to + " extend " + extend );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -1043,7 +1043,7 @@ public class DataHelper extends DataSetObservable
   public void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom )
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB,
+    // TDLog.Log( TDLog.LOG_DB,
     //                   "updatePlot: " + plot_id + "/" + survey_id + " x " + xoffset + " y " + yoffset + " zoom " + zooom);
     updatePlotStmt.bindDouble( 1, xoffset );
     updatePlotStmt.bindDouble( 2, yoffset );
@@ -1056,7 +1056,7 @@ public class DataHelper extends DataSetObservable
   public void updatePlotView( long plot_id, long survey_id, String view )
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updatePlot: " + plot_id + "/" + survey_id + " view " + view );
+    // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + plot_id + "/" + survey_id + " view " + view );
     updatePlotViewStmt.bindString( 1, view );
     updatePlotViewStmt.bindLong( 2, survey_id );
     updatePlotViewStmt.bindLong( 3, plot_id );
@@ -1066,7 +1066,7 @@ public class DataHelper extends DataSetObservable
   public void updatePlotHide( long plot_id, long survey_id, String hide )
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updatePlot: " + plot_id + "/" + survey_id + " hide " + hide );
+    // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + plot_id + "/" + survey_id + " hide " + hide );
     updatePlotHideStmt.bindString( 1, hide );
     updatePlotHideStmt.bindLong( 2, survey_id );
     updatePlotHideStmt.bindLong( 3, plot_id );
@@ -1078,7 +1078,7 @@ public class DataHelper extends DataSetObservable
   public void dropPlot( long plot_id, long survey_id )
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "dropPlot: " + plot_id + "/" + survey_id );
+    // TDLog.Log( TDLog.LOG_DB, "dropPlot: " + plot_id + "/" + survey_id );
     dropPlotStmt.bindLong( 1, survey_id );
     dropPlotStmt.bindLong( 2, plot_id );
     dropPlotStmt.execute();
@@ -1087,7 +1087,7 @@ public class DataHelper extends DataSetObservable
   public void deletePlot( long plot_id, long survey_id )
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "deletePlot: " + plot_id + "/" + survey_id );
+    // TDLog.Log( TDLog.LOG_DB, "deletePlot: " + plot_id + "/" + survey_id );
     deletePlotStmt.bindLong( 1, survey_id );
     deletePlotStmt.bindLong( 2, plot_id );
     deletePlotStmt.execute();
@@ -1096,12 +1096,12 @@ public class DataHelper extends DataSetObservable
   public void undeletePlot( long plot_id, long survey_id )
   {
     if ( myDB == null ) return;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "undeletePlot: " + plot_id + "/" + survey_id );
+    // TDLog.Log( TDLog.LOG_DB, "undeletePlot: " + plot_id + "/" + survey_id );
     undeletePlotStmt.bindLong( 1, survey_id );
     undeletePlotStmt.bindLong( 2, plot_id );
     undeletePlotStmt.execute();
     // long pid = plot_id + 1; // extended  does not need to be marked as normal
-    // TopoDroidLog.Error( "undeletePlot: " + plot_id + "/" + pid + " survey " + survey_id );
+    // TDLog.Error( "undeletePlot: " + plot_id + "/" + pid + " survey " + survey_id );
     // undeletePlotStmt.bindLong( 1, survey_id );
     // undeletePlotStmt.bindLong( 2, plot_id );
     // undeletePlotStmt.execute();
@@ -1174,7 +1174,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(6) ) ); // value
       } while (cursor.moveToNext());
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Sensors list size " + list.size() );
+    // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
     if (cursor != null && !cursor.isClosed()) {
       cursor.close();
     }
@@ -1216,7 +1216,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(6) ) ); // value
       } while (cursor.moveToNext());
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Sensors list size " + list.size() );
+    // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
     if (cursor != null && !cursor.isClosed()) {
       cursor.close();
     }
@@ -1256,7 +1256,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(4) ) );
       } while (cursor.moveToNext());
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Photos list size " + list.size() );
+    // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
     if (cursor != null && !cursor.isClosed()) {
       cursor.close();
     }
@@ -1296,7 +1296,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(4) ) );
       } while (cursor.moveToNext());
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Photos list size " + list.size() );
+    // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
     if (cursor != null && !cursor.isClosed()) {
       cursor.close();
     }
@@ -1339,7 +1339,7 @@ public class DataHelper extends DataSetObservable
     if (cursor != null && !cursor.isClosed()) {
       cursor.close();
     }
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
+    // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
     return list;
   }
 
@@ -1368,7 +1368,7 @@ public class DataHelper extends DataSetObservable
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
      return list;
    }
 
@@ -1410,7 +1410,7 @@ public class DataHelper extends DataSetObservable
          list.add( sketch );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Sketch list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Sketch list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1549,7 +1549,7 @@ public class DataHelper extends DataSetObservable
          list.add( plot );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Plots list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1672,7 +1672,7 @@ public class DataHelper extends DataSetObservable
 
    public DistoXDBlock selectShot( long id, long sid )
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectShot " + id + "/" + sid );
+     // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
        "surveyId=? and id=?", 
@@ -1698,7 +1698,7 @@ public class DataHelper extends DataSetObservable
 
    public DistoXDBlock selectPreviousLegShot( long shot_id, long survey_id )
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectPreviousLegShot " + shot_id + "/" + survey_id );
+     // TDLog.Log( TDLog.LOG_DB, "selectPreviousLegShot " + shot_id + "/" + survey_id );
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
        "surveyId=? and id<?",
@@ -1775,7 +1775,7 @@ public class DataHelper extends DataSetObservable
    //           if ( t > ret ) ret = t;
    //         }
    //       } catch ( NumberFormatException e ) {
-   //         TopoDroidLog.Error( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
+   //         TDLog.Error( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
    //       }
    //     } while (cursor.moveToNext());
    //   }
@@ -1788,7 +1788,7 @@ public class DataHelper extends DataSetObservable
 
    public DistoXDBlock selectNextLegShot( long shot_id, long survey_id ) 
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectNextLegShot " + shot_id + "/" + survey_id );
+     // TDLog.Log( TDLog.LOG_DB, "selectNextLegShot " + shot_id + "/" + survey_id );
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
        "surveyId=? and id>?",
@@ -1826,7 +1826,7 @@ public class DataHelper extends DataSetObservable
    //   if (cursor.moveToFirst()) {
    //     do {
    //       long idc = (long)cursor.getLong(0);
-   //       TopoDroidLog.Log( TopoDroidLog.LOG_DB, "hasShotAtStation " + id + " " + idc ); 
+   //       TDLog.Log( TDLog.LOG_DB, "hasShotAtStation " + id + " " + idc ); 
    //       if ( id != idc ) {
    //         ret = true;
    //       }
@@ -1835,7 +1835,7 @@ public class DataHelper extends DataSetObservable
    //   if (cursor != null && !cursor.isClosed()) {
    //     cursor.close();
    //   }
-   //   TopoDroidLog.Log( TopoDroidLog.LOG_DB, "hasShotAtStation returns " + ret );
+   //   TDLog.Log( TDLog.LOG_DB, "hasShotAtStation returns " + ret );
    //   return ret;
    // }
 
@@ -1937,7 +1937,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots At Station list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1965,7 +1965,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots At Station list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -1991,7 +1991,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots To Station list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Shots To Station list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -2015,7 +2015,7 @@ public class DataHelper extends DataSetObservable
          list.add( block );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -2039,7 +2039,7 @@ public class DataHelper extends DataSetObservable
          list.add( block );
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -2065,7 +2065,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "select All Shots list size " + list.size() );
+     // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
      }
@@ -2103,7 +2103,7 @@ public class DataHelper extends DataSetObservable
 
    private List<String> selectAllNames( String table )
    {
-     TopoDroidLog.Log( TopoDroidLog.LOG_DB, "selectAllNames table " + table );
+     TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
 
      List< String > list = new ArrayList< String >();
      if ( myDB == null ) return list;
@@ -2122,7 +2122,7 @@ public class DataHelper extends DataSetObservable
      } catch ( SQLException e ) {
        // ignore
      }
-     TopoDroidLog.Log( TopoDroidLog.LOG_DB, "found " + list.size() + " names " );
+     TDLog.Log( TDLog.LOG_DB, "found " + list.size() + " names " );
      return list;
    }
 
@@ -2134,11 +2134,11 @@ public class DataHelper extends DataSetObservable
    public String getValue( String key )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Error( "DataHelper::getValue null DB");
+       TDLog.Error( "DataHelper::getValue null DB");
        return null;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Error( "DataHelper::getValue null key");
+       TDLog.Error( "DataHelper::getValue null key");
        return null;
      }
      String value = null;
@@ -2158,15 +2158,15 @@ public class DataHelper extends DataSetObservable
    public void setValue( String key, String value )
    {
      if ( myDB == null ) {
-       TopoDroidLog.Error( "DataHelper::setValue null DB");
+       TDLog.Error( "DataHelper::setValue null DB");
        return;
      }
      if ( key == null || key.length() == 0 ) {
-       TopoDroidLog.Error( "DataHelper::setValue null key");
+       TDLog.Error( "DataHelper::setValue null key");
        return;
      }
      if ( value == null || value.length() == 0 ) {
-       TopoDroidLog.Error( "DataHelper::setValue null value");
+       TDLog.Error( "DataHelper::setValue null value");
        return;
      }
 
@@ -2256,7 +2256,7 @@ public class DataHelper extends DataSetObservable
    {
      long id = -1;
      if ( myDB == null ) { return 0; }
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "setName >" + name + "< table " + table );
+     // TDLog.Log( TDLog.LOG_DB, "setName >" + name + "< table " + table );
      Cursor cursor = myDB.query( table, new String[] { "id" },
                                  "name = ?", new String[] { name },
                                  null, null, null );
@@ -2310,7 +2310,7 @@ public class DataHelper extends DataSetObservable
                int k = Integer.parseInt( name.substring( prefix_length ) );
                if ( k >= max ) max = k+1;
              } catch ( NumberFormatException e ) {
-               TopoDroidLog.Error( "getNextSectionId parse Int error: survey ID " + sid );
+               TDLog.Error( "getNextSectionId parse Int error: survey ID " + sid );
              }
            }
          } while (cursor.moveToNext());
@@ -2625,7 +2625,7 @@ public class DataHelper extends DataSetObservable
      dropDeletedFixed( sid, station ); // drop deleted fixed if any
 
      id = maxId( FIXED_TABLE, sid );
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertFixed id " + id );
+     // TDLog.Log( TDLog.LOG_DB, "insertFixed id " + id );
      ContentValues cv = new ContentValues();
      cv.put( "surveyId",  sid );
      cv.put( "id",        id );
@@ -2865,7 +2865,7 @@ public class DataHelper extends DataSetObservable
 
    // public boolean updateSurveyName( long id, String name )
    // {
-   //   // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "updateSurveyName id " + id + " name \"" + name + "\"" );
+   //   // TDLog.Log( TDLog.LOG_DB, "updateSurveyName id " + id + " name \"" + name + "\"" );
    //   updateSurveyNameStmt.bindString( 1, (name != null)? name : "" );
    //   updateSurveyNameStmt.bindLong( 2, id );
    //   updateSurveyNameStmt.execute();
@@ -2885,7 +2885,7 @@ public class DataHelper extends DataSetObservable
      }
      if (cursor != null && !cursor.isClosed()) { cursor.close(); }
 
-     TopoDroidLog.Log( TopoDroidLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
+     TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
      if ( forward ) {
        // synchronized( mListeners )
        for ( DataListener listener : mListeners ) {
@@ -2932,11 +2932,11 @@ public class DataHelper extends DataSetObservable
 
    public void dumpToFile( String filename, long sid )
    {
-     // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "dumpToFile " + filename );
+     // TDLog.Log( TDLog.LOG_DB, "dumpToFile " + filename );
      // String where = "surveyId=" + Long.toString(sid);
      if ( myDB == null ) return;
      try {
-       TopoDroidApp.checkPath( filename );
+       TDPath.checkPath( filename );
        FileWriter fw = new FileWriter( filename );
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
@@ -3174,7 +3174,7 @@ public class DataHelper extends DataSetObservable
        BufferedReader br = new BufferedReader( fr );
        // first line is survey
        line = br.readLine();
-       // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile: " + line );
+       // TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
        String[] vals = line.split(" ", 4); 
        // if ( vals.length != 4 ) { TODO } // FIXME
        String table = vals[2];
@@ -3195,7 +3195,7 @@ public class DataHelper extends DataSetObservable
          sid = setSurvey( name, false );
          updateSurveyInfo( sid, day, team, decl, comment, init_station, false );
          while ( (line = br.readLine()) != null ) {
-           // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile: " + line );
+           // TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
            vals = line.split(" ", 4);
            table = vals[2];
            v = vals[3];
@@ -3203,7 +3203,7 @@ public class DataHelper extends DataSetObservable
            // pos = v.indexOf( '(' ) + 1;
            // len = v.lastIndexOf( ')' );
            // scanline1.skipSpaces( );
-           // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loafFromFile " + table + " " + v );
+           // TDLog.Log( TDLog.LOG_DB, "loafFromFile " + table + " " + v );
            skip_sid = scanline1.longValue( );
            id = scanline1.longValue( );
            if ( table.equals(PHOTO_TABLE) ) { // FIXME PHOTO
@@ -3213,7 +3213,7 @@ public class DataHelper extends DataSetObservable
              comment = scanline1.stringValue( );
              if ( shotid >= 0 ) {
                insertPhoto( sid, id, shotid, title, date, comment );
-               // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
+               // TDLog.Log( TDLog.LOG_DB, "loadFromFile photo " + sid + " " + id + " " + title + " " + name );
              }
            } else if ( table.equals(PLOT_TABLE) ) { // ***** PLOTS
              name         = scanline1.stringValue( );
@@ -3228,7 +3228,7 @@ public class DataHelper extends DataSetObservable
              double clino = ( db_version > 20 )? scanline1.doubleValue( ) : 0;
              String hide  = ( db_version > 24 )? scanline1.stringValue( ) : "";
              insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, false );
-             // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
+             // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
    
            // FIXME_SKETCH_3D
            } else if ( table.equals(SKETCH_TABLE) ) { // ***** SKETCHES
@@ -3273,7 +3273,7 @@ public class DataHelper extends DataSetObservable
 
              insertShot( sid, id, from, to, d, b, c, r, extend, flag, leg, status, 0, comment, false );
              updateShotAMDR( id, sid, acc, mag, dip, r, false );
-             // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "insertShot " + sid + " " + id + " " + from + " " + to );
+             // TDLog.Log( TDLog.LOG_DB, "insertShot " + sid + " " + id + " " + from + " " + to );
            } else if ( table.equals(FIXED_TABLE) ) {
              station    = scanline1.stringValue( );
              double lng = scanline1.doubleValue( );
@@ -3283,11 +3283,11 @@ public class DataHelper extends DataSetObservable
              comment    = scanline1.stringValue( );
              status     = scanline1.longValue( );
              insertFixed( sid, id, station, lng, lat, alt, asl, comment, status );
-             // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
+             // TDLog.Log( TDLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
            } else if ( table.equals(STATION_TABLE) ) {
              // N.B. ONLY IF db_version > 19
-             // TopoDroidLog.Error( "v <" + v + ">" );
-             // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment  );
+             // TDLog.Error( "v <" + v + ">" );
+             // TDLog.Log( TDLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment  );
              name    = scanline1.stringValue( );
              comment = scanline1.stringValue( );
              insertStation( sid, name, comment );
@@ -3482,14 +3482,14 @@ public class DataHelper extends DataSetObservable
       {
          super(context, database_name, null, DATABASE_VERSION);
          // Log.v("DistoX", "DB NAME " + database_name );
-         // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
+         // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + DATABASE_VERSION );
       }
 
       @Override
       public void onCreate(SQLiteDatabase db) 
       {
         createTables( db );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
+        // TDLog.Log( TDLog.LOG_DB, "DistoXOpenHelper onCreate done db " + db );
       }
 
       private void createTables( SQLiteDatabase db )
@@ -3666,7 +3666,7 @@ public class DataHelper extends DataSetObservable
 
            db.setTransactionSuccessful();
          } catch ( SQLException e ) {
-           TopoDroidLog.Error( "createTables exception " + e.toString() );
+           TDLog.Error( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
            db.setLockingEnabled( true );
@@ -3677,7 +3677,7 @@ public class DataHelper extends DataSetObservable
       public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
       {  
          // FIXME this is called at each start when the database file exists
-         TopoDroidLog.Log( TopoDroidLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
+         TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
          switch ( oldVersion ) {
            case 14: 
              db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );

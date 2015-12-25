@@ -180,7 +180,7 @@ public class DeviceActivity extends Activity
 
   // private void setButtonRemote( )
   // {
-  //   if ( TopoDroidSetting.mLevelOverNormal ) {
+  //   if ( TDSetting.mLevelOverNormal ) {
   //     if ( mDevice != null && mDevice.mType == Device.DISTO_X310 ) {
   //       mButton1[ indexButtonRemote ].setEnabled( true );
   //       mButton1[ indexButtonRemote ].setBackgroundResource( icons00[ indexButtonRemote ] );
@@ -220,10 +220,10 @@ public class DeviceActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00no = ( TopoDroidSetting.mSizeButtons == 2 )? ixonsno : iconsno;
+    // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
+    // icons00no = ( TDSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
-    mNrButton1 = TopoDroidSetting.mLevelOverNormal ? 6 : 3;
+    mNrButton1 = TDSetting.mLevelOverNormal ? 6 : 3;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = new Button( this );
@@ -259,7 +259,7 @@ public class DeviceActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
+    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
@@ -269,7 +269,7 @@ public class DeviceActivity extends Activity
 
   private void updateList( )
   {
-    // TopoDroidLog.Log(TopoDroidLog.LOG_MAIN, "updateList" );
+    // TDLog.Log(TDLog.LOG_MAIN, "updateList" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
     if ( mApp.mBTAdapter != null ) {
@@ -284,7 +284,7 @@ public class DeviceActivity extends Activity
           if ( dev == null ) {
             String model = device.getName();
             if ( model == null ) {
-              TopoDroidLog.Error( "WARNING. Null name for device " + addr );
+              TDLog.Error( "WARNING. Null name for device " + addr );
             } else if ( model.startsWith( "DistoX", 0 ) ) {
               String name  = Device.modelToName( model );
               mApp.mDData.insertDevice( addr, model, name );
@@ -292,7 +292,7 @@ public class DeviceActivity extends Activity
             }
           }
           if ( dev != null ) {
-            // // TopoDroidLog.Error( "device " + name );
+            // // TDLog.Error( "device " + name );
             // if ( dev.mModel.startsWith("DistoX-") ) {      // DistoX2 X310
             //   mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
             // } else if ( dev.mModel.equals("DistoX") ) {    // DistoX A3
@@ -324,7 +324,7 @@ public class DeviceActivity extends Activity
       //   }
       } else if ( p++ == pos ) { // PAIR
         pairDevice();
-      } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // DETACH
+      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DETACH
         detachDevice();
       // } else if ( p++ == pos ) { // CALIB
       //   if ( mApp.mDevice == null ) {
@@ -332,8 +332,8 @@ public class DeviceActivity extends Activity
       //   } else {
       //     (new CalibListDialog( this, this, mApp )).show();
       //   }
-      } else if ( TopoDroidSetting.mLevelOverNormal && /* TopoDroidSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
-        if ( TopoDroidSetting.mCommType != 0 ) {
+      } else if ( TDSetting.mLevelOverNormal && /* TDSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
+        if ( TDSetting.mCommType != 0 ) {
           Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
         } else {
           mApp.resetComm();
@@ -356,7 +356,7 @@ public class DeviceActivity extends Activity
 
 
     CharSequence item = ((TextView) view).getText();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DeviceActivity onItemClick() " + item.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "DeviceActivity onItemClick() " + item.toString() );
     // String value = item.toString();
     // if ( value.startsWith( "DistoX", 0 ) ) 
     {
@@ -409,7 +409,7 @@ public class DeviceActivity extends Activity
   public void enableButtons( boolean enable ) 
   {
     mButton1[1].setEnabled( enable );
-    if ( TopoDroidSetting.mLevelOverNormal ) {
+    if ( TDSetting.mLevelOverNormal ) {
       for ( int k=2; k<mNrButton1; ++k ) {
         mButton1[k].setEnabled( enable );
       }
@@ -418,14 +418,14 @@ public class DeviceActivity extends Activity
       setTitleColor( TopoDroidConst.COLOR_NORMAL );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib );
-      if ( TopoDroidSetting.mLevelOverNormal ) {
+      if ( TDSetting.mLevelOverNormal ) {
         mButton1[IDX_READ].setBackgroundDrawable( mBMread);
       }
     } else {
       setTitleColor( TopoDroidConst.COLOR_CONNECTED );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib_no );
-      if ( TopoDroidSetting.mLevelOverNormal ) {
+      if ( TDSetting.mLevelOverNormal ) {
         mButton1[IDX_READ].setBackgroundDrawable( mBMread_no );
       }
     }
@@ -452,7 +452,7 @@ public class DeviceActivity extends Activity
       return;
     }
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DeviceActivity onClick() button " + b.getText().toString() ); 
+    // TDLog.Log( TDLog.LOG_INPUT, "DeviceActivity onClick() button " + b.getText().toString() ); 
 
     // FIXME COMMENTED
     // DistoXComm comm = mApp.mComm;
@@ -555,7 +555,7 @@ public class DeviceActivity extends Activity
 
   boolean readDeviceHeadTail( int[] head_tail )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
+    // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
     String ht = mApp.readHeadTail( mDevice.mAddress, head_tail );
     if ( ht == null ) {
       Toast.makeText( this, R.string.head_tail_failed, Toast.LENGTH_SHORT).show();
@@ -595,8 +595,8 @@ public class DeviceActivity extends Activity
     dumpfile.trim();
     if ( dumpfile.length() == 0 ) return;
     try { 
-      TopoDroidApp.checkPath( dumpfile );
-      FileWriter fw = new FileWriter( TopoDroidPath.getDumpFile( dumpfile ) );
+      TDPath.checkPath( dumpfile );
+      FileWriter fw = new FileWriter( TDPath.getDumpFile( dumpfile ) );
       PrintWriter pw = new PrintWriter( fw );
       for ( MemoryOctet m : memory ) {
         m.printHexString( pw );
@@ -676,21 +676,21 @@ public class DeviceActivity extends Activity
       case REQUEST_DEVICE:
         if ( result == RESULT_OK ) {
           String address = extras.getString( TopoDroidTag.TOPODROID_DEVICE_ACTION );
-          // TopoDroidLog.Log(TopoDroidLog.LOG_DISTOX, "OK " + address );
+          // TDLog.Log(TDLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
-            TopoDroidLog.Error( "onActivityResult REQUEST_DEVICE: null address");
+            TDLog.Error( "onActivityResult REQUEST_DEVICE: null address");
           } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true );
             mApp.setDevice( address );
 
-            if ( TopoDroidSetting.mAutoPair ) { // try to get the system ask for the PIN
+            if ( TDSetting.mAutoPair ) { // try to get the system ask for the PIN
               BluetoothDevice btDevice = mApp.mBTAdapter.getRemoteDevice( address );
-              // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress()
+              // TDLog.Log( TDLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress()
               //   + " status " + btDevice.getBondState() );
               if ( ! DeviceUtil.isPaired( btDevice ) ) {
                 DeviceUtil.pairDevice( btDevice );
                 DeviceUtil.bindDevice( btDevice );
-                for (int c=0; c<TopoDroidSetting.mConnectSocketDelay; ++c ) {
+                for (int c=0; c<TDSetting.mConnectSocketDelay; ++c ) {
                   if ( DeviceUtil.isPaired( btDevice ) ) break;
                   try {
                     // Thread.yield();
@@ -705,7 +705,7 @@ public class DeviceActivity extends Activity
             setState();
           }
         } else if ( result == RESULT_CANCELED ) {
-          TopoDroidLog.Error( "CANCELED");
+          TDLog.Error( "CANCELED");
           // finish(); // back to survey
         }
         updateList();
@@ -724,7 +724,7 @@ public class DeviceActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Error( "search requested" );
+    // TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
     startActivity( intent );
@@ -744,7 +744,7 @@ public class DeviceActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Error( "key down: code " + code );
+        TDLog.Error( "key down: code " + code );
     }
     return false;
   }
@@ -757,8 +757,8 @@ public class DeviceActivity extends Activity
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TopoDroidSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[3] ) );
+    if ( TDSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[2] ) );
+    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
     mMenu.setAdapter( mMenuAdapter );
@@ -831,7 +831,7 @@ public class DeviceActivity extends Activity
 
   void importCalibFile( String name )
   {
-    String filename = TopoDroidPath.getCsvFile( name );
+    String filename = TDPath.getCsvFile( name );
     File file = new File( filename );
     if ( ! file.exists() ) {
       Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();

@@ -134,11 +134,11 @@ public class PlotRecoverDialog extends Dialog
   {
     mAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
 
-    if ( TopoDroidSetting.mBinaryTh2 ) {
-      populateAdapter( TopoDroidPath.getTdrFileWithExt( mFilename ), ".tdr" );
+    if ( TDSetting.mBinaryTh2 ) {
+      populateAdapter( TDPath.getTdrFileWithExt( mFilename ), ".tdr" );
       mTVfilename.setText( mFilename + ".tdr" );
     } else {
-      populateAdapter( TopoDroidPath.getTh2FileWithExt( mFilename ), ".th2" );
+      populateAdapter( TDPath.getTh2FileWithExt( mFilename ), ".th2" );
       mTVfilename.setText( mFilename + ".th2" );
     }
     mList.setAdapter( mAdapter );
@@ -156,7 +156,7 @@ public class PlotRecoverDialog extends Dialog
   @Override
   public void onClick(View v) 
   {
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PlotRecoverDialog onClick() " );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PlotRecoverDialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnOK ) { // OK
       mParent.doRecover( mTVfilename.getText().toString(), mType );

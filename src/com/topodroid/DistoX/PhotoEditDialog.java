@@ -53,7 +53,7 @@ public class PhotoEditDialog extends Dialog
     mParent = parent;
     mPhoto  = photo;
     mFilename = filename;
-    // TopoDroidLog.Log(TopoDroidLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
+    // TDLog.Log(TDLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
   }
 
 // -------------------------------------------------------------------
@@ -61,7 +61,7 @@ public class PhotoEditDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PHOTO, "onCreate" );
+    // TDLog.Log( TDLog.LOG_PHOTO, "onCreate" );
     setContentView(R.layout.photo_edit_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -83,7 +83,7 @@ public class PhotoEditDialog extends Dialog
       BitmapFactory.Options bfo = new BitmapFactory.Options();
       bfo.inJustDecodeBounds = true;
       BitmapFactory.decodeFile( mFilename, bfo );
-      int required_size = TopoDroidSetting.mThumbSize;
+      int required_size = TDSetting.mThumbSize;
       int scale = 1;
       while ( bfo.outWidth/scale/2 > required_size || bfo.outHeight/scale/2 > required_size ) {
         scale *= 2;
@@ -113,7 +113,7 @@ public class PhotoEditDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
 
     if ( b == mButtonOK ) {
       if ( mETcomment.getText() == null ) {

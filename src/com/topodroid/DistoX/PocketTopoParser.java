@@ -38,7 +38,7 @@ public class PocketTopoParser extends ImportParser
   {
     super( apply_declination );
     String mStartFrom = null;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PocketTopo parser " + surveyname );
+    // TDLog.Log( TDLog.LOG_PTOPO, "PocketTopo parser " + surveyname );
     mName     = surveyname.replace(".top", "");
     readPocketTopoFile( filename );
   }
@@ -46,22 +46,22 @@ public class PocketTopoParser extends ImportParser
   private void readPocketTopoFile( String filename ) throws ParserException
   {
     PTFile ptfile = new PTFile();
-    TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT survey " + mName + " read file " + filename );
+    TDLog.Log( TDLog.LOG_PTOPO, "PT survey " + mName + " read file " + filename );
     // Log.v( "PTDistoX", "PT survey " + mName + " read file " + filename );
     try {
       FileInputStream fs = new FileInputStream( filename );
       ptfile.read( fs );
       fs.close();
     } catch ( FileNotFoundException e ) {
-      TopoDroidLog.Error( "File not found: " + filename );
+      TDLog.Error( "File not found: " + filename );
       // FIXME
       return;
     } catch ( IOException e ) { // on close
-      TopoDroidLog.Error( "IO exception: " + e );
+      TDLog.Error( "IO exception: " + e );
       return;
     }
     int nr_trip = ptfile.tripCount();
-    TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT trip count " + nr_trip );
+    TDLog.Log( TDLog.LOG_PTOPO, "PT trip count " + nr_trip );
     mComment = "";
     // mTeam = "";
     if ( nr_trip > 0 ) { // use only the first trip
@@ -131,7 +131,7 @@ public class PocketTopoParser extends ImportParser
       //   data.add( new DistoXDBlock( from, to,  da, ba, ca, ra, extend, DistoXDBlock.BLOCK_MAIN_LEG ) );
       // }
     }
-    TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT parser shot count " + shot_count + " size " + shots.size() );
+    TDLog.Log( TDLog.LOG_PTOPO, "PT parser shot count " + shot_count + " size " + shots.size() );
 
     // Log.v("PTDistoX", "start from " + mStartFrom );
     // DistoXNum num = new DistoXNum( data, mStartFrom, null, null );
@@ -147,15 +147,15 @@ public class PocketTopoParser extends ImportParser
       // Log.v("PTDistoX", " start " + st.e + " " + st.s );
 
       PTDrawing outline = ptfile.getOutline();
-      String filename1 = TopoDroidPath.getTh2File( mName + "-1p.th2" );
+      String filename1 = TDPath.getTh2File( mName + "-1p.th2" );
       writeDrawing( filename1, outline, PlotInfo.PLOT_PLAN, 5*DrawingUtil.CENTER_X, 5*DrawingUtil.CENTER_Y );
 
       PTDrawing sideview = ptfile.getSideview();
-      String filename2 = TopoDroidPath.getTh2File( mName + "-1s.th2" );
+      String filename2 = TDPath.getTh2File( mName + "-1s.th2" );
       writeDrawing( filename2, sideview, PlotInfo.PLOT_EXTENDED, 5*DrawingUtil.CENTER_X, 5*DrawingUtil.CENTER_Y );
       // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
     } else {
-      TopoDroidLog.Error( "PT null StartFrom");
+      TDLog.Error( "PT null StartFrom");
     }
     
   }
@@ -168,12 +168,12 @@ public class PocketTopoParser extends ImportParser
     if ( drawing == null ) return false;
     int elem_count = drawing.elementNumber();
     // Log.v( "PTDistoX", "off " + xoff + " " + yoff );
-    TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "Therion file " + filename + " elems " + elem_count );
+    TDLog.Log( TDLog.LOG_PTOPO, "Therion file " + filename + " elems " + elem_count );
 
-    TopoDroidApp.checkPath( filename );
+    TDPath.checkPath( filename );
     File file = new File( filename );
     boolean ret = false;
-    synchronized( TopoDroidPath.mTherionLock ) {
+    synchronized( TDPath.mTherionLock ) {
       try {
         FileWriter fw = new FileWriter( file );
         PrintWriter pw = new PrintWriter( fw );
@@ -242,7 +242,7 @@ public class PocketTopoParser extends ImportParser
         fw.close();
         ret = true;
       } catch ( IOException e ) {
-        TopoDroidLog.Error( mName + " scraps IO error " + e );
+        TDLog.Error( mName + " scraps IO error " + e );
         file.delete();
       }
     }

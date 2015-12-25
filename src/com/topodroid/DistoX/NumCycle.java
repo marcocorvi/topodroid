@@ -42,7 +42,7 @@ public class NumCycle
       branches[mSize] = branch;
       // nodes[mSize] = node;
       dirs[mSize] = ( node == branch.n2 )? 1 : -1;
-      // TopoDroidLog.Log( TopoDroidLog.LOG_NUM, "C add branch dir " + dirs[mSize] );
+      // TDLog.Log( TDLog.LOG_NUM, "C add branch dir " + dirs[mSize] );
       // branch.dump();
       ++mSize;
     }

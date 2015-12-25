@@ -61,14 +61,14 @@ class DrawingIO
     float x, y, x1, y1, x2, y2;
     boolean is_not_section = true;
 
-    TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
+    TDLog.Log( TDLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "after reset 0: " + DrawingBrushPaths.mOrientation[0]
+    // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + DrawingBrushPaths.mOrientation[0]
     //                      + " 7: " + DrawingBrushPaths.mOrientation[7] );
 
-    synchronized( TopoDroidPath.mTherionLock ) {
+    synchronized( TDPath.mTherionLock ) {
       try {
         FileReader fr = new FileReader( filename );
         BufferedReader br = new BufferedReader( fr );
@@ -115,13 +115,13 @@ class DrawingIO
             continue;
           }
 
-          // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line: >>" + line + "<<");
+          // TDLog.Log( TDLog.LOG_PLOT, "  line: >>" + line + "<<");
           line = line.replaceAll("\\s+", " ");
           String[] vals = line.split( " " );
           // FIXME assert( vals.length > 0 );
           if ( vals[0].equals( "scrap" ) ) {
             if ( vals.length < 4 ) {
-              TopoDroidLog.Error( "bad scrap cmd: " + line );
+              TDLog.Error( "bad scrap cmd: " + line );
             } else {
               // String name = vals[1];
               // skip "-projection" vals[2]
@@ -130,7 +130,7 @@ class DrawingIO
           } else if ( vals[0].equals( "point" ) ) {
             // ****** THERION POINT ********************************** point X Y type [options]
             if ( vals.length < 4 ) {
-              TopoDroidLog.Error( "bad point cmd: " + line );
+              TDLog.Error( "bad point cmd: " + line );
             } else {
               int ptType = DrawingBrushPaths.mPointLib.mSymbolNr;
               boolean has_orientation = false;
@@ -142,14 +142,14 @@ class DrawingIO
                 x = dx + Float.parseFloat( vals[1] ) / TopoDroidConst.TO_THERION;
                 y = dy - Float.parseFloat( vals[2] ) / TopoDroidConst.TO_THERION;
               } catch ( NumberFormatException e ) {
-                TopoDroidLog.Error( "Therion Point error (number fmt) <" + line + ">" );
+                TDLog.Error( "Therion Point error (number fmt) <" + line + ">" );
                 continue;
               }
               String type = vals[3];
               String label_text = null;
               int k = 4;
               if ( type.equals( "station" ) ) {
-                if ( ! TopoDroidSetting.mAutoStations ) {
+                if ( ! TDSetting.mAutoStations ) {
                   if ( vals.length > k+1 && vals[k].equals( "-name" ) ) {
                     String name = vals[k+1];
                     DrawingStationPath station_path = new DrawingStationPath( name, x, y, scale );
@@ -164,7 +164,7 @@ class DrawingIO
                     orientation = Float.parseFloat( vals[k+1] );
                     has_orientation = true;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Error( "Therion Point orientation error : " + line );
+                    TDLog.Error( "Therion Point orientation error : " + line );
                   }
                   k += 2;
                 } else if ( vals[k].equals( "-scale" ) ) {
@@ -211,7 +211,7 @@ class DrawingIO
               }
 
               if ( has_orientation && DrawingBrushPaths.mPointLib.isSymbolOrientable(ptType) ) {
-                // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
+                // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
                 DrawingBrushPaths.rotateGradPoint( ptType, orientation );
                 DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
                 surface.addDrawingPath( path );
@@ -234,11 +234,11 @@ class DrawingIO
           } else if ( vals[0].equals( "line" ) ) {
             // ********* THERION LINES ************************************************************
             if ( vals.length < 2 ) {
-              TopoDroidLog.Error( "bad line cmd: " + line );
+              TDLog.Error( "bad line cmd: " + line );
             } else {
               if ( vals.length >= 6 && vals[1].equals( "border" ) && vals[2].equals( "-id" ) ) { // THERION AREAS
                 boolean visible = true;
-                // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "area id " + vals[3] );
+                // TDLog.Log( TDLog.LOG_PLOT, "area id " + vals[3] );
                 if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
                   visible = false;
                 }
@@ -253,7 +253,7 @@ class DrawingIO
                     x = dx + Float.parseFloat( pt[0] ) / TopoDroidConst.TO_THERION;
                     y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Error( "Therion Line error (number fmt) <" + line + ">" );
+                    TDLog.Error( "Therion Line error (number fmt) <" + line + ">" );
                     continue;
                   }
                   path.addStartPoint( x, y );
@@ -270,13 +270,13 @@ class DrawingIO
                           arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
                           // continue;
                         }
-                        // TopoDroidLog.Log(TopoDroidLog.LOG_PLOT, "set area type " + arType + " " + vals2[1]);
+                        // TDLog.Log(TDLog.LOG_PLOT, "set area type " + arType + " " + vals2[1]);
                         double orientation = 0;
                         if ( vals2.length >= 4 && vals2[2].equals("#orientation") ) {
                           try {
                             orientation = Double.parseDouble( vals2[3] );
                           } catch ( NumberFormatException e ) { 
-                            TopoDroidLog.Error( "Therion Area orientation error <" + line + ">" );
+                            TDLog.Error( "Therion Area orientation error <" + line + ">" );
                           }
                         }
                         path.setAreaType( arType );
@@ -287,19 +287,19 @@ class DrawingIO
                       line = readLine( br );
                       break;
                     }
-                    // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "  line point: >>" + line + "<<");
+                    // TDLog.Log( TDLog.LOG_DEBUG, "  line point: >>" + line + "<<");
                     String[] pt2 = line.split( " " );
                     if ( pt2.length == 2 ) {
                       try {
                         x = dx + Float.parseFloat( pt2[0] ) / TopoDroidConst.TO_THERION;
                         y = dy - Float.parseFloat( pt2[1] ) / TopoDroidConst.TO_THERION;
                         path.addPoint( x, y );
-                        // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x + " " + y);
+                        // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x + " " + y);
                       } catch ( NumberFormatException e ) {
-                        TopoDroidLog.Error( "Therion Line X-Y error (10) <" + line + ">" );
+                        TDLog.Error( "Therion Line X-Y error (10) <" + line + ">" );
                         continue;
                       } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TopoDroidLog.Error( "Therion Line X-Y error (11) " + line );
+                        TDLog.Error( "Therion Line X-Y error (11) " + line );
                         continue;
                       }
                     } else if ( pt2.length == 6 ) {
@@ -311,12 +311,12 @@ class DrawingIO
                         x  = dx + Float.parseFloat( pt2[4] ) / TopoDroidConst.TO_THERION;
                         y  = dy - Float.parseFloat( pt2[5] ) / TopoDroidConst.TO_THERION;
                         path.addPoint3( x1, y1, x2, y2, x, y );
-                        // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
+                        // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
                       } catch ( NumberFormatException e ) {
-                        TopoDroidLog.Error( "Therion Line X-Y error (12) <" + line + ">" );
+                        TDLog.Error( "Therion Line X-Y error (12) <" + line + ">" );
                         continue;
                       } catch ( ArrayIndexOutOfBoundsException e ) {
-                        TopoDroidLog.Error( "Therion Line X-Y error (13) " + line );
+                        TDLog.Error( "Therion Line X-Y error (13) " + line );
                         continue;
                       }
                     }
@@ -324,7 +324,7 @@ class DrawingIO
                 }
               } else { // ********* regular lines
                 // FIXME assert (vals.length > 1 );
-                // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "line type " + vals[1] );
+                // TDLog.Log( TDLog.LOG_PLOT, "line type " + vals[1] );
                 boolean closed = false;
                 boolean reversed = false;
                 int outline = DrawingLinePath.OUTLINE_UNDEF;
@@ -380,17 +380,17 @@ class DrawingIO
                   if ( outline != DrawingLinePath.OUTLINE_UNDEF ) path.mOutline = outline;
                   if ( options != null ) path.setOptions( options );
 
-                  // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line start point: <" + line + ">");
+                  // TDLog.Log( TDLog.LOG_PLOT, "  line start point: <" + line + ">");
                   String[] pt0 = line.split( "\\s+" );
                   try {
                     x = dx + Float.parseFloat( pt0[0] ) / TopoDroidConst.TO_THERION;
                     y = dy - Float.parseFloat( pt0[1] ) / TopoDroidConst.TO_THERION;
                     path.addStartPoint( x, y );
                   } catch ( NumberFormatException e ) {
-                    TopoDroidLog.Error( "Therion Line X-Y error (1) <" + line + ">" );
+                    TDLog.Error( "Therion Line X-Y error (1) <" + line + ">" );
                     continue;
                   } catch ( ArrayIndexOutOfBoundsException e ) {
-                    TopoDroidLog.Error( "Therion Line X-Y error (2) " + line );
+                    TDLog.Error( "Therion Line X-Y error (2) " + line );
                     continue;
                   }
                   // Log.v( "DistoX", "  line start point: <" + line + "> " + x + " " + y );
@@ -410,7 +410,7 @@ class DrawingIO
                       break;
                     }
                     if ( path != null ) {
-                      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "  line point: >>" + line + "<<");
+                      // TDLog.Log( TDLog.LOG_PLOT, "  line point: >>" + line + "<<");
                       String[] pt = line.split( " " );
                       if ( pt.length == 2 ) {
                         try {
@@ -418,10 +418,10 @@ class DrawingIO
                           y = dy - Float.parseFloat( pt[1] ) / TopoDroidConst.TO_THERION;
                           path.addPoint( x, y );
                         } catch ( NumberFormatException e ) {
-                          TopoDroidLog.Error( "Therion Line X-Y error (3) <" + line + ">" );
+                          TDLog.Error( "Therion Line X-Y error (3) <" + line + ">" );
                           continue;
                         } catch ( ArrayIndexOutOfBoundsException e ) {
-                          TopoDroidLog.Error( "Therion Line X-Y error (4) " + line );
+                          TDLog.Error( "Therion Line X-Y error (4) " + line );
                           continue;
                         }
                       } else if ( pt.length == 6 ) {
@@ -434,10 +434,10 @@ class DrawingIO
                           y  = dy - Float.parseFloat( pt[5] ) / TopoDroidConst.TO_THERION;
                           path.addPoint3( x1, y1, x2, y2, x, y );
                         } catch ( NumberFormatException e ) {
-                          TopoDroidLog.Error( "Therion Line X-Y error (5) <" + line + ">" );
+                          TDLog.Error( "Therion Line X-Y error (5) <" + line + ">" );
                           continue;
                         } catch ( ArrayIndexOutOfBoundsException e ) {
-                          TopoDroidLog.Error( "Therion Line X-Y error (6) " + line );
+                          TDLog.Error( "Therion Line X-Y error (6) " + line );
                           continue;
                         }
                       }
@@ -471,7 +471,7 @@ class DrawingIO
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Export Therion i/o: " + e.getMessage() );
+      TDLog.Error( "Export Therion i/o: " + e.getMessage() );
     }
   }
 
@@ -484,9 +484,9 @@ class DrawingIO
       dos.close();
       fos.close();
     } catch ( FileNotFoundException e ) {
-      TopoDroidLog.Error( "Export Data file: " + e.getMessage() );
+      TDLog.Error( "Export Data file: " + e.getMessage() );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "Export Data i/o: " + e.getMessage() );
+      TDLog.Error( "Export Data i/o: " + e.getMessage() );
     }
   }
 
@@ -508,7 +508,7 @@ class DrawingIO
     DrawingPath path;
     float north_x1, north_y1, north_x2, north_y2;
 
-    synchronized( TopoDroidPath.mTherionLock ) {
+    synchronized( TDPath.mTherionLock ) {
       try {
         FileInputStream fis = new FileInputStream( filename );
         DataInputStream dis = new DataInputStream( fis );
@@ -582,7 +582,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TopoDroidLog.Error( "ERROR bad input (1) " + (int)what );
+              TDLog.Error( "ERROR bad input (1) " + (int)what );
               break;
           } 
           if ( path != null && in_scrap ) {
@@ -651,7 +651,7 @@ class DrawingIO
       }
       dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
 
-      if ( TopoDroidSetting.mAutoStations ) {
+      if ( TDSetting.mAutoStations ) {
         synchronized( stations ) {
           for ( DrawingStationName st : stations ) {
             if ( st.mStation != null && st.mStation.barriered() ) continue;
@@ -766,7 +766,7 @@ class DrawingIO
             out.write( pp.toTherion() );
             out.newLine();
           } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
-            // if ( ! TopoDroidSetting.mAutoStations ) {
+            // if ( ! TDSetting.mAutoStations ) {
             //   DrawingStationPath st = (DrawingStationPath)p;
             //   out.write( st.toTherion() );
             //   out.newLine();
@@ -786,7 +786,7 @@ class DrawingIO
       }
       out.newLine();
 
-      if ( TopoDroidSetting.mAutoStations ) {
+      if ( TDSetting.mAutoStations ) {
         for ( DrawingStationName st : stations ) {
           if ( st.mStation != null && st.mStation.barriered() ) continue;
           // FIXME if station is in the convex hull (bbox) of the lines
@@ -824,7 +824,7 @@ class DrawingIO
     String lines  = "";
     String areas  = "";
 
-    // synchronized( TopoDroidPath.mTherionLock ) 
+    // synchronized( TDPath.mTherionLock ) 
     {
       try {
         FileInputStream fis = new FileInputStream( file );
@@ -895,7 +895,7 @@ class DrawingIO
               break;
             default:
               todo = false;
-              TopoDroidLog.Error( "ERROR bad input (2) " + (int)what );
+              TDLog.Error( "ERROR bad input (2) " + (int)what );
               break;
           } 
         }

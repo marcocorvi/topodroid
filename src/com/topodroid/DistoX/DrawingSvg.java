@@ -258,7 +258,7 @@ class DrawingSvg
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TopoDroidLog.Error( "SVG io-exception " + e.toString() );
+      TDLog.Error( "SVG io-exception " + e.toString() );
     }
   }
 

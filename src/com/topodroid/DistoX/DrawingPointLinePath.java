@@ -112,7 +112,7 @@ public class DrawingPointLinePath extends DrawingPath
       if ( ++ size > 100 ) break;;
     }
     if ( size != mSize ) {
-      TopoDroidLog.Error( "recount size mismatch " + mSize + " " + size );
+      TDLog.Error( "recount size mismatch " + mSize + " " + size );
       // throw new Exception("size mismatch");
     }
   }
@@ -258,7 +258,7 @@ public class DrawingPointLinePath extends DrawingPath
       float dx = - first.mY + last.mY;
       float d = dx*dx + dy*dy;
       if ( d > 0.00001f ) {
-        d = TopoDroidSetting.mArrowLength * TopoDroidSetting.mUnit / FloatMath.sqrt( d );
+        d = TDSetting.mArrowLength * TDSetting.mUnit / FloatMath.sqrt( d );
         dx *= d;
         dy *= d;
         addStartPoint( first.mX+dx, first.mY+dy );

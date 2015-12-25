@@ -123,7 +123,7 @@ public class ShotDialog extends Dialog
     mParent = parent;
     mPos = pos;
     loadDBlock( blk, prev, next );
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
+    TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
   }
 
 
@@ -132,9 +132,9 @@ public class ShotDialog extends Dialog
     mPrevBlk     = prev;
     mNextBlk     = next;
     mBlk         = blk;
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog LOAD " + blk.toString(true) );
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "  prev " + ((prev != null)? prev.toString(true) : "null") );
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "  next " + ((next != null)? next.toString(true) : "null") );
+    TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog LOAD " + blk.toString(true) );
+    TDLog.Log( TDLog.LOG_SHOT, "  prev " + ((prev != null)? prev.toString(true) : "null") );
+    TDLog.Log( TDLog.LOG_SHOT, "  next " + ((next != null)? next.toString(true) : "null") );
 
     shot_from    = blk.mFrom;
     shot_to      = blk.mTo;
@@ -165,7 +165,7 @@ public class ShotDialog extends Dialog
 
   private void setEditable( EditText et, KeyListener kl, boolean editable, int flag )
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       et.setKeyListener( null );
       et.setClickable( true );
       et.setFocusable( editable );
@@ -261,7 +261,7 @@ public class ShotDialog extends Dialog
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "Shot Dialog::onCreate" );
+    // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
     setContentView(R.layout.shot_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -283,15 +283,15 @@ public class ShotDialog extends Dialog
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
-      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
       MyKeyboard.registerEditText( mKeyboard, mETfrom, flag );
       MyKeyboard.registerEditText( mKeyboard, mETto,   flag );
       // mKeyboard.hide();
     } else {
       mKeyboard.hide();
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mETfrom.setInputType( InputType.TYPE_CLASS_NUMBER );
         mETto.setInputType( InputType.TYPE_CLASS_NUMBER );
       }
@@ -443,9 +443,9 @@ public class ShotDialog extends Dialog
 
     if ( shot_manual ) {
       try {
-        float d = Float.parseFloat( mETdistance.getText().toString() ) / TopoDroidSetting.mUnitLength;
-        float b = Float.parseFloat( mETbearing.getText().toString() )  / TopoDroidSetting.mUnitAngle;
-        float c = Float.parseFloat( mETclino.getText().toString() )    / TopoDroidSetting.mUnitAngle;
+        float d = Float.parseFloat( mETdistance.getText().toString() ) / TDSetting.mUnitLength;
+        float b = Float.parseFloat( mETbearing.getText().toString() )  / TDSetting.mUnitAngle;
+        float c = Float.parseFloat( mETclino.getText().toString() )    / TDSetting.mUnitAngle;
         mParent.updateShotDistanceBearingClino( d, b, c, mBlk );
       } catch (NumberFormatException e ) { }
     }
@@ -458,7 +458,7 @@ public class ShotDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "ShotDialog onClick button " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "ShotDialog onClick button " + b.getText().toString() );
 
     if ( b == mRBleft ) {
       mRBvert.setChecked( false );
@@ -517,11 +517,11 @@ public class ShotDialog extends Dialog
       // saveDBlock();
       if ( mPrevBlk != null ) {
         DistoXDBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
-        TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
+        TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
         loadDBlock( mPrevBlk, prevBlock, mBlk );
         updateView();
       } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "PREV is null" );
+        TDLog.Log( TDLog.LOG_SHOT, "PREV is null" );
       }
     } else if ( b == mButtonNext ) {
       // shift:
@@ -530,11 +530,11 @@ public class ShotDialog extends Dialog
       // saveDBlock();
       if ( mNextBlk != null ) {
         DistoXDBlock next = mParent.getNextLegShot( mNextBlk, true );
-        TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
+        TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
         loadDBlock( mNextBlk, mBlk, next );
         updateView();
       } else {
-        TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "NEXT is null" );
+        TDLog.Log( TDLog.LOG_SHOT, "NEXT is null" );
       }
     } else if ( b == mButtonReverse ) {
       shot_from = mETfrom.getText().toString();
@@ -565,7 +565,7 @@ public class ShotDialog extends Dialog
 
   private boolean closeKeyboard()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return true;

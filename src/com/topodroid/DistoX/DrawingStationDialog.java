@@ -86,7 +86,7 @@ public class DrawingStationDialog extends Dialog
       mBtnSet    = (Button) findViewById(R.id.btn_set);
       // mBtnCancel = (Button) findViewById(R.id.button_cancel);
 
-      if ( TopoDroidSetting.mAutoStations ) {
+      if ( TDSetting.mAutoStations ) {
         mBtnOK.setVisibility( View.GONE );
         mLabel.setVisibility( View.GONE );
       } else {
@@ -97,7 +97,7 @@ public class DrawingStationDialog extends Dialog
       mBtnHidden.setOnClickListener( this );
       mBtnSplays.setOnClickListener( this );
     
-      if ( TopoDroidSetting.mLevelOverAdvanced ) {
+      if ( TDSetting.mLevelOverAdvanced ) {
         mBtnXSection.setOnClickListener( this );
       } else {
         mBtnXSection.setVisibility( View.GONE );
@@ -118,7 +118,7 @@ public class DrawingStationDialog extends Dialog
 
     public void onClick(View view)
     {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
+      // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
       if (view.getId() == R.id.btn_ok ) {
         if ( mPath == null ) {
           mActivity.addStationPoint( mStation );

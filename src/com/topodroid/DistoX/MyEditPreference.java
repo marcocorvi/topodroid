@@ -45,8 +45,8 @@ public class MyEditPreference extends EditTextPreference
       @Override
       public boolean onPreferenceChange( Preference p, Object v ) 
       {
-        String new_value = TopoDroidSetting.enforsePreferenceBounds( p.getKey(), (String)v );
-        // TopoDroidLog.Error( p.getKey() + ": value " + ((String)v) + " -> " + new_value + " text " + getText() );
+        String new_value = TDSetting.enforsePreferenceBounds( p.getKey(), (String)v );
+        // TDLog.Error( p.getKey() + ": value " + ((String)v) + " -> " + new_value + " text " + getText() );
         SharedPreferences.Editor editor = sp.edit();
         editor.putString( p.getKey(), new_value );
         editor.commit();

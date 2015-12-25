@@ -118,7 +118,7 @@ public class DistoXProtocol
     final IOException[] maybeException = { null };
     final Thread reader = new Thread() {
       public void run() {
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "reader run " + dataRead[0] + "/" + toRead[0] );
+        // TDLog.Log( TDLog.LOG_PROTO, "reader run " + dataRead[0] + "/" + toRead[0] );
         try {
           // synchronized( dataRead ) 
           {
@@ -127,11 +127,11 @@ public class DistoXProtocol
             dataRead[0] += count[0];
           }
         } catch ( ClosedByInterruptException e ) {
-          TopoDroidLog.Error( "reader closed by interrupt");
+          TDLog.Error( "reader closed by interrupt");
         } catch ( IOException e ) {
           maybeException[0] = e;
         }
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "reader done " + dataRead[0] + "/" + toRead[0] );
+        // TDLog.Log( TDLog.LOG_PROTO, "reader done " + dataRead[0] + "/" + toRead[0] );
       }
     };
     reader.start();
@@ -140,7 +140,7 @@ public class DistoXProtocol
       // Log.v("DistoX", "interrupt loop " + k + " " + dataRead[0] + "/" + toRead[0] );
       try {
         reader.join( timeout );
-      } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "reader join-1 interrupted"); }
+      } catch ( InterruptedException e ) { TDLog.Log(TDLog.LOG_DEBUG, "reader join-1 interrupted"); }
       if ( ! reader.isAlive() ) break;
       {
         Thread interruptor = new Thread() { public void run() {
@@ -162,11 +162,11 @@ public class DistoXProtocol
 
         try {
           interruptor.join( 200 );
-        } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "interruptor join interrupted"); }
+        } catch ( InterruptedException e ) { TDLog.Log(TDLog.LOG_DEBUG, "interruptor join interrupted"); }
       }
       try {
         reader.join( 200 );
-      } catch ( InterruptedException e ) { TopoDroidLog.Log(TopoDroidLog.LOG_DEBUG, "reader join-2 interrupted"); }
+      } catch ( InterruptedException e ) { TDLog.Log(TDLog.LOG_DEBUG, "reader join-2 interrupted"); }
       if ( ! reader.isAlive() ) break; 
     }
     if ( maybeException[0] != null ) throw maybeException[0];
@@ -210,7 +210,7 @@ public class DistoXProtocol
       }
     } catch ( IOException e ) {
       // NOTE socket is null there is nothing we can do
-      TopoDroidLog.Error( "Proto cstr conn failed " + e.getMessage() );
+      TDLog.Error( "Proto cstr conn failed " + e.getMessage() );
     }
   }
 
@@ -228,8 +228,8 @@ public class DistoXProtocol
 
   public int handlePacket( ) 
   {
-    // if ( TopoDroidLog.LOG_PROTO ) {
-    //   TopoDroidLog.Log( TopoDroidLog.LOG_PROTO,
+    // if ( TDLog.LOG_PROTO ) {
+    //   TDLog.Log( TDLog.LOG_PROTO,
     //     "Proto handle packet " + 
     //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
     //     mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
@@ -266,8 +266,8 @@ public class DistoXProtocol
         if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
         mRoll = r * 180.0 / 128.0;
 
-        // if ( TopoDroidLog.LOG_PROTO ) {
-        //   TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto packet data " + 
+        // if ( TDLog.LOG_PROTO ) {
+        //   TDLog.Log( TDLog.LOG_PROTO, "Proto packet data " + 
         //     String.format(Locale.ENGLISH, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino ) );
         // }
 
@@ -280,7 +280,7 @@ public class DistoXProtocol
         if ( mGX > TopoDroidUtil.ZERO ) mGX = mGX - TopoDroidUtil.NEG;
         if ( mGY > TopoDroidUtil.ZERO ) mGY = mGY - TopoDroidUtil.NEG;
         if ( mGZ > TopoDroidUtil.ZERO ) mGZ = mGZ - TopoDroidUtil.NEG;
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "handlePacket " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+        // TDLog.Log( TDLog.LOG_PROTO, "handlePacket " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DISTOX_PACKET_G;
       case 0x03: // m
         mMX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
@@ -290,7 +290,7 @@ public class DistoXProtocol
         if ( mMX > TopoDroidUtil.ZERO ) mMX = mMX - TopoDroidUtil.NEG;
         if ( mMY > TopoDroidUtil.ZERO ) mMY = mMY - TopoDroidUtil.NEG;
         if ( mMZ > TopoDroidUtil.ZERO ) mMZ = mMZ - TopoDroidUtil.NEG;
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "handlePacket " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+        // TDLog.Log( TDLog.LOG_PROTO, "handlePacket " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DISTOX_PACKET_M;
       case 0x04: // vector data packet
         if ( mDevice.mType == Device.DISTO_X310 ) {
@@ -312,7 +312,7 @@ public class DistoXProtocol
         mReplyBuffer[1] = mBuffer[4];
         mReplyBuffer[2] = mBuffer[5];
         mReplyBuffer[3] = mBuffer[6];
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "handlePacket mReplyBuffer" );
+        // TDLog.Log( TDLog.LOG_PROTO, "handlePacket mReplyBuffer" );
         return DISTOX_PACKET_REPLY;
       // default:
       //   return DISTOX_PACKET_NONE;
@@ -322,7 +322,7 @@ public class DistoXProtocol
 
   public int readPacket( boolean no_timeout ) 
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet no-timeout " + no_timeout );
+    // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet no-timeout " + no_timeout );
     try {
       final int maxtimeout = 8;
       int timeout = 0;
@@ -331,23 +331,23 @@ public class DistoXProtocol
       if ( no_timeout ) {
         available = 8;
       } else { // do timeout
-        if ( TopoDroidSetting.mZ6Workaround ) {
+        if ( TDSetting.mZ6Workaround ) {
           available = getAvailable( mIn, 200, 2*maxtimeout );
         } else {
           while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) {
             ++ timeout;
             try {
-              // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
+              // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
               Thread.sleep( 100 );
             } catch (InterruptedException e ) {
-              TopoDroidLog.Error( "Proto read packet InterruptedException" + e.toString() );
+              TDLog.Error( "Proto read packet InterruptedException" + e.toString() );
             }
           }
         }
       }
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet available " + available );
+      // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet available " + available );
       if ( available > 0 ) {
-        if ( no_timeout || ! TopoDroidSetting.mZ6Workaround ) {
+        if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
         }
         byte seq  = (byte)(mBuffer[0] & 0x80); // sequence bit
@@ -356,8 +356,8 @@ public class DistoXProtocol
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet
         { 
           mAcknowledge[0] = (byte)(( mBuffer[0] & 0x80 ) | 0x55);
-          if ( TopoDroidLog.LOG_PROTO ) {
-            TopoDroidLog.Log( TopoDroidLog.LOG_PROTO,
+          if ( TDLog.LOG_PROTO ) {
+            TDLog.Log( TDLog.LOG_PROTO,
               "read packet byte " + String.format(" %02x", mBuffer[0] ) + " ... writing ack" );
           }
           mOut.write( mAcknowledge, 0, 1 );
@@ -365,12 +365,12 @@ public class DistoXProtocol
         if ( ok ) return handlePacket();
       } // else timedout with no packet
     } catch ( EOFException e ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "Proto read packet EOFException" + e.toString() );
+      TDLog.Log( TDLog.LOG_PROTO, "Proto read packet EOFException" + e.toString() );
     } catch (ClosedByInterruptException e ) {
-      TopoDroidLog.Error( "Proto read packet ClosedByInterruptException" + e.toString() );
+      TDLog.Error( "Proto read packet ClosedByInterruptException" + e.toString() );
     } catch (IOException e ) {
       // this is OK: the DistoX has been turned off
-      TopoDroidLog.Debug( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
+      TDLog.Debug( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
       return DISTOX_ERR_OFF;
     }
     return DISTOX_PACKET_NONE;
@@ -378,14 +378,14 @@ public class DistoXProtocol
 
   public boolean sendCommand( byte cmd )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "sendCommand " + String.format("Send command %02x", cmd ) );
+    // TDLog.Log( TDLog.LOG_PROTO, "sendCommand " + String.format("Send command %02x", cmd ) );
 
     try {
       mRequestBuffer[0] = (byte)(cmd);
       mOut.write( mRequestBuffer, 0, 1 );
       mOut.flush();
     } catch (IOException e ) {
-      TopoDroidLog.Error( "sendCommand failed" );
+      TDLog.Error( "sendCommand failed" );
       return false;
     }
     return true;
@@ -404,18 +404,18 @@ public class DistoXProtocol
       int ret = ( head >= tail )? (head-tail)/8 : ((0x8000 - tail) + head)/8; 
 
       // DEBUG
-      if ( TopoDroidLog.LOG_PROTO ) {
-        TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, 
+      if ( TDLog.LOG_PROTO ) {
+        TDLog.Log( TDLog.LOG_PROTO, 
           "Proto readToRead Head-Tail " + 
           String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] )
           + " " + head + " - " + tail + " = " + ret );
       }
       return ret;
     } catch ( EOFException e ) {
-      TopoDroidLog.Error( "Proto readToRead Head-Tail read() failed" );
+      TDLog.Error( "Proto readToRead Head-Tail read() failed" );
       return DISTOX_ERR_HEADTAIL_EOF;
     } catch (IOException e ) {
-      TopoDroidLog.Error( "Proto readToRead Head-Tail read() failed" );
+      TDLog.Error( "Proto readToRead Head-Tail read() failed" );
       return DISTOX_ERR_HEADTAIL_IO;
     }
   }
@@ -429,21 +429,21 @@ public class DistoXProtocol
       mOut.write( mBuffer, 0, 3 );
       mIn.readFully( mBuffer, 0, 8 );
       if ( mBuffer[0] != (byte)0x38 ) { 
-        TopoDroidLog.Error( "swapHotBit-38 wrong reply packet addr " + addr );
+        TDLog.Error( "swapHotBit-38 wrong reply packet addr " + addr );
         return false;
       }
 
       int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
       // Log.v( TopoDroidApp.TAG, "proto read ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
-        TopoDroidLog.Error( "swapHotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
+        TDLog.Error( "swapHotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
       mBuffer[0] = (byte)0x39;
       // mBuffer[1] = (byte)( addr & 0xff );
       // mBuffer[2] = (byte)( (addr>>8) & 0xff );
       if ( mBuffer[3] == 0x00 ) {
-        TopoDroidLog.Error( "swapHotBit refusing to swap addr " + addr );
+        TDLog.Error( "swapHotBit refusing to swap addr " + addr );
         return false;
       }  
 
@@ -451,20 +451,20 @@ public class DistoXProtocol
       mOut.write( mBuffer, 0, 7 );
       mIn.readFully( mBuffer, 0, 8 );
       if ( mBuffer[0] != (byte)0x38 ) {
-        TopoDroidLog.Error( "swapHotBit-39 wrong reply packet addr " + addr );
+        TDLog.Error( "swapHotBit-39 wrong reply packet addr " + addr );
         return false;
       }
       reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
       // Log.v( TopoDroidApp.TAG, "proto reset ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
-        TopoDroidLog.Error( "swapHotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
+        TDLog.Error( "swapHotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
     } catch ( EOFException e ) {
-      TopoDroidLog.Error( "swapHotBit EOF failed addr " + addr );
+      TDLog.Error( "swapHotBit EOF failed addr " + addr );
       return false;
     } catch (IOException e ) {
-      TopoDroidLog.Error( "swapHotBit IO failed addr " + addr );
+      TDLog.Error( "swapHotBit IO failed addr " + addr );
       return false;
     }
     return true;
@@ -483,13 +483,13 @@ public class DistoXProtocol
       head_tail[0] = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       head_tail[1] = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
       String res = String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "readHeadTail " + res );
+      // TDLog.Log( TDLog.LOG_PROTO, "readHeadTail " + res );
       return res;
     } catch ( EOFException e ) {
-      TopoDroidLog.Error( "readHeadTail read() EOF failed" );
+      TDLog.Error( "readHeadTail read() EOF failed" );
       return null;
     } catch (IOException e ) {
-      TopoDroidLog.Error( "readHeadTail read() IO failed" );
+      TDLog.Error( "readHeadTail read() IO failed" );
       return null;
     }
   }
@@ -573,7 +573,7 @@ public class DistoXProtocol
           mOut.write( mBuffer, 0, 3 );
           mIn.readFully( mBuffer, 0, 8 );
         } catch ( IOException e ) {
-          TopoDroidLog.Error( "readMemory() IO failed" );
+          TDLog.Error( "readMemory() IO failed" );
           break;
         }
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
@@ -590,7 +590,7 @@ public class DistoXProtocol
           mOut.write( mBuffer, 0, 3 );
           mIn.readFully( mBuffer, 0, 8 );
         } catch ( IOException e ) {
-          TopoDroidLog.Error( "readMemory() IO failed" );
+          TDLog.Error( "readMemory() IO failed" );
           break;
         }
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
@@ -616,23 +616,23 @@ public class DistoXProtocol
   //     mBuffer[0] = (byte)( 0x38 );
   //     mBuffer[1] = (byte)( addr & 0xff );
   //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
-  //     TopoDroidLog.Error( "resetMemory() address " + mBuffer[1] + " " + mBuffer[2] );
+  //     TDLog.Error( "resetMemory() address " + mBuffer[1] + " " + mBuffer[2] );
 
   //     // TODO write and read
   //     try {
   //       mOut.write( mBuffer, 0, 3 );
   //       mIn.readFully( mBuffer, 0, 8 );
   //     } catch ( IOException e ) {
-  //       TopoDroidLog.Error( "resetMemory() IO nr. 1 failed" );
+  //       TDLog.Error( "resetMemory() IO nr. 1 failed" );
   //       break;
   //     }
   //     if ( mBuffer[0] != (byte)( 0x38 ) ||
   //          mBuffer[1] != (byte)( addr & 0xff ) ||
   //          mBuffer[2] != (byte)( (addr>>8) & 0xff ) ) {
-  //       TopoDroidLog.Error( "resetMemory() bad read reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
+  //       TDLog.Error( "resetMemory() bad read reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
   //       break;
   //     }
-  //     TopoDroidLog.Error( "resetMemory() ok read reply " + mBuffer[3] + " " + mBuffer[4] + " " + mBuffer[5] + " " + mBuffer[6] );
+  //     TDLog.Error( "resetMemory() ok read reply " + mBuffer[3] + " " + mBuffer[4] + " " + mBuffer[5] + " " + mBuffer[6] );
 
   //     mBuffer[0] = (byte)( 0x39 );
   //     mBuffer[1] = (byte)( addr & 0xff );
@@ -643,16 +643,16 @@ public class DistoXProtocol
   //       mOut.write( mBuffer, 0, 7 );
   //       mIn.readFully( mBuffer, 0, 8 );
   //     } catch ( IOException e ) {
-  //       TopoDroidLog.Error( "resetMemory() IO nr. 2 failed" );
+  //       TDLog.Error( "resetMemory() IO nr. 2 failed" );
   //       break;
   //     }
   //     if ( mBuffer[0] != (byte)( 0x38 ) ||
   //          mBuffer[1] != (byte)( addr & 0xff ) ||
   //          mBuffer[2] != (byte)( (addr>>8) & 0xff ) ) {
-  //       TopoDroidLog.Error( "resetMemory() bad write reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
+  //       TDLog.Error( "resetMemory() bad write reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
   //       break;
   //     }
-  //     TopoDroidLog.Error( "resetMemory() ok write reply " + mBuffer[3] + " " + mBuffer[4] + " " + mBuffer[5] + " " + mBuffer[6] );
+  //     TDLog.Error( "resetMemory() ok write reply " + mBuffer[3] + " " + mBuffer[4] + " " + mBuffer[5] + " " + mBuffer[6] );
   //     ++ start;
   //   }
   //   return start - cnt;
@@ -667,7 +667,7 @@ public class DistoXProtocol
       mOut.write( mBuffer, 0, 3 );
       mIn.readFully( mBuffer, 0, 8 );
     } catch ( IOException e ) {
-      TopoDroidLog.Error( "readMemory() IO failed" );
+      TDLog.Error( "readMemory() IO failed" );
       return null;
     }
     if ( mBuffer[0] != (byte)( 0x38 ) ) return null;
@@ -699,7 +699,7 @@ public class DistoXProtocol
           mOut.write( mBuffer, 0, 3 );
           mIn.readFully( mBuffer, 0, 8 );
         } catch ( IOException e ) {
-          TopoDroidLog.Error( "readMemory() IO failed" );
+          TDLog.Error( "readMemory() IO failed" );
           break;
         }
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
@@ -731,10 +731,10 @@ public class DistoXProtocol
       result[2] = mBuffer[5];
       result[3] = mBuffer[6];
     } catch ( EOFException e ) {
-      TopoDroidLog.Error( "read8000 read() EOF failed" );
+      TDLog.Error( "read8000 read() EOF failed" );
       return false;
     } catch (IOException e ) {
-      TopoDroidLog.Error( "read8000 read() IO failed" );
+      TDLog.Error( "read8000 read() IO failed" );
       return false;
     }
     return true;
@@ -759,7 +759,7 @@ public class DistoXProtocol
         mBuffer[6] = calib[k]; ++k;
         mOut.write( mBuffer, 0, 7 );
         mIn.readFully( mBuffer, 0, 8 );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PROTO, "writeCalibration " + 
+        // TDLog.Log( TDLog.LOG_PROTO, "writeCalibration " + 
         //   String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
         //   mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
         if ( mBuffer[0] != 0x38 ) { return false; }
@@ -768,10 +768,10 @@ public class DistoXProtocol
         addr += 4;
       }
     } catch ( EOFException e ) {
-      // TopoDroidLog.Error( "writeCalibration EOF failed" );
+      // TDLog.Error( "writeCalibration EOF failed" );
       return false;
     } catch (IOException e ) {
-      // TopoDroidLog.Error( "writeCalibration IO failed" );
+      // TDLog.Error( "writeCalibration IO failed" );
       return false;
     }
     return true;  
@@ -803,10 +803,10 @@ public class DistoXProtocol
         addr += 4;
       }
     } catch ( EOFException e ) {
-      // TopoDroidLog.Error( "readCalibration EOF failed" );
+      // TDLog.Error( "readCalibration EOF failed" );
       return false;
     } catch (IOException e ) {
-      // TopoDroidLog.Error( "readCalibration IO failed" );
+      // TDLog.Error( "readCalibration IO failed" );
       return false;
     }
     return true;  
@@ -814,7 +814,7 @@ public class DistoXProtocol
 
   int uploadFirmware( String filepath )
   {
-    TopoDroidLog.LogFile( "Firmware upload: socket is ready " );
+    TDLog.LogFile( "Firmware upload: socket is ready " );
     byte[] buf = new byte[259];
     buf[0] = (byte)0x3b;
     buf[1] = (byte)0;
@@ -829,13 +829,13 @@ public class DistoXProtocol
       // int end_addr = (fp.size() + 255)/256;
 
       for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
-        TopoDroidLog.LogFile( "Firmware upload: addr " + addr + " count " + cnt );
+        TDLog.LogFile( "Firmware upload: addr " + addr + " count " + cnt );
         // memset(buf+3, 0, 256)
         for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
         try {
           int nr = dis.read( buf, 3, 256 );
           if ( nr <= 0 ) {
-            TopoDroidLog.LogFile( "Firmware upload: file read failure. Result " + nr );
+            TDLog.LogFile( "Firmware upload: file read failure. Result " + nr );
             break;
           }
           cnt += nr;
@@ -847,25 +847,25 @@ public class DistoXProtocol
             mIn.readFully( mBuffer, 0, 8 );
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
-              TopoDroidLog.LogFile( "Firmware upload: failure " + mBuffer[0] + " reply_addr " + reply_addr );
+              TDLog.LogFile( "Firmware upload: failure " + mBuffer[0] + " reply_addr " + reply_addr );
               ok = false;
               break;
             }
           }
         } catch ( EOFException e ) { // OK
-          TopoDroidLog.LogFile( "Firmware update: EOF " + e.getMessage() );
+          TDLog.LogFile( "Firmware update: EOF " + e.getMessage() );
           break;
         } catch ( IOException e ) { 
-          TopoDroidLog.LogFile( "Firmware update: IO error " + e.getMessage() );
+          TDLog.LogFile( "Firmware update: IO error " + e.getMessage() );
           ok = false;
           break;
         }
       }
     } catch ( FileNotFoundException e ) {
-      TopoDroidLog.LogFile( "Firmware update: Not Found error " + e.getMessage() );
+      TDLog.LogFile( "Firmware update: Not Found error " + e.getMessage() );
       return 0;
     }
-    TopoDroidLog.LogFile( "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    TDLog.LogFile( "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
 
@@ -876,7 +876,7 @@ public class DistoXProtocol
     boolean ok = true;
     int cnt = 0;
     try {
-      TopoDroidApp.checkPath( filepath );
+      TDPath.checkPath( filepath );
       File fp = new File( filepath );
       FileOutputStream fos = new FileOutputStream( fp );
       DataOutputStream dos = new DataOutputStream( fos );

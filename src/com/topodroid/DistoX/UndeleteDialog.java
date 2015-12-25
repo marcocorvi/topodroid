@@ -54,7 +54,7 @@ public class UndeleteDialog extends Dialog
   @Override
   public void onClick(View v) 
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "UndeleteDialog onClick()" );
+    // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onClick()" );
     dismiss();
   }
 
@@ -62,7 +62,7 @@ public class UndeleteDialog extends Dialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     CharSequence item = ((TextView) view).getText();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "UndeleteDialog onItemClick() " + item.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onItemClick() " + item.toString() );
 
     String[] value = item.toString().split( " " );
     
@@ -74,7 +74,7 @@ public class UndeleteDialog extends Dialog
           mData.undeletePlot( Long.parseLong( value[1] ), mSID );
         }
       } catch ( NumberFormatException e ) {
-        TopoDroidLog.Error( "undelete parse error: item " + item.toString() );
+        TDLog.Error( "undelete parse error: item " + item.toString() );
       }
     }
     dismiss();
@@ -107,7 +107,7 @@ public class UndeleteDialog extends Dialog
       if ( p.type == PlotInfo.PLOT_PLAN ) {
         mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
       // } else { // this is OK extended do not show up in this dialog
-      //   TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, " plot " + p.id + " <" + p.name + "> " +  p.getTypeString() );
+      //   TDLog.Log( TDLog.LOG_PLOT, " plot " + p.id + " <" + p.name + "> " +  p.getTypeString() );
       }
     }
 

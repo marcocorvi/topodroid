@@ -43,8 +43,8 @@ class ItemSymbol
   TextView     mTextView = null;
   LinearLayout mView;
   SymbolInterface mSymbol;
-  float sx = TopoDroidSetting.mUnit;
-  float sy = TopoDroidSetting.mUnit;
+  float sx = TDSetting.mUnit;
+  float sy = TDSetting.mUnit;
   boolean mUseText;
 
   // private Context mContext;

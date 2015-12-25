@@ -160,7 +160,7 @@ public class SurveyActivity extends Activity
       intent.putExtra( "altitude",  fxd.alt );
 
       mFixedDialog = dialog;
-      TopoDroidLog.Log( TopoDroidLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
+      TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
       startActivityForResult( intent, SurveyActivity.CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedDialog = null;
@@ -179,7 +179,7 @@ public class SurveyActivity extends Activity
              bundle.getDouble( "longitude"),
              bundle.getDouble( "latitude"),
              bundle.getDouble( "altitude") );
-          TopoDroidLog.Log( TopoDroidLog.LOG_LOC, "CONV. RESULT " + title );
+          TDLog.Log( TDLog.LOG_LOC, "CONV. RESULT " + title );
           mFixedDialog.setTitle( title );
           mFixedDialog.setCSto( cs );
           mFixedDialog = null;
@@ -190,7 +190,7 @@ public class SurveyActivity extends Activity
 
   boolean updateDisplay()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SURVEY, "app mSID " + mApp.mSID );
+    // TDLog.Log( TDLog.LOG_SURVEY, "app mSID " + mApp.mSID );
     if ( mApp.mSID < 0 ) return false;
     SurveyInfo info = mApp.getSurveyInfo();
     mTextName.setText( info.name );
@@ -245,7 +245,7 @@ public class SurveyActivity extends Activity
     mEditDate.setOnClickListener( this );
 
     if ( ! updateDisplay() ) {
-      TopoDroidLog.Error( "opening non-existent survey" );
+      TDLog.Error( "opening non-existent survey" );
       setResult( RESULT_CANCELED );
       finish();
     }
@@ -255,10 +255,10 @@ public class SurveyActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00 = ( TopoDroidSetting.mSizeButtons == 2 )? ixons : icons;
+    // icons00 = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
 
-    mNrButton1 = TopoDroidSetting.mLevelOverNormal ? 6 
-               : TopoDroidSetting.mLevelOverBasic ? 3 : 2;
+    mNrButton1 = TDSetting.mLevelOverNormal ? 6 
+               : TDSetting.mLevelOverBasic ? 3 : 2;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = new Button( this );
@@ -273,7 +273,7 @@ public class SurveyActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
+    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
@@ -356,7 +356,7 @@ public class SurveyActivity extends Activity
   {
     while ( ! mApp.mEnableZip ) Thread.yield();
 
-    doExport( TopoDroidSetting.mExportShotsFormat, false );
+    doExport( TDSetting.mExportShotsFormat, false );
     Archiver archiver = new Archiver( mApp );
     if ( archiver.archive( ) ) {
       String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
@@ -397,7 +397,7 @@ public class SurveyActivity extends Activity
     mApp.exportSurveyAsTh(); // make sure to have survey exported as therion
     try {
       Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-      intent.putExtra( "survey", TopoDroidPath.getSurveyThFile( mApp.mySurvey ) );
+      intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
       startActivity( intent );
     } catch ( ActivityNotFoundException e ) {
       Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT).show();
@@ -406,7 +406,7 @@ public class SurveyActivity extends Activity
 
   // private void doOpen()
   // {
-  //   // TopoDroidLog.Log( TopoDroidLog.LOG_SURVEY, "do OPEN " );
+  //   // TDLog.Log( TDLog.LOG_SURVEY, "do OPEN " );
   //   // dismiss();
   //   Intent openIntent = new Intent( mContext, ShotActivity.class );
   //   mContext.startActivity( openIntent );
@@ -414,7 +414,7 @@ public class SurveyActivity extends Activity
 
   private void doLocation()
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "doLocation" );
+    // TDLog.Log( TDLog.LOG_DEBUG, "doLocation" );
     LocationManager lm = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
     new LocationDialog( mContext, this, mApp, lm ).show();
   }
@@ -465,7 +465,7 @@ public class SurveyActivity extends Activity
         try {
           decl = Float.parseFloat( decl_str );
         } catch ( NumberFormatException e ) {
-          TopoDroidLog.Error( "parse Float error: declination " + decl_str );
+          TDLog.Error( "parse Float error: declination " + decl_str );
         }
       }
     }
@@ -476,7 +476,7 @@ public class SurveyActivity extends Activity
     if ( team != null ) { team = team.trim(); }
     if ( comment != null ) { comment = comment.trim(); }
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
+    // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
     if ( team == null ) team = "";
     mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, true );
   }
@@ -560,12 +560,12 @@ public class SurveyActivity extends Activity
     if ( mApp.mSID < 0 ) return;
     String survey = mApp.mySurvey;
 
-    TopoDroidPath.deleteSurveyFiles( survey );
+    TDPath.deleteSurveyFiles( survey );
 
     for ( int status = 0; status < 2; ++status ) {
       List< PlotInfo > plots = mApp.mData.selectAllPlots( mApp.mSID, status );
       if ( plots.size() > 0 ) {
-        TopoDroidPath.deleteSurveyPlotFiles( survey, plots );
+        TDPath.deleteSurveyPlotFiles( survey, plots );
       }
     }
 
@@ -573,7 +573,7 @@ public class SurveyActivity extends Activity
     for ( int status = 0; status < 2; ++status ) {
       List< Sketch3dInfo > sketches = mApp.mData.selectAllSketches( mApp.mSID, status );
       if ( sketches.size() > 0 ) {
-        TopoDroidPath.deleteSurvey3dFiles( survey, sketches );
+        TDPath.deleteSurvey3dFiles( survey, sketches );
       }
     }
 
@@ -619,7 +619,7 @@ public class SurveyActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Error( "search requested" );
+    // TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
     startActivity( intent );
@@ -639,7 +639,7 @@ public class SurveyActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Error( "key down: code " + code );
+        TDLog.Error( "key down: code " + code );
     }
     return false;
   }

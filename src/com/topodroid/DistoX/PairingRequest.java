@@ -28,11 +28,11 @@ public class PairingRequest extends BroadcastReceiver{
         // Method ms = device.getClass().getMethod("setPasskey", int.class);
         ms.invoke( device, pin );
       } catch ( NoSuchMethodException e ) {
-        TopoDroidLog.Error( "No Such method: " + e.getMessage() );
+        TDLog.Error( "No Such method: " + e.getMessage() );
       } catch ( IllegalAccessException e ) {
-        TopoDroidLog.Error( "Illegal access: " + e.getMessage() );
+        TDLog.Error( "Illegal access: " + e.getMessage() );
       } catch ( InvocationTargetException e ) {
-        TopoDroidLog.Error( "Invocation target: " + e.getMessage() );
+        TDLog.Error( "Invocation target: " + e.getMessage() );
       }
     }
   }

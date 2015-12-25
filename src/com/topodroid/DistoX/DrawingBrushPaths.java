@@ -342,8 +342,8 @@ public class DrawingBrushPaths
       // debugBlue.setStrokeWidth( WIDTH_FIXED );
       // debugBlue.setColor(0xFF0000FF); // blue
 
-      fixedGridPaint.setStrokeWidth( WIDTH_FIXED ); //* TopoDroidSetting.mFixedThickness );
-      fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED ); // * TopoDroidSetting.mFixedThickness );
+      fixedGridPaint.setStrokeWidth( WIDTH_FIXED ); //* TDSetting.mFixedThickness );
+      fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED ); // * TDSetting.mFixedThickness );
       doneMakePaths = true;
     }
     setStrokeWidths();
@@ -353,27 +353,27 @@ public class DrawingBrushPaths
   static void setStrokeWidths()
   {
     if (fixedShotPaint != null)
-      fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+      fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (fixedBluePaint != null)
-      fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+      fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (fixedSplayPaint != null)
-      fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+      fixedSplayPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
     if (fixedSplay2Paint != null)
-      fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TopoDroidSetting.mFixedThickness );
+      fixedSplay2Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }
 
   static void setTextSizes()
   {
-    // if ( labelPaint != null )
-      labelPaint.setTextSize( TopoDroidSetting.mLabelSize );
-    // if ( fixedStationPaint != null )
-      fixedStationPaint.setTextSize( TopoDroidSetting.mStationSize );
-    // if ( fixedStationBarrierPaint != null ) 
-      fixedStationBarrierPaint.setTextSize( TopoDroidSetting.mStationSize );
-    // if ( fixedStationHiddenPaint != null )
-      fixedStationHiddenPaint.setTextSize( TopoDroidSetting.mStationSize );
-    // if ( duplicateStationPaint != null ) 
-    //   duplicateStationPaint.setTextSize( TopoDroidSetting.mStationSize );
+    if ( labelPaint != null )
+      labelPaint.setTextSize( TDSetting.mLabelSize );
+    if ( fixedStationPaint != null )
+      fixedStationPaint.setTextSize( TDSetting.mStationSize );
+    if ( fixedStationBarrierPaint != null ) 
+      fixedStationBarrierPaint.setTextSize( TDSetting.mStationSize );
+    if ( fixedStationHiddenPaint != null )
+      fixedStationHiddenPaint.setTextSize( TDSetting.mStationSize );
+    if ( duplicateStationPaint != null ) 
+      duplicateStationPaint.setTextSize( TDSetting.mStationSize );
   }
 
 }

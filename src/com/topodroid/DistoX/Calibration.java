@@ -78,7 +78,7 @@ public class Calibration
     m = Math.abs( a.z.z ); if ( m > max ) max = m;
     if ( max >= 2.0 ) {
       float m1 = (float)(1.9999/max);
-      TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "EnforceMax2 scale by " + m1 );
+      TDLog.Log( TDLog.LOG_CALIB, "EnforceMax2 scale by " + m1 );
       b.x *= m1;
       b.y *= m1;
       b.z *= m1;
@@ -462,8 +462,8 @@ public class Calibration
     m[idx] = scaledVector( mx, my, mz );
     group[idx] = group0;
 
-    if ( TopoDroidLog.LOG_CALIB ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, 
+    if ( TDLog.LOG_CALIB ) {
+      TDLog.Log( TDLog.LOG_CALIB, 
         String.format("Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 ) );
     }
     idx ++;
@@ -474,7 +474,7 @@ public class Calibration
   public int Calibrate()
   {
     mDelta = 0.0f;
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "Calibrate: data nr. " + idx 
+    TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx 
                       + " algo " + (mNonLinear? "non-" : "") + "linear" );
     if ( idx < 16 ) return -1;
     return Optimize( idx, g, m );
@@ -494,7 +494,7 @@ public class Calibration
     bG = null;
     aM = null;
     bM = null;
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "Reset calibration " + N + " data");
+    TDLog.Log( TDLog.LOG_CALIB, "Reset calibration " + N + " data");
   }
     
   // ------------------------------------------------------------
@@ -541,13 +541,13 @@ public class Calibration
 
   private void LogNumber( String msg, int it )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, msg + " " + it );
+    TDLog.Log( TDLog.LOG_CALIB, msg + " " + it );
   }
 
   private void LogMatrixVector( String msg, Matrix m1, Vector v1 ) 
   {
-    if ( ! TopoDroidLog.LOG_CALIB ) return;
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB,
+    if ( ! TDLog.LOG_CALIB ) return;
+    TDLog.Log( TDLog.LOG_CALIB,
       msg + String.format(Locale.ENGLISH,
        " M: %8.4f %8.4f %8.4f V: %8.4f\n    %8.4f %8.4f %8.4f   %8.4f\n    %8.4f %8.4f %8.4f   %8.4f",
        m1.x.x, m1.x.y, m1.x.z, v1.x, 
@@ -557,16 +557,16 @@ public class Calibration
 
   private void LogVectors( String msg, long group, Vector v1, Vector v2 )
   {
-    if ( ! TopoDroidLog.LOG_CALIB ) return;
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB,
+    if ( ! TDLog.LOG_CALIB ) return;
+    TDLog.Log( TDLog.LOG_CALIB,
       msg + String.format(Locale.ENGLISH,
       " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ) ); 
   }
 
   private void LogSC( String msg, float s, float c )
   {
-    if ( ! TopoDroidLog.LOG_CALIB ) return;
-    TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, 
+    if ( ! TDLog.LOG_CALIB ) return;
+    TDLog.Log( TDLog.LOG_CALIB, 
       msg + String.format(Locale.ENGLISH, " S %8.4f C %8.4f", s, c ) ); 
   }
 
@@ -625,8 +625,8 @@ public class Calibration
 
   private int Optimize( int nn, Vector[] g, Vector [] m )
   {
-    int max_it = TopoDroidSetting.mCalibMaxIt;
-    float eps  = TopoDroidSetting.mCalibEps;
+    int max_it = TDSetting.mCalibMaxIt;
+    float eps  = TDSetting.mCalibEps;
 
     // int num = g.Length();
     Vector[] gr = new Vector[nn];
@@ -678,9 +678,9 @@ public class Calibration
     Matrix invG = (sumG2.minus( new Matrix(sumG, avG) ) ).InverseT();  // inverse of the transposed
     Matrix invM = (sumM2.minus( new Matrix(sumM, avM) ) ).InverseT();
 
-    // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "Number", nn );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "invG", invG, avG );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_CALIB, "invM", invM, avM ); // this is OK
+    // TDLog.Log( TDLog.LOG_CALIB, "Number", nn );
+    // TDLog.Log( TDLog.LOG_CALIB, "invG", invG, avG );
+    // TDLog.Log( TDLog.LOG_CALIB, "invM", invM, avM ); // this is OK
     // LogMatrixVector( "initial inverse|average G", invG, avG );
     // LogMatrixVector( "initial inverse|average M", invM, avM );
 

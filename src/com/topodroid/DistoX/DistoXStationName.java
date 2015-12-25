@@ -22,7 +22,7 @@ public class DistoXStationName
 
   static void setInitialStation( String init )
   {
-    if ( init == null || init.length() == 0 ) init = TopoDroidSetting.mInitStation;
+    if ( init == null || init.length() == 0 ) init = TDSetting.mInitStation;
     mInitialStation = init;
     mSecondStation  = increment( init );
   }
@@ -84,20 +84,20 @@ public class DistoXStationName
         int k = Character.getNumericValue( ch );
         if ( k >= 10 && k < 35 ) {
           k -= 9; // - 10 + 1
-          // TopoDroidLog.Log( TopoDroidLog.LOG_NAME, "not numeric " + k );
+          // TDLog.Log( TDLog.LOG_NAME, "not numeric " + k );
           return name.substring( 0, len - 1 ) + 
            ( Character.isLowerCase( ch )? lc[k] : uc[k] );
         } else if ( k >= 0 && k < 10 ) {
           int n = 0;
           int s = 1;
-          // TopoDroidLog.Log( TopoDroidLog.LOG_NAME, "name >" + name + "< n " + n );
+          // TDLog.Log( TDLog.LOG_NAME, "name >" + name + "< n " + n );
           while ( len > 0 ) {
             -- len;
             k = Character.getNumericValue( name.charAt(len) );
             if ( k < 0 || k >= 10 ) { ++len; break; }
             n += s * k;
             s *= 10;
-            // TopoDroidLog.Log( TopoDroidLog.LOG_NAME, "k " + k + " n " + n + " len " + len);
+            // TDLog.Log( TDLog.LOG_NAME, "k " + k + " n " + n + " len " + len);
           }
           if ( len > 0 ) {
             return name.substring( 0, len ) + Integer.toString( n+1 );

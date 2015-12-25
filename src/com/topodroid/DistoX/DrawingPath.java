@@ -268,7 +268,7 @@ public class DrawingPath implements ICanvasCommand
   {
     if ( intersects( bbox ) ) {
       if ( mType == DRAWING_PATH_AREA ) {
-        // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingPath::draw area" );
+        // TDLog.Log( TDLog.LOG_PLOT, "DrawingPath::draw area" );
         mPath.close();
       }
       drawPath( mPath, canvas );
@@ -307,7 +307,7 @@ public class DrawingPath implements ICanvasCommand
 
   public String toTherion() { return new String("FIXME"); }
 
-  void toDataStream( DataOutputStream dos ) { TopoDroidLog.Error( "ERROR DrawingPath toDataStream executed"); }
+  void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
 
   public void toCsurvey( PrintWriter pw ) { }
 

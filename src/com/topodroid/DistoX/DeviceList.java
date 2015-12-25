@@ -64,7 +64,7 @@ public class DeviceList extends Activity
     // setTitleColor( 0x006d6df6 );
 
     int command = getIntent().getExtras().getInt( TopoDroidTag.TOPODROID_DEVICE_ACTION );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "command " + command );
+    // TDLog.Log( TDLog.LOG_BT, "command " + command );
     switch ( command )
     {
       case DEVICE_PAIR:
@@ -74,7 +74,7 @@ public class DeviceList extends Activity
         scanBTDevices();
         break;
       default:  // 0x0 or unknown
-         // TopoDroidLog.Log(TopoDroidLog.LOG_BT, "Unknown intent command! ("+command+")");
+         // TDLog.Log(TDLog.LOG_BT, "Unknown intent command! ("+command+")");
     }
   }
 
@@ -83,14 +83,14 @@ public class DeviceList extends Activity
   {
     CharSequence item = ((TextView) view).getText();
     String value = item.toString();
-    // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "onItemClick " + mDistoX.StatusName() + " value: " + value + " pos " + position );
+    // TDLog.Log( TDLog.LOG_BT, "onItemClick " + mDistoX.StatusName() + " value: " + value + " pos " + position );
     if ( value.startsWith( "DistoX", 0 ) || value.startsWith( "A3", 0 ) || value.startsWith( "X310", 0 ) ) 
     {
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String address = buf.substring(k+1);
       // Toast.makeText( mApp.getApplicationContext(), address, Toast.LENGTH_SHORT).show();
-      TopoDroidLog.Log( TopoDroidLog.LOG_BT, "DeviceList item click Address " + address );
+      TDLog.Log( TDLog.LOG_BT, "DeviceList item click Address " + address );
       Intent intent = new Intent();
       intent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, address );
       setResult( RESULT_OK, intent );
@@ -115,7 +115,7 @@ public class DeviceList extends Activity
           mArrayAdapter.add( "DistoX " + device.getName() + " " + device.getAddress() );
        }
       }
-      // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "showPairedDevices n. " + mArrayAdapter.getCount() );
+      // TDLog.Log( TDLog.LOG_BT, "showPairedDevices n. " + mArrayAdapter.getCount() );
     } else {
       Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();
     }
@@ -125,7 +125,7 @@ public class DeviceList extends Activity
 
   private void scanBTDevices()
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_BT, "scanBTDevices" );
+    TDLog.Log( TDLog.LOG_BT, "scanBTDevices" );
     // Log.v( "DistoX", "scanBTDevices" );
     mArrayAdapter.clear();
     resetReceiver(); // FIXME should not be necessary
@@ -135,12 +135,12 @@ public class DeviceList extends Activity
       public void onReceive( Context ctx, Intent data )
       {
         String action = data.getAction();
-        // TopoDroidLog.Log( TopoDroidLog.LOG_BT, "onReceive action " + action );
+        // TDLog.Log( TDLog.LOG_BT, "onReceive action " + action );
         if ( BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals( action ) ) {
-          TopoDroidLog.Log(  TopoDroidLog.LOG_BT, "onReceive BT DISCOVERY STARTED" );
+          TDLog.Log(  TDLog.LOG_BT, "onReceive BT DISCOVERY STARTED" );
           setTitle(  R.string.title_discover );
         } else if ( BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals( action ) ) {
-          TopoDroidLog.Log(  TopoDroidLog.LOG_BT, "onReceive BT DISCOVERY FINISHED, found " + mArrayAdapter.getCount() );
+          TDLog.Log(  TDLog.LOG_BT, "onReceive BT DISCOVERY FINISHED, found " + mArrayAdapter.getCount() );
           setTitle( R.string.title_device );
           resetReceiver();
           if ( mArrayAdapter.getCount() < 1 ) { 
@@ -149,7 +149,7 @@ public class DeviceList extends Activity
           }
         } else if ( BluetoothDevice.ACTION_FOUND.equals( action ) ) {
           BluetoothDevice device = data.getParcelableExtra( BluetoothDevice.EXTRA_DEVICE );
-          TopoDroidLog.Log(  TopoDroidLog.LOG_BT, "onReceive BT DEVICES FOUND, name " + device.getName() );
+          TDLog.Log(  TDLog.LOG_BT, "onReceive BT DEVICES FOUND, name " + device.getName() );
           if ( device.getBondState() != BluetoothDevice.BOND_BONDED ) {
             String model = device.getName();
             if ( model != null && model.startsWith("DistoX") ) { // DistoX and DistoX2
@@ -161,14 +161,14 @@ public class DeviceList extends Activity
             }
           }
         // } else if ( BluetoothDevice.ACTION_ACL_CONNECTED.equals( action ) ) {
-        //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_CONNECTED");
+        //   TDLog.Log( TDLog.LOG_BT, "ACL_CONNECTED");
         // } else if ( BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
-        //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECT_REQUESTED");
+        //   TDLog.Log( TDLog.LOG_BT, "ACL_DISCONNECT_REQUESTED");
         // } else if ( BluetoothDevice.ACTION_ACL_DISCONNECTED.equals( action ) ) {
         //   // Bundle extra = data.getExtras();
         //   // String device = extra.getString( BluetoothDevice.EXTRA_DEVICE ).toString();
         //   // Log.v("DistoX", "DeviceList ACL_DISCONNECTED from " + device );
-        //   TopoDroidLog.Log( TopoDroidLog.LOG_BT, "ACL_DISCONNECTED");
+        //   TDLog.Log( TDLog.LOG_BT, "ACL_DISCONNECTED");
         }
       }
     };
@@ -205,7 +205,7 @@ public class DeviceList extends Activity
   private void resetReceiver()
   {
     if ( mBTReceiver != null ) {
-      TopoDroidLog.Log(  TopoDroidLog.LOG_BT, "resetReceiver");
+      TDLog.Log(  TDLog.LOG_BT, "resetReceiver");
       unregisterReceiver( mBTReceiver );
       mBTReceiver = null;
     }

@@ -138,7 +138,7 @@ public class CompassParser extends ImportParser
                 if ( mLeft > 0 ) {
                   float ber = mBearing + 270;
                   if ( ber > 360 ) ber -= 360;
-                  if ( TopoDroidSetting.mLRExtend ) {
+                  if ( TDSetting.mLRExtend ) {
                     extend = (int)TopoDroidApp.computeSplayExtend( ber );
                   }
                   splays.add( new ParserShot( mFrom, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
@@ -146,7 +146,7 @@ public class CompassParser extends ImportParser
                 if ( mRight > 0 ) {
                   float ber = mBearing + 90;
                   if ( ber > 360 ) ber -= 360;
-                  if ( TopoDroidSetting.mLRExtend ) {
+                  if ( TDSetting.mLRExtend ) {
                     extend = (int)TopoDroidApp.computeSplayExtend( ber );
                   }
                   splays.add( new ParserShot( mFrom, null, mRight, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
@@ -166,7 +166,7 @@ public class CompassParser extends ImportParser
                                  extend, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
+              TDLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
             }
           }
         }
@@ -174,13 +174,13 @@ public class CompassParser extends ImportParser
       }
     } catch ( IOException e ) {
       // TODO
-      TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line );
+      TDLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
     if ( mDate == null ) {
       mDate = TopoDroidUtil.currentDate();
     }
-    TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "CompassParser shots "+ shots.size() +" splays "+ splays.size()  );
+    TDLog.Log( TDLog.LOG_THERION, "CompassParser shots "+ shots.size() +" splays "+ splays.size()  );
     // Log.v( TopoDroidApp.TAG, "CompassParser shots "+ shots.size() + " splays "+ splays.size() );
   }
 

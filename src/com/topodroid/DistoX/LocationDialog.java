@@ -109,7 +109,7 @@ public class LocationDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TopoDroidLog.Log( TopoDroidLog.LOG_LOC, "Location onCreate" );
+    // TDLog.Log( TDLog.LOG_LOC, "Location onCreate" );
     setContentView(R.layout.location_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -158,15 +158,15 @@ public class LocationDialog extends Dialog
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                 R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
-    if ( TopoDroidSetting.mKeyboard ) {
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+    if ( TDSetting.mKeyboard ) {
+      if ( TDSetting.mStationNames == 1 ) {
         MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT );
       } else {
         MyKeyboard.registerEditText( mKeyboard, mETstation, MyKeyboard.FLAG_POINT_LCASE_2ND );
       }
     } else {
       mKeyboard.hide();
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mETstation.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       }
     }
@@ -175,7 +175,7 @@ public class LocationDialog extends Dialog
   public void refreshList()
   {
     List< FixedInfo > fxds = mApp.mData.selectAllFixed( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "Location::refreshList size " + fxds.size() );
+    // TDLog.Log( TDLog.LOG_DEBUG, "Location::refreshList size " + fxds.size() );
     mFixedAdapter = new FixedAdapter( mContext, R.layout.message, fxds );
     mList.setAdapter( mFixedAdapter );
   }
@@ -183,7 +183,7 @@ public class LocationDialog extends Dialog
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_LOC, "Location::onItemClick pos " + pos );
+    // TDLog.Log( TDLog.LOG_LOC, "Location::onItemClick pos " + pos );
     // CharSequence item = ((TextView) view).getText();
     // String value = item.toString();
     // // setListPos( position  );
@@ -252,7 +252,7 @@ public class LocationDialog extends Dialog
   @Override
   public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Location onEditorAction " + actionId );
+    // TDLog.Log( TDLog.LOG_INPUT, "Location onEditorAction " + actionId );
     // if ( actionId == 6 )
     {
       if ( (EditText)v == mETstation ) {
@@ -300,7 +300,7 @@ public class LocationDialog extends Dialog
     }
     if ( b == mBtnAdd ) {
       // stop GPS location and start dialog for lat/long/alt data
-      if ( TopoDroidSetting.mKeyboard ) mKeyboard.hide();
+      if ( TDSetting.mKeyboard ) mKeyboard.hide();
       if ( mLocating ) {
         setGPSoff();
       }
@@ -319,14 +319,14 @@ public class LocationDialog extends Dialog
     } else if ( b == mBtnMobileTopographer ) {
       (new MobileTopographerDialog( mParent, this )).show();
     } else if ( b == mBtnLoc ) {
-      if ( TopoDroidSetting.mKeyboard ) mKeyboard.hide();
+      if ( TDSetting.mKeyboard ) mKeyboard.hide();
       if ( mLocating ) {
         setGPSoff();
       } else {      
         // FIXME GPS_AVERAGE NOT USED
-        // if ( TopoDroidSetting.mUseGPSAveraging ) {
+        // if ( TDSetting.mUseGPSAveraging ) {
         //   if ( ! mParent.tryGPSAveraging( this ) ) {
-        //     TopoDroidLog.Error( "Location: failed GPSAveraging" );
+        //     TDLog.Error( "Location: failed GPSAveraging" );
         //   }
         // } else {
           setGPSon();
@@ -340,7 +340,7 @@ public class LocationDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;
@@ -390,7 +390,7 @@ public class LocationDialog extends Dialog
 
   public void onStatusChanged( String provider, int status, Bundle extras )
   {
-    // TopoDroidLog.Log(TopoDroidLog.LOG_LOC, "onStatusChanged status " + status );
+    // TDLog.Log(TDLog.LOG_LOC, "onStatusChanged status " + status );
   }
 
   public void onGpsStatusChanged( int event ) 
@@ -403,7 +403,7 @@ public class LocationDialog extends Dialog
         GpsSatellite sat = sats.next();
         if ( sat.usedInFix() ) ++nr;
       }
-      // TopoDroidLog.Log(TopoDroidLog.LOG_LOC, "onGpsStatusChanged nr satellites used in fix " + nr );
+      // TDLog.Log(TDLog.LOG_LOC, "onGpsStatusChanged nr satellites used in fix " + nr );
       mBtnStatus.setText( Integer.toString( nr ) );
       switch ( nr ) {
         case 0: mBtnStatus.setBackgroundColor( 0x80ff0000 );
@@ -423,9 +423,9 @@ public class LocationDialog extends Dialog
         mHasLocation = (loc != null);
         if ( mHasLocation ) displayLocation( loc );
       } catch ( IllegalArgumentException e ) {
-        TopoDroidLog.Error( "onGpsStatusChanged IllegalArgumentException " );
+        TDLog.Error( "onGpsStatusChanged IllegalArgumentException " );
       } catch ( SecurityException e ) {
-        TopoDroidLog.Error( "onGpsStatusChanged SecurityException " );
+        TDLog.Error( "onGpsStatusChanged SecurityException " );
       }
     }
   }

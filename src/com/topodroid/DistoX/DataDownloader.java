@@ -77,11 +77,11 @@ class DataDownloader
    */
   private void startDownloadData( )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** download data. status: " + mStatus );
-    if ( TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_BATCH ) {
+    // TDLog.Log( TDLog.LOG_COMM, "**** download data. status: " + mStatus );
+    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
       tryDownloadData( );
-    } else { // TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS
-      if ( TopoDroidSetting.mAutoReconnect ) {
+    } else { // TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS
+      if ( TDSetting.mAutoReconnect ) {
         new ReconnectTask( this ).execute();
       } else {
         tryConnect();
@@ -94,7 +94,7 @@ class DataDownloader
   {
     // Log.v("DistoX", "stop Download Data() connected " + mConnected );
     // if ( ! mConnected ) return;
-    if ( TopoDroidSetting.mConnectionMode == TopoDroidSetting.CONN_MODE_CONTINUOUS ) {
+    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS ) {
       mApp.disconnectComm();
       notifyConnectionStatus( false );
     }
@@ -112,10 +112,10 @@ class DataDownloader
       }
       if ( ! mConnected ) {
         mConnected = mApp.connectDevice( mApp.mDevice.mAddress );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** try Connect status 0 --> " + mStatus );
+        // TDLog.Log( TDLog.LOG_COMM, "**** try Connect status 0 --> " + mStatus );
       } else {
         mConnected = false;
-        // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "**** try Connect status " + mStatus + " --> 0 " );
+        // TDLog.Log( TDLog.LOG_COMM, "**** try Connect status " + mStatus + " --> 0 " );
       }
     }
   }
@@ -132,14 +132,14 @@ class DataDownloader
     // mSecondLastShotId = mApp.lastShotId( );
     if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {
       notifyConnectionStatus( true );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_COMM, "shot menu DOWNLOAD" );
+      // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
       new DataDownloadTask( mApp, mApp.mListerSet ).execute();
     } else {
       mDownload = false;
       notifyConnectionStatus( false );
-      TopoDroidLog.Error( "download data: no device selected" );
+      TDLog.Error( "download data: no device selected" );
       if ( mApp.mSID < 0 ) {
-        TopoDroidLog.Error( "download data: no survey selected" );
+        TDLog.Error( "download data: no survey selected" );
       } else {
         // DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
         // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();

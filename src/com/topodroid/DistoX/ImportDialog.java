@@ -74,14 +74,14 @@ public class ImportDialog extends Dialog
     // setTitleColor( 0x006d6df6 );
     setTitle( R.string.import_title );
 
-    File[] files = TopoDroidPath.getImportFiles();
+    File[] files = TDPath.getImportFiles();
     ArrayList<String> names = new ArrayList<String>();
     if ( files != null ) {
       for ( File f : files ) { 
         names.add( f.getName() );
       }
     }
-    File[] zips = TopoDroidPath.getZipFiles();
+    File[] zips = TDPath.getZipFiles();
     if ( zips != null ) {
       for ( File f : zips ) {
         names.add( f.getName() );
@@ -115,7 +115,7 @@ public class ImportDialog extends Dialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     String item = ((TextView) view).getText().toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "ImportDialog onItemClick() " + item.toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "ImportDialog onItemClick() " + item.toString() );
 
     // hide();
     mList.setOnItemClickListener( null );

@@ -141,14 +141,14 @@ public class PlotListDialog extends Dialog
         }
       // END_SKETCH_3D //
     } else {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "null data or survey (" + mApp.mSID + ")" );
+      // TDLog.Log( TDLog.LOG_PLOT, "null data or survey (" + mApp.mSID + ")" );
     }
   }
  
   // @Override
   public void onClick(View v) 
   {
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PlotListDialog onClick() " );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PlotListDialog onClick() " );
     Button b = (Button) v;
     if ( b == mBtnPlotNew ) {
       hide();
@@ -189,7 +189,7 @@ public class PlotListDialog extends Dialog
   {
     CharSequence item = ((TextView) view).getText();
     String value = item.toString();
-    // TopoDroidLog.Log(  TopoDroidLog.LOG_INPUT, "PlotListDialog onItemClick() " + value );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PlotListDialog onItemClick() " + value );
 
     int from = value.indexOf('<');
     if ( from < 0 ) return;

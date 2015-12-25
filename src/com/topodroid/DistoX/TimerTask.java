@@ -32,9 +32,9 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   protected Long doInBackground( String... str )
   {
-    int count = TopoDroidSetting.mTimerCount;
+    int count = TDSetting.mTimerCount;
     int duration = 100; // ms
-    ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TopoDroidSetting.mBeepVolume );
+    ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
     long ret = 0;
     for ( int i=0; i<count && mRun; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 

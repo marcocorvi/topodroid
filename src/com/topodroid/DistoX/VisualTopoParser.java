@@ -200,7 +200,7 @@ public class VisualTopoParser extends ImportParser
                 extend = 0;
                 if ( mLeft > 0 ) {
 	            float ber = mBearing + 180 + 90 * dirw;
-                    if ( TopoDroidSetting.mLRExtend ) {
+                    if ( TDSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
                     splays.add( new ParserShot( station, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
@@ -208,7 +208,7 @@ public class VisualTopoParser extends ImportParser
                 if ( mRight > 0 ) {
                     float ber = mBearing + 180 - 90 * dirw;
                     if ( ber > 360 ) ber -= 360;
-                    if ( TopoDroidSetting.mLRExtend ) {
+                    if ( TDSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
                     splays.add( new ParserShot( station, null, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );
@@ -224,7 +224,7 @@ public class VisualTopoParser extends ImportParser
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,
                                            shot_extend, duplicate, surface, backshot, comment ) );
               } catch ( NumberFormatException e ) {
-                TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line + " " + e.getMessage() );
+                TDLog.Error( "ERROR " + mLineCnt + ": " + line + " " + e.getMessage() );
               }
             }
           }
@@ -233,10 +233,10 @@ public class VisualTopoParser extends ImportParser
       }
     } catch ( IOException e ) {
       // TODO
-      TopoDroidLog.Error( "ERROR " + mLineCnt + ": " + line );
+      TDLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
-    TopoDroidLog.Log( TopoDroidLog.LOG_THERION, "VisualTopoParser shots "+ shots.size() +" splays "+ splays.size()  );
+    TDLog.Log( TDLog.LOG_THERION, "VisualTopoParser shots "+ shots.size() +" splays "+ splays.size()  );
     // Log.v( TopoDroidApp.TAG, "VisualTopoParser shots "+ shots.size() + " splays "+ splays.size() );
   }
 

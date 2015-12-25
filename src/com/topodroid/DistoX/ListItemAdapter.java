@@ -47,7 +47,7 @@ class ListItemAdapter extends ArrayAdapter< String >
     if ( b != null ) {
       TextView tw = (TextView) v.findViewById( R.id.row_text );
       tw.setText( b );
-      tw.setTextSize( TopoDroidSetting.mTextSize );
+      tw.setTextSize( TDSetting.mTextSize );
     }
     return v;
   }

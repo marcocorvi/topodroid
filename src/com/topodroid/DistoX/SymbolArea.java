@@ -53,7 +53,7 @@ class SymbolArea extends Symbol
   @Override public void setAngle( float angle ) 
   {
     if ( mBitmap == null ) return;
-    TopoDroidLog.Error( "ERROR area symbol set orientation " + angle + " not supported" );
+    TDLog.Error( "ERROR area symbol set orientation " + angle + " not supported" );
     // mOrientation = angle;
     // android.graphics.Matrix m = new android.graphics.Matrix();
     // int w = mBitmap.getWidth();
@@ -85,7 +85,7 @@ class SymbolArea extends Symbol
     mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
     mPaint.setStrokeJoin(Paint.Join.ROUND);
     mPaint.setStrokeCap(Paint.Cap.ROUND);
-    mPaint.setStrokeWidth( TopoDroidSetting.mLineThickness );
+    mPaint.setStrokeWidth( TDSetting.mLineThickness );
     makeShader( mBitmap, mXMode, mYMode, true );
     makePath();
   }
@@ -93,7 +93,7 @@ class SymbolArea extends Symbol
   void rotateGrad( double a ) 
   {
     if ( mOrientable ) {
-      TopoDroidLog.Error( "ERROR area symbol rotate by " + a + " not implementd" );
+      TDLog.Error( "ERROR area symbol rotate by " + a + " not implementd" );
       // mOrientation += a;
       // while ( mOrientation >= 360 ) mOrientation -= 360;
       // while ( mOrientation < 0 ) mOrientation += 360;
@@ -232,7 +232,7 @@ class SymbolArea extends Symbol
                 mCsxBrush = Integer.parseInt( vals[k] );
               }
             } catch ( NumberFormatException e ) {
-              TopoDroidLog.Error( filename + " parse error: " + line );
+              TDLog.Error( filename + " parse error: " + line );
             }
   	  } else if ( vals[k].equals("color") ) {
   	    ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -282,7 +282,7 @@ class SymbolArea extends Symbol
                   }
                 }   
               } catch ( NumberFormatException e ) {
-                TopoDroidLog.Error( filename + " parse bitmap error: " + line );
+                TDLog.Error( filename + " parse bitmap error: " + line );
               }
             }
   	  } else if ( vals[k].equals("endbitmap") ) {
@@ -306,7 +306,7 @@ class SymbolArea extends Symbol
               mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
               mPaint.setStrokeJoin(Paint.Join.ROUND);
               mPaint.setStrokeCap(Paint.Cap.ROUND);
-              mPaint.setStrokeWidth( TopoDroidSetting.mLineThickness );
+              mPaint.setStrokeWidth( TDSetting.mLineThickness );
   	    }
           }
         }

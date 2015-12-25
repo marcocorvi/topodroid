@@ -49,7 +49,7 @@ public class SurveyStatDialog extends Dialog
       super(context);
       mContext = context;
       mStat = stat;
-      // TopoDroidLog.Log(TopoDroidLog.LOG_STAT, "SurveyStat cstr");
+      // TDLog.Log(TDLog.LOG_STAT, "SurveyStat cstr");
     }
 
     @Override
@@ -63,7 +63,7 @@ public class SurveyStatDialog extends Dialog
 
         Resources res = mContext.getResources();
 
-        // TopoDroidLog.Log(TopoDroidLog.LOG_STAT, " SurveyStat onCreate");
+        // TDLog.Log(TDLog.LOG_STAT, " SurveyStat onCreate");
         mTextLeg       = (TextView) findViewById(R.id.stat_leg);
         mTextDuplicate = (TextView) findViewById(R.id.stat_duplicate);
         mTextSurface   = (TextView) findViewById(R.id.stat_surface);
@@ -91,7 +91,7 @@ public class SurveyStatDialog extends Dialog
     // {
     //   Button b = (Button)view;
     //   if ( b == mBtnBack ) {
-    //     // TopoDroidLog.Log( TopoDroidLog.LOG_STAT, "onClick()" );
+    //     // TDLog.Log( TDLog.LOG_STAT, "onClick()" );
     //     dismiss();
     //   }
     // }

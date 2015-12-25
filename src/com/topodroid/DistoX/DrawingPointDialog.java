@@ -100,7 +100,7 @@ public class DrawingPointDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingPointDialog onClick() " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingPointDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOk ) {
       if ( mEToptions.getText() != null ) {

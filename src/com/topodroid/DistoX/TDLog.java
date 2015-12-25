@@ -1,4 +1,4 @@
-/** @file TopoDroidLog.java
+/** @file TDLog.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -22,7 +22,7 @@ import android.content.SharedPreferences;
 
 import android.util.Log;
 
-class TopoDroidLog
+class TDLog
 {
 
   // ---------------------------------------------------------
@@ -157,7 +157,7 @@ class TopoDroidLog
   {
     if ( mLog == null ) {
       try {
-        File log_file = TopoDroidPath.getLogFile();
+        File log_file = TDPath.getLogFile();
         FileWriter fw = new FileWriter( log_file );
         mLog = new PrintWriter( fw, true ); // true = autoflush
         mLog.format( "TopoDroid version %s\n", TopoDroidApp.VERSION );

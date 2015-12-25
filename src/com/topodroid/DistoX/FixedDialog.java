@@ -103,7 +103,7 @@ public class FixedDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TopoDroidLog.Log( TopoDroidLog.LOG_FIXED, "FixedDialog onCreate" );
+    // TDLog.Log( TDLog.LOG_FIXED, "FixedDialog onCreate" );
     setContentView(R.layout.fixed_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -151,14 +151,14 @@ public class FixedDialog extends Dialog
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                   R.xml.my_keyboard, R.xml.my_keyboard_qwerty );
 
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       MyKeyboard.registerEditText( mKeyboard, mETlng, MyKeyboard.FLAG_POINT_DEGREE );
       MyKeyboard.registerEditText( mKeyboard, mETlat, MyKeyboard.FLAG_POINT_DEGREE );
       MyKeyboard.registerEditText( mKeyboard, mETalt, MyKeyboard.FLAG_POINT  );
       MyKeyboard.registerEditText( mKeyboard, mETasl, MyKeyboard.FLAG_POINT  );
       MyKeyboard.registerEditText( mKeyboard, mETdecl, MyKeyboard.FLAG_POINT  );
       int flag = MyKeyboard.FLAG_POINT_LCASE_2ND;
-      if ( TopoDroidSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
+      if ( TDSetting.mStationNames == 1 ) flag = MyKeyboard.FLAG_POINT;
       MyKeyboard.registerEditText( mKeyboard, mETstation, flag );
     } else {
       mKeyboard.hide();
@@ -167,7 +167,7 @@ public class FixedDialog extends Dialog
       mETalt.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       mETasl.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       mETdecl.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
-      if ( TopoDroidSetting.mStationNames == 1 ) {
+      if ( TDSetting.mStationNames == 1 ) {
         mETstation.setInputType( TopoDroidConst.NUMBER_DECIMAL );
       }
     }
@@ -176,7 +176,7 @@ public class FixedDialog extends Dialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "FixedDialog onClick() button " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "FixedDialog onClick() button " + b.getText().toString() );
 
     if ( b == mButtonStation ) {
       double lng = FixedInfo.string2double( mETlng.getText().toString() );
@@ -297,7 +297,7 @@ public class FixedDialog extends Dialog
   @Override
   public void onBackPressed()
   {
-    if ( TopoDroidSetting.mKeyboard ) {
+    if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();
         return;

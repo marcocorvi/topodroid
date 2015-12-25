@@ -58,13 +58,13 @@ class PTDrawing
         PTElement el = null;
         byte id = PTFile.readByte( fs );
         if ( id == PTElement.ID_POLYGON_ELEMENT ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT drawing id polygon" );
+          // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing id polygon" );
           el = new PTPolygonElement();
         } else if ( id == PTElement.ID_XSECTION_ELEMENT) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT drawing id xsection" );
+          // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing id xsection" );
           el = new PTXSectionElement();
         } else if ( id == PTElement.ID_NO_ELEMENT ) {
-          // TopoDroidLog.Log( TopoDroidLog.LOG_PTOPO, "PT drawing id no element" );
+          // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing id no element" );
           break;
         }
         if ( el != null ) el.read( fs );

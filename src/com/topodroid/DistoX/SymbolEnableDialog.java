@@ -85,7 +85,7 @@ class SymbolEnableDialog extends Dialog
     mBTarea  = (Button) findViewById(R.id.symbol_area );
 
     mBTline.setOnClickListener( this );
-    if ( TopoDroidSetting.mLevelOverBasic ) {
+    if ( TDSetting.mLevelOverBasic ) {
       mBTpoint.setOnClickListener( this );
       mBTarea.setOnClickListener( this );
     }
@@ -104,7 +104,7 @@ class SymbolEnableDialog extends Dialog
     mLineAdapter  = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
     mAreaAdapter  = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
 
-    if ( TopoDroidSetting.mLevelOverBasic ) {
+    if ( TDSetting.mLevelOverBasic ) {
       SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
       if ( point_lib == null ) return false;
       int np = point_lib.mSymbolNr;
@@ -120,7 +120,7 @@ class SymbolEnableDialog extends Dialog
       mLineAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
 
-    if ( TopoDroidSetting.mLevelOverBasic ) {
+    if ( TDSetting.mLevelOverBasic ) {
       SymbolAreaLibrary area_lib   = DrawingBrushPaths.mAreaLib;
       if ( area_lib == null ) return false;
       int na = area_lib.mSymbolNr;
@@ -138,7 +138,7 @@ class SymbolEnableDialog extends Dialog
     // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... updateList type " + mType );
     switch ( mType ) {
       case DrawingActivity.SYMBOL_POINT:
-        if ( TopoDroidSetting.mLevelOverBasic ) {
+        if ( TDSetting.mLevelOverBasic ) {
           mList.setAdapter( mPointAdapter );
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
           mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
@@ -152,7 +152,7 @@ class SymbolEnableDialog extends Dialog
         mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
         break;
       case DrawingActivity.SYMBOL_AREA:
-        if ( TopoDroidSetting.mLevelOverBasic ) {
+        if ( TDSetting.mLevelOverBasic ) {
           mList.setAdapter( mAreaAdapter );
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
           mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
@@ -166,17 +166,17 @@ class SymbolEnableDialog extends Dialog
   @Override
   public void onClick(View view)
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_PLOT, "DrawingLinePickerDialog::onClick" );
+    // TDLog.Log( TDLog.LOG_PLOT, "DrawingLinePickerDialog::onClick" );
     int type = -1;
     switch (view.getId()) {
       case R.id.symbol_point:
-        if ( TopoDroidSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_POINT;
+        if ( TDSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_POINT;
         break;
       case R.id.symbol_line:
         type = DrawingActivity.SYMBOL_LINE;
         break;
       case R.id.symbol_area:
-        if ( TopoDroidSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_AREA;
+        if ( TDSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_AREA;
         break;
       default:
         break;
@@ -196,7 +196,7 @@ class SymbolEnableDialog extends Dialog
 
   void saveSymbols()
   {
-    if ( TopoDroidSetting.mLevelOverBasic ) {
+    if ( TDSetting.mLevelOverBasic ) {
       mPointAdapter.updateSymbols( "p_" );
       SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
       if ( point_lib != null ) point_lib.makeEnabledList();
@@ -206,7 +206,7 @@ class SymbolEnableDialog extends Dialog
     SymbolLineLibrary line_lib   = DrawingBrushPaths.mLineLib;
     if ( line_lib  != null ) line_lib.makeEnabledList();
 
-    if ( TopoDroidSetting.mLevelOverBasic ) {
+    if ( TDSetting.mLevelOverBasic ) {
       mAreaAdapter.updateSymbols( "a_" );
       SymbolAreaLibrary area_lib   = DrawingBrushPaths.mAreaLib;
       if ( area_lib  != null ) area_lib.makeEnabledList();

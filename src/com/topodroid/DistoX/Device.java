@@ -44,7 +44,7 @@ class Device
   static int  stringToType( String model ) 
   {
     if ( model != null ) {
-      TopoDroidLog.Log( TopoDroidLog.LOG_DEBUG, "stringToType " + model );
+      TDLog.Log( TDLog.LOG_DEBUG, "stringToType " + model );
       if ( model.equals( "X310" ) || model.startsWith( "DistoX-" ) ) return DISTO_X310;
       if ( model.equals( "A3" ) || model.equals( "DistoX" ) ) return DISTO_A3;
     }

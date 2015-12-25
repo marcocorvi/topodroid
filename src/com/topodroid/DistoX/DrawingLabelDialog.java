@@ -59,7 +59,7 @@ public class DrawingLabelDialog extends Dialog
     mBtnOK.setOnClickListener( this );
     // mBtnCancel.setOnClickListener( this );
 
-    mLabel.setTextSize( TopoDroidSetting.mTextSize );
+    mLabel.setTextSize( TDSetting.mTextSize );
 
     String title = mContext.getResources().getString( R.string.label_title );
 
@@ -68,7 +68,7 @@ public class DrawingLabelDialog extends Dialog
 
   public void onClick(View view)
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
     if (view.getId() == R.id.label_ok ) {
       mActivity.addLabel( mLabel.getText().toString(), mX, mY );
     }

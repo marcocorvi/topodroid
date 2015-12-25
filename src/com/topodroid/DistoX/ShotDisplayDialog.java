@@ -73,7 +73,7 @@ public class ShotDisplayDialog extends Dialog
 
     public void onClick(View view)
     {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "ShotDisplayDialog onClick " + view.toString() );
+      // TDLog.Log( TDLog.LOG_INPUT, "ShotDisplayDialog onClick " + view.toString() );
       hide();
       switch (view.getId()) {
         case R.id.button_mode_ok:

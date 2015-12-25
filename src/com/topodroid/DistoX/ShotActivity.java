@@ -285,7 +285,7 @@ public class ShotActivity extends Activity
       if ( list.size() > 4 ) computeMeans( list );
 
       List< PhotoInfo > photos = data.selectAllPhotos( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "updateDisplay() shot list size " + list.size() );
+      // TDLog.Log( TDLog.LOG_SHOT, "updateDisplay() shot list size " + list.size() );
       // Log.v( TopoDroidApp.TAG, "updateDisplay() shot list size " + list.size() );
       updateShotList( list, photos );
       
@@ -346,7 +346,7 @@ public class ShotActivity extends Activity
 
   private void updateShotList( List<DistoXDBlock> list, List< PhotoInfo > photos )
   {
-    TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
+    TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
     // Log.v( "DistoX", "update Shot List shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
@@ -367,7 +367,7 @@ public class ShotActivity extends Activity
       DistoXDBlock cur = item;
       int t = cur.type();
 
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+      // TDLog.Log( TDLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
 
       if ( cur.mType == DistoXDBlock.BLOCK_SEC_LEG || cur.relativeDistance( prev ) ) {
         // Log.v( "DistoX", "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
@@ -380,7 +380,7 @@ public class ShotActivity extends Activity
         if ( prev != null ) prev.setTypeBlankLeg();
 
         if ( mLeg ) { // flag: hide leg extra shots
-          // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "close distance");
+          // TDLog.Log( TDLog.LOG_SHOT, "close distance");
 
           if ( mBlank && prev != null && prev.isTypeBlank() ) {
             // prev was skipped: draw it now
@@ -407,7 +407,7 @@ public class ShotActivity extends Activity
         }
       } else {
         // Log.v( "DistoX", "item not close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
-        // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "not close distance");
+        // TDLog.Log( TDLog.LOG_SHOT, "not close distance");
         prev_is_leg = false;
         if ( DistoXDBlock.isTypeBlank(t) ) {
           prev = cur;
@@ -426,7 +426,7 @@ public class ShotActivity extends Activity
           prev = cur;
         }
       }
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
+      // TDLog.Log( TDLog.LOG_SHOT, "adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
       // Log.v( "DistoX", "shot adapter add " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
       mDataAdapter.add( cur );
     }
@@ -442,10 +442,10 @@ public class ShotActivity extends Activity
       closeMenu();
       return true;
     }
-    TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "ShotActivity onItemLongClick id " + id);
+    TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemLongClick id " + id);
     DistoXDBlock blk = mDataAdapter.get(pos);
     mShotId = blk.mId;
-    if ( TopoDroidSetting.mLevelOverNormal ) {
+    if ( TDSetting.mLevelOverNormal ) {
       (new PhotoSensorsDialog(this, this, blk ) ).show();
     } else {
       (new ShotDeleteDialog( this, this, blk ) ).show();
@@ -471,26 +471,26 @@ public class ShotActivity extends Activity
         intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
         intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
         startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
-      // } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
+      // } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
       //   (new CurrentStationDialog( this, this, mApp )).show();
 
-      } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
+      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
         (new UndeleteDialog(this, this, mApp.mData, mApp.mSID ) ).show();
         updateDisplay( );
-      } else if ( TopoDroidSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
+      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
         startActivity( new Intent( this, PhotoActivity.class ) );
-      } else if ( TopoDroidSetting.mLevelOverNormal && p++ == pos ) { // SENSORS
+      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // SENSORS
         startActivity( new Intent( this, SensorListActivity.class ) );
-      } else if ( TopoDroidSetting.mLevelOverBasic && p++ == pos ) { // 3D
+      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // 3D
         mApp.exportSurveyAsTh(); // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          intent.putExtra( "survey", TopoDroidPath.getSurveyThFile( mApp.mySurvey ) );
+          intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( TopoDroidSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
+      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
         if ( mApp.mBTAdapter.isEnabled() ) {
           startActivity( new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceActivity.class ) );
         }
@@ -509,7 +509,7 @@ public class ShotActivity extends Activity
       return;
     }
 
-    TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "ShotActivity onItemClick id " + id);
+    TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemClick id " + id);
     DistoXDBlock blk = mDataAdapter.get(pos);
 
     mShotPos = pos;
@@ -530,7 +530,7 @@ public class ShotActivity extends Activity
       prevBlock = getPreviousLegShot( blk, false );
       nextBlock = getNextLegShot( blk, false );
       // if ( prevBlock != null ) {
-      //   TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "prev leg " + prevBlock.mFrom + " " + prevBlock.mTo );
+      //   TDLog.Log( TDLog.LOG_SHOT, "prev leg " + prevBlock.mFrom + " " + prevBlock.mTo );
       // }
     // }
     (new ShotDialog( this, this, pos, blk, prevBlock, nextBlock )).show();
@@ -551,8 +551,8 @@ public class ShotActivity extends Activity
 
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-    File imagefile = new File( TopoDroidPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhotoId) ) );
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "photo " + imagefile.toString() );
+    File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhotoId) ) );
+    // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
     try {
       Uri outfileuri = Uri.fromFile( imagefile );
       Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
@@ -567,7 +567,7 @@ public class ShotActivity extends Activity
   void askSensor( )
   {
     mSensorId = mApp.mData.nextSensorId( mApp.mSID );
-    TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "sensor " + mSensorId );
+    TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
     Intent intent = new Intent( this, SensorActivity.class );
     startActivityForResult( intent, SENSOR_ACTIVITY_REQUEST_CODE );
   }
@@ -575,7 +575,7 @@ public class ShotActivity extends Activity
   // void askExternal( )
   // {
   //   mSensorId = mApp.mData.nextSensorId( mApp.mSID );
-  //   TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "sensor " + mSensorId );
+  //   TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
   //   Intent intent = new Intent( this, ExternalActivity.class );
   //   startActivityForResult( intent, EXTERNAL_ACTIVITY_REQUEST_CODE );
   // }
@@ -658,7 +658,7 @@ public class ShotActivity extends Activity
           String type  = extras.getString( TopoDroidTag.TOPODROID_SENSOR_TYPE );
           String value = extras.getString( TopoDroidTag.TOPODROID_SENSOR_VALUE );
           String comment = extras.getString( TopoDroidTag.TOPODROID_SENSOR_COMMENT );
-          TopoDroidLog.Log( TopoDroidLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
+          TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
 
           mApp.mData.insertSensor( mApp.mSID, mSensorId, mShotId, "", 
                                   TopoDroidUtil.currentDate(),
@@ -726,7 +726,7 @@ public class ShotActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mButtonSize = mApp.setListViewHeight( mListView );
 
-    mNrButton1 = TopoDroidSetting.mLevelOverBasic ? 8 : 6;
+    mNrButton1 = TDSetting.mLevelOverBasic ? 8 : 6;
     mButton1 = new Button[ mNrButton1 ];
     int k;
     for ( k=0; k<mNrButton1; ++k ) {
@@ -785,7 +785,7 @@ public class ShotActivity extends Activity
     mImage.setOnClickListener( this );
 
     // mImage.setBackgroundResource( 
-    //   ( TopoDroidSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
+    //   ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     mApp.setButtonBackground( mImage, mButtonSize, R.drawable.iz_menu);
 
     mMenu = (ListView) findViewById( R.id.menu );
@@ -945,12 +945,12 @@ public class ShotActivity extends Activity
       // int k2 = 0;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
         setConnectionStatus( 2 ); // turn arrow orange
-        // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Download button, mode " + TopoDroidSetting.mConnectionMode );
+        // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
         mDataDownloader.toggleDownload();
         setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
-        // TopoDroidLog.Log( TopoDroidLog.LOG_INPUT, "Reset button, mode " + TopoDroidSetting.mConnectionMode );
+        // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
@@ -972,7 +972,7 @@ public class ShotActivity extends Activity
           (new DistoXAnnotations( this, mApp.mySurvey )).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
-        if ( TopoDroidSetting.mAzimuthManual ) {
+        if ( TDSetting.mAzimuthManual ) {
           setRefAzimuth( 0, - mApp.mFixedExtend );
         } else {
           (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
@@ -1111,7 +1111,7 @@ public class ShotActivity extends Activity
 
   public void startExistingPlot( String name, long type ) // name = plot/sketch3d name
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "startExistingPlot \"" + name + "\" type " + type + " sid " + mApp.mSID );
+    // TDLog.Log( TDLog.LOG_SHOT, "startExistingPlot \"" + name + "\" type " + type + " sid " + mApp.mSID );
 
     // FIXME_SKETCH_3D
     if ( type == PlotInfo.PLOT_SKETCH_3D ) {
@@ -1217,9 +1217,9 @@ public class ShotActivity extends Activity
   // get the next centerline shot and set mNextPos index
   public DistoXDBlock getNextLegShot( DistoXDBlock blk, boolean move_down )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "getNextLegShot: pos " + mShotPos );
+    // TDLog.Log( TDLog.LOG_SHOT, "getNextLegShot: pos " + mShotPos );
     if ( blk == null ) {
-      // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "   block is null");
+      // TDLog.Log( TDLog.LOG_SHOT, "   block is null");
       return null;
     }
     if ( move_down ) {
@@ -1249,7 +1249,7 @@ public class ShotActivity extends Activity
   // get the previous centerline shot and set the mPrevPos index
   public DistoXDBlock getPreviousLegShot( DistoXDBlock blk, boolean move_up )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "getPreviousLegShot: pos " + mShotPos );
+    // TDLog.Log( TDLog.LOG_SHOT, "getPreviousLegShot: pos " + mShotPos );
     if ( blk == null ) return null;
     if ( move_up ) {
       mNextPos = mShotPos;
@@ -1281,7 +1281,7 @@ public class ShotActivity extends Activity
 
   void updateShot( String from, String to, long extend, long flag, boolean leg, String comment, DistoXDBlock blk )
   {
-    // TopoDroidLog.Log( TopoDroidLog.LOG_SHOT, "updateShot From >" + from + "< To >" + to + "< comment " + comment );
+    // TDLog.Log( TDLog.LOG_SHOT, "updateShot From >" + from + "< To >" + to + "< comment " + comment );
     blk.setName( from, to );
 
     int ret = mApp.mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg?1:0, comment, true );
@@ -1338,7 +1338,7 @@ public class ShotActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    // TopoDroidLog.Error( "search requested" );
+    // TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
     startActivity( intent );
@@ -1358,7 +1358,7 @@ public class ShotActivity extends Activity
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TopoDroidLog.Error( "key down: code " + code );
+        TDLog.Error( "key down: code " + code );
     }
     return false;
   }
@@ -1371,11 +1371,11 @@ public class ShotActivity extends Activity
     Resources res = getResources();
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[k++] ) );                                             // menu_survey
-    if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
-    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
-    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
-    if ( TopoDroidSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
-    if ( TopoDroidSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
+    if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
+    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
+    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
+    if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_3d
+    if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_distox
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_options
     mMenuAdapter.add( res.getString( menus[k++] ) );  // menu_help
     mMenu.setAdapter( mMenuAdapter );

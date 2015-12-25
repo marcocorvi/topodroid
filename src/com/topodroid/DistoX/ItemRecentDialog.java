@@ -91,7 +91,7 @@ class ItemRecentDialog extends Dialog
     super( context );
     mContext = context;
     mParent  = parent;
-    nrRecent = TopoDroidSetting.mRecentNr;
+    nrRecent = TDSetting.mRecentNr;
 
     mPlotType = type;
     mScale = mParent.getPointScale(); // DrawingPointPath.SCALE_M;
@@ -219,7 +219,7 @@ class ItemRecentDialog extends Dialog
   // void rotatePoint( int angle )
   // {
   //   if ( mPointAdapter == null ) return;
-  //   if ( TopoDroidSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
+  //   if ( TDSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
   //     // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
   //     mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
   //   }
