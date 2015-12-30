@@ -26,7 +26,7 @@
     <string name="thl_wall">Pared</string>
     <string name="tha_water">Agua</string>
 
-    <!-- TODO string name="make_walls">Walls</string -->
+    <string name="make_walls">Paredes</string -->
     <string name="missing_area">Área</string>
     <string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string>
     <string name="missing_line">Línea</string>
@@ -56,15 +56,15 @@
     <string name="calib_compute_coeffs">Cálculo de coeficientes de calibración  ...</string>
     <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración ...</string -->
     <string name="calib_write_coeffs">Escribir coeficientes de calibración ...</string>
-    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
+    <string name="calib_validation">Validación de %1$s vs %2$s</string -->
     <string name="connect_failed">Fallo de conexión</string>
     <string name="data"> Datos</string>
     <string name="using">Utilizar %1$s %2$s</string>
     <string name="calib_error">Error: %1$.4f grados</string>
-    <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
+    <string name="calib_stddev">Error stddev: %1$.4f grados</string -->
     <string name="calib_max_error">Max. error: %1$.4f grados</string>
-    <!-- TODO string name="calib_ave_std">Accuracy: %1$.4f %2$.4f degrees</string -->
-    <!-- TODO string name="calib_precision">Precision</string -->
+    <string name="calib_ave_std">Accuracy: %1$.4f %2$.4f grados</string -->
+    <string name="calib_precision">Precisión</string -->
     <string name="calib_iter">Iteraciones: %1$d</string>
     <string name="calib_saturated_values">ADVERTENCIA: %1$d exceso de datos</string>
     <string name="algorithm">Algoritmo:</string>
@@ -107,7 +107,7 @@
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_plots">No hay suficientes dibujos</string>
-    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
+    <string name="few_calibs">No hay suficientes calibraciones</string -->
 
     <string name="import_title">Importar archivo</string>
     <string name="import_wait">Importando archivo, espere...</string>
@@ -130,12 +130,12 @@
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <string name="altitude">Alt. </string>
-    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
-    <!-- TODO string name="h_geoid">H geoid </string -->
+    <string name="h_ellipsoid">H elip. </string -->
+    <string name="h_geoid">H geoide </string -->
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
-    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
+    <string name="h_ellipsoid_hint">H elip. [metros]</string -->
+    <string name="h_geoid_hint">H geoide [metros]</string -->
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Errores de cierre de bucle</string>
@@ -182,7 +182,7 @@
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
     <string name="hidden_add">Oculta pantalla de la línea media</string>
     <string name="hidden_del">Mostrar pantalla de la línea media</string>
-    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
+    <string name="splays_toggle">Cambiar a pantalla </string -->
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
@@ -233,12 +233,12 @@
     <string name="menu_photo">Foto</string>
     <string name="menu_sensor">Sensor</string>
     <string name="menu_scan">Escanear</string>
-    <!-- UNUSED string name="menu_station">Eestación</string -->
+    <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
-    <!-- TODO string name="menu_sync">SYNC</string -->
-    <!-- TODO string name="menu_tdr2th2">TH2 SKETCHES</string -->
-    <!-- TODO string name="menu_validate">VALIDATE</string -->
+    <string name="menu_sync">Sincro</string -->
+    <string name="menu_tdr2th2">Dibujos TH2</string -->
+    <string name="menu_validate">Validar</string -->
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -286,8 +286,8 @@
     <string name="splay">Secundaria</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
     <string name="too_many_legs_xsection">Demasiadas tomas de X-sección</string>
-    <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
-    <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
+    <string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a th2</string -->
+    <string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
 
     <string name="sensor">Sensor</string>
     <!-- UNUSED string name="sensor_accelerometer">Acelerómetro</string -->
@@ -403,7 +403,7 @@
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
-    <!-- TODO string name="button_geomag"    >Declination</string -->
+    <string name="button_geomag"    >Declinación</string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
@@ -485,7 +485,7 @@
     <!-- UNUSED string name="help_splay">Asignar estaciones laterales automáticamente</string -->
     <string name="help_display">Seleccione modo de visualización</string>
     <string name="help_display_calib">Cambiar a pantalla de tomas eliminadas</string>
-    <!-- TODO string name="help_validate">Validate calibration</string -->
+    <string name="help_validate">Validar la calibración</string -->
     <string name="help_overview">Actividad general</string>
     <string name="help_plot">Introducir datos en dibujo</string>
     <string name="help_note">Editar notas Topografía</string>
@@ -505,7 +505,7 @@
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_stats">Estadísticas de Topografías</string>
     <string name="help_save_plot">Exportar dibujo</string>
-    <!-- TODO string name="help_tdr2th2">Convert sketch binary files to th2</string -->
+    <string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string -->
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
     <string name="help_trash">Eliminar dibujo</string>
     <string name="help_undo">Deshacer última acción de dibujo</string>
@@ -616,14 +616,14 @@
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
-  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
-  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
-  <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->
-  <!-- TODO string name="pref_survex_lrud_summary">Add LRUD to Survex export</string -->
-  <!-- TODO string name="pref_csv_length_title">CSV length unit</string -->
-  <!-- TODO string name="pref_csv_length_summary">CSV export length unit</string -->
+  <string name="pref_survex_eol_title">Terminación de línea Survex</string -->
+  <string name="pref_survex_eol_summary">Terminación de línea Survex</string -->
+  <string name="pref_survex_splay_title">Estación toma lateral Survex</string -->
+  <string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string -->
+  <string name="pref_survex_lrud_title">LRUD Survex</string -->
+  <string name="pref_survex_lrud_summary">Añadir LRUD a exportación Survex</string -->
+  <string name="pref_csv_length_title">Unidad de longitud CSV</string -->
+  <string name="pref_csv_length_summary">Unidad de longitud exportación CSV</string -->
 
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
@@ -652,7 +652,7 @@
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
   <string name="pref_plot_screen_title">Opciones de pantalla de dibujo</string>
   <!-- FIXME string name="pref_tool_line_title">Opciones de dibujo</string -->
-  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
+  <string name="pref_tool_point_title">Herramienta de Puntos</string -->
   <string name="pref_location_title">Opciones de ubicación</string>
   <string name="pref_accuracy_title">Opciones de medición</string>
   <string name="pref_shot_data_title">Opciones de visuales</string>
@@ -740,8 +740,8 @@
   <string name="pref_drawing_unit_title">Tamaño de los símbolo</string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
   <string name="pref_drawing_unit_message">Escala de los símbolos del dibujo en la pantalla</string>
-  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
-  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
+  <string name="pref_unscaled_points_title">Iconos de punto sin zoom</string -->
+  <string name="pref_unscaled_points_summary">Iconos de punto sin zoom</string -->
   <string name="pref_segment_title">Precisión de la línea</string>
   <string name="pref_segment_summary">Mínimo distancia línea-punto</string>
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
@@ -790,8 +790,8 @@
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Comprobación línea media</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
-  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
-  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <string name="pref_xtherion_areas_title">áreas xtherion</string -->
+  <!-- TODO string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
   <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>
