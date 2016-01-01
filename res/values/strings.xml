@@ -711,6 +711,9 @@
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
   <string name="pref_station_prefix_title">cSurvey station prefix</string>
   <string name="pref_station_prefix_summary">Export cSurvey station prefix</string>
+  <string name="pref_ortho_lrud_title">LRUD splay angle</string>
+  <string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string>
+  <string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string>
   <string name="pref_survex_eol_title">Survex line termination</string>
   <string name="pref_survex_eol_summary">Survex line termination</string>
   <string name="pref_survex_splay_title">Survex splays station</string>

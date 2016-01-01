@@ -1031,7 +1031,7 @@ public class TopoDroidActivity extends Activity
   @Override
   public boolean onSearchRequested()
   {
-    TDLog.Error( "search requested" );
+    // TDLog.Error( "search requested" );
     Intent intent = new Intent( this, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
     startActivity( intent );
@@ -1056,80 +1056,4 @@ public class TopoDroidActivity extends Activity
     return false;
   }
 
-  // ---------------------------------------------------------------
-  /* OPTIONS MENU
-
-  private MenuItem mMIsymbol;
-  private MenuItem mMIoptions;
-  private MenuItem mMIlogs;
-  // private MenuItem mMImanual;
-  private MenuItem mMIjoin;   // join-survey
-  private MenuItem mMIhelp;
-  private MenuItem mMIabout;
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) 
-  {
-    super.onCreateOptionsMenu( menu );
-
-    mMIsymbol  = menu.add( R.string.menu_palette );
-    mMIsymbol.setIcon(  icons[5] );
-
-    mMIoptions = menu.add( R.string.menu_options );
-    mMIoptions.setIcon( icons[6] );
-
-    if ( TopoDroidApp.mLevelOverAdvanced ) {
-      mMIlogs = menu.add( R.string.menu_logs );
-      mMIlogs.setIcon(    icons[7] );
-    }
-
-    // mMImanual  = menu.add( R.string.menu_manual  );
-    // mMImanual.setIcon(  icons[8] );
-
-    if ( TopoDroidApp.mLevelOverAdvanced ) {
-      mMIjoin  = menu.add( R.string.menu_join_survey );
-      mMIjoin.setIcon(  icons[8] );
-    }
-
-    mMIabout   = menu.add( R.string.menu_about );
-    mMIabout.setIcon(   icons[9] );
-
-    mMIhelp    = menu.add( R.string.menu_help  );
-    mMIhelp.setIcon(    icons[10] );
-
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) 
-  {
-    // TDLog.Log( TDLog.LOG_INPUT, "TopoDroidActivity onOptionsItemSelected() " + item.toString() );
-    // Handle item selection
-    Intent intent;
-    if ( item == mMIsymbol ) { 
-      DrawingBrushPaths.makePaths( getResources() );
-      (new SymbolEnableDialog( this, this )).show();
-    } else if ( item == mMIoptions ) { // OPTIONS DIALOG
-      intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
-      startActivity( intent );
-    } else if ( item == mMIlogs ) { // LOG OPTIONS DIALOG
-      intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
-      startActivity( intent );
-    // } else if ( item == mMImanual ) { // USER MANUAL DIALOG
-    //   startActivity( new Intent( Intent.ACTION_VIEW ).setClass( this, DistoXManualDialog.class ) );
-    } else if ( item == mMIjoin ) { // JOIN-SURVEY DIALOG
-      (new ConnectDialog( this, mApp )).show();
-    } else if ( item == mMIabout ) { // ABOUT DIALOG
-      (new TopoDroidAbout( this )).show();
-    } else if ( item == mMIhelp  ) { // HELP DIALOG
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
-    } else {
-      return super.onOptionsItemSelected(item);
-    }
-    return true;
-  }
-
-  */
 }

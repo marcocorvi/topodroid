@@ -45,6 +45,15 @@
        android:defaultValue="false"
      />
 
+  <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_ORTHO_LRUD"
+       android:title="@string/pref_ortho_lrud_title"
+       android:summary="@string/pref_ortho_lrud_summary"
+       android:dialogTitle="@string/pref_ortho_lrud_title"
+       android:dialogMessage="@string/pref_ortho_lrud_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0" />
+
   <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_SURVEX_EOL"
        android:title="@string/pref_survex_eol_title"

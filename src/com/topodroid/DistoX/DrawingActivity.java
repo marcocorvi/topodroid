@@ -196,397 +196,334 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_prefs,
                         R.string.help_help
                       };
-    private TopoDroidApp mApp;
-    private DataDownloader mDataDownloader;
+  private TopoDroidApp mApp;
+  private DataDownloader mDataDownloader;
 
-    private PlotInfo mPlot1;
-    private PlotInfo mPlot2;
+  private PlotInfo mPlot1;
+  private PlotInfo mPlot2;
 
-    long getSID() { return mApp.mSID; }
-    String getSurvey() { return mApp.mySurvey; }
+  long getSID() { return mApp.mSID; }
+  String getSurvey() { return mApp.mySurvey; }
 
-    // 0: no bezier, plain path
-    // 1: bezier interpolator
+  // 0: no bezier, plain path
+  // 1: bezier interpolator
 
-    private String mSectionName;
+  private String mSectionName;
 
-    private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
-    private DrawingSurface  mDrawingSurface;
-    private DrawingLinePath mCurrentLinePath;
-    private DrawingAreaPath mCurrentAreaPath;
-    private DrawingPath mFixedDrawingPath;
-    // private Paint mCurrentPaint;
-    LinearLayout popup_layout = null;
-    PopupWindow popup_window = null;
-    // PopupWindow popup_mode_window = null;
+  private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
+  private DrawingSurface  mDrawingSurface;
+  private DrawingLinePath mCurrentLinePath;
+  private DrawingAreaPath mCurrentAreaPath;
+  private DrawingPath mFixedDrawingPath;
+  // private Paint mCurrentPaint;
+  LinearLayout popup_layout = null;
+  PopupWindow popup_window = null;
+  // PopupWindow popup_mode_window = null;
 
-    // private boolean canRedo;
-    private DistoXNum mNum;
-    private int mPointCnt; // counter of points in the currently drawing line
+  // private boolean canRedo;
+  private DistoXNum mNum;
+  private int mPointCnt; // counter of points in the currently drawing line
 
-    // private boolean mIsNotMultitouch;
+  // private boolean mIsNotMultitouch;
 
-    private DrawingBrush mCurrentBrush;
-    private Path  mCurrentPath;
+  private DrawingBrush mCurrentBrush;
+  private Path  mCurrentPath;
 
-    private String mName;   // current-plot name
-    String mName1;          // first name (PLAN)
-    private String mName2;  // second name (EXTENDED)
-    String mFullName1; // accessible by the SaveThread
-    String mFullName2;
+  private String mName;   // current-plot name
+  String mName1;          // first name (PLAN)
+  private String mName2;  // second name (EXTENDED)
+  String mFullName1; // accessible by the SaveThread
+  String mFullName2;
 
-    private boolean mEditMove;    // whether moving the selected point
-    private boolean mShiftMove;   // whether to move the canvas in point-shift mode
-    boolean mShiftDrawing;        // whether to shift the drawing
-    EraseCommand mEraseCommand = null;
+  private boolean mEditMove;    // whether moving the selected point
+  private boolean mShiftMove;   // whether to move the canvas in point-shift mode
+  boolean mShiftDrawing;        // whether to shift the drawing
+  EraseCommand mEraseCommand = null;
 
-    ZoomButtonsController mZoomBtnsCtrl = null;
-    boolean mZoomBtnsCtrlOn = false;
-    // FIXME ZOOM_CTRL ZoomControls mZoomCtrl = null;
-    // ZoomButton mZoomOut;
-    // ZoomButton mZoomIn;
-    private float oldDist;  // zoom pointer-sapcing
+  ZoomButtonsController mZoomBtnsCtrl = null;
+  boolean mZoomBtnsCtrlOn = false;
+  // FIXME ZOOM_CTRL ZoomControls mZoomCtrl = null;
+  // ZoomButton mZoomOut;
+  // ZoomButton mZoomIn;
+  private float oldDist;  // zoom pointer-sapcing
 
-    private static final float ZOOM_INC = 1.4f;
-    private static final float ZOOM_DEC = 1.0f/ZOOM_INC;
+  private static final float ZOOM_INC = 1.4f;
+  private static final float ZOOM_DEC = 1.0f/ZOOM_INC;
 
-    public static final int MODE_DRAW  = 1;
-    public static final int MODE_MOVE  = 2;
-    public static final int MODE_EDIT  = 3;
-    public static final int MODE_ZOOM  = 4; // used only for touchMode
-    public static final int MODE_SHIFT = 5; // change point symbol position
-    public static final int MODE_ERASE = 6;
+  public static final int MODE_DRAW  = 1;
+  public static final int MODE_MOVE  = 2;
+  public static final int MODE_EDIT  = 3;
+  public static final int MODE_ZOOM  = 4; // used only for touchMode
+  public static final int MODE_SHIFT = 5; // change point symbol position
+  public static final int MODE_ERASE = 6;
 
-    public int mMode   = MODE_MOVE;
-    private int mTouchMode = MODE_MOVE;
-    private boolean mContinueLine = false;
-    private float mDownX;
-    private float mDownY;
-    private float mSaveX;
-    private float mSaveY;
-    private float mSave0X;
-    private float mSave0Y;
-    private float mSave1X;
-    private float mSave1Y;
-    private float mStartX; // line shift scene start point
-    private float mStartY;
-    private PointF mOffset  = new PointF( 0f, 0f );
-    // private PointF mOffset0 = new PointF( 0f, 0f );
-    private PointF mDisplayCenter;
-    private float mZoom  = 1.0f;
+  public int mMode   = MODE_MOVE;
+  private int mTouchMode = MODE_MOVE;
+  private boolean mContinueLine = false;
+  private float mDownX;
+  private float mDownY;
+  private float mSaveX;
+  private float mSaveY;
+  private float mSave0X;
+  private float mSave0Y;
+  private float mSave1X;
+  private float mSave1Y;
+  private float mStartX; // line shift scene start point
+  private float mStartY;
+  private PointF mOffset  = new PointF( 0f, 0f );
+  // private PointF mOffset0 = new PointF( 0f, 0f );
+  private PointF mDisplayCenter;
+  private float mZoom  = 1.0f;
 
-    private DataHelper mData;
-    private long mSid;  // survey id
-    private long mPid1; // plot id
-    private long mPid2; // plot id
-    private long mPid;  // current plot id
-    private long mType;  // current plot type
-    private String mFrom;
-    private String mTo;   // TO station for sections
-    private float mAzimuth = 0.0f;
-    private float mClino   = 0.0f;
-    private boolean mModified; // whether the sketch has been modified 
+  private DataHelper mData;
+  private long mSid;  // survey id
+  private long mPid1; // plot id
+  private long mPid2; // plot id
+  private long mPid;  // current plot id
+  private long mType;  // current plot type
+  private String mFrom;
+  private String mTo;   // TO station for sections
+  private float mAzimuth = 0.0f;
+  private float mClino   = 0.0f;
+  private boolean mModified; // whether the sketch has been modified 
 
-    private boolean mAllSymbols; // whether the library has all the symbols of the plot
+  private boolean mAllSymbols; // whether the library has all the symbols of the plot
 
-    long getPlotType() { return mType; }
+  long getPlotType()   { return mType; }
 
-    boolean isSection() { return mType == PlotInfo.PLOT_SECTION || mType == PlotInfo.PLOT_H_SECTION; }
-    boolean isXSection() { return mType == PlotInfo.PLOT_X_SECTION || mType == PlotInfo.PLOT_XH_SECTION; }
-    boolean isPhoto() { return mType == PlotInfo.PLOT_PHOTO; }
-    boolean isSketch2D() { return mType == PlotInfo.PLOT_PLAN || mType == PlotInfo.PLOT_EXTENDED; }
-    boolean isSketch3D() { return mType == PlotInfo.PLOT_SKETCH_3D; }
+  boolean isSection()  { return mType == PlotInfo.PLOT_SECTION || mType == PlotInfo.PLOT_H_SECTION; }
+  boolean isXSection() { return mType == PlotInfo.PLOT_X_SECTION || mType == PlotInfo.PLOT_XH_SECTION; }
+  boolean isPhoto()    { return mType == PlotInfo.PLOT_PHOTO; }
+  boolean isSketch2D() { return mType == PlotInfo.PLOT_PLAN || mType == PlotInfo.PLOT_EXTENDED; }
+  boolean isSketch3D() { return mType == PlotInfo.PLOT_SKETCH_3D; }
 
-    private float mBorderRight      = 4096;
-    private float mBorderLeft       = 0;
-    private float mBorderInnerRight = 4096;
-    private float mBorderInnerLeft  = 0;
-    private float mBorderBottom     = 4096;
+  private float mBorderRight      = 4096;
+  private float mBorderLeft       = 0;
+  private float mBorderInnerRight = 4096;
+  private float mBorderInnerLeft  = 0;
+  private float mBorderBottom     = 4096;
 
-    private void modified()
-    {
-      if ( ! mModified ) {
-        // Log.v("DistoX", "start Save Th2 Task Nr "+ mNrSaveTh2Task);
-        mModified = true;
-        startSaveTh2Task( "modified", MAX_TASK_NORMAL, 1 );
-      // } else {
-      //   if ( mSaveTh2File != null ) {
-      //     mSaveTh2File.setModified( true );
-      //   }
-      }
-    }
-
-    // -------------------------------------------------------------------
-    // ZOOM CONTROLS
-
-    @Override
-    public void onVisibilityChanged(boolean visible)
-    {
-      if ( mZoomBtnsCtrlOn && mZoomBtnsCtrl != null ) {
-        mZoomBtnsCtrl.setVisible( visible || ( TDSetting.mZoomCtrl > 1 ) );
-      }
-    }
-
-    @Override
-    public void onZoom( boolean zoomin )
-    {
-      if ( zoomin ) changeZoom( ZOOM_INC );
-      else changeZoom( ZOOM_DEC );
-    }
-
-    private void changeZoom( float f ) 
-    {
-      float zoom = mZoom;
-      mZoom     *= f;
-      // Log.v( TopoDroidApp.TAG, "zoom " + mZoom );
-      mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
-      mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
-      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-      // mDrawingSurface.refresh();
-      // mZoomCtrl.hide();
-      // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
-    }
-
-    // private void resetZoom() 
-    // {
-    //   int w = mDrawingSurface.width();
-    //   int h = mDrawingSurface.height();
-    //   mOffset.x = w/4;
-    //   mOffset.y = h/4;
-    //   mZoom = mApp.mScaleFactor;
-    //   // TDLog.Log(TDLog.LOG_PLOT, "zoom one " + mZoom + " off " + mOffset.x + " " + mOffset.y );
-    //   if ( mType == PlotInfo.PLOT_PLAN ) {
-    //     float zx = w/(mNum.surveyEmax() - mNum.surveyEmin());
-    //     float zy = h/(mNum.surveySmax() - mNum.surveySmin());
-    //     mZoom = (( zx < zy )? zx : zy)/40;
-    //   } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
-    //     float zx = w/(mNum.surveyHmax() - mNum.surveyHmin());
-    //     float zy = h/(mNum.surveyVmax() - mNum.surveyVmin());
-    //     mZoom = (( zx < zy )? zx : zy)/40;
-    //   } else {
-    //     mZoom = mApp.mScaleFactor;
-    //     mOffset.x = 0.0f;
-    //     mOffset.y = 0.0f;
+  private void modified()
+  {
+    if ( ! mModified ) {
+      mModified = true;
+      startSaveTh2Task( "modified", MAX_TASK_NORMAL, 1 );
+    // } else {
+    //   if ( mSaveTh2File != null ) {
+    //     mSaveTh2File.setModified( true );
     //   }
-    //     
-    //   // TDLog.Log(TDLog.LOG_PLOT, "zoom one to " + mZoom );
-    //     
-    //   mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-    //   // mDrawingSurface.refresh();
-    // }
-
-    public void zoomIn()  { changeZoom( ZOOM_INC ); }
-    public void zoomOut() { changeZoom( ZOOM_DEC ); }
-    // public void zoomOne() { resetZoom( ); }
-
-    // public void zoomView( )
-    // {
-    //   // TDLog.Log( TDLog.LOG_PLOT, "zoomView ");
-    //   DrawingZoomDialog zoom = new DrawingZoomDialog( mDrawingSurface.getContext(), this );
-    //   zoom.show();
-    // }
-
-    // -----------------------------------------------------------------
-
-    // void setType( int type )
-    // {
-    //   mSymbol = SYMBOL_POINT;
-    //   setTheTitle();
-    // }
-
-    @Override
-    public void lineSelected( int k, boolean update_recent )
-    {
-      super.lineSelected( k, update_recent );
-      if ( mCurrentLine == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-        setButtonContinue( false );
-      }
     }
+  }
 
-    private void resetFixedPaint( )
-    {
-      mDrawingSurface.resetFixedPaint( DrawingBrushPaths.fixedShotPaint );
-    }
-    
-    private void addFixedSpecial( float x1, float y1, float x2, float y2, float xoff, float yoff )
-    {
-      DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH );
-      dpath.setPaint( DrawingBrushPaths.highlightPaint );
-      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mDrawingSurface.setNorthPath( dpath );
-    }
+  // -------------------------------------------------------------------
+  // ZOOM CONTROLS
 
-    private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff, 
-                               boolean splay, boolean selectable )
-    {
-      DrawingPath dpath = null;
-      if ( splay ) {
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-        if ( blk.mClino > TDSetting.mVertSplay ) {
-          dpath.setPaint( DrawingBrushPaths.fixedSplay4Paint );
-        } else if ( blk.mClino < -TDSetting.mVertSplay ) {
-          dpath.setPaint( DrawingBrushPaths.fixedSplay3Paint );
-        } else {
-          dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
-        }
+  @Override
+  public void onVisibilityChanged(boolean visible)
+  {
+    if ( mZoomBtnsCtrlOn && mZoomBtnsCtrl != null ) {
+      mZoomBtnsCtrl.setVisible( visible || ( TDSetting.mZoomCtrl > 1 ) );
+    }
+  }
+
+  @Override
+  public void onZoom( boolean zoomin )
+  {
+    if ( zoomin ) changeZoom( ZOOM_INC );
+    else changeZoom( ZOOM_DEC );
+  }
+
+  private void changeZoom( float f ) 
+  {
+    float zoom = mZoom;
+    mZoom     *= f;
+    // Log.v( TopoDroidApp.TAG, "zoom " + mZoom );
+    mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
+    mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
+    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    // mDrawingSurface.refresh();
+    // mZoomCtrl.hide();
+    // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
+  }
+
+  public void zoomIn()  { changeZoom( ZOOM_INC ); }
+  public void zoomOut() { changeZoom( ZOOM_DEC ); }
+  // public void zoomOne() { resetZoom( ); }
+
+  // public void zoomView( )
+  // {
+  //   // TDLog.Log( TDLog.LOG_PLOT, "zoomView ");
+  //   DrawingZoomDialog zoom = new DrawingZoomDialog( mDrawingSurface.getContext(), this );
+  //   zoom.show();
+  // }
+
+  // -----------------------------------------------------------------
+  @Override
+  public void lineSelected( int k, boolean update_recent )
+  {
+    super.lineSelected( k, update_recent );
+    if ( mCurrentLine == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+      setButtonContinue( false );
+    }
+  }
+
+  private void resetFixedPaint( )
+  {
+    mDrawingSurface.resetFixedPaint( DrawingBrushPaths.fixedShotPaint );
+  }
+  
+  private void addFixedSpecial( float x1, float y1, float x2, float y2, float xoff, float yoff )
+  {
+    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH );
+    dpath.setPaint( DrawingBrushPaths.highlightPaint );
+    DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+    mDrawingSurface.setNorthPath( dpath );
+  }
+
+  private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff, 
+                             boolean splay, boolean selectable )
+  {
+    DrawingPath dpath = null;
+    if ( splay ) {
+      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+      if ( blk.mClino > TDSetting.mVertSplay ) {
+        dpath.setPaint( DrawingBrushPaths.fixedSplay4Paint );
+      } else if ( blk.mClino < -TDSetting.mVertSplay ) {
+        dpath.setPaint( DrawingBrushPaths.fixedSplay3Paint );
       } else {
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-        dpath.setPaint( blk.isMultiBad() ? DrawingBrushPaths.fixedRedPaint
-                        : blk.isRecent( mApp.mSecondLastShotId )? DrawingBrushPaths.fixedBluePaint 
-                        : DrawingBrushPaths.fixedShotPaint );
+        dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
       }
-      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mDrawingSurface.addFixedPath( dpath, splay, selectable );
+    } else {
+      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
+      dpath.setPaint( blk.isMultiBad() ? DrawingBrushPaths.fixedRedPaint
+                      : blk.isRecent( mApp.mSecondLastShotId )? DrawingBrushPaths.fixedBluePaint 
+                      : DrawingBrushPaths.fixedShotPaint );
     }
+    DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+    mDrawingSurface.addFixedPath( dpath, splay, selectable );
+  }
 
-    private void addFixedSectionSplay( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff, 
-                               boolean blue )
-    {
-      DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
-      dpath.setPaint( blue? DrawingBrushPaths.fixedSplay2Paint : DrawingBrushPaths.fixedSplayPaint );
-      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
-      mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
+  private void addFixedSectionSplay( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff, 
+                             boolean blue )
+  {
+    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
+    dpath.setPaint( blue? DrawingBrushPaths.fixedSplay2Paint : DrawingBrushPaths.fixedSplayPaint );
+    DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+    mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
+  }
+
+  // --------------------------------------------------------------------------------------
+
+  @Override
+  protected void setTheTitle()
+  {
+    String s1 = mApp.getConnectionStateTitleStr();
+    Resources res = getResources();
+    if ( mMode == MODE_DRAW ) { 
+      if ( mSymbol == SYMBOL_POINT ) {
+        setTitle( s1 + String.format( res.getString(R.string.title_draw_point), 
+                                 DrawingBrushPaths.mPointLib.getSymbolName(mCurrentPoint) ) );
+      } else if ( mSymbol == SYMBOL_LINE ) {
+        setTitle( s1 + String.format( res.getString(R.string.title_draw_line),
+                                 DrawingBrushPaths.mLineLib.getSymbolName(mCurrentLine) ) );
+      } else  {  // if ( mSymbol == SYMBOL_LINE ) 
+        setTitle( s1 + String.format( res.getString(R.string.title_draw_area),
+                                 DrawingBrushPaths.mAreaLib.getSymbolName(mCurrentArea) ) );
+      }
+      // boolean visible = ( mSymbol == SYMBOL_LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
+      boolean visible = ( mSymbol == SYMBOL_LINE );
+      mButton2[ BTN_CONTINUE ].setVisibility( visible? View.VISIBLE : View.GONE );
+    } else if ( mMode == MODE_MOVE ) {
+      setTitle( s1 + res.getString( R.string.title_move ) );
+    } else if ( mMode == MODE_EDIT ) {
+      setTitle( s1 + res.getString( R.string.title_edit ) );
+    } else if ( mMode == MODE_SHIFT ) {
+      setTitle( s1 + res.getString( R.string.title_shift ) );
+    } else if ( mMode == MODE_ERASE ) {
+      setTitle( s1 + res.getString( R.string.title_erase ) );
     }
-
-    // --------------------------------------------------------------------------------------
-
-    @Override
-    protected void setTheTitle()
-    {
-      String s1 = mApp.getConnectionStateTitleStr();
-      Resources res = getResources();
-      if ( mMode == MODE_DRAW ) { 
-        if ( mSymbol == SYMBOL_POINT ) {
-          setTitle( s1 + String.format( res.getString(R.string.title_draw_point), 
-                                   DrawingBrushPaths.mPointLib.getSymbolName(mCurrentPoint) ) );
-        } else if ( mSymbol == SYMBOL_LINE ) {
-          setTitle( s1 + String.format( res.getString(R.string.title_draw_line),
-                                   DrawingBrushPaths.mLineLib.getSymbolName(mCurrentLine) ) );
-        } else  {  // if ( mSymbol == SYMBOL_LINE ) 
-          setTitle( s1 + String.format( res.getString(R.string.title_draw_area),
-                                   DrawingBrushPaths.mAreaLib.getSymbolName(mCurrentArea) ) );
-        }
-        // boolean visible = ( mSymbol == SYMBOL_LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
-        boolean visible = ( mSymbol == SYMBOL_LINE );
-        mButton2[ BTN_CONTINUE ].setVisibility( visible? View.VISIBLE : View.GONE );
-      } else if ( mMode == MODE_MOVE ) {
-        setTitle( s1 + res.getString( R.string.title_move ) );
-      } else if ( mMode == MODE_EDIT ) {
-        setTitle( s1 + res.getString( R.string.title_edit ) );
-      } else if ( mMode == MODE_SHIFT ) {
-        setTitle( s1 + res.getString( R.string.title_shift ) );
-      } else if ( mMode == MODE_ERASE ) {
-        setTitle( s1 + res.getString( R.string.title_erase ) );
-      }
-      if ( ! mDrawingSurface.isSelectable() ) {
-        setTitle( s1 + getTitle() + " [!s]" );
-      }
+    if ( ! mDrawingSurface.isSelectable() ) {
+      setTitle( s1 + getTitle() + " [!s]" );
     }
+  }
 
-    // private void AlertMissingSymbols()
-    // {
-    //   new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.missing_symbols ),
-    //     new DialogInterface.OnClickListener() {
-    //       @Override
-    //       public void onClick( DialogInterface dialog, int btn ) {
-    //         mAllSymbols = true;
-    //       }
-    //     }
-    //   );
-    // }
+  // private void AlertMissingSymbols()
+  // {
+  //   new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.missing_symbols ),
+  //     new DialogInterface.OnClickListener() {
+  //       @Override
+  //       public void onClick( DialogInterface dialog, int btn ) {
+  //         mAllSymbols = true;
+  //       }
+  //     }
+  //   );
+  // }
 
-    // called by doPause and onBackPressed
-    private void doSaveTh2( ) 
-    {
-      if ( mFullName1 != null && mDrawingSurface != null ) {
-        startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
+  // called by doPause and onBackPressed
+  private void doSaveTh2( ) 
+  {
+    if ( mFullName1 != null && mDrawingSurface != null ) {
+      startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
 
-        // if ( not_all_symbols ) AlertMissingSymbols();
+      // if ( not_all_symbols ) AlertMissingSymbols();
 
-        // if ( mAllSymbols ) {
-        //   // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-        //   startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
-        // } else { // mAllSymbols is false: FIXME what to do ?
-        //  Toast.makeText( this,
-        //    "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
-        // }
-      }
+      // if ( mAllSymbols ) {
+      //   // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
+      //   startSaveTh2Task( "dosave", MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
+      // } else { // mAllSymbols is false: FIXME what to do ?
+      //  Toast.makeText( this,
+      //    "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
+      // }
     }
+  }
 
 
-    private int mNrSaveTh2Task = 0;
-    private final int MAX_TASK_NORMAL = 4;
-    private final int MAX_TASK_FINAL  = 6;
+  private int mNrSaveTh2Task = 0;
+  private final int MAX_TASK_NORMAL = 4;
+  private final int MAX_TASK_FINAL  = 6;
 
-    // called by doSaveTh2 and saveTh2
-    private void startSaveTh2Task( String suffix, int maxTasks, int backup_rotate )
-    {
-      if ( ! mModified ) {
-        // Log.v("DistoX", "drawing not modified: not saving");
-        return;
-      }
-      if ( mNrSaveTh2Task > maxTasks ) return;
+  // called by doSaveTh2 and saveTh2
+  private void startSaveTh2Task( String suffix, int maxTasks, int backup_rotate )
+  {
+    if ( ! mModified ) {
+      return;
+    }
+    if ( mNrSaveTh2Task > maxTasks ) return;
 
-      // final Activity currentActivity = this; // if Toast
-      Handler saveHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-          -- mNrSaveTh2Task;
-          // Log.v("DistoX", "handle message " + msg.what );
-          // if ( msg.what == 660 ) {
-          // } else if ( msg.what == 661 ) { // saving return true
-          // } else {
-          //   TDLog.Error( "handle save th2 message " + msg.what);
-          // }
-          if ( mModified ) {
-            // Log.v("DistoX", "start new SaveTh2FileTask");
-            startSaveTh2Task( "handler", MAX_TASK_NORMAL, 0 ); 
-          } else {
-            mApp.mShotActivity.enableSketchButton( true );
-          }
-        }
-      };
-      ++ mNrSaveTh2Task;
-      mApp.mShotActivity.enableSketchButton( false );
-      mModified = false;
-      try { Thread.sleep(10); } catch( InterruptedException e ) { }
-      SaveTh2FileTask saveTh2File = null;
-      // Log.v("DistoX", "create SaveTh2FileTask");
-      if ( mType == PlotInfo.PLOT_EXTENDED ) {
-        saveTh2File = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix, backup_rotate );
-      } else {
-        saveTh2File = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix, backup_rotate );
-      }
-      try { 
-        // Log.v("DistoX", "exec SaveTh2FileTask");
-        saveTh2File.execute();
-      } catch ( RejectedExecutionException e ) { 
-        // Log.v("DistoX", "Rejected exec exception");
+    // final Activity currentActivity = this; // if Toast
+    Handler saveHandler = new Handler(){
+      @Override
+      public void handleMessage(Message msg) {
         -- mNrSaveTh2Task;
+        // Log.v("DistoX", "handle message " + msg.what );
+        // if ( msg.what == 660 ) {
+        // } else if ( msg.what == 661 ) { // saving return true
+        // } else {
+        //   TDLog.Error( "handle save th2 message " + msg.what);
+        // }
+        if ( mModified ) {
+          startSaveTh2Task( "handler", MAX_TASK_NORMAL, 0 ); 
+        } else {
+          mApp.mShotActivity.enableSketchButton( true );
+        }
       }
+    };
+    ++ mNrSaveTh2Task;
+    mApp.mShotActivity.enableSketchButton( false );
+    mModified = false;
+    try { Thread.sleep(10); } catch( InterruptedException e ) { }
+    SaveTh2FileTask saveTh2File = null;
+    if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      saveTh2File = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix, backup_rotate );
+    } else {
+      saveTh2File = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix, backup_rotate );
     }
-
-    // private void immediateSaveTh2( )
-    // {
-    //   Log.v("DistoX", "immSaveTh2() type " + mType + " modified " + mModified );
-    //   // if ( mModified )  FIXME-MODIFIED
-    //   {
-    //     // Log.v( TopoDroidApp.TAG, " savingTh2 " + mFullName1 + " " + mFullName2 + " do save ");
-    //     Handler handler = new Handler(){
-    //       @Override
-    //       public void handleMessage(Message msg) {
-    //         mApp.mShotActivity.enableSketchButton( true );
-    //       }
-    //     };
-    //     mApp.mShotActivity.enableSketchButton( false );
-    //     // if ( mType = PlotInfo.PLOT_EXTENDED ) {
-    //     //   (new SaveTh2FileTask(this, handler, mApp, mDrawingSurface, null, mFullName2 )).execute();
-    //     // } else {
-    //     //   (new SaveTh2FileTask(this, handler, mApp, mDrawingSurface, mFullName1, null )).execute();
-    //     // }
-    //     (new SaveTh2FileTask(this, handler, mApp, mDrawingSurface, mFullName1, mFullName2 )).execute();
-    //   }
-    // }
+    try { 
+      saveTh2File.execute();
+    } catch ( RejectedExecutionException e ) { 
+      -- mNrSaveTh2Task;
+    }
+  }
 
   private void computeReferences( int type, float xoff, float yoff, float zoom, boolean can_toast )
   {
@@ -603,15 +540,9 @@ public class DrawingActivity extends ItemDrawer
                            xoff, yoff, mDrawingSurface );
     }
 
-    // Log.v("DistoX", "reference offset " + xoff + " " + yoff );
-    // Log.v("DistoX", "num " + mNum.surveyEmin() + " " + mNum.surveyEmax()
-    //                  + " " + mNum.surveySmin() + " " + mNum.surveySmax() );
-
     List< NumStation > stations = mNum.getStations();
     List< NumShot > shots   = mNum.getShots();
     List< NumSplay > splays = mNum.getSplays();
-    // Log.v( "DistoX", "stations " + stations.size() + " legs " + shots.size() );
-    // Log.v( "DistoX", "compute refs. offs " + xoff + " " + yoff + " zoom " + zoom );
 
     if ( type == PlotInfo.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
@@ -620,8 +551,6 @@ public class DrawingActivity extends ItemDrawer
         if ( st1.show() && st2.show() ) {
           addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), 
                         xoff, yoff, false, true );
-          // TDLog.Log( TDLog.LOG_PLOT, 
-          //   "add line " + (float)(st1.e) + " " + (float)(st1.s) + " " + (float)(st2.e) + " " + (float)(st2.s) );
         }
       }
       for ( NumSplay sp : splays ) {
@@ -647,7 +576,6 @@ public class DrawingActivity extends ItemDrawer
           if ( st1.show() && st2.show() ) {
             addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), 
                           xoff, yoff, false, true );
-            // TDLog.Log(TDLog.LOG_PLOT, "line " + DrawingUtil.toSceneX(st1.h) + " " + DrawingUtil.toSceneY(st1.v) + " - " + DrawingUtil.toSceneX(st2.h) + " " + DrawingUtil.toSceneY(st2.v) );
           }
         }
       } 

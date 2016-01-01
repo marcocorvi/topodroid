@@ -115,6 +115,7 @@ class TDSetting
     "DISTOX_CONT_JOIN",           // line continuation is join
     "DISTOX_CSV_LENGTH",          // CSV export length unit
     "DISTOX_BINARY_STORE",        // 82
+    "DISTOX_ORTHO_LRUD",          // orthogonal LRUD ( >=1 disable, min 0 )
 
     "DISTOX_WALLS_TYPE",
     "DISTOX_WALLS_PLAN_THR",
@@ -156,11 +157,14 @@ class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
-  static boolean mLRExtend             = true;   // whether to extend LR or not (Compass/VisualTopo input)
+  static boolean mLRExtend           = true;   // whether to extend LR or not (Compass/VisualTopo input)
 
-  static String mSurvexEol             = "\n";
-  static boolean mSurvexSplay          = false;
-  static boolean mSurvexLRUD           = false;
+  static String mSurvexEol           = "\n";
+  static boolean mSurvexSplay        = false;
+  static boolean mSurvexLRUD         = false;
+  static boolean mOrthogonalLRUD     = false; // whether angle > 0 
+  static float mOrthogonalLRUDAngle  = 0;     // angle
+  static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
 
   static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey export
 
@@ -238,7 +242,7 @@ class TDSetting
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SHOTS
   static float mVThreshold = 80f;   // verticality threshold (LRUD)
-  static float mHThreshold;  // horizontal plot threshold
+  static float mHThreshold;         // horizontal plot threshold
 
   static int mExportShotsFormat = 0; // TopoDroidExport.EXPORT_THERION
 
@@ -618,6 +622,10 @@ class TDSetting
     mCsvLengthUnit = tryFloat( prefs, key[k++], "1" );        // DISTOX_CSV_LENGTH
     mBinaryTh2 = prefs.getBoolean( key[k++], false );         // DISTOX_BINARY_STORE 82
 
+    mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0"); // DISTOX_ORTHO_LRUD
+    mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
+    mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
+
     mWallsType        = tryInt(   prefs, key[k++], "0" );     // DISTOX_WALLS_TYPE choice: 0, 1
     mWallsPlanThr     = tryFloat( prefs, key[k++], "70"  );   // DISTOX_WALLS_PLAN_THR
     mWallsExtendedThr = tryFloat( prefs, key[k++], "45"  );   // DISTOX_WALLS_EXTENDED_THR
@@ -888,6 +896,10 @@ class TDSetting
       mCsvLengthUnit = tryFloat( prefs, k, "1" ); // DISTOX_CSV_LENGTH
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mBinaryTh2 = prefs.getBoolean( k, false );   // DISTOX_BINARY_STORE
+    } else if ( k.equals( key[ nk++ ] ) ) {        // DISTOX_ORTHO_LRUD
+      mOrthogonalLRUDAngle  = tryFloat( prefs, k, "0");
+      mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
+      mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
 
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mWallsType = tryInt(prefs, k, "0" ); // DISTOX_WALLS_TYPE
@@ -1122,6 +1134,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_CONT_JOIN" ) 
     //C if ( name.equals( "DISTOX_CSV_LENGTH" )
     //B if ( name.equals( "DISTOX_BINARY_STORE" )
+    if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );
 
     // if ( name.equals( "DISTOX_WALLS_TYPE" )
     if ( name.equals( "DISTOX_WALLS_PLAN_THR"     ) ) return parseFloatValue( value, mWallsPlanThr, 0, 90 );

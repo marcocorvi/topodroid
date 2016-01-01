@@ -1782,38 +1782,32 @@ public class TopoDroidApp extends Application
 
   int getConnectionType() 
   {
-    if ( mSyncConn == null ) return SyncService.STATE_NONE;
-    return mSyncConn.getType();
+    return ( mSyncConn == null )? SyncService.STATE_NONE : mSyncConn.getType();
   }
 
   int getAcceptState()
   {
-    if ( mSyncConn == null ) return SyncService.STATE_NONE;
-    return mSyncConn.getAcceptState();
+    return ( mSyncConn == null )? SyncService.STATE_NONE : mSyncConn.getAcceptState();
   }
 
   int getConnectState()
   {
-    if ( mSyncConn == null ) return SyncService.STATE_NONE;
-    return mSyncConn.getConnectState();
+    return ( mSyncConn == null )? SyncService.STATE_NONE : mSyncConn.getConnectState();
   }
 
   String getConnectionStateStr()
   {
-    if ( mSyncConn == null ) return "NONE";
-    return mSyncConn.getConnectStateStr();
+    return ( mSyncConn == null )? "NONE": mSyncConn.getConnectStateStr();
   }
 
   String getConnectedDeviceName()
   {
-    if ( mSyncConn == null ) return null;
-    return mSyncConn.getConnectedDeviceName();
+    return ( mSyncConn == null )? null : mSyncConn.getConnectedDeviceName();
   }
 
   String getConnectionStateTitleStr()
   {
-    if ( mSyncConn == null ) return "";
-    return mSyncConn.getConnectionStateTitleStr();
+    return ( mSyncConn == null )? "" : mSyncConn.getConnectionStateTitleStr();
   }
 
   void connStateChanged()
@@ -1833,9 +1827,7 @@ public class TopoDroidApp extends Application
 
   void connectRemoteTopoDroid( BluetoothDevice device )
   { 
-    if ( mSyncConn != null ) {
-      mSyncConn.connect( device );
-    }
+    if ( mSyncConn != null ) { mSyncConn.connect( device ); }
   }
 
   void disconnectRemoteTopoDroid( BluetoothDevice device )

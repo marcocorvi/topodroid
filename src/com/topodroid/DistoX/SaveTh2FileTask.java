@@ -36,8 +36,8 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
   private int mRotate;  // nr. backups to rotate
 
   public SaveTh2FileTask( Context context, Handler handler,
-                      TopoDroidApp app, DrawingSurface surface, 
-                      String fullname1, long type, String suffix, int rotate )
+                          TopoDroidApp app, DrawingSurface surface, 
+                          String fullname1, long type, String suffix, int rotate )
   {
      mContext  = context;
      mHandler  = handler;
@@ -53,21 +53,18 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
 
   private void rotateBackups( String filename )
   {
-    // Log.v("DistoX", "rotate " + filename );
     File file2;
     File file1;
     for ( int i=mRotate-1; i>0; --i ) { 
       file2 = new File( filename + Integer.toString(i) );
       file1 = new File( filename + Integer.toString(i-1) );
       if ( file1.exists() ) {
-        // Log.v("DistoX", "rename " + (i-1) + "->" + i + " size " + file1.length() + " " + file2.length() );
         file1.renameTo( file2 );
       }
     }
     file2 = new File( filename + "0" );
     file1 = new File( filename );
     if ( file1.exists() ) {
-      // Log.v("DistoX", "rename .->0 size " + file1.length() + " " + file2.length() );
       file1.renameTo( file2 );
     }
   }
@@ -79,7 +76,7 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
     synchronized( TDPath.mTherionLock ) {
       // Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
       String filename = (TDSetting.mBinaryTh2)? TDPath.getTdrFileWithExt( mFullName1 ) + ".bck"
-                                                     : TDPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+                                              : TDPath.getTh2FileWithExt( mFullName1 ) + ".bck";
       rotateBackups( filename );
 
       long now  = System.currentTimeMillis();

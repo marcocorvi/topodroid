@@ -667,7 +667,7 @@ class TopoDroidExporter
       if ( fixed.size() > 0 ) {
         pw.format("    cs long-lat\n");
         for ( FixedInfo fix : fixed ) {
-          pw.format("    # fix %s m\n", fix.toExportString() );
+          pw.format("    # fix %s\n", fix.toExportString() );
         }
       }
       pw.format("    date %s \n", info.date );
@@ -675,7 +675,7 @@ class TopoDroidExporter
         pw.format("    # team %s \n", info.team );
       }
 
-      pw.format(Locale.ENGLISH, "    declination %.2f degrees\n", info.declination );
+      pw.format(Locale.ENGLISH, "    # declination %.2f degrees\n", info.declination );
 
       pw.format("    data normal from to length compass clino\n");
 
@@ -1422,8 +1422,6 @@ class TopoDroidExporter
     float sc0 = TDMath.sind( b.mClino );
     float cb0 = n0;
     float sb0 = e0;
-    // float sc02 = sc0 * sc0;
-    // float cc02 = 1.0f - sc02;
     String station = ( at_from ) ? b.mFrom : b.mTo;
     
     for ( DistoXDBlock item : list ) {
@@ -1441,22 +1439,14 @@ class TopoDroidExporter
         float cc = TDMath.cosd( item.mClino );
         float sc = TDMath.sind( item.mClino );
         float len = item.mLength;
-        float cbb0 = sb*sb0 + cb*cb0; // cosine of angle between block and item
-
 
         // skip splays too close to shot direction // FIXME setting
-        if ( Math.abs( cbb0 ) > 0.90 ) continue;  // 0.90 = cos( 25 deg )
+        // this test aims to use only splays that are "orthogonal" to the shot
+        if ( TDSetting.mOrthogonalLRUD ) {
+          float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
+          if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
+        }
 
-        // version [1]
-        // float z1 = sc02 * sc;      // first point: horizontal projection [times sc02]
-        // float n1 = sc02 * cc * cb;
-        // float e1 = sc02 * cc * sb;
-        // version [2]
-        // // len * ( second_point - first_point )
-        // float z1 = len * ( sc * cc02 - cc * cc0 * sc0 * cbb0 + sc02 * sc);
-        // float n1 = len * cc * ( cc02 * ( cb - cb0 * cbb0 )   + sc02 * cb);
-        // float e1 = len * cc * ( cc02 * ( sb - sb0 * cbb0 )   + sc02 * sb);
-        // version [3]
         float z1 = len * sc;
         float n1 = len * cc * cb;
         float e1 = len * cc * sb;
@@ -1944,8 +1934,9 @@ class TopoDroidExporter
    ( @param list   ...
    * @note item is guaranteed not null by the caller
    */
-  static private void printStartShotToTro( PrintWriter pw, DistoXDBlock item, List< DistoXDBlock > list )
+  static private boolean printStartShotToTro( PrintWriter pw, DistoXDBlock item, List< DistoXDBlock > list )
   {
+    if ( item == null ) return false;
     LRUD lrud = computeLRUD( item, list, true );
     pw.format(Locale.ENGLISH, "%s %s 0.00 0.00 0.00 ", item.mFrom, item.mFrom );
     pw.format(Locale.ENGLISH, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
@@ -1953,10 +1944,12 @@ class TopoDroidExporter
       pw.format(" ;%s", item.mComment );
     }
     pw.format("\r\n");
+    return true;
   }
 
-  static private void printShotToTro( PrintWriter pw, DistoXDBlock item, AverageLeg leg, LRUD lrud )
+  static private boolean printShotToTro( PrintWriter pw, DistoXDBlock item, AverageLeg leg, LRUD lrud )
   {
+    if ( item == null ) return false;
     // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     pw.format("%s %s ", item.mFrom, item.mTo );
     pw.format(Locale.ENGLISH, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
@@ -1969,6 +1962,7 @@ class TopoDroidExporter
       pw.format(" ;%s", item.mComment );
     }
     pw.format("\r\n");
+    return true;
   }
 
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
@@ -2004,9 +1998,9 @@ class TopoDroidExporter
       DistoXDBlock ref_item = null;
 
       int extra_cnt = 0;
-      boolean in_splay = false;
+      boolean in_splay  = false;
       boolean duplicate = false;
-      boolean start = true;
+      boolean started   = false;
       LRUD lrud;
 
       for ( DistoXDBlock item : list ) {
@@ -2021,9 +2015,8 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              if ( start ) {
-                printStartShotToTro( pw, ref_item, list );
-                start = false;
+              if ( ! started ) {
+                started = printStartShotToTro( pw, ref_item, list );
               }
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
@@ -2034,9 +2027,8 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
-              if ( start ) {
-                printStartShotToTro( pw, ref_item, list );
-                start = false;
+              if ( ! started ) {
+                started = printStartShotToTro( pw, ref_item, list );
               }
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
@@ -2045,9 +2037,8 @@ class TopoDroidExporter
             }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              if ( start ) {
-                printStartShotToTro( pw, ref_item, list );
-                start = false;
+              if ( ! started ) {
+                started = printStartShotToTro( pw, ref_item, list );
               }
               lrud = computeLRUD( ref_item, list, false );
               printShotToTro( pw, ref_item, leg, lrud );
@@ -2060,9 +2051,8 @@ class TopoDroidExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        if ( start ) {
-          printStartShotToTro( pw, ref_item, list );
-          start = false;
+        if ( ! started ) {
+          started = printStartShotToTro( pw, ref_item, list );
         }
         lrud = computeLRUD( ref_item, list, false );
         printShotToTro( pw, ref_item, leg, lrud );
