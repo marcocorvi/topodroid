@@ -186,7 +186,7 @@
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
-    <string name="bad_point">Tipo de punto Malo</string>
+    <string name="bad_point">Tipo de punto malo</string>
 
     <string name="no_calib">No hay calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
@@ -332,7 +332,7 @@
     <string name="station_set">Â¿Desea continuar la topografía desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <string name="station_next">Siguiente estación</string>
-    <string name="station_viewed">Vista de estación </string>
+    <string name="station_viewed">Vista de estación</string>
     <string name="survey_exists">Conflicto Nombre Topografía</string>
     <string name="survey_date">yyyy.mm.dd</string>
     <string name="survey_delete">Â¿Eliminar Topografía?</string>
@@ -659,7 +659,7 @@
   <string name="pref_location_title">Opciones de ubicación</string>
   <string name="pref_accuracy_title">Opciones de medición</string>
   <string name="pref_shot_data_title">Opciones de visuales</string>
-  <string name="pref_shot_units_title">Unidades de datos</string>
+  <string name="pref_shot_units_title">Unidades de medida</string>
   <string name="pref_cwd_title">Directorio principal</string>
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
