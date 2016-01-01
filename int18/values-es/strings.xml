@@ -18,7 +18,7 @@
     <string name="memoryX310">Memoria DistoX X310</string>
     <string name="memory_data">Datos DistoX</string>
 
-    <string name="td_symbol_text">Â¿Necesitas instalar los símbolos de dibujo? \ Puede hacerlo más adelante con la aplicación TdSymbol</string>
+    <string name="td_symbol_text">¿Necesitas instalar los símbolos de dibujo? \ Puede hacerlo más adelante con la aplicación TdSymbol</string>
     <string name="td_symbol_ask">No preguntar de nuevo</string>
 
     <string name="thp_label">Texto</string>
@@ -26,7 +26,7 @@
     <string name="thl_wall">Pared</string>
     <string name="tha_water">Agua</string>
 
-    <!-- TODO string name="make_walls">Walls</string -->
+    <string name="make_walls">Paredes</string>
     <string name="missing_area">Área</string>
     <string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string>
     <string name="missing_line">Línea</string>
@@ -56,15 +56,15 @@
     <string name="calib_compute_coeffs">Cálculo de coeficientes de calibración  ...</string>
     <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración ...</string -->
     <string name="calib_write_coeffs">Escribir coeficientes de calibración ...</string>
-    <!-- TODO string name="calib_validation">Validation of %1$s vs %2$s</string -->
+    <string name="calib_validation">Validación de %1$s vs %2$s</string>
     <string name="connect_failed">Fallo de conexión</string>
     <string name="data"> Datos</string>
     <string name="using">Utilizar %1$s %2$s</string>
     <string name="calib_error">Error: %1$.4f grados</string>
-    <!-- TODO string name="calib_stddev">Error stddev: %1$.4f degrees</string -->
+    <string name="calib_stddev">Error stddev: %1$.4f grados</string>
     <string name="calib_max_error">Max. error: %1$.4f grados</string>
-    <!-- TODO string name="calib_ave_std">Accuracy: %1$.4f %2$.4f degrees</string -->
-    <!-- TODO string name="calib_precision">Precision</string -->
+    <string name="calib_ave_std">Accuracy: %1$.4f %2$.4f grados</string>
+    <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
     <string name="calib_saturated_values">ADVERTENCIA: %1$d exceso de datos</string>
     <string name="algorithm">Algoritmo:</string>
@@ -107,7 +107,7 @@
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_plots">No hay suficientes dibujos</string>
-    <!-- TODO string name="few_calibs">Not enough calibrations</string -->
+    <string name="few_calibs">No hay suficientes calibraciones</string>
 
     <string name="import_title">Importar archivo</string>
     <string name="import_wait">Importando archivo, espere...</string>
@@ -130,12 +130,12 @@
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <string name="altitude">Alt. </string>
-    <!-- TODO string name="h_ellipsoid">H ellip. </string -->
-    <!-- TODO string name="h_geoid">H geoid </string -->
+    <string name="h_ellipsoid">H elip. </string>
+    <string name="h_geoid">H geoide </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <!-- TODO string name="h_ellipsoid_hint">H ellip. [meters]</string -->
-    <!-- TODO string name="h_geoid_hint">H geoid [meters]</string -->
+    <string name="h_ellipsoid_hint">H elip. [metros]</string>
+    <string name="h_geoid_hint">H geoide [metros]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Errores de cierre de bucle</string>
@@ -182,7 +182,7 @@
     <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
     <string name="hidden_add">Oculta pantalla de la línea media</string>
     <string name="hidden_del">Mostrar pantalla de la línea media</string>
-    <!-- TODO string name="splays_toggle">Toggle splays display</string -->
+    <string name="splays_toggle">Cambiar a tomas laterales</string>
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
@@ -207,8 +207,8 @@
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
     <string name="no_undelete">No hay medida para recuperar</string>
-    <!-- TODO string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string -->
-    <!-- TODO string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string -->
+    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
 
     <string name="menu_about">Acerca de..</string>
     <string name="menu_attach">Conectar</string>
@@ -233,12 +233,12 @@
     <string name="menu_photo">Foto</string>
     <string name="menu_sensor">Sensor</string>
     <string name="menu_scan">Escanear</string>
-    <!-- UNUSED string name="menu_station">Eestación</string -->
+    <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
-    <!-- TODO string name="menu_sync">SYNC</string -->
-    <!-- TODO string name="menu_tdr2th2">TH2 SKETCHES</string -->
-    <!-- TODO string name="menu_validate">VALIDATE</string -->
+    <string name="menu_sync">Sincro</string>
+    <string name="menu_tdr2th2">Dibujos TH2</string>
+    <string name="menu_validate">Validar</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -283,11 +283,11 @@
     <string name="saving_">Guardar</string>
     <string name="saving_file_failed">Fallo al guardar archivo</string>
     <string name="scrap_name">Nombre de dibujo</string>
-    <string name="splay">Secundaria</string>
+    <string name="splay">Toma Secundaria</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
     <string name="too_many_legs_xsection">Demasiadas tomas de X-sección</string>
-    <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
-    <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
+    <string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a th2</string>
+    <string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string>
 
     <string name="sensor">Sensor</string>
     <!-- UNUSED string name="sensor_accelerometer">Acelerómetro</string -->
@@ -307,15 +307,15 @@
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
     <string name="shot_delete">¿Eliminar toma?</string>
-    <string name="shot_from">Desde</string>
+    <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
     <string name="shot_leg">Toma repetida</string>
-    <string name="shot_renumber">Reenumerar</string>
-    <string name="shot_all_splay">Grupo bisceles</string>
-    <!-- UNUSED string name="shot_length">Longitud</string -->
-    <string name="shot_note">Nota</string>
-    <string name="shot_reverse">Inversa</string>
-    <string name="shot_to">Hasta</string>
+    <string name="shot_renumber">Reenumerar toma</string>
+    <string name="shot_all_splay">Todas las tomas laterales</string>
+    <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
+    <string name="shot_note">Nota de toma</string>
+    <string name="shot_reverse">Toma Inversa</string>
+    <string name="shot_to">Toma hasta</string>
 
 <!-- NOT USED -->
     <!-- UNUSED string name="make_surface">Ya existe en superficie Â¿Reemplazar?</string -->
@@ -365,7 +365,7 @@
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
     <string name="stat_shot">Toma  %1$d,   Duplicada %2$d,   Superficie %3$d</string>
-    <string name="stat_splay">Secundaria %1$d</string>
+    <string name="stat_splay">Toma secundaria %1$d</string>
     <string name="stat_station">Estaciones %1$d</string>
     <string name="stat_surface">mediciones Superficie %1$d %2$.1f</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
@@ -375,7 +375,7 @@
     <string name="hide_blank">Mediciones en blanco</string>
     <string name="hide_leg">Mediciones repetidas</string>
     <string name="hide_ids">Enumeración de toma</string>
-    <string name="hide_splay">Mediciones laterales</string>
+    <string name="hide_splay">Tomas Laterales</string>
 
     <string name="surveys">Topografía</string>
     <string name="calibs">Calibración</string>
@@ -403,7 +403,7 @@
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
-    <!-- TODO string name="button_geomag"    >Declination</string -->
+    <string name="button_geomag"    >Declinación</string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
@@ -485,7 +485,7 @@
     <!-- UNUSED string name="help_splay">Asignar estaciones laterales automáticamente</string -->
     <string name="help_display">Seleccione modo de visualización</string>
     <string name="help_display_calib">Cambiar a pantalla de tomas eliminadas</string>
-    <!-- TODO string name="help_validate">Validate calibration</string -->
+    <string name="help_validate">Validar la calibración</string>
     <string name="help_overview">Actividad general</string>
     <string name="help_plot">Introducir datos en dibujo</string>
     <string name="help_note">Editar notas Topografía</string>
@@ -505,7 +505,7 @@
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_stats">Estadísticas de Topografías</string>
     <string name="help_save_plot">Exportar dibujo</string>
-    <!-- TODO string name="help_tdr2th2">Convert sketch binary files to th2</string -->
+    <string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string>
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
     <string name="help_trash">Eliminar dibujo</string>
     <string name="help_undo">Deshacer última acción de dibujo</string>
@@ -619,14 +619,14 @@
   <!-- TODO string name="pref_ortho_lrud_title">LRUD splay angle</string -->
   <!-- TODO string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string -->
   <!-- TODO string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string -->
-  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
-  <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
-  <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->
-  <!-- TODO string name="pref_survex_lrud_summary">Add LRUD to Survex export</string -->
-  <!-- TODO string name="pref_csv_length_title">CSV length unit</string -->
-  <!-- TODO string name="pref_csv_length_summary">CSV export length unit</string -->
+  <string name="pref_survex_eol_title">Terminación de línea Survex</string>
+  <string name="pref_survex_eol_summary">Terminación de línea Survex</string>
+  <string name="pref_survex_splay_title">Estación toma lateral Survex</string>
+  <string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string>
+  <string name="pref_survex_lrud_title">LRUD Survex</string>
+  <string name="pref_survex_lrud_summary">Añadir LRUD a exportación Survex</string>
+  <string name="pref_csv_length_title">Unidad de longitud CSV</string>
+  <string name="pref_csv_length_summary">Unidad de longitud exportación CSV</string>
 
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
@@ -654,8 +654,8 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
   <string name="pref_plot_screen_title">Opciones de pantalla de dibujo</string>
-  <!-- FIXME string name="pref_tool_line_title">Opciones de dibujo</string -->
-  <!-- TODO string name="pref_tool_point_title">POINT TOOLS</string -->
+  <!-- FIXME string name="pref_tool_line_title">Opciones de línea</string -->
+  <string name="pref_tool_point_title">Opciones de Puntos</string>
   <string name="pref_location_title">Opciones de ubicación</string>
   <string name="pref_accuracy_title">Opciones de medición</string>
   <string name="pref_shot_data_title">Opciones de visuales</string>
@@ -694,8 +694,8 @@
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
   <string name="pref_backsight_title">Desacer</string>
   <string name="pref_backsight_summary">Desacer a punto anterior en dialogo de la nueva toma</string>
-  <string name="pref_mag_anomaly_title">Anomalia magnética</string>
-  <string name="pref_mag_anomaly_summary">Compensar Anomalía Local Magnética</string>
+  <string name="pref_mag_anomaly_title">Declinación magnética</string>
+  <string name="pref_mag_anomaly_summary">Compensar declinación Local Magnética</string>
   <string name="pref_azimuth_manual_title">Configuración manual "extensión"</string>
   <string name="pref_azimuth_manual_summary">Configurar manualmente "extensión"</string>
   <string name="pref_team_title">Equipo</string>
@@ -743,8 +743,8 @@
   <string name="pref_drawing_unit_title">Tamaño de los símbolo</string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
   <string name="pref_drawing_unit_message">Escala de los símbolos del dibujo en la pantalla</string>
-  <!-- TODO string name="pref_unscaled_points_title">Non-zoomed point icons</string -->
-  <!-- TODO string name="pref_unscaled_points_summary">Point icons are not zoomed</string -->
+  <string name="pref_unscaled_points_title">Símbolos de punto sin zoom</string>
+  <string name="pref_unscaled_points_summary">Símbolos de punto sin aumentar</string>
   <string name="pref_segment_title">Precisión de la línea</string>
   <string name="pref_segment_summary">Mínimo distancia línea-punto</string>
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
@@ -793,10 +793,10 @@
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Comprobación línea media</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
-  <!-- TODO string name="pref_xtherion_areas_title">xtherion areas</string -->
-  <!-- TODO string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
-  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
-  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
+  <string name="pref_xtherion_areas_title">áreas xtherion</string>
+  <string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string>
+  <string name="pref_binary_store_title">Archivo binario dibujo</string>
+  <string name="pref_binary_store_summary">Guardar dibujos en formato binario</string>
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
@@ -813,17 +813,17 @@
   <string name="pref_zoom_controls_summary">Control de Zoom multitouch</string>
   <string name="pref_side_drag_title">Arrastre lateral</string>
   <string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string>
-  <!-- TODO string name="pref_unit_grid_title">Sketch units</string -->
-  <!-- TODO string name="pref_unit_grid_summary">Sketch grid cell size</string -->
-  <!-- TODO string name="pref_recent_nr_title">Recent tools number</string -->
-  <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
-  <!-- TODO string name="pref_area_border_title">Area border visibility</string --> 
-  <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
-  <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
-  <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
+  <string name="pref_unit_grid_title">Unidades de dibujo</string>
+  <string name="pref_unit_grid_summary">Tamaño de celda de la cuadrícula del dibujo</string>
+  <string name="pref_recent_nr_title">Número de herramientas recientes</string>
+  <string name="pref_recent_nr_summary">Número de las herramientas más recientes seleccionadas</string>
+  <string name="pref_area_border_title">Visibilidad borde área</string> 
+  <string name="pref_area_border_summary">Visibilidad predeterminada en el borde de área</string>
+  <string name="pref_cont_join_title">Unir a la continuación</string>
+  <string name="pref_cont_join_summary">Línea continuación que se une a las líneas</string>
 
   <string name="pref_sketchUsesSplays_title">Tomas laterales en el dibujo</string>
-  <string name="pref_sketchUsesSplays_summary">Utilizar superficie laterales en el dibujo</string>
+  <string name="pref_sketchUsesSplays_summary">Utilizar tomas laterales en el dibujo</string>
   <string name="pref_sketchLineStep_title">Paso de la línea</string>
   <string name="pref_sketchLineStep_summary">Distancia entre puntos de la línea</string>
   <string name="pref_sketchLineStep_message">Distancia entre puntos de la línea</string>
@@ -847,24 +847,24 @@
   <string name="pref_unit_location_title">Unidades de Posicionamiento</string>
   <string name="pref_unit_location_summary">Visualizar unidades de Posicionamiento</string>
 
-  <!-- TODO string name="pref_plot_walls_title">AUTO WALLS</string -->
-  <!-- TODO string name="pref_walls_type_title">Walls type</string -->
-  <!-- TODO string name="pref_walls_type_summary">Walls type</string -->
-  <!-- TODO string name="pref_walls_plan_thr_title">Splay plan clino</string -->
-  <!-- TODO string name="pref_walls_plan_thr_summary">Maximum splay clino for plan walls</string -->
-  <!-- TODO string name="pref_walls_plan_thr_message">Maximum splay clino for plan walls [deg]</string -->
-  <!-- TODO string name="pref_walls_extended_thr_title">Splay profile clino</string -->
-  <!-- TODO string name="pref_walls_extended_thr_summary">Maximum splay clino for profile walls</string -->
-  <!-- TODO string name="pref_walls_extended_thr_message">Maximum splay clino for profile walls [deg]</string -->
-  <!-- TODO string name="pref_walls_xclose_title">Separation</string -->
-  <!-- TODO string name="pref_walls_xclose_summary">Minimum point-separation along the shot</string -->
-  <!-- TODO string name="pref_walls_xclose_message">Minimum separation of wall points along the shot [m]</string -->
-  <!-- TODO string name="pref_walls_concave_title">Concavity</string -->
-  <!-- TODO string name="pref_walls_concave_summary">Maximum concavity</string -->
-  <!-- TODO string name="pref_walls_concave_message">Maximum concavity [percent]</string -->
-  <!-- TODO string name="pref_walls_xstep_title">Step</string -->
-  <!-- TODO string name="pref_walls_xstep_summary">Point separation along the wall</string -->
-  <!-- TODO string name="pref_walls_xstep_message">Separation of points along the wall [m]</string -->
+  <string name="pref_plot_walls_title">Paredes automaticas</string>
+  <string name="pref_walls_type_title">Tipo de pared</string>
+  <string name="pref_walls_type_summary">Tipo de paredes</string>
+  <string name="pref_walls_plan_thr_title">inclinación tomas laterales</string>
+  <string name="pref_walls_plan_thr_summary">Máxima inclinación para tomas laterales, paredes lisas</string>
+  <string name="pref_walls_plan_thr_message">Máxima inclinación para tomas laterales, paredes lisas [deg]</string>
+  <string name="pref_walls_extended_thr_title">Perfil inclinación de tomas laterales</string>
+  <string name="pref_walls_extended_thr_summary">Máxima inclinación para tomas laterales, perfil paredes</string>
+  <string name="pref_walls_extended_thr_message">Máxima inclinación para tomas laterales, perfil paredes [grad.]</string>
+  <string name="pref_walls_xclose_title">Separaciónn</string>
+  <string name="pref_walls_xclose_summary">Punto de separación mínima a lo largo de la toma</string>
+  <string name="pref_walls_xclose_message">Separación mínima de puntos de pared a lo largo del tiro [m]</string>
+  <string name="pref_walls_concave_title">Concavidad</string>
+  <string name="pref_walls_concave_summary">Concavidad máxima</string>
+  <string name="pref_walls_concave_message">Concavidad máxima [porciento]</string>
+  <string name="pref_walls_xstep_title">Media</string>
+  <string name="pref_walls_xstep_summary">Separación de punto a lo largo de la pared</string>
+  <string name="pref_walls_xstep_message">La separación de los puntos a lo largo de la pared [m]</string>
 
   <string name="pref_log_stream_summary">Salida secuencia de registros</string>
   <string name="pref_log_stream_title">Secuencia de registros</string>
@@ -897,11 +897,11 @@
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">gruesa</string -->
 
-    <string name="welcome_title">Bienvenido a TopoDroid 2.6</string>
+    <string name="welcome_title">Bienvenido a TopoDroid 2.7</string>
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
-\n\nVisite http://sites.google.com/site/speleoapps para las aplicaciones y documentos complementarios. 
+\n\nVisite http://sites.google.com/site/speleoapps para las aplicaciones y documentos complementarios.
 \nEnvíe sus comentarios, informes de errores, peticiones de características, a marco.corvi@gmail.com.
 \nTraducción al español manuguerreros@gmail.com
 \n

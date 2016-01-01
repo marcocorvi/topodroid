@@ -2,15 +2,15 @@
 
 <resources>
 
-  <!-- TODO string-array name="unitGrid">
-     <item name="meter">meter</item>
-     <item name="yard">yard</item>
-  </string-array -->
+  <string-array name="unitGrid">
+     <item name="meter">metros</item>
+     <item name="yard">yarda</item>
+  </string-array>
 
-  <!-- TODO string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
-  </string-array -->
+  <string-array name="wallsType">
+     <item name="none">Nada</item>
+     <item name="convex">Convexa</item>
+  </string-array>
 
   <string-array name="zoomCtrl">
      <item name="0">Off</item>
@@ -72,9 +72,9 @@
   </string-array>
 
   <string-array name="pickerType">
-     <!-- TODO item name="recent">Most recent</item -->
+     <item name="recent">Más reciente</item>
      <item name="list">Lista</item>
-     <item name="grid">Cuadricula</item>
+     <item name="grid">Cuadrícula</item>
   </string-array>
 
   <string-array name="deviceType">
