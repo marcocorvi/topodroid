@@ -219,7 +219,7 @@
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Registro</string>
-    <string name="menu_reload">Recargar</string>
+    <string name="menu_reload">Importar</string>
     <string name="menu_rename">Renombrar</string>
     <string name="menu_help">Ayuda</string>
     <string name="menu_join_survey">Topografía comartida</string>
@@ -227,7 +227,7 @@
     <!-- UNUSED string name="menu_manual">Manual</string -->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Opciones</string>
-    <string name="menu_overview">Visualización General</string>
+    <string name="menu_overview">Medir distancia</string>
     <string name="menu_pair">Emparejar</string>
     <string name="menu_palette">Paleta</string>
     <string name="menu_photo">Foto</string>
@@ -469,7 +469,7 @@
     <string name="help_measure">Medir distancias</string>
     
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
-    <string name="help_current_station">Estaciones guardadas</string>
+    <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Extensión Referencia-Rumbo</string>
     <string name="help_device">Cambiar a opciones del dispositivo</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
@@ -551,7 +551,7 @@
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
     <string name="title_coord">Introduzca las coordenadas del punto:</string>
-    <string name="title_current_station">Estaciones guardadas</string>
+    <string name="title_current_station">Última estación guardada</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_discover">Buscar dispositivos DistoX ... espere</string>
     <string name="title_draw_area">Área %1$s</string>
