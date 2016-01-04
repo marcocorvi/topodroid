@@ -54,12 +54,12 @@
 
   <string-array name="altitudeType">
     <item name="wgs84">WGS84</item>
-    <item name="asl">elípticas</item>
+    <item name="asl">Elípticas</item>
   </string-array>
 
   <string-array name="sockType">
      <item name="default">Por defecto</item>
-     <item name="Insecure">inestable</item>
+     <item name="Insecure">Inestable</item>
   </string-array>
 
     <string-array name="surveyStations">
