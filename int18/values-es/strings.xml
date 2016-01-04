@@ -256,8 +256,8 @@
     <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
     <string name="photo_name">Estación/nombre</string>
-    <string name="photo_photo">Foto</string>
-    <string name="photo_sensor">Sensor</string>
+    <string name="photo_photo">Toma con foto</string>
+    <string name="photo_sensor">Toma con sensor</string>
     <string name="photo_external">Medición</string>
     <!-- UNUSED string name="photo_sensor_prompt">Seleccione fotografía o sensor</string -->
     <string name="photo_shot">Añadir toma</string>
