@@ -218,7 +218,7 @@
     <string name="menu_display">Pantalla</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
-    <string name="menu_recover">Registro</string>
+    <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_reload">Importar</string>
     <string name="menu_rename">Renombrar</string>
     <string name="menu_help">Ayuda</string>
@@ -345,7 +345,7 @@
     <string name="team">Equipo</string>
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
-    <string name="undelete_text">Pulse el archivo a recuperar</string>
+    <string name="undelete_text">Pulse sobre la toma a recuperar</string>
     <string name="visible_border">Borde visible</string>
     <string name="vthreshold">Precisión</string>
     <string name="wait_scan">Buscando: espere...</string>
