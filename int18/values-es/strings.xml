@@ -223,7 +223,7 @@
     <string name="menu_rename">Renombrar</string>
     <string name="menu_help">Ayuda</string>
     <string name="menu_join_survey">Topografía comartida</string>
-    <string name="menu_logs">Rgistros</string>
+    <string name="menu_logs">Registros</string>
     <!-- UNUSED string name="menu_manual">Manual</string -->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Opciones</string>
@@ -500,20 +500,20 @@
     <string name="help_3d">Visualizar en 3D(Cave3D)</string>
     <string name="help_move">Modo Mover/zoom</string>
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
-    <string name="help_edit">Introducir modo de edición</string>
+    <string name="help_edit">Seleccionar modo de edición</string>
     <string name="help_refs">Elejir dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
-    <string name="help_stats">Estadísticas de Topografías</string>
+    <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
     <string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string>
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
     <string name="help_trash">Eliminar dibujo</string>
     <string name="help_undo">Deshacer última acción de dibujo</string>
     <string name="help_redo">Rehacer última acción de dibujo</string>
-    <string name="help_symbol_plot">Seleccione el símbolo de dibujo para dibujar</string>
-    <string name="help_delete_item">Eliminar elemento del dibujo</string>
+    <string name="help_symbol_plot">Seleccionar el símbolos</string>
+    <string name="help_delete_item">Eliminar simbolos del dibujo</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
-    <string name="help_eraser">Borrar dibujos</string>
+    <string name="help_eraser">Borrar dibujo</string>
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
@@ -522,11 +522,11 @@
 <!--
     <string name="help_to_point">Mueva el punto seleccionado para unirse con el punto más cercano</string>
     <string name="help_split_point">Dividir el punto en dos [línea / área]</string>
-    <string name="help_split_line">Dividir la línea en dos punto</string>
+    <string name="help_split_line">Dividir la línea en dos puntos</string>
     <string name="help_kink">Utilice una línea recta en el punto [línea / área]</string>
 -->
     <string name="help_manual_calibration">Manual instrumentos calibración</string>
-    <string name="help_note_plot">Edite las propiedades del elemento de dibujo</string>
+    <string name="help_note_plot">Editar propiedades del elemento de dibujo</string>
     <string name="help_save">Guardar cambios de la Topografía o calibración</string>
     <string name="help_export_survey">Exportar Topografía</string>
     <string name="help_loc">Posicionamiento GPS</string>
@@ -571,7 +571,7 @@
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>
-    <string name="title_shot_delete">Â¿Quiere eleiminar toma?</string>
+    <string name="title_shot_delete">Â¿Quiere eliminar toma?</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->
