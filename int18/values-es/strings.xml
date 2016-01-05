@@ -222,7 +222,7 @@
     <string name="menu_reload">Importar</string>
     <string name="menu_rename">Renombrar</string>
     <string name="menu_help">Ayuda</string>
-    <string name="menu_join_survey">Topografía comartida</string>
+    <string name="menu_join_survey">Topografía compartida</string>
     <string name="menu_logs">Registros</string>
     <!-- UNUSED string name="menu_manual">Manual</string -->
     <string name="menu_manual_calibration">Calibración</string>
@@ -482,7 +482,7 @@
     <string name="help_join_survey">Unir dos topografías</string>
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Descargar datos</string>
-    <!-- UNUSED string name="help_splay">Asignar estaciones laterales automáticamente</string -->
+    <!-- UNUSED string name="help_splay">Asignar Tomas laterales automáticamente</string -->
     <string name="help_display">Seleccione modo de visualización</string>
     <string name="help_display_calib">Cambiar a pantalla de tomas eliminadas</string>
     <string name="help_validate">Validar la calibración</string>
@@ -491,7 +491,7 @@
     <string name="help_note">Editar notas Topografía</string>
     <string name="help_bluetooth">Reinicio conexión bluetooth</string>
     <string name="help_remote">Control remoto DistoX</string>
-    <string name="help_add_shot">Introducir datos de una toma manualmente</string>
+    <string name="help_add_shot">Introducir una toma manualmente</string>
     <string name="help_info_shot">Estadísticas de topografía</string>
     <string name="help_survey_info">Información topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
