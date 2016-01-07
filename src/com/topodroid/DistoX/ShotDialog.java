@@ -25,19 +25,23 @@ import android.text.InputType;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.DialogInterface;
 import android.inputmethodservice.KeyboardView;
+
+import android.graphics.Paint.FontMetrics;
 
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
@@ -45,6 +49,7 @@ import android.util.Log;
 
 public class ShotDialog extends Dialog
                         implements View.OnClickListener
+                                 , View.OnLongClickListener
 {
   private Context mContext;
   private ShotActivity mParent;
@@ -280,6 +285,9 @@ public class ShotDialog extends Dialog
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
+   
+    mETfrom.setOnLongClickListener( this );
+    mETto.setOnLongClickListener( this );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
@@ -455,8 +463,19 @@ public class ShotDialog extends Dialog
     }
   }
 
+
+  @Override
+  public boolean onLongClick(View v) 
+  {
+    CutNPaste.makePopup( mContext, (EditText)v );
+    return true;
+  }
+    
+
+  @Override
   public void onClick(View v) 
   {
+    CutNPaste.dismissPopup();
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "ShotDialog onClick button " + b.getText().toString() );
 
@@ -559,6 +578,7 @@ public class ShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
+    if ( CutNPaste.dismissPopup() ) return;
     if ( closeKeyboard() ) return;
     dismiss();
   }

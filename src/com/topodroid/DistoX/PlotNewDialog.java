@@ -37,6 +37,7 @@ import android.widget.Toast;
 
 public class PlotNewDialog extends Dialog
                            implements View.OnClickListener
+                           , View.OnLongClickListener
 {
   private Context mContext;
   private INewPlot mMaker;
@@ -83,6 +84,8 @@ public class PlotNewDialog extends Dialog
 
     mEditName.setText( Integer.toString( mIndex ) );
 
+    mEditStart.setOnLongClickListener( this );
+
     // mBtnPlan     = (RadioButton) findViewById( R.id.btn_plot_plan );
     // mBtnExtended = (RadioButton) findViewById( R.id.btn_plot_ext );
     // mBtnVSection = (RadioButton) findViewById( R.id.btn_plot_vcross );
@@ -114,10 +117,20 @@ public class PlotNewDialog extends Dialog
     }
   }
 
+ 
+  @Override
+  public boolean onLongClick(View v) 
+  {
+    CutNPaste.makePopup( mContext, (EditText)v );
+    return true;
+  }
+
   // FIXME synchronized ?
   @Override
   public void onClick(View v) 
   {
+    CutNPaste.dismissPopup();
+
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
@@ -181,6 +194,8 @@ public class PlotNewDialog extends Dialog
   @Override
   public void onBackPressed()
   {
+    if ( CutNPaste.dismissPopup() ) return;
+
     if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();

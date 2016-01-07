@@ -15,6 +15,11 @@
     <string name="HELP">HELP</string>
     <string name="STATION">STATION </string>
 
+    <string name="cut">CUT</string>
+    <string name="copy">COPY</string>
+    <string name="paste">PASTE</string>
+    <string name="copied">Copied %1$s to clipboard</string>
+
     <string name="memoryA3">DistoX A3 memory</string>
     <string name="memoryX310">DistoX X310 memory</string>
     <string name="memory_data">DistoX data</string>

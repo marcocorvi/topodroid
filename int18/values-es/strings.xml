@@ -14,6 +14,11 @@
     <string name="HELP">Ayuda</string>
     <string name="STATION">Estación</string>
 
+    <!-- TODO string name="cut">CUT</string -->
+    <!-- TODO string name="copy">COPY</string -->
+    <!-- TODO string name="paste">PASTE</string -->
+    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
     <string name="memory_data">Datos DistoX</string>

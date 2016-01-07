@@ -51,6 +51,7 @@ import android.util.Log;
 
 public class LocationDialog extends Dialog
                             implements View.OnClickListener
+                                     , View.OnLongClickListener
                                      , AdapterView.OnItemClickListener
                                      , TextView.OnEditorActionListener
                                      , LocationListener
@@ -121,6 +122,7 @@ public class LocationDialog extends Dialog
     // mBtnStatus = (Button) findViewById( R.id.status );
 
     mETstation.setOnEditorActionListener( this );
+    mETstation.setOnLongClickListener( this );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setOnItemClickListener( this );
@@ -283,8 +285,17 @@ public class LocationDialog extends Dialog
   }
 
   @Override
+  public boolean onLongClick(View v) 
+  {
+    CutNPaste.makePopup( mContext, (EditText)v );
+    return true;
+  }
+
+  @Override
   public void onClick(View v) 
   {
+    CutNPaste.dismissPopup();
+
     Button b = (Button) v;
     // if ( b == mBtnCancel ) {
     //   onBackPressed();
@@ -340,6 +351,8 @@ public class LocationDialog extends Dialog
   @Override
   public void onBackPressed()
   {
+    if ( CutNPaste.dismissPopup() ) return;
+
     if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();

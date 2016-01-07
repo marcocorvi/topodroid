@@ -32,6 +32,7 @@ import android.inputmethodservice.KeyboardView;
 
 public class DrawingShotDialog extends Dialog 
                                implements View.OnClickListener
+                               , View.OnLongClickListener
 {
   private Context mContext;
 
@@ -78,6 +79,9 @@ public class DrawingShotDialog extends Dialog
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
+
+    mETfrom.setOnLongClickListener( this );
+    mETto.setOnLongClickListener( this );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                 R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
@@ -188,9 +192,18 @@ public class DrawingShotDialog extends Dialog
 
   }
 
+  @Override
+  public boolean onLongClick(View view)
+  {
+    CutNPaste.makePopup( mContext, (EditText)view );
+    return true;
+  }
+
+  @Override
   public void onClick(View view)
   {
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingShotDialog onClick() " + view.toString() );
+    CutNPaste.dismissPopup();
 
     Button b = (Button)view;
 
@@ -259,6 +272,7 @@ public class DrawingShotDialog extends Dialog
   @Override
   public void onBackPressed()
   {
+    if ( CutNPaste.dismissPopup() ) return;
     if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();

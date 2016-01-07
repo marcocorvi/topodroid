@@ -15,6 +15,11 @@
     <string name="HELP">Помощ</string>
     <string name="STATION">Репер </string>
 
+    <!-- TODO string name="cut">CUT</string -->
+    <!-- TODO string name="copy">COPY</string -->
+    <!-- TODO string name="paste">PASTE</string -->
+    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+
     <string name="memoryA3">DistoX A3 памет</string>
     <string name="memoryX310">DistoX X310 памет</string>
     <string name="memory_data">DistoX данни</string>

@@ -40,6 +40,7 @@ import android.util.Log;
 
 public class ShotNewDialog extends Dialog
                            implements View.OnClickListener
+                           , View.OnLongClickListener
                            , IBearingAndClino
 {
   // private ShotActivity mParent;
@@ -100,6 +101,9 @@ public class ShotNewDialog extends Dialog
 
     mETfrom = (EditText) findViewById(R.id.shot_from );
     mETto   = (EditText) findViewById(R.id.shot_to );
+
+    mETfrom.setOnLongClickListener( this );
+    mETto.setOnLongClickListener( this );
 
     mETdistance = (EditText) findViewById(R.id.shot_distance );
     mETbearing  = (EditText) findViewById(R.id.shot_bearing );
@@ -250,13 +254,22 @@ public class ShotNewDialog extends Dialog
     mETclino.setText( String.format(Locale.ENGLISH, "%.1f", c ) );
   }
 
+  @Override
+  public boolean onLongClick( View v )
+  {
+    CutNPaste.makePopup( mContext, (EditText)v );
+    return true;
+  }
+
   // FIXME synchronized ?
+  @Override
   public void onClick(View v) 
   {
     if ( mTimer != null ) {
       mTimer.cancel( true );
       mTimer = null;
     }
+    CutNPaste.dismissPopup();
 
     Button b = (Button) v;
     String val;
@@ -417,6 +430,7 @@ public class ShotNewDialog extends Dialog
       mTimer.cancel( true );
       mTimer = null;
     }
+    if ( CutNPaste.dismissPopup() ) return;
     if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();

@@ -15,6 +15,11 @@
     <string name="HELP">HILFE</string>
     <string name="STATION">MESSPUNKT</string>
 
+    <!-- TODO string name="cut">CUT</string -->
+    <!-- TODO string name="copy">COPY</string -->
+    <!-- TODO string name="paste">PASTE</string -->
+    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+
     <string name="memoryA3">DistoX A3 Speicherkarte</string>
     <string name="memoryX310">DistoX X310 Speicherkarte</string>
     <string name="memory_data">DistoX Daten</string>

@@ -44,6 +44,7 @@ import android.util.Log;
 
 public class CurrentStationDialog extends Dialog
                         implements View.OnClickListener
+                        , View.OnLongClickListener
                         , OnItemClickListener
 {
   private Context mContext;
@@ -84,6 +85,8 @@ public class CurrentStationDialog extends Dialog
     mName = (EditText) findViewById( R.id.name );
     mComment = (EditText) findViewById( R.id.comment );
     mName.setText( mApp.getCurrentOrLastStation() );
+
+    mName.setOnLongClickListener( this );
 
     mBtnPush    = (Button) findViewById(R.id.button_push);
     mBtnPop     = (Button) findViewById(R.id.button_pop );
@@ -149,8 +152,17 @@ public class CurrentStationDialog extends Dialog
   }
  
   @Override
+  public boolean onLongClick(View v) 
+  {
+    CutNPaste.makePopup( mContext, (EditText)v );
+    return true;
+  }
+
+  @Override
   public void onClick(View v) 
   {
+    CutNPaste.dismissPopup();
+
     // TDLog.Log(  TDLog.LOG_INPUT, "CurrentStationDialog onClick() " );
     Button b = (Button) v;
     String name = mName.getText().toString().trim();
@@ -216,6 +228,8 @@ public class CurrentStationDialog extends Dialog
   @Override
   public void onBackPressed()
   {
+    if ( CutNPaste.dismissPopup() ) return;
+
     if ( TDSetting.mKeyboard ) {
       if ( mKeyboard.isVisible() ) {
         mKeyboard.hide();

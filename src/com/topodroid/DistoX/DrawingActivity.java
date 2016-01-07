@@ -19,13 +19,12 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.pm.PackageManager;
 
-import android.util.TypedValue;
-
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -2232,22 +2231,6 @@ public class DrawingActivity extends ItemDrawer
       );
     }
 
-    private Button makeButton( String text, int color, int size )
-    {
-      Button myTextView = new Button( this );
-      myTextView.setHeight( 3*size );
-
-      myTextView.setText( text );
-      myTextView.setTextColor( color );
-      myTextView.setTextSize( TypedValue.COMPLEX_UNIT_DIP, size );
-      myTextView.setBackgroundColor( 0xff333333 );
-      myTextView.setSingleLine( true );
-      myTextView.setGravity( 0x03 ); // left
-      myTextView.setPadding( 4, 4, 4, 4 );
-      // Log.v(TopoDroidApp.TAG, "makeButton " + text );
-      return myTextView;
-    }
-
     public void onBackPressed()
     {
       if ( popup_window != null ) {
@@ -2310,7 +2293,7 @@ public class DrawingActivity extends ItemDrawer
         //
         String text = getString(R.string.popup_join_pt);
         int len = text.length();
-        Button myTextView0 = makeButton( text, 0xffffffff, 16 );
+        Button myTextView0 = CutNPaste.makeButton( this, text, 0xffffffff, 16 );
         popup_layout.addView(myTextView0, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView0.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2331,7 +2314,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_snap_ln);
         if ( len < text.length() ) len = text.length();
-        Button myTextView1 = makeButton( text, 0xffffffff, 16 );
+        Button myTextView1 = CutNPaste.makeButton( this, text, 0xffffffff, 16 );
         popup_layout.addView(myTextView1, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView1.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2358,7 +2341,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_split_pt);
         if ( len > text.length() ) len = text.length();
-        Button myTextView2 = makeButton( text, 0xffffffff, 16 );
+        Button myTextView2 = CutNPaste.makeButton( this, text, 0xffffffff, 16 );
         popup_layout.addView(myTextView2, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView2.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2374,7 +2357,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_split_ln);
         if ( len < text.length() ) len = text.length();
-        Button myTextView3 = makeButton( text, 0xffffffff, 16 );
+        Button myTextView3 = CutNPaste.makeButton( this, text, 0xffffffff, 16 );
         popup_layout.addView(myTextView3, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView3.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2393,7 +2376,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_sharp_pt);
         if ( len < text.length() ) len = text.length();
-        Button myTextView4 = makeButton( text, 0xffffffff, 16 );
+        Button myTextView4 = CutNPaste.makeButton( this, text, 0xffffffff, 16 );
         popup_layout.addView(myTextView4, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView4.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2416,7 +2399,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_curve_pt);
         if ( len < text.length() ) len = text.length();
-        Button myTextView5 = makeButton( text, 0xffffffff, 16 );
+        Button myTextView5 = CutNPaste.makeButton( this, text, 0xffffffff, 16 );
         popup_layout.addView(myTextView5, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView5.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {
@@ -2451,7 +2434,7 @@ public class DrawingActivity extends ItemDrawer
         //
         text = getString(R.string.popup_remove_pt);
         if ( len < text.length() ) len = text.length();
-        Button myTextView6 = makeButton( text, 0xffffffff, 16 );
+        Button myTextView6 = CutNPaste.makeButton( this, text, 0xffffffff, 16 );
         popup_layout.addView(myTextView6, new LinearLayout.LayoutParams(lHeight, lWidth));
         myTextView6.setOnClickListener( new View.OnClickListener( ) {
           public void onClick(View v) {

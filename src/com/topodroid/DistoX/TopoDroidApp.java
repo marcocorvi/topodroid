@@ -104,6 +104,8 @@ public class TopoDroidApp extends Application
   static String mManual;  // manual url
   static Locale mLocale;
 
+  static String mClipboardText = null; // text clipboard
+
   public static float mScaleFactor   = 1.0f;
   public static float mDisplayWidth  = 200f;
   public static float mDisplayHeight = 320f;
