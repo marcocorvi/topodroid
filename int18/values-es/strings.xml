@@ -223,12 +223,12 @@
     <string name="menu_display">Pantalla</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
-    <string name="menu_recover">Registro</string>
+    <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_reload">Importar</string>
     <string name="menu_rename">Renombrar</string>
     <string name="menu_help">Ayuda</string>
-    <string name="menu_join_survey">Topografía comartida</string>
-    <string name="menu_logs">Rgistros</string>
+    <string name="menu_join_survey">Topografía compartida</string>
+    <string name="menu_logs">Registros</string>
     <!-- UNUSED string name="menu_manual">Manual</string -->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Opciones</string>
@@ -261,8 +261,8 @@
     <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
     <string name="photo_name">Estación/nombre</string>
-    <string name="photo_photo">Foto</string>
-    <string name="photo_sensor">Sensor</string>
+    <string name="photo_photo">Toma con foto</string>
+    <string name="photo_sensor">Toma con sensor</string>
     <string name="photo_external">Medición</string>
     <!-- UNUSED string name="photo_sensor_prompt">Seleccione fotografía o sensor</string -->
     <string name="photo_shot">Añadir toma</string>
@@ -350,7 +350,7 @@
     <string name="team">Equipo</string>
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
-    <string name="undelete_text">Pulse el archivo a recuperar</string>
+    <string name="undelete_text">Pulse sobre la toma a recuperar</string>
     <string name="visible_border">Borde visible</string>
     <string name="vthreshold">Precisión</string>
     <string name="wait_scan">Buscando: espere...</string>
@@ -487,7 +487,7 @@
     <string name="help_join_survey">Unir dos topografías</string>
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Descargar datos</string>
-    <!-- UNUSED string name="help_splay">Asignar estaciones laterales automáticamente</string -->
+    <!-- UNUSED string name="help_splay">Asignar Tomas laterales automáticamente</string -->
     <string name="help_display">Seleccione modo de visualización</string>
     <string name="help_display_calib">Cambiar a pantalla de tomas eliminadas</string>
     <string name="help_validate">Validar la calibración</string>
@@ -496,7 +496,7 @@
     <string name="help_note">Editar notas Topografía</string>
     <string name="help_bluetooth">Reinicio conexión bluetooth</string>
     <string name="help_remote">Control remoto DistoX</string>
-    <string name="help_add_shot">Introducir datos de una toma manualmente</string>
+    <string name="help_add_shot">Introducir una toma manualmente</string>
     <string name="help_info_shot">Estadísticas de topografía</string>
     <string name="help_survey_info">Información topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
@@ -505,20 +505,20 @@
     <string name="help_3d">Visualizar en 3D(Cave3D)</string>
     <string name="help_move">Modo Mover/zoom</string>
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
-    <string name="help_edit">Introducir modo de edición</string>
+    <string name="help_edit">Seleccionar modo de edición</string>
     <string name="help_refs">Elejir dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
-    <string name="help_stats">Estadísticas de Topografías</string>
+    <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
     <string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string>
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
     <string name="help_trash">Eliminar dibujo</string>
     <string name="help_undo">Deshacer última acción de dibujo</string>
     <string name="help_redo">Rehacer última acción de dibujo</string>
-    <string name="help_symbol_plot">Seleccione el símbolo de dibujo para dibujar</string>
-    <string name="help_delete_item">Eliminar elemento del dibujo</string>
+    <string name="help_symbol_plot">Seleccionar el símbolos</string>
+    <string name="help_delete_item">Eliminar simbolos del dibujo</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
-    <string name="help_eraser">Borrar dibujos</string>
+    <string name="help_eraser">Borrar dibujo</string>
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
@@ -527,11 +527,11 @@
 <!--
     <string name="help_to_point">Mueva el punto seleccionado para unirse con el punto más cercano</string>
     <string name="help_split_point">Dividir el punto en dos [línea / área]</string>
-    <string name="help_split_line">Dividir la línea en dos punto</string>
+    <string name="help_split_line">Dividir la línea en dos puntos</string>
     <string name="help_kink">Utilice una línea recta en el punto [línea / área]</string>
 -->
     <string name="help_manual_calibration">Manual instrumentos calibración</string>
-    <string name="help_note_plot">Edite las propiedades del elemento de dibujo</string>
+    <string name="help_note_plot">Editar propiedades del elemento de dibujo</string>
     <string name="help_save">Guardar cambios de la Topografía o calibración</string>
     <string name="help_export_survey">Exportar Topografía</string>
     <string name="help_loc">Posicionamiento GPS</string>
@@ -576,7 +576,7 @@
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>
-    <string name="title_shot_delete">Â¿Quiere eleiminar toma?</string>
+    <string name="title_shot_delete">Â¿Quiere eliminar toma?</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->
