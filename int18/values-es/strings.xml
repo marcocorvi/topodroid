@@ -5,7 +5,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Haga clic de nuevo para salir</string>
 
-    <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\nÂ¿Quiere volver a instalar los elementos de dibujo?</string>
+    <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
     <string name="version_title">Versión de actualización</string>
 
     <string name="POINT">Punto</string>
@@ -14,10 +14,10 @@
     <string name="HELP">Ayuda</string>
     <string name="STATION">Estación</string>
 
-    <!-- TODO string name="cut">CUT</string -->
-    <!-- TODO string name="copy">COPY</string -->
-    <!-- TODO string name="paste">PASTE</string -->
-    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+    <string name="cut">Cortar</string -->
+    <string name="copy">Copiar</string -->
+    <string name="paste">Pegar</string -->
+    <string name="copied">Copiado al portapapeles</string -->
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
@@ -54,7 +54,7 @@
     <string name="calib_delete">Eliminar calibración </string>
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
-    <string name="calib_gm_undelete">Â¿Eliminar datos de calibración?</string>
+    <string name="calib_gm_undelete">¿Eliminar datos de calibración?</string>
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
     <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos ...</string>
@@ -81,7 +81,7 @@
     <string name="device_busy">Dispositivo ocupado</string>
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">información del dispositivo</string>
-    <string name="device_model_set">Â¿Desea cambiar de dispositivo?</string>
+    <string name="device_model_set">¿Desea cambiar de dispositivo?</string>
     <string name="device_none">DistoX no seleccionado</string>
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
@@ -183,8 +183,8 @@
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
     <string name="none">Nada</string>
-    <string name="barrier_add">Â¿Dividir la visualización de la línea central?</string>
-    <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
+    <string name="barrier_add">¿Dividir la visualización de la línea central?</string>
+    <string name="barrier_del">¿Unir la visualización de la línea central?</string>
     <string name="hidden_add">Oculta pantalla de la línea media</string>
     <string name="hidden_del">Mostrar pantalla de la línea media</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
@@ -268,7 +268,7 @@
     <string name="photo_shot">Añadir toma</string>
     <string name="photo_survey">Dividir topografía</string>
     <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>
-    <string name="plot_delete">Â¿Eliminar dibujo?</string>
+    <string name="plot_delete">¿Eliminar dibujo?</string>
     <string name="item_delete">Eliminar elemento %1$s ?</string>
     <string name="plot_duplicate_name">Nombre dibujo duplicado</string>
     <string name="plot_name">Nombre dibujo</string>
@@ -276,7 +276,7 @@
     <string name="plot_not_found">No hay dibujo</string>
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
     <!-- UNUSED string name="plot_null_start">Falta base estación</string -->
-    <string name="plot_recover">Â¿Actualizar copia de seguridad de la topografía?</string>
+    <string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string>
     <string name="plot_start">Base estación</string>
     <!-- UNUSED string name="plot_view">Vista Estación</string -->
     <!-- UNUSED string name="read_">Leer </string -->
@@ -333,15 +333,15 @@
     <!-- UNUSED string name="sketch3d_start">Estación base</string -->
 
     <string name="station">Estación</string>
-    <string name="station_ask">Â¿Insertar estación?</string>
-    <string name="station_set">Â¿Desea continuar la topografía desde aquí?</string>
+    <string name="station_ask">¿Insertar estación?</string>
+    <string name="station_set">¿Desea continuar la topografía desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <string name="station_next">Siguiente estación</string>
     <string name="station_viewed">Vista de estación</string>
     <string name="survey_exists">Conflicto Nombre Topografía</string>
     <string name="survey_date">yyyy.mm.dd</string>
-    <string name="survey_delete">Â¿Eliminar Topografía?</string>
-    <string name="survey_split">Â¿Dividir topografía?</string>
+    <string name="survey_delete">¿Eliminar Topografía?</string>
+    <string name="survey_split">¿Dividir topografía?</string>
     <string name ="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
@@ -396,8 +396,8 @@
     <string name="distox_err_headtail_eof">Fallo memoria EOF DistoX</string>
     <string name="distox_err_connected">Dispositivo ya conectado</string>
 
-    <!-- UNUSED string name="ask_close">Â¿Cerrar TopoDroid?</string -->
-    <string name="ask_reset">Â¿Reiniciar memoria DistoX?</string>
+    <!-- UNUSED string name="ask_close">¿Cerrar TopoDroid?</string -->
+    <string name="ask_reset">¿Reiniciar memoria DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
 
     <string name="button_add"       >Añadir    </string>
