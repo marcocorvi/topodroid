@@ -23,7 +23,7 @@
     <string name="memoryX310">Memoria DistoX X310</string>
     <string name="memory_data">Datos DistoX</string>
 
-    <string name="td_symbol_text">¿Necesitas instalar los símbolos de dibujo? \ Puede hacerlo más adelante con la aplicación TdSymbol</string>
+    <string name="td_symbol_text">¿Necesitas instalar los símbolos de dibujo? \nPuede hacerlo más adelante con la aplicación TdSymbol</string>
     <string name="td_symbol_ask">No preguntar de nuevo</string>
 
     <string name="thp_label">Texto</string>
@@ -171,7 +171,7 @@
     <string name="error_value_required">Introducir valor</string>
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
-    <string name="group_policy_four">Política: Grupo en cuatro</string>
+    <string name="group_policy_four">Política: Grupo de cuatro</string>
     <string name="group_policy_sixteen">Política: cuatro grupos de cuatro, otro solo</string>
     <string name="group_policy_distance">Política: Grupo según la distancia angular</string>
     <string name="group_reset">Resetear grupos</string>
@@ -202,7 +202,7 @@
     <string name="no_device_found">No se encuentra dispositivos</string>
     <string name="no_gms">Calibración no tiene datos.\nUse botón Descargar</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
-    <string name="no_paired_device">Dispositivo no emparejado.\Escanee y empareje DistoX</string>
+    <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
     <string name="no_photos">Topografía sin foto</string>
     <string name="no_plots">Topografía sin dibujos\Use el botón para añadir uno</string>
     <string name="no_proj4">Proj4 no instalado</string>
@@ -323,7 +323,7 @@
     <string name="shot_to">Toma hasta</string>
 
 <!-- NOT USED -->
-    <!-- UNUSED string name="make_surface">Ya existe en superficie Â¿Reemplazar?</string -->
+    <!-- UNUSED string name="make_surface">Ya existe en superficie ¿Reemplazar?</string -->
     <!-- UNUSED string name="sketch3d_name">Nombre</string -->
     <!-- UNUSED string name="sketch3d_new">Nuevo dibujo 3D</string -->
     <!-- UNUSED string name="sketch3d_next">Falta nombre de dibujo 3D</string -->
