@@ -115,8 +115,8 @@
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">Grados sexagesimal 360ş</item>
-     <item name="grads">Grados centesimal 400ş</item>
+     <item name="degrees">Grados sexagesimal 360º</item>
+     <item name="grads">Grados centesimal 400º</item>
   </string-array>
 
   <string-array name="unitLocation">
