@@ -38,7 +38,7 @@
     <string name="missing_point">Punto</string>
     <!-- UNUSED string name="missing_save">Faltan símbolos.\nno guardado</string -->
     <string name="missing_station">Falta Estación</string>
-    <string name="missing_symbols">Faltan símbolos. \nÂ¿Desea guardar de todos modos?</string>
+    <string name="missing_symbols">Faltan símbolos. \n¿Desea guardar de todos modos?</string>
     <!-- UNUSED string name="missing_title">Faltan símbolos</string -->
     <string name="missing_warning">Faltan los siguientes símbolos en el dibujo.\n</string>
     <string name="failed_snap_to_line">Ninguna línea cercana al borde</string>
@@ -77,7 +77,7 @@
     <string name="linear">lineal</string>
     <string name="non_linear">No lineal</string>
    
-    <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ nUse el algoritmo lineal</string>
+    <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string>
     <string name="device_busy">Dispositivo ocupado</string>
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">información del dispositivo</string>
@@ -143,7 +143,7 @@
     <string name="h_geoid_hint">H geoide [metros]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">Errores de cierre de bucle</string>
+    <string name="loop_closure_errors">Error en cierre de bucle</string>
     <string name="loop_none">No hay Bucle</string>
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
@@ -202,12 +202,12 @@
     <string name="no_device_found">No se encuentra dispositivos</string>
     <string name="no_gms">Calibración no tiene datos.\nUse botón Descargar</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
-    <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
+    <string name="no_paired_device">Dispositivo no emparejado.\Escanee y empareje DistoX</string>
     <string name="no_photos">Topografía sin foto</string>
-    <string name="no_plots">Topografía sin dibujos\nUse el botón para añadir uno</string>
+    <string name="no_plots">Topografía sin dibujos\Use el botón para añadir uno</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
-    <string name="no_shots">Topografía sin mediciones.\nUse botón para descargar mediciones</string>
+    <string name="no_shots">Topografía sin mediciones.\Use botón para descargar mediciones</string>
     <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
@@ -572,11 +572,11 @@
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
-    <string name="title_profile_flip">Â¿Quieres cambiar al perfil del dibujo?</string>
+    <string name="title_profile_flip">¿Quieres cambiar al perfil del dibujo?</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>
-    <string name="title_shot_delete">Â¿Quiere eliminar toma?</string>
+    <string name="title_shot_delete">¿Quiere eliminar toma?</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->
@@ -593,7 +593,7 @@
 
   <string name="pref_cat_survey">Opciones de topografía</string>
   <string name="pref_cat_drawing">Opciones de dibujo</string>
-  <string name="pref_cat_import_export">Importar / Exportar</string>
+  <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_calib">Opciones de calibración</string>
   <string name="pref_cat_device">Opciones de distoX</string>
   <!-- UNUSED string name="pref_cat_sketch">Opciones de dibujo</string -->
@@ -607,9 +607,9 @@
   <!-- UNUSED string name="pref_bootloader_title">Gestor de arranque</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Habilitar gestor de arranque</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
-  <string name="pref_mkeyboard_summary">Activar / Desactivar los teclados personalizados</string>
+  <string name="pref_mkeyboard_summary">Activar/Desactivar los teclados personalizados</string>
   <string name="pref_cosurvey_title">Topografía compartida</string>
-  <string name="pref_cosurvey_summary">Activar / Desactivar topografías compartidas</string>
+  <string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
@@ -621,9 +621,9 @@
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
-  <!-- TODO string name="pref_ortho_lrud_title">LRUD splay angle</string -->
-  <!-- TODO string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string -->
-  <!-- TODO string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string -->
+  <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string -->
+  <string name="pref_ortho_lrud_summary">Ángulo mínimo para tomas laterales LRUD</string -->
+  <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas laterales LRUD</string -->
   <string name="pref_survex_eol_title">Terminación de línea Survex</string>
   <string name="pref_survex_eol_summary">Terminación de línea Survex</string>
   <string name="pref_survex_splay_title">Estación toma lateral Survex</string>
@@ -895,7 +895,7 @@
   <string name="pref_log_survey">Topografía</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unidades</string>
-  <string name="pref_log_zip">ZIP</string>
+  <string name="pref_log_zip">Zip</string>
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fina</string -->
