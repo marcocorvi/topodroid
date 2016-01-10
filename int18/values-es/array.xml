@@ -68,7 +68,7 @@
      <item name="back">Inversa, primero anchuras</item>
      <item name="for2">Directa, primero visual</item>
      <item name="back2">Inversa, primero visual</item>
-     <item name="anomaly">Punto respaldado</item> <!-- TODO -->
+     <item name="anomaly">Punto respaldado</item>
   </string-array>
 
   <string-array name="pickerType">
@@ -115,8 +115,8 @@
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">Grados sexagesimal 360ş</item>
-     <item name="grads">Grados centesimal 400ş</item>
+     <item name="degrees">Grados sexagesimal 360º</item>
+     <item name="grads">Grados centesimal 400º</item>
   </string-array>
 
   <string-array name="unitLocation">

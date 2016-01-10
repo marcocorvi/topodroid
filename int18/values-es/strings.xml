@@ -5,7 +5,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Haga clic de nuevo para salir</string>
 
-    <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\nÂ¿Quiere volver a instalar los elementos de dibujo?</string>
+    <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
     <string name="version_title">Versión de actualización</string>
 
     <string name="POINT">Punto</string>
@@ -14,16 +14,16 @@
     <string name="HELP">Ayuda</string>
     <string name="STATION">Estación</string>
 
-    <!-- TODO string name="cut">CUT</string -->
-    <!-- TODO string name="copy">COPY</string -->
-    <!-- TODO string name="paste">PASTE</string -->
-    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+    <string name="cut">Cortar</string>
+    <string name="copy">Copiar</string>
+    <string name="paste">Pegar</string>
+    <string name="copied">Copiado al portapapeles</string>
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
     <string name="memory_data">Datos DistoX</string>
 
-    <string name="td_symbol_text">¿Necesitas instalar los símbolos de dibujo? \ Puede hacerlo más adelante con la aplicación TdSymbol</string>
+    <string name="td_symbol_text">¿Necesitas instalar los símbolos de dibujo? \nPuede hacerlo más adelante con la aplicación TdSymbol</string>
     <string name="td_symbol_ask">No preguntar de nuevo</string>
 
     <string name="thp_label">Texto</string>
@@ -38,7 +38,7 @@
     <string name="missing_point">Punto</string>
     <!-- UNUSED string name="missing_save">Faltan símbolos.\nno guardado</string -->
     <string name="missing_station">Falta Estación</string>
-    <string name="missing_symbols">Faltan símbolos. \nÂ¿Desea guardar de todos modos?</string>
+    <string name="missing_symbols">Faltan símbolos. \n¿Desea guardar de todos modos?</string>
     <!-- UNUSED string name="missing_title">Faltan símbolos</string -->
     <string name="missing_warning">Faltan los siguientes símbolos en el dibujo.\n</string>
     <string name="failed_snap_to_line">Ninguna línea cercana al borde</string>
@@ -54,7 +54,7 @@
     <string name="calib_delete">Eliminar calibración </string>
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
-    <string name="calib_gm_undelete">Â¿Eliminar datos de calibración?</string>
+    <string name="calib_gm_undelete">¿Eliminar datos de calibración?</string>
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
     <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos ...</string>
@@ -77,11 +77,11 @@
     <string name="linear">lineal</string>
     <string name="non_linear">No lineal</string>
    
-    <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ nUse el algoritmo lineal</string>
+    <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string>
     <string name="device_busy">Dispositivo ocupado</string>
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">información del dispositivo</string>
-    <string name="device_model_set">Â¿Desea cambiar de dispositivo?</string>
+    <string name="device_model_set">¿Desea cambiar de dispositivo?</string>
     <string name="device_none">DistoX no seleccionado</string>
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
@@ -108,7 +108,7 @@
     <string name="extend_right">Drch.</string>
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
-    <string name="splay_at_to">LRUD hacia la estación</string>
+    <string name="splay_at_to">LRUD en la estación</string>
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_plots">No hay suficientes dibujos</string>
@@ -143,7 +143,7 @@
     <string name="h_geoid_hint">H geoide [metros]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">Errores de cierre de bucle</string>
+    <string name="loop_closure_errors">Error en cierre de bucle</string>
     <string name="loop_none">No hay Bucle</string>
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
@@ -171,7 +171,7 @@
     <string name="error_value_required">Introducir valor</string>
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
-    <string name="group_policy_four">Política: Grupo en cuatro</string>
+    <string name="group_policy_four">Política: Grupo de cuatro</string>
     <string name="group_policy_sixteen">Política: cuatro grupos de cuatro, otro solo</string>
     <string name="group_policy_distance">Política: Grupo según la distancia angular</string>
     <string name="group_reset">Resetear grupos</string>
@@ -183,8 +183,8 @@
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
     <string name="none">Nada</string>
-    <string name="barrier_add">Â¿Dividir la visualización de la línea central?</string>
-    <string name="barrier_del">Â¿Continúe la visualización de la línea central?</string>
+    <string name="barrier_add">¿Dividir la visualización de la línea central?</string>
+    <string name="barrier_del">¿Unir la visualización de la línea central?</string>
     <string name="hidden_add">Oculta pantalla de la línea media</string>
     <string name="hidden_del">Mostrar pantalla de la línea media</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
@@ -204,10 +204,10 @@
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
     <string name="no_photos">Topografía sin foto</string>
-    <string name="no_plots">Topografía sin dibujos\nUse el botón para añadir uno</string>
+    <string name="no_plots">Topografía sin dibujos\Use el botón para añadir uno</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
-    <string name="no_shots">Topografía sin mediciones.\nUse botón para descargar mediciones</string>
+    <string name="no_shots">Topografía sin mediciones.\Use botón para descargar mediciones</string>
     <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
@@ -242,7 +242,7 @@
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
     <string name="menu_sync">Sincro</string>
-    <string name="menu_tdr2th2">Dibujos TH2</string>
+    <string name="menu_tdr2th2">Dibujos Th2</string>
     <string name="menu_validate">Validar</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
@@ -268,7 +268,7 @@
     <string name="photo_shot">Añadir toma</string>
     <string name="photo_survey">Dividir topografía</string>
     <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>
-    <string name="plot_delete">Â¿Eliminar dibujo?</string>
+    <string name="plot_delete">¿Eliminar dibujo?</string>
     <string name="item_delete">Eliminar elemento %1$s ?</string>
     <string name="plot_duplicate_name">Nombre dibujo duplicado</string>
     <string name="plot_name">Nombre dibujo</string>
@@ -276,7 +276,7 @@
     <string name="plot_not_found">No hay dibujo</string>
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
     <!-- UNUSED string name="plot_null_start">Falta base estación</string -->
-    <string name="plot_recover">Â¿Actualizar copia de seguridad de la topografía?</string>
+    <string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string>
     <string name="plot_start">Base estación</string>
     <!-- UNUSED string name="plot_view">Vista Estación</string -->
     <!-- UNUSED string name="read_">Leer </string -->
@@ -291,7 +291,7 @@
     <string name="splay">Toma Secundaria</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
     <string name="too_many_legs_xsection">Demasiadas tomas de X-sección</string>
-    <string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a th2</string>
+    <string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string>
     <string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string>
 
     <string name="sensor">Sensor</string>
@@ -323,7 +323,7 @@
     <string name="shot_to">Toma hasta</string>
 
 <!-- NOT USED -->
-    <!-- UNUSED string name="make_surface">Ya existe en superficie Â¿Reemplazar?</string -->
+    <!-- UNUSED string name="make_surface">Ya existe en superficie ¿Reemplazar?</string -->
     <!-- UNUSED string name="sketch3d_name">Nombre</string -->
     <!-- UNUSED string name="sketch3d_new">Nuevo dibujo 3D</string -->
     <!-- UNUSED string name="sketch3d_next">Falta nombre de dibujo 3D</string -->
@@ -333,15 +333,15 @@
     <!-- UNUSED string name="sketch3d_start">Estación base</string -->
 
     <string name="station">Estación</string>
-    <string name="station_ask">Â¿Insertar estación?</string>
-    <string name="station_set">Â¿Desea continuar la topografía desde aquí?</string>
+    <string name="station_ask">¿Insertar estación?</string>
+    <string name="station_set">¿Desea continuar la topografía desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <string name="station_next">Siguiente estación</string>
     <string name="station_viewed">Vista de estación</string>
     <string name="survey_exists">Conflicto Nombre Topografía</string>
     <string name="survey_date">yyyy.mm.dd</string>
-    <string name="survey_delete">Â¿Eliminar Topografía?</string>
-    <string name="survey_split">Â¿Dividir topografía?</string>
+    <string name="survey_delete">¿Eliminar Topografía?</string>
+    <string name="survey_split">¿Dividir topografía?</string>
     <string name ="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
@@ -396,8 +396,8 @@
     <string name="distox_err_headtail_eof">Fallo memoria EOF DistoX</string>
     <string name="distox_err_connected">Dispositivo ya conectado</string>
 
-    <!-- UNUSED string name="ask_close">Â¿Cerrar TopoDroid?</string -->
-    <string name="ask_reset">Â¿Reiniciar memoria DistoX?</string>
+    <!-- UNUSED string name="ask_close">¿Cerrar TopoDroid?</string -->
+    <string name="ask_reset">¿Reiniciar memoria DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
 
     <string name="button_add"       >Añadir    </string>
@@ -573,11 +573,11 @@
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
-    <string name="title_profile_flip">Â¿Quieres cambiar al perfil del dibujo?</string>
+    <string name="title_profile_flip">¿Quieres cambiar al perfil del dibujo?</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>
-    <string name="title_shot_delete">Â¿Quiere eliminar toma?</string>
+    <string name="title_shot_delete">¿Quiere eliminar toma?</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->
@@ -594,7 +594,7 @@
 
   <string name="pref_cat_survey">Opciones de topografía</string>
   <string name="pref_cat_drawing">Opciones de dibujo</string>
-  <string name="pref_cat_import_export">Importar / Exportar</string>
+  <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_calib">Opciones de calibración</string>
   <string name="pref_cat_device">Opciones de distoX</string>
   <!-- UNUSED string name="pref_cat_sketch">Opciones de dibujo</string -->
@@ -608,9 +608,9 @@
   <!-- UNUSED string name="pref_bootloader_title">Gestor de arranque</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Habilitar gestor de arranque</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
-  <string name="pref_mkeyboard_summary">Activar / Desactivar los teclados personalizados</string>
+  <string name="pref_mkeyboard_summary">Activar/Desactivar los teclados personalizados</string>
   <string name="pref_cosurvey_title">Topografía compartida</string>
-  <string name="pref_cosurvey_summary">Activar / Desactivar topografías compartidas</string>
+  <string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
@@ -622,15 +622,15 @@
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
-  <!-- TODO string name="pref_ortho_lrud_title">LRUD splay angle</string -->
-  <!-- TODO string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string -->
-  <!-- TODO string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string -->
+  <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
+  <string name="pref_ortho_lrud_summary">Ángulo mínimo para tomas laterales</string>
+  <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas laterales</string>
   <string name="pref_survex_eol_title">Terminación de línea Survex</string>
   <string name="pref_survex_eol_summary">Terminación de línea Survex</string>
   <string name="pref_survex_splay_title">Estación toma lateral Survex</string>
   <string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
-  <string name="pref_survex_lrud_summary">Añadir LRUD a exportación Survex</string>
+  <string name="pref_survex_lrud_summary">Añadir toma lateral a exportación Survex</string>
   <string name="pref_csv_length_title">Unidad de longitud CSV</string>
   <string name="pref_csv_length_summary">Unidad de longitud exportación CSV</string>
 
@@ -660,7 +660,7 @@
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
   <string name="pref_plot_screen_title">Opciones de pantalla de dibujo</string>
-  <!-- FIXME string name="pref_tool_line_title">Opciones de línea</string -->
+  <string name="pref_tool_line_title">Opciones de línea</string>
   <string name="pref_tool_point_title">Opciones de Puntos</string>
   <string name="pref_location_title">Opciones de ubicación</string>
   <string name="pref_accuracy_title">Opciones de medición</string>
@@ -709,8 +709,8 @@
   <string name="pref_team_message">Equipo de topógrafos por defecto</string>
 
   <string name="pref_ethr_title">Ampliar límites</string>
-  <string name="pref_ethr_summary">Ampliar límites de la toma Secundaria</string>
-  <string name="pref_ethr_message">Calculo ampliación límite de la toma secundaria</string>
+  <string name="pref_ethr_summary">Ampliar límites de la toma lateral</string>
+  <string name="pref_ethr_message">Calculo ampliación límite de la toma lateral</string>
   <string name="pref_vthr_title">Toma límite</string>
   <string name="pref_vthr_summary">límite visual vertical por LRUD/WENS</string>
   <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
@@ -896,7 +896,7 @@
   <string name="pref_log_survey">Topografía</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unidades</string>
-  <string name="pref_log_zip">ZIP</string>
+  <string name="pref_log_zip">Zip</string>
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fina</string -->
