@@ -26,10 +26,13 @@ package com.topodroid.DistoX;
 // import java.io.BufferedReader;
 // import java.io.BufferedInputStream;
 
+import android.net.Uri;
+
 import android.app.Dialog;
 import android.os.Bundle;
 
 import android.content.Context;
+import android.content.Intent;
 
 import android.widget.EditText;
 import android.widget.Button;
@@ -57,6 +60,7 @@ public class LongLatAltDialog extends Dialog
   private Button   mBtnNS;
   private Button   mBtnEW;
   private Button   mBtnOK;
+  private Button   mBtnView;
 
   public LongLatAltDialog( Context context, LocationDialog parent )
   {
@@ -106,6 +110,8 @@ public class LongLatAltDialog extends Dialog
     mBtnEW.setOnClickListener( this );
     mBtnOK = (Button) findViewById(R.id.button_ok);
     mBtnOK.setOnClickListener( this );
+    mBtnView = (Button) findViewById(R.id.button_view);
+    mBtnView.setOnClickListener( this );
 
     setTitle( R.string.title_coord );
   }
@@ -118,6 +124,8 @@ public class LongLatAltDialog extends Dialog
 
     boolean north = mBtnNS.getText().toString().equals("N");
     boolean east  = mBtnEW.getText().toString().equals("E");
+    String longit, latit;
+    double lng, lat, alt, asl;
 
     if ( b == mBtnNS ) {
       mBtnNS.setText( north ? "S" : "N" );
@@ -125,15 +133,42 @@ public class LongLatAltDialog extends Dialog
     } else if ( b == mBtnEW ) {
       mBtnEW.setText( east ? "W" : "E" );
       return;
-    } else if ( b == mBtnOK ) {
-   
-      String longit = mEditLong.getText().toString();
-      // TODO convert string to dec-degrees
+    } else if ( b == mBtnView ) {
+      longit = mEditLong.getText().toString();
       if ( longit == null || longit.length() == 0 ) {
         mEditLong.setError( mContext.getResources().getString( R.string.error_long_required ) );
         return;
       }
-      String latit = mEditLat.getText().toString();
+      latit = mEditLat.getText().toString();
+      if ( latit == null || latit.length() == 0 ) {
+        mEditLat.setError( mContext.getResources().getString( R.string.error_lat_required) );
+        return;
+      }
+      lng = FixedInfo.string2double( longit );
+      if ( lng < -1000 ) {
+        mEditLong.setError( mContext.getResources().getString( R.string.error_long_required ) );
+        return;
+      } 
+      lat = FixedInfo.string2double( latit );
+      if ( lat < -1000 ) {
+        mEditLat.setError( mContext.getResources().getString( R.string.error_lat_required) );
+        return;
+      }
+      if ( ! north ) lat = -lat;
+      if ( ! east )  lng = -lng;
+
+      Uri uri = Uri.parse( "geo:" + lat + "," + lng );
+      mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
+
+    } else if ( b == mBtnOK ) {
+   
+      // TODO convert string to dec-degrees
+      longit = mEditLong.getText().toString();
+      if ( longit == null || longit.length() == 0 ) {
+        mEditLong.setError( mContext.getResources().getString( R.string.error_long_required ) );
+        return;
+      }
+      latit = mEditLat.getText().toString();
       if ( latit == null || latit.length() == 0 ) {
         mEditLat.setError( mContext.getResources().getString( R.string.error_lat_required) );
         return;
@@ -144,18 +179,18 @@ public class LongLatAltDialog extends Dialog
         mEditAlt.setError( mContext.getResources().getString( R.string.error_alt_required) );
         return;
       }
-      double lng = FixedInfo.string2double( longit );
+      lng = FixedInfo.string2double( longit );
       if ( lng < -1000 ) {
         mEditLong.setError( mContext.getResources().getString( R.string.error_long_required ) );
         return;
       } 
-      double lat = FixedInfo.string2double( latit );
+      lat = FixedInfo.string2double( latit );
       if ( lat < -1000 ) {
         mEditLat.setError( mContext.getResources().getString( R.string.error_lat_required) );
         return;
       }
-      double alt = -1000.0;
-      double asl = -1000.0;
+      alt = -1000.0;
+      asl = -1000.0;
       if ( ( altit == null || altit.length() == 0 ) ) {
         try {
           asl = Double.parseDouble( aslit.replace(",", ".") );

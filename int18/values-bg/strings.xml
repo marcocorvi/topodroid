@@ -453,6 +453,7 @@
     <string name="button_start"     >Старт     </string>
     <string name="button_stop"      >Стоп      </string>
     <string name="button_upload"    >Качване   </string>
+    <!-- TODO string name="button_view"      >View      </string -->
     <string name="button_yes"       >Да       </string>
 
     <!-- UNUSED string name="button_sharp"     >Изостряне</string -->

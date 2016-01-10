@@ -34,6 +34,8 @@ import android.widget.GridView;
 // import android.view.KeyEvent;
 import android.inputmethodservice.KeyboardView;
 
+import android.net.Uri;
+
 // import android.widget.Toast;
 
 import android.util.Log;
@@ -63,6 +65,7 @@ public class FixedDialog extends Dialog
   private TextView mTVfix_station;
   private Button   mButtonDrop;
   private Button   mButtonDecl;
+  private Button   mButtonView;
   private Button   mButtonGeomag;
   private Button   mButtonStation;
   private Button   mButtonConvert;
@@ -117,6 +120,8 @@ public class FixedDialog extends Dialog
     mETdecl.setText( Float.toString( mParent.getDeclination() ) );
     mButtonDecl = (Button) findViewById( R.id.fix_save_decl );
 
+    mButtonView = (Button) findViewById( R.id.fix_view );
+
     mButtonConvert = (Button) findViewById( R.id.fix_convert );
     mTVcrs = (TextView) findViewById( R.id.fix_crs );
 
@@ -142,6 +147,7 @@ public class FixedDialog extends Dialog
     mButtonGeomag.setOnClickListener( this );
     mButtonDrop.setOnClickListener( this );
     mButtonDecl.setOnClickListener( this );
+    mButtonView.setOnClickListener( this );
     mButtonStation.setOnClickListener( this );
     mButtonConvert.setOnClickListener( this );
     mButtonOrthometric.setOnClickListener( this );
@@ -285,6 +291,9 @@ public class FixedDialog extends Dialog
           }
         }
       }
+    } else if ( b == mButtonView ) {
+      Uri uri = Uri.parse( "geo:" + mFxd.lat + "," + mFxd.lng );
+      mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
     } else if ( b == mButtonDrop ) {
       mParent.dropFixed( mFxd );
       mSubParent.refreshList();

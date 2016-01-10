@@ -27,7 +27,6 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
-
 import android.widget.Toast;
 
 // import android.util.Log;
@@ -40,6 +39,7 @@ import android.view.View.OnClickListener;
 
 public class SurveyNewDialog extends Dialog
                              implements View.OnClickListener
+                             , View.OnLongClickListener
 {
   private TopoDroidActivity mParent;
   private Context mContext;
@@ -95,6 +95,7 @@ public class SurveyNewDialog extends Dialog
     mEditDate.setOnClickListener( this );
 
     mEditStation.setText( TDSetting.mInitStation );
+    mEditStation.setOnLongClickListener( this );
 
     if ( TDSetting.mDefaultTeam.length() > 0 ) {
       mEditTeam.setText( TDSetting.mDefaultTeam );
@@ -111,10 +112,17 @@ public class SurveyNewDialog extends Dialog
   }
 
   // ------------------------------------------
+  @Override
+  public boolean onLongClick(View v)
+  {
+    CutNPaste.makePopup( mContext, (EditText)v );
+    return true;
+  }
    
   @Override
   public void onClick(View view)
   {
+    CutNPaste.dismissPopup();
     Button b = (Button)view;
 
     // if ( b == mBTback ) {
@@ -209,6 +217,13 @@ public class SurveyNewDialog extends Dialog
     }
     
     return true;
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( CutNPaste.dismissPopup() ) return;
+    dismiss();
   }
 
 }

@@ -449,6 +449,7 @@
     <string name="button_start"     >Start</string>
     <string name="button_stop"      >Stop</string>
     <string name="button_upload"    >Upload    </string>
+    <string name="button_view"      >View      </string>
     <string name="button_yes"       >Yes       </string>
 
     <!-- UNUSED string name="button_sharp"     >Sharp</string -->

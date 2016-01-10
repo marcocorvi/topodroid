@@ -188,6 +188,15 @@
        android:layout_below="@id/layout5"
        android:paddingBottom="3dp"
     >  
+      <Button android:id="@+id/fix_view"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_view"
+        />
       <Button android:id="@+id/fix_convert"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 

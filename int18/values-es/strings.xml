@@ -432,6 +432,7 @@
     <string name="button_start"     >Inicio</string>
     <string name="button_stop"      >Stop</string>
     <string name="button_upload"    >Cargar    </string>
+    <!-- TODO string name="button_view"      >View      </string -->
     <string name="button_yes"       >Si        </string>
 
     <!-- UNUSED string name="button_sharp"     >agudo</string -->
