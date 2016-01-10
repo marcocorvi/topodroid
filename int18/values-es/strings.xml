@@ -358,7 +358,7 @@
     <string name="write_ok">Calibración Escrita en DistoX</string>
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
-    <string name="unzip_fail">Error en archivo medida</string>
+    <string name="unzip_fail">Error al importar archivo</string>
     <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
     <string name="survey_info">Info Topografía</string>
@@ -374,7 +374,7 @@
     <string name="stat_station">Estaciones %1$d</string>
     <string name="stat_surface">mediciones Superficie %1$d %2$.1f</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
-    <string name="shot_title">TOMA %1$s - %2$s"</string>
+    <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 
     <string name="hide_blank">Mediciones en blanco</string>
