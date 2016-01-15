@@ -15,10 +15,10 @@
     <string name="HELP">ПОМОЩЬ</string>
     <string name="STATION">ПИКЕТ </string>
 
-    <!-- TODO string name="cut">CUT</string -->
-    <!-- TODO string name="copy">COPY</string -->
-    <!-- TODO string name="paste">PASTE</string -->
-    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+    <string name="cut">ВЫРЕЗАТЬ</string>
+    <string name="copy">КОПИРОВАТЬ</string>
+    <string name="paste">ВСТАВИТЬ</string>
+    <string name="copied">Скопировано %1$s в буфер обмена</string>
 
     <string name="memoryA3">Память DistoX A3</string>
     <string name="memoryX310">Память DistoX X310</string>
@@ -444,9 +444,9 @@
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
-    <string name="button_store"     >Записать</string>
+    <string name="button_store"     >Запсать</string>
     <string name="button_upload"    >Передать в Disto </string>
-    <!-- TODO string name="button_view"      >View      </string -->
+    <string name="button_view"      >Просмотр      </string>
     <string name="button_yes"       >Да        </string>
 
     <!-- UNUSED string name="button_sharp"     >Острый</string -->
