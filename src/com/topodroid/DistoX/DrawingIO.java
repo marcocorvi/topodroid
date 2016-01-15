@@ -809,14 +809,13 @@ class DrawingIO
     }
   }
 
-  static public void dataStream2Therion( File file, BufferedWriter out )
+  static public void dataStream2Therion( File file, BufferedWriter out, RectF bbox, boolean endscrap )
   {
     int version = 0;
     boolean in_scrap = false;
 
     boolean do_north = false;
     float north_x1=0, north_y1=0, north_x2=0, north_y2=0;
-    RectF bbox = new RectF();
 
     String name = "";
     int type = 0;
@@ -886,6 +885,7 @@ class DrawingIO
               out.write( DrawingStationPath.loadDataStream( version, dis ).toTherion() );
               break;
             case 'X':
+              // NOTE need to check XSection ??? STATION_XSECTION
               out.write( DrawingStationName.loadDataStream( version, dis ).toTherion() );
               break;
             case 'F':
@@ -899,7 +899,7 @@ class DrawingIO
               break;
           } 
         }
-        exportTherionClose( out );
+        if (endscrap ) exportTherionClose( out );
         dis.close();
         fis.close();
       } catch ( FileNotFoundException e ) {

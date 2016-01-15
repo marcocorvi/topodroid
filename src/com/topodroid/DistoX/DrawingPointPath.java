@@ -56,7 +56,7 @@ public class DrawingPointPath extends DrawingPath
 
   public DrawingPointPath( int type, float x, float y, int scale, String options )
   {
-    super( DrawingPath.DRAWING_PATH_POINT );
+    super( DrawingPath.DRAWING_PATH_POINT, null );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
     mPointType = type;
     setCenter( x, y );

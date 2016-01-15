@@ -1720,9 +1720,13 @@ public class TopoDroidApp extends Application
     return 1; // CALIB_ALGO_LINEAR
   }  
 
+  // --------------------------------------------------------
+
   void setX310Laser( int what, Handler /* ILister */ lister ) // 0: off, 1: on, 2: measure // FIXME LISTER
   {
-    mComm.setX310Laser( mDevice.mAddress, what, lister );
+    if ( mComm != null && mDevice != null ) {
+      mComm.setX310Laser( mDevice.mAddress, what, lister );
+    }
   }
 
   // int readFirmwareHardware()
@@ -1732,19 +1736,21 @@ public class TopoDroidApp extends Application
 
   int dumpFirmware( String filename )
   {
-    // Log.v( "DistoX", "dump firmware " + filename );
+    if ( mComm == null || mDevice == null ) return -1;
     return mComm.dumpFirmware( mDevice.mAddress, TDPath.getBinFile(filename) );
   }
 
   int uploadFirmware( String filename )
   {
-    // Log.v( "DistoX", "upload firmware " + filename );
+    if ( mComm == null || mDevice == null ) return -1;
     String pathname = TDPath.getBinFile( filename );
     TDLog.LogFile( "Firmware upload address " + mDevice.mAddress );
     TDLog.LogFile( "Firmware upload file " + pathname );
     if ( ! pathname.endsWith( "bin" ) ) return 0;
     return mComm.uploadFirmware( mDevice.mAddress, pathname );
   }
+
+  // ----------------------------------------------------------------------
 
   long insert2dPlot( long sid , String name, String start )
   {

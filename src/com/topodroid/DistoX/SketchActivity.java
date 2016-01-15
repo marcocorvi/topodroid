@@ -678,7 +678,7 @@ public class SketchActivity extends ItemDrawer
     // mIsInSection = false;
 
     mSketchSurface = (SketchDrawingSurface) findViewById(R.id.sketchSurface);
-    mSketchSurface.previewPath = new DrawingPath( DrawingPath.DRAWING_PATH_LINE );
+    mSketchSurface.previewPath = new DrawingPath( DrawingPath.DRAWING_PATH_LINE, null );
     mSketchSurface.previewPath.mPath = new Path();
     mSketchSurface.previewPath.setPaint( mPainter.previewPaint );
     mSketchSurface.setOnTouchListener(this);

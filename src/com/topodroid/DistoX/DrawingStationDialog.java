@@ -134,7 +134,7 @@ public class DrawingStationDialog extends Dialog
       } else if (view.getId() == R.id.btn_splays ) {
         mActivity.toggleStationSplays( mStationName );
       } else if (view.getId() == R.id.btn_xsection ) {
-        mActivity.openXSection( mStationName, mActivity.getPlotType() );
+        mActivity.openXSection( mStation, mStationName, mActivity.getPlotType() );
       }
       dismiss();
     }

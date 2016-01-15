@@ -60,6 +60,7 @@ public class DrawingSurface extends SurfaceView
     private AttributeSet mAttrs;
     private int mWidth;            // canvas width
     private int mHeight;           // canvas height
+    private long mType; 
 
     private DrawingCommandManager commandManager; // FIXME not private only to export DXF
     DrawingCommandManager mCommandManager1; 
@@ -106,6 +107,7 @@ public class DrawingSurface extends SurfaceView
 
     void setManager( long type ) 
     {
+      mType = type;
       // Log.v( "DistoX", " set manager type " + type );
       if ( type == PlotInfo.PLOT_EXTENDED ) {
         commandManager = mCommandManager2;
@@ -253,9 +255,12 @@ public class DrawingSurface extends SurfaceView
     }
 
     // called by DrawingActivity::computeReference
-    public DrawingStationName addDrawingStation( NumStation num_st, float x, float y, boolean selectable )
+    public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
     {
-      // TDLog.Log( TDLog.LOG_PLOT, "addDrawingStation " + num_st.name + " " + x + " " + y );
+      // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
+      // FIXME STATION_XSECTION
+      // DO as when loaded
+
       DrawingStationName st = new DrawingStationName( num_st, x, y );
       if ( num_st.mHidden == 1 ) {
         st.setPaint( DrawingBrushPaths.fixedStationHiddenPaint );
@@ -264,15 +269,24 @@ public class DrawingSurface extends SurfaceView
       } else {
         st.setPaint( DrawingBrushPaths.fixedStationPaint );
       }
+      if ( xsections != null ) {
+        for ( PlotInfo plot : xsections ) {
+          if ( plot.start.equals( st.mName ) ) {
+            st.setXSection( plot.azimuth, plot.clino, mType );
+            break;
+          }
+        }
+      }
       commandManager.addStation( st, selectable );
       return st;
     }
 
     // called by DrawingActivity (for SECTION)
     // note: not selectable
-    public DrawingStationName addDrawingStation( String name, float x, float y )
+    public DrawingStationName addDrawingStationName( String name, float x, float y )
     {
-      // TDLog.Log( TDLog.LOG_PLOT, "addDrawingStation " + name + " " + x + " " + y );
+      // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
+      // NOTE No station_XSection in X-Sections
       DrawingStationName st = new DrawingStationName( name, x, y );
       st.setPaint( DrawingBrushPaths.fixedStationPaint );
       commandManager.addStation( st, false );
@@ -607,6 +621,12 @@ public class DrawingSurface extends SurfaceView
     } else {
       mSplayStations.add( station );
     }
+  }
+  
+  void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext )
+  {
+    mCommandManager1.setStationXSections( xsection_plan, PlotInfo.PLOT_PLAN );
+    mCommandManager2.setStationXSections( xsection_ext,  PlotInfo.PLOT_EXTENDED );
   }
 
 }

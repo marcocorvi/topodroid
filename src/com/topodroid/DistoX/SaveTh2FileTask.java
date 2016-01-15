@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -32,12 +31,12 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
   private DrawingSurface mSurface;
   private String mFullName1;
   private int mType; // plot type
-  private String mSuffix;
+  private int mSuffix;
   private int mRotate;  // nr. backups to rotate
 
   public SaveTh2FileTask( Context context, Handler handler,
                           TopoDroidApp app, DrawingSurface surface, 
-                          String fullname1, long type, String suffix, int rotate )
+                          String fullname1, long type, int suffix, int rotate )
   {
      mContext  = context;
      mHandler  = handler;
@@ -49,6 +48,7 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
      mRotate = rotate;
      if ( mRotate > NR_BACKUP ) mRotate = NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Th2 File Task " + mFullName1 + " type " + mType );
+     // Log.v( "DistoX", "Save Th2 File Task " + mFullName1 + " type " + mType + " suffix " + mSuffix );
   }
 
   private void rotateBackups( String filename )
@@ -73,11 +73,15 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
   protected Boolean doInBackground(Intent... arg0)
   {
     boolean ret = false;
+    boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT );
     synchronized( TDPath.mTherionLock ) {
       // Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
-      String filename = (TDSetting.mBinaryTh2)? TDPath.getTdrFileWithExt( mFullName1 ) + ".bck"
-                                              : TDPath.getTh2FileWithExt( mFullName1 ) + ".bck";
-      rotateBackups( filename );
+      
+      String filename = do_binary ? TDPath.getTdrFileWithExt( mFullName1 ) + ".bck"
+                                  : TDPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+      if ( mSuffix != PlotSave.EXPORT ) {
+        rotateBackups( filename );
+      }
 
       long now  = System.currentTimeMillis();
       long time = now - 60000; // one minute before now
@@ -91,9 +95,9 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
         }
       }
 
-      String tempname1 = TDPath.getTmpFileWithExt( mSuffix + Long.toString(now) );
+      String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
       File file1 = new File( tempname1 );
-      if ( TDSetting.mBinaryTh2 ) {
+      if ( do_binary ) {
         DrawingIO.exportDataStream( mSurface, mType, file1, mFullName1 );
       } else {
         DrawingIO.exportTherion( mSurface, mType, file1, mFullName1, PlotInfo.projName[mType] );
@@ -104,8 +108,8 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
         file1.delete();
       } else {
         // Log.v("DistoX", "save completed");
-        String filename1 = (TDSetting.mBinaryTh2)? TDPath.getTdrFileWithExt( mFullName1 )
-                                                        : TDPath.getTh2FileWithExt( mFullName1 );
+        String filename1 = do_binary ? TDPath.getTdrFileWithExt( mFullName1 )
+                                     : TDPath.getTh2FileWithExt( mFullName1 );
         (new File( filename1 )).renameTo( new File( filename1 + ".bck" ) );
         file1.renameTo( new File( filename1 ) );
       }

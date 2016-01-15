@@ -48,6 +48,19 @@ public class DrawingPath implements ICanvasCommand
   public static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
   public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
 
+
+  DrawingPath( int type, DistoXDBlock blk )
+  {
+    mType  = type;
+    mBlock = blk; 
+    mBBox  = new RectF();
+    mPaint = DrawingBrushPaths.errorPaint;
+    // dir = 4;
+    // x1 = y1 = 0.0f;
+    // x2 = y2 = 1.0f;
+    // dx = dy = 1.0f;
+  }
+
   static boolean isReferenceType( int type ) 
   {
     return type < DrawingPath.DRAWING_PATH_STATION || type >= DrawingPath.DRAWING_PATH_NAME;
@@ -88,8 +101,6 @@ public class DrawingPath implements ICanvasCommand
     return true;
   }
   
-                 
-
   public void flipXAxis()
   {
     float offx = 2 * ( DrawingUtil.CENTER_X + cx );
@@ -157,28 +168,6 @@ public class DrawingPath implements ICanvasCommand
     mPath.lineTo( x1, y1-r2 );
     mPath.lineTo( x1-r, y1 );
     mPath.offset( off_x, off_y );
-  }
-
-  DrawingPath( int type )
-  {
-    mType = type;
-    mBlock = null;
-    mBBox  = new RectF();
-    // dir = 4;
-    // x1 = y1 = 0.0f;
-    // x2 = y2 = 1.0f;
-    // dx = dy = 1.0f;
-  }
-
-  DrawingPath( int type, DistoXDBlock blk )
-  {
-    mType = type;
-    mBlock = blk; 
-    mBBox  = new RectF();
-    // dir = 4;
-    // x1 = y1 = 0.0f;
-    // x2 = y2 = 1.0f;
-    // dx = dy = 1.0f;
   }
 
   public void setPaint( Paint paint ) { mPaint = paint; }

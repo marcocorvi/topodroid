@@ -717,22 +717,6 @@ public class DrawingCommandManager
       }
     }
   }
- 
-  // called by DrawingSurface::addDrawingStation
-  public void addStation( DrawingStationName st, boolean selectable )
-  {
-    // Log.v("PTDistoX", "add station " + st.mName + " scene " + st.cx + " " + st.cy
-    //                + " num " + st.mStation.e + " " + st.mStation.s );
-    synchronized( mStations ) {
-      mStations.add( st );
-      if ( selectable ) {
-        synchronized( mSelection ) {
-          // Log.v( "DistoX", "selection add station " + st.mName );
-          mSelection.insertStationName( st );
-        }
-      }
-    }
-  }
 
   // void setScaleBar( float x0, float y0 ) 
   // {
@@ -1991,6 +1975,38 @@ public class DrawingCommandManager
       pw.format("        </items>\n");
       pw.format("      </layer>\n");
       pw.format("    </layers>\n");
+    }
+  }
+ 
+  // called by DrawingSurface::addDrawingStationName
+  public void addStation( DrawingStationName st, boolean selectable )
+  {
+    Log.v("DistoX", "add station " + st.mName + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
+    //                + " num " + st.mStation.e + " " + st.mStation.s );
+    synchronized( mStations ) {
+      mStations.add( st );
+      if ( selectable ) {
+        synchronized( mSelection ) {
+          // Log.v( "DistoX", "selection add station " + st.mName );
+          mSelection.insertStationName( st );
+        }
+      }
+    }
+  }
+
+  // this is not efficient: the station names should be stored in a tree (key = name) for log-time search
+  // type = type of the plot
+  void setStationXSections( List<PlotInfo> xsections, long type )
+  {
+    for ( DrawingStationName st : mStations ) {
+      String name = st.mName;
+      // Log.v( "DistoX", "Station <" + name + ">" );
+      for ( PlotInfo plot : xsections ) {
+        if ( name.equals( plot.start ) ) {
+          st.setXSection( plot.azimuth, plot.clino, type );
+          break;
+        }
+      }
     }
   }
 }

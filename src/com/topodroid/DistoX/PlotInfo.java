@@ -18,6 +18,7 @@ import android.content.res.Resources;
 class PlotInfo
 {
   // sketch types
+  public static final long PLOT_NULL       = -1; 
   public static final long PLOT_X_SECTION  = 0; // X-section at a station (defined in PLAN plot)
   public static final long PLOT_PLAN       = 1;
   public static final long PLOT_EXTENDED   = 2;

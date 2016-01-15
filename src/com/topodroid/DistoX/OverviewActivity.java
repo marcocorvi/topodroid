@@ -289,7 +289,8 @@ public class OverviewActivity extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        dst = mOverviewSurface.addDrawingStation( st, DrawingUtil.toSceneX(st.e) - xoff, DrawingUtil.toSceneY(st.s) - yoff, true );
+        dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.e) - xoff,
+                                                          DrawingUtil.toSceneY(st.s) - yoff, true, null );
       }
     } else { // if ( type == PlotInfo.PLOT_EXTENDED && 
       for ( NumShot sh : shots ) {
@@ -307,7 +308,8 @@ public class OverviewActivity extends ItemDrawer
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        dst = mOverviewSurface.addDrawingStation( st, DrawingUtil.toSceneX(st.h) - xoff, DrawingUtil.toSceneY(st.v) - yoff, true );
+        dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h) - xoff,
+                                                          DrawingUtil.toSceneY(st.v) - yoff, true, null );
       }
     }
 
@@ -746,7 +748,7 @@ public class OverviewActivity extends ItemDrawer
           mStartY = y_canvas/mZoom - mOffset.y;
           mOnMeasure = 2;
           // add reference point
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH );
+          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
           path.setPaint( DrawingBrushPaths.highlightPaint );
           path.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
           mOverviewSurface.setFirstReference( path );
@@ -777,7 +779,7 @@ public class OverviewActivity extends ItemDrawer
           // setTitle( sw.getBuffer().toString() );
           setTitle( msg );
           // replace target point
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH );
+          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
           path.setPaint( DrawingBrushPaths.fixedBluePaint );
           path.makePath( mCrossPath, new Matrix(), x, y );
           path.mPath.moveTo( mStartX, mStartY );

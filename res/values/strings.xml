@@ -478,6 +478,10 @@
     <string name="remote_reset">Reset BT</string>
     <string name="download">Download</string>
 
+    <string name="popup_do_splay">Splay shot</string>
+    <string name="popup_do_leg">Leg shots</string>
+
+
 <!--
     <string name="btn_3d">3D</string>
 -->

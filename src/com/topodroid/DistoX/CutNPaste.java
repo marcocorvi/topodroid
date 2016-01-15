@@ -21,7 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.Gravity;
+import android.view.MotionEvent;
 
 import android.graphics.Paint.FontMetrics;
 
@@ -109,7 +112,7 @@ class CutNPaste
     FontMetrics fm = btn_cut.getPaint().getFontMetrics();
     int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 1.3); // 0.7
     int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 2.7); // 1.7
-    // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
+    // int h1 = (int)( textview0.getHeight() * 7 * 1.1 ); this is 0
     btn_cut.setWidth( w );
     btn_copy.setWidth( w );
     btn_paste.setWidth( w );
@@ -120,18 +123,141 @@ class CutNPaste
 
   static Button makeButton( Context context, String text, int color, int size )
   {
-      Button myTextView = new Button( context );
-      myTextView.setHeight( 3*size );
+    Button button = new Button( context );
+    // button.set???( R.layout.popup_item );
 
-      myTextView.setText( text );
-      myTextView.setTextColor( color );
-      myTextView.setTextSize( TypedValue.COMPLEX_UNIT_DIP, size );
-      myTextView.setBackgroundColor( 0xff333333 );
-      myTextView.setSingleLine( true );
-      myTextView.setGravity( 0x03 ); // left
-      myTextView.setPadding( 4, 4, 4, 4 );
-      // Log.v(TopoDroidApp.TAG, "makeButton " + text );
-      return myTextView;
+    // THIS CRASHES THE APP
+    // button.setBackgroundResource( R.drawable.popup_bgcolor );
+    button.setTextColor( color );
+    button.setBackgroundColor( 0xff333333 );
+
+    button.setHeight( 3*size );
+    button.setText( text );
+    button.setTextSize( TypedValue.COMPLEX_UNIT_DIP, size );
+    button.setSingleLine( true );
+    button.setGravity( 0x03 ); // left
+    button.setPadding( 4, 4, 4, 4 );
+    return button;
+  }
+
+  static Button makePopupButton( Context context, String text,
+                                         LinearLayout layout, int w, int h, View.OnClickListener listener )
+  {
+    Button button = makeButton( context, text, 0xffffffff, 20 );
+    layout.addView( button, new LinearLayout.LayoutParams(h, w));
+    button.setOnClickListener( listener );
+    button.setOnTouchListener( new View.OnTouchListener( ) {
+      @Override public boolean onTouch( View v, MotionEvent ev ) { v.setBackgroundColor( 0xffff6600 ); return false; }
+    } );
+    return button;
+  }
+
+  static PopupWindow mPopupBT = null;
+
+  /** show BT popup under button b
+   * @param b button
+   */
+  static PopupWindow showPopupBT( final Context context, ILister ilister, final TopoDroidApp app, View b )
+  {
+    final ListerHandler lister = new ListerHandler( ilister );
+    LinearLayout popup_layout  = new LinearLayout( context );
+    popup_layout.setOrientation(LinearLayout.VERTICAL);
+    int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+    int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+    Resources res = context.getResources();
+    // ----- RESET BT
+    //
+    String text = res.getString(R.string.remote_reset);
+    int len = text.length();
+    Button textview0 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          app.resetComm();
+          dismissPopupBT();
+          Toast.makeText( context, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+        }
+      } );
+
+    Button textview1 = null;
+    Button textview2 = null;
+    Button textview3 = null;
+    Button textview4 = null;
+    if ( app.distoType() == Device.DISTO_X310 ) {
+      // ----- TURN LASER ON
+      //
+      text = res.getString(R.string.remote_on);
+      if ( len < text.length() ) len = text.length();
+      textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.setX310Laser( 1, null );
+            dismissPopupBT();
+          }
+        } );
+
+      // ----- TURN LASER OFF
+      //
+      text = res.getString(R.string.remote_off);
+      if ( len < text.length() ) len = text.length();
+      textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.setX310Laser( 0, null );
+            dismissPopupBT();
+          }
+        } );
+
+      // ----- MEASURE ONE SPLAY AND DOWNLOAD IT
+      //
+      text = res.getString(R.string.popup_do_splay);
+      if ( len < text.length() ) len = text.length();
+      textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            new DeviceX310TakeShot( lister, app, 1 ).execute();
+            dismissPopupBT();
+          }
+        } );
+
+      // ----- MEASURE ONE LEG AND DOWNLOAD IT
+      //
+      text = res.getString(R.string.popup_do_leg);
+      if ( len < text.length() ) len = text.length();
+      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            new DeviceX310TakeShot( lister, app, 3 ).execute();
+            dismissPopupBT();
+          }
+        } );
+    }
+
+    FontMetrics fm = textview0.getPaint().getFontMetrics();
+    // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
+    int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+    int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+    // int h1 = (int)( textview0.getHeight() * 7 * 1.1 ); this is 0
+    textview0.setWidth( w );
+    if ( app.distoType() == Device.DISTO_X310 ) {
+      textview1.setWidth( w );
+      textview2.setWidth( w );
+      textview3.setWidth( w );
+      textview4.setWidth( w );
+    }
+    mPopupBT = new PopupWindow( popup_layout, w, h ); 
+    mPopupBT.showAsDropDown(b); 
+    return mPopupBT;
+  }
+
+  static boolean dismissPopupBT()
+  {
+    if ( mPopupBT != null ) {
+      mPopupBT.dismiss();
+      mPopupBT = null;
+      return true;
+    }
+    return false;
   }
 
 }

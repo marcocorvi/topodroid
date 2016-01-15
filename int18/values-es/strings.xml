@@ -461,6 +461,9 @@
     <string name="remote_reset">Resetear BT</string>
     <string name="download">Descarga</string>
 
+    <!-- TODO string name="popup_do_splay">Splay shot</string -->
+    <!-- TODO string name="popup_do_leg">Leg shots</string -->
+
 <!--
     <string name="btn_3d">3D</string>
 -->

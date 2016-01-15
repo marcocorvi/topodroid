@@ -478,6 +478,9 @@
     <string name="remote_reset">Reset Bluetoot</string>
     <string name="download">Telecharger</string>
 
+    <!-- TODO string name="popup_do_splay">Splay shot</string -->
+    <!-- TODO string name="popup_do_leg">Leg shots</string -->
+
 <!--
     <string name="btn_3d">3D</string>
 -->

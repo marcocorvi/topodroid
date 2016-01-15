@@ -28,6 +28,7 @@ import android.os.Parcelable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.AsyncTask;
 import android.os.Debug;
 
 // import android.os.SystemClock;
@@ -58,6 +59,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.app.Dialog;
 import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.LinearLayout;
 
 import android.view.WindowManager;
 import android.view.View;
@@ -77,6 +80,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Paint.FontMetrics;
 
 import android.net.Uri;
 
@@ -86,12 +90,17 @@ public class ShotActivity extends Activity
                           implements OnItemClickListener
                         , OnItemLongClickListener
                         , OnClickListener
+                        , OnLongClickListener
                         , ILister
                         , INewPlot
 {
+  final static int BTN_DOWNLOAD = 0;
+  final static int BTN_PLOT     = 2;
+  final static int BTN_AZIMUTH  = 4;
+
   private static int izons[] = {
                         R.drawable.iz_download,
-                        R.drawable.iz_bt,
+                        // R.drawable.iz_bt,
                         R.drawable.iz_mode,
                         R.drawable.iz_plot,
                         R.drawable.iz_note,
@@ -102,7 +111,7 @@ public class ShotActivity extends Activity
 
   private static int izonsno[] = {
                         0,
-                        0,
+                        // 0,
                         0,
                         R.drawable.iz_plot, // TODO_IZ
                         0,
@@ -123,7 +132,7 @@ public class ShotActivity extends Activity
 
   private static int help_icons[] = {
                           R.string.help_download,
-                          R.string.help_remote,
+                          // R.string.help_remote,
                           R.string.help_display,
                           R.string.help_plot,
                           R.string.help_note,
@@ -183,12 +192,12 @@ public class ShotActivity extends Activity
       {
         Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
         Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
-        mButton1[5].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
+        mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
       }
     } else if ( mApp.mFixedExtend == -1L ) {
-      mButton1[5].setBackgroundDrawable( mBMleft );
+      mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( mBMleft );
     } else {
-      mButton1[5].setBackgroundDrawable( mBMright );
+      mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( mBMright );
     } 
   }
 
@@ -438,10 +447,9 @@ public class ShotActivity extends Activity
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    if ( onMenu ) {
-      closeMenu();
-      return true;
-    }
+    if ( closeMenu() ) return true;
+    if ( CutNPaste.dismissPopupBT() ) return true;
+
     TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemLongClick id " + id);
     DistoXDBlock blk = mDataAdapter.get(pos);
     mShotId = blk.mId;
@@ -458,6 +466,7 @@ public class ShotActivity extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    if ( CutNPaste.dismissPopupBT() ) return;
     if ( mSkipItemClick ) {
       mSkipItemClick = false;
       return;
@@ -504,10 +513,7 @@ public class ShotActivity extends Activity
       }
       return;
     }
-    if ( onMenu ) {
-      closeMenu();
-      return;
-    }
+    if ( closeMenu() ) return;
 
     TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemClick id " + id);
     DistoXDBlock blk = mDataAdapter.get(pos);
@@ -681,10 +687,10 @@ public class ShotActivity extends Activity
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
   HorizontalButtonView mButtonView2;
-  ListView   mMenu;
+  ListView   mMenu = null;
   Button     mImage;
   ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
+  boolean onMenu = false;
 
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
@@ -726,7 +732,7 @@ public class ShotActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mButtonSize = mApp.setListViewHeight( mListView );
 
-    mNrButton1 = TDSetting.mLevelOverBasic ? 8 : 6;
+    mNrButton1 = TDSetting.mLevelOverBasic ? 7 : 5;
     mButton1 = new Button[ mNrButton1 ];
     int k;
     for ( k=0; k<mNrButton1; ++k ) {
@@ -736,9 +742,9 @@ public class ShotActivity extends Activity
       // mButton1[k].setBackgroundResource(  icons00[k] );
 
       BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[k] );
-      if ( k == 0 ) mBMdownload = bm2;
-      if ( k == 3 ) mBMplot = bm2;
-      // if ( k == 7 ) mBMadd  = bm2;
+      if ( k == BTN_DOWNLOAD ) mBMdownload = bm2;
+      if ( k == BTN_PLOT ) mBMplot = bm2;
+      // if ( k == 6 ) mBMadd  = bm2;
     }
     mBMdial = BitmapFactory.decodeResource( getResources(), R.drawable.iz_dial );
     mBMplot_no = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_plot_no );
@@ -748,19 +754,8 @@ public class ShotActivity extends Activity
     mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
 
 
-    mButton1[3].setOnLongClickListener( new OnLongClickListener() {
-      @Override 
-      public boolean onLongClick( View view )
-      {
-        // Log.v("DistoX", "long click button 3: " + mRecentPlot );
-        if ( onMenu ) {
-          closeMenu();
-        } else if ( mRecentPlot != null ) {
-          startExistingPlot( mRecentPlot, mRecentPlotType );
-        }
-        return true;
-      }
-    } );
+    mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
+    mButton1[ BTN_PLOT ].setOnLongClickListener( this );
 
     mApp.resetRefAzimuth( 90 );
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
@@ -790,8 +785,11 @@ public class ShotActivity extends Activity
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
-    closeMenu();
     mMenu.setOnItemClickListener( this );
+    mMenu.setVisibility( View.GONE );
+    onMenu = false;
+
+    // CutNPaste.dismissPopupBT();
 
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
@@ -801,8 +799,8 @@ public class ShotActivity extends Activity
   void enableSketchButton( boolean enabled )
   {
     mApp.mEnableZip = enabled;
-    mButton1[3].setEnabled( enabled ); // FIXME SKETCH BUTTON 
-    mButton1[3].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
+    mButton1[ BTN_PLOT ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
+    mButton1[ BTN_PLOT ].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
   }
 
   // @Override
@@ -920,12 +918,42 @@ public class ShotActivity extends Activity
   }
 
 
+  @Override 
+  public boolean onLongClick( View view )
+  {
+    if ( closeMenu() ) return true;
+    if ( CutNPaste.dismissPopupBT() ) return true;
+
+    Button b = (Button)view;
+    if ( b == mButton1[ BTN_PLOT ] ) {
+      if ( mRecentPlot != null ) {
+        startExistingPlot( mRecentPlot, mRecentPlotType );
+      }
+    } else if ( b == mButton1[ BTN_DOWNLOAD ] ) {
+      // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
+      mDataDownloader.setDownload( false );
+      mDataDownloader.stopDownloadData();
+      setConnectionStatus( mDataDownloader.getStatus() );
+      switch ( mApp.distoType() ) {
+        case Device.DISTO_A3:
+          mApp.resetComm();
+          Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+          break;
+        case Device.DISTO_X310:
+          CutNPaste.showPopupBT( this, this, mApp, b );
+          // (new DeviceRemoteDialog( this, this, mApp )).show();
+          break;
+      }
+    }
+    return true;
+  } 
+
+  @Override 
   public void onClick(View view)
   {
-    if ( onMenu ) {
-      closeMenu();
-      return;
-    }
+    if ( closeMenu() ) return;
+    if ( CutNPaste.dismissPopupBT() ) return;
+
     Button b = (Button)view;
     if ( b == mImage ) {
       if ( mMenu.getVisibility() == View.VISIBLE ) {
@@ -949,20 +977,20 @@ public class ShotActivity extends Activity
         mDataDownloader.toggleDownload();
         setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
-        // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
-        mDataDownloader.setDownload( false );
-        mDataDownloader.stopDownloadData();
-        setConnectionStatus( mDataDownloader.getStatus() );
-        switch ( mApp.distoType() ) {
-          case Device.DISTO_A3:
-            mApp.resetComm();
-            Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-            break;
-          case Device.DISTO_X310:
-            (new DeviceRemoteDialog( this, this, mApp )).show();
-            break;
-        }
+      // } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
+      //   // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
+      //   mDataDownloader.setDownload( false );
+      //   mDataDownloader.stopDownloadData();
+      //   setConnectionStatus( mDataDownloader.getStatus() );
+      //   switch ( mApp.distoType() ) {
+      //     case Device.DISTO_A3:
+      //       mApp.resetComm();
+      //       Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+      //       break;
+      //     case Device.DISTO_X310:
+      //       (new DeviceRemoteDialog( this, this, mApp )).show();
+      //       break;
+      //   }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
         new ShotDisplayDialog( this, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SKETCH
@@ -1382,10 +1410,14 @@ public class ShotActivity extends Activity
     mMenu.invalidate();
   }
 
-  private void closeMenu()
+  private boolean closeMenu()
   {
-    mMenu.setVisibility( View.GONE );
-    onMenu = false;
+    if ( onMenu ) {
+      mMenu.setVisibility( View.GONE );
+      onMenu = false;
+      return true;
+    }
+    return false;
   }
 
 
@@ -1416,18 +1448,18 @@ public class ShotActivity extends Activity
   public void setConnectionStatus( int status )
   { 
     if ( mApp.mDevice == null ) {
-      mButton1[ 0 ].setVisibility( View.GONE );
+      mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
     } else {
-      mButton1[ 0 ].setVisibility( View.VISIBLE );
+      mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
       switch ( status ) {
         case 1:
-          mButton1[0].setBackgroundDrawable( mBMdownload_on );
+          mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_on );
           break;
         case 2:
-          mButton1[0].setBackgroundDrawable( mBMdownload_wait );
+          mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_wait );
           break;
         default:
-          mButton1[0].setBackgroundDrawable( mBMdownload );
+          mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
       }
     }
   }
@@ -1459,4 +1491,7 @@ public class ShotActivity extends Activity
     }
     return id;
   }
+
+  // ------------------------------------------------------------------
+
 }

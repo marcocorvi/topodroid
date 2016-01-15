@@ -80,8 +80,10 @@ public class DrawingBrushPaths
   // --------------------------------------------------------------------------
   // LINES
 
-  static final int highlightColor = 0xffff9999;
-  static final int highlightFill  = 0x6600cc00;
+  static final int errorColor      = 0xffff00ff;
+  static final int highlightColor1 = 0xffff9999;
+  static final int highlightColor2 = 0x6600cc00;
+  static final int highlightColor3 = 0xffff3333;
 
   // -----------------------------------------------------------------------
   // AREAS
@@ -90,6 +92,7 @@ public class DrawingBrushPaths
 
   // --------------------------------------------------------------------------
 
+  static Paint errorPaint      = null;
   static Paint highlightPaint  = null;
   static Paint highlightPaint2 = null;
   static Paint highlightPaint3 = null;
@@ -156,9 +159,17 @@ public class DrawingBrushPaths
   static void doMakePaths()
   {
     if ( ! doneMakePaths ) {
+      errorPaint = new Paint();
+      errorPaint.setDither(true);
+      errorPaint.setColor( errorColor );
+      errorPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+      errorPaint.setStrokeJoin(Paint.Join.ROUND);
+      errorPaint.setStrokeCap(Paint.Cap.ROUND);
+      errorPaint.setStrokeWidth( WIDTH_CURRENT );
+
       highlightPaint = new Paint();
       highlightPaint.setDither(true);
-      highlightPaint.setColor( highlightColor );
+      highlightPaint.setColor( highlightColor1 );
       highlightPaint.setStyle(Paint.Style.STROKE);
       highlightPaint.setStrokeJoin(Paint.Join.ROUND);
       highlightPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -166,7 +177,7 @@ public class DrawingBrushPaths
 
       highlightPaint2 = new Paint();
       highlightPaint2.setDither(true);
-      highlightPaint2.setColor( highlightFill );
+      highlightPaint2.setColor( highlightColor2 );
       highlightPaint2.setStyle(Paint.Style.FILL);
       highlightPaint2.setStrokeJoin(Paint.Join.ROUND);
       highlightPaint2.setStrokeCap(Paint.Cap.ROUND);
@@ -174,7 +185,7 @@ public class DrawingBrushPaths
 
       highlightPaint3 = new Paint();
       highlightPaint3.setDither(true);
-      highlightPaint3.setColor( highlightColor );
+      highlightPaint3.setColor( highlightColor3 );
       highlightPaint3.setStyle(Paint.Style.STROKE);
       highlightPaint3.setStrokeJoin(Paint.Join.ROUND);
       highlightPaint3.setStrokeCap(Paint.Cap.ROUND);

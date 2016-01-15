@@ -35,7 +35,12 @@ public class DrawingStationName extends DrawingPointPath
   NumStation mStation;
   // float mX;     // scene coordinates (cx, cy)
   // float mY;
-  boolean mDuplicate; // whether this is a duplicated station
+
+  boolean mDuplicate;  // whether this is a duplicated station
+
+  long  mXSectionType; // whether this station has a X-section
+  float mAzimuth, mClino;
+  float mDX, mDY;     // X-section direction
 
   public DrawingStationName( String name, float x, float y )
   {
@@ -46,6 +51,7 @@ public class DrawingStationName extends DrawingPointPath
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = null;
     mName = name;
+    mXSectionType = PlotInfo.PLOT_NULL;
 
     // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
 
@@ -63,6 +69,7 @@ public class DrawingStationName extends DrawingPointPath
     mType = DRAWING_PATH_NAME; // override DrawingPath.mType
     mStation = num_st;
     mName = num_st.name;
+    mXSectionType = PlotInfo.PLOT_NULL;
 
     // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
     if ( num_st.mDuplicate ) mPaint = DrawingBrushPaths.duplicateStationPaint;
@@ -71,6 +78,32 @@ public class DrawingStationName extends DrawingPointPath
     
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
+
+  static final int LENGTH = 20;
+
+  void setXSection( float azimuth, float clino, long type )
+  {
+    mXSectionType = type;
+    mAzimuth      = azimuth;
+    mClino        = clino;
+    if ( type == PlotInfo.PLOT_PLAN ) {
+      mDX =   LENGTH * (float)Math.sin( azimuth * Math.PI/180 );
+      mDY = - LENGTH * (float)Math.cos( azimuth * Math.PI/180 );
+    } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+      if ( clino > 89 ) {
+        mDX = 0;
+        mDY = -LENGTH;
+      } else if ( clino < -89 ) {
+        mDX = 0;
+        mDY = LENGTH;
+      } else {
+        mDX = LENGTH; // FIXME
+        mDY = 0;
+      }
+    }
+  }
+
+  void resetXSection( ) { mXSectionType = PlotInfo.PLOT_NULL; }
 
   // defined in DrawingPointPath
   // float distance( float x, float y )
@@ -86,6 +119,12 @@ public class DrawingStationName extends DrawingPointPath
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "DrawingStationName::draw LABEL " + mName );
       canvas.drawTextOnPath( mName, mPath, 0f, 0f, mPaint );
+      if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+        Path path = new Path();
+        path.moveTo( cx, cy );
+        path.lineTo( cx+mDX, cy+mDY );
+        canvas.drawPath( path, mPaint );
+      }
     }
   }
 
@@ -97,6 +136,13 @@ public class DrawingStationName extends DrawingPointPath
       mTransformedPath = new Path( mPath );
       mTransformedPath.transform( matrix );
       canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, mPaint );
+      if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+        Path path = new Path();
+        path.moveTo( cx, cy );
+        path.lineTo( cx+mDX, cy+mDY );
+        path.transform( matrix );
+        canvas.drawPath( path, mPaint );
+      }
     }
   }
   
@@ -122,6 +168,11 @@ public class DrawingStationName extends DrawingPointPath
       dos.writeFloat( cx );
       dos.writeFloat( cy );
       dos.writeUTF( mName );
+      dos.writeInt( (int)mXSectionType );
+      if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+        dos.writeFloat( mAzimuth );
+        dos.writeFloat( mClino );
+      }
     } catch ( IOException e ) { }
   }
 
@@ -131,12 +182,30 @@ public class DrawingStationName extends DrawingPointPath
   {
     float ccx, ccy;
     String name;
+    int type;
     try {
       ccx = dis.readFloat();
       ccy = dis.readFloat();
       name = dis.readUTF();
-      return new DrawingStationName( name, ccx, ccy );
+      DrawingStationName ret = new DrawingStationName( name, ccx, ccy );
+      if ( version >= 207038 ) {
+        type = dis.readInt();
+        if ( type != (int)PlotInfo.PLOT_NULL ) {
+          ccx = dis.readFloat();
+          ccy = dis.readFloat();
+          ret.setXSection( ccx, ccy, type );
+        }
+      }
+      return ret;
     } catch ( IOException e ) { }
     return null;
   }
+
+  @Override
+  public void flipXAxis()
+  {
+    super.flipXAxis();
+    if ( mXSectionType != PlotInfo.PLOT_NULL ) mDX = -mDX;
+  }
+
 }

@@ -119,7 +119,7 @@ public class DrawingPointLinePath extends DrawingPath
 
   public DrawingPointLinePath( int path_type, boolean visible, boolean closed )
   {
-    super( path_type ); // DrawingPath.DRAWING_PATH_AREA );
+    super( path_type, null ); // DrawingPath.DRAWING_PATH_AREA );
     // mPoints  = new ArrayList< LinePoint >();
     clear();
     mVisible = visible;

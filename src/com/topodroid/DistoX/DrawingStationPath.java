@@ -40,7 +40,7 @@ public class DrawingStationPath extends DrawingPath
 
   public DrawingStationPath( String name, float x, float y, int scale )
   {
-    super( DrawingPath.DRAWING_PATH_STATION );
+    super( DrawingPath.DRAWING_PATH_STATION, null );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + x + " Y " + y );
     // Log.v( "DistoX", "User Station (1) " + mType + " X " + x + " Y " + y );
     // mType = DRAWING_PATH_STATION;
@@ -59,7 +59,7 @@ public class DrawingStationPath extends DrawingPath
 
   public DrawingStationPath( DrawingStationName st, int scale )
   {
-    super( DrawingPath.DRAWING_PATH_STATION );
+    super( DrawingPath.DRAWING_PATH_STATION, null );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + st.cx + " Y " + st.cy );
     // Log.v( "DistoX", "User Station (2) " + mType + " X " + st.cx + " Y " + st.cy );
     // mType = DRAWING_PATH_STATION;
