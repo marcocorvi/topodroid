@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid GPS-location for fixed stations: new-entry and listing
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright: This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

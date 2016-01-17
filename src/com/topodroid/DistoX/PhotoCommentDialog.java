@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid photo comment dialog (to enter the comment of the photo)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright: This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * CHANGES

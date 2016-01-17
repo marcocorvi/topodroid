@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid survey shot dialog to enter FROM-TO stations etc.
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright: This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
