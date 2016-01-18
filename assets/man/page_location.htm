@@ -1,33 +1,45 @@
 <html><body>
 
-<h4>Location</h4>
+<h4>Location dialog</h4>
 
-Through the location dialog you enter (or get with the GPS) the coordinates of a fixed station, eg, the entrance.<br><p>
+The "Location" button (the "GPS" icon) of the "Survey info" window opens the "Location" dialog.<br><p>
+  
+Through this dialog you enter (or get with the GPS) the coordinates of a fixed station, eg, the entrance.
+<ol>
+<li>first specify the station <b>name</b>.</li>
+<li>next enter the coordinate manually ("Add" button), or get them with the Android GPS ("GPS" button), 
+or import them from Mobile Topographer ("Import" button).</li>
+</ol>
+<br><p>
 
-To locate a station (GPS button), you must first specify the station name. Next enter the coordinate manually ("Add" button), or get them with the Android GPS ("GPS" button). While searching for satellites the button displays the number of satellites in sight. You should wait till this number becomes green and the coordinates are displayed underneath. Then stop the GPS tapping the button again, and tap the "Add" button.<br><p>
+To use the GPS the Android Location must be enabled.
+While searching for satellites the "GPS" button becomes red (or green) displays the number of satellites in sight.
+You should wait till the button becomes green and the coordinates are displayed underneath.
+Then stop the GPS location tapping the button again, and tap the "Add" button.<br><p>
 
-Internally TopoDroid stores the coordinates in decimal degrees. However, in the coordinates dialog, you can write latitude and longitude either in the format "dd:mm:ss.ss" or as decimal degrees. If your keyboard does not show the semicolon ':' use the space instead. If your keyboard does not have the decimal point '.' use the slash '/' instead. TopoDroid custom keypad has two buttons for "degrees" and "minutes".<br>
+Internally TopoDroid stores the coordinates in decimal degrees. However, in the coordinates dialog,
+you can write latitude and longitude either in the format "dd:mm:ss.ss" or as decimal degrees.
+If your keyboard does not show the semicolon ':' use the space instead.
+If your keyboard does not have the decimal point '.' use the slash '/' instead. TopoDroid custom keypad has two buttons for "degrees" and "minutes".<br>
 Tapping the "E" and "N" buttons changes the East/West and North/South hemisphere for the coordinates. Effectively it is like entering negative coordinates.<br>
 The altitude is stored in meters and it is always the WGS84 altitude.<br><p>
 
-The coordinates of all fixed points are listed in the dialog, as "station longitude latitude altitude". Tapping any of them opens another dialog where you can get the magnetic declination at the point, convert the coordinates to another coordinate reference system (using <i>Proj4</i>), get the orthometric altitude, change the station name, or delete the fixed point.<br><p>
+Underneath the buttons the dialog lists
+the coordinates of all fixed points, as "station longitude latitude altitude".
+Tapping any of them opens the "Fixed Station" dialog where you can 
+<ul>
+<li>compute the magnetic declination at the station,</li>
+<li>convert the coordinates to another coordinate reference system (using <i>Proj4</i>),</li>
+<li>see the orthometric altitude</li>
+<li>change the station name,</li>
+<li>delete the fixed station record.</li>
+</ul>
+<br><p>
 
 <h4>Location settings</h4>
 <ul style="margin-top:0; margin-bottom:0">
 <li><i>Location units</i>: either dd.mm.ss or decimal degrees [A]</li>
 <li><i>C.R.S.</i> coordinate reference system [default is long-lat] (disabled)</li>
 </ul>
-
-<h4>Mobile Topographer</h4>
-TopoDroid can import the coordinates of a point from a Mobile Topographer point list file.<br><p>
-
-<ol>
-<li>Open Mobile Topographer and find the point coordinates ("flag" icon on the left).</li>
-<li>When you have reached a sufficient accuracy in the coordinates, save the point (third icon "doc with plus").</li>
-<li>Go to the list of saved points (fourth icon "doc")</li>
-<li>Move the point you just got to the top with the green arrows, as TopoDroid imports the first point in the list.</li>
-<li>Save the list (fourth icon "diskette"). The file is saved in "MobileTopographer/pointlist"</li>
-<li>Import the coordinates in TopoDroid.</li>
-</ol>
 
 </body></html>
