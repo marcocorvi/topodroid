@@ -459,7 +459,7 @@
     <string name="button_split"     >Разделить </string>
     <string name="button_toggle"    >Режим КАЛИБ  </string>
 -->
-    <string name="button_write"     >Записать</string>
+    <string name="button_write"     >Записть</string>
     <string name="button_xsection"  >Сечение</string>
 
     <string name="mode_leg">Нитка</string>
