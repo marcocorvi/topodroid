@@ -459,7 +459,7 @@
     <string name="button_split"     >Разделить </string>
     <string name="button_toggle"    >Режим КАЛИБ  </string>
 -->
-    <string name="button_write"     >Записать</string>
+    <string name="button_write"     >Записть</string>
     <string name="button_xsection"  >Сечение</string>
 
     <string name="mode_leg">Нитка</string>
@@ -475,8 +475,8 @@
     <string name="remote_reset">Сброс БT</string>
     <string name="download">Скачать</string>
 
-    <!-- TODO string name="popup_do_splay">Splay shot</string -->
-    <!-- TODO string name="popup_do_leg">Leg shots</string -->
+    <string name="popup_do_splay">Боковой замер</string>
+    <string name="popup_do_leg">Замер на пикет</string>
 
 <!-- OK
     <string name="btn_3d">3D</string>
