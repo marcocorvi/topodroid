@@ -1468,7 +1468,7 @@ class TopoDroidExporter
    *    SURVEY TEAM:
    *    team_line
    *    DECLINATION: declination  FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00
-   *    FROM TO LENGTH BEARING INC FLAGS COMMENTS
+   *    FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS
    *    ...
    *    0x0c
    *
@@ -1536,7 +1536,7 @@ class TopoDroidExporter
       pw.format(Locale.ENGLISH, "DECLINATION: %.4f  ", info.declination );
       pw.format("FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00\r\n" );
       pw.format("\r\n" );
-      pw.format("FROM TO LENGTH BEARING INC FLAGS COMMENTS\r\n" );
+      pw.format("FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS\r\n" );
       pw.format( "\r\n" );
 
       AverageLeg leg = new AverageLeg();

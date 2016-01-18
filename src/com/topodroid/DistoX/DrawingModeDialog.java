@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 
-public class DrawingModeDialog extends Dialog 
+public class DrawingModeDialog extends MyDialog 
                                implements View.OnClickListener
 {
     private CheckBox mCBleg;      // whether to show legs
@@ -39,7 +39,7 @@ public class DrawingModeDialog extends Dialog
 
     public DrawingModeDialog( Context context, DrawingActivity parent, DrawingSurface surface )
     {
-      super(context);
+      super(context, R.string.DrawingModeDialog );
       mParent  = parent;
       mSurface = surface;
     }

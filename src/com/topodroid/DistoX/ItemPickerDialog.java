@@ -38,7 +38,7 @@ import android.widget.GridView;
 
 import android.util.Log;
 
-class ItemPickerDialog extends Dialog
+class ItemPickerDialog extends MyDialog
                        implements View.OnClickListener
                        , IItemPicker
                        // , View.OnLongClickListener
@@ -61,7 +61,6 @@ class ItemPickerDialog extends Dialog
   // private  Button mBTok;
   private SeekBar mSeekBar;
 
-  private Context mContext;
   // private DrawingActivity mParent;
   private ItemDrawer mParent;
 
@@ -91,8 +90,7 @@ class ItemPickerDialog extends Dialog
    */
   ItemPickerDialog( Context context, ItemDrawer parent, long type, int item_type  )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.ItemPickerDialog );
     mParent  = parent;
 
     mPlotType = type;

@@ -22,6 +22,8 @@ import android.widget.RadioButton;
 // import android.widget.ArrayAdapter;
 
 import android.content.Context;
+import android.content.Intent;
+
 import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
@@ -38,13 +40,12 @@ import android.view.KeyEvent;
 import android.util.Log;
 
 
-public class ShotNewDialog extends Dialog
+public class ShotNewDialog extends MyDialog
                            implements View.OnClickListener
                            , View.OnLongClickListener
                            , IBearingAndClino
 {
   // private ShotActivity mParent;
-  private Context mContext;
   private TopoDroidApp mApp;
   private ILister mLister;
   private DistoXDBlock mPrevBlk;
@@ -80,7 +81,7 @@ public class ShotNewDialog extends Dialog
 
   public ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DistoXDBlock last_blk, long at )
   {
-    super( context );
+    super( context, R.string.ShotNewDialog );
     mContext = context;
     mApp  = app;
     mLister  = lister;
@@ -95,9 +96,9 @@ public class ShotNewDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+
     // TDLog.Log( TDLog.LOG_SHOT, "ShotNewDialog onCreate" );
-    setContentView(R.layout.shot_new_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.shot_new_dialog, R.string.shot_info );
 
     mETfrom = (EditText) findViewById(R.id.shot_from );
     mETto   = (EditText) findViewById(R.id.shot_to );
@@ -227,7 +228,6 @@ public class ShotNewDialog extends Dialog
     mBtnSave.setOnClickListener( this );
     // mBtnBack.setOnClickListener( this );
 
-    setTitle( R.string.shot_info );
   }
 
   private void resetData( String from )
@@ -439,6 +439,20 @@ public class ShotNewDialog extends Dialog
     }
     dismiss();
   }
+
+  // @Override 
+  // // public boolean onKeyLongPress( int code, KeyEvent ev )
+  // public boolean onKeyDown( int code, KeyEvent ev )
+  // {
+  //   if ( code == KeyEvent.KEYCODE_BACK ) {
+  //     onBackPressed();
+  //     return true;
+  //   } else if ( code == KeyEvent.KEYCODE_MENU ) {
+  //     DistoXManualDialog.show Help Page( mContext, R.string.ShotNewDialog );
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
 }
 

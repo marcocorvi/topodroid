@@ -8,10 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120516 length and angle units
- * 20120521 converted from DistoXPreferences.java
- * 20120715 loading only per-category preferences
  */
 package com.topodroid.DistoX;
 

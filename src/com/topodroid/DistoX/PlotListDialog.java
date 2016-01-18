@@ -37,12 +37,11 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class PlotListDialog extends Dialog
+public class PlotListDialog extends MyDialog
                         implements OnItemClickListener
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
 {
-  private Context mContext;
   private ShotActivity mParent;
   private TopoDroidApp mApp;
   private ArrayAdapter<String> mArrayAdapter;
@@ -59,8 +58,7 @@ public class PlotListDialog extends Dialog
 
   public PlotListDialog( Context context, ShotActivity parent, TopoDroidApp app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.PlotListDialog );
     mParent = parent;
     mApp = app;
   }

@@ -27,10 +27,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-class DeviceA3MemoryDialog extends Dialog
+class DeviceA3MemoryDialog extends MyDialog
                            implements View.OnClickListener
 {
-  Context mContext;
   DeviceActivity mParent;
 
   private Button mBtnStore;
@@ -52,8 +51,7 @@ class DeviceA3MemoryDialog extends Dialog
 
   DeviceA3MemoryDialog( Context context, DeviceActivity parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DeviceA3MemoryDialog );
     mParent = parent;
   }
 
@@ -62,8 +60,7 @@ class DeviceA3MemoryDialog extends Dialog
   {
     super.onCreate( bundle );
 
-    setContentView( R.layout.device_a3_memory_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.device_a3_memory_dialog, R.string.memoryA3 );
 
     mTVshead = (TextView) findViewById( R.id.tv_stored_head );
     mTVstail = (TextView) findViewById( R.id.tv_stored_tail );
@@ -85,7 +82,6 @@ class DeviceA3MemoryDialog extends Dialog
     mBtnDump.setOnClickListener( this );
     // mBtnBack.setOnClickListener( this );
     
-    setTitle( mParent.getResources().getString( R.string.memoryA3 ) );
 
     int[] ht = new int[2];
     mParent.retrieveDeviceHeadTail( ht );

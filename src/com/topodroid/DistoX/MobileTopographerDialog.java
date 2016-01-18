@@ -39,13 +39,12 @@ import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class MobileTopographerDialog extends Dialog
+public class MobileTopographerDialog extends MyDialog
                           implements OnItemClickListener
                           , OnClickListener
 { 
   static final String POINTLISTS = "/sdcard/MobileTopographer/pointlists";
 
-  private Context mContext;
   private LocationDialog mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
@@ -61,8 +60,7 @@ public class MobileTopographerDialog extends Dialog
 
   public MobileTopographerDialog( Context context, LocationDialog parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.MobileTopographerDialog );
     mParent  = parent;
   }
 

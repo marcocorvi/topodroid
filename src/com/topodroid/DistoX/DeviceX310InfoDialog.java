@@ -26,10 +26,9 @@ import android.widget.TextView;
 import android.widget.RadioButton;
 import android.widget.Button;
 
-class DeviceX310InfoDialog extends Dialog
+class DeviceX310InfoDialog extends MyDialog
                            implements View.OnClickListener
 {
-  Context mContext;
   private TextView mTVcode;
   private TextView mTVfirmware;
   private TextView mTVhardware;
@@ -44,8 +43,7 @@ class DeviceX310InfoDialog extends Dialog
 
   DeviceX310InfoDialog( Context context, DeviceActivity parent, Device device )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DeviceX310InfoDialog );
     mParent = parent;
     mDevice = device;
   }

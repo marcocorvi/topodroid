@@ -94,6 +94,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updatePlotViewStmt;
   private SQLiteStatement updatePlotHideStmt;
   private SQLiteStatement deletePlotStmt;
+  private SQLiteStatement deletePlotByNameStmt;
   private SQLiteStatement undeletePlotStmt;
   // FIXME_SKETCH_3D
   private SQLiteStatement updateSketchStmt;
@@ -227,6 +228,7 @@ public class DataHelper extends DataSetObservable
         updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
         dropPlotStmt     = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
         deletePlotStmt   = myDB.compileStatement( "UPDATE plots set status=1 WHERE surveyId=? AND id=?" );
+        deletePlotByNameStmt = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND name=?" );
         undeletePlotStmt = myDB.compileStatement( "UPDATE plots set status=0 WHERE surveyId=? AND id=?" );
 
         // FIXME_SKETCH_3D
@@ -1091,6 +1093,15 @@ public class DataHelper extends DataSetObservable
     deletePlotStmt.bindLong( 1, survey_id );
     deletePlotStmt.bindLong( 2, plot_id );
     deletePlotStmt.execute();
+  }
+
+  // THIS REALLY DROPS THE RECORD FROM THE TABLE
+  public void deletePlotByName( String name, long survey_id )
+  {
+    if ( myDB == null ) return;
+    deletePlotByNameStmt.bindLong( 1, survey_id );
+    deletePlotByNameStmt.bindString( 2, name );
+    deletePlotByNameStmt.execute();
   }
   
   public void undeletePlot( long plot_id, long survey_id )

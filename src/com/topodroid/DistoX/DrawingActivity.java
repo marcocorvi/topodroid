@@ -794,8 +794,10 @@ public class DrawingActivity extends ItemDrawer
           mBMplan = bm2;
         }
       }
-      mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
-      mButton1[BTN_PLOT].setOnLongClickListener( this );
+      if ( TDSetting.mLevelOverBasic ) {
+        mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
+        mButton1[BTN_PLOT].setOnLongClickListener( this );
+      }
       mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
       mBMextend  = mApp.setButtonBackground( null, mButtonSize, izons[IC_EXTEND] ); 
       mBMdownload_on = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_on );
@@ -838,7 +840,7 @@ public class DrawingActivity extends ItemDrawer
       mBMadd     = mApp.setButtonBackground( null, mButtonSize, izons[IC_ADD] );
 
       mButton5 = new Button[ mNrButton5 ];    // ERASE
-      off = 9 - 3; // FIXME (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
+      off = 8 - 3; // FIXME (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
       for ( int k=0; k<mNrButton5; ++k ) {
         mButton5[k] = new Button( this );
         mButton5[k].setPadding(0,0,0,0);
@@ -1024,8 +1026,10 @@ public class DrawingActivity extends ItemDrawer
 
       loadFiles( mType ); 
 
+      // There are four types of sections:
       // SECTION and H_SECTION: mFrom != null, mTo != null, splays and leg
       // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
+
       if ( isSection() || isXSection() ) {
         DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
         float xfrom=0;
@@ -1033,18 +1037,24 @@ public class DrawingActivity extends ItemDrawer
         float xto=0;
         float yto=0;
         // normal, horizontal and cross-product
-        float mc = mClino * TDMath.GRAD2RAD;
+        float mc = mClino   * TDMath.GRAD2RAD;
         float ma = mAzimuth * TDMath.GRAD2RAD;
         float X0 = FloatMath.cos( mc ) * FloatMath.cos( ma );  // X = North
         float Y0 = FloatMath.cos( mc ) * FloatMath.sin( ma );  // Y = East
         float Z0 = FloatMath.sin( mc );                        // Z = Up
+        // canvas X-axis, unit horizontal axis: 90 degrees to the right of the azimuth
+        //   azimuth = 0 (north) --> horizontal = ( 0N, 1E)
+        //   azimuth = 90 (east) --> horizontal = (-1N, 0E)
+        //   etc.
         float X1 = - FloatMath.sin( ma ); // X1 goes to the left in the section plane !!!
         float Y1 =   FloatMath.cos( ma ); 
         float Z1 = 0;
         // float X2 = - FloatMath.sin( mc ) * FloatMath.cos( ma );
         // float Y2 = - FloatMath.sin( mc ) * FloatMath.sin( ma );
         // float Z2 =   FloatMath.cos( ma );
-        float X2 = Y0 * Z1 - Y1 * Z0;  // this is X0 ^ X1 : it goes up in the section plane
+        // canvas UP-axis: this is X0 ^ X1 : it goes up in the section plane 
+        // canvas Y-axis = - UP-axis
+        float X2 = Y0 * Z1 - Y1 * Z0; 
         float Y2 = Z0 * X1 - Z1 * X0;
         float Z2 = X0 * Y1 - X1 * Y0;
 
@@ -1103,9 +1113,9 @@ public class DrawingActivity extends ItemDrawer
           float d = b.mLength;
           float bc = b.mClino * TDMath.GRAD2RAD;
           float bb = b.mBearing * TDMath.GRAD2RAD;
-          float X = FloatMath.cos( bc ) * FloatMath.cos( bb );
-          float Y = FloatMath.cos( bc ) * FloatMath.sin( bb );
-          float Z = FloatMath.sin( bc );
+          float X = FloatMath.cos( bc ) * FloatMath.cos( bb ); // North
+          float Y = FloatMath.cos( bc ) * FloatMath.sin( bb ); // East
+          float Z = FloatMath.sin( bc );                       // Up
           float x =  d * (float)(X1 * X + Y1 * Y + Z1 * Z);
           float y = -d * (float)(X2 * X + Y2 * Y + Z2 * Z);
           if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
@@ -2041,6 +2051,29 @@ public class DrawingActivity extends ItemDrawer
 
     void setCurrentStationName( String name ) { mApp.setCurrentStationName( name ); }
 
+    void deleteXSection( DrawingStationName st, String name, long type ) 
+    {
+      long xtype = -1;
+      String xsname = null;
+      if ( type == PlotInfo.PLOT_PLAN ) {
+        xsname = "xs-" + name;
+        xtype = PlotInfo.PLOT_X_SECTION;
+      } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+        xsname = "xh-" + name;
+        xtype = PlotInfo.PLOT_XH_SECTION;
+      } else {
+        return;
+      }
+
+      st.resetXSection();
+      mData.deletePlotByName( xsname, mApp.mSID );
+      // drop the files
+      File tdr = new File( TDPath.getSurveyPlotTdrFile( mApp.mySurvey, xsname ) );
+      if ( tdr.exists() ) tdr.delete(); 
+      File th2 = new File( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xsname ) );
+      if ( th2.exists() ) th2.delete(); 
+    }
+
     // X-SECTION AT A STATION
     // @param name station name
     void openXSection( DrawingStationName st, String name, long type ) 
@@ -2254,7 +2287,7 @@ public class DrawingActivity extends ItemDrawer
     void doDelete()
     {
       mData.deletePlot( mPid1, mSid );
-      mData.deletePlot( mPid2, mSid );
+      if ( mPid2 >= 0 ) mData.deletePlot( mPid2, mSid );
       finish();
     }
 
@@ -3189,8 +3222,11 @@ public class DrawingActivity extends ItemDrawer
         super.onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         return onSearchRequested();
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        String help_page = getResources().getString( R.string.DrawingActivity );
+        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
@@ -3206,14 +3242,14 @@ public class DrawingActivity extends ItemDrawer
   {
     Resources res = getResources();
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[2] ) );
-    mMenuAdapter.add( res.getString( menus[3] ) );
-    mMenuAdapter.add( res.getString( menus[4] ) );
-    mMenuAdapter.add( res.getString( menus[5] ) );
-    mMenuAdapter.add( res.getString( menus[6] ) );
-    mMenuAdapter.add( res.getString( menus[7] ) );
+    mMenuAdapter.add( res.getString( menus[0] ) );  // EXPORT
+    mMenuAdapter.add( res.getString( menus[1] ) );  // INFO
+    mMenuAdapter.add( res.getString( menus[2] ) );  // RELOAD
+    if ( TDSetting.mLevelOverBasic && isSketch2D() ) mMenuAdapter.add( res.getString( menus[3] ) ); // DELETE
+    mMenuAdapter.add( res.getString( menus[4] ) ); // PALETTE
+    if ( isSketch2D() ) mMenuAdapter.add( res.getString( menus[5] ) ); // OVERVIEW
+    mMenuAdapter.add( res.getString( menus[6] ) ); // OPTIONS
+    mMenuAdapter.add( res.getString( menus[7] ) ); // HELP
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -3254,12 +3290,12 @@ public class DrawingActivity extends ItemDrawer
         } else {
           ( new PlotRecoverDialog( this, this, mFullName1, 1 ) ).show();
         }
-      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DELETE
+      } else if ( TDSetting.mLevelOverBasic && isSketch2D() && p++ == pos ) { // DELETE
         askDelete();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
-      } else if ( p++ == pos ) { // OVERVIEW
+      } else if ( isSketch2D() && p++ == pos ) { // OVERVIEW
         // startSaveTh2Task( OVERVIEW, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP ); // FIXME this is not necessary
         // try {
         //   Thread.sleep(100);

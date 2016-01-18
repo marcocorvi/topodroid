@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View;
+import android.view.KeyEvent;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;

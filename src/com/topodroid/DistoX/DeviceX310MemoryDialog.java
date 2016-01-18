@@ -28,7 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-class DeviceX310MemoryDialog extends Dialog
+class DeviceX310MemoryDialog extends MyDialog
                              implements View.OnClickListener
 {
   private Button mBtnDump;
@@ -42,7 +42,7 @@ class DeviceX310MemoryDialog extends Dialog
 
   DeviceX310MemoryDialog( Context context, DeviceActivity parent )
   {
-    super( context );
+    super( context, R.string.DeviceX310MemoryDialog );
     mParent = parent;
   }
 
@@ -62,8 +62,7 @@ class DeviceX310MemoryDialog extends Dialog
   {
     super.onCreate( bundle );
 
-    setContentView( R.layout.device_x310_memory_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.device_x310_memory_dialog, R.string.memoryX310 );
 
     mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom );
     mETdumpto    = (EditText) findViewById( R.id.et_dumpto );
@@ -74,7 +73,6 @@ class DeviceX310MemoryDialog extends Dialog
     // mBtnBack = (Button) findViewById(R.id.button_cancel);
     // mBtnBack.setOnClickListener( this );
     
-    setTitle( mParent.getResources().getString( R.string.memoryX310 ) );
 
     // int[] ht = new int[2];
     // mParent.retrieveDeviceHeadTail( ht );

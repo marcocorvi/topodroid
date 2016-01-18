@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -35,12 +34,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.widget.Toast;
 
-public class CalibListDialog extends Dialog
+public class CalibListDialog extends MyDialog
                         implements OnItemClickListener
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
 {
-  private Context mContext;
   private DeviceActivity mParent;
   private TopoDroidApp mApp;
   private ArrayAdapter<String> mArrayAdapter;
@@ -53,8 +51,7 @@ public class CalibListDialog extends Dialog
 
   public CalibListDialog( Context context, DeviceActivity parent, TopoDroidApp app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CalibListDialog );
     mParent = parent;
     mApp = app;
   }

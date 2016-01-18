@@ -10,9 +10,6 @@
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
  * which, in turns, is based on PocketTopo implementation.
- * --------------------------------------------------------
- * CHANGES
- * 20130831 static cross, dot, and triple product
  */
 package com.topodroid.DistoX;
 

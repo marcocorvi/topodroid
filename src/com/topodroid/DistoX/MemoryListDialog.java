@@ -8,8 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20131204 cstr
  */
 package com.topodroid.DistoX;
 
@@ -32,13 +30,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 
-public class MemoryListDialog extends Dialog
+public class MemoryListDialog extends MyDialog
                               // implements View.OnClickListener
                               // , OnItemClickListener
 {
   public long mSID;
   DeviceActivity mParent;
-  Context mContext;
 
   // private Button mBtnCancel;
 
@@ -48,8 +45,7 @@ public class MemoryListDialog extends Dialog
 
   public MemoryListDialog( Context context, DeviceActivity parent, List<MemoryOctet> memory )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.MemoryListDialog );
     mParent = parent;
     mMemory = memory;
   }

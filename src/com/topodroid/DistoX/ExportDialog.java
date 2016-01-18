@@ -8,8 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130213 created
  */
 package com.topodroid.DistoX;
 
@@ -33,12 +31,11 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.util.Log;
 
-public class ExportDialog extends Dialog
+public class ExportDialog extends MyDialog
                           implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
   private Button   mBtnOk;
 
-  private Context   mContext;
   private IExporter mParent;
   private String[]  mTypes;
   private String    mSelected;
@@ -46,8 +43,7 @@ public class ExportDialog extends Dialog
 
   ExportDialog( Context context, IExporter parent, String[] types, int title )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.ExportDialog );
     mParent = parent;
     mTypes  = types;
     mSelected = null;
@@ -59,8 +55,8 @@ public class ExportDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.export_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+    initLayout( R.layout.export_dialog, mTitle );
 
     Spinner spin = (Spinner)findViewById( R.id.spin );
     spin.setOnItemSelectedListener( this );
@@ -73,7 +69,6 @@ public class ExportDialog extends Dialog
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
 
-    setTitle( mTitle );
   }
 
   public void onItemSelected( AdapterView av, View v, int pos, long id )

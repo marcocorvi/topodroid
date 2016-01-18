@@ -146,6 +146,16 @@
         style="@style/button_default"
         android:text="@string/button_xsection"
       />
+
+      <Button android:id="@+id/btn_xdelete"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_delete"
+      />
+
     </LinearLayout>
 
     <!-- LinearLayout 

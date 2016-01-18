@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -28,7 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
-public class CalibCoverageDialog extends Dialog
+public class CalibCoverageDialog extends MyDialog
                            implements View.OnClickListener
 {
   private class Direction
@@ -70,8 +69,7 @@ public class CalibCoverageDialog extends Dialog
 
   public CalibCoverageDialog( Context context, List< CalibCBlock > list, Calibration cal )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CalibCoverageDialog );
     mCalib = cal;
     mList  = list;
     clino_angles = new int[ DIMY ];
@@ -88,9 +86,8 @@ public class CalibCoverageDialog extends Dialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-    setContentView(R.layout.calib_coverage_dialog);
 
-    setTitle( mContext.getResources().getString( R.string.title_coverage ) );
+    initLayout( R.layout.calib_coverage_dialog, R.string.title_coverage );
 
     mText  = (TextView) findViewById( R.id.coverage_value );
     mImage = (ImageView) findViewById( R.id.coverage_image );

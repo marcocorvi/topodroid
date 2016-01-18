@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130307 made Annotations into a dialog
- * 201311   icon for the button OK
  */
 package com.topodroid.DistoX;
 
@@ -22,7 +19,7 @@ import java.io.IOException;
 import android.app.Activity;
 // import android.app.Dialog;
 import android.os.Bundle;
-// import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.net.Uri;
@@ -53,9 +50,11 @@ public class DistoXManualDialog extends Activity
                                 implements OnItemClickListener, OnClickListener
 {
   private WebView mTVtext;
+  private int mCloseOnBack = 0;
 
   private void load( String filename )
   {
+    ++mCloseOnBack;
     StringBuilder html = new StringBuilder();
     mTVtext.loadUrl("file:///android_asset/man/" + filename );
   }
@@ -81,6 +80,13 @@ public class DistoXManualDialog extends Activity
   {
     super.onCreate(savedInstanceState);
 
+    mCloseOnBack = 0;
+    // get intent extra
+    String page = null;
+    Bundle extras = getIntent().getExtras();
+    if ( extras != null ) page = extras.getString( TopoDroidTag.TOPODROID_HELP_PAGE );
+    if ( page == null ) page = "manual00.htm";
+
     setContentView(R.layout.distox_manual_dialog);
     mTVtext   = (WebView) findViewById(R.id.manual_text );
 
@@ -96,7 +102,7 @@ public class DistoXManualDialog extends Activity
     mTVtext.getSettings().setSupportZoom( true ); 
 
     setTitle( R.string.title_manual );
-    load( "manual00.htm" );
+    load( page );
 
     mImage  = (ImageView) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -158,9 +164,30 @@ public class DistoXManualDialog extends Activity
   @Override
   public void onBackPressed()
   {
+    if ( (-- mCloseOnBack) == 0 ) finish();
     String url = mTVtext.getUrl();
     if ( url.indexOf("manual") >= 0 ) finish();
     mTVtext.goBack();
+  }
+
+  // static void show Help Page( Context context, int class_string )
+  // {
+  //   Intent intent = new Intent( Intent.ACTION_VIEW );
+  //   intent.setClass( context, DistoXManualDialog.class );
+  //   String page = context.getResources().getString( class_string );
+  //   if ( page != null ) { 
+  //     intent.putExtra( TopoDroidTag.TOPODROID_HELP_PAGE, page );
+  //   }
+  //   context.startActivity( intent );
+  // }
+  
+  static void showHelpPage( Context context, String page )
+  {
+    // if ( page == null ) return;
+    Intent intent = new Intent( Intent.ACTION_VIEW );
+    intent.setClass( context, DistoXManualDialog.class );
+    intent.putExtra( TopoDroidTag.TOPODROID_HELP_PAGE, page );
+    context.startActivity( intent );
   }
 
 }

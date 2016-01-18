@@ -23,10 +23,8 @@ import android.view.View.OnClickListener;
 
 // import android.util.Log;
 
-public class CalibValidateResultDialog extends Dialog
+public class CalibValidateResultDialog extends MyDialog
 {
-  private Context mContext;
-
   private String avestd0;
   private String avestd1;
   private String std;
@@ -38,8 +36,7 @@ public class CalibValidateResultDialog extends Dialog
   public CalibValidateResultDialog( Context context, double a0, double s0, double a1, double s1,
                                                      double e1, double e2, double em, String n1, String n2 )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CalibValidateResultDialog );
 
     avestd0 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a0, s0 );
     avestd1 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a1, s1 );

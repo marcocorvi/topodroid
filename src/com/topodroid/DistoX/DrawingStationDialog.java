@@ -27,7 +27,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class DrawingStationDialog extends Dialog 
+public class DrawingStationDialog extends MyDialog 
                                   implements View.OnClickListener
 {
     private TextView mLabel;
@@ -40,11 +40,11 @@ public class DrawingStationDialog extends Dialog
     private Button mBtnHidden;
     private Button mBtnSplays;
     private Button mBtnXSection;
+    private Button mBtnXDelete;
     // private Button mBtnCancel;
 
-    private Context mContext;
     private DrawingActivity mActivity;
-    private DrawingStationName mStation;
+    private DrawingStationName mStation; // num station point
     private DrawingStationPath mPath;
 
     private String mStationName;
@@ -55,8 +55,7 @@ public class DrawingStationDialog extends Dialog
                                  DrawingStationPath path,
                                  boolean is_barrier, boolean is_hidden )
     {
-      super(context);
-      mContext  = context;
+      super( context, R.string.DrawingStationDialog );
       mActivity = activity;
       mStation  = station;
       mPath     = path;
@@ -69,8 +68,9 @@ public class DrawingStationDialog extends Dialog
     protected void onCreate(Bundle savedInstanceState)
     {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.drawing_station_dialog);
-      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+  
+      String title = mContext.getResources().getString(R.string.STATION) + " " + mStationName;
+      initLayout( R.layout.drawing_station_dialog, title );
 
       mLabel     = (TextView) findViewById(R.id.station_text);
       mBarrierLabel = (TextView) findViewById(R.id.barrier_text);
@@ -82,6 +82,7 @@ public class DrawingStationDialog extends Dialog
       mBtnHidden = (Button) findViewById(R.id.btn_hidden );
       mBtnSplays = (Button) findViewById(R.id.btn_splays );
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
+      mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
       // mBtnCancel = (Button) findViewById(R.id.button_cancel);
@@ -99,8 +100,14 @@ public class DrawingStationDialog extends Dialog
     
       if ( TDSetting.mLevelOverAdvanced ) {
         mBtnXSection.setOnClickListener( this );
+        if ( mStation.mXSectionType != PlotInfo.PLOT_NULL ) {
+          mBtnXDelete.setOnClickListener( this );
+        } else {
+          mBtnXDelete.setVisibility( View.GONE );
+        }
       } else {
         mBtnXSection.setVisibility( View.GONE );
+        mBtnXDelete.setVisibility( View.GONE );
       }
 
       // mBtnCancel.setOnClickListener( this );
@@ -113,7 +120,6 @@ public class DrawingStationDialog extends Dialog
         mHiddenLabel.setText( mContext.getResources().getString(R.string.hidden_del) );
       }
 
-      setTitle( mContext.getResources().getString(R.string.STATION) + mStationName ); 
     }
 
     public void onClick(View view)
@@ -135,6 +141,8 @@ public class DrawingStationDialog extends Dialog
         mActivity.toggleStationSplays( mStationName );
       } else if (view.getId() == R.id.btn_xsection ) {
         mActivity.openXSection( mStation, mStationName, mActivity.getPlotType() );
+      } else if (view.getId() == R.id.btn_xdelete ) {
+        mActivity.deleteXSection( mStation, mStationName, mActivity.getPlotType() );
       }
       dismiss();
     }

@@ -17,9 +17,6 @@
  * Modified to add corner detection previous to cubic fitting.
  *
  * --------------------------------------------------------
- * CHANGES
- * 20120725 TopoDroidApp log
- * 20121109 enforced alpha_left + alpha_right < 2/3 * distance( point_left, point_right )
  */
 package com.topodroid.DistoX;
 

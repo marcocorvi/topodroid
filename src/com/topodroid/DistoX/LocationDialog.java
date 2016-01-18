@@ -49,7 +49,7 @@ import android.location.GpsSatellite;
 
 import android.util.Log;
 
-public class LocationDialog extends Dialog
+public class LocationDialog extends MyDialog
                             implements View.OnClickListener
                                      , View.OnLongClickListener
                                      , AdapterView.OnItemClickListener
@@ -59,7 +59,6 @@ public class LocationDialog extends Dialog
 {
   // private boolean  mLocated;
   private LocationManager locManager;
-  private Context mContext;
   private TopoDroidApp mApp;
 
   private TextView mTVlat;
@@ -94,8 +93,7 @@ public class LocationDialog extends Dialog
 
   public LocationDialog( Context context, SurveyActivity parent, TopoDroidApp app, LocationManager lm )
   {
-    super(context);
-    mContext = context;
+    super(context, R.string.LocationDialog );
     mParent = parent;
     mApp = app;
     locManager = lm;
@@ -111,8 +109,8 @@ public class LocationDialog extends Dialog
   {
     super.onCreate(savedInstanceState);
     // TDLog.Log( TDLog.LOG_LOC, "Location onCreate" );
-    setContentView(R.layout.location_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+    initLayout( R.layout.location_dialog, R.string.title_location );
 
     mTVlong = (TextView) findViewById(R.id.longitude );
     mTVlat  = (TextView) findViewById(R.id.latitude  );
@@ -154,7 +152,6 @@ public class LocationDialog extends Dialog
     // locManager = (LocationManager) getSystemService( LOCATION_SERVICE );
     mLocating = false;
     mHasLocation = false;
-    setTitle( R.string.title_location );
 
     refreshList();
 
@@ -349,25 +346,6 @@ public class LocationDialog extends Dialog
 
 
   @Override
-  public void onBackPressed()
-  {
-    if ( CutNPaste.dismissPopup() ) return;
-
-    if ( TDSetting.mKeyboard ) {
-      if ( mKeyboard.isVisible() ) {
-        mKeyboard.hide();
-        return;
-      }
-    }
-    if ( mLocating ) {
-      locManager.removeUpdates( this );
-      locManager.removeGpsStatusListener( this );
-      mLocating = false;
-    }
-    dismiss();
-  }
-
-  @Override
   public void onLocationChanged( Location loc )
   {
     if ( loc != null ) displayLocation( loc );
@@ -454,5 +432,39 @@ public class LocationDialog extends Dialog
     showLocation();
     mHasLocation = true;
   }
+
+  @Override
+  public void onBackPressed()
+  {
+    if ( CutNPaste.dismissPopup() ) return;
+
+    if ( TDSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
+    }
+    if ( mLocating ) {
+      locManager.removeUpdates( this );
+      locManager.removeGpsStatusListener( this );
+      mLocating = false;
+    }
+    dismiss();
+  }
+
+  // @Override 
+  // // public boolean onKeyLongPress( int code, KeyEvent ev )
+  // public boolean onKeyDown( int code, KeyEvent ev )
+  // {
+  //   if ( code == KeyEvent.KEYCODE_BACK ) {
+  //     onBackPressed();
+  //     return true;
+  //   } else if ( code == KeyEvent.KEYCODE_MENU ) {
+  //     DistoXManualDialog.show Help Page( mContext, R.string.LocationDialog );
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
 }
 

@@ -37,11 +37,10 @@ import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class CalibImportDialog extends Dialog
+public class CalibImportDialog extends MyDialog
                           implements OnItemClickListener
                           , OnClickListener
 { 
-  private Context mContext;
   private DeviceActivity mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
@@ -50,8 +49,7 @@ public class CalibImportDialog extends Dialog
 
   public CalibImportDialog( Context context, DeviceActivity parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CalibImportDialog );
     mParent  = parent;
   }
 

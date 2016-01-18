@@ -47,11 +47,10 @@ import android.view.KeyEvent;
 
 import android.util.Log;
 
-public class ShotDialog extends Dialog
+public class ShotDialog extends MyDialog
                         implements View.OnClickListener
                                  , View.OnLongClickListener
 {
-  private Context mContext;
   private ShotActivity mParent;
   private DistoXDBlock mBlk;
   private DistoXDBlock mPrevBlk;
@@ -123,8 +122,7 @@ public class ShotDialog extends Dialog
   public ShotDialog( Context context, ShotActivity parent, int pos,
                      DistoXDBlock blk, DistoXDBlock prev, DistoXDBlock next )
   {
-    super(context);
-    mContext = context;
+    super( context, R.string.ShotDialog );
     mParent = parent;
     mPos = pos;
     loadDBlock( blk, prev, next );
@@ -263,13 +261,8 @@ public class ShotDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
-    // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
-    // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
-    setContentView(R.layout.shot_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-
+    initLayout( R.layout.shot_dialog, null );
 
     // mTVdata    = (TextView) findViewById(R.id.shot_data );
     mETdistance = (EditText) findViewById(R.id.shot_distance);
@@ -593,5 +586,19 @@ public class ShotDialog extends Dialog
     }
     return false;
   }
+
+  // @Override 
+  // // public boolean onKeyLongPress( int code, KeyEvent ev )
+  // public boolean onKeyDown( int code, KeyEvent ev )
+  // {
+  //   if ( code == KeyEvent.KEYCODE_BACK ) {
+  //     onBackPressed();
+  //     return true;
+  //   } else if ( code == KeyEvent.KEYCODE_MENU ) {
+  //     DistoXManualDialog.show Help Page( mContext, R.string.ShotDialog );
+  //     return true;
+  //   }
+  //   return false;
+  // }
 }
 

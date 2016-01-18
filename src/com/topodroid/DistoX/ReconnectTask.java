@@ -3,12 +3,11 @@
  * @author marco corvi
  * @date nov 2013
  *
- * @brief TopoDroid 
+ * @brief TopoDroid Data downlod reconnection task
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 

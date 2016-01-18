@@ -34,10 +34,9 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class DrawingProfileFlipDialog extends Dialog
+public class DrawingProfileFlipDialog extends MyDialog
                            implements View.OnClickListener
 {
-  private Context mContext;
   private DrawingActivity mParent;
   private CheckBox mCBshots;
 
@@ -45,8 +44,7 @@ public class DrawingProfileFlipDialog extends Dialog
 
   public DrawingProfileFlipDialog( Context context, DrawingActivity parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DrawingProfileFlipDialog );
     mParent  = parent;
   }
 
@@ -54,15 +52,14 @@ public class DrawingProfileFlipDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.drawing_profile_flip_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+    initLayout( R.layout.drawing_profile_flip_dialog, R.string.title_profile_flip );
 
     mCBshots = (CheckBox) findViewById( R.id.shots );
 
     mBtnOK      = (Button) findViewById(R.id.button_ok );
     mBtnOK.setOnClickListener( this );   // OK-SAVE
 
-    setTitle( R.string.title_profile_flip );
   }
 
   @Override

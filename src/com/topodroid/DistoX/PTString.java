@@ -1,8 +1,13 @@
 /** @file PTString.java
  *
+ * @author marco corvi
+ * @date march 2010
+ *
+ * @brief PocketTopo file IO - String
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 

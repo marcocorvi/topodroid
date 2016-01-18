@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120605 created
- * 20121212 sorted names in alphabetical order
  */
 package com.topodroid.DistoX;
 
@@ -38,10 +35,9 @@ import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class FirmwareFileDialog extends Dialog
+public class FirmwareFileDialog extends MyDialog
                           implements OnItemClickListener
 { 
-  private Context mContext;
   private TopoDroidApp mApp;
   private FirmwareDialog mParent;
 
@@ -51,8 +47,7 @@ public class FirmwareFileDialog extends Dialog
 
   public FirmwareFileDialog( Context context, FirmwareDialog parent, TopoDroidApp app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.FirmwareFileDialog );
     mParent  = parent;
     mApp = app;
   }
@@ -61,7 +56,8 @@ public class FirmwareFileDialog extends Dialog
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    setContentView(R.layout.firmware_file_dialog);
+
+    initLayout( R.layout.firmware_file_dialog, R.string.firmware_file_title );
 
     mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
 
@@ -72,7 +68,6 @@ public class FirmwareFileDialog extends Dialog
     mTVfile = (TextView) findViewById( R.id.file );
 
     // setTitleColor( 0x006d6df6 );
-    setTitle( R.string.firmware_file_title );
 
     File[] files = TDPath.getBinFiles();
     ArrayList<String> names = new ArrayList<String>();
@@ -97,6 +92,7 @@ public class FirmwareFileDialog extends Dialog
       Toast.makeText( mContext, R.string.firmware_none, Toast.LENGTH_SHORT ).show();
       dismiss();
     }
+
   }
 
   @Override

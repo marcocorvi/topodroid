@@ -7,6 +7,7 @@
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
@@ -30,10 +31,9 @@ import android.widget.LinearLayout;
 
 import android.util.Log;
 
-public class PhotoSensorsDialog extends Dialog
+public class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
 {
-  private Context mContext;
   private ShotActivity mParent;
   private DistoXDBlock mBlk;
 
@@ -61,8 +61,7 @@ public class PhotoSensorsDialog extends Dialog
    */
   PhotoSensorsDialog( Context context, ShotActivity parent, DistoXDBlock blk )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.PhotoSensorsDialog );
     mParent  = parent;
     mBlk = blk;
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoSensorDialog");

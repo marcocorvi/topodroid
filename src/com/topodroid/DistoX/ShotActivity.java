@@ -753,9 +753,10 @@ public class ShotActivity extends Activity
     mBMleft  = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_left );
     mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
 
-
-    mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
-    mButton1[ BTN_PLOT ].setOnLongClickListener( this );
+    if ( TDSetting.mLevelOverBasic ) {
+      mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
+      mButton1[ BTN_PLOT ].setOnLongClickListener( this );
+    }
 
     mApp.resetRefAzimuth( 90 );
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
@@ -1381,8 +1382,11 @@ public class ShotActivity extends Activity
         onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         return onSearchRequested();
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        String help_page = getResources().getString( R.string.ShotActivity );
+        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:

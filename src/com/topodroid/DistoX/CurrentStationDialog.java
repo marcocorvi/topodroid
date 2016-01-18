@@ -42,12 +42,11 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class CurrentStationDialog extends Dialog
+public class CurrentStationDialog extends MyDialog
                         implements View.OnClickListener
                         , View.OnLongClickListener
                         , OnItemClickListener
 {
-  private Context mContext;
   private TopoDroidApp mApp;
   private ShotActivity mParent;
   private EditText mName;
@@ -65,8 +64,7 @@ public class CurrentStationDialog extends Dialog
 
   public CurrentStationDialog( Context context, ShotActivity parent, TopoDroidApp app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CurrentStationDialog );
     mParent  = parent;
     mApp = app;
   }
@@ -75,8 +73,8 @@ public class CurrentStationDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.current_station_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+    initLayout( R.layout.current_station_dialog, R.string.title_current_station );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setDividerHeight( 2 );
@@ -113,7 +111,6 @@ public class CurrentStationDialog extends Dialog
       }
     }
 
-    setTitle( R.string.title_current_station );
     updateList();
   }
 

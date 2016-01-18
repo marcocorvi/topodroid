@@ -8,8 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130110 created
  */
 package com.topodroid.DistoX;
 
@@ -25,7 +23,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 
-public class ShotDisplayDialog extends Dialog 
+public class ShotDisplayDialog extends MyDialog 
                                implements View.OnClickListener
 {
     private CheckBox mCBids;      // whether to hide ids
@@ -40,7 +38,7 @@ public class ShotDisplayDialog extends Dialog
 
     public ShotDisplayDialog( Context context, ShotActivity parent )
     {
-      super(context);
+      super( context, R.string.ShotDisplayDialog );
       mParent = parent;
     }
 
@@ -48,7 +46,8 @@ public class ShotDisplayDialog extends Dialog
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shot_display_dialog);
+
+        initLayout( R.layout.shot_display_dialog, R.string.title_mode );
 
         mCBids   = (CheckBox) findViewById(R.id.cb_mode_ids);
         mCBsplay = (CheckBox) findViewById(R.id.cb_mode_splay);
@@ -68,7 +67,6 @@ public class ShotDisplayDialog extends Dialog
         mCBblank.setChecked( ! mParent.mBlank );
         mCBleg.setChecked(   ! mParent.mLeg );
 
-        setTitle( R.string.title_mode );
     }
 
     public void onClick(View view)

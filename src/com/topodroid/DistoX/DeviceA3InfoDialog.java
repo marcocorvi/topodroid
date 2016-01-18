@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.RadioButton;
 import android.widget.Button;
 
-class DeviceA3InfoDialog extends Dialog
+class DeviceA3InfoDialog extends MyDialog
                          implements View.OnClickListener
 {
   private TextView mTVserial;
@@ -41,7 +41,7 @@ class DeviceA3InfoDialog extends Dialog
 
   DeviceA3InfoDialog( Context context, DeviceActivity parent, Device device )
   {
-    super( context );
+    super( context, R.string.DeviceA3InfoDialog );
     mParent = parent;
     mDevice = device;
   }

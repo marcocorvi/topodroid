@@ -630,6 +630,7 @@
     <string name="title_photo">Foto/Messungen</string>
     <string name="title_photo_comment">Foto Kommentar</string>
     <string name="title_plot_save">Skizze Speichern als</string>
+    <!-- TODO string name="title_plot_reload">Reload sketch</string -->
     <!-- TODO string name="title_profile_flip">Flip profile sketch ?</string -->
     <string name="title_refs">Skizze Referenzen</string>
     <string name="title_scraps">Skizzen</string>

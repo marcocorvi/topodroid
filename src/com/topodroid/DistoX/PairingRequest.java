@@ -1,3 +1,14 @@
+/* @file PairingRequest.java
+ *
+ * @author marco corvi
+ * @date nov 2011
+ *
+ * @brief TopoDroid Bluetooth device pairing request
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
+ */
 package com.topodroid.DistoX;
 
 import java.nio.ByteBuffer;

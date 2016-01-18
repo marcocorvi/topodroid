@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120521 using INewPlot interface for the maker
- * 20140416 setError for required EditText inputs
  */
 package com.topodroid.DistoX;
 
@@ -35,11 +32,10 @@ import android.widget.Toast;
 
 // import android.util.Log;
 
-public class PlotNewDialog extends Dialog
+public class PlotNewDialog extends MyDialog
                            implements View.OnClickListener
                            , View.OnLongClickListener
 {
-  private Context mContext;
   private INewPlot mMaker;
   // private boolean notDone;
 
@@ -62,8 +58,7 @@ public class PlotNewDialog extends Dialog
 
   public PlotNewDialog( Context context, INewPlot maker, int index )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.PlotNewDialog );
     mMaker  = maker;
     mIndex  = index;
     // notDone = true;

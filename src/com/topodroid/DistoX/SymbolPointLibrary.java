@@ -108,9 +108,10 @@ class SymbolPointLibrary extends SymbolLibrary
   void loadUserPoints()
   {
     String locale = "name-" + TopoDroidApp.mLocale.toString().substring(0,2);
-    String iso = "ISO-8859-1";
-    // String iso = "UTF-8";
+    // String iso = "ISO-8859-1";
+    String iso = "UTF-8";
     // if ( locale.equals( "name-de" ) ) iso = "UTF-8";
+    // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     // Charset.forName("ISO-8859-1")
 
     File dir = new File( TDPath.APP_POINT_PATH );

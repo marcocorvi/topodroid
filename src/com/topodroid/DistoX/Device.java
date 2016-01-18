@@ -8,8 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 201311   added model and type info
  */
 package com.topodroid.DistoX;
 

@@ -1,5 +1,13 @@
 /** @file HelpDialog.java
  *
+ * @author marco corvi
+ * @date nov 2013
+ *
+ * @brief TopoDroid help dialog 
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 

@@ -27,7 +27,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.graphics.Paint;
 
-public class DrawingPointDialog extends Dialog
+public class DrawingPointDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingPointPath mPoint;
@@ -49,7 +49,7 @@ public class DrawingPointDialog extends Dialog
 
   public DrawingPointDialog( DrawingActivity context, DrawingPointPath point )
   {
-    super( context );
+    super( context, R.string.DrawingPointDialog );
     mParent = context;
     mPoint  = point;
     mOrientable = DrawingBrushPaths.mPointLib.isSymbolOrientable( mPoint.mPointType );

@@ -41,10 +41,9 @@ import android.net.Uri;
 import android.util.Log;
 
 
-public class FixedDialog extends Dialog
+public class FixedDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private Context mContext;
   private SurveyActivity mParent;
   private LocationDialog mSubParent;
   private FixedInfo mFxd;
@@ -77,8 +76,7 @@ public class FixedDialog extends Dialog
 
   public FixedDialog( Context context, SurveyActivity parent, LocationDialog sub_parent, FixedInfo fxd )
   {
-    super(context);
-    mContext     = context;
+    super(context, R.string.FixedDialog );
     mParent      = parent;
     mSubParent   = sub_parent;
     mFxd         = fxd;

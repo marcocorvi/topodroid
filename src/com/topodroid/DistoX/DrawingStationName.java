@@ -4,10 +4,11 @@
  * @date nov 2011
  *
  * @brief TopoDroid drawing station name (this is not a station point) 
-*        type: DRAWING_PATH_NAME
+ *        type: DRAWING_PATH_NAME
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
@@ -25,8 +26,6 @@ import android.graphics.Matrix;
 
 // import android.util.Log;
 
-/**
- */
 public class DrawingStationName extends DrawingPointPath
 {
   private static float toTherion = TopoDroidConst.TO_THERION;

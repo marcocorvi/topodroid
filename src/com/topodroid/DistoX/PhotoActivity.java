@@ -8,11 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120520 created from DistoX.java
- * 20120531 implemented photo and 3D
- * 20120531 shot-numbering bugfix
- * 20120606 3D: implied therion export before 3D
  */
 package com.topodroid.DistoX;
 
@@ -33,7 +28,16 @@ import android.os.Message;
 
 import android.app.Application;
 import android.app.Activity;
+import android.app.Dialog;
+
 import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ActivityNotFoundException;
+
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -42,18 +46,12 @@ import android.view.SubMenu;
 
 // import android.location.LocationManager;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.ActivityNotFoundException;
 
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.app.Dialog;
 import android.widget.Button;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.preference.PreferenceManager;

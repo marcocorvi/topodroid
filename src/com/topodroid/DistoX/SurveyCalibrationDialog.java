@@ -26,10 +26,9 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 
-class SurveyCalibrationDialog extends Dialog
+class SurveyCalibrationDialog extends MyDialog
                        implements View.OnClickListener
 {
-  Context mContext;
   private EditText mETlength;
   private EditText mETazimuth;
   private EditText mETclino;
@@ -41,8 +40,7 @@ class SurveyCalibrationDialog extends Dialog
 
   SurveyCalibrationDialog( Context context, SurveyActivity parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.SurveyCalibrationDialog );
     mParent = parent;
     mApp    = mParent.mApp;
   }

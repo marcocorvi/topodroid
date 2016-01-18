@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -35,7 +34,7 @@ import android.widget.ListView;
 
 // import android.util.Log;
 
-class SymbolEnableDialog extends Dialog
+class SymbolEnableDialog extends MyDialog
                          implements View.OnClickListener
 {
   private int mType; // symbols type
@@ -47,7 +46,6 @@ class SymbolEnableDialog extends Dialog
   // private  Button mBTcancel;
   // private  Button mBTok;
 
-  private Context mContext;
   private Activity mParent;
 
   private ListView    mList;
@@ -58,8 +56,7 @@ class SymbolEnableDialog extends Dialog
 
   SymbolEnableDialog( Context context, Activity parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.SymbolEnableDialog );
     mParent  = parent;
     mType    = DrawingActivity.SYMBOL_LINE; // default symbols are lines
   }

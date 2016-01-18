@@ -67,11 +67,11 @@ public class DrawingPointPath extends DrawingPath
       mOrientation = DrawingBrushPaths.getPointOrientation(type);
     }
     setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
-    if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
+    // if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
       mScale = scale;
-    } else {
-      mScale = SCALE_M;
-    }
+    // } else {
+    //   mScale = SCALE_M;
+    // }
     resetPath( 1.0f );
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }

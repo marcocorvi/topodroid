@@ -7,7 +7,7 @@
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
- * 20130220 created
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 

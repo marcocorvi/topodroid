@@ -576,6 +576,7 @@
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
+    <!-- TODO string name="title_plot_reload">Reload sketch</string -->
     <string name="title_profile_flip">¿Quieres cambiar al perfil del dibujo?</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>

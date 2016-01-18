@@ -35,10 +35,9 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.widget.Toast;
 
-public class CalibValidateListDialog extends Dialog
+public class CalibValidateListDialog extends MyDialog
                         implements OnItemClickListener
 {
-  private Context mContext;
   private GMActivity mParent;
   private ArrayAdapter<String> mArrayAdapter;
 
@@ -47,8 +46,7 @@ public class CalibValidateListDialog extends Dialog
 
   public CalibValidateListDialog( Context context, GMActivity parent, List<String> calibs )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CalibValidateListDialog );
     mParent  = parent;
     mCalibs  = calibs;
   }

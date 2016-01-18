@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -34,6 +33,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.view.KeyEvent;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -122,6 +122,26 @@ public class CWDActivity extends Activity
   {
     setPreference();
     finish();
+  }
+
+  @Override
+  public boolean onKeyDown( int code, KeyEvent event )
+  {
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        String help_page = getResources().getString( R.string.CWDActivity );
+        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TDLog.Error( "key down: code " + code );
+    }
+    return false;
   }
 
 }

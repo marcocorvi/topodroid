@@ -1,4 +1,13 @@
 /** @file FirmwareUtils.java
+ *
+ * @author marco corvi
+ * @date nov 2011
+ *
+ * @brief TopoDroid firmware utilities
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 

@@ -25,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.KeyEvent;
+
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -36,11 +38,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
 
-public class AzimuthDialDialog extends Dialog
+public class AzimuthDialDialog extends MyDialog
                               implements View.OnClickListener
                               , IBearingAndClino
 {
-  private Context mContext;
   private ILister mParent;
   private float mAzimuth;
   private Bitmap mBMdial;
@@ -57,8 +58,7 @@ public class AzimuthDialDialog extends Dialog
 
   public AzimuthDialDialog( Context context, ILister parent, float azimuth, Bitmap dial )
   {
-    super(context);
-    mContext = context;
+    super(context, R.string.AzimuthDialDialog );
     mParent  = parent;
     mAzimuth = azimuth;
     mBMdial  = dial;
@@ -83,12 +83,12 @@ public class AzimuthDialDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+    // requestWindowFeature(Window.FEATURE_NO_TITLE);
     // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
-    setContentView(R.layout.azimuth_dial_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.azimuth_dial_dialog, null );
 
     // mBTback = (Button) findViewById(R.id.btn_back );
     // mBTfore = (Button) findViewById(R.id.btn_fore );
@@ -197,6 +197,20 @@ public class AzimuthDialDialog extends Dialog
     }
     dismiss();
   }
+
+  // @Override 
+  // // public boolean onKeyLongPress( int code, KeyEvent ev )
+  // public boolean onKeyDown( int code, KeyEvent ev )
+  // {
+  //   if ( code == KeyEvent.KEYCODE_BACK ) {
+  //     onBackPressed();
+  //     return true;
+  //   } else if ( code == KeyEvent.KEYCODE_MENU ) {
+  //     DistoXManualDialog.show Help Page( mContext, R.string.AzimuthDialDialog );
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
 }
 

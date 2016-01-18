@@ -8,12 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20120623 handle line attributes in loadTherion
- * 20120705 hadle point attributes in loadTherion
- * 20121113 sink/spring points from Therion
- * 20121122 overloaded point snow/ice, flowstone/moonmilk dig/choke crystal/gypsum
- * 20121206 symbol libraries
  */
 package com.topodroid.DistoX;
 

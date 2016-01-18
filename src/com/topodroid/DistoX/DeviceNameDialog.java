@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -27,10 +26,9 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 
-class DeviceNameDialog extends Dialog
+class DeviceNameDialog extends MyDialog
                        implements View.OnClickListener
 {
-  Context mContext;
   private TextView mTVmodel;
   private TextView mTVaddress;
   private TextView mTVname;
@@ -43,8 +41,7 @@ class DeviceNameDialog extends Dialog
 
   DeviceNameDialog( Context context, DeviceActivity parent, Device device )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DeviceNameDialog );
     mParent = parent;
     mDevice = device;
   }

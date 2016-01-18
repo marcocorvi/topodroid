@@ -44,11 +44,10 @@ import android.widget.Toast;
 
 import android.util.Log;
 
-public class PlotRecoverDialog extends Dialog
+public class PlotRecoverDialog extends MyDialog
                         implements View.OnClickListener
                         , OnItemClickListener
 {
-  private Context mContext;
   private TopoDroidApp mApp;
   private DrawingActivity mParent;
 
@@ -63,8 +62,7 @@ public class PlotRecoverDialog extends Dialog
   // type is either 1 or 2
   public PlotRecoverDialog( Context context, DrawingActivity parent, String filename, int type )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.PlotRecoverDialog );
     mParent  = parent;
     mFilename = filename;
     mType = type;
@@ -74,8 +72,8 @@ public class PlotRecoverDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.plot_recover_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+    initLayout( R.layout.plot_recover_dialog, R.string.title_plot_reload );
 
     mList = (ListView) findViewById(R.id.th2_list);
     mList.setDividerHeight( 2 );
@@ -87,7 +85,6 @@ public class PlotRecoverDialog extends Dialog
     mBtnOK.setOnClickListener( this );   // OK-SAVE
     // mBtnCancel.setOnClickListener( this );
 
-    // setTitle( R.string.title_current_station );
     updateList();
   }
 

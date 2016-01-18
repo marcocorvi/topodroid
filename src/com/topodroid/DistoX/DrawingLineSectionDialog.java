@@ -30,7 +30,7 @@ import android.graphics.BitmapFactory;
 
 import android.util.Log;
 
-public class DrawingLineSectionDialog extends Dialog
+public class DrawingLineSectionDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingLinePath mLine;
@@ -58,7 +58,7 @@ public class DrawingLineSectionDialog extends Dialog
   public DrawingLineSectionDialog( DrawingActivity context, TopoDroidApp app, boolean h_section, boolean exists,
                                    DrawingLinePath line, String from, String to, float azimuth, float clino )
   {
-    super( context );
+    super( context, R.string.DrawingLineSectionDialog );
     mParent = context;
     mApp  = app;
     mExists = exists;      // whether the section exists or it is being created

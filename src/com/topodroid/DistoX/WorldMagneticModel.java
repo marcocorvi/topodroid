@@ -18,7 +18,6 @@
  *  Email:  Susan.McLean@noaa.gov
  */
 package com.topodroid.DistoX;
-/*--------------------------------------------------------------------------*/
 
 import java.io.InputStream;
 import java.io.DataInputStream;

@@ -26,11 +26,9 @@ import android.widget.TextView;
 import android.widget.Button;
 
 
-public class SurveyStatDialog extends Dialog 
+public class SurveyStatDialog extends MyDialog 
                               // implements View.OnClickListener
 {
-    private Context mContext;
-
     private TextView mTextLeg;
     private TextView mTextDuplicate;
     private TextView mTextSurface;
@@ -46,8 +44,7 @@ public class SurveyStatDialog extends Dialog
 
     public SurveyStatDialog( Context context, SurveyStat stat )
     {
-      super(context);
-      mContext = context;
+      super( context, R.string.SurveyStatDialog );
       mStat = stat;
       // TDLog.Log(TDLog.LOG_STAT, "SurveyStat cstr");
     }
@@ -56,10 +53,8 @@ public class SurveyStatDialog extends Dialog
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.survey_stat_dialog);
 
-        getWindow().setLayout( LayoutParams.MATCH_PARENT,
-                               LayoutParams.WRAP_CONTENT );
+        initLayout( R.layout.survey_stat_dialog, R.string.survey_info );
 
         Resources res = mContext.getResources();
 
@@ -83,7 +78,6 @@ public class SurveyStatDialog extends Dialog
         mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );
         mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
 
-        setTitle( res.getString(R.string.survey_info) );
     }
 
     // @Override

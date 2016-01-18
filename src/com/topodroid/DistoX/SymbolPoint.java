@@ -193,7 +193,8 @@ class SymbolPoint extends Symbol
           } else if ( vals[k].equals("name") || vals[k].equals(locale) ) {
             ++k; while ( k < s && vals[k].length() == 0 ) ++k;
             if ( k < s ) {
-              name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
+              // name = (new String( vals[k].getBytes(iso) )).replace("_", " ");
+              name = vals[k].replace("_", " ");
               // Log.v(  TopoDroidApp.TAG, "set name " + name );
             }
           } else if ( vals[k].equals("th_name") ) {

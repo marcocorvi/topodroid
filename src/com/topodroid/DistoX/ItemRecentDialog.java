@@ -38,7 +38,7 @@ import android.widget.GridView;
 
 import android.util.Log;
 
-class ItemRecentDialog extends Dialog
+class ItemRecentDialog extends MyDialog
                        implements View.OnClickListener
                        , View.OnLongClickListener
                        // , IItemPicker
@@ -56,7 +56,6 @@ class ItemRecentDialog extends Dialog
   // private  Button mBTok;
   private SeekBar mSeekBar;
 
-  private Context mContext;
   // private DrawingActivity mParent;
   private ItemDrawer mParent;
 
@@ -88,8 +87,7 @@ class ItemRecentDialog extends Dialog
    */
   ItemRecentDialog( Context context, ItemDrawer parent, long type )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.ItemRecentDialog );
     mParent  = parent;
     nrRecent = TDSetting.mRecentNr;
 

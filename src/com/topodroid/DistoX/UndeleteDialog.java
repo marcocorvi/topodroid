@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -31,7 +30,7 @@ import android.widget.Toast;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class UndeleteDialog extends Dialog
+public class UndeleteDialog extends MyDialog
                             implements OnItemClickListener
                             , View.OnClickListener
 {
@@ -45,7 +44,7 @@ public class UndeleteDialog extends Dialog
 
   public UndeleteDialog( Context context, ShotActivity parent, DataHelper data, long sid )
   {
-    super( context );
+    super( context, R.string.UndeleteDialog );
     mParent = parent;
     mData   = data;
     mSID    = sid;

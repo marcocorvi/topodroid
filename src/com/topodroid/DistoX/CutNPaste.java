@@ -1,7 +1,7 @@
 /* @file CutNPaste.java
  *
  * @author marco corvi
- * @date nov 2011
+ * @date dec 2015
  *
  * @brief TopoDroid shot stations cut-n-paste
  * --------------------------------------------------------
@@ -32,6 +32,8 @@ import android.util.TypedValue;
 
 class CutNPaste
 {
+  final static int BUTTON_HEIGHT = 22;
+
   static String mClipboardText = null;
   static PopupWindow popup = null;
   static EditText    popup_et = null;
@@ -68,49 +70,45 @@ class CutNPaste
     if ( len < copy.length() ) len = copy.length();
     if ( len < paste.length() ) len = paste.length();
 
-    Button btn_cut = makeButton( context, cut, 0xffffffff, 20 );
-    btn_cut.setOnClickListener( new View.OnClickListener( ) {
-      public void onClick(View v) {
-        if ( popup_et != null ) {
-          mClipboardText = popup_et.getText().toString();
-          popup_et.setText("");
-          String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-          Toast t = Toast.makeText( context, str, Toast.LENGTH_SHORT );
-          t.setGravity( Gravity.LEFT | Gravity.TOP, 10, 10);
-          t.show();
+    Button btn_cut = makePopupButton( context, cut, layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          if ( popup_et != null ) {
+            mClipboardText = popup_et.getText().toString();
+            popup_et.setText("");
+            String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
+            Toast t = Toast.makeText( context, str, Toast.LENGTH_SHORT );
+            t.setGravity( Gravity.LEFT | Gravity.TOP, 10, 10);
+            t.show();
+          }
+          dismissPopup();
         }
-        dismissPopup();
-      }
-    } );
-    Button btn_copy = makeButton( context, copy, 0xffffffff, 20 );
-    btn_copy.setOnClickListener( new View.OnClickListener( ) {
-      public void onClick(View v) {
-        if ( popup_et != null ) {
-          mClipboardText = popup_et.getText().toString();
-          String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-          Toast t = Toast.makeText( context, str, Toast.LENGTH_SHORT );
-          t.setGravity( Gravity.LEFT | Gravity.TOP, 10, 10);
-          t.show();
+      } );
+    Button btn_copy = makePopupButton( context, copy, layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          if ( popup_et != null ) {
+            mClipboardText = popup_et.getText().toString();
+            String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
+            Toast t = Toast.makeText( context, str, Toast.LENGTH_SHORT );
+            t.setGravity( Gravity.LEFT | Gravity.TOP, 10, 10);
+            t.show();
+          }
+          dismissPopup();
         }
-        dismissPopup();
-      }
-    } );
-    Button btn_paste = makeButton( context, paste, 0xffffffff, 20 );
-    btn_paste.setOnClickListener( new View.OnClickListener( ) {
-      public void onClick(View v) {
-        if ( mClipboardText != null && popup_et != null ) {
-          popup_et.setText( mClipboardText );
+      } );
+    Button btn_paste = makePopupButton( context, paste, layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          if ( mClipboardText != null && popup_et != null ) {
+            popup_et.setText( mClipboardText );
+          }
+          dismissPopup();
         }
-        dismissPopup();
-      }
-    } );
-
-    layout.addView( btn_cut, new LinearLayout.LayoutParams(lHeight, lWidth));
-    layout.addView( btn_copy, new LinearLayout.LayoutParams(lHeight, lWidth));
-    layout.addView( btn_paste, new LinearLayout.LayoutParams(lHeight, lWidth));
+      } );
 
     FontMetrics fm = btn_cut.getPaint().getFontMetrics();
-    int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 1.3); // 0.7
+    int w = (int)( Math.abs( len * fm.ascent ) * 1.3); // 0.7
     int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 2.7); // 1.7
     // int h1 = (int)( textview0.getHeight() * 7 * 1.1 ); this is 0
     btn_cut.setWidth( w );
@@ -141,9 +139,9 @@ class CutNPaste
   }
 
   static Button makePopupButton( Context context, String text,
-                                         LinearLayout layout, int w, int h, View.OnClickListener listener )
+                                 LinearLayout layout, int w, int h, View.OnClickListener listener )
   {
-    Button button = makeButton( context, text, 0xffffffff, 20 );
+    Button button = makeButton( context, text, 0xffffffff, BUTTON_HEIGHT );
     layout.addView( button, new LinearLayout.LayoutParams(h, w));
     button.setOnClickListener( listener );
     button.setOnTouchListener( new View.OnTouchListener( ) {
@@ -234,10 +232,9 @@ class CutNPaste
     }
 
     FontMetrics fm = textview0.getPaint().getFontMetrics();
-    // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
-    int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+    int w = (int)( Math.abs( len * fm.ascent ) * 0.7);
     int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
-    // int h1 = (int)( textview0.getHeight() * 7 * 1.1 ); this is 0
+    // int h = (int)( BUTTON_HEIGHT * 7 * 1.1 ); 
     textview0.setWidth( w );
     if ( app.distoType() == Device.DISTO_X310 ) {
       textview1.setWidth( w );

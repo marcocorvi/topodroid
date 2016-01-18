@@ -37,7 +37,7 @@ import android.text.method.KeyListener;
 
 import android.util.Log;
 
-class FirmwareDialog extends Dialog
+class FirmwareDialog extends MyDialog
                              implements View.OnClickListener
 {
   private RadioButton mBtnDump;
@@ -47,15 +47,13 @@ class FirmwareDialog extends Dialog
 
   private EditText mETfile;
 
-  Context mContext;
   DeviceActivity mParent;
   TopoDroidApp   mApp;
   KeyListener    mETkeyListener;
 
   FirmwareDialog( Context context, DeviceActivity parent, TopoDroidApp app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.FirmwareDialog );
     mParent  = parent;
     mApp     = app;
   }
@@ -65,7 +63,7 @@ class FirmwareDialog extends Dialog
   {
     super.onCreate( bundle );
 
-    setContentView( R.layout.firmware_dialog );
+    initLayout( R.layout.firmware_dialog, R.string.firmware_title );
 
     mETfile  = (EditText) findViewById( R.id.firmware_file );
 
@@ -87,7 +85,6 @@ class FirmwareDialog extends Dialog
     mBtnOK.setOnClickListener( this );
     // mBtnClose.setOnClickListener( this );
     
-    setTitle( mParent.getResources().getString( R.string.firmware_title ) );
   }
 
   void setFile( String filename )

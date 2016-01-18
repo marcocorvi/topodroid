@@ -26,10 +26,9 @@ import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-public class DrawingLineDialog extends Dialog
+public class DrawingLineDialog extends MyDialog
                                implements View.OnClickListener
 {
-  private Context mContext;
   private DrawingLinePath mLine;
   private DrawingActivity mParent;
   private LinePoint mPoint;
@@ -50,8 +49,7 @@ public class DrawingLineDialog extends Dialog
 
   public DrawingLineDialog( DrawingActivity context, DrawingLinePath line, LinePoint lp )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DrawingLineDialog );
     mParent  = context;
     mLine  = line;
     mPoint = lp;
@@ -62,11 +60,10 @@ public class DrawingLineDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.drawing_line_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    setTitle( String.format( mParent.getResources().getString( R.string.title_draw_line ),
-              DrawingBrushPaths.mLineLib.getSymbolName( mLine.mLineType ) ) );
+    String title = String.format( mParent.getResources().getString( R.string.title_draw_line ),
+                                  DrawingBrushPaths.mLineLib.getSymbolName( mLine.mLineType ) );
+    initLayout( R.layout.drawing_line_dialog, title );
 
     // mTVtype = (TextView) findViewById( R.id.line_type );
     mEToptions = (EditText) findViewById( R.id.line_options );

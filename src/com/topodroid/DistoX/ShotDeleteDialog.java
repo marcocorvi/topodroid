@@ -7,6 +7,7 @@
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
@@ -25,10 +26,9 @@ import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
 
-public class ShotDeleteDialog extends Dialog
+public class ShotDeleteDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private Context mContext;
   private ShotActivity mParent;
   private DistoXDBlock mBlk;
 
@@ -44,8 +44,7 @@ public class ShotDeleteDialog extends Dialog
    */
   ShotDeleteDialog( Context context, ShotActivity parent, DistoXDBlock blk )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.ShotDeleteDialog );
     mParent  = parent;
     mBlk = blk;
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoSensorDialog");

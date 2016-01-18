@@ -1,4 +1,13 @@
 /** @file GMGroupsDialog.java
+ *
+ * @author marco corvi
+ * @date may 2012
+ *
+ * @brief TopoDroid calibration data dialog
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
@@ -14,10 +23,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 
-class GMGroupsDialog extends Dialog
+class GMGroupsDialog extends MyDialog
                      implements OnClickListener
 {
-  private Context mContext;
   private GMActivity mParent;
 
   private CheckBox mCBreset;
@@ -27,8 +35,7 @@ class GMGroupsDialog extends Dialog
 
   GMGroupsDialog( Context context, GMActivity parent, String policy )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.GMGroupsDialog );
     mParent  = parent;
     mPolicy  = policy;
   }
@@ -38,10 +45,7 @@ class GMGroupsDialog extends Dialog
   {
     super.onCreate( bundle );
 
-    setContentView(R.layout.gm_groups_dialog );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-
-    setTitle( mContext.getResources().getString( R.string.group_title ) );
+    initLayout( R.layout.gm_groups_dialog, R.string.group_title );
     
     mBtnOK = (Button) findViewById( R.id.group_ok );
     mBtnOK.setOnClickListener( this );

@@ -1,5 +1,13 @@
 /** @file ConnectionQueueItem.java
  *
+ * @author marco corvi
+ * @date 
+ *
+ * @brief TopoDroid cosurveying connection queue item
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 

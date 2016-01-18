@@ -29,7 +29,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-class DeviceRemoteDialog extends Dialog
+class DeviceRemoteDialog extends MyDialog
                    implements View.OnClickListener
 {
   private Button mBTlaserOn;
@@ -51,7 +51,7 @@ class DeviceRemoteDialog extends Dialog
                 ILister lister,
                 TopoDroidApp app )
   {
-    super( context );
+    super( context, R.string.DeviceRemoteDialog );
     mApp    = app;
     mLister = new ListerHandler( lister );
   }

@@ -7,7 +7,7 @@
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
- * 
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 
@@ -79,7 +79,7 @@ public class DrawingLabelPath extends DrawingPointPath
   public void draw( Canvas canvas, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TDLog.Log( TDLog.LOG_PATH, "DrawingLabelPath::draw " + mText );
+      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw " + mText );
       canvas.drawTextOnPath( mText, mPath, 0f, 0f, mPaint );
     }
   }
@@ -88,7 +88,7 @@ public class DrawingLabelPath extends DrawingPointPath
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TDLog.Log( TDLog.LOG_PATH, "DrawingLabelPath::draw[matrix] " + mText );
+      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mText );
       setTextSize();
       mTransformedPath = new Path( mPath );
       mTransformedPath.transform( matrix );

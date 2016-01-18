@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -401,8 +400,11 @@ public class CalibActivity extends Activity
         super.onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         return onSearchRequested();
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        String help_page = getResources().getString( R.string.CalibActivity );
+        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:

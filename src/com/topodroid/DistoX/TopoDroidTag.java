@@ -26,6 +26,7 @@ class TopoDroidTag
   public static final String TOPODROID_PLOT_CLINO   = "plot_clino";
   public static final String TOPODROID_PLOT_XOFF    = "plot_xoff";
   public static final String TOPODROID_PLOT_YOFF    = "plot_yoff";
+  public static final String TOPODROID_HELP_PAGE    = "help_page";
 
   // FIXME_SKETCH_3D
   public static final String TOPODROID_SKETCH_ID   = "sketch_id";

@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -29,7 +28,7 @@ import android.view.KeyEvent;
 
 // import android.util.Log;
 
-public class PhotoCommentDialog extends Dialog
+public class PhotoCommentDialog extends MyDialog
                          implements View.OnClickListener
 {
   private ShotActivity mParent;
@@ -46,7 +45,7 @@ public class PhotoCommentDialog extends Dialog
    */
   PhotoCommentDialog( Context context, ShotActivity parent )
   {
-    super( context );
+    super( context, R.string.PhotoCommentDialog );
     mParent = parent;
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoCommentDialog");
   }

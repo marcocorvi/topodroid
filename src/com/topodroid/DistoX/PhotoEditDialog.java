@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -31,7 +30,7 @@ import android.view.KeyEvent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-public class PhotoEditDialog extends Dialog
+public class PhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
   private PhotoActivity mParent;
@@ -49,7 +48,7 @@ public class PhotoEditDialog extends Dialog
    */
   PhotoEditDialog( Context context, PhotoActivity parent, PhotoInfo photo, String filename )
   {
-    super( context );
+    super( context, R.string.PhotoEditDialog );
     mParent = parent;
     mPhoto  = photo;
     mFilename = filename;

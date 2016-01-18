@@ -24,10 +24,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
-public class DrawingLabelDialog extends Dialog 
+public class DrawingLabelDialog extends MyDialog 
                                 implements View.OnClickListener
 {
-  private Context mContext;
   private EditText mLabel;
   private Button mBtnOK;
   // private Button mBtnCancel;
@@ -38,8 +37,7 @@ public class DrawingLabelDialog extends Dialog
 
   public DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
   {
-    super(context);
-    mContext  = context;
+    super(context, R.string.DrawingLabelDialog );
     mActivity = activity;
     mX = x; 
     mY = y;
@@ -49,8 +47,7 @@ public class DrawingLabelDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.drawing_label_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.drawing_label_dialog, R.string.label_title );
 
     mLabel     = (EditText) findViewById(R.id.label_text);
     mBtnOK     = (Button) findViewById(R.id.label_ok);
@@ -61,9 +58,6 @@ public class DrawingLabelDialog extends Dialog
 
     mLabel.setTextSize( TDSetting.mTextSize );
 
-    String title = mContext.getResources().getString( R.string.label_title );
-
-    setTitle( title );
   }
 
   public void onClick(View view)

@@ -40,7 +40,7 @@ import android.widget.Toast;
 
 import android.bluetooth.BluetoothDevice;
 
-public class ConnectDialog extends Dialog
+public class ConnectDialog extends MyDialog
                            implements View.OnClickListener
                            , OnItemClickListener
 {
@@ -63,7 +63,6 @@ public class ConnectDialog extends Dialog
 
   private TextView mTVstate;
 
-  private Context mContext;
   private TopoDroidApp mApp;
 
   private String mName = null;
@@ -89,8 +88,7 @@ public class ConnectDialog extends Dialog
 
   ConnectDialog( Context context, TopoDroidApp app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.ConnectDialog );
     mApp     = app;
     mName    = null; // mApp.getConnectedDeviceName();
   }

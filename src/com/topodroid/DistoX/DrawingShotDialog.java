@@ -30,12 +30,10 @@ import android.widget.LinearLayout;
 import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
-public class DrawingShotDialog extends Dialog 
+public class DrawingShotDialog extends MyDialog 
                                implements View.OnClickListener
                                , View.OnLongClickListener
 {
-  private Context mContext;
-
   private TextView mLabel;
   private Button mBtnOK;
   // private Button mBtnCancel;
@@ -61,8 +59,7 @@ public class DrawingShotDialog extends Dialog
 
   public DrawingShotDialog( Context context, DrawingActivity parent, DrawingPath shot )
   {
-    super(context);
-    mContext = context;
+    super(context, R.string.DrawingShotDialog );
     mParent  = parent;
     mBlock   = shot.mBlock;
   }

@@ -6,7 +6,7 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/eband3 for more book information.
  *
- * this class has been taken from "Hello, Android" source code
+ * This class has been taken from "Hello, Android" source code
 ***/
 package com.topodroid.DistoX;
 

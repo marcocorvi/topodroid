@@ -37,11 +37,10 @@ import android.content.IntentFilter;
 import android.content.Context;
 
 
-public class ImportDialog extends Dialog
+public class ImportDialog extends MyDialog
                           implements OnItemClickListener
                           , OnClickListener
 { 
-  private Context mContext;
   private TopoDroidApp app;
   private TopoDroidActivity mParent;
 
@@ -51,8 +50,7 @@ public class ImportDialog extends Dialog
 
   public ImportDialog( Context context, TopoDroidActivity parent, TopoDroidApp _app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.ImportDialog );
     mParent  = parent;
     app = _app;
   }
@@ -61,7 +59,8 @@ public class ImportDialog extends Dialog
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    setContentView(R.layout.import_dialog);
+
+    initLayout( R.layout.import_dialog, R.string.import_title );
 
     mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list);
@@ -70,9 +69,6 @@ public class ImportDialog extends Dialog
 
     // mBtnCancel = (Button)findViewById( R.id.button_cancel );
     // mBtnCancel.setOnClickListener( this );
-
-    // setTitleColor( 0x006d6df6 );
-    setTitle( R.string.import_title );
 
     File[] files = TDPath.getImportFiles();
     ArrayList<String> names = new ArrayList<String>();

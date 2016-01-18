@@ -26,7 +26,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 
-public class SurveyRenameDialog extends Dialog
+public class SurveyRenameDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private EditText mEtName;
@@ -37,7 +37,7 @@ public class SurveyRenameDialog extends Dialog
 
   SurveyRenameDialog( Context context, SurveyActivity parent )
   {
-    super( context );
+    super( context, R.string.SurveyRenameDialog );
     mParent = parent;
   }
 

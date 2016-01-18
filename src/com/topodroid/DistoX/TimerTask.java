@@ -1,4 +1,13 @@
 /** @file TimerTask.java
+ *
+ * @author marco corvi
+ * @date jan 2014
+ *
+ * @brief TopoDroid timer
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 

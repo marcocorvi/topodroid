@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -36,10 +35,9 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class CalibGMDialog extends Dialog
+public class CalibGMDialog extends MyDialog
                            implements View.OnClickListener
 {
-  private Context     mContext;
   private GMActivity  mParent;
   private CalibCBlock mBlk;
 
@@ -65,8 +63,7 @@ public class CalibGMDialog extends Dialog
    */
   CalibGMDialog( Context context, GMActivity parent, CalibCBlock blk )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CalibGMDialog );
     mParent  = parent;
     mBlk     = blk;
   }
@@ -76,10 +73,8 @@ public class CalibGMDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_NO_TITLE); 
 
-    setContentView(R.layout.calib_gm_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.calib_gm_dialog, null );
 
     mETbearing = (EditText) findViewById( R.id.gm_bearing );
     mETclino   = (EditText) findViewById( R.id.gm_clino   );
@@ -88,28 +83,29 @@ public class CalibGMDialog extends Dialog
 
     mETname = (EditText) findViewById(R.id.gm_name);
 
-    LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout2 );
+    LinearLayout layout2 = (LinearLayout) findViewById( R.id.layout2 );
     int size = TopoDroidApp.getScaledSize( mContext );
-    layout4.setMinimumHeight( size + 20 );
+    layout2.setMinimumHeight( size + 20 );
     
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, 10, 20, 10 );
 
-    mButtonOK = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
+    // mButtonOK     = new MyCheckBox( mContext, size, R.drawable.iz_save, R.drawable.iz_save ); 
     mButtonDelete = new MyCheckBox( mContext, size, R.drawable.iz_delete, R.drawable.iz_delete ); 
     mCBregroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no ); 
     mCBregroup.setState( false );
 
-    layout4.addView( mCBregroup, lp );
-    layout4.addView( mButtonOK, lp );
-    layout4.addView( mButtonDelete, lp );
+    layout2.addView( mCBregroup, lp );
+    // layout2.addView( mButtonOK, lp );
+    layout2.addView( mButtonDelete, lp );
+
 
     // LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mCBregroup.getLayoutParams();
     // params.setMargins( 0, 0, 40, 0 );
     // mCBregroup.setLayoutParams( params );
     
-    // mButtonOK     = (Button) findViewById(R.id.gm_ok );
+    mButtonOK     = (Button) findViewById(R.id.gm_ok );
     // mButtonDelete = (Button) findViewById(R.id.gm_delete );
     // mCBregroup = (CheckBox) findViewById(R.id.gm_regroup );
     // mCBregroup.setChecked( false );

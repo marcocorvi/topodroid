@@ -37,12 +37,11 @@ import android.view.View.OnClickListener;
 // import android.widget.AdapterView;
 // import android.widget.AdapterView.OnItemClickListener;
 
-public class SurveyNewDialog extends Dialog
+public class SurveyNewDialog extends MyDialog
                              implements View.OnClickListener
                              , View.OnLongClickListener
 {
   private TopoDroidActivity mParent;
-  private Context mContext;
 
   private EditText mEditName;
   private Button mEditDate;
@@ -66,8 +65,7 @@ public class SurveyNewDialog extends Dialog
 // -------------------------------------------------------------------
   public SurveyNewDialog( Context context, TopoDroidActivity parent, long old_sid, long old_id )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.SurveyNewDialog );
     mParent  = parent;
     mApp = (TopoDroidApp) mParent.getApplication();
     mOldSid = old_sid;
@@ -79,10 +77,7 @@ public class SurveyNewDialog extends Dialog
   {
     super.onCreate( savedInstanceState );
 
-    setContentView(R.layout.survey_new_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-
-    setTitle( R.string.title_survey );
+    initLayout( R.layout.survey_new_dialog, R.string.title_survey );
 
     mEditName    = (EditText) findViewById(R.id.survey_name);
     mEditDate    = (Button) findViewById(R.id.survey_date);

@@ -25,7 +25,7 @@ import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-public class DrawingAreaDialog extends Dialog
+public class DrawingAreaDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingAreaPath mArea;
@@ -40,7 +40,7 @@ public class DrawingAreaDialog extends Dialog
 
   public DrawingAreaDialog( DrawingActivity context, DrawingAreaPath line )
   {
-    super( context );
+    super( context, R.string.DrawingAreaDialog );
     mParent = context;
     mArea = line;
     mOrientable = DrawingBrushPaths.mAreaLib.isSymbolOrientable( mArea.mAreaType );
@@ -51,11 +51,9 @@ public class DrawingAreaDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.drawing_area_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-
-    setTitle( String.format( mParent.getResources().getString( R.string.title_draw_area ),
-              DrawingBrushPaths.mAreaLib.getSymbolName( mArea.mAreaType ) ) );
+    String title = String.format( mParent.getResources().getString( R.string.title_draw_area ),
+                                  DrawingBrushPaths.mAreaLib.getSymbolName( mArea.mAreaType ) );
+    initLayout( R.layout.drawing_area_dialog, title );
 
     mOrientationWidget = new OrientationWidget( this, mOrientable, mArea.mOrientation );
 

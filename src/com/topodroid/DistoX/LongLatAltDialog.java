@@ -8,8 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130520 altimetric altitude
  */
 package com.topodroid.DistoX;
 
@@ -39,16 +37,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.KeyEvent;
 
 import android.inputmethodservice.KeyboardView;
 import android.widget.Toast;
 
 import android.util.Log;
 
-public class LongLatAltDialog extends Dialog
+public class LongLatAltDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private Context mContext;
   private LocationDialog mParent;
 
   private MyKeyboard mKeyboard = null;
@@ -64,8 +62,7 @@ public class LongLatAltDialog extends Dialog
 
   public LongLatAltDialog( Context context, LocationDialog parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.LongLatAltDialog );
     mParent  = parent;
   }
 
@@ -74,8 +71,8 @@ public class LongLatAltDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.longlatalt_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+    initLayout( R.layout.longlatalt_dialog, R.string.title_coord );
 
     mEditLong  = (EditText) findViewById(R.id.edit_long );
     mEditLat   = (EditText) findViewById(R.id.edit_lat );
@@ -113,7 +110,6 @@ public class LongLatAltDialog extends Dialog
     mBtnView = (Button) findViewById(R.id.button_view);
     mBtnView.setOnClickListener( this );
 
-    setTitle( R.string.title_coord );
   }
 
   @Override
@@ -239,6 +235,20 @@ public class LongLatAltDialog extends Dialog
     }
     dismiss();
   }
+
+  // @Override 
+  // // public boolean onKeyLongPress( int code, KeyEvent ev )
+  // public boolean onKeyDown( int code, KeyEvent ev )
+  // {
+  //   if ( code == KeyEvent.KEYCODE_BACK ) {
+  //     onBackPressed();
+  //     return true;
+  //   } else if ( code == KeyEvent.KEYCODE_MENU ) {
+  //     DistoXManualDialog.show Help Page( mContext, R.string.LongLatAltDialog );
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
 }
 

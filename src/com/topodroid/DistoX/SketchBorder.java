@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130216 created
- * 20130830 getCenter
  */
 package com.topodroid.DistoX;
 

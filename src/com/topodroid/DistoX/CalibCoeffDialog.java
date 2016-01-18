@@ -8,7 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
  */
 package com.topodroid.DistoX;
 
@@ -26,10 +25,9 @@ import android.view.View.OnClickListener;
 
 // import android.util.Log;
 
-public class CalibCoeffDialog extends Dialog
+public class CalibCoeffDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private Context mContext;
   private TopoDroidApp mApp;
 
   private TextView mTextBG;
@@ -68,8 +66,7 @@ public class CalibCoeffDialog extends Dialog
                            Vector bg, Matrix ag, Vector bm, Matrix am, Vector nl,
                            float delta, float delta2, float error, long iter, byte[] coeff )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.CalibCoeffDialog );
     mApp     = app;
     mCoeff   = coeff;
 
@@ -101,9 +98,8 @@ public class CalibCoeffDialog extends Dialog
   {
     super.onCreate(savedInstanceState);
 
-    setTitle( mContext.getResources().getString( R.string.title_coeff ) );
+    initLayout( R.layout.calib_coeff_dialog, R.string.title_coeff );
 
-    setContentView(R.layout.calib_coeff_dialog);
     mTextBG  = (TextView) findViewById(R.id.coeff_bg);
     mTextAGx = (TextView) findViewById(R.id.coeff_agx);
     mTextAGy = (TextView) findViewById(R.id.coeff_agy);

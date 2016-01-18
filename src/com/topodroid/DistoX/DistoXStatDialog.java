@@ -32,10 +32,9 @@ import android.widget.ListView;
 
 import android.widget.ArrayAdapter;
 
-public class DistoXStatDialog extends Dialog 
+public class DistoXStatDialog extends MyDialog 
                               // implements View.OnClickListener
 {
-    private Context mContext;
     private DistoXNum mNum;
     private String mOrigin;
 
@@ -53,8 +52,7 @@ public class DistoXStatDialog extends Dialog
 
     public DistoXStatDialog( Context context, DistoXNum num, String origin )
     {
-      super(context);
-      mContext = context;
+      super( context, R.string.DistoXStatDialog );
       mNum = num;
       mOrigin = origin;
     }
@@ -63,8 +61,8 @@ public class DistoXStatDialog extends Dialog
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.distox_stat_dialog);
-        getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+
+        initLayout( R.layout.distox_stat_dialog, R.string.title_stats );
 
         mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
         mTextLength   = (TextView) findViewById(R.id.text_stat_length);
@@ -112,7 +110,6 @@ public class DistoXStatDialog extends Dialog
         mTextSplays.setText( String.format( res.getString(R.string.stat_splay),
                                             mNum.splaysNr() ) );
 
-        setTitle( R.string.title_stats );
     }
 
     // @Override

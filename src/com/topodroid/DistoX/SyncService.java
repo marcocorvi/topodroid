@@ -1,8 +1,10 @@
 /** @file SyncService.java
  * 
+ * --------------------------------------------------------
  * this class is made after the sample BluetoothChat by the 
  * The Android Open Source Project which is licenced under
  * the Apache License, Version 2.0 (the "License");
+ * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
 

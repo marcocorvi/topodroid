@@ -8,9 +8,6 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
- * CHANGES
- * 20130307 made Annotations into a dialog
- * 201311   icon for the button OK
  */
 package com.topodroid.DistoX;
 
@@ -37,7 +34,7 @@ import android.view.ViewGroup.LayoutParams;
 // import android.view.KeyEvent;
 
 
-public class DistoXAnnotations extends Dialog // Activity
+public class DistoXAnnotations extends MyDialog // Activity
                                implements View.OnClickListener
 {
   // private TextView mTVtitle;
@@ -49,7 +46,7 @@ public class DistoXAnnotations extends Dialog // Activity
 
   DistoXAnnotations( Context context, String title )
   {
-    super( context );
+    super( context, R.string.DistoXAnnotations );
     mTitle = title;
   }
 

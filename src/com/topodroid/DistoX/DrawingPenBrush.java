@@ -13,8 +13,6 @@ package com.topodroid.DistoX;
 
 import android.graphics.Path;
 
-/**
- */
 public class DrawingPenBrush extends DrawingBrush
 {
     @Override
