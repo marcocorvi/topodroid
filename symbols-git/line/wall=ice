@@ -1,6 +1,6 @@
 symbol line
 name wall_ice
-name-es paredes de hielo
+name-es paredes_de_hielo
 name-bg стена_лед
 name-ru стена_во_льду
 th_name wall:ice
