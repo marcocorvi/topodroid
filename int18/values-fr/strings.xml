@@ -208,6 +208,7 @@
     <string name="no_device_found">Pas de périphérique trouvé</string>
     <string name="no_gms">La Calibration ne contient pas de données.\nUtiliser le bouton Télécharger</string>
     <string name="no_leg_intersection">La ligne de section ne coupe aucune ligne cheminement</string>
+    <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string>
     <string name="no_photos">Le relevé ne contient pas de photo</string>
     <string name="no_plots">Le relevé ne contient pas de croquis.\nUtilisez le bouton Ajouter pour en créer un.</string>
@@ -662,8 +663,10 @@
     <string name="title_draw_point">POINT %1$s</string>
     <string name="title_edit">Modifier</string>
     <string name="title_erase">Supprimer</string>
-    <string name="title_location">Localisation</string>
-    <string name="title_location_gps">Localisation</string>
+    <!-- TODO string name="title_fixed">Fixed points</string -->
+    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
+    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
+    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
     <string name="title_manual">TopoDroid Manuel utilisateur</string>
     <string name="title_mode">Mode d\'affichage</string>
     <string name="title_move">Déplacement</string>

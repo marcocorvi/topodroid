@@ -208,6 +208,7 @@
     <string name="no_device_found">No device found</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
+    <string name="no_location_data">No location data</string>
     <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>
     <string name="no_photos">Survey has no photo</string>
     <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
@@ -662,8 +663,10 @@
     <string name="title_draw_point">POINT %1$s</string>
     <string name="title_edit">Edit</string>
     <string name="title_erase">Erase</string>
-    <string name="title_location">Location</string>
-    <string name="title_location_gps">Location *</string>
+    <string name="title_fixed">Fixed points</string>
+    <string name="title_fixed_import">Fixed point import</string>
+    <string name="title_fixed_gps">Fixed point: GPS</string>
+    <string name="title_fixed_add">Fixed point: insert</string>
     <string name="title_manual">TopoDroid User Manual</string>
     <string name="title_mode">Display Mode</string>
     <string name="title_move">Moving</string>

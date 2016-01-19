@@ -204,6 +204,7 @@
     <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
+    <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
     <string name="no_photos">Rilievo senza foto</string>
     <string name="no_plots">Rilievo senza disegni</string>
@@ -575,8 +576,10 @@
     <string name="title_draw_point">PUNTO %1$s</string>
     <string name="title_edit">Edita</string>
     <string name="title_erase">Cancella</string>
-    <string name="title_location">Posizione</string>
-    <string name="title_location_gps">Posizione *</string>
+    <!-- TODO string name="title_fixed">Fixed points</string -->
+    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
+    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
+    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
     <string name="title_mode">Modalità display</string>
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>

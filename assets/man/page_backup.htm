@@ -1,23 +1,37 @@
 <html><body>
 
-<b>Sketch exports</b><br>
-Sketches are stored in therion format. Exporting as <i>Therion</i> will save a new copy.<br><p>
+<h4>Sketch Reload dialog</h4>
 
-The <b>cSurvey</b> export file contains both the plan and the profile sketches. However it does not has the cross-sections. Cross-sections cannot be exported as cSurvey files, and you need to export as images if you want to use them for postprocessing with cSurvey.<br><p.
+The "Sketch reload" dialog is opened by the "Reload" menu of the "sketch" window.
+<br><p>
 
-The resolution of <b>PNG</b> images is an adjustable setting. However a larger and more detailed image requires more CPU time and may fail due to memory limits. If it fails TopoDroid tries reducing the resolution until it succeeds exporting the sketch as PNG image file.<br><p>
+TopoDroid maintains backup copies of sketch files, from which the sketch can be recovered.<br>
+TopoDroid keeps a set of four backup copies for each sketch file.
+These are named with suffixes "bck", "bck0", "bck1", and "bck2" and are stored in the <i>th2</i> (Therion files)
+or <i>tdr</i> (binary files) subdirectory. Whenever a sketch is saved the backup copies are rotated
+(eg, "bck1" is renamed "bck2", and so on; "bck" is renamed "bck0"),
+the old "th2" or "tdr" file is renamed with suffix "bck", and the sketch is saved to a new "th2" or "tdr" file.
+<br><p>
 
-Sketches can be exported as 2D <b>DXF</b> files. The AutoCAD version of the exported DXF files can be either 6 or 12. In the former cubic lines are replaced by polylines. For the latter splines are used, however there are issues loading DXF saved with version 12 in AutoCAD.<br><p>
+TopoDroid saves a sketch whenever it is modified (eg, a new item is added, or part of the sketch is erased)
+while it is open. Only one backup is used in this case: the old saved copy being renamed with suffix "bck".
+<br><p>
 
-<b>Sketch backup copies</b><br>
-A sketch is saved whenever it is modified. TopoDroid maintains <a href="page_backup.htm">backup</a> copies of sketch files, from which a skatch can be recovered (menu "reload" of the sketch window).</li>
+The sketch is saved only if you have made changes to it, otherwise it is not saved and the backup copies are not rotated.
+<br><p>
 
-TopoDroid keeps a set of four backup copies for each sketch file. These are named with suffixes "bck", "bck0", "bck1", and "bck2" and are stored in the <i>th2</i> subdirectory. Whenever a sketch is saved the backup copies are rotated (eg, "bck1" is renamed "bck2", and so on; "bck" is renamed "bck0"), the old "th2" file is renamed with suffix "bck", and the sketch is saved to a new "th2" file.<br><p>
+The "Sketch reload" dialog shows the list of the sketch backups. Each entry has:<br>
+<ul>
+<li>the size of the file (in bytes)</li>
+<li>how long ago it was written, with suffixes for minutes (m), hours (h), days (d), months (M) and years (Y)</li>
+<li>the filename</li>
+</ul>
+<br><p> 
 
-TopoDroid saves a sketch whenever it is modified (eg, a new item is added, or part of the sketch is erased) while it is open. Only one backup is used in this case: the old saved copy being renamed with suffix "bck".<br><p>
-
-The sketch is saved only if you have made changes to it, otherwise it is not saved and the backup copies are not rotated.<br><p>
-
-When you need to recover a sketch you can choose which copy to load. The dialog displays the backup files and their sizes. Select the backup copy and tap the "OK" button.<br><p>
+To recover a sketch you choose which copy to load. 
+The filename is shown above the list.
+Next you tap the <b>OK</b> button to confirm the choice.<br>
+The <b>Back</b> key closes the dialog without reloading the sketch.
+<br><p>
 
 </body></html>

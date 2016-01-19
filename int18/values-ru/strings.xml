@@ -210,6 +210,7 @@
     <string name="no_device_found">Прибор не обнаружен</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
+    <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string>
     <string name="no_photos">В съёмке нет фото</string>
     <string name="no_plots">В съёмке нет абрисов \nДля создания используйте кнопку Добавить</string>
@@ -640,8 +641,10 @@
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редактировать</string>
     <string name="title_erase">Удалить</string>
-    <string name="title_location">Расположение</string>
-    <string name="title_location_gps">Расположение *</string>
+    <!-- TODO string name="title_fixed">Fixed points</string -->
+    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
+    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
+    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
     <string name="title_manual">TopoDroid Инструкция</string>
     <string name="title_mode">Режим просмотра</string>
     <string name="title_move">Подвижный</string>

@@ -210,6 +210,7 @@
     <string name="no_device_found">Не е намерено устройство</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
+    <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
     <string name="no_photos">Картировката не съдържа снимка</string>
     <string name="no_plots">Картировката не съдържа скици\nДобавете нова</string>
@@ -648,8 +649,10 @@
     <string name="title_draw_point">Точка %1$s</string>
     <string name="title_edit">Редакция</string>
     <string name="title_erase">Изтриване</string>
-    <string name="title_location">Местоположение</string>
-    <string name="title_location_gps">Местоположение *</string>
+    <!-- TODO string name="title_fixed">Fixed points</string -->
+    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
+    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
+    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
     <string name="title_manual">TopoDroid ръководство</string>
     <string name="title_mode">Показване на</string>
     <string name="title_move">Преместване</string>

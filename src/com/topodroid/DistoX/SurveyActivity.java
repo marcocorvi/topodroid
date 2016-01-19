@@ -19,15 +19,18 @@ import java.io.File;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 // import android.app.Dialog;
-import android.content.DialogInterface;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.ActivityNotFoundException;
+import android.content.res.Resources;
 
 import android.location.LocationManager;
 
@@ -36,14 +39,8 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
-import android.app.DatePickerDialog;
-
-import android.app.Application;
-import android.view.KeyEvent;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import android.widget.Toast;
 
@@ -51,8 +48,7 @@ import android.widget.Toast;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.view.KeyEvent;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -140,54 +136,7 @@ public class SurveyActivity extends Activity
     
 
 // -------------------------------------------------------------------
-  // private final static int LOCATION_REQUEST = 1;
-  private static int CRS_CONVERSION_REQUEST = 2; // not final ?
   
-  // private LocationDialog mLocation;
-  private FixedDialog mFixedDialog;
-
-  void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
-  {
-    if ( cs_to == null ) return;
-    try {
-      Intent intent = new Intent( "Proj4.intent.action.Launch" );
-      // Intent intent = new Intent( Intent.ACTION_DEFAULT, "com.topodroid.Proj4.intent.action.Launch" );
-      intent.putExtra( "version", "1.1" );      // Proj4 version
-      intent.putExtra( "cs_from", "Long-Lat" ); // NOTE MUST USE SAME NAME AS Proj4
-      intent.putExtra( "cs_to", cs_to ); 
-      intent.putExtra( "longitude", fxd.lng );
-      intent.putExtra( "latitude",  fxd.lat );
-      intent.putExtra( "altitude",  fxd.alt );
-
-      mFixedDialog = dialog;
-      TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
-      startActivityForResult( intent, SurveyActivity.CRS_CONVERSION_REQUEST );
-    } catch ( ActivityNotFoundException e ) {
-      mFixedDialog = null;
-      Toast.makeText( this, R.string.no_proj4, Toast.LENGTH_SHORT).show();
-    }
-  }
-
-  public void onActivityResult( int reqCode, int resCode, Intent intent )
-  {
-    if ( resCode == RESULT_OK ) {
-      if ( reqCode == CRS_CONVERSION_REQUEST ) {
-        if ( mFixedDialog != null ) {
-          Bundle bundle = intent.getExtras();
-          String cs = bundle.getString( "cs_to" );
-          String title = String.format(Locale.ENGLISH, "%.2f %.2f %.2f",
-             bundle.getDouble( "longitude"),
-             bundle.getDouble( "latitude"),
-             bundle.getDouble( "altitude") );
-          TDLog.Log( TDLog.LOG_LOC, "CONV. RESULT " + title );
-          mFixedDialog.setTitle( title );
-          mFixedDialog.setCSto( cs );
-          mFixedDialog = null;
-        }
-      }
-    }
-  }
-
   boolean updateDisplay()
   {
     // TDLog.Log( TDLog.LOG_SURVEY, "app mSID " + mApp.mSID );
@@ -220,7 +169,6 @@ public class SurveyActivity extends Activity
 
     mApp = (TopoDroidApp)getApplication();
     mApp.mSurveyActivity = this;
-    mFixedDialog = null;
 
     mContext = this;
     mustOpen = false;
@@ -288,15 +236,13 @@ public class SurveyActivity extends Activity
               getResources().getString( R.string.title_survey ) );
   }
 
-  // @Override
-  // public synchronized void onResume() 
-  // {
-  //   super.onResume();
-  //   if ( mustOpen ) {
-  //     mustOpen = false;
-  //     doOpen();
-  //   }
-  // }
+  @Override
+  public synchronized void onResume() 
+  {
+    super.onResume();
+    float decl = mApp.mData.getSurveyDeclination( mApp.mSID );
+    mEditDecl.setText( String.format(Locale.ENGLISH, "%.4f", decl ) );
+  }
 
   // ------------------------------------------
    
@@ -335,13 +281,11 @@ public class SurveyActivity extends Activity
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS
-      doLocation();
+      startActivity( new Intent( this, FixedActivity.class ) );
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // photo camera
-      Intent photoIntent = new Intent( this, PhotoActivity.class );
-      startActivity( photoIntent );
+      startActivity( new Intent( this, PhotoActivity.class ) );
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // sensors data
-      Intent intent = new Intent( this, SensorListActivity.class );
-      startActivity( intent );
+      startActivity( new Intent( this, SensorListActivity.class ) );
     }
   }
 
@@ -412,12 +356,6 @@ public class SurveyActivity extends Activity
   //   mContext.startActivity( openIntent );
   // }
 
-  private void doLocation()
-  {
-    // TDLog.Log( TDLog.LOG_DEBUG, "doLocation" );
-    LocationManager lm = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
-    new LocationDialog( mContext, this, mApp, lm ).show();
-  }
 
   private void doNotes()
   {
@@ -431,22 +369,23 @@ public class SurveyActivity extends Activity
   void setDeclination( float decl )
   {
     mEditDecl.setText( String.format(Locale.ENGLISH, "%.4f", decl ) );
+    mApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
   }
 
-  float getDeclination()
-  {
-    if ( mEditDecl.getText() != null ) {
-      String decl_str = mEditDecl.getText().toString();
-      if ( decl_str != null || decl_str.length() > 0 ) {
-        try {
-          return Float.parseFloat( decl_str );
-        } catch ( NumberFormatException e ) {
-          // ignore
-        }
-      }
-    }
-    return 0.0f;
-  }
+  // float getDeclination()
+  // {
+  //   if ( mEditDecl.getText() != null ) {
+  //     String decl_str = mEditDecl.getText().toString();
+  //     if ( decl_str != null || decl_str.length() > 0 ) {
+  //       try {
+  //         return Float.parseFloat( decl_str );
+  //       } catch ( NumberFormatException e ) {
+  //         // ignore
+  //       }
+  //     }
+  //   }
+  //   return 0.0f;
+  // }
 
   // ---------------------------------------------------------------
 
@@ -582,37 +521,6 @@ public class SurveyActivity extends Activity
     setResult( RESULT_OK, new Intent() );
     finish();
     // dismiss();
-  }
-
-  public boolean hasLocation( String station )
-  {
-    return mApp.mData.hasFixed( mApp.mSID, station );
-  }
- 
-  public FixedInfo addLocation( String station, double longitude, double latitude, double h_ellpsoid, double altimetric )
-  {
-    long id = mApp.mData.insertFixed( mApp.mSID, -1L, station, longitude, latitude, h_ellpsoid, altimetric, "", 0L );
-    return new FixedInfo( id, station, longitude, latitude, h_ellpsoid, altimetric, "" ); // FIXME comment
-  }
-
-  boolean updateFixed( FixedInfo fxd, String station )
-  {
-    return mApp.mData.updateFixedStation( fxd.id, mApp.mSID, station );
-  }
-
-  void updateFixedData( FixedInfo fxd )
-  {
-    mApp.mData.updateFixedData( fxd.id, mApp.mSID, fxd.lng, fxd.lat, fxd.alt );
-  }
-
-  void updateFixedAltitude( FixedInfo fxd )
-  {
-    mApp.mData.updateFixedAltitude( fxd.id, mApp.mSID, fxd.alt, fxd.asl );
-  }
-
-  public void dropFixed( FixedInfo fxd )
-  {
-    mApp.mData.updateFixedStatus( fxd.id, mApp.mSID, TopoDroidApp.STATUS_DELETED );
   }
 
 

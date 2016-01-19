@@ -37,16 +37,16 @@ class FixedInfo extends MagLatLong
     comment = cmt;
   }
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid )
-  {
-    id = _id;
-    name = n;
-    lat = latitude;
-    lng = longitude;
-    alt = h_ellip;
-    asl = h_geoid;
-    comment = "";
-  }
+  // public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid )
+  // {
+  //   id = _id;
+  //   name = n;
+  //   lat = latitude;
+  //   lng = longitude;
+  //   alt = h_ellip;
+  //   asl = h_geoid;
+  //   comment = "";
+  // }
 
   // get the string "name long lat alt" for the exports
   public String toExportString()

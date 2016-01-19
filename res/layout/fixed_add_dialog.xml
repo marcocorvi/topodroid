@@ -8,8 +8,18 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     >
+  <EditText android:id="@+id/edit_name" 
+        android:layout_marginTop="2dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:hint="@string/station"
+        android:singleLine="true"
+        android:nextFocusDown="@+id/edit_long"
+      	android:ems="25"
+     />
 
   <LinearLayout android:id="@+id/layout1"
+      android:layout_below="@id/edit_name"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -114,12 +124,23 @@
         android:singleLine="true"
         android:hint="@string/h_geoid_hint"
         android:scrollHorizontally="true"
-        android:nextFocusDown="@id/top"
+        android:nextFocusDown="@+id/edit_comment"
         />
   </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout4"
+  <EditText android:id="@id/edit_comment" 
       android:layout_below="@id/layout3b"
+      android:layout_marginTop="2dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:hint="@string/comment"
+      android:singleLine="true"
+      android:nextFocusDown="@id/top"
+      android:ems="25"
+  />
+
+  <LinearLayout android:id="@+id/layout4"
+      android:layout_below="@id/edit_comment"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
@@ -140,9 +161,9 @@
       <Button android:id="@+id/button_ok"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:text="@string/button_save"
         android:background="@drawable/button"
         style="@style/button_default"
+        android:text="@string/button_save"
         />
       </LinearLayout>
   </LinearLayout>

@@ -227,6 +227,7 @@
     <string name="no_device_found">Kein Gerät gefunden</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
+    <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
     <string name="no_photos">Vermessung hat kein Foto</string>
     <string name="no_plots">Vermessung hat keine Skizze</string>
@@ -622,8 +623,10 @@
     <string name="title_draw_point">PUNKT %1$s</string>
     <string name="title_edit">Bearbeiten</string>
     <string name="title_erase">Löschen</string>
-    <string name="title_location">Position</string>
-    <string name="title_location_gps">GPS-Position</string>
+    <!-- TODO string name="title_fixed">Fixed points</string -->
+    <!-- TODO string name="title_fixed_import">Fixed point: import</string -->
+    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
+    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
     <string name="title_mode">Anzeigemodus</string>
     <string name="title_move">Verlagerung</string>
     <string name="title_note">Anmerkung</string>

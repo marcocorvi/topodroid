@@ -47,33 +47,32 @@ public class DrawingModeDialog extends MyDialog
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawing_mode_dialog);
+      super.onCreate(savedInstanceState);
 
-        mCBleg     = (CheckBox) findViewById(R.id.cb_mode_leg);
-        mCBsplay   = (CheckBox) findViewById(R.id.cb_mode_splay);
-        mCBstation = (CheckBox) findViewById(R.id.cb_mode_station);
-        mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
-        mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
+      initLayout( R.layout.drawing_mode_dialog, R.string.title_refs );
 
-        mBtnOK   = (Button) findViewById(R.id.button_ok);
-        mBtnOK.setOnClickListener( this );
-        // mBtnBack = (Button) findViewById(R.id.button_cancel);
-        // mBtnBack.setOnClickListener( this );
+      mCBleg     = (CheckBox) findViewById(R.id.cb_mode_leg);
+      mCBsplay   = (CheckBox) findViewById(R.id.cb_mode_splay);
+      mCBstation = (CheckBox) findViewById(R.id.cb_mode_station);
+      mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
+      mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
 
-        int mode = mSurface.getDisplayMode();
-        mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
-        mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
-        mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
-        mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
+      mBtnOK   = (Button) findViewById(R.id.button_ok);
+      mBtnOK.setOnClickListener( this );
+      // mBtnBack = (Button) findViewById(R.id.button_cancel);
+      // mBtnBack.setOnClickListener( this );
 
-        if ( mParent != null && TDSetting.mLevelOverNormal ) {
-          mCBfixed.setChecked( mParent.mShiftDrawing );
-        } else {
-          mCBfixed.setVisibility( View.GONE );
-        }
+      int mode = mSurface.getDisplayMode();
+      mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
+      mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
+      mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
+      mCBgrid.setChecked(    (mode & DisplayMode.DISPLAY_GRID) != 0 );
 
-        setTitle( R.string.title_refs );
+      if ( mParent != null && TDSetting.mLevelOverNormal ) {
+        mCBfixed.setChecked( mParent.mShiftDrawing );
+      } else {
+        mCBfixed.setVisibility( View.GONE );
+      }
     }
 
     public void onClick(View view)

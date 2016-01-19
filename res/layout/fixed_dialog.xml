@@ -20,8 +20,7 @@
        android:paddingBottom="3dp"
        >
 
-      <EditText 
-        android:id="@+id/fix_lng" 
+      <TextView android:id="@+id/fix_lng" 
         android:layout_width="0dp"
         android:layout_weight="50"
         android:layout_height="wrap_content" 
@@ -29,8 +28,7 @@
         android:singleLine="true"
         />
 
-      <EditText
-        android:id="@id/fix_lat" 
+      <TextView android:id="@id/fix_lat" 
         android:layout_width="0dp"
         android:layout_weight="50"
         android:layout_height="wrap_content" 
@@ -55,22 +53,12 @@
         android:layout_gravity="left"
         android:text="@string/h_ellipsoid"
         />
-      <EditText android:id="@id/fix_alt" 
+      <TextView android:id="@id/fix_alt" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content" 
         android:nextFocusDown="@+id/fix_asl"
         android:singleLine="true"
-        />
-      <Button android:id="@+id/fix_ellipsoidic"
-        android:layout_width="0dp"
-        android:layout_weight="20"
-        android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp" 
-        android:layout_gravity="left"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_save"
         />
     </LinearLayout>
 
@@ -90,22 +78,12 @@
         android:layout_gravity="left"
         android:text="@string/h_geoid"
         />
-      <EditText android:id="@id/fix_asl" 
+      <TextView android:id="@id/fix_asl" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content" 
-        android:nextFocusDown="@+id/fix_station_value"
+        android:nextFocusDown="@+id/fix_comment"
         android:singleLine="true"
-        />
-      <Button android:id="@+id/fix_orthometric"
-        android:layout_width="0dp"
-        android:layout_weight="20"
-        android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp" 
-        android:layout_gravity="left"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_save"
         />
     </LinearLayout>
 
@@ -117,14 +95,13 @@
        android:orientation="horizontal"
        android:paddingBottom="3dp"
      >  
-      <TextView
+      <TextView android:id="@+id/fix_station" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp" 
-        android:text="@string/station"
         />
-      <EditText android:id="@id/fix_station_value" 
+      <EditText android:id="@id/fix_comment" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content" 
@@ -151,16 +128,6 @@
        android:orientation="horizontal"
        android:paddingBottom="3dp"
     >
-      <Button android:id="@+id/fix_geomag"
-        android:layout_width="0dp"
-        android:layout_weight="40"
-        android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp" 
-        android:layout_gravity="left"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_geomag"
-        />
       <EditText android:id="@id/fix_decl" 
         android:layout_width="0dp"
         android:layout_weight="40"
@@ -222,14 +189,6 @@
        android:orientation="horizontal"
        android:layout_marginTop="25dip"
        > 
-      <!-- Button android:id="@+id/fix_cancel"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_gravity="left"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_back"
-        / -->
       
       <LinearLayout
         android:layout_width="fill_parent" 
@@ -237,14 +196,6 @@
         android:layout_gravity="right"
         android:orientation="horizontal"
         > 
-        <!-- Button android:id="@+id/fix_ok"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:layout_gravity="right"
-          android:background="@drawable/button"
-          style="@style/button_default"
-          android:text="@string/button_save"
-          / -->
         <Button android:id="@+id/fix_drop"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
@@ -258,17 +209,4 @@
     </LinearLayout>
 
 
-  <android.inputmethodservice.KeyboardView
-    android:id="@+id/keyboardview"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="bottom"
-    android:visibility="gone"
-  />
-
-   		
 </RelativeLayout>

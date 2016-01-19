@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="207039"
-      android:versionName="2.7.3i"
+      android:versionCode="207040"
+      android:versionName="2.7.4a"
     >
     <uses-sdk
        android:minSdkVersion="8"
@@ -37,12 +37,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GMActivity"
+        <activity android:name=".FixedActivity"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
         </activity>
 
+        <activity android:name=".GMActivity"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity>
 
         <activity android:name=".CalibActivity"
                   android:theme="@style/Theme.FullScreen"

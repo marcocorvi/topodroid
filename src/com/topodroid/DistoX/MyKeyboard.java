@@ -121,6 +121,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
       e.setOnFocusChangeListener( new OnFocusChangeListener() {
         @Override
         public void onFocusChange( View v, boolean hasFocus ) {
+          CutNPaste.dismissPopup();
           // Log.v(TAG, "onFocusChange() " + hasFocus + " " + e.getText().toString() );
           if ( hasFocus ) {
             InputMethodManager imm = (InputMethodManager)kbd.getContext().getSystemService( Context.INPUT_METHOD_SERVICE );
@@ -143,6 +144,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
       e.setOnClickListener( new View.OnClickListener() {
         @Override
         public void onClick( View v ) {
+          CutNPaste.dismissPopup();
           // Log.v(TAG, "on click " + e.getText().toString() );
           // EditText et = (EditText) v; 
           // EditText e0 = kbd.getEditText();

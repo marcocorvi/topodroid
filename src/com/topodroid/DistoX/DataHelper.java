@@ -111,6 +111,7 @@ public class DataHelper extends DataSetObservable
 
   private SQLiteStatement updateFixedStationStmt;
   private SQLiteStatement updateFixedStatusStmt;
+  private SQLiteStatement updateFixedCommentStmt;
   private SQLiteStatement updateFixedAltStmt;
   private SQLiteStatement updateFixedDataStmt;
 
@@ -250,6 +251,7 @@ public class DataHelper extends DataSetObservable
  
         updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
         updateFixedStatusStmt = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
+        updateFixedCommentStmt = myDB.compileStatement( "UPDATE fixeds set comment=? WHERE surveyId=? AND id=?" );
         updateFixedAltStmt = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
         updateFixedDataStmt = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
 
@@ -315,6 +317,27 @@ public class DataHelper extends DataSetObservable
     }
     return ret;
   }
+
+  public float getSurveyDeclination( long sid )
+  {
+    float ret = 0;
+    if ( myDB == null ) return 0;
+    Cursor cursor = myDB.query( SURVEY_TABLE,
+			        new String[] { "declination" },
+                                "id=?", 
+                                new String[] { Long.toString(sid) },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if (cursor.moveToFirst()) {
+      ret = (float)(cursor.getDouble( 0 ));
+    }
+    if (cursor != null && !cursor.isClosed()) {
+      cursor.close();
+    }
+    return ret;
+  }
+
 
   public SurveyStat getSurveyStat( long sid )
   {
@@ -2832,6 +2855,15 @@ public class DataHelper extends DataSetObservable
      updateFixedStatusStmt.bindLong( 3, id );
      updateFixedStatusStmt.execute();
    }
+
+   public void updateFixedComment( long id, long sid, String comment )
+   {
+     updateFixedCommentStmt.bindString( 1, comment );
+     updateFixedCommentStmt.bindLong( 2, sid );
+     updateFixedCommentStmt.bindLong( 3, id );
+     updateFixedCommentStmt.execute();
+   }
+
 
    public void updateFixedAltitude( long id, long sid, double alt, double asl )
    {

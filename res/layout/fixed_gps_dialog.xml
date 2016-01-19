@@ -16,12 +16,23 @@
         android:imeActionLabel="OK"
         android:imeOptions="actionDone"
         />
-
-    <LinearLayout
-        android:id="@+id/layout1"
+ 
+    <EditText android:id="@+id/comment"
+        android:layout_below="@id/station"
+        android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:layout_below="@id/station"
+        android:hint="@string/comment"
+        android:singleLine="true"
+        android:imeActionId="6"
+        android:imeActionLabel="OK"
+        android:imeOptions="actionDone"
+        />
+
+    <LinearLayout android:id="@+id/layout1"
+        android:layout_below="@id/comment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
         android:orientation="horizontal"
         android:layout_marginTop="25dp" 
         >
@@ -47,11 +58,11 @@
         android:text="@string/button_gps_start"
         />
 
-      <Button android:id="@+id/button_mobile_topographer"
+      <Button android:id="@+id/button_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="@string/btn_import"
+        android:text="@string/button_view"
         android:background="@drawable/button"
         style="@style/button_default"
         />
@@ -69,7 +80,7 @@
         android:layout_gravity="right"
         android:background="@drawable/button"
         style="@style/button_default"
-        android:text="@string/button_add"
+        android:text="@string/button_save"
         />
       </LinearLayout>
 
