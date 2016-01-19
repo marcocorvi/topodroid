@@ -3,7 +3,7 @@
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2-es.pdf</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Haga clic de nuevo para salir</string>
+    <string name="double_back">Haga doble click para salir</string>
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
     <string name="version_title">Versión de actualización</string>
@@ -119,7 +119,7 @@
     <string name="import_already">Topografía ya importada</string>
     <string name="import_none">No hay archivo a importar</string>
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
-    <string name="import_zip_wait">El archivo zip importado puede tomar mucho tiempo. Por favor espera ...</string>
+    <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere ...</string>
     <string name="sketch_loading">Importando dibujo, espere ...</string>
     <string name="sketch_saving">Exportando dibujo ... espere ...</string>
     <string name="lookup_wait">Buscando en Internet ... Por favor, espere ...</string>
