@@ -1,5 +1,6 @@
 symbol line
 name wall_clay
+name-es paredes_de_barro
 name-bg стена_глина
 name-ru стена_в_глине
 th_name wall:clay

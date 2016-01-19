@@ -1,5 +1,6 @@
 symbol line
 name wall_debris
+name-es paredes_descompuestas
 name-bg стена_чакъл
 name-ru стена_мусор_осадки
 th_name wall:debris
