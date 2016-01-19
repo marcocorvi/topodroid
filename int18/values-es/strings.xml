@@ -200,15 +200,15 @@
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
-    <string name="no_gms">Calibración no tiene datos.\nUse botón Descargar</string>
+    <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
     <string name="no_photos">Topografía sin foto</string>
-    <string name="no_plots">Topografía sin dibujos\Use el botón para añadir uno</string>
+    <string name="no_plots">Topografía sin dibujos.\nPulse el botón para añadir uno</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
-    <string name="no_shots">Topografía sin mediciones.\Use botón para descargar mediciones</string>
+    <string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string>
     <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_thmanager">ThManager no instalado</string>
     <string name="no_db_viewer">app DB_viewer no instalada</string>
@@ -250,7 +250,7 @@
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
     <string name="popup_split_pt">Añadir punto</string>
     <string name="popup_split_ln">Separar línea</string>
-    <string name="popup_sharp_pt">Ángulo agudo</string>
+    <string name="popup_sharp_pt">Segmento recto</string>
     <string name="popup_curve_pt">Segmento curvo</string>
     <string name="popup_remove_pt">Eliminar punto</string>
 
@@ -271,7 +271,7 @@
     <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>
     <string name="plot_delete">¿Eliminar dibujo?</string>
     <string name="item_delete">Eliminar elemento %1$s ?</string>
-    <string name="plot_duplicate_name">Nombre dibujo duplicado</string>
+    <string name="plot_duplicate_name">Nombre de dibujo duplicado</string>
     <string name="plot_name">Nombre dibujo</string>
     <string name="plot_new">Nuevo dibujo</string>
     <string name="plot_not_found">No hay dibujo</string>
@@ -291,7 +291,7 @@
     <string name="scrap_name">Nombre de dibujo</string>
     <string name="splay">Toma Secundaria</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
-    <string name="too_many_legs_xsection">Demasiadas tomas de X-sección</string>
+    <string name="too_many_legs_xsection">Demasiadas tomas de sección</string>
     <string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string>
     <string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string>
 
@@ -453,7 +453,7 @@
     <string name="mode_splay">Laterales</string>
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadriculas</string>
-    <string name="mode_fixed">Fix refs</string>
+    <string name="mode_fixed">Referencia fija</string>
 
     <string name="remote_title">Control remoto del dispositivo</string>
     <string name="remote_on">Láser ON</string>
@@ -480,7 +480,7 @@
     
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_current_station">Última estación guardada</string>
-    <string name="help_azimuth">Extensión Referencia-Rumbo</string>
+    <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_device">Cambiar a opciones del dispositivo</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
