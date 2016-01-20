@@ -658,6 +658,8 @@
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
+    <!-- TODO string name="title_sensor_edit">Sensor</string -->
+
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Описание съёмки</string>
     <string name="title_survey_export">Экспорт съёмки как</string>

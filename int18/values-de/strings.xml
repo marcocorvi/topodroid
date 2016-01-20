@@ -639,6 +639,7 @@
     <string name="title_scraps">Skizzen</string>
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
+    <!-- TODO string name="title_sensor_edit">Sensor</string -->
 
 <!-- SKETCH_3D titles -->
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->

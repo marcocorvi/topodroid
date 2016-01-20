@@ -3,8 +3,8 @@
 
   <string name="PhotoActivity">page_photolist.htm</string>
   <!-- string name="PtCmapActivity">page_todo.htm</string -->
-  <!-- string name="SensorActivity">page_todo.htm</string -->
-  <!-- string name="SensorListActivity">page_todo.htm</string -->
+  <string name="SensorActivity">page_sensors.htm</string>
+  <string name="SensorListActivity">page_sensorslist.htm</string>
   <string name="SketchActivity">page_todo.htm</string>
 
   <string name="FixedActivity">page_todo.htm</string>
@@ -67,6 +67,7 @@
   <string name="PlotListDialog">page_plotlist.htm</string>
   <string name="PlotNewDialog">page_newplot.htm</string>
   <string name="PlotRecoverDialog">page_backup.htm</string>
+  <string name="SensorEditDialog">page_sensoredit.htm</string>
   <string name="ShotDeleteDialog">page_shotedit2.htm</string>
   <string name="ShotDialog">page_shotedit1.htm</string>
   <string name="ShotDisplayDialog">page_displaymode.htm</string>

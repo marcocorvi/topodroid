@@ -261,8 +261,8 @@ public class PhotoActivity extends Activity
         if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        // super.onBackPressed();
-        // return true;
+        super.onBackPressed();
+        return true;
       case KeyEvent.KEYCODE_SEARCH:
         // return onSearchRequested();
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)

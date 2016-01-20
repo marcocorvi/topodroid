@@ -61,8 +61,7 @@ public class PhotoEditDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     // TDLog.Log( TDLog.LOG_PHOTO, "onCreate" );
-    setContentView(R.layout.photo_edit_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.photo_edit_dialog, R.string.title_photo_comment );
 
     mIVimage      = (ImageView) findViewById( R.id.photo_image );
     mETcomment    = (EditText) findViewById( R.id.photo_comment );
@@ -70,7 +69,6 @@ public class PhotoEditDialog extends MyDialog
     mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
 
-    setTitle( R.string.title_photo_comment );
     // public String mPhoto.mDate;
     if ( mPhoto.mComment != null ) {
       mETcomment.setText( mPhoto.mComment );

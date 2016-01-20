@@ -291,6 +291,27 @@ public class SensorActivity extends Activity
      super.onStop();
   }
 
+  @Override
+  public boolean onKeyDown( int code, KeyEvent event )
+  {
+    switch ( code ) {
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        String help_page = getResources().getString( R.string.SensorActivity );
+        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        return true;
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+        // return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TDLog.Error( "key down: code " + code );
+    }
+    return false;
+  }
+
 }
 
 

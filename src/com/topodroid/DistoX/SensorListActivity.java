@@ -51,7 +51,7 @@ import android.widget.Button;
 import android.view.View;
 // import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-// import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.preference.PreferenceManager;
 
 import android.provider.MediaStore;
@@ -60,7 +60,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 
 public class SensorListActivity extends Activity
-                          // implements OnItemClickListener
+                                implements OnItemClickListener
 {
   private TopoDroidApp app;
 
@@ -72,7 +72,7 @@ public class SensorListActivity extends Activity
 
   private String mSaveData = "";
   private TextView mSaveTextView = null;
-  // private SensorInfo mSaveSensor = null;
+  private SensorInfo mSaveSensor = null;
 
   String mSensorComment;
   long   mSensorId;
@@ -110,7 +110,6 @@ public class SensorListActivity extends Activity
   // ---------------------------------------------------------------
   // list items click
 
-/*
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
@@ -123,7 +122,6 @@ public class SensorListActivity extends Activity
      mSaveSensor = mDataAdapter.get(pos);
      (new SensorEditDialog( this, this, mSaveSensor )).show();
   }
-*/
 
   // ---------------------------------------------------------------
   
@@ -137,7 +135,7 @@ public class SensorListActivity extends Activity
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
-    // mList.setOnItemClickListener( this );
+    mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
     updateDisplay( );
@@ -165,5 +163,26 @@ public class SensorListActivity extends Activity
     } else {
       Toast.makeText( this, R.string.no_db, Toast.LENGTH_SHORT ).show();
     }
+  }
+
+  @Override
+  public boolean onKeyDown( int code, KeyEvent event )
+  {
+    switch ( code ) {
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        String help_page = getResources().getString( R.string.SensorListActivity );
+        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        return true;
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        super.onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_SEARCH:
+        // return onSearchRequested();
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        TDLog.Error( "key down: code " + code );
+    }
+    return false;
   }
 }

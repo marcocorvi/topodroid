@@ -6,21 +6,37 @@
     android:paddingLeft="6dp"
     android:paddingRight="6dp"
     android:paddingBottom="3dp">
-   					  
-    <TextView android:id="@+id/photo_name"
+
+    <TextView android:id="@+id/sensor_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
+        android:layout_marginTop="2dip"
         />
 
-    <ImageView android:id="@+id/photo_image"
-        android:layout_width="fill_parent"
-        android:layout_height="80sp" 
-        android:scaleType="fitCenter"
+    <TextView android:id="@+id/sensor_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:textSize="18sp"
+        android:layout_marginTop="10dip"
         />
-   					  
-    <EditText android:id="@+id/photo_comment" 
-        android:layout_marginTop="2dp"
+
+    <TextView android:id="@+id/sensor_shotname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:textSize="18sp"
+        android:layout_marginTop="10dip"
+        />
+
+    <TextView android:id="@+id/sensor_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:textSize="18sp"
+        android:layout_marginTop="10dip"
+        />
+
+    <EditText android:id="@+id/sensor_comment" 
+        android:layout_marginTop="15dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:singleLine="true"
@@ -33,7 +49,7 @@
       android:orientation="horizontal"
       android:layout_marginTop="25dip"
       >
-        <Button android:id="@+id/photo_delete"
+        <Button android:id="@+id/sensor_delete"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:background="@drawable/button"
@@ -47,7 +63,7 @@
           android:layout_gravity="right"
           android:orientation="horizontal"
         >
-        <Button android:id="@+id/photo_ok"
+        <Button android:id="@+id/sensor_ok"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:background="@drawable/button"
