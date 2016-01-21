@@ -1003,6 +1003,8 @@
   <string name="splay_extend">Разгъване на странични отсечки</string>
 
     <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>
+
+  <!-- FIXME TODO welcome_text has been updated. Please fix accordingly -->
     <string name="welcome_text">
 \nTopoDroid е Андроид приложение с отворен код за картиране на пещери с помощта на на DistoX лазерна рулетка.
 \n\nБез гаранция: с използването му, вие се съгласявате, че авторът не носи отговорност за загуба на данни или други проблеми, които може да срещнете при използване на програмата.

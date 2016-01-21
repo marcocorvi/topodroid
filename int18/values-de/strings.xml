@@ -973,12 +973,14 @@
 
 <!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
     <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
-<!-- OK 
+<!-- TODO
    <string name="welcome_text">
 \nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
 \n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
-\n\nVisit http://sites.google.com/site/speleoapps for complementary apps and docs.
-\nSend comments, bug reports, feature requests, to marco.corvi@gmail.com.
+\n\nMan pages: MENU key
+\nOther docs: http://sites.google.com/site/speleoapps
+\nComments, bug reports, feature requests: marco.corvi@gmail.com
+\n
 \nGerman translation by T. Müller hoehle@thilomueller.de
 \n
     </string>

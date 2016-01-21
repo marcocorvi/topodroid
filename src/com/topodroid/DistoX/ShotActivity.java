@@ -95,12 +95,12 @@ public class ShotActivity extends Activity
                         , INewPlot
 {
   final static int BTN_DOWNLOAD = 0;
-  final static int BTN_PLOT     = 2;
-  final static int BTN_AZIMUTH  = 4;
+  final static int BTN_PLOT     = 3;
+  final static int BTN_AZIMUTH  = 5;
 
   private static int izons[] = {
                         R.drawable.iz_download,
-                        // R.drawable.iz_bt,
+                        R.drawable.iz_bt,
                         R.drawable.iz_mode,
                         R.drawable.iz_plot,
                         R.drawable.iz_note,
@@ -111,7 +111,7 @@ public class ShotActivity extends Activity
 
   private static int izonsno[] = {
                         0,
-                        // 0,
+                        0,
                         0,
                         R.drawable.iz_plot, // TODO_IZ
                         0,
@@ -132,7 +132,7 @@ public class ShotActivity extends Activity
 
   private static int help_icons[] = {
                           R.string.help_download,
-                          // R.string.help_remote,
+                          R.string.help_remote,
                           R.string.help_display,
                           R.string.help_plot,
                           R.string.help_note,
@@ -732,7 +732,7 @@ public class ShotActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mButtonSize = mApp.setListViewHeight( mListView );
 
-    mNrButton1 = TDSetting.mLevelOverBasic ? 7 : 5;
+    mNrButton1 = TDSetting.mLevelOverBasic ? 8 : 6;
     mButton1 = new Button[ mNrButton1 ];
     int k;
     for ( k=0; k<mNrButton1; ++k ) {
@@ -754,7 +754,7 @@ public class ShotActivity extends Activity
     mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
 
     if ( TDSetting.mLevelOverBasic ) {
-      mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
+      // mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
     }
 
@@ -918,6 +918,27 @@ public class ShotActivity extends Activity
     // Log.v("DistoX", "save to data mSplay " + mSplay );
   }
 
+  void doBluetooth( Button b )
+  {
+    // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
+    mDataDownloader.setDownload( false );
+    mDataDownloader.stopDownloadData();
+    setConnectionStatus( mDataDownloader.getStatus() );
+    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
+      switch ( mApp.distoType() ) {
+        case Device.DISTO_A3:
+          mApp.resetComm();
+          Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+          break;
+        case Device.DISTO_X310:
+          CutNPaste.showPopupBT( this, this, mApp, b );
+          // (new DeviceRemoteDialog( this, this, mApp )).show();
+          break;
+      }
+    } else {
+      mApp.resetComm();
+    }
+  }
 
   @Override 
   public boolean onLongClick( View view )
@@ -930,21 +951,8 @@ public class ShotActivity extends Activity
       if ( mRecentPlot != null ) {
         startExistingPlot( mRecentPlot, mRecentPlotType );
       }
-    } else if ( b == mButton1[ BTN_DOWNLOAD ] ) {
-      // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
-      mDataDownloader.setDownload( false );
-      mDataDownloader.stopDownloadData();
-      setConnectionStatus( mDataDownloader.getStatus() );
-      switch ( mApp.distoType() ) {
-        case Device.DISTO_A3:
-          mApp.resetComm();
-          Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-          break;
-        case Device.DISTO_X310:
-          CutNPaste.showPopupBT( this, this, mApp, b );
-          // (new DeviceRemoteDialog( this, this, mApp )).show();
-          break;
-      }
+    // } else if ( b == mButton1[ BTN_DOWNLOAD ] ) {
+    //   doBluetooth( b );
     }
     return true;
   } 
@@ -978,20 +986,8 @@ public class ShotActivity extends Activity
         mDataDownloader.toggleDownload();
         setConnectionStatus( mDataDownloader.getStatus() );
         mDataDownloader.doDataDownload( );
-      // } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
-      //   // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
-      //   mDataDownloader.setDownload( false );
-      //   mDataDownloader.stopDownloadData();
-      //   setConnectionStatus( mDataDownloader.getStatus() );
-      //   switch ( mApp.distoType() ) {
-      //     case Device.DISTO_A3:
-      //       mApp.resetComm();
-      //       Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-      //       break;
-      //     case Device.DISTO_X310:
-      //       (new DeviceRemoteDialog( this, this, mApp )).show();
-      //       break;
-      //   }
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
+        doBluetooth( b );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
         new ShotDisplayDialog( this, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SKETCH

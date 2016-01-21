@@ -912,6 +912,8 @@
   <!-- UNUSED string name="line_coarse">gruesa</string -->
 
     <string name="welcome_title">Bienvenido a TopoDroid 2.7</string>
+
+  <!-- FIXME TODO welcome_text has been updated. Please fix accordingly -->
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.

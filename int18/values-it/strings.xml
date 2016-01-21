@@ -924,9 +924,11 @@
     <string name="welcome_text">
 \nTopoDroid è una app Android open-source per fare rilievi di grotta con il DistoX
 \nNessuna garanzia: usandola sollevi l\'autore da ogni responsabilità per qualsiasi perdita di dati o danno che ne possano conseguire.
-\n\nDocumentazione e app complementari http://sites.google.com/site/speleoapps
-\nInvia commenti, segnalazioni bug, richieste a marco.corvi@gmail.com
+\n\nManuale: tasto MENU
+\nDocumentazione: http://sites.google.com/site/speleoapps
+\nCommenti, segnalazioni bug, richieste: marco.corvi@gmail.com
 \n
+\nTraduzione italiana a cura di fabrizio.toso@fastwebnet.it
     </string>
 
 

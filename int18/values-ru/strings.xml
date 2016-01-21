@@ -987,6 +987,8 @@
   <!-- UNUSED string name="line_coarse">грубый</string -->
 
     <string name="welcome_title">TopoDroid %1$s</string>
+
+  <!-- FIXME TODO welcome_text has been updated. Please fix accordingly -->
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер при помощи прибора DistoX.
 \n\nНет гарантий: используя данное ПО вы соглашаетесть с тем что автор не несет ответственность за потерю данных.

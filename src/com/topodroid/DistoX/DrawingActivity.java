@@ -95,20 +95,21 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_select_ok };
 
   private static int IC_DOWNLOAD = 3;
-  private static int IC_PLAN     = 5;
-  private static int IC_DIAL     = 6;
-  private static int IC_JOIN     = 14;
-  private static int IC_JOIN_NO  = 19;
-  private static int IC_MENU     = 17;
-  private static int IC_EXTEND   = 18;
-  private static int IC_CONTINUE_NO = 11;  // index of continue-no icon
-  private static int IC_CONTINUE = 20;     // index of continue icon
-  private static int IC_ADD = 21;
+  private static int IC_PLAN     = 6;
+  private static int IC_DIAL     = 7;
+  private static int IC_JOIN     = 15;
+  private static int IC_JOIN_NO  = 20;
+  private static int IC_MENU     = 18;
+  private static int IC_EXTEND   = 19;
+  private static int IC_CONTINUE_NO = 12;  // index of continue-no icon
+  private static int IC_CONTINUE = 21;     // index of continue icon
+  private static int IC_ADD = 22;
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
-  // private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
-  private static int BTN_PLOT = 5;      // index of mButton1 plot button
-  private static int BTN_DIAL = 6;      // index of mButton1 azimuth button
+  private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
+  private static int BTN_PLOT = 6;      // index of mButton1 plot button
+  private static int BTN_DIAL = 7;      // index of mButton1 azimuth button
+
   private static int BTN_CONTINUE = 6;  // index of mButton2 continue button
   private static int BTN_JOIN = 5;      // index of mButton3 join button
 
@@ -134,25 +135,25 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
                         R.drawable.iz_download,      // 3 MOVE Nr 9
-                        // R.drawable.iz_bt,
-                        R.drawable.iz_mode,          // 4
-                        R.drawable.iz_plan,          // 5
-                        R.drawable.iz_dial,          // 6
-                        R.drawable.iz_note,          // 7
-                        R.drawable.iz_undo,          // 8 DRAW Nr 7
-                        R.drawable.iz_redo,          // 9
-                        R.drawable.iz_tools,         // 10
-                        R.drawable.iz_continue_no,   // 11
-                        R.drawable.iz_back,          // 12 EDIT Nr 8
+                        R.drawable.iz_bt,
+                        R.drawable.iz_mode,          // 5
+                        R.drawable.iz_plan,          // 6
+                        R.drawable.iz_dial,          // 7
+                        R.drawable.iz_note,          // 8
+                        R.drawable.iz_undo,          // 9 DRAW Nr 7
+                        R.drawable.iz_redo,          // 10
+                        R.drawable.iz_tools,         // 11
+                        R.drawable.iz_continue_no,   // 12
+                        R.drawable.iz_back,          // 13 EDIT Nr 8
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
                         R.drawable.iz_note,          
-                        R.drawable.iz_delete,        // 16
-                        R.drawable.iz_menu,          // 17
-                        R.drawable.iz_extended,      // 18
-                        R.drawable.iz_join_no,       // 19
-                        R.drawable.iz_continue,      // 20
-                        R.drawable.iz_plus,          // 21
+                        R.drawable.iz_delete,        // 17
+                        R.drawable.iz_menu,          // 18
+                        R.drawable.iz_extended,      // 19
+                        R.drawable.iz_join_no,       // 20
+                        R.drawable.iz_continue,      // 21
+                        R.drawable.iz_plus,          // 22
                       };
   private static int menus[] = {
                         R.string.menu_export,
@@ -170,7 +171,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_eraser,
                         R.string.help_edit,
                         R.string.help_download,
-                        // R.string.help_remote,
+                        R.string.help_remote,
                         R.string.help_refs,
                         R.string.help_toggle_plot,
                         R.string.help_azimuth,
@@ -612,7 +613,7 @@ public class DrawingActivity extends ItemDrawer
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  private int mNrButton1 = 8;          // main-primary
+  private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
   private int mNrButton3 = 8;          // edit
   private int mNrButton5 = 5;          // erase
@@ -795,7 +796,7 @@ public class DrawingActivity extends ItemDrawer
         }
       }
       if ( TDSetting.mLevelOverBasic ) {
-        mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
+        // mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
         mButton1[BTN_PLOT].setOnLongClickListener( this );
       }
       mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
@@ -840,7 +841,7 @@ public class DrawingActivity extends ItemDrawer
       mBMadd     = mApp.setButtonBackground( null, mButtonSize, izons[IC_ADD] );
 
       mButton5 = new Button[ mNrButton5 ];    // ERASE
-      off = 8 - 3; // FIXME (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
+      off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
       for ( int k=0; k<mNrButton5; ++k ) {
         mButton5[k] = new Button( this );
         mButton5[k].setPadding(0,0,0,0);
@@ -2623,15 +2624,35 @@ public class DrawingActivity extends ItemDrawer
       recomputeProfileReference();
     }
 
+  void doBluetooth( Button b )
+  {
+    // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
+    mDataDownloader.setDownload( false );
+    mDataDownloader.stopDownloadData();
+    setConnectionStatus( mDataDownloader.getStatus() );
+    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
+      switch ( mApp.distoType() ) {
+        case Device.DISTO_A3:
+          mApp.resetComm();
+          Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+          break;
+        case Device.DISTO_X310:
+          CutNPaste.showPopupBT( this, this, mApp, b );
+          // (new DeviceRemoteDialog( this, this, mApp )).show();
+          break;
+      }
+    } else {
+      mApp.resetComm();
+    }
+  }
+
     public boolean onLongClick( View view ) 
     {
       Button b = (Button)view;
       if ( b == mButton1[ BTN_PLOT ] ) {
         new DrawingProfileFlipDialog( this, this ).show();
-      } else if ( b == mButton1[ BTN_DOWNLOAD ] ) {
-        if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
-          CutNPaste.showPopupBT( this, this, mApp, b );
-        }
+      // } else if ( b == mButton1[ BTN_DOWNLOAD ] ) {
+      //   doBluetooth( b );
       }
       return true;
     }
@@ -2694,8 +2715,8 @@ public class DrawingActivity extends ItemDrawer
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
         }
-      // } else if ( b == mButton1[k1++] ) { // BLUETOOTH
-      //   new DeviceRemoteDialog( this, this, mApp ).show();
+      } else if ( b == mButton1[k1++] ) { // BLUETOOTH
+        doBluetooth( b );
       } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED

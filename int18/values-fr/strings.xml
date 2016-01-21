@@ -1018,6 +1018,8 @@
   <string name="splay_extend">estimer extension visée laterales</string>
 
     <string name="welcome_title">Bienvenue dans TopoDroid %1$s</string>
+
+  <!-- FIXME TODO welcome_text has been updated. Please fix accordingly -->
     <string name="welcome_text">
 \nTopodroid est une application Open Source pour réaliser des relevé topographique des cavités sous-terraine avec un DistoX.
 \n\nAucune garantie : en l\'utilisant vous acceptez que l\'auteur ne puisse être responsable d\'une quelconque perte de données, dommages ou quoi que ce soit.

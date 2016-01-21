@@ -17,13 +17,14 @@ the other for the profile. The filenames are obtained composing the survey name,
 ("p" for plan, "s" for profile). For example the sketch "2" of the survey "cave" is saved in the two files
 "cave-2p.th2" and "cave-2s.th2" (if you choose to save the sketch in Therion format).<br><p>
 
+<b>WARNING. The name of the sketch cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
 
 The <b>origin station</b> defines how the sketch is translated with respect to the survey midline.
 The sketch reference the survey midline defines the sketch scale and rotation, but leaves undefined
 how the drawing is translated with respect to the midline. This uncertanty is resolved by specifying the
-<b>origin station</b>: this station has coordinates (0,0) in the reference frame of the sketch canvas.<br><p>
+origin station to be at (0,0) in the reference frame of the sketch canvas.<br><p>
 
-The <b>origin station</b> also determines the survey midline data reduction for the sketch. From the sketch point of view
+The origin station also determines the survey midline <b>data reduction</b> for the sketch. From the sketch point of view
 the midline is built starting from the origin station and continuing as long as data can be attached. The resulting midline
 forms a tree, rooted at the origin station. In order to make the canvas less cluttered, 
 is possible to hide the display of portion of the midline, either
