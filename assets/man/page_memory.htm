@@ -1,15 +1,31 @@
 <html><body>
 
-<h4>DistoX memory dialog</h4>
+<h4>DistoX memory</h4>
 
-The <u>Memory</u> button of the Device window opens the "DistoX memory" dialog.<br><p>
+This dialog is opened tapping the <u>Memory</u> button of the <i>Device</i> window.<br><p>
 
-You can retrieve the content of the DistoX memory, and even modify it if you have a DistoX1. The content of the DistoX memory is displayed in the "Memory list" dialog.<br><p>
+<ul>
+<li><b>Dump</b> reads the content of the DistoX memory. 
+You must enter the initial anf final memory location in the two text fields to its right.</li>
+<li>Optional <b>filename</b> to save the dump</li>
+</ul>
+<br>
 
-If you have entered a filename it is also saved to a dump file (in the "dump" folder), for analysis with other tools.<br><p>
+Only for DistoX A3:
+<ul>
+<li><b>Read</b> the memory cursors</li>
+<li><b>Store</b> the memory cursors</li>
+<li><b>Reset</b> a portion of memory, ie, marks it "to-be-downloaded"</li>
+</ul>
 
-This functionality is for recovery from desperate situations (eg, your android got lost but the data are still in the DistoX). Memory inspection requires some knowledge of the internals of the DistoX: at a minimum the address space, and the way data are stored. You should have read the DistoX documentation before using it.<br><p>
+The content of the DistoX memory is displayed in the "Memory list" dialog.<br><p>
 
-Reading the DistoX memory directly is a slow process. As this operation is carried out in the main gui thread, you have to be patient. It is advisable to read a portion of memory, say 100 entries, at a time.<br><p>
+Reading the DistoX memory directly is a slow process, and the DistoX must be kept "ON" while doing it.
+It is advisable to read a portion of memory, say 50 entries, at a time.
+Be patient: this operation is carried out in the main gui thread.<br><p>
+
+If you have entered a filename it is also saved to a dump file (in the "dump" folder).<br><p>
+
+Memory inspection requires some knowledge of the internals of the DistoX: at a minimum the address space, and the way data are stored. You should have read the DistoX documentation before using it.<br><p>
 
 </body></html>

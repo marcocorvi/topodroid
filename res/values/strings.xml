@@ -664,9 +664,9 @@
     <string name="title_edit">Edit</string>
     <string name="title_erase">Erase</string>
     <string name="title_fixed">Fixed points</string>
-    <string name="title_fixed_import">Fixed point import</string>
-    <string name="title_fixed_gps">Fixed point: GPS</string>
-    <string name="title_fixed_add">Fixed point: insert</string>
+    <string name="title_fixed_import">Location: import</string>
+    <string name="title_fixed_gps">Location: GPS</string>
+    <string name="title_fixed_add">Location: insert</string>
     <string name="title_manual">TopoDroid User Manual</string>
     <string name="title_mode">Display Mode</string>
     <string name="title_move">Moving</string>
