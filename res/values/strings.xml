@@ -118,7 +118,8 @@
     <string name="few_plots">Not enough sketches</string>
     <string name="few_calibs">Not enough calibrations</string>
 
-    <string name="import_title">File Import</string>
+    <string name="calib_import_title">Calibration import</string>
+    <string name="import_title">Survey import</string>
     <string name="import_wait">Importing file... please wait...</string>
     <string name="import_already">Survey already imported</string>
     <string name="import_none">No file to import</string>
@@ -142,10 +143,10 @@
     <string name="label_title">LABEL</string>
     <string name="label_text">Enter the label text</string>
     <string name="altitude">Alt. </string>
-    <string name="h_ellipsoid">H ellip. </string>
+    <string name="h_ellipsoid">H ellipsoid </string>
     <string name="h_geoid">H geoid </string>
-    <string name="latitude">Lat. </string>
-    <string name="longitude">Long. </string>
+    <string name="latitude">Latitude </string>
+    <string name="longitude">Longitude </string>
     <string name="h_ellipsoid_hint">H ellip. [meters]</string>
     <string name="h_geoid_hint">H geoid [meters]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
@@ -175,7 +176,7 @@
     <string name="error_sensor_required">Sensor required</string>
     <string name="error_value_required">Value required</string>
     
-    <string name="group_title">Assign calibration data groups</string>
+    <string name="group_title">Calibration data groups</string>
     <string name="group_policy_four">Policy: group by four</string>
     <string name="group_policy_sixteen">Policy: four groups of four, other single</string>
     <string name="group_policy_distance">Policy: group by angular distance</string>
@@ -651,6 +652,7 @@
     <string name="help_refine_triangle">Refine surface al the long sides</string>
   
 
+    <string name="title_azimut">Extend reference</string>
     <string name="title_calib">Calibrations</string>
     <string name="title_coverage">Calibration data distibution</string>
     <string name="title_coeff">Calibration coefficients</string>
@@ -663,10 +665,11 @@
     <string name="title_draw_point">POINT %1$s</string>
     <string name="title_edit">Edit</string>
     <string name="title_erase">Erase</string>
-    <string name="title_fixed">Fixed points</string>
-    <string name="title_fixed_import">Location: import</string>
-    <string name="title_fixed_gps">Location: GPS</string>
-    <string name="title_fixed_add">Location: insert</string>
+    <string name="title_fixed">Locations</string>
+    <string name="title_fixed_edit">Location edit</string>
+    <string name="title_fixed_import">Location import</string>
+    <string name="title_fixed_gps">Location GPS</string>
+    <string name="title_fixed_add">Location insert</string>
     <string name="title_manual">TopoDroid User Manual</string>
     <string name="title_mode">Display Mode</string>
     <string name="title_move">Moving</string>
@@ -684,6 +687,7 @@
 
     <string name="title_stats">Statistics</string>
     <string name="title_survey">Survey Info</string>
+    <string name="title_survey_new">New survey</string>
     <string name="title_survey_export">Export survey</string>
     <string name="title_survey_rename">Rename survey</string>
     <string name="title_calib_export">Export calibration</string>

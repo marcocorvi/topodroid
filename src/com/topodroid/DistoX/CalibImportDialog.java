@@ -57,7 +57,8 @@ public class CalibImportDialog extends MyDialog
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    setContentView(R.layout.import_dialog);
+
+    initLayout( R.layout.import_dialog, R.string.calib_import_title );
 
     mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list);
@@ -68,7 +69,6 @@ public class CalibImportDialog extends MyDialog
     // mBtnCancel.setOnClickListener( this );
 
     // setTitleColor( 0x006d6df6 );
-    setTitle( R.string.import_title );
 
     File[] files = TDPath.getCalibFiles();
     ArrayList<String> names = new ArrayList<String>();

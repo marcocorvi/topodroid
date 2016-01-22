@@ -7,41 +7,63 @@
     android:padding="0dp"
     >
 
-    <!-- TextView android:id="@+id/fix_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:textSize="18sp"
-        / -->
     <LinearLayout 
-       android:id="@+id/layout1"
+       android:id="@+id/layout0"
        android:layout_width="fill_parent" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
        android:paddingBottom="3dp"
        >
 
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="40"
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:text="@string/longitude"
+        />
+
       <TextView android:id="@+id/fix_lng" 
         android:layout_width="0dp"
-        android:layout_weight="50"
+        android:layout_weight="40"
         android:layout_height="wrap_content" 
         android:nextFocusDown="@+id/fix_lat"
         android:singleLine="true"
         />
 
+    </LinearLayout>
+    <LinearLayout 
+       android:id="@+id/layout1"
+       android:layout_below="@id/layout0"
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:paddingBottom="3dp"
+       >
+
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="40"
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:layout_gravity="left"
+        android:text="@string/latitude"
+        />
+
       <TextView android:id="@id/fix_lat" 
         android:layout_width="0dp"
-        android:layout_weight="50"
+        android:layout_weight="40"
         android:layout_height="wrap_content" 
         android:nextFocusDown="@+id/fix_alt"
         android:singleLine="true"
         />
     </LinearLayout>
 
-    <LinearLayout 
-       android:id="@+id/layout2"
+    <LinearLayout android:id="@+id/layout2"
+       android:layout_below="@id/layout1"
        android:layout_width="fill_parent" 
        android:layout_height="wrap_content"
-       android:layout_below="@id/layout1"
        android:orientation="horizontal"
        android:paddingBottom="3dp"
        >
@@ -62,12 +84,11 @@
         />
     </LinearLayout>
 
-    <LinearLayout 
-       android:id="@+id/layout3"
+    <LinearLayout android:id="@+id/layout3"
+       android:layout_below="@id/layout2"
        android:layout_width="fill_parent" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:layout_below="@id/layout2"
        android:paddingBottom="3dp"
        >
       <TextView
@@ -87,63 +108,55 @@
         />
     </LinearLayout>
 
-    <LinearLayout
-       android:id="@+id/layout4"
+    <LinearLayout android:id="@+id/layout4"
+       android:layout_below="@id/layout3"
        android:layout_width="fill_parent" 
        android:layout_height="wrap_content"
-       android:layout_below="@id/layout3"
        android:orientation="horizontal"
        android:paddingBottom="3dp"
      >  
-      <TextView android:id="@+id/fix_station" 
+      <EditText android:id="@+id/fix_station" 
         android:layout_width="0dp"
-        android:layout_weight="40"
+        android:layout_weight="20"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp" 
         />
       <EditText android:id="@id/fix_comment" 
         android:layout_width="0dp"
-        android:layout_weight="40"
+        android:layout_weight="80"
         android:layout_height="wrap_content" 
         android:nextFocusDown="@+id/fix_decl"
         android:singleLine="true"
         />
-      <Button android:id="@+id/fix_save_station"
-        android:layout_width="0dp"
-        android:layout_weight="20"
-        android:layout_height="wrap_content" 
-        android:layout_marginLeft="10dp" 
-        android:layout_gravity="left"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_save"
-        />
     </LinearLayout>
      					  
-    <LinearLayout
-       android:id="@+id/layout5"
+    <LinearLayout android:id="@+id/layout5"
+       android:layout_below="@id/layout4"
        android:layout_width="fill_parent" 
        android:layout_height="wrap_content"
-       android:layout_below="@id/layout4"
        android:orientation="horizontal"
        android:paddingBottom="3dp"
     >
+      <TextView android:id="@+id/fix_empty" 
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp" 
+        android:text="@string/declination"
+        />
       <EditText android:id="@id/fix_decl" 
         android:layout_width="0dp"
-        android:layout_weight="40"
+        android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:nextFocusDown="@id/top"
         android:singleLine="true"
         />
-      <Button android:id="@+id/fix_save_decl"
+      <CheckBox android:id="@+id/fix_save_decl"
         android:layout_width="0dp"
         android:layout_weight="20"
         android:layout_height="wrap_content" 
         android:layout_marginLeft="10dp" 
-        android:layout_gravity="left"
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_save"
+        android:layout_marginRight="10dp" 
         />
     </LinearLayout>
      					  
@@ -159,7 +172,6 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp" 
-        android:layout_gravity="left"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_view"
@@ -168,44 +180,53 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp" 
-        android:layout_gravity="left"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_convert"
         />
       <TextView android:id="@+id/fix_crs" 
-        android:layout_width="wrap_content"
+        android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:hint="Long-Lat"
         android:singleLine="true" 
         />
-    </LinearLayout>
-     					  
-    <LinearLayout
-       android:id="@+id/layout7"
-       android:layout_width="fill_parent" 
-       android:layout_height="wrap_content"
-       android:layout_below="@id/layout6"
-       android:orientation="horizontal"
-       android:layout_marginTop="25dip"
-       > 
-      
+
       <LinearLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:gravity="right" 
         android:orientation="horizontal"
         > 
+        <Button android:id="@+id/fix_save"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" 
+          android:layout_marginLeft="10dp" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          />
+      </LinearLayout>
+
+    </LinearLayout>
+     					  
+    <LinearLayout android:id="@+id/layout7"
+       android:layout_below="@id/layout6"
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="25dip"
+       > 
         <Button android:id="@+id/fix_drop"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_gravity="right" 
           android:background="@drawable/button"
           style="@style/button_default"
           android:text="@string/button_delete"
           android:textColor="@color/textdelete"
           />
-      </LinearLayout>
+      
+
     </LinearLayout>
 
 

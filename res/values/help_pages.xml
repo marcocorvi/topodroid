@@ -7,7 +7,7 @@
   <string name="SensorListActivity">page_sensorslist.htm</string>
   <string name="SketchActivity">page_todo.htm</string>
 
-  <string name="FixedActivity">page_todo.htm</string>
+  <string name="FixedActivity">page_fixedlist.htm</string>
 
   <string name="TopoDroidActivity">manual02.htm</string>
   <string name="DeviceActivity">manual03.htm</string>

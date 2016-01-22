@@ -77,7 +77,7 @@ public class SurveyNewDialog extends MyDialog
   {
     super.onCreate( savedInstanceState );
 
-    initLayout( R.layout.survey_new_dialog, R.string.title_survey );
+    initLayout( R.layout.survey_new_dialog, R.string.title_survey_new );
 
     mEditName    = (EditText) findViewById(R.id.survey_name);
     mEditDate    = (Button) findViewById(R.id.survey_date);

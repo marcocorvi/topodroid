@@ -133,6 +133,7 @@
     <!-- TODO string name="few_calibs">Not enough calibrations</string -->
 
 <!-- IMPORTING A SURVEY or A ZIP -->
+    <!-- TODO string name="calib_import_title">Calibration import</string -->
     <string name="import_title">Daten Importieren</string>
     <string name="import_wait">Importieren ... bitte warten ...</string>
     <string name="import_already">Vermessung bereits importiert</string>
@@ -611,6 +612,7 @@
     <string name="help_write">Kalibrierung Koeffizienten zu den DistoX hochladen</string> <!-- speichern -->
 
 <!-- TITLES -->
+    <!-- TODO string name="title_azimut">Extend reference</string -->
     <string name="title_calib">Kalibrierung</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
@@ -624,6 +626,7 @@
     <string name="title_edit">Bearbeiten</string>
     <string name="title_erase">Löschen</string>
     <!-- TODO string name="title_fixed">Fixed points</string -->
+    <!-- TODO string name="title_fixed_edit">Location edit</string -->
     <!-- TODO string name="title_fixed_import">Fixed point: import</string -->
     <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
     <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
@@ -650,6 +653,7 @@
 
     <string name="title_stats">Statistik</string>
     <string name="title_survey">Vermessungs-Info</string>
+    <!-- TODO string name="title_survey_new">New survey</string -->
     <string name="title_survey_export">Vermessung speichern als</string>
     <string name="title_survey_rename">Benenne Vermessung um in</string>
     <string name="title_calib_export">Kalibrierung speichern als</string>

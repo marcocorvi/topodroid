@@ -120,6 +120,7 @@
     <string name="few_plots">Не достаточно абрисов</string>
     <string name="few_calibs">Недостаточно калиб. замеров</string>
 
+    <!-- TODO string name="calib_import_title">Calibration import</string -->
     <string name="import_title">Импорт файла</string>
     <string name="import_wait">Импорт файла... обождите...</string>
     <string name="import_already">съёмка уже импортирована</string>
@@ -629,6 +630,7 @@
     <string name="help_refine_triangle">Уточнить поверхность вдоль длинной стороны</string>
   
 
+    <!-- TODO string name="title_azimut">Extend reference</string -->
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэфиценты</string>
@@ -642,6 +644,7 @@
     <string name="title_edit">Редактировать</string>
     <string name="title_erase">Удалить</string>
     <!-- TODO string name="title_fixed">Fixed points</string -->
+    <!-- TODO string name="title_fixed_edit">Location edit</string -->
     <!-- TODO string name="title_fixed_import">Fixed point import</string -->
     <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
     <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
@@ -662,6 +665,7 @@
 
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Описание съёмки</string>
+    <!-- TODO string name="title_survey_new">New survey</string -->
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
     <string name="title_calib_export">Экспорт калибровки как</string>

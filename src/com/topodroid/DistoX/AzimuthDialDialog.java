@@ -88,7 +88,7 @@ public class AzimuthDialDialog extends MyDialog
     // getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
 
     // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog::onCreate" );
-    initLayout( R.layout.azimuth_dial_dialog, null );
+    initLayout( R.layout.azimuth_dial_dialog, R.string.title_azimut );
 
     // mBTback = (Button) findViewById(R.id.btn_back );
     // mBTfore = (Button) findViewById(R.id.btn_fore );

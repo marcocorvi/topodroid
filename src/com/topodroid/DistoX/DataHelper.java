@@ -252,7 +252,7 @@ public class DataHelper extends DataSetObservable
  
         updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
         updateFixedStatusStmt = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
-        updateFixedCommentStmt = myDB.compileStatement( "UPDATE fixeds set comment=? WHERE surveyId=? AND id=?" );
+        updateFixedCommentStmt = myDB.compileStatement( "UPDATE fixeds set station=?, comment=? WHERE surveyId=? AND id=?" );
         updateFixedAltStmt = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
         updateFixedDataStmt = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
 
@@ -2857,11 +2857,12 @@ public class DataHelper extends DataSetObservable
      updateFixedStatusStmt.execute();
    }
 
-   public void updateFixedComment( long id, long sid, String comment )
+   public void updateFixedStationComment( long id, long sid, String station, String comment )
    {
-     updateFixedCommentStmt.bindString( 1, comment );
-     updateFixedCommentStmt.bindLong( 2, sid );
-     updateFixedCommentStmt.bindLong( 3, id );
+     updateFixedCommentStmt.bindString( 1, station );
+     updateFixedCommentStmt.bindString( 2, comment );
+     updateFixedCommentStmt.bindLong( 3, sid );
+     updateFixedCommentStmt.bindLong( 4, id );
      updateFixedCommentStmt.execute();
    }
 

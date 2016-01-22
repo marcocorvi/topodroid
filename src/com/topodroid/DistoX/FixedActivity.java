@@ -119,9 +119,10 @@ public class FixedActivity extends Activity
     mApp = (TopoDroidApp)getApplication();
     mContext = this;
 
-    Bundle extras = getIntent().getExtras();
-    if ( extras != null ) {
-    }
+    // Bundle extras = getIntent().getExtras();
+    // if ( extras != null ) {
+    // }
+
     setContentView(R.layout.fixed_activity);
     setTitle( R.string.title_fixed );
 
@@ -130,7 +131,7 @@ public class FixedActivity extends Activity
     mNrButton1 = 3;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new Button( this );
+      mButton1[k] = new Button( mContext );
       mButton1[k].setPadding(0,0,0,0);
       mButton1[k].setOnClickListener( this );
       mApp.setButtonBackground( mButton1[k], size, izons[k] );
@@ -171,7 +172,7 @@ public class FixedActivity extends Activity
     // mSaveTextView = (TextView) view;
     mSaveFixed = mFixedAdapter.get(pos);
     mSavePos   = pos;
-    // FIXME (new FixedDialog( this, this, mSaveFixed )).show();
+    (new FixedDialog( mContext, this, mSaveFixed )).show();
   }
 
   public void addFixedPoint( String name,
@@ -204,11 +205,11 @@ public class FixedActivity extends Activity
 
     int k = 0;
     if ( b == mButton1[k++] ) { // GPS
-      new FixedGpsDialog( this, this ).show();
+      new FixedGpsDialog( mContext, this ).show();
     } else if ( b == mButton1[k++] ) { // ADD
-      new FixedAddDialog( this, this ).show();
+      new FixedAddDialog( mContext, this ).show();
     } else if ( b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
-      new FixedImportDialog( this, this ).show();
+      new FixedImportDialog( mContext, this ).show();
     }
     // refreshList();
   }
@@ -219,9 +220,9 @@ public class FixedActivity extends Activity
     return mApp.mData.hasFixed( mApp.mSID, station );
   }
  
-  void updateFixedComment( FixedInfo fxd, String comment )
+  void updateFixedNameComment( FixedInfo fxd, String name, String comment )
   {
-    mApp.mData.updateFixedComment( fxd.id, mApp.mSID, comment );
+    mApp.mData.updateFixedStationComment( fxd.id, mApp.mSID, name, comment );
     mList.invalidate();
   }
 
@@ -258,7 +259,7 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedDialog = null;
-      Toast.makeText( this, R.string.no_proj4, Toast.LENGTH_SHORT).show();
+      Toast.makeText( mContext, R.string.no_proj4, Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -281,7 +282,6 @@ public class FixedActivity extends Activity
       }
     }
   }
-
 
   // @Override
   // public boolean onSearchRequested()

@@ -1,44 +1,22 @@
 <html><body>
 
-<h4>Location dialog</h4>
+<h4>Location GPS</h4>
 
-This dialog is opened tapping the <u>GPS</u> button of the <i>Survey info</i> window.<br><p>
+This dialog is opened tapping the <u>GPS</u> button of the <a href="page_fixedlist.htm">Locations</a> dialog.<br><p>
   
-<ul>
-<li><b>GPS</b>: get coordinates with GPS</li>
-<li><b>Import</b> coordinates</li>
-<li><b>Add</b>: enter coordinates manually</li>
-</ul>
-<br><p>
+To use the GPS the Android Location must be enabled.<br><p>
 
-To use the GPS the Android Location must be enabled.
+This dialog has
+<ul>
+<li><b>station</b> name</li>
+<li><b>comment</b></li>
+<li><b>GPS</b> starts/stops the location</li>
+<li><b>View</b> the point in a location app</li>
+<li><b>Save</b> the point</li>
+</ul>
+
 While searching for satellites the "GPS" button becomes red (or green) displays the number of satellites in sight.
 You should wait till the button becomes green and the coordinates are displayed underneath.
-Then stop the GPS location tapping the button again, and tap the "Add" button.<br><p>
-
-Internally TopoDroid stores the coordinates in decimal degrees. However, in the coordinates dialog,
-you can write latitude and longitude either in the format "dd:mm:ss.ss" or as decimal degrees.
-If your keyboard does not show the semicolon ':' use the space instead.
-If your keyboard does not have the decimal point '.' use the slash '/' instead. TopoDroid custom keypad has two buttons for "degrees" and "minutes".<br>
-Tapping the "E" and "N" buttons changes the East/West and North/South hemisphere for the coordinates. Effectively it is like entering negative coordinates.<br>
-The altitude is stored in meters and it is always the WGS84 altitude.<br><p>
-
-Underneath the buttons the dialog lists
-the coordinates of all fixed points, as "station longitude latitude altitude".
-Tapping any of them opens the "Fixed Station" dialog where you can 
-<ul>
-<li>compute the magnetic declination at the station,</li>
-<li>convert the coordinates to another coordinate reference system (using <i>Proj4</i>),</li>
-<li>see the orthometric altitude</li>
-<li>change the station name,</li>
-<li>delete the fixed station record.</li>
-</ul>
-<br><p>
-
-<h4>Location settings</h4>
-<ul style="margin-top:0; margin-bottom:0">
-<li><i>Location units</i>: either dd.mm.ss or decimal degrees [A]</li>
-<li><i>C.R.S.</i> coordinate reference system [default is long-lat] (disabled)</li>
-</ul>
+Then stop the GPS location tapping the button again.<br><p>
 
 </body></html>

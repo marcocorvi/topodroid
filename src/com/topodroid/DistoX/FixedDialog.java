@@ -27,6 +27,7 @@ import android.content.ActivityNotFoundException;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.GridView;
@@ -53,16 +54,16 @@ public class FixedDialog extends MyDialog
   private TextView mTValt;
   private TextView mTVasl;
 
-  private TextView mTVstation;
+  private TextView mETstation;
   private EditText mETcomment;
   private TextView mTVdecl;
   private TextView mTVcrs;
   private TextView mTVfix_station;
   private Button   mButtonDrop;
-  private Button   mButtonDecl;
+  private CheckBox mButtonDecl;
   private Button   mButtonView;
   // private Button   mButtonWmm;
-  private Button   mButtonStation;
+  private Button   mButtonSave;
   private Button   mButtonConvert;
   private Button   mButtonCancel;
 
@@ -87,8 +88,7 @@ public class FixedDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     // TDLog.Log( TDLog.LOG_FIXED, "FixedDialog onCreate" );
-    setContentView(R.layout.fixed_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.fixed_dialog, R.string.title_fixed_edit );
 
     mTVlng = (TextView) findViewById( R.id.fix_lng );
     mTVlat = (TextView) findViewById( R.id.fix_lat );
@@ -104,17 +104,17 @@ public class FixedDialog extends MyDialog
       mTVdecl.setText( String.format(Locale.ENGLISH, "%.4f", elem.Decl ) );
     }
 
-    mButtonDecl = (Button) findViewById( R.id.fix_save_decl );
+    mButtonDecl = (CheckBox) findViewById( R.id.fix_save_decl );
     mButtonView = (Button) findViewById( R.id.fix_view );
     mButtonConvert = (Button) findViewById( R.id.fix_convert );
-    mButtonStation = (Button) findViewById( R.id.fix_save_station );
 
     mTVcrs     = (TextView) findViewById( R.id.fix_crs );
-    mTVstation = (TextView) findViewById( R.id.fix_station );
+    mETstation = (TextView) findViewById( R.id.fix_station );
     mETcomment = (EditText) findViewById( R.id.fix_comment );
-    mTVstation.setText( mFxd.name );
-    mETcomment.setText( mFxd.name );
+    mETstation.setText( mFxd.name );
+    mETcomment.setText( mFxd.comment );
 
+    mButtonSave = (Button) findViewById( R.id.fix_save );
     mButtonDrop    = (Button) findViewById(R.id.fix_drop );
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
@@ -125,9 +125,8 @@ public class FixedDialog extends MyDialog
     mTVasl.setText( String.format( Locale.ENGLISH, "%.0f", mFxd.asl ) );
     
     mButtonDrop.setOnClickListener( this );
-    mButtonDecl.setOnClickListener( this );
     mButtonView.setOnClickListener( this );
-    mButtonStation.setOnClickListener( this );
+    mButtonSave.setOnClickListener( this );
     mButtonConvert.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
   }
@@ -137,30 +136,36 @@ public class FixedDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "FixedDialog onClick() button " + b.getText().toString() );
 
-    if ( b == mButtonStation ) {
+    if ( b == mButtonSave ) {
+      String station = mETstation.getText().toString();
+      if ( station == null || station.length() == 0 ) {
+        mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
+        return;
+      }
       String comment = mETcomment.getText().toString();
       if ( comment == null ) comment = "";
-      mFxd.comment = comment;
-      mParent.updateFixedComment( mFxd, comment );
-    } else if ( b == mButtonConvert ) {
-      if ( mTVcrs.getText() != null ) {
-        mParent.tryProj4( this, mTVcrs.getText().toString(), mFxd );
-      }
-      return;
-    } else if ( b == mButtonDecl ) {
-      if ( mTVdecl.getText() != null ) {
+      if ( mButtonDecl.isChecked() && mTVdecl.getText() != null ) {
         String decl_str = mTVdecl.getText().toString();
         if ( decl_str != null && decl_str.length() > 0 ) {
           decl_str = decl_str.replaceAll( ",", "." );
           try {
             mParent.setDeclination( Float.parseFloat( decl_str ) );
           } catch ( NumberFormatException e ) {
-            String error = mContext.getResources().getString( R.string.error_declination_number );
-            mTVdecl.setError( error );
+            mTVdecl.setError( mContext.getResources().getString( R.string.error_declination_number ) );
             return;
           }
         }
       }
+
+      mFxd.name = station;
+      mFxd.comment = comment;
+      mParent.updateFixedNameComment( mFxd, station, comment );
+      dismiss();
+    } else if ( b == mButtonConvert ) {
+      if ( mTVcrs.getText() != null ) {
+        mParent.tryProj4( this, mTVcrs.getText().toString(), mFxd );
+      }
+      return;
     } else if ( b == mButtonView ) {
       Uri uri = Uri.parse( "geo:" + mFxd.lat + "," + mFxd.lng );
       mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );

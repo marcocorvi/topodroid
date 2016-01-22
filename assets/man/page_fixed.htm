@@ -1,26 +1,27 @@
 <html>
 <body>
 
-<h4>Fixed point</h4>
+<h4>Location edit</h4>
 
-This dialog is opened tapping a fixed point entry in the list if the <i>Location</i> dialog.<br><p>
+This dialog is opened tapping a fixed point entry in the <a href="page_fixedlist.htm">Locations list</a> dialog.<br><p>
 
 The dialog shows
 <ul>
-<li>longitude and latitude coordinates</li>
-<li>altitude over the WGS-84 ellipsoid</li>
-<li>altitude above mean sea level</li>
-<li>fixed point name</li>
-<li>the magnetic declination at the point position (at the current date)</li>
-<li><b>View</b> the position with a Location app (provided you have one installed)</li>
-<li><b>Convert</b> the location to another reference system (using the app Proj4)</li>
-<li><b>Delete</b> the fixed point record</li>
+<li>longitude, latitude and atitudes (wgs84 and above MSL)</li>
+<li>point <b>name</b> and <b>comment</b></li>
+<li>magnetic <b>declination</b> at the point (at the current date)</li>
+<li><b>View</b> the point in a Location app (provided you have one installed)</li>
+<li><b>Convert</b> the position to another reference system (using the app Proj4)</li>
+<li><b>Delete</b> the location record</li>
 </ul>
 
 The orthometric altitude is computed from the ellipsoidic altitude using the geoid model EGM2008.<br><p>
 
-The magnetid declination is computed using the World Magnetic Model for 2015-2020.
-To save it with the survey informations tap the <b>Save</b> button after computing it.<br><P.
+The magnetic declination is computed using the World Magnetic Model for 2015-2020.
+Check the <b>save</b> box to set it to the survey.<br><p>
+
+The <b>Save</b> button confirm the changes.<br><p>
+
 
 </body>
 </html>
