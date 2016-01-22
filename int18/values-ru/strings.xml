@@ -120,7 +120,7 @@
     <string name="few_plots">Не достаточно абрисов</string>
     <string name="few_calibs">Недостаточно калиб. замеров</string>
 
-    <!-- TODO string name="calib_import_title">Calibration import</string -->
+    <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
     <string name="import_wait">Импорт файла... обождите...</string>
     <string name="import_already">съёмка уже импортирована</string>
@@ -211,7 +211,7 @@
     <string name="no_device_found">Прибор не обнаружен</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
-    <!-- TODO string name="no_location_data">No location data</string -->
+    <string name="no_location_data">Нет данных о местоположении</string>
     <string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string>
     <string name="no_photos">В съёмке нет фото</string>
     <string name="no_plots">В съёмке нет абрисов \nДля создания используйте кнопку Добавить</string>
@@ -643,11 +643,11 @@
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редактировать</string>
     <string name="title_erase">Удалить</string>
-    <!-- TODO string name="title_fixed">Fixed points</string -->
-    <!-- TODO string name="title_fixed_edit">Location edit</string -->
-    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
-    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
-    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
+    <string name="title_fixed">Фиксированные точки</string>
+    <string name="title_fixed_edit">Редактировать местоположение</string>
+    <string name="title_fixed_import">Импортировать фиксированную точку</string>
+    <string name="title_fixed_gps">Фиксированная точка: GPS</string>
+    <string name="title_fixed_add">Фиксированная точка: вставить</string>
     <string name="title_manual">TopoDroid Инструкция</string>
     <string name="title_mode">Режим просмотра</string>
     <string name="title_move">Подвижный</string>
@@ -655,17 +655,17 @@
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_plot_save">Сохранить абрис как</string>
-    <!-- TODO string name="title_plot_reload">Reload sketch</string -->
+    <string name="title_plot_reload">Перезагрузить абрис</string>
     <string name="title_profile_flip">Развернуть разрез ?</string>
     <string name="title_refs">Привязки абриса</string>
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
-    <!-- TODO string name="title_sensor_edit">Sensor</string -->
+    <string name="title_sensor_edit">Сенсор</string>
 
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Описание съёмки</string>
-    <!-- TODO string name="title_survey_new">New survey</string -->
+    <string name="title_survey_new">Новая съёмка</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
     <string name="title_calib_export">Экспорт калибровки как</string>
@@ -992,10 +992,10 @@
 
     <string name="welcome_title">TopoDroid %1$s</string>
 
-  <!-- FIXME TODO welcome_text has been updated. Please fix accordingly -->
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер при помощи прибора DistoX.
 \n\nНет гарантий: используя данное ПО вы соглашаетесть с тем что автор не несет ответственность за потерю данных.
+\n\nПомощь: кнопка МЕНЮ
 \n\nПосетите http://sites.google.com/site/speleoapps с инструкцией и доп приложениями.
 \nПрисылайте ваши предложения, вопросы, сообщения об ошибках, на marco.corvi@gmail.com
 \nПеревод на Русский язык - Коженков Андрей, пишите письма akozhenkov@gmail.com
