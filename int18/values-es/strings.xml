@@ -229,7 +229,7 @@
     <string name="menu_reload">Importar</string>
     <string name="menu_rename">Renombrar</string>
     <string name="menu_help">Ayuda</string>
-    <string name="menu_join_survey">Topografía compartida</string>
+    <string name="menu_join_survey">Unir topografías</string>
     <string name="menu_logs">Registros</string>
     <!-- UNUSED string name="menu_manual">Manual</string -->
     <string name="menu_manual_calibration">Calibración</string>
@@ -482,7 +482,7 @@
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
-    <string name="help_device">Cambiar a opciones del dispositivo</string>
+    <string name="help_device">Opciones del dispositivo distoX</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
     <string name="help_symbol">Activar/desactivar los símbolos de dibujo</string>
@@ -512,7 +512,7 @@
     <string name="help_move">Modo Mover/zoom</string>
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
     <string name="help_edit">Seleccionar modo de edición</string>
-    <string name="help_refs">Elejir dibujo</string>
+    <string name="help_refs">Opciones de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
@@ -558,7 +558,7 @@
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
 
-    <!-- TODO string name="title_azimut">Extend reference</string -->
+    <string name="title_azimut">Extensión de referencia</string>
     <string name="title_calib">Calibración</string>
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
@@ -571,24 +571,24 @@
     <string name="title_draw_point">Punto %1$s</string>
     <string name="title_edit">Editar</string>
     <string name="title_erase">Borrar</string>
-    <!-- TODO string name="title_fixed">Fixed points</string -->
-    <!-- TODO string name="title_fixed_edit">Location edit</string -->
-    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
-    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
-    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
+    <string name="title_fixed">Fijar puntos</string>
+    <string name="title_fixed_edit">Punto de edición</string>
+    <string name="title_fixed_import">Punto de importación fijado</string>
+    <string name="title_fixed_gps">Punto fijo: GPS</string>
+    <string name="title_fixed_add">Punto fijo: insert</string>
     <string name="title_mode">Modo de visualización</string>
     <string name="title_move">Mover</string>
     <string name="title_note">Notas</string>
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
-    <!-- TODO string name="title_plot_reload">Reload sketch</string -->
+    <string name="title_plot_reload">Actualizar dibujo</string>
     <string name="title_profile_flip">¿Quieres cambiar al perfil del dibujo?</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>
     <string name="title_shot_delete">¿Quiere eliminar toma?</string>
-    <!-- TODO string name="title_sensor_edit">Sensor</string -->
+    <string name="title_sensor_edit">Sensor</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edición Superficie 3D</string -->
@@ -598,7 +598,7 @@
 
     <string name="title_stats">Estadísticas</string>
     <string name="title_survey">Info Topografía</string>
-    <!-- TODO string name="title_survey_new">New survey</string -->
+    <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar Topografías</string>
     <string name="title_survey_rename">Renombrar topografía como...</string>
     <string name="title_calib_export">Exportar topografía como...</string>
