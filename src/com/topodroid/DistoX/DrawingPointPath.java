@@ -26,7 +26,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -180,6 +180,7 @@ public class DrawingPointPath extends DrawingPath
 
   private void resetPath( float f )
   {
+    // Log.v("DistoX", "Reset path " + mOrientation + " scale " + mScale );
     Matrix m = new Matrix();
     if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
       if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
@@ -212,8 +213,8 @@ public class DrawingPointPath extends DrawingPath
   @Override
   public void setOrientation( double angle ) 
   { 
-    // TDLog.Log( TDLog.LOG_PATH, "Point " + mPointType + " setOrientation " + angle );
-    // Log.v( TopoDroidApp.TAG, "Point::setOrientation " + angle );
+    // TDLog.Log( TDLog.LOG_PATH, "Point " + mPointType + " set Orientation " + angle );
+    // Log.v( "DistoX", "Point::set Orientation " + angle );
     mOrientation = angle; 
     while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
     while ( mOrientation < 0.0 ) mOrientation += 360.0;

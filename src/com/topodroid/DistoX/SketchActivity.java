@@ -1965,12 +1965,12 @@ public class SketchActivity extends ItemDrawer
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.SketchActivity );
-        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
         return true;
-      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
-      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TDLog.Error( "key down: code " + code );
+        // TDLog.Error( "key down: code " + code );
     }
     return false;
   }

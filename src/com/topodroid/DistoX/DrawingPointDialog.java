@@ -27,6 +27,8 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.graphics.Paint;
 
+import android.util.Log;
+
 public class DrawingPointDialog extends MyDialog
                                implements View.OnClickListener
 {
@@ -115,6 +117,7 @@ public class DrawingPointDialog extends MyDialog
 
       if ( mOrientable ) {
         mPoint.setOrientation( mOrientationWidget.mOrient );
+        // Log.v("DistoX", "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
       }
       if ( DrawingBrushPaths.mPointLib.pointHasText( mPoint.mPointType ) ) {
         mPoint.setText( mETtext.getText().toString().trim() );

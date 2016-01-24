@@ -8,13 +8,25 @@ This dialog is opened tapping a data entry in the <i>Calibration data</i> window
 <ul>
 <li><b>azimuth, inclination, roll</b></li>
 <li>calibration <b>error</b></li>
+<li><b>group</b> number entry field</li>
 <li><b>regroup</b>: reassign the groups from this data onward</li>
 <li><b>delete</b> the data</li>
 <li><b>Save</b> the changes</li>
 </ul>
+<br><p>
 
-<b>Delete</b> does not remove the data from the database, but it marks it with a negative group number (-1),
-so that it does not count for the calibration nor it is (normally) shown in the data list.<br><p>
+The item group can be set or changed. 
+<ul>
+<li><b>positive</b>: the data takes part to the computation of the calibration coefficients</li>
+<li><b>zero</b>: the data does not contribute to the computation</li>
+<li><b>-1</b> (negative one): "delete" the data. This can be done also with the <u>Delete</u> button</li>
+</ul>
+
+Data with the same positive group number form a group.<br><p>
+
+Deleted data are not removed the data from the database.<br>
+They are not usually shown in the calibration data list, are not taken into account in the automatic group assignment,
+and do not contrinute to the coefficient computation.<br><p>
 
 </body>
 </html>

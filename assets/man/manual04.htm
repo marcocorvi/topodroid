@@ -1,17 +1,9 @@
 <html><body>
 <h3>[4] CALIBRATION WINDOW</h3>
 
-Tapping the <u>Calibration</u> menu in the Device activity window takes to the Calibrations dialog, listing the calibrations of the current DistoX.<br><p>
-
-<h4>New calibration</h4>
-To create a new calibration tap on the <u>New Calibration</u> button in the dialog. This brings you to the window for the calibration informations. The "date" field is prefilled with the current date. The "device" field contains the address of the DistoX, and cannot be modified.<br><p>
-
-You must give a "name" to the calibration. The name is what appears in the list of calibrations. A brief "description" is optional. By default TopoDroid will pick automatically the calibration algorithm based on the DistoX model and firmware. However you can force it to use either the linear or the non-linear algorithm.<br>
-<b>WARNING. The name of the calibration must not contain the character '/' (slash), which is the pathname separator.</b><br><p>
-
-When you are done tap the <u>Save</u> button (the leftmost) to save the calibration info to the database.<br><p>
-
-When you open an existing calibration (tapping the calibration name in the list of the calibration of a DistoX), you get the same interface.  The only difference is that the name of the calibration is no more editable.<br><p>
+Tapping the <u>Calibration</u> menu in the <i>Device</i> window shows the lists of the 
+<a href="page_calib_list.htm">calibrations</a> of the current DistoX, through which you can 
+create a new calibration or open an existing one. In both cases you are led to the <i>Calibration</i> window.<br><p>
 
 <h4>BUTTONS</h4>
 <ul>
@@ -22,7 +14,7 @@ When you open an existing calibration (tapping the calibration name in the list 
 
 <h4>MENUS</h4>
 <ul>
-<li>Calibration <a href="page_calib_impexp.htm">export</a></li>
+<li>Calibration <a href="page_calib_import.htm">export</a></li>
 <li><u>Delete</u> the calibration and its data from the database (non-recoverable action)</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
@@ -38,7 +30,7 @@ When you open an existing calibration (tapping the calibration name in the list 
 <li><i>Algorithm</i>: can be 0 (auto), 1 (linear), 2 (non-linear). If a calibration algorithm is left "auto", and this setting is not "auto", then the algorithm of the settings is used to calculate the calibration. If they are both "auto" the algorithm is chosen automatically by TopoDroid depending on the DistoX model and firmware. [default "auto"]</li>
 </ul><br><p>
 
-<a href="page_calibration.htm">Calibration howto</a><br>
+<a href="page_calib_howto.htm">Calibration howto</a><br>
 <p>
 
 <a href="manual03.htm">&lt; Device window</a> |

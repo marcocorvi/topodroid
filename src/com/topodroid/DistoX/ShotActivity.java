@@ -867,6 +867,7 @@ public class ShotActivity extends Activity
     setConnectionStatus( mDataDownloader.getStatus() );
   }
 
+  // --------------------------------------------------------------
 
   private boolean doubleBack = false;
   private Handler doubleBackHandler = new Handler();
@@ -896,6 +897,8 @@ public class ShotActivity extends Activity
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
 
+  // --------------------------------------------------------------
+
   // FIXME NOTIFY: the display mode is local - do not notify
   private void restoreInstanceFromData()
   { 
@@ -921,23 +924,20 @@ public class ShotActivity extends Activity
   void doBluetooth( Button b )
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
+    if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
+      if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
+        mDataDownloader.setDownload( false );
+        mDataDownloader.stopDownloadData();
+        setConnectionStatus( mDataDownloader.getStatus() );
+      }
+      CutNPaste.showPopupBT( this, this, mApp, b );
+      return;
+    }
     mDataDownloader.setDownload( false );
     mDataDownloader.stopDownloadData();
     setConnectionStatus( mDataDownloader.getStatus() );
-    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
-      switch ( mApp.distoType() ) {
-        case Device.DISTO_A3:
-          mApp.resetComm();
-          Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-          break;
-        case Device.DISTO_X310:
-          CutNPaste.showPopupBT( this, this, mApp, b );
-          // (new DeviceRemoteDialog( this, this, mApp )).show();
-          break;
-      }
-    } else {
-      mApp.resetComm();
-    }
+    mApp.resetComm();
+    Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
   }
 
   @Override 
@@ -1381,12 +1381,12 @@ public class ShotActivity extends Activity
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.ShotActivity );
-        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
         return true;
-      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
-      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TDLog.Error( "key down: code " + code );
+        // TDLog.Error( "key down: code " + code );
     }
     return false;
   }

@@ -105,7 +105,7 @@ class HelpDialog extends Dialog
   public void onClick( View v ) 
   {
     dismiss();
-    mContext.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mContext, DistoXManualDialog.class ) );
+    mContext.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mContext, UserManualActivity.class ) );
   }
 
 }

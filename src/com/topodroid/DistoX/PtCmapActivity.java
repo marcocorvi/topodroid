@@ -187,5 +187,25 @@ public class PtCmapActivity extends Activity
   //   finish();
   // }
 
+
+  @Override
+  public boolean onKeyDown( int code, KeyEvent event )
+  {
+    switch ( code ) {
+      case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
+        onBackPressed();
+        return true;
+      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+        String help_page = getResources().getString( R.string.ShotActivity );
+        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        return true;
+      // case KeyEvent.KEYCODE_SEARCH:
+      // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+      // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      default:
+        // TDLog.Error( "key down: code " + code );
+    }
+    return false;
+  }
 }
 

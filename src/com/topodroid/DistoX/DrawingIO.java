@@ -210,25 +210,28 @@ class DrawingIO
                 // continue;
               }
 
-              if ( has_orientation && DrawingBrushPaths.mPointLib.isSymbolOrientable(ptType) ) {
+              if ( ptType == DrawingBrushPaths.mPointLib.mPointLabelIndex ) {
+                if ( label_text != null ) {
+                  if ( label_text.equals( "!" ) ) {    // "danger" point
+                    DrawingPointPath path = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointDangerIndex, x, y, scale, options );
+                    surface.addDrawingPath( path );
+                  } else {                             // regular label
+                    DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
+                    if ( has_orientation ) {
+                      path.setOrientation( orientation );
+                    }
+                    surface.addDrawingPath( path );
+                  }
+                }
+              } else if ( has_orientation && DrawingBrushPaths.mPointLib.isSymbolOrientable(ptType) ) {
                 // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
                 DrawingBrushPaths.rotateGradPoint( ptType, orientation );
                 DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
                 surface.addDrawingPath( path );
                 DrawingBrushPaths.rotateGradPoint( ptType, -orientation );
               } else {
-                if ( ptType != DrawingBrushPaths.mPointLib.mPointLabelIndex ) {
-                  DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
-                  surface.addDrawingPath( path );
-                } else {
-                  if ( label_text.equals( "!" ) ) {    // "danger" point
-                    DrawingPointPath path = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointDangerIndex, x, y, scale, options );
-                    surface.addDrawingPath( path );
-                  } else {                             // regular label
-                    DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
-                    surface.addDrawingPath( path );
-                  }
-                }
+                DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
+                surface.addDrawingPath( path );
               }
             }
           } else if ( vals[0].equals( "line" ) ) {

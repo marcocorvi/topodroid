@@ -82,8 +82,8 @@ class SymbolPointLibrary extends SymbolLibrary
 
   // ========================================================================
 
-  final String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6";
-  final String p_user = "addCircle 0 0 6";
+  final String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
+  final String p_user = "addCircle 0 0 6";                                  // "o" shape
 
   private void loadSystemPoints( Resources res )
   {
@@ -98,7 +98,7 @@ class SymbolPointLibrary extends SymbolLibrary
     addSymbol( symbol );
 
     mPointLabelIndex = mSymbols.size();
-    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, false, true );
+    symbol = new SymbolPoint( res.getString(R.string.thp_label), "label", "label", 0xffffffff, p_label, true, true );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;

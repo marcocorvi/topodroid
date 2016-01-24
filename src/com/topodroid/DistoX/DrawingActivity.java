@@ -447,6 +447,8 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
+  // --------------------------------------------------------------
+
   // private void AlertMissingSymbols()
   // {
   //   new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.missing_symbols ),
@@ -459,6 +461,37 @@ public class DrawingActivity extends ItemDrawer
   //   );
   // }
 
+  private boolean doubleBack = false;
+  private Handler doubleBackHandler = new Handler();
+  private Toast   doubleBackToast = null;
+
+  private final Runnable doubleBackRunnable = new Runnable() {
+    @Override 
+    public void run() {
+      doubleBack = false;
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+    }
+  };
+
+  @Override
+  public void onBackPressed () // askClose
+  {
+    if ( dismissPopups() ) return;
+
+    if ( doubleBack ) {
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+      doSaveTh2( ); // do not alert-dialog on mAllSymbols
+      super.onBackPressed();
+    }
+    doubleBack = true;
+    doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+    doubleBackToast.show();
+    doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+  }
+
+
   // called by doPause and onBackPressed
   private void doSaveTh2( ) 
   {
@@ -466,7 +499,6 @@ public class DrawingActivity extends ItemDrawer
       startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
 
       // if ( not_all_symbols ) AlertMissingSymbols();
-
       // if ( mAllSymbols ) {
       //   // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
       //   startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
@@ -2305,15 +2337,6 @@ public class DrawingActivity extends ItemDrawer
       );
     }
 
-    public void onBackPressed()
-    {
-      if ( dismissPopups() ) return;
-
-      // finish();
-      doSaveTh2( ); // do not alert-dialog on mAllSymbols
-      super.onBackPressed();
-    }
-
     private void setMode( int mode )
     {
       mMode = mode;
@@ -3239,14 +3262,13 @@ public class DrawingActivity extends ItemDrawer
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        dismissPopups();
-        super.onBackPressed();
+        onBackPressed();
         return true;
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.DrawingActivity );
-        if ( help_page != null ) DistoXManualDialog.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
         return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

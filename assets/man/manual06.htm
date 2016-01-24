@@ -16,21 +16,21 @@ Each kind of shots is displayed with a different color: "legs" are white, "repea
 <h4>ACTIONS</h4>
 <ul>
 <li>tap on a shot: shot edit dialog</li>
-<li>long tap on a shot: shot <a href="page_shot2.htm">secondary edit actions</a></li>
+<li>long tap on a shot: shot <a href="page_shot_edit2.htm">secondary edit actions</a></li>
 <li>tap on a station: show/hide splays at the station</li>
 <li>long tap on a station: select/deselect the <a href="page_current.htm">"current" station</a></li>
 </ul><br><p>
 
 <h4>BUTTONS</h4>
 <ul>
-<li><u>Download</u>: <a href="page_download.htm">DistoX data download</a>. Hidden if no DistoX selected</li>
-<li><u>Bluetooth</u>: <a href="page_bluetooth.htm">bluetooth dialog</a></li>
-<li><u>Display</u>: to choose the <a href="page_displaymode.htm">display mode</a></li>
-<li><u>Sketch</u>: sketch dialog. A long tap opens immediately the most recent sketch</li>
-<li><u>Notes</u>: survey annotations</li>
-<li><u>Extend</u>: <a href="page_extend.htm">extend reference</a></li>
-<li><u>Stations</u> [N]: <a href="page_stations.htm">saved stations</a></li>
-<li><u>Add</u> [N] <a href="page_man_data.htm">manual</a> shot data dialog</li>
+<li>DistoX data <a href="page_download.htm">download</a>. Hidden if no DistoX selected</li>
+<li><a href="page_bluetooth.htm">Bluetooth</a></li>
+<li>Data <a href="page_displaymode.htm">display mode</a></li>
+<li><u>Sketch</u> list. A long tap opens immediately the most recent sketch</li>
+<li>Survey <a href="page_survey_notes.htm">notes</a></li>
+<li><a href="page_azimuth.htm">extend reference</a></li>
+<li><a href="page_saved_station.htm">saved stations</a></li>
+<li><u>Add</u> <a href="page_man_data.htm">manual</a> shot data dialog</li>
 </ul><br><p>
 
 <h4>Sketch dialog</h4>
@@ -42,10 +42,10 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 <ul>
 <li><u>Survey info</u>: survey information window</li>
 <li><u>Recover</u>: deleted item (shot or sketch) recovery</li>
-<li><u>Photo</u> [A]: pictures taken for this survey</li>
-<li><u>Sensor</u> [A]: sensor data taken for this survey</li>
+<li><u>Photo</u>: pictures taken for this survey</li>
+<li><u>Sensor</u>: sensor data taken for this survey</li>
 <li><u>3D</u>: 3D survey display (need </i>Cave3D</i>)</li>
-<li><u>DistoX</u> [A]: device window</li>
+<li><u>DistoX</u>: device window</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ul><br><p>
@@ -68,9 +68,9 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg [default 0.05, min 0]</li>
     <li><i>Minimum leg shots</i>: minimum number of close consecutive shots for a leg.[default 2, min 2, max 4]</li>
-    <li><i>Splay vertical threshold</i> defines how the <a href="page_extend.htm">splay "extend"</a> is set [default 10, min 0, max 90]</li>
+    <li><i>Splay vertical threshold</i> defines how the <a href="page_azimuth.htm">splay "extend"</a> is set [default 10, min 0, max 90]</li>
     <li><i>Leg vertical threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold [default 80, min 0, max 90]</li>
-    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_extend.htm">extend reference</a> [default ???]</li>
+    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_azimuth.htm">extend reference</a> [default ???]</li>
     <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors [default "no"]</li>
     <li><i>Backsight</i> fields in the shot manual input dialog [N] [default "no"]</li>
     <li><i>Magnetic anomaly</i> compensation. It requires backsight auto-station policy [default "off"]</li>

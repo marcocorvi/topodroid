@@ -1,5 +1,4 @@
-<html>
-<body>
+<html><body>
 
 <h4>Extend Reference</h4>
 
@@ -23,6 +22,16 @@ This dialog has
 <li><b>right</b> forces "extend" to RIGHT (+1)</li>
 <li><b>ok</b>: use the azimuth for the "extend"</li>
 </ul>
+<br><p>
 
-</body>
-</html>
+<b>Leg extend</b><br>
+When a new shot is downloaded TopoDroid sets its "extend" automatically. This holds also for shots entered manually, without specifying the "extend" in the shot dialog. By default the "extend" is either LEFT, RIGHT, or VERT (vertical), depending on the angle the shot makes with a reference azimuth. The "Extend Reference" dialog allows to change the reference azimuth, by rotating it clockwise or counterclockwise. Alternatively, the reference azimuth can be set using the Android compass sensors.<br><p>
+
+It is also possible to fix the "extend" for coming shots to either LEFT or RIGHT, by selecting the appropriate buttons in the dialog.<br><p>
+
+<b>Splay extend</b><br>
+The "extend" of splay shots is determined according to that of the leg(s) at the splay station and the azimuth between the splay and the leg. The circle of azimuths is divided in four regions: two "cones" around the directions at 90 degrees with the leg, and the remaining sectors, one around the direction of the leg, the other around the opposite. The <i>Splay vertical threshold</i> setting defines the width of the two cones.<br><p>
+
+When the angle between splay and leg is closer than this value to 90 degrees the splay gets a "vertical extend". Otherwise it gets the same extend as the leg, or the opposite, according to the sector the angle falls in.<br><p>
+
+</body></html>

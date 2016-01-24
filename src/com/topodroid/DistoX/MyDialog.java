@@ -69,7 +69,7 @@ public class MyDialog extends Dialog
       return true;
     } else if ( code == KeyEvent.KEYCODE_MENU ) {
       if ( mHelpPage != null ) {
-        DistoXManualDialog.showHelpPage( mContext, mHelpPage );
+        UserManualActivity.showHelpPage( mContext, mHelpPage );
       }
       return true;
     }

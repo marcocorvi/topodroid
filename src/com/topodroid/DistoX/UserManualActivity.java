@@ -1,9 +1,9 @@
-/* @file DistoXManualDialog.java
+/* @file UserManualActivity.java
  *
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid survey shot dialog
+ * @brief TopoDroid user manual actvity with a webview
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -46,7 +46,7 @@ import android.webkit.WebViewClient;
 
 import android.util.Log;
 
-public class DistoXManualDialog extends Activity
+public class UserManualActivity extends Activity
                                 implements OnItemClickListener, OnClickListener
 {
   private WebView mTVtext;
@@ -93,6 +93,7 @@ public class DistoXManualDialog extends Activity
     mTVtext.setWebViewClient( new WebViewClient() {
       @Override 
       public boolean shouldOverrideUrlLoading( WebView view, String url ) {
+        ++mCloseOnBack;
         view.loadUrl( url );
         return false;
       }
@@ -155,6 +156,7 @@ public class DistoXManualDialog extends Activity
     // Log.v("DistoX", "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
     if ( pos <= 14 ) {
+      mCloseOnBack = 0;
       load( String.format( "manual%02d.htm", pos ) );
     } else {
       getManualFromWeb();
@@ -165,15 +167,13 @@ public class DistoXManualDialog extends Activity
   public void onBackPressed()
   {
     if ( (-- mCloseOnBack) == 0 ) finish();
-    String url = mTVtext.getUrl();
-    if ( url.indexOf("manual") >= 0 ) finish();
     mTVtext.goBack();
   }
 
   // static void show Help Page( Context context, int class_string )
   // {
   //   Intent intent = new Intent( Intent.ACTION_VIEW );
-  //   intent.setClass( context, DistoXManualDialog.class );
+  //   intent.setClass( context, UserManualActivity.class );
   //   String page = context.getResources().getString( class_string );
   //   if ( page != null ) { 
   //     intent.putExtra( TopoDroidTag.TOPODROID_HELP_PAGE, page );
@@ -185,7 +185,7 @@ public class DistoXManualDialog extends Activity
   {
     // if ( page == null ) return;
     Intent intent = new Intent( Intent.ACTION_VIEW );
-    intent.setClass( context, DistoXManualDialog.class );
+    intent.setClass( context, UserManualActivity.class );
     intent.putExtra( TopoDroidTag.TOPODROID_HELP_PAGE, page );
     context.startActivity( intent );
   }

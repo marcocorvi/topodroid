@@ -198,19 +198,5 @@ public class AzimuthDialDialog extends MyDialog
     dismiss();
   }
 
-  // @Override 
-  // // public boolean onKeyLongPress( int code, KeyEvent ev )
-  // public boolean onKeyDown( int code, KeyEvent ev )
-  // {
-  //   if ( code == KeyEvent.KEYCODE_BACK ) {
-  //     onBackPressed();
-  //     return true;
-  //   } else if ( code == KeyEvent.KEYCODE_MENU ) {
-  //     DistoXManualDialog.show Help Page( mContext, R.string.AzimuthDialDialog );
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
 }
 

@@ -4,58 +4,103 @@ When you are done, export the survey in your favourite format and make a zip arc
 
 After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to. The support of other cave survey file format in import may not be complete.<br><p>
 
-<h4>Therion</h4>
-<i>Therion</i> is the cave map drafting program of choice for TopoDroid. Sketches are "natively" saved as Therion files. Beware that TopoDroid does not add to closed lines (in particular area borders) an extra point coinciding with the first point, as "xtherion" does.<br>
 
+<h4>SURVEY DATA EXPORT</h4>
+
+<b>Therion</b><br>
 Survey data are exported in <i>Therion</i> format, using the data "normal" form. The team names are listed but the command is commented. Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br>
 
 TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion commands "units", "flag", and "extend" are supported.<br><p>
 
-<h4>Compass</h4>
+<b>Compass</b><br>
 <i>Compass</i> data file are supported both in input and in export.<br><p>
 
-<h4>Walls</h4>
+<b>Walls</b><br>
 Survey data can be exported as <i>Walls</i> files.<br><p>
 
-<h4>Survex</h4>
+<b>Survex</b><br>
 Survey data can be exported as <i>Survex</i> files.<br>
-There are two settings, related to Survex export: the line termination can be either Unix or Windows, and the splay shots can be exported with a named TO station. In this case the TO station is named as the FROM station with a letter appended.<br><p>
+Settings:
+<ul>
+<li>line termination can be either Unix or Windows</li>
+<li>splay shots can be exported with a named TO station (named as the FROM station with a letter appended)</li>
+</ul><br><p>
 
-<h4>VisualTopo</h4>
+<b>VisualTopo</b><br>
 <i>VisualTopo</i> data file are supported both in input and in export.<br><p>
 
-<h4>PocketTopo</h4>
-TopoDroid supports <i>PocketTopo</i> both in import and in export.
-However, <i>PocketTopo</i> exports contain only the survey data, while, on import, "outline" and "profile" sketches are imported as Therion files. As <i>PocketTopo</i> uses only a few colors to differentiate line types, a map from colors to therion_types is used. The line and point types are selected through a setting.<br><p>
+<b>PocketTopo</b><br>
+TopoDroid supports <i>PocketTopo</i> both in import and in export.<br><p>
 
-It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch [A] in the <i>Sketch</i> window, to fit the centerline.<br><p>
+The exports contain only the survey data.<br>
+On export station names with alphabetic characters must be converted to integer number. In this case TopoDroid replaces each character with two digits. More precisely 'a' goes to '00', 'b' to '01' and so on, 'A' to '50', 'B' to '51', and so on. Every other character (ie, non-alphanumeric) goes to '99'.<br><p>
 
-On export station names with alphabetic characters must be converted to integer number. In this case TopoDroid replaces each character with two digits. More precisely 'a' goes to '00', 'b' to '01' and so on, 'A' to '50', 'B' to '51', and so on. Every other character (ie, non-alphanumeric) goes to '99'. 
+On import, "outline" and "profile" sketches are imported.<br>
+<i>PocketTopo</i> uses only a few colors to differentiate line types.
+Therefore a <a href="page_pt_cmap.htm">map</a> from colors to therion_types is used. The line and point types can be through a setting.<br><p>
 
-<h4>cSurvey</h4>
-There are two exports as <i>cSurvey</i> files. You can export the survey data, or you can export a sketch. The former contains only the survey data. The latter contains also the plna and profile sketches. If your survey has only one sketch this is a complete export of your work (except for the cross-sections), however, if the survey has more than one sketch, only one of them is included in the <i>cSurvey</i> file.<br>
+It may happen that the imported sketch is not aligned with the survey data. In this case you can shift the sketch in the <i>Sketch</i> window, to fit the centerline.<br><p>
 
+<b>cSurvey</b><br>
+Data exports as <i>cSurvey</i> file contains only the survey data.<br><p>
+
+<b>PLT</b><br>
+Survey data can be exported as track file (<i>OziExplorer</i>) if you have georefernced a station.<br><p>
+
+<b>KML</b><br>
+Survey data can be exported as KML file (<i>GoogleEarth</i>) if you have georeferenced a station.<br><p>
+
+<b>CSV</b><br>
+Survey data can be esported as a list of records with comma-separated fields:
+<ul>
+<li>"from" station</li>
+<li>"to" station</li>
+<li>distance, azimuth, clino</li>
+<li>if present the flag</li>
+</ul><br>
+Shot comments are not exported. A brief header is prepended to the data list.<br><p>
+
+<b>DXF</b><br>
+Survey data are exported as 3D DXF with layers
+<ul>
+<li>stations</li>
+<li>legs</li>
+<li>splays</li>
+</ul>
+<br><p>
+
+<h4>SKETCH EXPORT</h4>
+
+<b>Therion</b><br>
+<i>Therion</i> is the cave map drafting program of choice for TopoDroid.<br><p>
+
+Sketches are "natively" saved either as Therion files or in TopoDroid binary format.<br>
+The conversion from Therion to binary is "automatic": when you open a sketch and TopoDroid does not find the binary file, it looks for the Therion file.<br> 
+The conversion from binary to Therion must be requested through the appropriate menu in the <i>Survey</i> window.<br><p>
+
+By default TopoDroid, unlike "xtherion", does not add an extra point coinciding with the first point, to closed area borders.<br><p>
+
+<b>cSurvey</b><br>
+These exports contain both the plan and profile sketches, as well as the survey data.
 The sketch items are distributed on suitable <i>cSurvey</i> layers.<br><p>
 
-<h4>PLT</h4>
-Survey data can be exported as track file (<i>OziExplorer</i>).<br><p>
+If your survey has only one sketch this is a complete export of your work (except for the cross-sections).
+If the survey has more than one sketch, you must export each sketch individually and merge the exports with <i>cSurvey</i>.<br><p>
 
-<h4>KML</h4>
-Survey data can be exported as KML file (<i>GoogleEarth</i>).<br><p>
+<b>DXF</b><br>
+Sketches can be exported as 2D DXF files with layers for each point, line and area type in addition to the layers of the data 3D DXF.<br><p>
 
-<h4>CSV</h4>
-Survey data can be esported as a list of records with comma-separated fields: "from" station, "to" station, distance, azimuth, clino, and if present the flag. Shot comments are not exported. A brief header is prepended to the data list.<br><p>
+The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
 
-<h4>DXF</h4>
-There are two kinds of DXF exports. Survey data are exported as 3D DXF. Sketches are exported as 2D DXF (ie, sketch items lie in the Z=0 plane).<br>
-
-The 3D DXF have layers for "stations", "legs", and "splay" shots. The 2D DXF have also layers for each point, line, and area type.<br><p>
-
-<h4>SVG</h4>
+<b>SVG</b><br>
 Sketches can be exported as SVG files.<br><p>
 
-<h4>PNG</h4>
+<b>PNG</b><br>
 Image file in PNG format is used only to export sketches. The image resolution (pixels per meter) can be changed through a setting. If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds.<br><p>
+
+<h4>CALIBRATION EXPORT</h4>
+
+<a href="page_calib_import">Calibrations</a> can be exported and imported as CSV files.<br><p>
 
 <h4>IMPORT/EXPORT SETTINGS</h4>
 <ul>
