@@ -344,12 +344,12 @@
     <string name="survey_date">yyyy.mm.dd</string>
     <string name="survey_delete">¿Eliminar Topografía?</string>
     <string name="survey_split">¿Dividir topografía?</string>
-    <string name ="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
+    <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
     <string name="description">Descripción</string>
     <string name="name">Nombre</string>
-    <string name="team">Equipo</string>
+    <string name="team">Grupo</string>
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
