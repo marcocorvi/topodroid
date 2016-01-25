@@ -1,12 +1,12 @@
 symbol point
 name gradient
-name-es inclinaci�n
+name-es pendiente
 name-pt linhas_gradiente
 name-it pendenza
 name-fr pente
-name-de Gef�lle
-name-ru градиент
-name-bg наклон
+name-de Gefälle
+name-ru Ð³Ñ€Ð°Ð´Ð¸ÐµÐ½Ñ‚
+name-bg Ð½Ð°ÐºÐ»Ð¾Ð½
 th_name gradient
 orientation yes
 color 0x33ff66
