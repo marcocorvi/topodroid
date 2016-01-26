@@ -114,7 +114,7 @@
     <string name="few_plots">No hay suficientes dibujos</string>
     <string name="few_calibs">No hay suficientes calibraciones</string>
 
-    <!-- TODO string name="calib_import_title">Calibration import</string -->
+    <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
     <string name="import_wait">Importando archivo, espere...</string>
     <string name="import_already">Topografía ya importada</string>
@@ -203,7 +203,7 @@
     <string name="no_device_found">No se encuentra dispositivos</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
-    <!-- TODO string name="no_location_data">No location data</string -->
+    <string name="no_location_data">Sin datos de calibración</string>
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
     <string name="no_photos">Topografía sin foto</string>
     <string name="no_plots">Topografía sin dibujos.\nPulse el botón para añadir uno</string>
@@ -434,7 +434,7 @@
     <string name="button_start"     >Inicio</string>
     <string name="button_stop"      >Stop</string>
     <string name="button_upload"    >Cargar    </string>
-    <!-- TODO string name="button_view"      >View      </string -->
+    <string name="button_view"      >Ver       </string>
     <string name="button_yes"       >Si        </string>
 
     <!-- UNUSED string name="button_sharp"     >agudo</string -->
@@ -454,7 +454,7 @@
     <string name="mode_splay">Laterales</string>
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadriculas</string>
-    <string name="mode_fixed">Referencia fija</string>
+    <string name="mode_fixed">Desplazar objetos</string>
 
     <string name="remote_title">Control remoto del dispositivo</string>
     <string name="remote_on">Láser ON</string>
@@ -463,8 +463,8 @@
     <string name="remote_reset">Resetear BT</string>
     <string name="download">Descarga</string>
 
-    <!-- TODO string name="popup_do_splay">Splay shot</string -->
-    <!-- TODO string name="popup_do_leg">Leg shots</string -->
+    <string name="popup_do_splay">Tomas laterales</string>
+    <string name="popup_do_leg">Tomas principales</string>
 
 <!--
     <string name="btn_3d">3D</string>
@@ -720,15 +720,15 @@
   <string name="pref_team_summary">Equipo de Topógrafos</string>
   <string name="pref_team_message">Equipo de topógrafos por defecto</string>
 
-  <string name="pref_ethr_title">Ampliar límites</string>
+  <string name="pref_ethr_title">Precisión toma lateral</string>
   <string name="pref_ethr_summary">Ampliar límites de la toma lateral</string>
-  <string name="pref_ethr_message">Calculo ampliación límite de la toma lateral</string>
-  <string name="pref_vthr_title">Toma límite</string>
-  <string name="pref_vthr_summary">límite visual vertical por LRUD/WENS</string>
+  <string name="pref_ethr_message">Cálculo del límite de la toma lateral</string>
+  <string name="pref_vthr_title">Precisión toma vertical</string>
+  <string name="pref_vthr_summary">Cáculo del límite de la toma vertical</string>
   <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Límite visual vertical</string>
-  <string name="pref_plan_vthr_summary">Límite vertical visual en planta</string>
-  <string name="pref_plan_vthr_message">límite vertical de la visual en el planta</string>
+  <string name="pref_plan_vthr_summary">Límite vertical de la visual en planta</string>
+  <string name="pref_plan_vthr_message">límite vertical de la visual en planta</string>
   <string name="pref_init_station_title">Estación de inicio</string>
   <string name="pref_init_station_summary">Estación inicio por defecto</string>
   <string name="pref_init_station_message">Estación inicio por defecto</string>
@@ -758,9 +758,9 @@
   <string name="pref_beep_volume_title">Volumen del sonido del temporizador</string>
   <string name="pref_beep_volume_summary">Nivel % del volumen del pitido del temporizador</string>
   <string name="pref_beep_volume_message">Nivel % del volumen del pitido del temporizador</string>
-  <string name="pref_drawing_unit_title">Tamaño de los símbolo</string>
+  <string name="pref_drawing_unit_title">Tamaño de los símbolos</string>
   <string name="pref_drawing_unit_summary">Escala de símbolos del dibujo</string>
-  <string name="pref_drawing_unit_message">Escala de los símbolos del dibujo en la pantalla</string>
+  <string name="pref_drawing_unit_message">Tamaño de los símbolos del dibujo en la pantalla</string>
   <string name="pref_unscaled_points_title">Símbolos de punto sin zoom</string>
   <string name="pref_unscaled_points_summary">Símbolos de punto sin aumentar</string>
   <string name="pref_segment_title">Precisión de la línea</string>
@@ -793,14 +793,14 @@
   <string name="pref_label_size_summary">Tamaño del texto</string>
   <string name="pref_label_size_message">Tamaño del texto</string>
   <string name="pref_arrow_length_title">Corte seccional</string>
-  <string name="pref_arrow_length_summary">tamaño de la línea de la corte sección</string>
-  <string name="pref_arrow_length_message">tamaño de la línea de la corte sección</string>
+  <string name="pref_arrow_length_summary">tamaño de la línea del corte de sección</string>
+  <string name="pref_arrow_length_message">tamaño de la línea del corte de sección</string>
   <string name="pref_dot_radius_title">Puntos del radio</string>
   <string name="pref_dot_radius_summary">Tamaño de los puntos verdes</string>
   <string name="pref_dot_radius_message">Tamaño de los puntos verdes</string>
-  <string name="pref_line_thickness_title">Grosor de la linea</string>
-  <string name="pref_line_thickness_summary">Grosor de la linea</string>
-  <string name="pref_line_thickness_message">Grosor de la linea</string>
+  <string name="pref_line_thickness_title">Grosor de la línea</string>
+  <string name="pref_line_thickness_summary">Grosor de la línea</string>
+  <string name="pref_line_thickness_message">Grosor de la línea</string>
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_message">Grosor de la línea topografía</string>
@@ -837,8 +837,8 @@
   <string name="pref_recent_nr_summary">Número de las herramientas más recientes seleccionadas</string>
   <string name="pref_area_border_title">Visibilidad borde área</string> 
   <string name="pref_area_border_summary">Visibilidad predeterminada en el borde de área</string>
-  <string name="pref_cont_join_title">Unir a la continuación</string>
-  <string name="pref_cont_join_summary">Línea continuación que se une a las líneas</string>
+  <string name="pref_cont_join_title">Unir a la línea contínua</string>
+  <string name="pref_cont_join_summary">continuación de la línea se une a otra línea</string>
 
   <string name="pref_sketchUsesSplays_title">Tomas laterales en el dibujo</string>
   <string name="pref_sketchUsesSplays_summary">Utilizar tomas laterales en el dibujo</string>
@@ -874,7 +874,7 @@
   <string name="pref_walls_extended_thr_title">Perfil inclinación de tomas laterales</string>
   <string name="pref_walls_extended_thr_summary">Máxima inclinación para tomas laterales, perfil paredes</string>
   <string name="pref_walls_extended_thr_message">Máxima inclinación para tomas laterales, perfil paredes [grad.]</string>
-  <string name="pref_walls_xclose_title">Separaciónn</string>
+  <string name="pref_walls_xclose_title">Separación</string>
   <string name="pref_walls_xclose_summary">Punto de separación mínima a lo largo de la toma</string>
   <string name="pref_walls_xclose_message">Separación mínima de puntos de pared a lo largo del tiro [m]</string>
   <string name="pref_walls_concave_title">Concavidad</string>
