@@ -441,8 +441,7 @@ public class GMActivity extends Activity
     if ( nr >= 0 ) {
       if ( nr > 0 ) updateDisplay( );
       if ( toast ) {
-        Toast.makeText( this, String.format( getString(R.string.read_data), nr ), Toast.LENGTH_SHORT ).show();
-        // Toast.makeText( this, getString(R.string.read_) + nr + getString(R.string.data), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, String.format( getString(R.string.read_calib_data), nr/2, nr ), Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {
@@ -734,10 +733,10 @@ public class GMActivity extends Activity
           new DataDownloadTask( mApp, handler ).execute();
           // new DataDownloadTask( mApp, this ).execute();
         }
-      } else if ( b == mButton1[1] ) { // toggle
+      } else if ( b == mButton1[1] ) { // TOGGLE
         enableButtons( false );
         new CalibToggleTask( this, this, mApp ).execute();
-      } else if ( b == mButton1[2] ) { // group
+      } else if ( b == mButton1[2] ) { // GROUP
         if ( mApp.mCID >= 0 ) {
           List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
           if ( list.size() >= 16 ) {
@@ -758,7 +757,7 @@ public class GMActivity extends Activity
           resetTitle( );
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[3] ) { // cover
+      } else if ( b == mButton1[3] ) { // COVER
         Calibration calib = mApp.mCalibration;
         if ( calib != null ) {
           List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
@@ -770,7 +769,7 @@ public class GMActivity extends Activity
         } else {
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[4] ) { // compute
+      } else if ( b == mButton1[4] ) { // COMPUTE
         if ( mApp.mCID >= 0 ) {
           setTitle( R.string.calib_compute_coeffs );
           setTitleColor( TopoDroidConst.COLOR_COMPUTE );
@@ -782,11 +781,11 @@ public class GMActivity extends Activity
         } else {
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[5] ) { // read
+      } else if ( b == mButton1[5] ) { // READ
         enableButtons( false );
         new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
 
-      } else if ( b == mButton1[6] ) { // write
+      } else if ( b == mButton1[6] ) { // WRITE
         // if ( mEnableWrite ) {
           if ( mApp.mCalibration == null ) {
             Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();

@@ -127,10 +127,8 @@
     <string name="file_not_found">Fichier inexistant</string>
     <string name="import_zip_ok">Fichier zip importé avec succes</string>
     <string name="import_zip_wait">L\'importation du fichier zip peut etre longue ... Patientez...</string>
-    <string name="sketch_loading">Importation de dessin ... Patientez ...</string>
+    <!-- UNUSED string name="sketch_loading">Importation de dessin ... Patientez ...</string -->
     <string name="sketch_saving">Exportation de dessin ... Patientez ...</string>
-    <string name="lookup_wait">Recheche Internet  ... Patientez...</string>
-    <string name="lookup_fail">la Recherche a echouée</string>
     <string name="MT_points_none">No MobileTopographer point</string>
  
 
@@ -297,6 +295,7 @@
     <!-- UNUSED string name="plot_view">Station consulté</string -->
     <!-- UNUSED string name="read_">Lecture </string -->
     <string name="read_data">Lecture %1$d données</string>
+    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
     <string name="read_fail_with_code">Echec de lecture : code d\'erreur </string>
     <string name="read_failed">Echec lors de lecture du DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Echec lors de la lecture du fichier</string -->
@@ -425,7 +424,7 @@
     <string name="button_delete"    >Supprimer    </string>
     <string name="button_eval"      >Evaluation      </string>
     <string name="button_eval_cal"  >Evaluation avec Calibration</string>
-    <string name="button_geomag">Declinaison</string>
+    <!-- UNUSED string name="button_geomag">Declinaison</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manuel    </string -->
@@ -473,10 +472,10 @@
     <string name="mode_grid">Grille</string>
     <string name="mode_fixed">References fixes</string>
 
-    <string name="remote_title">Contrôle à distance</string>
+    <!-- UNUSED string name="remote_title">Contrôle à distance</string -->
     <string name="remote_on">Laser ACTIF</string>
     <string name="remote_off">Laser INACTIF</string>
-    <string name="remote_measure">Mesure</string>
+    <!-- UNUSED string name="remote_measure">Mesure</string -->
     <string name="remote_reset">Reset Bluetoot</string>
     <string name="download">Telecharger</string>
 
@@ -656,7 +655,7 @@
     <string name="title_calib">Calibration</string>
     <string name="title_coverage">Distributions des données de Calibration</string>
     <string name="title_coeff">Coefficients de Calibration</string>
-    <string name="title_coord">Entrer les Coordonnées du point</string>
+    <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX... Patientez</string>
@@ -1017,8 +1016,8 @@
   <!-- UNUSED string name="units_grads">grads</string -->
   <!-- UNUSED string name="units_meters">meters</string -->
   <!-- UNUSED string name="units_feet">feet</string -->
-  <string name="alt_wgs">ellipsoide</string>
-  <string name="alt_ortho">orthometrique</string>
+  <!-- UNUSED string name="alt_wgs">ellipsoide</string -->
+  <!-- UNUSED string name="alt_ortho">orthometrique</string -->
   <string name="splay_extend">estimer extension visée laterales</string>
 
     <string name="welcome_title">Bienvenue dans TopoDroid %1$s</string>

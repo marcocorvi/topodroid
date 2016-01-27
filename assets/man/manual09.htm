@@ -38,19 +38,19 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <ul>
 <li><u>Undo</u> removes the last items you have drawn, one at a time.</li>
 <li><u>Redo</u> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Pointwise editing actions may also affect the list of redo.</li>
-<li><u>Drawing tool</u> picker, to select the drawing tool from the <a href="page_tools.htm">palette</a></li>
-<li><u>Continuation</u> [N]. When this button is pressed a line started close to the end of another line of the same type is considered as its continuation and is attached to that. A new line is not created, and the line that has been continued is moved on top of the undo stack.</li> 
+<li><a href="page_tools_recent.htm">Drawing tool</a> picker</li>
+<li>Line <u>continuation</u></li>
 </ul><br><p>
 
 The <b>erase</b> mode has the <u>Undo</u> and <u>Redo</u> buttons.<br><p>
 
 The <b>edit</b> [A] mode has, besides the green buttons:
 <ul>
-<li><u>Previous</u> to go to the previous point in the selection. To do some editing you must select a point (either a point, a line/area point, a station, or a shot midpoint). To do this you tap near the point you want; however if there are several points close by the result is a selection set containing several point, only one of them is the active editing point.  You move among them with the "Previous" and "Next" buttons.</li>
-<li><u>Next</u> to go to the next point in the selection.</li>
-<li><u>Point</u> (point-wise edit). Editing the item attributes and moving/editing the item point(s)</li>
+<li><u>Previous</u> point in the selection</li>
+<li><u>Next</u> point in the selection.</li>
+<li><u>Point-wise</u> edit</li>
 <li><u>Item</u> properties edit</li>
-<li><u>Delete</u>: deletes the item from the sketch (it asks for confirmation, and can be "undone")</li>
+<li><u>Delete</u> the item from the sketch (it asks for confirmation, and can be "undone"). Long-tap: delete the item point.</li>
 </ul><br><p>
 
 <h4>MENUS</h4>
@@ -68,24 +68,24 @@ The <b>edit</b> [A] mode has, besides the green buttons:
 
 <h4>SKETCH SETTINGS</h4>
 <ul>
-  <li><i>Drawing tool picker</i>: either most-recent [default], or list view or grid view</li>
-  <li><i>Number of most recnt tools</i>: number of tools to display in the most-recent tool picker [3, 4, 5, or 6]</li>
-  <li><i>Side drag</i>: whether to enable panning by side-dragging</li>
+  <li><i>Drawing tool picker</i>: most-recent [default], or list view, or grid view</li>
+  <li><i>Number of recent tools</i> to display in the recent tool picker [3, 4, 5, or 6]</li>
+  <li><i>Side drag</i>: enable panning by side-dragging</li>
   <li><i>Zoom controls</i>: specifies whether and how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time</li>
-  <li><i>Midline check</i>: whether to check if all the legs are attached to the midline</li>
-  <li><i>xtherion areas</i> whether to save sketch th2 files with an extra point in area borders</li>
+  <li><i>Midline check</i>: check if all the legs are attached to the midline</li>
+  <li><i>xtherion areas</i> save sketch th2 files with an extra point in area borders</li>
   <li><i>POINT TOOLS >></i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Non-zoomed point</i>: whether point items should remain of fixed size when the drawing is zoomed</li>
-    <li><i>Point tools scale</i>: the base scale of point symbols [N]</li>
-    <li><i>Labels size</i>: size of label texts [default 24 pt]</li>
+    <li><i>Non-zoomed point</i>: point items stay of fixed size when zooming</li>
+    <li><i>Base scale</i> for point symbols</li>
+    <li>Label <i>text size</i> [default 24 pt]</li>
     </ul>
   <li><i>LINE TOOLS >></i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Line style</i>: drawing line style</li>
-    <li><i>Line width</i>: thickness of the lines</li>
-    <li><i>Section-line tick size</i>: length of the direction "tick" line in cross-section lines [default 5 pxl]</li>
-    <li><i>Line point spacing</i>: this is the distance between line points in the normal style [default 5 pxl] </li>
+    <li>Line <i>tracing style</i></li>
+    <li>Line <i>thickness</i></li>
+    <li><i>Direction tick length</i> for cross-section lines [default 5 pxl]</li>
+    <li>Line <i>point spacing</i>: distance between line points in normal style [default 5 pxl] </li>
     <li><i>Bezier accuracy</i> determines the number of base points in the interpolating curve. The smaller the more points. The default value is 1.0.</li>
     <li><i>Bezier corner</i>. Even an interpolated line should have corners, when there is a sharp turn at a point. Small values (0.2) make the corner sharper. Large values (20.0) make them rounded.</li>
     </ul>
@@ -95,21 +95,30 @@ The <b>edit</b> [A] mode has, besides the green buttons:
   <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view</li>
   <li><i>Splay dash threshold</i>: splay shots with inclination above this threshold are drawn with a dashed line</li>
   <li><i>Cross-section H-threshold</i>: the inclination angle above which a cross-section is horizontal. (Below it cross-section are vertical).</li>
-    <li><i>Survey line width</i>: the base thickness of midline/splay lines</li>
-    <li><i>Station name size</i>: size of stations names [default 18 pt] [N]</li>
-    <li><i>Green dots radius</i>: size of the green dots displayed in <b>edit</b> mode [default 5 pxl] [N]</li>
-    <li><i>Selection radius</i>: the range within which points are selected when fine-editing a sketch; [default 16 pxl]</li>
+    <li>Survey line <i>thickness</i> (midline/splay)</li>
+    <li>Station name <i>text size</i> [default 18 pt] [N]</li>
+    <li>Size of <i>green dots</i> displayed in <b>edit</b> mode [default 5 pxl] [N]</li>
+    <li>Radius of <i>selection</i> for fine-editing a sketch; [default 16 pxl]</li>
     </ul>
   </li>
   <li><i>AUTO WALLS [E]</i> <a href="page_walls.htm">settings</a></li>
 </ul>
 
+<h4>Point selection</h4>
+To do some editing you must select a point: either a point item, a line/area point, a station, or a shot midpoint.<br>
+To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is actively being edited. You change the "active" point among the selected set with the <u>Previous</u> and <u>Next</u> buttons.<br><p>
+
 <h4>Line style</h4>
 TopoDroid has four line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves. These segments pass through the two endpoints and have two control points used define the curvature.<br><p>
 
+<h4>Line continuation</h4>
+When the <u>Continuation</u> button is pressed, a line started close to the end of another line of the same type is considered as its continuation and is attached to that.<br>
+Depending on a setting a new line is created, or the existing line is continued (and moved on top of the undo stack).<br><p>
+ 
 <b>Warning. If the sketch disappear from the display, switch between plan and profile to force TopoDroid to reload it.</b><br><p>
 
 
+<a href="page_tools.htm">Drawing tools palette</a><br>
 <a href="page_therion_stations.htm">Therion station points</a><br>
 <a href="page_undo.htm">Undo stack</a><br>
 <a href="page_shift.htm">Sketch shift and flip</a><br>

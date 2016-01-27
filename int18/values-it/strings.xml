@@ -123,10 +123,8 @@
     <string name="file_not_found">File non trovato</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
     <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi...</string>
-    <string name="sketch_loading">Caricamento disegno ... attendi ...</string>
+    <!-- UNUSED string name="sketch_loading">Caricamento disegno ... attendi ...</string -->
     <string name="sketch_saving">Salvataggio disegno ... attendi ...</string>
-    <string name="lookup_wait">Ricerca in internet ... attendi ...</string>
-    <string name="lookup_fail">Ricerca fallita</string>
     <string name="MT_points_none">Punto GPS mancante</string>
 
     <string name="head_tail">Memoria: </string>
@@ -286,9 +284,10 @@
     <!-- string name="plot_view">Caposaldo puntato</string -->
     <!-- UNUSED string name="read_">Letti </string -->
     <string name="read_data">Letti %1sd dati</string>
+    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
     <string name="read_fail_with_code">Lettura fallita. Codice </string>
     <string name="read_failed">Lettura dati DistoX fallita</string>
-    <!-- string name="reading_file_failed">Lettura file fallita</string -->
+    <!-- UNUSED string name="reading_file_failed">Lettura file fallita</string -->
     <string name="saved_file_">Salvato file\ </string>
     <string name="saving_">Salvando </string>
     <string name="saving_file_failed">Salvataggio file fallito</string>
@@ -416,7 +415,7 @@
     <string name="button_eval"      >Calcola   </string>
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
-    <string name="button_geomag"    >Declinazione</string>
+    <!-- UNUSED string name="button_geomag"    >Declinazione</string -->
     <!-- NO string name="button_gps_stop"  >Stop      </string -->
     <!-- NO string name="button_manual"    >Manuale   </string -->
     <!-- NO string name="button_measure"   >Misura    </string -->
@@ -463,10 +462,10 @@
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
 
-    <string name="remote_title">DistoX Remote Control</string>
+    <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <string name="remote_on">Laser ON</string>
     <string name="remote_off">Laser OFF</string>
-    <string name="remote_measure">Misura</string>
+    <!-- UNUSED string name="remote_measure">Misura</string -->
     <!-- NO string name="remote_reset">Reset BT</string -->
     <string name="download">Scarica dati</string>
 
@@ -569,7 +568,7 @@
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
-    <string name="title_coord">Inserisci le coordinate del punto:</string>
+    <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_discover">Ricerca dispositivi DistoX ... attendi</string>

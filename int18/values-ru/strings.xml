@@ -129,10 +129,8 @@
     <string name="file_not_found">Файл не обнаружен</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
     <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите ...</string>
-    <string name="sketch_loading">Загрузка абриса... обождите...</string>
+    <!-- UNUSED string name="sketch_loading">Загрузка абриса... обождите...</string -->
     <string name="sketch_saving">Сохранение абриса ... обождите...</string>
-    <string name="lookup_wait">Интернет поиск ... обождите...</string>
-    <string name="lookup_fail">Не удалось найти</string>
     <string name="MT_points_none">Нет точки MobileTopographer</string>
  
 
@@ -297,6 +295,7 @@
     <!-- OK string name="plot_view">Просмотренный пикет</string -->
     <!-- UNUSED string name="read_">Считать </string -->
     <string name="read_data">Считать %1$d данных</string>
+    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
     <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
@@ -425,7 +424,7 @@
     <string name="button_delete"    >Удалить   </string>
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
-    <string name="button_geomag"    >Магнитное склонение</string>
+    <!-- UNUSED string name="button_geomag"    >Магнитное склонение</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- OK string name="button_gps_stop"  >Стоп      </string -->
     <!-- OK string name="button_manual"    >Вручную    </string -->
@@ -470,10 +469,10 @@
     <string name="mode_grid">Сетка</string>
     <string name="mode_fixed">Фиксир. точки.</string>
 
-    <string name="remote_title">Пульт дистанционного управления</string>
+    <!-- UNUSED string name="remote_title">Пульт дистанционного управления</string -->
     <string name="remote_on">Лазер ВКЛ</string>
     <string name="remote_off">Лазер ВЫКЛ</string>
-    <string name="remote_measure">Замер</string>
+    <!-- UNUSED string name="remote_measure">Замер</string -->
     <string name="remote_reset">Сброс БT</string>
     <string name="download">Скачать</string>
 
@@ -634,7 +633,7 @@
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэфиценты</string>
-    <string name="title_coord">Введите координаты точки:</string>
+    <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_discover">Поиск устройств DistoX ... подождите</string>

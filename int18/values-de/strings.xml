@@ -142,10 +142,8 @@
     <string name="file_not_found">Datei nicht gefunden</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
     <string name="import_zip_wait">Importieren Zip-Datei ... bitte warten ...</string>
-    <string name="sketch_loading">Skizze laden... bitte warten ...</string>
+    <!-- UNUSED string name="sketch_loading">Skizze laden... bitte warten ...</string -->
     <string name="sketch_saving">Skizze sichern ... bitte warten ...</string>
-    <!-- TODO string name="lookup_wait">Internet lookup ... bitte warten...</string -->
-    <!-- TODO string name="lookup_fail">Failed lookup</string -->
 
 <!-- MORE DEVICE STRINGS -->
     <!-- OK string name="head_tail">Memory: </string -->
@@ -313,6 +311,7 @@
     <string name="plot_start">Basismesspunkt</string>
     <!-- UNUSED string name="read_">Lesen </string -->
     <string name="read_data">%1$d Messungen gelesen</string>
+    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
     <string name="read_fail_with_code">Lesefehler: Fehlercode</string>
     <string name="read_failed">Failed DistoX-read</string>
     <string name="saved_file_">Gespeicherte Datei</string>
@@ -447,7 +446,7 @@
     <string name="button_delete"    >Löschen    </string>
     <string name="button_eval"      >Auswerten </string>
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
-    <!-- TODO string name="button_geomag"    >Declination</string -->
+    <!-- UNUSED string name="button_geomag"    >Declination</string -->
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- NO string name="button_gps_stop"  >Anhalten      </string -->
     <!-- NO string name="button_manual"    >Bedienungsanleitung </string -->
@@ -495,10 +494,10 @@
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Festen Rahmen</string>
 
-    <string name="remote_title">DistoX Fernbedienung</string>
+    <!-- UNUSED string name="remote_title">DistoX Fernbedienung</string -->
     <string name="remote_on">Laser AN</string>
     <string name="remote_off">Laser AUS</string>
-    <string name="remote_measure">Messung</string>
+    <!-- UNUSED string name="remote_measure">Messung</string -->
     <string name="remote_reset">BT zurücksetzen</string>
     <string name="download">Daten herunterladen</string>
 
@@ -616,7 +615,7 @@
     <string name="title_calib">Kalibrierung</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
-    <string name="title_coord">Gib die Punkt-Koordinaten ein:</string>
+    <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_device">DistoX Geräte</string>
     <string name="title_discover">DistoX Geräte finden ... warten</string>

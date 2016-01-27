@@ -112,6 +112,7 @@ public class DrawingActivity extends ItemDrawer
 
   private static int BTN_CONTINUE = 6;  // index of mButton2 continue button
   private static int BTN_JOIN = 5;      // index of mButton3 join button
+  private static int BTN_REMOVE = 7;    // index of mButton3 remove
 
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
@@ -827,10 +828,6 @@ public class DrawingActivity extends ItemDrawer
           mBMplan = bm2;
         }
       }
-      if ( TDSetting.mLevelOverBasic ) {
-        // mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
-        mButton1[BTN_PLOT].setOnLongClickListener( this );
-      }
       mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
       mBMextend  = mApp.setButtonBackground( null, mButtonSize, izons[IC_EXTEND] ); 
       mBMdownload_on = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_on );
@@ -886,11 +883,16 @@ public class DrawingActivity extends ItemDrawer
         }
       }
       if ( ! TDSetting.mLevelOverNormal ) {
-         mButton1[2].setVisibility( View.GONE );
-         mButton2[2].setVisibility( View.GONE );
-         mButton3[2].setVisibility( View.GONE );
-         mButton5[2].setVisibility( View.GONE );
-       }
+        mButton1[2].setVisibility( View.GONE );
+        mButton2[2].setVisibility( View.GONE );
+        mButton3[2].setVisibility( View.GONE );
+        mButton5[2].setVisibility( View.GONE );
+      }
+      if ( TDSetting.mLevelOverBasic ) {
+        // mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
+        mButton1[BTN_PLOT].setOnLongClickListener( this );
+        mButton3[BTN_REMOVE].setOnLongClickListener( this );
+      }
  
       // set button1[download] icon
       setConnectionStatus( mDataDownloader.getStatus() );
@@ -2674,6 +2676,34 @@ public class DrawingActivity extends ItemDrawer
       Button b = (Button)view;
       if ( b == mButton1[ BTN_PLOT ] ) {
         new DrawingProfileFlipDialog( this, this ).show();
+      } else if ( b == mButton3[ BTN_REMOVE ] ) {
+        SelectionPoint sp = mDrawingSurface.hotItem();
+        if ( sp != null ) {
+          int t = sp.type();
+          String name = null;
+          if ( t == DrawingPath.DRAWING_PATH_POINT ) {
+            DrawingPointPath pp = (DrawingPointPath)sp.mItem;
+            askDeleteItem( pp, t, DrawingBrushPaths.getPointName( pp.mPointType ) );
+          } else if ( t == DrawingPath.DRAWING_PATH_LINE ) {
+            DrawingLinePath lp = (DrawingLinePath)sp.mItem;
+            if ( lp.size() <= 2 ) {
+              askDeleteItem( lp, t, DrawingBrushPaths.mLineLib.getSymbolName( lp.mLineType ) );
+            } else {
+              removeLinePoint( lp, sp.mPoint, sp );
+              lp.retracePath();
+              modified();
+            }
+          } else if ( t == DrawingPath.DRAWING_PATH_AREA ) {
+            DrawingAreaPath ap = (DrawingAreaPath)sp.mItem;
+            if ( ap.size() <= 3 ) {
+              askDeleteItem( ap, t, DrawingBrushPaths.mAreaLib.getSymbolName( ap.mAreaType ) );
+            } else {
+              removeLinePoint( ap, sp.mPoint, sp );
+              ap.retracePath();
+              modified();
+            }
+          }
+        }
       // } else if ( b == mButton1[ BTN_DOWNLOAD ] ) {
       //   doBluetooth( b );
       }

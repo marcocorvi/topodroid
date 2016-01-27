@@ -127,10 +127,8 @@
     <string name="file_not_found">Файлът не е намерен</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте ...</string>
-    <string name="sketch_loading">Зареждане на скица... Моля изчакайте...</string>
+    <!-- UNUSED string name="sketch_loading">Зареждане на скица... Моля изчакайте...</string -->
     <string name="sketch_saving">Записване на скица... Моля изчакайте...</string>
-    <string name="lookup_wait">Търсене в интернет. Моля изчакайте...</string>
-    <string name="lookup_fail">Неуспешно търсене</string>
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
 
@@ -298,9 +296,10 @@
     <!-- string name="plot_view">Viewed station</string -->
     <!-- UNUSED string name="read_">Прочетени </string -->
     <string name="read_data">Прочетени %1$d измервания</string>
+    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
     <string name="read_fail_with_code">Грешка при четене: код </string>
     <string name="read_failed">Грешка при четене от DistoX</string>
-    <!-- string name="reading_file_failed">Failed file-read</string -->
+    <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
     <string name="saved_file_">Файлът е записан\ </string>
     <string name="saving_">Записване</string>
     <string name="saving_file_failed">Грешка при запис на файл</string>
@@ -429,7 +428,7 @@
     <string name="button_delete"    >Изтриване </string>
     <string name="button_eval"      >Оценка    </string>
     <string name="button_eval_cal"  >Оц./кал.  </string>
-    <string name="button_geomag"    >Деклинация</string>
+    <!-- UNUSED string name="button_geomag"    >Деклинация</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
@@ -477,10 +476,10 @@
     <string name="mode_grid">Мащабна мрежа</string>
     <string name="mode_fixed">Преместване на скица</string>
 
-    <string name="remote_title">Дист. управление</string>
+    <!-- UNUSED string name="remote_title">Дист. управление</string -->
     <string name="remote_on">Вкл. лазер</string>
     <string name="remote_off">Изкл. лазер</string>
-    <string name="remote_measure">Измерване</string>
+    <!-- UNUSED string name="remote_measure">Измерване</string -->
     <string name="remote_reset">Рестарт. Bluetooth</string>
     <string name="download">Сваляне</string>
 
@@ -642,7 +641,7 @@
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
-    <string name="title_coord">Въведете координати на точката:</string>
+    <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
     <string name="title_discover">Сканиране за DistoX устройства...</string>
@@ -1002,8 +1001,8 @@
   <!-- UNUSED string name="units_grads">гради</string -->
   <!-- UNUSED string name="units_meters">метри</string -->
   <!-- UNUSED string name="units_feet">футове</string -->
-  <string name="alt_wgs">елипсоидна</string>
-  <string name="alt_ortho">ортометрична</string>
+  <!-- UNUSED string name="alt_wgs">елипсоидна</string -->
+  <!-- UNUSED string name="alt_ortho">ортометрична</string -->
   <string name="splay_extend">Разгъване на странични отсечки</string>
 
     <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>

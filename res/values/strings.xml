@@ -127,10 +127,8 @@
     <string name="file_not_found">File not found</string>
     <string name="import_zip_ok">Successfully imported zip file</string>
     <string name="import_zip_wait">Imported zip file may take long. Please wait ...</string>
-    <string name="sketch_loading">Loading sketch ... please wait...</string>
+    <!-- string name="sketch_loading">Loading sketch ... please wait...</string -->
     <string name="sketch_saving">Saving sketch ... please wait...</string>
-    <string name="lookup_wait">Internet lookup ... please wait...</string>
-    <string name="lookup_fail">Failed lookup</string>
     <string name="MT_points_none">No MobileTopographer point</string>
  
 
@@ -297,6 +295,7 @@
     <!-- string name="plot_view">Viewed station</string -->
     <!-- string name="read_">Read </string -->
     <string name="read_data">Read %1$d data</string>
+    <string name="read_calib_data">Read %1$d data (%2$d packets)</string>
     <string name="read_fail_with_code">Read failure: error code </string>
     <string name="read_failed">Failed DistoX-read</string>
     <!-- string name="reading_file_failed">Failed file-read</string -->
@@ -425,7 +424,7 @@
     <string name="button_delete"    >Delete    </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
-    <string name="button_geomag"    >Declination</string>
+    <!-- UNUSED string name="button_geomag"    >Declination</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
@@ -473,10 +472,10 @@
     <string name="mode_grid">Grid</string>
     <string name="mode_fixed">Fix refs</string>
 
-    <string name="remote_title">Device Remote Control</string>
+    <!-- string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser ON</string>
     <string name="remote_off">Laser OFF</string>
-    <string name="remote_measure">Measure</string>
+    <!-- string name="remote_measure">Measure</string -->
     <string name="remote_reset">Reset BT</string>
     <string name="download">Download</string>
 
@@ -656,7 +655,7 @@
     <string name="title_calib">Calibrations</string>
     <string name="title_coverage">Calibration data distibution</string>
     <string name="title_coeff">Calibration coefficients</string>
-    <string name="title_coord">Enter the point coordinates:</string>
+    <!-- string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_discover">Scanning for DistoX devices ... wait</string>
@@ -1017,8 +1016,8 @@
   <!-- string name="units_grads">grads</string -->
   <!-- string name="units_meters">meters</string -->
   <!-- string name="units_feet">feet</string -->
-  <string name="alt_wgs">ellipsoid</string>
-  <string name="alt_ortho">orthometric</string>
+  <!-- string name="alt_wgs">ellipsoid</string -->
+  <!-- string name="alt_ortho">orthometric</string -->
   <string name="splay_extend">estimate splay extend</string>
 
     <string name="welcome_title">TopoDroid %1$s</string>
