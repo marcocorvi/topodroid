@@ -445,10 +445,10 @@
     <string name="button_clear"     >Очистить  </string>
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
-    <string name="button_store"     >Запсать</string>
-    <string name="button_upload"    >Передать в Disto </string>
-    <string name="button_view"      >Просмотр      </string>
-    <string name="button_yes"       >Да        </string>
+    <string name="button_store"     >Записать   </string>
+    <string name="button_upload"    >Выгрузить  </string>
+    <string name="button_view"      >Просмотр   </string>
+    <string name="button_yes"       >Да         </string>
 
     <!-- UNUSED string name="button_sharp"     >Острый</string -->
     <!-- UNUSED string name="button_rock"      >Камень</string -->
@@ -460,7 +460,7 @@
     <string name="button_split"     >Разделить </string>
     <string name="button_toggle"    >Режим КАЛИБ  </string>
 -->
-    <string name="button_write"     >Записть</string>
+    <string name="button_write"     >Загрузить в Disto</string>
     <string name="button_xsection"  >Сечение</string>
 
     <string name="mode_leg">Нитка</string>
