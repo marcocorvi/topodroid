@@ -38,15 +38,15 @@
     <string name="tha_water">вода</string>
 
     <string name="make_walls">Стены</string>
-    <string name="missing_area">ОБЛАСТЬ</string>
-    <string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string>
-    <string name="missing_line">ЛИНИЯ</string>
-    <string name="missing_point">ТОЧКА</string>
-    <!-- OK string name="missing_save">В абрисе присутстсвуют неизвестные элементы.\nНе сохранено.</string -->
     <string name="missing_station">Отсутствует пикет</string>
-    <string name="missing_symbols">Отсутствуют инструменты для рисования.\nВы хотите сохранить?</string>
+    <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
+    <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
+    <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
+    <!-- UNUSED string name="missing_point">ТОЧКА</string -->
+    <!-- UNUSED string name="missing_save">В абрисе присутстсвуют неизвестные элементы.\nНе сохранено.</string -->
+    <!-- UNUSED string name="missing_symbols">Отсутствуют инструменты для рисования.\nВы хотите сохранить?</string -->
     <!-- UNUSED string name="missing_title">ОТСУТСТВУЮТ СИМВОЛЫ</string -->
-    <string name="missing_warning">Отсутствуют следующие инструменты для рисования.\n</string>
+    <!-- UNUSED string name="missing_warning">Отсутствуют следующие инструменты для рисования.\n</string -->
     <string name="failed_snap_to_line">Отсутствует ближайшая точка-линии для закрепления границы зоны</string>
     <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
 
@@ -224,14 +224,15 @@
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Угол %4$.1f"</string>
 
-    <!-- NO string name="menu_3d">3 D</string -->
+    <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">Описание</string>
+    <!-- TODO string name="menu_area">AREA</string -->
     <string name="menu_attach">СОЕДИНИТЬ</string>
     <string name="menu_calib">КАЛИБРОВКИ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <string name="menu_display">Показать</string>
-    <string name="menu_distox">DISTOX</string>
+    <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">Экспорт</string>
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_recover">Восстановить</string>
@@ -308,6 +309,7 @@
     <string name="too_many_legs_xsection">Слишком много лучей для разреза</string>
     <string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string>
     <string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string>
+    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
 
     <string name="sensor">датчик</string>
     <!-- OK string name="sensor_accelerometer">акселерометр</string -->
@@ -529,8 +531,8 @@
 
     <string name="help_help">Помощь</string>
     <string name="help_manual">Инструкция</string>
-    <!-- NO string name="help_more">Показать вторичные функции</string -->
-    <!-- NO string name="help_less">Показать первичные функции</string -->
+    <!-- OK string name="help_more">Показать вторичные функции</string -->
+    <!-- OK string name="help_less">Показать первичные функции</string -->
     <string name="help_measure">Измерить расстояния</string>
     
     <string name="help_coeff">Показать коэфиценты калибровки</string>
@@ -678,8 +680,8 @@
   <!-- UNUSED string name="pref_cat_sketch">Настройки Абриса</string -->
   <string name="pref_cat_log">настройки журнала</string>
 
-  <!-- NO string name="pref_hide_help_title">Скрыть помощь</string -->
-  <!-- NO string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
+  <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
+  <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
   <string name="pref_locale_title">Язык</string>
   <string name="pref_locale_summary">Язык</string>
 

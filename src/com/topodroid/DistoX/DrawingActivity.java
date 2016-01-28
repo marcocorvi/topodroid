@@ -164,7 +164,8 @@ public class DrawingActivity extends ItemDrawer
                         R.string.menu_palette,
                         R.string.menu_overview,
                         R.string.menu_options,
-                        R.string.menu_help
+                        R.string.menu_help,
+                        R.string.menu_area
                      };
 
   private static int help_icons[] = { 
@@ -452,7 +453,7 @@ public class DrawingActivity extends ItemDrawer
 
   // private void AlertMissingSymbols()
   // {
-  //   new TopoDroidAlertDialog( this, getResources(), getResources().getString( R.string.missing_symbols ),
+  //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.missing-symbols,
   //     new DialogInterface.OnClickListener() {
   //       @Override
   //       public void onClick( DialogInterface dialog, int btn ) {
@@ -479,17 +480,22 @@ public class DrawingActivity extends ItemDrawer
   public void onBackPressed () // askClose
   {
     if ( dismissPopups() ) return;
-
-    if ( doubleBack ) {
-      if ( doubleBackToast != null ) doubleBackToast.cancel();
-      doubleBackToast = null;
+    if ( isSection() || isXSection() ) {
       doSaveTh2( ); // do not alert-dialog on mAllSymbols
       super.onBackPressed();
+    } else {
+      if ( doubleBack ) {
+        if ( doubleBackToast != null ) doubleBackToast.cancel();
+        doubleBackToast = null;
+        doSaveTh2( ); // do not alert-dialog on mAllSymbols
+        super.onBackPressed();
+      } else {
+        doubleBack = true;
+        doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+        doubleBackToast.show();
+        doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+      }
     }
-    doubleBack = true;
-    doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
-    doubleBackToast.show();
-    doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
 
 
@@ -2328,8 +2334,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void askDelete()
     {
-      new TopoDroidAlertDialog( this, getResources(),
-                        getResources().getString( R.string.plot_delete ),
+      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.plot_delete,
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
@@ -2897,7 +2902,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void askDeleteItem( final DrawingPath p, final int t, final String name )
     {
-      new TopoDroidAlertDialog( this, getResources(), 
+      TopoDroidAlertDialog.makeAlert( this, getResources(), 
                                 String.format( getResources().getString( R.string.item_delete ), name ), 
         new DialogInterface.OnClickListener() {
           @Override
@@ -3316,7 +3321,11 @@ public class DrawingActivity extends ItemDrawer
     Resources res = getResources();
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
     mMenuAdapter.add( res.getString( menus[0] ) );  // EXPORT
-    mMenuAdapter.add( res.getString( menus[1] ) );  // INFO
+    if ( isSection() || isXSection() ) {
+      mMenuAdapter.add( res.getString( menus[8] ) );  // AREA
+    } else {
+      mMenuAdapter.add( res.getString( menus[1] ) );  // INFO
+    }
     mMenuAdapter.add( res.getString( menus[2] ) );  // RELOAD
     if ( TDSetting.mLevelOverBasic && isSketch2D() ) mMenuAdapter.add( res.getString( menus[3] ) ); // DELETE
     mMenuAdapter.add( res.getString( menus[4] ) ); // PALETTE
@@ -3356,6 +3365,12 @@ public class DrawingActivity extends ItemDrawer
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
           new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start ).show();
+        } else if ( isSection() || isXSection() ) {
+          float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
+          // Log.v("DistoX", "Section area " + area );
+          Resources res = getResources();
+          String msg = String.format( res.getString( R.string.section_area ), area );
+          TopoDroidAlertDialog.makeAlert( this, res, msg, R.string.button_ok, -1, null, null );
         }
       } else if ( p++ == pos ) { // RECOVER RELOAD
         if ( mType == PlotInfo.PLOT_EXTENDED ) {

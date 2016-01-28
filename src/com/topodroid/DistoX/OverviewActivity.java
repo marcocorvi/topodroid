@@ -240,8 +240,7 @@ public class OverviewActivity extends ItemDrawer
 
     // private void AlertMissingSymbols()
     // {
-    //   new TopoDroidAlertDialog( this, getResources(),
-    //                     getResources().getString( R.string.missing_symbols ),
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.missing_symbols,
     //     new DialogInterface.OnClickListener() {
     //       @Override
     //       public void onClick( DialogInterface dialog, int btn ) {

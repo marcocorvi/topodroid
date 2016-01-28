@@ -496,6 +496,11 @@ class DrawingIO
 
   // =========================================================================
   // EXPORT details
+  // V ... S ... I ...
+  // paths: P. T, L. A. U. X.
+  // F
+  // stations: U
+  // E
 
   static public boolean doLoadDataStream( DrawingSurface surface,
                                    String filename,

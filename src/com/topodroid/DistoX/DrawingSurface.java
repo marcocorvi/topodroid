@@ -629,4 +629,10 @@ public class DrawingSurface extends SurfaceView
     mCommandManager2.setStationXSections( xsection_ext,  PlotInfo.PLOT_EXTENDED );
   }
 
+  // only for sections
+  float computeSectionArea()
+  {
+    return commandManager.computeSectionArea();
+  }
+
 }

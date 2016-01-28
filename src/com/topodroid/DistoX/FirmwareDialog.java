@@ -158,8 +158,7 @@ class FirmwareDialog extends MyDialog
 
   void askDump( final String filename )
   {
-    String title = mParent.getResources().getString( R.string.ask_dump );
-    new TopoDroidAlertDialog( mContext, mParent.getResources(), title,
+    TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_dump,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -179,7 +178,7 @@ class FirmwareDialog extends MyDialog
   {
     TDLog.LogFile( "FW/HW compatibility " + (compatible? "yes" : "no") );
     String title = mParent.getResources().getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
-    new TopoDroidAlertDialog( mContext, mParent.getResources(), title,
+    TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), title,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {

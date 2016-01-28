@@ -32,15 +32,15 @@
     <string name="tha_water">acqua</string>
 
     <string name="make_walls">Pareti</string>
-    <string name="missing_area">AREA</string>
-    <string name="missing_hint">Installa i prototipi grafici con TdSymbol</string>
-    <string name="missing_line">LINEA</string>
-    <string name="missing_point">PUNTO</string>
-    <!-- string name="missing_save">Disegno non salvato causa prototipi mancanti</string -->
     <string name="missing_station">Caposaldo assente</string>
-    <string name="missing_symbols">Mancano alcuni prototipi grafici.\nSalvare ugualmente?</string>
+    <!-- UNUSED string name="missing_area">AREA</string -->
+    <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
+    <!-- UNUSED string name="missing_line">LINEA</string -->
+    <!-- UNUSED string name="missing_point">PUNTO</string -->
+    <!-- UNUSED string name="missing_save">Disegno non salvato causa prototipi mancanti</string -->
+    <!-- UNUSED string name="missing_symbols">Mancano alcuni prototipi grafici.\nSalvare ugualmente?</string -->
     <!-- UNUSED string name="missing_title">PROTOTIPI MANCANTI</string -->
-    <string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string>
+    <!-- UNUSED string name="missing_warning">Mancano i seguenti prototipi grafici.\n</string -->
     <string name="failed_snap_to_line">Nessuna linea su cui deformare il bordo area</string>
     <string name="failed_snap_to_point">Nessun punto vicino su cui muovere il punto</string>
 
@@ -218,12 +218,15 @@
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Posizione %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinazione %4$.1f"</string>
 
+    <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
+    <!-- TODO string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNETTI</string>
     <string name="menu_calib">CALIBRAZIONI</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <string name="menu_display">DISPLAY</string>
+    <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">ESPORTA</string>
     <!-- OK ENGLISH string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
@@ -297,6 +300,7 @@
     <string name="too_many_legs_xsection">Troppe battute per una Cross-section</string>
     <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
+    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
 
     <string name="sensor">sensore</string>
     <!-- string name="sensor_accelerometer">accelerometro</string -->
@@ -341,8 +345,8 @@
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>
     <string name="station_set">Prosegui rilievo da qui?</string>
-    <!-- NO string name="station_base">caposaldo di riferimento</string -->
-    <!-- NO string name="station_next">prossimo caposaldo</string -->
+    <!-- OK string name="station_base">caposaldo di riferimento</string -->
+    <!-- OK string name="station_next">prossimo caposaldo</string -->
     <string name="station_viewed">caposaldo puntato</string>
     <string name="survey_exists">Rilievo già presente</string>
     <string name="survey_date">aaaa.mm.gg</string>
@@ -416,9 +420,9 @@
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_geomag"    >Declinazione</string -->
-    <!-- NO string name="button_gps_stop"  >Stop      </string -->
-    <!-- NO string name="button_manual"    >Manuale   </string -->
-    <!-- NO string name="button_measure"   >Misura    </string -->
+    <!-- OK string name="button_gps_stop"  >Stop      </string -->
+    <!-- OK string name="button_manual"    >Manuale   </string -->
+    <!-- OK string name="button_measure"   >Misura    </string -->
     <string name="button_photo"   >Foto</string>
     <string name="button_sensor"  >Misure</string>
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
@@ -466,7 +470,7 @@
     <string name="remote_on">Laser ON</string>
     <string name="remote_off">Laser OFF</string>
     <!-- UNUSED string name="remote_measure">Misura</string -->
-    <!-- NO string name="remote_reset">Reset BT</string -->
+    <!-- OK string name="remote_reset">Reset BT</string -->
     <string name="download">Scarica dati</string>
 
     <!-- TODO string name="popup_do_splay">Splay shot</string -->
@@ -481,8 +485,8 @@
 
     <string name="help_help">Questo aiuto</string>
     <string name="help_manual">Manuale online</string>
-    <!-- NO string name="help_more">Passa ai tasti secondari</string -->
-    <!-- NO string name="help_less">Ritorna ai tasti primari</string -->
+    <!-- OK string name="help_more">Passa ai tasti secondari</string -->
+    <!-- OK string name="help_less">Ritorna ai tasti primari</string -->
     <string name="help_measure">Misurare le distanze</string>
     
     <string name="help_coeff">Coefficienti della calibrazione</string>
@@ -627,7 +631,7 @@
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tastiera</string>
   <string name="pref_mkeyboard_summary">Abilita/Disabilita tastiere personalizzate</string>
-  <!-- NO string name="pref_cosurvey_title">Co-surveying</string -->
+  <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->
   <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
   <string name="pref_export_shots_title">Formato esportazione dati</string>
   <string name="pref_export_shots_summary">Formato esportazione dati preferenziale</string>

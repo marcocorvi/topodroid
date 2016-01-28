@@ -320,8 +320,7 @@ public class SketchActivity extends ItemDrawer
 
   private void alertMakeSurface( )
   {
-    new TopoDroidAlertDialog( this, getResources(),
-                      getResources().getString( R.string.make_surface ),
+    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.make_surface,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -334,8 +333,7 @@ public class SketchActivity extends ItemDrawer
 
   // private void alertMissingSymbols()
   // {
-  //   new TopoDroidAlertDialog( this, getResources(),
-  //                     getResources().getString( R.string.missing_symbols ),
+  //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.missing-symbols,
   //     new DialogInterface.OnClickListener() {
   //       @Override
   //       public void onClick( DialogInterface dialog, int btn ) {
@@ -433,7 +431,7 @@ public class SketchActivity extends ItemDrawer
   //   Handler saveHandler = new Handler(){
   //        @Override
   //        public void handleMessage(Message msg) {
-  //   //         new TopoDroidAlertDialog( this, getResources(), "Saving sketch",
+  //   //         TopoDroidAlertDialog.makeAlert( this, getResources(), "Saving sketch",
   //   //         new DialogInterface.OnClickListener() {
   //   //             public void onClick(DialogInterface dialog, int which) {
   //   //                 return;
@@ -576,7 +574,7 @@ public class SketchActivity extends ItemDrawer
         Handler saveHandler = new Handler(){
              @Override
              public void handleMessage(Message msg) {
-        //        new TopoDroidAlertDialog( this, getResources(), "Saving sketch",
+        //        TopoDroidAlertDialog.makeAlert( this, getResources(), "Saving sketch",
         //           DialogInterface.OnClickListener() {
         //             public void onClick(DialogInterface dialog, int which) {
         //                 return;
@@ -1562,7 +1560,7 @@ public class SketchActivity extends ItemDrawer
 
   private void askDeleteLine( final SketchLinePath line )
   {
-    new TopoDroidAlertDialog( this, getResources(),
+    TopoDroidAlertDialog.makeAlert( this, getResources(),
                            getResources().getString( R.string.line_delete ) + " ?",
       new DialogInterface.OnClickListener() {
         @Override
@@ -1812,8 +1810,7 @@ public class SketchActivity extends ItemDrawer
 
   private void askDelete()
   {
-    new TopoDroidAlertDialog( this, getResources(),
-                      getResources().getString( R.string.sketch_delete ),
+    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sketch_delete,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {

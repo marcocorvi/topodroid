@@ -597,8 +597,7 @@ public class ShotActivity extends Activity
   //
   void askSurvey( )
   {
-    new TopoDroidAlertDialog( this, getResources(),
-                      getResources().getString( R.string.survey_split ),
+    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.survey_split,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {

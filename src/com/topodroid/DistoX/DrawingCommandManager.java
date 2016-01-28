@@ -2009,4 +2009,23 @@ public class DrawingCommandManager
       }
     }
   }
+
+  float computeSectionArea()
+  {
+    float ret = 0;
+    for ( ICanvasCommand icc : mCurrentStack ) {
+      if ( icc.commandType() != 0 ) continue;
+      DrawingPath p = (DrawingPath)icc;
+      if ( p.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+      DrawingLinePath lp = (DrawingLinePath)p;
+      if ( lp.mLineType != DrawingBrushPaths.mLineLib.mLineWallIndex ) continue;
+      LinePoint pt = lp.mFirst;
+      while ( pt != lp.mLast ) {
+        LinePoint pn = pt.mNext;
+        ret += pt.mY * pn.mX - pt.mX * pn.mY;
+        pt = pn;
+      }
+    }
+    return ret / 2;
+  }
 }

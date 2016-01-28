@@ -36,15 +36,15 @@
     <string name="tha_water">вода</string>
 
     <string name="make_walls">Стени</string>
-    <string name="missing_area">Площ</string>
-    <string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string>
-    <string name="missing_line">Линия</string>
-    <string name="missing_point">Точка</string>
-    <!-- string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
     <string name="missing_station">Липсващ репер</string>
-    <string name="missing_symbols">Има липсващи символи.\nЗаписване независимо от това?</string>
+    <!-- UNUSED string name="missing_area">Площ</string -->
+    <!-- UNUSED string name="missing_hint">Разрешете липсващите символи или ги инсталирайте</string -->
+    <!-- UNUSED string name="missing_line">Линия</string -->
+    <!-- UNUSED string name="missing_point">Точка</string -->
+    <!-- UNUSED string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
+    <!-- UNUSED string name="missing_symbols">Има липсващи символи.\nЗаписване независимо от това?</string -->
     <!-- UNUSED string name="missing_title">Липсващи символи</string -->
-    <string name="missing_warning">Следните символи за рисуване липсват\n</string>
+    <!-- UNUSED string name="missing_warning">Следните символи за рисуване липсват\n</string -->
     <string name="failed_snap_to_line">Няма близка точка за прикачане на границата на площта</string>
     <string name="failed_snap_to_point">Няма близка точка за прикачане на избраната точка</string>
 
@@ -224,8 +224,9 @@
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Азимут %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Наклон %4$.1f"</string>
 
-    <string name="menu_3d">3D</string>
+    <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">За програмата</string>
+    <!-- TODO string name="menu_area">AREA</string -->
     <string name="menu_attach">Свързване</string>
     <string name="menu_calib">Калибрация</string>
     <!-- unused string name="menu_attached">connected</string -->
@@ -309,6 +310,7 @@
     <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
     <string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string>
     <string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string>
+    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
 
     <string name="sensor">сензор</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->
@@ -536,8 +538,8 @@
 
     <string name="help_help">Помощ</string>
     <string name="help_manual">Ръководство</string>
-    <!-- NO string name="help_more">Показване на допълнителни команди</string -->
-    <!-- NO string name="help_less">Връщане към основните команди</string -->
+    <!-- OK string name="help_more">Показване на допълнителни команди</string -->
+    <!-- OK string name="help_less">Връщане към основните команди</string -->
     <string name="help_measure">Измерване на разстояния</string>
 
     <string name="help_coeff">Показване на коеф. на калибрация</string>

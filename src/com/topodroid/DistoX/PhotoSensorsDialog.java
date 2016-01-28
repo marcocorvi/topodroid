@@ -140,8 +140,7 @@ public class PhotoSensorsDialog extends MyDialog
       mParent.askShot( );
       dismiss();
     } else if ( b == mButtonSurvey ) {
-      new TopoDroidAlertDialog( mParent, mParent.getResources(),
-                      mParent.getResources().getString( R.string.survey_split ),
+      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
@@ -151,8 +150,7 @@ public class PhotoSensorsDialog extends MyDialog
         } );
       // mParent.askSurvey( );
     } else if ( b == mButtonDelete ) {
-      new TopoDroidAlertDialog( mParent, mParent.getResources(),
-                      mParent.getResources().getString( R.string.shot_delete ),
+      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_delete,
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {

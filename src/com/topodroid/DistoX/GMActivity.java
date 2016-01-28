@@ -558,8 +558,7 @@ public class GMActivity extends Activity
         // startGMDialog( mCIDid, st[1] );
         (new CalibGMDialog( this, this, mSaveCBlock )).show();
       } else { // FIXME TODO ask whether to undelete
-        new TopoDroidAlertDialog( this, getResources(),
-                          getResources().getString( R.string.calib_gm_undelete ),
+        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.calib_gm_undelete,
           new DialogInterface.OnClickListener() {
             @Override
             public void onClick( DialogInterface dialog, int btn ) {

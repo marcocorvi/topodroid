@@ -36,15 +36,15 @@
     <string name="tha_water">water</string>
 
     <string name="make_walls">Walls</string>
-    <string name="missing_area">AREA</string>
-    <string name="missing_hint">Please, enable the missing tools or install them</string>
-    <string name="missing_line">LINE</string>
-    <string name="missing_point">POINT</string>
-    <!-- string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
     <string name="missing_station">Missing station</string>
-    <string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string>
-    <!-- string name="missing_title">MISSING SYMBOLS</string -->
-    <string name="missing_warning">The following drawing tools are missing.\n</string>
+    <!-- UNUSED string name="missing_area">AREA</string -->
+    <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
+    <!-- UNUSED string name="missing_line">LINE</string -->
+    <!-- UNUSED string name="missing_point">POINT</string -->
+    <!-- UNUSED string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
+    <!-- UNUSED string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
+    <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
+    <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
     <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
     <string name="failed_snap_to_point">No close point to snap the point to</string>
 
@@ -222,8 +222,9 @@
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
 
-    <string name="menu_3d">3 D</string>
+    <string name="menu_3d">3D</string>
     <string name="menu_about">ABOUT</string>
+    <string name="menu_area">AREA</string>
     <string name="menu_attach">CONNECT</string>
     <string name="menu_calib">CALIBRATIONS</string>
     <!-- string name="menu_attached">Connected</string -->
@@ -308,6 +309,7 @@
     <string name="too_many_legs_xsection">Too many legs for X-section</string>
     <string name="converted_tdr2th2">Converted sketches binary files to th2</string>
     <string name="convert_tdr2th2">Overwrite th2 sketch files ?</string>
+    <string name="section_area">Section area: %1$.1f</string>
 
     <string name="sensor">sensor</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->
@@ -769,8 +771,8 @@
   <string name="pref_shot_data_title">SHOT DATA</string>
   <string name="pref_shot_units_title">UNITS</string>
   <string name="pref_cwd_title">Work Directory</string>
-  <!-- NOT USED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <!-- NOT USED string name="pref_cwd_message">Enter TopoDroid work directory</string -->
+  <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
+  <!-- UNUSED string name="pref_cwd_message">Enter TopoDroid work directory</string -->
   <string name="pref_pt_color_map_title">PocketTopo color map</string>
   <string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string>
   <string name="pref_text_size_title">Text size</string>

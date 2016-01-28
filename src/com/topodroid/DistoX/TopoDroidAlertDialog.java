@@ -21,26 +21,93 @@ import android.widget.TextView;
 
 class TopoDroidAlertDialog 
 {
-  TopoDroidAlertDialog( Context context, Resources res, String title,
-                        DialogInterface.OnClickListener pos )
+  static void makeAlert( Context context, Resources res, int title, DialogInterface.OnClickListener pos )
+  {
+    makeAlert( context, res, res.getString(title), R.string.button_cancel, R.string.button_ok, null, pos );
+  }
+
+  static void makeAlert( Context context, Resources res, String title, DialogInterface.OnClickListener pos )
+  {
+    makeAlert( context, res, title, R.string.button_cancel, R.string.button_ok, null, pos );
+  }
+
+    // AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
+    // alert_builder.setMessage( title );
+    // alert_builder.setPositiveButton( res.getString( R.string.button_cancel ), 
+    //     new DialogInterface.OnClickListener() {
+    //       @Override
+    //       public void onClick( DialogInterface dialog, int btn ) { }
+    //     }
+    // );
+    // alert_builder.setNegativeButton( res.getString( R.string.button_ok ), pos );
+    // AlertDialog alert = alert_builder.create();
+    // // alert.getWindow().setBackgroundDrawableResource( R.color.background );
+    // alert.show();
+
+  static void makeAlert( Context context, Resources res, String title, 
+             String ok, 
+             String no,
+             DialogInterface.OnClickListener ok_handler,
+             DialogInterface.OnClickListener no_handler )
   {
       // NEED API LEVEL 11 for custom background color
 
       AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
-
       alert_builder.setMessage( title );
+      if ( ok != null ) {
+        if ( ok_handler == null ) {
+          ok_handler = new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { }
+          };
+        } 
+        alert_builder.setNegativeButton( ok, ok_handler );
+      }
 
-      alert_builder.setPositiveButton( res.getString( R.string.button_cancel ), 
-          new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick( DialogInterface dialog, int btn ) { }
-          }
-      );
-
-      alert_builder.setNegativeButton( res.getString( R.string.button_ok ), pos );
+      if ( no != null ) {
+        if ( no_handler == null ) {
+          no_handler = new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { }
+          };
+        } 
+        alert_builder.setPositiveButton( no, no_handler );
+      }
 
       AlertDialog alert = alert_builder.create();
       // alert.getWindow().setBackgroundDrawableResource( R.color.background );
       alert.show();
   }
+
+  static void makeAlert( Context context, Resources res, String title, 
+             int ok, 
+             int no,
+             DialogInterface.OnClickListener ok_handler,
+             DialogInterface.OnClickListener no_handler )
+  {
+      // NEED API LEVEL 11 for custom background color
+
+      AlertDialog.Builder alert_builder = new AlertDialog.Builder( context );
+      alert_builder.setMessage( title );
+      if ( ok >= 0 ) {
+        if ( ok_handler == null ) {
+          ok_handler = new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { }
+          };
+        } 
+        alert_builder.setNegativeButton( res.getString(ok), ok_handler );
+      }
+
+      if ( no >= 0 ) {
+        if ( no_handler == null ) {
+          no_handler = new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { }
+          };
+        } 
+        alert_builder.setPositiveButton( res.getString(no), no_handler );
+      }
+
+      AlertDialog alert = alert_builder.create();
+      // alert.getWindow().setBackgroundDrawableResource( R.color.background );
+      alert.show();
+  }
+
 }

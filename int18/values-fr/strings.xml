@@ -36,15 +36,15 @@
     <string name="tha_water">eau</string>
 
     <string name="make_walls">Parois</string>
-    <string name="missing_area">ZONE</string>
-    <string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string>
-    <string name="missing_line">LIGNE</string>
-    <string name="missing_point">POINT</string>
-    <!-- UNUSED string name="missing_save">Il manque des symboles topographiques.\nSauvergarde annulée.</string -->
     <string name="missing_station">Station manquante</string>
-    <string name="missing_symbols">Il manque des symboles.\nEnregistrer tout de même ?</string>
+    <!-- UNUSED string name="missing_area">ZONE</string -->
+    <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
+    <!-- UNUSED string name="missing_line">LIGNE</string -->
+    <!-- UNUSED string name="missing_point">POINT</string -->
+    <!-- UNUSED string name="missing_save">Il manque des symboles topographiques.\nSauvergarde annulée.</string -->
+    <!-- UNUSED string name="missing_symbols">Il manque des symboles.\nEnregistrer tout de même ?</string -->
     <!-- UNUSED string name="missing_title">SYMBOLES MANQUANTS</string -->
-    <string name="missing_warning">Les symboles suivants sont manquants.\n</string>
+    <!-- UNUSED string name="missing_warning">Les symboles suivants sont manquants.\n</string -->
     <string name="failed_snap_to_line">Pas de ligne a accrocher</string>
     <string name="failed_snap_to_point">Pas de point a accrocher</string>
 
@@ -222,8 +222,9 @@
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Azimuth %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
 
-    <string name="menu_3d">3 D</string>
+    <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">A PROPOS</string>
+    <!-- TODO string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNECTER</string>
     <string name="menu_calib">CALIBRATION</string>
     <!-- string name="menu_attached">Connecté</string -->
@@ -231,7 +232,7 @@
     <string name="menu_delete">SUPPRIMER</string>
     <string name="menu_detach">DÉCONNECTER</string>
     <string name="menu_display">AFFICHAGE</string>
-    <string name="menu_distox">DISTOX</string>
+    <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPÉRER</string>
@@ -308,6 +309,7 @@
     <string name="too_many_legs_xsection">Trop de visées pour X-section</string>
     <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
+    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
 
     <string name="sensor">capteur</string>
     <!-- UNUSED string name="sensor_accelerometer">accelerometer</string -->

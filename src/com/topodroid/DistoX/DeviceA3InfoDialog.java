@@ -92,7 +92,7 @@ class DeviceA3InfoDialog extends MyDialog
     Button b = (Button)view;
     if ( b == mBTok ) {
       // TODO ask confirm
-      new TopoDroidAlertDialog( mParent, mParent.getResources(),
+      TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(),
                                 mParent.getResources().getString( R.string.device_model_set ) + " ?",
         new DialogInterface.OnClickListener() {
           @Override

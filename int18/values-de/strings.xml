@@ -37,16 +37,15 @@
     <string name="tha_water">Wasser</string>
 
     <!-- TODO string name="make_walls">Walls</string -->
-<!-- STRINGS ABOUT MISSING ITEMS ARE NO LONGER USED -->
-    <string name="missing_area">FLÄCHE</string>
-    <!-- OK string name="missing_hint">Please, enable the missing tools or install them</string -->
-    <string name="missing_line">LINIE</string>
-    <string name="missing_point">PUNKT</string>
-    <!-- OK string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
     <string name="missing_station">Kein Messpunkt</string>
-    <!-- OK string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
+    <!-- UNUSED string name="missing_area">FLÄCHE</string -->
+    <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
+    <!-- UNUSED string name="missing_line">LINIE</string -->
+    <!-- UNUSED string name="missing_point">PUNKT</string -->
+    <!-- UNUSED string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
+    <!-- UNUSED string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
     <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
-    <!-- OK string name="missing_warning">The following drawing tools are missing.\n</string -->
+    <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
 
 <!-- DRAWING POINT EDITING -->
     <string name="failed_snap_to_line">Kein Linienpunkt zum Verbinden gefunden</string>
@@ -247,12 +246,15 @@
  scan: BlueTooth scan
  survey: sorvey metadata interface
 -->
+    <!-- TODO string name="menu_3d">3D</string -->
     <string name="menu_about">ÜBER</string>
+    <!-- TODO string name="menu_area">AREA</string -->
     <string name="menu_attach">VERBINDEN</string>
     <string name="menu_calib">KALIBRIERUNG</string>
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
     <string name="menu_display">ANZEIGEN</string>
+    <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">EXPORTIEREN</string>
     <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">WIEDERHERSTELLEN</string>
@@ -323,6 +325,7 @@
     <!-- TODO string name="too_many_legs_xsection">Trop de visées pour X-section</string -->
     <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
     <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
+    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
 
     <string name="sensor">Sensor</string>
     <!-- string name="sensor_accelerometer">Beschleunigungsmesser</string -->
@@ -339,8 +342,8 @@
     <string name="sensor_value">Messung</string>
     <string name="sensor_comment">Anmerkung</string>
 
-    <!-- NO string name="shot_clino">Neigung</string -->
-    <!-- NO string name="shot_compass">Kompass</string -->
+    <!-- OK string name="shot_clino">Neigung</string -->
+    <!-- OK string name="shot_compass">Kompass</string -->
     <string name="shot_delete">Messzug löschen ?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Info</string>
@@ -366,8 +369,8 @@
     <string name="station">Messpunkt</string>
     <string name="station_ask">Messpunkt in Skizze anlegen?</string>
     <string name="station_set">Messpunkt setzen?</string>
-    <!-- NO string name="station_base">Bezugsmesspunkt</string -->
-    <!-- NO string name="station_next">Nächste Messpunkt</string -->
+    <!-- OK string name="station_base">Bezugsmesspunkt</string -->
+    <!-- OK string name="station_next">Nächste Messpunkt</string -->
     <string name="station_viewed">Bereits gesehener Messpunkt</string>
     <string name="survey_exists">Vermessung bereits vorhanden</string>
     <string name="survey_date">jjjj.mm.tt</string>
@@ -448,9 +451,9 @@
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
     <!-- UNUSED string name="button_geomag"    >Declination</string -->
     <!-- OK string name="button_gps_start" >GPS       </string -->
-    <!-- NO string name="button_gps_stop"  >Anhalten      </string -->
-    <!-- NO string name="button_manual"    >Bedienungsanleitung </string -->
-    <!-- NO string name="button_measure"   >Messung   </string -->
+    <!-- OK string name="button_gps_stop"  >Anhalten      </string -->
+    <!-- OK string name="button_manual"    >Bedienungsanleitung </string -->
+    <!-- OK string name="button_measure"   >Messung   </string -->
     <string name="button_photo"   >Foto</string>
     <string name="button_sensor"  >Messung</string>
     <!-- UNUSED Vstring name="button_direction">Azimut/Neigung</string -->
@@ -522,8 +525,8 @@
 -->
     <string name="help_help">Diese Hilfe</string>
     <string name="help_manual">Handbuch</string>
-    <!-- NO string name="help_more">Die sekundären Aktionen zeigen</string -->
-    <!-- NO string name="help_less">Zu den primären Aktionen zurückgehen</string -->
+    <!-- OK string name="help_more">Die sekundären Aktionen zeigen</string -->
+    <!-- OK string name="help_less">Zu den primären Aktionen zurückgehen</string -->
     <string name="help_measure">Entfernungen messen</string>
 
     <string name="help_coeff">Die Kalibrierungs-Koeffizienten zeigen</string>

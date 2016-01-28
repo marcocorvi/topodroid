@@ -654,7 +654,7 @@ public class DeviceActivity extends Activity
       return;
     } 
     // TODO ask confirm
-    new TopoDroidAlertDialog( this, getResources(),
+    TopoDroidAlertDialog.makeAlert( this, getResources(),
                               getResources().getString( R.string.device_reset ) + " ?",
       new DialogInterface.OnClickListener() {
         @Override

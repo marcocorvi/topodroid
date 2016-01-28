@@ -209,8 +209,7 @@ class DeviceA3MemoryDialog extends MyDialog
 
   void askReset( final int ht[] )
   {
-    new TopoDroidAlertDialog( mContext, mParent.getResources(),
-                              mParent.getResources().getString( R.string.ask_reset ),
+    TopoDroidAlertDialog.makeAlert( mContext, mParent.getResources(), R.string.ask_reset,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {

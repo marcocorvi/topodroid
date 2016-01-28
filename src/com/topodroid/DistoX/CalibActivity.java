@@ -293,7 +293,7 @@ public class CalibActivity extends Activity
 
   private void askDelete()
   {
-    new TopoDroidAlertDialog( this, getResources(), 
+    TopoDroidAlertDialog.makeAlert( this, getResources(), 
                               getResources().getString( R.string.calib_delete ) + " " + mApp.myCalib + " ?",
       new DialogInterface.OnClickListener() {
         @Override

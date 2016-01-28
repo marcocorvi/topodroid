@@ -312,8 +312,7 @@ public class SurveyActivity extends Activity
 
   private void askDelete()
   {
-    new TopoDroidAlertDialog( this, getResources(),
-                      getResources().getString( R.string.survey_delete ),
+    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.survey_delete,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -324,8 +323,7 @@ public class SurveyActivity extends Activity
 
   private void askTdr2Th2()
   {
-    new TopoDroidAlertDialog( this, getResources(),
-                      getResources().getString( R.string.convert_tdr2th2 ),
+    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.convert_tdr2th2,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
