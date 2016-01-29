@@ -22,8 +22,11 @@ import java.util.regex.Pattern;
 
 // import android.util.Log;
 
+// TODO this class can be made extend ImportParser
+
 public class ParserTherion
 {
+  final static String EMPTY = "";
   public String mName = null;  // survey name
   public String mDate = null;  // survey date
   public String mTeam = "";
@@ -72,6 +75,14 @@ public class ParserTherion
   public ArrayList< ParserShot > getShots() { return shots; }
   public ArrayList< ParserShot > getSplays() { return splays; }
 
+  // same as in ImportParser.java
+  public String initStation()
+  {
+    for ( ParserShot sh : shots ) {
+      if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
+    }
+    return "0";
+  }
 
   public ParserTherion( String filename, boolean apply_declination ) throws ParserException
   {
@@ -495,7 +506,8 @@ public class ParserTherion
                   // TODO add shot
                   if ( to.equals("-") || to.equals(".") ) { // splay shot
                     // from = from + "@" + path;
-                    splays.add( new ParserShot( state.mPrefix + from + state.mSuffix, null,
+                    // FIXME splays
+                    shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, EMPTY,
                                           len, ber, cln, 0.0f,
                                           state.mExtend, state.mDuplicate, state.mSurface, false, "" ) );
                   } else {

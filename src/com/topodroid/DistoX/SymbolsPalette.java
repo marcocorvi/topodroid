@@ -60,16 +60,16 @@ public class SymbolsPalette
   //   String prev = "";
   //   StringWriter sw = new StringWriter();
   //   PrintWriter pw  = new PrintWriter( sw );
-  //   pw.format( "%s\n",  res.getString( R.string.missing_warning ) );
+  //   pw.format( "%s\n",  res.getString( R.string.missing-warning ) );
   //   if ( mPalettePoint.size() > 0 ) {
-  //     pw.format( "%s:", res.getString( R.string.missing_point ) );
+  //     pw.format( "%s:", res.getString( R.string.missing-point ) );
   //     for ( String p : mPalettePoint ) {
   //       if ( ! p.equals(prev) ) pw.format( " %s", p );
   //     }
   //     pw.format( "\n");
   //   }
   //   if ( mPaletteLine.size() > 0 ) {
-  //     pw.format( "%s:", res.getString( R.string.missing_line ) );
+  //     pw.format( "%s:", res.getString( R.string.missing-line ) );
   //     prev = "";
   //     for ( String p : mPaletteLine ) {
   //       if ( ! p.equals(prev) ) pw.format( " %s", p );
@@ -77,14 +77,14 @@ public class SymbolsPalette
   //     pw.format( "\n");
   //   }
   //   if ( mPaletteArea.size() > 0 ) {
-  //     pw.format( "%s:", res.getString( R.string.missing_area ) );
+  //     pw.format( "%s:", res.getString( R.string.missing-area ) );
   //     prev = "";
   //     for ( String p : mPaletteArea ) {
   //       if ( ! p.equals(prev) ) pw.format( " %s", p );
   //     }
   //     pw.format( "\n");
   //   }
-  //   pw.format( "%s\n",  res.getString( R.string.missing_hint ) );
+  //   pw.format( "%s\n",  res.getString( R.string.missing-hint ) );
   //   return sw.getBuffer().toString();
   // }
 }

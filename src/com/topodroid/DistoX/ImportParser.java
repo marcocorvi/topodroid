@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 
 public class ImportParser
 {
+  final static String EMPTY = "";
   public String mName = null;  // survey name
   public String mDate = null;  // survey date
   public String mTeam = "";
@@ -38,6 +39,14 @@ public class ImportParser
 
   public ArrayList< ParserShot > getShots() { return shots; }
   public ArrayList< ParserShot > getSplays() { return splays; }
+
+  public String initStation() 
+  {
+    for ( ParserShot sh : shots ) {
+      if ( sh.from != null && sh.from.length() > 0 ) return sh.from;
+    }
+    return "0";
+  }
 
   protected int mLineCnt;  // line counter
 

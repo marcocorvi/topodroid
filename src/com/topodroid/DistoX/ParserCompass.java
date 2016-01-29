@@ -140,7 +140,8 @@ public class ParserCompass extends ImportParser
                   if ( TDSetting.mLRExtend ) {
                     extend = (int)TopoDroidApp.computeSplayExtend( ber );
                   }
-                  splays.add( new ParserShot( mFrom, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
+                  // FIXME splays
+                  shots.add( new ParserShot( mFrom, EMPTY, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                 }
                 if ( mRight > 0 ) {
                   float ber = mBearing + 90;
@@ -148,13 +149,16 @@ public class ParserCompass extends ImportParser
                   if ( TDSetting.mLRExtend ) {
                     extend = (int)TopoDroidApp.computeSplayExtend( ber );
                   }
-                  splays.add( new ParserShot( mFrom, null, mRight, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
+                  // FIXME splays
+                  shots.add( new ParserShot( mFrom, EMPTY, mRight, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                 }
                 if ( mUp > 0 ) {
-                  splays.add( new ParserShot( mFrom, null, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
+                  // FIXME splays
+                  shots.add( new ParserShot( mFrom, EMPTY, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
                 }
                 if ( mDown > 0 ) {
-                  splays.add( new ParserShot( mFrom, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
+                  // FIXME splays
+                  shots.add( new ParserShot( mFrom, EMPTY, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
                 }
                 extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f,

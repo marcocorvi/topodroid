@@ -29,6 +29,7 @@ public interface DataListener
   static final byte SURVEY_TEAM = (byte)4;
   static final byte SURVEY_DECL = (byte)5;
   static final byte SURVEY_NAME = (byte)6;
+  static final byte SURVEY_INIT_STATION = (byte)7;
 
   // only the sync-layer need be notified of this
   public void onSetSurvey( long id, String name );
@@ -40,6 +41,8 @@ public interface DataListener
   public void onUpdateSurveyDayAndComment( long id, String date, String comment );
 
   public void onUpdateSurveyTeam( long id, String team );
+
+  public void onUpdateSurveyInitStation( long id, String station );
 
   public void onUpdateSurveyDeclination( long id, double decl );
 

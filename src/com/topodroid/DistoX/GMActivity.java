@@ -323,8 +323,9 @@ public class GMActivity extends Activity
           Matrix am = calibration.GetAM();
           Vector nL = calibration.GetNL();
           byte[] coeff = calibration.GetCoeff();
+          float[] errors = calibration.Errors();
 
-          (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL,
+          (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, errors,
                                  calibration.Delta(), calibration.Delta2(), calibration.MaxError(), 
                                  result, coeff ) ).show();
         } else {

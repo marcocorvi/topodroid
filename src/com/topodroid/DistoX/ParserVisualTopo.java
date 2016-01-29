@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class ParserVisualTopo extends ImportParser
 {
@@ -203,7 +203,8 @@ public class ParserVisualTopo extends ImportParser
                     if ( TDSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
-                    splays.add( new ParserShot( station, null, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
+                    // FIXME splays
+                    shots.add( new ParserShot( station, EMPTY, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
                 }
                 if ( mRight > 0 ) {
                     float ber = mBearing + 180 - 90 * dirw;
@@ -211,13 +212,16 @@ public class ParserVisualTopo extends ImportParser
                     if ( TDSetting.mLRExtend ) {
                       extend = (int)TopoDroidApp.computeSplayExtend( ber );
                     }
-                    splays.add( new ParserShot( station, null, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );
+                    // FIXME splays
+                    shots.add( new ParserShot( station, EMPTY, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );
                 } 
                 if ( mUp > 0 ) {
-                    splays.add( new ParserShot( station, null, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
+                    // FIXME splays
+                    shots.add( new ParserShot( station, EMPTY, mUp, 0.0f, 90.0f, 0.0f, 0, false, false, false, "" ) );
                 }
                 if ( mDown > 0 ) {
-                    splays.add( new ParserShot( station, null, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
+                    // FIXME splays
+                    shots.add( new ParserShot( station, EMPTY, mDown, 0.0f, -90.0f, 0.0f, 0, false, false, false, "" ) );
                 }
                 
                 extend = ( mBearing < 90 || mBearing > 270 )? 1 : -1;
@@ -237,7 +241,7 @@ public class ParserVisualTopo extends ImportParser
       throw new ParserException();
     }
     TDLog.Log( TDLog.LOG_THERION, "ParserVisualTopo shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( TopoDroidApp.TAG, "ParserVisualTopo shots "+ shots.size() + " splays "+ splays.size() );
+    // Log.v( "DistoX", "ParserVisualTopo shots "+ shots.size() + " splays "+ splays.size() );
   }
 
   float parseAngleUnit( String unit ) 

@@ -85,6 +85,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updateSurveyNameStmt;
   private SQLiteStatement updateSurveyInfoStmt;
   private SQLiteStatement updateSurveyTeamStmt;
+  private SQLiteStatement updateSurveyInitStationStmt;
   private SQLiteStatement updateSurveyDeclinationStmt;
   // private SQLiteStatement updateSurveyNameStmt;
 
@@ -219,6 +220,7 @@ public class DataHelper extends DataSetObservable
         updateSurveyInfoStmt = myDB.compileStatement( "UPDATE surveys SET day=?, team=?, declination=?, comment=?, init_station=? WHERE id=?" );
         updateSurveyStmt = myDB.compileStatement( "UPDATE surveys SET day=?, comment=? WHERE id=?" );
         updateSurveyTeamStmt = myDB.compileStatement( "UPDATE surveys SET team=? WHERE id=?" );
+        updateSurveyInitStationStmt = myDB.compileStatement( "UPDATE surveys SET init_station=? WHERE id=?" );
         updateSurveyDeclinationStmt = myDB.compileStatement( "UPDATE surveys SET declination=? WHERE id=?" );
         // updateSurveyNameStmt = myDB.compileStatement( "UPDATE surveys SET name=? WHERE id=?" );
 
@@ -527,6 +529,18 @@ public class DataHelper extends DataSetObservable
     }
   }
 
+  public void updateSurveyInitStation( long id, String station, boolean forward )
+  {
+    updateSurveyInitStationStmt.bindString( 1, (station != null)? station : "" );
+    updateSurveyInitStationStmt.bindLong( 2, id );
+    updateSurveyInitStationStmt.execute();
+    if ( forward ) {
+      // synchronized( mListeners )
+      for ( DataListener listener : mListeners ) {
+        listener.onUpdateSurveyInitStation( id, station );
+      }
+    }
+  }
   public void updateSurveyDeclination( long id, double decl, boolean forward )
   {
     // TDLog.Log( TDLog.LOG_DB, "updateSurveyDeclination id " + id + " decl. " + decl );
