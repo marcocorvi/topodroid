@@ -192,7 +192,7 @@ public class GMActivity extends Activity
     }
     List<CalibCBlock> list  = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
     List<CalibCBlock> list1 = mApp.mDData.selectAllGMs( cid, 0 );
-    list.addAll( list1 );
+    // list.addAll( list1 );
     int size  = list.size();
     int size1 = list1.size();
     if ( size < 16 || size1 < 16 ) {
@@ -217,9 +217,10 @@ public class GMActivity extends Activity
     Calibration calib0 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
     // Log.v("DistoX", "Calib-0 algo " + algo );
     // calib0.dump();
-
-    computeErrorStats( calib0, list1 );
-    computeErrorStats( calib1, list );
+    float[] errors0 = new float[ list.size() ]; 
+    float[] errors1 = new float[ list1.size() ]; 
+    int ke1 = computeErrorStats( calib0, list1, errors1 );
+    int ke0 = computeErrorStats( calib1, list,  errors0 );
     double ave0 = calib0.mSumErrors / calib0.mSumCount;
     double std0 = Math.sqrt( calib0.mSumErrorSquared / calib0.mSumCount - ave0 * ave0 + 1e-8 );
     double ave1 = calib1.mSumErrors / calib1.mSumCount;
@@ -232,15 +233,18 @@ public class GMActivity extends Activity
     list.addAll( list1 );
     size = list.size();
 
+    float[] errors = new float[ size ];
     double err1   = 0; // average error [radians]
     double err2   = 0;
     double errmax = 0;
+    int ke = 0;
     for ( CalibCBlock b : list ) {
       Vector g = new Vector( b.gx, b.gy, b.gz );
       Vector m = new Vector( b.mx, b.my, b.mz );
       Vector v0 = calib0.computeDirection(g,m);
       Vector v1 = calib1.computeDirection(g,m);
       double err = v0.minus( v1 ).Length();
+      errors[ke++] = (float) err;
       err1 += err;
       err2 += err * err;
       if ( err > errmax ) errmax = err;
@@ -250,36 +254,45 @@ public class GMActivity extends Activity
     err1 *= TDMath.RAD2GRAD;
     err2 *= TDMath.RAD2GRAD;
     errmax *= TDMath.RAD2GRAD;
-    new CalibValidateResultDialog( this, ave0, std0, ave1, std1, err1, err2, errmax, name, mApp.myCalib ).show();
+    new CalibValidateResultDialog( this, errors0, errors1, errors,
+                                   ave0, std0, ave1, std1, err1, err2, errmax, name, mApp.myCalib ).show();
   }
 
   /** compute the error stats of the data of this calibration using the 
    * coeffiecients of another calibration
    * @param name  the other calibration name
+   * @return number of errors in the array
    */
-  private void computeErrorStats( Calibration calib, List<CalibCBlock> list )
+  private int computeErrorStats( Calibration calib, List<CalibCBlock> list, float[] errors )
   {
+    int ke = 0; // number of errors
+    for ( int c=0; c<errors.length; ++c ) errors[c] = -1;
+
     calib.initErrorStats();
     long group = 0;
     int k = 0;
     int cnt = 0;
     while( k < list.size() && list.get(k).mGroup <= 0 ) ++k;
+    
     for ( int j=k; j<list.size(); ++j ) {
       if ( list.get(j).mGroup > 0 ) {
         if ( list.get(j).mGroup != group ) {
           if ( cnt > 0 ) {
             Vector g[] = new Vector[cnt];
             Vector m[] = new Vector[cnt];
+            float  e[] = new float[cnt];
             int i=0;
             for ( ; k<j; ++k ) {
               CalibCBlock b = list.get(k);
               if ( b.mGroup == group ) {
                 g[i] = new Vector( b.gx, b.gy, b.gz );
                 m[i] = new Vector( b.mx, b.my, b.mz );
+                e[i] = -1;
                 ++i;
               }
             }
-            calib.addErrorStats( g, m );
+            calib.addErrorStats( g, m, e );
+            for ( int c=0; c<cnt; ++c ) errors[ ke++ ] = e[c];
           }
           group = list.get(j).mGroup;
           cnt = 1;
@@ -291,17 +304,21 @@ public class GMActivity extends Activity
     if ( cnt > 0 ) {
       Vector g[] = new Vector[cnt];
       Vector m[] = new Vector[cnt];
+      float  e[] = new float[cnt];
       int i=0;
       for ( ; k<list.size(); ++k ) {
         CalibCBlock b = list.get(k);
         if ( b.mGroup == group ) {
           g[i] = new Vector( b.gx, b.gy, b.gz );
           m[i] = new Vector( b.mx, b.my, b.mz );
+          e[i] = -1;
           ++i;
         }
       }
-      calib.addErrorStats( g, m );
+      calib.addErrorStats( g, m, e );
+      for ( int c=0; c<cnt; ++c ) errors[ ke++ ] = e[c];
     }
+    return ke;
   }
 
 

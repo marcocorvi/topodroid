@@ -18,13 +18,19 @@ import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import android.graphics.Bitmap;
 
 // import android.util.Log;
 
 public class CalibValidateResultDialog extends MyDialog
 {
+  private ImageView hist0;
+  private ImageView hist1;
+  private ImageView hist2;
   private String avestd0;
   private String avestd1;
   private String std;
@@ -32,12 +38,20 @@ public class CalibValidateResultDialog extends MyDialog
   private String err2;
   private String errmax;
   private String title;
+  float[] errors0;
+  float[] errors1;
+  float[] errors2;
 
-  public CalibValidateResultDialog( Context context, double a0, double s0, double a1, double s1,
-                                                     double e1, double e2, double em, String n1, String n2 )
+  public CalibValidateResultDialog( Context context,
+                                    float[] errs0, float[] errs1, float[] errs2,
+                                    double a0, double s0, double a1, double s1,
+                                    double e1, double e2, double em, String n1, String n2 )
   {
     super( context, R.string.CalibValidateResultDialog );
 
+    errors0 = errs0;
+    errors1 = errs1;
+    errors2 = errs2;
     avestd0 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a0, s0 );
     avestd1 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a1, s1 );
     err1  = String.format( mContext.getResources().getString( R.string.calib_error ), e1 );
@@ -59,6 +73,14 @@ public class CalibValidateResultDialog extends MyDialog
     ((TextView)findViewById(R.id.error1)).setText( err1 );
     ((TextView)findViewById(R.id.error2)).setText( err2 );
     ((TextView)findViewById(R.id.error_max)).setText( errmax );
+
+    hist0 = (ImageView) findViewById( R.id.histogram0 );
+    hist1 = (ImageView) findViewById( R.id.histogram1 );
+    hist2 = (ImageView) findViewById( R.id.histogram2 );
+
+    hist0.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors0, 400, 100, 40, 5, 0xff6699ff ) );
+    hist1.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors1, 400, 100, 40, 5, 0xffff9966 ) );
+    hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 2, 0xffcccccc ) );
 
     setTitle( title );
   }

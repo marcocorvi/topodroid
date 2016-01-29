@@ -8,18 +8,41 @@
     android:paddingBottom="3dp">
    					  
 
+    <ImageView android:id="@+id/histogram0"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dip"
+        />
     <TextView android:id="@+id/avestd0"
         android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         />
-    <TextView android:id="@+id/avestd1"
+
+    <ImageView android:id="@+id/histogram1"
         android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dip"
+        />
+    <TextView android:id="@+id/avestd1"
+        android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         />
+
+    <ImageView android:id="@+id/histogram2"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dip"
+        />
     <TextView 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:text="@string/calib_precision"

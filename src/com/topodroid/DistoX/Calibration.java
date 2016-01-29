@@ -942,8 +942,10 @@ public class Calibration
    * each error is the length of the vector-difference between the unit-vector directions.
    * this approximates the angle between the two directions:
    *   error = 2 tan(alpha/2) 
+   * @param errors output vector to fill with errors (if not null)
+   *               must have size as g1, m1
    */
-  void addErrorStats( Vector g1[], Vector m1[] )
+  void addErrorStats( Vector g1[], Vector m1[], float[] errors )
   {
     int size = g1.length;
     Vector g[] = new Vector[ size ];
@@ -993,6 +995,7 @@ public class Calibration
       //                         FloatMath.cos(c0) * FloatMath.sin(b0),
       //                         FloatMath.sin(c0) );
       double e = v1.minus(v0).Length();
+      if ( errors != null ) errors[i] = (float)e;
       // Log.v("DistoX", e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
       mSumCount += 1;
       mSumErrors += e;

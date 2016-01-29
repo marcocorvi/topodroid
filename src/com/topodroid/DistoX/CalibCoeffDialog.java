@@ -36,7 +36,6 @@ public class CalibCoeffDialog extends MyDialog
 
   private static final int WIDTH  = 200;
   private static final int HEIGHT = 100;
-  private int mHist[] = null; // histogram: 20 bin of size 0.1 from 0.0 to 2.0
   private ImageView mImage; // error histogram
   private Bitmap mBitmap = null;
 
@@ -102,38 +101,36 @@ public class CalibCoeffDialog extends MyDialog
     iter0   = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );
 
     if ( errors != null ) {
-      fillImage( errors );
+      mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, 0xff6699ff );
     }
   }
 
-  void fillImage( float[] error )
+  static Bitmap makeHistogramBitmap( float[] error, int width, int height, int bin, int step, int col )
   {
-    mBitmap = Bitmap.createBitmap( WIDTH+20, HEIGHT+20, Bitmap.Config.ARGB_8888 );
-    int ww = mBitmap.getWidth();
-    int hh = mBitmap.getHeight();
+    Bitmap bitmap = Bitmap.createBitmap( width+20, height+20, Bitmap.Config.ARGB_8888 );
+    int ww = bitmap.getWidth();
+    int hh = bitmap.getHeight();
     for ( int j=0; j<hh; ++j ) {
-      for ( int i=0; i<ww; ++i ) mBitmap.setPixel( i, j, 0 );
+      for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, j, 0 );
     }
-    mHist = new int[20];
-    for ( int k=0; k<20; ++k ) mHist[k] = 0;
+    int[] hist = new int[bin];
+    for ( int k=0; k<bin; ++k ) hist[k] = 0;
     if ( error != null ) {
       for ( int k=0; k < error.length; ++ k ) {
         int i = (int)( error[k]*10*TDMath.RAD2GRAD );
-        if ( i < 20 && i >= 0 ) ++ mHist[i];
+        if ( i < bin && i >= 0 ) ++ hist[i];
       }
     }
 
-    // each unit height is 5 pixel
     int red = 0xffffffff;
     int top = red;
-    int col = 0xff6699ff;
     int joff = hh-10;
     int ioff = 10;
-    int dx   = (int)( ww / 20.0 ); 
+    int dx   = (int)( ww / bin ); 
     if ( dx*20 >= ww ) dx --;
     int x, y;
-    for ( int k=0; k<20; ++ k ) {
-      int h = 5 * mHist[k];
+    for ( int k=0; k<bin; ++ k ) {
+      int h = step * hist[k];
       if ( h > joff ) {
         h = joff;
         top = col;
@@ -141,30 +138,39 @@ public class CalibCoeffDialog extends MyDialog
         top = red;
       }
       x  = ioff + dx * k;
-      for ( y=joff-h; y <= joff; ++y ) mBitmap.setPixel( x, y, red );
+      for ( y=joff-h; y <= joff; ++y ) bitmap.setPixel( x, y, red );
       int x2 = x  + dx-1;
       for ( ++x; x < x2; ++ x ) {
         y = joff-h;
-        mBitmap.setPixel( x, y, red );
-        for ( ++y; y < joff; ++y ) mBitmap.setPixel( x, y, col );
-        mBitmap.setPixel( x, y, top );
+        bitmap.setPixel( x, y, red );
+        for ( ++y; y < joff; ++y ) bitmap.setPixel( x, y, col );
+        bitmap.setPixel( x, y, top );
       }
-      for ( y=joff-h; y <= joff; ++y ) mBitmap.setPixel( x, y, red );
+      for ( y=joff-h; y <= joff; ++y ) bitmap.setPixel( x, y, red );
     }
-    for ( y = 0; y < hh; ++y ) mBitmap.setPixel( ioff, y, red );
-    for ( x = 0; x < ww; ++x ) mBitmap.setPixel( x, joff, red );
-    x  = ioff + dx * 5;
-    for ( y = joff; y < hh - 5; ++y ) mBitmap.setPixel( x, y, red );
-    x  = ioff + dx * 10;
-    for ( y = joff; y < hh - 0; ++y ) mBitmap.setPixel( x, y, red );
-    x  = ioff + dx * 15;
-    for ( y = joff; y < hh - 5; ++y ) mBitmap.setPixel( x, y, red );
-    y = joff - 50;
-    for ( x = 5; x < ioff; ++x ) mBitmap.setPixel( x, y, red );
-    y = joff - 100;
-    for ( x = 5; x < ioff; ++x ) mBitmap.setPixel( x, y, red );
+    for ( y = 0; y < hh; ++y ) bitmap.setPixel( ioff, y, red );
+    for ( x = 0; x < ww; ++x ) bitmap.setPixel( x, joff, red );
+    for ( int k = 5; k <= bin; k+=5 ) {
+      x  = ioff + dx * k;
+      int yy = hh - ( ((k%10) == 0 )? 0 : 5 );
+      for ( y = joff; y < yy; ++y ) bitmap.setPixel( x, y, red );
+    }
+    if ( 5  <= bin ) {
+      x  = ioff + dx * 5;
+      for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, 0xffffff00 );
+    }
+    if ( 10  <= bin ) {
+      x  = ioff + dx * 10;
+      for ( y = 0; y < joff; ++y ) bitmap.setPixel( x, y, 0xffff0000 );
+    }
+    for ( int k = 10; ; k += 10 ) {
+      y = joff - step * k;
+      if ( y < 0 ) break;
+      for ( x = 5; x < ioff; ++x ) bitmap.setPixel( x, y, red );
+    }
       
     // Log.v("DistoX", "fill image done");
+    return bitmap;
   }
 
 // -------------------------------------------------------------------
