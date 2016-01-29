@@ -215,9 +215,9 @@
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
 
-    <!-- OK string name="menu_3d">3D</string -->
+    <string name="menu_3d">3D</string>
     <string name="menu_about">Acerca de..</string>
-    <!-- TODO string name="menu_area">AREA</string -->
+    <string name="menu_area">Área</string>
     <string name="menu_attach">Conectar</string>
     <string name="menu_calib">Calibración</string>
     <string name="menu_delete">Eliminar</string>
@@ -284,7 +284,7 @@
     <!-- UNUSED string name="plot_view">Vista Estación</string -->
     <!-- UNUSED string name="read_">Leer </string -->
     <string name="read_data">Leer %1$d datos</string>
-    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
+    <string name="read_calib_data">Leer %1$d datos (%2$d packets)</string>
     <string name="read_fail_with_code">Fallo de lectura: código de error </string>
     <string name="read_failed">Error al leer DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
@@ -297,7 +297,7 @@
     <string name="too_many_legs_xsection">Demasiadas tomas de sección</string>
     <string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string>
     <string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string>
-    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
+    <string name="section_area">Sección de área: %1$.1f</string>
 
     <string name="sensor">Sensor</string>
     <!-- UNUSED string name="sensor_accelerometer">Acelerómetro</string -->
@@ -920,7 +920,7 @@
 
     <string name="welcome_title">Bienvenido a TopoDroid 2.7</string>
 
-  <!-- FIXME TODO welcome_text has been updated. Please fix accordingly -->
+
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
