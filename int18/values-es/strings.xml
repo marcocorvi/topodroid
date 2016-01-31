@@ -663,7 +663,7 @@
   <string name="pref_auto_reconnect_summary">Vuelva a conectar si se pierde la conexión</string>
   <string name="pref_auto_pair_title">Emparejamiento automático</string>
   <string name="pref_auto_pair_summary">Dispositivo emparejado</string>
-  <string name="pref_socket_delay_title">La conexión tarda más de lo normal</string>
+  <string name="pref_socket_delay_title">Retardo en la conexión</string>
   <string name="pref_socket_delay_summary">La conexión tarda mucho para emparejarse [0.1 sec]</string>
   <string name="pref_socket_delay_dialogtitle">La conexión tarda mucho para emparejarse</string>
   <string name="pref_socket_delay_message">La conexión tarda mucho para emparejarse [0.1 sec]</string>
