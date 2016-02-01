@@ -469,13 +469,11 @@ public class DataHelper extends DataSetObservable
   public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, boolean forward )
   {
-    // String stn = (init_station != null)? init_station : "";
-    // String cmt = (comment != null)? comment : "";
     updateSurveyInfoStmt.bindString( 1, date );
     updateSurveyInfoStmt.bindString( 2, team );
     updateSurveyInfoStmt.bindDouble( 3, decl );
-    updateSurveyInfoStmt.bindString( 4, comment );
-    updateSurveyInfoStmt.bindString( 5, init_station );
+    updateSurveyInfoStmt.bindString( 4, ((comment != null)? comment : "") );
+    updateSurveyInfoStmt.bindString( 5, ((init_station != null)? init_station : "") );
     updateSurveyInfoStmt.bindLong( 6, id );
     updateSurveyInfoStmt.execute();
     if ( forward ) {

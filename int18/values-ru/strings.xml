@@ -208,6 +208,7 @@
     <string name="no_device_address">Прибор не выбран</string>
     <string name="no_device_found">Прибор не обнаружен</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
+    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
     <string name="no_location_data">Нет данных о местоположении</string>
     <string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string>

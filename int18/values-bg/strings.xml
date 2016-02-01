@@ -208,6 +208,7 @@
     <string name="no_device_address">Липсва избрано устройство</string>
     <string name="no_device_found">Не е намерено устройство</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
+    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
     <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>

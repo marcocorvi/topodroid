@@ -206,6 +206,7 @@
     <string name="no_device_address">Device not selected</string>
     <string name="no_device_found">No device found</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
+    <string name="no_geo_station">Failed: no geolocalized station</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
     <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>

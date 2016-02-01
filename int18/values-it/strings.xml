@@ -202,6 +202,7 @@
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_gms">Calibrazione senza data.</string>
+    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
     <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>

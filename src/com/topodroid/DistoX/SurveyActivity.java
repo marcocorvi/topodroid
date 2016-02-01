@@ -117,7 +117,7 @@ public class SurveyActivity extends Activity
   Button     mImage;
   ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
-  String mInitStation;
+  String mInitStation = null;
 
   TopoDroidApp mApp;
   private boolean mustOpen;
@@ -462,10 +462,10 @@ public class SurveyActivity extends Activity
           }
           break;
         case TopoDroidConst.DISTOX_EXPORT_KML:
-          filename = mApp.exportSurveyAsKml( );
+          filename = mApp.exportSurveyAsKml( ); // can return ""
           break;
         case TopoDroidConst.DISTOX_EXPORT_PLT:
-          filename = mApp.exportSurveyAsPlt( );
+          filename = mApp.exportSurveyAsPlt( ); // can return ""
           break;
         case TopoDroidConst.DISTOX_EXPORT_CSX:
           filename = mApp.exportSurveyAsCsx( null, null );
@@ -483,10 +483,12 @@ public class SurveyActivity extends Activity
           break;
       }
       if ( warn ) { 
-        if ( filename != null ) {
-          Toast.makeText( mContext, mContext.getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
-        } else {
+        if ( filename == null ) {
           Toast.makeText( mContext, R.string.saving_file_failed, Toast.LENGTH_SHORT).show();
+        } else if ( filename.length() == 0 ) {
+          Toast.makeText( mContext, R.string.no_geo_station, Toast.LENGTH_SHORT).show();
+        } else {
+          Toast.makeText( mContext, mContext.getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
         }
       }
     }

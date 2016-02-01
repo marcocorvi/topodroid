@@ -206,6 +206,7 @@
     <string name="no_device_address">Adresse de périphérique non sélectionné</string>
     <string name="no_device_found">Pas de périphérique trouvé</string>
     <string name="no_gms">La Calibration ne contient pas de données.\nUtiliser le bouton Télécharger</string>
+    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
     <string name="no_leg_intersection">La ligne de section ne coupe aucune ligne cheminement</string>
     <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string>

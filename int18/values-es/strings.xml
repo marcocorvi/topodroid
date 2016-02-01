@@ -200,6 +200,7 @@
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
+    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>

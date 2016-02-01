@@ -224,6 +224,7 @@
     <string name="no_device_address">Kein Gerät gewählt</string>
     <string name="no_device_found">Kein Gerät gefunden</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
+    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
     <!-- TODO string name="no_location_data">No location data</string -->
     <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
