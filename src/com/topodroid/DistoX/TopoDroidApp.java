@@ -560,17 +560,11 @@ public class TopoDroidApp extends Application
 
     mManual = getResources().getString( R.string.topodroid_man );
 
-    // FIXME PAIRING_REQUEST api-19
-    // registerReceiver( mPairingRequest, new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST ) );
-
     if ( TDLog.LOG_DEBUG ) {
       isTracing = true;
       Debug.startMethodTracing("DISTOX");
     }
   }
-
-  // FIXME PAIRING_REQUEST api-19
-  // final PairingRequest mPairingRequest = new PairingRequest();
 
   void setLocale( String locale )
   {

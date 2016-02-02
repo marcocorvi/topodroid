@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <string-array name="unitGrid">
+     <item name="meter">米</item>
+     <item name="yard">码</item>
+  </string-array>
+
+  <string-array name="wallsType">
+     <item name="none">无</item>
+     <item name="convex">凸出</item>
+  </string-array>
+
+  <string-array name="zoomCtrl">
+     <item name="0">关闭</item>
+     <item name="1">临时</item>
+     <item name="2">永久</item>
+  </string-array>
+
+  <string-array name="stationNames">
+     <item name="alpha">字母</item>
+     <item name="number">数字</item>
+  </string-array>
+  
+  <string-array name="extend_name">
+     <item>左 </item>
+     <item>垂直 </item>
+     <item>右 </item>
+     <item>--</item>
+  </string-array>
+
+  <!-- DISTOX_LOCALE -->
+  <string-array name="locale">
+     <item name="english">English</item>
+     <item name="french">Français</item>
+     <item name="spanish">Español</item>
+     <item name="italian">Italiano</item>
+     <item name="russian">Русский</item>
+     <item name="german">Deutsch</item>
+     <item name="bulgarian">Български</item>
+     <item name="chinese">中文</item>
+  </string-array>
+
+  <string-array name="localeValue">
+     <item name="english">en</item>
+     <item name="french">fr</item>
+     <item name="spanish">es</item>
+     <item name="italian">it</item>
+     <item name="russian">ru</item>
+     <item name="german">de</item>
+     <item name="bulgarian">bg</item>
+     <item name="chinese">cn</item>
+  </string-array>
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <string-array name="exportShots">
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="pockettoopo">PocketTopo</item>
+     <item name="survex">Survex</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array>
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array>
+
+  <string-array name="legShots">
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="four">4</item>
+  </string-array>
+
+  <string-array name="extraButtons">
+     <item name="basic">基本模式</item>
+     <item name="normal">正常模式</item>
+     <item name="advanced">高级模式</item>
+     <item name="experimental">开发模式</item>
+     <!-- item name="complete">Complete</item -->
+  </string-array>
+
+  <string-array name="sizeButtons">
+     <item name="small1">小</item>
+     <item name="large">大</item>
+  </string-array>
+
+  <string-array name="logStream">
+     <item name="android">系统载入</item>
+     <item name="file">文件载入</item>
+  </string-array>
+
+  <string-array name="connMode">
+     <item name="batch">按需</item>
+     <item name="continuous">继续</item>
+  </string-array>
+
+  <string-array name="altitudeType">
+    <item name="wgs84">WGS84 椭圆</item>
+    <item name="asl">正交</item>
+  </string-array>
+
+  <string-array name="sockType">
+     <item name="default">默认</item>
+     <item name="Insecure">无密码</item>
+  </string-array>
+
+  <string-array name="surveyStations">
+     <item name="no">No</item>
+     <item name="for">侧线, 前测主线</item>
+     <item name="back">侧线, 后测主线</item>
+     <item name="for2">前测主线, 侧线</item>
+     <item name="back2">后测主线, 侧线</item>
+     <item name="anomaly">不规则</item>
+  </string-array>
+
+  <string-array name="pickerType">
+     <item name="recent">近期</item>
+     <item name="list">列表</item>
+     <item name="grid">网格</item>
+  </string-array>
+
+  <string-array name="deviceType">
+     <item name="none">无</item>
+     <item name="A3">A3</item>
+     <item name="X310">X310</item>
+  </string-array>
+
+  <string-array name="deviceBT">
+     <item name="0">不启用</item>
+     <item name="1">启动时检测</item>
+     <item name="2">启用</item>
+  </string-array>
+
+  <!-- OK string-array name="exportType">
+     <item name="th">Therion</item>
+     <item name="dat">Compass</item>
+     <item name="svx">Survex</item>
+     <item name="tro">VisualTopo</item>
+     <item name="tlx">TopoLinux</item>
+  </string-array -->
+
+  <string-array name="lineStyle">
+     <item name="none">精细</item>
+     <item name="two">正常</item>
+     <item name="three">粗糙</item>
+     <item name="bezier">贝塞尔曲线</item>
+  </string-array>
+
+  <string-array name="groupBy">
+     <item name="distance">距离</item>
+     <item name="four">每四个</item>
+     <item name="only16">前 16</item>
+  </string-array>
+
+  <string-array name="unitLength">
+     <item name="meters">米</item>
+     <item name="feet">尺</item>
+  </string-array>
+
+  <string-array name="unitAngle">
+     <item name="degrees">度</item>
+     <item name="grads">百分度</item>
+  </string-array>
+
+  <string-array name="unitLocation">
+     <item name="degrees">度</item>
+     <item name="ddmmss">度, 分, 秒</item>
+  </string-array>
+
+  <string-array name="calibAlgo">
+     <item name="auto">自动</item>
+     <item name="linear">线性</item>
+     <item name="nonlinear">非线性</item>
+  </string-array>
+
+</resources>

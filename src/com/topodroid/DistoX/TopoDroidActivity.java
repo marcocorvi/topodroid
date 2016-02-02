@@ -50,11 +50,14 @@ import android.location.LocationManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.net.Uri;
+
+import android.bluetooth.BluetoothDevice;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -96,6 +99,9 @@ public class TopoDroidActivity extends Activity
                                , OnDismissListener
 {
   private TopoDroidApp mApp;
+
+  // FIXME PAIRING_REQUEST api-19
+  PairingRequest mPairingRequest = null;
 
   private boolean onMenu; // whether menu is displaying
 
@@ -930,6 +936,13 @@ public class TopoDroidActivity extends Activity
         // setBTMenus( mApp.mBTAdapter.isEnabled() );
       }
     }
+
+    // FIXME PAIRING_REQUEST api-19
+    // IntentFilter filter = new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST );
+    IntentFilter filter = new IntentFilter( "android.bluetooth.device.action.PAIRING_REQUEST" );
+    // filter.addCategory( Intent.CATEGORY_ALTERNATIVE );
+    mPairingRequest = new PairingRequest();
+    registerReceiver( mPairingRequest, filter );
   }
 
   @Override
@@ -961,6 +974,9 @@ public class TopoDroidActivity extends Activity
     super.onStop();
     if ( TopoDroidApp.isTracing ) {
       Debug.stopMethodTracing();
+    }
+    if ( mPairingRequest != null ) {
+      unregisterReceiver( mPairingRequest );
     }
   }
 
