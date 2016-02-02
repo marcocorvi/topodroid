@@ -200,7 +200,7 @@
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
-    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
+    <string name="no_geo_station">Error: estación no geolocalizada</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
@@ -718,8 +718,8 @@
   <string name="pref_backsight_summary">Desacer a punto anterior en dialogo de la nueva toma</string>
   <string name="pref_mag_anomaly_title">Declinación magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar declinación Local Magnética</string>
-  <string name="pref_azimuth_manual_title">Configuración manual "extensión"</string>
-  <string name="pref_azimuth_manual_summary">Configurar manualmente "extensión"</string>
+  <string name="pref_azimuth_manual_title">Toma extendida</string>
+  <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de Topógrafos</string>
   <string name="pref_team_message">Equipo de topógrafos por defecto</string>
