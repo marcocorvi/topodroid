@@ -15,10 +15,10 @@
     <string name="HELP">Помощ</string>
     <string name="STATION">Репер </string>
 
-    <!-- TODO string name="cut">CUT</string -->
-    <!-- TODO string name="copy">COPY</string -->
-    <!-- TODO string name="paste">PASTE</string -->
-    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+    <string name="cut">Изрязване</string>
+    <string name="copy">Копиране</string>
+    <string name="paste">Вмъкване</string>
+    <string name="copied">Копирано %1$s</string>
 
     <string name="memoryA3">DistoX A3 памет</string>
     <string name="memoryX310">DistoX X310 памет</string>
@@ -118,7 +118,7 @@
     <string name="few_plots">Няма достатъчно скици</string>
     <string name="few_calibs">Няма достатъчно калибрации</string>
 
-    <!-- TODO string name="calib_import_title">Calibration import</string -->
+    <string name="calib_import_title">Импортиране на калибрация</string>
     <string name="import_title">Импортиране на файл</string>
     <string name="import_wait">Импортиране... Моля изчакайте...</string>
     <string name="import_already">Картировката е вече импортирана</string>
@@ -208,9 +208,9 @@
     <string name="no_device_address">Липсва избрано устройство</string>
     <string name="no_device_found">Не е намерено устройство</string>
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
-    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
+    <string name="no_geo_station">Грешка: няма георефериран репер</string>
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
-    <!-- TODO string name="no_location_data">No location data</string -->
+    <string name="no_location_data">Няма данни за местоположение</string>
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
     <string name="no_photos">Картировката не съдържа снимка</string>
     <string name="no_plots">Картировката не съдържа скици\nДобавете нова</string>
@@ -227,7 +227,7 @@
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">За програмата</string>
-    <!-- TODO string name="menu_area">AREA</string -->
+    <string name="menu_area">Площ</string>
     <string name="menu_attach">Свързване</string>
     <string name="menu_calib">Калибрация</string>
     <!-- unused string name="menu_attached">connected</string -->
@@ -298,7 +298,7 @@
     <!-- string name="plot_view">Viewed station</string -->
     <!-- UNUSED string name="read_">Прочетени </string -->
     <string name="read_data">Прочетени %1$d измервания</string>
-    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
+    <string name="read_calib_data">Прочетени %1$d измервания (%2$d пакети)</string>
     <string name="read_fail_with_code">Грешка при четене: код </string>
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
@@ -311,7 +311,7 @@
     <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
     <string name="converted_tdr2th2">Конвертиране на файлове със скици от двоични в th2</string>
     <string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string>
-    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
+    <string name="section_area">Площ на сечение: %1$.1f</string>
 
     <string name="sensor">сензор</string>
     <!-- string name="sensor_accelerometer">accelerometer</string -->
@@ -457,7 +457,7 @@
     <string name="button_start"     >Старт     </string>
     <string name="button_stop"      >Стоп      </string>
     <string name="button_upload"    >Качване   </string>
-    <!-- TODO string name="button_view"      >View      </string -->
+    <string name="button_view"      >Преглед   </string>
     <string name="button_yes"       >Да       </string>
 
     <!-- UNUSED string name="button_sharp"     >Изостряне</string -->
@@ -486,8 +486,8 @@
     <string name="remote_reset">Рестарт. Bluetooth</string>
     <string name="download">Сваляне</string>
 
-    <!-- TODO string name="popup_do_splay">Splay shot</string -->
-    <!-- TODO string name="popup_do_leg">Leg shots</string -->
+    <string name="popup_do_splay">Странично измерване</string>
+    <string name="popup_do_leg">Отсечка</string>
 
 <!--
     <string name="btn_3d">3D</string>
@@ -640,7 +640,7 @@
     <string name="help_refine_triangle">Изчистване на повърхност в дългите страни</string>
 
 
-    <!-- TODO string name="title_azimut">Extend reference</string -->
+    <string name="title_azimut">Разгъване спрямо азим.</string>
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
@@ -653,11 +653,11 @@
     <string name="title_draw_point">Точка %1$s</string>
     <string name="title_edit">Редакция</string>
     <string name="title_erase">Изтриване</string>
-    <!-- TODO string name="title_fixed">Fixed points</string -->
-    <!-- TODO string name="title_fixed_edit">Location edit</string -->
-    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
-    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
-    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
+    <string name="title_fixed">Фиксирани репери</string>
+    <string name="title_fixed_edit">Редактиране на позиция</string>
+    <string name="title_fixed_import">Импортиране на фикс. репери</string>
+    <string name="title_fixed_gps">Фиксиран репер: GPS</string>
+    <string name="title_fixed_add">Фиксиран репер: добавяне</string>
     <string name="title_manual">TopoDroid ръководство</string>
     <string name="title_mode">Показване на</string>
     <string name="title_move">Преместване</string>
@@ -665,17 +665,17 @@
     <string name="title_photo">Снимки/Измервания</string>
     <string name="title_photo_comment">Коментар за снимка</string>
     <string name="title_plot_save">Запис на скица като</string>
-    <!-- TODO string name="title_plot_reload">Reload sketch</string -->
+    <string name="title_plot_reload">Препрочитане на скица</string>
     <string name="title_profile_flip">Обръщане на разреза?</string>
     <string name="title_refs">Показване в скицата на:</string>
     <string name="title_scraps">Скици в картировката</string>
     <string name="title_shift">Изместване</string>
     <string name="title_shot_delete">Изтриване на отсечката?</string>
-    <!-- TODO string name="title_sensor_edit">Sensor</string -->
+    <string name="title_sensor_edit">Сензор</string>
 
     <string name="title_stats">Статистика</string>
     <string name="title_survey">Информация за картировката</string>
-    <!-- TODO string name="title_survey_new">New survey</string -->
+    <string name="title_survey_new">Нова картировка</string>
     <string name="title_survey_export">Експортиране на картировка като</string>
     <string name="title_survey_rename">Преименуване като</string>
     <string name="title_calib_export">Експортиране на калибрация като</string>
@@ -712,9 +712,9 @@
   <string name="pref_leg_shots_summary">Минимален брой поредни еднакви измервания за да се считат за антена</string>
   <string name="pref_station_prefix_title">Експортиране на префикс в името на реперите</string>
   <string name="pref_station_prefix_summary">Експортиране в cSurvey на префикс в името на реперите</string>
-  <!-- TODO string name="pref_ortho_lrud_title">LRUD splay angle</string -->
-  <!-- TODO string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string -->
-  <!-- TODO string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string -->
+  <string name="pref_ortho_lrud_title">ЛДГД ъгъл на странично изм.</string>
+  <string name="pref_ortho_lrud_summary">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
+  <string name="pref_ortho_lrud_message">Минимален ъгъл м/у отсечка и странично за ГДЛД</string>
   <string name="pref_survex_eol_title">Край на ред в Survex</string>
   <string name="pref_survex_eol_summary">Край на ред в Survex експорт</string>
   <string name="pref_survex_splay_title">Странични измервания в Survex</string>
@@ -1010,12 +1010,12 @@
 
     <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>
 
-  <!-- FIXME TODO welcome_text has been updated. Please fix accordingly -->
     <string name="welcome_text">
 \nTopoDroid е Андроид приложение с отворен код за картиране на пещери с помощта на на DistoX лазерна рулетка.
 \n\nБез гаранция: с използването му, вие се съгласявате, че авторът не носи отговорност за загуба на данни или други проблеми, които може да срещнете при използване на програмата.
-\n\nПосетете http://sites.google.com/site/speleoapps за допълнителни програми и документация.
-\nИзпращайте коментари, описания на проблеми и предложения на marco.corvi@gmail.com
+\n\nОтваряне на ръководството: бутон MENU
+\nДокументация и друга информация: http://sites.google.com/site/speleoapps
+\nComments, bug reports, feature requests: marco.corvi@gmail.com
 \n
     </string>
 
