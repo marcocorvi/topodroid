@@ -632,7 +632,7 @@
     <string name="help_refine_triangle">Уточнить поверхность вдоль длинной стороны</string>
   
 
-    <!-- TODO string name="title_azimut">Extend reference</string -->
+    <string name="title_azimut">Направление разветки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэфиценты</string>
