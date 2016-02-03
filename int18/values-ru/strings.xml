@@ -463,7 +463,7 @@
     <string name="button_split"     >Разделить </string>
     <string name="button_toggle"    >Режим КАЛИБ  </string>
 -->
-    <string name="button_write"     >Загрузить в Disto</string>
+    <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
 
     <string name="mode_leg">Нитка</string>
@@ -1008,7 +1008,7 @@
   <string name="firmware_file_title">Файлы Прошвок</string>
   <string name="firmware_text">
 \n[1] Выберите либо загрузить прошивку на устройсто, либо скачать прошивку в файл.
-\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[2] Выберите файл для загрузки или сохранения. Файлы прошивок находятся в папке bin.
 \n[3] Убедитесь в том что версия прошивки совместима с версией аппаратуры DistoX.
 \n[4] Переключите DistoX2 в режим загрузчика: удерживайте ПЛЮС и МИНУС в момент включения кнопки DIST.
 \n[5] Нажмите кнопку OK и дожитесь завершения процесса.
@@ -1022,8 +1022,8 @@
    <string name="firmware_file_missing">отсутствует файл прошивки</string>
    <string name="ask_upload">Загрузить прошивку?</string>
    <string name="ask_upload_not_compatible">Невозможно проверить совместимость ПО.\nЗагрузить прошивку?</string>
-   <string name="firmware_file_dumped">Сохраненный файл прошивки %1$s size %2$d</string>
-   <string name="firmware_file_uploaded">Загруженный файл прошивки %1$s size %2$d</string>
+   <string name="firmware_file_dumped">Сохраненный файл прошивки %1$s размер %2$d</string>
+   <string name="firmware_file_uploaded">Загруженный файл прошивки %1$s размер %2$d</string>
    
 
 </resources>
