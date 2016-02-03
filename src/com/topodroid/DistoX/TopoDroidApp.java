@@ -58,6 +58,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.SharedPreferences.Editor;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.ActivityNotFoundException;
@@ -90,7 +91,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "17";
+  static String SYMBOL_VERSION = "18";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -495,6 +496,8 @@ public class TopoDroidApp extends Application
     mDData = new DeviceHelper( this, null ); 
 
     TDSetting.loadPreferences( this, mPrefs );
+    checkAutoPairing();
+
     // ***** REGISTER PREF CHANGE LISTENER AFTER HAVING LOADED PREFERENCES
     this.mPrefs.registerOnSharedPreferenceChangeListener( this );
 
@@ -565,6 +568,7 @@ public class TopoDroidApp extends Application
       Debug.startMethodTracing("DISTOX");
     }
   }
+
 
   void setLocale( String locale )
   {
@@ -1876,6 +1880,41 @@ public class TopoDroidApp extends Application
     Toast.makeText( this, "Sync connected " + name, Toast.LENGTH_SHORT ).show();
     if ( mSyncConn != null ) {
       registerDataListener( mSyncConn );
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // DISTOX PAIRING
+
+  static PairingRequest mPairingRequest = null;
+
+  void checkAutoPairing()
+  {
+    if ( TDSetting.mAutoPair ) {
+      startPairingRequest();
+    } else {
+      stopPairingRequest();
+    }
+  }
+
+  void stopPairingRequest()
+  {
+    if ( mPairingRequest != null ) {
+      // Log.v("DistoX", "stop pairing" );
+      unregisterReceiver( mPairingRequest );
+      mPairingRequest = null;
+    }
+  }
+
+  void startPairingRequest()
+  {
+    if ( mPairingRequest == null ) {
+      // Log.v("DistoX", "start pairing" );
+      // IntentFilter filter = new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST );
+      IntentFilter filter = new IntentFilter( "android.bluetooth.device.action.PAIRING_REQUEST" );
+      // filter.addCategory( Intent.CATEGORY_ALTERNATIVE );
+      mPairingRequest = new PairingRequest();
+      registerReceiver( mPairingRequest, filter );
     }
   }
 

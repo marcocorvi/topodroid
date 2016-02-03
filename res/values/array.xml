@@ -74,7 +74,7 @@
      <item name="russian">Русский</item>
      <item name="german">Deutsch</item>
      <item name="bulgarian">Български</item>
-     <item name="chinese">Chinese</item>
+     <item name="chinese">中文</item>
   </string-array>
   <string-array name="localeValue">
      <item name="english">en</item>

@@ -1,5 +1,6 @@
 symbol point
 name air-draught
+name-cn 气流方向
 name-es corriente_de_aire
 name-pt corrente_de_ar
 name-it corrente_d'aria

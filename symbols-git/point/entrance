@@ -1,5 +1,6 @@
 symbol point
 name entrance
+name-cn 入口
 name-es entrada
 name-pt entrada
 name-it ingresso

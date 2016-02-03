@@ -870,6 +870,7 @@ class TDSetting
       setBitmapBgcolor( prefs.getString( k, "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
     } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_AUTO_PAIR
       mAutoPair = prefs.getBoolean( k, true );
+      app.checkAutoPairing();
     } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_SOCKET_DELAY
       mConnectSocketDelay = tryInt(prefs, k, "0" );  
     } else if ( k.equals( key[ nk++ ] ) ) {

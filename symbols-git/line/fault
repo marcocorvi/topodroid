@@ -1,5 +1,6 @@
 symbol line
 name fault
+name-cn 断层
 name-es falla
 name-it faglia
 name-fr faute

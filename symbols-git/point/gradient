@@ -1,5 +1,6 @@
 symbol point
 name gradient
+name-cn 陡坡
 name-es pendiente
 name-pt linhas_gradiente
 name-it pendenza

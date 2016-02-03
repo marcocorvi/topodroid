@@ -100,9 +100,6 @@ public class TopoDroidActivity extends Activity
 {
   private TopoDroidApp mApp;
 
-  // FIXME PAIRING_REQUEST api-19
-  PairingRequest mPairingRequest = null;
-
   private boolean onMenu; // whether menu is displaying
 
   // private static final int REQUEST_DEVICE    = 1;
@@ -937,12 +934,7 @@ public class TopoDroidActivity extends Activity
       }
     }
 
-    // FIXME PAIRING_REQUEST api-19
-    // IntentFilter filter = new IntentFilter( BluetoothDevice.ACTION_PAIRING_REQUEST );
-    IntentFilter filter = new IntentFilter( "android.bluetooth.device.action.PAIRING_REQUEST" );
-    // filter.addCategory( Intent.CATEGORY_ALTERNATIVE );
-    mPairingRequest = new PairingRequest();
-    registerReceiver( mPairingRequest, filter );
+    mApp.checkAutoPairing();
   }
 
   @Override
@@ -975,9 +967,6 @@ public class TopoDroidActivity extends Activity
     if ( TopoDroidApp.isTracing ) {
       Debug.stopMethodTracing();
     }
-    if ( mPairingRequest != null ) {
-      unregisterReceiver( mPairingRequest );
-    }
   }
 
   @Override
@@ -991,6 +980,8 @@ public class TopoDroidActivity extends Activity
     // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
     // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();
+
+    mApp.stopPairingRequest();
   }
 
   private boolean doubleBack = false;
