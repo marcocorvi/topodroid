@@ -23,37 +23,14 @@
      <item name="number">数字</item>
   </string-array>
   
-  <string-array name="extend_name">
+  <!-- UNUSED string-array name="extend_name">
      <item>左 </item>
      <item>垂直 </item>
      <item>右 </item>
-     <item>--</item>
-  </string-array>
+     <item>- -</item>
+  </string-array -->
 
-  <!-- DISTOX_LOCALE -->
-  <string-array name="locale">
-     <item name="english">English</item>
-     <item name="french">Français</item>
-     <item name="spanish">Español</item>
-     <item name="italian">Italiano</item>
-     <item name="russian">Русский</item>
-     <item name="german">Deutsch</item>
-     <item name="bulgarian">Български</item>
-     <item name="chinese">中文</item>
-  </string-array>
-
-  <string-array name="localeValue">
-     <item name="english">en</item>
-     <item name="french">fr</item>
-     <item name="spanish">es</item>
-     <item name="italian">it</item>
-     <item name="russian">ru</item>
-     <item name="german">de</item>
-     <item name="bulgarian">bg</item>
-     <item name="chinese">cn</item>
-  </string-array>
-
-  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX
   <string-array name="exportShots">
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
@@ -65,8 +42,9 @@
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
   </string-array>
+  -->
 
-  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX
   <string-array name="exportSketch">
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
@@ -74,6 +52,7 @@
      <item name="png">PNG</item>
      <item name="svg">SVG</item>
   </string-array>
+  -->
 
   <string-array name="legShots">
      <item name="two">2</item>

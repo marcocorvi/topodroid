@@ -24,12 +24,12 @@
   </string-array>
 
 
-  <string-array name="extend_name">
+  <!-- UNUSED string-array name="extend_name">
     <item>РРвЛево</item>
     <item>РРвВерх</item>
     <item>РРвПраво</item>
-    <item>--</item>
-  </string-array>
+    <item>- -</item>
+  </string-array -->
 
   <string-array name="extraButtons">
      <item name="basic">Базовый</item>
@@ -90,13 +90,6 @@
      <item name="1">Проверять на старте</item>
      <item name="2">Включен</item>
   </string-array>
-
-  <!-- OK string-array name="exportType">
-     <item name="th">Therion</item>
-     <item name="dat">Compass</item>
-     <item name="svx">Survex</item>
-     <item name="tro">VisualTopo</item>
-  </string-array -->
 
   <string-array name="lineStyle">
      <item name="none">Точный</item>

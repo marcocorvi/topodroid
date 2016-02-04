@@ -25,6 +25,7 @@ import android.content.res.Resources;
 
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.LinearLayout;
@@ -42,12 +43,15 @@ import android.widget.Toast;
 import android.util.Log;
 
 public class CWDActivity extends Activity
-                               implements OnItemClickListener
+                         implements OnItemClickListener
+                                  , OnClickListener
+
 {
   private TopoDroidApp mApp;
 
   private ListView mList;
   private EditText mETcwd;
+  private Button mBtnOK;
 
   private void setPreference()
   {
@@ -63,7 +67,7 @@ public class CWDActivity extends Activity
       dir_name = "TopoDroid-" + dir_name;
     }
     TDPath.checkBasePath( dir_name );
-    // Log.v("DistoX", "dir name <" + dir_name + ">" );
+    Log.v("DistoX", "dir name <" + dir_name + ">" );
     mApp.setCWDPreference( dir_name );
     Intent intent = new Intent();
     intent.putExtra( TopoDroidTag.TOPODROID_CWD, dir_name );
@@ -94,6 +98,15 @@ public class CWDActivity extends Activity
     mETcwd.setText( item );
   }
 
+  @Override
+  public void onClick( View v ) 
+  {
+    Button b = (Button)v;
+    if ( b == mBtnOK ) {
+      setPreference();
+      finish();
+    }
+  }
   
   @Override
   public void onCreate( Bundle b )
@@ -106,23 +119,24 @@ public class CWDActivity extends Activity
 
     mList = (ListView) findViewById( R.id.cwd_list );
     mETcwd = (EditText) findViewById( R.id.cwd_text );
+    mBtnOK = (Button) findViewById( R.id.button_ok );
     
+    mBtnOK.setOnClickListener( this );
     updateDisplay();
   }
 
+  // @Override
+  // public synchronized void onStop()
+  // { 
+  //   super.onStop();
+  // }
 
-  @Override
-  public synchronized void onStop()
-  { 
-    super.onStop();
-  }
-
-  @Override
-  public void onBackPressed()
-  {
-    setPreference();
-    finish();
-  }
+  // @Override
+  // public void onBackPressed()
+  // {
+  //   // setPreference();
+  //   finish();
+  // }
 
   @Override
   public boolean onKeyDown( int code, KeyEvent event )

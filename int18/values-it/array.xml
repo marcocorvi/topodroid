@@ -23,12 +23,12 @@
      <item name="number">Numerico</item>
   </string-array>
 
-  <string-array name="extend_name">
+  <!-- UNUSED string-array name="extend_name">
      <item>Sinistra</item>
      <item>Verticale</item>
      <item>Destra</item>
-     <item>--</item>
-  </string-array>
+     <item>- -</item>
+  </string-array -->
 
   <!-- OK string-array name="logStream">
      <item name="android">System log</item>

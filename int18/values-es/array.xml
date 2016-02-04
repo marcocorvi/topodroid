@@ -23,12 +23,12 @@
      <item name="number">Numéricas</item>
   </string-array>
 
-  <string-array name="extend_name">
+  <!-- UNUSED string-array name="extend_name">
      <item>Izq.</item>
      <item>Vert.</item>
      <item>Drch.</item>
-     <item>--</item>
-  </string-array>
+     <item>- -</item>
+  </string-array -->
 
   <string-array name="extraButtons">
      <item name="basic">Básico</item>
