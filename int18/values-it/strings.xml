@@ -14,10 +14,10 @@
     <string name="HELP">AIUTO</string>
     <string name="STATION">CAPOSALDO </string>
 
-    <!-- TODO string name="cut">CUT</string -->
-    <!-- TODO string name="copy">COPY</string -->
-    <!-- TODO string name="paste">PASTE</string -->
-    <!-- TODO string name="copied">Copied %1$s to clipboard</string -->
+    <!-- DONE string name="cut">TAGLIA</string -->
+    <!-- DONE string name="copy">COPIA</string -->
+    <!-- DONE string name="paste">INCOLLA</string -->
+    <!-- DONE string name="copied">Copiati %1$s negli appunti</string -->
 
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
@@ -114,7 +114,7 @@
     <string name="few_plots">Troppo pochi disegni</string>
     <string name="few_calibs">Calibrazioni non sufficienti</string>
 
-    <!-- TODO string name="calib_import_title">Calibration import</string -->
+    <!-- DONE string name="calib_import_title">Importa calibrazione</string -->
     <string name="import_title">Importazione file</string>
     <string name="import_wait">Importazione file... attendi...</string>
     <string name="import_already">Rilievo già presente</string>
@@ -202,9 +202,9 @@
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_gms">Calibrazione senza data.</string>
-    <!-- TODO string name="no_geo_station">Failed: no geolocalized station</string -->
+    <!-- DONE string name="no_geo_station">Failed: nessun caposaldo geolocalizzato</string -->
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
-    <!-- TODO string name="no_location_data">No location data</string -->
+    <!-- DONE string name="no_location_data">Nessun dato di posizione</string -->
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
     <string name="no_photos">Rilievo senza foto</string>
     <string name="no_plots">Rilievo senza disegni</string>
@@ -221,7 +221,7 @@
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
-    <!-- TODO string name="menu_area">AREA</string -->
+    <!-- DONE string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNETTI</string>
     <string name="menu_calib">CALIBRAZIONI</string>
     <string name="menu_delete">ELIMINA</string>
@@ -250,7 +250,7 @@
     <string name="menu_survey">INFORMAZIONI</string>
     <string name="menu_sync">SINC</string>
     <string name="menu_validate">CONVALIDA</string>
-    <!-- TODO string name="menu_tdr2th2">TH2 SKETCHES</string -->
+    <!-- DONE string name="menu_tdr2th2">DISEGNI TH2</string -->
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
@@ -288,7 +288,7 @@
     <!-- string name="plot_view">Caposaldo puntato</string -->
     <!-- UNUSED string name="read_">Letti </string -->
     <string name="read_data">Letti %1sd dati</string>
-    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
+    <!-- DONE string name="read_calib_data">Letti %1$d dati (%2$d pacchetti)</string -->
     <string name="read_fail_with_code">Lettura fallita. Codice </string>
     <string name="read_failed">Lettura dati DistoX fallita</string>
     <!-- UNUSED string name="reading_file_failed">Lettura file fallita</string -->
@@ -299,9 +299,9 @@
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
     <string name="too_many_legs_xsection">Troppe battute per una Cross-section</string>
-    <!-- TODO strung name="converted_tdr2th2">Converted sketches binary files to th2</string -->
-    <!-- TODO string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
-    <!-- TODO string name="section_area">Section area: %1$.1f</string -->
+    <!-- DONE string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
+    <!-- DONE string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
+    <!-- DONE string name="section_area">Area della sezione: %1$.1f</string -->
 
     <string name="sensor">sensore</string>
     <!-- string name="sensor_accelerometer">accelerometro</string -->
@@ -445,7 +445,7 @@
     <!-- OK string name="button_start"     >Start</string -->
     <!-- OK string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
-    <!-- TODO string name="button_view"      >View      </string -->
+    <!-- DONE string name="button_view"      >Visualizza      </string -->
     <string name="button_yes"       >Sí        </string>
 
     <!-- UNUSED string name="button_sharp"     >Spigolosa</string -->
@@ -474,8 +474,8 @@
     <!-- OK string name="remote_reset">Reset BT</string -->
     <string name="download">Scarica dati</string>
 
-    <!-- TODO string name="popup_do_splay">Splay shot</string -->
-    <!-- TODO string name="popup_do_leg">Leg shots</string -->
+    <!-- DONE string name="popup_do_splay">Splay</string -->
+    <!-- DONE string name="popup_do_leg">Battuta</string -->
 
 <!--
     <string name="btn_3d">3D</string>
@@ -527,7 +527,7 @@
     <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
-    <!-- TODO string name="help_tdr2th2">Convert sketch binary files to th2</string -->
+    <!-- DONE string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
     <string name="help_toggle_plot">Passa tra pianta e sezione long.</string>
     <string name="help_trash">ELimina disegno</string>
     <string name="help_undo">Cancella ultima azione di disegno</string>
@@ -538,7 +538,7 @@
     <string name="help_eraser">Modalità cancella</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
     <string name="help_next">Prossimo oggetto nella selezione</string>
-    <string name="help_recover">Recupera schizzo dal backup</string>
+    <string name="help_recover">Recupera disegno dal backup</string>
    
     <string name="help_line_point">Azioni per pulti di linee: unire, dividere, tagliare, rimuovere</string>
 <!--
@@ -569,7 +569,7 @@
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
 
-    <!-- TODO string name="title_azimut">Extend reference</string -->
+    <!-- DONE string name="title_azimut">Riferimento Extend</string -->
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
@@ -582,24 +582,24 @@
     <string name="title_draw_point">PUNTO %1$s</string>
     <string name="title_edit">Edita</string>
     <string name="title_erase">Cancella</string>
-    <!-- TODO string name="title_fixed">Fixed points</string -->
-    <!-- TODO string name="title_fixed_edit">Location edit</string -->
-    <!-- TODO string name="title_fixed_import">Fixed point import</string -->
-    <!-- TODO string name="title_fixed_gps">Fixed point: GPS</string -->
-    <!-- TODO string name="title_fixed_add">Fixed point: insert</string -->
+    <!-- DONE string name="title_fixed">Punti fissi</string -->
+    <!-- DONE string name="title_fixed_edit">Modifica posizione</string -->
+    <!-- DONE string name="title_fixed_import">Importa punto fisso</string -->
+    <!-- DONE string name="title_fixed_gps">Punto fisso: GPS</string -->
+    <!-- DONE string name="title_fixed_add">Punto fisso: inserimento</string -->
     <string name="title_mode">Modalità display</string>
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
-    <!-- TODO string name="title_plot_reload">Reload sketch</string -->
+    <!-- DONE string name="title_plot_reload">Ricarica disegno</string -->
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
-    <!-- TODO string name="title_sensor_edit">Sensor</string -->
+    <!-- DONE string name="title_sensor_edit">Sensore</string -->
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
@@ -609,7 +609,7 @@
 
     <string name="title_stats">Statistiche</string>
     <string name="title_survey">Info rilievo</string>
-    <!-- TODO string name="title_survey_new">New survey</string -->
+    <!-- DONE string name="title_survey_new">Nuovo rilievo</string -->
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
@@ -645,9 +645,9 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
-  <!-- TODO string name="pref_ortho_lrud_title">LRUD splay angle</string -->
-  <!-- TODO string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string -->
-  <!-- TODO string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string -->
+  <!-- DONE string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string -->
+  <!-- DONE string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string -->
+  <!-- DONE string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string -->
   <string name="pref_survex_eol_title">Survex terminazione linea</string>
   <string name="pref_survex_eol_summary">Survex - terminazione linea</string>
   <string name="pref_survex_splay_title">Survex - stazioni splay</string>
@@ -750,8 +750,8 @@
   <string name="pref_hthr_summary">Soglia inclinazione per sezioni orizzontali</string>
   <string name="pref_hthr_message">Soglia inclinazione battuta per sezioni orizzontali</string>
   <string name="pref_bitmap_scale_title">Risoluzione PNG</string>
-  <string name="pref_bitmap_scale_summary">Risoluzione nei PNG degli schizzi</string>
-  <string name="pref_bitmap_scale_message">Risoluzione nell\'esportazione PNG degli schizzi</string>
+  <string name="pref_bitmap_scale_summary">Risoluzione nei PNG dei disegni</string>
+  <string name="pref_bitmap_scale_message">Risoluzione nell\'esportazione PNG dei disegni</string>
   <string name="pref_bitmap_bgcolor_title">Colore di sfondo per PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Colore di sfondo della immagine PNG dei rilievi</string>
   <string name="pref_bitmap_bgcolor_message">Colore di sfondo per export rilievo in formato PNG</string>
@@ -824,8 +824,8 @@
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
   <string name="pref_xtherion_areas_title">Aree xtherion</string>
   <string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string>
-  <!-- TODO string name="pref_binary_store_title">Sketch binary file</string -->
-  <!-- TODO string name="pref_binary_store_summary">Save sketches in binary format</string -->
+  <!-- DONE string name="pref_binary_store_title">File disegno formato binario</string -->
+  <!-- DONE string name="pref_binary_store_summary">Salva file disegno in formato binario</string -->
   <string name="pref_autoStations_title">Punti th2 station</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
