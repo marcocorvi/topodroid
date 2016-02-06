@@ -68,7 +68,7 @@
     <string name="calib_validation">确认 %1$s vs %2$s</string>
     <string name="connect_failed">连接失败</string>
     <string name="data"> 数据</string>
-    <string name="using">使用 %1$s %2$s</string>
+    <string name="using">使用中 %1$s %2$s</string>
     <string name="calib_error">平均误差: %1$.4f 度</string>
     <string name="calib_stddev">标准差: %1$.4f 度</string>
     <string name="calib_max_error">最大误差: %1$.4f 度</string>
@@ -176,17 +176,17 @@
     
     <string name="group_title">标准数据组</string>
     <string name="group_policy_four">策略: 按四个值一组</string>
-    <string name="group_policy_sixteen">策略: four groups of four, other single</string>
+    <string name="group_policy_sixteen">策略: 四组四个, 其他单独</string>
     <string name="group_policy_distance">策略: 按角度距离分组</string>
     <string name="group_reset">重置分组</string>
 
-    <string name="scale">scale</string>
+    <string name="scale">比例</string>
     <string name="reversed">reverse</string>
-    <string name="options">options</string>
-    <string name="outline">outline</string>
-    <string name="out">out</string>
-    <string name="in">in</string>
-    <string name="none">none</string>
+    <string name="options">选项</string>
+    <string name="outline">轮廓</string>
+    <string name="out">出</string>
+    <string name="in">入</string>
+    <string name="none">无</string>
     <string name="barrier_add">隐藏以下的测量</string>
     <string name="barrier_del">显示以下的测量</string>
     <string name="hidden_add">隐藏之前的测量</string>
@@ -240,13 +240,13 @@
     <string name="menu_rename">重命名</string>
     <string name="menu_help">帮助</string>
     <string name="menu_join_survey">联合测量</string>
-    <string name="menu_logs">LOGS</string>
+    <string name="menu_logs">日志设定</string>
     <!-- string name="menu_manual">手册</string -->
     <string name="menu_manual_calibration">校准</string>
     <string name="menu_options">设置</string>
     <string name="menu_overview">概览</string>
     <string name="menu_pair">PAIR</string>
-    <string name="menu_palette">调色板</string>
+    <string name="menu_palette">图例管理</string>
     <string name="menu_photo">照片</string>
     <string name="menu_sensor">传感器</string>
     <string name="menu_scan">扫描</string>
@@ -441,7 +441,7 @@
     <string name="button_open"      >打开      </string>
     <string name="button_read"      >读取      </string>
     <string name="button_regroup"   >重组   </string>
-    <string name="button_dump"      >垃圾     </string>
+    <string name="button_dump"      >删除     </string>
     <string name="button_reset"     >重置     </string>
     <string name="button_left"      >左</string>
     <string name="button_right"     >右</string>
@@ -715,7 +715,7 @@
   <string name="pref_cosurvey_summary">启用/停用 联合测量服务</string>
   <string name="pref_export_shots_title">默认数据导出</string>
   <string name="pref_export_shots_summary">默认数据导出格式</string>
-  <string name="pref_extra_buttons_title">特殊模式</string>
+  <string name="pref_extra_buttons_title">工作模式选择</string>
   <string name="pref_extra_buttons_summary">激活特殊模式</string>
   <string name="pref_size_buttons_title">按键尺寸</string>
   <string name="pref_size_buttons_summary">活动按钮尺寸</string>
@@ -723,8 +723,8 @@
 
   <string name="pref_leg_shots_title">最小的主线测量</string>
   <string name="pref_leg_shots_summary">每条主线最少的测量次数</string>
-  <string name="pref_station_prefix_title">cSurvey station prefix</string>
-  <string name="pref_station_prefix_summary">Export cSurvey station prefix</string>
+  <string name="pref_station_prefix_title">cSurvey 测量点名称前缀</string>
+  <string name="pref_station_prefix_summary">输出cSurvey测量点名称前缀</string>
   <string name="pref_ortho_lrud_title">LRUD 侧线的角度</string>
   <string name="pref_ortho_lrud_summary">每组LRUD侧线与主线的最小测量角度</string>
   <string name="pref_ortho_lrud_message">LRUD最小的侧线主线角度</string>
@@ -732,8 +732,8 @@
   <string name="pref_survex_eol_summary">Survex 线终端</string>
   <string name="pref_survex_splay_title">Survex 侧线测量点</string>
   <string name="pref_survex_splay_summary">在Survex中添加侧线的测量点</string>
-  <string name="pref_survex_lrud_title">Survex LRUD</string>
-  <string name="pref_survex_lrud_summary">添加 LRUD 到 Survex 输出</string>
+  <string name="pref_survex_lrud_title">Survex左右上下</string>
+  <string name="pref_survex_lrud_summary">添加左右上下到 Survex 输出</string>
   <string name="pref_csv_length_title">CSV 长度单位</string>
   <string name="pref_csv_length_summary">CSV 输出长度单位</string>
 
@@ -773,8 +773,8 @@
   <string name="pref_cwd_title">工作目录</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid 工作目录</string -->
   <!-- UNUSED string name="pref_cwd_message">输入TopoDroid工作目录</string -->
-  <string name="pref_pt_color_map_title">PocketTopo 彩色地图</string>
-  <string name="pref_pt_color_map_summary">PocketTopo 彩色地图 (PocketTopo 输入)</string>
+  <string name="pref_pt_color_map_title">PocketTopo 地图颜色</string>
+  <string name="pref_pt_color_map_summary">PocketTopo 地图颜色 (PocketTopo 输入)</string>
   <string name="pref_text_size_title">字体大小</string>
   <string name="pref_text_size_summary">列表项目字体大小</string>
   <string name="pref_text_size_message">列表中字体大小</string>
@@ -796,7 +796,7 @@
   <string name="pref_mag_thr_title">地磁公差</string>
   <string name="pref_mag_thr_summary">磁场测量容差</string>
   <string name="pref_mag_thr_message">磁场测量容差</string>
-  <string name="pref_dip_thr_title">磁场将容差</string>
+  <string name="pref_dip_thr_title">磁场降容差</string>
   <string name="pref_dip_thr_summary">磁场测量降容差</string>
   <string name="pref_dip_thr_message">磁场测量降容差</string>
 
@@ -820,9 +820,9 @@
   <string name="pref_vthr_title">主线垂直极限值</string>
   <string name="pref_vthr_summary">LRSD/WENS垂直的极限值</string>
   <string name="pref_vthr_message">主线在LRSD/WENS倾斜的临界值</string>
-  <string name="pref_plan_vthr_title">平视图侧线的极限值</string>
-  <string name="pref_plan_vthr_summary">平视图中的侧线垂直极限值</string>
-  <string name="pref_plan_vthr_message">在平视图中隐藏高斜度的侧线</string>
+  <string name="pref_plan_vthr_title">平面视图侧线的极限值</string>
+  <string name="pref_plan_vthr_summary">平面视图中的侧线垂直极限值</string>
+  <string name="pref_plan_vthr_message">在平面视图中隐藏高斜度的侧线</string>
   <string name="pref_init_station_title">起始测量点的名称</string>
   <string name="pref_init_station_summary">默认起始测量点名称</string>
   <string name="pref_init_station_message">默认起始测量点名称</string>
@@ -977,8 +977,8 @@
   <string name="pref_walls_concave_summary">最大凹度</string>
   <string name="pref_walls_concave_message">最大凹度 [百分比]</string>
   <string name="pref_walls_xstep_title">步骤</string>
-  <string name="pref_walls_xstep_summary">点沿着洞壁分离</string>
-  <string name="pref_walls_xstep_message">点沿着洞壁分离 [m]</string>
+  <string name="pref_walls_xstep_summary">沿着洞壁分割点</string>
+  <string name="pref_walls_xstep_message">沿着洞壁分割点 [m]</string>
 
   <string name="pref_log_stream_summary">记录输出流</string>
   <string name="pref_log_stream_title">记录数据流</string>
@@ -1028,8 +1028,8 @@
 \n\n免责声明: 要使用这个软件您必须同意作者将不对可能引起的的数据丢失或者损坏负责.
 \n\n说明书: 请按菜单
 \n\n说明文件: http://sites.google.com/site/speleoapps
-\n注解, 错误报告, 特殊功能请联系: marco.corvi@gmail.com
-\n中文版编辑张远海、罗宏杰。 luohongjie2012@gmail.com
+\n注解, 错误报告, 特殊功能请联系: luohongjie2012@gmail.com
+\n中文版编辑张远海、罗宏杰。
 \n
     </string>
 
