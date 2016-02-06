@@ -80,7 +80,7 @@
 
   <string-array name="connMode">
      <item name="batch">按需</item>
-     <item name="continuous">继续</item>
+     <item name="continuous">保持连接</item>
   </string-array>
 
   <string-array name="altitudeType">
@@ -136,7 +136,7 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">距离</item>
+     <item name="distance">按距离</item>
      <item name="four">每四个</item>
      <item name="only16">前 16</item>
   </string-array>
