@@ -1,6 +1,7 @@
 symbol line
 name wall_sand
 name-es paredes_de_arena
+name-de Sandwand
 name-bg стена_пясък
 name-ru стена_песок
 th_name wall:sand
