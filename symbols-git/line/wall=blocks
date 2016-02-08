@@ -1,6 +1,7 @@
 symbol line
 name wall_blocks
 name-es paredes_estratificadas
+name-de Geschichtete_Wand
 name-bg стена_блокаж
 name-ru стена_из_блоков
 th_name wall:blocks
