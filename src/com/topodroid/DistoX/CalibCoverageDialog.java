@@ -65,11 +65,11 @@ public class CalibCoverageDialog extends MyDialog
   private Button mBtnEval;
   private Button mBtnEvalCal;
   // private Button mBtnBack;
-  private Context mContext;
 
   public CalibCoverageDialog( Context context, List< CalibCBlock > list, Calibration cal )
   {
     super( context, R.string.CalibCoverageDialog );
+    
     mCalib = cal;
     mList  = list;
     clino_angles = new int[ DIMY ];
