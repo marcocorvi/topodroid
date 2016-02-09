@@ -372,7 +372,7 @@
     <string name="stat_depth">Profundidad %1$.1f %2$.1f"</string>
     <string name="stat_duplicate">mediciones duplicadas %1$d %2$.1f</string>
     <string name="stat_leg">Visual %1$d %2$.1f</string>
-    <string name="stat_length">Longitud %1$.1f</string>
+    <string name="stat_length">Desarrollo %1$.1f</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
     <string name="stat_shot">Toma  %1$d,   Duplicada %2$d,   Superficie %3$d</string>
