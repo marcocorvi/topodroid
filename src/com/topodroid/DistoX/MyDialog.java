@@ -39,11 +39,12 @@ public class MyDialog extends Dialog
   // utility method for derived classes
   protected void initLayout( int layout_resource, int title_resource )
   {
-    setContentView( layout_resource );
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     if ( title_resource == -1 ) {
       requestWindowFeature(Window.FEATURE_NO_TITLE);
-    } else {
+    }
+    setContentView( layout_resource );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    if ( title_resource != -1 ) {
       setTitle( title_resource );
     }
   }
