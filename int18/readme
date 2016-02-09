@@ -37,23 +37,23 @@ this make the translation work a bit harder.
 
 There is a sure way to find the context of a string: track its use through the sources.
 This is not very easy, if you have no (or almost no) idea of how the sources are organized.
-Another way is to play with te program, and see if the string translation make sense:
+Another way is to play with the program, and see if the string translation make sense:
 this requires that you build an apk using the translation, or wait for the translation to be included in
 the next apk (in this case get the beta apk, they are updated more often).
 If you make a substantial change to the translation, you can also ask me to build an apk
-with you translation, and send it to you by mail.
+with your translation, and send it to you by mail.
 
-Finally if you have doubt about the meaning of a string do not hesitate to write me.
+Finally if you have any doubt about the meaning of a string do not hesitate to write me.
 
 -------------------------------------------------------------------------
 MISSING STRINGS
 
 The Android build warns if a string appear in a translation file, that has no default (English)
-value. It does not complain if s translation is not present.
+value. It does not complain if a translation is not present.
 Therefore it may occur that some strings from the original file do not appear in a translation file.
 That is usually my fault.
-As a translator you should check now and then yout string file against the original (English)
-file, and add the missing strings, possibly commented if there is non need for translation.
+As a translator you should check now and then your string file against the original (English)
+file, and add the missing strings, possibly commented if there is no need for translation.
 
 The "values" strings in the "array.xml" files must not be translated, so they should be present
 only in the default file. 
@@ -63,7 +63,7 @@ only in the default file.
 IMPORTANT: ENCODING
 The string files are encoded.
 Write the proper encoding in the first line, and use an editor that saves the file with that encoding.
-My suggestion is to use UTF-8 and make life easier for you and me.
+My suggestion is to use UTF-8 to make life easier for you and me.
 
 -------------------------------------------------------------------------
 HOW TO MANAGE YOUR TRANSLATION WITH THE SOURCE TREE
@@ -72,7 +72,7 @@ Make a local copy of the repository.
 Work on int18/values-XX files
 Push your changes to github repo (I will get them automatically).
 
-You can check the files in res/values-XX to see if i made any change. 
+You can check the files in res/values-XX to see if I made any change. 
 In case pull my changes and merge them in.
 
 -------------------------------------------------------------------------
@@ -94,8 +94,8 @@ These are written in the drawing tool files, which are in the symbol subdirector
 you install topodroid).
 These are plain text file with one line for each language name.
 If you change these you *must* tell me because I must increase the symbol version 
-in the code, so that the drawing tools areupdated when a user install a new version of
+in the code, so that the drawing tools are updated when a user installs a new version of
 TopoDroid.
 
-Since this is a bit annoying (to the user that gets a dialog askink if he/she wants to
+Since this is a bit annoying (to the user that gets a dialog asking if he/she wants to
 update the drawing tools), try to limit it and to do all the changes at once.

@@ -1,30 +1,28 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <resources>
 
-  <!-- TODO string-array name="unitGrid">
-     <item name="meter">meter</item>
-     <item name="yard">yard</item>
-  </string-array -->
-
-  <!-- TODO string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
-  </string-array -->
-
-  <!-- TODO string-array name="zoomCtrl">
-     <item name="0">Off</item>
-     <item name="1">Temporary</item>
-     <item name="2">Permanent</item>
-  </string-array -->
-
-
-  <!-- TODO 
-  <string-array name="stationNames">
-     <item name="alpha">Alphanumeric</item>
-     <item name="number">Numeric</item>
+  <string-array name="unitGrid">
+     <item name="meter">Meter</item>
+     <item name="yard">Yard</item>
   </string-array>
-  -->
+
+  <string-array name="wallsType">
+     <item name="none">Keine</item>
+     <item name="convex">Konvex</item>
+  </string-array>
+
+  <string-array name="zoomCtrl">
+     <item name="0">Aus</item>
+     <item name="1">Temporär</item>
+     <item name="2">Immer</item>
+  </string-array>
+
+
+  <string-array name="stationNames">
+     <item name="alpha">Alphanumerisch</item>
+     <item name="number">Numerisch</item>
+  </string-array>
 
   <!-- UNUSED string-array name="extend_name">
      <item>Links</item>
@@ -34,36 +32,36 @@
   </string-array -->
 
   <string-array name="logStream">
-     <item name="android">System log</item>
-     <item name="file">Datei log</item>
+     <item name="android">System Log</item>
+     <item name="file">Datei Log</item>
   </string-array>
 
   <string-array name="connMode">
      <item name="batch">Auf Anfrage</item>
-     <item name="continuous">Fortlaufend</item>
+     <item name="continuous">Ständig</item>
   </string-array>
 
   <string-array name="altitudeType">
     <item name="wgs84">WGS84 Ellipsoid</item>
-    <item name="asl">Orthometrische</item>
+    <item name="asl">Orthometrisch</item>
   </string-array>
 
   <string-array name="sockType">
-     <item name="default">Voreinstellung</item>
+     <item name="default">Standard</item>
      <item name="Insecure">Unsicher</item>
   </string-array>
 
   <string-array name="surveyStations">
      <item name="no">Nein</item>
-     <item name="for">Splays, Vorwärtsmessung</item>
-     <item name="back">Splays, Rückwärtsmessung</item>
-     <item name="for2">Vorwärtsmessung, splays</item>
-     <item name="back2">Rückwärtsmessung, splays</item>
-     <item name="anomaly">Zurücksicht</item> <!-- TODO -->
+     <item name="for">Hilfszüge, Vorwärtsmessung</item>
+     <item name="back">Hilfszüge, Rückwärtsmessung</item>
+     <item name="for2">Vorwärtsmessung, Hilfszüge</item>
+     <item name="back2">Rückwärtsmessung, Hilfszüge</item>
+     <item name="anomaly">Rückwärts, Hilfszüge, Vorwärts</item>
   </string-array>
 
   <string-array name="pickerType">
-     <!-- TODO item name="recent">Most recent</item -->
+     <item name="recent">Häufigste</item>
      <item name="list">Liste</item>
      <item name="grid">Gitter</item>
   </string-array>
@@ -75,9 +73,9 @@
   </string-array>
 
   <string-array name="deviceBT">
-     <item name="0">deaktiviert</item>
-     <item name="1">prüfe beim Start</item>
-     <item name="2">aktiviert</item>
+     <item name="0">Deaktiviert</item>
+     <item name="1">Beim Start prüfen</item>
+     <item name="2">Aktiviert</item>
   </string-array>
 
   <!-- OK
@@ -98,7 +96,7 @@
 
   <string-array name="groupBy">
      <item name="distance">Winkelabstand</item>
-     <item name="four">gleichzeitig 4</item>
+     <item name="four">Immer 4 Messungen</item>
      <item name="only16">Nur die ersten 16</item>
   </string-array>
 
@@ -118,9 +116,9 @@
   </string-array>
 
   <string-array name="calibAlgo">
-     <item name="auto">auto</item>
-     <item name="linear">linear</item>
-     <item name="nonlinear">nicht-linear</item>
+     <item name="auto">Automatisch</item>
+     <item name="linear">Linear</item>
+     <item name="nonlinear">Nicht-linear</item>
   </string-array>
 
 </resources>
