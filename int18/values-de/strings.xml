@@ -6,12 +6,12 @@
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
-    <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\n.Wollen Sie die Zeichenwerkzeuge aktualisieren?</string>
+    <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string>
     <string name="version_title">Versions-Update</string>
 
-    <string name="POINT">PUNKT</string>
-    <string name="LINE">LINIE</string>
-    <string name="AREA">QUERSCHNITTSFLÄCHE</string>
+    <string name="POINT">PUNKTE</string>
+    <string name="LINE">LINIEN</string>
+    <string name="AREA">FLÄCHEN</string>
     <string name="HELP">HILFE</string>
     <string name="STATION">Messpunkt</string>
 
@@ -51,7 +51,7 @@
     <string name="failed_snap_to_line">Kein Linienpunkt zum Verbinden gefunden</string>
     <string name="failed_snap_to_point">Kein Punkt zum Verbinden gefunden</string>
 
-    <string name="calibration_title">Gerät Kalibrierung</string>
+    <string name="calibration_title">Maßband Kalibrierung</string>
     <string name="calibration_length">Maßband</string>
     <string name="calibration_azimuth">Kompass</string>
     <string name="calibration_clino">Neigungsmesser</string>
@@ -75,9 +75,9 @@
     <string name="data"> Daten</string>
     <string name="using">%1$s %2$s benutzen</string>
     <string name="calib_error">Abweichung: %1$.4f Grad</string>
-    <string name="calib_stddev">Standardabweichung: %1$.4f degrees</string>
+    <string name="calib_stddev">Standardabweichung: %1$.4f Grad</string>
     <string name="calib_max_error">Max. Abweichung: %1$.4f Grad</string>
-    <string name="calib_ave_std">Genauigkeit: %1$.4f %2$.4f degrees</string>
+    <string name="calib_ave_std">Genauigkeit: %1$.4f %2$.4f Grad</string>
     <string name="calib_precision">Präzision</string>
     <string name="calib_iter">Iterationen: %1$d</string>
     <string name="calib_saturated_values">WARNUNG: %1$d gesättigter Daten</string>
@@ -111,7 +111,7 @@
   if the TO station is not set, the data is "splay"
   LRUD are left-right-up-down dimensions
 -->
-    <string name="comment">Anmerkung</string>
+    <string name="comment">Notizen</string>
     <!-- string name="flag">Flag</string -->
     <string name="backshot">Rückmessung</string>
     <string name="duplicate">Dupliziert</string>
@@ -130,7 +130,7 @@
     <string name="few_calibs">Nicht genügend Kalbirierungen</string>
 
 <!-- IMPORTING A SURVEY or A ZIP -->
-    <string name="calib_import_title">Kalibration importieren</string>
+    <string name="calib_import_title">Kalibrierung importieren</string>
     <string name="import_title">Daten Importieren</string>
     <string name="import_wait">Importieren ... bitte warten ...</string>
     <string name="import_already">Vermessung bereits importiert</string>
@@ -226,11 +226,11 @@
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
     <string name="no_location_data">Keine Ortsdaten</string>
     <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
-    <string name="no_photos">Vermessung hat kein Foto</string>
-    <string name="no_plots">Vermessung hat keine Skizze</string>
+    <string name="no_photos">Vermessung hat keine Fotos</string>
+    <string name="no_plots">Vermessung hat keine Skizzen</string>
     <string name="no_proj4">Proj4 nicht installiert</string>
-    <string name="no_sensors">Vermessung hat keine Sensormessung</string>
-    <string name="no_shots">Vermessung hat keine Messung</string>
+    <string name="no_sensors">Vermessung hat keine Sensormessungen</string>
+    <string name="no_shots">Vermessung hat keine Messungen</string>
     <string name="no_survey">Keine Vermessung ausgewählt</string>
     <!-- UNUSED string name="no_tdsymbol">Keine TdSymbol App</string -->
     <string name="no_thmanager">Keine ThManager App</string>
@@ -263,7 +263,7 @@
     <string name="menu_join_survey">CO-VERMESSUNG</string>
     <string name="menu_logs">LOGS</string>
     <!-- UNUSED string name="menu_manual">HANDBUCH</string -->
-    <string name="menu_manual_calibration">KALIBRATION</string>
+    <string name="menu_manual_calibration">KALIBRIERUNG</string>
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_pair">VERBINDEN</string>
@@ -279,7 +279,7 @@
     <string name="menu_validate">VALIDIEREN</string>
 
 <!-- LINE POINT EDITING ACTIONS -->
-    <string name="popup_join_pt">Mit nächstem Punkt vereinigen</string>
+    <string name="popup_join_pt">Mit nähestem Punkt vereinigen</string>
     <string name="popup_snap_ln">Auf nächste Linie verschieben</string>
     <string name="popup_split_pt">Punkt verdoppeln</string>
     <string name="popup_split_ln">Linie trennen</string>
@@ -300,7 +300,7 @@
     <string name="photo_external">Messung</string>
     <!-- UNUSED string name="photo_sensor_prompt">Foto oder Sensor auswählen</string -->
     <string name="photo_shot">Messung hinzufügen</string>
-    <string name="photo_survey">Vermessung teilen</string>
+    <string name="photo_survey">Messzug teilen</string>
     <string name="picture_no_station">Name erforderlich</string>
     <string name="plot_delete">Skizze löschen?</string>
     <string name="item_delete">Element löschen %1$s ?</string>
@@ -339,7 +339,7 @@
     <string name="sensor_extern">Benutzerdefiniert</string>
     <string name="sensor_type">Art</string>
     <string name="sensor_value">Messung</string>
-    <string name="sensor_comment">Anmerkung</string>
+    <string name="sensor_comment">Notizen</string>
 
     <string name="shot_clino">Neigung</string>
     <string name="shot_compass">Azimut</string>
@@ -350,7 +350,7 @@
     <string name="shot_leg">Wiedermessung</string>
     <string name="shot_renumber">Umnummerieren</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
-    <string name="shot_note">Anmerkung</string>
+    <string name="shot_note">Notizen</string>
     <string name="shot_reverse">umkehren</string>
     <string name="shot_to">bis</string>
 
@@ -377,7 +377,7 @@
     <string name="survey_split">Vermessung teilen ?</string>
     <string name="survey_not_attached">WARNUNG: unverbundene Messungen</string>
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
-    <string name="declination">Magn. Dekl.</string>
+    <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
     <string name="name">Namen</string>
     <string name="team">Messteam</string>
@@ -405,7 +405,7 @@
     <string name="stat_origin">Urspungs-Messpunkt: %1$s</string>
     <string name="stat_shot">Messungen  %1$d,   Doppelte %2$d,   Oberfläche %3$d</string>
     <string name="stat_splay">Hilfszüge %1$d</string>
-    <string name="stat_station">Messpunkten %1$d</string>
+    <string name="stat_station">Messpunkte %1$d</string>
     <string name="stat_surface">Oberflächenmessungen %1$d %2$.1f</string>
     <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f"</string>
     <string name="shot_title">Messung %1$s - %2$s"</string>
@@ -418,21 +418,21 @@
      repeated-leg: no station, but values close to immediately preceeding shot which is a leg
                    or a repeated-leg
 -->
-    <string name="hide_blank">Ohne Messpunkten</string>
-    <string name="hide_leg">Wiedermessungen</string>
-    <string name="hide_ids">Messung ID</string>
+    <string name="hide_blank">Hilfszüge ohne Punkte</string>
+    <string name="hide_leg">Wiederholungsmessungen</string>
+    <string name="hide_ids">Messungs-ID</string>
     <string name="hide_splay">Hilfszüge</string>
 
     <string name="surveys">VERMESSUNG</string>
     <string name="calibs">KALIBRIERUNG</string>
 
     <string name="plan">GRUNDRISS</string>
-    <string name="extended">LÄNGSSCHNITT</string>
+    <string name="extended">SEITENRISS</string>
     <string name="v_section">V-PROFIL</string> <!-- Querschnitt -->
     <string name="h_section">H-PROFIL</string>
 
     <!-- OK string name="distox_err_ok">OK</string -->
-    <!-- OK string name="distox_err_headtail">Failed DistoX memory-read</string -->
+    <string name="distox_err_headtail">Verbindungsfehler mit DistoX</string>
     <!-- OK string name="distox_err_headtail_io">DistoX memory I/O error</string -->
     <!-- OK string name="distox_err_headtail_eof">DistoX memory EOF error</string -->
     <string name="distox_err_connected">Gerät bereits verbunden</string>
@@ -460,7 +460,7 @@
     <string name="button_plot"    >Skizze</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_no"        >Nein      </string>
-    <string name="button_open"      >Offen     </string>
+    <string name="button_open"      >Öffnen     </string>
     <string name="button_read"      >Lesen      </string>
     <string name="button_regroup"   >Umgruppieren   </string>
     <string name="button_dump"      >Lesen</string>
@@ -490,9 +490,9 @@
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Querschnitt</string>
 
-    <string name="mode_leg">Messstrecke</string>
-    <string name="mode_splay">Hilfszug</string>
-    <string name="mode_station">Messpunkten</string>
+    <string name="mode_leg">Messstrecken</string>
+    <string name="mode_splay">Hilfszüge</string>
+    <string name="mode_station">Messpunkte</string>
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Festen Rahmen</string>
 
@@ -500,11 +500,11 @@
     <string name="remote_on">Laser AN</string>
     <string name="remote_off">Laser AUS</string>
     <!-- UNUSED string name="remote_measure">Messung</string -->
-    <string name="remote_reset">BT zurücksetzen</string>
+    <string name="remote_reset">Bluetooth zurücksetzen</string>
     <string name="download">Daten herunterladen</string>
 
     <string name="popup_do_splay">Hilfszug messen</string>
-    <string name="popup_do_leg">Messzug messen (3 Messungen)</string>
+    <string name="popup_do_leg">Messzug messen (n Messungen)</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <!-- UNUSED string name="btn_man">Manual</string -->
@@ -518,10 +518,10 @@
     <!-- OK string name="help_less">Zu den primären Aktionen zurückgehen</string -->
     <string name="help_measure">Entfernungen messen</string>
 
-    <string name="help_coeff">Die Kalibrierungs-Koeffizienten zeigen</string>
+    <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
     <string name="help_continue">Linien fortsetzen</string>
     <string name="help_current_station">Gespeicherte Messpunkte</string>
-    <string name="help_azimuth">Extend Referenzazimut</string>
+    <string name="help_azimuth">Seitenriss Referenzazimut</string>
     <string name="help_device">Zu der Gerätaktivität gehen</string>
     <string name="help_add_topodroid">Neue Vermessung/Kalibrierung starten</string>
     <string name="help_import">Zip oder Datei importieren</string>
@@ -534,12 +534,12 @@
 
     <string name="help_info_topodroid">TopoDroid Nachrichten</string>
     <string name="help_download">Daten herunterladen</string>
-    <!-- UNUSED string name="help_splay">Die Messpunkten automatisch zuweisen</string -->
-    <string name="help_display">Den Anzeigemodus wählen</string>
+    <!-- UNUSED string name="help_splay">Die Messpunkte automatisch zuweisen</string -->
+    <string name="help_display">Anzeige-Einstellungen</string>
     <string name="help_display_calib">Anzeige der gelöschten Vermessungen</string>
     <string name="help_validate">Kalibrierung validieren</string>
     <string name="help_overview">Überblicksansicht</string>
-    <string name="help_plot">Zu der Skizzeaktivität gehen</string>
+    <string name="help_plot">Skizzean</string>
     <string name="help_note">Notizen</string>
     <string name="help_bluetooth">Bluetooth-Verbindung zurücksetzen</string>
     <string name="help_remote">DistoX Fernbedienung</string>
@@ -547,9 +547,9 @@
     <string name="help_info_shot">Vermessungs-Statistiken</string>
     <string name="help_survey_info">Vermessungs-Notizen</string>
     <string name="help_undelete">Gelöschte Objekte wiederherstellen</string>
-    <string name="help_photo">Foto-Dialog</string>
-    <string name="help_sensor">Sensormessungs-Dialog</string>
-    <string name="help_3d">3D-Modell App (Cave3D)</string>
+    <string name="help_photo">Fotos</string>
+    <string name="help_sensor">Sensormessungen</string>
+    <string name="help_3d">3D-Modell (Benötigt Cave3D)</string>
     <string name="help_move">Move/zoom Modus</string>
     <string name="help_draw">Zeichnungmodus</string>
     <string name="help_eraser">Löschmodus</string>
@@ -563,7 +563,7 @@
     <string name="help_trash">Die Skizze löschen</string>
     <string name="help_undo">Letzte Aktion rückgängig machen</string>
     <string name="help_redo">Letzte Aktion wiederholen</string>
-    <string name="help_symbol_plot">Das Zeichenwerkzeuge wählen</string>
+    <string name="help_symbol_plot">Zeichenwerkzeug auswählen</string>
     <string name="help_delete_item">Lösche Element</string>
     <!-- UNUSED string name="help_clear">Die Auswahl löschen</string -->
 
@@ -579,10 +579,10 @@
     <string name="help_split_line">Split the line into two at the point</string>
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
-    <string name="help_manual_calibration">Handbuch für Gerätekalibrierung</string>
+    <string name="help_manual_calibration">Gerätekalibrierung</string>
     <string name="help_note_plot">Eigenschaften des ausgewählten Objekts bearbeiten</string>
     <string name="help_save">Änderungen der Vermessung speichern</string>
-    <string name="help_save_calib">Änderungen der Kalibrierung speichern</string>
+    <string name="help_save_calib">Änderungen speichern</string>
     <string name="help_export_survey">Vermessung speichern</string>
     <string name="help_loc">GPS-Position</string>
     <string name="help_delete_survey">Vermessung löschen</string>
@@ -624,13 +624,13 @@
     <string name="title_fixed_add">Fixpunkt einfügen</string>
     <string name="title_mode">Anzeigemodus</string>
     <string name="title_move">Verschieben</string>
-    <string name="title_note">Anmerkung</string>
+    <string name="title_note">Notizen</string>
     <string name="title_photo">Foto/Messungen</string>
     <string name="title_photo_comment">Foto Kommentar</string>
     <string name="title_plot_save">Skizze Speichern als</string>
     <string name="title_plot_reload">Skizzenbackup wiederherstellen</string>
     <string name="title_profile_flip">Seitenansicht spiegeln?</string>
-    <string name="title_refs">Skizze Referenzen</string>
+    <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
@@ -704,7 +704,7 @@
   <string name="pref_comm_retry_message">Zahl der Verbindungsversuche</string>
   <string name="pref_conn_mode_title">Verbindungsart</string>
   <string name="pref_conn_mode_summary">Art der Verbindung mit DistoX</string>
-  <string name="pref_auto_reconnect_title">Automatische Wiederverbindung</string>
+  <string name="pref_auto_reconnect_title">Automatische Verbindung</string>
   <string name="pref_auto_reconnect_summary">Wiederverbindung nach Verbindungsverlust</string>
   <string name="pref_auto_pair_title">Automatische Verbindung</string>
   <string name="pref_auto_pair_summary">Automatische Verbindung nach dem scannen</string>
@@ -730,9 +730,10 @@
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid Ordner</string -->
   <!-- UNUSED string name="pref_cwd_message">Die TopoDroid Ordner stellen</string -->
   <string name="pref_pt_color_map_title">PocketTopo Farbkarte</string>
+  <string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string>
   <string name="pref_text_size_title">Schriftgröße</string>
   <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
-  <string name="pref_text_size_message">Größe des Textes in Listen</string>
+  <string name="pref_text_size_message">Textgrösse in Listen</string>
   <string name="pref_closeness_title">Auswahl Radius</string>
   <string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string>
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
@@ -743,7 +744,7 @@
   <string name="pref_altitude_summary">Wähle Höhentyp</string>
   <string name="pref_altimetric_title">Orthometrische Höhe</string>
   <string name="pref_altimetric_summary">Orthometrische Höhe Tabelle</string>
-  <string name="pref_survey_stations_title">Vermessung Massungpunkte</string>
+  <string name="pref_survey_stations_title">Strategie Vermessung</string>
   <string name="pref_survey_stations_summary">Automatische Vermessungs-Messpunkte</string>
   <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>
   <string name="pref_accel_thr_summary">Toleranz der Messpunkt-Beschleunigung</string>
@@ -751,7 +752,7 @@
   <string name="pref_mag_thr_title">Magnetfeldetoleranz</string>
   <string name="pref_mag_thr_summary">Toleranz des Magnetfeldes</string>
   <string name="pref_mag_thr_message">Toleranz des Magnetfeldes</string>
-  <string name="pref_dip_thr_title">Magnetische Inklinations-Toleranz</string>
+  <string name="pref_dip_thr_title">Magnetische Neigungs-Toleranz</string>
   <string name="pref_dip_thr_summary">Toleranz der magnetischen Inklination</string>
   <string name="pref_dip_thr_message">Toleranz der magnetischen Inklination</string>
 
@@ -761,11 +762,11 @@
   <string name="pref_backsight_title">Rückblick</string>
   <string name="pref_backsight_summary">Rückblick Feld im Dialog neuer Messzug</string>
   <string name="pref_mag_anomaly_title">Magnetische Abweichung</string>
-  <string name="pref_mag_anomaly_summary">Kompensiere lokale Magnetische Abweichung</string>
+  <string name="pref_mag_anomaly_summary">Kompensiere lokale magnetische Abweichung</string>
   <string name="pref_azimuth_manual_title">Seitenriss-Azimut wählbar</string>
   <string name="pref_azimuth_manual_summary">Azimut des Seitenrisses wählbar</string>
 
-  <string name="pref_team_title">Mess-Team</string>
+  <string name="pref_team_title">Vermessungsteam</string>
   <string name="pref_team_summary">Messteam</string>
   <string name="pref_team_message">Default Messteam</string>
   <string name="pref_ethr_title">Winkel für vertikalen Seitenriss</string>
@@ -777,12 +778,12 @@
   <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
   <string name="pref_plan_vthr_summary">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
   <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
-  <string name="pref_init_station_title">Startmesspunkt</string>
-  <string name="pref_init_station_summary">Default Startmesspunkt</string>
-  <string name="pref_init_station_message">Default Startmesspunkt</string>
+  <string name="pref_init_station_title">Name Startmesspunkt</string>
+  <string name="pref_init_station_summary">Standard Startmesspunkt</string>
+  <string name="pref_init_station_message">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>
   <string name="pref_station_names_summary">Typ von Messpunktnamen</string>
-  <string name="pref_hthr_title">Winkelgrenzwert für horizontale Querschnitte</string>
+  <string name="pref_hthr_title">Winkelgrenzwert für hor. Schnitte</string>
   <string name="pref_hthr_summary">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
   <string name="pref_hthr_message">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
   <string name="pref_bitmap_scale_title">PNG Massstab</string>
@@ -839,7 +840,7 @@
   <string name="pref_label_size_title">Beschriftung Schriftgröße</string>
   <string name="pref_label_size_summary">Beschriftung Schriftgröße</string>
   <string name="pref_label_size_message">Beschriftung Schriftgröße</string>
-  <string name="pref_arrow_length_title">Querschnitts-Pfeil Länge</string>
+  <string name="pref_arrow_length_title">Querschnittsmarkierung Länge</string>
   <string name="pref_arrow_length_summary">Länge des Pfeiles einer Querschnitts-Linie</string>
   <string name="pref_arrow_length_message">Länge des Pfeiles einer Querschnitts-Linie</string>
   <string name="pref_dot_radius_title">Grösse der Linienpunkte</string>
@@ -869,7 +870,7 @@
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
   <string name="pref_LRExtend_title">Links/Rechts-Werte abschätzen</string>
-  <string name="pref_LRExtend_summary">Links/Rechts-Werte abschätzen (Compass/VisualTopo import)</string>
+  <string name="pref_LRExtend_summary">Links/Rechts-Werte abschätzen (Compass/VisualTopo Import)</string>
 
   <string name="pref_picker_type_title">Zeichenwerkzeuge wählen</string>
   <string name="pref_picker_type_summary">Zeichenwerkzeug-Auswahl</string>
@@ -921,7 +922,7 @@
   <string name="pref_walls_plan_thr_title">Max. Hilfszug-Neigung Plan</string>
   <string name="pref_walls_plan_thr_summary">Maximale Neigung eines Hilfszugs für Wände</string>
   <string name="pref_walls_plan_thr_message">Maximale Neigung eines Hilfszugs für Wände [°]</string>
-  <string name="pref_walls_extended_thr_title">Max. Hilfszug-Niegung für Seitenriss</string>
+  <string name="pref_walls_extended_thr_title">Max. Hilfszug-Neigung für Seitenriss</string>
   <string name="pref_walls_extended_thr_summary">Maximale Neigung eines Hilfszugs für Wände</string>
   <string name="pref_walls_extended_thr_message">Maximale Neigung eines Hilfszugs für Wände [°]</string>
   <string name="pref_walls_xclose_title">Min. Punkteabstand</string>
@@ -984,12 +985,12 @@
   <string name="firmware_title">Firmware Updater</string>
   <string name="firmware_file_title">Firmware-Datei</string>
   <string name="firmware_text">
-\n[1] Auswählen, ob die DistoX-Firmware geschrieben oder gelesen werdne soll.
+\n[1] Wählen ob die DistoX-Firmware geschrieben oder gelesen werdne soll.
 \n[2] Datei auswählen zum lesen oder schreiben. Firmware-Dateien sind im "bin" Verzeichnis.
 \n[3] Beim schreiben sicher stellen, dass die Firmware-Version kompatibel mit dem DistoX ist.
 \n[4] Den DistoX2 in den Bootloader-Modus versetzen: PLUS und MINUS gedrückt halten und Gerät mit DIST einschalten.
 \n[5] OK drücken und warten während das Bluetooth-Icon blinkt.
-\n[6] Den DistoX2 ausschalten mit CLR.
+\n[6] Den DistoX2 ausschalten mit CLEAR.
 \n
    </string>
    <string name="firmware_none">Keine Firmware-Datei</string>
