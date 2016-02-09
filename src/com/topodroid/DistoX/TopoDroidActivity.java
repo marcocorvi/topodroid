@@ -138,7 +138,7 @@ public class TopoDroidActivity extends Activity
   //                         R.drawable.ix_database
   //                         };
   private static int izons[] = {
-                          R.drawable.iz_disto2,
+                          R.drawable.iz_disto2b,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
                           R.drawable.iz_therion,
