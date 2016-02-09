@@ -6,8 +6,8 @@ name-pt linhas_gradiente
 name-it pendenza
 name-fr pente
 name-de Gefälle
-name-ru Ð³Ñ€Ð°Ð´Ð¸ÐµÐ½Ñ‚
-name-bg Ð½Ð°ÐºÐ»Ð¾Ð½
+name-ru градиент
+name-bg наклон
 th_name gradient
 orientation yes
 color 0x33ff66
