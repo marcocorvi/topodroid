@@ -8,7 +8,7 @@
   </string-array>
 
   <string-array name="wallsType">
-     <item name="none">Keine</item>
+     <item name="none">Keine automatischen Wände</item>
      <item name="convex">Konvex</item>
   </string-array>
 
@@ -31,6 +31,19 @@
      <item>Kein</item>
   </string-array -->
 
+  <string-array name="extraButtons">
+     <item name="basic">Einfach</item>
+     <item name="normal">Normal</item>
+     <item name="advanced">Fortgeschritten</item>
+     <item name="experimental">Experimentell</item>
+     <!-- item name="complete">Complete</item -->
+  </string-array>
+
+  <string-array name="sizeButtons">
+     <item name="small1">Klein</item>
+     <item name="large">Groß</item>
+  </string-array>
+
   <string-array name="logStream">
      <item name="android">System Log</item>
      <item name="file">Datei Log</item>
@@ -52,7 +65,7 @@
   </string-array>
 
   <string-array name="surveyStations">
-     <item name="no">Nein</item>
+     <item name="no">Keine</item>
      <item name="for">Hilfszüge, Vorwärtsmessung</item>
      <item name="back">Hilfszüge, Rückwärtsmessung</item>
      <item name="for2">Vorwärtsmessung, Hilfszüge</item>
@@ -106,8 +119,8 @@
   </string-array>
 
   <string-array name="unitAngle">
-     <item name="degrees">Sexagesimalgrad</item>
-     <item name="grads">Dezimalgrad</item>
+     <item name="degrees">Grad (360°)</item>
+     <item name="grads">Gon (400gon)</item>
   </string-array>
 
   <string-array name="unitLocation">
