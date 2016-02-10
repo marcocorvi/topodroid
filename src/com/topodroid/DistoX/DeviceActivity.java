@@ -670,7 +670,7 @@ public class DeviceActivity extends Activity
 
   public void onActivityResult( int request, int result, Intent intent ) 
   {
-    // Log.v("DistoX", "onActivityResult req. " + request + " res. " + result );
+    // Log.v("DistoX", "on Activity Result: req. " + request + " res. " + result );
     Bundle extras = (intent != null)? intent.getExtras() : null;
     switch ( request ) {
       case REQUEST_DEVICE:

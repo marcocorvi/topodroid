@@ -162,46 +162,6 @@ public class PhotoActivity extends Activity
 
 
   // ---------------------------------------------------------------
-/*
-  void takePhoto( long shotid, String name, String comment )
-  {
-    if ( name != null && name.length() > 0 ) {
-      mPhotoId      = app.mData.nextPhotoId( );
-      mShotId       = shoitid;
-      mPhotoTitle   = name;
-      mPhotoComment = comment;
-      File imagefile = new File( app.getSurveyJpgFile( Long.toString(mPhotoId) ) );
-      // TDLog.Log("DistoX", "photo " + imagefile.toString() );
-
-      Uri outfileuri = Uri.fromFile( imagefile );
-      try {
-        Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-        intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
-        intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-        startActivityForResult( intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE );
-      } catch ( ActivityNotFoundException e ) {
-        Toast.makeText( this, "No app found to take photo", Toast.LENGTH_SHORT ).show();
-      }
-    } else {
-      Toast.makeText( this, R.string.picture_no_station, Toast.LENGTH_SHORT ).show();
-    }
-  }
-
-  @Override
-  protected void onActivityResult( int reqCode, int resCode, Intent data )
-  {
-    switch ( reqCode ) {
-      case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
-        if ( resCode == Activity.RESULT_OK ) {
-          // TDLog.Log("DistoX", "insert photo in db " + mPhotoId );
-          app.mData.insertPhoto( app.mSID, -1L, mShotId, mPhotoTitle, mPhotoComment );
-        }
-    }
-  }
-*/
-
-  // ---------------------------------------------------------------
-
   
   @Override
   public void onCreate(Bundle savedInstanceState)

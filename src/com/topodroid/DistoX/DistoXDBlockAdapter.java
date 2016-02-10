@@ -256,12 +256,15 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
 
   public boolean onLongClick( View view ) 
   {
-    TextView tv = (TextView) view;
-    if ( tv != null ) {
-      String st = tv.getText().toString();
-      mParent.setCurrentStationName( st );
+    if ( TDSetting.mLevelOverNormal ) {
+      TextView tv = (TextView) view;
+      if ( tv != null ) {
+        String st = tv.getText().toString();
+        mParent.setCurrentStationName( st );
+      }
+      return true;
     }
-    return true;
+    return false;
   }
 
 }

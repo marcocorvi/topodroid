@@ -91,7 +91,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "19";
+  static String SYMBOL_VERSION = "20";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -569,6 +569,10 @@ public class TopoDroidApp extends Application
     }
   }
 
+  void resetLocale()
+  {
+    getResources().getConfiguration().locale = mLocale;
+  }
 
   void setLocale( String locale )
   {

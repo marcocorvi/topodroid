@@ -96,7 +96,7 @@ public class ShotActivity extends Activity
 {
   final static int BTN_DOWNLOAD = 0;
   final static int BTN_PLOT     = 3;
-  final static int BTN_AZIMUTH  = 5;
+  final static int BTN_AZIMUTH  = 7;
 
   private static int izons[] = {
                         R.drawable.iz_download,
@@ -104,9 +104,9 @@ public class ShotActivity extends Activity
                         R.drawable.iz_mode,
                         R.drawable.iz_plot,
                         R.drawable.iz_note,
-                        R.drawable.iz_dial,
+                        R.drawable.iz_plus,
                         R.drawable.iz_station,
-                        R.drawable.iz_plus
+                        R.drawable.iz_dial
                       };
 
   private static int izonsno[] = {
@@ -136,13 +136,12 @@ public class ShotActivity extends Activity
                           R.string.help_display,
                           R.string.help_plot,
                           R.string.help_note,
-                          R.string.help_azimuth,
-                          R.string.help_current_station,
                           R.string.help_add_shot,
+                          R.string.help_current_station,
+                          R.string.help_azimuth,
                         };
    private static int help_menus[] = {
                           R.string.help_survey_info,
-                          // R.string.help_current_station,
                           R.string.help_undelete,
                           R.string.help_photo,
                           R.string.help_sensor,
@@ -185,6 +184,7 @@ public class ShotActivity extends Activity
 
   public void setRefAzimuthButton()
   {
+    if ( ! TDSetting.mLevelOverNormal ) return;
     if ( mApp.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
       m.postRotate( mApp.mRefAzimuth - 90 );
@@ -553,8 +553,7 @@ public class ShotActivity extends Activity
   void doTakePhoto( String comment )
   {
     mComment = comment;
-    mPhotoId      = mApp.mData.nextPhotoId( mApp.mSID );
-
+    mPhotoId = mApp.mData.nextPhotoId( mApp.mSID );
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(mPhotoId) ) );
@@ -649,6 +648,7 @@ public class ShotActivity extends Activity
   {
     switch ( reqCode ) {
       case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
+        mApp.resetLocale();
         if ( resCode == Activity.RESULT_OK ) {
           // (new PhotoCommentDialog(this, this) ).show();
           insertPhoto();
@@ -731,22 +731,20 @@ public class ShotActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mButtonSize = mApp.setListViewHeight( mListView );
 
-    mNrButton1 = TDSetting.mLevelOverBasic ? 8 : 6;
+    mNrButton1 = TDSetting.mLevelOverNormal ? 8 : ( TDSetting.mLevelOverBasic ? 6 : 5 );
     mButton1 = new Button[ mNrButton1 ];
     int k;
     for ( k=0; k<mNrButton1; ++k ) {
       mButton1[k] = new Button( this );
       mButton1[k].setPadding(0,0,0,0);
       mButton1[k].setOnClickListener( this );
-      // mButton1[k].setBackgroundResource(  icons00[k] );
-
       BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[k] );
       if ( k == BTN_DOWNLOAD ) mBMdownload = bm2;
       if ( k == BTN_PLOT ) mBMplot = bm2;
       // if ( k == 6 ) mBMadd  = bm2;
     }
-    mBMdial = BitmapFactory.decodeResource( getResources(), R.drawable.iz_dial );
-    mBMplot_no = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_plot_no );
+    mBMdial        = BitmapFactory.decodeResource( getResources(), R.drawable.iz_dial );
+    mBMplot_no     = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_plot_no );
     mBMdownload_on = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_on );
     mBMdownload_wait = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_wait );
     mBMleft  = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_left );
@@ -884,6 +882,9 @@ public class ShotActivity extends Activity
   @Override
   public void onBackPressed () // askClose
   {
+    if ( closeMenu() ) return;
+    if ( CutNPaste.dismissPopupBT() ) return;
+
     if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
@@ -995,66 +996,30 @@ public class ShotActivity extends Activity
         if ( mApp.mySurvey != null ) {
           (new DistoXAnnotations( this, mApp.mySurvey )).show();
         }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
-        if ( TDSetting.mAzimuthManual ) {
-          setRefAzimuth( 0, - mApp.mFixedExtend );
-        } else {
-          (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
-        }
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
-        (new CurrentStationDialog( this, this, mApp )).show();
-
-        // ArrayList<DistoXDBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
-        // if ( list != null && list.size() > 0 ) {
-        //   updateDisplay( );
-        // }
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
-        // mSecondLastShotId = mApp.lastShotId( );
-        DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
-        // Log.v( "DistoX", "last blk: " + last_blk.toString() );
-        (new ShotNewDialog( this, mApp, this, last_blk, -1L )).show();
-
-      //   mListView.setAdapter( mButtonView2.mAdapter );
-      //   mListView.invalidate();
-      //
-      // 
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnLess
-      //   mListView.setAdapter( mButtonView1.mAdapter );
-      //   mListView.invalidate();
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnDevice
-      //   if ( mApp.mBTAdapter.isEnabled() ) {
-      //     intent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceActivity.class );
-      //     startActivity( intent );
-      //   }
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnAdd 
-      //   // mSecondLastShotId = mApp.lastShotId( );
-      //   DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
-      //   // Log.v( "DistoX", "last blk: " + last_blk.toString() );
-      //   (new ShotNewDialog( this, mApp, this, last_blk, -1L )).show();
-      // // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnInfo
-      // //   intent = new Intent( this, SurveyActivity.class );
-      // //   intent.putExtra( TopoDroidTag.TOPODROID_SURVEY,  0 ); // mustOpen 
-      // //   intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
-      // //   intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
-      // //   startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
-
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnUndelete
-      //   (new UndeleteDialog(this, this, mApp.mData, mApp.mSID ) ).show();
-      //   updateDisplay( );
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnCamera
-      //   startActivity( new Intent( this, PhotoActivity.class ) );
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtnSensor
-      //   startActivity( new Intent( this, SensorListActivity.class ) );
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // mBtn3D
-      //   mApp.exportSurveyAsTh(); // make sure to have survey exported as therion
-      //   try {
-      //     intent = new Intent( "Cave3D.intent.action.Launch" );
-      //     intent.putExtra( "survey", mApp.getSurveyThFile() );
-      //     startActivity( intent );
-      //   } catch ( ActivityNotFoundException e ) {
-      //     Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
-      //   }
+        if ( TDSetting.mLevelOverBasic ) {
+          // mSecondLastShotId = mApp.lastShotId( );
+          DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
+          // Log.v( "DistoX", "last blk: " + last_blk.toString() );
+          (new ShotNewDialog( this, mApp, this, last_blk, -1L )).show();
+        }
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
+        if ( TDSetting.mLevelOverNormal ) {
+          (new CurrentStationDialog( this, this, mApp )).show();
+          // ArrayList<DistoXDBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
+          // if ( list != null && list.size() > 0 ) {
+          //   updateDisplay( );
+          // }
+        }
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
+        if ( TDSetting.mLevelOverNormal ) {
+          if ( TDSetting.mAzimuthManual ) {
+            setRefAzimuth( 0, - mApp.mFixedExtend );
+          } else {
+            (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
+          }
+        }
       }
     }
   }

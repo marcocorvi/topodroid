@@ -138,7 +138,7 @@ public class TopoDroidActivity extends Activity
   //                         R.drawable.ix_database
   //                         };
   private static int izons[] = {
-                          R.drawable.iz_disto2b,
+                          R.drawable.iz_disto, // iz_disto2b,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
                           R.drawable.iz_therion,
@@ -933,7 +933,6 @@ public class TopoDroidActivity extends Activity
         // setBTMenus( mApp.mBTAdapter.isEnabled() );
       }
     }
-
     mApp.checkAutoPairing();
   }
 
@@ -942,6 +941,7 @@ public class TopoDroidActivity extends Activity
   {
     super.onResume();
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
+    mApp.resetLocale();
     mApp.resumeComm();
 
     // restoreInstanceFromFile();
@@ -1021,11 +1021,12 @@ public class TopoDroidActivity extends Activity
 
   public void onActivityResult( int request, int result, Intent intent ) 
   {
-    // TDLog.Log( TDLog.LOG_MAIN, "onActivityResult() request " + mRequestName[request] + " result: " + result );
+    // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
     DataHelper data = mApp.mData;
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
       case REQUEST_ENABLE_BT:
+        // mApp.resetLocale(); // apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
           // nothing to do: scanBTDEvices() is called by menu CONNECT
         } else if ( say_not_enabled ) {
@@ -1040,7 +1041,6 @@ public class TopoDroidActivity extends Activity
         break;
 
     }
-    // TDLog.Log( TDLog.LOG_MAIN, "onActivityResult() done " );
   }
 
   @Override
