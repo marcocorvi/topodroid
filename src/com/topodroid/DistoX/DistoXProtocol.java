@@ -268,7 +268,7 @@ public class DistoXProtocol
 
         // if ( TDLog.LOG_PROTO ) {
         //   TDLog.Log( TDLog.LOG_PROTO, "Proto packet data " + 
-        //     String.format(Locale.ENGLISH, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino ) );
+        //     String.format(Locale.US, " %7.2f %6.1f %6.1f", mDistance, mBearing, mClino ) );
         // }
 
         return DISTOX_PACKET_DATA;

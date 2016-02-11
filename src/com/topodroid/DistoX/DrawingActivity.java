@@ -648,10 +648,10 @@ public class DrawingActivity extends ItemDrawer
 
   // private Button mButtonHelp;
   private int mButtonSize;
-  private Button[] mButton1; // primary
-  private Button[] mButton2; // draw
-  private Button[] mButton3; // edit
-  private Button[] mButton5; // eraser
+  private MyButton[] mButton1; // primary
+  private MyButton[] mButton2; // draw
+  private MyButton[] mButton3; // edit
+  private MyButton[] mButton5; // eraser
   private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
   private int mNrButton3 = 8;          // edit
@@ -819,74 +819,47 @@ public class DrawingActivity extends ItemDrawer
       mListView = (HorizontalListView) findViewById(R.id.listview);
       mButtonSize = mApp.setListViewHeight( mListView );
 
-      mButton1 = new Button[ mNrButton1 ]; // MOVE
+      mButton1 = new MyButton[ mNrButton1 ]; // MOVE
       int off = 0;
       int ic = 0;
       for ( int k=0; k<mNrButton1; ++k ) {
-        mButton1[k] = new Button( this );
-        mButton1[k].setPadding(0,0,0,0);
-        mButton1[k].setOnClickListener( this );
         ic = ( k <3 )? k : off+k;
-        BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], mButtonSize, izons[ ic ] );
-        if ( ic == IC_DOWNLOAD ) {
-          mBMdownload = bm2;
-        } else if ( ic == IC_PLAN ) {
-          mBMplan = bm2;
-        }
+        mButton1[k] = new MyButton( this, this, mButtonSize, izons[ic], 0 );
+        if ( ic == IC_DOWNLOAD ) { mBMdownload = mButton1[k].mBitmap; }
+        else if ( ic == IC_PLAN ) { mBMplan = mButton1[k].mBitmap; }
       }
       mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
-      mBMextend  = mApp.setButtonBackground( null, mButtonSize, izons[IC_EXTEND] ); 
-      mBMdownload_on = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_on );
-      mBMdownload_wait = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_download_wait );
-      mBMleft  = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_left );
-      mBMright = mApp.setButtonBackground( null, mButtonSize, R.drawable.iz_right );
+      mBMextend        = MyButton.getButtonBackground( mApp, mButtonSize, izons[IC_EXTEND] ); 
+      mBMdownload_on   = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_download_on );
+      mBMdownload_wait = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_download_wait );
+      mBMleft          = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_left );
+      mBMright         = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_right );
       setRefAzimuth( mApp.mRefAzimuth, mApp.mFixedExtend );
 
-      mButton2 = new Button[ mNrButton2 ]; // DRAW
+      mButton2 = new MyButton[ mNrButton2 ]; // DRAW
       off = (mNrButton1 - 3); 
       for ( int k=0; k<mNrButton2; ++k ) {
-        mButton2[k] = new Button( this );
-        mButton2[k].setPadding(0,0,0,0);
-        mButton2[k].setOnClickListener( this );
         ic = ( k < 3 )? k : off+k;
-        if ( k == 0 ) {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons_ok[ic] );
-        } else {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton2[k], mButtonSize, izons[ic] );
-          if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = bm2;
-        }
+        mButton2[k] = new MyButton( this, this, mButtonSize, ((k==0)? izons_ok[ic] : izons[ic]), 0 );
+        if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = mButton2[k].mBitmap;
       }
-      mBMcontinue  = mApp.setButtonBackground( null, mButtonSize, izons[IC_CONTINUE] );
+      mBMcontinue  = MyButton.getButtonBackground( mApp, mButtonSize, izons[IC_CONTINUE] );
 
-      mButton3 = new Button[ mNrButton3 ];      // EDIT
+      mButton3 = new MyButton[ mNrButton3 ];      // EDIT
       off = (mNrButton1-3) + (mNrButton2-3); 
       for ( int k=0; k<mNrButton3; ++k ) {
-        mButton3[k] = new Button( this );
-        mButton3[k].setPadding(0,0,0,0);
-        mButton3[k].setOnClickListener( this );
         ic = ( k < 3 )? k : off+k;
-        if ( k == 2 ) {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons_ok[ic] );
-        } else {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton3[k], mButtonSize, izons[ic] );
-          if ( ic == IC_JOIN ) mBMjoin = bm2;
-        }
+        mButton3[k] = new MyButton( this, this, mButtonSize, ( (k==2)? izons_ok[ic] : izons[ic] ), 0 );
+        if ( ic == IC_JOIN ) mBMjoin = mButton3[k].mBitmap;
       }
-      mBMjoin_no = mApp.setButtonBackground( null, mButtonSize, izons[IC_JOIN_NO] );
-      mBMadd     = mApp.setButtonBackground( null, mButtonSize, izons[IC_ADD] );
+      mBMjoin_no = MyButton.getButtonBackground( mApp, mButtonSize, izons[IC_JOIN_NO] );
+      mBMadd     = MyButton.getButtonBackground( mApp, mButtonSize, izons[IC_ADD] );
 
-      mButton5 = new Button[ mNrButton5 ];    // ERASE
+      mButton5 = new MyButton[ mNrButton5 ];    // ERASE
       off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
       for ( int k=0; k<mNrButton5; ++k ) {
-        mButton5[k] = new Button( this );
-        mButton5[k].setPadding(0,0,0,0);
-        mButton5[k].setOnClickListener( this );
         ic = ( k < 3 )? k : off+k;
-        if ( k == 1 ) {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton5[k], mButtonSize, izons_ok[ic] );
-        } else {
-          BitmapDrawable bm2 = mApp.setButtonBackground( mButton5[k], mButtonSize, izons[ic] );
-        }
+        mButton5[k] = new MyButton( this, this, mButtonSize, ((k==1)? izons_ok[ic] : izons[ic] ), 0 );
       }
       if ( ! TDSetting.mLevelOverNormal ) {
         mButton1[2].setVisibility( View.GONE );
@@ -949,7 +922,7 @@ public class DrawingActivity extends ItemDrawer
       mImage = (Button) findViewById( R.id.handle );
       mImage.setOnClickListener( this );
       // mImage.setBackgroundResource( icons00[ IC_MENU ] );
-      mApp.setButtonBackground( mImage, mButtonSize, izons[IC_MENU] );
+      MyButton.setButtonBackground( mApp, mImage, mButtonSize, izons[IC_MENU] );
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter();
       closeMenu();

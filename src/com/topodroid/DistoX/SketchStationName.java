@@ -80,7 +80,7 @@ public class SketchStationName extends SketchPath
   @Override
   public String toTherion()
   {
-    return String.format(Locale.ENGLISH, "point %.2f %.2f %.2f station -name \"%s\"", 
+    return String.format(Locale.US, "point %.2f %.2f %.2f station -name \"%s\"", 
       x*toTherion, -y*toTherion, -z*toTherion, mName );
   }
 }

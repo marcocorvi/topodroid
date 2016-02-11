@@ -167,9 +167,9 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     holder.tvFrom.setText( b.mFrom );
     holder.tvTo.setText( b.mTo );
 
-    holder.tvLength.setText(  String.format(Locale.ENGLISH, "%1$.2f", b.mLength * TDSetting.mUnitLength ) );
-    holder.tvCompass.setText( String.format(Locale.ENGLISH, "%1$.1f", b.mBearing * TDSetting.mUnitAngle ) );
-    holder.tvClino.setText(   String.format(Locale.ENGLISH, "%1$.1f", b.mClino * TDSetting.mUnitAngle ) );
+    holder.tvLength.setText(  String.format(Locale.US, "%1$.2f", b.mLength * TDSetting.mUnitLength ) );
+    holder.tvCompass.setText( String.format(Locale.US, "%1$.1f", b.mBearing * TDSetting.mUnitAngle ) );
+    holder.tvClino.setText(   String.format(Locale.US, "%1$.1f", b.mClino * TDSetting.mUnitAngle ) );
     holder.tvNote.setText( b.toNote() );
 
     holder.tvFrom.setOnClickListener( this );

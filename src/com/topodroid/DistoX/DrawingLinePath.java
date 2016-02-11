@@ -269,7 +269,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     {
       float x = DrawingUtil.sceneToWorldX( pt.mX );
       float y = DrawingUtil.sceneToWorldY( pt.mY );
-      pw.format(Locale.ENGLISH, "%.2f %.2f ", x, y );
+      pw.format(Locale.US, "%.2f %.2f ", x, y );
       if ( b ) { pw.format("B "); b = false; }
     }
     pw.format("\" />\n");

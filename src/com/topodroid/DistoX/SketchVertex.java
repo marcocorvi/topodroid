@@ -35,7 +35,7 @@ class SketchVertex extends Vector
 
   void toTherion( PrintWriter pw )
   {
-    pw.format(Locale.ENGLISH, "  %d %.4f %.4f %.4f\n", index, x, -y, -z );
+    pw.format(Locale.US, "  %d %.4f %.4f %.4f\n", index, x, -y, -z );
   }
 }
 

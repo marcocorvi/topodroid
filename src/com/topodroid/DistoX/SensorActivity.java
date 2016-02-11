@@ -217,15 +217,15 @@ public class SensorActivity extends Activity
           case Sensor.TYPE_TEMPERATURE:
           case Sensor.TYPE_PRESSURE:
           // case Sensor.TYPE_RELATIVE_HUMIDITY:
-            value = String.format(Locale.ENGLISH, "%.2f", mValues[0] );
+            value = String.format(Locale.US, "%.2f", mValues[0] );
             break;
           case Sensor.TYPE_MAGNETIC_FIELD:
           case Sensor.TYPE_ORIENTATION:
           // case Sensor.TYPE_ACCELEROMETER:
-            value = String.format(Locale.ENGLISH, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
+            value = String.format(Locale.US, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
             break;
           default:
-            value = String.format(Locale.ENGLISH, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
+            value = String.format(Locale.US, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
             break;
         }
         mETvalue.setText( value );

@@ -3002,7 +3002,7 @@ public class DataHelper extends DataSetObservable
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\" );\n",
                      SURVEY_TABLE,
                      sid,
@@ -3025,7 +3025,7 @@ public class DataHelper extends DataSetObservable
                                    null, null, null );
        if (cursor.moveToFirst()) {
          do {
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\" );\n",
                      PHOTO_TABLE,
                      sid,
@@ -3046,7 +3046,7 @@ public class DataHelper extends DataSetObservable
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\" );\n",
                      PLOT_TABLE,
                      sid,
@@ -3074,7 +3074,7 @@ public class DataHelper extends DataSetObservable
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, \"%s\", %d, \"%s\", \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f );\n",
                      SKETCH_TABLE,
                      sid,
@@ -3113,7 +3113,7 @@ public class DataHelper extends DataSetObservable
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f %.2f %.2f, %d, %d, %d, %d, \"%s\", %d );\n",
                      SHOT_TABLE,
                      sid,
@@ -3146,7 +3146,7 @@ public class DataHelper extends DataSetObservable
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d );\n",
                      FIXED_TABLE,
                      sid,
@@ -3171,7 +3171,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            // STATION_TABLE does not have field "id"
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, 0, \"%s\", \"%s\" );\n",
                      STATION_TABLE,
                      sid, 
@@ -3189,7 +3189,7 @@ public class DataHelper extends DataSetObservable
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
-           pw.format(Locale.ENGLISH,
+           pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\" );\n",
                      FIXED_TABLE,
                      sid,

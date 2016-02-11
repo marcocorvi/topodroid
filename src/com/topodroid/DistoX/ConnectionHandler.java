@@ -434,12 +434,12 @@ class ConnectionHandler extends Handler
 
   public void onUpdateSurveyName( long id, String name )
   {
-    enqueue( DataListener.SURVEY_NAME, String.format(Locale.ENGLISH, "%s|", name ) );
+    enqueue( DataListener.SURVEY_NAME, String.format(Locale.US, "%s|", name ) );
   }
 
   public void onUpdateSurveyInfo( long id, String date, String team, double decl, String comment, String station ) 
   {
-    enqueue( DataListener.SURVEY_INFO, String.format(Locale.ENGLISH, "%s|%s|%.2f|%s|%s|",
+    enqueue( DataListener.SURVEY_INFO, String.format(Locale.US, "%s|%s|%.2f|%s|%s|",
       date, team, decl, comment, station ) );
   }
 
@@ -460,7 +460,7 @@ class ConnectionHandler extends Handler
 
   public void onUpdateSurveyDeclination( long id, double decl )
   {
-    enqueue( DataListener.SURVEY_DECL, String.format(Locale.ENGLISH, "%.2f|", decl ) );
+    enqueue( DataListener.SURVEY_DECL, String.format(Locale.US, "%.2f|", decl ) );
   }
 
   // -------------------------------------------------------------------------
@@ -506,7 +506,7 @@ class ConnectionHandler extends Handler
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double roll ) 
   {
     enqueue( DataListener.SHOT_AMDR, 
-      String.format(Locale.ENGLISH, "%d|%d|%.2f|%.2f|%.2f|%.2f|", (int)sid, (int)id, acc, mag, dip, roll ) );
+      String.format(Locale.US, "%d|%d|%.2f|%.2f|%.2f|%.2f|", (int)sid, (int)id, acc, mag, dip, roll ) );
   }
 
   public void onDeleteShot( long id, long sid )
@@ -524,14 +524,14 @@ class ConnectionHandler extends Handler
                           long extend, long flag, long leg, long status, int shot_type, String comment ) 
   {
     enqueue( DataListener.SHOT_INSERT, 
-      String.format(Locale.ENGLISH, "%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|", 
+      String.format(Locale.US, "%d|%d|%s|%s|%.2f|%.1f|%.1f|%.1f|%d|%d|%d|%d|%d|%s|", 
       (int)sid, (int)id, from, to, d, b, c, r, (int)extend, (int)flag, (int)leg, (int)status, shot_type, comment ) );
   }
 
   public void onInsertShotAt( long sid, long at, double d, double b, double c, double r, long e, int t ) 
   {
     enqueue( DataListener.SHOT_INSERTAT, 
-      String.format(Locale.ENGLISH, "%d|%d||%.2f|%.1f|%.1f|%.1f|%d|%d", (int)sid, (int)at, d, b, c, r, (int)e, t ) );
+      String.format(Locale.US, "%d|%d||%.2f|%.1f|%.1f|%.1f|%d|%d", (int)sid, (int)at, d, b, c, r, (int)e, t ) );
   }
 
   // public void transferShots( long sid, long old_sid, long old_id ) { }
@@ -547,7 +547,7 @@ class ConnectionHandler extends Handler
                             String hide ) 
   {
     enqueue( DataListener.PLOT_INSERT, 
-      String.format(Locale.ENGLISH, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|%s|",
+      String.format(Locale.US, "%d|%d|%s|%d|%d|%s|%s|%.2f|%.2f|%.2f|%.2f|%.2f|%s|",
       (int)sid, (int)id, name, (int)type, (int)status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide ) );
   }
 

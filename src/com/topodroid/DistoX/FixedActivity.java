@@ -92,7 +92,7 @@ public class FixedActivity extends Activity
   private FixedInfo mSaveFixed;
   private int mSavePos;
 
-  private Button[] mButton1;
+  private MyButton[] mButton1;
   private int mNrButton1 = 0;
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
@@ -129,12 +129,9 @@ public class FixedActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
     mNrButton1 = 3;
-    mButton1 = new Button[ mNrButton1 ];
+    mButton1 = new MyButton[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new Button( mContext );
-      mButton1[k].setPadding(0,0,0,0);
-      mButton1[k].setOnClickListener( this );
-      mApp.setButtonBackground( mButton1[k], size, izons[k] );
+      mButton1[k] = new MyButton( mContext, this, size, izons[k], 0 );
     }
     mButtonView1 = new HorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -143,7 +140,7 @@ public class FixedActivity extends Activity
     // mImage = (Button) findViewById( R.id.handle );
     // mImage.setOnClickListener( this );
     // // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    // mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
+    // MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
     // mMenu = (ListView) findViewById( R.id.menu );
     // setMenuAdapter();
     // closeMenu();
@@ -265,13 +262,13 @@ public class FixedActivity extends Activity
 
   public void onActivityResult( int reqCode, int resCode, Intent intent )
   {
-    mApp.resetLocale();
+    // mApp.resetLocale();
     if ( resCode == RESULT_OK ) {
       if ( reqCode == CRS_CONVERSION_REQUEST ) {
         if ( mFixedDialog != null ) {
           Bundle bundle = intent.getExtras();
           String cs = bundle.getString( "cs_to" );
-          String title = String.format(Locale.ENGLISH, "%.2f %.2f %.2f",
+          String title = String.format(Locale.US, "%.2f %.2f %.2f",
              bundle.getDouble( "longitude"),
              bundle.getDouble( "latitude"),
              bundle.getDouble( "altitude") );

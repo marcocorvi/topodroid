@@ -100,7 +100,7 @@ public class UndeleteDialog extends MyDialog
     }
     for ( DistoXDBlock b : shots ) {
       mArrayAdapter.add( 
-        String.format(Locale.ENGLISH, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
+        String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
     }
     for ( PlotInfo p : plots ) {
       if ( p.type == PlotInfo.PLOT_PLAN ) {

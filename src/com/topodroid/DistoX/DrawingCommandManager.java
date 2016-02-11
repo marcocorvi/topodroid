@@ -1949,7 +1949,7 @@ public class DrawingCommandManager
         //   for ( LinePoint pt : pts ) {
         //     float x = DrawingActivity.sceneToWorldX( pt.mX );
         //     float y = DrawingActivity.sceneToWorldY( pt.mY );
-        //     pw.format(Locale.ENGLISH, "%.2f %.2f ", x, y );
+        //     pw.format(Locale.US, "%.2f %.2f ", x, y );
         //     if ( b ) { pw.format("B "); b = false; }
         //   }
         //   pw.format("\" />\n");

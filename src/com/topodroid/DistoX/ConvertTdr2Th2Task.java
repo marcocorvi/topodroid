@@ -98,7 +98,7 @@ class ConvertTdr2Th2Task extends AsyncTask<Intent,Void,Boolean>
               }
               if ( bbox.left > x || bbox.right  < x ) continue;
               if ( bbox.top  > y || bbox.bottom < y ) continue;
-              bw.write( String.format(Locale.ENGLISH,
+              bw.write( String.format(Locale.US,
                            "point %.2f %.2f station -name \"%s\"\n", x*toTherion, -y*toTherion, st.name ) );
             }
           }

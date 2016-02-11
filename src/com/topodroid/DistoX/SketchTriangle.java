@@ -223,7 +223,7 @@ class SketchTriangle
 
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
-    // pw.format(Locale.ENGLISH, "T %.2f %.2f  %.2f %.2f  %.2f %.2f A %.2f %.2f %.2f",
+    // pw.format(Locale.US, "T %.2f %.2f  %.2f %.2f  %.2f %.2f A %.2f %.2f %.2f",
     //     p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, a1, a2, a3 );
     // Log.v( "DistoX", sw.getBuffer().toString() );
 

@@ -97,7 +97,7 @@ PTxsection_element::printTherion( FILE * fp, int x0, int y0, int scale,
    double x =   XTHERION_FACTOR * (double)(_pos.x() - x0)/1000.0;
    double y = - XTHERION_FACTOR * (double)(_pos.y() - y0)/1000.0;
    std::string station = _station.toString();
-   fprintf(fp, "    point %.3f %.3f section -scrap station_%s\n",  // Locale ENGLISH
+   fprintf(fp, "    point %.3f %.3f section -scrap station_%s\n",  // Locale.US
      x, y, station.c_str() );
 }
 

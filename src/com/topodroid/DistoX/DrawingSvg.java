@@ -131,13 +131,13 @@ class DrawingSvg
                 float y  = DrawingUtil.toSceneY( f.s );
                 float x1 = DrawingUtil.toSceneX( t.e );
                 float y1 = DrawingUtil.toSceneY( t.s );
-                pw4.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
+                pw4.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
                 float x  = DrawingUtil.toSceneX( f.h );
                 float y  = DrawingUtil.toSceneY( f.v );
                 float x1 = DrawingUtil.toSceneX( t.h );
                 float y1 = DrawingUtil.toSceneY( t.v );
-                pw4.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
+                pw4.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
               }
             // }
             out.write( sw4.getBuffer().toString() );
@@ -158,12 +158,12 @@ class DrawingSvg
                 float y = DrawingUtil.toSceneY( f.s );
                 float de =   dh * FloatMath.sin( blk.mBearing * grad2rad);
                 float ds = - dh * FloatMath.cos( blk.mBearing * grad2rad);
-                pw41.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x + de, (y+ds) );
+                pw41.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x + de, (y+ds) );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
                 float x = DrawingUtil.toSceneX( f.h );
                 float y = DrawingUtil.toSceneY( f.v );
                 float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
-                pw41.format(Locale.ENGLISH, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x+dh*blk.mExtend, (y+dv) );
+                pw41.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x+dh*blk.mExtend, (y+dv) );
               }
             // }
             out.write( sw41.getBuffer().toString() );
@@ -188,7 +188,7 @@ class DrawingSvg
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
             DrawingStationPath st = (DrawingStationPath)path;
             pw5.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
-            pw5.format(Locale.ENGLISH, " x=\"%.0f\" y=\"%.0f\">", st.cx, st.cy );
+            pw5.format(Locale.US, " x=\"%.0f\" y=\"%.0f\">", st.cx, st.cy );
             pw5.format("%s</text>\n", st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath) path;
@@ -201,18 +201,18 @@ class DrawingSvg
             else if ( th_name.equals( "ceiling-meander" ) ) pw5.format(" stroke-dasharray=\"6 2 \"");
             pw5.format(" d=\"");
             LinePoint p = line.mFirst;
-            pw5.format(Locale.ENGLISH, "M %.0f %.0f", p.mX, p.mY );
+            pw5.format(Locale.US, "M %.0f %.0f", p.mX, p.mY );
             for ( p = p.mNext; p != null; p = p.mNext ) { 
-              pw5.format(Locale.ENGLISH, " L %.0f %.0f", p.mX, p.mY );
+              pw5.format(Locale.US, " L %.0f %.0f", p.mX, p.mY );
             }
             pw5.format("\" />\n");
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;
             pw5.format("  <path stroke=\"black\" stroke-width=\"1\" fill=\"%s\" fill-opacity=\"0.5\" d=\"", color_str );
             LinePoint p = area.mFirst;
-            pw5.format(Locale.ENGLISH, "M %.0f %.0f", p.mX, p.mY );
+            pw5.format(Locale.US, "M %.0f %.0f", p.mX, p.mY );
             for ( p = p.mNext; p != null; p = p.mNext ) { 
-              pw5.format(Locale.ENGLISH, " L %.0f %.0f", p.mX, p.mY );
+              pw5.format(Locale.US, " L %.0f %.0f", p.mX, p.mY );
             }
             pw5.format(" Z\" />\n");
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
@@ -223,24 +223,24 @@ class DrawingSvg
             pw5.format("<!-- point %s -->\n", name );
             if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
-              pw5.format(Locale.ENGLISH, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
+              pw5.format(Locale.US, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
               pw5.format(" style=\"fill:black;stroke:black;stroke-width:0.3\">%s</text>\n", label.mText );
             // } else if ( name.equals("continuation") ) {
-            //   pw5.format(Locale.ENGLISH, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
+            //   pw5.format(Locale.US, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
             //   pw5.format(" style=\"fill:none;stroke:black;stroke-width:0.3\">\?</text>\n" );
             // } else if ( name.equals("danger") ) {
-            //   pw5.format(Locale.ENGLISH, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
+            //   pw5.format(Locale.US, "<text x=\"%.0f\" y=\".0f\" ", point.cx, -point.cy );
             //   pw5.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
             } else {
               SymbolPoint sp = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex( idx );
               if ( sp != null ) {
-                pw5.format(Locale.ENGLISH, "<g transform=\"translate(%.0f,%.0f),scale(10),rotate(%.0f)\" \n", 
+                pw5.format(Locale.US, "<g transform=\"translate(%.0f,%.0f),scale(10),rotate(%.0f)\" \n", 
                   point.cx, point.cy, point.mOrientation );
                 pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
                 pw5.format("%s\n", sp.mSvg );
                 pw5.format("</g>\n");
               } else {
-                pw5.format(Locale.ENGLISH, "<circle cx=\"%.0f\" cy=\".0f\" r=\"10\" ", point.cx, -point.cy );
+                pw5.format(Locale.US, "<circle cx=\"%.0f\" cy=\".0f\" r=\"10\" ", point.cx, -point.cy );
                 pw5.format(" style=\"fill:none;stroke:black;stroke-width:0.1\" />\n");
               }
             }

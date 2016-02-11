@@ -102,7 +102,7 @@ class DrawingDxf
 
   static void printFloat(  PrintWriter pw, int code, float val )
   {
-    pw.printf(Locale.ENGLISH, "  %d\n%.2f\n", code, val );
+    pw.printf(Locale.US, "  %d\n%.2f\n", code, val );
   }
 
   static void writeInt(  BufferedWriter out, int code, int val ) throws IOException
@@ -117,17 +117,17 @@ class DrawingDxf
 
   static void printXY( PrintWriter pw, float x, float y )
   {
-    pw.printf(Locale.ENGLISH, "  10\n%.2f\n  20\n%.2f\n", x, y );
+    pw.printf(Locale.US, "  10\n%.2f\n  20\n%.2f\n", x, y );
   }
 
   static void printXYZ( PrintWriter pw, float x, float y, float z )
   {
-    pw.printf(Locale.ENGLISH, "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n", x, y, z );
+    pw.printf(Locale.US, "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n", x, y, z );
   }
 
   static void printXYZ1( PrintWriter pw, float x, float y, float z )
   {
-    pw.printf(Locale.ENGLISH, "  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n", x, y, z );
+    pw.printf(Locale.US, "  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n", x, y, z );
   }
 
 

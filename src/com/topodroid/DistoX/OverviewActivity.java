@@ -321,7 +321,7 @@ public class OverviewActivity extends ItemDrawer
     // ------------------------------------------------------------------------------
     // BUTTON BAR
   
-    private Button[] mButton1; // primary
+    private MyButton[] mButton1; // primary
     private int mNrButton1 = 2;          // main-primary
     HorizontalListView mListView;
     HorizontalButtonView mButtonView1;
@@ -403,20 +403,15 @@ public class OverviewActivity extends ItemDrawer
       mListView = (HorizontalListView) findViewById(R.id.listview);
       int size = mApp.setListViewHeight( mListView );
 
-      mButton1 = new Button[ mNrButton1 ];
+      mButton1 = new MyButton[ mNrButton1 ];
       for ( int k=0; k<mNrButton1; ++k ) {
-        mButton1[k] = new Button( this );
-        mButton1[k].setPadding(0,0,0,0);
-        mButton1[k].setOnClickListener( this );
-        BitmapDrawable bm = mApp.setButtonBackground( mButton1[k], size, izons[k] );
-        if ( k == 0 ) { // IC_SELECT = 0;
-          mBMselect = bm;
+        mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
+        if ( k == 0 ) { mBMselect = mButton1[k].mBitmap; }
         // FIXME_OVER } else if ( k == 2 ) { // IC_PLAN = 2;
         // FIXME_OVER   mBMplan = bm;
-        }
       }
-      mBMselectOn = mApp.setButtonBackground( null, size, R.drawable.iz_measure_on );
-      // FIXME_OVER mBMextend  = mApp.setButtonBackground( null, mButtonSize, izons[IC_EXTEND] ); 
+      mBMselectOn = MyButton.getButtonBackground( mApp, size, R.drawable.iz_measure_on );
+      // FIXME_OVER mBMextend  = MyButton.getButtonBackground( mApp, mButtonSize, izons[IC_EXTEND] ); 
 
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
@@ -437,7 +432,7 @@ public class OverviewActivity extends ItemDrawer
 
       mImage = (Button) findViewById( R.id.handle );
       mImage.setOnClickListener( this );
-      mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
+      MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter();
       closeMenu();

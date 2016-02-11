@@ -42,9 +42,8 @@ class HelpEntry
       mButton.setBackgroundColor( 0xff000000 );
       mButton.setTextColor( 0xff33ccff ); // FIXME color/menu_foreground
     } else {
-      // mButton.setBackgroundResource( icon );
       int size = TopoDroidApp.getDefaultSize( context );
-      TopoDroidApp.setButtonBackground( context, mButton, size, icon );
+      MyButton.setButtonBackground( context, mButton, size, icon );
     }
     mTextView.setText( text );
 

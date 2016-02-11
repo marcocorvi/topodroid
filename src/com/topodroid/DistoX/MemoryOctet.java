@@ -97,7 +97,7 @@ class MemoryOctet
           double dd = toDistance( data[0], data[1], data[2] );
           double bb = toAzimuth( data[3], data[4] );
           double cc = toClino( data[5], data[6] );
-          pw.format(Locale.ENGLISH, "%4d %c %.2f %.1f %.1f", index, hot? 'D' : 'd', dd, bb, cc );
+          pw.format(Locale.US, "%4d %c %.2f %.1f %.1f", index, hot? 'D' : 'd', dd, bb, cc );
           break;
         case 0x02:
         case 0x03:
@@ -119,7 +119,7 @@ class MemoryOctet
           double dip = toInt( data[5], data[6] );
           dip = dip * 90.0  / 16384.0; // 90/0x4000;
           if ( dip >= 32768 ) { dip = (65536 - dip) * (-90.0) / 16384.0; }
-          pw.format(Locale.ENGLISH, "%4d %c %d %d %.2f %02x", index, hot? 'V' : 'v', acc, mag, dip, data[7] );
+          pw.format(Locale.US, "%4d %c %d %d %.2f %02x", index, hot? 'V' : 'v', acc, mag, dip, data[7] );
           break;
         default:
           printHexString( pw );

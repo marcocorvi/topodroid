@@ -61,11 +61,12 @@ public class UserManualActivity extends Activity
 
   private void getManualFromWeb()
   {
-    if ( TopoDroidApp.mManual.startsWith("http") ) {
+    String manual = getResources().getString( R.string.topodroid_man );
+    if ( manual.startsWith("http") ) {
       try {
-        startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( TopoDroidApp.mManual )));
+        startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( manual )));
       } catch ( ActivityNotFoundException e ) {
-        Toast.makeText( this, "Cannot retrieve user manual from the web", Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, R.string.no_manual, Toast.LENGTH_SHORT ).show();
       }
     }
   }

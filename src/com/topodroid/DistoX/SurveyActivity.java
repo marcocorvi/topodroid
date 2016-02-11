@@ -108,8 +108,7 @@ public class SurveyActivity extends Activity
 
   MyDateSetListener mDateListener;
 
-  // private Button mButtonHelp;
-  private Button[] mButton1;
+  private MyButton[] mButton1;
   private int mNrButton1 = 0;
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
@@ -207,13 +206,9 @@ public class SurveyActivity extends Activity
 
     mNrButton1 = TDSetting.mLevelOverNormal ? 6 
                : TDSetting.mLevelOverBasic ? 3 : 2;
-    mButton1 = new Button[ mNrButton1 ];
+    mButton1 = new MyButton[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new Button( this );
-      mButton1[k].setPadding(0,0,0,0);
-      mButton1[k].setOnClickListener( this );
-      // mButton1[k].setBackgroundResource( icons00[k] );
-      mApp.setButtonBackground( mButton1[k], size, izons[k] );
+      mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
     }
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
@@ -222,7 +217,7 @@ public class SurveyActivity extends Activity
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
+    MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
     closeMenu();
@@ -241,7 +236,7 @@ public class SurveyActivity extends Activity
   {
     super.onResume();
     float decl = mApp.mData.getSurveyDeclination( mApp.mSID );
-    mEditDecl.setText( String.format(Locale.ENGLISH, "%.4f", decl ) );
+    mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
   }
 
   // ------------------------------------------
@@ -366,7 +361,7 @@ public class SurveyActivity extends Activity
 
   void setDeclination( float decl )
   {
-    mEditDecl.setText( String.format(Locale.ENGLISH, "%.4f", decl ) );
+    mEditDecl.setText( String.format(Locale.US, "%.4f", decl ) );
     mApp.mData.updateSurveyDeclination( mApp.mSID, decl, true );
   }
 

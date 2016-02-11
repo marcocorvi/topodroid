@@ -244,12 +244,12 @@ public class DrawingPointPath extends DrawingPath
     pw.format("&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot; &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;[]&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xml:space=&quot;preserve&quot; style=&quot;shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;&lt;defs&gt;&lt;style type=&quot;text/css&quot;&gt;&lt;![CDATA[ .str0 {stroke:#1F1A17;stroke-width:0.2} .fil0 {fill:none} ]]&gt;&lt;/style&gt;&lt;/defs&gt;&lt;g id=&quot;Livello_%d&quot;&gt;", layer );
     pw.format("%s", csx );
     pw.format("&lt;/g&gt;&lt;/svg&gt;\" ");
-    pw.format(Locale.ENGLISH, "dataformat=\"0\" signsize=\"%d\" angle=\"%.2f\" >\n", size, mOrientation );
+    pw.format(Locale.US, "dataformat=\"0\" signsize=\"%d\" angle=\"%.2f\" >\n", size, mOrientation );
     pw.format("  <pen type=\"10\" />\n");
     pw.format("  <brush type=\"7\" />\n");
     float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
     float y = DrawingUtil.sceneToWorldY( cy );
-    pw.format(Locale.ENGLISH, " <points data=\"%.2f %.2f \" />\n", x, y );
+    pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <datarow>\n");
     pw.format("  </datarow>\n");
     pw.format("</item>\n");
@@ -263,11 +263,11 @@ public class DrawingPointPath extends DrawingPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
 
-    pw.format(Locale.ENGLISH, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
+    pw.format(Locale.US, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
                               DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
     if ( mOrientation != 0.0 ) {
       // TDLog.Log( TDLog.LOG_PATH, "point.toTherion type " + mPointType + " orientation " + mOrientation );
-      pw.format(Locale.ENGLISH, " -orientation %.2f", mOrientation);
+      pw.format(Locale.US, " -orientation %.2f", mOrientation);
     }
 
     toTherionOptions( pw );

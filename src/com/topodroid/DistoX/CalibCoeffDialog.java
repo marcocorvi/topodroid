@@ -79,18 +79,18 @@ public class CalibCoeffDialog extends MyDialog
     mApp     = app;
     mCoeff   = coeff;
 
-    bg0 = String.format(Locale.ENGLISH, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
-    agx = String.format(Locale.ENGLISH, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z );
-    agy = String.format(Locale.ENGLISH, "aGy  %8.4f %8.4f %8.4f", ag.y.x, ag.y.y, ag.y.z );
-    agz = String.format(Locale.ENGLISH, "aGz  %8.4f %8.4f %8.4f", ag.z.x, ag.z.y, ag.z.z );
+    bg0 = String.format(Locale.US, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
+    agx = String.format(Locale.US, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z );
+    agy = String.format(Locale.US, "aGy  %8.4f %8.4f %8.4f", ag.y.x, ag.y.y, ag.y.z );
+    agz = String.format(Locale.US, "aGz  %8.4f %8.4f %8.4f", ag.z.x, ag.z.y, ag.z.z );
 
-    bm0 = String.format(Locale.ENGLISH, "bM   %8.4f %8.4f %8.4f", bm.x, bm.y, bm.z );
-    amx = String.format(Locale.ENGLISH, "aMx  %8.4f %8.4f %8.4f", am.x.x, am.x.y, am.x.z );
-    amy = String.format(Locale.ENGLISH, "aMy  %8.4f %8.4f %8.4f", am.y.x, am.y.y, am.y.z );
-    amz = String.format(Locale.ENGLISH, "aMz  %8.4f %8.4f %8.4f", am.z.x, am.z.y, am.z.z );
+    bm0 = String.format(Locale.US, "bM   %8.4f %8.4f %8.4f", bm.x, bm.y, bm.z );
+    amx = String.format(Locale.US, "aMx  %8.4f %8.4f %8.4f", am.x.x, am.x.y, am.x.z );
+    amy = String.format(Locale.US, "aMy  %8.4f %8.4f %8.4f", am.y.x, am.y.y, am.y.z );
+    amz = String.format(Locale.US, "aMz  %8.4f %8.4f %8.4f", am.z.x, am.z.y, am.z.z );
 
     if ( nl != null ) {
-      nlx = String.format(Locale.ENGLISH, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z );
+      nlx = String.format(Locale.US, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z );
     } else {
       nlx = new String("");
     }

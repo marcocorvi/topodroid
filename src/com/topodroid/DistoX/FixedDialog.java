@@ -101,7 +101,7 @@ public class FixedDialog extends MyDialog
       int month = TopoDroidUtil.month();
       int day = TopoDroidUtil.day();
       MagElement elem = mWMM.computeMagElement( mFxd.lat, mFxd.lng, mFxd.alt, year, month, day );
-      mTVdecl.setText( String.format(Locale.ENGLISH, "%.4f", elem.Decl ) );
+      mTVdecl.setText( String.format(Locale.US, "%.4f", elem.Decl ) );
     }
 
     mButtonDecl = (CheckBox) findViewById( R.id.fix_save_decl );
@@ -119,10 +119,10 @@ public class FixedDialog extends MyDialog
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
 
-    mTVlng.setText( String.format( Locale.ENGLISH, "%.6f", mFxd.lng ) );
-    mTVlat.setText( String.format( Locale.ENGLISH, "%.6f", mFxd.lat ) );
-    mTValt.setText( String.format( Locale.ENGLISH, "%.0f", mFxd.alt ) );
-    mTVasl.setText( String.format( Locale.ENGLISH, "%.0f", mFxd.asl ) );
+    mTVlng.setText( String.format( Locale.US, "%.6f", mFxd.lng ) );
+    mTVlat.setText( String.format( Locale.US, "%.6f", mFxd.lat ) );
+    mTValt.setText( String.format( Locale.US, "%.0f", mFxd.alt ) );
+    mTVasl.setText( String.format( Locale.US, "%.0f", mFxd.asl ) );
     
     mButtonDrop.setOnClickListener( this );
     mButtonView.setOnClickListener( this );

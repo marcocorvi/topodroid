@@ -1386,7 +1386,7 @@ class DistoXNum
     float dl = TDMath.sqrt( dh + dv*dv );
     dh = TDMath.sqrt( dh );
     float error = (dl*100) / len;
-    return String.format(Locale.ENGLISH, "%s-%s %.2f [%.2f %.2f] %.2f%%", fr.name, at.name,  dl, dh, dv, error );
+    return String.format(Locale.US, "%s-%s %.2f [%.2f %.2f] %.2f%%", fr.name, at.name,  dl, dh, dv, error );
   }
 }
 

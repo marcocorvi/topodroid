@@ -245,7 +245,7 @@ public class DistoXDBlock
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     if ( show_id ) pw.format("%d ", mId );
-    pw.format(Locale.ENGLISH, "<%s-%s> %.2f %.1f %.1f [%c]",
+    pw.format(Locale.US, "<%s-%s> %.2f %.1f %.1f [%c]",
       mFrom, mTo,
       mLength*ul, mBearing*ua, mClino*ua, mExtendTag[ (int)(mExtend) + 1 ] );
     formatFlag( pw );
@@ -270,27 +270,27 @@ public class DistoXDBlock
   {
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
-    return String.format(Locale.ENGLISH, fmt, mLength*ul, mBearing*ua, mClino*ua );
+    return String.format(Locale.US, fmt, mLength*ul, mBearing*ua, mClino*ua );
   }
 
   public String distanceString()
   {
-    return String.format(Locale.ENGLISH, "%.2f", mLength * TDSetting.mUnitLength );
+    return String.format(Locale.US, "%.2f", mLength * TDSetting.mUnitLength );
   }
 
   public String bearingString()
   {
-    return String.format(Locale.ENGLISH, "%.1f", mBearing * TDSetting.mUnitAngle );
+    return String.format(Locale.US, "%.1f", mBearing * TDSetting.mUnitAngle );
   }
 
   public String clinoString()
   {
-    return String.format(Locale.ENGLISH, "%.1f", mClino * TDSetting.mUnitAngle );
+    return String.format(Locale.US, "%.1f", mClino * TDSetting.mUnitAngle );
   }
 
   public String extraString()
   {
-    return String.format(Locale.ENGLISH, "A %.2f  M %.1f  D %.1f", 
+    return String.format(Locale.US, "A %.2f  M %.1f  D %.1f", 
       TopoDroidApp.deltaAcc( mAcceleration ), 
       TopoDroidApp.deltaMag( mMagnetic ), 
       TopoDroidApp.deltaDip( mDip ) * TDSetting.mUnitAngle

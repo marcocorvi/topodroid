@@ -949,7 +949,7 @@ public class DeviceHelper extends DataSetObservable
    //     //                      null, null, null );
    //     // if (cursor.moveToFirst()) {
    //     //   do {
-   //     //     pw.format(Locale.ENGLISH,
+   //     //     pw.format(Locale.US,
    //     //               "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\" );\n",
    //     //               FIXED_TABLE,
    //     //               sid,

@@ -263,7 +263,7 @@ public class Vector
   // Y and Z are reversed in Therion
   void toTherion( PrintWriter pw )
   {
-    pw.format(Locale.ENGLISH, "  %.2f %.2f %.2f\n", x, -y, -z );
+    pw.format(Locale.US, "  %.2f %.2f %.2f\n", x, -y, -z );
   }
 
   /** The plane of a path is: a0*x + b0*y + c0*z = 1

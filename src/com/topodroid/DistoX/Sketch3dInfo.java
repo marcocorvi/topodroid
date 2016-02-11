@@ -153,12 +153,12 @@ Nx=(-ca,-sa,0) | ,'
 
   String getDirectionString()
   {
-    return String.format(Locale.ENGLISH, "%.0f %.0f", azimuth, clino ); // can skip Locale
+    return String.format(Locale.US, "%.0f %.0f", azimuth, clino ); // can skip Locale
   }
 
   String getShotString()
   { 
-    return String.format(Locale.ENGLISH, "%s-%s %.0f %.0f", st1, st2, shotBearing, shotClino ); // can skip Locale
+    return String.format(Locale.US, "%s-%s %.0f %.0f", st1, st2, shotBearing, shotClino ); // can skip Locale
   }
   
   void setStations( NumStation s1, NumStation s2, DistoXDBlock blk, boolean set_origin )

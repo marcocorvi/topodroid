@@ -548,7 +548,7 @@ public class Calibration
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.Log( TDLog.LOG_CALIB,
-      msg + String.format(Locale.ENGLISH,
+      msg + String.format(Locale.US,
        " M: %8.4f %8.4f %8.4f V: %8.4f\n    %8.4f %8.4f %8.4f   %8.4f\n    %8.4f %8.4f %8.4f   %8.4f",
        m1.x.x, m1.x.y, m1.x.z, v1.x, 
        m1.y.x, m1.y.y, m1.y.z, v1.y, 
@@ -559,7 +559,7 @@ public class Calibration
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.Log( TDLog.LOG_CALIB,
-      msg + String.format(Locale.ENGLISH,
+      msg + String.format(Locale.US,
       " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ) ); 
   }
 
@@ -567,7 +567,7 @@ public class Calibration
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.Log( TDLog.LOG_CALIB, 
-      msg + String.format(Locale.ENGLISH, " S %8.4f C %8.4f", s, c ) ); 
+      msg + String.format(Locale.US, " S %8.4f C %8.4f", s, c ) ); 
   }
 
 /* ============================================================ */

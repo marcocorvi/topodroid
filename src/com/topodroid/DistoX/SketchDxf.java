@@ -32,12 +32,12 @@ class SketchDxf
     out.printf("0\nSECTION\n2\nHEADER\n");
       out.printf("9\n$ACADVER\n1\nAC1012\n"); // was AC1006
       out.printf("9\n$INSBASE\n");
-      out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", 0.0, 0.0, 0.0 ); // FIXME (0,0,0)
+      out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", 0.0, 0.0, 0.0 ); // FIXME (0,0,0)
       out.printf("9\n$EXTMIN\n");
-      out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n",
+      out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n",
         num.surveyEmin(), num.surveySmin(), num.surveyVmin() );
       out.printf("9\n$EXTMAX\n");
-      out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n",
+      out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n",
         num.surveyEmax(), num.surveySmax(), num.surveyVmax() );
     out.printf("0\nENDSEC\n");
     
@@ -86,22 +86,22 @@ class SketchDxf
         NumStation f = sh.from;
         NumStation t = sh.to;
         out.printf("0\nLINE\n8\nLEG\n");
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, f.s, f.v );
-        out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", t.e, t.s, t.v );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, f.s, f.v );
+        out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", t.e, t.s, t.v );
       }
 
       for ( NumSplay sh : num.getSplays() ) {
         NumStation f = sh.from;
         out.printf("0\nLINE\n8\nSPLAY\n");
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, f.s, f.v );
-        out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", sh.e, sh.s, sh.v );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, f.s, f.v );
+        out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", sh.e, sh.s, sh.v );
       }
 
       for ( NumStation st : num.getStations() ) {
         // FIXME station scale is 0.3
         out.printf("0\nTEXT\n8\nSTATION\n");
         out.printf("1\n%s\n", st.name );
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", st.e, st.s, st.v );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", st.e, st.s, st.v );
       }
 
       for ( SketchPath path : model.mPaths ) {
@@ -115,7 +115,7 @@ class SketchDxf
           out.printf("0\nPOLYLINE\n8\n%s\n70\n%d\n66\n1\n", layer, flag );
           for ( Vector p : points ) {
             out.printf("0\nVERTEX\n8\n%s\n", layer );
-            out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", p.x, p.y, p.z );
+            out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", p.x, p.y, p.z );
           }
           out.printf("0\nSEQEND\n");
         } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -125,14 +125,14 @@ class SketchDxf
           out.printf("0\nHATCH\n8\nAREA\n91\n1\n" );
           out.printf("93\n%d\n", points.size() );
           for ( Vector p : points ) {
-            out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", p.x, p.y, p.z );
+            out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", p.x, p.y, p.z );
           }
         } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
           // FIXME point scale factor is 0.3
           SketchPointPath point = (SketchPointPath) path;
           int idx = 1 + point.mThType;
           out.printf("0\nINSERT\n8\nPOINT\n2\n%d\n41\n0.3\n42\n0.3\n", idx);
-          out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", point.mXpos, point.mYpos, point.mZpos );
+          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", point.mXpos, point.mYpos, point.mZpos );
         }
       }
     
@@ -143,8 +143,8 @@ class SketchDxf
         //     SketchVertex v1 = vts.get( s.v1 );
         //     SketchVertex v2 = vts.get( s.v2 );
         //     out.printf("0\nLINE\n8\nBORDER\n" );
-        //     out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
-        //     out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
+        //     out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
+        //     out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
         //   }
         // }
         ArrayList< SketchTriangle > tris = sf.mTriangles;
@@ -153,10 +153,10 @@ class SketchDxf
           SketchVertex v2 = vts.get( tri.j );
           SketchVertex v3 = vts.get( tri.k );
           out.printf("0\n3DFACE\n8\nSURFACE\n");
-          out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
-          out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
-          out.printf(Locale.ENGLISH, "12\n%.2f\n22\n%.2f\n32\n%.2f\n", v3.x, v3.y, v3.z );
-          out.printf(Locale.ENGLISH, "13\n%.2f\n23\n%.2f\n33\n%.2f\n", v3.x, v3.y, v3.z );
+          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
+          out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
+          out.printf(Locale.US, "12\n%.2f\n22\n%.2f\n32\n%.2f\n", v3.x, v3.y, v3.z );
+          out.printf(Locale.US, "13\n%.2f\n23\n%.2f\n33\n%.2f\n", v3.x, v3.y, v3.z );
         }
       }
 
@@ -167,8 +167,8 @@ class SketchDxf
         //     SketchVertex v1 = vts.get( s.v1 );
         //     SketchVertex v2 = vts.get( s.v2 );
         //     out.printf("0\nLINE\n8\nBORDER\n" );
-        //     out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
-        //     out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
+        //     out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
+        //     out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
         //   }
         // }
         ArrayList< SketchTriangle > tris = sf.mTriangles;
@@ -177,10 +177,10 @@ class SketchDxf
           SketchVertex v2 = vts.get( tri.j );
           SketchVertex v3 = vts.get( tri.k );
           out.printf("0\n3DFACE\n8\nJOIN\n");
-          out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
-          out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
-          out.printf(Locale.ENGLISH, "12\n%.2f\n22\n%.2f\n32\n%.2f\n", v3.x, v3.y, v3.z );
-          out.printf(Locale.ENGLISH, "13\n%.2f\n23\n%.2f\n33\n%.2f\n", v3.x, v3.y, v3.z );
+          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", v1.x, v1.y, v1.z );
+          out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", v2.x, v2.y, v2.z );
+          out.printf(Locale.US, "12\n%.2f\n22\n%.2f\n32\n%.2f\n", v3.x, v3.y, v3.z );
+          out.printf(Locale.US, "13\n%.2f\n23\n%.2f\n33\n%.2f\n", v3.x, v3.y, v3.z );
         }
       }
 

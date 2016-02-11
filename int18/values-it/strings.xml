@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
+    <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>

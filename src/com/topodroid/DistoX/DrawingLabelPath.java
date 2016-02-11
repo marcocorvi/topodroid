@@ -165,7 +165,7 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.ENGLISH, "point %.2f %.2f label -text \"%s\" -orientation %.2f",
+    pw.format(Locale.US, "point %.2f %.2f label -text \"%s\" -orientation %.2f",
                      cx*toTherion, -cy*toTherion, mText, mOrientation );
     toTherionOptions( pw );
     pw.format("\n");
@@ -185,7 +185,7 @@ public class DrawingLabelPath extends DrawingPointPath
     pw.format("  <brush type=\"7\" />\n");
     float x = DrawingUtil.sceneToWorldX( cx ); // convert to world coords.
     float y = DrawingUtil.sceneToWorldY( cy );
-    pw.format(Locale.ENGLISH, " <points data=\"%.2f %.2f \" />\n", x, y );
+    pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("  <font type=\"0\" />\n");
     pw.format("</item>\n");
   }

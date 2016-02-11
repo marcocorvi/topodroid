@@ -333,7 +333,7 @@ class SymbolPoint extends Symbol
             x00 = x0 * dxfScale;
             y00 = y0 * dxfScale;
 
-            pv1.format(Locale.ENGLISH, "M %.2f %.2f ", x00*csxScale, y00*csxScale );
+            pv1.format(Locale.US, "M %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
           TDLog.Error( path + " parse moveTo error" );
@@ -355,7 +355,7 @@ class SymbolPoint extends Symbol
             y00 = y0 * dxfScale;
             DrawingDxf.printXYZ1( pw, x00, -y00, 0.0f );
             
-            pv1.format(Locale.ENGLISH, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
+            pv1.format(Locale.US, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
           TDLog.Error( path + " parse lineTo error" );
@@ -495,7 +495,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printString( pw, 0, "ELLIPSE" );
             // DrawingDxf.printString( pw, 8, "POINT" );
             // DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbEllipse" );
-            // pw.printf(Locale.ENGLISH,
+            // pw.printf(Locale.US,
             //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
             //           cx*dxfScale, -cy*dxfScale, 0.0f,        // CENTER
             //           r*dxfScale, 0.0, 0.0f,                  // ENDPOINT OF MAJOR AXIS - CENTER
@@ -512,7 +512,7 @@ class SymbolPoint extends Symbol
             x00 = x2 * dxfScale;
             y00 = y2 * dxfScale;
 
-            pv1.format(Locale.ENGLISH, "C %.2f %.2f %.2f %.2f %.2f %.2f ",
+            pv1.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f ",
                x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale, y1*csxdxfScale, x2*csxdxfScale, y2*csxdxfScale );
           
             // FIXME
@@ -543,10 +543,10 @@ class SymbolPoint extends Symbol
             DrawingDxf.printXYZ( pw, x0*dxfScale, -y0*dxfScale, 0.0f );
             DrawingDxf.printFloat( pw, 40, x1*dxfScale );
 
-            pv2.format(Locale.ENGLISH,
+            pv2.format(Locale.US,
               "&lt;circle cx=&quot;%.2f&quot; cy=&quot;%.2f&quot; r=&quot;%.2f&quot; /&gt;",
               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
-            pv3.format(Locale.ENGLISH,
+            pv3.format(Locale.US,
               "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%.2f\" />",
               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
           }
@@ -586,7 +586,7 @@ class SymbolPoint extends Symbol
             // DrawingDxf.printString( pw, 0, "ELLIPSE" );
             // DrawingDxf.printString( pw, 8, "POINT" );
             // DrawingDxf.printAcDb(pw, -1, "AcDbEntity", AcDbEllipse" );
-            // pw.printf(Locale.ENGLISH,
+            // pw.printf(Locale.US,
             //           "  10\n%.2f\n  20\n%.2f\n  30\n%.2f\n  11\n%.2f\n  21\n%.2f\n  31\n%.2f\n  40\n%.2f\n  41\n%.2f\n  42\n%.2f\n",
             //           (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                 // CENTER
             //           x1*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                        // ENDPOINT OF MAJOR AXIS
@@ -611,8 +611,8 @@ class SymbolPoint extends Symbol
             y00 = (cy + ry * TDMath.sind( x2+y2 ) )* dxfScale;
             
             // mode to (x00, y00)
-            pv1.format(Locale.ENGLISH, "M %.2f %.2f ", x0i*csxScale, y0i*csxScale );
-            pv1.format(Locale.ENGLISH, "A %.2f %.2f 0 1 %.2f %.2f ", rx*csxdxfScale, ry*csxdxfScale, x00*csxScale, y00*csxScale );
+            pv1.format(Locale.US, "M %.2f %.2f ", x0i*csxScale, y0i*csxScale );
+            pv1.format(Locale.US, "A %.2f %.2f 0 1 %.2f %.2f ", rx*csxdxfScale, ry*csxdxfScale, x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
           TDLog.Error( path + " parse arcTo error" );

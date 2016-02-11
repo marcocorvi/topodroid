@@ -250,8 +250,8 @@ public class ShotNewDialog extends MyDialog
   // implements
   public void setBearingAndClino( float b, float c )
   {
-    mETbearing.setText( String.format(Locale.ENGLISH, "%.1f", b ) );
-    mETclino.setText( String.format(Locale.ENGLISH, "%.1f", c ) );
+    mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
+    mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   }
 
   @Override

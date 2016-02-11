@@ -138,12 +138,12 @@ public class LinePoint extends BezierPoint
   public void toTherion( PrintWriter pw )
   {
     if ( has_cp ) {
-      pw.format(Locale.ENGLISH, "  %.2f %.2f %.2f %.2f %.2f %.2f\n",
+      pw.format(Locale.US, "  %.2f %.2f %.2f %.2f %.2f %.2f\n",
         mX1*toTherion, -mY1*toTherion,
         mX2*toTherion, -mY2*toTherion,
         mX*toTherion, -mY*toTherion );
     } else {
-      pw.format(Locale.ENGLISH, "  %.2f %.2f\n", mX*toTherion, -mY*toTherion );
+      pw.format(Locale.US, "  %.2f %.2f\n", mX*toTherion, -mY*toTherion );
     }
   }
 

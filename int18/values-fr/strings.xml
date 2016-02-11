@@ -2,6 +2,7 @@
 <resources>
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
     <!-- string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
+    <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Clic RETOUR une nouvelle fois pour sortir</string>

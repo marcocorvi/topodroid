@@ -22,6 +22,8 @@ import android.preference.CheckBoxPreference;
 // import android.view.Menu;
 // import android.view.MenuItem;
 
+import android.widget.ListAdapter;
+
 import android.util.Log;
 
 /**
@@ -64,6 +66,13 @@ public class TopoDroidPreferences extends PreferenceActivity
   TopoDroidApp mApp;
 
   @Override
+  public void onDestroy( )
+  {
+    super.onDestroy();
+    // if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivity = null; }
+  }
+
+  @Override
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
@@ -79,6 +88,7 @@ public class TopoDroidPreferences extends PreferenceActivity
     }
 
     // Log.v("DistoX", "Pref cat " + mPrefCategory );
+    if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivity = this; }
 
     if (mPrefCategory == PREF_CATEGORY_SURVEY ) {
       addPreferencesFromResource(R.xml.preferences_survey);
@@ -163,6 +173,16 @@ public class TopoDroidPreferences extends PreferenceActivity
       linkPreference( "DISTOX_SHOT_UNITS_SCREEN", PREF_SHOT_UNITS );
       linkPreference( "DISTOX_SHOT_DATA_SCREEN", PREF_SHOT_DATA );
     }
+  }
+
+  void reloadPreferences()
+  {
+    if (mPrefCategory != PREF_CATEGORY_ALL ) return;
+    mApp.mPrefActivity = null;
+    finish();
+    Intent intent = new Intent( mApp, TopoDroidPreferences.class );
+    intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+    startActivity( intent );
   }
 
   private void linkPreference( String pref_name, int category )

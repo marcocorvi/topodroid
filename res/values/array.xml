@@ -67,6 +67,7 @@
 
   <!-- DISTOX_LOCALE -->
   <string-array name="locale">
+     <item name="default">default</item>
      <item name="english">English</item>
      <item name="french">Français</item>
      <item name="spanish">Español</item>
@@ -77,6 +78,7 @@
      <item name="chinese">中文</item>
   </string-array>
   <string-array name="localeValue">
+     <item name="default"></item>
      <item name="english">en</item>
      <item name="french">fr</item>
      <item name="spanish">es</item>

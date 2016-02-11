@@ -124,8 +124,7 @@ public class CalibActivity extends Activity
   }
 
 // -------------------------------------------------------------------
-  // private Button mButtonHelp;
-  private Button[] mButton1;
+  private MyButton[] mButton1;
   private int mNrButton1 = 0;
   // private Button[] mButton2;
   HorizontalListView mListView;
@@ -160,21 +159,14 @@ public class CalibActivity extends Activity
     // icons00no = ( TDSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
     mNrButton1 = 2 + ( TDSetting.mLevelOverNormal? 1 : 0 );
-    mButton1 = new Button[ mNrButton1 ];
+    mButton1 = new MyButton[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new Button( this );
-      mButton1[k].setPadding(0,0,0,0);
-      mButton1[k].setOnClickListener( this );
-      // mButton1[k].setBackgroundResource(  icons00[k] );
-      BitmapDrawable bm2 = mApp.setButtonBackground( mButton1[k], size, izons[k] );
-      if ( k == 1 ) {
-        mBMopen = bm2;
-      } else if ( k == 2 ) {
-        mBMread = bm2;
-      }
+      mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
+      if ( k == 1 ) { mBMopen = mButton1[k].mBitmap; }
+      else if ( k == 2 ) { mBMread = mButton1[k].mBitmap; }
     }
-    mBMopen_no = mApp.setButtonBackground( null, size, izonsno[1] );
-    mBMread_no = mApp.setButtonBackground( null, size, izonsno[2] );
+    mBMopen_no = MyButton.getButtonBackground( mApp, size, izonsno[1] );
+    mBMread_no = MyButton.getButtonBackground( mApp, size, izonsno[2] );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     // mButtonView2 = new HorizontalButtonView( mButton2 );
@@ -217,7 +209,7 @@ public class CalibActivity extends Activity
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
+    MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();

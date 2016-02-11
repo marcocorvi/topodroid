@@ -88,11 +88,11 @@ public class SketchPointPath extends SketchPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
 
-    pw.format(Locale.ENGLISH, "point %.2f %.2f %.2f %s -shot %s %s",
+    pw.format(Locale.US, "point %.2f %.2f %.2f %s -shot %s %s",
               mXpos*toTherion, -mYpos*toTherion, -mZpos*toTherion,
                               DrawingBrushPaths.mPointLib.getSymbolThName(mThType), st1, st2 );
     if ( mOrientation != null ) {
-      pw.format(Locale.ENGLISH, " -orientation %.2f %.2f %.2f",
+      pw.format(Locale.US, " -orientation %.2f %.2f %.2f",
          mOrientation.x*toTherion, -mOrientation.y*toTherion, -mOrientation.z*toTherion );
     }
     // toTherionOptions( pw );

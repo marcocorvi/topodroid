@@ -57,7 +57,7 @@ public class MyCheckBox extends CompoundButton
       @Override
       public void onCheckedChanged( CompoundButton b, boolean status )
       {
-        TopoDroidApp.setButtonBackground( mContext, b, mSize, (status ? mIdOn : mIdOff ) );
+        MyButton.setButtonBackground( mContext, b, mSize, (status ? mIdOn : mIdOff ) );
       }
     } );
 
@@ -71,7 +71,7 @@ public class MyCheckBox extends CompoundButton
       }
     } );
 
-    TopoDroidApp.setButtonBackground( mContext, this, mSize, (mState ? mIdOn : mIdOff ) );
+    MyButton.setButtonBackground( mContext, this, mSize, (mState ? mIdOn : mIdOff ) );
   }
 
   @Override
@@ -85,7 +85,7 @@ public class MyCheckBox extends CompoundButton
   public void setState( boolean state )
   {
     mState = state;
-    TopoDroidApp.setButtonBackground( mContext, this, mSize, (mState ? mIdOn : mIdOff ) );
+    MyButton.setButtonBackground( mContext, this, mSize, (mState ? mIdOn : mIdOff ) );
   }
 
 }

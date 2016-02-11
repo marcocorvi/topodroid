@@ -77,7 +77,7 @@ class FixedInfo extends MagLatLong
 
   static private String double2degree( double x )
   {
-    return String.format(Locale.ENGLISH, "%.6f", x );
+    return String.format(Locale.US, "%.6f", x );
   }
 
 

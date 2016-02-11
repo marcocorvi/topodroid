@@ -149,14 +149,14 @@ public class DrawingStationName extends DrawingPointPath
   {
     if ( mStation == null ) return null;
     // east north vertical (downward)
-    return String.format(Locale.ENGLISH, "E %.2f N %.2f V %.2f", mStation.e, -mStation.s, mStation.v );
+    return String.format(Locale.US, "E %.2f N %.2f V %.2f", mStation.e, -mStation.s, mStation.v );
   }
 
   @Override
   public String toTherion()
   {
     if ( mStation == null ) return ""; // empty string
-    return String.format(Locale.ENGLISH, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
+    return String.format(Locale.US, "point %.2f %.2f station -name \"%s\"", cx*toTherion, -cy*toTherion, mName );
   }
 
   @Override

@@ -102,8 +102,9 @@ public class TopoDroidApp extends Application
   static final int SUB_MIN   = 1;
   
   boolean mWelcomeScreen;  // whether to show the welcome screen
-  static String mManual;  // manual url
+  // static String mManual;  // manual url
   static Locale mLocale;
+  static String mLocaleStr;
 
   static String mClipboardText = null; // text clipboard
 
@@ -184,6 +185,7 @@ public class TopoDroidApp extends Application
   static ShotActivity mShotActivity     = null;
   // static DrawingActivity mDrawingActivity = null; // FIXME currently not used
   TopoDroidActivity mActivity = null; 
+  TopoDroidPreferences mPrefActivity = null;
 
   static boolean mDeviceActivityVisible = false;
   static boolean mGMActivityVisible = false;
@@ -238,19 +240,6 @@ public class TopoDroidApp extends Application
   static int getDefaultSize( Context context )
   {
     return (int)(42 * context.getResources().getSystem().getDisplayMetrics().density );
-  }
-
-  BitmapDrawable setButtonBackground( Button button, int size, int res_id )
-  {
-    return TopoDroidApp.setButtonBackground( this, button, size, res_id );
-  }
-
-  static BitmapDrawable setButtonBackground( Context context, Button button, int size, int res_id )
-  {
-    Bitmap bm1 = BitmapFactory.decodeResource( context.getResources(), res_id );
-    BitmapDrawable bm2 = new BitmapDrawable( context.getResources(), Bitmap.createScaledBitmap( bm1, size, size, false ) );
-    if ( button != null ) button.setBackgroundDrawable( bm2 );
-    return bm2;
   }
 
   boolean isMultitouch()
@@ -561,7 +550,7 @@ public class TopoDroidApp extends Application
     mDisplayHeight = dm.heightPixels;
     mScaleFactor   = (mDisplayHeight / 320.0f) * density;
 
-    mManual = getResources().getString( R.string.topodroid_man );
+    // mManual = getResources().getString( R.string.topodroid_man );
 
     if ( TDLog.LOG_DEBUG ) {
       isTracing = true;
@@ -571,21 +560,26 @@ public class TopoDroidApp extends Application
 
   void resetLocale()
   {
-    getResources().getConfiguration().locale = mLocale;
+    // Log.v("DistoX", "reset locale to " + mLocaleStr );
+    // mLocale = (mLocaleStr.equals(""))? Locale.getDefault() : new Locale( mLocaleStr );
+    Resources res = getResources();
+    DisplayMetrics dm = res.getDisplayMetrics();
+    Configuration conf = res.getConfiguration();
+    conf.locale = mLocale; // setLocale API-17
+    res.updateConfiguration( conf, dm );
   }
 
   void setLocale( String locale )
   {
-    mLocale = (locale.equals(""))? Locale.getDefault() : new Locale( locale );
+    mLocaleStr = locale;
+    mLocale = (mLocaleStr.equals(""))? Locale.getDefault() : new Locale( mLocaleStr );
+    resetLocale();
     Resources res = getResources();
-    DisplayMetrics dm = res.getDisplayMetrics();
-    Configuration conf = res.getConfiguration();
-    conf.locale = mLocale;
-    res.updateConfiguration( conf, dm );
     DrawingBrushPaths.reloadPointLibrary( res ); // reload symbols
     DrawingBrushPaths.reloadLineLibrary( res );
     DrawingBrushPaths.reloadAreaLibrary( res );
     if ( mActivity != null ) mActivity.setMenuAdapter( res );
+    if ( mPrefActivity != null ) mPrefActivity.reloadPreferences();
   }
 
   void setCWD( String cwd )

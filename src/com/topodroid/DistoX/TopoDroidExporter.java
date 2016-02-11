@@ -86,7 +86,7 @@ class TopoDroidExporter
 
   static private void writeCsxLeg( PrintWriter pw, AverageLeg leg )
   {
-    pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
+    pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
       leg.length(), leg.bearing(), leg.clino()
     );
     leg.reset();
@@ -127,7 +127,7 @@ class TopoDroidExporter
       if ( info.team != null && info.team.length() > 0 ) {
         pw.format(" team=\"%s\" ", info.team );
       }
-      pw.format(Locale.ENGLISH, "nordtype=\"0\" manualdeclination=\"0\" declination=\"%.4f\" ", info.declination );
+      pw.format(Locale.US, "nordtype=\"0\" manualdeclination=\"0\" declination=\"%.4f\" ", info.declination );
       pw.format(">\n");
       pw.format("      </session>\n");
       pw.format("    </sessions>\n");
@@ -207,7 +207,7 @@ class TopoDroidExporter
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
-            pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
+            pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                item.mLength, item.mBearing, item.mClino );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -244,7 +244,7 @@ class TopoDroidExporter
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
-            pw.format(Locale.ENGLISH, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
+            pw.format(Locale.US, " distance=\"%.2f\" bearing=\"%.1f\" inclination=\"%.1f\"",
                item.mLength, item.mBearing, item.mClino );
             pw.format(" l=\"0\" r=\"0\" u=\"0\" d=\"0\"");
             if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -311,7 +311,7 @@ class TopoDroidExporter
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
           pw.format("     <trigpoint name=\"%s\" labelsymbol=\"0\" >\n", fix.name );
-          pw.format(Locale.ENGLISH, "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
+          pw.format(Locale.US, "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
              fix.lat, fix.lng, fix.alt, fix.lat, fix.lng, fix.alt );
           pw.format("     </trigpoint>\n");
         }
@@ -449,7 +449,7 @@ class TopoDroidExporter
         pw.format("  <styleUrl>#station</styleUrl>\n");
         pw.format("  <MultiGeometry>\n");
           pw.format("  <Point id=\"%s\">\n", st.name );
-          pw.format(Locale.ENGLISH, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
+          pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
           pw.format("  </Point>\n");
         pw.format("  </MultiGeometry>\n");
         pw.format("</Placemark>\n");
@@ -468,8 +468,8 @@ class TopoDroidExporter
           // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
           // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
           pw.format("      <coordinates>\n");
-          pw.format(Locale.ENGLISH, "        %f,%f,%f\n", from.e, from.s, from.v );
-          pw.format(Locale.ENGLISH, "        %f,%f,%f\n", to.e, to.s, to.v );
+          pw.format(Locale.US, "        %f,%f,%f\n", from.e, from.s, from.v );
+          pw.format(Locale.US, "        %f,%f,%f\n", to.e, to.s, to.v );
           pw.format("      </coordinates>\n");
           pw.format("    </LineString>\n");
         } else {
@@ -490,8 +490,8 @@ class TopoDroidExporter
       //   // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
       //   // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
       //   pw.format("      <coordinates>\n");
-      //   pw.format(Locale.ENGLISH, "        %f,%f,%f\n", from.e, from.s, from.v );
-      //   pw.format(Locale.ENGLISH, "        %f,%f,%f\n", to.e, to.s, to.v );
+      //   pw.format(Locale.US, "        %f,%f,%f\n", from.e, from.s, from.v );
+      //   pw.format(Locale.US, "        %f,%f,%f\n", to.e, to.s, to.v );
       //   pw.format("      </coordinates>\n");
       //   pw.format("    </LineString>\n");
       // }
@@ -553,9 +553,9 @@ class TopoDroidExporter
         NumStation from = sh.from;
         NumStation to   = sh.to;
         if ( from != last ) {
-          pw.format(Locale.ENGLISH, "%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
+          pw.format(Locale.US, "%f, %f,1, %f,%d,,\r\n", from.e, from.s, from.v, days );
         }
-        pw.format(Locale.ENGLISH, "%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
+        pw.format(Locale.US, "%f,%f,0,%f,%d,,\r\n", to.e, to.s, to.v, days );
         last = to;
       }
       fw.flush();
@@ -647,7 +647,7 @@ class TopoDroidExporter
 
   static private void writeThLeg( PrintWriter pw, AverageLeg leg ) 
   {
-    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", leg.length(), leg.bearing(), leg.clino() );
+    pw.format(Locale.US, "%.2f %.1f %.1f\n", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
   }
 
@@ -681,7 +681,7 @@ class TopoDroidExporter
         pw.format("    # team %s \n", info.team );
       }
 
-      pw.format(Locale.ENGLISH, "    # declination %.2f degrees\n", info.declination );
+      pw.format(Locale.US, "    # declination %.2f degrees\n", info.declination );
 
       pw.format("    data normal from to length compass clino\n");
 
@@ -721,7 +721,7 @@ class TopoDroidExporter
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
             pw.format("    - %s ", to );
-            pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
@@ -745,7 +745,7 @@ class TopoDroidExporter
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
             pw.format("    %s - ", from ); // write splay shot
-            pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeThLeg( pw, leg );
@@ -780,7 +780,7 @@ class TopoDroidExporter
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
-        // pw.format(Locale.ENGLISH, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
+        // pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeThLeg( pw, leg );
@@ -865,7 +865,7 @@ class TopoDroidExporter
   static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DistoXDBlock blk )
   {
     if ( first ) {
-      pw.format(Locale.ENGLISH, "  %.2f %.1f %.1f", leg.length(), leg.bearing(), leg.clino() );
+      pw.format(Locale.US, "  %.2f %.1f %.1f", leg.length(), leg.bearing(), leg.clino() );
       leg.reset();
       if ( blk.mComment != null && blk.mComment.length() > 0 ) {
         pw.format("  ; %s", blk.mComment );
@@ -882,14 +882,14 @@ class TopoDroidExporter
   static void writeSurvexLRUD( PrintWriter pw, String st, LRUD lrud )
   {
     if ( lrud != null ) {
-      pw.format(Locale.ENGLISH, "%s  %.2f %.2f %.2f %.2f", st, lrud.l, lrud.r, lrud.u, lrud.d );
+      pw.format(Locale.US, "%s  %.2f %.2f %.2f %.2f", st, lrud.l, lrud.r, lrud.u, lrud.d );
       writeSurvexEOL( pw );
     }
   }
 
   static void writeSurvexSplay( PrintWriter pw, String from, String to, DistoXDBlock blk )
   {
-    pw.format(Locale.ENGLISH, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength, blk.mBearing, blk.mClino );
+    pw.format(Locale.US, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength, blk.mBearing, blk.mClino );
     if ( blk.mComment != null && blk.mComment.length() > 0 ) {
       pw.format(" ; %s", blk.mComment );
     }
@@ -931,7 +931,7 @@ class TopoDroidExporter
       writeSurvexLine(pw, "  *units tape metres" );
       writeSurvexLine(pw, "  *units compass degrees" );
       writeSurvexLine(pw, "  *units clino degrees" );
-      pw.format(Locale.ENGLISH, "  *calibrate declination %.2f", info.declination ); writeSurvexEOL(pw);
+      pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); writeSurvexEOL(pw);
       if ( ! TDSetting.mSurvexSplay ) {
         writeSurvexLine( pw, "  *alias station - .." );
       }
@@ -1162,7 +1162,7 @@ class TopoDroidExporter
    */
   static private void writeCsvLeg( PrintWriter pw, AverageLeg leg )
   {
-    pw.format(Locale.ENGLISH, ",%.2f,%.1f,%.1f", 
+    pw.format(Locale.US, ",%.2f,%.1f,%.1f", 
       leg.length() * TDSetting.mCsvLengthUnit, leg.bearing(), leg.clino() );
     leg.reset();
   }
@@ -1184,7 +1184,7 @@ class TopoDroidExporter
       //     pw.format("  ; *fix %s\n", fix.toExportString() );
       //   }
       // }
-      pw.format(Locale.ENGLISH, "# from to tape compass clino (declination %.4f)\n", info.declination );
+      pw.format(Locale.US, "# from to tape compass clino (declination %.4f)\n", info.declination );
       
       AverageLeg leg = new AverageLeg();
       DistoXDBlock ref_item = null;
@@ -1216,7 +1216,7 @@ class TopoDroidExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.ENGLISH, "-,%s@%s,%.2f,%.1f,%.1f\n", to, info.name,
+            pw.format(Locale.US, "-,%s@%s,%.2f,%.1f,%.1f\n", to, info.name,
               item.mLength * TDSetting.mCsvLengthUnit, item.mBearing, item.mClino );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
@@ -1240,7 +1240,7 @@ class TopoDroidExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.ENGLISH, "%s@%s,-,%.2f,%.1f,%.1f\n", from, info.name,
+            pw.format(Locale.US, "%s@%s,-,%.2f,%.1f,%.1f\n", from, info.name,
               item.mLength * TDSetting.mCsvLengthUnit, item.mBearing, item.mClino );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
@@ -1320,10 +1320,10 @@ class TopoDroidExporter
   //         if ( to != null && to.length() > 0 ) {
   //           if ( n > 0 /* && ref_item != null */ ) {
   //             b = TopoDroidUtil.in360( b/n );
-  //             pw.format(Locale.ENGLISH, "%.2f %.1f %.1f 0.0 %d %d %d\n", l/n, b, c/n, extend, flag, n );
+  //             pw.format(Locale.US, "%.2f %.1f %.1f 0.0 %d %d %d\n", l/n, b, c/n, extend, flag, n );
   //             while ( n > 0 ) {
   //               -- n;
-  //               pw.format(Locale.ENGLISH, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
+  //               pw.format(Locale.US, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //             }
   //             extend = 0;
   //             flag   = DistoXDBlock.BLOCK_SURVEY;
@@ -1344,10 +1344,10 @@ class TopoDroidExporter
   //         } else { // to.isEmpty()
   //           if ( n > 0 /* && ref_item != null */ ) {
   //             b = TopoDroidUtil.in360( b/n );
-  //             pw.format(Locale.ENGLISH, "%.2f %.1f %.1f 0.0 %d %d %d\n", l/n, b, c/n, extend, flag, n );
+  //             pw.format(Locale.US, "%.2f %.1f %.1f 0.0 %d %d %d\n", l/n, b, c/n, extend, flag, n );
   //             while ( n > 0 ) {
   //               -- n;
-  //               pw.format(Locale.ENGLISH, "@ %.2f %.1f %.1fi %.1f\n", l0[n], b0[n], c0[n], r0[n] );
+  //               pw.format(Locale.US, "@ %.2f %.1f %.1fi %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //             }
   //             n = 0;
   //             ref_item = null;
@@ -1356,17 +1356,17 @@ class TopoDroidExporter
   //           }
   //           // item.Comment()
   //           pw.format("    \"%s\" \"\" ", from );
-  //           pw.format(Locale.ENGLISH, "%.2f %.1f %.1f %.1f %d %d 1\n",
+  //           pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d 1\n",
   //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.mExtend, item.mFlag );
   //         }
   //       } else { // from.isEmpty()
   //         if ( to != null && to.length() > 0 ) {
   //           if ( n > 0 /* && ref_item != null */ ) {
   //             b = TopoDroidUtil.in360( b/n );
-  //             pw.format(Locale.ENGLISH, "%.2f %.1f %.1f 0.0 %d 0 %d\n", l/n, b, c/n, extend, n );
+  //             pw.format(Locale.US, "%.2f %.1f %.1f 0.0 %d 0 %d\n", l/n, b, c/n, extend, n );
   //             while ( n > 0 ) {
   //               -- n;
-  //               pw.format(Locale.ENGLISH, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
+  //               pw.format(Locale.US, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //             }
   //             n = 0;
   //             ref_item = null;
@@ -1375,7 +1375,7 @@ class TopoDroidExporter
   //           }
   //           // item.Comment()
   //           pw.format("    \"\" \"%s\" ", to );
-  //           pw.format(Locale.ENGLISH, "%.2f %.1f %.1f %.1f %d %d 1\n",
+  //           pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d 1\n",
   //             item.mLength, item.mBearing, item.mClino, item.mRoll, item.mExtend, item.mFlag );
   //         } else {
   //           // not exported
@@ -1396,15 +1396,15 @@ class TopoDroidExporter
   //     }
   //     if ( n > 0 /* && ref_item != null */ ) {
   //       b = TopoDroidUtil.in360( b/n );
-  //       pw.format(Locale.ENGLISH, "%.2f %.1f %.1f 0.0 %d 0 %d\n", l/n, b, c/n, extend, n );
+  //       pw.format(Locale.US, "%.2f %.1f %.1f 0.0 %d 0 %d\n", l/n, b, c/n, extend, n );
   //       while ( n > 0 ) {
   //         -- n;
-  //         pw.format(Locale.ENGLISH, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
+  //         pw.format(Locale.US, "@ %.2f %.1f %.1f %.1f\n", l0[n], b0[n], c0[n], r0[n] );
   //       }
   //       // extend = 0;
   //       // flag   = DistoXDBlock.BLOCK_SURVEY;
   //     }
-  //     // pw.format(Locale.ENGLISH, "%.2f %.1f %.1f %.1f %d %d %d\n", 
+  //     // pw.format(Locale.US, "%.2f %.1f %.1f %.1f %d %d %d\n", 
   //     //   item.mLength, item.mBearing, item.mClino, item.mRoll, item.mExtend, 0, 1 );
   //     // item.mComment
   //     fw.flush();
@@ -1488,7 +1488,7 @@ class TopoDroidExporter
 
   private static void printShotToDat( PrintWriter pw, AverageLeg leg, LRUD lrud, boolean duplicate, String comment )
   {
-    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+    pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
       leg.length()*TopoDroidUtil.M2FT, leg.bearing(), leg.clino(),
       lrud.l*TopoDroidUtil.M2FT, lrud.u*TopoDroidUtil.M2FT, lrud.d*TopoDroidUtil.M2FT, lrud.r*TopoDroidUtil.M2FT );
     leg.reset();
@@ -1539,7 +1539,7 @@ class TopoDroidExporter
       } else {
         pw.format("...\r\n");
       }
-      pw.format(Locale.ENGLISH, "DECLINATION: %.4f  ", info.declination );
+      pw.format(Locale.US, "DECLINATION: %.4f  ", info.declination );
       pw.format("FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00\r\n" );
       pw.format("\r\n" );
       pw.format("FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS\r\n" );
@@ -1613,7 +1613,7 @@ class TopoDroidExporter
 
   static private void writeSrvLeg( PrintWriter pw, AverageLeg leg )
   {
-    pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f", leg.length(), leg.bearing(), leg.clino() );
+    pw.format(Locale.US, "%.2f\t%.1f\t%.1f", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
   }
  
@@ -1626,7 +1626,7 @@ class TopoDroidExporter
   
       pw.format("; %s\n", info.name );
       pw.format("; created by TopoDroid v %s - %s \n", TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd") );
-      pw.format(Locale.ENGLISH, "#Units Decl=%.1f\n", info.declination );
+      pw.format(Locale.US, "#Units Decl=%.1f\n", info.declination );
 
       String date = info.date;
       int y = 0;
@@ -1655,16 +1655,16 @@ class TopoDroidExporter
         for ( FixedInfo fix : fixed ) {
           pw.format("#Fix %s", fix.name );
           if ( fix.lng >= 0 ) {
-            pw.format(Locale.ENGLISH, " E%.6f", fix.lng );
+            pw.format(Locale.US, " E%.6f", fix.lng );
           } else {
-            pw.format(Locale.ENGLISH, " W%.6f", - fix.lng );
+            pw.format(Locale.US, " W%.6f", - fix.lng );
           }
           if ( fix.lat >= 0 ) {
-            pw.format(Locale.ENGLISH, " N%.6f", fix.lat );
+            pw.format(Locale.US, " N%.6f", fix.lat );
           } else {
-            pw.format(Locale.ENGLISH, " S%.6f", - fix.lat );
+            pw.format(Locale.US, " S%.6f", - fix.lat );
           }
-          pw.format(Locale.ENGLISH, " %.0f", fix.alt );
+          pw.format(Locale.US, " %.0f", fix.alt );
           if ( fix.comment != null && fix.comment.length() > 0 ) pw.format(" /%s", fix.comment );
           pw.format("\n");
         }
@@ -1708,7 +1708,7 @@ class TopoDroidExporter
             //   //  FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
             pw.format("-\t%s\t", to );
-            pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength, item.mBearing, item.mClino );
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("\t; %s\n", item.mComment );
             } else {
@@ -1739,7 +1739,7 @@ class TopoDroidExporter
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
             pw.format("%s\t-\t", from ); // write splay shot
-            pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength, item.mBearing, item.mClino );
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("\t; %s\n", item.mComment );
             } else {
@@ -1784,7 +1784,7 @@ class TopoDroidExporter
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
-        // pw.format(Locale.ENGLISH, "%.2f\t%.1f\t%.1f\n", item.mLength, item.mBearing, item.mClino );
+        // pw.format(Locale.US, "%.2f\t%.1f\t%.1f\n", item.mLength, item.mBearing, item.mClino );
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeSrvLeg( pw, leg );
@@ -1820,17 +1820,17 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter out = new PrintWriter( fw );
       // TODO
-      out.printf(Locale.ENGLISH, "999\nDXF created by TopoDroid v %s - %s (declination %.4f)\n",
+      out.printf(Locale.US, "999\nDXF created by TopoDroid v %s - %s (declination %.4f)\n",
         TopoDroidApp.VERSION, TopoDroidUtil.getDateString("yyyy.MM.dd"), info.declination );
       out.printf("0\nSECTION\n2\nHEADER\n");
       out.printf("9\n$ACADVER\n1\nAC1006\n");
       out.printf("9\n$INSBASE\n");
-      out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", 0.0, 0.0, 0.0 ); // FIXME (0,0,0)
+      out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", 0.0, 0.0, 0.0 ); // FIXME (0,0,0)
       out.printf("9\n$EXTMIN\n");
       float emin = num.surveyEmin() - 2.0f;
       float nmin = - num.surveySmax() - 2.0f;
       float zmin = - num.surveyVmax() - 2.0f;
-      out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
+      out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
         // num.surveyEmin(), -num.surveySmax(), -num.surveyVmax() );
       out.printf("9\n$EXTMAX\n");
       float emax = num.surveyEmax();
@@ -1841,7 +1841,7 @@ class TopoDroidExporter
       int dn = (100f < nmax-nmin )? 100 : (50f < nmax-nmin)? 50 : 10;
       int dz = (100f < zmax-zmin )? 100 : (50f < zmax-zmin)? 50 : 10;
 
-      out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emax, nmax, zmax );
+      out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emax, nmax, zmax );
         // num.surveyEmax(), -num.surveySmin(), -num.surveyVmin() );
       out.printf("0\nENDSEC\n");
 
@@ -1888,50 +1888,50 @@ class TopoDroidExporter
         nmin += 1f;
         zmin += 1f;
         out.printf("0\nLINE\n8\nREF\n");
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
-        out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", emin+de, nmin, zmin );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
+        out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", emin+de, nmin, zmin );
         out.printf("0\nLINE\n8\nREF\n");
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
-        out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", emin, nmin+dn, zmin );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
+        out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", emin, nmin+dn, zmin );
         out.printf("0\nLINE\n8\nREF\n");
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
-        out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", emin, nmin, zmin+dz );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", emin, nmin, zmin );
+        out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", emin, nmin, zmin+dz );
         out.printf("0\nTEXT\n8\nREF\n");
         out.printf("1\n%s\n", (de==100)? "100" : (de==50)? "50" : "10" );
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", emin+de+1, nmin, zmin );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", emin+de+1, nmin, zmin );
         out.printf("0\nTEXT\n8\nREF\n");
         out.printf("1\n%s\n", (dn==100)? "100" : (dn==50)? "50" : "10" );
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", emin, nmin+de+1, zmin );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", emin, nmin+de+1, zmin );
         out.printf("0\nTEXT\n8\nREF\n");
         out.printf("1\n%s\n", (dz==100)? "100" : (dz==50)? "50" : "10" );
-        out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", emin, nmin, zmin+dz+1 );
+        out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", emin, nmin, zmin+dz+1 );
 
         // centerline data
         for ( NumShot sh : num.getShots() ) {
           NumStation f = sh.from;
           NumStation t = sh.to;
           out.printf("0\nLINE\n8\nLEG\n");
-          out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, -f.s, -f.v );
-          out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", t.e, -t.s, -t.v );
+          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, -f.s, -f.v );
+          out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", t.e, -t.s, -t.v );
         }
 
         for ( NumSplay sh : num.getSplays() ) {
           NumStation f = sh.from;
           out.printf("0\nLINE\n8\nSPLAY\n");
-          out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, -f.s, -f.v );
-          out.printf(Locale.ENGLISH, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", sh.e, -sh.s, -sh.v );
+          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, -f.s, -f.v );
+          out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", sh.e, -sh.s, -sh.v );
 
           out.printf("0\nINSERT\n8\nPOINT\n2\npoint\n");
           // out.printf("41\n1\n42\n1\n") // point scale
           // out.printf("50\n0\n");  // orientation
-          out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", sh.e, -sh.s, -sh.v );
+          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", sh.e, -sh.s, -sh.v );
         }
    
         for ( NumStation st : num.getStations() ) {
           // FIXME station scale is 0.3
           out.printf("0\nTEXT\n8\nSTATION\n");
           out.printf("1\n%s\n", st.name );
-          out.printf(Locale.ENGLISH, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", st.e, -st.s, -st.v );
+          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", st.e, -st.s, -st.v );
         }
 
       }
@@ -1962,8 +1962,8 @@ class TopoDroidExporter
   {
     if ( item == null ) return false;
     LRUD lrud = computeLRUD( item, list, true );
-    pw.format(Locale.ENGLISH, "%s %s 0.00 0.00 0.00 ", item.mFrom, item.mFrom );
-    pw.format(Locale.ENGLISH, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
+    pw.format(Locale.US, "%s %s 0.00 0.00 0.00 ", item.mFrom, item.mFrom );
+    pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
     if ( item.mComment != null && item.mComment.length() > 0 ) {
       pw.format(" ;%s", item.mComment );
     }
@@ -1976,9 +1976,9 @@ class TopoDroidExporter
     if ( item == null ) return false;
     // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     pw.format("%s %s ", item.mFrom, item.mTo );
-    pw.format(Locale.ENGLISH, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
+    pw.format(Locale.US, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
-    pw.format(Locale.ENGLISH, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
+    pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I", lrud.l, lrud.r, lrud.u, lrud.d );
     // if ( duplicate ) {
     //   // pw.format(" #|L#");
     // }
@@ -2003,7 +2003,7 @@ class TopoDroidExporter
 
       pw.format("Version 5.02\r\n\r\n");
       if ( fixed.size() > 0 ) { // FIXME
-        // pw.format(Locale.ENGLISH, "Trou %s,%.2f,%.2f,LT2E\r\n", info.name, fix.lat, fix.lng );
+        // pw.format(Locale.US, "Trou %s,%.2f,%.2f,LT2E\r\n", info.name, fix.lat, fix.lng );
         for ( FixedInfo fix : fixed ) {
           // pw.format("Entree %s\r\n", fix.name );
           break;
@@ -2016,7 +2016,7 @@ class TopoDroidExporter
       }
       pw.format("Couleur 0,0,0\r\n\r\n");
       
-      pw.format(Locale.ENGLISH, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.declination );
+      pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.declination );
 
       AverageLeg leg = new AverageLeg();
       DistoXDBlock ref_item = null;
@@ -2109,7 +2109,7 @@ class TopoDroidExporter
       List<CalibCBlock> list = data.selectAllGMs( cid, 1 ); // status 1 --> all shots
       for ( CalibCBlock b : list ) {
         b.computeBearingAndClino();
-        pw.format(Locale.ENGLISH, "%d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %.2f, %.4f, %d\n",
+        pw.format(Locale.US, "%d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %.2f, %.4f, %d\n",
           b.mId, b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup, b.mBearing, b.mClino, b.mRoll, b.mError, b.mStatus );
       }
       fw.flush();

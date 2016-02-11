@@ -105,7 +105,7 @@ public class CalibCBlock
     float f = TopoDroidUtil.FV;
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
-    // pw.format("Locale.ENGLISH, G %d %d %d M %d %d %d E %.2f", gx, gy, gz, mx, my, mz, mError );
+    // pw.format("Locale.US, G %d %d %d M %d %d %d E %.2f", gx, gy, gz, mx, my, mz, mError );
     // TDLog.Log( TDLog.LOG_DATA, sw.getBuffer().toString() );
     Vector g = new Vector( gx/f, gy/f, gz/f );
     Vector m = new Vector( mx/f, my/f, mz/f );
@@ -153,7 +153,7 @@ public class CalibCBlock
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     computeBearingAndClino();
-    pw.format(Locale.ENGLISH, "%d <%d> %5.1f %5.1f %5.1f %6.4f",
+    pw.format(Locale.US, "%d <%d> %5.1f %5.1f %5.1f %6.4f",
       mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TDMath.RAD2GRAD );
     if ( TDSetting.mRawData ) {
       pw.format( "  %d %d %d  %d %d %d", gx, gy, gz, mx, my, mz );

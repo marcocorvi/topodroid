@@ -107,10 +107,10 @@ public class SketchActivity extends ItemDrawer
 
   // private Button selectBtn;
 
-  private Button[] mButton1; // primary: draw edit select refs surface download note info one step ( shot join )
-  private Button[] mButton2; // draw:    draw edit select undo redo symbol 
-  private Button[] mButton3; // edit     draw edit select refineC refineS cut stretch extrude
-  private Button[] mButton4; // select   draw edit select next prev cutP refineP
+  private MyButton[] mButton1; // primary: draw edit select refs surface download note info one step ( shot join )
+  private MyButton[] mButton2; // draw:    draw edit select undo redo symbol 
+  private MyButton[] mButton3; // edit     draw edit select refineC refineS cut stretch extrude
+  private MyButton[] mButton4; // select   draw edit select next prev cutP refineP
   HorizontalButtonView mButtonView1;
   HorizontalButtonView mButtonView2;
   HorizontalButtonView mButtonView3;
@@ -732,46 +732,33 @@ public class SketchActivity extends ItemDrawer
     // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
     // icons00ok = ( TDSetting.mSizeButtons == 2 )? ixonsok : iconsok;
 
-    mButton1 = new Button[ mNrButton1 ];
+    mButton1 = new MyButton[ mNrButton1 ];
     int off = 3;
     int ic  = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new Button( this );
-      mButton1[k].setPadding(0,0,0,0);
-      mButton1[k].setOnClickListener( this );
       ic = ( k == 0 )? 0 : off+k;
-      mApp.setButtonBackground( mButton1[k], size, izons[ic] );
+      mButton1[k] = new MyButton( this, this, size, izons[ic], 0 );
     }
 
-
-    mButton2 = new Button[ mNrButton2 ];
+    mButton2 = new MyButton[ mNrButton2 ];
     off = 2 + mNrButton1;
     for ( int k=0; k<mNrButton2; ++k ) {
-      mButton2[k] = new Button( this );
-      mButton2[k].setPadding(0,0,0,0);
-      mButton2[k].setOnClickListener( this );
       ic = ( k == 0 )? 1 : off+k;
-      mApp.setButtonBackground( mButton2[k], size, izons[ic] );
+      mButton2[k] = new MyButton( this, this, size, izons[ic], 0 );
     }
 
-    mButton3 = new Button[ mNrButton3 ];
+    mButton3 = new MyButton[ mNrButton3 ];
     off = 1 + mNrButton1 + mNrButton2;
     for ( int k=0; k<mNrButton3; ++k ) {
-      mButton3[k] = new Button( this );
-      mButton3[k].setPadding(0,0,0,0);
-      mButton3[k].setOnClickListener( this );
       ic = ( k == 0 )? 2 : off+k;
-      mApp.setButtonBackground( mButton3[k], size, izons[ic] );
+      mButton3[k] = new MyButton( this, this, size, izons[ic], 0 );
     }
 
-    mButton4 = new Button[ mNrButton4 ];
+    mButton4 = new MyButton[ mNrButton4 ];
     off = 0 + mNrButton1 + mNrButton2 + mNrButton3;
     for ( int k=0; k<mNrButton4; ++k ) {
-      mButton4[k] = new Button( this );
-      mButton4[k].setPadding(0,0,0,0);
-      mButton4[k].setOnClickListener( this );
       ic = ( k == 0 )? 3 : off+k;
-      mApp.setButtonBackground( mButton4[k], size, izons[ic] );
+      mButton4[k] = new MyButton( this, this, size, izons[ic], 0 );
     }
     mButtonView1 = new HorizontalButtonView( mButton1 );  // MOVE
     mButtonView2 = new HorizontalButtonView( mButton2 );  // DRAW
@@ -790,7 +777,7 @@ public class SketchActivity extends ItemDrawer
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    mApp.setButtonBackground( mImage, size, R.drawable.iz_menu );
+    MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
     closeMenu();
@@ -1510,7 +1497,7 @@ public class SketchActivity extends ItemDrawer
                     // for ( PointF p : border ) {
                     //   p.x += 0.1f * (p.x - x );
                     //   p.y += 0.1f * (p.y - y );
-                    //   // pw.format(Locale.ENGLISH, "%.2f %.2f ", p.x, p.y );
+                    //   // pw.format(Locale.US, "%.2f %.2f ", p.x, p.y );
                     // }
                     // Log.v( "DistoX", " border " + sw.getBuffer().toString() );
 

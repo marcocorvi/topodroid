@@ -211,7 +211,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     pw.format("endline\n");
     pw.format("area %s", DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType ) );
     if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
-      pw.format(Locale.ENGLISH, " #orientation %.1f", mOrientation );
+      pw.format(Locale.US, " #orientation %.1f", mOrientation );
     }
     pw.format("\n");
     pw.format("  %s%d\n", mPrefix, mAreaCnt );
@@ -240,7 +240,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     {
       float x = DrawingUtil.sceneToWorldX( pt.mX );
       float y = DrawingUtil.sceneToWorldY( pt.mY );
-      pw.format(Locale.ENGLISH, "%.2f %.2f ", x, y );
+      pw.format(Locale.US, "%.2f %.2f ", x, y );
       if ( b ) { pw.format("B "); b = false; }
     }
     pw.format("\" />\n");

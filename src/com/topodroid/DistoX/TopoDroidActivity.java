@@ -122,7 +122,7 @@ public class TopoDroidActivity extends Activity
   // private ArrayAdapter<String> mArrayAdapter;
   private ListItemAdapter mArrayAdapter;
 
-  private Button[] mButton1;
+  private MyButton[] mButton1;
   // private static int icons[] = {
   //                         R.drawable.ic_disto,
   //                         R.drawable.ic_add,
@@ -767,18 +767,13 @@ public class TopoDroidActivity extends Activity
 
     // icons00 = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
     mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
-    mButton1 = new Button[mNrButton1];
+    mButton1 = new MyButton[mNrButton1];
 
     // mMenuImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    mApp.setButtonBackground( mMenuImage, size, R.drawable.iz_menu );
+    MyButton.setButtonBackground( mApp, mMenuImage, size, R.drawable.iz_menu );
 
     for (int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new Button( this );
-      mButton1[k].setPadding(0,0,0,0);
-      mButton1[k].setOnClickListener( this );
-      // mButton1[k].setBackgroundResource(  icons00[k] );
-      // // mButton1[k].setImageResource(  icons00[k] );
-      mApp.setButtonBackground( mButton1[k], size, izons[k] );
+      mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
     }
 
     // mButtonView1 = new HorizontalImageButtonView( mButton1 );
@@ -941,7 +936,7 @@ public class TopoDroidActivity extends Activity
   {
     super.onResume();
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
-    mApp.resetLocale();
+    // mApp.resetLocale();
     mApp.resumeComm();
 
     // restoreInstanceFromFile();

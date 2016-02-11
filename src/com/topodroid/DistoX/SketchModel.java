@@ -649,7 +649,7 @@ class SketchModel
       for ( NumStation st : stations ) {
         StringWriter sw1 = new StringWriter();
         PrintWriter  pw1 = new PrintWriter( sw1 );
-        pw1.format( Locale.ENGLISH, "  point %.2f %.2f %.2f station -name %s\n\n", st.e, -st.s, -st.v, st.name );
+        pw1.format( Locale.US, "  point %.2f %.2f %.2f station -name %s\n\n", st.e, -st.s, -st.v, st.name );
         out.write( sw1.getBuffer().toString() );
       }
       for (  SketchPath path : mPaths ) {
@@ -671,7 +671,7 @@ class SketchModel
               }
             }
             for ( Vector pt : line.mLine.points ) {
-              pw2.format( Locale.ENGLISH, "    %.2f %.2f %.2f\n", pt.x, -pt.y, -pt.z );
+              pw2.format( Locale.US, "    %.2f %.2f %.2f\n", pt.x, -pt.y, -pt.z );
             }          
             {
               if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {

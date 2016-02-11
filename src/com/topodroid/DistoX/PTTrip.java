@@ -177,7 +177,7 @@ PTtrip::printTherion( FileOutputStream fp )
   }
   fprintf(fp, "    date %4d.%02d.%02d\n", y, m, d );
   if ( _declination != 0 ) {
-    fprintf(fp, "    declination %.3f degrees\n", declination );  // Locale ENGLISH
+    fprintf(fp, "    declination %.3f degrees\n", declination );  // Locale.US
   }
   fprintf(fp, "    data normal from to length compass clino\n");
   fprintf(fp, "    extend right\n");

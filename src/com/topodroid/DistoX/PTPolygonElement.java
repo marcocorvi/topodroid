@@ -114,7 +114,7 @@ class PTPolygonElement extends PTElement
 //     int k = 0;
 //     double x =   XTHERION_FACTOR * (double)(_points[k].x() - x0)/1000.0;
 //     double y = - XTHERION_FACTOR * (double)(_points[k].y() - y0)/1000.0;
-//     fprintf(fp, "    point %.3f %.3f %s\n", x, y, PtCmapActivity.getPointThName(_color) );       // Locale ENGLISH
+//     fprintf(fp, "    point %.3f %.3f %s\n", x, y, PtCmapActivity.getPointThName(_color) ); // Locale.US
 //   }
 // }
 // 

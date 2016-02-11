@@ -126,7 +126,7 @@ class PTDrawing
       ymax += XTHERION_FACTOR;
     
       fprintf(fp, "encoding utf-8\n");
-      fprintf(fp, "##XTHERION## xth_me_area_adjust %.2f %.2f %.2f %.2f \n", FIXME Locale.ENGLISH
+      fprintf(fp, "##XTHERION## xth_me_area_adjust %.2f %.2f %.2f %.2f \n", FIXME Locale.US
         xmin, ymin, xmax, ymax );
       fprintf(fp, "##XTHERION## xth_me_area_zoom_to 100\n\n");
     

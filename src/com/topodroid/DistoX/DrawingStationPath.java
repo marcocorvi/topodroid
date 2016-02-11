@@ -109,8 +109,8 @@ public class DrawingStationPath extends DrawingPath
   @Override
   public String toTherion()
   {
-    // return String.format(Locale.ENGLISH, "point %.2f %.2f station -name %s\n", mXpos*toTherion, -mYpos*toTherion, mName );
-    return String.format(Locale.ENGLISH, "point %.2f %.2f station -name %s\n", cx*toTherion, -cy*toTherion, mName );
+    // return String.format(Locale.US, "point %.2f %.2f station -name %s\n", mXpos*toTherion, -mYpos*toTherion, mName );
+    return String.format(Locale.US, "point %.2f %.2f station -name %s\n", cx*toTherion, -cy*toTherion, mName );
   }
 
   @Override
