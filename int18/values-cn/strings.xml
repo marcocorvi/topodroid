@@ -363,13 +363,7 @@
     <string name="cannot_rename">不能重命名</string>
     <string name="declination">磁偏角.</string>
     <string name="description">描述</string>
-
-<!-- FIXME this was a GIT conflict
-    <string name="name">洞穴名称</string>
-=======
     <string name="name">名称</string>
-77e3edccb5ce78f5adeb8fbb4250badb9937ccb0 
--->
     <string name="team">团队</string>
     <!-- string name="toggle_device">设备校准模式开关</string -->
     <string name="toggle_failed">启动DistoX失败</string>
