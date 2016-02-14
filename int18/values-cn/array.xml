@@ -84,8 +84,8 @@
   </string-array>
 
   <string-array name="altitudeType">
-    <item name="wgs84">WGS84 椭圆</item>
-    <item name="asl">正交</item>
+    <item name="wgs84">WGS84</item>
+    <item name="asl">海拔</item>
   </string-array>
 
   <string-array name="sockType">
