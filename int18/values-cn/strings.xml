@@ -4,16 +4,16 @@
     <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">再按返回键退出</string>
+    <string name="double_back">双击返回键退出</string>
 
-    <string name="version_ask">升级到新版的TopoDroid.\n你是否要重装绘图工具?</string>
+    <string name="version_ask">升级到新版.\n要重装绘图工具?</string>
     <string name="version_title">版本升级</string>
 
     <string name="POINT">点图例</string>
     <string name="LINE">线图例</string>
     <string name="AREA">面图例</string>
     <string name="HELP">帮助</string>
-    <string name="STATION">测量点 </string>
+    <string name="STATION">测点 </string>
 
     <string name="cut">剪切</string>
     <string name="copy">复制</string>
@@ -24,18 +24,18 @@
     <string name="memoryX310">DistoX X310 内存</string>
     <string name="memory_data">DistoX 数据</string>
 
-    <string name="td_symbol_text">你需要安装绘画工具吗?\n你可以稍后安装</string>
+    <string name="td_symbol_text">你需要安装绘画工具?\n稍后安装</string>
     <string name="td_symbol_ask">不再提示</string>
 
-    <string name="thp_user">用户</string>
+    <string name="thp_user">自定义</string>
     <string name="thp_label">标签</string>
     <!-- string name="thp_danger">危险</string -->
-    <string name="thl_user">用户</string>
-    <string name="thl_wall">洞壁</string>
-    <string name="tha_user">用户</string>
-    <string name="tha_water">水</string>
+    <string name="thl_user">自定义</string>
+    <string name="thl_wall">洞道边界</string>
+    <string name="tha_user">自定义</string>
+    <string name="tha_water">水体</string>
 
-    <string name="make_walls">洞壁</string>
+    <string name="make_walls">洞道边界</string>
     <string name="missing_station">请输入测量点</string>
     <!-- UNUSED string name="missing_area">面图例</string -->
     <!-- UNUSED string name="missing_hint">请启用或者安装缺少的工具</string -->
@@ -49,17 +49,17 @@
     <string name="failed_snap_to_point">不能与点合并</string>
 
     <string name="calibration_title">设备校准</string>
-    <string name="calibration_length">卷尺</string>
+    <string name="calibration_length">测尺</string>
     <string name="calibration_azimuth">罗盘</string>
     <string name="calibration_clino">倾角仪</string>
 
     <string name="calib_new">新建校准</string>
-    <string name="calib_exists">校准已存在</string>
+    <string name="calib_exists">已有校准</string>
     <string name="calib_delete">删除校准 </string>
     <string name="calib_device_mismatch">警告: 校准设备不匹配</string>
     <string name="calib_no_name">强制命名</string>
     <string name="calib_gm_undelete">还原校准数据?</string>
-    <string name="calib_saved">校准已保存</string>
+    <string name="calib_saved">校准数据已保存</string>
     <string name="calib_updated">更新校准数据</string>
     <string name="calib_compute_groups">计算校准数据组 ...</string>
     <string name="calib_compute_coeffs">计算校准系数 ...</string>
@@ -73,7 +73,7 @@
     <string name="calib_stddev">标准差: %1$.4f 度</string>
     <string name="calib_max_error">最大误差: %1$.4f 度</string>
     <string name="calib_ave_std">准确度: %1$.4f ± %2$.4f 度</string>
-    <string name="calib_precision">精确度</string>
+    <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
     <string name="calib_saturated_values">警告: %1$d 数据溢出</string>
     <string name="algorithm">算法:</string>
@@ -86,7 +86,7 @@
     <string name="device_illegal_addr">非法的存储地址</string>
     <string name="device_info">设备信息</string>
     <string name="device_model_set">你是否想要切换设备</string>
-    <string name="device_none">无DistoX设备可供选择</string>
+    <string name="device_none">无可供选择DistoX设备</string>
     <!-- string name="device_paired">设备已配对</string -->
     <string name="device_reset">重置 DistoX 内存</string>
     <string name="device_code">DistoX 代码 %1$4d</string>
@@ -98,31 +98,31 @@
     <string name="device_status_silent">静音 %1$s</string>
     <string name="bt_reset">重置蓝牙连接</string>
     <string name="save_as">另存为</string>
-    <string name="nickname">昵称</string>
+    <string name="nickname">别称</string>
 
     <string name="comment">注释</string>
     <string name="flag">标记</string>
     <string name="backshot">回测</string>
     <string name="duplicate">副本</string>
     <!-- string name="regular">regular</string -->
-    <string name="surface">表面</string>
+    <string name="surface">地表</string>
     <string name="extend">扩展</string>
     <string name="extend_ignore">无</string>
     <string name="extend_left">左</string>
     <string name="extend_right">右</string>
     <string name="extend_vert">垂直</string>
     <!-- string name="external_prompt">输入测量数据</string -->
-    <string name="splay_at_to">上下左右对应测量点</string>
+    <string name="splay_at_to">测量点上下左右值</string>
 
     <string name="few_data">数据不足</string>
-    <string name="few_plots">草图绘制不足</string>
+    <string name="few_plots">绘图不足</string>
     <string name="few_calibs">校准数据不足</string>
 
     <string name="calib_import_title">校准数据输入</string>
-    <string name="import_title">测量数据输入</string>
+    <string name="import_title">数据导入</string>
     <string name="import_wait">数据导入中... 请稍后...</string>
-    <string name="import_already">测量数据已输入</string>
-    <string name="import_none">无输入数据</string>
+    <string name="import_already">测量数据已导入</string>
+    <string name="import_none">无导入数据</string>
     <string name="import_failed">数据导入失败</string>
     <string name="file_not_found">未发现相应文件</string>
     <string name="import_zip_ok">成功导入zip文件</string>
@@ -140,48 +140,48 @@
     <string name="illegal_data_value">非法数值</string>
     <string name="label_title">标签</string>
     <string name="label_text">输入标签文本</string>
-    <string name="altitude">高度. </string>
-    <string name="h_ellipsoid">H ellipsoid </string>
-    <string name="h_geoid">H 地平面 </string>
-    <string name="latitude">纬度 </string>
-    <string name="longitude">经度 </string>
-    <string name="h_ellipsoid_hint">H ellip. [米]</string>
-    <string name="h_geoid_hint">H 地平面 [米]</string>
+    <string name="altitude">标高</string>
+    <string name="h_ellipsoid">椭球高度 </string>
+    <string name="h_geoid">大地水准面高度</string>
+    <string name="latitude">纬度</string>
+    <string name="longitude">经度</string>
+    <string name="h_ellipsoid_hint">椭球高度. [米]</string>
+    <string name="h_geoid_hint">大地水准面高度 [米]</string>
     <string name="latitude_hint">纬度. dd:mm:ss.sss</string>
     <string name="longitude_hint">经度. dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">圈测闭合误差</string>
-    <string name="loop_none">无圈测</string>
+    <string name="loop_closure_errors">环路闭合误差</string>
+    <string name="loop_none">无环路</string>
 
     <string name="error_azimuth_required">需输入方位角</string>
     <string name="error_length_required">需输入距离</string>
     <string name="error_clino_required">需输入倾角</string>
     <string name="error_comment_required">需输入注释</string>
-    <string name="error_begin_required">需输入起始点</string>
-    <string name="error_declination_number">倾角必须是数字</string>
-    <string name="error_end_required">需输入最终地址</string>
-    <string name="error_from_required">需输入起始测量点</string>
+    <string name="error_begin_required">输入起点</string>
+    <string name="error_declination_number">磁偏角必须是数字</string>
+    <string name="error_end_required">输入终点</string>
+    <string name="error_from_required">需输入起始测点</string>
     <string name="error_group_required">需输入组编号</string>
     <string name="error_group_non_integer">组编号必须是整数</string>
-    <string name="error_alt_required">需输入高度</string>
+    <string name="error_alt_required">需输入标度</string>
     <string name="error_invalid_number">无效数字</string>
     <string name="error_lat_required">需输入纬度</string>
     <string name="error_long_required">需输入经度</string>
     <string name="error_name_required">需输入名称</string>
-    <string name="error_start_required">需输入参考测量点</string>
-    <string name="error_station_already_fixed">测量点已有坐标</string>
-    <string name="error_station_required">需输入测量点</string>
-    <string name="error_station_non_existing">无现存测量点</string>
+    <string name="error_start_required">需输入参考测点</string>
+    <string name="error_station_already_fixed">测点已有坐标</string>
+    <string name="error_station_required">需输入测点</string>
+    <string name="error_station_non_existing">测点不存在</string>
     <string name="error_sensor_required">需指定传感器</string>
     <string name="error_value_required">需输入数值</string>
     
     <string name="group_title">标准数据组</string>
-    <string name="group_policy_four">策略: 按四个值一组</string>
-    <string name="group_policy_sixteen">策略: 四组四个, 其他单独</string>
-    <string name="group_policy_distance">策略: 按角度距离分组</string>
+    <string name="group_policy_four">规则: 按四个值一组</string>
+    <string name="group_policy_sixteen">规则: 四组四个, 其他单独</string>
+    <string name="group_policy_distance">规则: 按角度距离分组</string>
     <string name="group_reset">重置分组</string>
 
     <string name="scale">比例</string>
-    <string name="reversed">reverse</string>
+    <string name="reversed">反向</string>
     <string name="options">选项</string>
     <string name="outline">轮廓</string>
     <string name="out">出</string>
@@ -191,7 +191,7 @@
     <string name="barrier_del">显示以下的测量</string>
     <string name="hidden_add">隐藏之前的测量</string>
     <string name="hidden_del">显示之前的测量</string>
-    <string name="splays_toggle">侧线显示开关</string>
+    <string name="splays_toggle">辐线测量显示开关</string>
 
     <string name="bad_cwd">项目名称不能作为路径</string>
     <string name="bad_line">错误的线型</string>
@@ -206,7 +206,7 @@
     <string name="no_device_address">设备未指定</string>
     <string name="no_device_found">未发现设备</string>
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
-    <string name="no_leg_intersection">剖面线不与主线交叉</string>
+    <string name="no_leg_intersection">断面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>
     <string name="no_paired_device">无配对设备.\n扫描并配对一个DistoX</string>
     <string name="no_photos">测量无图片</string>
@@ -218,7 +218,7 @@
     <!-- string name="no_tdsymbol">TdSymbol 未安装</string -->
     <string name="no_thmanager">ThManager 未安装</string>
     <string name="no_db_viewer">DB_viewer 未发现</string>
-    <string name="no_undelete">没有复原的项目</string>
+    <string name="no_undelete">无还原项目</string>
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
 
@@ -245,7 +245,7 @@
     <string name="menu_manual_calibration">校准</string>
     <string name="menu_options">设置</string>
     <string name="menu_overview">概览</string>
-    <string name="menu_pair">PAIR</string>
+    <string name="menu_pair">配对</string>
     <string name="menu_palette">图例管理</string>
     <string name="menu_photo">照片</string>
     <string name="menu_sensor">传感器</string>
@@ -257,15 +257,15 @@
     <string name="menu_tdr2th2">TH2 草图</string>
     <string name="menu_validate">验证</string>
 
-    <string name="popup_join_pt">接合至附近点</string>
-    <string name="popup_snap_ln">接合至附近线</string>
+    <string name="popup_join_pt">接至附近点</string>
+    <string name="popup_snap_ln">接至附近线</string>
     <string name="popup_split_pt">复制点</string>
-    <string name="popup_split_ln">在线上的点切开</string>
+    <string name="popup_split_ln">在线上的点剪切</string>
     <string name="popup_sharp_pt">分段拉直</string>
     <string name="popup_curve_pt">分段平滑</string>
     <string name="popup_remove_pt">删除点</string>
 
-    <string name="connected_none">无连接</string>
+    <string name="connected_none">未连接</string>
     <string name="connected_already">已连接</string>
 
     <string name="not_available">蓝牙无法使用</string>
@@ -282,7 +282,7 @@
     <!-- string name="photo_sensor_prompt">选择照片或者传感器</string -->
     <string name="photo_shot">添加照片</string>
     <string name="photo_survey">分开照片</string>
-    <string name="picture_no_station">需添加照片所在的测量点</string>
+    <string name="picture_no_station">需添加照片所在的测点</string>
     <string name="plot_delete">删除草图 ?</string>
     <string name="item_delete">删除项目 %1$s ?</string>
     <string name="plot_duplicate_name">复制草图名称</string>
