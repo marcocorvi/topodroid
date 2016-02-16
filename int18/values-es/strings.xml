@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2-es.pdf</string>
-    <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
+    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string>
+    <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Haga doble click para salir</string>
@@ -118,7 +118,7 @@
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
     <string name="import_wait">Importando archivo, espere...</string>
-    <string name="import_already">Topografía ya importada</string>
+    <string name="import_already">Topografía importada con éxito</string>
     <string name="import_none">No hay archivo a importar</string>
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
     <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere ...</string>
@@ -401,7 +401,7 @@
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
     <string name="distox_err_headtail_io">Fallo memoria DistoX I/O</string>
     <string name="distox_err_headtail_eof">Fallo memoria EOF DistoX</string>
-    <string name="distox_err_connected">Dispositivo ya conectado</string>
+    <string name="distox_err_connected">Dispositivo conectado con éxito</string>
 
     <!-- UNUSED string name="ask_close">¿Cerrar TopoDroid?</string -->
     <string name="ask_reset">¿Reiniciar memoria DistoX?</string>
@@ -920,7 +920,7 @@
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">gruesa</string -->
 
-    <string name="welcome_title">Bienvenido a TopoDroid 2.7</string>
+    <string name="welcome_title">Bienvenido a TopoDroid 2.8</string>
 
 
     <string name="welcome_text">

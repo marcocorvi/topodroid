@@ -24,9 +24,9 @@
   </string-array>
   
   <!-- UNUSED string-array name="extend_name">
-     <item>左 </item>
+     <item>左宽 </item>
      <item>垂直 </item>
-     <item>右 </item>
+     <item>右宽 </item>
      <item>- -</item>
   </string-array -->
 
@@ -84,8 +84,8 @@
   </string-array>
 
   <string-array name="altitudeType">
-    <item name="wgs84">WGS84 椭圆</item>
-    <item name="asl">正交</item>
+    <item name="wgs84">WGS84</item>
+    <item name="asl">海拔</item>
   </string-array>
 
   <string-array name="sockType">
@@ -95,15 +95,15 @@
 
   <string-array name="surveyStations">
      <item name="no">No</item>
-     <item name="for">侧线, 前测主线</item>
-     <item name="back">侧线, 后测主线</item>
-     <item name="for2">前测主线, 侧线</item>
-     <item name="back2">后测主线, 侧线</item>
-     <item name="anomaly">不规则</item>
+     <item name="for">射线, 前测主线</item>
+     <item name="back">射线, 后测主线</item>
+     <item name="for2">前测主线, 射线</item>
+     <item name="back2">后测主线, 射线</item>
+     <item name="anomaly">后视</item>
   </string-array>
 
   <string-array name="pickerType">
-     <item name="recent">近期</item>
+     <item name="recent">最近</item>
      <item name="list">列表</item>
      <item name="grid">网格</item>
   </string-array>
@@ -131,19 +131,19 @@
   <string-array name="lineStyle">
      <item name="none">精细</item>
      <item name="two">正常</item>
-     <item name="three">粗糙</item>
+     <item name="three">粗略</item>
      <item name="bezier">贝塞尔曲线</item>
   </string-array>
 
   <string-array name="groupBy">
      <item name="distance">按距离</item>
      <item name="four">每四个</item>
-     <item name="only16">前 16</item>
+     <item name="only16">仅初始 16</item>
   </string-array>
 
   <string-array name="unitLength">
      <item name="meters">米</item>
-     <item name="feet">尺</item>
+     <item name="feet">英尺</item>
   </string-array>
 
   <string-array name="unitAngle">

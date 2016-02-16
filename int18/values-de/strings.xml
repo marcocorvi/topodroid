@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
-    <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
+    <string name="no_manual">Handbuch konnte nicht herunter geladen werden.</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
@@ -768,7 +768,7 @@
 
   <string name="pref_team_title">Vermessungsteam</string>
   <string name="pref_team_summary">Messteam</string>
-  <string name="pref_team_message">Default Messteam</string>
+  <string name="pref_team_message">Standard-Messteam</string>
   <string name="pref_ethr_title">Winkel für vertikalen Seitenriss</string>
   <string name="pref_ethr_summary">Grenzwert für vertikale Darstellung</string>
   <string name="pref_ethr_message">Grenzwert für vertikale Darstellung</string>
