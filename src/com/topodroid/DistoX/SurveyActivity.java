@@ -63,7 +63,7 @@ public class SurveyActivity extends Activity
 {
   private static int izons[] = { 
                         R.drawable.iz_note,
-                        R.drawable.iz_info, // ic_details,
+                        // R.drawable.iz_info, // ic_details,
                         R.drawable.iz_3d,
                         R.drawable.iz_gps,
                         R.drawable.iz_camera,
@@ -80,7 +80,7 @@ public class SurveyActivity extends Activity
                       };
   private static int help_icons[] = { 
                         R.string.help_note,
-                        R.string.help_info_shot,
+                        // R.string.help_info_shot,
                         R.string.help_3d,
                         R.string.help_loc,
                         R.string.help_photo,
@@ -272,7 +272,7 @@ public class SurveyActivity extends Activity
     if ( k < mNrButton1 && b == mButton1[k++] ) {  // note
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
-      (new SurveyStatDialog( this, mApp.mData.getSurveyStat( mApp.mSID ) )).show();
+      new SurveyStatDialog( this, mApp.mData.getSurveyStat( mApp.mSID ) ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS

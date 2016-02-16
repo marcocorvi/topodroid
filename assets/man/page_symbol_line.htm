@@ -1,6 +1,37 @@
 <html><body>
 <h4>LINE_TOOLS</h4>
 
-This page needs writing.
+The "line" tools are defined in text files.<br><p>
+
+Two line tools, "user" and "wall", are built in the programs.
+The others are loaded from the TopoDroid subdirectory <i>symbol/line</i>.
+This directory is populated with the line tools packaed in the distribution apk.
+You can delete the tools you do not need, edit the ones you want to change, and
+add new ones that are not provided in the apk.<br><p>
+
+The line tool file contains lines specifying the property of the drawing tool.
+<ul>
+<li>"symbol line" [mandatory]</li>
+<li>"name NAME", where NAME is the area default name [mandatory]</li>
+<li>translated names, eg, "name-es ..." [optional]</li>
+<li>"th_name NAME", where NAME is the Therion name, and must be the same as the filename [mandatory]</li>
+<lI>"group GROUP", specifies the group this line belongs to [optional, defauklt no group]</li>
+<li>"color rgb alpha" (rgb and alpha in hex format) [mandatory, alpha is optional]</li>
+<li>"width SIZE" [optional, multiple of "base line width"]</li>
+<li>"dash PATTERN" [ optional dash pattern]</li>
+<li>"style STYLE" where STYLE can be 'straigth' or 'xN'</li>
+<li>"effect" begins the line path-effect and is followed by path commands, and closed by</li>
+<li>"endeffect"</li>
+<li>"csurvey LAYER TYPE CATEGORY PEN"</li>
+<li>"endsymbol"</li>
+</ul>
+
+<b>Group</b><br>
+Line types in the same group can be joined together by "continuation".<br><p>
+
+This is used to specify that the various "wall" line types can be joined together.<br><p>
+
+<b>Effect path</b><br>
+This option is used to define lines with complex style.<br><p>
 
 </body></html>

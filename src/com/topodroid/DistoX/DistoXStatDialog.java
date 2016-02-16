@@ -37,6 +37,7 @@ public class DistoXStatDialog extends MyDialog
 {
     private DistoXNum mNum;
     private String mOrigin;
+    SurveyStat mStat;
 
     private TextView mTextOrigin;
     private TextView mTextLength;
@@ -47,14 +48,23 @@ public class DistoXStatDialog extends MyDialog
     private TextView mTextSplays;
     private ListView mList;
     
+    private TextView mTextLeg;
+    private TextView mTextDuplicate;
+    private TextView mTextSurface;
+    private TextView mTextSplay;
+    private TextView mTextStation;
+    private TextView mTextLoop;
+    private TextView mTextComponent;
+
 
     // private Button mBtnCancel;
 
-    public DistoXStatDialog( Context context, DistoXNum num, String origin )
+    public DistoXStatDialog( Context context, DistoXNum num, String origin, SurveyStat stat )
     {
       super( context, R.string.DistoXStatDialog );
-      mNum = num;
+      mNum    = num;
       mOrigin = origin;
+      mStat   = stat;
     }
 
     @Override
@@ -64,6 +74,9 @@ public class DistoXStatDialog extends MyDialog
 
         initLayout( R.layout.distox_stat_dialog, R.string.title_stats );
 
+        Resources res = mContext.getResources();
+        float unit = TDSetting.mUnitLength;
+
         mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
         mTextLength   = (TextView) findViewById(R.id.text_stat_length);
         mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
@@ -71,6 +84,23 @@ public class DistoXStatDialog extends MyDialog
         mTextStations = (TextView) findViewById(R.id.text_stat_stations);
         mTextShots    = (TextView) findViewById(R.id.text_stat_shots);
         mTextSplays   = (TextView) findViewById(R.id.text_stat_splays);
+
+        mTextLeg       = (TextView) findViewById(R.id.stat_leg);
+        mTextDuplicate = (TextView) findViewById(R.id.stat_duplicate);
+        mTextSurface   = (TextView) findViewById(R.id.stat_surface);
+        mTextSplay     = (TextView) findViewById(R.id.stat_splay);
+        mTextStation   = (TextView) findViewById(R.id.stat_station);
+        mTextLoop      = (TextView) findViewById(R.id.stat_loop);
+        mTextComponent = (TextView) findViewById(R.id.stat_component);
+
+        mTextLeg.setText( String.format( res.getString(R.string.stat_leg), mStat.countLeg, mStat.lengthLeg * unit ) );
+        mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate), mStat.countDuplicate, mStat.lengthDuplicate * unit ) );
+        mTextSurface.setText( String.format( res.getString(R.string.stat_surface), mStat.countSurface, mStat.lengthSurface * unit ) );
+        mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay ) );
+        mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
+        mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );
+        mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
+
    
         // mList.setOnItemClickListener( this );
         List< String > cls = mNum.getClosures();
@@ -84,21 +114,18 @@ public class DistoXStatDialog extends MyDialog
         // mBtnCancel = (Button) findViewById(R.id.button_cancel);
         // mBtnCancel.setOnClickListener( this );
 
-        Resources res = mContext.getResources();
-
         mTextOrigin.setText( String.format( res.getString(R.string.stat_origin), mOrigin ) );
 
-        mTextLength.setText( String.format( res.getString(R.string.stat_length),
-                                            mNum.surveyLength() ) );
+        mTextLength.setText( String.format( res.getString(R.string.stat_length), mNum.surveyLength() * unit ) );
         mTextWENS.setText( String.format( res.getString(R.string.stat_wens),
-                                          mNum.surveyWest(),
-                                          mNum.surveyEast(),
-                                          mNum.surveyNorth(),
-                                          mNum.surveySouth()
+                                          mNum.surveyWest()  * unit,
+                                          mNum.surveyEast()  * unit,
+                                          mNum.surveyNorth() * unit,
+                                          mNum.surveySouth() * unit
                           ) );
         mTextZminmax.setText( String.format( res.getString(R.string.stat_depth),
-                                             mNum.surveyTop(),
-                                             mNum.surveyBottom() ) );
+                                             mNum.surveyTop()    * unit,
+                                             mNum.surveyBottom() * unit ) );
         mTextStations.setText(String.format( res.getString(R.string.stat_station),
                                              mNum.stationsNr() ) );
 
