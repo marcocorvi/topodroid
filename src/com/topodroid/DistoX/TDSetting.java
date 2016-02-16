@@ -278,6 +278,8 @@ class TDSetting
   // conversion factor from internal units (m) to user units
   static float mUnitLength = 1;
   static float mUnitAngle  = 1;
+  static String mUnitLengthStr = "m";
+  static String mUnitAngleStr  = "deg";
 
   // static final String EXTEND_THR = "10"; 
   static float mExtendThr = 10;             // extend vertically splays in [90-30, 90+30] of the leg
@@ -506,8 +508,20 @@ class TDSetting
 
     parseSurveyStations( prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS 6
 
-    mUnitLength = prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ?  1.0f : TopoDroidUtil.M2FT;
-    mUnitAngle  = prefs.getString( key[k++], UNIT_ANGLE ).equals(UNIT_ANGLE) ?  1.0f : TopoDroidUtil.DEG2GRAD;
+    if ( prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
+      mUnitLength = 1.0f;
+      mUnitLengthStr = "m";
+    } else {
+      mUnitLength = TopoDroidUtil.M2FT;
+      mUnitLengthStr = "ft";
+    }
+    if ( prefs.getString( key[k++], UNIT_ANGLE ).equals(UNIT_ANGLE) ) {
+      mUnitAngle = 1.0f;
+      mUnitAngleStr = "deg";
+    } else {
+      mUnitAngle = TopoDroidUtil.DEG2GRAD;
+      mUnitAngleStr = "grad";
+    }
   
     mAccelerationThr = tryFloat( prefs, key[k++], "400" );  // DISTOX_ACCEL_THR
     mMagneticThr     = tryFloat( prefs, key[k++], "300" );  // DISTOX_MAG_THR
@@ -686,10 +700,22 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       parseSurveyStations( prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION 6
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mUnitLength = prefs.getString( k, UNIT_LENGTH ).equals(UNIT_LENGTH) ?  1.0f : TopoDroidUtil.M2FT;
+      if ( prefs.getString( k, UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
+        mUnitLength = 1.0f;
+        mUnitLengthStr = "m";
+      } else {
+        mUnitLength = TopoDroidUtil.M2FT;
+        mUnitLengthStr = "ft";
+      }
       // TDLog.Log( TDLog.LOG_UNITS, "mUnitLength changed " + mUnitLength );
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mUnitAngle  = prefs.getString( k, UNIT_ANGLE ).equals(UNIT_ANGLE) ?  1.0f : TopoDroidUtil.DEG2GRAD;
+      if ( prefs.getString( k, UNIT_ANGLE ).equals(UNIT_ANGLE) ) {
+        mUnitAngle = 1.0f;
+        mUnitAngleStr = "deg";
+      } else {
+        mUnitAngle = TopoDroidUtil.DEG2GRAD;
+        mUnitAngleStr = "grad";
+      }
       // TDLog.Log( TDLog.LOG_UNITS, "mUnitAngle changed " + mUnitAngle );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAccelerationThr = tryFloat( prefs, k, "400" ); // DISTOX_ACCEL_THR 9

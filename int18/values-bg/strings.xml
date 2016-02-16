@@ -386,17 +386,17 @@
 
     <string name="survey_info">Информация за картировката</string>
     <string name="stat_component">Компоненти %1$d</string>
-    <string name="stat_depth">Дълбочина %1$.1f %2$.1f"</string>
-    <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f</string>
-    <string name="stat_leg">Отсечки %1$d %2$.1f</string>
-    <string name="stat_length">Дължина %1$.1f</string>
+    <string name="stat_depth">Дълбочина %1$.1f %2$s %3$.1f %4$s"</string>
+    <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Отсечки %1$d %2$.1f %3$s</string>
+    <string name="stat_length">Дължина %1$.1f %2$s</string>
     <string name="stat_loop">Полигони %1$d</string>
     <string name="stat_origin">Начален репер: %1$s</string>
     <string name="stat_shot">Отсечки  %1$d,   Дублирани %2$d,   Повърхностни %3$d</string>
     <string name="stat_splay">Странични %1$d</string>
     <string name="stat_station">Репери %1$d</string>
-    <string name="stat_surface">Повърхн. отсечки %1$d %2$.1f</string>
-    <string name="stat_wens">З %1$.0f  И %2$.0f  С %3$.0f  Ю %4$.0f"</string>
+    <string name="stat_surface">Повърхн. отсечки %1$d %2$.1f %3$s</string>
+    <string name="stat_wens">З %1$.0f  И %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
     <string name="shot_title">Отсечка %1$s - %2$s"</string>
     <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
 

@@ -58,6 +58,7 @@ public class SurveyStatDialog extends MyDialog
 
         Resources res = mContext.getResources();
         float unit = TDSetting.mUnitLength;
+        String unit_str = TDSetting.mUnitLengthStr;
 
         // TDLog.Log(TDLog.LOG_STAT, " SurveyStat onCreate");
         mTextLeg       = (TextView) findViewById(R.id.stat_leg);
@@ -71,9 +72,12 @@ public class SurveyStatDialog extends MyDialog
         // mBtnBack = (Button) findViewById(R.id.btn_back);
         // mBtnBack.setOnClickListener( this );
 
-        mTextLeg.setText( String.format( res.getString(R.string.stat_leg), mStat.countLeg, mStat.lengthLeg * unit ) );
-        mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate), mStat.countDuplicate, mStat.lengthDuplicate * unit ) );
-        mTextSurface.setText( String.format( res.getString(R.string.stat_surface), mStat.countSurface, mStat.lengthSurface * unit ) );
+        mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
+                          mStat.countLeg, mStat.lengthLeg * unit, unit_str ) );
+        mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
+                          mStat.countDuplicate, mStat.lengthDuplicate * unit, unit_str ) );
+        mTextSurface.setText( String.format( res.getString(R.string.stat_surface),
+                          mStat.countSurface, mStat.lengthSurface * unit, unit_str ) );
         mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay ) );
         mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
         mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );

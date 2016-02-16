@@ -376,17 +376,17 @@
 
     <string name="survey_info">Info rilievo</string>
     <string name="stat_component">Componenti %1$d</string>
-    <string name="stat_depth">Profondità %1$.1f %2$.1f"</string>
-    <string name="stat_duplicate">Battute doppie %1$d %2$.1f</string>
-    <string name="stat_leg">Battute %1$d %2$.1f</string>
-    <string name="stat_length">Sviluppo %1$.1f</string>
+    <string name="stat_depth">Profondità %1$.1f %2$s %3$.1f %4$s"</string>
+    <string name="stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Battute %1$d %2$.1f %3$s</string>
+    <string name="stat_length">Sviluppo %1$.1f %2$s</string>
     <string name="stat_loop">Anelli %1$d</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
     <string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string>
     <string name="stat_splay">Splay %1$d</string>
     <string name="stat_station">Capisaldi %1$d</string>
-    <string name="stat_surface">Tiri di superficie %1$d %2$.1f</string>
-    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <string name="stat_surface">Tiri di superficie %1$d %2$.1f %3$s</string>
+    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="shot_title">BATTUTA %1$s - %2$s"</string>
     <string name="shot_data">D %1$.2f  N %2$.1f  I %3$.1f"</string>
 

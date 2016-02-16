@@ -397,17 +397,17 @@
 
     <string name="survey_info">Vermessungsinfo</string>
     <string name="stat_component">Komponenten %1$d</string>
-    <string name="stat_depth">Tiefe %1$.1f %2$.1f"</string>
-    <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f</string>
-    <string name="stat_leg">Messstrecke %1$d %2$.1f</string>
-    <string name="stat_length">Länge %1$.1f</string>
+    <string name="stat_depth">Tiefe %1$.1f %2$s %3$.1f %4$s"</string>
+    <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s</string>
+    <string name="stat_length">Länge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
     <string name="stat_origin">Urspungs-Messpunkt: %1$s</string>
     <string name="stat_shot">Messungen  %1$d,   Doppelte %2$d,   Oberfläche %3$d</string>
     <string name="stat_splay">Hilfszüge %1$d</string>
     <string name="stat_station">Messpunkte %1$d</string>
-    <string name="stat_surface">Oberflächenmessungen %1$d %2$.1f</string>
-    <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <string name="stat_surface">Oberflächenmessungen %1$d %2$.1f %3$s</string>
+    <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="shot_title">Messung %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  A %2$.1f  N %3$.1f"</string>
 

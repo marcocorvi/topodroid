@@ -99,7 +99,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // Log.v( TopoDroidApp.TAG, "load system areas");
     if ( size() > 0 ) return;
 
-    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user", "user", 0x66ffffff, null, TileMode.REPEAT, TileMode.REPEAT );
+    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user", "user", 0x67cccccc, null, TileMode.REPEAT, TileMode.REPEAT, false );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;
@@ -107,8 +107,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     symbol.mCsxBrush = 2;
     addSymbol( symbol );
 
-    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water", "water", 0x660000ff, null, TileMode.REPEAT, TileMode.REPEAT );
-    symbol.mCloseHorizontal = true;
+    symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water", "water", 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;

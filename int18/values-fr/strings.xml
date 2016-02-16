@@ -383,17 +383,17 @@
 
     <string name="survey_info">Information de relevé</string>
     <string name="stat_component">Composants %1$d</string>
-    <string name="stat_depth">Profondeur %1$.1f %2$.1f"</string>
-    <string name="stat_duplicate">Visée dupliquées %1$d %2$.1f</string>
-    <string name="stat_leg">Cheminements %1$d %2$.1f</string>
-    <string name="stat_length">Longueur %1$.1f</string>
+    <string name="stat_depth">Profondeur %1$.1f %2$s %3$.1f %4$s"</string>
+    <string name="stat_duplicate">Visée dupliquées %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Cheminements %1$d %2$.1f %3$s</string>
+    <string name="stat_length">Longueur %1$.1f %2$s</string>
     <string name="stat_loop">Boucle %1$d</string>
     <string name="stat_origin">0 - Station Origine: %1$s</string>
     <string name="stat_shot">Visées  %1$d,   Dupliquées %2$d,   Surface %3$d</string>
     <string name="stat_splay">Visées latérales %1$d</string>
     <string name="stat_station">Stations %1$d</string>
-    <string name="stat_surface">Surface des visées %1$d %2$.1f</string>
-    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <string name="stat_surface">Surface des visées %1$d %2$.1f %3$s</string>
+    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="shot_title">VISEE %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 

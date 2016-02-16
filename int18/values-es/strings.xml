@@ -370,17 +370,17 @@
 
     <string name="survey_info">Info Topografía</string>
     <string name="stat_component">Componentes %1$d</string>
-    <string name="stat_depth">Profundidad %1$.1f %2$.1f"</string>
-    <string name="stat_duplicate">mediciones duplicadas %1$d %2$.1f</string>
-    <string name="stat_leg">Visual %1$d %2$.1f</string>
-    <string name="stat_length">Desarrollo %1$.1f</string>
+    <string name="stat_depth">Profundidad %1$.1f %2$s %3$.1f %4$s"</string>
+    <string name="stat_duplicate">mediciones duplicadas %1$d %2$.1f %3$s</string>
+    <string name="stat_leg">Visual %1$d %2$.1f %3$s</string>
+    <string name="stat_length">Desarrollo %1$.1f %2$s</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
     <string name="stat_shot">Toma  %1$d,   Duplicada %2$d,   Superficie %3$d</string>
     <string name="stat_splay">Toma secundaria %1$d</string>
     <string name="stat_station">Estaciones %1$d</string>
-    <string name="stat_surface">mediciones Superficie %1$d %2$.1f</string>
-    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <string name="stat_surface">mediciones Superficie %1$d %2$.1f %3$s</string>
+    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 

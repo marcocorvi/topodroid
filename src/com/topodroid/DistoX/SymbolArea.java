@@ -69,7 +69,8 @@ class SymbolArea extends Symbol
   /** 
    * color 0xaarrggbb
    */
-  SymbolArea( String name, String th_name, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode )
+  SymbolArea( String name, String th_name, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode,
+              boolean close_horizontal )
   {
     super( th_name, fname );
     mName = name;
@@ -77,7 +78,7 @@ class SymbolArea extends Symbol
     mBitmap = bitmap;
     mXMode  = xmode;
     mYMode  = ymode;
-    mCloseHorizontal = false;
+    mCloseHorizontal = close_horizontal;
     mOrientable  = false;
     mOrientation = 0;
     mPaint = new Paint();
@@ -113,7 +114,14 @@ class SymbolArea extends Symbol
   void makePath()
   {
     mPath = new Path();
-    mPath.addCircle( 0, 0, 10, Path.Direction.CCW );
+    if ( mCloseHorizontal ) {
+      mPath.moveTo( -10, -5 );
+      mPath.cubicTo( -10, 0, -5, 5,  0,  5 );
+      mPath.cubicTo(   5, 5,  10, 0, 10, -5 );
+      mPath.close();
+    } else {
+      mPath.addCircle( 0, 0, 10, Path.Direction.CCW );
+    }
   }
 
   SymbolArea( String filepath, String fname, String locale, String iso )

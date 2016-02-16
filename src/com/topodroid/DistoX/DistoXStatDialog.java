@@ -76,6 +76,7 @@ public class DistoXStatDialog extends MyDialog
 
         Resources res = mContext.getResources();
         float unit = TDSetting.mUnitLength;
+        String unit_str = TDSetting.mUnitLengthStr;
 
         mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
         mTextLength   = (TextView) findViewById(R.id.text_stat_length);
@@ -93,9 +94,12 @@ public class DistoXStatDialog extends MyDialog
         mTextLoop      = (TextView) findViewById(R.id.stat_loop);
         mTextComponent = (TextView) findViewById(R.id.stat_component);
 
-        mTextLeg.setText( String.format( res.getString(R.string.stat_leg), mStat.countLeg, mStat.lengthLeg * unit ) );
-        mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate), mStat.countDuplicate, mStat.lengthDuplicate * unit ) );
-        mTextSurface.setText( String.format( res.getString(R.string.stat_surface), mStat.countSurface, mStat.lengthSurface * unit ) );
+        mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
+                          mStat.countLeg, mStat.lengthLeg * unit, unit_str ) );
+        mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
+                          mStat.countDuplicate, mStat.lengthDuplicate * unit, unit_str ) );
+        mTextSurface.setText( String.format( res.getString(R.string.stat_surface),
+                          mStat.countSurface, mStat.lengthSurface * unit, unit_str ) );
         mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay ) );
         mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
         mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );
@@ -116,16 +120,18 @@ public class DistoXStatDialog extends MyDialog
 
         mTextOrigin.setText( String.format( res.getString(R.string.stat_origin), mOrigin ) );
 
-        mTextLength.setText( String.format( res.getString(R.string.stat_length), mNum.surveyLength() * unit ) );
+        mTextLength.setText( String.format( res.getString(R.string.stat_length),
+                             mNum.surveyLength() * unit, unit_str ) );
         mTextWENS.setText( String.format( res.getString(R.string.stat_wens),
                                           mNum.surveyWest()  * unit,
                                           mNum.surveyEast()  * unit,
                                           mNum.surveyNorth() * unit,
-                                          mNum.surveySouth() * unit
+                                          mNum.surveySouth() * unit,
+                                          unit_str
                           ) );
         mTextZminmax.setText( String.format( res.getString(R.string.stat_depth),
-                                             mNum.surveyTop()    * unit,
-                                             mNum.surveyBottom() * unit ) );
+                                             mNum.surveyTop()    * unit, unit_str,
+                                             mNum.surveyBottom() * unit, unit_str ) );
         mTextStations.setText(String.format( res.getString(R.string.stat_station),
                                              mNum.stationsNr() ) );
 
