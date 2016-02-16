@@ -105,19 +105,14 @@ public class CalibActivity extends Activity
   {
     mButton1[1].setEnabled( isSaved );   // open
     if ( 2 < mNrButton1 ) mButton1[2].setEnabled( isSaved ); // coeff (read)
-    // mButton1[3].setEnabled( isSaved );   // export
     if ( isSaved ) {
-      // mButton1[1].setBackgroundResource( icons00[1] );
       mButton1[1].setBackgroundDrawable( mBMopen );
       if ( 2 < mNrButton1 ) {
-        // mButton1[2].setBackgroundResource( icons00[2] );
         mButton1[2].setBackgroundDrawable( mBMread );
       }
     } else {
-      // mButton1[1].setBackgroundResource( icons00no[1] );
       mButton1[1].setBackgroundDrawable( mBMopen_no );
       if ( 2 < mNrButton1 ) {
-        // mButton1[2].setBackgroundResource( icons00no[2] );
         mButton1[2].setBackgroundDrawable( mBMread_no );
       }
     }

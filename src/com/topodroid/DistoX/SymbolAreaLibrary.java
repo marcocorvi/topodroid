@@ -44,6 +44,12 @@ class SymbolAreaLibrary extends SymbolLibrary
     // for ( Symbol s : mSymbols ) Log.v("DistoX", "area " + s.getName() + " " + s.getThName() );
   }
 
+  boolean isCloseHorizontal( int k ) 
+  {
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return ( s == null )? false : s.mCloseHorizontal;
+  }
+
   double getAreaOrientation( int k )
   {
     SymbolArea s = (SymbolArea)getSymbolByIndex(k);
@@ -102,6 +108,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     addSymbol( symbol );
 
     symbol = new SymbolArea( res.getString( R.string.tha_water ),  "water", "water", 0x660000ff, null, TileMode.REPEAT, TileMode.REPEAT );
+    symbol.mCloseHorizontal = true;
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;

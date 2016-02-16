@@ -108,16 +108,6 @@ public class ShotActivity extends Activity
                         R.drawable.iz_station,
                         R.drawable.iz_dial
                       };
-  private static int izonx[] = {
-                        R.drawable.iz_station,
-                        R.drawable.iz_download,
-                        R.drawable.iz_bt,
-                        R.drawable.iz_mode,
-                        R.drawable.iz_plot,
-                        R.drawable.iz_note,
-                        R.drawable.iz_plus,
-                        R.drawable.iz_dial
-                      };
 
   private static int izonsno[] = {
                         0,
@@ -744,11 +734,10 @@ public class ShotActivity extends Activity
 
     mNrButton1 = TDSetting.mLevelOverNormal ? 8 : ( TDSetting.mLevelOverBasic ? 6 : 5 );
     mButton1 = new MyButton[ mNrButton1 ];
-    int k;
-    for ( k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new MyButton( this, this, mButtonSize, izons[k], izonx[k] );
-      if ( k == BTN_DOWNLOAD ) mBMdownload = mButton1[k].mBitmap;
-      if ( k == BTN_PLOT ) mBMplot = mButton1[k].mBitmap;
+    for ( int k=0; k<mNrButton1; ++k ) {
+      mButton1[k] = new MyButton( this, this, mButtonSize, izons[k], 0 );
+      if ( k == BTN_DOWNLOAD ) { mBMdownload = mButton1[k].mBitmap; }
+      else if ( k == BTN_PLOT ) { mBMplot = mButton1[k].mBitmap; }
     }
     mBMdial          = BitmapFactory.decodeResource( getResources(), R.drawable.iz_dial );
     mBMplot_no       = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_plot_no );

@@ -31,6 +31,7 @@ class SymbolArea extends Symbol
 {
   String mName;
   int mColor;
+  boolean mCloseHorizontal;
   boolean mOrientable;
   double mOrientation;
   Paint mPaint;
@@ -76,6 +77,7 @@ class SymbolArea extends Symbol
     mBitmap = bitmap;
     mXMode  = xmode;
     mYMode  = ymode;
+    mCloseHorizontal = false;
     mOrientable  = false;
     mOrientation = 0;
     mPaint = new Paint();
@@ -290,6 +292,8 @@ class SymbolArea extends Symbol
             pxl = null;
   	  } else if ( vals[k].equals("orientable") ) {
             mOrientable = true;
+  	  } else if ( vals[k].equals("close-horizontal") ) {
+            mCloseHorizontal = true;
 
   	  } else if ( vals[k].equals("endsymbol") ) {
   	    if ( name == null ) {

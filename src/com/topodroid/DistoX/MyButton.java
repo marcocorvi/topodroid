@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import android.content.Context;
 import android.widget.Button;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.MotionEvent;
 
@@ -24,7 +25,7 @@ public class MyButton extends Button
 {
   Context mContext;
   BitmapDrawable mBitmap;
-  BitmapDrawable mBitmap2;
+  // BitmapDrawable mBitmap2;
 
   public MyButton( Context context, OnClickListener click_listener, int size, int res_id, int res_id2 )
   {
@@ -32,8 +33,9 @@ public class MyButton extends Button
     mContext = context;
     setPadding(0,0,0,0);
     setOnClickListener( click_listener );
+        
     mBitmap  = getButtonBackground( mContext, size, res_id );
-    mBitmap2 = ( res_id2 > 0 )? getButtonBackground( mContext, size, res_id2 ) : null;
+    // mBitmap2 = ( res_id2 > 0 )? getButtonBackground( mContext, size, res_id2 ) : null;
     setBackgroundDrawable( mBitmap );
   }
 

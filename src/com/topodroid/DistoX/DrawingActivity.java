@@ -825,7 +825,7 @@ public class DrawingActivity extends ItemDrawer
       for ( int k=0; k<mNrButton1; ++k ) {
         ic = ( k <3 )? k : off+k;
         mButton1[k] = new MyButton( this, this, mButtonSize, izons[ic], 0 );
-        if ( ic == IC_DOWNLOAD ) { mBMdownload = mButton1[k].mBitmap; }
+        if ( ic == IC_DOWNLOAD )  { mBMdownload = mButton1[k].mBitmap; }
         else if ( ic == IC_PLAN ) { mBMplan = mButton1[k].mBitmap; }
       }
       mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
@@ -1628,6 +1628,7 @@ public class DrawingActivity extends ItemDrawer
             mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
               mName+"-a", TDSetting.mAreaBorder );
             mCurrentAreaPath.addStartPoint( x_scene, y_scene );
+            // Log.v("DistoX", "start area start " + x_scene + " " + y_scene );
             mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
           } else { // SYMBOL_POINT
             // mSaveX = x_canvas; // FIXME-000
@@ -1700,6 +1701,7 @@ public class DrawingActivity extends ItemDrawer
               if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
                 if ( ++mPointCnt % mLinePointStep == 0 ) {
                   mCurrentAreaPath.addPoint( x_scene, y_scene );
+                  // Log.v("DistoX", "start area add " + x_scene + " " + y_scene );
                 }
                 mCurrentBrush.mouseMove( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
               } else {
@@ -1768,21 +1770,27 @@ public class DrawingActivity extends ItemDrawer
           float y_shift = y_canvas - mSaveY;
           if ( mMode == MODE_DRAW ) {
             if ( mSymbol == SYMBOL_LINE || mSymbol == SYMBOL_AREA ) {
-              // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_UP line style " + mApp.mLineStyle );
-              // TDLog.Log( TDLog.LOG_PLOT, 
-              //   "  path size " + ((mSymbol == SYMBOL_LINE )? mCurrentLinePath.size() : mCurrentAreaPath.size()) );
 
               mCurrentBrush.mouseUp( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
               mDrawingSurface.previewPath.mPath = new Path();
 
-              if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
-                   || ( mPointCnt % mLinePointStep ) > 0 ) {
-                if ( mSymbol == SYMBOL_LINE ) {
+              if ( mSymbol == SYMBOL_LINE ) {
+                if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
+                     || ( mPointCnt % mLinePointStep ) > 0 ) {
                   mCurrentLinePath.addPoint( x_scene, y_scene );
-                } else if ( mSymbol == SYMBOL_AREA ) {
-                  mCurrentAreaPath.addPoint( x_scene, y_scene );
+                }
+              } else if ( mSymbol == SYMBOL_AREA ) {
+                if ( mType != PlotInfo.PLOT_PLAN && DrawingBrushPaths.mAreaLib.isCloseHorizontal( mCurrentArea ) ) {
+                  // Log.v("DistoX", "close horizontal " + y_scene + " -> " + mCurrentAreaPath.mFirst.mY );
+                  mCurrentAreaPath.addPoint( x_scene, mCurrentAreaPath.mFirst.mY );
+                } else {  
+                  if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
+                       || ( mPointCnt % mLinePointStep ) > 0 ) {
+                    mCurrentAreaPath.addPoint( x_scene, y_scene );
+                  }
                 }
               }
+              
               if ( mPointCnt > mLinePointStep ) {
                 if ( ! ( mSymbol == SYMBOL_LINE && mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) 
                      && TDSetting.mLineStyle == TDSetting.LINE_STYLE_BEZIER

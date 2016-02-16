@@ -271,7 +271,7 @@ public class SurveyActivity extends Activity
     int k = 0;
     if ( k < mNrButton1 && b == mButton1[k++] ) {  // note
       doNotes();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // details
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
       (new SurveyStatDialog( this, mApp.mData.getSurveyStat( mApp.mSID ) )).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
@@ -579,7 +579,6 @@ public class SurveyActivity extends Activity
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
-        // new SurveyExportDialog( this, this ).show();
         new ExportDialog( this, this, TopoDroidConst.mSurveyExportTypes, R.string.title_survey_export ).show();
       } else if ( p++ == pos ) { // TDR to TH2 
         askTdr2Th2();
