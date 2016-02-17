@@ -26,7 +26,7 @@ import android.util.FloatMath;
  */
 public class SketchStationName extends SketchPath
 {
-  private static float toTherion = 1.0f; // TopoDroidConst.TO_THERION;
+  private static float toTherion = 1.0f; // TDConst.TO_THERION;
 
   String mName;   // station name
   float x, y, z;  // world coordinates

@@ -32,7 +32,7 @@ import android.util.Log;
  */
 public class DrawingPointPath extends DrawingPath
 {
-  private static float toTherion = TopoDroidConst.TO_THERION;
+  private static float toTherion = TDConst.TO_THERION;
 
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;

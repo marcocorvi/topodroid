@@ -1780,7 +1780,7 @@ public class DrawingActivity extends ItemDrawer
                   mCurrentLinePath.addPoint( x_scene, y_scene );
                 }
               } else if ( mSymbol == SYMBOL_AREA ) {
-                if ( mType != PlotInfo.PLOT_PLAN && DrawingBrushPaths.mAreaLib.isCloseHorizontal( mCurrentArea ) ) {
+                if ( PlotInfo.isVertical( mType ) && DrawingBrushPaths.mAreaLib.isCloseHorizontal( mCurrentArea ) ) {
                   // Log.v("DistoX", "close horizontal " + y_scene + " -> " + mCurrentAreaPath.mFirst.mY );
                   mCurrentAreaPath.addPoint( x_scene, mCurrentAreaPath.mFirst.mY );
                 } else {  
@@ -3216,7 +3216,7 @@ public class DrawingActivity extends ItemDrawer
 
   public void refreshDisplay( int nr, boolean toast )
   {
-    setTitleColor( TopoDroidConst.COLOR_NORMAL );
+    setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         doComputeReferences();
@@ -3325,13 +3325,13 @@ public class DrawingActivity extends ItemDrawer
 
   public void doExport( String type )
   {
-    int index = TopoDroidConst.plotExportIndex( type );
+    int index = TDConst.plotExportIndex( type );
     switch ( index ) {
-      case TopoDroidConst.DISTOX_EXPORT_TH2: saveTh2(); break;
-      case TopoDroidConst.DISTOX_EXPORT_CSX: saveCsx(); break;
-      case TopoDroidConst.DISTOX_EXPORT_PNG: savePng(); break;
-      case TopoDroidConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break;
-      case TopoDroidConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
+      case TDConst.DISTOX_EXPORT_TH2: saveTh2(); break;
+      case TDConst.DISTOX_EXPORT_CSX: saveCsx(); break;
+      case TDConst.DISTOX_EXPORT_PNG: savePng(); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break;
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
     }
   }
 
@@ -3342,7 +3342,7 @@ public class DrawingActivity extends ItemDrawer
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
-        new ExportDialog( this, this, TopoDroidConst.mPlotExportTypes, R.string.title_plot_save ).show();
+        new ExportDialog( this, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
           new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start, mData.getSurveyStat( mApp.mSID ) ).show();

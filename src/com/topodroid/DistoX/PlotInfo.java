@@ -28,6 +28,11 @@ class PlotInfo
   public static final long PLOT_SKETCH_3D  = 6;
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
 
+  static boolean isVertical( long type ) 
+  {
+    return ( type == PLOT_EXTENDED || type == PLOT_SECTION || type == PLOT_X_SECTION );
+  }
+
   // public static final String[] plotType = {
   //   "X-SECTION",  // vertical cross section
   //   "PLAN",       // plan

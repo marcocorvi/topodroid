@@ -61,7 +61,7 @@ class FixedInfo extends MagLatLong
 
   static String double2string( double x )
   {
-    return ( TDSetting.mUnitLocation == TopoDroidConst.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
+    return ( TDSetting.mUnitLocation == TDConst.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
   }
 
   static private String double2ddmmss( double x )

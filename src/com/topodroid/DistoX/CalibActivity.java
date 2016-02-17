@@ -423,7 +423,7 @@ public class CalibActivity extends Activity
 
   public void doExport( String type )
   {
-    int index = TopoDroidConst.calibExportIndex( type );
+    int index = TDConst.calibExportIndex( type );
     if ( index >= 0 ) doExport( index, true );
   }
 
@@ -438,7 +438,7 @@ public class CalibActivity extends Activity
       if ( p++ == pos ) { // EXPORT
         if ( mApp.myCalib != null ) {
           // new CalibExportDialog( this, this ).show();
-          new ExportDialog( this, this, TopoDroidConst.mCalibExportTypes, R.string.title_calib_export ).show();
+          new ExportDialog( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
         }
       } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
         if ( mApp.myCalib != null ) {
@@ -463,7 +463,7 @@ public class CalibActivity extends Activity
     } else {
       String filename = null;
       switch ( exportType ) {
-        case TopoDroidConst.DISTOX_EXPORT_CSV:
+        case TDConst.DISTOX_EXPORT_CSV:
           filename = mApp.exportCalibAsCsv();
       }
       if ( warn ) { 

@@ -847,7 +847,7 @@ public class DistoXProtocol
             mIn.readFully( mBuffer, 0, 8 );
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
-              TDLog.LogFile( "Firmware upload: failure " + mBuffer[0] + " reply_addr " + reply_addr );
+              TDLog.LogFile( "Firmware upload: failure  at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
               ok = false;
               break;
             }

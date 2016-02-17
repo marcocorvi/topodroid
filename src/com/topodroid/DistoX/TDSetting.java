@@ -530,8 +530,8 @@ class TDSetting
     mLoopClosure   = prefs.getBoolean( key[k++], false );   // DISTOX_LOOP_CLOSURE
     mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
 
-    mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TopoDroidConst.DDMMSS  // choice
-                                                                            : TopoDroidConst.DEGREE;
+    mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS  // choice
+                                                                            : TDConst.DEGREE;
     mCRS           = prefs.getString( key[k++], "Long-Lat" );                 // DISTOX_CRS
 
     // ------------------- CALIBRATION PREFERENCES
@@ -729,8 +729,8 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCheckAttached = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TopoDroidConst.DDMMSS
-                                                                       : TopoDroidConst.DEGREE;
+      mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS
+                                                                       : TDConst.DEGREE;
       // TDLog.Log( TDLog.LOG_UNITS, "mUnitLocation changed " + mUnitLocation );
     // } else if ( k.equals( key[ nk++ ] ) ) {
     //   try {

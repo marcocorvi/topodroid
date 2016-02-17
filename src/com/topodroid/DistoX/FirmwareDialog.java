@@ -182,12 +182,15 @@ class FirmwareDialog extends MyDialog
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          TDLog.LogFile( "Firmware uploading from file " + filename );
-          int ret = mApp.uploadFirmware( filename );
-          TDLog.LogFile( "Firmware upload result " + ret );
+          String pathname = TDPath.getBinFile( filename );
+          TDLog.LogFile( "Firmware uploading from path " + pathname );
+          File file = new File( pathname ); // file must exists
+          long len = file.length();
+          int ret  = mApp.uploadFirmware( filename );
+          TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + len );
           Toast.makeText( mParent, 
-            String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret ),
-            Toast.LENGTH_SHORT).show();
+            String.format( mParent.getResources().getString(R.string.firmware_file_uploaded), filename, ret, len ),
+            Toast.LENGTH_LONG).show();
           // finish(); 
         }
       }

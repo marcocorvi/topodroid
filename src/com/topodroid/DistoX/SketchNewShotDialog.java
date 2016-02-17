@@ -116,12 +116,12 @@ public class SketchNewShotDialog extends Dialog
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
-        mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-        mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mETfrom.setInputType( TDConst.NUMBER_DECIMAL );
+        mETto.setInputType( TDConst.NUMBER_DECIMAL );
       }
-      mETlength.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETazimuth.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETclino.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
+      mETlength.setInputType( TDConst.NUMBER_DECIMAL );
+      mETazimuth.setInputType( TDConst.NUMBER_DECIMAL );
+      mETclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
     }
 
     // TextView station = (TextView) findViewById(R.id.tv_station );

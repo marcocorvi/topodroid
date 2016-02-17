@@ -412,14 +412,14 @@ public class DeviceActivity extends Activity
       }
     }
     if ( enable ) {
-      setTitleColor( TopoDroidConst.COLOR_NORMAL );
+      setTitleColor( TDConst.COLOR_NORMAL );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib );
       if ( TDSetting.mLevelOverNormal ) {
         mButton1[IDX_READ].setBackgroundDrawable( mBMread);
       }
     } else {
-      setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+      setTitleColor( TDConst.COLOR_CONNECTED );
       mButton1[IDX_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
       mButton1[IDX_CALIB].setBackgroundDrawable( mBMcalib_no );
       if ( TDSetting.mLevelOverNormal ) {

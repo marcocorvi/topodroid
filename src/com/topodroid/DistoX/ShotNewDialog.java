@@ -149,19 +149,19 @@ public class ShotNewDialog extends MyDialog
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
-        mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-        mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mETfrom.setInputType( TDConst.NUMBER_DECIMAL );
+        mETto.setInputType( TDConst.NUMBER_DECIMAL );
       }
-      mETdistance.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETbearing.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETclino.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
-      mETbackdistance.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETbackbearing.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETbackclino.setInputType( TopoDroidConst.NUMBER_DECIMAL_SIGNED );
-      mETleft.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETright.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETup.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mETdown.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      mETdistance.setInputType( TDConst.NUMBER_DECIMAL );
+      mETbearing.setInputType( TDConst.NUMBER_DECIMAL );
+      mETclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+      mETbackdistance.setInputType( TDConst.NUMBER_DECIMAL );
+      mETbackbearing.setInputType( TDConst.NUMBER_DECIMAL );
+      mETbackclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+      mETleft.setInputType( TDConst.NUMBER_DECIMAL );
+      mETright.setInputType( TDConst.NUMBER_DECIMAL );
+      mETup.setInputType( TDConst.NUMBER_DECIMAL );
+      mETdown.setInputType( TDConst.NUMBER_DECIMAL );
     }
 
 

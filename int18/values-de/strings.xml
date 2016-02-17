@@ -1000,6 +1000,6 @@
    <string name="ask_upload">Firmware updaten?</string>
    <string name="ask_upload_not_compatible">Kompatibilität konnte nicht sicher gestellt werden.\nFirmware trotzdem updaten?</string>
    <string name="firmware_file_dumped">Firmware gespeichert als %1$s (Grösse %2$d)</string>
-   <string name="firmware_file_uploaded">Firmware %1$s geupdatet (Grösse %2$d)</string>
+   <!-- FIXME string name="firmware_file_uploaded">Firmware %1$s geupdatet (written %2$d / %3$d)</string -->
 
 </resources>

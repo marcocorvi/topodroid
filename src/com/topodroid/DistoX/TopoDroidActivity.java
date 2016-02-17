@@ -138,7 +138,7 @@ public class TopoDroidActivity extends Activity
   //                         R.drawable.ix_database
   //                         };
   private static int izons[] = {
-                          R.drawable.iz_disto, // iz_disto2b,
+                          R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
                           R.drawable.iz_therion,
@@ -385,7 +385,7 @@ public class TopoDroidActivity extends Activity
   {
     String title = getResources().getString( R.string.app_name );
     setTitle( mApp.getConnectionStateTitleStr() + title );
-    setTitleColor( TopoDroidConst.COLOR_NORMAL );
+    setTitleColor( TDConst.COLOR_NORMAL );
     // Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
 
@@ -600,7 +600,7 @@ public class TopoDroidActivity extends Activity
   {
     // FIXME connect-title string
     setTitle( R.string.import_title );
-    setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+    setTitleColor( TDConst.COLOR_CONNECTED );
     if ( filename.endsWith(".th") ) {
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" );

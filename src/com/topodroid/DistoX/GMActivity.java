@@ -657,9 +657,9 @@ public class GMActivity extends Activity
   {
     setTitle( mCalibName );
     if ( mBlkStatus == 0 ) {
-      setTitleColor( TopoDroidConst.COLOR_NORMAL );
+      setTitleColor( TDConst.COLOR_NORMAL );
     } else {
-      setTitleColor( TopoDroidConst.COLOR_NORMAL2 );
+      setTitleColor( TDConst.COLOR_NORMAL2 );
     }
   }
 
@@ -683,13 +683,13 @@ public class GMActivity extends Activity
     mButton1[5].setEnabled( enable );
     mButton1[6].setEnabled( enable && mEnableWrite );
     if ( enable ) {
-      setTitleColor( TopoDroidConst.COLOR_NORMAL );
+      setTitleColor( TDConst.COLOR_NORMAL );
       // mButton1[1].setBackgroundResource( icons00[1] );
       // mButton1[5].setBackgroundResource( icons00[5] );
       mButton1[1].setBackgroundDrawable( mBMtoggle );
       mButton1[5].setBackgroundDrawable( mBMread );
     } else {
-      setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+      setTitleColor( TDConst.COLOR_CONNECTED );
       // mButton1[1].setBackgroundResource( icons00no[1] );
       // mButton1[5].setBackgroundResource( icons00no[5] );
       mButton1[1].setBackgroundDrawable( mBMtoggle_no );
@@ -729,7 +729,7 @@ public class GMActivity extends Activity
           Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
         } else {
           enableWrite( false );
-          setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+          setTitleColor( TDConst.COLOR_CONNECTED );
           if ( mAlgo == 0 ) { // CALIB_ALGO_AUTO
             mAlgo = mApp.getCalibAlgoFromDevice();
             if ( mAlgo < 0 ) { // CALIB_ALGO_AUTO
@@ -781,7 +781,7 @@ public class GMActivity extends Activity
       } else if ( b == mButton1[4] ) { // COMPUTE
         if ( mApp.mCID >= 0 ) {
           setTitle( R.string.calib_compute_coeffs );
-          setTitleColor( TopoDroidConst.COLOR_COMPUTE );
+          setTitleColor( TDConst.COLOR_COMPUTE );
           if ( mAlgo == 0 ) { // CALIB_ALGO_AUTO
             mAlgo = ( TDSetting.mCalibAlgo != 0 ) ? TDSetting.mCalibAlgo : 1; // CALIB_AUTO_LINEAR
             mApp.updateCalibAlgo( mAlgo );
@@ -800,7 +800,7 @@ public class GMActivity extends Activity
             Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
           } else {
             setTitle( R.string.calib_write_coeffs );
-            setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+            setTitleColor( TDConst.COLOR_CONNECTED );
 
             byte[] coeff = mApp.mCalibration.GetCoeff();
             if ( coeff == null ) {
@@ -820,7 +820,7 @@ public class GMActivity extends Activity
   void computeGroups( long start_id )
   {
     setTitle( R.string.calib_compute_groups );
-    setTitleColor( TopoDroidConst.COLOR_COMPUTE );
+    setTitleColor( TDConst.COLOR_COMPUTE );
     new CalibComputer( this, start_id, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
   }
 
@@ -832,7 +832,7 @@ public class GMActivity extends Activity
   void resetAndComputeGroups( long start_id )
   {
     setTitle( R.string.calib_compute_groups );
-    setTitleColor( TopoDroidConst.COLOR_COMPUTE );
+    setTitleColor( TDConst.COLOR_COMPUTE );
     new CalibComputer( this, start_id, CalibComputer.CALIB_RESET_AND_COMPUTE_GROUPS ).execute();
   }
 

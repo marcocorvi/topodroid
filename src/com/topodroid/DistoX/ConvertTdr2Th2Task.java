@@ -83,7 +83,7 @@ class ConvertTdr2Th2Task extends AsyncTask<Intent,Void,Boolean>
           DrawingIO.dataStream2Therion( tdrfile, bw, bbox, false ); // false == no endscrap
           if ( TDSetting.mAutoStations &&
                ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) ) {
-            float toTherion = TopoDroidConst.TO_THERION;
+            float toTherion = TDConst.TO_THERION;
             NumStationSet nss = num.mStations;
             List< NumStation > ns = nss.getStations();
             float x = 0;

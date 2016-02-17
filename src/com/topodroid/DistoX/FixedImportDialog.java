@@ -119,7 +119,7 @@ public class FixedImportDialog extends MyDialog
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
-        mETstation.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mETstation.setInputType( TDConst.NUMBER_DECIMAL );
       }
     }
 

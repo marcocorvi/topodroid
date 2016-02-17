@@ -307,7 +307,7 @@ public class ShotActivity extends Activity
   void setTheTitle()
   {
     setTitle( mApp.getConnectionStateTitleStr() + mApp.mySurvey );
-    // FIXME setTitleColor( TopoDroidConst.COLOR_NORMAL );
+    // FIXME setTitleColor( TDConst.COLOR_NORMAL );
   }
 
   boolean isCurrentStationName( String st ) { return mApp.isCurrentStationName( st ); }

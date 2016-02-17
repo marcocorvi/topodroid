@@ -31,7 +31,7 @@ import android.util.Log;
  */
 public class DrawingStationPath extends DrawingPath
 {
-  private static float toTherion = TopoDroidConst.TO_THERION;
+  private static float toTherion = TDConst.TO_THERION;
 
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
   protected int mScale;       //! symbol scale

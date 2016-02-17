@@ -106,7 +106,7 @@ public class PlotNewDialog extends MyDialog
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
-        mEditStart.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mEditStart.setInputType( TDConst.NUMBER_DECIMAL );
       }
     }
   }

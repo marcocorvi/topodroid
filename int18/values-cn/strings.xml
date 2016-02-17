@@ -1053,6 +1053,6 @@
    <string name="ask_upload">升级固件?</string>
    <string name="ask_upload_not_compatible">固件文件不争取.\n强行升级?</string>
    <string name="firmware_file_dumped">保存固件文件 %1$s size %2$d</string>
-   <string name="firmware_file_uploaded">升级固件文件 %1$s size %2$d</string>
+   <!-- FIXME string name="firmware_file_uploaded">升级固件文件 %1$s written %2$d / %3$d </string -->
    
 </resources>

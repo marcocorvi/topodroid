@@ -22,7 +22,7 @@ import android.util.FloatMath;
 
 public class LinePoint extends BezierPoint
 {
-  private static final float toTherion = TopoDroidConst.TO_THERION;
+  private static final float toTherion = TDConst.TO_THERION;
 
   // public float mX;
   // public float mY;

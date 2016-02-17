@@ -182,8 +182,8 @@ public class DrawingShotDialog extends MyDialog
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
-        mETfrom.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-        mETto.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mETfrom.setInputType( TDConst.NUMBER_DECIMAL );
+        mETto.setInputType( TDConst.NUMBER_DECIMAL );
       }
     }
 

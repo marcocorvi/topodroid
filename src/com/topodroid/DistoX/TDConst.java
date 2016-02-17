@@ -1,4 +1,4 @@
-/** @file TopoDroidConst.java
+/** @file TDConst.java
  *
  * @author marco corvi
  * @date jan 2014
@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import android.text.InputType;
 
-class TopoDroidConst
+class TDConst
 {
   static final int DISTOX_EXPORT_TH  = 0;
   static final int DISTOX_EXPORT_TLX = 1;

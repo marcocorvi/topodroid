@@ -415,8 +415,8 @@ public class SurveyActivity extends Activity
 
   public void doExport( String type )
   {
-    int index = TopoDroidConst.surveyExportIndex( type );
-    if ( index == TopoDroidConst.DISTOX_EXPORT_ZIP ) {
+    int index = TDConst.surveyExportIndex( type );
+    if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {
       doExport( index, true );
@@ -432,22 +432,22 @@ public class SurveyActivity extends Activity
     } else {
       String filename = null;
       switch ( exportType ) {
-        // case TopoDroidConst.DISTOX_EXPORT_TLX:
+        // case TDConst.DISTOX_EXPORT_TLX:
         //   filename = mApp.exportSurveyAsTlx();
         //   break;
-        case TopoDroidConst.DISTOX_EXPORT_DAT:
+        case TDConst.DISTOX_EXPORT_DAT:
           filename = mApp.exportSurveyAsDat();
           break;
-        case TopoDroidConst.DISTOX_EXPORT_SVX:
+        case TDConst.DISTOX_EXPORT_SVX:
           filename = mApp.exportSurveyAsSvx();
           break;
-        case TopoDroidConst.DISTOX_EXPORT_TRO:
+        case TDConst.DISTOX_EXPORT_TRO:
           filename = mApp.exportSurveyAsTro();
           break;
-        case TopoDroidConst.DISTOX_EXPORT_CSV:
+        case TDConst.DISTOX_EXPORT_CSV:
           filename = mApp.exportSurveyAsCsv();
           break;
-        case TopoDroidConst.DISTOX_EXPORT_DXF:
+        case TDConst.DISTOX_EXPORT_DXF:
           List<DistoXDBlock> list = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
           DistoXDBlock blk = list.get( 0 );
           if ( blk != null ) {
@@ -456,23 +456,23 @@ public class SurveyActivity extends Activity
             filename = mApp.exportSurveyAsDxf( num );
           }
           break;
-        case TopoDroidConst.DISTOX_EXPORT_KML:
+        case TDConst.DISTOX_EXPORT_KML:
           filename = mApp.exportSurveyAsKml( ); // can return ""
           break;
-        case TopoDroidConst.DISTOX_EXPORT_PLT:
+        case TDConst.DISTOX_EXPORT_PLT:
           filename = mApp.exportSurveyAsPlt( ); // can return ""
           break;
-        case TopoDroidConst.DISTOX_EXPORT_CSX:
+        case TDConst.DISTOX_EXPORT_CSX:
           filename = mApp.exportSurveyAsCsx( null, null );
           break;
-        case TopoDroidConst.DISTOX_EXPORT_TOP:
+        case TDConst.DISTOX_EXPORT_TOP:
           filename = mApp.exportSurveyAsTop( null, null );
           break;
-        case TopoDroidConst.DISTOX_EXPORT_SRV:
+        case TDConst.DISTOX_EXPORT_SRV:
           filename = mApp.exportSurveyAsSrv();
           break;
 
-        case TopoDroidConst.DISTOX_EXPORT_TH:
+        case TDConst.DISTOX_EXPORT_TH:
         default:
           filename = mApp.exportSurveyAsTh();
           break;
@@ -579,7 +579,7 @@ public class SurveyActivity extends Activity
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
-        new ExportDialog( this, this, TopoDroidConst.mSurveyExportTypes, R.string.title_survey_export ).show();
+        new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
       } else if ( p++ == pos ) { // TDR to TH2 
         askTdr2Th2();
       } else if ( p++ == pos ) { // RENAME

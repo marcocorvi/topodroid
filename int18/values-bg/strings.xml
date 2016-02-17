@@ -1039,7 +1039,7 @@
    <string name="ask_upload">Качване на фърмуер?</string>
    <string name="ask_upload_not_compatible">Файлът с фърмуер не изглежда коректен.\nПродължаване с качването?</string>
    <string name="firmware_file_dumped">Записан файл %1$s с размер %2$d</string>
-   <string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d</string>
+   <!-- FIXME string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d / %3$d</string -->
 
 
 </resources>

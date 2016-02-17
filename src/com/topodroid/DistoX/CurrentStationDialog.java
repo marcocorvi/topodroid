@@ -107,7 +107,7 @@ public class CurrentStationDialog extends MyDialog
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
-        mName.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mName.setInputType( TDConst.NUMBER_DECIMAL );
       }
     }
 

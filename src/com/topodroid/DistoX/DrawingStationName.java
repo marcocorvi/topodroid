@@ -28,7 +28,7 @@ import android.graphics.Matrix;
 
 public class DrawingStationName extends DrawingPointPath
 {
-  private static float toTherion = TopoDroidConst.TO_THERION;
+  private static float toTherion = TDConst.TO_THERION;
 
   String mName; // station name
   NumStation mStation;

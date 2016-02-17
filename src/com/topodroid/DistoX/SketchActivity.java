@@ -1621,7 +1621,7 @@ public class SketchActivity extends ItemDrawer
           // TODO if there is an empty shot use it, else try to download the data
           //      with the Asynch task that download the data.
           //      if there is an empty shot assign it
-          setTitleColor( TopoDroidConst.COLOR_CONNECTED );
+          setTitleColor( TDConst.COLOR_CONNECTED );
           ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
           new DataDownloadTask( mApp, handler ).execute();
           // new DataDownloadTask( mApp, this ).execute();
@@ -1808,10 +1808,10 @@ public class SketchActivity extends ItemDrawer
 
   public void doExport( String type )
   {
-    int index = TopoDroidConst.sketchExportIndex( type );
+    int index = TDConst.sketchExportIndex( type );
     switch ( index ) {
-      case TopoDroidConst.DISTOX_EXPORT_TH3: doSaveTh3( false ); break;
-      case TopoDroidConst.DISTOX_EXPORT_DXF: doSaveDxf(); break;
+      case TDConst.DISTOX_EXPORT_TH3: doSaveTh3( false ); break;
+      case TDConst.DISTOX_EXPORT_DXF: doSaveDxf(); break;
     }
   }
 
@@ -1823,7 +1823,7 @@ public class SketchActivity extends ItemDrawer
       int p = 0;
       if ( p++ == pos ) { // EXPORT
         // new SketchSaveDialog( this, this ).show();
-        new ExportDialog( this, this, TopoDroidConst.mSketchExportTypes, R.string.title_plot_save ).show();
+        new ExportDialog( this, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // PALETTE 
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
@@ -1981,7 +1981,7 @@ public class SketchActivity extends ItemDrawer
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
-    setTitleColor( TopoDroidConst.COLOR_NORMAL );
+    setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );

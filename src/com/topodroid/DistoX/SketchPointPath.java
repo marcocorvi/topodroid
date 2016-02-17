@@ -29,7 +29,7 @@ import android.util.Log;
 public class SketchPointPath extends SketchPath
 {
   // static final String TAG = "DistoX";
-  private static float toTherion = 1.0f; // TopoDroidConst.TO_THERION;
+  private static float toTherion = 1.0f; // TDConst.TO_THERION;
 
   static final int SCALE_NONE = -3; // used to force scaling
   static final int SCALE_XS = -2;

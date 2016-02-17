@@ -96,12 +96,12 @@ public class FixedAddDialog extends MyDialog
       MyKeyboard.registerEditText( mKeyboard, mETlat,  flag );
     } else {
       mKeyboard.hide();
-      mETlng.setInputType(  TopoDroidConst.NUMBER_DECIMAL_SIGNED );
-      mETlat.setInputType(  TopoDroidConst.NUMBER_DECIMAL_SIGNED );
-      mEThell.setInputType( TopoDroidConst.NUMBER_DECIMAL );
-      mEThgeo.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+      mETlng.setInputType(  TDConst.NUMBER_DECIMAL_SIGNED );
+      mETlat.setInputType(  TDConst.NUMBER_DECIMAL_SIGNED );
+      mEThell.setInputType( TDConst.NUMBER_DECIMAL );
+      mEThgeo.setInputType( TDConst.NUMBER_DECIMAL );
       if ( TDSetting.mStationNames == 1 ) {
-        mETstation.setInputType( TopoDroidConst.NUMBER_DECIMAL );
+        mETstation.setInputType( TDConst.NUMBER_DECIMAL );
       }
     }
 

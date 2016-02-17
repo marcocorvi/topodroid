@@ -125,7 +125,7 @@ public class CalibGMDialog extends MyDialog
     if ( TDSetting.mKeyboard ) {
       MyKeyboard.registerEditText( mKeyboard, mETname, MyKeyboard.FLAG_SIGN );
     } else {
-      mETname.setInputType( TopoDroidConst.NUMBER_SIGNED );
+      mETname.setInputType( TDConst.NUMBER_SIGNED );
     }
     setEditable( mETbearing, null, false, MyKeyboard.FLAG_POINT );
     setEditable( mETclino,   null, false, MyKeyboard.FLAG_POINT );

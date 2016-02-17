@@ -30,7 +30,7 @@ import java.util.Locale;
  */
 public class DrawingLabelPath extends DrawingPointPath
 {
-  private static float toTherion = TopoDroidConst.TO_THERION;
+  private static float toTherion = TDConst.TO_THERION;
   public String mText;
   // private Paint paint;
 
