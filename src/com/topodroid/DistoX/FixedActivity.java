@@ -99,7 +99,8 @@ public class FixedActivity extends Activity
 
   // ListView   mMenu;
   // Button     mImage;
-  // ArrayAdapter< String > mMenuAdapter;
+  // // ArrayAdapter< String > mMenuAdapter;
+  // MyMenuAdapter mMenuAdapter;
   // boolean onMenu;
 
   private static int izons[] = { 

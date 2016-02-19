@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import java.util.Locale;
 import java.util.List;
 import java.util.Calendar;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.IOException;
@@ -114,7 +115,8 @@ public class SurveyActivity extends Activity
   HorizontalButtonView mButtonView1;
   ListView   mMenu;
   Button     mImage;
-  ArrayAdapter< String > mMenuAdapter;
+  // ArrayAdapter< String > mMenuAdapter;
+  MyMenuAdapter mMenuAdapter;
   boolean onMenu;
   String mInitStation = null;
 
@@ -554,7 +556,9 @@ public class SurveyActivity extends Activity
   private void setMenuAdapter()
   {
     Resources res = getResources();
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
     mMenuAdapter.add( res.getString( menus[2] ) );

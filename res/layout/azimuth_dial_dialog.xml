@@ -7,48 +7,25 @@
     android:paddingRight="6dp"
     android:paddingBottom="3dp">
 
-    <LinearLayout android:id="@+id/layout3"
-      android:layout_width="match_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      android:layout_marginTop="2dp"
-      >
-
-      <!-- Button android:id="@+id/btn_back"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_gravity="left"
-        android:background="@drawable/ic_back"
-        android:layout_marginRight="20dp"
-        / -->
-
-      <Button
-        android:id="@+id/btn_azimuth"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_gravity="center"
-        android:background="@drawable/iz_dial"
-        style="@style/button_default"
-        />
-
-      <!-- Button android:id="@+id/btn_fore"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_gravity="right"
-        android:background="@drawable/ic_forw"
-        android:layout_marginLeft="20dp"
-        / -->
-
-      <SeekBar android:id="@+id/seekbar"
-         android:layout_gravity="center"
-         android:layout_width="fill_parent"
-         android:layout_height="20dp" 
-         android:max="360"
-         android:background="#666666"
-         android:progressDrawable="@drawable/progress2"
+    <Button
+      android:id="@+id/btn_azimuth"
+      android:layout_width="96dp"
+      android:layout_height="96dp"
+      android:layout_gravity="center"
+      android:background="@drawable/iz_dial"
+      style="@style/button_default"
+      android:layout_marginTop="10dp"
       />
 
-    </LinearLayout>				  
+    <SeekBar android:id="@+id/seekbar"
+      android:layout_gravity="center"
+      android:layout_width="fill_parent"
+      android:layout_height="20dp" 
+      android:max="360"
+      android:background="#666666"
+      android:progressDrawable="@drawable/progress2"
+      android:layout_marginTop="10dp"
+    />
 
     <LinearLayout android:id="@+id/layout4"
       android:layout_width="wrap_content" 
@@ -72,27 +49,33 @@
       android:layout_marginTop="25dip"
       >
       <Button android:id="@+id/btn_left"
-        android:layout_width="wrap_content" 
+        android:layout_width="0dp" 
         android:layout_height="wrap_content" 
+        android:layout_weight="25"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_left"
         android:layout_marginRight="20dp"
+        android:singleLine="true"
       />
       <Button android:id="@+id/btn_ok"
-        android:layout_width="wrap_content" 
+        android:layout_width="0dp" 
         android:layout_height="wrap_content" 
+        android:layout_weight="25"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_ok"
+        android:singleLine="true"
       />
       <Button android:id="@+id/btn_right"
-        android:layout_width="wrap_content" 
+        android:layout_width="0dp" 
         android:layout_height="wrap_content" 
+        android:layout_weight="25"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_right"
         android:layout_marginLeft="20dp"
+        android:singleLine="true"
       />
    		
     </LinearLayout>

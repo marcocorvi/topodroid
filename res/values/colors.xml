@@ -2,6 +2,7 @@
 <resources>
     <color name="menu_foreground">#ff33ccff</color>
     <color name="menu_background">#ff333333</color>
+    <color name="menu_highlight">#ffff9900</color>
     <color name="button_background">#ff33ccff</color>
     <color name="bg_grey">#ff999999</color>
     <color name="bg_white">#ffffffff</color>

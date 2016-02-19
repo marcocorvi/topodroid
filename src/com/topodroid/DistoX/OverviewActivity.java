@@ -327,7 +327,8 @@ public class OverviewActivity extends ItemDrawer
     HorizontalButtonView mButtonView1;
     ListView   mMenu;
     Button     mImage;
-    ArrayAdapter< String > mMenuAdapter;
+    // ArrayAdapter< String > mMenuAdapter;
+    MyMenuAdapter mMenuAdapter;
     boolean onMenu;
   
     List<DistoXDBlock> mBlockList = null;
@@ -941,7 +942,9 @@ public class OverviewActivity extends ItemDrawer
   private void setMenuAdapter()
   {
     Resources res = getResources();
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
     mMenu.setAdapter( mMenuAdapter );

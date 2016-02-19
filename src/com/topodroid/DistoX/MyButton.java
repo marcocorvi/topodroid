@@ -21,34 +21,66 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
+import android.util.Log;
+
 public class MyButton extends Button
 {
   Context mContext;
   BitmapDrawable mBitmap;
-  // BitmapDrawable mBitmap2;
+  BitmapDrawable mBitmap2;
+  OnClickListener mListener;
+  int mSize;
+  float mX;
 
   public MyButton( Context context, OnClickListener click_listener, int size, int res_id, int res_id2 )
   {
     super( context );
     mContext = context;
     setPadding(0,0,0,0);
-    setOnClickListener( click_listener );
+    mSize = size;
+    mListener = click_listener;
+    // setOnClickListener( click_listener );
         
-    mBitmap  = getButtonBackground( mContext, size, res_id );
+    mBitmap  = getButtonBackground2( mContext, size, res_id );
     // mBitmap2 = ( res_id2 > 0 )? getButtonBackground( mContext, size, res_id2 ) : null;
     setBackgroundDrawable( mBitmap );
   }
 
-  // @Override
-  // public boolean onTouchEvent( MotionEvent ev )
-  // {
-  //   int action = ev.getAction();
-  //   if ( action == MotionEvent.ACTION_DOWN ) {
-  //     setBackgroundDrawable( mBitmap2 );
-  //     setBackgroundDrawable( mBitmap );
-  //   }
-  //   return false;
-  // }
+  @Override
+  public boolean onTouchEvent( MotionEvent ev )
+  {
+    int action = ev.getAction();
+    if ( action == MotionEvent.ACTION_DOWN ) {
+      mX = ev.getX();
+      setBackgroundDrawable( mBitmap2 );
+      // Log.v("DistoX", "Touch DOWN");
+      return true;
+    } else if ( action == MotionEvent.ACTION_UP ) {
+      setBackgroundDrawable( mBitmap );
+      if ( Math.abs( ev.getX() - mX ) < mSize ) {
+        // FIXME should test also on Y
+        mListener.onClick( this );
+      }
+    }
+    return false;
+  }
+
+  private BitmapDrawable getButtonBackground2( Context c, int size, int res_id )
+  {
+    Bitmap bm1 = BitmapFactory.decodeResource( c.getResources(), res_id );
+    Bitmap bmx = Bitmap.createScaledBitmap( bm1, size, size, false );
+    int w = bmx.getWidth();
+    int h = bmx.getHeight();
+    int pxl[] = new int[w*h];
+    bmx.getPixels( pxl, 0, w, 0, 0, w, h );
+    for ( int k=0; k<w*h; ++k ) pxl[k] |= 0xccff9900;
+    Bitmap bmy = Bitmap.createBitmap( pxl, 0, w, w, h, Bitmap.Config.ARGB_8888 );
+    mBitmap2 = new BitmapDrawable( c.getResources(), bmy );
+
+    BitmapDrawable bm2 = new BitmapDrawable( c.getResources(), bmx );
+    return bm2;
+  }
+
 
   static BitmapDrawable getButtonBackground( Context c, int size, int res_id )
   {

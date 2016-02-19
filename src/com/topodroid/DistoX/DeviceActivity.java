@@ -174,7 +174,8 @@ public class DeviceActivity extends Activity
   HorizontalButtonView mButtonView1;
   ListView   mMenu;
   Button     mImage;
-  ArrayAdapter< String > mMenuAdapter;
+  // ArrayAdapter< String > mMenuAdapter;
+  MyMenuAdapter mMenuAdapter;
   boolean onMenu;
 
 
@@ -754,7 +755,9 @@ public class DeviceActivity extends Activity
   private void setMenuAdapter()
   {
     Resources res = getResources();
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
     if ( TDSetting.mLevelOverBasic ) mMenuAdapter.add( res.getString( menus[2] ) );

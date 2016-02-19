@@ -637,13 +637,14 @@ public class TopoDroidActivity extends Activity
   HorizontalButtonView mButtonView1;
   Button     mMenuImage;
   ListView   mMenu;
-  ArrayAdapter< String > mMenuAdapter;
+  // ArrayAdapter< String > mMenuAdapter;
+  MyMenuAdapter mMenuAdapter;
   
 
   void setMenuAdapter( Resources res )
   {
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    // FIXME TextView tv = ((TextVie)mMenuAdaptergetView()).setTextSize( 24 );
+    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );

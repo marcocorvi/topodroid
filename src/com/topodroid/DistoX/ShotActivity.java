@@ -472,6 +472,10 @@ public class ShotActivity extends Activity
       return;
     }
     if ( mMenu == (ListView)parent ) {
+      view.setBackgroundColor( 0xffff9900 ); // R.color.menu_highlight
+      view.invalidate();
+      try { Thread.sleep( 200 ); } catch( InterruptedException e ) { }
+      view.setBackgroundColor( 0xff333333 ); // R.color.menu_background
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // SURVEY ACTIVITY
@@ -689,7 +693,8 @@ public class ShotActivity extends Activity
   HorizontalButtonView mButtonView2;
   ListView   mMenu = null;
   Button     mImage;
-  ArrayAdapter< String > mMenuAdapter;
+  // ArrayAdapter< String > mMenuAdapter;
+  MyMenuAdapter mMenuAdapter;
   boolean onMenu = false;
 
   BitmapDrawable mBMdownload;
@@ -1359,7 +1364,9 @@ public class ShotActivity extends Activity
   {
     int k = 0;
     Resources res = getResources();
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+
     mMenuAdapter.add( res.getString( menus[k++] ) );                                             // menu_survey
     if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
     if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  

@@ -664,7 +664,8 @@ public class DrawingActivity extends ItemDrawer
   HorizontalButtonView mButtonView5;
   ListView   mMenu;
   Button     mImage;
-  ArrayAdapter< String > mMenuAdapter;
+  // ArrayAdapter< String > mMenuAdapter;
+  MyMenuAdapter mMenuAdapter;
   boolean onMenu;
 
   List<DistoXDBlock> mList = null;
@@ -1780,9 +1781,30 @@ public class DrawingActivity extends ItemDrawer
                   mCurrentLinePath.addPoint( x_scene, y_scene );
                 }
               } else if ( mSymbol == SYMBOL_AREA ) {
-                if ( PlotInfo.isVertical( mType ) && DrawingBrushPaths.mAreaLib.isCloseHorizontal( mCurrentArea ) ) {
-                  // Log.v("DistoX", "close horizontal " + y_scene + " -> " + mCurrentAreaPath.mFirst.mY );
-                  mCurrentAreaPath.addPoint( x_scene, mCurrentAreaPath.mFirst.mY );
+                // Log.v("DistoX",
+                //       "DX " + (x_scene - mCurrentAreaPath.mFirst.mX) + " DY " + (y_scene - mCurrentAreaPath.mFirst.mY ) );
+                if (    PlotInfo.isVertical( mType )
+                     && DrawingBrushPaths.mAreaLib.isCloseHorizontal( mCurrentArea ) 
+                     && Math.abs( x_scene - mCurrentAreaPath.mFirst.mX ) > 20  // 20 == 1.0 meter
+                     && Math.abs( y_scene - mCurrentAreaPath.mFirst.mY ) < 10  // 10 == 0.5 meter
+                  ) {
+                  LinePoint lp = mCurrentAreaPath.mFirst; 
+                  float yy = lp.mY;
+                  mCurrentAreaPath.addPoint( x_scene, yy-0.001f );
+                  DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
+                                                              mCurrentAreaPath.mAreaCnt, 
+                                                              mCurrentAreaPath.mPrefix, 
+                                                              TDSetting.mAreaBorder );
+                  area.addStartPoint( lp.mX, lp.mY );
+                  for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                    if ( lp.mY <= yy ) {
+                      area.addPoint( lp.mX, yy );
+                      break;
+                    } else {
+                      area.addPoint( lp.mX, lp.mY );
+                    }
+                  }
+                  mCurrentAreaPath = area;
                 } else {  
                   if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
                        || ( mPointCnt % mLinePointStep ) > 0 ) {
@@ -3300,7 +3322,9 @@ public class DrawingActivity extends ItemDrawer
   private void setMenuAdapter()
   {
     Resources res = getResources();
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+
     mMenuAdapter.add( res.getString( menus[0] ) );  // EXPORT
     if ( isSection() || isXSection() ) {
       mMenuAdapter.add( res.getString( menus[8] ) );  // AREA
