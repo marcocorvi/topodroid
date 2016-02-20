@@ -45,20 +45,11 @@ class MyMenuItem extends TextView
   public MyMenuItem( Context context, OnClickListener listener, String text )
   {  
     super( context );
-
-    // LinearLayout ll = new LinearLayout( context );
-    // // ll.setOrientation( LinearLayout.HORIZONTAL );
-    // int lw = LinearLayout.LayoutParams.MATCH_PARENT;
-    // int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
-    // LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
-
     setTextColor( 0xff33ccff );
-    setBackgroundColor( 0xccff9900 );
+    setBackgroundColor( 0xff333333 );
     setTextSize( 14 );
     setText( text );
     setPadding( 10, 10, 5, 10 );
-    // ll.addView( this, new LinearLayout.LayoutParams(lh,lw) );
-    // mView = ll;
     mListener = listener;
     mTouch = false;
 

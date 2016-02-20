@@ -30,7 +30,7 @@ public class MyButton extends Button
   BitmapDrawable mBitmap2;
   OnClickListener mListener;
   int mSize;
-  float mX;
+  float mX, mY;
 
   public MyButton( Context context, OnClickListener click_listener, int size, int res_id, int res_id2 )
   {
@@ -52,13 +52,13 @@ public class MyButton extends Button
     int action = ev.getAction();
     if ( action == MotionEvent.ACTION_DOWN ) {
       mX = ev.getX();
+      mY = ev.getY();
       setBackgroundDrawable( mBitmap2 );
       // Log.v("DistoX", "Touch DOWN");
       return true;
     } else if ( action == MotionEvent.ACTION_UP ) {
       setBackgroundDrawable( mBitmap );
-      if ( Math.abs( ev.getX() - mX ) < mSize ) {
-        // FIXME should test also on Y
+      if ( Math.abs( ev.getX() - mX ) < mSize && Math.abs( ev.getY() - mY ) < mSize ) {
         mListener.onClick( this );
       }
     }

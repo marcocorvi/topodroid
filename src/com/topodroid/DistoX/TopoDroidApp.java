@@ -273,11 +273,11 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------------
   // ConnListener
-  ArrayList< Handler > mConnListener;
+  ArrayList< Handler > mConnListener = null;
 
   void registerConnListener( Handler hdl )
   {
-    if ( hdl != null ) {
+    if ( hdl != null && mConnListener != null ) {
       mConnListener.add( hdl );
       // try {
       //   new Messenger( hdl ).send( new Message() );
@@ -287,7 +287,7 @@ public class TopoDroidApp extends Application
 
   void unregisterConnListener( Handler hdl )
   {
-    if ( hdl != null ) {
+    if ( hdl != null && mConnListener != null ) {
       // try {
       //   new Messenger( hdl ).send( new Message() );
       // } catch ( RemoteException e ) { }
@@ -298,6 +298,7 @@ public class TopoDroidApp extends Application
   private void notifyConnState( int w )
   {
     // Log.v( TAG, "notify conn state" );
+    if ( mConnListener == null ) return;
     for ( Handler hdl : mConnListener ) {
       try {
         Message msg = Message.obtain();
@@ -484,6 +485,7 @@ public class TopoDroidApp extends Application
     mData  = new DataHelper( this, mDataListeners );
     mDData = new DeviceHelper( this, null ); 
 
+    // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
     TDSetting.loadPreferences( this, mPrefs );
     checkAutoPairing();
 
@@ -513,9 +515,11 @@ public class TopoDroidApp extends Application
       mCosurvey =  value != null && value.equals("on");
       setCoSurvey( false );
       setBooleanPreference( "DISTOX_COSURVEY", false );
+      if ( mCosurvey ) {
+        mSyncConn = new ConnectionHandler( this );
+        mConnListener = new ArrayList< Handler >();
+      }
     }
-
-    mSyncConn = new ConnectionHandler( this );
 
     mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), "" ) );
 
@@ -537,7 +541,6 @@ public class TopoDroidApp extends Application
     //   // finish(); // FIXME
     //   // return;
     // }
-    mConnListener = new ArrayList< Handler >();
 
     mComm = new DistoXComm( this );
 
@@ -556,6 +559,7 @@ public class TopoDroidApp extends Application
       isTracing = true;
       Debug.startMethodTracing("DISTOX");
     }
+    // TDLog.Debug("ready");
   }
 
   void resetLocale()
@@ -1834,7 +1838,7 @@ public class TopoDroidApp extends Application
 
   void connectRemoteTopoDroid( BluetoothDevice device )
   { 
-    if ( mSyncConn != null ) { mSyncConn.connect( device ); }
+    if ( mSyncConn != null ) mSyncConn.connect( device );
   }
 
   void disconnectRemoteTopoDroid( BluetoothDevice device )
@@ -1848,16 +1852,12 @@ public class TopoDroidApp extends Application
 
   void syncRemoteTopoDroid( BluetoothDevice device )
   { 
-    if ( mSyncConn != null ) {
-      mSyncConn.syncDevice( device );
-    }
+    if ( mSyncConn != null ) mSyncConn.syncDevice( device );
   }
 
   void startRemoteTopoDroid( )
   { 
-    if ( mSyncConn != null ) {
-      mSyncConn.start( );
-    }
+    if ( mSyncConn != null ) mSyncConn.start( );
   }
 
   void stopRemoteTopoDroid( )
@@ -1876,9 +1876,7 @@ public class TopoDroidApp extends Application
   void syncConnectedDevice( String name )
   {
     Toast.makeText( this, "Sync connected " + name, Toast.LENGTH_SHORT ).show();
-    if ( mSyncConn != null ) {
-      registerDataListener( mSyncConn );
-    }
+    if ( mSyncConn != null ) registerDataListener( mSyncConn );
   }
 
   // ---------------------------------------------------------------
