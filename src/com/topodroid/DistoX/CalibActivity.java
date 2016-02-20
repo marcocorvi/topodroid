@@ -212,7 +212,7 @@ public class CalibActivity extends Activity
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
     closeMenu();
-    mMenu.setOnItemClickListener( this );
+    // mMenu.setOnItemClickListener( this );
   }
 
   // ---------------------------------------------------------------
@@ -427,6 +427,29 @@ public class CalibActivity extends Activity
     onMenu = false;
   }
 
+  private void handleMenu( int pos )
+  {
+    closeMenu();
+    // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
+    int p = 0;
+    if ( p++ == pos ) { // EXPORT
+      if ( mApp.myCalib != null ) {
+        // new CalibExportDialog( this, this ).show();
+        new ExportDialog( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
+      }
+    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
+      if ( mApp.myCalib != null ) {
+        askDelete();
+      }
+    } else if ( p++ == pos ) { // OPTIONS
+      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
+      startActivity( intent );
+    } else if ( p++ == pos ) { // HELP
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
+    }
+  }
+
   public void doExport( String type )
   {
     int index = TDConst.calibExportIndex( type );
@@ -438,25 +461,7 @@ public class CalibActivity extends Activity
   {
     // CharSequence item = ((TextView) view).getText();
     if ( mMenu == (ListView)parent ) {
-      closeMenu();
-      // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
-      int p = 0;
-      if ( p++ == pos ) { // EXPORT
-        if ( mApp.myCalib != null ) {
-          // new CalibExportDialog( this, this ).show();
-          new ExportDialog( this, this, TDConst.mCalibExportTypes, R.string.title_calib_export ).show();
-        }
-      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DELETE 
-        if ( mApp.myCalib != null ) {
-          askDelete();
-        }
-      } else if ( p++ == pos ) { // OPTIONS
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
-        startActivity( intent );
-      } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
-      }
+      handleMenu( pos );
     }
   }
 

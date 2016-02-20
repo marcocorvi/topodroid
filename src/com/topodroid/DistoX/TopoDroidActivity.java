@@ -306,16 +306,6 @@ public class TopoDroidActivity extends Activity
       return true;
     }
     CharSequence item = ((TextView) view).getText();
-    // TDLog.Log( TDLog.LOG_INPUT, "TopoDroidActivity onItemLongClick() " + item.toString() );
-    // switch ( mStatus ) {
-    //   case STATUS_SURVEY:
-    //     startSurvey( item.toString(), 0 ); // , -1, -1 );
-    //     return true;
-    //   case STATUS_CALIB:
-    //     startCalib( item.toString(), 0 );
-    //     return true;
-    // }
-    // return false;
     startSurvey( item.toString(), 0 ); // , -1, -1 );
     return true;
   }
@@ -332,39 +322,7 @@ public class TopoDroidActivity extends Activity
   {
     CharSequence item = ((TextView) view).getText();
     if ( mMenu == (ListView)parent ) {
-      closeMenu();
-      // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
-      int p = 0;
-      if ( p++ == pos ) { // PALETTE
-        DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, this )).show();
-      } else { 
-        Intent intent;
-        if ( p++ == pos ) { // SETTINGS
-          intent = new Intent( this, TopoDroidPreferences.class );
-          intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
-          startActivity( intent );
-        } else { 
-          if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
-            intent = new Intent( this, TopoDroidPreferences.class );
-            intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
-            startActivity( intent );
-          } else {  
-            if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
-              (new ConnectDialog( this, mApp )).show();
-            } else { 
-              if ( p++ == pos ) { // ABOUT
-                (new TopoDroidAbout( this )).show();
-              } else { 
-                if ( p++ == pos ) { // HELP
-                  (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
-                }
-              }
-            }
-          }
-        }
-      }
-      // updateDisplay();
+      handleMenu( pos );
       return;
     }
     if ( onMenu ) {
@@ -376,10 +334,6 @@ public class TopoDroidActivity extends Activity
     Intent openIntent = new Intent( this, ShotActivity.class );
     startActivity( openIntent );
   }
-
-  // void handleSurveyActivity( int result )
-  // {
-  // }
 
   void setTheTitle()
   {
@@ -638,7 +592,7 @@ public class TopoDroidActivity extends Activity
   Button     mMenuImage;
   ListView   mMenu;
   // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter;
+  MyMenuAdapter mMenuAdapter = null;
   
 
   void setMenuAdapter( Resources res )
@@ -661,6 +615,43 @@ public class TopoDroidActivity extends Activity
     mMenu.setVisibility( View.GONE );
     mMenuAdapter.resetBgColor();
     onMenu = false;
+  }
+
+  private void handleMenu( int pos ) 
+  {
+    closeMenu();
+    // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
+    int p = 0;
+    if ( p++ == pos ) { // PALETTE
+      DrawingBrushPaths.makePaths( getResources() );
+      (new SymbolEnableDialog( this, this )).show();
+    } else { 
+      Intent intent;
+      if ( p++ == pos ) { // SETTINGS
+        intent = new Intent( this, TopoDroidPreferences.class );
+        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+        startActivity( intent );
+      } else { 
+        if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
+          intent = new Intent( this, TopoDroidPreferences.class );
+          intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
+          startActivity( intent );
+        } else {  
+          if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
+            (new ConnectDialog( this, mApp )).show();
+          } else { 
+            if ( p++ == pos ) { // ABOUT
+              (new TopoDroidAbout( this )).show();
+            } else { 
+              if ( p++ == pos ) { // HELP
+                (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
+              }
+            }
+          }
+        }
+      }
+    }
+    // updateDisplay();
   }
 
   @Override
@@ -687,9 +678,11 @@ public class TopoDroidActivity extends Activity
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
+    mMenuAdapter = null;
+
     setMenuAdapter( getResources() );
     closeMenu();
-    mMenu.setOnItemClickListener( this );
+    // mMenu.setOnItemClickListener( this );
 
     // mBtnSurveys = (Button) findViewById( R.id.btn_surveys );
     // mBtnCalibs  = (Button) findViewById( R.id.btn_calibs );

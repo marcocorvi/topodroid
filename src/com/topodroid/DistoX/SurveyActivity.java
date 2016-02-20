@@ -223,8 +223,7 @@ public class SurveyActivity extends Activity
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
     closeMenu();
-    mMenu.setOnItemClickListener( this );
-
+    // mMenu.setOnItemClickListener( this );
   }
 
   void setTheTitle()
@@ -577,31 +576,36 @@ public class SurveyActivity extends Activity
     onMenu = false;
   }
 
+  private void handleMenu( int pos )
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // EXPORT
+      new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
+    } else if ( p++ == pos ) { // TDR to TH2 
+      askTdr2Th2();
+    } else if ( p++ == pos ) { // RENAME
+      new SurveyRenameDialog( this, this ).show();
+    } else if ( p++ == pos ) { // DELETE
+      askDelete();
+    } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
+      new SurveyCalibrationDialog( this, this ).show();
+    } else if ( p++ == pos ) { // OPTIONS
+      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+      startActivity( intent );
+    } else if ( p++ == pos ) { // HELP
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 7 ) ).show();
+    }
+    // updateDisplay();
+  }
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     closeMenu();
     if ( mMenu == (ListView)parent ) {
-      // closeMenu();
-      int p = 0;
-      if ( p++ == pos ) { // EXPORT
-        new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
-      } else if ( p++ == pos ) { // TDR to TH2 
-        askTdr2Th2();
-      } else if ( p++ == pos ) { // RENAME
-        new SurveyRenameDialog( this, this ).show();
-      } else if ( p++ == pos ) { // DELETE
-        askDelete();
-      } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
-        new SurveyCalibrationDialog( this, this ).show();
-      } else if ( p++ == pos ) { // OPTIONS
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-        startActivity( intent );
-      } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 7 ) ).show();
-      }
-      // updateDisplay();
+      handleMenu( pos );
       return;
     }
     // if ( onMenu ) {

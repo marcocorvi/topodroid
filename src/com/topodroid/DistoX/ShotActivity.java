@@ -463,6 +463,49 @@ public class ShotActivity extends Activity
 
   private boolean mSkipItemClick = false;
 
+  private void handleMenu( int pos )
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // SURVEY ACTIVITY
+      Intent intent = new Intent( this, SurveyActivity.class );
+      intent.putExtra( TopoDroidTag.TOPODROID_SURVEY,  0 ); // mustOpen 
+      intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
+      intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
+      startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
+    // } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
+    //   (new CurrentStationDialog( this, this, mApp )).show();
+
+    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
+      (new UndeleteDialog(this, this, mApp.mData, mApp.mSID ) ).show();
+      updateDisplay( );
+    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
+      startActivity( new Intent( this, PhotoActivity.class ) );
+    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // SENSORS
+      startActivity( new Intent( this, SensorListActivity.class ) );
+    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // 3D
+      mApp.exportSurveyAsTh(); // make sure to have survey exported as therion
+      try {
+        Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+        intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
+        startActivity( intent );
+      } catch ( ActivityNotFoundException e ) {
+        Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
+      }
+    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
+      if ( mApp.mBTAdapter.isEnabled() ) {
+        startActivity( new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceActivity.class ) );
+      }
+    } else  if ( p++ == pos ) { // OPTIONS
+      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
+      startActivity( intent );
+    } else if ( p++ == pos ) { // HELP
+      // int nn = mNrButton1; //  + ( TopoDroidApp.mLevelOverNormal ?  mNrButton2 : 0 );
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 8 ) ).show();
+    }
+  }
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -472,49 +515,7 @@ public class ShotActivity extends Activity
       return;
     }
     if ( mMenu == (ListView)parent ) {
-      view.setBackgroundColor( 0xffff9900 ); // R.color.menu_highlight
-      view.invalidate();
-      try { Thread.sleep( 200 ); } catch( InterruptedException e ) { }
-      view.setBackgroundColor( 0xff333333 ); // R.color.menu_background
-      closeMenu();
-      int p = 0;
-      if ( p++ == pos ) { // SURVEY ACTIVITY
-        Intent intent = new Intent( this, SurveyActivity.class );
-        intent.putExtra( TopoDroidTag.TOPODROID_SURVEY,  0 ); // mustOpen 
-        intent.putExtra( TopoDroidTag.TOPODROID_OLDSID, -1 ); // old_sid 
-        intent.putExtra( TopoDroidTag.TOPODROID_OLDID,  -1 ); // old_id 
-        startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
-      // } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
-      //   (new CurrentStationDialog( this, this, mApp )).show();
-
-      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
-        (new UndeleteDialog(this, this, mApp.mData, mApp.mSID ) ).show();
-        updateDisplay( );
-      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
-        startActivity( new Intent( this, PhotoActivity.class ) );
-      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // SENSORS
-        startActivity( new Intent( this, SensorListActivity.class ) );
-      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // 3D
-        mApp.exportSurveyAsTh(); // make sure to have survey exported as therion
-        try {
-          Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
-          startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
-        }
-      } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
-        if ( mApp.mBTAdapter.isEnabled() ) {
-          startActivity( new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceActivity.class ) );
-        }
-      } else  if ( p++ == pos ) { // OPTIONS
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-        startActivity( intent );
-      } else if ( p++ == pos ) { // HELP
-        // int nn = mNrButton1; //  + ( TopoDroidApp.mLevelOverNormal ?  mNrButton2 : 0 );
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 8 ) ).show();
-      }
+      handleMenu( pos );
       return;
     }
     if ( closeMenu() ) return;
@@ -786,9 +787,9 @@ public class ShotActivity extends Activity
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
-    mMenu.setOnItemClickListener( this );
-    mMenu.setVisibility( View.GONE );
-    onMenu = false;
+    // mMenu.setOnItemClickListener( this );
+    onMenu = true;
+    closeMenu();
 
     // CutNPaste.dismissPopupBT();
 

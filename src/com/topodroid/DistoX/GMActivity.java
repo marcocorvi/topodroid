@@ -527,27 +527,7 @@ public class GMActivity extends Activity
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( mMenu == (ListView)parent ) {
-      closeMenu();
-      int p = 0;
-      if ( p++ == pos ) { // DISPLAY
-        mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
-        updateDisplay( );
-      } else if ( p++ == pos ) { // VALIDATE
-        // Toast.makeText( this, "UNDER CONSTRUCTION", Toast.LENGTH_SHORT ).show();
-        List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
-        list.remove( mApp.myCalib );
-        if ( list.size() == 0 ) {
-          Toast.makeText( this, R.string.few_calibs, Toast.LENGTH_SHORT ).show();
-        } else {
-          (new CalibValidateListDialog( this, this, list )).show();
-        }
-      } else if ( p++ == pos ) { // OPTIONS
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
-        startActivity( intent );
-      } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
-      }
+      handleMenu( pos );
       return;
     }
     if ( onMenu ) {
@@ -651,7 +631,7 @@ public class GMActivity extends Activity
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
     closeMenu();
-    mMenu.setOnItemClickListener( this );
+    // mMenu.setOnItemClickListener( this );
   }
 
   private void resetTitle()
@@ -980,6 +960,31 @@ public class GMActivity extends Activity
     mMenu.setVisibility( View.GONE );
     mMenuAdapter.resetBgColor();
     onMenu = false;
+  }
+
+  private void handleMenu( int pos )
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // DISPLAY
+      mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
+      updateDisplay( );
+    } else if ( p++ == pos ) { // VALIDATE
+      // Toast.makeText( this, "UNDER CONSTRUCTION", Toast.LENGTH_SHORT ).show();
+      List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
+      list.remove( mApp.myCalib );
+      if ( list.size() == 0 ) {
+        Toast.makeText( this, R.string.few_calibs, Toast.LENGTH_SHORT ).show();
+      } else {
+        (new CalibValidateListDialog( this, this, list )).show();
+      }
+    } else if ( p++ == pos ) { // OPTIONS
+      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
+      startActivity( intent );
+    } else if ( p++ == pos ) { // HELP
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
+    }
   }
 
   // public void notifyDisconnected()

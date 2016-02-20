@@ -927,7 +927,7 @@ public class DrawingActivity extends ItemDrawer
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter();
       closeMenu();
-      mMenu.setOnItemClickListener( this );
+      // mMenu.setOnItemClickListener( this );
 
       doStart();
       if ( ! ( isSection() || isXSection() ) ) {
@@ -3348,22 +3348,8 @@ public class DrawingActivity extends ItemDrawer
     onMenu = false;
   }
 
-  public void doExport( String type )
+  private void handleMenu( int pos )
   {
-    int index = TDConst.plotExportIndex( type );
-    switch ( index ) {
-      case TDConst.DISTOX_EXPORT_TH2: saveTh2(); break;
-      case TDConst.DISTOX_EXPORT_CSX: saveCsx(); break;
-      case TDConst.DISTOX_EXPORT_PNG: savePng(); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break;
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
-    }
-  }
-
-  @Override 
-  public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
-  {
-    if ( mMenu == (ListView)parent ) { // MENU
       closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
@@ -3410,6 +3396,25 @@ public class DrawingActivity extends ItemDrawer
         int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 5 + ( TDSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
         (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 8 ) ).show();
       }
+  }
+
+  public void doExport( String type )
+  {
+    int index = TDConst.plotExportIndex( type );
+    switch ( index ) {
+      case TDConst.DISTOX_EXPORT_TH2: saveTh2(); break;
+      case TDConst.DISTOX_EXPORT_CSX: saveCsx(); break;
+      case TDConst.DISTOX_EXPORT_PNG: savePng(); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break;
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
+    }
+  }
+
+  @Override 
+  public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    if ( mMenu == (ListView)parent ) { // MENU
+      handleMenu( pos );
     }
   }
 

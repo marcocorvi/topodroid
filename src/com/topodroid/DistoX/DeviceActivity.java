@@ -262,7 +262,7 @@ public class DeviceActivity extends Activity
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
     closeMenu();
-    mMenu.setOnItemClickListener( this );
+    // mMenu.setOnItemClickListener( this );
   }
 
   private void updateList( )
@@ -309,41 +309,7 @@ public class DeviceActivity extends Activity
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( mMenu == (ListView)parent ) {
-      closeMenu();
-      int p = 0;
-      if ( p++ == pos ) { // SCAN
-        Intent scanIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceList.class );
-        scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
-        startActivityForResult( scanIntent, REQUEST_DEVICE );
-        Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
-      // } else if ( p++ == pos ) { // NAME
-      //   if ( mApp.mDevice != null ) {
-      //     (new DeviceNameDialog( this, this, mApp.mDevice )).show();
-      //   }
-      } else if ( p++ == pos ) { // PAIR
-        pairDevice();
-      } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DETACH
-        detachDevice();
-      // } else if ( p++ == pos ) { // CALIB
-      //   if ( mApp.mDevice == null ) {
-      //     Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
-      //   } else {
-      //     (new CalibListDialog( this, this, mApp )).show();
-      //   }
-      } else if ( TDSetting.mLevelOverNormal && /* TDSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
-        if ( TDSetting.mCommType != 0 ) {
-          Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
-        } else {
-          mApp.resetComm();
-          (new FirmwareDialog( this, this, mApp )).show();
-        }
-      } else if ( p++ == pos ) { // OPTIONS
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
-        startActivity( intent );
-      } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
-      }
+      handleMenu( pos );
       return;
     }
 
@@ -351,7 +317,6 @@ public class DeviceActivity extends Activity
       closeMenu();
       return;
     }
-
 
     CharSequence item = ((TextView) view).getText();
     // TDLog.Log( TDLog.LOG_INPUT, "DeviceActivity onItemClick() " + item.toString() );
@@ -773,6 +738,45 @@ public class DeviceActivity extends Activity
     mMenu.setVisibility( View.GONE );
     mMenuAdapter.resetBgColor();
     onMenu = false;
+  }
+
+  private void handleMenu( int pos )
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // SCAN
+      Intent scanIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceList.class );
+      scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
+      startActivityForResult( scanIntent, REQUEST_DEVICE );
+      Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
+    // } else if ( p++ == pos ) { // NAME
+    //   if ( mApp.mDevice != null ) {
+    //     (new DeviceNameDialog( this, this, mApp.mDevice )).show();
+    //   }
+    } else if ( p++ == pos ) { // PAIR
+      pairDevice();
+    } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DETACH
+      detachDevice();
+    // } else if ( p++ == pos ) { // CALIB
+    //   if ( mApp.mDevice == null ) {
+    //     Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
+    //   } else {
+    //     (new CalibListDialog( this, this, mApp )).show();
+    //   }
+    } else if ( TDSetting.mLevelOverNormal && /* TDSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
+      if ( TDSetting.mCommType != 0 ) {
+        Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
+      } else {
+        mApp.resetComm();
+        (new FirmwareDialog( this, this, mApp )).show();
+      }
+    } else if ( p++ == pos ) { // OPTIONS
+      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
+      startActivity( intent );
+    } else if ( p++ == pos ) { // HELP
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
+    }
   }
 
   String readDistoXCode()

@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 
 import android.widget.TextView;
+import android.widget.Button;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -51,9 +52,8 @@ class MyMenuItem extends TextView
     // int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
     // LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
 
-    // mTextView = new TextView( context );
     setTextColor( 0xff33ccff );
-    setBackgroundColor( 0xff333333 );
+    setBackgroundColor( 0xccff9900 );
     setTextSize( 14 );
     setText( text );
     setPadding( 10, 10, 5, 10 );
@@ -61,6 +61,8 @@ class MyMenuItem extends TextView
     // mView = ll;
     mListener = listener;
     mTouch = false;
+
+    // setOnClickListener( listener );
   }
 
   void resetBgColor() { setBackgroundColor( 0xff333333 ); }

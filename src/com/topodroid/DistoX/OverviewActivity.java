@@ -437,7 +437,7 @@ public class OverviewActivity extends ItemDrawer
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter();
       closeMenu();
-      mMenu.setOnItemClickListener( this );
+      // mMenu.setOnItemClickListener( this );
 
       doStart();
       // Log.v("DistoX", "Overview offset " + mOffset.x + " " + mOffset.y );
@@ -958,22 +958,27 @@ public class OverviewActivity extends ItemDrawer
     onMenu = false;
   }
 
+  private void handleMenu( int pos )
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // OPTIONS
+      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
+      startActivity( intent );
+    } else if ( p++ == pos ) { // HELP
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 2 ) ).show();
+    }
+  }
+
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( mMenu == (ListView)parent ) {
-      closeMenu();
-      int p = 0;
-      if ( p++ == pos ) { // OPTIONS
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
-        startActivity( intent );
-      } else if ( p++ == pos ) { // HELP
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 2 ) ).show();
-      }
+      handleMenu( pos );
     }
   }
-
 
   public void checkZoomBtnsCtrl()
   {

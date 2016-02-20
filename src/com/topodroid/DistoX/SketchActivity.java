@@ -782,7 +782,7 @@ public class SketchActivity extends ItemDrawer
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter();
     closeMenu();
-    mMenu.setOnItemClickListener( this );
+    // mMenu.setOnItemClickListener( this );
 
     mTimer   = null;
 
@@ -1793,6 +1793,34 @@ public class SketchActivity extends ItemDrawer
     onMenu = false;
   }
 
+  private void handleMenu( int pos )
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // EXPORT
+      // new SketchSaveDialog( this, this ).show();
+      new ExportDialog( this, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
+    } else if ( p++ == pos ) { // PALETTE 
+      DrawingBrushPaths.makePaths( getResources() );
+      (new SymbolEnableDialog( this, this )).show();
+    } else if ( p++ == pos ) { // DELETE
+      askDelete();
+    } else if ( p++ == pos ) { // 
+      Intent optionsIntent = new Intent( this, TopoDroidPreferences.class );
+      optionsIntent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
+      startActivity( optionsIntent );
+    } else if ( p++ == pos ) { // 
+      setMode( SketchDef.MODE_MOVE );
+      // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
+      // mCompass = new SketchCompassSensor( this, sm, TDSetting.mCompassReadings );
+      mTimer = new TimerTask( this, this );
+      mTimer.execute();
+    } else if ( p++ == pos ) { // 
+      int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 6 ) ).show();
+    }
+  }
+
   void doDelete()
   {
     mData.deleteSketch( mPid, mSid );
@@ -1823,30 +1851,7 @@ public class SketchActivity extends ItemDrawer
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( mMenu == (ListView)parent ) {
-      closeMenu();
-      int p = 0;
-      if ( p++ == pos ) { // EXPORT
-        // new SketchSaveDialog( this, this ).show();
-        new ExportDialog( this, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
-      } else if ( p++ == pos ) { // PALETTE 
-        DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, this )).show();
-      } else if ( p++ == pos ) { // DELETE
-        askDelete();
-      } else if ( p++ == pos ) { // 
-        Intent optionsIntent = new Intent( this, TopoDroidPreferences.class );
-        optionsIntent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
-        startActivity( optionsIntent );
-      } else if ( p++ == pos ) { // 
-        setMode( SketchDef.MODE_MOVE );
-        // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
-        // mCompass = new SketchCompassSensor( this, sm, TDSetting.mCompassReadings );
-        mTimer = new TimerTask( this, this );
-        mTimer.execute();
-      } else if ( p++ == pos ) { // 
-        int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 6 ) ).show();
-      }
+      handleMenu( pos );
     }
   }
 
