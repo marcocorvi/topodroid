@@ -3344,6 +3344,7 @@ public class DrawingActivity extends ItemDrawer
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
+    mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

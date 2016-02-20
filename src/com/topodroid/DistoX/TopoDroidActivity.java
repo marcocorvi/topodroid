@@ -659,6 +659,7 @@ public class TopoDroidActivity extends Activity
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
+    mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

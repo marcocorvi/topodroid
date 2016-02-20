@@ -1383,6 +1383,7 @@ public class ShotActivity extends Activity
   {
     if ( onMenu ) {
       mMenu.setVisibility( View.GONE );
+      mMenuAdapter.resetBgColor();
       onMenu = false;
       return true;
     }

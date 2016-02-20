@@ -573,14 +573,16 @@ public class SurveyActivity extends Activity
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
+    mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    closeMenu();
     if ( mMenu == (ListView)parent ) {
-      closeMenu();
+      // closeMenu();
       int p = 0;
       if ( p++ == pos ) { // EXPORT
         new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
@@ -602,10 +604,10 @@ public class SurveyActivity extends Activity
       // updateDisplay();
       return;
     }
-    if ( onMenu ) {
-      closeMenu();
-      return;
-    }
+    // if ( onMenu ) {
+    //   closeMenu();
+    //   return;
+    // }
   }
 
   private void startConvertTdrTh2Task()
