@@ -498,7 +498,7 @@
     <!-- UNUSED string name="title_sketch_select">Выбрать</string -->
 
     <string name="sketch_mode_single">Отдельный пикет</string>
-    <string name="sketch_mode_ngbh">Соединение пикеты</string>
+    <string name="sketch_mode_ngbh">Соседние пикеты</string>
     <string name="sketch_mode_all">Все пикеты</string>
     <string name="sketch_delete">Удалить 3D модель ?</string>
     <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
