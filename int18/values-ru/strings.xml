@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
+    <string name="no_manual">Не возможно скачать страницы помощи из интернета.</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Нажмте "НАЗАД" еще раз для выхода</string>
@@ -500,7 +500,7 @@
     <!-- UNUSED string name="title_sketch_select">Выбрать</string -->
 
     <string name="sketch_mode_single">Отдельный пикет</string>
-    <string name="sketch_mode_ngbh">Соединение пикеты</string>
+    <string name="sketch_mode_ngbh">Соседние пикеты</string>
     <string name="sketch_mode_all">Все пикеты</string>
     <string name="sketch_delete">Удалить 3D модель ?</string>
     <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
@@ -1025,7 +1025,7 @@
    <string name="ask_upload">Загрузить прошивку?</string>
    <string name="ask_upload_not_compatible">Невозможно проверить совместимость ПО.\nЗагрузить прошивку?</string>
    <string name="firmware_file_dumped">Сохраненный файл прошивки %1$s размер %2$d</string>
-   <!-- FIXME string name="firmware_file_uploaded">Загруженный файл прошивки %1$s размер %2$d / %3$d</string -->
+   <string name="firmware_file_uploaded">Загружен файл прошивки %1$s записано %2$d / %3$d</string>
    
 
 </resources>

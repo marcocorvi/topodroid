@@ -183,10 +183,10 @@
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
     <string name="none">Nada</string>
-    <string name="barrier_add">¿Dividir la visualización de la línea central?</string>
-    <string name="barrier_del">¿Unir la visualización de la línea central?</string>
-    <string name="hidden_add">Oculta pantalla de la línea media</string>
-    <string name="hidden_del">Mostrar pantalla de la línea media</string>
+    <string name="barrier_add">¿Dividir dibujo de la poligonal principal?</string>
+    <string name="barrier_del">¿Unir dibujo de la poligonal principal?</string>
+    <string name="hidden_add">Oculta dibujo de la poligonal principal</string>
+    <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
     <!-- TODO string name="fixed">fixed</string -->
     <!-- TODO string name="painted">painted</string -->
@@ -343,7 +343,7 @@
 
     <string name="station">Estación</string>
     <string name="station_ask">¿Insertar estación?</string>
-    <string name="station_set">¿Desea continuar la topografía desde aquí?</string>
+    <string name="station_set">¿Quiere continuar la topo desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <string name="station_next">Siguiente estación</string>
     <string name="station_viewed">Vista de estación</string>
