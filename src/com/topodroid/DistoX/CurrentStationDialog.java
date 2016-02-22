@@ -31,6 +31,7 @@ import android.inputmethodservice.KeyboardView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -58,6 +59,9 @@ public class CurrentStationDialog extends MyDialog
   private Button mBtnClear;
   // private Button mBtnCancel;
 
+  private CheckBox mBtnFixed;
+  private CheckBox mBtnPainted;
+
   private ListView mList;
 
   private MyKeyboard mKeyboard = null;
@@ -83,8 +87,12 @@ public class CurrentStationDialog extends MyDialog
     mName = (EditText) findViewById( R.id.name );
     mComment = (EditText) findViewById( R.id.comment );
     mName.setText( mApp.getCurrentOrLastStation() );
-
     mName.setOnLongClickListener( this );
+
+    mBtnFixed   = (CheckBox) findViewById(R.id.button_fixed);
+    mBtnPainted = (CheckBox) findViewById(R.id.button_painted);
+    mBtnFixed.setOnClickListener( this ); 
+    mBtnPainted.setOnClickListener( this ); 
 
     mBtnPush    = (Button) findViewById(R.id.button_push);
     mBtnPop     = (Button) findViewById(R.id.button_pop );
@@ -139,12 +147,19 @@ public class CurrentStationDialog extends MyDialog
     }
     // Log.v("DistoX", "get station <" + name + ">" );
     CurrentStation cs = mApp.mData.getStation( mApp.mSID, name );
+    mBtnFixed.setChecked( false );
+    mBtnPainted.setChecked( false );
     if ( cs == null ) {
       mName.setText( "" );
       mComment.setText( null );
     } else {
       mName.setText( cs.mName );
       mComment.setText( cs.mComment );
+      if ( cs.mFlag == CurrentStation.STATION_FIXED ) {
+        mBtnFixed.setChecked( true );
+      } else if ( cs.mFlag == CurrentStation.STATION_PAINTED ) {
+        mBtnPainted.setChecked( true );
+      }
     }
   }
  
@@ -164,7 +179,14 @@ public class CurrentStationDialog extends MyDialog
     Button b = (Button) v;
     String name = mName.getText().toString().trim();
     String error = mContext.getResources().getString( R.string.error_name_required );
-    if ( b == mBtnPush ) { // STORE
+    if ( b == mBtnFixed ) {
+      mBtnPainted.setChecked( false );
+      return;
+    } else if ( b == mBtnPainted ) {
+      mBtnFixed.setChecked( false );
+      return;
+
+    } else if ( b == mBtnPush ) { // STORE
       if ( name.length() == 0 ) {
         mName.setError( error );
         return;
@@ -175,13 +197,20 @@ public class CurrentStationDialog extends MyDialog
         mComment.setError( error );
         return;
       } 
+      int flag = CurrentStation.STATION_NONE;
+      if ( mBtnFixed.isChecked() ) {
+        flag = CurrentStation.STATION_FIXED;
+      } else if ( mBtnPainted.isChecked() ) {
+        flag = CurrentStation.STATION_PAINTED;
+      }
       String comment = mComment.getText().toString().trim();
-      if ( comment.length() == 0 ) {
+      if ( comment.length() == 0 && flag == CurrentStation.STATION_NONE ) {
         mComment.setError( error );
         return;
       }
+
       // mApp.pushCurrentStation( name, comment );
-      mApp.mData.insertStation( mApp.mSID, name, comment );
+      mApp.mData.insertStation( mApp.mSID, name, comment, flag );
       updateList();
       return;
 
@@ -207,6 +236,8 @@ public class CurrentStationDialog extends MyDialog
     } else if ( b == mBtnClear ) {
       mName.setText("");
       mComment.setText("");
+      mBtnFixed.setChecked( false );
+      mBtnPainted.setChecked( false );
       return;
     } else if ( b == mBtnOK ) {
       if ( name.length() > 0 ) {

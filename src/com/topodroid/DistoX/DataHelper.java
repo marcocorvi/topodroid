@@ -40,8 +40,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "25";
-  static final int DATABASE_VERSION = 25;
+  static final String DB_VERSION = "26";
+  static final int DATABASE_VERSION = 26;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -190,7 +190,7 @@ public class DataHelper extends DataSetObservable
 
         updateConfig       = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
 
-        updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=? WHERE surveyId=? AND name=?" );
+        updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
         deleteStationStmt  = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
         updateShotNameStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
         updateShotNameAndExtendStmt = myDB.compileStatement(
@@ -959,7 +959,7 @@ public class DataHelper extends DataSetObservable
       transferShotStmt.execute();
       
       // transfer fixeds, stations, plots and sketches
-      // TODOi FIXME cross-sections 
+      // TODO FIXME cross-sections 
       if ( blk.mFrom.length() > 0 ) {
         List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mFrom ); 
         for ( FixedInfo fixed : fixeds ) {
@@ -3165,18 +3165,19 @@ public class DataHelper extends DataSetObservable
        }
 
        cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment" },
+                            new String[] { "name", "comment", "flag" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            // STATION_TABLE does not have field "id"
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, 0, \"%s\", \"%s\" );\n",
+                     "INSERT into %s values( %d, 0, \"%s\", \"%s\", %d );\n",
                      STATION_TABLE,
                      sid, 
                      cursor.getString(0),
-                     cursor.getString(1) );
+                     cursor.getString(1),
+                     cursor.getLong(2) );
          } while (cursor.moveToNext());
        }
        if (cursor != null && !cursor.isClosed()) {
@@ -3344,10 +3345,11 @@ public class DataHelper extends DataSetObservable
            } else if ( table.equals(STATION_TABLE) ) {
              // N.B. ONLY IF db_version > 19
              // TDLog.Error( "v <" + v + ">" );
-             // TDLog.Log( TDLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment  );
+             // TDLog.Log( TDLog.LOG_DB, "loadFromFile station " + sid + " " + name + " " + comment + " " + flag  );
              name    = scanline1.stringValue( );
              comment = scanline1.stringValue( );
-             insertStation( sid, name, comment );
+             long flag = ( db_version > 25 )? scanline1.longValue() : 0;
+             insertStation( sid, name, comment, flag );
            }
          }
        }
@@ -3360,23 +3362,25 @@ public class DataHelper extends DataSetObservable
    }
 
    // ----------------------------------------------------------------------
-   void insertStation( long sid, String name, String comment )
+   void insertStation( long sid, String name, String comment, long flag )
    {
      if ( myDB == null ) return;
      Cursor cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment" },
+                            new String[] { "name", "comment", "flag" },
                             "surveyId=? and name=?", new String[] { Long.toString( sid ), name },
                             null, null, null );
      if (cursor.moveToFirst()) {
        updateStationCommentStmt.bindString( 1, comment );
-       updateStationCommentStmt.bindLong(   2, sid );
-       updateStationCommentStmt.bindString( 3, name );
+       updateStationCommentStmt.bindLong(   2, flag );
+       updateStationCommentStmt.bindLong(   3, sid );
+       updateStationCommentStmt.bindString( 4, name );
        updateStationCommentStmt.execute();
      } else {
        ContentValues cv = new ContentValues();
        cv.put( "surveyId",  sid );
        cv.put( "name",      name );
        cv.put( "comment",   (comment == null)? "" : comment );
+       cv.put( "flag",      flag );
        myDB.insert( STATION_TABLE, null, cv );
      }
      if (cursor != null && !cursor.isClosed()) {
@@ -3389,11 +3393,11 @@ public class DataHelper extends DataSetObservable
      CurrentStation cs = null;
      if ( myDB == null ) return cs;
      Cursor cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment" },
+                            new String[] { "name", "comment", "flag" },
                             "surveyId=? and name=?", new String[] { Long.toString( sid ), name },
                             null, null, null );
      if (cursor.moveToFirst()) {
-       cs = new CurrentStation( cursor.getString(0), cursor.getString(1) );
+       cs = new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) );
      }
      if (cursor != null && !cursor.isClosed()) {
        cursor.close();
@@ -3407,12 +3411,12 @@ public class DataHelper extends DataSetObservable
      ArrayList< CurrentStation > ret = new ArrayList< CurrentStation >();
      if ( myDB == null ) return ret;
      Cursor cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment" },
+                            new String[] { "name", "comment", "flag" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
      if (cursor.moveToFirst()) {
        do {
-         ret.add( new CurrentStation( cursor.getString(0), cursor.getString(1) ) );
+         ret.add( new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) ) );
        } while (cursor.moveToNext());
      }
      if (cursor != null && !cursor.isClosed()) {
@@ -3620,7 +3624,8 @@ public class DataHelper extends DataSetObservable
                create_table + STATION_TABLE 
              + " ( surveyId INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
              +   " name TEXT, "
-             +   " comment TEXT "
+             +   " comment TEXT, "
+             +   " flag INTEGER default 0 "
              +   ")"
            );
             
@@ -3765,6 +3770,8 @@ public class DataHelper extends DataSetObservable
            case 24:
              db.execSQL( "ALTER TABLE plots ADD COLUMN hide TEXT default \"\"" );
            case 25:
+             db.execSQL( "ALTER TABLE stations ADD COLUMN flag INTEGER default 0" );
+           case 26:
              /* current version */
            default:
              break;

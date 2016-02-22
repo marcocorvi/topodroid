@@ -194,6 +194,8 @@
     <string name="hidden_add">Скриване на предишни репери</string>
     <string name="hidden_del">Показване на предишни репери</string>
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
+    <!-- TODO string name="fixed">fixed</string -->
+    <!-- TODO string name="painted">painted</string -->
 
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
     <string name="bad_line">Невалиден тип линия</string>

@@ -193,6 +193,8 @@
     <string name="hidden_add">Cacher les visées precedentes</string>
     <string name="hidden_del">Afficher les visées precedentes</string>
     <string name="splays_toggle">Basculer les Visées d\'habillage - Splays</string>
+    <!-- TODO string name="fixed">fixed</string -->
+    <!-- TODO string name="painted">painted</string -->
 
     <string name="bad_cwd">Le nom du projet ne peut etre son chemin</string>
     <string name="bad_line">mauvais type de ligne</string>

@@ -188,6 +188,8 @@
     <string name="hidden_add">Oculta pantalla de la línea media</string>
     <string name="hidden_del">Mostrar pantalla de la línea media</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
+    <!-- TODO string name="fixed">fixed</string -->
+    <!-- TODO string name="painted">painted</string -->
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>

@@ -645,14 +645,22 @@ class TopoDroidExporter
   // =======================================================================
   // THERION EXPORT Therion
 
-  static private void writeThLeg( PrintWriter pw, AverageLeg leg ) 
+  static private void writeThLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
-    pw.format(Locale.US, "%.2f %.1f %.1f\n", leg.length(), leg.bearing(), leg.clino() );
+    pw.format(Locale.US, "%.2f %.1f %.1f\n", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
     leg.reset();
   }
 
   static String exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+
+    String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
+    String uas = ( ua < 1.01f )? "degrees" : "grads";
+    // String uls = TDSetting.mUnitLengthStr;
+    // String uas = TDSetting.mUnitAngleStr;
+
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TopoDroidApp.STATUS_NORMAL );
@@ -683,6 +691,39 @@ class TopoDroidExporter
 
       pw.format(Locale.US, "    # declination %.2f degrees\n", info.declination );
 
+      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+      // mark ... 
+      // station ...
+      
+      if ( stations.size() > 0 ) {
+        pw.format("\n");
+        StringBuilder sb_fixed   = new StringBuilder();
+        StringBuilder sb_painted = new StringBuilder();
+        for ( CurrentStation station : stations ) {
+          if ( station.mFlag == CurrentStation.STATION_FIXED ) { 
+            sb_fixed.append(" " + station.mName );
+          } else if ( station.mFlag == CurrentStation.STATION_PAINTED ) {
+            sb_painted.append(" " + station.mName );
+          }
+          pw.format("    station %s \"%s\"\n", station.mName, station.mComment );
+        }
+        String str_fixed   = sb_fixed.toString();
+        String str_painted = sb_painted.toString();
+        if ( str_fixed.length() > 0 ) {
+          pw.format("    mark%s fixed\n", str_fixed );
+        }
+        if ( str_painted.length() > 0 ) {
+          pw.format("    mark%s painted\n", str_painted );
+        }
+        pw.format("\n");
+      }
+
+      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+      // centerline data
+
+      pw.format("    units length %s\n", uls );
+      pw.format("    units compass clino %s\n", uas );
+
       pw.format("    data normal from to length compass clino\n");
 
       long extend = 0;  // current extend
@@ -702,7 +743,7 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeThLeg( pw, leg );
+              writeThLeg( pw, leg, ul, ua );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -721,12 +762,12 @@ class TopoDroidExporter
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
             pw.format("    - %s ", to );
-            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              writeThLeg( pw, leg );
+              writeThLeg( pw, leg, ul, ua );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -745,10 +786,10 @@ class TopoDroidExporter
               pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             }
             pw.format("    %s - ", from ); // write splay shot
-            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeThLeg( pw, leg );
+              writeThLeg( pw, leg, ul, ua );
               if ( duplicate ) {
                 pw.format(therion_flags_not_duplicate);
                 duplicate = false;
@@ -780,22 +821,20 @@ class TopoDroidExporter
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
-        // pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength, item.mBearing, item.mClino );
+        // pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeThLeg( pw, leg );
+        writeThLeg( pw, leg, ul, ua );
         if ( duplicate ) {
           pw.format(therion_flags_not_duplicate);
           // duplicate = false;
         }
       }
-      if ( stations.size() > 0 ) {
-        pw.format("\n");
-        for ( CurrentStation station : stations ) {
-          pw.format("    station %s \"%s\"\n", station.mName, station.mComment );
-        }
-      }
+
       pw.format("  endcenterline\n\n");
+
+      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+      // scraps and maps
 
       for ( PlotInfo plt : plots ) {
         String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
@@ -831,7 +870,7 @@ class TopoDroidExporter
    *
    *    *begin survey_name
    *      *units tape feet|metres
-   *      *units compass clino grad|degrees
+   *      *units compass clino grads|degrees
    *      *calibrate declination ...
    *      *date yyyy.mm.dd
    *      ; *fix station long lat alt
@@ -862,10 +901,10 @@ class TopoDroidExporter
     pw.format("%s", TDSetting.mSurvexEol );
   }
 
-  static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DistoXDBlock blk )
+  static boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DistoXDBlock blk, float ul, float ua )
   {
     if ( first ) {
-      pw.format(Locale.US, "  %.2f %.1f %.1f", leg.length(), leg.bearing(), leg.clino() );
+      pw.format(Locale.US, "  %.2f %.1f %.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
       leg.reset();
       if ( blk.mComment != null && blk.mComment.length() > 0 ) {
         pw.format("  ; %s", blk.mComment );
@@ -879,17 +918,17 @@ class TopoDroidExporter
     return false;
   }
 
-  static void writeSurvexLRUD( PrintWriter pw, String st, LRUD lrud )
+  static void writeSurvexLRUD( PrintWriter pw, String st, LRUD lrud, float ul )
   {
     if ( lrud != null ) {
-      pw.format(Locale.US, "%s  %.2f %.2f %.2f %.2f", st, lrud.l, lrud.r, lrud.u, lrud.d );
+      pw.format(Locale.US, "%s  %.2f %.2f %.2f %.2f", st, lrud.l * ul, lrud.r * ul, lrud.u * ul, lrud.d * ul );
       writeSurvexEOL( pw );
     }
   }
 
-  static void writeSurvexSplay( PrintWriter pw, String from, String to, DistoXDBlock blk )
+  static void writeSurvexSplay( PrintWriter pw, String from, String to, DistoXDBlock blk, float ul, float ua )
   {
-    pw.format(Locale.US, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength, blk.mBearing, blk.mClino );
+    pw.format(Locale.US, "  %s %s %.2f %.1f %.1f", from, to, blk.mLength * ul, blk.mBearing * ua, blk.mClino * ua );
     if ( blk.mComment != null && blk.mComment.length() > 0 ) {
       pw.format(" ; %s", blk.mComment );
     }
@@ -899,6 +938,11 @@ class TopoDroidExporter
   static String exportSurveyAsSvx( long sid, DataHelper data, SurveyInfo info, Device device, String filename )
   {
     char splayChar = 'a';
+
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+    String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
+    String uas = ( ua < 1.01f )? "degrees" : "grads";
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
@@ -928,9 +972,9 @@ class TopoDroidExporter
       pw.format("*begin %s ", info.name );      writeSurvexEOL(pw);
       pw.format("  *date %s ", info.date );     writeSurvexEOL(pw);
       pw.format("  *team \"%s\" ", info.team ); writeSurvexEOL(pw);
-      writeSurvexLine(pw, "  *units tape metres" );
-      writeSurvexLine(pw, "  *units compass degrees" );
-      writeSurvexLine(pw, "  *units clino degrees" );
+      writeSurvexLine(pw, "  *units tape " + uls );
+      writeSurvexLine(pw, "  *units compass " + uas );
+      writeSurvexLine(pw, "  *units clino " + uas );
       pw.format(Locale.US, "  *calibrate declination %.2f", info.declination ); writeSurvexEOL(pw);
       if ( ! TDSetting.mSurvexSplay ) {
         writeSurvexLine( pw, "  *alias station - .." );
@@ -968,7 +1012,7 @@ class TopoDroidExporter
               }
             } else { // only TO station
               if ( leg.mCnt > 0 && ref_item != null ) {
-                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
+                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item, ul, ua );
                 if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 ref_item = null; 
               }
@@ -983,16 +1027,16 @@ class TopoDroidExporter
               // if ( ! first  ) 
               {
                 if ( TDSetting.mSurvexSplay ) {
-                  writeSurvexSplay( pw, to + splayChar, to, item );
+                  writeSurvexSplay( pw, to + splayChar, to, item, ul, ua );
                 } else {
-                  writeSurvexSplay( pw, "-", to, item );
+                  writeSurvexSplay( pw, "-", to, item, ul, ua );
                 }
               }
             }
           } else { // with FROM station
             if ( to == null || to.length() == 0 ) { // splay shot
               if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
-                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
+                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item, ul, ua );
                 if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 ref_item = null; 
               }
@@ -1007,14 +1051,14 @@ class TopoDroidExporter
               // if ( ! first  )
               {
                 if ( TDSetting.mSurvexSplay ) {
-                  writeSurvexSplay( pw, from, from + splayChar, item );
+                  writeSurvexSplay( pw, from, from + splayChar, item, ul, ua );
                 } else {
-                  writeSurvexSplay( pw, from, "-", item );
+                  writeSurvexSplay( pw, from, "-", item, ul, ua );
                 }
               }
             } else {
               if ( leg.mCnt > 0 && ref_item != null ) {
-                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
+                duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item, ul, ua );
                 if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
                 ref_item = null; 
               }
@@ -1033,7 +1077,7 @@ class TopoDroidExporter
           }
         }
         if ( leg.mCnt > 0 && ref_item != null ) {
-          duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item );
+          duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item, ul, ua );
           if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
           ref_item = null;
         }
@@ -1057,8 +1101,11 @@ class TopoDroidExporter
             ArrayList<NumShot> shots = branch.shots;
             int size = shots.size();
             if ( size > 0 ) {
-              pw.format("*data passage station left right up down");
-              writeSurvexEOL( pw );
+              pw.format("*data passage station left right up down"); writeSurvexEOL( pw );
+              pw.format("*units left %s", uls );  writeSurvexEOL( pw );
+              pw.format("*units right %s", uls ); writeSurvexEOL( pw );
+              pw.format("*units up %s", uls );    writeSurvexEOL( pw );
+              pw.format("*units down %s", uls );  writeSurvexEOL( pw );
               NumShot sh = shots.get(0);
               NumStation s1 = sh.from;
               NumStation s2 = sh.to;
@@ -1072,11 +1119,11 @@ class TopoDroidExporter
               DistoXDBlock blk0 = sh.getFirstBlock();
               if ( size == 1 ) {
                 if ( step > 0 ) {
-                  writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
-                  writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                  writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ), ul );
+                  writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ), ul );
                 } else {
-                  writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
-                  writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                  writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ), ul );
+                  writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ), ul );
                 }
               } else {
                 String st_name = null;
@@ -1089,28 +1136,28 @@ class TopoDroidExporter
                     if ( blk0.mFrom.equals( blk.mFrom ) || blk0.mFrom.equals( blk.mTo ) ) {
                       st_name = blk0.mFrom;
                       if ( step > 0 ) {
-                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
-                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ), ul );
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ), ul );
                       } else {
-                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
-                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ), ul );
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ), ul );
                       }
                     } else if ( blk0.mTo.equals( blk.mFrom ) || blk0.mTo.equals( blk.mTo ) ) {
                       st_name = blk0.mTo;
                       if ( step > 0 ) {
-                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
-                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ), ul );
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ), ul );
                       } else {
-                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ) );
-                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ) );
+                        writeSurvexLRUD( pw, blk0.mTo, computeLRUD( blk0, list, false ), ul );
+                        writeSurvexLRUD( pw, blk0.mFrom, computeLRUD( blk0, list, true ), ul );
                       }
                     }
                   }
                   if ( st_name.equals( blk.mTo ) ) {
-                    writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ) );
+                    writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ), ul );
                     st_name = blk.mFrom;
                   } else if ( st_name.equals( blk.mFrom ) ) {
-                    writeSurvexLRUD( pw, blk.mTo, computeLRUD( blk, list, false ) );
+                    writeSurvexLRUD( pw, blk.mTo, computeLRUD( blk, list, false ), ul );
                     st_name = blk.mTo;
                   } else {
                     Log.e("DistoX", "ERROR unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
@@ -1141,7 +1188,7 @@ class TopoDroidExporter
         //   pw.format("*data passage station left right up down");
         //   writeSurvexEOL( pw );
         //   for ( DistoXDBlock blk : st_blk ) {
-        //     writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ) );
+        //     writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ), ul );
         //   }
         // }
       }
@@ -1611,14 +1658,19 @@ class TopoDroidExporter
   // =======================================================================
   // WALLS EXPORT 
 
-  static private void writeSrvLeg( PrintWriter pw, AverageLeg leg )
+  static private void writeSrvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
-    pw.format(Locale.US, "%.2f\t%.1f\t%.1f", leg.length(), leg.bearing(), leg.clino() );
+    pw.format(Locale.US, "%.2f\t%.1f\t%.1f", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
     leg.reset();
   }
  
   static String exportSurveyAsSrv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+    String uls = ( ul < 1.01f )? "Meters"  : "Feet"; // FIXME
+    String uas = ( ua < 1.01f )? "Degrees" : "Grads";
+
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -1638,7 +1690,7 @@ class TopoDroidExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "exportSurveyAsDat date parse error " + date );
+          TDLog.Error( "exportSurveyAsSrv date parse error " + date );
         }
       }
       pw.format("#Date %04d-%02d-%02d\n", y, m, d ); // format "YYYY-MM-DD"
@@ -1670,6 +1722,8 @@ class TopoDroidExporter
         }
       } 
 
+      pw.format("#Units %s A=%s\n", uls, uas );
+
       List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       // int extend = 1;
       AverageLeg leg = new AverageLeg();
@@ -1687,7 +1741,7 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeSrvLeg( pw, leg );
+              writeSrvLeg( pw, leg, ul, ua );
               if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
                 pw.format("\t; %s\n", ref_item.mComment );
               } else {
@@ -1708,7 +1762,7 @@ class TopoDroidExporter
             //   //  FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
             pw.format("-\t%s\t", to );
-            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("\t; %s\n", item.mComment );
             } else {
@@ -1718,7 +1772,7 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              writeSrvLeg( pw, leg );
+              writeSrvLeg( pw, leg, ul, ua );
               if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
                 pw.format("\t; %s\n", ref_item.mComment );
               } else {
@@ -1739,7 +1793,7 @@ class TopoDroidExporter
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+(int)(extend)] );
             // }
             pw.format("%s\t-\t", from ); // write splay shot
-            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength, item.mBearing, item.mClino );
+            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             if ( item.mComment != null && item.mComment.length() > 0 ) {
               pw.format("\t; %s\n", item.mComment );
             } else {
@@ -1747,7 +1801,7 @@ class TopoDroidExporter
             }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeSrvLeg( pw, leg );
+              writeSrvLeg( pw, leg, ul, ua );
               if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
                 pw.format("\t; %s\n", ref_item.mComment );
               } else {
@@ -1784,10 +1838,10 @@ class TopoDroidExporter
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
-        // pw.format(Locale.US, "%.2f\t%.1f\t%.1f\n", item.mLength, item.mBearing, item.mClino );
+        // pw.format(Locale.US, "%.2f\t%.1f\t%.1f\n", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeSrvLeg( pw, leg );
+        writeSrvLeg( pw, leg, ul, ua );
         if ( ref_item.mComment != null && ref_item.mComment.length() > 0 ) {
           pw.format("\t; %s\n", ref_item.mComment );
         } else {

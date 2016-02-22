@@ -5,16 +5,38 @@
     android:layout_height="fill_parent"
     >
 
-  <EditText android:id="@+id/name"
+  <LinearLayout android:id="@+id/layout0"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+      >
+
+     <EditText android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="30"
         android:singleLine="true"
-  />
+     />
+     <CheckBox android:id="@+id/button_fixed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="35"
+        android:singleLine="true"
+        android:text="@string/fixed"
+     />
+     <CheckBox android:id="@+id/button_painted"
+	android:layout_width="0dp"
+	android:layout_height="wrap_content"
+	android:layout_weight="35"
+	android:singleLine="true"
+	android:text="@string/painted"
+     />
+  </LinearLayout>
 
   <EditText android:id="@+id/comment"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:layout_below="@id/name"
+     android:layout_below="@id/layout0"
      android:hint="@string/comment"
      android:singleLine="true"
   />

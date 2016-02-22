@@ -192,6 +192,8 @@
     <string name="hidden_add">Hide previous shots</string>
     <string name="hidden_del">Show previous shots</string>
     <string name="splays_toggle">Toggle splays display</string>
+    <string name="fixed">fixed</string>
+    <string name="painted">painted</string>
 
     <string name="bad_cwd">Project name cannot be path</string>
     <string name="bad_line">Bad line type</string>

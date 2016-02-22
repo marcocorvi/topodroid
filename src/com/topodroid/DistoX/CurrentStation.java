@@ -15,15 +15,23 @@ class CurrentStation
 {
   public String mName;
   public String mComment;
+  public int mFlag;
 
-  CurrentStation( String name, String comment )
+  static final int STATION_NONE    = 0;
+  static final int STATION_FIXED   = 1;
+  static final int STATION_PAINTED = 2;
+
+  static final String[] flag_str = { " ", " [F] ", " [P] " };
+
+  CurrentStation( String name, String comment, long flag )
   {
-    mName = name;
+    mName    = name;
     mComment = (comment == null)? "" : comment;
+    mFlag    = (int)flag;
   }
 
   public String toString() 
   { 
-    return mName + " " + mComment;
+    return mName + flag_str[mFlag] + mComment;
   }
 }

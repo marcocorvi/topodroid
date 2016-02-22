@@ -278,8 +278,8 @@ class TDSetting
   // conversion factor from internal units (m) to user units
   static float mUnitLength = 1;
   static float mUnitAngle  = 1;
-  static String mUnitLengthStr = "m";
-  static String mUnitAngleStr  = "deg";
+  static String mUnitLengthStr = "m";    // N.B. Therion syntax: "m", "ft"
+  static String mUnitAngleStr  = "deg";  // N.B. Therion syntax: "deg", "grad"
 
   // static final String EXTEND_THR = "10"; 
   static float mExtendThr = 10;             // extend vertically splays in [90-30, 90+30] of the leg

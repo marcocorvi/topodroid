@@ -190,6 +190,8 @@
     <string name="hidden_add">Nascondi la linea mediana</string>
     <string name="hidden_del">Mostra la linea mediana</string>
     <string name="splays_toggle">Mostra o Nascondi gli splay</string>
+    <!-- TODO string name="fixed">fixed</string -->
+    <!-- TODO string name="painted">painted</string -->
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>

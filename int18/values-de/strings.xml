@@ -208,6 +208,8 @@
     <string name="hidden_add">Vorherige Messungen ausblenden</string>
     <string name="hidden_del">Vorherige Messungen anzeigen</string>
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
+    <!-- TODO string name="fixed">fixed</string -->
+    <!-- TODO string name="painted">painted</string -->
 
     <string name="bad_cwd">Der Projektname kann nicht der Pfad sein</string>
     <string name="bad_line">Ungültiger Linientyp</string>
