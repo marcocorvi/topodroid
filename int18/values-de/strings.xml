@@ -24,9 +24,6 @@
     <string name="memoryX310">DistoX X310 Speicher</string>
     <string name="memory_data">DistoX Daten</string>
 
-    <!-- OK string name="td_symbol_text">Do you need to install drawing tools?\nYou can do it later with the app TdSymbol</string -->
-    <!-- OK string name="td_symbol_ask">Don\'t ask me again</string -->
-
 <!-- names of therion items -->
     <string name="thp_user">Nutzer</string>
     <string name="thp_label">Beschriftung</string>
@@ -512,6 +509,10 @@
     <!-- UNUSED string name="btn_man">Manual</string -->
     <!-- UNUSED string name="btn_symbol">Drawing tools</string -->
     <string name="btn_import">Importieren</string>
+
+    <!-- TODO string name="length">Length [m]</string -->
+    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
+    <!-- TODO string name="clino">Clino [deg]</string -->
 
 <!-- HELP STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
     <string name="help_help">Diese Hilfe</string>

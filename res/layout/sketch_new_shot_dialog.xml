@@ -40,7 +40,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content"
-        android:hint="Length [m]"
+        android:hint="@string/length"
         android:nextFocusDown="@+id/et_azimuth"
         />
 
@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content"
-        android:hint="Azimuth [deg]"
+        android:hint="@string/azimuth"
         android:nextFocusDown="@+id/et_clino"
         />
 
@@ -56,7 +56,7 @@
         android:layout_width="0dp"
         android:layout_weight="30"
         android:layout_height="wrap_content"
-        android:hint="Clino [deg]"
+        android:hint="@string/clino"
         android:nextFocusDown="@id/top"
         />
     </LinearLayout>

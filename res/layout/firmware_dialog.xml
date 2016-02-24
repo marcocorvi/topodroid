@@ -44,7 +44,6 @@
   <ScrollView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_above="@+id/firmware_action"
     android:orientation="vertical"
   >
       <TextView android:id="@+id/firmware_text"

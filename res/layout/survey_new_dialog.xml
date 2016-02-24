@@ -3,14 +3,14 @@
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    android:paddingLeft="6sp"
+    android:paddingRight="6sp"
+    android:paddingBottom="3sp">
 
    					  
   <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
     android:layout_weight="1"
     >
     <LinearLayout
@@ -20,7 +20,7 @@
       >
 
     <EditText android:id="@+id/survey_name" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="2sp"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
@@ -30,7 +30,7 @@
         	
     <Button android:id="@+id/survey_date" 
         android:maxLines="1" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="2sp"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
@@ -38,7 +38,7 @@
     />
         	
     <EditText android:id="@+id/survey_team" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="2sp"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
@@ -47,7 +47,7 @@
         android:scrollHorizontally="true" />
         	
     <EditText android:id="@+id/survey_station" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="2sp"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
@@ -55,7 +55,7 @@
         android:scrollHorizontally="true" />
         	
     <EditText android:id="@+id/survey_decl" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="2sp"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 
@@ -65,7 +65,7 @@
         android:scrollHorizontally="true" />
         	
     <EditText android:id="@+id/survey_comment" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="2sp"
         android:layout_width="wrap_content"
       	android:ems="25"
         android:layout_height="wrap_content" 

@@ -109,7 +109,7 @@ public class DrawingStationName extends DrawingPointPath
   // { 
   //   double dx = x - cx;
   //   double dy = y - cy;
-  //   return FloatMath.sqrt( dx*dx + dy*dy );
+  //   return Math.sqrt( dx*dx + dy*dy );
   // }
 
   @Override

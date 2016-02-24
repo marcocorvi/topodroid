@@ -8,16 +8,15 @@
 
     <ListView android:id="@+id/help_list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:stackFromBottom="false"
         android:transcriptMode="alwaysScroll"
-        android:layout_weight="1"
         android:background="#ff000000"
     />  
 
     <Button android:id="@+id/button_manual"
-      android:layout_width="42dp"
-      android:layout_height="42dp"
+      android:layout_width="42sp"
+      android:layout_height="42sp"
       android:background="@drawable/ic_manual"
       android:layout_gravity="right"
       android:gravity="right"

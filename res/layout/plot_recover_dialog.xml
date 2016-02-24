@@ -15,11 +15,11 @@
 
    <ListView android:id="@+id/th2_list"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="0dp"
           android:stackFromBottom="false"
           android:transcriptMode="alwaysScroll"
           android:layout_weight="1"
-          android:paddingTop="25dp"
+          android:paddingTop="25sp"
           android:textSize="14sp"
     />  
 

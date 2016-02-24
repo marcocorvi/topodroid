@@ -17,7 +17,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-import android.util.FloatMath;
 // import android.util.Log;
 
 public class LinePoint extends BezierPoint
@@ -126,12 +125,12 @@ public class LinePoint extends BezierPoint
 
   float distanceCP1( float x, float y )
   {
-    return FloatMath.sqrt( (x-mX1)*(x-mX1) + (y-mY1)*(y-mY1) );
+    return (float)Math.sqrt( (x-mX1)*(x-mX1) + (y-mY1)*(y-mY1) );
   }
 
   float distanceCP2( float x, float y )
   {
-    return FloatMath.sqrt( (x-mX2)*(x-mX2) + (y-mY2)*(y-mY2) );
+    return (float)Math.sqrt( (x-mX2)*(x-mX2) + (y-mY2)*(y-mY2) );
   }
 
 

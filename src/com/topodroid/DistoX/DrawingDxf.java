@@ -23,7 +23,6 @@ import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class DrawingDxf
@@ -524,18 +523,18 @@ class DrawingDxf
               printString( pw41, 8, "SPLAY" );
               // printInt( pw41, 39, 1 );         // line thickness
 
-              float dhs = scale * blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
+              float dhs = scale * blk.mLength * (float)Math.cos( blk.mClino * grad2rad )*SCALE_FIX; // scaled dh
               if ( type == PlotInfo.PLOT_PLAN ) {
                 float x = scale * DrawingUtil.toSceneX( f.e );
                 float y = scale * DrawingUtil.toSceneY( f.s );
-                float de =   dhs * FloatMath.sin( blk.mBearing * grad2rad);
-                float ds = - dhs * FloatMath.cos( blk.mBearing * grad2rad);
+                float de =   dhs * (float)Math.sin( blk.mBearing * grad2rad);
+                float ds = - dhs * (float)Math.cos( blk.mBearing * grad2rad);
                 printXYZ( pw41, x, -y, 0.0f );
                 printXYZ1( pw41, x + de, -(y+ds), 0.0f );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
                 float x = scale * DrawingUtil.toSceneX( f.h );
                 float y = scale * DrawingUtil.toSceneY( f.v );
-                float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
+                float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
                 printXYZ( pw41, x, -y, 0.0f );
                 printXYZ1( pw41, x+dhs*blk.mExtend, -(y+dv), 0.0f );
               } else if ( type == PlotInfo.PLOT_SECTION ) {
@@ -606,7 +605,7 @@ class DrawingDxf
                   xt = pn.mX - p.mX;
                   yt = pn.mY - p.mY;
                 }
-                float d = FloatMath.sqrt( xt*xt + yt*yt );
+                float d = (float)Math.sqrt( xt*xt + yt*yt );
                 printFloat( pw5, 12, xt/d );
                 printFloat( pw5, 22, -yt/d );
                 printFloat( pw5, 32, 0 );
@@ -623,7 +622,7 @@ class DrawingDxf
                   xt = pn.mX - p.mX;
                   yt = pn.mY - p.mY;
                 }
-                d = FloatMath.sqrt( xt*xt + yt*yt );
+                d = (float)Math.sqrt( xt*xt + yt*yt );
                 printFloat( pw5, 13, xt/d );
                 printFloat( pw5, 23, -yt/d );
                 printFloat( pw5, 33, 0 );

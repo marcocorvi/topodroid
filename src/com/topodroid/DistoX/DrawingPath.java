@@ -25,7 +25,6 @@ import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 
-// import android.util.FloatMath;
 import android.util.Log;
 
 /**
@@ -182,7 +181,7 @@ public class DrawingPath implements ICanvasCommand
     y2 = y20;
     // dir = ( Math.abs( x2-x1 ) >= Math.abs( y2-y1 ) )?
     //          ( (x2 > x1)? 0 : 2 ) : ( (y2>y1)? 1 : 3 );
-    // d = FloatMath.sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+    // d = Math.sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
     cx = (x20+x10)/2;
     cy = (y20+y10)/2;
     if ( x1 < x2 ) {

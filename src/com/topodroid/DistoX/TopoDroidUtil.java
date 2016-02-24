@@ -121,7 +121,7 @@ public class TopoDroidUtil
 
   static String composeDate( int y, int m, int d )
   {
-    return String.format("%04d.%02d.%02d", y, m+1, d );
+    return String.format(Locale.US, "%04d.%02d.%02d", y, m+1, d );
   }
 
   static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }

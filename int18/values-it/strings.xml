@@ -24,9 +24,6 @@
     <string name="memoryX310">DistoX X310</string>
     <string name="memory_data">Dati DistoX</string>
 
-    <string name="td_symbol_text">Vuoi installare strumenti grafici?\nPuoi farlo anche dopo con l\'app TdSymbol</string>
-    <string name="td_symbol_ask">Non chiederlo piú</string>
-
     <string name="thp_label">testo</string>
     <!-- string name="thp_danger">pericolo</string -->
     <string name="thl_wall">parete</string>
@@ -66,7 +63,7 @@
     <string name="connect_failed">Comunicazione DistoX fallita</string>
     <string name="data"> dati</string>
     <string name="using">Usando %1$s %2$s</string>
-    <string name="calib_error">Errore %1$s gradi</string>
+    <string name="calib_error">Errore %1$f gradi</string>
     <string name="calib_stddev">Errore stddev: %1$.4f gradi</string>
     <string name="calib_max_error">Errore massimo %1$.4f gradi</string>
     <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f gradi</string>
@@ -290,7 +287,7 @@
     <string name="plot_start">Caposaldo di origine</string>
     <!-- string name="plot_view">Caposaldo puntato</string -->
     <!-- UNUSED string name="read_">Letti </string -->
-    <string name="read_data">Letti %1sd dati</string>
+    <string name="read_data">Letti %1$d dati</string>
     <!-- DONE string name="read_calib_data">Letti %1$d dati (%2$d pacchetti)</string -->
     <string name="read_fail_with_code">Lettura fallita. Codice </string>
     <string name="read_failed">Lettura dati DistoX fallita</string>
@@ -486,6 +483,10 @@
     <string name="btn_man">Manuale</string>
     <string name="btn_symbol">Strumenti grafici</string>
     <string name="btn_import">Importa</string>
+
+    <!-- TODO string name="length">Length [m]</string -->
+    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
+    <!-- TODO string name="clino">Clino [deg]</string -->
 
     <string name="help_help">Questo aiuto</string>
     <string name="help_manual">Manuale online</string>

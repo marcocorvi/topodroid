@@ -24,9 +24,6 @@
     <string name="memoryX310">Memoria DistoX X310</string>
     <string name="memory_data">Datos DistoX</string>
 
-    <string name="td_symbol_text">¿Necesitas instalar los símbolos de dibujo? \nPuede hacerlo más adelante con la aplicación TdSymbol</string>
-    <string name="td_symbol_ask">No preguntar de nuevo</string>
-
     <string name="thp_label">Texto</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_wall">Pared</string>
@@ -479,6 +476,10 @@
     <string name="btn_man">Manual</string>
     <string name="btn_symbol">Símbolos</string>
     <string name="btn_import">Importar</string>
+
+    <!-- TODO string name="length">Length [m]</string -->
+    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
+    <!-- TODO string name="clino">Clino [deg]</string -->
 
     <string name="help_help">Ayuda</string>
     <string name="help_manual">Manual online</string>

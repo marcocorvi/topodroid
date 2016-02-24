@@ -13,7 +13,6 @@ package com.topodroid.DistoX;
 
 import java.lang.Math;
 
-import android.util.FloatMath;
 // import android.util.Log;
 
 public class TDMath
@@ -27,15 +26,15 @@ public class TDMath
   static final float GRAD2RAD = (M_PI/180.0f);
 
   static float abs( float x )   { return (float)( Math.abs(x) ); }
-  static float cos( float x )   { return FloatMath.cos( x ); }
-  static float cosd( float xd ) { return FloatMath.cos( xd * GRAD2RAD ); }
-  static float sin( float x )   { return FloatMath.sin( x ); }
-  static float sind( float xd ) { return FloatMath.sin( xd * GRAD2RAD ); }
+  static float cos( float x )   { return (float)Math.cos( x ); }
+  static float cosd( float xd ) { return (float)Math.cos( xd * GRAD2RAD ); }
+  static float sin( float x )   { return (float)Math.sin( x ); }
+  static float sind( float xd ) { return (float)Math.sin( xd * GRAD2RAD ); }
   static float atan2( float y, float x ) { return (float)( Math.atan2( y, x ) ); }
   static float atan2d( float y, float x ) { return (float)( RAD2GRAD * Math.atan2( y, x ) ); }
   static float acos( float x )   { return (float)( Math.acos( x ) ); }
   static float acosd( float x )  { return (float)( RAD2GRAD * Math.acos( x ) ); }
-  static float sqrt( float x )   { return FloatMath.sqrt( x ); }
+  static float sqrt( float x )   { return (float)Math.sqrt( x ); }
 
   static float in360( float f )
   {

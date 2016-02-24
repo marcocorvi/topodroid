@@ -8,8 +8,7 @@
           android:layout_height="match_parent"
           android:stackFromBottom="true"
           android:transcriptMode="alwaysScroll"
-          android:layout_weight="1"
-          android:textSize="12sp"
+          android:textSize="14sp"
   />  
 </RelativeLayout>
 

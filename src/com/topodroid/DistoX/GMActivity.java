@@ -51,7 +51,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 public class GMActivity extends Activity
@@ -888,7 +887,7 @@ public class GMActivity extends Activity
   void updateGM( long value, String name )
   {
     mApp.mDData.updateGMName( mCIDid, mApp.mCID, name );
-    String id = (new Long(mCIDid)).toString();
+    String id = Long.toString(mCIDid);
     // CalibCBlock blk = mApp.mDData.selectGM( mCIDid, mApp.mCID );
     mSaveCBlock.setGroup( value );
 

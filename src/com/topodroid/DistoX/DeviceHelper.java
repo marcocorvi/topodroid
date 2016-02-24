@@ -596,6 +596,8 @@ public class DeviceHelper extends DataSetObservable
      if (cursor.moveToFirst() ) {
        id = 1 + cursor.getLong(0);
      }
+     if ( ! cursor.isClosed()) cursor.close();
+
      ContentValues cv = new ContentValues();
      cv.put( "id",      id );
      cv.put( "name",    name );

@@ -31,7 +31,7 @@
       	android:ems="25"
      />
 
-  <LinearLayout
+  <LinearLayout android:id="@+id/layout0"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -72,7 +72,6 @@
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout4"
-      android:layout_below="@id/edit_comment"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
@@ -104,10 +103,10 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:transcriptMode="alwaysScroll"
-        android:layout_weight="1"
-        android:textSize="12sp"
+        android:textSize="14sp"
   />  
    					  
+</LinearLayout>
 
   <android.inputmethodservice.KeyboardView
     android:id="@+id/keyboardview"
@@ -120,7 +119,6 @@
     android:gravity="bottom"
     android:visibility="gone"
   />
-</LinearLayout>
 
 </RelativeLayout>
 

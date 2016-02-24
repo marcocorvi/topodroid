@@ -37,6 +37,12 @@
             </intent-filter>
         </activity>
 
+        <!-- activity android:name=".ItemDrawer"
+                  android:theme="@style/Theme.FullScreen"
+                  android:screenOrientation="portrait"
+                  android:label="@string/app_name">
+        </activity -->
+
         <activity android:name=".FixedActivity"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"

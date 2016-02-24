@@ -841,6 +841,7 @@ public class SketchActivity extends ItemDrawer
     if ( mDataDownloader != null ) {
       mApp.unregisterLister( this );
     }
+    super.onDestroy();
   }
 
   // ----------------------------------------------------------------------

@@ -24,7 +24,6 @@ import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import android.util.FloatMath;
 // import android.util.Log;
 
 class DrawingSvg
@@ -152,17 +151,17 @@ class DrawingSvg
             // if ( sh.mType == DrawingPath.DRAWING_PATH_SPLAY ) {
               NumStation f = num.getStation( blk.mFrom );
               pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
-              float dh = blk.mLength * FloatMath.cos( blk.mClino * grad2rad )*SCALE_FIX;
+              float dh = blk.mLength * (float)Math.cos( blk.mClino * grad2rad )*SCALE_FIX;
               if ( type == PlotInfo.PLOT_PLAN ) {
                 float x = DrawingUtil.toSceneX( f.e ); 
                 float y = DrawingUtil.toSceneY( f.s );
-                float de =   dh * FloatMath.sin( blk.mBearing * grad2rad);
-                float ds = - dh * FloatMath.cos( blk.mBearing * grad2rad);
+                float de =   dh * (float)Math.sin( blk.mBearing * grad2rad);
+                float ds = - dh * (float)Math.cos( blk.mBearing * grad2rad);
                 pw41.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x + de, (y+ds) );
               } else if ( type == PlotInfo.PLOT_EXTENDED ) {
                 float x = DrawingUtil.toSceneX( f.h );
                 float y = DrawingUtil.toSceneY( f.v );
-                float dv = - blk.mLength * FloatMath.sin( blk.mClino * grad2rad )*SCALE_FIX;
+                float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
                 pw41.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x+dh*blk.mExtend, (y+dv) );
               }
             // }

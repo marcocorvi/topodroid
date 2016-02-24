@@ -103,7 +103,6 @@
        android:layout_below="@id/layout1"
        android:stackFromBottom="false"
        android:transcriptMode="alwaysScroll"
-       android:layout_weight="1"
        android:textSize="12sp"
   />  
 

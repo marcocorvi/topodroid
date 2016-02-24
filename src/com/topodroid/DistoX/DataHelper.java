@@ -414,7 +414,7 @@ public class DataHelper extends DataSetObservable
             ++ nv;
           } else {
             ++ n0;
-            Integer fi = new Integer( n0 );
+            Integer fi = Integer.valueOf( n0 );
             map.put( t, fi );
             map.put( f, fi );
             nv += 2;

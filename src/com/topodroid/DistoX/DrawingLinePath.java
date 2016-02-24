@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.FloatMath;
 // import android.util.Log;
 
 /**
@@ -150,7 +149,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       mDy = - second.mX + mFirst.mX;
       float d = ( mDx*mDx + mDy*mDy );
       if ( d > 0 ) {
-        d = 1 / FloatMath.sqrt( d );
+        d = 1 / (float)Math.sqrt( d );
         if ( mReversed ) d = -d;
         mDx *= d;
         mDy *= d;

@@ -20,7 +20,6 @@ import android.graphics.PointF;
 import android.graphics.Matrix;
 
 import android.util.Log;
-import android.util.FloatMath;
 
 /**
  */
@@ -74,7 +73,7 @@ public class SketchStationName extends SketchPath
 
   float sceneDistance( float xx, float yy )
   {
-    return FloatMath.sqrt( (xc-xx)*(xc-xx) + (yc-yy)*(yc-yy) );
+    return (float)Math.sqrt( (xc-xx)*(xc-xx) + (yc-yy)*(yc-yy) );
   }
 
   @Override

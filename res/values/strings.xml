@@ -24,9 +24,6 @@
     <string name="memoryX310">DistoX X310 memory</string>
     <string name="memory_data">DistoX data</string>
 
-    <string name="td_symbol_text">Do you need to install drawing tools?\nYou can do it later with the app TdSymbol</string>
-    <string name="td_symbol_ask">Don\'t ask me again</string>
-
     <string name="thp_user">user</string>
     <string name="thp_label">label</string>
     <!-- string name="thp_danger">danger</string -->
@@ -524,6 +521,9 @@
     <string name="sketch_mode_all">All shots</string>
     <string name="sketch_delete">Delete 3D model ?</string>
     <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
+    <string name="length">Length [m]</string>
+    <string name="azimuth">Azimuth [deg]</string>
+    <string name="clino">Clino [deg]</string>
 
     <!-- string name="btn_head">head</string -->
     <!-- string name="btn_stretch">Stretch</string -->

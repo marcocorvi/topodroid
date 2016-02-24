@@ -33,7 +33,7 @@ class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    return new Boolean( mApp.toggleCalibMode( ) );
+    return Boolean.valueOf( mApp.toggleCalibMode( ) );
   }
 
   // @Override

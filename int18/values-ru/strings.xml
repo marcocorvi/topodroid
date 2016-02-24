@@ -24,9 +24,6 @@
     <string name="memoryX310">Память DistoX X310</string>
     <string name="memory_data">DistoX данные</string>
 
-    <string name="td_symbol_text">Вы хотите установить инструменты для рисования?\nМожно сделать это позже, установив приложение TdSymbol</string>
-    <string name="td_symbol_ask">Не спрашивать снова</string>
-
     <!-- string name="thp_danger">опасность</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">лейбл</string>
@@ -504,6 +501,9 @@
     <string name="sketch_mode_all">Все пикеты</string>
     <string name="sketch_delete">Удалить 3D модель ?</string>
     <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
+    <!-- TODO string name="length">Length [m]</string -->
+    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
+    <!-- TODO string name="clino">Clino [deg]</string -->
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Растянуть</string -->

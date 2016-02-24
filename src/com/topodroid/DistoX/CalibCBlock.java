@@ -15,8 +15,6 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.Locale;
 
-import android.util.FloatMath;
-
 public class CalibCBlock
 {
   private static final float grad2rad = TDMath.GRAD2RAD;
@@ -62,14 +60,14 @@ public class CalibCBlock
     computeBearingAndClino();
     float c = c0 * grad2rad;
     float b = b0 * grad2rad;
-    Vector v1 = new Vector( FloatMath.cos(c) * FloatMath.cos(b), 
-                            FloatMath.cos(c) * FloatMath.sin(b),
-                            FloatMath.sin(c) );
+    Vector v1 = new Vector( (float)Math.cos(c) * (float)Math.cos(b), 
+                            (float)Math.cos(c) * (float)Math.sin(b),
+                            (float)Math.sin(c) );
     c = mClino   * grad2rad; 
     b = mBearing * grad2rad;
-    Vector v2 = new Vector( FloatMath.cos(c) * FloatMath.cos(b), 
-                            FloatMath.cos(c) * FloatMath.sin(b),
-                            FloatMath.sin(c) );
+    Vector v2 = new Vector( (float)Math.cos(c) * (float)Math.cos(b), 
+                            (float)Math.cos(c) * (float)Math.sin(b),
+                            (float)Math.sin(c) );
     float x = v1.dot(v2);
     return x < thr; // 0.70: approx 45 degrees
   }
@@ -137,7 +135,7 @@ public class CalibCBlock
     float ey = e.dot( y );
     float ez = e.dot( g );
     mBearing =   TDMath.atan2( -ey, ex );
-    mClino   = - TDMath.atan2( ez, FloatMath.sqrt(ex*ex+ey*ey) );
+    mClino   = - TDMath.atan2( ez, (float)Math.sqrt(ex*ex+ey*ey) );
     mRoll    =   TDMath.atan2( g.y, g.z );
     if ( mBearing < 0.0f ) mBearing += TDMath.M_2PI;
     if ( mRoll < 0.0f ) mRoll += TDMath.M_2PI;

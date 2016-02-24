@@ -18,7 +18,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 public class Vector
@@ -48,10 +47,10 @@ public class Vector
   // c   clino [radians]
   public Vector( float b, float c )
   {
-    float h = FloatMath.cos( c );
-    x = h * FloatMath.cos( b );
-    y = h * FloatMath.sin( b );
-    z = FloatMath.sin( c );
+    float h = (float)Math.cos( c );
+    x = h * (float)Math.cos( b );
+    y = h * (float)Math.sin( b );
+    z = (float)Math.sin( c );
   }
 
   // copy cstr
@@ -88,7 +87,7 @@ public class Vector
 
   public float Length()
   {
-    return FloatMath.sqrt( x*x + y*y + z*z );
+    return (float)Math.sqrt( x*x + y*y + z*z );
   }
 
   public float Abs( ) { return Length(); }
@@ -256,7 +255,7 @@ public class Vector
     float a = x - p.x;
     float b = y - p.y;
     float c = z - p.z;
-    return FloatMath.sqrt( a*a + b*b + c*c );
+    return (float)Math.sqrt( a*a + b*b + c*c );
   }
 
   // as 3D point (X,Y,Z) are east, south, vert(down) 

@@ -21,7 +21,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Locale;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 /**
@@ -128,7 +127,7 @@ public class SketchPointPath extends SketchPath
       q1.y -= q.y; // minus sin-rotation
       // path.moveTo(0,0);
       // path.lineTo( q1.x, q1.y );
-      float d = FloatMath.sqrt( q1.x*q1.x + q1.y*q1.y );
+      float d = (float)Math.sqrt( q1.x*q1.x + q1.y*q1.y );
       if ( Math.abs(d) > 0.01 ) {
         Matrix matrix1 = new Matrix();
         // float angle = TDMath.atan2d( q1.y/d, q1.x/d ); // degrees

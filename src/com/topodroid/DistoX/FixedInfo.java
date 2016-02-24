@@ -51,7 +51,7 @@ class FixedInfo extends MagLatLong
   // get the string "name long lat alt" for the exports
   public String toExportString()
   {
-    return String.format("%s %.6f %.6f %.0f", name, lng, lat, asl );
+    return String.format(Locale.US, "%s %.6f %.6f %.0f", name, lng, lat, asl );
   }
 
   public String toString()
@@ -72,7 +72,7 @@ class FixedInfo extends MagLatLong
     x = 60*(x - mp);
     int sp = (int)x;
     int ds = (int)( 100 * (x-sp) );
-    return String.format( "%d°%02d'%02d.%02d", dp, mp, sp, ds );
+    return String.format(Locale.US, "%d°%02d'%02d.%02d", dp, mp, sp, ds );
   }
 
   static private String double2degree( double x )

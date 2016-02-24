@@ -16,7 +16,6 @@ package com.topodroid.DistoX;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import android.util.FloatMath;
 import android.util.Log;
 
 class Selection
@@ -302,8 +301,8 @@ class Selection
     for ( SelectionBucket bucket : mBuckets ) {
       if ( bucket.contains( x, y ) ) return bucket;
     }
-    float x0 = BSIZE * FloatMath.floor(x / BSIZE);
-    float y0 = BSIZE * FloatMath.floor(y / BSIZE);
+    float x0 = BSIZE * (float)Math.floor(x / BSIZE);
+    float y0 = BSIZE * (float)Math.floor(y / BSIZE);
     SelectionBucket ret = new SelectionBucket( x0, y0, x0+BSIZE, y0+BSIZE );
     mBuckets.add( ret );
     return ret;

@@ -708,7 +708,8 @@ public class ShotActivity extends Activity
   BitmapDrawable mBMleft;
   BitmapDrawable mBMright;
 
-  private Handler mListItemsHandler;
+  // FIXME made static: should not cause problems
+  private static Handler mListItemsHandler = null;
   static final int MSG_ADD_BLK = 1;
   
   @Override

@@ -53,8 +53,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.util.FloatMath;
-
 import android.provider.MediaStore;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -1054,19 +1052,19 @@ public class DrawingActivity extends ItemDrawer
         // normal, horizontal and cross-product
         float mc = mClino   * TDMath.GRAD2RAD;
         float ma = mAzimuth * TDMath.GRAD2RAD;
-        float X0 = FloatMath.cos( mc ) * FloatMath.cos( ma );  // X = North
-        float Y0 = FloatMath.cos( mc ) * FloatMath.sin( ma );  // Y = East
-        float Z0 = FloatMath.sin( mc );                        // Z = Up
+        float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
+        float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
+        float Z0 = (float)Math.sin( mc );                        // Z = Up
         // canvas X-axis, unit horizontal axis: 90 degrees to the right of the azimuth
         //   azimuth = 0 (north) --> horizontal = ( 0N, 1E)
         //   azimuth = 90 (east) --> horizontal = (-1N, 0E)
         //   etc.
-        float X1 = - FloatMath.sin( ma ); // X1 goes to the left in the section plane !!!
-        float Y1 =   FloatMath.cos( ma ); 
+        float X1 = - (float)Math.sin( ma ); // X1 goes to the left in the section plane !!!
+        float Y1 =   (float)Math.cos( ma ); 
         float Z1 = 0;
-        // float X2 = - FloatMath.sin( mc ) * FloatMath.cos( ma );
-        // float Y2 = - FloatMath.sin( mc ) * FloatMath.sin( ma );
-        // float Z2 =   FloatMath.cos( ma );
+        // float X2 = - (float)Math.sin( mc ) * (float)Math.cos( ma );
+        // float Y2 = - (float)Math.sin( mc ) * (float)Math.sin( ma );
+        // float Z2 =   (float)Math.cos( ma );
         // canvas UP-axis: this is X0 ^ X1 : it goes up in the section plane 
         // canvas Y-axis = - UP-axis
         float X2 = Y0 * Z1 - Y1 * Z0; 
@@ -1082,7 +1080,7 @@ public class DrawingActivity extends ItemDrawer
             if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
               xn =  (float)(X1);
               yn = -(float)(X2);
-              float d = 5 / FloatMath.sqrt(xn*xn + yn*yn);
+              float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
               if ( mClino > 0 ) xn = -xn;
               // FIXME NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
               addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
@@ -1105,9 +1103,9 @@ public class DrawingActivity extends ItemDrawer
           if ( blk != null ) {
             float bc = blk.mClino * TDMath.GRAD2RAD;
             float bb = blk.mBearing * TDMath.GRAD2RAD;
-            float X = FloatMath.cos( bc ) * FloatMath.cos( bb );
-            float Y = FloatMath.cos( bc ) * FloatMath.sin( bb );
-            float Z = FloatMath.sin( bc );
+            float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
+            float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
+            float Z = (float)Math.sin( bc );
             xfrom = -dist * (float)(X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
             yfrom =  dist * (float)(X2 * X + Y2 * Y + Z2 * Z);
             if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
@@ -1128,9 +1126,9 @@ public class DrawingActivity extends ItemDrawer
           float d = b.mLength;
           float bc = b.mClino * TDMath.GRAD2RAD;
           float bb = b.mBearing * TDMath.GRAD2RAD;
-          float X = FloatMath.cos( bc ) * FloatMath.cos( bb ); // North
-          float Y = FloatMath.cos( bc ) * FloatMath.sin( bb ); // East
-          float Z = FloatMath.sin( bc );                       // Up
+          float X = (float)Math.cos( bc ) * (float)Math.cos( bb ); // North
+          float Y = (float)Math.cos( bc ) * (float)Math.sin( bb ); // East
+          float Z = (float)Math.sin( bc );                       // Up
           float x =  d * (float)(X1 * X + Y1 * Y + Z1 * Z);
           float y = -d * (float)(X2 * X + Y2 * Y + Z2 * Z);
           if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
@@ -1491,7 +1489,7 @@ public class DrawingActivity extends ItemDrawer
       if ( np < 2 ) return 0.0f;
       float x = ev.getX(1) - ev.getX(0);
       float y = ev.getY(1) - ev.getY(0);
-      return FloatMath.sqrt(x*x + y*y);
+      return (float)Math.sqrt(x*x + y*y);
     }
 
     void saveEventPoint( MotionEventWrap ev )
@@ -1929,7 +1927,7 @@ public class DrawingActivity extends ItemDrawer
                         } else {
                           DrawingPath p = paths.get(0);
                           blk = p.mBlock;
-                          Float result = new Float(0);
+                          Float result = Float.valueOf(0);
                           p.intersect( l1.mX, l1.mY, l2.mX, l2.mY, result );
                           intersection = result.floatValue();
                           // p.log();
@@ -3513,7 +3511,7 @@ public class DrawingActivity extends ItemDrawer
     }
     float x2 = x1 - x0;
     float y2 = y1 - y0;
-    float len = FloatMath.sqrt( x2 * x2 + y2 * y2 );
+    float len = (float)Math.sqrt( x2 * x2 + y2 * y2 );
     PointF uu = new PointF( x2 / len, y2 / len );
     PointF vv = new PointF( -uu.y, uu.x );
 
@@ -3566,7 +3564,7 @@ public class DrawingActivity extends ItemDrawer
 
   void addPointsToLine( DrawingLinePath line, float x0, float y0, float xx, float yy )
   {
-    float ll = FloatMath.sqrt( (xx-x0)*(xx-x0) + (yy-y0)*(yy-y0) ) / 20;
+    float ll = (float)Math.sqrt( (xx-x0)*(xx-x0) + (yy-y0)*(yy-y0) ) / 20;
     if ( ll > TDSetting.mWallsXStep ) {
       int n = 1 + (int)ll;
       float dx = (xx-x0) / n;

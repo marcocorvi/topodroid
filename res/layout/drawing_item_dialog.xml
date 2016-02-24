@@ -13,7 +13,7 @@
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:paddingBottom="10dp">
+      android:paddingBottom="10dp"
       >
 
     </TableLayout>
@@ -22,7 +22,7 @@
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:paddingTop="10dp">
+      android:paddingTop="10dp"
       >
 
       <Button android:id="@+id/button_point"

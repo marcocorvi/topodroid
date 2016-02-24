@@ -182,14 +182,14 @@
      <item name="continuous">1</item>
   </string-array>
 
-  <string-array name="altitudeType">
+  <!-- string-array name="altitudeType">
     <item name="wgs84">WGS84 ellipsoidal</item>
     <item name="asl">Orthometric</item>
   </string-array>
   <string-array name="altitudeTypeValue">
     <item name="wgs84">0</item>
     <item name="asl">1</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="sockType">
      <item name="default">Default</item>

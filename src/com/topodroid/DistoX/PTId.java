@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import java.util.Locale;
 // import android.util.Log;
 
 class PTId
@@ -98,7 +99,7 @@ class PTId
       // sprintf(tmp, "%d", _id + 0x80000001 ); // FIXME this is the correct form
       return new String("-");
     }
-    return String.format( "%04d.%d", _id>>16, _id & 0xffff );
+    return String.format(Locale.US, "%04d.%d", _id>>16, _id & 0xffff );
   }
     
   // -----------------------------------------------------------

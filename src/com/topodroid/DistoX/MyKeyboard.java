@@ -103,7 +103,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     
   Integer addFlag( EditText e, int f )
   {
-    return mFlags.put( e, new Integer(f) );
+    return mFlags.put( e, Integer.valueOf(f) );
   }
 
   static void registerEditText( final MyKeyboard kbd, final EditText e, int flag )

@@ -11,7 +11,7 @@
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:paddingBottom="10dp">
+       android:paddingBottom="10dp"
        >
    					  
       <Button android:id="@+id/button_store"
@@ -43,7 +43,7 @@
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:paddingBottom="10dp">
+       android:paddingBottom="10dp"
        >
    					  
       <Button android:id="@+id/button_read"

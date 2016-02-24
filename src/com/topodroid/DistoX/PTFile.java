@@ -449,7 +449,7 @@ class PTFile
       Integer intId = stationsId.get( name );
       if ( intId == null ) {
         int id = DistoXStationName.toInt( name );
-        stationsId.put( name, new Integer( id ) );
+        stationsId.put( name, Integer.valueOf( id ) );
         return id;
       }
       return intId.intValue();

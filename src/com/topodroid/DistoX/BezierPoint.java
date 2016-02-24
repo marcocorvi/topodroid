@@ -11,8 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import android.util.FloatMath;
-
 class BezierPoint
 {
   public float mX;  // X coord
@@ -71,7 +69,7 @@ class BezierPoint
   float length() 
   { 
     float l2 = mX*mX + mY*mY;
-    return ( l2 > 0 )? FloatMath.sqrt( l2 ) : 0;
+    return ( l2 > 0 )? (float)Math.sqrt( l2 ) : 0;
   }
 
   float squareLength() { return mX*mX + mY*mY; }
@@ -81,7 +79,7 @@ class BezierPoint
     float dx = mX - p.mX;
     float dy = mY - p.mY;
     float d = dx*dx + dy*dy;
-    return ( d > 0 )? FloatMath.sqrt(d) : 0;
+    return ( d > 0 )? (float)Math.sqrt(d) : 0;
   }
 
   float distance( float x, float y )
@@ -89,7 +87,7 @@ class BezierPoint
     float dx = x - mX;
     float dy = y - mY;
     float d = dx*dx + dy*dy;
-    return ( d > 0 )? FloatMath.sqrt(d) : 0;
+    return ( d > 0 )? (float)Math.sqrt(d) : 0;
   }
 
   void normalize()

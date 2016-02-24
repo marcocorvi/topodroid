@@ -21,6 +21,7 @@ import java.util.ArrayList;
 // import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Environment;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,7 +52,7 @@ public class FixedImportDialog extends MyDialog
                                         , OnClickListener
                                         , OnLongClickListener
 { 
-  static final String POINTLISTS = "/sdcard/MobileTopographer/pointlists";
+  static final String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
 
   private FixedActivity mParent;
 

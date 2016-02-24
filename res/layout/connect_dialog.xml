@@ -3,21 +3,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
+    android:paddingLeft="6sp"
+    android:paddingRight="6sp"
   >
 
   <TextView android:id="@+id/conn_state"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:textSize="16dip"
+        android:textSize="16sp"
         />
 
   <!-- LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="15dp" 
+      android:layout_marginTop="15sp" 
       >
         <Button android:id="@+id/button_start"
           android:layout_width="wrap_content" 
@@ -36,10 +36,10 @@
     </LinearLayout -->
 
   <TextView android:id="@+id/device_address"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="25sp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:textSize="16dip"
+        android:textSize="16sp"
         android:hint="@string/no_device_address"
         />
 
@@ -47,7 +47,7 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginTop="10dp" 
+      android:layout_marginTop="10sp" 
       >
         <Button android:id="@+id/button_connect"
           android:layout_width="wrap_content" 
@@ -76,8 +76,8 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_marginBottom="15dp" 
-      android:layout_marginTop="10dp" 
+      android:layout_marginBottom="15sp" 
+      android:layout_marginTop="10sp" 
       >
       <Button android:id="@+id/button_cancel"
         android:layout_width="wrap_content" 
@@ -90,7 +90,7 @@
 
   <ListView android:id="@+id/dev_list"
           android:layout_width="match_parent"
-          android:layout_height="fill_parent"
+          android:layout_height="0dp"
           android:stackFromBottom="true"
           android:transcriptMode="alwaysScroll"
           android:layout_weight="1"

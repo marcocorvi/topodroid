@@ -19,7 +19,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;
 
-import android.util.FloatMath;
 
 import java.util.Iterator;
 // import java.util.List;
@@ -191,7 +190,7 @@ public class DrawingPointLinePath extends DrawingPath
         float y1 = pt.mY - prev.mY;
         float x2 = next.mX - pt.mX;
         float y2 = next.mY - pt.mY;
-        float cos = (x1*x2 + y1*y2)/FloatMath.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2));
+        float cos = (x1*x2 + y1*y2)/(float)Math.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2));
         if ( cos >= 0.7 ) {
           prev.mNext = next;
           next.mPrev = prev; 
@@ -258,7 +257,7 @@ public class DrawingPointLinePath extends DrawingPath
       float dx = - first.mY + last.mY;
       float d = dx*dx + dy*dy;
       if ( d > 0.00001f ) {
-        d = TDSetting.mArrowLength * TDSetting.mUnit / FloatMath.sqrt( d );
+        d = TDSetting.mArrowLength * TDSetting.mUnit / (float)Math.sqrt( d );
         dx *= d;
         dy *= d;
         addStartPoint( first.mX+dx, first.mY+dy );

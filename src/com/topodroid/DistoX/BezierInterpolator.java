@@ -307,7 +307,7 @@ public class BezierInterpolator
     }
 
     ArrayList<Integer> corners = new ArrayList<Integer>();
-    corners.add( new Integer(0) );
+    corners.add( Integer.valueOf(0) );
     int kc = 0;
     int kgap = 0;
     float dc = 0.0f;
@@ -332,16 +332,16 @@ public class BezierInterpolator
       } else if ( d0 > len_thr_hgh ) {
         in_corner = false;
         if ( kc > kgap ) {
-          corners.add( new Integer(kc) );
+          corners.add( Integer.valueOf(kc) );
           kgap = k0;
         }
       }
     }
     if ( in_corner ) {
-      if ( kc > kgap ) corners.add( new Integer(kc) );
+      if ( kc > kgap ) corners.add( Integer.valueOf(kc) );
     }
     if ( kc != nPts-1 ) { // last point is a corner
-      corners.add( new Integer(nPts-1) );
+      corners.add( Integer.valueOf(nPts-1) );
     }
     return corners;  
   }

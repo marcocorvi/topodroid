@@ -25,9 +25,6 @@
     <string name="memoryX310">Mémoire du DistoX X310</string>
     <string name="memory_data">Données du DistoX</string>
 
-    <string name="td_symbol_text">Avez vous besoin d\'installer les symboles de dessin ?\nVous pourrez le faire plus tard avec l\'application TdSymbol.</string>
-    <string name="td_symbol_ask">Ne plus me le proposer</string>
-
     <string name="thp_user">utilisateur</string>
     <string name="thp_label">étiquette</string>
     <!-- string name="thp_danger">danger</string -->
@@ -70,7 +67,7 @@
     <string name="connect_failed">Echec de la connexion</string>
     <string name="data"> données</string>
     <string name="using">Utilisation de %1$s %2$s</string>
-    <string name="calib_error">Erreur moyenne : %1$s degrés</string>
+    <string name="calib_error">Erreur moyenne : %1$f degrés</string>
     <string name="calib_stddev">Erreur stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Erreur max : %1$.4f degrés</string>
     <string name="calib_ave_std">Précision ave_std: %1$.4f %2$.4f degrees</string>
@@ -525,6 +522,9 @@
     <string name="sketch_mode_all">tous les points</string>
     <string name="sketch_delete">Suprimer le model 3D?</string>
     <!-- TODO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
+    <!-- TODO string name="length">Length [m]</string -->
+    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
+    <!-- TODO string name="clino">Clino [deg]</string -->
 
     <!-- string name="btn_head">head</string -->
     <!-- string name="btn_stretch">Stretch</string -->

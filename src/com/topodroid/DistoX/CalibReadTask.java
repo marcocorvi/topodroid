@@ -49,7 +49,7 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    return new Boolean( mApp.readCalibCoeff( coeff ) );
+    return Boolean.valueOf( mApp.readCalibCoeff( coeff ) );
   }
 
   // @Override

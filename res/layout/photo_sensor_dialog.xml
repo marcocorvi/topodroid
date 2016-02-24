@@ -3,19 +3,19 @@
     android:layout_width="match_parent" 
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
-    android:paddingBottom="3dp">
+    android:paddingLeft="6sp"
+    android:paddingRight="6sp"
+    android:paddingBottom="3sp">
 
-  <LinearLayout
+  <LinearLayout android:id="@+id/layout5"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="10sp"
     >
     <TextView android:id="@+id/photo_shot_stations" 
         android:maxLines="1" 
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="5sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
       	android:ems="25"
@@ -33,7 +33,7 @@
   <Button android:id="@+id/photo_shot"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:layout_marginBottom="10dp"
+      android:layout_marginBottom="10sp"
       android:background="@drawable/button"
       style="@style/button_default"
       android:text="@string/photo_shot"
@@ -41,7 +41,7 @@
   <Button android:id="@+id/photo_survey"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:layout_marginBottom="10dp"
+      android:layout_marginBottom="10sp"
       android:background="@drawable/button"
       style="@style/button_default"
       android:text="@string/photo_survey"
@@ -57,7 +57,7 @@
     <Button android:id="@+id/photo_photo"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:layout_marginRight="10dp"
+      android:layout_marginRight="10sp"
       android:background="@drawable/button"
       style="@style/button_default"
       android:text="@string/button_photo"
@@ -65,7 +65,7 @@
     <Button android:id="@+id/photo_sensor"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:layout_marginRight="10dp"
+      android:layout_marginRight="10sp"
       android:background="@drawable/button"
       style="@style/button_default"
       android:text="@string/button_sensor"
@@ -82,13 +82,11 @@
   </LinearLayout>
 -->
    		
-  <LinearLayout 
-      android:id="@+id/layout4"
-      android:layout_below="@id/layout5"
+  <LinearLayout android:id="@+id/layout4"
       android:layout_width="fill_parent" 
-      android:layout_height="50dp"
-      android:paddingLeft="10dp"
-      android:paddingRight="10dp"
+      android:layout_height="50sp"
+      android:paddingLeft="10sp"
+      android:paddingRight="10sp"
       android:orientation="horizontal" 
       />
 

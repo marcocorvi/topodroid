@@ -3,7 +3,7 @@
     android:layout_width="match_parent" 
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="0dp"
+    android:padding="0sp"
     >
 
     <!-- TextView android:id="@+id/shot_data"
@@ -17,29 +17,29 @@
       android:id="@+id/layout1"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="10sp"
       android:orientation="horizontal"
       >
     <EditText android:id="@+id/shot_distance"
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="10sp"
         android:nextFocusDown="@+id/shot_bearing"
         android:singleLine="true"
         />
     <EditText android:id="@id/shot_bearing"
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="10sp"
         android:nextFocusDown="@+id/shot_clino"
         android:singleLine="true"
         />
     <EditText android:id="@id/shot_clino"
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
@@ -62,11 +62,11 @@
       android:layout_height="wrap_content"
       android:layout_below="@id/shot_extra"
       android:orientation="horizontal" 
-      android:layout_marginTop="2dp"
+      android:layout_marginTop="2sp"
       >
 
       <EditText android:id="@id/shot_from" 
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_weight="50"
         android:layout_height="wrap_content" 
         android:text=""
@@ -74,7 +74,7 @@
         android:singleLine="true"
         />
       <EditText android:id="@id/shot_to" 
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_weight="50"
         android:layout_height="wrap_content" 
         android:text=""
@@ -90,7 +90,7 @@
       android:layout_height="wrap_content"
       android:layout_below="@id/layout2"
       android:orientation="horizontal" 
-      android:layout_marginTop="2dp"
+      android:layout_marginTop="2sp"
       >
 
       <Button android:id="@+id/btn_prev"
@@ -122,7 +122,7 @@
     <EditText
         android:id="@id/shot_comment" 
         android:maxLines="1" 
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="2sp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:layout_below="@id/layout3"
@@ -136,10 +136,10 @@
     <!-- LinearLayout 
       android:id="@+id/layout4"
       android:layout_width="fill_parent" 
-      android:layout_height="50dp"
+      android:layout_height="50sp"
       android:layout_below="@id/shot_comment"
-      android:paddingLeft="10dp"
-      android:paddingRight="10dp"
+      android:paddingLeft="10sp"
+      android:paddingRight="10sp"
       android:orientation="horizontal" 
       />
       <CheckBox
@@ -220,9 +220,9 @@
       android:id="@+id/layout4"
       android:layout_below="@id/layout5"
       android:layout_width="fill_parent" 
-      android:layout_height="50dp"
-      android:paddingLeft="10dp"
-      android:paddingRight="10dp"
+      android:layout_height="50sp"
+      android:paddingLeft="10sp"
+      android:paddingRight="10sp"
       android:orientation="horizontal" 
       />
 
@@ -251,7 +251,7 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_gravity="right"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="10sp"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_ok"

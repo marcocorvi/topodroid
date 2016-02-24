@@ -20,7 +20,6 @@ import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 
-// import android.util.FloatMath;
 import java.util.ArrayList;
 // import android.util.Log;
 

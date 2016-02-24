@@ -59,11 +59,11 @@
      <item name="anomaly">Doppia battuta</item>
   </string-array>
 
-  <string-array name="pickerType">
-     <!-- TODO item name="recent">Most recent</item -->
+  <!-- TODO string-array name="pickerType">
+     <item name="recent">Most recent</item>
      <item name="list">Lista</item>
      <item name="grid">Griglia</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="deviceType">
      <item name="none">Nessuno</item>
