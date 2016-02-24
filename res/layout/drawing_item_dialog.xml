@@ -31,7 +31,7 @@
         android:singleLine="true"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:text="POINTS"
+        android:text="@string/POINT"
       />
 
       <Button android:id="@+id/button_line"
@@ -40,7 +40,7 @@
         android:singleLine="true"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:text="LINES"
+        android:text="@string/LINE"
       />
 
       <Button android:id="@+id/button_area"
@@ -49,7 +49,7 @@
         android:singleLine="true"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:text="AREAS"
+        android:text="@string/AREA"
       />
 
     </LinearLayout>

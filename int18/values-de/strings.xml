@@ -60,6 +60,7 @@
     <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
     <string name="calib_no_name">Name erforderlich</string>
 
+    <!-- TODO string name="calib_gm_policy">Policy</string -->
     <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
     <string name="calib_saved">Kalibrierung gespeichert</string>
     <string name="calib_updated">Kalibrierung aktualisiert</string>
@@ -743,10 +744,6 @@
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
-  <string name="pref_altitude_title">Höhe</string>
-  <string name="pref_altitude_summary">Wähle Höhentyp</string>
-  <string name="pref_altimetric_title">Orthometrische Höhe</string>
-  <string name="pref_altimetric_summary">Orthometrische Höhe Tabelle</string>
   <string name="pref_survey_stations_title">Strategie Vermessung</string>
   <string name="pref_survey_stations_summary">Automatische Vermessungs-Messpunkte</string>
   <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>

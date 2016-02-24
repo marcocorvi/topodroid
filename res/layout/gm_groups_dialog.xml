@@ -12,7 +12,7 @@
         android:layout_marginTop="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:text="Policy"
+        android:text="@string/calib_gm_policy"
         />
 
     <CheckBox android:id="@+id/group_reset" 

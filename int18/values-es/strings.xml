@@ -52,6 +52,7 @@
     <string name="calib_delete">Eliminar calibración </string>
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
+    <!-- TODO string name="calib_gm_policy">Policy</string -->
     <string name="calib_gm_undelete">¿Eliminar datos de calibración?</string>
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
@@ -699,10 +700,6 @@
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <string name="pref_vert_splay_summary">Límite de trazos del borde</string>
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
-  <string name="pref_altitude_title">Altimetría</string>
-  <string name="pref_altitude_summary">Seleccione el tipo de exportación</string>
-  <string name="pref_altimetric_title">Altitud ortométrica</string>
-  <string name="pref_altimetric_summary">Búsqueda altitud ortométrica</string>
   <string name="pref_survey_stations_title">Sentido de las estaciones topográficas</string>
   <string name="pref_survey_stations_summary">Estaciones topográficas automáticas</string>
   <string name="pref_accel_thr_title">Precisión Aceleración</string>

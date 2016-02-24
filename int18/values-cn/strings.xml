@@ -55,6 +55,7 @@
     <string name="calib_delete">删除校准 </string>
     <string name="calib_device_mismatch">警告: 校准设备不匹配</string>
     <string name="calib_no_name">强制命名</string>
+    <!-- TODO string name="calib_gm_policy">Policy</string -->
     <string name="calib_gm_undelete">还原校准数据?</string>
     <string name="calib_saved">校准数据已保存</string>
     <string name="calib_updated">更新校准数据</string>
@@ -786,10 +787,6 @@
   <string name="pref_vert_splay_title">侧线虚线倾斜极限</string>
   <string name="pref_vert_splay_summary">侧线虚线倾斜极限</string>
   <string name="pref_vert_splay_message">侧线虚线倾斜极限</string>
-  <string name="pref_altitude_title">海拔</string>
-  <string name="pref_altitude_summary">选择海拔类型</string>
-  <string name="pref_altimetric_title">垂直高度姿态检查</string>
-  <string name="pref_altimetric_summary">网络查找垂直高度</string>
   <string name="pref_survey_stations_title">测量点方案</string>
   <string name="pref_survey_stations_summary">测量点自动命名方案</string>
   <string name="pref_accel_thr_title">加速度容差</string>
@@ -1022,7 +1019,7 @@
   <!-- string name="units_feet">英尺</string -->
   <!-- string name="alt_wgs">ellipsoid</string -->
   <!-- string name="alt_ortho">垂直高度</string -->
-  <string name="splay_extend">估算侧线延展</string>
+  <!-- UNUSED string name="splay_extend">估算侧线延展</string -->
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">

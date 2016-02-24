@@ -52,6 +52,7 @@
     <string name="calib_delete">Eliminare calibrazione </string>
     <string name="calib_device_mismatch">ATTENZIONE. Discrepanza tra calibrazione e dispositivo</string>
     <string name="calib_no_name">Nome della calibrazione mancante</string>
+    <!-- TODO string name="calib_gm_policy">Policy</string -->
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
     <string name="calib_saved">Salvata calibrazione</string>
     <string name="calib_updated">Aggiornata calibrazione</string>
@@ -705,10 +706,6 @@
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
   <string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string>
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
-  <string name="pref_altitude_title">Altitudine</string>
-  <string name="pref_altitude_summary">Tipo di altitudine</string>
-  <string name="pref_altimetric_title">Quota ortometrica (con internet)</string>
-  <string name="pref_altimetric_summary">Ricerca internet quota ortometrica</string>
   <string name="pref_survey_stations_title">Capisaldi rilievo</string>
   <string name="pref_survey_stations_summary">Capisaldi rilievo automatici</string>
   <string name="pref_accel_thr_title">Tolleranza accelerazione</string>

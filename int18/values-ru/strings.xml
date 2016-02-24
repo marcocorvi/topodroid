@@ -57,6 +57,7 @@
     <string name="calib_delete">Удалить калибровку </string>
     <string name="calib_device_mismatch">ВНИМАНИЕ: Несоответствие калибровчных данных и прибора</string>
     <string name="calib_no_name">Необходимо задать имя</string>
+    <!-- TODO string name="calib_gm_policy">Policy</string -->
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
     <string name="calib_saved">Сохранить калибровку</string>
     <string name="calib_updated">Обновить калибровку</string>
@@ -764,10 +765,6 @@
   <string name="pref_vert_splay_title">Угловой прог для прерывистой линии луча</string>
   <string name="pref_vert_splay_summary">Угловой прог для прерывистой линии луча</string>
   <string name="pref_vert_splay_message">Угловой прог для прерывистой линии луча</string>
-  <string name="pref_altitude_title">Альтитуда</string>
-  <string name="pref_altitude_summary">Выберите тип альтитуды</string>
-  <string name="pref_altimetric_title">Вертикальная координата</string>
-  <string name="pref_altimetric_summary">Поиск вертикальной координаты в интернете</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->
   <string name="pref_survey_stations_title">Настройки нумерации пикетов</string>

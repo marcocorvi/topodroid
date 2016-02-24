@@ -56,6 +56,7 @@
     <string name="calib_delete">Supprimer cette Calibration </string>
     <string name="calib_device_mismatch">ATTENTION : Calibration et Appareil ne correspondent pas</string>
     <string name="calib_no_name">Vous devez indiquer un nom pour cette Calibration</string>
+    <!-- TODO string name="calib_gm_policy">Policy</string -->
     <string name="calib_gm_undelete">Recuperer ces données de Calibration?</string>
     <string name="calib_saved">Calibration enregistré</string>
     <string name="calib_updated">Calibration mise à jour</string>
@@ -788,10 +789,6 @@
   <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
   <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
   <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
-  <string name="pref_altitude_title">Altitude</string>
-  <string name="pref_altitude_summary">Sélectionner le type d\'altitude</string>
-  <!-- TODO string name="pref_altimetric_title">Orthometric atitude</string -->
-  <!-- TODO string name="pref_altimetric_summary">Orthometric altitude lookup</string -->
   <string name="pref_survey_stations_title">Stations du relevé</string>
   <string name="pref_survey_stations_summary">Stations automatiques</string>
   <string name="pref_accel_thr_title">Tolérance de l\'accélération</string>
@@ -1024,7 +1021,7 @@
   <!-- UNUSED string name="units_feet">feet</string -->
   <!-- UNUSED string name="alt_wgs">ellipsoide</string -->
   <!-- UNUSED string name="alt_ortho">orthometrique</string -->
-  <string name="splay_extend">estimer extension visée laterales</string>
+  <!-- UNUSED string name="splay_extend">estimer extension visée laterales</string -->
 
     <string name="welcome_title">Bienvenue dans TopoDroid %1$s</string>
 
