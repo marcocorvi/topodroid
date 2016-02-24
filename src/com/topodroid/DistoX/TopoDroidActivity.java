@@ -356,6 +356,8 @@ public class TopoDroidActivity extends Activity
         ParserTherion parser = new ParserTherion( str[0], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
         ArrayList< ParserShot > splays = parser.getSplays();
+        ArrayList< ParserTherion.Station > stations = parser.getStations();
+        ArrayList< ParserTherion.Fix > fixes = parser.getFixes();
 
         sid = mApp.setSurveyFromName( str[1], false ); // IMPORT TH no forward
         mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
@@ -364,6 +366,18 @@ public class TopoDroidActivity extends Activity
 
         long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
         mApp.mData.insertShots( sid, id, splays );
+
+        // FIXME this suppose CS long-lat, ie, e==long, n==lat
+        // WorldMagneticModel wmm = new WorldMagneticModel( mApp );
+        // for ( ParserTherion.Fix fix : fixes ) {
+        //   // double asl = fix.z;
+        //   double alt = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
+        //   mApp.mData.insertFixed( sid, -1L, fix.name, fix.e, fix.n, alt, fix.z, "", 0 );
+        // }
+
+        for ( ParserTherion.Station st : stations ) {
+          mApp.mData.insertStation( sid, st.name, st.comment, st.flag );
+        }
       } catch ( ParserException e ) {
         // Toast.makeText(this, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
       }

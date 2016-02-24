@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-// import android.util.Log;
+import android.util.Log;
 
 // TODO this class can be made extend ImportParser
 
@@ -65,15 +65,32 @@ public class ParserTherion
     }
   }
 
+  class Station
+  {
+    String name;
+    String comment;
+    long flag;
+ 
+    public Station( String n, String c, long f )
+    {
+      name = n;
+      comment = c;
+      flag = f;
+    }
+  }
+
   private ArrayList< Fix > fixes;
+  private ArrayList< Station > stations;
   private ArrayList< ParserShot > shots;   // centerline shots
   private ArrayList< ParserShot > splays;  // splay shots
 
   public int getShotNumber()    { return shots.size(); }
   public int getSplayNumber()   { return splays.size(); }
 
-  public ArrayList< ParserShot > getShots() { return shots; }
-  public ArrayList< ParserShot > getSplays() { return splays; }
+  public ArrayList< ParserShot > getShots()    { return shots; }
+  public ArrayList< ParserShot > getSplays()   { return splays; }
+  public ArrayList< Station >    getStations() { return stations; }
+  public ArrayList< Fix >        getFixes()    { return fixes; }
 
   // same as in ImportParser.java
   public String initStation()
@@ -86,10 +103,11 @@ public class ParserTherion
 
   public ParserTherion( String filename, boolean apply_declination ) throws ParserException
   {
-    fixes  = new ArrayList< Fix >();
-    shots  = new ArrayList< ParserShot >();
-    splays = new ArrayList< ParserShot >();
-    mStates = new Stack< ParserTherionState >();
+    fixes    = new ArrayList< Fix >();
+    stations = new ArrayList< Station >();
+    shots    = new ArrayList< ParserShot >();
+    splays   = new ArrayList< ParserShot >();
+    mStates  = new Stack< ParserTherionState >();
     mApplyDeclination = apply_declination;
     ParserTherionState state = new ParserTherionState();
     readFile( filename, "", state );
@@ -108,6 +126,15 @@ public class ParserTherion
       if ( line != null ) ret.append( line );
     }
     return ret.toString();
+  }
+
+  private String extractStationName( String fullname )
+  {
+    int idx = fullname.indexOf('@');
+    if ( idx > 0 ) {
+       return fullname.substring(0,idx); // + "@" + path + "." + vals[1].substring(idx+1);
+    }
+    return fullname;
   }
 
   /** read input file
@@ -328,7 +355,7 @@ public class ParserTherion
                 try {
                   factor = Float.parseFloat( vals[vals_len-2] );
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error( "therion parser error: units " + line );
+                  TDLog.Debug( "therion parser: units without factor " + line ); // this is OK
                 }
                 if ( ulen ) {
                   state.mUnitLen = factor * parseLengthUnit( vals[vals_len-1] );
@@ -356,11 +383,7 @@ public class ParserTherion
                     TDLog.Error( "therion parser error: declination " + line );
                   }
                 }      
-              } else if ( cmd.equals("infer") ) {
-                // ignore
               } else if ( cmd.equals("instrument") ) {
-                // ignore
-              } else if ( cmd.equals("mark") ) {
                 // ignore
               } else if ( cmd.equals("flags") ) {
                 if ( vals_len >= 2 ) {
@@ -376,19 +399,63 @@ public class ParserTherion
                     }
                   }
                 }
-              } else if ( cmd.equals("station") ) {
-                // ignore: station <station> <comment>
               } else if ( cmd.equals("cs") ) { 
                 // TODO cs
+              } else if ( cmd.equals("mark") ) { // ***** fix station east north Z (ignored std-dev's)
+                String flag_str = vals[ vals_len - 1 ];
+                int flag = 0;
+                if ( "painted".equals( vals[ vals_len-1 ] ) ) {
+                  flag = CurrentStation.STATION_PAINTED;
+                } else if ( "fixed".equals( vals[ vals_len-1 ] ) ) {
+                  flag = CurrentStation.STATION_FIXED;
+                }
+                // Log.v("DistoX", "Therion parser: mark flag " + flag + " " + flag_str );
+                if ( flag != 0 ) {
+                  for ( int k=1; k<vals_len-1; ++k ) {
+                    String name = extractStationName( vals[k] );
+                    // Log.v("DistoX", "mark station " + name );
+                    boolean must_add = true;
+                    for ( Station st : stations ) if ( st.name.equals( name ) ) {
+                      must_add = false;
+                      st.flag = flag;
+                      break;
+                    }
+                    if ( must_add ) stations.add( new Station( name, "", flag ) );
+                  }
+                }   
+                
+              } else if ( cmd.equals("station") ) { // ***** station name "comment"
+                if ( vals_len > 2 ) {
+                  String name = extractStationName( vals[1] );
+                  String comment = vals[2];
+                  if ( comment.startsWith( "\"" ) ) {
+                    int len = comment.length();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append( comment.substring( 1 ) );
+                    for ( int kk=3; kk<vals_len; ++kk ) {
+                      if ( vals[kk].endsWith("\"") ) {
+                        sb.append( " " + vals[kk].substring(0, vals[kk].length()-1) );
+                        break;
+                      } else {
+                        sb.append( " " + vals[kk] );
+                      }
+                    }
+                    comment = sb.toString();
+                  }
+                  // Log.v("DistoX", "Therion parser station " + name + " comment <" + comment + ">" );
+                  if ( comment.length() > 0 ) {
+                    boolean must_add = true;
+                    for ( Station st : stations ) if ( st.name.equals( name ) ) { 
+                      must_add = false;
+                      st.comment = comment;
+                      break;
+                    }
+                    if ( must_add ) stations.add( new Station( name, comment, 0 ) );
+                  }
+                }
               } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's)
                 if ( vals_len > 4 ) {
-                  String name;
-                  int idx = vals[1].indexOf('@');
-                  if ( idx > 0 ) {
-                    name = vals[1].substring(0,idx); // + "@" + path + "." + vals[1].substring(idx+1);
-                  } else {
-                    name = vals[1]; // + "@" + path;
-                  }
+                  String name = extractStationName( vals[1] );
                   try {
 	            fixes.add( new Fix( name,
                                         Float.parseFloat( vals[2] ),

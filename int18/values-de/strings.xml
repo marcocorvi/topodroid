@@ -447,10 +447,10 @@
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
     <string name="button_convert"   >Konvertieren </string>
+    <!-- TODO string name="button_current"   >Current   </string -->
     <string name="button_delete"    >Löschen    </string>
     <string name="button_eval"      >Auswerten </string>
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
-    <!-- UNUSED string name="button_geomag"    >Declination</string -->
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- OK string name="button_gps_stop"  >Anhalten      </string -->
     <!-- UNUSED string name="button_manual"    >Handbuch</string -->

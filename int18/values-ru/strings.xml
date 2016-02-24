@@ -426,10 +426,10 @@
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
     <string name="button_convert"   >Конвертир.</string>
+    <!-- TODO string name="button_current"   >Current   </string -->
     <string name="button_delete"    >Удалить   </string>
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
-    <!-- UNUSED string name="button_geomag"    >Магнитное склонение</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- OK string name="button_gps_stop"  >Стоп      </string -->
     <!-- OK string name="button_manual"    >Вручную    </string -->

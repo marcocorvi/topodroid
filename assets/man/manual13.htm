@@ -8,18 +8,26 @@ After you have downloaded the zip to your PC and unzipped it, you can complete t
 <h4>SURVEY DATA EXPORT</h4>
 
 <b>Therion</b><br>
-Survey data are exported in <i>Therion</i> format, using the data "normal" form. The team names are listed but the command is commented. Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br>
+Survey data are exported in <i>Therion</i> format, using the data "normal" form.<br>
+Data units are according to the user options.<br>
+The team names are listed but the command is commented.<br>
+Station comments and marks (fixed, painted) preceed the centerline data.<br>
+Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br><p>
 
-TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion commands "units", "flag", and "extend" are supported.<br><p>
+TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion data commands "units", "flag", "extend", "mark" and "station" are supported.<br>
+Fixed points ("fix") are parsed but not taken into account as "cs" is not supported.<br><p>
 
 <b>Compass</b><br>
-<i>Compass</i> data file are supported both in input and in export.<br><p>
+<i>Compass</i> data file are supported both in input and in export.<br>
+Data units are 'feet' and 'degrees'.<br><p>
 
 <b>Walls</b><br>
-Survey data can be exported as <i>Walls</i> files.<br><p>
+Survey data can be exported as <i>Walls</i> files.<br>
+Data units are according to the user options.<br><p>
 
 <b>Survex</b><br>
 Survey data can be exported as <i>Survex</i> files.<br>
+Data units are according to the user options.<br>
 Settings:
 <ul>
 <li>line termination can be either Unix or Windows</li>
@@ -27,7 +35,8 @@ Settings:
 </ul><br><p>
 
 <b>VisualTopo</b><br>
-<i>VisualTopo</i> data file are supported both in input and in export.<br><p>
+<i>VisualTopo</i> data file are supported both in input and in export.<br>
+Data units are 'meters' and 'degrees'.<br><p>
 
 <b>PocketTopo</b><br>
 TopoDroid supports <i>PocketTopo</i> both in import and in export.<br><p>

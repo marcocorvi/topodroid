@@ -78,7 +78,7 @@
         android:layout_weight="25"
         android:background="@drawable/button"
         style="@style/button_default"
-        android:text="@string/button_ok"
+        android:text="@string/button_current"
         android:layout_gravity="right"
         android:singleLine="true"
       />

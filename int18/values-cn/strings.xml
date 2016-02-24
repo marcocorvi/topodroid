@@ -425,10 +425,10 @@
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >退出    </string>
     <string name="button_convert"   >转换   </string>
+    <!-- TODO string name="button_current"   >Current   </string -->
     <string name="button_delete"    >删除    </string>
     <string name="button_eval"      >复运算      </string>
     <string name="button_eval_cal"  >校准复运算</string>
-    <!-- UNUSED string name="button_geomag"    >赤纬</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >停止      </string -->
     <!-- string name="button_manual"    >手册    </string -->

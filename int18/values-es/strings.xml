@@ -413,11 +413,11 @@
     <string name="button_back"      >Atras     </string>
     <string name="button_cancel"    >Cancelar  </string>
     <string name="button_convert"   >Convertir </string>
+    <!-- TODO string name="button_current"   >Current   </string -->
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
     <string name="button_gps_start" >GPS       </string>
-    <!-- UNUSED string name="button_geomag"    >Declinación</string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
