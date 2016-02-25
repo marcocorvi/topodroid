@@ -32,6 +32,16 @@ public class MyButton extends Button
   int mSize;
   float mX, mY;
 
+  public MyButton( Context context )
+  {
+    super( context );
+    mContext = context;
+    setPadding(0,0,0,0);
+    mSize = 0;
+    mListener = null;
+    mBitmap   = null;
+  }
+
   public MyButton( Context context, OnClickListener click_listener, int size, int res_id, int res_id2 )
   {
     super( context );

@@ -28,6 +28,7 @@
         android:layout_marginRight="10sp"
         android:nextFocusDown="@+id/shot_bearing"
         android:singleLine="true"
+        android:inputType="numberDecimal"
         />
     <EditText android:id="@id/shot_bearing"
         android:layout_width="0sp"
@@ -37,6 +38,7 @@
         android:layout_marginRight="10sp"
         android:nextFocusDown="@+id/shot_clino"
         android:singleLine="true"
+        android:inputType="numberDecimal"
         />
     <EditText android:id="@id/shot_clino"
         android:layout_width="0sp"
@@ -45,6 +47,7 @@
         android:textSize="18sp"
         android:nextFocusDown="@+id/shot_from"
         android:singleLine="true"
+        android:inputType="numberDecimal|numberSigned"
         />
   </LinearLayout>
 
@@ -72,6 +75,7 @@
         android:text=""
         android:nextFocusDown="@+id/shot_to"
         android:singleLine="true"
+        android:inputType="text"
         />
       <EditText android:id="@id/shot_to" 
         android:layout_width="0sp"
@@ -80,6 +84,7 @@
         android:text=""
         android:nextFocusDown="@+id/shot_comment"
         android:singleLine="true"
+        android:inputType="text"
         />
 
   </LinearLayout>

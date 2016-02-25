@@ -19,6 +19,7 @@
         android:layout_height="wrap_content" 
         android:textSize="18sp"
         android:layout_marginRight="10dp"
+        android:inputType="numberDecimal"
         android:singleLine="true"
         />
     <EditText android:id="@+id/gm_clino"
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content" 
         android:textSize="18sp"
         android:layout_marginRight="10dp"
+        android:inputType="numberDecimal|numberSigned"
         android:singleLine="true"
         />
     <EditText android:id="@+id/gm_roll"
@@ -34,6 +36,7 @@
         android:layout_weight="30"
         android:layout_height="wrap_content" 
         android:textSize="18sp"
+        android:inputType="numberDecimal"
         android:singleLine="true"
         />
   </LinearLayout>

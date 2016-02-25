@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="30"
         android:singleLine="true"
+        android:inputType="text"
      />
      <CheckBox android:id="@+id/button_fixed"
         android:layout_width="0dp"

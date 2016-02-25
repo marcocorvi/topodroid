@@ -64,7 +64,7 @@
     <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
     <string name="calib_validation">Проверка на %1$s срещу %2$s</string>
-    <string name="connect_failed">Невъзможна връзка</string>
+    <!-- UNUSED string name="connect_failed">Невъзможна връзка</string -->
     <!-- UNUSED string name="data"> измервания</string -->
     <string name="using">Използва се %1$s %2$s</string>
     <string name="calib_error">Грешка: %1$.4f градуси</string>
@@ -130,7 +130,7 @@
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
 
-    <string name="head_tail">Памет: </string>
+    <!-- UNUSED string name="head_tail">Памет: </string -->
     <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
     <string name="head_tail_store_failed">Неуспешен запис на индекс от DistoX паметта</string>
     <!-- UNUSED string name="pairing_failed">Неуспешно сдвояване</string -->
@@ -149,6 +149,8 @@
     <string name="longitude_hint">Дълж. гг:мм:сс.ссс</string>
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
     <string name="loop_none">няма полигон loop</string>
+    <!-- TODO string name="long_lat">Long-Lat</string -->
+
     <!-- string name="line_delete">Изтриване на линия</string -->
     <string name="flip_shots">Обръщане на отсечките</string>
 
@@ -180,7 +182,7 @@
     <string name="group_policy_distance">Вид групиране: групиране по ъглово разстояние</string>
     <string name="group_reset">Изчистване на групите</string>
 
-    <string name="scale">мащаб</string>
+    <!-- UNUSED string name="scale">мащаб</string -->
     <!-- UNUSED string name="reversed">обръщане</string -->
     <string name="options">опции</string>
     <string name="outline">контур</string>
@@ -275,7 +277,7 @@
     <string name="not_enabled">Bluetooth не е разрешен</string>
     <!-- UNUSED string name="not_implemented">Тази функционалност не достъпна все още</string -->
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
-    <string name="photo">снимка</string>
+    <!-- UNUSED string name="photo">снимка</string -->
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
     <!-- UNUSED string name="photo_name">репер/име</string -->
     <!-- UNUSED string name="photo_photo">снимка</string -->
@@ -284,7 +286,7 @@
     <!-- UNUSED string name="photo_sensor_prompt">Изберете снимка или сензор</string -->
     <!-- UNUSED string name="photo_shot">Добавяне на измерване</string -->
     <!-- UNUSED string name="photo_survey">Разделяне на картировка</string -->
-    <string name="picture_no_station">Необходимо е име на репер</string>
+    <!-- UNUSED string name="picture_no_station">Необходимо е име на репер</string -->
     <string name="plot_delete">Изтриване на скица?</string>
     <string name="item_delete">Изтриване на елемент %1$s ?</string>
     <string name="plot_duplicate_name">Дублирано име на скица</string>
@@ -293,13 +295,13 @@
     <string name="plot_not_found">Скицата не е намерена</string>
     <!-- string name="plot_null_name">Missing sketch name</string -->
     <!-- string name="plot_null_start">Missing base station</string -->
-    <string name="plot_recover">Възстановяване на скицата от резервното копие?</string>
+    <!-- UNUSED string name="plot_recover">Възстановяване на скицата от резервното копие?</string -->
     <string name="plot_start">Начален репер</string>
     <!-- string name="plot_view">Viewed station</string -->
     <!-- UNUSED string name="read_">Прочетени </string -->
     <string name="read_data">Прочетени %1$d измервания</string>
     <string name="read_calib_data">Прочетени %1$d измервания (%2$d пакети)</string>
-    <string name="read_fail_with_code">Грешка при четене: код </string>
+    <!-- UNUSED string name="read_fail_with_code">Грешка при четене: код </string -->
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
     <string name="saved_file_">Файлът е записан\ </string>
@@ -313,7 +315,7 @@
     <string name="convert_tdr2th2">Презаписване на съшествуващи th2 файлове?</string>
     <string name="section_area">Площ на сечение: %1$.1f</string>
 
-    <string name="sensor">сензор</string>
+    <!-- UNUSED string name="sensor">сензор</string -->
     <!-- string name="sensor_accelerometer">accelerometer</string -->
     <string name="sensor_gravity">гравитация</string>
     <!-- string name="sensor_humidity">humidity</string -->
@@ -321,7 +323,7 @@
     <string name="sensor_magnetic_field">магнитно поле</string>
     <!-- string name="sensor_orientation">orientation</string -->
     <string name="sensor_pressure">налягане</string>
-    <string name="sensor_proximity">близост</string>
+    <!-- UNUSED string name="sensor_proximity">близост</string -->
     <string name="sensor_temperature">температура</string>
     <string name="sensor_extern">външен</string>
     <string name="sensor_type">тип</string>
@@ -349,7 +351,7 @@
     <!-- UNUSED string name="sketch3d_null_name">Липсва име на 3D модела</string -->
     <!-- UNUSED string name="sketch3d_null_next">Липсва следващ репер на 3D модела</string -->
     <!-- UNUSED string name="sketch3d_null_start">Липсва начален репер на 3D модела</string -->
-    <string name="sketch3d_start">Начален репер</string>
+    <!-- UNUSED string name="sketch3d_start">Начален репер</string -->
 
     <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата?</string>
@@ -357,7 +359,7 @@
 
     <!-- string name="station_base">reference station</string -->
     <!-- string name="station_next">next station</string -->
-    <string name="station_viewed">избран репер</string>
+    <!-- UNUSED string name="station_viewed">избран репер</string -->
     <string name="survey_exists">Картировката вече съществува</string>
     <!-- UNUSED string name="survey_date">гггг.мм.дд</string -->
 
@@ -407,7 +409,7 @@
 
     <string name="plan">План</string>
     <string name="extended">Разрез</string>
-    <string name="v_section">Верт. сечение</string>
+    <!-- UNUSED string name="v_section">Верт. сечение</string -->
     <string name="h_section">Хор. сечение</string>
 
     <string name="distox_err_ok">OK</string>
@@ -434,7 +436,7 @@
     <!-- string name="button_manual"    >Manual    </string -->
     <!-- string name="button_measure"   >Measure   </string -->
     <string name="button_photo"   >Снимка</string>
-    <string name="button_sensor"  >Сензори</string>
+    <!-- UNUSED string name="button_sensor"  >Сензори</string -->
     <!-- UNUSED string name="button_direction">Азимут/Наклон</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Скица</string>
@@ -458,13 +460,13 @@
     <!-- UNUSED string name="button_sharp"     >Изостряне</string -->
     <!-- UNUSED string name="button_rock"      >Редуц. точки</string -->
     <!-- UNUSED string name="button_close"     >Close</string -->
-<!--
-    <string name="button_erase"     >Erase     </string>
-    <string name="button_next"      >Next      </string>
-    <string name="button_prev"      >Previous  </string>
-    <string name="button_split"     >Split     </string>
-    <string name="button_toggle"    >Toggle CAL mode  </string>
--->
+
+    <!-- UNUSED string name="button_erase"     >Erase     </string -->
+    <!-- UNUSED string name="button_next"      >Next      </string -->
+    <!-- UNUSED string name="button_prev"      >Previous  </string -->
+    <!-- UNUSED string name="button_split"     >Split     </string -->
+    <!-- UNUSED string name="button_toggle"    >Toggle CAL mode  </string -->
+
     <string name="button_write"     >Качване</string>
     <string name="button_xsection"  >Сечение</string>
 
@@ -479,7 +481,7 @@
     <string name="remote_off">Изкл. лазер</string>
     <!-- UNUSED string name="remote_measure">Измерване</string -->
     <string name="remote_reset">Рестарт. Bluetooth</string>
-    <string name="download">Сваляне</string>
+    <!-- UNUSED string name="download">Сваляне</string -->
 
     <string name="popup_do_splay">Странично измерване</string>
     <string name="popup_do_leg">Отсечка</string>
@@ -523,10 +525,10 @@
     <!-- UNUSED string name="btn_join">Свързване</string -->
 
     <!-- UNUSED string name="button_redraw">Прерисуване</string -->
-    <string name="button_erase">Изтриване</string>
+    <!-- UNUSED string name="button_erase">Изтриване</string -->
     <!-- UNUSED string name="btn_surface">Повърхност</string -->
 
-    <string name="station_next">Следваща</string>
+    <!-- UNUSED string name="station_next">Следваща</string -->
     <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
     <string name="few_line_points">Линията има твърде малко точки</string>
     <string name="line_delete">Изтр. на линия</string>
@@ -878,9 +880,9 @@
   <string name="pref_fixed_thickness_title">Широчина на линия от антената</string>
   <string name="pref_fixed_thickness_summary">Широчина на линия от антената</string>
   <string name="pref_fixed_thickness_message">Широчина на линия от антената</string>
-  <string name="pref_device_title">Устройство</string>
-  <string name="pref_device_summary">Адрес на DistoX</string>
-  <string name="pref_device_message">Адрес на DistoX</string>
+  <!-- UNUSED string name="pref_device_title">Устройство</string -->
+  <!-- UNUSED string name="pref_device_summary">Адрес на DistoX</string -->
+  <!-- UNUSED string name="pref_device_message">Адрес на DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>

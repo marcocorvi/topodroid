@@ -21,6 +21,7 @@
       <EditText android:id="@+id/et_length"
          android:layout_width="200dp"
          android:layout_height="wrap_content" 
+         android:inputType="numberDecimal|numberSigned"
       />
     </LinearLayout>
 
@@ -37,6 +38,7 @@
       <EditText android:id="@+id/et_azimuth"
          android:layout_width="200dp"
          android:layout_height="wrap_content" 
+         android:inputType="numberDecimal|numberSigned"
       />
     </LinearLayout>
 
@@ -53,6 +55,7 @@
       <EditText android:id="@+id/et_clino"
          android:layout_width="200dp"
          android:layout_height="wrap_content" 
+         android:inputType="numberDecimal|numberSigned"
       />
     </LinearLayout>
 

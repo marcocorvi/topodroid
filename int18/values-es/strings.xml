@@ -61,7 +61,7 @@
     <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración ...</string -->
     <string name="calib_write_coeffs">Escribir coeficientes de calibración ...</string>
     <string name="calib_validation">Validación de %1$s vs %2$s</string>
-    <string name="connect_failed">Fallo de conexión</string>
+    <!-- UNUSED string name="connect_failed">Fallo de conexión</string -->
     <!-- UNUSED string name="data"> Datos</string -->
     <string name="using">Utilizar %1$s %2$s</string>
     <string name="calib_error">Error: %1$.4f grados</string>
@@ -126,7 +126,7 @@
     <!-- UNUSED string name="sketch_saving">Exportando dibujo ... espere ...</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
 
-    <string name="head_tail">Memoria: </string>
+    <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
     <string name="head_tail_store_failed">Error al almacenar en la memoria DistoX</string>
     <!-- UNUSED string name="pairing_failed">Falló en el emparejamiento</string -->
@@ -145,6 +145,8 @@
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Error en cierre de bucle</string>
     <string name="loop_none">No hay Bucle</string>
+    <!-- TODO string name="long_lat">Long-Lat</string -->
+
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
 
@@ -176,7 +178,7 @@
     <string name="group_policy_distance">Política: Grupo según la distancia angular</string>
     <string name="group_reset">Resetear grupos</string>
 
-    <string name="scale">Escala</string>
+    <!-- UNUSED string name="scale">Escala</string -->
     <!-- UNUSED string name="reversed">Inverso</string -->
     <string name="options">Nota</string>
     <string name="outline">Contorno</string>
@@ -269,7 +271,7 @@
     <string name="not_enabled">BT No habilitado</string>
     <!-- UNUSED string name="not_implemented">No implantado</string -->
     <string name="null_bitmap">Mapa bits nulo</string>
-    <string name="photo">Foto</string>
+    <!-- UNUSED string name="photo">Foto</string -->
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
     <!-- UNUSED string name="photo_name">Estación/nombre</string -->
     <!-- UNUSED string name="photo_photo">Toma con foto</string -->
@@ -278,7 +280,7 @@
     <!-- UNUSED string name="photo_sensor_prompt">Seleccione fotografía o sensor</string -->
     <!-- UNUSED string name="photo_shot">Añadir toma</string -->
     <!-- UNUSED string name="photo_survey">Dividir topografía</string -->
-    <string name="picture_no_station">Necesitas una estación / nombre para la foto</string>
+    <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
     <string name="plot_delete">¿Eliminar dibujo?</string>
     <string name="item_delete">Eliminar elemento %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de dibujo duplicado</string>
@@ -287,13 +289,13 @@
     <string name="plot_not_found">No hay dibujo</string>
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
     <!-- UNUSED string name="plot_null_start">Falta base estación</string -->
-    <string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string>
+    <!-- UNUSED string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string -->
     <string name="plot_start">Base estación</string>
     <!-- UNUSED string name="plot_view">Vista Estación</string -->
     <!-- UNUSED string name="read_">Leer </string -->
     <string name="read_data">Leer %1$d datos</string>
     <string name="read_calib_data">Leer %1$d datos (%2$d packets)</string>
-    <string name="read_fail_with_code">Fallo de lectura: código de error </string>
+    <!-- UNUSED string name="read_fail_with_code">Fallo de lectura: código de error </string -->
     <string name="read_failed">Error al leer DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
     <string name="saved_file_">Guardar archivo\ </string>
@@ -307,7 +309,7 @@
     <string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string>
     <string name="section_area">Sección de área: %1$.1f</string>
 
-    <string name="sensor">Sensor</string>
+    <!-- UNUSED string name="sensor">Sensor</string -->
     <!-- UNUSED string name="sensor_accelerometer">Acelerómetro</string -->
     <string name="sensor_gravity">Gravedad</string>
     <!-- UNUSED string name="sensor_humidity">Humedad</string -->
@@ -315,7 +317,7 @@
     <string name="sensor_magnetic_field">Campo magnético</string>
     <!-- UNUSED string name="sensor_orientation">Orientación</string -->
     <string name="sensor_pressure">Presión</string>
-    <string name="sensor_proximity">Proximidad</string>
+    <!-- UNUSED string name="sensor_proximity">Proximidad</string -->
     <string name="sensor_temperature">Temperatura</string>
     <string name="sensor_extern">Externo</string>
     <string name="sensor_type">Tipo</string>
@@ -349,8 +351,8 @@
     <string name="station_ask">¿Insertar estación?</string>
     <string name="station_set">¿Quiere continuar la topo desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
-    <string name="station_next">Siguiente estación</string>
-    <string name="station_viewed">Vista de estación</string>
+    <!-- UNUSED string name="station_next">Siguiente estación</string -->
+    <!-- UNUSED string name="station_viewed">Vista de estación</string -->
     <string name="survey_exists">Conflicto Nombre Topografía</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">¿Eliminar Topografía?</string>
@@ -397,7 +399,7 @@
 
     <string name="plan">Planta</string>
     <string name="extended">Desarrollado</string>
-    <string name="v_section">V-sección</string>
+    <!-- UNUSED string name="v_section">V-sección</string -->
     <string name="h_section">H-sección</string>
 
     <string name="distox_err_ok">OK</string>
@@ -423,7 +425,7 @@
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
     <string name="button_photo"   >Fotos</string>
-    <string name="button_sensor"  >Sensores</string>
+    <!-- UNUSED string name="button_sensor"  >Sensores</string -->
     <!-- UNUSED string name="button_direction">Rumbo/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
@@ -446,13 +448,13 @@
     <!-- UNUSED string name="button_sharp"     >agudo</string -->
     <!-- UNUSED string name="button_rock"      >Roca</string -->
     <!-- UNUSED string name="button_close"     >Cerrar</string -->
-<!--
-    <string name="button_erase"     >Borrar    </string>
-    <string name="button_next"      >Siguiente </string>
-    <string name="button_prev"      >Anterior  </string>
-    <string name="button_split"     >División </string>
-    <string name="button_toggle"    >Cambiar Modo CAL </string>
--->
+
+    <!-- UNUSED string name="button_erase"     >Borrar    </string -->
+    <!-- UNUSED string name="button_next"      >Siguiente </string -->
+    <!-- UNUSED string name="button_prev"      >Anterior  </string -->
+    <!-- UNUSED string name="button_split"     >División </string -->
+    <!-- UNUSED string name="button_toggle"    >Cambiar Modo CAL </string -->
+
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >X-Sección</string>
 
@@ -467,7 +469,7 @@
     <string name="remote_off">Láser OFF</string>
     <!-- UNUSED string name="remote_measure">Medida</string -->
     <string name="remote_reset">Resetear BT</string>
-    <string name="download">Descarga</string>
+    <!-- UNUSED string name="download">Descarga</string -->
 
     <string name="popup_do_splay">Tomas laterales</string>
     <string name="popup_do_leg">Tomas principales</string>
@@ -812,7 +814,7 @@
   <string name="pref_fixed_thickness_message">Grosor de la línea topografía</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
   <!-- UNUSED string name="pref_device_summary">Nombre dirección DistoX</string -->
-  <string name="pref_device_message">Nombre dirección DistoX</string>
+  <!-- UNUSED string name="pref_device_message">Nombre dirección DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Comprobación de la poligonal principal</string>

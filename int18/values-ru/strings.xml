@@ -66,7 +66,7 @@
     <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки ...</string -->
     <string name="calib_write_coeffs">Запись коэфицентов калибровки ...</string>
     <string name="calib_validation">Проверить %1$s относительно %2$s</string>
-    <string name="connect_failed">Ошибка соединения</string>
+    <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
     <string name="using">Использую %1$s %2$s</string>
     <string name="calib_error">Ошибка: %1$.4f градусов</string>
@@ -132,7 +132,7 @@
     <string name="MT_points_none">Нет точки MobileTopographer</string>
  
 
-    <string name="head_tail">Память: </string>
+    <!-- UNUSED string name="head_tail">Память: </string -->
     <string name="head_tail_failed">Ошибка чтения индекса памяти DistoX</string>
     <string name="head_tail_store_failed">Не удалось сохранить индекс памяти DistoX</string>
     <!-- UNUSED string name="pairing_failed">Не удалось соединить устройства</string -->
@@ -150,6 +150,8 @@
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ошибки закрытия петли</string>
     <string name="loop_none">нет петли</string>
+    <!-- TODO string name="long_lat">Long-Lat</string -->
+
     <!-- OK string name="line_delete">Удалить линию</string -->
     <string name="flip_shots">Развернуть пикеты</string>
 
@@ -181,7 +183,7 @@
     <string name="group_policy_distance">Правило: группировать по угловому расстоянию</string>
     <string name="group_reset">Сбросить группы</string>
 
-    <string name="scale">масштаб</string>
+    <!-- UNUSED string name="scale">масштаб</string -->
     <!-- UNUSED string name="reversed">обратный</string -->
     <string name="options">опции</string>
     <string name="outline">контур</string>
@@ -275,7 +277,7 @@
     <string name="not_enabled">Блютуф выключен</string>
     <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
-    <string name="photo">фото</string>
+    <!-- UNUSED string name="photo">фото</string -->
     <string name="photo_comment_prompt">Введите комментарий к фото</string>
     <!-- UNUSED string name="photo_name">Пикет/имя</string -->
     <!-- UNUSED string name="photo_photo">фото</string -->
@@ -284,7 +286,7 @@
     <!-- UNUSED string name="photo_sensor_prompt">Выберите фото либо датчик</string -->
     <!-- UNUSED string name="photo_shot">добавить пикет</string -->
     <!-- UNUSED string name="photo_survey">разорвать съёмку</string -->
-    <string name="picture_no_station">Требуется номер пикета</string>
+    <!-- UNUSED string name="picture_no_station">Требуется номер пикета</string -->
     <string name="plot_delete">Удалить абрис ?</string>
     <string name="item_delete">Удалить пункт %1$s ?</string>
     <string name="plot_duplicate_name">Дублировать название абриса</string>
@@ -293,13 +295,13 @@
     <string name="plot_not_found">Абрис не обнаружен</string>
     <!-- OK string name="plot_null_name">Отсутствует имя абриса</string -->
     <!-- OK string name="plot_null_start">Отсутствует базовый пикет</string -->
-    <string name="plot_recover">Перезагрузить абрис из бекапа?</string>
+    <!-- UNUSED string name="plot_recover">Перезагрузить абрис из бекапа?</string -->
     <string name="plot_start">Начальный пикет</string>
     <!-- OK string name="plot_view">Просмотренный пикет</string -->
     <!-- UNUSED string name="read_">Считать </string -->
     <string name="read_data">Считать %1$d данных</string>
     <string name="read_calib_data">Считанно %1$d данных (%2$d пакетов)</string>
-    <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
+    <!-- UNUSED string name="read_fail_with_code">Ошибка чтения: код ошибки </string -->
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
     <string name="saved_file_">Сохраненный файл\ </string>
@@ -313,7 +315,7 @@
     <string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string>
     <string name="section_area">Площадь сечения: %1$.1f</string>
 
-    <string name="sensor">датчик</string>
+    <!-- UNUSED string name="sensor">датчик</string -->
     <!-- OK string name="sensor_accelerometer">акселерометр</string -->
     <string name="sensor_gravity">ускорение</string>
     <!-- OK string name="sensor_humidity">влажность</string -->
@@ -321,7 +323,7 @@
     <string name="sensor_magnetic_field">магнитное поле</string>
     <!-- OK string name="sensor_orientation">ориентация</string -->
     <string name="sensor_pressure">атм. давление</string>
-    <string name="sensor_proximity">сближение</string>
+    <!-- UNUSED string name="sensor_proximity">сближение</string -->
     <string name="sensor_temperature">температура</string>
     <string name="sensor_extern">внешний</string>
     <string name="sensor_type">тип</string>
@@ -349,14 +351,14 @@
     <!-- UNUSED string name="sketch3d_null_name">Отсутствует название 3D абриса</string -->
     <!-- UNUSED string name="sketch3d_null_next">Отсутствует следующий пикет 3D абриса</string -->
     <!-- UNUSED string name="sketch3d_null_start">Отсутствует начальный пикет 3D абриса</string -->
-    <string name="sketch3d_start">начальный пикет</string>
+    <!-- UNUSED string name="sketch3d_start">начальный пикет</string -->
 
     <string name="station">пикет</string>
     <string name="station_ask">Добавить пикет в абрис?</string>
     <string name="station_set">Продолжить съёмку отсюда?</string>
     <!-- OK string name="station_base">пикет привязки</string -->
     <!-- OK string name="station_next">следующий пикет</string -->
-    <string name="station_viewed">просмотренные пикеты</string>
+    <!-- UNUSED string name="station_viewed">просмотренные пикеты</string -->
     <string name="survey_exists">Съёмка уже существует</string>
     <!-- UNUSED string name="survey_date">ггг.мм.дд</string -->
     <string name="survey_delete">Удалить съёмку?</string>
@@ -404,7 +406,7 @@
 
     <string name="plan">ПЛАН</string>
     <string name="extended">РАЗРЕЗ-Р</string>
-    <string name="v_section">Верт-СЕЧЕНИЕ</string>
+    <!-- UNUSED string name="v_section">Верт-СЕЧЕНИЕ</string -->
     <string name="h_section">Гор-СЕЧЕНИЕ</string>
 
     <string name="distox_err_ok">OK</string>
@@ -431,7 +433,7 @@
     <!-- OK string name="button_manual"    >Вручную    </string -->
     <!-- OK string name="button_measure"   >Изменить   </string -->
     <string name="button_photo"   >Фото</string>
-    <string name="button_sensor"  >Датчики</string>
+    <!-- UNUSED string name="button_sensor"  >Датчики</string -->
     <!-- UNUESD string name="button_direction">Азимут/угол</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_ok"        >OK        </string>
@@ -452,13 +454,13 @@
     <!-- UNUSED string name="button_sharp"     >Острый</string -->
     <!-- UNUSED string name="button_rock"      >Камень</string -->
     <!-- UNUSED string name="button_close"     >Закрыть</string -->
-<!-- OK
-    <string name="button_erase"     >Стереть   </string>
-    <string name="button_next"      >Следующий </string>
-    <string name="button_prev"      >Предыдущий</string>
-    <string name="button_split"     >Разделить </string>
-    <string name="button_toggle"    >Режим КАЛИБ  </string>
--->
+
+    <!-- UNUSED string name="button_erase"     >Стереть   </string -->
+    <!-- UNUSED string name="button_next"      >Следующий </string -->
+    <!-- UNUSED string name="button_prev"      >Предыдущий</string -->
+    <!-- UNUSED string name="button_split"     >Разделить </string -->
+    <!-- UNUSED string name="button_toggle"    >Режим КАЛИБ  </string -->
+
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
 
@@ -473,7 +475,7 @@
     <string name="remote_off">Лазер ВЫКЛ</string>
     <!-- UNUSED string name="remote_measure">Замер</string -->
     <string name="remote_reset">Сброс БT</string>
-    <string name="download">Скачать</string>
+    <!-- UNUSED string name="download">Скачать</string -->
 
     <string name="popup_do_splay">Боковой замер</string>
     <string name="popup_do_leg">Замер на пикет</string>
@@ -517,10 +519,10 @@
     <!-- UNUSED string name="btn_join">Сцепить</string -->
 
     <!-- UNUSED string name="button_redraw">Перерисовать</string -->
-    <string name="button_erase">Стереть</string>
+    <!-- UNUSED string name="button_erase">Стереть</string -->
     <!-- UNUSED string name="btn_surface">Поверхность</string -->
 
-    <string name="station_next">СЛЕД.</string>
+    <!-- UNUSED string name="station_next">СЛЕД.</string -->
     <string name="no_shot_between_stations">нет замера между пикетами</string>
     <string name="few_line_points">Слишком мало точек в линии</string>
     <string name="line_delete">удалить_линию</string>
@@ -872,9 +874,9 @@
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
   <string name="pref_fixed_thickness_summary">Толщина нитки хода</string>
   <string name="pref_fixed_thickness_message">Толщина нитки хода</string>
-  <string name="pref_device_title">Устройство</string>
-  <string name="pref_device_summary">DistoX наименование адреса</string>
-  <string name="pref_device_message">DistoX наименование адреса</string>
+  <!-- UNUSED string name="pref_device_title">Устройство</string -->
+  <!-- UNUSED string name="pref_device_summary">DistoX наименование адреса</string -->
+  <!-- UNUSED string name="pref_device_message">DistoX наименование адреса</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>

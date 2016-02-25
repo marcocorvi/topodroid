@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:hint=" 0 "
         android:nextFocusDown="@+id/et_to"
+        android:inputType="text"
         />
       <EditText android:id="@+id/et_to"
         android:layout_width="0dp"
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:hint=" 1 "
         android:nextFocusDown="@+id/et_length"
+        android:inputType="text"
         />
     </LinearLayout>
 
@@ -42,6 +44,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/length"
         android:nextFocusDown="@+id/et_azimuth"
+        android:inputType="numberDecimal"
         />
 
       <EditText android:id="@+id/et_azimuth"
@@ -50,6 +53,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/azimuth"
         android:nextFocusDown="@+id/et_clino"
+        android:inputType="numberDecimal"
         />
 
       <EditText android:id="@+id/et_clino"
@@ -58,6 +62,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/clino"
         android:nextFocusDown="@id/top"
+        android:inputType="numberDecimal|numberSigned"
         />
     </LinearLayout>
 

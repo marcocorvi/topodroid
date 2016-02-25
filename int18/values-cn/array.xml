@@ -30,30 +30,6 @@
      <item>- -</item>
   </string-array -->
 
-  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX
-  <string-array name="exportShots">
-     <item name="therion">Therion</item>
-     <item name="compass">Compass</item>
-     <item name="csurvey">cSurvey</item>
-     <item name="pockettoopo">PocketTopo</item>
-     <item name="survex">Survex</item>
-     <item name="visualtopo">VisualTopo</item>
-     <item name="walls">Walls</item>
-     <item name="csv">CSV</item>
-     <item name="dxf">DXF</item>
-  </string-array>
-  -->
-
-  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX
-  <string-array name="exportSketch">
-     <item name="therion">Therion</item>
-     <item name="csurvey">cSurvey</item>
-     <item name="dxf">DXF</item>
-     <item name="png">PNG</item>
-     <item name="svg">SVG</item>
-  </string-array>
-  -->
-
   <string-array name="legShots">
      <item name="two">2</item>
      <item name="three">3</item>

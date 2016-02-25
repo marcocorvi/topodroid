@@ -9,18 +9,19 @@
    					  
 
     <TextView android:id="@+id/label_caption"
-        android:layout_marginTop="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/label_text"
-        />
+      android:layout_marginTop="2dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:text="@string/label_text"
+      />
    					  
     <EditText android:id="@+id/label_text"
-        android:layout_marginTop="2dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content" 
-        android:singleLine="true"
-        />
+      android:layout_marginTop="2dp"
+      android:layout_width="150dp"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:inputType="text"
+      />
    		
     <LinearLayout 
       android:layout_width="fill_parent" 

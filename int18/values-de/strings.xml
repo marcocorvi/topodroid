@@ -69,7 +69,7 @@
     <!-- UNUSED string name="calib_read_coeffs">Kalibrierung Koeffizienten READING ...</string -->
     <string name="calib_write_coeffs">Kalibrierung Koeffizienten speichern ...</string>
     <string name="calib_validation">Vergleich %1$s vs. %2$s</string>
-    <string name="connect_failed">Verbindung fehlgeschlagen</string>
+    <!-- UNUSED string name="connect_failed">Verbindung fehlgeschlagen</string -->
     <!-- UNUSED string name="data"> Daten</string -->
     <string name="using">%1$s %2$s benutzen</string>
     <string name="calib_error">Abweichung: %1$.4f Grad</string>
@@ -142,7 +142,7 @@
     <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
 
 <!-- MORE DEVICE STRINGS -->
-    <!-- TODO string name="head_tail">Memory: </string -->
+    <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Fehler beim DistoX Speicherindex lesen</string>
     <string name="head_tail_store_failed">Fehler beim DistoX Speicherindex speichern</string>
     <!-- UNUSED string name="pairing_failed">Verbindung fehlgeschlagen</string -->
@@ -163,6 +163,7 @@
     <string name="longitude_hint">Länge dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ringschlussfehler</string>
     <string name="loop_none">Kein Ringschluss</string>
+    <!-- TODO string name="long_lat">Long-Lat</string -->
 
 <!-- INPUT FIELDS ERROR STRINGS: BAD VALUE or MISSING VALUE -->
     <string name="error_azimuth_required">Azimut erforderlich</string>
@@ -193,7 +194,7 @@
     <string name="group_policy_distance">Gruppieren nach Winkelabstand</string>
     <string name="group_reset">Groupierung zurücksetzen</string>
 
-    <string name="scale">Ausmaß</string>
+    <!-- UNUSED string name="scale">Ausmaß</string -->
     <!-- UNUSED string name="reversed">umkehren</string -->
     <string name="options">Einstellungen</string>
     <string name="outline">Linientyp (Therion)</string>
@@ -295,7 +296,7 @@
     <string name="not_enabled">BT nicht aktiviert</string>
     <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
     <string name="null_bitmap">Null Bitmap [OOM error]</string>
-    <string name="photo">Foto</string>
+    <!-- UNUSED string name="photo">Foto</string -->
     <string name="photo_comment_prompt">Kommentar</string>
     <!-- UNUSED string name="photo_name">Messpunkt/Name</string -->
     <!-- UNUSED string name="photo_photo">Foto</string -->
@@ -304,19 +305,19 @@
     <!-- UNUSED string name="photo_sensor_prompt">Foto oder Sensor auswählen</string -->
     <!-- UNUSED string name="photo_shot">Messung hinzufügen</string -->
     <!-- UNUSED string name="photo_survey">Messzug teilen</string -->
-    <string name="picture_no_station">Name erforderlich</string>
+    <!-- UNUSED string name="picture_no_station">Name erforderlich</string -->
     <string name="plot_delete">Skizze löschen?</string>
     <string name="item_delete">Element löschen %1$s ?</string>
     <string name="plot_duplicate_name">Doppelter Name</string>
     <!-- UNUSED string name="plot_name">Name der Skizze</string -->
     <string name="plot_new">Neue Skizze</string>
     <string name="plot_not_found">Skizze nicht gefunden</string>
-    <string name="plot_recover">Skizze aus dem Backup laden?</string>
+    <!-- UNUSED string name="plot_recover">Skizze aus dem Backup laden?</string -->
     <string name="plot_start">Basismesspunkt</string>
     <!-- UNUSED string name="read_">Lesen </string -->
     <string name="read_data">%1$d Messungen gelesen</string>
     <string name="read_calib_data">%1$d Daten gelesen (%2$d Pakete)</string>
-    <string name="read_fail_with_code">Lesefehler: Fehlercode</string>
+    <!-- UNUSED string name="read_fail_with_code">Lesefehler: Fehlercode</string -->
     <string name="read_failed">Fehler beim lesen vom DistoX</string>
     <string name="saved_file_">Gespeicherte Datei</string>
     <string name="saving_">Speichern </string>
@@ -329,7 +330,7 @@
     <string name="convert_tdr2th2">th2 Skizzen überschreiben?</string>
     <string name="section_area">Fläche: %1$.1f</string>
 
-    <string name="sensor">Sensor</string>
+    <!-- UNUSED string name="sensor">Sensor</string -->
     <!-- UNUSED string name="sensor_accelerometer">Beschleunigungsmesser</string -->
     <string name="sensor_gravity">Schwerkraft</string>
     <!-- UNUSED string name="sensor_humidity">Luftfeuchtigkeit</string -->
@@ -337,7 +338,7 @@
     <string name="sensor_magnetic_field">Magnetisches Feld</string>
     <!-- UNUSED string name="sensor_orientation">Richtung</string -->
     <string name="sensor_pressure">Druck</string>
-    <string name="sensor_proximity">Nähe</string>
+    <!-- UNUSED string name="sensor_proximity">Nähe</string -->
     <string name="sensor_temperature">Temperatur</string>
     <string name="sensor_extern">Benutzerdefiniert</string>
     <string name="sensor_type">Art</string>
@@ -373,7 +374,7 @@
     <string name="station_set">Als Ausgangspunkt setzen</string>
     <!-- UNUSED string name="station_base">Bezugsmesspunkt</string -->
     <!-- UNUSED string name="station_next">Nächster Messpunkt</string -->
-    <string name="station_viewed">Bereits gesehener Messpunkt</string>
+    <!-- UNUSED string name="station_viewed">Bereits gesehener Messpunkt</string -->
     <string name="survey_exists">Vermessung bereits vorhanden</string>
     <!-- UNUSED string name="survey_date">jjjj.mm.tt</string -->
     <string name="survey_delete">Vermessung löschen?</string>
@@ -428,7 +429,7 @@
 
     <string name="plan">GRUNDRISS</string>
     <string name="extended">SEITENRISS</string>
-    <string name="v_section">V-PROFIL</string> <!-- Querschnitt -->
+    <!-- UNUSED string name="v_section">V-PROFIL</string -->
     <string name="h_section">H-PROFIL</string>
 
     <!-- OK string name="distox_err_ok">OK</string -->
@@ -454,7 +455,7 @@
     <!-- UNUSED string name="button_manual"    >Handbuch</string -->
     <!-- UNUSED string name="button_measure"   >Messung   </string -->
     <string name="button_photo"   >Foto</string>
-    <string name="button_sensor"  >Messung</string>
+    <!-- UNUSED string name="button_sensor"  >Messung</string -->
     <!-- UNUSED string name="button_direction">Azimut/Neigung</string -->
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Skizze</string>
@@ -478,13 +479,13 @@
     <!-- UNUSED string name="button_sharp"     >Schärfen</string -->
     <!-- UNUSED string name="button_rock"      >Stein</string -->
     <!-- UNUSED string name="button_close"     >Beenden</string -->
-<!--
-    <string name="button_erase"     >Löschen   </string>
-    <string name="button_next"      >Nächste   </string>
-    <string name="button_prev"      >Früher    </string>
-    <string name="button_split"     >Split     </string>
-    <string name="button_toggle"    >Toggle CAL mode  </string>
--->
+
+    <!-- UNUSED string name="button_erase"     >Löschen   </string -->
+    <!-- UNUSED string name="button_next"      >Nächste   </string -->
+    <!-- UNUSED string name="button_prev"      >Früher    </string -->
+    <!-- UNUSED string name="button_split"     >Split     </string -->
+    <!-- UNUSED string name="button_toggle"    >Toggle CAL mode  </string -->
+
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Querschnitt</string>
 
@@ -499,7 +500,7 @@
     <string name="remote_off">Laser AUS</string>
     <!-- UNUSED string name="remote_measure">Messung</string -->
     <string name="remote_reset">Bluetooth zurücksetzen</string>
-    <string name="download">Daten herunterladen</string>
+    <!-- UNUSED string name="download">Daten herunterladen</string -->
 
     <string name="popup_do_splay">Hilfszug messen</string>
     <string name="popup_do_leg">Messzug messen (n Messungen)</string>
@@ -542,11 +543,11 @@
     <!-- UNUSED string name="btn_shot">Shot</string -->
     <!-- UNUSED string name="btn_join">Join</string -->
 
-    <!-- string name="button_redraw">Redraw</string -->
-    <!-- TODO string name="button_erase">Erase</string -->
-    <!-- string name="btn_surface">surface</string -->
+    <!-- UNUSED string name="button_redraw">Redraw</string -->
+    <!-- UNUSED string name="button_erase">Erase</string -->
+    <!-- UNUSED string name="btn_surface">surface</string -->
 
-    <string name="station_next">NEXT</string>
+    <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">no_shot_between_stations</string>
     <string name="few_line_points">Line has too few points</string>
     <string name="line_delete">line_delete</string>

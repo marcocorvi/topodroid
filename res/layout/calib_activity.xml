@@ -70,7 +70,7 @@
           android:layout_width="fill_parent"
           android:layout_height="wrap_content" 
           android:singleLine="true"
-          android:editable="false"
+          android:inputType="none"
           android:scrollHorizontally="true" />
 
     <EditText android:id="@+id/calib_comment" 

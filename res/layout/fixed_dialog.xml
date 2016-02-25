@@ -120,6 +120,7 @@
         android:layout_weight="20"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp" 
+        android:inputType="text"
         />
       <EditText android:id="@id/fix_comment" 
         android:layout_width="0dp"
@@ -127,6 +128,7 @@
         android:layout_height="wrap_content" 
         android:nextFocusDown="@+id/fix_decl"
         android:singleLine="true"
+        android:inputType="text"
         />
     </LinearLayout>
      					  
@@ -150,6 +152,7 @@
         android:layout_height="wrap_content" 
         android:nextFocusDown="@id/top"
         android:singleLine="true"
+        android:inputType="numberDecimal|numberSigned"
         />
       <CheckBox android:id="@+id/fix_save_decl"
         android:layout_width="0dp"
@@ -187,7 +190,7 @@
       <TextView android:id="@+id/fix_crs" 
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:hint="Long-Lat"
+        android:hint="@string/long_lat"
         android:singleLine="true" 
         />
 

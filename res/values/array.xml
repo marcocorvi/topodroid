@@ -114,7 +114,7 @@
   </string-array>
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
-  <string-array name="exportSketch">
+  <!-- UNUSED string-array name="exportSketch">
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
@@ -127,7 +127,7 @@
      <item name="dxf">6</item>
      <item name="png">11</item>
      <item name="svg">12</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="legShots">
      <item name="two">2</item>

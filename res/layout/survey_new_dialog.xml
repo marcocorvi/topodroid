@@ -44,7 +44,9 @@
         android:layout_height="wrap_content" 
         android:singleLine="true"
         android:hint="@string/team"
-        android:scrollHorizontally="true" />
+        android:scrollHorizontally="true"
+        android:inputType="text"
+    />
         	
     <EditText android:id="@+id/survey_station" 
         android:layout_marginTop="2sp"
@@ -52,7 +54,9 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-        android:scrollHorizontally="true" />
+        android:scrollHorizontally="true"
+        android:inputType="text"
+    />
         	
     <EditText android:id="@+id/survey_decl" 
         android:layout_marginTop="2sp"
@@ -61,8 +65,9 @@
         android:layout_height="wrap_content" 
         android:singleLine="true"
         android:hint="@string/declination"
+        android:scrollHorizontally="true"
         android:inputType="numberDecimal|numberSigned"
-        android:scrollHorizontally="true" />
+    />
         	
     <EditText android:id="@+id/survey_comment" 
         android:layout_marginTop="2sp"
@@ -71,8 +76,9 @@
         android:layout_height="wrap_content" 
         android:singleLine="true"
         android:hint="@string/description"
-        android:scrollHorizontally="true" />
-
+        android:scrollHorizontally="true"
+        android:inputType="text"
+     />
 
   </LinearLayout>
   </ScrollView>

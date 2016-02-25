@@ -33,6 +33,7 @@
         android:layout_height="wrap_content" 
         android:text="-"
         android:singleLine="true"
+        android:inputType="text"
         android:nextFocusDown="@+id/shot_to"
         />
       <EditText android:id="@+id/shot_to"
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content" 
         android:text="-"
         android:singleLine="true"
+        android:inputType="text"
         android:nextFocusDown="@+id/shot_comment"
         />
     </LinearLayout>
@@ -52,6 +54,7 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
       android:layout_below="@id/layout1"
+      android:inputType="text"
       android:singleLine="true"
       />
 
