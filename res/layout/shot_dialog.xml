@@ -232,21 +232,8 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
+      android:gravity="right"
       >
-      <!-- Button android:id="@+id/btn_back"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_back"
-        / -->
-
-      <LinearLayout 
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:orientation="horizontal" 
-        >
       <Button android:id="@+id/btn_ok"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -264,9 +251,6 @@
         style="@style/button_default"
         android:text="@string/button_save"
         />
-
-      </LinearLayout>
-
     </LinearLayout>
 
   <android.inputmethodservice.KeyboardView

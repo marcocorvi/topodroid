@@ -52,10 +52,10 @@
      <item name="continuous">Continuo</item>
   </string-array>
 
-  <string-array name="altitudeType">
+  <!-- UNUSED string-array name="altitudeType">
     <item name="wgs84">WGS84</item>
     <item name="asl">Elípticas</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="sockType">
      <item name="default">Por defecto</item>
@@ -77,11 +77,11 @@
      <item name="grid">Cuadrícula</item>
   </string-array>
 
-  <string-array name="deviceType">
+  <!-- UNUSED string-array name="deviceType">
      <item name="none">Nada</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="deviceBT">
      <item name="0">Desactivar</item>
@@ -89,12 +89,12 @@
      <item name="2">Activar</item>
   </string-array>
 
-  <string-array name="exportType">
+  <!-- UNUSED string-array name="exportType">
      <item name="th">Therion</item>
      <item name="dat">Compass</item>
      <item name="svx">Survex</item>
      <item name="tro">VisualTopo</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="lineStyle">
      <item name="none">Muchos</item>

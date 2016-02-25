@@ -7,7 +7,7 @@
     <string name="double_back">Натиснете отново за да излезете</string>
 
     <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string>
-    <string name="version_title">Обновяване на версията</string>
+    <!-- UNUSED string name="version_title">Обновяване на версията</string -->
 
     <string name="POINT">Точка</string>
     <string name="LINE">Линия</string>
@@ -65,7 +65,7 @@
     <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
     <string name="calib_validation">Проверка на %1$s срещу %2$s</string>
     <string name="connect_failed">Невъзможна връзка</string>
-    <string name="data"> измервания</string>
+    <!-- UNUSED string name="data"> измервания</string -->
     <string name="using">Използва се %1$s %2$s</string>
     <string name="calib_error">Грешка: %1$.4f градуси</string>
     <string name="calib_stddev">Грешка ст. откл.: %1$.4f градуси</string>
@@ -99,13 +99,13 @@
     <string name="nickname">Име на устройство</string>
 
     <string name="comment">Коментар</string>
-    <string name="flag">Флаг</string>
-    <string name="backshot">Обратна отсечка</string>
-    <string name="duplicate">Дублирана</string>
-    <!-- string name="regular">regular</string -->
-    <string name="surface">Повърхностна</string>
-    <string name="extend">Разгъване</string>
-    <string name="extend_ignore">Без</string>
+    <!-- UNUSED string name="flag">Флаг</string -->
+    <!-- UNUSED string name="backshot">Обратна отсечка</string -->
+    <!-- UNUSED string name="duplicate">Дублирана</string -->
+    <!-- UNUSED string name="regular">regular</string -->
+    <!-- UNUSED string name="surface">Повърхностна</string -->
+    <!-- UNUSED string name="extend">Разгъване</string -->
+    <!-- UNUSED string name="extend_ignore">Без</string -->
     <string name="extend_left">Наляво</string>
     <string name="extend_right">Надясно</string>
     <string name="extend_vert">Вертикално</string>
@@ -113,12 +113,12 @@
     <string name="splay_at_to">"&lt;,&gt;,Г,Д" в репер "ДО"</string>
 
     <string name="few_data">Няма достатъчно данни</string>
-    <string name="few_plots">Няма достатъчно скици</string>
+    <!-- UNUSED string name="few_plots">Няма достатъчно скици</string -->
     <string name="few_calibs">Няма достатъчно калибрации</string>
 
     <string name="calib_import_title">Импортиране на калибрация</string>
     <string name="import_title">Импортиране на файл</string>
-    <string name="import_wait">Импортиране... Моля изчакайте...</string>
+    <!-- UNUSED string name="import_wait">Импортиране... Моля изчакайте...</string -->
     <string name="import_already">Картировката е вече импортирана</string>
     <string name="import_none">Няма файлове за импортиране</string>
     <string name="import_failed">Файлът не е импортиран</string>
@@ -126,7 +126,7 @@
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте ...</string>
     <!-- UNUSED string name="sketch_loading">Зареждане на скица... Моля изчакайте...</string -->
-    <string name="sketch_saving">Записване на скица... Моля изчакайте...</string>
+    <!-- UNUSED string name="sketch_saving">Записване на скица... Моля изчакайте...</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
 
@@ -138,7 +138,7 @@
     <string name="illegal_data_value">Невалидни данни</string>
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
-    <string name="altitude">Надм. височина</string>
+    <!-- UNUSED string name="altitude">Надм. височина</string -->
     <string name="h_ellipsoid">Вис. елипсоид.</string>
     <string name="h_geoid">Вис. геоид</string>
     <string name="latitude">Геогр. широчина</string>
@@ -168,7 +168,7 @@
     <string name="error_long_required">Необходима геогр. дължина</string>
     <string name="error_name_required">Необходимо име</string>
     <string name="error_start_required">Необходим репер</string>
-    <string name="error_station_already_fixed">Репера вече има координати</string>
+    <!-- UNUSED string name="error_station_already_fixed">Репера вече има координати</string -->
     <string name="error_station_required">Необходим репер</string>
     <string name="error_station_non_existing">Несъществуващ репер</string>
     <string name="error_sensor_required">Необходим сензор</string>
@@ -181,12 +181,12 @@
     <string name="group_reset">Изчистване на групите</string>
 
     <string name="scale">мащаб</string>
-    <string name="reversed">обръщане</string>
+    <!-- UNUSED string name="reversed">обръщане</string -->
     <string name="options">опции</string>
     <string name="outline">контур</string>
     <string name="out">вън</string>
     <string name="in">във</string>
-    <string name="none">няма</string>
+    <!-- UNUSED string name="none">няма</string -->
     <string name="barrier_add">Скриване на следващи репери</string>
     <string name="barrier_del">Показване на следващи репери</string>
     <string name="hidden_add">Скриване на предишни репери</string>
@@ -216,7 +216,7 @@
     <string name="no_plots">Картировката не съдържа скици\nДобавете нова</string>
     <string name="no_proj4">Proj4 не е инсталирана</string>
     <string name="no_sensors">Картировката не съдържа сензорни измервания</string>
-    <string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string>
+    <!-- UNUSED string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string -->
     <string name="no_survey">Не е избрана картировка</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol не е инсталирана</string -->
     <string name="no_thmanager">ThManager не е инсталирана</string>
@@ -229,9 +229,9 @@
     <string name="menu_about">За програмата</string>
     <string name="menu_area">Площ</string>
     <string name="menu_attach">Свързване</string>
-    <string name="menu_calib">Калибрация</string>
-    <!-- unused string name="menu_attached">connected</string -->
-    <!-- unused string name="menu_ready">ready</string -->
+    <!-- UNUSED string name="menu_calib">Калибрация</string -->
+    <!-- UNUSED string name="menu_attached">connected</string -->
+    <!-- UNUSED string name="menu_ready">ready</string -->
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
     <string name="menu_display">Дисплей</string>
@@ -277,18 +277,18 @@
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
     <string name="photo">снимка</string>
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
-    <string name="photo_name">репер/име</string>
-    <string name="photo_photo">снимка</string>
-    <string name="photo_sensor">сензор</string>
-    <string name="photo_external">измерване</string>
+    <!-- UNUSED string name="photo_name">репер/име</string -->
+    <!-- UNUSED string name="photo_photo">снимка</string -->
+    <!-- UNUSED string name="photo_sensor">сензор</string -->
+    <!-- UNUSED string name="photo_external">измерване</string -->
     <!-- UNUSED string name="photo_sensor_prompt">Изберете снимка или сензор</string -->
-    <string name="photo_shot">Добавяне на измерване</string>
-    <string name="photo_survey">Разделяне на картировка</string>
+    <!-- UNUSED string name="photo_shot">Добавяне на измерване</string -->
+    <!-- UNUSED string name="photo_survey">Разделяне на картировка</string -->
     <string name="picture_no_station">Необходимо е име на репер</string>
     <string name="plot_delete">Изтриване на скица?</string>
     <string name="item_delete">Изтриване на елемент %1$s ?</string>
     <string name="plot_duplicate_name">Дублирано име на скица</string>
-    <string name="plot_name">Име на скица</string>
+    <!-- UNUSED string name="plot_name">Име на скица</string -->
     <string name="plot_new">Нова скица</string>
     <string name="plot_not_found">Скицата не е намерена</string>
     <!-- string name="plot_null_name">Missing sketch name</string -->
@@ -305,7 +305,7 @@
     <string name="saved_file_">Файлът е записан\ </string>
     <string name="saving_">Записване</string>
     <string name="saving_file_failed">Грешка при запис на файл</string>
-    <string name="scrap_name">Име на скица</string>
+    <!-- UNUSED string name="scrap_name">Име на скица</string -->
     <string name="splay">странично измервание</string>
     <string name="too_many_leg_intersection">Линията на сечението пресича повече от една отсечка</string>
     <string name="too_many_legs_xsection">Твърде много отсечки за сечение</string>
@@ -333,9 +333,9 @@
     <string name="shot_delete">Изтриване на измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
-    <string name="shot_leg">Повтаряща се отсечка</string>
-    <string name="shot_renumber">Преномериране</string>
-    <string name="shot_all_splay">Група странични изм.</string>
+    <!-- UNUSED string name="shot_leg">Повтаряща се отсечка</string -->
+    <!-- UNUSED string name="shot_renumber">Преномериране</string -->
+    <!-- UNUSED string name="shot_all_splay">Група странични изм.</string -->
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
     <string name="shot_reverse">обръщане</string>
@@ -359,7 +359,7 @@
     <!-- string name="station_next">next station</string -->
     <string name="station_viewed">избран репер</string>
     <string name="survey_exists">Картировката вече съществува</string>
-    <string name="survey_date">гггг.мм.дд</string>
+    <!-- UNUSED string name="survey_date">гггг.мм.дд</string -->
 
     <string name="survey_delete">Изтриване на картировката?</string>
     <string name="survey_split">Разделяне на картировката?</string>
@@ -375,7 +375,7 @@
     <string name="toggle_ok">Включен/изключен режим на калибрация на DistoX</string>
     <string name="undelete_text">Изберете какво искате да възстановите</string>
     <string name="visible_border">видима граница</string>
-    <string name="vthreshold">вертикална граница</string>
+    <!-- UNUSED string name="vthreshold">вертикална граница</string -->
     <string name="wait_scan">Сканиране, моля изчакайте...</string>
     <string name="write_failed">Грешка при запис в DistoX</string>
     <string name="write_ok">Калибрацията е записана в DistoX</string>
@@ -405,9 +405,6 @@
     <string name="hide_ids">Номера на отсечки</string>
     <string name="hide_splay">Странични измервания</string>
 
-    <string name="surveys">Картировки</string>
-    <string name="calibs">Калибрации</string>
-
     <string name="plan">План</string>
     <string name="extended">Разрез</string>
     <string name="v_section">Верт. сечение</string>
@@ -424,7 +421,7 @@
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
 
 
-    <string name="button_add"       >Добавяне  </string>
+    <!-- UNUSED string name="button_add"       >Добавяне  </string -->
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
     <string name="button_convert"   >Конверт.  </string>
@@ -442,10 +439,9 @@
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Скица</string>
     <string name="button_ok"        >OK        </string>
-    <string name="button_no"        >Не        </string>
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
-    <string name="button_regroup"   >Прегрупиране</string>
+    <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
@@ -454,11 +450,10 @@
     <string name="button_save"      >Запис     </string>
     <!-- UNUSED string name="button_select"    >Избор     </string -->
     <string name="button_store"     >Съхраняване</string>
-    <string name="button_start"     >Старт     </string>
-    <string name="button_stop"      >Стоп      </string>
+    <!-- UNUSED string name="button_start"     >Старт     </string -->
+    <!-- UNUSED string name="button_stop"      >Стоп      </string -->
     <string name="button_upload"    >Качване   </string>
     <string name="button_view"      >Преглед   </string>
-    <string name="button_yes"       >Да       </string>
 
     <!-- UNUSED string name="button_sharp"     >Изостряне</string -->
     <!-- UNUSED string name="button_rock"      >Редуц. точки</string -->
@@ -492,8 +487,8 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_man">Ръчно</string>
-    <string name="btn_symbol">Инструменти за рисуване</string>
+    <!-- UNUSED string name="btn_man">Ръчно</string -->
+    <!-- UNUSED string name="btn_symbol">Инструменти за рисуване</string -->
     <string name="btn_import">Импортиране</string>
 
 <!-- FIXME_SKETCH_3D -->
@@ -522,10 +517,10 @@
     <!-- UNUSED string name="btn_horizontal">Хоризонтално</string -->
 
     <!-- select buttin labels -->
-    <string name="btn_section">Сечение</string>
-    <string name="btn_step">Стъпка</string>
-    <string name="btn_shot">Отсечка</string>
-    <string name="btn_join">Свързване</string>
+    <!-- UNUSED string name="btn_section">Сечение</string -->
+    <!-- UNUSED string name="btn_step">Стъпка</string -->
+    <!-- UNUSED string name="btn_shot">Отсечка</string -->
+    <!-- UNUSED string name="btn_join">Свързване</string -->
 
     <!-- UNUSED string name="button_redraw">Прерисуване</string -->
     <string name="button_erase">Изтриване</string>
@@ -541,7 +536,7 @@
 <!-- END_SKETCH_3D -->
 
     <string name="help_help">Помощ</string>
-    <string name="help_manual">Ръководство</string>
+    <!-- UNUSED string name="help_manual">Ръководство</string -->
     <!-- OK string name="help_more">Показване на допълнителни команди</string -->
     <!-- OK string name="help_less">Връщане към основните команди</string -->
     <string name="help_measure">Измерване на разстояния</string>
@@ -606,7 +601,7 @@
 -->
     <string name="help_manual_calibration">Ръчно калибр. на инструментите</string>
     <string name="help_note_plot">Редактиране на настройки на избрания елемент</string>
-    <string name="help_save">Запис на промените в информацията за картировката</string>
+    <!-- UNUSED string name="help_save">Запис на промените в информацията за картировката</string -->
     <string name="help_save_calib">Запис на промените в информацията за калибрацията</string>
     <string name="help_export_survey">Експортиране на картировката</string>
     <string name="help_loc">GPS координати</string>
@@ -731,10 +726,10 @@
   <string name="pref_sock_type_summary">Bluetooth режим</string>
   <!-- string name="pref_device_type_title">DistoX тип</string -->
   <!-- string name="pref_device_type_summary">Модел на DistoX</string -->
-  <string name="pref_comm_retry_title">Опити за връзка</string>
-  <string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string>
-  <string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string>
-  <string name="pref_comm_retry_message">Брой опити за връзка при грешка</string>
+  <!-- UNUSED string name="pref_comm_retry_title">Опити за връзка</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string -->
+  <!-- UNUSED string name="pref_comm_retry_message">Брой опити за връзка при грешка</string -->
   <string name="pref_conn_mode_title">Тип на връзката за данни</string>
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
@@ -761,8 +756,8 @@
   <string name="pref_shot_data_title">Данни за отсечка</string>
   <string name="pref_shot_units_title">Мерни единици</string>
   <string name="pref_cwd_title">Работна директория</string>
-  <!-- unused string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string -->
-  <!-- unused string name="pref_cwd_message">Въведете директория на TopoDroid</string -->
+  <!-- UNUSED string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string -->
+  <!-- UNUSED string name="pref_cwd_message">Въведете директория на TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo карта на цветовете</string>
   <string name="pref_text_size_title">Размер на текста</string>
   <string name="pref_text_size_summary">Размер на шрифта в текстове</string>

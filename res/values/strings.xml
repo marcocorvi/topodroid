@@ -7,7 +7,7 @@
     <string name="double_back">Click BACK again to exit</string>
 
     <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string>
-    <string name="version_title">Version update</string>
+    <!-- UNUSED string name="version_title">Version update</string -->
 
     <string name="POINT">POINT</string>
     <string name="LINE">LINE</string>
@@ -65,7 +65,7 @@
     <string name="calib_write_coeffs">Writing calibration coefficients ...</string>
     <string name="calib_validation">Validation of %1$s vs %2$s</string>
     <string name="connect_failed">Failed connect</string>
-    <string name="data"> data</string>
+    <!-- UNUSED string name="data"> data</string -->
     <string name="using">Using %1$s %2$s</string>
     <string name="calib_error">Average error: %1$.4f degrees</string>
     <string name="calib_stddev">Error stddev: %1$.4f degrees</string>
@@ -99,13 +99,13 @@
     <string name="nickname">Nickname</string>
 
     <string name="comment">comment</string>
-    <string name="flag">Flag</string>
-    <string name="backshot">backshot</string>
-    <string name="duplicate">duplicate</string>
-    <!-- string name="regular">regular</string -->
-    <string name="surface">surface</string>
-    <string name="extend">Extend</string>
-    <string name="extend_ignore">None</string>
+    <!-- UNUSED string name="flag">Flag</string -->
+    <!-- UNUSED string name="backshot">backshot</string -->
+    <!-- UNUSED string name="duplicate">duplicate</string -->
+    <!-- UNUSED string name="regular">regular</string -->
+    <!-- UNUSED string name="surface">surface</string -->
+    <!-- UNUSED string name="extend">Extend</string -->
+    <!-- UNUSED string name="extend_ignore">None</string -->
     <string name="extend_left">Left</string>
     <string name="extend_right">Right</string>
     <string name="extend_vert">Vert</string>
@@ -113,12 +113,12 @@
     <string name="splay_at_to">LRUD at TO station</string>
 
     <string name="few_data">Not enough data</string>
-    <string name="few_plots">Not enough sketches</string>
+    <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
 
     <string name="calib_import_title">Calibration import</string>
     <string name="import_title">Survey import</string>
-    <string name="import_wait">Importing file... please wait...</string>
+    <!-- UNUSED string name="import_wait">Importing file... please wait...</string -->
     <string name="import_already">Survey already imported</string>
     <string name="import_none">No file to import</string>
     <string name="import_failed">File import failed</string>
@@ -126,7 +126,7 @@
     <string name="import_zip_ok">Successfully imported zip file</string>
     <string name="import_zip_wait">Imported zip file may take long. Please wait ...</string>
     <!-- string name="sketch_loading">Loading sketch ... please wait...</string -->
-    <string name="sketch_saving">Saving sketch ... please wait...</string>
+    <!-- UNUSED string name="sketch_saving">Saving sketch ... please wait...</string -->
     <string name="MT_points_none">No MobileTopographer point</string>
  
 
@@ -138,7 +138,7 @@
     <string name="illegal_data_value">Illegal data value</string>
     <string name="label_title">LABEL</string>
     <string name="label_text">Enter the label text</string>
-    <string name="altitude">Alt. </string>
+    <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">H ellipsoid </string>
     <string name="h_geoid">H geoid </string>
     <string name="latitude">Latitude </string>
@@ -166,7 +166,7 @@
     <string name="error_long_required">Longitude required</string>
     <string name="error_name_required">Name required</string>
     <string name="error_start_required">Reference station required</string>
-    <string name="error_station_already_fixed">Station already with coordinates</string>
+    <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
     <string name="error_station_required">Station required</string>
     <string name="error_station_non_existing">Non existing station</string>
     <string name="error_sensor_required">Sensor required</string>
@@ -179,12 +179,12 @@
     <string name="group_reset">Reset groups</string>
 
     <string name="scale">scale</string>
-    <string name="reversed">reverse</string>
+    <!-- UNUSED string name="reversed">reverse</string -->
     <string name="options">options</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
     <string name="in">in</string>
-    <string name="none">none</string>
+    <!-- UNUSED string name="none">none</string -->
     <string name="barrier_add">Hide following shots</string>
     <string name="barrier_del">Show following shots</string>
     <string name="hidden_add">Hide previous shots</string>
@@ -214,7 +214,7 @@
     <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
     <string name="no_proj4">Proj4 not installed</string>
     <string name="no_sensors">Survey has no measurement</string>
-    <string name="no_shots">Survey has no shots.\nUse Download button to get some</string>
+    <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">No survey selected.</string>
     <!-- string name="no_tdsymbol">TdSymbol not installed</string -->
     <string name="no_thmanager">ThManager app not installed</string>
@@ -227,7 +227,7 @@
     <string name="menu_about">ABOUT</string>
     <string name="menu_area">AREA</string>
     <string name="menu_attach">CONNECT</string>
-    <string name="menu_calib">CALIBRATIONS</string>
+    <!-- UNUSED string name="menu_calib">CALIBRATIONS</string -->
     <!-- string name="menu_attached">Connected</string -->
     <!-- string name="menu_ready">Ready</string -->
     <string name="menu_delete">DELETE</string>
@@ -276,18 +276,18 @@
     <string name="null_bitmap">Cannot create image [OOM error]</string>
     <string name="photo">photo</string>
     <string name="photo_comment_prompt">Enter the photo comment</string>
-    <string name="photo_name">station/name</string>
-    <string name="photo_photo">photo</string>
-    <string name="photo_sensor">sensor</string>
-    <string name="photo_external">measurement</string>
+    <!-- UNUSED string name="photo_name">station/name</string -->
+    <!-- UNUSED string name="photo_photo">photo</string -->
+    <!-- UNUSED string name="photo_sensor">sensor</string -->
+    <!-- UNUSED string name="photo_external">measurement</string -->
     <!-- string name="photo_sensor_prompt">Select photo or sensor</string -->
-    <string name="photo_shot">add shot</string>
-    <string name="photo_survey">split survey</string>
+    <!-- UNUSED string name="photo_shot">add shot</string -->
+    <!-- UNUSED string name="photo_survey">split survey</string -->
     <string name="picture_no_station">Station name required</string>
     <string name="plot_delete">Delete sketch ?</string>
     <string name="item_delete">Delete item %1$s ?</string>
     <string name="plot_duplicate_name">Duplicate sketch name</string>
-    <string name="plot_name">Sketch name</string>
+    <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">New sketch</string>
     <string name="plot_not_found">Sketch not found</string>
     <!-- string name="plot_null_name">Missing sketch name</string -->
@@ -304,7 +304,7 @@
     <string name="saved_file_">Saved file\ </string>
     <string name="saving_">Saving </string>
     <string name="saving_file_failed">Failed file-save</string>
-    <string name="scrap_name">sketch name</string>
+    <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">Section line crosses many legs</string>
     <string name="too_many_legs_xsection">Too many legs for X-section</string>
@@ -332,9 +332,9 @@
     <string name="shot_delete">Delete shot ?</string>
     <string name="shot_from">from</string>
     <string name="shot_info">Enter shot data</string>
-    <string name="shot_leg">repeated leg</string>
-    <string name="shot_renumber">renumber</string>
-    <string name="shot_all_splay">splay group</string>
+    <!-- UNUSED string name="shot_leg">repeated leg</string -->
+    <!-- UNUSED string name="shot_renumber">renumber</string -->
+    <!-- UNUSED string name="shot_all_splay">splay group</string -->
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">note</string>
     <string name="shot_reverse">reverse</string>
@@ -357,7 +357,7 @@
     <!-- string name="station_next">next station</string -->
     <string name="station_viewed">viewed station</string>
     <string name="survey_exists">Survey already exists</string>
-    <string name="survey_date">yyyy.mm.dd</string>
+    <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Delete survey ?</string>
     <string name="survey_split">Split survey ?</string>
     <string name="survey_not_attached">WARNING: unattached shots</string>
@@ -371,7 +371,7 @@
     <string name="toggle_ok">Toggled DistoX calibration mode</string>
     <string name="undelete_text">Tap item to recover</string>
     <string name="visible_border">visible border</string>
-    <string name="vthreshold">vert. threshold</string>
+    <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <string name="wait_scan">Scanning: wait ...</string>
     <string name="write_failed">Failed DistoX-write</string>
     <string name="write_ok">Written calibration to DistoX</string>
@@ -401,9 +401,6 @@
     <string name="hide_ids">Shot IDs</string>
     <string name="hide_splay">Splay shots</string>
 
-    <string name="surveys">SURVEYS</string>
-    <string name="calibs">CALIBS</string>
-
     <string name="plan">PLAN</string>
     <string name="extended">PROFILE</string>
     <string name="v_section">V-SECTION</string>
@@ -420,7 +417,7 @@
     <!-- string name="ask_close_survey">Close survey?</string -->
     
 
-    <string name="button_add"       >Add       </string>
+    <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Back      </string>
     <string name="button_cancel"    >Cancel    </string>
     <string name="button_convert"   >Convert   </string>
@@ -435,13 +432,12 @@
     <string name="button_photo"   >Photo</string>
     <string name="button_sensor"  >Sensors</string>
     <!-- string name="button_direction">Azimuth/Clino</string -->
-    <string name="button_azimuth">Azimuth</string>
+    <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Sketch</string>
     <string name="button_ok"        >OK        </string>
-    <string name="button_no"        >No        </string>
     <string name="button_open"      >Open      </string>
     <string name="button_read"      >Read      </string>
-    <string name="button_regroup"   >Regroup   </string>
+    <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump     </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>
@@ -450,11 +446,10 @@
     <string name="button_save"      >Save      </string>
     <!-- string name="button_select"    >Select    </string -->
     <string name="button_store"     >Store     </string>
-    <string name="button_start"     >Start</string>
-    <string name="button_stop"      >Stop</string>
+    <!-- UNUSED string name="button_start"     >Start</string -->
+    <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Upload    </string>
     <string name="button_view"      >View      </string>
-    <string name="button_yes"       >Yes       </string>
 
     <!-- UNUSED string name="button_sharp"     >Sharp</string -->
     <!-- UNUSED string name="button_rock"      >Rock</string -->
@@ -505,8 +500,8 @@
     <string name="btn_svg">SVG</string>
     <string name="btn_zip">Zip</string>
 -->
-    <string name="btn_man">Manual</string>
-    <string name="btn_symbol">Drawing tools</string>
+    <!-- UNUSED string name="btn_man">Manual</string -->
+    <!-- UNUSED string name="btn_symbol">Drawing tools</string -->
     <string name="btn_import">Import</string>
 
 <!-- FIXME_SKETCH_3D -->    
@@ -535,10 +530,10 @@
     <!-- string name="btn_horizontal">Horizontal</string -->
 
     <!-- select buttin labels -->
-    <string name="btn_section">Section</string>
-    <string name="btn_step">Step</string>
-    <string name="btn_shot">Shot</string>
-    <string name="btn_join">Join</string>
+    <!-- UNUSED string name="btn_section">Section</string -->
+    <!-- UNUSED string name="btn_step">Step</string -->
+    <!-- UNUSED string name="btn_shot">Shot</string -->
+    <!-- UNUSED string name="btn_join">Join</string -->
 
     <!-- string name="button_redraw">Redraw</string -->
     <string name="button_erase">Erase</string>
@@ -555,7 +550,7 @@
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">This help</string>
-    <string name="help_manual">User manual</string>
+    <!-- UNUSED string name="help_manual">User manual</string -->
     <!-- string name="help_more">Show the secondary actions</string -->
     <!-- string name="help_less">Return to the primary actions</string -->
     <string name="help_measure">Measure distances</string>
@@ -620,7 +615,7 @@
 -->
     <string name="help_manual_calibration">Manual instruments calibration</string>
     <string name="help_note_plot">Edit the properties of the selected sketch item</string>
-    <string name="help_save">Save changes to survey info</string>
+    <!-- UNUSED string name="help_save">Save changes to survey info</string -->
     <string name="help_save_calib">Save changes to calibration info</string>
     <string name="help_export_survey">Export survey</string>
     <string name="help_loc">GPS location</string>
@@ -745,10 +740,10 @@
   <string name="pref_sock_type_summary">Socket create</string>
   <!-- string name="pref_device_type_title">Disto type</string -->
   <!-- string name="pref_device_type_summary">Model of the DistoX</string -->
-  <string name="pref_comm_retry_title">Connection retry</string>
-  <string name="pref_comm_retry_summary">Connection retries number</string>
-  <string name="pref_comm_retry_dialogtitle">Connection retries number</string>
-  <string name="pref_comm_retry_message">Connection retries number</string>
+  <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
+  <!-- UNUSED string name="pref_comm_retry_message">Connection retries number</string -->
   <string name="pref_conn_mode_title">Data connection type</string>
   <string name="pref_conn_mode_summary">Type of the connection with DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnect</string>

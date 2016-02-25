@@ -261,20 +261,18 @@
      <item name="2">2</item>
   </string-array>
 
-  <string-array name="exportType">
+  <!-- string-array name="exportType">
      <item name="th">Therion</item>
      <item name="dat">Compass</item>
      <item name="svx">Survex</item>
      <item name="tro">VisualTopo</item>
-     <!-- item name="tlx">TopoLinux</item -->
   </string-array>
   <string-array name="exportTypeValue">
      <item name="th">th</item>
      <item name="dat">dat</item>
      <item name="svx">svx</item>
      <item name="tro">tro</item>
-     <!-- item name="tlx">tlx</item -->
-  </string-array>
+  </string-array -->
 
   <string-array name="lineStyle">
      <item name="none">Fine</item>

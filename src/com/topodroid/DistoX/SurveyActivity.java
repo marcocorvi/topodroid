@@ -617,13 +617,13 @@ public class SurveyActivity extends Activity
   private void startConvertTdrTh2Task()
   {
     // final Activity currentActivity = this; 
-    Handler handler = new Handler(){
+    Handler convert_handler= new Handler(){
       @Override
       public void handleMessage(Message msg) {
         Toast.makeText( mApp, R.string.converted_tdr2th2, Toast.LENGTH_SHORT).show();
       }
     };
-    (new ConvertTdr2Th2Task( this, handler, mApp )).execute();
+    (new ConvertTdr2Th2Task( this, convert_handler, mApp )).execute();
   }
 
 }

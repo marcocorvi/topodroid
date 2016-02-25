@@ -34,7 +34,7 @@ import android.widget.ListView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-// import android.util.Log;
+import android.util.Log;
 
 class HelpDialog extends Dialog
                  implements OnClickListener
@@ -63,6 +63,7 @@ class HelpDialog extends Dialog
     mMenuTexts = texts2;
     mNr0 = n0;
     mNr1 = n1; // offset of menus
+    // Log.v("DistoX", "HELP buttons " + mNr0 + " menus " + mNr1 );
   }
 
   @Override
@@ -88,6 +89,7 @@ class HelpDialog extends Dialog
 
   void createAdapter()
   {
+    // Log.v("DistoX", "HELP create adapter");
     mAdapter = new HelpAdapter( mContext, this, R.layout.item, new ArrayList<HelpEntry>() );
     // int np = mIcons.length;
     for ( int i=0; i<mNr0; ++i ) {

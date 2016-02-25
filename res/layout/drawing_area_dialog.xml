@@ -53,13 +53,8 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="25dip"
+      android:gravity="right"
       >
-      <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right"
-        >
       <Button android:id="@+id/button_ok"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -68,8 +63,6 @@
         style="@style/button_default"
         android:text="@string/button_save"
       />
-
-      </LinearLayout>
 
     </LinearLayout>
 

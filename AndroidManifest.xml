@@ -24,8 +24,9 @@
           android:name=".TopoDroidApp"
           android:label="@string/app_name"
           android:screenOrientation="portrait"
-          android:debuggable="false"
+          android:allowBackup="false"
           android:icon="@drawable/icon3" >
+          <!-- android:debuggable="false" -->
 
         <activity android:name=".TopoDroidActivity"
                   android:theme="@style/Theme.FullScreen"

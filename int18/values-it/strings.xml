@@ -7,7 +7,7 @@
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
 
     <string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string>
-    <string name="version_title">Aggiornamento di versione</string>
+    <!-- UNUSED string name="version_title">Aggiornamento di versione</string -->
 
     <string name="POINT">PUNTO</string>
     <string name="LINE">LINEA</string>
@@ -62,7 +62,7 @@
     <string name="calib_write_coeffs">Scrittura coefficienti in corso</string>
     <string name="calib_validation">Validatione di %1$s vs %2$s</string>
     <string name="connect_failed">Comunicazione DistoX fallita</string>
-    <string name="data"> dati</string>
+    <!-- UNUSED string name="data"> dati</string -->
     <string name="using">Usando %1$s %2$s</string>
     <string name="calib_error">Errore %1$f gradi</string>
     <string name="calib_stddev">Errore stddev: %1$.4f gradi</string>
@@ -96,13 +96,13 @@
     <string name="nickname">Nome</string>
 
     <string name="comment">commento</string>
-    <!-- string name="flag">Flag</string -->
-    <!-- OK string name="backshot">backshot</string -->
-    <string name="duplicate">duplicato</string>
-    <!-- string name="regular">regolare</string -->
-    <string name="surface">superficie</string>
-    <!-- string name="extend">Extend</string -->
-    <string name="extend_ignore">Niente</string>
+    <!-- UNUSED string name="flag">Flag</string -->
+    <!-- UNUSED string name="backshot">backshot</string -->
+    <!-- UNUSED string name="duplicate">duplicato</string -->
+    <!-- UNUSED string name="regular">regolare</string -->
+    <!-- UNUSED string name="surface">superficie</string -->
+    <!-- UNUSED string name="extend">Extend</string -->
+    <!-- UNUSED string name="extend_ignore">Niente</string -->
     <string name="extend_left">Sx</string>
     <string name="extend_right">Dx</string>
     <string name="extend_vert">Vert.</string>
@@ -110,12 +110,12 @@
     <string name="splay_at_to">LRUD al caposaldo di arrivo</string>
 
     <string name="few_data">Dati insufficienti</string>
-    <string name="few_plots">Troppo pochi disegni</string>
+    <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
 
-    <!-- DONE string name="calib_import_title">Importa calibrazione</string -->
+    <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>
-    <string name="import_wait">Importazione file... attendi...</string>
+    <!-- UNUSED string name="import_wait">Importazione file... attendi...</string -->
     <string name="import_already">Rilievo già presente</string>
     <string name="import_none">Nessun file da importare</string>
     <string name="import_failed">Importazione file fallita</string>
@@ -123,7 +123,7 @@
     <string name="import_zip_ok">ZIP importato con successo</string>
     <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi...</string>
     <!-- UNUSED string name="sketch_loading">Caricamento disegno ... attendi ...</string -->
-    <string name="sketch_saving">Salvataggio disegno ... attendi ...</string>
+    <!-- UNUSED string name="sketch_saving">Salvataggio disegno ... attendi ...</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
 
     <string name="head_tail">Memoria: </string>
@@ -134,7 +134,7 @@
     <string name="illegal_data_value">Dati illegali</string>
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
-    <string name="altitude">Alt. </string>
+    <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">H ellissoide </string>
     <string name="h_geoid">H geoide </string>
     <string name="latitude">Lat. </string>
@@ -164,7 +164,7 @@
     <string name="error_long_required">Longitudine mancante</string>
     <string name="error_name_required">Nome mancante</string>
     <string name="error_start_required">Caposaldo di riferimento mancante</string>
-    <string name="error_station_already_fixed">Caposaldo già con coordinate</string>
+    <!-- UNUSED string name="error_station_already_fixed">Caposaldo già con coordinate</string -->
     <string name="error_station_required">Caposaldo mancante</string>
     <string name="error_station_non_existing">Caposaldo inesistente</string>
     <string name="error_sensor_required">Sensore mancante</string>
@@ -177,12 +177,12 @@
     <string name="group_reset">Cancella i gruppi</string>
 
     <string name="scale">scala</string>
-    <string name="reversed">reversa</string>
+    <!-- UNUSED string name="reversed">reversa</string -->
     <string name="options">opzioni</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
     <string name="in">in</string>
-    <string name="none">none</string>
+    <!-- UNUSED string name="none">none</string -->
     <string name="barrier_add">Interruzione restituzione?</string>
     <string name="barrier_del">Continuazione restituzione?</string>
     <string name="hidden_add">Nascondi la linea mediana</string>
@@ -195,6 +195,7 @@
     <string name="bad_line">Tipo linea errato</string>
     <string name="bad_point">Tipo punto errato</string>
 
+    <!-- TODO string name="no_bt">No Bluetooth</string -->
     <string name="no_calib">Nessuna calibrazione</string>
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
     <string name="no_capture_app">Nessuna app per foto</string>
@@ -203,15 +204,15 @@
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_gms">Calibrazione senza data.</string>
-    <!-- DONE string name="no_geo_station">Failed: nessun caposaldo geolocalizzato</string -->
+    <!-- TODO string name="no_geo_station">Failed: nessun caposaldo geolocalizzato</string -->
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
-    <!-- DONE string name="no_location_data">Nessun dato di posizione</string -->
+    <string name="no_location_data">Nessun dato di posizione</string>
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
     <string name="no_photos">Rilievo senza foto</string>
     <string name="no_plots">Rilievo senza disegni</string>
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
-    <string name="no_shots">Rilievo senza dati</string>
+    <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Rilievo non selezionato</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol non installato</string -->
     <string name="no_thmanager">ThManager non installato</string>
@@ -222,9 +223,9 @@
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">INFO</string>
-    <!-- DONE string name="menu_area">AREA</string -->
+    <!-- OK string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNETTI</string>
-    <string name="menu_calib">CALIBRAZIONI</string>
+    <!-- UNUSED string name="menu_calib">CALIBRAZIONI</string -->
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <string name="menu_display">DISPLAY</string>
@@ -240,7 +241,7 @@
     <!-- string name="menu_manual">MANUALE</string -->
     <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
-    <!-- OK string name="menu_overview">OVERVIEW</string -->
+    <!-- TODO string name="menu_overview">OVERVIEW</string -->
     <string name="menu_pair">ASSOCIA</string>
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
@@ -261,25 +262,28 @@
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
 
+    <!-- TODO string name="connected_none">Not connected</string -->
+    <!-- TODO string name="connected_already">Already connected</string -->
+
     <string name="not_available">Bluetooth non disponibile</string>
     <!-- string name="not_connected">Non connesso</string -->
     <string name="not_enabled">BT non attivo</string>
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
-    <!-- OK english string name="null_bitmap">null bitmap</string -->
+    <!-- TODO string name="null_bitmap">null bitmap</string -->
     <string name="photo">foto</string>
     <string name="photo_comment_prompt">Scrivi il commento</string>
-    <string name="photo_name">caposaldo/nome</string>
-    <string name="photo_photo">foto</string>
-    <string name="photo_sensor">sensore</string>
-    <string name="photo_external">misurazione</string>
+    <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
+    <!-- UNUSED string name="photo_photo">foto</string -->
+    <!-- UNUSED string name="photo_sensor">sensore</string -->
+    <!-- UNUSED string name="photo_external">misurazione</string -->
     <!-- UNUSED string name="photo_sensor_prompt">Seleziona foto o sensore</string -->
-    <string name="photo_shot">aggiungi battuta</string>
-    <string name="photo_survey">dividi rilievo</string>
+    <!-- UNUSED string name="photo_shot">aggiungi battuta</string -->
+    <!-- UNUSED string name="photo_survey">dividi rilievo</string -->
     <string name="picture_no_station">Caposaldo o nome mancante</string>
     <string name="plot_delete">Elimina disegno ?</string>
     <string name="item_delete">Cancellare elemento %1$s ?</string>
     <string name="plot_duplicate_name">Nome disegno già presente</string>
-    <string name="plot_name">Nome del disegno</string>
+    <!-- UNUSED string name="plot_name">Nome del disegno</string -->
     <string name="plot_new">Nuovo disegno</string>
     <string name="plot_not_found">Disegno non trovato</string>
     <!-- string name="plot_null_name">Nome del disegno mancante</string -->
@@ -289,20 +293,20 @@
     <!-- string name="plot_view">Caposaldo puntato</string -->
     <!-- UNUSED string name="read_">Letti </string -->
     <string name="read_data">Letti %1$d dati</string>
-    <!-- DONE string name="read_calib_data">Letti %1$d dati (%2$d pacchetti)</string -->
+    <string name="read_calib_data">Letti %1$d dati (%2$d pacchetti)</string>
     <string name="read_fail_with_code">Lettura fallita. Codice </string>
     <string name="read_failed">Lettura dati DistoX fallita</string>
     <!-- UNUSED string name="reading_file_failed">Lettura file fallita</string -->
     <string name="saved_file_">Salvato file\ </string>
     <string name="saving_">Salvando </string>
     <string name="saving_file_failed">Salvataggio file fallito</string>
-    <string name="scrap_name">nome del disegno</string>
+    <!-- UNUSED string name="scrap_name">nome del disegno</string -->
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
     <string name="too_many_legs_xsection">Troppe battute per una Cross-section</string>
-    <!-- DONE string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
-    <!-- DONE string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
-    <!-- DONE string name="section_area">Area della sezione: %1$.1f</string -->
+    <string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string>
+    <string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string>
+    <string name="section_area">Area della sezione: %1$.1f</string>
 
     <string name="sensor">sensore</string>
     <!-- string name="sensor_accelerometer">accelerometro</string -->
@@ -324,9 +328,9 @@
     <string name="shot_delete">Cancellare la misura?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
-    <string name="shot_leg">battuta ripetuta</string>
-    <string name="shot_renumber">rinumera</string>
-    <string name="shot_all_splay">gruppo splay</string>
+    <!-- UNUSED string name="shot_leg">battuta ripetuta</string -->
+    <!-- UNUSED string name="shot_renumber">rinumera</string -->
+    <!-- UNUSED string name="shot_all_splay">gruppo splay</string -->
     <!-- string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
     <string name="shot_reverse">inverso</string>
@@ -351,7 +355,7 @@
     <!-- OK string name="station_next">prossimo caposaldo</string -->
     <string name="station_viewed">caposaldo puntato</string>
     <string name="survey_exists">Rilievo già presente</string>
-    <string name="survey_date">aaaa.mm.gg</string>
+    <!-- UNUSED string name="survey_date">aaaa.mm.gg</string -->
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_split">Dividi rilievo?</string>
     <string name ="survey_not_attached">ATTENZIONE: dati scollegati</string>
@@ -365,7 +369,7 @@
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
     <string name="visible_border">bordo visibile</string>
-    <string name="vthreshold">soglia vert.</string>
+    <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <string name="wait_scan">Scanning: attendi ...</string>
     <string name="write_failed">Scrittura su DistoX fallita</string>
     <string name="write_ok">Calibrazione scritta sul DistoX</string>
@@ -395,9 +399,6 @@
     <string name="hide_ids">ID misure</string>
     <string name="hide_splay">Misure laterali</string>
 
-    <string name="surveys">RILIEVI</string>
-    <string name="calibs">CALIBRAZ.</string>
-
     <string name="plan">PIANTA</string>
     <string name="extended">SEZIONE LONG.</string>
     <string name="v_section">SEZIONE VERT.</string>
@@ -413,7 +414,7 @@
      <string name="ask_reset">Resettare memoria DistoX?</string>
      <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
 
-    <string name="button_add"       >Aggiungi  </string>
+    <!-- UNUSED string name="button_add"       >Aggiungi  </string -->
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
     <string name="button_convert"   >Converti  </string>
@@ -431,10 +432,9 @@
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
     <string name="button_ok"        >OK        </string>
-    <string name="button_no"        >No        </string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
-    <string name="button_regroup"   >Raggruppare   </string>
+    <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <!-- string name="button_dump"      >Scarica   </string -->
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
@@ -447,7 +447,6 @@
     <!-- OK string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
     <!-- DONE string name="button_view"      >Visualizza      </string -->
-    <string name="button_yes"       >Sí        </string>
 
     <!-- UNUSED string name="button_sharp"     >Spigolosa</string -->
     <!-- UNUSED string name="button_rock"      >Masso</string -->
@@ -481,8 +480,8 @@
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_man">Manuale</string>
-    <string name="btn_symbol">Strumenti grafici</string>
+    <!-- UNUSED string name="btn_man">Manuale</string -->
+    <!-- UNUSED string name="btn_symbol">Strumenti grafici</string -->
     <string name="btn_import">Importa</string>
 
     <!-- TODO string name="length">Length [m]</string -->
@@ -490,7 +489,7 @@
     <!-- TODO string name="clino">Clino [deg]</string -->
 
     <string name="help_help">Questo aiuto</string>
-    <string name="help_manual">Manuale online</string>
+    <!-- UNUSED string name="help_manual">Manuale online</string -->
     <!-- OK string name="help_more">Passa ai tasti secondari</string -->
     <!-- OK string name="help_less">Ritorna ai tasti primari</string -->
     <string name="help_measure">Misurare le distanze</string>
@@ -554,7 +553,7 @@
 -->
     <string name="help_manual_calibration">Strumenti di calibrazione manuale</string>
     <string name="help_note_plot">Edita le propertà dell\'oggetto</string>
-    <string name="help_save">Salva le modifiche al rilievo/calibr.</string>
+    <!-- UNUSED string name="help_save">Salva le modifiche al rilievo/calibr.</string -->
     <string name="help_export_survey">Esporta rilievo</string>
     <string name="help_loc">Localizzazione GPS</string>
     <string name="help_delete_survey">Elimina rilievo</string>
@@ -666,10 +665,10 @@
   <string name="pref_sock_type_summary">Crea socket</string>
   <!-- string name="pref_device_type_title">Tipo DistoX</string -->
   <!-- string name="pref_device_type_summary">Modello DistoX</string -->
-  <string name="pref_comm_retry_title">Tentativi connesione</string>
-  <string name="pref_comm_retry_summary">Numero tentativi di connessione</string>
-  <string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string>
-  <string name="pref_comm_retry_message">Numero tentativi di connessione</string>
+  <!-- UNUSED string name="pref_comm_retry_title">Tentativi connesione</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
+  <!-- UNUSED string name="pref_comm_retry_message">Numero tentativi di connessione</string -->
   <string name="pref_conn_mode_title">Tipo connessione</string>
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>

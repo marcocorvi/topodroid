@@ -54,10 +54,10 @@
      <item name="continuous">Постоянный</item>
   </string-array>
 
-  <string-array name="altitudeType">
+  <!-- UNUSED string-array name="altitudeType">
     <item name="wgs84">WGS84 элипсоид</item>
     <item name="asl">Прямоугольный</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="sockType">
      <item name="default">По умолчанию</item>
@@ -79,11 +79,11 @@
      <item name="grid">Сетка</item>
   </string-array>
 
-  <string-array name="deviceType">
+  <!-- UNUSED string-array name="deviceType">
      <item name="none">Без типа</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="deviceBT">
      <item name="0">Выключен</item>

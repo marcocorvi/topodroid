@@ -8,7 +8,7 @@
     <string name="double_back">Clic RETOUR une nouvelle fois pour sortir</string>
 
     <string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez vous réinstaller les symboles de dessins ?</string>
-    <string name="version_title">Mise à jour de version</string>
+    <!-- UNUSED string name="version_title">Mise à jour de version</string -->
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
@@ -66,7 +66,7 @@
     <string name="calib_write_coeffs">Ecriture des coéficients de Calibration ...</string>
     <string name="calib_validation">Validation de %1$s vs %2$s</string >
     <string name="connect_failed">Echec de la connexion</string>
-    <string name="data"> données</string>
+    <!-- UNUSED string name="data"> données</string -->
     <string name="using">Utilisation de %1$s %2$s</string>
     <string name="calib_error">Erreur moyenne : %1$f degrés</string>
     <string name="calib_stddev">Erreur stddev: %1$.4f degrees</string>
@@ -100,13 +100,13 @@
     <string name="nickname">Surnom ou pseudo</string>
 
     <string name="comment">commentaires</string>
-    <string name="flag">Point Drapeau</string>
-    <string name="backshot">Visée Arrière</string>
-    <string name="duplicate">Double</string>
+    <!-- UNUSED string name="flag">Point Drapeau</string -->
+    <!-- UNUSED string name="backshot">Visée Arrière</string -->
+    <!-- UNUSED string name="duplicate">Double</string -->
     <!-- UNUSED string name="regular">régulier</string -->
-    <string name="surface">surface</string>
-    <string name="extend">Etendre</string>
-    <string name="extend_ignore">Aucun</string>
+    <!-- UNUSED string name="surface">surface</string -->
+    <!-- UNUSED string name="extend">Etendre</string -->
+    <!-- UNUSED string name="extend_ignore">Aucun</string -->
     <string name="extend_left">Gauche</string>
     <string name="extend_right">Droite</string>
     <string name="extend_vert">Vert.</string>
@@ -114,12 +114,12 @@
     <string name="splay_at_to">LRUD à la station Vers</string>
 
     <string name="few_data">Pas assez de données</string>
-    <string name="few_plots">Pas assez de Points</string>
+    <!-- UNUSED string name="few_plots">Pas assez de Points</string -->
     <string name="few_calibs">Pas assez de Calibrations</string>
 
     <!-- TODO string name="calib_import_title">Calibration import</string -->
     <string name="import_title">Import fichier</string>
-    <string name="import_wait">Importation de fichier... Patientez...</string>
+    <!-- UNUSED string name="import_wait">Importation de fichier... Patientez...</string -->
     <string name="import_already">Relevé déjà importé</string>
     <string name="import_none">Aucun fichier à importer</string>
     <string name="import_failed">L\'import du fichier a échoué</string>
@@ -127,7 +127,7 @@
     <string name="import_zip_ok">Fichier zip importé avec succes</string>
     <string name="import_zip_wait">L\'importation du fichier zip peut etre longue ... Patientez...</string>
     <!-- UNUSED string name="sketch_loading">Importation de dessin ... Patientez ...</string -->
-    <string name="sketch_saving">Exportation de dessin ... Patientez ...</string>
+    <!-- UNUSED string name="sketch_saving">Exportation de dessin ... Patientez ...</string -->
     <string name="MT_points_none">No MobileTopographer point</string>
  
 
@@ -139,7 +139,7 @@
     <string name="illegal_data_value">Valeur de donnée incorrecte</string>
     <string name="label_title">ETIQUETTE</string>
     <string name="label_text">Saisissez le texte</string>
-    <string name="altitude">Alt. </string>
+    <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">H ellip. </string>
     <string name="h_geoid">H geoid </string>
     <string name="latitude">Lat. </string>
@@ -167,7 +167,7 @@
     <string name="error_long_required">Longitude nécessaire</string>
     <string name="error_name_required">Nom nécessaire</string>
     <string name="error_start_required">Station de référence nécessaire</string>
-    <string name="error_station_already_fixed">cette Station a deja des coordonées</string>
+    <!-- UNUSED string name="error_station_already_fixed">cette Station a deja des coordonées</string -->
     <string name="error_station_required">Station nécessaire</string>
     <string name="error_station_non_existing">Cette station n\'existe pas</string>
     <string name="error_sensor_required">Capteur nécessaire</string>
@@ -180,12 +180,12 @@
     <string name="group_reset">Remise a zero des groupes</string>
 
     <string name="scale">échelle</string>
-    <string name="reversed">inverser</string>
+    <!-- UNUSED string name="reversed">inverser</string -->
     <string name="options">options</string>
     <string name="outline">contours</string>
     <string name="out">externe</string>
     <string name="in">interne</string>
-    <string name="none">aucun</string>
+    <!-- UNUSED string name="none">aucun</string -->
     <string name="barrier_add">Cacher les visées suivantes</string>
     <string name="barrier_del">Afficher les visées suivantes</string>
     <string name="hidden_add">Cacher les visées precedentes</string>
@@ -215,7 +215,7 @@
     <string name="no_plots">Le relevé ne contient pas de croquis.\nUtilisez le bouton Ajouter pour en créer un.</string>
     <string name="no_proj4">*Proj$* non installé</string>
     <string name="no_sensors">Le relevé n\'a aucune mesure</string>
-    <string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string>
+    <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
     <string name="no_survey">Aucun relevé sélectionné.</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol non installé</string -->
     <string name="no_thmanager">ThManager non installé</string>
@@ -228,7 +228,7 @@
     <string name="menu_about">A PROPOS</string>
     <!-- TODO string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNECTER</string>
-    <string name="menu_calib">CALIBRATION</string>
+    <!-- UNUSED string name="menu_calib">CALIBRATION</string -->
     <!-- string name="menu_attached">Connecté</string -->
     <!-- string name="menu_ready">Prêt</string -->
     <string name="menu_delete">SUPPRIMER</string>
@@ -277,18 +277,18 @@
     <string name="null_bitmap">creation image impossible</string>
     <string name="photo">photo</string>
     <string name="photo_comment_prompt">Saisissez un commentaire pour la photo</string>
-    <string name="photo_name">station/nom</string>
-    <string name="photo_photo">photo</string>
-    <string name="photo_sensor">capteur</string>
-    <string name="photo_external">mesure</string>
+    <!-- UNUSED string name="photo_name">station/nom</string -->
+    <!-- UNUSED string name="photo_photo">photo</string -->
+    <!-- UNUSED string name="photo_sensor">capteur</string -->
+    <!-- UNUSED string name="photo_external">mesure</string -->
     <!-- UNUSED string name="photo_sensor_prompt">Sélectionnez photo ou capteur</string -->
-    <string name="photo_shot">ajouter une visée</string>
-    <string name="photo_survey">Découper le relevé</string>
+    <!-- UNUSED string name="photo_shot">ajouter une visée</string -->
+    <!-- UNUSED string name="photo_survey">Découper le relevé</string -->
     <string name="picture_no_station">Nom station requis</string>
     <string name="plot_delete">Supprimer le croquis ?</string>
     <string name="item_delete">Supprimer object %1$s ?</string>
     <string name="plot_duplicate_name">dupliquer le nom du relevé</string>
-    <string name="plot_name">Nom du croquis</string>
+    <!-- UNUSED string name="plot_name">Nom du croquis</string -->
     <string name="plot_new">Nouveau croquis</string>
     <string name="plot_not_found">Dessin introuvable</string>
     <!-- UNUSED string name="plot_null_name">Nom relevé manquant</string -->
@@ -305,7 +305,7 @@
     <string name="saved_file_">Fichier enregistré\ </string>
     <string name="saving_">Enregistrement </string>
     <string name="saving_file_failed">Echec de l\'enregistrement du fichier</string>
-    <string name="scrap_name">Nom du croquis</string>
+    <!-- UNUSED string name="scrap_name">Nom du croquis</string -->
     <string name="splay">*splay*</string>
     <string name="too_many_leg_intersection">La ligne de section croise plus d\'une ligne de cheminement.</string>
     <string name="too_many_legs_xsection">Trop de visées pour X-section</string>
@@ -333,9 +333,9 @@
     <string name="shot_delete">Supprimer visée ?</string >
     <string name="shot_from">depuis</string>
     <string name="shot_info">Saisir les infos de visée</string>
-    <string name="shot_leg">Visée répétée</string>
-    <string name="shot_renumber">renumeroter</string>
-    <string name="shot_all_splay">groupe de visée laterales</string >
+    <!-- UNUSED string name="shot_leg">Visée répétée</string -->
+    <!-- UNUSED string name="shot_renumber">renumeroter</string -->
+    <!-- UNUSED string name="shot_all_splay">groupe de visée laterales</string  -->
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">note</string>
     <string name="shot_reverse">inverse</string>
@@ -358,7 +358,7 @@
     <!-- UNUSED string name="station_next">next station</string -->
     <string name="station_viewed">station consultée</string>
     <string name="survey_exists">Ce nom de relevé existe deja</string>
-    <string name="survey_date">aaaa/mm/jj</string>
+    <!-- UNUSED string name="survey_date">aaaa/mm/jj</string -->
     <string name="survey_delete">Supprimer le relevé?</string>
     <string name="survey_split">Diviser le relevé?</string>
     <string name ="survey_not_attached">ATTENTION: visées non rattachées</string>
@@ -372,7 +372,7 @@
     <string name="toggle_ok">DistoX en mode étalonnage</string>
     <string name="undelete_text">Sélectionner un élément pour le récupérer</string>
     <string name="visible_border">Bordure visible</string>
-    <string name="vthreshold">Seuil vertical</string>
+    <!-- UNUSED string name="vthreshold">Seuil vertical</string -->
     <string name="wait_scan">Recherche : patientez...</string>
     <string name="write_failed">Echec de l\'écriture vers le DistoX</string>
     <string name="write_ok">Etalonnage écrit dans le DistoX</string>
@@ -402,9 +402,6 @@
     <string name="hide_ids">ID de visées</string>
     <string name="hide_splay">Visées latérales</string>
 
-    <string name="surveys">RELEVES</string>
-    <string name="calibs">ETALONNAGES</string>
-
     <string name="plan">PLAN</string>
     <string name="extended">COUPE</string>
     <string name="v_section">SECTION V</string>
@@ -421,7 +418,7 @@
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
 
 
-    <string name="button_add"       >Ajouter       </string>
+    <!-- UNUSED string name="button_add"       >Ajouter       </string -->
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
     <string name="button_convert"   >Convertir   </string>
@@ -436,13 +433,12 @@
     <string name="button_photo"   >Photos</string>
     <string name="button_sensor"  >Capteurs</string>
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
-    <string name="button_azimuth">Azimuth</string>
+    <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
     <string name="button_ok"        >OK        </string>
-    <string name="button_no"        >Non        </string>
     <string name="button_open"      >Ouvrir    </string>
     <string name="button_read"      >Lecture      </string>
-    <string name="button_regroup"   >Regrouper   </string>
+    <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Dump     </string>
     <string name="button_reset"     >Reset      </string>
     <string name="button_left"      >GAUCHE</string>
@@ -451,11 +447,10 @@
     <string name="button_save"      >ENREGISTRER      </string>
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
     <string name="button_store"     >STOCKER     </string>
-    <string name="button_start"     >DEMARRER</string>
-    <string name="button_stop"      >ARRETER</string>
+    <!-- UNUSED string name="button_start"     >DEMARRER</string -->
+    <!-- UNUSED string name="button_stop"      >ARRETER</string -->
     <string name="button_upload"    >UPLOAD   </string>
     <!-- TODO string name="button_view"      >View      </string -->
-    <string name="button_yes"       >OUI       </string>
 
     <!-- UNUSED string name="button_sharp"     >Sharp</string -->
     <!-- UNUSED string name="button_rock"      >Rock</string -->
@@ -505,8 +500,8 @@
     <string name="btn_svg">SVG</string>
     <string name="btn_zip">Zip</string>
 -->
-    <string name="btn_man">Manuel</string>
-    <string name="btn_symbol">Outils de dessin</string>
+    <!-- UNUSED string name="btn_man">Manuel</string -->
+    <!-- UNUSED string name="btn_symbol">Outils de dessin</string -->
     <string name="btn_import">Importer</string>
 
 
@@ -536,10 +531,10 @@
     <!-- string name="btn_horizontal">Horizontal</string -->
 
     <!-- select buttin labels -->
-    <string name="btn_section">Section</string>
-    <string name="btn_step">Pas</string>
-    <string name="btn_shot">Point</string>
-    <string name="btn_join">Joindre</string>
+    <!-- UNUSED string name="btn_section">Section</string -->
+    <!-- UNUSED string name="btn_step">Pas</string -->
+    <!-- UNUSED string name="btn_shot">Point</string -->
+    <!-- UNUSED string name="btn_join">Joindre</string -->
 
     <!-- string name="button_redraw">Redraw</string -->
     <string name="button_erase">Effacer</string>
@@ -556,7 +551,7 @@
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">Affiche l\'aide</string>
-    <string name="help_manual">Manuel Utilisateur</string>
+    <!-- UNUSED string name="help_manual">Manuel Utilisateur</string -->
     <!-- string name="help_more">Affiche des options supplémentaires</string -->
     <!-- string name="help_less">Retour aux options précédentes</string -->
     <string name="help_measure">Mesurer les distances</string>
@@ -621,7 +616,7 @@
 -->
     <string name="help_manual_calibration">Manuel de calibration instrument</string>
     <string name="help_note_plot">Edite les propriétés de l\'élément dessiné</string>
-    <string name="help_save">Enregistre les modifications d\'infosdu relevé</string>
+    <!-- UNUSED string name="help_save">Enregistre les modifications d\'infosdu relevé</string -->
     <string name="help_save_calib">Enregistre les modifications d\'infos de Calibration</string>
     <string name="help_export_survey">Exporte le relevé</string>
     <string name="help_loc">Localisation GPS </string>
@@ -746,10 +741,10 @@
   <string name="pref_sock_type_summary">Créer socket</string>
   <!-- UNUSED string name="pref_device_type_title">Type de Disto</string -->
   <!-- UNUSED string name="pref_device_type_summary">Modele de DistoX</string -->
-  <string name="pref_comm_retry_title">Tentative de communication</string>
-  <string name="pref_comm_retry_summary">Nombre max. de tentatives</string>
-  <string name="pref_comm_retry_dialogtitle">Nombre max. de tentatives</string>
-  <string name="pref_comm_retry_message">Nombre max. de tentatives</string>
+  <!-- UNUSED string name="pref_comm_retry_title">Tentative de communication</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">Nombre max. de tentatives</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Nombre max. de tentatives</string -->
+  <!-- UNUSED string name="pref_comm_retry_message">Nombre max. de tentatives</string -->
   <string name="pref_conn_mode_title">Mode de connexion</string>
   <string name="pref_conn_mode_summary">Comment connecter le DistoX</string>
   <string name="pref_auto_reconnect_title">Reconnexion automatique</string>

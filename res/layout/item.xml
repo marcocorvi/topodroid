@@ -3,7 +3,6 @@
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   android:orientation="horizontal"
-  android:background="#ff000000"
   >
   <CheckBox 
     android:id="@+id/item_radio"

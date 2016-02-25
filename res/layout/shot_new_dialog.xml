@@ -258,23 +258,9 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_gravity="right"
       android:layout_marginTop="25dip"
+      android:layout_gravity="right"
       >
-        <!-- Button android:id="@+id/button_back_shot_name"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:background="@drawable/button"
-          style="@style/button_default"
-          android:text="@string/button_cancel"
-          / -->
-   		
-      <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right"
-        >
 
       <Button android:id="@+id/button_ok_shot_name"
         android:layout_width="wrap_content" 
@@ -294,9 +280,6 @@
         style="@style/button_default"
         android:text="@string/button_save"
       />
-   		
-      </LinearLayout>
-   		
   </LinearLayout>
    					  
 

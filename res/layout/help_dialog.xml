@@ -3,15 +3,13 @@
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:orientation="vertical"
-     android:background="#ff000000"
      >
 
     <ListView android:id="@+id/help_list"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="fill_parent"
         android:stackFromBottom="false"
         android:transcriptMode="alwaysScroll"
-        android:background="#ff000000"
     />  
 
     <Button android:id="@+id/button_manual"
