@@ -61,10 +61,10 @@
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
     <string name="calib_saved">Сохранить калибровку</string>
     <string name="calib_updated">Обновить калибровку</string>
-    <string name="calib_compute_groups">Вычисление групп данных калибровки ...</string>
-    <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки ...</string>
-    <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки ...</string -->
-    <string name="calib_write_coeffs">Запись коэфицентов калибровки ...</string>
+    <string name="calib_compute_groups">Вычисление групп данных калибровки &#8230;</string>
+    <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки &#8230;</string>
+    <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки &#8230;</string -->
+    <string name="calib_write_coeffs">Запись коэфицентов калибровки &#8230;</string>
     <string name="calib_validation">Проверить %1$s относительно %2$s</string>
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
@@ -120,15 +120,15 @@
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
-    <!-- UNUSED string name="import_wait">Импорт файла... обождите...</string -->
+    <!-- UNUSED string name="import_wait">Импорт файла&#8230; обождите&#8230;</string -->
     <string name="import_already">съёмка уже импортирована</string>
     <string name="import_none">Отсутствует файл для импортирта</string>
     <string name="import_failed">Не удалось импортироапть файл</string>
     <string name="file_not_found">Файл не обнаружен</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
-    <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите ...</string>
-    <!-- UNUSED string name="sketch_loading">Загрузка абриса... обождите...</string -->
-    <!-- UNUSED string name="sketch_saving">Сохранение абриса ... обождите...</string -->
+    <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string>
+    <!-- UNUSED string name="sketch_loading">Загрузка абриса&#8230; обождите&#8230;</string -->
+    <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Нет точки MobileTopographer</string>
  
 
@@ -375,7 +375,7 @@
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
     <string name="visible_border">видимая граница</string>
     <!-- UNUSED string name="vthreshold">верт. порог</string -->
-    <string name="wait_scan">Сканирование: ждите ...</string>
+    <string name="wait_scan">Сканирование: ждите &#8230;</string>
     <string name="write_failed">Ошибка записи DistoX</string>
     <string name="write_ok">Запись калибровки в DistoX</string>
     <string name="zip_saved">Сохранено </string>
@@ -642,7 +642,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
-    <string name="title_discover">Поиск устройств DistoX ... подождите</string>
+    <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
