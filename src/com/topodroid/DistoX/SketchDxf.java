@@ -19,6 +19,8 @@ import java.util.Locale;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.util.SparseArray;
+
 class SketchDxf
 {
 
@@ -137,7 +139,7 @@ class SketchDxf
       }
     
       for ( SketchSurface sf : model.mSurfaces ) {
-        HashMap< Integer, SketchVertex > vts = sf.mVertices;
+        SparseArray< SketchVertex > vts = sf.mVertices;
         // for ( SketchBorder brd : sf.borders ) {
         //   for ( SketchSide s : brd.sides ) {
         //     SketchVertex v1 = vts.get( s.v1 );
@@ -161,7 +163,7 @@ class SketchDxf
       }
 
       for ( SketchSurface sf : model.mJoins ) {
-        HashMap< Integer, SketchVertex > vts = sf.mVertices;
+        SparseArray< SketchVertex > vts = sf.mVertices;
         // for ( SketchBorder brd : sf.borders ) {
         //   for ( SketchSide s : brd.sides ) {
         //     SketchVertex v1 = vts.get( s.v1 );

@@ -31,6 +31,17 @@ public class MyCheckBox extends CompoundButton
   int mSize;
   boolean mState;
 
+  public MyCheckBox( Context context )
+  {
+    super( context );
+    mContext = context;
+    mIdOn  = 0;
+    mIdOff = 0;
+    mSize  = 0;
+    mState = false ; // state;
+    init();
+  }
+
   public MyCheckBox( Context context, int size, int id_on, int id_off )
   {
     super( context );

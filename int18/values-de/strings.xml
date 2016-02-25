@@ -528,6 +528,10 @@
     <!-- TODO string name="length">Length [m]</string -->
     <!-- TODO string name="azimuth">Azimuth [deg]</string -->
     <!-- TODO string name="clino">Clino [deg]</string -->
+    <!-- TODO string name="orientation">orientation</string -->
+    <!-- TODO string name="contents">contents</string -->
+    <!-- TODO string name="error_distribution">error distribution</string -->
+    <!-- TODO string name="angle_distribution">angular distribution</string -->
 
     <!-- string name="btn_head">head</string -->
     <!-- string name="btn_stretch">Stretch</string -->

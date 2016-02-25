@@ -275,7 +275,7 @@
 
     <!-- string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Cannot create image [OOM error]</string>
-    <!-- UNUSED string name="photo">photo</string -->
+    <string name="photo">photo</string>
     <string name="photo_comment_prompt">Enter the photo comment</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
     <!-- UNUSED string name="photo_photo">photo</string -->
@@ -521,6 +521,11 @@
     <string name="length">Length [m]</string>
     <string name="azimuth">Azimuth [deg]</string>
     <string name="clino">Clino [deg]</string>
+
+    <string name="orientation">orientation</string>
+    <string name="contents">contents</string>
+    <string name="error_distribution">error distribution</string>
+    <string name="angle_distribution">angular distribution</string>
 
     <!-- string name="btn_head">head</string -->
     <!-- string name="btn_stretch">Stretch</string -->

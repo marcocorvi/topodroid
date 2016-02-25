@@ -503,6 +503,10 @@
     <!-- TODO string name="length">Length [m]</string -->
     <!-- TODO string name="azimuth">Azimuth [deg]</string -->
     <!-- TODO string name="clino">Clino [deg]</string -->
+    <!-- TODO string name="orientation">orientation</string -->
+    <!-- TODO string name="contents">contents</string -->
+    <!-- TODO string name="error_distribution">error distribution</string -->
+    <!-- TODO string name="angle_distribution">angular distribution</string -->
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Растянуть</string -->
@@ -512,7 +516,7 @@
     <!-- UNUSED string name="btn_vertical">Вертикальный</string -->
     <!-- UNUSED string name="btn_horizontal">Горизонтальный</string -->
 
-    <!-- select buttin labels -->
+    <!-- select button labels -->
     <!-- UNUSED string name="btn_section">Сечение</string -->
     <!-- UNUSED string name="btn_step">Шаг</string -->
     <!-- UNUSED string name="btn_shot">Пикет</string -->

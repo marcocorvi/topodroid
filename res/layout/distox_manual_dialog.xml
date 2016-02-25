@@ -18,6 +18,7 @@
         android:src="@drawable/ic_mode"
         android:layout_gravity="right"
         android:gravity="right"
+        android:contentDescription="@string/contents"
       />
       <ListView android:id="@+id/content"
         android:layout_width="240dp"

@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dip"
+        android:contentDescription="@string/angle_distribution"
         />
 
     <TextView android:id="@+id/coverage_value"

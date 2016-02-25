@@ -20,6 +20,7 @@ import java.util.Random;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Comparator;
+import android.util.SparseArray;
 
 import android.graphics.Paint;
 import android.graphics.Canvas;
@@ -31,10 +32,11 @@ import android.util.Log;
 
 class SketchSurface extends SketchShot
 {
-  HashMap< Integer, SketchVertex > mVertices;
+  SparseArray< SketchVertex > mVertices;
+  SparseArray< PointF > mCorners;   // corners of forward surface: index-of-vertex, canvas-point
+
   ArrayList< SketchSide > mSides;
   ArrayList< SketchTriangle > mTriangles;
-  HashMap< Integer, PointF > mCorners;   // corners of forward surface: index-of-vertex, canvas-point
   int maxkey_vtx;
   // int maxkey_sds;
   private SketchVertex mSelectedVertex;
@@ -62,9 +64,9 @@ class SketchSurface extends SketchShot
   SketchSurface( String s1, String s2, SketchPainter painter )
   {
     super( s1, s2 );
-    mVertices   = new HashMap< Integer, SketchVertex >();
+    mVertices   = new SparseArray< SketchVertex >();
+    mCorners    = new SparseArray< PointF >();
     mTriangles  = new ArrayList< SketchTriangle >();
-    mCorners    = new HashMap< Integer, PointF >();
     mSides      = new ArrayList<SketchSide>();
     mBorders    = new ArrayList< SketchBorder >();
     mInsideTriangles = new ArrayList< SketchTriangle >();
@@ -460,9 +462,8 @@ class SketchSurface extends SketchShot
     // Log.v( "DistoX", "make cut: outer vertices " + outerVertices.size() + " / " + mVertices.size() );
     
 
-    // HashMap<SketchVertices> vertices = mVertices;
     ArrayList<SketchTriangle> triangles = mTriangles;
-    mVertices   = new HashMap< Integer, SketchVertex >();
+    mVertices   = new SparseArray< SketchVertex >();
     mTriangles  = new ArrayList< SketchTriangle >();
     synchronized( mTriangles ) {
       for ( SketchTriangle t : triangles ) {
@@ -624,12 +625,13 @@ class SketchSurface extends SketchShot
    */
   private int addVertex( float x, float y, float z )
   {
-    for ( SketchVertex v : mVertices.values() ) {
+    int size = mVertices.size();
+    for ( int k = 0; k<size; ++ k ) {
+      SketchVertex v = mVertices.valueAt( k );
       if ( Math.abs( x - v.x ) < 0.1 && Math.abs( y - v.y ) <  0.1 && Math.abs( z - v.z ) < 0.1 ) {
         return v.index;
       }
     }
-    // int n = mVertices.size();
     ++ maxkey_vtx;
     SketchVertex v = new SketchVertex( this, maxkey_vtx, x, y, z );
     mVertices.put( maxkey_vtx, v );
@@ -1387,7 +1389,9 @@ class SketchSurface extends SketchShot
       }
 
       // paint = mPainter.backVertexPaint;
-      // for ( PointF p : mCorners.values() ) {
+      // int size = mCorners.size();
+      // for ( int k=0; k<size; ++k ) {
+      //   PointF p = mCorners.valueAt( k );
       //   Path path = new Path();
       //   path.addCircle( p.x, p.y, 3*radius, Path.Direction.CCW );
       //   path.transform( matrix );
@@ -1429,7 +1433,9 @@ class SketchSurface extends SketchShot
       }
 
       paint = mPainter.vertexPaint;
-      for ( PointF p : mCorners.values() ) {
+      int size = mCorners.size();
+      for ( int k=0; k<size; ++k ) {
+        PointF p = mCorners.valueAt( k );
         Path path = new Path();
         path.addCircle( p.x, p.y, radius, Path.Direction.CCW );
         path.transform( matrix );
@@ -1516,8 +1522,10 @@ class SketchSurface extends SketchShot
   SketchVertex getVertexAt( float x, float y, float d ) // (x,y) scene point
   {
     synchronized( mTriangles ) {  // mCorners is synchronized on mTriangles
-      for ( Integer key : mCorners.keySet() ) {
-        PointF p = mCorners.get( key );
+      int size = mCorners.size();
+      for ( int k=0; k<size; ++k ) {
+        PointF p = mCorners.valueAt( k );
+        int key  = mCorners.keyAt( k );
         // Log.v("DistoX", "pt " + key + " " + p.x + " " + p.y  );
         if ( Math.abs( p.x - x ) < d && Math.abs( p.y - y ) < d ) {
           return mVertices.get( key );
@@ -1533,7 +1541,9 @@ class SketchSurface extends SketchShot
     // pw.format("%s -shot %s %s %d %d %d\n", what, st1, st2, mVertices.size(), mSides.size(), mTriangles.size() );
     pw.format("%s -shot %s %s %d %d\n", what, st1, st2, mVertices.size(), mTriangles.size() );
     pw.format("  vertex\n");
-    for ( SketchVertex v : mVertices.values() ) {
+    int size = mVertices.size();
+    for ( int k = 0; k < size; ++k ) {
+      SketchVertex v = mVertices.valueAt( k );
       v.toTherion( pw );
     }
     pw.format("  endvertex\n");

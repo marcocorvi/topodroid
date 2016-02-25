@@ -133,7 +133,7 @@
         android:layout_below="@id/layout3"
       	android:ems="25"
         android:scrollHorizontally="true"
-        android:autoText="false"
+        android:inputType="text"
         android:singleLine="true"
         android:hint="@string/shot_note"
         />

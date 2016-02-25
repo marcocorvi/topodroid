@@ -72,6 +72,7 @@
          android:singleLine="true"
          android:paddingLeft="15dp"
          android:paddingRight="15dp"
+         android:contentDescription="@string/orientation"
       />
       <!-- TextView android:id="@+id/value"
          android:layout_width="wrap_content"

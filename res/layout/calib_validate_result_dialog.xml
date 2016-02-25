@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="5dip"
+        android:contentDescription="@string/error_distribution"
         />
     <TextView android:id="@+id/avestd0"
         android:layout_marginTop="2dp"
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="5dip"
+        android:contentDescription="@string/error_distribution"
         />
     <TextView android:id="@+id/avestd1"
         android:layout_marginTop="2dp"
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="5dip"
+        android:contentDescription="@string/error_distribution"
         />
     <TextView 
         android:layout_marginTop="2dp"

@@ -196,7 +196,7 @@ public class PtCmapActivity extends Activity
         onBackPressed();
         return true;
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.ShotActivity );
+        String help_page = getResources().getString( R.string.PtCmapActivity );
         if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
         return true;
       // case KeyEvent.KEYCODE_SEARCH:

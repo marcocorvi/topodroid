@@ -83,7 +83,6 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_weight="10"
-      android:inputType="text"
       />
     <EditText android:id="@+id/etline2"
       android:layout_width="wrap_content"
@@ -190,13 +189,14 @@
       android:orientation="horizontal" 
       android:layout_marginTop="25dp" 
       android:gravity="right"
-      <Button android:id="@+id/button_ok"
+    >
+    <Button android:id="@+id/button_ok"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
           android:background="@drawable/button"
           style="@style/button_default"
           android:text="@string/button_save"
-      />
+    />
     </LinearLayout>
  
 

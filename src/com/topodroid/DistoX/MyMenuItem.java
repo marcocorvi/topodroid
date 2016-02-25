@@ -42,6 +42,18 @@ class MyMenuItem extends TextView
 
   // private Context mContext;
 
+  public MyMenuItem( Context context )
+  {  
+    super( context );
+    setTextColor( 0xff33ccff );
+    setBackgroundColor( 0xff333333 );
+    setTextSize( 14 );
+    setText( "" );
+    setPadding( 10, 10, 5, 10 );
+    mListener = null;
+    mTouch = false;
+  }
+
   public MyMenuItem( Context context, OnClickListener listener, String text )
   {  
     super( context );
@@ -52,7 +64,6 @@ class MyMenuItem extends TextView
     setPadding( 10, 10, 5, 10 );
     mListener = listener;
     mTouch = false;
-
     // setOnClickListener( listener );
   }
 

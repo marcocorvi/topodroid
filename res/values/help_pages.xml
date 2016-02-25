@@ -32,7 +32,6 @@
   <string name="DeviceA3InfoDialog">page_a3_info.htm</string>
   <string name="DeviceA3MemoryDialog">page_memory.htm</string>
   <string name="DeviceNameDialog">page_device_name.htm</string>
-  <string name="DeviceRemoteDialog">page_remote.htm</string>
   <string name="DeviceX310InfoDialog">page_x310_info.htm</string>
   <string name="DeviceX310MemoryDialog">page_memory.htm</string>
   <string name="DistoXStatDialog">page_stat2.htm</string>
