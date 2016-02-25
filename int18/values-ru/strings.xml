@@ -57,14 +57,14 @@
     <string name="calib_delete">Удалить калибровку </string>
     <string name="calib_device_mismatch">ВНИМАНИЕ: Несоответствие калибровчных данных и прибора</string>
     <string name="calib_no_name">Необходимо задать имя</string>
-    <!-- TODO string name="calib_gm_policy">Policy</string -->
+    <string name="calib_gm_policy">Правила</string>
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
     <string name="calib_saved">Сохранить калибровку</string>
     <string name="calib_updated">Обновить калибровку</string>
-    <string name="calib_compute_groups">Вычисление групп данных калибровки ...</string>
-    <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки ...</string>
-    <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки ...</string -->
-    <string name="calib_write_coeffs">Запись коэфицентов калибровки ...</string>
+    <string name="calib_compute_groups">Вычисление групп данных калибровки &#8230;</string>
+    <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки &#8230;</string>
+    <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки &#8230;</string -->
+    <string name="calib_write_coeffs">Запись коэфицентов калибровки &#8230;</string>
     <string name="calib_validation">Проверить %1$s относительно %2$s</string>
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
@@ -120,15 +120,15 @@
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
-    <!-- UNUSED string name="import_wait">Импорт файла... обождите...</string -->
+    <!-- UNUSED string name="import_wait">Импорт файла&#8230; обождите&#8230;</string -->
     <string name="import_already">съёмка уже импортирована</string>
     <string name="import_none">Отсутствует файл для импортирта</string>
     <string name="import_failed">Не удалось импортироапть файл</string>
     <string name="file_not_found">Файл не обнаружен</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
-    <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите ...</string>
-    <!-- UNUSED string name="sketch_loading">Загрузка абриса... обождите...</string -->
-    <!-- UNUSED string name="sketch_saving">Сохранение абриса ... обождите...</string -->
+    <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string>
+    <!-- UNUSED string name="sketch_loading">Загрузка абриса&#8230; обождите&#8230;</string -->
+    <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Нет точки MobileTopographer</string>
  
 
@@ -150,7 +150,7 @@
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ошибки закрытия петли</string>
     <string name="loop_none">нет петли</string>
-    <!-- TODO string name="long_lat">Long-Lat</string -->
+    <string name="long_lat">Широта-Долгота</string>
 
     <!-- OK string name="line_delete">Удалить линию</string -->
     <string name="flip_shots">Развернуть пикеты</string>
@@ -195,14 +195,14 @@
     <string name="hidden_add">Скрыть среднюю линию</string>
     <string name="hidden_del">Показать среднюю линию</string>
     <string name="splays_toggle">Переключить отображение лучей</string>
-    <!-- TODO string name="fixed">fixed</string -->
-    <!-- TODO string name="painted">painted</string -->
+    <string name="fixed">фиксированный</string>
+    <string name="painted">нарисованный</string>
 
     <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
 
-    <!-- TODO string name="no_bt">No Bluetooth</string -->
+    <string name="no_bt">Нет Блютуфа</string>
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calibration">Калибровка не выбрана</string>
     <string name="no_capture_app">Отсутствует приложение для фото</string>
@@ -375,7 +375,7 @@
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
     <string name="visible_border">видимая граница</string>
     <!-- UNUSED string name="vthreshold">верт. порог</string -->
-    <string name="wait_scan">Сканирование: ждите ...</string>
+    <string name="wait_scan">Сканирование: ждите &#8230;</string>
     <string name="write_failed">Ошибка записи DistoX</string>
     <string name="write_ok">Запись калибровки в DistoX</string>
     <string name="zip_saved">Сохранено </string>
@@ -424,7 +424,7 @@
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
     <string name="button_convert"   >Конвертир.</string>
-    <!-- TODO string name="button_current"   >Current   </string -->
+    <string name="button_current"   >Текущий   </string>
     <string name="button_delete"    >Удалить   </string>
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
@@ -436,6 +436,7 @@
     <!-- UNUSED string name="button_sensor"  >Датчики</string -->
     <!-- UNUESD string name="button_direction">Азимут/угол</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
+    <string name="button_plot"     >Абрис</string>
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
@@ -500,9 +501,9 @@
     <string name="sketch_mode_all">Все пикеты</string>
     <string name="sketch_delete">Удалить 3D модель ?</string>
     <string name="sketch_no_split">Не точно. Уменьшите боковую макс. длинну чтобы уточнить.</string>
-    <!-- TODO string name="length">Length [m]</string -->
-    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
-    <!-- TODO string name="clino">Clino [deg]</string -->
+    <string name="length">Длинна [м]</string>
+    <string name="azimuth">Азимут [грд]</string>
+    <string name="clino">Угол [грд]</string>
     <!-- TODO string name="orientation">orientation</string -->
     <!-- TODO string name="contents">contents</string -->
     <!-- TODO string name="error_distribution">error distribution</string -->
@@ -542,6 +543,7 @@
     <string name="help_measure">Измерить расстояния</string>
     
     <string name="help_coeff">Показать коэфиценты калибровки</string>
+    <string name="help_continue">Продолжить рисовать линию</string>
     <string name="help_current_station">Сохраненные пикеты</string>
     <string name="help_azimuth">Развертка референс-азимут</string>
     <string name="help_device">Введите активность устройства</string>
@@ -644,7 +646,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
-    <string name="title_discover">Поиск устройств DistoX ... подождите</string>
+    <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
@@ -757,7 +759,8 @@
   <string name="pref_cwd_title">Рабочий каталог</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid корневой каталог</string -->
   <!-- UNUSED string name="pref_cwd_message">Введите корневой каталог TopoDroid</string -->
-  <string name="pref_pt_color_map_title">Цветовая палитра от PocketTopo</string>
+  <string name="pref_pt_color_map_title">Цветовая палитра PocketTopo</string>
+  <string name="pref_pt_color_map_summary">PocketTopo палитра (PocketTopo импорт)</string>
   <string name="pref_text_size_title">Размер текста</string>
   <string name="pref_text_size_summary">Размер текста в списках</string>
   <string name="pref_text_size_message">Размер текста в списках</string>
@@ -973,7 +976,7 @@
   <string name="pref_log_device">Окно прибора</string>
   <string name="pref_log_distox">DistoX</string>
   <string name="pref_log_err">Ошибка</string>
-  <string name="pref_log_fixed">Точки GPS</string>
+  <string name="pref_log_fixed">Точки с GPS координатами</string>
   <string name="pref_log_input">Входные данные</string>
   <string name="pref_log_loc">Местоположение</string>
   <string name="pref_log_num">Сжатие данных</string>
@@ -983,6 +986,7 @@
   <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Датчики</string>
   <string name="pref_log_shot">Пикеты</string>
+  <string name="pref_log_sync">Совм. съёмка</string>
   <string name="pref_log_survey">Съёмки</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Единицы</string>
@@ -1021,6 +1025,7 @@
    <string name="firmware_file">файл прошивки</string>
    <string name="firmware_file_exists">Существующий файл прошивки</string>
    <string name="firmware_file_missing">отсутствует файл прошивки</string>
+   <string name="ask_dump">Выгрузить прошивку?</string>
    <string name="ask_upload">Загрузить прошивку?</string>
    <string name="ask_upload_not_compatible">Невозможно проверить совместимость ПО.\nЗагрузить прошивку?</string>
    <string name="firmware_file_dumped">Сохраненный файл прошивки %1$s размер %2$d</string>
