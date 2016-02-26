@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
+    <string name="no_manual">Ръководството не може да бъде изтеглено</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натиснете отново за да излезете</string>
@@ -55,14 +55,14 @@
     <string name="calib_delete">Изтриване на калибрация </string>
     <string name="calib_device_mismatch">Предупреждение: Различно устройство за тази калибрация</string>
     <string name="calib_no_name">Името е задължително</string>
-    <!-- TODO string name="calib_gm_policy">Policy</string -->
+    <string name="calib_gm_policy">Правила</string>
     <string name="calib_gm_undelete">Възстановяване на данни за калибрацията?</string>
     <string name="calib_saved">Калибрацията е записана</string>
     <string name="calib_updated">Калибрацията е обновена</string>
-    <string name="calib_compute_groups">Изчисляване на калибр. групи...</string>
-    <string name="calib_compute_coeffs">Изчисляване на калибр. коефициенти...</string>
-    <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
-    <string name="calib_write_coeffs">Запис на калибр. коефициенти...</string>
+    <string name="calib_compute_groups">Изчисляване на калибр. групи…</string>
+    <string name="calib_compute_coeffs">Изчисляване на калибр. коефициенти…</string>
+    <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients …</string -->
+    <string name="calib_write_coeffs">Запис на калибр. коефициенти…</string>
     <string name="calib_validation">Проверка на %1$s срещу %2$s</string>
     <!-- UNUSED string name="connect_failed">Невъзможна връзка</string -->
     <!-- UNUSED string name="data"> измервания</string -->
@@ -118,15 +118,15 @@
 
     <string name="calib_import_title">Импортиране на калибрация</string>
     <string name="import_title">Импортиране на файл</string>
-    <!-- UNUSED string name="import_wait">Импортиране... Моля изчакайте...</string -->
+    <!-- UNUSED string name="import_wait">Импортиране… Моля изчакайте…</string -->
     <string name="import_already">Картировката е вече импортирана</string>
     <string name="import_none">Няма файлове за импортиране</string>
     <string name="import_failed">Файлът не е импортиран</string>
     <string name="file_not_found">Файлът не е намерен</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
-    <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте ...</string>
-    <!-- UNUSED string name="sketch_loading">Зареждане на скица... Моля изчакайте...</string -->
-    <!-- UNUSED string name="sketch_saving">Записване на скица... Моля изчакайте...</string -->
+    <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
+    <!-- UNUSED string name="sketch_loading">Зареждане на скица… Моля изчакайте…</string -->
+    <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
 
@@ -149,7 +149,7 @@
     <string name="longitude_hint">Дълж. гг:мм:сс.ссс</string>
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
     <string name="loop_none">няма полигон loop</string>
-    <!-- TODO string name="long_lat">Long-Lat</string -->
+    <string name="long_lat">Дълж.-Шир.</string>
 
     <!-- string name="line_delete">Изтриване на линия</string -->
     <string name="flip_shots">Обръщане на отсечките</string>
@@ -194,8 +194,8 @@
     <string name="hidden_add">Скриване на предишни репери</string>
     <string name="hidden_del">Показване на предишни репери</string>
     <string name="splays_toggle">Показване/скриване на странични изм.</string>
-    <!-- TODO string name="fixed">fixed</string -->
-    <!-- TODO string name="painted">painted</string -->
+    <string name="fixed">Фиксиран</string>
+    <string name="painted">Боядисан</string>
 
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
     <string name="bad_line">Невалиден тип линия</string>
@@ -378,7 +378,7 @@
     <string name="undelete_text">Изберете какво искате да възстановите</string>
     <string name="visible_border">видима граница</string>
     <!-- UNUSED string name="vthreshold">вертикална граница</string -->
-    <string name="wait_scan">Сканиране, моля изчакайте...</string>
+    <string name="wait_scan">Сканиране, моля изчакайте…</string>
     <string name="write_failed">Грешка при запис в DistoX</string>
     <string name="write_ok">Калибрацията е записана в DistoX</string>
     <string name="zip_saved">Записан </string>
@@ -427,7 +427,7 @@
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
     <string name="button_convert"   >Конверт.  </string>
-    <!-- TODO string name="button_current"   >Current   </string -->
+    <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
     <string name="button_eval"      >Оценка    </string>
     <string name="button_eval_cal"  >Оц./кал.  </string>
@@ -506,13 +506,13 @@
     <string name="sketch_mode_all">Всички отсечки</string>
     <string name="sketch_delete">Изтриване на 3D модел?</string>
     <string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string>
-    <!-- TODO string name="length">Length [m]</string -->
-    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
-    <!-- TODO string name="clino">Clino [deg]</string -->
-    <!-- TODO string name="orientation">orientation</string -->
-    <!-- TODO string name="contents">contents</string -->
-    <!-- TODO string name="error_distribution">error distribution</string -->
-    <!-- TODO string name="angle_distribution">angular distribution</string -->
+    <string name="length">Дължина [метри]</string>
+    <string name="azimuth">Азимут [градуси]</string>
+    <string name="clino">Наклон [градуси]</string>
+    <string name="orientation">Ориентация</string>
+    <string name="contents">Съдържание</string>
+    <string name="error_distribution">Разпределение на грешка</string>
+    <string name="angle_distribution">Ъглово разпределение</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Разтягане</string -->
@@ -651,7 +651,7 @@
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
-    <string name="title_discover">Сканиране за DistoX устройства...</string>
+    <string name="title_discover">Сканиране за DistoX устройства…</string>
     <string name="title_draw_area">Площ %1$s</string>
     <string name="title_draw_line">Линия %1$s</string>
     <string name="title_draw_point">Точка %1$s</string>
@@ -707,7 +707,7 @@
   <string name="pref_export_shots_title">Формат на експортираните данни</string>
   <string name="pref_export_shots_summary">Формат на експортираните данни по подразбиране</string>
   <string name="pref_extra_buttons_title">Ниво на функциите</string>
-  <string name="pref_extra_buttons_summary">Ниво на показваните менюта: основни, нормални, пълни...</string>
+  <string name="pref_extra_buttons_summary">Ниво на показваните менюта: основни, нормални, пълни…</string>
   <string name="pref_size_buttons_title">Размер бутони</string>
   <string name="pref_size_buttons_summary">Размер на бутоните за главните функции</string>
   <!-- UNUSED string name="pref_size_buttons_message">Въведете размер на бутоните (в пиксели)</string -->
@@ -765,6 +765,7 @@
   <!-- UNUSED string name="pref_cwd_summary">Работна директория за данните на TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Въведете директория на TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo карта на цветовете</string>
+  <string name="pref_pt_color_map_summary">PocketTopo карта на цветовете (импорт)</string>
   <string name="pref_text_size_title">Размер на текста</string>
   <string name="pref_text_size_summary">Размер на шрифта в текстове</string>
   <string name="pref_text_size_message">Размер на шрифта в текстове</string>
@@ -1039,7 +1040,7 @@
    <string name="ask_upload">Качване на фърмуер?</string>
    <string name="ask_upload_not_compatible">Файлът с фърмуер не изглежда коректен.\nПродължаване с качването?</string>
    <string name="firmware_file_dumped">Записан файл %1$s с размер %2$d</string>
-   <!-- FIXME string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d / %3$d</string -->
+   <string name="firmware_file_uploaded">Качен файл %1$s с размер %2$d / %3$d</string>
 
 
 </resources>

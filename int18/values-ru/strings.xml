@@ -504,10 +504,10 @@
     <string name="length">Длинна [м]</string>
     <string name="azimuth">Азимут [грд]</string>
     <string name="clino">Угол [грд]</string>
-    <!-- TODO string name="orientation">orientation</string -->
-    <!-- TODO string name="contents">contents</string -->
-    <!-- TODO string name="error_distribution">error distribution</string -->
-    <!-- TODO string name="angle_distribution">angular distribution</string -->
+    <string name="orientation">ориентация</string>
+    <string name="contents">содержимое</string>
+    <string name="error_distribution">распределение ошибки</string>
+    <string name="angle_distribution">угловое распределение</string>
 
     <!-- UNUSED string name="btn_head">head</string -->
     <!-- UNUSED string name="btn_stretch">Растянуть</string -->

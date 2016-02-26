@@ -27,7 +27,7 @@
 <!-- names of therion items -->
     <string name="thp_user">Nutzer</string>
     <string name="thp_label">Beschriftung</string>
-    <!-- UNUSED string name="thp_danger">danger</string -->
+    <!-- UNUSED string name="thp_danger">Gefahr</string -->
     <string name="thl_user">Nutzer</string>
     <string name="thl_wall">Wand</string>
     <string name="tha_user">Nutzer</string>
@@ -60,14 +60,14 @@
     <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
     <string name="calib_no_name">Name erforderlich</string>
 
-    <!-- TODO string name="calib_gm_policy">Policy</string -->
+    <string name="calib_gm_policy">Methode</string>
     <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
     <string name="calib_saved">Kalibrierung gespeichert</string>
     <string name="calib_updated">Kalibrierung aktualisiert</string>
-    <string name="calib_compute_groups">Kalibrierung Datengruppen berechnen ...</string>
-    <string name="calib_compute_coeffs">Kalibrierung Koeffizienten berechnen ...</string>
-    <!-- UNUSED string name="calib_read_coeffs">Kalibrierung Koeffizienten READING ...</string -->
-    <string name="calib_write_coeffs">Kalibrierung Koeffizienten speichern ...</string>
+    <string name="calib_compute_groups">Kalibrierungs-Datengruppen berechnen&#8230;</string>
+    <string name="calib_compute_coeffs">Kalibrierungs-Koeffizienten berechnen&#8230;</string>
+    <!-- UNUSED string name="calib_read_coeffs">Kalibrierungs-Koeffizienten lesen&#8230;</string -->
+    <string name="calib_write_coeffs">Kalibrierungs-Koeffizienten speichern&#8230;</string>
     <string name="calib_validation">Vergleich %1$s vs. %2$s</string>
     <!-- UNUSED string name="connect_failed">Verbindung fehlgeschlagen</string -->
     <!-- UNUSED string name="data"> Daten</string -->
@@ -93,9 +93,9 @@
     <string name="device_none">Kein DistoX ausgewählt</string>
     <!-- UNUSED string name="device_paired">Gerät ist verbunden</string -->
     <string name="device_reset">DistoX Speicher zurücksetzen</string>
-    <!-- OK string name="device_code">DistoX code %1$4d</string -->
-    <!-- OK string name="device_firmware">Firmware  %1$d.%2$d</string -->
-    <!-- OK string name="device_hardware">Hardware  %1$d.%2$d</string -->
+    <string name="device_code">DistoX Code %1$4d</string>
+    <string name="device_firmware">Firmware  %1$d.%2$d</string>
+    <string name="device_hardware">Hardware  %1$d.%2$d</string>
     <string name="device_status_angle">Winkeleinheiten %1$s</string>
     <string name="device_status_compass">Kompass %1$s</string>
     <string name="device_status_calib">Mode %1$s</string>
@@ -125,21 +125,21 @@
 
     <string name="few_data">Nicht genügend Daten</string>
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
-    <string name="few_calibs">Nicht genügend Kalbirierungen</string>
+    <string name="few_calibs">Nicht genügend Kalibrierungen</string>
 
 <!-- IMPORTING A SURVEY or A ZIP -->
     <string name="calib_import_title">Kalibrierung importieren</string>
     <string name="import_title">Daten Importieren</string>
-    <!-- UNUSED string name="import_wait">Importieren ... bitte warten ...</string -->
+    <!-- UNUSED string name="import_wait">Importieren&#8230; bitte warten&#8230;</string -->
     <string name="import_already">Vermessung bereits importiert</string>
     <string name="import_none">Keine Daten importieren</string>
     <string name="import_failed">Import fehlgeschlagen</string>
     <string name="file_not_found">Datei nicht gefunden</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
-    <string name="import_zip_wait">Importieren Zip-Datei ... bitte warten ...</string>
-    <!-- UNUSED string name="sketch_loading">Skizze laden... bitte warten ...</string -->
-    <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten ...</string -->
-    <!-- TODO string name="MT_points_none">No MobileTopographer point</string -->
+    <string name="import_zip_wait">Importieren Zip-Datei, bitte warten&#8230;</string>
+    <!-- UNUSED string name="sketch_loading">Skizze laden, bitte warten&#8230;</string -->
+    <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
+    <string name="MT_points_none">Keine MobileTopographer Punkte</string>
 
 <!-- MORE DEVICE STRINGS -->
     <!-- UNUSED string name="head_tail">Memory: </string -->
@@ -163,7 +163,7 @@
     <string name="longitude_hint">Länge dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ringschlussfehler</string>
     <string name="loop_none">Kein Ringschluss</string>
-    <!-- TODO string name="long_lat">Long-Lat</string -->
+    <string name="long_lat">Länge-Breite</string>
 
 <!-- INPUT FIELDS ERROR STRINGS: BAD VALUE or MISSING VALUE -->
     <string name="error_azimuth_required">Azimut erforderlich</string>
@@ -192,13 +192,13 @@
     <string name="group_policy_four">Jeweils 4 Messungen</string>
     <string name="group_policy_sixteen">Vier mal 4 Messungen, Rest einzeln</string>
     <string name="group_policy_distance">Gruppieren nach Winkelabstand</string>
-    <string name="group_reset">Groupierung zurücksetzen</string>
+    <string name="group_reset">Gruppierung zurücksetzen</string>
 
     <!-- UNUSED string name="scale">Ausmaß</string -->
     <!-- UNUSED string name="reversed">umkehren</string -->
     <string name="options">Einstellungen</string>
     <string name="outline">Linientyp (Therion)</string>
-    <string name="out">aussen</string>
+    <string name="out">außen</string>
     <string name="in">innen</string>
     <!-- UNUSED string name="none">kein</string -->
     <string name="barrier_add">Nachfolgende Messungen ausblenden</string>
@@ -206,15 +206,15 @@
     <string name="hidden_add">Vorherige Messungen ausblenden</string>
     <string name="hidden_del">Vorherige Messungen anzeigen</string>
     <string name="splays_toggle">Hilfszüge ein/ausblenden</string>
-    <!-- TODO string name="fixed">fixed</string -->
-    <!-- TODO string name="painted">painted</string -->
+    <string name="fixed">fixiert</string>
+    <string name="painted">gezeichnet</string>
 
     <string name="bad_cwd">Der Projektname kann nicht der Pfad sein</string>
     <string name="bad_line">Ungültiger Linientyp</string>
     <string name="bad_point">Ungültiger Punkttyp</string>
 
 <!-- ERRORS: MISSING SOMETHING -->
-    <!-- TODO string name="no_bt">No Bluetooth</string -->
+    <string name="no_bt">Bluetooth nicht aktiv</string>
     <string name="no_calib">Keine Kalibrierung</string>
     <string name="no_calibration">Keine Kalibrierung gewählt</string>
     <string name="no_capture_app">Keine Kamera-App vorhanden</string>
@@ -254,9 +254,9 @@
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
     <string name="menu_display">ANZEIGEN</string>
-    <!-- OK string name="menu_distox">DISTOX</string -->
+    <string name="menu_distox">DISTOX</string>
     <string name="menu_export">EXPORTIEREN</string>
-    <!-- OK string name="menu_firmware">FIRMWARE</string -->
+    <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">WIEDERHERSTELLEN</string>
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename">UMBENENNEN</string>
@@ -288,14 +288,14 @@
     <string name="popup_curve_pt">Linie rund machen</string>
     <string name="popup_remove_pt">Punkt löschen</string>
 
-    <!-- TODO string name="connected_none">Not connected</string -->
-    <!-- TODO string name="connected_already">Already connected</string -->
+    <string name="connected_none">Nicht verbunden</string>
+    <string name="connected_already">Bereits verbunden</string>
 
     <string name="not_available">BT nicht verfügbar</string>
-    <!-- UNUSED string name="not_connected">Nicth verbinden</string -->
+    <!-- UNUSED string name="not_connected">Nicht verbinden</string -->
     <string name="not_enabled">BT nicht aktiviert</string>
     <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
-    <string name="null_bitmap">Null Bitmap [OOM error]</string>
+    <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
     <!-- UNUSED string name="photo">Foto</string -->
     <string name="photo_comment_prompt">Kommentar</string>
     <!-- UNUSED string name="photo_name">Messpunkt/Name</string -->
@@ -307,7 +307,7 @@
     <!-- UNUSED string name="photo_survey">Messzug teilen</string -->
     <!-- UNUSED string name="picture_no_station">Name erforderlich</string -->
     <string name="plot_delete">Skizze löschen?</string>
-    <string name="item_delete">Element löschen %1$s ?</string>
+    <string name="item_delete">Element löschen: %1$s?</string>
     <string name="plot_duplicate_name">Doppelter Name</string>
     <!-- UNUSED string name="plot_name">Name der Skizze</string -->
     <string name="plot_new">Neue Skizze</string>
@@ -318,13 +318,13 @@
     <string name="read_data">%1$d Messungen gelesen</string>
     <string name="read_calib_data">%1$d Daten gelesen (%2$d Pakete)</string>
     <!-- UNUSED string name="read_fail_with_code">Lesefehler: Fehlercode</string -->
-    <string name="read_failed">Fehler beim lesen vom DistoX</string>
+    <string name="read_failed">Fehler beim Lesen vom DistoX</string>
     <string name="saved_file_">Gespeicherte Datei</string>
     <string name="saving_">Speichern </string>
     <string name="saving_file_failed">Datei konnten nicht gespeichert werden</string>
     <!-- UNUSED string name="scrap_name">Name der Skizze</string -->
     <string name="splay">Hilfszug</string>
-    <string name="too_many_leg_intersection">Schnittlinie durchquert zuviele Messstrecken</string>
+    <string name="too_many_leg_intersection">Schnittlinie durchquert zu viele Messstrecken</string>
     <string name="too_many_legs_xsection">Zu viele Messstrecken für Querschnitt</string>
     <string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string>
     <string name="convert_tdr2th2">th2 Skizzen überschreiben?</string>
@@ -347,7 +347,7 @@
 
     <!-- UNUSED string name="shot_clino">Neigung</string -->
     <!-- UNUSED string name="shot_compass">Azimut</string -->
-    <string name="shot_delete">Messzug löschen ?</string>
+    <string name="shot_delete">Messzug löschen?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Info</string>
     <!-- UNUSED string name="shot_leg">Wiederholen Messstrecke</string -->
@@ -358,8 +358,8 @@
     <string name="shot_reverse">umkehren</string>
     <string name="shot_to">bis</string>
 
+    <string name="make_surface">Oberfläche existiert. Ersetzen?</string>
 <!-- NOT USED -->
-    <!-- UNUSED string name="make_surface">Oberfläche existiert. Ersetzen?</string -->
 
     <!-- UNUSED string name="sketch3d_name">Namen</string -->
     <!-- UNUSED string name="sketch3d_new">Neue 3D Skizze</string -->
@@ -378,7 +378,7 @@
     <string name="survey_exists">Vermessung bereits vorhanden</string>
     <!-- UNUSED string name="survey_date">jjjj.mm.tt</string -->
     <string name="survey_delete">Vermessung löschen?</string>
-    <string name="survey_split">Vermessung teilen ?</string>
+    <string name="survey_split">Vermessung teilen?</string>
     <string name="survey_not_attached">WARNUNG: unverbundene Messungen</string>
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
@@ -391,12 +391,12 @@
     <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
     <string name="visible_border">Sichtbare Grenze</string>
     <!-- UNUSED string name="vthreshold">Vertikale Schwelle</string -->
-    <string name="wait_scan">Scannen: warten ...</string>
+    <string name="wait_scan">Scannen: warten&#8230;</string>
     <string name="write_failed">DistoX Schreiben fehgeschlagen</string>
     <string name="write_ok">DistoX Schreiben erfolgreich</string>
     <string name="zip_saved">Zip-Datei gespeichert</string>
-    <string name="zip_failed">Fehler beim speichern der Zip-Datei</string>
-    <string name="unzip_fail">Fehler beim entpacken der Zip-Datei</string>
+    <string name="zip_failed">Fehler beim Speichern der Zip-Datei</string>
+    <string name="unzip_fail">Fehler beim Entpacken der Zip-Datei</string>
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Vermessungsinfo</string>
@@ -406,7 +406,7 @@
     <string name="stat_leg">Messstrecke %1$d %2$.1f %3$s</string>
     <string name="stat_length">Länge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
-    <string name="stat_origin">Urspungs-Messpunkt: %1$s</string>
+    <string name="stat_origin">Ursprungs-Messpunkt: %1$s</string>
     <string name="stat_shot">Messungen  %1$d,   Doppelte %2$d,   Oberfläche %3$d</string>
     <string name="stat_splay">Hilfszüge %1$d</string>
     <string name="stat_station">Messpunkte %1$d</string>
@@ -432,10 +432,10 @@
     <!-- UNUSED string name="v_section">V-PROFIL</string -->
     <string name="h_section">H-PROFIL</string>
 
-    <!-- OK string name="distox_err_ok">OK</string -->
+    <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Verbindungsfehler mit DistoX</string>
-    <!-- OK string name="distox_err_headtail_io">DistoX memory I/O error</string -->
-    <!-- OK string name="distox_err_headtail_eof">DistoX memory EOF error</string -->
+    <string name="distox_err_headtail_io">DistoX Speicher I/O Fehler</string>
+    <string name="distox_err_headtail_eof">DistoX Speicher EOF Fehler</string>
     <string name="distox_err_connected">Gerät bereits verbunden</string>
 
     <!-- UNUSED string name="ask_close">TopoDroid beenden?</string -->
@@ -446,12 +446,12 @@
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
     <string name="button_convert"   >Konvertieren </string>
-    <!-- TODO string name="button_current"   >Current   </string -->
+    <string name="button_current"   >Hier fortsetzen   </string>
     <string name="button_delete"    >Löschen    </string>
     <string name="button_eval"      >Auswerten </string>
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
-    <!-- OK string name="button_gps_stop"  >Anhalten      </string -->
+    <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->
     <!-- UNUSED string name="button_manual"    >Handbuch</string -->
     <!-- UNUSED string name="button_measure"   >Messung   </string -->
     <string name="button_photo"   >Foto</string>
@@ -589,7 +589,7 @@
     <string name="help_display_calib">Anzeige der gelöschten Vermessungen</string>
     <string name="help_validate">Kalibrierung validieren</string>
     <string name="help_overview">Überblicksansicht</string>
-    <string name="help_plot">Skizzean</string>
+    <string name="help_plot">Skizzen</string>
     <string name="help_note">Notizen</string>
     <string name="help_bluetooth">Bluetooth-Verbindung zurücksetzen</string>
     <string name="help_remote">DistoX Fernbedienung</string>
@@ -601,7 +601,7 @@
     <string name="help_sensor">Sensormessungen</string>
     <string name="help_3d">3D-Modell (Benötigt Cave3D)</string>
     <string name="help_move">Move/zoom Modus</string>
-    <string name="help_draw">Zeichnungmodus</string>
+    <string name="help_draw">Skizzenmodus</string>
     <string name="help_eraser">Löschmodus</string>
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Skizzenelemente anzeigen</string>
@@ -638,7 +638,7 @@
     <string name="help_delete_survey">Vermessung löschen</string>
     <string name="help_delete_calib">Kalibrierung löschen</string>
     <string name="help_detach">Vom DistoX trennen</string>
-    <!-- OK string name="help_firmware">DistoX2 firmware updater</string -->
+    <string name="help_firmware">DistoX2 Firmware Update</string>
 
     <string name="help_toggle">DistoX Kalibrier-Modus umschalten</string>
     <string name="help_sdcard">DistoX Speicher</string>
@@ -661,7 +661,7 @@
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_device">DistoX Geräte</string>
-    <string name="title_discover">DistoX Geräte suchen ...</string>
+    <string name="title_discover">DistoX Geräte suchen&#8230;</string>
     <string name="title_draw_area">FLÄCHE %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
     <string name="title_draw_point">PUNKT %1$s</string>
@@ -672,6 +672,7 @@
     <string name="title_fixed_import">Fixpunkt: Import</string>
     <string name="title_fixed_gps">Fixpunkt: GPS</string>
     <string name="title_fixed_add">Fixpunkt einfügen</string>
+    <string name="title_manual">TopoDroid Handbuch</string>
     <string name="title_mode">Anzeigemodus</string>
     <string name="title_move">Verschieben</string>
     <string name="title_note">Notizen</string>
@@ -727,9 +728,9 @@
   <string name="pref_extra_buttons_summary">Fortgeschrittenen-Modus</string>
   <string name="pref_size_buttons_title">Button-Größe</string>
   <string name="pref_size_buttons_summary">Größe der Action-bar Buttons</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Eingabe der Größe der Action-bar Buttons [pixels]</string -->
+  <!-- UNUSED string name="pref_size_buttons_message">Eingabe der Größe der Action-bar Buttons [px]</string -->
   <string name="pref_leg_shots_title">Messzüge</string>
-  <string name="pref_leg_shots_summary">Mindesanzahl von Messungen pro Messzug</string>
+  <string name="pref_leg_shots_summary">Mindestanzahl von Messungen pro Messzug</string>
   <string name="pref_station_prefix_title">Export Messpunkt Prefix</string>
   <string name="pref_station_prefix_summary">Export cSurvey Messpunkt Prefix</string>
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD</string>
@@ -783,7 +784,7 @@
   <string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string>
   <string name="pref_text_size_title">Schriftgröße</string>
   <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
-  <string name="pref_text_size_message">Textgrösse in Listen</string>
+  <string name="pref_text_size_message">Textgröße in Listen</string>
   <string name="pref_closeness_title">Auswahl Radius</string>
   <string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string>
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
@@ -795,7 +796,7 @@
   <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>
   <string name="pref_accel_thr_summary">Toleranz der Messpunkt-Beschleunigung</string>
   <string name="pref_accel_thr_message">Toleranz der Messpunkt-Beschleunigung</string>
-  <string name="pref_mag_thr_title">Magnetfeldetoleranz</string>
+  <string name="pref_mag_thr_title">Magnetfeldtoleranz</string>
   <string name="pref_mag_thr_summary">Toleranz des Magnetfeldes</string>
   <string name="pref_mag_thr_message">Toleranz des Magnetfeldes</string>
   <string name="pref_dip_thr_title">Magnetische Neigungs-Toleranz</string>
@@ -806,7 +807,7 @@
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_leg_message">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_backsight_title">Rückblick</string>
-  <string name="pref_backsight_summary">Rückblick Feld im Dialog neuer Messzug</string>
+  <string name="pref_backsight_summary">Rückblick-Feld im Dialog neuer Messzug</string>
   <string name="pref_mag_anomaly_title">Magnetische Abweichung</string>
   <string name="pref_mag_anomaly_summary">Kompensiere lokale magnetische Abweichung</string>
   <string name="pref_azimuth_manual_title">Seitenriss-Azimut wählbar</string>
@@ -849,7 +850,7 @@
   <string name="pref_shot_timer_title">Richtungsmesser Verzögerung</string>
   <string name="pref_shot_timer_summary">Sekunden Verzögerung bis zur Messung</string>
   <string name="pref_shot_timer_message">Sekunden Verzögerung bis zur Messung</string>
-  <string name="pref_beep_volume_title">Timer Piep Lautstärke</string>
+  <string name="pref_beep_volume_title">Piep Lautstärke</string>
   <string name="pref_beep_volume_summary">Lautstärke des Pieptones</string>
   <string name="pref_beep_volume_message">Lautstärke des Pieptones</string>
   <string name="pref_drawing_unit_title">Punktsymbole Massstab</string>
@@ -872,13 +873,13 @@
   <string name="pref_calib_algo_summary">Kalibrierung-Algorithmus</string>
   <string name="pref_group_by_title">Gruppierung</string>
   <string name="pref_group_by_summary">Gruppierung</string>
-  <string name="pref_group_title">Guppierungs-Toleranz</string>
+  <string name="pref_group_title">Gruppierungs-Toleranz</string>
   <string name="pref_group_summary">Toleranz zwischen Messungen in derselben Gruppe</string>
   <string name="pref_group_message">Toleranz zwischen Messungen in derselben Gruppe</string>
   <string name="pref_error_title">Kalibrierungsfehler</string>
-  <string name="pref_error_summary">Minimaler Kalbirierungsfehler</string>
+  <string name="pref_error_summary">Minimaler Kalibrierungsfehler</string>
   <string name="pref_error_dialogtitle">Kalibrierungsfehler</string>
-  <string name="pref_error_message">Minimaler Kalbirierungsfehler</string>
+  <string name="pref_error_message">Minimaler Kalibrierungsfehler</string>
   <string name="pref_iter_title">Kalibrierungs-Iterationen</string>
   <string name="pref_iter_summary">Max. Iterationen für die Kalibrierung</string>
   <string name="pref_iter_dialogtitle">Kalibrierungs-Iterationen</string>
@@ -889,9 +890,9 @@
   <string name="pref_arrow_length_title">Querschnittsmarkierung Länge</string>
   <string name="pref_arrow_length_summary">Länge des Pfeiles einer Querschnitts-Linie</string>
   <string name="pref_arrow_length_message">Länge des Pfeiles einer Querschnitts-Linie</string>
-  <string name="pref_dot_radius_title">Grösse der Linienpunkte</string>
-  <string name="pref_dot_radius_summary">Grösse der Punkte während dem bearbeiten einer Linie</string>
-  <string name="pref_dot_radius_message">Grösse der Punkte während dem bearbeiten einer Linie</string>
+  <string name="pref_dot_radius_title">Größe der Linienpunkte</string>
+  <string name="pref_dot_radius_summary">Größe der Punkte während dem bearbeiten einer Linie</string>
+  <string name="pref_dot_radius_message">Größe der Punkte während dem bearbeiten einer Linie</string>
   <string name="pref_line_thickness_title">Liniendicke</string>
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>
   <string name="pref_line_thickness_message">Dicke der gezeichneten Linien</string>
@@ -955,7 +956,7 @@
   <!-- TODO string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
   <!-- TODO string name="pref_sketchCompassReadings_message">Number of compass readings to average</string -->
 
-  <string name="pref_unit_length_title">Längeeinheit</string>
+  <string name="pref_unit_length_title">Längeneinheit</string>
   <string name="pref_unit_length_summary">Masseinheit für Längen</string>
   <string name="pref_unit_angle_title">Winkeleinheit</string>
   <string name="pref_unit_angle_summary">Masseinheit für Winkel</string>
@@ -983,7 +984,7 @@
 
   <string name="pref_log_stream_summary">Log Output</string>
   <string name="pref_log_stream_title">Log Output</string>
-  <!-- OK string name="pref_log_bt">Bluetooth</string -->
+  <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Bezier Kurven</string>
   <string name="pref_log_calib">Kalibrierung</string>
   <string name="pref_log_comm">Bluetooth Kommunikation</string>
@@ -1004,15 +1005,16 @@
   <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensoren</string>
   <string name="pref_log_shot">Messungen</string>
+  <string name="pref_log_sync">Co-Vermessung</string>
   <string name="pref_log_survey">Vermessung</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Einheiten</string>
   <string name="pref_log_zip">ZIP</string>
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
-  <!-- UNUSED string name="line_fine">fine</string -->
-  <!-- UNUSED string name="line_normal">normale</string -->
-  <!-- UNUSED string name="line_coarse">grossolana</string -->
+  <!-- UNUSED string name="line_fine">Fein</string -->
+  <!-- UNUSED string name="line_normal">Normal</string -->
+  <!-- UNUSED string name="line_coarse">Grob</string -->
 
 <!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
     <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
@@ -1031,9 +1033,9 @@
   <string name="firmware_title">Firmware Updater</string>
   <string name="firmware_file_title">Firmware-Datei</string>
   <string name="firmware_text">
-\n[1] Wählen ob die DistoX-Firmware geschrieben oder gelesen werdne soll.
+\n[1] Wählen ob die DistoX-Firmware geschrieben oder gelesen werden soll.
 \n[2] Datei auswählen zum lesen oder schreiben. Firmware-Dateien sind im "bin" Verzeichnis.
-\n[3] Beim schreiben sicher stellen, dass die Firmware-Version kompatibel mit dem DistoX ist.
+\n[3] Beim schreiben sicherstellen, dass die Firmware-Version kompatibel mit dem DistoX ist.
 \n[4] Den DistoX2 in den Bootloader-Modus versetzen: PLUS und MINUS gedrückt halten und Gerät mit DIST einschalten.
 \n[5] OK drücken und warten während das Bluetooth-Icon blinkt.
 \n[6] Den DistoX2 ausschalten mit CLEAR.
@@ -1043,9 +1045,10 @@
    <string name="firmware_file">Firmware-Datei</string>
    <string name="firmware_file_exists">Firmware-Datei existiert bereits</string>
    <string name="firmware_file_missing">Firmware-Datei existiert nicht</string>
+   <string name="ask_dump">Firmware herunterladen?</string>
    <string name="ask_upload">Firmware updaten?</string>
-   <string name="ask_upload_not_compatible">Kompatibilität konnte nicht sicher gestellt werden.\nFirmware trotzdem updaten?</string>
-   <string name="firmware_file_dumped">Firmware gespeichert als %1$s (Grösse %2$d)</string>
+   <string name="ask_upload_not_compatible">Kompatibilität konnte nicht sichergestellt werden.\nFirmware trotzdem updaten?</string>
+   <string name="firmware_file_dumped">Firmware gespeichert als %1$s (Größe %2$d)</string>
    <string name="firmware_file_uploaded">Firmware %1$s aktualisiert (%2$d / %3$d geschrieben)</string>
 
 </resources>

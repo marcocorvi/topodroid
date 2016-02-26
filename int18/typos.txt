@@ -1,7 +1,0 @@
-res/values-de/strings.xml:201: Warning: "aussen" is a common misspelling; did you mean "außen" ? [Typos]
-res/values-de/strings.xml:888: Warning: "Grösse" is a common misspelling; did you mean "Größe" ? [Typos]
-res/values-de/strings.xml:889: Warning: "Grösse" is a common misspelling; did you mean "Größe" ? [Typos]
-res/values-de/strings.xml:890: Warning: "Grösse" is a common misspelling; did you mean "Größe" ? [Typos]
-res/values-de/strings.xml:1032: Warning: "sicher stellen" is a common misspelling; did you mean "sicherstellen" ? [Typos]
-res/values-de/strings.xml:1043: Warning: "sicher gestellt" is a common misspelling; did you mean "sichergestellt" ? [Typos]
-res/values-de/strings.xml:1044: Warning: "Grösse" is a common misspelling; did you mean "Größe" ? [Typos]
