@@ -7,7 +7,6 @@
     <string name="double_back">Нажмте "НАЗАД" еще раз для выхода</string>
 
     <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить объекты рисунков?</string>
-    <!-- UNUSED string name="version_title">Обновление приложения</string -->
 
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛИНИЯ</string>
@@ -127,7 +126,6 @@
     <string name="file_not_found">Файл не обнаружен</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
     <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string>
-    <!-- UNUSED string name="sketch_loading">Загрузка абриса&#8230; обождите&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Нет точки MobileTopographer</string>
  
@@ -221,7 +219,6 @@
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
     <string name="no_survey">Съёмка не выбрана.</string>
-    <!-- UNUSED string name="no_tdsymbol">TdSymbol не установлен</string -->
     <string name="no_thmanager">ThManager не установлен</string>
     <string name="no_db_viewer">Приложение просмотра баз данных не найдено</string>
     <string name="no_undelete">Нечего восстанавливать</string>
@@ -232,7 +229,6 @@
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
     <string name="menu_attach">СОЕДИНИТЬ</string>
-    <!-- UNUSED string name="menu_calib">КАЛИБРОВКИ</string -->
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <string name="menu_display">Показать</string>
@@ -245,7 +241,6 @@
     <string name="menu_help">Помощь</string>
     <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
     <string name="menu_logs">Журнал</string>
-    <!-- OK string name="menu_manual">Вручную</string -->
     <string name="menu_manual_calibration">Калибровка</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">ОБЗОР</string>
@@ -298,7 +293,6 @@
     <!-- UNUSED string name="plot_recover">Перезагрузить абрис из бекапа?</string -->
     <string name="plot_start">Начальный пикет</string>
     <!-- OK string name="plot_view">Просмотренный пикет</string -->
-    <!-- UNUSED string name="read_">Считать </string -->
     <string name="read_data">Считать %1$d данных</string>
     <string name="read_calib_data">Считанно %1$d данных (%2$d пакетов)</string>
     <!-- UNUSED string name="read_fail_with_code">Ошибка чтения: код ошибки </string -->
@@ -316,14 +310,12 @@
     <string name="section_area">Площадь сечения: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->
-    <!-- OK string name="sensor_accelerometer">акселерометр</string -->
     <string name="sensor_gravity">ускорение</string>
     <!-- OK string name="sensor_humidity">влажность</string -->
     <string name="sensor_light">освещенность</string>
     <string name="sensor_magnetic_field">магнитное поле</string>
     <!-- OK string name="sensor_orientation">ориентация</string -->
     <string name="sensor_pressure">атм. давление</string>
-    <!-- UNUSED string name="sensor_proximity">сближение</string -->
     <string name="sensor_temperature">температура</string>
     <string name="sensor_extern">внешний</string>
     <string name="sensor_type">тип</string>
@@ -335,9 +327,6 @@
     <string name="shot_delete">Удалить сегмент ?</string>
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные пикета</string>
-    <!-- UNUSED string name="shot_leg">повторный замер</string -->
-    <!-- UNUSED string name="shot_renumber">перенумеровать</string -->
-    <!-- UNUSED string name="shot_all_splay">группа боковых замеров</string -->
     <!-- OK string name="shot_length">длинна</string -->
     <string name="shot_note">заметки</string>
     <string name="shot_reverse">обратный</string>
@@ -452,15 +441,6 @@
     <string name="button_upload"    >Выгрузить  </string>
     <string name="button_view"      >Просмотр   </string>
 
-    <!-- UNUSED string name="button_sharp"     >Острый</string -->
-    <!-- UNUSED string name="button_rock"      >Камень</string -->
-    <!-- UNUSED string name="button_close"     >Закрыть</string -->
-
-    <!-- UNUSED string name="button_erase"     >Стереть   </string -->
-    <!-- UNUSED string name="button_next"      >Следующий </string -->
-    <!-- UNUSED string name="button_prev"      >Предыдущий</string -->
-    <!-- UNUSED string name="button_split"     >Разделить </string -->
-    <!-- UNUSED string name="button_toggle"    >Режим КАЛИБ  </string -->
 
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
@@ -481,11 +461,7 @@
     <string name="popup_do_splay">Боковой замер</string>
     <string name="popup_do_leg">Замер на пикет</string>
 
-<!-- OK
-    <string name="btn_3d">3D</string>
--->
-    <!-- UNUSED string name="btn_man">Ручной</string -->
-    <!-- UNUSED string name="btn_symbol">Инстр. Рисования</string -->
+    <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импорт</string>
 
 <!-- FIXME_SKETCH_3D -->    
@@ -538,8 +514,6 @@
 
     <string name="help_help">Помощь</string>
     <!-- UNUSED string name="help_manual">Инструкция</string -->
-    <!-- OK string name="help_more">Показать вторичные функции</string -->
-    <!-- OK string name="help_less">Показать первичные функции</string -->
     <string name="help_measure">Измерить расстояния</string>
     
     <string name="help_coeff">Показать коэфиценты калибровки</string>

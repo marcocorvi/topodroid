@@ -8,7 +8,6 @@
     <string name="double_back">Clic RETOUR une nouvelle fois pour sortir</string>
 
     <string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez vous réinstaller les symboles de dessins ?</string>
-    <!-- UNUSED string name="version_title">Mise à jour de version</string -->
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
@@ -126,7 +125,6 @@
     <string name="file_not_found">Fichier inexistant</string>
     <string name="import_zip_ok">Fichier zip importé avec succes</string>
     <string name="import_zip_wait">L\'importation du fichier zip peut etre longue ... Patientez...</string>
-    <!-- UNUSED string name="sketch_loading">Importation de dessin ... Patientez ...</string -->
     <!-- UNUSED string name="sketch_saving">Exportation de dessin ... Patientez ...</string -->
     <string name="MT_points_none">No MobileTopographer point</string>
  
@@ -218,7 +216,6 @@
     <string name="no_sensors">Le relevé n\'a aucune mesure</string>
     <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
     <string name="no_survey">Aucun relevé sélectionné.</string>
-    <!-- UNUSED string name="no_tdsymbol">TdSymbol non installé</string -->
     <string name="no_thmanager">ThManager non installé</string>
     <string name="no_db_viewer">DB_viewer app pas trouvée</string>
     <string name="no_undelete">Aucun élément à récupérer</string>
@@ -229,7 +226,6 @@
     <string name="menu_about">A PROPOS</string>
     <!-- TODO string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNECTER</string>
-    <!-- UNUSED string name="menu_calib">CALIBRATION</string -->
     <!-- string name="menu_attached">Connecté</string -->
     <!-- string name="menu_ready">Prêt</string -->
     <string name="menu_delete">SUPPRIMER</string>
@@ -244,7 +240,6 @@
     <string name="menu_help">AIDE</string>
     <string name="menu_join_survey">CO-RELEVE</string>
     <string name="menu_logs">JOURNALISATION</string>
-    <!-- UNUSED string name="menu_manual">MANUEL</string -->
     <string name="menu_manual_calibration">CALIBRATION</string>
     <string name="menu_options">OPTIONS</string>
     <string name="menu_overview">VUE ENSEMBLE</string>
@@ -297,7 +292,6 @@
     <!-- UNUSED string name="plot_recover">Recuperer relevé de la sauvegarde?</string -->
     <string name="plot_start">Station d\'origne</string>
     <!-- UNUSED string name="plot_view">Station consulté</string -->
-    <!-- UNUSED string name="read_">Lecture </string -->
     <string name="read_data">Lecture %1$d données</string>
     <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
     <!-- UNUSED string name="read_fail_with_code">Echec de lecture : code d\'erreur </string -->
@@ -315,14 +309,12 @@
     <!-- TODO string name="section_area">Section area: %1$.1f</string -->
 
     <!-- UNUSED string name="sensor">capteur</string -->
-    <!-- UNUSED string name="sensor_accelerometer">accelerometer</string -->
     <string name="sensor_gravity">gravité</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">lumière</string>
     <string name="sensor_magnetic_field">champ magnétique</string>
     <!-- UNUSED string name="sensor_orientation">orientation</string -->
     <string name="sensor_pressure">pression</string>
-    <!-- UNUSED string name="sensor_proximity">proximité</string -->
     <string name="sensor_temperature">température</string>
     <string name="sensor_extern">externe</string>
     <string name="sensor_type">type</string>
@@ -334,9 +326,6 @@
     <string name="shot_delete">Supprimer visée ?</string >
     <string name="shot_from">depuis</string>
     <string name="shot_info">Saisir les infos de visée</string>
-    <!-- UNUSED string name="shot_leg">Visée répétée</string -->
-    <!-- UNUSED string name="shot_renumber">renumeroter</string -->
-    <!-- UNUSED string name="shot_all_splay">groupe de visée laterales</string  -->
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">note</string>
     <string name="shot_reverse">inverse</string>
@@ -453,15 +442,6 @@
     <string name="button_upload"    >UPLOAD   </string>
     <!-- TODO string name="button_view"      >View      </string -->
 
-    <!-- UNUSED string name="button_sharp"     >Sharp</string -->
-    <!-- UNUSED string name="button_rock"      >Rock</string -->
-    <!-- UNUSED string name="button_close"     >Fermer</string -->
-
-    <!-- UNUSED string name="button_erase"     >Effacer     </string -->
-    <!-- UNUSED string name="button_next"      >Suivant      </string -->
-    <!-- UNUSED string name="button_prev"      >Precedent  </string -->
-    <!-- UNUSED string name="button_split"     >Diviser     </string -->
-    <!-- UNUSED string name="button_toggle"    >BAsculer CAL mode  </string -->
 
     <string name="button_write"     >Uploader</string>
     <string name="button_xsection"  >X-Section</string>
@@ -482,27 +462,7 @@
     <!-- TODO string name="popup_do_splay">Splay shot</string -->
     <!-- TODO string name="popup_do_leg">Leg shots</string -->
 
-<!--
-    <string name="btn_3d">3D</string>
--->
-<!--
-    <string name="btn_compass">Compass</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
-    <string name="btn_kml">KML</string>
-    <string name="btn_oziexplorer">OziExplorer</string>
-    <string name="btn_png">PNG</string>
-    <string name="btn_pockettopo">PocketTopo</string>
-    <string name="btn_survex">Survex</string>
-    <string name="btn_therion">Therion</string>
-    <string name="btn_vtopo">VisualTopo</string>
-    <string name="btn_walls">Walls</string>
-    <string name="btn_svg">SVG</string>
-    <string name="btn_zip">Zip</string>
--->
-    <!-- UNUSED string name="btn_man">Manuel</string -->
-    <!-- UNUSED string name="btn_symbol">Outils de dessin</string -->
+    <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importer</string>
 
 
@@ -557,8 +517,6 @@
 
     <string name="help_help">Affiche l\'aide</string>
     <!-- UNUSED string name="help_manual">Manuel Utilisateur</string -->
-    <!-- string name="help_more">Affiche des options supplémentaires</string -->
-    <!-- string name="help_less">Retour aux options précédentes</string -->
     <string name="help_measure">Mesurer les distances</string>
     
     <string name="help_coeff">Montrer les coefficients de calibration</string>

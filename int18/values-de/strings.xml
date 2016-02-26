@@ -7,7 +7,6 @@
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
     <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string>
-    <!-- UNUSED string name="version_title">Versions-Update</string -->
 
     <string name="POINT">PUNKTE</string>
     <string name="LINE">LINIEN</string>
@@ -137,7 +136,6 @@
     <string name="file_not_found">Datei nicht gefunden</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
     <string name="import_zip_wait">Importieren Zip-Datei, bitte warten&#8230;</string>
-    <!-- UNUSED string name="sketch_loading">Skizze laden, bitte warten&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
 
@@ -233,7 +231,6 @@
     <string name="no_sensors">Vermessung hat keine Sensormessungen</string>
     <!-- UNUSED string name="no_shots">Vermessung hat keine Messungen</string -->
     <string name="no_survey">Keine Vermessung ausgewählt</string>
-    <!-- UNUSED string name="no_tdsymbol">Keine TdSymbol App</string -->
     <string name="no_thmanager">Keine ThManager App</string>
     <string name="no_db_viewer">Keine DB_viewer App</string>
     <string name="no_undelete">Nichts wiederherzustellen</string>
@@ -250,7 +247,6 @@
     <string name="menu_about">ÜBER</string>
     <string name="menu_area">FLÄCHE</string>
     <string name="menu_attach">VERBINDEN</string>
-    <!-- UNUSED string name="menu_calib">KALIBRIERUNG</string -->
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
     <string name="menu_display">ANZEIGEN</string>
@@ -263,7 +259,6 @@
     <string name="menu_help">HILFE</string>
     <string name="menu_join_survey">CO-VERMESSUNG</string>
     <string name="menu_logs">LOGS</string>
-    <!-- UNUSED string name="menu_manual">HANDBUCH</string -->
     <string name="menu_manual_calibration">KALIBRIERUNG</string>
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
@@ -314,7 +309,6 @@
     <string name="plot_not_found">Skizze nicht gefunden</string>
     <!-- UNUSED string name="plot_recover">Skizze aus dem Backup laden?</string -->
     <string name="plot_start">Basismesspunkt</string>
-    <!-- UNUSED string name="read_">Lesen </string -->
     <string name="read_data">%1$d Messungen gelesen</string>
     <string name="read_calib_data">%1$d Daten gelesen (%2$d Pakete)</string>
     <!-- UNUSED string name="read_fail_with_code">Lesefehler: Fehlercode</string -->
@@ -331,14 +325,12 @@
     <string name="section_area">Fläche: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
-    <!-- UNUSED string name="sensor_accelerometer">Beschleunigungsmesser</string -->
     <string name="sensor_gravity">Schwerkraft</string>
     <!-- UNUSED string name="sensor_humidity">Luftfeuchtigkeit</string -->
     <string name="sensor_light">Licht</string>
     <string name="sensor_magnetic_field">Magnetisches Feld</string>
     <!-- UNUSED string name="sensor_orientation">Richtung</string -->
     <string name="sensor_pressure">Druck</string>
-    <!-- UNUSED string name="sensor_proximity">Nähe</string -->
     <string name="sensor_temperature">Temperatur</string>
     <string name="sensor_extern">Benutzerdefiniert</string>
     <string name="sensor_type">Art</string>
@@ -350,9 +342,6 @@
     <string name="shot_delete">Messzug löschen?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Info</string>
-    <!-- UNUSED string name="shot_leg">Wiederholen Messstrecke</string -->
-    <!-- UNUSED string name="shot_leg">Wiedermessung</string -->
-    <!-- UNUSED string name="shot_renumber">Umnummerieren</string -->
     <!-- UNUSED string name="shot_length">Länge</string -->
     <string name="shot_note">Notizen</string>
     <string name="shot_reverse">umkehren</string>
@@ -476,16 +465,6 @@
     <string name="button_upload"    >Schreiben</string>
     <string name="button_view"      >Anzeigen      </string>
 
-    <!-- UNUSED string name="button_sharp"     >Schärfen</string -->
-    <!-- UNUSED string name="button_rock"      >Stein</string -->
-    <!-- UNUSED string name="button_close"     >Beenden</string -->
-
-    <!-- UNUSED string name="button_erase"     >Löschen   </string -->
-    <!-- UNUSED string name="button_next"      >Nächste   </string -->
-    <!-- UNUSED string name="button_prev"      >Früher    </string -->
-    <!-- UNUSED string name="button_split"     >Split     </string -->
-    <!-- UNUSED string name="button_toggle"    >Toggle CAL mode  </string -->
-
     <string name="button_write"     >Hochladen</string>
     <string name="button_xsection"  >Querschnitt</string>
 
@@ -506,8 +485,6 @@
     <string name="popup_do_leg">Messzug messen (n Messungen)</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- UNUSED string name="btn_man">Manual</string -->
-    <!-- UNUSED string name="btn_symbol">Drawing tools</string -->
     <string name="btn_import">Importieren</string>
 
 
@@ -564,8 +541,6 @@
 <!-- HELP STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
     <string name="help_help">Diese Hilfe</string>
     <!-- UNUSED string name="help_manual">Handbuch</string -->
-    <!-- OK string name="help_more">Die sekundären Aktionen zeigen</string -->
-    <!-- OK string name="help_less">Zu den primären Aktionen zurückgehen</string -->
     <string name="help_measure">Entfernungen messen</string>
 
     <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>

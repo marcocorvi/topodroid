@@ -40,13 +40,6 @@ public class PhotoSensorsDialog extends MyDialog
   private TextView mTVstations;
   private TextView mTVdata;
 
-  // private Button   mButtonPhoto;
-  // private Button   mButtonSensor;
-  // // private Button   mButtonExternal;
-  // private Button   mButtonShot;     // add shot
-  // private Button   mButtonSurvey;   // split survey
-  // private Button   mButtonDelete;
-  // // private Button   mButtonCancel;
   private MyCheckBox mButtonPhoto;
   private MyCheckBox mButtonSensor;
   private MyCheckBox mButtonShot;
@@ -76,14 +69,6 @@ public class PhotoSensorsDialog extends MyDialog
     setContentView(R.layout.photo_sensor_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    // mButtonPhoto    = (Button) findViewById(R.id.photo_photo );
-    // mButtonSensor   = (Button) findViewById(R.id.photo_sensor );
-    // // mButtonExternal = (Button) findViewById(R.id.photo_external );
-    // mButtonShot     = (Button) findViewById(R.id.photo_shot );
-    // mButtonSurvey   = (Button) findViewById(R.id.photo_survey );
-    // mButtonDelete = (Button) findViewById(R.id.photo_delete );
-    // // mButtonCancel = (Button) findViewById(R.id.button_cancel );
-
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 20 );
@@ -106,7 +91,6 @@ public class PhotoSensorsDialog extends MyDialog
 
     layout4.invalidate();
 
-
     setTitle( R.string.title_photo );
 
     mTVstations = (TextView) findViewById( R.id.photo_shot_stations );
@@ -120,7 +104,6 @@ public class PhotoSensorsDialog extends MyDialog
     mButtonShot.setOnClickListener( this );
     mButtonSurvey.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
   }
 
   public void onClick(View v) 

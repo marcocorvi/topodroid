@@ -7,7 +7,6 @@
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
-    <!-- UNUSED string name="version_title">Versión de actualización</string -->
 
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
@@ -122,7 +121,6 @@
     <!-- TODO string name="file_not_found">File not found</string -->
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
     <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string>
-    <!-- UNUSED string name="sketch_loading">Importando dibujo, espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
 
@@ -226,7 +224,6 @@
     <string name="menu_about">Acerca de..</string>
     <string name="menu_area">Área</string>
     <string name="menu_attach">Conectar</string>
-    <!-- UNUSED string name="menu_calib">Calibración</string -->
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <string name="menu_display">Pantalla</string>
@@ -239,7 +236,6 @@
     <string name="menu_help">Ayuda</string>
     <string name="menu_join_survey">Unir topografías</string>
     <string name="menu_logs">Registros</string>
-    <!-- UNUSED string name="menu_manual">Manual</string -->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Opciones</string>
     <string name="menu_overview">Medir distancia</string>
@@ -292,7 +288,6 @@
     <!-- UNUSED string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string -->
     <string name="plot_start">Base estación</string>
     <!-- UNUSED string name="plot_view">Vista Estación</string -->
-    <!-- UNUSED string name="read_">Leer </string -->
     <string name="read_data">Leer %1$d datos</string>
     <string name="read_calib_data">Leer %1$d datos (%2$d packets)</string>
     <!-- UNUSED string name="read_fail_with_code">Fallo de lectura: código de error </string -->
@@ -310,14 +305,12 @@
     <string name="section_area">Sección de área: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
-    <!-- UNUSED string name="sensor_accelerometer">Acelerómetro</string -->
     <string name="sensor_gravity">Gravedad</string>
     <!-- UNUSED string name="sensor_humidity">Humedad</string -->
     <string name="sensor_light">Luz</string>
     <string name="sensor_magnetic_field">Campo magnético</string>
     <!-- UNUSED string name="sensor_orientation">Orientación</string -->
     <string name="sensor_pressure">Presión</string>
-    <!-- UNUSED string name="sensor_proximity">Proximidad</string -->
     <string name="sensor_temperature">Temperatura</string>
     <string name="sensor_extern">Externo</string>
     <string name="sensor_type">Tipo</string>
@@ -329,9 +322,6 @@
     <string name="shot_delete">¿Eliminar toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
-    <!-- UNUSED string name="shot_leg">Toma repetida</string -->
-    <!-- UNUSED string name="shot_renumber">Reenumerar toma</string -->
-    <!-- UNUSED string name="shot_all_splay">Todas las tomas laterales</string -->
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
     <string name="shot_reverse">Toma Inversa</string>
@@ -445,15 +435,6 @@
     <string name="button_upload"    >Cargar    </string>
     <string name="button_view"      >Ver       </string>
 
-    <!-- UNUSED string name="button_sharp"     >agudo</string -->
-    <!-- UNUSED string name="button_rock"      >Roca</string -->
-    <!-- UNUSED string name="button_close"     >Cerrar</string -->
-
-    <!-- UNUSED string name="button_erase"     >Borrar    </string -->
-    <!-- UNUSED string name="button_next"      >Siguiente </string -->
-    <!-- UNUSED string name="button_prev"      >Anterior  </string -->
-    <!-- UNUSED string name="button_split"     >División </string -->
-    <!-- UNUSED string name="button_toggle"    >Cambiar Modo CAL </string -->
 
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >X-Sección</string>
@@ -474,11 +455,7 @@
     <string name="popup_do_splay">Tomas laterales</string>
     <string name="popup_do_leg">Tomas principales</string>
 
-<!--
-    <string name="btn_3d">3D</string>
--->
-    <!-- UNUSED string name="btn_man">Manual</string -->
-    <!-- UNUSED string name="btn_symbol">Símbolos</string -->
+    <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importar</string>
 
     <!-- TODO string name="length">Length [m]</string -->
@@ -491,8 +468,6 @@
 
     <string name="help_help">Ayuda</string>
     <!-- UNUSED string name="help_manual">Manual online</string -->
-    <!-- UNUSED string name="help_more">Mostrar otras opciones</string -->
-    <!-- UNUSED string name="help_less">Volver a opciones principales</string -->
     <string name="help_measure">Medir distancias</string>
     
     <string name="help_coeff">Mostrar coeficientes de calibración</string>

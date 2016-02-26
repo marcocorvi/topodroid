@@ -104,7 +104,6 @@ public class DeviceActivity extends Activity
                         R.string.menu_scan,
                         R.string.menu_pair,
                         R.string.menu_detach,
-                        // R.string.menu_calib,
                         R.string.menu_firmware,
                         R.string.menu_options,
                         R.string.menu_help

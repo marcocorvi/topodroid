@@ -45,7 +45,6 @@ public class SensorActivity extends Activity
 
   private RadioButton mRBLight = null;
   private RadioButton mRBMagnetic = null;
-  // private RadioButton mRBProximity = null;
   private RadioButton mRBTemperature = null;
   private RadioButton mRBPressure = null;
   private RadioButton mRBGravity = null;
@@ -70,7 +69,6 @@ public class SensorActivity extends Activity
 
     mRBLight         = ( RadioButton ) findViewById( R.id.sensor_light );
     mRBMagnetic      = ( RadioButton ) findViewById( R.id.sensor_magnetic_field );
-    // mRBProximity     = ( RadioButton ) findViewById( R.id.sensor_proximity );
     mRBTemperature   = ( RadioButton ) findViewById( R.id.sensor_temperature );
     mRBPressure      = ( RadioButton ) findViewById( R.id.sensor_pressure );
     mRBGravity       = ( RadioButton ) findViewById( R.id.sensor_gravity );
@@ -100,14 +98,6 @@ public class SensorActivity extends Activity
     } else {
       mRBMagnetic.setEnabled( false );
     }
-
-    // sl = mSensorManager.getSensorList( Sensor.TYPE_PROXIMITY );
-    // if ( sl.size() > 0 ) {
-    //   mRBProximity.setOnClickListener( this );
-    //   for ( Sensor s : sl ) mSensor.add( s );
-    // } else {
-    //   mRBProximity.setEnabled( false );
-    // }
 
     sl = mSensorManager.getSensorList( Sensor.TYPE_TEMPERATURE );
     if ( sl.size() > 0 ) {
@@ -165,9 +155,6 @@ public class SensorActivity extends Activity
     } else if ( mRBMagnetic != null && mRBMagnetic.isChecked() ) {
       mSensorType = Sensor.TYPE_MAGNETIC_FIELD;
       mETtype.setText( R.string.sensor_magnetic_field );
-    // } else if ( mRBProximity != null && mRBProximity.isChecked() ) {
-    //   mSensorType = Sensor.TYPE_PROXIMITY;
-    //   mETtype.setText( R.string.sensor_proximity );
     } else if ( mRBTemperature != null && mRBTemperature.isChecked() ) {
       mSensorType = Sensor.TYPE_TEMPERATURE; //  Sensor.TYPE_AMBIENT_TEMPERATURE;
       mETtype.setText( R.string.sensor_temperature );

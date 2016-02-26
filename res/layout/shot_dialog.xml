@@ -138,38 +138,6 @@
         android:hint="@string/shot_note"
         />
 
-    <!-- LinearLayout 
-      android:id="@+id/layout4"
-      android:layout_width="fill_parent" 
-      android:layout_height="50sp"
-      android:layout_below="@id/shot_comment"
-      android:paddingLeft="10sp"
-      android:paddingRight="10sp"
-      android:orientation="horizontal" 
-      />
-      <CheckBox
-        android:id="@+id/shot_renumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/shot_renumber"
-        android:singleLine="true"
-        />
-      <CheckBox
-        android:id="@+id/shot_leg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/shot_leg"
-        android:singleLine="true"
-        />
-      <CheckBox
-        android:id="@+id/shot_all_splay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/shot_all_splay"
-        android:singleLine="true"
-        />
-    </LinearLayout -->
-
     <LinearLayout 
       android:id="@+id/layout5"
       android:layout_below="@id/shot_comment"
@@ -198,28 +166,6 @@
         android:layout_height="wrap_content"
         android:text="@string/extend_ignore" / -->
     </LinearLayout>
-
-    <!-- LinearLayout 
-      android:id="@+id/layout6"
-      android:layout_below="@id/layout5"
-      android:layout_width="fill_parent" 
-      android:layout_height="wrap_content"
-      android:orientation="horizontal" 
-      >
-      <CheckBox 
-        android:id="@+id/shot_dup"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:text="@string/duplicate"
-        />
-
-      <CheckBox 
-        android:id="@+id/shot_surf"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content"
-        android:text="@string/surface"
-        />
-    </LinearLayout -->
 
     <LinearLayout 
       android:id="@+id/layout4"

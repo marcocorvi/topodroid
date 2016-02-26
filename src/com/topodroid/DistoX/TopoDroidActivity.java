@@ -598,7 +598,6 @@ public class TopoDroidActivity extends Activity
   // private Button mButtonHelp;
 
   TopoDroidAbout mTopoDroidAbout = null;
-  // TdSymbolDialog mTdSymbolDialog = null;
  
   HorizontalListView mListView;
   // HorizontalImageButtonView mButtonView1;
@@ -727,8 +726,6 @@ public class TopoDroidActivity extends Activity
       mTopoDroidAbout.setOnCancelListener( this );
       mTopoDroidAbout.setOnDismissListener( this );
       mTopoDroidAbout.show();
-    // } else if ( mApp.mTdSymbol ) {
-    //   startTdSymbolDialog();
     }
 
     if ( mApp.askSymbolUpdate ) {
@@ -808,20 +805,7 @@ public class TopoDroidActivity extends Activity
   @Override
   public void onDismiss( DialogInterface d )
   { 
-    // if ( d == (Dialog)mTdSymbolDialog ) {
-    //   if ( mApp.mStartTdSymbol ) {
-    //     Intent intent = new Intent( "TdSymbol.intent.action.Launch" );
-    //     try {
-    //       startActivity( intent );
-    //       DrawingBrushPaths.mReloadSymbols = true;
-    //     } catch ( ActivityNotFoundException e ) {
-    //       Toast.makeText( this, R.string.no_tdsymbol, Toast.LENGTH_SHORT ).show();
-    //     }
-    //   }
-    //   mTdSymbolDialog = null;
-    // } else
     if ( d == (Dialog)mTopoDroidAbout ) {
-      // startTdSymbolDialog();
       mTopoDroidAbout = null;
     }
   }
@@ -830,7 +814,6 @@ public class TopoDroidActivity extends Activity
   public void onCancel( DialogInterface d )
   {
     if ( d == (Dialog)mTopoDroidAbout ) {
-      // startTdSymbolDialog();
       mTopoDroidAbout = null;
     }
   }

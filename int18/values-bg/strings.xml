@@ -7,7 +7,6 @@
     <string name="double_back">Натиснете отново за да излезете</string>
 
     <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string>
-    <!-- UNUSED string name="version_title">Обновяване на версията</string -->
 
     <string name="POINT">Точка</string>
     <string name="LINE">Линия</string>
@@ -125,7 +124,6 @@
     <string name="file_not_found">Файлът не е намерен</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
-    <!-- UNUSED string name="sketch_loading">Зареждане на скица… Моля изчакайте…</string -->
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
 
@@ -220,7 +218,6 @@
     <string name="no_sensors">Картировката не съдържа сензорни измервания</string>
     <!-- UNUSED string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string -->
     <string name="no_survey">Не е избрана картировка</string>
-    <!-- UNUSED string name="no_tdsymbol">TdSymbol не е инсталирана</string -->
     <string name="no_thmanager">ThManager не е инсталирана</string>
     <string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string>
     <string name="no_undelete">Няма елементи за възстановяване</string>
@@ -231,7 +228,6 @@
     <string name="menu_about">За програмата</string>
     <string name="menu_area">Площ</string>
     <string name="menu_attach">Свързване</string>
-    <!-- UNUSED string name="menu_calib">Калибрация</string -->
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
     <string name="menu_delete">Изтриване</string>
@@ -246,7 +242,6 @@
     <string name="menu_help">Помощ</string>
     <string name="menu_join_survey">Ко-картиране</string>
     <string name="menu_logs">Лог файлове</string>
-    <!-- string name="menu_manual">manual</string -->
     <string name="menu_manual_calibration">Калибрация</string>
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">Общ изглед</string>
@@ -298,7 +293,6 @@
     <!-- UNUSED string name="plot_recover">Възстановяване на скицата от резервното копие?</string -->
     <string name="plot_start">Начален репер</string>
     <!-- string name="plot_view">Viewed station</string -->
-    <!-- UNUSED string name="read_">Прочетени </string -->
     <string name="read_data">Прочетени %1$d измервания</string>
     <string name="read_calib_data">Прочетени %1$d измервания (%2$d пакети)</string>
     <!-- UNUSED string name="read_fail_with_code">Грешка при четене: код </string -->
@@ -316,14 +310,12 @@
     <string name="section_area">Площ на сечение: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">сензор</string -->
-    <!-- string name="sensor_accelerometer">accelerometer</string -->
     <string name="sensor_gravity">гравитация</string>
     <!-- string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">осветеност</string>
     <string name="sensor_magnetic_field">магнитно поле</string>
     <!-- string name="sensor_orientation">orientation</string -->
     <string name="sensor_pressure">налягане</string>
-    <!-- UNUSED string name="sensor_proximity">близост</string -->
     <string name="sensor_temperature">температура</string>
     <string name="sensor_extern">външен</string>
     <string name="sensor_type">тип</string>
@@ -335,9 +327,6 @@
     <string name="shot_delete">Изтриване на измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
-    <!-- UNUSED string name="shot_leg">Повтаряща се отсечка</string -->
-    <!-- UNUSED string name="shot_renumber">Преномериране</string -->
-    <!-- UNUSED string name="shot_all_splay">Група странични изм.</string -->
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
     <string name="shot_reverse">обръщане</string>
@@ -457,15 +446,6 @@
     <string name="button_upload"    >Качване   </string>
     <string name="button_view"      >Преглед   </string>
 
-    <!-- UNUSED string name="button_sharp"     >Изостряне</string -->
-    <!-- UNUSED string name="button_rock"      >Редуц. точки</string -->
-    <!-- UNUSED string name="button_close"     >Close</string -->
-
-    <!-- UNUSED string name="button_erase"     >Erase     </string -->
-    <!-- UNUSED string name="button_next"      >Next      </string -->
-    <!-- UNUSED string name="button_prev"      >Previous  </string -->
-    <!-- UNUSED string name="button_split"     >Split     </string -->
-    <!-- UNUSED string name="button_toggle"    >Toggle CAL mode  </string -->
 
     <string name="button_write"     >Качване</string>
     <string name="button_xsection"  >Сечение</string>
@@ -486,11 +466,7 @@
     <string name="popup_do_splay">Странично измерване</string>
     <string name="popup_do_leg">Отсечка</string>
 
-<!--
-    <string name="btn_3d">3D</string>
--->
-    <!-- UNUSED string name="btn_man">Ръчно</string -->
-    <!-- UNUSED string name="btn_symbol">Инструменти за рисуване</string -->
+    <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импортиране</string>
 
 <!-- FIXME_SKETCH_3D -->
@@ -543,8 +519,6 @@
 
     <string name="help_help">Помощ</string>
     <!-- UNUSED string name="help_manual">Ръководство</string -->
-    <!-- OK string name="help_more">Показване на допълнителни команди</string -->
-    <!-- OK string name="help_less">Връщане към основните команди</string -->
     <string name="help_measure">Измерване на разстояния</string>
 
     <string name="help_coeff">Показване на коеф. на калибрация</string>

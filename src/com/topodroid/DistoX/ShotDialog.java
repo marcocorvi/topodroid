@@ -298,14 +298,6 @@ public class ShotDialog extends MyDialog
       }
     }
     
-    // // mRBreg  = (CheckBox) findViewById( R.id.shot_reg );
-    // mRBdup  = (CheckBox) findViewById( R.id.shot_dup );
-    // mRBsurf = (CheckBox) findViewById( R.id.shot_surf );
-    // // mRBback = (CheckBox) findViewById( R.id.shot_back );
-    // mCBleg = (CheckBox)  findViewById(R.id.shot_leg );
-    // mCBallSplay = (CheckBox)  findViewById(R.id.shot_all_splay );
-    // mCBrenumber  = (CheckBox)  findViewById(R.id.shot_renumber  );
-
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
     layout4.setMinimumHeight( size + 20 );
