@@ -373,7 +373,7 @@
     <string name="undelete_text">Tap item to recover</string>
     <string name="visible_border">visible border</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
-    <string name="wait_scan">Scanning: wait ...</string>
+    <string name="wait_scan">Scanning: wait &#8230;</string>
     <string name="write_failed">Failed DistoX-write</string>
     <string name="write_ok">Written calibration to DistoX</string>
     <string name="zip_saved">Saved </string>
@@ -665,7 +665,7 @@
     <!-- string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_device">DistoX devices</string>
-    <string name="title_discover">Scanning for DistoX devices ... wait</string>
+    <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINE %1$s</string>
     <string name="title_draw_point">POINT %1$s</string>
