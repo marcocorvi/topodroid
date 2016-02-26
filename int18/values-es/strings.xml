@@ -56,10 +56,10 @@
     <string name="calib_gm_undelete">¿Eliminar datos de calibración?</string>
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
-    <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos ...</string>
-    <string name="calib_compute_coeffs">Cálculo de coeficientes de calibración  ...</string>
-    <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración ...</string -->
-    <string name="calib_write_coeffs">Escribir coeficientes de calibración ...</string>
+    <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos &#8230;</string>
+    <string name="calib_compute_coeffs">Cálculo de coeficientes de calibración  &#8230;</string>
+    <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración &#8230;</string -->
+    <string name="calib_write_coeffs">Escribir coeficientes de calibración &#8230;</string>
     <string name="calib_validation">Validación de %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Fallo de conexión</string -->
     <!-- UNUSED string name="data"> Datos</string -->
@@ -115,15 +115,15 @@
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
-    <!-- UNUSED string name="import_wait">Importando archivo, espere...</string -->
+    <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
     <string name="import_none">No hay archivo a importar</string>
     <!-- TODO string name="import_failed">File import failed</string -->
     <!-- TODO string name="file_not_found">File not found</string -->
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
-    <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere ...</string>
-    <!-- UNUSED string name="sketch_loading">Importando dibujo, espere ...</string -->
-    <!-- UNUSED string name="sketch_saving">Exportando dibujo ... espere ...</string -->
+    <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string>
+    <!-- UNUSED string name="sketch_loading">Importando dibujo, espere &#8230;</string -->
+    <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
@@ -368,7 +368,7 @@
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
     <string name="visible_border">Borde visible</string>
     <!-- UNUSED string name="vthreshold">Precisión</string -->
-    <string name="wait_scan">Buscando: espere...</string>
+    <string name="wait_scan">Buscando: espere&#8230;</string>
     <string name="write_failed">Error al escribir en DistoX</string>
     <string name="write_ok">Calibración Escrita en DistoX</string>
     <string name="zip_saved">Guardar</string>
@@ -581,7 +581,7 @@
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_device">Dispositivo DistoX</string>
-    <string name="title_discover">Buscar dispositivos DistoX ... espere</string>
+    <string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string>
     <string name="title_draw_area">Área %1$s</string>
     <string name="title_draw_line">Línea %1$s</string>
     <string name="title_draw_point">Punto %1$s</string>
@@ -616,8 +616,8 @@
     <string name="title_survey">Info Topografía</string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar Topografías</string>
-    <string name="title_survey_rename">Renombrar topografía como...</string>
-    <string name="title_calib_export">Exportar topografía como...</string>
+    <string name="title_survey_rename">Renombrar topografía como&#8230;</string>
+    <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">Opciones de topografía</string>

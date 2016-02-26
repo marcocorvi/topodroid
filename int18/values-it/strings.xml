@@ -115,15 +115,15 @@
 
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>
-    <!-- UNUSED string name="import_wait">Importazione file... attendi...</string -->
+    <!-- UNUSED string name="import_wait">Importazione file&#8230; attendi&#8230;</string -->
     <string name="import_already">Rilievo già presente</string>
     <string name="import_none">Nessun file da importare</string>
     <string name="import_failed">Importazione file fallita</string>
     <string name="file_not_found">File non trovato</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
-    <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi...</string>
-    <!-- UNUSED string name="sketch_loading">Caricamento disegno ... attendi ...</string -->
-    <!-- UNUSED string name="sketch_saving">Salvataggio disegno ... attendi ...</string -->
+    <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string>
+    <!-- UNUSED string name="sketch_loading">Caricamento disegno &#8230; attendi &#8230;</string -->
+    <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
@@ -372,7 +372,7 @@
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
     <string name="visible_border">bordo visibile</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
-    <string name="wait_scan">Scanning: attendi ...</string>
+    <string name="wait_scan">Scanning: attendi &#8230;</string>
     <string name="write_failed">Scrittura su DistoX fallita</string>
     <string name="write_ok">Calibrazione scritta sul DistoX</string>
     <string name="zip_saved">Salvato </string>
@@ -586,7 +586,7 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
-    <string name="title_discover">Ricerca dispositivi DistoX ... attendi</string>
+    <string name="title_discover">Ricerca dispositivi DistoX &#8230; attendi</string>
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINEA %1$s</string>
     <string name="title_draw_point">PUNTO %1$s</string>
