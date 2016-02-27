@@ -145,7 +145,7 @@
     <string name="loop_none">Nessun anello</string>
     <string name="long_lat">Long-Lat</string>
 
-    <!-- string name="line_delete">Elimina linea</string -->
+    <string name="line_delete">Elimina linea</string>
     <string name="flip_shots">Capovolgi battute</string>
 
     <string name="error_azimuth_required">Azimuth mancante</string>
