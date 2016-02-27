@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
-    <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
+    <string name="no_manual">Scarico manuale utente dal web non riuscito</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
@@ -14,10 +14,10 @@
     <string name="HELP">AIUTO</string>
     <string name="STATION">CAPOSALDO </string>
 
-    <!-- DONE string name="cut">TAGLIA</string -->
-    <!-- DONE string name="copy">COPIA</string -->
-    <!-- DONE string name="paste">INCOLLA</string -->
-    <!-- DONE string name="copied">Copiati %1$s negli appunti</string -->
+    <string name="cut">TAGLIA</string>
+    <string name="copy">COPIA</string>
+    <string name="paste">INCOLLA</string>
+    <string name="copied">Copiati %1$s negli appunti</string -->
 
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
@@ -51,7 +51,7 @@
     <string name="calib_delete">Eliminare calibrazione </string>
     <string name="calib_device_mismatch">ATTENZIONE. Discrepanza tra calibrazione e dispositivo</string>
     <string name="calib_no_name">Nome della calibrazione mancante</string>
-    <!-- TODO string name="calib_gm_policy">Policy</string -->
+    <string name="calib_gm_policy">Policy di calibrazione</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
     <string name="calib_saved">Salvata calibrazione</string>
     <string name="calib_updated">Aggiornata calibrazione</string>
@@ -143,7 +143,7 @@
     <string name="longitude_hint">Long. gg:mm:ss.sss</string>
     <string name="loop_closure_errors">Errori chiusura anelli</string>
     <string name="loop_none">Nessun anello</string>
-    <!-- TODO string name="long_lat">Long-Lat</string -->
+    <string name="long_lat">Long-Lat</string>
 
     <!-- string name="line_delete">Elimina linea</string -->
     <string name="flip_shots">Capovolgi battute</string>
@@ -188,14 +188,14 @@
     <string name="hidden_add">Nascondi la linea mediana</string>
     <string name="hidden_del">Mostra la linea mediana</string>
     <string name="splays_toggle">Mostra o Nascondi gli splay</string>
-    <!-- TODO string name="fixed">fixed</string -->
-    <!-- TODO string name="painted">painted</string -->
+    <string name="fixed">fisso</string>
+    <string name="painted">colorato</string>
 
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>
     <string name="bad_point">Tipo punto errato</string>
 
-    <!-- TODO string name="no_bt">No Bluetooth</string -->
+    <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">Nessuna calibrazione</string>
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
     <string name="no_capture_app">Nessuna app per foto</string>
@@ -204,7 +204,7 @@
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_gms">Calibrazione senza data.</string>
-    <!-- TODO string name="no_geo_station">Failed: nessun caposaldo geolocalizzato</string -->
+    <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
     <string name="no_location_data">Nessun dato di posizione</string>
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
@@ -238,7 +238,7 @@
     <string name="menu_logs">LOGS</string>
     <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
-    <!-- TODO string name="menu_overview">OVERVIEW</string -->
+    <string name="menu_overview">PANORAMICA</string>
     <string name="menu_pair">ASSOCIA</string>
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
@@ -249,7 +249,7 @@
     <string name="menu_survey">INFORMAZIONI</string>
     <string name="menu_sync">SINC</string>
     <string name="menu_validate">CONVALIDA</string>
-    <!-- DONE string name="menu_tdr2th2">DISEGNI TH2</string -->
+    <string name="menu_tdr2th2">DISEGNI TH2</string>
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
@@ -259,14 +259,14 @@
     <string name="popup_curve_pt">Rendi curvo</string>
     <string name="popup_remove_pt">Elimina punto</string>
 
-    <!-- TODO string name="connected_none">Not connected</string -->
-    <!-- TODO string name="connected_already">Already connected</string -->
+    <string name="connected_none">Non connesso</string>
+    <string name="connected_already">Gia\' connesso</string>
 
     <string name="not_available">Bluetooth non disponibile</string>
     <!-- string name="not_connected">Non connesso</string -->
     <string name="not_enabled">BT non attivo</string>
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
-    <!-- TODO string name="null_bitmap">null bitmap</string -->
+    <string name="null_bitmap">bitmap non valida</string>
     <!-- UNUSED string name="photo">foto</string -->
     <string name="photo_comment_prompt">Scrivi il commento</string>
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
@@ -409,7 +409,7 @@
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
     <string name="button_convert"   >Converti  </string>
-    <!-- TODO string name="button_current"   >Current   </string -->
+    <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
     <string name="button_eval"      >Calcola   </string>
     <string name="button_eval_cal"  >Calcola con calibr.</string>
@@ -437,7 +437,7 @@
     <!-- OK string name="button_start"     >Start</string -->
     <!-- OK string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
-    <!-- DONE string name="button_view"      >Visualizza      </string -->
+    <string name="button_view"      >Visualizza      </string>
 
 
     <string name="button_write"     >Installa</string>
@@ -456,19 +456,19 @@
     <!-- OK string name="remote_reset">Reset BT</string -->
     <!-- UNUSED string name="download">Scarica dati</string -->
 
-    <!-- DONE string name="popup_do_splay">Splay</string -->
-    <!-- DONE string name="popup_do_leg">Battuta</string -->
+    <string name="popup_do_splay">Splay</string>
+    <string name="popup_do_leg">Battuta</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importa</string>
 
-    <!-- TODO string name="length">Length [m]</string -->
-    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
-    <!-- TODO string name="clino">Clino [deg]</string -->
-    <!-- TODO string name="orientation">orientation</string -->
-    <!-- TODO string name="contents">contents</string -->
-    <!-- TODO string name="error_distribution">error distribution</string -->
-    <!-- TODO string name="angle_distribution">angular distribution</string -->
+    <string name="length">Lunghezza [m]</string>
+    <string name="azimuth">Azimut [deg]</string>
+    <string name="clino">Inclinazione [deg]</string>
+    <string name="orientation">orientamento</string>
+    <string name="contents">contenuti</string>
+    <string name="error_distribution">distribuzione degli errori</string>
+    <string name="angle_distribution">distribuzione degli angoli</string>
 
     <string name="help_help">Questo aiuto</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
@@ -511,7 +511,7 @@
     <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
-    <!-- DONE string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
+    <string name="help_tdr2th2">Conversione formato disegno da binario a th2</string>
     <string name="help_toggle_plot">Passa tra pianta e sezione long.</string>
     <string name="help_trash">ELimina disegno</string>
     <string name="help_undo">Cancella ultima azione di disegno</string>
@@ -553,7 +553,7 @@
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
 
-    <!-- DONE string name="title_azimut">Riferimento Extend</string -->
+    <string name="title_azimut">Riferimento Extend</string>
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
@@ -566,24 +566,24 @@
     <string name="title_draw_point">PUNTO %1$s</string>
     <string name="title_edit">Edita</string>
     <string name="title_erase">Cancella</string>
-    <!-- DONE string name="title_fixed">Punti fissi</string -->
-    <!-- DONE string name="title_fixed_edit">Modifica posizione</string -->
-    <!-- DONE string name="title_fixed_import">Importa punto fisso</string -->
-    <!-- DONE string name="title_fixed_gps">Punto fisso: GPS</string -->
-    <!-- DONE string name="title_fixed_add">Punto fisso: inserimento</string -->
+    <string name="title_fixed">Punti fissi</string>
+    <string name="title_fixed_edit">Modifica posizione</string>
+    <string name="title_fixed_import">Importa punto fisso</string>
+    <string name="title_fixed_gps">Punto fisso: GPS</string>
+    <string name="title_fixed_add">Punto fisso: inserimento</string>
     <string name="title_mode">Modalità display</string>
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_plot_save">Salva disegno come </string>
-    <!-- DONE string name="title_plot_reload">Ricarica disegno</string -->
+    <string name="title_plot_reload">Ricarica disegno</string>
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
-    <!-- DONE string name="title_sensor_edit">Sensore</string -->
+    <string name="title_sensor_edit">Sensore</string>
 
     <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
@@ -593,7 +593,7 @@
 
     <string name="title_stats">Statistiche</string>
     <string name="title_survey">Info rilievo</string>
-    <!-- DONE string name="title_survey_new">Nuovo rilievo</string -->
+    <string name="title_survey_new">Nuovo rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
@@ -629,9 +629,9 @@
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta in cSurvey il prefisso dei caposaldi</string>
-  <!-- DONE string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string -->
-  <!-- DONE string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string -->
-  <!-- DONE string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string -->
+  <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>
+  <string name="pref_ortho_lrud_summary">Minimo angolo tra splay e battuta per uno splay di tipo LRUD</string>
+  <string name="pref_ortho_lrud_message">LRUD: minimo angolo splay-battuta</string>
   <string name="pref_survex_eol_title">Survex terminazione linea</string>
   <string name="pref_survex_eol_summary">Survex - terminazione linea</string>
   <string name="pref_survex_splay_title">Survex - stazioni splay</string>
@@ -804,8 +804,8 @@
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
   <string name="pref_xtherion_areas_title">Aree xtherion</string>
   <string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string>
-  <!-- DONE string name="pref_binary_store_title">File disegno formato binario</string -->
-  <!-- DONE string name="pref_binary_store_summary">Salva file disegno in formato binario</string -->
+  <string name="pref_binary_store_title">File disegno formato binario</string>
+  <string name="pref_binary_store_summary">Salva file disegno in formato binario</string>
   <string name="pref_autoStations_title">Punti th2 station</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
