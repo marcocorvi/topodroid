@@ -51,7 +51,7 @@
     <string name="calib_delete">Eliminar calibración </string>
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
-    <!-- TODO string name="calib_gm_policy">Policy</string -->
+    <string name="calib_gm_policy">Política</string>
     <string name="calib_gm_undelete">¿Eliminar datos de calibración?</string>
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
@@ -117,8 +117,8 @@
     <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
     <string name="import_none">No hay archivo a importar</string>
-    <!-- TODO string name="import_failed">File import failed</string -->
-    <!-- TODO string name="file_not_found">File not found</string -->
+    <string name="import_failed">Fallo al importar archivo</string>
+    <string name="file_not_found">Archivo no encontrado</string>
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
     <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
@@ -143,7 +143,7 @@
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Error en cierre de bucle</string>
     <string name="loop_none">No hay Bucle</string>
-    <!-- TODO string name="long_lat">Long-Lat</string -->
+    <string name="long_lat">Longitud-Latitud</string>
 
     <string name="line_delete">Eliminar línea</string>
     <string name="flip_shots">Tomas contínuas</string>
@@ -188,14 +188,14 @@
     <string name="hidden_add">Oculta dibujo de la poligonal principal</string>
     <string name="hidden_del">Mostrar dibujo de la poligonal principal</string>
     <string name="splays_toggle">Cambiar a tomas laterales</string>
-    <!-- TODO string name="fixed">fixed</string -->
-    <!-- TODO string name="painted">painted</string -->
+    <string name="fixed">Fijo</string>
+    <string name="painted">Dibujado</string>
 
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
 
-    <!-- TODO string name="no_bt">No Bluetooth</string -->
+    <string name="no_bt">No Bluetooth</string>
     <string name="no_calib">No hay calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <string name="no_capture_app">No hay aplicación para capturar imagen</string>
@@ -220,7 +220,7 @@
     <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
     <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
 
-    <string name="menu_3d">3D</string>
+    <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de..</string>
     <string name="menu_area">Área</string>
     <string name="menu_attach">Conectar</string>
@@ -259,8 +259,8 @@
     <string name="popup_curve_pt">Segmento curvo</string>
     <string name="popup_remove_pt">Eliminar punto</string>
 
-    <!-- TODO string name="connected_none">Not connected</string -->
-    <!-- TODO string name="connected_already">Already connected</string -->
+    <string name="connected_none">No conctado</string>
+    <string name="connected_already">Ya esta conectado</string>
 
     <string name="not_available">BT No disponible</string>
     <!-- UNUSED string name="not_connected">No conectado</string -->
@@ -406,7 +406,7 @@
     <string name="button_back"      >Atras     </string>
     <string name="button_cancel"    >Cancelar  </string>
     <string name="button_convert"   >Convertir </string>
-    <!-- TODO string name="button_current"   >Current   </string -->
+    <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
@@ -458,13 +458,13 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importar</string>
 
-    <!-- TODO string name="length">Length [m]</string -->
-    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
-    <!-- TODO string name="clino">Clino [deg]</string -->
-    <!-- TODO string name="orientation">orientation</string -->
-    <!-- TODO string name="contents">contents</string -->
-    <!-- TODO string name="error_distribution">error distribution</string -->
-    <!-- TODO string name="angle_distribution">angular distribution</string -->
+    <string name="length">Longitud [m]</string>
+    <string name="azimuth">Rumbo [deg]</string>
+    <string name="clino">Clino [deg]</string>
+    <string name="orientation">orientación</string>
+    <string name="contents">contenido</string>
+    <string name="error_distribution">error distribucción</string>
+    <string name="angle_distribution">distribucción angular</string>
 
     <string name="help_help">Ayuda</string>
     <!-- UNUSED string name="help_manual">Manual online</string -->
