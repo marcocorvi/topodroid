@@ -1,0 +1,62 @@
+Howto add a translation
+
+[1] get a github account if you do notalready have one,
+and send me your github username so that i can add you to the collaborators of the repo
+
+[2] check out the repo
+
+[3] add the directory int18/values-XX for your translation (replace "XX" with the two-letter country code
+of the language)
+
+[4] copy res/values/strings.xml and res/values/array.xml in the translation directory.
+
+[5] edit the two files and replace the english strings with the translations in your language
+save them with utf-8 encoding
+
+NOTES:
+(A) do not change the order of the strings. 
+it is the sama for all translations and makes maintenance easier
+
+(B) some strings are commented (ie, they are in the file but they are not used in the program):
+you may leave these untranslated
+
+(C) some strings (eg. name of programs, digits) do not need to be translated:
+you can comment them in the translation
+
+(D) the array strings with name xxxValue MUST not be translated:
+you can delete them from the translation file
+
+(E) i will not change a translated string, 
+however i do update the translation file to keep them uptodate with the default file (english):
+i may add a new string: in this case the new string is added in comment with a a mark TODO.
+you should translated it and remove the comment and the mark
+
+i may comment a string that becomes not used any longer.
+in this case i put the string in comment with a mark UNUSED
+
+a string that does not need a translation can be put in comment with the mark OK
+
+i may change the english string of a translated string:
+i may put the translated string in comment with a mark FIXME
+after checking the english and possibly updating the translation remove the comment and the mark
+
+(F) as a guideline string should be short and concise: there is no much space on the display and the
+user do not like to read long messages
+
+(G) i am aware that it can be difficult to find a good translation for a string in english without knowing 
+the context where the string is used. if you have doubts you may check the translation in another language
+(that you know) or write me an email
+
+[6] add your name and email to the welcome message in the translation file strings.xml
+
+[7] push your translation files to github and let me know 
+I need to add a s-link to your translations so that they are included in the app
+
+[8] add a translation to the symbol files in symbols-git:
+you need to add one line with name-XX (where XX is the two-letter iso code of the language)
+save the file with utf-8 encoding
+
+NOTE replace spaces in the name with underscore
+
+[9] push the new symbols file to github and let me know
+i need to increase the symbols version in the code otherwise topodroid will not install the new files
