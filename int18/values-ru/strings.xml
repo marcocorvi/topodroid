@@ -55,7 +55,7 @@
     <string name="calib_exists">Калибровка уже существует</string>
     <string name="calib_delete">Удалить калибровку </string>
     <string name="calib_device_mismatch">ВНИМАНИЕ: Несоответствие калибровчных данных и прибора</string>
-    <string name="calib_no_name">Необходимо задать имя</string>
+    <string name="calib_no_name">Необходимо задать название</string>
     <string name="calib_gm_policy">Правила</string>
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
     <string name="calib_saved">Сохранить калибровку</string>
@@ -167,7 +167,7 @@
     <string name="error_invalid_number">Недопустимое значение</string>
     <string name="error_lat_required">Требуется широта</string>
     <string name="error_long_required">Требуется долгота</string>
-    <string name="error_name_required">Требуется имя</string>
+    <string name="error_name_required">Требуется название</string>
     <string name="error_start_required">Требуется привязка к пикету</string>
     <!-- UNUSED string name="error_station_already_fixed">Пикет уже имеет координаты</string -->
     <string name="error_station_required">Требуется прикет</string>
@@ -196,7 +196,7 @@
     <string name="fixed">фиксированный</string>
     <string name="painted">нарисованный</string>
 
-    <string name="bad_cwd">Имя проекта не может совпадать с путем к папке</string>
+    <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
 
@@ -274,7 +274,7 @@
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <!-- UNUSED string name="photo">фото</string -->
     <string name="photo_comment_prompt">Введите комментарий к фото</string>
-    <!-- UNUSED string name="photo_name">Пикет/имя</string -->
+    <!-- UNUSED string name="photo_name">Пикет/название</string -->
     <!-- UNUSED string name="photo_photo">фото</string -->
     <!-- UNUSED string name="photo_sensor">датчик</string -->
     <!-- UNUSED string name="photo_external">измерение</string -->
@@ -288,7 +288,7 @@
     <!-- UNUSED string name="plot_name">Название абриса</string -->
     <string name="plot_new">Новый абрис</string>
     <string name="plot_not_found">Абрис не обнаружен</string>
-    <!-- OK string name="plot_null_name">Отсутствует имя абриса</string -->
+    <!-- OK string name="plot_null_name">Отсутствует название абриса</string -->
     <!-- OK string name="plot_null_start">Отсутствует базовый пикет</string -->
     <!-- UNUSED string name="plot_recover">Перезагрузить абрис из бекапа?</string -->
     <string name="plot_start">Начальный пикет</string>
@@ -301,7 +301,7 @@
     <string name="saved_file_">Сохраненный файл\ </string>
     <string name="saving_">Сохранение </string>
     <string name="saving_file_failed">Ошибка сохранения файла</string>
-    <!-- UNUSED string name="scrap_name">имя абриса</string -->
+    <!-- UNUSED string name="scrap_name">название абриса</string -->
     <string name="splay">боковой замер</string>
     <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
     <string name="too_many_legs_xsection">Слишком много лучей для разреза</string>
@@ -356,7 +356,7 @@
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
-    <string name="name">имя</string>
+    <string name="name">Название</string>
     <string name="team">группа топосъёмки</string>
     <!-- OK string name="toggle_device">Переключить устройство в режим калибровки</string -->
     <string name="toggle_failed">Не удалось переключить DistoX</string>
@@ -551,7 +551,7 @@
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Выбрать привязку абриса</string>
-    <string name="help_rename">Изменить имя съёмки</string>
+    <string name="help_rename">Изменить название съёмки</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
     <string name="help_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string>
