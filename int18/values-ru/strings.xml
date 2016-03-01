@@ -61,9 +61,9 @@
     <string name="calib_saved">Сохранить калибровку</string>
     <string name="calib_updated">Обновить калибровку</string>
     <string name="calib_compute_groups">Вычисление групп данных калибровки &#8230;</string>
-    <string name="calib_compute_coeffs">Вычисление коэфицентов калибровки &#8230;</string>
-    <!-- UNUSED string name="calib_read_coeffs">Считывание коэфицентов калибровки &#8230;</string -->
-    <string name="calib_write_coeffs">Запись коэфицентов калибровки &#8230;</string>
+    <string name="calib_compute_coeffs">Вычисление коэффициентов калибровки &#8230;</string>
+    <!-- UNUSED string name="calib_read_coeffs">Считывание коэффициентов калибровки &#8230;</string -->
+    <string name="calib_write_coeffs">Запись коэффициентов калибровки &#8230;</string>
     <string name="calib_validation">Проверить %1$s относительно %2$s</string>
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
@@ -516,7 +516,7 @@
     <!-- UNUSED string name="help_manual">Инструкция</string -->
     <string name="help_measure">Измерить расстояния</string>
     
-    <string name="help_coeff">Показать коэфиценты калибровки</string>
+    <string name="help_coeff">Показать коэффициенты калибровки</string>
     <string name="help_continue">Продолжить рисовать линию</string>
     <string name="help_current_station">Сохраненные пикеты</string>
     <string name="help_azimuth">Развертка референс-азимут</string>
@@ -586,7 +586,7 @@
     <string name="help_firmware">DistoX2 обновление прошивки</string>
     <string name="help_toggle">Переключить DistoX калибровка/нормальный режим</string>
     <string name="help_sdcard">DistoX управление памятью</string>
-    <string name="help_read">Считать и вывсти коэфиценты калибровки DistoX</string>
+    <string name="help_read">Считать и вывсти коэффициенты калибровки DistoX</string>
     <string name="help_info_device">Информация об устройстве</string>
     <string name="help_scan">Найти новые устройства DistoX</string>
     <string name="help_pair">Присоединить текущее устройство DistoX</string>
@@ -595,7 +595,7 @@
     <string name="help_group">Присваивать номер групп автоматически</string>
     <string name="help_cover">Показать угловое распределение данных калибровки</string>
     <string name="help_compute">Рассчитать калибровку</string>
-    <string name="help_write">Записать коэфиценты калибровки в DistoX</string>
+    <string name="help_write">Записать коэффициенты калибровки в DistoX</string>
 <!-- FIXME_SKETCH_3D -->
     <!-- UNUSED string name="help_refs_model">Режим просмотра</string -->
     <string name="help_one_model">Вместить 3d модель в экран</string>
@@ -616,7 +616,7 @@
     <string name="title_azimut">Направление разветки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
-    <string name="title_coeff">Калибровочные коэфиценты</string>
+    <string name="title_coeff">Калибровочные коэффициенты</string>
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
@@ -790,8 +790,8 @@
   <string name="pref_hthr_summary">Порог  для горизонтальных разрезов</string>
   <string name="pref_hthr_message">Угол на пикете выше которонро разрез считается горизонтальным</string>
   <string name="pref_bitmap_scale_title">масштаб PNG</string>
-  <string name="pref_bitmap_scale_summary">Масштабный коэфицент абриса при экспорте в PNG</string>
-  <string name="pref_bitmap_scale_message">Масштабный коэфицент абриса при экспорте в PNG</string>
+  <string name="pref_bitmap_scale_summary">Масштабный коэффициент абриса при экспорте в PNG</string>
+  <string name="pref_bitmap_scale_message">Масштабный коэффициент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string>
   <string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов</string>
   <string name="pref_bitmap_bgcolor_message">Цвет фона PNG при экспорте абрисов</string>
