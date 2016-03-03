@@ -102,41 +102,15 @@ public class TopoDroidActivity extends Activity
 
   private boolean onMenu; // whether menu is displaying
 
-  // private static final int REQUEST_DEVICE    = 1;
   private static final int REQUEST_ENABLE_BT = 2;
-
-  // statuses
-  // private static final int STATUS_NONE   = 0;
-  // private static final int STATUS_SURVEY = 1;
-  // private static final int STATUS_CALIB  = 2;
-
-  // private int mStatus    = STATUS_SURVEY;
-  // private int mOldStatus = STATUS_SURVEY;
 
   private LinearLayout mLayout;
   private ListView mList;
-
-  // private Button   mBtnSurveys = null;
-  // private Button   mBtnCalibs  = null;
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListItemAdapter mArrayAdapter;
 
   private MyButton[] mButton1;
-  // private static int icons[] = {
-  //                         R.drawable.ic_disto,
-  //                         R.drawable.ic_add,
-  //                         R.drawable.ic_import,
-  //                         R.drawable.ic_therion,
-  //                         R.drawable.ic_database
-  //                         };
-  // private static int ixons[] = {
-  //                         R.drawable.ix_disto,
-  //                         R.drawable.ix_add,
-  //                         R.drawable.ix_import,
-  //                         R.drawable.ix_therion,
-  //                         R.drawable.ix_database
-  //                         };
   private static int izons[] = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
@@ -144,7 +118,6 @@ public class TopoDroidActivity extends Activity
                           R.drawable.iz_therion,
                           R.drawable.iz_database
                           };
-  // private int icons00[];
 
   private static int menus[] = { 
                           R.string.menu_palette,
@@ -172,13 +145,10 @@ public class TopoDroidActivity extends Activity
 
   // -------------------------------------------------------------
   private boolean say_no_survey = true;
-  private boolean say_no_calib  = true;
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
   boolean do_check_bt = true;             // one-time bluetooth check sentinel
 
   // -------------------------------------------------------------------
-
-
     
   public void updateDisplay( )
   {
@@ -288,14 +258,6 @@ public class TopoDroidActivity extends Activity
   {
     mApp.setSurveyFromName( null, false ); // FIXME JOIN-SURVEY
     (new SurveyNewDialog( this, this, old_sid, old_id )).show(); // WITH SPLIT
-  }
-
-  private void startCalib( String value, int mustOpen )
-  {
-    mApp.setCalibFromName( value );
-    Intent calibIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, CalibActivity.class );
-    calibIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
-    startActivity( calibIntent );
   }
 
   @Override 
@@ -595,7 +557,6 @@ public class TopoDroidActivity extends Activity
   }
   
   // ---------------------------------------------------------------
-  // private Button mButtonHelp;
 
   TopoDroidAbout mTopoDroidAbout = null;
  
@@ -697,28 +658,9 @@ public class TopoDroidActivity extends Activity
     closeMenu();
     // mMenu.setOnItemClickListener( this );
 
-    // mBtnSurveys = (Button) findViewById( R.id.btn_surveys );
-    // mBtnCalibs  = (Button) findViewById( R.id.btn_calibs );
-
-    // mButtonHelp = (Button)findViewById( R.id.help );
-    // mButtonHelp.setOnClickListener( this );
-    // if ( TopoDroidApp.mHideHelp ) {
-    //   mButtonHelp.setVisibility( View.GONE );
-    // } else {
-    //   mButtonHelp.setVisibility( View.VISIBLE );
-    // }
-
     mListView = (HorizontalListView) findViewById(R.id.listview);
     resetButtonBar();
 
-    // if ( savedInstanceState == null) {
-    //   TDLog.Log(TDLog.LOG_MAIN, "onCreate null savedInstanceState" );
-    // } else {
-    //   Bundle map = savedInstanceState.getBundle(DISTOX_KEY);
-    //   restoreInstanceState( map );
-    // }
-    // restoreInstanceFromFile();
-    // restoreInstanceFromData();
     if ( mApp.mWelcomeScreen ) {
       mApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
       mApp.mWelcomeScreen = false;
@@ -730,7 +672,7 @@ public class TopoDroidActivity extends Activity
 
     if ( mApp.askSymbolUpdate ) {
       // (new TopoDroidVersionDialog(this, mApp)).show();
-      // FIXME SYMBOL is symbol have not been updated TopoDroid exits
+      // FIXME SYMBOL if symbol have not been updated TopoDroid exits
       // if ( mApp.askSymbolUpdate ) finish();
       TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.version_ask,
         new DialogInterface.OnClickListener() {
@@ -755,13 +697,16 @@ public class TopoDroidActivity extends Activity
     //     return null;
     //   }
     // };
-    new Thread() {
+    Thread loader = new Thread() {
       @Override
       public void run() {
+        mApp.startupStep2();
         DrawingBrushPaths.doMakePaths( );
         WorldMagneticModel.loadEGM9615( mApp );
       }
-    }.start();
+    };
+    loader.setPriority( Thread.MIN_PRIORITY );
+    loader.start();
 
   }
   
@@ -787,21 +732,6 @@ public class TopoDroidActivity extends Activity
     mListView.setAdapter( mButtonView1.mAdapter );
   }
 
-  // public void rescaleButtons()
-  // {
-  //   Toast.makeText( this, "You must close TopoDroid\nto make change effective", Toast.LENGTH_LONG ).show();
-  //   // int size = mApp.setListViewHeight( mListView );
-  //   // // TDLog.Error( "scale " + TopoDroidApp.mSizeButtons );
-  //   // icons00 = ( TopoDroidApp.mSizeButtons == 2 )? ixons : icons;
-
-  //   // for (int k=0; k<mNrButton1; ++k ) {
-  //   //   mButton1[k].setBackgroundResource( icons00[k] );
-  //   //   mButton1[k].invalidate();
-  //   // }
-  //   // mListView.invalidate();
-  //   // mLayout.invalidate();
-  // }
-
   @Override
   public void onDismiss( DialogInterface d )
   { 
@@ -820,74 +750,19 @@ public class TopoDroidActivity extends Activity
 
   // private void restoreInstanceState(Bundle map )
   // {
-  //   if ( map != null ) {
-  //     TDLog.Log( TDLog.LOG_MAIN, "onRestoreInstanceState non-null bundle");
-  //     mStatus        = map.getInt( DISTOX_KEY_STATUS );
-  //     mOldStatus     = map.getInt( DISTOX_KEY_OLD_STATUS );
-  //     mSplay         = map.getBoolean( DISTOX_KEY_SPLAY );
-  //     mLeg           = map.getBoolean( DISTOX_KEY_CENTERLINE );
-  //     mBlank         = map.getBoolean( DISTOX_KEY_BLANK );
-  //     String survey  = map.getString( DISTOX_KEY_SURVEY );
-  //     String calib   = map.getString( DISTOX_KEY_CALIB );
-  //     if ( survey != null ) setSurveyFromName( survey, false );
-  //     if ( calib  != null ) setCalibFromName( calib );
-  //   } else {
-  //     TDLog.Log( TDLog.LOG_MAIN, "onRestoreInstanceState null bundle");
-  //     // mStatus ??
-  //   }
   // }
 
   // private void restoreInstanceFromData()
   // { 
-  //   // TDLog.Log( TDLog.LOG_MAIN, "restoreInstanceFromData ");
-  //   DataHelper data = mApp.mData;
-  //   // String status = data.getValue( "DISTOX_STATUS" );
-  //   // // TDLog.Log( TDLog.LOG_MAIN, "restore STATUS " + status );
-  //   // if ( status != null ) {
-  //   //   String[] vals = status.split( " " );
-  //   //   // FIXME
-  //   // }
-  //   String survey = data.getValue( "DISTOX_SURVEY" );
-  //   // TDLog.Log( TDLog.LOG_MAIN, "restore SURVEY >" + survey + "<" );
-  //   if ( survey != null && survey.length() > 0 ) {
-  //     mApp.setSurveyFromName( survey, false );
-  //   } else {
-  //     mApp.setSurveyFromName( null, false );
-  //   }
-  //   String calib = data.getValue( "DISTOX_CALIB" );
-  //   // TDLog.Log( TDLog.LOG_MAIN, "restore CALIB >" + calib + "<" );
-  //   if ( calib != null && calib.length() > 0 ) {
-  //     mApp.setCalibFromName( calib );
-  //   } else {
-  //     mApp.setCalibFromName( null );
-  //   }
   // }
     
   // private void saveInstanceToData()
   // {
-  //   // TDLog.Log(TDLog.LOG_MAIN, "saveInstanceToData");
-  //   DataHelper data = mApp.mData;
-  //   data.setValue( "DISTOX_STATUS", String.format("%d ", 1 ) ); // mStatus ) );
-  //   // TDLog.Log( TDLog.LOG_MAIN, "save STATUS " + sw.getBuffer().toString() );
-  //   // TDLog.Log( TDLog.LOG_MAIN, "save SURVEY >" + mApp.mySurvey + "<" );
-  //   // TDLog.Log( TDLog.LOG_MAIN, "save CALIB >" + mApp.getCalib() + "<" );
-  //   // data.setValue( "DISTOX_SURVEY", (mApp.mySurvey == null)? "" : mApp.mySurvey );
-  //   data.setValue( "DISTOX_CALIB", (mApp.myCalib == null)? "" : mApp.myCalib );
   // }
-
 
   // @Override
   // public void onSaveInstanceState(Bundle outState) 
   // {
-  //   TDLog.Log( TDLog.LOG_MAIN, "onSaveInstanceState");
-  //   // outState.putBundle(DISTOX_KEY, mList.saveState());
-  //   outState.putInt(DISTOX_KEY_STATUS, mStatus );
-  //   outState.putInt(DISTOX_KEY_OLD_STATUS, mOldStatus );
-  //   outState.putBoolean(DISTOX_KEY_SPLAY, mSplay );
-  //   outState.putBoolean(DISTOX_KEY_CENTERLINE, mLeg );
-  //   outState.putBoolean(DISTOX_KEY_BLANK, mBlank );
-  //   outState.putString(DISTOX_KEY_SURVEY, mySurvey );
-  //   outState.putString(DISTOX_KEY_CALIB, myCalib );
   // }
 
   // ------------------------------------------------------------------
@@ -920,7 +795,7 @@ public class TopoDroidActivity extends Activity
         // setBTMenus( mApp.mBTAdapter.isEnabled() );
       }
     }
-    mApp.checkAutoPairing();
+    // mApp.checkAutoPairing(); // already done when prefs are loaded
   }
 
   @Override
@@ -1009,7 +884,6 @@ public class TopoDroidActivity extends Activity
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
-    DataHelper data = mApp.mData;
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
       case REQUEST_ENABLE_BT:

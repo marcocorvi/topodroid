@@ -22,110 +22,115 @@ class TDSetting
   // ---------------------------------------------------------
   // PREFERENCES KEYS
 
+  final static int NR_PRIMARY_PREFS = 12;
+
   static final String[] key = { // prefs keys
     "DISTOX_EXTRA_BUTTONS",       //  0 TODO move to general options
     "DISTOX_SIZE_BUTTONS",        //  1
     "DISTOX_TEXT_SIZE",           //  2
+    "DISTOX_MKEYBOARD",           //  3
+    "DISTOX_TEAM",                //  4
+    "DISTOX_COSURVEY",            //  5
+    "DISTOX_BINARY_STORE",        //  6
+    "DISTOX_INIT_STATION",        //  7 default initial station for sketches
+
+    "DISTOX_DEVICE",              //  8 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
+    "DISTOX_BLUETOOTH",           //  9
+
+    "DISTOX_LOCALE",              // 10
+    "DISTOX_CWD",                 // 11
+
+    // ----------------------- DEVICE PREFERNCES 
+    "DISTOX_SOCK_TYPE",           //  9
+    "DISTOX_COMM_RETRY",          // 10
+    "DISTOX_Z6_WORKAROUND",       // 12
+    "DISTOX_CONN_MODE",           // 11
+    "DISTOX_AUTO_PAIR",           // 13
+    "DISTOX_SOCKET_DELAY",        // 14
+    "DISTOX_AUTO_RECONNECT",      // 15
+
     // ------------------- SURVEY PREFERENCES
-    "DISTOX_CLOSE_DISTANCE",      //  3
-    "DISTOX_EXTEND_THR2",         //  4
-    "DISTOX_VTHRESHOLD",          //  5 // LRUD vertical threshold
-    "DISTOX_SURVEY_STATION",      //  6 // DISTOX_SURVEY_STATIONS must not be used
-    "DISTOX_UNIT_LENGTH",
-    "DISTOX_UNIT_ANGLE",
-    "DISTOX_ACCEL_THR",           //  9 // shot quality thresholds
+    "DISTOX_CLOSE_DISTANCE",      // 18
+    "DISTOX_EXTEND_THR2",         // 19
+    "DISTOX_VTHRESHOLD",          // 20 LRUD vertical threshold
+    "DISTOX_SURVEY_STATION",      // 21 DISTOX_SURVEY_STATIONS must not be used
+    "DISTOX_UNIT_LENGTH",         // 22
+    "DISTOX_UNIT_ANGLE",          // 23
+    "DISTOX_ACCEL_THR",           // 24 shot quality thresholds
     "DISTOX_MAG_THR",
-    "DISTOX_DIP_THR",             // 11
-    "DISTOX_LOOP_CLOSURE",        // 12 // whether to close loop
-    "DISTOX_CHECK_ATTACHED",      // 13
+    "DISTOX_DIP_THR",             // 26
+    "DISTOX_LOOP_CLOSURE",        // 27 whether to close loop
+    "DISTOX_CHECK_ATTACHED",      // 28
 
-    "DISTOX_UNIT_LOCATION",       // 14 
-    "DISTOX_CRS",                 // 15
+    "DISTOX_UNIT_LOCATION",       // 29 
+    "DISTOX_CRS",                 // 30
 
-    "DISTOX_GROUP_BY",            // 16
-    "DISTOX_GROUP_DISTANCE",      // 17
-    "DISTOX_CALIB_EPS",           // 18
-    "DISTOX_CALIB_MAX_IT",        // 19
-    "DISTOX_RAW_DATA",            // 20
-    "DISTOX_CALIB_ALGO",          // 21
+    "DISTOX_GROUP_BY",            // 31
+    "DISTOX_GROUP_DISTANCE",      // 32
+    "DISTOX_CALIB_EPS",           // 33
+    "DISTOX_CALIB_MAX_IT",        // 34
+    "DISTOX_RAW_DATA",            // 35
+    "DISTOX_CALIB_ALGO",          // 36
 
-    "DISTOX_DEVICE",              // 22 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
-    "DISTOX_BLUETOOTH",           // 23
-    "DISTOX_SOCK_TYPE",
-    "DISTOX_COMM_RETRY",          // 25
-    "DISTOX_CONN_MODE",           // 26
-
-    "DISTOX_AUTO_STATIONS",       //  
-    "DISTOX_CLOSENESS",           // 28
+    "DISTOX_AUTO_STATIONS",       // 37
+    "DISTOX_CLOSENESS",           // 38
     "DISTOX_LINE_SEGMENT",
     "DISTOX_LINE_ACCURACY",
-    "DISTOX_LINE_CORNER",         // 31
-    "DISTOX_LINE_STYLE",          // 
-    "DISTOX_DRAWING_UNIT",        // 
-    "DISTOX_PICKER_TYPE",         // 34
+    "DISTOX_LINE_CORNER",         // 41
+    "DISTOX_LINE_STYLE",          // 42
+    "DISTOX_DRAWING_UNIT",        // 43
+    "DISTOX_PICKER_TYPE",         // 44
     "DISTOX_HTHRESHOLD",          // UNUSED
-    "DISTOX_STATION_SIZE",        // 
-    "DISTOX_LABEL_SIZE",          // 
-    "DISTOX_LINE_THICKNESS",      // 38
+    "DISTOX_STATION_SIZE",        // 46
+    "DISTOX_LABEL_SIZE",          // 47
+    "DISTOX_LINE_THICKNESS",      // 48
 
-    "DISTOX_TEAM",                   // 39
-    "DISTOX_SHOT_TIMER",             // 40 // bearing-clino timer
-    "DISTOX_BEEP_VOLUME",            // 41
-    "DISTOX_LEG_SHOTS",              // nr. of shots to make a leg
-    "DISTOX_COSURVEY",               // 43
+    "DISTOX_SHOT_TIMER",          // 49 // bearing-clino timer
+    "DISTOX_BEEP_VOLUME",         // 50
+    "DISTOX_LEG_SHOTS",           // 51 nr. of shots to make a leg
 
-    "DISTOX_SKETCH_LINE_STEP",       // 44
-    "DISTOX_DELTA_EXTRUDE",          // 
-    "DISTOX_COMPASS_READINGS",       // 
+    "DISTOX_SKETCH_LINE_STEP",    // 52
+    "DISTOX_DELTA_EXTRUDE",       // 53
+    "DISTOX_COMPASS_READINGS",    // 54
 
-    "DISTOX_SPLAY_EXTEND",           // 47 // whether to set extend to splay shots
-    "DISTOX_AUTO_RECONNECT",         // 48
-    "DISTOX_BITMAP_SCALE",           // 49
-    "DISTOX_THUMBNAIL",              // 
-    "DISTOX_DOT_RADIUS",             // 
-    "DISTOX_FIXED_THICKNESS",        // 52
-    "DISTOX_ARROW_LENGTH",           // 53
-    "DISTOX_EXPORT_SHOTS",           // 54
+    "DISTOX_SPLAY_EXTEND",        // 55 whether to set extend to splay shots
+    "DISTOX_BITMAP_SCALE",        // 56
+    "DISTOX_THUMBNAIL",           // 57
+    "DISTOX_DOT_RADIUS",          // 58
+    "DISTOX_FIXED_THICKNESS",     // 59
+    "DISTOX_ARROW_LENGTH",        // 60
+    "DISTOX_EXPORT_SHOTS",        // 61
 
-    "DISTOX_SPLAY_VERT_THRS",        // over mSplayVertThrs splays are not displayed in plan view
-    "DISTOX_INIT_STATION",           // default initial station for sketches
-    "DISTOX_BACKSIGHT",              // 57
-    "DISTOX_Z6_WORKAROUND",          // 58
-    "DISTOX_MAG_ANOMALY",            // whether to compensate magnetic anomaly
-    "DISTOX_AZIMUTH_MANUAL",         // 60
-    "DISTOX_VERT_SPLAY",             // over this splay are shown with dashed line
-    "DISTOX_STATION_PREFIX",         // whether to add cave-name prefix to stations (cSurvey)
+    "DISTOX_SPLAY_VERT_THRS",     // 62 over mSplayVertThrs splays are not displayed in plan view
+    "DISTOX_BACKSIGHT",           // 64
+    "DISTOX_MAG_ANOMALY",         // 65 whether to compensate magnetic anomaly
+    "DISTOX_AZIMUTH_MANUAL",      // 66
+    "DISTOX_VERT_SPLAY",          // 67 over this splay are shown with dashed line
+    "DISTOX_STATION_PREFIX",      // 68 whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
-    "DISTOX_ZOOM_CTRL",              // 64
-    "DISTOX_SIDE_DRAG",              // whether to enable side-drag
-    "DISTOX_MKEYBOARD",
+    "DISTOX_ZOOM_CTRL",           // 70
+    "DISTOX_SIDE_DRAG",           // 71 whether to enable side-drag
     "DISTOX_DXF_SCALE", 
     "DISTOX_ACAD_VERSION",
-    "DISTOX_BITMAP_BGCOLOR",         // 69
-    "DISTOX_AUTO_PAIR",
-    "DISTOX_SOCKET_DELAY",
-    "DISTOX_SURVEX_EOL",          // 72 survex end of line
+    "DISTOX_BITMAP_BGCOLOR",      // 74
+    "DISTOX_SURVEX_EOL",          // 75 survex end of line
     "DISTOX_SURVEX_SPLAY",
-    "DISTOX_SURVEX_LRUD",         // 74
-    "DISTOX_UNSCALED_POINTS",     // unscaled drawing point items
-    "DISTOX_UNIT_GRID",
-    "DISTOX_XTHERION_AREAS",      // save areas a-la xtherion
-    "DISTOX_RECENT_NR",           // 78 number of most recent items (item picker)
-    "DISTOX_AREA_BORDER",         // area border visibility
-    "DISTOX_CONT_JOIN",           // line continuation is join
-    "DISTOX_CSV_LENGTH",          // CSV export length unit
-    "DISTOX_BINARY_STORE",        // 82
-    "DISTOX_ORTHO_LRUD",          // orthogonal LRUD ( >=1 disable, min 0 )
+    "DISTOX_SURVEX_LRUD",         // 77
+    "DISTOX_UNSCALED_POINTS",     // 78 unscaled drawing point items
+    "DISTOX_UNIT_GRID",           // 79
+    "DISTOX_XTHERION_AREAS",      // 80 save areas a-la xtherion
+    "DISTOX_RECENT_NR",           // 81 number of most recent items (item picker)
+    "DISTOX_AREA_BORDER",         // 82 area border visibility
+    "DISTOX_CONT_JOIN",           // 83 line continuation is join
+    "DISTOX_CSV_LENGTH",          // 84 CSV export length unit
+    "DISTOX_ORTHO_LRUD",          // 85 orthogonal LRUD ( >=1 disable, min 0 )
 
-    "DISTOX_WALLS_TYPE",
-    "DISTOX_WALLS_PLAN_THR",
-    "DISTOX_WALLS_EXTENDED_THR",
-    "DISTOX_WALLS_XCLOSE",
-    "DISTOX_WALLS_XSTEP",
-    "DISTOX_WALLS_CONCAVE",
-
-    "DISTOX_LOCALE",                 // 89
-    "DISTOX_CWD",                    // must be last 
+    "DISTOX_WALLS_TYPE",          // 86
+    "DISTOX_WALLS_PLAN_THR",      // 87
+    "DISTOX_WALLS_EXTENDED_THR",  // 88
+    "DISTOX_WALLS_XCLOSE",        // 89
+    "DISTOX_WALLS_XSTEP",         // 90
+    "DISTOX_WALLS_CONCAVE",       // 91
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
     // "DISTOX_SKETCH_BERDER_STEP",
@@ -181,13 +186,7 @@ class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
-
-  // static final int ALT_WGS84 = 0; // WGS84 altitude
-  // static final int ALT_ASL = 1;   // altimetric altitude
-  // static final String ALTITUDE = "0";  
-
   static String mCRS = "Long-Lat";    // default coord ref systen 
-
   // static final  String UNIT_LOCATION  = "ddmmss";
   static int mUnitLocation = 0; // 0 dec-degree, 1 ddmmss
 
@@ -490,7 +489,7 @@ class TDSetting
   //   return i;
   // }
 
-  static void loadPreferences( TopoDroidApp app, SharedPreferences prefs )
+  static void loadPrimaryPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
     // ------------------- GENERAL PREFERENCES
     int k = 0;
@@ -500,13 +499,47 @@ class TDSetting
 
     mSizeButtons = tryInt( prefs, key[k++], "1" ); // choice: 0, 1 // DISTOX_SIZE_BUTTONS
     mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
+    mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
+    mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
+    boolean co_survey = prefs.getBoolean( key[k++], false );       // DISTOX_COSURVEY 
+    mBinaryTh2 = prefs.getBoolean( key[k++], false );              // DISTOX_BINARY_STORE
+
+    mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
+    if ( mInitStation.length() == 0 ) mInitStation = "0";
+    DistoXStationName.setInitialStation( mInitStation );
+    
+    // ------------------- DEVICE PREFERENCES -def--fallback--min-max
+    k++;                                                     // DISTOX_DEVICE - UNUSED HERE
+    mCheckBT        = tryInt( prefs, key[k++], "1" );        // DISTOX_BLUETOOTH choice: 0, 1, 2
+
+    app.setLocale( prefs.getString( key[k++], "" ) );              // DISTOX_LOCALE
+    // String cwd = prefs.getString( key[k++], "TopoDroid" );
+    // if ( ! cwd.equals( mCWD ) ) {
+    //   mCWD = cwd;
+    //   TDPath.setPaths( mCWD );
+    //   mData.openDatabase();
+    // }
+  }
+
+  static void loadSecondaryPreferences( TopoDroidApp app, SharedPreferences prefs )
+  {
+    int k = NR_PRIMARY_PREFS;;
+
+    // ------------------- DEVICE PREFERENCES
+    mSockType       = tryInt( prefs, key[k++], "0" );        // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
+    mCommRetry      = tryInt( prefs, key[k++], "1" );        // DISTOX_COMM_RETRY
+    mZ6Workaround   = prefs.getBoolean( key[k++], true  );   // DISTOX_Z6_WORKAROUND
+    mConnectionMode = tryInt( prefs, key[k++], "0" );        // DISTOX_CONN_MODE choice: 0, 1
+    mAutoPair       = prefs.getBoolean( key[ k++ ], true );  // DISTOX_AUTO_PAIR
+    mConnectSocketDelay = tryInt(prefs, key[ k++ ], "0" );   // DISTOX_SOCKET_DELAY
+    mAutoReconnect     = prefs.getBoolean( key[k++], false ); // DISTOX_AUTO_RECONNECT
 
     // ------------------- SURVEY PREFERENCES
     mCloseDistance = tryFloat( prefs, key[k++], "0.05" ); // DISTOX_CLOSE_DISTANCE
     mExtendThr     = tryFloat( prefs, key[k++], "10"   ); // DISTOX_EXTEND_THR2
     mVThreshold    = tryFloat( prefs, key[k++], "80"   ); // DISTOX_VTHRESHOLD
 
-    parseSurveyStations( prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS 6
+    parseSurveyStations( prefs.getString( key[k++], "1" ) ); // DISTOX_SURVEY_STATIONS 
 
     if ( prefs.getString( key[k++], UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
       mUnitLength = 1.0f;
@@ -543,100 +576,75 @@ class TDSetting
     mRawData       = prefs.getBoolean( key[k++], false );    // DISTOX_RAW_DATA 20
     mCalibAlgo     = tryInt( prefs, key[k++], "0" );         // choice: 0, 1, 2
 
-    // ------------------- DEVICE PREFERENCES -def--fallback--min-max
-    k++; // DISTOX_DEVICE - UNUSED HERE
-
-    mCheckBT        = tryInt( prefs, key[k++], "1" );     // DISTOX_BLUETOOTH choice: 0, 1, 2
-    mSockType       = tryInt( prefs, key[k++], "0" );     // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
-    mCommRetry      = tryInt( prefs, key[k++], "1" );     // DISTOX_COMM_RETRY
-    mConnectionMode = tryInt( prefs, key[k++], "0" );     // DISTOX_CONN_MODE 26 choice: 0, 1
-
     // -------------------  DRAWING PREFERENCES -def----fallback------min/max
-    mAutoStations  = prefs.getBoolean( key[k++], true );            // DISTOX_AUTO_STATIONS 27
+    mAutoStations  = prefs.getBoolean( key[k++], true );            // DISTOX_AUTO_STATIONS 
     mCloseness     = tryFloat( prefs, key[k++], "24" );             // DISTOX_CLOSENESS
     mLineSegment   = tryInt(   prefs, key[k++], "10" );             // DISTOX_LINE_SEGMENT
     mLineSegment2  = mLineSegment * mLineSegment;
     mLineAccuracy  = tryFloat( prefs, key[k++], "1" );              // DISTOX_LINE_ACCURACY
     mLineCorner    = tryFloat( prefs, key[k++], "20"  );            // DISTOX_LINE_CORNER
     setLineStyleAndType( prefs.getString( key[k++], LINE_STYLE ) ); // DISTOX_LINE_STYLE
-    mUnit          = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 33
+    mUnit          = tryFloat( prefs, key[k++], "1.4" );            // DISTOX_DRAWING_UNIT 
     mPickerType    = tryInt(   prefs, key[k++], "0" );              // DISTOX_PICKER_TYPE choice: 0, 1, 2
     mHThreshold    = tryFloat( prefs, key[k++], "70" );             // DISTOX_HTHRESHOLD
-    mStationSize   = tryFloat( prefs, key[k++], "20" );             // DISTOX_STATION_SIZE 36
-    mLabelSize     = tryFloat( prefs, key[k++], "24" );             // DISTOX_LABEL_SIZE 37
-    mLineThickness = tryFloat( prefs, key[k++], "1"  );             // DISTOX_LINE_THICKNESS 38
+    mStationSize   = tryFloat( prefs, key[k++], "20" );             // DISTOX_STATION_SIZE
+    mLabelSize     = tryFloat( prefs, key[k++], "24" );             // DISTOX_LABEL_SIZE
+    mLineThickness = tryFloat( prefs, key[k++], "1"  );             // DISTOX_LINE_THICKNESS
 
-    mDefaultTeam   = prefs.getString( key[k++], "" );               // DISTOX_TEAM
     mTimerCount    = tryInt(   prefs, key[k++], "10" );             // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs, key[k++], "50" );             // DISTOX_BEEP_VOLUME
     mMinNrLegShots = tryInt(   prefs, key[k++], "3" );              // DISTOX_LEG_SHOTS choice: 2, 3, 4
 
-    boolean co_survey = prefs.getBoolean( key[k++], false );        // DISTOX_COSURVEY 43
-
     // ------------------- SKETCH PREFERENCES
-    mSketchSideSize = tryFloat( prefs, key[k++], "0.5" );
-    mDeltaExtrude   = tryFloat( prefs, key[k++], "50"  );
-    // mSketchUsesSplays  = prefs.getBoolean( key[k++], false );
+    mSketchSideSize = tryFloat( prefs, key[k++], "0.5" );           // DISTOX_SKETCH_LINE_STEP
+    mDeltaExtrude   = tryFloat( prefs, key[k++], "50"  );           // DISTOX_DELTA_EXTRUDE
+    // mSketchUsesSplays  = prefs.getBoolean( key[k++], false );    
     // mSketchBorderStep  = Float.parseFloat( prefs.getString( key[k++], "0.2") );
     // mSketchSectionStep = Float.parseFloat( prefs.getString( key[k++], "0.5") );
 
-    mCompassReadings   = tryInt(   prefs, key[k++], "4" );    // DISTOX_COMPASS_READING 46
-    mLRExtend          = prefs.getBoolean( key[k++], true ); 
-    mAutoReconnect     = prefs.getBoolean( key[k++], false ); 
-    mBitmapScale       = tryFloat( prefs, key[k++], "1.5" );  // DISTOX_BITMAP_SCALE 49
-    mThumbSize         = tryInt(   prefs, key[k++], "200" );
+    mCompassReadings   = tryInt(   prefs, key[k++], "4" );    // DISTOX_COMPASS_READING 
+    mLRExtend          = prefs.getBoolean( key[k++], true );  // DISTOX_SPLAY_EXTEND
+    mBitmapScale       = tryFloat( prefs, key[k++], "1.5" );  // DISTOX_BITMAP_SCALE 
+    mThumbSize         = tryInt(   prefs, key[k++], "200" );  // DISTOX_THUMBNAIL
     mDotRadius         = tryFloat( prefs, key[k++], "5"   );  // DISTOX_DOT_RADIUS
-    mFixedThickness    = tryFloat( prefs, key[k++], "1"   );  // DISTOX_FIXED_THICKNESS 52
+    mFixedThickness    = tryFloat( prefs, key[k++], "1"   );  // DISTOX_FIXED_THICKNESS
     mArrowLength       = tryFloat( prefs, key[k++], "8"   );  // DISTOX_ARROW_LENGTH
     mExportShotsFormat = tryInt(   prefs, key[k++], "0" );    // DISTOX_EXPORT_SHOTS choice: 0, 2, 7, 8, 3, 4, 9, 5, 6
     mSplayVertThrs     = tryFloat( prefs, key[k++], "80"  );  // DISTOX_SPLAY_VERT_THRS
 
-    mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 56
-    if ( mInitStation.length() == 0 ) mInitStation = "0";
-    DistoXStationName.setInitialStation( mInitStation );
-    
-    mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT 57
-    mZ6Workaround  = prefs.getBoolean( key[k++], true  );   // DISTOX_Z6_WORKAROUND
+    mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
     setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
-    mAzimuthManual = prefs.getBoolean( key[k++], false );   // DISTOX_AZIMUTH_MANUAL 60
+    mAzimuthManual = prefs.getBoolean( key[k++], false );   // DISTOX_AZIMUTH_MANUAL 
     app.resetRefAzimuth( app.mRefAzimuth );
 
-    mVertSplay = tryFloat( prefs, key[k++], "50" ); // DISTOX_VERT_SPLAY
-
+    mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
-
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
 
-    // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS 64
-    setZoomControls( prefs.getString( key[k++], "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL 64
-
+    // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
+    setZoomControls( prefs.getString( key[k++], "1"), app.isMultitouch() ); // DISTOX_ZOOM_CTRL
     mSideDrag = prefs.getBoolean( key[k++], false );          // DISTOX_SIDE_DRAG
-    mKeyboard = prefs.getBoolean( key[k++], true );           // DISTOX_MKEYBOARD
 
     mDxfScale    = tryFloat( prefs, key[k++], "1.0" );        // DISTOX_DXF_SCALE
     mAcadVersion = tryInt(   prefs, key[k++], "9" );          // DISTOX_ACAD_VERSION choice: 9, 13
 
-    setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR 69
-
-    mAutoPair = prefs.getBoolean( key[ k++ ], true );         // DISTOX_AUTO_PAIR
-    mConnectSocketDelay = tryInt(prefs, key[ k++ ], "0" );    // DISTOX_SOCKET_DELAY
+    setBitmapBgcolor( prefs.getString( key[k++], "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
 
     mSurvexEol    = ( prefs.getString(  key[k++], "LF" ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
     mSurvexSplay  =   prefs.getBoolean( key[k++], false );    // DISTOX_SURVEX_SPLAY
-    mSurvexLRUD   =   prefs.getBoolean( key[k++], false );    // DISTOX_SURVEX_LRUD 74
+    mSurvexLRUD   =   prefs.getBoolean( key[k++], false );    // DISTOX_SURVEX_LRUD
     mUnscaledPoints = prefs.getBoolean( key[k++], false );    // DISTOX_UNSCALED_POINTS
     mUnitGrid       = tryFloat(  prefs, key[k++], "1" );      // DISTOX_UNIT_GRID
     mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
 
-    mRecentNr = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR 78 choice: 3, 4, 5, 6
+    mRecentNr = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
 
     mAreaBorder = prefs.getBoolean( key[k++], true );         // DISTOX_AREA_BORDER
     mContJoin   = prefs.getBoolean( key[k++], false );        // DISTOX_CONT_JOIN
 
     mCsvLengthUnit = tryFloat( prefs, key[k++], "1" );        // DISTOX_CSV_LENGTH
-    mBinaryTh2 = prefs.getBoolean( key[k++], false );         // DISTOX_BINARY_STORE 82
 
-    mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0"); // DISTOX_ORTHO_LRUD
+    mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0");  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
 
@@ -647,14 +655,6 @@ class TDSetting
     mWallsXStep       = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_WALLS_XSTEP
     mWallsConcave     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_WALLS_CONCAVE
 
-    app.setLocale( prefs.getString( key[k++], "" ) );
-
-    // String cwd = prefs.getString( key[k++], "TopoDroid" );
-    // if ( ! cwd.equals( mCWD ) ) {
-    //   mCWD = cwd;
-    //   TDPath.setPaths( mCWD );
-    //   mData.openDatabase();
-    // }
   }
 
   static void setActivityBooleans( SharedPreferences prefs )
@@ -675,6 +675,7 @@ class TDSetting
     // int i;
     // Log.v(TopoDroidApp.TAG, "onSharePreferenceChanged " + k );
 
+    // ---------------- PRIMARY PREFERENCES ---------------------------
     if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_EXTRA_BUTTONS
       int level = tryInt( prefs, k, "1" );
       if ( level != mActivityLevel ) {
@@ -685,20 +686,63 @@ class TDSetting
           activity.setMenuAdapter( app.getResources() );
         }  
       }
-    } else if ( k.equals( key[ nk++ ] ) ) {
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_SIZE_BUTTONS
       mSizeButtons = tryInt( prefs, k, "1" );
       if ( activity != null ) activity.resetButtonBar();
-    } else if ( k.equals( key[ nk++ ] ) ) {   // DISTOX_TEXT_SIZE
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_TEXT_SIZE
       mTextSize = tryInt( prefs, k, "16" );
   
     } else if ( k.equals( key[ nk++ ] ) ) {
+      mKeyboard = prefs.getBoolean( k, true );           // DISTOX_MKEYBOARD
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mDefaultTeam     = prefs.getString( k, "" );       // DISTOX_TEAM
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      boolean co_survey = prefs.getBoolean( k, false );  // DISTOX_COSURVEY
+      if ( co_survey != app.mCoSurveyServer ) {
+        app.setCoSurvey( co_survey ); // set flag and start/stop server
+      }
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BINARY_STORE
+      mBinaryTh2 = prefs.getBoolean( k, false );
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_INIT_STATION
+      mInitStation = prefs.getString( k, "0" ).replaceAll("\\s+", "");
+      if ( mInitStation.length() == 0 ) mInitStation = "0";
+      DistoXStationName.setInitialStation( mInitStation );
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      // mDevice      = mData.getDevice( prefs.getString( k, "" ) );  // DISTOX_DEVICE - UNUSED HERE
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mCheckBT        = tryInt( prefs, k, "1" );         // DISTOX_BLUETOOTH (choice)
+
+    } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_LOCALE
+      app.setLocale( prefs.getString( k, "" ) );
+    } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_CWD
+      app.setCWD( prefs.getString( k, "TopoDroid" ) );
+
+    // ---------------- SECOINDARY PREFERENCES ---------------------------
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mSockType       = tryInt( prefs, k, "0" );     // "DISTOX_SOCK_TYPE (choice)
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mCommRetry      = tryInt( prefs, k, "1" );     // DISTOX_COMM_RETRY
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_Z6_WORKAROUND
+      mZ6Workaround = prefs.getBoolean( k, true );
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mConnectionMode = tryInt( prefs, k, "0" );     // DISTOX_CONN_MODE (choice)
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_AUTO_PAIR
+      mAutoPair = prefs.getBoolean( k, true );
+      app.checkAutoPairing();
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_SOCKET_DELAY
+      mConnectSocketDelay = tryInt(prefs, k, "0" );  
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mAutoReconnect = prefs.getBoolean( k, false ); // DISTOX_AUTO_RECONNECT
+  
+
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_CLOSE_DISTANCE
       mCloseDistance = tryFloat( prefs, k, "0.05" );
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mExtendThr     = tryFloat( prefs, k, "10" );   // DISTOX_EXTEND_THR2
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mVThreshold    = tryFloat( prefs, k, "80" );
+      mVThreshold    = tryFloat( prefs, k, "80" );   // DISTOX_VTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
-      parseSurveyStations( prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION 6
+      parseSurveyStations( prefs.getString( k, "1" ) ); // DISTOX_SURVEY_STATION
     } else if ( k.equals( key[ nk++ ] ) ) {
       if ( prefs.getString( k, UNIT_LENGTH ).equals(UNIT_LENGTH) ) {
         mUnitLength = 1.0f;
@@ -718,13 +762,13 @@ class TDSetting
       }
       // TDLog.Log( TDLog.LOG_UNITS, "mUnitAngle changed " + mUnitAngle );
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mAccelerationThr = tryFloat( prefs, k, "400" ); // DISTOX_ACCEL_THR 9
+      mAccelerationThr = tryFloat( prefs, k, "400" );    // DISTOX_ACCEL_THR 
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mMagneticThr     = tryFloat( prefs, k, "300" ); // DISTOX_MAG_THR
+      mMagneticThr     = tryFloat( prefs, k, "300" );    // DISTOX_MAG_THR
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mDipThr          = tryFloat( prefs, k, "3" ); // DISTOX_DIP_THR 11
+      mDipThr          = tryFloat( prefs, k, "3" );      // DISTOX_DIP_THR
   
-    } else if ( k.equals( key[ nk++ ] ) ) {
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_LOOP_CLOSURE
       mLoopClosure   = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCheckAttached = prefs.getBoolean( k, false );
@@ -737,10 +781,10 @@ class TDSetting
     //     mAltitude = Integer.parseInt( prefs.getString( k, ALTITUDE ) ); // DISTOX_ALTITUDE 15
     //   } catch ( NumberFormatException e ) { mAltitude = _WGS84; }
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mCRS = prefs.getString( k, "Long-Lat" );     // DISTOX_CRS 16
+      mCRS = prefs.getString( k, "Long-Lat" );     // DISTOX_CRS
 
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mGroupBy       = tryInt(   prefs, k, "1" );  // DISTOX_GROUP_BY 18 (choice)
+      mGroupBy       = tryInt(   prefs, k, "1" );  // DISTOX_GROUP_BY (choice)
     } else if ( k.equals( key[ nk++ ] ) ) {
       mGroupDistance = tryFloat( prefs, k, "40" );
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -748,35 +792,24 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCalibMaxIt    = tryInt(   prefs, k, "200" );   // DISTOX_CALIB_MAX_IT
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mRawData       = prefs.getBoolean( k, false );  // DISTOX_RAW_DATA 20
+      mRawData       = prefs.getBoolean( k, false );  // DISTOX_RAW_DATA
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mCalibAlgo     = tryInt( prefs, k, "0" );  // DISTOX_CALIB_ALGO 21
+      mCalibAlgo     = tryInt( prefs, k, "0" );       // DISTOX_CALIB_ALGO
 
     } else if ( k.equals( key[ nk++ ] ) ) {
-      // mDevice      = mData.getDevice( prefs.getString( k, "" ) );  // DISTOX_DEVICE - UNUSED HERE
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mCheckBT        = tryInt( prefs, k, "1" );     // DISTOX_BLUETOOTH (choice)
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mSockType       = tryInt( prefs, k, "0" );     // "DISTOX_SOCK_TYPE 26 (choice)
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mCommRetry      = tryInt( prefs, k, "1" );     // DISTOX_COMM_RETRY 27
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mConnectionMode = tryInt( prefs, k, "0" );     // DISTOX_CONN_MODE (choice)
-  
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mAutoStations = prefs.getBoolean( k, true );   // DISTOX_AUTO_STATIONS 30
+      mAutoStations = prefs.getBoolean( k, true );    // DISTOX_AUTO_STATIONS
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCloseness    = tryFloat( prefs, k, "24" );
-    } else if ( k.equals( key[ nk++ ] ) ) {
+    } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_LINE_SEGMENT
       mLineSegment  = tryInt(   prefs, k, "10" );
       mLineSegment2 = mLineSegment * mLineSegment;
     } else if ( k.equals( key[ nk++ ] ) ) {
       mLineAccuracy = tryFloat( prefs, k, "1" );
-    } else if ( k.equals( key[ nk++ ] ) ) {
+    } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_LINE_CORNER
       mLineCorner   = tryFloat( prefs, k, "20" );
-    } else if ( k.equals( key[ nk++ ] ) ) {                           // STYLE 35
+    } else if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_LINE_STYLE
       setLineStyleAndType( prefs.getString( k, LINE_STYLE ) );
-    } else if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_DRAWING_UNIT 36
+    } else if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_DRAWING_UNIT
       try {
         f = Float.parseFloat( prefs.getString( k, "1.4" ) );
         if ( f > 0 && f != mUnit ) {
@@ -784,13 +817,13 @@ class TDSetting
           DrawingBrushPaths.reloadPointLibrary( app.getResources() );
         }
       } catch ( NumberFormatException e ) { }
-    } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_PICKER_TYPE 37
+    } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_PICKER_TYPE
       mPickerType = tryInt(   prefs, k, "0" );
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mHThreshold = tryFloat( prefs, k, "70" );  // DISTOX_HTHRESHOLD 38
+      mHThreshold = tryFloat( prefs, k, "70" );  // DISTOX_HTHRESHOLD
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "20" ) ); // DISTOX_STATION_SIZE 39
+        f = Float.parseFloat( prefs.getString( k, "20" ) ); // DISTOX_STATION_SIZE
         if ( f >= 1 && f != mStationSize ) {
           mStationSize = f;
           DrawingBrushPaths.setTextSizes( );
@@ -798,7 +831,7 @@ class TDSetting
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "24" ) ); // DISTOX_LABEL_SIZE 40
+        f = Float.parseFloat( prefs.getString( k, "24" ) ); // DISTOX_LABEL_SIZE
         if ( f >= 1 && f != mLabelSize ) {
           mLabelSize = f;
           DrawingBrushPaths.setTextSizes( );
@@ -808,7 +841,7 @@ class TDSetting
       //       not existing labels (until they are edited)
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
-        f = Float.parseFloat( prefs.getString( k, "1" ) );  // DISTOX_LINE_THICKNESS 41
+        f = Float.parseFloat( prefs.getString( k, "1" ) );  // DISTOX_LINE_THICKNESS
         if ( f >= 0.5f && f != mLineThickness ) {
           mLineThickness = f;
           DrawingBrushPaths.reloadLineLibrary( app.getResources() );
@@ -816,18 +849,11 @@ class TDSetting
       } catch ( NumberFormatException e ) { }
 
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mDefaultTeam     = prefs.getString( k, "" );         // DISTOX_TEAM
-    } else if ( k.equals( key[ nk++ ] ) ) {
       mTimerCount       = tryInt( prefs, k, "10" );        // DISTOX_SHOT_TIMER
     } else if ( k.equals( key[ nk++ ] ) ) {
       mBeepVolume       = tryInt( prefs, k, "50" );  // DISTOX_BEEP_VOLUME
     } else if ( k.equals( key[ nk++ ] ) ) {
       mMinNrLegShots    = tryInt( prefs, k, "3" ); // DISTOX_LEG_SHOTS (choice)
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      boolean co_survey = prefs.getBoolean( k, false );                       // DISTOX_COSURVEY
-      if ( co_survey != app.mCoSurveyServer ) {
-        app.setCoSurvey( co_survey ); // set flag and start/stop server
-      }
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSketchSideSize = tryFloat( prefs, k, "0.5" );  // 0.5 meter // DISTOX_SKETCH_LINE_STEP
@@ -837,8 +863,6 @@ class TDSetting
       mCompassReadings = tryInt( prefs, k, "4" );     // DISTOX_COMPASS_READINGS
     } else if ( k.equals( key[ nk++ ] ) ) {
       mLRExtend = prefs.getBoolean( k, true );        // DISTOX_SPLAY_EXTEND
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mAutoReconnect = prefs.getBoolean( k, false );  // DISTOX_AUTO_RECONNECT
     } else if ( k.equals( key[ nk++ ] ) ) {
       mBitmapScale = tryFloat( prefs, k, "1.5" );     // DISTOX_BITMAP_SCALE
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -854,23 +878,17 @@ class TDSetting
         }
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) { 
-      mArrowLength = tryFloat( prefs, k, "8" ); // DISTOX_ARROW_LENGTH
+      mArrowLength = tryFloat( prefs, k, "8" );      // DISTOX_ARROW_LENGTH
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mExportShotsFormat = tryInt( prefs, k, "0" );  // DISTOX_EXPORT_SHOTS (choice)
 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_SPLAY_VERT_THRS
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_SPLAY_VERT_THRS
       mSplayVertThrs = tryFloat( prefs, k, "80" );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_INIT_STATION
-      mInitStation = prefs.getString( k, "0" ).replaceAll("\\s+", "");
-      if ( mInitStation.length() == 0 ) mInitStation = "0";
-      DistoXStationName.setInitialStation( mInitStation );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_BACKSIGHT
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_BACKSIGHT
       mBacksight = prefs.getBoolean( k, false );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_Z6_WORKAROUND
-      mZ6Workaround = prefs.getBoolean( k, true );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_MAG_ANOMALY
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_MAG_ANOMALY
       setMagAnomaly( prefs.getBoolean( k, false ) );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_AZIMUTH_MANUAL
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_AZIMUTH_MANUAL
       mAzimuthManual = prefs.getBoolean( k, false ); 
       app.resetRefAzimuth( app.mRefAzimuth );
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -885,8 +903,6 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSideDrag = prefs.getBoolean( k, false ); // DISTOX_SIDE_DRAG
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mKeyboard = prefs.getBoolean( k, true ); // DISTOX_MKEYBOARD
-    } else if ( k.equals( key[ nk++ ] ) ) {
       mDxfScale = tryFloat( prefs, k, "1" );   // DISTOX_DXF_SCALE
     } else if ( k.equals( key[ nk++ ] ) ) {
       try {
@@ -894,11 +910,6 @@ class TDSetting
       } catch ( NumberFormatException e) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       setBitmapBgcolor( prefs.getString( k, "0 0 0" ) ); // DISTOX_BITMAP_BGCOLOR
-    } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_AUTO_PAIR
-      mAutoPair = prefs.getBoolean( k, true );
-      app.checkAutoPairing();
-    } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_SOCKET_DELAY
-      mConnectSocketDelay = tryInt(prefs, k, "0" );  
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSurvexEol = ( prefs.getString( k, "LF" ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -921,8 +932,6 @@ class TDSetting
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCsvLengthUnit = tryFloat( prefs, k, "1" ); // DISTOX_CSV_LENGTH
-    } else if ( k.equals( key[ nk++ ] ) ) { 
-      mBinaryTh2 = prefs.getBoolean( k, false );   // DISTOX_BINARY_STORE
     } else if ( k.equals( key[ nk++ ] ) ) {        // DISTOX_ORTHO_LRUD
       mOrthogonalLRUDAngle  = tryFloat( prefs, k, "0");
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
@@ -940,11 +949,6 @@ class TDSetting
       mWallsXStep = tryFloat( prefs, k, "1.0" ); // DISTOX_WALLS_XSTEP
     } else if ( k.equals( key[ nk++ ] ) ) {
       mWallsConcave = tryFloat( prefs, k, "0.1" ); // DISTOX_WALLS_CONCAVE
-
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_LOCALE
-      app.setLocale( prefs.getString( k, "" ) );
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_CWD
-      app.setCWD( prefs.getString( k, "TopoDroid" ) );
 
     // } else if ( k.equals( key[ nk++ ] ) ) {
     //   mSketchUsesSplays = prefs.getBoolean( k, false );

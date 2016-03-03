@@ -125,7 +125,6 @@ public class TopoDroidApp extends Application
     mManualCalibrationClino   = 0;
   }
 
-
   // ----------------------------------------------------------------------
   // data lister
   // ListerSet mListerSet;
@@ -367,15 +366,9 @@ public class TopoDroidApp extends Application
   }
 
   // called by DeviceActivity::onResume()
-  public void resumeComm()
-  {
-    if ( mComm != null ) mComm.resume();
-  }
+  public void resumeComm() { if ( mComm != null ) mComm.resume(); }
 
-  public void suspendComm()
-  {
-    if ( mComm != null ) mComm.suspend();
-  }
+  public void suspendComm() { if ( mComm != null ) mComm.suspend(); }
 
   public void resetComm() 
   { 
@@ -446,11 +439,32 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------
 
+  void startupStep2()
+  {
+    // ***** LOG FRAMEWORK
+    TDLog.setLogTarget();
+    TDLog.loadLogPreferences( mPrefs );
+
+    PtCmapActivity.setMap( mPrefs.getString( "DISTOX_PT_CMAP", null ) );
+
+    TDSetting.loadSecondaryPreferences( this, mPrefs );
+    checkAutoPairing();
+
+    if ( TDLog.LOG_DEBUG ) {
+      isTracing = true;
+      Debug.startMethodTracing("DISTOX");
+    }
+
+    mPrefs.registerOnSharedPreferenceChangeListener( this );
+    // TDLog.Debug("ready");
+  }
+
   @Override
   public void onCreate()
   {
     super.onCreate();
 
+    // Log.v("DistoX", "START" );
     try {
       VERSION      = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionName;
       VERSION_CODE = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionCode;
@@ -465,6 +479,7 @@ public class TopoDroidApp extends Application
       e.printStackTrace();
     }
 
+
     mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
     mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
 
@@ -472,25 +487,23 @@ public class TopoDroidApp extends Application
     mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
     TDPath.setPaths( mCWD );
 
-    String cmap = mPrefs.getString( "DISTOX_PT_CMAP", null );
-    PtCmapActivity.setMap( cmap );
-
-    // ***** LOG FRAMEWORK
-    TDLog.setLogTarget();
-    TDLog.loadLogPreferences( mPrefs );
-
     mDataListeners = new ArrayList< DataListener >( );
-
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     mData  = new DataHelper( this, mDataListeners );
     mDData = new DeviceHelper( this, null ); 
 
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-    TDSetting.loadPreferences( this, mPrefs );
-    checkAutoPairing();
+    TDSetting.loadPrimaryPreferences( this, mPrefs );
 
-    // ***** REGISTER PREF CHANGE LISTENER AFTER HAVING LOADED PREFERENCES
-    this.mPrefs.registerOnSharedPreferenceChangeListener( this );
+    mBTAdapter = BluetoothAdapter.getDefaultAdapter();
+    // if ( mBTAdapter == null ) {
+    //   // Toast.makeText( this, R.string.not_available, Toast.LENGTH_SHORT ).show();
+    //   // finish(); // FIXME
+    //   // return;
+    // }
+    mComm = new DistoXComm( this );
+    mListerSet = new ListerSetHandler();
+    mDataDownloader = new DataDownloader( this, this );
 
     mEnableZip = true;
 
@@ -505,7 +518,7 @@ public class TopoDroidApp extends Application
     }
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
-    {
+    if ( TDSetting.mLevelOverAdvanced ) {
       String value = mDData.getValue("sketch");
       mSketches =  value != null 
                 && value.equals("on")
@@ -523,8 +536,6 @@ public class TopoDroidApp extends Application
 
     mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), "" ) );
 
-    // DrawingBrushPaths.makePaths( getResources() );
-
     // ***** CALIBRATION COMPUTATION CLASS
     mCalibration = new Calibration( 0, this, false );
 
@@ -534,18 +545,6 @@ public class TopoDroidApp extends Application
     DistoXConnectionError[2] = getResources().getString( R.string.distox_err_headtail_io );
     DistoXConnectionError[3] = getResources().getString( R.string.distox_err_headtail_eof );
     DistoXConnectionError[4] = getResources().getString( R.string.distox_err_connected );
-    
-    mBTAdapter = BluetoothAdapter.getDefaultAdapter();
-    // if ( mBTAdapter == null ) {
-    //   // Toast.makeText( this, R.string.not_available, Toast.LENGTH_SHORT ).show();
-    //   // finish(); // FIXME
-    //   // return;
-    // }
-
-    mComm = new DistoXComm( this );
-
-    mListerSet = new ListerSetHandler();
-    mDataDownloader = new DataDownloader( this, this );
 
     DisplayMetrics dm = getResources().getDisplayMetrics();
     float density  = dm.density;
@@ -554,12 +553,6 @@ public class TopoDroidApp extends Application
     mScaleFactor   = (mDisplayHeight / 320.0f) * density;
 
     // mManual = getResources().getString( R.string.topodroid_man );
-
-    if ( TDLog.LOG_DEBUG ) {
-      isTracing = true;
-      Debug.startMethodTracing("DISTOX");
-    }
-    // TDLog.Debug("ready");
   }
 
   void resetLocale()
@@ -1046,6 +1039,8 @@ public class TopoDroidApp extends Application
   }
 
   // ----------------------------------------------------------------
+  // FIXME TO REMOVE
+
   static float mRefAzimuth = 90; // west to east
   static long  mFixedExtend = 0;
 
@@ -1090,6 +1085,7 @@ public class TopoDroidApp extends Application
     if ( b <= 90 - TDSetting.mExtendThr || b >= 270 + TDSetting.mExtendThr ) return 1L;
     return 0L;
   }
+  // END TO REMOVE
 
   private void setLegExtend( DistoXDBlock prev )
   {

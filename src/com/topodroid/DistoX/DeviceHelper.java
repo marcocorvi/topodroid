@@ -54,23 +54,23 @@ public class DeviceHelper extends DataSetObservable
   private long           myNextCId;  // id of next calib-data
 
   private SQLiteStatement updateConfig;
-  private SQLiteStatement updateGMGroupStmt;
-  private SQLiteStatement updateGMErrorStmt;
-  private SQLiteStatement deleteGMStmt;
+  private SQLiteStatement updateGMGroupStmt = null;
+  private SQLiteStatement updateGMErrorStmt = null;
+  private SQLiteStatement deleteGMStmt = null;
 
-  private SQLiteStatement updateCalibStmt;
-  private SQLiteStatement updateCalibAlgoStmt;
-  private SQLiteStatement updateCalibCoeffStmt;
-  private SQLiteStatement updateCalibErrorStmt;
-  private SQLiteStatement resetAllGMStmt;
+  private SQLiteStatement updateCalibStmt = null;
+  private SQLiteStatement updateCalibAlgoStmt = null;
+  private SQLiteStatement updateCalibCoeffStmt = null;
+  private SQLiteStatement updateCalibErrorStmt = null;
+  private SQLiteStatement resetAllGMStmt = null;
 
 //these are real database "delete"
-  private SQLiteStatement doDeleteGMStmt;
-  private SQLiteStatement doDeleteCalibStmt;
+  private SQLiteStatement doDeleteGMStmt = null;
+  private SQLiteStatement doDeleteCalibStmt = null;
 
-  private SQLiteStatement updateDeviceHeadTailStmt;
-  private SQLiteStatement updateDeviceModelStmt;
-  private SQLiteStatement updateDeviceNicknameStmt;
+  private SQLiteStatement updateDeviceHeadTailStmt = null;
+  private SQLiteStatement updateDeviceModelStmt = null;
+  private SQLiteStatement updateDeviceNicknameStmt = null;
 
   private ArrayList<DataListener> mListeners;
   // ----------------------------------------------------------------------
@@ -113,24 +113,6 @@ public class DeviceHelper extends DataSetObservable
         }
 
         updateConfig       = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
-        updateGMGroupStmt  = myDB.compileStatement( "UPDATE gms SET grp=? WHERE calibId=? AND id=?" );
-        updateGMErrorStmt  = myDB.compileStatement( "UPDATE gms SET error=? WHERE calibId=? AND id=?" );
-
-        updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
-        updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
-        updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
-        updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, stddev=?, max_error=?, iterations=? WHERE id=?" );
-
-        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
-        // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
-        deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
-
-        doDeleteGMStmt    = myDB.compileStatement( "DELETE FROM gms where calibId=?" );
-        doDeleteCalibStmt = myDB.compileStatement( "DELETE FROM calibs where id=?" );
-
-        updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
-        updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
-        updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
 
      } catch ( SQLiteException e ) {
        myDB = null;
@@ -144,6 +126,8 @@ public class DeviceHelper extends DataSetObservable
   void deleteGM( long cid, long id, boolean delete )
   {
     // if ( myDB == null ) return;
+    if ( deleteGMStmt == null )
+        deleteGMStmt = myDB.compileStatement( "UPDATE gms set status=? WHERE calibID=? AND id=?" );
     deleteGMStmt.bindLong( 1, delete? 1 : 0 );
     deleteGMStmt.bindLong( 2, cid );
     deleteGMStmt.bindLong( 3, id );
@@ -153,6 +137,10 @@ public class DeviceHelper extends DataSetObservable
   public void doDeleteCalib( long cid ) 
   {
     // if ( myDB == null ) return;
+    if ( doDeleteGMStmt == null )
+        doDeleteGMStmt    = myDB.compileStatement( "DELETE FROM gms where calibId=?" );
+    if ( doDeleteCalibStmt == null )
+        doDeleteCalibStmt = myDB.compileStatement( "DELETE FROM calibs where id=?" );
     doDeleteGMStmt.bindLong( 1, cid );
     doDeleteGMStmt.execute();
     doDeleteCalibStmt.bindLong( 1, cid );
@@ -162,6 +150,8 @@ public class DeviceHelper extends DataSetObservable
   public long updateGMName( long gid, long cid, String grp )
   {
     // if ( myDB == null ) return -1;
+    if ( updateGMGroupStmt == null )
+        updateGMGroupStmt  = myDB.compileStatement( "UPDATE gms SET grp=? WHERE calibId=? AND id=?" );
     updateGMGroupStmt.bindString( 1, grp );
     updateGMGroupStmt.bindLong( 2, cid );
     updateGMGroupStmt.bindLong( 3, gid );
@@ -172,6 +162,8 @@ public class DeviceHelper extends DataSetObservable
   public long updateGMError( long id, long cid, double error )
   {
     // if ( myDB == null ) return -1;
+    if ( updateGMErrorStmt == null ) 
+        updateGMErrorStmt  = myDB.compileStatement( "UPDATE gms SET error=? WHERE calibId=? AND id=?" );
     updateGMErrorStmt.bindDouble( 1, error );
     updateGMErrorStmt.bindLong( 2, cid );
     updateGMErrorStmt.bindLong( 3, id );
@@ -206,6 +198,9 @@ public class DeviceHelper extends DataSetObservable
 
    public void resetAllGMs( long cid, long start_id )
    {
+     if ( resetAllGMStmt == null )
+        resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>? AND status=0" );
+        // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
      resetAllGMStmt.bindLong( 1, cid );
      resetAllGMStmt.bindLong( 2, start_id );
      resetAllGMStmt.execute();
@@ -814,6 +809,8 @@ public class DeviceHelper extends DataSetObservable
 
   public void updateDeviceModel( String address, String model )
   {
+    if ( updateDeviceModelStmt == null )
+      updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
     updateDeviceModelStmt.bindString( 1, model );
     updateDeviceModelStmt.bindString( 2, address );
     updateDeviceModelStmt.execute();
@@ -821,6 +818,8 @@ public class DeviceHelper extends DataSetObservable
 
   public void updateDeviceNickname( String address, String nickname )
   {
+    if ( updateDeviceNicknameStmt == null )
+        updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
     updateDeviceNicknameStmt.bindString( 1, nickname );
     updateDeviceNicknameStmt.bindString( 2, address );
     updateDeviceNicknameStmt.execute();
@@ -830,6 +829,8 @@ public class DeviceHelper extends DataSetObservable
   {
     // if ( myDB == null ) return false;
     boolean ret = false;
+    if ( updateDeviceHeadTailStmt == null )
+        updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
     Cursor cursor = myDB.query( DEVICE_TABLE, new String[] { "head" },
                          "address=?", 
                          new String[] { address },
@@ -876,6 +877,8 @@ public class DeviceHelper extends DataSetObservable
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
      if ( date == null ) return false;
+     if ( updateCalibStmt == null )
+        updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
      updateCalibStmt.bindString( 1, date );
      updateCalibStmt.bindString( 2, (device != null)? device : "" );
      updateCalibStmt.bindString( 3, (comment != null)? comment : "" );
@@ -887,6 +890,8 @@ public class DeviceHelper extends DataSetObservable
    public boolean updateCalibAlgo( long id, long algo )
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibAlgo id " + id + " algo " + algo );
+     if ( updateCalibAlgoStmt == null )
+        updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
      updateCalibAlgoStmt.bindLong( 1, algo );
      updateCalibAlgoStmt.bindLong( 2, id );
      updateCalibAlgoStmt.execute();
@@ -897,6 +902,8 @@ public class DeviceHelper extends DataSetObservable
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
      if ( coeff == null ) return false;
+     if ( updateCalibCoeffStmt == null )
+        updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
      updateCalibCoeffStmt.bindString( 1, coeff );
      updateCalibCoeffStmt.bindLong( 2, id );
      updateCalibCoeffStmt.execute();
@@ -906,6 +913,8 @@ public class DeviceHelper extends DataSetObservable
    public boolean updateCalibError( long id, double error, double stddev, double max_error, int iterations )
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
+     if ( updateCalibErrorStmt == null )
+        updateCalibErrorStmt = myDB.compileStatement( "UPDATE calibs SET error=?, stddev=?, max_error=?, iterations=? WHERE id=?" );
      updateCalibErrorStmt.bindDouble( 1, error );
      updateCalibErrorStmt.bindDouble( 2, stddev );
      updateCalibErrorStmt.bindDouble( 3, max_error );
