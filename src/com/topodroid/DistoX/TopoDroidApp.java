@@ -464,6 +464,7 @@ public class TopoDroidApp extends Application
     super.onCreate();
 
     // Log.v("DistoX", "START" );
+    // TDLog.Profile("TDApp onCreate");
     try {
       VERSION      = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionName;
       VERSION_CODE = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionCode;
@@ -482,24 +483,31 @@ public class TopoDroidApp extends Application
     mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
     mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
 
+    // TDLog.Profile("TDApp paths");
     TDPath.setDefaultPaths();
+
+    // TDLog.Profile("TDApp cwd");
     mCWD = mPrefs.getString( "DISTOX_CWD", "TopoDroid" );
     TDPath.setPaths( mCWD );
 
+    // TDLog.Profile("TDApp DB");
     mDataListeners = new ArrayList< DataListener >( );
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     mData  = new DataHelper( this, mDataListeners );
     mDData = new DeviceHelper( this, null ); 
 
+    // TDLog.Profile("TDApp prefs");
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
     TDSetting.loadPrimaryPreferences( this, mPrefs );
 
+    // TDLog.Profile("TDApp BT");
     mBTAdapter = BluetoothAdapter.getDefaultAdapter();
     // if ( mBTAdapter == null ) {
     //   // Toast.makeText( this, R.string.not_available, Toast.LENGTH_SHORT ).show();
     //   // finish(); // FIXME
     //   // return;
     // }
+    // TDLog.Profile("TDApp comm");
     mComm = new DistoXComm( this );
     mListerSet = new ListerSetHandler();
     mDataDownloader = new DataDownloader( this, this );
@@ -507,6 +515,7 @@ public class TopoDroidApp extends Application
     mEnableZip = true;
 
     // ***** DRAWING TOOLS SYMBOLS
+    // TDLog.Profile("TDApp symbols");
     String version = mDData.getValue( "version" );
     if ( version == null || ( ! version.equals(VERSION) ) ) {
       mDData.setValue( "version", VERSION );
@@ -533,6 +542,7 @@ public class TopoDroidApp extends Application
       }
     }
 
+    // TDLog.Profile("TDApp device etc.");
     mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), "" ) );
 
     DistoXConnectionError = new String[5];
@@ -562,15 +572,17 @@ public class TopoDroidApp extends Application
     res.updateConfiguration( conf, dm );
   }
 
-  void setLocale( String locale )
+  void setLocale( String locale, boolean load_symbols )
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(""))? Locale.getDefault() : new Locale( mLocaleStr );
     resetLocale();
     Resources res = getResources();
-    DrawingBrushPaths.reloadPointLibrary( res ); // reload symbols
-    DrawingBrushPaths.reloadLineLibrary( res );
-    DrawingBrushPaths.reloadAreaLibrary( res );
+    if ( load_symbols ) {
+      DrawingBrushPaths.reloadPointLibrary( res ); // reload symbols
+      DrawingBrushPaths.reloadLineLibrary( res );
+      DrawingBrushPaths.reloadAreaLibrary( res );
+    }
     if ( mActivity != null ) mActivity.setMenuAdapter( res );
     if ( mPrefActivity != null ) mPrefActivity.reloadPreferences();
   }

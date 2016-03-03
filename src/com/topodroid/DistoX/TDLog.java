@@ -95,6 +95,12 @@ class TDLog
     "DISTOX_LOG_UNITS",
     "DISTOX_LOG_SYNC"
   };
+
+  // static void Profile( String msg )
+  // {
+  //   long millis = System.currentTimeMillis() % 600000;
+  //   Log.v("DistoX", Long.toString(millis) + " PROFILE " + msg );
+  // }
   
   static void LogFile( String msg )
   {

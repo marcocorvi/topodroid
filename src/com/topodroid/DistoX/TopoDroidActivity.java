@@ -633,6 +633,7 @@ public class TopoDroidActivity extends Activity
   {
     super.onCreate( savedInstanceState );
     
+    // TDLog.Profile("TDActivity onCreate");
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
     mApp.mActivity = this;
@@ -649,6 +650,7 @@ public class TopoDroidActivity extends Activity
     mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
 
+    // TDLog.Profile("TDActivity menu");
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
@@ -658,6 +660,7 @@ public class TopoDroidActivity extends Activity
     closeMenu();
     // mMenu.setOnItemClickListener( this );
 
+    // TDLog.Profile("TDActivity buttons");
     mListView = (HorizontalListView) findViewById(R.id.listview);
     resetButtonBar();
 
@@ -697,10 +700,15 @@ public class TopoDroidActivity extends Activity
     //     return null;
     //   }
     // };
+    // TDLog.Profile("TDActivity thread");
     Thread loader = new Thread() {
       @Override
       public void run() {
         mApp.startupStep2();
+        Resources res = getResources();
+        DrawingBrushPaths.reloadPointLibrary( res ); // reload symbols
+        DrawingBrushPaths.reloadLineLibrary( res );
+        DrawingBrushPaths.reloadAreaLibrary( res );
         DrawingBrushPaths.doMakePaths( );
         WorldMagneticModel.loadEGM9615( mApp );
       }
@@ -780,6 +788,7 @@ public class TopoDroidActivity extends Activity
     // restoreInstanceFromFile();
     // TDLog.Log( TopoDroidLoLogOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + mApp.mBTAdapter.isEnabled() );
 
+    // TDLog.Profile("TDActivity onStart");
     if ( do_check_bt ) {
       do_check_bt = false;
       if ( mApp.mBTAdapter == null ) {
@@ -802,6 +811,7 @@ public class TopoDroidActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    // TDLog.Profile("TDActivity onResume");
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
     // mApp.resetLocale();
     mApp.resumeComm();

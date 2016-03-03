@@ -512,7 +512,8 @@ class TDSetting
     k++;                                                     // DISTOX_DEVICE - UNUSED HERE
     mCheckBT        = tryInt( prefs, key[k++], "1" );        // DISTOX_BLUETOOTH choice: 0, 1, 2
 
-    app.setLocale( prefs.getString( key[k++], "" ) );              // DISTOX_LOCALE
+    // TDLog.Profile("locale");
+    app.setLocale( prefs.getString( key[k++], "" ), false );              // DISTOX_LOCALE
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
     // if ( ! cwd.equals( mCWD ) ) {
     //   mCWD = cwd;
@@ -713,7 +714,7 @@ class TDSetting
       mCheckBT        = tryInt( prefs, k, "1" );         // DISTOX_BLUETOOTH (choice)
 
     } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_LOCALE
-      app.setLocale( prefs.getString( k, "" ) );
+      app.setLocale( prefs.getString( k, "" ), true );
     } else if ( k.equals( key[ nk++ ] ) ) {     // DISTOX_CWD
       app.setCWD( prefs.getString( k, "TopoDroid" ) );
 
