@@ -177,24 +177,24 @@ public class ShotActivity extends Activity
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
-    mApp.mFixedExtend = fixed_extend;
-    mApp.mRefAzimuth  = azimuth;
+    TDAzimuth.mFixedExtend = fixed_extend;
+    TDAzimuth.mRefAzimuth  = azimuth;
     setRefAzimuthButton();
   }
 
   public void setRefAzimuthButton()
   {
     if ( ! TDSetting.mLevelOverNormal ) return;
-    if ( mApp.mFixedExtend == 0 ) {
+    if ( TDAzimuth.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
-      m.postRotate( mApp.mRefAzimuth - 90 );
+      m.postRotate( TDAzimuth.mRefAzimuth - 90 );
       // if ( mBMdial != null ) // extra care !!!
       {
         Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
         Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
         mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
       }
-    } else if ( mApp.mFixedExtend == -1L ) {
+    } else if ( TDAzimuth.mFixedExtend == -1L ) {
       mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( mBMleft );
     } else {
       mButton1[ BTN_AZIMUTH ].setBackgroundDrawable( mBMright );
@@ -758,7 +758,7 @@ public class ShotActivity extends Activity
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
     }
 
-    mApp.resetRefAzimuth( 90 );
+    TDAzimuth.resetRefAzimuth( 90 );
     // setRefAzimuthButton( ); // called by mApp.resetRefAzimuth
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
@@ -1020,9 +1020,9 @@ public class ShotActivity extends Activity
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
         if ( TDSetting.mLevelOverNormal ) {
           if ( TDSetting.mAzimuthManual ) {
-            setRefAzimuth( 0, - mApp.mFixedExtend );
+            setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
+            (new AzimuthDialDialog( this, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
           }
         }
       }

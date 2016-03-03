@@ -1036,7 +1036,7 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------
   // FIXME TO REMOVE
-
+/*
   static float mRefAzimuth = 90; // west to east
   static long  mFixedExtend = 0;
 
@@ -1082,13 +1082,14 @@ public class TopoDroidApp extends Application
     return 0L;
   }
   // END TO REMOVE
+*/
 
   private void setLegExtend( DistoXDBlock prev )
   {
     // FIXME what has "splay extend" to do with "leg extend" ???
     // if ( ! TDSetting.mSplayExtend ) 
     {
-      long extend = computeLegExtend( prev.mBearing );
+      long extend = TDAzimuth.computeLegExtend( prev.mBearing );
       mData.updateShotExtend( prev.mId, mSID, extend, true );
     }
   }
@@ -1570,7 +1571,7 @@ public class TopoDroidApp extends Application
           }
           if ( l >= 0.0f ) {
             if ( horizontal ) { // WENS
-              extend = computeSplayExtend( 270 );
+              extend = TDAzimuth.computeSplayExtend( 270 );
               if ( at >= 0L ) {
                 id = mData.insertShotAt( mSID, at, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
               } else {
@@ -1579,7 +1580,7 @@ public class TopoDroidApp extends Application
             } else {
               float b = bearing - 90.0f;
               if ( b < 0.0f ) b += 360.0f;
-              extend = computeSplayExtend( b );
+              extend = TDAzimuth.computeSplayExtend( b );
               // b = in360( b );
               if ( at >= 0L ) {
                 id = mData.insertShotAt( mSID, at, l, b, 0.0f, 0.0f, extend, 1, true );
@@ -1600,7 +1601,7 @@ public class TopoDroidApp extends Application
           }
           if ( r >= 0.0f ) {
             if ( horizontal ) { // WENS
-              extend = computeSplayExtend( 90 );
+              extend = TDAzimuth.computeSplayExtend( 90 );
               if ( at >= 0L ) {
                 id = mData.insertShotAt( mSID, at, r, 90.0f, 0.0f, 0.0f, extend, 1, true );
               } else {
@@ -1609,7 +1610,7 @@ public class TopoDroidApp extends Application
             } else {
               float b = bearing + 90.0f;
               if ( b >= 360.0f ) b -= 360.0f;
-              extend = computeSplayExtend( b );
+              extend = TDAzimuth.computeSplayExtend( b );
               if ( at >= 0L ) {
                 id = mData.insertShotAt( mSID, at, r, b, 0.0f, 0.0f, extend, 1, true );
               } else {

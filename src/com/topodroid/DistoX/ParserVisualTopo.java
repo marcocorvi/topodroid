@@ -201,7 +201,7 @@ public class ParserVisualTopo extends ImportParser
                 if ( mLeft > 0 ) {
 	            float ber = mBearing + 180 + 90 * dirw;
                     if ( TDSetting.mLRExtend ) {
-                      extend = (int)TopoDroidApp.computeSplayExtend( ber );
+                      extend = (int)TDAzimuth.computeSplayExtend( ber );
                     }
                     // FIXME splays
                     shots.add( new ParserShot( station, EMPTY, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
@@ -210,7 +210,7 @@ public class ParserVisualTopo extends ImportParser
                     float ber = mBearing + 180 - 90 * dirw;
                     if ( ber > 360 ) ber -= 360;
                     if ( TDSetting.mLRExtend ) {
-                      extend = (int)TopoDroidApp.computeSplayExtend( ber );
+                      extend = (int)TDAzimuth.computeSplayExtend( ber );
                     }
                     // FIXME splays
                     shots.add( new ParserShot( station, EMPTY, mRight, ber, 0.0f, 0.0f, -extend, false, false, false, "" ) );

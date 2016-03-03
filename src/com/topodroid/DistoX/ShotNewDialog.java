@@ -328,7 +328,7 @@ public class ShotNewDialog extends MyDialog
       else if ( mRadioRight.isChecked() ) { shot_extend = 1; }
       else { // FIXME-EXTEND let TopoDroid choose
         try {
-          shot_extend = mApp.computeLegExtend( Float.parseFloat(bearing.replace(',','.') ) );
+          shot_extend = TDAzimuth.computeLegExtend( Float.parseFloat(bearing.replace(',','.') ) );
         } catch ( NumberFormatException e ) { }
       }
 

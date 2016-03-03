@@ -244,7 +244,7 @@ public class DistoXComm
           double b = mProto.mBearing;
           double c = mProto.mClino;
           double r = mProto.mRoll;
-          long extend = mApp.computeLegExtend( b ); // FIXME-EXTEND
+          long extend = TDAzimuth.computeLegExtend( b ); // FIXME-EXTEND
           TDLog.Log( TDLog.LOG_DISTOX, "DATA PACKET " + d + " " + b + " " + c );
           // NOTE type=0 shot is DistoX-type
           mLastShotId = mApp.mData.insertShot( mApp.mSID, -1L, d, b, c, r, extend, 0, true );

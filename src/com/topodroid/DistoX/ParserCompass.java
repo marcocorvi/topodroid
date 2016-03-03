@@ -138,7 +138,7 @@ public class ParserCompass extends ImportParser
                   float ber = mBearing + 270;
                   if ( ber > 360 ) ber -= 360;
                   if ( TDSetting.mLRExtend ) {
-                    extend = (int)TopoDroidApp.computeSplayExtend( ber );
+                    extend = (int)TDAzimuth.computeSplayExtend( ber );
                   }
                   // FIXME splays
                   shots.add( new ParserShot( mFrom, EMPTY, mLeft, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );
@@ -147,7 +147,7 @@ public class ParserCompass extends ImportParser
                   float ber = mBearing + 90;
                   if ( ber > 360 ) ber -= 360;
                   if ( TDSetting.mLRExtend ) {
-                    extend = (int)TopoDroidApp.computeSplayExtend( ber );
+                    extend = (int)TDAzimuth.computeSplayExtend( ber );
                   }
                   // FIXME splays
                   shots.add( new ParserShot( mFrom, EMPTY, mRight, ber, 0.0f, 0.0f, extend, false, false, false, "" ) );

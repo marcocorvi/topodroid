@@ -683,15 +683,15 @@ public class DrawingActivity extends ItemDrawer
    */
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
-    mApp.mFixedExtend = fixed_extend;
-    mApp.mRefAzimuth = azimuth;
-    if ( mApp.mFixedExtend == 0 ) {
+    TDAzimuth.mFixedExtend = fixed_extend;
+    TDAzimuth.mRefAzimuth = azimuth;
+    if ( TDAzimuth.mFixedExtend == 0 ) {
       android.graphics.Matrix m = new android.graphics.Matrix();
       m.postRotate( azimuth - 90 );
       Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
       Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
       mButton1[BTN_DIAL].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) );
-    } else if ( mApp.mFixedExtend == -1L ) {
+    } else if ( TDAzimuth.mFixedExtend == -1L ) {
       mButton1[BTN_DIAL].setBackgroundDrawable( mBMleft );
     } else {
       mButton1[BTN_DIAL].setBackgroundDrawable( mBMright );
@@ -833,7 +833,7 @@ public class DrawingActivity extends ItemDrawer
       mBMdownload_wait = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_download_wait );
       mBMleft          = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_left );
       mBMright         = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_right );
-      setRefAzimuth( mApp.mRefAzimuth, mApp.mFixedExtend );
+      setRefAzimuth( TDAzimuth.mRefAzimuth, TDAzimuth.mFixedExtend );
 
       mButton2 = new MyButton[ mNrButton2 ]; // DRAW
       off = (mNrButton1 - 3); 
@@ -2786,9 +2786,9 @@ public class DrawingActivity extends ItemDrawer
         }
       } else if ( b == mButton1[k1++] ) { //  AZIMUTH
         if ( TDSetting.mAzimuthManual ) {
-          setRefAzimuth( 0, - mApp.mFixedExtend );
+          setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
         } else {
-          (new AzimuthDialDialog( this, this, mApp.mRefAzimuth, mBMdial )).show();
+          (new AzimuthDialDialog( this, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
         }
 
       } else if ( b == mButton1[k1++] ) { //  NOTE

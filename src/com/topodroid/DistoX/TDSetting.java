@@ -615,7 +615,7 @@ class TDSetting
     mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
     setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
     mAzimuthManual = prefs.getBoolean( key[k++], false );   // DISTOX_AZIMUTH_MANUAL 
-    app.resetRefAzimuth( app.mRefAzimuth );
+    TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth );
 
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
@@ -890,7 +890,7 @@ class TDSetting
       setMagAnomaly( prefs.getBoolean( k, false ) );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_AZIMUTH_MANUAL
       mAzimuthManual = prefs.getBoolean( k, false ); 
-      app.resetRefAzimuth( app.mRefAzimuth );
+      TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVertSplay = tryFloat( prefs, k, "50" );
     } else if ( k.equals( key[ nk++ ] ) ) {
