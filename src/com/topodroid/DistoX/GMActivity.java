@@ -61,6 +61,8 @@ public class GMActivity extends Activity
 {
   private TopoDroidApp mApp;
 
+  private Calibration mCalibration = null;
+
   private String mSaveData;                // saved GM text representation
   private TextView mSaveTextView;          // view of the saved GM
   private CalibCBlock mSaveCBlock = null;  // data of the saved GM
@@ -145,29 +147,30 @@ public class GMActivity extends Activity
     if ( list.size() < 16 ) {
       return -1;
     }
-    Calibration calibration = mApp.mCalibration;
-    // FIXME set the calibration algorithm (whether non-linear or linear)
-    calibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
+    mCalibration = new Calibration( 0, false );
 
-    calibration.Reset( list.size() );
+    // FIXME set the calibration algorithm (whether non-linear or linear)
+    mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
+
+    mCalibration.Reset( list.size() );
     for ( CalibCBlock item : list ) {
-      calibration.AddValues( item );
+      mCalibration.AddValues( item );
     }
-    int iter = calibration.Calibrate();
+    int iter = mCalibration.Calibrate();
     if ( iter > 0 ) {
-      float[] errors = calibration.Errors();
+      float[] errors = mCalibration.Errors();
       for ( int k = 0; k < list.size(); ++k ) {
         CalibCBlock cb = list.get( k );
         mApp.mDData.updateGMError( cb.mId, cid, errors[k] );
         // cb.setError( errors[k] );
       }
 
-      byte[] coeff = calibration.GetCoeff();
+      byte[] coeff = mCalibration.GetCoeff();
       mApp.mDData.updateCalibCoeff( cid, Calibration.coeffToString( coeff ) );
       mApp.mDData.updateCalibError( cid, 
-             calibration.Delta(),
-             calibration.Delta2(),
-             calibration.MaxError(),
+             mCalibration.Delta(),
+             mCalibration.Delta2(),
+             mCalibration.MaxError(),
              iter );
 
       // DEBUG:
@@ -332,17 +335,16 @@ public class GMActivity extends Activity
           return;
         } else if ( result > 0 ) {
           enableWrite( true );
-          Calibration calibration = mApp.mCalibration;
-          Vector bg = calibration.GetBG();
-          Matrix ag = calibration.GetAG();
-          Vector bm = calibration.GetBM();
-          Matrix am = calibration.GetAM();
-          Vector nL = calibration.GetNL();
-          byte[] coeff = calibration.GetCoeff();
-          float[] errors = calibration.Errors();
+          Vector bg = mCalibration.GetBG();
+          Matrix ag = mCalibration.GetAG();
+          Vector bm = mCalibration.GetBM();
+          Matrix am = mCalibration.GetAM();
+          Vector nL = mCalibration.GetNL();
+          byte[] coeff = mCalibration.GetCoeff();
+          float[] errors = mCalibration.Errors();
 
           (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, errors,
-                                 calibration.Delta(), calibration.Delta2(), calibration.MaxError(), 
+                                 mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
                                  result, coeff ) ).show();
         } else {
           // Toast.makeText( mApp.getApplicationContext(), R.string.few_data, Toast.LENGTH_SHORT ).show();
@@ -747,11 +749,10 @@ public class GMActivity extends Activity
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
         }
       } else if ( b == mButton1[3] ) { // COVER
-        Calibration calib = mApp.mCalibration;
-        if ( calib != null ) {
+        if ( mCalibration != null ) {
           List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
           if ( list.size() >= 16 ) {
-            ( new CalibCoverageDialog( this, list, calib ) ).show();
+            ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
           } else {
             Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
           }
@@ -776,13 +777,13 @@ public class GMActivity extends Activity
 
       } else if ( b == mButton1[6] ) { // WRITE
         // if ( mEnableWrite ) {
-          if ( mApp.mCalibration == null ) {
+          if ( mCalibration == null ) {
             Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
           } else {
             setTitle( R.string.calib_write_coeffs );
             setTitleColor( TDConst.COLOR_CONNECTED );
 
-            byte[] coeff = mApp.mCalibration.GetCoeff();
+            byte[] coeff = mCalibration.GetCoeff();
             if ( coeff == null ) {
               Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();
             } else {

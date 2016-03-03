@@ -23,8 +23,6 @@ import android.util.Log;
 
 public class Calibration
 {
-  private TopoDroidApp mApp;
-
   private Matrix aG = null;
   private Matrix aM = null;
   private Vector bG = null;
@@ -124,11 +122,10 @@ public class Calibration
   //   Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
-  public Calibration( int N, TopoDroidApp app, boolean nonLinear )
+  public Calibration( int N, boolean nonLinear )
   {
     num = 0;
     if ( N > 0 ) Reset( N );
-    mApp = app;
     mNonLinear = nonLinear;
   }
 

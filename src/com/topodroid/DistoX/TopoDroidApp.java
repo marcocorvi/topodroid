@@ -198,7 +198,6 @@ public class TopoDroidApp extends Application
   long mCID   = -1;   // id of the current calib
   String mySurvey;   // current survey name
   String myCalib;    // current calib name
-  Calibration mCalibration    = null;     // current calibration 
   static long mSecondLastShotId = 0L;
 
   public long lastShotId( ) { return mData.getLastShotId( mSID ); }
@@ -535,9 +534,6 @@ public class TopoDroidApp extends Application
     }
 
     mDevice = mDData.getDevice( mPrefs.getString( TDSetting.keyDeviceName(), "" ) );
-
-    // ***** CALIBRATION COMPUTATION CLASS
-    mCalibration = new Calibration( 0, this, false );
 
     DistoXConnectionError = new String[5];
     DistoXConnectionError[0] = getResources().getString( R.string.distox_err_ok );
