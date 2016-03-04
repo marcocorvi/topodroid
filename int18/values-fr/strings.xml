@@ -73,7 +73,6 @@
     <string name="calib_ave_std">Précision ave_std: %1$.4f %2$.4f degrees</string>
     <string name="calib_precision">Précision</string>
     <string name="calib_iter">itérations : %1$d</string>
-    <string name="calib_saturated_values">ATTENTION : %1$d Saturation des données</string>
     <string name="algorithm">Algorithme:</string>
     <string name="auto">automatique</string>
     <string name="linear">linéaire</string>
@@ -292,8 +291,6 @@
     <!-- UNUSED string name="plot_recover">Recuperer relevé de la sauvegarde?</string -->
     <string name="plot_start">Station d\'origne</string>
     <!-- UNUSED string name="plot_view">Station consulté</string -->
-    <string name="read_data">Lecture %1$d données</string>
-    <!-- TODO string name="read_calib_data">Read %1$d data (%2$d packets)</string -->
     <!-- UNUSED string name="read_fail_with_code">Echec de lecture : code d\'erreur </string -->
     <string name="read_failed">Echec lors de lecture du DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Echec lors de la lecture du fichier</string -->

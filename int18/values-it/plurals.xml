@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- PLURAL string name="calib_saturated_values">ATTENZIONE: %1$ dati saturati</string -->
+  <plurals name="calib_saturated_values">
+    <item quantity="zero">Nessun dato saturato</item>
+    <item quantity="one">ATTENZIONE. Un dato saturato.</item>
+    <item quantity="other">ATTENZIONE. %1$d dati saturati</item>
+  </plurals>
+
+  <!-- PLURAL string name="read_data">Letti %1$d dati</string -->
+  <plurals name="read_data">
+    <item quantity="zero">Nessun dato letto</item>
+    <item quantity="one">Letto un dato</item>
+    <item quantity="other">Letti %1$d dati</item>
+  </plurals -->
+
+  <!-- PLURAL string name="read_calib_data">Letti %1$d dati (%2$d pacchetti)</string -->
+  <plurals name="read_calib_data">
+    <item quantity="zero">Nessun dato letto</item>
+    <item quantity="one">Letto un dato (%2$d pacchetti)</item>
+    <item quantity="other">Letti %1$d dati (%2$d pacchetti)</item>
+  </plurals -->
+</resources>

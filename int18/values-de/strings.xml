@@ -77,7 +77,6 @@
     <string name="calib_ave_std">Genauigkeit: %1$.4f %2$.4f Grad</string>
     <string name="calib_precision">Präzision</string>
     <string name="calib_iter">Iterationen: %1$d</string>
-    <string name="calib_saturated_values">WARNUNG: %1$d gesättigter Daten</string>
     <string name="algorithm">Algorithmus:</string>
     <string name="auto">automatisch</string>
     <string name="linear">linear</string>
@@ -309,8 +308,6 @@
     <string name="plot_not_found">Skizze nicht gefunden</string>
     <!-- UNUSED string name="plot_recover">Skizze aus dem Backup laden?</string -->
     <string name="plot_start">Basismesspunkt</string>
-    <string name="read_data">%1$d Messungen gelesen</string>
-    <string name="read_calib_data">%1$d Daten gelesen (%2$d Pakete)</string>
     <!-- UNUSED string name="read_fail_with_code">Lesefehler: Fehlercode</string -->
     <string name="read_failed">Fehler beim Lesen vom DistoX</string>
     <string name="saved_file_">Gespeicherte Datei</string>

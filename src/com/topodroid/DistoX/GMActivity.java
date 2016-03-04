@@ -460,7 +460,9 @@ public class GMActivity extends Activity
     if ( nr >= 0 ) {
       if ( nr > 0 ) updateDisplay( );
       if ( toast ) {
-        Toast.makeText( this, String.format( getString(R.string.read_calib_data), nr/2, nr ), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, 
+          getResources().getQuantityString(R.plurals.read_calib_data, nr/2, nr/2, nr ),
+          Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {
@@ -502,19 +504,19 @@ public class GMActivity extends Activity
 
   private void updateGMList( List<CalibCBlock> list )
   {
-    int nr_saturated_values = 0;
+    int n_saturated = 0;
     if ( list.size() == 0 ) {
       Toast.makeText( this, R.string.no_gms, Toast.LENGTH_SHORT ).show();
       return;
     }
     for ( CalibCBlock item : list ) {
-      if ( item.isSaturated() ) ++ nr_saturated_values;
+      if ( item.isSaturated() ) ++ n_saturated;
       mDataAdapter.add( item );
     }
     // mList.setAdapter( mDataAdapter );
-    if ( nr_saturated_values > 0 ) {
+    if ( n_saturated > 0 ) {
       Toast.makeText( this, 
-        String.format( getResources().getString( R.string.calib_saturated_values ), nr_saturated_values ),
+        getResources().getQuantityString( R.plurals.calib_saturated_values, n_saturated, n_saturated),
         Toast.LENGTH_LONG ).show();
     }
   }

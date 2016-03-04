@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- PLURAL string name="calib_saturated_values">警告: %1$d 数据溢出</string -->
+  <!-- plurals name="calib_saturated_values">
+    <item quantity="zero">No saturated data</item>
+    <item quantity="one">WARNING. One saturated data</item>
+    <item quantity=["two" | "few" | "many" | "other" ]>WARNING. %1$d saturated data</item>
+  </plurals -->
+
+  <!-- PLURAL string name="read_data">读取 %1$d 数据</string -->
+  <!-- plurals name="read_data">
+    <item quantity="zero">No data read</item>
+    <item quantity=["one" | "two" | "few" | "many" | "other" ]>Read %1$d data</item>
+  </plurals -->
+
+  <!-- PLURAL string name="read_calib_data">读取 %1$d 数据 (%2$d packets)</string -->
+  <!-- plurals name="read_calib_data">
+    <item quantity="zero">No calibration data read</item>
+    <item quantity=["one" | "two" | "few" | "many" | "other" ]>Read %1$d data (%2$d packets)</item>
+  </plurals -->
+</resources>

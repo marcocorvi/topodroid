@@ -69,7 +69,6 @@
     <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f gradi</string>
     <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
-    <string name="calib_saturated_values">ATTENZIONE: %1$ dati saturati</string>
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
     <string name="linear">lineare</string>
@@ -288,8 +287,6 @@
     <!-- UNUSED string name="plot_recover">Ricaricare il disegno dal backup?</string -->
     <string name="plot_start">Caposaldo di origine</string>
     <!-- string name="plot_view">Caposaldo puntato</string -->
-    <string name="read_data">Letti %1$d dati</string>
-    <string name="read_calib_data">Letti %1$d dati (%2$d pacchetti)</string>
     <!-- UNUSED string name="read_fail_with_code">Lettura fallita. Codice </string -->
     <string name="read_failed">Lettura dati DistoX fallita</string>
     <!-- UNUSED string name="reading_file_failed">Lettura file fallita</string -->

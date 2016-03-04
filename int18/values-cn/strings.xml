@@ -72,7 +72,6 @@
     <string name="calib_ave_std">准确度: %1$.4f ± %2$.4f 度</string>
     <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
-    <string name="calib_saturated_values">警告: %1$d 数据溢出</string>
     <string name="algorithm">算法:</string>
     <string name="auto">自动</string>
     <string name="linear">线性</string>
@@ -291,8 +290,6 @@
     <!-- UNUSED string name="plot_recover">从备份中导入草图?</string -->
     <string name="plot_start">起始测量点</string>
     <!-- string name="plot_view">查看测量点</string -->
-    <string name="read_data">读取 %1$d 数据</string>
-    <string name="read_calib_data">读取 %1$d 数据 (%2$d packets)</string>
     <!-- UNUSED string name="read_fail_with_code">读取失败: 错误代码 </string -->
     <string name="read_failed">DistoX-读取失败</string>
     <!-- string name="reading_file_failed">文件读取失败</string -->

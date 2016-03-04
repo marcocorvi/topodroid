@@ -69,7 +69,6 @@
     <string name="calib_ave_std">Accuracy: %1$.4f %2$.4f grados</string>
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
-    <string name="calib_saturated_values">ADVERTENCIA: %1$d exceso de datos</string>
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
     <string name="linear">lineal</string>
@@ -288,8 +287,6 @@
     <!-- UNUSED string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string -->
     <string name="plot_start">Base estación</string>
     <!-- UNUSED string name="plot_view">Vista Estación</string -->
-    <string name="read_data">Leer %1$d datos</string>
-    <string name="read_calib_data">Leer %1$d datos (%2$d packets)</string>
     <!-- UNUSED string name="read_fail_with_code">Fallo de lectura: código de error </string -->
     <string name="read_failed">Error al leer DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->

@@ -74,7 +74,6 @@
     <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градусов</string>
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итерации: %1$d</string>
-    <string name="calib_saturated_values">ВНИМАНИЕ: %1$d saturated data</string>
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
     <string name="linear">линейный</string>
@@ -293,8 +292,6 @@
     <!-- UNUSED string name="plot_recover">Перезагрузить абрис из бекапа?</string -->
     <string name="plot_start">Начальный пикет</string>
     <!-- OK string name="plot_view">Просмотренный пикет</string -->
-    <string name="read_data">Считать %1$d данных</string>
-    <string name="read_calib_data">Считанно %1$d данных (%2$d пакетов)</string>
     <!-- UNUSED string name="read_fail_with_code">Ошибка чтения: код ошибки </string -->
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
