@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- PLURAL string name="calib_saturated_values">ВНИМАНИЕ: %1$d saturated data</string -->
   <plurals name="calib_saturated_values">
     <item quantity="zero">Нет насыщенных данных</item>
     <item quantity="one">ВНИМАНИЕ. Один насыщенный данный</item>
-    <item quantity=["two" | "few" | "many" | "other" ]>ВНИМАНИЕ. %1$d насыщенных данных</item>
+    <item quantity="other">ВНИМАНИЕ. %1$d насыщенных данных</item>
   </plurals>
 
-  <!-- PLURAL string name="read_data">Считать %1$d измерений</string -->
   <plurals name="read_data">
     <item quantity="zero">Данные не считаны</item>
-    <item quantity=["one" | "two" | "few" | "many" | "other" ]>Считано %1$d измерений</item>
+    <item quantity="other">Считано %1$d измерений</item>
   </plurals>
 
-  <!-- PLURAL string name="read_calib_data">Считанно %1$d измерений (%2$d пакетов)</string -->
   <plurals name="read_calib_data">
     <item quantity="zero">Данных для калибровки не считано</item>
-    <item quantity=["one" | "two" | "few" | "many" | "other" ]>Считанно %1$d измерений (%2$d пакетов)</item>
+    <item quantity="other">Считанно %1$d измерений (%2$d пакетов)</item>
   </plurals>
 </resources>
