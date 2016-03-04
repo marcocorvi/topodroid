@@ -30,7 +30,6 @@ import android.app.Application;
 import android.app.Activity;
 import android.app.Dialog;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
@@ -181,6 +180,21 @@ public class PhotoActivity extends Activity
 
   // ------------------------------------------------------------------
 
+  public void viewPhoto( String filename )
+  {
+    // Log.v("DistoX", "photo <" + filename + ">" );
+    File file = new File( filename );
+    Uri uri = Uri.fromFile( file );
+    // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
+    Intent intent = new Intent(Intent.ACTION_VIEW );
+    intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+    intent.setDataAndType( uri, "image/jpeg" );
+    try {
+      startActivity( intent );
+    } catch ( ActivityNotFoundException e ) {
+      // gracefully fail without saying anything
+    }
+  }
 
   public void dropPhoto( PhotoInfo photo )
   {

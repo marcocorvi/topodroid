@@ -111,18 +111,18 @@ public class PlotRecoverDialog extends MyDialog
       String age = getAge( millis - file.lastModified() );
       mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext );
     }
-    String filename1 = filename + ".bck";
+    String filename1 = filename + TDPath.BCK_SUFFIX;
     file = new File( filename1 );
     if ( file.exists() ) {
       String age = getAge( millis - file.lastModified() );
-      mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + ".bck" );
+      mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + TDPath.BCK_SUFFIX );
     }
-    for ( int i=0; i<SaveTh2FileTask.NR_BACKUP; ++i ) {
-      filename1 = filename + ".bck" + Integer.toString(i);
+    for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
+      filename1 = filename + TDPath.BCK_SUFFIX + Integer.toString(i);
       file = new File( filename1 );
       if ( file.exists() ) {
         String age = getAge( millis - file.lastModified() );
-        mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + ".bck" + Integer.toString(i) );
+        mAdapter.add( Long.toString(file.length()) + " " + age + " " +  mFilename + ext + TDPath.BCK_SUFFIX + Integer.toString(i) );
       }
     }
   }

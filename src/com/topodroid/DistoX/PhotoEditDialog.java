@@ -16,6 +16,7 @@ import android.os.Bundle;
 
 import android.content.Intent;
 import android.content.Context;
+import android.net.Uri;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -29,6 +30,8 @@ import android.view.KeyEvent;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import android.util.Log;
 
 public class PhotoEditDialog extends MyDialog
                              implements View.OnClickListener
@@ -96,6 +99,9 @@ public class PhotoEditDialog extends MyDialog
           mIVimage.setImageBitmap( image2 );
           // mIVimage.setHeight( h2 );
           // mIVimage.setWidth( w2 );
+          mIVimage.setOnClickListener( this );
+        } else {
+          mIVimage.setVisibility( View.GONE );
         }
       }
     } catch ( OutOfMemoryError e ) {
@@ -109,17 +115,20 @@ public class PhotoEditDialog extends MyDialog
 
   public void onClick(View v) 
   {
-    Button b = (Button) v;
+    // Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
 
-    if ( b == mButtonOK ) {
+    if ( v.getId() == R.id.photo_ok ) {
       if ( mETcomment.getText() == null ) {
         mParent.updatePhoto( mPhoto, "" );
       } else {
         mParent.updatePhoto( mPhoto, mETcomment.getText().toString() );
       }
-    } else if ( b == mButtonDelete ) {
+    } else if ( v.getId() == R.id.photo_delete ) {
       mParent.dropPhoto( mPhoto );
+    } else if ( v.getId() == R.id.photo_image ) {
+      mParent.viewPhoto( mFilename );
+      return;
     }
     dismiss();
   }

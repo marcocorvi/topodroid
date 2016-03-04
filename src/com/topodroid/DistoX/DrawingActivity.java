@@ -501,12 +501,12 @@ public class DrawingActivity extends ItemDrawer
   private void doSaveTh2( ) 
   {
     if ( mFullName1 != null && mDrawingSurface != null ) {
-      startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
+      startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
 
       // if ( not_all_symbols ) AlertMissingSymbols();
       // if ( mAllSymbols ) {
       //   // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-      //   startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
+      //   startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
       // } else { // mAllSymbols is false: FIXME what to do ?
       //  Toast.makeText( this,
       //    "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
@@ -1389,37 +1389,14 @@ public class DrawingActivity extends ItemDrawer
     }
 
 
-    private void deletePlotFile( String filename )
-    {
-      File file = new File( filename );
-      if ( file.exists() ) file.delete(); 
-      // Log.v("DistoX", "delete th2 file " + filename );
-    }
-
-    private void deletePlotFileWithBackups( String filename )
-    {
-      File file = new File( filename );
-      if ( file.exists() ) file.delete(); 
-      // Log.v("DistoX", "delete th2 file " + filename );
-
-      String filepath = filename + ".bck";
-      file = new File( filepath );
-      if ( file.exists() ) file.delete(); 
-      for ( int i=0; i<SaveTh2FileTask.NR_BACKUP; ++i ) {
-        filepath = filename + ".bck" + Integer.toString(i);
-        file = new File( filepath );
-        if ( file.exists() ) file.delete(); 
-      }
-    }
-
     // @param name  section-line name 
     void deleteLine( DrawingLinePath line, String name ) 
     { 
       mDrawingSurface.deletePath( line );
       if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-        deletePlotFileWithBackups( TDPath.getTh2File( mApp.mySurvey + "-" + name + ".th2" ) );
-        deletePlotFileWithBackups( TDPath.getTdrFile( mApp.mySurvey + "-" + name + ".tdr" ) );
-        deletePlotFile( TDPath.getJpgFile( mApp.mySurvey, name + ".jpg" ) );
+        TDPath.deletePlotFileWithBackups( TDPath.getTh2File( mApp.mySurvey + "-" + name + ".th2" ) );
+        TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( mApp.mySurvey + "-" + name + ".tdr" ) );
+        TDPath.deleteFile( TDPath.getJpgFile( mApp.mySurvey, name + ".jpg" ) );
        
         PlotInfo plot = mData.getPlotInfo( mApp.mSID, name );
         if ( plot != null ) {
@@ -2114,6 +2091,7 @@ public class DrawingActivity extends ItemDrawer
       if ( tdr.exists() ) tdr.delete(); 
       File th2 = new File( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xsname ) );
       if ( th2.exists() ) th2.delete(); 
+      // TODO delete backup files
     }
 
     // X-SECTION AT A STATION
@@ -2780,7 +2758,7 @@ public class DrawingActivity extends ItemDrawer
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( ! isSection() ) { 
-          startSaveTh2Task( PlotSave.TOGGLE, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP ); 
+          startSaveTh2Task( PlotSave.TOGGLE, MAX_TASK_FINAL, TDPath.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
@@ -3194,7 +3172,7 @@ public class DrawingActivity extends ItemDrawer
     {
       // TDLog.Log( TDLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
       // TDLog.Log( TDLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
-      startSaveTh2Task( PlotSave.EXPORT, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP );
+      startSaveTh2Task( PlotSave.EXPORT, MAX_TASK_FINAL, TDPath.NR_BACKUP );
     }
 
   
@@ -3374,7 +3352,7 @@ public class DrawingActivity extends ItemDrawer
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
       } else if ( isSketch2D() && p++ == pos ) { // OVERVIEW
-        // startSaveTh2Task( OVERVIEW, MAX_TASK_FINAL, SaveTh2FileTask.NR_BACKUP ); // FIXME this is not necessary
+        // startSaveTh2Task( OVERVIEW, MAX_TASK_FINAL, TDPath.NR_BACKUP ); // FIXME this is not necessary
         // try {
         //   Thread.sleep(100);
         // } catch ( InterruptedException e ) { /* ignore */ }

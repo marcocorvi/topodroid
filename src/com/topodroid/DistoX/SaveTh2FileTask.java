@@ -24,7 +24,6 @@ import android.util.Log;
 
 class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
 {
-  final static int NR_BACKUP = 3;
   private Context mContext;
   private Handler mHandler;
   private TopoDroidApp mApp;
@@ -46,27 +45,8 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
      mType = (int)type;
      mSuffix = suffix;
      mRotate = rotate;
-     if ( mRotate > NR_BACKUP ) mRotate = NR_BACKUP;
+     if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Th2 File Task " + mFullName1 + " type " + mType );
-     // Log.v( "DistoX", "Save Th2 File Task " + mFullName1 + " type " + mType + " suffix " + mSuffix );
-  }
-
-  private void rotateBackups( String filename )
-  {
-    File file2;
-    File file1;
-    for ( int i=mRotate-1; i>0; --i ) { 
-      file2 = new File( filename + Integer.toString(i) );
-      file1 = new File( filename + Integer.toString(i-1) );
-      if ( file1.exists() ) {
-        file1.renameTo( file2 );
-      }
-    }
-    file2 = new File( filename + "0" );
-    file1 = new File( filename );
-    if ( file1.exists() ) {
-      file1.renameTo( file2 );
-    }
   }
 
   @Override
@@ -77,10 +57,10 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
     synchronized( TDPath.mTherionLock ) {
       // Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
       
-      String filename = do_binary ? TDPath.getTdrFileWithExt( mFullName1 ) + ".bck"
-                                  : TDPath.getTh2FileWithExt( mFullName1 ) + ".bck";
+      String filename = do_binary ? TDPath.getTdrFileWithExt( mFullName1 ) + TDPath.BCK_SUFFIX
+                                  : TDPath.getTh2FileWithExt( mFullName1 ) + TDPath.BCK_SUFFIX;
       if ( mSuffix != PlotSave.EXPORT ) {
-        rotateBackups( filename );
+        TDPath.rotateBackups( filename, mRotate );
       }
 
       long now  = System.currentTimeMillis();
@@ -110,7 +90,7 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
         // Log.v("DistoX", "save completed");
         String filename1 = do_binary ? TDPath.getTdrFileWithExt( mFullName1 )
                                      : TDPath.getTh2FileWithExt( mFullName1 );
-        (new File( filename1 )).renameTo( new File( filename1 + ".bck" ) );
+        (new File( filename1 )).renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) );
         file1.renameTo( new File( filename1 ) );
       }
       ret = true;
