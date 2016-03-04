@@ -1,7 +1,10 @@
 Translation howto
 
 TopoDroid internationalization is kept to a minimum level.
-All that is required is to provide a translation for strings in two files: strings.xml and array.xml.
+All that is required is to provide a translation for strings in three files: 
+- strings.xml
+- array.xml
+- plurals.xml
 
 For each translation language these are in the directory int18/values-XX (where XX is the iso code
 of the language). For example int18/values-de/strings.xml is the german translation file for strings.
