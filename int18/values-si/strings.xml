@@ -72,7 +72,6 @@
     <string name="calib_ave_std">Accuracy: %1$.4f ± %2$.4f degrees</string>
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
-    <string name="calib_saturated_values">WARNING: %1$d saturated data</string>
     <string name="algorithm">Algorithm:</string>
     <string name="auto">auto</string>
     <string name="linear">linear</string>
@@ -291,8 +290,6 @@
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Origin station</string>
     <!-- string name="plot_view">Viewed station</string -->
-    <string name="read_data">Read %1$d data</string>
-    <string name="read_calib_data">Read %1$d data (%2$d packets)</string>
     <!-- UNUSED string name="read_fail_with_code">Read failure: error code </string -->
     <string name="read_failed">Failed DistoX-read</string>
     <!-- string name="reading_file_failed">Failed file-read</string -->

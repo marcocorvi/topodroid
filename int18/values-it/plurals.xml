@@ -12,12 +12,12 @@
     <item quantity="zero">Nessun dato letto</item>
     <item quantity="one">Letto un dato</item>
     <item quantity="other">Letti %1$d dati</item>
-  </plurals -->
+  </plurals>
 
   <!-- PLURAL string name="read_calib_data">Letti %1$d dati (%2$d pacchetti)</string -->
   <plurals name="read_calib_data">
     <item quantity="zero">Nessun dato letto</item>
     <item quantity="one">Letto un dato (%2$d pacchetti)</item>
     <item quantity="other">Letti %1$d dati (%2$d pacchetti)</item>
-  </plurals -->
+  </plurals>
 </resources>

@@ -293,8 +293,6 @@
     <!-- UNUSED string name="plot_recover">Възстановяване на скицата от резервното копие?</string -->
     <string name="plot_start">Начален репер</string>
     <!-- string name="plot_view">Viewed station</string -->
-    <string name="read_data">Прочетени %1$d измервания</string>
-    <string name="read_calib_data">Прочетени %1$d измервания (%2$d пакети)</string>
     <!-- UNUSED string name="read_fail_with_code">Грешка при четене: код </string -->
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
