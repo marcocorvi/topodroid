@@ -264,7 +264,7 @@
     <string name="menu_pair">VERBINDEN</string>
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
-    <string name="menu_sensor">SENSOR</string>
+    <string name="menu_sensor">SENSORWERTE</string>
     <string name="menu_scan">SCAN</string>
     <!-- UNUSED string name="menu_station">MESSPUNKTE</string -->
     <string name="menu_stats">STATISTIK</string>
@@ -365,7 +365,7 @@
     <!-- UNUSED string name="survey_date">jjjj.mm.tt</string -->
     <string name="survey_delete">Vermessung löschen?</string>
     <string name="survey_split">Vermessung teilen?</string>
-    <string name="survey_not_attached">WARNUNG: unverbundene Messungen</string>
+    <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
     <string name="cannot_rename">Kann Vermessung nicht umbenennen</string>
     <string name="declination">Magnetische Deklination</string>
     <string name="description">Beschreibung</string>
@@ -544,7 +544,7 @@
     <string name="help_continue">Linien fortsetzen</string>
     <string name="help_current_station">Gespeicherte Messpunkte</string>
     <string name="help_azimuth">Seitenriss Referenzazimut</string>
-    <string name="help_device">Zu der Gerätaktivität gehen</string>
+    <string name="help_device">DistoX Verwalten</string>
     <string name="help_add_topodroid">Neue Vermessung/Kalibrierung starten</string>
     <string name="help_import">Zip oder Datei importieren</string>
     <string name="help_symbol">Zeichenwerkzeuge (de)aktivieren</string>
@@ -565,7 +565,7 @@
     <string name="help_note">Notizen</string>
     <string name="help_bluetooth">Bluetooth-Verbindung zurücksetzen</string>
     <string name="help_remote">DistoX Fernbedienung</string>
-    <string name="help_add_shot">Durch manuelle Eingabe Messung hinzufügen</string>
+    <string name="help_add_shot">Manuelle Messung hinzufügen</string>
     <string name="help_info_shot">Vermessungs-Statistiken</string>
     <string name="help_survey_info">Vermessungs-Notizen</string>
     <string name="help_undelete">Gelöschte Objekte wiederherstellen</string>
