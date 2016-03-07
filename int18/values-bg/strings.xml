@@ -214,6 +214,7 @@
     <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
     <string name="no_photos">Картировката не съдържа снимка</string>
     <string name="no_plots">Картировката не съдържа скици\nДобавете нова</string>
+    <!-- TODO string name="no_profile_overview">No overview for projected profiles</string -->
     <string name="no_proj4">Proj4 не е инсталирана</string>
     <string name="no_sensors">Картировката не съдържа сензорни измервания</string>
     <!-- UNUSED string name="no_shots">Картировката не съдържа отсечки.\nИзползвайте бутона за изтегляне на данни</string -->
@@ -396,6 +397,8 @@
 
     <string name="plan">План</string>
     <string name="extended">Разрез</string>
+    <!-- TODO string name="extended_profile">Extended profile</string -->
+    <!-- TODO string name="profile">PROJECT.</string -->
     <!-- UNUSED string name="v_section">Верт. сечение</string -->
     <string name="h_section">Хор. сечение</string>
 

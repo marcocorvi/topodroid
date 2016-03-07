@@ -465,12 +465,12 @@ class DrawingIO
   // =========================================================================
   // EXPORT 
 
-  static public void exportTherion( DrawingSurface surface, int type, File file, String fullname, String projname )
+  static public void exportTherion( DrawingSurface surface, int type, File file, String fullname, String projname, int proj_dir )
   {
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
-      surface.exportTherion( type, bw, fullname, projname );
+      surface.exportTherion( type, bw, fullname, projname, proj_dir );
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
@@ -478,12 +478,12 @@ class DrawingIO
     }
   }
 
-  static public void exportDataStream( DrawingSurface surface, int type, File file, String fullname )
+  static public void exportDataStream( DrawingSurface surface, int type, File file, String fullname, int proj_dir )
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
       DataOutputStream dos = new DataOutputStream( fos );
-      surface.exportDataStream( type, dos, fullname );
+      surface.exportDataStream( type, dos, fullname, proj_dir );
       dos.close();
       fos.close();
     } catch ( FileNotFoundException e ) {
@@ -514,6 +514,7 @@ class DrawingIO
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
     DrawingPath path;
+    int project_dir = 0;
     float north_x1, north_y1, north_x2, north_y2;
 
     synchronized( TDPath.mTherionLock ) {
@@ -552,6 +553,7 @@ class DrawingIO
               {
                 String name = dis.readUTF();
                 int type = dis.readInt();
+                if ( type == PlotInfo.PLOT_PROFILE ) project_dir = dis.readInt();
                 // read palettes
                 String points = dis.readUTF();
                 String[] vals = points.split(",");
@@ -613,7 +615,7 @@ class DrawingIO
     return (missingSymbols != null )? missingSymbols.isOK() : true;
   }
 
-  static public void exportDataStream( int type, DataOutputStream dos, String scrap_name, RectF bbox,
+  static public void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir, RectF bbox,
       DrawingPath north,
       List<ICanvasCommand> cstack,
       List<DrawingStationPath> userstations,
@@ -625,6 +627,7 @@ class DrawingIO
       dos.write( 'S' );
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
+      if ( type == PlotInfo.PLOT_PROFILE ) dos.writeInt( proj_dir );
       DrawingBrushPaths.mPointLib.toDataStream( dos );
       DrawingBrushPaths.mLineLib.toDataStream( dos );
       DrawingBrushPaths.mAreaLib.toDataStream( dos );
@@ -720,7 +723,7 @@ class DrawingIO
   }
   
   static private void exportTherionHeader3( BufferedWriter out,
-         int type, String scrap_name, String proj_name,
+         int type, String scrap_name, String proj_name, int project_dir,
          boolean do_north, float x1, float y1, float x2, float y2 ) throws IOException
   {
     StringWriter sw = new StringWriter();
@@ -734,6 +737,8 @@ class DrawingIO
       } else {
         pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
       }
+    } else if ( type == PlotInfo.PLOT_PROFILE ) {
+      pw.format("scrap %s -projection %s %d -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, project_dir, oneMeter );
     } else {
       pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
     }
@@ -750,7 +755,8 @@ class DrawingIO
     out.newLine();
   }
 
-  static public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, RectF bbox,
+  static public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
+        RectF bbox,
         DrawingPath north,
         List<ICanvasCommand> cstack,
         List<DrawingStationPath> userstations,
@@ -760,9 +766,9 @@ class DrawingIO
       exportTherionHeader1( out, type, bbox );
       exportTherionHeader2( out );
       if ( north != null ) { 
-        exportTherionHeader3( out, type, scrap_name, proj_name, true, north.x1, north.y1, north.x2, north.y2 );
+        exportTherionHeader3( out, type, scrap_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2 );
       } else {
-        exportTherionHeader3( out, type, scrap_name, proj_name, false, 0, 0, 0, 0 );
+        exportTherionHeader3( out, type, scrap_name, proj_name, project_dir, false, 0, 0, 0, 0 );
       }
         
       synchronized( cstack ) {
@@ -827,6 +833,8 @@ class DrawingIO
 
     String name = "";
     int type = 0;
+    boolean project = false;
+    int project_dir = 0;
     String points = "";
     String lines  = "";
     String areas  = "";
@@ -860,9 +868,9 @@ class DrawingIO
                 exportTherionHeader2( out, points, lines, areas );
                 String proj = PlotInfo.projName[ type ];
                 if ( do_north ) { 
-                  exportTherionHeader3( out, type, name, proj, true, north_x1, north_y1, north_x2, north_y2 );
+                  exportTherionHeader3( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2 );
                 } else {
-                  exportTherionHeader3( out, type, name, proj, false, 0, 0, 0, 0 );
+                  exportTherionHeader3( out, type, name, proj, project_dir, false, 0, 0, 0, 0 );
                 }
                 in_scrap = true;
               }
@@ -871,6 +879,7 @@ class DrawingIO
               {
                 name = dis.readUTF();
                 type = dis.readInt();
+                if ( type == PlotInfo.PLOT_PROFILE ) project_dir = dis.readInt();
                 // read palettes
                 points = dis.readUTF();
                 lines = dis.readUTF();

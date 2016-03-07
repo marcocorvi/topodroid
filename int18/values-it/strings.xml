@@ -209,6 +209,7 @@
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
     <string name="no_photos">Rilievo senza foto</string>
     <string name="no_plots">Rilievo senza disegni</string>
+    <!-- TODO string name="no_profile_overview">No overview for projected profiles</string -->
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
@@ -389,6 +390,8 @@
 
     <string name="plan">PIANTA</string>
     <string name="extended">SEZIONE LONG.</string>
+    <!-- TODO string name="extended_profile">Extended profile</string -->
+    <!-- TODO string name="profile">PROJECT.</string -->
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">SEZIONE ORIZZ.</string>
 

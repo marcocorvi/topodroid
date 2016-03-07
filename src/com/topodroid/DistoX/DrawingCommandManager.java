@@ -313,7 +313,7 @@ public class DrawingCommandManager
   // public DistoXDBlock setHighlight( int plot_type, float x, float y )
   // {
   //   clearHighlight();
-  //   if ( plot_type != PlotInfo.PLOT_PLAN && plot_type != PlotInfo.PLOT_EXTENDED ) return null;
+  //   if ( ! PlotInfo.isSketch2d( plot_type ) ) return null;
   //   boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
   //   boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY) != 0;
   //   if ( mHighlight.size() == 1 ) {
@@ -1837,16 +1837,16 @@ public class DrawingCommandManager
     return new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
   }
 
-  public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name )
+  public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir )
   {
     RectF bbox = computeBBox();
-    DrawingIO.exportTherion( type, out, scrap_name, proj_name, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
+    DrawingIO.exportTherion( type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
   }
    
-  public void exportDataStream( int type, DataOutputStream dos, String scrap_name )
+  public void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )
   {
     RectF bbox = computeBBox();
-    DrawingIO.exportDataStream( type, dos, scrap_name, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
+    DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
   }
 
   void exportAsCsx( PrintWriter pw )
@@ -1981,8 +1981,7 @@ public class DrawingCommandManager
   // called by DrawingSurface::addDrawingStationName
   public void addStation( DrawingStationName st, boolean selectable )
   {
-    Log.v("DistoX", "add station " + st.mName + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
-    //                + " num " + st.mStation.e + " " + st.mStation.s );
+    // Log.v("DistoX", "add station " + st.mName + " scene " + st.cx + " " + st.cy + " XSection " + st.mXSectionType );
     synchronized( mStations ) {
       mStations.add( st );
       if ( selectable ) {

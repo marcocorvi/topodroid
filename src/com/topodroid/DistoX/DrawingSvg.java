@@ -112,7 +112,8 @@ class DrawingSvg
         float SCALE_FIX = DrawingUtil.SCALE_FIX;
 
         // centerline data
-        if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
+        if ( PlotInfo.isSketch2D( type ) ) { 
+          // FIXME OK PROFILE
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
             DistoXDBlock blk = sh.mBlock;
@@ -131,7 +132,7 @@ class DrawingSvg
                 float x1 = DrawingUtil.toSceneX( t.e );
                 float y1 = DrawingUtil.toSceneY( t.s );
                 pw4.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x1, y1 );
-              } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+              } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
                 float x  = DrawingUtil.toSceneX( f.h );
                 float y  = DrawingUtil.toSceneY( f.v );
                 float x1 = DrawingUtil.toSceneX( t.h );
@@ -158,7 +159,7 @@ class DrawingSvg
                 float de =   dh * (float)Math.sin( blk.mBearing * grad2rad);
                 float ds = - dh * (float)Math.cos( blk.mBearing * grad2rad);
                 pw41.format(Locale.US, "M %.0f %.0f L %.0f %.0f\" />\n", x, y, x + de, (y+ds) );
-              } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+              } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
                 float x = DrawingUtil.toSceneX( f.h );
                 float y = DrawingUtil.toSceneY( f.v );
                 float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;

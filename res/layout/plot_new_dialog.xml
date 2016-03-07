@@ -68,40 +68,35 @@
 
     </LinearLayout>
 
-    <!-- RadioGroup 
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content"
-      android:orientation="vertical" 
-      >
-        <RadioButton android:id="@+id/btn_plot_plan"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:layout_gravity="left"
-          android:text="@string/plan"
-          />
-        <RadioButton android:id="@+id/btn_plot_ext"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:layout_gravity="left"
-          android:text="@string/extended"
-          />
-        <RadioButton android:id="@+id/btn_plot_vcross"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:layout_gravity="left"
-          android:text="@string/v_section"
-          />
-        <RadioButton android:id="@+id/btn_plot_hcross"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content" 
-          android:layout_gravity="left"
-          android:text="@string/h_section"
-          />
-    </RadioGroup -->
-
     <LinearLayout 
       android:id="@+id/layout3"
       android:layout_below="@id/layout2"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="25dp"
+      android:gravity="right"
+      >
+      <EditText android:id="@+id/plot_project"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" 
+        android:layout_weight="50"
+      	android:ems="25"
+        android:singleLine="true"
+        android:hint="0"
+        android:scrollHorizontally="true" />
+
+      <CheckBox android:id="@+id/button_extended"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" 
+        android:layout_weight="50"
+        android:text="@string/extended_profile"
+      />
+    </LinearLayout>
+
+    <LinearLayout 
+      android:id="@+id/layout4"
+      android:layout_below="@id/layout3"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 

@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 public interface INewPlot 
 {
   // public void makeNewPlot( String name, long type, String start, String view );
-  public void makeNewPlot( String name, String start );
+  public void makeNewPlot( String name, String start, boolean extended, int project );
 
   // FIXME_SKETCH_3D
   public void makeNewSketch3d(  String name, String start, String next );

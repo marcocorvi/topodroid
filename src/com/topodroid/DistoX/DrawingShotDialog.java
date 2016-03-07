@@ -128,7 +128,7 @@ public class DrawingShotDialog extends MyDialog
     if ( TDSetting.mWallsType != TDSetting.WALLS_NONE 
       && TDSetting.mLevelOverAdvanced 
       && mBlock.mType == DistoXDBlock.BLOCK_MAIN_LEG
-      && ( mParent.getPlotType() == PlotInfo.PLOT_PLAN || mParent.getPlotType() == PlotInfo.PLOT_EXTENDED ) ) {
+      && ( PlotInfo.isSketch2D( mParent.getPlotType() ) ) ) {
       mRBwalls.setOnClickListener( this );
     } else {
       mRBwalls.setVisibility( View.GONE );

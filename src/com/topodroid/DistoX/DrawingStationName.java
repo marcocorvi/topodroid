@@ -80,6 +80,7 @@ public class DrawingStationName extends DrawingPointPath
 
   static final int LENGTH = 20;
 
+  // FIXME OK PROFILE
   void setXSection( float azimuth, float clino, long type )
   {
     mXSectionType = type;
@@ -88,7 +89,7 @@ public class DrawingStationName extends DrawingPointPath
     if ( type == PlotInfo.PLOT_PLAN ) {
       mDX =   LENGTH * (float)Math.sin( azimuth * Math.PI/180 );
       mDY = - LENGTH * (float)Math.cos( azimuth * Math.PI/180 );
-    } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+    } else if ( PlotInfo.isProfile( type ) ) {
       if ( clino > 89 ) {
         mDX = 0;
         mDY = -LENGTH;

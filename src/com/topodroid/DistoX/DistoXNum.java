@@ -197,13 +197,8 @@ class DistoXNum
   DistoXNum( List<DistoXDBlock> data, String start, String view, String hide )
   {
     surveyAttached = computeNum( data, start );
-
     setStationsHide( hide );
     setStationsBarr( view );
-
-    // TDLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum cstr length " + mLength + " depth " + mZmin + " " + mZmax );
-    // Log.v( TopoDroidApp.TAG, "DistoXNum cstr data " + data.size() + " start " + start );
-    // Log.v( TopoDroidApp.TAG, "DistoXNum cstr length " + mLength + " depth " + mZmin + " " + mZmax );
   }
 
   // public void dump()
@@ -377,8 +372,7 @@ class DistoXNum
   //           mLength += block.mLength;
   //           if ( st != null ) { // close loop
   //             if ( /* TopoDroidApp.mAutoStations || */ ! TopoDroidApp.mLoopClosure ) {
-  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino,
-  //                                                (int)(block.mExtend) );
+  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino, block.mExtend );
   //               st1.addAzimuth( (block.mBearing+180)%360, -block.mExtend );
   //               st1.mDuplicate = true;
   //               mStations.add( st1 );
@@ -402,8 +396,7 @@ class DistoXNum
   //           else
   //           { // add regular from-->to leg' first shot
   //             // FIXME temporary "st" coordinates
-  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino,
-  //                                  (int)(block.mExtend) );
+  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino, block.mExtend );
   //             st.addAzimuth( (block.mBearing+180)%360, -(int)block.mExtend );
   //             updateBBox( st );
   //             // if ( ts.duplicate ) { // FIXME
@@ -421,8 +414,7 @@ class DistoXNum
   //         }
   //         else if ( st != null )
   //         { // sf == null && st != null
-  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing, block.mClino,
-  //                                (int)(block.mExtend) );
+  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing, block.mClino, block.mExtend );
   //           sf.addLeg( block.mBearing, (int)block.mExtend );
   //           updateBBox( sf );
   //           // if ( ts.duplicate ) {
@@ -642,7 +634,6 @@ class DistoXNum
   /** survey data reduction 
    * return true if all shots are attached
    */
-  // private boolean computeNum( List<DistoXDBlock> data, String start, String[] barrier )
   private boolean computeNum( List<DistoXDBlock> data, String start )
   {
     resetBBox();
@@ -847,7 +838,8 @@ class DistoXNum
             if ( /* TDSetting.mAutoStations || */ ! TDSetting.mLoopClosure ) { // do not close loop
               // TDLog.Log( TDLog.LOG_NUM, "do not close loop");
               // keep loop open: new station( id=ts.to, from=sf, ... )
-              NumStation st1 = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
+              float bearing = ts.b() - sf.mAnomaly;
+              NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ts.extend );
               st1.addAzimuth( (ts.b()+180)%360, -ts.extend );
               st1.mAnomaly = anomaly;
               updateBBox( st );
@@ -877,7 +869,8 @@ class DistoXNum
             //                   "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
             // Log.v( "DistoX", "new station F->T id= " + ts.to + " from= " + sf.name + " anomaly " + anomaly ); 
 
-            st = new NumStation( ts.to, sf, ts.d(), ts.b() - sf.mAnomaly, ts.c(), ts.extend );
+            float bearing = ts.b() - sf.mAnomaly;
+            st = new NumStation( ts.to, sf, ts.d(), bearing, ts.c(), ts.extend );
             st.addAzimuth( (ts.b()+180)%360, -ts.extend );
             st.mAnomaly = anomaly;
             updateBBox( st );
@@ -899,7 +892,8 @@ class DistoXNum
           //                   "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
           // Log.v("DistoX", "new station T->F id= " + ts.from + " from= " + st.name + " anomaly " + anomaly ); 
 
-          sf = new NumStation( ts.from, st, - ts.d(), ts.b()-st.mAnomaly, ts.c(), ts.extend );
+          float bearing = ts.b() - st.mAnomaly;
+          sf = new NumStation( ts.from, st, - ts.d(), bearing, ts.c(), ts.extend );
           sf.addAzimuth( ts.b(), ts.extend );
           sf.mAnomaly = anomaly; // FIXME
 
@@ -982,7 +976,7 @@ class DistoXNum
     for ( TmpSplay ts : tmpsplays ) {
       NumStation st = getStation( ts.from );
       if ( st != null ) {
-        float extend = st.computeExtend( ts.b(), ts.extend ); 
+        float extend = st.computeExtend( ts.b(), ts.extend ) ;
         mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.block ) );
       }
     }

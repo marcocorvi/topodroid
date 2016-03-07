@@ -55,6 +55,8 @@ class ConvertTdr2Th2Task extends AsyncTask<Intent,Void,Boolean>
     float xoff = 0;
     float yoff = 0;
     long  type = PlotInfo.PLOT_PLAN;
+    boolean project = false;
+    int proj_dir = 0;
     if ( TDSetting.mAutoStations ) {
       list = mApp.mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     }
@@ -81,8 +83,7 @@ class ConvertTdr2Th2Task extends AsyncTask<Intent,Void,Boolean>
           BufferedWriter bw = new BufferedWriter( fw );
           RectF bbox = new RectF();
           DrawingIO.dataStream2Therion( tdrfile, bw, bbox, false ); // false == no endscrap
-          if ( TDSetting.mAutoStations &&
-               ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) ) {
+          if ( TDSetting.mAutoStations && PlotInfo.isSketch2D( type ) ) {
             float toTherion = TDConst.TO_THERION;
             NumStationSet nss = num.mStations;
             List< NumStation > ns = nss.getStations();
@@ -92,7 +93,7 @@ class ConvertTdr2Th2Task extends AsyncTask<Intent,Void,Boolean>
               if ( type == PlotInfo.PLOT_PLAN ) {
                 x = DrawingUtil.toSceneX( st.e ) - xoff;
                 y = DrawingUtil.toSceneY( st.s ) - yoff;
-              } else {
+              } else if ( PlotInfo.isProfile( type ) ) {
                 x = DrawingUtil.toSceneX( st.h ) - xoff;
                 y = DrawingUtil.toSceneY( st.v ) - yoff;
               }

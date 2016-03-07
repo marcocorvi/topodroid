@@ -29,22 +29,24 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
   private TopoDroidApp mApp;
   private DrawingSurface mSurface;
   private String mFullName1;
-  private int mType; // plot type
+  private int mType;    // plot type
+  private int mProjDir;
   private int mSuffix;
   private int mRotate;  // nr. backups to rotate
 
   public SaveTh2FileTask( Context context, Handler handler,
                           TopoDroidApp app, DrawingSurface surface, 
-                          String fullname1, long type, int suffix, int rotate )
+                          String fullname1, long type, int proj_dir, int suffix, int rotate )
   {
      mContext  = context;
      mHandler  = handler;
      mApp      = app;
      mSurface  = surface;
      mFullName1 = fullname1;
-     mType = (int)type;
-     mSuffix = suffix;
-     mRotate = rotate;
+     mType     = (int)type;
+     mProjDir  = proj_dir;
+     mSuffix   = suffix;
+     mRotate   = rotate;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Th2 File Task " + mFullName1 + " type " + mType );
   }
@@ -78,9 +80,9 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
       String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
       File file1 = new File( tempname1 );
       if ( do_binary ) {
-        DrawingIO.exportDataStream( mSurface, mType, file1, mFullName1 );
+        DrawingIO.exportDataStream( mSurface, mType, file1, mFullName1, mProjDir );
       } else {
-        DrawingIO.exportTherion( mSurface, mType, file1, mFullName1, PlotInfo.projName[mType] );
+        DrawingIO.exportTherion( mSurface, mType, file1, mFullName1, PlotInfo.projName[mType], mProjDir );
       }
 
       if ( isCancelled() ) {

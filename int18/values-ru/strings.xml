@@ -214,6 +214,7 @@
     <string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string>
     <string name="no_photos">В съёмке нет фото</string>
     <string name="no_plots">В съёмке нет абрисов \nДля создания используйте кнопку Добавить</string>
+    <!-- TODO string name="no_profile_overview">No overview for projected profiles</string -->
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
@@ -392,6 +393,8 @@
 
     <string name="plan">ПЛАН</string>
     <string name="extended">РАЗРЕЗ-Р</string>
+    <!-- TODO string name="extended_profile">Extended profile</string -->
+    <!-- TODO string name="profile">PROJECT.</string -->
     <!-- UNUSED string name="v_section">Верт-СЕЧЕНИЕ</string -->
     <string name="h_section">Гор-СЕЧЕНИЕ</string>
 

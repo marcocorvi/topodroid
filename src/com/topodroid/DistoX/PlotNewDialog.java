@@ -23,8 +23,8 @@ import android.view.Window;
 
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
@@ -41,18 +41,10 @@ public class PlotNewDialog extends MyDialog
 
   private EditText mEditName;
   private EditText mEditStart;
-  // private EditText mEditView;
-
-  // private RadioButton mBtnPlan;
-  // private RadioButton mBtnExtended;
-
-  // private RadioButton mBtnVSection;
-  // private RadioButton mBtnHSection;
-  // private RadioGroup  mBtns;
+  private EditText mEditProject;
 
   private Button   mBtnOK;
-  // private Button   mBtnBack;
-  // private Button   mBtnCancel;
+  private CheckBox mCBextended;
   private int mIndex;
   private MyKeyboard mKeyboard = null;
 
@@ -74,40 +66,40 @@ public class PlotNewDialog extends MyDialog
 
     mEditName  = (EditText) findViewById(R.id.edit_plot_name);
     mEditStart = (EditText) findViewById(R.id.edit_plot_start);
-    // mEditView  = (EditText) findViewById(R.id.edit_plot_view);
+    mEditProject = (EditText) findViewById(R.id.plot_project);
 
     mEditName.setText( Integer.toString( mIndex ) );
-
     mEditStart.setOnLongClickListener( this );
-
-    // mBtnPlan     = (RadioButton) findViewById( R.id.btn_plot_plan );
-    // mBtnExtended = (RadioButton) findViewById( R.id.btn_plot_ext );
-    // mBtnVSection = (RadioButton) findViewById( R.id.btn_plot_vcross );
-    // mBtnHSection = (RadioButton) findViewById( R.id.btn_plot_hcross );
-
-    // mEditName.setHint( R.string.scrap_name );
-    // mEditStart.setHint( R.string.station_base );
-    // mEditView.setHint(  R.string.station_viewed );
-    // mBtnPlan.setChecked( true ); // default is plan
 
     mBtnOK = (Button) findViewById(R.id.button_ok );
     mBtnOK.setOnClickListener( this );
-    // mBtnBack = (Button) findViewById(R.id.button_back );
-    // mBtnBack.setOnClickListener( this );
-    // mBtnCancel = (Button) findViewById(R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
-   
+    mCBextended = (CheckBox)findViewById( R.id.button_extended );
+    mCBextended.setChecked( true );
+    mEditProject.setVisibility( View.INVISIBLE );
+    mCBextended.setOnClickListener( new View.OnClickListener() {
+      public void onClick( View v ) {
+        mEditProject.setVisibility( mCBextended.isChecked() ? View.INVISIBLE : View.VISIBLE );
+      }
+    } );
+         
+    if ( ! TDSetting.mLevelOverAdvanced ) {
+      LinearLayout layout3 = (LinearLayout) findViewById( R.id.layout3 );
+      layout3.setVisibility( View.GONE );
+    }
+
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {
       MyKeyboard.registerEditText( mKeyboard, mEditName,  MyKeyboard.FLAG_POINT_LCASE_2ND );
       int flag = ( TDSetting.mStationNames == 1 ) ? MyKeyboard.FLAG_POINT : MyKeyboard.FLAG_POINT_LCASE_2ND;
       MyKeyboard.registerEditText( mKeyboard, mEditStart, flag);
+      MyKeyboard.registerEditText( mKeyboard, mEditProject, 0 ); // MyKeyboard.FLAG_POINT );
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
         mEditStart.setInputType( TDConst.NUMBER_DECIMAL );
       }
+      mEditProject.setInputType( TDConst.NUMBER );
     }
   }
 
@@ -171,16 +163,18 @@ public class PlotNewDialog extends MyDialog
         return;
       }
 
-      // long type = PlotInfo.PLOT_PLAN;
-      // if ( mBtnPlan.isChecked() )          { type = PlotInfo.PLOT_PLAN; }
-      // else if ( mBtnExtended.isChecked() ) { type = PlotInfo.PLOT_EXTENDED; }
-      // else if ( mBtnVSection.isChecked() ) { type = PlotInfo.PLOT_V_SECTION; }
-      // else if ( mBtnHSection.isChecked() ) { type = PlotInfo.PLOT_H_SECTION; }
-      // view = TopoDroidUtil.noSpaces( view );
-      // mMaker.makeNewPlot( name, type, start, view );
-      mMaker.makeNewPlot( name, start );
-    // } else if ( b == mBtnBack ) {
-    //   /* nothing */
+      boolean extended = true;
+      int project = 0;
+      if ( TDSetting.mLevelOverAdvanced ) {
+        extended = mCBextended.isChecked();
+        if ( ! extended ) {
+          try {
+            project = Integer.parseInt( mEditProject.getText().toString() );
+          } catch ( NumberFormatException e ) {  }
+        }
+      }
+
+      mMaker.makeNewPlot( name, start, extended, project );
     }
     dismiss();
   }

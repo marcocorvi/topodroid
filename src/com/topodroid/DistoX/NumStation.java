@@ -55,7 +55,7 @@ public class NumStation extends NumSurveyPoint
     mLegs = new ArrayList<  NumAzimuth  >();
   }
 
-  NumStation( String id, NumStation from, float d, float b, float c, int extend )
+  NumStation( String id, NumStation from, float d, float b, float c, float extend )
   {
     // TDLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
     name = id;
@@ -74,11 +74,12 @@ public class NumStation extends NumSurveyPoint
     mBarrierAndHidden = false;
     mParent  = from;
     mLegs = new ArrayList<  NumAzimuth  >();
+    Log.v( "DistoX", "NumStation cstr " + id + " extend " + extend + " H " + h + " V " + v );
   }
 
   // azimuth [degrees]
   // extend  [-1,0,+1]
-  void addAzimuth( float azimuth, int extend ) 
+  void addAzimuth( float azimuth, float extend ) 
   {
     // Log.v("DistoX", "Station " + name + " add azimuth " + azimuth + " extend " + extend );
     NumAzimuth leg = new NumAzimuth( azimuth, extend );
@@ -126,7 +127,7 @@ public class NumStation extends NumSurveyPoint
 
   // @param b bearing [degrees]
   // @param e original splay extend
-  float computeExtend( float b, int e )
+  float computeExtend( float b, float e )
   {
     if ( mLegs.size() == 0 ) return e;
     NumAzimuth a1 = mLegs.get(0);

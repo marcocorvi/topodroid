@@ -210,6 +210,7 @@
     <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>
     <string name="no_photos">Survey has no photo</string>
     <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
+    <string name="no_profile_overview">No overview for projected profiles</string>
     <string name="no_proj4">Proj4 not installed</string>
     <string name="no_sensors">Survey has no measurement</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
@@ -390,6 +391,8 @@
 
     <string name="plan">PLAN</string>
     <string name="extended">PROFILE</string>
+    <string name="profile">PROJECT.</string>
+    <string name="extended_profile">Extended profile</string>
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">H-SECTION</string>
 

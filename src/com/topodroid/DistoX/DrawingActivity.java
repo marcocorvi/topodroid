@@ -280,7 +280,7 @@ public class DrawingActivity extends ItemDrawer
   private long mPid1; // plot id
   private long mPid2; // plot id
   private long mPid;  // current plot id
-  private long mType;  // current plot type
+  private long mType; // current plot type
   private String mFrom;
   private String mTo;   // TO station for sections
   private float mAzimuth = 0.0f;
@@ -290,12 +290,6 @@ public class DrawingActivity extends ItemDrawer
   private boolean mAllSymbols; // whether the library has all the symbols of the plot
 
   long getPlotType()   { return mType; }
-
-  boolean isSection()  { return mType == PlotInfo.PLOT_SECTION || mType == PlotInfo.PLOT_H_SECTION; }
-  boolean isXSection() { return mType == PlotInfo.PLOT_X_SECTION || mType == PlotInfo.PLOT_XH_SECTION; }
-  boolean isPhoto()    { return mType == PlotInfo.PLOT_PHOTO; }
-  boolean isSketch2D() { return mType == PlotInfo.PLOT_PLAN || mType == PlotInfo.PLOT_EXTENDED; }
-  boolean isSketch3D() { return mType == PlotInfo.PLOT_SKETCH_3D; }
 
   private float mBorderRight      = 4096;
   private float mBorderLeft       = 0;
@@ -478,7 +472,7 @@ public class DrawingActivity extends ItemDrawer
   public void onBackPressed () // askClose
   {
     if ( dismissPopups() ) return;
-    if ( isSection() || isXSection() ) {
+    if ( PlotInfo.isAnySection( mType ) ) {
       doSaveTh2( ); // do not alert-dialog on mAllSymbols
       super.onBackPressed();
     } else {
@@ -553,10 +547,11 @@ public class DrawingActivity extends ItemDrawer
     try { Thread.sleep(10); } catch( InterruptedException e ) { }
 
     SaveTh2FileTask save_task = null;
-    if ( mType == PlotInfo.PLOT_EXTENDED ) {
-      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType, suffix, backup_rotate );
+    if ( PlotInfo.isProfile( mType ) ) {
+      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType,
+                                       (int)mPlot2.azimuth, suffix, backup_rotate );
     } else {
-      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, suffix, backup_rotate );
+      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, 0, suffix, backup_rotate );
     }
     try { 
       save_task.execute();
@@ -567,10 +562,14 @@ public class DrawingActivity extends ItemDrawer
 
   private void computeReferences( int type, float xoff, float yoff, float zoom, boolean can_toast )
   {
-    if ( type != PlotInfo.PLOT_PLAN && type != PlotInfo.PLOT_EXTENDED ) return;
+    // if ( type != PlotInfo.PLOT_PLAN && type != PlotInfo.PLOT_EXTENDED ) return;
+    if ( ! PlotInfo.isSketch2D( type ) ) return;
 
     mDrawingSurface.clearReferences( type );
     mDrawingSurface.setManager( type );
+
+    float cosp = 0;
+    float sinp = 0;
 
     if ( type == PlotInfo.PLOT_PLAN ) {
       DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(),
@@ -578,11 +577,15 @@ public class DrawingActivity extends ItemDrawer
     } else {
       DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(),
                            xoff, yoff, mDrawingSurface );
+      if ( type == PlotInfo.PLOT_PROFILE ) {
+        cosp = TDMath.cosd( mPlot2.azimuth );
+        sinp = TDMath.sind( mPlot2.azimuth );
+      }
     }
 
     List< NumStation > stations = mNum.getStations();
-    List< NumShot > shots   = mNum.getShots();
-    List< NumSplay > splays = mNum.getSplays();
+    List< NumShot > shots       = mNum.getShots();
+    List< NumSplay > splays     = mNum.getSplays();
 
     if ( type == PlotInfo.PLOT_PLAN ) {
       for ( NumShot sh : shots ) {
@@ -610,7 +613,7 @@ public class DrawingActivity extends ItemDrawer
                                                            DrawingUtil.toSceneY(st.s) - yoff, true, xsections );
         }
       }
-    } else { // if ( type == PlotInfo.PLOT_EXTENDED && 
+    } else if ( type == PlotInfo.PLOT_EXTENDED ) {
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
@@ -633,6 +636,36 @@ public class DrawingActivity extends ItemDrawer
         if ( st.show() ) {
           DrawingStationName dst;
           dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h) - xoff,
+                                                           DrawingUtil.toSceneY(st.v) - yoff, true, xhsections );
+        }
+      }
+    } else { // if ( type == PlotInfo.PLOT_PROFILE ) 
+      float h1, h2;
+      for ( NumShot sh : shots ) {
+        if  ( ! sh.mIgnoreExtend ) {
+          NumStation st1 = sh.from;
+          NumStation st2 = sh.to;
+          if ( st1.show() && st2.show() ) {
+            h1 = (float)( st1.e * cosp + st1.s * sinp );
+            h2 = (float)( st2.e * cosp + st2.s * sinp );
+            addFixedLine( sh.getFirstBlock(), h1, (float)(st1.v), h2, (float)(st2.v), xoff, yoff, false, true );
+          }
+        }
+      } 
+      for ( NumSplay sp : splays ) {
+        NumStation st = sp.from;
+        if ( st.show() ) {
+          h1 = (float)( st.e * cosp + st.s * sinp );
+          h2 = (float)( sp.e * cosp + sp.s * sinp );
+          addFixedLine( sp.getBlock(), h1, (float)(st.v), h2, (float)(sp.v), xoff, yoff, true, true );
+        }
+      }
+      List< PlotInfo > xhsections = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
+      for ( NumStation st : stations ) {
+        if ( st.show() ) {
+          DrawingStationName dst;
+          h1 = (float)( st.e * cosp + st.s * sinp );
+          dst = mDrawingSurface.addDrawingStationName( st, DrawingUtil.toSceneX(h1) - xoff,
                                                            DrawingUtil.toSceneY(st.v) - yoff, true, xhsections );
         }
       }
@@ -905,12 +938,12 @@ public class DrawingActivity extends ItemDrawer
       mName = mName1;
 
       mType = (int)extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE ); 
-      if ( isSection() ) { 
+      if ( PlotInfo.isSection( mType ) ) { 
         mTo    = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );  // to station ( null for X-section)
         mAzimuth = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
         mClino   = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_CLINO );
         // Log.v("DistoX", "X-Section " + mFrom + "-" + mTo + " azimuth " + mAzimuth + " clino " + mClino  );
-      } else if ( isXSection() ) {
+      } else if ( PlotInfo.isXSection( mType ) ) {
         mTo = null;
         mAzimuth = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
         mClino   = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_CLINO );
@@ -928,7 +961,7 @@ public class DrawingActivity extends ItemDrawer
       // mMenu.setOnItemClickListener( this );
 
       doStart();
-      if ( ! ( isSection() || isXSection() ) ) {
+      if ( ! ( PlotInfo.isAnySection( mType ) ) ) {
         if ( mDataDownloader != null ) {
           mApp.registerLister( this );
         } 
@@ -1028,9 +1061,9 @@ public class DrawingActivity extends ItemDrawer
       // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
       resetCurrentIndices();
 
-      if ( isSection() ) {
+      if ( PlotInfo.isSection( mType ) ) {
         mList = mData.selectAllShotsAtStations( mSid, mFrom, mTo );
-      } else if ( isXSection() ) { 
+      } else if ( PlotInfo.isXSection( mType ) ) { 
         // N.B. mTo can be null
         mList = mData.selectShotsAt( mSid, mFrom, false ); // select only splays
       } else {
@@ -1043,7 +1076,7 @@ public class DrawingActivity extends ItemDrawer
       // SECTION and H_SECTION: mFrom != null, mTo != null, splays and leg
       // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
-      if ( isSection() || isXSection() ) {
+      if ( PlotInfo.isAnySection( mType ) ) {
         DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
         float xfrom=0;
         float yfrom=0;
@@ -1075,7 +1108,7 @@ public class DrawingActivity extends ItemDrawer
         DistoXDBlock blk = null;
         float xn = 0;  // X-North // Rotate as NORTH is upward
         float yn = -1; // Y-North
-        if ( isSection() ) {
+        if ( PlotInfo.isSection( mType ) ) {
           if ( mType == PlotInfo.PLOT_H_SECTION ) {
             if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
               xn =  (float)(X1);
@@ -1117,7 +1150,7 @@ public class DrawingActivity extends ItemDrawer
             mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
             mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto), DrawingUtil.toSceneY(yto) );
           }
-        } else { // if ( isXSection() ) }
+        } else { // if ( PlotInfo.isXSection( mType ) ) }
           mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
         }
 
@@ -1158,19 +1191,20 @@ public class DrawingActivity extends ItemDrawer
 
     private void loadFiles( long type )
     {
-      // Log.v( TopoDroidApp.TAG, "load " + mName1 + " " + mName2 );
+      // Log.v( "DistoX", "load " + mName1 + " " + mName2 );
       mPlot1 = mApp.mData.getPlotInfo( mSid, mName1 );
-      mPid1        = mPlot1.id;
+      mPid1  = mPlot1.id;
       if ( mName2 != null ) {
         mPlot2 = mApp.mData.getPlotInfo( mSid, mName2 );
-        mPid2        = mPlot2.id;
+        mPid2  = mPlot2.id;
+        // Log.v("DistoX", "Plot2 type " + mPlot2.type + " azimuth " + mPlot2.azimuth );
       } else {
         mPlot2 = null;
-        mPid2 = -1;
+        mPid2  = -1;
       }
       mPid = mPid1;
 
-      // Log.v( "DistoX", "loadFiles pid " + mName1 + " " + mName2 );
+      // Log.v( "DistoX", "loadFiles " + mName1 + " " + mName2 );
 
       String start = mPlot1.start;
       String view  = mPlot1.view;
@@ -1192,9 +1226,9 @@ public class DrawingActivity extends ItemDrawer
       // long millis_start = System.currentTimeMillis();
       // long millis_end;
 
-      if ( isSection() ) {
+      if ( PlotInfo.isSection( mType ) ) {
         mTo = view;
-      } else if ( isXSection() ) { 
+      } else if ( PlotInfo.isXSection( mType ) ) { 
         mTo = "";
       } else {
         if ( mList.size() == 0 ) {
@@ -1228,14 +1262,14 @@ public class DrawingActivity extends ItemDrawer
         mAllSymbols = mDrawingSurface.loadTherion( filename1, filename2, missingSymbols );
         // Log.v("DistoX", "Th2 " + (System.currentTimeMillis() - millis_start) + " msec");
       }
-      if ( isSketch2D() ) {
+      if ( PlotInfo.isSketch2D( mType ) ) {
         List<PlotInfo> xsection_plan = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION );
         List<PlotInfo> xsection_ext  = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
 
-        computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
-        computeReferences( (int)PlotInfo.PLOT_PLAN,     mOffset.x, mOffset.y, mZoom, true );
+        computeReferences( mPlot2.type, mOffset.x, mOffset.y, mZoom, true );
+        computeReferences( mPlot1.type, mOffset.x, mOffset.y, mZoom, true );
 
-        mDrawingSurface.setStationXSections( xsection_plan, xsection_ext );
+        mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       }
       // Log.v("DistoX", "Sketch load " + (System.currentTimeMillis() - millis_start) + " msec");
 
@@ -1248,7 +1282,7 @@ public class DrawingActivity extends ItemDrawer
       // }
 
       resetReference( mPlot1 );
-      if ( type == PlotInfo.PLOT_EXTENDED ) {
+      if ( type == PlotInfo.PLOT_EXTENDED || type == PlotInfo.PLOT_PROFILE ) {
         switchPlotType();
       }
    }
@@ -1316,7 +1350,7 @@ public class DrawingActivity extends ItemDrawer
     void updateBlockName( DistoXDBlock block, String from, String to )
     {
       // if ( mFullName2 == null ) return; // nothing for PLOT_SECTION or PLOT_H_SECTION
-      if ( isSection() )  return;
+      if ( PlotInfo.isSection( mType ) )  return;
       // FIXME if ( from == null || to == null ) return;
 
       if ( ( ( block.mFrom == null && from == null ) || block.mFrom.equals(from) ) && 
@@ -1355,16 +1389,18 @@ public class DrawingActivity extends ItemDrawer
       recomputeProfileReference();
     }
 
+    // only PLOT_EXTENDED ( not PLOT_PROFILE )
+    // used only when a shot extend is changed
     private void recomputeProfileReference()
     {
-      if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      if ( mType == PlotInfo.PLOT_EXTENDED ) { 
         mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
-        computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor, true );
+        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide ); 
+        computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         // mDrawingSurface.refresh();
         modified();
-      }
+      } 
     }
 
     void deletePoint( DrawingPointPath point ) 
@@ -1871,7 +1907,7 @@ public class DrawingActivity extends ItemDrawer
                     if ( mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                       mCurrentLinePath.addOption("-direction both");
                       mCurrentLinePath.makeStraight( true ); // true = with arrow
-                      boolean h_section = ( mType == PlotInfo.PLOT_EXTENDED );
+                      boolean h_section = PlotInfo.isProfile( mType );
                      
                       // NOTE here l1 is the end-point and l2 the start-point (not considering the tick)
                       //         |
@@ -2038,8 +2074,8 @@ public class DrawingActivity extends ItemDrawer
           } else { // MODE_MOVE 
 /* FIXME for the moment do not create X-Sections
             if ( Math.abs(x_canvas - mDownX) < 10 && Math.abs(y_canvas - mDownY) < 10 ) {
-              // check if there is a station: only PLAN and EXTENDED
-              if ( mType == PlotInfo.PLOT_PLAN || mType == PlotInfo.PLOT_EXTENDED ) {
+              // check if there is a station: only PLAN and EXTENDED or PROFILE
+              if ( PlotInfo.isSketch2D( mType ) ) {
                 DrawingStationName sn = mDrawingSurface.getStationAt( x_scene, y_scene );
                 if ( sn != null ) {
                   boolean barrier = mNum.isBarrier( sn.mName );
@@ -2077,7 +2113,7 @@ public class DrawingActivity extends ItemDrawer
       if ( type == PlotInfo.PLOT_PLAN ) {
         xsname = "xs-" + name;
         xtype = PlotInfo.PLOT_X_SECTION;
-      } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+      } else if ( PlotInfo.isProfile( type ) ) {
         xsname = "xh-" + name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
@@ -2103,7 +2139,7 @@ public class DrawingActivity extends ItemDrawer
       if ( type == PlotInfo.PLOT_PLAN ) {
         xsname = "xs-" + name;
         xtype = PlotInfo.PLOT_X_SECTION;
-      } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+      } else if ( PlotInfo.isProfile( type ) ) {
         xsname = "xh-" + name;
         xtype = PlotInfo.PLOT_XH_SECTION;
       } else {
@@ -2150,13 +2186,14 @@ public class DrawingActivity extends ItemDrawer
         }
         if ( azimuth >= 360 ) azimuth -= 360;
 
-        // if ( type == PlotInfo.PLOT_PLAN ) {
-        //   clino = 0;
-        // } else { // type == PlotInfo.PLOT_EXTENDED
+        if ( PlotInfo.isProfile( type ) ) {
           clino = ( clino >  TDSetting.mVertSplay )?  90
                 : ( clino < -TDSetting.mVertSplay )? -90 : 0;
-        // }
+        // } else { // type == PlotInfo.PLOT_PLAN
+        //   clino = 0;
+        }
         // Log.v("DistoX", "new X section azimuth " + azimuth + " clino " + clino );
+
         long pid = mApp.insert2dSection( mApp.mSID, xsname, xtype, name, "", azimuth, clino );
         plot = mData.getPlotInfo( mApp.mSID, xsname );
 
@@ -2566,7 +2603,7 @@ public class DrawingActivity extends ItemDrawer
       if ( mType == PlotInfo.PLOT_PLAN ) {
         saveReference( mPlot1, mPid1 );
         setPlotType2();
-      } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      } else if ( PlotInfo.isProfile( mType ) ) {
         saveReference( mPlot2, mPid2 );
         setPlotType1();
       }
@@ -2577,22 +2614,22 @@ public class DrawingActivity extends ItemDrawer
     {
       mPid  = mPid2;
       mName = mName2;
-      mType = (int)PlotInfo.PLOT_EXTENDED;
+      mType = mPlot2.type;
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
       mDrawingSurface.setManager( mType );
       resetReference( mPlot2 );
-      mApp.mShotActivity.mRecentPlotType = PlotInfo.PLOT_EXTENDED;
+      mApp.mShotActivity.mRecentPlotType = mType;
     } 
 
     private void setPlotType1()
     {
       mPid  = mPid1;
       mName = mName1;
-      mType = (int)PlotInfo.PLOT_PLAN;
+      mType = mPlot1.type;
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
       mDrawingSurface.setManager( mType );
       resetReference( mPlot1 );
-      mApp.mShotActivity.mRecentPlotType = PlotInfo.PLOT_PLAN;
+      mApp.mShotActivity.mRecentPlotType = mType;
     }
 
     private void flipBlock( DistoXDBlock blk )
@@ -2741,7 +2778,7 @@ public class DrawingActivity extends ItemDrawer
         resetFixedPaint();
         if ( mType == (int)PlotInfo.PLOT_PLAN ) {
           saveReference( mPlot1, mPid1 );
-        } else if ( mType == (int)PlotInfo.PLOT_EXTENDED ) {
+        } else if ( PlotInfo.isProfile( mType ) ) {
           saveReference( mPlot2, mPid2 );
         }
         if ( mApp.mDevice == null ) {
@@ -2757,7 +2794,7 @@ public class DrawingActivity extends ItemDrawer
       } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
-        if ( ! isSection() ) { 
+        if ( ! PlotInfo.isSection( mType ) ) { 
           startSaveTh2Task( PlotSave.TOGGLE, MAX_TASK_FINAL, TDPath.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
@@ -2834,7 +2871,7 @@ public class DrawingActivity extends ItemDrawer
               if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                 // Log.v("DistoX", "edit section line " ); // default azimuth = 0 clino = 0
                 // cross-section exists already
-                boolean h_section = ( mType == PlotInfo.PLOT_EXTENDED ); // not really necessary
+                boolean h_section = PlotInfo.isProfile( mType ); // not really necessary
                 new DrawingLineSectionDialog( this, mApp, h_section, true, line, null, null, 0, 0 ).show();
               } else {
                 new DrawingLineDialog( this, line, sp.mPoint ).show();
@@ -3086,10 +3123,11 @@ public class DrawingActivity extends ItemDrawer
 
     private void savePng()
     {
-      if ( isSection() ) { 
+      if ( PlotInfo.isSection( mType ) ) { 
         doSavePng( mType, mFullName1 ); // FIXME
       } else {
-        doSavePng( (int)PlotInfo.PLOT_PLAN, mFullName1 ); // FIXME
+        doSavePng( (int)PlotInfo.PLOT_PLAN, mFullName1 );
+        // FIXME OK PROFILE (to check)
         doSavePng( (int)PlotInfo.PLOT_EXTENDED, mFullName2 );
       }
     }
@@ -3123,15 +3161,17 @@ public class DrawingActivity extends ItemDrawer
 
     private void saveWithExt( String ext )
     {
-      if ( isSection() ) { 
+      if ( PlotInfo.isSection( mType ) ) { 
         doSaveWithExt( mType, mFullName1, ext ); // FIXME
       } else {
-        doSaveWithExt( PlotInfo.PLOT_PLAN, mFullName1, ext ); // FIXME
-        doSaveWithExt( PlotInfo.PLOT_EXTENDED, mFullName2, ext );
+        doSaveWithExt( mPlot1.type, mFullName1, ext );
+        doSaveWithExt( mPlot2.type, mFullName2, ext );
       }
     }
 
     // ext file extension (--> saving class)
+    // ext can be dxf, svg
+    // FIXME OK PROFILE
     private void doSaveWithExt( long type, final String filename, final String ext )
     {
       final Activity currentActivity  = this;
@@ -3147,7 +3187,7 @@ public class DrawingActivity extends ItemDrawer
              }
            }
       } ;
-      if ( type == PlotInfo.PLOT_EXTENDED ) {
+      if ( PlotInfo.isProfile( type ) ) {
         new ExportToFile(this, saveHandler, mDrawingSurface.mCommandManager2, mNum, type, filename, ext ).execute();
       } else {
         new ExportToFile(this, saveHandler, mDrawingSurface.mCommandManager1, mNum, type, filename, ext ).execute();
@@ -3202,12 +3242,12 @@ public class DrawingActivity extends ItemDrawer
     mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor, true );
-      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor, true );
+      computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
+      computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       resetReference( mPlot1 );
-    } else if ( mType == (int)PlotInfo.PLOT_EXTENDED ) {
-      computeReferences( (int)PlotInfo.PLOT_PLAN, 0.0f, 0.0f, mApp.mScaleFactor, true );
-      computeReferences( (int)PlotInfo.PLOT_EXTENDED, 0.0f, 0.0f, mApp.mScaleFactor, true );
+    } else if ( PlotInfo.isProfile( mType ) ) {
+      computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
+      computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       resetReference( mPlot2 );
     }
   }
@@ -3240,7 +3280,7 @@ public class DrawingActivity extends ItemDrawer
     }
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       resetReference( mPlot1 );
-    } else if ( mType == (int)PlotInfo.PLOT_EXTENDED ) {
+    } else if ( PlotInfo.isProfile( mType ) ) {
       resetReference( mPlot2 );
     }
   }
@@ -3301,15 +3341,19 @@ public class DrawingActivity extends ItemDrawer
     mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
 
     mMenuAdapter.add( res.getString( menus[0] ) );  // EXPORT
-    if ( isSection() || isXSection() ) {
+    if ( PlotInfo.isAnySection( mType ) ) {
       mMenuAdapter.add( res.getString( menus[8] ) );  // AREA
     } else {
       mMenuAdapter.add( res.getString( menus[1] ) );  // INFO
     }
     mMenuAdapter.add( res.getString( menus[2] ) );  // RELOAD
-    if ( TDSetting.mLevelOverBasic && isSketch2D() ) mMenuAdapter.add( res.getString( menus[3] ) ); // DELETE
+    if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) ) {
+      mMenuAdapter.add( res.getString( menus[3] ) ); // DELETE
+    }
     mMenuAdapter.add( res.getString( menus[4] ) ); // PALETTE
-    if ( isSketch2D() ) mMenuAdapter.add( res.getString( menus[5] ) ); // OVERVIEW
+    if ( PlotInfo.isSketch2D( mType ) ) {
+      mMenuAdapter.add( res.getString( menus[5] ) ); // OVERVIEW
+    }
     mMenuAdapter.add( res.getString( menus[6] ) ); // OPTIONS
     mMenuAdapter.add( res.getString( menus[7] ) ); // HELP
     mMenu.setAdapter( mMenuAdapter );
@@ -3332,7 +3376,7 @@ public class DrawingActivity extends ItemDrawer
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
           new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start, mData.getSurveyStat( mApp.mSID ) ).show();
-        } else if ( isSection() || isXSection() ) {
+        } else if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
           // Log.v("DistoX", "Section area " + area );
           Resources res = getResources();
@@ -3340,29 +3384,29 @@ public class DrawingActivity extends ItemDrawer
           TopoDroidAlertDialog.makeAlert( this, res, msg, R.string.button_ok, -1, null, null );
         }
       } else if ( p++ == pos ) { // RECOVER RELOAD
-        if ( mType == PlotInfo.PLOT_EXTENDED ) {
+        if ( PlotInfo.isProfile( mType ) ) {
           ( new PlotRecoverDialog( this, this, mFullName2, 2 ) ).show();
         } else {
           ( new PlotRecoverDialog( this, this, mFullName1, 1 ) ).show();
         }
-      } else if ( TDSetting.mLevelOverBasic && isSketch2D() && p++ == pos ) { // DELETE
+      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // DELETE
         askDelete();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this )).show();
-      } else if ( isSketch2D() && p++ == pos ) { // OVERVIEW
-        // startSaveTh2Task( OVERVIEW, MAX_TASK_FINAL, TDPath.NR_BACKUP ); // FIXME this is not necessary
-        // try {
-        //   Thread.sleep(100);
-        // } catch ( InterruptedException e ) { /* ignore */ }
-        Intent intent = new Intent( this, OverviewActivity.class );
-        intent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mSid );
-        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, mFrom );
-        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_ZOOM, mZoom );
-        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, mType );
-        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_XOFF, mOffset.x );
-        intent.putExtra( TopoDroidTag.TOPODROID_PLOT_YOFF, mOffset.y );
-        startActivity( intent );
+      } else if ( PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
+        if ( mType == PlotInfo.PLOT_PROFILE ) {
+          Toast.makeText( this, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();
+        } else {
+          Intent intent = new Intent( this, OverviewActivity.class );
+          intent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mSid );
+          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, mFrom );
+          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_ZOOM, mZoom );
+          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, mType );
+          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_XOFF, mOffset.x );
+          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_YOFF, mOffset.y );
+          startActivity( intent );
+        }
       } else if ( p++ == pos ) { // OPTIONS
         Intent intent = new Intent( this, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
@@ -3440,7 +3484,7 @@ public class DrawingActivity extends ItemDrawer
     pw.format("    <plot />\n");
     pw.format("  </plan>\n");
     pw.format("  <profile>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED );
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED ); 
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");
   }

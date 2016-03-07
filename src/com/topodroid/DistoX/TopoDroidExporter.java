@@ -842,7 +842,7 @@ class TopoDroidExporter
       }
       pw.format("\n");
       for ( PlotInfo plt : plots ) {
-        if ( plt.type == PlotInfo.PLOT_PLAN || plt.type == PlotInfo.PLOT_EXTENDED ) {
+        if ( PlotInfo.isSketch2D( plt.type ) ) {
           String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
           pw.format("%s map m%s -projection %s\n", extra, plt.name, PlotInfo.projName[ plt.type ] );
           pw.format("%s   %s-%s\n", extra, info.name, plt.name );

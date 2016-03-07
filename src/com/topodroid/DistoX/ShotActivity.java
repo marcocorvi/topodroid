@@ -1040,14 +1040,9 @@ public class ShotActivity extends Activity
     return mApp.mData.hasSurveyStation( mApp.mSID, start );
   }
 
-  public void makeNewPlot( String name, String start )
+  public void makeNewPlot( String name, String start, boolean extended, int project )
   {
-    // plot-id -1, status 0, azimuth 0.0f
-    // long mPIDp = mApp.mData.insertPlot( mApp.mSID, -1L, name+"p",
-    //              PlotInfo.PLOT_PLAN, 0L, start, "", 0, 0, TopoDroidApp.mScaleFactor, 0.0f );
-    // long mPIDs = mApp.mData.insertPlot( mApp.mSID, -1L, name+"s",
-    //              PlotInfo.PLOT_EXTENDED, 0L, start, "", 0, 0, TopoDroidApp.mScaleFactor, 0.0f );
-    long mPIDp = mApp.insert2dPlot( mApp.mSID, name, start );
+    long mPIDp = mApp.insert2dPlot( mApp.mSID, name, start, extended, project );
 
     if ( mPIDp >= 0 ) {
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed

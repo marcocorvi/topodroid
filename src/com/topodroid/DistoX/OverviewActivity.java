@@ -180,7 +180,7 @@ public class OverviewActivity extends ItemDrawer
     //     float zx = w/(mNum.surveyEmax() - mNum.surveyEmin());
     //     float zy = h/(mNum.surveySmax() - mNum.surveySmin());
     //     mZoom = (( zx < zy )? zx : zy)/40;
-    //   } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+    //   } else if ( PlotInfo.isProfile( mType ) ) { // FIXME OK PROFILE
     //     float zx = w/(mNum.surveyHmax() - mNum.surveyHmin());
     //     float zy = h/(mNum.surveyVmax() - mNum.surveyVmin());
     //     mZoom = (( zx < zy )? zx : zy)/40;
@@ -291,7 +291,7 @@ public class OverviewActivity extends ItemDrawer
         dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.e) - xoff,
                                                           DrawingUtil.toSceneY(st.s) - yoff, true, null );
       }
-    } else { // if ( type == PlotInfo.PLOT_EXTENDED && 
+    } else { // if ( PlotInfo.isProfile( type ) // FIXME OK PROFILE
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
@@ -534,6 +534,7 @@ public class OverviewActivity extends ItemDrawer
           String view  = plot.view;
           mPlot1 = plot;
           // mPid = plot.id;
+          // NOTE Overview only for plan or extended plots
           mNum = new DistoXNum( mBlockList, start, null, null );
           mStartStation = mNum.getStation( start );
           computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
@@ -853,16 +854,15 @@ public class OverviewActivity extends ItemDrawer
       if ( mType == PlotInfo.PLOT_PLAN ) {
         // saveReference( mPlot1, mPid1 );
         // mPid  = mPid2;
-        mType = (int)PlotInfo.PLOT_EXTENDED;
+        mType = PlotInfo.mPlot2.type; 
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
-
         mOverviewSurface.setManager( mType );
         resetReference( mPlot2 );
       } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
         // saveReference( mPlot2, mPid2 );
         // mPid  = mPid1;
         // mName = mName1;
-        mType = (int)PlotInfo.PLOT_PLAN;
+        mType = mPlot1.type;
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
         mOverviewSurface.setManager( mType );
         resetReference( mPlot1 );

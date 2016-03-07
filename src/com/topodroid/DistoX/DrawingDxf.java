@@ -472,7 +472,7 @@ class DrawingDxf
         out.flush();
 
         // centerline data
-        if ( type == PlotInfo.PLOT_PLAN || type == PlotInfo.PLOT_EXTENDED ) {
+        if ( PlotInfo.isSketch2D( type ) ) {
           for ( DrawingPath sh : plot.getLegs() ) {
             DistoXDBlock blk = sh.mBlock;
             if ( blk == null ) continue;
@@ -495,7 +495,7 @@ class DrawingDxf
                 float y1 = scale * DrawingUtil.toSceneY( t.s );
                 printXYZ( pw4, x, -y, 0.0f );
                 printXYZ1( pw4, x1, -y1, 0.0f );
-              } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+              } else if ( PlotInfo.isProfile( type ) ) {
                 float x =  scale * DrawingUtil.toSceneX( f.h );
                 float y =  scale * DrawingUtil.toSceneY( f.v );
                 float x1 = scale * DrawingUtil.toSceneX( t.h );
@@ -531,7 +531,7 @@ class DrawingDxf
                 float ds = - dhs * (float)Math.cos( blk.mBearing * grad2rad);
                 printXYZ( pw41, x, -y, 0.0f );
                 printXYZ1( pw41, x + de, -(y+ds), 0.0f );
-              } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+              } else if ( PlotInfo.isProfile( type ) ) {
                 float x = scale * DrawingUtil.toSceneX( f.h );
                 float y = scale * DrawingUtil.toSceneY( f.v );
                 float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;

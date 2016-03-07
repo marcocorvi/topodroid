@@ -1757,13 +1757,18 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------------
 
-  long insert2dPlot( long sid , String name, String start )
+  long insert2dPlot( long sid , String name, String start, boolean extended, int project )
   {
     TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
     long pid_p = mData.insertPlot( sid, -1L, name+"p",
                  PlotInfo.PLOT_PLAN, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
-    long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                 PlotInfo.PLOT_EXTENDED, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
+    if ( extended ) {
+      long pid_s = mData.insertPlot( sid, -1L, name+"s",
+                   PlotInfo.PLOT_EXTENDED, 0L, start, "", 0, 0, mScaleFactor, 0, 0, "", true );
+    } else {
+      long pid_s = mData.insertPlot( sid, -1L, name+"s",
+                   PlotInfo.PLOT_PROFILE, 0L, start, "", 0, 0, mScaleFactor, project, 0, "", true );
+    }
     return pid_p;
   }
   

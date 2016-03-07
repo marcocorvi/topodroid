@@ -27,11 +27,21 @@ class PlotInfo
   public static final long PLOT_SECTION    = 5;
   public static final long PLOT_SKETCH_3D  = 6;
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
+  public static final long PLOT_PROFILE    = 8; // projected profile
 
   static boolean isVertical( long type ) 
   {
-    return ( type == PLOT_EXTENDED || type == PLOT_SECTION || type == PLOT_X_SECTION );
+    return ( type == PLOT_EXTENDED || type == PLOT_PROFILE || type == PLOT_SECTION || type == PLOT_X_SECTION );
   }
+
+  static boolean isSection( long t )  { return t == PLOT_SECTION   || t == PLOT_H_SECTION; }
+  static boolean isXSection( long t ) { return t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
+  static boolean isAnySection( long t ) { return t == PLOT_SECTION   || t == PLOT_H_SECTION 
+                                             || t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
+  static boolean isPhoto( long t )    { return t == PLOT_PHOTO; }
+  static boolean isSketch2D( long t ) { return t == PLOT_PLAN || t == PLOT_EXTENDED || t == PLOT_PROFILE; }
+  static boolean isProfile( long t )  { return t == PLOT_EXTENDED || t == PLOT_PROFILE; }
+  static boolean isSketch3D( long t ) { return t == PLOT_SKETCH_3D; }
 
   // public static final String[] plotType = {
   //   "X-SECTION",  // vertical cross section
@@ -50,10 +60,8 @@ class PlotInfo
       case 0:
         return "X-SECTION";
       case 1:
-        // return "PLAN";
         return res.getString( R.string.plan );
       case 2:
-        // return "EXTENDED";
         return res.getString( R.string.extended );
       case 3:
         // return "H-SECTION";
@@ -67,6 +75,8 @@ class PlotInfo
         return "SKETCH-3D";
       case 7:
         return "XH-SECTION";
+      case 8:
+        return res.getString( R.string.profile );
     }
     return "Unknown type";
   }
@@ -81,7 +91,7 @@ class PlotInfo
   // }
 
   static final String[] projName = { // therion projection names
-    "none", "plan", "extended", "none", "none", "none", "sketch_3d", "none"
+    "none", "plan", "extended", "none", "none", "none", "sketch_3d", "none", "elevation"
   };
   // static final String[] plotName = { // plot list names
   //   "+", "==", "||", "x", "[o]", "<>", "3d", "><"
@@ -98,7 +108,7 @@ class PlotInfo
   public float xoffset; // display X-offset
   public float yoffset; // display Y-offset
   public float zoom;    // display zoom
-  public float azimuth; // vertical cross-section azimuth
+  public float azimuth; // vertical cross-section azimuth / profile projection azimuth
   public float clino;   // inclination (0 for plan cross-sections)
 
   // void dump()
@@ -119,14 +129,15 @@ class PlotInfo
 
   // public static int getTypeValue( String type )
   // {
-  //    if ( type.equals("X-SECTION") ) return (int)PLOT_X_SECTION;
-  //    if ( type.equals("PLAN") )      return (int)PLOT_PLAN;
-  //    if ( type.equals("EXTENDED") )  return (int)PLOT_EXTENDED;
-  //    if ( type.equals("H-SECTION") ) return (int)PLOT_H_SECTION;
-  //    if ( type.equals("PHOTO") )     return (int)PLOT_PHOTO;
-  //    if ( type.equals("SECTION") )   return (int)PLOT_SECTION;
-  //    if ( type.equals("SKETCH-3D") ) return (int)PLOT_SKETCH_3D;
+  //    if ( type.equals("X-SECTION") )  return (int)PLOT_X_SECTION;
+  //    if ( type.equals("PLAN") )       return (int)PLOT_PLAN;
+  //    if ( type.equals("EXTENDED") )   return (int)PLOT_EXTENDED;
+  //    if ( type.equals("H-SECTION") )  return (int)PLOT_H_SECTION;
+  //    if ( type.equals("PHOTO") )      return (int)PLOT_PHOTO;
+  //    if ( type.equals("SECTION") )    return (int)PLOT_SECTION;
+  //    if ( type.equals("SKETCH-3D") )  return (int)PLOT_SKETCH_3D;
   //    if ( type.equals("XH-SECTION") ) return (int)PLOT_XH_SECTION;
+  //    if ( type.equals("PROFILE") )    return (int)PLOT_PROFILE;
   //    return (int)PLOT_PLAN;
   // }
 

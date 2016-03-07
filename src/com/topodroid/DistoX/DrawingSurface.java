@@ -109,7 +109,7 @@ public class DrawingSurface extends SurfaceView
     {
       mType = type;
       // Log.v( "DistoX", " set manager type " + type );
-      if ( type == PlotInfo.PLOT_EXTENDED ) {
+      if ( PlotInfo.isProfile( type ) ) {
         commandManager = mCommandManager2;
       } else if ( type == PlotInfo.PLOT_PLAN ) {
         commandManager = mCommandManager1;
@@ -179,7 +179,7 @@ public class DrawingSurface extends SurfaceView
     
     void clearReferences( int type ) 
     {
-      if ( type == PlotInfo.PLOT_EXTENDED ) {
+      if ( PlotInfo.isProfile( type ) ) {
         mCommandManager2.clearReferences();
       } else {
         mCommandManager1.clearReferences();
@@ -349,7 +349,7 @@ public class DrawingSurface extends SurfaceView
 
     public Bitmap getBitmap( long type )
     {
-      if ( type == PlotInfo.PLOT_EXTENDED ) {
+      if ( PlotInfo.isProfile( type ) ) {
         return mCommandManager2.getBitmap();
       }
       return mCommandManager1.getBitmap();
@@ -431,23 +431,23 @@ public class DrawingSurface extends SurfaceView
       mDrawThread = null;
     }
 
-    public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name )
+    public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name, int proj_dir )
     {
       // Log.v("DistoX", sketch_name + " export th2 type " + type );
-      if ( type == PlotInfo.PLOT_EXTENDED ) {
-        mCommandManager2.exportTherion( type, out, sketch_name, plot_name );
+      if ( PlotInfo.isProfile( type ) ) {
+        mCommandManager2.exportTherion( type, out, sketch_name, plot_name, proj_dir );
       } else {
-        mCommandManager1.exportTherion( type, out, sketch_name, plot_name );
+        mCommandManager1.exportTherion( type, out, sketch_name, plot_name, proj_dir );
       }
     }
 
-    public void exportDataStream( int type, DataOutputStream dos, String sketch_name )
+    public void exportDataStream( int type, DataOutputStream dos, String sketch_name, int proj_dir )
     {
       // Log.v("DistoX", sketch_name + " export stream type " + type );
-      if ( type == PlotInfo.PLOT_EXTENDED ) {
-        mCommandManager2.exportDataStream( type, dos, sketch_name );
+      if ( PlotInfo.isProfile( type ) ) {
+        mCommandManager2.exportDataStream( type, dos, sketch_name, proj_dir );
       } else {
-        mCommandManager1.exportDataStream( type, dos, sketch_name );
+        mCommandManager1.exportDataStream( type, dos, sketch_name, 0 );
       }
     }
 
@@ -555,7 +555,8 @@ public class DrawingSurface extends SurfaceView
 
   void exportAsCsx( PrintWriter pw, long type )
   {
-    if ( type == PlotInfo.PLOT_EXTENDED ) {
+    if ( PlotInfo.isProfile( type ) ) {
+      // FIXME OK PROFILE to check
       mCommandManager2.exportAsCsx( pw );
     } else if ( type == PlotInfo.PLOT_PLAN ) {
       mCommandManager1.exportAsCsx( pw );
@@ -623,10 +624,10 @@ public class DrawingSurface extends SurfaceView
     }
   }
   
-  void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext )
+  void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext, long type2 )
   {
     mCommandManager1.setStationXSections( xsection_plan, PlotInfo.PLOT_PLAN );
-    mCommandManager2.setStationXSections( xsection_ext,  PlotInfo.PLOT_EXTENDED );
+    mCommandManager2.setStationXSections( xsection_ext,  type2 );
   }
 
   // only for sections

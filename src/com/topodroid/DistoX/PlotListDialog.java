@@ -120,14 +120,12 @@ public class PlotListDialog extends MyDialog
       mArrayAdapter.clear();
       // mArrayAdapter.add( res.getString(R.string.back_to_survey) );
       for ( PlotInfo item : list ) {
-        if ( item.type == PlotInfo.PLOT_PLAN /* || item.type == PlotInfo.PLOT_EXTENDED */ ) {
+        // if ( item.type == PlotInfo.PLOT_PLAN /* || item.type == PlotInfo.PLOT_EXTENDED */ ) 
+        if ( PlotInfo.isProfile( item.type ) )
+        {
           String name = item.name.substring( 0, item.name.length() - 1 );
-
-          mArrayAdapter.add( 
-           String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) ) );
-
-          mArrayAdapter.add( 
-            String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_EXTENDED, res ) ) );
+          mArrayAdapter.add( String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) ) );
+          mArrayAdapter.add( String.format("<%s> %s", name, PlotInfo.plotTypeString( item.type, res ) ) );
         }
       }
       // FIXME_SKETCH_3D
@@ -194,8 +192,18 @@ public class PlotListDialog extends MyDialog
     int to = value.lastIndexOf('>');
     String plot_name = value.substring( from+1, to );
     String type = value.substring( to+2 );
-    // long plot_type = PlotInfo.toPlotType( type );
-    long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
+
+    long plot_type = PlotInfo.PLOT_PLAN;
+    Resources res = mApp.getResources();
+    if ( res.getString( R.string.plan ).equals( type ) ) {
+      plot_type = PlotInfo.PLOT_PLAN;
+    } else if ( res.getString( R.string.extended ).equals( type ) ) {
+      plot_type = PlotInfo.PLOT_EXTENDED;
+    } else if ( res.getString( R.string.profile ).equals( type ) ) {
+      plot_type = PlotInfo.PLOT_PROFILE;
+    }
+
+    // long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
     mParent.startExistingPlot( plot_name, plot_type ); // context of current SID
     dismiss();
   }
