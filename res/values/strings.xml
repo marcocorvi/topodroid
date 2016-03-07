@@ -980,7 +980,8 @@
     <string name="welcome_text">
 \nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
 \n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
-\n\nMan pages: MENU key
+\n\nHelp: menu "help"
+\nMan pages: MENU key
 \nDocs: http://sites.google.com/site/speleoapps
 \nComments, bug reports, feature requests: marco.corvi@gmail.com
 \n
