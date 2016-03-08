@@ -68,8 +68,7 @@
 
     </LinearLayout>
 
-    <LinearLayout 
-      android:id="@+id/layout3"
+    <LinearLayout android:id="@+id/layout3"
       android:layout_below="@id/layout2"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
@@ -77,14 +76,14 @@
       android:layout_marginTop="25dp"
       android:gravity="right"
       >
-      <EditText android:id="@+id/plot_project"
+      <!-- EditText android:id="@+id/plot_project"
         android:layout_width="0dp"
         android:layout_height="wrap_content" 
         android:layout_weight="50"
       	android:ems="25"
         android:singleLine="true"
         android:hint="0"
-        android:scrollHorizontally="true" />
+        android:scrollHorizontally="true" / -->
 
       <CheckBox android:id="@+id/button_extended"
         android:layout_width="0dp"

@@ -575,6 +575,7 @@
     <string name="title_plot_save">Guardar dibujo como</string>
     <string name="title_plot_reload">Actualizar dibujo</string>
     <string name="title_profile_flip">¿Quieres cambiar al perfil del dibujo?</string>
+    <!-- TODO string name="title_projection">Projected profile azimuth %1$d</string -->
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>

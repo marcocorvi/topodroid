@@ -247,15 +247,15 @@ public class DrawingActivity extends ItemDrawer
   // ZoomButton mZoomIn;
   private float oldDist;  // zoom pointer-sapcing
 
-  private static final float ZOOM_INC = 1.4f;
-  private static final float ZOOM_DEC = 1.0f/ZOOM_INC;
+  static final float ZOOM_INC = 1.4f;
+  static final float ZOOM_DEC = 1.0f/ZOOM_INC;
 
-  public static final int MODE_DRAW  = 1;
-  public static final int MODE_MOVE  = 2;
-  public static final int MODE_EDIT  = 3;
-  public static final int MODE_ZOOM  = 4; // used only for touchMode
-  public static final int MODE_SHIFT = 5; // change point symbol position
-  public static final int MODE_ERASE = 6;
+  static final int MODE_DRAW  = 1;
+  static final int MODE_MOVE  = 2;
+  static final int MODE_EDIT  = 3;
+  static final int MODE_ZOOM  = 4; // used only for touchMode
+  static final int MODE_SHIFT = 5; // change point symbol position
+  static final int MODE_ERASE = 6;
 
   public int mMode   = MODE_MOVE;
   private int mTouchMode = MODE_MOVE;

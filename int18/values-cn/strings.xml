@@ -641,6 +641,7 @@
     <string name="title_plot_save">输出草图</string>
     <string name="title_plot_reload">重装草图</string>
     <string name="title_profile_flip">剖面草图 ?</string>
+    <!-- TODO string name="title_projection">Projected profile azimuth %1$d</string -->
     <string name="title_refs">参考草图</string>
     <string name="title_scraps">测量草图</string>
     <string name="title_shift">转换</string>

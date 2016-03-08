@@ -23,6 +23,7 @@ public interface INewPlot
 
   public boolean hasSurveyStation( String start );
 
+  public void doProjectionDialog( String name, String start );
 }
 
 

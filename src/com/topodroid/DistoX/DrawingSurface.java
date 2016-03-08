@@ -199,13 +199,12 @@ public class DrawingSurface extends SurfaceView
       try {
         canvas = mHolder.lockCanvas();
         // canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-
-        mWidth  = canvas.getWidth();
-        mHeight = canvas.getHeight();
-        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler, mSplayStations );
-        if ( previewPath != null ) {
-          previewPath.draw(canvas, null);
+        if ( canvas != null ) {
+          mWidth  = canvas.getWidth();
+          mHeight = canvas.getHeight();
+          canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+          commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler, mSplayStations );
+          if ( previewPath != null ) previewPath.draw(canvas, null);
         }
       } finally {
         if ( canvas != null ) {

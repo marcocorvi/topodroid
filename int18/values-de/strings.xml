@@ -656,6 +656,7 @@
     <string name="title_plot_save">Skizze Speichern als</string>
     <string name="title_plot_reload">Skizzenbackup wiederherstellen</string>
     <string name="title_profile_flip">Seitenansicht spiegeln?</string>
+    <!-- TODO string name="title_projection">Projected profile azimuth %1$d</string -->
     <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
     <string name="title_shift">Verschieben</string>

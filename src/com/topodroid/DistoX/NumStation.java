@@ -74,7 +74,7 @@ public class NumStation extends NumSurveyPoint
     mBarrierAndHidden = false;
     mParent  = from;
     mLegs = new ArrayList<  NumAzimuth  >();
-    Log.v( "DistoX", "NumStation cstr " + id + " extend " + extend + " H " + h + " V " + v );
+    // Log.v( "DistoX", "NumStation cstr " + id + " extend " + extend + " H " + h + " V " + v );
   }
 
   // azimuth [degrees]

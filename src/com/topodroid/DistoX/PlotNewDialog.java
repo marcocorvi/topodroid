@@ -41,7 +41,7 @@ public class PlotNewDialog extends MyDialog
 
   private EditText mEditName;
   private EditText mEditStart;
-  private EditText mEditProject;
+  // private EditText mEditProject;
 
   private Button   mBtnOK;
   private CheckBox mCBextended;
@@ -66,7 +66,7 @@ public class PlotNewDialog extends MyDialog
 
     mEditName  = (EditText) findViewById(R.id.edit_plot_name);
     mEditStart = (EditText) findViewById(R.id.edit_plot_start);
-    mEditProject = (EditText) findViewById(R.id.plot_project);
+    // mEditProject = (EditText) findViewById(R.id.plot_project);
 
     mEditName.setText( Integer.toString( mIndex ) );
     mEditStart.setOnLongClickListener( this );
@@ -75,12 +75,12 @@ public class PlotNewDialog extends MyDialog
     mBtnOK.setOnClickListener( this );
     mCBextended = (CheckBox)findViewById( R.id.button_extended );
     mCBextended.setChecked( true );
-    mEditProject.setVisibility( View.INVISIBLE );
-    mCBextended.setOnClickListener( new View.OnClickListener() {
-      public void onClick( View v ) {
-        mEditProject.setVisibility( mCBextended.isChecked() ? View.INVISIBLE : View.VISIBLE );
-      }
-    } );
+    // mEditProject.setVisibility( View.INVISIBLE );
+    // mCBextended.setOnClickListener( new View.OnClickListener() {
+    //   public void onClick( View v ) {
+    //     mEditProject.setVisibility( mCBextended.isChecked() ? View.INVISIBLE : View.VISIBLE );
+    //   }
+    // } );
          
     if ( ! TDSetting.mLevelOverAdvanced ) {
       LinearLayout layout3 = (LinearLayout) findViewById( R.id.layout3 );
@@ -93,13 +93,13 @@ public class PlotNewDialog extends MyDialog
       MyKeyboard.registerEditText( mKeyboard, mEditName,  MyKeyboard.FLAG_POINT_LCASE_2ND );
       int flag = ( TDSetting.mStationNames == 1 ) ? MyKeyboard.FLAG_POINT : MyKeyboard.FLAG_POINT_LCASE_2ND;
       MyKeyboard.registerEditText( mKeyboard, mEditStart, flag);
-      MyKeyboard.registerEditText( mKeyboard, mEditProject, 0 ); // MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mEditProject, 0 ); // MyKeyboard.FLAG_POINT );
     } else {
       mKeyboard.hide();
       if ( TDSetting.mStationNames == 1 ) {
         mEditStart.setInputType( TDConst.NUMBER_DECIMAL );
       }
-      mEditProject.setInputType( TDConst.NUMBER );
+      // mEditProject.setInputType( TDConst.NUMBER );
     }
   }
 
@@ -164,17 +164,21 @@ public class PlotNewDialog extends MyDialog
       }
 
       boolean extended = true;
-      int project = 0;
+      // int project = 0;
       if ( TDSetting.mLevelOverAdvanced ) {
         extended = mCBextended.isChecked();
-        if ( ! extended ) {
-          try {
-            project = Integer.parseInt( mEditProject.getText().toString() );
-          } catch ( NumberFormatException e ) {  }
-        }
+        // if ( ! extended ) {
+        //   try {
+        //     project = Integer.parseInt( mEditProject.getText().toString() );
+        //   } catch ( NumberFormatException e ) {  }
+        // }
       }
 
-      mMaker.makeNewPlot( name, start, extended, project );
+      if ( extended ) {
+        mMaker.makeNewPlot( name, start, extended, 0 );
+      } else {
+        mMaker.doProjectionDialog( name, start );
+      }
     }
     dismiss();
   }

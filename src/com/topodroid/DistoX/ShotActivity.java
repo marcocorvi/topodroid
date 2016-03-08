@@ -1459,5 +1459,14 @@ public class ShotActivity extends Activity
   }
 
   // ------------------------------------------------------------------
+  public void doProjectionDialog( String name, String start )
+  {
+    new ProjectionDialog( this, this, mApp.mSID, name, start ).show();
+  }
+
+  void doProjectedProfile( String name, String start, int azimuth )
+  {
+    makeNewPlot( name, start, false, azimuth );
+  }
 
 }
