@@ -51,6 +51,7 @@ public class DrawingPath implements ICanvasCommand
   DrawingPath( int type, DistoXDBlock blk )
   {
     mType  = type;
+    mOptions  = null;
     mBlock = blk; 
     mBBox  = new RectF();
     mPaint = DrawingBrushPaths.errorPaint;
@@ -74,6 +75,7 @@ public class DrawingPath implements ICanvasCommand
   Path mTransformedPath;
   Paint mPaint;
   int mType;
+  String mOptions;
   float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
   DistoXDBlock mBlock;
@@ -308,4 +310,42 @@ public class DrawingPath implements ICanvasCommand
   public void computeBounds( RectF bound, boolean b ) { mPath.computeBounds( bound, b ); }
 
   // public void transform( Matrix matrix ) { mPath.transform( matrix ); }
+
+  // ------------------------------------------------------------------
+  // Therion options
+
+  void addOption( String option ) 
+  {
+    // Log.v("DistoX", "add option <" + option +">" );
+    if ( mOptions == null ) {
+      mOptions = option;
+    } else {
+      mOptions = mOptions + " " + option;
+    }
+  }
+
+  // String[] getOptions() 
+  // {
+  //   if ( mOptions == null ) return new String[0];
+  //   return mOptions.split(" ");
+  // }
+
+  // key must be not null and start with '-'
+  String getOption( String key )
+  {
+    if ( mOptions == null ) return null;
+    String vals[] = mOptions.split(" ");
+    int len = vals.length;
+    for ( int k = 0; k < len; ++k ) {
+      if ( key.equals( vals[k] ) ) {
+        while ( ++k < len ) if ( vals[k].length() > 0 ) return vals[k];
+        break;
+      }
+    }
+    return null;
+  }
+
+  String getOptionString() { return ( mOptions == null )? "" : mOptions; }
+
+  void setOptions( String options ) { mOptions = options; }
 }

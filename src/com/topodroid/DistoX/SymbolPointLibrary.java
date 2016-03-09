@@ -32,7 +32,7 @@ class SymbolPointLibrary extends SymbolLibrary
   int mPointUserIndex;
   int mPointLabelIndex;
   int mPointDangerIndex;
-
+  int mPointSectionIndex;
 
   SymbolPointLibrary( Resources res )
   {
@@ -40,6 +40,7 @@ class SymbolPointLibrary extends SymbolLibrary
     mPointUserIndex   = 0;
     mPointLabelIndex  = -1;
     mPointDangerIndex = -1;
+    mPointSectionIndex = -1;
     loadSystemPoints( res );
     loadUserPoints();
     makeEnabledList();
@@ -178,9 +179,10 @@ class SymbolPointLibrary extends SymbolLibrary
   protected void makeEnabledList()
   {
     super.makeEnabledList();
-    mPointUserIndex   = getSymbolIndexByThName( "user" );
-    mPointLabelIndex  = getSymbolIndexByThName( "label" );
-    mPointDangerIndex = getSymbolIndexByThName( "danger" );
+    mPointUserIndex    = getSymbolIndexByThName( "user" );
+    mPointLabelIndex   = getSymbolIndexByThName( "label" );
+    mPointDangerIndex  = getSymbolIndexByThName( "danger" );
+    mPointSectionIndex = getSymbolIndexByThName( "section" ); 
   }
 
 

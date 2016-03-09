@@ -51,7 +51,6 @@ public class DrawingPointPath extends DrawingPath
   // float mYpos;
   int mPointType;
   protected int mScale;       //! symbol scale
-  String mOptions;
   double mOrientation;
 
   public DrawingPointPath( int type, float x, float y, int scale, String options )

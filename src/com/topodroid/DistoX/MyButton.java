@@ -15,6 +15,7 @@ import android.content.Context;
 import android.widget.Button;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.MotionEvent;
 
 import android.graphics.Bitmap;
@@ -28,33 +29,38 @@ public class MyButton extends Button
   Context mContext;
   BitmapDrawable mBitmap;
   BitmapDrawable mBitmap2;
-  OnClickListener mListener;
+  OnClickListener mClick;
+  OnLongClickListener mLongClick;
   int mSize;
   float mX, mY;
+  long mMillis;
 
   public MyButton( Context context )
   {
     super( context );
     mContext = context;
     setPadding(0,0,0,0);
-    mSize = 0;
-    mListener = null;
-    mBitmap   = null;
+    mSize   = 0;
+    mClick  = null;
+    mBitmap = null;
   }
 
-  public MyButton( Context context, OnClickListener click_listener, int size, int res_id, int res_id2 )
+  public MyButton( Context context, OnClickListener click, int size, int res_id, int res_id2 )
   {
     super( context );
     mContext = context;
     setPadding(0,0,0,0);
     mSize = size;
-    mListener = click_listener;
-    // setOnClickListener( click_listener );
+    mClick = click;
+    mLongClick = null;
         
     mBitmap  = getButtonBackground2( mContext, size, res_id );
     // mBitmap2 = ( res_id2 > 0 )? getButtonBackground( mContext, size, res_id2 ) : null;
     setBackgroundDrawable( mBitmap );
   }
+
+  @Override 
+  public void setOnLongClickListener( OnLongClickListener listener ) { mLongClick = listener; }
 
   @Override
   public boolean onTouchEvent( MotionEvent ev )
@@ -63,13 +69,18 @@ public class MyButton extends Button
     if ( action == MotionEvent.ACTION_DOWN ) {
       mX = ev.getX();
       mY = ev.getY();
+      mMillis = ev.getEventTime();
       setBackgroundDrawable( mBitmap2 );
       // Log.v("DistoX", "Touch DOWN");
       return true;
     } else if ( action == MotionEvent.ACTION_UP ) {
       setBackgroundDrawable( mBitmap );
       if ( Math.abs( ev.getX() - mX ) < mSize && Math.abs( ev.getY() - mY ) < mSize ) {
-        mListener.onClick( this );
+        boolean consumed = false;
+        if ( mLongClick != null && ev.getEventTime() - mMillis > 400 ) {
+          consumed = mLongClick.onLongClick( this );
+        } 
+        if ( ! consumed ) mClick.onClick( this );
       }
     }
     return false;

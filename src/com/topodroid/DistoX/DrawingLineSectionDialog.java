@@ -55,7 +55,7 @@ public class DrawingLineSectionDialog extends MyDialog
   boolean mHSection;
   boolean mExists;
 
-  public DrawingLineSectionDialog( DrawingActivity context, TopoDroidApp app, boolean h_section, boolean exists,
+  public DrawingLineSectionDialog( DrawingActivity context, TopoDroidApp app, boolean h_section, boolean exists, String id,
                                    DrawingLinePath line, String from, String to, float azimuth, float clino )
   {
     super( context, R.string.DrawingLineSectionDialog );
@@ -70,22 +70,16 @@ public class DrawingLineSectionDialog extends MyDialog
     mClino = clino;
 
     // read section id from the line options
-    mId   = null;
-    String[] vals = mLine.getOptions();
-    for (int k = 0; k<vals.length - 1; ++k ) {
-      if ( vals[k].equals( "-id" ) ) {
-        mId = vals[k+1];
-        break;
-      }
-    } 
+    mId = mLine.getOption( "-id" );
+    // Log.v("DistoX", "Line Section Dialog: id " + ((mId!=null)? mId : "null") 
+    //               + " arg " + ((id!=null)? id : "null") + " exists " + mExists + " options " + line.mOptions );
     if ( mId == null ) {  // line does not have ID yet 
-      mId = TopoDroidApp.mData.getNextSectionId( mParent.getSID() );
-      String option = "-id " + mId;
-      mLine.addOption( option );
+      mId = id;
+      // mLine.addOption( "-id " + mId );
       mPlotInfo = null;
-      // Log.v( "DistoX", "DrawingLineSectionDialog ID was null: set to " + mId );
+      // Log.v( "DistoX", "Drawing Line Section Dialog ID was null: set to " + mId );
     } else {
-      // Log.v( "DistoX", "DrawingLineSectionDialog ID: " + mId );
+      // Log.v( "DistoX", "Drawing Line Section Dialog ID: " + mId );
       mPlotInfo = TopoDroidApp.mData.getPlotInfo( mParent.getSID(), mId );
       if ( mPlotInfo != null ) { // extra careful
         mFrom     = mPlotInfo.start;
@@ -159,7 +153,7 @@ public class DrawingLineSectionDialog extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button)v;
-    // TDLog.Log( TDLog.LOG_INPUT, "DrawingLineSectionDialog onClick() " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
     long type = mHSection ? PlotInfo.PLOT_H_SECTION : PlotInfo.PLOT_SECTION;
 
     if ( b == mBtnFoto ) {
@@ -167,7 +161,7 @@ public class DrawingLineSectionDialog extends MyDialog
     } else if ( b == mBtnDraw ) {
       mParent.makeSectionDraw( mLine, mId, type, mFrom, mTo, mAzimuth, mClino );
     } else if ( b == mBtnErase ) {
-      mParent.deleteLine( mLine, mId );
+      mParent.deleteLine( mLine );
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
     }
@@ -179,7 +173,7 @@ public class DrawingLineSectionDialog extends MyDialog
   {
     if ( ! mExists ) {
       // if pressed BACK and the section did not exist, tell the parent to delete the "section" line
-      mParent.deleteLine( mLine, mId );
+      mParent.deleteLine( mLine );
     }
     dismiss();
   }

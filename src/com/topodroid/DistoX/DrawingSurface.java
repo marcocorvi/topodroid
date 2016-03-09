@@ -635,4 +635,12 @@ public class DrawingSurface extends SurfaceView
     return commandManager.computeSectionArea();
   }
 
+  void deleteSectionLine( DrawingLinePath line, String scrap )
+  {
+    isDrawing = true;
+    EraseCommand cmd = new EraseCommand();
+    commandManager.deleteSectionLine( line, scrap, cmd );
+    commandManager.addEraseCommand( cmd );
+  }
+
 }

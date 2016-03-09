@@ -594,6 +594,33 @@ public class DrawingCommandManager
     eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
 
+  void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
+  {
+    synchronized( mCurrentStack ) {
+      int index = DrawingBrushPaths.mPointLib.mPointSectionIndex;
+      if ( index >= 0 ) {
+        ArrayList<DrawingPath> todo = new ArrayList<DrawingPath>();
+        final Iterator i = mCurrentStack.iterator();
+        while ( i.hasNext() ){
+          final ICanvasCommand c = (ICanvasCommand) i.next();
+          if ( c.commandType() == 0 ) {
+            DrawingPath p = (DrawingPath)c;
+            if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+              DrawingPointPath pt = (DrawingPointPath)p;
+              if ( pt.mPointType == index && scrap.equals( pt.getOption( "-scrap" ) ) ) {
+                todo.add(p);
+              }
+            }
+          }
+        }
+        for ( DrawingPath pp : todo ) deletePath( pp, cmd );
+      }
+      deletePath( line, cmd );
+    }
+  }
+
+  
+
   void sharpenLine( DrawingLinePath line ) 
   {
     synchronized( mCurrentStack ) {
@@ -2027,4 +2054,5 @@ public class DrawingCommandManager
     }
     return ret / 2;
   }
+
 }

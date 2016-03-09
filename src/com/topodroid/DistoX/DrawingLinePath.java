@@ -45,7 +45,6 @@ public class DrawingLinePath extends DrawingPointLinePath
   int mLineType;
   int mOutline; 
   private boolean mReversed;
-  private String mOptions;
 
   public DrawingLinePath( int line_type )
   {
@@ -58,7 +57,6 @@ public class DrawingLinePath extends DrawingPointLinePath
     mLineType = line_type;
     mReversed = false;
     mOutline  = ( mLineType == DrawingBrushPaths.mLineLib.mLineWallIndex )? OUTLINE_OUT : OUTLINE_NONE;
-    mOptions  = null;
     setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
 
@@ -119,25 +117,6 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
     return null;
   }
-
-  void addOption( String option ) 
-  {
-    if ( mOptions == null ) {
-      mOptions = option;
-    } else {
-      mOptions = mOptions + " " + option;
-    }
-  }
-
-  String[] getOptions() 
-  {
-    if ( mOptions == null ) return new String[0];
-    return mOptions.split(" ");
-  }
-
-  String getOptionString() { return ( mOptions == null )? "" : mOptions; }
-
-  void setOptions( String options ) { mOptions = options; }
 
   @Override
   void computeUnitNormal()

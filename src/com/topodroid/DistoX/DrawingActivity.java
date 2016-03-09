@@ -1426,20 +1426,24 @@ public class DrawingActivity extends ItemDrawer
 
 
     // @param name  section-line name 
-    void deleteLine( DrawingLinePath line, String name ) 
+    void deleteLine( DrawingLinePath line ) 
     { 
-      mDrawingSurface.deletePath( line );
       if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-        TDPath.deletePlotFileWithBackups( TDPath.getTh2File( mApp.mySurvey + "-" + name + ".th2" ) );
-        TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( mApp.mySurvey + "-" + name + ".tdr" ) );
+        String name = line.getOption( "-id" );
+        String scrap = mApp.mySurvey + "-" + name;
+        mDrawingSurface.deleteSectionLine( line, scrap );
+        TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap + ".th2" ) );
+        TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap + ".tdr" ) );
         TDPath.deleteFile( TDPath.getJpgFile( mApp.mySurvey, name + ".jpg" ) );
        
         PlotInfo plot = mData.getPlotInfo( mApp.mSID, name );
         if ( plot != null ) {
           mData.dropPlot( plot.id, mApp.mSID );
         } else {
-          TDLog.Error("No plot " + name + " SID " + mApp.mSID + " in database" );
+          TDLog.Error("No plot NAME " + name + " SID " + mApp.mSID + " in database" );
         }
+      } else {
+        mDrawingSurface.deletePath( line );
       }
       modified();
     }
@@ -1918,12 +1922,11 @@ public class DrawingActivity extends ItemDrawer
                       //
                       LinePoint l2 = mCurrentLinePath.mFirst.mNext;
                       LinePoint l1 = l2.mNext;
-                      // Log.v("DistoX", "L1 " + l1.mX + " " + l1.mY + " L2 " + l2.mX + " " + l2.mY );
+                      // Log.v("DistoX", "section line L1 " + l1.mX + " " + l1.mY + " L2 " + l2.mX + " " + l2.mY );
 
                       List< DrawingPath > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
                       if ( paths.size() > 0 ) {
                         mCurrentLinePath.computeUnitNormal();
-                        mDrawingSurface.addDrawingPath( mCurrentLinePath );
 
                         String from = "-1";
                         String to   = "-1";
@@ -1987,7 +1990,24 @@ public class DrawingActivity extends ItemDrawer
                         }
                         // Log.v("DistoX", "new section " + from + " - " + to );
                         // cross-section does not exists yet
-                        new DrawingLineSectionDialog( this, mApp, h_section, false, mCurrentLinePath, from, to, azimuth, clino ).show();
+                        String section_id = mData.getNextSectionId( mApp.mSID );
+                        mCurrentLinePath.addOption( "-id " + section_id );
+                        mDrawingSurface.addDrawingPath( mCurrentLinePath );
+
+                        if ( section_id != null ) {
+                          float x5 = mCurrentLinePath.mLast.mX + mCurrentLinePath.mDx * 20; 
+                          float y5 = mCurrentLinePath.mLast.mY + mCurrentLinePath.mDy * 20; 
+                          String scrap = mApp.mySurvey + "-" + section_id;
+                          DrawingPointPath section_pt = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointSectionIndex,
+                                                                            x5, y5, DrawingPointPath.SCALE_M, 
+                                                                            "-scrap " + scrap );
+                          mDrawingSurface.addDrawingPath( section_pt );
+                        } else {
+                          TDLog.Error( "null scrap id" );
+                        }
+
+                        new DrawingLineSectionDialog( this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
+
                       } else { // empty path list
                         Toast.makeText( this, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
                       }
@@ -2696,7 +2716,11 @@ public class DrawingActivity extends ItemDrawer
     {
       Button b = (Button)view;
       if ( b == mButton1[ BTN_PLOT ] ) {
-        new DrawingProfileFlipDialog( this, this ).show();
+        if ( mPlot2 != null && mPlot2.type == PlotInfo.PLOT_EXTENDED ) {
+          new DrawingProfileFlipDialog( this, this ).show();
+        } else {
+          return false; // not consumed
+        }
       } else if ( b == mButton3[ BTN_REMOVE ] ) {
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
@@ -2872,7 +2896,12 @@ public class DrawingActivity extends ItemDrawer
                 // Log.v("DistoX", "edit section line " ); // default azimuth = 0 clino = 0
                 // cross-section exists already
                 boolean h_section = PlotInfo.isProfile( mType ); // not really necessary
-                new DrawingLineSectionDialog( this, mApp, h_section, true, line, null, null, 0, 0 ).show();
+                String id = line.getOption( "-id" );
+                if ( id != null ) {
+                  new DrawingLineSectionDialog( this, mApp, h_section, true, id, line, null, null, 0, 0 ).show();
+                } else {
+                  TDLog.Error("edit section line with null id" );
+                }
               } else {
                 new DrawingLineDialog( this, line, sp.mPoint ).show();
               }
@@ -2928,7 +2957,7 @@ public class DrawingActivity extends ItemDrawer
                 deletePoint( (DrawingPointPath)p );
                 break;
               case DrawingPath.DRAWING_PATH_LINE:
-                deleteLine( (DrawingLinePath)p, name );
+                deleteLine( (DrawingLinePath)p );
                 break;
               case DrawingPath.DRAWING_PATH_AREA:
                 deleteArea( (DrawingAreaPath)p );
