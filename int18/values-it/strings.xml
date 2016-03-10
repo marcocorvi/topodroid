@@ -23,9 +23,12 @@
     <string name="memoryX310">DistoX X310</string>
     <string name="memory_data">Dati DistoX</string>
 
+    <!-- TODO string name="thp_user">user</string -->
     <string name="thp_label">testo</string>
     <!-- string name="thp_danger">pericolo</string -->
+    <!-- TODO string name="thl_user">user</string -->
     <string name="thl_wall">parete</string>
+    <!-- TODO string name="tha_user">user</string -->
     <string name="tha_water">acqua</string>
 
     <string name="make_walls">Pareti</string>
@@ -123,12 +126,13 @@
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
 
+
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Lettura memoria DistoX fallita</string>
     <string name="head_tail_store_failed">Memorizzazione memoria DistoX fallita</string>
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
-    <string name="illegal_data_value">Dati illegali</string>
+    <string name="illegal_data_value">Dati non corretti</string>
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -144,8 +148,7 @@
     <string name="loop_none">Nessun anello</string>
     <string name="long_lat">Long-Lat</string>
 
-    <string name="line_delete">Elimina linea</string>
-    <string name="flip_shots">Capovolgi battute</string>
+ 
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -224,6 +227,8 @@
     <string name="menu_about">INFO</string>
     <!-- OK string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNETTI</string>
+    <!-- string name="menu_attached">Connected</string -->
+    <!-- string name="menu_ready">Ready</string -->
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <string name="menu_display">DISPLAY</string>
@@ -248,8 +253,9 @@
     <string name="menu_stats">STATISTICHE</string>
     <string name="menu_survey">INFORMAZIONI</string>
     <string name="menu_sync">SINC</string>
-    <string name="menu_validate">CONVALIDA</string>
     <string name="menu_tdr2th2">DISEGNI TH2</string>
+    <string name="menu_validate">CONVALIDA</string>
+
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
@@ -263,7 +269,6 @@
     <string name="connected_already">Gia\' connesso</string>
 
     <string name="not_available">Bluetooth non disponibile</string>
-    <!-- string name="not_connected">Non connesso</string -->
     <string name="not_enabled">BT non attivo</string>
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap non valida</string>
@@ -325,7 +330,6 @@
     <string name="shot_reverse">inverso</string>
     <string name="shot_to">a</string>
 
-<!-- NOT USED -->
     <!-- UNUSED string name="make_surface">Surface exists. Replace it?</string -->
 
     <!-- UNUSED string name="sketch3d_new">New 3D sketch</string -->
@@ -462,19 +466,63 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importa</string>
 
+<!-- FIXME_SKETCH_3D -->    
+    <!-- FATO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
+    <!-- string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- FATO string name="title_sketch_shot">New shot</string -->
+    <!-- FATO string name="title_sketch_refs">View mode</string -->
+    <!-- string name="title_sketch_section_type">Sections type</string -->
+    <!-- string name="title_sketch_select">Select item</string -->
+
+    <!-- FATO string name="sketch_mode_single">Single shot</string -->
+    <!-- FATO string name="sketch_mode_ngbh">Nearby shots</string -->
+    <!-- FATO string name="sketch_mode_all">All shots</string -->
+    <!-- FATO string name="sketch_delete">Delete 3D model ?</string -->
+    <!-- FATO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
     <string name="length">Lunghezza [m]</string>
     <string name="azimuth">Azimut [deg]</string>
     <string name="clino">Inclinazione [deg]</string>
+
     <string name="orientation">orientamento</string>
     <string name="contents">contenuti</string>
     <string name="error_distribution">distribuzione degli errori</string>
     <string name="angle_distribution">distribuzione degli angoli</string>
+
+    <!-- string name="btn_head">head</string -->
+    <!-- string name="btn_stretch">Stretch</string -->
+    <!-- string name="btn_extrude">Extrude</string -->
+    <!-- string name="btn_erase">erase</string -->
+    <!-- string name="btn_cut">cut</string -->
+    <!-- string name="btn_vertical">Vertical</string -->
+    <!-- string name="btn_horizontal">Horizontal</string -->
+
+    <!-- select buttin labels -->
+    <!-- UNUSED string name="btn_section">Section</string -->
+    <!-- UNUSED string name="btn_step">Step</string -->
+    <!-- UNUSED string name="btn_shot">Shot</string -->
+    <!-- UNUSED string name="btn_join">Join</string -->
+
+    <!-- string name="button_redraw">Redraw</string -->
+    <!-- UNUSED string name="button_erase">Erase</string -->
+    <!-- string name="btn_surface">surface</string -->
+
+    <!-- UNUSED string name="station_next">NEXT</string -->
+    <!-- FATO string name="no_shot_between_stations">no_shot_between_stations</string -->
+    <!-- FATO string name="few_line_points">Line has too few points</string -->
+    <string name="line_delete">Elimina linea</string>
+    <string name="flip_shots">Capovolgi battute</string>
+
+    <!-- FATO string name="menu_head">HEAD</string -->
+    <!-- string name="menu_save_th2">SAVE TH2</string -->
+<!-- END_SKETCH_3D -->    
+
 
     <string name="help_help">Questo aiuto</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Misurare le distanze</string>
     
     <string name="help_coeff">Coefficienti della calibrazione</string>
+    <!-- FATO string name="help_continue">Continue drawing a line</string -->
     <string name="help_current_station">Capisaldi salvati</string>
     <string name="help_azimuth">Riferimento per "extend"</string>
     <string name="help_device">Finestra DistoX</string>
@@ -534,6 +582,7 @@
     <string name="help_manual_calibration">Strumenti di calibrazione manuale</string>
     <string name="help_note_plot">Edita le propertà dell\'oggetto</string>
     <!-- UNUSED string name="help_save">Salva le modifiche al rilievo/calibr.</string -->
+    <!-- FATO string name="help_save_calib">Save changes to calibration info</string -->
     <string name="help_export_survey">Esporta rilievo</string>
     <string name="help_loc">Localizzazione GPS</string>
     <string name="help_delete_survey">Elimina rilievo</string>
@@ -552,6 +601,22 @@
     <string name="help_cover">Distribuzione angolare dati calibrazione</string>
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
+<!-- FIXME_SKETCH_3D -->
+    <!-- string name="help_refs_model">View mode</string -->
+    <string name="help_one_model">Fit 3d model to view</string>
+    <string name="help_surface">Make surface</string>
+    <string name="help_save_model">Export 3D model</string>
+    <string name="help_trash_model">Delete 3D model</string>
+    <string name="help_head_model">Orient 3D model</string>
+    <!-- string name="help_erase_model">Erase region</string -->
+    <string name="help_cut_model">Cut region</string>
+    <string name="help_stretch_model">Stretch region</string>
+    <!-- string name="help_extrude_model">Extrude region</string -->
+    <string name="help_refine_center">Refine surface at triangle centers</string>
+    <string name="help_refine_sides">Refine surface at triangle sides</string>
+    <string name="help_refine_point">Refine surface at point</string>
+    <string name="help_refine_triangle">Refine surface al the long sides</string>
+  
 
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_calib">Calibrazioni</string>
@@ -571,6 +636,7 @@
     <string name="title_fixed_import">Importa punto fisso</string>
     <string name="title_fixed_gps">Punto fisso: GPS</string>
     <string name="title_fixed_add">Punto fisso: inserimento</string>
+    <!-- FATO string name="title_manual">TopoDroid User Manual</string -->
     <string name="title_mode">Modalità display</string>
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
@@ -672,11 +738,14 @@
   <string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI LINEA</string>
   <string name="pref_tool_point_title">STRUMENTI PUNTO</string>
   <string name="pref_location_title">IMPOSTAZIONI POSIZIONE</string>
+  <!-- FATO string name="pref_accuracy_title">ACCURACY</string -->
   <string name="pref_shot_data_title">IMPOSTAZIONI DATI POLIGONALE</string>
+  <!-- FATO string name="pref_shot_units_title">UNITS</string -->
   <string name="pref_cwd_title">DIRECTORY DI LAVORO</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
   <string name="pref_pt_color_map_title">Mappa di colori di PocketTopo</string>
+  <!-- FATO string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string -->
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
   <string name="pref_text_size_message">Dimensione testo liste</string>
@@ -886,6 +955,7 @@
   <string name="pref_log_bezier">Curve Bezier</string>
   <string name="pref_log_calib">Calibrazione</string>
   <string name="pref_log_comm">Comunicazione BT</string>
+  <!-- FATO string name="pref_log_csurvey">cSurvey</string -->
   <string name="pref_log_data">Dati</string>
   <string name="pref_log_db">Database</string>
   <string name="pref_log_debug">Debug</string>
@@ -899,8 +969,10 @@
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Disegni</string>
   <string name="pref_log_proto">Protocollo DistoX</string>
+  <!-- FATO string name="pref_log_ptopo">PocketTopo</string -->
   <string name="pref_log_sensor">Sensori</string>
   <string name="pref_log_shot">Tiri</string>
+  <!-- FATO string name="pref_log_sync">Cosurveying</string -->
   <string name="pref_log_survey">Rilievi</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unità</string>
@@ -910,6 +982,15 @@
   <!-- UNUSED string name="line_fine">fine</string -->
   <!-- UNUSED string name="line_normal">normale</string -->
   <!-- UNUSED string name="line_coarse">grossolana</string -->
+  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+  <!-- UNUSED string name="units_dd">degrees</string -->
+  <!-- UNUSED string name="units_grads">grads</string -->
+  <!-- UNUSED string name="units_meters">meters</string -->
+  <!-- UNUSED string name="units_feet">feet</string -->
+  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
+  <!-- UNUSED string name="alt_ortho">orthometric</string -->
+  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
+
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
@@ -922,5 +1003,27 @@
 \nTraduzione italiana: fabrizio.toso@fastwebnet.it
     </string>
 
+  <!-- FATO string name="firmware_title">Firmware Updater</string -->
+  <!-- FATO string name="firmware_file_title">Firmware Files</string -->
+  <!-- FATO string name="firmware_text">
+\n[1] Select either to upload a firmware or to dump the firmware to a file.
+\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
+\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
+\n[5] Tap the OK button.
+\n[6] Confirm to continue and wait till the process is done.
+\n[7] Turn off the DistoX2 with the CLR key.
+\n
+   </string -->
+
+   <!-- FATO string name="firmware_none">no firmware file</string -->
+   <!-- FATO string name="firmware_file">firmware file</string -->
+   <!-- FATO string name="firmware_file_exists">Existing firmware file</string -->
+   <!-- FATO string name="firmware_file_missing">Missing firmware file</string -->
+   <!-- FATO string name="ask_dump">Dump firmware?</string -->
+   <!-- FATO string name="ask_upload">Upload firmware?</string -->
+   <!-- FATO string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string -->
+   <!-- FATO string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string -->
+   <!-- FATO string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string -->
 
 </resources>
