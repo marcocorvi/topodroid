@@ -27,6 +27,8 @@ import java.util.TreeSet;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.HashMap;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -49,406 +51,468 @@ import android.util.Log;
 public class DrawingSurface extends SurfaceView
                             implements SurfaceHolder.Callback
 {
-    private Boolean _run;
-    boolean mSurfaceCreated = false;
-    protected DrawThread mDrawThread;
-    public boolean isDrawing = true;
-    public DrawingPath previewPath;
-    private SurfaceHolder mHolder; // canvas holder
-    private Context mContext;
-    private IZoomer mZoomer = null;
-    private AttributeSet mAttrs;
-    private int mWidth;            // canvas width
-    private int mHeight;           // canvas height
-    private long mType; 
+  static final int DRAWING_PLAN     = 1;
+  static final int DRAWING_PROFILE  = 2;
+  static final int DRAWING_SECTION  = 3;
+  static final int DRAWING_OVERVIEW = 4;
 
-    private DrawingCommandManager commandManager; // FIXME not private only to export DXF
-    DrawingCommandManager mCommandManager1; 
-    DrawingCommandManager mCommandManager2; 
 
-    ArrayList< String > mSplayStations; // stations where to show splays
+  private Boolean _run;
+  boolean mSurfaceCreated = false;
+  protected DrawThread mDrawThread;
+  public boolean isDrawing = true;
+  public DrawingPath previewPath;
+  private SurfaceHolder mHolder; // canvas holder
+  private Context mContext;
+  private IZoomer mZoomer = null;
+  private AttributeSet mAttrs;
+  private int mWidth;            // canvas width
+  private int mHeight;           // canvas height
+  private long mType; 
 
-    public int width()  { return mWidth; }
-    public int height() { return mHeight; }
+  static private DrawingCommandManager commandManager = null; 
 
-    // private Timer mTimer;
-    // private TimerTask mTask;
+  static DrawingCommandManager mCommandManager1 = null; 
+  static DrawingCommandManager mCommandManager2 = null; 
+  static DrawingCommandManager mCommandManager3 = null; 
 
-    boolean isSelectable() { return commandManager.isSelectable(); }
+  ArrayList< String > mSplayStations; // stations where to show splays
 
-    void setZoomer( IZoomer zoomer ) { mZoomer = zoomer; }
+  // -----------------------------------------------------
+  // MANAGER CACHE
 
-    public DrawingSurface(Context context, AttributeSet attrs) 
-    {
-      super(context, attrs);
-      mWidth = 0;
-      mHeight = 0;
+  static private HashMap<String, DrawingCommandManager> mCache = new HashMap<String, DrawingCommandManager>();
 
-      mDrawThread = null;
-      mContext = context;
-      mAttrs   = attrs;
-      mHolder = getHolder();
-      mHolder.addCallback(this);
-      mCommandManager1 = new DrawingCommandManager();
-      mCommandManager2 = new DrawingCommandManager();
+  static void clearCache() { mCache.clear(); }
+
+  static void addManagerToCache( String fullname ) 
+  { 
+    if ( commandManager != null ) mCache.put( fullname, commandManager );
+  }
+
+  // return true if saved manager can be used
+  boolean resetManager( int mode, String fullname )
+  {
+    boolean ret = false;
+    DrawingCommandManager manager = null;
+
+    // Log.v("DistoX", "cache size " + mCache.size() );
+
+    if ( mode == DRAWING_PLAN ) {
+      if ( fullname != null ) manager = mCache.get( fullname );
+      if ( manager == null ) {
+        mCommandManager1 = new DrawingCommandManager();
+      } else {
+        mCommandManager1 = manager;
+        mCommandManager1.setDisplayPoints( false );
+        ret = true;
+      }
       commandManager = mCommandManager1;
-      mSplayStations = new ArrayList<String>();
-
-      // setOnLongClickListener(new View.OnLongClickListener() 
-      //   {
-      //     public boolean onLongClick(View v)
-      //     {
-      //       Log.v( TopoDroidApp.TAG, "LONG CLICK!" );
-      //       return true;
-      //     }
-      //   }
-      // );
-    }
-
-    void setManager( long type ) 
-    {
-      mType = type;
-      // Log.v( "DistoX", " set manager type " + type );
-      if ( PlotInfo.isProfile( type ) ) {
-        commandManager = mCommandManager2;
-      } else if ( type == PlotInfo.PLOT_PLAN ) {
-        commandManager = mCommandManager1;
-      } else { // should never happen
-        commandManager = mCommandManager1;
-        mCommandManager2 = null;
-      }
-    }
-
-    void setDisplayPoints( boolean display ) 
-    { 
-      commandManager.setDisplayPoints( display );
-      if ( display ) {
+    } else if ( mode == DRAWING_PROFILE ) {
+      if ( fullname != null ) manager = mCache.get( fullname );
+      if ( manager == null ) {
+        mCommandManager2 = new DrawingCommandManager();
       } else {
-        commandManager.clearSelected();
+        mCommandManager2 = manager;
+        mCommandManager2.setDisplayPoints( false );
+        ret = true;
       }
-    }
-
-    int getNextAreaIndex() { return commandManager.getNextAreaIndex(); }
-
-    // void setScaleBar( float x0, float y0 ) 
-    // { 
-    //   commandManager.setScaleBar(x0,y0);
-    // }
-    
-    List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
-    {
-      return commandManager.getIntersectionShot(p1, p2);
-    }
-
-    // -----------------------------------------------------------
-
-    public void setDisplayMode( int mode ) { commandManager.setDisplayMode(mode); }
-
-    public int getDisplayMode( ) { return commandManager.getDisplayMode(); }
-
-    public void setTransform( float dx, float dy, float s )
-    {
-      commandManager.setTransform( dx, dy, s );
-    }
-
-    void splitLine( DrawingLinePath line, LinePoint lp ) { commandManager.splitLine( line, lp ); }
-
-    boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
-    { return commandManager.removeLinePoint(line, point, sp); }
-
-    void deletePath( DrawingPath path ) 
-    { 
-      isDrawing = true;
-      EraseCommand cmd = new EraseCommand();
-      commandManager.deletePath( path, cmd );
-      commandManager.addEraseCommand( cmd );
-    }
-
-    void sharpenLine( DrawingLinePath line ) { commandManager.sharpenLine( line ); }
-    void reduceLine( DrawingLinePath line ) { commandManager.reduceLine( line ); }
-    void closeLine( DrawingLinePath line ) { commandManager.closeLine( line ); }
-
-    int eraseAt( float x, float y, float zoom, EraseCommand cmd ) 
-    { return commandManager.eraseAt( x, y, zoom, cmd ); }
-    
-    void addEraseCommand( EraseCommand cmd )
-    {
-      isDrawing = true;
-      commandManager.addEraseCommand( cmd );
-    }
-    
-    void clearReferences( int type ) 
-    {
-      if ( PlotInfo.isProfile( type ) ) {
-        mCommandManager2.clearReferences();
+      commandManager = mCommandManager2;
+    } else {
+      if ( mCommandManager3 == null ) {
+        mCommandManager3 = new DrawingCommandManager();
       } else {
-        mCommandManager1.clearReferences();
+        mCommandManager3.clearDrawing();
+      }
+      commandManager = mCommandManager3;
+    }
+    return ret;
+  }
+
+  void setManager( int mode, int type )
+  {
+    mType = type;
+    // Log.v( "DistoX", " set manager type " + type );
+    if ( mode == DRAWING_PROFILE ) {
+      commandManager = mCommandManager2;
+    } else if ( mode == DRAWING_PLAN ) {
+      commandManager = mCommandManager1;
+    } else {
+      commandManager = mCommandManager3;
+    }
+  }
+
+
+  // -----------------------------------------------------
+
+  public int width()  { return mWidth; }
+  public int height() { return mHeight; }
+
+  // private Timer mTimer;
+  // private TimerTask mTask;
+
+  boolean isSelectable() { return commandManager != null && commandManager.isSelectable(); }
+
+  void setZoomer( IZoomer zoomer ) { mZoomer = zoomer; }
+
+  public DrawingSurface(Context context, AttributeSet attrs) 
+  {
+    super(context, attrs);
+    mWidth = 0;
+    mHeight = 0;
+
+    mDrawThread = null;
+    mContext = context;
+    mAttrs   = attrs;
+    mHolder = getHolder();
+    mHolder.addCallback(this);
+    // mCommandManager1 = new DrawingCommandManager();
+    // mCommandManager2 = new DrawingCommandManager();
+    commandManager = mCommandManager3;
+    mSplayStations = new ArrayList<String>();
+  }
+
+  // -------------------------------------------------------------------
+
+  void setDisplayPoints( boolean display ) 
+  { 
+    commandManager.setDisplayPoints( display );
+    if ( display ) {
+    } else {
+      commandManager.clearSelected();
+    }
+  }
+
+  int getNextAreaIndex() { return commandManager.getNextAreaIndex(); }
+
+  // void setScaleBar( float x0, float y0 ) 
+  // { 
+  //   commandManager.setScaleBar(x0,y0);
+  // }
+  
+  List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
+  {
+    return commandManager.getIntersectionShot(p1, p2);
+  }
+
+  // -----------------------------------------------------------
+
+  public void setDisplayMode( int mode ) { commandManager.setDisplayMode(mode); }
+
+  public int getDisplayMode( ) { return commandManager.getDisplayMode(); }
+
+  public void setTransform( float dx, float dy, float s )
+  {
+    commandManager.setTransform( dx, dy, s );
+  }
+
+  void splitLine( DrawingLinePath line, LinePoint lp ) { commandManager.splitLine( line, lp ); }
+
+  boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
+  { return commandManager.removeLinePoint(line, point, sp); }
+
+  void deletePath( DrawingPath path ) 
+  { 
+    isDrawing = true;
+    EraseCommand cmd = new EraseCommand();
+    commandManager.deletePath( path, cmd );
+    commandManager.addEraseCommand( cmd );
+  }
+
+  void sharpenLine( DrawingLinePath line ) { commandManager.sharpenLine( line ); }
+  void reduceLine( DrawingLinePath line ) { commandManager.reduceLine( line ); }
+  void closeLine( DrawingLinePath line ) { commandManager.closeLine( line ); }
+
+  int eraseAt( float x, float y, float zoom, EraseCommand cmd ) 
+  { return commandManager.eraseAt( x, y, zoom, cmd ); }
+  
+  void addEraseCommand( EraseCommand cmd )
+  {
+    isDrawing = true;
+    commandManager.addEraseCommand( cmd );
+  }
+  
+  void clearReferences( int type ) 
+  {
+    if ( PlotInfo.isProfile( type ) ) {
+      mCommandManager2.clearReferences();
+    } else if ( type == PlotInfo.PLOT_PLAN ) {
+      mCommandManager1.clearReferences();
+    } else {
+      mCommandManager3.clearReferences();
+    }
+  }
+
+  void flipProfile()
+  {
+    if ( mCommandManager2 == null ) return;
+    mCommandManager2.flipXAxis();
+  }
+
+  void refreshSurface()
+  {
+    // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
+    Canvas canvas = null;
+    try {
+      canvas = mHolder.lockCanvas();
+      // canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+      if ( canvas != null ) {
+        mWidth  = canvas.getWidth();
+        mHeight = canvas.getHeight();
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler, mSplayStations );
+        if ( previewPath != null ) previewPath.draw(canvas, null);
+      }
+    } finally {
+      if ( canvas != null ) {
+        mHolder.unlockCanvasAndPost( canvas );
       }
     }
+  }
 
-    void flipProfile()
+  private Handler previewDoneHandler = new Handler()
+  {
+    @Override
+    public void handleMessage(Message msg) {
+      isDrawing = false;
+    }
+  };
+
+  // void clearDrawing() { commandManager.clearDrawing(); }
+
+  class DrawThread extends  Thread
+  {
+    private SurfaceHolder mSurfaceHolder;
+
+    public DrawThread(SurfaceHolder surfaceHolder)
     {
-      if ( mCommandManager2 == null ) return;
-      mCommandManager2.flipXAxis();
+      mSurfaceHolder = surfaceHolder;
     }
 
-    void refreshSurface()
+    public void setRunning(boolean run)
     {
-      // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
-      Canvas canvas = null;
-      try {
-        canvas = mHolder.lockCanvas();
-        // canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        if ( canvas != null ) {
-          mWidth  = canvas.getWidth();
-          mHeight = canvas.getHeight();
-          canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-          commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler, mSplayStations );
-          if ( previewPath != null ) previewPath.draw(canvas, null);
+      _run = run;
+    }
+
+    @Override
+    public void run() 
+    {
+      while ( _run ) {
+        if ( isDrawing == true ) {
+          refreshSurface();
+        } else {
+          try {
+            // Log.v( TopoDroidApp.TAG, "drawing thread sleeps ..." );
+            sleep(100);
+          } catch ( InterruptedException e ) { }
         }
-      } finally {
-        if ( canvas != null ) {
-          mHolder.unlockCanvasAndPost( canvas );
-        }
       }
     }
+  }
 
-    private Handler previewDoneHandler = new Handler()
-    {
-      @Override
-      public void handleMessage(Message msg) {
-        isDrawing = false;
-      }
-    };
+  // called by DrawingActivity::computeReference
+  public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
+  {
+    // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
+    // FIXME STATION_XSECTION
+    // DO as when loaded
 
-    void clearDrawing() { commandManager.clearDrawing(); }
-
-    class DrawThread extends  Thread
-    {
-      private SurfaceHolder mSurfaceHolder;
-
-      public DrawThread(SurfaceHolder surfaceHolder)
-      {
-        mSurfaceHolder = surfaceHolder;
-      }
-
-      public void setRunning(boolean run)
-      {
-        _run = run;
-      }
-
-      @Override
-      public void run() 
-      {
-        while ( _run ) {
-          if ( isDrawing == true ) {
-            refreshSurface();
-          } else {
-            try {
-              // Log.v( TopoDroidApp.TAG, "drawing thread sleeps ..." );
-              sleep(100);
-            } catch ( InterruptedException e ) { }
-          }
-        }
-      }
-    }
-
-    // called by DrawingActivity::computeReference
-    public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
-    {
-      // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
-      // FIXME STATION_XSECTION
-      // DO as when loaded
-
-      DrawingStationName st = new DrawingStationName( num_st, x, y );
-      if ( num_st.mHidden == 1 ) {
-        st.setPaint( DrawingBrushPaths.fixedStationHiddenPaint );
-      } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
-        st.setPaint( DrawingBrushPaths.fixedStationBarrierPaint );
-      } else {
-        st.setPaint( DrawingBrushPaths.fixedStationPaint );
-      }
-      if ( xsections != null ) {
-        for ( PlotInfo plot : xsections ) {
-          if ( plot.start.equals( st.mName ) ) {
-            st.setXSection( plot.azimuth, plot.clino, mType );
-            break;
-          }
-        }
-      }
-      commandManager.addStation( st, selectable );
-      return st;
-    }
-
-    // called by DrawingActivity (for SECTION)
-    // note: not selectable
-    public DrawingStationName addDrawingStationName( String name, float x, float y )
-    {
-      // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
-      // NOTE No station_XSection in X-Sections
-      DrawingStationName st = new DrawingStationName( name, x, y );
+    DrawingStationName st = new DrawingStationName( num_st, x, y );
+    if ( num_st.mHidden == 1 ) {
+      st.setPaint( DrawingBrushPaths.fixedStationHiddenPaint );
+    } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
+      st.setPaint( DrawingBrushPaths.fixedStationBarrierPaint );
+    } else {
       st.setPaint( DrawingBrushPaths.fixedStationPaint );
-      commandManager.addStation( st, false );
-      return st;
     }
-
-    void resetFixedPaint( Paint paint )
-    {
-      mCommandManager1.resetFixedPaint( paint );
-      mCommandManager2.resetFixedPaint( paint );
-    }
-
-    // called by DarwingActivity::addFixedLine
-    public void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
-    {
-      if ( splay ) {
-        commandManager.addSplayPath( path, selectable );
-      } else {
-        commandManager.addLegPath( path, selectable );
-      }
-      // commandManager.addFixedPath( path, selectable );
-    }
-
-    public void setNorthPath( DrawingPath path ) { commandManager.setNorth( path ); }
-
-    public void setFirstReference( DrawingPath path ) { commandManager.setFirstReference( path ); }
-
-    public void setSecondReference( DrawingPath path ) { commandManager.setSecondReference( path ); }
-
-
-    // k : grid type 1, 10, 100
-    public void addGridPath( DrawingPath path, int k ) { commandManager.addGrid( path, k ); }
-
-    public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
-    
-    // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
-
-    public boolean hasMoreRedo() { return commandManager.hasMoreRedo(); }
-
-    public void redo()
-    {
-      isDrawing = true;
-      commandManager.redo();
-    }
-
-    public void undo()
-    {
-      isDrawing = true;
-      commandManager.undo();
-    }
-
-    public boolean hasMoreUndo() { return commandManager.hasMoreUndo(); }
-
-    // public boolean hasStationName( String name ) { return commandManager.hasUserStation( name ); }
-
-    DrawingStationPath getStationPath( String name ) { return commandManager.getUserStation( name ); }
-
-    void addDrawingStationPath( DrawingStationPath path ) { commandManager.addUserStation( path ); }
-    void removeDrawingStationPath( DrawingStationPath path ) { commandManager.removeUserStation( path ); }
-
-    public Bitmap getBitmap( long type )
-    {
-      if ( PlotInfo.isProfile( type ) ) {
-        return mCommandManager2.getBitmap();
-      }
-      return mCommandManager1.getBitmap();
-    }
-
-    // @param lp   point
-    // @param type line type
-    DrawingLinePath getLineToContinue( LinePoint lp, int type ) { return commandManager.getLineToContinue( lp, type ); }
- 
-    /** add the points of the first line to the second line
-     */
-    void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { commandManager.addLineToLine( line, line0 ); }
-
-    // ---------------------------------------------------------------------
-    // SELECT - EDIT
-
-    // public SelectionPoint getPointAt( float x, float y ) { return commandManager.getPointAt( x, y ); }
-    // public SelectionPoint getLineAt( float x, float y ) { return commandManager.getLineAt( x, y ); }
-    // public SelectionPoint getAreaAt( float x, float y ) { return commandManager.getAreaAt( x, y ); }
-    // public SelectionPoint getShotAt( float x, float y ) { return commandManager.getShotAt( x, y ); }
-
-    // x,y canvas coords
-    DrawingStationName getStationAt( float x, float y ) { return commandManager.getStationAt( x, y ); }
-
-    SelectionSet getItemsAt( float x, float y, float zoom ) { return commandManager.getItemsAt( x, y, zoom ); }
-
-    boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
-    
-    int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }
-
-    void splitHotItem() { commandManager.splitHotItem(); }
-    
-    SelectionPoint hotItem() { return commandManager.hotItem(); }
-
-    void shiftHotItem( float dx, float dy ) { commandManager.shiftHotItem( dx, dy ); }
-
-    SelectionPoint nextHotItem() { return commandManager.nextHotItem(); }
-
-    SelectionPoint prevHotItem() { return commandManager.prevHotItem(); }
-
-    void clearSelected() { commandManager.clearSelected(); }
-
-    void shiftDrawing( float x, float y ) { commandManager.shiftDrawing( x, y ); }
-
-    // ---------------------------------------------------------------------
-
-    public void surfaceChanged(SurfaceHolder mHolder, int format, int width,  int height) 
-    {
-      // TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
-      // TODO Auto-generated method stub
-    }
-
-
-    public void surfaceCreated(SurfaceHolder mHolder) 
-    {
-      TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
-      if ( mDrawThread == null ) {
-        mDrawThread = new DrawThread(mHolder);
-      }
-      mDrawThread.setRunning(true);
-      mDrawThread.start();
-      mSurfaceCreated = true;
-    }
-
-    public void surfaceDestroyed(SurfaceHolder mHolder) 
-    {
-      mSurfaceCreated = false;
-      TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
-      boolean retry = true;
-      mDrawThread.setRunning(false);
-      while (retry) {
-        try {
-          mDrawThread.join();
-          retry = false;
-        } catch (InterruptedException e) {
-          // we will try it again and again...
+    if ( xsections != null ) {
+      for ( PlotInfo plot : xsections ) {
+        if ( plot.start.equals( st.mName ) ) {
+          st.setXSection( plot.azimuth, plot.clino, mType );
+          break;
         }
       }
-      mDrawThread = null;
     }
+    commandManager.addStation( st, selectable );
+    return st;
+  }
 
-    public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name, int proj_dir )
-    {
-      // Log.v("DistoX", sketch_name + " export th2 type " + type );
-      if ( PlotInfo.isProfile( type ) ) {
-        mCommandManager2.exportTherion( type, out, sketch_name, plot_name, proj_dir );
-      } else {
-        mCommandManager1.exportTherion( type, out, sketch_name, plot_name, proj_dir );
+  // called by DrawingActivity (for SECTION)
+  // note: not selectable
+  public DrawingStationName addDrawingStationName( String name, float x, float y )
+  {
+    // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
+    // NOTE No station_XSection in X-Sections
+    DrawingStationName st = new DrawingStationName( name, x, y );
+    st.setPaint( DrawingBrushPaths.fixedStationPaint );
+    commandManager.addStation( st, false );
+    return st;
+  }
+
+  void resetFixedPaint( Paint paint )
+  {
+    mCommandManager1.resetFixedPaint( paint );
+    mCommandManager2.resetFixedPaint( paint );
+  }
+
+  // called by DarwingActivity::addFixedLine
+  public void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
+  {
+    if ( splay ) {
+      commandManager.addSplayPath( path, selectable );
+    } else {
+      commandManager.addLegPath( path, selectable );
+    }
+    // commandManager.addFixedPath( path, selectable );
+  }
+
+  public void setNorthPath( DrawingPath path ) { commandManager.setNorth( path ); }
+
+  public void setFirstReference( DrawingPath path ) { commandManager.setFirstReference( path ); }
+
+  public void setSecondReference( DrawingPath path ) { commandManager.setSecondReference( path ); }
+
+
+  // k : grid type 1, 10, 100
+  public void addGridPath( DrawingPath path, int k ) { commandManager.addGrid( path, k ); }
+
+  public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
+  
+  // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
+
+  public boolean hasMoreRedo() { return commandManager.hasMoreRedo(); }
+
+  public void redo()
+  {
+    isDrawing = true;
+    commandManager.redo();
+  }
+
+  public void undo()
+  {
+    isDrawing = true;
+    commandManager.undo();
+  }
+
+  public boolean hasMoreUndo() { return commandManager.hasMoreUndo(); }
+
+  // public boolean hasStationName( String name ) { return commandManager.hasUserStation( name ); }
+
+  DrawingStationPath getStationPath( String name ) { return commandManager.getUserStation( name ); }
+
+  void addDrawingStationPath( DrawingStationPath path ) { commandManager.addUserStation( path ); }
+  void removeDrawingStationPath( DrawingStationPath path ) { commandManager.removeUserStation( path ); }
+
+  public Bitmap getBitmap( long type )
+  {
+    if ( PlotInfo.isProfile( type ) ) {
+      return mCommandManager2.getBitmap();
+    } else if ( type == PlotInfo.PLOT_PLAN ) {
+      return mCommandManager1.getBitmap();
+    } else {
+      return mCommandManager3.getBitmap();
+    }
+  }
+
+  // @param lp   point
+  // @param type line type
+  DrawingLinePath getLineToContinue( LinePoint lp, int type ) { return commandManager.getLineToContinue( lp, type ); }
+ 
+  /** add the points of the first line to the second line
+   */
+  void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { commandManager.addLineToLine( line, line0 ); }
+
+  // ---------------------------------------------------------------------
+  // SELECT - EDIT
+
+  // public SelectionPoint getPointAt( float x, float y ) { return commandManager.getPointAt( x, y ); }
+  // public SelectionPoint getLineAt( float x, float y ) { return commandManager.getLineAt( x, y ); }
+  // public SelectionPoint getAreaAt( float x, float y ) { return commandManager.getAreaAt( x, y ); }
+  // public SelectionPoint getShotAt( float x, float y ) { return commandManager.getShotAt( x, y ); }
+
+  // x,y canvas coords
+  DrawingStationName getStationAt( float x, float y ) { return commandManager.getStationAt( x, y ); }
+
+  SelectionSet getItemsAt( float x, float y, float zoom ) { return commandManager.getItemsAt( x, y, zoom ); }
+
+  boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
+  
+  int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }
+
+  void splitHotItem() { commandManager.splitHotItem(); }
+  
+  SelectionPoint hotItem() { return commandManager.hotItem(); }
+
+  void shiftHotItem( float dx, float dy ) { commandManager.shiftHotItem( dx, dy ); }
+
+  SelectionPoint nextHotItem() { return commandManager.nextHotItem(); }
+
+  SelectionPoint prevHotItem() { return commandManager.prevHotItem(); }
+
+  void clearSelected() { commandManager.clearSelected(); }
+
+  void shiftDrawing( float x, float y ) { commandManager.shiftDrawing( x, y ); }
+
+  // ---------------------------------------------------------------------
+
+  public void surfaceChanged(SurfaceHolder mHolder, int format, int width,  int height) 
+  {
+    // TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
+    // TODO Auto-generated method stub
+  }
+
+
+  public void surfaceCreated(SurfaceHolder mHolder) 
+  {
+    TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
+    if ( mDrawThread == null ) {
+      mDrawThread = new DrawThread(mHolder);
+    }
+    mDrawThread.setRunning(true);
+    mDrawThread.start();
+    mSurfaceCreated = true;
+  }
+
+  public void surfaceDestroyed(SurfaceHolder mHolder) 
+  {
+    mSurfaceCreated = false;
+    TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
+    boolean retry = true;
+    mDrawThread.setRunning(false);
+    while (retry) {
+      try {
+        mDrawThread.join();
+        retry = false;
+      } catch (InterruptedException e) {
+        // we will try it again and again...
       }
     }
+    mDrawThread = null;
+  }
 
-    public void exportDataStream( int type, DataOutputStream dos, String sketch_name, int proj_dir )
-    {
-      // Log.v("DistoX", sketch_name + " export stream type " + type );
-      if ( PlotInfo.isProfile( type ) ) {
-        mCommandManager2.exportDataStream( type, dos, sketch_name, proj_dir );
-      } else {
-        mCommandManager1.exportDataStream( type, dos, sketch_name, 0 );
-      }
+  public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name, int proj_dir )
+  {
+    // Log.v("DistoX", sketch_name + " export th2 type " + type );
+    if ( PlotInfo.isProfile( type ) ) {
+      mCommandManager2.exportTherion( type, out, sketch_name, plot_name, proj_dir );
+    } else if ( type == PlotInfo.PLOT_PLAN ) {
+      mCommandManager1.exportTherion( type, out, sketch_name, plot_name, proj_dir );
+    } else {
+      mCommandManager3.exportTherion( type, out, sketch_name, plot_name, proj_dir );
     }
+  }
+
+  public void exportDataStream( int type, DataOutputStream dos, String sketch_name, int proj_dir )
+  {
+    // Log.v("DistoX", sketch_name + " export stream type " + type );
+    if ( PlotInfo.isProfile( type ) ) {
+      mCommandManager2.exportDataStream( type, dos, sketch_name, proj_dir );
+    } else if ( type == PlotInfo.PLOT_PLAN ) {
+      mCommandManager1.exportDataStream( type, dos, sketch_name, 0 );
+    } else {
+      mCommandManager3.exportDataStream( type, dos, sketch_name, 0 );
+    }
+  }
 
   private SymbolsPalette preparePalette()
   {
@@ -472,12 +536,14 @@ public class DrawingSurface extends SurfaceView
     return palette;
   }
 
+  // -------------------------------------------------------------------
+  // LOAD
+
   // called by OverviewActivity
   // @pre th2 != null
-  public boolean loadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  public boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
-    commandManager = mCommandManager1;
     if ( (new File(th2)).exists() ) {
       return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
     }
@@ -486,10 +552,9 @@ public class DrawingSurface extends SurfaceView
 
   // called by OverviewActivity
   // @pre tdr != null
-  public boolean loadDataStream( String tdr, String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
+  public boolean addloadDataStream( String tdr, String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
-    commandManager = mCommandManager1;
     if ( (new File(tdr)).exists() ) {
       return DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, missingSymbols, localPalette, null, false );
     } else if ( th2 != null && (new File(th2)).exists() ) {
@@ -499,23 +564,11 @@ public class DrawingSurface extends SurfaceView
   }
 
   // @note th21 and th22 can be null
-  public boolean loadTherion( String th21, String th22, SymbolsPalette missingSymbols )
+  public boolean modeloadTherion( String th21, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
-    boolean ret = true;
-    if ( th21 != null ) {
-      commandManager = mCommandManager1;
-      commandManager.clearSketchItems();
-      ret = ret && DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
-    }
-    if ( th22 != null ) {
-      commandManager = mCommandManager2;
-      commandManager.clearSketchItems();
-      ret = ret && DrawingIO.doLoadTherion( this, th22, 0, 0, missingSymbols, localPalette );
-    }
-    commandManager = mCommandManager1;
-    return ret;
+    return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
   }
 
   // FIXME 
@@ -524,33 +577,22 @@ public class DrawingSurface extends SurfaceView
   // @note th21 and th22 can be null, 
   // @note th21 is not used if tdr1 == null
   // @note th22 is not used if tdr2 == null
-  public boolean loadDataStream( String tdr1, String tdr2, String th21, String th22, SymbolsPalette missingSymbols )
+  public boolean modeloadDataStream( String tdr1, String th21, SymbolsPalette missingSymbols )
   {
     SymbolsPalette localPalette = preparePalette();
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
-    boolean ret = true;
     if ( tdr1 != null ) {
-      commandManager = mCommandManager1;
-      commandManager.clearSketchItems();
       if ( (new File( tdr1 )).exists() ) {
-        ret = ret && DrawingIO.doLoadDataStream( this, tdr1, 0, 0, missingSymbols, localPalette, null, false );
+        return DrawingIO.doLoadDataStream( this, tdr1, 0, 0, missingSymbols, localPalette, null, false );
       } else if ( th21 != null && (new File(th21)).exists() ) {
-        ret = ret && DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
+        return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
       }
     }
-    if ( tdr2 != null ) {
-      commandManager = mCommandManager2;
-      commandManager.clearSketchItems();
-      if ( (new File( tdr2 )).exists() ) {
-        ret = ret && DrawingIO.doLoadDataStream( this, tdr2, 0, 0, missingSymbols, localPalette, null, false );
-      } else if ( th22 != null && (new File(th22)).exists() ) {
-        ret = ret && DrawingIO.doLoadTherion( this, th22, 0, 0, missingSymbols, localPalette );
-      }
-    }
-    commandManager = mCommandManager1;
-    return ret;
+    return true;
   }
 
+  // -----------------------------------------------------------------------------
+  // EXPORT
 
   void exportAsCsx( PrintWriter pw, long type )
   {
@@ -559,7 +601,7 @@ public class DrawingSurface extends SurfaceView
       mCommandManager2.exportAsCsx( pw );
     } else if ( type == PlotInfo.PLOT_PLAN ) {
       mCommandManager1.exportAsCsx( pw );
-    } else { // should never happen
+    } else { // should never happen, but it happens for X-Sections
       pw.format("    <layers>\n");
       pw.format("      <layer name=\"Base\" type=\"0\">\n");
       pw.format("         <items />\n");

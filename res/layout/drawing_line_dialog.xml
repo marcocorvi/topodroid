@@ -7,11 +7,11 @@
     android:paddingRight="6dp"
     android:paddingBottom="3dp">
    					  
-    <!-- TextView android:id="@+id/line_type"
+    <Spinner android:id="@+id/line_type"
       android:layout_marginBottom="2dp"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      / -->
+      />
 
     <EditText android:id="@+id/line_options"
       android:layout_width="fill_parent" 

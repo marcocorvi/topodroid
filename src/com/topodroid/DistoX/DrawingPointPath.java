@@ -117,10 +117,10 @@ public class DrawingPointPath extends DrawingPath
   {
     cx = x;
     cy = y;
-    mBBox.left   = x; 
-    mBBox.right  = x+1;
-    mBBox.top    = y;
-    mBBox.bottom = y+1;
+    left   = x; 
+    right  = x+1;
+    top    = y;
+    bottom = y+1;
   }
 
   @Override
@@ -129,10 +129,10 @@ public class DrawingPointPath extends DrawingPath
     cx += dx;
     cy += dy;
     mPath.offset( dx, dy );
-    mBBox.left   += dx;
-    mBBox.right  += dx;
-    mBBox.top    += dy;
-    mBBox.bottom += dy;
+    left   += dx;
+    right  += dx;
+    top    += dy;
+    bottom += dy;
   }
 
   @Override
@@ -145,10 +145,10 @@ public class DrawingPointPath extends DrawingPath
     // cx += dx;
     // cy += dy;
     // mPath.offset( dx, dy );
-    // mBBox.left   += dx;
-    // mBBox.right  += dx;
-    // mBBox.top    += dy;
-    // mBBox.bottom += dy;
+    // left   += dx;
+    // right  += dx;
+    // top    += dy;
+    // bottom += dy;
   }
 
 

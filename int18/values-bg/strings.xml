@@ -896,6 +896,8 @@
   <string name="pref_recent_nr_summary">Брой показвани последни инструменти в прозореца</string>
   <string name="pref_area_border_title">Видима граница на площ</string> 
   <string name="pref_area_border_summary">Дали линията "граница" на площ да е видима</string>
+  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
+  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
   <string name="pref_cont_join_title">Свързване на линии при продължаване</string>
   <string name="pref_cont_join_summary">Опцията "продължаване" на линия свързва еднакви линии</string>
 

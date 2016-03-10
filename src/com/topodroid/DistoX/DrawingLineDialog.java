@@ -22,18 +22,24 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 public class DrawingLineDialog extends MyDialog
-                               implements View.OnClickListener
+                               implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
   private DrawingLinePath mLine;
   private DrawingActivity mParent;
   private LinePoint mPoint;
+  private int mType;
 
-  // private TextView mTVtype;
+  private Spinner mETtype;
   private EditText mEToptions;
  
   private CheckBox mBtnOutlineOut;
@@ -53,6 +59,7 @@ public class DrawingLineDialog extends MyDialog
     mParent  = context;
     mLine  = line;
     mPoint = lp;
+    mType  = mLine.mLineType;
   }
 
 // -------------------------------------------------------------------
@@ -65,10 +72,14 @@ public class DrawingLineDialog extends MyDialog
                                   DrawingBrushPaths.mLineLib.getSymbolName( mLine.mLineType ) );
     initLayout( R.layout.drawing_line_dialog, title );
 
-    // mTVtype = (TextView) findViewById( R.id.line_type );
-    mEToptions = (EditText) findViewById( R.id.line_options );
+    mETtype = (Spinner) findViewById( R.id.line_type );
+    // mETtype.setText( DrawingBrushPaths.mLineLib.getSymbolThName( mLine.mLineType ) );
+    ArrayAdapter adapter = new ArrayAdapter<String>( mContext, R.layout.menu, DrawingBrushPaths.mLineLib.getSymbolNames() );
+    mETtype.setAdapter( adapter );
+    mETtype.setSelection( mType );
+    mETtype.setOnItemSelectedListener( this );
 
-    // mTVtype.setText( DrawingBrushPaths.mLineLib.getSymbolThName( mLine.mLineType ) );
+    mEToptions = (EditText) findViewById( R.id.line_options );
     mEToptions.setText( mLine.getOptionString() );
 
     mBtnOutlineOut  = (CheckBox) findViewById( R.id.line_outline_out );
@@ -109,6 +120,13 @@ public class DrawingLineDialog extends MyDialog
     layout3.addView( mBtnClose, lp );
   }
 
+  @Override
+  public void onItemSelected( AdapterView av, View v, int pos, long id ) { mType = pos; }
+
+  @Override
+  public void onNothingSelected( AdapterView av ) { mType = mLine.mLineType; }
+
+  @Override
   public void onClick(View v) 
   {
     Button b = (Button)v;
@@ -122,6 +140,8 @@ public class DrawingLineDialog extends MyDialog
       return;
     
     } else if ( b == mBtnOk ) {
+      if ( mType != mLine.mLineType ) mLine.setLineType( mType );
+
       if ( mEToptions.getText() != null ) {
         String options = mEToptions.getText().toString().trim();
         if ( options.length() > 0 ) mLine.setOptions( options );

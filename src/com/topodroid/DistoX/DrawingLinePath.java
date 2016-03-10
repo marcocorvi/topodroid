@@ -91,7 +91,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       mX = x + dis.readFloat();
       mY = y + dis.readFloat();
       has_cp = dis.read(); // this is 0
-      ret.addStartPoint( mX, mY );
+      ret.addStartPointNoPath( mX, mY );
       for ( int k=1; k<npt; ++k ) {
         mX = x + dis.readFloat();
         mY = y + dis.readFloat();
@@ -101,9 +101,9 @@ public class DrawingLinePath extends DrawingPointLinePath
           mY1 = y + dis.readFloat();
           mX2 = x + dis.readFloat();
           mY2 = y + dis.readFloat();
-          ret.addPoint3( mX1, mY1, mX2, mY2, mX, mY );
+          ret.addPoint3NoPath( mX1, mY1, mX2, mY2, mX, mY );
         } else {
-          ret.addPoint( mX, mY );
+          ret.addPointNoPath( mX, mY );
         }
       }
       if ( closed ) {
@@ -225,6 +225,12 @@ public class DrawingLinePath extends DrawingPointLinePath
   boolean isReversed() { return mReversed; }
 
   public int lineType() { return mLineType; }
+
+  void setLineType( int type )
+  {
+    mLineType = type;
+    setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+  }
 
   @Override
   public void toCsurvey( PrintWriter pw )

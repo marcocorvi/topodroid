@@ -893,6 +893,8 @@
   <!-- TODO string name="pref_recent_nr_summary">Number of the most recent tools in the item picker</string -->
   <!-- TODO string name="pref_area_border_title">Area border visibility</string -->
   <!-- TODO string name="pref_area_border_summary">Area border default visibility</string -->
+  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
+  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
   <!-- TODO string name="pref_cont_join_title">Join continuation</string -->
   <!-- TODO string name="pref_cont_join_summary">Line continuation joins lines</string -->
 

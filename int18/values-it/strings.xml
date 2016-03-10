@@ -831,6 +831,8 @@
   <string name="pref_recent_nr_summary">Numero di strumenti recenti nel raccoglitore</string>
   <string name="pref_area_border_title">Visibilità bordi area</string> 
   <string name="pref_area_border_summary">Visibilità di default dei bordi di una area</string>
+  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
+  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
   <string name="pref_cont_join_title">Continuazione Unione</string>
   <string name="pref_cont_join_summary">Continuazione di linea unisce linee</string>
 

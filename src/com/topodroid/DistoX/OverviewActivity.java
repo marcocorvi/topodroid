@@ -55,10 +55,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -256,8 +254,7 @@ public class OverviewActivity extends ItemDrawer
     // Log.v("DistoX", "Overview compute reference. Type " + type );
     // FIXME_OVER
     // mOverviewSurface.clearReferences( type );
-    // mOverviewSurface.setManager( type );
-    mOverviewSurface.setManager( PlotInfo.PLOT_PLAN ); // MUST use first commandManager
+    mOverviewSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
 
     if ( type == PlotInfo.PLOT_PLAN ) {
       DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(),
@@ -523,6 +520,8 @@ public class OverviewActivity extends ItemDrawer
 
       NumStation mStartStation = null;
 
+      mOverviewSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null );
+
       for ( int k=0; k<plots.size(); ++k ) {
         PlotInfo plot = plots.get(k);
         // Log.v( "DistoX", "plot " + plot.name );
@@ -557,17 +556,15 @@ public class OverviewActivity extends ItemDrawer
         // now try to load drawings from therion file
         String fullName = mApp.mySurvey + "-" + plot.name;
         TDLog.Log( TDLog.LOG_DEBUG, "load th2 file " + fullName );
-        // Log.v("DistoX", "Overview load file " + fullName );
 
         String th2 = TDPath.getTh2FileWithExt( fullName );
         if ( TDSetting.mBinaryTh2 ) {
           String tdr = TDPath.getTdrFileWithExt( fullName );
           // FIXME to check
-          mOverviewSurface.loadDataStream( tdr, th2, xdelta, ydelta, null );
+          mOverviewSurface.addloadDataStream( tdr, th2, xdelta, ydelta, null );
         } else {
-          // FIXME_OVER 
-          // N.B. this loads the drawing on DrawingSurface.mCommandManager1
-          mOverviewSurface.loadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
+          // FIXME_OVER N.B. this loads the drawing on DrawingSurface.mCommandManager3
+          mOverviewSurface.addloadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
         }
       }
 
@@ -856,15 +853,15 @@ public class OverviewActivity extends ItemDrawer
         // mPid  = mPid2;
         mType = PlotInfo.mPlot2.type; 
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
-        mOverviewSurface.setManager( mType );
+        mOverviewSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType ); 
         resetReference( mPlot2 );
-      } else if ( mType == PlotInfo.PLOT_EXTENDED ) {
+      } else if ( mType == PlotInfo.PLOT_EXTENDED ) { // PROJECTED not supported on overview
         // saveReference( mPlot2, mPid2 );
         // mPid  = mPid1;
         // mName = mName1;
         mType = mPlot1.type;
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
-        mOverviewSurface.setManager( mType );
+        mOverviewSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
         resetReference( mPlot1 );
       }
     }

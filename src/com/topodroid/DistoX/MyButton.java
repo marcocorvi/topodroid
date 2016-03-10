@@ -22,6 +22,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
+// import android.util.SparseArray;
 import android.util.Log;
 
 public class MyButton extends Button
@@ -34,6 +35,10 @@ public class MyButton extends Button
   int mSize;
   float mX, mY;
   long mMillis;
+  
+  // using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
+  // static SparseArray<BitmapDrawable> mCache = new SparseArray<BitmapDrawable>();
+  // static void clearCache() { mCache.clear(); }
 
   public MyButton( Context context )
   {
@@ -53,7 +58,7 @@ public class MyButton extends Button
     mSize = size;
     mClick = click;
     mLongClick = null;
-        
+
     mBitmap  = getButtonBackground2( mContext, size, res_id );
     // mBitmap2 = ( res_id2 > 0 )? getButtonBackground( mContext, size, res_id2 ) : null;
     setBackgroundDrawable( mBitmap );
@@ -88,6 +93,13 @@ public class MyButton extends Button
 
   private BitmapDrawable getButtonBackground2( Context c, int size, int res_id )
   {
+    BitmapDrawable ret;
+    // ret = mCache.get( res_id );
+    // if ( ret != null ) {
+    //   mBitmap2 = mCache.get( -res_id );
+    //   return ret;
+    // }
+        
     Bitmap bm1 = BitmapFactory.decodeResource( c.getResources(), res_id );
     Bitmap bmx = Bitmap.createScaledBitmap( bm1, size, size, false );
     int w = bmx.getWidth();
@@ -98,16 +110,21 @@ public class MyButton extends Button
     Bitmap bmy = Bitmap.createBitmap( pxl, 0, w, w, h, Bitmap.Config.ARGB_8888 );
     mBitmap2 = new BitmapDrawable( c.getResources(), bmy );
 
-    BitmapDrawable bm2 = new BitmapDrawable( c.getResources(), bmx );
-    return bm2;
+    ret = new BitmapDrawable( c.getResources(), bmx );
+    // mCache.append( -res_id, mBitmap2 );
+    // mCache.append( res_id, ret );
+    return ret;
   }
-
 
   static BitmapDrawable getButtonBackground( Context c, int size, int res_id )
   {
+    BitmapDrawable ret;
+    // ret = mCache.get( res_id );
+    // if ( ret != null ) return ret;
     Bitmap bm1 = BitmapFactory.decodeResource( c.getResources(), res_id );
-    BitmapDrawable bm2 = new BitmapDrawable( c.getResources(), Bitmap.createScaledBitmap( bm1, size, size, false ) );
-    return bm2;
+    ret = new BitmapDrawable( c.getResources(), Bitmap.createScaledBitmap( bm1, size, size, false ) );
+    // mCache.append( res_id, ret );
+    return ret;
   }
 
   static void setButtonBackground( Context c, Button b, int size, int res_id )

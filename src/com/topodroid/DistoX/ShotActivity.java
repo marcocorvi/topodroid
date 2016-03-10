@@ -892,6 +892,7 @@ public class ShotActivity extends Activity
     if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
+      DrawingSurface.clearCache();
       super.onBackPressed();
       return;
     }

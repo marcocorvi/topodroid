@@ -84,14 +84,15 @@ class TDSetting
     "DISTOX_STATION_SIZE",        // 46
     "DISTOX_LABEL_SIZE",          // 47
     "DISTOX_LINE_THICKNESS",      // 48
+    "DISTOX_AUTO_SECTION_PT",     // 49
 
-    "DISTOX_SHOT_TIMER",          // 49 // bearing-clino timer
-    "DISTOX_BEEP_VOLUME",         // 50
-    "DISTOX_LEG_SHOTS",           // 51 nr. of shots to make a leg
+    "DISTOX_SHOT_TIMER",          // 50 // bearing-clino timer
+    "DISTOX_BEEP_VOLUME",         // 51
+    "DISTOX_LEG_SHOTS",           // 52 nr. of shots to make a leg
 
-    "DISTOX_SKETCH_LINE_STEP",    // 52
-    "DISTOX_DELTA_EXTRUDE",       // 53
-    "DISTOX_COMPASS_READINGS",    // 54
+    "DISTOX_SKETCH_LINE_STEP",    // 53
+    "DISTOX_DELTA_EXTRUDE",       // 54
+    "DISTOX_COMPASS_READINGS",    // 55
 
     "DISTOX_SPLAY_EXTEND",        // 55 whether to set extend to splay shots
     "DISTOX_BITMAP_SCALE",        // 56
@@ -326,6 +327,7 @@ class TDSetting
   static float mLabelSize      = 24;   // size of labels [pt]
   static float mFixedThickness = 1;    // width of fixed lines
   static float mLineThickness  = 1;    // witdh of drawing lines
+  static boolean mAutoSectionPt = false;
   static float mDotRadius      = 5;
   static float mArrowLength    = 8;
 
@@ -591,6 +593,7 @@ class TDSetting
     mStationSize   = tryFloat( prefs, key[k++], "20" );             // DISTOX_STATION_SIZE
     mLabelSize     = tryFloat( prefs, key[k++], "24" );             // DISTOX_LABEL_SIZE
     mLineThickness = tryFloat( prefs, key[k++], "1"  );             // DISTOX_LINE_THICKNESS
+    mAutoSectionPt = prefs.getBoolean( key[k++], false );           // DISTOX_AUTO_SECTION_PT
 
     mTimerCount    = tryInt(   prefs, key[k++], "10" );             // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs, key[k++], "50" );             // DISTOX_BEEP_VOLUME
@@ -848,13 +851,15 @@ class TDSetting
           DrawingBrushPaths.reloadLineLibrary( app.getResources() );
         }
       } catch ( NumberFormatException e ) { }
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mAutoSectionPt = prefs.getBoolean( k, false ); // DISTOX_AUTO_SECTION_PT
 
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mTimerCount       = tryInt( prefs, k, "10" );        // DISTOX_SHOT_TIMER
+      mTimerCount       = tryInt( prefs, k, "10" );  // DISTOX_SHOT_TIMER
     } else if ( k.equals( key[ nk++ ] ) ) {
       mBeepVolume       = tryInt( prefs, k, "50" );  // DISTOX_BEEP_VOLUME
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mMinNrLegShots    = tryInt( prefs, k, "3" ); // DISTOX_LEG_SHOTS (choice)
+      mMinNrLegShots    = tryInt( prefs, k, "3" );   // DISTOX_LEG_SHOTS (choice)
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSketchSideSize = tryFloat( prefs, k, "0.5" );  // 0.5 meter // DISTOX_SKETCH_LINE_STEP

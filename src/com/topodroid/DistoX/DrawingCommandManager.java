@@ -197,18 +197,68 @@ public class DrawingCommandManager
     mGridStack1   = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mGridStack10  = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mGridStack100 = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mLegsStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
-    mSplaysStack   = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mLegsStack    = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    mSplaysStack  = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mCurrentStack = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
     mUserStations = Collections.synchronizedList( new ArrayList<DrawingStationPath>());
     mRedoStack    = Collections.synchronizedList(new ArrayList<ICanvasCommand>());
-    // mHighlight    = Collections.synchronizedList(new ArrayList<DrawingPath>());
+    // mHighlight = Collections.synchronizedList(new ArrayList<DrawingPath>());
     mStations     = Collections.synchronizedList(new ArrayList<DrawingStationName>());
-    mMatrix = new Matrix(); // identity
-    mSelection = new Selection();
-    mSelected  = new SelectionSet();
+    mMatrix       = new Matrix(); // identity
+    mSelection    = new Selection();
+    mSelected     = new SelectionSet();
     mMaxAreaIndex = 0;
   }
+
+  // void debug()
+  // {
+  //   Log.v("DistoX", "Manager grid " + mGridStack1.toArray().length + " " 
+  //                                   + mGridStack10.toArray().length + " " 
+  //                                   + mGridStack100.toArray().length + " legs "
+  //                                   + mLegsStack.toArray().length + " "
+  //                                   + mSplaysStack.toArray().length + " items "
+  //                                   + mCurrentStack.toArray().length );
+  // }
+
+  void clearSelected() { synchronized( mSelected ) { mSelected.clear(); } }
+
+  void clearReferences()
+  {
+    synchronized( mGridStack1 ) {
+      mNorthLine       = null;
+      mFirstReference  = null;
+      mSecondReference = null;
+      mGridStack1.clear();
+      mGridStack10.clear();
+      mGridStack100.clear();
+    }
+    synchronized( mLegsStack )   { mLegsStack.clear(); }
+    synchronized( mSplaysStack ) { mSplaysStack.clear(); }
+    synchronized( mStations )    { mStations.clear(); }
+    clearSelected();
+    synchronized( mSelection )   { mSelection.clearReferencePoints(); }
+  }
+
+  private void clearSketchItems()
+  {
+    synchronized( mSelection )    { mSelection.clearSelectionPoints(); }
+    synchronized( mCurrentStack ) { mCurrentStack.clear(); }
+    synchronized( mUserStations ) { mUserStations.clear(); }
+    mRedoStack.clear();
+    mSelected.clear();
+    mDisplayPoints = false;
+  }
+
+  void clearDrawing()
+  {
+    clearReferences();
+    clearSketchItems();
+    // mMatrix = new Matrix(); // identity
+  }
+
+  void setFirstReference( DrawingPath path ) { synchronized( mGridStack1 ) { mFirstReference = path; } }
+
+  void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
 
   int getNextAreaIndex()
   {
@@ -243,60 +293,6 @@ public class DrawingCommandManager
   void setDisplayPoints( boolean display ) { mDisplayPoints = display; }
 
   boolean isSelectable() { return mSelection != null; }
-
-  void clearReferences()
-  {
-    synchronized( mGridStack1 ) {
-      mNorthLine = null;
-      mFirstReference = null;
-      mSecondReference = null;
-      mGridStack1.clear();
-      mGridStack10.clear();
-      mGridStack100.clear();
-    }
-    synchronized( mLegsStack ) {
-      mLegsStack.clear();
-    }
-    synchronized( mSplaysStack ) {
-      mSplaysStack.clear();
-    }
-    synchronized( mStations ) {
-      mStations.clear();
-    }
-    clearSelected();
-    synchronized( mSelection ) {
-      // Log.v("DistoX", "clear selection");
-      mSelection.clearReferencePoints();
-    }
-  }
-
-  void clearDrawing()
-  {
-    mNorthLine = null;
-    mFirstReference = null;
-    mSecondReference = null;
-    mGridStack1.clear();
-    mGridStack10.clear();
-    mGridStack100.clear();
-    mLegsStack.clear();
-    mSplaysStack.clear();
-    mStations.clear();
-    mSelection.clearSelectionPoints();
-    clearSketchItems();
-  }
-
-  void setFirstReference( DrawingPath path ) { synchronized( mGridStack1 ) { mFirstReference = path; } }
-
-  void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
-
-  void clearSketchItems()
-  {
-    mCurrentStack.clear();
-    mUserStations.clear();
-    mRedoStack.clear();
-    mSelected.clear();
-    mDisplayPoints = false;
-  }
 
   // public void clearHighlight()
   // {
@@ -558,9 +554,7 @@ public class DrawingCommandManager
     // int size = line.mPoints.size();
     int size = line.size();
     if ( size <= 2 ) return false;
-    synchronized( mSelection ) {
-      clearSelected();
-    }
+    synchronized( mSelection ) { clearSelected(); }
     // for ( int k=0; k<size; ++k ) 
     for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) 
     {
@@ -787,7 +781,7 @@ public class DrawingCommandManager
   {
     // TDLog.Log( TDLog.LOG_PLOT, "addCommand stack size  " + mCurrentStack.size() );
     // TDLog.Log( TDLog.LOG_PLOT, "addCommand path " + path.toString() );
-    // Log.v("DistoX", "add command type " + path.mType + " " + path.mBBox.left + " " + path.mBBox.top + " " 
+    // Log.v("DistoX", "add command type " + path.mType + " " + path.left + " " + path.top + " " 
     //        + mBBox.left + " " + mBBox.top + " " + mBBox.right + " " + mBBox.bottom );
 
     mRedoStack.clear();
@@ -1819,7 +1813,6 @@ public class DrawingCommandManager
   }
   SelectionPoint nextHotItem() { return mSelected.nextHotItem(); }
   SelectionPoint prevHotItem() { return mSelected.prevHotItem(); }
-  void clearSelected() { synchronized( mSelected ) { mSelected.clear(); } }
 
   // used by flipProfile
   // void rebuildSelection()
@@ -1854,11 +1847,11 @@ public class DrawingCommandManager
         final ICanvasCommand cmd = (ICanvasCommand) i.next();
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath p = (DrawingPath) cmd;
-        RectF bbox = p.mBBox;
-        if ( bbox.left   < xmin ) xmin = bbox.left;
-        if ( bbox.right  > xmax ) xmax = bbox.right;
-        if ( bbox.top    < ymin ) ymin = bbox.top;
-        if ( bbox.bottom > ymax ) ymax = bbox.bottom;
+        // RectF bbox = p.mBBox;
+        if ( p.left   < xmin ) xmin = p.left;
+        if ( p.right  > xmax ) xmax = p.right;
+        if ( p.top    < ymin ) ymin = p.top;
+        if ( p.bottom > ymax ) ymax = p.bottom;
       }
     }
     return new RectF( xmin, ymin, xmax, ymax ); // left top right bottom

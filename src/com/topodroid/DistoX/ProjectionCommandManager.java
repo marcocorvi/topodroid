@@ -386,11 +386,11 @@ public class ProjectionCommandManager
   //       final ICanvasCommand cmd = (ICanvasCommand) i.next();
   //       if ( cmd.commandType() != 0 ) continue;
   //       DrawingPath p = (DrawingPath) cmd;
-  //       RectF bbox = p.mBBox;
-  //       if ( bbox.left   < xmin ) xmin = bbox.left;
-  //       if ( bbox.right  > xmax ) xmax = bbox.right;
-  //       if ( bbox.top    < ymin ) ymin = bbox.top;
-  //       if ( bbox.bottom > ymax ) ymax = bbox.bottom;
+  //       // RectF bbox = p.mBBox;
+  //       if ( p.left   < xmin ) xmin = p.left;
+  //       if ( p.right  > xmax ) xmax = p.right;
+  //       if ( p.top    < ymin ) ymin = p.top;
+  //       if ( p.bottom > ymax ) ymax = p.bottom;
   //     }
   //   }
   //   return new RectF( xmin, ymin, xmax, ymax ); // left top right bottom

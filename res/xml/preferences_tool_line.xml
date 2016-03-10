@@ -41,6 +41,13 @@
        android:defaultValue="8" />
 
      <CheckBoxPreference
+       android:key="DISTOX_AUTO_SECTION_PT"
+       android:summary="@string/pref_auto_section_pt_summary"
+       android:title="@string/pref_auto_section_pt_title"
+       android:defaultValue="true"
+       />
+
+     <CheckBoxPreference
        android:key="DISTOX_AREA_BORDER"
        android:summary="@string/pref_area_border_summary"
        android:title="@string/pref_area_border_title"

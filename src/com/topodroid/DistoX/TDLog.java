@@ -31,6 +31,7 @@ class TDLog
 
   static int mLogStream = 0;    // log stream
   static PrintWriter mLog = null;
+  static long mMillis;
 
   static boolean LOG_BEZIER = false;
   static boolean LOG_BT     = false;   // bluetooth
@@ -98,24 +99,32 @@ class TDLog
 
   // static void Profile( String msg )
   // {
-  //   long millis = System.currentTimeMillis() % 600000;
-  //   Log.v("DistoX", Long.toString(millis) + " PROFILE " + msg );
+  //   mMillis = System.currentTimeMillis() % 600000;
+  //   Log.v("DistoX", Long.toString(mMillis) + " PROFILE " + msg );
   // }
+
+  static void TimeStart() { mMillis = System.currentTimeMillis(); }
+
+  static void TimeEnd( String msg ) 
+  {
+    long millis = System.currentTimeMillis() - mMillis;
+    Log.v( TAG, msg + " " + millis );
+  }
   
   static void LogFile( String msg )
   {
-    long millis = System.currentTimeMillis() % 600000;
-    mLog.format( "%d: %s\n", millis, msg );
+    mMillis = System.currentTimeMillis() % 600000;
+    mLog.format( "%d: %s\n", mMillis, msg );
   }
 
   static void Debug( String msg )
   {
     if ( LOG_DEBUG && msg != null ) {
-      long millis = System.currentTimeMillis() % 600000;
+      mMillis = System.currentTimeMillis() % 600000;
       if ( mLogStream == 0 ) {
-        Log.v( TAG, millis + " " + msg );
+        Log.v( TAG, mMillis + " " + msg );
       } else {
-        mLog.format( "%d: %s\n", millis, msg );
+        mLog.format( "%d: %s\n", mMillis, msg );
         // mLog.flush(); // autoflush ?
       }
     }
@@ -124,11 +133,11 @@ class TDLog
   static void Error( String msg )
   {
     if ( LOG_ERR && msg != null ) {
-      long millis = System.currentTimeMillis() % 600000;
+      mMillis = System.currentTimeMillis() % 600000;
       if ( mLogStream == 0 ) {
-        Log.v( TAG, millis + " " + msg );
+        Log.v( TAG, mMillis + " " + msg );
       } else {
-        mLog.format( "%d: %s\n", millis, msg );
+        mLog.format( "%d: %s\n", mMillis, msg );
         // mLog.flush(); // autoflush ?
       }
     }
@@ -137,11 +146,11 @@ class TDLog
   static void Log( boolean flag, String msg )
   {
     if ( flag && msg != null ) {
-      long millis = System.currentTimeMillis() % 600000;
+      mMillis = System.currentTimeMillis() % 600000;
       if ( mLogStream == 0 ) {
-        Log.v( TAG, millis + " " + msg );
+        Log.v( TAG, mMillis + " " + msg );
       } else {
-        mLog.format( "%d: %s\n", millis, msg );
+        mLog.format( "%d: %s\n", mMillis, msg );
         // mLog.flush(); // autoflush ?
       }
     }

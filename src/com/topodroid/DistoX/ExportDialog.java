@@ -71,15 +71,12 @@ public class ExportDialog extends MyDialog
 
   }
 
-  public void onItemSelected( AdapterView av, View v, int pos, long id )
-  {
-    mSelected = mTypes[ pos ];
-  }
+  @Override
+  public void onItemSelected( AdapterView av, View v, int pos, long id ) { mSelected = mTypes[ pos ]; }
 
-  public void onNothingSelected( AdapterView av )
-  {
-    mSelected = null;
-  }
+  @Override
+  public void onNothingSelected( AdapterView av ) { mSelected = null; }
+
 
   public void onClick(View v) 
   {

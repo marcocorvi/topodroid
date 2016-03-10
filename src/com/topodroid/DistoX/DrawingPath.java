@@ -35,7 +35,8 @@ import android.util.Log;
  *   - DrawingPointPath
  *   - DrawingStationPath
  */
-public class DrawingPath implements ICanvasCommand
+public class DrawingPath extends RectF
+                         implements ICanvasCommand
 {
   public static final int DRAWING_PATH_FIXED   = 0; // leg
   public static final int DRAWING_PATH_SPLAY   = 1; // splay
@@ -47,13 +48,24 @@ public class DrawingPath implements ICanvasCommand
   public static final int DRAWING_PATH_NAME    = 7; // station name (from survey data)
   public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
 
+  Path mPath;
+  Path mTransformedPath;
+  Paint mPaint;
+  int mType;
+  String mOptions;
+  float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
+  // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
+  DistoXDBlock mBlock;
+
+  float cx, cy; // midpoint scene coords
+  // RectF mBBox;   // path boundig box (scene coords)
 
   DrawingPath( int type, DistoXDBlock blk )
   {
     mType  = type;
     mOptions  = null;
     mBlock = blk; 
-    mBBox  = new RectF();
+    // mBBox  = new RectF();
     mPaint = DrawingBrushPaths.errorPaint;
     // dir = 4;
     // x1 = y1 = 0.0f;
@@ -71,34 +83,22 @@ public class DrawingPath implements ICanvasCommand
     return type >= DrawingPath.DRAWING_PATH_STATION && type < DrawingPath.DRAWING_PATH_NAME;
   }
 
-  Path mPath;
-  Path mTransformedPath;
-  Paint mPaint;
-  int mType;
-  String mOptions;
-  float x1, y1, x2, y2; // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
-  // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1
-  DistoXDBlock mBlock;
-
-  float cx, cy; // midpoint scene coords
-  RectF mBBox;   // path boundig box (scene coords)
-
   void setBBox( float x1, float x2, float y1, float y2 )
   {
-    mBBox.left   = x1;
-    mBBox.right  = x2;
-    mBBox.top    = y1;
-    mBBox.bottom = y2;
+    left   = x1;
+    right  = x2;
+    top    = y1;
+    bottom = y2;
   }
 
   protected boolean intersects( RectF bbox )
   { 
     // return true;
     if ( bbox == null ) return true;
-    if ( ( bbox.right  < mBBox.left   ) 
-      || ( bbox.left   > mBBox.right  ) 
-      || ( bbox.top    > mBBox.bottom ) 
-      || ( bbox.bottom < mBBox.top    ) ) return false;
+    if ( ( bbox.right  < left   ) 
+      || ( bbox.left   > right  ) 
+      || ( bbox.top    > bottom ) 
+      || ( bbox.bottom < top    ) ) return false;
     return true;
   }
   
@@ -187,18 +187,18 @@ public class DrawingPath implements ICanvasCommand
     cx = (x20+x10)/2;
     cy = (y20+y10)/2;
     if ( x1 < x2 ) {
-      mBBox.left  = x1;
-      mBBox.right = x2;
+      left  = x1;
+      right = x2;
     } else {
-      mBBox.left  = x2;
-      mBBox.right = x1;
+      left  = x2;
+      right = x1;
     }
     if ( y1 < y2 ) {
-      mBBox.top    = y1;
-      mBBox.bottom = y2;
+      top    = y1;
+      bottom = y2;
     } else {
-      mBBox.top    = y2;
-      mBBox.bottom = y1;
+      top    = y2;
+      bottom = y1;
     }
   }
 
@@ -237,10 +237,10 @@ public class DrawingPath implements ICanvasCommand
     cx += dx;
     cy += dy;
     mPath.offset( dx, dy );
-    mBBox.left   += dx;
-    mBBox.right  += dx;
-    mBBox.top    += dy;
-    mBBox.bottom += dy;
+    left   += dx;
+    right  += dx;
+    top    += dy;
+    bottom += dy;
   }
 
   // this is used only by the Selection 

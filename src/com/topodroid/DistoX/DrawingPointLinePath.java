@@ -231,10 +231,10 @@ public class DrawingPointLinePath extends DrawingPath
     mLast  = null;
     mPath = new Path();
     mSize = 0;
-    mBBox.left   = 0;
-    mBBox.right  = 0;
-    mBBox.top    = 0;
-    mBBox.bottom = 0;
+    left   = 0;
+    right  = 0;
+    top    = 0;
+    bottom = 0;
     mDx = 0;
     mDy = 0;
   }
@@ -285,8 +285,8 @@ public class DrawingPointLinePath extends DrawingPath
     ++ mSize;
     mFirst = mLast;
     mPath.moveTo( x, y );
-    mBBox.left = mBBox.right  = x;
-    mBBox.top  = mBBox.bottom = y;
+    left = right  = x;
+    top  = bottom = y;
   }
 
   public void addPoint( float x, float y ) 
@@ -300,8 +300,8 @@ public class DrawingPointLinePath extends DrawingPath
       mLast = new LinePoint(x, y, mLast);
       ++ mSize;
       mPath.lineTo( x, y );
-      if ( x < mBBox.left ) { mBBox.left = x; } else if ( x > mBBox.right  ) { mBBox.right  = x; }
-      if ( y < mBBox.top  ) { mBBox.top  = y; } else if ( y > mBBox.bottom ) { mBBox.bottom = y; }
+      if ( x < left ) { left = x; } else if ( x > right  ) { right  = x; }
+      if ( y < top  ) { top  = y; } else if ( y > bottom ) { bottom = y; }
     }
   }
 
@@ -322,10 +322,36 @@ public class DrawingPointLinePath extends DrawingPath
         ++mSize;
         mPath.cubicTo( x1,y1, x2,y2, x,y );
       }
-      if ( x < mBBox.left ) { mBBox.left = x; } else if ( x > mBBox.right  ) { mBBox.right  = x; }
-      if ( y < mBBox.top  ) { mBBox.top  = y; } else if ( y > mBBox.bottom ) { mBBox.bottom = y; }
+      if ( x < left ) { left = x; } else if ( x > right  ) { right  = x; }
+      if ( y < top  ) { top  = y; } else if ( y > bottom ) { bottom = y; }
     }
   }
+
+  // ----------------------------------------------
+  protected void addStartPointNoPath( float x, float y ) 
+  {
+    mFirst = mLast = new LinePoint(x,y, null);
+    ++ mSize;
+    left = right  = x;
+    top  = bottom = y;
+  }
+
+  protected void addPointNoPath( float x, float y ) 
+  {
+    mLast = new LinePoint(x, y, mLast);
+    ++ mSize;
+    if ( x < left ) { left = x; } else if ( x > right  ) { right  = x; }
+    if ( y < top  ) { top  = y; } else if ( y > bottom ) { bottom = y; }
+  }
+
+  protected void addPoint3NoPath( float x1, float y1, float x2, float y2, float x, float y ) 
+  {
+    mLast = new LinePoint( x1,y1, x2,y2, x,y, mLast );
+    ++mSize;
+    if ( x < left ) { left = x; } else if ( x > right  ) { right  = x; }
+    if ( y < top  ) { top  = y; } else if ( y > bottom ) { bottom = y; }
+  }
+  // ----------------------------------------------
 
   void append( DrawingPointLinePath line )
   {

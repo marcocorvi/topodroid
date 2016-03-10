@@ -910,6 +910,8 @@
   <string name="pref_recent_nr_summary">Anzahl der am häufigsten verwendeten Werkzeuge in der Auswahl</string>
   <string name="pref_area_border_title">Flächenumrandung anzeigen</string> 
   <string name="pref_area_border_summary">Linie um Flächen herum anzeigen</string>
+  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
+  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
   <string name="pref_cont_join_title">Linien fortsetzen</string>
   <string name="pref_cont_join_summary">Linien verbinden beim fortsetzen</string>
 

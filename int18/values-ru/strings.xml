@@ -891,6 +891,8 @@
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
   <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
+  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
+  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
   <string name="pref_cont_join_title">Продолжать для соединения</string>
   <string name="pref_cont_join_summary">Продолжить линию до соединения с другой линией</string>
 

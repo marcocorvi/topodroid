@@ -71,6 +71,7 @@ import java.util.ArrayList;
 import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // only API-9
 
+// import android.util.SparseArray;
 import android.util.Log;
 
 /**
@@ -296,12 +297,46 @@ public class DrawingActivity extends ItemDrawer
   private float mBorderInnerRight = 4096;
   private float mBorderInnerLeft  = 0;
   private float mBorderBottom     = 4096;
+    
+  // ----------------------------------------------------------------
+  // BUTTONS and MENU
+
+  // private Button mButtonHelp;
+  private int mButtonSize;
+  private MyButton[] mButton1; // primary
+  private MyButton[] mButton2; // draw
+  private MyButton[] mButton3; // edit
+  private MyButton[] mButton5; // eraser
+  private int mNrButton1 = 9;          // main-primary
+  private int mNrButton2 = 7;          // draw
+  private int mNrButton3 = 8;          // edit
+  private int mNrButton5 = 5;          // erase
+  HorizontalListView mListView;
+  HorizontalButtonView mButtonView1;
+  HorizontalButtonView mButtonView2;
+  HorizontalButtonView mButtonView3;
+  // HorizontalButtonView mButtonView4;
+  HorizontalButtonView mButtonView5;
+  ListView   mMenu;
+  Button     mImage;
+  // ArrayAdapter< String > mMenuAdapter;
+  MyMenuAdapter mMenuAdapter;
+  boolean onMenu;
+
+  List<DistoXDBlock> mList = null;
+
+  int mHotItemType = -1;
+  private boolean inLinePoint = false;
+
+  // ----------------------------------------------------------------
+
+  public float zoom() { return mZoom; }
 
   private void modified()
   {
     if ( ! mModified ) {
       mModified = true;
-      startSaveTh2Task( PlotSave.MODIFIED, MAX_TASK_NORMAL, 1 );
+      startSaveTh2Task( mType, PlotSave.MODIFIED, MAX_TASK_NORMAL, 1 );
     // } else {
     //   if ( mSaveTh2File != null ) {
     //     mSaveTh2File.setModified( true );
@@ -495,12 +530,12 @@ public class DrawingActivity extends ItemDrawer
   private void doSaveTh2( ) 
   {
     if ( mFullName1 != null && mDrawingSurface != null ) {
-      startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
+      startSaveTh2Task( mType, PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
 
       // if ( not_all_symbols ) AlertMissingSymbols();
       // if ( mAllSymbols ) {
       //   // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-      //   startSaveTh2Task( PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
+      //   startSaveTh2Task( mType, PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
       // } else { // mAllSymbols is false: FIXME what to do ?
       //  Toast.makeText( this,
       //    "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
@@ -514,8 +549,10 @@ public class DrawingActivity extends ItemDrawer
   private final int MAX_TASK_FINAL  = 6;
 
   // called by doSaveTh2 and saveTh2
-  private void startSaveTh2Task( int suffix, int maxTasks, int backup_rotate )
+  private void startSaveTh2Task( final long type, int suffix, int maxTasks, int backup_rotate )
   {
+    // Log.v("DistoX", "start save Th2 task. type " + type + " suffix " + suffix 
+    //               + " maxTasks " + maxTasks + " rotate " + backup_rotate ); 
     Handler saveHandler = null;
     if ( suffix != PlotSave.EXPORT ) {
       if ( ! mModified ) return;
@@ -526,7 +563,7 @@ public class DrawingActivity extends ItemDrawer
         public void handleMessage(Message msg) {
           -- mNrSaveTh2Task;
           if ( mModified ) {
-            startSaveTh2Task( PlotSave.HANDLER, MAX_TASK_NORMAL, 0 ); 
+            startSaveTh2Task( type, PlotSave.HANDLER, MAX_TASK_NORMAL, 0 ); 
           } else {
             mApp.mShotActivity.enableSketchButton( true );
           }
@@ -547,11 +584,20 @@ public class DrawingActivity extends ItemDrawer
     try { Thread.sleep(10); } catch( InterruptedException e ) { }
 
     SaveTh2FileTask save_task = null;
-    if ( PlotInfo.isProfile( mType ) ) {
-      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, mType,
+    if ( type == -1 ) {
+      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
+                                       (int)mPlot2.azimuth, suffix, backup_rotate );
+      try { 
+        save_task.execute();
+      } catch ( RejectedExecutionException e ) { }
+      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, mPlot1.type,
+                                       0, suffix, backup_rotate );
+    } else if ( PlotInfo.isProfile( type ) ) {
+      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName2, type,
                                        (int)mPlot2.azimuth, suffix, backup_rotate );
     } else {
-      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, mType, 0, suffix, backup_rotate );
+      save_task = new SaveTh2FileTask( this, saveHandler, mApp, mDrawingSurface, mFullName1, type,
+                                       0, suffix, backup_rotate );
     }
     try { 
       save_task.execute();
@@ -566,15 +612,16 @@ public class DrawingActivity extends ItemDrawer
     if ( ! PlotInfo.isSketch2D( type ) ) return;
 
     mDrawingSurface.clearReferences( type );
-    mDrawingSurface.setManager( type );
 
     float cosp = 0;
     float sinp = 0;
 
     if ( type == PlotInfo.PLOT_PLAN ) {
+      mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, type );
       DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(),
                            xoff, yoff, mDrawingSurface );
     } else {
+      mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, type );
       DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(),
                            xoff, yoff, mDrawingSurface );
       if ( type == PlotInfo.PLOT_PROFILE ) {
@@ -675,37 +722,6 @@ public class DrawingActivity extends ItemDrawer
       Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
   }
-    
-
-  // private Button mButtonHelp;
-  private int mButtonSize;
-  private MyButton[] mButton1; // primary
-  private MyButton[] mButton2; // draw
-  private MyButton[] mButton3; // edit
-  private MyButton[] mButton5; // eraser
-  private int mNrButton1 = 9;          // main-primary
-  private int mNrButton2 = 7;          // draw
-  private int mNrButton3 = 8;          // edit
-  private int mNrButton5 = 5;          // erase
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
-  HorizontalButtonView mButtonView2;
-  HorizontalButtonView mButtonView3;
-  // HorizontalButtonView mButtonView4;
-  HorizontalButtonView mButtonView5;
-  ListView   mMenu;
-  Button     mImage;
-  // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter;
-  boolean onMenu;
-
-  List<DistoXDBlock> mList = null;
-
-  int mHotItemType = -1;
-  private boolean inLinePoint = false;
-
-  public float zoom() { return mZoom; }
-
 
   // --------------------------------------------------------------
 
@@ -803,6 +819,7 @@ public class DrawingActivity extends ItemDrawer
     public void onCreate(Bundle savedInstanceState) 
     {
       super.onCreate(savedInstanceState);
+      // TDLog.TimeStart();
       mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
       mPointScale = DrawingPointPath.SCALE_M;
 
@@ -960,6 +977,8 @@ public class DrawingActivity extends ItemDrawer
       closeMenu();
       // mMenu.setOnItemClickListener( this );
 
+      // TDLog.TimeEnd( "on create" );
+
       doStart();
       if ( ! ( PlotInfo.isAnySection( mType ) ) ) {
         if ( mDataDownloader != null ) {
@@ -978,6 +997,7 @@ public class DrawingActivity extends ItemDrawer
       doResume();
       if ( mDataDownloader != null ) mDataDownloader.onResume();
       setConnectionStatus( mDataDownloader.getStatus() );
+      // TDLog.TimeEnd( "drawing activity ready" );
     }
 
     @Override
@@ -1028,6 +1048,7 @@ public class DrawingActivity extends ItemDrawer
       mDrawingSurface.isDrawing = true;
       switchZoomCtrl( TDSetting.mZoomCtrl );
       // Log.v("DistoX", "do Resume. Save tasks: " + mNrSaveTh2Task );
+      setPlotType( mType );
     }
 
     private void doPause()
@@ -1070,7 +1091,9 @@ public class DrawingActivity extends ItemDrawer
         mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       }
 
+      // TDLog.TimeEnd( "before load" );
       loadFiles( mType ); 
+      // TDLog.TimeEnd( "after load" );
 
       // There are four types of sections:
       // SECTION and H_SECTION: mFrom != null, mTo != null, splays and leg
@@ -1150,7 +1173,7 @@ public class DrawingActivity extends ItemDrawer
             mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
             mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto), DrawingUtil.toSceneY(yto) );
           }
-        } else { // if ( PlotInfo.isXSection( mType ) ) }
+        } else { // if ( PlotInfo.isXSection( mType ) ) 
           mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
         }
 
@@ -1191,7 +1214,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void loadFiles( long type )
     {
-      // Log.v( "DistoX", "load " + mName1 + " " + mName2 );
+      // Log.v( "DistoX", "load files type " + type + " " + mName1 + " " + mName2 );
       mPlot1 = mApp.mData.getPlotInfo( mSid, mName1 );
       mPid1  = mPlot1.id;
       if ( mName2 != null ) {
@@ -1204,13 +1227,11 @@ public class DrawingActivity extends ItemDrawer
       }
       mPid = mPid1;
 
-      // Log.v( "DistoX", "loadFiles " + mName1 + " " + mName2 );
-
       String start = mPlot1.start;
       String view  = mPlot1.view;
       String hide  = mPlot1.hide;
-      mType        = mPlot1.type;
-      // Log.v( TopoDroidApp.TAG, "loadFiles start <" + start + "> view <" + view + ">" );
+      // mType        = mPlot1.type;
+      mType = type;
 
       mAllSymbols  = true; // by default there are all the symbols
 
@@ -1222,9 +1243,6 @@ public class DrawingActivity extends ItemDrawer
         filename2  = TDPath.getTh2FileWithExt( mFullName2 );
         filename2b = TDPath.getTdrFileWithExt( mFullName2 );
       }
-
-      // long millis_start = System.currentTimeMillis();
-      // long millis_end;
 
       if ( PlotInfo.isSection( mType ) ) {
         mTo = view;
@@ -1238,12 +1256,11 @@ public class DrawingActivity extends ItemDrawer
           finish();
         } else {
           mNum = new DistoXNum( mList, start, view, hide );
-          // Log.v("DistoX", "Data redux " + (System.currentTimeMillis() - millis_start) + " msec");
           // computeReferences( (int)PlotInfo.PLOT_PLAN,     mOffset.x, mOffset.y, mZoom, true );
           // computeReferences( (int)PlotInfo.PLOT_EXTENDED, mOffset.x, mOffset.y, mZoom, true );
-          // Log.v("DistoX", "Refs " + (System.currentTimeMillis() - millis_start) + " msec");
         }
       }
+      // TDLog.TimeEnd( "after num" );
 
       // now try to load drawings from therion file
       // TDLog.Debug( "load th2 file " + mFullName1 + " " + mFullName2 );
@@ -1255,13 +1272,40 @@ public class DrawingActivity extends ItemDrawer
       // when the sketch is saved, mAllSymbols is checked ( see doSaveTh2 )
       // if there are not all symbols the user is asked if he/she wants to save anyways
 
-      if ( TDSetting.mBinaryTh2 ) {
-        mAllSymbols = mDrawingSurface.loadDataStream( filename1b, filename2b, filename1, filename2, missingSymbols );
-        // Log.v("DistoX", "Streams " + (System.currentTimeMillis() - millis_start) + " msec");
-      } else {
-        mAllSymbols = mDrawingSurface.loadTherion( filename1, filename2, missingSymbols );
-        // Log.v("DistoX", "Th2 " + (System.currentTimeMillis() - millis_start) + " msec");
+      if ( TDSetting.mBinaryTh2 ) { // BINARY
+        if ( filename2b != null ) {
+          if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1 ) ) {
+            mAllSymbols = mDrawingSurface.modeloadDataStream( filename1b, filename1, missingSymbols );
+            mDrawingSurface.addManagerToCache( mFullName1 );
+          }
+        } else {
+          mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
+          mAllSymbols = mDrawingSurface.modeloadDataStream( filename1b, filename1, missingSymbols );
+        }
+        if ( filename2b != null ) {
+          if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2 ) ) {
+            mAllSymbols = mAllSymbols && mDrawingSurface.modeloadDataStream( filename2b, filename2, missingSymbols );
+            mDrawingSurface.addManagerToCache( mFullName2 );
+          }
+        }
+      } else { // THERION
+        if ( filename2b != null ) {
+          if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1 ) ) {
+            mAllSymbols = mDrawingSurface.modeloadTherion( filename1, missingSymbols );
+            mDrawingSurface.addManagerToCache( mFullName1 );
+          }
+        } else {
+          mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
+          mAllSymbols = mDrawingSurface.modeloadTherion( filename1, missingSymbols );
+        }
+        if ( filename2b != null ) {
+          if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2 ) ) {
+            mAllSymbols = mAllSymbols && mDrawingSurface.modeloadTherion( filename2, missingSymbols );
+            mDrawingSurface.addManagerToCache( mFullName2 );
+          }
+        }
       }
+
       if ( PlotInfo.isSketch2D( mType ) ) {
         List<PlotInfo> xsection_plan = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION );
         List<PlotInfo> xsection_ext  = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
@@ -1271,7 +1315,6 @@ public class DrawingActivity extends ItemDrawer
 
         mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       }
-      // Log.v("DistoX", "Sketch load " + (System.currentTimeMillis() - millis_start) + " msec");
 
       // if ( ! mAllSymbols ) {
       //   String msg = missingSymbols.getMessage( getResources() );
@@ -1281,10 +1324,18 @@ public class DrawingActivity extends ItemDrawer
       //   // finish();
       // }
 
-      resetReference( mPlot1 );
-      if ( type == PlotInfo.PLOT_EXTENDED || type == PlotInfo.PLOT_PROFILE ) {
-        switchPlotType();
-      }
+      setPlotType( type );
+   }
+
+   private void setPlotType( long type )
+   {
+     // resetReference( mPlot1 );
+     if ( PlotInfo.isProfile( type ) ) {
+       setPlotType2();
+       // switchPlotType();
+     } else if ( type == PlotInfo.PLOT_PLAN ) { 
+       setPlotType1();
+     }
    }
 
    private void saveReference( PlotInfo plot, long pid )
@@ -1994,7 +2045,7 @@ public class DrawingActivity extends ItemDrawer
                         mCurrentLinePath.addOption( "-id " + section_id );
                         mDrawingSurface.addDrawingPath( mCurrentLinePath );
 
-                        if ( section_id != null ) {
+                        if ( TDSetting.mAutoSectionPt && section_id != null ) {
                           float x5 = mCurrentLinePath.mLast.mX + mCurrentLinePath.mDx * 20; 
                           float y5 = mCurrentLinePath.mLast.mY + mCurrentLinePath.mDy * 20; 
                           String scrap = mApp.mySurvey + "-" + section_id;
@@ -2002,8 +2053,6 @@ public class DrawingActivity extends ItemDrawer
                                                                             x5, y5, DrawingPointPath.SCALE_M, 
                                                                             "-scrap " + scrap );
                           mDrawingSurface.addDrawingPath( section_pt );
-                        } else {
-                          TDLog.Error( "null scrap id" );
                         }
 
                         new DrawingLineSectionDialog( this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
@@ -2632,22 +2681,24 @@ public class DrawingActivity extends ItemDrawer
 
     private void setPlotType2( )
     {
+      // Log.v("DistoX", "set plot type 2 mType " + mType );
       mPid  = mPid2;
       mName = mName2;
       mType = mPlot2.type;
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
-      mDrawingSurface.setManager( mType );
+      mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       resetReference( mPlot2 );
       mApp.mShotActivity.mRecentPlotType = mType;
     } 
 
     private void setPlotType1()
     {
+      // Log.v("DistoX", "set plot type 1 mType " + mType );
       mPid  = mPid1;
       mName = mName1;
       mType = mPlot1.type;
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
-      mDrawingSurface.setManager( mType );
+      mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       resetReference( mPlot1 );
       mApp.mShotActivity.mRecentPlotType = mType;
     }
@@ -2819,7 +2870,7 @@ public class DrawingActivity extends ItemDrawer
         new DrawingModeDialog( this, this, mDrawingSurface ).show();
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( ! PlotInfo.isSection( mType ) ) { 
-          startSaveTh2Task( PlotSave.TOGGLE, MAX_TASK_FINAL, TDPath.NR_BACKUP ); 
+          startSaveTh2Task( mType, PlotSave.TOGGLE, MAX_TASK_FINAL, TDPath.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         }
@@ -3218,8 +3269,10 @@ public class DrawingActivity extends ItemDrawer
       } ;
       if ( PlotInfo.isProfile( type ) ) {
         new ExportToFile(this, saveHandler, mDrawingSurface.mCommandManager2, mNum, type, filename, ext ).execute();
-      } else {
+      } else if ( type == PlotInfo.PLOT_PLAN ) {
         new ExportToFile(this, saveHandler, mDrawingSurface.mCommandManager1, mNum, type, filename, ext ).execute();
+      } else {
+        new ExportToFile(this, saveHandler, mDrawingSurface.mCommandManager3, mNum, type, filename, ext ).execute();
       }
     }
 
@@ -3241,7 +3294,7 @@ public class DrawingActivity extends ItemDrawer
     {
       // TDLog.Log( TDLog.LOG_PLOT, "saveTh2() type " + mType + " modified " + mModified );
       // TDLog.Log( TDLog.LOG_PLOT, "saveTh2 back up " + mFullName1 + " " + mFullName2 );
-      startSaveTh2Task( PlotSave.EXPORT, MAX_TASK_FINAL, TDPath.NR_BACKUP );
+      startSaveTh2Task( -1, PlotSave.EXPORT, MAX_TASK_FINAL, TDPath.NR_BACKUP );
     }
 
   
@@ -3472,10 +3525,14 @@ public class DrawingActivity extends ItemDrawer
     // Log.v("DistoX", "recover " + type + " " + filename );
     String th2  = TDPath.getTh2File( filename );
     if ( type == 1 ) {
-      mDrawingSurface.loadTherion( th2, null, null ); // no missing symbols
+      mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null );
+      mDrawingSurface.modeloadTherion( th2, null ); // no missing symbols
+      mDrawingSurface.addManagerToCache( mFullName1 );
       setPlotType1();
     } else {
-      mDrawingSurface.loadTherion( null, th2, null );
+      mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null );
+      mDrawingSurface.modeloadTherion( th2, null );
+      mDrawingSurface.addManagerToCache( mFullName2 );
       // TODO now switch to extended view FIXME-VIEW
       setPlotType2();
     }
@@ -3487,10 +3544,14 @@ public class DrawingActivity extends ItemDrawer
     String tdr  = TDPath.getTdrFile( filename );
     String th2  = TDPath.getTh2File( filename );
     if ( type == 1 ) {
-      mDrawingSurface.loadDataStream( tdr, null, th2, null, null ); // no missing symbols
+      mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null );
+      mDrawingSurface.modeloadDataStream( tdr, th2, null ); // no missing symbols
+      mDrawingSurface.addManagerToCache( mFullName1 );
       setPlotType1();
     } else {
-      mDrawingSurface.loadDataStream( null, tdr, null, th2, null );
+      mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null );
+      mDrawingSurface.modeloadDataStream( tdr, th2, null );
+      mDrawingSurface.addManagerToCache( mFullName2 );
       // TODO now switch to extended view FIXME-VIEW
       setPlotType2();
     }

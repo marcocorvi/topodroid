@@ -138,6 +138,13 @@ class SymbolLibrary
   boolean isSymbolOrientable( int k )   { return ( k < 0 || k >= mSymbolNr )? false : mSymbols.get( k ).isOrientable(); }
   boolean isSymbolEnabled( int k )      { return ( k < 0 || k >= mSymbolNr )? false : mSymbols.get( k ).isEnabled(); }
 
+  ArrayList<String> getSymbolNames()
+  {
+    ArrayList<String> ret = new ArrayList<String>();
+    for ( Symbol s : mSymbols ) ret.add( s.getName() );
+    return ret;
+  }
+
   boolean isSymbolEnabled( String th_name ) 
   {
     Symbol a = get( th_name );

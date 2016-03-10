@@ -16,8 +16,12 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.StringWriter;
@@ -28,8 +32,11 @@ import java.io.IOException;
 import java.io.EOFException;
 
 import java.util.List;
+import java.util.HashMap;
 
 import android.graphics.RectF;
+
+import android.util.Log;
 
 class DrawingIO
 {
@@ -482,9 +489,18 @@ class DrawingIO
   {
     try {
       FileOutputStream fos = new FileOutputStream( file );
-      DataOutputStream dos = new DataOutputStream( fos );
+
+      // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
+      BufferedOutputStream bfos = new BufferedOutputStream( fos );
+      DataOutputStream dos = new DataOutputStream( bfos );
       surface.exportDataStream( type, dos, fullname, proj_dir );
       dos.close();
+
+      // CACHE add filename/bos.toByteArray to cache
+      // mTdrCache.put( fullname + ".tdr", bos );
+      // byte[] bytes = bos.toByteArray();
+      // fos.write( bytes, 0, bos.size() );
+
       fos.close();
     } catch ( FileNotFoundException e ) {
       TDLog.Error( "Export Data file: " + e.getMessage() );
@@ -493,6 +509,11 @@ class DrawingIO
     }
   }
 
+  // tdr files CACHE
+  // no need to use a cache: buffering streams is as fast as reading from file
+  // and requires less management overhead
+  // static HashMap< String, ByteArrayOutputStream > mTdrCache = new HashMap< String, ByteArrayOutputStream >();
+  // static void clearTdrCache() { mTdrCache.clear(); }
 
   // =========================================================================
   // EXPORT details
@@ -513,14 +534,26 @@ class DrawingIO
     boolean in_scrap = false;
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
-    DrawingPath path;
+    DrawingPath path = null;
     int project_dir = 0;
     float north_x1, north_y1, north_x2, north_y2;
 
+    File file = new File( filename );
+    FileInputStream fis = null;
+    DataInputStream dis = null;
     synchronized( TDPath.mTherionLock ) {
       try {
-        FileInputStream fis = new FileInputStream( filename );
-        DataInputStream dis = new DataInputStream( fis );
+        // CACHE check if filename is in the cache: if so use the cache byte array
+        // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
+        // if ( bos == null ) {
+          fis = new FileInputStream( filename );
+          BufferedInputStream bfis = new BufferedInputStream( fis );
+          dis = new DataInputStream( bfis );
+        // } else {
+        //   Log.v("DistoX", "cache hit " + filename );
+        //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
+        //   dis = new DataInputStream( bis );
+        // }
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
@@ -604,7 +637,7 @@ class DrawingIO
           }
         }
         dis.close();
-        fis.close();
+        if ( fis != null ) fis.close();
       } catch ( FileNotFoundException e ) {
         // this is OK
       } catch ( IOException e ) {
