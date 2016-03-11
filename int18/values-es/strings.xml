@@ -209,7 +209,7 @@
     <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
     <string name="no_photos">Topografía sin foto</string>
     <string name="no_plots">Topografía sin dibujos.\nPulse el botón para añadir uno</string>
-    <!-- TODO string name="no_profile_overview">No overview for projected profiles</string -->
+    <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
@@ -241,8 +241,8 @@
     <string name="menu_overview">Medir distancia</string>
     <string name="menu_pair">Emparejar</string>
     <string name="menu_palette">Paleta</string>
-    <string name="menu_photo">Foto</string>
-    <string name="menu_sensor">Sensor</string>
+    <string name="menu_photo">Tomas con foto</string>
+    <string name="menu_sensor">Tomas con sensor</string>
     <string name="menu_scan">Escanear</string>
     <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
@@ -387,9 +387,9 @@
 
     <string name="plan">Planta</string>
     <string name="extended">Desarrollado</string>
-    <!-- TODO string name="extended_profile">Extended profile</string -->
-    <!-- TODO string name="profile">PROJECT.</string -->
-    <!-- UNUSED string name="v_section">V-sección</string -->
+    <string name="extended_profile">Perfil extendido</string>
+    <string name="profile">PROYECTO</string>
+    <string name="v_section">V-sección</string>
     <string name="h_section">H-sección</string>
 
     <string name="distox_err_ok">OK</string>
@@ -575,7 +575,7 @@
     <string name="title_plot_save">Guardar dibujo como</string>
     <string name="title_plot_reload">Actualizar dibujo</string>
     <string name="title_profile_flip">¿Quieres cambiar al perfil del dibujo?</string>
-    <!-- TODO string name="title_projection">Projected profile azimuth %1$d</string -->
+    <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_shift">Cambio</string>
@@ -825,8 +825,8 @@
   <string name="pref_recent_nr_summary">Número de las herramientas más recientes seleccionadas</string>
   <string name="pref_area_border_title">Visibilidad borde área</string> 
   <string name="pref_area_border_summary">Visibilidad predeterminada en el borde de área</string>
-  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
-  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
+  <string name="pref_auto_section_pt_title">Punto de sección</string>
+  <string name="pref_auto_section_pt_summary">Añadir punto de la sección a las líneas de sección</string>
   <string name="pref_cont_join_title">Unir a la línea contínua</string>
   <string name="pref_cont_join_summary">continuación de la línea se une a otra línea</string>
 
