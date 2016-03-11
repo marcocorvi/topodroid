@@ -693,8 +693,9 @@ public class ShotActivity extends Activity
   HorizontalButtonView mButtonView2;
   ListView   mMenu = null;
   Button     mImage;
-  // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter;
+  // HOVER
+  // MyMenuAdapter mMenuAdapter;
+  ArrayAdapter< String > mMenuAdapter;
   boolean onMenu = false;
 
   BitmapDrawable mBMdownload;
@@ -786,10 +787,11 @@ public class ShotActivity extends Activity
     MyButton.setButtonBackground( mApp, mImage, mButtonSize, R.drawable.iz_menu);
 
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter();
-    // mMenu.setOnItemClickListener( this );
+    setMenuAdapter( getResources() );
     onMenu = true;
     closeMenu();
+    // HOVER
+    mMenu.setOnItemClickListener( this );
 
     // CutNPaste.dismissPopupBT();
 
@@ -798,12 +800,12 @@ public class ShotActivity extends Activity
     }
   }
 
-  void enableSketchButton( boolean enabled )
-  {
-    mApp.mEnableZip = enabled;
-    mButton1[ BTN_PLOT ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
-    mButton1[ BTN_PLOT ].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
-  }
+  // void enableSketchButton( boolean enabled )
+  // {
+  //   mApp.mEnableZip = enabled;
+  //   mButton1[ BTN_PLOT ].setEnabled( enabled ); // FIXME SKETCH BUTTON 
+  //   mButton1[ BTN_PLOT ].setBackgroundDrawable( enabled ? mBMplot : mBMplot_no );
+  // }
 
   // @Override
   // public synchronized void onStart() 
@@ -1161,6 +1163,9 @@ public class ShotActivity extends Activity
     drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME2, plot2_name );
     drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, type );
     drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, start );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TO, "" );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_AZIMUTH, 0.0f );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO, 0.0f );
     // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_ID, plot1_id ); // not necessary
     // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_ID2, plot2_id ); // not necessary
 
@@ -1357,12 +1362,12 @@ public class ShotActivity extends Activity
 
   // ---------------------------------------------------------
 
-  private void setMenuAdapter()
+  private void setMenuAdapter( Resources res )
   {
     int k = 0;
-    Resources res = getResources();
-    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    // HOVER
+    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[k++] ) );                                             // menu_survey
     if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
@@ -1380,7 +1385,8 @@ public class ShotActivity extends Activity
   {
     if ( onMenu ) {
       mMenu.setVisibility( View.GONE );
-      mMenuAdapter.resetBgColor();
+      // HOVER
+      // mMenuAdapter.resetBgColor();
       onMenu = false;
       return true;
     }

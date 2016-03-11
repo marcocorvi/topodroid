@@ -31,7 +31,8 @@ class TDSetting
     "DISTOX_MKEYBOARD",           //  3
     "DISTOX_TEAM",                //  4
     "DISTOX_COSURVEY",            //  5
-    "DISTOX_BINARY_STORE",        //  6
+    // "DISTOX_BINARY_STORE",        //  6
+    "DISTOX_AUTO_TH2",            //  6
     "DISTOX_INIT_STATION",        //  7 default initial station for sketches
 
     "DISTOX_DEVICE",              //  8 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
@@ -289,7 +290,8 @@ class TDSetting
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SKETCH DRAWING
 
-  static boolean mBinaryTh2 = false;
+  // static boolean mBinaryTh2 = false;
+  static boolean mAutoTh2 = false;
 
   // static boolean mZoomControls = false;
   static int mZoomCtrl = 1;
@@ -504,7 +506,8 @@ class TDSetting
     mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
     mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
     boolean co_survey = prefs.getBoolean( key[k++], false );       // DISTOX_COSURVEY 
-    mBinaryTh2 = prefs.getBoolean( key[k++], false );              // DISTOX_BINARY_STORE
+    // mBinaryTh2 = prefs.getBoolean( key[k++], false );           // DISTOX_BINARY_STORE
+    mAutoTh2 = prefs.getBoolean( key[k++], false );                // DISTOX_AUTO_TH2
 
     mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
     if ( mInitStation.length() == 0 ) mInitStation = "0";
@@ -706,7 +709,8 @@ class TDSetting
         app.setCoSurvey( co_survey ); // set flag and start/stop server
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BINARY_STORE
-      mBinaryTh2 = prefs.getBoolean( k, false );
+      // mBinaryTh2 = prefs.getBoolean( k, false );
+      mAutoTh2 = prefs.getBoolean( k, false );           // DISTOX_AUTO_TH2
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_INIT_STATION
       mInitStation = prefs.getString( k, "0" ).replaceAll("\\s+", "");
       if ( mInitStation.length() == 0 ) mInitStation = "0";
@@ -1170,7 +1174,8 @@ class TDSetting
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
     //B if ( name.equals( "DISTOX_CONT_JOIN" ) 
     //C if ( name.equals( "DISTOX_CSV_LENGTH" )
-    //B if ( name.equals( "DISTOX_BINARY_STORE" )
+    // //B if ( name.equals( "DISTOX_BINARY_STORE" )
+    //B if ( name.equals( "DISTOX_AUTO_TH2" )
     if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );
 
     // if ( name.equals( "DISTOX_WALLS_TYPE" )

@@ -433,8 +433,8 @@ public class TopoDroidApp extends Application
   // public String getSurvey() { return mySurvey; }
   // public String getCalib()  { return myCalib; }
 
-  static boolean mEnableZip = true;    // whether zip saving is enabled or must wait (locked by th2. saving thread)
-  static boolean mSketches = false;        // whether to use 3D models
+  static boolean mEnableZip = true;  // whether zip saving is enabled or must wait (locked by th2. saving thread)
+  static boolean mSketches = false;  // whether to use 3D models
 
   // ---------------------------------------------------------
 

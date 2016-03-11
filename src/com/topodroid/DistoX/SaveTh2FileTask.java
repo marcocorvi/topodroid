@@ -55,12 +55,17 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
   protected Boolean doInBackground(Intent... arg0)
   {
     boolean ret = false;
-    boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT );
+    // boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT ); // TDR BINARY
+    boolean do_binary  = ( mSuffix != PlotSave.EXPORT );
+    boolean do_therion = ( mSuffix == PlotSave.EXPORT || TDSetting.mAutoTh2 );
+
     synchronized( TDPath.mTherionLock ) {
       // Log.v("DistoX", "save scrap files " + mFullName1 + " suffix " + mSuffix );
       
-      String filename = do_binary ? TDPath.getTdrFileWithExt( mFullName1 ) + TDPath.BCK_SUFFIX
-                                  : TDPath.getTh2FileWithExt( mFullName1 ) + TDPath.BCK_SUFFIX;
+      // String filename = do_binary ? TDPath.getTdrFileWithExt( mFullName1 ) + TDPath.BCK_SUFFIX // TDR BINARY
+      //                             : TDPath.getTh2FileWithExt( mFullName1 ) + TDPath.BCK_SUFFIX;
+      String filename = TDPath.getTdrFileWithExt( mFullName1 ) + TDPath.BCK_SUFFIX;
+
       if ( mSuffix != PlotSave.EXPORT ) {
         TDPath.rotateBackups( filename, mRotate );
       }
@@ -81,7 +86,8 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
       File file1 = new File( tempname1 );
       if ( do_binary ) {
         DrawingIO.exportDataStream( mSurface, mType, file1, mFullName1, mProjDir );
-      } else {
+      } // else { // TDR BINARY
+      if ( do_therion ) {
         DrawingIO.exportTherion( mSurface, mType, file1, mFullName1, PlotInfo.projName[mType], mProjDir );
       }
 
@@ -90,8 +96,10 @@ class SaveTh2FileTask extends AsyncTask<Intent,Void,Boolean>
         file1.delete();
       } else {
         // Log.v("DistoX", "save completed");
-        String filename1 = do_binary ? TDPath.getTdrFileWithExt( mFullName1 )
-                                     : TDPath.getTh2FileWithExt( mFullName1 );
+        // String filename1 = do_binary ? TDPath.getTdrFileWithExt( mFullName1 ) // TDR_BINARY
+        //                              : TDPath.getTh2FileWithExt( mFullName1 );
+        String filename1 = TDPath.getTdrFileWithExt( mFullName1 );
+
         (new File( filename1 )).renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) );
         file1.renameTo( new File( filename1 ) );
       }

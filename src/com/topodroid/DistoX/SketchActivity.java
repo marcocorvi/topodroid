@@ -122,8 +122,9 @@ public class SketchActivity extends ItemDrawer
   HorizontalListView mListView;
   ListView   mMenu;
   Button     mImage;
-  // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter;
+  // HOVER 
+  // MyMenuAdapter mMenuAdapter;
+  ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
 
   private static int izons[] = { 
@@ -780,9 +781,10 @@ public class SketchActivity extends ItemDrawer
     // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter();
+    setMenuAdapter( getResources() );
     closeMenu();
-    // mMenu.setOnItemClickListener( this );
+    // HOVER
+    mMenu.setOnItemClickListener( this );
 
     mTimer   = null;
 
@@ -1771,11 +1773,11 @@ public class SketchActivity extends ItemDrawer
 
     */
 
-  private void setMenuAdapter()
+  private void setMenuAdapter( Resources res )
   {
-    Resources res = getResources();
-    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    // HOVER
+    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -1790,7 +1792,8 @@ public class SketchActivity extends ItemDrawer
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    mMenuAdapter.resetBgColor();
+    // HOVER
+    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

@@ -248,7 +248,7 @@
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
     <string name="menu_sync">Sincro</string>
-    <string name="menu_tdr2th2">Dibujos Th2</string>
+    <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
@@ -298,8 +298,8 @@
     <string name="splay">Toma Secundaria</string>
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
     <string name="too_many_legs_xsection">Demasiadas tomas de sección</string>
-    <string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string>
-    <string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string>
+    <!-- UNUSED string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string -->
+    <!-- UNUSED string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
     <string name="section_area">Sección de área: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
@@ -507,7 +507,7 @@
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_stats">Estadísticas de Topografía</string>
     <string name="help_save_plot">Exportar dibujo</string>
-    <string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string>
+    <!-- UNUSED string name="help_tdr2th2">Convertir archivos binarios de dibujo a th2</string -->
     <string name="help_toggle_plot">Cambiar de planta a Alzado</string>
     <string name="help_trash">Eliminar dibujo</string>
     <string name="help_undo">Deshacer última acción de dibujo</string>
@@ -801,8 +801,10 @@
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
   <string name="pref_xtherion_areas_title">Áreas Xtherion</string>
   <string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string>
-  <string name="pref_binary_store_title">Archivo binario dibujo</string>
-  <string name="pref_binary_store_summary">Guardar dibujos en formato binario</string>
+  <!-- UNUSED string name="pref_binary_store_title">Archivo binario dibujo</string -->
+  <!-- UNUSED string name="pref_binary_store_summary">Guardar dibujos en formato binario</string -->
+  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
+  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>

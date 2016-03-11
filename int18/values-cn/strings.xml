@@ -251,7 +251,7 @@
     <string name="menu_stats">统计</string>
     <string name="menu_survey">测量信息</string>
     <string name="menu_sync">同步</string>
-    <string name="menu_tdr2th2">TH2 草图</string>
+    <!-- UNUSED string name="menu_tdr2th2">TH2 草图</string -->
     <string name="menu_validate">验证</string>
 
     <string name="popup_join_pt">接至附近点</string>
@@ -301,8 +301,8 @@
     <string name="splay">侧线</string>
     <string name="too_many_leg_intersection">剖面线与数条主线交叉</string>
     <string name="too_many_legs_xsection">剖面中有太多主线</string>
-    <string name="converted_tdr2th2">转换草图为二进制文件到 th2</string>
-    <string name="convert_tdr2th2">重写th2草图文件?</string>
+    <!-- UNUSED string name="converted_tdr2th2">转换草图为二进制文件到 th2</string -->
+    <!-- UNUSED string name="convert_tdr2th2">重写th2草图文件?</string -->
     <string name="section_area">切面区域: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">传感器</string -->
@@ -555,7 +555,7 @@
     <string name="help_rename">修改测量名称</string>
     <string name="help_stats">测量点对话框</string>
     <string name="help_save_plot">输出草图</string>
-    <string name="help_tdr2th2">转换二进制草图文件到th2</string>
+    <!-- UNUSED string name="help_tdr2th2">转换二进制草图文件到th2</string -->
     <string name="help_toggle_plot">在平面图和侧面图之间切换</string>
     <string name="help_trash">删除草图</string>
     <string name="help_undo">取消上一次操作</string>
@@ -865,8 +865,10 @@
   <string name="pref_checkAttached_summary">检测如果测量点相连接</string>
   <string name="pref_xtherion_areas_title">xtherion 区域</string>
   <string name="pref_xtherion_areas_summary">保存 xtherion 区域</string>
-  <string name="pref_binary_store_title">草图二进制文件</string>
-  <string name="pref_binary_store_summary">保存草图为二进制文件</string>
+  <!-- UNUSED string name="pref_binary_store_title">草图二进制文件</string -->
+  <!-- UNUSED string name="pref_binary_store_summary">保存草图为二进制文件</string -->
+  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
+  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Therion 测量点</string>
   <string name="pref_autoStations_summary">自动添加测量点到Therion文件</string>
   <string name="pref_loopClosure_title">闭合圈测</string>

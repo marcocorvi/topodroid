@@ -253,7 +253,7 @@
     <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Метаданные</string>
     <string name="menu_sync">СИНХР.</string>
-    <string name="menu_tdr2th2">TH2 Абрисы</string>
+    <!-- UNUSED string name="menu_tdr2th2">TH2 Абрисы</string -->
     <string name="menu_validate">ПОДТВЕРДИТЬ</string>
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
@@ -303,8 +303,8 @@
     <string name="splay">боковой замер</string>
     <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
     <string name="too_many_legs_xsection">Слишком много лучей для разреза</string>
-    <string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string>
-    <string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string>
+    <!-- UNUSED string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
+    <!-- UNUSED string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string -->
     <string name="section_area">Площадь сечения: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->
@@ -554,7 +554,7 @@
     <string name="help_rename">Изменить название съёмки</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
-    <string name="help_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string>
+    <!-- UNUSED string name="help_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
     <string name="help_toggle_plot">Переключить план разрез-разв.</string>
     <string name="help_trash">Удалить абрис</string>
     <string name="help_undo">Отмена последнего действия</string>
@@ -865,8 +865,10 @@
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
   <string name="pref_xtherion_areas_title">Области xtherion</string>
   <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
-  <string name="pref_binary_store_title">Бинарный файл абриса</string>
-  <string name="pref_binary_store_summary">Сохранить абрисы в бинарный формат</string>
+  <!-- UNUSED string name="pref_binary_store_title">Бинарный файл абриса</string -->
+  <!-- UNUSED string name="pref_binary_store_summary">Сохранить абрисы в бинарный формат</string -->
+  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
+  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>

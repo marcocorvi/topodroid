@@ -583,8 +583,9 @@ public class GMActivity extends Activity
   boolean mEnableWrite;
   ListView   mMenu;
   Button     mImage;
-  // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter;
+  // HOVER
+  // MyMenuAdapter mMenuAdapter;
+  ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
   
   @Override
@@ -632,9 +633,10 @@ public class GMActivity extends Activity
     // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter();
+    setMenuAdapter( getResources() );
     closeMenu();
-    // mMenu.setOnItemClickListener( this );
+    // HOVER
+    mMenu.setOnItemClickListener( this );
   }
 
   private void resetTitle()
@@ -944,11 +946,11 @@ public class GMActivity extends Activity
 
   // ---------------------------------------------------------
 
-  private void setMenuAdapter()
+  private void setMenuAdapter( Resources res )
   {
-    Resources res = getResources();
-    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    // HOVER
+    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     for ( int k=0; k<4; ++k ) {
       mMenuAdapter.add( res.getString( menus[k] ) );
@@ -960,7 +962,8 @@ public class GMActivity extends Activity
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    mMenuAdapter.resetBgColor();
+    // HOVER
+    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

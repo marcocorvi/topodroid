@@ -29,6 +29,19 @@ class PlotInfo
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
   public static final long PLOT_PROFILE    = 8; // projected profile
 
+  public long surveyId; // survey id
+  public long id;       // plot id
+  public String name;   // name of the plot
+  public int type;      // type of the plot
+  public String start;  // base station
+  public String view;   // viewed station (barrier)
+  public String hide;   // hiding stations
+  public float xoffset; // display X-offset
+  public float yoffset; // display Y-offset
+  public float zoom;    // display zoom
+  public float azimuth; // vertical cross-section azimuth / profile projection azimuth
+  public float clino;   // inclination (0 for plan cross-sections)
+
   static boolean isVertical( long type ) 
   {
     return ( type == PLOT_EXTENDED || type == PLOT_PROFILE || type == PLOT_SECTION || type == PLOT_X_SECTION );
@@ -97,19 +110,6 @@ class PlotInfo
   //   "+", "==", "||", "x", "[o]", "<>", "3d", "><"
   // };
 
-
-  public long surveyId; // survey id
-  public long id;       // plot id
-  public String name;   // name of the plot
-  public int type;      // type of the plot
-  public String start;  // base station
-  public String view;   // viewed station (barrier)
-  public String hide;   // hiding stations
-  public float xoffset; // display X-offset
-  public float yoffset; // display Y-offset
-  public float zoom;    // display zoom
-  public float azimuth; // vertical cross-section azimuth / profile projection azimuth
-  public float clino;   // inclination (0 for plan cross-sections)
 
   // void dump()
   // {

@@ -1041,7 +1041,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return;
     // TDLog.Log( TDLog.LOG_DB,
     //                   "updatePlot: " + plot_id + "/" + survey_id + " x " + xoffset + " y " + yoffset + " zoom " + zooom);
-    if ( updatePlotStmt == null ) updatePlotStmt   = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
+    if ( updatePlotStmt == null ) updatePlotStmt = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
     updatePlotStmt.bindDouble( 1, xoffset );
     updatePlotStmt.bindDouble( 2, yoffset );
     updatePlotStmt.bindDouble( 3, zoom );

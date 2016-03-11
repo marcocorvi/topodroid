@@ -253,7 +253,7 @@
     <string name="menu_stats">STATISTICHE</string>
     <string name="menu_survey">INFORMAZIONI</string>
     <string name="menu_sync">SINC</string>
-    <string name="menu_tdr2th2">DISEGNI TH2</string>
+    <!-- UNUSED string name="menu_tdr2th2">DISEGNI TH2</string -->
     <string name="menu_validate">CONVALIDA</string>
 
 
@@ -303,8 +303,8 @@
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
     <string name="too_many_legs_xsection">Troppe battute per una Cross-section</string>
-    <string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string>
-    <string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string>
+    <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
+    <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
@@ -559,7 +559,7 @@
     <string name="help_rename">Modifica il nome del rilievo</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
-    <string name="help_tdr2th2">Conversione formato disegno da binario a th2</string>
+    <!-- UNUSED string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
     <string name="help_toggle_plot">Passa tra pianta e sezione long.</string>
     <string name="help_trash">ELimina disegno</string>
     <string name="help_undo">Cancella ultima azione di disegno</string>
@@ -874,8 +874,10 @@
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
   <string name="pref_xtherion_areas_title">Aree xtherion</string>
   <string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string>
-  <string name="pref_binary_store_title">File disegno formato binario</string>
-  <string name="pref_binary_store_summary">Salva file disegno in formato binario</string>
+  <!-- UNUSED string name="pref_binary_store_title">File disegno formato binario</string -->
+  <!-- UNUSED string name="pref_binary_store_summary">Salva file disegno in formato binario</string -->
+  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
+  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Punti th2 station</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>

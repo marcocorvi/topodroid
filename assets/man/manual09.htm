@@ -3,7 +3,7 @@
 
 The Sketch button of the "Shot data" window opens the dialog with the list of sketches, besides the "New Sketch" button. Tap on this button to create a new survey sketch.<br><p>
 
-Each sketch is made of two Therion 2D sketch files: one for the plan view, the other for the profile view (either extended or projected). Cross sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
+Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). Cross sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br><p>
 
 The plan view displays the projection on the horizontal plane of midline and splay shots. Splays above a certain inclination are shown as dashed lines. For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
 
@@ -107,6 +107,14 @@ The <b>edit</b> [A] mode has, besides the green buttons:
   </li>
   <li><i>AUTO WALLS [E]</i> <a href="page_walls.htm">settings</a></li>
 </ul>
+
+<h4>Sketch cache</h4>
+Once opened the sketches are kept in memory, in a cache. This speeds up switching between the shot-list window and the sketch window, as the sketch do not need to be read from file. The sketch cache is cleared when the survey is closed.<br><p>
+
+<h4>Sketch file format</h4>
+Each sketch is saved to file whenever it is modified, or when the sketch window changes to a different view.
+For performance TopoDroid saves the sketches in its binary format.
+There is however the option to save sketches also in Therion format.<br><p>
 
 <h4>Point selection</h4>
 To do some editing you must select a point: either a point item, a line/area point, a station, or a shot midpoint.<br>

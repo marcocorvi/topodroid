@@ -324,8 +324,9 @@ public class OverviewActivity extends ItemDrawer
     HorizontalButtonView mButtonView1;
     ListView   mMenu;
     Button     mImage;
-    // ArrayAdapter< String > mMenuAdapter;
-    MyMenuAdapter mMenuAdapter;
+    // HOVER
+    // MyMenuAdapter mMenuAdapter;
+    ArrayAdapter< String > mMenuAdapter;
     boolean onMenu;
   
     List<DistoXDBlock> mBlockList = null;
@@ -432,9 +433,10 @@ public class OverviewActivity extends ItemDrawer
       mImage.setOnClickListener( this );
       MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
       mMenu = (ListView) findViewById( R.id.menu );
-      setMenuAdapter();
+      setMenuAdapter( getResources() );
       closeMenu();
-      // mMenu.setOnItemClickListener( this );
+      // HOVER
+      mMenu.setOnItemClickListener( this );
 
       doStart();
       // Log.v("DistoX", "Overview offset " + mOffset.x + " " + mOffset.y );
@@ -558,14 +560,13 @@ public class OverviewActivity extends ItemDrawer
         TDLog.Log( TDLog.LOG_DEBUG, "load th2 file " + fullName );
 
         String th2 = TDPath.getTh2FileWithExt( fullName );
-        if ( TDSetting.mBinaryTh2 ) {
+        // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
           String tdr = TDPath.getTdrFileWithExt( fullName );
-          // FIXME to check
           mOverviewSurface.addloadDataStream( tdr, th2, xdelta, ydelta, null );
-        } else {
-          // FIXME_OVER N.B. this loads the drawing on DrawingSurface.mCommandManager3
-          mOverviewSurface.addloadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
-        }
+        // } else {
+        //   // FIXME_OVER N.B. this loads the drawing on DrawingSurface.mCommandManager3
+        //   mOverviewSurface.addloadTherion( th2, xdelta, ydelta, null ); // ignore missing symbols
+        // }
       }
 
       // if ( ! mAllSymbols ) {
@@ -936,11 +937,11 @@ public class OverviewActivity extends ItemDrawer
   }
 
 
-  private void setMenuAdapter()
+  private void setMenuAdapter( Resources res )
   {
-    Resources res = getResources();
-    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    // HOVER
+    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -951,7 +952,8 @@ public class OverviewActivity extends ItemDrawer
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    mMenuAdapter.resetBgColor();
+    // HOVER
+    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

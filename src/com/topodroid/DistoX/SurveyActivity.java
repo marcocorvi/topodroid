@@ -72,7 +72,7 @@ public class SurveyActivity extends Activity
                      };
   private static int menus[] = {
                         R.string.menu_export,
-                        R.string.menu_tdr2th2,
+                        // R.string.menu_tdr2th2, // TDR BINARY
                         R.string.menu_rename,
                         R.string.menu_delete,
                         R.string.menu_manual_calibration,
@@ -89,7 +89,7 @@ public class SurveyActivity extends Activity
                         };
   private static int help_menus[] = { 
                         R.string.help_export_survey,
-                        R.string.help_tdr2th2,
+                        // R.string.help_tdr2th2, // TDR BINARY
                         R.string.help_rename,
                         R.string.help_delete_survey,
                         R.string.help_manual_calibration,
@@ -115,8 +115,9 @@ public class SurveyActivity extends Activity
   HorizontalButtonView mButtonView1;
   ListView   mMenu;
   Button     mImage;
-  // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter;
+  // HOVER
+  // MyMenuAdapter mMenuAdapter;
+  ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
   String mInitStation = null;
 
@@ -221,9 +222,10 @@ public class SurveyActivity extends Activity
     // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
     MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter();
+    setMenuAdapter( getResources() );
     closeMenu();
-    // mMenu.setOnItemClickListener( this );
+    // HOVER
+    mMenu.setOnItemClickListener( this );
   }
 
   void setTheTitle()
@@ -317,16 +319,17 @@ public class SurveyActivity extends Activity
     } );
   }
 
-  private void askTdr2Th2()
-  {
-    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.convert_tdr2th2,
-      new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick( DialogInterface dialog, int btn ) {
-          startConvertTdrTh2Task();
-        }
-    } );
-  }
+  // TDR BINARY
+  // private void askTdr2Th2()
+  // {
+  //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.convert_tdr2th2,
+  //     new DialogInterface.OnClickListener() {
+  //       @Override
+  //       public void onClick( DialogInterface dialog, int btn ) {
+  //         startConvertTdrTh2Task();
+  //       }
+  //   } );
+  // }
 
   // ===============================================================
 
@@ -552,11 +555,11 @@ public class SurveyActivity extends Activity
   }
   // ---------------------------------------------------------
 
-  private void setMenuAdapter()
+  private void setMenuAdapter( Resources res )
   {
-    Resources res = getResources();
-    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    // HOVER
+    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -564,7 +567,7 @@ public class SurveyActivity extends Activity
     mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
-    mMenuAdapter.add( res.getString( menus[6] ) );
+    // mMenuAdapter.add( res.getString( menus[6] ) ); // TDR BINARY
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -572,7 +575,8 @@ public class SurveyActivity extends Activity
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    mMenuAdapter.resetBgColor();
+    // HOVER
+    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 
@@ -582,8 +586,8 @@ public class SurveyActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // EXPORT
       new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
-    } else if ( p++ == pos ) { // TDR to TH2 
-      askTdr2Th2();
+    // } else if ( p++ == pos ) { // TDR to TH2  TDR BINARY
+    //   askTdr2Th2();
     } else if ( p++ == pos ) { // RENAME
       new SurveyRenameDialog( this, this ).show();
     } else if ( p++ == pos ) { // DELETE
@@ -614,16 +618,17 @@ public class SurveyActivity extends Activity
     // }
   }
 
-  private void startConvertTdrTh2Task()
-  {
-    // final Activity currentActivity = this; 
-    Handler convert_handler= new Handler(){
-      @Override
-      public void handleMessage(Message msg) {
-        Toast.makeText( mApp, R.string.converted_tdr2th2, Toast.LENGTH_SHORT).show();
-      }
-    };
-    (new ConvertTdr2Th2Task( this, convert_handler, mApp )).execute();
-  }
+  // TDR BINARY
+  // private void startConvertTdrTh2Task()
+  // {
+  //   // final Activity currentActivity = this; 
+  //   Handler convert_handler= new Handler(){
+  //     @Override
+  //     public void handleMessage(Message msg) {
+  //       Toast.makeText( mApp, R.string.converted_tdr2th2, Toast.LENGTH_SHORT).show();
+  //     }
+  //   };
+  //   (new ConvertTdr2Th2Task( this, convert_handler, mApp )).execute();
+  // }
 
 }

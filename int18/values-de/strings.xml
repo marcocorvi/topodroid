@@ -271,7 +271,7 @@
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
     <string name="menu_sync">SYNCHRONISIEREN</string>
-    <string name="menu_tdr2th2">TH2 SKIZZEN</string>
+    <!-- UNUSED string name="menu_tdr2th2">TH2 SKIZZEN</string -->
     <string name="menu_validate">VALIDIEREN</string>
 
 <!-- LINE POINT EDITING ACTIONS -->
@@ -318,8 +318,8 @@
     <string name="splay">Hilfszug</string>
     <string name="too_many_leg_intersection">Schnittlinie durchquert zu viele Messstrecken</string>
     <string name="too_many_legs_xsection">Zu viele Messstrecken für Querschnitt</string>
-    <string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string>
-    <string name="convert_tdr2th2">th2 Skizzen überschreiben?</string>
+    <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
+    <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
     <string name="section_area">Fläche: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
@@ -583,7 +583,7 @@
     <string name="help_rename">Ändere Vermessungsnamen</string>
     <string name="help_stats">Vermessungs-Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
-    <string name="help_tdr2th2">Erstelle th2 Dateien der Skizzen</string>
+    <!-- UNUSED string name="help_tdr2th2">Erstelle th2 Dateien der Skizzen</string -->
     <string name="help_toggle_plot">Zwischen der Draufsicht und Seitenansicht wechseln</string>
     <string name="help_trash">Die Skizze löschen</string>
     <string name="help_undo">Letzte Aktion rückgängig machen</string>
@@ -884,8 +884,10 @@
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
   <string name="pref_xtherion_areas_title">xtherion Flächen</string>
   <string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string>
-  <string name="pref_binary_store_title">Skizzen als binäre Datei</string>
-  <string name="pref_binary_store_summary">Skizzen binär speichern (experimentell)</string>
+  <!-- UNUSED string name="pref_binary_store_title">Skizzen als binäre Datei</string -->
+  <!-- UNUSED string name="pref_binary_store_summary">Skizzen binär speichern (experimentell)</string -->
+  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
+  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Skizzen-Messpunkte</string>
   <string name="pref_autoStations_summary">Messpunkte automatisch einfügen</string>
   <string name="pref_loopClosure_title">Kreisschluss</string>

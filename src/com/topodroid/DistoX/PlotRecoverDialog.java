@@ -131,13 +131,13 @@ public class PlotRecoverDialog extends MyDialog
   {
     mAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
 
-    if ( TDSetting.mBinaryTh2 ) {
+    // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
       populateAdapter( TDPath.getTdrFileWithExt( mFilename ), ".tdr" );
       mTVfilename.setText( mFilename + ".tdr" );
-    } else {
-      populateAdapter( TDPath.getTh2FileWithExt( mFilename ), ".th2" );
-      mTVfilename.setText( mFilename + ".th2" );
-    }
+    // } else {
+    //   populateAdapter( TDPath.getTh2FileWithExt( mFilename ), ".th2" );
+    //   mTVfilename.setText( mFilename + ".th2" );
+    // }
     mList.setAdapter( mAdapter );
   }
 

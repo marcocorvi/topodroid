@@ -173,8 +173,9 @@ public class DeviceActivity extends Activity
   HorizontalButtonView mButtonView1;
   ListView   mMenu;
   Button     mImage;
-  // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter;
+  // HOVER
+  // MyMenuAdapter mMenuAdapter;
+  ArrayAdapter< String > mMenuAdapter;
   boolean onMenu;
 
 
@@ -259,9 +260,10 @@ public class DeviceActivity extends Activity
     MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
 
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter();
+    setMenuAdapter( getResources() );
     closeMenu();
-    // mMenu.setOnItemClickListener( this );
+    // HOVER
+    mMenu.setOnItemClickListener( this );
   }
 
   private void updateList( )
@@ -716,11 +718,11 @@ public class DeviceActivity extends Activity
 
   // ---------------------------------------------------------
 
-  private void setMenuAdapter()
+  private void setMenuAdapter( Resources res )
   {
-    Resources res = getResources();
-    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    // HOVER
+    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -735,7 +737,8 @@ public class DeviceActivity extends Activity
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    mMenuAdapter.resetBgColor();
+    // HOVER
+    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

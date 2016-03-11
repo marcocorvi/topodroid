@@ -565,14 +565,16 @@ public class TopoDroidActivity extends Activity
   HorizontalButtonView mButtonView1;
   Button     mMenuImage;
   ListView   mMenu;
-  // ArrayAdapter< String > mMenuAdapter;
-  MyMenuAdapter mMenuAdapter = null;
+  // HOVER
+  // MyMenuAdapter mMenuAdapter = null;
+  ArrayAdapter< String > mMenuAdapter;
   
 
   void setMenuAdapter( Resources res )
   {
-    // mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
-    mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    // HOVER
+    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -587,7 +589,8 @@ public class TopoDroidActivity extends Activity
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    mMenuAdapter.resetBgColor();
+    // HOVER
+    // mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 
@@ -658,7 +661,8 @@ public class TopoDroidActivity extends Activity
 
     setMenuAdapter( getResources() );
     closeMenu();
-    // mMenu.setOnItemClickListener( this );
+    // HOVER
+    mMenu.setOnItemClickListener( this );
 
     // TDLog.Profile("TDActivity buttons");
     mListView = (HorizontalListView) findViewById(R.id.listview);
