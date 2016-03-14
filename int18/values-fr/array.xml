@@ -53,6 +53,27 @@
      <item name="four">4</item>
   </string-array>
 
+  <string-array name="exportShots">
+     <item name="none">Aucun</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="pockettoopo">PocketTopo</item>
+     <item name="survex">Survex</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array>
+
+  <string-array name="exportPlot">
+     <item name="none">Aucun</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array>
 
   <string-array name="extraButtons">
      <item name="basic">Basic</item>

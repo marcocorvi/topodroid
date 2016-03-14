@@ -30,6 +30,15 @@
      <item>- -</item>
   </string-array -->
 
+  <string-array name="exportPlot">
+     <item name="none">nessuno</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array>
+
   <string-array name="extraButtons">
      <item name="basic">Basic</item>
      <item name="normale">Normal</item>

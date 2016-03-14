@@ -668,7 +668,7 @@
 
   <string name="pref_cat_survey">Opzioni rilievo</string>
   <string name="pref_cat_drawing">Opzioni disegno</string>
-  <string name="pref_cat_import_export">IMPORTA/ESPORTA</string>
+  <string name="pref_cat_import_export">Opzioni import/export</string>
   <string name="pref_cat_calib">Opzioni calibrazione</string>
   <string name="pref_cat_device">Opzioni DistoX</string>
   <!-- UNUSED string name="pref_cat_sketch">Opzioni sketch 3D</string -->
