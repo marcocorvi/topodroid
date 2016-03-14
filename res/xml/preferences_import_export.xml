@@ -24,6 +24,15 @@
        android:entryValues="@array/exportShotsValue"
        />
 
+  <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_EXPORT_PLOT"
+       android:title="@string/pref_export_plot_title"
+       android:summary="@string/pref_export_plot_summary"
+       android:defaultValue="0"
+       android:entries="@array/exportPlot"
+       android:entryValues="@array/exportPlotValue"
+       />
+
    <CheckBoxPreference
        android:key="DISTOX_AUTO_STATIONS"
        android:summary="@string/pref_autoStations_summary"

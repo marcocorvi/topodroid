@@ -29,22 +29,6 @@ import android.util.Log;
 
 class TopoDroidExporter
 {
-
-  // final static int EXPORT_THERION    = 0;
-  // final static int EXPORT_COMPASS    = 1;
-  // final static int EXPORT_CSURVEY    = 2;
-  // final static int EXPORT_POCKETTOPO = 3;
-  // final static int EXPORT_SURVEX     = 4;
-  // final static int EXPORT_VISUALTOPO = 5;
-  // final static int EXPORT_WALLS      = 6;
-  // final static int EXPORT_CSV        = 10;
-  // final static int EXPORT_DXF        = 11;
-  // final static int EXPORT_PNG        = 12;
-  // final static int EXPORT_SVG        = 13;
-  // final static int EXPORT_KML        = 14;
-  // final static int EXPORT_ZIP        = 20;
-
-
   // =======================================================================
   // CSURVEY EXPORT cSurvey
 
@@ -92,7 +76,8 @@ class TopoDroidExporter
     leg.reset();
   }
 
-  static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch, String origin, String filename )
+  static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch,
+                                   String origin, String filename )
   {
     String cave = info.name.toUpperCase();
 
@@ -106,7 +91,6 @@ class TopoDroidExporter
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
-
 
       pw.format("<csurvey version=\"1.04\" id=\"\">\n");
       pw.format("<!-- %s created by TopoDroid v %s -->\n", TopoDroidUtil.getDateString("yyyy-MM-dd"), TopoDroidApp.VERSION );

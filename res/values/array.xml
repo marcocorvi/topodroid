@@ -91,6 +91,7 @@
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <string-array name="exportShots">
+     <item name="none">-</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
@@ -102,6 +103,7 @@
      <item name="dxf">DXF</item>
   </string-array>
   <string-array name="exportShotsValue">
+     <item name="none">100</item>
      <item name="therion">0</item>
      <item name="compass">2</item>
      <item name="csurvey">7</item>
@@ -112,6 +114,25 @@
      <item name="csv">5</item>
      <item name="dxf">6</item>
   </string-array>
+
+  <string-array name="exportPlot">
+     <item name="none">-</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array>
+  <string-array name="exportPlotValue">
+     <item name="none">100</item>
+     <item name="therion">14</item>
+     <item name="csurvey">7</item>
+     <item name="dxf">6</item>
+     <item name="svg">13</item>
+     <item name="png">12</item>
+  </string-array>
+
+   
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <!-- UNUSED string-array name="exportSketch">

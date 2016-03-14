@@ -677,6 +677,8 @@
   <string name="pref_cosurvey_summary">启用/停用 联合测量服务</string>
   <string name="pref_export_shots_title">默认数据导出</string>
   <string name="pref_export_shots_summary">默认数据导出格式</string>
+  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
   <string name="pref_extra_buttons_title">工作模式选择</string>
   <string name="pref_extra_buttons_summary">激活特殊模式</string>
   <string name="pref_size_buttons_title">按键尺寸</string>
@@ -865,10 +867,6 @@
   <string name="pref_checkAttached_summary">检测如果测量点相连接</string>
   <string name="pref_xtherion_areas_title">xtherion 区域</string>
   <string name="pref_xtherion_areas_summary">保存 xtherion 区域</string>
-  <!-- UNUSED string name="pref_binary_store_title">草图二进制文件</string -->
-  <!-- UNUSED string name="pref_binary_store_summary">保存草图为二进制文件</string -->
-  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
-  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Therion 测量点</string>
   <string name="pref_autoStations_summary">自动添加测量点到Therion文件</string>
   <string name="pref_loopClosure_title">闭合圈测</string>

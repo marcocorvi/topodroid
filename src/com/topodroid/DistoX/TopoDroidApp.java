@@ -1324,7 +1324,7 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------
   // EXPORTS
 
-  public String exportSurveyAsCsx( DrawingActivity sketch, String origin )
+  public String exportSurveyAsCsx( DrawingActivity sketch, String origin, boolean with_handler )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     String filename = ( sketch == null )? TDPath.getSurveyCsxFile(mySurvey)

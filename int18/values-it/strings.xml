@@ -687,6 +687,8 @@
   <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
   <string name="pref_export_shots_title">Formato esportazione dati</string>
   <string name="pref_export_shots_summary">Formato esportazione dati preferenziale</string>
+  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
   <string name="pref_extra_buttons_title">Livello di comandi</string>
   <string name="pref_extra_buttons_summary">Seleziona il livello di comandi</string>
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
@@ -874,10 +876,6 @@
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
   <string name="pref_xtherion_areas_title">Aree xtherion</string>
   <string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string>
-  <!-- UNUSED string name="pref_binary_store_title">File disegno formato binario</string -->
-  <!-- UNUSED string name="pref_binary_store_summary">Salva file disegno in formato binario</string -->
-  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
-  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Punti th2 station</string>
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>

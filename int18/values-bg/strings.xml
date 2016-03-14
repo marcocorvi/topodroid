@@ -682,6 +682,8 @@
   <string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string>
   <string name="pref_export_shots_title">Формат на експортираните данни</string>
   <string name="pref_export_shots_summary">Формат на експортираните данни по подразбиране</string>
+  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
   <string name="pref_extra_buttons_title">Ниво на функциите</string>
   <string name="pref_extra_buttons_summary">Ниво на показваните менюта: основни, нормални, пълни…</string>
   <string name="pref_size_buttons_title">Размер бутони</string>
@@ -870,10 +872,6 @@
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
   <string name="pref_xtherion_areas_title">Площи експорт в xtherion</string>
   <string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string>
-  <!-- UNUSED string name="pref_binary_store_title">Двоичен формат скици</string -->
-  <!-- UNUSED string name="pref_binary_store_summary">Записване на скиците в двоичен формат</string -->
-  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
-  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>

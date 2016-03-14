@@ -679,6 +679,8 @@
   <!-- TODO string name="pref_cosurvey_summary">Enable/Disable co-surveying</string -->
   <string name="pref_export_shots_title">Format export des données</string>
   <string name="pref_export_shots_summary">Format export des données par defaut</string>
+  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
   <string name="pref_extra_buttons_title">Niveau d\'Utilisation</string>
   <string name="pref_extra_buttons_summary">Active des options suplementaires</string>
   <string name="pref_size_buttons_title">Taille des boutons</string>
@@ -867,10 +869,6 @@
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
   <string name="pref_xtherion_areas_title">Aire Xtherion</string>
   <string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string>
-  <!-- UNUSED string name="pref_binary_store_title">Sketch binary file</string -->
-  <!-- UNUSED string name="pref_binary_store_summary">Save sketches in binary format</string -->
-  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
-  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Stations auto</string>
   <string name="pref_autoStations_summary">Ajouter les stations automatiquement</string>
   <string name="pref_loopClosure_title">Bouclage</string>

@@ -15,6 +15,7 @@ import android.text.InputType;
 
 class TDConst
 {
+  static final int DISTOX_EXPORT_NONE = -1;
   static final int DISTOX_EXPORT_TH  = 0;
   static final int DISTOX_EXPORT_TLX = 1;
   static final int DISTOX_EXPORT_DAT = 2;
@@ -58,7 +59,7 @@ class TDConst
     for ( int k=0; k<types.length; ++k ) {
       if ( types[k].equals( type ) ) return index[k];
     }
-    return -1;
+    return DISTOX_EXPORT_NONE;
   }
 
   static int surveyExportIndex( String type ) { return exportIndex( type, mSurveyExportTypes, mSurveyExportIndex ); }

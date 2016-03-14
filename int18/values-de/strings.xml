@@ -700,6 +700,8 @@
   <string name="pref_cosurvey_summary">Aktivieren/Deaktivieren Co-Vermessung</string>
   <string name="pref_export_shots_title">Datenexportformat</string>
   <string name="pref_export_shots_summary">Standarddatenexportformat</string>
+  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
   <string name="pref_extra_buttons_title">Modus</string>
   <string name="pref_extra_buttons_summary">Fortgeschrittenen-Modus</string>
   <string name="pref_size_buttons_title">Button-Größe</string>
@@ -884,10 +886,6 @@
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
   <string name="pref_xtherion_areas_title">xtherion Flächen</string>
   <string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string>
-  <!-- UNUSED string name="pref_binary_store_title">Skizzen als binäre Datei</string -->
-  <!-- UNUSED string name="pref_binary_store_summary">Skizzen binär speichern (experimentell)</string -->
-  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
-  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Skizzen-Messpunkte</string>
   <string name="pref_autoStations_summary">Messpunkte automatisch einfügen</string>
   <string name="pref_loopClosure_title">Kreisschluss</string>

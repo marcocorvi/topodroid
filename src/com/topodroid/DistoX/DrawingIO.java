@@ -557,6 +557,7 @@ class DrawingIO
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
+          Log.v("DistoX", "Read " + what );
           path = null;
           switch ( what ) {
             case 'V':

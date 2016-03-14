@@ -677,6 +677,8 @@
   <string name="pref_cosurvey_summary">Enable/Disable co-surveying service</string>
   <string name="pref_export_shots_title">Default data export</string>
   <string name="pref_export_shots_summary">Default data export format</string>
+  <string name="pref_export_plot_title">Default sketch export</string>
+  <string name="pref_export_plot_summary">Default sketch export format</string>
   <string name="pref_extra_buttons_title">Level of features</string>
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
   <string name="pref_size_buttons_title">Buttons size</string>
@@ -865,10 +867,6 @@
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
   <string name="pref_xtherion_areas_title">xtherion areas</string>
   <string name="pref_xtherion_areas_summary">Save areas a la xtherion</string>
-  <!-- UNUSED string name="pref_binary_store_title">Sketch binary file</string -->
-  <!-- UNUSED string name="pref_binary_store_summary">Save sketches in binary format</string -->
-  <string name="pref_auto_th2_title">Therion sketch files</string>
-  <string name="pref_auto_th2_summary">Auto save sketches in Therion format</string>
   <string name="pref_autoStations_title">Therion stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>

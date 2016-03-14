@@ -389,7 +389,7 @@
     <string name="extended">Desarrollado</string>
     <string name="extended_profile">Perfil extendido</string>
     <string name="profile">PROYECTO</string>
-    <string name="v_section">V-sección</string>
+    <!-- UNUSED string name="v_section">V-sección</string -->
     <string name="h_section">H-sección</string>
 
     <string name="distox_err_ok">OK</string>
@@ -617,6 +617,8 @@
   <string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
+  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
   <string name="pref_extra_buttons_summary">Habilitar botones opcionales ventana principal</string>
   <string name="pref_size_buttons_title">Tamaño botones</string>
@@ -801,10 +803,6 @@
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
   <string name="pref_xtherion_areas_title">Áreas Xtherion</string>
   <string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string>
-  <!-- UNUSED string name="pref_binary_store_title">Archivo binario dibujo</string -->
-  <!-- UNUSED string name="pref_binary_store_summary">Guardar dibujos en formato binario</string -->
-  <!-- TODO string name="pref_auto_th2_title">Therion sketch files</string -->
-  <!-- TODO string name="pref_auto_th2_summary">Auto save sketches in Therion format</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>

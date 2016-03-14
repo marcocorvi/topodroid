@@ -515,19 +515,18 @@ public class DrawingActivity extends ItemDrawer
     }
   };
 
+  // doSaveTdr( ) is already called by onPause
   @Override
   public void onBackPressed () // askClose
   {
     if ( dismissPopups() ) return;
     if ( PlotInfo.isAnySection( mType ) ) {
-      // doSaveTdr( ); // already called by onPause
       popInfo();
       doStart( false );
     } else {
       if ( doubleBack ) {
         if ( doubleBackToast != null ) doubleBackToast.cancel();
         doubleBackToast = null;
-        // doSaveTdr( ); // already called by onPause
         super.onBackPressed();
       } else {
         doubleBack = true;
@@ -539,7 +538,7 @@ public class DrawingActivity extends ItemDrawer
   }
 
 
-  // called by doPause and onBackPressed
+  // called by doPause 
   private void doSaveTdr( )
   {
     if ( mDrawingSurface != null ) {
@@ -606,7 +605,7 @@ public class DrawingActivity extends ItemDrawer
     long tt     = type;
     if ( type == -1 ) {
       try { 
-        (new SaveTh2FileTask( this, handler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
+        (new SavePlotFileTask( this, this, handler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
                               (int)mPlot2.azimuth, suffix, rotate )).execute();
       } catch ( RejectedExecutionException e ) { }
       name = mFullName1;
@@ -620,7 +619,7 @@ public class DrawingActivity extends ItemDrawer
       name = mFullName3;
     }
     try { 
-      (new SaveTh2FileTask( this, handler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
+      (new SavePlotFileTask( this, this, handler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
       ).execute();
     } catch ( RejectedExecutionException e ) { 
       -- mNrSaveTh2Task;
@@ -1387,9 +1386,9 @@ public class DrawingActivity extends ItemDrawer
    private void setPlotType( long type )
    {
      if ( PlotInfo.isProfile( type ) ) {
-       setPlotType2();
+       setPlotType2( false );
      } else if ( type == PlotInfo.PLOT_PLAN ) { 
-       setPlotType1();
+       setPlotType1( false );
      } else {
        setPlotType3();
      }
@@ -2723,10 +2722,10 @@ public class DrawingActivity extends ItemDrawer
       doSaveTdr(); // this sets mModified = false
       if ( mType == PlotInfo.PLOT_PLAN ) {
         saveReference( mPlot1, mPid1 );
-        setPlotType2();
+        setPlotType2( false );
       } else if ( PlotInfo.isProfile( mType ) ) {
         saveReference( mPlot2, mPid2 );
-        setPlotType1();
+        setPlotType1( false );
       }
     }
 
@@ -2741,7 +2740,7 @@ public class DrawingActivity extends ItemDrawer
       resetReference( mPlot3 );
     } 
 
-    private void setPlotType2( )
+    private void setPlotType2( boolean compute )
     {
       // Log.v("DistoX", "set plot type 2 mType " + mType );
       mPid  = mPid2;
@@ -2749,11 +2748,14 @@ public class DrawingActivity extends ItemDrawer
       mType = mPlot2.type;
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
+      if ( compute ) {
+        computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
+      }
       resetReference( mPlot2 );
       mApp.mShotActivity.mRecentPlotType = mType;
     } 
 
-    private void setPlotType1()
+    private void setPlotType1( boolean compute )
     {
       // Log.v("DistoX", "set plot type 1 mType " + mType );
       mPid  = mPid1;
@@ -2761,6 +2763,9 @@ public class DrawingActivity extends ItemDrawer
       mType = mPlot1.type;
       mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
+      if ( compute ) {
+        computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
+      }
       resetReference( mPlot1 );
       mApp.mShotActivity.mRecentPlotType = mType;
     }
@@ -3155,114 +3160,6 @@ public class DrawingActivity extends ItemDrawer
     }
 
     // --------------------------------------------------------------------------
-    private class ExportBitmapToFile extends AsyncTask<Intent,Void,Boolean> 
-    {
-        private Context mContext;
-        private Handler mHandler;
-        private Bitmap mBitmap;
-        private String mFullName;
-
-        public ExportBitmapToFile( Context context, Handler handler, Bitmap bitmap, String name )
-        {
-           mContext  = context;
-           mBitmap   = bitmap;
-           mHandler  = handler;
-           mFullName = name;
-           // TDLog.Log( TDLog.LOG_PLOT, "ExportBitmapToFile " + mFullName );
-        }
-
-        @Override
-        protected Boolean doInBackground(Intent... arg0)
-        {
-          try {
-            String filename = TDPath.getPngFileWithExt( mFullName );
-            TDPath.checkPath( filename );
-            final FileOutputStream out = new FileOutputStream( filename );
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.flush();
-            out.close();
-            return true;
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-          //mHandler.post(completeRunnable);
-          return false;
-        }
-
-
-        @Override
-        protected void onPostExecute(Boolean bool) {
-            super.onPostExecute(bool);
-            mHandler.sendEmptyMessage( bool? 1 : 0 );
-        }
-    }
-
-
-    private class ExportToFile extends AsyncTask<Intent,Void,Boolean> 
-    {
-        private Context mContext;
-        private DrawingCommandManager mCommand;
-        private DistoXNum mNum;
-        private long mType;
-        private Handler mHandler;
-        private String mFullName;
-        private String mExt; // extension
-
-        public ExportToFile( Context context, Handler handler, DrawingCommandManager command,
-                             DistoXNum num, long type, String name, String ext )
-        {
-           // FIXME assert( ext != null );
-           mContext  = context;
-           mCommand  = command;
-           mNum = num;
-           mType = type;
-           mHandler  = handler;
-           mFullName = name;
-           mExt = ext;
-        }
-
-        @Override
-        protected Boolean doInBackground(Intent... arg0)
-        {
-          try {
-            String filename = null;
-            if ( mExt.equals("dxf") ) {
-              filename = TDPath.getDxfFileWithExt( mFullName );
-            } else if ( mExt.equals("svg") ) {
-              filename = TDPath.getSvgFileWithExt( mFullName );
-            }
-            // Log.v("DistoX", "Export to File: " + filename );
-            if ( filename != null ) {
-              // final FileOutputStream out = new FileOutputStream( filename );
-              TDPath.checkPath( filename );
-              final FileWriter fw = new FileWriter( filename );
-              BufferedWriter bw = new BufferedWriter( fw );
-              if ( mExt.equals("dxf") ) {
-                DrawingDxf.write( bw, mNum, mCommand, mType );
-              } else if ( mExt.equals("svg") ) {
-                DrawingSvg.write( bw, mNum, mCommand, mType );
-              }
-              fw.flush();
-              fw.close();
-              return true;
-            }
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-          //mHandler.post(completeRunnable);
-          return false;
-        }
-
-
-        @Override
-        protected void onPostExecute(Boolean bool) 
-        {
-          super.onPostExecute(bool);
-          mHandler.sendEmptyMessage( bool? 1 : 0 );
-        }
-    }
-
-    // --------------------------------------------------------
 
     private void savePng()
     {
@@ -3297,28 +3194,32 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    private void saveCsx()
+    // used by SavePlotFileTask
+    void saveCsx( boolean with_handler )
     {
-      mApp.exportSurveyAsCsx( this, mPlot1.start );
+      mApp.exportSurveyAsCsx( this, mPlot1.start, with_handler );
     }
 
     private void saveWithExt( String ext )
     {
       if ( PlotInfo.isSection( mType ) ) { 
-        doSaveWithExt( mType, mFullName1, ext ); // FIXME
+        doSaveWithExt( mType, mFullName1, ext, true ); // FIXME
       } else {
-        doSaveWithExt( mPlot1.type, mFullName1, ext );
-        doSaveWithExt( mPlot2.type, mFullName2, ext );
+        doSaveWithExt( mPlot1.type, mFullName1, ext, true );
+        doSaveWithExt( mPlot2.type, mFullName2, ext, true );
       }
     }
 
     // ext file extension (--> saving class)
     // ext can be dxf, svg
     // FIXME OK PROFILE
-    private void doSaveWithExt( long type, final String filename, final String ext )
+    // used by SavePlotFileTask
+    void doSaveWithExt( long type, final String filename, final String ext, boolean with_handler )
     {
       final Activity currentActivity  = this;
-      Handler handler = new Handler(){
+      Handler handler = null;
+      if ( with_handler ) {
+        handler = new Handler(){
            @Override
            public void handleMessage(Message msg) {
              if (msg.what == 1 ) {
@@ -3329,13 +3230,14 @@ public class DrawingActivity extends ItemDrawer
                  getString(R.string.saving_file_failed), Toast.LENGTH_SHORT ).show();
              }
            }
-      } ;
+        };
+      }
       if ( PlotInfo.isProfile( type ) ) {
-        new ExportToFile(this, handler, mDrawingSurface.mCommandManager2, mNum, type, filename, ext ).execute();
+        new ExportPlotToFile(this, handler, mDrawingSurface.mCommandManager2, mNum, type, filename, ext ).execute();
       } else if ( type == PlotInfo.PLOT_PLAN ) {
-        new ExportToFile(this, handler, mDrawingSurface.mCommandManager1, mNum, type, filename, ext ).execute();
+        new ExportPlotToFile(this, handler, mDrawingSurface.mCommandManager1, mNum, type, filename, ext ).execute();
       } else {
-        new ExportToFile(this, handler, mDrawingSurface.mCommandManager3, mNum, type, filename, ext ).execute();
+        new ExportPlotToFile(this, handler, mDrawingSurface.mCommandManager3, mNum, type, filename, ext ).execute();
       }
     }
 
@@ -3370,7 +3272,7 @@ public class DrawingActivity extends ItemDrawer
       name = mFullName3;
     }
     try { 
-      (new SaveTh2FileTask( this, null, mApp, mDrawingSurface, name, mType, azimuth, suffix, 0 )).execute();
+      (new SavePlotFileTask( this, this, null, mApp, mDrawingSurface, name, mType, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }
 
@@ -3547,9 +3449,9 @@ public class DrawingActivity extends ItemDrawer
         }
       } else if ( p++ == pos ) { // RECOVER RELOAD
         if ( PlotInfo.isProfile( mType ) ) {
-          ( new PlotRecoverDialog( this, this, mFullName2, 2 ) ).show();
+          ( new PlotRecoverDialog( this, this, mFullName2, mType ) ).show();
         } else {
-          ( new PlotRecoverDialog( this, this, mFullName1, 1 ) ).show();
+          ( new PlotRecoverDialog( this, this, mFullName1, mType ) ).show();
         }
       } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // DELETE
         askDelete();
@@ -3584,7 +3486,7 @@ public class DrawingActivity extends ItemDrawer
     int index = TDConst.plotExportIndex( type );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: saveTh2(); break;
-      case TDConst.DISTOX_EXPORT_CSX: saveCsx(); break;
+      case TDConst.DISTOX_EXPORT_CSX: saveCsx( true ); break;
       case TDConst.DISTOX_EXPORT_PNG: savePng(); break;
       case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break;
       case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
@@ -3600,7 +3502,7 @@ public class DrawingActivity extends ItemDrawer
   }
 
   // FIXME BACKUP TDR BINARY
-  // private void doRecoverTh2( String filename, int type )
+  // private void doRecoverTh2( String filename, long type )
   // {
   //   // Log.v("DistoX", "recover " + type + " " + filename );
   //   String th2  = TDPath.getTh2File( filename );
@@ -3608,36 +3510,36 @@ public class DrawingActivity extends ItemDrawer
   //     mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null );
   //     mDrawingSurface.modeloadTherion( th2, null ); // no missing symbols
   //     mDrawingSurface.addManagerToCache( mFullName1 );
-  //     setPlotType1();
+  //     setPlotType1( true );
   //   } else {
   //     mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null );
   //     mDrawingSurface.modeloadTherion( th2, null );
   //     mDrawingSurface.addManagerToCache( mFullName2 );
   //     // TODO now switch to extended view FIXME-VIEW
-  //     setPlotType2();
+  //     setPlotType2( true );
   //   }
   // }
 
-  private void doRecoverTdr( String filename, int type )
+  private void doRecoverTdr( String filename, long type )
   {
-    // Log.v("DistoX", "recover " + type + " " + filename );
     String tdr  = TDPath.getTdrFile( filename );
     String th2  = TDPath.getTh2File( filename );
-    if ( type == 1 ) {
+    // Log.v("DistoX", "recover " + type + " <" + filename + "> TRD " + tdr + " TH2 " + th2 );
+    if ( type == PlotInfo.PLOT_PLAN ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null );
       mDrawingSurface.modeloadDataStream( tdr, th2, null ); // no missing symbols
       mDrawingSurface.addManagerToCache( mFullName1 );
-      setPlotType1();
-    } else {
+      setPlotType1( true );
+    } else { // if ( PlotInfo.isProfile( type ) )
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null );
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
       mDrawingSurface.addManagerToCache( mFullName2 );
       // TODO now switch to extended view FIXME-VIEW
-      setPlotType2();
+      setPlotType2( true );
     }
   }
 
-  void doRecover( String filename, int type )
+  void doRecover( String filename, long type )
   {
     // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
       doRecoverTdr( filename, type );

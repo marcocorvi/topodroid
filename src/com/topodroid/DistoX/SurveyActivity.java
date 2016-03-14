@@ -45,7 +45,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import android.widget.Toast;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,13 +72,14 @@ public class SurveyActivity extends Activity
                      };
   private static int menus[] = {
                         R.string.menu_export,
-                        // R.string.menu_tdr2th2, // TDR BINARY
                         R.string.menu_rename,
                         R.string.menu_delete,
                         R.string.menu_manual_calibration,
                         R.string.menu_options,
                         R.string.menu_help
                       };
+  private static final int mNrMenus = 6;
+
   private static int help_icons[] = { 
                         R.string.help_note,
                         R.string.help_info_shot,
@@ -89,7 +90,6 @@ public class SurveyActivity extends Activity
                         };
   private static int help_menus[] = { 
                         R.string.help_export_survey,
-                        // R.string.help_tdr2th2, // TDR BINARY
                         R.string.help_rename,
                         R.string.help_delete_survey,
                         R.string.help_manual_calibration,
@@ -296,7 +296,9 @@ public class SurveyActivity extends Activity
   {
     while ( ! mApp.mEnableZip ) Thread.yield();
 
-    doExport( TDSetting.mExportShotsFormat, false );
+    if ( TDSetting.mExportShotsFormat >= 0 ) {
+      doExport( TDSetting.mExportShotsFormat, false );
+    }
     Archiver archiver = new Archiver( mApp );
     if ( archiver.archive( ) ) {
       String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
@@ -316,18 +318,6 @@ public class SurveyActivity extends Activity
         }
     } );
   }
-
-  // TDR BINARY
-  // private void askTdr2Th2()
-  // {
-  //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.convert_tdr2th2,
-  //     new DialogInterface.OnClickListener() {
-  //       @Override
-  //       public void onClick( DialogInterface dialog, int btn ) {
-  //         startConvertTdrTh2Task();
-  //       }
-  //   } );
-  // }
 
   // ===============================================================
 
@@ -465,7 +455,7 @@ public class SurveyActivity extends Activity
           filename = mApp.exportSurveyAsPlt( ); // can return ""
           break;
         case TDConst.DISTOX_EXPORT_CSX:
-          filename = mApp.exportSurveyAsCsx( null, null );
+          filename = mApp.exportSurveyAsCsx( null, null, false ); // false: no handler
           break;
         case TDConst.DISTOX_EXPORT_TOP:
           filename = mApp.exportSurveyAsTop( null, null );
@@ -565,7 +555,6 @@ public class SurveyActivity extends Activity
     mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
-    // mMenuAdapter.add( res.getString( menus[6] ) ); // TDR BINARY
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -584,8 +573,6 @@ public class SurveyActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // EXPORT
       new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
-    // } else if ( p++ == pos ) { // TDR to TH2  TDR BINARY
-    //   askTdr2Th2();
     } else if ( p++ == pos ) { // RENAME
       new SurveyRenameDialog( this, this ).show();
     } else if ( p++ == pos ) { // DELETE
@@ -597,7 +584,7 @@ public class SurveyActivity extends Activity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 7 ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, mNrMenus ) ).show();
     }
     // updateDisplay();
   }

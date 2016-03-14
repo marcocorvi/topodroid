@@ -22,7 +22,7 @@ class TDSetting
   // ---------------------------------------------------------
   // PREFERENCES KEYS
 
-  final static int NR_PRIMARY_PREFS = 12;
+  final static int NR_PRIMARY_PREFS = 11;
 
   static final String[] key = { // prefs keys
     "DISTOX_EXTRA_BUTTONS",       //  0 TODO move to general options
@@ -31,24 +31,22 @@ class TDSetting
     "DISTOX_MKEYBOARD",           //  3
     "DISTOX_TEAM",                //  4
     "DISTOX_COSURVEY",            //  5
-    // "DISTOX_BINARY_STORE",        //  6
-    "DISTOX_AUTO_TH2",            //  6
-    "DISTOX_INIT_STATION",        //  7 default initial station for sketches
+    "DISTOX_INIT_STATION",        //  6 default initial station for sketches
 
-    "DISTOX_DEVICE",              //  8 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
-    "DISTOX_BLUETOOTH",           //  9
+    "DISTOX_DEVICE",              //  7 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
+    "DISTOX_BLUETOOTH",           //  8
 
-    "DISTOX_LOCALE",              // 10
-    "DISTOX_CWD",                 // 11
+    "DISTOX_LOCALE",              //  9
+    "DISTOX_CWD",                 // 10
 
     // ----------------------- DEVICE PREFERNCES 
-    "DISTOX_SOCK_TYPE",           //  9
-    "DISTOX_COMM_RETRY",          // 10
-    "DISTOX_Z6_WORKAROUND",       // 12
-    "DISTOX_CONN_MODE",           // 11
-    "DISTOX_AUTO_PAIR",           // 13
-    "DISTOX_SOCKET_DELAY",        // 14
-    "DISTOX_AUTO_RECONNECT",      // 15
+    "DISTOX_SOCK_TYPE",           // 11
+    "DISTOX_COMM_RETRY",          // 12
+    "DISTOX_Z6_WORKAROUND",       // 13
+    "DISTOX_CONN_MODE",           // 14
+    "DISTOX_AUTO_PAIR",           // 15
+    "DISTOX_SOCKET_DELAY",        // 16
+    "DISTOX_AUTO_RECONNECT",      // 17
 
     // ------------------- SURVEY PREFERENCES
     "DISTOX_CLOSE_DISTANCE",      // 18
@@ -95,44 +93,45 @@ class TDSetting
     "DISTOX_DELTA_EXTRUDE",       // 54
     "DISTOX_COMPASS_READINGS",    // 55
 
-    "DISTOX_SPLAY_EXTEND",        // 55 whether to set extend to splay shots
-    "DISTOX_BITMAP_SCALE",        // 56
-    "DISTOX_THUMBNAIL",           // 57
-    "DISTOX_DOT_RADIUS",          // 58
-    "DISTOX_FIXED_THICKNESS",     // 59
-    "DISTOX_ARROW_LENGTH",        // 60
-    "DISTOX_EXPORT_SHOTS",        // 61
+    "DISTOX_SPLAY_EXTEND",        // 56 whether to set extend to splay shots
+    "DISTOX_BITMAP_SCALE",        // 57
+    "DISTOX_THUMBNAIL",           // 58
+    "DISTOX_DOT_RADIUS",          // 59
+    "DISTOX_FIXED_THICKNESS",     // 60
+    "DISTOX_ARROW_LENGTH",        // 61
+    "DISTOX_EXPORT_SHOTS",        // 62
+    "DISTOX_EXPORT_PLOT",         // 63
 
-    "DISTOX_SPLAY_VERT_THRS",     // 62 over mSplayVertThrs splays are not displayed in plan view
-    "DISTOX_BACKSIGHT",           // 64
-    "DISTOX_MAG_ANOMALY",         // 65 whether to compensate magnetic anomaly
-    "DISTOX_AZIMUTH_MANUAL",      // 66
-    "DISTOX_VERT_SPLAY",          // 67 over this splay are shown with dashed line
-    "DISTOX_STATION_PREFIX",      // 68 whether to add cave-name prefix to stations (cSurvey)
+    "DISTOX_SPLAY_VERT_THRS",     // 64 over mSplayVertThrs splays are not displayed in plan view
+    "DISTOX_BACKSIGHT",           // 65
+    "DISTOX_MAG_ANOMALY",         // 66 whether to compensate magnetic anomaly
+    "DISTOX_AZIMUTH_MANUAL",      // 67
+    "DISTOX_VERT_SPLAY",          // 68 over this splay are shown with dashed line
+    "DISTOX_STATION_PREFIX",      // 69 whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
-    "DISTOX_ZOOM_CTRL",           // 70
-    "DISTOX_SIDE_DRAG",           // 71 whether to enable side-drag
+    "DISTOX_ZOOM_CTRL",           // 71
+    "DISTOX_SIDE_DRAG",           // 72 whether to enable side-drag
     "DISTOX_DXF_SCALE", 
     "DISTOX_ACAD_VERSION",
-    "DISTOX_BITMAP_BGCOLOR",      // 74
-    "DISTOX_SURVEX_EOL",          // 75 survex end of line
+    "DISTOX_BITMAP_BGCOLOR",      // 75
+    "DISTOX_SURVEX_EOL",          // 76 survex end of line
     "DISTOX_SURVEX_SPLAY",
-    "DISTOX_SURVEX_LRUD",         // 77
-    "DISTOX_UNSCALED_POINTS",     // 78 unscaled drawing point items
-    "DISTOX_UNIT_GRID",           // 79
-    "DISTOX_XTHERION_AREAS",      // 80 save areas a-la xtherion
-    "DISTOX_RECENT_NR",           // 81 number of most recent items (item picker)
-    "DISTOX_AREA_BORDER",         // 82 area border visibility
-    "DISTOX_CONT_JOIN",           // 83 line continuation is join
-    "DISTOX_CSV_LENGTH",          // 84 CSV export length unit
-    "DISTOX_ORTHO_LRUD",          // 85 orthogonal LRUD ( >=1 disable, min 0 )
+    "DISTOX_SURVEX_LRUD",         // 78
+    "DISTOX_UNSCALED_POINTS",     // 79 unscaled drawing point items
+    "DISTOX_UNIT_GRID",           // 80
+    "DISTOX_XTHERION_AREAS",      // 81 save areas a-la xtherion
+    "DISTOX_RECENT_NR",           // 82 number of most recent items (item picker)
+    "DISTOX_AREA_BORDER",         // 83 area border visibility
+    "DISTOX_CONT_JOIN",           // 84 line continuation is join
+    "DISTOX_CSV_LENGTH",          // 85 CSV export length unit
+    "DISTOX_ORTHO_LRUD",          // 86 orthogonal LRUD ( >=1 disable, min 0 )
 
-    "DISTOX_WALLS_TYPE",          // 86
-    "DISTOX_WALLS_PLAN_THR",      // 87
-    "DISTOX_WALLS_EXTENDED_THR",  // 88
-    "DISTOX_WALLS_XCLOSE",        // 89
-    "DISTOX_WALLS_XSTEP",         // 90
-    "DISTOX_WALLS_CONCAVE",       // 91
+    "DISTOX_WALLS_TYPE",          // 87
+    "DISTOX_WALLS_PLAN_THR",      // 88
+    "DISTOX_WALLS_EXTENDED_THR",  // 89
+    "DISTOX_WALLS_XCLOSE",        // 90
+    "DISTOX_WALLS_XSTEP",         // 91
+    "DISTOX_WALLS_CONCAVE",       // 92
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
     // "DISTOX_SKETCH_BERDER_STEP",
@@ -245,7 +244,8 @@ class TDSetting
   static float mVThreshold = 80f;   // verticality threshold (LRUD)
   static float mHThreshold;         // horizontal plot threshold
 
-  static int mExportShotsFormat = 0; // TopoDroidExport.EXPORT_THERION
+  static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
+  static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
 
   static int     mSurveyStations  = 1;     // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay
   static boolean mShotAfterSplays = true;  //                            3 forward-before-splay, 4 backward-before-splay
@@ -289,9 +289,6 @@ class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SKETCH DRAWING
-
-  // static boolean mBinaryTh2 = false;
-  static boolean mAutoTh2 = false;
 
   // static boolean mZoomControls = false;
   static int mZoomCtrl = 1;
@@ -506,8 +503,6 @@ class TDSetting
     mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
     mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
     boolean co_survey = prefs.getBoolean( key[k++], false );       // DISTOX_COSURVEY 
-    // mBinaryTh2 = prefs.getBoolean( key[k++], false );           // DISTOX_BINARY_STORE
-    mAutoTh2 = prefs.getBoolean( key[k++], false );                // DISTOX_AUTO_TH2
 
     mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
     if ( mInitStation.length() == 0 ) mInitStation = "0";
@@ -616,7 +611,8 @@ class TDSetting
     mDotRadius         = tryFloat( prefs, key[k++], "5"   );  // DISTOX_DOT_RADIUS
     mFixedThickness    = tryFloat( prefs, key[k++], "1"   );  // DISTOX_FIXED_THICKNESS
     mArrowLength       = tryFloat( prefs, key[k++], "8"   );  // DISTOX_ARROW_LENGTH
-    mExportShotsFormat = tryInt(   prefs, key[k++], "0" );    // DISTOX_EXPORT_SHOTS choice: 0, 2, 7, 8, 3, 4, 9, 5, 6
+    mExportShotsFormat = tryInt(   prefs, key[k++], "-1" );   // DISTOX_EXPORT_SHOTS choice: 
+    mExportPlotFormat  = tryInt(   prefs, key[k++], "-1" );   // DISTOX_EXPORT_PLOT choice: 0, 2, 11, 12, 13
     mSplayVertThrs     = tryFloat( prefs, key[k++], "80"  );  // DISTOX_SPLAY_VERT_THRS
 
     mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
@@ -711,9 +707,6 @@ class TDSetting
       if ( co_survey != app.mCoSurveyServer ) {
         app.setCoSurvey( co_survey ); // set flag and start/stop server
       }
-    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BINARY_STORE
-      // mBinaryTh2 = prefs.getBoolean( k, false );
-      mAutoTh2 = prefs.getBoolean( k, false );           // DISTOX_AUTO_TH2
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_INIT_STATION
       mInitStation = prefs.getString( k, "0" ).replaceAll("\\s+", "");
       if ( mInitStation.length() == 0 ) mInitStation = "0";
@@ -893,7 +886,9 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mArrowLength = tryFloat( prefs, k, "8" );      // DISTOX_ARROW_LENGTH
     } else if ( k.equals( key[ nk++ ] ) ) { 
-      mExportShotsFormat = tryInt( prefs, k, "0" );  // DISTOX_EXPORT_SHOTS (choice)
+      mExportShotsFormat = tryInt( prefs, k, "-1" ); // DISTOX_EXPORT_SHOTS (choice)
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mExportPlotFormat = tryInt( prefs, k, "-1" );  // DISTOX_EXPORT_PLOT (choice)
 
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_SPLAY_VERT_THRS
       mSplayVertThrs = tryFloat( prefs, k, "80" );
@@ -1149,6 +1144,7 @@ class TDSetting
     if ( name.equals( "DISTOX_FIXED_THICKNESS"  ) ) return parseFloatValue( value, mFixedThickness, 1,    10 );
     if ( name.equals( "DISTOX_ARROW_LENGTH"     ) ) return parseFloatValue( value, mArrowLength,    1,    40 );
     //C if ( name.equals( "DISTOX_EXPORT_SHOTS" )
+    //C if ( name.equals( "DISTOX_EXPORT_PLOT" )
 
     if ( name.equals( "DISTOX_SPLAY_VERT_THRS"  ) ) return parseFloatValue( value, mSplayVertThrs, 0, 91 );
     //S if ( name.equals( "DISTOX_INIT_STATION" )
@@ -1177,8 +1173,6 @@ class TDSetting
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
     //B if ( name.equals( "DISTOX_CONT_JOIN" ) 
     //C if ( name.equals( "DISTOX_CSV_LENGTH" )
-    // //B if ( name.equals( "DISTOX_BINARY_STORE" )
-    //B if ( name.equals( "DISTOX_AUTO_TH2" )
     if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );
 
     // if ( name.equals( "DISTOX_WALLS_TYPE" )
