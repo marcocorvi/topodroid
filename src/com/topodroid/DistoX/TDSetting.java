@@ -683,7 +683,7 @@ class TDSetting
     // Log.v(TopoDroidApp.TAG, "onSharePreferenceChanged " + k );
 
     // ---------------- PRIMARY PREFERENCES ---------------------------
-    if ( k.equals( key[ nk++ ] ) ) {                           // DISTOX_EXTRA_BUTTONS
+    if ( k.equals( key[ nk++ ] ) ) {                     // DISTOX_EXTRA_BUTTONS
       int level = tryInt( prefs, k, "1" );
       if ( level != mActivityLevel ) {
         mActivityLevel = level;
@@ -694,8 +694,11 @@ class TDSetting
         }  
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_SIZE_BUTTONS
-      mSizeButtons = tryInt( prefs, k, "1" );
-      if ( activity != null ) activity.resetButtonBar();
+      int size = tryInt( prefs, k, "1" );
+      if ( size != mSizeButtons ) {
+        mSizeButtons = size;
+        if ( activity != null ) activity.resetButtonBar();
+      }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_TEXT_SIZE
       mTextSize = tryInt( prefs, k, "16" );
   

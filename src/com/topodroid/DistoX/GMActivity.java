@@ -576,7 +576,7 @@ public class GMActivity extends Activity
  
   // ---------------------------------------------------------------
 
-  private MyButton[] mButton1;
+  private Button[] mButton1;
   private int mNrButton1 = 7;
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
@@ -605,19 +605,17 @@ public class GMActivity extends Activity
     // mHandler = new ConnHandler( mApp, this );
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00no = ( TDSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
-    mButton1 = new MyButton[ mNrButton1 ];
+    mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
-      if ( k == 1 )      { mBMtoggle = mButton1[k].mBitmap; }
-      else if ( k == 5 ) { mBMread   = mButton1[k].mBitmap; }
-      else if ( k == 6 ) { mBMwrite  = mButton1[k].mBitmap; }
+      mButton1[k] = MyButton.getButton( this, izons[k] );
+      if ( k == 1 )      { mBMtoggle = MyButton.getButtonBackground( izons[k] ); }
+      else if ( k == 5 ) { mBMread   = MyButton.getButtonBackground( izons[k] ); }
+      else if ( k == 6 ) { mBMwrite  = MyButton.getButtonBackground( izons[k] ); }
     }
-    mBMtoggle_no = MyButton.getButtonBackground( mApp, size, izonsno[1] );
-    mBMread_no   = MyButton.getButtonBackground( mApp, size, izonsno[5] );
-    mBMwrite_no  = MyButton.getButtonBackground( mApp, size, izonsno[6] );
+    mBMtoggle_no = MyButton.getButtonBackground( izonsno[1] );
+    mBMread_no   = MyButton.getButtonBackground( izonsno[5] );
+    mBMwrite_no  = MyButton.getButtonBackground( izonsno[6] );
 
     enableWrite( false );
 
@@ -630,8 +628,7 @@ public class GMActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );
     closeMenu();

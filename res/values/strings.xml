@@ -65,7 +65,7 @@
     <string name="calib_validation">Validation of %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
-    <string name="using">Using %1$s %2$s</string>
+    <string name="using">Using %1$s</string>
     <string name="calib_error">Average error: %1$.4f degrees</string>
     <string name="calib_stddev">Error stddev: %1$.4f degrees</string>
     <string name="calib_max_error">Max. error: %1$.4f degrees</string>

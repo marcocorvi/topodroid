@@ -65,7 +65,7 @@
     <string name="calib_validation">确认 %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">连接失败</string -->
     <!-- UNUSED string name="data"> 数据</string -->
-    <string name="using">使用中 %1$s %2$s</string>
+    <string name="using">使用中 %1$s</string>
     <string name="calib_error">平均误差: %1$.4f 度</string>
     <string name="calib_stddev">标准差: %1$.4f 度</string>
     <string name="calib_max_error">最大误差: %1$.4f 度</string>

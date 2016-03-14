@@ -55,7 +55,6 @@ public class UserManualActivity extends Activity
   private void load( String filename )
   {
     ++mCloseOnBack;
-    StringBuilder html = new StringBuilder();
     mTVtext.loadUrl("file:///android_asset/man/" + filename );
   }
 

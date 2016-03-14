@@ -110,7 +110,7 @@ public class TopoDroidActivity extends Activity
   // private ArrayAdapter<String> mArrayAdapter;
   private ListItemAdapter mArrayAdapter;
 
-  private MyButton[] mButton1;
+  private Button[] mButton1;
   private static int izons[] = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
@@ -187,7 +187,7 @@ public class TopoDroidActivity extends Activity
     // int status = mStatus;
     Button b0 = (Button)view;
 
-    if ( b0 == mMenuImage ) {
+    if ( b0 == mImage ) {
       if ( mMenu.getVisibility() == View.VISIBLE ) {
         mMenu.setVisibility( View.GONE );
         onMenu = false;
@@ -563,7 +563,7 @@ public class TopoDroidActivity extends Activity
   HorizontalListView mListView;
   // HorizontalImageButtonView mButtonView1;
   HorizontalButtonView mButtonView1;
-  Button     mMenuImage;
+  Button     mImage;
   ListView   mMenu;
   // HOVER
   // MyMenuAdapter mMenuAdapter = null;
@@ -654,8 +654,8 @@ public class TopoDroidActivity extends Activity
     mList.setDividerHeight( 2 );
 
     // TDLog.Profile("TDActivity menu");
-    mMenuImage = (Button) findViewById( R.id.handle );
-    mMenuImage.setOnClickListener( this );
+    mImage = (Button) findViewById( R.id.handle );
+    mImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
     mMenuAdapter = null;
 
@@ -727,16 +727,14 @@ public class TopoDroidActivity extends Activity
   void resetButtonBar()
   {
     int size = mApp.setListViewHeight( mListView );
+    MyButton.resetCache( mApp, size );
 
-    // icons00 = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
     mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
-    mButton1 = new MyButton[mNrButton1];
+    mButton1 = new Button[mNrButton1];
 
-    // mMenuImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    MyButton.setButtonBackground( mApp, mMenuImage, size, R.drawable.iz_menu );
-
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
     for (int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
+      mButton1[k] = MyButton.getButton( this, izons[k] );
     }
 
     // mButtonView1 = new HorizontalImageButtonView( mButton1 );

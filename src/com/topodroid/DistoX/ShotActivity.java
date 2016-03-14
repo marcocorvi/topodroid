@@ -172,7 +172,7 @@ public class ShotActivity extends Activity
   long   mRecentPlotType = PlotInfo.PLOT_PLAN;
 
   int mButtonSize = 42;
-  private MyButton[] mButton1;
+  private Button[] mButton1;
   private int mNrButton1 = 0;
 
   public void setRefAzimuth( float azimuth, long fixed_extend )
@@ -273,7 +273,8 @@ public class ShotActivity extends Activity
         updateDisplay( );
       }
       if ( toast ) {
-        Toast.makeText( this, getResources().getString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( this, " read_data: " + nr, Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {
@@ -740,18 +741,18 @@ public class ShotActivity extends Activity
     mButtonSize = mApp.setListViewHeight( mListView );
 
     mNrButton1 = TDSetting.mLevelOverNormal ? 8 : ( TDSetting.mLevelOverBasic ? 6 : 5 );
-    mButton1 = new MyButton[ mNrButton1 ];
+    mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new MyButton( this, this, mButtonSize, izons[k], 0 );
-      if ( k == BTN_DOWNLOAD ) { mBMdownload = mButton1[k].mBitmap; }
-      else if ( k == BTN_PLOT ) { mBMplot = mButton1[k].mBitmap; }
+      mButton1[k] = MyButton.getButton( this, izons[k] );
+      if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( izons[k] ); }
+      else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( izons[k] ); }
     }
     mBMdial          = BitmapFactory.decodeResource( getResources(), R.drawable.iz_dial );
-    mBMplot_no       = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_plot_no );
-    mBMdownload_on   = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_download_on );
-    mBMdownload_wait = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_download_wait );
-    mBMleft          = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_left );
-    mBMright         = MyButton.getButtonBackground( mApp, mButtonSize, R.drawable.iz_right );
+    mBMplot_no       = MyButton.getButtonBackground( R.drawable.iz_plot_no );
+    mBMdownload_on   = MyButton.getButtonBackground( R.drawable.iz_download_on );
+    mBMdownload_wait = MyButton.getButtonBackground( R.drawable.iz_download_wait );
+    mBMleft          = MyButton.getButtonBackground( R.drawable.iz_left );
+    mBMright         = MyButton.getButtonBackground( R.drawable.iz_right );
 
     if ( TDSetting.mLevelOverBasic ) {
       // mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
@@ -781,10 +782,7 @@ public class ShotActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-
-    // mImage.setBackgroundResource( 
-    //   ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    MyButton.setButtonBackground( mApp, mImage, mButtonSize, R.drawable.iz_menu);
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );

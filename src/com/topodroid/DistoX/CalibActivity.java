@@ -91,7 +91,8 @@ public class CalibActivity extends Activity
 
   private EditText mEditName;
   private Button mEditDate;
-  private EditText mEditDevice;
+  // private TextView mEditDevice;
+  private String mDeviceAddress;
   private EditText mEditComment;
 
   MyDateSetListener mDateListener;
@@ -121,7 +122,7 @@ public class CalibActivity extends Activity
   }
 
 // -------------------------------------------------------------------
-  private MyButton[] mButton1;
+  private Button[] mButton1;
   private int mNrButton1 = 0;
   // private Button[] mButton2;
   HorizontalListView mListView;
@@ -142,7 +143,7 @@ public class CalibActivity extends Activity
     setContentView(R.layout.calib_activity);
     mEditName    = (EditText) findViewById(R.id.calib_name);
     mEditDate    = (Button) findViewById(R.id.calib_date);
-    mEditDevice  = (EditText) findViewById(R.id.calib_device);
+    // mEditDevice  = (TextView) findViewById(R.id.calib_device);
     mEditComment = (EditText) findViewById(R.id.calib_comment);
 
     mDateListener = new MyDateSetListener( mEditDate );
@@ -154,18 +155,16 @@ public class CalibActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00no = ( TDSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
     mNrButton1 = 2 + ( TDSetting.mLevelOverNormal? 1 : 0 );
-    mButton1 = new MyButton[ mNrButton1 ];
+    mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
-      if ( k == 1 ) { mBMopen = mButton1[k].mBitmap; }
-      else if ( k == 2 ) { mBMread = mButton1[k].mBitmap; }
+      mButton1[k] = MyButton.getButton( this, izons[k] );
+      if ( k == 1 )      { mBMopen = MyButton.getButtonBackground( izons[k] ); }
+      else if ( k == 2 ) { mBMread = MyButton.getButtonBackground( izons[k] ); }
     }
-    mBMopen_no = MyButton.getButtonBackground( mApp, size, izonsno[1] );
-    mBMread_no = MyButton.getButtonBackground( mApp, size, izonsno[2] );
+    mBMopen_no = MyButton.getButtonBackground( izonsno[1] );
+    mBMread_no = MyButton.getButtonBackground( izonsno[2] );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     // mButtonView2 = new HorizontalButtonView( mButton2 );
@@ -180,10 +179,12 @@ public class CalibActivity extends Activity
       // mEditName.setEditable( false );
       mEditDate.setText( info.date );
       if ( info.device != null && info.device.length() > 0 ) {
-        mEditDevice.setText( info.device );
+        mDeviceAddress = info.device;
       } else if ( mApp.distoAddress() != null ) {
-        mEditDevice.setText( mApp.distoAddress() );
+        mDeviceAddress = mApp.distoAddress();
       }
+      // mEditDevice.setText( mDeviceAddress );
+
       if ( info.comment != null && info.comment.length() > 0 ) {
         mEditComment.setText( info.comment );
       } else {
@@ -198,7 +199,9 @@ public class CalibActivity extends Activity
     } else {
       mEditName.setHint( R.string.name );
       mEditDate.setText( TopoDroidUtil.currentDate() );
-      mEditDevice.setText( mApp.distoAddress() );
+      mDeviceAddress = mApp.distoAddress();
+      // mEditDevice.setText( mDeviceAddress );
+
       mEditComment.setHint( R.string.description );
       mCBAlgoAuto.setChecked( true );
     }
@@ -207,8 +210,7 @@ public class CalibActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );
@@ -320,7 +322,7 @@ public class CalibActivity extends Activity
     }
 
     String date = mEditDate.getText().toString();
-    String device = mEditDevice.getText().toString();
+    String device = mDeviceAddress; // mEditDevice.getText().toString();
     String comment = mEditComment.getText().toString();
     if ( date    != null ) { date    = date.trim(); }
     if ( device  != null ) { device  = device.trim(); }
@@ -361,9 +363,9 @@ public class CalibActivity extends Activity
       mEditName.setFocusable( false );
       mEditName.setClickable( false );
       mEditName.setKeyListener( null );
-      mEditDevice.setFocusable( false );
-      mEditDevice.setClickable( false );
-      mEditDevice.setKeyListener( null );
+      // mEditDevice.setFocusable( false );
+      // mEditDevice.setClickable( false );
+      // mEditDevice.setKeyListener( null );
     }
   }
 

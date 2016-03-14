@@ -155,7 +155,7 @@ public class DeviceActivity extends Activity
     boolean cntd = mApp.isCommConnected();
     if ( mDevice != null ) { // mAddress.length() > 0 ) {
       mTvAddress.setTextColor( 0xffffffff );
-      mTvAddress.setText( String.format( getResources().getString( R.string.using ), mDevice.mName, mDevice.mAddress ) );
+      mTvAddress.setText( String.format( getResources().getString( R.string.using ), mDevice.toString() ) );
       // setButtonRemote();
     } else {
       mTvAddress.setTextColor( 0xffff0000 );
@@ -167,7 +167,7 @@ public class DeviceActivity extends Activity
 
   // ---------------------------------------------------------------
   // private Button mButtonHelp;
-  private MyButton[] mButton1;
+  private Button[] mButton1;
   private int mNrButton1 = 6; // 7 if ButtonRemote
   HorizontalListView mListView;
   HorizontalButtonView mButtonView1;
@@ -221,22 +221,20 @@ public class DeviceActivity extends Activity
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
-    // icons00   = ( TDSetting.mSizeButtons == 2 )? ixons : icons;
-    // icons00no = ( TDSetting.mSizeButtons == 2 )? ixonsno : iconsno;
 
     mNrButton1 = TDSetting.mLevelOverNormal ? 6 : 3;
-    mButton1 = new MyButton[ mNrButton1 ];
+    mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = new MyButton( this, this, size, izons[k], 0 );
+      mButton1[k] = MyButton.getButton( this, izons[k] );
       if ( k == IDX_TOGGLE ) {
-        mBMtoggle    = mButton1[k].mBitmap;
-        mBMtoggle_no = MyButton.getButtonBackground( mApp, size, izonsno[k] );
+        mBMtoggle    = MyButton.getButtonBackground( izons[k] );
+        mBMtoggle_no = MyButton.getButtonBackground( izonsno[k] );
       } else if ( k == IDX_CALIB ) {
-        mBMcalib    = mButton1[k].mBitmap;
-        mBMcalib_no = MyButton.getButtonBackground( mApp, size, izonsno[k] );
+        mBMcalib    = MyButton.getButtonBackground( izons[k] );
+        mBMcalib_no = MyButton.getButtonBackground( izonsno[k] );
       } else if ( k == IDX_READ ) {
-        mBMread    = mButton1[k].mBitmap;
-        mBMread_no = MyButton.getButtonBackground( mApp, size, izonsno[k] );
+        mBMread    = MyButton.getButtonBackground( izons[k] );
+        mBMread_no = MyButton.getButtonBackground( izonsno[k] );
       }
     }
 
@@ -256,8 +254,7 @@ public class DeviceActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    // mImage.setBackgroundResource( ( TDSetting.mSizeButtons == 2 )? R.drawable.ix_menu : R.drawable.ic_menu );
-    MyButton.setButtonBackground( mApp, mImage, size, R.drawable.iz_menu );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );

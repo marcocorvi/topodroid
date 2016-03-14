@@ -70,7 +70,7 @@
     <string name="calib_validation">Vergleich %1$s vs. %2$s</string>
     <!-- UNUSED string name="connect_failed">Verbindung fehlgeschlagen</string -->
     <!-- UNUSED string name="data"> Daten</string -->
-    <string name="using">%1$s %2$s benutzen</string>
+    <string name="using">%1$s benutzen</string>
     <string name="calib_error">Abweichung: %1$.4f Grad</string>
     <string name="calib_stddev">Standardabweichung: %1$.4f Grad</string>
     <string name="calib_max_error">Max. Abweichung: %1$.4f Grad</string>
