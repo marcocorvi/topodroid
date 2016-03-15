@@ -90,9 +90,10 @@ public class GMActivity extends Activity
                         R.drawable.iz_read,
                         R.drawable.iz_write
                      };
+  final static int BTN_DOWNLOAD = 0;
 
   static int izonsno[] = { 
-                        0,
+                        R.drawable.iz_download_on,
                         R.drawable.iz_toggle_no,
                         0,
                         0,
@@ -107,6 +108,8 @@ public class GMActivity extends Activity
   BitmapDrawable mBMread_no;
   BitmapDrawable mBMwrite;
   BitmapDrawable mBMwrite_no;
+  BitmapDrawable mBMdownload;
+  BitmapDrawable mBMdownload_on;
 
   static int menus[] = {
                         R.string.menu_display,
@@ -470,6 +473,7 @@ public class GMActivity extends Activity
         Toast.makeText( this, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
       }
     }
+    mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
   }
     
   @Override
@@ -491,12 +495,12 @@ public class GMActivity extends Activity
 
   public void updateDisplay( )
   {
-    // Log.v( TopoDroidApp.TAG, "updateDisplay CID " + mApp.mCID );
+    // Log.v( TopoDroidApp.TAG, "update Display CID " + mApp.mCID );
     resetTitle( );
     mDataAdapter.clear();
     if ( mApp.mDData != null && mApp.mCID >= 0 ) {
       List<CalibCBlock> list = mApp.mDData.selectAllGMs( mApp.mCID, mBlkStatus );
-      // Log.v( TopoDroidApp.TAG, "updateDisplay GMs " + list.size() );
+      // Log.v( TopoDroidApp.TAG, "update Display GMs " + list.size() );
       updateGMList( list );
       setTitle( mCalibName );
     }
@@ -609,13 +613,15 @@ public class GMActivity extends Activity
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, izons[k] );
-      if ( k == 1 )      { mBMtoggle = MyButton.getButtonBackground( izons[k] ); }
-      else if ( k == 5 ) { mBMread   = MyButton.getButtonBackground( izons[k] ); }
-      else if ( k == 6 ) { mBMwrite  = MyButton.getButtonBackground( izons[k] ); }
+      if ( k == 0 )      { mBMdownload = MyButton.getButtonBackground( izons[k] ); }
+      else if ( k == 1 ) { mBMtoggle   = MyButton.getButtonBackground( izons[k] ); }
+      else if ( k == 5 ) { mBMread     = MyButton.getButtonBackground( izons[k] ); }
+      else if ( k == 6 ) { mBMwrite    = MyButton.getButtonBackground( izons[k] ); }
     }
-    mBMtoggle_no = MyButton.getButtonBackground( izonsno[1] );
-    mBMread_no   = MyButton.getButtonBackground( izonsno[5] );
-    mBMwrite_no  = MyButton.getButtonBackground( izonsno[6] );
+    mBMdownload_on = MyButton.getButtonBackground( izonsno[0] );
+    mBMtoggle_no   = MyButton.getButtonBackground( izonsno[1] );
+    mBMread_no     = MyButton.getButtonBackground( izonsno[5] );
+    mBMwrite_no    = MyButton.getButtonBackground( izonsno[6] );
 
     enableWrite( false );
 
@@ -724,6 +730,7 @@ public class GMActivity extends Activity
           ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
           new DataDownloadTask( mApp, handler ).execute();
           // new DataDownloadTask( mApp, this ).execute();
+          mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
         }
       } else if ( b == mButton1[1] ) { // TOGGLE
         enableButtons( false );

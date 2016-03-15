@@ -474,6 +474,7 @@ class DrawingIO
 
   static public void exportTherion( DrawingSurface surface, int type, File file, String fullname, String projname, int proj_dir )
   {
+    // Log.v("DistoX", "Export Therion file " + file.getPath() );
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
@@ -557,7 +558,7 @@ class DrawingIO
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
-          Log.v("DistoX", "Read " + what );
+          // Log.v("DistoX", "Read " + what );
           path = null;
           switch ( what ) {
             case 'V':

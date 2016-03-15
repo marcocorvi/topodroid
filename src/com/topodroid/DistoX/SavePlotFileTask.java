@@ -66,18 +66,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // Log.v("DistoX", "save scrap files " + mFullName + " suffix " + mSuffix );
 
       if ( mSuffix == PlotSave.EXPORT ) {
-        String filename2 = TDPath.getTdrFileWithExt( mFullName );
-        File file2 = new File( mFullName );
+        File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
         DrawingIO.exportTherion( mSurface, mType, file2, mFullName, PlotInfo.projName[mType], mProjDir );
       } else if ( mSuffix == PlotSave.SAVE ) {
         switch ( TDSetting.mExportPlotFormat ) {
           case TDConst.DISTOX_EXPORT_TH2:
-            String filename2 = TDPath.getTdrFileWithExt( mFullName );
-            File file2 = new File( mFullName );
+            File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
             DrawingIO.exportTherion( mSurface, mType, file2, mFullName, PlotInfo.projName[mType], mProjDir );
-            break;
-          case TDConst.DISTOX_EXPORT_CSX:
-            if ( PlotInfo.isSketch2D( mType ) ) mParent.saveCsx( false );
             break;
           case TDConst.DISTOX_EXPORT_DXF:
             mParent.doSaveWithExt( mType, mFullName, "dxf", false );
@@ -85,6 +80,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           case TDConst.DISTOX_EXPORT_SVG:
             mParent.doSaveWithExt( mType, mFullName, "svg", false );
             break;
+          case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
+            if ( PlotInfo.isSketch2D( mType ) ) {
+              mParent.saveCsx( false );
+              break;
+            } else { // X-Section cSurvey are exported as PNG
+              // fall-through
+            }
           case TDConst.DISTOX_EXPORT_PNG:
             Bitmap bitmap = mSurface.getBitmap( mType );
             if ( bitmap == null ) {

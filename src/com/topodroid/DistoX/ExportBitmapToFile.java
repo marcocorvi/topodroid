@@ -33,7 +33,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
        mBitmap   = bitmap;
        mHandler  = handler;
        mFullName = name;
-       // TDLog.Log( TDLog.LOG_PLOT, "ExportBitmapToFile " + mFullName );
+       // TDLog.Log( TDLog.LOG_PLOT, "Export Bitmap To File " + mFullName );
     }
 
     @Override

@@ -73,8 +73,8 @@ class TDConst
   static final float TO_THERION = 5.0f;  // therion export scale-factor
 
   static final int COLOR_NORMAL    = 0xffcccccc; // title colors
-  static final int COLOR_NORMAL2   = 0xffffcc99; // title color nr. 2
-  static final int COLOR_CONNECTED = 0xffff6666; 
+  static final int COLOR_NORMAL2   = 0xff99ccff; // title color nr. 2
+  static final int COLOR_CONNECTED = 0xffff0000; 
   static final int COLOR_COMPUTE   = 0xffff33cc;
 
   static final int NUMBER                 = InputType.TYPE_CLASS_NUMBER;
