@@ -34,6 +34,13 @@
        />
 
    <CheckBoxPreference
+       android:key="DISTOX_THERION_MAPS"
+       android:summary="@string/pref_therion_maps_summary"
+       android:title="@string/pref_therion_maps_title"
+       android:defaultValue="false"
+     />
+
+   <CheckBoxPreference
        android:key="DISTOX_AUTO_STATIONS"
        android:summary="@string/pref_autoStations_summary"
        android:title="@string/pref_autoStations_title"

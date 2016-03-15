@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileOutputStream;
+import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
@@ -635,6 +636,27 @@ class TopoDroidExporter
     leg.reset();
   }
 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  // Therion scraps and maps
+  static private void doTherionMaps( PrintWriter pw, SurveyInfo info, List< PlotInfo > plots )
+  {
+    if ( plots.size() == 0 ) return;
+    for ( PlotInfo plt : plots ) {
+        String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
+        pw.format("%s input \"%s-%s.th2\"\n", extra, info.name, plt.name );
+    }
+    pw.format("\n");
+    for ( PlotInfo plt : plots ) {
+      if ( PlotInfo.isSketch2D( plt.type ) ) {
+        String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
+        pw.format("%s map m%s -projection %s\n", extra, plt.name, PlotInfo.projName[ plt.type ] );
+        pw.format("%s   %s-%s\n", extra, info.name, plt.name );
+        pw.format("%s endmap\n", extra );
+      }
+    }
+    pw.format("\n");
+  }
+
   static String exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     float ul = TDSetting.mUnitLength;
@@ -652,7 +674,8 @@ class TopoDroidExporter
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
-      PrintWriter pw = new PrintWriter( fw );
+      BufferedWriter bw = new BufferedWriter( fw );
+      PrintWriter pw = new PrintWriter( bw );
 
       pw.format("# %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
       pw.format("survey %s -title \"%s\"\n", info.name, info.name );
@@ -660,6 +683,9 @@ class TopoDroidExporter
         pw.format("    # %s \n", info.comment );
       }
       pw.format("\n");
+      
+      if ( TDSetting.mTherionMaps ) doTherionMaps( pw, info, plots );
+
       pw.format("  centerline\n");
 
       if ( fixed.size() > 0 ) {
@@ -817,22 +843,7 @@ class TopoDroidExporter
 
       pw.format("  endcenterline\n\n");
 
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-      // scraps and maps
-
-      for ( PlotInfo plt : plots ) {
-        String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
-        pw.format("%s input \"%s-%s.th2\"\n", extra, info.name, plt.name );
-      }
-      pw.format("\n");
-      for ( PlotInfo plt : plots ) {
-        if ( PlotInfo.isSketch2D( plt.type ) ) {
-          String extra = ((new File( TDPath.getSurveyPlotTh2File( info.name, plt.name ) )).exists())? "  #" : "  ##";
-          pw.format("%s map m%s -projection %s\n", extra, plt.name, PlotInfo.projName[ plt.type ] );
-          pw.format("%s   %s-%s\n", extra, info.name, plt.name );
-          pw.format("%s endmap\n", extra );
-        }
-      }
+      if ( ! TDSetting.mTherionMaps ) doTherionMaps( pw, info, plots );
 
       pw.format("endsurvey\n");
       fw.flush();

@@ -679,6 +679,8 @@
   <string name="pref_export_shots_summary">默认数据导出格式</string>
   <!-- TODO string name="pref_export_plot_title">默认草图输出</string -->
   <!-- TODO string name="pref_export_plot_summary">默认草图输出格式</string -->
+  <!-- TODO string name="pref_therion_maps_title">Therion maps first</string -->
+  <!-- TODO string name="pref_therion_maps_summary">Therion maps before survey data</string -->
   <string name="pref_extra_buttons_title">工作模式选择</string>
   <string name="pref_extra_buttons_summary">激活特殊模式</string>
   <string name="pref_size_buttons_title">按键尺寸</string>

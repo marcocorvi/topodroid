@@ -100,7 +100,8 @@ class TDSetting
     "DISTOX_FIXED_THICKNESS",     // 60
     "DISTOX_ARROW_LENGTH",        // 61
     "DISTOX_EXPORT_SHOTS",        // 62
-    "DISTOX_EXPORT_PLOT",         // 63
+    "DISTOX_EXPORT_PLOT",        // 63
+    "DISTOX_THERION_MAPS",
 
     "DISTOX_SPLAY_VERT_THRS",     // 64 over mSplayVertThrs splays are not displayed in plan view
     "DISTOX_BACKSIGHT",           // 65
@@ -246,6 +247,7 @@ class TDSetting
 
   static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
+  static boolean mTherionMaps   = false;
 
   static int     mSurveyStations  = 1;     // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay
   static boolean mShotAfterSplays = true;  //                            3 forward-before-splay, 4 backward-before-splay
@@ -612,7 +614,8 @@ class TDSetting
     mFixedThickness    = tryFloat( prefs, key[k++], "1"   );  // DISTOX_FIXED_THICKNESS
     mArrowLength       = tryFloat( prefs, key[k++], "8"   );  // DISTOX_ARROW_LENGTH
     mExportShotsFormat = tryInt(   prefs, key[k++], "-1" );   // DISTOX_EXPORT_SHOTS choice: 
-    mExportPlotFormat  = tryInt(   prefs, key[k++], "-1" );   // DISTOX_EXPORT_PLOT choice: 0, 2, 11, 12, 13
+    mExportPlotFormat  = tryInt(   prefs, key[k++], "-1" );   // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
+    mTherionMaps       = prefs.getBoolean( key[k++], false ); // DISTOX_THERION_MAPS
     mSplayVertThrs     = tryFloat( prefs, key[k++], "80"  );  // DISTOX_SPLAY_VERT_THRS
 
     mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
@@ -889,6 +892,8 @@ class TDSetting
       mExportShotsFormat = tryInt( prefs, k, "-1" ); // DISTOX_EXPORT_SHOTS (choice)
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mExportPlotFormat = tryInt( prefs, k, "-1" );  // DISTOX_EXPORT_PLOT (choice)
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mTherionMaps = prefs.getBoolean( k, false );   // DISTOX_THERION_MAPS
 
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_SPLAY_VERT_THRS
       mSplayVertThrs = tryFloat( prefs, k, "80" );
@@ -1145,6 +1150,7 @@ class TDSetting
     if ( name.equals( "DISTOX_ARROW_LENGTH"     ) ) return parseFloatValue( value, mArrowLength,    1,    40 );
     //C if ( name.equals( "DISTOX_EXPORT_SHOTS" )
     //C if ( name.equals( "DISTOX_EXPORT_PLOT" )
+    //B if ( name.equals( "DISTOX_THERION_MAPS" )
 
     if ( name.equals( "DISTOX_SPLAY_VERT_THRS"  ) ) return parseFloatValue( value, mSplayVertThrs, 0, 91 );
     //S if ( name.equals( "DISTOX_INIT_STATION" )
