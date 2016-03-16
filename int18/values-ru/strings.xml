@@ -678,10 +678,10 @@
   <string name="pref_cosurvey_summary">Вкл/Выкл Совм. съёмку</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>
   <string name="pref_export_shots_summary">Формат экспорта данных по умолчанию</string>
-  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_therion_maps_title">Therion maps first</string -->
-  <!-- TODO string name="pref_therion_maps_summary">Therion maps before survey data</string -->
+  <string name="pref_export_plot_title">Формат экспорта абрисов по умолчанию</string>
+  <string name="pref_export_plot_summary">Формат экспорта абрисов по умолчанию</string>
+  <string name="pref_therion_maps_title"> Карты Therion в первую очередь</string>
+  <string name="pref_therion_maps_summary">Карты Therion до данных съёмки</string>
   <string name="pref_extra_buttons_title">Уровень функционала</string>
   <string name="pref_extra_buttons_summary">Уровень подключенного функционала</string>
   <string name="pref_size_buttons_title">Размер кнопок</string>
@@ -893,8 +893,8 @@
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
   <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
-  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
-  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
+  <string name="pref_auto_section_pt_title">Точки сечений</string>
+  <string name="pref_auto_section_pt_summary">Добавить точки сечений к линиям сечений</string>
   <string name="pref_cont_join_title">Продолжать для соединения</string>
   <string name="pref_cont_join_summary">Продолжить линию до соединения с другой линией</string>
 
