@@ -444,6 +444,8 @@ public class TopoDroidApp extends Application
     TDLog.setLogTarget();
     TDLog.loadLogPreferences( mPrefs );
 
+    mData.compileStatements();
+
     PtCmapActivity.setMap( mPrefs.getString( "DISTOX_PT_CMAP", null ) );
 
     TDSetting.loadSecondaryPreferences( this, mPrefs );

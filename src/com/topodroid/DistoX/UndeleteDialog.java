@@ -41,13 +41,18 @@ public class UndeleteDialog extends MyDialog
   // private Button mBtnCancel;
   ArrayAdapter< String >  mArrayAdapter;
   ListView mList;
+  List< DistoXDBlock > mShots;
+  List< PlotInfo >     mPlots;
 
-  public UndeleteDialog( Context context, ShotActivity parent, DataHelper data, long sid )
+  public UndeleteDialog( Context context, ShotActivity parent, DataHelper data, long sid,
+                         List<DistoXDBlock> shots, List<PlotInfo> plots )
   {
     super( context, R.string.UndeleteDialog );
     mParent = parent;
     mData   = data;
     mSID    = sid;
+    mShots  = shots;
+    mPlots  = plots;
   }
 
   @Override
@@ -58,7 +63,7 @@ public class UndeleteDialog extends MyDialog
   }
 
   @Override
-  public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+  public void onItemClick(AdapterView<?> parent, View view, int position, long index)
   {
     CharSequence item = ((TextView) view).getText();
     // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onItemClick() " + item.toString() );
@@ -66,11 +71,12 @@ public class UndeleteDialog extends MyDialog
     String[] value = item.toString().split( " " );
     
     if ( value.length >= 2 ) {
+      long id = Long.parseLong( value[1] );
       try {
         if ( value[0].equals( "shot" ) ) {
-          mData.undeleteShot( Long.parseLong( value[1] ), mSID, true );
+          mData.undeleteShot( id, mSID, true );
         } else {
-          mData.undeletePlot( Long.parseLong( value[1] ), mSID );
+          mData.undeletePlot( id, mSID );
         }
       } catch ( NumberFormatException e ) {
         TDLog.Error( "undelete parse error: item " + item.toString() );
@@ -90,19 +96,11 @@ public class UndeleteDialog extends MyDialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    // TODO fill the list
-    List< DistoXDBlock > shots = mData.selectAllShots( mSID, TopoDroidApp.STATUS_DELETED );
-    List< PlotInfo > plots   = mData.selectAllPlots( mSID, TopoDroidApp.STATUS_DELETED );
-    if ( shots.size() == 0 && plots.size() == 0 ) {
-      Toast.makeText( mParent, R.string.no_undelete, Toast.LENGTH_SHORT ).show();
-      dismiss();
-      // finish();
-    }
-    for ( DistoXDBlock b : shots ) {
+    for ( DistoXDBlock b : mShots ) {
       mArrayAdapter.add( 
         String.format(Locale.US, "shot %d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ) );
     }
-    for ( PlotInfo p : plots ) {
+    for ( PlotInfo p : mPlots ) {
       if ( p.type == PlotInfo.PLOT_PLAN ) {
         mArrayAdapter.add( String.format("plot %d <%s> %s", p.id, p.name, p.getTypeString() ) );
       // } else { // this is OK extended do not show up in this dialog

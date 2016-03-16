@@ -477,8 +477,14 @@ public class ShotActivity extends Activity
     //   (new CurrentStationDialog( this, this, mApp )).show();
 
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
-      (new UndeleteDialog(this, this, mApp.mData, mApp.mSID ) ).show();
-      updateDisplay( );
+      List< DistoXDBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
+      List< PlotInfo > plots     = mApp.mData.selectAllPlots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
+      if ( shots.size() == 0 && plots.size() == 0 ) {
+        Toast.makeText( this, R.string.no_undelete, Toast.LENGTH_SHORT ).show();
+      } else {
+        (new UndeleteDialog(this, this, mApp.mData, mApp.mSID, shots, plots ) ).show();
+      }
+      // updateDisplay( );
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
       startActivity( new Intent( this, PhotoActivity.class ) );
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // SENSORS

@@ -189,7 +189,6 @@ public class DrawingActivity extends ItemDrawer
   long getSID() { return mApp.mSID; }
   String getSurvey() { return mApp.mySurvey; }
 
-  private List<DistoXDBlock> mList = null;
   private DistoXNum mNum;
 
   // 0: no bezier, plain path
@@ -1036,8 +1035,8 @@ public class DrawingActivity extends ItemDrawer
     mName    = (mType == PlotInfo.PLOT_PLAN)? mName1 : mName2;
     mFrom    = extras.getString( TopoDroidTag.TOPODROID_PLOT_FROM );
     mTo      = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );
-    mAzimuth = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
-    mClino   = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_CLINO );
+    mAzimuth = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
+    mClino   = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_CLINO );
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
     mContinueLine = false;
@@ -1151,18 +1150,19 @@ public class DrawingActivity extends ItemDrawer
       mCurrentArea  = ( DrawingBrushPaths.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
       setButtonContinue( false );
 
+      List<DistoXDBlock> list = null;
       if ( PlotInfo.isSection( mType ) ) {
-        mList = mData.selectAllShotsAtStations( mSid, mFrom, mTo );
+        list = mData.selectAllShotsAtStations( mSid, mFrom, mTo );
       } else if ( PlotInfo.isXSection( mType ) ) { 
         // N.B. mTo can be null
-        mList = mData.selectShotsAt( mSid, mFrom, false ); // select only splays
+        list = mData.selectShotsAt( mSid, mFrom, false ); // select only splays
       } else {
-        mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       }
 
       // TDLog.TimeEnd( "before load" );
 
-      if ( do_load ) loadFiles( mType ); 
+      if ( do_load ) loadFiles( mType, list ); 
 
       setPlotType( mType );
       // TDLog.TimeEnd( "after load" );
@@ -1172,118 +1172,125 @@ public class DrawingActivity extends ItemDrawer
       // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
       if ( PlotInfo.isAnySection( mType ) ) {
-        DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-        float xfrom=0;
-        float yfrom=0;
-        float xto=0;
-        float yto=0;
-        // normal, horizontal and cross-product
-        float mc = mClino   * TDMath.GRAD2RAD;
-        float ma = mAzimuth * TDMath.GRAD2RAD;
-        float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
-        float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
-        float Z0 = (float)Math.sin( mc );                        // Z = Up
-        // canvas X-axis, unit horizontal axis: 90 degrees to the right of the azimuth
-        //   azimuth = 0 (north) --> horizontal = ( 0N, 1E)
-        //   azimuth = 90 (east) --> horizontal = (-1N, 0E)
-        //   etc.
-        float X1 = - (float)Math.sin( ma ); // X1 goes to the left in the section plane !!!
-        float Y1 =   (float)Math.cos( ma ); 
-        float Z1 = 0;
-        // float X2 = - (float)Math.sin( mc ) * (float)Math.cos( ma );
-        // float Y2 = - (float)Math.sin( mc ) * (float)Math.sin( ma );
-        // float Z2 =   (float)Math.cos( ma );
-        // canvas UP-axis: this is X0 ^ X1 : it goes up in the section plane 
-        // canvas Y-axis = - UP-axis
-        float X2 = Y0 * Z1 - Y1 * Z0; 
-        float Y2 = Z0 * X1 - Z1 * X0;
-        float Z2 = X0 * Y1 - X1 * Y0;
-
-        float dist = 0;
-        DistoXDBlock blk = null;
-        float xn = 0;  // X-North // Rotate as NORTH is upward
-        float yn = -1; // Y-North
-        if ( PlotInfo.isSection( mType ) ) {
-          if ( mType == PlotInfo.PLOT_H_SECTION ) {
-            if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
-              xn =  (float)(X1);
-              yn = -(float)(X2);
-              float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
-              if ( mClino > 0 ) xn = -xn;
-              // FIXME NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
-              addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
-              // Log.v("AZIMUTH", "North " + xn + " " + yn );
-            }
-          }
-
-          for ( DistoXDBlock b : mList ) {
-            if ( b.mType == DistoXDBlock.BLOCK_SPLAY ) continue;
-            if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
-              dist = b.mLength;
-              blk = b;
-              break;
-            } else if ( mFrom.equals( b.mTo ) && mTo.equals( b.mFrom ) ) { // TO --> FROM
-              dist = - b.mLength;
-              blk = b;
-              break;
-            }
-          }
-          if ( blk != null ) {
-            float bc = blk.mClino * TDMath.GRAD2RAD;
-            float bb = blk.mBearing * TDMath.GRAD2RAD;
-            float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
-            float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
-            float Z = (float)Math.sin( bc );
-            xfrom = -dist * (float)(X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
-            yfrom =  dist * (float)(X2 * X + Y2 * Y + Z2 * Z);
-            if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
-              float xx = -yn * xfrom + xn * yfrom;
-              yfrom = -xn * xfrom - yn * yfrom;
-              xfrom = xx;
-            }
-            addFixedLine( blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
-            mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
-            mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto), DrawingUtil.toSceneY(yto) );
-          }
-        } else { // if ( PlotInfo.isXSection( mType ) ) 
-          mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
-        }
-
-        for ( DistoXDBlock b : mList ) { // repeat for splays
-          if ( b.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
-          float d = b.mLength;
-          float bc = b.mClino * TDMath.GRAD2RAD;
-          float bb = b.mBearing * TDMath.GRAD2RAD;
-          float X = (float)Math.cos( bc ) * (float)Math.cos( bb ); // North
-          float Y = (float)Math.cos( bc ) * (float)Math.sin( bb ); // East
-          float Z = (float)Math.sin( bc );                       // Up
-          float x =  d * (float)(X1 * X + Y1 * Y + Z1 * Z);
-          float y = -d * (float)(X2 * X + Y2 * Y + Z2 * Z);
-          if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
-            float xx = -yn * x + xn * y;
-            y = -xn * x - yn * y;
-            x = xx;
-          }
-          // Log.v("DistoX", "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
-          if ( b.mFrom.equals( mFrom ) ) {
-            // N.B. this must be guaranteed for X_SECTION
-            x += xfrom;
-            y += yfrom;
-            addFixedSectionSplay( b, xfrom, yfrom, x, y, 0, 0, false );
-            // Log.v("DistoX", "Splay(F) " + x + " " + y );
-          } else { // if ( b.mFrom.equals( mTo ) ) 
-            x += xto;
-            y += yto;
-            addFixedSectionSplay( b, xto, yto, x, y, 0, 0, true );
-            // Log.v("DistoX", "Splay(T) " + x + " " + y );
-          }
-        }
-        // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
+        makeSectionReferences( list );
       }
       // TDLog.TimeEnd("do start done");
     }
 
-    private void loadFiles( long type )
+    private void makeSectionReferences( List<DistoXDBlock> list )
+    {
+      Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
+ 
+      DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+      float xfrom=0;
+      float yfrom=0;
+      float xto=0;
+      float yto=0;
+      // normal, horizontal and cross-product
+      float mc = mClino   * TDMath.GRAD2RAD;
+      float ma = mAzimuth * TDMath.GRAD2RAD;
+      float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
+      float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
+      float Z0 = (float)Math.sin( mc );                        // Z = Up
+      // canvas X-axis, unit horizontal axis: 90 degrees to the right of the azimuth
+      //   azimuth = 0 (north) --> horizontal = ( 0N, 1E)
+      //   azimuth = 90 (east) --> horizontal = (-1N, 0E)
+      //   etc.
+      float X1 = - (float)Math.sin( ma ); // X1 goes to the left in the section plane !!!
+      float Y1 =   (float)Math.cos( ma ); 
+      float Z1 = 0;
+      // float X2 = - (float)Math.sin( mc ) * (float)Math.cos( ma );
+      // float Y2 = - (float)Math.sin( mc ) * (float)Math.sin( ma );
+      // float Z2 =   (float)Math.cos( ma );
+      // canvas UP-axis: this is X0 ^ X1 : it goes up in the section plane 
+      // canvas Y-axis = - UP-axis
+      float X2 = Y0 * Z1 - Y1 * Z0; 
+      float Y2 = Z0 * X1 - Z1 * X0;
+      float Z2 = X0 * Y1 - X1 * Y0;
+
+      float dist = 0;
+      DistoXDBlock blk = null;
+      float xn = 0;  // X-North // Rotate as NORTH is upward
+      float yn = -1; // Y-North
+      if ( PlotInfo.isSection( mType ) ) {
+        if ( mType == PlotInfo.PLOT_H_SECTION ) {
+          if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
+            xn =  (float)(X1);
+            yn = -(float)(X2);
+            float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
+            if ( mClino > 0 ) xn = -xn;
+            // FIXME NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
+            addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
+            // Log.v("AZIMUTH", "North " + xn + " " + yn );
+          }
+        }
+
+        for ( DistoXDBlock b : list ) {
+          if ( b.mType == DistoXDBlock.BLOCK_SPLAY ) continue;
+          if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
+            dist = b.mLength;
+            blk = b;
+            break;
+          } else if ( mFrom.equals( b.mTo ) && mTo.equals( b.mFrom ) ) { // TO --> FROM
+            dist = - b.mLength;
+            blk = b;
+            break;
+          }
+        }
+        if ( blk != null ) {
+          float bc = blk.mClino * TDMath.GRAD2RAD;
+          float bb = blk.mBearing * TDMath.GRAD2RAD;
+          float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
+          float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
+          float Z = (float)Math.sin( bc );
+          xfrom = -dist * (float)(X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
+          yfrom =  dist * (float)(X2 * X + Y2 * Y + Z2 * Z);
+          if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
+            float xx = -yn * xfrom + xn * yfrom;
+            yfrom = -xn * xfrom - yn * yfrom;
+            xfrom = xx;
+          }
+          addFixedLine( blk, xfrom, yfrom, xto, yto, 0, 0, false, false ); // not-splay, not-selecteable
+          mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
+          mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto), DrawingUtil.toSceneY(yto) );
+        }
+      } else { // if ( PlotInfo.isXSection( mType ) ) 
+        mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom), DrawingUtil.toSceneY(yfrom) );
+      }
+
+      for ( DistoXDBlock b : list ) { // repeat for splays
+        if ( b.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
+        float d = b.mLength;
+        float bc = b.mClino * TDMath.GRAD2RAD;
+        float bb = b.mBearing * TDMath.GRAD2RAD;
+        float X = (float)Math.cos( bc ) * (float)Math.cos( bb ); // North
+        float Y = (float)Math.cos( bc ) * (float)Math.sin( bb ); // East
+        float Z = (float)Math.sin( bc );                       // Up
+        float x =  d * (float)(X1 * X + Y1 * Y + Z1 * Z);
+        float y = -d * (float)(X2 * X + Y2 * Y + Z2 * Z);
+        if ( mType == PlotInfo.PLOT_H_SECTION ) { // Rotate as NORTH is upward
+          float xx = -yn * x + xn * y;
+          y = -xn * x - yn * y;
+          x = xx;
+        }
+        // Log.v("DistoX", "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
+        if ( b.mFrom.equals( mFrom ) ) {
+          // N.B. this must be guaranteed for X_SECTION
+          x += xfrom;
+          y += yfrom;
+          addFixedSectionSplay( b, xfrom, yfrom, x, y, 0, 0, false );
+          // Log.v("DistoX", "Splay(F) " + x + " " + y );
+        } else { // if ( b.mFrom.equals( mTo ) ) 
+          x += xto;
+          y += yto;
+          addFixedSectionSplay( b, xto, yto, x, y, 0, 0, true );
+          // Log.v("DistoX", "Splay(T) " + x + " " + y );
+        }
+      }
+      // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
+    }
+
+    private void loadFiles( long type, List<DistoXDBlock> list )
     {
       
       String filename1  = null;
@@ -1322,38 +1329,26 @@ public class DrawingActivity extends ItemDrawer
       // if there are not all symbols the user is asked if he/she wants to save anyways
 
       if ( PlotInfo.isSketch2D( type ) ) {
-        if ( mList.size() == 0 ) {
+        if ( list.size() == 0 ) {
           Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
           if ( mPid1 >= 0 ) mApp.mData.dropPlot( mPid1, mSid );
           if ( mPid2 >= 0 ) mApp.mData.dropPlot( mPid2, mSid );
           finish();
         } else {
-          mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
+          mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide );
         }
 
-        // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
-          if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1 ) ) {
-            // mAllSymbols =
-            mDrawingSurface.modeloadDataStream( filename1b, filename1, missingSymbols );
-            mDrawingSurface.addManagerToCache( mFullName1 );
-          }
-          if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2 ) ) {
-            // mAllSymbols = mAllSymbols &&
-            mDrawingSurface.modeloadDataStream( filename2b, filename2, missingSymbols );
-            mDrawingSurface.addManagerToCache( mFullName2 );
-          }
-        // } else { // THERION
-        //   if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1 ) ) {
-        //     // mAllSymbols =
-        //     mDrawingSurface.modeloadTherion( filename1, missingSymbols );
-        //     mDrawingSurface.addManagerToCache( mFullName1 );
-        //   }
-        //   if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2 ) ) {
-        //     // mAllSymbols = mAllSymbols &&
-        //     mDrawingSurface.modeloadTherion( filename2, missingSymbols );
-        //     mDrawingSurface.addManagerToCache( mFullName2 );
-        //   }
-        // }
+        if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1 ) ) {
+          // mAllSymbols =
+          mDrawingSurface.modeloadDataStream( filename1b, filename1, missingSymbols );
+          mDrawingSurface.addManagerToCache( mFullName1 );
+        }
+        if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2 ) ) {
+          // mAllSymbols = mAllSymbols &&
+          mDrawingSurface.modeloadDataStream( filename2b, filename2, missingSymbols );
+          mDrawingSurface.addManagerToCache( mFullName2 );
+        }
+        
         List<PlotInfo> xsection_plan = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_X_SECTION );
         List<PlotInfo> xsection_ext  = mData.selectAllPlotsWithType( mApp.mSID, 0, PlotInfo.PLOT_XH_SECTION );
 
@@ -1363,15 +1358,9 @@ public class DrawingActivity extends ItemDrawer
         mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       } else {
         mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
-        // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
-          mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
-          // mAllSymbols =
-          mDrawingSurface.modeloadDataStream( filename3b, filename3, missingSymbols );
-        // } else { // THERION
-        //   mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
-        //   // mAllSymbols =
-        //   mDrawingSurface.modeloadTherion( filename3, missingSymbols );
-        // }
+        mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
+        // mAllSymbols =
+        mDrawingSurface.modeloadDataStream( filename3b, filename3, missingSymbols );
       }
 
       // if ( ! mAllSymbols ) {
@@ -1493,8 +1482,8 @@ public class DrawingActivity extends ItemDrawer
     private void recomputeProfileReference()
     {
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
-        mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide ); 
+        List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide ); 
         computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         // mDrawingSurface.refresh();
@@ -3152,8 +3141,8 @@ public class DrawingActivity extends ItemDrawer
         // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, type );
         // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, from );
         // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TO,   to );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_AZIMUTH, (long)azimuth );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO, (long)clino );
+        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_AZIMUTH, azimuth );
+        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO, clino );
         // startActivity( drawIntent );
         pushInfo( type, mSectionName, from, to, azimuth, clino );
       }
@@ -3261,7 +3250,6 @@ public class DrawingActivity extends ItemDrawer
     int suffix = PlotSave.EXPORT;
     int azimuth = 0;
     String name = null;
-    // startSaveTdrTask( -1, PlotSave.EXPORT, MAX_TASK_FINAL, TDPath.NR_BACKUP ); // TDR BINARY
 
     if ( mType == PlotInfo.PLOT_PLAN ) {
       name = mFullName1;
@@ -3300,8 +3288,8 @@ public class DrawingActivity extends ItemDrawer
 
   private void doComputeReferences()
   {
-    mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-    mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
+    List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+    mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide );
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
@@ -3333,10 +3321,9 @@ public class DrawingActivity extends ItemDrawer
 
   public void updateDisplay( boolean compute )
   {
-    // Log.v( TopoDroidApp.TAG, "update display: list " + mList.size() );
     if ( compute ) {
-      mList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      mNum = new DistoXNum( mList, mPlot1.start, mPlot1.view, mPlot1.hide );
+      List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide );
       computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
     }
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
@@ -3450,8 +3437,10 @@ public class DrawingActivity extends ItemDrawer
       } else if ( p++ == pos ) { // RECOVER RELOAD
         if ( PlotInfo.isProfile( mType ) ) {
           ( new PlotRecoverDialog( this, this, mFullName2, mType ) ).show();
-        } else {
+        } else if ( mType == PlotInfo.PLOT_PLAN ) {
           ( new PlotRecoverDialog( this, this, mFullName1, mType ) ).show();
+        } else {
+          ( new PlotRecoverDialog( this, this, mFullName3, mType ) ).show();
         }
       } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // DELETE
         askDelete();
@@ -3501,27 +3490,11 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
-  // FIXME BACKUP TDR BINARY
-  // private void doRecoverTh2( String filename, long type )
-  // {
-  //   // Log.v("DistoX", "recover " + type + " " + filename );
-  //   String th2  = TDPath.getTh2File( filename );
-  //   if ( type == 1 ) {
-  //     mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null );
-  //     mDrawingSurface.modeloadTherion( th2, null ); // no missing symbols
-  //     mDrawingSurface.addManagerToCache( mFullName1 );
-  //     setPlotType1( true );
-  //   } else {
-  //     mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null );
-  //     mDrawingSurface.modeloadTherion( th2, null );
-  //     mDrawingSurface.addManagerToCache( mFullName2 );
-  //     // TODO now switch to extended view FIXME-VIEW
-  //     setPlotType2( true );
-  //   }
-  // }
-
-  private void doRecoverTdr( String filename, long type )
+  void doRecover( String filename, long type )
   {
+    float x = mOffset.x;
+    float y = mOffset.y;
+    float z = mZoom;
     String tdr  = TDPath.getTdrFile( filename );
     String th2  = TDPath.getTh2File( filename );
     // Log.v("DistoX", "recover " + type + " <" + filename + "> TRD " + tdr + " TH2 " + th2 );
@@ -3530,24 +3503,24 @@ public class DrawingActivity extends ItemDrawer
       mDrawingSurface.modeloadDataStream( tdr, th2, null ); // no missing symbols
       mDrawingSurface.addManagerToCache( mFullName1 );
       setPlotType1( true );
-    } else { // if ( PlotInfo.isProfile( type ) )
+    } else if ( PlotInfo.isProfile( type ) ) {
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null );
       mDrawingSurface.modeloadDataStream( tdr, th2, null );
       mDrawingSurface.addManagerToCache( mFullName2 );
       // TODO now switch to extended view FIXME-VIEW
       setPlotType2( true );
+    } else {
+      mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null );
+      mDrawingSurface.modeloadDataStream( tdr, th2, null );
+      mDrawingSurface.addManagerToCache( mFullName2 );
+      setPlotType3( );
+      makeSectionReferences( mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL ) );
     }
+    mOffset.x = x;
+    mOffset.y = y;
+    mZoom     = z;
+    mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
-
-  void doRecover( String filename, long type )
-  {
-    // if ( TDSetting.mBinaryTh2 ) { // TDR BINARY
-      doRecoverTdr( filename, type );
-    // } else {
-    //   doRecoverTh2( filename, type );
-    // }
-  }
-  
 
   void exportAsCsx( PrintWriter pw )
   {

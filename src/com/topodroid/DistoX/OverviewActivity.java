@@ -419,12 +419,12 @@ public class OverviewActivity extends ItemDrawer
       DrawingBrushPaths.makePaths( getResources() );
       setTheTitle();
 
-      mData        = mApp.mData; // new DataHelper( this ); 
+      mData         = mApp.mData; // new DataHelper( this ); 
       Bundle extras = getIntent().getExtras();
-      mSid         = extras.getLong( TopoDroidTag.TOPODROID_SURVEY_ID );
-      mFrom        = extras.getString( TopoDroidTag.TOPODROID_PLOT_FROM );
-      mZoom        = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_ZOOM );
-      mType = (int)extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE );
+      mSid          = extras.getLong( TopoDroidTag.TOPODROID_SURVEY_ID );
+      mFrom         = extras.getString( TopoDroidTag.TOPODROID_PLOT_FROM );
+      mZoom         = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_ZOOM );
+      mType         = (int)extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE );
 
       // Log.v("DistoX", "Overview from " + mFrom + " Type " + mType + " Zoom " + mZoom );
 

@@ -57,6 +57,21 @@ public class DataHelper extends DataSetObservable
   private static final String SENSOR_TABLE = "sensors";
   private static final String DEVICE_TABLE = "devices";
 
+  private final static String WHERE_ID         = "id=?";
+  private final static String WHERE_SID        = "surveyId=?";
+  private final static String WHERE_SID_ID     = "surveyId=? AND id=?";
+  private final static String WHERE_SID_NAME   = "surveyId=? AND name=?";
+  private final static String WHERE_SID_STATUS = "surveyId=? AND status=?";
+  private final static String WHERE_SID_SHOTID = "surveyId=? AND shotId=?";
+  private final static String WHERE_SID_START  = "surveyId=? AND start=?";
+
+
+  static final long STATUS_NORMAL  = 0L;
+  static final long STATUS_DELETED = 1L;
+
+  static final long LEG_NORMAL = 0L;
+  static final long LEG_EXTRA  = 1L;
+
   private SQLiteDatabase myDB = null;
   private long           myNextId;   // id of next shot
   private long           myNextCId;  // id of next calib-data
@@ -78,51 +93,34 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updateShotAMDRStmt = null;
   private SQLiteStatement shiftShotsIdStmt = null;
   private SQLiteStatement transferShotStmt = null;
-  private SQLiteStatement updateSurveyStmt = null;
-  private SQLiteStatement updateSurveyNameStmt = null;
-  private SQLiteStatement updateSurveyInfoStmt = null;
-  private SQLiteStatement updateSurveyTeamStmt = null;
-  private SQLiteStatement updateSurveyInitStationStmt = null;
-  private SQLiteStatement updateSurveyDeclinationStmt = null;
 
-  private SQLiteStatement deleteShotStmt = null;
-  private SQLiteStatement undeleteShotStmt = null;
   private SQLiteStatement updatePlotStmt = null;
   private SQLiteStatement updatePlotViewStmt = null;
   private SQLiteStatement updatePlotHideStmt = null;
-  private SQLiteStatement deletePlotStmt = null;
-  private SQLiteStatement deletePlotByNameStmt = null;
-  private SQLiteStatement undeletePlotStmt = null;
   // FIXME_SKETCH_3D
   private SQLiteStatement updateSketchStmt = null;
-  private SQLiteStatement deleteSketchStmt = null;
+  // private SQLiteStatement deleteSketchStmt = null;
   // END_SKETCH_3D
-  private SQLiteStatement updatePhotoStmt = null;
-  private SQLiteStatement updateSensorStmt = null;
-  private SQLiteStatement transferSensorStmt = null;
-  private SQLiteStatement transferPhotoStmt = null;
-  private SQLiteStatement transferFixedStmt = null;
+  // private SQLiteStatement updatePhotoStmt = null;
+  // private SQLiteStatement updateSensorStmt = null;
+  // private SQLiteStatement transferSensorStmt = null;
+  // private SQLiteStatement transferPhotoStmt = null;
+  // private SQLiteStatement transferFixedStmt = null;
   private SQLiteStatement transferPlotStmt = null;
   private SQLiteStatement transferSketchStmt = null;
-  private SQLiteStatement transferStationStmt = null;
+  // private SQLiteStatement transferStationStmt = null;
 
-  private SQLiteStatement updateFixedStationStmt = null;
-  private SQLiteStatement updateFixedStatusStmt = null;
-  private SQLiteStatement updateFixedCommentStmt = null;
-  private SQLiteStatement updateFixedAltStmt = null;
-  private SQLiteStatement updateFixedDataStmt = null;
+  // private SQLiteStatement updateFixedStationStmt = null;
+  // private SQLiteStatement updateFixedStatusStmt = null;
+  // private SQLiteStatement updateFixedCommentStmt = null;
+  // private SQLiteStatement updateFixedAltStmt = null;
+  // private SQLiteStatement updateFixedDataStmt = null;
 
 //these are real database "delete"
-  private SQLiteStatement deletePhotoStmt = null;
-  private SQLiteStatement deleteSensorStmt = null;
-  private SQLiteStatement dropPlotStmt = null;
-  private SQLiteStatement dropFixedStmt = null;
-  private SQLiteStatement doDeletePhotoStmt = null;
-  private SQLiteStatement doDeletePlotStmt = null;
-  private SQLiteStatement doDeleteFixedStmt = null;
-  private SQLiteStatement doDeleteShotStmt = null;
-  private SQLiteStatement doDeleteStationStmt = null;
-  private SQLiteStatement doDeleteSurveyStmt = null;
+  // private SQLiteStatement deletePhotoStmt = null;
+  // private SQLiteStatement deleteSensorStmt = null;
+  // private SQLiteStatement dropPlotStmt = null;
+  // private SQLiteStatement dropFixedStmt = null;
 
   private String[] mShotFields; // select shot fields
   private String[] mPlotFields; // select plot fields
@@ -192,10 +190,10 @@ public class DataHelper extends DataSetObservable
      }
    }
 
-   private void fillBlock( long survey_id, DistoXDBlock block, Cursor cursor )
+   private void fillBlock( long sid, DistoXDBlock block, Cursor cursor )
    {
-     block.setId( cursor.getLong(0), survey_id );
-     // Log.v( TopoDroidApp.TAG, survey_id + "/" + cursor.getLong(0) + " name <" + cursor.getString(1) + "> <" + cursor.getString(2) );
+     block.setId( cursor.getLong(0), sid );
+     // Log.v( TopoDroidApp.TAG, sid + "/" + cursor.getLong(0) + " name <" + cursor.getString(1) + "> <" + cursor.getString(2) );
 
      block.setName( cursor.getString(1), cursor.getString(2) );  // from - to
      block.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
@@ -234,9 +232,7 @@ public class DataHelper extends DataSetObservable
       if (cursor.moveToFirst()) {
         ret = cursor.getString(0);
       }
-      if ( ! cursor.isClosed() ) {
-        cursor.close();
-      }
+      if ( ! cursor.isClosed() ) cursor.close();
     }
     return ret;
   }
@@ -255,9 +251,7 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       ret = (float)(cursor.getDouble( 0 ));
     }
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
     return ret;
   }
 
@@ -343,9 +337,7 @@ public class DataHelper extends DataSetObservable
         }
       } while ( cursor.moveToNext() );
     }
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
 
     stat.countStation = map.size();
     stat.countLoop = nl;
@@ -363,21 +355,72 @@ public class DataHelper extends DataSetObservable
     if (cursor.moveToFirst()) {
       stat.countSplay = (int)( cursor.getLong(0) );
     }
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
     return stat;
   }
 
   // --------------------------------------------------------------------
+  // compile statements
+
+  public void compileStatements()
+  {
+    // clearStationsStmt = myDB.compileStatement( "UPDATE shots SET fStation=\"\", tStation=\"\" where id>? and surveyId=?" );
+    updateShotDBCStmt    = myDB.compileStatement( "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
+    updateShotStmtFull   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
+    updateShotStmt       = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
+    shiftShotsIdStmt     = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
+    updateShotNameStmt   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
+    updateShotLegStmt    = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
+    updateShotExtendStmt = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
+    updateShotFlagStmt   = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
+    updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
+
+    updateShotNameAndExtendStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
+    updateShotAMDRStmt   = myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
+
+    updatePlotStmt       = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
+    updatePlotViewStmt   = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+    updatePlotHideStmt   = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+    // dropPlotStmt         = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
+
+    updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+    // deleteSketchStmt    = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
+
+    // updatePhotoStmt     = myDB.compileStatement( "UPDATE photos set comment=? WHERE surveyId=? AND id=?" );
+    // deletePhotoStmt     = myDB.compileStatement( "DELETE FROM photos WHERE surveyId=? AND id=?" );
+    // deleteSensorStmt    = myDB.compileStatement( "UPDATE sensors set status=1 WHERE surveyId=? AND id=?" );
+    // updateSensorStmt    = myDB.compileStatement( "UPDATE sensors set comment=? WHERE surveyId=? AND id=?" );
+
+    transferShotStmt     = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
+    // transferSensorStmt  = myDB.compileStatement( "UPDATE sensors set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+    // transferPhotoStmt   = myDB.compileStatement( "UPDATE photos set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+    // transferFixedStmt   = myDB.compileStatement( "UPDATE fixeds set surveyId=? WHERE surveyId=? AND id=?" );
+    // transferStationStmt = myDB.compileStatement( "UPDATE stations set surveyId=? WHERE surveyId=? AND name=?" );
+    transferPlotStmt    = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
+    transferSketchStmt  = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+
+    // dropFixedStmt       = myDB.compileStatement( "DELETE FROM fixeds where surveyId=? and station=? and status=1" );
+    // updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
+    // updateFixedStatusStmt  = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
+    // updateFixedCommentStmt = myDB.compileStatement( "UPDATE fixeds set station=?, comment=? WHERE surveyId=? AND id=?" );
+    // updateFixedAltStmt     = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
+    // updateFixedDataStmt    = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
+
+    updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
+    deleteStationStmt        = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
+
+    Log.v("DistoX", "compile statements done");
+  }
+
+  // --------------------------------------------------------------------
   // SURVEY
-   
+  // survey attributes renaming are "rare" actions
+
   public boolean renameSurvey( long id, String name, boolean forward )
   {
-    if ( updateSurveyNameStmt == null ) updateSurveyNameStmt = myDB.compileStatement( "UPDATE surveys SET name=? WHERE id=?" );
-    updateSurveyNameStmt.bindString( 1, name );
-    updateSurveyNameStmt.bindLong( 2, id );
-    updateSurveyNameStmt.execute();
+    ContentValues vals = new ContentValues();
+    vals.put("name", name );
+    myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -386,19 +429,17 @@ public class DataHelper extends DataSetObservable
     }
     return true;
   }
-   
+
   public void updateSurveyInfo( long id, String date, String team, double decl, String comment,
                                 String init_station, boolean forward )
   {
-    if ( updateSurveyInfoStmt == null ) 
-      updateSurveyInfoStmt = myDB.compileStatement( "UPDATE surveys SET day=?, team=?, declination=?, comment=?, init_station=? WHERE id=?" );
-    updateSurveyInfoStmt.bindString( 1, date );
-    updateSurveyInfoStmt.bindString( 2, team );
-    updateSurveyInfoStmt.bindDouble( 3, decl );
-    updateSurveyInfoStmt.bindString( 4, ((comment != null)? comment : "") );
-    updateSurveyInfoStmt.bindString( 5, ((init_station != null)? init_station : "") );
-    updateSurveyInfoStmt.bindLong( 6, id );
-    updateSurveyInfoStmt.execute();
+    ContentValues vals = new ContentValues();
+    vals.put( "day", date );
+    vals.put( "team", team );
+    vals.put( "declination", decl );
+    vals.put( "comment", ((comment != null)? comment : "") );
+    vals.put( "init_station", ((init_station != null)? init_station : "") );
+    myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -423,11 +464,10 @@ public class DataHelper extends DataSetObservable
     // TDLog.Log( TDLog.LOG_DB,
     //   "updateSurveyDayAndComment id " + id + " day " + date + " comment \"" + comment + "\"" );
     if ( date == null ) return false;
-    if ( updateSurveyStmt == null ) updateSurveyStmt = myDB.compileStatement( "UPDATE surveys SET day=?, comment=? WHERE id=?" );
-    updateSurveyStmt.bindString( 1, date );
-    updateSurveyStmt.bindString( 2, (comment != null)? comment : "" );
-    updateSurveyStmt.bindLong( 3, id );
-    updateSurveyStmt.execute();
+    ContentValues vals = new ContentValues();
+    vals.put( "day", date );
+    vals.put( "comment", (comment != null)? comment : "" );
+    myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -440,11 +480,9 @@ public class DataHelper extends DataSetObservable
   public void updateSurveyTeam( long id, String team, boolean forward )
   {
     // TDLog.Log( TDLog.LOG_DB, "updateSurveyTeam id " + id + " team \"" + team + "\"" );
-    if ( updateSurveyTeamStmt == null ) 
-      updateSurveyTeamStmt = myDB.compileStatement( "UPDATE surveys SET team=? WHERE id=?" );
-    updateSurveyTeamStmt.bindString( 1, (team != null)? team : "" );
-    updateSurveyTeamStmt.bindLong( 2, id );
-    updateSurveyTeamStmt.execute();
+    ContentValues vals = new ContentValues();
+    vals.put( "team", team );
+    myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -455,11 +493,9 @@ public class DataHelper extends DataSetObservable
 
   public void updateSurveyInitStation( long id, String station, boolean forward )
   {
-    if ( updateSurveyInitStationStmt == null ) 
-      updateSurveyInitStationStmt = myDB.compileStatement( "UPDATE surveys SET init_station=? WHERE id=?" );
-    updateSurveyInitStationStmt.bindString( 1, (station != null)? station : "" );
-    updateSurveyInitStationStmt.bindLong( 2, id );
-    updateSurveyInitStationStmt.execute();
+    ContentValues vals = new ContentValues();
+    vals.put( "init_station", station );
+    myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -470,10 +506,9 @@ public class DataHelper extends DataSetObservable
   public void updateSurveyDeclination( long id, double decl, boolean forward )
   {
     // TDLog.Log( TDLog.LOG_DB, "updateSurveyDeclination id " + id + " decl. " + decl );
-    if ( updateSurveyDeclinationStmt == null ) updateSurveyDeclinationStmt = myDB.compileStatement( "UPDATE surveys SET declination=? WHERE id=?" );
-    updateSurveyDeclinationStmt.bindDouble( 1, decl );
-    updateSurveyDeclinationStmt.bindLong( 2, id );
-    updateSurveyDeclinationStmt.execute();
+    ContentValues vals = new ContentValues();
+    vals.put( "declination", decl );
+    myDB.update( SURVEY_TABLE, vals, "id=?", new String[]{ Long.toString(id) } );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -482,28 +517,26 @@ public class DataHelper extends DataSetObservable
     }
   }
 
+  // -----------------------------------------------------------------------
+  // SURVEY delete
+
   public void doDeleteSurvey( long sid ) 
   {
     if ( myDB == null ) return;
-    if ( doDeletePhotoStmt == null ) doDeletePhotoStmt   = myDB.compileStatement( "DELETE FROM photos where surveyId=?" );
-    if ( doDeletePlotStmt == null )  doDeletePlotStmt    = myDB.compileStatement( "DELETE FROM plots where surveyId=?" );
-    if ( doDeleteFixedStmt == null ) doDeleteFixedStmt   = myDB.compileStatement( "DELETE FROM fixeds where surveyId=?" );
-    if ( doDeleteShotStmt == null )  doDeleteShotStmt    = myDB.compileStatement( "DELETE FROM shots where surveyId=?" );
-    if ( doDeleteStationStmt == null ) doDeleteStationStmt = myDB.compileStatement( "DELETE FROM stations where surveyId=?" );
-    if ( doDeleteSurveyStmt == null ) doDeleteSurveyStmt  = myDB.compileStatement( "DELETE FROM surveys where id=?" );
+    String[] clause = new String[]{ Long.toString( sid ) };
 
-    doDeletePhotoStmt.bindLong( 1, sid );
-    doDeletePhotoStmt.execute();
-    doDeletePlotStmt.bindLong( 1, sid );
-    doDeletePlotStmt.execute();
-    doDeleteFixedStmt.bindLong( 1, sid );
-    doDeleteFixedStmt.execute();
-    doDeleteShotStmt.bindLong( 1, sid );
-    doDeleteShotStmt.execute();
-    doDeleteStationStmt.bindLong( 1, sid );
-    doDeleteStationStmt.execute();
-    doDeleteSurveyStmt.bindLong( 1, sid );
-    doDeleteSurveyStmt.execute();
+    myDB.beginTransaction();
+    try {
+      myDB.delete( PHOTO_TABLE,   WHERE_SID, clause );
+      myDB.delete( PLOT_TABLE,    WHERE_SID, clause );
+      myDB.delete( FIXED_TABLE,   WHERE_SID, clause );
+      myDB.delete( SHOT_TABLE,    WHERE_SID, clause );
+      myDB.delete( STATION_TABLE, WHERE_SID, clause );
+      myDB.delete( SURVEY_TABLE, "id=?", clause );
+      myDB.setTransactionSuccessful();
+    } finally {
+      myDB.endTransaction();
+    }
   }
   
   // --------------------------------------------------------------------
@@ -525,8 +558,10 @@ public class DataHelper extends DataSetObservable
 
   void updateShotDistanceBearingClino( long id, long sid, float d, float b, float c, boolean forward )
   {
-    if ( updateShotDBCStmt == null )
-      updateShotDBCStmt = myDB.compileStatement( "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
+    // if ( updateShotDBCStmt == null )
+    //   updateShotDBCStmt = myDB.compileStatement(
+    //     "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
+
     updateShotDBCStmt.bindDouble(  1, d );
     updateShotDBCStmt.bindDouble(  2, b );
     updateShotDBCStmt.bindDouble(  3, c );
@@ -547,10 +582,13 @@ public class DataHelper extends DataSetObservable
     TDLog.Log(  TDLog.LOG_DB, "updateShot " + fStation + "-" + tStation + " " + extend + " " + flag + " <" + comment + ">");
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
-    if ( updateShotStmtFull == null )
-      updateShotStmtFull = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
-    if ( updateShotStmt == null )
-      updateShotStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
+
+    // if ( updateShotStmtFull == null )
+    //   updateShotStmtFull = myDB.compileStatement(
+    //     "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
+    // if ( updateShotStmt == null )
+    //   updateShotStmt = myDB.compileStatement(
+    //     "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
 
     if ( comment != null ) {
       updateShotStmtFull.bindString( 1, fStation );
@@ -583,7 +621,9 @@ public class DataHelper extends DataSetObservable
 
   private void shiftShotsId( long sid, long id )
   {
-    if ( shiftShotsIdStmt == null ) shiftShotsIdStmt = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
+    // if ( shiftShotsIdStmt == null )
+    //   shiftShotsIdStmt = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
+
     shiftShotsIdStmt.bindLong(1, sid);
     shiftShotsIdStmt.bindLong(2, id);
     shiftShotsIdStmt.execute();
@@ -604,8 +644,9 @@ public class DataHelper extends DataSetObservable
   public void updateShotName( long id, long sid, String fStation, String tStation, boolean forward )
   {
     if ( myDB == null ) return;
-    if ( updateShotNameStmt == null ) 
-      updateShotNameStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
+    // if ( updateShotNameStmt == null ) 
+    //   updateShotNameStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
+
     updateShotNameStmt.bindString( 1, fStation );
     updateShotNameStmt.bindString( 2, tStation );
     updateShotNameStmt.bindLong(   3, sid );
@@ -621,9 +662,11 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotLeg( long id, long sid, long leg, boolean forward )
   {
-    if ( myDB == null ) return;
-    if ( updateShotLegStmt == null )
-      updateShotLegStmt = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
+    // TDLog.Log( TDLog.LOG_DB, "updateShotLeg <" + id + "> leg " + leg );
+    // if ( myDB == null ) return;
+    // if ( updateShotLegStmt == null )
+    //   updateShotLegStmt = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
+
     updateShotLegStmt.bindLong(   1, leg );
     updateShotLegStmt.bindLong(   2, sid );
     updateShotLegStmt.bindLong(   3, id );
@@ -638,9 +681,11 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotExtend( long id, long sid, long extend, boolean forward )
   {
-    TDLog.Log( TDLog.LOG_DB, "updateShotExtend <" + id + "> " + extend );
-    if ( myDB == null ) return;
-    if ( updateShotExtendStmt == null ) updateShotExtendStmt = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
+    // TDLog.Log( TDLog.LOG_DB, "updateShotExtend <" + id + "> extend " + extend );
+    // if ( myDB == null ) return;
+    // if ( updateShotExtendStmt == null )
+    //   updateShotExtendStmt = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
+
     updateShotExtendStmt.bindLong( 1, extend );
     updateShotExtendStmt.bindLong( 2, sid );
     updateShotExtendStmt.bindLong( 3, id );
@@ -655,8 +700,10 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotFlag( long id, long sid, long flag, boolean forward )
   {
-    if ( myDB == null ) return;
-    if ( updateShotFlagStmt == null ) updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
+    // if ( myDB == null ) return;
+    // if ( updateShotFlagStmt == null )
+    //   updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
+
     updateShotFlagStmt.bindLong( 1, flag );
     updateShotFlagStmt.bindLong( 2, sid );
     updateShotFlagStmt.bindLong( 3, id );
@@ -671,8 +718,10 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotComment( long id, long sid, String comment, boolean forward )
   {
-    if ( myDB == null ) return;
-    if ( updateShotCommentStmt == null ) updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
+    // if ( myDB == null ) return;
+    // if ( updateShotCommentStmt == null )
+    //   updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
+
     updateShotCommentStmt.bindString( 1, comment );
     updateShotCommentStmt.bindLong( 2, sid );
     updateShotCommentStmt.bindLong( 3, id );
@@ -685,15 +734,19 @@ public class DataHelper extends DataSetObservable
     }
   }
 
+  private void updateStatus( String table, long id, long sid, long status )
+  {
+    ContentValues vals = new ContentValues();
+    vals.put( "status", status );
+    myDB.update( table, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+  }
+
 
   public void deleteShot( long id, long sid, boolean forward ) 
   {
-    if ( myDB == null ) return;
     // TDLog.Log( TDLog.LOG_DB, "deleteShot: " + id + "/" + sid );
-    if ( deleteShotStmt == null ) deleteShotStmt   = myDB.compileStatement( "UPDATE shots set status=1 WHERE surveyId=? AND id=?" );
-    deleteShotStmt.bindLong( 1, sid ); 
-    deleteShotStmt.bindLong( 2, id );
-    deleteShotStmt.execute();
+    // if ( myDB == null ) return;
+    updateStatus( SHOT_TABLE, id, sid, STATUS_DELETED );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -704,12 +757,9 @@ public class DataHelper extends DataSetObservable
 
   public void undeleteShot( long id, long sid, boolean forward ) 
   {
-    if ( myDB == null ) return;
     // TDLog.Log( TDLog.LOG_DB, "undeleteShot: " + id + "/" + sid );
-    if ( undeleteShotStmt == null ) undeleteShotStmt = myDB.compileStatement( "UPDATE shots set status=0 WHERE surveyId=? AND id=?" );
-    undeleteShotStmt.bindLong( 1, sid ); 
-    undeleteShotStmt.bindLong( 2, id );
-    undeleteShotStmt.execute();
+    // if ( myDB == null ) return;
+    updateStatus( SHOT_TABLE, id, sid, STATUS_NORMAL );
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -720,15 +770,17 @@ public class DataHelper extends DataSetObservable
   
   public void updateShotNameAndExtend( long sid, ArrayList< DistoXDBlock > updatelist )
   {
-    if ( myDB == null ) return;
+    // if ( myDB == null ) return;
     try {
+      // if ( updateShotNameAndExtendStmt == null ) 
+      //   updateShotNameAndExtendStmt = myDB.compileStatement(
+      //     "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
+
       // myDB.execSQL("PRAGMA synchronous=OFF");
       myDB.setLockingEnabled( false );
       myDB.beginTransaction();
       for ( DistoXDBlock b : updatelist ) {
-        TDLog.Log( TDLog.LOG_DB, "updateShotNameAndExtend <" + b.mFrom + "-" + b.mTo + "> " + b.mExtend );
-        if ( updateShotNameAndExtendStmt == null ) 
-          updateShotNameAndExtendStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
+        // TDLog.Log( TDLog.LOG_DB, "updateShotNameAndExtend <" + b.mFrom + "-" + b.mTo + "> " + b.mExtend );
         updateShotNameAndExtendStmt.bindString( 1, b.mFrom );
         updateShotNameAndExtendStmt.bindString( 2, b.mTo );
         updateShotNameAndExtendStmt.bindLong(   3, b.mExtend );
@@ -757,7 +809,8 @@ public class DataHelper extends DataSetObservable
   public long insertShots( long sid, long id, ArrayList< ParserShot > shots )
   {
     // TDLog.Log( TDLog.LOG_DB, "insertShots list size " + shots.size() );
-    if ( myDB == null ) return -1L;
+    // if ( myDB == null ) return -1L;
+
     InsertHelper ih = new InsertHelper( myDB, SHOT_TABLE );
     final int surveyIdCol = ih.getColumnIndex( "surveyId" );
     final int idCol       = ih.getColumnIndex( "id" );
@@ -837,8 +890,11 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean forward )
   {
-    if ( myDB == null ) return;
-    if ( updateShotAMDRStmt == null ) updateShotAMDRStmt = myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
+    // if ( myDB == null ) return;
+    // if ( updateShotAMDRStmt == null )
+    //   updateShotAMDRStmt = myDB.compileStatement(
+    //     "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
+
     updateShotAMDRStmt.bindDouble( 1, acc );
     updateShotAMDRStmt.bindDouble( 2, mag );
     updateShotAMDRStmt.bindDouble( 3, dip );
@@ -905,11 +961,18 @@ public class DataHelper extends DataSetObservable
     SurveyInfo old_survey = selectSurveyInfo( old_sid );
     SurveyInfo new_survey = selectSurveyInfo( sid );
     long max_id = maxId( SHOT_TABLE, old_sid );
+
+    ContentValues vals0 = new ContentValues();
+    vals0.put( "surveyId", sid );
+    String[] where0 = new String[2];
+    where0[0] = Long.toString( old_sid );
+
     while ( old_id < max_id ) {
       DistoXDBlock blk = selectShot( old_id, old_sid );
       if ( blk == null ) continue;
 
-      if ( transferShotStmt == null ) transferShotStmt = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
+      if ( transferShotStmt == null )
+        transferShotStmt = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
       transferShotStmt.bindLong(1, sid);
       transferShotStmt.bindLong(2, myNextId);
       transferShotStmt.bindLong(3, old_sid);
@@ -921,29 +984,43 @@ public class DataHelper extends DataSetObservable
       if ( blk.mFrom.length() > 0 ) {
         List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mFrom ); 
         for ( FixedInfo fixed : fixeds ) {
-          transferFixed( sid, old_sid, fixed.id );
+          where0[1] = Long.toString( fixed.id );
+          myDB.update( FIXED_TABLE, vals0, WHERE_SID_ID, where0 );
         }
-        transferStation( sid, old_sid, blk.mFrom );
+        where0[1] = blk.mFrom;
+        myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 );
+
         transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
         transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
       }
       if ( blk.mTo.length() > 0 ) {
         List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mTo );
         for ( FixedInfo fixed : fixeds ) {
-          transferFixed( sid, old_sid, fixed.id );
+          where0[1] = Long.toString( fixed.id );
+          myDB.update( FIXED_TABLE, vals0, WHERE_SID_ID, where0 );
         }
-        transferStation( sid, old_sid, blk.mTo );
+        where0[1] = blk.mTo;
+        myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 );
+        
         transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mTo );
         transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
       }
+
+      ContentValues vals = new ContentValues();
+      vals.put( "surveyId", sid );
+      vals.put( "shotId",   myNextId );
+      String where[] = new String[2];
+      where[0] = Long.toString( old_sid );
       List< SensorInfo > sensors = selectSensorsAtShot( old_sid, old_id ); // transfer sensors
       for ( SensorInfo sensor : sensors ) {
-        transferSensor( sid, myNextId, old_sid, sensor.id );
+        where[1] = Long.toString( sensor.id );
+        myDB.update( SENSOR_TABLE, vals, WHERE_SID_ID, where );
       }
 
       List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
       for ( PhotoInfo photo : photos ) {
-        transferPhoto( sid, myNextId, old_sid, photo.id );
+        where[1] = Long.toString( photo.id );
+        myDB.update( PHOTO_TABLE, vals, WHERE_SID_ID, where );
         File oldfile = new File( TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) ) );
         File newfile = new File( TDPath.getSurveyJpgFile( new_survey.name, Long.toString(photo.id) ) );
         if ( oldfile.exists() && ! newfile.exists() ) {
@@ -977,8 +1054,8 @@ public class DataHelper extends DataSetObservable
     cv.put( "dip",      0.0 );
     cv.put( "extend",   extend );
     cv.put( "flag",     DistoXDBlock.BLOCK_SURVEY ); // flag );
-    cv.put( "leg",      0L ); // leg );
-    cv.put( "status",   0L ); // status );
+    cv.put( "leg",      LEG_NORMAL ); // leg );
+    cv.put( "status",   STATUS_NORMAL ); // status );
     cv.put( "comment",  "" ); // comment );
     cv.put( "type",     type ); 
     myDB.insert( SHOT_TABLE, null, cv );
@@ -1036,93 +1113,89 @@ public class DataHelper extends DataSetObservable
   // -----------------------------------------------------------------
   // PLOT
 
-  public void updatePlot( long plot_id, long survey_id, double xoffset, double yoffset, double zoom )
+  public void updatePlot( long pid, long sid, double xoffset, double yoffset, double zoom )
   {
     if ( myDB == null ) return;
     // TDLog.Log( TDLog.LOG_DB,
-    //                   "updatePlot: " + plot_id + "/" + survey_id + " x " + xoffset + " y " + yoffset + " zoom " + zooom);
-    if ( updatePlotStmt == null ) updatePlotStmt = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
+    //                   "updatePlot: " + pid + "/" + sid + " x " + xoffset + " y " + yoffset + " zoom " + zooom);
+    // if ( updatePlotStmt == null ) 
+    //   updatePlotStmt = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
     updatePlotStmt.bindDouble( 1, xoffset );
     updatePlotStmt.bindDouble( 2, yoffset );
     updatePlotStmt.bindDouble( 3, zoom );
-    updatePlotStmt.bindLong( 4, survey_id );
-    updatePlotStmt.bindLong( 5, plot_id );
+    updatePlotStmt.bindLong( 4, sid );
+    updatePlotStmt.bindLong( 5, pid );
     updatePlotStmt.execute();
   }
  
-  public void updatePlotView( long plot_id, long survey_id, String view )
+  public void updatePlotView( long pid, long sid, String view )
   {
     if ( myDB == null ) return;
-    // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + plot_id + "/" + survey_id + " view " + view );
-    if (updatePlotViewStmt == null ) updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+    // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + pid + "/" + sid + " view " + view );
+    // if (updatePlotViewStmt == null )
+    //   updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
     updatePlotViewStmt.bindString( 1, view );
-    updatePlotViewStmt.bindLong( 2, survey_id );
-    updatePlotViewStmt.bindLong( 3, plot_id );
+    updatePlotViewStmt.bindLong( 2, sid );
+    updatePlotViewStmt.bindLong( 3, pid );
     updatePlotViewStmt.execute();
   }
    
-  public void updatePlotHide( long plot_id, long survey_id, String hide )
+  public void updatePlotHide( long pid, long sid, String hide )
   {
     if ( myDB == null ) return;
-    // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + plot_id + "/" + survey_id + " hide " + hide );
-    if ( updatePlotHideStmt == null ) updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+    // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + pid + "/" + sid + " hide " + hide );
+    // if ( updatePlotHideStmt == null )
+    //   updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
     updatePlotHideStmt.bindString( 1, hide );
-    updatePlotHideStmt.bindLong( 2, survey_id );
-    updatePlotHideStmt.bindLong( 3, plot_id );
+    updatePlotHideStmt.bindLong( 2, sid );
+    updatePlotHideStmt.bindLong( 3, pid );
     updatePlotHideStmt.execute();
   }
    
   /** DROP is a real record delete from the database table
    */
-  public void dropPlot( long plot_id, long survey_id )
+  public void dropPlot( long pid, long sid )
   {
     if ( myDB == null ) return;
-    if ( dropPlotStmt == null ) dropPlotStmt = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
-    // TDLog.Log( TDLog.LOG_DB, "dropPlot: " + plot_id + "/" + survey_id );
-    dropPlotStmt.bindLong( 1, survey_id );
-    dropPlotStmt.bindLong( 2, plot_id );
-    dropPlotStmt.execute();
+    myDB.delete( PLOT_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(pid) } );
   }
 
-  public void deletePlot( long plot_id, long survey_id )
+  public void deletePlot( long pid, long sid )
   {
+    // TDLog.Log( TDLog.LOG_DB, "deletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
-    // TDLog.Log( TDLog.LOG_DB, "deletePlot: " + plot_id + "/" + survey_id );
-    if ( deletePlotStmt == null ) deletePlotStmt   = myDB.compileStatement( "UPDATE plots set status=1 WHERE surveyId=? AND id=?" );
-    deletePlotStmt.bindLong( 1, survey_id );
-    deletePlotStmt.bindLong( 2, plot_id );
-    deletePlotStmt.execute();
+    updateStatus( PLOT_TABLE, pid, sid, STATUS_DELETED );
   }
 
   // THIS REALLY DROPS THE RECORD FROM THE TABLE
-  public void deletePlotByName( String name, long survey_id )
+  public void deletePlotByName( String name, long sid )
   {
     if ( myDB == null ) return;
-    if ( deletePlotByNameStmt == null ) deletePlotByNameStmt = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND name=?" );
-    deletePlotByNameStmt.bindLong( 1, survey_id );
-    deletePlotByNameStmt.bindString( 2, name );
-    deletePlotByNameStmt.execute();
+    myDB.delete( PLOT_TABLE, WHERE_SID_NAME, new String[]{ Long.toString(sid), name } );
   }
   
-  public void undeletePlot( long plot_id, long survey_id )
+  public void undeletePlot( long pid, long sid )
   {
+    // TDLog.Log( TDLog.LOG_DB, "undeletePlot: " + pid + "/" + sid );
     if ( myDB == null ) return;
-    // TDLog.Log( TDLog.LOG_DB, "undeletePlot: " + plot_id + "/" + survey_id );
-
-    if ( undeletePlotStmt == null ) undeletePlotStmt = myDB.compileStatement( "UPDATE plots set status=0 WHERE surveyId=? AND id=?" );
-    undeletePlotStmt.bindLong( 1, survey_id );
-    undeletePlotStmt.bindLong( 2, plot_id );
-    undeletePlotStmt.execute();
-    // long pid = plot_id + 1; // extended  does not need to be marked as normal
-    // TDLog.Error( "undeletePlot: " + plot_id + "/" + pid + " survey " + survey_id );
-    // undeletePlotStmt.bindLong( 1, survey_id );
-    // undeletePlotStmt.bindLong( 2, plot_id );
-    // undeletePlotStmt.execute();
+    updateStatus( PLOT_TABLE, pid, sid, STATUS_NORMAL );
+    // get plot type 
+    Cursor cursor = myDB.query( PLOT_TABLE,
+       		         new String[] { "type" }, // columns
+                                WHERE_SID_ID,
+                                new String[] { Long.toString(sid), Long.toString(pid) },
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if ( cursor.moveToFirst() && cursor.getLong(0) == PlotInfo.PLOT_PLAN ) {
+      updateStatus( PLOT_TABLE, pid+1, sid, STATUS_NORMAL );
+    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
   }
   
 
   // FIXME_SKETCH_3D
-  public void updateSketch( long sketch_id, long survey_id, 
+  public void updateSketch( long sketch_id, long sid, 
                             String st1, String st2,
                             double xofftop, double yofftop, double zoomtop,
                             double xoffside, double yoffside, double zoomside,
@@ -1130,7 +1203,8 @@ public class DataHelper extends DataSetObservable
                             double east, double south, double vert, double azimuth, double clino )
   {
     if ( myDB == null ) return;
-    if ( updateSketchStmt == null ) updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+    // if ( updateSketchStmt == null )
+    //   updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
     updateSketchStmt.bindString( 1, st1 );
     updateSketchStmt.bindString( 2, st2 );
     updateSketchStmt.bindDouble( 3, xofftop );
@@ -1147,18 +1221,20 @@ public class DataHelper extends DataSetObservable
     updateSketchStmt.bindDouble(14, vert );
     updateSketchStmt.bindDouble(15, azimuth );
     updateSketchStmt.bindDouble(16, clino );
-    updateSketchStmt.bindLong( 17, survey_id );
+    updateSketchStmt.bindLong( 17, sid );
     updateSketchStmt.bindLong( 18, sketch_id );
     updateSketchStmt.execute();
   }
   
-  public void deleteSketch( long sketch_id, long survey_id )
+  public void deleteSketch( long sketch_id, long sid )
   {
     if ( myDB == null ) return;
-    if ( deleteSketchStmt == null ) deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
-    deleteSketchStmt.bindLong( 1, survey_id );
-    deleteSketchStmt.bindLong( 2, sketch_id );
-    deleteSketchStmt.execute();
+    updateStatus( SKETCH_TABLE, sketch_id, sid, STATUS_DELETED );
+    // if ( deleteSketchStmt == null )
+    //   deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
+    // deleteSketchStmt.bindLong( 1, sid );
+    // deleteSketchStmt.bindLong( 2, sketch_id );
+    // deleteSketchStmt.execute();
   }
   // END_SKETCH_3D
 
@@ -1171,7 +1247,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( SENSOR_TABLE,
        		         new String[] { "id", "shotId", "title", "date", "comment", "type", "value" }, // columns
-                                "surveyId=? AND status=?", 
+                                WHERE_SID_STATUS,
                                 new String[] { Long.toString(sid), Long.toString(status) },
                                 null,  // groupBy
                                 null,  // having
@@ -1190,13 +1266,11 @@ public class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
     for ( SensorInfo si : list ) { // set shot-names to the sensor infos
       cursor = myDB.query( SHOT_TABLE, 
                            new String[] { "fStation", "tStation" },
-                           "surveyId=? and id=?",
+                           WHERE_SID_ID,
                            new String[] { Long.toString(sid), Long.toString(si.shotid) },
                            null, null, null );
       if (cursor.moveToFirst()) {
@@ -1232,15 +1306,14 @@ public class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
+    String[] where = new String[2];
+    where[0] = Long.toString(sid);
     for ( SensorInfo si : list ) { // set shot-names to the sensor infos
+      where[1] = Long.toString( si.shotid );
       cursor = myDB.query( SHOT_TABLE, 
                            new String[] { "fStation", "tStation" },
-                           "surveyId=? and id=?",
-                           new String[] { Long.toString(sid), Long.toString(si.shotid) },
-                           null, null, null );
+                           WHERE_SID_ID, where, null, null, null );
       if (cursor.moveToFirst()) {
         si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
@@ -1255,11 +1328,8 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( PHOTO_TABLE,
        		         new String[] { "id", "shotId", "title", "date", "comment" }, // columns
-                                "surveyId=? AND status=?", 
-                                new String[] { Long.toString(sid), Long.toString(status) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+                                WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) },
+                                null, null,  null ); 
     if (cursor.moveToFirst()) {
       do {
         list.add( new PhotoInfo( sid, 
@@ -1272,15 +1342,15 @@ public class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
+
+    String[] where = new String[2];
+    where[0] = Long.toString(sid);
     for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
+      where[1] = Long.toString( pi.shotid );
       cursor = myDB.query( SHOT_TABLE, 
                            new String[] { "fStation", "tStation" },
-                           "surveyId=? and id=?",
-                           new String[] { Long.toString(sid), Long.toString(pi.shotid) },
-                           null, null, null );
+                           WHERE_SID_ID, where, null, null, null );
       if (cursor.moveToFirst()) {
         pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
@@ -1294,12 +1364,9 @@ public class DataHelper extends DataSetObservable
     List< PhotoInfo > list = new ArrayList< PhotoInfo >();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( PHOTO_TABLE,
-       		         new String[] { "id", "shotId", "title", "date", "comment" }, // columns
-                                "surveyId=? AND shotId=?", 
-                                new String[] { Long.toString(sid), Long.toString(shotid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+                                new String[] { "id", "shotId", "title", "date", "comment" }, // columns
+                                WHERE_SID_SHOTID, new String[] { Long.toString(sid), Long.toString(shotid) },
+                                null, null, null ); 
     if (cursor.moveToFirst()) {
       do {
         list.add( new PhotoInfo( sid, 
@@ -1312,15 +1379,14 @@ public class DataHelper extends DataSetObservable
       } while (cursor.moveToNext());
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
+
+    String[] where = new String[2];
+    where[0] = Long.toString(sid);
     for ( PhotoInfo pi : list ) { // fill in the shot-name of the photos
-      cursor = myDB.query( SHOT_TABLE, 
-                           new String[] { "fStation", "tStation" },
-                           "surveyId=? and id=?",
-                           new String[] { Long.toString(sid), Long.toString(pi.shotid) },
-                           null, null, null );
+      where[1] = Long.toString( pi.shotid );
+      cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" },
+                           WHERE_SID_ID, where, null, null, null );
       if (cursor.moveToFirst()) {
         pi.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }
@@ -1334,12 +1400,9 @@ public class DataHelper extends DataSetObservable
     List<  FixedInfo  > list = new ArrayList<  FixedInfo  >();
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query( FIXED_TABLE,
-			         new String[] { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment" }, // columns
-                                 "surveyId=? and status=?",  // selection = WHERE clause (without "WHERE")
-                                new String[] { Long.toString(sid), Long.toString(status) },     // selectionArgs
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+			        new String[] { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment" }, // columns
+                                WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) }, 
+                                null, null, null );
     if (cursor.moveToFirst()) {
       do {
         list.add( new FixedInfo( cursor.getLong(0),
@@ -1351,9 +1414,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(6) ) );
       } while (cursor.moveToNext());
     }
-    if (cursor != null && !cursor.isClosed()) {
-      cursor.close();
-    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
     // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
     return list;
   }
@@ -1380,25 +1441,19 @@ public class DataHelper extends DataSetObservable
                                   cursor.getString(6) ) );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
      return list;
    }
 
    // FIXME_SKETCH_3D
-   private List< Sketch3dInfo > doSelectAllSketches( long sid, String where, String[] wheres )
+   private List< Sketch3dInfo > doSelectAllSketches( long sid, String where_str, String[] where )
    {
      List<  Sketch3dInfo  > list = new ArrayList<  Sketch3dInfo  >();
      if ( myDB == null ) return list;
-     Cursor cursor = myDB.query( SKETCH_TABLE,
-                                 mSketchFields,
-                                 where,
-                                 wheres,
-                                 null,  // groupBy
-                                 null,  // having
-                                 "id" ); // order by
+     Cursor cursor = myDB.query( SKETCH_TABLE, mSketchFields,
+                                 where_str, where,
+                                 null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          Sketch3dInfo sketch = new  Sketch3dInfo ();
@@ -1426,16 +1481,14 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Sketch list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
    public List< Sketch3dInfo > selectAllSketches( long sid )
    {
      return doSelectAllSketches( sid, 
-                                 "surveyId=?",
+                                 WHERE_SID,
                                  new String[] { Long.toString(sid) } 
      );
    }
@@ -1443,7 +1496,7 @@ public class DataHelper extends DataSetObservable
    public List< Sketch3dInfo > selectAllSketches( long sid, long status )
    {
      return doSelectAllSketches( sid, 
-                                 "surveyId=? and status=?",
+                                 WHERE_SID_STATUS,
                                  new String[] { Long.toString(sid), Long.toString(status) }
      );
    }
@@ -1451,7 +1504,7 @@ public class DataHelper extends DataSetObservable
    private List< Sketch3dInfo > selectSketchesAtStation( long sid, String name )
    {
      return doSelectAllSketches( sid, 
-                                 "surveyId=? and start=?",
+                                 WHERE_SID_START,
                                  new String[] { Long.toString(sid), name }
      );
    }
@@ -1461,17 +1514,11 @@ public class DataHelper extends DataSetObservable
    {
      boolean ret = false;
      if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query(PLOT_TABLE,
-			        new String[] { "id", "name" },
-                                "surveyId=? and name=?",
-                                new String[] { Long.toString(sid), name }, 
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
+     Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name" },
+                                WHERE_SID_NAME, new String[] { Long.toString(sid), name }, 
+                                null, null, "id" );
      if (cursor.moveToFirst()) ret = true;
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1483,13 +1530,9 @@ public class DataHelper extends DataSetObservable
 			        new String[] { "id", "fStation", "tStation" },
                                 "surveyId=? and ( fStation=? or tStation=? )",
                                 new String[] { Long.toString(sid), start, start }, 
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
+                                null, null, "id" );
      if (cursor.moveToFirst()) ret = true;
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1498,13 +1541,9 @@ public class DataHelper extends DataSetObservable
    {
      int ret = 0;
      if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query(PLOT_TABLE,
-			        new String[] { "id", "name", "type" },
-                                "surveyId=?",
-                                new String[] { Long.toString(sid) }, 
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
+     Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name", "type" },
+                                WHERE_SID, new String[] { Long.toString(sid) }, 
+                                null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          int type = cursor.getInt(2);
@@ -1522,9 +1561,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1544,17 +1581,11 @@ public class DataHelper extends DataSetObservable
    }
 
 
-   private List< PlotInfo > doSelectAllPlots( long sid, String where, String[] wheres )
+   private List< PlotInfo > doSelectAllPlots( long sid, String where_str, String[] where )
    {
      List<  PlotInfo  > list = new ArrayList<  PlotInfo  >();
      if ( myDB == null ) return list;
-     Cursor cursor = myDB.query(PLOT_TABLE,
-                                mPlotFields,
-                                where,
-                                wheres,
-                                null,  // groupBy
-                                null,  // having
-                                "id" ); // order by
+     Cursor cursor = myDB.query(PLOT_TABLE, mPlotFields, where_str, where, null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          PlotInfo plot = new  PlotInfo ();
@@ -1565,16 +1596,14 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
    public List< PlotInfo > selectAllPlots( long sid )
    {
      return doSelectAllPlots( sid, 
-                              "surveyId=?", 
+                              WHERE_SID,
                               new String[] { Long.toString(sid) }
      );
    }
@@ -1583,7 +1612,7 @@ public class DataHelper extends DataSetObservable
    public List< PlotInfo > selectAllPlots( long sid, long status )
    {
      return doSelectAllPlots( sid, 
-                              "surveyId=? and status=?", 
+                              WHERE_SID_STATUS,
                               new String[] { Long.toString(sid), Long.toString(status) }
      );
    }
@@ -1599,7 +1628,7 @@ public class DataHelper extends DataSetObservable
    private List< PlotInfo > selectPlotsAtStation( long sid, String name )
    {
      return doSelectAllPlots( sid, 
-                              "surveyId=? and start=?",
+                              WHERE_SID_START,
                               new String[] { Long.toString(sid), name }
      );
    }
@@ -1616,9 +1645,7 @@ public class DataHelper extends DataSetObservable
        null,   // having
        null ); // order by
      boolean ret = cursor.moveToFirst();
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
      
@@ -1638,9 +1665,7 @@ public class DataHelper extends DataSetObservable
          ret = cursor.getString( 0 );
        } while ( ret.length() == 0 && cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1648,12 +1673,9 @@ public class DataHelper extends DataSetObservable
    {
      long ret = -1;
      if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query(SHOT_TABLE, new String[] { "id", "fStation", "tStation" },
-       "surveyId=? and id>=?", 
-       new String[] { Long.toString(sid), Long.toString(blk.mId) },
-       null,  // groupBy
-       null,  // having
-       "id ASC" ); // order by ID
+     Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "id", "fStation", "tStation" },
+                                 WHERE_SID_ID, new String[] { Long.toString(sid), Long.toString(blk.mId) },
+                                 null, null, "id ASC" ); 
      if (cursor.moveToFirst()) {
        for ( int k = 0; k < 3; ++ k ) {
          String from = cursor.getString(1);
@@ -1664,10 +1686,10 @@ public class DataHelper extends DataSetObservable
            if ( k > 0 ) {
              // Log.v("DistoX", blk.mId + " clear shot name " + ret );
              updateShotName( ret, sid, "", "", forward );
-             updateShotLeg( ret, sid, 1L, forward ); 
+             updateShotLeg( ret, sid, LEG_EXTRA, forward ); 
              if ( k == 2 ) { // N.B. if k == 2 must set ShotLeg also to intermediate shot
                if ( cursor.moveToPrevious() ) { // overcautious
-                 updateShotLeg( cursor.getLong(0), sid, 1L, forward ); 
+                 updateShotLeg( cursor.getLong(0), sid, LEG_EXTRA, forward ); 
                }
              }
            }
@@ -1679,9 +1701,7 @@ public class DataHelper extends DataSetObservable
          if ( ! cursor.moveToNext() ) break;
        }
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
 
@@ -1689,61 +1709,51 @@ public class DataHelper extends DataSetObservable
    {
      // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );
      if ( myDB == null ) return null;
-     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and id=?", 
-       new String[] { Long.toString(sid), Long.toString(id) },
-       null,  // groupBy
-       null,  // having
-       null ); // order by
+     Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
+                                 WHERE_SID_ID, new String[] { Long.toString(sid), Long.toString(id) },
+                                 null, null, null );
      DistoXDBlock block = null;
      if (cursor.moveToFirst()) {
        block = new DistoXDBlock();
        fillBlock( sid, block, cursor );
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return block;
    }
 
-   public DistoXDBlock selectLastLegShot( long survey_id )
+   public DistoXDBlock selectLastLegShot( long sid )
    {
-     return selectPreviousLegShot( myNextId+1, survey_id );
+     return selectPreviousLegShot( myNextId+1, sid );
    }
 
-   public DistoXDBlock selectPreviousLegShot( long shot_id, long survey_id )
+   public DistoXDBlock selectPreviousLegShot( long shot_id, long sid )
    {
-     // TDLog.Log( TDLog.LOG_DB, "selectPreviousLegShot " + shot_id + "/" + survey_id );
+     // TDLog.Log( TDLog.LOG_DB, "selectPreviousLegShot " + shot_id + "/" + sid );
      if ( myDB == null ) return null;
-     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and id<?",
-       new String[] { Long.toString(survey_id), Long.toString(shot_id) },
-       null,  // groupBy
-       null,  // having
-       "id DESC" ); // order by
-       // "1" ); // no limit
+     Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
+                                 "surveyId=? and id<?",
+                                 new String[] { Long.toString(sid), Long.toString(shot_id) },
+                                 null, null, "id DESC" );
      DistoXDBlock block = null;
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getString(0).length() > 0 && cursor.getString(1).length() > 0 ) {
            block = new DistoXDBlock();
-           fillBlock( survey_id, block, cursor );
+           fillBlock( sid, block, cursor );
          }  
        } while (block == null && cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return block;
    }
 
-   String getLastStationName( long survey_id )
+   String getLastStationName( long sid )
    {
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query(SHOT_TABLE,
        new String[] { "fStation", "tStation" },
-       "surveyId=?",
-       new String[] { Long.toString(survey_id) },
+       WHERE_SID,
+       new String[] { Long.toString(sid) },
        null,  // groupBy
        null,  // having
        "id DESC" // order by
@@ -1759,20 +1769,18 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
 
    // FIXME this is ok only for numbers
-   // String getNextStationName( long survey_id )
+   // String getNextStationName( long sid )
    // {
    //   if ( myDB == null ) return null;
    //   Cursor cursor = myDB.query(SHOT_TABLE,
    //     new String[] { "fStation", "tStation" },
-   //     "surveyId=?",
-   //     new String[] { Long.toString(survey_id) },
+   //      WHERE_SID,
+   //     new String[] { Long.toString(sid) },
    //     null,  // groupBy
    //     null,  // having
    //     "id DESC" // order by
@@ -1794,36 +1802,29 @@ public class DataHelper extends DataSetObservable
    //       }
    //     } while (cursor.moveToNext());
    //   }
-   //   if (cursor != null && !cursor.isClosed()) {
-   //     cursor.close();
-   //   }
+   //   if (cursor != null && !cursor.isClosed()) cursor.close();
    //   ++ ret;
    //   return Integer.toString(ret);
    // }
 
-   public DistoXDBlock selectNextLegShot( long shot_id, long survey_id ) 
+   public DistoXDBlock selectNextLegShot( long shot_id, long sid ) 
    {
-     // TDLog.Log( TDLog.LOG_DB, "selectNextLegShot " + shot_id + "/" + survey_id );
+     // TDLog.Log( TDLog.LOG_DB, "selectNextLegShot " + shot_id + "/" + sid );
      if ( myDB == null ) return null;
-     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and id>?",
-       new String[] { Long.toString(survey_id), Long.toString(shot_id) },
-       null,  // groupBy
-       null,  // having
-       "id ASC" ); // order by
-       // "1" ); // no limit
+     Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
+                                 "surveyId=? and id>?",
+                                 new String[] { Long.toString(sid), Long.toString(shot_id) },
+                                 null, null, "id ASC" );
      DistoXDBlock block = null;
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getString(0).length() > 0 && cursor.getString(1).length() > 0 ) {
            block = new DistoXDBlock();
-           fillBlock( survey_id, block, cursor );
+           fillBlock( sid, block, cursor );
          }  
        } while (block == null && cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return block;
    }
 
@@ -1847,9 +1848,7 @@ public class DataHelper extends DataSetObservable
    //       }
    //     } while (ret == false && cursor.moveToNext());
    //   }
-   //   if (cursor != null && !cursor.isClosed()) {
-   //     cursor.close();
-   //   }
+   //   if (cursor != null && !cursor.isClosed()) cursor.close();
    //   TDLog.Log( TDLog.LOG_DB, "hasShotAtStation returns " + ret );
    //   return ret;
    // }
@@ -1859,11 +1858,9 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and status=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )",
-       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), st1, st2, st2, st1 },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     "surveyId=? and status=? and ( ( fStation=? and tStation=? ) or ( fStation=? and tStation=? ) )",
+                     new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), st1, st2, st2, st1 },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          DistoXDBlock block = new DistoXDBlock();
@@ -1871,9 +1868,7 @@ public class DataHelper extends DataSetObservable
          list.add( block );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -1882,11 +1877,9 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and status=? and id>?",
-       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), Long.toString(id) },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     "surveyId=? and status=? and id>?",
+                     new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), Long.toString(id) },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          DistoXDBlock block = new DistoXDBlock();
@@ -1894,9 +1887,7 @@ public class DataHelper extends DataSetObservable
          list.add( block );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -1906,11 +1897,9 @@ public class DataHelper extends DataSetObservable
      if ( station == null || station.length() == 0 ) return list;
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and status=? and (fStation=? or tStation=?)",
-       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station, station },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     "surveyId=? and status=? and (fStation=? or tStation=?)",
+                     new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station, station },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          int fl = cursor.getString(1).length();
@@ -1923,9 +1912,7 @@ public class DataHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -1940,9 +1927,7 @@ public class DataHelper extends DataSetObservable
      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
        "surveyId=? and status=? and ( fStation=? or tStation=? or fStation=? or tStation=? )",
        new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station1, station2, station2, station1 },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+       null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
@@ -1953,9 +1938,7 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -1966,11 +1949,9 @@ public class DataHelper extends DataSetObservable
 
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and status=? and fStation=?", 
-       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     "surveyId=? and status=? and fStation=?", 
+                     new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
@@ -1981,9 +1962,7 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -1992,11 +1971,9 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and status=? and tStation=?", 
-       new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     "surveyId=? and status=? and tStation=?", 
+                     new String[] { Long.toString(sid), Long.toString(TopoDroidApp.STATUS_NORMAL), station },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getLong(11) == 0 ) { // skip leg-blocks
@@ -2007,9 +1984,7 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots To Station list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2018,11 +1993,9 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "id>=? and surveyId=? and status=?",
-       new String[] { Long.toString(id), Long.toString(sid), Long.toString(status) },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     "id>=? and surveyId=? and status=?",
+                     new String[] { Long.toString(id), Long.toString(sid), Long.toString(status) },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          DistoXDBlock block = new DistoXDBlock();
@@ -2031,9 +2004,7 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots after " + id + " list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2042,11 +2013,8 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and status=?",
-       new String[] { Long.toString(sid), Long.toString(status) },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          DistoXDBlock block = new DistoXDBlock();
@@ -2055,9 +2023,7 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2066,11 +2032,8 @@ public class DataHelper extends DataSetObservable
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
      if ( myDB == null ) return list;
      Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
-       "surveyId=? and status=?",
-       new String[] { Long.toString(sid), Long.toString(status) },
-       null,  // groupBy
-       null,  // having
-       "id" ); // order by
+                     WHERE_SID_STATUS, new String[]{ Long.toString(sid), Long.toString(status) },
+                     null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          if ( cursor.getString(1).length() > 0 && cursor.getString(2).length() > 0 ) {
@@ -2081,9 +2044,7 @@ public class DataHelper extends DataSetObservable
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return list;
    }
 
@@ -2093,11 +2054,8 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return null;
      Cursor cursor = myDB.query( SURVEY_TABLE,
                                 new String[] { "name", "day", "team", "declination", "comment", "init_station" }, // columns
-                                "id=?",
-                                new String[] { Long.toString(sid) },
-                                null,  // groupBy
-                                null,  // having
-                                null ); // order by
+                                WHERE_ID, new String[] { Long.toString(sid) },
+                                null, null, "name" );
      if (cursor.moveToFirst()) {
        info = new SurveyInfo();
        info.id      = sid;
@@ -2108,9 +2066,7 @@ public class DataHelper extends DataSetObservable
        info.comment = cursor.getString( 4 );
        info.initStation = cursor.getString( 5 );
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return info;
    }
    // ----------------------------------------------------------------------
@@ -2124,16 +2080,14 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return list;
      try {
        Cursor cursor = myDB.query( table,
-                                  new String[] { "name" }, // columns
-                                  null, null, null, null, "name" );
+                                   new String[] { "name" }, // columns
+                                   null, null, null, null, "name" );
        if (cursor.moveToFirst()) {
          do {
            list.add( cursor.getString(0) );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
      } catch ( SQLException e ) {
        // ignore
      }
@@ -2277,9 +2231,9 @@ public class DataHelper extends DataSetObservable
                                  null, null, null );
      if (cursor.moveToFirst() ) {
        id = cursor.getLong(0);
-       if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
      } else {
-       if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
        // SELECT max(id) FROM table
        cursor = myDB.query( table, new String[] { "max(id)" },
                             null, null, null, null, null );
@@ -2288,7 +2242,7 @@ public class DataHelper extends DataSetObservable
        } else {
          id = 1;
        }
-       if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
        // INSERT INTO table VALUES( id, name, "", "" )
        ContentValues cv = new ContentValues();
        cv.put( "id",      id );
@@ -2311,7 +2265,7 @@ public class DataHelper extends DataSetObservable
      // Log.v( TopoDroidApp.TAG, "getNextSectionId sid " + sid + " prefix " + prefix );
      Cursor cursor = myDB.query( PLOT_TABLE, 
                  new String[] { "id", "type", "name" },
-                 "surveyId=?",
+                 WHERE_SID,
                  new String[] { Long.toString(sid) },
                  null, null, null );
      if (cursor != null ) {
@@ -2341,7 +2295,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB != null && name != null ) {
        Cursor cursor = myDB.query( PLOT_TABLE, 
                  new String[] { "id", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" },
-                 "surveyId=? and name=?", 
+                 WHERE_SID_NAME,
                  new String[] { Long.toString(sid), name },
                  null, null, null );
        if (cursor != null ) {
@@ -2374,7 +2328,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB != null && name != null ) {
        Cursor cursor = myDB.query( SKETCH_TABLE, 
                  new String[] { "id", "start", "st1", "st2", "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d", "east", "south", "vert", "azimuth", "clino" },
-                 "surveyId=? and name=?", 
+                 WHERE_SID_NAME,
                  new String[] { Long.toString(sid), name },
                  null, null, null );
        if (cursor.moveToFirst() ) {
@@ -2400,7 +2354,7 @@ public class DataHelper extends DataSetObservable
          sketch.azimuth = (float)( cursor.getDouble(16) );
          sketch.clino   = (float)( cursor.getDouble(17) );
        }
-       if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
      }
      return sketch;
    }
@@ -2411,7 +2365,7 @@ public class DataHelper extends DataSetObservable
      long ret = -1;
      if ( myDB != null && name != null ) {
        Cursor cursor = myDB.query( PLOT_TABLE, new String[] { "id" },
-                            "surveyId=? and name=?", 
+                            WHERE_SID_NAME,
                             new String[] { Long.toString(sid), name },
                             null, null, null );
        if ( cursor != null ) {
@@ -2430,7 +2384,7 @@ public class DataHelper extends DataSetObservable
      long ret = -1;
      if ( myDB != null && name != null ) {
        Cursor cursor = myDB.query( SKETCH_TABLE, new String[] { "id" },
-                            "surveyId=? and name=?",
+                            WHERE_SID_NAME,
                             new String[] { Long.toString(sid), name },
                             null, null, null );
        if ( cursor != null ) {
@@ -2450,7 +2404,7 @@ public class DataHelper extends DataSetObservable
    //   if ( field == null ) return ret;
    //   if ( myDB == null ) return ret;
    //   Cursor cursor = myDB.query( PLOT_TABLE, new String[] { field },
-   //                        "surveyId=? and id=?", 
+   //                        WHERE_SID_ID,
    //                        new String[] { Long.toString(sid), Long.toString(pid) },
    //                        null, null, null );
    //   if ( cursor != null ) {
@@ -2497,23 +2451,17 @@ public class DataHelper extends DataSetObservable
    public boolean updatePhoto( long sid, long id, String comment )
    {
      if ( myDB == null ) return false;
-     if ( updatePhotoStmt == null ) updatePhotoStmt  = myDB.compileStatement( "UPDATE photos set comment=? WHERE surveyId=? AND id=?" );
-     updatePhotoStmt.bindString( 1, comment );
-     updatePhotoStmt.bindLong( 2, sid );
-     updatePhotoStmt.bindLong( 3, id );
-     updatePhotoStmt.execute();
+     ContentValues vals = new ContentValues();
+     vals.put( "comment", comment );
+     myDB.update( PHOTO_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
      return true;
    }
 
    public void deletePhoto( long sid, long id )
    {
      if ( myDB == null ) return;
-     if ( deletePhotoStmt == null ) deletePhotoStmt = myDB.compileStatement( "DELETE FROM photos WHERE surveyId=? AND id=?" );
-     deletePhotoStmt.bindLong( 1, sid );
-     deletePhotoStmt.bindLong( 2, id );
-     deletePhotoStmt.execute();
+     myDB.delete( PHOTO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
    }
-
 
    /**
     * @param sid       survey id
@@ -2552,77 +2500,77 @@ public class DataHelper extends DataSetObservable
    public void deleteSensor( long sid, long id )
    {
      if ( myDB == null ) return;
-     // deleteSensorStmt = myDB.compileStatement( "DELETE FROM sensors WHERE surveyId=? AND id=?" );
-     if ( deleteSensorStmt == null ) deleteSensorStmt = myDB.compileStatement( "UPDATE sensors set status=1 WHERE surveyId=? AND id=?" );
-     deleteSensorStmt.bindLong( 1, sid );
-     deleteSensorStmt.bindLong( 2, id );
-     deleteSensorStmt.execute();
+     updateStatus( SENSOR_TABLE, id, sid, STATUS_DELETED );
    }
 
    public boolean updateSensor( long sid, long id, String comment )
    {
      if ( myDB == null ) return false;
-     if ( updateSensorStmt == null ) updateSensorStmt = myDB.compileStatement( "UPDATE sensors set comment=? WHERE surveyId=? AND id=?" );
-     updateSensorStmt.bindString( 1, comment );
-     updateSensorStmt.bindLong( 2, sid );
-     updateSensorStmt.bindLong( 3, id );
-     updateSensorStmt.execute();
+     ContentValues vals = new ContentValues();
+     vals.put( "comment", comment );
+     myDB.update( SENSOR_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
      return true;
    }
 
-   private void transferSensor( long sid, long shot_id, long old_sid, long old_id )
-   {
-     if ( transferSensorStmt == null ) transferSensorStmt = myDB.compileStatement( "UPDATE sensors set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
-     transferSensorStmt.bindLong( 1, sid );
-     transferSensorStmt.bindLong( 2, shot_id );
-     transferSensorStmt.bindLong( 3, old_sid );
-     transferSensorStmt.bindLong( 4, old_id );
-     transferSensorStmt.execute();
-   }
+   // private void transferSensor( long sid, long shot_id, long old_sid, long old_id )
+   // {
+   //   if ( transferSensorStmt == null )
+   //     transferSensorStmt = myDB.compileStatement( "UPDATE sensors set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+   //   transferSensorStmt.bindLong( 1, sid );
+   //   transferSensorStmt.bindLong( 2, shot_id );
+   //   transferSensorStmt.bindLong( 3, old_sid );
+   //   transferSensorStmt.bindLong( 4, old_id );
+   //   transferSensorStmt.execute();
+   // }
 
-   private void transferPhoto( long sid, long shot_id, long old_sid, long old_id )
-   {
-     if ( transferPhotoStmt == null ) transferPhotoStmt = myDB.compileStatement( "UPDATE photos set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
-     transferPhotoStmt.bindLong( 1, sid );
-     transferPhotoStmt.bindLong( 2, shot_id );
-     transferPhotoStmt.bindLong( 3, old_sid );
-     transferPhotoStmt.bindLong( 4, old_id );
-     transferPhotoStmt.execute();
-   }
+   // private void transferPhoto( long sid, long shot_id, long old_sid, long old_id )
+   // {
+   //   if ( transferPhotoStmt == null )
+   //     transferPhotoStmt = myDB.compileStatement( "UPDATE photos set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+   //   transferPhotoStmt.bindLong( 1, sid );
+   //   transferPhotoStmt.bindLong( 2, shot_id );
+   //   transferPhotoStmt.bindLong( 3, old_sid );
+   //   transferPhotoStmt.bindLong( 4, old_id );
+   //   transferPhotoStmt.execute();
+   // }
 
-   private void transferFixed( long sid, long old_sid, long fixed_id )
-   {
-     if ( transferFixedStmt == null ) transferFixedStmt = myDB.compileStatement( "UPDATE fixeds set surveyId=? WHERE surveyId=? AND id=?" );
-     transferFixedStmt.bindLong( 1, sid );
-     transferFixedStmt.bindLong( 2, old_sid );
-     transferFixedStmt.bindLong( 3, fixed_id );
-     transferFixedStmt.execute();
-   }
+   // private void transferFixed( long sid, long old_sid, long fixed_id )
+   // {
+   //   if ( transferFixedStmt == null )
+   //     transferFixedStmt = myDB.compileStatement( "UPDATE fixeds set surveyId=? WHERE surveyId=? AND id=?" );
+   //   transferFixedStmt.bindLong( 1, sid );
+   //   transferFixedStmt.bindLong( 2, old_sid );
+   //   transferFixedStmt.bindLong( 3, fixed_id );
+   //   transferFixedStmt.execute();
+   // }
 
-   private void transferStation( long sid, long old_sid, String name )
-   {
-     if ( transferStationStmt == null ) transferStationStmt = myDB.compileStatement( "UPDATE stations set surveyId=? WHERE surveyId=? AND name=?" );
-     transferStationStmt.bindLong( 1, sid );
-     transferStationStmt.bindLong( 2, old_sid );
-     transferStationStmt.bindString( 3, name );
-     transferStationStmt.execute();
-   }
+   // private void transferStation( long sid, long old_sid, String name )
+   // {
+   //   if ( transferStationStmt == null )
+   //     transferStationStmt = myDB.compileStatement( "UPDATE stations set surveyId=? WHERE surveyId=? AND name=?" );
+   //   transferStationStmt.bindLong( 1, sid );
+   //   transferStationStmt.bindLong( 2, old_sid );
+   //   transferStationStmt.bindString( 3, name );
+   //   transferStationStmt.execute();
+   // }
        
-   private void transferPlot( long sid, long old_sid, long plot_id )
+   private void transferPlot( long sid, long old_sid, long pid )
    {
-     if ( transferPlotStmt == null ) transferPlotStmt  = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
+     // if ( transferPlotStmt == null )
+     //   transferPlotStmt = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
      transferPlotStmt.bindLong( 1, sid );
      transferPlotStmt.bindLong( 2, old_sid );
-     transferPlotStmt.bindLong( 3, plot_id );
+     transferPlotStmt.bindLong( 3, pid );
      transferPlotStmt.execute();
    }
 
-   private void transferSketch( long sid, long old_sid, long plot_id )
+   private void transferSketch( long sid, long old_sid, long pid )
    {
-     if ( transferSketchStmt == null ) transferSketchStmt  = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+     // if ( transferSketchStmt == null )
+     //   transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
      transferSketchStmt.bindLong( 1, sid );
      transferSketchStmt.bindLong( 2, old_sid );
-     transferSketchStmt.bindLong( 3, plot_id );
+     transferSketchStmt.bindLong( 3, pid );
      transferSketchStmt.execute();
    }
 
@@ -2812,10 +2760,7 @@ public class DataHelper extends DataSetObservable
    */
   private void dropDeletedFixed( long sid, String station )
   {
-    if ( dropFixedStmt == null ) dropFixedStmt = myDB.compileStatement( "DELETE FROM fixeds where surveyId=? and station=? and status=1" );
-    dropFixedStmt.bindLong( 1, sid );
-    dropFixedStmt.bindString( 2, station );
-    dropFixedStmt.execute();
+    myDB.delete( FIXED_TABLE, "surveyId=? and station=? and status=1", new String[]{ Long.toString(sid), station } );
   }
   
 
@@ -2825,90 +2770,68 @@ public class DataHelper extends DataSetObservable
     // Log.v("DistoX", "update fixed id " + id + " station " + station );
     boolean ret = false;
     if ( ! hasFixedStation( id, sid, station ) ) {
-      dropDeletedFixed( sid, station );
+      dropDeletedFixed( sid, station ); // drop deleted fixed at station, if any
 
-      if ( updateFixedStationStmt == null ) updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
-      updateFixedStationStmt.bindString( 1, station );
-      updateFixedStationStmt.bindLong( 2, sid );
-      updateFixedStationStmt.bindLong( 3, id );
-      updateFixedStationStmt.execute();
+      ContentValues vals = new ContentValues();
+      vals.put( "station", station );
+      myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       ret = true;
     }
     return ret;
   }
 
-   public void updateFixedStatus( long id, long sid, long status )
-   {
-     if ( updateFixedStatusStmt == null ) updateFixedStatusStmt = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
-     updateFixedStatusStmt.bindLong( 1, status );
-     updateFixedStatusStmt.bindLong( 2, sid );
-     updateFixedStatusStmt.bindLong( 3, id );
-     updateFixedStatusStmt.execute();
-   }
+  public void updateFixedStatus( long id, long sid, long status )
+  {
+    updateStatus( FIXED_TABLE, id, sid, status );
+  }
 
-   public void updateFixedStationComment( long id, long sid, String station, String comment )
-   {
-     if ( updateFixedCommentStmt == null ) updateFixedCommentStmt = myDB.compileStatement( "UPDATE fixeds set station=?, comment=? WHERE surveyId=? AND id=?" );
-     updateFixedCommentStmt.bindString( 1, station );
-     updateFixedCommentStmt.bindString( 2, comment );
-     updateFixedCommentStmt.bindLong( 3, sid );
-     updateFixedCommentStmt.bindLong( 4, id );
-     updateFixedCommentStmt.execute();
-   }
+  public void updateFixedStationComment( long id, long sid, String station, String comment )
+  {
+    ContentValues vals = new ContentValues();
+    vals.put( "station", station );
+    vals.put( "comment", comment );
+    myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+  }
 
 
-   public void updateFixedAltitude( long id, long sid, double alt, double asl )
-   {
-     if ( myDB == null ) return;
-     if ( updateFixedAltStmt == null ) updateFixedAltStmt = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
-     updateFixedAltStmt.bindDouble( 1, alt );
-     updateFixedAltStmt.bindDouble( 2, asl );
-     updateFixedAltStmt.bindLong( 3, sid );
-     updateFixedAltStmt.bindLong( 4, id );
-     updateFixedAltStmt.execute();
-   }
+  public void updateFixedAltitude( long id, long sid, double alt, double asl )
+  {
+    if ( myDB == null ) return;
+    ContentValues vals = new ContentValues();
+    vals.put( "altitude",   alt );
+    vals.put( "altimetric", asl );
+    myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+  }
 
-   public void updateFixedData( long id, long sid, double lng, double lat, double alt )
-   {
-     if ( myDB == null ) return;
-     if ( updateFixedDataStmt == null ) updateFixedDataStmt = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
-     updateFixedDataStmt.bindDouble( 1, lng );
-     updateFixedDataStmt.bindDouble( 2, lat );
-     updateFixedDataStmt.bindDouble( 3, alt );
-     updateFixedDataStmt.bindLong( 4, sid );
-     updateFixedDataStmt.bindLong( 5, id );
-     updateFixedDataStmt.execute();
-   }
+  public void updateFixedData( long id, long sid, double lng, double lat, double alt )
+  {
+    if ( myDB == null ) return;
+    ContentValues vals = new ContentValues();
+    vals.put( "longitude", lng );
+    vals.put( "latitude",  lat );
+    vals.put( "altitude",  alt );
+    myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+  }
 
-   public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
-   public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
+  public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
+  public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
 
-   private boolean hasName( String name, String table )
-   {
-     boolean ret = false;
-     if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query( table, new String[] { "id" },
-                          "name=?", 
-                          new String[] { name },
-                          null, null, null );
-     if (cursor != null) {
-       if (cursor.moveToFirst() ) {
-         ret = true;
-       }
-       if (!cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
-
-   // public boolean updateSurveyName( long id, String name )
-   // {
-   //   // TDLog.Log( TDLog.LOG_DB, "updateSurveyName id " + id + " name \"" + name + "\"" );
-   //   if ( updateSurveyNameStmt == null ) updateSurveyNameStmt = myDB.compileStatement( "UPDATE surveys SET name=? WHERE id=?" );
-   //   updateSurveyNameStmt.bindString( 1, (name != null)? name : "" );
-   //   updateSurveyNameStmt.bindLong( 2, id );
-   //   updateSurveyNameStmt.execute();
-   //   return true;
-   // }
+  private boolean hasName( String name, String table )
+  {
+    boolean ret = false;
+    if ( myDB == null ) return ret;
+    Cursor cursor = myDB.query( table, new String[] { "id" },
+                         "name=?", 
+                         new String[] { name },
+                         null, null, null );
+    if (cursor != null) {
+      if (cursor.moveToFirst() ) {
+        ret = true;
+      }
+      if (!cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
 
    public long setSurvey( String name, boolean forward )
    {
@@ -2921,7 +2844,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst() ) {
        myNextId = cursor.getLong(0);
      }
-     if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
 
      TDLog.Log( TDLog.LOG_DB, "setSurvey " + name + " forward " + forward + " listeners " + mListeners.size() );
      if ( forward ) {
@@ -2953,7 +2876,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst() ) {
        ret = cursor.getString(0);
      }
-     if (cursor != null && !cursor.isClosed()) { cursor.close(); }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
       
@@ -2996,9 +2919,7 @@ public class DataHelper extends DataSetObservable
            );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( PHOTO_TABLE, // SELECT ALL PHOTO RECORD
   			           new String[] { "id", "shotId", "status", "title", "date", "comment" },
@@ -3018,9 +2939,7 @@ public class DataHelper extends DataSetObservable
                      cursor.getString(5) );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
        cursor = myDB.query( PLOT_TABLE, 
                             new String[] { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
@@ -3046,9 +2965,7 @@ public class DataHelper extends DataSetObservable
                     );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
        cursor = myDB.query( SKETCH_TABLE, 
                             new String[] { "id", "name", "status", "start", "st1", "st2", "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d", "east", "south", "vert", "azimuth", "clino" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
@@ -3082,9 +2999,7 @@ public class DataHelper extends DataSetObservable
                     );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( SHOT_TABLE, 
                             new String[] { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll",
@@ -3117,9 +3032,7 @@ public class DataHelper extends DataSetObservable
            );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( FIXED_TABLE, 
                             new String[] { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status" },
@@ -3141,9 +3054,7 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(7) );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( STATION_TABLE, 
                             new String[] { "name", "comment", "flag" },
@@ -3161,9 +3072,7 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(2) );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
 
        cursor = myDB.query( SENSOR_TABLE, 
                             new String[] { "id", "shotId", "status", "title", "date", "comment", "type", "value" },
@@ -3186,9 +3095,7 @@ public class DataHelper extends DataSetObservable
                     );
          } while (cursor.moveToNext());
        }
-       if (cursor != null && !cursor.isClosed()) {
-         cursor.close();
-       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
 
        fw.flush();
        fw.close();
@@ -3366,9 +3273,7 @@ public class DataHelper extends DataSetObservable
        cv.put( "flag",      flag );
        myDB.insert( STATION_TABLE, null, cv );
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
    }
 
    CurrentStation getStation( long sid, String name )
@@ -3382,9 +3287,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        cs = new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) );
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return cs;
    }
 
@@ -3402,15 +3305,14 @@ public class DataHelper extends DataSetObservable
          ret.add( new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) ) );
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
 
    void deleteStation( long sid, String name )
    {
-     if ( deleteStationStmt == null ) deleteStationStmt = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
+     if ( deleteStationStmt == null )
+       deleteStationStmt = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
      deleteStationStmt.bindLong(   1, sid );
      deleteStationStmt.bindString( 2, name );
      deleteStationStmt.execute();
@@ -3506,9 +3408,7 @@ public class DataHelper extends DataSetObservable
           list.add( block );
         } while (cursor.moveToNext());
       }
-      if (cursor != null && !cursor.isClosed()) {
-        cursor.close();
-      }
+      if (cursor != null && !cursor.isClosed()) cursor.close();
     } catch ( SQLException e ) {
       // ignore
     }
