@@ -1213,7 +1213,7 @@ class TopoDroidExporter
    *  NOTE declination exported in comment only in CSV
    *
    */
-  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua
+  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
     pw.format(Locale.US, ",%.2f,%.1f,%.1f", 
       leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );

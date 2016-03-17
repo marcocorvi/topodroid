@@ -17,8 +17,9 @@ import java.io.BufferedWriter;
 import android.content.Context;
 
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.os.Message;
+
+import android.widget.Toast;
 
 class ExportPlotToFile extends AsyncTask<Void,Void,Boolean> 
 {
@@ -26,11 +27,11 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private DrawingCommandManager mCommand;
     private DistoXNum mNum;
     private long mType;
-    private Handler mHandler;
     private String mFullName;
     private String mExt; // extension
+    private String filename = null;
 
-    public ExportPlotToFile( Context context, Handler handler, DrawingCommandManager command,
+    public ExportPlotToFile( Context context, DrawingCommandManager command,
                          DistoXNum num, long type, String name, String ext )
     {
        // FIXME assert( ext != null );
@@ -38,7 +39,6 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
        mCommand  = command;
        mNum = num;
        mType = type;
-       mHandler  = handler;
        mFullName = name;
        mExt = ext;
     }
@@ -47,7 +47,6 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     protected Boolean doInBackground(Void... arg0)
     {
       try {
-        String filename = null;
         if ( mExt.equals("dxf") ) {
           filename = TDPath.getDxfFileWithExt( mFullName );
         } else if ( mExt.equals("svg") ) {
@@ -71,7 +70,6 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       } catch (Exception e) {
         e.printStackTrace();
       }
-      // if ( mHandler != null) mHandler.post(completeRunnable);
       return false;
     }
 
@@ -80,7 +78,11 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     protected void onPostExecute(Boolean bool) 
     {
       super.onPostExecute(bool);
-      if ( mHandler != null ) mHandler.sendEmptyMessage( bool? 1 : 0 );
+      if ( bool ) {
+        Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_) + " " + filename, Toast.LENGTH_SHORT ).show();
+      } else {
+        Toast.makeText( mContext, mContext.getResources().getString(R.string.saving_file_failed), Toast.LENGTH_SHORT ).show();
+      }
     }
 }
 

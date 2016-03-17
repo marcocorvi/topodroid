@@ -124,7 +124,6 @@ class TDSetting
     "DISTOX_RECENT_NR",           // 82 number of most recent items (item picker)
     "DISTOX_AREA_BORDER",         // 83 area border visibility
     "DISTOX_CONT_JOIN",           // 84 line continuation is join
-    // "DISTOX_CSV_LENGTH",          // 85 CSV export length unit
     "DISTOX_ORTHO_LRUD",          // 86 orthogonal LRUD ( >=1 disable, min 0 )
 
     "DISTOX_WALLS_TYPE",          // 87
@@ -174,8 +173,6 @@ class TDSetting
   static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
 
   static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey export
-
-  // static float mCsvLengthUnit          = 1;      // meters
 
   static boolean mXTherionAreas = false;
   static boolean mAutoStations = true; // whether to add stations automatically to scrap therion files
@@ -648,8 +645,6 @@ class TDSetting
     mAreaBorder = prefs.getBoolean( key[k++], true );         // DISTOX_AREA_BORDER
     mContJoin   = prefs.getBoolean( key[k++], false );        // DISTOX_CONT_JOIN
 
-    // mCsvLengthUnit = tryFloat( prefs, key[k++], "1" );        // DISTOX_CSV_LENGTH
-
     mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0");  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
@@ -943,8 +938,6 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mContJoin = prefs.getBoolean( k, false );   // DISTOX_CONT_JOIN
 
-    // } else if ( k.equals( key[ nk++ ] ) ) {
-    //   mCsvLengthUnit = tryFloat( prefs, k, "1" ); // DISTOX_CSV_LENGTH
     } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_ORTHO_LRUD
       mOrthogonalLRUDAngle  = tryFloat( prefs, k, "0");
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
@@ -1178,7 +1171,6 @@ class TDSetting
     //C if ( name.equals( "DISTOX_RECENT_NR" )
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
     //B if ( name.equals( "DISTOX_CONT_JOIN" ) 
-    // //C if ( name.equals( "DISTOX_CSV_LENGTH" )
     if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );
 
     // if ( name.equals( "DISTOX_WALLS_TYPE" )

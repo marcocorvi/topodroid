@@ -79,6 +79,11 @@
        />
 
   <Preference
+     android:key="DISTOX_IMPORT_EXPORT_PREF"
+     android:title="@string/pref_cat_import_export"
+     />
+
+  <Preference
      android:key="DISTOX_SURVEY_PREF"
      android:title="@string/pref_cat_survey"
      />
@@ -86,11 +91,6 @@
   <Preference
      android:key="DISTOX_PLOT_PREF"
      android:title="@string/pref_cat_drawing"
-     />
-
-  <Preference
-     android:key="DISTOX_IMPORT_EXPORT_PREF"
-     android:title="@string/pref_cat_import_export"
      />
 
   <Preference

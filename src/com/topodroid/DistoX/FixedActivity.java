@@ -220,7 +220,8 @@ public class FixedActivity extends Activity
   void updateFixedNameComment( FixedInfo fxd, String name, String comment )
   {
     mApp.mData.updateFixedStationComment( fxd.id, mApp.mSID, name, comment );
-    mList.invalidate();
+    // mList.invalidate();
+    refreshList();
   }
 
   public void dropFixed( FixedInfo fxd )

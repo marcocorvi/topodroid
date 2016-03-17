@@ -456,7 +456,7 @@ public class SurveyActivity extends Activity
           filename = mApp.exportSurveyAsPlt( ); // can return ""
           break;
         case TDConst.DISTOX_EXPORT_CSX:
-          filename = mApp.exportSurveyAsCsx( null, null, false ); // false: no handler
+          filename = mApp.exportSurveyAsCsx( null, null );
           break;
         case TDConst.DISTOX_EXPORT_TOP:
           filename = mApp.exportSurveyAsTop( null, null );

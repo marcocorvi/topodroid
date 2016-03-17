@@ -723,8 +723,6 @@
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
-  <string name="pref_csv_length_title">CSV Längeneinheit</string>
-  <string name="pref_csv_length_summary">CSV-Export Längeneinheit</string>
 
   <string name="pref_sock_type_title">Anschlussart</string>
   <string name="pref_sock_type_summary">Socket erzeugen</string>

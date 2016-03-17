@@ -16,22 +16,23 @@ import java.io.FileOutputStream;
 import android.content.Context;
 
 import android.os.AsyncTask;
-import android.os.Handler;
+// import android.os.Handler;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+
+import android.widget.Toast;
 
 class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean> 
 {
     private Context mContext;
-    private Handler mHandler;
     private Bitmap mBitmap;
     private String mFullName;
+    private String filename = null;
 
-    public ExportBitmapToFile( Context context, Handler handler, Bitmap bitmap, String name )
+    public ExportBitmapToFile( Context context, Bitmap bitmap, String name )
     {
        mContext  = context;
        mBitmap   = bitmap;
-       mHandler  = handler;
        mFullName = name;
        // TDLog.Log( TDLog.LOG_PLOT, "Export Bitmap To File " + mFullName );
     }
@@ -40,7 +41,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     protected Boolean doInBackground(Void... arg0)
     {
       try {
-        String filename = TDPath.getPngFileWithExt( mFullName );
+        filename = TDPath.getPngFileWithExt( mFullName );
         TDPath.checkPath( filename );
         final FileOutputStream out = new FileOutputStream( filename );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
@@ -50,13 +51,16 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       } catch (Exception e) {
         e.printStackTrace();
       }
-      //mHandler.post(completeRunnable);
       return false;
     }
 
     @Override
     protected void onPostExecute(Boolean bool) {
       super.onPostExecute(bool);
-      if ( mHandler != null ) mHandler.sendEmptyMessage( bool? 1 : 0 );
+      if ( bool ) {
+        Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_) + " " + filename, Toast.LENGTH_SHORT ).show();
+      } else {
+        Toast.makeText( mContext, R.string.saving_file_failed, Toast.LENGTH_SHORT ).show();
+      }
     }
 }
