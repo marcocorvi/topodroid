@@ -135,9 +135,9 @@ public class FixedImportDialog extends MyDialog
     File dir = new File( POINTLISTS );
     File[] files = dir.listFiles();
     if ( files == null || files.length == 0 ) return false;
-    Log.v("DistoX", "number of files " + files.length );
+    // Log.v("DistoX", "number of files " + files.length );
     for ( File f : files ) {
-      Log.v("DistoX", "file " + f.getName() + " is dir " + f.isDirectory() );
+      // Log.v("DistoX", "file " + f.getName() + " is dir " + f.isDirectory() );
       if ( ! f.isDirectory() ) {
         ret = readPointFile( f.getName() ) || ret; // N.B. read file before oring with ret
       }
@@ -153,7 +153,7 @@ public class FixedImportDialog extends MyDialog
 
   private boolean readPointFile( String filename )
   {
-    Log.v("DistoX", "reading file " + filename );
+    // Log.v("DistoX", "reading file " + filename );
     boolean ret = false;
     try {
       FileReader fr = new FileReader( POINTLISTS + "/" + filename );
@@ -161,7 +161,7 @@ public class FixedImportDialog extends MyDialog
       for ( ; ; ) {
         String line = br.readLine();
         if ( line == null ) break;
-        Log.v("DistoX", "read " + line );
+        // Log.v("DistoX", "read " + line );
 
         String[] vals = line.split(",");
         int len = vals.length;

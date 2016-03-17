@@ -67,7 +67,7 @@ public class CWDActivity extends Activity
       dir_name = "TopoDroid-" + dir_name;
     }
     TDPath.checkBasePath( dir_name );
-    Log.v("DistoX", "dir name <" + dir_name + ">" );
+    // Log.v("DistoX", "dir name <" + dir_name + ">" );
     mApp.setCWDPreference( dir_name );
     Intent intent = new Intent();
     intent.putExtra( TopoDroidTag.TOPODROID_CWD, dir_name );

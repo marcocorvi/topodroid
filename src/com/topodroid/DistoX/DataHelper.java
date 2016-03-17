@@ -409,7 +409,7 @@ public class DataHelper extends DataSetObservable
     updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
     deleteStationStmt        = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
 
-    Log.v("DistoX", "compile statements done");
+    // Log.v("DistoX", "compile statements done");
   }
 
   // --------------------------------------------------------------------

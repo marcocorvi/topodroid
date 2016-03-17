@@ -1177,7 +1177,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void makeSectionReferences( List<DistoXDBlock> list )
     {
-      Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
+      // Log.v("DistoX", "Section " + mClino + " " + mAzimuth );
  
       DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
       float xfrom=0;
