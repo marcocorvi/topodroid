@@ -82,8 +82,7 @@ public class ShotNewDialog extends MyDialog
   public ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DistoXDBlock last_blk, long at )
   {
     super( context, R.string.ShotNewDialog );
-    mContext = context;
-    mApp  = app;
+    mApp     = app;
     mLister  = lister;
     mPrevBlk = last_blk;
     notDone  = true;
@@ -126,8 +125,6 @@ public class ShotNewDialog extends MyDialog
     mETup       = (EditText) findViewById(R.id.shot_up );
     mETdown     = (EditText) findViewById(R.id.shot_down );
 
-
-
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {
@@ -164,28 +161,44 @@ public class ShotNewDialog extends MyDialog
       mETdown.setInputType( TDConst.NUMBER_DECIMAL );
     }
 
-
     // mETfrom.setRawInputType( InputType.TYPE_CLASS_NUMBER );
     // mETto.setRawInputType( InputType.TYPE_CLASS_NUMBER );
 
-    if ( mPrevBlk != null ) {
-      mETfrom.setHint( mPrevBlk.mTo );
-      mETto.setHint( DistoXStationName.increment( mPrevBlk.mTo ) );
-    } else {
-      if ( TDSetting.mSurveyStations == 1 ) {
-        mETfrom.setHint( DistoXStationName.mInitialStation );
-        mETto.setHint( DistoXStationName.mSecondStation );
+    if ( mAt < 0 ) {
+      // prev blk is the last leg block of the survey
+      if ( mPrevBlk != null ) {
+        if ( TDSetting.mSurveyStations == 1 ) {
+          mETfrom.setHint( mPrevBlk.mTo );
+          mETto.setHint( DistoXStationName.increment( mPrevBlk.mTo ) );
+        } else {
+          mETto.setHint( mPrevBlk.mFrom );
+          mETfrom.setHint( DistoXStationName.increment( mPrevBlk.mFrom ) );
+        }
       } else {
-        mETfrom.setHint( DistoXStationName.mSecondStation );
-        mETto.setHint( DistoXStationName.mInitialStation );
+        if ( TDSetting.mSurveyStations == 1 ) {
+          mETfrom.setHint( DistoXStationName.mInitialStation );
+          mETto.setHint( DistoXStationName.mSecondStation );
+        } else {
+          mETfrom.setHint( DistoXStationName.mSecondStation );
+          mETto.setHint( DistoXStationName.mInitialStation );
+        }
       }
-    }
-    String current_name = mApp.getCurrentStationName();
-    if ( current_name != null ) {
-      if ( TDSetting.isSurveyForward() ) {
-        mETfrom.setHint( current_name );
+      String current_name = mApp.getCurrentStationName();
+      if ( current_name != null ) {
+        if ( TDSetting.isSurveyForward() ) {
+          mETfrom.setHint( current_name );
+        } else {
+          mETto.setHint( current_name );
+        }
+      }
+    } else {
+      // prev blk is the leg after which to add the new shot
+      if ( TDSetting.mSurveyStations == 1 ) {
+        mETfrom.setHint( mPrevBlk.mTo );
+        mETto.setHint( "" );
       } else {
-        mETto.setHint( current_name );
+        mETfrom.setHint( "" );
+        mETto.setHint( mPrevBlk.mFrom );
       }
     }
 

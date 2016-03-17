@@ -44,7 +44,7 @@ public class SurveyNewDialog extends MyDialog
   private TopoDroidActivity mParent;
 
   private EditText mEditName;
-  private Button mEditDate;
+  private Button   mEditDate;
   private EditText mEditTeam;
   private EditText mEditDecl;
   private EditText mEditStation;
@@ -66,8 +66,8 @@ public class SurveyNewDialog extends MyDialog
   public SurveyNewDialog( Context context, TopoDroidActivity parent, long old_sid, long old_id )
   {
     super( context, R.string.SurveyNewDialog );
-    mParent  = parent;
-    mApp = (TopoDroidApp) mParent.getApplication();
+    mParent = parent;
+    mApp    = (TopoDroidApp) mParent.getApplication();
     mOldSid = old_sid;
     mOldId  = old_id;
   }

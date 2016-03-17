@@ -524,6 +524,7 @@ public class TopoDroidApp extends Application
       // FIXME MANUAL installManual( );  // must come before installSymbols
       installSymbols( false ); // this updates symbol_version in the database
       installFirmware( false );
+      // installUserManual( );
       updateDefaultPreferences(); // reset a few default preference values
     }
 
@@ -1411,18 +1412,27 @@ public class TopoDroidApp extends Application
     if ( mCID < 0 ) return null;
     CalibInfo ci = mDData.selectCalibInfo( mCID );
     if ( ci == null ) return null;
-    String filename = TDPath.getCsvFile( ci.name );
+    TDPath.checkCCsvDir();
+    String filename = TDPath.getCCsvFile( ci.name );
     return TopoDroidExporter.exportCalibAsCsv( mCID, mDData, ci, filename );
   }
 
   // ----------------------------------------------
-  // FIRMWARE
+  // FIRMWARE and USER MANUAL
 
   private void installFirmware( boolean overwrite )
   {
     InputStream is = getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
+    try { is.close(); } catch ( IOException e ) { }
   }
+ 
+  // private void installUserManual()
+  // {
+  //   InputStream is = getResources().openRawResource( R.raw.manual ); // res/raw/manual.zip
+  //   userManualUncompress( is );
+  //   try { is.close(); } catch ( IOException e ) { }
+  // }
  
   // -------------------------------------------------------------
   // SYMBOLS
@@ -1540,6 +1550,38 @@ public class TopoDroidApp extends Application
     } catch ( IOException e ) {
     }
   }
+
+  // private void userManualUncompress( InputStream fis )
+  // {
+  //   // Log.v(TAG, "user-manual uncompress ...");
+  //   TDPath.checkManDir( );
+  //   try {
+  //     // byte buffer[] = new byte[36768];
+  //     byte buffer[] = new byte[4096];
+  //     ZipEntry ze = null;
+  //     ZipInputStream zin = new ZipInputStream( fis );
+  //     while ( ( ze = zin.getNextEntry() ) != null ) {
+  //       String filepath = ze.getName();
+  //       if ( ze.isDirectory() ) continue;
+  //       if ( ! filepath.endsWith("bin") ) continue;
+  //       String pathname =  TDPath.getManFile( filepath );
+  //       File file = new File( pathname );
+  //       TDPath.checkPath( pathname );
+  //       FileOutputStream fout = new FileOutputStream( pathname );
+  //       int c;
+  //       while ( ( c = zin.read( buffer ) ) != -1 ) {
+  //         fout.write(buffer, 0, c); // offset 0 in buffer
+  //       }
+  //       fout.close();
+  //       zin.closeEntry();
+  //     }
+  //     zin.close();
+  //   } catch ( FileNotFoundException e ) {
+  //   } catch ( IOException e ) {
+  //   }
+  // }
+
+  // ---------------------------------------------------------
 
   /** insert manual-data shot
    * @param at   id of the shot before which to insert the new shot (and LRUD)

@@ -297,7 +297,6 @@ public class DrawingActivity extends ItemDrawer
   // ----------------------------------------------------------------
   // BUTTONS and MENU
 
-  // static boolean needMakeButtons = true;
   // private Button mButtonHelp;
   private int mButtonSize;
   private Button[] mButton1; // primary
@@ -884,52 +883,51 @@ public class DrawingActivity extends ItemDrawer
     mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
-  private void makeButtons( Context ctx, View.OnClickListener listener, int size ) 
+  private void makeButtons( )
   {
-    // if ( ! needMakeButtons ) return;
-    // needMakeButtons = false;
+    Resources res = getResources();
     mButton1 = new Button[ mNrButton1 ]; // MOVE
     int off = 0;
     int ic = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
       ic = ( k <3 )? k : off+k;
-      mButton1[k] = MyButton.getButton( listener, izons[ic] );
-      if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( izons[ic] ); }
-      else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( izons[ic] ); }
+      mButton1[k] = MyButton.getButton( this, this, izons[ic] );
+      if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( res, izons[ic] ); }
+      else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( res, izons[ic] ); }
     }
-    mBMdial = BitmapFactory.decodeResource( getResources(), izons[IC_DIAL] );
-    mBMextend        = MyButton.getButtonBackground( izons[IC_EXTEND] ); 
-    mBMdownload_on   = MyButton.getButtonBackground( R.drawable.iz_download_on );
-    mBMdownload_wait = MyButton.getButtonBackground( R.drawable.iz_download_wait );
-    mBMleft          = MyButton.getButtonBackground( R.drawable.iz_left );
-    mBMright         = MyButton.getButtonBackground( R.drawable.iz_right );
+    mBMdial = BitmapFactory.decodeResource( res, izons[IC_DIAL] );
+    mBMextend        = MyButton.getButtonBackground( res, izons[IC_EXTEND] ); 
+    mBMdownload_on   = MyButton.getButtonBackground( res, R.drawable.iz_download_on );
+    mBMdownload_wait = MyButton.getButtonBackground( res, R.drawable.iz_download_wait );
+    mBMleft          = MyButton.getButtonBackground( res, R.drawable.iz_left );
+    mBMright         = MyButton.getButtonBackground( res, R.drawable.iz_right );
     setRefAzimuth( TDAzimuth.mRefAzimuth, TDAzimuth.mFixedExtend );
 
     mButton2 = new Button[ mNrButton2 ]; // DRAW
     off = (mNrButton1 - 3); 
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k < 3 )? k : off+k;
-      mButton2[k] = MyButton.getButton( listener, ((k==0)? izons_ok[ic] : izons[ic]) );
-      if ( ic == IC_CONTINUE_NO ) { mBMcontinue_no = MyButton.getButtonBackground( ((k==0)? izons_ok[ic] : izons[ic]) ); }
+      mButton2[k] = MyButton.getButton( this, this, ((k==0)? izons_ok[ic] : izons[ic]) );
+      if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = MyButton.getButtonBackground( res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
-    mBMcontinue = MyButton.getButtonBackground( izons[IC_CONTINUE] );
+    mBMcontinue = MyButton.getButtonBackground( res, izons[IC_CONTINUE] );
 
     mButton3 = new Button[ mNrButton3 ];      // EDIT
     off = (mNrButton1-3) + (mNrButton2-3); 
     for ( int k=0; k<mNrButton3; ++k ) {
       ic = ( k < 3 )? k : off+k;
-      mButton3[k] = MyButton.getButton( listener, ( (k==2)? izons_ok[ic] : izons[ic] ) );
+      mButton3[k] = MyButton.getButton( this, this, ((k==2)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_JOIN ) 
-        mBMjoin = MyButton.getButtonBackground( ( (k==2)? izons_ok[ic] : izons[ic] ) );
+        mBMjoin = MyButton.getButtonBackground( res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
-    mBMjoin_no = MyButton.getButtonBackground( izons[IC_JOIN_NO] );
-    mBMadd     = MyButton.getButtonBackground( izons[IC_ADD] );
+    mBMjoin_no = MyButton.getButtonBackground( res, izons[IC_JOIN_NO] );
+    mBMadd     = MyButton.getButtonBackground( res, izons[IC_ADD] );
 
     mButton5 = new Button[ mNrButton5 ];    // ERASE
     off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
     for ( int k=0; k<mNrButton5; ++k ) {
       ic = ( k < 3 )? k : off+k;
-      mButton5[k] = MyButton.getButton( listener, ((k==1)? izons_ok[ic] : izons[ic] ) );
+      mButton5[k] = MyButton.getButton( this, this, ((k==1)? izons_ok[ic] : izons[ic] ) );
     }
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
@@ -993,12 +991,12 @@ public class DrawingActivity extends ItemDrawer
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     // mImage.setBackgroundResource( icons00[ IC_MENU ] );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( izons[IC_MENU] ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( getResources(), izons[IC_MENU] ) );
     mMenu = (ListView) findViewById( R.id.menu );
     // HOVER
     mMenu.setOnItemClickListener( this );
 
-    makeButtons( mApp, this, mButtonSize );
+    makeButtons( );
 
     if ( ! TDSetting.mLevelOverNormal ) {
       mButton1[2].setVisibility( View.GONE );

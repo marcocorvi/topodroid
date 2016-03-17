@@ -81,35 +81,30 @@ public class GMActivity extends Activity
   private String mCalibName;
   // private ConnHandler mHandler;
 
-  static int izons[] = { 
+  private static int izons[] = { 
                         R.drawable.iz_download,
                         R.drawable.iz_toggle,
                         R.drawable.iz_numbers_no,
-                        R.drawable.iz_cover,
                         R.drawable.iz_compute,
+                        R.drawable.iz_cover,
                         R.drawable.iz_read,
                         R.drawable.iz_write
                      };
   final static int BTN_DOWNLOAD = 0;
+  final static int BTN_TOGGLE   = 1;
+  final static int BTN_COVER    = 4;
+  final static int BTN_READ     = 5;
+  final static int BTN_WRITE    = 6;
 
   static int izonsno[] = { 
                         R.drawable.iz_download_on,
                         R.drawable.iz_toggle_no,
                         0,
                         0,
-                        0,
+                        R.drawable.iz_cover_no,
                         R.drawable.iz_read_no,
                         R.drawable.iz_write_no
                      };
-
-  BitmapDrawable mBMtoggle;
-  BitmapDrawable mBMtoggle_no;
-  BitmapDrawable mBMread;
-  BitmapDrawable mBMread_no;
-  BitmapDrawable mBMwrite;
-  BitmapDrawable mBMwrite_no;
-  BitmapDrawable mBMdownload;
-  BitmapDrawable mBMdownload_on;
 
   static int menus[] = {
                         R.string.menu_display,
@@ -122,8 +117,8 @@ public class GMActivity extends Activity
                         R.string.help_download,
                         R.string.help_toggle,
                         R.string.help_group,
-                        R.string.help_cover,
                         R.string.help_compute,
+                        R.string.help_cover,
                         R.string.help_read,
                         R.string.help_write
                       };
@@ -133,6 +128,30 @@ public class GMActivity extends Activity
                         R.string.help_prefs,
                         R.string.help_help
                       };
+
+  final static int mNrButton1 = 7;
+  private Button[]     mButton1;
+  HorizontalListView   mListView;
+  HorizontalButtonView mButtonView1;
+  boolean mEnableWrite;
+  ListView   mMenu;
+  Button     mImage;
+  // HOVER
+  // MyMenuAdapter mMenuAdapter;
+  ArrayAdapter< String > mMenuAdapter;
+  boolean onMenu;
+
+  BitmapDrawable mBMtoggle;
+  BitmapDrawable mBMtoggle_no;
+  BitmapDrawable mBMcover;
+  BitmapDrawable mBMcover_no;
+  BitmapDrawable mBMread;
+  BitmapDrawable mBMread_no;
+  BitmapDrawable mBMwrite;
+  BitmapDrawable mBMwrite_no;
+  BitmapDrawable mBMdownload;
+  BitmapDrawable mBMdownload_on;
+
   // -------------------------------------------------------------------
   // forward survey name to DeviceHelper
 
@@ -579,19 +598,6 @@ public class GMActivity extends Activity
   }
  
   // ---------------------------------------------------------------
-
-  private Button[] mButton1;
-  private int mNrButton1 = 7;
-  HorizontalListView mListView;
-  HorizontalButtonView mButtonView1;
-  boolean mEnableWrite;
-  ListView   mMenu;
-  Button     mImage;
-  // HOVER
-  // MyMenuAdapter mMenuAdapter;
-  ArrayAdapter< String > mMenuAdapter;
-  boolean onMenu;
-  
   @Override
   public void onCreate(Bundle savedInstanceState)
   {
@@ -610,18 +616,21 @@ public class GMActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
 
+    Resources res = getResources();
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, izons[k] );
-      if ( k == 0 )      { mBMdownload = MyButton.getButtonBackground( izons[k] ); }
-      else if ( k == 1 ) { mBMtoggle   = MyButton.getButtonBackground( izons[k] ); }
-      else if ( k == 5 ) { mBMread     = MyButton.getButtonBackground( izons[k] ); }
-      else if ( k == 6 ) { mBMwrite    = MyButton.getButtonBackground( izons[k] ); }
+      mButton1[k] = MyButton.getButton( this, this, izons[k] );
+      if ( k == BTN_DOWNLOAD )    { mBMdownload = MyButton.getButtonBackground( res, izons[k] ); }
+      else if ( k == BTN_TOGGLE ) { mBMtoggle   = MyButton.getButtonBackground( res, izons[k] ); }
+      else if ( k == BTN_COVER )  { mBMcover    = MyButton.getButtonBackground( res, izons[k] ); }
+      else if ( k == BTN_READ )   { mBMread     = MyButton.getButtonBackground( res, izons[k] ); }
+      else if ( k == BTN_WRITE )  { mBMwrite    = MyButton.getButtonBackground( res, izons[k] ); }
     }
-    mBMdownload_on = MyButton.getButtonBackground( izonsno[0] );
-    mBMtoggle_no   = MyButton.getButtonBackground( izonsno[1] );
-    mBMread_no     = MyButton.getButtonBackground( izonsno[5] );
-    mBMwrite_no    = MyButton.getButtonBackground( izonsno[6] );
+    mBMdownload_on = MyButton.getButtonBackground( res, izonsno[BTN_DOWNLOAD] );
+    mBMtoggle_no   = MyButton.getButtonBackground( res, izonsno[BTN_TOGGLE] );
+    mBMcover_no    = MyButton.getButtonBackground( res, izonsno[BTN_COVER] );
+    mBMread_no     = MyButton.getButtonBackground( res, izonsno[BTN_READ] );
+    mBMwrite_no    = MyButton.getButtonBackground( res, izonsno[BTN_WRITE] );
 
     enableWrite( false );
 
@@ -634,9 +643,9 @@ public class GMActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( getResources() );
+    setMenuAdapter( res );
     closeMenu();
     // HOVER
     mMenu.setOnItemClickListener( this );
@@ -655,41 +664,39 @@ public class GMActivity extends Activity
   private void enableWrite( boolean enable ) 
   {
     mEnableWrite = enable;
-    mButton1[6].setEnabled( enable );
+    mButton1[BTN_COVER].setEnabled( enable );
+    mButton1[BTN_WRITE].setEnabled( enable );
     if ( enable ) {
-      // mButton1[6].setBackgroundResource( icons00[6] );
-      mButton1[6].setBackgroundDrawable( mBMwrite );
+      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover );
+      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite );
     } else {
-      // mButton1[6].setBackgroundResource( icons00no[6] );
-      mButton1[6].setBackgroundDrawable( mBMwrite_no );
+      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover_no );
+      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite_no );
     }
   }
 
   @Override
   public void enableButtons( boolean enable )
   {
-    mButton1[1].setEnabled( enable );
-    mButton1[5].setEnabled( enable );
-    mButton1[6].setEnabled( enable && mEnableWrite );
+    mButton1[BTN_TOGGLE].setEnabled( enable );
+    mButton1[BTN_READ].setEnabled( enable );
+    mButton1[BTN_WRITE].setEnabled( enable && mEnableWrite );
+    mButton1[BTN_COVER].setEnabled( enable && mEnableWrite );
     if ( enable ) {
       setTitleColor( TDConst.COLOR_NORMAL );
-      // mButton1[1].setBackgroundResource( icons00[1] );
-      // mButton1[5].setBackgroundResource( icons00[5] );
-      mButton1[1].setBackgroundDrawable( mBMtoggle );
-      mButton1[5].setBackgroundDrawable( mBMread );
+      mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle );
+      mButton1[BTN_READ].setBackgroundDrawable( mBMread );
     } else {
       setTitleColor( TDConst.COLOR_CONNECTED );
-      // mButton1[1].setBackgroundResource( icons00no[1] );
-      // mButton1[5].setBackgroundResource( icons00no[5] );
-      mButton1[1].setBackgroundDrawable( mBMtoggle_no );
-      mButton1[5].setBackgroundDrawable( mBMread_no );
+      mButton1[BTN_TOGGLE].setBackgroundDrawable( mBMtoggle_no );
+      mButton1[BTN_READ].setBackgroundDrawable( mBMread_no );
     }
     if ( enable && mEnableWrite ) {
-      // mButton1[6].setBackgroundResource( icons00[6] );
-      mButton1[6].setBackgroundDrawable( mBMwrite );
+      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover );
+      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite );
     } else {
-      // mButton1[6].setBackgroundResource( icons00no[6] );
-      mButton1[6].setBackgroundDrawable( mBMwrite_no );
+      mButton1[BTN_COVER].setBackgroundDrawable( mBMcover_no );
+      mButton1[BTN_WRITE].setBackgroundDrawable( mBMwrite_no );
     }
   }
 
@@ -713,7 +720,7 @@ public class GMActivity extends Activity
         return;
       }
 
-      if ( b == mButton1[0] ) { // download
+      if ( b == mButton1[BTN_DOWNLOAD] ) { // DOWNLOAD
         if ( ! mApp.checkCalibrationDeviceMatch() ) {
           Toast.makeText( this, R.string.calib_device_mismatch, Toast.LENGTH_LONG ).show();
         } else {
@@ -732,7 +739,7 @@ public class GMActivity extends Activity
           // new DataDownloadTask( mApp, this ).execute();
           mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
         }
-      } else if ( b == mButton1[1] ) { // TOGGLE
+      } else if ( b == mButton1[BTN_TOGGLE] ) { // TOGGLE
         enableButtons( false );
         new CalibToggleTask( this, this, mApp ).execute();
       } else if ( b == mButton1[2] ) { // GROUP
@@ -756,18 +763,7 @@ public class GMActivity extends Activity
           resetTitle( );
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[3] ) { // COVER
-        if ( mCalibration != null ) {
-          List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
-          if ( list.size() >= 16 ) {
-            ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
-          } else {
-            Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-          }
-        } else {
-          Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
-        }
-      } else if ( b == mButton1[4] ) { // COMPUTE
+      } else if ( b == mButton1[3] ) { // COMPUTE
         if ( mApp.mCID >= 0 ) {
           setTitle( R.string.calib_compute_coeffs );
           setTitleColor( TDConst.COLOR_COMPUTE );
@@ -779,11 +775,22 @@ public class GMActivity extends Activity
         } else {
           Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
         }
-      } else if ( b == mButton1[5] ) { // READ
+      } else if ( b == mButton1[BTN_COVER] ) { // COVER
+        if ( mCalibration == null ) {
+          Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT ).show();
+        } else {
+          List< CalibCBlock > list = mApp.mDData.selectAllGMs( mApp.mCID, 0 );
+          if ( list.size() >= 16 ) {
+            ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
+          } else {
+            Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+          }
+        }
+      } else if ( b == mButton1[BTN_READ] ) { // READ
         enableButtons( false );
         new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
 
-      } else if ( b == mButton1[6] ) { // WRITE
+      } else if ( b == mButton1[BTN_WRITE] ) { // WRITE
         // if ( mEnableWrite ) {
           if ( mCalibration == null ) {
             Toast.makeText( this, R.string.no_calibration, Toast.LENGTH_SHORT).show();

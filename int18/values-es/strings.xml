@@ -118,6 +118,7 @@
     <string name="import_none">No hay archivo a importar</string>
     <string name="import_failed">Fallo al importar archivo</string>
     <string name="file_not_found">Archivo no encontrado</string>
+    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
     <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->

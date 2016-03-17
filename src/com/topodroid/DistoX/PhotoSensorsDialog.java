@@ -111,18 +111,18 @@ public class PhotoSensorsDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
 
-    if ( b == mButtonPhoto ) {
+    if ( b == mButtonPhoto ) {       // PHOTO
       mParent.askPhotoComment( );
       dismiss();
-    } else if ( b == mButtonSensor ) {
+    } else if ( b == mButtonSensor ) { // SENSOIR
       mParent.askSensor( );
       dismiss();
     // } else if ( b == mButtonExternal ) {
     //   mParent.askExternal( );
-    } else if ( b == mButtonShot ) {
-      mParent.askShot( );
+    } else if ( b == mButtonShot ) {  // INSERT SHOT
+      mParent.insertShotAt( mBlk );
       dismiss();
-    } else if ( b == mButtonSurvey ) {
+    } else if ( b == mButtonSurvey ) { // SPLIT
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,
         new DialogInterface.OnClickListener() {
           @Override
@@ -132,7 +132,7 @@ public class PhotoSensorsDialog extends MyDialog
           }
         } );
       // mParent.askSurvey( );
-    } else if ( b == mButtonDelete ) {
+    } else if ( b == mButtonDelete ) { // DELETE
       TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.shot_delete,
         new DialogInterface.OnClickListener() {
           @Override

@@ -596,25 +596,23 @@ public class ShotActivity extends Activity
   //   startActivityForResult( intent, EXTERNAL_ACTIVITY_REQUEST_CODE );
   // }
 
-  void askShot( )
+  // called to insert a manual shot after a given shot
+  void insertShotAt( DistoXDBlock blk )
   {
-    // mSecondLastShotId = mApp.lastShotId( );
-    DistoXDBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
-    (new ShotNewDialog( this, mApp, this, last_blk, mShotId )).show();
+    (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
   }
 
   // called by PhotoSensorDialog to split the survey
-  //
-  void askSurvey( )
-  {
-    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.survey_split,
-      new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick( DialogInterface dialog, int btn ) {
-          doSplitSurvey();
-        }
-    } );
-  }
+  // void askSurvey( )
+  // {
+  //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.survey_split,
+  //     new DialogInterface.OnClickListener() {
+  //       @Override
+  //       public void onClick( DialogInterface dialog, int btn ) {
+  //         doSplitSurvey();
+  //       }
+  //   } );
+  // }
 
   void doSplitSurvey()
   {
@@ -746,19 +744,20 @@ public class ShotActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mButtonSize = mApp.setListViewHeight( mListView );
 
+    Resources res = getResources();
     mNrButton1 = TDSetting.mLevelOverNormal ? 8 : ( TDSetting.mLevelOverBasic ? 6 : 5 );
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, izons[k] );
-      if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( izons[k] ); }
-      else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( izons[k] ); }
+      mButton1[k] = MyButton.getButton( this, this, izons[k] );
+      if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( res, izons[k] ); }
+      else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( res, izons[k] ); }
     }
-    mBMdial          = BitmapFactory.decodeResource( getResources(), R.drawable.iz_dial );
-    mBMplot_no       = MyButton.getButtonBackground( R.drawable.iz_plot_no );
-    mBMdownload_on   = MyButton.getButtonBackground( R.drawable.iz_download_on );
-    mBMdownload_wait = MyButton.getButtonBackground( R.drawable.iz_download_wait );
-    mBMleft          = MyButton.getButtonBackground( R.drawable.iz_left );
-    mBMright         = MyButton.getButtonBackground( R.drawable.iz_right );
+    mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial );
+    mBMplot_no       = MyButton.getButtonBackground( res, R.drawable.iz_plot_no );
+    mBMdownload_on   = MyButton.getButtonBackground( res, R.drawable.iz_download_on );
+    mBMdownload_wait = MyButton.getButtonBackground( res, R.drawable.iz_download_wait );
+    mBMleft          = MyButton.getButtonBackground( res, R.drawable.iz_left );
+    mBMright         = MyButton.getButtonBackground( res, R.drawable.iz_right );
 
     if ( TDSetting.mLevelOverBasic ) {
       // mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
@@ -788,7 +787,7 @@ public class ShotActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );

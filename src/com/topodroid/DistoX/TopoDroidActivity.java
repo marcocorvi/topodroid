@@ -727,14 +727,14 @@ public class TopoDroidActivity extends Activity
   void resetButtonBar()
   {
     int size = mApp.setListViewHeight( mListView );
-    MyButton.resetCache( mApp, size );
+    MyButton.resetCache( /* mApp, */ size );
 
     mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
     mButton1 = new Button[mNrButton1];
 
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( getResources(), R.drawable.iz_menu ) );
     for (int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, izons[k] );
+      mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
 
     // mButtonView1 = new HorizontalImageButtonView( mButton1 );

@@ -213,7 +213,6 @@ public class DeviceActivity extends Activity
 
     mDevice  = mApp.mDevice;
     // mAddress = mDevice.mAddress;
-
     // mAddress = getIntent().getExtras().getString(   TopoDroidTag.TOPODROID_DEVICE_ADDR );
 
     setContentView(R.layout.device_activity);
@@ -222,19 +221,20 @@ public class DeviceActivity extends Activity
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
 
+    Resources res = getResources();
     mNrButton1 = TDSetting.mLevelOverNormal ? 6 : 3;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, izons[k] );
+      mButton1[k] = MyButton.getButton( this, this, izons[k] );
       if ( k == IDX_TOGGLE ) {
-        mBMtoggle    = MyButton.getButtonBackground( izons[k] );
-        mBMtoggle_no = MyButton.getButtonBackground( izonsno[k] );
+        mBMtoggle    = MyButton.getButtonBackground( res, izons[k] );
+        mBMtoggle_no = MyButton.getButtonBackground( res, izonsno[k] );
       } else if ( k == IDX_CALIB ) {
-        mBMcalib    = MyButton.getButtonBackground( izons[k] );
-        mBMcalib_no = MyButton.getButtonBackground( izonsno[k] );
+        mBMcalib    = MyButton.getButtonBackground( res, izons[k] );
+        mBMcalib_no = MyButton.getButtonBackground( res, izonsno[k] );
       } else if ( k == IDX_READ ) {
-        mBMread    = MyButton.getButtonBackground( izons[k] );
-        mBMread_no = MyButton.getButtonBackground( izonsno[k] );
+        mBMread    = MyButton.getButtonBackground( res, izons[k] );
+        mBMread_no = MyButton.getButtonBackground( res, izonsno[k] );
       }
     }
 
@@ -254,10 +254,10 @@ public class DeviceActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( getResources() );
+    setMenuAdapter( res );
     closeMenu();
     // HOVER
     mMenu.setOnItemClickListener( this );
@@ -556,8 +556,9 @@ public class DeviceActivity extends Activity
     dumpfile.trim();
     if ( dumpfile.length() == 0 ) return;
     try { 
-      TDPath.checkPath( dumpfile );
-      FileWriter fw = new FileWriter( TDPath.getDumpFile( dumpfile ) );
+      String dumppath = TDPath.getDumpFile( dumpfile );
+      TDPath.checkPath( dumppath );
+      FileWriter fw = new FileWriter( dumppath );
       PrintWriter pw = new PrintWriter( fw );
       for ( MemoryOctet m : memory ) {
         m.printHexString( pw );
@@ -838,7 +839,7 @@ public class DeviceActivity extends Activity
 
   void importCalibFile( String name )
   {
-    String filename = TDPath.getCsvFile( name );
+    String filename = TDPath.getCCsvFile( name );
     File file = new File( filename );
     if ( ! file.exists() ) {
       Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
@@ -846,6 +847,8 @@ public class DeviceActivity extends Activity
       int ret = TopoDroidExporter.importCalibFromCsv( mApp.mDData, filename, mDevice.mAddress );
       if ( ret != 0 ) { 
         Toast.makeText(this, R.string.import_failed, Toast.LENGTH_SHORT).show();
+      } else {
+        Toast.makeText(this, R.string.import_calib_ok, Toast.LENGTH_SHORT).show();
       }
     }
   }

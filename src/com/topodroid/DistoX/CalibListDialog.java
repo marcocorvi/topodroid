@@ -35,9 +35,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class CalibListDialog extends MyDialog
-                        implements OnItemClickListener
-                                // , OnItemLongClickListener
-                                , View.OnClickListener
+                             implements OnItemClickListener
+                             , View.OnClickListener
+                             // , OnItemLongClickListener
 {
   private DeviceActivity mParent;
   private TopoDroidApp mApp;

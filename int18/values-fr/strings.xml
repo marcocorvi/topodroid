@@ -122,6 +122,7 @@
     <string name="import_none">Aucun fichier à importer</string>
     <string name="import_failed">L\'import du fichier a échoué</string>
     <string name="file_not_found">Fichier inexistant</string>
+    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
     <string name="import_zip_ok">Fichier zip importé avec succes</string>
     <string name="import_zip_wait">L\'importation du fichier zip peut etre longue ... Patientez...</string>
     <!-- UNUSED string name="sketch_saving">Exportation de dessin ... Patientez ...</string -->

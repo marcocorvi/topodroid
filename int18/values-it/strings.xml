@@ -121,6 +121,7 @@
     <string name="import_none">Nessun file da importare</string>
     <string name="import_failed">Importazione file fallita</string>
     <string name="file_not_found">File non trovato</string>
+    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
     <string name="import_zip_ok">ZIP importato con successo</string>
     <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string>
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->

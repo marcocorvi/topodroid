@@ -38,8 +38,8 @@ import android.content.Context;
 
 
 public class CalibImportDialog extends MyDialog
-                          implements OnItemClickListener
-                          , OnClickListener
+                               implements OnItemClickListener
+                               , OnClickListener
 { 
   private DeviceActivity mParent;
 
@@ -105,7 +105,7 @@ public class CalibImportDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     String item = ((TextView) view).getText().toString();
-    // TDLog.Log(  TDLog.LOG_INPUT, "CalibImportDialog onItemClick() " + item.toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "CalibImportDialog onItemClick() " + item );
 
     // hide();
     mList.setOnItemClickListener( null );

@@ -123,6 +123,7 @@
     <string name="import_none">Отсутствует файл для импортирта</string>
     <string name="import_failed">Не удалось импортироапть файл</string>
     <string name="file_not_found">Файл не обнаружен</string>
+    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
     <string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->

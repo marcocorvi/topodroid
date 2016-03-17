@@ -732,33 +732,34 @@ public class SketchActivity extends ItemDrawer
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
 
+    Resources res = getResources();
     mButton1 = new Button[ mNrButton1 ];
     int off = 3;
     int ic  = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
       ic = ( k == 0 )? 0 : off+k;
-      mButton1[k] = MyButton.getButton( this, izons[ic] );
+      mButton1[k] = MyButton.getButton( this, this, izons[ic] );
     }
 
     mButton2 = new Button[ mNrButton2 ];
     off = 2 + mNrButton1;
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k == 0 )? 1 : off+k;
-      mButton2[k] = MyButton.getButton( this, izons[ic] );
+      mButton2[k] = MyButton.getButton( this, this, izons[ic] );
     }
 
     mButton3 = new Button[ mNrButton3 ];
     off = 1 + mNrButton1 + mNrButton2;
     for ( int k=0; k<mNrButton3; ++k ) {
       ic = ( k == 0 )? 2 : off+k;
-      mButton3[k] = MyButton.getButton( this, izons[ic] );
+      mButton3[k] = MyButton.getButton( this, this, izons[ic] );
     }
 
     mButton4 = new Button[ mNrButton4 ];
     off = 0 + mNrButton1 + mNrButton2 + mNrButton3;
     for ( int k=0; k<mNrButton4; ++k ) {
       ic = ( k == 0 )? 3 : off+k;
-      mButton4[k] = MyButton.getButton( this, izons[ic] );
+      mButton4[k] = MyButton.getButton( this, this, izons[ic] );
     }
     mButtonView1 = new HorizontalButtonView( mButton1 );  // MOVE
     mButtonView2 = new HorizontalButtonView( mButton2 );  // DRAW
@@ -776,9 +777,9 @@ public class SketchActivity extends ItemDrawer
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( getResources() );
+    setMenuAdapter( res );
     closeMenu();
     // HOVER
     mMenu.setOnItemClickListener( this );

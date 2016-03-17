@@ -122,6 +122,7 @@
     <string name="import_none">Няма файлове за импортиране</string>
     <string name="import_failed">Файлът не е импортиран</string>
     <string name="file_not_found">Файлът не е намерен</string>
+    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->

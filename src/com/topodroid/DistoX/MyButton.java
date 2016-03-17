@@ -12,11 +12,13 @@
 package com.topodroid.DistoX;
 
 import android.content.Context;
+import android.content.res.Resources;
+
 import android.widget.Button;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.view.MotionEvent;
+// import android.view.View.OnLongClickListener;
+// import android.view.MotionEvent;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,7 +29,7 @@ import android.util.Log;
 
 public class MyButton
 {
-  static Context mContext = null;
+  // static Context mContext = null;
   static int mSize = 42;
 
   // CACHE
@@ -35,29 +37,29 @@ public class MyButton
   static SparseArray<BitmapDrawable> mBitmapCache = new SparseArray<BitmapDrawable>();
 
   // called with context = mApp
-  static void resetCache( Context context, int size )
+  static void resetCache( /* Context context, */ int size )
   {
-    mContext = context;
+    // mContext = context;
     mSize    = size;
     mBitmapCache.clear();
   }
 
-  static Button getButton( OnClickListener click, int res_id )
+  static Button getButton( Context ctx, OnClickListener click, int res_id )
   {
-    Button ret = new Button( mContext );
+    Button ret = new Button( ctx );
     ret.setPadding(0,0,0,0);
     ret.setOnClickListener( click );
-    ret.setBackgroundDrawable( getButtonBackground( res_id ) );
+    ret.setBackgroundDrawable( getButtonBackground( ctx.getResources(), res_id ) );
     return ret;
   }
 
-  static BitmapDrawable getButtonBackground( int res_id )
+  static BitmapDrawable getButtonBackground( Resources res, int res_id )
   {
     BitmapDrawable ret = mBitmapCache.get( res_id );
     if ( ret == null ) {    
-      Bitmap bm1 = BitmapFactory.decodeResource( mContext.getResources(), res_id );
+      Bitmap bm1 = BitmapFactory.decodeResource( res, res_id );
       Bitmap bmx = Bitmap.createScaledBitmap( bm1, mSize, mSize, false );
-      ret = new BitmapDrawable( mContext.getResources(), bmx );
+      ret = new BitmapDrawable( res, bmx );
       mBitmapCache.append( res_id, ret );
     }
     return ret;
