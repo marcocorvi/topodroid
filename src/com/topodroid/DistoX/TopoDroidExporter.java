@@ -80,6 +80,7 @@ class TopoDroidExporter
   static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch,
                                    String origin, String filename )
   {
+    // Log.v("DistoX", "export as csurvey: " + filename );
     String cave = info.name.toUpperCase();
 
     String prefix = "";
@@ -369,6 +370,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    // Log.v("DistoX", "export as KML " + filename );
     DistoXNum num = getGeolocalizedData( sid, data, 1.0f );
     if ( num == null ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
@@ -496,6 +498,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    // Log.v("DistoX", "export as trackfile: " + filename );
     DistoXNum num = getGeolocalizedData( sid, data, TopoDroidUtil.M2FT );
     if ( num == null ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
@@ -557,6 +560,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsTop( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch, String origin, String filename )
   {
+    // Log.v("DistoX", "export as pockettopo: " + filename );
     PTFile ptfile = new PTFile();
     // TODO add a trip
     // date --> year, month, day --> _time
@@ -659,6 +663,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    // Log.v("DistoX", "export as therion: " + filename );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
 
@@ -846,7 +851,8 @@ class TopoDroidExporter
       if ( ! TDSetting.mTherionMaps ) doTherionMaps( pw, info, plots );
 
       pw.format("endsurvey\n");
-      fw.flush();
+      bw.flush();
+      // fw.flush();
       fw.close();
 
       // (new File( filename )).setReadable( true, false );
@@ -932,6 +938,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsSvx( long sid, DataHelper data, SurveyInfo info, Device device, String filename )
   {
+    // Log.v("DistoX", "export as survex: " + filename );
     char splayChar = 'a';
 
     float ul = TDSetting.mUnitLength;
@@ -1089,6 +1096,7 @@ class TopoDroidExporter
           }
         }
         if ( from != null ) {
+          boolean do_header = true;
           DistoXNum num = new DistoXNum( list, from, null, null );
           List<NumBranch> branches = num.makeBranches( true );
           for ( NumBranch branch : branches ) {
@@ -1096,11 +1104,14 @@ class TopoDroidExporter
             ArrayList<NumShot> shots = branch.shots;
             int size = shots.size();
             if ( size > 0 ) {
-              pw.format("*data passage station left right up down"); writeSurvexEOL( pw );
-              pw.format("*units left %s", uls );  writeSurvexEOL( pw );
-              pw.format("*units right %s", uls ); writeSurvexEOL( pw );
-              pw.format("*units up %s", uls );    writeSurvexEOL( pw );
-              pw.format("*units down %s", uls );  writeSurvexEOL( pw );
+              if ( do_header ) {
+                pw.format("*data passage station left right up down"); writeSurvexEOL( pw );
+                pw.format("*units left %s", uls );  writeSurvexEOL( pw );
+                pw.format("*units right %s", uls ); writeSurvexEOL( pw );
+                pw.format("*units up %s", uls );    writeSurvexEOL( pw );
+                pw.format("*units down %s", uls );  writeSurvexEOL( pw );
+                do_header = false;
+              }
               NumShot sh = shots.get(0);
               NumStation s1 = sh.from;
               NumStation s2 = sh.to;
@@ -1202,17 +1213,22 @@ class TopoDroidExporter
    *  NOTE declination exported in comment only in CSV
    *
    */
-  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg )
+  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua
   {
     pw.format(Locale.US, ",%.2f,%.1f,%.1f", 
-      leg.length() * TDSetting.mCsvLengthUnit, leg.bearing(), leg.clino() );
+      leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
     leg.reset();
   }
 
   static String exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    // Log.v("DistoX", "export as CSV: " + filename );
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     // List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+    float ul = TDSetting.mUnitLength;
+    float ua = TDSetting.mUnitAngle;
+    String uls = ( ul < 1.01f )? "meters"  : "feet"; // FIXME
+    String uas = ( ua < 1.01f )? "degrees" : "grads";
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -1227,6 +1243,7 @@ class TopoDroidExporter
       //   }
       // }
       pw.format(Locale.US, "# from to tape compass clino (declination %.4f)\n", info.declination );
+      pw.format(Locale.US, "# units tape %s compass clino %s\n", uls, uas );
       
       AverageLeg leg = new AverageLeg();
       DistoXDBlock ref_item = null;
@@ -1243,7 +1260,7 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsvLeg( pw, leg );
+              writeCsvLeg( pw, leg, ul, ua );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
@@ -1259,7 +1276,7 @@ class TopoDroidExporter
               splays = true;
             }
             pw.format(Locale.US, "-,%s@%s,%.2f,%.1f,%.1f\n", to, info.name,
-              item.mLength * TDSetting.mCsvLengthUnit, item.mBearing, item.mClino );
+              item.mLength * ul, item.mBearing * ua, item.mClino * ua );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
@@ -1267,7 +1284,7 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
-              writeCsvLeg( pw, leg );
+              writeCsvLeg( pw, leg, ul, ua );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
@@ -1283,13 +1300,13 @@ class TopoDroidExporter
               splays = true;
             }
             pw.format(Locale.US, "%s@%s,-,%.2f,%.1f,%.1f\n", from, info.name,
-              item.mLength * TDSetting.mCsvLengthUnit, item.mBearing, item.mClino );
+              item.mLength * ul, item.mBearing * ua, item.mClino * ua );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsvLeg( pw, leg );
+              writeCsvLeg( pw, leg, ul, ua );
               if ( duplicate ) {
                 pw.format(",L");
                 duplicate = false;
@@ -1310,7 +1327,7 @@ class TopoDroidExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeCsvLeg( pw, leg );
+        writeCsvLeg( pw, leg, ul, ua );
         if ( duplicate ) {
           pw.format(",L");
           // duplicate = false;
@@ -1545,6 +1562,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    // Log.v("DistoX", "export as compass: " + filename );
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     try {
       TDPath.checkPath( filename );
@@ -1661,6 +1679,7 @@ class TopoDroidExporter
  
   static String exportSurveyAsSrv( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    // Log.v("DistoX", "export as walls: " + filename );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
     String uls = ( ul < 1.01f )? "Meters"  : "Feet"; // FIXME
@@ -1863,6 +1882,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsDxf( long sid, DataHelper data, SurveyInfo info, DistoXNum num, String filename )
   {
+    // Log.v("DistoX", "export as DXF: " + filename );
     // Log.v( TAG, "exportSurveyAsDxf " + filename );
     try {
       TDPath.checkPath( filename );
@@ -2040,6 +2060,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String filename )
   {
+    // Log.v("DistoX", "export as visualtopo: " + filename );
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     try {
