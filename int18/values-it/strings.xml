@@ -23,12 +23,12 @@
     <string name="memoryX310">DistoX X310</string>
     <string name="memory_data">Dati DistoX</string>
 
-    <!-- TODO string name="thp_user">utente</string -->
+    <string name="thp_user">utente</string>
     <string name="thp_label">testo</string>
     <!-- string name="thp_danger">pericolo</string -->
-    <!-- TODO string name="thl_user">utente</string -->
+    <string name="thl_user">utente</string>
     <string name="thl_wall">parete</string>
-    <!-- TODO string name="tha_user">utente</string -->
+    <string name="tha_user">utente</string>
     <string name="tha_water">acqua</string>
 
     <string name="make_walls">Pareti</string>
@@ -121,7 +121,7 @@
     <string name="import_none">Nessun file da importare</string>
     <string name="import_failed">Importazione file fallita</string>
     <string name="file_not_found">File non trovato</string>
-    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
+    <string name="import_calib_ok">Calibrazione importata con successo</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
     <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string>
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
@@ -213,7 +213,7 @@
     <string name="no_paired_device">Nessun DistoX accoppiato.</string>
     <string name="no_photos">Rilievo senza foto</string>
     <string name="no_plots">Rilievo senza disegni</string>
-    <!-- TODO string name="no_profile_overview">Nessuna panoramica per i profili proiettati</string -->
+    <string name="no_profile_overview">Nessuna panoramica per i profili proiettati</string>
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
@@ -395,8 +395,8 @@
 
     <string name="plan">PIANTA</string>
     <string name="extended">SEZIONE LONG.</string>
-    <!-- TODO string name="extended_profile">Profilo esteso</string -->
-    <!-- TODO string name="profile">PROGETTO.</string -->
+    <string name="extended_profile">Profilo esteso</string>
+    <string name="profile">PROGETTO.</string>
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">SEZIONE ORIZZ.</string>
 
@@ -470,16 +470,16 @@
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <!-- string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- FATO string name="title_sketch_shot">Nuovo tiro</string -->
-    <!-- FATO string name="title_sketch_refs">Modo di visualizzazione</string -->
+    <string name="title_sketch_shot">Nuovo tiro</string>
+    <string name="title_sketch_refs">Modo di visualizzazione</string>
     <!-- string name="title_sketch_section_type">Tipo di sezioni</string -->
     <!-- string name="title_sketch_select">Seleziona un oggetto</string -->
 
-    <!-- FATO string name="sketch_mode_single">Tiro singolo</string -->
-    <!-- FATO string name="sketch_mode_ngbh">Tiri vicini</string -->
-    <!-- FATO string name="sketch_mode_all">Tutti i tiri</string -->
-    <!-- FATO string name="sketch_delete">Cancella modello 3D ?</string -->
-    <!-- FATO string name="sketch_no_split">Nessun raffinamento. Diminuire lato max. Lunghezza da raffinare ulteriormente.</string -->
+    <string name="sketch_mode_single">Tiro singolo</string>
+    <string name="sketch_mode_ngbh">Tiri vicini</string>
+    <string name="sketch_mode_all">Tutti i tiri</string>
+    <string name="sketch_delete">Cancella modello 3D ?</string>
+    <string name="sketch_no_split">Nessun raffinamento. Diminuire lato max. Lunghezza da raffinare ulteriormente.</string>
     <string name="length">Lunghezza [m]</string>
     <string name="azimuth">Azimut [deg]</string>
     <string name="clino">Inclinazione [deg]</string>
@@ -508,12 +508,12 @@
     <!-- string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
-    <!-- FATO string name="no_shot_between_stations">Nessun tiro tra i capisaldi</string -->
-    <!-- FATO string name="few_line_points">La linea ha troppo pochi punti</string -->
+    <string name="no_shot_between_stations">Nessun tiro tra i capisaldi</string>
+    <string name="few_line_points">La linea ha troppo pochi punti</string>
     <string name="line_delete">Elimina linea</string>
     <string name="flip_shots">Capovolgi battute</string>
 
-    <!-- FATO string name="menu_head">CIMA</string -->
+    <string name="menu_head">CIMA</string>
     <!-- string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
@@ -523,7 +523,7 @@
     <string name="help_measure">Misurare le distanze</string>
     
     <string name="help_coeff">Coefficienti della calibrazione</string>
-    <!-- FATO string name="help_continue">Continuare il disegno di una linea</string -->
+    <string name="help_continue">Continuare il disegno di una linea</string>
     <string name="help_current_station">Capisaldi salvati</string>
     <string name="help_azimuth">Riferimento per "extend"</string>
     <string name="help_device">Finestra DistoX</string>
@@ -583,7 +583,7 @@
     <string name="help_manual_calibration">Strumenti di calibrazione manuale</string>
     <string name="help_note_plot">Edita le propertà dell\'oggetto</string>
     <!-- UNUSED string name="help_save">Salva le modifiche al rilievo/calibr.</string -->
-    <!-- FATO string name="help_save_calib">Salva i cambiamenti alla calibrazione</string -->
+    <string name="help_save_calib">Salva i cambiamenti alla calibrazione</string>
     <string name="help_export_survey">Esporta rilievo</string>
     <string name="help_loc">Localizzazione GPS</string>
     <string name="help_delete_survey">Elimina rilievo</string>
@@ -637,7 +637,7 @@
     <string name="title_fixed_import">Importa punto fisso</string>
     <string name="title_fixed_gps">Punto fisso: GPS</string>
     <string name="title_fixed_add">Punto fisso: inserimento</string>
-    <!-- FATO string name="title_manual">TopoDroid - Manuale utente</string -->
+    <string name="title_manual">TopoDroid - Manuale utente</string>
     <string name="title_mode">Modalità display</string>
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
@@ -646,7 +646,7 @@
     <string name="title_plot_save">Salva disegno come </string>
     <string name="title_plot_reload">Ricarica disegno</string>
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
-    <!-- TODO string name="title_projection">Proiezione azimutale profilo %1$d</string -->
+    <string name="title_projection">Proiezione azimutale profilo %1$d</string>
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
     <string name="title_shift">Sposta</string>
@@ -688,10 +688,10 @@
   <string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string>
   <string name="pref_export_shots_title">Formato esportazione dati</string>
   <string name="pref_export_shots_summary">Formato esportazione dati preferenziale</string>
-  <!-- TODO string name="pref_export_plot_title">Default export disegno</string -->
-  <!-- TODO string name="pref_export_plot_summary">Formato di default export disegno</string -->
-  <!-- TODO string name="pref_therion_maps_title">Mappe Therion per prime</string -->
-  <!-- TODO string name="pref_therion_maps_summary">Mappe Therion prima dei dati del rilievo</string -->
+  <string name="pref_export_plot_title">Default export disegno</string>
+  <string name="pref_export_plot_summary">Formato di default export disegno</string>
+  <string name="pref_therion_maps_title">Mappe Therion per prime</string>
+  <string name="pref_therion_maps_summary">Mappe Therion prima dei dati del rilievo</string>
   <string name="pref_extra_buttons_title">Livello di comandi</string>
   <string name="pref_extra_buttons_summary">Seleziona il livello di comandi</string>
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
@@ -743,14 +743,14 @@
   <string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI LINEA</string>
   <string name="pref_tool_point_title">STRUMENTI PUNTO</string>
   <string name="pref_location_title">IMPOSTAZIONI POSIZIONE</string>
-  <!-- FATO string name="pref_accuracy_title">ACCURATEZZA</string -->
+  <string name="pref_accuracy_title">ACCURATEZZA</string>
   <string name="pref_shot_data_title">IMPOSTAZIONI DATI POLIGONALE</string>
-  <!-- FATO string name="pref_shot_units_title">UNITA\'</string -->
+  <string name="pref_shot_units_title">UNITA\'</string>
   <string name="pref_cwd_title">DIRECTORY DI LAVORO</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
   <string name="pref_pt_color_map_title">Mappa di colori di PocketTopo</string>
-  <!-- FATO string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string -->
+  <string name="pref_pt_color_map_summary">Mappa colori di PocketTopo (PocketTopo import)</string>
   <string name="pref_text_size_title">Dimensione testo</string>
   <string name="pref_text_size_summary">Dimensione testo liste</string>
   <string name="pref_text_size_message">Dimensione testo liste</string>
@@ -903,8 +903,8 @@
   <string name="pref_recent_nr_summary">Numero di strumenti recenti nel raccoglitore</string>
   <string name="pref_area_border_title">Visibilità bordi area</string> 
   <string name="pref_area_border_summary">Visibilità di default dei bordi di una area</string>
-  <!-- TODO string name="pref_auto_section_pt_title">Punti sezione</string -->
-  <!-- TODO string name="pref_auto_section_pt_summary">Aggiungi un punto di sezione alle linee di sezione</string -->
+  <string name="pref_auto_section_pt_title">Punti sezione</string>
+  <string name="pref_auto_section_pt_summary">Aggiungi un punto di sezione alle linee di sezione</string>
   <string name="pref_cont_join_title">Continuazione Unione</string>
   <string name="pref_cont_join_summary">Continuazione di linea unisce linee</string>
 
