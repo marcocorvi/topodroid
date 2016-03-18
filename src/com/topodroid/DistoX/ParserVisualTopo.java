@@ -27,6 +27,9 @@ public class ParserVisualTopo extends ImportParser
   public ParserVisualTopo( String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
+    int pos = filename.lastIndexOf( '/' ); ++pos;
+    int ext = filename.lastIndexOf( '.' ); if ( ext < 0 ) ext = filename.length();
+    mName = filename.substring( pos, ext );
     readFile( filename );
   }
 
@@ -87,6 +90,7 @@ public class ParserVisualTopo extends ImportParser
       line = nextLine( br );
       while ( line != null ) {
         line = line.trim();
+        // Log.v("DistoX", "LINE: " + line );
         if ( line.startsWith("[Configuration]") ) break;
 
         int pos = line.indexOf(";");

@@ -29,19 +29,16 @@ import android.util.Log;
 
 public class MyButton
 {
-  // static Context mContext = null;
   static int mSize = 42;
 
-  // CACHE
-  // using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
-  static SparseArray<BitmapDrawable> mBitmapCache = new SparseArray<BitmapDrawable>();
+  // CACHE : using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
+  // static SparseArray<BitmapDrawable> mBitmapCache = new SparseArray<BitmapDrawable>();
 
   // called with context = mApp
   static void resetCache( /* Context context, */ int size )
   {
-    // mContext = context;
     mSize    = size;
-    mBitmapCache.clear();
+    // mBitmapCache.clear();
   }
 
   static Button getButton( Context ctx, OnClickListener click, int res_id )
@@ -55,12 +52,13 @@ public class MyButton
 
   static BitmapDrawable getButtonBackground( Resources res, int res_id )
   {
-    BitmapDrawable ret = mBitmapCache.get( res_id );
+    BitmapDrawable ret = null;
+    // ret = mBitmapCache.get( res_id );
     if ( ret == null ) {    
       Bitmap bm1 = BitmapFactory.decodeResource( res, res_id );
       Bitmap bmx = Bitmap.createScaledBitmap( bm1, mSize, mSize, false );
       ret = new BitmapDrawable( res, bmx );
-      mBitmapCache.append( res_id, ret );
+      // mBitmapCache.append( res_id, ret );
     }
     return ret;
   }

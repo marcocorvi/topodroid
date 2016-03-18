@@ -2068,18 +2068,14 @@ class TopoDroidExporter
       FileWriter fw = new FileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
   
-      // FIXME 
-      // pw.format("; %s created by TopoDroid v %s\n\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
-
       pw.format("Version 5.02\r\n\r\n");
-      if ( fixed.size() > 0 ) { // FIXME
-        // pw.format(Locale.US, "Trou %s,%.2f,%.2f,LT2E\r\n", info.name, fix.lat, fix.lng );
-        for ( FixedInfo fix : fixed ) {
-          // pw.format("Entree %s\r\n", fix.name );
-          break;
-        }
+      pw.format("; %s created by TopoDroid v %s\r\n\r\n", TopoDroidUtil.getDateString("yyyy.MM.dd"), TopoDroidApp.VERSION );
+      if ( fixed.size() > 0 ) { 
+        FixedInfo fix = fixed.get(0);
+        pw.format(Locale.US, "; Trou %s,%.7f,%.7f,LT2E\r\n", info.name, fix.lat, fix.lng );
+        pw.format("; Entree %s\r\n", fix.name );
       } else {
-        // pw.format("Trou %s\r\n", info.name );
+        pw.format("; Trou %s\r\n", info.name );
       }
       if ( info.team != null && info.team.length() > 0 ) {
         pw.format("Club %s\r\n", info.team );
