@@ -92,7 +92,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             if ( bitmap == null ) {
               TDLog.Error( "cannot save PNG: null bitmap" );
             } else {
-              new ExportBitmapToFile( mContext, null, bitmap, mFullName ).execute();
+              new ExportBitmapToFile( mContext, bitmap, mFullName, false ).execute();
             }
             break;
         }

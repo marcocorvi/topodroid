@@ -78,6 +78,7 @@
     <string name="non_linear">non-linear</string>
    
     <string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string>
+    <string name="device_address">Address %1$s</string>
     <string name="device_busy">Device busy</string>
     <string name="device_illegal_addr">Illegal memory address</string>
     <string name="device_info">Device info</string>

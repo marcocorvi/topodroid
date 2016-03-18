@@ -30,17 +30,19 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private String mFullName;
     private String mExt; // extension
     private String filename = null;
+    private boolean mToast;
 
     public ExportPlotToFile( Context context, DrawingCommandManager command,
-                         DistoXNum num, long type, String name, String ext )
+                         DistoXNum num, long type, String name, String ext, boolean toast )
     {
        // FIXME assert( ext != null );
        mContext  = context;
        mCommand  = command;
-       mNum = num;
-       mType = type;
+       mNum      = num;
+       mType     = type;
        mFullName = name;
-       mExt = ext;
+       mExt      = ext;
+       mToast    = toast;
     }
 
     @Override
@@ -78,10 +80,13 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     protected void onPostExecute(Boolean bool) 
     {
       super.onPostExecute(bool);
-      if ( bool ) {
-        Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_) + " " + filename, Toast.LENGTH_SHORT ).show();
-      } else {
-        Toast.makeText( mContext, mContext.getResources().getString(R.string.saving_file_failed), Toast.LENGTH_SHORT ).show();
+      if ( mToast ) {
+        if ( bool ) {
+          Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_) + " " + filename,
+                          Toast.LENGTH_SHORT ).show();
+        } else {
+          Toast.makeText( mContext, mContext.getResources().getString(R.string.saving_file_failed), Toast.LENGTH_SHORT ).show();
+        }
       }
     }
 }

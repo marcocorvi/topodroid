@@ -84,6 +84,7 @@
    
 <!-- DistoX DEVICE STUFF -->
     <string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string>
+    <!-- TODO string name="device_address">Address %1$s</string -->
     <string name="device_busy">Gerät arbeitet</string>
     <string name="device_illegal_addr">Ungültige Speicheradresse</string>
     <string name="device_info">Geräte-Info</string>

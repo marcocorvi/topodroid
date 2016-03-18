@@ -29,10 +29,6 @@ import android.widget.Button;
 class DeviceX310InfoDialog extends MyDialog
                            implements View.OnClickListener
 {
-  private TextView mTVcode;
-  private TextView mTVfirmware;
-  private TextView mTVhardware;
-  // private TextView mTV;
   private RadioButton mRBa3;
   private RadioButton mRBx310;
   private Button mBTok;
@@ -62,21 +58,22 @@ class DeviceX310InfoDialog extends MyDialog
     // mRBa3.setChecked( false );
     mRBx310.setChecked( true );
 
-    mTVcode = (TextView) findViewById( R.id.tv_code );
-    mTVfirmware = (TextView) findViewById( R.id.tv_firmware );
-    mTVhardware = (TextView) findViewById( R.id.tv_hardware );
+    TextView tv_address  = (TextView) findViewById( R.id.tv_address );
+    TextView tv_code     = (TextView) findViewById( R.id.tv_code );
+    TextView tv_firmware = (TextView) findViewById( R.id.tv_firmware );
+    TextView tv_hardware = (TextView) findViewById( R.id.tv_hardware );
 
     setTitle( mParent.getResources().getString( R.string.device_info ) );
 
-    mTVcode.setText( mParent.readDistoXCode() );
-    mTVfirmware.setText( mParent.readX310firmware() );
-    mTVhardware.setText( mParent.readX310hardware() );
+    tv_address.setText( String.format( mParent.getResources().getString( R.string.device_address ), mDevice.mAddress ) );
+    tv_code.setText( mParent.readDistoXCode() );
+    tv_firmware.setText( mParent.readX310firmware() );
+    tv_hardware.setText( mParent.readX310hardware() );
 
     mBTok = (Button) findViewById( R.id.btn_ok );
     mBTok.setOnClickListener( this );
     // mBTback = (Button) findViewById( R.id.button_cancel );
     // mBTback.setOnClickListener( this );
-
   }
 
   @Override

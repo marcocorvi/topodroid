@@ -79,6 +79,7 @@
     <string name="non_linear">non-linéaire</string>
    
     <string name="device_algo_failed">Echec de determination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string>
+    <!-- TODO string name="device_address">Address %1$s</string -->
     <string name="device_busy">Périphérique occupé</string>
     <string name="device_illegal_addr">Adresse mémoire illégale</string>
     <string name="device_info">Informations sur le périphérique</string>

@@ -75,6 +75,7 @@
     <string name="non_linear">No lineal</string>
    
     <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string>
+    <!-- TODO string name="device_address">Address %1$s</string -->
     <string name="device_busy">Dispositivo ocupado</string>
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">información del dispositivo</string>

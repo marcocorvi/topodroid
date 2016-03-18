@@ -79,6 +79,7 @@
     <string name="non_linear">нелинеен</string>
 
     <string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string>
+    <!-- TODO string name="device_address">Address %1$s</string -->
     <string name="device_busy">Устройството е заето</string>
     <string name="device_illegal_addr">Грешен адрес в паметта</string>
     <string name="device_info">Информация за устройството</string>

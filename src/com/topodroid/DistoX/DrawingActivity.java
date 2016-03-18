@@ -3148,42 +3148,43 @@ public class DrawingActivity extends ItemDrawer
 
     // --------------------------------------------------------------------------
 
-    private void savePng()
+    private void savePng( boolean toast )
     {
       if ( PlotInfo.isSection( mType ) ) { 
-        doSavePng( mType, mFullName1 ); // FIXME
+        doSavePng( mType, mFullName1, toast ); // FIXME
       } else {
-        doSavePng( (int)PlotInfo.PLOT_PLAN, mFullName1 );
+        doSavePng( (int)PlotInfo.PLOT_PLAN, mFullName1, toast );
         // FIXME OK PROFILE (to check)
-        doSavePng( (int)PlotInfo.PLOT_EXTENDED, mFullName2 );
+        doSavePng( (int)PlotInfo.PLOT_EXTENDED, mFullName2, toast );
       }
     }
 
-    void doSavePng( long type, final String filename )
+    void doSavePng( long type, final String filename, boolean toast )
     {
       Bitmap bitmap = mDrawingSurface.getBitmap( type );
       if ( bitmap == null ) {
-        Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
+        if ( toast ) Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
       } else {
-        new ExportBitmapToFile(this, bitmap, filename ).execute();
+        new ExportBitmapToFile(this, bitmap, filename, toast ).execute();
       }
     }
 
     // used by SavePlotFileTask
-    void saveCsx( )
+    void saveCsx( boolean toast )
     {
       String filename = mApp.exportSurveyAsCsx( this, mPlot1.start );
-      Toast.makeText( mApp, getString(R.string.saved_file_) + " " + filename, Toast.LENGTH_SHORT ).show();
+      if ( toast )
+        Toast.makeText( mApp, getString(R.string.saved_file_) + " " + filename, Toast.LENGTH_SHORT ).show();
     }
 
     // used to save "dxf", "svg"
-    private void saveWithExt( String ext )
+    private void saveWithExt( String ext, boolean toast )
     {
       if ( PlotInfo.isSection( mType ) ) { 
-        doSaveWithExt( mType, mFullName1, ext ); // FIXME
+        doSaveWithExt( mType, mFullName1, ext, toast ); // FIXME
       } else {
-        doSaveWithExt( mPlot1.type, mFullName1, ext );
-        doSaveWithExt( mPlot2.type, mFullName2, ext );
+        doSaveWithExt( mPlot1.type, mFullName1, ext, toast );
+        doSaveWithExt( mPlot2.type, mFullName2, ext, toast );
       }
     }
 
@@ -3191,14 +3192,14 @@ public class DrawingActivity extends ItemDrawer
     // ext can be dxf, svg
     // FIXME OK PROFILE
     // used by SavePlotFileTask
-    void doSaveWithExt( long type, final String filename, final String ext )
+    void doSaveWithExt( long type, final String filename, final String ext, boolean toast )
     {
       if ( PlotInfo.isProfile( type ) ) {
-        new ExportPlotToFile(this, mDrawingSurface.mCommandManager2, mNum, type, filename, ext ).execute();
+        new ExportPlotToFile(this, mDrawingSurface.mCommandManager2, mNum, type, filename, ext, toast ).execute();
       } else if ( type == PlotInfo.PLOT_PLAN ) {
-        new ExportPlotToFile(this, mDrawingSurface.mCommandManager1, mNum, type, filename, ext ).execute();
+        new ExportPlotToFile(this, mDrawingSurface.mCommandManager1, mNum, type, filename, ext, toast ).execute();
       } else {
-        new ExportPlotToFile(this, mDrawingSurface.mCommandManager3, mNum, type, filename, ext ).execute();
+        new ExportPlotToFile(this, mDrawingSurface.mCommandManager3, mNum, type, filename, ext, toast ).execute();
       }
     }
 
@@ -3457,10 +3458,10 @@ public class DrawingActivity extends ItemDrawer
     int index = TDConst.plotExportIndex( type );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: saveTh2(); break;
-      case TDConst.DISTOX_EXPORT_CSX: saveCsx( ); break;
-      case TDConst.DISTOX_EXPORT_PNG: savePng(); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break;
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
+      case TDConst.DISTOX_EXPORT_CSX: saveCsx( true ); break;
+      case TDConst.DISTOX_EXPORT_PNG: savePng( true ); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf", true ); break;
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg", true ); break;
     }
   }
 

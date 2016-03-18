@@ -423,18 +423,18 @@ public class DeviceActivity extends Activity
     // }
 
     int k = 0;
-    if ( k < mNrButton1 && b == mButton1[k++] ) { // 4: RESET COMM STATE [This is fast]
+    if ( k < mNrButton1 && b == mButton1[k++] ) {         // RESET COMM STATE [This is fast]
       mApp.resetComm();
       setState();
       Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) {          // DISTOX CALIBRATION MODE TOGGLE
+    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATION MODE TOGGLE
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
         enableButtons( false );
         new CalibToggleTask( this, this, mApp ).execute();
       }
-    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX CALIBRATIONS
+    } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // CALIBRATIONS
       if ( mApp.mDevice == null ) {
         Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
@@ -453,7 +453,7 @@ public class DeviceActivity extends Activity
           Toast.makeText( this, "Unknown DistoX type " + mDevice.mType, Toast.LENGTH_SHORT).show();
         }
       }
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // 2: DISTOX CALIBRATION COEFFS READ
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {   // CALIBRATION COEFFS READ
       if ( mDevice == null ) { // mAddress.length() < 1 ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
@@ -461,29 +461,20 @@ public class DeviceActivity extends Activity
         new CalibReadTask( this, this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
       }
 
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // 3: DISTOX INFO
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {    // INFO
       if ( mDevice == null ) {
         Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
       } else {
+        // setTitleColor( TDConst.COLOR_CONNECTED ); // USELESS
         if ( mDevice.mType == Device.DISTO_A3 ) {
           new DeviceA3InfoDialog( this, this, mDevice ).show();
         } else if ( mDevice.mType == Device.DISTO_X310 ) {
           new DeviceX310InfoDialog( this, this, mDevice ).show();
         } else {
-          Toast.makeText( this, "Unknown DistoX type " + mDevice.mType, Toast.LENGTH_SHORT).show();
+          TDLog.Error( "Unknown DistoX type " + mDevice.mType );
         }
+        // setTitleColor( TDConst.COLOR_NORMAL );
       }
-
-    // } else if ( k < mNrButton1 && b == mButton1[k++] ) { // 5: REMOTE
-    //   if ( mDevice == null ) {
-    //     Toast.makeText( this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
-    //   } else {
-    //     if ( mDevice.mType == Device.DISTO_X310 ) {
-    //       ( new DeviceRemoteDialog( this, this, mApp )).show();
-    //     } else {
-    //       /* nothing */
-    //     }
-    //   }
 
     }
     setState();

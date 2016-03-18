@@ -78,6 +78,7 @@
     <string name="non_linear">非线性</string>
    
     <string name="device_algo_failed">自动算法失败\n使用线性算法...</string>
+    <!-- TODO string name="device_address">Address %1$s</string -->
     <string name="device_busy">设备忙...</string>
     <string name="device_illegal_addr">非法的存储地址</string>
     <string name="device_info">设备信息</string>

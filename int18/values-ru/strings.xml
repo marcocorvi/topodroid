@@ -80,6 +80,7 @@
     <string name="non_linear">не-линейный</string>
    
     <string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string>
+    <!-- TODO string name="device_address">Address %1$s</string -->
     <string name="device_busy">Устройство занято</string>
     <string name="device_illegal_addr">Недопустимый адрес памяти</string>
     <string name="device_info">Информация об устройстве</string>

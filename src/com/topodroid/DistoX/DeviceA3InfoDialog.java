@@ -30,7 +30,6 @@ import android.widget.Button;
 class DeviceA3InfoDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private TextView mTVserial;
   private RadioButton mRBa3;
   private RadioButton mRBx310;
   private Button   mBTok;
@@ -60,7 +59,8 @@ class DeviceA3InfoDialog extends MyDialog
     mRBa3.setChecked( true );
     // mRBx310.setChecked( false );
 
-    mTVserial = (TextView) findViewById( R.id.tv_serial );
+    TextView tv_address       = (TextView) findViewById( R.id.tv_address );
+    TextView tv_serial        = (TextView) findViewById( R.id.tv_serial );
     TextView tv_statusAngle   = (TextView) findViewById( R.id.tv_status_angle );
     TextView tv_statusCompass = (TextView) findViewById( R.id.tv_status_compass );
     TextView tv_statusCalib   = (TextView) findViewById( R.id.tv_status_calib );
@@ -68,7 +68,8 @@ class DeviceA3InfoDialog extends MyDialog
 
     setTitle( mParent.getResources().getString( R.string.device_info ) );
 
-    mTVserial.setText( mParent.readDistoXCode() );
+    tv_address.setText( String.format( mParent.getResources().getString( R.string.device_address ), mDevice.mAddress ) );
+    tv_serial.setText( mParent.readDistoXCode() );
     byte res = mParent.readA3status();
     String angle_units = (( res & 0x01 ) != 0)? "grad" : "degree";
     String compass     = (( res & 0x04 ) != 0)? "on" : "off";

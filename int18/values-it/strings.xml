@@ -78,6 +78,7 @@
     <string name="non_linear">non-lineare</string>
    
     <string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string>
+    <!-- TODO string name="device_address">Address %1$s</string -->
     <string name="device_busy">Dispositivo occupato</string>
     <string name="device_illegal_addr">Indirizzo di memoria illegale</string>
     <string name="device_info">Dati dispositivo</string>
