@@ -1,0 +1,67 @@
+/** @file MyStringAdapter.java
+ *
+ * @author marco corvi
+ * @date mar 2016
+ *
+ * @brief TopoDroid simple string adapter
+ * --------------------------------------------------------
+ *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
+ */
+package com.topodroid.DistoX;
+
+import android.content.Context;
+
+import android.widget.TextView;
+import android.widget.BaseAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.LayoutInflater;
+
+import java.util.ArrayList;
+
+public class MyStringAdapter extends BaseAdapter
+{
+  Context mContext;
+  int     mResId;
+  ArrayList<String> mStr;
+
+  public MyStringAdapter( Context context, int res_id )
+  {
+    mContext = context;
+    mResId   = res_id;
+    mStr     = new ArrayList<String>();
+  }
+
+  @Override public int getCount() { return mStr.size(); }
+
+  @Override public String getItem( int pos ) { return mStr.get(pos); }
+
+  @Override  public long getItemId( int pos ) { return pos; }
+
+  void add( String str ) { mStr.add( str ); }
+
+  void remove( String str ) { mStr.remove( str ); }
+
+  class Holder { TextView tv; }
+
+  @Override
+  public View getView( int pos, View convertView, ViewGroup parent )
+  {
+    Holder holder;
+    if  ( convertView == null ) {
+      holder = new Holder();
+      convertView = LayoutInflater.from( mContext ).inflate( mResId, null );
+      holder.tv = (TextView) convertView.findViewById( R.id.message_text );
+      holder.tv.setTextSize( TDSetting.mTextSize );
+      convertView.setTag( holder );
+    } else {
+      holder = (Holder) convertView.getTag();
+    }
+    holder.tv.setText( mStr.get(pos) );
+    return convertView;
+  }
+
+}
+
