@@ -80,7 +80,7 @@
     <string name="non_linear">не-линейный</string>
    
     <string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string>
-    <!-- TODO string name="device_address">Address %1$s</string -->
+    <string name="device_address">Адрес %1$s</string>
     <string name="device_busy">Устройство занято</string>
     <string name="device_illegal_addr">Недопустимый адрес памяти</string>
     <string name="device_info">Информация об устройстве</string>
@@ -711,10 +711,10 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Число попыток подключения</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Кол-во попыток подключения</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Кол-во попыток подключения</string -->
-  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
-  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
+  <string name="pref_wait_laser_title">Пауза после лазера [мс]</string>
+  <string name="pref_wait_laser_summary">Пауза после включения лазера [мс]</string>
+  <string name="pref_wait_shot_title">Пауза после замера [мс]</string>
+  <string name="pref_wait_shot_summary">Время ожидания после выполнения измерения [мс]</string>
   <string name="pref_conn_mode_title">Типы подключения</string>
   <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
   <string name="pref_auto_reconnect_title">Авто соединение</string>
