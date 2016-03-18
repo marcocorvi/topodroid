@@ -89,6 +89,26 @@
        android:defaultValue="true"
      />
 
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WAIT_LASER"
+       android:title="@string/pref_wait_laser_title"
+       android:summary="@string/pref_wait_laser_summary"
+       android:dialogTitle="@string/pref_wait_laser_title"
+       android:dialogMessage="@string/pref_wait_laser_summary"
+       android:inputType="number"
+       android:defaultValue="1000"
+     />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WAIT_SHOT"
+       android:title="@string/pref_wait_shot_title"
+       android:summary="@string/pref_wait_shot_summary"
+       android:dialogTitle="@string/pref_wait_shot_title"
+       android:dialogMessage="@string/pref_wait_shot_summary"
+       android:inputType="number"
+       android:defaultValue="4000"
+     />
+
   <Preference
      android:key="DISTOX_CALIB_PREF"
      android:title="@string/pref_cat_calib"

@@ -13,7 +13,8 @@
        android:summary="@string/pref_text_size_summary"
        android:dialogTitle="@string/pref_text_size_title"
        android:dialogMessage="@string/pref_text_size_message"
-       android:defaultValue="14"
+       android:defaultValue="16"
+       android:inputType="number"
        />
 
   <com.topodroid.DistoX.MyListPreference
@@ -40,20 +41,6 @@
        android:title="@string/pref_mkeyboard_title"
        android:defaultValue="true"
        />
-
-  <!-- CheckBoxPreference
-       android:key="DISTOX_BINARY_STORE"
-       android:summary="@string/pref_binary_store_summary"
-       android:title="@string/pref_binary_store_title"
-       android:defaultValue="false"
-       / -->
-
-  <!-- CheckBoxPreference
-       android:key="DISTOX_AUTO_TH2"
-       android:summary="@string/pref_auto_th2_summary"
-       android:title="@string/pref_auto_th2_title"
-       android:defaultValue="false"
-       / -->
 
   <!-- CheckBoxPreference
        android:key="DISTOX_BOOTLOADER"

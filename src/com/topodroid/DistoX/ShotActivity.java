@@ -206,7 +206,7 @@ public class ShotActivity extends Activity
   private ListView mList;
   // private int mListPos = -1;
   // private int mListTop = 0;
-  private DistoXDBlockAdapter   mDataAdapter;
+  private DistoXDBlockAdapter mDataAdapter;
   private ArrayList< String > mShowSplay;
 
 
@@ -294,8 +294,8 @@ public class ShotActivity extends Activity
       if ( list.size() > 4 ) computeMeans( list );
 
       List< PhotoInfo > photos = data.selectAllPhotos( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
-      // TDLog.Log( TDLog.LOG_SHOT, "updateDisplay() shot list size " + list.size() );
-      // Log.v( TopoDroidApp.TAG, "updateDisplay() shot list size " + list.size() );
+      // TDLog.Log( TDLog.LOG_SHOT, "update Display() shot list size " + list.size() );
+      // Log.v( TopoDroidApp.TAG, "update Display() shot list size " + list.size() );
       updateShotList( list, photos );
       
       setTheTitle( );
@@ -716,6 +716,13 @@ public class ShotActivity extends Activity
   // FIXME made static: should not cause problems
   private static Handler mListItemsHandler = null;
   static final int MSG_ADD_BLK = 1;
+
+  // void refreshList()
+  // {
+  //   Log.v("DistoX", "refresh display" );
+  //   mDataAdapter.notifyDataSetChanged();
+  //   mList.invalidate();
+  // }
   
   @Override
   public void onCreate(Bundle savedInstanceState)

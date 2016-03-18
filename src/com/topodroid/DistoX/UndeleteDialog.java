@@ -39,7 +39,8 @@ public class UndeleteDialog extends MyDialog
   ShotActivity mParent;
 
   // private Button mBtnCancel;
-  ArrayAdapter< String >  mArrayAdapter;
+  // ArrayAdapter< String >  mArrayAdapter;
+  MyStringAdapter mArrayAdapter;
   ListView mList;
   List< DistoXDBlock > mShots;
   List< PlotInfo >     mPlots;
@@ -75,6 +76,7 @@ public class UndeleteDialog extends MyDialog
       try {
         if ( value[0].equals( "shot" ) ) {
           mData.undeleteShot( id, mSID, true );
+          mParent.updateDisplay();
         } else {
           mData.undeletePlot( id, mSID );
         }
@@ -90,7 +92,8 @@ public class UndeleteDialog extends MyDialog
     super.onCreate( savedInstanceState );
 
     setContentView(R.layout.undelete_dialog);
-    mArrayAdapter = new ArrayAdapter<String>( mParent, R.layout.message );
+    // mArrayAdapter = new ArrayAdapter<String>( mParent, R.layout.message );
+    mArrayAdapter = new MyStringAdapter( mParent, R.layout.message );
     mList = (ListView) findViewById(R.id.list_undelete);
     mList.setAdapter( mArrayAdapter );
     mList.setOnItemClickListener( this );

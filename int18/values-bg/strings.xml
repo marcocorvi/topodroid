@@ -716,6 +716,10 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Брой опити за връзка при грешка</string -->
+  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
+  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
   <string name="pref_conn_mode_title">Тип на връзката за данни</string>
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>

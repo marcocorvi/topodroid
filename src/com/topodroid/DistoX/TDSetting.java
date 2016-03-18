@@ -42,6 +42,8 @@ class TDSetting
     // ----------------------- DEVICE PREFERNCES 
     "DISTOX_SOCK_TYPE",           // 11
     "DISTOX_COMM_RETRY",          // 12
+    "DISTOX_WAIT_LASER",
+    "DISTOX_WAIT_SHOT",
     "DISTOX_Z6_WORKAROUND",       // 13
     "DISTOX_CONN_MODE",           // 14
     "DISTOX_AUTO_PAIR",           // 15
@@ -234,6 +236,9 @@ class TDSetting
 
   static int mCommRetry = 1; 
   static int mCommType  = 0; // 0: on-demand, 1: continuous
+
+  static int mWaitLaser = 1000;
+  static int mWaitShot  = 4000;
 
   static boolean mCheckAttached = false;    // whether to check is there are shots non-attached
 
@@ -528,6 +533,8 @@ class TDSetting
     // ------------------- DEVICE PREFERENCES
     mSockType       = tryInt( prefs, key[k++], "0" );        // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
     mCommRetry      = tryInt( prefs, key[k++], "1" );        // DISTOX_COMM_RETRY
+    mWaitLaser      = tryInt( prefs, key[k++], "1000" );     // DISTOX_WAIT_LASER
+    mWaitShot       = tryInt( prefs, key[k++], "4000" );     // DISTOX_WAIT_SHOT
     mZ6Workaround   = prefs.getBoolean( key[k++], true  );   // DISTOX_Z6_WORKAROUND
     mConnectionMode = tryInt( prefs, key[k++], "0" );        // DISTOX_CONN_MODE choice: 0, 1
     mAutoPair       = prefs.getBoolean( key[ k++ ], true );  // DISTOX_AUTO_PAIR
@@ -724,6 +731,10 @@ class TDSetting
       mSockType       = tryInt( prefs, k, "0" );     // "DISTOX_SOCK_TYPE (choice)
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCommRetry      = tryInt( prefs, k, "1" );     // DISTOX_COMM_RETRY
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWaitLaser      = tryInt( prefs, k, "1000" );  // DISTOX_WAIT_LASER
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWaitShot       = tryInt( prefs, k, "4000" );  // DISTOX_WAIT_SHOT
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_Z6_WORKAROUND
       mZ6Workaround = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1109,6 +1120,8 @@ class TDSetting
     //C if ( name.equals( "DISTOX_BLUETOOTH" )
     //C if ( name.equals( "DISTOX_SOCK_TYPE" )
     if ( name.equals( "DISTOX_COMM_RETRY"    ) ) return parseIntValue( value, mCommRetry, 1, 5 );
+    if ( name.equals( "DISTOX_WAIT_LASER"    ) ) return parseIntValue( value, mWaitLaser, 100,  5000 );
+    if ( name.equals( "DISTOX_WAIT_SHOT"     ) ) return parseIntValue( value, mWaitShot,  100, 10000 );
     //C if ( name.equals( "DISTOX_CONN_MODE" )
 
     // if ( name.equals( "DISTOX_AUTO_STATIONS" )

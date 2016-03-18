@@ -124,7 +124,7 @@ public class CurrentStationDialog extends MyDialog
 
   private void updateList()
   {
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    MyStringAdapter adapter = new MyStringAdapter( mContext, R.layout.message );
     // mApp.fillCurrentStationAdapter( adapter );
     ArrayList< CurrentStation > stations = mApp.mData.getStations( mApp.mSID );
     for ( CurrentStation st : stations ) {

@@ -711,6 +711,10 @@
   <!-- UNUSED string name="pref_comm_retry_summary">重试连接数</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">重试连接数</string -->
   <!-- UNUSED string name="pref_comm_retry_message">重试连接数</string -->
+  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
+  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
   <string name="pref_conn_mode_title">数据连接类型</string>
   <string name="pref_conn_mode_summary">DistoX连接类型</string>
   <string name="pref_auto_reconnect_title">自动再连接</string>

@@ -720,6 +720,10 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Numero tentativi di connessione</string -->
+  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
+  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
   <string name="pref_conn_mode_title">Tipo connessione</string>
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>
