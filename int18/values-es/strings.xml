@@ -75,7 +75,7 @@
     <string name="non_linear">No lineal</string>
    
     <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string>
-    <!-- TODO string name="device_address">Address %1$s</string -->
+    <string name="device_address">Dirección %1$s</string>
     <string name="device_busy">Dispositivo ocupado</string>
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">información del dispositivo</string>
@@ -619,10 +619,10 @@
   <string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string>
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
-  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_therion_maps_title">Therion maps first</string -->
-  <!-- TODO string name="pref_therion_maps_summary">Therion maps before survey data</string -->
+  <string name="pref_export_plot_title">Exportación de dibujo por defecto</string>
+  <string name="pref_export_plot_summary">Exportación formato de dibujo por defecto</string>
+  <string name="pref_therion_maps_title">Mapa Therion primero</string -->
+  <string name="pref_therion_maps_summary">Mapas Therion antes de los datos de la topografía</string>
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
   <string name="pref_extra_buttons_summary">Habilitar botones opcionales ventana principal</string>
   <string name="pref_size_buttons_title">Tamaño botones</string>
@@ -650,10 +650,10 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Reintentar comunicación</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Números de intentos de comunicación</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Números de intentos de comunicación</string -->
-  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
-  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
+  <string name="pref_wait_laser_title">Espera después de láser [ms]</string>
+  <string name="pref_wait_laser_summary">Retardo de espera después de girar el láser [ms]</string>
+  <string name="pref_wait_shot_title">Espere tras el disparo [ms]</string>
+  <string name="pref_wait_shot_summary">Retardo de espera después de la medición [ms]</string>
   <string name="pref_conn_mode_title">Modo Conexión</string>
   <string name="pref_conn_mode_summary">Modo conexión con DistoX</string>
   <string name="pref_auto_reconnect_title">Autoconectar</string>
