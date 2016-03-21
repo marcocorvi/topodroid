@@ -411,8 +411,11 @@ class TDSetting
   {
     float f = 0;
     try { f = Float.parseFloat( prefs.getString( key, def_value ) ); } 
-    catch ( NumberFormatException e ) { f = Float.parseFloat(def_value); }
-    setPreference( prefs, key, f );
+    catch ( NumberFormatException e ) {
+      TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
+      f = Float.parseFloat(def_value);
+      setPreference( prefs, key, def_value );
+    }
     return f;
   }
 
@@ -420,8 +423,11 @@ class TDSetting
   {
     int i = 0;
     try { i = Integer.parseInt( prefs.getString( key, def_value ) ); }
-    catch( NumberFormatException e ) { i = Integer.parseInt(def_value); }
-    setPreference( prefs, key, i );
+    catch( NumberFormatException e ) { 
+      TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
+      i = Integer.parseInt(def_value);
+      setPreference( prefs, key, def_value );
+    }
     return i;
   }
 
@@ -1024,26 +1030,26 @@ class TDSetting
   //   editor.commit();
   // }
   
-  // static void setPreference( SharedPreferences sp, String name, String value )
+  static void setPreference( SharedPreferences sp, String name, String value )
+  {
+    Editor editor = sp.edit();
+    editor.putString( name, value );
+    editor.commit();
+  }
+
+  // static void setPreference( SharedPreferences sp, String name, int val )
   // {
   //   Editor editor = sp.edit();
-  //   editor.putString( name, value );
+  //   editor.putString( name, Integer.toString(val) );
   //   editor.commit();
   // }
 
-  static void setPreference( SharedPreferences sp, String name, int val )
-  {
-    Editor editor = sp.edit();
-    editor.putString( name, Integer.toString(val) );
-    editor.commit();
-  }
-
-  static void setPreference( SharedPreferences sp, String name, float val )
-  {
-    Editor editor = sp.edit();
-    editor.putString( name, Float.toString(val) );
-    editor.commit();
-  }
+  // static void setPreference( SharedPreferences sp, String name, float val )
+  // {
+  //   Editor editor = sp.edit();
+  //   editor.putString( name, Float.toString(val) );
+  //   editor.commit();
+  // }
 
   // ===================================================================
   // ENFORCE BOUNDS

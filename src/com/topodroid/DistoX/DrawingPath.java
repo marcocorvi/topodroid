@@ -268,7 +268,7 @@ public class DrawingPath extends RectF
   // N.B. canvas is guaranteed ! null
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
-    // if ( intersects( bbox ) ) 
+    if ( intersects( bbox ) ) 
     {
       mTransformedPath = new Path( mPath );
       mTransformedPath.transform( matrix );
