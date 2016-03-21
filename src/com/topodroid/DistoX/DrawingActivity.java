@@ -1077,9 +1077,9 @@ public class DrawingActivity extends ItemDrawer
     @Override
     protected synchronized void onPause() 
     { 
-      super.onPause();
       // Log.v("DistoX", "Drawing Activity onPause " + ((mDataDownloader!=null)?"with DataDownloader":"") );
       doPause();
+      super.onPause();
     }
 
     @Override
@@ -1129,7 +1129,13 @@ public class DrawingActivity extends ItemDrawer
     {
       switchZoomCtrl( 0 );
       mDrawingSurface.isDrawing = false;
-      if ( mPid >= 0 ) mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
+      if ( mPid >= 0 ) {
+        try {
+          mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
+        } catch ( IllegalStateException e ) {
+          TDLog.Error("cannot save plot state: " + e.getMessage() );
+        }
+      }
       doSaveTdr( ); // do not alert-dialog on mAllSymbols
     }
 
