@@ -621,7 +621,7 @@
   <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
   <string name="pref_export_plot_title">Exportación de dibujo por defecto</string>
   <string name="pref_export_plot_summary">Exportación formato de dibujo por defecto</string>
-  <string name="pref_therion_maps_title">Mapa Therion primero</string -->
+  <string name="pref_therion_maps_title">Mapa Therion primero</string>
   <string name="pref_therion_maps_summary">Mapas Therion antes de los datos de la topografía</string>
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
   <string name="pref_extra_buttons_summary">Habilitar botones opcionales ventana principal</string>
