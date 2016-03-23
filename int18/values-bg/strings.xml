@@ -79,7 +79,7 @@
     <string name="non_linear">нелинеен</string>
 
     <string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string>
-    <!-- TODO string name="device_address">Address %1$s</string -->
+    <string name="device_address">Адрес %1$s</string>
     <string name="device_busy">Устройството е заето</string>
     <string name="device_illegal_addr">Грешен адрес в паметта</string>
     <string name="device_info">Информация за устройството</string>
@@ -123,7 +123,7 @@
     <string name="import_none">Няма файлове за импортиране</string>
     <string name="import_failed">Файлът не е импортиран</string>
     <string name="file_not_found">Файлът не е намерен</string>
-    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
+    <string name="import_calib_ok">Успешно импортиране на калибрация</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
@@ -682,12 +682,12 @@
   <string name="pref_mkeyboard_summary">Използване на Topodroid клавиатурни подредби</string>
   <string name="pref_cosurvey_title">Ко-картиране</string>
   <string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string>
-  <string name="pref_export_shots_title">Формат на експортираните данни</string>
-  <string name="pref_export_shots_summary">Формат на експортираните данни по подразбиране</string>
-  <!-- TODO string name="pref_export_plot_title">Default sketch export</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_therion_maps_title">Therion maps first</string -->
-  <!-- TODO string name="pref_therion_maps_summary">Therion maps before survey data</string -->
+  <string name="pref_export_shots_title">Експортиране на измервания</string>
+  <string name="pref_export_shots_summary">Формат на експортираните измервания</string>
+  <string name="pref_export_plot_title">Експортиране на скици</string>
+  <string name="pref_export_plot_summary">Формат на експортираните скици</string>
+  <string name="pref_therion_maps_title">Therion дефиниции "maps"</string>
+  <string name="pref_therion_maps_summary">Дефиниции "maps" преди антената в Therion</string>
   <string name="pref_extra_buttons_title">Ниво на функциите</string>
   <string name="pref_extra_buttons_summary">Ниво на показваните менюта: основни, нормални, пълни…</string>
   <string name="pref_size_buttons_title">Размер бутони</string>
@@ -716,10 +716,10 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Брой опити за връзка при грешка</string -->
-  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
-  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
+  <string name="pref_wait_laser_title">Изчакване след лазер [ms]</string>
+  <string name="pref_wait_laser_summary">Изчакване след включване на лазера [ms]</string>
+  <string name="pref_wait_shot_title">Изчакване след измерване [ms]</string>
+  <string name="pref_wait_shot_summary">Изчакване след измерване [ms]</string>
   <string name="pref_conn_mode_title">Тип на връзката за данни</string>
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
@@ -902,8 +902,8 @@
   <string name="pref_recent_nr_summary">Брой показвани последни инструменти в прозореца</string>
   <string name="pref_area_border_title">Видима граница на площ</string> 
   <string name="pref_area_border_summary">Дали линията "граница" на площ да е видима</string>
-  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
-  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
+  <string name="pref_auto_section_pt_title">Точки "сечение"</string>
+  <string name="pref_auto_section_pt_summary">Добавяне на точки "сечение" към линиите</string>
   <string name="pref_cont_join_title">Свързване на линии при продължаване</string>
   <string name="pref_cont_join_summary">Опцията "продължаване" на линия свързва еднакви линии</string>
 
