@@ -25,7 +25,7 @@
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_SEGMENT"
        android:title="@string/pref_segment_title"
-       android:summary="@string/pref_segment_summary"
+       android:summary="@string/pref_segment_message"
        android:dialogTitle="@string/pref_segment_title"
        android:dialogMessage="@string/pref_segment_message"
        android:inputType="number"
@@ -34,7 +34,7 @@
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ARROW_LENGTH"
        android:title="@string/pref_arrow_length_title"
-       android:summary="@string/pref_arrow_length_summary"
+       android:summary="@string/pref_arrow_length_message"
        android:dialogTitle="@string/pref_arrow_length_title"
        android:dialogMessage="@string/pref_arrow_length_message"
        android:inputType="numberDecimal"

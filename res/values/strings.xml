@@ -749,11 +749,11 @@
   <string name="pref_text_size_summary">List items text size</string>
   <string name="pref_text_size_message">Size of text in lists</string>
   <string name="pref_closeness_title">Selection radius</string>
-  <string name="pref_closeness_summary">Sketch item selection radius</string>
+  <!-- UNUSED string name="pref_closeness_summary">Sketch item selection radius</string -->
   <string name="pref_closeness_message">Sketch item selection radius</string>
-  <string name="pref_vert_splay_title">Dashed splay clino thr.</string>
-  <string name="pref_vert_splay_summary">Dashed splay clino threshold</string>
-  <string name="pref_vert_splay_message">Dashed splay clino threshold</string>
+  <string name="pref_vert_splay_title">Splay dash clino threshold</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">Splay over this inclination are dashed</string -->
+  <string name="pref_vert_splay_message">Splay over this inclination are dashed</string>
   <string name="pref_survey_stations_title">Stations policy</string>
   <string name="pref_survey_stations_summary">Stations automatic naming policy</string>
   <string name="pref_accel_thr_title">Acceleration tolerance</string>
@@ -787,7 +787,7 @@
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
   <string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
-  <string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string -->
   <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
   <string name="pref_init_station_title">Initial station name</string>
   <string name="pref_init_station_summary">Default initial station name</string>
@@ -824,7 +824,7 @@
   <string name="pref_unscaled_points_title">Non-zoomed point icons</string>
   <string name="pref_unscaled_points_summary">Point icons are not zoomed</string>
   <string name="pref_segment_title">Line-point spacing</string>
-  <string name="pref_segment_summary">Minimum line-point distance</string>
+  <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
   <string name="pref_segment_message">Minimum distance between points on a line</string>
   <string name="pref_linestyle_title">Line style</string>
   <string name="pref_linestyle_summary">Line drawing style</string>
@@ -853,10 +853,10 @@
   <string name="pref_label_size_summary">Size of the labels</string>
   <string name="pref_label_size_message">Size of the labels</string>
   <string name="pref_arrow_length_title">Section line tick size</string>
-  <string name="pref_arrow_length_summary">Size of the section line tick</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Size of the section line tick</string -->
   <string name="pref_arrow_length_message">Size of the section line tick</string>
   <string name="pref_dot_radius_title">Green dots size</string>
-  <string name="pref_dot_radius_summary">Green dots size</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Green dots size</string -->
   <string name="pref_dot_radius_message">Size of the green dots</string>
   <string name="pref_line_thickness_title">Line width</string>
   <string name="pref_line_thickness_summary">Drawing line width</string>
@@ -900,7 +900,7 @@
   <string name="pref_auto_section_pt_title">Section points</string>
   <string name="pref_auto_section_pt_summary">Add section point to section lines</string>
   <string name="pref_cont_join_title">Join continuation</string>
-  <string name="pref_cont_join_summary">Line continuation joins lines</string>
+  <string name="pref_cont_join_summary">Line continuation merges lines</string>
 
   <string name="pref_sketchUsesSplays_title">Sketch splays</string>
   <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>

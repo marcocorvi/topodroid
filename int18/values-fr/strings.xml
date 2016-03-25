@@ -751,10 +751,10 @@
   <string name="pref_text_size_summary">Taille du texte des éléments de liste</string>
   <string name="pref_text_size_message">Taille du texte dans les listes</string>
   <string name="pref_closeness_title">Radius de sélection</string>
-  <string name="pref_closeness_summary">Portée de la zone de sélection</string>
+  <!-- UNUSED string name="pref_closeness_summary">Portée de la zone de sélection</string -->
   <string name="pref_closeness_message">Portée de la zone de sélection</string>
   <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
-  <!-- TODO string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
+  <!-- UNUSED string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
   <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
   <string name="pref_survey_stations_title">Stations du relevé</string>
   <string name="pref_survey_stations_summary">Stations automatiques</string>
@@ -789,7 +789,7 @@
   <string name="pref_vthr_summary">Seuil vertical LRUD/WENS</string>
   <string name="pref_vthr_message">Seuil inclinaison cheminement entre LRUD/WENS</string>
   <!-- TODO string name="pref_plan_vthr_title">Splay vertical threshold</string -->
-  <!-- TODO string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string -->
+  <!-- UNUSED string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string -->
   <!-- TODO string name="pref_plan_vthr_message">Vertical threshold for splays in plan</string -->
   <string name="pref_init_station_title">Nom par defaut de la premiere station</string>
   <string name="pref_init_station_summary">Nom par defaut de la premiere station</string>
@@ -826,7 +826,7 @@
   <string name="pref_unscaled_points_title">Zoom Icones Desactivé</string>
   <string name="pref_unscaled_points_summary">desactivation du zoom sur les icones</string>
   <string name="pref_segment_title">Espacement des points de ligne</string>
-  <string name="pref_segment_summary">Distance mini entre points d\'une ligne</string>
+  <!-- UNUSED string name="pref_segment_summary">Distance mini entre points d\'une ligne</string -->
   <string name="pref_segment_message">Distance mini entre les points d\'une ligne</string>
   <string name="pref_linestyle_title">Style de ligne</string>
   <string name="pref_linestyle_summary">Style de ligne</string>
@@ -855,10 +855,10 @@
   <string name="pref_label_size_summary">Taille des étiquettes</string>
   <string name="pref_label_size_message">Taille des étiquettes</string>
   <string name="pref_arrow_length_title">Ligne de section pointillé</string>
-  <string name="pref_arrow_length_summary">Epaisseur Ligne de section en pointillé</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Epaisseur Ligne de section en pointillé</string -->
   <string name="pref_arrow_length_message">Epaisseur Ligne de section en pointillé</string>
   <string name="pref_dot_radius_title">Points Verts Edition</string>
-  <string name="pref_dot_radius_summary">Taille des points verts</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Taille des points verts</string -->
   <string name="pref_dot_radius_message">Taille des points verts</string>
   <string name="pref_line_thickness_title">Epaisseur de ligne</string>
   <string name="pref_line_thickness_summary">Epaisseur de ligne</string>

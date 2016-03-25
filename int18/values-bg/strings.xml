@@ -754,10 +754,10 @@
   <string name="pref_text_size_summary">Размер на шрифта в текстове</string>
   <string name="pref_text_size_message">Размер на шрифта в текстове</string>
   <string name="pref_closeness_title">Радиус при избиране</string>
-  <string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string>
+  <!-- UNUSED string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string -->
   <string name="pref_closeness_message">Радиус за избиране на елемент от скицата</string>
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
-  <string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
   <string name="pref_survey_stations_title">Репери</string>
   <string name="pref_survey_stations_summary">Автоматични репери</string>
@@ -792,7 +792,7 @@
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
   <string name="pref_vthr_message">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
   <string name="pref_plan_vthr_title">Скриване на наклонени измервания</string>
-  <string name="pref_plan_vthr_summary">Граница за скриване на странични измервания в хор. план</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">Граница за скриване на странични измервания в хор. план</string -->
   <string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string>
   <string name="pref_init_station_title">Начален репер</string>
   <string name="pref_init_station_summary">Име на първия репер в картировката</string>
@@ -829,7 +829,7 @@
   <string name="pref_unscaled_points_title">Фиксиран размер на точките</string>
   <string name="pref_unscaled_points_summary">Точките не се променят при приближаване</string>
   <string name="pref_segment_title">Отстояния между точки на линия</string>
-  <string name="pref_segment_summary">Минимално разстояние м/у точките в "линия"</string>
+  <!-- UNUSED string name="pref_segment_summary">Минимално разстояние м/у точките в "линия"</string -->
   <string name="pref_segment_message">Минимално разстояние м/у точките в "линия"</string>
   <string name="pref_linestyle_title">Стил на линии</string>
   <string name="pref_linestyle_summary">Стил на линиите за рисуване</string>
@@ -858,10 +858,10 @@
   <string name="pref_label_size_summary">Размер на надписи в скиците</string>
   <string name="pref_label_size_message">Размер на надписи в скиците</string>
   <string name="pref_arrow_length_title">Размер на стрелка в сечение</string>
-  <string name="pref_arrow_length_summary">Размер на помощната стрелка за посока на сечение</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Размер на помощната стрелка за посока на сечение</string -->
   <string name="pref_arrow_length_message">Размер на помощната стрелка за посока на сечение</string>
   <string name="pref_dot_radius_title">Размер на зелена точка</string>
-  <string name="pref_dot_radius_summary">Размер на зелена точка</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Размер на зелена точка</string -->
   <string name="pref_dot_radius_message">Размер на зелена точка при избор на елементи в скицата</string>
   <string name="pref_line_thickness_title">Широчина на линия</string>
   <string name="pref_line_thickness_summary">Широчина на линията за рисуване</string>

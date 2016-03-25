@@ -758,10 +758,10 @@
   <string name="pref_text_size_summary">Dimensione testo liste</string>
   <string name="pref_text_size_message">Dimensione testo liste</string>
   <string name="pref_closeness_title">Raggio di selezione</string>
-  <string name="pref_closeness_summary">Raggio di selezione oggetti disegno</string>
+  <!-- UNUSED string name="pref_closeness_summary">Raggio di selezione oggetti disegno</string -->
   <string name="pref_closeness_message">Raggio di selezione oggetti disegno</string>
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
-  <string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
   <string name="pref_survey_stations_title">Capisaldi rilievo</string>
   <string name="pref_survey_stations_summary">Capisaldi rilievo automatici</string>
@@ -796,7 +796,7 @@
   <string name="pref_vthr_summary">Soglia inclinazione LRUD/WENS</string>
   <string name="pref_vthr_message">Soglia inclinazione battuta per LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Splay soglia verticale</string>
-  <string name="pref_plan_vthr_summary">soglia verticale per splay in pianta</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">soglia verticale per splay in pianta</string -->
   <string name="pref_plan_vthr_message">Soglia verticale per splay in pianta</string>
   <string name="pref_init_station_title">Caposaldo iniziale</string>
   <string name="pref_init_station_summary">Caposaldo iniziale di default</string>
@@ -833,7 +833,7 @@
   <string name="pref_unscaled_points_title">Punti icona senza zoom</string>
   <string name="pref_unscaled_points_summary">I punti icona non sono ingranditi</string>
   <string name="pref_segment_title">Spaziatura punti sulle linee</string>
-  <string name="pref_segment_summary">Minima spaziatura dei punti sulle linee</string>
+  <!-- UNUSED string name="pref_segment_summary">Minima spaziatura dei punti sulle linee</string -->
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
   <string name="pref_linestyle_title">Stile linee</string>
   <string name="pref_linestyle_summary">Stile linee</string>
@@ -862,10 +862,10 @@
   <string name="pref_label_size_summary">Dimensione delle scritte</string>
   <string name="pref_label_size_message">Dimensione delle scritte</string>
   <string name="pref_arrow_length_title">Direzione di sezione</string>
-  <string name="pref_arrow_length_summary">Lunghezza direzione di sezione</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Lunghezza direzione di sezione</string -->
   <string name="pref_arrow_length_message">Lunghezza direzione di sezione</string>
   <string name="pref_dot_radius_title">Raggio punti selezione</string>
-  <string name="pref_dot_radius_summary">Raggio punti selezione</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Raggio punti selezione</string -->
   <string name="pref_dot_radius_message">Raggio dei punti di selezione</string>
   <string name="pref_line_thickness_title">Spessore linee</string>
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>

@@ -686,10 +686,10 @@
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
   <string name="pref_closeness_title">Selección radio</string>
-  <string name="pref_closeness_summary">Selección dibujo de elementos radio</string>
+  <!-- UNUSED string name="pref_closeness_summary">Selección dibujo de elementos radio</string -->
   <string name="pref_closeness_message">dibujo selección radio</string>
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
-  <string name="pref_vert_splay_summary">Límite de trazos del borde</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
   <string name="pref_survey_stations_title">Sentido de las estaciones topográficas</string>
   <string name="pref_survey_stations_summary">Estaciones topográficas automáticas</string>
@@ -723,7 +723,7 @@
   <string name="pref_vthr_summary">Cáculo del límite de la toma vertical</string>
   <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Límite visual vertical</string>
-  <string name="pref_plan_vthr_summary">Límite vertical de la visual en planta</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">Límite vertical de la visual en planta</string -->
   <string name="pref_plan_vthr_message">límite vertical de la visual en planta</string>
   <string name="pref_init_station_title">Estación de inicio</string>
   <string name="pref_init_station_summary">Estación inicio por defecto</string>
@@ -760,7 +760,7 @@
   <string name="pref_unscaled_points_title">Símbolos de punto sin zoom</string>
   <string name="pref_unscaled_points_summary">Símbolos de punto sin aumentar</string>
   <string name="pref_segment_title">Precisión de la línea</string>
-  <string name="pref_segment_summary">Mínimo distancia línea-punto</string>
+  <!-- UNUSED string name="pref_segment_summary">Mínimo distancia línea-punto</string -->
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
   <string name="pref_linestyle_title">Nº de puntos en línea</string>
   <string name="pref_linestyle_summary">Número de puntos en la línea dibujada</string>
@@ -789,10 +789,10 @@
   <string name="pref_label_size_summary">Tamaño del texto</string>
   <string name="pref_label_size_message">Tamaño del texto</string>
   <string name="pref_arrow_length_title">Corte seccional</string>
-  <string name="pref_arrow_length_summary">tamaño de la línea del corte de sección</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">tamaño de la línea del corte de sección</string -->
   <string name="pref_arrow_length_message">tamaño de la línea del corte de sección</string>
   <string name="pref_dot_radius_title">Puntos del radio</string>
-  <string name="pref_dot_radius_summary">Tamaño de los puntos verdes</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Tamaño de los puntos verdes</string -->
   <string name="pref_dot_radius_message">Tamaño de los puntos verdes</string>
   <string name="pref_line_thickness_title">Grosor de la línea</string>
   <string name="pref_line_thickness_summary">Grosor de la línea</string>

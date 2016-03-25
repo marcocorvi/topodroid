@@ -770,10 +770,10 @@
   <string name="pref_text_size_summary">Liste der Text-Elementengröße</string>
   <string name="pref_text_size_message">Textgröße in Listen</string>
   <string name="pref_closeness_title">Auswahl Radius</string>
-  <string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string>
+  <!-- UNUSED string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string -->
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
-  <string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
   <string name="pref_survey_stations_title">Strategie Vermessung</string>
   <string name="pref_survey_stations_summary">Automatische Vermessungs-Messpunkte</string>
@@ -807,7 +807,7 @@
   <string name="pref_vthr_summary">Winkelgrenzwert für LRUD/WENS</string>
   <string name="pref_vthr_message">Winkelgrenzwert für LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
-  <string name="pref_plan_vthr_summary">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string -->
   <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
   <string name="pref_init_station_title">Name Startmesspunkt</string>
   <string name="pref_init_station_summary">Standard Startmesspunkt</string>
@@ -843,7 +843,7 @@
   <string name="pref_unscaled_points_title">Punktsymbole nicht zoomen</string>
   <string name="pref_unscaled_points_summary">Punktsymbole sind nicht gezoomt</string>
   <string name="pref_segment_title">Punkteabstand</string>
-  <string name="pref_segment_summary">Minimaler Abstand zwischen Punkten auf einer Linie</string>
+  <!-- UNUSED string name="pref_segment_summary">Minimaler Abstand zwischen Punkten auf einer Linie</string -->
   <string name="pref_segment_message">Minimaler Abstand zwischen Punkten auf einer Linie</string>
   <string name="pref_linestyle_title">Linientyp</string>
   <string name="pref_linestyle_summary">Linientyp</string>
@@ -872,10 +872,10 @@
   <string name="pref_label_size_summary">Beschriftung Schriftgröße</string>
   <string name="pref_label_size_message">Beschriftung Schriftgröße</string>
   <string name="pref_arrow_length_title">Querschnittsmarkierung Länge</string>
-  <string name="pref_arrow_length_summary">Länge des Pfeiles einer Querschnitts-Linie</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Länge des Pfeiles einer Querschnitts-Linie</string -->
   <string name="pref_arrow_length_message">Länge des Pfeiles einer Querschnitts-Linie</string>
   <string name="pref_dot_radius_title">Größe der Linienpunkte</string>
-  <string name="pref_dot_radius_summary">Größe der Punkte während dem bearbeiten einer Linie</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Größe der Punkte während dem bearbeiten einer Linie</string -->
   <string name="pref_dot_radius_message">Größe der Punkte während dem bearbeiten einer Linie</string>
   <string name="pref_line_thickness_title">Liniendicke</string>
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>

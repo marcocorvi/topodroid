@@ -26,7 +26,7 @@
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DOT_RADIUS"
        android:title="@string/pref_dot_radius_title"
-       android:summary="@string/pref_dot_radius_summary"
+       android:summary="@string/pref_dot_radius_message"
        android:dialogTitle="@string/pref_dot_radius_title"
        android:dialogMessage="@string/pref_dot_radius_message"
        android:inputType="numberDecimal"
@@ -35,7 +35,7 @@
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_CLOSENESS"
        android:title="@string/pref_closeness_title"
-       android:summary="@string/pref_closeness_summary"
+       android:summary="@string/pref_closeness_message"
        android:dialogTitle="@string/pref_closeness_title"
        android:dialogMessage="@string/pref_closeness_message"
        android:inputType="number"
@@ -44,7 +44,7 @@
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SPLAY_VERT_THRS"
        android:title="@string/pref_plan_vthr_title"
-       android:summary="@string/pref_plan_vthr_summary"
+       android:summary="@string/pref_plan_vthr_message"
        android:dialogTitle="@string/pref_plan_vthr_title"
        android:dialogMessage="@string/pref_plan_vthr_message"
        android:inputType="number"
@@ -53,7 +53,7 @@
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_VERT_SPLAY"
        android:title="@string/pref_vert_splay_title"
-       android:summary="@string/pref_vert_splay_summary"
+       android:summary="@string/pref_vert_splay_message"
        android:dialogTitle="@string/pref_vert_splay_title"
        android:dialogMessage="@string/pref_vert_splay_message"
        android:inputType="numberDecimal"

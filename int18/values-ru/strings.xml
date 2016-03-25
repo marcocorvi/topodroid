@@ -748,10 +748,10 @@
   <string name="pref_text_size_summary">Размер текста в списках</string>
   <string name="pref_text_size_message">Размер текста в списках</string>
   <string name="pref_closeness_title">Радиус выбора</string>
-  <string name="pref_closeness_summary">Радиус выбора элемента абриса</string>
+  <!-- UNUSED string name="pref_closeness_summary">Радиус выбора элемента абриса</string -->
   <string name="pref_closeness_message">Радиус выбора элемента абриса</string>
   <string name="pref_vert_splay_title">Угловой прог для прерывистой линии луча</string>
-  <string name="pref_vert_splay_summary">Угловой прог для прерывистой линии луча</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">Угловой прог для прерывистой линии луча</string -->
   <string name="pref_vert_splay_message">Угловой прог для прерывистой линии луча</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->
@@ -787,7 +787,7 @@
   <string name="pref_vthr_summary">Верт. порог ЛПВН/ЗВСЮ</string>
   <string name="pref_vthr_message">Допустимый наклон отрезка между ЛПВН/ЗВСЮ</string>
   <string name="pref_plan_vthr_title">Вертикальное ограничение бок. замера</string>
-  <string name="pref_plan_vthr_summary">Вертикальное ограничение бок. замера в плане</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">Вертикальное ограничение бок. замера в плане</string -->
   <string name="pref_plan_vthr_message">Вертикальное ограничение бок. замеров в плане</string>
   <string name="pref_init_station_title">Начальный пикет</string>
   <string name="pref_init_station_summary">Начальный пикет по умолчаниию</string>
@@ -824,7 +824,7 @@
   <string name="pref_unscaled_points_title">Не-увеличеваемые значки точек</string>
   <string name="pref_unscaled_points_summary">Значки точек не увеличеваемы</string>
   <string name="pref_segment_title">Шаг точек на линии</string>
-  <string name="pref_segment_summary">Шаг точек на линии</string>
+  <!-- UNUSED string name="pref_segment_summary">Шаг точек на линии</string -->
   <string name="pref_segment_message">Минимальное расстояние между точками в линии</string>
   <string name="pref_linestyle_title">Стиль рисования линий</string>
   <string name="pref_linestyle_summary">Способ отрисовки линий</string>
@@ -853,10 +853,10 @@
   <string name="pref_label_size_summary">Размер значков</string>
   <string name="pref_label_size_message">Размер значков</string>
   <string name="pref_arrow_length_title">Бергштрихи сечений</string>
-  <string name="pref_arrow_length_summary">Размер бергштриха линии сечений</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Размер бергштриха линии сечений</string -->
   <string name="pref_arrow_length_message">Размер бергштриха линии сечений</string>
   <string name="pref_dot_radius_title">Радиус точек</string>
-  <string name="pref_dot_radius_summary">Размер зеленых точек</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Размер зеленых точек</string -->
   <string name="pref_dot_radius_message">Размер зеленых точек</string>
   <string name="pref_line_thickness_title">Толщина линии</string>
   <string name="pref_line_thickness_summary">Толщина линий</string>

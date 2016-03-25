@@ -749,10 +749,10 @@
   <string name="pref_text_size_summary">列表项目字体大小</string>
   <string name="pref_text_size_message">列表中字体大小</string>
   <string name="pref_closeness_title">选择半径</string>
-  <string name="pref_closeness_summary">草图项目选择半径</string>
+  <!-- UNUSED string name="pref_closeness_summary">草图项目选择半径</string -->
   <string name="pref_closeness_message">草图项目选择半径</string>
   <string name="pref_vert_splay_title">侧线虚线倾斜极限</string>
-  <string name="pref_vert_splay_summary">侧线虚线倾斜极限</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">侧线虚线倾斜极限</string -->
   <string name="pref_vert_splay_message">侧线虚线倾斜极限</string>
   <string name="pref_survey_stations_title">测量点方案</string>
   <string name="pref_survey_stations_summary">测量点自动命名方案</string>
@@ -787,7 +787,7 @@
   <string name="pref_vthr_summary">LRSD/WENS垂直的极限值</string>
   <string name="pref_vthr_message">主线在LRSD/WENS倾斜的临界值</string>
   <string name="pref_plan_vthr_title">平面视图侧线的极限值</string>
-  <string name="pref_plan_vthr_summary">平面视图中的侧线垂直极限值</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">平面视图中的侧线垂直极限值</string -->
   <string name="pref_plan_vthr_message">在平面视图中隐藏高斜度的侧线</string>
   <string name="pref_init_station_title">起始测量点的名称</string>
   <string name="pref_init_station_summary">默认起始测量点名称</string>
@@ -824,7 +824,7 @@
   <string name="pref_unscaled_points_title">非缩放点图标</string>
   <string name="pref_unscaled_points_summary">点图标不能缩放</string>
   <string name="pref_segment_title">线点间隔</string>
-  <string name="pref_segment_summary">线点间隔最小值</string>
+  <!-- UNUSED string name="pref_segment_summary">线点间隔最小值</string -->
   <string name="pref_segment_message">线上的点之间的最小距离</string>
   <string name="pref_linestyle_title">线类型</string>
   <string name="pref_linestyle_summary">线绘制类型</string>
@@ -853,10 +853,10 @@
   <string name="pref_label_size_summary">标签大小</string>
   <string name="pref_label_size_message">标签大小</string>
   <string name="pref_arrow_length_title">截面线最小单位</string>
-  <string name="pref_arrow_length_summary">截面线的大小</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">截面线的大小</string -->
   <string name="pref_arrow_length_message">截面线的大小</string>
   <string name="pref_dot_radius_title">绿色点大小</string>
-  <string name="pref_dot_radius_summary">绿色点大小</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">绿色点大小</string -->
   <string name="pref_dot_radius_message">绿色点大小</string>
   <string name="pref_line_thickness_title">线宽</string>
   <string name="pref_line_thickness_summary">绘图线宽</string>
