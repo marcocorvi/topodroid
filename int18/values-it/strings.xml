@@ -78,7 +78,7 @@
     <string name="non_linear">non-lineare</string>
    
     <string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string>
-    <!-- TODO string name="device_address">Address %1$s</string -->
+    <string name="device_address">Indirizzo %1$s</string>
     <string name="device_busy">Dispositivo occupato</string>
     <string name="device_illegal_addr">Indirizzo di memoria illegale</string>
     <string name="device_info">Dati dispositivo</string>
@@ -574,7 +574,7 @@
     <string name="help_next">Prossimo oggetto nella selezione</string>
     <string name="help_recover">Recupera disegno dal backup</string>
    
-    <string name="help_line_point">Azioni per pulti di linee: unire, dividere, tagliare, rimuovere</string>
+    <string name="help_line_point">Azioni per punti di linee: unire, dividere, tagliare, rimuovere</string>
 <!--
     <string name="help_to_point">Move selected point to join with the nearest point</string>
     <string name="help_split_point">Split the point into two [line/area]</string>
@@ -582,7 +582,7 @@
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
     <string name="help_manual_calibration">Strumenti di calibrazione manuale</string>
-    <string name="help_note_plot">Edita le propertà dell\'oggetto</string>
+    <string name="help_note_plot">Edita le proprietà dell\'oggetto</string>
     <!-- UNUSED string name="help_save">Salva le modifiche al rilievo/calibr.</string -->
     <string name="help_save_calib">Salva i cambiamenti alla calibrazione</string>
     <string name="help_export_survey">Esporta rilievo</string>
@@ -720,10 +720,10 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Numero tentativi di connessione</string -->
-  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
-  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
+  <string name="pref_wait_laser_title">Attesa dopo laser [ms]</string>
+  <string name="pref_wait_laser_summary">Tempo di attesa dopo accensione laser [ms]</string>
+  <string name="pref_wait_shot_title">Attesa dopo tiro [ms]</string>
+  <string name="pref_wait_shot_summary">Tempo di attesa dopo la misurazione [ms]</string>
   <string name="pref_conn_mode_title">Tipo connessione</string>
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>
