@@ -92,6 +92,30 @@ public class TopoDroidUtil
     return sdf.format( new Date() );
   }
 
+  static float getDatePlg( )
+  {
+    Calendar c = new GregorianCalendar();
+    int y = c.get( Calendar.YEAR );
+    int m = 1 + c.get( Calendar.MONTH );
+    int d = c.get( Calendar.DAY_OF_MONTH );
+    return getDatePlg( y, m, d );
+  }
+
+  static int mDaysByMonth[] = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 284, 294, 324 };
+  // m: 1 .. 12
+  static float getDatePlg( int y, int m, int d )
+  {
+    int days = 100 * 365 + 24;
+    while ( y > 2000 ) {
+      days += 365;
+      if ( (y % 4) == 0 ) ++ days;
+      -- y;
+    }
+    days += mDaysByMonth[ m ] + d;
+    return days;
+  }
+
+
   static int dateParseYear( String date )
   {
     try {

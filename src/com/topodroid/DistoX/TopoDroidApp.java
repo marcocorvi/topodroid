@@ -1349,6 +1349,13 @@ public class TopoDroidApp extends Application
     return TopoDroidExporter.exportSurveyAsTh( mSID, mData, info, filename );
   }
 
+  public String exportSurveyAsPlg()
+  {
+    SurveyInfo info = mData.selectSurveyInfo( mSID );
+    String filename = TDPath.getSurveyCaveFile( mySurvey );
+    return TopoDroidExporter.exportSurveyAsPlg( mSID, mData, info, filename );
+  }
+
   public String exportSurveyAsSvx()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );

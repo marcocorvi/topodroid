@@ -28,25 +28,29 @@ class TDConst
   static final int DISTOX_EXPORT_SRV = 9;
   static final int DISTOX_EXPORT_KML = 10;
   static final int DISTOX_EXPORT_PLT = 11;
-  // static final int DISTOX_EXPORT_MAX = 12;   // placeholder 
 
   static final int DISTOX_EXPORT_PNG = 12;
   static final int DISTOX_EXPORT_SVG = 13;
   static final int DISTOX_EXPORT_TH2 = 14;
   static final int DISTOX_EXPORT_TH3 = 15;
 
+  static final int DISTOX_EXPORT_PLG = 16; // Polygon
+
   static final int DISTOX_EXPORT_ZIP = 20;
 
   static final String[] mSurveyExportTypes = { "ZIP", // 0
                             "Compass", "cSurvey", "PocketTopo", "Survex", "Therion", "VisualTopo", "Walls", // 1-6
-                            "CSV", "DXF", "KML", "OziExplorer" }; // 7-10
+                            "CSV", "DXF", "KML", "OziExplorer",   // 7-10
+                            "Polygon" };
   static final int[] mSurveyExportIndex = { 20, 
                             DISTOX_EXPORT_DAT, DISTOX_EXPORT_CSX, DISTOX_EXPORT_TOP, DISTOX_EXPORT_SVX, DISTOX_EXPORT_TH,
                             DISTOX_EXPORT_TRO, DISTOX_EXPORT_SRV,
-                            DISTOX_EXPORT_CSV, DISTOX_EXPORT_DXF, DISTOX_EXPORT_KML, DISTOX_EXPORT_PLT };
+                            DISTOX_EXPORT_CSV, DISTOX_EXPORT_DXF, DISTOX_EXPORT_KML, DISTOX_EXPORT_PLT,
+                            DISTOX_EXPORT_PLG };
 
   static final String[] mPlotExportTypes = { "Therion", "cSurvey", "DXF", "SVG", "PNG" };
-  static final int[] mPlotExportIndex = { DISTOX_EXPORT_TH2, DISTOX_EXPORT_CSX, DISTOX_EXPORT_DXF, DISTOX_EXPORT_SVG, DISTOX_EXPORT_PNG };
+  static final int[] mPlotExportIndex = {
+    DISTOX_EXPORT_TH2, DISTOX_EXPORT_CSX, DISTOX_EXPORT_DXF, DISTOX_EXPORT_SVG, DISTOX_EXPORT_PNG };
 
   static final String[] mCalibExportTypes = { "CSV" };
   static final int[] mCalibExportIndex = { DISTOX_EXPORT_CSV };

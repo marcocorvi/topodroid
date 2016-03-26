@@ -33,6 +33,7 @@ public class TDPath
 
   final static String CSV = ".csv";
   final static String CSX = ".csx";
+  final static String CAVE = ".cave";
   final static String DAT = ".dat";
   final static String DXF = ".dxf";
   final static String KML = ".kml";
@@ -72,6 +73,7 @@ public class TDPath
   static String APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
   static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
 
+  private static String PATH_CAVE;   //  = PATH_BASE + "cave/";  // Polygon
   private static String PATH_CSV ;   //  = PATH_BASE + "csv/";   // CSV text
   private static String PATH_CSX ;   //  = PATH_BASE + "csx/";   // cSurvey
   private static String PATH_DAT ;   //  = PATH_BASE + "dat/";   // Compass
@@ -134,6 +136,9 @@ public class TDPath
 
     PATH_DAT = PATH_BASE + "dat/";
     // FIXME checkDirs( PATH_DAT );
+
+    PATH_CAVE = PATH_BASE + "cave/";
+    // FIXME checkDirs( PATH_CAVE );
 
     PATH_SRV = PATH_BASE + "srv/";
     // FIXME checkDirs( PATH_SRV );
@@ -281,6 +286,7 @@ public class TDPath
   static String getTh3File( String name )    { return PATH_TH3 + name; }
 
   static String getThFile( String name )     { return PATH_TH + name; }
+  static String getCaveFile( String name )   { return PATH_CAVE + name; }
   static String getDatFile( String name )    { return PATH_DAT + name; }
   static String getDxfFile( String name )    { return PATH_DXF + name; }
   static String getKmlFile( String name )    { return PATH_KML + name; }
@@ -336,6 +342,7 @@ public class TDPath
   static String getSurveyCsvFile( String survey ) { return getFile( PATH_CSV, survey, CSV ); }
   static String getSurveyCsxFile( String survey ) { return getFile( PATH_CSX, survey, CSX ); }
   static String getSurveyCsxFile( String survey, String name ) { return getFile( PATH_CSX, survey + "-" + name, CSX ); }
+  static String getSurveyCaveFile( String survey ) { return getFile( PATH_CAVE, survey, CAVE ); }
   static String getSurveyDatFile( String survey ) { return getFile( PATH_DAT, survey, DAT ); }
   static String getSurveyDxfFile( String survey ) { return getFile( PATH_DXF, survey, DXF ); }
   static String getSurveyKmlFile( String survey ) { return getFile( PATH_KML, survey, KML ); }
@@ -448,6 +455,7 @@ public class TDPath
     t = new File( getThFile(  survey + TH  ) ); if ( t.exists() ) t.delete();
     t = new File( getCsvFile( survey + CSV ) ); if ( t.exists() ) t.delete();
     t = new File( getCsxFile( survey + CSX ) ); if ( t.exists() ) t.delete();
+    t = new File( getDatFile( survey + CAVE ) ); if ( t.exists() ) t.delete();
     t = new File( getDatFile( survey + DAT ) ); if ( t.exists() ) t.delete();
     t = new File( getDxfFile( survey + DXF ) ); if ( t.exists() ) t.delete();
     t = new File( getKmlFile( survey + KML ) ); if ( t.exists() ) t.delete();

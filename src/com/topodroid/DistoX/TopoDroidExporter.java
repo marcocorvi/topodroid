@@ -1876,6 +1876,160 @@ class TopoDroidExporter
     }
   }
 
+  // =======================================================================
+  // POLYGON EXPORT 
+
+  private static void printShotToPlg( PrintWriter pw, AverageLeg leg, LRUD lrud, boolean duplicate, String comment )
+  {
+    pw.format(Locale.US, "%.2f\t%.1f\t%.1f\t\t%.2f\t%.2f\t%.2f\t%.2f\t", 
+      leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+    leg.reset();
+    // if ( duplicate ) { pw.format(" #|L#"); }
+    if ( comment != null && comment.length() > 0 ) {
+      pw.format("%s", comment );
+    }
+    pw.format( "\n" );
+  }
+ 
+  static String exportSurveyAsPlg( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    // Log.v("DistoX", "export as polygon: " + filename );
+    float ul = 1; // TDSetting.mUnitLength;
+    float ua = 1; // TDSetting.mUnitAngle;
+    // String uls = ( ul < 1.01f )? "Meters"  : "Feet"; // FIXME
+    // String uas = ( ua < 1.01f )? "Degrees" : "Grads";
+
+    try {
+      TDPath.checkPath( filename );
+      FileWriter fw = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+
+      pw.format("POLYGON Cave Surveying Software\n");
+      pw.format("Polygon Program Version   = 2\n");
+      pw.format("Polygon Data File Version = 1\n");
+      pw.format("1998-2001 ===> Prepostffy Zsolt\n");
+      pw.format("-------------------------------\n\n");
+
+      pw.format("*** Project ***\n");
+      pw.format("Project name: %s\n", info.name );
+      pw.format("Project place: %s\n", info.name );
+      pw.format("Project code: 9999\n");
+      pw.format("Made by: TopoDroid %s\n", TopoDroidApp.VERSION );
+      pw.format(Locale.US, "Made date: %f\n", TopoDroidUtil.getDatePlg() );
+      pw.format("Last modi: 0\n");
+      pw.format("AutoCorrect: 1\n");
+      pw.format("AutoSize: 20.0\n\n");
+
+      String date = info.date;
+      int y = 0;
+      int m = 0;
+      int d = 0;
+      if ( date != null && date.length() == 10 ) {
+        try {
+          y = Integer.parseInt( date.substring(0,4) );
+          m = Integer.parseInt( date.substring(5,7) );
+          d = Integer.parseInt( date.substring(8,10) );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "exportSurveyAsSrv date parse error " + date );
+        }
+      }
+      pw.format("*** Surveys ***\n");
+      pw.format("Survey name: %s\n", info.name );
+      pw.format("Survey team:\n");
+      pw.format("%s\n\t\n\t\n\t\n\t\n", (info.team != null)? info.team : "" );
+      pw.format(Locale.US, "Survey date: %f\n", TopoDroidUtil.getDatePlg( y, m, d ) );
+      pw.format(Locale.US, "Declination: %.1f\n", info.declination );
+      pw.format("Instruments:\n\t0\n\t0\n\t0\n");
+
+      // if ( info.comment != null ) {
+      //   pw.format("; %s\n", info.comment );
+      // }
+
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      if ( fixed.size() > 0 ) {
+        for ( FixedInfo fix : fixed ) {
+          pw.format("Fix point: %s\n", fix.name );
+          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0\n", fix.lng, fix.lat, fix.alt );
+          break;
+        }
+      } else {
+        pw.format("Fix point: 0\n" );
+        pw.format(Locale.US, "0\t0\t0\t0\t0\t0\t0\n" );
+      }
+
+      pw.format("Survey data\n");
+      pw.format("From\tTo\tLength\tAzimuth\tVertical\tLabel\tLeft\tRight\tUp\tDown\tNote\n");
+
+      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+
+      AverageLeg leg = new AverageLeg();
+      DistoXDBlock ref_item = null;
+
+      int extra_cnt = 0;
+      boolean in_splay = false;
+      boolean duplicate = false;
+      LRUD lrud;
+
+      for ( DistoXDBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( from == null || from.length() == 0 ) {
+          if ( to == null || to.length() == 0 ) { // no station: not exported
+            if ( ref_item != null && 
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
+            }
+          } else { // only TO station
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              lrud = computeLRUD( ref_item, list, true );
+              pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+              printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
+              duplicate = false;
+              ref_item = null; 
+            }
+          }
+        } else { // with FROM station
+          if ( to == null || to.length() == 0 ) { // splay shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+              lrud = computeLRUD( ref_item, list, true );
+              pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+              printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
+              duplicate = false;
+              ref_item = null; 
+            }
+          } else {
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              lrud = computeLRUD( ref_item, list, true );
+              pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+              printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
+            }
+            ref_item = item;
+            duplicate = ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
+            leg.set( item.mLength, item.mBearing, item.mClino );
+          }
+        }
+      }
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        lrud = computeLRUD( ref_item, list, true );
+        pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
+        printShotToPlg( pw, leg, lrud, duplicate, ref_item.mComment );
+      }
+      pw.format( "\n" );
+      pw.format("End of survey data.\n\n");
+      pw.format("*** Surface ***\n");
+      pw.format("End of surface data.\n\n");
+      pw.format("EOF.\n");
+
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed Polygon export: " + e.getMessage() );
+      return null;
+    }
+  }
+
+
   // -----------------------------------------------------------------------
   // DXF EXPORT 
   // NOTE declination not taken into account in DXF export (only saved in comment)

@@ -461,6 +461,9 @@ public class SurveyActivity extends Activity
         case TDConst.DISTOX_EXPORT_TOP:
           filename = mApp.exportSurveyAsTop( null, null );
           break;
+        case TDConst.DISTOX_EXPORT_PLG:
+          filename = mApp.exportSurveyAsPlg();
+          break;
         case TDConst.DISTOX_EXPORT_SRV:
           filename = mApp.exportSurveyAsSrv();
           break;
