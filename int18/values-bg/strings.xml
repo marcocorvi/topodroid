@@ -389,6 +389,7 @@
     <string name="stat_station">Репери %1$d</string>
     <string name="stat_surface">Повърхн. отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_wens">З %1$.0f  И %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
+    <!-- TODO string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f"</string -->
     <string name="shot_title">Отсечка %1$s - %2$s"</string>
     <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
 

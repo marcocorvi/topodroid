@@ -37,11 +37,31 @@ class DistoXNum
   private int mDupNr;  // number of duplicate shots
   private int mSurfNr; // number of surface shots
 
+  private float mErr0; // angular error distribution
+  private float mErr1;
+  private float mErr2;
+
   void resetStats()
   {
     mLength = 0.0f;
     mDupNr  = 0;
     mSurfNr = 0;
+    mErr0 = mErr1 = mErr2 = 0;
+  }
+
+  void addToStats( TmpShot ts )
+  {
+    int size = ts.blocks.size();
+    for ( int i = 0; i < size; ++i ) {
+      DistoXDBlock blk1 = ts.blocks.get(i);
+      for ( int j = i+1; j < size; ++j ) {
+        DistoXDBlock blk2 = ts.blocks.get(j);
+        float e = blk1.relativeAngle( blk2 );
+        mErr0 += 1;
+        mErr1 += e;
+        mErr2 += e*e;
+      }
+    }
   }
 
   void addToStats( boolean d, boolean s, float l )
@@ -85,6 +105,9 @@ class DistoXNum
   public float surveyLength() { return mLength; }
   public float surveyTop()    { return -mZmin; } // top must be positive
   public float surveyBottom() { return -mZmax; } // bottom must be negative
+
+  public float angleErrorMean()   { return mErr1; } // radians
+  public float angleErrorStddev() { return mErr2; } // radians
 
   public boolean surveyAttached; //!< whether the survey is attached
 
@@ -432,7 +455,7 @@ class DistoXNum
   //         { // sf == null && st == null
   //           // secondary leg shot ?
   //           if ( lastLeg != null ) {
-  //             if ( block.relativeDistance( lastLeg.getFirstBlock() ) )  {
+  //             if ( block.isRelativeDistance( lastLeg.getFirstBlock() ) )  {
   //               lastLeg.addBlock( block );
   //             } else { // splay
   //               lastLeg = null;
@@ -678,7 +701,7 @@ class DistoXNum
         case DistoXDBlock.BLOCK_BLANK_LEG:
         case DistoXDBlock.BLOCK_BLANK:
           if (lastLeg != null ) {
-            if ( blk.relativeDistance( lastLeg.getFirstBlock() ) ) {
+            if ( blk.isRelativeDistance( lastLeg.getFirstBlock() ) ) {
               lastLeg.addBlock( blk );
             }
           }
@@ -691,6 +714,7 @@ class DistoXNum
 
     for ( int i = 0; i < tmpshots.size(); ++i ) {
       TmpShot ts0 = tmpshots.get( i );
+      addToStats( ts0 );
       DistoXDBlock blk0 = ts0.getFirstBlock();
       blk0.mMultiBad = false;
       if ( ts0.backshot != 0 ) continue;
@@ -753,6 +777,12 @@ class DistoXNum
         }
       }
     }
+
+    if ( mErr0 > 0 ) {
+      mErr1 /= mErr0;
+      mErr2 = (float)Math.sqrt( mErr2/mErr0 - mErr1*mErr1 );
+    }
+
     // Log.v( TDLog.TAG,
     //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     // for ( TmpShot ts : tmpshots ) ts.Dump();

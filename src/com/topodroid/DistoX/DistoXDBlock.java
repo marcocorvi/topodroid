@@ -191,9 +191,26 @@ public class DistoXDBlock
 
   public int color() { return colors[ mType ]; }
 
-  public boolean relativeDistance( DistoXDBlock b )
+  // compute relative angle in radians
+  public float relativeAngle( DistoXDBlock b )
   {
-    if ( b == null ) return false;
+    float cc, sc, cb, sb;
+    cc = TDMath.cosd( mClino );
+    sc = TDMath.sind( mClino );
+    cb = TDMath.cosd( mBearing ); 
+    sb = TDMath.sind( mBearing ); 
+    Vector v1 = new Vector( cc * sb, cc * cb, sc );
+    cc = TDMath.cosd( b.mClino );
+    sc = TDMath.sind( b.mClino );
+    cb = TDMath.cosd( b.mBearing ); 
+    sb = TDMath.sind( b.mBearing ); 
+    Vector v2 = new Vector( cc * sb, cc * cb, sc );
+    float dv = (v1.minus(v2)).Length();
+    return dv; // approximation: 2 * asin( dv/2 );
+  }
+
+  public float relativeDistance( DistoXDBlock b )
+  {
     float cc, sc, cb, sb, len;
     len = mLength;
     cc = TDMath.cosd( mClino );
@@ -207,16 +224,16 @@ public class DistoXDBlock
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
     Vector v2 = new Vector( len * cc * sb, len * cc * cb, len * sc );
-    float dist = (v1.minus(v2)).Length();
-    return ( dist/mLength + dist/b.mLength ) < TDSetting.mCloseDistance;
-    // if ( ret ) {
-    //   Log.v("DistoX", "dist " + dist + " " + mLength + " " + mBearing + " " + mClino + " " + v1.x + " " + v1.y + " " + v1.z);
-    //   Log.v("DistoX", "  " + b.mLength + " " + b.mBearing + " " + b.mClino + " " + v2.x + " " + v2.y + " " + v2.z);
-    //   Log.v("DistoX", "  " + dist/v1.Length() + " " + dist/v2.Length() );
-    // }
-    // return ret;
-      
+    return (v1.minus(v2)).Length();
   }
+
+  public boolean isRelativeDistance( DistoXDBlock b )
+  {
+    if ( b == null ) return false;
+    float dist = relativeDistance( b );
+    return ( dist/mLength + dist/b.mLength ) < TDSetting.mCloseDistance;
+  }
+
   
   private void formatFlag( PrintWriter pw )
   {

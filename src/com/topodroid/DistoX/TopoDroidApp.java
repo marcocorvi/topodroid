@@ -1205,7 +1205,7 @@ public class TopoDroidApp extends Application
           mData.updateShotName( blk.mId, mSID, blk.mFrom, "", true );  // SPLAY
           // Log.v( "DistoX", blk.mId + " FROM " + blk.mFrom + " PREV null" );
         } else {
-          if ( prev.relativeDistance( blk ) ) {
+          if ( prev.isRelativeDistance( blk ) ) {
             if ( nrLegShots == 0 ) {
               // checkCurrentStationName
               if ( mCurrentStationName != null ) {

@@ -55,6 +55,7 @@ public class DistoXStatDialog extends MyDialog
     private TextView mTextStation;
     private TextView mTextLoop;
     private TextView mTextComponent;
+    private TextView mTextAngleErr;
 
 
     // private Button mBtnCancel;
@@ -94,6 +95,8 @@ public class DistoXStatDialog extends MyDialog
         mTextLoop      = (TextView) findViewById(R.id.stat_loop);
         mTextComponent = (TextView) findViewById(R.id.stat_component);
 
+        mTextAngleErr  = (TextView) findViewById(R.id.text_stat_angle_error);
+
         mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
                           mStat.countLeg, mStat.lengthLeg * unit, unit_str ) );
         mTextDuplicate.setText( String.format( res.getString(R.string.stat_duplicate),
@@ -104,6 +107,9 @@ public class DistoXStatDialog extends MyDialog
         mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
         mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );
         mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
+
+        mTextAngleErr.setText( String.format( res.getString(R.string.stat_angle_error), 
+            mNum.angleErrorMean() * TDMath.RAD2GRAD, mNum.angleErrorStddev() * TDMath.RAD2GRAD ) );
 
    
         // mList.setOnItemClickListener( this );

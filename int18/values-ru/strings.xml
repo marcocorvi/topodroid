@@ -385,6 +385,7 @@
     <string name="stat_station">Пикеты %1$d</string>
     <string name="stat_surface">Поверхн. пикеты %1$d %2$.1f %3$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
+    <!-- TODO string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f"</string -->
     <string name="shot_title">ПИКЕТ %1$s - %2$s"</string>
     <string name="shot_data">Дл %1$.2f  Аз %2$.1f  Уг %3$.1f"</string>
 

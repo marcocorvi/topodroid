@@ -401,6 +401,7 @@
     <string name="stat_station">Messpunkte %1$d</string>
     <string name="stat_surface">Oberflächenmessungen %1$d %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
+    <!-- TODO string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f"</string -->
     <string name="shot_title">Messung %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  A %2$.1f  N %3$.1f"</string>
 

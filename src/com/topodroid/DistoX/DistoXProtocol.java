@@ -391,6 +391,7 @@ public class DistoXProtocol
     return true;
   }
 
+/* NOT USED
   public int readToReadA3() // number of data-packet to read
   {
     try {
@@ -419,6 +420,7 @@ public class DistoXProtocol
       return DISTOX_ERR_HEADTAIL_IO;
     }
   }
+*/
 
   boolean swapHotBit( int addr ) // only A3
   {

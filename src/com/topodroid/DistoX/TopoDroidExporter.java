@@ -3,11 +3,24 @@
  * @author marco corvi
  * @date jan 2014
  *
- * @grief numerical utilities
+ * @grief TopoDroid exports
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ * formats
+ *   cSurvey
+ *   Compass
+ *   Therion
+ *   VisualTopo
+ *   PocketTopo
+ *   Survex
+ *   Walls
+ *   Polygon
+ *   KML
+ *   Track file (OziExplorer)
+ *   DXF
+ *   CSV
  */
 package com.topodroid.DistoX;
 
@@ -161,7 +174,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -298,7 +311,7 @@ class TopoDroidExporter
         for ( FixedInfo fix : fixed ) {
           pw.format("     <trigpoint name=\"%s\" labelsymbol=\"0\" >\n", fix.name );
           pw.format(Locale.US, "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
-             fix.lat, fix.lng, fix.alt, fix.lat, fix.lng, fix.alt );
+             fix.lat, fix.lng, fix.asl, fix.lat, fix.lng, fix.asl );
           pw.format("     </trigpoint>\n");
         }
       }
@@ -332,7 +345,7 @@ class TopoDroidExporter
   static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
-  static private DistoXNum getGeolocalizedData( long sid, DataHelper data, float alt_factor )
+  static private DistoXNum getGeolocalizedData( long sid, DataHelper data, float asl_factor )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     if ( fixeds.size() == 0 ) return null;
@@ -351,7 +364,7 @@ class TopoDroidExporter
 
     float lat = (float)origin.lat;
     float lng = (float)origin.lng;
-    float alt = (float)origin.alt;
+    float asl = (float)origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
     float alat = TDMath.abs( lat );
 
     float s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
@@ -363,7 +376,7 @@ class TopoDroidExporter
     for ( NumStation st : num.getStations() ) {
       st.s = lat - st.s * s_radius;
       st.e = lng + st.e * e_radius;
-      st.v = (alt - st.v)*alt_factor;
+      st.v = (asl - st.v)*asl_factor;
     }
     return num;
   }
@@ -496,6 +509,9 @@ class TopoDroidExporter
     }
   }
 
+  // -------------------------------------------------------------------
+  // TRACK FILE OZIEXPLORER
+
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as trackfile: " + filename );
@@ -596,7 +612,7 @@ class TopoDroidExporter
         if ( to == null || to.length() == 0 ) {
           to = "";
           if ( ref_item != null 
-            && ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+            && ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
             from = ref_item.mFrom;
             to   = ref_item.mTo;
             extend = ref_item.mExtend;
@@ -753,7 +769,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1009,7 +1025,7 @@ class TopoDroidExporter
           if ( from == null || from.length() == 0 ) {
             if ( to == null || to.length() == 0 ) { // no station: not exported
               if ( ref_item != null &&
-                 ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+                 ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
                 leg.add( item.mLength, item.mBearing, item.mClino );
               }
             } else { // only TO station
@@ -1255,7 +1271,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1439,7 +1455,7 @@ class TopoDroidExporter
   //         } else {
   //           // not exported
   //           if ( ref_item != null &&
-  //              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+  //              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
   //             float bb = TopoDroidUtil.around( item.mBearing, b0[0] );
   //             l += item.mLength;
   //             b += bb;
@@ -1619,7 +1635,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1730,7 +1746,7 @@ class TopoDroidExporter
           } else {
             pw.format(Locale.US, " S%.6f", - fix.lat );
           }
-          pw.format(Locale.US, " %.0f", fix.alt );
+          pw.format(Locale.US, " %.0f", fix.asl );
           if ( fix.comment != null && fix.comment.length() > 0 ) pw.format(" /%s", fix.comment );
           pw.format("\n");
         }
@@ -1750,7 +1766,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null &&
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -1949,7 +1965,7 @@ class TopoDroidExporter
       if ( fixed.size() > 0 ) {
         for ( FixedInfo fix : fixed ) {
           pw.format("Fix point: %s\n", fix.name );
-          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0\n", fix.lng, fix.lat, fix.alt );
+          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0\n", fix.lng, fix.lat, fix.asl );
           break;
         }
       } else {
@@ -1976,7 +1992,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
           } else { // only TO station
@@ -2253,7 +2269,7 @@ class TopoDroidExporter
         if ( from == null || from.length() == 0 ) {
           if ( to == null || to.length() == 0 ) { // no station: not exported
             if ( ref_item != null && 
-               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.relativeDistance( ref_item ) ) ) {
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
               // Log.v( TAG, "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
               leg.add( item.mLength, item.mBearing, item.mClino );
             }
@@ -2310,6 +2326,9 @@ class TopoDroidExporter
       return null;
     }
   }
+
+  // --------------------------------------------------------------------
+  // CALIBRATION import/export
 
   static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String filename )
   {

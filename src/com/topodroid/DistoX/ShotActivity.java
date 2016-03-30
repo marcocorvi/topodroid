@@ -378,7 +378,7 @@ public class ShotActivity extends Activity
 
       // TDLog.Log( TDLog.LOG_SHOT, "item " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
 
-      if ( cur.mType == DistoXDBlock.BLOCK_SEC_LEG || cur.relativeDistance( prev ) ) {
+      if ( cur.mType == DistoXDBlock.BLOCK_SEC_LEG || cur.isRelativeDistance( prev ) ) {
         // Log.v( "DistoX", "item close " + cur.type() + " " + cur.mLength + " " + cur.mBearing + " " + cur.mClino );
         if ( cur.mType == DistoXDBlock.BLOCK_BLANK ) {   // FIXME 20140612
           cur.mType = DistoXDBlock.BLOCK_SEC_LEG;
@@ -1205,11 +1205,11 @@ public class ShotActivity extends Activity
     for ( DistoXDBlock b : list ) {
       if ( b.isTypeBlank() ) {
         // Log.v( TopoDroidApp.TAG, "BLANK " + b.mLength + " " + b.mBearing + " " + b.mClino );
-        if ( ret != null && ret.relativeDistance( b ) ) return ret;
+        if ( ret != null && ret.isRelativeDistance( b ) ) return ret;
         ret = b;
       } else if ( b.mType == DistoXDBlock.BLOCK_SEC_LEG ) {
         // Log.v( TopoDroidApp.TAG, "LEG " + b.mLength + " " + b.mBearing + " " + b.mClino );
-        if ( ret != null &&  ret.relativeDistance( b ) ) return ret;
+        if ( ret != null &&  ret.isRelativeDistance( b ) ) return ret;
       } else {
         // Log.v( TopoDroidApp.TAG, "OTHER " + b.mLength + " " + b.mBearing + " " + b.mClino );
         ret = null;
@@ -1242,7 +1242,7 @@ public class ShotActivity extends Activity
         return b;
       } else if (    DistoXDBlock.isTypeBlank( t )
                   && mNextPos+1 < mDataAdapter.size()
-                  && b.relativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
+                  && b.isRelativeDistance( mDataAdapter.get(mNextPos+1) ) ) {
         return b;
       }
       ++ mNextPos;
@@ -1298,7 +1298,7 @@ public class ShotActivity extends Activity
       // update same shots of the given block
       List< DistoXDBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
       for ( DistoXDBlock blk1 : blk_list ) {
-        if ( ! blk1.relativeDistance( blk ) ) break;
+        if ( ! blk1.isRelativeDistance( blk ) ) break;
         mApp.mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
       }
     }
@@ -1325,7 +1325,7 @@ public class ShotActivity extends Activity
           // // update same shots of the given block: SHOULD NOT HAPPEN
           // List< DistoXDBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
           // for ( DistoXDBlock blk1 : blk_list ) {
-          //   if ( ! blk1.relativeDistance( blk ) ) break;
+          //   if ( ! blk1.isRelativeDistance( blk ) ) break;
           //   mApp.mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
           // }
         }

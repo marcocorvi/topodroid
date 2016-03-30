@@ -17,6 +17,8 @@ import android.widget.Toast;
 import android.os.AsyncTask;
 import android.os.Handler;
 
+import android.util.Log;
+
 public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 {
   private TopoDroidApp mApp;
@@ -36,7 +38,11 @@ public class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   protected Integer doInBackground( String... statuses )
   {
     if ( ! lock() ) return null;
+    // long time = System.currentTimeMillis();
     int nRead = mApp.downloadDataBatch( mLister );
+    // time = System.currentTimeMillis() - time;
+    // Log.v("DistoX", "READ " + nRead + " data in " + time + " msec");
+
     // if ( nRead < 0 ) {
     //   Toast.makeText( mApp.getApplicationContext(), mApp.DistoXConnectionError[ -nRead ], Toast.LENGTH_SHORT ).show();
     // TDLog.Error( "doInBackground read " + nRead );

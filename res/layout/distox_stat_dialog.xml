@@ -79,11 +79,17 @@
         android:layout_height="wrap_content" 
         />
 
+    <TextView android:id="@+id/text_stat_angle_error"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="20sp" 
+        />
+
     <TextView android:id="@+id/text_stat_loops"
-        android:layout_marginTop="10sp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
         android:text="@string/loop_closure_errors"
+        android:layout_marginTop="10sp"
         />
     <ListView android:id="@+id/list"
         android:layout_width="fill_parent"

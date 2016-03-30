@@ -308,9 +308,9 @@ public class DistoXComm
           if ( mApp.distoType() == Device.DISTO_X310 ) {
             mApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
           }
-          try {
-            Thread.sleep( 1000 ); // FIXME SLOWDOWN
-          } catch ( InterruptedException e ) { }
+          // try {
+          //   Thread.sleep( 1000 ); // FIXME SLOWDOWN
+          // } catch ( InterruptedException e ) { }
         }
       }
       // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread run() exiting");

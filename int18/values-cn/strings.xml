@@ -383,6 +383,7 @@
     <string name="stat_station">测量点 %1$d</string>
     <string name="stat_surface">表面测量 %1$d %2$.1f %3$s</string>
     <string name="stat_wens">西 %1$.0f  东 %2$.0f  北 %3$.0f  南 %4$.0f [%5$s]"</string>
+    <!-- TODO string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f"</string -->
     <string name="shot_title">测射 %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 
