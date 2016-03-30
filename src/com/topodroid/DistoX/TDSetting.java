@@ -44,6 +44,7 @@ class TDSetting
     "DISTOX_COMM_RETRY",          // 12
     "DISTOX_WAIT_LASER",
     "DISTOX_WAIT_SHOT",
+    "DISTOX_WAIT_DATA",
     "DISTOX_Z6_WORKAROUND",       // 13
     "DISTOX_CONN_MODE",           // 14
     "DISTOX_AUTO_PAIR",           // 15
@@ -239,6 +240,7 @@ class TDSetting
 
   static int mWaitLaser = 1000;
   static int mWaitShot  = 4000;
+  static int mWaitData  =  500;
 
   static boolean mCheckAttached = false;    // whether to check is there are shots non-attached
 
@@ -541,6 +543,7 @@ class TDSetting
     mCommRetry      = tryInt( prefs, key[k++], "1" );        // DISTOX_COMM_RETRY
     mWaitLaser      = tryInt( prefs, key[k++], "1000" );     // DISTOX_WAIT_LASER
     mWaitShot       = tryInt( prefs, key[k++], "4000" );     // DISTOX_WAIT_SHOT
+    mWaitData       = tryInt( prefs, key[k++], "500" );      // DISTOX_WAIT_DATA
     mZ6Workaround   = prefs.getBoolean( key[k++], true  );   // DISTOX_Z6_WORKAROUND
     mConnectionMode = tryInt( prefs, key[k++], "0" );        // DISTOX_CONN_MODE choice: 0, 1
     mAutoPair       = prefs.getBoolean( key[ k++ ], true );  // DISTOX_AUTO_PAIR
@@ -741,6 +744,8 @@ class TDSetting
       mWaitLaser      = tryInt( prefs, k, "1000" );  // DISTOX_WAIT_LASER
     } else if ( k.equals( key[ nk++ ] ) ) {
       mWaitShot       = tryInt( prefs, k, "4000" );  // DISTOX_WAIT_SHOT
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mWaitData       = tryInt( prefs, k, "500" );   // DISTOX_WAIT_DATA
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_Z6_WORKAROUND
       mZ6Workaround = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1128,6 +1133,7 @@ class TDSetting
     if ( name.equals( "DISTOX_COMM_RETRY"    ) ) return parseIntValue( value, mCommRetry, 1, 5 );
     if ( name.equals( "DISTOX_WAIT_LASER"    ) ) return parseIntValue( value, mWaitLaser, 100,  5000 );
     if ( name.equals( "DISTOX_WAIT_SHOT"     ) ) return parseIntValue( value, mWaitShot,  100, 10000 );
+    if ( name.equals( "DISTOX_WAIT_DATA"     ) ) return parseIntValue( value, mWaitData,  0,   2000 );
     //C if ( name.equals( "DISTOX_CONN_MODE" )
 
     // if ( name.equals( "DISTOX_AUTO_STATIONS" )

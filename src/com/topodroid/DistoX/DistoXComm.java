@@ -254,6 +254,11 @@ public class DistoXComm
             bundle.putLong( ListerHandler.LISTER_DATA_BLOCK_ID, mLastShotId );
             msg.setData(bundle);
             mLister.sendMessage(msg);
+            if ( mApp.distoType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+              try {
+                Thread.sleep( TDSetting.mWaitData ); // slowdown
+              } catch ( InterruptedException e ) { }
+            }
           }
           // if ( mLister != null ) {
           //   DistoXDBlock blk = new DistoXDBlock( );
@@ -304,13 +309,14 @@ public class DistoXComm
           double dip  = mProto.mDip;
           double roll = mProto.mRoll;
           TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + acc + " " + mag + " " + dip + " " + roll );
-          // TODO X310
           if ( mApp.distoType() == Device.DISTO_X310 ) {
             mApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
+            if ( TDSetting.mWaitData > 10 ) {
+              try {
+                Thread.sleep( TDSetting.mWaitData ); // slowdown
+              } catch ( InterruptedException e ) { }
+            }
           }
-          // try {
-          //   Thread.sleep( 1000 ); // FIXME SLOWDOWN
-          // } catch ( InterruptedException e ) { }
         }
       }
       // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread run() exiting");

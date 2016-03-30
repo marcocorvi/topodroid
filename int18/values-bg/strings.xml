@@ -721,6 +721,8 @@
   <string name="pref_wait_laser_summary">Изчакване след включване на лазера [ms]</string>
   <string name="pref_wait_shot_title">Изчакване след измерване [ms]</string>
   <string name="pref_wait_shot_summary">Изчакване след измерване [ms]</string>
+  <!-- TODO string name="pref_wait_data_title">Data pause [ms]</string -->
+  <!-- TODO string name="pref_wait_data_summary">Pause after a data download [ms]</string -->
   <string name="pref_conn_mode_title">Тип на връзката за данни</string>
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
