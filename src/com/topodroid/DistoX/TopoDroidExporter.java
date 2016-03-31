@@ -713,6 +713,10 @@ class TopoDroidExporter
         pw.format("    cs long-lat\n");
         for ( FixedInfo fix : fixed ) {
           pw.format("    # fix %s\n", fix.toExportString() );
+          if ( fix.hasCSCoords() ) {
+            pw.format("    # cs %s\n", fix.csName() );
+            pw.format("    # fix %s\n", fix.toExportCSString() );
+          }
         }
       }
       pw.format("    date %s \n", info.date );

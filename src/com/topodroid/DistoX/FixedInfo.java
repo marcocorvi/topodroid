@@ -90,6 +90,14 @@ class FixedInfo extends MagLatLong
     return String.format(Locale.US, "%s %.6f %.6f %.0f", name, lng, lat, asl );
   }
 
+  public String toExportCSString()
+  {
+    return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_alt );
+  }
+
+  public String csName() { return cs; }
+
+
   public String toString()
   {
     return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl) + " [wgs " + (int)(alt) + "]";
