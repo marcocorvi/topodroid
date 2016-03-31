@@ -25,6 +25,10 @@ class FixedInfo extends MagLatLong
   double alt;      // wgs84 altitude [m]
   double asl;      // geoid altitude [m] 
   String comment;
+  String cs;
+  double cs_lng;
+  double cs_lat;
+  double cs_alt;
 
   public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt )
   {
@@ -35,7 +39,39 @@ class FixedInfo extends MagLatLong
     alt = h_ellip;
     asl = h_geoid;
     comment = cmt;
+    cs = null;
+    cs_lng = 0;
+    cs_lat = 0;
+    cs_alt = 0;
   }
+
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt,
+                    String name_cs, double lng_cs, double lat_cs, double alt_cs )
+  {
+    id = _id;
+    name = n;
+    lat = latitude;
+    lng = longitude;
+    alt = h_ellip;
+    asl = h_geoid;
+    comment = cmt;
+    cs      = name_cs;
+    cs_lng  = lng_cs;
+    cs_lat  = lat_cs;
+    cs_alt  = alt_cs;
+  }
+
+  void setCSCoords( String name_cs, double lng_cs, double lat_cs, double alt_cs )
+  {
+    cs = name_cs;
+    if ( cs != null && cs.length() > 0 ) {
+      cs_lng = lng_cs;
+      cs_lat = lat_cs;
+      cs_alt = alt_cs;
+    }
+  }
+
+  boolean hasCSCoords() { return ( cs != null && cs.length() > 0 ); }
 
   // public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid )
   // {

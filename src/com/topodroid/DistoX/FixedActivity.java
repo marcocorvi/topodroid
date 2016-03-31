@@ -239,7 +239,7 @@ public class FixedActivity extends Activity
   private static int CRS_CONVERSION_REQUEST = 2; // not final ?
   private FixedDialog mFixedDialog = null;
 
-  void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
+  void tryProj4( FixedDialog dialog, String cs_to, String cs_to_spec, FixedInfo fxd )
   {
     if ( cs_to == null ) return;
     try {
@@ -248,6 +248,7 @@ public class FixedActivity extends Activity
       intent.putExtra( "version", "1.1" );      // Proj4 version
       intent.putExtra( "cs_from", "Long-Lat" ); // NOTE MUST USE SAME NAME AS Proj4
       intent.putExtra( "cs_to", cs_to ); 
+      intent.putExtra( "cs_to_spec", cs_to_spec ); 
       intent.putExtra( "longitude", fxd.lng );
       intent.putExtra( "latitude",  fxd.lat );
       intent.putExtra( "altitude",  fxd.alt );
@@ -269,13 +270,18 @@ public class FixedActivity extends Activity
         if ( mFixedDialog != null ) {
           Bundle bundle = intent.getExtras();
           String cs = bundle.getString( "cs_to" );
-          String title = String.format(Locale.US, "%.2f %.2f %.2f",
-             bundle.getDouble( "longitude"),
-             bundle.getDouble( "latitude"),
-             bundle.getDouble( "altitude") );
-          TDLog.Log( TDLog.LOG_LOC, "CONV. RESULT " + title );
-          mFixedDialog.setTitle( title );
-          mFixedDialog.setCSto( cs );
+          // String title = String.format(Locale.US, "%.2f %.2f %.2f",
+          //    bundle.getDouble( "longitude"),
+          //    bundle.getDouble( "latitude"),
+          //    bundle.getDouble( "altitude") );
+          // TDLog.Log( TDLog.LOG_LOC, "CONV. RESULT " + title );
+          // mFixedDialog.setTitle( title );
+          // mFixedDialog.setCSto( cs );
+          double lng = bundle.getDouble( "longitude");
+          double lat = bundle.getDouble( "latitude");
+          double alt = bundle.getDouble( "altitude");
+          mApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), mApp.mSID, cs, lng, lat, alt );
+          mFixedDialog.setConvertedCoords( cs, lng, lat, alt );
           mFixedDialog = null;
         }
       }

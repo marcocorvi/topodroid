@@ -490,13 +490,14 @@ public class ShotActivity extends Activity
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // SENSORS
       startActivity( new Intent( this, SensorListActivity.class ) );
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // 3D
-      mApp.exportSurveyAsTh(); // make sure to have survey exported as therion
-      try {
-        Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
-        startActivity( intent );
-      } catch ( ActivityNotFoundException e ) {
-        Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
+      if ( mApp.exportSurveyAsTh() != null ) { // make sure to have survey exported as therion
+        try {
+          Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+          intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
+          startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
+        }
       }
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
       if ( mApp.mBTAdapter.isEnabled() ) {
@@ -508,7 +509,7 @@ public class ShotActivity extends Activity
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // int nn = mNrButton1; //  + ( TopoDroidApp.mLevelOverNormal ?  mNrButton2 : 0 );
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 8 ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
   }
 

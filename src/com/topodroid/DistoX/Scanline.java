@@ -58,7 +58,7 @@ class Scanline
     int next_pos = nextQuote( );
     String ret = (pos == next_pos )? "" : val.substring(pos, next_pos );
     // TDLog.Log( TDLog.LOG_DB, "stringValue <" + ret + ">" );
-    pos = next_pos + 1;
+    pos = (next_pos < len )? next_pos + 1 : len;
     skipCommaAndSpaces( );
     return ret;
   }

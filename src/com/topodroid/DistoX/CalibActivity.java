@@ -452,7 +452,7 @@ public class CalibActivity extends Activity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_CALIB );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 4 ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
   }
 

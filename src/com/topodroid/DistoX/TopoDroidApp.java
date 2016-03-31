@@ -1330,6 +1330,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsCsx( DrawingActivity sketch, String origin )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = ( sketch == null )? TDPath.getSurveyCsxFile(mySurvey)
                                         : TDPath.getSurveyCsxFile(mySurvey, sketch.mName1);
     return TopoDroidExporter.exportSurveyAsCsx( mSID, mData, info, sketch, origin, filename );
@@ -1338,6 +1339,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsTop( DrawingActivity sketch, String origin )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyTopFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsTop( mSID, mData, info, sketch, origin, filename );
   }
@@ -1345,6 +1347,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsTh( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyThFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsTh( mSID, mData, info, filename );
   }
@@ -1352,6 +1355,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsPlg()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyCaveFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsPlg( mSID, mData, info, filename );
   }
@@ -1359,6 +1363,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsSvx()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveySvxFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsSvx( mSID, mData, info, mDevice, filename );
   }
@@ -1366,6 +1371,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsTro()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyTroFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsTro( mSID, mData, info, filename );
   }
@@ -1373,6 +1379,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsCsv( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyCsvFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsCsv( mSID, mData, info, filename );
   }
@@ -1380,6 +1387,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsSrv()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveySrvFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsSrv( mSID, mData, info, filename );
   }
@@ -1387,6 +1395,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsDxf( DistoXNum num )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyDxfFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsDxf( mSID, mData, info, num, filename );
   }
@@ -1394,6 +1403,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsKml( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyKmlFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsKml( mSID, mData, info, filename );
   }
@@ -1401,6 +1411,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsPlt( )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyPltFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsPlt( mSID, mData, info, filename );
   }
@@ -1408,6 +1419,7 @@ public class TopoDroidApp extends Application
   public String exportSurveyAsDat()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) return null;
     String filename = TDPath.getSurveyDatFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsDat( mSID, mData, info, filename );
   }
@@ -1802,7 +1814,10 @@ public class TopoDroidApp extends Application
     String pathname = TDPath.getBinFile( filename );
     TDLog.LogFile( "Firmware upload address " + mDevice.mAddress );
     TDLog.LogFile( "Firmware upload file " + pathname );
-    if ( ! pathname.endsWith( "bin" ) ) return 0;
+    if ( ! pathname.endsWith( "bin" ) ) {
+      TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
+      return 0;
+    }
     return mComm.uploadFirmware( mDevice.mAddress, pathname );
   }
 

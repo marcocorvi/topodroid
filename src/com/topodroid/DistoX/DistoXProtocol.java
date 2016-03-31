@@ -816,7 +816,7 @@ public class DistoXProtocol
 
   int uploadFirmware( String filepath )
   {
-    TDLog.LogFile( "Firmware upload: socket is ready " );
+    TDLog.LogFile( "Firmware upload: protocol starts" );
     byte[] buf = new byte[259];
     buf[0] = (byte)0x3b;
     buf[1] = (byte)0;
@@ -849,10 +849,14 @@ public class DistoXProtocol
             mIn.readFully( mBuffer, 0, 8 );
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
-              TDLog.LogFile( "Firmware upload: failure  at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+              TDLog.LogFile( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
               ok = false;
               break;
+            } else {
+              TDLog.LogFile( "Firmware upload: reply address ok");
             }
+          } else {
+            TDLog.LogFile( "Firmware upload: skip address " + addr );
           }
         } catch ( EOFException e ) { // OK
           TDLog.LogFile( "Firmware update: EOF " + e.getMessage() );
@@ -873,6 +877,7 @@ public class DistoXProtocol
 
   int dumpFirmware( String filepath )
   {
+    TDLog.LogFile( "Firmware dump: output filepath " + filepath );
     byte[] buf = new byte[256];
 
     boolean ok = true;
@@ -883,6 +888,7 @@ public class DistoXProtocol
       FileOutputStream fos = new FileOutputStream( fp );
       DataOutputStream dos = new DataOutputStream( fos );
       for ( int addr = 0; ; ++ addr ) {
+        TDLog.LogFile( "Firmware dump: addr " + addr + " count " + cnt );
         try {
           buf[0] = (byte)0x3a;
           buf[1] = (byte)( addr & 0xff );
@@ -892,8 +898,11 @@ public class DistoXProtocol
           mIn.readFully( mBuffer, 0, 8 );
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
+            TDLog.LogFile( "Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
             ok = false;
             break;
+          } else {
+            TDLog.LogFile( "Firmware dump: reply addr ok");
           }
 
           mIn.readFully( buf, 0, 256 );
@@ -914,6 +923,7 @@ public class DistoXProtocol
     } catch ( FileNotFoundException e ) {
       return 0;
     }
+    TDLog.LogFile( "Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
 

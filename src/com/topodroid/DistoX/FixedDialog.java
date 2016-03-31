@@ -57,17 +57,21 @@ public class FixedDialog extends MyDialog
   private TextView mETstation;
   private EditText mETcomment;
   private TextView mTVdecl;
-  private TextView mTVcrs;
   private TextView mTVfix_station;
   private Button   mButtonDrop;
   private CheckBox mButtonDecl;
   private Button   mButtonView;
   // private Button   mButtonWmm;
   private Button   mButtonSave;
+
   private Button   mButtonConvert;
+  private TextView mTVcrs;
+  private TextView mTVcs_coords;
+
   private Button   mButtonCancel;
 
   private WorldMagneticModel mWMM;
+
 
   public FixedDialog( Context context, FixedActivity parent, FixedInfo fxd )
   {
@@ -77,10 +81,33 @@ public class FixedDialog extends MyDialog
     mWMM = new WorldMagneticModel( mContext );
   }
   
-  void setCSto( String cs )
+  // void setCSto( String cs )
+  // {
+  //   mTVcrs.setText( cs );
+  // }
+  
+  void setConvertedCoords( String cs, double lng, double lat, double alt )
   {
-    mTVcrs.setText( cs );
+    mFxd.setCSCoords( cs, lng, lat, alt );
+    showConvertedCoords( );
   }
+
+  private void showConvertedCoords( )
+  {
+    String cs = mFxd.cs;
+    if ( cs != null && cs.length() > 0 ) {
+      // setTitle( String.format(Locale.US, "%.2f %.2f %.1f", mFxd.cs_lng, mFxd.cs_lat, mFxd.cs_alt ) );
+      mTVcrs.setText( cs );
+      mTVcs_coords.setText( String.format(Locale.US, "%.2f %.2f %.1f", mFxd.cs_lng, mFxd.cs_lat, mFxd.cs_alt ) );
+      mTVcrs.setVisibility( View.VISIBLE );
+      mTVcs_coords.setVisibility( View.VISIBLE );
+    } else {
+      mTVcrs.setVisibility( View.INVISIBLE );
+      mTVcs_coords.setVisibility( View.GONE );
+    }
+  }
+
+  long getFixedId() { return mFxd.id; }
 
 // -------------------------------------------------------------------
   @Override
@@ -106,9 +133,11 @@ public class FixedDialog extends MyDialog
 
     mButtonDecl = (CheckBox) findViewById( R.id.fix_save_decl );
     mButtonView = (Button) findViewById( R.id.fix_view );
-    mButtonConvert = (Button) findViewById( R.id.fix_convert );
 
+    mButtonConvert = (Button) findViewById( R.id.fix_convert );
     mTVcrs     = (TextView) findViewById( R.id.fix_crs );
+    mTVcs_coords = (TextView) findViewById( R.id.fix_cs_coords );
+
     mETstation = (TextView) findViewById( R.id.fix_station );
     mETcomment = (EditText) findViewById( R.id.fix_comment );
     mETstation.setText( mFxd.name );
@@ -129,6 +158,8 @@ public class FixedDialog extends MyDialog
     mButtonSave.setOnClickListener( this );
     mButtonConvert.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
+
+    showConvertedCoords( );
   }
 
   public void onClick(View v) 
@@ -163,7 +194,9 @@ public class FixedDialog extends MyDialog
       dismiss();
     } else if ( b == mButtonConvert ) {
       if ( mTVcrs.getText() != null ) {
-        mParent.tryProj4( this, mTVcrs.getText().toString(), mFxd );
+        String cs_to = mTVcrs.getText().toString();
+        String cs_to_spec = ""; // FIXME PROJ4
+        mParent.tryProj4( this, cs_to, cs_to_spec, mFxd );
       }
       return;
     } else if ( b == mButtonView ) {

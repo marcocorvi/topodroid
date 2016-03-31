@@ -621,7 +621,7 @@ public class TopoDroidActivity extends Activity
               (new TopoDroidAbout( this )).show();
             } else { 
               if ( p++ == pos ) { // HELP
-                (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
+                (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
               }
             }
           }

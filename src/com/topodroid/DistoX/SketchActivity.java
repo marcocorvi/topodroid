@@ -1764,7 +1764,7 @@ public class SketchActivity extends ItemDrawer
         mTimer.execute();
       } else if (item == mMIhelp ) {
         int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 6 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
       }
       return true;
     }
@@ -1819,7 +1819,7 @@ public class SketchActivity extends ItemDrawer
       mTimer.execute();
     } else if ( p++ == pos ) { // 
       int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 6 ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
     }
   }
 

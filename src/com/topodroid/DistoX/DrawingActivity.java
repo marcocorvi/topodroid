@@ -3455,7 +3455,7 @@ public class DrawingActivity extends ItemDrawer
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 5 + ( TDSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, 8 ) ).show();
+        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
       }
   }
 

@@ -474,6 +474,7 @@
     <string name="help_measure">Medir distancias</string>
     
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
+    <!-- TODO string name="help_continue">Continue drawing a line</string -->
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_device">Opciones del dispositivo distoX</string>

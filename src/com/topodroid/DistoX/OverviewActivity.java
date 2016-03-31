@@ -968,7 +968,7 @@ public class OverviewActivity extends ItemDrawer
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 2 ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
   }
 

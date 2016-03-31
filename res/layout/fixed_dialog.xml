@@ -161,6 +161,7 @@
         android:layout_marginLeft="10dp" 
         android:layout_marginRight="10dp" 
         />
+
     </LinearLayout>
      					  
     <LinearLayout
@@ -171,14 +172,6 @@
        android:layout_below="@id/layout5"
        android:paddingBottom="3dp"
     >  
-      <Button android:id="@+id/fix_view"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_marginRight="10dp" 
-        android:background="@drawable/button"
-        style="@style/button_default"
-        android:text="@string/button_view"
-        />
       <Button android:id="@+id/fix_convert"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -190,27 +183,8 @@
       <TextView android:id="@+id/fix_crs" 
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:hint="@string/long_lat"
         android:singleLine="true" 
         />
-
-      <LinearLayout
-        android:layout_width="fill_parent" 
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:gravity="right" 
-        android:orientation="horizontal"
-        > 
-        <Button android:id="@+id/fix_save"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content" 
-          android:layout_marginLeft="10dp" 
-          android:background="@drawable/button"
-          style="@style/button_default"
-          android:text="@string/button_save"
-          />
-      </LinearLayout>
-
     </LinearLayout>
      					  
     <LinearLayout android:id="@+id/layout7"
@@ -220,6 +194,45 @@
        android:orientation="horizontal"
        android:layout_marginTop="25dip"
        > 
+      <TextView android:id="@+id/fix_cs_coords" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:singleLine="true" 
+        />
+    </LinearLayout>
+     					  
+    <LinearLayout android:id="@+id/layout8"
+       android:layout_below="@id/layout7"
+       android:layout_width="fill_parent" 
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="25dip"
+       > 
+      <Button android:id="@+id/fix_view"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_view"
+        />
+
+        <Button android:id="@+id/fix_save"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" 
+          android:layout_marginLeft="10dp" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          />
+
+      <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="right" 
+        android:orientation="horizontal"
+        > 
         <Button android:id="@+id/fix_drop"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
@@ -228,9 +241,6 @@
           android:text="@string/button_delete"
           android:textColor="@color/textdelete"
           />
-      
-
+      </LinearLayout>
     </LinearLayout>
-
-
 </RelativeLayout>

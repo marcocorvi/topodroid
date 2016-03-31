@@ -766,7 +766,7 @@ public class DeviceActivity extends Activity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, 6 ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
   }
 

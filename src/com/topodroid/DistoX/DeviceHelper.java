@@ -40,8 +40,8 @@ import java.util.HashMap;
 public class DeviceHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "25";
-  static final int DATABASE_VERSION = 25;
+  static final String DB_VERSION = "26";
+  static final int DATABASE_VERSION = 26;
   static final int DATABASE_VERSION_MIN = 21; 
 
   private static final String CONFIG_TABLE = "configs";
@@ -93,6 +93,7 @@ public class DeviceHelper extends DataSetObservable
     myDB.close();
     myDB = null;
   }
+
 
   public void openDatabase() 
   {
@@ -191,7 +192,8 @@ public class DeviceHelper extends DataSetObservable
       // this method returns the GM-data ID
     return myNextCId;
   }
-  
+
+    
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
 
@@ -237,9 +239,8 @@ public class DeviceHelper extends DataSetObservable
          }
        } while (cursor.moveToNext());
      }
-     if (cursor != null && !cursor.isClosed()) {
-       cursor.close();
-     }
+     if (cursor != null && !cursor.isClosed()) cursor.close();
+    
      return list;
    }
 
@@ -1096,6 +1097,7 @@ public class DeviceHelper extends DataSetObservable
              +   ")"
            );
 
+
            db.setTransactionSuccessful();
          } catch ( SQLException e ) {
            TDLog.Error( "createTables exception " + e.toString() );
@@ -1124,6 +1126,7 @@ public class DeviceHelper extends DataSetObservable
            case 24:
              db.execSQL( "ALTER TABLE calibs ADD COLUMN stddev REAL default 0" );
            case 25:
+           case 26:
              /* current version */
            default:
              break;

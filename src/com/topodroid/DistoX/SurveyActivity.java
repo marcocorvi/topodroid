@@ -78,7 +78,6 @@ public class SurveyActivity extends Activity
                         R.string.menu_options,
                         R.string.menu_help
                       };
-  private static final int mNrMenus = 6;
 
   private static int help_icons[] = { 
                         R.string.help_note,
@@ -324,13 +323,14 @@ public class SurveyActivity extends Activity
 
   private void do3D()
   {
-    mApp.exportSurveyAsTh(); // make sure to have survey exported as therion
-    try {
-      Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-      intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
-      startActivity( intent );
-    } catch ( ActivityNotFoundException e ) {
-      Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT).show();
+    if ( mApp.exportSurveyAsTh() != null ) { // make sure to have survey exported as therion
+      try {
+        Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+        intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
+        startActivity( intent );
+      } catch ( ActivityNotFoundException e ) {
+        Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT).show();
+      }
     }
   }
 
@@ -588,7 +588,7 @@ public class SurveyActivity extends Activity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, mNrMenus ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
     // updateDisplay();
   }
