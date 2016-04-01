@@ -135,8 +135,8 @@ public class FixedDialog extends MyDialog
     mButtonView = (Button) findViewById( R.id.fix_view );
 
     mButtonConvert = (Button) findViewById( R.id.fix_convert );
-    mTVcrs     = (TextView) findViewById( R.id.fix_crs );
-    mTVcs_coords = (TextView) findViewById( R.id.fix_cs_coords );
+    mTVcrs         = (TextView) findViewById( R.id.fix_crs );
+    mTVcs_coords   = (TextView) findViewById( R.id.fix_cs_coords );
 
     mETstation = (TextView) findViewById( R.id.fix_station );
     mETcomment = (EditText) findViewById( R.id.fix_comment );
@@ -193,11 +193,8 @@ public class FixedDialog extends MyDialog
       mParent.updateFixedNameComment( mFxd, station, comment );
       dismiss();
     } else if ( b == mButtonConvert ) {
-      if ( mTVcrs.getText() != null ) {
-        String cs_to = mTVcrs.getText().toString();
-        String cs_to_spec = ""; // FIXME PROJ4
-        mParent.tryProj4( this, cs_to, cs_to_spec, mFxd );
-      }
+      String cs_to = mFxd.hasCSCoords() ? mFxd.cs : TDSetting.mCRS;
+      mParent.tryProj4( this, cs_to, mFxd );
       return;
     } else if ( b == mButtonView ) {
       Uri uri = Uri.parse( "geo:" + mFxd.lat + "," + mFxd.lng );

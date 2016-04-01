@@ -97,10 +97,10 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updatePlotStmt = null;
   private SQLiteStatement updatePlotViewStmt = null;
   private SQLiteStatement updatePlotHideStmt = null;
-  // FIXME_SKETCH_3D
+// FIXME_SKETCH_3D
   private SQLiteStatement updateSketchStmt = null;
   // private SQLiteStatement deleteSketchStmt = null;
-  // END_SKETCH_3D
+// END_SKETCH_3D
   // private SQLiteStatement updatePhotoStmt = null;
   // private SQLiteStatement updateSensorStmt = null;
   // private SQLiteStatement transferSensorStmt = null;
@@ -124,7 +124,12 @@ public class DataHelper extends DataSetObservable
   // private SQLiteStatement dropFixedStmt = null;
 
   private String[] mShotFields; // select shot fields
-  private String[] mPlotFields; // select plot fields
+
+  static private String[] mPlotFieldsFull =
+    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" };
+  static private String[] mPlotFields =
+    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" };
+
   private String[] mSketchFields; // select sketch fields
 
   private ArrayList<DataListener> mListeners;
@@ -148,9 +153,6 @@ public class DataHelper extends DataSetObservable
          "id", "fStation", "tStation", "distance", "bearing",
          "clino", "acceleration", "magnetic", "dip", "extend",
          "flag", "leg", "comment", "type"
-    };
-    mPlotFields = new String[] {
-         "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide"
     };
     mSketchFields =
     new String[] {
@@ -1201,50 +1203,6 @@ public class DataHelper extends DataSetObservable
   }
   
 
-  // FIXME_SKETCH_3D
-  public void updateSketch( long sketch_id, long sid, 
-                            String st1, String st2,
-                            double xofftop, double yofftop, double zoomtop,
-                            double xoffside, double yoffside, double zoomside,
-                            double xoff3d, double yoff3d, double zoom3d,
-                            double east, double south, double vert, double azimuth, double clino )
-  {
-    if ( myDB == null ) return;
-    // if ( updateSketchStmt == null )
-    //   updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
-    updateSketchStmt.bindString( 1, st1 );
-    updateSketchStmt.bindString( 2, st2 );
-    updateSketchStmt.bindDouble( 3, xofftop );
-    updateSketchStmt.bindDouble( 4, yofftop );
-    updateSketchStmt.bindDouble( 5, zoomtop );
-    updateSketchStmt.bindDouble( 6, xoffside );
-    updateSketchStmt.bindDouble( 7, yoffside );
-    updateSketchStmt.bindDouble( 8, zoomside );
-    updateSketchStmt.bindDouble( 9, xoff3d );
-    updateSketchStmt.bindDouble(10, yoff3d );
-    updateSketchStmt.bindDouble(11, zoom3d );
-    updateSketchStmt.bindDouble(12, east );
-    updateSketchStmt.bindDouble(13, south );
-    updateSketchStmt.bindDouble(14, vert );
-    updateSketchStmt.bindDouble(15, azimuth );
-    updateSketchStmt.bindDouble(16, clino );
-    updateSketchStmt.bindLong( 17, sid );
-    updateSketchStmt.bindLong( 18, sketch_id );
-    updateSketchStmt.execute();
-  }
-  
-  public void deleteSketch( long sketch_id, long sid )
-  {
-    if ( myDB == null ) return;
-    updateStatus( SKETCH_TABLE, sketch_id, sid, STATUS_DELETED );
-    // if ( deleteSketchStmt == null )
-    //   deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
-    // deleteSketchStmt.bindLong( 1, sid );
-    // deleteSketchStmt.bindLong( 2, sketch_id );
-    // deleteSketchStmt.execute();
-  }
-  // END_SKETCH_3D
-
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
 
@@ -1465,70 +1423,6 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
-   // FIXME_SKETCH_3D
-   private List< Sketch3dInfo > doSelectAllSketches( long sid, String where_str, String[] where )
-   {
-     List<  Sketch3dInfo  > list = new ArrayList<  Sketch3dInfo  >();
-     if ( myDB == null ) return list;
-     Cursor cursor = myDB.query( SKETCH_TABLE, mSketchFields,
-                                 where_str, where,
-                                 null, null, "id" );
-     if (cursor.moveToFirst()) {
-       do {
-         Sketch3dInfo sketch = new  Sketch3dInfo ();
-         sketch.surveyId = sid;
-         sketch.id    = cursor.getLong(0);
-         sketch.name  = cursor.getString(1);
-         sketch.start = cursor.getString(2);
-         sketch.st1   = cursor.getString(3);
-         sketch.st2   = cursor.getString(4);
-         sketch.xoffset_top = (float)( cursor.getDouble(5) );
-         sketch.yoffset_top = (float)( cursor.getDouble(6) );
-         sketch.zoom_top    = (float)( cursor.getDouble(7) );
-         sketch.xoffset_side = (float)( cursor.getDouble(8) );
-         sketch.yoffset_side = (float)( cursor.getDouble(9) );
-         sketch.zoom_side    = (float)( cursor.getDouble(10) );
-         sketch.xoffset_3d = (float)( cursor.getDouble(11) );
-         sketch.yoffset_3d = (float)( cursor.getDouble(12) );
-         sketch.zoom_3d    = (float)( cursor.getDouble(13) );
-         sketch.east    = (float)( cursor.getDouble(14) );
-         sketch.south   = (float)( cursor.getDouble(15) );
-         sketch.vert    = (float)( cursor.getDouble(16) );
-         sketch.azimuth = (float)( cursor.getDouble(17) );
-         sketch.clino   = (float)( cursor.getDouble(18) );
-         list.add( sketch );
-       } while (cursor.moveToNext());
-     }
-     // TDLog.Log( TDLog.LOG_DB, "select All Sketch list size " + list.size() );
-     if (cursor != null && !cursor.isClosed()) cursor.close();
-     return list;
-   }
-
-   public List< Sketch3dInfo > selectAllSketches( long sid )
-   {
-     return doSelectAllSketches( sid, 
-                                 WHERE_SID,
-                                 new String[] { Long.toString(sid) } 
-     );
-   }
-
-   public List< Sketch3dInfo > selectAllSketches( long sid, long status )
-   {
-     return doSelectAllSketches( sid, 
-                                 WHERE_SID_STATUS,
-                                 new String[] { Long.toString(sid), Long.toString(status) }
-     );
-   }
-
-   private List< Sketch3dInfo > selectSketchesAtStation( long sid, String name )
-   {
-     return doSelectAllSketches( sid, 
-                                 WHERE_SID_START,
-                                 new String[] { Long.toString(sid), name }
-     );
-   }
-   // END_SKETCH_3D
-
    public boolean hasSurveyPlot( long sid, String name )
    {
      boolean ret = false;
@@ -1584,19 +1478,22 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
-   private void fillPlotInfo( PlotInfo plot, Cursor cursor )
+   private PlotInfo makePlotInfo( long sid, Cursor cursor )
    {
-     plot.id    = cursor.getLong(0);
-     plot.name = cursor.getString(1);
-     plot.type = cursor.getInt(2);
-     plot.start = cursor.getString(3);
-     plot.view  = cursor.getString(4);
+     PlotInfo plot = new  PlotInfo ();
+     plot.surveyId = sid;
+     plot.id      = cursor.getLong(0);
+     plot.name    = cursor.getString(1);
+     plot.type    = cursor.getInt(2);
+     plot.start   = cursor.getString(3);
+     plot.view    = cursor.getString(4);
      plot.xoffset = (float)(cursor.getDouble(5));
      plot.yoffset = (float)(cursor.getDouble(6));
      plot.zoom    = (float)(cursor.getDouble(7));
      plot.azimuth = (float)(cursor.getDouble(8));
      plot.clino   = (float)(cursor.getDouble(9));
      plot.hide    = cursor.getString(10);
+     return plot;
    }
 
 
@@ -1604,14 +1501,10 @@ public class DataHelper extends DataSetObservable
    {
      List<  PlotInfo  > list = new ArrayList<  PlotInfo  >();
      if ( myDB == null ) return list;
-     Cursor cursor = myDB.query(PLOT_TABLE, mPlotFields, where_str, where, null, null, "id" );
+     Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields, where_str, where, null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
-         PlotInfo plot = new  PlotInfo ();
-         // plot.setId( cursor.getLong(0), sid );
-         plot.surveyId = sid;
-         fillPlotInfo( plot, cursor );
-         list.add( plot );
+         list.add( makePlotInfo( sid, cursor ) );
        } while (cursor.moveToNext());
      }
      // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
@@ -2312,72 +2205,17 @@ public class DataHelper extends DataSetObservable
    {
      PlotInfo plot = null;
      if ( myDB != null && name != null ) {
-       Cursor cursor = myDB.query( PLOT_TABLE, 
-                 new String[] { "id", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" },
+       Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
                  WHERE_SID_NAME,
                  new String[] { Long.toString(sid), name },
                  null, null, null );
        if (cursor != null ) {
-         if (cursor.moveToFirst() ) {
-           plot = new PlotInfo();
-           plot.surveyId = sid;
-           plot.id    = cursor.getLong(0);
-           plot.type  = cursor.getInt(1);
-           plot.name  = name;
-           plot.start = cursor.getString(2);
-           plot.view  = cursor.getString(3);
-           plot.xoffset = (float)( cursor.getDouble(4) );
-           plot.yoffset = (float)( cursor.getDouble(5) );
-           plot.zoom    = (float)( cursor.getDouble(6) );
-           plot.azimuth = (float)( cursor.getDouble(7) );
-           plot.clino   = (float)( cursor.getDouble(8) );
-           plot.hide  = cursor.getString(9);
-           // Log.v( TopoDroidApp.TAG, "plot " + plot.name + " azimuth " + plot.azimuth );
-         }
+         if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
          if (!cursor.isClosed()) cursor.close();
        }
      }
      return plot;
    }
- 
-   // FIXME_SKETCH_3D
-   public Sketch3dInfo getSketch3dInfo( long sid, String name )
-   {
-     Sketch3dInfo sketch = null;
-     if ( myDB != null && name != null ) {
-       Cursor cursor = myDB.query( SKETCH_TABLE, 
-                 new String[] { "id", "start", "st1", "st2", "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d", "east", "south", "vert", "azimuth", "clino" },
-                 WHERE_SID_NAME,
-                 new String[] { Long.toString(sid), name },
-                 null, null, null );
-       if (cursor.moveToFirst() ) {
-         sketch = new Sketch3dInfo();
-         sketch.surveyId = sid;
-         sketch.id    = cursor.getLong(0);
-         sketch.name  = name;
-         sketch.start = cursor.getString(1);
-         sketch.st1   = cursor.getString(2);
-         sketch.st2   = cursor.getString(3);
-         sketch.xoffset_top = (float)( cursor.getDouble(4) );
-         sketch.yoffset_top = (float)( cursor.getDouble(5) );
-         sketch.zoom_top    = (float)( cursor.getDouble(6) );
-         sketch.xoffset_side = (float)( cursor.getDouble(7) );
-         sketch.yoffset_side = (float)( cursor.getDouble(8) );
-         sketch.zoom_side    = (float)( cursor.getDouble(9) );
-         sketch.xoffset_3d = (float)( cursor.getDouble(10) );
-         sketch.yoffset_3d = (float)( cursor.getDouble(11) );
-         sketch.zoom_3d    = (float)( cursor.getDouble(12) );
-         sketch.east    = (float)( cursor.getDouble(13) );
-         sketch.south   = (float)( cursor.getDouble(14) );
-         sketch.vert    = (float)( cursor.getDouble(15) );
-         sketch.azimuth = (float)( cursor.getDouble(16) );
-         sketch.clino   = (float)( cursor.getDouble(17) );
-       }
-       if (cursor != null && !cursor.isClosed()) cursor.close();
-     }
-     return sketch;
-   }
-   // END_SKETCH_3D
 
    long getPlotId( long sid, String name )
    {
@@ -2388,34 +2226,12 @@ public class DataHelper extends DataSetObservable
                             new String[] { Long.toString(sid), name },
                             null, null, null );
        if ( cursor != null ) {
-         if (cursor.moveToFirst() ) {
-           ret = cursor.getLong(0);
-         }
+         if (cursor.moveToFirst() ) ret = cursor.getLong(0);
          if ( !cursor.isClosed()) cursor.close();
        }
      }
      return ret;
    }
-
-   // FIXME_SKETCH_3D
-   private long getSketch3dId( long sid, String name )
-   {
-     long ret = -1;
-     if ( myDB != null && name != null ) {
-       Cursor cursor = myDB.query( SKETCH_TABLE, new String[] { "id" },
-                            WHERE_SID_NAME,
-                            new String[] { Long.toString(sid), name },
-                            null, null, null );
-       if ( cursor != null ) {
-         if (cursor.moveToFirst() ) {
-           ret = cursor.getLong(0);
-         }
-         if ( !cursor.isClosed()) cursor.close();
-       }
-     }
-     return ret;
-   }
-   // END_SKETCH_3D
 
    // public String getPlotFieldAsString( long sid, long pid, String field )
    // {
@@ -2673,46 +2489,6 @@ public class DataHelper extends DataSetObservable
      return id;
    }
 
-   // FIXME_SKETCH_3D
-   public long insertSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
-                           double xoffsettop, double yoffsettop, double zoomtop,
-                           double xoffsetside, double yoffsetside, double zoomside,
-                           double xoffset3d, double yoffset3d, double zoom3d,
-                           double x, double y, double z, double azimuth, double clino )
-   {
-     if ( myDB == null ) return -1L;
-     long ret = getSketch3dId( sid, name );
-     if ( ret >= 0 ) return -1;
-     if ( id == -1L ) id = maxId( SKETCH_TABLE, sid );
-     // Log.v( TopoDroidApp.TAG, "Survey ID " + sid + " Sketch ID " + id );
-
-     ContentValues cv = new ContentValues();
-     cv.put( "surveyId", sid );
-     cv.put( "id",       id );
-     cv.put( "name",     name );
-     cv.put( "status",   status );
-     cv.put( "start",    start );
-     cv.put( "st1",      st1 );
-     cv.put( "st2",      st2 );
-     cv.put( "xoffsettop",  xoffsettop );
-     cv.put( "yoffsettop",  yoffsettop );
-     cv.put( "zoomtop",     zoomtop );
-     cv.put( "xoffsetside",  xoffsetside );
-     cv.put( "yoffsetside",  yoffsetside );
-     cv.put( "zoomside",     zoomside );
-     cv.put( "xoffset3d",  xoffset3d );
-     cv.put( "yoffset3d",  yoffset3d );
-     cv.put( "zoom3d",     zoom3d );
-     cv.put( "east",     x );
-     cv.put( "south",    y );
-     cv.put( "vert",     z );
-     cv.put( "azimuth",  azimuth );
-     cv.put( "clino",    clino );
-     myDB.insert( SKETCH_TABLE, null, cv );
-     return id;
-   }
-   // END_SKETCH_3D
-
    private long maxId( String table, long sid )
    {
      long id = 1;
@@ -2927,6 +2703,207 @@ public class DataHelper extends DataSetObservable
      if (cursor != null && !cursor.isClosed()) cursor.close();
      return ret;
    }
+
+// -------------------------------------------------------------------------------
+// SKETCH_3D
+/* FIXME BEGIN SKETCH_3D */
+  public void updateSketch( long sketch_id, long sid, 
+                            String st1, String st2,
+                            double xofftop, double yofftop, double zoomtop,
+                            double xoffside, double yoffside, double zoomside,
+                            double xoff3d, double yoff3d, double zoom3d,
+                            double east, double south, double vert, double azimuth, double clino )
+  {
+    if ( myDB == null ) return;
+    // if ( updateSketchStmt == null )
+    //   updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+    updateSketchStmt.bindString( 1, st1 );
+    updateSketchStmt.bindString( 2, st2 );
+    updateSketchStmt.bindDouble( 3, xofftop );
+    updateSketchStmt.bindDouble( 4, yofftop );
+    updateSketchStmt.bindDouble( 5, zoomtop );
+    updateSketchStmt.bindDouble( 6, xoffside );
+    updateSketchStmt.bindDouble( 7, yoffside );
+    updateSketchStmt.bindDouble( 8, zoomside );
+    updateSketchStmt.bindDouble( 9, xoff3d );
+    updateSketchStmt.bindDouble(10, yoff3d );
+    updateSketchStmt.bindDouble(11, zoom3d );
+    updateSketchStmt.bindDouble(12, east );
+    updateSketchStmt.bindDouble(13, south );
+    updateSketchStmt.bindDouble(14, vert );
+    updateSketchStmt.bindDouble(15, azimuth );
+    updateSketchStmt.bindDouble(16, clino );
+    updateSketchStmt.bindLong( 17, sid );
+    updateSketchStmt.bindLong( 18, sketch_id );
+    updateSketchStmt.execute();
+  }
+  
+  public void deleteSketch( long sketch_id, long sid )
+  {
+    if ( myDB == null ) return;
+    updateStatus( SKETCH_TABLE, sketch_id, sid, STATUS_DELETED );
+    // if ( deleteSketchStmt == null )
+    //   deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
+    // deleteSketchStmt.bindLong( 1, sid );
+    // deleteSketchStmt.bindLong( 2, sketch_id );
+    // deleteSketchStmt.execute();
+  }
+
+   private List< Sketch3dInfo > doSelectAllSketches( long sid, String where_str, String[] where )
+   {
+     List<  Sketch3dInfo  > list = new ArrayList<  Sketch3dInfo  >();
+     if ( myDB == null ) return list;
+     Cursor cursor = myDB.query( SKETCH_TABLE, mSketchFields,
+                                 where_str, where,
+                                 null, null, "id" );
+     if (cursor.moveToFirst()) {
+       do {
+         Sketch3dInfo sketch = new  Sketch3dInfo ();
+         sketch.surveyId = sid;
+         sketch.id    = cursor.getLong(0);
+         sketch.name  = cursor.getString(1);
+         sketch.start = cursor.getString(2);
+         sketch.st1   = cursor.getString(3);
+         sketch.st2   = cursor.getString(4);
+         sketch.xoffset_top = (float)( cursor.getDouble(5) );
+         sketch.yoffset_top = (float)( cursor.getDouble(6) );
+         sketch.zoom_top    = (float)( cursor.getDouble(7) );
+         sketch.xoffset_side = (float)( cursor.getDouble(8) );
+         sketch.yoffset_side = (float)( cursor.getDouble(9) );
+         sketch.zoom_side    = (float)( cursor.getDouble(10) );
+         sketch.xoffset_3d = (float)( cursor.getDouble(11) );
+         sketch.yoffset_3d = (float)( cursor.getDouble(12) );
+         sketch.zoom_3d    = (float)( cursor.getDouble(13) );
+         sketch.east    = (float)( cursor.getDouble(14) );
+         sketch.south   = (float)( cursor.getDouble(15) );
+         sketch.vert    = (float)( cursor.getDouble(16) );
+         sketch.azimuth = (float)( cursor.getDouble(17) );
+         sketch.clino   = (float)( cursor.getDouble(18) );
+         list.add( sketch );
+       } while (cursor.moveToNext());
+     }
+     // TDLog.Log( TDLog.LOG_DB, "select All Sketch list size " + list.size() );
+     if (cursor != null && !cursor.isClosed()) cursor.close();
+     return list;
+   }
+
+   public List< Sketch3dInfo > selectAllSketches( long sid )
+   {
+     return doSelectAllSketches( sid, 
+                                 WHERE_SID,
+                                 new String[] { Long.toString(sid) } 
+     );
+   }
+
+   public List< Sketch3dInfo > selectAllSketches( long sid, long status )
+   {
+     return doSelectAllSketches( sid, 
+                                 WHERE_SID_STATUS,
+                                 new String[] { Long.toString(sid), Long.toString(status) }
+     );
+   }
+
+   private List< Sketch3dInfo > selectSketchesAtStation( long sid, String name )
+   {
+     return doSelectAllSketches( sid, 
+                                 WHERE_SID_START,
+                                 new String[] { Long.toString(sid), name }
+     );
+   }
+ 
+   public Sketch3dInfo getSketch3dInfo( long sid, String name )
+   {
+     Sketch3dInfo sketch = null;
+     if ( myDB != null && name != null ) {
+       Cursor cursor = myDB.query( SKETCH_TABLE, 
+                 new String[] { "id", "start", "st1", "st2", "xoffsettop", "yoffsettop", "zoomtop", "xoffsetside", "yoffsetside", "zoomside", "xoffset3d", "yoffset3d", "zoom3d", "east", "south", "vert", "azimuth", "clino" },
+                 WHERE_SID_NAME,
+                 new String[] { Long.toString(sid), name },
+                 null, null, null );
+       if (cursor.moveToFirst() ) {
+         sketch = new Sketch3dInfo();
+         sketch.surveyId = sid;
+         sketch.id    = cursor.getLong(0);
+         sketch.name  = name;
+         sketch.start = cursor.getString(1);
+         sketch.st1   = cursor.getString(2);
+         sketch.st2   = cursor.getString(3);
+         sketch.xoffset_top = (float)( cursor.getDouble(4) );
+         sketch.yoffset_top = (float)( cursor.getDouble(5) );
+         sketch.zoom_top    = (float)( cursor.getDouble(6) );
+         sketch.xoffset_side = (float)( cursor.getDouble(7) );
+         sketch.yoffset_side = (float)( cursor.getDouble(8) );
+         sketch.zoom_side    = (float)( cursor.getDouble(9) );
+         sketch.xoffset_3d = (float)( cursor.getDouble(10) );
+         sketch.yoffset_3d = (float)( cursor.getDouble(11) );
+         sketch.zoom_3d    = (float)( cursor.getDouble(12) );
+         sketch.east    = (float)( cursor.getDouble(13) );
+         sketch.south   = (float)( cursor.getDouble(14) );
+         sketch.vert    = (float)( cursor.getDouble(15) );
+         sketch.azimuth = (float)( cursor.getDouble(16) );
+         sketch.clino   = (float)( cursor.getDouble(17) );
+       }
+       if (cursor != null && !cursor.isClosed()) cursor.close();
+     }
+     return sketch;
+   }
+
+   private long getSketch3dId( long sid, String name )
+   {
+     long ret = -1;
+     if ( myDB != null && name != null ) {
+       Cursor cursor = myDB.query( SKETCH_TABLE, new String[] { "id" },
+                            WHERE_SID_NAME,
+                            new String[] { Long.toString(sid), name },
+                            null, null, null );
+       if ( cursor != null ) {
+         if (cursor.moveToFirst() ) {
+           ret = cursor.getLong(0);
+         }
+         if ( !cursor.isClosed()) cursor.close();
+       }
+     }
+     return ret;
+   }
+
+   public long insertSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
+                           double xoffsettop, double yoffsettop, double zoomtop,
+                           double xoffsetside, double yoffsetside, double zoomside,
+                           double xoffset3d, double yoffset3d, double zoom3d,
+                           double x, double y, double z, double azimuth, double clino )
+   {
+     if ( myDB == null ) return -1L;
+     long ret = getSketch3dId( sid, name );
+     if ( ret >= 0 ) return -1;
+     if ( id == -1L ) id = maxId( SKETCH_TABLE, sid );
+     // Log.v( TopoDroidApp.TAG, "Survey ID " + sid + " Sketch ID " + id );
+
+     ContentValues cv = new ContentValues();
+     cv.put( "surveyId", sid );
+     cv.put( "id",       id );
+     cv.put( "name",     name );
+     cv.put( "status",   status );
+     cv.put( "start",    start );
+     cv.put( "st1",      st1 );
+     cv.put( "st2",      st2 );
+     cv.put( "xoffsettop",  xoffsettop );
+     cv.put( "yoffsettop",  yoffsettop );
+     cv.put( "zoomtop",     zoomtop );
+     cv.put( "xoffsetside",  xoffsetside );
+     cv.put( "yoffsetside",  yoffsetside );
+     cv.put( "zoomside",     zoomside );
+     cv.put( "xoffset3d",  xoffset3d );
+     cv.put( "yoffset3d",  yoffset3d );
+     cv.put( "zoom3d",     zoom3d );
+     cv.put( "east",     x );
+     cv.put( "south",    y );
+     cv.put( "vert",     z );
+     cv.put( "azimuth",  azimuth );
+     cv.put( "clino",    clino );
+     myDB.insert( SKETCH_TABLE, null, cv );
+     return id;
+   }
+/* END SKETCH_3D */
       
    // ----------------------------------------------------------------------
    // SERIALIZATION of surveys TO FILE
@@ -2937,7 +2914,8 @@ public class DataHelper extends DataSetObservable
    //    SKETCHES
    //  6 PHOTOS   { "id", "shotId", "status", "title", "date", "comment" },
    //  8 SENSORS  { "id", "shotId", "status", "title", "date", "comment", "type", "value" },
-   //  8 FIXEDS   { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status" },
+   // 12 FIXEDS   { "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status",
+   //               "cs_name", "cs_longitude", "cs_latitude", "cs_altitude" }
 
    public void dumpToFile( String filename, long sid )
    {
@@ -2989,7 +2967,7 @@ public class DataHelper extends DataSetObservable
        }
        if (cursor != null && !cursor.isClosed()) cursor.close();
        cursor = myDB.query( PLOT_TABLE, 
-                            new String[] { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide" },
+                            mPlotFieldsFull,
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
@@ -3229,7 +3207,7 @@ public class DataHelper extends DataSetObservable
              insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, false );
              // TDLog.Log( TDLog.LOG_DB, "loadFromFile plot " + sid + " " + id + " " + start + " " + name );
    
-           // FIXME_SKETCH_3D
+/* FIXME BEGIN SKETCH_3D */
            } else if ( table.equals(SKETCH_TABLE) ) { // ***** SKETCHES
              name         = scanline1.stringValue( );
              status       = scanline1.longValue( );
@@ -3251,7 +3229,7 @@ public class DataHelper extends DataSetObservable
              double azimuth= scanline1.doubleValue( );
              double clino  = scanline1.doubleValue( );
              insertSketch3d( sid, id, name, status, start, st1, st2, xofft, yofft, zoomt, xoffs, yoffs, zooms, xoff3, yoff3, zoom3, east, south, vert, azimuth, clino );
-           // END_SKETCH_3D
+/* END SKETCH_3D */
            } else if ( table.equals(SHOT_TABLE) ) { // ***** SHOTS
              String from = scanline1.stringValue( );
              String to   = scanline1.stringValue( );
@@ -3284,7 +3262,7 @@ public class DataHelper extends DataSetObservable
              double cs_lng = 0;
              double cs_lat = 0;
              double cs_alt = 0;
-             String cs  = scanline1.stringValue( );
+             String cs = scanline1.stringValue( );
              if ( cs.length() > 0 ) {
                cs_lng = scanline1.doubleValue( );
                cs_lat = scanline1.doubleValue( );

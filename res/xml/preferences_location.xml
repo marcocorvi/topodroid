@@ -20,7 +20,6 @@
        android:summary="@string/pref_crs_summary"
        android:dialogTitle="@string/pref_crs_title"
        android:dialogMessage="@string/pref_crs_message"
-       android:enabled="false"
        android:defaultValue="Long-Lat"
      />
 

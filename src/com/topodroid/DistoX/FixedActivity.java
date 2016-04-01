@@ -239,7 +239,7 @@ public class FixedActivity extends Activity
   private static int CRS_CONVERSION_REQUEST = 2; // not final ?
   private FixedDialog mFixedDialog = null;
 
-  void tryProj4( FixedDialog dialog, String cs_to, String cs_to_spec, FixedInfo fxd )
+  void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
   {
     if ( cs_to == null ) return;
     try {
@@ -248,7 +248,6 @@ public class FixedActivity extends Activity
       intent.putExtra( "version", "1.1" );      // Proj4 version
       intent.putExtra( "cs_from", "Long-Lat" ); // NOTE MUST USE SAME NAME AS Proj4
       intent.putExtra( "cs_to", cs_to ); 
-      intent.putExtra( "cs_to_spec", cs_to_spec ); 
       intent.putExtra( "longitude", fxd.lng );
       intent.putExtra( "latitude",  fxd.lat );
       intent.putExtra( "altitude",  fxd.alt );

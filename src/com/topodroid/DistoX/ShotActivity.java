@@ -768,7 +768,6 @@ public class ShotActivity extends Activity
     mBMright         = MyButton.getButtonBackground( res, R.drawable.iz_right );
 
     if ( TDSetting.mLevelOverBasic ) {
-      // mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
     }
 
@@ -969,8 +968,6 @@ public class ShotActivity extends Activity
       if ( mRecentPlot != null ) {
         startExistingPlot( mRecentPlot, mRecentPlotType );
       }
-    // } else if ( b == mButton1[ BTN_DOWNLOAD ] ) {
-    //   doBluetooth( b );
     }
     return true;
   } 
@@ -1067,7 +1064,7 @@ public class ShotActivity extends Activity
     // updateDisplay( );
   }
 
-  // FIXME_SKETCH_3D
+/* FIXME BEGIN SKETCH_3D */
   public void makeNewSketch3d( String name, String st1, String st2 )
   {
     // FIXME xoffset yoffset, east south and vert (downwards)
@@ -1097,48 +1094,7 @@ public class ShotActivity extends Activity
       Toast.makeText( this, "no to station", Toast.LENGTH_SHORT).show();
     }
   }
-  // END_SKETCH_3D
-
-  // public void startPlotDialog( String name, String type ) // name = plot/sketch3d name
-  // {
-  //   // FIXME SKETCH-3D
-  //     PlotInfo plot1 =  mApp.mData.getPlotInfo( mApp.mSID, name+"p" );
-  //     if ( plot1 != null ) {
-  //       PlotInfo plot2 = mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
-  //       ( new PlotDialog( this, this, plot1, plot2 )).show();
-  //       return;
-  //     }
-  //   Toast.makeText( this, R.string.plot_not_found, Toast.LENGTH_SHORT).show();
-  // }
-
-  public void startExistingPlot( String name, long type ) // name = plot/sketch3d name
-  {
-    // TDLog.Log( TDLog.LOG_SHOT, "startExistingPlot \"" + name + "\" type " + type + " sid " + mApp.mSID );
-
-    // FIXME_SKETCH_3D
-    if ( type == PlotInfo.PLOT_SKETCH_3D ) {
-      Sketch3dInfo sketch = mApp.mData.getSketch3dInfo( mApp.mSID, name );
-      if ( sketch != null ) {
-        startSketchActivity( sketch.name );
-        return;
-      }
-    } else {
-    // END_SKETCH_3D
-      PlotInfo plot1 =  mApp.mData.getPlotInfo( mApp.mSID, name+"p" );
-      if ( plot1 != null ) {
-        mRecentPlot     = name;
-        mRecentPlotType = type;
-        PlotInfo plot2 =  mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
-        startDrawingActivity( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type );
-        return;
-      } else {
-        mRecentPlot = null;
-      }
-    }
-    Toast.makeText( this, R.string.plot_not_found, Toast.LENGTH_SHORT).show();
-  }
  
-  // FIXME_SKETCH_3D
   private void startSketchActivity( String name )
   {
     if ( mApp.mSID < 0 ) {
@@ -1155,7 +1111,34 @@ public class ShotActivity extends Activity
     sketchIntent.putExtra( TopoDroidTag.TOPODROID_SKETCH_NAME, name );
     startActivity( sketchIntent );
   }
-  // END_SKETCH_3D
+/* END SKETCH_3D */
+
+  public void startExistingPlot( String name, long type ) // name = plot/sketch3d name
+  {
+    // TDLog.Log( TDLog.LOG_SHOT, "start Existing Plot \"" + name + "\" type " + type + " sid " + mApp.mSID );
+
+    if ( type != PlotInfo.PLOT_SKETCH_3D ) {
+      PlotInfo plot1 =  mApp.mData.getPlotInfo( mApp.mSID, name+"p" );
+      if ( plot1 != null ) {
+        mRecentPlot     = name;
+        mRecentPlotType = type;
+        PlotInfo plot2 =  mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
+        startDrawingActivity( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type );
+        return;
+      } else {
+        mRecentPlot = null;
+      }
+/* FIXME BEGIN SKETCH_3D */
+    } else {
+      Sketch3dInfo sketch = mApp.mData.getSketch3dInfo( mApp.mSID, name );
+      if ( sketch != null ) {
+        startSketchActivity( sketch.name );
+        return;
+      }
+/* END SKETCH_3D */
+    }
+    Toast.makeText( this, R.string.plot_not_found, Toast.LENGTH_SHORT).show();
+  }
 
   private void startDrawingActivity( String start, String plot1_name, long plot1_id,
                                                    String plot2_name, long plot2_id, long type )

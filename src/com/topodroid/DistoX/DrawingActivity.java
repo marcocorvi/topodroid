@@ -519,6 +519,8 @@ public class DrawingActivity extends ItemDrawer
   {
     if ( dismissPopups() ) return;
     if ( PlotInfo.isAnySection( mType ) ) {
+      mModified = true; // force saving
+      startSaveTdrTask( mType, PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
       popInfo();
       doStart( false );
     } else {
@@ -2745,6 +2747,7 @@ public class DrawingActivity extends ItemDrawer
         computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       }
       resetReference( mPlot2 );
+      // FIXME if ( mApp.mShotActivity != null ) 
       mApp.mShotActivity.mRecentPlotType = mType;
     } 
 
@@ -2760,6 +2763,7 @@ public class DrawingActivity extends ItemDrawer
         computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       }
       resetReference( mPlot1 );
+      // FIXME if ( mApp.mShotActivity != null ) 
       mApp.mShotActivity.mRecentPlotType = mType;
     }
 
@@ -3328,6 +3332,7 @@ public class DrawingActivity extends ItemDrawer
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
+    // FIXME if ( mApp.mShotActivity != null ) 
     mApp.mShotActivity.updateBlockList( blk );
     updateDisplay( true );
   }
@@ -3335,6 +3340,7 @@ public class DrawingActivity extends ItemDrawer
   @Override
   public void updateBlockList( long blk_id )
   {
+    // FIXME if ( mApp.mShotActivity != null ) 
     mApp.mShotActivity.updateBlockList( blk_id );
     updateDisplay( true );
   }

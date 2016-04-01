@@ -90,7 +90,7 @@ public class Archiver
       String pathname;
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipname ) ) );
 
-      // FIXME_SKETCH_3D
+/* FIXME BEGIN SKETCH_3D */
       List< Sketch3dInfo > sketches  = app.mData.selectAllSketches( app.mSID, TopoDroidApp.STATUS_NORMAL );
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchFile( survey, skt.name ) ) );
@@ -99,7 +99,7 @@ public class Archiver
       for ( Sketch3dInfo skt : sketches ) {
         addEntry( zos, new File( TDPath.getSurveySketchFile( survey, skt.name ) ) );
       }
-      // END_SKETCH_3D
+/* END SKETCH_3D */
 
       List< PlotInfo > plots  = app.mData.selectAllPlots( app.mSID, TopoDroidApp.STATUS_NORMAL );
       for ( PlotInfo plt : plots ) {
