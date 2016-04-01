@@ -1,6 +1,10 @@
 <html><body>
 <h3>[13] IMPORT EXPORT </h3>
-When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey, and its exports. You can use it to transfer the survey to another android.<br>
+When you are done, export the survey in your favourite format and make a zip archive. The zip archive is the a complete backup of your survey, and its exports. You can use it to transfer the survey to another android.<br><p>
+
+<b>Warning</b><br>
+The zip archive contains the command to restore the survey data and other informations in the database.
+Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.<br><p>
 
 After you have downloaded the zip to your PC and unzipped it, you can complete the cave map with whatever program you are used to. The support of other cave survey file format in import may not be complete.<br><p>
 
@@ -24,13 +28,16 @@ mean sea level [m].<br><p>
 Survey data are exported in <i>Therion</i> format, using the data "normal" form.<br>
 Data units are according to the user options.<br>
 The team names are listed but the command is commented.<br>
-Station comments and marks (fixed, painted) preceed the centerline data.<br>
-Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.<br><p>
+Station comments and marks (fixed, painted) preceed the centerline data.<br><p>
+
+Fixed points coordinates (longitude latitude and altitude a.s.l.) are exported commented.
+If the point has custom CRS coordinates, these are exported as well, preceeded by the CRS name.<br><p>
+
+Furthermore "input" of the th2 files and definitions for a map for each scrap are added at the end, but are commented.
+If the "Therion Maps" setting is enabled the "map" commands are placed before the survey centerline.<br><p>
 
 TopoDroid parsing of <i>Therion</i> data syntax is very limited. Basically only data in "normal" form are understood. The Therion data commands "units", "flag", "extend", "mark" and "station" are supported.<br>
 Fixed points ("fix") are parsed but not taken into account as "cs" is not supported.<br><p>
-
-If the "Therion Maps" setting is enabled the "map" commands are placed before the survey centerline.<br><p>
 
 <b>Compass</b><br>
 <i>Compass</i> data file are supported both in input and in export.<br>
