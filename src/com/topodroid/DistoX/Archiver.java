@@ -112,6 +112,7 @@ public class Archiver
           addEntry( zos, new File( TDPath.getSurveyCsxFile( survey, plt.name ) ) );
         }
       }
+
       plots  = app.mData.selectAllPlots( app.mSID, TopoDroidApp.STATUS_DELETED );
       for ( PlotInfo plt : plots ) {
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
@@ -127,14 +128,18 @@ public class Archiver
         addEntry( zos, new File( TDPath.getSurveyJpgFile( survey, Long.toString(pht.id) ) ) );
       }
 
+      addEntry( zos, new File( TDPath.getSurveyCsvFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyCsxFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyCaveFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyDatFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyDxfFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyKmlFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveyPltFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveySrvFile( survey ) ) );
+      addEntry( zos, new File( TDPath.getSurveySvxFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyThFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyTroFile( survey ) ) );
       addEntry( zos, new File( TDPath.getSurveyTopFile( survey ) ) );
-      addEntry( zos, new File( TDPath.getSurveySvxFile( survey ) ) );
-      addEntry( zos, new File( TDPath.getSurveyCsvFile( survey ) ) );
-      addEntry( zos, new File( TDPath.getSurveyCsxFile( survey ) ) );
-      addEntry( zos, new File( TDPath.getSurveyDatFile( survey ) ) );
-      addEntry( zos, new File( TDPath.getSurveyDxfFile( survey ) ) );
 
       addEntry( zos, new File( TDPath.getSurveyNoteFile( survey ) ) );
  
@@ -206,35 +211,45 @@ public class Archiver
             } else if ( ze.getName().equals( "survey.sql" ) ) {
               pathname = TDPath.getSqlFile();
               sql = true;
-            } else if ( ze.getName().endsWith( ".csv" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.CSV ) ) {
               pathname = TDPath.getCsvFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".csx" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.CSX ) ) {
               pathname = TDPath.getCsxFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".dat" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.CAVE ) ) {
+              pathname = TDPath.getCaveFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.DAT ) ) {
               pathname = TDPath.getDatFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".dxf" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.DXF ) ) {
               pathname = TDPath.getDxfFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".png" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.KML ) ) {
+              pathname = TDPath.getKmlFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.PLT ) ) {
+              pathname = TDPath.getPltFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.PNG ) ) {
               pathname = TDPath.getPngFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".svg" ) ) {
-              pathname = TDPath.getSvgFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".svx" ) ) {
-              pathname = TDPath.getSvxFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".srv" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.SRV ) ) {
               pathname = TDPath.getSrvFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".tro" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.SVG ) ) {
+              pathname = TDPath.getSvgFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.SVX ) ) {
+              pathname = TDPath.getSvxFile( ze.getName() );
+
+            } else if ( ze.getName().endsWith( TDPath.TH ) ) {
+              pathname = TDPath.getThFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.TH2 ) ) {
+              pathname = TDPath.getTh2File( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.TH3 ) ) {
+              pathname = TDPath.getTh3File( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.TDR ) ) {
+              pathname = TDPath.getTdrFile( ze.getName() );
+
+            } else if ( ze.getName().endsWith( TDPath.TRO ) ) {
               pathname = TDPath.getTroFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".top" ) ) {
+            } else if ( ze.getName().endsWith( TDPath.TOP ) ) {
               pathname = TDPath.getTopFile( ze.getName() );
 
-            } else if ( ze.getName().endsWith( ".th" ) ) {
-              pathname = TDPath.getThFile( ze.getName() );
-            } else if ( ze.getName().endsWith( ".th2" ) ) {
-              pathname = TDPath.getTh2File( ze.getName() );
-            } else if ( ze.getName().endsWith( ".th3" ) ) {
-              pathname = TDPath.getTh3File( ze.getName() );
-            } else if ( ze.getName().endsWith( ".tdr" ) ) {
-              pathname = TDPath.getTdrFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.TXT ) ) {
+              pathname = TDPath.getNoteFile( ze.getName() );
 
             } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
               // FIXME need survey dir
@@ -243,7 +258,8 @@ public class Archiver
               file.mkdirs();
               pathname = TDPath.getJpgFile( surveyname, ze.getName() );
             } else {
-              pathname = TDPath.getNoteFile( ze.getName() );
+              // unexpected file type
+              pathname = null; //
             }
             TDLog.Log( TDLog.LOG_ZIP, "Zip filename \"" + pathname + "\"" );
             if ( pathname != null ) {

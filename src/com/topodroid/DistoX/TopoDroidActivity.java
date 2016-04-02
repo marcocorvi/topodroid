@@ -516,8 +516,14 @@ public class TopoDroidActivity extends Activity
     protected void onPostExecute(Long result) {
       activity.setTheTitle( );
       activity.updateDisplay( );
-      if ( result <= -2 ) {
+      if ( result < -4 ) {
         Toast.makeText( activity, R.string.unzip_fail, Toast.LENGTH_SHORT).show();
+      } else if ( result == -4 ) {
+        Toast.makeText( activity, R.string.unzip_fail_survey, Toast.LENGTH_SHORT).show();
+      } else if ( result == -3 ) {
+        Toast.makeText( activity, R.string.unzip_fail_db, Toast.LENGTH_SHORT).show();
+      } else if ( result == -2 ) {
+        Toast.makeText( activity, R.string.unzip_fail_td, Toast.LENGTH_SHORT).show();
       } else if ( result == -1 ) {
         Toast.makeText( activity, R.string.import_already, Toast.LENGTH_SHORT).show();
       } else {

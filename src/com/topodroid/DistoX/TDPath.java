@@ -455,7 +455,7 @@ public class TDPath
     t = new File( getThFile(  survey + TH  ) ); if ( t.exists() ) t.delete();
     t = new File( getCsvFile( survey + CSV ) ); if ( t.exists() ) t.delete();
     t = new File( getCsxFile( survey + CSX ) ); if ( t.exists() ) t.delete();
-    t = new File( getDatFile( survey + CAVE ) ); if ( t.exists() ) t.delete();
+    t = new File( getCaveFile( survey + CAVE ) ); if ( t.exists() ) t.delete();
     t = new File( getDatFile( survey + DAT ) ); if ( t.exists() ) t.delete();
     t = new File( getDxfFile( survey + DXF ) ); if ( t.exists() ) t.delete();
     t = new File( getKmlFile( survey + KML ) ); if ( t.exists() ) t.delete();

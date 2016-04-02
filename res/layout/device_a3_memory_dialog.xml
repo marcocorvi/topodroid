@@ -163,5 +163,12 @@
       />
     </LinearLayout>
 
-   					  
+  <ListView android:id="@+id/list_memory"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:stackFromBottom="true"
+    android:transcriptMode="alwaysScroll"
+    android:textSize="12sp"
+  />  
+
 </LinearLayout>

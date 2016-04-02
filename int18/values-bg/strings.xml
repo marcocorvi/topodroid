@@ -21,7 +21,7 @@
 
     <string name="memoryA3">DistoX A3 памет</string>
     <string name="memoryX310">DistoX X310 памет</string>
-    <string name="memory_data">DistoX данни</string>
+    <!-- UNUSED string name="memory_data">DistoX данни</string -->
 
     <string name="thp_user">друго</string>
     <string name="thp_label">надпис</string>
@@ -374,6 +374,9 @@
     <string name="zip_saved">Записан </string>
     <string name="zip_failed">Грешка при архивиране</string>
     <string name="unzip_fail">Грешка при разархивиране</string>
+    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
+    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
+    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Информация за картировката</string>

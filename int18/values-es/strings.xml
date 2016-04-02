@@ -21,7 +21,7 @@
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
-    <string name="memory_data">Datos DistoX</string>
+    <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 
     <string name="thp_label">Texto</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
@@ -364,6 +364,9 @@
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
     <string name="unzip_fail">Error al importar archivo</string>
+    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
+    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
+    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
     <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
     <string name="survey_info">Info Topografía</string>

@@ -22,7 +22,7 @@
 
     <string name="memoryA3">Mémoire du DistoX A3</string>
     <string name="memoryX310">Mémoire du DistoX X310</string>
-    <string name="memory_data">Données du DistoX</string>
+    <!-- UNUSED string name="memory_data">Données du DistoX</string -->
 
     <string name="thp_user">utilisateur</string>
     <string name="thp_label">étiquette</string>
@@ -369,6 +369,9 @@
     <string name="zip_saved">Enregistré </string>
     <string name="zip_failed">Echec lors de la compression du relevé</string>
     <string name="unzip_fail">Echec lors la décompression du relevé</string>
+    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
+    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
+    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
     <!-- UNUSED string name="zoom_in_out">Zoom +/-</string -->
 
     <string name="survey_info">Information de relevé</string>

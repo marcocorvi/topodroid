@@ -21,7 +21,7 @@
 
     <string name="memoryA3">DistoX A3 Speicher</string>
     <string name="memoryX310">DistoX X310 Speicher</string>
-    <string name="memory_data">DistoX Daten</string>
+    <!-- UNUSED string name="memory_data">DistoX Daten</string -->
 
 <!-- names of therion items -->
     <string name="thp_user">Nutzer</string>
@@ -386,6 +386,9 @@
     <string name="zip_saved">Zip-Datei gespeichert</string>
     <string name="zip_failed">Fehler beim Speichern der Zip-Datei</string>
     <string name="unzip_fail">Fehler beim Entpacken der Zip-Datei</string>
+    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
+    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
+    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Vermessungsinfo</string>

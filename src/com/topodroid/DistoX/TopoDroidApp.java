@@ -675,6 +675,12 @@ public class TopoDroidApp extends Application
 
   int mManifestDbVersion = 0;
 
+  // returns
+  //  0 ok
+  // -1 survey already present
+  // -2 TopoDroid version mismatch
+  // -3 database version mismatch
+  // -4 survey name does not match filename
   public int checkManifestFile( String filename, String surveyname )
   {
     mManifestDbVersion = 0;

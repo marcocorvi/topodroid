@@ -2747,8 +2747,7 @@ public class DrawingActivity extends ItemDrawer
         computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       }
       resetReference( mPlot2 );
-      // FIXME if ( mApp.mShotActivity != null ) 
-      mApp.mShotActivity.mRecentPlotType = mType;
+      if ( mApp.mShotActivity != null ) mApp.mShotActivity.mRecentPlotType = mType;
     } 
 
     private void setPlotType1( boolean compute )
@@ -2763,8 +2762,7 @@ public class DrawingActivity extends ItemDrawer
         computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       }
       resetReference( mPlot1 );
-      // FIXME if ( mApp.mShotActivity != null ) 
-      mApp.mShotActivity.mRecentPlotType = mType;
+      if ( mApp.mShotActivity != null ) mApp.mShotActivity.mRecentPlotType = mType;
     }
 
     private void flipBlock( DistoXDBlock blk )
@@ -3332,16 +3330,14 @@ public class DrawingActivity extends ItemDrawer
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    // FIXME if ( mApp.mShotActivity != null ) 
-    mApp.mShotActivity.updateBlockList( blk );
+    if ( mApp.mShotActivity != null ) mApp.mShotActivity.updateBlockList( blk );
     updateDisplay( true );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
-    // FIXME if ( mApp.mShotActivity != null ) 
-    mApp.mShotActivity.updateBlockList( blk_id );
+    if ( mApp.mShotActivity != null ) mApp.mShotActivity.updateBlockList( blk_id );
     updateDisplay( true );
   }
 

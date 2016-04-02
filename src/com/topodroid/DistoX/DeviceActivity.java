@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
@@ -541,54 +542,18 @@ public class DeviceActivity extends Activity
     mApp.mDData.getDeviceHeadTail( mDevice.mAddress, head_tail );
   }
 
-  private void writeMemoryDumpToFile( String dumpfile, ArrayList< MemoryOctet > memory )
+  void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
-    if ( dumpfile == null ) return;
-    dumpfile.trim();
-    if ( dumpfile.length() == 0 ) return;
-    try { 
-      String dumppath = TDPath.getDumpFile( dumpfile );
-      TDPath.checkPath( dumppath );
-      FileWriter fw = new FileWriter( dumppath );
-      PrintWriter pw = new PrintWriter( fw );
-      for ( MemoryOctet m : memory ) {
-        m.printHexString( pw );
-        pw.format(" " + m.toString() + "\n");
-      }
-      fw.flush();
-      fw.close();
-    } catch ( IOException e ) {
-    }
+    ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, mDevice.mAddress, head_tail, dumpfile ) ).execute();
   }
 
-  void readX310Memory( final int[] head_tail, String dumpfile )
-  {
-    ArrayList< MemoryOctet > memory = new ArrayList< MemoryOctet >();
-    int n = mApp.readX310Memory( mDevice.mAddress, head_tail[0], head_tail[1], memory );
-    if ( n <= 0 ) return;
-    writeMemoryDumpToFile( dumpfile, memory );
-    (new MemoryListDialog(this, this, memory)).show();
-  }
-
-  void readA3Memory( final int[] head_tail, String dumpfile )
+  void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     if ( head_tail[0] < 0 || head_tail[0] >= 0x8000 || head_tail[1] < 0 || head_tail[1] >= 0x8000 ) {
       Toast.makeText(this, R.string.device_illegal_addr, Toast.LENGTH_SHORT).show();
       return;
     }
-    ArrayList< MemoryOctet > memory = new ArrayList< MemoryOctet >();
-    int from = head_tail[0];
-    int to   = head_tail[1];
-    // Log.v(TopoDroidApp.TAG, "read-memory from " + from + " to " + to );
-    int n = mApp.readA3Memory( mDevice.mAddress, from, to, memory );
-    if ( n == 0 ) {
-      Toast.makeText(this, "no data", Toast.LENGTH_SHORT).show();
-      return;
-    } 
-    // Toast.makeText(this, "read " + n + " data", Toast.LENGTH_SHORT).show();
-    writeMemoryDumpToFile( dumpfile, memory );
-    (new MemoryListDialog(this, this, memory)).show();
-
+    ( new MemoryReadTask( mApp, dialog, Device.DISTO_A3, mDevice.mAddress, head_tail, dumpfile ) ).execute();
   }
 
   // X310 data memory is read-only

@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Dialog;
 // import android.app.Activity;
@@ -26,10 +28,12 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 
 class DeviceX310MemoryDialog extends MyDialog
                              implements View.OnClickListener
+                             , IMemoryDialog
 {
   private Button mBtnDump;
   // private Button mBtnBack;
@@ -37,6 +41,10 @@ class DeviceX310MemoryDialog extends MyDialog
   private EditText mETdumpfrom;
   private EditText mETdumpto;
   private EditText mETdumpfile;
+
+  // List< MemoryOctet> mMemory;
+  ArrayAdapter< String > mArrayAdapter;
+  ListView mList;
 
   DeviceActivity mParent;
 
@@ -63,6 +71,7 @@ class DeviceX310MemoryDialog extends MyDialog
     super.onCreate( bundle );
 
     initLayout( R.layout.device_x310_memory_dialog, R.string.memoryX310 );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom );
     mETdumpto    = (EditText) findViewById( R.id.et_dumpto );
@@ -73,10 +82,22 @@ class DeviceX310MemoryDialog extends MyDialog
     // mBtnBack = (Button) findViewById(R.id.button_cancel);
     // mBtnBack.setOnClickListener( this );
     
+    mArrayAdapter = new ArrayAdapter<String>( mParent, R.layout.message );
+    mList = (ListView) findViewById(R.id.list_memory);
+    mList.setAdapter( mArrayAdapter );
+    // mList.setOnItemClickListener( this );
+    mList.setDividerHeight( 2 );
 
     // int[] ht = new int[2];
     // mParent.retrieveDeviceHeadTail( ht );
     // setText( mTVshead, mTVstail, ht );
+  }
+
+  public void updateList( ArrayList<MemoryOctet> memory )
+  {
+    mArrayAdapter.clear();
+    for ( MemoryOctet m : memory ) mArrayAdapter.add( m.toString() );
+    mList.invalidate();
   }
 
   static final int MAX_ADDRESS_X310 = 1064;
@@ -119,7 +140,7 @@ class DeviceX310MemoryDialog extends MyDialog
         if ( ht[0] < ht[1] ) {
           String file = null;
           if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();
-          mParent.readX310Memory( ht, file );
+          mParent.readX310Memory( this, ht, file );
         }
         break;
       // case R.id.button_cancel:

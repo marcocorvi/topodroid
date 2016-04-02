@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Dialog;
 // import android.app.Activity;
@@ -25,10 +27,12 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 
 class DeviceA3MemoryDialog extends MyDialog
                            implements View.OnClickListener
+                           , IMemoryDialog
 {
   DeviceActivity mParent;
 
@@ -48,6 +52,9 @@ class DeviceA3MemoryDialog extends MyDialog
   private TextView mTVrhead;
   private TextView mTVrtail;
 
+  // List< MemoryOctet> mMemory;
+  ArrayAdapter< String > mArrayAdapter;
+  ListView mList;
 
   DeviceA3MemoryDialog( Context context, DeviceActivity parent )
   {
@@ -61,6 +68,7 @@ class DeviceA3MemoryDialog extends MyDialog
     super.onCreate( bundle );
 
     initLayout( R.layout.device_a3_memory_dialog, R.string.memoryA3 );
+    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     mTVshead = (TextView) findViewById( R.id.tv_stored_head );
     mTVstail = (TextView) findViewById( R.id.tv_stored_tail );
@@ -82,10 +90,22 @@ class DeviceA3MemoryDialog extends MyDialog
     mBtnDump.setOnClickListener( this );
     // mBtnBack.setOnClickListener( this );
     
+    mArrayAdapter = new ArrayAdapter<String>( mParent, R.layout.message );
+    mList = (ListView) findViewById(R.id.list_memory);
+    mList.setAdapter( mArrayAdapter );
+    // mList.setOnItemClickListener( this );
+    mList.setDividerHeight( 2 );
 
     int[] ht = new int[2];
     mParent.retrieveDeviceHeadTail( ht );
     setText( mTVshead, mTVstail, ht );
+  }
+
+  public void updateList( ArrayList<MemoryOctet> memory )
+  {
+    mArrayAdapter.clear();
+    for ( MemoryOctet m : memory ) mArrayAdapter.add( m.toString() );
+    mList.invalidate();
   }
 
   private void setText( TextView h, TextView t, int[] ht )
@@ -163,7 +183,7 @@ class DeviceA3MemoryDialog extends MyDialog
         }
         String dumpfile = null;
         if ( mETdumpfile.getText() != null ) dumpfile = mETdumpfile.getText().toString();
-        mParent.readA3Memory( ht, dumpfile );
+        mParent.readA3Memory( this, ht, dumpfile );
         break;
       case R.id.button_read:
         mParent.readDeviceHeadTail( ht );

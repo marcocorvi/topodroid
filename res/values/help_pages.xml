@@ -28,7 +28,6 @@
   <string name="CalibValidateListDialog">page_validation.htm</string>
   <string name="CalibValidateResultDialog">page_validation.htm</string>
   <string name="ConnectDialog">page_connect.htm</string>
-  <string name="CSDialog">page_cs.htm</string>
   <string name="CurrentStationDialog">page_saved_station.htm</string>
   <string name="DeviceA3InfoDialog">page_a3_info.htm</string>
   <string name="DeviceA3MemoryDialog">page_memory.htm</string>
@@ -57,7 +56,6 @@
   <string name="ImportDialog">page_import.htm</string>
   <string name="ItemPickerDialog">page_tools_list.htm</string>
   <string name="ItemRecentDialog">page_tools_recent.htm</string>
-  <string name="MemoryListDialog">page_memory_list.htm</string>
   <string name="PhotoCommentDialog">page_photo_comment.htm</string>
   <string name="PhotoEditDialog">page_photo_edit.htm</string>
   <string name="PhotoSensorsDialog">page_shot_edit2.htm</string>

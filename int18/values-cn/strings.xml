@@ -21,7 +21,7 @@
 
     <string name="memoryA3">DistoX A3 内存</string>
     <string name="memoryX310">DistoX X310 内存</string>
-    <string name="memory_data">DistoX 数据</string>
+    <!-- UNUSED string name="memory_data">DistoX 数据</string -->
 
     <string name="thp_user">自定义</string>
     <string name="thp_label">标签</string>
@@ -368,6 +368,9 @@
     <string name="zip_saved">保存 </string>
     <string name="zip_failed">文件压缩失败</string>
     <string name="unzip_fail">文件解压失败</string>
+    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
+    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
+    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
     <!-- string name="zoom_in_out">放大/缩小</string -->
 
     <string name="survey_info">测量信息</string>

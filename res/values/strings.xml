@@ -21,7 +21,7 @@
 
     <string name="memoryA3">DistoX A3 memory</string>
     <string name="memoryX310">DistoX X310 memory</string>
-    <string name="memory_data">DistoX data</string>
+    <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">user</string>
     <string name="thp_label">label</string>
@@ -368,6 +368,9 @@
     <string name="zip_saved">Saved </string>
     <string name="zip_failed">Failed survey-zip</string>
     <string name="unzip_fail">Failed survey-unzip</string>
+    <string name="unzip_fail_survey">Failed: survey name mismatch</string>
+    <string name="unzip_fail_db">Failed: database version mismatch</string>
+    <string name="unzip_fail_td">Failed: TopoDroid version mismatch</string>
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Survey info</string>
