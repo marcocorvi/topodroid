@@ -343,9 +343,9 @@ public class ShotActivity extends Activity
         }
       } );
 
-      Message msg = Message.obtain();
-      msg.what = MSG_ADD_BLK;
-      mListItemsHandler.sendMessage( msg );
+      // Message msg = Message.obtain();
+      // msg.what = MSG_ADD_BLK;
+      // mListItemsHandler.sendMessage( msg );
     }
   }
 
@@ -715,8 +715,8 @@ public class ShotActivity extends Activity
   BitmapDrawable mBMright;
 
   // FIXME made static: should not cause problems
-  private static Handler mListItemsHandler = null;
-  static final int MSG_ADD_BLK = 1;
+  // private static Handler mListItemsHandler = null;
+  // static final int MSG_ADD_BLK = 1;
 
   // void refreshList()
   // {
@@ -737,17 +737,17 @@ public class ShotActivity extends Activity
     mShowSplay   = new ArrayList< String >();
     mDataAdapter = new DistoXDBlockAdapter( this, this, R.layout.row, new ArrayList<DistoXDBlock>() );
 
-    mListItemsHandler = new Handler() {
-      @Override
-      public void handleMessage( Message msg ) {
-        switch (msg.what) {
-        case MSG_ADD_BLK:
-          mDataAdapter.notifyDataSetChanged();
-          break;
-        }
-        super.handleMessage( msg );
-      }
-    };
+    // mListItemsHandler = new Handler() {
+    //   @Override
+    //   public void handleMessage( Message msg ) {
+    //     switch (msg.what) {
+    //     case MSG_ADD_BLK:
+    //       mDataAdapter.notifyDataSetChanged();
+    //       break;
+    //     }
+    //     super.handleMessage( msg );
+    //   }
+    // };
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     mButtonSize = mApp.setListViewHeight( mListView );

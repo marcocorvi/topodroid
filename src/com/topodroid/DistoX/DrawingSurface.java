@@ -249,6 +249,14 @@ public class DrawingSurface extends SurfaceView
     mCommandManager2.flipXAxis();
   }
 
+  // static Handler previewDoneHandler = new Handler()
+  // {
+  //   @Override
+  //   public void handleMessage(Message msg) {
+  //     isDrawing = false;
+  //   }
+  // };
+
   void refreshSurface()
   {
     // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
@@ -260,7 +268,7 @@ public class DrawingSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mZoomer.zoom(), previewDoneHandler, mSplayStations );
+        commandManager.executeAll( canvas, mZoomer.zoom(), mSplayStations );
         if ( previewPath != null ) previewPath.draw(canvas, null);
       }
     } finally {
@@ -270,13 +278,6 @@ public class DrawingSurface extends SurfaceView
     }
   }
 
-  private Handler previewDoneHandler = new Handler()
-  {
-    @Override
-    public void handleMessage(Message msg) {
-      isDrawing = false;
-    }
-  };
 
   // void clearDrawing() { commandManager.clearDrawing(); }
 

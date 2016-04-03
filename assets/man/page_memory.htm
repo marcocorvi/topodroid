@@ -4,28 +4,36 @@
 
 This dialog is opened tapping the <u>Memory</u> button of the <i>Device</i> window.<br><p>
 
-<ul>
-<li><b>Dump</b> reads the content of the DistoX memory. 
-You must enter the initial and final memory location in the two text fields to its right.</li>
-<li>Optional <b>filename</b> to save the dump</li>
-</ul>
-<br>
+<b>Memory dump<b><br><p>
 
-Only for DistoX A3:
+The <i>Dump</i> button reads the content of the DistoX memory.
+Reading the DistoX memory directly is a slow process, and the DistoX must be kept "ON" while doing it.
+It is advisable to read a portion of memory, say 50 entries, at a time:
+enter the initial and final memory location in the two text fields to its right.
+If you have entered a filename it is also saved to a dump file (in the "dump" folder).<br><p>
+
+Memory inspection requires some knowledge of the internals of the DistoX: at a minimum the address space, and the way data are stored. You should have read the DistoX documentation before using it.<br><p>
+
+The result of the memory dump is shown in a list at the bottom of the dialog.
+Each line contains 
+<ul>
+<li>the memory location</li>
+<li>a letter-code telling whether it is a shot ('d') or a calibration ('g') data</li>
+<li>the values of the memory.</li>
+</ul>
+<br><p>
+
+Entries without values are marked with a question-mark ('?') code.<br>
+Shot values are shown as length (meters), azimuth and clino (degrees).<br>
+The "accuracy" data of the DistoX2 are not shown.<br>
+For the calibration data, the raw values are shown ('m' data are not shown for the DistoX2).<br><p>
+
+
+<b>Only for DistoX A3<b><br>
 <ul>
 <li><b>Read</b> the memory cursors</li>
 <li><b>Store</b> the memory cursors</li>
 <li><b>Reset</b> a portion of memory, ie, marks it "to-be-downloaded"</li>
 </ul>
-
-The content of the DistoX memory is displayed in the "Memory list" dialog.<br><p>
-
-Reading the DistoX memory directly is a slow process, and the DistoX must be kept "ON" while doing it.
-It is advisable to read a portion of memory, say 50 entries, at a time.
-Be patient: this operation is carried out in the main gui thread.<br><p>
-
-If you have entered a filename it is also saved to a dump file (in the "dump" folder).<br><p>
-
-Memory inspection requires some knowledge of the internals of the DistoX: at a minimum the address space, and the way data are stored. You should have read the DistoX documentation before using it.<br><p>
 
 </body></html>

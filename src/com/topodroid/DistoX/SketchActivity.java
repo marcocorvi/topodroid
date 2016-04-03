@@ -430,22 +430,11 @@ public class SketchActivity extends ItemDrawer
   // void savePng()
   // {
   //   final Activity currentActivity  = this;
-  //   Handler saveHandler = new Handler(){
-  //        @Override
-  //        public void handleMessage(Message msg) {
-  //   //         TopoDroidAlertDialog.makeAlert( this, getResources(), "Saving sketch",
-  //   //         new DialogInterface.OnClickListener() {
-  //   //             public void onClick(DialogInterface dialog, int which) {
-  //   //                 return;
-  //   //             }
-  //   //         });
-  //        }
-  //   } ;
   //   Bitmap bitmap = mSketchSurface.getBitmap();
   //   if ( bitmap == null ) {
   //     Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
   //   } else {
-  //     new ExportBitmapToFile(this, saveHandler, mSketchSurface.getBitmap(), mFullName ).execute();
+  //     new ExportBitmapToFile(this, mSaveHandler, mSketchSurface.getBitmap(), mFullName ).execute();
   //     Toast.makeText( this, getString(R.string.saved_file_) + mFullName + ".png", Toast.LENGTH_SHORT ).show();
   //   }
   // }
@@ -565,27 +554,17 @@ public class SketchActivity extends ItemDrawer
   //   }
   // }
 
+  static Handler mSaveHandler = new Handler();
+  // {
+  //   @Override
+  //   public void handleMessage(Message msg) { }
+  // } ;
+
   boolean doSaveTh3( boolean not_all_symbols )
   {
     // TDLog.Log( TDLog.LOG_PLOT, " savingTh3 " + mFullName );
     if ( mFullName != null && mSketchSurface != null ) {
-      // if ( not_all_symbols ) {
-      //   alertMissingSymbols();
-      // }
-      // if ( mAllSymbols ) {
-        Handler saveHandler = new Handler(){
-             @Override
-             public void handleMessage(Message msg) {
-        //        TopoDroidAlertDialog.makeAlert( this, getResources(), "Saving sketch",
-        //           DialogInterface.OnClickListener() {
-        //             public void onClick(DialogInterface dialog, int which) {
-        //                 return;
-        //             }
-        //         });
-             }
-        } ;
-        new SaveTh3File(this, saveHandler, mModel, mFullName ).execute();
-      // }
+      new SaveTh3File(this, mSaveHandler, mModel, mFullName ).execute();
     }
     return false;
   }
@@ -641,11 +620,7 @@ public class SketchActivity extends ItemDrawer
       //   alertMissingSymbols();
       // }
       // if ( mAllSymbols ) {
-        Handler saveHandler = new Handler(){
-             @Override
-             public void handleMessage(Message msg) { }
-        } ;
-        new SaveDxfFile(this, saveHandler, mModel, mFullName ).execute();
+        new SaveDxfFile(this, mSaveHandler, mModel, mFullName ).execute();
       // }
     }
   }

@@ -1068,10 +1068,11 @@ public class DrawingCommandManager
     return splay_stations.contains( station );
   }
 
-  public void executeAll( Canvas canvas, float zoom, Handler doneHandler, ArrayList<String> splay_stations )
+  // N.B. doneHandler is not used
+  public void executeAll( Canvas canvas, float zoom, ArrayList<String> splay_stations )
   {
     if ( canvas == null ) {
-      TDLog.Error( "drawing executeAll null canvas");
+      TDLog.Error( "drawing executeAll: null canvas");
       return;
     }
 
@@ -1122,7 +1123,6 @@ public class DrawingCommandManager
           if ( splays || showStationSplays( path, splay_stations ) ) {
             path.draw( canvas, mMatrix, mScale, mBBox );
           }
-          //doneHandler.sendEmptyMessage(1);
         }
       }
     }
@@ -1143,7 +1143,6 @@ public class DrawingCommandManager
           if ( cmd.commandType() == 0 ) {
             cmd.draw( canvas, mMatrix, mScale, mBBox );
           }
-          //doneHandler.sendEmptyMessage(1);
         }
       }
     }

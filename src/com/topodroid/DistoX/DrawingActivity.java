@@ -558,6 +558,8 @@ public class DrawingActivity extends ItemDrawer
     mModified = false;
   }
 
+  static Handler saveHandler = null;
+
 
   // called by doSaveTdr and saveTh2
   // @param suffix
@@ -567,12 +569,11 @@ public class DrawingActivity extends ItemDrawer
   {
     // Log.v("DistoX", "start save Th2 task. type " + type + " suffix " + suffix 
     //               + " maxTasks " + maxTasks + " rotate " + rotate ); 
-    Handler handler = null;
     if ( suffix != PlotSave.EXPORT ) {
       if ( ! mModified ) return;
       if ( mNrSaveTh2Task > maxTasks ) return;
 
-      handler = new Handler(){
+      saveHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
           -- mNrSaveTh2Task;
@@ -590,7 +591,7 @@ public class DrawingActivity extends ItemDrawer
       mModified = false;
     } else {
       // Log.v("DISTOX", "exporting plot ...");
-      handler = new Handler(){
+      saveHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
           // mApp.mShotActivity.enableSketchButton( true );
@@ -605,7 +606,7 @@ public class DrawingActivity extends ItemDrawer
     long tt     = type;
     if ( type == -1 ) {
       try { 
-        (new SavePlotFileTask( this, this, handler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
+        (new SavePlotFileTask( this, this, saveHandler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
                               (int)mPlot2.azimuth, suffix, rotate )).execute();
       } catch ( RejectedExecutionException e ) { }
       name = mFullName1;
@@ -619,7 +620,7 @@ public class DrawingActivity extends ItemDrawer
       name = mFullName3;
     }
     try { 
-      (new SavePlotFileTask( this, this, handler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
+      (new SavePlotFileTask( this, this, saveHandler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
       ).execute();
     } catch ( RejectedExecutionException e ) { 
       -- mNrSaveTh2Task;
@@ -2747,7 +2748,11 @@ public class DrawingActivity extends ItemDrawer
         computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       }
       resetReference( mPlot2 );
-      if ( mApp.mShotActivity != null ) mApp.mShotActivity.mRecentPlotType = mType;
+      if ( mApp.mShotActivity != null ) {
+        mApp.mShotActivity.mRecentPlotType = mType;
+      } else {
+        TDLog.Error("Null app mShotActivity on recent plot type2");
+      }
     } 
 
     private void setPlotType1( boolean compute )
@@ -2762,7 +2767,11 @@ public class DrawingActivity extends ItemDrawer
         computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       }
       resetReference( mPlot1 );
-      if ( mApp.mShotActivity != null ) mApp.mShotActivity.mRecentPlotType = mType;
+      if ( mApp.mShotActivity != null ) {
+        mApp.mShotActivity.mRecentPlotType = mType;
+      } else {
+        TDLog.Error("Null app mShotActivity on recent plot type1");
+      }
     }
 
     private void flipBlock( DistoXDBlock blk )
@@ -3224,6 +3233,9 @@ public class DrawingActivity extends ItemDrawer
     //   if ( file.exists() ) file.renameTo( file2 );
     // }
 
+
+  static Handler th2Handler = null;
+
   // called (indirectly) only by ExportDialog: save as th2 even if there are missing symbols
   // no backup_rotate (rotate = 0)
   private void saveTh2()
@@ -3241,7 +3253,7 @@ public class DrawingActivity extends ItemDrawer
       name = mFullName3;
     }
     final String filename = name;
-    Handler handler = new Handler(){
+    th2Handler = new Handler(){
       @Override public void handleMessage(Message msg) {
         if (msg.what == 661 ) {
           Toast.makeText( mApp, getString(R.string.saved_file_) + " " + filename + ".th2", Toast.LENGTH_SHORT ).show();
@@ -3251,7 +3263,7 @@ public class DrawingActivity extends ItemDrawer
       }
     };
     try { 
-      (new SavePlotFileTask( this, this, handler, mApp, mDrawingSurface, name, mType, azimuth, suffix, 0 )).execute();
+      (new SavePlotFileTask( this, this, th2Handler, mApp, mDrawingSurface, name, mType, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }
 
@@ -3330,14 +3342,22 @@ public class DrawingActivity extends ItemDrawer
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    if ( mApp.mShotActivity != null ) mApp.mShotActivity.updateBlockList( blk );
+    if ( mApp.mShotActivity != null ) {
+      mApp.mShotActivity.updateBlockList( blk );
+    } else {
+      TDLog.Error("Null app mShotActivity on update list [1]");
+    }
     updateDisplay( true );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
-    if ( mApp.mShotActivity != null ) mApp.mShotActivity.updateBlockList( blk_id );
+    if ( mApp.mShotActivity != null ) {
+      mApp.mShotActivity.updateBlockList( blk_id );
+    } else {
+      TDLog.Error("Null app mShotActivity on update list [2]");
+    }
     updateDisplay( true );
   }
 
