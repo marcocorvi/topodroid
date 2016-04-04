@@ -8,7 +8,7 @@ name-fr danger
 name-de Gefahr
 name-ru опасность
 name-bg опасност
-th_name danger
+th_name u:danger
 orientation no
 color 0xff3333
 csurvey 6 6 80
