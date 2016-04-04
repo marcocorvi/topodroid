@@ -235,7 +235,6 @@
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
     <string name="menu_attach">СОЕДИНИТЬ</string>
-    <string name="menu_cs">СИСТЕМА КООРДИНАТ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <string name="menu_display">Показать</string>
