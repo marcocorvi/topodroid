@@ -231,7 +231,7 @@
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
     <string name="menu_attach">СОЕДИНИТЬ</string>
-    <!-- TODO string name="menu_cs">COORD SYSTEM</string -->
+    <string name="menu_cs">СИСТЕМА КООРДИНАТ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <string name="menu_display">Показать</string>
@@ -371,9 +371,9 @@
     <string name="zip_saved">Сохранено </string>
     <string name="zip_failed">Ошибка survey-zip</string>
     <string name="unzip_fail">Ошибка survey-unzip</string>
-    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
-    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
-    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
+    <string name="unzip_fail_survey">Ошибка: несовпадение названия съёмки</string>
+    <string name="unzip_fail_db">Ошибка: несовпадение версии базы данных</string>
+    <string name="unzip_fail_td">Ошибка: несовпадение версии TopoDroid</string>
     <!-- OK string name="zoom_in_out">Увеличить/уменьшить/string -->
 
     <string name="survey_info">Статистика съёмки</string>
@@ -389,7 +389,7 @@
     <string name="stat_station">Пикеты %1$d</string>
     <string name="stat_surface">Поверхн. пикеты %1$d %2$.1f %3$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
-    <!-- TODO string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f"</string -->
+    <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>
     <string name="shot_title">ПИКЕТ %1$s - %2$s"</string>
     <string name="shot_data">Дл %1$.2f  Аз %2$.1f  Уг %3$.1f"</string>
 
@@ -720,8 +720,8 @@
   <string name="pref_wait_laser_summary">Пауза после включения лазера [мс]</string>
   <string name="pref_wait_shot_title">Пауза после замера [мс]</string>
   <string name="pref_wait_shot_summary">Время ожидания после выполнения измерения [мс]</string>
-  <!-- TODO string name="pref_wait_data_title">Data pause [ms]</string -->
-  <!-- TODO string name="pref_wait_data_summary">Pause after a data download [ms]</string -->
+  <string name="pref_wait_data_title">Пауза скачивания [мс]</string>
+  <string name="pref_wait_data_summary">Время ожидания после скачивания данных [мс]</string>
   <string name="pref_conn_mode_title">Типы подключения</string>
   <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
   <string name="pref_auto_reconnect_title">Авто соединение</string>
