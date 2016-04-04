@@ -416,6 +416,44 @@ public class TopoDroidApp extends Application
   }
   // end FIXME_COMM
 
+  DeviceA3Info readDeviceA3Info( String address )
+  {
+    DeviceA3Info info = new DeviceA3Info();
+    byte[] ret = readMemory( address, 0x8008 );
+    if ( ret == null ) return null;
+    info.mCode = String.format( getResources().getString( R.string.device_code ), MemoryOctet.toInt( ret[1], ret[0] ) );
+
+    ret = readMemory( mDevice.mAddress, 0x8000 );
+    if ( ret == null ) return null;
+
+    info.mAngle   = getResources().getString( 
+                    (( ret[0] & 0x01 ) != 0)? R.string.device_status_angle_grad : R.string.device_status_angle_degree );
+    info.mCompass = getResources().getString( 
+                    (( ret[0] & 0x04 ) != 0)? R.string.device_status_compass_on : R.string.device_status_compass_off );
+    info.mCalib   = getResources().getString(
+                    (( ret[0] & 0x08 ) != 0)? R.string.device_status_calib : R.string.device_status_normal );
+    info.mSilent  = getResources().getString(
+                    (( ret[0] & 0x10 ) != 0)? R.string.device_status_silent_on : R.string.device_status_silent_off );
+    return info;
+  }
+
+  DeviceX310Info readDeviceX310Info( String address )
+  {
+    DeviceX310Info info = new DeviceX310Info();
+    byte[] ret = readMemory( address, 0x8008 );
+    if ( ret == null ) return null;
+    info.mCode = String.format( getResources().getString( R.string.device_code ), MemoryOctet.toInt( ret[1], ret[0] ) );
+
+    ret = readMemory( address, 0xe000 );
+    if ( ret == null ) return null;
+    info.mFirmware = String.format( getResources().getString( R.string.device_firmware ), ret[0], ret[1] );
+
+    ret = readMemory( address, 0xe004 );
+    if ( ret == null ) return null;
+    info.mHardware = String.format( getResources().getString( R.string.device_hardware ), ret[0], ret[1] );
+
+    return info;
+  }
 
   String readHeadTail( String address, int[] head_tail )
   {

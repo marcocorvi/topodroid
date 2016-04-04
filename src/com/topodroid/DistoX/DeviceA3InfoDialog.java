@@ -38,6 +38,12 @@ class DeviceA3InfoDialog extends MyDialog
   DeviceActivity mParent;
   Device mDevice;
 
+  TextView tv_serial;
+  TextView tv_statusAngle;
+  TextView tv_statusCompass;
+  TextView tv_statusCalib;
+  TextView tv_statusSilent;
+
   DeviceA3InfoDialog( Context context, DeviceActivity parent, Device device )
   {
     super( context, R.string.DeviceA3InfoDialog );
@@ -60,31 +66,37 @@ class DeviceA3InfoDialog extends MyDialog
     // mRBx310.setChecked( false );
 
     TextView tv_address       = (TextView) findViewById( R.id.tv_address );
-    TextView tv_serial        = (TextView) findViewById( R.id.tv_serial );
-    TextView tv_statusAngle   = (TextView) findViewById( R.id.tv_status_angle );
-    TextView tv_statusCompass = (TextView) findViewById( R.id.tv_status_compass );
-    TextView tv_statusCalib   = (TextView) findViewById( R.id.tv_status_calib );
-    TextView tv_statusSilent  = (TextView) findViewById( R.id.tv_status_silent );
+    tv_serial        = (TextView) findViewById( R.id.tv_serial );
+    tv_statusAngle   = (TextView) findViewById( R.id.tv_status_angle );
+    tv_statusCompass = (TextView) findViewById( R.id.tv_status_compass );
+    tv_statusCalib   = (TextView) findViewById( R.id.tv_status_calib );
+    tv_statusSilent  = (TextView) findViewById( R.id.tv_status_silent );
 
     setTitle( mParent.getResources().getString( R.string.device_info ) );
 
     tv_address.setText( String.format( mParent.getResources().getString( R.string.device_address ), mDevice.mAddress ) );
-    tv_serial.setText( mParent.readDistoXCode() );
-    byte res = mParent.readA3status();
-    String angle_units = (( res & 0x01 ) != 0)? "grad" : "degree";
-    String compass     = (( res & 0x04 ) != 0)? "on" : "off";
-    String calib       = (( res & 0x08 ) != 0)? "calib" : "normal";
-    String silent      = (( res & 0x10 ) != 0)? "on" : "off";
 
-    tv_statusAngle.setText(   String.format( mParent.getResources().getString( R.string.device_status_angle ), angle_units ) );
-    tv_statusCompass.setText( String.format( mParent.getResources().getString( R.string.device_status_compass ), compass ) );
-    tv_statusCalib.setText(   String.format( mParent.getResources().getString( R.string.device_status_calib ), calib ) );
-    tv_statusSilent.setText(  String.format( mParent.getResources().getString( R.string.device_status_silent ), silent ) );
+    // tv_serial.setText( "" );
+    // tv_statusAngle.setText(   "" );
+    // tv_statusCompass.setText( "" );
+    // tv_statusCalib.setText(   "" );
+    // tv_statusSilent.setText(  "" );
+    mParent.readA3Info( this );
 
     mBTok = (Button) findViewById( R.id.btn_ok );
     mBTok.setOnClickListener( this );
     // mBTcancel = (Button) findViewById( R.id.button_cancel );
     // mBTcancel.setOnClickListener( this );
+  }
+
+  public void updateInfo( DeviceA3Info info ) 
+  {
+    if ( info == null ) return;
+    tv_serial.setText( info.mCode );
+    tv_statusAngle.setText(   info.mAngle   );
+    tv_statusCompass.setText( info.mCompass );
+    tv_statusCalib.setText(   info.mCalib   );
+    tv_statusSilent.setText(  info.mSilent  );
   }
 
   @Override

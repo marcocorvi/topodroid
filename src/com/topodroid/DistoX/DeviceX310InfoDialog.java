@@ -37,6 +37,10 @@ class DeviceX310InfoDialog extends MyDialog
   DeviceActivity mParent;
   Device mDevice;
 
+  TextView tv_code;
+  TextView tv_firmware;
+  TextView tv_hardware;
+
   DeviceX310InfoDialog( Context context, DeviceActivity parent, Device device )
   {
     super( context, R.string.DeviceX310InfoDialog );
@@ -59,21 +63,30 @@ class DeviceX310InfoDialog extends MyDialog
     mRBx310.setChecked( true );
 
     TextView tv_address  = (TextView) findViewById( R.id.tv_address );
-    TextView tv_code     = (TextView) findViewById( R.id.tv_code );
-    TextView tv_firmware = (TextView) findViewById( R.id.tv_firmware );
-    TextView tv_hardware = (TextView) findViewById( R.id.tv_hardware );
+    tv_code     = (TextView) findViewById( R.id.tv_code );
+    tv_firmware = (TextView) findViewById( R.id.tv_firmware );
+    tv_hardware = (TextView) findViewById( R.id.tv_hardware );
 
     setTitle( mParent.getResources().getString( R.string.device_info ) );
 
     tv_address.setText( String.format( mParent.getResources().getString( R.string.device_address ), mDevice.mAddress ) );
-    tv_code.setText( mParent.readDistoXCode() );
-    tv_firmware.setText( mParent.readX310firmware() );
-    tv_hardware.setText( mParent.readX310hardware() );
+    // tv_code.setText( "" );
+    // tv_firmware.setText( "" );
+    // tv_hardware.setText( "" );
+    mParent.readX310Info( this );
 
     mBTok = (Button) findViewById( R.id.btn_ok );
     mBTok.setOnClickListener( this );
     // mBTback = (Button) findViewById( R.id.button_cancel );
     // mBTback.setOnClickListener( this );
+  }
+
+  public void updateInfo( DeviceX310Info info )
+  {
+    if ( info == null ) return;
+    tv_code.setText(     info.mCode );
+    tv_firmware.setText( info.mFirmware );
+    tv_hardware.setText( info.mHardware );
   }
 
   @Override

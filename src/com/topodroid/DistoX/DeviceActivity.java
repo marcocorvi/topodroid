@@ -542,6 +542,16 @@ public class DeviceActivity extends Activity
     mApp.mDData.getDeviceHeadTail( mDevice.mAddress, head_tail );
   }
 
+  void readX310Info( DeviceX310InfoDialog dialog )
+  {
+    ( new InfoReadX310Task( mApp, dialog, mDevice.mAddress ) ).execute();
+  }
+
+  void readA3Info( DeviceA3InfoDialog dialog )
+  {
+    ( new InfoReadA3Task( mApp, dialog, mDevice.mAddress ) ).execute();
+  }
+
   void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, mDevice.mAddress, head_tail, dumpfile ) ).execute();
@@ -733,35 +743,6 @@ public class DeviceActivity extends Activity
     } else if ( p++ == pos ) { // HELP
       (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
-  }
-
-  String readDistoXCode()
-  {
-    byte[] ret = mApp.readMemory( mDevice.mAddress, 0x8008 );
-    if ( ret == null ) return getResources().getString( R.string.device_busy );
-    int code = MemoryOctet.toInt( ret[1], ret[0] );
-    return String.format( getResources().getString( R.string.device_code ), code );
-  }
-
-  String readX310firmware()
-  {
-    byte[] ret = mApp.readMemory( mDevice.mAddress, 0xe000 );
-    if ( ret == null ) return getResources().getString( R.string.device_busy );
-    return String.format( getResources().getString( R.string.device_firmware ), ret[0], ret[1] );
-  }
-
-  String readX310hardware()
-  {
-    byte[] ret = mApp.readMemory( mDevice.mAddress, 0xe004 );
-    if ( ret == null ) return getResources().getString( R.string.device_busy );
-    return String.format( getResources().getString( R.string.device_hardware ), ret[0], ret[1] );
-  }
-
-
-  byte readA3status()
-  {
-    byte[] ret = mApp.readMemory( mDevice.mAddress, 0x8000 );
-    return ( ret == null )? 0 : ret[0];
   }
 
   @Override 
