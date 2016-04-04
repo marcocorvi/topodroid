@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="zero">Нет насыщенных данных</item>
     <item quantity="one">ВНИМАНИЕ. Один насыщенный данный</item>
     <item quantity="other">ВНИМАНИЕ. %1$d насыщенных данных</item>
   </plurals>

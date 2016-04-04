@@ -5,8 +5,10 @@
     android:layout_height="wrap_content"
     android:textSize="14sp"
     android:textColor="@color/menu_foreground"
-    android:background="@color/menu_background"
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="5dp"
 />
+<!--
+    android:background="@color/menu_background"
+-->

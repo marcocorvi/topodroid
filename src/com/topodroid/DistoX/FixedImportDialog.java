@@ -53,6 +53,7 @@ public class FixedImportDialog extends MyDialog
                                         , OnLongClickListener
 { 
   static final String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
+  static final String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";
 
   private FixedActivity mParent;
 
@@ -131,15 +132,19 @@ public class FixedImportDialog extends MyDialog
   {
     mArrayAdapter.clear();
 
-    boolean ret = false;
     File dir = new File( POINTLISTS );
+    if ( ! dir.exists() ) dir = new File( POINTLISTS_PRO );
+    if ( ! dir.exists() ) return false;
+
     File[] files = dir.listFiles();
     if ( files == null || files.length == 0 ) return false;
     // Log.v("DistoX", "number of files " + files.length );
+
+    boolean ret = false;
     for ( File f : files ) {
       // Log.v("DistoX", "file " + f.getName() + " is dir " + f.isDirectory() );
       if ( ! f.isDirectory() ) {
-        ret = readPointFile( f.getName() ) || ret; // N.B. read file before oring with ret
+        ret = readPointFile( dir, f.getName() ) || ret; // N.B. read file before oring with ret
       }
     }
     if ( ret ) {
@@ -151,12 +156,13 @@ public class FixedImportDialog extends MyDialog
     return ret;
   }
 
-  private boolean readPointFile( String filename )
+  private boolean readPointFile( File dir, String filename )
   {
     // Log.v("DistoX", "reading file " + filename );
     boolean ret = false;
     try {
-      FileReader fr = new FileReader( POINTLISTS + "/" + filename );
+      File file = new File( dir, filename );
+      FileReader fr = new FileReader( file );
       BufferedReader br = new BufferedReader( fr );
       for ( ; ; ) {
         String line = br.readLine();

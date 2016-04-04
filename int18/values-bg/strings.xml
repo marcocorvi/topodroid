@@ -149,7 +149,7 @@
     <string name="longitude_hint">Дълж. гг:мм:сс.ссс</string>
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
     <string name="loop_none">няма полигон loop</string>
-    <string name="long_lat">Дълж.-Шир.</string>
+    <!-- UNUSED string name="long_lat">Дълж.-Шир.</string -->
 
     <!-- string name="line_delete">Изтриване на линия</string -->
     <string name="flip_shots">Обръщане на отсечките</string>

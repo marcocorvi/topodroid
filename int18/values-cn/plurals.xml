@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- PLURAL string name="calib_saturated_values">警告: %1$d 数据溢出</string -->
-  <!-- plurals name="calib_saturated_values">
-    <item quantity="zero">无饱和数据</item>
+  <plurals name="calib_saturated_values">
     <item quantity="one">警告： 一个饱和数据</item>
-    <item quantity=["two" | "few" | "many" | "other" ]>警告. %1$d 饱和数据</item>
-  </plurals -->
+    <item quantity="other">警告. %1$d 饱和数据</item>
+  </plurals>
 
-  <!-- PLURAL string name="read_data">读取 %1$d 数据</string -->
-  <!-- plurals name="read_data">
+  <plurals name="read_data">
     <item quantity="zero">无数据读取</item>
-    <item quantity=["one" | "two" | "few" | "many" | "other" ]>读取 %1$d data</item>
-  </plurals -->
+    <item quantity="other">读取 %1$d data</item>
+  </plurals>
 
-  <!-- PLURAL string name="read_calib_data">读取 %1$d 数据 (%2$d packets)</string -->
-  <!-- plurals name="read_calib_data">
+  <plurals name="read_calib_data">
     <item quantity="zero">无校准数据读取</item>
-    <item quantity=["one" | "two" | "few" | "many" | "other" ]>读取 %1$d 数据 (%2$d packets)</item>
-  </plurals -->
+    <item quantity="other">读取 %1$d 数据 (%2$d packets)</item>
+  </plurals>
 </resources>

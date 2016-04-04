@@ -40,13 +40,13 @@ class TDConst
 
   static final String[] mSurveyExportTypes = { "ZIP", 
                             "Compass", "cSurvey", "PocketTopo", "Survex", "Therion", "VisualTopo", "Walls", 
-                            "CSV", "DXF", "KML", "OziExplorer" /* , "Polygon" */ };
+                            "CSV", "DXF", "KML", "OziExplorer", "Polygon" };
   static final int[] mSurveyExportIndex = { 20, 
                             DISTOX_EXPORT_DAT, DISTOX_EXPORT_CSX, DISTOX_EXPORT_TOP,
                             DISTOX_EXPORT_SVX, DISTOX_EXPORT_TH,
                             DISTOX_EXPORT_TRO, DISTOX_EXPORT_SRV,
                             DISTOX_EXPORT_CSV, DISTOX_EXPORT_DXF,
-                            DISTOX_EXPORT_KML, DISTOX_EXPORT_PLT /* , DISTOX_EXPORT_PLG */ };
+                            DISTOX_EXPORT_KML, DISTOX_EXPORT_PLT, DISTOX_EXPORT_PLG };
 
   static final String[] mPlotExportTypes = { "Therion", "cSurvey", "DXF", "SVG", "PNG" };
   static final int[] mPlotExportIndex = {

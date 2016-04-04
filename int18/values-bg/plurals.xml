@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="zero">Няма наситени данни</item>
     <item quantity="one">ПРЕДУПРЕЖДЕНИЕ: Едни наситени данни</item>
     <item quantity="other">ПРЕДУПРЕЖДЕНИЕ: %1$d наситени данни</item>
   </plurals>

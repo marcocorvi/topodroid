@@ -2,7 +2,6 @@
 <resources>
   <!-- PLURAL string name="calib_saturated_values">ATTENTION : %1$d Saturation des données</string -->
   <!-- plurals name="calib_saturated_values">
-    <item quantity="zero">No saturated data</item>
     <item quantity="one">WARNING. One saturated data</item>
     <item quantity=["two" | "few" | "many" | "other" ]>WARNING. %1$d saturated data</item>
   </plurals -->
