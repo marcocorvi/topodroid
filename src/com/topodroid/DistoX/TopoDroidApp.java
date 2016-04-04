@@ -1964,7 +1964,6 @@ public class TopoDroidApp extends Application
     }
   }
 
-
   void syncRemoteTopoDroid( BluetoothDevice device )
   { 
     if ( mSyncConn != null ) mSyncConn.syncDevice( device );

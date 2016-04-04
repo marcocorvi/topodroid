@@ -634,7 +634,8 @@ class TDSetting
     mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
     setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
     mAzimuthManual = prefs.getBoolean( key[k++], false );   // DISTOX_AZIMUTH_MANUAL 
-    TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth );
+    TDAzimuth.mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
+    // TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth ); // BUG may call setRefAzimuthButton on non-UI thread
 
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX

@@ -22,7 +22,13 @@ public class TDAzimuth
   {
     mRefAzimuth  = azimuth;
     mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
-    if ( TopoDroidApp.mShotActivity != null ) TopoDroidApp.mShotActivity.setRefAzimuthButton();
+    if ( TopoDroidApp.mShotActivity != null ) {
+      TopoDroidApp.mShotActivity.runOnUiThread( new Runnable() {
+        public void run() {
+          TopoDroidApp.mShotActivity.setRefAzimuthButton();
+        }
+      } );
+    }
     // DrawingActivity does not have the RefAzimuth setting
   }
 
