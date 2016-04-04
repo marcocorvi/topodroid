@@ -895,6 +895,8 @@
 
   <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
   <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>
+  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
+  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Размер на име на репер</string>
   <string name="pref_station_size_summary">Размер на име на репер</string>
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>

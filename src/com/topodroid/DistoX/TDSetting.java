@@ -22,9 +22,10 @@ class TDSetting
   // ---------------------------------------------------------
   // PREFERENCES KEYS
 
-  final static int NR_PRIMARY_PREFS = 11;
+  final static int NR_PRIMARY_PREFS = 12;
 
   static final String[] key = { // prefs keys
+    // ------------------------- PRIMARY PREFS
     "DISTOX_EXTRA_BUTTONS",       //  0 TODO move to general options
     "DISTOX_SIZE_BUTTONS",        //  1
     "DISTOX_TEXT_SIZE",           //  2
@@ -32,12 +33,13 @@ class TDSetting
     "DISTOX_TEAM",                //  4
     "DISTOX_COSURVEY",            //  5
     "DISTOX_INIT_STATION",        //  6 default initial station for sketches
+    "DISTOX_AZIMUTH_MANUAL",      //  7
 
-    "DISTOX_DEVICE",              //  7 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
-    "DISTOX_BLUETOOTH",           //  8
+    "DISTOX_DEVICE",              //  8 N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
+    "DISTOX_BLUETOOTH",           //  9
 
-    "DISTOX_LOCALE",              //  9
-    "DISTOX_CWD",                 // 10
+    "DISTOX_LOCALE",              // 10
+    "DISTOX_CWD",                 // 11
 
     // ----------------------- DEVICE PREFERNCES 
     "DISTOX_SOCK_TYPE",           // 11
@@ -109,7 +111,6 @@ class TDSetting
     "DISTOX_SPLAY_VERT_THRS",     // 64 over mSplayVertThrs splays are not displayed in plan view
     "DISTOX_BACKSIGHT",           // 65
     "DISTOX_MAG_ANOMALY",         // 66 whether to compensate magnetic anomaly
-    "DISTOX_AZIMUTH_MANUAL",      // 67
     "DISTOX_VERT_SPLAY",          // 68 over this splay are shown with dashed line
     "DISTOX_STATION_PREFIX",      // 69 whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
@@ -128,6 +129,7 @@ class TDSetting
     "DISTOX_AREA_BORDER",         // 83 area border visibility
     "DISTOX_CONT_JOIN",           // 84 line continuation is join
     "DISTOX_ORTHO_LRUD",          // 86 orthogonal LRUD ( >=1 disable, min 0 )
+    "DISTOX_SECTION_STATIONS",    //
 
     "DISTOX_WALLS_TYPE",          // 87
     "DISTOX_WALLS_PLAN_THR",      // 88
@@ -336,6 +338,8 @@ class TDSetting
   static float mDotRadius      = 5;
   static float mArrowLength    = 8;
 
+  static int mSectionStations = 3; // 1: From, 2: To, 3: both
+
   static boolean mUnscaledPoints = false;
   static boolean mAreaBorder     = true;
   static boolean mContJoin       = false;
@@ -519,6 +523,10 @@ class TDSetting
     mInitStation = prefs.getString( key[k++], "0" ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
     if ( mInitStation.length() == 0 ) mInitStation = "0";
     DistoXStationName.setInitialStation( mInitStation );
+
+    mAzimuthManual = prefs.getBoolean( key[k++], false );   // DISTOX_AZIMUTH_MANUAL 
+    TDAzimuth.mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
+    // TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth ); // BUG may call setRefAzimuthButton on non-UI thread
     
     // ------------------- DEVICE PREFERENCES -def--fallback--min-max
     k++;                                                     // DISTOX_DEVICE - UNUSED HERE
@@ -633,9 +641,6 @@ class TDSetting
 
     mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
     setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
-    mAzimuthManual = prefs.getBoolean( key[k++], false );   // DISTOX_AZIMUTH_MANUAL 
-    TDAzimuth.mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
-    // TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth ); // BUG may call setRefAzimuthButton on non-UI thread
 
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
     mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
@@ -657,7 +662,7 @@ class TDSetting
     mUnitGrid       = tryFloat(  prefs, key[k++], "1" );      // DISTOX_UNIT_GRID
     mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
 
-    mRecentNr = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
+    mRecentNr   = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
 
     mAreaBorder = prefs.getBoolean( key[k++], true );         // DISTOX_AREA_BORDER
     mContJoin   = prefs.getBoolean( key[k++], false );        // DISTOX_CONT_JOIN
@@ -665,6 +670,8 @@ class TDSetting
     mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0");  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
+
+    mSectionStations  = tryInt( prefs, key[k++], "3");         // DISTOX_SECTION_STATIONS
 
     mWallsType        = tryInt(   prefs, key[k++], "0" );     // DISTOX_WALLS_TYPE choice: 0, 1
     mWallsPlanThr     = tryFloat( prefs, key[k++], "70"  );   // DISTOX_WALLS_PLAN_THR
@@ -726,6 +733,10 @@ class TDSetting
       mInitStation = prefs.getString( k, "0" ).replaceAll("\\s+", "");
       if ( mInitStation.length() == 0 ) mInitStation = "0";
       DistoXStationName.setInitialStation( mInitStation );
+    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_AZIMUTH_MANUAL
+      mAzimuthManual = prefs.getBoolean( k, false ); 
+      TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth );
+
     } else if ( k.equals( key[ nk++ ] ) ) {
       // mDevice      = mData.getDevice( prefs.getString( k, "" ) );  // DISTOX_DEVICE - UNUSED HERE
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -919,9 +930,6 @@ class TDSetting
       mBacksight = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_MAG_ANOMALY
       setMagAnomaly( prefs.getBoolean( k, false ) );
-    } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_AZIMUTH_MANUAL
-      mAzimuthManual = prefs.getBoolean( k, false ); 
-      TDAzimuth.resetRefAzimuth( TDAzimuth.mRefAzimuth );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVertSplay = tryFloat( prefs, k, "50" );
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -966,8 +974,11 @@ class TDSetting
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
 
-    } else if ( k.equals( key[ nk++ ] ) ) { 
-      mWallsType = tryInt(prefs, k, "0" ); // DISTOX_WALLS_TYPE
+    } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_SECTION_STATIONS
+      mSectionStations = tryInt( prefs, k, "3");
+
+    } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_WALLS_TYPE
+      mWallsType = tryInt(prefs, k, "0" );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mWallsPlanThr = tryFloat( prefs, k, "70" ); // DISTOX_WALLS_PLAN_THR
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1105,6 +1116,10 @@ class TDSetting
 
   static String enforsePreferenceBounds( String name, String value )
   {
+    // if ( name.equals( "DISTOX_COSURVEY" )
+    //S if ( name.equals( "DISTOX_INIT_STATION" )
+    //B if ( name.equals( "DISTOX_AZIMUTH_MANUAL" )
+
     if ( name.equals( "DISTOX_TEXT_SIZE" ) ) return parseIntValue( value, mTextSize, 1 );
     if ( name.equals( "DISTOX_CLOSE_DISTANCE" ) ) return parseFloatValue( value, mCloseDistance, 0.0001f );
     if ( name.equals( "DISTOX_EXTEND_THR2"    ) ) return parseFloatValue( value, mExtendThr, 0, 90 );
@@ -1154,7 +1169,6 @@ class TDSetting
     if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerCount, 0 );
     if ( name.equals( "DISTOX_BEEP_VOLUME"    ) ) return parseIntValue( value, mBeepVolume, 10, 100 );
     // if ( name.equals( "DISTOX_LEG_SHOTS" )
-    // if ( name.equals( "DISTOX_COSURVEY" )
 
     if ( name.equals( "DISTOX_SKETCH_LINE_STEP" ) ) return parseFloatValue( value, mSketchSideSize,  0.01f );
     if ( name.equals( "DISTOX_DELTA_EXTRUDE"    ) ) return parseFloatValue( value, mDeltaExtrude,    0.01f );
@@ -1172,11 +1186,9 @@ class TDSetting
     //B if ( name.equals( "DISTOX_THERION_MAPS" )
 
     if ( name.equals( "DISTOX_SPLAY_VERT_THRS"  ) ) return parseFloatValue( value, mSplayVertThrs, 0, 91 );
-    //S if ( name.equals( "DISTOX_INIT_STATION" )
     //B if ( name.equals( "DISTOX_BACKSIGHT" )
     //B if ( name.equals( "DISTOX_Z6_WORKAROUND" )
     //B if ( name.equals( "DISTOX_MAG_ANOMALY" )
-    //B if ( name.equals( "DISTOX_AZIMUTH_MANUAL" )
     if ( name.equals( "DISTOX_VERT_SPLAY"       ) ) return parseFloatValue( value, mVertSplay, 0, 91 );
     //B if ( name.equals( "DISTOX_STATION_PREFIX" )
     //C if ( name.equals( "DISTOX_STATION_NAMES" )

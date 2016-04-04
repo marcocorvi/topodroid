@@ -892,6 +892,8 @@
 
   <string name="pref_picker_type_title">Sélectionneur de symbole</string>
   <string name="pref_picker_type_summary">Type sélectionneur symbole</string>
+  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
+  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Taille nom de station</string>
   <string name="pref_station_size_summary">Taille du texte des stations</string>
   <string name="pref_station_size_message">Taille du texte des stations</string>

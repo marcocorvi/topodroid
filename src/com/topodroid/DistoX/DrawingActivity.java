@@ -205,7 +205,6 @@ public class DrawingActivity extends ItemDrawer
   private DrawingBrush mCurrentBrush;
   private Path  mCurrentPath;
 
-
   // LinearLayout popup_layout = null;
   PopupWindow mPopupEdit = null;
 
@@ -1267,6 +1266,18 @@ public class DrawingActivity extends ItemDrawer
 
       for ( DistoXDBlock b : list ) { // repeat for splays
         if ( b.mType != DistoXDBlock.BLOCK_SPLAY ) continue;
+   
+        int splay_station = 3; // could use a boolean
+        if ( b.mFrom.equals( mFrom ) ) {
+          splay_station = 1;
+          if ( TDSetting.mSectionStations == 2 ) continue;
+        } else if ( b.mFrom.equals( mTo ) ) {
+          splay_station = 2;
+          if ( TDSetting.mSectionStations == 1 ) continue;
+        } else {
+          continue;
+        }
+
         float d = b.mLength;
         float bc = b.mClino * TDMath.GRAD2RAD;
         float bb = b.mBearing * TDMath.GRAD2RAD;
@@ -1281,13 +1292,13 @@ public class DrawingActivity extends ItemDrawer
           x = xx;
         }
         // Log.v("DistoX", "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
-        if ( b.mFrom.equals( mFrom ) ) {
+        if ( splay_station == 1 ) {
           // N.B. this must be guaranteed for X_SECTION
           x += xfrom;
           y += yfrom;
           addFixedSectionSplay( b, xfrom, yfrom, x, y, 0, 0, false );
           // Log.v("DistoX", "Splay(F) " + x + " " + y );
-        } else { // if ( b.mFrom.equals( mTo ) ) 
+        } else { // if ( splay_station == 2
           x += xto;
           y += yto;
           addFixedSectionSplay( b, xto, yto, x, y, 0, 0, true );

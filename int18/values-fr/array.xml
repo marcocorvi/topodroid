@@ -132,6 +132,11 @@
      <item name="grid">Grille</item>
    </string-array>
 
+  <!-- TODO string-array name="sectionStations">
+     <item name="both">both</item>
+     <item name="from">behind</item>
+     <item name="to">in front</item>
+  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Aucune</item>

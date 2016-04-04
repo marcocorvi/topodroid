@@ -72,7 +72,7 @@ class SymbolLineLibrary extends SymbolLibrary
   private void loadSystemLines( Resources res )
   {
     if ( mSymbols.size() > 0 ) return;
-    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "user", "user", "user", 0xffffffff, 1 );
+    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "u:user", "user", "user", 0xffffffff, 1 );
     symbol.mCsxLayer = 5;
     symbol.mCsxType  = 4;
     symbol.mCsxCategory = 1;

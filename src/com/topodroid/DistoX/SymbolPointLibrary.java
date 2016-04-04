@@ -31,7 +31,7 @@ class SymbolPointLibrary extends SymbolLibrary
   // ArrayList< SymbolPoint > mPoint;    // enabled points
   int mPointUserIndex;
   int mPointLabelIndex;
-  int mPointDangerIndex;
+  // int mPointDangerIndex;
   int mPointSectionIndex;
 
   SymbolPointLibrary( Resources res )
@@ -39,7 +39,7 @@ class SymbolPointLibrary extends SymbolLibrary
     super( "p_" );
     mPointUserIndex   = 0;
     mPointLabelIndex  = -1;
-    mPointDangerIndex = -1;
+    // mPointDangerIndex = -1;
     mPointSectionIndex = -1;
     loadSystemPoints( res );
     loadUserPoints();
@@ -92,7 +92,7 @@ class SymbolPointLibrary extends SymbolLibrary
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadSystemPoints()" );
 
     mPointUserIndex = mSymbols.size();
-    symbol = new SymbolPoint( res.getString(R.string.thp_user), "user", "user", 0xffffffff, p_user, false, false );
+    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", "user", 0xffffffff, p_user, false, false );
     symbol.mCsxLayer = 6;
     symbol.mCsxType  = 8;
     symbol.mCsxCategory = 81;
@@ -181,7 +181,7 @@ class SymbolPointLibrary extends SymbolLibrary
     super.makeEnabledList();
     mPointUserIndex    = getSymbolIndexByThName( "user" );
     mPointLabelIndex   = getSymbolIndexByThName( "label" );
-    mPointDangerIndex  = getSymbolIndexByThName( "danger" );
+    // mPointDangerIndex  = getSymbolIndexByThName( "danger" );
     mPointSectionIndex = getSymbolIndexByThName( "section" ); 
   }
 

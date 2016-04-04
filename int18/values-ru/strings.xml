@@ -891,6 +891,8 @@
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
+  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
+  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Размер номера пикетов</string>
   <string name="pref_station_size_summary">Размер номера пикетов</string>
   <string name="pref_station_size_message">Размер подписи пикетов</string>

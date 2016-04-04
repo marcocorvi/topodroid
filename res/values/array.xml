@@ -205,15 +205,6 @@
      <item name="continuous">1</item>
   </string-array>
 
-  <!-- string-array name="altitudeType">
-    <item name="wgs84">WGS84 ellipsoidal</item>
-    <item name="asl">Orthometric</item>
-  </string-array>
-  <string-array name="altitudeTypeValue">
-    <item name="wgs84">0</item>
-    <item name="asl">1</item>
-  </string-array -->
-
   <string-array name="sockType">
      <item name="default">Default</item>
      <item name="Insecure">Insecure</item>
@@ -253,6 +244,17 @@
      <item name="recent">0</item>
      <item name="list">1</item>
      <item name="grid">2</item>
+  </string-array>
+
+  <string-array name="sectionStations">
+     <item name="both">Both</item>
+     <item name="from">Behind</item>
+     <item name="to">In front</item>
+  </string-array>
+  <string-array name="sectionStationsValue">
+     <item name="both">3</item>
+     <item name="from">1</item>
+     <item name="to">2</item>
   </string-array>
 
   <string-array name="recentNr">
@@ -353,9 +355,9 @@
   </string-array>
 
   <string-array name="calibAlgo">
-     <item name="auto">auto</item>
-     <item name="linear">linear</item>
-     <item name="nonlinear">non-linear</item>
+     <item name="auto">Auto</item>
+     <item name="linear">Linear</item>
+     <item name="nonlinear">Non-linear</item>
   </string-array>
   <string-array name="calibAlgoValue">
      <item name="auto">0</item>

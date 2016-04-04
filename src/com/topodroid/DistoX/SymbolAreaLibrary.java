@@ -99,7 +99,7 @@ class SymbolAreaLibrary extends SymbolLibrary
     // Log.v( TopoDroidApp.TAG, "load system areas");
     if ( size() > 0 ) return;
 
-    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "user", "user", 0x67cccccc, null, TileMode.REPEAT, TileMode.REPEAT, false );
+    SymbolArea symbol = new SymbolArea( res.getString( R.string.tha_user ),  "u:user", "user", 0x67cccccc, null, TileMode.REPEAT, TileMode.REPEAT, false );
     symbol.mCsxLayer = 2;
     symbol.mCsxType  = 3;   
     symbol.mCsxCategory = 46;

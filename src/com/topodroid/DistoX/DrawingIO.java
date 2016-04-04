@@ -210,7 +210,13 @@ class DrawingIO
               }
 
               DrawingBrushPaths.mPointLib.tryLoadMissingPoint( type );
-              ptType = DrawingBrushPaths.mPointLib.getSymbolIndexByThName( type );
+              // map pre 3.1.1 thnames to 3.1.1 names
+              String thname = type;
+              if ( thname.equals( "user" ) )        { thname = "u:user"; }
+              else if ( thname.equals( "danger" ) ) { thname = "u:danger"; }
+              else if ( thname.equals( "archeo" ) ) { thname = "archeo-material"; }
+              ptType = DrawingBrushPaths.mPointLib.getSymbolIndexByThName( thname );
+              // Log.v("DistoX", "type " + type + " thname " + thname + " " + ptType );
               if ( ptType < 0 ) {
                 if ( missingSymbols != null ) missingSymbols.addPointFilename( type ); // add "type" to the missing point-types
                 ptType = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
@@ -219,16 +225,17 @@ class DrawingIO
 
               if ( ptType == DrawingBrushPaths.mPointLib.mPointLabelIndex ) {
                 if ( label_text != null ) {
-                  if ( label_text.equals( "!" ) ) {    // "danger" point
-                    DrawingPointPath path = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointDangerIndex, x, y, scale, options );
-                    surface.addDrawingPath( path );
-                  } else {                             // regular label
+                  // "danger" is no longer mapped on a label 
+                  // if ( label_text.equals( "!" ) ) {    // "danger" point
+                  //   DrawingPointPath path = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointDangerIndex, x, y, scale, options );
+                  //   surface.addDrawingPath( path );
+                  // } else {                             // regular label
                     DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
                     if ( has_orientation ) {
                       path.setOrientation( orientation );
                     }
                     surface.addDrawingPath( path );
-                  }
+                  // }
                 }
               } else if ( has_orientation && DrawingBrushPaths.mPointLib.isSymbolOrientable(ptType) ) {
                 // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
@@ -274,7 +281,9 @@ class DrawingIO
                       String[] vals2 = line.split( " " );
                       if ( vals2.length >= 2 ) {
                         DrawingBrushPaths.mAreaLib.tryLoadMissingArea( vals2[1] );
-                        arType = DrawingBrushPaths.mAreaLib.getSymbolIndexByThName( vals2[1] );
+                        String thname = vals2[1];
+                        if ( thname.equals( "user" ) ) { thname = "u:user"; }
+                        arType = DrawingBrushPaths.mAreaLib.getSymbolIndexByThName( thname );
                         if ( arType < 0 ) {
                           if ( missingSymbols != null ) missingSymbols.addAreaFilename( vals2[1] );
                           arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
@@ -375,7 +384,9 @@ class DrawingIO
                 int lnType = lnTypeMax;
                 DrawingLinePath path = null;
                 DrawingBrushPaths.mLineLib.tryLoadMissingLine( type );
-                lnType = DrawingBrushPaths.mLineLib.getSymbolIndexByThName( type );
+                String thname = type;
+                if ( thname.equals( "user" ) ) { thname = "u:user"; }
+                lnType = DrawingBrushPaths.mLineLib.getSymbolIndexByThName( thname );
                 if ( lnType < 0 ) {
                   if ( missingSymbols != null ) missingSymbols.addLineFilename( type );
                   lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME

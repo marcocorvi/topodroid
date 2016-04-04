@@ -899,6 +899,8 @@
 
   <string name="pref_picker_type_title">Dialogo scelta prototipo</string>
   <string name="pref_picker_type_summary">Tipo dialogo scelta prototipo grafico</string>
+  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
+  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Dimensione nome capisaldi</string>
   <string name="pref_station_size_summary">Dimensione nome capisaldi</string>
   <string name="pref_station_size_message">Size of the station labels</string>
