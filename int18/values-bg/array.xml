@@ -106,11 +106,11 @@
      <item name="grid">Таблица</item>
   </string-array>
 
-  <!-- TODO string-array name="sectionStations">
-     <item name="both">both</item>
-     <item name="from">behind</item>
-     <item name="to">in front</item>
-  </string-array -->
+  <string-array name="sectionStations">
+     <item name="both">В двата</item>
+     <item name="from">В преден</item>
+     <item name="to">В заден</item>
+  </string-array>
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Няма</item>
