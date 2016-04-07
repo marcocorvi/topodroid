@@ -5,12 +5,13 @@ All that is required is to provide a translation for strings in three files:
 - strings.xml
 - array.xml
 - plurals.xml
+and drawing tools names. For any drawing tool there is one file in the symbol-git directiory. 
 
 For each translation language these are in the directory int18/values-XX (where XX is the iso code
 of the language). For example int18/values-de/strings.xml is the german translation file for strings.
 
 The master string files (english) are in res/values.
-For the translation languages there are symlinks to the int18/values-XX directory in res.
+For the translated languages there are symlinks to the int18/values-XX directory in res.
 
 All the translation files are "aligned", ie the order of the strings is the same in all of them.
 This help maintaining the translations.
@@ -58,8 +59,8 @@ That is usually my fault.
 As a translator you should check now and then your string file against the original (English)
 file, and add the missing strings, possibly commented if there is no need for translation.
 
-The "values" strings in the "array.xml" files must not be translated, so they should be present
-only in the default file. 
+The "...Value" strings in the "array.xml" files must not be translated, so they must be present
+only in the default file.
 
 
 -------------------------------------------------------------------------
@@ -102,3 +103,8 @@ TopoDroid.
 
 Since this is a bit annoying (to the user that gets a dialog asking if he/she wants to
 update the drawing tools), try to limit it and to do all the changes at once.
+
+You can test your changes to the drawing tools without installing a new apk.
+Copy the new files in the subdirectories of topodroid/symbols on your android and
+restart topodroid (you might have to stop the app explicitly with a task manager or
+the Settings app).
