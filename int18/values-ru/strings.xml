@@ -91,14 +91,14 @@
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Прошивка  %1$d.%2$d</string>
     <string name="device_hardware">Чип  %1$d.%2$d</string>
-    <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
-    <!-- TODO string name="device_status_angle_degree">Angle units: degree</string -->
-    <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
-    <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
-    <!-- TODO string name="device_status_calib">Mode: calibration</string -->
-    <!-- TODO string name="device_status_normal">Mode: normal</string -->
-    <!-- TODO string name="device_status_silent_on">Silent: on</string -->
-    <!-- TODO string name="device_status_silent_off">Silent: off</string -->
+    <string name="device_status_angle_grad">Ед измерения угла: град.</string>
+    <string name="device_status_angle_degree">Ед измерения угла: градусы</string>
+    <string name="device_status_compass_on">Азимут/угол: вкл</string>
+    <string name="device_status_compass_off">Азимут/угол: выкл</string>
+    <string name="device_status_calib">Режим: калибровка</string>
+    <string name="device_status_normal">Режим: нормальный</string>
+    <string name="device_status_silent_on">Тихий: вкл</string>
+    <string name="device_status_silent_off">Тихий: выкл</string>
     <string name="bt_reset">Сброс соединения bluetooth</string>
     <string name="save_as">сохранить как</string>
     <string name="nickname">Псевдоним</string>
@@ -894,8 +894,8 @@
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
-  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
-  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
+  <string name="pref_section_stations_title">Сечение пикеты</string>
+  <string name="pref_section_stations_summary">Сечение пикеты привязки</string>
   <string name="pref_station_size_title">Размер номера пикетов</string>
   <string name="pref_station_size_summary">Размер номера пикетов</string>
   <string name="pref_station_size_message">Размер подписи пикетов</string>
