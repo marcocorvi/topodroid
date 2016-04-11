@@ -90,14 +90,14 @@
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Фърмуер  %1$d.%2$d</string>
     <string name="device_hardware">Хардуер  %1$d.%2$d</string>
-    <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
-    <!-- TODO string name="device_status_angle_degree">Angle units: degree</string -->
-    <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
-    <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
-    <!-- TODO string name="device_status_calib">Mode: calibration</string -->
-    <!-- TODO string name="device_status_normal">Mode: normal</string -->
-    <!-- TODO string name="device_status_silent_on">Silent: on</string -->
-    <!-- TODO string name="device_status_silent_off">Silent: off</string -->
+    <string name="device_status_angle_grad">Ъгли: гради</string>
+    <string name="device_status_angle_degree">Ъгли: градуси</string>
+    <string name="device_status_compass_on">Компас/наклономер: включен</string>
+    <string name="device_status_compass_off">Компас/наклономер: изключен</string>
+    <string name="device_status_calib">Режим: калибрация</string>
+    <string name="device_status_normal">Режим: нормален</string>
+    <string name="device_status_silent_on">Без запаметяване: вкл.</string>
+    <string name="device_status_silent_off">Без запаметяване: изкл.</string>
     <string name="bt_reset">Рестарт. на Bluetooth връзката</string>
     <string name="save_as">запис като</string>
     <string name="nickname">Име на устройство</string>
@@ -378,9 +378,9 @@
     <string name="zip_saved">Записан </string>
     <string name="zip_failed">Грешка при архивиране</string>
     <string name="unzip_fail">Грешка при разархивиране</string>
-    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
-    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
-    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
+    <string name="unzip_fail_survey">Грешка: различно име на картировка</string>
+    <string name="unzip_fail_db">Грешка: различни версии на базата данни</string>
+    <string name="unzip_fail_td">Грешка: различни версии на Topodroid</string>
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Информация за картировката</string>
@@ -396,7 +396,7 @@
     <string name="stat_station">Репери %1$d</string>
     <string name="stat_surface">Повърхн. отсечки %1$d %2$.1f %3$s</string>
     <string name="stat_wens">З %1$.0f  И %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
-    <!-- TODO string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f"</string -->
+    <string name="stat_angle_error">Ъглова грешка %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Отсечка %1$s - %2$s"</string>
     <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
 
@@ -724,12 +724,12 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Брой опити за връзка при грешка</string -->
-  <string name="pref_wait_laser_title">Изчакване след лазер [ms]</string>
-  <string name="pref_wait_laser_summary">Изчакване след включване на лазера [ms]</string>
-  <string name="pref_wait_shot_title">Изчакване след измерване [ms]</string>
+  <string name="pref_wait_laser_title">Пауза след лазер [ms]</string>
+  <string name="pref_wait_laser_summary">Пауза след включване на лазера [ms]</string>
+  <string name="pref_wait_shot_title">Пауза след измерване [ms]</string>
   <string name="pref_wait_shot_summary">Изчакване след измерване [ms]</string>
-  <!-- TODO string name="pref_wait_data_title">Data pause [ms]</string -->
-  <!-- TODO string name="pref_wait_data_summary">Pause after a data download [ms]</string -->
+  <string name="pref_wait_data_title">Пауза след изтегляне [ms]</string>
+  <string name="pref_wait_data_summary">Пауза след изтегляне на отсечка [ms]</string>
   <string name="pref_conn_mode_title">Тип на връзката за данни</string>
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
@@ -899,8 +899,8 @@
 
   <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
   <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>
-  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
-  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
+  <string name="pref_section_stations_title">Измервания/репери в сечение</string>
+  <string name="pref_section_stations_summary">Показване на измервания в репер на сечение</string>
   <string name="pref_station_size_title">Размер на име на репер</string>
   <string name="pref_station_size_summary">Размер на име на репер</string>
   <string name="pref_station_size_message">Размер на име на репер в скицата</string>
