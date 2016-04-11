@@ -97,7 +97,7 @@
     <string name="device_status_compass_off">Азимут/угол: выкл</string>
     <string name="device_status_calib">Режим: калибровка</string>
     <string name="device_status_normal">Режим: нормальный</string>
-    <string name="device_status_silent_on"><Без сохранения: вкл</string>
+    <!-- FIXME NOT WELL FORMED string name="device_status_silent_on"><Без сохранения: вкл</string -->
     <string name="device_status_silent_off">Без сохранения: выкл</string>
     <string name="bt_reset">Сброс соединения bluetooth</string>
     <string name="save_as">сохранить как</string>
