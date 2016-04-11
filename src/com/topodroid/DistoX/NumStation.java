@@ -37,7 +37,7 @@ public class NumStation extends NumSurveyPoint
   boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
   boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
 
-  ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot
+  ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot (used to compute extends)
 
   NumStation( String id )
   {

@@ -337,7 +337,8 @@ public class ProjectionDialog extends MyDialog
         dismiss();
         Toast.makeText( mParent, R.string.few_data, Toast.LENGTH_SHORT ).show();
       } else {
-        mNum = new DistoXNum( mList, mFrom, "", "" );
+        // float decl = mApp.mData.getSurveyDeclination( mSid );
+        mNum = new DistoXNum( mList, mFrom, "", "", 0.0f );
         mSeekBar.setProgress( 200 );
         float de = - mNum.surveyEmin();
         if ( mNum.surveyEmax() > de ) de = mNum.surveyEmax();

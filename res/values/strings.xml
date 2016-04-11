@@ -72,6 +72,8 @@
     <string name="calib_ave_std">Accuracy: %1$.4f ± %2$.4f degrees</string>
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
+    <string name="calib_reset">Reset DistoX calibration ?</string>
+    
     <string name="algorithm">Algorithm:</string>
     <string name="auto">auto</string>
     <string name="linear">linear</string>

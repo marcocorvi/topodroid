@@ -640,11 +640,11 @@ public class TopoDroidApp extends Application
 // -----------------------------------------------------------------
 
   // called by GMActivity and by CalibCoeffDialog 
-  void uploadCalibCoeff( Context context, byte[] coeff )
+  void uploadCalibCoeff( Context context, byte[] coeff, boolean check )
   {
     if ( mComm == null || mDevice == null ) {
       Toast.makeText( context, R.string.no_device_address, Toast.LENGTH_SHORT ).show();
-    } else if ( ! checkCalibrationDeviceMatch() ) {
+    } else if ( check && ! checkCalibrationDeviceMatch() ) {
       Toast.makeText( context, R.string.calib_device_mismatch, Toast.LENGTH_SHORT ).show();
     } else if ( ! mComm.writeCoeff( distoAddress(), coeff ) ) {
       Toast.makeText( context, R.string.write_failed, Toast.LENGTH_SHORT).show();

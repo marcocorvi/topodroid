@@ -15,11 +15,13 @@ class AverageLeg
 {
   Vector mAverage;
   int mCnt;
+  float mDecl; // magnetic declination
 
-  AverageLeg()
+  AverageLeg( float decl )
   {
     mAverage = new Vector( 0, 0, 0 );
     mCnt = 0;
+    mDecl = decl;
   }
 
   void reset() {
@@ -57,7 +59,7 @@ class AverageLeg
 
   float bearing() 
   {
-    float a = TDMath.atan2d( mAverage.x, mAverage.y );
+    float a = TDMath.atan2d( mAverage.x, mAverage.y ) + mDecl;
     if ( a < 0 ) a += 360;
     return a;
   }

@@ -538,7 +538,8 @@ public class OverviewActivity extends ItemDrawer
           mPlot1 = plot;
           // mPid = plot.id;
           // NOTE Overview only for plan or extended plots
-          mNum = new DistoXNum( mBlockList, start, null, null );
+          // float decl = mData.getSurveyDeclination( mSid );
+          mNum = new DistoXNum( mBlockList, start, null, null, 0.0f );
           mStartStation = mNum.getStation( start );
           computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
           // Log.v( "DistoX", "Overview num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );

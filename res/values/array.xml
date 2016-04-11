@@ -95,7 +95,7 @@
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
-     <item name="pockettoopo">PocketTopo</item>
+     <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
      <item name="visualtopo">VisualTopo</item>
@@ -108,7 +108,7 @@
      <item name="therion">0</item>
      <item name="compass">2</item>
      <item name="csurvey">7</item>
-     <item name="pockettoopo">8</item>
+     <item name="pockettopo">8</item>
      <item name="polygon">16</item>
      <item name="survex">3</item>
      <item name="visualtopo">4</item>

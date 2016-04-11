@@ -122,26 +122,32 @@ public class ItemDrawer extends Activity
 
   protected void saveRecentSymbols( DataHelper data )
   {
-    StringBuilder points = new StringBuilder( mRecentPoint[0].mThName );
-    for ( int k=1; k<NR_RECENT; ++k ) {
-      if ( mRecentPoint[k] == null ) break;
-      points.append( " " + mRecentPoint[k].mThName );
+    if ( mRecentPoint[0] != null ) {
+      StringBuilder points = new StringBuilder( mRecentPoint[0].mThName );
+      for ( int k=1; k<NR_RECENT; ++k ) {
+        if ( mRecentPoint[k] == null ) break;
+        points.append( " " + mRecentPoint[k].mThName );
+      }
+      data.setValue( "recent_points", points.toString() );
     }
-    data.setValue( "recent_points", points.toString() );
 
-    StringBuilder lines = new StringBuilder( mRecentLine[0].mThName );
-    for ( int k=1; k<NR_RECENT; ++k ) {
-      if ( mRecentLine[k] == null ) break;
-      lines.append( " " + mRecentLine[k].mThName );
+    if ( mRecentLine[0] != null ) {
+      StringBuilder lines = new StringBuilder( mRecentLine[0].mThName );
+      for ( int k=1; k<NR_RECENT; ++k ) {
+        if ( mRecentLine[k] == null ) break;
+        lines.append( " " + mRecentLine[k].mThName );
+      }
+      data.setValue( "recent_lines", lines.toString() );
     }
-    data.setValue( "recent_lines", lines.toString() );
 
-    StringBuilder areas = new StringBuilder( mRecentArea[0].mThName );
-    for ( int k=1; k<NR_RECENT; ++k ) {
-      if ( mRecentArea[k] == null ) break;
-      lines.append( mRecentArea[k].mThName );
+    if ( mRecentArea[0] != null ) { 
+      StringBuilder areas = new StringBuilder( mRecentArea[0].mThName );
+      for ( int k=1; k<NR_RECENT; ++k ) {
+        if ( mRecentArea[k] == null ) break;
+        areas.append( mRecentArea[k].mThName );
+      }
+      data.setValue( "recent_areas", areas.toString() );
     }
-    data.setValue( "recent_areas", areas.toString() );
   }
 
   // ----------------------------------------------------------------------

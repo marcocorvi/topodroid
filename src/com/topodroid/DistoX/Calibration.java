@@ -399,14 +399,14 @@ public class Calibration
   //          254       -1
   //  0xff    255        0     
   //
-  private static float byteToFloatNL( byte b )
+  static float byteToFloatNL( byte b )
   {
     int c0 = 1 + (int)(b);
     if ( c0 >= 128 ) c0 = c0 - 256;
     return c0 / TopoDroidUtil.FN;
   }
 
-  private static byte floatToByteNL( float x )
+  static byte floatToByteNL( float x )
   {
     float xf = x * TopoDroidUtil.FN; 
     int v = (int)Math.round( xf ) - 1; 
@@ -671,8 +671,8 @@ public class Calibration
 
     Vector avG = sumG.mult( invNum );  // average G
     Vector avM = sumM.mult( invNum );  // average M
-    Matrix invG = (sumG2.minus( new Matrix(sumG, avG) ) ).InverseT();  // inverse of the transposed
-    Matrix invM = (sumM2.minus( new Matrix(sumM, avM) ) ).InverseT();
+    Matrix invG = (sumG2.minus( new Matrix(sumG, avG) ) ).InverseM();  // inverse of the transposed
+    Matrix invM = (sumM2.minus( new Matrix(sumM, avM) ) ).InverseM();
 
     // TDLog.Log( TDLog.LOG_CALIB, "Number", nn );
     // TDLog.Log( TDLog.LOG_CALIB, "invG", invG, avG );
@@ -715,9 +715,7 @@ public class Calibration
           Vector mrp = new Vector();
           int first = i;
           while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
-            // group must be positive integer
-            // group == 0 means to skip
-            //
+            // group must be positive integer: group == 0 means to skip
             if ( group[i] > 0 ) {
               TurnVectors( gr[i], mr[i], gr[first], mr[first] ); // output ==> gxt, mxt
               grp.add( gxt );
@@ -792,7 +790,7 @@ public class Calibration
             qsum.add( pt.timesV( q ) );
           }
         }
-        nL = ( psum.InverseT()).timesV( qsum );
+        nL = ( psum.InverseM()).timesV( qsum );
         saturate( nL );
 
         sumG  = new Vector(); // recalculate linearized g values
@@ -805,7 +803,7 @@ public class Calibration
           }
         }
         avG  = sumG.mult( invNum ); // average g
-        invG = (sumG2.minus( new Matrix(sumG, avG)) ).InverseT(); // inverse of the transposed
+        invG = (sumG2.minus( new Matrix(sumG, avG)) ).InverseM(); // inverse of the transposed
       }
       ++ it;
     } while ( it < max_it && ( aG.MaxDiff(aG0) > eps || aM.MaxDiff(aM0) > eps ) );

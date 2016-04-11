@@ -32,6 +32,13 @@
           style="@style/button_default"
           android:text="@string/btn_import"
         />
+        <Button android:id="@+id/button_reset"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_reset"
+        />
        </LinearLayout>
 
   </LinearLayout>

@@ -108,6 +108,7 @@ public class DeviceActivity extends Activity
                         R.string.menu_firmware,
                         R.string.menu_options,
                         R.string.menu_help
+                        // CALIB_RESET , R.string.menu_calib_reset
                      };
 
   private static int help_icons[] = {
@@ -694,6 +695,8 @@ public class DeviceActivity extends Activity
     if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
+    // CALIB_RESET
+    // if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[6] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -715,21 +718,11 @@ public class DeviceActivity extends Activity
       scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, REQUEST_DEVICE );
       Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
-    // } else if ( p++ == pos ) { // NAME
-    //   if ( mApp.mDevice != null ) {
-    //     (new DeviceNameDialog( this, this, mApp.mDevice )).show();
-    //   }
     } else if ( p++ == pos ) { // PAIR
       pairDevice();
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // DETACH
       detachDevice();
-    // } else if ( p++ == pos ) { // CALIB
-    //   if ( mApp.mDevice == null ) {
-    //     Toast.makeText(this, R.string.no_device_address, Toast.LENGTH_SHORT).show();
-    //   } else {
-    //     (new CalibListDialog( this, this, mApp )).show();
-    //   }
-    } else if ( TDSetting.mLevelOverNormal && /* TDSetting.mBootloader && */ p++ == pos ) { // FIRMWARE
+    } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // FIRMWARE
       if ( TDSetting.mCommType != 0 ) {
         Toast.makeText( this, "Connection mode must be \"on-demand\"", Toast.LENGTH_LONG).show();
       } else {
@@ -741,7 +734,52 @@ public class DeviceActivity extends Activity
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_DEVICE );
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length ) ).show();
+    // } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // CALIB_RESET
+    //   doCalibReset();
+    }
+  }
+
+  void askCalibReset()
+  {
+    TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.calib_reset ),
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          doCalibReset();
+        }
+      }
+    );
+  }
+
+  private void doCalibReset()
+  {
+    // Log.v("DistoX", "CALIB RESET");
+    if ( mDevice != null ) {
+      long one = (long)Math.round( TopoDroidUtil.FM );
+      // if (one > TopoDroidUtil.ZERO ) one = TopoDroidUtil.NEG - one;
+      byte low  = (byte)( one & 0xff );
+      byte high = (byte)((one >> 8) & 0xff );
+      byte zeroNL = Calibration.floatToByteNL( 0 );
+      byte[] coeff = new byte[52];
+      for ( int k=0; k<52; ++k ) coeff[k] = (byte)0x00;
+      coeff[ 2] = low;
+      coeff[ 3] = high;
+      coeff[12] = low;
+      coeff[13] = high;
+      coeff[22] = low;
+      coeff[23] = high;
+      coeff[26] = low;
+      coeff[27] = high;
+      coeff[36] = low;
+      coeff[37] = high;
+      coeff[46] = low;
+      coeff[47] = high;
+      coeff[48] = zeroNL;
+      coeff[49] = zeroNL;
+      coeff[50] = zeroNL;
+      coeff[51] = zeroNL;
+      mApp.uploadCalibCoeff( this, coeff, false );
     }
   }
 
@@ -769,7 +807,7 @@ public class DeviceActivity extends Activity
 
   void openCalibrationImportDialog()
   {
-    if ( mDevice != null ){
+    if ( mDevice != null ) {
       (new CalibImportDialog( this, this )).show();
     }
   }

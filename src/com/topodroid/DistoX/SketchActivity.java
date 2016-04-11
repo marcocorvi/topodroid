@@ -97,6 +97,7 @@ public class SketchActivity extends ItemDrawer
 
   // private boolean canRedo;
   private DistoXNum mNum;
+  private float mDecl;
   private int mPointCnt; // counter of points in the currently drawing line
 
   // private boolean mAllSymbols; // whether the library has all the symbols of the plot
@@ -668,9 +669,11 @@ public class SketchActivity extends ItemDrawer
     String name  = extras.getString( TopoDroidTag.TOPODROID_SKETCH_NAME );
     mFullName    = mApp.mySurvey + "-" + name;
     // mCompass     = null;
+    // mDecl = mData.getSurveyDeclination( mSid );
+    mDecl = 0.0f;
 
-    mInfo      = mApp.mData.getSketch3dInfo( mSid, name );
-    mPid         = mInfo.id;
+    mInfo      = mData.getSketch3dInfo( mSid, name );
+    mPid       = mInfo.id;
     mInfo.xcenter = mApp.mDisplayWidth/2;
     mInfo.ycenter = mApp.mDisplayHeight/2;
 
@@ -941,7 +944,7 @@ public class SketchActivity extends ItemDrawer
   private void prepareReferences( List<DistoXDBlock> list )
   {
     // mSketchSurface.clearReferences();
-    mNum = new DistoXNum( list, mInfo.start, null, null ); // FIXME null: no barrier no hiding
+    mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
     if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
       Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
@@ -951,7 +954,7 @@ public class SketchActivity extends ItemDrawer
 
   void recreateNum( List<DistoXDBlock> list )
   {
-    mNum = new DistoXNum( list, mInfo.start, null, null ); // FIXME null: no barrier no hiding
+    mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
     mModel.setNum( mNum );
   }
 

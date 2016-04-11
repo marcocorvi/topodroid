@@ -46,6 +46,7 @@ public class CalibListDialog extends MyDialog
   private Button mBtnNew;
   private Button mBtnImport;
   // private Button mBtnCancel;
+  private Button mBtnReset;
 
   private ListView mList;
 
@@ -71,12 +72,18 @@ public class CalibListDialog extends MyDialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    mBtnNew     = (Button) findViewById(R.id.button_new);
-    mBtnImport  = (Button) findViewById(R.id.button_import);
+    mBtnNew    = (Button) findViewById(R.id.button_new);
+    mBtnImport = (Button) findViewById(R.id.button_import);
+    mBtnReset  = (Button) findViewById(R.id.button_reset);
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
 
     mBtnNew.setOnClickListener( this );
     mBtnImport.setOnClickListener( this );
+    if ( TDSetting.mLevelOverAdvanced ) {
+      mBtnReset.setOnClickListener( this );
+    } else {
+      mBtnReset.setVisibility( View.GONE );
+    }
     // mBtnCancel.setOnClickListener( this );
 
     setTitle( R.string.title_calib );
@@ -100,12 +107,13 @@ public class CalibListDialog extends MyDialog
   {
     // TDLog.Log(  TDLog.LOG_INPUT, "CalibListDialog onClick() " );
     Button b = (Button) v;
+    hide();
     if ( b == mBtnNew ) {
-      hide();
       mParent.openCalibration( null );
     } else if ( b == mBtnImport ) {
-      hide();
       mParent.openCalibrationImportDialog();
+    } else if ( b == mBtnReset ) {
+      mParent.askCalibReset();
     // } else if ( b == mBtnCancel ) {
     //   /* nothing */
     }

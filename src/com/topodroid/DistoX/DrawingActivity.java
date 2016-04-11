@@ -190,6 +190,7 @@ public class DrawingActivity extends ItemDrawer
   String getSurvey() { return mApp.mySurvey; }
 
   private DistoXNum mNum;
+  private float mDecl;
 
   // 0: no bezier, plain path
   // 1: bezier interpolator
@@ -1025,6 +1026,9 @@ public class DrawingActivity extends ItemDrawer
 
     Bundle extras = getIntent().getExtras();
     mSid   = extras.getLong( TopoDroidTag.TOPODROID_SURVEY_ID );
+    // mDecl = mData.getSurveyDeclination( mSid );
+    mDecl = 0; // FIXME do not correct declination in sketches
+
     mName1 = extras.getString( TopoDroidTag.TOPODROID_PLOT_NAME );
     mName2 = extras.getString( TopoDroidTag.TOPODROID_PLOT_NAME2 );
     mFullName1 = mApp.mySurvey + "-" + mName1;
@@ -1349,11 +1353,11 @@ public class DrawingActivity extends ItemDrawer
       if ( PlotInfo.isSketch2D( type ) ) {
         if ( list.size() == 0 ) {
           Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-          if ( mPid1 >= 0 ) mApp.mData.dropPlot( mPid1, mSid );
-          if ( mPid2 >= 0 ) mApp.mData.dropPlot( mPid2, mSid );
+          if ( mPid1 >= 0 ) mData.dropPlot( mPid1, mSid );
+          if ( mPid2 >= 0 ) mData.dropPlot( mPid2, mSid );
           finish();
         } else {
-          mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide );
+          mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
         }
 
         if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1 ) ) {
@@ -1501,7 +1505,7 @@ public class DrawingActivity extends ItemDrawer
     {
       if ( mType == PlotInfo.PLOT_EXTENDED ) { 
         List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide ); 
+        mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl ); 
         computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
         // mDrawingSurface.refresh();
@@ -3303,7 +3307,7 @@ public class DrawingActivity extends ItemDrawer
   private void doComputeReferences()
   {
     List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-    mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide );
+    mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
@@ -3337,7 +3341,7 @@ public class DrawingActivity extends ItemDrawer
   {
     if ( compute ) {
       List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
-      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide );
+      mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
     }
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {

@@ -40,7 +40,7 @@ public class NumShot
 
   DistoXDBlock getFirstBlock() { return blocks.get(0); }
 
-  NumShot( NumStation f, NumStation t, DistoXDBlock blk, int dir, float anomaly )
+  NumShot( NumStation f, NumStation t, DistoXDBlock blk, int dir, float anomaly, float decl )
   {
     from = f;
     to   = t;
@@ -55,7 +55,7 @@ public class NumShot
     // mLength  = blk.mLength;
     // mBearing = blk.mBearing;
     // mClino   = blk.mClino;
-    mAvgLeg  = new AverageLeg();
+    mAvgLeg  = new AverageLeg( decl );
     mAvgLeg.set( blk );
     mAnomaly = anomaly;
     mExtend  = (int)(blk.mExtend);

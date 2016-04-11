@@ -445,7 +445,8 @@ public class SurveyActivity extends Activity
           DistoXDBlock blk = list.get( 0 );
           if ( blk != null ) {
             // Log.v( TopoDroidApp.TAG, "DISTOX_EXPORT_DXF from " + blk.mFrom );
-            DistoXNum num = new DistoXNum( list, blk.mFrom, null, null );
+            float decl = mApp.mData.getSurveyDeclination( mApp.mSID );
+            DistoXNum num = new DistoXNum( list, blk.mFrom, null, null, decl );
             filename = mApp.exportSurveyAsDxf( num );
           }
           break;

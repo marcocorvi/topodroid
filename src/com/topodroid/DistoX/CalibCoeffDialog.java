@@ -235,7 +235,7 @@ public class CalibCoeffDialog extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mButtonWrite ) {
-      mApp.uploadCalibCoeff( mContext, mCoeff );
+      mApp.uploadCalibCoeff( mContext, mCoeff, true );
     } else {
       dismiss();
     }

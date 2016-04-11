@@ -29,6 +29,7 @@ class DistoXNum
   private float mVmax;
   private float mHmin; // horizontal
   private float mHmax;
+  private float mDecl;
 
   /* statistics - not including survey shots */
   private float mZmin; // Z depth 
@@ -217,8 +218,9 @@ class DistoXNum
    * @param view     barriers list
    * @param hide     hiding list
    */
-  DistoXNum( List<DistoXDBlock> data, String start, String view, String hide )
+  DistoXNum( List<DistoXDBlock> data, String start, String view, String hide, float decl )
   {
+    mDecl = decl;
     surveyAttached = computeNum( data, start );
     setStationsHide( hide );
     setStationsBarr( view );
@@ -373,7 +375,7 @@ class DistoXNum
   // public boolean addNewData( List<DistoXDBlock> data )
   // {
   //   NumShot lastLeg = null;
-
+  //
   //   boolean ret = true;
   //   NumStation sf, st;
   //   for ( DistoXDBlock block : data ) {
@@ -395,14 +397,14 @@ class DistoXNum
   //           mLength += block.mLength;
   //           if ( st != null ) { // close loop
   //             if ( /* TopoDroidApp.mAutoStations || */ ! TopoDroidApp.mLoopClosure ) {
-  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino, block.mExtend );
-  //               st1.addAzimuth( (block.mBearing+180)%360, -block.mExtend );
+  //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.mExtend );
+  //               st1.addAzimuth( (block.mBearing+ mDecl +180)%360, -block.mExtend );
   //               st1.mDuplicate = true;
   //               mStations.add( st1 );
-  //               lastLeg = new NumShot( sf, st1, block, 1 );
+  //               lastLeg = new NumShot( sf, st1, block, 1, mDecl );
   //               addShotToStations( lastLeg, st1, sf );
   //             } else { // loop-closure
-  //               lastLeg = new NumShot( sf, st, block, 1 );
+  //               lastLeg = new NumShot( sf, st, block, 1, mDecl );
   //               addShotToStations( lastLeg, sf, st );
   //             }
   //             // if ( ts.duplicate ) { // FIXME
@@ -414,13 +416,13 @@ class DistoXNum
   //             // do close loop also on duplicate shots
   //             // need the loop length to compute the fractional closure error
   //             float length = shortestPath( sf, st) + block.mLength;
-  //             mClosures.add( getClosureError( st, sf, block.mLength, block.mBearing, block.mClino, length ) );
+  //             mClosures.add( getClosureError( st, sf, block.mLength, block.mBearing+ mDecl , block.mClino, length ) );
   //           } 
   //           else
   //           { // add regular from-->to leg' first shot
   //             // FIXME temporary "st" coordinates
-  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing, block.mClino, block.mExtend );
-  //             st.addAzimuth( (block.mBearing+180)%360, -(int)block.mExtend );
+  //             st = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.mExtend );
+  //             st.addAzimuth( (block.mBearing+ mDecl +180)%360, -(int)block.mExtend );
   //             updateBBox( st );
   //             // if ( ts.duplicate ) { // FIXME
   //             //   ++mDupNr;
@@ -431,14 +433,14 @@ class DistoXNum
   //             if ( st.v < mZmin ) { mZmin = st.v; }
   //             if ( st.v > mZmax ) { mZmax = st.v; }
   //             mStations.add( st );
-  //             lastLeg = new NumShot( sf, st, block, 1 );
+  //             lastLeg = new NumShot( sf, st, block, 1, mDecl );
   //             addShotToStations( lastLeg, st, sf );
   //           }
   //         }
   //         else if ( st != null )
   //         { // sf == null && st != null
-  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing, block.mClino, block.mExtend );
-  //           sf.addLeg( block.mBearing, (int)block.mExtend );
+  //           sf = new NumStation( block.mFrom, st, -block.mLength, block.mBearing+ mDecl , block.mClino, block.mExtend );
+  //           sf.addLeg( block.mBearing+ mDecl , (int)block.mExtend );
   //           updateBBox( sf );
   //           // if ( ts.duplicate ) {
   //           //   ++mDupNr;
@@ -449,7 +451,7 @@ class DistoXNum
   //           if ( sf.v < mZmin ) { mZmin = sf.v; }
   //           if ( sf.v > mZmax ) { mZmax = sf.v; }
   //           mStations.add( sf );
-  //           addShotToStations( new NumShot( st, sf, block, -1), sf, st );
+  //           addShotToStations( new NumShot( st, sf, block, -1), sf, st, mDecl );
   //         }
   //         else 
   //         { // sf == null && st == null
@@ -490,8 +492,8 @@ class DistoXNum
   //       if ( f != null && f.length() > 0 ) {
   //         sf = getStation( f ); // find station with name "f"
   //         if ( sf != null ) {              // add splay at station
-  //           mSplays.add( new NumSplay( sf, rev*block.mLength, block.mBearing, block.mClino,
-  //                                     (int)(block.mExtend), block ) );
+  //           mSplays.add( new NumSplay( sf, rev*block.mLength, block.mBearing+ mDecl , block.mClino,
+  //                                     (int)(block.mExtend), block, mDecl ) );
   //         }
   //       } else {
   //         ret = false;
@@ -533,7 +535,7 @@ class DistoXNum
       sibling = null;
       blocks = new ArrayList<DistoXDBlock>();
       blocks.add( blk );
-      mAvgLeg = new AverageLeg();
+      mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
       mAvgLeg.set( blk );
     }
 
@@ -569,7 +571,7 @@ class DistoXNum
       // float ret = b0;
       // for ( int k=1; k<size; ++k ) {
       //   blk = blocks.get(k);
-      //   ret += TDMath.around( blk.mBearing, b0 );
+      //   ret += TDMath.around( blk.mBearing , b0 );
       // }
       // return TDMath.in360( ret/size );
 
@@ -623,7 +625,7 @@ class DistoXNum
 
     float b()
     {
-      if ( reversed == 1 ) return block.mBearing;
+      if ( reversed == 1 ) return block.mBearing+ mDecl ;
       float ret = block.mBearing + 180;
       if ( ret >= 360 ) ret -= 360;
       return ret;
@@ -640,13 +642,13 @@ class DistoXNum
    * @param st    to station
    * @param ts    temp shot
    */
-  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TmpShot ts, float anomaly )
+  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TmpShot ts, float anomaly, float mDecl )
   {
     if ( ts.reversed != 1 ) {
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() );
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly );
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl );
     ArrayList<DistoXDBlock> blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
@@ -742,16 +744,16 @@ class DistoXNum
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
         float sc = TDMath.sind( blk0.mClino );
-        float cb = TDMath.cosd( blk0.mBearing ); 
-        float sb = TDMath.sind( blk0.mBearing ); 
+        float cb = TDMath.cosd( blk0.mBearing + mDecl ); 
+        float sb = TDMath.sind( blk0.mBearing + mDecl ); 
         Vector v1 = new Vector( blk0.mLength * cc * sb, blk0.mLength * cc * cb, blk0.mLength * sc );
         ts1 = ts0.sibling;
         while ( ts1 != null ) {
           DistoXDBlock blk1 = ts1.getFirstBlock();
           cc = TDMath.cosd( blk1.mClino );
           sc = TDMath.sind( blk1.mClino );
-          cb = TDMath.cosd( blk1.mBearing ); 
-          sb = TDMath.sind( blk1.mBearing ); 
+          cb = TDMath.cosd( blk1.mBearing + mDecl ); 
+          sb = TDMath.sind( blk1.mBearing + mDecl ); 
           Vector v2 = new Vector( blk1.mLength * cc * sb, blk1.mLength * cc * cb, blk1.mLength * sc );
           float d = ( ( ts1.backshot == -1 )? v1.plus(v2) : v1.minus(v2) ).Length();
           d = d/blk0.mLength + d/blk1.mLength; 
@@ -876,11 +878,11 @@ class DistoXNum
               st1.mDuplicate = true;
               mStations.addStation( st1 );
 
-              sh = makeShotFromTmp( sf, st1, ts, sf.mAnomaly );
+              sh = makeShotFromTmp( sf, st1, ts, sf.mAnomaly, mDecl );
               addShotToStations( sh, st1, sf );
             } else { // close loop
               // TDLog.Log( TDLog.LOG_NUM, "close loop");
-              sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly ); 
+              sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly, mDecl ); 
               addShotToStations( sh, sf, st );
             }
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ) ); // NOTE Math.abs is not necessary
@@ -907,7 +909,7 @@ class DistoXNum
             addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), st.v );
             mStations.addStation( st );
 
-            sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly );
+            sh = makeShotFromTmp( sf, st, ts, sf.mAnomaly, mDecl );
             addShotToStations( sh, st, sf );
             ts.used = true;
             repeat = true;
@@ -932,7 +934,8 @@ class DistoXNum
           mStations.addStation( sf );
 
           // FIXME is st.mAnomaly OK ?
-          sh = makeShotFromTmp( sf, st, ts, st.mAnomaly ); // N.B. was new NumShot(st, sf, ts.block, -1); // FIXME check -anomaly
+          // N.B. was new NumShot(st, sf, ts.block, -1, mDecl); // FIXME check -anomaly
+          sh = makeShotFromTmp( sf, st, ts, st.mAnomaly, mDecl );
           addShotToStations( sh, sf, st );
           ts.used = true;
           repeat = true;
@@ -964,7 +967,7 @@ class DistoXNum
           NumStation s1 = sh2.from;
           NumStation s2 = sh2.to;
           float c2 = sh2.clino();
-          float b2 = sh2.bearing();
+          float b2 = sh2.bearing() + mDecl;
           if ( s1.mHasCoords && ! s2.mHasCoords ) {
             // reset s2 values from the shot
             float d = sh2.length() * sh2.mDirection;
@@ -1007,7 +1010,7 @@ class DistoXNum
       NumStation st = getStation( ts.from );
       if ( st != null ) {
         float extend = st.computeExtend( ts.b(), ts.extend ) ;
-        mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.block ) );
+        mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.block, mDecl ) );
       }
     }
 
@@ -1307,18 +1310,18 @@ class DistoXNum
     ArrayList<NumCycle> cycles = new ArrayList<NumCycle>();
     makeCycles( cycles, branches );
 
-    for ( NumBranch b : branches ) { // compute branches and cycles errors
-      b.computeError();
+    for ( NumBranch branch : branches ) { // compute branches and cycles errors
+      branch.computeError();
     }
-    for ( NumCycle c : cycles ) {
-      c.computeError();
-      // TDLog.Log( TDLog.LOG_NUM, "cycle error " + c.e + " " + c.s + " " + c.v ); 
+    for ( NumCycle cycle : cycles ) {
+      cycle.computeError();
+      // TDLog.Log( TDLog.LOG_NUM, "cycle error " + cycle.e + " " + cycle.s + " " + cycle.v ); 
     }
 
     ArrayList<NumCycle> indep_cycles = new ArrayList<NumCycle>(); // independent cycles
-    for ( NumCycle cl : cycles ) {
-      if ( ! cl.isBranchCovered( indep_cycles ) ) {
-        indep_cycles.add( cl );
+    for ( NumCycle cycle : cycles ) {
+      if ( ! cycle.isBranchCovered( indep_cycles ) ) {
+        indep_cycles.add( cycle );
       }
     }
 

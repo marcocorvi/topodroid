@@ -133,7 +133,8 @@ public class ParserPocketTopo extends ImportParser
     TDLog.Log( TDLog.LOG_PTOPO, "PT parser shot count " + shot_count + " size " + shots.size() );
 
     // Log.v("PTDistoX", "start from " + mStartFrom );
-    // DistoXNum num = new DistoXNum( data, mStartFrom, null, null );
+    // float declination = mData.getSurveyDeclination( mSid );
+    // DistoXNum num = new DistoXNum( data, mStartFrom, null, null, declination );
     // Log.v("DistoX", "Num E " + (20*num.surveyEmin()) + " " + (20*num.surveyEmax()) +
     //                 " S " + (20*num.surveySmin()) + " " + (20*num.surveySmax()) +
     //                 " H " + (20*num.surveyHmin()) + " " + (20*num.surveyHmax()) +

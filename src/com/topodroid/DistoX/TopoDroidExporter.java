@@ -166,7 +166,7 @@ class TopoDroidExporter
       DistoXDBlock ref_item = null;
       // float l=0.0f, b=0.0f, c=0.0f, b0=0.0f;
       // int n = 0;
-      AverageLeg leg = new AverageLeg();
+      AverageLeg leg = new AverageLeg(0);
 
       for ( DistoXDBlock item : list ) {
         String from = item.mFrom;
@@ -345,8 +345,9 @@ class TopoDroidExporter
   static float EARTH_RADIUS1 = (float)(6378137 * Math.PI / 180.0f); // semimajor axis [m]
   static float EARTH_RADIUS2 = (float)(6356752 * Math.PI / 180.0f);
 
-  static private DistoXNum getGeolocalizedData( long sid, DataHelper data, float asl_factor )
+  static private DistoXNum getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor )
   {
+    // Log.v("DistoX", "get geoloc. data. Decl " + decl );
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     if ( fixeds.size() == 0 ) return null;
 
@@ -354,7 +355,7 @@ class TopoDroidExporter
     FixedInfo origin = null;
     List<DistoXDBlock> shots_data = data.selectAllShots( sid, 0 );
     for ( FixedInfo fixed : fixeds ) {
-      num = new DistoXNum( shots_data, fixed.name, null, null );
+      num = new DistoXNum( shots_data, fixed.name, null, null, decl );
       if ( num.getShots().size() > 0 ) {
         origin = fixed;
         break;
@@ -384,7 +385,7 @@ class TopoDroidExporter
   static String exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as KML " + filename );
-    DistoXNum num = getGeolocalizedData( sid, data, 1.0f );
+    DistoXNum num = getGeolocalizedData( sid, data, info.declination, 1.0f );
     if ( num == null ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
@@ -515,7 +516,7 @@ class TopoDroidExporter
   static String exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as trackfile: " + filename );
-    DistoXNum num = getGeolocalizedData( sid, data, TopoDroidUtil.M2FT );
+    DistoXNum num = getGeolocalizedData( sid, data, info.declination, TopoDroidUtil.M2FT );
     if ( num == null ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return "";
@@ -762,7 +763,7 @@ class TopoDroidExporter
       pw.format("    data normal from to length compass clino\n");
 
       long extend = 0;  // current extend
-      AverageLeg leg = new AverageLeg();
+      AverageLeg leg = new AverageLeg(0);
 
       DistoXDBlock ref_item = null;
       boolean duplicate = false;
@@ -970,6 +971,7 @@ class TopoDroidExporter
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
     List<DistoXDBlock> st_blk = new ArrayList<DistoXDBlock>(); // blocks with from station (for LRUD)
 
+    // float decl = info.declination; // DECLINATION not used
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -1019,7 +1021,7 @@ class TopoDroidExporter
           writeSurvexEOL(pw);
           writeSurvexLine(pw, "  *flags splay");
         }
-        AverageLeg leg = new AverageLeg();
+        AverageLeg leg = new AverageLeg(0);
         DistoXDBlock ref_item = null;
         boolean duplicate = false;
         boolean splays = false;
@@ -1117,7 +1119,7 @@ class TopoDroidExporter
         }
         if ( from != null ) {
           boolean do_header = true;
-          DistoXNum num = new DistoXNum( list, from, null, null );
+          DistoXNum num = new DistoXNum( list, from, null, null, 0.0f ); // no declination
           List<NumBranch> branches = num.makeBranches( true );
           for ( NumBranch branch : branches ) {
             // ArrayList<String> stations = new ArrayList<String>();
@@ -1265,7 +1267,7 @@ class TopoDroidExporter
       pw.format(Locale.US, "# from to tape compass clino (declination %.4f)\n", info.declination );
       pw.format(Locale.US, "# units tape %s compass clino %s\n", uls, uas );
       
-      AverageLeg leg = new AverageLeg();
+      AverageLeg leg = new AverageLeg(0);
       DistoXDBlock ref_item = null;
       boolean duplicate = false;
       boolean splays = false;
@@ -1625,7 +1627,7 @@ class TopoDroidExporter
       pw.format("FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS\r\n" );
       pw.format( "\r\n" );
 
-      AverageLeg leg = new AverageLeg();
+      AverageLeg leg = new AverageLeg(0);
       DistoXDBlock ref_item = null;
 
       int extra_cnt = 0;
@@ -1760,7 +1762,7 @@ class TopoDroidExporter
 
       List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
       // int extend = 1;
-      AverageLeg leg = new AverageLeg();
+      AverageLeg leg = new AverageLeg(0);
       DistoXDBlock ref_item = null;
       boolean duplicate = false;
       boolean surface   = false; // TODO
@@ -1982,7 +1984,7 @@ class TopoDroidExporter
 
       List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
 
-      AverageLeg leg = new AverageLeg();
+      AverageLeg leg = new AverageLeg(0);
       DistoXDBlock ref_item = null;
 
       int extra_cnt = 0;
@@ -2052,12 +2054,12 @@ class TopoDroidExporter
 
   // -----------------------------------------------------------------------
   // DXF EXPORT 
-  // NOTE declination not taken into account in DXF export (only saved in comment)
+  // NOTE declination is taken into account in DXF export (used to compute num)
 
   static String exportSurveyAsDxf( long sid, DataHelper data, SurveyInfo info, DistoXNum num, String filename )
   {
     // Log.v("DistoX", "export as DXF: " + filename );
-    // Log.v( TAG, "exportSurveyAsDxf " + filename );
+    // Log.v( TAG, "export SurveyAsDxf " + filename );
     try {
       TDPath.checkPath( filename );
       FileWriter fw = new FileWriter( filename );
@@ -2258,7 +2260,7 @@ class TopoDroidExporter
       
       pw.format(Locale.US, "Param Deca Degd Clino Degd %.4f Dir,Dir,Dir Arr Inc 0,0,0\r\n\r\n", info.declination );
 
-      AverageLeg leg = new AverageLeg();
+      AverageLeg leg = new AverageLeg(0);
       DistoXDBlock ref_item = null;
 
       int extra_cnt = 0;

@@ -512,7 +512,7 @@ class TDSetting
     int k = 0;
 
     mActivityLevel = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
-    setActivityBooleans( prefs );
+    setActivityBooleans( );
 
     mSizeButtons = tryInt( prefs, key[k++], "1" ); // choice: 0, 1 // DISTOX_SIZE_BUTTONS
     mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
@@ -682,7 +682,7 @@ class TDSetting
 
   }
 
-  static void setActivityBooleans( SharedPreferences prefs )
+  static private void setActivityBooleans( )
   {
     mLevelOverBasic        = mActivityLevel > LEVEL_BASIC;
     mLevelOverNormal       = mActivityLevel > LEVEL_NORMAL;
@@ -705,7 +705,7 @@ class TDSetting
       int level = tryInt( prefs, k, "1" );
       if ( level != mActivityLevel ) {
         mActivityLevel = level;
-        setActivityBooleans( prefs );
+        setActivityBooleans( );
         if ( activity != null ) {
           activity.resetButtonBar();
           activity.setMenuAdapter( app.getResources() );

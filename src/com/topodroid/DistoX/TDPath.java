@@ -507,8 +507,10 @@ public class TDPath
 
   static void deleteBackups( String filename ) // filename has suffix BCK_SUFFIX
   {
+    File file = new File( filename );
+    if ( file.exists() ) file.delete();
     for ( int i=NR_BACKUP-1; i>=0; --i ) { 
-      File file = new File( filename + Integer.toString(i) );
+      file = new File( filename + Integer.toString(i) );
       if ( file.exists() ) file.delete();
     }
   }
