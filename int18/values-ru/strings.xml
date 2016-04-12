@@ -651,7 +651,7 @@
     <string name="title_plot_reload">Перезагрузить абрис</string>
     <string name="title_profile_flip">Развернуть разрез ?</string>
     <string name="title_projection">Проекция разреза на азимут %1$d</string>
-    <string name="title_refs">Привязки абриса</string>
+    <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
