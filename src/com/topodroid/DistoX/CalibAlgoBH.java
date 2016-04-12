@@ -3,13 +3,21 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid DistoX calibration algorithm
+ * @brief TopoDroid DistoX Beat Heeb's calibration algorithm
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * This software is adapted from TopoLinux implementation,
  * which, in turns, is based on PocketTopo implementation.
+ * This calibration algorithm is published in 
+ *   B. Heeb 
+ *   A general calibration algorithm for a 3-axis compass/clinometer devices
+ *   CREG Journal 73
+ * The C# source code for both the linear and the non-linear algorithms 
+ * hev been provided courtesy of Beat Heeb.
+ * This is a Java re-writing of the code.
+ * It differs from the original code in the final error evaluation and reporting.
  * --------------------------------------------------------
  */
 package com.topodroid.DistoX;
