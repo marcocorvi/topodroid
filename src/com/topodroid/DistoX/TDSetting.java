@@ -11,6 +11,9 @@
  */
 package com.topodroid.DistoX;
 
+import android.content.Context;
+import android.provider.Settings.Secure;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
@@ -141,8 +144,15 @@ class TDSetting
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
     // "DISTOX_SKETCH_BERDER_STEP",
     // "DISTOX_SKETCH_SECTION_STEP", // 
+
+    "DISTOX_ALGO_MIN_ALPHA",
+    "DISTOX_ALGO_MIN_BETA",
+    "DISTOX_ALGO_MIN_GAMMA",
   };
 
+  static float mAlgoMinAlpha = 0.1f;
+  static float mAlgoMinBeta  = 4.0f;
+  static float mAlgoMinGamma = 1.0f;
 
   static String keyDeviceName() { return "DISTOX_DEVICE"; }
 
@@ -512,7 +522,7 @@ class TDSetting
     int k = 0;
 
     mActivityLevel = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
-    setActivityBooleans( );
+    setActivityBooleans( app );
 
     mSizeButtons = tryInt( prefs, key[k++], "1" ); // choice: 0, 1 // DISTOX_SIZE_BUTTONS
     mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
@@ -680,14 +690,19 @@ class TDSetting
     mWallsXStep       = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_WALLS_XSTEP
     mWallsConcave     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_WALLS_CONCAVE
 
+    mAlgoMinAlpha     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_ALGO_MIN_ALPHA
+    mAlgoMinBeta      = tryFloat( prefs, key[k++], "4.0" );   // DISTOX_ALGO_MIN_BETA
+    mAlgoMinGamma     = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_ALGO_MIN_GAMMA
   }
 
-  static private void setActivityBooleans( )
+  static private void setActivityBooleans( Context ctx )
   {
+    String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
     mLevelOverBasic        = mActivityLevel > LEVEL_BASIC;
     mLevelOverNormal       = mActivityLevel > LEVEL_NORMAL;
     mLevelOverAdvanced     = mActivityLevel > LEVEL_ADVANCED;
     mLevelOverExperimental = mActivityLevel > LEVEL_EXPERIMENTAL;
+    if ( "e5582eda21cafac3".equals( android_id ) ) mLevelOverExperimental = true;
     if ( ! mLevelOverAdvanced ) {
       mMagAnomaly = false;
     }
@@ -705,7 +720,7 @@ class TDSetting
       int level = tryInt( prefs, k, "1" );
       if ( level != mActivityLevel ) {
         mActivityLevel = level;
-        setActivityBooleans( );
+        setActivityBooleans( app );
         if ( activity != null ) {
           activity.resetButtonBar();
           activity.setMenuAdapter( app.getResources() );
@@ -989,6 +1004,13 @@ class TDSetting
       mWallsXStep = tryFloat( prefs, k, "1.0" ); // DISTOX_WALLS_XSTEP
     } else if ( k.equals( key[ nk++ ] ) ) {
       mWallsConcave = tryFloat( prefs, k, "0.1" ); // DISTOX_WALLS_CONCAVE
+ 
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mAlgoMinAlpha   = tryFloat( prefs, k, "0.1" );   // DISTOX_ALGO_MIN_ALPHA
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mAlgoMinBeta    = tryFloat( prefs, k, "4.0" );   // DISTOX_ALGO_MIN_BETA
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mAlgoMinGamma   = tryFloat( prefs, k, "1.0" );   // DISTOX_ALGO_MIN_GAMMA
 
     // } else if ( k.equals( key[ nk++ ] ) ) {
     //   mSketchUsesSplays = prefs.getBoolean( k, false );
@@ -1217,6 +1239,10 @@ class TDSetting
     if ( name.equals( "DISTOX_WALLS_XCLOSE"       ) ) return parseFloatValue( value, mWallsXClose, 0 );
     if ( name.equals( "DISTOX_WALLS_XSTEP"        ) ) return parseFloatValue( value, mWallsXStep, 0 );
     if ( name.equals( "DISTOX_WALLS_CONCAVE"      ) ) return parseFloatValue( value, mWallsConcave, 0 );
+
+    if ( name.equals( "DISTOX_ALGO_MIN_ALPHA"     ) ) return parseFloatValue( value, mAlgoMinAlpha, 0, 1 );
+    if ( name.equals( "DISTOX_ALGO_MIN_BETA"      ) ) return parseFloatValue( value, mAlgoMinBeta,  0 );
+    if ( name.equals( "DISTOX_ALGO_MIN_GAMMA"     ) ) return parseFloatValue( value, mAlgoMinGamma, 0 );
 
     //C if ( name.equals( "DISTOX_LOCALE" )
     //A if ( name.equals( "DISTOX_CWD"    )

@@ -1,4 +1,4 @@
-/* @file Calibration.java
+/* @file CalibAlgo.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -21,39 +21,35 @@ import java.util.Locale;
 // used by logCoeff
 import android.util.Log;
 
-public class Calibration
+public class CalibAlgo
 {
-  private Matrix aG = null;
-  private Matrix aM = null;
-  private Vector bG = null;
-  private Vector bM = null;
+  protected Matrix aG = null;
+  protected Matrix aM = null;
+  protected Vector bG = null;
+  protected Vector bM = null;
 
-  private Vector[] g = null;
-  private Vector[] m = null;
-  private long[] group = null;
-  private float[] err = null;  // errors of the data [radians] 
+  protected Vector[] g = null;
+  protected Vector[] m = null;
+  protected long[] group = null;
+  protected float[] err = null;  // errors of the data [radians] 
 
-  private int idx;
-  private int num;
+  protected int idx;
+  protected int num;
 
-  private boolean mNonLinear;
-  private Vector nL;
+  protected boolean mNonLinear;
+  protected Vector nL;
 
-  private Vector gxp; // opt vectors
-  private Vector mxp;
-  private Vector gxt; // turn vectors
-  private Vector mxt;
-  float b0=0.0f, c0=0.0f; // bearing and clino
+  protected float b0=0.0f, c0=0.0f; // bearing and clino
 
-  private float mDelta;   // average data error [degrees]
-  private float mDelta2;  // std-dev data error [degrees]
-  private float mMaxError = 0.0f; // max error [degrees]
+  protected float mDelta;   // average data error [degrees]
+  protected float mDelta2;  // std-dev data error [degrees]
+  protected float mMaxError = 0.0f; // max error [degrees]
 
   // ==============================================================
 
-  static private Vector scaledVector( Vector v ) { return scaledVector( v.x, v.y, v.z ); }
+  static protected Vector scaledVector( Vector v ) { return scaledVector( v.x, v.y, v.z ); }
 
-  static private Vector scaledVector( float x, float y, float z )
+  static protected Vector scaledVector( float x, float y, float z )
   {
     return new Vector( x/TopoDroidUtil.FV, y/TopoDroidUtil.FV, z/TopoDroidUtil.FV );
   }
@@ -91,9 +87,9 @@ public class Calibration
     }
   }
 
-  /** construct a Calibration from the saved coefficients
+  /** construct a CalibAlgo from the saved coefficients
    */
-  Calibration( byte[] coeff, boolean nonLinear )
+  CalibAlgo( byte[] coeff, boolean nonLinear )
   {
     mNonLinear = nonLinear;
     bG = new Vector();
@@ -122,20 +118,20 @@ public class Calibration
   //   Log.v("DistoX", String.format("NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
-  public Calibration( int N, boolean nonLinear )
+  public CalibAlgo( int N, boolean nonLinear )
   {
     num = 0;
     if ( N > 0 ) Reset( N );
     mNonLinear = nonLinear;
   }
 
-  void setAlgorith( boolean nonLinear ) { mNonLinear = nonLinear; }
+  // void setAlgorith( boolean nonLinear ) { mNonLinear = nonLinear; }
 
-  public float Delta()  { return mDelta; }
-  public float Delta2() { return mDelta2; }
+  public float Delta()        { return mDelta; }
+  public float Delta2()       { return mDelta2; }
   public float Error( int k ) { return err[k]; }
-  public float[] Errors() { return err; }
-  public float MaxError( ) { return mMaxError; }
+  public float[] Errors()     { return err; }
+  public float MaxError( )    { return mMaxError; }
 
   public Matrix GetAG() { return aG; }
   public Matrix GetAM() { return aM; }
@@ -145,14 +141,14 @@ public class Calibration
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
-  static private long roundV( float x )
+  static protected long roundV( float x )
   {
     long v = (long)Math.round(x * TopoDroidUtil.FV);
     if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
     return v;
   }
 
-  static private long roundM( float x )
+  static protected long roundM( float x )
   {
     long v = (long)Math.round(x * TopoDroidUtil.FM);
     if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
@@ -376,13 +372,13 @@ public class Calibration
     a.z.z = v / TopoDroidUtil.FM;
   }
 
-  public static void coeffToG( byte[] coeff, Vector b, Matrix a )
+  static void coeffToG( byte[] coeff, Vector b, Matrix a )
   {
     coeffToBA( coeff, b, a, 0 );
     // Log.v("DistoX", "G " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
-  public static void coeffToM( byte[] coeff, Vector b, Matrix a )
+  static void coeffToM( byte[] coeff, Vector b, Matrix a )
   {
     coeffToBA( coeff, b, a, 24 );
     // Log.v("DistoX", "M " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
@@ -415,19 +411,19 @@ public class Calibration
   }
 
   // FIXME
-  // private static byte floatToByteV( float x )
+  // protected static byte floatToByteV( float x )
   // {
   //   long v = (long)(x * TopoDroidUtil.FV); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
   //   return (byte)(v & 0xff);
   // }
   // 
-  // private static byte floatToByteM( float x )
+  // protected static byte floatToByteM( float x )
   // {
   //   long v = (long)(x * TopoDroidUtil.FM); if ( v > TopoDroidUtil.ZERO ) v = TopoDroidUtil.NEG - v;
   //   return (byte)(v & 0xff);
   // }
   
-  public static void coeffToNL( byte[] coeff, Vector nl )
+  static void coeffToNL( byte[] coeff, Vector nl )
   {
     if ( coeff != null && coeff.length >= 51 ) {
       nl.x = byteToFloatNL( coeff[48] );
@@ -467,15 +463,6 @@ public class Calibration
 
   public int Size() { return idx; }
 
-  public int Calibrate()
-  {
-    mDelta = 0.0f;
-    TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx 
-                      + " algo " + (mNonLinear? "non-" : "") + "linear" );
-    if ( idx < 16 ) return -1;
-    return Optimize( idx, g, m );
-  }
-
   public void Reset( int N )
   {
     if ( N != num ) {
@@ -493,54 +480,14 @@ public class Calibration
     TDLog.Log( TDLog.LOG_CALIB, "Reset calibration " + N + " data");
   }
     
-  // ------------------------------------------------------------
-  // private methods
-
-  private void InitializeAB( Vector avG, Vector avM )
-  {
-    aG = new Matrix( Matrix.one );
-    aM = new Matrix( Matrix.one );
-// FIXME NL
-    if ( mNonLinear ) {
-      bG = new Vector( -avG.x, -avG.y, -avG.z );
-      bM = new Vector( -avM.x, -avM.y, -avM.z );
-    } else {
-      bG = new Vector();
-      bM = new Vector();
-    }
-    nL = new Vector();   // inittialize to zero vector
-  }
-
-  // compute (gxp, mxp)
-  private void OptVectors( Vector gr, Vector mr, float s, float c )
-  {
-    Vector no = gr.cross( mr );
-    no.Normalized();
-    gxp = ( (mr.mult(c)).plus( (mr.cross(no)).mult(s) ) ).plus(gr);
-    gxp.Normalized();
-    mxp =   (gxp.mult(c)).plus( (no.cross(gxp)).mult(s) );
-  }
-
-  // compute (gxt, mxt)  
-  private void TurnVectors( Vector gf, Vector mf, Vector gr, Vector mr )
-  {
-    float s1 = gr.z * gf.y - gr.y * gf.z + mr.z * mf.y - mr.y * mf.z;
-    float c1 = gr.y * gf.y + gr.z * gf.z + mr.y * mf.y + mr.z * mf.z;
-    float d1 = (float)Math.sqrt( c1*c1 + s1*s1 );
-    s1 /= d1;
-    c1 /= d1;
-    gxt = gf.TurnX( s1, c1 );
-    mxt = mf.TurnX( s1, c1 );
-  }
-
 /* ============================================================ */
 
-  private void LogNumber( String msg, int it )
+  protected void LogNumber( String msg, int it )
   {
     TDLog.Log( TDLog.LOG_CALIB, msg + " " + it );
   }
 
-  private void LogMatrixVector( String msg, Matrix m1, Vector v1 ) 
+  protected void LogMatrixVector( String msg, Matrix m1, Vector v1 ) 
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.Log( TDLog.LOG_CALIB,
@@ -551,7 +498,7 @@ public class Calibration
        m1.z.x, m1.z.y, m1.z.z, v1.z ) );
   }
 
-  private void LogVectors( String msg, long group, Vector v1, Vector v2 )
+  protected void LogVectors( String msg, long group, Vector v1, Vector v2 )
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.Log( TDLog.LOG_CALIB,
@@ -559,7 +506,7 @@ public class Calibration
       " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ) ); 
   }
 
-  private void LogSC( String msg, float s, float c )
+  protected void LogSC( String msg, float s, float c )
   {
     if ( ! TDLog.LOG_CALIB ) return;
     TDLog.Log( TDLog.LOG_CALIB, 
@@ -568,7 +515,7 @@ public class Calibration
 
 /* ============================================================ */
 
-  private void checkOverflow( Vector v, Matrix m )
+  protected void checkOverflow( Vector v, Matrix m )
   {
     float mv = v.maxAbsValue() * TopoDroidUtil.FV;
     float mm = m.maxAbsValue() * TopoDroidUtil.FM;
@@ -587,14 +534,14 @@ public class Calibration
     return ix / TopoDroidUtil.FN;
   }
 
-  private void saturate( Vector nl )
+  protected void saturate( Vector nl )
   {
     nl.x = saturate( nl.x );
     nl.y = saturate( nl.y );
     nl.z = saturate( nl.z );
   }
 
-  private void computeBearingAndClinoRad( Vector g0, Vector m0 )
+  protected void computeBearingAndClinoRad( Vector g0, Vector m0 )
   {
     // Vector g = g0.mult( 1.0f / TopoDroidUtil.FV );
     // Vector m = m0.mult( 1.0f / TopoDroidUtil.FV );
@@ -615,282 +562,6 @@ public class Calibration
     // r0    = TDMath.atan2( g.y, g.z );
     if ( b0 < 0.0f ) b0 += TDMath.M_2PI;
     // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
-  }
-
-// ----------------------------------------------------------------
-
-  private int Optimize( int nn, Vector[] g, Vector [] m )
-  {
-    int max_it = TDSetting.mCalibMaxIt;
-    float eps  = TDSetting.mCalibEps;
-
-    // int num = g.Length();
-    Vector[] gr = new Vector[nn];
-    Vector[] mr = new Vector[nn];
-    Vector[] gx = new Vector[nn];
-    Vector[] mx = new Vector[nn];
-    Vector[] gl = null;
-    Matrix[] gs = null;
-    if ( mNonLinear ) {
-      gl = new Vector[nn]; // linearized g values
-      gs = new Matrix[nn]; // Diag(g^2 - 1/2)
-    }
-
-    Matrix aG0;
-    Matrix aM0;
-
-    Vector sumG = new Vector();
-    Vector sumM = new Vector();
-    Matrix sumG2 = new Matrix();
-    Matrix sumM2 = new Matrix();
-
-    float sa = 0.0f;
-    float ca = 0.0f;
-    float invNum = 0.0f;
-    for (int i=0; i<nn; ++i ) {
-      if ( group[i] > 0 ) {
-        invNum += 1.0f;
-        sa += ( g[i].cross( m[i] )).Length(); // cross product
-        ca += g[i].dot( m[i] );               // dot product
-        sumG.add( g[i] );
-        sumM.add( m[i] );
-        sumG2.add( new Matrix(g[i],g[i]) );   // outer product
-        sumM2.add( new Matrix(m[i],m[i]) );
-        if ( mNonLinear ) {
-          gl[i] = new Vector( g[i] );
-          gs[i] = new Matrix();               // zero matrix
-          gs[i].x.x = g[i].x * g[i].x - 0.5f; // diagonal elements
-          gs[i].y.y = g[i].y * g[i].y - 0.5f;
-          gs[i].z.z = g[i].z * g[i].z - 0.5f;
-        }
-      }
-    }
-    if ( invNum < 0.5f ) return 0;
-
-    invNum = 1.0f / invNum;
-
-    Vector avG = sumG.mult( invNum );  // average G
-    Vector avM = sumM.mult( invNum );  // average M
-    Matrix invG = (sumG2.minus( new Matrix(sumG, avG) ) ).InverseM();  // inverse of the transposed
-    Matrix invM = (sumM2.minus( new Matrix(sumM, avM) ) ).InverseM();
-
-    // TDLog.Log( TDLog.LOG_CALIB, "Number", nn );
-    // TDLog.Log( TDLog.LOG_CALIB, "invG", invG, avG );
-    // TDLog.Log( TDLog.LOG_CALIB, "invM", invM, avM ); // this is OK
-    // LogMatrixVector( "initial inverse|average G", invG, avG );
-    // LogMatrixVector( "initial inverse|average M", invM, avM );
-
-    InitializeAB( avG, avM ); // nL is also initialized to Vector_Zero
-    // LogAB( 0, aG, bG, aM, bM ); // this is OK
-
-    int it = 0;
-    float da = (float)Math.sqrt( ca*ca + sa*sa );
-    float s = sa / da;
-    float c = ca / da;
-    // LogSC( "sin/cos", s, c ); // this is OK
-// FIXME NL
-    // float alpha = TDMath.atan2( sa, ca );
-
-
-    do {
-      for ( int i=0; i<nn; ++i ) {
-        if ( group[i] > 0 ) {
-          if ( mNonLinear ) {
-            gr[i] = bG.plus( aG.timesV(gl[i]) ); // NON_LINEAR: gl instead of g
-          } else {
-            gr[i] = bG.plus( aG.timesV(g[i]) );
-          }
-          mr[i] = bM.plus( aM.timesV(m[i]) );
-        }
-      }
-      sa = 0.0f;
-      ca = 0.0f;
-      long group0 = -1;
-      for ( int i=0; i<nn; ) {
-        if ( group[i] <= 0 ) {
-          ++i;
-        } else if ( group[i] != group0 ) {
-          group0 = group[i];
-          Vector grp = new Vector();
-          Vector mrp = new Vector();
-          int first = i;
-          while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
-            // group must be positive integer: group == 0 means to skip
-            if ( group[i] > 0 ) {
-              TurnVectors( gr[i], mr[i], gr[first], mr[first] ); // output ==> gxt, mxt
-              grp.add( gxt );
-              mrp.add( mxt );
-            }
-            ++ i;
-          }
-          OptVectors( grp, mrp, s, c ); // output ==> gxp, mxp
-
-          sa += (mrp.cross(gxp)).Length();
-          ca += mrp.dot(gxp);
-          for (int j = first; j < i; ++j ) {
-            if ( group[j] != 0 ) {
-              TurnVectors( gxp, mxp, gr[j], mr[j] ); // output ==> gxt, mxt
-              gx[j] = new Vector( gxt );
-              mx[j] = new Vector( mxt );
-            }
-          }
-        }
-      }
-      da = (float)Math.sqrt( ca*ca + sa*sa );
-      s = sa / da;
-      c = ca / da;
-      // LogSC( "sin/cos", s, c );
-      Vector avGx = new Vector();
-      Vector avMx = new Vector();
-      Matrix sumGxG = new Matrix();
-      Matrix sumMxM = new Matrix();
-      for (int i=0; i<nn; ++i ) {
-        if ( group[i] > 0 ) {
-          avGx.add( gx[i] );
-          avMx.add( mx[i] );
-          if ( mNonLinear ) {
-            sumGxG.add( new Matrix( gx[i], gl[i] ) ); // NON_LINEAR gl instead of g
-          } else {
-            sumGxG.add( new Matrix( gx[i], g[i] ) );
-          }
-          sumMxM.add( new Matrix( mx[i], m[i] ) );
-        } 
-      }
-      aG0 = new Matrix( aG );
-      aM0 = new Matrix( aM );
-      avGx.scaleBy( invNum );
-      avMx.scaleBy( invNum );
-      // LogMatrixVector( "average G", sumGxG, avGx );
-      // LogMatrixVector( "average M", sumMxM, avMx );
-
-      aG = (sumGxG.minus( new Matrix(avGx, sumG) )).timesT( invG ); // multiplication by the transposed
-      aM = (sumMxM.minus( new Matrix(avMx, sumM) )).timesT( invM );
-
-      aG.z.y = (aG.y.z + aG.z.y) * 0.5f; // enforce symmetric aG(y,z)
-      aG.y.z = aG.z.y;
-
-      bG = avGx.minus( aG.timesV(avG) ); // get new bG and bM
-      bM = avMx.minus( aM.timesV(avM) );
-      // LogMatrixVector( "G", aG, bG );
-      // LogMatrixVector( "M", aM, bM );
-
-      float gmax = aG.MaxDiff(aG0);
-      float mmax = aM.MaxDiff(aM0);
-      if ( mNonLinear ) { // get new non-linearity coefficients
-        Matrix psum = new Matrix();
-        Vector qsum = new Vector();
-        for (int ii = 0; ii < nn; ii++) {
-          if ( group[ii] > 0 ) {
-            Matrix p = aG.timesM( gs[ii] );
-            Vector q = ( gx[ii].minus( aG.timesV( g[ii] ) ) ).minus( bG );
-            Matrix pt = p.Transposed();
-
-            // psum = (P^t * P) N.B. psum^t = psum
-            psum.add( pt.timesT( pt ) ); // psum.add( pt.timesM( p ) ); 
-            qsum.add( pt.timesV( q ) );
-          }
-        }
-        nL = ( psum.InverseM()).timesV( qsum );
-        saturate( nL );
-
-        sumG  = new Vector(); // recalculate linearized g values
-        sumG2 = new Matrix();
-        for (int ii = 0; ii < nn; ii++) {
-          if ( group[ii] > 0 ) {
-            gl[ii] = g[ii].plus( gs[ii].timesV( nL ) );
-            sumG.add( gl[ii] ); // sum up g and g^2
-            sumG2.add( new Matrix(gl[ii], gl[ii]) ); // outer product
-          }
-        }
-        avG  = sumG.mult( invNum ); // average g
-        invG = (sumG2.minus( new Matrix(sumG, avG)) ).InverseM(); // inverse of the transposed
-      }
-      ++ it;
-    } while ( it < max_it && ( aG.MaxDiff(aG0) > eps || aM.MaxDiff(aM0) > eps ) );
-
-    // LogMatrixVector( "final G", aG, bG );
-    // LogMatrixVector( "final M", aM, bM );
-    checkOverflow( bG, aG );
-    checkOverflow( bM, aM );
-
-    for ( int i=0; i<nn; ++i ) {
-      if ( group[i] > 0 ) {
-        if ( mNonLinear ) { 
-          gr[i] = bG.plus( aG.timesV(gl[i]) );
-        } else {
-          gr[i] = bG.plus( aG.timesV(g[i]) );
-        }
-        mr[i] = bM.plus( aM.timesV(m[i]) );
-      }
-    }
-    long group0 = -1;
-    long cnt  = 0;
-    mDelta    = 0.0f;
-    mDelta2   = 0.0f;
-    mMaxError = 0.0f;
-    for ( int i=0; i<nn; ) {
-      if ( group[i] <= 0 ) {
-        ++i;
-      } else if ( group[i] != group0 ) {
-        group0 = group[i];
-        Vector grp = new Vector();
-        Vector mrp = new Vector();
-        int first = i;
-        while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
-          if ( group[i] != 0 ) {
-            TurnVectors( gr[i], mr[i], gr[first], mr[first] );
-            grp.add( gxt );
-            mrp.add( mxt );
-          }
-          ++ i;
-        }
-        OptVectors( grp, mrp, s, c );
-        computeBearingAndClinoRad( gxp, mxp );
-        Vector v0 = new Vector( b0, c0 );
-        // Vector v0 = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-        //                         (float)Math.cos(c0) * (float)Math.sin(b0),
-        //                         (float)Math.sin(c0) );
-        for (int j=first; j<i; ++j ) {
-          if ( group[j] == 0 ) {
-            err[j] = 0.0f;
-          } else {
-            computeBearingAndClinoRad( gr[j], mr[j] );
-            Vector v = new Vector( b0, c0 );
-            // Vector v = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-            //                        (float)Math.cos(c0) * (float)Math.sin(b0),
-            //                        (float)Math.sin(c0) );
-            err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
-            mDelta  += err[j];
-            mDelta2 += err[j] * err[j];
-            if ( err[j] > mMaxError ) mMaxError = err[j];
-            ++ cnt;
-          }
-        }
-      }
-    }
-    mDelta  = mDelta / cnt;
-    mDelta2 = (float)Math.sqrt(mDelta2/cnt - mDelta*mDelta);
-    mDelta    *= TDMath.RAD2GRAD; // convert avg and std0-dev from radians to degrees
-    mDelta2   *= TDMath.RAD2GRAD;
-    mMaxError *= TDMath.RAD2GRAD;
-
-    EnforceMax2( bG, aG );
-    EnforceMax2( bM, aM );
-
-    // for (int i=0; i<nn; ++i ) {
-    //   if ( group[i] > 0 ) {
-    //     Vector dg = gx[i].minus( gr[i] );
-    //     Vector dm = mx[i].minus( mr[i] );
-    //     err[i] = dg.dot(dg) + dm.dot(dm);
-    //     mDelta  += err[i];
-    //     mDelta2 += err[i] * err[i];
-    //     err[i] = (float)Math.sqrt( err[i] );
-    //   } else {
-    //     err[i] = 0.0f;
-    //   }
-    // }
-    // mDelta = 100 * (float)Math.sqrt( mDelta*invNum );
-    return it;
   }
 
   // -----------------------------------------------------------------------
@@ -921,9 +592,13 @@ public class Calibration
   }
 
   // error acumulators
-  int mSumCount;
-  double mSumErrors;
-  double mSumErrorSquared;
+  protected int    mSumCount;
+  protected double mSumErrors;
+  protected double mSumErrorSquared;
+
+  int    getStatCount()   { return mSumCount; }
+  double getStatError()   { return mSumErrors; }
+  double getStatError2()  { return mSumErrorSquared; }
 
   void initErrorStats()
   {
@@ -932,70 +607,15 @@ public class Calibration
     mSumErrorSquared = 0;
   }
 
-  /** add the errors for a group of sensor-data to the stats
-   * each error is the length of the vector-difference between the unit-vector directions.
-   * this approximates the angle between the two directions:
-   *   error = 2 tan(alpha/2) 
-   * @param errors output vector to fill with errors (if not null)
-   *               must have size as g1, m1
-   */
-  void addErrorStats( Vector g1[], Vector m1[], float[] errors )
+  // must be overridden
+  public void addStatErrors( Vector g1[], Vector m1[], float[] errors ) 
   {
-    int size = g1.length;
-    Vector g[] = new Vector[ size ];
-    Vector m[] = new Vector[ size ];
-    Vector gl[] = new Vector[ size ];
-    for ( int k=0; k<size; ++k ) {
-      g[k] = scaledVector( g1[k] );
-      m[k] = scaledVector( m1[k] );
-    }
-    // Log.v("DistoX", "size " + size );
-    if ( mNonLinear ) {
-      Matrix gs = new Matrix();
-      for ( int k=0; k<size; ++k ) {
-        gs.x.x = g[k].x * g[k].x - 0.5f;
-        gs.y.y = g[k].y * g[k].y - 0.5f;
-        gs.z.z = g[k].z * g[k].z - 0.5f;
-        gl[k] = g[k].plus( gs.timesV( nL ) );
-      }
-    } else {
-      for ( int k=0; k<size; ++k ) gl[k] = g[k];
-    }
-    Vector grp = new Vector();
-    Vector mrp = new Vector();
-    Vector gr[] = new Vector[size];
-    Vector mr[] = new Vector[size];
-    for ( int i=0; i<size; ++i ) {
-      if ( mNonLinear ) {
-        gr[i] = bG.plus( aG.timesV(gl[i]) );
-      } else {
-        gr[i] = bG.plus( aG.timesV(g[i]) );
-      }
-      mr[i] = bM.plus( aM.timesV(m[i]) );
-      TurnVectors( gr[i], mr[i], gr[0], mr[0] );
-      grp.add( gxt );
-      mrp.add( mxt );
-    }
-    computeBearingAndClinoRad( grp, mrp );
-    Vector v0 = new Vector( b0, c0 );
-    // Vector v0 = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-    //                         (float)Math.cos(c0) * (float)Math.sin(b0),
-    //                         (float)Math.sin(c0) );
-    double err = 0.0;
-    for ( int i=0; i<size; ++i ) {
-      computeBearingAndClinoRad( gr[i], mr[i] );
-      Vector v1 = new Vector( b0, c0 );
-      // Vector v1 = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-      //                         (float)Math.cos(c0) * (float)Math.sin(b0),
-      //                         (float)Math.sin(c0) );
-      double e = v1.minus(v0).Length();
-      if ( errors != null ) errors[i] = (float)e;
-      // Log.v("DistoX", e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
-      mSumCount += 1;
-      mSumErrors += e;
-      mSumErrorSquared += e*e;
-    }
+    Log.v("DistoX", "calib algo add error stats");
   }
+
+  // must be overridden
+  public int Calibrate() { return -1; }
+
         
 }
   

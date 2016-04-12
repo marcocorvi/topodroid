@@ -2401,7 +2401,7 @@ class TopoDroidExporter
             if ( line == null ) {
               ret = -4;
             } else {
-              long cid = data.insertCalib( name, date, device, comment, algo );
+              long cid = data.insertCalibInfo( name, date, device, comment, algo );
               while ( line != null ) {
                 String[] vals = line.split(", ");
                 if ( vals.length > 7 ) {

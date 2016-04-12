@@ -278,7 +278,7 @@ public class DeviceHelper extends DataSetObservable
 
    public int selectCalibAlgo( long cid )
    {
-     int algo = 0; // default CALIB_ALGO_AUTO
+     int algo = CalibInfo.ALGO_AUTO; // default 
      // if ( myDB == null ) return 0;
      Cursor cursor = myDB.query( CALIB_TABLE,
                                 new String[] { "algo" }, // columns
@@ -584,7 +584,7 @@ public class DeviceHelper extends DataSetObservable
    }
 
    // this must be called when the calib name is not yet in the db
-   long insertCalib( String name, String date, String device, String comment, long algo )
+   long insertCalibInfo( String name, String date, String device, String comment, long algo )
    {
      if ( hasCalibName( name ) ) return -1L;
      long id = 1;
@@ -606,12 +606,13 @@ public class DeviceHelper extends DataSetObservable
      return id;
    }
 
-   private long setName( String table, String name ) 
+   // used only by setCalib
+   private long setCalibName( String name ) 
    {
      long id = -1;
      // if ( myDB == null ) { return 0; }
-     // TDLog.Log( TDLog.LOG_DB, "setName >" + name + "< table " + table );
-     Cursor cursor = myDB.query( table, new String[] { "id" },
+     // TDLog.Log( TDLog.LOG_DB, "set Calib Name >" + name + "< table " + table );
+     Cursor cursor = myDB.query( CALIB_TABLE, new String[] { "id" },
                                  "name = ?", new String[] { name },
                                  null, null, null );
      if (cursor.moveToFirst() ) {
@@ -620,7 +621,7 @@ public class DeviceHelper extends DataSetObservable
      } else {
        if (cursor != null && !cursor.isClosed()) { cursor.close(); }
        // SELECT max(id) FROM table
-       cursor = myDB.query( table, new String[] { "max(id)" },
+       cursor = myDB.query( CALIB_TABLE, new String[] { "max(id)" },
                             null, null, null, null, null );
        if (cursor.moveToFirst() ) {
          id = 1 + cursor.getLong(0);
@@ -634,7 +635,7 @@ public class DeviceHelper extends DataSetObservable
        cv.put( "name",    name );
        cv.put( "day",     "" );
        cv.put( "comment", "" );
-       myDB.insert( table, null, cv );
+       myDB.insert( CALIB_TABLE, null, cv );
      }
      return id;
    }
@@ -929,7 +930,7 @@ public class DeviceHelper extends DataSetObservable
    {
      myNextCId = 0;
      // if ( myDB == null ) return 0L;
-     long cid = setName( CALIB_TABLE, calib );
+     long cid = setCalibName( calib );
      Cursor cursor = myDB.query( GM_TABLE, new String[] { "max(id)" },
                           "calibId=?", new String[] { Long.toString(cid) },
                           null, null, null );

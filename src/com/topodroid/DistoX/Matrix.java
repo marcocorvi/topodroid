@@ -108,7 +108,7 @@ public class Matrix
   }
 
   // inverse of the transposed: (this^t)^-1
-  public Matrix InverseT()
+  private Matrix InverseT()
   {
     Matrix ad = new Matrix( y.cross(z), z.cross(x), x.cross(y) );
     float inv_det = 1.0f / ( x.dot( ad.x ) );

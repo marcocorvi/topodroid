@@ -90,6 +90,11 @@ public class Vector
     return (float)Math.sqrt( x*x + y*y + z*z );
   }
 
+  public float LengthSquared()
+  {
+    return ( x*x + y*y + z*z );
+  }
+
   public float Abs( ) { return Length(); }
 
   public Vector TurnX( float s, float c )

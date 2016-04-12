@@ -109,6 +109,11 @@
             android:layout_height="wrap_content" 
             android:text="@string/non_linear"
             />
+          <RadioButton android:id="@+id/calib_algo_minimum"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="@string/algo_minimum"
+            />
     </RadioGroup>
 
   </LinearLayout>

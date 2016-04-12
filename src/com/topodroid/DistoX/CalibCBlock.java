@@ -110,7 +110,7 @@ public class CalibCBlock
     doComputeBearingAndClino( g, m );
   }
 
-  public void computeBearingAndClino( Calibration calib )
+  public void computeBearingAndClino( CalibAlgo calib )
   {
     float f = TopoDroidUtil.FV;
     Vector g = new Vector( gx/f, gy/f, gz/f );

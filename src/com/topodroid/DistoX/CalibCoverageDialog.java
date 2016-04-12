@@ -58,7 +58,7 @@ public class CalibCoverageDialog extends MyDialog
 
   private Bitmap mBitmap;
   private List<CalibCBlock> mList;
-  private Calibration mCalib;
+  private CalibAlgo mCalib;
 
   private TextView mText;
   private ImageView mImage;
@@ -66,7 +66,7 @@ public class CalibCoverageDialog extends MyDialog
   private Button mBtnEvalCal;
   // private Button mBtnBack;
 
-  public CalibCoverageDialog( Context context, List< CalibCBlock > list, Calibration cal )
+  public CalibCoverageDialog( Context context, List< CalibCBlock > list, CalibAlgo cal )
   {
     super( context, R.string.CalibCoverageDialog );
     
@@ -181,7 +181,7 @@ public class CalibCoverageDialog extends MyDialog
     }
   }
 
-  private void evalCoverage( List<CalibCBlock> clist, Calibration transform )
+  private void evalCoverage( List<CalibCBlock> clist, CalibAlgo transform )
   {
     for (int j=0; j<t_dim; ++j ) angles[j].mValue = 1.0f;
 

@@ -760,7 +760,7 @@ public class DeviceActivity extends Activity
       // if (one > TopoDroidUtil.ZERO ) one = TopoDroidUtil.NEG - one;
       byte low  = (byte)( one & 0xff );
       byte high = (byte)((one >> 8) & 0xff );
-      byte zeroNL = Calibration.floatToByteNL( 0 );
+      byte zeroNL = CalibAlgo.floatToByteNL( 0 );
       byte[] coeff = new byte[52];
       for ( int k=0; k<52; ++k ) coeff[k] = (byte)0x00;
       coeff[ 2] = low;

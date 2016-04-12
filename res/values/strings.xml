@@ -78,6 +78,7 @@
     <string name="auto">auto</string>
     <string name="linear">linear</string>
     <string name="non_linear">non-linear</string>
+    <string name="algo_minimum">minimum</string>
    
     <string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string>
     <string name="device_address">Address %1$s</string>
@@ -959,6 +960,16 @@
   <string name="pref_walls_xstep_title">Step</string>
   <string name="pref_walls_xstep_summary">Point separation along the wall</string>
   <string name="pref_walls_xstep_message">Separation of points along the wall [m]</string>
+
+  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string>
+  <string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string>
+  <string name="pref_algo_min_beta_title">Min-algo beta</string>
+  <string name="pref_algo_min_beta_summary">Min-algo magnetic dip weight</string>
+  <string name="pref_algo_min_beta_message">Min-algo magnetic dip weight</string>
+  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
+  <string name="pref_algo_min_gamma_summary">Min-algo group weight</string>
+  <string name="pref_algo_min_gamma_message">Min-algo group weight</string>
 
   <string name="pref_log_stream_summary">Log output stream</string>
   <string name="pref_log_stream_title">Log stream</string>

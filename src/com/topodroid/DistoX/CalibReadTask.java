@@ -68,9 +68,9 @@ class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
       Vector bm = new Vector();
       Matrix am = new Matrix();
       Vector nL = new Vector();
-      Calibration.coeffToG( coeff, bg, ag );
-      Calibration.coeffToM( coeff, bm, am );
-      Calibration.coeffToNL( coeff, nL );
+      CalibAlgo.coeffToG( coeff, bg, ag );
+      CalibAlgo.coeffToM( coeff, bm, am );
+      CalibAlgo.coeffToNL( coeff, nL );
 
       switch ( mParentType ) {
         case PARENT_DEVICE:

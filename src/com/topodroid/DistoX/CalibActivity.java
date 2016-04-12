@@ -100,6 +100,8 @@ public class CalibActivity extends Activity
   private RadioButton mCBAlgoAuto;
   private RadioButton mCBAlgoLinear;
   private RadioButton mCBAlgoNonLinear;
+  private RadioButton mCBAlgoMinimum;
+
 
   private TopoDroidApp mApp;
   private boolean isSaved;
@@ -152,6 +154,9 @@ public class CalibActivity extends Activity
     mCBAlgoAuto      = (RadioButton) findViewById( R.id.calib_algo_auto );
     mCBAlgoLinear    = (RadioButton) findViewById( R.id.calib_algo_linear );
     mCBAlgoNonLinear = (RadioButton) findViewById( R.id.calib_algo_non_linear );
+    mCBAlgoMinimum   = (RadioButton) findViewById( R.id.calib_algo_minimum );
+
+    if ( ! TDSetting.mLevelOverExperimental ) mCBAlgoMinimum.setVisibility( View.GONE );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
@@ -195,6 +200,7 @@ public class CalibActivity extends Activity
         case 0: mCBAlgoAuto.setChecked( true ); break;
         case 1: mCBAlgoLinear.setChecked( true ); break;
         case 2: mCBAlgoNonLinear.setChecked( true ); break;
+        case 3: mCBAlgoMinimum.setChecked( true ); break;
         default: mCBAlgoAuto.setChecked( true ); break;
       }
     } else {
@@ -271,15 +277,15 @@ public class CalibActivity extends Activity
 
   private void showCoeffs()
   {
-    byte[] coeff = Calibration.stringToCoeff( mApp.mDData.selectCalibCoeff( mApp.mCID ) );
+    byte[] coeff = CalibAlgo.stringToCoeff( mApp.mDData.selectCalibCoeff( mApp.mCID ) );
     Matrix mG = new Matrix();
     Matrix mM = new Matrix();
     Vector vG = new Vector();
     Vector vM = new Vector();
     Vector nL = new Vector();
-    Calibration.coeffToG( coeff, vG, mG );
-    Calibration.coeffToM( coeff, vM, mM );
-    Calibration.coeffToNL( coeff, nL );
+    CalibAlgo.coeffToG( coeff, vG, mG );
+    CalibAlgo.coeffToM( coeff, vM, mM );
+    CalibAlgo.coeffToNL( coeff, nL );
    
     CalibResult res = new CalibResult();
     mApp.mDData.selectCalibError( mApp.mCID, res );
@@ -350,8 +356,9 @@ public class CalibActivity extends Activity
       }
     }
     int algo = 0;
-    if ( mCBAlgoLinear.isChecked() ) algo = 1;
+    if ( mCBAlgoLinear.isChecked() )         algo = 1;
     else if ( mCBAlgoNonLinear.isChecked() ) algo = 2;
+    else if ( mCBAlgoMinimum.isChecked() )   algo = 3;
     mApp.mDData.updateCalibAlgo( mApp.mCID, algo );
 
     setButtons();

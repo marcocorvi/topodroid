@@ -15,6 +15,11 @@ import android.util.Log;
 
 class CalibInfo
 {
+  final static int ALGO_AUTO       = 0;
+  final static int ALGO_LINEAR     = 1;
+  final static int ALGO_NON_LINEAR = 2;
+  final static int ALGO_MINIMUM    = 3;
+
   public long id;           //!< database ID
   public String name;       //!< name 
   public String date;       //!< date

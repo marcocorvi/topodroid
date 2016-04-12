@@ -61,7 +61,7 @@ public class GMActivity extends Activity
 {
   private TopoDroidApp mApp;
 
-  private Calibration mCalibration = null;
+  private CalibAlgo mCalibration = null;
 
   private String mSaveData;                // saved GM text representation
   private TextView mSaveTextView;          // view of the saved GM
@@ -169,10 +169,18 @@ public class GMActivity extends Activity
     if ( list.size() < 16 ) {
       return -1;
     }
-    mCalibration = new Calibration( 0, false );
-
-    // FIXME set the calibration algorithm (whether non-linear or linear)
-    mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
+    switch ( mAlgo ) {
+      case CalibInfo.ALGO_NON_LINEAR:
+        mCalibration = new CalibAlgoBH( 0, true );
+        // FIXME set the calibration algorithm (whether non-linear or linear)
+        // mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
+        break;
+      case CalibInfo.ALGO_MINIMUM:
+        mCalibration = new CalibAlgoMin( 0, false );
+        break;
+      default: // linear algo
+        mCalibration = new CalibAlgoBH( 0, false );
+    }
 
     mCalibration.Reset( list.size() );
     for ( CalibCBlock item : list ) {
@@ -188,7 +196,7 @@ public class GMActivity extends Activity
       }
 
       byte[] coeff = mCalibration.GetCoeff();
-      mApp.mDData.updateCalibCoeff( cid, Calibration.coeffToString( coeff ) );
+      mApp.mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff ) );
       mApp.mDData.updateCalibError( cid, 
              mCalibration.Delta(),
              mCalibration.Delta2(),
@@ -226,29 +234,46 @@ public class GMActivity extends Activity
 
     String coeffStr = mApp.mDData.selectCalibCoeff( cid );
     int algo = mApp.mDData.selectCalibAlgo( cid );
-    boolean nonLinear = false;
     if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
-    if ( algo == 2 ) nonLinear = true;
-    Calibration calib1 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+    CalibAlgo calib1 = null;
+    switch ( algo ) {
+      case CalibInfo.ALGO_NON_LINEAR:
+        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
+        break;
+      case CalibInfo.ALGO_MINIMUM:
+        calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+        break;
+      default:
+        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
+    }
     // Log.v("DistoX", "Calib-1 algo " + algo );
     // calib1.dump();
 
     coeffStr = mApp.mDData.selectCalibCoeff( mApp.mCID );
     algo = mApp.mDData.selectCalibAlgo( mApp.mCID );
-    nonLinear = false;
     if ( algo == 0 ) algo = mApp.getCalibAlgoFromDevice();
-    if ( algo == 2 ) nonLinear = true;
-    Calibration calib0 = new Calibration( Calibration.stringToCoeff( coeffStr ), nonLinear );
+    CalibAlgo calib0 = null;
+    switch ( algo ) {
+      case CalibInfo.ALGO_NON_LINEAR:
+        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
+        break;
+      case CalibInfo.ALGO_MINIMUM:
+        calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+        break;
+      default:
+        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
+    }
     // Log.v("DistoX", "Calib-0 algo " + algo );
     // calib0.dump();
+
     float[] errors0 = new float[ list.size() ]; 
     float[] errors1 = new float[ list1.size() ]; 
     int ke1 = computeErrorStats( calib0, list1, errors1 );
     int ke0 = computeErrorStats( calib1, list,  errors0 );
-    double ave0 = calib0.mSumErrors / calib0.mSumCount;
-    double std0 = Math.sqrt( calib0.mSumErrorSquared / calib0.mSumCount - ave0 * ave0 + 1e-8 );
-    double ave1 = calib1.mSumErrors / calib1.mSumCount;
-    double std1 = Math.sqrt( calib1.mSumErrorSquared / calib1.mSumCount - ave1 * ave1 + 1e-8 );
+    double ave0 = calib0.getStatError() / calib0.getStatCount();
+    double std0 = Math.sqrt( calib0.getStatError2() / calib0.getStatCount() - ave0 * ave0 + 1e-8 );
+    double ave1 = calib1.getStatError() / calib1.getStatCount();
+    double std1 = Math.sqrt( calib1.getStatError2() / calib1.getStatCount() - ave1 * ave1 + 1e-8 );
     ave0 *= TDMath.RAD2GRAD;
     std0 *= TDMath.RAD2GRAD;
     ave1 *= TDMath.RAD2GRAD;
@@ -287,7 +312,7 @@ public class GMActivity extends Activity
    * @param name  the other calibration name
    * @return number of errors in the array
    */
-  private int computeErrorStats( Calibration calib, List<CalibCBlock> list, float[] errors )
+  private int computeErrorStats( CalibAlgo calib, List<CalibCBlock> list, float[] errors )
   {
     int ke = 0; // number of errors
     for ( int c=0; c<errors.length; ++c ) errors[c] = -1;
@@ -315,7 +340,7 @@ public class GMActivity extends Activity
                 ++i;
               }
             }
-            calib.addErrorStats( g, m, e );
+            calib.addStatErrors( g, m, e );
             for ( int c=0; c<cnt; ++c ) errors[ ke++ ] = e[c];
           }
           group = list.get(j).mGroup;
@@ -339,9 +364,10 @@ public class GMActivity extends Activity
           ++i;
         }
       }
-      calib.addErrorStats( g, m, e );
+      calib.addStatErrors( g, m, e );
       for ( int c=0; c<cnt; ++c ) errors[ ke++ ] = e[c];
     }
+    Log.v("DistoX", "compute error stats " + ke );
     return ke;
   }
 
@@ -726,11 +752,11 @@ public class GMActivity extends Activity
         } else {
           enableWrite( false );
           setTitleColor( TDConst.COLOR_CONNECTED );
-          if ( mAlgo == 0 ) { // CALIB_ALGO_AUTO
+          if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
             mAlgo = mApp.getCalibAlgoFromDevice();
-            if ( mAlgo < 0 ) { // CALIB_ALGO_AUTO
+            if ( mAlgo < CalibInfo.ALGO_AUTO ) {
               Toast.makeText( this, R.string.device_algo_failed, Toast.LENGTH_SHORT ).show();
-              mAlgo = 1; // CALIB_ALGO_LINEAR
+              mAlgo = CalibInfo.ALGO_LINEAR; 
             }
             mApp.updateCalibAlgo( mAlgo );
           }
@@ -767,8 +793,8 @@ public class GMActivity extends Activity
         if ( mApp.mCID >= 0 ) {
           setTitle( R.string.calib_compute_coeffs );
           setTitleColor( TDConst.COLOR_COMPUTE );
-          if ( mAlgo == 0 ) { // CALIB_ALGO_AUTO
-            mAlgo = ( TDSetting.mCalibAlgo != 0 ) ? TDSetting.mCalibAlgo : 1; // CALIB_AUTO_LINEAR
+          if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
+            mAlgo = ( TDSetting.mCalibAlgo != CalibInfo.ALGO_AUTO ) ? TDSetting.mCalibAlgo : CalibInfo.ALGO_LINEAR;
             mApp.updateCalibAlgo( mAlgo );
           }
           new CalibComputer( this, -1L, CalibComputer.CALIB_COMPUTE_CALIB ).execute();

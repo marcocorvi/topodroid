@@ -567,13 +567,15 @@ public class TopoDroidApp extends Application
     }
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mLevelOverExperimental ) {
       String value = mDData.getValue("sketch");
       mSketches =  value != null 
                 && value.equals("on")
                 && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
+    }
 
-      value = mDData.getValue("cosurvey");
+    if ( TDSetting.mLevelOverAdvanced ) {
+      String value = mDData.getValue("cosurvey");
       mCosurvey =  value != null && value.equals("on");
       setCoSurvey( false );
       setBooleanPreference( "DISTOX_COSURVEY", false );
@@ -1853,16 +1855,14 @@ public class TopoDroidApp extends Application
   
   int getCalibAlgoFromDevice()
   {
-    if ( mDevice == null ) return 1;                  // default: CALIB_ALGO_LINEAR
-    if ( mDevice.mType == Device.DISTO_A3 ) return 1; // A3: CALIB_ALGO_LINEAR
+    if ( mDevice == null ) return CalibInfo.ALGO_LINEAR;
+    if ( mDevice.mType == Device.DISTO_A3 ) return CalibInfo.ALGO_LINEAR; // A3
     if ( mDevice.mType == Device.DISTO_X310 ) {
       // if ( mComm == null ) return 1; // should not happen
       byte[] ret = mComm.readMemory( mDevice.mAddress, 0xe000 );
-      if ( ret == null ) return -1; // should not happen
-      if ( ret[0] >= 2 && ret[1] >= 3 ) return 2; // CALIB_ALGO_NON_LINEAR
-      return 1; // CALIB_ALGO_LINEAR
+      if ( ret != null && ( ret[0] >= 2 && ret[1] >= 3 ) ) return CalibInfo.ALGO_NON_LINEAR;
     }
-    return 1; // CALIB_ALGO_LINEAR
+    return CalibInfo.ALGO_LINEAR; // default
   }  
 
   // --------------------------------------------------------
