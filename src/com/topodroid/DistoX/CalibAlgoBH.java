@@ -95,10 +95,10 @@ public class CalibAlgoBH extends CalibAlgo
   private void OptVectors( Vector gr, Vector mr, float s, float c )
   {
     Vector no = gr.cross( mr );
-    no.Normalized();
-    gxp = ( (mr.mult(c)).plus( (mr.cross(no)).mult(s) ) ).plus(gr);
-    gxp.Normalized();
-    mxp =   (gxp.mult(c)).plus( (no.cross(gxp)).mult(s) );
+    no.normalize();
+    gxp = ( (mr.times(c)).plus( (mr.cross(no)).times(s) ) ).plus(gr);
+    gxp.normalize();
+    mxp =   (gxp.times(c)).plus( (no.cross(gxp)).times(s) );
   }
 
   // compute (gxt, mxt)  
@@ -148,10 +148,10 @@ public class CalibAlgoBH extends CalibAlgo
         invNum += 1.0f;
         sa += ( g[i].cross( m[i] )).Length(); // cross product
         ca += g[i].dot( m[i] );               // dot product
-        sumG.add( g[i] );
-        sumM.add( m[i] );
-        sumG2.add( new Matrix(g[i],g[i]) );   // outer product
-        sumM2.add( new Matrix(m[i],m[i]) );
+        sumG.plusEqual( g[i] );
+        sumM.plusEqual( m[i] );
+        sumG2.plusEqual( new Matrix(g[i],g[i]) );   // outer product
+        sumM2.plusEqual( new Matrix(m[i],m[i]) );
         if ( mNonLinear ) {
           gl[i] = new Vector( g[i] );
           gs[i] = new Matrix();               // zero matrix
@@ -173,8 +173,8 @@ public class CalibAlgoBH extends CalibAlgo
     //    return ad * ( 1 / m.x * ad.x ); // adjugate * 1/determinant
     // which is InverseM 
 
-    Vector avG = sumG.mult( invNum );  // average G
-    Vector avM = sumM.mult( invNum );  // average M
+    Vector avG = sumG.times( invNum );  // average G
+    Vector avM = sumM.times( invNum );  // average M
     Matrix invG = (sumG2.minus( new Matrix(sumG, avG) ) ).InverseM();  // inverse of the transposed
     Matrix invM = (sumM2.minus( new Matrix(sumM, avM) ) ).InverseM();
 
@@ -222,8 +222,8 @@ public class CalibAlgoBH extends CalibAlgo
             // group must be positive integer: group == 0 means to skip
             if ( group[i] > 0 ) {
               TurnVectors( gr[i], mr[i], gr[first], mr[first] ); // output ==> gxt, mxt
-              grp.add( gxt );
-              mrp.add( mxt );
+              grp.plusEqual( gxt );
+              mrp.plusEqual( mxt );
             }
             ++ i;
           }
@@ -250,20 +250,20 @@ public class CalibAlgoBH extends CalibAlgo
       Matrix sumMxM = new Matrix();
       for (int i=0; i<nn; ++i ) {
         if ( group[i] > 0 ) {
-          avGx.add( gx[i] );
-          avMx.add( mx[i] );
+          avGx.plusEqual( gx[i] );
+          avMx.plusEqual( mx[i] );
           if ( mNonLinear ) {
-            sumGxG.add( new Matrix( gx[i], gl[i] ) ); // NON_LINEAR gl instead of g
+            sumGxG.plusEqual( new Matrix( gx[i], gl[i] ) ); // NON_LINEAR gl instead of g
           } else {
-            sumGxG.add( new Matrix( gx[i], g[i] ) );
+            sumGxG.plusEqual( new Matrix( gx[i], g[i] ) );
           }
-          sumMxM.add( new Matrix( mx[i], m[i] ) );
+          sumMxM.plusEqual( new Matrix( mx[i], m[i] ) );
         } 
       }
       aG0 = new Matrix( aG );
       aM0 = new Matrix( aM );
-      avGx.scaleBy( invNum );
-      avMx.scaleBy( invNum );
+      avGx.timesEqual( invNum );
+      avMx.timesEqual( invNum );
       // LogMatrixVector( "average G", sumGxG, avGx );
       // LogMatrixVector( "average M", sumMxM, avMx );
 
@@ -290,8 +290,8 @@ public class CalibAlgoBH extends CalibAlgo
             Matrix pt = p.Transposed();
 
             // psum = (P^t * P) N.B. psum^t = psum
-            psum.add( pt.timesT( pt ) ); // psum.add( pt.timesM( p ) ); 
-            qsum.add( pt.timesV( q ) );
+            psum.plusEqual( pt.timesT( pt ) ); // psum.plusEqual( pt.timesM( p ) ); 
+            qsum.plusEqual( pt.timesV( q ) );
           }
         }
         nL = ( psum.InverseM()).timesV( qsum );
@@ -302,11 +302,11 @@ public class CalibAlgoBH extends CalibAlgo
         for (int ii = 0; ii < nn; ii++) {
           if ( group[ii] > 0 ) {
             gl[ii] = g[ii].plus( gs[ii].timesV( nL ) );
-            sumG.add( gl[ii] ); // sum up g and g^2
-            sumG2.add( new Matrix(gl[ii], gl[ii]) ); // outer product
+            sumG.plusEqual( gl[ii] ); // sum up g and g^2
+            sumG2.plusEqual( new Matrix(gl[ii], gl[ii]) ); // outer product
           }
         }
-        avG  = sumG.mult( invNum ); // average g
+        avG  = sumG.times( invNum ); // average g
         invG = (sumG2.minus( new Matrix(sumG, avG)) ).InverseM(); // inverse of the transposed
       }
       ++ it;
@@ -344,27 +344,23 @@ public class CalibAlgoBH extends CalibAlgo
         while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
           if ( group[i] != 0 ) {
             TurnVectors( gr[i], mr[i], gr[first], mr[first] );
-            grp.add( gxt );
-            mrp.add( mxt );
+            grp.plusEqual( gxt );
+            mrp.plusEqual( mxt );
           }
           ++ i;
         }
         OptVectors( grp, mrp, s, c );
         computeBearingAndClinoRad( gxp, mxp );
         Vector v0 = new Vector( b0, c0 );
-        // Vector v0 = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-        //                         (float)Math.cos(c0) * (float)Math.sin(b0),
-        //                         (float)Math.sin(c0) );
+        // Log.v("DistoX", "group V " + v0.x + " " + v0.y + " " + v0.z );
         for (int j=first; j<i; ++j ) {
           if ( group[j] == 0 ) {
             err[j] = 0.0f;
           } else {
             computeBearingAndClinoRad( gr[j], mr[j] );
             Vector v = new Vector( b0, c0 );
-            // Vector v = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-            //                        (float)Math.cos(c0) * (float)Math.sin(b0),
-            //                        (float)Math.sin(c0) );
             err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
+            // Log.v("DistoX", "Err" + err[j] + " V " + v.x + " " + v.y + " " + v.z );
             mDelta  += err[j];
             mDelta2 += err[j] * err[j];
             if ( err[j] > mMaxError ) mMaxError = err[j];
@@ -419,7 +415,7 @@ public class CalibAlgoBH extends CalibAlgo
       g[k] = scaledVector( g1[k] );
       m[k] = scaledVector( m1[k] );
     }
-    Log.v("DistoX", "add stat errors: size " + size );
+    // Log.v("DistoX", "add stat errors: size " + size );
     if ( mNonLinear ) {
       Matrix gs = new Matrix();
       for ( int k=0; k<size; ++k ) {
@@ -443,8 +439,8 @@ public class CalibAlgoBH extends CalibAlgo
       }
       mr[i] = bM.plus( aM.timesV(m[i]) );
       TurnVectors( gr[i], mr[i], gr[0], mr[0] );
-      grp.add( gxt );
-      mrp.add( mxt );
+      grp.plusEqual( gxt );
+      mrp.plusEqual( mxt );
     }
     computeBearingAndClinoRad( grp, mrp );
     Vector v0 = new Vector( b0, c0 );

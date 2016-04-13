@@ -148,11 +148,13 @@ class TDSetting
     "DISTOX_ALGO_MIN_ALPHA",
     "DISTOX_ALGO_MIN_BETA",
     "DISTOX_ALGO_MIN_GAMMA",
+    "DISTOX_ALGO_MIN_DELTA",
   };
 
   static float mAlgoMinAlpha = 0.1f;
   static float mAlgoMinBeta  = 4.0f;
   static float mAlgoMinGamma = 1.0f;
+  static float mAlgoMinDelta = 1.0f;
 
   static String keyDeviceName() { return "DISTOX_DEVICE"; }
 
@@ -693,6 +695,7 @@ class TDSetting
     mAlgoMinAlpha     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_ALGO_MIN_ALPHA
     mAlgoMinBeta      = tryFloat( prefs, key[k++], "4.0" );   // DISTOX_ALGO_MIN_BETA
     mAlgoMinGamma     = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_ALGO_MIN_GAMMA
+    mAlgoMinDelta     = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_ALGO_MIN_DELTA
   }
 
   static private void setActivityBooleans( Context ctx )
@@ -1011,6 +1014,8 @@ class TDSetting
       mAlgoMinBeta    = tryFloat( prefs, k, "4.0" );   // DISTOX_ALGO_MIN_BETA
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAlgoMinGamma   = tryFloat( prefs, k, "1.0" );   // DISTOX_ALGO_MIN_GAMMA
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mAlgoMinDelta   = tryFloat( prefs, k, "1.0" );   // DISTOX_ALGO_MIN_DELTA
 
     // } else if ( k.equals( key[ nk++ ] ) ) {
     //   mSketchUsesSplays = prefs.getBoolean( k, false );
@@ -1126,7 +1131,7 @@ class TDSetting
 
   static private String parseFloatValue( String value, float def, float min, float max )
   {
-    TDLog.Error("parse float " + value + " def " + def + " min " + min + " max " + max );
+    // TDLog.Error("parse float " + value + " def " + def + " min " + min + " max " + max );
     float i = def;
     try {
       i = Float.parseFloat( value ); 
@@ -1161,7 +1166,7 @@ class TDSetting
     //C if ( name.equals( "DISTOX_GROUP_BY" )
     if ( name.equals( "DISTOX_GROUP_DISTANCE" ) ) return parseFloatValue( value, mGroupDistance, 0 );
     if ( name.equals( "DISTOX_CALIB_EPS"      ) ) return parseFloatValue( value, mCalibEps, 0.000001f );
-    if ( name.equals( "DISTOX_CALIB_MAX_IT"   ) ) return parseFloatValue( value, mCalibMaxIt, 10 );
+    if ( name.equals( "DISTOX_CALIB_MAX_IT"   ) ) return parseIntValue( value, mCalibMaxIt, 10 );
     //B if ( name.equals( "DISTOX_RAW_DATA" )
     //C if ( name.equals( "DISTOX_CALIB_ALGO" )
 
@@ -1243,6 +1248,7 @@ class TDSetting
     if ( name.equals( "DISTOX_ALGO_MIN_ALPHA"     ) ) return parseFloatValue( value, mAlgoMinAlpha, 0, 1 );
     if ( name.equals( "DISTOX_ALGO_MIN_BETA"      ) ) return parseFloatValue( value, mAlgoMinBeta,  0 );
     if ( name.equals( "DISTOX_ALGO_MIN_GAMMA"     ) ) return parseFloatValue( value, mAlgoMinGamma, 0 );
+    if ( name.equals( "DISTOX_ALGO_MIN_DELTA"     ) ) return parseFloatValue( value, mAlgoMinDelta, -10 );
 
     //C if ( name.equals( "DISTOX_LOCALE" )
     //A if ( name.equals( "DISTOX_CWD"    )

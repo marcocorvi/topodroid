@@ -79,6 +79,15 @@
        android:dialogTitle="@string/pref_algo_min_gamma_title"
        android:dialogMessage="@string/pref_algo_min_gamma_message"
        android:inputType="numberDecimal"
-       android:defaultValue="2.0" />
+       android:defaultValue="1.0" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_ALGO_MIN_DELTA"
+       android:title="@string/pref_algo_min_delta_title"
+       android:summary="@string/pref_algo_min_delta_summary"
+       android:dialogTitle="@string/pref_algo_min_delta_title"
+       android:dialogMessage="@string/pref_algo_min_delta_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1.0" />
 
 </PreferenceScreen>

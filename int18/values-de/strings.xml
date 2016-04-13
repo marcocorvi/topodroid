@@ -127,6 +127,8 @@
     <string name="splay_at_to">LRUD bei Ziel-Messpunkt</string>
 
     <string name="few_data">Nicht genügend Daten</string>
+    <!-- TODO string name="few_iter">Failed to iterate</string -->
+    <!-- TODO string name="few_groups">Not enough data with group</string -->
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
 

@@ -63,9 +63,9 @@ class SketchTriangle
     // sij = s12;
     center = new Vector( (v1.x+v2.x+v3.x)/3, (v1.y+v2.y+v3.y)/3, (v1.z+v2.z+v3.z)/3 );
 
-    w12 = v1.minus( v2 ); w12.Normalized();
-    w31 = v3.minus( v1 ); w31.Normalized();
-    w23 = v2.minus( v3 ); w23.Normalized();
+    w12 = v1.minus( v2 ); w12.normalize();
+    w31 = v3.minus( v1 ); w31.normalize();
+    w23 = v2.minus( v3 ); w23.normalize();
 
     // float x1 = v1.x - v2.x;
     // float y1 = v1.y - v2.y;
@@ -75,7 +75,7 @@ class SketchTriangle
     // float z3 = v3.z - v2.z;
     // normal = new Vector( y3*z1-y1*z3, z3*x1-z1*x3, x3*y1-y3*x1 );
     normal = w12.cross( w23 );
-    normal.Normalized();
+    normal.normalize();
 
     p1 = new PointF(0,0);
     p2 = new PointF(0,0);
@@ -103,16 +103,16 @@ class SketchTriangle
     Vector z12 = w1.minus(w2);
     float d2 = normal.dot( z12 );
     if ( d1 * d2 <= 0 || Math.abs(d1) > Math.abs(d2) ) return null;
-    z12.times( d1/d2 );
+    z12.timesEqual( d1/d2 );
     Vector w0 = w1.minus( z12 );
 
-    Vector w = w0.minus( v1 ); w.Normalized();
+    Vector w = w0.minus( v1 ); w.normalize();
     if ( w31.dot( w ) < cosine1 ) return null;
 
-    w = w0.minus( v2 ); w.Normalized();
+    w = w0.minus( v2 ); w.normalize();
     if ( w12.dot( w ) < cosine2 ) return null;
 
-    w = w0.minus( v3 ); w.Normalized();
+    w = w0.minus( v3 ); w.normalize();
     if ( w23.dot( w ) < cosine3 ) return null;
 
     // Log.v("DistoX", "intersection with plane at " + -d1/d2 + " vector " + w0.x + " " + w0.y + " " + w0.y );
@@ -121,10 +121,10 @@ class SketchTriangle
 
   void shiftVertices( Vector v )
   {
-    v1.add( v );
-    v2.add( v );
-    v3.add( v );
-    center.add( v );
+    v1.plusEqual( v );
+    v2.plusEqual( v );
+    v3.plusEqual( v );
+    center.plusEqual( v );
   }
 
   // dot product of the normal with a vector

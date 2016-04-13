@@ -765,7 +765,7 @@ class SketchSurface extends SketchShot
       retn.x -= p * unit.x;
       retn.y -= p * unit.y;
       retn.z -= p * unit.z;
-      retn.Normalized();
+      retn.normalize();
       angle[n] = TDMath.atan2( retn.dot(dir1), retn.dot(dir2) );
     }
     float a = angle[0] - angle[ns-1];
@@ -827,8 +827,8 @@ class SketchSurface extends SketchShot
     Vector np = p1.cross( p2 );              // "normal" to the plane (p1,p2)
     Vector nq = q1.cross( q2 );              // "normal" to the plane (q1,q2)
     Vector nn = np.cross( nq );
-    nn.Normalized(); // intersection of the planes (p1,p2) (q1,q2)
-    if ( p1.cross( nn ).dot( p1.cross( p2 ) ) < 0 ) nn.times( -1 );
+    nn.normalize(); // intersection of the planes (p1,p2) (q1,q2)
+    if ( p1.cross( nn ).dot( p1.cross( p2 ) ) < 0 ) nn.reverse();
     if ( p1.cross( nn ).dot( nn.cross( p2 ) ) < 0 ) return false;
     if ( q1.cross( nn ).dot( q1.cross( q2 ) ) < 0 ) return false;
     if ( q1.cross( nn ).dot( nn.cross( q2 ) ) < 0 ) return false;
@@ -1090,7 +1090,7 @@ class SketchSurface extends SketchShot
   //       dir1.z = -unit.y;
   //     }
   //   }
-  //   dir1.Normalized();
+  //   dir1.normalize();
   //   Vector dir2 = unit.cross(dir1);  // second orthogonal unit-vector
 
   //   Vector v0, v1, v2;

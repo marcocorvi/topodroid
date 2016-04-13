@@ -664,7 +664,7 @@ public class DistoXComm
   /**
    * nothing to read (only write) --> no AsyncTask
    */
-  void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME LISTER
+  public void setX310Laser( String address, int what, Handler /* ILister */ lister ) // FIXME LISTER
   {
     if ( connectSocket( address ) ) {
       switch ( what ) {
@@ -861,6 +861,7 @@ public class DistoXComm
   public int swapHotBit( String address, int from, int to )
   {
     if ( ! checkRfcommThreadNull( "swap hot bit: address " + address ) ) return -1;
+    if ( mApp.distoType() != Device.DISTO_A3 ) return -2;
 
     from &= 0x7ff8;
     to   &= 0xfff8;
@@ -881,7 +882,7 @@ public class DistoXComm
           ++ n;
         } while ( to != from );
         // FIXME ASYNC new CommandThread( mProtocol, SWAP_HOT_BITS, from, to ) Note...
-        // TDLog.Log( TDLog.LOG_COMM, "swapHotBit swapped " + n + "data" );
+        // TDLog.Log( TDLog.LOG_COMM, "swap Hot Bit swapped " + n + "data" );
       }
       destroySocket( );
     }
@@ -974,7 +975,7 @@ public class DistoXComm
   //   return ret;
   // }
     
-  int dumpFirmware( String address, String filepath )
+  public int dumpFirmware( String address, String filepath )
   {
     int ret = 0;
     if ( connectSocket( address ) ) {
@@ -984,7 +985,7 @@ public class DistoXComm
     return ret;
   }
 
-  int uploadFirmware( String address, String filepath )
+  public int uploadFirmware( String address, String filepath )
   {
     int ret = 0;
     if ( connectSocket( address ) ) {

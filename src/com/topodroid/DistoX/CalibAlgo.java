@@ -522,8 +522,8 @@ public class CalibAlgo
     if ( mv > mm ) mm = mv;
     if ( mm > 32768 ) { // 32768 = 256*128 = 1<<15 = 0x010000
       mv = 32768 / mm;
-      m.scaleBy( mv );
-      v.scaleBy( mv );
+      m.timesEqual( mv );
+      v.timesEqual( mv );
     }
   }
 
@@ -547,13 +547,13 @@ public class CalibAlgo
     // Vector m = m0.mult( 1.0f / TopoDroidUtil.FV );
     Vector g = scaledVector( g0 );
     Vector m = scaledVector( m0 );
-    g.Normalized();
-    m.Normalized();
+    g.normalize();
+    m.normalize();
     Vector e = new Vector( 1.0f, 0.0f, 0.0f );
     Vector y = m.cross( g );
     Vector x = g.cross( y );
-    y.Normalized();
-    x.Normalized();
+    y.normalize();
+    x.normalize();
     float ex = e.dot( x );
     float ey = e.dot( y );
     float ez = e.dot( g );

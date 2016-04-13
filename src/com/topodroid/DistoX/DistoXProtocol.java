@@ -81,6 +81,10 @@ public class DistoXProtocol
   long mGX, mGY, mGZ;
   long mMX, mMY, mMZ;
 
+  final private byte[] mBuffer = new byte[8];
+  int mMaxTimeout = 8;
+  
+
   byte[] getAddress() { return mAddress; }
   byte[] getReply()   { return mReplyBuffer; }
 
@@ -90,25 +94,23 @@ public class DistoXProtocol
 
 //------------------------------------------------------
 
-  private InputStream extractCoreInputStream( InputStream in )
-  {
-    try {
-      Field f = FilterInputStream.class.getDeclaredField("in");
-      f.setAccessible( true );
-      while ( in instanceof FilterInputStream ) {
-        in = (InputStream) f.get( (FilterInputStream)in );
-      }
-    } catch ( NoSuchFieldException e ) {
-      return in;
-    } catch( IllegalAccessException e ) {
-      return in;
-    }
-    return in;
-  }
+  // UNUSED
+  // private InputStream extractCoreInputStream( InputStream in )
+  // {
+  //   try {
+  //     Field f = FilterInputStream.class.getDeclaredField("in");
+  //     f.setAccessible( true );
+  //     while ( in instanceof FilterInputStream ) {
+  //       in = (InputStream) f.get( (FilterInputStream)in );
+  //     }
+  //   } catch ( NoSuchFieldException e ) {
+  //     return in;
+  //   } catch( IllegalAccessException e ) {
+  //     return in;
+  //   }
+  //   return in;
+  // }
 
-  final byte[] mBuffer = new byte[8];
-  int mMaxTimeout = 8;
-  
   private int getAvailable( final InputStream in, long timeout, int maxtimeout ) throws IOException
   {
     mMaxTimeout = maxtimeout;
@@ -177,7 +179,6 @@ public class DistoXProtocol
 
   public DistoXProtocol( BluetoothSocket socket, Device device )
   {
- 
     mDevice = device;
     mSocket = socket;
     // mDistoX = distox;
@@ -422,7 +423,7 @@ public class DistoXProtocol
   }
 */
 
-  boolean swapHotBit( int addr ) // only A3
+  public boolean swapHotBit( int addr ) // only A3
   {
     try {
       mBuffer[0] = (byte) 0x38;
@@ -431,21 +432,21 @@ public class DistoXProtocol
       mOut.write( mBuffer, 0, 3 );
       mIn.readFully( mBuffer, 0, 8 );
       if ( mBuffer[0] != (byte)0x38 ) { 
-        TDLog.Error( "swapHotBit-38 wrong reply packet addr " + addr );
+        TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
         return false;
       }
 
       int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
       // Log.v( TopoDroidApp.TAG, "proto read ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
-        TDLog.Error( "swapHotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
+        TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
       mBuffer[0] = (byte)0x39;
       // mBuffer[1] = (byte)( addr & 0xff );
       // mBuffer[2] = (byte)( (addr>>8) & 0xff );
       if ( mBuffer[3] == 0x00 ) {
-        TDLog.Error( "swapHotBit refusing to swap addr " + addr );
+        TDLog.Error( "HotBit refusing to swap addr " + addr );
         return false;
       }  
 
@@ -453,20 +454,20 @@ public class DistoXProtocol
       mOut.write( mBuffer, 0, 7 );
       mIn.readFully( mBuffer, 0, 8 );
       if ( mBuffer[0] != (byte)0x38 ) {
-        TDLog.Error( "swapHotBit-39 wrong reply packet addr " + addr );
+        TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
         return false;
       }
       reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
       // Log.v( TopoDroidApp.TAG, "proto reset ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
-        TDLog.Error( "swapHotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
+        TDLog.Error( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
     } catch ( EOFException e ) {
-      TDLog.Error( "swapHotBit EOF failed addr " + addr );
+      TDLog.Error( "HotBit EOF failed addr " + addr );
       return false;
     } catch (IOException e ) {
-      TDLog.Error( "swapHotBit IO failed addr " + addr );
+      TDLog.Error( "HotBit IO failed addr " + addr );
       return false;
     }
     return true;
@@ -660,7 +661,7 @@ public class DistoXProtocol
   //   return start - cnt;
   // }
 
-  byte[] readMemory( int addr )
+  public byte[] readMemory( int addr )
   {
     mBuffer[0] = (byte)( 0x38 );
     mBuffer[1] = (byte)( addr & 0xff );
@@ -814,7 +815,7 @@ public class DistoXProtocol
     return true;  
   }
 
-  int uploadFirmware( String filepath )
+  public int uploadFirmware( String filepath )
   {
     TDLog.LogFile( "Firmware upload: protocol starts" );
     byte[] buf = new byte[259];
@@ -875,7 +876,7 @@ public class DistoXProtocol
     return ( ok ? cnt : -cnt );
   }
 
-  int dumpFirmware( String filepath )
+  public int dumpFirmware( String filepath )
   {
     TDLog.LogFile( "Firmware dump: output filepath " + filepath );
     byte[] buf = new byte[256];

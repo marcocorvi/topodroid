@@ -79,7 +79,7 @@ public class CalibListDialog extends MyDialog
 
     mBtnNew.setOnClickListener( this );
     mBtnImport.setOnClickListener( this );
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mLevelOverExperimental ) {
       mBtnReset.setOnClickListener( this );
     } else {
       mBtnReset.setVisibility( View.GONE );

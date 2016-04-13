@@ -169,6 +169,13 @@ public class GMActivity extends Activity
     if ( list.size() < 16 ) {
       return -1;
     }
+    int ng = 0; // cb with group
+    for ( CalibCBlock cb : list ) {
+      if ( cb.mGroup > 0 ) ++ng;
+    }
+    if ( ng < 16 ) {
+      return -3;
+    }
     switch ( mAlgo ) {
       case CalibInfo.ALGO_NON_LINEAR:
         mCalibration = new CalibAlgoBH( 0, true );
@@ -183,9 +190,8 @@ public class GMActivity extends Activity
     }
 
     mCalibration.Reset( list.size() );
-    for ( CalibCBlock item : list ) {
-      mCalibration.AddValues( item );
-    }
+    for ( CalibCBlock item : list ) mCalibration.AddValues( item );
+    
     int iter = mCalibration.Calibrate();
     if ( iter > 0 ) {
       float[] errors = mCalibration.Errors();
@@ -367,7 +373,6 @@ public class GMActivity extends Activity
       calib.addStatErrors( g, m, e );
       for ( int c=0; c<cnt; ++c ) errors[ ke++ ] = e[c];
     }
-    Log.v("DistoX", "compute error stats " + ke );
     return ke;
   }
 
@@ -377,11 +382,8 @@ public class GMActivity extends Activity
     switch ( job ) {
       case CalibComputer.CALIB_COMPUTE_CALIB:
         resetTitle( );
-        // ( result == -2 ) not handled
-        if ( result == -1 ) {
-          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
-          return;
-        } else if ( result > 0 ) {
+        // Log.v("DistoX", "compute result " + result );
+        if ( result > 0 ) {
           enableWrite( true );
           Vector bg = mCalibration.GetBG();
           Matrix ag = mCalibration.GetAG();
@@ -394,8 +396,18 @@ public class GMActivity extends Activity
           (new CalibCoeffDialog( this, mApp, bg, ag, bm, am, nL, errors,
                                  mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
                                  result, coeff ) ).show();
+        } else if ( result == 0 ) {
+          Toast.makeText( this, R.string.few_iter, Toast.LENGTH_SHORT ).show();
+          return;
+        } else if ( result == -1 ) {
+          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+          return;
+        } else if ( result == -2 ) {
+          return;
+        } else if ( result == -3 ) {
+          Toast.makeText( this, R.string.few_groups, Toast.LENGTH_SHORT ).show();
+          return;
         } else {
-          // Toast.makeText( mApp.getApplicationContext(), R.string.few_data, Toast.LENGTH_SHORT ).show();
           Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
           return;
         }

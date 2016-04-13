@@ -61,6 +61,9 @@ public class Vector
     z = a.z;
   }
 
+  // this cross (1,0,0)
+  Vector crossX() { return new Vector( 0, z, -y ); }
+
   float maxAbsValue()
   {
     float mx = TDMath.abs(x);
@@ -70,18 +73,11 @@ public class Vector
                                : ( ( my > mz )? my : mz ) );
   }
 
-  public void scaleBy( float b )
-  {
-    x *= b;
-    y *= b;
-    z *= b;
-  }
-
   // get unit vector 
   public Vector getUnitVector( )
   {
     Vector ret = new Vector( x, y, z );
-    ret.Normalized();
+    ret.normalize();
     return ret;
   }
 
@@ -112,8 +108,7 @@ public class Vector
     return new Vector( c*x - s*y, c*y + s*x, z );
   }
 
-
-  public void Normalized( )
+  public void normalize( )
   {
     float len = Length();
     if ( len > 0.0f ) {
@@ -122,6 +117,13 @@ public class Vector
       y *= n;
       z *= n;
     }
+  }
+
+  public void reverse()
+  {
+    x = -x;
+    y = -y;
+    z = -z;
   }
 
   public float MaxDiff( Vector b )
@@ -148,21 +150,21 @@ public class Vector
   //   z = a.z;
   // }
 
-  public void add( Vector b ) 
+  public void plusEqual( Vector b ) 
   {
     x += b.x;
     y += b.y;
     z += b.z;
   }
 
-  public void sub( Vector b ) 
+  public void minusEqual( Vector b ) 
   {
     x -= b.x;
     y -= b.y;
     z -= b.z;
   }
 
-  public void times( float f )
+  public void timesEqual( float f )
   {
     x *= f;
     y *= f;
@@ -180,7 +182,7 @@ public class Vector
   }
 
   // MULTIPLICATION: this * b
-  public Vector mult( float b )
+  public Vector times( float b )
   {
     return new Vector(x*b, y*b, z*b );
   }
@@ -295,7 +297,7 @@ public class Vector
       n.y += (q.z-z0)*(p.x-x0) - (q.x-x0)*(p.z-z0);
       n.z += (q.x-x0)*(p.y-y0) - (q.y-y0)*(p.x-x0);
     }
-    n.Normalized();
+    n.normalize();
     return n;
   }
   
@@ -336,7 +338,7 @@ public class Vector
       y0 = y1;
       z0 = z1;
     }
-    normal.Normalized();
+    normal.normalize();
     return normal;
   }
 
@@ -363,12 +365,12 @@ public class Vector
     // Vector w1 = normal.orthogonal( this );
     Vector w0 = this.minus( last_point );
     w0 = normal.orthogonal( w0 );
-    // w0.Normalized();
+    // w0.normalize();
     float a = 0.0f;
     for ( Vector p : pts2 ) {
       Vector w2 = this.minus( p );
       w2 = normal.orthogonal( w2 );
-      // w2.Normalized();
+      // w2.normalize();
       float s = normal.dot( w0.cross(w2) );
       float c = w0.dot(w2);
       a += TDMath.atan2( s, c );

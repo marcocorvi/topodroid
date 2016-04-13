@@ -116,6 +116,8 @@
     <string name="splay_at_to">测量点上下左右值</string>
 
     <string name="few_data">数据不足</string>
+    <!-- TODO string name="few_iter">Failed to iterate</string -->
+    <!-- TODO string name="few_groups">Not enough data with group</string -->
     <!-- UNUSED string name="few_plots">绘图不足</string -->
     <string name="few_calibs">校准数据不足</string>
 

@@ -124,13 +124,13 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   {
     Vector g = new Vector( mValAcc[0], mValAcc[1], mValAcc[2] );
     Vector m = new Vector( mValMag[0], mValMag[1], mValMag[2] );
-    g.Normalized();
-    m.Normalized();
+    g.normalize();
+    m.normalize();
     // Vector e = new Vector( 1.0f, 0.0f, 0.0f );
     Vector w = m.cross( g ); // west
     Vector n = g.cross( w ); // north
-    w.Normalized();
-    n.Normalized();
+    w.normalize();
+    n.normalize();
     float b0 = TDMath.atan2( -w.y, n.y );
     float c0 = - TDMath.atan2( g.y, TDMath.sqrt(w.y*w.y+n.y*n.y) );
     if ( b0 < 0.0f ) b0 += TDMath.M_2PI;

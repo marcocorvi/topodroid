@@ -124,13 +124,13 @@ public class CalibCBlock
 
   private void doComputeBearingAndClino( Vector g, Vector m )
   {
-    g.Normalized();
-    m.Normalized();
+    g.normalize();
+    m.normalize();
     Vector e = new Vector( 1.0f, 0.0f, 0.0f );
     Vector y = m.cross( g );
     Vector x = g.cross( y );
-    y.Normalized();
-    x.Normalized();
+    y.normalize();
+    x.normalize();
     float ex = e.dot( x );
     float ey = e.dot( y );
     float ez = e.dot( g );

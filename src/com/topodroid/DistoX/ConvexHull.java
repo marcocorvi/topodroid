@@ -50,7 +50,7 @@ public class ConvexHull
     mPts = pts;
 
     mX = mV2.minus( mV1 );
-    mX.Normalized(); 
+    mX.normalize(); 
     if ( Math.abs( mX.z ) > Math.abs( mX.y ) ) {
       if ( Math.abs( mX.y ) > Math.abs( mX.x ) ) {
         mZ = new Vector( 1, 0, 0 );
@@ -65,9 +65,9 @@ public class ConvexHull
       }
     }
     mY = mX.cross( mZ );
-    mY.Normalized();
+    mY.normalize();
     mZ = mX.cross( mY ); 
-    mZ.Normalized(); // not really needed: should be normalized
+    mZ.normalize(); // not really needed: should be normalized
 
     // first two triangles mV1-mV2-pmax mV2-mV1-p[0] 
     // use temporary triangle array

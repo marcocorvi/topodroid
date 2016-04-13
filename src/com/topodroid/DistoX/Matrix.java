@@ -41,9 +41,9 @@ public class Matrix
   // OUTER PRODUCT: a & b
   public Matrix( Vector a, Vector b ) 
   {
-    x = b.mult(a.x);
-    y = b.mult(a.y);
-    z = b.mult(a.z);
+    x = b.times(a.x);
+    y = b.times(a.y);
+    z = b.times(a.z);
   }
 
   public Matrix( Matrix a )
@@ -62,11 +62,11 @@ public class Matrix
                                : ( ( my > mz )? my : mz ) );
   }
 
-  public void add( Matrix b ) 
+  public void plusEqual( Matrix b ) 
   {
-    x.add( b.x );
-    y.add( b.y );
-    z.add( b.z );
+    x.plusEqual( b.x );
+    y.plusEqual( b.y );
+    z.plusEqual( b.z );
   }
 
   public Matrix plus( Matrix b )
@@ -79,16 +79,16 @@ public class Matrix
     return new Matrix( x.minus(b.x), y.minus(b.y), z.minus(b.z) );
   }
 
-  public void scaleBy( float b )
+  public void timesEqual( float b )
   {
-    x.scaleBy( b );
-    y.scaleBy( b );
-    z.scaleBy( b );
+    x.timesEqual( b );
+    y.timesEqual( b );
+    z.timesEqual( b );
   }
 
-  public Matrix mult( float b )
+  public Matrix timesF( float b )
   {
-    return new Matrix( x.mult(b), y.mult(b), z.mult(b) );
+    return new Matrix( x.times(b), y.times(b), z.times(b) );
   }
 
   public Vector timesV( Vector b )
@@ -112,7 +112,7 @@ public class Matrix
   {
     Matrix ad = new Matrix( y.cross(z), z.cross(x), x.cross(y) );
     float inv_det = 1.0f / ( x.dot( ad.x ) );
-    ad.scaleBy( inv_det );
+    ad.timesEqual( inv_det );
     return ad;
   }
 

@@ -34,7 +34,7 @@ public class Triangle
     Vector v1 = mB.minus( mA );
     Vector v2 = mC.minus( mA );
     mN = v1.cross( v2 );
-    mN.Normalized();
+    mN.normalize();
   }
 
   float signedDistance( Vector p ) { return mN.dot( p.minus(mA) ); }
@@ -43,7 +43,7 @@ public class Triangle
 
   Triangle[] refineAtCenter()
   {
-    Vector p = mA.plus( mB ).plus( mC ); p.scaleBy( 1.0f/3.0f );
+    Vector p = mA.plus( mB ).plus( mC ); p.timesEqual( 1.0f/3.0f );
 
     Triangle[] ret = new Triangle[3];
     ret[0] = new Triangle( mA, mB, p );
@@ -54,9 +54,9 @@ public class Triangle
 
   Triangle[] refineAtSides()
   {
-    Vector a = mB.plus( mC ); a.scaleBy( 0.5f );
-    Vector b = mC.plus( mA ); b.scaleBy( 0.5f );
-    Vector c = mA.plus( mB ); c.scaleBy( 0.5f );
+    Vector a = mB.plus( mC ); a.timesEqual( 0.5f );
+    Vector b = mC.plus( mA ); b.timesEqual( 0.5f );
+    Vector c = mA.plus( mB ); c.timesEqual( 0.5f );
     
     Triangle[] ret = new Triangle[4];
     ret[0] = new Triangle( a, b, c );
@@ -80,9 +80,9 @@ public class Triangle
     } else {
       return null;
     }
-    // Vector a = vb.plus( vc ); a.scaleBy( 0.5f );
-    Vector b = vc.plus( va ); b.scaleBy( 0.5f );
-    Vector c = va.plus( vb ); c.scaleBy( 0.5f );
+    // Vector a = vb.plus( vc ); a.timesEqual( 0.5f );
+    Vector b = vc.plus( va ); b.timesEqual( 0.5f );
+    Vector c = va.plus( vb ); c.timesEqual( 0.5f );
 
     ret[0] = new Triangle( va, c, b );
     if ( va.distance( vb ) > va.distance( vc ) ) {

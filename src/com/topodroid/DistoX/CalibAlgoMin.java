@@ -30,6 +30,8 @@ public class CalibAlgoMin extends CalibAlgo
   private Vector mxp;
   private Vector gxt; // turn vectors
   private Vector mxt;
+
+  private float invNN;
   // float b0=0.0f, c0=0.0f; // bearing and clino
 
   // ==============================================================
@@ -57,28 +59,28 @@ public class CalibAlgoMin extends CalibAlgo
   float clino( Vector gs, Vector ms )
   {
     Vector g = bG.plus( aG.timesV( gs ) );
-    g.Normalized();
+    g.normalize();
     return (float)Math.acos( g.x ) * TDMath.RAD2GRAD;
   }
 
   float azimuth( Vector gs, Vector ms )
   {
     Vector g = bG.plus( aG.timesV( gs ) );
-    g.Normalized();
+    g.normalize();
     float gx = g.x;
 
     Vector m = bM.plus( aM.timesV( ms ) );
-    m.Normalized();
+    m.normalize();
     float gm = g.dot( m );
  
     return (float)Math.acos( (gx*gm - m.x)/Math.sqrt((1-gx*gx)*(1-gm*gm)) ) * TDMath.RAD2GRAD;
 
     // Vector e = g ^ m;
     // Vector n = e ^ g;
-    // n.Normalized();
+    // n.normalize();
     // Vector x(1,0,0);
     // Vector xh = x - g * g.x;
-    // xh.Normalized();
+    // xh.normalize();
     // return acos( xh * n ) * 180 / M_PI;
   }
 
@@ -95,32 +97,32 @@ public class CalibAlgoMin extends CalibAlgo
   Vector mean_g()
   {
     Vector sum = new Vector();
-    for (int i=0; i<idx; ++i ) sum.add( g[i] );
-    sum.scaleBy( 1.0f/idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( g[i] );
+    sum.timesEqual( invNN );
     return sum;
   }
   
   Vector mean_m()
   {
     Vector sum = new Vector();
-    for (int i=0; i<idx; ++i ) sum.add( m[i] );
-    sum.scaleBy( 1.0f/idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( m[i] );
+    sum.timesEqual( invNN );
     return sum;
   }
   
   Matrix mean_gg()
   {
     Matrix sum = new Matrix();
-    for (int i=0; i<idx; ++i ) sum.add( new Matrix( g[i], g[i] ) );
-    sum.scaleBy( 1.0f/idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( g[i], g[i] ) );
+    sum.timesEqual( invNN );
     return sum;
   }
   
   Matrix mean_mm()
   {
     Matrix sum = new Matrix();
-    for (int i=0; i<idx; ++i ) sum.add( new Matrix( m[i], m[i] ) );
-    sum.scaleBy( 1.0f/idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( m[i], m[i] ) );
+    sum.timesEqual( invNN );
     return sum;
   }
   
@@ -152,207 +154,269 @@ public class CalibAlgoMin extends CalibAlgo
     return sum / idx;
   }
   
-  float dgxx()
+
+  Matrix dgxyz()
   {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) { 
-      float x1 = g[i+0].x;
-      float x2 = g[i+1].x;
-      float x3 = g[i+2].x;
-      float x4 = g[i+3].x;
-      float x = ( x1 + x2 + x3 + x4 )/4;
-      sum += (x-x1)*(x-x1) + (x-x2)*(x-x2) + (x-x3)*(x-x3) + (x-x4)*(x-x4);
+    Matrix sum = new Matrix();
+    long group0 = -1;
+    for ( int i=0; i<idx; ) {
+      if ( group[i] <= 0 ) {
+        ++i;
+      } else if ( group[i] != group0 ) {
+        group0 = group[i];
+        int first = i;
+        int c = 0;
+        float xx = 0;
+        float yy = 0;
+        float zz = 0;
+        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
+          if ( group[i] != 0 ) {
+            Vector v = g[i];
+            xx += v.x;
+            yy += v.y;
+            zz += v.z;
+            ++c;
+          }
+          ++ i;
+        }
+        if ( c > 0 ) {
+          xx /= c;
+          yy /= c;
+          zz /= c;
+          for (int j=first; j<i; ++j ) {
+            if ( group[j] > 0 ) {
+              Vector v = g[j];
+              sum.x.x += (xx-v.x) * (xx-v.x);
+              sum.x.y += (xx-v.x) * (yy-v.y);
+              sum.x.z += (xx-v.x) * (zz-v.z);
+              sum.y.y += (yy-v.y) * (yy-v.y);
+              sum.y.z += (yy-v.y) * (zz-v.z);
+              sum.z.z += (zz-v.z) * (zz-v.z);
+            }
+          }
+        }
+      }
     }
-    return sum / idx;
+    sum.timesEqual( invNN );
+    sum.y.x = sum.x.y;
+    sum.z.x = sum.x.z;
+    sum.z.y = sum.y.z;
+    return sum;
   }
-  
-  float dgyy()
+
+  private Matrix dmxyz()
   {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float y1 = g[i+0].y;
-      float y2 = g[i+1].y;
-      float y3 = g[i+2].y;
-      float y4 = g[i+3].y;
-      float y = ( y1 + y2 + y3 + y4 )/4;
-      sum += (y-y1)*(y-y1) + (y-y2)*(y-y2) + (y-y3)*(y-y3) + (y-y4)*(y-y4);
+    Matrix sum = new Matrix();
+    long group0 = -1;
+    for ( int i=0; i<idx; ) {
+      if ( group[i] <= 0 ) {
+        ++i;
+      } else if ( group[i] != group0 ) {
+        group0 = group[i];
+        int first = i;
+        int c = 0;
+        float xx = 0;
+        float yy = 0;
+        float zz = 0;
+        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
+          if ( group[i] != 0 ) {
+            Vector v = m[i];
+            xx += v.x;
+            yy += v.y;
+            zz += v.z;
+            ++c;
+          }
+          ++ i;
+        }
+        if ( c > 0 ) {
+          xx /= c;
+          yy /= c;
+          zz /= c;
+          for (int j=first; j<i; ++j ) {
+            if ( group[j] > 0 ) {
+              Vector v = m[j];
+              sum.x.x += (xx-v.x) * (xx-v.x);
+              sum.x.y += (xx-v.x) * (yy-v.y);
+              sum.x.z += (xx-v.x) * (zz-v.z);
+              sum.y.y += (yy-v.y) * (yy-v.y);
+              sum.y.z += (yy-v.y) * (zz-v.z);
+              sum.z.z += (zz-v.z) * (zz-v.z);
+            }
+          }
+        }
+      }
     }
-    return sum / idx;
+    sum.timesEqual( invNN );
+    sum.y.x = sum.x.y;
+    sum.z.x = sum.x.z;
+    sum.z.y = sum.y.z;
+    return sum;
   }
-  
-  float dgzz()
+
+  private Vector dbgGM()
   {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float z1 = g[i+0].z;
-      float z2 = g[i+1].z;
-      float z3 = g[i+2].z;
-      float z4 = g[i+3].z;
-      float z = ( z1 + z2 + z3 + z4 )/4;
-      sum += (z-z1)*(z-z1) + (z-z2)*(z-z2) + (z-z3)*(z-z3) + (z-z4)*(z-z4);
+    Vector sum = new Vector();
+    long group0 = -1;
+    for ( int i=0; i<idx; ) {
+      if ( group[i] <= 0 ) {
+        ++i;
+      } else if ( group[i] != group0 ) {
+        group0 = group[i];
+        int first = i;
+        int c = 0;
+        Vector xx = new Vector();
+        float gmx = 0;
+        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
+          if ( group[i] != 0 ) {
+            Vector gg = G(i);
+            Vector mm = M(i);
+            gmx += gg.cross( mm ).x;
+            xx.plusEqual( mm.crossX() );
+            ++c;
+          }
+          ++ i;
+        }
+        if ( c > 0 ) {
+          xx.timesEqual( 1/c );
+          gmx /= c;
+          for (int j=first; j<i; ++j ) {
+            if ( group[j] > 0 ) {
+              Vector gg = G(j);
+              Vector mm = M(j);
+              sum.plusEqual( ( xx.minus( mm.crossX() ) ).times( gmx - gg.cross( mm ).x ) );
+            }
+          }
+        }
+      }
     }
-    return sum / idx;
+    sum.timesEqual( invNN );
+    return sum;
   }
-  
-  float dgxy()
+
+  private Matrix dagGM()
   {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float x1 = g[i+0].x;
-      float x2 = g[i+1].x;
-      float x3 = g[i+2].x;
-      float x4 = g[i+3].x;
-      float x = ( x1 + x2 + x3 + x4 )/4;
-      float y1 = g[i+0].y;
-      float y2 = g[i+1].y;
-      float y3 = g[i+2].y;
-      float y4 = g[i+3].y;
-      float y = ( y1 + y2 + y3 + y4 )/4;
-      sum += (x-x1)*(y-y1) + (x-x2)*(y-y2) + (x-x3)*(y-y3) + (x-x4)*(y-y4);
+    Matrix sum = new Matrix();
+    long group0 = -1;
+    for ( int i=0; i<idx; ) {
+      if ( group[i] <= 0 ) {
+        ++i;
+      } else if ( group[i] != group0 ) {
+        group0 = group[i];
+        int first = i;
+        int c = 0;
+        Matrix xx = new Matrix();
+        float gmx = 0;
+        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
+          if ( group[i] != 0 ) {
+            Vector gg = G(i);
+            Vector mm = M(i);
+            gmx += gg.cross( mm ).x;
+            xx.plusEqual( new Matrix( gg, mm.crossX() ) );
+            ++c;
+          }
+          ++ i;
+        }
+        if ( c > 0 ) {
+          xx.timesEqual( 1/c );
+          gmx /= c;
+          for (int j=first; j<i; ++j ) {
+            if ( group[j] > 0 ) {
+              Vector gg = G(j);
+              Vector mm = M(j);
+              Matrix zz = xx.minus( new Matrix( gg, mm.crossX() ) );
+              zz.timesEqual( gmx - gg.cross( mm ).x );
+              sum.plusEqual( zz );
+            }
+          }
+        }
+      }
     }
-    return sum / idx;
+    sum.timesEqual( invNN );
+    return sum;
   }
-  
-  float dgxz()
+
+  private Vector dbmGM()
   {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float x1 = g[i+0].x;
-      float x2 = g[i+1].x;
-      float x3 = g[i+2].x;
-      float x4 = g[i+3].x;
-      float x = ( x1 + x2 + x3 + x4 )/4;
-      float z1 = g[i+0].z;
-      float z2 = g[i+1].z;
-      float z3 = g[i+2].z;
-      float z4 = g[i+3].z;
-      float z = ( z1 + z2 + z3 + z4 )/4;
-      sum += (x-x1)*(z-z1) + (x-x2)*(z-z2) + (x-x3)*(z-z3) + (x-x4)*(z-z4);
+    Vector sum = new Vector();
+    long group0 = -1;
+    for ( int i=0; i<idx; ) {
+      if ( group[i] <= 0 ) {
+        ++i;
+      } else if ( group[i] != group0 ) {
+        group0 = group[i];
+        int first = i;
+        int c = 0;
+        Vector xx = new Vector();
+        float gmx = 0;
+        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
+          if ( group[i] != 0 ) {
+            Vector gg = G(i);
+            Vector mm = M(i);
+            gmx += mm.cross( gg ).x;
+            xx.plusEqual( gg.crossX() );
+            ++c;
+          }
+          ++ i;
+        }
+        if ( c > 0 ) {
+          xx.timesEqual( 1/c );
+          gmx /= c;
+          for (int j=first; j<i; ++j ) {
+            if ( group[j] > 0 ) {
+              Vector gg = G(j);
+              Vector mm = M(j);
+              sum.plusEqual( ( xx.minus( gg.crossX() ) ).times( gmx - mm.cross( gg ).x ) );
+            }
+          }
+        }
+      }
     }
-    return sum / idx;
+    sum.timesEqual( invNN );
+    return sum;
   }
-  
-  float dgyz()
+
+  private Matrix damGM()
   {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float y1 = g[i+0].y;
-      float y2 = g[i+1].y;
-      float y3 = g[i+2].y;
-      float y4 = g[i+3].y;
-      float y = ( y1 + y2 + y3 + y4 )/4;
-      float z1 = g[i+0].z;
-      float z2 = g[i+1].z;
-      float z3 = g[i+2].z;
-      float z4 = g[i+3].z;
-      float z = ( z1 + z2 + z3 + z4 )/4;
-      sum += (y-y1)*(z-z1) + (y-y2)*(z-z2) + (y-y3)*(z-z3) + (y-y4)*(z-z4);
+    Matrix sum = new Matrix();
+    long group0 = -1;
+    for ( int i=0; i<idx; ) {
+      if ( group[i] <= 0 ) {
+        ++i;
+      } else if ( group[i] != group0 ) {
+        group0 = group[i];
+        int first = i;
+        int c = 0;
+        Matrix xx = new Matrix();
+        float gmx = 0;
+        while ( i < idx && (group[i] == 0 || group[i] == group0) ) {
+          if ( group[i] != 0 ) {
+            Vector gg = G(i);
+            Vector mm = M(i);
+            gmx += mm.cross( gg ).x;
+            xx.plusEqual( new Matrix( mm, gg.crossX() ) );
+            ++c;
+          }
+          ++ i;
+        }
+        if ( c > 0 ) {
+          xx.timesEqual( 1/c );
+          gmx /= c;
+          for (int j=first; j<i; ++j ) {
+            if ( group[j] > 0 ) {
+              Vector gg = G(j);
+              Vector mm = M(j);
+              Matrix zz = xx.minus( new Matrix( mm, gg.crossX() ) );
+              zz.timesEqual( gmx - mm.cross( gg ).x );
+              sum.plusEqual( zz );
+            }
+          }
+        }
+      }
     }
-    return sum / idx;
+    sum.timesEqual( invNN );
+    return sum;
   }
-  
-  
-  float dmxx()
-  {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float x1 = m[i+0].x;
-      float x2 = m[i+1].x;
-      float x3 = m[i+2].x;
-      float x4 = m[i+3].x;
-      float x = ( x1 + x2 + x3 + x4 )/4;
-      sum += (x-x1)*(x-x1) + (x-x2)*(x-x2) + (x-x3)*(x-x3) + (x-x4)*(x-x4);
-    }
-    return sum / idx;
-  }
-  
-  float dmyy()
-  {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float y1 = m[i+0].y;
-      float y2 = m[i+1].y;
-      float y3 = m[i+2].y;
-      float y4 = m[i+3].y;
-      float y = ( y1 + y2 + y3 + y4 )/4;
-      sum += (y-y1)*(y-y1) + (y-y2)*(y-y2) + (y-y3)*(y-y3) + (y-y4)*(y-y4);
-    }
-    return sum / idx;
-  }
-  
-  float dmzz()
-  {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float z1 = m[i+0].z;
-      float z2 = m[i+1].z;
-      float z3 = m[i+2].z;
-      float z4 = m[i+3].z;
-      float z = ( z1 + z2 + z3 + z4 )/4;
-      sum += (z-z1)*(z-z1) + (z-z2)*(z-z2) + (z-z3)*(z-z3) + (z-z4)*(z-z4);
-    }
-    return sum / idx;
-  }
-  
-  float dmxy()
-  {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float x1 = m[i+0].x;
-      float x2 = m[i+1].x;
-      float x3 = m[i+2].x;
-      float x4 = m[i+3].x;
-      float x = ( x1 + x2 + x3 + x4 )/4;
-      float y1 = m[i+0].y;
-      float y2 = m[i+1].y;
-      float y3 = m[i+2].y;
-      float y4 = m[i+3].y;
-      float y = ( y1 + y2 + y3 + y4 )/4;
-      sum += (x-x1)*(y-y1) + (x-x2)*(y-y2) + (x-x3)*(y-y3) + (x-x4)*(y-y4);
-    }
-    return sum / idx;
-  }
-  
-  float dmxz()
-  {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float x1 = m[i+0].x;
-      float x2 = m[i+1].x;
-      float x3 = m[i+2].x;
-      float x4 = m[i+3].x;
-      float x = ( x1 + x2 + x3 + x4 )/4;
-      float z1 = m[i+0].z;
-      float z2 = m[i+1].z;
-      float z3 = m[i+2].z;
-      float z4 = m[i+3].z;
-      float z = ( z1 + z2 + z3 + z4 )/4;
-      sum += (x-x1)*(z-z1) + (x-x2)*(z-z2) + (x-x3)*(z-z3) + (x-x4)*(z-z4);
-    }
-    return sum / idx;
-  }
-  
-  float dmyz()
-  {
-    float sum = 0;
-    for (int i=0; i<idx; i+=4 ) {
-      float y1 = m[i+0].y;
-      float y2 = m[i+1].y;
-      float y3 = m[i+2].y;
-      float y4 = m[i+3].y;
-      float y = ( y1 + y2 + y3 + y4 )/4;
-      float z1 = m[i+0].z;
-      float z2 = m[i+1].z;
-      float z3 = m[i+2].z;
-      float z4 = m[i+3].z;
-      float z = ( z1 + z2 + z3 + z4 )/4;
-      sum += (y-y1)*(z-z1) + (y-y2)*(z-z2) + (y-y3)*(z-z3) + (y-y4)*(z-z4);
-    }
-    return sum / idx;
-  }
-  
-  
-  
+
   // ========================================================
   
   float r2g()
@@ -374,10 +438,10 @@ public class CalibAlgoMin extends CalibAlgo
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {
       Matrix mu = new Matrix(g[i], g[i]);
-      mu.scaleBy( G(i).LengthSquared() );
-      sum.add( mu );
+      mu.timesEqual( G(i).LengthSquared() );
+      sum.plusEqual( mu );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
   
@@ -386,58 +450,58 @@ public class CalibAlgoMin extends CalibAlgo
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {
       Matrix mu = new Matrix(m[i], m[i]);
-      mu.scaleBy( M(i).LengthSquared() );
-      sum.add( mu );
+      mu.timesEqual( M(i).LengthSquared() );
+      sum.plusEqual( mu );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
   
   Vector g0() // <Bg + Ag * gs>
   {
     Vector sum = new Vector();
-    for (int i=0; i<idx; ++i ) sum.add( G(i) );
-    sum.scaleBy( 1.0f / idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( G(i) );
+    sum.timesEqual( invNN );
     return sum;
   }
     
   Vector m0() // <Bm + Am * ms>
   {
     Vector sum = new Vector();
-    for (int i=0; i<idx; ++i ) sum.add( M(i) );
-    sum.scaleBy( 1.0f / idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( M(i) );
+    sum.timesEqual( invNN );
     return sum;
   }
   
   Matrix gg()
   {
     Matrix sum = new Matrix();
-    for (int i=0; i<idx; ++i ) sum.add( new Matrix( G(i), g[i] ) );
-    sum.scaleBy( 1.0f / idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( G(i), g[i] ) );
+    sum.timesEqual( invNN );
     return sum;
   }
   
   Matrix mm()
   {
     Matrix sum = new Matrix();
-    for (int i=0; i<idx; ++i ) sum.add( new Matrix( M(i), m[i] ) );
-    sum.scaleBy( 1.0f / idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( new Matrix( M(i), m[i] ) );
+    sum.timesEqual( invNN );
     return sum;
   }
   
   Vector r2ag()
   {
     Vector sum = new Vector();
-    for (int i=0; i<idx; ++i ) sum.add( g[i].mult( G(i).LengthSquared() ) );
-    sum.scaleBy( 1.0f / idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( g[i].times( G(i).LengthSquared() ) );
+    sum.timesEqual( invNN );
     return aG.timesV( sum );
   }
     
   Vector r2am()
   {
     Vector sum = new Vector();
-    for (int i=0; i<idx; ++i ) sum.add( m[i].mult( M(i).LengthSquared() ) );
-    sum.scaleBy( 1.0f / idx );
+    for (int i=0; i<idx; ++i ) sum.plusEqual( m[i].times( M(i).LengthSquared() ) );
+    sum.timesEqual( invNN );
     return aM.timesV( sum );
   }
   
@@ -446,9 +510,9 @@ public class CalibAlgoMin extends CalibAlgo
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) {
       Vector v = M(i);
-      sum.add( v.mult( G(i).dot(v) - d) );
+      sum.plusEqual( v.times( G(i).dot(v) - d) );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
   
@@ -457,9 +521,9 @@ public class CalibAlgoMin extends CalibAlgo
     Vector sum = new Vector();
     for (int i=0; i<idx; ++i ) {
       Vector v = G(i);
-      sum.add( v.mult( M(i).dot(v) - d ) );
+      sum.plusEqual( v.times( M(i).dot(v) - d ) );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
    
@@ -468,10 +532,10 @@ public class CalibAlgoMin extends CalibAlgo
     Matrix sum = new Matrix(); 
     for (int i=0; i<idx; ++i ) {
       Matrix mu = new Matrix( bG, g[i]);
-      mu.scaleBy( G(i).LengthSquared() );
-      sum.add( mu );
+      mu.timesEqual( G(i).LengthSquared() );
+      sum.plusEqual( mu );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
       
@@ -480,10 +544,10 @@ public class CalibAlgoMin extends CalibAlgo
     Matrix sum = new Matrix();
     for (int i=0; i<idx; ++i ) {
       Matrix mu = new Matrix( bM, m[i]);
-      mu.scaleBy( M(i).LengthSquared() );
-      sum.add( mu );
+      mu.timesEqual( M(i).LengthSquared() );
+      sum.plusEqual( mu );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
   
@@ -493,10 +557,10 @@ public class CalibAlgoMin extends CalibAlgo
     for (int i=0; i<idx; ++i ) {
       Vector v = M(i);
       Matrix mu = new Matrix(v, g[i]);
-      mu.scaleBy( G(i).dot(v) - d );
-      sum.add( mu );
+      mu.timesEqual( G(i).dot(v) - d );
+      sum.plusEqual( mu );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
   
@@ -506,10 +570,10 @@ public class CalibAlgoMin extends CalibAlgo
     for (int i=0; i<idx; ++i ) {
       Vector v = G(i);
       Matrix mu = new Matrix(v, m[i]);
-      mu.scaleBy( M(i).dot(v) - d );
-      sum.add( mu );
+      mu.timesEqual( M(i).dot(v) - d );
+      sum.plusEqual( mu );
     }
-    sum.scaleBy( 1.0f / idx );
+    sum.timesEqual( invNN );
     return sum;
   }
   
@@ -544,20 +608,23 @@ public class CalibAlgoMin extends CalibAlgo
   public int Calibrate()
   {
     mDelta = 0.0f;
-    TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx 
-                      + " algo " + (mNonLinear? "non-" : "") + "linear" );
-    if ( idx < 16 ) return -1;
+    TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx + " Algo: min" );
+    if ( idx < 16 ) return -1; // too few data
+    invNN = 1.0f / idx;
 
     float alpha0 = TDSetting.mAlgoMinAlpha;
     float alpha1 = 1 - alpha0;
     float beta  = TDSetting.mAlgoMinBeta;
     float gamma = TDSetting.mAlgoMinGamma;
+    float delta = TDSetting.mAlgoMinDelta;
+
+    Vector zero = new Vector();
 
     float dip, e0, e1;
     int iter = 0;
 
-    bG = mean_g(); bG.scaleBy(-1);
-    bM = mean_m(); bM.scaleBy(-1);
+    bG = mean_g(); bG.reverse();
+    bM = mean_m(); bM.reverse();
     aG = mean_gg().InverseM();
     aM = mean_mm().InverseM();
     
@@ -566,40 +633,46 @@ public class CalibAlgoMin extends CalibAlgo
     // printf("E %.6f dip %.4f\n", e0, dip );
 
     do {
-      Vector bg0 = bG.mult( alpha1 );
-      Matrix ag0 = aG.mult( alpha1 );
-      Vector bm0 = bM.mult( alpha1 );
-      Matrix am0 = aM.mult( alpha1 );
+      Vector bg0 = bG.times( alpha1 );
+      Matrix ag0 = aG.timesF( alpha1 );
+      Vector bm0 = bM.times( alpha1 );
+      Matrix am0 = aM.timesF( alpha1 );
       e1 = e0;
       {
         float r = 1 / r2g();
-        Vector bg1 = ( g0().minus( r2ag().plus( gmm( dip ).mult( beta ) ) ) ).mult( r );
+        Vector bd1 = dbgGM().times( delta );
+        Vector bb1 = gmm( dip ).times( beta );
+        Vector bg1 = ( g0().minus( r2ag().plus( bb1 ).plus( bd1 ) ) ).times( r );
         Matrix rho = r2gg().InverseM();
-        Vector dgx = new Vector( dgxx(), dgxy(), dgxz() );
-        Vector dgy = new Vector( dgxy(), dgyy(), dgyz() );
-        Vector dgz = new Vector( dgxz(), dgyz(), dgzz() );
+        Matrix dg  = dgxyz();
         Matrix dag = new Matrix();
-        dag.x.x = aG.x.dot( dgx );
-        dag.x.y = aG.x.dot( dgy );
-        dag.x.z = aG.x.dot( dgz );
-        Matrix ag1 = ( gg().minus( r2bg().plus( gmmg( dip ).mult( beta ) ).plus( dag.mult( gamma ) ) ) ).timesM( rho );
-        bG = bg0.plus( bg1.mult(alpha0) );
-        aG = ag0.plus( ag1.mult(alpha0) );
+        dag.x.x = aG.x.dot( dg.x );
+        dag.x.y = aG.x.dot( dg.y );
+        dag.x.z = aG.x.dot( dg.z );
+        Matrix ad1 = dagGM().timesF( delta );
+        Matrix ac1 = dag.timesF( gamma );
+        Matrix ab1 = gmmg( dip ).timesF( beta );
+        Matrix ag1 = ( gg().minus( r2bg().plus( ab1 ).plus( ac1 ).plus( ad1 ) ) ).timesM( rho );
+        bG = bg0.plus( bg1.times(alpha0) );
+        aG = ag0.plus( ag1.timesF(alpha0) );
       }
       {
         float r = 1 / r2m();
-        Vector bm1 = ( m0().minus( r2am().plus( gmg( dip ).mult( beta ) ) ) ).mult( r );
+        Vector bd1 = dbmGM().times( delta );
+        Vector bb1 = gmg( dip ).times( beta );
+        Vector bm1 = ( m0().minus( r2am().plus( bb1 ).plus( bd1 ) ) ).times( r );
         Matrix rho = r2mm().InverseM();
-        Vector dmx = new Vector( dmxx(), dmxy(), dmxz() );
-        Vector dmy = new Vector( dmxy(), dmyy(), dmyz() );
-        Vector dmz = new Vector( dmxz(), dmyz(), dmzz() );
+        Matrix dm  = dmxyz();
         Matrix dam = new Matrix();
-        dam.x.x = aM.x.dot( dmx );
-        dam.x.y = aM.x.dot( dmy );
-        dam.x.z = aM.x.dot( dmz );
-        Matrix am1 = ( mm().minus( r2bm().plus( gmgm( dip ).mult( beta ) ).plus( dam.mult( gamma ) ) ) ).timesM( rho );
-        bM = bm0.plus( bm1.mult(alpha0) );
-        aM = am0.plus( am1.mult(alpha0) );
+        dam.x.x = aM.x.dot( dm.x );
+        dam.x.y = aM.x.dot( dm.y );
+        dam.x.z = aM.x.dot( dm.z );
+        Matrix ad1 = damGM().timesF( delta );
+        Matrix ac1 = dam.timesF( gamma );
+        Matrix ab1 = gmgm( dip ).timesF( beta );
+        Matrix am1 = ( mm().minus( r2bm().plus( ab1 ).plus( ac1 ).plus( ad1 ) ) ).timesM( rho );
+        bM = bm0.plus( bm1.times(alpha0) );
+        aM = am0.plus( am1.timesF(alpha0) );
       }
       dip = mean_dip();
       e0 = error( dip, beta, gamma );
@@ -639,25 +712,21 @@ public class CalibAlgoMin extends CalibAlgo
         while ( i < nn && (group[i] == 0 || group[i] == group0) ) {
           if ( group[i] != 0 ) {
             computeBearingAndClinoRad( gr[i], mr[i] );
-            vx.add( new Vector( b0, c0 ) ); 
+            vx.plusEqual( new Vector( b0, c0 ) ); 
             ++cx;
           }
           ++ i;
         }
-        vx.scaleBy( 1.0f/cx );
-        // Vector v0 = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-        //                         (float)Math.cos(c0) * (float)Math.sin(b0),
-        //                         (float)Math.sin(c0) );
+        if ( cx > 0 ) vx.timesEqual( 1.0f/cx );
+        // Log.v("DistoX", "group V " + vx.x + " " + vx.y + " " + vx.z );
         for (int j=first; j<i; ++j ) {
           if ( group[j] == 0 ) {
             err[j] = 0.0f;
           } else {
             computeBearingAndClinoRad( gr[j], mr[j] );
             Vector v = new Vector( b0, c0 );
-            // Vector v = new Vector( (float)Math.cos(c0) * (float)Math.cos(b0),
-            //                        (float)Math.cos(c0) * (float)Math.sin(b0),
-            //                        (float)Math.sin(c0) );
             err[j] = vx.minus(v).Length(); // approx angle with 2*tan(alpha/2)
+            // Log.v("DistoX", "Err " + err[j] + " V " + vx.x + " " + vx.y + " " + vx.z );
             mDelta  += err[j];
             mDelta2 += err[j] * err[j];
             if ( err[j] > mMaxError ) mMaxError = err[j];
@@ -666,8 +735,10 @@ public class CalibAlgoMin extends CalibAlgo
         }
       }
     }
-    mDelta  = mDelta / cnt;
-    mDelta2 = (float)Math.sqrt(mDelta2/cnt - mDelta*mDelta);
+    if ( cnt > 0 ) {
+      mDelta  = mDelta / cnt;
+      mDelta2 = (float)Math.sqrt(mDelta2/cnt - mDelta*mDelta);
+    }
     mDelta    *= TDMath.RAD2GRAD; // convert avg and std0-dev from radians to degrees
     mDelta2   *= TDMath.RAD2GRAD;
     mMaxError *= TDMath.RAD2GRAD;
@@ -720,9 +791,9 @@ public class CalibAlgoMin extends CalibAlgo
       gr[i] = bG.plus( aG.timesV(g2[i]) );
       mr[i] = bM.plus( aM.timesV(m2[i]) );
       computeBearingAndClinoRad( gr[i], mr[i] );
-      vx.add( new Vector( b0, c0 ) );
+      vx.plusEqual( new Vector( b0, c0 ) );
     }
-    vx.scaleBy( 1.0f/size );
+    vx.timesEqual( 1.0f/size );
     float err = 0.0f;
     for ( int i=0; i<size; ++i ) {
       computeBearingAndClinoRad( gr[i], mr[i] );

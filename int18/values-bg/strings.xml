@@ -117,6 +117,8 @@
     <string name="splay_at_to">"&lt;,&gt;,Г,Д" в репер "ДО"</string>
 
     <string name="few_data">Няма достатъчно данни</string>
+    <!-- TODO string name="few_iter">Failed to iterate</string -->
+    <!-- TODO string name="few_groups">Not enough data with group</string -->
     <!-- UNUSED string name="few_plots">Няма достатъчно скици</string -->
     <string name="few_calibs">Няма достатъчно калибрации</string>
 

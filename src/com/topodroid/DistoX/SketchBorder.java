@@ -41,16 +41,16 @@ class SketchBorder
       for ( SketchSide side : sides ) {
         SketchVertex v1 = surface.getVertex( side.v1 );
         if ( v1 != null ) {
-          mCenter.add( v1 );
+          mCenter.plusEqual( v1 );
           ++ n;
         }
         SketchVertex v2 = surface.getVertex( side.v2 );
         if ( v2 != null ) {
-          mCenter.add( v2 );
+          mCenter.plusEqual( v2 );
           ++ n;
         }
       }
-      mCenter.times( 1.0f/(2.0f*n) );
+      mCenter.timesEqual( 1.0f/(2.0f*n) );
     }
     return mCenter;
   }

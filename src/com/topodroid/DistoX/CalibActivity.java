@@ -156,7 +156,8 @@ public class CalibActivity extends Activity
     mCBAlgoNonLinear = (RadioButton) findViewById( R.id.calib_algo_non_linear );
     mCBAlgoMinimum   = (RadioButton) findViewById( R.id.calib_algo_minimum );
 
-    if ( ! TDSetting.mLevelOverExperimental ) mCBAlgoMinimum.setVisibility( View.GONE );
+    if ( ! TDSetting.mLevelOverExperimental )
+      mCBAlgoMinimum.setVisibility( View.GONE );
 
     mListView = (HorizontalListView) findViewById(R.id.listview);
     int size = mApp.setListViewHeight( mListView );
