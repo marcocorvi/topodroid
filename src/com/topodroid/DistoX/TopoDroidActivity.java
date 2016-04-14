@@ -299,8 +299,8 @@ public class TopoDroidActivity extends Activity
 
   void setTheTitle()
   {
-    String title = getResources().getString( R.string.app_name );
-    setTitle( mApp.getConnectionStateTitleStr() + title );
+    // String title = getResources().getString( R.string.app_name );
+    setTitle( mApp.getConnectionStateTitleStr() + mApp.mCWD );
     setTitleColor( TDConst.COLOR_NORMAL );
     // Log.v("DistoX", "TopoDroid activity set the title <" + mApp.getConnectionStateTitleStr() + title + ">" );
   }
@@ -726,6 +726,7 @@ public class TopoDroidActivity extends Activity
     loader.setPriority( Thread.MIN_PRIORITY );
     loader.start();
 
+    setTheTitle();
   }
   
   int mNrButton1 = 3;

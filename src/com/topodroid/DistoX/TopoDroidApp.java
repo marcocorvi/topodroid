@@ -519,7 +519,6 @@ public class TopoDroidApp extends Application
       e.printStackTrace();
     }
 
-
     mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
     mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
 
@@ -637,6 +636,7 @@ public class TopoDroidApp extends Application
     mCWD = cwd;
     TDPath.setPaths( mCWD );
     mData.openDatabase();
+    if ( mActivity != null ) mActivity.setTheTitle( );
   }
 
 // -----------------------------------------------------------------

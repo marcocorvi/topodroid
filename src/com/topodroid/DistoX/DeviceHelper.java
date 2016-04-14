@@ -132,7 +132,9 @@ public class DeviceHelper extends DataSetObservable
     deleteGMStmt.bindLong( 1, delete? 1 : 0 );
     deleteGMStmt.bindLong( 2, cid );
     deleteGMStmt.bindLong( 3, id );
-    deleteGMStmt.execute();
+    try { deleteGMStmt.execute(); } catch (SQLiteException e ) {
+      TDLog.Error( "Failed GM delete. CID " + cid + " id " + id );
+    }
   }
 
   public void doDeleteCalib( long cid ) 
@@ -143,9 +145,9 @@ public class DeviceHelper extends DataSetObservable
     if ( doDeleteCalibStmt == null )
         doDeleteCalibStmt = myDB.compileStatement( "DELETE FROM calibs where id=?" );
     doDeleteGMStmt.bindLong( 1, cid );
-    doDeleteGMStmt.execute();
+    try { doDeleteGMStmt.execute(); } catch (SQLiteException e ) { }
     doDeleteCalibStmt.bindLong( 1, cid );
-    doDeleteCalibStmt.execute();
+    try { doDeleteCalibStmt.execute(); } catch (SQLiteException e ) { }
   }
 
   public long updateGMName( long gid, long cid, String grp )
@@ -156,7 +158,9 @@ public class DeviceHelper extends DataSetObservable
     updateGMGroupStmt.bindString( 1, grp );
     updateGMGroupStmt.bindLong( 2, cid );
     updateGMGroupStmt.bindLong( 3, gid );
-    updateGMGroupStmt.execute();
+    try { updateGMGroupStmt.execute(); } catch (SQLiteException e ) {
+      TDLog.Error( "Failed GM update. CID " + cid + " id " + gid + " group " + grp );
+    }
     return 0;
   }
 
@@ -168,7 +172,7 @@ public class DeviceHelper extends DataSetObservable
     updateGMErrorStmt.bindDouble( 1, error );
     updateGMErrorStmt.bindLong( 2, cid );
     updateGMErrorStmt.bindLong( 3, id );
-    updateGMErrorStmt.execute();
+    try { updateGMErrorStmt.execute(); } catch (SQLiteException e ) { }
     return 0;
   }
 
@@ -205,7 +209,9 @@ public class DeviceHelper extends DataSetObservable
         // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
      resetAllGMStmt.bindLong( 1, cid );
      resetAllGMStmt.bindLong( 2, start_id );
-     resetAllGMStmt.execute();
+     try { resetAllGMStmt.execute(); } catch (SQLiteException e ) { 
+       TDLog.Error( "Failed GM reset. CID " + cid + " from id " + start_id );
+     }
    }
 
    public List<CalibCBlock> selectAllGMs( long cid, int status )
@@ -515,7 +521,9 @@ public class DeviceHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          updateConfig.bindString( 1, value );
          updateConfig.bindString( 2, key );
-         updateConfig.execute();
+         try { updateConfig.execute(); } catch (SQLiteException e ) {
+           TDLog.Error( "Failed update config. " + key + " " + value );
+         }
        } else {
          ContentValues cv = new ContentValues();
          cv.put( "key",     key );
@@ -815,7 +823,7 @@ public class DeviceHelper extends DataSetObservable
       updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
     updateDeviceModelStmt.bindString( 1, model );
     updateDeviceModelStmt.bindString( 2, address );
-    updateDeviceModelStmt.execute();
+    try { updateDeviceModelStmt.execute(); } catch (SQLiteException e ) { }
   }
 
   public void updateDeviceNickname( String address, String nickname )
@@ -824,7 +832,7 @@ public class DeviceHelper extends DataSetObservable
         updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
     updateDeviceNicknameStmt.bindString( 1, nickname );
     updateDeviceNicknameStmt.bindString( 2, address );
-    updateDeviceNicknameStmt.execute();
+    try { updateDeviceNicknameStmt.execute(); } catch (SQLiteException e ) { }
   }
 
   public boolean updateDeviceHeadTail( String address, int[] head_tail )
@@ -845,7 +853,7 @@ public class DeviceHelper extends DataSetObservable
         updateDeviceHeadTailStmt.bindLong( 1, head );
         updateDeviceHeadTailStmt.bindLong( 2, tail );
         updateDeviceHeadTailStmt.bindString( 3, address );
-        updateDeviceHeadTailStmt.execute();
+        try { updateDeviceHeadTailStmt.execute(); } catch (SQLiteException e ) { }
         ret = true;
       } else {
         // insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
@@ -881,11 +889,15 @@ public class DeviceHelper extends DataSetObservable
      if ( date == null ) return false;
      if ( updateCalibStmt == null )
         updateCalibStmt = myDB.compileStatement( "UPDATE calibs SET day=?, device=?, comment=? WHERE id=?" );
+     String dev = (device != null)? device : "";
+     String cmt = (comment != null)? comment : "";
      updateCalibStmt.bindString( 1, date );
-     updateCalibStmt.bindString( 2, (device != null)? device : "" );
-     updateCalibStmt.bindString( 3, (comment != null)? comment : "" );
+     updateCalibStmt.bindString( 2, dev );
+     updateCalibStmt.bindString( 3, cmt );
      updateCalibStmt.bindLong( 4, id );
-     updateCalibStmt.execute();
+     try { updateCalibStmt.execute(); } catch (SQLiteException e ) {
+       TDLog.Error( "Failed calib info. Device " + dev + " comment " + cmt );
+     }
      return true;
    }
 
@@ -896,7 +908,9 @@ public class DeviceHelper extends DataSetObservable
         updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
      updateCalibAlgoStmt.bindLong( 1, algo );
      updateCalibAlgoStmt.bindLong( 2, id );
-     updateCalibAlgoStmt.execute();
+     try { updateCalibAlgoStmt.execute(); } catch (SQLiteException e ) {
+       TDLog.Error( "Failed calib algo. CID " + id + " algo " + algo );
+     }
      return true;
    }
 
@@ -908,7 +922,9 @@ public class DeviceHelper extends DataSetObservable
         updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
      updateCalibCoeffStmt.bindString( 1, coeff );
      updateCalibCoeffStmt.bindLong( 2, id );
-     updateCalibCoeffStmt.execute();
+     try { updateCalibCoeffStmt.execute(); } catch (SQLiteException e ) {
+       TDLog.Error( "Failed calib coeff. CID " + id );
+     }
      return true;
    }
 
@@ -922,7 +938,7 @@ public class DeviceHelper extends DataSetObservable
      updateCalibErrorStmt.bindDouble( 3, max_error );
      updateCalibErrorStmt.bindLong( 4, iterations );
      updateCalibErrorStmt.bindLong( 5, id );
-     updateCalibErrorStmt.execute();
+     try { updateCalibErrorStmt.execute(); } catch (SQLiteException e ) { }
      return true;
    }
 

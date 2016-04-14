@@ -129,6 +129,7 @@ public class TopoDroidPreferences extends PreferenceActivity
     if (mPrefCategory == PREF_CATEGORY_ALL ) {
       final Intent cwd_intent = new Intent( this, CWDActivity.class );
       mCwdPreference = (Preference) findPreference( "DISTOX_CWD" );
+      mCwdPreference.setSummary( mApp.mCWD );
       mCwdPreference.setOnPreferenceClickListener( 
         new Preference.OnPreferenceClickListener() {
           @Override

@@ -42,7 +42,7 @@ class TDSetting
     "DISTOX_BLUETOOTH",           //  9
 
     "DISTOX_LOCALE",              // 10
-    "DISTOX_CWD",                 // 11
+    "DISTOX_CWD",                 // 11 CWD must be the last of primary preferences
 
     // ----------------------- DEVICE PREFERNCES 
     "DISTOX_SOCK_TYPE",           // 11
@@ -546,6 +546,7 @@ class TDSetting
 
     // TDLog.Profile("locale");
     app.setLocale( prefs.getString( key[k++], "" ), false );              // DISTOX_LOCALE
+
     // String cwd = prefs.getString( key[k++], "TopoDroid" );
     // if ( ! cwd.equals( mCWD ) ) {
     //   mCWD = cwd;

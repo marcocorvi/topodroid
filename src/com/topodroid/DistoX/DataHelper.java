@@ -558,7 +558,7 @@ public class DataHelper extends DataSetObservable
   //     clearStationsStmt = myDB.compileStatement( "UPDATE shots SET fStation=\"\", tStation=\"\" where id>? and surveyId=?" );
   //   clearStationsStmt.bindLong( 1, id );
   //   clearStationsStmt.bindLong( 2, sid );
-  //   clearStationsStmt.execute();
+  //   try { clearStationsStmt.execute(); } catch (SQLiteException e ) { }
   //   if ( forward ) {
   //     // no need to forward ?
   //   }
@@ -576,7 +576,10 @@ public class DataHelper extends DataSetObservable
     updateShotDBCStmt.bindDouble(  3, c );
     updateShotDBCStmt.bindLong(   4, sid );     // WHERE
     updateShotDBCStmt.bindLong(   5, id );
-    updateShotDBCStmt.execute();
+    try { updateShotDBCStmt.execute(); } catch (SQLiteException e ) { 
+      TDLog.Error( "Failed shot update. SID " + sid + " id " + id + " D " + d + " B " + b + " C " + c );
+    }
+
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -608,7 +611,9 @@ public class DataHelper extends DataSetObservable
       updateShotStmtFull.bindString( 6, comment );
       updateShotStmtFull.bindLong(   7, sid );     // WHERE
       updateShotStmtFull.bindLong(   8, id );
-      updateShotStmtFull.execute();
+      try { updateShotStmtFull.execute(); } catch (SQLiteException e ) { 
+        TDLog.Error( "Failed shot full-update. SID " + sid + " id " + id );
+      }
     } else {
       updateShotStmt.bindString( 1, fStation );
       updateShotStmt.bindString( 2, tStation );
@@ -617,7 +622,9 @@ public class DataHelper extends DataSetObservable
       updateShotStmt.bindLong(   5, leg );
       updateShotStmt.bindLong(   6, sid );
       updateShotStmt.bindLong(   7, id );
-      updateShotStmt.execute();
+      try { updateShotStmt.execute(); } catch (SQLiteException e ) {
+        TDLog.Error( "Failed shot part-update. SID " + sid + " id " + id );
+      }
     }
     if ( forward ) {
       // synchronized( mListeners )
@@ -635,7 +642,7 @@ public class DataHelper extends DataSetObservable
 
     shiftShotsIdStmt.bindLong(1, sid);
     shiftShotsIdStmt.bindLong(2, id);
-    shiftShotsIdStmt.execute();
+    try { shiftShotsIdStmt.execute(); } catch (SQLiteException e ) { }
   }
 
   // public boolean makesCycle( long id, long sid, String f, String t )
@@ -660,7 +667,9 @@ public class DataHelper extends DataSetObservable
     updateShotNameStmt.bindString( 2, tStation );
     updateShotNameStmt.bindLong(   3, sid );
     updateShotNameStmt.bindLong(   4, id );
-    updateShotNameStmt.execute();
+    try { updateShotNameStmt.execute(); } catch (SQLiteException e ) { 
+      TDLog.Error( "Failed shot name. SID " + sid + " id " + id + " F " + fStation + " T " + tStation );
+    }
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -679,7 +688,9 @@ public class DataHelper extends DataSetObservable
     updateShotLegStmt.bindLong(   1, leg );
     updateShotLegStmt.bindLong(   2, sid );
     updateShotLegStmt.bindLong(   3, id );
-    updateShotLegStmt.execute();
+    try { updateShotLegStmt.execute(); } catch (SQLiteException e ) {
+      TDLog.Error( "Failed shot leg. SID " + sid + " id " + id + " " + leg );
+    }
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -698,7 +709,9 @@ public class DataHelper extends DataSetObservable
     updateShotExtendStmt.bindLong( 1, extend );
     updateShotExtendStmt.bindLong( 2, sid );
     updateShotExtendStmt.bindLong( 3, id );
-    updateShotExtendStmt.execute();
+    try { updateShotExtendStmt.execute(); } catch (SQLiteException e ) {
+      TDLog.Error( "Failed shot extend. SID " + sid + " id " + id + " " + extend );
+    }
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -716,7 +729,9 @@ public class DataHelper extends DataSetObservable
     updateShotFlagStmt.bindLong( 1, flag );
     updateShotFlagStmt.bindLong( 2, sid );
     updateShotFlagStmt.bindLong( 3, id );
-    updateShotFlagStmt.execute();
+    try { updateShotFlagStmt.execute(); } catch (SQLiteException e ) {
+      TDLog.Error( "Failed shot flag. SID " + sid + " id " + id + " " + flag );
+    }
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -734,7 +749,9 @@ public class DataHelper extends DataSetObservable
     updateShotCommentStmt.bindString( 1, comment );
     updateShotCommentStmt.bindLong( 2, sid );
     updateShotCommentStmt.bindLong( 3, id );
-    updateShotCommentStmt.execute();
+    try { updateShotCommentStmt.execute(); } catch (SQLiteException e ) {
+      TDLog.Error( "Failed shot comment. SID " + sid + " id " + id );
+    }
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -796,7 +813,9 @@ public class DataHelper extends DataSetObservable
         updateShotNameAndExtendStmt.bindLong(   4, (b.mType == DistoXDBlock.BLOCK_SEC_LEG)? 1 : 0 );
         updateShotNameAndExtendStmt.bindLong(   5, sid );
         updateShotNameAndExtendStmt.bindLong(   6, b.mId );
-        updateShotNameAndExtendStmt.execute();
+        try { updateShotNameAndExtendStmt.execute(); } catch (SQLiteException e ) {
+          TDLog.Error( "Failed shot name+extend. SID " + sid + " id " + b.mId + " F " + b.mFrom + " T " + b.mTo );
+        }
       }
       myDB.setTransactionSuccessful();
     } finally {
@@ -864,7 +883,7 @@ public class DataHelper extends DataSetObservable
         ih.bind( statusCol, 0 );
         ih.bind( commentCol, s.comment );
         ih.bind( typeCol, 0 );
-        ih.execute();
+        try { ih.execute(); } catch (SQLiteException e ) { }
         // TDLog.Log( TDLog.LOG_DEBUG, "shot " + id + ": " + s.from + "-" + s.to );
         ++id;
       }
@@ -910,7 +929,9 @@ public class DataHelper extends DataSetObservable
     updateShotAMDRStmt.bindDouble( 4, r );
     updateShotAMDRStmt.bindLong( 5, sid );
     updateShotAMDRStmt.bindLong( 6, id );
-    updateShotAMDRStmt.execute();
+    try { updateShotAMDRStmt.execute(); } catch (SQLiteException e ) {
+      TDLog.Error( "Failed AMDR. SID " + sid + " id " + id );
+    }
     if ( forward ) {
       // synchronized( mListeners )
       for ( DataListener listener : mListeners ) {
@@ -986,7 +1007,7 @@ public class DataHelper extends DataSetObservable
       transferShotStmt.bindLong(2, myNextId);
       transferShotStmt.bindLong(3, old_sid);
       transferShotStmt.bindLong(4, old_id);
-      transferShotStmt.execute();
+      try { transferShotStmt.execute(); } catch (SQLiteException e ) { }
       
       // transfer fixeds, stations, plots and sketches
       // TODO FIXME cross-sections 
@@ -1125,8 +1146,7 @@ public class DataHelper extends DataSetObservable
   public void updatePlot( long pid, long sid, double xoffset, double yoffset, double zoom )
   {
     if ( myDB == null ) return;
-    // TDLog.Log( TDLog.LOG_DB,
-    //                   "updatePlot: " + pid + "/" + sid + " x " + xoffset + " y " + yoffset + " zoom " + zooom);
+    // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + pid + "/" + sid + " x " + xoffset + " y " + yoffset + " zoom " + zoom);
     // if ( updatePlotStmt == null ) 
     //   updatePlotStmt = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
     updatePlotStmt.bindDouble( 1, xoffset );
@@ -1134,7 +1154,9 @@ public class DataHelper extends DataSetObservable
     updatePlotStmt.bindDouble( 3, zoom );
     updatePlotStmt.bindLong( 4, sid );
     updatePlotStmt.bindLong( 5, pid );
-    updatePlotStmt.execute();
+    try { updatePlotStmt.execute(); } catch ( SQLException e ) {
+      TDLog.Error( "Failed plot update. SID " + sid + " id " + pid );
+    }
   }
  
   public void updatePlotView( long pid, long sid, String view )
@@ -1143,10 +1165,13 @@ public class DataHelper extends DataSetObservable
     // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + pid + "/" + sid + " view " + view );
     // if (updatePlotViewStmt == null )
     //   updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+    if ( view == null ) view = "";
     updatePlotViewStmt.bindString( 1, view );
     updatePlotViewStmt.bindLong( 2, sid );
     updatePlotViewStmt.bindLong( 3, pid );
-    updatePlotViewStmt.execute();
+    try { updatePlotViewStmt.execute(); } catch ( SQLException e ) { 
+      TDLog.Error( "Failed plot update view. SID " + sid + " id " + pid + " view: " + view );
+    }
   }
    
   public void updatePlotHide( long pid, long sid, String hide )
@@ -1155,10 +1180,13 @@ public class DataHelper extends DataSetObservable
     // TDLog.Log( TDLog.LOG_DB, "updatePlot: " + pid + "/" + sid + " hide " + hide );
     // if ( updatePlotHideStmt == null )
     //   updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+    if ( hide == null ) hide = "";
     updatePlotHideStmt.bindString( 1, hide );
     updatePlotHideStmt.bindLong( 2, sid );
     updatePlotHideStmt.bindLong( 3, pid );
-    updatePlotHideStmt.execute();
+    try { updatePlotHideStmt.execute(); } catch (SQLiteException e ) { 
+      TDLog.Error( "Failed plot update view. SID " + sid + " id " + pid + " hide: " + hide );
+    }
   }
    
   /** DROP is a real record delete from the database table
@@ -2059,7 +2087,9 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          updateConfig.bindString( 1, value );
          updateConfig.bindString( 2, key );
-         updateConfig.execute();
+         try { updateConfig.execute(); } catch (SQLiteException e ) { 
+           TDLog.Error( "Failed config. " + key + " " + value );
+         }
        } else {
          ContentValues cv = new ContentValues();
          cv.put( "key",     key );
@@ -2355,7 +2385,7 @@ public class DataHelper extends DataSetObservable
    //   transferSensorStmt.bindLong( 2, shot_id );
    //   transferSensorStmt.bindLong( 3, old_sid );
    //   transferSensorStmt.bindLong( 4, old_id );
-   //   transferSensorStmt.execute();
+   //   try { transferSensorStmt.execute(); } catch (SQLiteException e ) { }
    // }
 
    // private void transferPhoto( long sid, long shot_id, long old_sid, long old_id )
@@ -2366,7 +2396,7 @@ public class DataHelper extends DataSetObservable
    //   transferPhotoStmt.bindLong( 2, shot_id );
    //   transferPhotoStmt.bindLong( 3, old_sid );
    //   transferPhotoStmt.bindLong( 4, old_id );
-   //   transferPhotoStmt.execute();
+   //   try { transferPhotoStmt.execute(); } catch (SQLiteException e ) { }
    // }
 
    // private void transferFixed( long sid, long old_sid, long fixed_id )
@@ -2376,7 +2406,7 @@ public class DataHelper extends DataSetObservable
    //   transferFixedStmt.bindLong( 1, sid );
    //   transferFixedStmt.bindLong( 2, old_sid );
    //   transferFixedStmt.bindLong( 3, fixed_id );
-   //   transferFixedStmt.execute();
+   //   try { transferFixedStmt.execute(); } catch (SQLiteException e ) { }
    // }
 
    // private void transferStation( long sid, long old_sid, String name )
@@ -2386,7 +2416,7 @@ public class DataHelper extends DataSetObservable
    //   transferStationStmt.bindLong( 1, sid );
    //   transferStationStmt.bindLong( 2, old_sid );
    //   transferStationStmt.bindString( 3, name );
-   //   transferStationStmt.execute();
+   //   try { transferStationStmt.execute(); } catch (SQLiteException e ) { }
    // }
        
    private void transferPlot( long sid, long old_sid, long pid )
@@ -2396,7 +2426,7 @@ public class DataHelper extends DataSetObservable
      transferPlotStmt.bindLong( 1, sid );
      transferPlotStmt.bindLong( 2, old_sid );
      transferPlotStmt.bindLong( 3, pid );
-     transferPlotStmt.execute();
+     try { transferPlotStmt.execute(); } catch (SQLiteException e ) { }
    }
 
    private void transferSketch( long sid, long old_sid, long pid )
@@ -2406,7 +2436,7 @@ public class DataHelper extends DataSetObservable
      transferSketchStmt.bindLong( 1, sid );
      transferSketchStmt.bindLong( 2, old_sid );
      transferSketchStmt.bindLong( 3, pid );
-     transferSketchStmt.execute();
+     try { transferSketchStmt.execute(); } catch (SQLiteException e ) { }
    }
 
 
@@ -2735,7 +2765,7 @@ public class DataHelper extends DataSetObservable
     updateSketchStmt.bindDouble(16, clino );
     updateSketchStmt.bindLong( 17, sid );
     updateSketchStmt.bindLong( 18, sketch_id );
-    updateSketchStmt.execute();
+    try { updateSketchStmt.execute(); } catch (SQLiteException e ) { }
   }
   
   public void deleteSketch( long sketch_id, long sid )
@@ -2746,7 +2776,7 @@ public class DataHelper extends DataSetObservable
     //   deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
     // deleteSketchStmt.bindLong( 1, sid );
     // deleteSketchStmt.bindLong( 2, sketch_id );
-    // deleteSketchStmt.execute();
+    // try { deleteSketchStmt.execute(); } catch (SQLiteException e ) { }
   }
 
    private List< Sketch3dInfo > doSelectAllSketches( long sid, String where_str, String[] where )
@@ -3304,7 +3334,9 @@ public class DataHelper extends DataSetObservable
        updateStationCommentStmt.bindLong(   2, flag );
        updateStationCommentStmt.bindLong(   3, sid );
        updateStationCommentStmt.bindString( 4, name );
-       updateStationCommentStmt.execute();
+       try { updateStationCommentStmt.execute(); } catch (SQLiteException e ) {
+         TDLog.Error( "Failed station update. SID " + sid + " name " + name );
+       }
      } else {
        ContentValues cv = new ContentValues();
        cv.put( "surveyId",  sid );
@@ -3355,7 +3387,9 @@ public class DataHelper extends DataSetObservable
        deleteStationStmt = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
      deleteStationStmt.bindLong(   1, sid );
      deleteStationStmt.bindString( 2, name );
-     deleteStationStmt.execute();
+     try { deleteStationStmt.execute(); } catch (SQLiteException e ) {
+       TDLog.Error( "Failed station delete. SID " + sid + " name " + name );
+     }
    }
 
 
