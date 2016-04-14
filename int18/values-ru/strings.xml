@@ -117,10 +117,10 @@
     <!-- UNUSED string name="external_prompt">Ввод измерения</string -->
     <string name="splay_at_to">Л:П:В:Н на следующем пикете</string>
 
-    <string name="few_data">Не достаточно данных</string>
-    <!-- TODO string name="few_iter">Failed to iterate</string -->
-    <!-- TODO string name="few_groups">Not enough data with group</string -->
-    <!-- UNUSED string name="few_plots">Не достаточно абрисов</string -->
+    <string name="few_data">Недостаточно данных</string>
+    <string name="few_iter">Не удалось выполнить итерацию</string>
+    <string name="few_groups">Недостаточно данных с номером группы</string>
+    <!-- UNUSED string name="few_plots">Недостаточно абрисов</string -->
     <string name="few_calibs">Недостаточно калиб. замеров</string>
 
     <string name="calib_import_title">Импорт калибровки</string>
