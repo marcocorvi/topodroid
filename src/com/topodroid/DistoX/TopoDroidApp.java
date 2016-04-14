@@ -796,21 +796,75 @@ public class TopoDroidApp extends Application
       { // rename plot/sketch files: th3
         List< PlotInfo > plots = mData.selectAllPlots( sid );
         for ( PlotInfo p : plots ) {
-          old = new File( TDPath.getSurveyPlotTh2File( mySurvey, p.name ) );
-          nev = new File( TDPath.getSurveyPlotTh2File( name, p.name ) );
-          if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          // Therion
+            old = new File( TDPath.getSurveyPlotTh2File( mySurvey, p.name ) );
+            nev = new File( TDPath.getSurveyPlotTh2File( name, p.name ) );
+            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          // Tdr
+            old = new File( TDPath.getSurveyPlotTdrFile( mySurvey, p.name ) );
+            nev = new File( TDPath.getSurveyPlotTdrFile( name, p.name ) );
+            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+          // rename exported plots: dxf png svg csx
+            old = new File( TDPath.getSurveyPlotDxfFile( mySurvey, p.name ) );
+            nev = new File( TDPath.getSurveyPlotDxfFile( name, p.name ) );
+            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+            old = new File( TDPath.getSurveyPlotSvgFile( mySurvey, p.name ) );
+            nev = new File( TDPath.getSurveyPlotSvgFile( name, p.name ) );
+            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+            old = new File( TDPath.getSurveyPlotPngFile( mySurvey, p.name ) );
+            nev = new File( TDPath.getSurveyPlotPngFile( name, p.name ) );
+            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+            old = new File( TDPath.getSurveyPlotCsxFile( mySurvey, p.name ) );
+            nev = new File( TDPath.getSurveyPlotCsxFile( name, p.name ) );
+            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
         }
       }
       { // rename sketch files: th3
         List< Sketch3dInfo > sketches = mData.selectAllSketches( sid );
         for ( Sketch3dInfo s : sketches ) {
-          old = new File( TDPath.getSurveyPlotTh2File( mySurvey, s.name ) );
-          nev = new File( TDPath.getSurveyPlotTh2File( name, s.name ) );
+          old = new File( TDPath.getSurveySketchFile( mySurvey, s.name ) );
+          nev = new File( TDPath.getSurveySketchFile( name, s.name ) );
           if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
         }
       }
-      // TODO rename exported files: csv csx dat dxf kml plt srv svx th top tro 
-      // TODO rename exported plots: dxf png svg
+      // rename exported files: csv csx dat dxf kml plt srv svx th top tro 
+        old = new File( TDPath.getSurveyThFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyThFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyCsvFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyCsvFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyCsxFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyCsxFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyCaveFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyCaveFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyDatFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyDatFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyDxfFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyDxfFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyKmlFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyKmlFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyPltFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyPltFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveySrvFile( mySurvey ) );
+        nev = new File( TDPath.getSurveySrvFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveySvxFile( mySurvey ) );
+        nev = new File( TDPath.getSurveySvxFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyTopFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyTopFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+        old = new File( TDPath.getSurveyTroFile( mySurvey ) );
+        nev = new File( TDPath.getSurveyTroFile( name ) );
+        if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+
       { // rename note file: note
         old = new File( TDPath.getSurveyNoteFile( mySurvey ) );
         nev = new File( TDPath.getSurveyNoteFile( name ) );

@@ -183,8 +183,10 @@ public class GMActivity extends Activity
         // mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
         break;
       case CalibInfo.ALGO_MINIMUM:
-        mCalibration = new CalibAlgoMin( 0, false );
-        break;
+        if ( TDSetting.mLevelOverExperimental ) {
+          mCalibration = new CalibAlgoMin( 0, false );
+          break;
+        }
       default: // linear algo
         mCalibration = new CalibAlgoBH( 0, false );
     }
@@ -247,8 +249,10 @@ public class GMActivity extends Activity
         calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
       case CalibInfo.ALGO_MINIMUM:
-        calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
-        break;
+        if ( TDSetting.mLevelOverExperimental ) {
+          calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+          break;
+        }
       default:
         calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
     }
@@ -264,8 +268,10 @@ public class GMActivity extends Activity
         calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
         break;
       case CalibInfo.ALGO_MINIMUM:
-        calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
-        break;
+        if ( TDSetting.mLevelOverExperimental ) {
+          calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+          break;
+        }
       default:
         calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
     }

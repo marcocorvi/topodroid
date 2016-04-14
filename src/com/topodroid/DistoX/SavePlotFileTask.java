@@ -53,7 +53,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = suffix;
      mRotate   = rotate;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
-     // TDLog.Log( TDLog.LOG_PLOT, "Save Th2 File Task " + mFullName + " type " + mType );
+     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
   }
 
   @Override

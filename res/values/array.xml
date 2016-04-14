@@ -358,11 +358,13 @@
      <item name="auto">Auto</item>
      <item name="linear">Linear</item>
      <item name="nonlinear">Non-linear</item>
+     <!-- item name="minimum">Minimum</item -->
   </string-array>
   <string-array name="calibAlgoValue">
      <item name="auto">0</item>
      <item name="linear">1</item>
      <item name="nonlinear">2</item>
+     <!-- item name="minimum">3</item -->
   </string-array>
 
 </resources>

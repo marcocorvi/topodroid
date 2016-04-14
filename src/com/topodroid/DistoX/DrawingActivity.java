@@ -1460,7 +1460,7 @@ public class DrawingActivity extends ItemDrawer
     void updateBlockName( DistoXDBlock block, String from, String to )
     {
       // if ( mFullName2 == null ) return; // nothing for PLOT_SECTION or PLOT_H_SECTION
-      if ( PlotInfo.isSection( mType ) )  return;
+      if ( PlotInfo.isAnySection( mType ) )  return;
       // FIXME if ( from == null || to == null ) return;
 
       if ( ( ( block.mFrom == null && from == null ) || block.mFrom.equals(from) ) && 
@@ -3182,8 +3182,8 @@ public class DrawingActivity extends ItemDrawer
 
     private void savePng( boolean toast )
     {
-      if ( PlotInfo.isSection( mType ) ) { 
-        doSavePng( mType, mFullName1, toast ); // FIXME
+      if ( PlotInfo.isAnySection( mType ) ) { 
+        doSavePng( mType, mFullName3, toast );
       } else {
         doSavePng( (int)PlotInfo.PLOT_PLAN, mFullName1, toast );
         // FIXME OK PROFILE (to check)
@@ -3212,8 +3212,12 @@ public class DrawingActivity extends ItemDrawer
     // used to save "dxf", "svg"
     private void saveWithExt( String ext, boolean toast )
     {
-      if ( PlotInfo.isSection( mType ) ) { 
-        doSaveWithExt( mType, mFullName1, ext, toast ); // FIXME
+      if ( PlotInfo.isAnySection( mType ) ) { 
+        if ( "csx".equals( ext ) ) {
+          doSavePng( mType, mFullName3, toast );
+        } else {
+          doSaveWithExt( mType, mFullName3, ext, toast );
+        }
       } else {
         doSaveWithExt( mPlot1.type, mFullName1, ext, toast );
         doSaveWithExt( mPlot2.type, mFullName2, ext, toast );
@@ -3226,6 +3230,7 @@ public class DrawingActivity extends ItemDrawer
     // used by SavePlotFileTask
     void doSaveWithExt( long type, final String filename, final String ext, boolean toast )
     {
+      // Log.v("DistoX", "save with ext: " + filename + " ext " + ext );
       if ( PlotInfo.isProfile( type ) ) {
         new ExportPlotToFile(this, mDrawingSurface.mCommandManager2, mNum, type, filename, ext, toast ).execute();
       } else if ( type == PlotInfo.PLOT_PLAN ) {
@@ -3501,7 +3506,11 @@ public class DrawingActivity extends ItemDrawer
     int index = TDConst.plotExportIndex( type );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: saveTh2(); break;
-      case TDConst.DISTOX_EXPORT_CSX: saveCsx( true ); break;
+      case TDConst.DISTOX_EXPORT_CSX: 
+        if ( ! PlotInfo.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
+          saveCsx( true );
+          break;
+        } // else fall-through and savePng
       case TDConst.DISTOX_EXPORT_PNG: savePng( true ); break;
       case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf", true ); break;
       case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg", true ); break;
