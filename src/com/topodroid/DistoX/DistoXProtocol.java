@@ -780,7 +780,7 @@ public class DistoXProtocol
     return true;  
   }
 
-  // called only by DistoXComm.readCoeff
+  // called only by DistoXComm.readCoeff (TopoDroidComm.readCoeff)
   public boolean readCalibration( byte[] calib )
   {
     if ( calib == null ) return false;

@@ -418,7 +418,7 @@ public class DeviceActivity extends Activity
     // TDLog.Log( TDLog.LOG_INPUT, "DeviceActivity onClick() button " + b.getText().toString() ); 
 
     // FIXME COMMENTED
-    // DistoXComm comm = mApp.mComm;
+    // TopoDroidComm comm = mApp.mComm;
     // if ( comm == null ) {
     //   Toast.makeText( this, R.string.connect_failed, Toast.LENGTH_SHORT).show();
     //   return;

@@ -53,7 +53,7 @@
        android:entries="@array/calibAlgo"
        android:entryValues="@array/calibAlgoValue"
      />
-<!--
+
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ALGO_MIN_ALPHA"
        android:title="@string/pref_algo_min_alpha_title"
@@ -89,5 +89,5 @@
        android:dialogMessage="@string/pref_algo_min_delta_message"
        android:inputType="numberDecimal"
        android:defaultValue="1.0" />
--->
+
 </PreferenceScreen>

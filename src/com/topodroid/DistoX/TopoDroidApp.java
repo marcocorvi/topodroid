@@ -175,7 +175,7 @@ public class TopoDroidApp extends Application
 
   String[] DistoXConnectionError;
   BluetoothAdapter mBTAdapter = null;     // BT connection
-  private DistoXComm mComm = null;        // BT communication
+  private TopoDroidComm mComm = null;        // BT communication
   DataDownloader mDataDownloader = null;  // data downloader
   static DataHelper mData = null;         // database 
   static DeviceHelper mDData = null;      // device/calib database
@@ -1150,54 +1150,6 @@ public class TopoDroidApp extends Application
   }
 
   // ----------------------------------------------------------------
-  // FIXME TO REMOVE
-/*
-  static float mRefAzimuth = 90; // west to east
-  static long  mFixedExtend = 0;
-
-  static void resetRefAzimuth( float azimuth )
-  {
-    mRefAzimuth  = azimuth;
-    mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
-    if ( mShotActivity != null ) mShotActivity.setRefAzimuthButton();
-    // DrawingActivity does not have the RefAzimuth setting
-  }
-
-  // called by DistoXComm, ShotNewDialog, and setLegExtend
-  static long computeLegExtend( double bearing )
-  {
-    if ( mFixedExtend == 0 ) {
-      double ref = mRefAzimuth;
-      while ( bearing < ref ) bearing += 360;
-      bearing -= ref;
-      return ( bearing > 90 && bearing < 270 )? -1L : 1L;
-    } else if ( mFixedExtend == -1L ) {
-      bearing += 180; 
-      if ( bearing >= 360 ) bearing -= 360;
-    }
-    mRefAzimuth = (float)bearing;
-    return mFixedExtend;
-  }
-
-  // used for manually entered shots, and by Compass/VisualTopo parser
-  static long computeSplayExtend( double bearing )
-  {
-    while ( bearing < mRefAzimuth ) bearing += 360;
-    bearing -= mRefAzimuth;
-    return computeAbsoluteExtendSplay( bearing );
-  }
-
-
-  // @param b bearing [deg] in 0 .. 360
-  // called only by computeSplayExtend
-  static private long computeAbsoluteExtendSplay( double b )
-  {
-    if ( b >= 90 + TDSetting.mExtendThr && b <= 270 - TDSetting.mExtendThr ) return -1L;
-    if ( b <= 90 - TDSetting.mExtendThr || b >= 270 + TDSetting.mExtendThr ) return 1L;
-    return 0L;
-  }
-  // END TO REMOVE
-*/
 
   private void setLegExtend( DistoXDBlock prev )
   {
