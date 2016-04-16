@@ -95,14 +95,14 @@
     <string name="device_code">DistoX Code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
-    <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
-    <!-- TODO string name="device_status_angle_degree">Angle units: degree</string -->
-    <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
-    <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
-    <!-- TODO string name="device_status_calib">Mode: calibration</string -->
-    <!-- TODO string name="device_status_normal">Mode: normal</string -->
-    <!-- TODO string name="device_status_silent_on">Silent: on</string -->
-    <!-- TODO string name="device_status_silent_off">Silent: off</string -->
+    <string name="device_status_angle_grad">Winkeleinheiten: Gon (400°)</string>
+    <string name="device_status_angle_degree">Winkeleinheiten: Grad (360°)</string>
+    <string name="device_status_compass_on">Kompass/Klinometer: Ein</string>
+    <string name="device_status_compass_off">Kompass/Klinometer: Aus</string>
+    <string name="device_status_calib">Modus: Kalibrierung</string>
+    <string name="device_status_normal">Modus: Normal</string>
+    <string name="device_status_silent_on">Lautlos: Ein</string>
+    <string name="device_status_silent_off">Lautlos: Aus</string>
     <string name="bt_reset">Bluetooth-Verbindung zurückgesetzt</string>
     <string name="save_as">Speichern als</string>
     <string name="nickname">Anzeigename</string>
@@ -127,8 +127,8 @@
     <string name="splay_at_to">LRUD bei Ziel-Messpunkt</string>
 
     <string name="few_data">Nicht genügend Daten</string>
-    <!-- TODO string name="few_iter">Failed to iterate</string -->
-    <!-- TODO string name="few_groups">Not enough data with group</string -->
+    <string name="few_iter">Nicht genügend Wiederholungen</string>
+    <string name="few_groups">Zu wenige Gruppen</string>
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
 
@@ -345,7 +345,7 @@
 
     <!-- UNUSED string name="shot_clino">Neigung</string -->
     <!-- UNUSED string name="shot_compass">Azimut</string -->
-    <string name="shot_delete">Messzug löschen?</string>
+    <string name="shot_delete">Messung löschen?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Info</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
@@ -392,9 +392,9 @@
     <string name="zip_saved">Zip-Datei gespeichert</string>
     <string name="zip_failed">Fehler beim Speichern der Zip-Datei</string>
     <string name="unzip_fail">Fehler beim Entpacken der Zip-Datei</string>
-    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
-    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
-    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
+    <string name="unzip_fail_survey">Fehler: Vermessungsname falsch</string>
+    <string name="unzip_fail_db">Fehler: Ungültige Datenbank-Version</string>
+    <string name="unzip_fail_td">Fehler: Ungültige TopoDroid-Version</string>
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Vermessungsinfo</string>
@@ -747,8 +747,8 @@
   <string name="pref_wait_laser_summary">Wartezeit nach Laser einschalten [ms]</string>
   <string name="pref_wait_shot_title">Wartezeit nach Messung [ms]</string>
   <string name="pref_wait_shot_summary">Wartezeit nach einer Messung [ms]</string>
-  <!-- TODO string name="pref_wait_data_title">Data pause [ms]</string -->
-  <!-- TODO string name="pref_wait_data_summary">Pause after a data download [ms]</string -->
+  <string name="pref_wait_data_title">Wartezeit nach Download [ms]</string>
+  <string name="pref_wait_data_summary">Wartezeit nach dem Download von Daten [ms]</string>
   <string name="pref_conn_mode_title">Verbindungsart</string>
   <string name="pref_conn_mode_summary">Art der Verbindung mit DistoX</string>
   <string name="pref_auto_reconnect_title">Automatische Verbindung</string>
@@ -904,8 +904,8 @@
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
   <string name="pref_xtherion_areas_title">xtherion Flächen</string>
   <string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string>
-  <string name="pref_autoStations_title">Skizzen-Messpunkte</string>
-  <string name="pref_autoStations_summary">Messpunkte automatisch einfügen</string>
+  <string name="pref_autoStations_title">Therion Stationen</string>
+  <string name="pref_autoStations_summary">Therion-Stationen automatisch einfügen</string>
   <string name="pref_loopClosure_title">Kreisschluss</string>
   <string name="pref_loopClosure_summary">Kreisschlussfehler Kompensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
@@ -915,8 +915,8 @@
 
   <string name="pref_picker_type_title">Zeichenwerkzeuge wählen</string>
   <string name="pref_picker_type_summary">Zeichenwerkzeug-Auswahl</string>
-  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
-  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
+  <string name="pref_section_stations_title">Querschnitts-Stationen</string>
+  <string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string>
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>
   <string name="pref_station_size_summary">Messpunkt Beschriftung Schriftgröße</string>
   <string name="pref_station_size_message">Messpunkt Beschriftung Schriftgröße</string>
