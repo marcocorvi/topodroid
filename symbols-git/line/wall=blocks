@@ -1,5 +1,6 @@
 symbol line
 name wall_blocks
+name-cn 堵塞形成的墙
 name-es paredes_estratificadas
 name-de Geschichtete_Wand
 name-bg стена_блокаж

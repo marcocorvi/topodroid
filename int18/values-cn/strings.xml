@@ -721,12 +721,12 @@
   <!-- UNUSED string name="pref_comm_retry_summary">重试连接数</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">重试连接数</string -->
   <!-- UNUSED string name="pref_comm_retry_message">重试连接数</string -->
-  <!-- TODO string name="pref_wait_laser_title">Wait after laser [ms]</string -->
-  <!-- TODO string name="pref_wait_laser_summary">Delay to wait after turning laser on [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_title">Wait after shot [ms]</string -->
-  <!-- TODO string name="pref_wait_shot_summary">Delay to wait after measuring [ms]</string -->
-  <!-- TODO string name="pref_wait_data_title">Data pause [ms]</string -->
-  <!-- TODO string name="pref_wait_data_summary">Pause after a data download [ms]</string -->
+  <!-- TODO string name="pref_wait_laser_title">等待激光 [毫秒]</string -->
+  <!-- TODO string name="pref_wait_laser_summary">延迟等待设备通电 [毫秒]</string -->
+  <!-- TODO string name="pref_wait_shot_title">测射后等待 [毫秒]</string -->
+  <!-- TODO string name="pref_wait_shot_summary">为等待测量数据延迟 [毫秒]</string -->
+  <!-- TODO string name="pref_wait_data_title">数据暂停间隔 [毫秒]</string -->
+  <!-- TODO string name="pref_wait_data_summary">下载数据后暂停 [毫秒]</string -->
   <string name="pref_conn_mode_title">数据连接类型</string>
   <string name="pref_conn_mode_summary">DistoX连接类型</string>
   <string name="pref_auto_reconnect_title">自动再连接</string>
@@ -896,8 +896,8 @@
 
   <string name="pref_picker_type_title">绘图工具选取</string>
   <string name="pref_picker_type_summary">绘图工具选取显示类型</string>
-  <!-- TODO string name="pref_section_stations_title">X-Section stations</string -->
-  <!-- TODO string name="pref_section_stations_summary">X-Section reference stations</string -->
+  <!-- TODO string name="pref_section_stations_title">X-截面系</string -->
+  <!-- TODO string name="pref_section_stations_summary">X-截面参考系</string -->
   <string name="pref_station_size_title">测量点名称尺寸</string>
   <string name="pref_station_size_summary">测量点名称尺寸</string>
   <string name="pref_station_size_message">测量点名称尺寸</string>
@@ -911,8 +911,8 @@
   <string name="pref_recent_nr_summary">项目选择中最新选择的工具数</string>
   <string name="pref_area_border_title">面积图例边框可见度</string>
   <string name="pref_area_border_summary">面积图例边框默认可见度</string>
-  <!-- TODO string name="pref_auto_section_pt_title">Section points</string -->
-  <!-- TODO string name="pref_auto_section_pt_summary">Add section point to section lines</string -->
+  <!-- TODO string name="pref_auto_section_pt_title">截面点</string -->
+  <!-- TODO string name="pref_auto_section_pt_summary">将截面点加入到截面线中</string -->
   <string name="pref_cont_join_title">加入延续</string>
   <string name="pref_cont_join_summary">线延续加入线</string>
 
