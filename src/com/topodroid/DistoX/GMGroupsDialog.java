@@ -28,7 +28,7 @@ class GMGroupsDialog extends MyDialog
 {
   private GMActivity mParent;
 
-  private CheckBox mCBreset;
+  private Button mBtnReset;
   private Button mBtnOK;
 
   private String mPolicy;
@@ -48,13 +48,12 @@ class GMGroupsDialog extends MyDialog
     initLayout( R.layout.gm_groups_dialog, R.string.group_title );
     
     mBtnOK = (Button) findViewById( R.id.group_ok );
+    mBtnReset = (Button) findViewById( R.id.group_reset );
     mBtnOK.setOnClickListener( this );
+    mBtnReset.setOnClickListener( this );
     
     TextView policy = (TextView) findViewById( R.id.group_policy );
     policy.setText( mPolicy );
-
-    mCBreset = (CheckBox) findViewById( R.id.group_reset );
-    mCBreset.setChecked( false );
   }
     
   @Override
@@ -62,11 +61,9 @@ class GMGroupsDialog extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mBtnOK ) {
-      if ( mCBreset.isChecked() ) {
-        mParent.resetGroups( -1L );
-      } else {
-        mParent.computeGroups( -1L );
-      }
+      mParent.computeGroups( -1L );
+    } else if ( b == mBtnReset ) {
+      mParent.resetGroups( -1L );
     }
     dismiss();
   }

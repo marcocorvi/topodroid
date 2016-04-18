@@ -706,7 +706,7 @@ class TDSetting
     mLevelOverNormal       = mActivityLevel > LEVEL_NORMAL;
     mLevelOverAdvanced     = mActivityLevel > LEVEL_ADVANCED;
     mLevelOverExperimental = mActivityLevel > LEVEL_EXPERIMENTAL;
-    if ( "e5582eda21cafac3".equals( android_id ) ) mLevelOverExperimental = true;
+    // if ( "e5582eda21cafac3".equals( android_id ) ) mLevelOverExperimental = true;
     if ( ! mLevelOverAdvanced ) {
       mMagAnomaly = false;
     }
