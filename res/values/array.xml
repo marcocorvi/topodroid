@@ -239,11 +239,13 @@
      <item name="recent">Most recent</item>
      <item name="list">List</item>
      <item name="grid">Grid</item>
+     <item name="grid3">Triple grid</item>
   </string-array>
   <string-array name="pickerTypeValue">
      <item name="recent">0</item>
      <item name="list">1</item>
      <item name="grid">2</item>
+     <item name="grid3">3</item>
   </string-array>
 
   <string-array name="sectionStations">

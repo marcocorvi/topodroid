@@ -3348,6 +3348,11 @@ public class DrawingActivity extends ItemDrawer
       List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      if ( mType == PlotInfo.PLOT_PLAN ) {
+        resetReference( mPlot1 );
+      } else if ( mType == PlotInfo.PLOT_EXTENDED || mType == PlotInfo.PLOT_PROFILE ) {
+        resetReference( mPlot2 );
+      }
     }
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       resetReference( mPlot1 );

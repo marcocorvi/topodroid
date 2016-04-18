@@ -16,7 +16,7 @@ package com.topodroid.DistoX;
 interface IItemPicker 
           // extends OnClickListener
 {
-  public void setTypeAndItem( int pos );
+  public void setTypeAndItem( int type, int pos );
 
   public void closeDialog();
 }

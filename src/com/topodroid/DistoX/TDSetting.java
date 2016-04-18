@@ -327,6 +327,7 @@ class TDSetting
   static final int PICKER_RECENT = 0; // Drawing-tools picker type
   static final int PICKER_LIST   = 1; 
   static final int PICKER_GRID   = 2;
+  static final int PICKER_GRID_3 = 3;
   static int mPickerType = PICKER_RECENT;
   static int mRecentNr    = 4;        // nr. most recent symbols
 

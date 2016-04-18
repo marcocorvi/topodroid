@@ -100,6 +100,7 @@
      <item name="recent">Häufigste</item>
      <item name="list">Liste</item>
      <item name="grid">Gitter</item>
+     <!-- TODO item name="grid3">Triple grid</item -->
   </string-array>
 
   <string-array name="sectionStations">

@@ -111,7 +111,32 @@
           android:gravity="center"
           android:stretchMode="columnWidth"
           android:columnWidth="80sp"
-      />  
+      />
+
+      <GridView android:id="@+id/item_grid_line"
+          android:layout_width="fill_parent"
+          android:layout_height="0dp"
+          android:transcriptMode="alwaysScroll"
+          android:layout_weight="1"
+          android:background="#ff000000"
+          android:numColumns="auto_fit"
+          android:gravity="center"
+          android:stretchMode="columnWidth"
+          android:columnWidth="80sp"
+      />
+
+      <GridView android:id="@+id/item_grid_area"
+          android:layout_width="fill_parent"
+          android:layout_height="0dp"
+          android:transcriptMode="alwaysScroll"
+          android:layout_weight="1"
+          android:background="#ff000000"
+          android:numColumns="auto_fit"
+          android:gravity="center"
+          android:stretchMode="columnWidth"
+          android:columnWidth="80sp"
+      />
+
   </LinearLayout>
 
 

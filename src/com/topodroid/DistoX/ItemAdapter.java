@@ -35,6 +35,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   // private Context mContext;
   private IItemPicker mParent;
   private int mPos;    
+  private int mType;
 
   /** get the item at a certain position in the list of symbols 
    */
@@ -48,11 +49,12 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   // {
   // }
 
-  public ItemAdapter( Context ctx, IItemPicker parent, int id, ArrayList< ItemSymbol > items )
+  public ItemAdapter( Context ctx, IItemPicker parent, int type, int id, ArrayList< ItemSymbol > items )
   {
     super( ctx, id, items );
     mParent = parent;
     mPos    = -1;
+    mType   = type;
 
     if ( items != null ) {
       mItems = items;
@@ -172,7 +174,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
           if ( cb == item.mCheckBox ) {
             if ( mPos == pos && Math.abs(millis - mClickMillis) < DOUBLE_CLICK_TIME ) doubleclick = true;
             mPos = pos; // item.mIndex;
-            mParent.setTypeAndItem( mPos );
+            mParent.setTypeAndItem( mType, mPos );
             item.setChecked( true );
           } else {
             item.setChecked( false );
@@ -187,7 +189,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
         if ( ib == item.mButton ) {
           if ( mPos == pos && Math.abs(millis - mClickMillis) < DOUBLE_CLICK_TIME ) doubleclick = true;
           mPos = pos; // item.mIndex;
-          mParent.setTypeAndItem( mPos );
+          mParent.setTypeAndItem( mType, mPos );
           item.setChecked( true );
         } else {
           item.setChecked( false );

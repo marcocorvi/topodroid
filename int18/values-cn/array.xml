@@ -105,6 +105,7 @@
      <item name="recent">最近</item>
      <item name="list">列表</item>
      <item name="grid">网格</item>
+     <!-- TODO item name="grid3">Triple grid</item -->
   </string-array>
 
   <!-- TODO string-array name="sectionStations">
