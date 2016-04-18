@@ -109,8 +109,8 @@
 
   <string-array name="sectionStations">
      <item name="both">В двата</item>
-     <item name="from">В преден</item>
-     <item name="to">В заден</item>
+     <item name="from">В заден</item>
+     <item name="to">В преден</item>
   </string-array>
 
   <!-- UNUSED string-array name="deviceType">
