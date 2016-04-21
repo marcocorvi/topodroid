@@ -99,7 +99,7 @@
      <item name="recent">Más reciente</item>
      <item name="list">Lista</item>
      <item name="grid">Cuadrícula</item>
-     <!-- TODO item name="grid3">Triple grid</item -->
+     <item name="grid3">Triple grid</item>
   </string-array>
 
   <!-- TODO string-array name="sectionStations">

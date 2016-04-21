@@ -132,7 +132,7 @@
      <item name="recent">Plus recentes</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
-     <!-- TODO item name="grid3">Triple grid</item -->
+     <item name="grid3">Triple grid</item>
    </string-array>
 
   <!-- TODO string-array name="sectionStations">

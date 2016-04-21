@@ -99,7 +99,7 @@
      <item name="recent">Piu\' recente</item>
      <item name="list">Lista</item>
      <item name="grid">Griglia</item>
-     <!-- TODO item name="grid3">Triple grid</item -->
+     <item name="grid3">Tre griglie</item>
   </string-array>
 
   <!-- TODO string-array name="sectionStations">

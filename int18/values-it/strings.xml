@@ -678,12 +678,12 @@
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- string name="title_zoom">Zoom</string -->
 
-  <string name="pref_cat_survey">Opzioni rilievo</string>
-  <string name="pref_cat_drawing">Opzioni disegno</string>
-  <string name="pref_cat_import_export">Opzioni import/export</string>
-  <string name="pref_cat_calib">Opzioni calibrazione</string>
-  <string name="pref_cat_device">Opzioni DistoX</string>
-  <!-- UNUSED string name="pref_cat_sketch">Opzioni sketch 3D</string -->
+  <string name="pref_cat_survey">OPZIONI RILIEVO</string>
+  <string name="pref_cat_drawing">OPZIONI DISEGNO</string>
+  <string name="pref_cat_import_export">OPZIONI IMPORT/EXPORT</string>
+  <string name="pref_cat_calib">OPZIONI CALIBRAZIONE</string>
+  <string name="pref_cat_device">OPZIONI DISTOX</string>
+  <!-- UNUSED string name="pref_cat_sketch">OPZIONI SKETCH 3D</string -->
   <string name="pref_cat_log">Opzioni log</string>
 
   <string name="pref_locale_title">Lingua</string>
@@ -753,15 +753,14 @@
   <string name="pref_crs_message">Scrivi il CRS come in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
-  <string name="pref_plot_screen_title">IMPOSTAZIONI SCHERMO DISEGNO</string>
-  <!-- FIXED string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI DISEGNO</string -->
-  <string name="pref_tool_line_title">IMPOSTAZIONI STRUMENTI LINEA</string>
-  <string name="pref_tool_point_title">STRUMENTI PUNTO</string>
-  <string name="pref_location_title">IMPOSTAZIONI POSIZIONE</string>
-  <string name="pref_accuracy_title">ACCURATEZZA</string>
-  <string name="pref_shot_data_title">IMPOSTAZIONI DATI POLIGONALE</string>
-  <string name="pref_shot_units_title">UNITA\'</string>
-  <string name="pref_cwd_title">DIRECTORY DI LAVORO</string>
+  <string name="pref_plot_screen_title">OPZIONI DISEGNO</string>
+  <string name="pref_tool_line_title">OPZIONI LINEE</string>
+  <string name="pref_tool_point_title">OPZIONI PUNTI</string>
+  <string name="pref_location_title">OPZIONI POSIZIONE</string>
+  <string name="pref_accuracy_title">OPZIONI ACCURATEZZA</string>
+  <string name="pref_shot_data_title">OPZIONI POLIGONALE</string>
+  <string name="pref_shot_units_title">OPZIONI UNITA\'</string>
+  <string name="pref_cwd_title">Directory di lavoro</string>
   <!-- UNUSED string name="pref_cwd_summary">Directory di lavoro di TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Scrivi la directory di lavoro di TopoDroid</string -->
   <string name="pref_pt_color_map_title">Mappa di colori di PocketTopo</string>
@@ -950,7 +949,7 @@
   <string name="pref_unit_location_title">Unità posizioni</string>
   <string name="pref_unit_location_summary">Unità posizioni</string>
 
-  <string name="pref_plot_walls_title">Pareti Automatiche</string>
+  <string name="pref_plot_walls_title">OPZIONI AUTO-PARETI</string>
   <string name="pref_walls_type_title">Tipo pareti</string>
   <string name="pref_walls_type_summary">Tipo pareti</string>
   <string name="pref_walls_plan_thr_title">Inclinazione per Splay in pianta</string>
