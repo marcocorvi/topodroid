@@ -101,7 +101,7 @@
      <item name="recent">Недавние</item>
      <item name="list">Список</item>
      <item name="grid">Сетка</item>
-     <!-- TODO item name="grid3">Triple grid</item -->
+     <item name="grid3">Тройная сетка</item>
   </string-array>
 
   <string-array name="sectionStations">
