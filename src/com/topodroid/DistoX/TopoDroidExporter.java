@@ -1899,6 +1899,179 @@ class TopoDroidExporter
   }
 
   // =======================================================================
+  // TOPO EXPORT ( CAV )
+
+  private static void printShotToCav( PrintWriter pw, AverageLeg leg, DistoXDBlock item, String eol, ArrayList ents )
+  {
+    if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+      pw.format("#duplicate%s", eol);
+    } else if ( item.mFlag == DistoXDBlock.BLOCK_SURFACE ) {
+      pw.format("#surface%s", eol);
+    }
+    if ( ents != null ) {
+      int s = ents.size();
+      for ( int k = 0; k < s; ++ k ) {
+        if ( ents.get(k).equals( item.mFrom ) ) {
+          pw.format("#ent%s", eol );
+          ents.remove( k );
+          break;
+        }
+      }
+    }
+    pw.format(Locale.US, "%s %s %.2f %.1f %.1f", item.mFrom, item.mTo, leg.length(), leg.bearing(), leg.clino() );
+    if ( item.mComment != null ) {
+      pw.format(" ; %s%s", item.mComment, eol );
+    } else {
+      pw.format("%s", eol );
+    }
+    if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+      pw.format("#end_duplicate%s", eol);
+    } else if ( item.mFlag == DistoXDBlock.BLOCK_SURFACE ) {
+      pw.format("#end_surface%s", eol);
+    }
+    leg.reset();
+  }
+
+  private static void printSplayToCav( PrintWriter pw, DistoXDBlock blk, String eol )
+  {
+    // if ( duplicate ) pw.format("#duplicate%s", eol);
+    pw.format(Locale.US, "%s - %.2f %.1f %.1f", blk.mFrom, blk.mLength, blk.mBearing, blk.mClino );
+    if ( blk.mComment != null ) {
+      pw.format(" ; %s%s", blk.mComment, eol );
+    } else {
+      pw.format("%s", eol );
+    }
+    // if ( duplicate ) pw.format("#end_duplicate%s", eol);
+  }
+
+  static long printCavExtend( PrintWriter pw, long extend, long item_extend, String eol )
+  {
+    if ( item_extend != extend ) { 
+      if ( item_extend == DistoXDBlock.EXTEND_LEFT ) {
+        pw.format("#R180%s", eol );
+      } else if ( item_extend == DistoXDBlock.EXTEND_RIGHT ) {
+        pw.format("#R0%s", eol );
+      } else if ( item_extend == DistoXDBlock.EXTEND_VERT ) {
+        pw.format("#PR[0]%s", eol );
+      }
+      return item_extend;
+    }
+    return extend;
+  }
+
+  static String exportSurveyAsCav( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    // Log.v("DistoX", "export as topo: " + filename );
+    String eol = TDSetting.mSurvexEol;
+    ArrayList< String > ents = null;
+
+    try {
+      TDPath.checkPath( filename );
+      FileWriter fw = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+
+      pw.format("#cave %s%s", info.name, eol );
+      pw.format("%% Made by: TopoDroid %s - %s%s", TopoDroidApp.VERSION, TopoDroidUtil.currentDate(), eol );
+
+      String date = info.date;
+      int y = 0;
+      int m = 0;
+      int d = 0;
+      if ( date != null && date.length() == 10 ) {
+        try {
+          y = Integer.parseInt( date.substring(0,4) );
+          m = Integer.parseInt( date.substring(5,7) );
+          d = Integer.parseInt( date.substring(8,10) );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "exportSurveyAsSrv date parse error " + date );
+        }
+      }
+      pw.format("#survey ^%s%s", info.name, eol );
+      if ( info.team != null ) pw.format("#survey_team %s %s", info.team, eol );
+      pw.format("#survey_date %02d.%02d.%04d %s", d, m, y, eol ); 
+      if ( info.comment != null ) pw.format("#survey_title %s %s", info.comment, eol );
+
+      pw.format(Locale.US, "#declination[%.1f] %s", info.declination, eol );
+      
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      if ( fixed.size() > 0 ) {
+        ents = new ArrayList< String >();
+        for ( FixedInfo fix : fixed ) {
+          ents.add( fix.name );
+          pw.format("; #point Point%s ", fix.name );
+          pw.format(Locale.US, "%.6f %.6f %.0f %s", fix.lng, fix.lat, fix.asl, eol );
+          break;
+        }
+      }
+
+      pw.format("#data_order L Az An%s", eol);
+      pw.format("#from_to%s", eol);
+      pw.format("#R0%s", eol);
+
+      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      AverageLeg leg = new AverageLeg(0);
+      DistoXDBlock ref_item = null;
+
+      long extend = 1;
+      int extra_cnt = 0;
+      boolean in_splay = false;
+      boolean duplicate = false;
+      LRUD lrud;
+
+      for ( DistoXDBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( from == null || from.length() == 0 ) {
+          if ( to == null || to.length() == 0 ) { // no station: not exported
+            if ( ref_item != null && 
+              ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
+            }
+          } else { // only TO station
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              printShotToCav( pw, leg, ref_item, eol, ents );
+              duplicate = false;
+              ref_item = null; 
+            }
+            extend = printCavExtend( pw, extend, item.mExtend, eol );
+            // TODO export TO splay
+          }
+        } else { // with FROM station
+          if ( to == null || to.length() == 0 ) { // splay shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+              printShotToCav( pw, leg, ref_item, eol, ents );
+              duplicate = false;
+              ref_item = null; 
+            }
+            extend = printCavExtend( pw, extend, item.mExtend, eol );
+            printSplayToCav( pw, item, eol );
+          } else {
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              printShotToCav( pw, leg, ref_item, eol, ents );
+            }
+            ref_item = item;
+            extend = printCavExtend( pw, extend, item.mExtend, eol );
+            leg.set( item.mLength, item.mBearing, item.mClino );
+          }
+        }
+      }
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        printShotToCav( pw, leg, ref_item, eol, ents );
+      }
+      pw.format( "%s", eol );
+      pw.format("#end_declination%s", eol);
+      pw.format("#end_survey%s", eol);
+
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed Polygon export: " + e.getMessage() );
+      return null;
+    }
+  }
+
+  // =======================================================================
   // POLYGON EXPORT 
 
   private static void printShotToPlg( PrintWriter pw, AverageLeg leg, LRUD lrud, boolean duplicate, String comment )

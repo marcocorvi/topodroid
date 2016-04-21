@@ -34,6 +34,7 @@ public class TDPath
   final static String CSV = ".csv";
   final static String CSX = ".csx";
   final static String CAVE = ".cave";
+  final static String CAV = ".cav";
   final static String DAT = ".dat";
   final static String DXF = ".dxf";
   final static String KML = ".kml";
@@ -74,27 +75,28 @@ public class TDPath
   static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
 
   private static String PATH_CAVE;   //  = PATH_BASE + "cave/";  // Polygon
-  private static String PATH_CSV ;   //  = PATH_BASE + "csv/";   // CSV text
-  private static String PATH_CSX ;   //  = PATH_BASE + "csx/";   // cSurvey
-  private static String PATH_DAT ;   //  = PATH_BASE + "dat/";   // Compass
-  private static String PATH_DUMP ;  //  = PATH_BASE + "dump/"; // DistoX memory dumps
-  private static String PATH_DXF ;   //  = PATH_BASE + "dxf/";
-  private static String PATH_KML ;   //  = PATH_BASE + "kml/";
-  private static String PATH_PLT ;   //  = PATH_BASE + "plt/";
+  private static String PATH_CAV;    //  = PATH_BASE + "cav/";   // Topo
+  private static String PATH_CSV;    //  = PATH_BASE + "csv/";   // CSV text
+  private static String PATH_CSX;    //  = PATH_BASE + "csx/";   // cSurvey
+  private static String PATH_DAT;    //  = PATH_BASE + "dat/";   // Compass
+  private static String PATH_DUMP;   //  = PATH_BASE + "dump/";  // DistoX memory dumps
+  private static String PATH_DXF;    //  = PATH_BASE + "dxf/";
+  private static String PATH_KML;    //  = PATH_BASE + "kml/";
+  private static String PATH_PLT;    //  = PATH_BASE + "plt/";
   private static String APP_FOTO_PATH;   //  = PATH_BASE + "photo/";
   private static String PATH_IMPORT; //  = PATH_BASE + "import/";
   private static String APP_NOTE_PATH;   //  = PATH_BASE + "note/";
   private static String PATH_PNG;    //  = PATH_BASE + "png/";
-  private static String PATH_SRV ;   //  = PATH_BASE + "srv/";
-  private static String PATH_SVG ;   //  = PATH_BASE + "svg/";
-  private static String PATH_SVX ;   //  = PATH_BASE + "svx/";
-  private static String PATH_TH  ;   //  = PATH_BASE + "th/";
-  private static String PATH_TDR ;   //  = PATH_BASE + "tdr/";
-  private static String PATH_TH2 ;   //  = PATH_BASE + "th2/";
-  private static String PATH_TH3 ;   //  = PATH_BASE + "th3/";
-  private static String APP_TMP_PATH ;   //  = PATH_BASE + "tmp/";
-  private static String PATH_TOP ;   //  = PATH_BASE + "top/";
-  private static String PATH_TRO ;   //  = PATH_BASE + "tro/";
+  private static String PATH_SRV;    //  = PATH_BASE + "srv/";
+  private static String PATH_SVG;    //  = PATH_BASE + "svg/";
+  private static String PATH_SVX;    //  = PATH_BASE + "svx/";
+  private static String PATH_TH;     //  = PATH_BASE + "th/";
+  private static String PATH_TDR;    //  = PATH_BASE + "tdr/";
+  private static String PATH_TH2;    //  = PATH_BASE + "th2/";
+  private static String PATH_TH3;    //  = PATH_BASE + "th3/";
+  private static String APP_TMP_PATH;    //  = PATH_BASE + "tmp/";
+  private static String PATH_TOP;    //  = PATH_BASE + "top/";
+  private static String PATH_TRO;    //  = PATH_BASE + "tro/";
   private static String PATH_ZIP;    //  = PATH_BASE + "zip/";
   // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
 
@@ -133,6 +135,9 @@ public class TDPath
 
     // APP_TLX_PATH = PATH_BASE + "tlx/";
     // checkDirs( APP_TLX_PATH );
+
+    PATH_CAV = PATH_BASE + "cav/";
+    // FIXME checkDirs( PATH_CAV );
 
     PATH_DAT = PATH_BASE + "dat/";
     // FIXME checkDirs( PATH_DAT );
@@ -287,6 +292,7 @@ public class TDPath
 
   static String getThFile( String name )     { return PATH_TH + name; }
   static String getCaveFile( String name )   { return PATH_CAVE + name; }
+  static String getCavFile( String name )    { return PATH_CAV + name; }
   static String getDatFile( String name )    { return PATH_DAT + name; }
   static String getDxfFile( String name )    { return PATH_DXF + name; }
   static String getKmlFile( String name )    { return PATH_KML + name; }
@@ -344,6 +350,7 @@ public class TDPath
   static String getSurveyCsxFile( String survey ) { return getFile( PATH_CSX, survey, CSX ); }
   static String getSurveyCsxFile( String survey, String name ) { return getFile( PATH_CSX, survey + "-" + name, CSX ); }
   static String getSurveyCaveFile( String survey ) { return getFile( PATH_CAVE, survey, CAVE ); }
+  static String getSurveyCavFile( String survey ) { return getFile( PATH_CAV, survey, CAV ); }
   static String getSurveyDatFile( String survey ) { return getFile( PATH_DAT, survey, DAT ); }
   static String getSurveyDxfFile( String survey ) { return getFile( PATH_DXF, survey, DXF ); }
   static String getSurveyKmlFile( String survey ) { return getFile( PATH_KML, survey, KML ); }
@@ -457,6 +464,7 @@ public class TDPath
     t = new File( getCsvFile( survey + CSV ) ); if ( t.exists() ) t.delete();
     t = new File( getCsxFile( survey + CSX ) ); if ( t.exists() ) t.delete();
     t = new File( getCaveFile( survey + CAVE ) ); if ( t.exists() ) t.delete();
+    t = new File( getCavFile( survey + CAV ) ); if ( t.exists() ) t.delete();
     t = new File( getDatFile( survey + DAT ) ); if ( t.exists() ) t.delete();
     t = new File( getDxfFile( survey + DXF ) ); if ( t.exists() ) t.delete();
     t = new File( getKmlFile( survey + KML ) ); if ( t.exists() ) t.delete();

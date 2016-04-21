@@ -217,6 +217,8 @@ public class Archiver
               pathname = TDPath.getCsxFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.CAVE ) ) {
               pathname = TDPath.getCaveFile( ze.getName() );
+            } else if ( ze.getName().endsWith( TDPath.CAV ) ) {
+              pathname = TDPath.getCavFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.DAT ) ) {
               pathname = TDPath.getDatFile( ze.getName() );
             } else if ( ze.getName().endsWith( TDPath.DXF ) ) {

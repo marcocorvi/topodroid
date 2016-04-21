@@ -44,6 +44,7 @@
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
      <item name="visualtopo">VisualTopo</item>
      <item name="walls">Walls</item>
      <item name="csv">CSV</item>

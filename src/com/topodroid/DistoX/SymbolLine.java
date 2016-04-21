@@ -50,7 +50,7 @@ public class SymbolLine extends Symbol
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
-  // @Override public void setAngle( float angle ) { }
+  // @Override public boolean setAngle( float angle ) { }
   // @Override public int getAngle() { return 0; }
 
   public String getGroup() { return mGroup; }

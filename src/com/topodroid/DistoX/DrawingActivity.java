@@ -3342,25 +3342,22 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
-  public void updateDisplay( boolean compute )
+  private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
-    if ( compute ) {
+    // if ( compute ) {
       List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
       computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      if ( mType == PlotInfo.PLOT_PLAN ) {
-        resetReference( mPlot1 );
-      } else if ( mType == PlotInfo.PLOT_EXTENDED || mType == PlotInfo.PLOT_PROFILE ) {
-        resetReference( mPlot2 );
-      }
-    }
-    if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-      resetReference( mPlot1 );
-    } else if ( PlotInfo.isProfile( mType ) ) {
-      resetReference( mPlot2 );
-    } else {
-      resetReference( mPlot3 );
-    }
+    // }
+    // if ( reference ) {
+    //   if ( mType == (int)PlotInfo.PLOT_PLAN ) {
+    //     resetReference( mPlot1 );
+    //   } else if ( PlotInfo.isProfile( mType ) ) {
+    //     resetReference( mPlot2 );
+    //   } else {
+    //     resetReference( mPlot3 );
+    //   }
+    // }
   }
 
   // forward adding data to the ShotActivity
@@ -3372,7 +3369,7 @@ public class DrawingActivity extends ItemDrawer
     } else {
       TDLog.Error("Null app mShotActivity on update list [1]");
     }
-    updateDisplay( true );
+    updateDisplay( /* true, false */ );
   }
 
   @Override
@@ -3383,7 +3380,7 @@ public class DrawingActivity extends ItemDrawer
     } else {
       TDLog.Error("Null app mShotActivity on update list [2]");
     }
-    updateDisplay( true );
+    updateDisplay( /* true, false */ );
   }
 
   @Override

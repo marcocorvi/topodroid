@@ -646,8 +646,8 @@
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
   <string name="pref_ortho_lrud_summary">Ángulo mínimo para tomas laterales</string>
   <string name="pref_ortho_lrud_message">Ángulo mínimo de tomas laterales</string>
-  <string name="pref_survex_eol_title">Terminación de línea Survex</string>
-  <string name="pref_survex_eol_summary">Terminación de línea Survex</string>
+  <string name="pref_survex_eol_title">Terminación de línea Survex/Topo</string>
+  <string name="pref_survex_eol_summary">Terminación de línea Survex/Topo</string>
   <string name="pref_survex_splay_title">Estación toma lateral Survex</string>
   <string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>

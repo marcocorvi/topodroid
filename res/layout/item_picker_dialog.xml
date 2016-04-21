@@ -68,14 +68,15 @@
         android:orientation="horizontal"
       >
         <Button android:id="@+id/size"
-            android:layout_width="wrap_content"
-            android:layout_weight="10"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10sp"
             android:background="@drawable/button"
             style="@style/button_default"
             android:text="-/+"
         />
+<!--
+            android:layout_weight="10"
           <com.topodroid.DistoX.ItemButton android:id="@+id/recent0"
             android:layout_width="0dp" 
             android:layout_height="wrap_content" 
@@ -99,6 +100,7 @@
             android:layout_height="wrap_content" 
             android:layout_weight="20"
           />
+-->
       </LinearLayout>
 
       <!-- ListView android:id="@+id/item_list"

@@ -37,6 +37,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private int mPos;    
   private int mType;
 
+
   /** get the item at a certain position in the list of symbols 
    */
   ItemSymbol get( int k )
@@ -65,6 +66,8 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
       mItems = new ArrayList< ItemSymbol >();
     }
   }
+
+  int size() { return mItems.size(); }
 
   // void rotatePoint( int index, int angle )
   // {

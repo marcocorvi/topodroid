@@ -26,7 +26,7 @@ public interface SymbolInterface
   void setEnabled( boolean enabled );
   void toggleEnabled();
   // void rotate( float angle );
-  void setAngle( float angle );
+  boolean setAngle( float angle ); // return true if symbol has rotated
   int getAngle();
 }
 

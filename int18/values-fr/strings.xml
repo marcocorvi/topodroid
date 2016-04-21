@@ -708,8 +708,8 @@
   <!-- TODO string name="pref_ortho_lrud_title">LRUD splay angle</string -->
   <!-- TODO string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string -->
   <!-- TODO string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string -->
-  <!-- TODO string name="pref_survex_eol_title">Survex line termination</string -->
-  <!-- TODO string name="pref_survex_eol_summary">Survex line termination</string -->
+  <!-- TODO string name="pref_survex_eol_title">Survex/Topo line termination</string -->
+  <!-- TODO string name="pref_survex_eol_summary">Survex/Topo line termination</string -->
   <!-- TODO string name="pref_survex_splay_title">Survex splays station</string -->
   <!-- TODO string name="pref_survex_splay_summary">Add TO station to splays in Survex</string -->
   <!-- TODO string name="pref_survex_lrud_title">Survex LRUD</string -->

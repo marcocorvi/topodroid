@@ -44,12 +44,19 @@ class ItemPickerDialog extends MyDialog
                        // , View.OnLongClickListener
                        // , AdapterView.OnItemClickListener
 {
+  private final static float DIMXP = 1.8f;
+  private final static float DIMXL = 2.2f;
+  private final static float DIMYL = 1.9f;
+
   private int mItemType; // items type
   private int mPointPos;  // item point position
   private int mLinePos;   // item line  position
   private int mAreaPos;   // item area  position
   private long mPlotType;
   private int mScale;
+  private int mSelectedPoint;
+  private int mSelectedLine;
+  private int mSelectedArea;
 
   private  Button mBTpoint;
   private  Button mBTline;
@@ -103,6 +110,9 @@ class ItemPickerDialog extends MyDialog
     mAreaLib = DrawingBrushPaths.mAreaLib;
 
     mScale = mParent.getPointScale();
+    mSelectedPoint = mParent.mCurrentPoint;
+    mSelectedLine  = mParent.mCurrentLine;
+    mSelectedArea  = mParent.mCurrentArea;
   }
 
   @Override
@@ -110,6 +120,8 @@ class ItemPickerDialog extends MyDialog
   {
     super.onCreate( savedInstanceState );
     // requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+    createAdapters();
     
     if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
       mUseText = false;
@@ -123,6 +135,16 @@ class ItemPickerDialog extends MyDialog
         mGridL.setVisibility( View.GONE );
         mGridA.setVisibility( View.GONE );
       } else {
+        LinearLayout.LayoutParams params;
+        params = new LinearLayout.LayoutParams( LayoutParams.FILL_PARENT, 0 );
+        params.weight = 10 + mPointAdapter.size();
+        mGrid.setLayoutParams(  params );
+        params = new LinearLayout.LayoutParams( LayoutParams.FILL_PARENT, 0 );
+        params.weight = 10 + mLineAdapter.size();
+        mGridL.setLayoutParams( params );
+        params = new LinearLayout.LayoutParams( LayoutParams.FILL_PARENT, 0 );
+        params.weight = 10 + mAreaAdapter.size();
+        mGridA.setLayoutParams( params );
       }
       // mGrid.setOnItemClickListener( this );
       // mGrid.setDividerHeight( 2 );
@@ -146,6 +168,7 @@ class ItemPickerDialog extends MyDialog
     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       mRecent[k] = new ItemButton( mContext );
       mRecent[k].setOnClickListener( this );
+      mRecentLayout.addView( mRecent[k] );
     }
     
     mBTpoint = (Button) findViewById(R.id.item_point);
@@ -158,14 +181,14 @@ class ItemPickerDialog extends MyDialog
     // mBTcancel  = (Button) findViewById(R.id.item_cancel );
     // mBTok    = (Button) findViewById(R.id.item_ok   );
 
-    if ( TDSetting.mPickerType == TDSetting.PICKER_GRID ) {
-      mBTpoint.setOnClickListener( this );
-      mBTline.setOnClickListener( this );
-      mBTarea.setOnClickListener( this );
-    } else {
+    if ( TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
       mBTpoint.setVisibility( View.GONE );
       mBTline.setVisibility( View.GONE );
       mBTarea.setVisibility( View.GONE );
+    } else {
+      mBTpoint.setOnClickListener( this );
+      mBTline.setOnClickListener( this );
+      mBTarea.setOnClickListener( this );
     }
     mBTsize.setOnClickListener( this );
     mBTsize.setOnLongClickListener( new View.OnLongClickListener() {
@@ -204,7 +227,6 @@ class ItemPickerDialog extends MyDialog
     // requestWindowFeature( Window.FEATURE_NO_TITLE );
 
     // Log.v( TopoDroidApp.TAG, "ItemPickerDialog ... createAdapters" );
-    createAdapters();
     updateList();
     updateRecentButtons( mItemType );
 
@@ -233,18 +255,24 @@ class ItemPickerDialog extends MyDialog
 
   private void setItemAngle( int angle )
   {
-    if ( mItemType == DrawingActivity.SYMBOL_POINT &&  mPointAdapter != null ) {
+    if ( mItemType == DrawingActivity.SYMBOL_POINT && mPointAdapter != null ) {
       int index = mPointAdapter.getSelectedPos();
       // Log.v("DistoX", "set item " + index + " angle " + angle );
-      mPointAdapter.setPointOrientation( index, angle );
+      // mPointAdapter.setPointOrientation( index, angle );
  
-      // ItemSymbol item = mPointAdapter.get( index );
-      // if ( item != null ) {
-      //   SymbolInterface symbol = item.mSymbol;
-      //   if ( symbol != null && symbol.isOrientable() ) {
-      //     symbol.setAngle( angle );
-      //   }
-      // }
+      ItemSymbol item = mPointAdapter.get( index );
+      if ( item != null ) {
+        item.setAngle( angle );
+        Symbol[] symbols = ItemDrawer.mRecentPoint;
+        for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+          Symbol p = symbols[k];
+          if ( p == null ) break;
+          if ( p == item.mSymbol ) {
+            mRecent[k].reset( p.getPaint(), p.getPath(), DIMXP, DIMXP );
+            break;
+          }
+        }
+      }
     }
   }
 
@@ -269,29 +297,36 @@ class ItemPickerDialog extends MyDialog
   {
     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       Symbol p = symbols[k];
-      if ( p == null ) break;
-      mRecent[k].reset( p.getPaint(), p.getPath(), sx, sy );
+      if ( p == null ) {
+        mRecent[k].setVisibility( View.INVISIBLE );
+      } else {
+        mRecent[k].reset( p.getPaint(), p.getPath(), sx, sy );
+        mRecent[k].setVisibility( View.VISIBLE );
+      }
     }
   }
 
   private void updateRecentButtons( int item_type ) 
   {
-    // float sx=1.0f, sy=1.0f;
-    if ( item_type == DrawingActivity.SYMBOL_POINT ) {
-      mBTsize.setVisibility( View.VISIBLE );
-      setRecentButtons( ItemDrawer.mRecentPoint, 1.5f, 1.5f ); // sx*1.5f, sy*1.5f
-    } else if ( item_type == DrawingActivity.SYMBOL_LINE ) {
-      mBTsize.setVisibility( View.GONE );
-      setRecentButtons( ItemDrawer.mRecentLine, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
-    } else if ( item_type == DrawingActivity.SYMBOL_AREA ) {
-      mBTsize.setVisibility( View.GONE );
-      setRecentButtons( ItemDrawer.mRecentArea, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
+    if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
+      // float sx=1.0f, sy=1.0f;
+      if ( item_type == DrawingActivity.SYMBOL_POINT ) {
+        mBTsize.setVisibility( View.VISIBLE );
+        setRecentButtons( ItemDrawer.mRecentPoint, DIMXP, DIMXP );
+      } else if ( item_type == DrawingActivity.SYMBOL_LINE ) {
+        mBTsize.setVisibility( View.GONE );
+        setRecentButtons( ItemDrawer.mRecentLine, DIMXL, DIMYL );
+      } else if ( item_type == DrawingActivity.SYMBOL_AREA ) {
+        mBTsize.setVisibility( View.GONE );
+        setRecentButtons( ItemDrawer.mRecentArea, DIMXL, DIMYL );
+      }
+    } else {
+      // nothing
     }
   }
         
   private void createAdapters()
   {
-
     // if ( TDSetting.mLevelOverBasic ) 
     {
       mPointAdapter = new ItemAdapter( mContext, this, DrawingActivity.SYMBOL_POINT, 
@@ -303,7 +338,7 @@ class ItemPickerDialog extends MyDialog
           mPointAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_POINT, i, p, mUseText ) );
         }
       }
-      mPointAdapter.setSelectedItem( mParent.mCurrentPoint );
+      mPointAdapter.setSelectedItem( mSelectedPoint );
     }
 
     mLineAdapter  = new ItemAdapter( mContext, this, DrawingActivity.SYMBOL_LINE,
@@ -315,7 +350,7 @@ class ItemPickerDialog extends MyDialog
         mLineAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_LINE, j, l, mUseText ) );
       }
     }
-    mLineAdapter.setSelectedItem( mParent.mCurrentLine ); 
+    mLineAdapter.setSelectedItem( mSelectedLine ); 
 
     // if ( TDSetting.mLevelOverBasic )
     {
@@ -328,60 +363,60 @@ class ItemPickerDialog extends MyDialog
           mAreaAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_AREA, k, a, mUseText ) );
         }
       }
-      mAreaAdapter.setSelectedItem( mParent.mCurrentArea );
+      mAreaAdapter.setSelectedItem( mSelectedArea );
     }
   }
 
   private void updateList()
   {
-    // Log.v( TopoDroidApp.TAG, "ItemPickerDialog ... updateList type " + mItemType );
-    switch ( mItemType ) {
-      case DrawingActivity.SYMBOL_POINT:
-        // if ( TDSetting.mLevelOverBasic )
-        {
-          mAdapter = mPointAdapter;
-          mBTpoint.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
-          mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
-          mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
-          mSeekBar.setVisibility( View.VISIBLE );
-          setSeekBarProgress();
-        }
-        break;
-      case DrawingActivity.SYMBOL_LINE:
-        mAdapter = mLineAdapter;
-        mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
-        mBTline.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
-        mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
-        mSeekBar.setVisibility( View.INVISIBLE );
-        break;
-      case DrawingActivity.SYMBOL_AREA:
-        // if ( TDSetting.mLevelOverBasic )
-        {
-          mAdapter = mAreaAdapter;
+    // Log.v( TopoDroidApp.TAG, "ItemPickerDialog ... update List type " + mItemType );
+    if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
+      switch ( mItemType ) {
+        case DrawingActivity.SYMBOL_POINT:
+          // if ( TDSetting.mLevelOverBasic )
+          {
+            mAdapter = mPointAdapter;
+            mBTpoint.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
+            mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
+            mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
+            mSeekBar.setVisibility( View.VISIBLE );
+            setSeekBarProgress();
+          }
+          break;
+        case DrawingActivity.SYMBOL_LINE:
+          mAdapter = mLineAdapter;
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
-          mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
-          mBTarea.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
+          mBTline.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
+          mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
           mSeekBar.setVisibility( View.INVISIBLE );
-        }
-        break;
-    }
-    if ( mAdapter != null ) {
-      if ( mList != null ) {
-        mList.setAdapter( mAdapter );
-        mList.invalidate();
-      } else if ( mGrid != null ) {
-        if ( TDSetting.mPickerType == TDSetting.PICKER_GRID ) {
+          break;
+        case DrawingActivity.SYMBOL_AREA:
+          // if ( TDSetting.mLevelOverBasic )
+          {
+            mAdapter = mAreaAdapter;
+            mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
+            mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
+            mBTarea.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
+            mSeekBar.setVisibility( View.INVISIBLE );
+          }
+          break;
+      }
+      if ( mAdapter != null ) {
+        if ( mList != null ) {
+          mList.setAdapter( mAdapter );
+          mList.invalidate();
+        } else if ( mGrid != null ) {
           mGrid.setAdapter( mAdapter );
           mGrid.invalidate();
-        } else {
-          mGrid.setAdapter( mPointAdapter );
-          mGrid.invalidate();
-          mGridL.setAdapter( mLineAdapter );
-          mGridL.invalidate();
-          mGridA.setAdapter( mAreaAdapter );
-          mGridA.invalidate();
         }
       }
+    } else {
+      mGrid.setAdapter( mPointAdapter );
+      mGrid.invalidate();
+      mGridL.setAdapter( mLineAdapter );
+      mGridL.invalidate();
+      mGridA.setAdapter( mAreaAdapter );
+      mGridA.invalidate();
     }
   }
 
@@ -395,17 +430,17 @@ class ItemPickerDialog extends MyDialog
         title.append( "] " );
         title.append( mContext.getResources().getString( R.string.POINT ) );
         title.append( " " );
-        title.append( mPointLib.getSymbolName( mParent.mCurrentPoint ) );
+        title.append( mPointLib.getSymbolName( mSelectedPoint ) );
         break;
       case DrawingActivity.SYMBOL_LINE: 
         title.append( mContext.getResources().getString( R.string.LINE ) );
         title.append( " " );
-        title.append( mLineLib.getSymbolName( mParent.mCurrentLine ) );
+        title.append( mLineLib.getSymbolName( mSelectedLine ) );
         break;
       case DrawingActivity.SYMBOL_AREA: 
         title.append( mContext.getResources().getString( R.string.AREA ) );
         title.append( " " );
-        title.append( mAreaLib.getSymbolName( mParent.mCurrentArea ) );
+        title.append( mAreaLib.getSymbolName( mSelectedArea ) );
         break;
     }
     // Log.v("DistoX", "set title " + title.toString() );
@@ -423,8 +458,8 @@ class ItemPickerDialog extends MyDialog
         if ( mPointAdapter != null /* && TDSetting.mLevelOverBasic */ ) {
           is = mPointAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type point pos " + index + " index " + is.mIndex );
-          mParent.mCurrentPoint = is.mIndex;
-          mParent.pointSelected( is.mIndex, false ); // mPointAdapter.getSelectedItem() );
+          mSelectedPoint = is.mIndex;
+          // mParent.pointSelected( is.mIndex, false ); // mPointAdapter.getSelectedItem() );
           setSeekBarProgress();
         }
         break;
@@ -433,8 +468,8 @@ class ItemPickerDialog extends MyDialog
           is = mLineAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type line pos " + index + " index " + is.mIndex );
           if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-            mParent.mCurrentLine = is.mIndex;
-            mParent.lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
+            mSelectedLine = is.mIndex;
+            // mParent.lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
           } else {
           }
           mSeekBar.setEnabled( false );
@@ -445,8 +480,8 @@ class ItemPickerDialog extends MyDialog
           // mAreaPos = index;
           is = mAreaAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type area pos " + index + " index " + is.mIndex );
-          mParent.mCurrentArea = is.mIndex;
-          mParent.areaSelected( is.mIndex, false ); // mAreaAdapter.getSelectedItem() );
+          mSelectedArea = is.mIndex;
+          // mParent.areaSelected( is.mIndex, false ); // mAreaAdapter.getSelectedItem() );
           mSeekBar.setEnabled( false );
         }
         break;
@@ -462,22 +497,22 @@ class ItemPickerDialog extends MyDialog
       case DrawingActivity.SYMBOL_POINT: 
         // if ( TDSetting.mLevelOverBasic ) 
         {
-          mParent.pointSelected( mParent.mCurrentPoint, false );
-          // mSeekBar.setEnabled( DrawingBrushPaths.mPointLib.isPointOrientable( mParent.mCurrentPoint ) );
+          // mParent.pointSelected( mSelectedPoint, false );
+          // mSeekBar.setEnabled( DrawingBrushPaths.mPointLib.isPointOrientable( mSelectedPoint ) );
           if ( mPointAdapter != null ) setTypeAndItem( mItemType, mPointAdapter.getSelectedPos() );
         }
         break;
       case DrawingActivity.SYMBOL_LINE: 
-        if ( ! PlotInfo.isAnySection( mPlotType ) ) {
-          mParent.lineSelected( mParent.mCurrentLine, false );
-        } else {
-        }
+        // if ( ! PlotInfo.isAnySection( mPlotType ) ) {
+        //   mParent.lineSelected( mSelectedLine, false );
+        // } else {
+        // }
         if ( mLineAdapter != null ) setTypeAndItem( mItemType, mLineAdapter.getSelectedPos() );
         break;
       case DrawingActivity.SYMBOL_AREA: 
         // if ( TDSetting.mLevelOverBasic ) 
         {
-          mParent.areaSelected( mParent.mCurrentArea, false );
+          // mParent.areaSelected( mSelectedArea, false );
           if ( mAreaAdapter != null ) setTypeAndItem( mItemType, mAreaAdapter.getSelectedPos() );
         }
         break;
@@ -490,8 +525,8 @@ class ItemPickerDialog extends MyDialog
   // {
   //   if ( mPointAdapter == null ) return;
   //   if ( TDSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
-  //     // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
-  //     mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
+  //     // Log.v( TopoDroidApp.TAG, "rotate point " + mSelectedPoint );
+  //     mPointAdapter.rotatePoint( mSelectedPoint, angle );
   //   }
   // }
 
@@ -499,12 +534,12 @@ class ItemPickerDialog extends MyDialog
   {
     if ( mPointAdapter == null ) return;
     if ( /* TDSetting.mLevelOverBasic && */ mItemType == DrawingActivity.SYMBOL_POINT ) {
-      // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
-      mPointAdapter.setPointOrientation( mParent.mCurrentPoint, angle );
+      // Log.v( TopoDroidApp.TAG, "rotate point " + mSelectedPoint );
+      mPointAdapter.setPointOrientation( mSelectedPoint, angle );
       // ItemSymbol item = mPointAdapter.getSelectedItem();
       // if ( item != null ) {
       //   angle -= (int) item.mSymbol.getAngle();
-      //   mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
+      //   mPointAdapter.rotatePoint( mSelectedPoint, angle );
       // }
     }
   }
@@ -514,51 +549,39 @@ class ItemPickerDialog extends MyDialog
   public void onBackPressed ()
   {
     // Log.v( TopoDroidApp.TAG, "onBackPressed type " + mItemType );
-    // itemSelected();
+    itemSelected();
     cancel();
   }
 
-  // private void itemSelected()
-  // {
-  //   switch ( mItemType ) {
-  //     case DrawingActivity.SYMBOL_POINT: 
-  //       // if ( TDSetting.mLevelOverBasic )
-  //       {
-  //         Log.v("DistoX", "selected point " + mParent.mCurrentPoint );
-  //         mParent.pointSelected( mParent.mCurrentPoint, true );
-  //       }
-  //       break;
-  //     case DrawingActivity.SYMBOL_LINE: 
-  //       Log.v("DistoX", "selected line " + mParent.mCurrentLine );
-  //       mParent.lineSelected( mParent.mCurrentLine, true ); 
-  //       break;
-  //     case DrawingActivity.SYMBOL_AREA: 
-  //       // if ( TDSetting.mLevelOverBasic )
-  //       {
-  //         Log.v("DistoX", "selected area " + mParent.mCurrentArea );
-  //         mParent.areaSelected( mParent.mCurrentArea, true );
-  //       }
-  //       break;
-  //   }
-  // }
+  private void itemSelected()
+  {
+    switch ( mItemType ) {
+      case DrawingActivity.SYMBOL_POINT: 
+        // if ( TDSetting.mLevelOverBasic )
+        {
+          // Log.v("DistoX", "selected point " + mSelectedPoint );
+          mParent.pointSelected( mSelectedPoint, true );
+        }
+        break;
+      case DrawingActivity.SYMBOL_LINE: 
+        // Log.v("DistoX", "selected line " + mSelectedLine );
+        mParent.lineSelected( mSelectedLine, true ); 
+        break;
+      case DrawingActivity.SYMBOL_AREA: 
+        // if ( TDSetting.mLevelOverBasic )
+        {
+          // Log.v("DistoX", "selected area " + mSelectedArea );
+          mParent.areaSelected( mSelectedArea, true );
+        }
+        break;
+    }
+  }
 
   @Override
   public void onClick(View view)
   {
     // Log.v("DistoX", "ItemPicker onClick()" );
     switch (view.getId()) {
-      case R.id.recent0:
-        setRecent(0);
-        break;
-      case R.id.recent1:
-        setRecent(1);
-        break;
-      case R.id.recent2:
-        setRecent(2);
-        break;
-      case R.id.recent3:
-        setRecent(3);
-        break;
       case R.id.item_point:
         // if ( TDSetting.mLevelOverBasic )
         {
@@ -596,10 +619,20 @@ class ItemPickerDialog extends MyDialog
           setTheTitle();
         }
         break;
-
-      default: 
-        break;
     }
+
+    try {
+      ItemButton iv = (ItemButton)view;
+      if ( iv != null ) {
+        for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
+          if ( iv == mRecent[k] ) {
+            setRecent( k );
+            return;
+          }
+        }
+      }
+    } catch ( ClassCastException e ) { } // it is ok
+     
     // dismiss();
   }
 
@@ -622,13 +655,14 @@ class ItemPickerDialog extends MyDialog
     }
     if ( p != null ) {
       if ( mAdapter != null ) mAdapter.setSelectedItem( p );
+      setSeekBarProgress();
     }
   } 
     
 
   public void closeDialog()
   {  
-    // itemSelected();
+    itemSelected();
     dismiss();
   }
 }

@@ -728,8 +728,8 @@
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
   <string name="pref_ortho_lrud_summary">Minimaler Hilfszug-Winkel für LRUD</string>
   <string name="pref_ortho_lrud_message">Minimaler Hilfszug-Winkel für LRUD</string>
-  <string name="pref_survex_eol_title">Survex Zeilenumbruch</string>
-  <string name="pref_survex_eol_summary">Survex Zeilenumbruch</string>
+  <string name="pref_survex_eol_title">Survex/Topo Zeilenumbruch</string>
+  <string name="pref_survex_eol_summary">Survex/Topo Zeilenumbruch</string>
   <string name="pref_survex_splay_title">Survex Hilfszug-Zielstationen</string>
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex-Export</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>

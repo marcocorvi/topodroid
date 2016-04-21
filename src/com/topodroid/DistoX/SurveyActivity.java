@@ -450,23 +450,26 @@ public class SurveyActivity extends Activity
             filename = mApp.exportSurveyAsDxf( num );
           }
           break;
-        case TDConst.DISTOX_EXPORT_KML:
+        case TDConst.DISTOX_EXPORT_KML: // KML
           filename = mApp.exportSurveyAsKml( ); // can return ""
           break;
-        case TDConst.DISTOX_EXPORT_PLT:
+        case TDConst.DISTOX_EXPORT_PLT: // Track file
           filename = mApp.exportSurveyAsPlt( ); // can return ""
           break;
         case TDConst.DISTOX_EXPORT_CSX:
           filename = mApp.exportSurveyAsCsx( null, null );
           break;
-        case TDConst.DISTOX_EXPORT_TOP:
+        case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
           filename = mApp.exportSurveyAsTop( null, null );
           break;
-        case TDConst.DISTOX_EXPORT_PLG:
+        case TDConst.DISTOX_EXPORT_SRV: // Walls
+          filename = mApp.exportSurveyAsSrv();
+          break;
+        case TDConst.DISTOX_EXPORT_PLG: // Polygon
           filename = mApp.exportSurveyAsPlg();
           break;
-        case TDConst.DISTOX_EXPORT_SRV:
-          filename = mApp.exportSurveyAsSrv();
+        case TDConst.DISTOX_EXPORT_CAV: // Topo
+          filename = mApp.exportSurveyAsCav( );
           break;
 
         case TDConst.DISTOX_EXPORT_TH:

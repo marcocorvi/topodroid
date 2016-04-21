@@ -1172,7 +1172,6 @@ public class TopoDroidApp extends Application
     if ( survey_stations <= 0 ) return;
     boolean shot_after_splays = TDSetting.mShotAfterSplays;
 
-
     boolean flip = false;
     // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
@@ -1419,6 +1418,17 @@ public class TopoDroidApp extends Application
     }
     String filename = TDPath.getSurveyCaveFile( mySurvey );
     return TopoDroidExporter.exportSurveyAsPlg( mSID, mData, info, filename );
+  }
+
+  public String exportSurveyAsCav()
+  {
+    SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) {
+      TDLog.Error("Export CAV null survey info. sid " + mSID );
+      return null;
+    }
+    String filename = TDPath.getSurveyCavFile( mySurvey );
+    return TopoDroidExporter.exportSurveyAsCav( mSID, mData, info, filename );
   }
 
   public String exportSurveyAsSvx()
@@ -1687,6 +1697,127 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------
 
+  private long addManualSplays( long at, String splay_station, String left, String right, String up, String down,
+                                float bearing, boolean horizontal )
+  {
+    long id;
+    long extend = 0L;
+    if ( left != null && left.length() > 0 ) {
+      float l = -1.0f;
+      try {
+        l = Float.parseFloat( left ) / TDSetting.mUnitLength;
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( "manual-shot parse error: left " + left );
+      }
+      if ( l >= 0.0f ) {
+        if ( horizontal ) { // WENS
+          extend = TDAzimuth.computeSplayExtend( 270 );
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
+          }
+        } else {
+          float b = bearing - 90.0f;
+          if ( b < 0.0f ) b += 360.0f;
+          extend = TDAzimuth.computeSplayExtend( b );
+          // b = in360( b );
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, l, b, 0.0f, 0.0f, extend, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, l, b, 0.0f, 0.0f, extend, 1, true );
+          }
+        }
+        mData.updateShotName( id, mSID, splay_station, "", true );
+      }
+    } 
+    if ( right != null && right.length() > 0 ) {
+      float r = -1.0f;
+      try {
+        r = Float.parseFloat( right ) / TDSetting.mUnitLength;
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( "manual-shot parse error: right " + right );
+      }
+      if ( r >= 0.0f ) {
+        if ( horizontal ) { // WENS
+          extend = TDAzimuth.computeSplayExtend( 90 );
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, r, 90.0f, 0.0f, 0.0f, extend, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, r, 90.0f, 0.0f, 0.0f, extend, 1, true );
+          }
+        } else {
+          float b = bearing + 90.0f;
+          if ( b >= 360.0f ) b -= 360.0f;
+          extend = TDAzimuth.computeSplayExtend( b );
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, r, b, 0.0f, 0.0f, extend, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, r, b, 0.0f, 0.0f, extend, 1, true );
+          }
+        }
+        mData.updateShotName( id, mSID, splay_station, "", true );
+      }
+    }
+    if ( up != null && up.length() > 0 ) {
+      float u = -1.0f;
+      try {
+        u = Float.parseFloat( up ) / TDSetting.mUnitLength;
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( "manual-shot parse error: up " + up );
+      }
+      if ( u >= 0.0f ) {
+        if ( horizontal ) {
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, u, 0.0f, 0.0f, 0.0f, 0L, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, u, 0.0f, 0.0f, 0.0f, 0L, 1, true );
+          }
+        } else {
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, u, 0.0f, 90.0f, 0.0f, 0L, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, u, 0.0f, 90.0f, 0.0f, 0L, 1, true );
+          }
+        }
+        mData.updateShotName( id, mSID, splay_station, "", true );
+      }
+    }
+    if ( down != null && down.length() > 0 ) {
+      float d = -1.0f;
+      try {
+        d = Float.parseFloat( down ) / TDSetting.mUnitLength;
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( "manual-shot parse error: down " + down );
+      }
+      if ( d >= 0.0f ) {
+        if ( horizontal ) {
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, d, 180.0f, 0.0f, 0.0f, 0L, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, d, 180.0f, 0.0f, 0.0f, 0L, 1, true );
+          }
+        } else {
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, d, 0.0f, -90.0f, 0.0f, 0L, 1, true );
+            ++at;
+          } else {
+            id = mData.insertShot( mSID, -1L, d, 0.0f, -90.0f, 0.0f, 0L, 1, true );
+          }
+        }
+        mData.updateShotName( id, mSID, splay_station, "", true );
+      }
+    }
+    return at;
+  }
+
   /** insert manual-data shot
    * @param at   id of the shot before which to insert the new shot (and LRUD)
    * 
@@ -1703,15 +1834,18 @@ public class TopoDroidApp extends Application
     long id;
 
     distance = (distance - mManualCalibrationLength)  / TDSetting.mUnitLength;
-    bearing  = (bearing  - mManualCalibrationAzimuth) / TDSetting.mUnitAngle;
     clino    = (clino    - mManualCalibrationClino)   / TDSetting.mUnitAngle;
+    float b  = bearing - TDSetting.mUnitAngle;
 
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
-         ( bearing < 0.0f || bearing >= 360.0f ) ) {
+         ( b < 0.0f || b >= 360.0f ) ) {
       Toast.makeText( this, R.string.illegal_data_value, Toast.LENGTH_SHORT ).show();
       return null;
     }
+    bearing = (bearing  - mManualCalibrationAzimuth) / TDSetting.mUnitAngle;
+    while ( bearing >= 360 ) bearing -= 360;
+    while ( bearing <    0 ) bearing += 360;
 
     if ( from != null && to != null && from.length() > 0 ) {
       // if ( mData.makesCycle( -1L, mSID, from, to ) ) {
@@ -1721,126 +1855,32 @@ public class TopoDroidApp extends Application
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot Data " + distance + " " + bearing + " " + clino );
         boolean horizontal = ( Math.abs( clino ) > TDSetting.mVThreshold );
         // TDLog.Log( TDLog.LOG_SHOT, "manual-shot SID " + mSID + " LRUD " + left + " " + right + " " + up + " " + down);
-        long extend = 0L;
-        if ( left != null && left.length() > 0 ) {
-          float l = -1.0f;
-          try {
-            l = Float.parseFloat( left ) / TDSetting.mUnitLength;
-          } catch ( NumberFormatException e ) {
-            TDLog.Error( "manual-shot parse error: left " + left );
-          }
-          if ( l >= 0.0f ) {
-            if ( horizontal ) { // WENS
-              extend = TDAzimuth.computeSplayExtend( 270 );
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, l, 270.0f, 0.0f, 0.0f, extend, 1, true );
-              }
-            } else {
-              float b = bearing - 90.0f;
-              if ( b < 0.0f ) b += 360.0f;
-              extend = TDAzimuth.computeSplayExtend( b );
-              // b = in360( b );
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, l, b, 0.0f, 0.0f, extend, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, l, b, 0.0f, 0.0f, extend, 1, true );
-              }
-            }
-            mData.updateShotName( id, mSID, splay_station, "", true );
-            if ( at >= 0L ) ++at;
-          }
-        } 
-        if ( right != null && right.length() > 0 ) {
-          float r = -1.0f;
-          try {
-            r = Float.parseFloat( right ) / TDSetting.mUnitLength;
-          } catch ( NumberFormatException e ) {
-            TDLog.Error( "manual-shot parse error: right " + right );
-          }
-          if ( r >= 0.0f ) {
-            if ( horizontal ) { // WENS
-              extend = TDAzimuth.computeSplayExtend( 90 );
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, r, 90.0f, 0.0f, 0.0f, extend, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, r, 90.0f, 0.0f, 0.0f, extend, 1, true );
-              }
-            } else {
-              float b = bearing + 90.0f;
-              if ( b >= 360.0f ) b -= 360.0f;
-              extend = TDAzimuth.computeSplayExtend( b );
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, r, b, 0.0f, 0.0f, extend, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, r, b, 0.0f, 0.0f, extend, 1, true );
-              }
-            }
-            mData.updateShotName( id, mSID, splay_station, "", true );
-            if ( at >= 0L ) ++at;
-          }
-        }
-        if ( up != null && up.length() > 0 ) {
-          float u = -1.0f;
-          try {
-            u = Float.parseFloat( up ) / TDSetting.mUnitLength;
-          } catch ( NumberFormatException e ) {
-            TDLog.Error( "manual-shot parse error: up " + up );
-          }
-          if ( u >= 0.0f ) {
-            if ( horizontal ) {
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, u, 0.0f, 0.0f, 0.0f, 0L, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, u, 0.0f, 0.0f, 0.0f, 0L, 1, true );
-              }
-            } else {
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, u, 0.0f, 90.0f, 0.0f, 0L, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, u, 0.0f, 90.0f, 0.0f, 0L, 1, true );
-              }
-            }
-            mData.updateShotName( id, mSID, splay_station, "", true );
-            if ( at >= 0L ) ++at;
-          }
-        }
-        if ( down != null && down.length() > 0 ) {
-          float d = -1.0f;
-          try {
-            d = Float.parseFloat( down ) / TDSetting.mUnitLength;
-          } catch ( NumberFormatException e ) {
-            TDLog.Error( "manual-shot parse error: down " + down );
-          }
-          if ( d >= 0.0f ) {
-            if ( horizontal ) {
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, d, 180.0f, 0.0f, 0.0f, 0L, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, d, 180.0f, 0.0f, 0.0f, 0L, 1, true );
-              }
-            } else {
-              if ( at >= 0L ) {
-                id = mData.insertShotAt( mSID, at, d, 0.0f, -90.0f, 0.0f, 0L, 1, true );
-              } else {
-                id = mData.insertShot( mSID, -1L, d, 0.0f, -90.0f, 0.0f, 0L, 1, true );
-              }
-            }
-            mData.updateShotName( id, mSID, splay_station, "", true );
-            if ( at >= 0L ) ++at;
-          }
-        }
-        if ( at >= 0L ) {
-          id = mData.insertShotAt( mSID, at, distance, bearing, clino, 0.0f, extend0, 1, true );
-        } else {
-          id = mData.insertShot( mSID, -1L, distance, bearing, clino, 0.0f, extend0, 1, true );
-        }
-        // String name = from + "-" + to;
-        mData.updateShotName( id, mSID, from, to, true );
-        mData.updateShotExtend( id, mSID, extend0, true ); // FIXME-EXTEND maybe not needed
-        // FIXME updateDisplay( );
+        if ( TDSetting.mShotAfterSplays ) {
+          at = addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
 
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, distance, bearing, clino, 0.0f, extend0, 1, true );
+          } else {
+            id = mData.insertShot( mSID, -1L, distance, bearing, clino, 0.0f, extend0, 1, true );
+          }
+          // String name = from + "-" + to;
+          mData.updateShotName( id, mSID, from, to, true );
+          mData.updateShotExtend( id, mSID, extend0, true ); // FIXME-EXTEND maybe not needed
+          // FIXME updateDisplay( );
+        } else {
+          if ( at >= 0L ) {
+            id = mData.insertShotAt( mSID, at, distance, bearing, clino, 0.0f, extend0, 1, true );
+            ++ at;
+          } else {
+            id = mData.insertShot( mSID, -1L, distance, bearing, clino, 0.0f, extend0, 1, true );
+          }
+          // String name = from + "-" + to;
+          mData.updateShotName( id, mSID, from, to, true );
+          mData.updateShotExtend( id, mSID, extend0, true ); // FIXME-EXTEND maybe not needed
+          // FIXME updateDisplay( );
+
+          addManualSplays( at, splay_station, left, right, up, down, bearing, horizontal );
+        }
         ret = mData.selectShot( id, mSID );
       }
     } else {

@@ -1957,14 +1957,14 @@ public class SketchActivity extends ItemDrawer
   public void updateBlockList( DistoXDBlock blk )
   {
     mApp.mShotActivity.updateBlockList( blk );
-    // FIXME FIXME updateDisplay( true );
+    // FIXME FIXME updateDisplay( true, true );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
     mApp.mShotActivity.updateBlockList( blk_id );
-    // FIXME FIXME updateDisplay( true );
+    // FIXME FIXME updateDisplay( true, true );
   }
 
   @Override

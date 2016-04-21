@@ -58,15 +58,15 @@ class SymbolPoint extends Symbol
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
   @Override
-  public void setAngle( float angle ) // degrees
+  public boolean setAngle( float angle ) // degrees
   {
-    if ( mOrientable ) {
-      float a = angle - (float)mOrientation;
-      if ( Math.abs(a) > 1 ) {
-        rotateGrad( a );
-      }
-      // Log.v("DistoX", "rotate point by " + a + " orientation " + (int)mOrientation );
+    if ( ! mOrientable ) return false;
+    float a = angle - (float)mOrientation;
+    if ( Math.abs(a) > 1 ) {
+      rotateGrad( a );
+      return true;
     }
+    return false;
   }
   @Override public int getAngle() { return (int)mOrientation; } // degrees
 

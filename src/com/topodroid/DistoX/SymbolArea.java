@@ -51,9 +51,9 @@ class SymbolArea extends Symbol
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
-  @Override public void setAngle( float angle ) 
+  @Override public boolean setAngle( float angle ) 
   {
-    if ( mBitmap == null ) return;
+    if ( mBitmap == null ) return false;
     TDLog.Error( "ERROR area symbol set orientation " + angle + " not supported" );
     // mOrientation = angle;
     // android.graphics.Matrix m = new android.graphics.Matrix();
@@ -62,6 +62,7 @@ class SymbolArea extends Symbol
     // m.postRotate( (float)mOrientation );
     // Bitmap bitmap = Bitmap.createBitmap( mBitmap, 0, 0, w, h, m, true );
     // makeShader( bitmap, mXMode, mYMode, false );
+    return false;
   }
 
   @Override public int getAngle() { return (int)mOrientation; }

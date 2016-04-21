@@ -88,7 +88,7 @@ class Symbol implements SymbolInterface
   public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   public void toggleEnabled() { mEnabled = ! mEnabled; }
 
-  public void setAngle( float angle ) {}
+  public boolean setAngle( float angle ) { return false; }
   public int getAngle() { return 0; }
 
 }
