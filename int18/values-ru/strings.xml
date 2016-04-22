@@ -404,9 +404,9 @@
     <string name="hide_splay">Боковые замеры</string>
 
     <string name="plan">ПЛАН</string>
-    <string name="extended">РАЗРЕЗ-Р</string>
+    <string name="extended">РАЗРЕЗ-РАЗВЕРТКА</string>
     <string name="extended_profile">Разрез-развертка</string>
-    <string name="profile">СПРОЕЦИРОВАТЬ.</string>
+    <string name="profile">РАЗРЕЗ-ПРОЕКЦИЯ</string>
     <!-- UNUSED string name="v_section">Верт-СЕЧЕНИЕ</string -->
     <string name="h_section">Гор-СЕЧЕНИЕ</string>
 
