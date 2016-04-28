@@ -18,6 +18,7 @@ import android.graphics.Path;
 import android.graphics.DashPathEffect;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Shader.TileMode;
 
 import android.content.res.Resources;
@@ -114,6 +115,8 @@ public class DrawingBrushPaths
   static Paint duplicateStationPaint = null;
   // static Paint stationPaint = null;
 
+  // static BitmapDrawable mSymbolHighlight = null;
+
   // ===========================================================================
   static boolean mReloadSymbols = true; // whether to reload symbols
 
@@ -123,6 +126,9 @@ public class DrawingBrushPaths
       mStationSymbol = new SymbolPoint( "station", "station", "station", 0xffff6633, 
         "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false );
     }
+    // if ( mSymbolHighlight == null ) {
+    //   mSymbolHighlight = MyButton.getButtonBackground( res, R.drawable.symbol_highlight );
+    // }
 
     if ( mPointLib == null ) mPointLib = new SymbolPointLibrary( res );
     if ( mLineLib == null ) mLineLib = new SymbolLineLibrary( res );

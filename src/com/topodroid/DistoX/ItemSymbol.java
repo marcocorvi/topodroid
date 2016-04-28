@@ -76,6 +76,7 @@ class ItemSymbol
       mCheckBox.setChecked( false );
       ll.addView( mCheckBox, lllp );
     }
+    lllp.setMargins(2,1,2,1);
 
     mButton   = new ItemButton( context, mSymbol.getPaint(), mSymbol.getPath(), sx, sy );
     ll.addView( mButton, lllp );
@@ -161,7 +162,12 @@ class ItemSymbol
     if ( mUseText ) {
       mCheckBox.setChecked( checked );
     } else {
-      mButton.setBackgroundColor( checked? 0x99333333 /* Color.DKGRAY */ : Color.BLACK );
+      mButton.setBackgroundColor( checked? 0xff444444 /* Color.DKGRAY */ : Color.BLACK ); // was 99333333
+      // if ( checked ) {
+      //   mButton.setBackgroundDrawable( DrawingBrushPaths.mSymbolHighlight );
+      // } else {
+      //   mButton.setBackgroundColor( Color.BLACK ); 
+      // }
     }
   }
 

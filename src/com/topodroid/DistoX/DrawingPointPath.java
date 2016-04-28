@@ -264,15 +264,18 @@ public class DrawingPointPath extends DrawingPath
 
     pw.format(Locale.US, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
                               DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
-    if ( mOrientation != 0.0 ) {
-      // TDLog.Log( TDLog.LOG_PATH, "point.toTherion type " + mPointType + " orientation " + mOrientation );
-      pw.format(Locale.US, " -orientation %.2f", mOrientation);
-    }
-
+    toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");
 
     return sw.getBuffer().toString();
+  }
+
+  protected void toTherionOrientation( PrintWriter pw )
+  {
+    if ( mOrientation != 0.0 ) {
+      pw.format(Locale.US, " -orientation %.2f", mOrientation);
+    }
   }
 
   protected void toTherionOptions( PrintWriter pw )

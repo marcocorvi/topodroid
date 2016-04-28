@@ -79,7 +79,6 @@ class ItemPickerDialog extends MyDialog
   private ItemAdapter mPointAdapter = null;
   private ItemAdapter mLineAdapter  = null;
   private ItemAdapter mAreaAdapter  = null;
-  private boolean mUseText = false;
   private ItemAdapter mAdapter = null;
 
   private LinearLayout mRecentLayout;
@@ -121,10 +120,10 @@ class ItemPickerDialog extends MyDialog
     super.onCreate( savedInstanceState );
     // requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-    createAdapters();
+    createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST 
+                   || TDSetting.mPickerType == TDSetting.PICKER_RECENT ) );
     
     if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
-      mUseText = false;
       setContentView(R.layout.item_picker2_dialog);
       getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
 
@@ -150,14 +149,13 @@ class ItemPickerDialog extends MyDialog
       // mGrid.setDividerHeight( 2 );
       mList = null;
     } else { // PICKER_LIST || PICKER_RECENT
-      mUseText = true;
       setContentView(R.layout.item_picker_dialog);
       getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
 
-      //* mList = (ListView) findViewById(R.id.item_list);
+      // * mList = (ListView) findViewById(R.id.item_list);
       mList = (GridView) findViewById(R.id.item_list);
       // mList.setOnItemClickListener( this );
-      //* mList.setDividerHeight( 1 );
+      // * mList.setDividerHeight( 1 );
       mGrid  = null;
       mGridL = null;
       mGridA = null;
@@ -165,10 +163,14 @@ class ItemPickerDialog extends MyDialog
 
     mRecentLayout = (LinearLayout) findViewById( R.id.layout2 );
     mRecent = new ItemButton[ TDSetting.mRecentNr ];
+    int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
+    int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
+    LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
+    lllp.setMargins(5, 2, 5, 2);
     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
       mRecent[k] = new ItemButton( mContext );
       mRecent[k].setOnClickListener( this );
-      mRecentLayout.addView( mRecent[k] );
+      mRecentLayout.addView( mRecent[k], lllp );
     }
     
     mBTpoint = (Button) findViewById(R.id.item_point);
@@ -325,7 +327,7 @@ class ItemPickerDialog extends MyDialog
     }
   }
         
-  private void createAdapters()
+  private void createAdapters( boolean use_text )
   {
     // if ( TDSetting.mLevelOverBasic ) 
     {
@@ -335,7 +337,7 @@ class ItemPickerDialog extends MyDialog
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
         if ( p.isEnabled() ) {
-          mPointAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_POINT, i, p, mUseText ) );
+          mPointAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_POINT, i, p, use_text ) );
         }
       }
       mPointAdapter.setSelectedItem( mSelectedPoint );
@@ -347,7 +349,7 @@ class ItemPickerDialog extends MyDialog
     for ( int j=0; j<nl; ++j ) {
       SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
       if ( l.isEnabled() ) {
-        mLineAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_LINE, j, l, mUseText ) );
+        mLineAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_LINE, j, l, use_text ) );
       }
     }
     mLineAdapter.setSelectedItem( mSelectedLine ); 
@@ -360,7 +362,7 @@ class ItemPickerDialog extends MyDialog
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
         if ( a.isEnabled() ) {
-          mAreaAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_AREA, k, a, mUseText ) );
+          mAreaAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_AREA, k, a, use_text ) );
         }
       }
       mAreaAdapter.setSelectedItem( mSelectedArea );

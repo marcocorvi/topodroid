@@ -1180,6 +1180,35 @@ class DistoXNum
     }
   }
 
+  // follow a shot
+  // good for a single line without crosses
+  private ArrayList<NumShot> followShot( NumBranch br, NumStation st, boolean after )
+  {
+    ArrayList<NumShot> ret = new ArrayList<NumShot>();
+    boolean found = true;
+    while ( found ) {
+      found = false;
+      for ( NumShot shot1 : mShots ) {
+        if ( shot1.branch != null ) continue;
+        if ( shot1.from == st ) {
+          shot1.mBranchDir = after? 1 : -1;
+          st = shot1.to;
+          found = true;
+        } else if ( shot1.to == st ) {
+          shot1.mBranchDir = after? -1 : 1;
+          st = shot1.from;
+          found = true;
+        }
+        if ( found ) {
+          shot1.branch = br;
+          ret.add( shot1 );
+          break;
+        } 
+      }
+    }
+    return ret;
+  }
+
   /* make branches from this num nodes
    * @param also_cross_end     whether to include branches to end-points
    */
@@ -1195,54 +1224,75 @@ class DistoXNum
     //   Log.v("DistoX", "node " + nd.station.name + " branches " + nd.branches.size() );
     // }
     ArrayList< NumBranch > branches = new ArrayList<NumBranch>();
-    for ( NumNode node : nodes ) {
-      for ( NumShot shot : node.shots ) {
-        if ( shot.branch != null ) continue;
-        NumBranch branch = new NumBranch( NumBranch.BRANCH_CROSS_CROSS, node );
-        NumStation sf0 = node.station;
-        NumShot sh0    = shot;
-        NumStation st0 = sh0.to;
-        if ( sh0.from == sf0 ) { 
-          sh0.mBranchDir = 1;
-          // st0 = sh0.to;
-        } else {
-          sh0.mBranchDir = -1; // swap stations
-          st0 = sh0.from;
-        }
-        while ( st0 != sf0 ) { // follow the shot 
-          branch.addShot( sh0 ); // add shot to branch and find next shot
-          sh0.branch = branch;
-          if ( st0.node != null ) { // end-of-branch
-            branch.setLastNode( st0.node );
-            branches.add( branch );
-            break;
+    if ( nodes.size() > 0 ) {
+      for ( NumNode node : nodes ) {
+        for ( NumShot shot : node.shots ) {
+          if ( shot.branch != null ) continue;
+          NumBranch branch = new NumBranch( NumBranch.BRANCH_CROSS_CROSS, node );
+          NumStation sf0 = node.station;
+          NumShot sh0    = shot;
+          NumStation st0 = sh0.to;
+          if ( sh0.from == sf0 ) { 
+            sh0.mBranchDir = 1;
+            // st0 = sh0.to;
+          } else {
+            sh0.mBranchDir = -1; // swap stations
+            st0 = sh0.from;
           }
-          NumShot sh1 = st0.s1;
-          if ( sh1 == sh0 ) { sh1 = st0.s2; }
-          if ( sh1 == null ) { // dangling station: CROSS_END branch --> drop
-            // mEndBranches.add( branch );
+          while ( st0 != sf0 ) { // follow the shot 
+            branch.addShot( sh0 ); // add shot to branch and find next shot
+            sh0.branch = branch;
+            if ( st0.node != null ) { // end-of-branch
+              branch.setLastNode( st0.node );
+              branches.add( branch );
+              break;
+            }
+            NumShot sh1 = st0.s1;
+            if ( sh1 == sh0 ) { sh1 = st0.s2; }
+            if ( sh1 == null ) { // dangling station: CROSS_END branch --> drop
+              // mEndBranches.add( branch );
+              if ( also_cross_end ) {
+                branch.setLastNode( st0.node );
+                branches.add( branch );
+              }
+              break;
+            }
+            if ( sh1.from == st0 ) { // move forward
+              sh1.mBranchDir = 1;
+              st0 = sh1.to; 
+            } else {  
+              sh1.mBranchDir = -1; // swap
+              st0 = sh1.from;
+            }
+            sh0 = sh1;
+          }
+          if ( st0 == sf0 ) { // closed-loop ???
+            // TDLog.Error( "ERROR closed loop in num branches");
             if ( also_cross_end ) {
               branch.setLastNode( st0.node );
               branches.add( branch );
             }
-            break;
-          }
-          if ( sh1.from == st0 ) { // move forward
-            sh1.mBranchDir = 1;
-            st0 = sh1.to; 
-          } else {  
-            sh1.mBranchDir = -1; // swap
-            st0 = sh1.from;
-          }
-          sh0 = sh1;
-        }
-        if ( st0 == sf0 ) { // closed-loop ???
-          // TDLog.Error( "ERROR closed loop in num branches");
-          if ( also_cross_end ) {
-            branch.setLastNode( st0.node );
-            branches.add( branch );
           }
         }
+      }
+    } else if ( also_cross_end ) { // no nodes: only end-end lines
+      for ( NumShot shot : mShots ) {
+        if ( shot.branch != null ) continue;
+        NumBranch branch = new NumBranch( NumBranch.BRANCH_END_END, null );
+        shot.branch = branch;
+
+        ArrayList< NumShot > shots_after  = followShot( branch, shot.to,   true );
+        ArrayList< NumShot > shots_before = followShot( branch, shot.from, false );
+        for ( int k=shots_before.size() - 1; k>=0; --k ) {
+          NumShot sh = shots_before.get( k );
+          branch.addShot( sh );
+        }
+        branch.addShot( shot );
+        for ( NumShot sh : shots_after ) {
+          branch.addShot( sh );
+        }
+        branch.setLastNode( null );
+        branches.add( branch );
       }
     }
     return branches;

@@ -3051,7 +3051,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\" );\n",
+                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\" );\n",
                      PHOTO_TABLE,
                      sid,
                      cursor.getLong(0),   // id

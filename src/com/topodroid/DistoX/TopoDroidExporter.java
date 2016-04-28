@@ -1109,6 +1109,7 @@ class TopoDroidExporter
       }
       writeSurvexLine(pw, "  *flags not splay");
 
+      // Log.v("DistoX", "Station blocks " + st_blk.size() );
       if ( TDSetting.mSurvexLRUD && st_blk.size() > 0 ) {
         String from = null;
         for ( int k=0; k<st_blk.size(); ++k ) { 
@@ -1121,10 +1122,14 @@ class TopoDroidExporter
           boolean do_header = true;
           DistoXNum num = new DistoXNum( list, from, null, null, 0.0f ); // no declination
           List<NumBranch> branches = num.makeBranches( true );
+          // Log.v("DistoX", "Station " + from + " shots " + num.shotsNr() + " splays " + num.splaysNr()
+          //               + " branches " + branches.size() );
+
           for ( NumBranch branch : branches ) {
             // ArrayList<String> stations = new ArrayList<String>();
             ArrayList<NumShot> shots = branch.shots;
             int size = shots.size();
+            // Log.v("DistoX", "branch shots " + size );
             if ( size > 0 ) {
               if ( do_header ) {
                 pw.format("*data passage station left right up down"); writeSurvexEOL( pw );
@@ -1188,7 +1193,7 @@ class TopoDroidExporter
                     writeSurvexLRUD( pw, blk.mTo, computeLRUD( blk, list, false ), ul );
                     st_name = blk.mTo;
                   } else {
-                    Log.e("DistoX", "ERROR unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
+                    TDLog.Error("ERROR unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
                     break;
                   }
                 }
@@ -1901,13 +1906,24 @@ class TopoDroidExporter
   // =======================================================================
   // TOPO EXPORT ( CAV )
 
-  private static void printShotToCav( PrintWriter pw, AverageLeg leg, DistoXDBlock item, String eol, ArrayList ents )
+  private static long printFlagToCav( PrintWriter pw, long old_flag, long new_flag, String eol )
   {
-    if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
+    if ( old_flag == new_flag ) return old_flag;
+    if ( old_flag == DistoXDBlock.BLOCK_DUPLICATE ) {
+      pw.format("#end_duplicate%s", eol);
+    } else if ( old_flag == DistoXDBlock.BLOCK_SURFACE ) {
+      pw.format("#end_surface%s", eol);
+    }
+    if ( new_flag == DistoXDBlock.BLOCK_DUPLICATE ) {
       pw.format("#duplicate%s", eol);
-    } else if ( item.mFlag == DistoXDBlock.BLOCK_SURFACE ) {
+    } else if ( new_flag == DistoXDBlock.BLOCK_SURFACE ) {
       pw.format("#surface%s", eol);
     }
+    return new_flag;
+  }
+
+  private static void printShotToCav( PrintWriter pw, AverageLeg leg, DistoXDBlock item, String eol, ArrayList ents )
+  {
     if ( ents != null ) {
       int s = ents.size();
       for ( int k = 0; k < s; ++ k ) {
@@ -1923,11 +1939,6 @@ class TopoDroidExporter
       pw.format(" ; %s%s", item.mComment, eol );
     } else {
       pw.format("%s", eol );
-    }
-    if ( item.mFlag == DistoXDBlock.BLOCK_DUPLICATE ) {
-      pw.format("#end_duplicate%s", eol);
-    } else if ( item.mFlag == DistoXDBlock.BLOCK_SURFACE ) {
-      pw.format("#end_surface%s", eol);
     }
     leg.reset();
   }
@@ -2013,10 +2024,9 @@ class TopoDroidExporter
       DistoXDBlock ref_item = null;
 
       long extend = 1;
-      int extra_cnt = 0;
-      boolean in_splay = false;
-      boolean duplicate = false;
-      LRUD lrud;
+      long flag = 0;
+      // boolean in_splay = false;
+      // LRUD lrud;
 
       for ( DistoXDBlock item : list ) {
         String from = item.mFrom;
@@ -2029,8 +2039,8 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
+              flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
-              duplicate = false;
               ref_item = null; 
             }
             extend = printCavExtend( pw, extend, item.mExtend, eol );
@@ -2039,14 +2049,15 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+              flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
-              duplicate = false;
               ref_item = null; 
             }
             extend = printCavExtend( pw, extend, item.mExtend, eol );
             printSplayToCav( pw, item, eol );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
+              flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
             }
             ref_item = item;
@@ -2056,8 +2067,10 @@ class TopoDroidExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
+        flag = printFlagToCav( pw, flag, ref_item.mFlag, eol );
         printShotToCav( pw, leg, ref_item, eol, ents );
-      }
+      }      
+      flag = printFlagToCav( pw, flag, 0, eol );
       pw.format( "%s", eol );
       pw.format("#end_declination%s", eol);
       pw.format("#end_survey%s", eol);
