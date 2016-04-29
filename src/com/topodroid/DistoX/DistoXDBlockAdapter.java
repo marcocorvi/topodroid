@@ -117,6 +117,12 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   }
 
   public DistoXDBlock get( int pos ) { return mItems.get(pos); }
+
+  // public DistoXDBlock getBlockById( long id ) 
+  // {
+  //   for ( DistoXDBlock b : mItems ) if ( b.mId == id ) return b;
+  //   return null;
+  // }
  
   private class ViewHolder
   { 
@@ -229,19 +235,21 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
  
   // called by ShotActivity::updateShot()
   //
-  void updateBlockView( DistoXDBlock blk ) 
+  DistoXDBlock updateBlockView( long blk_id ) 
   {
-    for ( int k=0; k<mItems.size(); ++k ) {
-      if ( mItems.get(k) == blk) {
-        View v = blk.mView;
+    for ( DistoXDBlock b : mItems ) {
+      if ( b.mId == blk_id ) { // use block id instead of block itself
+        View v = b.mView;
         if ( v != null ) {
           ViewHolder holder = (ViewHolder) v.getTag();
-          if ( holder != null ) setViewText( holder, blk );
-          v.setVisibility( blk.mVisible );
+          if ( holder != null ) setViewText( holder, b );
+          v.setVisibility( b.mVisible );
+          v.invalidate();
         }
-        return;
+        return b;
       }
     }
+    return null;
   }
 
 

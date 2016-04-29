@@ -1264,7 +1264,7 @@ public class ShotActivity extends Activity
     blk.mLength  = d;
     blk.mBearing = b;
     blk.mClino   = c;
-    mDataAdapter.updateBlockView( blk );
+    mDataAdapter.updateBlockView( blk.mId );
   }
 
   void updateShot( String from, String to, long extend, long flag, boolean leg, String comment, DistoXDBlock blk )
@@ -1286,7 +1286,15 @@ public class ShotActivity extends Activity
         mApp.mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
       }
     }
-    mDataAdapter.updateBlockView( blk );
+    DistoXDBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
+    if ( blk3 != blk && blk3 != null ) {
+      blk3.setName( from, to );
+      blk3.mExtend  = extend;
+      blk3.mFlag    = flag;
+      blk3.mComment = comment;
+      // FIXME if ( leg ) blk3.mType = DistoXDBlock.BLOCK_SEC_LEG;
+      mDataAdapter.updateBlockView( blk3.mId );
+    }
   }
 
   
@@ -1317,7 +1325,7 @@ public class ShotActivity extends Activity
         b.setName( from, to );
         mApp.mData.updateShotName( b.mId, mApp.mSID, from, to, true );
       }
-      mDataAdapter.updateBlockView( b );
+      mDataAdapter.updateBlockView( b.mId );
     }
   }
 
