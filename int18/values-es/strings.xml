@@ -220,6 +220,7 @@
     <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
+    <!-- TODO string name="no_sketch">No 3D sketch</string -->
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
     <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_thmanager">ThManager no instalado</string>

@@ -68,9 +68,9 @@
   <string name="ShotDialog">page_shot_edit1.htm</string>
   <string name="ShotDisplayDialog">page_displaymode.htm</string>
   <string name="ShotNewDialog">page_man_data.htm</string>
-  <!-- string name="Sketch3dNewDialog"></string -->
-  <!-- string name="SketchModeDialog"></string -->
-  <!-- string name="SketchNewShotDialog"></string -->
+  <string name="Sketch3dNewDialog">page_todo.htm</string>
+  <string name="SketchModeDialog">page_todo.htm</string>
+  <string name="SketchNewShotDialog">page_todo.htm</string>
   <string name="SurveyCalibrationDialog">page_survey_calib.htm</string>
   <string name="SurveyNewDialog">page_new_survey.htm</string>
   <string name="SurveyRenameDialog">page_survey_rename.htm</string>

@@ -33,6 +33,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 
+import android.util.Log;
+
 
 public class SensorActivity extends Activity
                             implements View.OnClickListener
@@ -40,6 +42,8 @@ public class SensorActivity extends Activity
   private TopoDroidApp app;
   private SensorManager mSensorManager;
   private float[] mValues;
+  private float mAlpha = 0.85f;
+  private boolean mFirst;
   private int mSensorType; // current sensor type
   private ArrayList< Sensor > mSensor;
 
@@ -66,6 +70,10 @@ public class SensorActivity extends Activity
     setContentView(R.layout.sensor_activity);
     app = (TopoDroidApp) getApplication();
     mSensorManager = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
+
+    mValues = new float[3];
+    mFirst  = true;
+    mAlpha  = 0.8f;
 
     mRBLight         = ( RadioButton ) findViewById( R.id.sensor_light );
     mRBMagnetic      = ( RadioButton ) findViewById( R.id.sensor_magnetic_field );
@@ -173,6 +181,8 @@ public class SensorActivity extends Activity
       mSensorManager.unregisterListener(mListener);
     }
     if ( mSensorType != -1 ) {
+      mFirst = true;
+      mAlpha = 0.8f;
       registerSensorEventListener();
     }
   }
@@ -192,11 +202,12 @@ public class SensorActivity extends Activity
   private final SensorEventListener mListener = new SensorEventListener() 
   {
     @Override
-    public void onSensorChanged( SensorEvent event) // int sensor, float[] values)
+    public void onSensorChanged( SensorEvent event)
     {
       if ( event.sensor.getType() == mSensorType ) {
-        mValues = event.values;
-        // TDLog.Log( TDLog.LOG_SENSOR, "sensorChanged (" + mValues[0] + ", " + mValues[1] + ", " + mValues[2] + ")");
+        // TDLog.Log( TDLog.LOG_SENSOR,
+        //   "sensorChanged (" + evenmt.values[0] + ", " + evenmt.values[1] + ", " + evenmt.values[2] + ")");
+        if ( mFirst ) Log.v("DistoX", "sensor changed first " + event.values[0] );
         String value = "";
         switch ( mSensorType ) {
           case Sensor.TYPE_LIGHT:
@@ -204,14 +215,30 @@ public class SensorActivity extends Activity
           case Sensor.TYPE_TEMPERATURE:
           case Sensor.TYPE_PRESSURE:
           // case Sensor.TYPE_RELATIVE_HUMIDITY:
+            if ( mFirst ) {
+              mValues[0] = event.values[0];
+              mFirst = false;
+            } else {
+              mValues[0] = ( 1 - mAlpha ) * mValues[0] + mAlpha * event.values[0];
+              if ( mAlpha > 0.01f ) mAlpha *= 0.9f;
+            }
             value = String.format(Locale.US, "%.2f", mValues[0] );
             break;
           case Sensor.TYPE_MAGNETIC_FIELD:
           case Sensor.TYPE_ORIENTATION:
           // case Sensor.TYPE_ACCELEROMETER:
-            value = String.format(Locale.US, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
-            break;
           default:
+            if ( mFirst ) {
+              mFirst = false;
+              mValues[0] = event.values[0];
+              mValues[1] = event.values[1];
+              mValues[2] = event.values[2];
+            } else {
+              mValues[0] = ( 1 - mAlpha ) * mValues[0] + mAlpha * event.values[0];
+              mValues[1] = ( 1 - mAlpha ) * mValues[1] + mAlpha * event.values[1];
+              mValues[2] = ( 1 - mAlpha ) * mValues[2] + mAlpha * event.values[2];
+              if ( mAlpha > 0.01f ) mAlpha *= 0.9f;
+            }
             value = String.format(Locale.US, "%.2f %.2f %.2f", mValues[0], mValues[1], mValues[2] );
             break;
         }
@@ -223,6 +250,8 @@ public class SensorActivity extends Activity
     public void onAccuracyChanged( Sensor sensor, int accuracy )
     {
       // TODO Auto-generated method stub
+      mFirst = true;
+      mAlpha = 0.8f;
     }
   };
 

@@ -26,10 +26,9 @@ import android.view.View.OnClickListener;
 
 import android.widget.Toast;
 
-public class SketchModeDialog extends Dialog
+public class SketchModeDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private Context mContext;
   private SketchModel mParent;
 
   private RadioButton mRBsingle;
@@ -41,8 +40,7 @@ public class SketchModeDialog extends Dialog
 
   public SketchModeDialog( Context context, SketchModel parent )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.SketchModeDialog );
     mParent  = parent;
   }
 
@@ -51,7 +49,9 @@ public class SketchModeDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.sketch_mode_dialog);
+
+    initLayout( R.layout.sketch_mode_dialog, R.string.title_sketch_refs );
+    
     mRBsingle  = (RadioButton) findViewById(R.id.sketch_mode_single);
     mRBngbh    = (RadioButton) findViewById(R.id.sketch_mode_ngbh);
     mRBall     = (RadioButton) findViewById(R.id.sketch_mode_all);
@@ -72,8 +72,6 @@ public class SketchModeDialog extends Dialog
     mBtnOK.setOnClickListener( this );
     // mBtnCancel = (Button) findViewById(R.id.button_cancel);
     // mBtnCancel.setOnClickListener( this );
-
-    setTitle( mContext.getResources().getString( R.string.title_sketch_refs ) );
   }
 
   @Override

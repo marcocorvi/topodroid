@@ -2961,6 +2961,23 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
+   public boolean hasSketch3d( long sid, String name )
+   {
+     boolean ret = false;
+     if ( myDB != null && name != null ) {
+       Cursor cursor = myDB.query( SKETCH_TABLE, new String[] { "id" },
+                            WHERE_SID_NAME,
+                            new String[] { Long.toString(sid), name },
+                            null, null, null );
+       if ( cursor != null ) {
+         ret = (cursor.moveToFirst() );
+         if ( !cursor.isClosed()) cursor.close();
+       }
+     }
+     return ret;
+   }
+
+
    public long insertSketch3d( long sid, long id, String name, long status, String start, String st1, String st2,
                            double xoffsettop, double yoffsettop, double zoomtop,
                            double xoffsetside, double yoffsetside, double zoomside,

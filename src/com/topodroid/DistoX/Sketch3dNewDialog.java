@@ -26,10 +26,9 @@ import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Toast;
 
-public class Sketch3dNewDialog extends Dialog
+public class Sketch3dNewDialog extends MyDialog
                                implements View.OnClickListener
 {
-  private Context mContext;
   private TopoDroidApp mApp;
   private INewPlot mMaker;
 
@@ -42,8 +41,7 @@ public class Sketch3dNewDialog extends Dialog
 
   public Sketch3dNewDialog( Context context, INewPlot maker, TopoDroidApp app )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.Sketch3dNewDialog );
     mApp    = app;
     mMaker  = maker;
   }
@@ -53,8 +51,8 @@ public class Sketch3dNewDialog extends Dialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.sketch3d_new_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    
+    initLayout( R.layout.sketch3d_new_dialog, R.string.title_sketch_new );
 
     mEditName  = (EditText) findViewById(R.id.edit_sketch3d_name);
     mEditStart = (EditText) findViewById(R.id.edit_sketch3d_start);

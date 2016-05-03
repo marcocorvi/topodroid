@@ -38,10 +38,9 @@ import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
 
 
-public class SketchNewShotDialog extends Dialog
+public class SketchNewShotDialog extends MyDialog
                                  implements View.OnClickListener
 {
-  private Context  mContext;
   private Button   mBtnOk;
   // private Button   mBtnCancel;
   private CheckBox mCBsplay;
@@ -63,8 +62,8 @@ public class SketchNewShotDialog extends Dialog
 
   SketchNewShotDialog( Context context, SketchActivity parent, TopoDroidApp app, String name )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.SketchNewShotDialog );
+
     mParent = parent;
     mApp    = app;
     mData   = app.mData;
@@ -82,8 +81,7 @@ public class SketchNewShotDialog extends Dialog
   {
     super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.sketch_new_shot_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.sketch_new_shot_dialog, R.string.title_sketch_shot );
 
     mBtnOk     = (Button) findViewById(R.id.btn_ok );
     // mBtnCancel = (Button) findViewById(R.id.button_cancel );
@@ -148,8 +146,6 @@ public class SketchNewShotDialog extends Dialog
     }
     mBtnOk.setOnClickListener( this );
     // mBtnCancel.setOnClickListener( this );
-
-    setTitle( R.string.title_sketch_shot );
   }
 
   public void onClick(View v) 

@@ -30,7 +30,7 @@ class TDSetting
   static final String[] key = { // prefs keys
     // ------------------------- PRIMARY PREFS
     "DISTOX_EXTRA_BUTTONS",       //  0 TODO move to general options
-    "DISTOX_SIZE_BUTTONS",        //  1
+    "DISTOX_BUTTON_SIZE",         //  1
     "DISTOX_TEXT_SIZE",           //  2
     "DISTOX_MKEYBOARD",           //  3
     "DISTOX_TEAM",                //  4
@@ -174,7 +174,7 @@ class TDSetting
   static boolean mLevelOverAdvanced     = false;
   static boolean mLevelOverExperimental = false;
 
-  static int mSizeButtons     = 1;      // action bar buttons scale (either 1 or 2)
+  static int mSizeButtons     = 42;      // action bar buttons scale (either 1 or 2)
   static int mTextSize        = 16;     // list text size 
   static boolean mKeyboard    = true;
 
@@ -527,7 +527,7 @@ class TDSetting
     mActivityLevel = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( app );
 
-    mSizeButtons = tryInt( prefs, key[k++], "1" ); // choice: 0, 1 // DISTOX_SIZE_BUTTONS
+    mSizeButtons = tryInt( prefs, key[k++], "42" ); // choice: 0, 1 // DISTOX_BUTTON_SIZE
     mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
     mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
     mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
@@ -702,12 +702,14 @@ class TDSetting
 
   static private void setActivityBooleans( Context ctx )
   {
-    String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
     mLevelOverBasic        = mActivityLevel > LEVEL_BASIC;
     mLevelOverNormal       = mActivityLevel > LEVEL_NORMAL;
     mLevelOverAdvanced     = mActivityLevel > LEVEL_ADVANCED;
     mLevelOverExperimental = mActivityLevel > LEVEL_EXPERIMENTAL;
-    // if ( "e5582eda21cafac3".equals( android_id ) ) mLevelOverExperimental = true;
+    if ( mLevelOverAdvanced ) {
+      String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
+      if ( "e5582eda21cafac3".equals( android_id ) ) mLevelOverExperimental = true;
+    }
     if ( ! mLevelOverAdvanced ) {
       mMagAnomaly = false;
     }
@@ -731,8 +733,8 @@ class TDSetting
           activity.setMenuAdapter( app.getResources() );
         }  
       }
-    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_SIZE_BUTTONS
-      int size = tryInt( prefs, k, "1" );
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BUTTON_SIZE
+      int size = tryInt( prefs, k, "42" );
       if ( size != mSizeButtons ) {
         mSizeButtons = size;
         if ( activity != null ) activity.resetButtonBar();

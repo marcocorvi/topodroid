@@ -224,6 +224,7 @@
     <string name="no_profile_overview">No overview for projected profiles</string>
     <string name="no_proj4">Proj4 not installed</string>
     <string name="no_sensors">Survey has no measurement</string>
+    <string name="no_sketch">No 3D sketch</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">No survey selected.</string>
     <string name="no_thmanager">ThManager app not installed</string>
@@ -480,6 +481,7 @@
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <string name="title_sketch_new">New 3D sketch</string>
     <!-- string name="title_sketch_edit">Edit 3D surface</string -->
     <string name="title_sketch_shot">New shot</string>
     <string name="title_sketch_refs">View mode</string>

@@ -1095,10 +1095,15 @@ public class ShotActivity extends Activity
     }
   }
  
-  private void startSketchActivity( String name )
+  void startSketchActivity( String name )
   {
     if ( mApp.mSID < 0 ) {
       Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+      return;
+    }
+
+    if ( ! mApp.mData.hasSketch3d( mApp.mSID, name ) ) {
+      Toast.makeText( this, R.string.no_sketch, Toast.LENGTH_SHORT ).show();
       return;
     }
 

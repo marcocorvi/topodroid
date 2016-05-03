@@ -223,6 +223,7 @@
     <string name="no_profile_overview">Nessuna panoramica per i profili proiettati</string>
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
+    <!-- TODO string name="no_sketch">No 3D sketch</string -->
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Rilievo non selezionato</string>
     <string name="no_thmanager">ThManager non installato</string>

@@ -189,11 +189,6 @@ public class TopoDroidApp extends Application
   static boolean mDeviceActivityVisible = false;
   static boolean mGMActivityVisible = false;
 
-  // static final int DISTO_NONE = 0;  // supported Disto types
-  // static final int DISTO_A3 = 1;
-  // static final int DISTO_X310 = 2;
-  // static int mDistoType = DISTO_A3;
-
   long mSID   = -1;   // id of the current survey
   long mCID   = -1;   // id of the current calib
   String mySurvey;   // current survey name
@@ -232,12 +227,12 @@ public class TopoDroidApp extends Application
   // default button size
   static int getScaledSize( Context context )
   {
-    return (int)( 42 * TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
+    return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
   }
 
   static int getDefaultSize( Context context )
   {
-    return (int)(42 * context.getResources().getSystem().getDisplayMetrics().density );
+    return (int)( 42 * context.getResources().getSystem().getDisplayMetrics().density );
   }
 
   boolean isMultitouch()
@@ -567,7 +562,7 @@ public class TopoDroidApp extends Application
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES
     if ( TDSetting.mLevelOverExperimental ) {
-      String value = mDData.getValue("sketch");
+      String value = mDData.getValue("sketches");
       mSketches =  value != null 
                 && value.equals("on")
                 && getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );

@@ -62,7 +62,9 @@
   </string-array>
 
   <string-array name="sizeButtons">
-     <item name="small1">Piccoli</item>
+     <item name="small">Piccoli</item>
+     <item name="normal">Normal</item>
+     <item name="medium">Medium</item>
      <item name="large">Grandi</item>
   </string-array>
 

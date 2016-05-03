@@ -221,6 +221,7 @@
     <!-- TODO string name="no_profile_overview">No overview for projected profiles</string -->
     <string name="no_proj4">Proj4 未安装</string>
     <string name="no_sensors">测量无数据</string>
+    <!-- TODO string name="no_sketch">No 3D sketch</string -->
     <!-- UNUSED string name="no_shots">测量无数据.\n点击下载按钮获取数据</string -->
     <string name="no_survey">无测量选择.</string>
     <string name="no_thmanager">ThManager 未安装</string>

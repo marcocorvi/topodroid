@@ -51,6 +51,7 @@ public class PlotListDialog extends MyDialog
 
   // FIXME_SKETCH_3D
   private Button mBtnSketch3dNew;
+  private int mPlots = 0;
   // END_SKETCH_3D
 
   // private ListView mList;
@@ -119,6 +120,7 @@ public class PlotListDialog extends MyDialog
       // mList.setAdapter( mArrayAdapter );
       mArrayAdapter.clear();
       // mArrayAdapter.add( res.getString(R.string.back_to_survey) );
+      mPlots = 0;
       for ( PlotInfo item : list ) {
         // if ( item.type == PlotInfo.PLOT_PLAN /* || item.type == PlotInfo.PLOT_EXTENDED */ ) 
         if ( PlotInfo.isProfile( item.type ) )
@@ -126,6 +128,7 @@ public class PlotListDialog extends MyDialog
           String name = item.name.substring( 0, item.name.length() - 1 );
           mArrayAdapter.add( String.format("<%s> %s", name, PlotInfo.plotTypeString( (int)PlotInfo.PLOT_PLAN, res ) ) );
           mArrayAdapter.add( String.format("<%s> %s", name, PlotInfo.plotTypeString( item.type, res ) ) );
+          mPlots += 2;
         }
       }
       // FIXME_SKETCH_3D
@@ -190,21 +193,26 @@ public class PlotListDialog extends MyDialog
     int from = value.indexOf('<');
     if ( from < 0 ) return;
     int to = value.lastIndexOf('>');
-    String plot_name = value.substring( from+1, to );
-    String type = value.substring( to+2 );
+    if ( position < mPlots ) {
+      String plot_name = value.substring( from+1, to );
+      String type = value.substring( to+2 );
 
-    long plot_type = PlotInfo.PLOT_PLAN;
-    Resources res = mApp.getResources();
-    if ( res.getString( R.string.plan ).equals( type ) ) {
-      plot_type = PlotInfo.PLOT_PLAN;
-    } else if ( res.getString( R.string.extended ).equals( type ) ) {
-      plot_type = PlotInfo.PLOT_EXTENDED;
-    } else if ( res.getString( R.string.profile ).equals( type ) ) {
-      plot_type = PlotInfo.PLOT_PROFILE;
+      long plot_type = PlotInfo.PLOT_PLAN;
+      Resources res = mApp.getResources();
+      if ( res.getString( R.string.plan ).equals( type ) ) {
+        plot_type = PlotInfo.PLOT_PLAN;
+      } else if ( res.getString( R.string.extended ).equals( type ) ) {
+        plot_type = PlotInfo.PLOT_EXTENDED;
+      } else if ( res.getString( R.string.profile ).equals( type ) ) {
+        plot_type = PlotInfo.PLOT_PROFILE;
+      }
+
+      // long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
+      mParent.startExistingPlot( plot_name, plot_type ); // context of current SID
+    } else {
+      String sketch_name = value.substring( from+1, to );
+      mParent.startSketchActivity( sketch_name ); // context of current SID
     }
-
-    // long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
-    mParent.startExistingPlot( plot_name, plot_type ); // context of current SID
     dismiss();
   }
 
