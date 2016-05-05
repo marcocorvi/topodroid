@@ -639,6 +639,7 @@
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_discover">Ricerca dispositivi DistoX &#8230; attendi</string>
+    <!-- TODO string name="title_draw">Draw</string -->
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINEA %1$s</string>
     <string name="title_draw_point">PUNTO %1$s</string>
@@ -661,6 +662,7 @@
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>
+    <!-- TODO string name="title_select">Select</string -->
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
     <string name="title_sensor_edit">Sensore</string>

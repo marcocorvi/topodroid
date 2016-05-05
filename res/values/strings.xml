@@ -213,7 +213,7 @@
     <string name="no_cave3d">Cave3D not installed</string>
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
-    <string name="no_device_found">No device found</string>
+    <string name="no_device_found">Found no device</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_geo_station">Failed: no geolocalized station</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
@@ -337,6 +337,7 @@
     <string name="shot_info">Enter shot data</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">note</string>
+    <string name="shot_not_found">Found no shot</string>
     <string name="shot_reverse">reverse</string>
     <string name="shot_to">to</string>
 
@@ -536,6 +537,7 @@
     
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_continue">Continue drawing a line</string>
+    <string name="help_contour">Contour editing</string>
     <string name="help_current_station">Saved stations</string>
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_device">Enter device activity</string>
@@ -635,10 +637,12 @@
     <string name="title_calib">Calibrations</string>
     <string name="title_coverage">Calibration data distibution</string>
     <string name="title_coeff">Calibration coefficients</string>
+    <string name="title_contour">Contour</string>
     <!-- string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>
+    <string name="title_draw">Draw</string>
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINE %1$s</string>
     <string name="title_draw_point">POINT %1$s</string>
@@ -661,11 +665,13 @@
     <string name="title_projection">Projected profile azimuth %1$d</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
+    <string name="title_select">Select</string>
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>
     <string name="title_sensor_edit">Sensor</string>
 
     <string name="title_stats">Statistics</string>
+    <string name="title_step">Step</string>
     <string name="title_survey">Survey Info</string>
     <string name="title_survey_new">New survey</string>
     <string name="title_survey_export">Export survey</string>

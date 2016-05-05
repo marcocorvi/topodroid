@@ -650,6 +650,7 @@
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_device">DistoX Geräte</string>
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>
+    <!-- TODO string name="title_draw">Draw</string -->
     <string name="title_draw_area">FLÄCHE %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
     <string name="title_draw_point">PUNKT %1$s</string>
@@ -672,6 +673,7 @@
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
     <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
+    <!-- TODO string name="title_select">Select</string -->
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
     <string name="title_sensor_edit">Sensordaten</string>

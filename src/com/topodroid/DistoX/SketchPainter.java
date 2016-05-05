@@ -108,14 +108,14 @@ class SketchPainter
 
     surfaceForPaint = new Paint();
     // surfaceForPaint.setColor(0x66666666);
-    surfaceForPaint.setColor(0x6600cc99);
-    // surfaceForPaint.setStyle(Paint.Style.FILL);
-    surfaceForPaint.setStyle(Paint.Style.STROKE);
+    surfaceForPaint.setColor(0x33cc6633);
+    surfaceForPaint.setStyle(Paint.Style.FILL);
+    // surfaceForPaint.setStyle(Paint.Style.STROKE);
     surfaceForPaint.setStrokeJoin(Paint.Join.ROUND);
     surfaceForPaint.setStrokeCap(Paint.Cap.ROUND);
 
     surfaceBackPaint = new Paint();
-    surfaceBackPaint.setColor(0x44cc6633);
+    surfaceBackPaint.setColor(0x66cc9966);
     // surfaceBackPaint.setStyle(Paint.Style.FILL);
     surfaceBackPaint.setStyle(Paint.Style.STROKE);
     surfaceBackPaint.setStrokeJoin(Paint.Join.ROUND);

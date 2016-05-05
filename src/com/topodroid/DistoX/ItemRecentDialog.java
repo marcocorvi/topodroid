@@ -176,7 +176,7 @@ class ItemRecentDialog extends MyDialog
   void setItemAngle( int angle ) 
   {
     Symbol symbol = ItemDrawer.mRecentPoint[0];
-    if ( symbol.isOrientable() ) {
+    if ( symbol != null && symbol.isOrientable() ) {
       symbol.setAngle( angle );
       mRecentP[0].reset( symbol.getPaint(), symbol.getPath(), 1.5f, 1.5f );
       mRecentP[0].invalidate();
@@ -187,7 +187,7 @@ class ItemRecentDialog extends MyDialog
   {
     int angle = 0;
     Symbol symbol = ItemDrawer.mRecentPoint[0];
-    if ( symbol.isOrientable() ) angle = symbol.getAngle();
+    if ( symbol != null && symbol.isOrientable() ) angle = symbol.getAngle();
     int progress = (180+angle)%360;
     mSeekBar.setProgress( progress );
   }

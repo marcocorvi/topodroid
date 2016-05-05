@@ -30,7 +30,7 @@ class TDSetting
   static final String[] key = { // prefs keys
     // ------------------------- PRIMARY PREFS
     "DISTOX_EXTRA_BUTTONS",       //  0 TODO move to general options
-    "DISTOX_BUTTON_SIZE",         //  1
+    "DISTOX_SIZE_BUTTONS",        // "DISTOX_BUTTON_SIZE",         //  1
     "DISTOX_TEXT_SIZE",           //  2
     "DISTOX_MKEYBOARD",           //  3
     "DISTOX_TEAM",                //  4
@@ -519,6 +519,18 @@ class TDSetting
   //   return i;
   // }
 
+  static private int getSizeButtons( int size )
+  {
+    switch ( size ) {
+      case 0: return 36; // small
+      case 1: return 42; // normal
+      case 3: return 48; // medium
+      case 4: return 64; // large
+      case 2: return 84; // huge
+    }
+    return mSizeButtons;
+  }
+
   static void loadPrimaryPreferences( TopoDroidApp app, SharedPreferences prefs )
   {
     // ------------------- GENERAL PREFERENCES
@@ -527,7 +539,7 @@ class TDSetting
     mActivityLevel = Integer.parseInt( prefs.getString( key[k++], "1" ) ); // DISTOX_EXTRA_BUTTONS choice: 0, 1, 2, 3
     setActivityBooleans( app );
 
-    mSizeButtons = tryInt( prefs, key[k++], "42" ); // choice: 0, 1 // DISTOX_BUTTON_SIZE
+    mSizeButtons = getSizeButtons( tryInt( prefs, key[k++], "1" ) ); // choice: 1, 2, 3, 4  // DISTOX_BUTTON_SIZE
     mTextSize    = tryInt( prefs, key[k++], "16" );                // DISTOX_TEXT_SIZE
     mKeyboard    = prefs.getBoolean( key[k++], true );             // DISTOX_MKEYBOARD
     mDefaultTeam = prefs.getString( key[k++], "" );                // DISTOX_TEAM
@@ -708,7 +720,10 @@ class TDSetting
     mLevelOverExperimental = mActivityLevel > LEVEL_EXPERIMENTAL;
     if ( mLevelOverAdvanced ) {
       String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
-      if ( "e5582eda21cafac3".equals( android_id ) ) mLevelOverExperimental = true;
+      // Log.v("DistoX", "android_id <" + android_id + ">");
+      if ( "e5582eda21cafac3".equals( android_id ) || "8c894b79b6dce351".equals( android_id ) ) {
+        mLevelOverExperimental = true;
+      }
     }
     if ( ! mLevelOverAdvanced ) {
       mMagAnomaly = false;
@@ -734,7 +749,7 @@ class TDSetting
         }  
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BUTTON_SIZE
-      int size = tryInt( prefs, k, "42" );
+      int size = getSizeButtons( tryInt( prefs, k, "1" ) );
       if ( size != mSizeButtons ) {
         mSizeButtons = size;
         if ( activity != null ) activity.resetButtonBar();

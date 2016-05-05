@@ -18,10 +18,10 @@
        />
 
   <com.topodroid.DistoX.MyListPreference
-       android:key="DISTOX_BUTTON_SIZE"
+       android:key="DISTOX_SIZE_BUTTONS"
        android:title="@string/pref_size_buttons_title"
        android:summary="@string/pref_size_buttons_summary"
-       android:defaultValue="42"
+       android:defaultValue="1"
        android:entries="@array/sizeButtons"
        android:entryValues="@array/sizeButtonsValue"
        />

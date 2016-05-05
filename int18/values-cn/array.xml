@@ -73,6 +73,7 @@
      <item name="normal">Normal</item>
      <item name="medium">Medium</item>
      <item name="large">大</item>
+     <item name="huge">Huge</item>
   </string-array>
 
   <string-array name="logStream">

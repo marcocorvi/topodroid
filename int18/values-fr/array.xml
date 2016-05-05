@@ -91,6 +91,7 @@
      <item name="normal">Normal</item>
      <item name="medium">Medium</item>
      <item name="large">Grand</item>
+     <item name="huge">Huge</item>
   </string-array>
  
 

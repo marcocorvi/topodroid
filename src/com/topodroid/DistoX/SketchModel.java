@@ -66,6 +66,7 @@ class SketchModel
   SketchUndo mRedo;
 
   int mDisplayMode = SketchDef.DISPLAY_NGBH;
+  int mActivityMode = SketchDef.MODE_MOVE;
 
   public static final int highlightColor = 0xffff9999;
   int cnt;
@@ -428,7 +429,7 @@ class SketchModel
         while ( i.hasNext() ) {
           final SketchFixedPath fixed = (SketchFixedPath) i.next();
           if ( mInfo.isConnectedTo(fixed, mDisplayMode) ) {
-            fixed.draw( canvas, mMatrix, mInfo );
+            fixed.draw( canvas, mMatrix, mInfo, mActivityMode );
           }
           //doneHandler.sendEmptyMessage(1);
         }
@@ -452,7 +453,7 @@ class SketchModel
         while ( i.hasNext() ) {
           final SketchSurface surface = (SketchSurface) i.next();
           if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
-            surface.draw( canvas, mMatrix, mInfo );
+            surface.draw( canvas, mMatrix, mInfo, mActivityMode );
           }
         }
       }
@@ -480,7 +481,7 @@ class SketchModel
         while ( i.hasNext() ) {
           final SketchSurface surface = (SketchSurface) i.next();
           if ( mInfo.isConnectedTo(surface, mDisplayMode) ) {
-            surface.draw( canvas, mMatrix, mInfo );
+            surface.draw( canvas, mMatrix, mInfo, mActivityMode );
           }
         }
       }

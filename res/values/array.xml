@@ -185,12 +185,14 @@
      <item name="normal">Normal</item>
      <item name="medium">Medium</item>
      <item name="large">Large</item>
+     <item name="huge">Huge</item>
   </string-array>
   <string-array name="sizeButtonsValue">
-     <item name="small">32</item>
-     <item name="normal">42</item>
-     <item name="medium">48</item>
-     <item name="large">84</item>
+     <item name="small">0</item>
+     <item name="normal">1</item>
+     <item name="medium">3</item>
+     <item name="large">4</item>
+     <item name="huge">2</item>
   </string-array>
 
   <string-array name="logStream">

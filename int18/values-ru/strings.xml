@@ -634,6 +634,7 @@
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
+    <!-- TODO string name="title_draw">Draw</string -->
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
@@ -656,6 +657,7 @@
     <string name="title_projection">Проекция разреза на азимут %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
+    <!-- TODO string name="title_select">Select</string -->
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
     <string name="title_sensor_edit">Сенсор</string>

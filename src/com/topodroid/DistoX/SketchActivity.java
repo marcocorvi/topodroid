@@ -22,6 +22,7 @@ import android.content.pm.ActivityInfo;
 
 import android.graphics.Bitmap;
 import android.graphics.Paint;
+import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
@@ -36,6 +37,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.KeyEvent;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Button;
 import android.widget.ZoomControls;
 import android.widget.ZoomButton;
@@ -131,7 +134,7 @@ public class SketchActivity extends ItemDrawer
   private static int izons[] = { 
                         R.drawable.iz_move, // 0
                         R.drawable.iz_edit, // 1
-                        R.drawable.iz_eraser,
+                        R.drawable.iz_contour,
                         R.drawable.iz_select,
                         R.drawable.iz_one,           // 4
                         R.drawable.iz_mode,          // 5
@@ -168,7 +171,7 @@ public class SketchActivity extends ItemDrawer
   private static int help_icons[] = {
                         R.string.help_move,
                         R.string.help_draw,
-                        R.string.help_eraser,
+                        R.string.help_contour,
                         R.string.help_edit,
                         R.string.help_one_model,   
                         R.string.help_refs,       
@@ -266,11 +269,13 @@ public class SketchActivity extends ItemDrawer
     setTitle( String.format( res.getString( R.string.title_sketch), 
       mInfo.getShotString(),
       mInfo.getDirectionString(),
-        ( mMode == SketchDef.MODE_MOVE )? "MOVE"
-      : ( mMode == SketchDef.MODE_DRAW )? "DRAW" 
-      : ( mMode == SketchDef.MODE_EDIT )? "EDIT"
-      // : ( mMode == SketchDef.MODE_HEAD )? "HEAD"
-      : "NONE",
+        ( mMode == SketchDef.MODE_MOVE )? res.getString( R.string.title_move )
+      : ( mMode == SketchDef.MODE_DRAW )? res.getString( R.string.title_draw )
+      : ( mMode == SketchDef.MODE_EDIT )? res.getString( R.string.title_contour )
+      : ( mMode == SketchDef.MODE_SELECT )? res.getString( R.string.title_select )
+      : ( mMode == SketchDef.MODE_STEP )? res.getString( R.string.title_step )
+      // : ( mMode == SketchDef.MODE_HEAD )? res.getString( R.string.title_head )
+      : "--",
       ( mMode == SketchDef.MODE_DRAW )? symbol_name : ""
     ) );
 
@@ -308,6 +313,9 @@ public class SketchActivity extends ItemDrawer
       case SketchDef.MODE_SELECT:
         mListView.setAdapter( mButtonView4.mAdapter );
         break;
+      case SketchDef.MODE_STEP:
+        mListView.setAdapter( mButtonView4.mAdapter );
+        break;
       // case SketchDef.MODE_HEAD:
       //   mListView.setAdapter( mButtonView1.mAdapter );
       //   break;
@@ -318,6 +326,7 @@ public class SketchActivity extends ItemDrawer
   void setMode( int mode )
   {
     mMode = mode;
+    mModel.mActivityMode = mMode;
     setTheTitle();
   }
 
@@ -861,10 +870,13 @@ public class SketchActivity extends ItemDrawer
    
     SketchFixedPath path = null;
     if ( splay ) {
-      path = new SketchFixedPath( DrawingPath.DRAWING_PATH_SPLAY, blk, DrawingBrushPaths.fixedSplayPaint );
+      path = new SketchFixedPath( DrawingPath.DRAWING_PATH_SPLAY, blk,
+                                  DrawingBrushPaths.fixedSplayPaint,
+                                  null );
     } else {
       path = new SketchFixedPath( DrawingPath.DRAWING_PATH_FIXED, blk,
-                             is_reference? DrawingBrushPaths.highlightPaint : DrawingBrushPaths.fixedShotPaint );
+                             is_reference? DrawingBrushPaths.highlightPaint : DrawingBrushPaths.fixedShotPaint,
+                             DrawingBrushPaths.fixedBluePaint );
     }
     if ( path != null ) {
       // path.setEndPoints( x1, y1, x2, y2 ); // scene coords
@@ -1126,6 +1138,7 @@ public class SketchActivity extends ItemDrawer
       closeMenu();
       return true;
     }
+    dismissPopups();
 
     float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mInfo.zoom_3d;
 
@@ -1202,6 +1215,34 @@ public class SketchActivity extends ItemDrawer
         // doSelectAt( x_scene, y_scene );
         mSaveX = x_canvas;
         mSaveY = y_canvas;
+      } else if ( mMode == SketchDef.MODE_STEP ) {
+        SketchFixedPath path = doSelectShotAt( x_scene, y_scene ); 
+        if ( path == null ) {
+          Toast.makeText( this, R.string.shot_not_found, Toast.LENGTH_SHORT ).show();
+        } else {
+          DistoXDBlock blk = path.mBlock;
+          if ( blk != null ) {
+            // float a = mInfo.azimuth;
+            // float c = mInfo.clino;
+            // float x = mInfo.xoffset_3d;
+            // float y = mInfo.yoffset_3d;
+            // float z = mInfo.zoom_3d;
+
+            mInfo.st1 = blk.mFrom;
+            mInfo.st2 = blk.mTo;
+            computeReferenceFrame( false );
+
+            mMode = SketchDef.MODE_MOVE;
+            setTheTitle();
+
+            // mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
+            // resetZoom();
+            // mInfo.shiftOffset3d( x, y );
+            // mInfo.resetZoom3d( x, y, z );
+            // mInfo.rotateBy3d( a, c );
+          }
+        }
+        
       }
     }
     // ============================== MOVE ===============================
@@ -1233,6 +1274,8 @@ public class SketchActivity extends ItemDrawer
           }
         } else if ( mMode == SketchDef.MODE_SELECT && mMoveSelected ) { // moving the selected vertex
           // TODO
+        } else if ( mMode == SketchDef.MODE_STEP ) {
+          // nothing
         }
       } else { // mTouchMode == SketchDef.TOUCH_ZOOM
         float newDist = spacing( event );
@@ -1545,134 +1588,135 @@ public class SketchActivity extends ItemDrawer
   // ----------------------------------------------------------------------
   // CLICK
 
-    public void onClick(View view)
-    {
-      if ( onMenu ) {
-        closeMenu();
-        return;
+  public void onClick(View view)
+  {
+    if ( onMenu ) {
+      closeMenu();
+      return;
+    }
+    dismissPopups();
+
+    if ( mTimer != null ) mTimer.mRun = false;
+
+    Button b = (Button)view;
+
+    if ( b == mImage ) {
+      if ( mMenu.getVisibility() == View.VISIBLE ) {
+        mMenu.setVisibility( View.GONE );
+        onMenu = false;
+      } else {
+        mMenu.setVisibility( View.VISIBLE );
+        onMenu = true;
       }
-
-      if ( mTimer != null ) mTimer.mRun = false;
-
-      Button b = (Button)view;
-
-      if ( b == mImage ) {
-	if ( mMenu.getVisibility() == View.VISIBLE ) {
-	  mMenu.setVisibility( View.GONE );
-	  onMenu = false;
-	} else {
-	  mMenu.setVisibility( View.VISIBLE );
-	  onMenu = true;
-	}
-	return;
-      }
-
-      // if ( b == selectBtn ) {
-      //   if ( mSelect == SketchDef.SELECT_SECTION ) {
-      //     setSelect( SketchDef.SELECT_STEP );
-      //   } else if ( mSelect == SketchDef.SELECT_STEP ) {
-      //     setSelect( SketchDef.SELECT_SHOT );
-      //   } else if ( mSelect == SketchDef.SELECT_SHOT ) {
-      //     setSelect( SketchDef.SELECT_JOIN );
-      //   } else if ( mSelect == SketchDef.SELECT_JOIN ) {
-      //     setSelect( SketchDef.SELECT_SECTION );
-      //   }
-      //   // FIXME (new SketchSelectDialog(this, this)).show();
-      // } else 
-
-      if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton4[0] ) {
-        // makeModePopup( b ); 
-
-      } else if ( b == mButton1[1] ) { // one
-        mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
-        resetZoom();
-        // doSaveTh3AndReload( ); // save to th3
-        // mSketchSurface.isDrawing = true;
-      } else if ( b == mButton1[2] ) { // display mode. cycle (NGBH, SINGLE, ALL)
-        (new SketchModeDialog( this, mModel )).show();
-      } else if ( b == mButton1[3] ) { // surface
-        if ( mModel.mCurrentSurface != null ) {
-          alertMakeSurface( );
-        } else {
-          doMakeSurface( );
-        }
-      } else if ( b == mButton1[4] ) { // download
-        if ( mApp.mDevice != null ) {
-          // TODO if there is an empty shot use it, else try to download the data
-          //      with the Asynch task that download the data.
-          //      if there is an empty shot assign it
-          setTitleColor( TDConst.COLOR_CONNECTED );
-          ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
-          new DataDownloadTask( mApp, handler ).execute();
-          // new DataDownloadTask( mApp, this ).execute();
-        } else {
-          Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
-        }
-      } else if ( b == mButton1[5] ) { // notes
-        (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
-      } else if ( b == mButton1[6] ) { // info
-        new DistoXStatDialog( mSketchSurface.getContext(), mNum, mInfo.start, mData.getSurveyStat( mApp.mSID ) ).show();
-
-      } else if ( b == mButton2[1] ) { // undo
-        mModel.undo();
-      } else if ( b == mButton2[2] ) { // redo
-        mModel.redo();
-      } else if ( b == mButton2[3] ) { // symbols
-        if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
-          new ItemRecentDialog(this, this, mType ).show();
-        } else {
-          new ItemPickerDialog(this, this, mType, mSymbol ).show();
-        }
-
-      } else if ( b == mButton3[1] ) { // refine triangles
-        //   extrudeRegion();
-        // Log.v("DistoX", "refine to max side ");
-        int split = mModel.refineToMaxSide( TDSetting.mSketchSideSize );
-        if ( split == 0 ) { 
-          Toast.makeText( this, getString(R.string.sketch_no_split), Toast.LENGTH_SHORT ).show();
-        }
-      } else if ( b == mButton3[2] ) { // refine_center
-        mModel.refineSurfaceAtCenters();
-      } else if ( b == mButton3[3] ) { // refine_sides
-        mModel.refineSurfaceAtSides();
-      } else if ( b == mButton3[4] && mCurrentLinePath != null ) { // cut
-        cutRegion();
-      } else if ( b == mButton3[5] && mCurrentLinePath != null ) { // stretch
-        stretchRegion();
-
-      } else if ( b == mButton4[1] ) { 
-        // TODO previous
-      } else if ( b == mButton4[2] ) { 
-        // TODO next
-      } else if ( b == mButton4[3] ) { 
-        mModel.refineSurfaceAtSelectedVertex();
-      } else if ( b == mButton4[4] ) { 
-        // TODO edit item
-      }
+      return;
     }
 
-    // void setSelect( int select )
-    // {
-    //   mSelect = select;
-    //   setMode( ( select != SketchDef.SELECT_NONE )? SketchDef.MODE_EDIT : SketchDef.MODE_MOVE );
-    // }
+    // if ( b == selectBtn ) {
+    //   if ( mSelect == SketchDef.SELECT_SECTION ) {
+    //     setSelect( SketchDef.SELECT_STEP );
+    //   } else if ( mSelect == SketchDef.SELECT_STEP ) {
+    //     setSelect( SketchDef.SELECT_SHOT );
+    //   } else if ( mSelect == SketchDef.SELECT_SHOT ) {
+    //     setSelect( SketchDef.SELECT_JOIN );
+    //   } else if ( mSelect == SketchDef.SELECT_JOIN ) {
+    //     setSelect( SketchDef.SELECT_SECTION );
+    //   }
+    //   // FIXME (new SketchSelectDialog(this, this)).show();
+    // } else 
 
-    // ----------------------------------------------------------------
-    // SECTION
+    if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton4[0] ) {
+      makePopupMode( b ); 
 
-    // void setSectionType( int type )
-    // { 
-    //   mModel.setSectionType( type );
-    //   mSectionType = type;
-    // }
+    } else if ( b == mButton1[1] ) { // one
+      mInfo.resetDirection(); // azi = 0, clino = 0, and compute triad versors
+      resetZoom();
+      // doSaveTh3AndReload( ); // save to th3
+      // mSketchSurface.isDrawing = true;
+    } else if ( b == mButton1[2] ) { // display mode. cycle (NGBH, SINGLE, ALL)
+      (new SketchModeDialog( this, mModel )).show();
+    } else if ( b == mButton1[3] ) { // surface
+      if ( mModel.mCurrentSurface != null ) {
+        alertMakeSurface( );
+      } else {
+        doMakeSurface( );
+      }
+    } else if ( b == mButton1[4] ) { // download
+      if ( mApp.mDevice != null ) {
+        // TODO if there is an empty shot use it, else try to download the data
+        //      with the Asynch task that download the data.
+        //      if there is an empty shot assign it
+        setTitleColor( TDConst.COLOR_CONNECTED );
+        ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
+        new DataDownloadTask( mApp, handler ).execute();
+        // new DataDownloadTask( mApp, this ).execute();
+      } else {
+        Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
+      }
+    } else if ( b == mButton1[5] ) { // notes
+      (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
+    } else if ( b == mButton1[6] ) { // info
+      new DistoXStatDialog( mSketchSurface.getContext(), mNum, mInfo.start, mData.getSurveyStat( mApp.mSID ) ).show();
 
-    void startSectionDialog()
-    {
+    } else if ( b == mButton2[1] ) { // undo
+      mModel.undo();
+    } else if ( b == mButton2[2] ) { // redo
+      mModel.redo();
+    } else if ( b == mButton2[3] ) { // symbols
+      if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
+        new ItemRecentDialog(this, this, mType ).show();
+      } else {
+        new ItemPickerDialog(this, this, mType, mSymbol ).show();
+      }
+
+    } else if ( b == mButton3[1] ) { // refine triangles
+      //   extrudeRegion();
+      // Log.v("DistoX", "refine to max side ");
+      int split = mModel.refineToMaxSide( TDSetting.mSketchSideSize );
+      if ( split == 0 ) { 
+        Toast.makeText( this, getString(R.string.sketch_no_split), Toast.LENGTH_SHORT ).show();
+      }
+    } else if ( b == mButton3[2] ) { // refine_center
+      mModel.refineSurfaceAtCenters();
+    } else if ( b == mButton3[3] ) { // refine_sides
+      mModel.refineSurfaceAtSides();
+    } else if ( b == mButton3[4] && mCurrentLinePath != null ) { // cut
+      cutRegion();
+    } else if ( b == mButton3[5] && mCurrentLinePath != null ) { // stretch
+      stretchRegion();
+
+    } else if ( b == mButton4[1] ) { 
+      // TODO previous
+    } else if ( b == mButton4[2] ) { 
+      // TODO next
+    } else if ( b == mButton4[3] ) { 
+      mModel.refineSurfaceAtSelectedVertex();
+    } else if ( b == mButton4[4] ) { 
+      // TODO edit item
     }
+  }
 
-    void addSection()
-    {
-    }
+  // void setSelect( int select )
+  // {
+  //   mSelect = select;
+  //   setMode( ( select != SketchDef.SELECT_NONE )? SketchDef.MODE_EDIT : SketchDef.MODE_MOVE );
+  // }
+
+  // ----------------------------------------------------------------
+  // SECTION
+
+  // void setSectionType( int type )
+  // { 
+  //   mModel.setSectionType( type );
+  //   mSectionType = type;
+  // }
+
+  void startSectionDialog()
+  {
+  }
+
+  void addSection()
+  {
+  }
 
     // ----------------------------------------------------------------
 
@@ -1685,69 +1729,8 @@ public class SketchActivity extends ItemDrawer
     }
 
 
-    // ----------------------------------------------
-    /* MENU
-
-    private MenuItem mMIsave;
-    private MenuItem mMIoptions;
-    private MenuItem mMIdelete;
-    private MenuItem mMIsymbol;
-    private MenuItem mMIhead;
-    private MenuItem mMIhelp;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-      mMIsave    = menu.add( R.string.menu_export );
-      mMIsymbol  = menu.add( R.string.menu_palette );
-      mMIdelete  = menu.add( R.string.menu_delete );
-      mMIoptions = menu.add( R.string.menu_options );
-      mMIhead    = menu.add( R.string.menu_head );
-      mMIhelp    = menu.add( R.string.menu_help );
-
-      mMIsave.setIcon( R.drawable.ic_export0 );
-      mMIsymbol.setIcon( R.drawable.ic_symbol );
-      mMIdelete.setIcon( R.drawable.ic_trash );
-      mMIoptions.setIcon( R.drawable.ic_pref );
-      mMIhead.setIcon( R.drawable.ic_head );
-      mMIhelp.setIcon( R.drawable.ic_help );
-
-      return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-      // TDLog.Log( TDLog.LOG_INPUT, "SketchActivity onOptionsItemSelected() " + item.toString() );
-
-      if (item == mMIdelete ) {
-        // TODO ask for confirmation: however file th3 is not deleted
-        askDelete();
-      } else if ( item == mMIoptions ) { // OPTIONS DIALOG
-        Intent optionsIntent = new Intent( this, TopoDroidPreferences.class );
-        optionsIntent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
-        startActivity( optionsIntent );
-      } else if (item == mMIsymbol ) {
-        DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, this )).show();
-      } else if (item == mMIsave ) {
-        new SketchSaveDialog( this, this ).show();
-        // saveTh3( );
-      } else if (item == mMIhead ) {
-        // setMode( SketchDef.MODE_HEAD );
-        setMode( SketchDef.MODE_MOVE );
-        // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
-        // mCompass = new SketchCompassSensor( this, sm, TDSetting.mCompassReadings );
-        mTimer = new TimerTask( this, this );
-        mTimer.execute();
-      } else if (item == mMIhelp ) {
-        int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;
-        (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
-      }
-      return true;
-    }
-
-    */
+  // ----------------------------------------------
+  // MENU
 
   private void setMenuAdapter( Resources res )
   {
@@ -1785,17 +1768,17 @@ public class SketchActivity extends ItemDrawer
       (new SymbolEnableDialog( this, this )).show();
     } else if ( p++ == pos ) { // DELETE
       askDelete();
-    } else if ( p++ == pos ) { // 
+    } else if ( p++ == pos ) { // SETTINGS
       Intent optionsIntent = new Intent( this, TopoDroidPreferences.class );
       optionsIntent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
       startActivity( optionsIntent );
-    } else if ( p++ == pos ) { // 
+    } else if ( p++ == pos ) { // HEADING
       setMode( SketchDef.MODE_MOVE );
       // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
       // mCompass = new SketchCompassSensor( this, sm, TDSetting.mCompassReadings );
       mTimer = new TimerTask( this, this );
       mTimer.execute();
-    } else if ( p++ == pos ) { // 
+    } else if ( p++ == pos ) { // HELP
       int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;
       (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
     }
@@ -1930,6 +1913,8 @@ public class SketchActivity extends ItemDrawer
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
+    if ( dismissPopups() ) return true;
+
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
@@ -1988,5 +1973,104 @@ public class SketchActivity extends ItemDrawer
     /* TODO */
   }
 
+  // --------------------------------------------------
+  // MODE
+
+  private PopupWindow mPopupMode = null;
+
+  /** mode popup
+   * @param b button
+   */
+  private void makePopupMode( View b )
+  {
+    if ( mPopupMode != null ) return;
+
+    final Context context = this;
+    LinearLayout popup_layout = new LinearLayout(this);
+    popup_layout.setOrientation(LinearLayout.VERTICAL);
+    int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+    int lWidth  = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+    String text = getString(R.string.title_move);
+    int len = text.length();
+    Button myTextView0 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          dismissPopupMode();
+          setMode( SketchDef.MODE_MOVE );
+        }
+      } );
+  
+    text = getString(R.string.title_draw);
+    if ( len < text.length() ) len = text.length();
+    Button myTextView1 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          dismissPopupMode();
+          setMode( SketchDef.MODE_DRAW );
+        }
+      } );
+  
+    text = getString(R.string.title_contour);
+    if ( len < text.length() ) len = text.length();
+    Button myTextView2 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          dismissPopupMode();
+          setMode( SketchDef.MODE_EDIT );
+        }
+      } );
+
+    text = getString(R.string.title_select);
+    if ( len > text.length() ) len = text.length();
+    Button myTextView3 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          dismissPopupMode();
+          setMode( SketchDef.MODE_SELECT );
+        }
+      } );
+
+    text = getString(R.string.title_step);
+    if ( len > text.length() ) len = text.length();
+    Button myTextView4 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      new View.OnClickListener( ) {
+        public void onClick(View v) {
+          dismissPopupMode();
+          setMode( SketchDef.MODE_STEP );
+        }
+      } );
+
+
+    FontMetrics fm = myTextView0.getPaint().getFontMetrics();
+    // Log.v("DistoX", "font metrics TOP " + fm.top + " ASC. " + fm.ascent + " BOT " + fm.bottom + " LEAD " + fm.leading ); 
+    int w = (int)( Math.abs( ( len + 1 ) * fm.ascent ) * 0.7);
+    int h = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+    // int h1 = (int)( myTextView0.getHeight() * 7 * 1.1 ); this is 0
+    myTextView0.setWidth( w );
+    myTextView1.setWidth( w );
+    myTextView2.setWidth( w );
+    myTextView3.setWidth( w );
+    myTextView4.setWidth( w );
+    // Log.v( TopoDroidApp.TAG, "popup width " + w );
+    mPopupMode = new PopupWindow( popup_layout, w, h ); 
+    // mPopupMode = new PopupWindow( popup_layout, popup_layout.getHeight(), popup_layout.getWidth() );
+    mPopupMode.showAsDropDown(b); 
+  }
+
+  private boolean dismissPopupMode()
+  {
+    if ( mPopupMode != null ) {
+      mPopupMode.dismiss();
+      mPopupMode = null;
+      return true;
+    }
+    return false;
+  }
+
+  private boolean dismissPopups() 
+  {
+    return dismissPopupMode();
+  }
 
 }

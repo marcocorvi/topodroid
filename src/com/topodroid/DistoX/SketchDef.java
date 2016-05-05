@@ -37,8 +37,9 @@ class SketchDef
     public static final int MODE_DRAW    = 1;
     public static final int MODE_EDIT    = 2;  // change the surface as a whole
     public static final int MODE_SELECT  = 3;  // select a point to edit
-    // public static final int MODE_HEAD = 4;
-    // public static final int MODE_JOIN = 5;
+    public static final int MODE_STEP    = 4;  // step to another leg
+    // public static final int MODE_HEAD = 5;
+    // public static final int MODE_JOIN = 6;
 
     public static final int TOUCH_NONE = 0;
     public static final int TOUCH_MOVE = 2;

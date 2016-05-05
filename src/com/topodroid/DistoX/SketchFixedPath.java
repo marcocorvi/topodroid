@@ -31,16 +31,18 @@ import java.util.ArrayList;
 public class SketchFixedPath extends SketchPath
 {
   DistoXDBlock mBlock;
+  Paint mStepPaint;
   float sx, sy;     // midpoint scene 2d coords
   float cx, cy, cz; // midpoint 3d coords
   Line3D  mLine;
 
 
-  public SketchFixedPath( int type, DistoXDBlock blk, Paint paint ) 
+  public SketchFixedPath( int type, DistoXDBlock blk, Paint paint, Paint step_paint ) 
   {
     super( type, blk.mFrom, blk.mTo );
     mBlock = blk;
     mPaint = paint;
+    mStepPaint = step_paint;
     mLine = new Line3D();
     sx = 0;
     sy = 0;
@@ -72,7 +74,7 @@ public class SketchFixedPath extends SketchPath
     cz = z;
   }
 
-  public void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  public void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
   {
     Path  path = new Path();
     int np = 0;
@@ -83,6 +85,7 @@ public class SketchFixedPath extends SketchPath
         path.moveTo( q.x, q.y );
         sx = q.x;
         sy = q.y;
+        
       } else {
         path.lineTo( q.x, q.y );
         sx += q.x;
@@ -90,12 +93,19 @@ public class SketchFixedPath extends SketchPath
       }
       ++ np;
     }
-    if ( np > 1 ) {
-      sx /= np;
-      sy /= np;
-    }
     path.transform( matrix );
     canvas.drawPath( path, mPaint );
+    if ( activity_mode == SketchDef.MODE_STEP && mStepPaint != null ) {
+      float radius = 5 / info.zoom_3d;
+      if ( np > 1 ) {
+        sx /= np;
+        sy /= np;
+      }
+      path = new Path();
+      path.addCircle( sx, sy, radius, Path.Direction.CCW );
+      path.transform( matrix );
+      canvas.drawPath( path, mStepPaint );
+    }
   }
 
   @Override

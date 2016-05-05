@@ -329,6 +329,7 @@ class SketchSurface extends SketchShot
 
   int refineToMaxSide( float max_size )
   {
+    if ( mSides.size() == 0 ) return 0;
     for ( SketchTriangle t : mTriangles ) t.splitted = false;
     // boolean repeat = true;
     // int cnt = 0;
@@ -710,8 +711,12 @@ class SketchSurface extends SketchShot
   {
     SketchTriangle t = null;
     if ( i != j && j != k && k != i ) {
-      t = new SketchTriangle( this, i, j, k, v1, v2, v3 );
-      mTriangles.add( t );
+      if ( v1 == null || v2 == null || v3 == null ) {
+        TDLog.Error("ERROR add triangle with a null vertex. Vertex indices " + i + " " + j + " " + k );
+      } else {
+        t = new SketchTriangle( this, i, j, k, v1, v2, v3 );
+        mTriangles.add( t );
+      }
     }
     return t;
   }
@@ -720,9 +725,13 @@ class SketchSurface extends SketchShot
   {
     SketchTriangle t = null;
     if ( i != j && j != k && k != i ) {
-      t = new SketchTriangle( this, i, j, k, v1, v2, v3 );
-      computeProjections3V( t, v1, v2, v3, info );
-      mTriangles.add( t );
+      if ( v1 == null || v2 == null || v3 == null ) {
+        TDLog.Error("ERROR add triangle with a null vertex. Vertex indices " + i + " " + j + " " + k );
+      } else {
+        t = new SketchTriangle( this, i, j, k, v1, v2, v3 );
+        computeProjections3V( t, v1, v2, v3, info );
+        mTriangles.add( t );
+      }
     }
     return t;
   }
@@ -1340,7 +1349,7 @@ class SketchSurface extends SketchShot
     } 
   }
 
-  private void drawBorders( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  private void drawBorders( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
   {
     if ( mBorders != null ) {
       for ( SketchBorder brd : mBorders ) {
@@ -1362,7 +1371,7 @@ class SketchSurface extends SketchShot
     }
   }
    
-  private void drawSurfaceBack( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  private void drawSurfaceBack( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
   {
     float radius = 5f / info.zoom_3d;
     synchronized( mTriangles ) {
@@ -1374,9 +1383,11 @@ class SketchSurface extends SketchShot
         float zz = computeProjections( tri, info );
         if ( zz > -900 ) {
           Path path = new Path();
-          // mCorners.put( tri.i, tri.p1 );
-          // mCorners.put( tri.j, tri.p2 );
-          // mCorners.put( tri.k, tri.p3 );
+          // if ( activity_mode == SketchDef.MODE_SELECT || activity_mode == SketchDef.MODE_STEP ) {
+          //   mCorners.put( tri.i, tri.p1 );
+          //   mCorners.put( tri.j, tri.p2 );
+          //   mCorners.put( tri.k, tri.p3 );
+          // }
 
           path.moveTo( tri.p1.x, tri.p1.y );
           path.lineTo( tri.p2.x, tri.p2.y );
@@ -1401,7 +1412,7 @@ class SketchSurface extends SketchShot
   }
 
 
-  private void drawSurfaceFor( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  private void drawSurfaceFor( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
   {
     Paint highpaint = mPainter.bluePaint;
     float radius = 5f / info.zoom_3d;
@@ -1414,9 +1425,12 @@ class SketchSurface extends SketchShot
         float zz = computeProjections( tri, info );
         if ( zz > -900 ) {
           Path path = new Path();
-          mCorners.put( tri.i, tri.p1 );
-          mCorners.put( tri.j, tri.p2 );
-          mCorners.put( tri.k, tri.p3 );
+          // if select mode add triangle vertices
+          if ( activity_mode == SketchDef.MODE_SELECT ) {
+            mCorners.put( tri.i, tri.p1 );
+            mCorners.put( tri.j, tri.p2 );
+            mCorners.put( tri.k, tri.p3 );
+          }
 
           path.moveTo( tri.p1.x, tri.p1.y );
           path.lineTo( tri.p2.x, tri.p2.y );
@@ -1445,7 +1459,7 @@ class SketchSurface extends SketchShot
   }
 
 
-  private void drawVertices( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  private void drawVertices( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
   {
     float radius = 5f / info.zoom_3d;
     if ( mSelectedVertex != null ) {
@@ -1508,13 +1522,13 @@ class SketchSurface extends SketchShot
     //   canvas.drawPath( path1, mPainter.redPaint );
     // }
   
-  synchronized void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info )
+  synchronized void draw( Canvas canvas, Matrix matrix, Sketch3dInfo info, int activity_mode )
   {
-    drawSurfaceBack( canvas, matrix, info );
-    drawSurfaceFor( canvas, matrix, info );
-    drawVertices( canvas, matrix, info );
-    // drawInsideTriangles( canvas, matrix, info );
-    drawBorders( canvas, matrix, info );
+    drawSurfaceBack( canvas, matrix, info, activity_mode );
+    drawSurfaceFor( canvas, matrix, info, activity_mode );
+    drawVertices( canvas, matrix, info, activity_mode );
+    // drawInsideTriangles( canvas, matrix, info, activity_mode );
+    drawBorders( canvas, matrix, info, activity_mode );
   }
 
   // get the vertex at a certain scene point 

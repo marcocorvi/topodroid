@@ -640,6 +640,7 @@
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
     <string name="title_discover">Сканиране за DistoX устройства…</string>
+    <!-- TODO string name="title_draw">Draw</string -->
     <string name="title_draw_area">Площ %1$s</string>
     <string name="title_draw_line">Линия %1$s</string>
     <string name="title_draw_point">Точка %1$s</string>
@@ -662,6 +663,7 @@
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>
     <string name="title_refs">Показване в скицата на:</string>
     <string name="title_scraps">Скици в картировката</string>
+    <!-- TODO string name="title_select">Select</string -->
     <string name="title_shift">Изместване</string>
     <string name="title_shot_delete">Изтриване на отсечката?</string>
     <string name="title_sensor_edit">Сензор</string>
