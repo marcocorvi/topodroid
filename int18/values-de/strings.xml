@@ -237,7 +237,7 @@
     <string name="no_profile_overview">Kein Überblick für projizierte Profile</string>
     <string name="no_proj4">Proj4 nicht installiert</string>
     <string name="no_sensors">Vermessung hat keine Sensormessungen</string>
-    <!-- TODO string name="no_sketch">No 3D sketch</string -->
+    <string name="no_sketch">Keine 3D Skizze</string>
     <!-- UNUSED string name="no_shots">Vermessung hat keine Messungen</string -->
     <string name="no_survey">Keine Vermessung ausgewählt</string>
     <string name="no_thmanager">Keine ThManager App</string>
