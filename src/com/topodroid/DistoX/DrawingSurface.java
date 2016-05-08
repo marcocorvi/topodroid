@@ -404,6 +404,8 @@ public class DrawingSurface extends SurfaceView
   void addDrawingStationPath( DrawingStationPath path ) { commandManager.addUserStation( path ); }
   void removeDrawingStationPath( DrawingStationPath path ) { commandManager.removeUserStation( path ); }
 
+  public RectF getBitmapBounds( ) { return commandManager.getBitmapBounds(); }
+
   public Bitmap getBitmap( long type )
   {
     if ( PlotInfo.isProfile( type ) ) {

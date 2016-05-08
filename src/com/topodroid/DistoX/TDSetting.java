@@ -68,6 +68,7 @@ class TDSetting
     "DISTOX_DIP_THR",             // 26
     "DISTOX_LOOP_CLOSURE",        // 27 whether to close loop
     "DISTOX_CHECK_ATTACHED",      // 28
+    "DISTOX_PREV_NEXT",         
 
     "DISTOX_UNIT_LOCATION",       // 29 
     "DISTOX_CRS",                 // 30
@@ -81,6 +82,8 @@ class TDSetting
 
     "DISTOX_AUTO_STATIONS",       // 37
     "DISTOX_CLOSENESS",           // 38
+    "DISTOX_MIN_SHIFT",          
+    "DISTOX_POINTING",
     "DISTOX_LINE_SEGMENT",
     "DISTOX_LINE_ACCURACY",
     "DISTOX_LINE_CORNER",         // 41
@@ -257,6 +260,7 @@ class TDSetting
   static int mWaitData  =  500;
 
   static boolean mCheckAttached = false;    // whether to check is there are shots non-attached
+  static boolean mPrevNext = true;    // whether to display prev-next buttons in shot dialog
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SHOTS
@@ -320,6 +324,8 @@ class TDSetting
   static final float mCloseCutoff = 0.01f; // minimum selection radius
 
   static float mCloseness = 24f;             // selection radius
+  static int mMinShift = 60;
+  static int mPointingRadius = 16;
 
   // static final String LINE_SHIFT = "20.0";
   static float mUnitGrid  = 1;         // 1: meter, 0.9... yard
@@ -612,6 +618,7 @@ class TDSetting
 
     mLoopClosure   = prefs.getBoolean( key[k++], false );   // DISTOX_LOOP_CLOSURE
     mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
+    mPrevNext      = prefs.getBoolean( key[k++], true );    // DISTOX_PREV_NEXT
 
     mUnitLocation  = prefs.getString( key[k++], "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS  // choice
                                                                             : TDConst.DEGREE;
@@ -629,6 +636,8 @@ class TDSetting
     // -------------------  DRAWING PREFERENCES -def----fallback------min/max
     mAutoStations  = prefs.getBoolean( key[k++], true );            // DISTOX_AUTO_STATIONS 
     mCloseness     = tryFloat( prefs, key[k++], "24" );             // DISTOX_CLOSENESS
+    mMinShift      = tryInt(   prefs, key[k++], "60" );             // DISTOX_MIN_SHIFT
+    mPointingRadius= tryInt(   prefs, key[k++], "16" );             // DISTOX_POINTING
     mLineSegment   = tryInt(   prefs, key[k++], "10" );             // DISTOX_LINE_SEGMENT
     mLineSegment2  = mLineSegment * mLineSegment;
     mLineAccuracy  = tryFloat( prefs, key[k++], "1" );              // DISTOX_LINE_ACCURACY
@@ -845,6 +854,8 @@ class TDSetting
       mLoopClosure   = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCheckAttached = prefs.getBoolean( k, false );
+    } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_PREV_NEXT
+      mPrevNext = prefs.getBoolean( k, true );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mUnitLocation  = prefs.getString( k, "ddmmss" ).equals("ddmmss") ? TDConst.DDMMSS
                                                                        : TDConst.DEGREE;
@@ -873,6 +884,10 @@ class TDSetting
       mAutoStations = prefs.getBoolean( k, true );    // DISTOX_AUTO_STATIONS
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCloseness    = tryFloat( prefs, k, "24" );
+    } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_MIN_SHIFT
+      mMinShift     = tryInt(  prefs, k, "60" );
+    } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_POINTING
+      mPointingRadius= tryInt(   prefs, k, "16" );
     } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_LINE_SEGMENT
       mLineSegment  = tryInt(   prefs, k, "10" );
       mLineSegment2 = mLineSegment * mLineSegment;
@@ -1160,7 +1175,7 @@ class TDSetting
     return Float.toString( i );
   }
 
-  static String enforsePreferenceBounds( String name, String value )
+  static String enforcePreferenceBounds( String name, String value )
   {
     // if ( name.equals( "DISTOX_COSURVEY" )
     //S if ( name.equals( "DISTOX_INIT_STATION" )
@@ -1178,6 +1193,7 @@ class TDSetting
     if ( name.equals( "DISTOX_DIP_THR"        ) ) return parseFloatValue( value, mDipThr, 0 );
     //B if ( name.equals( "DISTOX_LOOP_CLOSURE" ) 
     //B if ( name.equals( "DISTOX_CHECK_ATTACHED" )
+    //B if ( name.equals( "DISTOX_PREV_NEXT" )
 
     //C if ( name.equals( "DISTOX_UNIT_LOCATION" )
     //S if ( name.equals( "DISTOX_CRS" )
@@ -1200,7 +1216,9 @@ class TDSetting
 
     // if ( name.equals( "DISTOX_AUTO_STATIONS" )
     if ( name.equals( "DISTOX_CLOSENESS"      ) ) return parseFloatValue( value, mCloseness,    1 );
-    if ( name.equals( "DISTOX_LINE_SEGMENT"   ) ) return parseFloatValue( value, mLineSegment,  1 );
+    if ( name.equals( "DISTOX_MIN_SHIFT"      ) ) return parseIntValue( value, mMinShift,      10 );
+    if ( name.equals( "DISTOX_POINTING"       ) ) return parseIntValue( value, mPointingRadius, 1 );
+    if ( name.equals( "DISTOX_LINE_SEGMENT"   ) ) return parseIntValue( value, mLineSegment,    1 );
     if ( name.equals( "DISTOX_LINE_ACCURACY"  ) ) return parseFloatValue( value, mLineAccuracy, 0.1f );
     if ( name.equals( "DISTOX_LINE_CORNER"    ) ) return parseFloatValue( value, mLineCorner,   0.1f );
     // if ( name.equals( "DISTOX_LINE_STYLE" ) 

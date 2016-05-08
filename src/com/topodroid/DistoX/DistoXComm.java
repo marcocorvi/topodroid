@@ -66,7 +66,11 @@ public class DistoXComm extends TopoDroidComm
   {
     if ( mBTReceiver == null ) return;
     // TDLog.Log( TDLog.LOG_COMM, "reset BT receiver");
-    mApp.unregisterReceiver( mBTReceiver );
+    try {
+      mApp.unregisterReceiver( mBTReceiver );
+    } catch ( IllegalArgumentException e ) {
+      TDLog.Error( "unregister BT receiver error " + e.getMessage() );
+    }
     mBTReceiver = null;
   }
 

@@ -259,6 +259,7 @@
     <string name="menu_sync">Sincro</string>
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
+    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -533,6 +534,7 @@
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
+    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
    
     <string name="help_line_point">Editar punto o línea: unir, separar, cortar, eliminar</string>
 <!--
@@ -704,6 +706,10 @@
   <string name="pref_closeness_title">Selección radio</string>
   <!-- UNUSED string name="pref_closeness_summary">Selección dibujo de elementos radio</string -->
   <string name="pref_closeness_message">dibujo selección radio</string>
+  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
+  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
+  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
+  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
@@ -724,6 +730,8 @@
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
+  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
+  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
   <string name="pref_mag_anomaly_title">Declinación magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
   <string name="pref_azimuth_manual_title">Toma extendida</string>

@@ -282,6 +282,7 @@
     <string name="menu_sync">SYNCHRONISIEREN</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKIZZEN</string -->
     <string name="menu_validate">VALIDIEREN</string>
+    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
 
 <!-- LINE POINT EDITING ACTIONS -->
     <string name="popup_join_pt">Mit nähestem Punkt vereinigen</string>
@@ -608,6 +609,7 @@
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
+    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
    
     <string name="help_line_point">Linienpunkt Aktionen: verbinden, trennen, schneiden, löschen</string>
 
@@ -787,6 +789,10 @@
   <string name="pref_closeness_title">Auswahl Radius</string>
   <!-- UNUSED string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string -->
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
+  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
+  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
+  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
+  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
@@ -807,6 +813,8 @@
   <string name="pref_leg_message">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
   <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog neuer Messzug anzeigen</string>
+  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
+  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
   <string name="pref_mag_anomaly_title">Magnetische Abweichung</string>
   <string name="pref_mag_anomaly_summary">Kompensiere lokale magnetische Abweichung</string>
   <string name="pref_azimuth_manual_title">Seitenriss-Azimut wählbar</string>

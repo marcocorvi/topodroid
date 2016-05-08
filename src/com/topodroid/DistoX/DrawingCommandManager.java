@@ -810,7 +810,7 @@ public class DrawingCommandManager
   }
 
   // called by DrawingSurface.getBitmap()
-  public Bitmap getBitmap()
+  public RectF getBitmapBounds()
   {
     RectF bounds = new RectF();
     RectF b = new RectF();
@@ -845,6 +845,12 @@ public class DrawingCommandManager
         }
       }
     }
+    return bounds;
+  }
+
+  public Bitmap getBitmap()
+  {
+    RectF bounds = getBitmapBounds();
     // TDLog.Log(  TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     float scale = TDSetting.mBitmapScale;
 
@@ -857,10 +863,10 @@ public class DrawingCommandManager
     }
     width  = (int)((bounds.right - bounds.left + 2 * BORDER) * scale );
     height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * scale );
-    // Log.v( "DistoX", "PNG scale " + scale + " " + TDSetting.mBitmapScale );
+    Log.v( "DistoX", "PNG scale " + scale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
    
     Bitmap bitmap = null;
-    while ( bitmap == null && scale > 0.01 ) {
+    while ( bitmap == null && scale > 0.05 ) {
       try {
         // bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
         bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.RGB_565);
@@ -868,8 +874,12 @@ public class DrawingCommandManager
         scale /= 2;
         width  = (int)((bounds.right - bounds.left + 2 * BORDER) * scale );
         height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * scale );
+      } catch ( IllegalArgumentException e ) {
+        TDLog.Error("create bitmap illegal arg " + e.getMessage() );
+        return null;
       }
     }
+    if ( scale <= 0.05 ) return null;
     if ( bitmap == null ) return null;
     Canvas c = new Canvas (bitmap);
     // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);

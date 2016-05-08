@@ -55,6 +55,13 @@
      />
 
      <CheckBoxPreference
+       android:key="DISTOX_PREV_NEXT"
+       android:summary="@string/pref_prev_next_summary"
+       android:title="@string/pref_prev_next_title"
+       android:defaultValue="true"
+     />
+
+     <CheckBoxPreference
        android:key="DISTOX_BACKSIGHT"
        android:summary="@string/pref_backsight_summary"
        android:title="@string/pref_backsight_title"

@@ -266,6 +266,7 @@
     <string name="menu_sync">Синхронизиране</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 скици</string -->
     <string name="menu_validate">Проверка</string>
+    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
     <string name="popup_snap_ln">Прикачване към близка линия</string>
@@ -585,6 +586,7 @@
     <string name="help_previous">Предишен избран елемент</string>
     <string name="help_next">Следващ избран елемент</string>
     <string name="help_recover">Възстановяване на скица от резервно копие</string>
+    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
 
     <string name="help_line_point">Действия за точка от линия: съединяване, разделяне, премахване</string>
 <!--
@@ -771,6 +773,10 @@
   <string name="pref_closeness_title">Радиус при избиране</string>
   <!-- UNUSED string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string -->
   <string name="pref_closeness_message">Радиус за избиране на елемент от скицата</string>
+  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
+  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
+  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
+  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
@@ -791,6 +797,8 @@
   <string name="pref_leg_message">Толеранс между измерванията за отсечка на антената</string>
   <string name="pref_backsight_title">Обратна отсечка</string>
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
+  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
+  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
   <string name="pref_azimuth_manual_title">Ръчно разгъване на отсечки</string>

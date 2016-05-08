@@ -46,14 +46,17 @@ public class MyEditPreference extends EditTextPreference
       @Override
       public boolean onPreferenceChange( Preference p, Object v ) 
       {
-        String new_value = TDSetting.enforsePreferenceBounds( p.getKey(), (String)v );
-        // TDLog.Error( p.getKey() + ": value " + ((String)v) + " -> " + new_value + " text " + getText() );
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString( p.getKey(), new_value );
-        editor.commit();
-        EditTextPreference ep = (EditTextPreference)p;
-        ep.setSummary( new_value );
-        ep.setText( new_value );
+        String value = (String)v;
+        String new_value = TDSetting.enforcePreferenceBounds( p.getKey(), value );
+        if ( ! new_value.equals( value ) ) {
+          // TDLog.Error( p.getKey() + ": value " + ((String)v) + " -> " + new_value + " text " + getText() );
+          SharedPreferences.Editor editor = sp.edit();
+          editor.putString( p.getKey(), new_value );
+          editor.commit();
+          EditTextPreference ep = (EditTextPreference)p;
+          ep.setSummary( new_value );
+          ep.setText( new_value );
+        }
         return false; // state of preference has already been updated
       }
     } );

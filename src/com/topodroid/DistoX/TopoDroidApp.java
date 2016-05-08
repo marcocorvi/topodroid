@@ -1093,7 +1093,7 @@ public class TopoDroidApp extends Application
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
       //   List<DistoXDBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
-      //   assignStations( list );
+      //   assign Stations( list );
       // }
     } else {
       TDLog.Error( "Comm or Device is null ");
@@ -1218,6 +1218,7 @@ public class TopoDroidApp extends Application
   //
   public void assignStations( List<DistoXDBlock> list )
   { 
+    // mSecondLastShotId = lastShotId(); // FIXME this probably not needed
     // Log.v("DistoX", "assign stations. size " + list.size() );
     int survey_stations = TDSetting.mSurveyStations;
     if ( survey_stations <= 0 ) return;
@@ -1234,8 +1235,7 @@ public class TopoDroidApp extends Application
     String oldFrom = "empty"; // FIXME
 
     String station = shot_after_splay ? from : "";  // splays station
-    // Log.v("DistoX", "assign stations: From <" + from + "> To <" + to + "> station <" + station + "> Blk size "
-    //    + list.size() );
+    // Log.v("DistoX", "assign stations: From <" + from + "> To <" + to + "> station <" + station + "> Blk size " + list.size() );
     // Log.v("DistoX", "Current Station " + ( (mCurrentStationName==null)? "null" : mCurrentStationName ) );
 
     int nrLegShots = 0;

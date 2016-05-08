@@ -86,6 +86,8 @@ public class DrawingLinePath extends DrawingPointLinePath
       ret.setReversed( reversed );
 
       int npt = dis.readInt();
+      // Log.v("DistoX", "L: " + fname + " T " + type + " R" + reversed + " C" + closed + " NP " + npt );
+
       int has_cp;
       float mX1, mY1, mX2, mY2, mX, mY;
       mX = x + dis.readFloat();
@@ -113,7 +115,8 @@ public class DrawingLinePath extends DrawingPointLinePath
       ret.retracePath();
       return ret;
     } catch ( IOException e ) {
-      TDLog.Error( "LINE in error " + e.toString() );
+      TDLog.Error( "LINE in error " + e.getMessage() );
+      // Log.v("DistoX", "LINE in error " + e.getMessage() );
     }
     return null;
   }

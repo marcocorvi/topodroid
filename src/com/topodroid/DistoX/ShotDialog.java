@@ -119,14 +119,16 @@ public class ShotDialog extends MyDialog
   private static int flagDistance = MyKeyboard.FLAG_POINT;
   private static int flagBearing  = MyKeyboard.FLAG_POINT;
   private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
-  public ShotDialog( Context context, ShotActivity parent, int pos,
-                     DistoXDBlock blk, DistoXDBlock prev, DistoXDBlock next )
+
+  public ShotDialog( Context context, ShotActivity parent, int pos, DistoXDBlock blk,
+                     DistoXDBlock prev, DistoXDBlock next
+                   )
   {
     super( context, R.string.ShotDialog );
     mParent = parent;
     mPos = pos;
     loadDBlock( blk, prev, next );
-    TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
+    // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog " + blk.toString(true) );
   }
 
 
@@ -135,12 +137,13 @@ public class ShotDialog extends MyDialog
     mPrevBlk     = prev;
     mNextBlk     = next;
     mBlk         = blk;
-    TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog LOAD " + blk.toString(true) );
-    TDLog.Log( TDLog.LOG_SHOT, "  prev " + ((prev != null)? prev.toString(true) : "null") );
-    TDLog.Log( TDLog.LOG_SHOT, "  next " + ((next != null)? next.toString(true) : "null") );
+    // TDLog.Log( TDLog.LOG_SHOT, "Shot Dialog LOAD " + blk.toString(true) );
+    // TDLog.Log( TDLog.LOG_SHOT, "  prev " + ((prev != null)? prev.toString(true) : "null") );
+    // TDLog.Log( TDLog.LOG_SHOT, "  next " + ((next != null)? next.toString(true) : "null") );
 
     shot_from    = blk.mFrom;
     shot_to      = blk.mTo;
+    
     if ( blk.isTypeBlank() && prev != null && prev.type() == DistoXDBlock.BLOCK_MAIN_LEG ) {
       if ( DistoXStationName.isLessOrEqual( prev.mFrom, prev.mTo ) ) {
         shot_from = prev.mTo;
@@ -338,28 +341,29 @@ public class ShotDialog extends MyDialog
     //   mRBignore.setTextColor( 0xff999999 );
     // }
 
-    // mButtonDrop = (Button) findViewById(R.id.btn_drop );
-    mButtonSave = (Button) findViewById(R.id.btn_save );
-    mButtonOK   = (Button) findViewById(R.id.btn_ok );
-    // mButtonBack = (Button) findViewById(R.id.btn_back );
-
     mButtonPrev = (Button) findViewById(R.id.btn_prev );
     mButtonNext = (Button) findViewById(R.id.btn_next );
+    mButtonSave = (Button) findViewById(R.id.btn_save );
+    mButtonOK   = (Button) findViewById(R.id.btn_ok );
 
     // mETfrom.setRawInputType( InputType.TYPE_CLASS_NUMBER );
     // mETfrom.setKeyListener( NumberKeyListener );
     // mETto.setRawInputType( InputType.TYPE_CLASS_NUMBER );
 
-    // mButtonDrop.setOnClickListener( this );
-    mButtonSave.setOnClickListener( this );
+    if ( TDSetting.mPrevNext ) {
+      mButtonPrev.setOnClickListener( this );
+      mButtonNext.setOnClickListener( this );
+      mButtonSave.setOnClickListener( this );
+    } else {
+      mButtonPrev.setVisibility( View.INVISIBLE );
+      mButtonNext.setVisibility( View.INVISIBLE );
+      mButtonSave.setVisibility( View.GONE );
+    }
     mButtonOK.setOnClickListener( this );
-    // mButtonBack.setOnClickListener( this );
 
     mRBdup.setOnClickListener( this );
     mRBsurf.setOnClickListener( this );
 
-    mButtonPrev.setOnClickListener( this );
-    mButtonNext.setOnClickListener( this );
     mButtonReverse.setOnClickListener( this );
 
     mRBleft.setOnClickListener( this );
@@ -368,7 +372,6 @@ public class ShotDialog extends MyDialog
     // mRBignore.setOnClickListener( this );
 
     updateView();
-
   }
 
   private void saveDBlock()
@@ -509,10 +512,10 @@ public class ShotDialog extends MyDialog
       closeKeyboard();
       saveDBlock();
       dismiss();
+
     } else if ( b == mButtonSave ) {
       closeKeyboard();
       saveDBlock();
-
     } else if ( b == mButtonPrev ) {
       // shift:
       //               prev -- blk -- next
@@ -521,7 +524,7 @@ public class ShotDialog extends MyDialog
       // saveDBlock();
       if ( mPrevBlk != null ) {
         DistoXDBlock prevBlock = mParent.getPreviousLegShot( mPrevBlk, true );
-        TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
+        // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
         loadDBlock( mPrevBlk, prevBlock, mBlk );
         updateView();
       } else {
@@ -534,12 +537,13 @@ public class ShotDialog extends MyDialog
       // saveDBlock();
       if ( mNextBlk != null ) {
         DistoXDBlock next = mParent.getNextLegShot( mNextBlk, true );
-        TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
+        // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
         loadDBlock( mNextBlk, mBlk, next );
         updateView();
       } else {
         TDLog.Log( TDLog.LOG_SHOT, "NEXT is null" );
       }
+
     } else if ( b == mButtonReverse ) {
       shot_from = mETfrom.getText().toString();
       shot_from = TopoDroidUtil.noSpaces( shot_from );

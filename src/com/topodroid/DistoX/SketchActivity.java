@@ -1253,13 +1253,11 @@ public class SketchActivity extends ItemDrawer
         float y_shift = y_canvas - mSaveY;
         if ( mMode == SketchDef.MODE_DRAW || mMode == SketchDef.MODE_EDIT ) {
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
-            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment ) {
-              // mSketchSurface.isDrawing = true;
-              if ( ++mPointCnt % TDSetting.mLineType == 0 ) {
-                mCurrentLinePath.addPoint( x_scene, y_scene );
-                mSaveX = x_canvas;                 // reset start
-                mSaveY = y_canvas;
-              }
+            if ( x_shift*x_shift + y_shift*y_shift > TDSetting.mLineSegment2 ) {
+              ++mPointCnt; // add all points
+              mCurrentLinePath.addPoint( x_scene, y_scene );
+              mSaveX = x_canvas;                 // reset start
+              mSaveY = y_canvas;
               mCurrentBrush.mouseMove( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             }
           }
@@ -1316,7 +1314,7 @@ public class SketchActivity extends ItemDrawer
           if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
-            if ( TDMath.sqrt( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment || (mPointCnt % TDSetting.mLineType) > 0 ) {
+            if ( x_shift*x_shift + y_shift*y_shift > TDSetting.mLineSegment2 ) {
               mCurrentLinePath.addPoint( x_scene, y_scene );
             }
             if ( mPointCnt > TDSetting.mLineType ) {

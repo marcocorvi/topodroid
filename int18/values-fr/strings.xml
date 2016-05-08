@@ -263,6 +263,7 @@
     <string name="menu_sync">SYNCHRONISATION</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <string name="menu_validate">VALIDATION</string>
+    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
 
     <string name="popup_join_pt">Attacher au point le plus proche</string>
     <string name="popup_snap_ln">Attacher à la ligne la plus proche</string>
@@ -582,6 +583,7 @@
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>
     <string name="help_next">Sélectionne l\'élément suivant dans la sélection</string>
     <string name="help_recover">Recuperer dessin de la sauvegarde</string>
+    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
    
     <string name="help_line_point">Actions sur les points d\'une ligne : joindre, partager, couper, supprimer</string>
 <!--
@@ -768,6 +770,10 @@
   <string name="pref_closeness_title">Radius de sélection</string>
   <!-- UNUSED string name="pref_closeness_summary">Portée de la zone de sélection</string -->
   <string name="pref_closeness_message">Portée de la zone de sélection</string>
+  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
+  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
+  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
+  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
   <!-- TODO string name="pref_vert_splay_title">Dashed splay clino thr.</string -->
   <!-- UNUSED string name="pref_vert_splay_summary">Dashed splay clino threshold</string -->
   <!-- TODO string name="pref_vert_splay_message">Dashed splay clino threshold</string -->
@@ -788,6 +794,8 @@
   <string name="pref_leg_message">Tolérance au long des visées de cheminement</string>
   <!-- TODO string name="pref_backsight_title">Backsight</string -->
   <!-- TODO string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string -->
+  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
+  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
   <!-- TODO string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- TODO string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
   <!-- TODO string name="pref_azimuth_manual_title">Manually set "extend"</string -->

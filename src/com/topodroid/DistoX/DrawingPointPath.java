@@ -26,7 +26,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  */
@@ -108,7 +108,8 @@ public class DrawingPointPath extends DrawingPath
       //   DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
       // }
     } catch ( IOException e ) {
-      TDLog.Error( "POINT in error " + e.toString() );
+      TDLog.Error( "POINT in error " + e.getMessage() );
+      // Log.v("DistoX", "POINT in error " + e.getMessage() );
     }
     return null;
   }

@@ -138,7 +138,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
       ret.retracePath();
       return  ( npt < 3 )? null : ret;
     } catch ( IOException e ) {
-      TDLog.Error( "AREA in error " + e.toString() );
+      TDLog.Error( "AREA in error " + e.getMessage() );
+      // Log.v("DistoX", "AREA in error " + e.getMessage() );
     }
     return null;
   }

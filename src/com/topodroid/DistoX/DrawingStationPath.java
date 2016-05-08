@@ -24,7 +24,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import android.util.Log;
+// import android.util.Log;
 
 /**
  * station points do not shift (!)
@@ -134,9 +134,10 @@ public class DrawingStationPath extends DrawingPath
       float y = dis.readFloat();
       int scale = dis.readInt();
       String name = dis.readUTF();
+      // Log.v("DistoX", "S " + name + " " + x + " " + y );
       return new DrawingStationPath( name, x, y, scale );
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR-dis station ");
+      TDLog.Error( "ERROR-dis station " + e.getMessage() );
     }
     return null;
   }

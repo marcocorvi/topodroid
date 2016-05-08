@@ -262,6 +262,7 @@
     <string name="menu_sync">同步</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 草图</string -->
     <string name="menu_validate">验证</string>
+    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
 
     <string name="popup_join_pt">接至附近点</string>
     <string name="popup_snap_ln">接至附近线</string>
@@ -580,6 +581,7 @@
     <string name="help_previous">已选项目</string>
     <string name="help_next">选项中的下一项目</string>
     <string name="help_recover">从备份中重新载入草图</string>
+    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
    
     <string name="help_line_point">线点功能: 衔接,分割, 剪切, 删除</string>
 <!--
@@ -766,6 +768,10 @@
   <string name="pref_closeness_title">选择半径</string>
   <!-- UNUSED string name="pref_closeness_summary">草图项目选择半径</string -->
   <string name="pref_closeness_message">草图项目选择半径</string>
+  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
+  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
+  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
+  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
   <string name="pref_vert_splay_title">侧线虚线倾斜极限</string>
   <!-- UNUSED string name="pref_vert_splay_summary">侧线虚线倾斜极限</string -->
   <string name="pref_vert_splay_message">侧线虚线倾斜极限</string>
@@ -786,6 +792,8 @@
   <string name="pref_leg_message">主线测量间容差</string>
   <string name="pref_backsight_title">后测</string>
   <string name="pref_backsight_summary">新测量对话框里的后测字段</string>
+  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
+  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
   <string name="pref_mag_anomaly_title">磁场异常</string>
   <string name="pref_mag_anomaly_summary">本地磁场异常抵消</string>
   <string name="pref_azimuth_manual_title">可设定延展参考</string>

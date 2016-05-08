@@ -574,6 +574,7 @@ class DrawingIO
           switch ( what ) {
             case 'V':
               version = dis.readInt();
+              // Log.v("DistoX", "TDR version " + version );
               break;
             case 'I': // plot info: bounding box
               {
@@ -593,6 +594,7 @@ class DrawingIO
                   north_x2 = dis.readFloat();
                   north_y2 = dis.readFloat();
                 }
+                // Log.v("DistoX", "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
               }
               break;
             case 'S':
@@ -611,6 +613,7 @@ class DrawingIO
                 vals = points.split(",");
                 for ( String val : vals ) if ( val.length() > 0 ) localPalette.addAreaFilename( val );
                 in_scrap = true;
+                // Log.v("DistoX", "TDR type " + type );
               }
               break;
             case 'P':

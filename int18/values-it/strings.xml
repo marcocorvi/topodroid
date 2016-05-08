@@ -264,6 +264,7 @@
     <string name="menu_sync">SINC</string>
     <!-- UNUSED string name="menu_tdr2th2">DISEGNI TH2</string -->
     <string name="menu_validate">CONVALIDA</string>
+    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
 
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
@@ -584,6 +585,7 @@
     <string name="help_previous">Precedente oggetto nella selezione</string>
     <string name="help_next">Prossimo oggetto nella selezione</string>
     <string name="help_recover">Recupera disegno dal backup</string>
+    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
    
     <string name="help_line_point">Azioni per punti di linee: unire, dividere, tagliare, rimuovere</string>
 <!--
@@ -774,6 +776,10 @@
   <string name="pref_closeness_title">Raggio di selezione</string>
   <!-- UNUSED string name="pref_closeness_summary">Raggio di selezione oggetti disegno</string -->
   <string name="pref_closeness_message">Raggio di selezione oggetti disegno</string>
+  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
+  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
+  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
+  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
@@ -794,6 +800,8 @@
   <string name="pref_leg_message">Tolleranza tra tiri di una battuta</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campi backsight nel dialogo Nuova Battuta</string>
+  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
+  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
   <string name="pref_mag_anomaly_title">Anomalia magnetica</string>
   <string name="pref_mag_anomaly_summary">Compensazione anomalia magnetica locale</string>
   <string name="pref_azimuth_manual_title">"extend" manuale</string>

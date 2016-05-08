@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
 
@@ -144,6 +145,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.menu_export,
                         R.string.menu_stats,
                         R.string.menu_reload,
+                        R.string.menu_zoom_fit,
                         R.string.menu_delete,
                         R.string.menu_palette,
                         R.string.menu_overview,
@@ -176,6 +178,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_save_plot,
                         R.string.help_stats,
                         R.string.help_recover,
+                        R.string.help_zoom_fit,
                         R.string.help_trash,
                         R.string.help_symbol,
                         R.string.help_overview,
@@ -380,7 +383,6 @@ public class DrawingActivity extends ItemDrawer
     mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
     mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-    // mDrawingSurface.refresh();
     // mZoomCtrl.hide();
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
@@ -434,9 +436,13 @@ public class DrawingActivity extends ItemDrawer
       }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-      dpath.setPaint( blk.isMultiBad() ? DrawingBrushPaths.fixedRedPaint
-                      : blk.isRecent( mApp.mSecondLastShotId )? DrawingBrushPaths.fixedBluePaint 
-                      : DrawingBrushPaths.fixedShotPaint );
+      if ( blk.isMultiBad() ) {
+        dpath.setPaint( DrawingBrushPaths.fixedRedPaint );
+      } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH && blk.isRecent( mApp.mSecondLastShotId ) ) {
+        dpath.setPaint( DrawingBrushPaths.fixedBluePaint );
+      } else {
+        dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
+      }
     }
     DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
     mDrawingSurface.addFixedPath( dpath, splay, selectable );
@@ -1471,7 +1477,6 @@ public class DrawingActivity extends ItemDrawer
       mData.updateShotName( block.mId, mSid, from, to, true );
       doComputeReferences();
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-      // mDrawingSurface.refresh();
 
       modified();
     }
@@ -1508,7 +1513,6 @@ public class DrawingActivity extends ItemDrawer
         mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl ); 
         computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, true );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-        // mDrawingSurface.refresh();
         modified();
       } 
     }
@@ -1582,13 +1586,6 @@ public class DrawingActivity extends ItemDrawer
       modified();
     }
 
-    // void refreshSurface()
-    // {
-    //   // TDLog.Log( TDLog.LOG_PLOT, "refresh surface");
-    //   mDrawingSurface.refresh();
-    // }
-
-    
     private void dumpEvent( MotionEventWrap ev )
     {
       String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
@@ -1661,7 +1658,7 @@ public class DrawingActivity extends ItemDrawer
       mSave1X = x1;
       mSave1Y = y1;
     
-      if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+      if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
         mOffset.x += x_shift / mZoom;                // add shift to offset
         mOffset.y += y_shift / mZoom; 
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
@@ -1670,11 +1667,10 @@ public class DrawingActivity extends ItemDrawer
 
     private void moveCanvas( float x_shift, float y_shift )
     {
-      if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+      if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
         mOffset.x += x_shift / mZoom;                // add shift to offset
         mOffset.y += y_shift / mZoom; 
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-        // mDrawingSurface.refresh();
       }
     }
 
@@ -1867,7 +1863,7 @@ public class DrawingActivity extends ItemDrawer
             float x_shift = x_canvas - mSaveX; // compute shift
             float y_shift = y_canvas - mSaveY;
             if ( TDSetting.mLevelOverNormal ) {
-              if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+              if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
                 mDrawingSurface.shiftDrawing( x_shift/mZoom, y_shift/mZoom );
                 modified();
               }
@@ -2162,7 +2158,8 @@ public class DrawingActivity extends ItemDrawer
               //   }
               // }
             } else { // SYMBOL_POINT
-              if ( ( ! pointerDown ) && Math.abs( x_shift ) < 16 && Math.abs( y_shift ) < 16 ) {
+              if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
+                                     && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
                 if ( DrawingBrushPaths.mPointLib.pointHasText(mCurrentPoint) ) {
                   DrawingLabelDialog label = new DrawingLabelDialog( mDrawingSurface.getContext(), this, x_scene, y_scene );
                   label.show();
@@ -2179,13 +2176,15 @@ public class DrawingActivity extends ItemDrawer
             pointerDown = false;
             modified();
           } else if ( mMode == MODE_EDIT ) {
-            if ( Math.abs(mStartX - x_canvas) < 10 && Math.abs(mStartY - y_canvas) < 10 ) {
+            if ( Math.abs(mStartX - x_canvas) < TDSetting.mPointingRadius 
+              && Math.abs(mStartY - y_canvas) < TDSetting.mPointingRadius ) {
               doSelectAt( x_scene, y_scene );
             }
             mEditMove = false;
           } else if ( mMode == MODE_SHIFT ) {
             if ( mShiftMove ) {
-              if ( Math.abs(mStartX - x_canvas) < 10 && Math.abs(mStartY - y_canvas) < 10 ) {
+              if ( Math.abs(mStartX - x_canvas) < TDSetting.mPointingRadius
+                && Math.abs(mStartY - y_canvas) < TDSetting.mPointingRadius ) {
                 // mEditMove = false;
                 mMode = MODE_EDIT;
                 mDrawingSurface.clearSelected();
@@ -2629,7 +2628,6 @@ public class DrawingActivity extends ItemDrawer
                 sp.mPoint.has_cp = false;
                 DrawingPointLinePath line = (DrawingPointLinePath)sp.mItem;
                 line.retracePath();
-                // mDrawingSurface.refresh();
                 modified();
               }
             }
@@ -2663,7 +2661,6 @@ public class DrawingActivity extends ItemDrawer
                     line.retracePath();
                   }
                 }
-                // mDrawingSurface.refresh();
                 modified();
               }
             }
@@ -3191,13 +3188,13 @@ public class DrawingActivity extends ItemDrawer
       }
     }
 
-    void doSavePng( long type, final String filename, boolean toast )
+    private void doSavePng( long type, final String filename, boolean toast )
     {
       Bitmap bitmap = mDrawingSurface.getBitmap( type );
-      if ( bitmap == null ) {
-        if ( toast ) Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
-      } else {
+      if ( bitmap != null ) {
         new ExportBitmapToFile(this, bitmap, filename, toast ).execute();
+      } else if ( toast ) {
+        Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
       }
     }
 
@@ -3364,22 +3361,12 @@ public class DrawingActivity extends ItemDrawer
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    if ( mApp.mShotActivity != null ) {
-      mApp.mShotActivity.updateBlockList( blk );
-    } else {
-      TDLog.Error("Null app mShotActivity on update list [1]");
-    }
     updateDisplay( /* true, false */ );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
-    if ( mApp.mShotActivity != null ) {
-      mApp.mShotActivity.updateBlockList( blk_id );
-    } else {
-      TDLog.Error("Null app mShotActivity on update list [2]");
-    }
     updateDisplay( /* true, false */ );
   }
 
@@ -3430,15 +3417,16 @@ public class DrawingActivity extends ItemDrawer
       mMenuAdapter.add( res.getString( menus[1] ) );  // INFO
     }
     mMenuAdapter.add( res.getString( menus[2] ) );  // RELOAD
+    mMenuAdapter.add( res.getString( menus[3] ) );  // ZOOM_FIT
     if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[3] ) ); // DELETE
+      mMenuAdapter.add( res.getString( menus[4] ) ); // DELETE
     }
-    mMenuAdapter.add( res.getString( menus[4] ) ); // PALETTE
+    mMenuAdapter.add( res.getString( menus[5] ) ); // PALETTE
     if ( PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[5] ) ); // OVERVIEW
+      mMenuAdapter.add( res.getString( menus[6] ) ); // OVERVIEW
     }
-    mMenuAdapter.add( res.getString( menus[6] ) ); // OPTIONS
-    mMenuAdapter.add( res.getString( menus[7] ) ); // HELP
+    mMenuAdapter.add( res.getString( menus[7] ) ); // OPTIONS
+    mMenuAdapter.add( res.getString( menus[8] ) ); // HELP
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -3475,6 +3463,15 @@ public class DrawingActivity extends ItemDrawer
         } else {
           ( new PlotRecoverDialog( this, this, mFullName3, mType ) ).show();
         }
+      } else if ( p++ == pos ) { // ZOOM_FIT
+        RectF b = mDrawingSurface.getBitmapBounds();
+        float w = b.right - b.left;
+        float h = b.bottom - b.top;
+        mZoom = TopoDroidApp.mDisplayWidth / ( 1 + ((w>h)? w : h ) );
+        mOffset.x = TopoDroidApp.mDisplayWidth  / (2*mZoom) - (b.left + b.right) / 2;
+        mOffset.y = TopoDroidApp.mDisplayHeight / (2*mZoom) - (b.top + b.bottom) / 2;
+        // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
+        mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // DELETE
         askDelete();
       } else if ( p++ == pos ) { // PALETTE

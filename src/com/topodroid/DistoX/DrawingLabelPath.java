@@ -73,7 +73,8 @@ public class DrawingLabelPath extends DrawingPointPath
       ret.setOrientation( orientation );
       return ret;
     } catch ( IOException e ) {
-      TDLog.Error( "LABEL in error " + e.toString() );
+      TDLog.Error( "LABEL in error " + e.getMessage() );
+      // Log.v("DistoX", "LABEL in error " + e.getMessage() );
     }
     return null;
   }

@@ -81,10 +81,10 @@ public class DrawingBrushPaths
   // --------------------------------------------------------------------------
   // LINES
 
-  static final int errorColor      = 0xffff00ff;
-  static final int highlightColor1 = 0xffff9999;
-  static final int highlightColor2 = 0x6600cc00;
-  static final int highlightColor3 = 0xffff3333;
+  static final int errorColor      = 0xffff00ff; // violet
+  static final int highlightColor1 = 0xffff9999; // pink
+  static final int highlightColor2 = 0x6600cc00; // green
+  static final int highlightColor3 = 0xffff3333; // reddish
 
   // -----------------------------------------------------------------------
   // AREAS

@@ -42,6 +42,24 @@
        android:defaultValue="24" />
 
      <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_MIN_SHIFT"
+       android:title="@string/pref_min_shift_title"
+       android:summary="@string/pref_min_shift_message"
+       android:dialogTitle="@string/pref_min_shift_title"
+       android:dialogMessage="@string/pref_min_shift_message"
+       android:inputType="number"
+       android:defaultValue="60" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_POINTING"
+       android:title="@string/pref_pointing_title"
+       android:summary="@string/pref_pointing_message"
+       android:dialogTitle="@string/pref_pointing_title"
+       android:dialogMessage="@string/pref_pointing_message"
+       android:inputType="number"
+       android:defaultValue="16" />
+
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SPLAY_VERT_THRS"
        android:title="@string/pref_plan_vthr_title"
        android:summary="@string/pref_plan_vthr_message"

@@ -1454,7 +1454,7 @@ public class ShotActivity extends Activity
 
     // DEBUG re-assign all the stations
     // List< DistoXDBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
-    // mApp.assignStations( shots );
+    // mApp.assign Stations( shots );
 
     updateDisplay();
   }
