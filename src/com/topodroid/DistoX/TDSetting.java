@@ -1162,9 +1162,11 @@ class TDSetting
   {
     float i = def;
     try {
-      i = Float.parseFloat( value ); 
+      i = (float)(Double.parseDouble( value )); 
       if ( i < min ) i = min;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      TDLog.Error("Parse Float Number exception. Value " + value );
+    }
     return Float.toString( i );
   }
 
@@ -1173,15 +1175,20 @@ class TDSetting
     // TDLog.Error("parse float " + value + " def " + def + " min " + min + " max " + max );
     float i = def;
     try {
-      i = Float.parseFloat( value ); 
+      i = (float)(Double.parseDouble( value )); 
       if ( i < min ) i = min;
       if ( i > max ) i = max;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) { 
+      TDLog.Error("Parse Float Number exception. Value " + value );
+    }
+    // Log.v("DistoX", "parse float " + value + " def " + def + " min " + min + " max " + max + " return " + i );
     return Float.toString( i );
   }
 
   static String enforcePreferenceBounds( String name, String value )
   {
+    // Log.v("DistoX", "enforce name " + name + " value <" + value + ">" );
+
     // if ( name.equals( "DISTOX_COSURVEY" )
     //S if ( name.equals( "DISTOX_INIT_STATION" )
     //B if ( name.equals( "DISTOX_AZIMUTH_MANUAL" )

@@ -187,7 +187,7 @@ public class DrawingStationName extends DrawingPointPath
       ccx = dis.readFloat();
       ccy = dis.readFloat();
       name = dis.readUTF();
-      // Log.v("DistoX", "SN " + ccx + " " + ccy + " " + name );
+      // TDLog.Log( TDLog.LOG_PATH, "SN " + ccx + " " + ccy + " " + name );
       DrawingStationName ret = new DrawingStationName( name, ccx, ccy );
       if ( version >= 207038 ) {
         type = dis.readInt();

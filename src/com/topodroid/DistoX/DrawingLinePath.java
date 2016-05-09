@@ -86,13 +86,19 @@ public class DrawingLinePath extends DrawingPointLinePath
       ret.setReversed( reversed );
 
       int npt = dis.readInt();
-      // Log.v("DistoX", "L: " + fname + " T " + type + " R" + reversed + " C" + closed + " NP " + npt );
+      // TDLog.Log( TDLog.LOG_PLOT, "L: " + fname + " T " + type + " R" + reversed + " C" + closed + " NP " + npt );
 
       int has_cp;
       float mX1, mY1, mX2, mY2, mX, mY;
       mX = x + dis.readFloat();
       mY = y + dis.readFloat();
       has_cp = dis.read(); // this is 0
+      if ( has_cp == 1 ) { // consume 4 floats
+        mX1 = x + dis.readFloat();
+        mY1 = y + dis.readFloat();
+        mX2 = x + dis.readFloat();
+        mY2 = y + dis.readFloat();
+      }
       ret.addStartPointNoPath( mX, mY );
       for ( int k=1; k<npt; ++k ) {
         mX = x + dis.readFloat();
@@ -325,6 +331,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
         pt.toDataStream( dos );
       }
+      // TDLog.Log( TDLog.LOG_PLOT, "L " + name + " " + npt );
     } catch ( IOException e ) {
       TDLog.Error( "LINE out error " + e.toString() );
     }

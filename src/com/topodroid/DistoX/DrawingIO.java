@@ -69,7 +69,7 @@ class DrawingIO
     float x, y, x1, y1, x2, y2;
     boolean is_not_section = true;
 
-    TDLog.Log( TDLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
+    // TDLog.Log( TDLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
     // DrawingBrushPaths.makePaths( );
     DrawingBrushPaths.resetPointOrientations();
 
@@ -581,7 +581,7 @@ class DrawingIO
           switch ( what ) {
             case 'V':
               version = dis.readInt();
-              // Log.v("DistoX", "TDR version " + version );
+              // TDLog.Log( TDLog.LOG_PLOT, "TDR version " + version );
               break;
             case 'I': // plot info: bounding box
               {
@@ -601,7 +601,7 @@ class DrawingIO
                   north_x2 = dis.readFloat();
                   north_y2 = dis.readFloat();
                 }
-                // Log.v("DistoX", "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
+                // TDLog.Log(TDLog.LOG_PLOT, "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
               }
               break;
             case 'S':
@@ -642,6 +642,7 @@ class DrawingIO
               path = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
               break;
             case 'F':
+              // TDLog.Log( TDLog.LOG_PLOT, "<F>" );
               if ( complete ) break; // continue parsing stations
             case 'E':
               todo = false;

@@ -68,7 +68,7 @@ public class DrawingLabelPath extends DrawingPointPath
       text = dis.readUTF();
       options = dis.readUTF();
 
-      // Log.v("DistoX", "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
+      // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
       DrawingLabelPath ret = new DrawingLabelPath( text, ccx, ccy, scale, options );
       ret.setOrientation( orientation );
       return ret;
@@ -203,6 +203,7 @@ public class DrawingLabelPath extends DrawingPointPath
       dos.writeInt( mScale );
       dos.writeUTF( ( mText != null )? mText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
+      // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
     } catch ( IOException e ) {
       TDLog.Error( "LABEL out error " + e.toString() );
     }

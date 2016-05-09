@@ -133,7 +133,10 @@ The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
 Sketches can be exported as SVG files.<br><p>
 
 <b>PNG</b><br>
-Image file in PNG format is used only to export sketches. The image resolution (pixels per meter) can be changed through a setting. If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds.<br><p>
+Image file in PNG format is used only to export sketches.<br><p>
+
+The image resolution can be changed through a setting: a resolution of 1 means that 1 m = 40 pixels.
+If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds (or it gets so small that the program gives up trying).<br><p>
 
 <h4>CALIBRATION EXPORT</h4>
 

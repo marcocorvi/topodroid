@@ -91,7 +91,7 @@ public class DrawingPointPath extends DrawingPath
 
       DrawingBrushPaths.mPointLib.tryLoadMissingPoint( fname );
       type = DrawingBrushPaths.mPointLib.getSymbolIndexByFilename( fname );
-      // Log.v("DistoX", "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      // TDLog.Log( TDLog.LOG_PLOT, "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
         if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
         type = 0;
@@ -308,6 +308,7 @@ public class DrawingPointPath extends DrawingPath
       dos.writeFloat( (float)mOrientation );
       dos.writeInt( mScale );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
+      // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
       TDLog.Error( "POINT out error " + e.toString() );
     }

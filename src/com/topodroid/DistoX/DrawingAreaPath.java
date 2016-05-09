@@ -104,7 +104,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
 
       // DrawingBrushPaths.mAreaLib.tryLoadMissingArea( fname );
       type = DrawingBrushPaths.mAreaLib.getSymbolIndexByFilename( fname );
-      // Log.v("DistoX", "A: " + fname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
+      // TDLog.Log( TDLog.LOG_PLOT, "A: " + fname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
         if ( missingSymbols != null ) missingSymbols.addAreaFilename( fname );
         type = 0;
@@ -118,6 +118,12 @@ public class DrawingAreaPath extends DrawingPointLinePath
       mX = x + dis.readFloat( );
       mY = y + dis.readFloat( );
       has_cp = dis.read();
+      if ( has_cp == 1 ) { // consume 4 floats
+        mX1 = x + dis.readFloat();
+        mY1 = y + dis.readFloat();
+        mX2 = x + dis.readFloat();
+        mY2 = y + dis.readFloat();
+      }
       ret.addStartPoint( mX, mY );
       // Log.v("DistoX", "A start " + mX + " " + mY );
       for ( int k=1; k<npt; ++k ) {
@@ -282,6 +288,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
         pt.toDataStream( dos );
       }
+      // TDLog.Log( TDLog.LOG_PLOT, "A " + name + " " + npt );
     } catch ( IOException e ) {
       TDLog.Error( "AREA out error " + e.toString() );
     }

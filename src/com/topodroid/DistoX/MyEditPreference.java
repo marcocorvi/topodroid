@@ -20,6 +20,8 @@ import android.preference.EditTextPreference;
 import android.util.AttributeSet;
 import android.preference.Preference.OnPreferenceChangeListener;
 
+import android.util.Log;
+
 /**
  */
 public class MyEditPreference extends EditTextPreference
@@ -48,8 +50,9 @@ public class MyEditPreference extends EditTextPreference
       {
         String value = (String)v;
         String new_value = TDSetting.enforcePreferenceBounds( p.getKey(), value );
-        if ( ! new_value.equals( value ) ) {
-          // TDLog.Error( p.getKey() + ": value " + ((String)v) + " -> " + new_value + " text " + getText() );
+        // Log.v("DistoX", p.getKey() + ": value " + ((String)v) + " -> " + new_value + " text " + getText() );
+        // if ( ! new_value.equals( value ) )
+        {
           SharedPreferences.Editor editor = sp.edit();
           editor.putString( p.getKey(), new_value );
           editor.commit();
