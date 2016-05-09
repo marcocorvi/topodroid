@@ -82,7 +82,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_) + " " + filename,
+          Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_1) + " " + filename,
                           Toast.LENGTH_SHORT ).show();
         } else {
           Toast.makeText( mContext, mContext.getResources().getString(R.string.saving_file_failed), Toast.LENGTH_SHORT ).show();

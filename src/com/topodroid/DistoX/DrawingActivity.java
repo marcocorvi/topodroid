@@ -1411,6 +1411,15 @@ public class DrawingActivity extends ItemDrawer
      }
    }
 
+   private void updateReference()
+   {
+     if ( mType == PlotInfo.PLOT_PLAN ) {
+       saveReference( mPlot1, mPid1 );
+     } else if ( PlotInfo.isProfile( mType ) ) {
+       saveReference( mPlot2, mPid2 );
+     }
+   }
+
    private void saveReference( PlotInfo plot, long pid )
    {
      // Log.v("DistoX", "save pid " + pid + " ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
@@ -2728,11 +2737,10 @@ public class DrawingActivity extends ItemDrawer
     private void switchPlotType()
     {
       doSaveTdr(); // this sets mModified = false
+      updateReference();
       if ( mType == PlotInfo.PLOT_PLAN ) {
-        saveReference( mPlot1, mPid1 );
         setPlotType2( false );
       } else if ( PlotInfo.isProfile( mType ) ) {
-        saveReference( mPlot2, mPid2 );
         setPlotType1( false );
       }
     }
@@ -2932,11 +2940,7 @@ public class DrawingActivity extends ItemDrawer
       } else if ( b == mButton1[k1++] ) { // DOWNLOAD
         setConnectionStatus( 2 );
         resetFixedPaint();
-        if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-          saveReference( mPlot1, mPid1 );
-        } else if ( PlotInfo.isProfile( mType ) ) {
-          saveReference( mPlot2, mPid2 );
-        }
+        updateReference();
         if ( mApp.mDevice == null ) {
           // DistoXDBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
           (new ShotNewDialog( this, mApp, this, null, -1L )).show();
@@ -3192,7 +3196,8 @@ public class DrawingActivity extends ItemDrawer
     {
       Bitmap bitmap = mDrawingSurface.getBitmap( type );
       if ( bitmap != null ) {
-        new ExportBitmapToFile(this, bitmap, filename, toast ).execute();
+        float scale = mDrawingSurface.getBitmapScale();
+        new ExportBitmapToFile(this, bitmap, scale, filename, toast ).execute();
       } else if ( toast ) {
         Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
       }
@@ -3203,7 +3208,7 @@ public class DrawingActivity extends ItemDrawer
     {
       String filename = mApp.exportSurveyAsCsx( this, mPlot1.start );
       if ( toast )
-        Toast.makeText( mApp, getString(R.string.saved_file_) + " " + filename, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mApp, getString(R.string.saved_file_1) + " " + filename, Toast.LENGTH_SHORT ).show();
     }
 
     // used to save "dxf", "svg"
@@ -3273,7 +3278,7 @@ public class DrawingActivity extends ItemDrawer
     th2Handler = new Handler(){
       @Override public void handleMessage(Message msg) {
         if (msg.what == 661 ) {
-          Toast.makeText( mApp, getString(R.string.saved_file_) + " " + filename + ".th2", Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mApp, getString(R.string.saved_file_1) + " " + filename + ".th2", Toast.LENGTH_SHORT ).show();
         } else {
           Toast.makeText( mApp, R.string.saving_file_failed, Toast.LENGTH_SHORT ).show();
         }
@@ -3481,6 +3486,7 @@ public class DrawingActivity extends ItemDrawer
         if ( mType == PlotInfo.PLOT_PROFILE ) {
           Toast.makeText( this, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();
         } else {
+          updateReference();
           Intent intent = new Intent( this, OverviewActivity.class );
           intent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mSid );
           intent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, mFrom );
@@ -3491,6 +3497,7 @@ public class DrawingActivity extends ItemDrawer
           startActivity( intent );
         }
       } else if ( p++ == pos ) { // OPTIONS
+        updateReference();
         Intent intent = new Intent( this, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
         startActivity( intent );

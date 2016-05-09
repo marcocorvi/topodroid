@@ -33,6 +33,7 @@ import java.io.EOFException;
 
 import java.util.List;
 import java.util.HashMap;
+import java.util.Locale;
 
 import android.graphics.RectF;
 
@@ -483,13 +484,19 @@ class DrawingIO
   // =========================================================================
   // EXPORT 
 
-  static public void exportTherion( DrawingSurface surface, int type, File file, String fullname, String projname, int proj_dir )
+  // exportTherion calls DrawingSurface' exportTherion, 
+  // which calls DrawingCommandManager's exportTherion,
+  // which calls the full method exportTherion with the list of sketch items
+  //
+  // FIXME DataHelper and SID are necessary to export splays by the station
+  static public void exportTherion( // DataHelper dh, long sid, 
+                       DrawingSurface surface, int type, File file, String fullname, String projname, int proj_dir )
   {
     // Log.v("DistoX", "Export Therion file " + file.getPath() );
     try {
       FileWriter fw = new FileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
-      surface.exportTherion( type, bw, fullname, projname, proj_dir );
+      surface.exportTherion( /* dh, sid, */ type, bw, fullname, projname, proj_dir );
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
@@ -804,12 +811,15 @@ class DrawingIO
     out.newLine();
   }
 
-  static public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
+  // FIXME DataHelper and SID are necessary to export splays by the station
+  static public void exportTherion( // DataHelper dh, long sid,
+                      int type, BufferedWriter out, String scrap_name, String proj_name, int project_dir,
         RectF bbox,
         DrawingPath north,
         List<ICanvasCommand> cstack,
         List<DrawingStationPath> userstations,
-        List<DrawingStationName> stations )
+        List<DrawingStationName> stations,
+        List<DrawingPath> splays )
   {
     try { 
       exportTherionHeader1( out, type, bbox );
@@ -849,6 +859,19 @@ class DrawingIO
       }
       out.newLine();
 
+      if ( TDSetting.mTherionSplays ) {
+        float th = TDConst.TO_THERION;
+        StringWriter sw = new StringWriter();
+        PrintWriter pw  = new PrintWriter(sw);
+        for ( DrawingPath splay : splays ) {
+          pw.format("line u:splay -visibility off\n");
+          pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*th, -splay.y1*th, splay.x2*th, -splay.y2*th );
+          pw.format("endline\n");
+        }
+        out.write( sw.toString() );
+        out.newLine();
+      }
+
       if ( TDSetting.mAutoStations ) {
         for ( DrawingStationName st : stations ) {
           if ( st.mStation != null && st.mStation.barriered() ) continue;
@@ -857,6 +880,42 @@ class DrawingIO
           if ( bbox.top  > st.cy || bbox.bottom < st.cy ) continue;
           out.write( st.toTherion() );
           out.newLine();
+/*
+ * this was to export splays by the station instead of all of them
+ *
+          if ( TDSetting.mTherionSplays ) {
+            float th = TDConst.TO_THERION;
+            float x = st.cx * th;
+            float y = - st.cy * th;
+            th *= DrawingUtil.SCALE_FIX;
+            List< DistoXDBlock > blks = dh.selectSplaysAt( sid, st.mName, false );
+            if ( type == PlotInfo.PLOT_PLAN ) {
+              for ( DistoXDBlock blk : blks ) {
+                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th;
+                float e = h * TDMath.sind( blk.mBearing );
+                float n = h * TDMath.cosd( blk.mBearing );
+                out.write( "line splay\n" );
+                out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+e, y+n ) );
+                out.write( "endline\n" );
+              }
+            } else if ( PlotInfo.isProfile( type ) ) {
+              for ( DistoXDBlock blk : blks ) {
+                float v = blk.mLength * TDMath.sind( blk.mClino ) * th;
+                float h = blk.mLength * TDMath.cosd( blk.mClino ) * th * blk.mExtend;
+                out.write( "line splay\n" );
+                out.write( String.format(Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", x, y, x+h, y+v ) );
+                out.write( "endline\n" );
+              }
+            } else if ( PlotInfo.isSection( type ) ) {
+              for ( DistoXDBlock blk : blks ) {
+                float d = blk.mLength;
+                float b = blk.mBearing;
+                float c = blk.mClino;
+                long  e = blk.mExtend;
+              }
+            }
+          }
+*/
         }
       } else {
         synchronized( userstations ) {

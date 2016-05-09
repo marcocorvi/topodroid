@@ -55,6 +55,13 @@
      />
 
    <CheckBoxPreference
+       android:key="DISTOX_THERION_SPLAYS"
+       android:summary="@string/pref_therion_splays_summary"
+       android:title="@string/pref_therion_splays_title"
+       android:defaultValue="false"
+     />
+
+   <CheckBoxPreference
        android:key="DISTOX_STATION_PREFIX"
        android:summary="@string/pref_station_prefix_summary"
        android:title="@string/pref_station_prefix_title"

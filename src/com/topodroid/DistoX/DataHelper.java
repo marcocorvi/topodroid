@@ -3286,7 +3286,7 @@ public class DataHelper extends DataSetObservable
          sid = setSurvey( name, false );
          updateSurveyInfo( sid, day, team, decl, comment, init_station, false );
          while ( (line = br.readLine()) != null ) {
-           // TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
+           TDLog.Log( TDLog.LOG_DB, "loadFromFile: " + line );
            vals = line.split(" ", 4);
            table = vals[2];
            v = vals[3];

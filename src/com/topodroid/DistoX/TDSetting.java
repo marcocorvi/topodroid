@@ -131,6 +131,7 @@ class TDSetting
     "DISTOX_UNSCALED_POINTS",     // 79 unscaled drawing point items
     "DISTOX_UNIT_GRID",           // 80
     "DISTOX_XTHERION_AREAS",      // 81 save areas a-la xtherion
+    "DISTOX_THERION_SPLAYS",
     "DISTOX_RECENT_NR",           // 82 number of most recent items (item picker)
     "DISTOX_AREA_BORDER",         // 83 area border visibility
     "DISTOX_CONT_JOIN",           // 84 line continuation is join
@@ -196,6 +197,7 @@ class TDSetting
 
   static boolean mXTherionAreas = false;
   static boolean mAutoStations = true; // whether to add stations automatically to scrap therion files
+  static boolean mTherionSplays = true; // whether to add splay segments to auto stations
 
   static float mBitmapScale = 1.5f;
   static float mDxfScale = 1.0f;
@@ -696,6 +698,7 @@ class TDSetting
     mUnscaledPoints = prefs.getBoolean( key[k++], false );    // DISTOX_UNSCALED_POINTS
     mUnitGrid       = tryFloat(  prefs, key[k++], "1" );      // DISTOX_UNIT_GRID
     mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
+    mTherionSplays  = prefs.getBoolean( key[k++], false );    // DISTOX_THERION_SPLAYS
 
     mRecentNr   = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
 
@@ -1013,6 +1016,8 @@ class TDSetting
       mUnitGrid = Float.parseFloat( prefs.getString( k, "1" ) ); 
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_XTHERION_AREAS
       mXTherionAreas = prefs.getBoolean( k, false );   
+    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_THERION_SPLAYS
+      mTherionSplays  = prefs.getBoolean( k, false );   
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_RECENT_NR
       mRecentNr = tryInt( prefs, k, "4" );
 
@@ -1270,6 +1275,7 @@ class TDSetting
     //B if ( name.equals( "DISTOX_UNSCALED_POINTS" )
     //C if ( name.equals( "DISTOX_UNIT_GRID" ) 
     //B if ( name.equals( "DISTOX_XTHERION_AREAS" )
+    //B if ( name.equals( "DISTOX_THERION_SPLAYS" )
     //C if ( name.equals( "DISTOX_RECENT_NR" )
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
     //B if ( name.equals( "DISTOX_CONT_JOIN" ) 

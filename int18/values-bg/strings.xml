@@ -307,7 +307,8 @@
     <!-- UNUSED string name="read_fail_with_code">Грешка при четене: код </string -->
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
-    <string name="saved_file_">Файлът е записан\ </string>
+    <string name="saved_file_1">Файлът е записан</string>
+    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
     <string name="saving_">Записване</string>
     <string name="saving_file_failed">Грешка при запис на файл</string>
     <!-- UNUSED string name="scrap_name">Име на скица</string -->
@@ -901,6 +902,8 @@
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
   <string name="pref_xtherion_areas_title">Площи експорт в xtherion</string>
   <string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string>
+  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
+  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>

@@ -307,7 +307,8 @@
     <!-- UNUSED string name="read_fail_with_code">Read failure: error code </string -->
     <string name="read_failed">Failed DistoX-read</string>
     <!-- string name="reading_file_failed">Failed file-read</string -->
-    <string name="saved_file_">Saved file\ </string>
+    <string name="saved_file_1">Saved file</string>
+    <string name="saved_file_2">Saved file %1$s Scale %2$.2f</string>
     <string name="saving_">Saving </string>
     <string name="saving_file_failed">Failed file-save</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
@@ -904,6 +905,8 @@
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
   <string name="pref_xtherion_areas_title">xtherion areas</string>
   <string name="pref_xtherion_areas_summary">Save areas a la xtherion</string>
+  <string name="pref_therion_splays_title">Therion splays</string>
+  <string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string>
   <string name="pref_autoStations_title">Therion stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>

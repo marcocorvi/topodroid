@@ -26,14 +26,16 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
 {
     private Context mContext;
     private Bitmap mBitmap;
+    private float  mScale;
     private String mFullName;
     private String filename = null;
     private boolean mToast;
 
-    public ExportBitmapToFile( Context context, Bitmap bitmap, String name, boolean toast )
+    public ExportBitmapToFile( Context context, Bitmap bitmap, float scale, String name, boolean toast )
     {
        mContext  = context;
        mBitmap   = bitmap;
+       mScale    = scale;
        mFullName = name;
        mToast    = toast;
        // TDLog.Log( TDLog.LOG_PLOT, "Export Bitmap To File " + mFullName );
@@ -61,7 +63,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          Toast.makeText( mContext, mContext.getResources().getString(R.string.saved_file_) + " " + filename,
+          Toast.makeText( mContext, 
+                          String.format( mContext.getResources().getString(R.string.saved_file_2), filename, mScale),
                           Toast.LENGTH_SHORT ).show();
         } else {
           Toast.makeText( mContext, R.string.saving_file_failed, Toast.LENGTH_SHORT ).show();

@@ -445,7 +445,7 @@ public class SketchActivity extends ItemDrawer
   //     Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
   //   } else {
   //     new ExportBitmapToFile(this, mSaveHandler, mSketchSurface.getBitmap(), mFullName ).execute();
-  //     Toast.makeText( this, getString(R.string.saved_file_) + mFullName + ".png", Toast.LENGTH_SHORT ).show();
+  //     Toast.makeText( this, getString(R.string.saved_file_1) + mFullName + ".png", Toast.LENGTH_SHORT ).show();
   //   }
   // }
 
@@ -496,7 +496,7 @@ public class SketchActivity extends ItemDrawer
   void saveTh3()
   {
     if ( doSaveTh3( false /* ! mAllSymbols */ ) ) {
-      Toast.makeText( this, getString(R.string.saved_file_) + mFullName + ".th2", Toast.LENGTH_SHORT ).show();
+      Toast.makeText( this, getString(R.string.saved_file_1) + " " + mFullName + ".th2", Toast.LENGTH_SHORT ).show();
     }
   }
 

@@ -406,6 +406,8 @@ public class DrawingSurface extends SurfaceView
 
   public RectF getBitmapBounds( ) { return commandManager.getBitmapBounds(); }
 
+  public float getBitmapScale() { return commandManager.getBitmapScale(); }
+
   public Bitmap getBitmap( long type )
   {
     if ( PlotInfo.isProfile( type ) ) {
@@ -493,15 +495,16 @@ public class DrawingSurface extends SurfaceView
     mDrawThread = null;
   }
 
-  public void exportTherion( int type, BufferedWriter out, String sketch_name, String plot_name, int proj_dir )
+  public void exportTherion( // DataHelper dh, long sid,
+                int type, BufferedWriter out, String sketch_name, String plot_name, int proj_dir )
   {
     // Log.v("DistoX", sketch_name + " export th2 type " + type );
     if ( PlotInfo.isProfile( type ) ) {
-      mCommandManager2.exportTherion( type, out, sketch_name, plot_name, proj_dir );
+      mCommandManager2.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, proj_dir );
     } else if ( type == PlotInfo.PLOT_PLAN ) {
-      mCommandManager1.exportTherion( type, out, sketch_name, plot_name, proj_dir );
+      mCommandManager1.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, proj_dir );
     } else {
-      mCommandManager3.exportTherion( type, out, sketch_name, plot_name, proj_dir );
+      mCommandManager3.exportTherion( /* dh, sid, */ type, out, sketch_name, plot_name, proj_dir );
     }
   }
 

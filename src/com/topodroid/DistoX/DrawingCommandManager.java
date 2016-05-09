@@ -848,39 +848,44 @@ public class DrawingCommandManager
     return bounds;
   }
 
+  private float mBitmapScale = 1;
+
+  // returns the last used bitmap scale
+  float getBitmapScale() { return mBitmapScale; }
+
   public Bitmap getBitmap()
   {
     RectF bounds = getBitmapBounds();
     // TDLog.Log(  TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
-    float scale = TDSetting.mBitmapScale;
+    mBitmapScale = TDSetting.mBitmapScale;
 
     int width  = (int)((bounds.right - bounds.left + 2 * BORDER) );
     int height = (int)((bounds.bottom - bounds.top + 2 * BORDER) );
-    int max = (int)( 8 * 1024 * 1024 / (scale * scale) );  // 16 MB 2 B/pixel
+    int max = (int)( 8 * 1024 * 1024 / (mBitmapScale * mBitmapScale) );  // 16 MB 2 B/pixel
     while ( width*height > max ) {
-      scale /= 2;
+      mBitmapScale /= 2;
       max *= 4;
     }
-    width  = (int)((bounds.right - bounds.left + 2 * BORDER) * scale );
-    height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * scale );
-    Log.v( "DistoX", "PNG scale " + scale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
+    width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
+    height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
    
     Bitmap bitmap = null;
-    while ( bitmap == null && scale > 0.05 ) {
+    while ( bitmap == null && mBitmapScale > 0.05 ) {
       try {
         // bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
         bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.RGB_565);
       } catch ( OutOfMemoryError e ) {
-        scale /= 2;
-        width  = (int)((bounds.right - bounds.left + 2 * BORDER) * scale );
-        height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * scale );
+        mBitmapScale /= 2;
+        width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
+        height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
       } catch ( IllegalArgumentException e ) {
         TDLog.Error("create bitmap illegal arg " + e.getMessage() );
         return null;
       }
     }
-    if ( scale <= 0.05 ) return null;
+    if ( mBitmapScale <= 0.05 ) return null;
     if ( bitmap == null ) return null;
+    Log.v( "DistoX", "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
     Canvas c = new Canvas (bitmap);
     // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
     c.drawColor( TDSetting.mBitmapBgcolor );
@@ -890,9 +895,9 @@ public class DrawingCommandManager
     c.drawBitmap (bitmap, 0, 0, null);
 
     Matrix mat = new Matrix();
-    float sca = 1 / scale;
+    float sca = 1 / mBitmapScale;
     mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
-    mat.postScale( scale, scale );
+    mat.postScale( mBitmapScale, mBitmapScale );
     if ( mGridStack1 != null ) {
       synchronized( mGridStack1 ) {
         final Iterator i1 = mGridStack1.iterator();
@@ -1866,10 +1871,14 @@ public class DrawingCommandManager
     return new RectF( xmin, ymin, xmax, ymax ); // left top right bottom
   }
 
-  public void exportTherion( int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir )
+  // FIXME DataHelper and SID are necessary to export splays by the station
+  public void exportTherion( // DataHelper dh, long sid,
+                             int type, BufferedWriter out, String scrap_name, String proj_name, int proj_dir )
   {
     RectF bbox = computeBBox();
-    DrawingIO.exportTherion( type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
+    DrawingIO.exportTherion( // dh, sid,
+                             type, out, scrap_name, proj_name, proj_dir, bbox, mNorthLine,
+                             mCurrentStack, mUserStations, mStations, mSplaysStack );
   }
    
   public void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )

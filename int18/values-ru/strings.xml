@@ -306,7 +306,8 @@
     <!-- UNUSED string name="read_fail_with_code">Ошибка чтения: код ошибки </string -->
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
-    <string name="saved_file_">Сохраненный файл\ </string>
+    <string name="saved_file_1">Сохраненный файл</string>
+    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
     <string name="saving_">Сохранение </string>
     <string name="saving_file_failed">Ошибка сохранения файла</string>
     <!-- UNUSED string name="scrap_name">название абриса</string -->
@@ -896,6 +897,8 @@
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
   <string name="pref_xtherion_areas_title">Области xtherion</string>
   <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
+  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
+  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
