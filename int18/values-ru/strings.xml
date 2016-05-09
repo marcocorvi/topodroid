@@ -264,7 +264,7 @@
     <string name="menu_sync">СИНХР.</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 Абрисы</string -->
     <string name="menu_validate">ПОДТВЕРДИТЬ</string>
-    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
+    <string name="menu_zoom_fit">ВМЕСТИТЬ</string>
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
     <string name="popup_snap_ln">Привязать к ближайшей линии</string>
@@ -307,7 +307,7 @@
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
     <string name="saved_file_1">Сохраненный файл</string>
-    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
+    <string name="saved_file_2">Масштаб %2$.2f Сохраненного файла %1$s</string>
     <string name="saving_">Сохранение </string>
     <string name="saving_file_failed">Ошибка сохранения файла</string>
     <!-- UNUSED string name="scrap_name">название абриса</string -->
@@ -581,7 +581,7 @@
     <string name="help_previous">Предыдущий выбранный элемент</string>
     <string name="help_next">Следующий элемент в выборке</string>
     <string name="help_recover">Восстановить абрис из Бекапа</string>
-    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
+    <string name="help_zoom_fit">Вместить абрис в экран</string>
    
     <string name="help_line_point">Действия с линиями и точками: соединить, разорвать, обрезать, удалить</string>
 <!-- OK
@@ -637,7 +637,7 @@
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
-    <!-- TODO string name="title_draw">Draw</string -->
+    <string name="title_draw">Рисовать</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
@@ -660,7 +660,7 @@
     <string name="title_projection">Проекция разреза на азимут %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
-    <!-- TODO string name="title_select">Select</string -->
+    <string name="title_select">Выбрать</string>
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
     <string name="title_sensor_edit">Сенсор</string>
@@ -768,10 +768,10 @@
   <string name="pref_closeness_title">Радиус выбора</string>
   <!-- UNUSED string name="pref_closeness_summary">Радиус выбора элемента абриса</string -->
   <string name="pref_closeness_message">Радиус выбора элемента абриса</string>
-  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
-  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
-  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
-  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
+  <string name="pref_min_shift_title">Чувствительность к сдвигу</string>
+  <string name="pref_min_shift_message">Чувствительность к сдвигу</string>
+  <string name="pref_pointing_title">Радиус указания</string>
+  <string name="pref_pointing_message">Радиус указания</string>
   <string name="pref_vert_splay_title">Угловой прог для прерывистой линии луча</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Угловой прог для прерывистой линии луча</string -->
   <string name="pref_vert_splay_message">Угловой прог для прерывистой линии луча</string>
@@ -794,8 +794,8 @@
   <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
-  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
-  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
+  <string name="pref_prev_next_title">Кнопки Пред/След</string>
+  <string name="pref_prev_next_summary">Кнопки Предыдущий/Следующий в диалоге измерений</string>
   <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
   <string name="pref_azimuth_manual_title">Вручную установить "развертку"</string>
@@ -897,8 +897,8 @@
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
   <string name="pref_xtherion_areas_title">Области xtherion</string>
   <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
-  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
-  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
+  <string name="pref_therion_splays_title">Боковые замеры в Therion</string>
+  <string name="pref_therion_splays_summary">Добавить линии боковых замеров в файл th2</string>
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
