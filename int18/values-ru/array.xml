@@ -121,7 +121,7 @@
 
   <string-array name="deviceBT">
      <item name="0">Выключен</item>
-     <item name="1">Проверять на старте</item>
+     <item name="1">Проверять при старте</item>
      <item name="2">Включен</item>
   </string-array>
 
