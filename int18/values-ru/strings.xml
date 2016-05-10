@@ -200,7 +200,7 @@
     <string name="hidden_add">Скрыть среднюю линию</string>
     <string name="hidden_del">Показать среднюю линию</string>
     <string name="splays_toggle">Переключить отображение лучей</string>
-    <string name="fixed">фиксированный</string>
+    <string name="fixed">сохраненный</string>
     <string name="painted">нарисованный</string>
 
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
@@ -460,21 +460,21 @@
     <string name="button_write"     >Передать в Disto</string>
     <string name="button_xsection"  >Сечение</string>
 
-    <string name="mode_leg">Нитка</string>
-    <string name="mode_splay">Бок. замер</string>
+    <string name="mode_leg">Нитка хода</string>
+    <string name="mode_splay">Бок. замеры</string>
     <string name="mode_station">Пикеты</string>
     <string name="mode_grid">Сетка</string>
-    <string name="mode_fixed">Фиксир. точки.</string>
+    <string name="mode_fixed">Сдвиг относительно нитки</string>
 
     <!-- UNUSED string name="remote_title">Пульт дистанционного управления</string -->
     <string name="remote_on">Лазер ВКЛ</string>
     <string name="remote_off">Лазер ВЫКЛ</string>
     <!-- UNUSED string name="remote_measure">Замер</string -->
-    <string name="remote_reset">Сброс БT</string>
+    <string name="remote_reset">Сброс Bluetooth</string>
     <!-- UNUSED string name="download">Скачать</string -->
 
-    <string name="popup_do_splay">Боковой замер</string>
-    <string name="popup_do_leg">Замер на пикет</string>
+    <string name="popup_do_splay">Сделать замер</string>
+    <string name="popup_do_leg">Сделать три замера</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импорт</string>
@@ -565,7 +565,7 @@
     <string name="help_move">Включть режим перемещения/зума</string>
     <string name="help_draw">Перейти в режим рисования</string>
     <string name="help_edit">Перейти в режим редактирования</string>
-    <string name="help_refs">Выбрать привязку абриса</string>
+    <string name="help_refs">Вид окна абриса</string>
     <string name="help_rename">Изменить название съёмки</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
@@ -634,7 +634,7 @@
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
-    <string name="title_current_station">Зафиксировать пикеты</string>
+    <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
     <string name="title_draw">Рисовать</string>
@@ -910,12 +910,12 @@
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
-  <string name="pref_section_stations_title">Сечение пикеты</string>
+  <string name="pref_section_stations_title">Пикеты на сечениях</string>
   <string name="pref_section_stations_summary">Сечение пикеты привязки</string>
   <string name="pref_station_size_title">Размер номера пикетов</string>
   <string name="pref_station_size_summary">Размер номера пикетов</string>
   <string name="pref_station_size_message">Размер подписи пикетов</string>
-  <string name="pref_zoom_controls_title">Управление зумом</string>
+  <string name="pref_zoom_controls_title">Управление зума кнопками</string>
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
   <string name="pref_side_drag_title">Перетаскивание за сторону</string>
   <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
