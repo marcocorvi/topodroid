@@ -73,7 +73,7 @@
      <item name="normal">Нормални</item>
      <item name="medium">Средни</item>
      <item name="large">Големи</item>
-     <item name="huge">Huge</item>
+     <item name="huge">Огромни</item>
   </string-array>
 
   <string-array name="logStream">
@@ -107,9 +107,9 @@
 
   <string-array name="pickerType">
      <item name="recent">Последни използвани</item>
-     <item name="list">Списък</item>
-     <item name="grid">Таблица</item>
-     <item name="grid3">Triple grid</item>
+     <item name="list">Списъци</item>
+     <item name="grid">Таблици</item>
+     <item name="grid3">Тройна таблица</item>
   </string-array>
 
   <string-array name="sectionStations">
