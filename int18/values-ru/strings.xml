@@ -182,7 +182,7 @@
     <string name="error_sensor_required">Требуется датчик</string>
     <string name="error_value_required">Требуется значение</string>
     
-    <string name="group_title">Присвоить калибровку к группе данных</string>
+    <string name="group_title">Присвоить номера групп калибровочным измерениям<</string>
     <string name="group_policy_four">Правило: группировать по четыре</string>
     <string name="group_policy_sixteen">Правило: четыре группы по четыре, остальные по одному</string>
     <string name="group_policy_distance">Правило: группировать по угловому расстоянию</string>
@@ -263,8 +263,8 @@
     <string name="menu_survey">Метаданные</string>
     <string name="menu_sync">СИНХР.</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 Абрисы</string -->
-    <string name="menu_validate">ПОДТВЕРДИТЬ</string>
-    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
+    <string name="menu_validate">ВАЛИДАЦИЯ</string>
+    <string name="menu_zoom_fit">ВМЕСТИТЬ</string>
 
     <string name="popup_join_pt">Привязать к ближайшей точке</string>
     <string name="popup_snap_ln">Привязать к ближайшей линии</string>
@@ -307,7 +307,7 @@
     <string name="read_failed">Ошибка чтения DistoX</string>
     <!-- OK string name="reading_file_failed">Чтение файла не удалось</string -->
     <string name="saved_file_1">Сохраненный файл</string>
-    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
+    <string name="saved_file_2">Масштаб %2$.2f Сохраненного файла %1$s</string>
     <string name="saving_">Сохранение </string>
     <string name="saving_file_failed">Ошибка сохранения файла</string>
     <!-- UNUSED string name="scrap_name">название абриса</string -->
@@ -338,7 +338,7 @@
     <string name="shot_info">Введите данные пикета</string>
     <!-- OK string name="shot_length">длинна</string -->
     <string name="shot_note">заметки</string>
-    <string name="shot_reverse">обратный</string>
+    <string name="shot_reverse">развернуть</string>
     <string name="shot_to">№ НА</string>
 
     <string name="make_surface">Поверхность существует. Заменить?</string>
@@ -387,19 +387,19 @@
     <string name="survey_info">Статистика съёмки</string>
     <string name="stat_component">Компоненты %1$d</string>
     <string name="stat_depth">Глубина %1$.1f %2$s %3$.1f %4$s"</string>
-    <string name="stat_duplicate">Дублированные пикеты %1$d %2$.1f %3$s</string>
-    <string name="stat_leg">Отрезки %1$d %2$.1f %3$s</string>
+    <string name="stat_duplicate">Дублированные пикеты %1$d длинна: %2$.1f %3$s</string>
+    <string name="stat_leg">Отрезки %1$d общая длинна: %2$.1f %3$s</string>
     <string name="stat_length">Длинна %1$.1f %2$s</string>
     <string name="stat_loop">Петли %1$d</string>
     <string name="stat_origin">Нулевой пикет: %1$s</string>
     <string name="stat_shot">Пикеты  %1$d,   Дублированные %2$d,   Поверхность %3$d</string>
     <string name="stat_splay">Боковых замеров %1$d</string>
     <string name="stat_station">Пикеты %1$d</string>
-    <string name="stat_surface">Поверхн. пикеты %1$d %2$.1f %3$s</string>
+    <string name="stat_surface">Поверхн. пикеты %1$d длинна: %2$.1f %3$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Угловые ошибки %1$.2f ± %2$.2f"</string>
-    <string name="shot_title">ПИКЕТ %1$s - %2$s"</string>
-    <string name="shot_data">Дл %1$.2f  Аз %2$.1f  Уг %3$.1f"</string>
+    <string name="shot_title">ПИКЕТЫ %1$s - %2$s"</string>
+    <string name="shot_data">Длинна %1$.2f  Азимут %2$.1f  Угол %3$.1f"</string>
 
     <string name="hide_blank">Пустые пикеты</string>
     <string name="hide_leg">Повторные измерения</string>
@@ -559,7 +559,7 @@
     <string name="help_info_shot">Статистика съёмки</string>
     <string name="help_survey_info">Информация о съёмке</string>
     <string name="help_undelete">Восстановить удаленные элементы</string>
-    <string name="help_photo">Инструмент Фото</string>
+    <string name="help_photo">Фотографии в съёмке</string>
     <string name="help_sensor">Показания датчиков</string>
     <string name="help_3d">3D просмотр (Cave3D)</string>
     <string name="help_move">Включть режим перемещения/зума</string>
@@ -581,7 +581,7 @@
     <string name="help_previous">Предыдущий выбранный элемент</string>
     <string name="help_next">Следующий элемент в выборке</string>
     <string name="help_recover">Восстановить абрис из Бекапа</string>
-    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
+    <string name="help_zoom_fit">Вместить абрис в экран</string>
    
     <string name="help_line_point">Действия с линиями и точками: соединить, разорвать, обрезать, удалить</string>
 <!-- OK
@@ -599,16 +599,16 @@
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>
     <string name="help_detach">Очистить текущий выбор DistoX</string>
-    <string name="help_firmware">DistoX2 обновление прошивки</string>
-    <string name="help_toggle">Переключить DistoX калибровка/нормальный режим</string>
+    <string name="help_firmware">Обновление прошивки DistoX2</string>
+    <string name="help_toggle">Переключить DistoX в режим калибровки и обратно в нормальный режим</string>
     <string name="help_sdcard">DistoX управление памятью</string>
-    <string name="help_read">Считать и вывсти коэффициенты калибровки DistoX</string>
+    <string name="help_read">Загрузить и показать текущие коэффициенты калибровки DistoX</string>
     <string name="help_info_device">Информация об устройстве</string>
     <string name="help_scan">Найти новые устройства DistoX</string>
-    <string name="help_pair">Присоединить текущее устройство DistoX</string>
-    <string name="help_open_calib">Открыть калибровку</string>
+    <string name="help_pair">Сопряжение текущего устройства DistoX</string>
+    <string name="help_open_calib">Открыть окно данных калибровки</string>
     <string name="help_export_calib">Экспорт калибровки</string>
-    <string name="help_group">Присваивать номер групп автоматически</string>
+    <string name="help_group">Присвоить номер группы калибровочным замерам</string>
     <string name="help_cover">Показать угловое распределение данных калибровки</string>
     <string name="help_compute">Рассчитать калибровку</string>
     <string name="help_write">Записать коэффициенты калибровки в DistoX</string>
@@ -637,7 +637,7 @@
     <string name="title_current_station">Зафиксировать пикеты</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
-    <!-- TODO string name="title_draw">Draw</string -->
+    <string name="title_draw">Рисовать</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
     <string name="title_draw_point">ТОЧКА %1$s</string>
@@ -660,7 +660,7 @@
     <string name="title_projection">Проекция разреза на азимут %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
-    <!-- TODO string name="title_select">Select</string -->
+    <string name="title_select">Выбрать</string>
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
     <string name="title_sensor_edit">Сенсор</string>
@@ -705,8 +705,8 @@
   <string name="pref_size_buttons_title">Размер кнопок</string>
   <string name="pref_size_buttons_summary">Размер кнопок панели инструментов</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
-  <string name="pref_leg_shots_title">Пикеты отрезка</string>
-  <string name="pref_leg_shots_summary">Минимальное кол-во пикетов на отрезке</string>
+  <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
+  <string name="pref_leg_shots_summary">Минимальное кол-во замеров на отрезке</string>
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
   <string name="pref_ortho_lrud_title">Угол луча для ЛПВН</string>
@@ -719,7 +719,7 @@
   <string name="pref_survex_lrud_title">Survex ЛПВН</string>
   <string name="pref_survex_lrud_summary">Добавить ЛПВН в при экспорте в формат Survex</string>
 
-  <string name="pref_sock_type_title">Socket</string>
+  <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Socket создать</string>
   <!-- OK string name="pref_device_type_title">Тип Disto</string -->
   <!-- OK string name="pref_device_type_summary">Модель DistoX</string -->
@@ -727,7 +727,7 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Число попыток подключения</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Кол-во попыток подключения</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Кол-во попыток подключения</string -->
-  <string name="pref_wait_laser_title">Пауза после лазера [мс]</string>
+  <string name="pref_wait_laser_title">Пауза вкл. лазера [мс]</string>
   <string name="pref_wait_laser_summary">Пауза после включения лазера [мс]</string>
   <string name="pref_wait_shot_title">Пауза после замера [мс]</string>
   <string name="pref_wait_shot_summary">Время ожидания после выполнения измерения [мс]</string>
@@ -735,16 +735,16 @@
   <string name="pref_wait_data_summary">Время ожидания после скачивания данных [мс]</string>
   <string name="pref_conn_mode_title">Типы подключения</string>
   <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
-  <string name="pref_auto_reconnect_title">Авто соединение</string>
-  <string name="pref_auto_reconnect_summary">Переподключиться при потере соединенияX</string>
+  <string name="pref_auto_reconnect_title">Авто подключение</string>
+  <string name="pref_auto_reconnect_summary">Переподключиться при потере соединения с DistoX</string>
   <string name="pref_auto_pair_title">Автоматическое сопряжение</string>
   <string name="pref_auto_pair_summary">Сопряжение устройства после сканирования</string>
   <string name="pref_socket_delay_title">Задержка подключения</string>
   <string name="pref_socket_delay_summary">Задержка подключения при сопряжении [0.1 сек]</string>
   <string name="pref_socket_delay_dialogtitle">Задержка подключения при сопряжении</string>
   <string name="pref_socket_delay_message">Задержка подключения для сопряжении [0.1 сек]</string>
-  <string name="pref_z6_workaround_title"> Решение для Z6</string>
-  <string name="pref_z6_workaround_summary">Z6 решение выгрузка данных</string>
+  <string name="pref_z6_workaround_title">Решение для Z6</string>
+  <string name="pref_z6_workaround_summary">Решение для загрузки данных с телефонов Z6</string>
   <string name="pref_crs_title">C R S система координат </string>
   <string name="pref_crs_summary">CRS имя</string>
   <string name="pref_crs_message">Введите имя CRS как в Proj4</string>
@@ -768,10 +768,10 @@
   <string name="pref_closeness_title">Радиус выбора</string>
   <!-- UNUSED string name="pref_closeness_summary">Радиус выбора элемента абриса</string -->
   <string name="pref_closeness_message">Радиус выбора элемента абриса</string>
-  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
-  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
-  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
-  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
+  <string name="pref_min_shift_title">Чувствительность к сдвигу</string>
+  <string name="pref_min_shift_message">Чувствительность к сдвигу</string>
+  <string name="pref_pointing_title">Радиус указания</string>
+  <string name="pref_pointing_message">Радиус указания</string>
   <string name="pref_vert_splay_title">Угловой прог для прерывистой линии луча</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Угловой прог для прерывистой линии луча</string -->
   <string name="pref_vert_splay_message">Угловой прог для прерывистой линии луча</string>
@@ -780,22 +780,22 @@
   <string name="pref_survey_stations_title">Настройки нумерации пикетов</string>
   <string name="pref_survey_stations_summary">Авто нумерация пикетов</string>
   <string name="pref_accel_thr_title">Максимальное допустимое ускорение</string>
-  <string name="pref_accel_thr_summary">Максимальное допустимое ускорение на пикете</string>
-  <string name="pref_accel_thr_message">Максимальное допустимое ускорение на пикете</string>
+  <string name="pref_accel_thr_summary">Максимальное допустимое ускорение при замере</string>
+  <string name="pref_accel_thr_message">Максимальное допустимое ускорение при замере</string>
   <string name="pref_mag_thr_title">Максимальная допустимая намагниченность</string>
-  <string name="pref_mag_thr_summary">Максимальное допустимое магнитное поле на пикете</string>
-  <string name="pref_mag_thr_message">Максимальное допустимое магнитное поле на пикете</string>
-  <string name="pref_dip_thr_title">Максимально допустимый магн угол</string>
-  <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие магн угла на пикете</string>
-  <string name="pref_dip_thr_message">Максимальное допустимое отклонениие магн угла на пикете</string>
+  <string name="pref_mag_thr_summary">Максимальное допустимое магнитное поле при замере</string>
+  <string name="pref_mag_thr_message">Максимальное допустимое магнитное поле при замере</string>
+  <string name="pref_dip_thr_title">Максимально допустимый магнитный угол</string>
+  <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
+  <string name="pref_dip_thr_message">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
   <string name="pref_leg_title">Допустимое отклонениие в измерении отрезков</string>
   <string name="pref_leg_summary">Точновсть измерений пикетов отрезка</string>
   <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
-  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
-  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
+  <string name="pref_prev_next_title">Кнопки Пред/След</string>
+  <string name="pref_prev_next_summary">Кнопки Предыдущий/Следующий в диалоге измерений</string>
   <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
   <string name="pref_azimuth_manual_title">Вручную установить "развертку"</string>
@@ -807,7 +807,7 @@
   <string name="pref_ethr_title">Вертикальный порог бокового замера</string>
   <string name="pref_ethr_summary">Область верт. проэкции (бок. замер)</string>
   <string name="pref_ethr_message">Угол около 90 для верт. проэкции бок. замера [град]</string>
-  <string name="pref_vthr_title">Вертикальный порог для пикетов</string>
+  <string name="pref_vthr_title">Вертикальный порог для отрезков</string>
   <string name="pref_vthr_summary">Верт. порог ЛПВН/ЗВСЮ</string>
   <string name="pref_vthr_message">Допустимый наклон отрезка между ЛПВН/ЗВСЮ</string>
   <string name="pref_plan_vthr_title">Вертикальное ограничение бок. замера</string>
@@ -860,7 +860,7 @@
   <string name="pref_linecorner_message">Порог чувствительности угла Безье</string>
   <string name="pref_calib_algo_title">Алгоритм</string>
   <string name="pref_calib_algo_summary">Алгоритм калибровки</string>
-  <string name="pref_group_by_title">Формирование групп калибровки</string>
+  <string name="pref_group_by_title">Группирование данных калибровки</string>
   <string name="pref_group_by_summary">Группирование данных калибровки</string>
   <string name="pref_group_title">Допуск в группе</string>
   <string name="pref_group_summary">Допуск для измерений в одной группе</string>
@@ -897,8 +897,8 @@
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
   <string name="pref_xtherion_areas_title">Области xtherion</string>
   <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
-  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
-  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
+  <string name="pref_therion_splays_title">Боковые замеры в Therion</string>
+  <string name="pref_therion_splays_summary">Добавить линии боковых замеров в файл th2</string>
   <string name="pref_autoStations_title">Пикеты абриса</string>
   <string name="pref_autoStations_summary">Добавлять пикеты автоматически</string>
   <string name="pref_loopClosure_title">Закрывать петли автоматически</string>
@@ -919,8 +919,8 @@
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
   <string name="pref_side_drag_title">Перетаскивание за сторону</string>
   <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
-  <string name="pref_unit_grid_title">Единицы изм. в абрисах</string>
-  <string name="pref_unit_grid_summary">Шаг сетки абриса</string>
+  <string name="pref_unit_grid_title">Единицы изм. сетки в абрисах</string>
+  <string name="pref_unit_grid_summary">Шаг сетки в абрисах</string>
   <string name="pref_recent_nr_title">Кол-во. недавних инструментов</string>
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
