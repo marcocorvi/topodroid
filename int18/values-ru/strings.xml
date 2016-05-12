@@ -789,17 +789,17 @@
   <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
   <string name="pref_dip_thr_message">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
-  <string name="pref_leg_title">Допустимое отклонениие в измерении отрезков</string>
+  <string name="pref_leg_title">Допустимое отклонениие измерений отрезков</string>
   <string name="pref_leg_summary">Точновсть измерений пикетов отрезка</string>
   <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
   <string name="pref_backsight_title">Обратный замер</string>
-  <string name="pref_backsight_summary">Данные обратного замера в диалоге ввода нового пикета</string>
+  <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
   <string name="pref_prev_next_summary">Кнопки Предыдущий/Следующий в диалоге измерений</string>
   <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
-  <string name="pref_azimuth_manual_title">Вручную установить "развертку"</string>
-  <string name="pref_azimuth_manual_summary">Вручную установить "развертку" отрезков </string>
+  <string name="pref_azimuth_manual_title">Устанавливать "развертку" вручную</string>
+  <string name="pref_azimuth_manual_summary">Задавать направление развертки отрезков вручную</string>
 
   <string name="pref_team_title">Группа съёмки</string>
   <string name="pref_team_summary">Группа съёмки</string>
@@ -836,7 +836,7 @@
   <string name="pref_thumbnail_title">Размер миниатюры</string>
   <string name="pref_thumbnail_summary">Размер картинки миниатюры</string>
   <string name="pref_thumbnail_message">Размер картинки миниатюры</string>
-  <string name="pref_shot_timer_title">Таймер замера направления</string>
+  <string name="pref_shot_timer_title">Таймер задержки измерения</string>
   <string name="pref_shot_timer_summary">Секунд до замера направления на пикет</string>
   <string name="pref_shot_timer_message">Секунд до замера направления на пикет</string>
   <string name="pref_beep_volume_title">Громкость сигнала таймера</string>
