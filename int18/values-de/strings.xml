@@ -813,7 +813,7 @@
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_leg_message">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
-  <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog neuer Messzug anzeigen</string>
+  <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
   <string name="pref_prev_next_title">Vorherige/Nächste Messtrecke</string>
   <string name="pref_prev_next_summary">Buttons anzeigen im Messdialog</string>
   <string name="pref_mag_anomaly_title">Magnetische Abweichung</string>
@@ -856,11 +856,11 @@
   <string name="pref_thumbnail_summary">Thumbnails Größe</string>
   <string name="pref_thumbnail_message">Thumbnails Größe</string>
   <string name="pref_shot_timer_title">Richtungsmesser Verzögerung</string>
-  <string name="pref_shot_timer_summary">Sekunden Verzögerung bis zur Messung</string>
-  <string name="pref_shot_timer_message">Sekunden Verzögerung bis zur Messung</string>
+  <string name="pref_shot_timer_summary">Sekunden Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird</string>
+  <string name="pref_shot_timer_message">Sekunden Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird</string>
   <string name="pref_beep_volume_title">Piep Lautstärke</string>
-  <string name="pref_beep_volume_summary">Lautstärke des Pieptones</string>
-  <string name="pref_beep_volume_message">Lautstärke des Pieptones</string>
+  <string name="pref_beep_volume_summary">Lautstärke des Pieptones bei Messung von Topodroid</string>
+  <string name="pref_beep_volume_message">Lautstärke des Pieptones bei Messung von Topodroid</string>
   <string name="pref_drawing_unit_title">Punktsymbole Massstab</string>
   <string name="pref_drawing_unit_summary">Massstab der Punktsymbole</string>
   <string name="pref_drawing_unit_message">Massstab der Punktsymbole</string>
