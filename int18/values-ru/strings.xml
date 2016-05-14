@@ -972,7 +972,7 @@
   <string name="pref_walls_concave_title">Вогнутость</string>
   <string name="pref_walls_concave_summary">Максимальная вогнутость</string>
   <string name="pref_walls_concave_message">Максимальная вогнутость [проценты]</string>
-  <string name="pref_walls_xstep_title">Щаг</string>
+  <string name="pref_walls_xstep_title">Шаг</string>
   <string name="pref_walls_xstep_summary">Интервал между точками вдоль стены</string>
   <string name="pref_walls_xstep_message">Интервал между точками вдоль стены [м]</string>
 
