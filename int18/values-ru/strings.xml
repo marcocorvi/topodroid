@@ -46,7 +46,7 @@
     <string name="failed_snap_to_line">Отсутствует ближайшая точка-линии для закрепления границы зоны</string>
     <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
 
-    <string name="calibration_title">Калибровка инструментов</string>
+    <string name="calibration_title">Корекция измерений</string>
     <string name="calibration_length">Рулетка</string>
     <string name="calibration_azimuth">Компас</string>
     <string name="calibration_clino">Клинометр</string>
@@ -250,7 +250,7 @@
     <string name="menu_help">Помощь</string>
     <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
     <string name="menu_logs">Журнал</string>
-    <string name="menu_manual_calibration">КАЛИБРОВКА</string>
+    <string name="menu_manual_calibration">ПОПРАВКИ</string>
     <string name="menu_options">НАСТРОЙКИ</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_pair">СОПРЯЖЕНИЕ</string>
