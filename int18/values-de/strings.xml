@@ -142,7 +142,7 @@
     <string name="file_not_found">Datei nicht gefunden</string>
     <string name="import_calib_ok">Kalibrierung erfolgreich importiert</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
-    <string name="import_zip_wait">Importieren Zip-Datei, bitte warten&#8230;</string>
+    <string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string>
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
 
@@ -282,7 +282,7 @@
     <string name="menu_sync">SYNCHRONISIEREN</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKIZZEN</string -->
     <string name="menu_validate">VALIDIEREN</string>
-    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
+    <string name="menu_zoom_fit">AUF SKIZZE ZOOMEN</string>
 
 <!-- LINE POINT EDITING ACTIONS -->
     <string name="popup_join_pt">Mit nähestem Punkt vereinigen</string>
@@ -322,7 +322,7 @@
     <!-- UNUSED string name="read_fail_with_code">Lesefehler: Fehlercode</string -->
     <string name="read_failed">Fehler beim Lesen vom DistoX</string>
     <string name="saved_file_1">Gespeicherte Datei</string>
-    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
+    <string name="saved_file_2">Datei %1$s gespeichert mit Faktor %2$.2f</string>
     <string name="saving_">Speichern </string>
     <string name="saving_file_failed">Datei konnten nicht gespeichert werden</string>
     <!-- UNUSED string name="scrap_name">Name der Skizze</string -->
@@ -487,7 +487,7 @@
     <string name="mode_splay">Hilfszüge</string>
     <string name="mode_station">Messpunkte</string>
     <string name="mode_grid">Gitter</string>
-    <string name="mode_fixed">Festen Rahmen</string>
+    <string name="mode_fixed">Fester Rahmen</string>
 
     <!-- UNUSED string name="remote_title">DistoX Fernbedienung</string -->
     <string name="remote_on">Laser AN</string>
@@ -610,7 +610,7 @@
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
-    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
+    <string name="help_zoom_fit">Zoomen auf ganze Skizze</string>
    
     <string name="help_line_point">Linienpunkt Aktionen: verbinden, trennen, schneiden, löschen</string>
 
@@ -653,7 +653,7 @@
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_device">DistoX Geräte</string>
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>
-    <!-- TODO string name="title_draw">Draw</string -->
+    <string name="title_draw">Zeichnen</string>
     <string name="title_draw_area">FLÄCHE %1$s</string>
     <string name="title_draw_line">LINIE %1$s</string>
     <string name="title_draw_point">PUNKT %1$s</string>
@@ -676,7 +676,7 @@
     <string name="title_projection">Projiziertes Profil Azimut %1$d</string>
     <string name="title_refs">Elemente Anzeigen</string>
     <string name="title_scraps">Skizzen</string>
-    <!-- TODO string name="title_select">Select</string -->
+    <string name="title_select">Auswählen</string>
     <string name="title_shift">Verschieben</string>
     <string name="title_shot_delete">Messung löschen ?</string>
     <string name="title_sensor_edit">Sensordaten</string>
@@ -792,10 +792,10 @@
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
   <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
   <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
-  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
-  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
-  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
-  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
+  <string name="pref_min_shift_title">Verschieben Sensitivität</string>
+  <string name="pref_min_shift_message">Ignoriert Verschiebungen grösser als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
+  <string name="pref_pointing_title">Radius für Tippen</string>
+  <string name="pref_pointing_message">Ein Antippen wir innerhalb dieses Radiuses erkannt in der Punktauswahl.</string>
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
@@ -815,9 +815,9 @@
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_leg_message">Toleranz zwischen Messungen eines Messzugs</string>
   <string name="pref_backsight_title">Rückmessungs-Feld anzeigen</string>
-  <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog neuer Messzug anzeigen</string>
-  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
-  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
+  <string name="pref_backsight_summary">Rückmessungs-Feld im Dialog bei neuem manuellen Messzug anzeigen</string>
+  <string name="pref_prev_next_title">Vorherige/Nächste Messtrecke</string>
+  <string name="pref_prev_next_summary">Buttons anzeigen im Messdialog</string>
   <string name="pref_mag_anomaly_title">Magnetische Abweichung</string>
   <string name="pref_mag_anomaly_summary">Kompensiere lokale magnetische Abweichung</string>
   <string name="pref_azimuth_manual_title">Seitenriss-Azimut wählbar</string>
@@ -858,11 +858,11 @@
   <string name="pref_thumbnail_summary">Thumbnails Größe</string>
   <string name="pref_thumbnail_message">Thumbnails Größe</string>
   <string name="pref_shot_timer_title">Richtungsmesser Verzögerung</string>
-  <string name="pref_shot_timer_summary">Sekunden Verzögerung bis zur Messung</string>
-  <string name="pref_shot_timer_message">Sekunden Verzögerung bis zur Messung</string>
+  <string name="pref_shot_timer_summary">Sekunden Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird</string>
+  <string name="pref_shot_timer_message">Sekunden Verzögerung bis zur Messung wenn Richtung von Topodroid ermittelt wird</string>
   <string name="pref_beep_volume_title">Piep Lautstärke</string>
-  <string name="pref_beep_volume_summary">Lautstärke des Pieptones</string>
-  <string name="pref_beep_volume_message">Lautstärke des Pieptones</string>
+  <string name="pref_beep_volume_summary">Lautstärke des Pieptones bei Messung von Topodroid</string>
+  <string name="pref_beep_volume_message">Lautstärke des Pieptones bei Messung von Topodroid</string>
   <string name="pref_drawing_unit_title">Punktsymbole Massstab</string>
   <string name="pref_drawing_unit_summary">Massstab der Punktsymbole</string>
   <string name="pref_drawing_unit_message">Massstab der Punktsymbole</string>
@@ -918,8 +918,8 @@
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
   <string name="pref_xtherion_areas_title">xtherion Flächen</string>
   <string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string>
-  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
-  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
+  <string name="pref_therion_splays_title">Therion Hilfszüge</string>
+  <string name="pref_therion_splays_summary">u:splay zu th2 dateien hinzufügen</string>
   <string name="pref_autoStations_title">Therion Stationen</string>
   <string name="pref_autoStations_summary">Therion-Stationen automatisch einfügen</string>
   <string name="pref_loopClosure_title">Kreisschluss</string>
@@ -929,8 +929,8 @@
   <string name="pref_LRExtend_title">Links/Rechts-Werte abschätzen</string>
   <string name="pref_LRExtend_summary">Links/Rechts-Werte abschätzen (Compass/VisualTopo Import)</string>
 
-  <string name="pref_picker_type_title">Zeichenwerkzeuge wählen</string>
-  <string name="pref_picker_type_summary">Zeichenwerkzeug-Auswahl</string>
+  <string name="pref_picker_type_title">Zeichenwerkzeuge Darstellung</string>
+  <string name="pref_picker_type_summary">Zeichenwerkzeug Darstellung</string>
   <string name="pref_section_stations_title">Querschnitts-Stationen</string>
   <string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string>
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>

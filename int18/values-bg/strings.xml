@@ -266,7 +266,7 @@
     <string name="menu_sync">Синхронизиране</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 скици</string -->
     <string name="menu_validate">Проверка</string>
-    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
+    <string name="menu_zoom_fit">Оптимално прибл.</string>
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
     <string name="popup_snap_ln">Прикачване към близка линия</string>
@@ -308,7 +308,7 @@
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
     <string name="saved_file_1">Файлът е записан</string>
-    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
+    <string name="saved_file_2">Файлът е записан %1$s Мащаб %2$.2f</string>
     <string name="saving_">Записване</string>
     <string name="saving_file_failed">Грешка при запис на файл</string>
     <!-- UNUSED string name="scrap_name">Име на скица</string -->
@@ -587,7 +587,7 @@
     <string name="help_previous">Предишен избран елемент</string>
     <string name="help_next">Следващ избран елемент</string>
     <string name="help_recover">Възстановяване на скица от резервно копие</string>
-    <!-- TODO string name="help_zoom_fit">Fit sketch to screen</string -->
+    <string name="help_zoom_fit">Показване на цялата скица на екрана</string>
 
     <string name="help_line_point">Действия за точка от линия: съединяване, разделяне, премахване</string>
 <!--
@@ -643,7 +643,7 @@
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
     <string name="title_discover">Сканиране за DistoX устройства…</string>
-    <!-- TODO string name="title_draw">Draw</string -->
+    <string name="title_draw">Рисуване</string>
     <string name="title_draw_area">Площ %1$s</string>
     <string name="title_draw_line">Линия %1$s</string>
     <string name="title_draw_point">Точка %1$s</string>
@@ -666,7 +666,7 @@
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>
     <string name="title_refs">Показване в скицата на:</string>
     <string name="title_scraps">Скици в картировката</string>
-    <!-- TODO string name="title_select">Select</string -->
+    <string name="title_select">Избор</string>
     <string name="title_shift">Изместване</string>
     <string name="title_shot_delete">Изтриване на отсечката?</string>
     <string name="title_sensor_edit">Сензор</string>
@@ -800,8 +800,8 @@
   <string name="pref_leg_message">Толеранс между измерванията за отсечка на антената</string>
   <string name="pref_backsight_title">Обратна отсечка</string>
   <string name="pref_backsight_summary">Въвеждане на обр. азимут/накл/разст при ръчно добавяне на отсечка</string>
-  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
-  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
+  <string name="pref_prev_next_title">Пред./Следваща бутони</string>
+  <string name="pref_prev_next_summary">Показване на бутони за Предишна/Следваща отсечка</string>
   <string name="pref_mag_anomaly_title">Магнитна аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсиране на локални аномалии чрез обратна отсечка</string>
   <string name="pref_azimuth_manual_title">Ръчно разгъване на отсечки</string>
@@ -904,8 +904,8 @@
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
   <string name="pref_xtherion_areas_title">Площи експорт в xtherion</string>
   <string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string>
-  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
-  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
+  <string name="pref_therion_splays_title">Therion странични измервания</string>
+  <string name="pref_therion_splays_summary">Експортиране на u:splay в th2 скиците</string>
   <string name="pref_autoStations_title">Репери в скицата</string>
   <string name="pref_autoStations_summary">Добавяне на реперите автоматично</string>
   <string name="pref_loopClosure_title">Затваряне на полигони</string>
