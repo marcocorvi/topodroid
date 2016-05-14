@@ -769,6 +769,8 @@
   <string name="pref_closeness_title">选择半径</string>
   <!-- UNUSED string name="pref_closeness_summary">草图项目选择半径</string -->
   <string name="pref_closeness_message">草图项目选择半径</string>
+  <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
+  <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
   <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
   <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
   <!-- TODO string name="pref_pointing_title">Pointing radius</string -->

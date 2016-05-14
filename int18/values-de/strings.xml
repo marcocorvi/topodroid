@@ -790,6 +790,8 @@
   <string name="pref_closeness_title">Auswahl Radius</string>
   <!-- UNUSED string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string -->
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
+  <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
+  <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
   <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
   <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
   <!-- TODO string name="pref_pointing_title">Pointing radius</string -->

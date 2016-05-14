@@ -38,39 +38,50 @@ public class DistoXStationName
 
   public static boolean isLessOrEqual( String lhs, String rhs )
   {
-    try {
-      int nl = Integer.parseInt( lhs );
-      int nr = Integer.parseInt( rhs );
-      return nl <= nr;
-    } catch (NumberFormatException e ) {
-      // ok
-    }
     int l1 = lhs.length();
     int l2 = rhs.length();
-    int len = ( l1 < l2 )? l1 : l2;
+    if ( l1 == 0 ) return true;   // "" <= any_string
+    if ( l2 == 0 ) return false;  // "..." > ""
+    
     char[] ch1 = lhs.toCharArray();
     char[] ch2 = rhs.toCharArray();
-    int k = 0;
-    for (; k<len; ++k ) {
-      if ( ch1[k] != ch2[k] ) { // try numbers again
-        try {
-          // Log.v( TopoDroidApp.TAG, lhs + " <= " + rhs + " : try " + lhs.substring(k) + " vs " + rhs.substring(k));
-          int nl = Integer.parseInt( lhs.substring(k) );
-          int nr = Integer.parseInt( rhs.substring(k) );
-          return nl <= nr;
-        } catch (NumberFormatException e ) {
-          // ok
-        }
-      }
-      if ( ch1[k] > ch2[k] ) {
-        // Log.v( TopoDroidApp.TAG, lhs + " <= " + rhs + " : false ");
-        return false;
+    
+    int n1 = 0, n2 = 0; // compare as numbers
+    int k1 = 0, k2 = 0;
+    for ( ; k1<l1; ++k1 ) {
+      if ( ch1[k1] >= '0' && ch1[k1] <= '9' ) {
+        n1 = n1*10 + ( ch1[k1] - '0' );
+      } else {
+        break;
       }
     }
-    // Log.v( TopoDroidApp.TAG, lhs + " <= " + rhs + " : " + (l1 <= l2) );
+    for ( ; k2<l2; ++k2 ) {
+      if ( ch2[k2] >= '0' && ch2[k2] <= '9' ) {
+        n2 = n2*10 + ( ch2[k2] - '0' );
+      } else {
+        break;
+      }
+    }
+    if ( n1 < n2 ) return true;    
+    if ( n1 > n2 ) return false;
+    // n1 == n2 compare rest of the string (note k1 == k2)
+    if ( k1 == l1 ) return true;  // nnn < nnn...
+    if ( k2 == l2 ) return false; // nnn... > nnn
+    int len = ( l1 < l2 )? l1 : l2;
+    for ( int k = k1; k < len; ++k ) {
+      if ( ch1[k] < ch2[k] ) return true;
+      if ( ch1[k] > ch2[k] ) return false;
+    }
     return ( l1 <= l2 );
   }
 
+  public static String increment( String name, List<DistoXDBlock> list )
+  {
+    do {
+      name = DistoXStationName.increment( name ); 
+    } while ( DistoXStationName.listHasName( list, name ) );
+    return name;
+  }
 
   public static String increment( String name )
   {

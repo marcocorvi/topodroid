@@ -368,7 +368,8 @@ public class DrawingCommandManager
   int eraseAt( float x, float y, float zoom, EraseCommand eraseCmd ) 
   {
     SelectionSet sel = new SelectionSet();
-    mSelection.selectAt( x, y, zoom, sel, false, false, false );
+    float radius = TDSetting.mCloseCutoff + TDSetting.mEraseness / zoom;
+    mSelection.selectAt( sel, x, y, radius, false, false, false );
     int ret = 0;
     if ( sel.size() > 0 ) {
       synchronized( mCurrentStack ) {
@@ -1361,13 +1362,14 @@ public class DrawingCommandManager
 
   public SelectionSet getItemsAt( float x, float y, float zoom )
   {
+    // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " selection pts " + mSelection.mPoints.size() );
+    float radius = TDSetting.mCloseCutoff + TDSetting.mCloseness / zoom;
     boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
     synchronized ( mSelected ) {
       mSelected.clear();
-      // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " selection pts " + mSelection.mPoints.size() );
-      mSelection.selectAt( x, y, zoom, mSelected, legs, splays, stations );
+      mSelection.selectAt( mSelected, x, y, radius, legs, splays, stations );
       if ( mSelected.mPoints.size() > 0 ) {
         mSelected.nextHotItem();
       }

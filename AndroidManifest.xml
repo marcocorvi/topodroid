@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="301021"
-      android:versionName="3.1.1"
+      android:versionCode="301022"
+      android:versionName="3.1.1a"
     >
     <uses-sdk
        android:minSdkVersion="8"
@@ -170,6 +170,15 @@
                <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" /> 
            </intent-filter>
         </receiver -->
+
+
+    <service
+      android:name="TD_DistoX"
+      android:icon="@drawable/icon3"
+      android:label="TD_DistoX"
+      android:process=":td_distox_process"
+      >
+    </service>
 
     </application>
 </manifest> 

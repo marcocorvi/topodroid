@@ -42,6 +42,15 @@
        android:defaultValue="24" />
 
      <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_ERASENESS"
+       android:title="@string/pref_eraseness_title"
+       android:summary="@string/pref_eraseness_message"
+       android:dialogTitle="@string/pref_eraseness_title"
+       android:dialogMessage="@string/pref_eraseness_message"
+       android:inputType="number"
+       android:defaultValue="36" />
+
+     <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_MIN_SHIFT"
        android:title="@string/pref_min_shift_title"
        android:summary="@string/pref_min_shift_message"

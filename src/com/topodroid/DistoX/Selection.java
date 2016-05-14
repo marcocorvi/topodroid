@@ -274,9 +274,8 @@ class Selection
     }
   }
 
-  void selectAt( float x, float y, float zoom, SelectionSet sel, boolean legs, boolean splays, boolean stations )
+  void selectAt( SelectionSet sel, float x, float y, float radius, boolean legs, boolean splays, boolean stations )
   {
-    float radius = TDSetting.mCloseCutoff + TDSetting.mCloseness / zoom;
     // Log.v( "DistoX", "selection select at " + x + " " + y + " pts " + mPoints.size() + " " + legs + " " + splays + " " + stations + " radius " + radius );
 
     bucketSelectAt( x, y, radius, sel, legs, splays, stations );

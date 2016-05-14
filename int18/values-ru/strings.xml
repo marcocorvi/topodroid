@@ -768,6 +768,8 @@
   <string name="pref_closeness_title">Радиус выбора</string>
   <!-- UNUSED string name="pref_closeness_summary">Радиус выбора элемента абриса</string -->
   <string name="pref_closeness_message">Радиус выбора элемента абриса</string>
+  <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
+  <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
   <string name="pref_min_shift_title">Чувствительность к сдвигу</string>
   <string name="pref_min_shift_message">Чувствительность к сдвигу</string>
   <string name="pref_pointing_title">Радиус указания</string>

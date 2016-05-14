@@ -771,6 +771,8 @@
   <string name="pref_closeness_title">Radius de sélection</string>
   <!-- UNUSED string name="pref_closeness_summary">Portée de la zone de sélection</string -->
   <string name="pref_closeness_message">Portée de la zone de sélection</string>
+  <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
+  <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
   <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
   <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
   <!-- TODO string name="pref_pointing_title">Pointing radius</string -->

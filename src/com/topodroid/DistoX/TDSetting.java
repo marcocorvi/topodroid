@@ -82,6 +82,7 @@ class TDSetting
 
     "DISTOX_AUTO_STATIONS",       // 37
     "DISTOX_CLOSENESS",           // 38
+    "DISTOX_ERASENESS",           // 38
     "DISTOX_MIN_SHIFT",          
     "DISTOX_POINTING",
     "DISTOX_LINE_SEGMENT",
@@ -326,6 +327,7 @@ class TDSetting
   static final float mCloseCutoff = 0.01f; // minimum selection radius
 
   static float mCloseness = 24f;             // selection radius
+  static float mEraseness = 36f;             // eraser radius
   static int mMinShift = 60;
   static int mPointingRadius = 16;
 
@@ -638,6 +640,7 @@ class TDSetting
     // -------------------  DRAWING PREFERENCES -def----fallback------min/max
     mAutoStations  = prefs.getBoolean( key[k++], true );            // DISTOX_AUTO_STATIONS 
     mCloseness     = tryFloat( prefs, key[k++], "24" );             // DISTOX_CLOSENESS
+    mEraseness     = tryFloat( prefs, key[k++], "36" );             // DISTOX_ERASENESS
     mMinShift      = tryInt(   prefs, key[k++], "60" );             // DISTOX_MIN_SHIFT
     mPointingRadius= tryInt(   prefs, key[k++], "16" );             // DISTOX_POINTING
     mLineSegment   = tryInt(   prefs, key[k++], "10" );             // DISTOX_LINE_SEGMENT
@@ -887,6 +890,8 @@ class TDSetting
       mAutoStations = prefs.getBoolean( k, true );    // DISTOX_AUTO_STATIONS
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCloseness    = tryFloat( prefs, k, "24" );
+    } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_ERASENESS
+      mEraseness    = tryFloat( prefs, k, "36" );
     } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_MIN_SHIFT
       mMinShift     = tryInt(  prefs, k, "60" );
     } else if ( k.equals( key[ nk++ ] ) ) {           // DISTOX_POINTING
@@ -1228,6 +1233,7 @@ class TDSetting
 
     // if ( name.equals( "DISTOX_AUTO_STATIONS" )
     if ( name.equals( "DISTOX_CLOSENESS"      ) ) return parseFloatValue( value, mCloseness,    1 );
+    if ( name.equals( "DISTOX_ERASENESS"      ) ) return parseFloatValue( value, mEraseness,    1 );
     if ( name.equals( "DISTOX_MIN_SHIFT"      ) ) return parseIntValue( value, mMinShift,      10 );
     if ( name.equals( "DISTOX_POINTING"       ) ) return parseIntValue( value, mPointingRadius, 1 );
     if ( name.equals( "DISTOX_LINE_SEGMENT"   ) ) return parseIntValue( value, mLineSegment,    1 );
