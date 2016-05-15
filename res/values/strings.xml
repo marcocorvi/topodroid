@@ -638,7 +638,7 @@
 
     <string name="title_azimut">Extend reference</string>
     <string name="title_calib">Calibrations</string>
-    <string name="title_coverage">Calibration data distibution</string>
+    <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>
     <string name="title_contour">Contour</string>
     <!-- string name="title_coord">Enter the point coordinates:</string -->
