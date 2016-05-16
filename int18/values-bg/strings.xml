@@ -426,6 +426,7 @@
     <!-- UNUSED string name="ask_close">Затваряне на TopoDroid?</string -->
     <string name="ask_reset">Изчистване на паметта на DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
+    <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
 
 
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->

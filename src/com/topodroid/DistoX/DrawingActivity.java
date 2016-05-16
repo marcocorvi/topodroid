@@ -1798,7 +1798,7 @@ public class DrawingActivity extends ItemDrawer
         } else if ( mMode == MODE_ERASE ) {
           // Log.v("DistoX", "Erase at " + x_scene + " " + y_scene );
           mEraseCommand =  new EraseCommand();
-          doEraseAt(  x_scene, y_scene );
+          doEraseAt( x_scene, y_scene );
         } else if ( mMode == MODE_MOVE ) {
           setTheTitle( );
           mSaveX = x_canvas; // FIXME-000

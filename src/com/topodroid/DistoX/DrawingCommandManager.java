@@ -391,6 +391,19 @@ public class DrawingCommandManager
                 mSelection.removePath( path );
               }
             } 
+            else if ( pt.mPoint == first ) // erase first point of the multi-point line (2016-05-14)
+            {
+              ret = 3;
+              eraseCmd.addAction( EraseAction.ERASE_MODIFY, path );
+              // LinePoint lp = points.get(0);
+              LinePoint lp = first;
+              doRemoveLinePoint( line, pt.mPoint, pt );
+              synchronized( mSelection ) {
+                mSelection.removeLinePoint( line, lp ); // index = 0
+                // mSelection.mPoints.remove( pt );        // index = 1
+              }
+              line.retracePath();
+            }
             else if ( pt.mPoint == first.mNext ) // erase second point of the multi-point line
             {
               ret = 3;

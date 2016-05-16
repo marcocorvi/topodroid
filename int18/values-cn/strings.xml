@@ -420,6 +420,7 @@
     <!-- string name="ask_close">关闭 TopoDroid?</string -->
     <string name="ask_reset">重置 DistoX 存储器?</string>
     <!-- string name="ask_close_survey">关闭测量?</string -->
+    <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
     
 
     <!-- UNUSED string name="button_add"       >添加       </string -->

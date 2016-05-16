@@ -420,9 +420,10 @@
     <string name="distox_err_headtail_eof">Memoria DistoX EOF</string>
     <string name="distox_err_connected">DistoX già connesso</string>
 
-     <!-- UNUSED string name="ask_close">Uscire da TopoDroid?</string -->
-     <string name="ask_reset">Resettare memoria DistoX?</string>
-     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
+    <!-- UNUSED string name="ask_close">Uscire da TopoDroid?</string -->
+    <string name="ask_reset">Resettare memoria DistoX?</string>
+    <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
+    <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
 
     <!-- UNUSED string name="button_add"       >Aggiungi  </string -->
     <string name="button_back"      >Indietro  </string>

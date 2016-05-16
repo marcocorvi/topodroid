@@ -202,7 +202,19 @@ public class FixedActivity extends Activity
 
     int k = 0;
     if ( b == mButton1[k++] ) { // GPS
-      new FixedGpsDialog( mContext, this ).show();
+      final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
+      if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+        TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
+          new DialogInterface.OnClickListener( ) { 
+            @Override public void onClick( DialogInterface dialog, int btn ) { 
+              startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
+            }
+          }
+        );
+      }
+      if ( lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+        new FixedGpsDialog( mContext, this ).show();
+      }
     } else if ( b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
     } else if ( b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER

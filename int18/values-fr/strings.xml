@@ -421,6 +421,7 @@
      <!-- UNUSED string name="ask_close">Quitter TopoDroid?</string -->
      <string name="ask_reset">Reinitialiser mémoire DistoX ?</string>
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
+    <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
 
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
