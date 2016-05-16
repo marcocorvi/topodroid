@@ -53,29 +53,6 @@
      <item name="four">4</item>
   </string-array>
 
-  <string-array name="exportShots">
-     <item name="none">Aucun</item>
-     <item name="therion">Therion</item>
-     <item name="compass">Compass</item>
-     <item name="csurvey">cSurvey</item>
-     <item name="pockettopo">PocketTopo</item>
-     <item name="polygon">Polygon</item>
-     <item name="survex">Survex</item>
-     <item name="topo">Topo</item>
-     <item name="visualtopo">VisualTopo</item>
-     <item name="walls">Walls</item>
-     <item name="csv">CSV</item>
-     <item name="dxf">DXF</item>
-  </string-array>
-
-  <string-array name="exportPlot">
-     <item name="none">Aucun</item>
-     <item name="therion">Therion</item>
-     <item name="csurvey">cSurvey</item>
-     <item name="dxf">DXF</item>
-     <item name="svg">SVG</item>
-     <item name="png">PNG</item>
-  </string-array>
 
   <string-array name="extraButtons">
      <item name="basic">Basic</item>
@@ -87,22 +64,19 @@
  
 
   <string-array name="sizeButtons">
-     <item name="small">Petit</item>
-     <item name="normal">Normal</item>
-     <item name="medium">Medium</item>
+     <item name="small1">Petit</item>
      <item name="large">Grand</item>
-     <item name="huge">Huge</item>
   </string-array>
  
 
   <string-array name="logStream">
-     <item name="android">Journal Systeme</item>
-     <item name="file">Journal Fichiers</item>
+     <item name="android">Journal système</item>
+     <item name="file">Journal fichiers</item>
   </string-array>
 
 
   <string-array name="connMode">
-     <item name="batch">A la Demande, par Lots</item>
+     <item name="batch">A la demande, par lots</item>
      <item name="continuous">Continue</item>
   </string-array>
  
@@ -114,7 +88,7 @@
  
 
   <string-array name="sockType">
-     <item name="default">Par Defaut</item>
+     <item name="default">Par défaut</item>
      <item name="Insecure">Non sécurisé</item>
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
@@ -128,22 +102,15 @@
      <item name="for2">Visée normale, cheminement en premier</item>
      <item name="back2">Visée inverse, cheminement en premier</item>
      <item name="anomaly">Visée Arriere, Backsight</item>
-     <item name="tripod">Tripod</item>
   </string-array>
  
 
    <string-array name="pickerType">
-     <item name="recent">Plus recentes</item>
+     <item name="recent">Plus récentes</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
-     <item name="grid3">Triple grid</item>
    </string-array>
 
-  <!-- TODO string-array name="sectionStations">
-     <item name="both">both</item>
-     <item name="from">behind</item>
-     <item name="to">in front</item>
-  </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Aucune</item>
@@ -196,8 +163,8 @@
 
   <string-array name="calibAlgo">
      <item name="auto">Automatique</item>
-     <item name="linear">Lineaire</item>
-     <item name="nonlinear">Non-lineaire</item>
+     <item name="linear">Linéaire</item>
+     <item name="nonlinear">Non-linéaire</item>
   </string-array>
 
 </resources>
