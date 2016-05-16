@@ -103,6 +103,7 @@
      <item name="for2">前测主线, 射线</item>
      <item name="back2">后测主线, 射线</item>
      <item name="anomaly">后视</item>
+     <item name="tripod">Tripod</item>
   </string-array>
 
   <string-array name="pickerType">

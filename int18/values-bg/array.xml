@@ -103,6 +103,7 @@
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
      <item name="anomaly">Обратна отсечка, странични, права</item>
+     <item name="tripod">Tripod</item>
   </string-array>
 
   <string-array name="pickerType">

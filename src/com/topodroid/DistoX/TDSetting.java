@@ -290,6 +290,7 @@ class TDSetting
   static String  mInitStation   = "0";
   static boolean mBacksight     = false;    // whether to check backsight
   static boolean mBacksightShot = false;    // backsight shooting policy
+  static boolean mTripodShot    = false;    // tripod shooting policy
   static boolean mMagAnomaly    = false;    // local magnetic anomaly survey
   static float   mSplayVertThrs = 80;
   static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
@@ -412,8 +413,9 @@ class TDSetting
   {
     mMagAnomaly = val;
     if ( mMagAnomaly && mSurveyStations > 0 ) {
-      mBacksightShot = true;
-      mSurveyStations = 1;
+      mBacksightShot   = true;
+      mTripodShot      = false;
+      mSurveyStations  = 1;
       mShotAfterSplays = true;
     }
   }
@@ -1098,12 +1100,19 @@ class TDSetting
     } catch ( NumberFormatException e ) {
       mSurveyStations = 1;
     }
-    if ( mSurveyStations == 5 ) { // local magnetic anomaly
-      mBacksightShot = true;
-      mSurveyStations = 1;
+    if ( mSurveyStations == 6 ) {  // TRIPOD
+      mBacksightShot   = false;
+      mTripodShot      = true;
+      mSurveyStations  = 1;
+      mShotAfterSplays = true;
+    } else if ( mSurveyStations == 5 ) { // BACKSIGHT
+      mBacksightShot   = true;
+      mTripodShot      = false;
+      mSurveyStations  = 1;
       mShotAfterSplays = true;
     } else {
-      mBacksightShot = false;
+      mBacksightShot   = false;
+      mTripodShot      = false;
       mShotAfterSplays = ( mSurveyStations <= 2 );
       if ( mSurveyStations > 2 ) mSurveyStations -= 2;
     }

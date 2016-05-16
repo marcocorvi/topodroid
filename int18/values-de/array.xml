@@ -98,6 +98,7 @@
      <item name="for2">Vorwärtsmessung, Hilfszüge</item>
      <item name="back2">Rückwärtsmessung, Hilfszüge</item>
      <item name="anomaly">Rückwärts, Hilfszüge, Vorwärts</item>
+     <item name="tripod">Tripod</item>
   </string-array>
 
   <string-array name="pickerType">

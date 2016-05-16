@@ -63,16 +63,22 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   /** get all the splays around a splay-block (from the prev leg to the next leg)
    * @param id    id of the given splay-block
    */
-  ArrayList< DistoXDBlock > getSplaysAtId( long id )
+  ArrayList< DistoXDBlock > getSplaysAtId( long id, String name )
   {
     ArrayList< DistoXDBlock > ret = new ArrayList< DistoXDBlock >();
     for ( int k = 0; k < mItems.size(); ++k ) {
       DistoXDBlock b = mItems.get( k );
       if ( b.mId == id ) {
         int k1 = k-1;
-        while ( k1 > 0 && mItems.get( k1 ).mType == DistoXDBlock.BLOCK_SPLAY ) --k1;
+        for ( ; k1 > 0; --k1 ) {
+          DistoXDBlock b1 = mItems.get( k1 );
+          if ( b1.mType != DistoXDBlock.BLOCK_SPLAY || ! name.equals( b1.mFrom ) ) break;
+        }
         int k2 = k;
-        while ( k2 < mItems.size() && mItems.get( k2 ).mType == DistoXDBlock.BLOCK_SPLAY ) ++k2;
+        for ( ; k2 < mItems.size(); ++k2 ) {
+          DistoXDBlock b2 = mItems.get( k2 );
+          if ( b2.mType != DistoXDBlock.BLOCK_SPLAY || ! name.equals( b2.mFrom ) ) break;
+        }
         for ( ++k1; k1<k2; ++k1 ) ret.add( mItems.get(k1) );
         break;
       }

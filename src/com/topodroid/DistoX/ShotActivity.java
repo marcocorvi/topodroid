@@ -1307,7 +1307,7 @@ public class ShotActivity extends Activity
   // and blk splay shot
   public void updateSplayShots( String from, String to, long extend, long flag, boolean leg, String comment, DistoXDBlock blk )
   {
-    ArrayList< DistoXDBlock > splays = mDataAdapter.getSplaysAtId( blk.mId );
+    ArrayList< DistoXDBlock > splays = mDataAdapter.getSplaysAtId( blk.mId, blk.mFrom );
     for ( DistoXDBlock b : splays ) {
       if ( b.mId == blk.mId ) {
         blk.setName( from, to );

@@ -96,6 +96,7 @@
      <item name="for2">Directa, primero anchuras</item>
      <item name="back2">Inversa, primero anchuras</item>
      <item name="anomaly">Punto respaldado</item>
+     <item name="tripod">Tripod</item>
   </string-array>
 
   <string-array name="pickerType">
