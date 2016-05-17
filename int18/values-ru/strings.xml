@@ -954,8 +954,8 @@
   <string name="pref_unit_length_summary">Показать единицы длинны</string>
   <string name="pref_unit_angle_title">Единицы измерения углов</string>
   <string name="pref_unit_angle_summary">Показать единицы углов</string>
-  <string name="pref_unit_location_title">Единицы координат</string>
-  <string name="pref_unit_location_summary">Показать единицы координат</string>
+  <string name="pref_unit_location_title">Формат координат</string>
+  <string name="pref_unit_location_summary">Показать формат координат</string>
 
   <string name="pref_plot_walls_title">АВТО СТЕНЫ</string>
   <string name="pref_walls_type_title">Тип стен</string>
