@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <plurals name="calib_saturated_values">
+    <item quantity="one">УВАГА. Один "насичений" замір</item>
+    <item quantity="other">УВАГА. %1$d "насичених" замірів</item>
+  </plurals>
+
+  <plurals name="read_data">
+    <item quantity="zero">Дані не зчитані</item>
+    <item quantity="other">Зчитано %1$d вимірюваннь</item>
+  </plurals>
+
+  <plurals name="read_calib_data">
+    <item quantity="zero">Дані для калібровки не зчитані</item>
+    <item quantity="other">Зчитано %1$d вимірювання (%2$d пакетів)</item>
+  </plurals>
+</resources>
