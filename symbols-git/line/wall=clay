@@ -5,6 +5,7 @@ name-es paredes_de_barro
 name-de Lehmwand
 name-bg стена_глина
 name-ru стена_в_глине
+name-ua стіна_в_глині
 th_name wall:clay
 group wall
 color 0xff0000 0xff

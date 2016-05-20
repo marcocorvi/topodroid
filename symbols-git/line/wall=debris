@@ -5,6 +5,7 @@ name-es paredes_descompuestas
 name-de Schuttwand
 name-bg стена_чакъл
 name-ru стена_мусор_осадки
+name-ua стіна_сміття_опади
 th_name wall:debris
 group wall
 color 0xff0000 0xff

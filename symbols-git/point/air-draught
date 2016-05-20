@@ -8,6 +8,7 @@ name-fr courant_d'air
 name-de Luftzug
 name-ru тяга_воздуха
 name-bg въздушно_течение
+name-ua тяга
 th_name air-draught
 orientation yes
 color 0x00ccff
