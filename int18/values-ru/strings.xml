@@ -4,7 +4,7 @@
     <string name="no_manual">Не возможно скачать страницы помощи из интернета.</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Нажмте "НАЗАД" еще раз для выхода</string>
+    <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
     <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить объекты рисунков?</string>
 
@@ -127,8 +127,8 @@
     <string name="import_title">Импорт файла</string>
     <!-- UNUSED string name="import_wait">Импорт файла&#8230; обождите&#8230;</string -->
     <string name="import_already">съёмка уже импортирована</string>
-    <string name="import_none">Отсутствует файл для импортирта</string>
-    <string name="import_failed">Не удалось импортироапть файл</string>
+    <string name="import_none">Отсутствует файл для импорта</string>
+    <string name="import_failed">Не удалось импортировть файл</string>
     <string name="file_not_found">Файл не обнаружен</string>
     <string name="import_calib_ok">Калибровка успешно импортирована</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
@@ -170,15 +170,15 @@
     <string name="error_from_required">Требуется начальный пикет</string>
     <string name="error_group_required">Требуется номер группы</string>
     <string name="error_group_non_integer">Номер группы должен быть целым числом</string>
-    <string name="error_alt_required">Требуется альтитуда</string>
+    <string name="error_alt_required">Требуется высота над уровнем моря</string>
     <string name="error_invalid_number">Недопустимое значение</string>
     <string name="error_lat_required">Требуется широта</string>
     <string name="error_long_required">Требуется долгота</string>
     <string name="error_name_required">Требуется название</string>
     <string name="error_start_required">Требуется привязка к пикету</string>
     <!-- UNUSED string name="error_station_already_fixed">Пикет уже имеет координаты</string -->
-    <string name="error_station_required">Требуется прикет</string>
-    <string name="error_station_non_existing">Несуществующий прикет</string>
+    <string name="error_station_required">Требуется пикет</string>
+    <string name="error_station_non_existing">Несуществующий пикет</string>
     <string name="error_sensor_required">Требуется датчик</string>
     <string name="error_value_required">Требуется значение</string>
     
@@ -207,7 +207,7 @@
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
 
-    <string name="no_bt">Нет Блютуфа</string>
+    <string name="no_bt">Нет Блютуза</string>
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calibration">Калибровка не выбрана</string>
     <string name="no_capture_app">Отсутствует приложение для фото</string>
@@ -277,9 +277,9 @@
     <string name="connected_none">Не соединено</string>
     <string name="connected_already">Уже соединено</string>
 
-    <string name="not_available">Блютуф недоступен</string>
+    <string name="not_available">Блютуз недоступен</string>
     <!-- OK string name="not_connected">Нет соединения</string -->
-    <string name="not_enabled">Блютуф выключен</string>
+    <string name="not_enabled">Блютуз выключен</string>
     <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <!-- UNUSED string name="photo">фото</string -->
@@ -618,7 +618,7 @@
     <string name="help_surface">Создать поверхность</string>
     <string name="help_save_model">Экспорт 3D модели</string>
     <string name="help_trash_model">Удалить 3D модель</string>
-    <string name="help_head_model">Ориентироапть 3D модель</string>
+    <string name="help_head_model">Ориентировать 3D модель</string>
     <!-- UNUSED string name="help_erase_model">Удалить область</string -->
     <string name="help_cut_model">Обрезать область</string>
     <string name="help_stretch_model">Растянуть область</string>
@@ -745,7 +745,7 @@
   <string name="pref_socket_delay_message">Задержка подключения для сопряжении [0.1 сек]</string>
   <string name="pref_z6_workaround_title">Решение для Z6</string>
   <string name="pref_z6_workaround_summary">Решение для загрузки данных с телефонов Z6</string>
-  <string name="pref_crs_title">C R S система координат </string>
+  <string name="pref_crs_title">CRS система координат </string>
   <string name="pref_crs_summary">CRS имя</string>
   <string name="pref_crs_message">Введите имя CRS как в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
@@ -792,8 +792,8 @@
   <string name="pref_dip_thr_message">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
   <string name="pref_leg_title">Допустимое отклонениие измерений отрезков</string>
-  <string name="pref_leg_summary">Точновсть измерений пикетов отрезка</string>
-  <string name="pref_leg_message">Точновсть измерений пикетов отрезка</string>
+  <string name="pref_leg_summary">Точность измерений пикетов отрезка</string>
+  <string name="pref_leg_message">Точность измерений пикетов отрезка</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
@@ -1023,14 +1023,14 @@
     </string>
 
   <string name="firmware_title">Обновление прошивки</string>
-  <string name="firmware_file_title">Файлы Прошвок</string>
+  <string name="firmware_file_title">Файлы Прошивок</string>
   <string name="firmware_text">
 \n[1] Выберите либо загрузить прошивку на устройсто, либо скачать прошивку в файл.
 \n[2] Выберите файл для загрузки или сохранения. Файлы прошивок находятся в папке bin.
 \n[3] Убедитесь в том что версия прошивки совместима с версией аппаратуры DistoX.
 \n[4] Переключите DistoX2 в режим загрузчика: удерживайте ПЛЮС и МИНУС в момент включения кнопки DIST.
 \n[5] Нажмите кнопку OK и дожитесь завершения процесса.
-\n[6] Подождите пока на DistoX не замигает значек блютуф.
+\n[6] Подождите пока на DistoX не замигает значек блютуз.
 \n[7] Выключите DistoX2 используя кнопку CLR.
 \n
    </string>
