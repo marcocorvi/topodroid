@@ -5,6 +5,7 @@ name-es paredes_de_arena
 name-de Sandwand
 name-bg стена_пясък
 name-ru стена_песок
+name-ua стіна_пісок
 th_name wall:sand
 group wall
 color 0xff0000 0xff
