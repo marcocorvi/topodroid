@@ -128,7 +128,7 @@
     <!-- UNUSED string name="import_wait">Импорт файла&#8230; обождите&#8230;</string -->
     <string name="import_already">съёмка уже импортирована</string>
     <string name="import_none">Отсутствует файл для импорта</string>
-    <string name="import_failed">Не удалось импортировть файл</string>
+    <string name="import_failed">Не удалось импортировать файл</string>
     <string name="file_not_found">Файл не обнаружен</string>
     <string name="import_calib_ok">Калибровка успешно импортирована</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
