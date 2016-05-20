@@ -897,8 +897,8 @@
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
-  <string name="pref_xtherion_areas_title">Области xtherion</string>
-  <string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">Области xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string -->
   <string name="pref_therion_splays_title">Боковые замеры в Therion</string>
   <string name="pref_therion_splays_summary">Добавить линии боковых замеров в файл th2</string>
   <string name="pref_autoStations_title">Точки пикетов Therion</string>

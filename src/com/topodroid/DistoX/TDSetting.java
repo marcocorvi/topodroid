@@ -131,7 +131,7 @@ class TDSetting
     "DISTOX_SURVEX_LRUD",         // 78
     "DISTOX_UNSCALED_POINTS",     // 79 unscaled drawing point items
     "DISTOX_UNIT_GRID",           // 80
-    "DISTOX_XTHERION_AREAS",      // 81 save areas a-la xtherion
+    // "DISTOX_XTHERION_AREAS",      // 81 save areas a-la xtherion
     "DISTOX_THERION_SPLAYS",
     "DISTOX_RECENT_NR",           // 82 number of most recent items (item picker)
     "DISTOX_AREA_BORDER",         // 83 area border visibility
@@ -196,7 +196,7 @@ class TDSetting
 
   static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey export
 
-  static boolean mXTherionAreas = false;
+  // static boolean mXTherionAreas = false;
   static boolean mAutoStations = true; // whether to add stations automatically to scrap therion files
   static boolean mTherionSplays = true; // whether to add splay segments to auto stations
 
@@ -702,7 +702,7 @@ class TDSetting
     mSurvexLRUD   =   prefs.getBoolean( key[k++], false );    // DISTOX_SURVEX_LRUD
     mUnscaledPoints = prefs.getBoolean( key[k++], false );    // DISTOX_UNSCALED_POINTS
     mUnitGrid       = tryFloat(  prefs, key[k++], "1" );      // DISTOX_UNIT_GRID
-    mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
+    // mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
     mTherionSplays  = prefs.getBoolean( key[k++], false );    // DISTOX_THERION_SPLAYS
 
     mRecentNr   = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
@@ -1021,8 +1021,8 @@ class TDSetting
       mUnscaledPoints = prefs.getBoolean( k, false ); // DISTOX_UNSCALED_POINTS
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_UNIT_GRID
       mUnitGrid = Float.parseFloat( prefs.getString( k, "1" ) ); 
-    } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_XTHERION_AREAS
-      mXTherionAreas = prefs.getBoolean( k, false );   
+    // } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_XTHERION_AREAS
+    //   mXTherionAreas = prefs.getBoolean( k, false );   
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_THERION_SPLAYS
       mTherionSplays  = prefs.getBoolean( k, false );   
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_RECENT_NR

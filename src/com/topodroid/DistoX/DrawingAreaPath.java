@@ -208,7 +208,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
     {
       pt.toTherion( pw );
     }
-    if ( TDSetting.mXTherionAreas ) { // NOTE xtherion needs an extra point 
+    // if ( TDSetting.mXTherionAreas ) // NOTE xtherion needs an extra point 
+    {
       float dx = mLast.mX - mFirst.mX;
       float dy = mLast.mY - mFirst.mY;
       if ( dx*dx + dy*dy > 1.0e-7 ) {

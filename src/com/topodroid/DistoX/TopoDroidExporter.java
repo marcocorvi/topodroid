@@ -1934,9 +1934,9 @@ class TopoDroidExporter
         }
       }
     }
-    pw.format(Locale.US, "%s %s %.2f %.1f %.1f", item.mFrom, item.mTo, leg.length(), leg.bearing(), leg.clino() );
+    pw.format(Locale.US, "%s\t%s\t%.2f\t%.1f\t%.1f", item.mFrom, item.mTo, leg.length(), leg.bearing(), leg.clino() );
     if ( item.mComment != null ) {
-      pw.format(" ; %s%s", item.mComment, eol );
+      pw.format("\t;\t%s%s", item.mComment, eol );
     } else {
       pw.format("%s", eol );
     }
@@ -1946,9 +1946,9 @@ class TopoDroidExporter
   private static void printSplayToCav( PrintWriter pw, DistoXDBlock blk, String eol )
   {
     // if ( duplicate ) pw.format("#duplicate%s", eol);
-    pw.format(Locale.US, "%s - %.2f %.1f %.1f", blk.mFrom, blk.mLength, blk.mBearing, blk.mClino );
+    pw.format(Locale.US, "%s\t-\t%.2f\t%.1f\t%.1f", blk.mFrom, blk.mLength, blk.mBearing, blk.mClino );
     if ( blk.mComment != null ) {
-      pw.format(" ; %s%s", blk.mComment, eol );
+      pw.format("\t;\t%s%s", blk.mComment, eol );
     } else {
       pw.format("%s", eol );
     }
@@ -1998,19 +1998,19 @@ class TopoDroidExporter
         }
       }
       pw.format("#survey ^%s%s", info.name, eol );
-      if ( info.team != null ) pw.format("#survey_team %s %s", info.team, eol );
-      pw.format("#survey_date %02d.%02d.%04d %s", d, m, y, eol ); 
-      if ( info.comment != null ) pw.format("#survey_title %s %s", info.comment, eol );
+      if ( info.team != null ) pw.format("#survey_team %s%s", info.team, eol );
+      pw.format("#survey_date %02d.%02d.%04d%s", d, m, y, eol ); 
+      if ( info.comment != null ) pw.format("#survey_title %s%s", info.comment, eol );
 
-      pw.format(Locale.US, "#declination[%.1f] %s", info.declination, eol );
+      pw.format(Locale.US, "#declination[%.1f]%s", info.declination, eol );
       
       List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
       if ( fixed.size() > 0 ) {
         ents = new ArrayList< String >();
         for ( FixedInfo fix : fixed ) {
           ents.add( fix.name );
-          pw.format("; #point Point%s ", fix.name );
-          pw.format(Locale.US, "%.6f %.6f %.0f %s", fix.lng, fix.lat, fix.asl, eol );
+          pw.format(";\t#point\tPoint%s\t", fix.name );
+          pw.format(Locale.US, "%.6f\t%.6f\t%.0f%s", fix.lng, fix.lat, fix.asl, eol );
           break;
         }
       }

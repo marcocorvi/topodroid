@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_WALLS_TYPE"
+       android:summary="@string/pref_walls_type_summary"
+       android:title="@string/pref_walls_type_title"
+       android:defaultValue="0"
+       android:entries="@array/wallsType"
+       android:entryValues="@array/wallsTypeValue"
+     />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WALLS_PLAN_THR"
+       android:title="@string/pref_walls_plan_thr_title"
+       android:summary="@string/pref_walls_plan_thr_summary"
+       android:dialogTitle="@string/pref_walls_plan_thr_title"
+       android:dialogMessage="@string/pref_walls_plan_thr_message"
+       android:inputType="number"
+       android:defaultValue="70"/>
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WALLS_EXTENDED_THR"
+       android:title="@string/pref_walls_extended_thr_title"
+       android:summary="@string/pref_walls_extended_thr_summary"
+       android:dialogTitle="@string/pref_walls_extended_thr_title"
+       android:dialogMessage="@string/pref_walls_extended_thr_message"
+       android:inputType="number"
+       android:defaultValue="45"/>
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WALLS_XCLOSE"
+       android:title="@string/pref_walls_xclose_title"
+       android:summary="@string/pref_walls_xclose_summary"
+       android:dialogTitle="@string/pref_walls_xclose_title"
+       android:dialogMessage="@string/pref_walls_xclose_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.1" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WALLS_CONCAVE"
+       android:title="@string/pref_walls_concave_title"
+       android:summary="@string/pref_walls_concave_summary"
+       android:dialogTitle="@string/pref_walls_concave_title"
+       android:dialogMessage="@string/pref_walls_concave_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="0.1" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WALLS_XSTEP"
+       android:title="@string/pref_walls_xstep_title"
+       android:summary="@string/pref_walls_xstep_summary"
+       android:dialogTitle="@string/pref_walls_xstep_title"
+       android:dialogMessage="@string/pref_walls_xstep_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="1.0" />
+
+     <!-- CheckBoxPreference
+       android:key="DISTOX_"
+       android:summary="@string/pref_checkAttached_summary"
+       android:title="@string/pref_checkAttached_title"
+       android:defaultValue="false"
+     / -->
+
+</PreferenceScreen>

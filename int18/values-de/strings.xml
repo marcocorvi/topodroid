@@ -917,8 +917,8 @@
   <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
   <string name="pref_checkAttached_title">Messlinien-Check</string>
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
-  <string name="pref_xtherion_areas_title">xtherion Flächen</string>
-  <string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">xtherion Flächen</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string -->
   <string name="pref_therion_splays_title">Therion Hilfszüge</string>
   <string name="pref_therion_splays_summary">u:splay zu th2 dateien hinzufügen</string>
   <string name="pref_autoStations_title">Therion Stationen</string>

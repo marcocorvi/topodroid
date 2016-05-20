@@ -835,8 +835,8 @@
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Comprobación de la poligonal principal</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
-  <string name="pref_xtherion_areas_title">Áreas Xtherion</string>
-  <string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
   <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
   <string name="pref_autoStations_title">Estaciones automáticas</string>

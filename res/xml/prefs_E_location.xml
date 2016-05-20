@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<!-- DISTOX_LOCATION  -->
+
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_UNIT_LOCATION"
+       android:summary="@string/pref_unit_location_summary"
+       android:title="@string/pref_unit_location_title"
+       android:defaultValue="ddmmss"
+       android:entries="@array/unitLocation"
+       android:entryValues="@array/unitLocationValue"
+     />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_CRS"
+       android:title="@string/pref_crs_title"
+       android:summary="@string/pref_crs_summary"
+       android:dialogTitle="@string/pref_crs_title"
+       android:dialogMessage="@string/pref_crs_message"
+       android:defaultValue="Long-Lat"
+     />
+
+</PreferenceScreen>

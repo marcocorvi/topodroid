@@ -900,8 +900,8 @@
   <string name="pref_checkBT_summary">Activer/désactiver Bluetooth</string>
   <string name="pref_checkAttached_title">Vérification cheminement</string>
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
-  <string name="pref_xtherion_areas_title">Aire Xtherion</string>
-  <string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">Aire Xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string -->
   <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
   <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
   <string name="pref_autoStations_title">Stations auto</string>

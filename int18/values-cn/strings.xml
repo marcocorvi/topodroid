@@ -898,8 +898,8 @@
   <string name="pref_checkBT_summary">启用/停用 蓝牙</string>
   <string name="pref_checkAttached_title">中间线检查</string>
   <string name="pref_checkAttached_summary">检测如果测量点相连接</string>
-  <string name="pref_xtherion_areas_title">xtherion 区域</string>
-  <string name="pref_xtherion_areas_summary">保存 xtherion 区域</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">xtherion 区域</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">保存 xtherion 区域</string -->
   <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
   <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
   <string name="pref_autoStations_title">Therion 测量点</string>

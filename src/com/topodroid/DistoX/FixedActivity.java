@@ -211,8 +211,7 @@ public class FixedActivity extends Activity
             }
           }
         );
-      }
-      if ( lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+      } else {
         new FixedGpsDialog( mContext, this ).show();
       }
     } else if ( b == mButton1[k++] ) { // ADD

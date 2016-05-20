@@ -906,8 +906,8 @@
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
-  <string name="pref_xtherion_areas_title">Aree xtherion</string>
-  <string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
   <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
   <string name="pref_autoStations_title">Punti th2 station</string>
