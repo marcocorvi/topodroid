@@ -90,212 +90,230 @@ public class TopoDroidPreferences extends PreferenceActivity
     // Log.v("DistoX", "Pref cat " + mPrefCategory );
     if (mPrefCategory == PREF_CATEGORY_ALL ) { mApp.mPrefActivity = this; }
 
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mLevelOverExperimental ) {
       switch ( mPrefCategory ) {
-        addPreferencesFromResource(R.xml.prefs_E_survey);
-        break;
-      case PREF_CATEGORY_PLOT:
-        addPreferencesFromResource(R.xml.prefs_E_plot);
-        // TODO handle ZOOM_CONTROLS separatedly
-        break;
       case PREF_CATEGORY_CALIB:
-        addPreferencesFromResource(R.xml.prefs_E_calib);
-        break;
-      case PREF_CATEGORY_DEVICE:
-        addPreferencesFromResource(R.xml.prefs_E_device);
-        linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
+        addPreferencesFromResource(R.xml.prefs_4_calib);
         break;
       case PREF_CATEGORY_SKETCH:
-        addPreferencesFromResource(R.xml.prefs_E_sketch);
-        break;
-      case PREF_CATEGORY_IMPORT_EXPORT:
-        addPreferencesFromResource(R.xml.prefs_E_export);
-        break;
-      case PREF_SHOT_DATA:
-        addPreferencesFromResource(R.xml.prefs_E_shot_data);
-        break;
-      case PREF_SHOT_UNITS:
-        addPreferencesFromResource(R.xml.prefs_E_shot_units);
-        break;
-      case PREF_ACCURACY:
-        addPreferencesFromResource(R.xml.prefs_E_accuracy);
-        break;
-      case PREF_LOCATION:
-        addPreferencesFromResource(R.xml.prefs_E_location);
-        break;
-      case PREF_PLOT_SCREEN:
-        addPreferencesFromResource(R.xml.prefs_E_plot_screen);
-        break;
-      case PREF_TOOL_LINE:
-        addPreferencesFromResource(R.xml.prefs_E_tool_line);
-        break;
-      case PREF_TOOL_POINT:
-        addPreferencesFromResource(R.xml.prefs_E_tool_point);
-        break;
-      case PREF_PLOT_WALLS:
-        addPreferencesFromResource(R.xml.prefs_E_plot_walls);
-        break;
-      case PREF_CATEGORY_LOG:
-        addPreferencesFromResource(R.xml.prefs_log);
+        addPreferencesFromResource(R.xml.prefs_sketch);
         break;
       default:
-        addPreferencesFromResource(R.xml.prefs_E);
+        addPreferencesFromResource(R.xml.prefs_4);
         break;
       }
-    } else if ( TDSetting.mLevelOverNormal ) {
+    }
+
+    if ( TDSetting.mLevelOverAdvanced ) { // ----------------- EXPERIMENTAL
       switch ( mPrefCategory ) {
-        addPreferencesFromResource(R.xml.prefs_A_survey);
+      case PREF_CATEGORY_SURVEY:
+        addPreferencesFromResource(R.xml.prefs_3_survey);
         break;
       case PREF_CATEGORY_PLOT:
-        addPreferencesFromResource(R.xml.prefs_A_plot);
+        addPreferencesFromResource(R.xml.prefs_3_plot);
         // TODO handle ZOOM_CONTROLS separatedly
         break;
       case PREF_CATEGORY_CALIB:
-        addPreferencesFromResource(R.xml.prefs_A_calib);
+        addPreferencesFromResource(R.xml.prefs_3_calib);
         break;
       case PREF_CATEGORY_DEVICE:
-        addPreferencesFromResource(R.xml.prefs_A_device);
+        addPreferencesFromResource(R.xml.prefs_3_device);
         linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
         break;
-      case PREF_CATEGORY_SKETCH:
-        addPreferencesFromResource(R.xml.prefs_A_sketch);
-        break;
+      // case PREF_CATEGORY_SKETCH:
+      //   addPreferencesFromResource(R.xml.prefs_sketch);
+      //   break;
       case PREF_CATEGORY_IMPORT_EXPORT:
-        addPreferencesFromResource(R.xml.prefs_A_export);
+        addPreferencesFromResource(R.xml.prefs_3_export);
         break;
       case PREF_SHOT_DATA:
-        addPreferencesFromResource(R.xml.prefs_A_shot_data);
+        addPreferencesFromResource(R.xml.prefs_3_shot_data);
         break;
       case PREF_SHOT_UNITS:
-        addPreferencesFromResource(R.xml.prefs_A_shot_units);
+        addPreferencesFromResource(R.xml.prefs_3_shot_units);
         break;
       case PREF_ACCURACY:
-        addPreferencesFromResource(R.xml.prefs_A_accuracy);
+        addPreferencesFromResource(R.xml.prefs_3_accuracy);
         break;
       case PREF_LOCATION:
-        addPreferencesFromResource(R.xml.prefs_A_location);
+        addPreferencesFromResource(R.xml.prefs_3_location);
         break;
       case PREF_PLOT_SCREEN:
-        addPreferencesFromResource(R.xml.prefs_A_plot_screen);
+        addPreferencesFromResource(R.xml.prefs_3_plot_screen);
         break;
       case PREF_TOOL_LINE:
-        addPreferencesFromResource(R.xml.prefs_A_tool_line);
+        addPreferencesFromResource(R.xml.prefs_3_tool_line);
         break;
       case PREF_TOOL_POINT:
-        addPreferencesFromResource(R.xml.prefs_A_tool_point);
+        addPreferencesFromResource(R.xml.prefs_3_tool_point);
         break;
       case PREF_PLOT_WALLS:
-        addPreferencesFromResource(R.xml.prefs_A_plot_walls);
+        addPreferencesFromResource(R.xml.prefs_3_plot_walls);
         break;
       case PREF_CATEGORY_LOG:
         addPreferencesFromResource(R.xml.prefs_log);
         break;
       default:
-        addPreferencesFromResource(R.xml.prefs_A);
+        addPreferencesFromResource(R.xml.prefs_3);
         break;
       }
-    } else if ( TDSetting.mLevelOverBasic ) {
+    } else if ( TDSetting.mLevelOverNormal ) { // ---------------- ADVANCED
       switch ( mPrefCategory ) {
-        addPreferencesFromResource(R.xml.prefs_N_survey);
+      case PREF_CATEGORY_SURVEY:
+        addPreferencesFromResource(R.xml.prefs_2_survey);
         break;
       case PREF_CATEGORY_PLOT:
-        addPreferencesFromResource(R.xml.prefs_N_plot);
+        addPreferencesFromResource(R.xml.prefs_2_plot);
         // TODO handle ZOOM_CONTROLS separatedly
         break;
       case PREF_CATEGORY_CALIB:
-        addPreferencesFromResource(R.xml.prefs_N_calib);
+        addPreferencesFromResource(R.xml.prefs_2_calib);
         break;
       case PREF_CATEGORY_DEVICE:
-        addPreferencesFromResource(R.xml.prefs_N_device);
+        addPreferencesFromResource(R.xml.prefs_2_device);
         linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
         break;
-      case PREF_CATEGORY_SKETCH:
-        addPreferencesFromResource(R.xml.prefs_N_sketch);
-        break;
+      // case PREF_CATEGORY_SKETCH:
+      //   addPreferencesFromResource(R.xml.prefs_sketch);
+      //   break;
       case PREF_CATEGORY_IMPORT_EXPORT:
-        addPreferencesFromResource(R.xml.prefs_N_export);
+        addPreferencesFromResource(R.xml.prefs_2_export);
         break;
       case PREF_SHOT_DATA:
-        addPreferencesFromResource(R.xml.prefs_N_shot_data);
+        addPreferencesFromResource(R.xml.prefs_2_shot_data);
         break;
       case PREF_SHOT_UNITS:
-        addPreferencesFromResource(R.xml.prefs_N_shot_units);
+        addPreferencesFromResource(R.xml.prefs_2_shot_units);
         break;
       case PREF_ACCURACY:
-        addPreferencesFromResource(R.xml.prefs_N_accuracy);
+        addPreferencesFromResource(R.xml.prefs_2_accuracy);
         break;
       case PREF_LOCATION:
-        addPreferencesFromResource(R.xml.prefs_N_location);
+        addPreferencesFromResource(R.xml.prefs_2_location);
         break;
       case PREF_PLOT_SCREEN:
-        addPreferencesFromResource(R.xml.prefs_N_plot_screen);
+        addPreferencesFromResource(R.xml.prefs_2_plot_screen);
         break;
       case PREF_TOOL_LINE:
-        addPreferencesFromResource(R.xml.prefs_N_tool_line);
+        addPreferencesFromResource(R.xml.prefs_2_tool_line);
         break;
       case PREF_TOOL_POINT:
-        addPreferencesFromResource(R.xml.prefs_N_tool_point);
+        addPreferencesFromResource(R.xml.prefs_2_tool_point);
         break;
-      case PREF_PLOT_WALLS:
-        addPreferencesFromResource(R.xml.prefs_N_plot_walls);
-        break;
-      case PREF_CATEGORY_LOG:
-        addPreferencesFromResource(R.xml.prefs_log);
-        break;
+      // case PREF_PLOT_WALLS:
+      //   addPreferencesFromResource(R.xml.prefs_2_plot_walls);
+      //   break;
+      // case PREF_CATEGORY_LOG:
+      //   addPreferencesFromResource(R.xml.prefs_log);
+      //   break;
       default:
-        addPreferencesFromResource(R.xml.prefs_N);
+        addPreferencesFromResource(R.xml.prefs_2);
         break;
       }
-    } else {
+    } else if ( TDSetting.mLevelOverBasic ) { // ------------------- NORMAL
       switch ( mPrefCategory ) {
-        addPreferencesFromResource(R.xml.prefs_B_survey);
+      case PREF_CATEGORY_SURVEY:
+        addPreferencesFromResource(R.xml.prefs_1_survey);
         break;
       case PREF_CATEGORY_PLOT:
-        addPreferencesFromResource(R.xml.prefs_B_plot);
+        addPreferencesFromResource(R.xml.prefs_1_plot);
         // TODO handle ZOOM_CONTROLS separatedly
         break;
       case PREF_CATEGORY_CALIB:
-        addPreferencesFromResource(R.xml.prefs_B_calib);
+        addPreferencesFromResource(R.xml.prefs_1_calib);
         break;
       case PREF_CATEGORY_DEVICE:
-        addPreferencesFromResource(R.xml.prefs_B_device);
+        addPreferencesFromResource(R.xml.prefs_1_device);
         linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
         break;
-      case PREF_CATEGORY_SKETCH:
-        addPreferencesFromResource(R.xml.prefs_B_sketch);
-        break;
+      // case PREF_CATEGORY_SKETCH:
+      //   addPreferencesFromResource(R.xml.prefs_sketch);
+      //   break;
       case PREF_CATEGORY_IMPORT_EXPORT:
-        addPreferencesFromResource(R.xml.prefs_B_export);
+        addPreferencesFromResource(R.xml.prefs_1_export);
         break;
       case PREF_SHOT_DATA:
-        addPreferencesFromResource(R.xml.prefs_B_shot_data);
+        addPreferencesFromResource(R.xml.prefs_1_shot_data);
         break;
       case PREF_SHOT_UNITS:
-        addPreferencesFromResource(R.xml.prefs_B_shot_units);
+        addPreferencesFromResource(R.xml.prefs_1_shot_units);
         break;
       case PREF_ACCURACY:
-        addPreferencesFromResource(R.xml.prefs_B_accuracy);
+        addPreferencesFromResource(R.xml.prefs_1_accuracy);
         break;
       case PREF_LOCATION:
-        addPreferencesFromResource(R.xml.prefs_B_location);
+        addPreferencesFromResource(R.xml.prefs_1_location);
         break;
       case PREF_PLOT_SCREEN:
-        addPreferencesFromResource(R.xml.prefs_B_plot_screen);
+        addPreferencesFromResource(R.xml.prefs_1_plot_screen);
         break;
       case PREF_TOOL_LINE:
-        addPreferencesFromResource(R.xml.prefs_B_tool_line);
+        addPreferencesFromResource(R.xml.prefs_1_tool_line);
         break;
       case PREF_TOOL_POINT:
-        addPreferencesFromResource(R.xml.prefs_B_tool_point);
+        addPreferencesFromResource(R.xml.prefs_1_tool_point);
         break;
-      case PREF_PLOT_WALLS:
-        addPreferencesFromResource(R.xml.prefs_B_plot_walls);
-        break;
-      case PREF_CATEGORY_LOG:
-        addPreferencesFromResource(R.xml.prefs_log);
-        break;
+      // case PREF_PLOT_WALLS:
+      //   addPreferencesFromResource(R.xml.prefs_1_plot_walls);
+      //   break;
+      // case PREF_CATEGORY_LOG:
+      //   addPreferencesFromResource(R.xml.prefs_log);
+      //   break;
       default:
-        addPreferencesFromResource(R.xml.prefs_B);
+        addPreferencesFromResource(R.xml.prefs_1);
+        break;
+      }
+    } else { // ---------------- BASIC
+      switch ( mPrefCategory ) {
+      case PREF_CATEGORY_SURVEY:
+        addPreferencesFromResource(R.xml.prefs_0_survey);
+        break;
+      case PREF_CATEGORY_PLOT:
+        addPreferencesFromResource(R.xml.prefs_0_plot);
+        // TODO handle ZOOM_CONTROLS separatedly
+        break;
+      case PREF_CATEGORY_CALIB:
+        addPreferencesFromResource(R.xml.prefs_0_calib);
+        break;
+      case PREF_CATEGORY_DEVICE:
+        addPreferencesFromResource(R.xml.prefs_0_device);
+        linkPreference( "DISTOX_CALIB_PREF", PREF_CATEGORY_CALIB );
+        break;
+      // case PREF_CATEGORY_SKETCH:
+      //   addPreferencesFromResource(R.xml.prefs_sketch);
+      //   break;
+      case PREF_CATEGORY_IMPORT_EXPORT:
+        addPreferencesFromResource(R.xml.prefs_0_export);
+        break;
+      case PREF_SHOT_DATA:
+        addPreferencesFromResource(R.xml.prefs_0_shot_data);
+        break;
+      case PREF_SHOT_UNITS:
+        addPreferencesFromResource(R.xml.prefs_0_shot_units);
+        break;
+      // case PREF_ACCURACY:
+      //   addPreferencesFromResource(R.xml.prefs_0_accuracy);
+      //   break;
+      case PREF_LOCATION:
+        addPreferencesFromResource(R.xml.prefs_0_location);
+        break;
+      case PREF_PLOT_SCREEN:
+        addPreferencesFromResource(R.xml.prefs_0_plot_screen);
+        break;
+      case PREF_TOOL_LINE:
+        addPreferencesFromResource(R.xml.prefs_0_tool_line);
+        break;
+      case PREF_TOOL_POINT:
+        addPreferencesFromResource(R.xml.prefs_0_tool_point);
+        break;
+      // case PREF_PLOT_WALLS:
+      //   addPreferencesFromResource(R.xml.prefs_0_plot_walls);
+      //   break;
+      // case PREF_CATEGORY_LOG:
+      //   addPreferencesFromResource(R.xml.prefs_log);
+      //   break;
+      default:
+        addPreferencesFromResource(R.xml.prefs_0);
         break;
       }
     }

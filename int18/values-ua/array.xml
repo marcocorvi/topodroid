@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <string-array name="unitGrid">
+     <item name="meter">метри</item>
+     <item name="yard">ярди</item>
+  </string-array>
+
+  <string-array name="wallsType">
+     <item name="none">Немає</item>
+     <item name="convex">Випуклі</item>
+  </string-array>
+
+  <string-array name="zoomCtrl">
+     <item name="0">Вимкнути</item>
+     <item name="1">Тимчасово</item>
+     <item name="2">Постійно</item>
+  </string-array>
+  
+  <string-array name="stationNames">
+     <item name="alpha">Буквенно-цифрові</item>
+     <item name="number">Цифрові</item>
+  </string-array>
+
+
+  <!-- UNUSED string-array name="extend_name">
+    <item>РРвЛіво</item>
+    <item>РРвВверх</item>
+    <item>РРвПраво</item>
+    <item>- -</item>
+  </string-array -->
+
+  <string-array name="exportShots">
+     <item name="none">відсутні</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="pockettopo">PocketTopo</item>
+     <item name="polygon">Polygon</item>
+     <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array>
+
+  <string-array name="exportPlot">
+     <item name="none">відсутні</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array>
+
+  <string-array name="extraButtons">
+     <item name="basic">Базовий</item>
+     <item name="normal">Нормальний</item>
+     <item name="advanced">Просунутий</item>
+     <item name="experimental">Експерементальний</item>
+     <!-- item name="complete">Повний</item -->
+  </string-array>
+
+  <string-array name="sizeButtons">
+     <item name="small">Маленькі</item>
+     <item name="normal">Нормальні</item>
+     <item name="medium">Середні</item>
+     <item name="large">Великі</item>
+     <item name="huge">Величезні</item>
+  </string-array>
+
+  <string-array name="logStream">
+     <item name="android">Системний журнал</item>
+     <item name="file">Файл журналу</item>
+  </string-array>
+
+  <string-array name="connMode">
+     <item name="batch">На вимогу</item>
+     <item name="continuous">Постійний</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="altitudeType">
+    <item name="wgs84">WGS84 еліпсоїд</item>
+    <item name="asl">Прямокутний</item>
+  </string-array -->
+
+  <string-array name="sockType">
+     <item name="default">За замовчанням</item>
+     <item name="Insecure">Небезпечний</item>
+  </string-array>
+
+  <string-array name="surveyStations">
+     <item name="no">Ні</item>
+     <item name="for">ЛПВН потім на наступ. пікет</item>
+     <item name="back">ЛПВН потім на поперед. пікет</item>
+     <item name="for2">На наступ. пікет потом ЛПВН</item>
+     <item name="back2">На поперед. пікет потом ЛПВН</item>
+     <item name="anomaly">На поперед. пікет ЛПВН на наступ. пікет</item>
+     <item name="tripod">Штатив</item>
+  </string-array>
+
+  <string-array name="pickerType">
+     <item name="recent">Нещодавні</item>
+     <item name="list">Список</item>
+     <item name="grid">Сітка</item>
+     <item name="grid3">Потрійна сітка</item>
+  </string-array>
+
+  <string-array name="sectionStations">
+     <item name="both">обидва</item>
+     <item name="from">позаду</item>
+     <item name="to">спереду</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="deviceType">
+     <item name="none">Без типу</item>
+     <item name="A3">A3</item>
+     <item name="X310">X310</item>
+  </string-array -->
+
+  <string-array name="deviceBT">
+     <item name="0">вимкнений</item>
+     <item name="1">Перевіряти при запуску</item>
+     <item name="2">Увімкнений</item>
+  </string-array>
+
+  <string-array name="lineStyle">
+     <item name="none">Точний</item>
+     <item name="two">Нормальний</item>
+     <item name="two">Грубий</item>
+     <item name="bezier">Кр. Безьє</item>
+  </string-array>
+
+  <string-array name="groupBy">
+     <item name="distance">По відстані</item>
+     <item name="four">По чотири</item>
+     <item name="only16">Тільки перші 16</item>
+  </string-array>
+
+  <string-array name="unitLength">
+     <item name="meters">метри</item>
+     <item name="feet">фути</item>
+  </string-array>
+
+  <string-array name="unitAngle">
+     <item name="degrees">градуси</item>
+     <item name="grads">десяткові градуси, %</item>
+  </string-array>
+
+  <string-array name="unitLocation">
+     <item name="degrees">долі градусів</item>
+     <item name="ddmmss">градуси, мінути, секунди</item>
+  </string-array>
+
+  <string-array name="calibAlgo">
+     <item name="auto">автоматично</item>
+     <item name="linear">лінійно</item>
+     <item name="nonlinear">не-лінійно</item>
+  </string-array>
+
+</resources>

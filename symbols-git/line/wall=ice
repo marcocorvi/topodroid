@@ -5,6 +5,7 @@ name-es paredes_de_hielo
 name-de Eiswand
 name-bg стена_лед
 name-ru стена_во_льду
+name-ua стіна_в_льоду
 th_name wall:ice
 color 0xff0000 0xff
 width 1

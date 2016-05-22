@@ -422,7 +422,7 @@
     <!-- UNUSED string name="ask_close">Закрыть TopoDroid?</string -->
     <string name="ask_reset">Сбросить память DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Закрыть съёмку?</string -->
-    <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
+    <string name="ask_gps_service">Включить сервис GPS?</string>
 
     <!-- UNUSED string name="button_add"       >Добавить  </string -->
     <string name="button_back"      >Назад     </string>
@@ -768,8 +768,8 @@
   <string name="pref_closeness_title">Радиус выбора</string>
   <!-- UNUSED string name="pref_closeness_summary">Радиус выбора элемента абриса</string -->
   <string name="pref_closeness_message">Радиус зоны выбора элемента абриса</string>
-  <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
-  <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
+  <string name="pref_eraseness_title">Размер ластика</string>
+  <string name="pref_eraseness_message">Радиус инструмента стирания</string>
   <string name="pref_min_shift_title">Чувствительность к сдвигу</string>
   <string name="pref_min_shift_message">Чувствительность к сдвигу</string>
   <string name="pref_pointing_title">Радиус указания</string>
@@ -954,8 +954,8 @@
   <string name="pref_unit_length_summary">Показать единицы длинны</string>
   <string name="pref_unit_angle_title">Единицы измерения углов</string>
   <string name="pref_unit_angle_summary">Показать единицы углов</string>
-  <string name="pref_unit_location_title">Единицы координат</string>
-  <string name="pref_unit_location_summary">Показать единицы координат</string>
+  <string name="pref_unit_location_title">Формат координат</string>
+  <string name="pref_unit_location_summary">Показать формат координат</string>
 
   <string name="pref_plot_walls_title">АВТО СТЕНЫ</string>
   <string name="pref_walls_type_title">Тип стен</string>

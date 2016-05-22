@@ -688,7 +688,7 @@
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_calib">CALIBRATION SETTINGS</string>
   <string name="pref_cat_device">DEVICE SETTINGS</string>
-  <!-- string name="pref_cat_sketch">3D MODEL SETTINGS</string -->
+  <string name="pref_cat_sketch">3D MODEL SETTINGS</string>
   <string name="pref_cat_log">LOG SETTINGS</string>
 
   <string name="pref_locale_title">Language</string>

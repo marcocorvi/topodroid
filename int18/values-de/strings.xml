@@ -445,7 +445,7 @@
     <!-- UNUSED string name="ask_close">TopoDroid beenden?</string -->
     <string name="ask_reset">DistoX zurücksetzen?</string>
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
-    <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
+    <string name="ask_gps_service">GPS aktiveren?</string>
 
     <!-- UNUSED string name="button_add"       >Erstellen       </string -->
     <string name="button_back"      >Zurück    </string>
@@ -792,11 +792,11 @@
   <!-- UNUSED string name="pref_closeness_summary">Skizzenelement Auswahl Radius</string -->
   <string name="pref_closeness_message">Skizzenelement Auswahl Radius</string>
   <string name="pref_eraseness_title">Löschradius</string>
-  <string name="pref_eraseness_message">Radius des Lösch-Tools</string>
+  <string name="pref_eraseness_message">Radius des Lösch-Tools (Standard: 36px)</string>
   <string name="pref_min_shift_title">Verschieben Sensitivität</string>
   <string name="pref_min_shift_message">Ignoriert Verschiebungen grösser als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
   <string name="pref_pointing_title">Radius für Tippen</string>
-  <string name="pref_pointing_message">Ein Antippen wir innerhalb dieses Radiuses erkannt in der Punktauswahl.</string>
+  <string name="pref_pointing_message">Ein Antippen wird innerhalb dieses Radiuses erkannt in der Punktauswahl.</string>
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
