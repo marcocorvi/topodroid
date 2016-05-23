@@ -50,49 +50,54 @@
        android:inputType="number"
        android:defaultValue="36" />
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_MIN_SHIFT"
        android:title="@string/pref_min_shift_title"
        android:summary="@string/pref_min_shift_message"
        android:dialogTitle="@string/pref_min_shift_title"
        android:dialogMessage="@string/pref_min_shift_message"
        android:inputType="number"
-       android:defaultValue="60" />
+       android:defaultValue="60"
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_POINTING"
        android:title="@string/pref_pointing_title"
        android:summary="@string/pref_pointing_message"
        android:dialogTitle="@string/pref_pointing_title"
        android:dialogMessage="@string/pref_pointing_message"
        android:inputType="number"
-       android:defaultValue="16" />
+       android:defaultValue="16"
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SPLAY_VERT_THRS"
        android:title="@string/pref_plan_vthr_title"
        android:summary="@string/pref_plan_vthr_message"
        android:dialogTitle="@string/pref_plan_vthr_title"
        android:dialogMessage="@string/pref_plan_vthr_message"
        android:inputType="number"
-       android:defaultValue="80"/>
+       android:defaultValue="80"
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_VERT_SPLAY"
        android:title="@string/pref_vert_splay_title"
        android:summary="@string/pref_vert_splay_message"
        android:dialogTitle="@string/pref_vert_splay_title"
        android:dialogMessage="@string/pref_vert_splay_message"
        android:inputType="numberDecimal"
-       android:defaultValue="50" />
+       android:defaultValue="50"
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_HTHRESHOLD"
        android:title="@string/pref_hthr_title"
        android:summary="@string/pref_hthr_summary"
        android:dialogTitle="@string/pref_hthr_title"
        android:dialogMessage="@string/pref_hthr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="70.0" />
+       android:defaultValue="70.0"
+     / -->
 
 </PreferenceScreen>

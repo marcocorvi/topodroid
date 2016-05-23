@@ -14,13 +14,13 @@
        android:entryValues="@array/unitLocationValue"
      />
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_CRS"
        android:title="@string/pref_crs_title"
        android:summary="@string/pref_crs_summary"
        android:dialogTitle="@string/pref_crs_title"
        android:dialogMessage="@string/pref_crs_message"
        android:defaultValue="Long-Lat"
-     />
+     / -->
 
 </PreferenceScreen>

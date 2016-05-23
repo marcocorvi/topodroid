@@ -2,10 +2,10 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <Preference
+  <!-- Preference
        android:key="DISTOX_CWD"
        android:title="@string/pref_cwd_title"
-       />
+       / -->
 
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_TEXT_SIZE"
@@ -49,21 +49,21 @@
        android:defaultValue="false"
        / -->
 
-  <CheckBoxPreference
+  <!-- CheckBoxPreference
        android:key="DISTOX_COSURVEY"
        android:title="@string/pref_cosurvey_title"
        android:summary="@string/pref_cosurvey_summary"
        android:defaultValue="false"
-       />
+       / -->
 
-  <com.topodroid.DistoX.MyListPreference
+  <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LOCALE"
        android:title="@string/pref_locale_title"
        android:summary="@string/pref_locale_summary"
        android:defaultValue=""
        android:entries="@array/locale"
        android:entryValues="@array/localeValue"
-       />
+       / -->
 
   <Preference
      android:key="DISTOX_IMPORT_EXPORT_PREF"

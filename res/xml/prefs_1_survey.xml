@@ -39,14 +39,15 @@
        android:defaultValue="0"
      />
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_THUMBNAIL"
        android:title="@string/pref_thumbnail_title"
        android:summary="@string/pref_thumbnail_summary"
        android:dialogTitle="@string/pref_thumbnail_title"
        android:dialogMessage="@string/pref_thumbnail_message"
        android:inputType="number"
-       android:defaultValue="200" />
+       android:defaultValue="200"
+     / -->
 
     <Preference
        android:key="DISTOX_SHOT_UNITS_SCREEN"
@@ -65,10 +66,10 @@
        android:textColor="#ff9966ff"
        />
 
-    <Preference
+    <!-- Preference
        android:key="DISTOX_ACCURACY_SCREEN"
        android:title="@string/pref_accuracy_title"
        android:textColor="#ff9966ff"
-       />
+       / -->
 
 </PreferenceScreen>

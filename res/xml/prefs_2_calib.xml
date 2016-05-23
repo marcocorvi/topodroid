@@ -45,14 +45,14 @@
        android:defaultValue="false"
      />
 
-     <com.topodroid.DistoX.MyListPreference
+     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_CALIB_ALGO"
        android:summary="@string/pref_calib_algo_summary"
        android:title="@string/pref_calib_algo_title"
        android:defaultValue="0"
        android:entries="@array/calibAlgo"
        android:entryValues="@array/calibAlgoValue"
-     />
+     / -->
 <!--
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ALGO_MIN_ALPHA"

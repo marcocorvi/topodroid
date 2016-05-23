@@ -72,7 +72,7 @@
        android:defaultValue="true"
      />
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SOCKET_DELAY"
        android:title="@string/pref_socket_delay_title"
        android:summary="@string/pref_socket_delay_summary"
@@ -80,16 +80,16 @@
        android:dialogMessage="@string/pref_socket_delay_message"
        android:inputType="number"
        android:defaultValue="0"
-     />
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_AUTO_PAIR"
        android:summary="@string/pref_auto_pair_summary"
        android:title="@string/pref_auto_pair_title"
        android:defaultValue="true"
-     />
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_WAIT_DATA"
        android:title="@string/pref_wait_data_title"
        android:summary="@string/pref_wait_data_summary"
@@ -97,9 +97,9 @@
        android:dialogMessage="@string/pref_wait_data_summary"
        android:inputType="number"
        android:defaultValue="500"
-     />
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_WAIT_LASER"
        android:title="@string/pref_wait_laser_title"
        android:summary="@string/pref_wait_laser_summary"
@@ -107,9 +107,9 @@
        android:dialogMessage="@string/pref_wait_laser_summary"
        android:inputType="number"
        android:defaultValue="1000"
-     />
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_WAIT_SHOT"
        android:title="@string/pref_wait_shot_title"
        android:summary="@string/pref_wait_shot_summary"
@@ -117,7 +117,7 @@
        android:dialogMessage="@string/pref_wait_shot_summary"
        android:inputType="number"
        android:defaultValue="4000"
-     />
+     / -->
 
   <Preference
      android:key="DISTOX_CALIB_PREF"

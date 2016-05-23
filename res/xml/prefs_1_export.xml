@@ -8,12 +8,12 @@
        android:summary="@string/pref_pt_color_map_summary"
        />
 
-  <CheckBoxPreference
+  <!-- CheckBoxPreference
        android:key="DISTOX_SPLAY_EXTEND"
        android:summary="@string/pref_LRExtend_summary"
        android:title="@string/pref_LRExtend_title"
        android:defaultValue="true"
-     />
+     / -->
 
   <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_EXPORT_SHOTS"
@@ -33,12 +33,12 @@
        android:entryValues="@array/exportPlotValue"
        />
 
-   <CheckBoxPreference
+   <!-- CheckBoxPreference
        android:key="DISTOX_THERION_MAPS"
        android:summary="@string/pref_therion_maps_summary"
        android:title="@string/pref_therion_maps_title"
        android:defaultValue="false"
-     />
+     / -->
 
    <CheckBoxPreference
        android:key="DISTOX_AUTO_STATIONS"
@@ -54,12 +54,12 @@
        android:defaultValue="false"
      / -->
 
-   <CheckBoxPreference
+   <!-- CheckBoxPreference
        android:key="DISTOX_THERION_SPLAYS"
        android:summary="@string/pref_therion_splays_summary"
        android:title="@string/pref_therion_splays_title"
        android:defaultValue="false"
-     />
+     / -->
 
    <CheckBoxPreference
        android:key="DISTOX_STATION_PREFIX"
@@ -68,14 +68,14 @@
        android:defaultValue="false"
      />
 
-  <com.topodroid.DistoX.MyEditPreference
+  <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ORTHO_LRUD"
        android:title="@string/pref_ortho_lrud_title"
        android:summary="@string/pref_ortho_lrud_summary"
        android:dialogTitle="@string/pref_ortho_lrud_title"
        android:dialogMessage="@string/pref_ortho_lrud_message"
        android:inputType="numberDecimal"
-       android:defaultValue="0" />
+       android:defaultValue="0" / -->
 
   <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_SURVEX_EOL"
@@ -86,19 +86,19 @@
        android:entryValues="@array/survexEolValue"
        />
 
-   <CheckBoxPreference
+   <!-- CheckBoxPreference
        android:key="DISTOX_SURVEX_SPLAY"
        android:summary="@string/pref_survex_splay_summary"
        android:title="@string/pref_survex_splay_title"
        android:defaultValue="false"
-     />
+     / -->
 
-   <CheckBoxPreference
+   <!-- CheckBoxPreference
        android:key="DISTOX_SURVEX_LRUD"
        android:summary="@string/pref_survex_lrud_summary"
        android:title="@string/pref_survex_lrud_title"
        android:defaultValue="false"
-     />
+     / -->
 
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_BITMAP_SCALE"
@@ -126,13 +126,13 @@
        android:inputType="numberDecimal"
        android:defaultValue="1.0" />
 
-  <com.topodroid.DistoX.MyListPreference
+  <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_ACAD_VERSION"
        android:title="@string/pref_acad_version_title"
        android:summary="@string/pref_acad_version_summary"
        android:defaultValue="9"
        android:entries="@array/acadVersion"
        android:entryValues="@array/acadVersionValue"
-       />
+       / -->
 
 </PreferenceScreen>

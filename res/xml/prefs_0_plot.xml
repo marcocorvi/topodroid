@@ -11,14 +11,14 @@
        android:entryValues="@array/pickerTypeValue"
      />
 
-     <com.topodroid.DistoX.MyListPreference
+     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_RECENT_NR"
        android:summary="@string/pref_recent_nr_summary"
        android:title="@string/pref_recent_nr_title"
        android:defaultValue="4"
        android:entries="@array/recentNr"
        android:entryValues="@array/recentNr"
-     />
+     / -->
 
      <CheckBoxPreference
        android:key="DISTOX_SIDE_DRAG"
@@ -36,21 +36,21 @@
        android:entryValues="@array/zoomCtrlValue"
        />
 
-     <com.topodroid.DistoX.MyListPreference
+     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_SECTION_STATIONS"
        android:summary="@string/pref_section_stations_summary"
        android:title="@string/pref_section_stations_title"
        android:defaultValue="3"
        android:entries="@array/sectionStations"
        android:entryValues="@array/sectionStationsValue"
-     />
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_CHECK_ATTACHED"
        android:summary="@string/pref_checkAttached_summary"
        android:title="@string/pref_checkAttached_title"
        android:defaultValue="false"
-     />
+     / -->
 
     <Preference
        android:key="DISTOX_TOOL_POINT"
@@ -58,11 +58,11 @@
        android:textColor="#ff9966ff"
        />
 
-    <Preference
+    <!-- Preference
        android:key="DISTOX_TOOL_LINE"
        android:title="@string/pref_tool_line_title"
        android:textColor="#ff9966ff"
-       />
+       / -->
 
     <Preference
        android:key="DISTOX_PLOT_SCREEN"
@@ -70,11 +70,11 @@
        android:textColor="#ff9966ff"
        />
 
-    <Preference
+    <!-- Preference
        android:key="DISTOX_PLOT_WALLS"
        android:title="@string/pref_plot_walls_title"
        android:textColor="#ff9966ff"
-       />
+       / -->
 
 
 </PreferenceScreen>

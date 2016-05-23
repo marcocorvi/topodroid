@@ -5,31 +5,31 @@
 
 <!-- ACCURACY -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ACCEL_THR"
        android:title="@string/pref_accel_thr_title"
        android:summary="@string/pref_accel_thr_summary"
        android:dialogTitle="@string/pref_accel_thr_title"
        android:dialogMessage="@string/pref_accel_thr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="400.0" />
+       android:defaultValue="400.0" / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_MAG_THR"
        android:title="@string/pref_mag_thr_title"
        android:summary="@string/pref_mag_thr_summary"
        android:dialogTitle="@string/pref_mag_thr_title"
        android:dialogMessage="@string/pref_mag_thr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="300.0" />
+       android:defaultValue="300.0" / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DIP_THR"
        android:title="@string/pref_dip_thr_title"
        android:summary="@string/pref_dip_thr_summary"
        android:dialogTitle="@string/pref_dip_thr_title"
        android:dialogMessage="@string/pref_dip_thr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="3.0" />
+       android:defaultValue="3.0" / -->
 
 </PreferenceScreen>

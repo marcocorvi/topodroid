@@ -13,84 +13,84 @@
        android:inputType="numberDecimal"
        android:defaultValue="0.05" />
 
-    <com.topodroid.DistoX.MyListPreference
+    <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LEG_SHOTS"
        android:title="@string/pref_leg_shots_title"
        android:summary="@string/pref_leg_shots_summary"
        android:defaultValue="3"
        android:entries="@array/legShots"
        android:entryValues="@array/legShotsValue"
-       />
+       / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_EXTEND_THR2"
        android:title="@string/pref_ethr_title"
        android:summary="@string/pref_ethr_summary"
        android:dialogTitle="@string/pref_ethr_title"
        android:dialogMessage="@string/pref_ethr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="10" />
+       android:defaultValue="10" / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_VTHRESHOLD"
        android:title="@string/pref_vthr_title"
        android:summary="@string/pref_vthr_summary"
        android:dialogTitle="@string/pref_vthr_title"
        android:dialogMessage="@string/pref_vthr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="80.0" />
+       android:defaultValue="80.0" / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_AZIMUTH_MANUAL"
        android:summary="@string/pref_azimuth_manual_summary"
        android:title="@string/pref_azimuth_manual_title"
        android:defaultValue="false"
-     />
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_LOOP_CLOSURE"
        android:summary="@string/pref_loopClosure_summary"
        android:title="@string/pref_loopClosure_title"
        android:defaultValue="false"
-     />
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_PREV_NEXT"
        android:summary="@string/pref_prev_next_summary"
        android:title="@string/pref_prev_next_title"
        android:defaultValue="true"
-     />
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_BACKSIGHT"
        android:summary="@string/pref_backsight_summary"
        android:title="@string/pref_backsight_title"
        android:defaultValue="false"
-     />
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_MAG_ANOMALY"
        android:summary="@string/pref_mag_anomaly_summary"
        android:title="@string/pref_mag_anomaly_title"
        android:defaultValue="false"
-     />
+     / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SHOT_TIMER"
        android:title="@string/pref_shot_timer_title"
        android:summary="@string/pref_shot_timer_summary"
        android:dialogTitle="@string/pref_shot_timer_title"
        android:dialogMessage="@string/pref_shot_timer_message"
        android:inputType="number"
-       android:defaultValue="10" />
+       android:defaultValue="10" / -->
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_BEEP_VOLUME"
        android:title="@string/pref_beep_volume_title"
        android:summary="@string/pref_beep_volume_summary"
        android:dialogTitle="@string/pref_beep_volume_title"
        android:dialogMessage="@string/pref_beep_volume_message"
        android:inputType="number"
-       android:defaultValue="50" />
+       android:defaultValue="50" / -->
 
 </PreferenceScreen>

@@ -381,17 +381,21 @@ public class TopoDroidPreferences extends PreferenceActivity
 
   private void linkPreference( String pref_name, int category )
   {
-    final Intent intent = new Intent( this, TopoDroidPreferences.class );
-    intent.putExtra( PREF_CATEGORY, category );
-    ((Preference) findPreference( pref_name )).setOnPreferenceClickListener( 
-      new Preference.OnPreferenceClickListener() {
-        @Override
-        public boolean onPreferenceClick( Preference pref ) 
-        {
-          startActivity( intent );
-          return true;
-        }
-     } );
+    // if ( pref_name == null ) return;
+    Preference pref = findPreference( pref_name );
+    if ( pref != null ) {
+      final Intent intent = new Intent( this, TopoDroidPreferences.class );
+      intent.putExtra( PREF_CATEGORY, category );
+      pref.setOnPreferenceClickListener( 
+        new Preference.OnPreferenceClickListener() {
+          @Override
+          public boolean onPreferenceClick( Preference pref ) 
+          {
+            startActivity( intent );
+            return true;
+          }
+      } );
+    }
   }
 
   public void onActivityResult( int request, int result, Intent intent ) 

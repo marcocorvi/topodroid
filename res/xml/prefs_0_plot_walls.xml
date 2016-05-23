@@ -2,6 +2,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+<!--
      <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_WALLS_TYPE"
        android:summary="@string/pref_walls_type_summary"
@@ -55,6 +56,7 @@
        android:dialogMessage="@string/pref_walls_xstep_message"
        android:inputType="numberDecimal"
        android:defaultValue="1.0" />
+-->
 
      <!-- CheckBoxPreference
        android:key="DISTOX_"

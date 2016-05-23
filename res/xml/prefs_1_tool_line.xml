@@ -31,21 +31,22 @@
        android:inputType="number"
        android:defaultValue="10" />
 
-     <com.topodroid.DistoX.MyEditPreference
+     <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_ARROW_LENGTH"
        android:title="@string/pref_arrow_length_title"
        android:summary="@string/pref_arrow_length_message"
        android:dialogTitle="@string/pref_arrow_length_title"
        android:dialogMessage="@string/pref_arrow_length_message"
        android:inputType="numberDecimal"
-       android:defaultValue="8" />
+       android:defaultValue="8"
+     / -->
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_AUTO_SECTION_PT"
        android:summary="@string/pref_auto_section_pt_summary"
        android:title="@string/pref_auto_section_pt_title"
        android:defaultValue="true"
-       />
+       / -->
 
      <CheckBoxPreference
        android:key="DISTOX_AREA_BORDER"
@@ -54,12 +55,12 @@
        android:defaultValue="true"
        />
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_CONT_JOIN"
        android:summary="@string/pref_cont_join_summary"
        android:title="@string/pref_cont_join_title"
        android:defaultValue="false"
-       />
+       / -->
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_ACCURACY"

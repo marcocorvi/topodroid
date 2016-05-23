@@ -305,6 +305,11 @@ public class SyncService
       BluetoothSocket socket = null;
 
       while ( mAcceptRun && mAcceptState == STATE_LISTEN ) {
+        if ( mmServerSocket == null ) { // FIXME should not happen
+          TDLog.Error("null server socket");
+          mConnectState = STATE_NONE;
+          break;
+        }
         try {
           // Log.v("DistoX", "sync accept listening ... ");
           socket = mmServerSocket.accept(); // blocking call

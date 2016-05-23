@@ -49,12 +49,12 @@
        android:defaultValue="false"
        / -->
 
-  <CheckBoxPreference
+  <!-- CheckBoxPreference
        android:key="DISTOX_COSURVEY"
        android:title="@string/pref_cosurvey_title"
        android:summary="@string/pref_cosurvey_summary"
        android:defaultValue="false"
-       />
+       / -->
 
   <com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_LOCALE"

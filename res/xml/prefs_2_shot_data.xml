@@ -47,12 +47,12 @@
        android:defaultValue="false"
      />
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_LOOP_CLOSURE"
        android:summary="@string/pref_loopClosure_summary"
        android:title="@string/pref_loopClosure_title"
        android:defaultValue="false"
-     />
+     / -->
 
      <CheckBoxPreference
        android:key="DISTOX_PREV_NEXT"
@@ -68,12 +68,12 @@
        android:defaultValue="false"
      />
 
-     <CheckBoxPreference
+     <!-- CheckBoxPreference
        android:key="DISTOX_MAG_ANOMALY"
        android:summary="@string/pref_mag_anomaly_summary"
        android:title="@string/pref_mag_anomaly_title"
        android:defaultValue="false"
-     />
+     / -->
 
      <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_SHOT_TIMER"
