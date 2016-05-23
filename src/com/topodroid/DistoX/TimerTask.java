@@ -45,6 +45,8 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
     int duration = 100; // ms
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
     long ret = 0;
+    mCntAcc = 0;
+    mCntMag = 0;
     for ( int i=0; i<count && mRun; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
       try {
@@ -57,23 +59,25 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
       }
     }
     if ( mRun ) {
-      mCntAcc = 0;
-      mCntMag = 0;
+      int cnt = 0;
       mValAcc[0] = 0; mValAcc[1] = 0; mValAcc[2] = 0;
       mValMag[0] = 0; mValMag[1] = 0; mValMag[2] = 0;
       SensorManager sensor_manager = (SensorManager)mContext.getSystemService( Context.SENSOR_SERVICE );
       Sensor mAcc = sensor_manager.getDefaultSensor( Sensor.TYPE_ACCELEROMETER );
       Sensor mMag = sensor_manager.getDefaultSensor( Sensor.TYPE_MAGNETIC_FIELD );
-      sensor_manager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
-      sensor_manager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
-      while ( mCntAcc < 10 || mCntMag < 10 ) {
-        toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
-        try{
-          Thread.sleep( 100 );
-        } catch ( InterruptedException e ) {
-        }
-      }    
-      sensor_manager.unregisterListener( this );
+      if ( mAcc != null && mMag != null ) {
+        sensor_manager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
+        sensor_manager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
+        while ( cnt < 100 && ( mCntAcc < 10 || mCntMag < 10 ) ) {
+          toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
+          try{
+            ++ cnt;
+            Thread.sleep( 100 );
+          } catch ( InterruptedException e ) {
+          }
+        }    
+        sensor_manager.unregisterListener( this );
+      }
     }
     return ret;
   }
