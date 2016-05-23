@@ -76,7 +76,7 @@
      <item name="german">Deutsch</item>
      <item name="bulgarian">Български</item>
      <item name="chinese">中文</item>
-     <item name="ukrainian">Ukrainian</item>
+     <item name="ukrainian">Українська</item>
   </string-array>
   <string-array name="localeValue">
      <item name="default"></item>

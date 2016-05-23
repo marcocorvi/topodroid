@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
-    <string name="no_manual">Не можливо скачати сторінку допомоги з інтернемаєу.</string>
+    <string name="no_manual">Не можливо скачати сторінку допомоги з інтернету.</string>
 
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натисніть "НАЗАД" ще раз для виходу</string>
 
-    <string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете перевстановити об'єкти малюнків?</string>
+    <string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете перевстановити об\'єкти малюнків?</string>
 
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛІНІЯ</string>
@@ -19,8 +19,8 @@
     <string name="paste">ВСТАВИТИ</string>
     <string name="copied">Скопіювано %1$s в буфер обміну</string>
 
-    <string name="memoryA3">Пам'ять DistoX A3</string>
-    <string name="memoryX310">Пам'ять DistoX X310</string>
+    <string name="memoryA3">Пам\'ять DistoX A3</string>
+    <string name="memoryX310">Пам\'ять DistoX X310</string>
     <!-- UNUSED string name="memory_data">DistoX дані</string -->
 
     <!-- string name="thp_danger">небезпека</string -->
@@ -44,7 +44,7 @@
     <!-- UNUSED string name="missing_title">ВІДСУТНІ СИМВОЛИ</string -->
     <!-- UNUSED string name="missing_warning">Відсутні наступні інструменти для малювання.\n</string -->
     <string name="failed_snap_to_line">Відсутня найближча точка-лінії для закріплення межі зони</string>
-    <string name="failed_snap_to_point">Відсутня найближча точка для закріплення об'єкта</string>
+    <string name="failed_snap_to_point">Відсутня найближча точка для закріплення об\'єкта</string>
 
     <string name="calibration_title">Корекція вимірюваннь</string>
     <string name="calibration_length">Рулетка</string>
@@ -82,12 +82,12 @@
     <string name="device_algo_failed">Алгоритм автовизначення не спрацював\nВикористовую лінійний алгоритм</string>
     <string name="device_address">Адреса %1$s</string>
     <string name="device_busy">Пристрій зайнятий</string>
-    <string name="device_illegal_addr">Недопустима адреса пам'яті</string>
+    <string name="device_illegal_addr">Недопустима адреса пам\'яті</string>
     <string name="device_info">Інформація про пристрій</string>
     <string name="device_model_set">Ви впевнені що хочете змінити модель пристрою</string>
     <string name="device_none">DistoX не вибраний</string>
     <!-- UNUSED string name="device_paired">Прилад сопряжен</string -->
-    <string name="device_reset">Зкидання пам'яті DistoX</string>
+    <string name="device_reset">Зкидання пам\'яті DistoX</string>
     <string name="device_code">DistoX код %1$4d</string>
     <string name="device_firmware">Прошивка  %1$d.%2$d</string>
     <string name="device_hardware">Чіп  %1$d.%2$d</string>
@@ -99,7 +99,7 @@
     <string name="device_status_normal">Режим: нормальний</string>
     <string name="device_status_silent_on">Без збереження: вкл</string>
     <string name="device_status_silent_off">Без збереження: викл</string>
-    <string name="bt_reset">Скидання з'єднання bluetooth</string>
+    <string name="bt_reset">Скидання з\'єднання bluetooth</string>
     <string name="save_as">зберегти як</string>
     <string name="nickname">Псевдонім</string>
 
@@ -138,8 +138,8 @@
  
 
     <!-- UNUSED string name="head_tail">Пам'ять: </string -->
-    <string name="head_tail_failed">Помилка зчитування індекса пам'яті DistoX</string>
-    <string name="head_tail_store_failed">Не вдалось зберегти індекс пам'яті DistoX</string>
+    <string name="head_tail_failed">Помилка зчитування індекса пам\'яті DistoX</string>
+    <string name="head_tail_store_failed">Не вдалось зберегти індекс пам\'яті DistoX</string>
     <!-- UNUSED string name="pairing_failed">Не вдалось з'єднати прилади</string -->
     <string name="illegal_data_value">Недопустиме значенння</string>
     <string name="label_title">ПІДПИС</string>
@@ -175,7 +175,7 @@
     <string name="error_lat_required">Вимагається широта</string>
     <string name="error_long_required">Вимагається довгота</string>
     <string name="error_name_required">Вимагається назва</string>
-    <string name="error_start_required">Вимагається прив'язка до пікету</string>
+    <string name="error_start_required">Вимагається прив\'язка до пікету</string>
     <!-- UNUSED string name="error_station_already_fixed">Пікет уже має координати</string -->
     <string name="error_station_required">Вимагається пікет</string>
     <string name="error_station_non_existing">Неіснуючий пікет</string>
@@ -219,7 +219,7 @@
     <string name="no_geo_station">Помилка: отсутствует пікет с координатами</string>
     <string name="no_leg_intersection">Розріз не перетинає пікет</string>
     <string name="no_location_data">Немає даних про місцезнаходження</string>
-    <string name="no_paired_device">Відсутній прив'язанbй приkfl.\nПроскануйте і привя'жіть DistoX</string>
+    <string name="no_paired_device">Відсутній прив\'язаний пікет.\nПроскануйте і привя\'жіть DistoX</string>
     <string name="no_photos">В зйомці немає фото</string>
     <string name="no_plots">В зйомці немає абрисов \nДля створення використовуйте кнопку Додати</string>
     <string name="no_profile_overview">Немає огляду для спроектованого профілю</string>
@@ -237,9 +237,9 @@
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">Опис</string>
     <string name="menu_area">ОБЛАСТЬ</string>
-    <string name="menu_attach">З'ЄДНАТИ</string>
+    <string name="menu_attach">З\'ЄДНАТИ</string>
     <string name="menu_delete">Видалити</string>
-    <string name="menu_detach">Від'єднати</string>
+    <string name="menu_detach">Від\'єднати</string>
     <string name="menu_display">Показати</string>
     <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">Експорт</string>
@@ -266,16 +266,16 @@
     <string name="menu_validate">ВАЛІДАЦІЯ</string>
     <string name="menu_zoom_fit">ВМІСТИТИ</string>
 
-    <string name="popup_join_pt">Прив'язати до найближчої точки</string>
-    <string name="popup_snap_ln">Прив'язати к найближчої лінії</string>
+    <string name="popup_join_pt">Прив\'язати до найближчої точки</string>
+    <string name="popup_snap_ln">Прив\'язати к найближчої лінії</string>
     <string name="popup_split_pt">Дублювати точку</string>
     <string name="popup_split_ln">Розірвати лінію на точці</string>
     <string name="popup_sharp_pt">Спрямити сегмент</string>
     <string name="popup_curve_pt">Сгладити сегмент</string>
     <string name="popup_remove_pt">Видалити точку</string>
 
-    <string name="connected_none">Не з'єднано</string>
-    <string name="connected_already">Уже з'єднано</string>
+    <string name="connected_none">Не з\'єднано</string>
+    <string name="connected_already">Уже з\'єднано</string>
 
     <string name="not_available">Bluetooth недоступний</string>
     <!-- OK string name="not_connected">Немає з'єднання</string -->
@@ -414,13 +414,13 @@
     <string name="h_section">Гор-ПЕРЕРІЗ</string>
 
     <string name="distox_err_ok">OK</string>
-    <string name="distox_err_headtail">Помилка зчитування пам'яті DistoX</string>
+    <string name="distox_err_headtail">Помилка зчитування пам\'яті DistoX</string>
     <string name="distox_err_headtail_io">DistoX помилка I/O </string>
     <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
     <string name="distox_err_connected">Прилад уже підключений</string>
 
     <!-- UNUSED string name="ask_close">Закрити TopoDroid?</string -->
-    <string name="ask_reset">Скидання пам'яті DistoX?</string>
+    <string name="ask_reset">Скидання пам\'яті DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Закрити зйомку?</string -->
     <string name="ask_gps_service">Включить сервіс GPS?</string>
 
@@ -553,7 +553,7 @@
     <string name="help_overview">Перегляд карти</string>
     <string name="help_plot">Вікно абрисов</string>
     <string name="help_note">Редагувати замітки зйомки</string>
-    <string name="help_bluetooth">Скидання з'єднання Bluetooth</string>
+    <string name="help_bluetooth">Скидання з\'єднання Bluetooth</string>
     <string name="help_remote">Дистанційне управління DistoX</string>
     <string name="help_add_shot">Додати вимір вручну</string>
     <string name="help_info_shot">Статистика зйомки</string>
@@ -583,7 +583,7 @@
     <string name="help_recover">Відновити абрис из бекапу</string>
     <string name="help_zoom_fit">Вмістити абрис в екран</string>
    
-    <string name="help_line_point">Дії з лініями і точками: з'єднати, розірвати, обрезати, видалити</string>
+    <string name="help_line_point">Дії з лініями і точками: з\'єднати, розірвати, обрізати, видалити</string>
 <!-- OK
     <string name="help_to_point">Притянгнути вибрану точку до найближчої точки</string>
     <string name="help_split_point">Розбити в цій точці на дві [лінії/області]</string>
@@ -601,7 +601,7 @@
     <string name="help_detach">Очистити поточний вибір DistoX</string>
     <string name="help_firmware">Оновлення прошивки DistoX2</string>
     <string name="help_toggle">Перемкнути DistoX в режим калібрування и назад в нормальний режим</string>
-    <string name="help_sdcard">DistoX управління пам'яттю</string>
+    <string name="help_sdcard">DistoX управління пам\'яттю</string>
     <string name="help_read">Завантажити і показати поточні коефіцієнти калібрування DistoX</string>
     <string name="help_info_device">Інформація про пристрій</string>
     <string name="help_scan">Знайти нові прилади DistoX</string>
@@ -719,7 +719,7 @@
   <string name="pref_survex_lrud_title">Survex ЛПВН</string>
   <string name="pref_survex_lrud_summary">Додати ЛПВН в при експорті в формат Survex</string>
 
-  <string name="pref_sock_type_title">Тип з'єднання</string>
+  <string name="pref_sock_type_title">Тип з\'єднання</string>
   <string name="pref_sock_type_summary">Socket створити</string>
   <!-- OK string name="pref_device_type_title">Тип Disto</string -->
   <!-- OK string name="pref_device_type_summary">Модель DistoX</string -->
@@ -736,7 +736,7 @@
   <string name="pref_conn_mode_title">Типи підключення</string>
   <string name="pref_conn_mode_summary">Типи підключення до DistoX</string>
   <string name="pref_auto_reconnect_title">Авто підключення</string>
-  <string name="pref_auto_reconnect_summary">Перепідключитися при втраті з'єднання з DistoX</string>
+  <string name="pref_auto_reconnect_summary">Перепідключитися при втраті з\'єднання з DistoX</string>
   <string name="pref_auto_pair_title">Автоматичне спряження</string>
   <string name="pref_auto_pair_summary">Спряження пристрою після сканування</string>
   <string name="pref_socket_delay_title">Затримка підключення</string>
@@ -746,8 +746,8 @@
   <string name="pref_z6_workaround_title">Рішення для Z6</string>
   <string name="pref_z6_workaround_summary">Рішення для завантаження даних з телефонів Z6</string>
   <string name="pref_crs_title">CRS система координат </string>
-  <string name="pref_crs_summary">CRS ім'я</string>
-  <string name="pref_crs_message">Введіть ім'я CRS як в Proj4</string>
+  <string name="pref_crs_summary">CRS ім\'я</string>
+  <string name="pref_crs_message">Введіть ім\'я CRS як в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Eсереднення даних GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Використовувати GPS Averaging?</string -->
   <string name="pref_plot_screen_title">Налаштування екрану абрисів</string>
@@ -761,7 +761,7 @@
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid кореневий каталог</string -->
   <!-- UNUSED string name="pref_cwd_message">Введіть кореневий каталог TopoDroid</string -->
   <string name="pref_pt_color_map_title">перетворення кольорів PocketTopo</string>
-  <string name="pref_pt_color_map_summary">Відповідність кольорів PocketTopo типам об'єктів (PocketTopo імпорт)</string>
+  <string name="pref_pt_color_map_summary">Відповідність кольорів PocketTopo типам об\'єктів (PocketTopo імпорт)</string>
   <string name="pref_text_size_title">Розмір текста</string>
   <string name="pref_text_size_summary">Розмір текста в списках</string>
   <string name="pref_text_size_message">Розмір текста в списках</string>
@@ -898,8 +898,8 @@
   <string name="pref_checkAttached_title">Перевірка нитки хода</string>
   <string name="pref_checkAttached_summary">Перевіряти належність пікетов</string>
   <string name="pref_xtherion_areas_title">Області xtherion</string>
-  <string name="pref_xtherion_areas_summary">Зберігати області як в xtherion</string>
-  <string name="pref_therion_splays_title">Бокові заміри в Therion</string>
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Зберігати області як в xtherion</string -->
+  <!-- UNUSED string name="pref_therion_splays_title">Бокові заміри в Therion</string -->
   <string name="pref_therion_splays_summary">Додати лінії бокових замірів в файл th2</string>
   <string name="pref_autoStations_title">Точки пікетів Therion</string>
   <string name="pref_autoStations_summary">Додавати точки пікетів в експорт абрису</string>
@@ -929,8 +929,8 @@
   <string name="pref_area_border_summary">Прозорість границь області за замовчуванням</string>
   <string name="pref_auto_section_pt_title">Точки перерізів</string>
   <string name="pref_auto_section_pt_summary">Додати точки перерізів до линій перерізів</string>
-  <string name="pref_cont_join_title">Продовжувати для з'єднання</string>
-  <string name="pref_cont_join_summary">Продовжити лінію до з'єднання з іншою лінією</string>
+  <string name="pref_cont_join_title">Продовжувати для з\'єднання</string>
+  <string name="pref_cont_join_summary">Продовжити лінію до з\'єднання з іншою лінією</string>
 
   <string name="pref_sketchUsesSplays_title">Абрис бокових замірів</string>
   <string name="pref_sketchUsesSplays_summary">Поверхня абрису використовує бокові заміри</string>
@@ -981,7 +981,7 @@
   <string name="pref_log_bt">Bluetooth</string>
   <string name="pref_log_bezier">Криві Безьє</string>
   <string name="pref_log_calib">Калібрування</string>
-  <string name="pref_log_comm">BT з'єднання</string>
+  <string name="pref_log_comm">BT з\'єднання</string>
   <string name="pref_log_csurvey">cSurvey</string>
   <string name="pref_log_data">Дані зйомки</string>
   <string name="pref_log_db">База даних</string>
@@ -1013,12 +1013,12 @@
     <string name="welcome_title">TopoDroid %1$s</string>
 
     <string name="welcome_text">
-\nTopoDroid це ПЗ з відкритим вихідним кодом для топозйомки пещер за допомогою приладу DistoX.
+\nTopoDroid це ПЗ з відкритим вихідним кодом для топозйомки печер за допомогою приладу DistoX.
 \n\nНема гарантій: використовуючи дане ПЗ ви згодні з тим що автор не несе відповідальність за утрату даних.
 \n\nДопомога: кнопка МЕНЮ
 \n\nВідвідайте http://sites.google.com/site/speleoapps з інструкцією і додатковими програмами.
 \nПрисилайте ваші пропозиції, питання, повідомлення про помилки, на marco.corvi@gmail.com
-\nПереклад на Українську мову - Козій Владислав, присилайте письма листи koziy.vladyslav@gmail.com
+\nПереклад на Українську мову - Козій Владислав, присилайте листи koziy.vladyslav@gmail.com
 \n
     </string>
 
