@@ -321,17 +321,18 @@ public class TopoDroidPreferences extends PreferenceActivity
     if (mPrefCategory == PREF_CATEGORY_ALL ) {
       final Intent cwd_intent = new Intent( this, CWDActivity.class );
       mCwdPreference = (Preference) findPreference( "DISTOX_CWD" );
-      mCwdPreference.setSummary( mApp.mCWD );
-      mCwdPreference.setOnPreferenceClickListener( 
-        new Preference.OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick( Preference pref ) 
-          {
-            startActivityForResult( cwd_intent, REQUEST_CWD );
-            return true;
-          }
+      if ( mCwdPreference != null ) {
+        mCwdPreference.setSummary( mApp.mCWD );
+        mCwdPreference.setOnPreferenceClickListener( 
+          new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick( Preference pref ) 
+            {
+              startActivityForResult( cwd_intent, REQUEST_CWD );
+              return true;
+            }
         } );
-
+      }
       linkPreference( "DISTOX_SURVEY_PREF", PREF_CATEGORY_SURVEY );
       linkPreference( "DISTOX_PLOT_PREF", PREF_CATEGORY_PLOT );
       linkPreference( "DISTOX_IMPORT_EXPORT_PREF", PREF_CATEGORY_IMPORT_EXPORT );
@@ -342,28 +343,32 @@ public class TopoDroidPreferences extends PreferenceActivity
     if (mPrefCategory == PREF_CATEGORY_IMPORT_EXPORT ) {
       final Intent pt_intent = new Intent( this, PtCmapActivity.class );
       mPtCmapPreference = (Preference) findPreference( "DISTOX_PT_CMAP" );
-      mPtCmapPreference.setOnPreferenceClickListener( 
-        new Preference.OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick( Preference pref ) 
-          {
-            startActivityForResult( pt_intent, REQUEST_PT_CMAP );
-            return true;
-          }
+      if ( mPtCmapPreference != null ) {
+        mPtCmapPreference.setOnPreferenceClickListener( 
+          new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick( Preference pref ) 
+            {
+              startActivityForResult( pt_intent, REQUEST_PT_CMAP );
+              return true;
+            }
         } );
+      }
     }
 
     if (mPrefCategory == PREF_CATEGORY_PLOT ) {
       linkPreference( "DISTOX_PLOT_SCREEN", PREF_PLOT_SCREEN );
       linkPreference( "DISTOX_TOOL_LINE",   PREF_TOOL_LINE );
       linkPreference( "DISTOX_TOOL_POINT",  PREF_TOOL_POINT );
-      if ( TDSetting.mLevelOverAdvanced ) 
+      // if ( TDSetting.mLevelOverAdvanced ) 
         linkPreference( "DISTOX_PLOT_WALLS",  PREF_PLOT_WALLS );
     }
 
     if (mPrefCategory == PREF_CATEGORY_SURVEY ) {
-      linkPreference( "DISTOX_LOCATION_SCREEN", PREF_LOCATION );
-      linkPreference( "DISTOX_ACCURACY_SCREEN", PREF_ACCURACY );
+      // if ( TDSetting.mLevelOverBasic ) 
+        linkPreference( "DISTOX_LOCATION_SCREEN", PREF_LOCATION );
+      // if ( TDSetting.mLevelOverNormal ) 
+        linkPreference( "DISTOX_ACCURACY_SCREEN", PREF_ACCURACY );
       linkPreference( "DISTOX_SHOT_UNITS_SCREEN", PREF_SHOT_UNITS );
       linkPreference( "DISTOX_SHOT_DATA_SCREEN", PREF_SHOT_DATA );
     }
@@ -383,19 +388,18 @@ public class TopoDroidPreferences extends PreferenceActivity
   {
     // if ( pref_name == null ) return;
     Preference pref = findPreference( pref_name );
-    if ( pref != null ) {
-      final Intent intent = new Intent( this, TopoDroidPreferences.class );
-      intent.putExtra( PREF_CATEGORY, category );
-      pref.setOnPreferenceClickListener( 
-        new Preference.OnPreferenceClickListener() {
-          @Override
-          public boolean onPreferenceClick( Preference pref ) 
-          {
-            startActivity( intent );
-            return true;
-          }
-      } );
-    }
+    if ( pref == null ) return;
+    final Intent intent = new Intent( this, TopoDroidPreferences.class );
+    intent.putExtra( PREF_CATEGORY, category );
+    pref.setOnPreferenceClickListener( 
+      new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick( Preference pref ) 
+        {
+          startActivity( intent );
+          return true;
+        }
+    } );
   }
 
   public void onActivityResult( int request, int result, Intent intent ) 
