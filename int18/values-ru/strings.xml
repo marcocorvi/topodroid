@@ -260,7 +260,7 @@
     <string name="menu_scan">Сканировать</string>
     <!-- UNUSED string name="menu_station">ПИКЕТЫ</string -->
     <string name="menu_stats">СТАТИСТИКА</string>
-    <string name="menu_survey">Метаданные</string>
+    <string name="menu_survey">Свойства съёмки</string>
     <string name="menu_sync">СИНХР.</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 Абрисы</string -->
     <string name="menu_validate">ВАЛИДАЦИЯ</string>
@@ -666,7 +666,7 @@
     <string name="title_sensor_edit">Сенсор</string>
 
     <string name="title_stats">Статистика</string>
-    <string name="title_survey">Описание съёмки</string>
+    <string name="title_survey">Свойства съёмки</string>
     <string name="title_survey_new">Новая съёмка</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
