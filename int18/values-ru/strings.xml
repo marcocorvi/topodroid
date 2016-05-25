@@ -191,7 +191,7 @@
     <!-- UNUSED string name="scale">масштаб</string -->
     <!-- UNUSED string name="reversed">обратный</string -->
     <string name="options">опции</string>
-    <string name="outline">контур</string>
+    <string name="outline">контур стен</string>
     <string name="out">наружный</string>
     <string name="in">внутренний</string>
     <!-- UNUSED string name="none">none</string -->
