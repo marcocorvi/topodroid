@@ -20,6 +20,7 @@ import android.graphics.Path;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
+import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
 
 import java.io.PrintWriter;
@@ -32,7 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -51,19 +52,25 @@ public class DrawingAreaPath extends DrawingPointLinePath
   double mOrientation;
   String mPrefix;      // border/area name prefix (= scrap name)
   // boolean mVisible; // visible border in DrawingPointLinePath
+  Shader mLocalShader = null;
 
   public DrawingAreaPath( int type, int cnt, String prefix, boolean visible )
   {
     super( DrawingPath.DRAWING_PATH_AREA, visible, true );
     mAreaType = type;
     mAreaCnt  = cnt;
-    mOrientation = 0.0;
-    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
-      mOrientation = DrawingBrushPaths.getAreaOrientation( type );
-    }
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
     if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
       setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+    }
+    mOrientation = 0.0;
+    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
+      // FIXME AREA_ORIENT 
+      mOrientation = DrawingBrushPaths.getAreaOrientation( type );
+
+      mLocalShader = DrawingBrushPaths.cloneAreaShader( mAreaType );
+      resetPaint();
+      mPaint.setShader( mLocalShader );
     }
   }
 
@@ -177,20 +184,35 @@ public class DrawingAreaPath extends DrawingPointLinePath
     resetPaint();
   }
 
+  void shiftShaderBy( float dx, float dy, float s )
+  {
+    if ( mLocalShader != null ) {
+      // Log.v( "DistoX", "shift shader by " + dx + " " + dy + " scale " + s + " orient " + mOrientation );
+      Matrix mat = new Matrix();
+      // shader.getLocalMatrix( mat ); // set shader matrix even if shader did not have one
+      mat.postRotate( (float)mOrientation );
+      mat.postTranslate( 4*dx, 4*dy );
+      mat.postScale( s/4, s/4 );
+      mLocalShader.setLocalMatrix( mat );
+    }
+  }
+
   private void resetPaint()
   {
     // Log.v("DistoX", "arae path reset paint orientation " + mOrientation );
-    Bitmap bitmap = DrawingBrushPaths.getAreaBitmap( mAreaType );
-    if ( bitmap != null ) {
+    // Bitmap bitmap = DrawingBrushPaths.getAreaBitmap( mAreaType );
+    // if ( bitmap != null )
+    if ( mLocalShader != null ) {
       Matrix mat = new Matrix();
-      int w = bitmap.getWidth();
-      int h = bitmap.getHeight();
       mat.postRotate( (float)mOrientation );
-      Bitmap bitmap1 = Bitmap.createBitmap( bitmap, 0, 0, w, h, mat, true );
-      Bitmap bitmap2 = Bitmap.createBitmap( bitmap1, w/4, h/4, w/2, h/2 );
-      BitmapShader shader = new BitmapShader( bitmap2,
-        DrawingBrushPaths.getAreaXMode( mAreaType ), DrawingBrushPaths.getAreaYMode( mAreaType ) );
-      mPaint.setShader( shader );
+      // int w = bitmap.getWidth();
+      // int h = bitmap.getHeight();
+      // Bitmap bitmap1 = Bitmap.createBitmap( bitmap, 0, 0, w, h, mat, true );
+      // Bitmap bitmap2 = Bitmap.createBitmap( bitmap1, w/4, h/4, w/2, h/2 );
+      // BitmapShader shader = new BitmapShader( bitmap2,
+      //   DrawingBrushPaths.getAreaXMode( mAreaType ), DrawingBrushPaths.getAreaYMode( mAreaType ) );
+      // mPaint.setShader( shader );
+      mLocalShader.setLocalMatrix( mat );
     }
   }
 

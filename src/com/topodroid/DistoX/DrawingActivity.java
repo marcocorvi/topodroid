@@ -2012,6 +2012,7 @@ public class DrawingActivity extends ItemDrawer
                           ap.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
                         ap.close();
+                        ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                         mDrawingSurface.addDrawingPath( ap );
                       }
                     }
@@ -2151,6 +2152,7 @@ public class DrawingActivity extends ItemDrawer
                     }
                   } else { //  mSymbol == SYMBOL_AREA
                     mCurrentAreaPath.close();
+                    mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                     mDrawingSurface.addDrawingPath( mCurrentAreaPath );
                   }
                 }

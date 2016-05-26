@@ -329,6 +329,20 @@ public class DrawingCommandManager
     mBBox.top    = - dy;
     mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
 
+    synchronized ( mCurrentStack ) {
+      final Iterator i = mCurrentStack.iterator();
+      while ( i.hasNext() ){
+        final ICanvasCommand c = (ICanvasCommand) i.next();
+        if ( c.commandType() == 0 ) {
+          DrawingPath path = (DrawingPath)c;
+          if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+            DrawingAreaPath area = (DrawingAreaPath)path;
+            area.shiftShaderBy( dx, dy, s );
+          }
+        }
+      }
+    }
+
     // FIXME 
     // TUNING this is to see how many buckets are on the canvas and how many points they contain
     //

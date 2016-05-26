@@ -33,10 +33,13 @@ class SymbolArea extends Symbol
   int mColor;
   boolean mCloseHorizontal;
   boolean mOrientable;
+  // FIXME AREA_ORIENT
   double mOrientation;
+
   Paint mPaint;
   Path mPath;
   Bitmap       mBitmap;
+  Bitmap       mShaderBitmap = null;
   BitmapShader mShader; // paint bitmap shader
   TileMode mXMode;
   TileMode mYMode;
@@ -51,20 +54,19 @@ class SymbolArea extends Symbol
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
+  // FIXME AREA_ORIENT
   @Override public boolean setAngle( float angle ) 
   {
     if ( mBitmap == null ) return false;
-    TDLog.Error( "ERROR area symbol set orientation " + angle + " not supported" );
-    // mOrientation = angle;
-    // android.graphics.Matrix m = new android.graphics.Matrix();
-    // int w = mBitmap.getWidth();
-    // int h = mBitmap.getHeight();
-    // m.postRotate( (float)mOrientation );
-    // Bitmap bitmap = Bitmap.createBitmap( mBitmap, 0, 0, w, h, m, true );
-    // makeShader( bitmap, mXMode, mYMode, false );
-    return false;
+    mOrientation = angle;
+    // TDLog.Error( "ERROR area symbol set orientation " + angle + " not supported" );
+    android.graphics.Matrix m = new android.graphics.Matrix();
+    m.preRotate( (float)mOrientation );
+    mShader.setLocalMatrix( m );
+    return true;
   }
 
+  // FIXME AREA_ORIENT
   @Override public int getAngle() { return (int)mOrientation; }
 
   /** 
@@ -81,7 +83,7 @@ class SymbolArea extends Symbol
     mYMode  = ymode;
     mCloseHorizontal = close_horizontal;
     mOrientable  = false;
-    mOrientation = 0;
+    // FIXME AREA_ORIET mOrientation = 0;
     mPaint = new Paint();
     mPaint.setDither(true);
     mPaint.setColor( mColor );
@@ -94,21 +96,19 @@ class SymbolArea extends Symbol
     makePath();
   }
 
-  void rotateGrad( double a ) 
+  // FIXME AREA_ORIENT
+  void rotateGradArea( double a ) 
   {
     if ( mOrientable ) {
-      TDLog.Error( "ERROR area symbol rotate by " + a + " not implementd" );
-      // mOrientation += a;
-      // while ( mOrientation >= 360 ) mOrientation -= 360;
-      // while ( mOrientation < 0 ) mOrientation += 360;
-      // if ( mBitmap != null ) {
-      //   android.graphics.Matrix m = new android.graphics.Matrix();
-      //   int w = mBitmap.getWidth();
-      //   int h = mBitmap.getHeight();
-      //   m.postRotate( (float)mOrientation );
-      //   Bitmap bitmap = Bitmap.createBitmap( mBitmap, 0, 0, w, h, m, true );
-      //   makeShader( bitmap, mXMode, mYMode, false );
-      // }
+      // TDLog.Error( "ERROR area symbol rotate by " + a + " not implementd" );
+      mOrientation += a;
+      while ( mOrientation >= 360 ) mOrientation -= 360;
+      while ( mOrientation < 0 ) mOrientation += 360;
+      if ( mShader != null ) {
+        android.graphics.Matrix m = new android.graphics.Matrix();
+        m.preRotate( (float)mOrientation );
+        mShader.setLocalMatrix( m );
+      }
     }
   }
 
@@ -129,7 +129,9 @@ class SymbolArea extends Symbol
   {
     super( null, fname );
     mOrientable  = false;
+    // FIXME AREA_ORIENT
     mOrientation = 0;
+
     readFile( filepath, locale, iso );
     makePath();
   }
@@ -165,9 +167,9 @@ class SymbolArea extends Symbol
       if ( subimage ) {
         int w1 = width / 2;
         int h1 = height / 2;
-        bitmap = Bitmap.createBitmap( bitmap0, w1/2, h1/2, w1, h1 );
+        mShaderBitmap = Bitmap.createBitmap( bitmap0, w1/2, h1/2, w1, h1 );
       }
-      mShader = new BitmapShader( bitmap, xmode, ymode );
+      mShader = new BitmapShader( mShaderBitmap, xmode, ymode );
       mPaint.setShader( mShader );
     }
   }
@@ -326,9 +328,9 @@ class SymbolArea extends Symbol
         line = br.readLine();
       }
     } catch ( FileNotFoundException e ) {
-      // FIXME
+      TDLog.Error( "File not found: " + e.getMessage() );
     } catch( IOException e ) {
-      // FIXME
+      TDLog.Error( "I/O error: " + e.getMessage() );
     }
     makeShader( mBitmap, mXMode, mYMode, true );
   }

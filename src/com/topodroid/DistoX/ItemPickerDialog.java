@@ -239,17 +239,17 @@ class ItemPickerDialog extends MyDialog
   private void setSeekBarProgress()
   {
     boolean orientable = false;
+    ItemSymbol item = null;
     if ( mItemType == DrawingActivity.SYMBOL_POINT &&  mPointAdapter != null ) {
-      int index = mPointAdapter.getSelectedPos();
-      ItemSymbol item = mPointAdapter.get( index );
-      if ( item != null ) {
-        SymbolInterface symbol = item.mSymbol;
-        if ( symbol != null && symbol.isOrientable() ) {
-          int progress = (180+symbol.getAngle())%360;
-          mSeekBar.setProgress( progress );
-          // Log.v("DistoX", "set progress " + progress );
-          orientable = true;
-        }
+      item = mPointAdapter.get( mPointAdapter.getSelectedPos() );
+    } else if ( mItemType == DrawingActivity.SYMBOL_AREA &&  mAreaAdapter != null ) {
+      item = mAreaAdapter.get( mAreaAdapter.getSelectedPos() );
+    }
+    if ( item != null ) {
+      SymbolInterface symbol = item.mSymbol;
+      if ( symbol != null && symbol.isOrientable() ) {
+        mSeekBar.setProgress( (180+symbol.getAngle())%360 );
+        orientable = true;
       }
     }
     mSeekBar.setEnabled( orientable );
@@ -257,15 +257,18 @@ class ItemPickerDialog extends MyDialog
 
   private void setItemAngle( int angle )
   {
+    ItemSymbol item = null;
+    Symbol[] symbols = null;
     if ( mItemType == DrawingActivity.SYMBOL_POINT && mPointAdapter != null ) {
-      int index = mPointAdapter.getSelectedPos();
-      // Log.v("DistoX", "set item " + index + " angle " + angle );
-      // mPointAdapter.setPointOrientation( index, angle );
- 
-      ItemSymbol item = mPointAdapter.get( index );
-      if ( item != null ) {
-        item.setAngle( angle );
-        Symbol[] symbols = ItemDrawer.mRecentPoint;
+      item = mPointAdapter.get( mPointAdapter.getSelectedPos() );
+      symbols = ItemDrawer.mRecentPoint;
+    } else if ( mItemType == DrawingActivity.SYMBOL_AREA && mAreaAdapter != null ) {
+      item = mAreaAdapter.get( mAreaAdapter.getSelectedPos() );
+      symbols = ItemDrawer.mRecentArea;
+    }
+    if ( item != null ) {
+      item.setAngle( angle );
+      if ( symbols != null ) {
         for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
           Symbol p = symbols[k];
           if ( p == null ) break;
@@ -399,7 +402,7 @@ class ItemPickerDialog extends MyDialog
             mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
             mBTline.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
             mBTarea.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
-            mSeekBar.setVisibility( View.INVISIBLE );
+            mSeekBar.setVisibility( View.VISIBLE );
           }
           break;
       }
@@ -484,7 +487,7 @@ class ItemPickerDialog extends MyDialog
           // Log.v( TDLog.TAG, "set TypeAndItem type area pos " + index + " index " + is.mIndex );
           mSelectedArea = is.mIndex;
           // mParent.areaSelected( is.mIndex, false ); // mAreaAdapter.getSelectedItem() );
-          mSeekBar.setEnabled( false );
+          setSeekBarProgress();
         }
         break;
     }

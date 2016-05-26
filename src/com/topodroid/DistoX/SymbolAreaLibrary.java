@@ -21,6 +21,8 @@ import java.io.IOException;
 
 import android.graphics.Paint;
 import android.graphics.Bitmap;
+import android.graphics.Shader;
+import android.graphics.BitmapShader;
 import android.graphics.Shader.TileMode;
 import android.content.res.Resources;
 
@@ -50,22 +52,40 @@ class SymbolAreaLibrary extends SymbolLibrary
     return ( s == null )? false : s.mCloseHorizontal;
   }
 
+  // FIXME AREA_ORIENT
   double getAreaOrientation( int k )
   {
     SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? 0 : s.mOrientation;
   }
 
+  // FIXME AREA_ORIENT
   void rotateGrad( int k, double a ) 
   {
     SymbolArea s = (SymbolArea)getSymbolByIndex(k);
-    if ( s != null ) s.rotateGrad( a );
+    if ( s != null ) s.rotateGradArea( a );
   }
 
   Bitmap getAreaBitmap( int k ) 
   { 
     SymbolArea s = (SymbolArea)getSymbolByIndex(k);
     return ( s == null )? null : s.mBitmap; 
+  }
+  
+  Shader getAreaShader( int k ) 
+  { 
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    return ( s == null )? null : s.mShader; 
+  }
+   
+  BitmapShader cloneAreaShader( int k ) 
+  { 
+    SymbolArea s = (SymbolArea)getSymbolByIndex(k);
+    if ( s == null ) return null; 
+    Bitmap b = s.mShaderBitmap;
+    if ( b == null ) return null;
+    BitmapShader ret = new BitmapShader( b, s.mXMode, s.mYMode );
+    return ret;
   }
   
   TileMode getAreaXMode( int k ) 

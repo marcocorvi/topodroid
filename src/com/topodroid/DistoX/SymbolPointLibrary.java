@@ -59,7 +59,7 @@ class SymbolPointLibrary extends SymbolLibrary
 
   void rotateGrad( int k, double a )
   {
-    if ( k >= 0 && k < mSymbolNr ) ((SymbolPoint)mSymbols.get(k)).rotateGrad( a );
+    if ( k >= 0 && k < mSymbolNr ) ((SymbolPoint)mSymbols.get(k)).rotateGradP( a );
   }
 
   Path getPointPath( int k ) { 

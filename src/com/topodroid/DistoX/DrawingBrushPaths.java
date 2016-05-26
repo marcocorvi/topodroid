@@ -18,6 +18,8 @@ import android.graphics.Path;
 import android.graphics.DashPathEffect;
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
+import android.graphics.Shader;
+import android.graphics.BitmapShader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Shader.TileMode;
 
@@ -64,17 +66,19 @@ public class DrawingBrushPaths
   static double getPointOrientation( int index ) { return mPointLib.getPointOrientation( index ); }
   static void resetPointOrientations( ) { mPointLib.resetOrientations(); }
   static void rotateGradPoint( int index, double a ) { mPointLib.rotateGrad( index, a ); }
-  // static void rotateRadPoint( int index, double a ) { rotateGradPoint( index, a * TDMath.RAD2GRAD ); }
   static Path getPointPath( int i ) { return mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i ) { return mPointLib.getPointOrigPath( i ); }
 
   static int getPointLabelIndex() { return mPointLib.mPointLabelIndex; }
 
-  static double getAreaOrientation( int index ) { return mAreaLib.getAreaOrientation( index ); }
+  // FIXME AREA_ORIENT
   static void resetAreaOrientations( ) { mAreaLib.resetOrientations(); }
+  static double getAreaOrientation( int index ) { return mAreaLib.getAreaOrientation( index ); }
   static void rotateGradArea( int index, double a ) { mAreaLib.rotateGrad( index, a ); }
 
   static Bitmap getAreaBitmap( int index ) { return mAreaLib.getAreaBitmap( index ); }
+  static Shader getAreaShader( int index ) { return mAreaLib.getAreaShader( index ); }
+  static BitmapShader cloneAreaShader( int index ) { return mAreaLib.cloneAreaShader( index ); }
   static TileMode getAreaXMode( int index ) { return mAreaLib.getAreaXMode( index ); }
   static TileMode getAreaYMode( int index ) { return mAreaLib.getAreaYMode( index ); }
 

@@ -63,7 +63,7 @@ class SymbolPoint extends Symbol
     if ( ! mOrientable ) return false;
     float a = angle - (float)mOrientation;
     if ( Math.abs(a) > 1 ) {
-      rotateGrad( a );
+      rotateGradP( a );
       return true;
     }
     return false;
@@ -128,10 +128,9 @@ class SymbolPoint extends Symbol
     mOrientation = 0.0;
   }
 
-  void rotateGrad( double a )
+  void rotateGradP( double a )
   {
     if ( mOrientable ) {
-      // Log.v( "DistoX", "SymbolPoint::rotateGrad orientation " + mOrientation + " rotation " + a );
       mOrientation += a;
       if ( mOrientation > 360.0 ) mOrientation -= 360.0;
       if ( mOrientation < 0.0 )   mOrientation += 360.0;

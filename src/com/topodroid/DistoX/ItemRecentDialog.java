@@ -173,7 +173,24 @@ class ItemRecentDialog extends MyDialog
     setTheTitle();
   }
 
-  void setItemAngle( int angle ) 
+  private void setSeekBarProgress()
+  {
+    boolean orientable = false;
+    Symbol symbol = ItemDrawer.mRecentPoint[0];
+    if ( symbol != null && symbol.isOrientable() ) {
+      mSeekBar.setProgress( (180+symbol.getAngle())%360 );
+      orientable = true;
+    }
+    // FIXME Most-Recent can orient only points
+    // symbol = ItemDrawer.mRecentArea[0];
+    // if ( symbol != null && symbol.isOrientable() ) {
+    //   mSeekBar.setProgress( (180+symbol.getAngle())%360 );
+    //   orientable = true;
+    // }
+    mSeekBar.setEnabled( orientable );
+  }
+
+  private void setItemAngle( int angle )
   {
     Symbol symbol = ItemDrawer.mRecentPoint[0];
     if ( symbol != null && symbol.isOrientable() ) {
@@ -181,15 +198,8 @@ class ItemRecentDialog extends MyDialog
       mRecentP[0].reset( symbol.getPaint(), symbol.getPath(), 1.5f, 1.5f );
       mRecentP[0].invalidate();
     }
-  }
-
-  private void setSeekBarProgress()
-  {
-    int angle = 0;
-    Symbol symbol = ItemDrawer.mRecentPoint[0];
-    if ( symbol != null && symbol.isOrientable() ) angle = symbol.getAngle();
-    int progress = (180+angle)%360;
-    mSeekBar.setProgress( progress );
+    // FIXME Most-Recent can orient only points
+    // symbol = ItemDrawer.mRecentArea[0];
   }
 
   private void setRecentButtons( ItemButton recent[], Symbol symbols[], float sx, float sy )
@@ -208,6 +218,7 @@ class ItemRecentDialog extends MyDialog
     setRecentButtons( mRecentP, ItemDrawer.mRecentPoint, 1.5f, 1.5f ); // sx*1.5f, sy*1.5f
     setRecentButtons( mRecentL, ItemDrawer.mRecentLine, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
     setRecentButtons( mRecentA, ItemDrawer.mRecentArea, 2.0f, 1.7f ); // sx*2.0f, sy*1.7f
+    // FIXME Most-Recent can orient only points
     Symbol p = ItemDrawer.mRecentPoint[0];
     mSeekBar.setEnabled( p != null && p.isOrientable() );
   }
@@ -271,6 +282,7 @@ class ItemRecentDialog extends MyDialog
     ItemDrawer.updateRecentArea( ItemDrawer.mRecentArea[k] );
     setRecentButtons( mRecentA, ItemDrawer.mRecentArea, 2.0f, 1.7f ); 
     setTheTitle();
+    // FIXME Most-Recent can orient only points
   }
 
   private void setPoint( int k )
