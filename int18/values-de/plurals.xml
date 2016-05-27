@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="other">WARNUNG: %1$d gesättigte Daten</item>
+    <item quantity="one">WARNUNG: 1 gesättigte Messung</item>
+    <item quantity="other">WARNUNG: %1$d gesättigte Messungen</item>
   </plurals>
   <plurals name="read_data">
     <item quantity="zero">Keine Messungen gelesen</item>

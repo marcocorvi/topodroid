@@ -3,7 +3,7 @@
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
     <string name="no_manual">Handbuch konnte nicht herunter geladen werden.</string>
 
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <string name="app_name">TopoDroid</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
     <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string>
@@ -77,14 +77,17 @@
     <string name="calib_ave_std">Genauigkeit: %1$.4f %2$.4f Grad</string>
     <string name="calib_precision">Präzision</string>
     <string name="calib_iter">Iterationen: %1$d</string>
+    <string name="calib_reset">DistoX-Kalibrierung zurücksetzen?</string>
+
     <string name="algorithm">Algorithmus:</string>
     <string name="auto">automatisch</string>
     <string name="linear">linear</string>
     <string name="non_linear">nicht-linear</string>
-   
+    <string name="algo_minimum">minimum</string>
+       
 <!-- DistoX DEVICE STUFF -->
     <string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string>
-    <string name="device_address">Addresse %1$s</string>
+    <string name="device_address">Adresse %1$s</string>
     <string name="device_busy">Gerät arbeitet</string>
     <string name="device_illegal_addr">Ungültige Speicheradresse</string>
     <string name="device_info">Geräte-Info</string>
@@ -301,7 +304,7 @@
     <string name="not_enabled">BT nicht aktiviert</string>
     <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
     <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
-    <!-- UNUSED string name="photo">Foto</string -->
+    <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Kommentar</string>
     <!-- UNUSED string name="photo_name">Messpunkt/Name</string -->
     <!-- UNUSED string name="photo_photo">Foto</string -->
@@ -353,7 +356,8 @@
     <string name="shot_info">Info</string>
     <!-- UNUSED string name="shot_length">Länge</string -->
     <string name="shot_note">Notizen</string>
-    <string name="shot_reverse">umkehren</string>
+    <string name="shot_not_found">nicht gefunden</string>
+    <string name="shot_reverse">Richtung umkehren</string>
     <string name="shot_to">bis</string>
 
     <string name="make_surface">Oberfläche existiert. Ersetzen?</string>
@@ -455,7 +459,7 @@
     <string name="button_delete"    >Löschen    </string>
     <string name="button_eval"      >Auswerten </string>
     <string name="button_eval_cal"  >Auswerten mit Kalibr.</string>
-    <!-- OK string name="button_gps_start" >GPS       </string -->
+    <string name="button_gps_start" >GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Anhalten      </string -->
     <!-- UNUSED string name="button_manual"    >Handbuch</string -->
     <!-- UNUSED string name="button_measure"   >Messung   </string -->
@@ -464,7 +468,7 @@
     <!-- UNUSED string name="button_direction">Azimut/Neigung</string -->
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
     <string name="button_plot"    >Skizze</string>
-    <!-- OK string name="button_ok"        >OK        </string -->
+    <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Öffnen     </string>
     <string name="button_read"      >Lesen      </string>
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
@@ -561,6 +565,7 @@
 
     <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
     <string name="help_continue">Linien fortsetzen</string>
+    <string name="help_contour">Konturen bearbeiten</string>
     <string name="help_current_station">Gespeicherte Messpunkte</string>
     <string name="help_azimuth">Seitenriss Referenzazimut</string>
     <string name="help_device">DistoX Verwalten</string>
@@ -644,12 +649,28 @@
     <string name="help_cover">Winkelverteilung der Kalibrierungsdaten</string>
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
-
+<!-- FIXME_SKETCH_3D -->
+    <!-- string name="help_refs_model">View mode</string -->
+    <string name="help_one_model">3D-Modell einpassen</string>
+    <string name="help_surface">Oberfläche erzeugen</string>
+    <string name="help_save_model">3D-Modell exportieren</string>
+    <string name="help_trash_model">3D-Modell löschen</string>
+    <string name="help_head_model">3D-Modell drehen</string>
+    <!-- string name="help_erase_model">Erase region</string -->
+    <string name="help_cut_model">Region ausschneiden</string>
+    <string name="help_stretch_model">Region zeichnen</string>
+    <!-- string name="help_extrude_model">Extrude region</string -->
+    <string name="help_refine_center">Oberfläche verfeinern im Dreieckszentrum/string>
+    <string name="help_refine_sides">Oberfläche verfeinern an den Rändern</string>
+    <string name="help_refine_point">Oberfläche verfeinern an Punkt</string>
+    <string name="help_refine_triangle">Oberfläche verfeinern an den langen Seiten</string>
+  
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
     <string name="title_calib">Kalibrierung</string>
     <string name="title_coverage">Kalibrierungsdaten</string>
     <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
+    <string name="title_contour">Konturen</string>
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_device">DistoX Geräte</string>
@@ -690,6 +711,7 @@
     <!-- UNUSED string name="title_sketch_select">Select item</string -->
 
     <string name="title_stats">Statistik</string>
+    <string name="title_step">Schritt</string>
     <string name="title_survey">Vermessungs-Info</string>
     <string name="title_survey_new">Neue Vermessung</string>
     <string name="title_survey_export">Vermessung speichern als</string>
@@ -703,7 +725,7 @@
   <string name="pref_cat_import_export">Import/Export</string>
   <string name="pref_cat_calib">Kalibrierung</string>
   <string name="pref_cat_device">Verbindung</string>
-  <!-- UNUSED string name="pref_cat_sketch">3D-Modell</string -->
+  <string name="pref_cat_sketch">3D-Modell</string>
   <string name="pref_cat_log">Log Optionen</string>
 
   <string name="pref_locale_title">Sprache</string>
@@ -768,9 +790,9 @@
   <string name="pref_socket_delay_message">Verzögerung vor dem verbinden [0.1 sek]</string>
   <string name="pref_z6_workaround_title">Z6 Workaround</string>
   <string name="pref_z6_workaround_summary">Z6 Workaround Daten-Download</string>
-  <!-- OK string name="pref_crs_title">C R S </string -->
+  <string name="pref_crs_title">Koordinatensystem</string>
   <string name="pref_crs_summary">Koordinatensystem</string>
-  <string name="pref_crs_message">CRS Name eingeben wie in Proj4</string>
+  <string name="pref_crs_message">Name eingeben wie in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Durchschnitt</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string -->
   <string name="pref_plot_screen_title">Skizze</string>
@@ -794,7 +816,7 @@
   <string name="pref_eraseness_title">Löschradius</string>
   <string name="pref_eraseness_message">Radius des Lösch-Tools (Standard: 36px)</string>
   <string name="pref_min_shift_title">Verschieben Sensitivität</string>
-  <string name="pref_min_shift_message">Ignoriert Verschiebungen grösser als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
+  <string name="pref_min_shift_message">Ignoriert Verschiebungen größer als dieser Wert. Verhindert herumspringen bei Multitouch.</string>
   <string name="pref_pointing_title">Radius für Tippen</string>
   <string name="pref_pointing_message">Ein Antippen wird innerhalb dieses Radiuses erkannt in der Punktauswahl.</string>
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
@@ -874,9 +896,9 @@
   <string name="pref_segment_message">Minimaler Abstand zwischen Punkten auf einer Linie</string>
   <string name="pref_linestyle_title">Linientyp</string>
   <string name="pref_linestyle_summary">Linientyp</string>
-  <string name="pref_lineacc_title">Bezier Genauigkeit</string>
-  <string name="pref_lineacc_summary">Bezier Interpolationsgenauigkeit</string>
-  <string name="pref_lineacc_message">Bezier Interpolationsgenauigkeit</string>
+  <string name="pref_lineacc_title">Interpolations-Genauigkeit</string>
+  <string name="pref_lineacc_summary">Interpolationsgenauigkeit</string>
+  <string name="pref_lineacc_message">Interpolationsgenauigkeit</string>
   <string name="pref_linecorner_title">Bezier Eckenerkennung</string>
   <string name="pref_linecorner_summary">Bezier Ecken Schwellwert</string>
   <string name="pref_linecorner_message">Bezier Ecken Schwellwert</string>
@@ -893,8 +915,8 @@
   <string name="pref_error_message">Minimaler Kalibrierungsfehler</string>
   <string name="pref_iter_title">Kalibrierungs-Iterationen</string>
   <string name="pref_iter_summary">Max. Iterationen für die Kalibrierung</string>
-  <string name="pref_iter_dialogtitle">Kalibrierungs-Iterationen</string>
-  <string name="pref_iter_message">Kalibrierungs-Iterationen</string>
+  <string name="pref_iter_dialogtitle">Max. Kalibrierungs-Iterationen</string>
+  <string name="pref_iter_message">Max. Kalibrierungs-Iterationen</string>
   <string name="pref_label_size_title">Beschriftung Schriftgröße</string>
   <string name="pref_label_size_summary">Beschriftung Schriftgröße</string>
   <string name="pref_label_size_message">Beschriftung Schriftgröße</string>
@@ -996,6 +1018,19 @@
   <string name="pref_walls_xstep_title">Abstand Zwischenpunkte</string>
   <string name="pref_walls_xstep_summary">Abstand der automatischen Zwischenpunkte</string>
   <string name="pref_walls_xstep_message">Abstand der automatischen Zwischenpunkte [m]</string>
+
+  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo Factor</string>
+  <string name="pref_algo_min_alpha_message">Min-algo Factor (in [0,1])</string>
+  <string name="pref_algo_min_beta_title">Min-algo beta</string>
+  <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
+  <string name="pref_algo_min_beta_message">Min-algo M dip weight</string>
+  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
+  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
+  <string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string>
+  <string name="pref_algo_min_delta_title">Min-algo delta</string>
+  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
+  <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
   <string name="pref_log_stream_summary">Log Output</string>
   <string name="pref_log_stream_title">Log Output</string>
