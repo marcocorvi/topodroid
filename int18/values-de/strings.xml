@@ -649,6 +649,7 @@
     <string name="help_cover">Winkelverteilung der Kalibrierungsdaten</string>
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
+
 <!-- FIXME_SKETCH_3D -->
     <!-- string name="help_refs_model">View mode</string -->
     <string name="help_one_model">3D-Modell einpassen</string>
@@ -660,7 +661,7 @@
     <string name="help_cut_model">Region ausschneiden</string>
     <string name="help_stretch_model">Region zeichnen</string>
     <!-- string name="help_extrude_model">Extrude region</string -->
-    <string name="help_refine_center">Oberfläche verfeinern im Dreieckszentrum/string>
+    <string name="help_refine_center">Oberfläche verfeinern im Dreieckszentrum</string>
     <string name="help_refine_sides">Oberfläche verfeinern an den Rändern</string>
     <string name="help_refine_point">Oberfläche verfeinern an Punkt</string>
     <string name="help_refine_triangle">Oberfläche verfeinern an den langen Seiten</string>
