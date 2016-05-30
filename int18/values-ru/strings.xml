@@ -200,7 +200,7 @@
     <string name="hidden_add">Скрыть нитку хода до этого пикета</string>
     <string name="hidden_del">Показать среднюю линию</string>
     <string name="splays_toggle">Показать/скрыть бок. замеры</string>
-    <string name="fixed">сохраненный</string>
+    <string name="fixed">фиксированный</string>
     <string name="painted">нарисованный</string>
 
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
