@@ -6,22 +6,22 @@
 <!-- ACCURACY -->
 
      <!-- com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_ACCEL_THR"
+       android:key="DISTOX_ACCEL_PERCENT"
        android:title="@string/pref_accel_thr_title"
        android:summary="@string/pref_accel_thr_summary"
        android:dialogTitle="@string/pref_accel_thr_title"
        android:dialogMessage="@string/pref_accel_thr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="400.0" / -->
+       android:defaultValue="1.0" / -->
 
      <!-- com.topodroid.DistoX.MyEditPreference
-       android:key="DISTOX_MAG_THR"
+       android:key="DISTOX_MAG_PERCENT"
        android:title="@string/pref_mag_thr_title"
        android:summary="@string/pref_mag_thr_summary"
        android:dialogTitle="@string/pref_mag_thr_title"
        android:dialogMessage="@string/pref_mag_thr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="300.0" / -->
+       android:defaultValue="1.0" / -->
 
      <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_DIP_THR"
@@ -30,6 +30,6 @@
        android:dialogTitle="@string/pref_dip_thr_title"
        android:dialogMessage="@string/pref_dip_thr_message"
        android:inputType="numberDecimal"
-       android:defaultValue="3.0" / -->
+       android:defaultValue="2.0" / -->
 
 </PreferenceScreen>

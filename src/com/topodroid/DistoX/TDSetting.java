@@ -63,8 +63,8 @@ class TDSetting
     "DISTOX_SURVEY_STATION",      // 21 DISTOX_SURVEY_STATIONS must not be used
     "DISTOX_UNIT_LENGTH",         // 22
     "DISTOX_UNIT_ANGLE",          // 23
-    "DISTOX_ACCEL_THR",           // 24 shot quality thresholds
-    "DISTOX_MAG_THR",
+    "DISTOX_ACCEL_PERCENT",           // 24 shot quality thresholds
+    "DISTOX_MAG_PERCENT",
     "DISTOX_DIP_THR",             // 26
     "DISTOX_LOOP_CLOSURE",        // 27 whether to close loop
     "DISTOX_CHECK_ATTACHED",      // 28
@@ -378,9 +378,9 @@ class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DATA ACCURACY
-  static float mAccelerationThr = 400; // acceleration threshold (shot quality)
-  static float mMagneticThr     = 300; // magnetic threshold
-  static float mDipThr          = 3;  // dip threshold
+  static float mAccelerationThr = 1; // acceleration threshold (shot quality)
+  static float mMagneticThr     = 1; // magnetic threshold
+  static float mDipThr          = 2; // dip threshold
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // WALLS
 
@@ -618,9 +618,9 @@ class TDSetting
       mUnitAngleStr = "grad";
     }
   
-    mAccelerationThr = tryFloat( prefs, key[k++], "400" );  // DISTOX_ACCEL_THR
-    mMagneticThr     = tryFloat( prefs, key[k++], "300" );  // DISTOX_MAG_THR
-    mDipThr          = tryFloat( prefs, key[k++], "3"   );  // DISTOX_DIP_THR
+    mAccelerationThr = tryFloat( prefs, key[k++], "1" );  // DISTOX_ACCEL_PERCENT
+    mMagneticThr     = tryFloat( prefs, key[k++], "1" );  // DISTOX_MAG_PERCENT
+    mDipThr          = tryFloat( prefs, key[k++], "2"   );  // DISTOX_DIP_THR
 
     mLoopClosure   = prefs.getBoolean( key[k++], false );   // DISTOX_LOOP_CLOSURE
     mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
@@ -852,11 +852,11 @@ class TDSetting
       }
       // TDLog.Log( TDLog.LOG_UNITS, "mUnitAngle changed " + mUnitAngle );
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mAccelerationThr = tryFloat( prefs, k, "400" );    // DISTOX_ACCEL_THR 
+      mAccelerationThr = tryFloat( prefs, k, "1" );    // DISTOX_ACCEL_PERCENT 
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mMagneticThr     = tryFloat( prefs, k, "300" );    // DISTOX_MAG_THR
+      mMagneticThr     = tryFloat( prefs, k, "1" );    // DISTOX_MAG_PERCENT
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mDipThr          = tryFloat( prefs, k, "3" );      // DISTOX_DIP_THR
+      mDipThr          = tryFloat( prefs, k, "2" );      // DISTOX_DIP_THR
   
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_LOOP_CLOSURE
       mLoopClosure   = prefs.getBoolean( k, false );
@@ -1214,8 +1214,8 @@ class TDSetting
     //C if ( name.equals( "DISTOX_SURVEY_STATION" ) 
     //C if ( name.equals( "DISTOX_UNIT_LENGTH" )
     //C if ( name.equals( "DISTOX_UNIT_ANGLE" )
-    if ( name.equals( "DISTOX_ACCEL_THR"      ) ) return parseFloatValue( value, mAccelerationThr, 0 );
-    if ( name.equals( "DISTOX_MAG_THR"        ) ) return parseFloatValue( value, mMagneticThr, 0 );
+    if ( name.equals( "DISTOX_ACCEL_PERCENT"  ) ) return parseFloatValue( value, mAccelerationThr, 0 );
+    if ( name.equals( "DISTOX_MAG_PERCENT"    ) ) return parseFloatValue( value, mMagneticThr, 0 );
     if ( name.equals( "DISTOX_DIP_THR"        ) ) return parseFloatValue( value, mDipThr, 0 );
     //B if ( name.equals( "DISTOX_LOOP_CLOSURE" ) 
     //B if ( name.equals( "DISTOX_CHECK_ATTACHED" )

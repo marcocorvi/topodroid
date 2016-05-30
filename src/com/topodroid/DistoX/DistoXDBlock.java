@@ -307,7 +307,7 @@ public class DistoXDBlock
 
   public String extraString()
   {
-    return String.format(Locale.US, "A %.2f  M %.1f  D %.1f", 
+    return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
       TopoDroidApp.deltaAcc( mAcceleration ), 
       TopoDroidApp.deltaMag( mMagnetic ), 
       TopoDroidApp.deltaDip( mDip ) * TDSetting.mUnitAngle

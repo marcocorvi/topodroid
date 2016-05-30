@@ -246,8 +246,18 @@ public class TopoDroidApp extends Application
   static float mMagneticMean     = 0.0f;
   static float mDipMean          = 0.0f;
 
-  static float deltaAcc( float acc ) { return TDMath.abs( acc - mAccelerationMean ); }
-  static float deltaMag( float mag ) { return TDMath.abs( mag - mMagneticMean ); }
+  static float deltaAcc( float acc )
+  {
+    if ( mAccelerationMean > 0 ) return TDMath.abs( 100*(acc - mAccelerationMean)/mAccelerationMean ); 
+    return 0;
+  }
+
+  static float deltaMag( float mag )
+  {
+    if ( mMagneticMean > 0 ) return TDMath.abs( 100*(mag - mMagneticMean)/mMagneticMean );
+    return 0;
+  }
+
   static float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 
   static boolean isBlockAcceptable( float acc, float mag, float dip )

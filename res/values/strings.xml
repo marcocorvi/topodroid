@@ -790,11 +790,11 @@
   <string name="pref_survey_stations_title">Stations policy</string>
   <string name="pref_survey_stations_summary">Stations automatic naming policy</string>
   <string name="pref_accel_thr_title">Acceleration tolerance</string>
-  <string name="pref_accel_thr_summary">Tolerance over the shots accelerations</string>
-  <string name="pref_accel_thr_message">Tolerance over the shots accelerations</string>
-  <string name="pref_mag_thr_title">Magnetic tolerance</string>
-  <string name="pref_mag_thr_summary">Tolerance over the shots magnetic field</string>
-  <string name="pref_mag_thr_message">Tolerance over the shots magnetic field</string>
+  <string name="pref_accel_thr_summary">Percent tolerance for the shots acceleration</string>
+  <string name="pref_accel_thr_message">Percent tolerance for the shots acceleration</string>
+  <string name="pref_mag_thr_title">Magnetic field tolerance</string>
+  <string name="pref_mag_thr_summary">Percent tolerance for the shots magnetic field</string>
+  <string name="pref_mag_thr_message">Percent tolerance for the shots magnetic field</string>
   <string name="pref_dip_thr_title">Magnetic dip tolerance</string>
   <string name="pref_dip_thr_summary">Tolerance over the shots magnetic dip</string>
   <string name="pref_dip_thr_message">Tolerance over the shots magnetic dip</string>

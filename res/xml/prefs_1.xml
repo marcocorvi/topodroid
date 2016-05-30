@@ -68,6 +68,7 @@
   <Preference
      android:key="DISTOX_IMPORT_EXPORT_PREF"
      android:title="@string/pref_cat_import_export"
+     android:textColor="@color/pref_category"
      />
 
   <Preference
