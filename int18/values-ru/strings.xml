@@ -539,8 +539,8 @@
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или файла съёмки</string>
     <string name="help_symbol">Вкл/Выкл инструментов рисования</string>
-    <string name="help_therion">Therion менеджер</string>
-    <string name="help_database">Просмотр базы данных (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">Therion менеджер</string -->
+    <!-- UNUSED string name="help_database">Просмотр базы данных (SQliteViewer)</string -->
     <string name="help_prefs">Изменить настройки</string>
     <string name="help_log">Вкл/Выкл настройки журнала</string>
     <string name="help_join_survey">Совместная топосъёмка</string>

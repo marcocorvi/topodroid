@@ -114,9 +114,10 @@ public class TopoDroidActivity extends Activity
   private static int izons[] = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
-                          R.drawable.iz_import,
-                          R.drawable.iz_therion,
-                          R.drawable.iz_database
+                          R.drawable.iz_import
+                          // FIXME THMANAGER
+                          // R.drawable.iz_therion,
+                          // R.drawable.iz_database
                           };
 
   private static int menus[] = { 
@@ -130,9 +131,10 @@ public class TopoDroidActivity extends Activity
 
   private static int help_icons[] = { R.string.help_device,
                           R.string.help_add_topodroid,
-                          R.string.help_import,
-                          R.string.help_therion,
-                          R.string.help_database
+                          R.string.help_import
+                          // FIXME THMANAGER
+                          // R.string.help_therion,
+                          // R.string.help_database
                           };
   private static int help_menus[] = {
                           R.string.help_symbol,   
@@ -219,22 +221,23 @@ public class TopoDroidActivity extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         (new ImportDialog( this, this, mApp )).show();
 
-      } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
-        try {
-          intent = new Intent( "ThManager.intent.action.Launch" );
-          // intent.putExtra( "survey", mApp.getSurveyThFile() );
-          startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( this, R.string.no_thmanager, Toast.LENGTH_SHORT ).show();
-        }
-      } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
-        try {
-          intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + TDPath.getDatabase() ) );
-          intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
-          startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( this, R.string.no_db_viewer, Toast.LENGTH_SHORT ).show();
-        }
+      // FIXME THMANAGER
+      // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
+      //   try {
+      //     intent = new Intent( "ThManager.intent.action.Launch" );
+      //     // intent.putExtra( "survey", mApp.getSurveyThFile() );
+      //     startActivity( intent );
+      //   } catch ( ActivityNotFoundException e ) {
+      //     Toast.makeText( this, R.string.no_thmanager, Toast.LENGTH_SHORT ).show();
+      //   }
+      // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
+      //   try {
+      //     intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + TDPath.getDatabase() ) );
+      //     intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
+      //     startActivity( intent );
+      //   } catch ( ActivityNotFoundException e ) {
+      //     Toast.makeText( this, R.string.no_db_viewer, Toast.LENGTH_SHORT ).show();
+      //   }
       }
     }
     // if ( status != mStatus ) {
@@ -736,7 +739,8 @@ public class TopoDroidActivity extends Activity
     int size = mApp.setListViewHeight( mListView );
     MyButton.resetCache( /* mApp, */ size );
 
-    mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
+    // FIXME THMANAGER
+    // mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
     mButton1 = new Button[mNrButton1];
 
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( getResources(), R.drawable.iz_menu ) );

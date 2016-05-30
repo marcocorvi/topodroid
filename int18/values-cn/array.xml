@@ -64,7 +64,7 @@
      <item name="basic">基本模式</item>
      <item name="normal">正常模式</item>
      <item name="advanced">高级模式</item>
-     <item name="experimental">开发模式</item>
+     <item name="expert">开发模式</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 

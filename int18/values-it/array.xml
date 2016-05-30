@@ -55,10 +55,11 @@
   </string-array>
 
   <string-array name="extraButtons">
-     <item name="basic">Basic</item>
-     <item name="normale">Normal</item>
-     <item name="Avanzato">Advanced</item>
-     <item name="Sperimentale">Experimental</item>
+     <item name="basic">Base</item>
+     <item name="normal">Normale</item>
+     <item name="advanced">Avanzato</item>
+     <item name="expert">Esperto</item>
+     <!-- item name="complete">Completo</item -->
   </string-array>
 
   <string-array name="sizeButtons">

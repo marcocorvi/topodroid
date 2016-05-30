@@ -545,8 +545,8 @@
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
     <string name="help_symbol">Attiva/disattiva prototipi grafici</string>
-    <string name="help_therion">App Therion manager</string>
-    <string name="help_database">App database (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">App Therion manager</string -->
+    <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preferenze</string>
     <string name="help_log">Attiva/disattiva opzioni di log</string>
     <!-- OK string name="help_join_survey">Join surveying</string -->

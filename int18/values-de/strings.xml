@@ -567,8 +567,8 @@
     <string name="help_add_topodroid">Neue Vermessung/Kalibrierung starten</string>
     <string name="help_import">Zip oder Datei importieren</string>
     <string name="help_symbol">Zeichenwerkzeuge (de)aktivieren</string>
-    <string name="help_therion">Therion Manager App</string>
-    <string name="help_database">Databanken App (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">Therion Manager App</string -->
+    <!-- UNUSED string name="help_database">Databanken App (SQliteViewer)</string -->
     <string name="help_prefs">Einstellungen bearbeiten</string>
     <string name="help_log">Logging-Einstellungen aktivieren</string>
     <string name="help_join_survey">Vermessungen verbinden</string>

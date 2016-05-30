@@ -90,7 +90,7 @@ public class DataHelper extends DataSetObservable
   private SQLiteStatement updateShotAMDRStmt = null;
   // private SQLiteStatement shiftShotsIdStmt = null;
 
-  private SQLiteStatement updatePlotStmt     = null;
+  // private SQLiteStatement updatePlotStmt     = null;
   private SQLiteStatement updatePlotViewStmt = null;
   private SQLiteStatement updatePlotHideStmt = null;
 
@@ -387,7 +387,7 @@ public class DataHelper extends DataSetObservable
     updateShotAMDRStmt   =
       myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
 
-    updatePlotStmt     = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
+    // updatePlotStmt     = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
     updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
     updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
     // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
@@ -1166,18 +1166,19 @@ public class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return;
     // TDLog.Log( TDLog.LOG_DB, "update Plot: " + pid + "/" + sid + " x " + xoffset + " y " + yoffset + " zoom " + zoom);
-    // StringWriter sw = new StringWriter();
-    // PrintWriter  pw = new PrintWriter( sw );
-    // pw.format( "UPDATE plots set xoffset=%.2f, yoffset=%.2f, zoom=%.2f WHERE surveyId=%d AND id=%d", 
-    //   xoffset, yoffset, zoom, sid, pid );
-    // myDB.execSQL( sw.toString() );
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( "UPDATE plots set xoffset=%.2f, yoffset=%.2f, zoom=%.2f WHERE surveyId=%d AND id=%d", 
+      xoffset, yoffset, zoom, sid, pid );
+    myDB.execSQL( sw.toString() );
 
-    updatePlotStmt.bindDouble( 1, xoffset );
-    updatePlotStmt.bindDouble( 2, yoffset );
-    updatePlotStmt.bindDouble( 3, zoom );
-    updatePlotStmt.bindLong( 4, sid );
-    updatePlotStmt.bindLong( 5, pid );
-    try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plot update", e); }
+    // FIXME with the update statement I get a crash on immediate switching Plan/Profile on load
+    // updatePlotStmt.bindDouble( 1, xoffset );
+    // updatePlotStmt.bindDouble( 2, yoffset );
+    // updatePlotStmt.bindDouble( 3, zoom );
+    // updatePlotStmt.bindLong( 4, sid );
+    // updatePlotStmt.bindLong( 5, pid );
+    // try { updatePlotStmt.execute(); } catch (SQLiteException e) { logError("plot update", e); }
   }
  
   public void updatePlotView( long pid, long sid, String view )

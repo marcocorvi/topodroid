@@ -547,8 +547,8 @@
     <string name="help_add_topodroid">Create new survey/calibration</string>
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_symbol">Enable/disable drawing tools</string>
-    <string name="help_therion">Therion manager app</string>
-    <string name="help_database">Database viewer app (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">Therion manager app</string -->
+    <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Edit preferences</string>
     <string name="help_log">Enable/disable logging settings</string>
     <string name="help_join_survey">Join surveying</string>

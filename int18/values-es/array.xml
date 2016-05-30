@@ -58,7 +58,7 @@
      <item name="basic">Básico</item>
      <item name="normal">Normal</item>
      <item name="advanced">Avanzado</item>
-     <item name="experimental">Experimental</item>
+     <item name="expert">Experimental</item>
   </string-array>
 
   <string-array name="sizeButtons">

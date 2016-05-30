@@ -541,8 +541,8 @@
     <string name="help_add_topodroid">新建测量/新建校准</string>
     <string name="help_import">输入压缩的存档或者测量文件</string>
     <string name="help_symbol">启用/停用绘图工具</string>
-    <string name="help_therion">Therion 管理软件</string>
-    <string name="help_database">数据库查看软件 (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">Therion 管理软件</string -->
+    <!-- UNUSED string name="help_database">数据库查看软件 (SQliteViewer)</string -->
     <string name="help_prefs">编辑参考选项</string>
     <string name="help_log">启用/停用登录设置</string>
     <string name="help_join_survey">加入测量</string>

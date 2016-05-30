@@ -64,7 +64,7 @@
      <item name="basic">Базови</item>
      <item name="normal">Нормални</item>
      <item name="advanced">Пълни</item>
-     <item name="experimental">Експериментални</item>
+     <item name="expert">Експериментални</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 

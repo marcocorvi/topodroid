@@ -494,8 +494,8 @@
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
     <string name="help_symbol">Activar/desactivar los símbolos de dibujo</string>
-    <string name="help_therion">Administrador de aplicación Therion</string>
-    <string name="help_database">Aplicación Database viewer(SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">Administrador de aplicación Therion</string -->
+    <!-- UNUSED string name="help_database">Aplicación Database viewer(SQliteViewer)</string -->
     <string name="help_prefs">Editar preferencias</string>
     <string name="help_log">Activar/desactivar las opciones de registro</string>
     <string name="help_join_survey">Unir dos topografías</string>

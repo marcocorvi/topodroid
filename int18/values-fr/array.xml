@@ -81,7 +81,7 @@
      <item name="basic">Basic</item>
      <item name="normal">Normal</item>
      <item name="advanced">Avancé</item>
-     <item name="experimental">Experimental</item>
+     <item name="expert">Experimental</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
  

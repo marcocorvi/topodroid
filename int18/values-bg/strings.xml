@@ -546,8 +546,8 @@
     <string name="help_add_topodroid">Нова картировка/калибрация</string>
     <string name="help_import">Импортиране на архив/картировка</string>
     <string name="help_symbol">Включване/изключване на инструменти за рисуване</string>
-    <string name="help_therion">Програма Therion мениджър</string>
-    <string name="help_database">Програма за преглеждане на базата данни (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">Програма Therion мениджър</string -->
+    <!-- UNUSED string name="help_database">Програма за преглеждане на базата данни (SQliteViewer)</string -->
     <string name="help_prefs">Настройки</string>
     <string name="help_log">Включване/изключване на лог файловете</string>
     <string name="help_join_survey">Едновременно картиране с две приложения TopoDroid</string>

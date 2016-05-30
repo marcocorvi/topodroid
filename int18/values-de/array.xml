@@ -59,7 +59,7 @@
      <item name="basic">Einfach</item>
      <item name="normal">Normal</item>
      <item name="advanced">Fortgeschritten</item>
-     <item name="experimental">Experimentell</item>
+     <item name="expert">Experimentell</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 
