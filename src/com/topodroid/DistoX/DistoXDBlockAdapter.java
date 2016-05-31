@@ -29,7 +29,8 @@ import java.util.Locale;
 import android.util.Log;
 
 class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
-                          implements OnClickListener, OnLongClickListener
+                          implements OnClickListener
+                                   , OnLongClickListener
 {
   private Context mContext;
   private ShotActivity mParent;
@@ -132,6 +133,8 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
  
   private class ViewHolder
   { 
+    DistoXDBlock blk;
+    int          pos;
     TextView tvId;
     TextView tvFrom;
     TextView tvTo;
@@ -139,16 +142,18 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     TextView tvCompass;
     TextView tvClino;
     TextView tvNote;
-    TextView textView;
   }
 
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
+    DistoXDBlock b = mItems.get( pos );
     ViewHolder holder = null; 
     if ( convertView == null ) {
       convertView = mLayoutInflater.inflate( R.layout.dblock_row, null );
       holder = new ViewHolder();
+      holder.blk       = b;
+      holder.pos       = pos;
       holder.tvId      = (TextView) convertView.findViewById( R.id.id );
       holder.tvFrom    = (TextView) convertView.findViewById( R.id.from );
       holder.tvTo      = (TextView) convertView.findViewById( R.id.to );
@@ -160,7 +165,6 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
-    DistoXDBlock b = mItems.get( pos );
     setViewText( holder, b );
     b.mView = convertView;
     convertView.setVisibility( b.mVisible );
@@ -172,7 +176,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
 
   public int size() { return mItems.size(); }
 
-  private void setViewText( ViewHolder holder, DistoXDBlock b ) 
+  private void setViewText( final ViewHolder holder, DistoXDBlock b ) 
   {
     holder.tvId.setText( String.format( "%1$d", b.mId ) );
 
@@ -186,6 +190,23 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
 
     holder.tvFrom.setOnClickListener( this );
     holder.tvTo.setOnClickListener( this );
+
+    holder.tvLength.setOnClickListener(
+      new OnClickListener() {
+        public void onClick( View v ) { mParent.onBlockClick( holder.blk, holder.pos ); }
+      }
+    );
+    holder.tvCompass.setOnClickListener(
+      new OnClickListener() {
+        public void onClick( View v ) { mParent.onBlockClick( holder.blk, holder.pos ); }
+      }
+    );
+    holder.tvClino.setOnClickListener(
+      new OnClickListener() {
+        public void onClick( View v ) { mParent.onBlockLongClick( holder.blk ); }
+      }
+    );
+
     if ( TDSetting.mLevelOverBasic ) {
       holder.tvFrom.setOnLongClickListener( this );
       holder.tvTo.setOnLongClickListener( this );

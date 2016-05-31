@@ -88,7 +88,7 @@ import android.util.Log;
 
 public class ShotActivity extends Activity
                           implements OnItemClickListener
-                        , OnItemLongClickListener
+                        // , OnItemLongClickListener
                         , OnClickListener
                         , OnLongClickListener
                         , ILister
@@ -444,21 +444,26 @@ public class ShotActivity extends Activity
   // ---------------------------------------------------------------
   // list items click
 
-  @Override 
-  public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
-  {
-    if ( closeMenu() ) return true;
-    if ( CutNPaste.dismissPopupBT() ) return true;
+  // @Override 
+  // public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
+  // {
+  //   if ( closeMenu() ) return true;
+  //   if ( CutNPaste.dismissPopupBT() ) return true;
 
-    TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemLongClick id " + id);
-    DistoXDBlock blk = mDataAdapter.get(pos);
+  //   // TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemLongClick id " + id);
+  //   DistoXDBlock blk = mDataAdapter.get(pos);
+  //   onBlockLongClick( blk, pos );
+  //   return true;
+  // }
+
+  void onBlockLongClick( DistoXDBlock blk )
+  {
     mShotId = blk.mId;
     if ( TDSetting.mLevelOverNormal ) {
       (new PhotoSensorsDialog(this, this, blk ) ).show();
     } else {
       (new ShotDeleteDialog( this, this, blk ) ).show();
     }
-    return true;
   }
 
   private boolean mSkipItemClick = false;
@@ -527,9 +532,14 @@ public class ShotActivity extends Activity
     }
     if ( closeMenu() ) return;
 
-    TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemClick id " + id);
+    // TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemClick id " + id);
     DistoXDBlock blk = mDataAdapter.get(pos);
 
+    onBlockClick( blk, pos );
+  }
+
+  void onBlockClick( DistoXDBlock blk, int pos )
+  {
     mShotPos = pos;
     // mSavePos = pos;
     // mFirstPos = mList.getFirstVisiblePosition();
@@ -779,9 +789,9 @@ public class ShotActivity extends Activity
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
-    mList.setOnItemClickListener( this );
-    mList.setLongClickable( true );
-    mList.setOnItemLongClickListener( this );
+    // mList.setOnItemClickListener( this );
+    // mList.setLongClickable( true );
+    // mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
     // mList.setSmoothScrollbarEnabled( true );
     // mList.setFastScrollAlwaysVisible( true ); // API-11
