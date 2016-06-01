@@ -825,15 +825,15 @@
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
   <string name="pref_survey_stations_title">Strategie Vermessung</string>
   <string name="pref_survey_stations_summary">Automatische Vermessungs-Messpunkte</string>
-  <string name="pref_accel_thr_title">Beschleunigungstoleranz</string>
-  <string name="pref_accel_thr_summary">Toleranz der Messpunkt-Beschleunigung</string>
-  <string name="pref_accel_thr_message">Toleranz der Messpunkt-Beschleunigung</string>
-  <string name="pref_mag_thr_title">Magnetfeldtoleranz</string>
-  <string name="pref_mag_thr_summary">Toleranz des Magnetfeldes</string>
-  <string name="pref_mag_thr_message">Toleranz des Magnetfeldes</string>
-  <string name="pref_dip_thr_title">Magnetische Neigungs-Toleranz</string>
-  <string name="pref_dip_thr_summary">Toleranz der magnetischen Inklination</string>
-  <string name="pref_dip_thr_message">Toleranz der magnetischen Inklination</string>
+  <string name="pref_accel_thr_title">Beschleunigungstoleranz (%)</string>
+  <string name="pref_accel_thr_summary">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren</string>
+  <string name="pref_accel_thr_message">Toleranz gegenüber Durchschnittswert der Beschleunigung um Messung als anomal zu markieren</string>
+  <string name="pref_mag_thr_title">Magnetfeldtoleranz (%)</string>
+  <string name="pref_mag_thr_summary">Toleranz gegenüber Durchschnittswert des Magnetfeldes um Messung als anomal zu markieren</string>
+  <string name="pref_mag_thr_message">Toleranz gegenüber Durchschnittswert der Magnetfeldes um Messung als anomal zu markieren</string>
+  <string name="pref_dip_thr_title">Magnetische Neigungs-Toleranz (%)</string>
+  <string name="pref_dip_thr_summary">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren</string>
+  <string name="pref_dip_thr_message">Toleranz gegenüber Durchschnittswert der magnetischen Inklination um Messung als anomal zu markieren</string>
 
   <string name="pref_leg_title">Messzug Toleranz</string>
   <string name="pref_leg_summary">Toleranz zwischen Messungen eines Messzugs</string>
