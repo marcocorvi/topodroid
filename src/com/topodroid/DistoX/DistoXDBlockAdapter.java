@@ -152,7 +152,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     if ( convertView == null ) {
       convertView = mLayoutInflater.inflate( R.layout.dblock_row, null );
       holder = new ViewHolder();
-      holder.blk       = b;
+      holder.blk       = null;
       holder.pos       = pos;
       holder.tvId      = (TextView) convertView.findViewById( R.id.id );
       holder.tvFrom    = (TextView) convertView.findViewById( R.id.from );
@@ -165,6 +165,12 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
+
+    if ( holder.blk != null ) {
+      holder.blk.mView = null;
+    }
+    holder.blk = b;
+
     setViewText( holder, b );
     b.mView = convertView;
     convertView.setVisibility( b.mVisible );
@@ -176,7 +182,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
 
   public int size() { return mItems.size(); }
 
-  private void setViewText( final ViewHolder holder, DistoXDBlock b ) 
+  private void setViewText( final ViewHolder holder, DistoXDBlock b )
   {
     holder.tvId.setText( String.format( "%1$d", b.mId ) );
 
@@ -279,6 +285,29 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     return null;
   }
 
+  private void updateBlocksName( )
+  {
+    for ( DistoXDBlock b : mItems ) {
+      if ( b.mType == DistoXDBlock.BLOCK_MAIN_LEG ) {
+        View v = b.mView;
+        if ( v != null ) {
+          ViewHolder holder = (ViewHolder) v.getTag();
+          if ( holder != null ) {
+            holder.tvFrom.setTextColor( b.color() );
+            holder.tvTo.setTextColor( b.color() );
+            if ( mParent.isCurrentStationName( b.mFrom ) ) {
+              holder.tvFrom.setTextColor( 0xff00ff00 );
+            } else if ( mParent.isCurrentStationName( b.mTo ) ) {
+              holder.tvTo.setTextColor( 0xff00ff00 );
+            }
+          }
+          v.setVisibility( b.mVisible );
+          v.invalidate();
+        }
+      }
+    }
+  }
+
 
   public void onClick(View view)
   {
@@ -296,6 +325,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
       if ( tv != null ) {
         String st = tv.getText().toString();
         mParent.setCurrentStationName( st );
+        updateBlocksName();
       }
       return true;
     }

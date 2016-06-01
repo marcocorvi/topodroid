@@ -315,7 +315,7 @@ public class ShotActivity extends Activity
   { 
     mSkipItemClick = true;
     mApp.setCurrentStationName( st ); 
-    updateDisplay( );
+    // updateDisplay( );
   }
 
   // add a block to the adapter (ILister interface)

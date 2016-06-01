@@ -40,18 +40,50 @@ class TDConst
   static final int DISTOX_EXPORT_ZIP = 20;
 
   static final String[] mSurveyExportTypes = { "ZIP", 
-                            "Compass", "cSurvey", "PocketTopo", "Survex", "Therion", "VisualTopo", "Walls", 
-                            "CSV", "DXF", "KML", "OziExplorer", "Polygon", "Topo" };
+    "Compass",
+    // FIXME CSX_EXPORT "cSurvey",
+    "PocketTopo",
+    "Polygon",
+    "Survex",
+    "Therion",
+    "Topo",
+    "VisualTopo",
+    "Walls", 
+    "CSV",
+    "DXF",
+    "KML",
+    "OziExplorer"
+  };
   static final int[] mSurveyExportIndex = { 20, 
-                            DISTOX_EXPORT_DAT, DISTOX_EXPORT_CSX, DISTOX_EXPORT_TOP,
-                            DISTOX_EXPORT_SVX, DISTOX_EXPORT_TH,
-                            DISTOX_EXPORT_TRO, DISTOX_EXPORT_SRV,
-                            DISTOX_EXPORT_CSV, DISTOX_EXPORT_DXF,
-                            DISTOX_EXPORT_KML, DISTOX_EXPORT_PLT, DISTOX_EXPORT_PLG, DISTOX_EXPORT_CAV };
+    DISTOX_EXPORT_DAT,
+    // FIXME CSX_EXPORT DISTOX_EXPORT_CSX,
+    DISTOX_EXPORT_TOP,
+    DISTOX_EXPORT_PLG,
+    DISTOX_EXPORT_SVX,
+    DISTOX_EXPORT_TH,
+    DISTOX_EXPORT_CAV,
+    DISTOX_EXPORT_TRO,
+    DISTOX_EXPORT_SRV,
+    DISTOX_EXPORT_CSV,
+    DISTOX_EXPORT_DXF,
+    DISTOX_EXPORT_KML,
+    DISTOX_EXPORT_PLT
+  };
 
-  static final String[] mPlotExportTypes = { "Therion", "cSurvey", "DXF", "SVG", "PNG" };
+  static final String[] mPlotExportTypes = {
+      "Therion",
+      "cSurvey",
+      "DXF",
+      "SVG",
+      "PNG"
+  };
   static final int[] mPlotExportIndex = {
-    DISTOX_EXPORT_TH2, DISTOX_EXPORT_CSX, DISTOX_EXPORT_DXF, DISTOX_EXPORT_SVG, DISTOX_EXPORT_PNG };
+    DISTOX_EXPORT_TH2,
+    DISTOX_EXPORT_CSX,
+    DISTOX_EXPORT_DXF,
+    DISTOX_EXPORT_SVG,
+    DISTOX_EXPORT_PNG
+  };
 
   static final String[] mCalibExportTypes = { "CSV" };
   static final int[] mCalibExportIndex = { DISTOX_EXPORT_CSV };
