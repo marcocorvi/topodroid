@@ -426,7 +426,7 @@
     <!-- UNUSED string name="ask_close">Затваряне на TopoDroid?</string -->
     <string name="ask_reset">Изчистване на паметта на DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
-    <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
+    <string name="ask_gps_service">Избор на GPS услуга?</string>
 
 
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->
@@ -775,12 +775,12 @@
   <string name="pref_closeness_title">Радиус при избиране</string>
   <!-- UNUSED string name="pref_closeness_summary">Радиус за избиране на елемент от скицата</string -->
   <string name="pref_closeness_message">Радиус за избиране на елемент от скицата</string>
-  <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
-  <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
-  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
-  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
-  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
-  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
+  <string name="pref_eraseness_title">Радиус за изтриване</string>
+  <string name="pref_eraseness_message">Радиус на гумата при триене в скицата</string>
+  <string name="pref_min_shift_title">Чувствителност при преместване</string>
+  <string name="pref_min_shift_message">Чувствителностс при скролиране на скицата</string>
+  <string name="pref_pointing_title">Радиус при преместване</string>
+  <string name="pref_pointing_message">Радиус на повторно натискане за преместване на елемент</string>
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
