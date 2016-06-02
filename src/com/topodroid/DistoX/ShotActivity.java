@@ -1418,12 +1418,15 @@ public class ShotActivity extends Activity
     // FIXME NOTIFY
   }
 
-  void recomputeItems( String st )
+  void recomputeItems( String st, int pos )
   {
-    if ( ! mShowSplay.remove( st ) ) {
-      mShowSplay.add( st );
+    if ( mSplay ) {
+      if ( ! mShowSplay.remove( st ) ) {
+        mShowSplay.add( st );
+      }
+      updateDisplay( );
+      mList.setSelection( (pos>5)? pos-5 : 0 );
     }
-    updateDisplay( );
   }
 
   private boolean showSplaysContains( String name ) 

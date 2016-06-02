@@ -29,8 +29,8 @@ import java.util.Locale;
 import android.util.Log;
 
 class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
-                          implements OnClickListener
-                                   , OnLongClickListener
+                          implements OnLongClickListener
+                                   // , OnClickListener
 {
   private Context mContext;
   private ShotActivity mParent;
@@ -194,24 +194,21 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     holder.tvClino.setText(   String.format(Locale.US, "%1$.1f", b.mClino * TDSetting.mUnitAngle ) );
     holder.tvNote.setText( b.toNote() );
 
-    holder.tvFrom.setOnClickListener( this );
-    holder.tvTo.setOnClickListener( this );
-
-    holder.tvLength.setOnClickListener(
-      new OnClickListener() {
+    OnClickListener toggle = new OnClickListener() {
+        public void onClick( View v ) { mParent.recomputeItems( ((TextView)v).getText().toString(), holder.pos ); }
+    };
+    OnClickListener edit1 = new OnClickListener() {
         public void onClick( View v ) { mParent.onBlockClick( holder.blk, holder.pos ); }
-      }
-    );
-    holder.tvCompass.setOnClickListener(
-      new OnClickListener() {
-        public void onClick( View v ) { mParent.onBlockClick( holder.blk, holder.pos ); }
-      }
-    );
-    holder.tvClino.setOnClickListener(
-      new OnClickListener() {
+    };
+    OnClickListener edit2 = new OnClickListener() {
         public void onClick( View v ) { mParent.onBlockLongClick( holder.blk ); }
-      }
-    );
+    };
+    holder.tvFrom.setOnClickListener( toggle );
+    holder.tvTo.setOnClickListener( toggle );
+    holder.tvLength.setOnClickListener( edit1 );
+    holder.tvCompass.setOnClickListener( edit1 );
+    holder.tvClino.setOnClickListener( edit2 );
+    holder.tvNote.setOnClickListener( edit2 );
 
     if ( TDSetting.mLevelOverBasic ) {
       holder.tvFrom.setOnLongClickListener( this );
@@ -308,15 +305,13 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     }
   }
 
-
-  public void onClick(View view)
-  {
-    TextView tv = (TextView) view;
-    if ( tv != null ) {
-      String st = tv.getText().toString();
-      mParent.recomputeItems( st );
-    }
-  }
+  // public void onClick(View view)
+  // {
+  //   TextView tv = (TextView) view;
+  //   if ( tv != null ) {
+  //     mParent.recomputeItems( tv.getText().toString() );
+  //   }
+  // }
 
   public boolean onLongClick( View view ) 
   {
