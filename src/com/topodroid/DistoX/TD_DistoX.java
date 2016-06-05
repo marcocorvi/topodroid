@@ -330,11 +330,11 @@ public class TD_DistoX
     M.z = (float)(Math.random()*2-1) * TopoDroidUtil.FV / 2;
     float dist = 2000 + 6000 * (float)Math.random();
     ++ mSplay;
-    if ( mSplay == 4 ) {
+    if ( mSplay == 6 ) {
       gx = G.x; gy = G.y; gz = G.z;
       mx = M.x; my = M.y; mz = M.z;
       d0 = dist;
-    } else if ( mSplay > 4 ) {
+    } else if ( mSplay > 6 ) {
       G.x = gx + 0.005f * G.x;
       G.y = gy + 0.005f * G.y;
       G.z = gz + 0.005f * G.z;
@@ -342,7 +342,7 @@ public class TD_DistoX
       M.y = my + 0.005f * M.y;
       M.z = mz + 0.005f * M.z;
       dist = d0 + (dist - 5000)/60; // +/- 50 mm
-      if ( mSplay > 6 ) mSplay = 0;
+      if ( mSplay > 7 ) mSplay = 0;
     }
     return dist;
   }
@@ -384,6 +384,7 @@ public class TD_DistoX
 
     float xg = vg.x; // (1,0,0) * vg
     float clino = (float)( Math.acos( xg ) ) * TDMath.RAD2GRAD;
+    if ( clino > 90 ) clino -= 180;
     Vector vh = new Vector( 1-xg*vg.x, 0-xg*vg.y, 0-xg*vg.z ); // X - (X*G) G = proj of X on E-N plane
     float azimuth = (float)( Math.atan2( vh.dot(ve), vh.dot(vn) ) ) * TDMath.RAD2GRAD;
     if ( azimuth < 0 ) azimuth += 360;
