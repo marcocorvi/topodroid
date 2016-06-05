@@ -34,6 +34,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.DialogInterface;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -270,6 +271,9 @@ public class DeviceActivity extends Activity
     // TDLog.Log(TDLog.LOG_MAIN, "updateList" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
+    if ( TDSetting.mLevelOverExperimental ) { // FIXME TD_DistoX
+      mArrayAdapter.add( "X000" );
+    }
     if ( mApp.mBTAdapter != null ) {
       Set<BluetoothDevice> device_set = mApp.mBTAdapter.getBondedDevices(); // get paired devices
       if ( device_set.isEmpty() ) {
@@ -326,9 +330,11 @@ public class DeviceActivity extends Activity
       StringBuffer buf = new StringBuffer( item );
       int k = buf.lastIndexOf(" ");
       String[] vals = item.toString().split(" ", 3 );
+      String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
+      // String address = vals[2]; // FIXME TD_DistoX
+
       // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
-      String address = vals[2]; // buf.substring(k+1);
       if ( mDevice == null || ! ( address.equals( mDevice.mAddress ) || address.equals( mDevice.mNickname ) ) ) {
         mApp.setDevice( address );
         mDevice = mApp.mDevice;
@@ -695,6 +701,7 @@ public class DeviceActivity extends Activity
     if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
     mMenuAdapter.add( res.getString( menus[5] ) );
+    // mMenuAdapter.add( res.getString( menus[6] ) ); // SERVER
     // CALIB_RESET
     // if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[6] ) );
     mMenu.setAdapter( mMenuAdapter );
@@ -787,6 +794,7 @@ public class DeviceActivity extends Activity
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
     String item_str = (String) mArrayAdapter.getItem(pos); // "model name addr"
+    if ( item_str.equals("X000") ) return true;
     String vals[] = item_str.split(" ", 3);
     String address = vals[2]; // address or nickname
     Device device = mApp.mDData.getDevice( address );

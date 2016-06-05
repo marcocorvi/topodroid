@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 import java.nio.ByteBuffer;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.EOFException;
 import java.io.UnsupportedEncodingException;
@@ -326,11 +328,18 @@ public class DistoXComm extends TopoDroidComm
         // TDLog.Log( TDLog.LOG_BT, "device not paired. state " + mBTDevice.getBondState() );
       }
 
+      mProtocol = null;
       if ( mBTSocket != null ) {
         // TDLog.Log( TDLog.LOG_COMM, "create Socket OK");
         // mBTSocket.setSoTimeout( 200 ); // BlueToothSocket does not have timeout 
-        mProtocol = new DistoXProtocol( mBTSocket, mApp.mDevice );
-        mAddress = address;
+        try {
+          DataInputStream in   = new DataInputStream( mBTSocket.getInputStream() );
+          DataOutputStream out = new DataOutputStream( mBTSocket.getOutputStream() );
+          mProtocol = new DistoXProtocol( in, out, mApp.mDevice );
+          mAddress = address;
+        } catch ( IOException e ) {
+          mAddress = null;
+        }
       } else {
         TDLog.Error( "create Socket fail");
         if ( mProtocol != null ) mProtocol.closeIOstreams();

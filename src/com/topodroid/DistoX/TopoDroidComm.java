@@ -222,6 +222,7 @@ public class TopoDroidComm
 
   protected void cancelRfcommThread()
   {
+    // TDLog.Log( TDLog.LOG_COMM, "TD_DistoX comm cancel Rfcomm thread");
     if ( mRfcommThread != null ) {
       // TDLog.Log( TDLog.LOG_COMM, "cancel Rfcomm thread: thread is active");
       mRfcommThread.cancelWork();
@@ -243,11 +244,15 @@ public class TopoDroidComm
 
   protected void closeProtocol()
   {
+    // TDLog.Log( TDLog.LOG_COMM, "TD_DistoX comm close protocol");
     // if ( mProtocol != null ) mProtocol.closeIOstreams();
     mProtocol = null;
   }
 
-  protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) { return false; }
+  protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) 
+  {
+    return false;
+  }
 
   public void disconnectRemoteDevice( )
   {
@@ -260,11 +265,12 @@ public class TopoDroidComm
 
   protected boolean sendCommand( int cmd )
   {
+    // TDLog.Log( TDLog.LOG_COMM, "TD_DistoX comm send cmd " + cmd );
     boolean ret = false;
     if ( mProtocol != null ) {
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
         ret |= mProtocol.sendCommand( (byte)cmd ); 
-        TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
+        // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
         try {
           Thread.sleep( 100 );
         } catch ( InterruptedException e ) {
@@ -295,14 +301,20 @@ public class TopoDroidComm
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
-  public boolean connectDevice( String address, Handler /* ILister */ lister ) { return false; }
+  public boolean connectDevice( String address, Handler /* ILister */ lister ) 
+  {
+    return false;
+   }
 
   public void disconnect() { }
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  public int downloadData( String address, Handler /* ILister */ lister ) { return -1; }
+  public int downloadData( String address, Handler /* ILister */ lister )
+  {
+    return -1;
+  }
 
   // ====================================================================================
   // FIRMWARE

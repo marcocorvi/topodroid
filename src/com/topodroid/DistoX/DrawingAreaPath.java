@@ -118,6 +118,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       }
 
       DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible );
+      ret.mOrientation = orientation;
       // setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
 
       int has_cp;

@@ -202,6 +202,9 @@ public class TopoDroidApp extends Application
   int    distoType() { return (mDevice == null)? 0 : mDevice.mType; }
   String distoAddress() { return (mDevice == null)? null : mDevice.mAddress; }
 
+
+  TD_DistoX mTD_DistoX = new TD_DistoX();
+
   // -------------------------------------------------------------------------------------
   // static SIZE methods
 
@@ -356,6 +359,9 @@ public class TopoDroidApp extends Application
         } else if ( model == Device.DISTO_X310 ) {
           mDData.updateDeviceModel( device.mAddress, "DistoX-0000" );
           device.mType = model;
+        } else if ( model == Device.DISTO_X000 ) {
+          mDData.updateDeviceModel( device.mAddress, "DistoX0" );
+          device.mType = model;
         }
       }
     }
@@ -376,9 +382,7 @@ public class TopoDroidApp extends Application
 
   public void resetComm() 
   { 
-    mComm.disconnectRemoteDevice( );
-    mComm = null;
-    mComm = new DistoXComm( this );
+    createComm();
     mDataDownloader.onStop(); // mDownload = false;
   }
 
@@ -503,6 +507,19 @@ public class TopoDroidApp extends Application
     // TDLog.Debug("ready");
   }
 
+  private void createComm()
+  {
+    if ( mComm != null ) {
+      mComm.disconnectRemoteDevice( );
+      mComm = null;
+    }
+    if ( mDevice != null && mDevice.mAddress.equals( Device.ZERO_ADDRESS ) ) {
+      mComm = new TD_DistoXComm( this, mTD_DistoX );
+    } else { 
+      mComm = new DistoXComm( this );
+    }
+  }
+
   @Override
   public void onCreate()
   {
@@ -552,7 +569,10 @@ public class TopoDroidApp extends Application
     //   // return;
     // }
     // TDLog.Profile("TDApp comm");
-    mComm = new DistoXComm( this );
+
+    // Log.v("TD_DistoX", "TDapp on create");
+    // createComm();
+
     mListerSet = new ListerSetHandler();
     mDataDownloader = new DataDownloader( this, this );
 
@@ -1076,11 +1096,21 @@ public class TopoDroidApp extends Application
 
   void setDevice( String address ) 
   { 
+    // Log.v("TD_DistoX", "TDapp set device address " + address );
     if ( address == null ) {
+      if ( mTD_DistoX != null ) mTD_DistoX.stopServer( this );
       mDevice = null;
       address = "";
+    } else if ( address.equals( Device.ZERO_ADDRESS )  ) {
+      if ( mTD_DistoX != null ) mTD_DistoX.startServer( this );
+      boolean create = ( mDevice == null || ! address.equals( mDevice.mAddress ) );
+      mDevice = new Device( address, "DistoX0", "X000", null );
+      if ( create ) createComm();
     } else {
+      if ( mTD_DistoX != null ) mTD_DistoX.stopServer( this );
+      boolean create = ( mDevice == null || mDevice.mAddress.equals( Device.ZERO_ADDRESS ) );
       mDevice = mDData.getDevice( address );
+      if ( create ) createComm();
     }
     if ( mPrefs != null ) {
       Editor editor = mPrefs.edit();

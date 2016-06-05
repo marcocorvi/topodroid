@@ -25,6 +25,7 @@ import java.util.UUID;
 import java.util.List;
 import java.util.Locale;
 import java.lang.reflect.Field;
+import java.net.Socket;
 
 import android.os.CountDownTimer;
 
@@ -44,7 +45,8 @@ public class DistoXProtocol
   private Device mDevice;
   // private DistoX mDistoX;
   // private BluetoothDevice  mBTDevice;
-  private BluetoothSocket  mSocket = null;
+  // private BluetoothSocket  mSocket = null;
+  private Socket  mSocket = null;
   private DataInputStream  mIn;
   private DataOutputStream mOut;
   private byte[] mHeadTailA3;  // head/tail for Protocol A3
@@ -94,24 +96,7 @@ public class DistoXProtocol
 
 //------------------------------------------------------
 
-  // UNUSED
-  // private InputStream extractCoreInputStream( InputStream in )
-  // {
-  //   try {
-  //     Field f = FilterInputStream.class.getDeclaredField("in");
-  //     f.setAccessible( true );
-  //     while ( in instanceof FilterInputStream ) {
-  //       in = (InputStream) f.get( (FilterInputStream)in );
-  //     }
-  //   } catch ( NoSuchFieldException e ) {
-  //     return in;
-  //   } catch( IllegalAccessException e ) {
-  //     return in;
-  //   }
-  //   return in;
-  // }
-
-  private int getAvailable( final InputStream in, long timeout, int maxtimeout ) throws IOException
+  private int getAvailable( long timeout, int maxtimeout ) throws IOException
   {
     mMaxTimeout = maxtimeout;
     final int[] dataRead = {0};
@@ -124,7 +109,7 @@ public class DistoXProtocol
         try {
           // synchronized( dataRead ) 
           {
-            count[0] = in.read( mBuffer, dataRead[0], toRead[0] );
+            count[0] = mIn.read( mBuffer, dataRead[0], toRead[0] );
             toRead[0]   -= count[0];
             dataRead[0] += count[0];
           }
@@ -177,10 +162,10 @@ public class DistoXProtocol
 
 //-----------------------------------------------------
 
-  public DistoXProtocol( BluetoothSocket socket, Device device )
+  public DistoXProtocol( DataInputStream in, DataOutputStream out, Device device )
   {
     mDevice = device;
-    mSocket = socket;
+    // mSocket = socket;
     // mDistoX = distox;
     mSeqBit = (byte)0xff;
 
@@ -203,16 +188,18 @@ public class DistoXProtocol
 
     // mBuffer = new byte[8];
   
-    try {
-      if ( mSocket != null ) {
-        // mIn  = new DataInputStream( extractCoreInputStream( mSocket.getInputStream() ) );
-        mIn  = new DataInputStream( mSocket.getInputStream() );
-        mOut = new DataOutputStream( mSocket.getOutputStream() );
-      }
-    } catch ( IOException e ) {
-      // NOTE socket is null there is nothing we can do
-      TDLog.Error( "Proto cstr conn failed " + e.getMessage() );
-    }
+    // try {
+    //   if ( mSocket != null ) {
+    //     // mIn  = new DataInputStream( extractCoreInputStream( mSocket.getInputStream() ) );
+    //     mIn  = new DataInputStream( mSocket.getInputStream() );
+    //     mOut = new DataOutputStream( mSocket.getOutputStream() );
+    //   }
+    // } catch ( IOException e ) {
+    //   // NOTE socket is null there is nothing we can do
+    //   TDLog.Error( "Proto cstr conn failed " + e.getMessage() );
+    // }
+    mIn  = in;
+    mOut = out;
   }
 
   public void closeIOstreams()
@@ -252,7 +239,7 @@ public class DistoXProtocol
         // double r = (mBuffer[7] & 0xff);
         double r = r7;
 
-        if ( mDevice.mType == Device.DISTO_A3 ) {
+        if ( mDevice.mType == Device.DISTO_A3 || mDevice.mType == Device.DISTO_X000) {
           mDistance = d / 1000.0;
         } else if ( mDevice.mType == Device.DISTO_X310 ) {
           if ( d < 99999 ) {
@@ -323,7 +310,8 @@ public class DistoXProtocol
 
   public int readPacket( boolean no_timeout ) 
   {
-    // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet no-timeout " + no_timeout );
+    // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet no-timeout " + (no_timeout?"no":"yes") );
+    // Log.v( "TD_DistoX", "Proto read packet no-timeout " + (no_timeout?"no":"yes") );
     try {
       final int maxtimeout = 8;
       int timeout = 0;
@@ -333,12 +321,13 @@ public class DistoXProtocol
         available = 8;
       } else { // do timeout
         if ( TDSetting.mZ6Workaround ) {
-          available = getAvailable( mIn, 200, 2*maxtimeout );
+          available = getAvailable( 200, 2*maxtimeout );
         } else {
           while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) {
             ++ timeout;
             try {
               // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
+              // Log.v( "TD_DistoX", "Proto read packet sleep " + timeout + "/" + maxtimeout );
               Thread.sleep( 100 );
             } catch (InterruptedException e ) {
               TDLog.Error( "Proto read packet InterruptedException" + e.toString() );
@@ -347,11 +336,14 @@ public class DistoXProtocol
         }
       }
       // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet available " + available );
-      if ( available > 0 ) {
+      // Log.v( "TD_DistoX", "Proto read packet available " + available );
+      // if ( available > 0 ) 
+      if ( available >= 8 ) {
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
         }
         byte seq  = (byte)(mBuffer[0] & 0x80); // sequence bit
+        // Log.v( "TD_DistoX", "read packet seq bit " + String.format("%02x %02x %02x", mBuffer[0], seq, mSeqBit ) );
         boolean ok = ( seq != mSeqBit );
         mSeqBit = seq;
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet

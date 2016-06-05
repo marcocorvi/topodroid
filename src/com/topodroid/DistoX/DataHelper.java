@@ -576,7 +576,9 @@ public class DataHelper extends DataSetObservable
 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d", d, b, c, sid, id );
+    pw.format( Locale.US,
+               "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
+               d, b, c, sid, id );
     try {
       myDB.execSQL( sw.toString() );
       if ( forward ) { // synchronized( mListeners )
@@ -604,11 +606,11 @@ public class DataHelper extends DataSetObservable
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
     // if ( comment != null ) {
-    //   pw.format(
+    //   pw.format( Locale.US,
 // "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d, comment=\"%s\" WHERE surveyId=%d AND id=%d",
     //      fStation, tStation, extend, flag, leg, comment, sid, id );
     // } else {
-    //   pw.format(
+    //   pw.format( Locale.US,
     //   "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d WHERE surveyId=%d AND id=%d",
     //      fStation, tStation, extend, flag, leg, sid, id );
     // }
@@ -654,7 +656,7 @@ public class DataHelper extends DataSetObservable
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( "UPDATE shots SET id=id+1 where surveyId=%d and id>=%d", sid, id );
+    pw.format( Locale.US, "UPDATE shots SET id=id+1 where surveyId=%d and id>=%d", sid, id );
     try { myDB.execSQL( sw.toString() ); } catch (SQLiteException e) { logError("Shift id " + id, e); }
 
     // shiftShotsIdStmt.bindLong(1, sid);
@@ -679,7 +681,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return;
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
-    // pw.format( "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
+    // pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
     //            fStation, tStation, sid, id );
     // myDB.execSQL( sw.toString() );
 
@@ -706,7 +708,7 @@ public class DataHelper extends DataSetObservable
 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
+    pw.format( Locale.US, "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
     try {
       myDB.execSQL( sw.toString() );
       if ( forward ) { // synchronized( mListeners )
@@ -721,7 +723,7 @@ public class DataHelper extends DataSetObservable
 
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
-    // pw.format( "UPDATE shots SET extend=%d WHERE surveyId=%d AND id=%d", extend, sid, id );
+    // pw.format( Locale.US, "UPDATE shots SET extend=%d WHERE surveyId=%d AND id=%d", extend, sid, id );
     // myDB.execSQL( sw.toString() );
 
     updateShotExtendStmt.bindLong( 1, extend );
@@ -745,7 +747,7 @@ public class DataHelper extends DataSetObservable
 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format( "UPDATE shots SET flag=%d WHERE surveyId=%d AND id=%d", flag, sid, id );
+    pw.format( Locale.US, "UPDATE shots SET flag=%d WHERE surveyId=%d AND id=%d", flag, sid, id );
     try {
       myDB.execSQL( sw.toString() );
       if ( forward ) { // synchronized( mListeners )
@@ -760,7 +762,7 @@ public class DataHelper extends DataSetObservable
     if ( comment == null ) comment = "";
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
-    // pw.format( "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
+    // pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
     // myDB.execSQL( sw.toString() );
 
     updateShotCommentStmt.bindString( 1, comment );
@@ -937,8 +939,9 @@ public class DataHelper extends DataSetObservable
 
     // StringWriter sw = new StringWriter();
     // PrintWriter pw  = new PrintWriter( sw );
-    // pw.format( "UPDATE shots SET acceleration=%.6f, magnetic=%.6f, dip=%.4f, roll=%.6f WHERE surveyId=%d AND id=%d",
-    //   acc, mag, dip, r, sid, id );
+    // pw.format( Locale.US,
+    //            "UPDATE shots SET acceleration=%.6f, magnetic=%.6f, dip=%.4f, roll=%.6f WHERE surveyId=%d AND id=%d",
+    //            acc, mag, dip, r, sid, id );
     // myDB.execSQL( sw.toString() );
 
     updateShotAMDRStmt.bindDouble( 1, acc );
@@ -1168,8 +1171,9 @@ public class DataHelper extends DataSetObservable
     // TDLog.Log( TDLog.LOG_DB, "update Plot: " + pid + "/" + sid + " x " + xoffset + " y " + yoffset + " zoom " + zoom);
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
-    pw.format( "UPDATE plots set xoffset=%.2f, yoffset=%.2f, zoom=%.2f WHERE surveyId=%d AND id=%d", 
-      xoffset, yoffset, zoom, sid, pid );
+    pw.format( Locale.US,
+               "UPDATE plots set xoffset=%.2f, yoffset=%.2f, zoom=%.2f WHERE surveyId=%d AND id=%d", 
+               xoffset, yoffset, zoom, sid, pid );
     myDB.execSQL( sw.toString() );
 
     // FIXME with the update statement I get a crash on immediate switching Plan/Profile on load
@@ -1189,7 +1193,7 @@ public class DataHelper extends DataSetObservable
     if ( view == null ) view = "";
     // StringWriter sw = new StringWriter();
     // PrintWriter  pw = new PrintWriter( sw );
-    // pw.format( "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
+    // pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
     // myDB.execSQL( sw.toString() );
 
     updatePlotViewStmt.bindString( 1, view );
@@ -1205,7 +1209,7 @@ public class DataHelper extends DataSetObservable
     if ( hide == null ) hide = "";
     // StringWriter sw = new StringWriter();
     // PrintWriter  pw = new PrintWriter( sw );
-    // pw.format( "UPDATE plots set hide=\"%s\" WHERE surveyId=%d AND id=%d", hide, sid, pid );
+    // pw.format( Locale.US, "UPDATE plots set hide=\"%s\" WHERE surveyId=%d AND id=%d", hide, sid, pid );
     // myDB.execSQL( sw.toString() );
 
     updatePlotHideStmt.bindString( 1, hide );
@@ -3416,7 +3420,7 @@ public class DataHelper extends DataSetObservable
      if (cursor.moveToFirst()) {
        // StringWriter sw = new StringWriter();
        // PrintWriter  pw = new PrintWriter( sw );
-       // pw.format( "UPDATE stations SET comment=\"%s\", flag=%d WHERE surveyId=%d AND name=\"%s\"",
+       // pw.format( Locale.US, "UPDATE stations SET comment=\"%s\", flag=%d WHERE surveyId=%d AND name=\"%s\"",
        //            comment, flag, sid, name );
        // myDB.execSQL( sw.toString() );
 
@@ -3479,7 +3483,7 @@ public class DataHelper extends DataSetObservable
    {
      StringWriter sw = new StringWriter();
      PrintWriter  pw = new PrintWriter( sw );
-     pw.format( "DELETE FROM stations WHERE surveyId=%d AND name=\"%s\"", sid, name );
+     pw.format( Locale.US, "DELETE FROM stations WHERE surveyId=%d AND name=\"%s\"", sid, name );
      try { myDB.execSQL( sw.toString() ); }
      catch ( SQLiteException e ) { logError("station delete", e ); }
 
