@@ -533,9 +533,8 @@ public class ShotActivity extends Activity
     if ( closeMenu() ) return;
 
     // TDLog.Log( TDLog.LOG_INPUT, "ShotActivity onItemClick id " + id);
-    DistoXDBlock blk = mDataAdapter.get(pos);
-
-    onBlockClick( blk, pos );
+    // DistoXDBlock blk = mDataAdapter.get(pos); // this is done by the DistoXDBlockAdapter
+    // onBlockClick( blk, pos );
   }
 
   void onBlockClick( DistoXDBlock blk, int pos )
