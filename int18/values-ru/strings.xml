@@ -200,7 +200,7 @@
     <string name="hidden_add">Скрыть нитку хода до этого пикета</string>
     <string name="hidden_del">Показать среднюю линию</string>
     <string name="splays_toggle">Показать/скрыть бок. замеры</string>
-    <string name="fixed">фиксированный</string>
+    <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
@@ -643,7 +643,7 @@
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редактировать</string>
     <string name="title_erase">Удалить</string>
-    <string name="title_fixed">Фиксированные точки</string>
+    <string name="title_fixed">Гео-привязанные точки</string>
     <string name="title_fixed_edit">Редактировать местоположение</string>
     <string name="title_fixed_import">Импортировать фиксированную точку</string>
     <string name="title_fixed_gps">Фиксированная точка: GPS</string>

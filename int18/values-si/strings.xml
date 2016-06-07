@@ -6,7 +6,7 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Klikni ponovno nazaj za izhod</string>
 
-    <string name="version_ask">Posodobitev topodroida na novejšo različico.\Želite reinstalirati orodje za risanje?</string>
+    <string name="version_ask">Posodobitev topodroida na novejšo različico.\nŽelite reinstalirati orodje za risanje?</string>
 
     <string name="POINT">točka</string>
     <string name="LINE">Linija</string>
