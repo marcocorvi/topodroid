@@ -2,7 +2,7 @@
 <resources>
   <plurals name="calib_saturated_values">
     <item quantity="one">ВНИМАНИЕ. Один "насыщенный" замер</item>
-    <item quantity="other">ВНИМАНИЕ. %1$d "насыщенных" замера</item>
+    <item quantity="other">ВНИМАНИЕ. %1$d "насыщенных" замеров</item>
   </plurals>
 
   <plurals name="read_data">
