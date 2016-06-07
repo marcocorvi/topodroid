@@ -1,0 +1,625 @@
+res/values/array.xml:233: Warning: Array surveyStations has an inconsistent number of items (6 in values-sl/array.xml, 7 in values-bg/array.xml) [InconsistentArrays]
+  <string-array name="surveyStations">
+  ^
+    res/values-bg/array.xml:99: Declaration with array size (7)
+    res/values-cn/array.xml:99: Declaration with array size (7)
+    res/values-de/array.xml:94: Declaration with array size (7)
+    res/values-es/array.xml:92: Declaration with array size (7)
+    res/values-fr/array.xml:124: Declaration with array size (7)
+    res/values-it/array.xml:93: Declaration with array size (7)
+    res/values-ru/array.xml:94: Declaration with array size (7)
+    res/values-sl/array.xml:65: Declaration with array size (6)
+    res/values-ua/array.xml:94: Declaration with array size (7)
+
+
+res/values-ru/plurals.xml:3: Error: For locale "ru" (Russian) the following quantities should also be defined: few, many [MissingQuantity]
+  <plurals name="calib_saturated_values">
+  ^
+res/values-sl/plurals.xml:3: Error: For locale "sl" (Slovenian) the following quantities should also be defined: few, two [MissingQuantity]
+  <plurals name="calib_saturated_values">
+  ^
+res/values-bg/plurals.xml:8: Error: For locale "bg" (Bulgarian) the following quantities should also be defined: one [MissingQuantity]
+  <plurals name="read_data">
+  ^
+res/values-ru/plurals.xml:8: Error: For locale "ru" (Russian) the following quantities should also be defined: few, many, one [MissingQuantity]
+  <plurals name="read_data">
+  ^
+res/values-sl/plurals.xml:8: Error: For locale "sl" (Slovenian) the following quantities should also be defined: few, one, two [MissingQuantity]
+  <plurals name="read_data">
+  ^
+res/values-de/plurals.xml:12: Error: For locale "de" (German) the following quantities should also be defined: one [MissingQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-sl/plurals.xml:12: Error: For locale "sl" (Slovenian) the following quantities should also be defined: few, one, two [MissingQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-bg/plurals.xml:13: Error: For locale "bg" (Bulgarian) the following quantities should also be defined: one [MissingQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-ru/plurals.xml:13: Error: For locale "ru" (Russian) the following quantities should also be defined: few, many, one [MissingQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values/array.xml:5: Error: "unitGrid" is not translated in "sl" (Slovenian) [MissingTranslation]
+  <string-array name="unitGrid">
+                ~~~~~~~~~~~~~~~
+res/values/array.xml:9: Error: "unitGridValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="unitGridValue">
+                ~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:14: Error: "survexEol" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="survexEol">
+                ~~~~~~~~~~~~~~~~
+res/values/array.xml:18: Error: "survexEolValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="survexEolValue">
+                ~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:23: Error: "wallsType" is not translated in "sl" (Slovenian) [MissingTranslation]
+  <string-array name="wallsType">
+                ~~~~~~~~~~~~~~~~
+res/values/array.xml:27: Error: "wallsTypeValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="wallsTypeValue">
+                ~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:32: Error: "acadVersion" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="acadVersion">
+                ~~~~~~~~~~~~~~~~~~
+res/values/array.xml:36: Error: "acadVersionValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="acadVersionValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:41: Error: "zoomCtrl" is not translated in "sl" (Slovenian) [MissingTranslation]
+  <string-array name="zoomCtrl">
+                ~~~~~~~~~~~~~~~
+res/values/array.xml:46: Error: "zoomCtrlValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="zoomCtrlValue">
+                ~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:56: Error: "stationNamesValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="stationNamesValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:69: Error: "locale" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="locale">
+                ~~~~~~~~~~~~~
+res/values/array.xml:82: Error: "localeValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="localeValue">
+                ~~~~~~~~~~~~~~~~~~
+res/values/array.xml:97: Error: "exportShots" is not translated in "cn", "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string-array name="exportShots">
+                ~~~~~~~~~~~~~~~~~~
+res/values/array.xml:111: Error: "exportShotsValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="exportShotsValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:126: Error: "exportPlot" is not translated in "cn", "sl" (Slovenian) [MissingTranslation]
+  <string-array name="exportPlot">
+                ~~~~~~~~~~~~~~~~~
+res/values/array.xml:134: Error: "exportPlotValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="exportPlotValue">
+                ~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:161: Error: "legShots" is not translated in "de" (German), "es" (Spanish), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="legShots">
+                ~~~~~~~~~~~~~~~
+res/values/array.xml:166: Error: "legShotsValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="legShotsValue">
+                ~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:172: Error: "extraButtons" is not translated in "sl" (Slovenian) [MissingTranslation]
+  <string-array name="extraButtons">
+                ~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:179: Error: "extraButtonsValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="extraButtonsValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:187: Error: "sizeButtons" is not translated in "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string-array name="sizeButtons">
+                ~~~~~~~~~~~~~~~~~~
+res/values/array.xml:194: Error: "sizeButtonsValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="sizeButtonsValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:202: Error: "logStream" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string-array name="logStream">
+                ~~~~~~~~~~~~~~~~
+res/values/array.xml:206: Error: "logStreamValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="logStreamValue">
+                ~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:215: Error: "connModeValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="connModeValue">
+                ~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:226: Error: "sockTypeValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="sockTypeValue">
+                ~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:242: Error: "surveyStationsValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="surveyStationsValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:252: Error: "pickerType" is not translated in "sl" (Slovenian) [MissingTranslation]
+  <string-array name="pickerType">
+                ~~~~~~~~~~~~~~~~~
+res/values/array.xml:258: Error: "pickerTypeValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="pickerTypeValue">
+                ~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:265: Error: "sectionStations" is not translated in "cn", "es" (Spanish), "fr" (French), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string-array name="sectionStations">
+                ~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:270: Error: "sectionStationsValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="sectionStationsValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:276: Error: "recentNr" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="recentNr">
+                ~~~~~~~~~~~~~~~
+res/values/array.xml:299: Error: "deviceBTValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="deviceBTValue">
+                ~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:324: Error: "lineStyleValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="lineStyleValue">
+                ~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:336: Error: "groupByValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="groupByValue">
+                ~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:346: Error: "unitLengthValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="unitLengthValue">
+                ~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:359: Error: "unitAngleValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="unitAngleValue">
+                ~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:368: Error: "unitLocationValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="unitLocationValue">
+                ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/array.xml:379: Error: "calibAlgoValue" is not translated in "bg" (Bulgarian), "cn", "de" (German), "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string-array name="calibAlgoValue">
+                ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:3: Error: "topodroid_man" is not translated in "bg" (Bulgarian), "cn", "de" (German), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:4: Error: "no_manual" is not translated in "cn" [MissingTranslation]
+    <string name="no_manual">Cannot retrieve user manual from the web</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:26: Error: "thp_user" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="thp_user">user</string>
+            ~~~~~~~~~~~~~~~
+res/values/strings.xml:29: Error: "thl_user" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="thl_user">user</string>
+            ~~~~~~~~~~~~~~~
+res/values/strings.xml:31: Error: "tha_user" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="tha_user">user</string>
+            ~~~~~~~~~~~~~~~
+res/values/strings.xml:57: Error: "calib_gm_policy" is not translated in "cn" [MissingTranslation]
+    <string name="calib_gm_policy">Policy</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:75: Error: "calib_reset" is not translated in "bg" (Bulgarian), "cn", "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="calib_reset">Reset DistoX calibration ?</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:81: Error: "algo_minimum" is not translated in "bg" (Bulgarian), "cn", "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="algo_minimum">minimum</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:83: Error: "device_algo_failed" is not translated in "sl" (Slovenian) [MissingTranslation]
+    <string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:84: Error: "device_address" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_address">Address %1$s</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:95: Error: "device_status_angle_grad" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_status_angle_grad">Angle units: grad</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:96: Error: "device_status_angle_degree" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_status_angle_degree">Angle units: degree</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:97: Error: "device_status_compass_on" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_status_compass_on">Compass/clino: on</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:98: Error: "device_status_compass_off" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_status_compass_off">Compass/clino: off</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:99: Error: "device_status_calib" is not translated in "cn", "es" (Spanish), "fr" (French) [MissingTranslation]
+    <string name="device_status_calib">Mode: calibration</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:100: Error: "device_status_normal" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_status_normal">Mode: normal</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:101: Error: "device_status_silent_on" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_status_silent_on">Silent: on</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:102: Error: "device_status_silent_off" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="device_status_silent_off">Silent: off</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:122: Error: "few_iter" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="few_iter">Failed to iterate</string>
+            ~~~~~~~~~~~~~~~
+res/values/strings.xml:123: Error: "few_groups" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="few_groups">Not enough data with group</string>
+            ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:134: Error: "import_calib_ok" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="import_calib_ok">Successfully imported calibration</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:202: Error: "fixed" is not translated in "cn" [MissingTranslation]
+    <string name="fixed">fixed</string>
+            ~~~~~~~~~~~~
+res/values/strings.xml:203: Error: "painted" is not translated in "cn" [MissingTranslation]
+    <string name="painted">painted</string>
+            ~~~~~~~~~~~~~~
+res/values/strings.xml:218: Error: "no_geo_station" is not translated in "cn" [MissingTranslation]
+    <string name="no_geo_station">Failed: no geolocalized station</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:224: Error: "no_profile_overview" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="no_profile_overview">No overview for projected profiles</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:227: Error: "no_sketch" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="no_sketch">No 3D sketch</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:236: Error: "menu_3d" is not translated in "bg" (Bulgarian), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="menu_3d">3D</string>
+            ~~~~~~~~~~~~~~
+res/values/strings.xml:238: Error: "menu_area" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="menu_area">AREA</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:245: Error: "menu_distox" is not translated in "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="menu_distox">DISTOX</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:247: Error: "menu_firmware" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="menu_firmware">FIRMWARE</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:258: Error: "menu_palette" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="menu_palette">PALETTE</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:268: Error: "menu_zoom_fit" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="menu_zoom_fit">ZOOM FIT</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:286: Error: "photo" is not translated in "bg" (Bulgarian), "cn", "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="photo">photo</string>
+            ~~~~~~~~~~~~
+res/values/strings.xml:310: Error: "saved_file_1" is not translated in "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="saved_file_1">Saved file</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:311: Error: "saved_file_2" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="saved_file_2">Saved file %1$s Scale %2$.2f</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:342: Error: "shot_not_found" is not translated in "bg" (Bulgarian), "cn", "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="shot_not_found">Found no shot</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:384: Error: "unzip_fail_survey" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="unzip_fail_survey">Failed: survey name mismatch</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:385: Error: "unzip_fail_db" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="unzip_fail_db">Failed: database version mismatch</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:386: Error: "unzip_fail_td" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="unzip_fail_td">Failed: TopoDroid version mismatch</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:402: Error: "stat_angle_error" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:413: Error: "profile" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="profile">PROJECT.</string>
+            ~~~~~~~~~~~~~~
+res/values/strings.xml:414: Error: "extended_profile" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="extended_profile">Extended profile</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:427: Error: "ask_gps_service" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="ask_gps_service">Set GPS service?</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:433: Error: "button_current" is not translated in "cn" [MissingTranslation]
+    <string name="button_current"   >Current   </string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:437: Error: "button_gps_start" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="button_gps_start" >GPS       </string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:450: Error: "button_dump" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="button_dump"      >Dump     </string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:460: Error: "button_upload" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="button_upload"    >Upload    </string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:477: Error: "remote_reset" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="remote_reset">Reset BT</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:500: Error: "length" is not translated in "cn", "de" (German) [MissingTranslation]
+    <string name="length">Length [m]</string>
+            ~~~~~~~~~~~~~
+res/values/strings.xml:501: Error: "azimuth" is not translated in "cn", "de" (German) [MissingTranslation]
+    <string name="azimuth">Azimuth [deg]</string>
+            ~~~~~~~~~~~~~~
+res/values/strings.xml:502: Error: "clino" is not translated in "cn", "de" (German), "fr" (French) [MissingTranslation]
+    <string name="clino">Clino [deg]</string>
+            ~~~~~~~~~~~~
+res/values/strings.xml:504: Error: "orientation" is not translated in "cn", "de" (German), "fr" (French) [MissingTranslation]
+    <string name="orientation">orientation</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:505: Error: "contents" is not translated in "cn", "de" (German) [MissingTranslation]
+    <string name="contents">contents</string>
+            ~~~~~~~~~~~~~~~
+res/values/strings.xml:506: Error: "error_distribution" is not translated in "cn", "de" (German) [MissingTranslation]
+    <string name="error_distribution">error distribution</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:507: Error: "angle_distribution" is not translated in "cn", "de" (German) [MissingTranslation]
+    <string name="angle_distribution">angular distribution</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:528: Error: "no_shot_between_stations" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="no_shot_between_stations">no_shot_between_stations</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:529: Error: "few_line_points" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="few_line_points">Line has too few points</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:533: Error: "menu_head" is not translated in "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="menu_head">HEAD</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:542: Error: "help_continue" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="help_continue">Continue drawing a line</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:543: Error: "help_contour" is not translated in "bg" (Bulgarian), "cn", "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="help_contour">Contour editing</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:554: Error: "help_join_survey" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="help_join_survey">Join surveying</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:592: Error: "help_zoom_fit" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="help_zoom_fit">Fit sketch to screen</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:604: Error: "help_save_calib" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="help_save_calib">Save changes to calibration info</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:610: Error: "help_firmware" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+    <string name="help_firmware">DistoX2 firmware updater</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:640: Error: "title_azimut" is not translated in "ua" [MissingTranslation]
+    <string name="title_azimut">Extend reference</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:641: Error: "title_calib" is not translated in "ua" [MissingTranslation]
+    <string name="title_calib">Calibrations</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:644: Error: "title_contour" is not translated in "bg" (Bulgarian), "cn", "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="title_contour">Contour</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:649: Error: "title_draw" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="title_draw">Draw</string>
+            ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:660: Error: "title_manual" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+    <string name="title_manual">TopoDroid User Manual</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:669: Error: "title_projection" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="title_projection">Projected profile azimuth %1$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:672: Error: "title_select" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+    <string name="title_select">Select</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:678: Error: "title_step" is not translated in "bg" (Bulgarian), "cn", "es" (Spanish), "fr" (French), "it" (Italian), "ru" (Russian), "sl" (Slovenian), "ua" [MissingTranslation]
+    <string name="title_step">Step</string>
+            ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:703: Error: "pref_cosurvey_title" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_cosurvey_title">Co-surveying service</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:707: Error: "pref_export_plot_title" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_export_plot_title">Default sketch export</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:708: Error: "pref_export_plot_summary" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_export_plot_summary">Default sketch export format</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:709: Error: "pref_therion_maps_title" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_therion_maps_title">Therion maps first</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:710: Error: "pref_therion_maps_summary" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_therion_maps_summary">Therion maps before survey data</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:739: Error: "pref_wait_laser_title" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_wait_laser_title">Laser pause [ms]</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:740: Error: "pref_wait_laser_summary" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_wait_laser_summary">Pause after turning laser on [ms]</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:741: Error: "pref_wait_shot_title" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_wait_shot_title">Shot pause [ms]</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:742: Error: "pref_wait_shot_summary" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_wait_shot_summary">Pause after measuring [ms]</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:743: Error: "pref_wait_data_title" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_wait_data_title">Data pause [ms]</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:744: Error: "pref_wait_data_summary" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_wait_data_summary">Pause after a data download [ms]</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:767: Error: "pref_accuracy_title" is not translated in "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_accuracy_title">ACCURACY</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:769: Error: "pref_shot_units_title" is not translated in "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_shot_units_title">UNITS</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:774: Error: "pref_pt_color_map_summary" is not translated in "es" (Spanish), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:781: Error: "pref_eraseness_title" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_eraseness_title">Eraser size</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:782: Error: "pref_eraseness_message" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_eraseness_message">Sketch item erasing radius</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:783: Error: "pref_min_shift_title" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_min_shift_title">Shift sensitivity</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:784: Error: "pref_min_shift_message" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_min_shift_message">Shift sensitivity</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:785: Error: "pref_pointing_title" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_pointing_title">Pointing radius</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:786: Error: "pref_pointing_message" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_pointing_message">Pointing radius</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:807: Error: "pref_prev_next_title" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_prev_next_title">Prev/Next buttons</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:808: Error: "pref_prev_next_summary" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:905: Error: "pref_checkBT_title" is not translated in "de" (German) [MissingTranslation]
+  <string name="pref_checkBT_title">Bluetooth</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:911: Error: "pref_therion_splays_title" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian), "ua" [MissingTranslation]
+  <string name="pref_therion_splays_title">Therion splays</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:912: Error: "pref_therion_splays_summary" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:924: Error: "pref_section_stations_title" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_section_stations_title">X-Section stations</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:925: Error: "pref_section_stations_summary" is not translated in "cn", "es" (Spanish), "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_section_stations_summary">X-Section reference stations</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:939: Error: "pref_auto_section_pt_title" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_auto_section_pt_title">Section points</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:940: Error: "pref_auto_section_pt_summary" is not translated in "cn", "fr" (French), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_auto_section_pt_summary">Add section point to section lines</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1001: Error: "pref_log_stream_summary" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_log_stream_summary">Log output stream</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1002: Error: "pref_log_stream_title" is not translated in "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string name="pref_log_stream_title">Log stream</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1054: Error: "firmware_title" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string name="firmware_title">Firmware Updater</string>
+          ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1055: Error: "firmware_file_title" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string name="firmware_file_title">Firmware Files</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1056: Error: "firmware_text" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+  <string name="firmware_text">
+          ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1066: Error: "firmware_none" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="firmware_none">no firmware file</string>
+           ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1067: Error: "firmware_file" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="firmware_file">firmware file</string>
+           ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1068: Error: "firmware_file_exists" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="firmware_file_exists">Existing firmware file</string>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1069: Error: "firmware_file_missing" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="firmware_file_missing">Missing firmware file</string>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1070: Error: "ask_dump" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="ask_dump">Dump firmware?</string>
+           ~~~~~~~~~~~~~~~
+res/values/strings.xml:1071: Error: "ask_upload" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="ask_upload">Upload firmware?</string>
+           ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1072: Error: "ask_upload_not_compatible" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1073: Error: "firmware_file_dumped" is not translated in "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1074: Error: "firmware_file_uploaded" is not translated in "cn", "es" (Spanish), "it" (Italian), "sl" (Slovenian) [MissingTranslation]
+   <string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-ru/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, …), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+    <item quantity="one">ВНИМАНИЕ. Один "насыщенный" замер</item>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-fr/plurals.xml:5: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+    <item quantity="one">ATTENTION. Une donnée saturée</item>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-sl/plurals.xml:5: Error: The quantity 'one' matches more than one specific number in this locale (1, 101, 201, 301, 401, 501, 601, 701, 1001, …), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+    <item quantity="one">WARNING. One saturated data</item>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-fr/plurals.xml:11: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+ <item quantity="one">Une donnée lue</item>
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-fr/strings.xml:69: Warning: Inconsistent number of arguments in formatting string using; found both 1 and 2 [StringFormatCount]
+    <string name="using">Utilisation de %1$s %2$s</string>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    res/values/strings.xml:68: Conflicting number of arguments here
+res/values-fr/plurals.xml:3: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="calib_saturated_values">
+  ^
+res/values-sl/plurals.xml:3: Warning: For language "sl" (Slovenian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="calib_saturated_values">
+  ^
+res/values-de/plurals.xml:7: Warning: For language "de" (German) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
+res/values-bg/plurals.xml:8: Warning: For language "bg" (Bulgarian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
+res/values-it/plurals.xml:8: Warning: For language "it" (Italian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
+res/values-ru/plurals.xml:8: Warning: For language "ru" (Russian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
+res/values-sl/plurals.xml:8: Warning: For language "sl" (Slovenian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
+res/values-fr/plurals.xml:9: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
+res/values-de/plurals.xml:12: Warning: For language "de" (German) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-sl/plurals.xml:12: Warning: For language "sl" (Slovenian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-bg/plurals.xml:13: Warning: For language "bg" (Bulgarian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-ru/plurals.xml:13: Warning: For language "ru" (Russian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-it/plurals.xml:14: Warning: For language "it" (Italian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-fr/plurals.xml:15: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/xml/prefs_0_accuracy.xml: Warning: The resource R.xml.prefs_0_accuracy appears to be unused [UnusedResources]
+res/xml/prefs_0_plot_walls.xml: Warning: The resource R.xml.prefs_0_plot_walls appears to be unused [UnusedResources]
+res/xml/prefs_1_plot_walls.xml: Warning: The resource R.xml.prefs_1_plot_walls appears to be unused [UnusedResources]
+res/xml/prefs_2_plot_walls.xml: Warning: The resource R.xml.prefs_2_plot_walls appears to be unused [UnusedResources]
+res/values/strings.xml:85: Warning: The resource R.string.device_busy appears to be unused [UnusedResources]
+    <string name="device_busy">Device busy</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:230: Warning: The resource R.string.no_thmanager appears to be unused [UnusedResources]
+    <string name="no_thmanager">ThManager app not installed</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:231: Warning: The resource R.string.no_db_viewer appears to be unused [UnusedResources]
+    <string name="no_db_viewer">DB_viewer app not found</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:944: Warning: The resource R.string.pref_sketchUsesSplays_title appears to be unused [UnusedResources]
+  <string name="pref_sketchUsesSplays_title">Sketch splays</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:945: Warning: The resource R.string.pref_sketchUsesSplays_summary appears to be unused [UnusedResources]
+  <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:949: Warning: The resource R.string.pref_sketchBorderStep_title appears to be unused [UnusedResources]
+  <string name="pref_sketchBorderStep_title">Border step</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:950: Warning: The resource R.string.pref_sketchBorderStep_summary appears to be unused [UnusedResources]
+  <string name="pref_sketchBorderStep_summary">Distance between edit-line points</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:951: Warning: The resource R.string.pref_sketchBorderStep_message appears to be unused [UnusedResources]
+  <string name="pref_sketchBorderStep_message">Distance between edit-line points</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:952: Warning: The resource R.string.pref_sketchSectionStep_title appears to be unused [UnusedResources]
+  <string name="pref_sketchSectionStep_title">Section step</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:953: Warning: The resource R.string.pref_sketchSectionStep_summary appears to be unused [UnusedResources]
+  <string name="pref_sketchSectionStep_summary">Distance between sections</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:954: Warning: The resource R.string.pref_sketchSectionStep_message appears to be unused [UnusedResources]
+  <string name="pref_sketchSectionStep_message">Distance between intermediate sections</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-cn/strings.xml:61: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="calib_compute_groups">计算校准数据组 ...</string>
+                                        ^
+res/values-cn/strings.xml:62: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="calib_compute_coeffs">计算校准系数 ...</string>
+                                        ^
+res/values-cn/strings.xml:64: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="calib_write_coeffs">校准系数正在写入 ...</string>
+                                      ^
+res/values-cn/strings.xml:80: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="device_algo_failed">自动算法失败\n使用线性算法...</string>
+                                      ^
+res/values-cn/strings.xml:82: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="device_busy">设备忙...</string>
+                               ^
+res/values-cn/strings.xml:133: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="import_zip_wait">数据导入可能可能费点时间. 请等待 ...</string>
+                                   ^
+res/values-cn/strings.xml:374: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="wait_scan">扫描: 请稍后 ...</string>
+                             ^
+res/values-cn/strings.xml:641: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="title_discover">扫码DistoX设备...请稍后</string>
+                                  ^

@@ -57,7 +57,7 @@
         android:layout_marginBottom="4sp"
         android:scrollHorizontally="true"
         android:editable="false"
-        />
+        /> <!-- android:inputType="none" -->
    		
     <Button android:id="@+id/survey_date" 
         android:maxLines="1" 
