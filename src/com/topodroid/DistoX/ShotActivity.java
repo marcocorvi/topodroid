@@ -716,6 +716,7 @@ public class ShotActivity extends Activity
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
   BitmapDrawable mBMdownload_wait;
+  BitmapDrawable mBMdownload_no;
   // BitmapDrawable mBMadd;
   BitmapDrawable mBMplot;
   Bitmap mBMdial;
@@ -773,6 +774,7 @@ public class ShotActivity extends Activity
     mBMplot_no       = MyButton.getButtonBackground( res, R.drawable.iz_plot_no );
     mBMdownload_on   = MyButton.getButtonBackground( res, R.drawable.iz_download_on );
     mBMdownload_wait = MyButton.getButtonBackground( res, R.drawable.iz_download_wait );
+    mBMdownload_no   = MyButton.getButtonBackground( res, R.drawable.iz_download_no );
     mBMleft          = MyButton.getButtonBackground( res, R.drawable.iz_left );
     mBMright         = MyButton.getButtonBackground( res, R.drawable.iz_right );
 
@@ -1005,11 +1007,13 @@ public class ShotActivity extends Activity
       int k1 = 0;
       // int k2 = 0;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-        setConnectionStatus( 2 ); // turn arrow orange
-        // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
-        mDataDownloader.toggleDownload();
-        setConnectionStatus( mDataDownloader.getStatus() );
-        mDataDownloader.doDataDownload( );
+        if ( mApp.mDevice != null ) {
+          setConnectionStatus( 2 ); // turn arrow orange
+          // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
+          mDataDownloader.toggleDownload();
+          setConnectionStatus( mDataDownloader.getStatus() );
+          mDataDownloader.doDataDownload( );
+        }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
         doBluetooth( b );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
@@ -1441,9 +1445,10 @@ public class ShotActivity extends Activity
   public void setConnectionStatus( int status )
   { 
     if ( mApp.mDevice == null ) {
-      mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+      // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
+      mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_no );
     } else {
-      mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
+      // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
       switch ( status ) {
         case 1:
           mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_on );
