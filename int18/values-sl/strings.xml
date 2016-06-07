@@ -21,7 +21,7 @@
 
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
-    <string name="memory_data">Podatki DistoX</string>
+    <!-- UNUSED string name="memory_data">Podatki DistoX</string -->
 
     <string name="thp_label">Oznaka</string>
     <!-- string name="thp_danger">pericolo</string -->
@@ -69,13 +69,13 @@
     <string name="calib_ave_std">Povprečje: %1$.4f %2$.4f stopinj</string>
     <string name="calib_precision">Natančnost</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
-    <string name="calib_saturated_values">Pozor: %1$ nasičeni podatki</string>
+    <!-- UNUSED string name="calib_saturated_values">Pozor: %1$ nasičeni podatki</string -->
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">Auto</string>
     <string name="linear">Linearno</string>
     <string name="non_linear">Nelinearno</string>
    
-    <string name="device_algo_failed">Neuspešna definicija automatičnega lgoritma\uporaba linearnega algoritma</string>
+    <!-- FIXME string name="device_algo_failed">Neuspešna definicija automatičnega lgoritma_uporaba linearnega algoritma</string bad chararcter backslash-u  -->
     <string name="device_busy">Aparat zaseden</string>
     <string name="device_illegal_addr">Ilegalen naslov spomina naprave</string>
     <string name="device_info">Podatki o napravi</string>
@@ -86,10 +86,10 @@
     <string name="device_code">Koda DistoX %1$4d</string>
     <string name="device_firmware">Firmware %1$d.%2$d</string>
     <string name="device_hardware">Hardware %1$d.%2$d</string>
-    <string name="device_status_angle">Koti  %1$s</string>
-    <string name="device_status_compass">Kompas/Naklonomer %1$s</string>
+    <!-- UNUSED string name="device_status_angle">Koti  %1$s</string -->
+    <!-- UNUSED string name="device_status_compass">Kompas/Naklonomer %1$s</string -->
     <string name="device_status_calib">Način %1$s</string>
-    <string name="device_status_silent">Tiho %1$s</string>
+    <!-- UNUSED string name="device_status_silent">Tiho %1$s</string -->
     <string name="bt_reset">Resetiranje povezave bluetooth</string>
     <string name="save_as">Shrani kot</string>
     <string name="nickname"></string>
@@ -143,7 +143,7 @@
     <string name="longitude_hint">dolžina gg:mm:ss.sss</string>
     <string name="loop_closure_errors">Napaka ob zapori zank</string>
     <string name="loop_none">Ni zanke</string>
-    <string name="long_lat">Dol-Širina</string>
+    <!-- UNUSED string name="long_lat">Dol-Širina</string -->
 
     <string name="line_delete">Odstrani črto</string>
     <string name="flip_shots">Obrni meritve</string>
@@ -249,7 +249,7 @@
     <string name="menu_survey">INFORMAZIJE</string>
     <string name="menu_sync">SINHRO</string>
     <string name="menu_validate">POTRDI</string>
-    <string name="menu_tdr2th2">RISEB TH2</string>
+    <!-- UNUSED string name="menu_tdr2th2">RISEB TH2</string -->
 
     <string name="popup_join_pt">Premakni na bližnjo točko</string>
     <string name="popup_snap_ln">Sledi bližnji črti</string>
@@ -288,20 +288,20 @@
     <!-- UNUSED string name="plot_recover">Ricaricare il disegno dal backup?</string -->
     <string name="plot_start">Začetna merilna točka</string>
     <!-- string name="plot_view">Caposaldo puntato</string -->
-    <string name="read_data">Brani %1$d podatki</string>
-    <string name="read_calib_data">Brani %1$d podatki (%2$d skupine)</string>
+    <!-- UNUSED string name="read_data">Brani %1$d podatki</string -->
+    <!-- UNUSED string name="read_calib_data">Brani %1$d podatki (%2$d skupine)</string -->
     <!-- UNUSED string name="read_fail_with_code">Lettura fallita. Codice </string -->
     <string name="read_failed">Neuspešno branje podatkov DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Lettura file fallita</string -->
-    <string name="saved_file_">Shranjena datoteka\ </string>
+    <!-- UNUSED string name="saved_file_">Shranjena datoteka\ </string -->
     <string name="saving_">Shranjevanje </string>
     <string name="saving_file_failed">Neuspešno reševanje datoteke</string>
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
     <string name="splay">stranske vizure</string>
     <string name="too_many_leg_intersection">Presek seka več vizur</string>
     <string name="too_many_legs_xsection">Preveč vizur za presek</string>
-    <string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string>
-    <string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string>
+    <!-- UNUSED string name="converted_tdr2th2">Pretvorjena skice iz binarnega formata v th2</string -->
+    <!-- UNUSED string name="convert_tdr2th2">Pretvori  skico iz binarnega formata v th2</string -->
     <string name="section_area">Površina preseka: %1$.1f</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
@@ -481,8 +481,8 @@
     <string name="help_add_topodroid">Nov načrt/kalibr.</string>
     <string name="help_import">Uvoz zip ali datoteke dati načrta</string>
     <string name="help_symbol">Aktiviraj/deaktiviraj grafične prototipe</string>
-    <string name="help_therion">App Therion manager</string>
-    <string name="help_database">App database (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">App Therion manager</string -->
+    <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preference</string>
     <string name="help_log">Aktiviraj/deaktiviraj opcije  log</string>
     <!-- OK string name="help_join_survey">Join surveying</string -->
@@ -511,7 +511,7 @@
     <string name="help_rename">Spremeni ime načrta</string>
     <string name="help_stats">Statistika načrta</string>
     <string name="help_save_plot">Izvozi skico</string>
-    <string name="help_tdr2th2">Pretvorba formata skice iz binarega v th2</string>
+    <!-- UNUSED string name="help_tdr2th2">Pretvorba formata skice iz binarega v th2</string -->
     <string name="help_toggle_plot">Preidi iz tlorisa na iztg.profil.</string>
     <string name="help_trash">Odstrani skico</string>
     <string name="help_undo">Izbriši zadnji aktivnost  skice</string>
@@ -638,8 +638,8 @@
   <string name="pref_survex_splay_summary">Survex - Dodaj točko A stranskim vizuram</string>
   <string name="pref_survex_lrud_title">Survex - LRUD</string>
   <string name="pref_survex_lrud_summary">Survex - Dodaj LRUD za izvoz</string>
-  <string name="pref_csv_length_title">CSV enota dolžine</string>
-  <string name="pref_csv_length_summary">CSV enota dolžine za izvoz</string>
+  <!-- UNUSED string name="pref_csv_length_title">CSV enota dolžine</string -->
+  <!-- UNUSED string name="pref_csv_length_summary">CSV enota dolžine za izvoz</string -->
 
   <string name="pref_sock_type_title">Vtičnica</string>
   <string name="pref_sock_type_summary">Kreiraj vtičnico</string>
@@ -680,10 +680,10 @@
   <string name="pref_text_size_summary">Dimenzije teksta seznama</string>
   <string name="pref_text_size_message">Dimenzija teksta seznama</string>
   <string name="pref_closeness_title">Obseg izbora</string>
-  <string name="pref_closeness_summary">Obseg izbora objektov skice</string>
+  <!-- UNUSED string name="pref_closeness_summary">Obseg izbora objektov skice</string -->
   <string name="pref_closeness_message">Obseg izbora objektov skice</string>
   <string name="pref_vert_splay_title">Prag črtkanih stranskih vizur</string>
-  <string name="pref_vert_splay_summary">Prag črtkanih stranskih vizur po naklonom</string>
+  <!-- UNUSED string name="pref_vert_splay_summary">Prag črtkanih stranskih vizur po naklonom</string -->
   <string name="pref_vert_splay_message">Prag črtkanih stranskih vizur po naklonom</string>
   <string name="pref_survey_stations_title">Merilne točke načrta</string>
   <string name="pref_survey_stations_summary">Samodejne merilne točke načrta</string>
@@ -718,7 +718,7 @@
   <string name="pref_vthr_summary">Prag naklona LRUD/WENS</string>
   <string name="pref_vthr_message">Prag naklona izmerjenga na LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Prag stranske vertikalne vizure</string>
-  <string name="pref_plan_vthr_summary">Prag stranske vertikalne vizure v tlorisu</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">Prag stranske vertikalne vizure v tlorisu</string -->
   <string name="pref_plan_vthr_message">Prag stranske vertikalne vizure v tlorisu</string>
   <string name="pref_init_station_title">Začetna merilna točka</string>
   <string name="pref_init_station_summary">Prednastavljena začetna merilna točka</string>
@@ -755,7 +755,7 @@
   <string name="pref_unscaled_points_title">Točke ikon brez zoom-a</string>
   <string name="pref_unscaled_points_summary">Točke ikon niso povečane</string>
   <string name="pref_segment_title">Razmiki toč na črti</string>
-  <string name="pref_segment_summary">Minimalen razdalja točk na črti</string>
+  <!-- UNUSED string name="pref_segment_summary">Minimalen razdalja točk na črti</string -->
   <string name="pref_segment_message">Minimalen razdalja točk na črti</string>
   <string name="pref_linestyle_title">Slog črt</string>
   <string name="pref_linestyle_summary">Slog črt</string>
@@ -784,10 +784,10 @@
   <string name="pref_label_size_summary">Dimenzije skript</string>
   <string name="pref_label_size_message">Dimenzije skript</string>
   <string name="pref_arrow_length_title">Smer preseka</string>
-  <string name="pref_arrow_length_summary">Dolžina smeri preseka</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Dolžina smeri preseka</string -->
   <string name="pref_arrow_length_message">Dolžina smeri preseka</string>
   <string name="pref_dot_radius_title">Izbor radiusa točk</string>
-  <string name="pref_dot_radius_summary">Izbor radiusa točk</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">Izbor radiusa točk</string -->
   <string name="pref_dot_radius_message">Radius izbranih točk</string>
   <string name="pref_line_thickness_title">Debelina črt</string>
   <string name="pref_line_thickness_summary">Debelina črt skice</string>
@@ -802,10 +802,10 @@
   <string name="pref_checkBT_summary">Aktiviraj/deaktiviraj  bluetooth</string>
   <string name="pref_checkAttached_title">Preveri poligon</string>
   <string name="pref_checkAttached_summary">Preveri če so merilne točke nepovezane</string>
-  <string name="pref_xtherion_areas_title">Površine xtherion</string>
-  <string name="pref_xtherion_areas_summary">Shrani površino v obliki xtherion</string>
-  <string name="pref_binary_store_title">Datoteka skice v  binarnem formatu</string>
-  <string name="pref_binary_store_summary">Shrani datoteko skice v binarnem formatu</string>
+  <!-- UNUSED string name="pref_xtherion_areas_title">Površine xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Shrani površino v obliki xtherion</string -->
+  <!-- UNUSED string name="pref_binary_store_title">Datoteka skice v  binarnem formatu</string -->
+  <!-- UNUSED string name="pref_binary_store_summary">Shrani datoteko skice v binarnem formatu</string -->
   <string name="pref_autoStations_title">Točke th2 station</string>
   <string name="pref_autoStations_summary">Dodaj samodejno merilne točke</string>
   <string name="pref_loopClosure_title">Zapora zanke</string>
