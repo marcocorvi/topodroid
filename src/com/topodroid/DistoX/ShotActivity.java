@@ -1301,6 +1301,7 @@ public class ShotActivity extends Activity
         mApp.mData.updateShotLeg( blk1.mId, mApp.mSID, 1L, true );
       }
     }
+    if ( leg ) blk.mType = DistoXDBlock.BLOCK_SEC_LEG;
     DistoXDBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
     if ( blk3 != blk && blk3 != null ) {
       blk3.setName( from, to );

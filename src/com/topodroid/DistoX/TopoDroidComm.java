@@ -175,7 +175,7 @@ public class TopoDroidComm
           double mag  = mProto.mMagnetic;
           double dip  = mProto.mDip;
           double roll = mProto.mRoll;
-          TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + acc + " " + mag + " " + dip + " " + roll );
+          TDLog.Log( TDLog.LOG_DISTOX, "VECTOR PACKET " + mLastShotId + " " + acc + " " + mag + " " + dip + " " + roll );
           if ( mApp.distoType() == Device.DISTO_X310 ) {
             mApp.mData.updateShotAMDR( mLastShotId, mApp.mSID, acc, mag, dip, roll, true );
             if ( TDSetting.mWaitData > 10 ) {

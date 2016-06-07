@@ -433,6 +433,7 @@ public class ShotDialog extends MyDialog
       mParent.updateSplayShots( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
     } else {
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
+      // if ( shot_leg ) mBlk.mType = DistoXDBlock.BLOCK_SEC_LEG; // FIXME maybe not necessary
       mParent.updateShot( shot_from, shot_to, shot_extend, shot_flag, shot_leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );

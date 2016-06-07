@@ -310,6 +310,8 @@ public class DistoXProtocol
 
   public int readPacket( boolean no_timeout ) 
   {
+    int min_available = ( mDevice.mType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case
+
     // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet no-timeout " + (no_timeout?"no":"yes") );
     // Log.v( "TD_DistoX", "Proto read packet no-timeout " + (no_timeout?"no":"yes") );
     try {
@@ -323,7 +325,8 @@ public class DistoXProtocol
         if ( TDSetting.mZ6Workaround ) {
           available = getAvailable( 200, 2*maxtimeout );
         } else {
-          while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) {
+          // while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) 
+          while ( ( available = mIn.available() ) < min_available && timeout < maxtimeout ) {
             ++ timeout;
             try {
               // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
@@ -338,7 +341,7 @@ public class DistoXProtocol
       // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet available " + available );
       // Log.v( "TD_DistoX", "Proto read packet available " + available );
       // if ( available > 0 ) 
-      if ( available >= 8 ) {
+      if ( available >= min_available ) {
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
         }

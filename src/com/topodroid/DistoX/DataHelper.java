@@ -58,13 +58,14 @@ public class DataHelper extends DataSetObservable
   private static final String SENSOR_TABLE = "sensors";
   private static final String DEVICE_TABLE = "devices";
 
-  private final static String WHERE_ID         = "id=?";
-  private final static String WHERE_SID        = "surveyId=?";
-  private final static String WHERE_SID_ID     = "surveyId=? AND id=?";
-  private final static String WHERE_SID_NAME   = "surveyId=? AND name=?";
-  private final static String WHERE_SID_STATUS = "surveyId=? AND status=?";
-  private final static String WHERE_SID_SHOTID = "surveyId=? AND shotId=?";
-  private final static String WHERE_SID_START  = "surveyId=? AND start=?";
+  private final static String WHERE_ID          = "id=?";
+  private final static String WHERE_SID         = "surveyId=?";
+  private final static String WHERE_SID_ID      = "surveyId=? AND id=?";
+  private final static String WHERE_SID_ID_MORE = "surveyId=? AND id>=?";
+  private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
+  private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
+  private final static String WHERE_SID_SHOTID  = "surveyId=? AND shotId=?";
+  private final static String WHERE_SID_START   = "surveyId=? AND start=?";
 
   static final long LEG_NORMAL = 0L;
   static final long LEG_EXTRA  = 1L;
@@ -1640,12 +1641,13 @@ public class DataHelper extends DataSetObservable
      return ret;
    }
 
+   // mergeToNextLeg does not change anything if blk has both FROM and TO stations
    long mergeToNextLeg( DistoXDBlock blk, long sid, boolean forward )
    {
      long ret = -1;
      if ( myDB == null ) return ret;
      Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "id", "fStation", "tStation" },
-                                 WHERE_SID_ID, new String[] { Long.toString(sid), Long.toString(blk.mId) },
+                                 WHERE_SID_ID_MORE, new String[] { Long.toString(sid), Long.toString(blk.mId) },
                                  null, null, "id ASC" ); 
      if (cursor.moveToFirst()) {
        for ( int k = 0; k < 3; ++ k ) {
