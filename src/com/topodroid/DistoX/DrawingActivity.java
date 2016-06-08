@@ -101,9 +101,10 @@ public class DrawingActivity extends ItemDrawer
   private static int IC_JOIN_NO  = 20;
   private static int IC_MENU     = 18;
   private static int IC_EXTEND   = 19;
-  private static int IC_CONTINUE_NO = 12;  // index of continue-no icon
-  private static int IC_CONTINUE = 21;     // index of continue icon
-  private static int IC_ADD = 22;
+  private static int IC_CONTINUE_NO   = 12;  // index of continue-no icon
+  private static int IC_CONTINUE_CONT = 21;     // index of continue icon
+  private static int IC_CONTINUE_JOIN = 22;     // index of continue icon
+  private static int IC_ADD = 23;
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -138,8 +139,9 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_menu,          // 18
                         R.drawable.iz_extended,      // 19
                         R.drawable.iz_join_no,       // 20
-                        R.drawable.iz_continue,      // 21
-                        R.drawable.iz_plus,          // 22
+                        R.drawable.iz_continue_cont, // 21
+                        R.drawable.iz_continue_join, // 22
+                        R.drawable.iz_plus,          // 23
                       };
   private static int menus[] = {
                         R.string.menu_export,
@@ -242,9 +244,14 @@ public class DrawingActivity extends ItemDrawer
   static final int MODE_SHIFT = 5; // change point symbol position
   static final int MODE_ERASE = 6;
 
+  static final int CONT_NO   = 0;  // no continue
+  static final int CONT_JOIN = 1;  // continue: join to existing line
+  static final int CONT_CONT = 2;  // continue: continue existing line 
+  static final int CONT_MAX  = 3; 
+
   public int mMode       = MODE_MOVE;
   private int mTouchMode = MODE_MOVE;
-  private boolean mContinueLine = false;
+  private int mContinueLine = CONT_NO;
   private float mDownX;
   private float mDownY;
   private float mSaveX;
@@ -323,7 +330,8 @@ public class DrawingActivity extends ItemDrawer
   private BitmapDrawable mBMplan;
   private BitmapDrawable mBMextend;
   private BitmapDrawable mBMcontinue_no;
-  private BitmapDrawable mBMcontinue;
+  private BitmapDrawable mBMcontinue_cont;
+  private BitmapDrawable mBMcontinue_join;
   private BitmapDrawable mBMadd;
   private BitmapDrawable mBMleft;
   private BitmapDrawable mBMright;
@@ -404,7 +412,7 @@ public class DrawingActivity extends ItemDrawer
   {
     super.lineSelected( k, update_recent );
     if ( mCurrentLine == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-      setButtonContinue( false );
+      setButtonContinue( CONT_NO );
     }
   }
 
@@ -793,24 +801,26 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
-  private void setButtonContinue( boolean continue_line )
+  private void setButtonContinue( int continue_line )
   {
     mContinueLine = continue_line;
     if ( mSymbol == SYMBOL_LINE /* && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex */ ) {
       mButton2[ BTN_CONTINUE ].setVisibility( View.VISIBLE );
-      mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mContinueLine ? mBMcontinue : mBMcontinue_no  );
+      switch ( mContinueLine ) {
+        case CONT_NO:
+          mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mBMcontinue_no  );
+          break;
+        case CONT_JOIN:
+          mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mBMcontinue_join  );
+          break;
+        case CONT_CONT:
+          mButton2[ BTN_CONTINUE ].setBackgroundDrawable( mBMcontinue_cont  );
+          break;
+      }
     } else {
       mButton2[ BTN_CONTINUE ].setVisibility( View.GONE );
     }
   }
-
-  // used only be setTheTitle
-  // void setButtonContinue( boolean visible )
-  // {
-  //   if ( mSymbol != SYMBOL_LINE || mCurrentLine != DrawingBrushPaths.mLineLib.mLineWallIndex ) 
-  //   visible = false;
-  //   mButton2[ BTN_CONTINUE ].setVisibility( visible? View.VISIBLE : View.GONE );
-  // }
 
   // this method is a callback to let other objects tell the activity to use zooms or not
   private void switchZoomCtrl( int ctrl )
@@ -849,7 +859,7 @@ public class DrawingActivity extends ItemDrawer
   {
     mSectionName  = null; 
     mShiftDrawing = false;
-    mContinueLine = false;
+    mContinueLine = CONT_NO;
     mModified     = false;
     setMode( MODE_MOVE );
     mTouchMode    = MODE_MOVE;
@@ -919,7 +929,8 @@ public class DrawingActivity extends ItemDrawer
       mButton2[k] = MyButton.getButton( this, this, ((k==0)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = MyButton.getButtonBackground( res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
-    mBMcontinue = MyButton.getButtonBackground( res, izons[IC_CONTINUE] );
+    mBMcontinue_cont = MyButton.getButtonBackground( res, izons[IC_CONTINUE_CONT] );
+    mBMcontinue_join = MyButton.getButtonBackground( res, izons[IC_CONTINUE_JOIN] );
 
     mButton3 = new Button[ mNrButton3 ];      // EDIT
     off = (mNrButton1-3) + (mNrButton2-3); 
@@ -1049,7 +1060,7 @@ public class DrawingActivity extends ItemDrawer
     mClino   = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_CLINO );
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
-    mContinueLine = false;
+    mContinueLine = CONT_NO;
     mModified     = false;
 
     // if ( PlotInfo.isSection( mType ) ) { 
@@ -1164,7 +1175,7 @@ public class DrawingActivity extends ItemDrawer
       mCurrentPoint = ( DrawingBrushPaths.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
       mCurrentLine  = ( DrawingBrushPaths.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
       mCurrentArea  = ( DrawingBrushPaths.mAreaLib.isSymbolEnabled( "water" ) )? 1 : 0;
-      setButtonContinue( false );
+      setButtonContinue( CONT_NO );
 
       List<DistoXDBlock> list = null;
       if ( PlotInfo.isSection( mType ) ) {
@@ -1979,11 +1990,11 @@ public class DrawingActivity extends ItemDrawer
                           lp1.addPoint3(p1.mX, p1.mY, p2.mX, p2.mY, p3.mX, p3.mY );
                         }
                         boolean addline = true;
-                        if ( mContinueLine && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+                        if ( mContinueLine > CONT_NO && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                           if ( line != null ) {
                             // Log.v( "DistoX", "[B] continuing line type " + mCurrentLine );
-                            if ( TDSetting.mContJoin && mCurrentLine == line.mLineType ) {
+                            if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
                               mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                               addline = false;
                             } else {
@@ -2127,12 +2138,12 @@ public class DrawingActivity extends ItemDrawer
                       }
                     } else {
                       boolean addline= true;
-                      if ( mContinueLine && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+                      if ( mContinueLine > CONT_NO && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                         // Log.v( "DistoX", "[N] try to continue line type " + mCurrentLine );
                         DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
                         if ( line != null ) {
                           // Log.v( "DistoX", "[N] continuing line type " + mCurrentLine );
-                          if ( TDSetting.mContJoin && mCurrentLine == line.mLineType ) {
+                          if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
                             mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                             addline = false;
                           } else {
@@ -2994,7 +3005,7 @@ public class DrawingActivity extends ItemDrawer
         }
       } else if ( b == mButton2[k2++] ) { //  continueBtn
         if ( mSymbol == SYMBOL_LINE && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-          setButtonContinue( ! mContinueLine );
+          setButtonContinue( (mContinueLine+1) % CONT_MAX );
         }
 
       } else if ( b == mButton3[k3++] ) { // prev
@@ -3483,7 +3494,7 @@ public class DrawingActivity extends ItemDrawer
         askDelete();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, this )).show();
+        (new SymbolEnableDialog( this, this, mApp )).show();
       } else if ( PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
           Toast.makeText( this, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();

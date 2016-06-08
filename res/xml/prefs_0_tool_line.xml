@@ -58,13 +58,6 @@
        android:defaultValue="true"
        / -->
 
-     <!-- CheckBoxPreference
-       android:key="DISTOX_CONT_JOIN"
-       android:summary="@string/pref_cont_join_summary"
-       android:title="@string/pref_cont_join_title"
-       android:defaultValue="false"
-       / -->
-
      <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_LINE_ACCURACY"
        android:title="@string/pref_lineacc_title"

@@ -697,11 +697,11 @@
   <string name="pref_raw_data_title">Raw data</string>
   <string name="pref_raw_data_summary">Show raw data</string>
   <!-- string name="pref_bootloader_title">Bootloader</string -->
-  <!-- string name="pref_bootloader_summary">Enable/Disable bootloader</string -->
+  <!-- string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Keyboard</string>
-  <string name="pref_mkeyboard_summary">Enable/Disable custom keyboards</string>
+  <string name="pref_mkeyboard_summary">Enable custom keyboards</string>
   <string name="pref_cosurvey_title">Co-surveying service</string>
-  <string name="pref_cosurvey_summary">Enable/Disable co-surveying service</string>
+  <string name="pref_cosurvey_summary">Enable co-surveying service</string>
   <string name="pref_export_shots_title">Default data export</string>
   <string name="pref_export_shots_summary">Default data export format</string>
   <string name="pref_export_plot_title">Default sketch export</string>
@@ -903,7 +903,7 @@
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
   <!-- UNUSED string name="pref_device_message">DistoX address name</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
-  <string name="pref_checkBT_summary">Enable/disable bluetooth</string>
+  <string name="pref_checkBT_summary">Enable bluetooth check at start-up</string>
   <string name="pref_checkAttached_title">Midline check</string>
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
@@ -938,8 +938,6 @@
   <string name="pref_area_border_summary">Area border default visibility</string>
   <string name="pref_auto_section_pt_title">Section points</string>
   <string name="pref_auto_section_pt_summary">Add section point to section lines</string>
-  <string name="pref_cont_join_title">Join continuation</string>
-  <string name="pref_cont_join_summary">Line continuation merges lines</string>
 
   <string name="pref_sketchUsesSplays_title">Sketch splays</string>
   <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>

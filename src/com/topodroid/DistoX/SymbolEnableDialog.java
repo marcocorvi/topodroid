@@ -42,11 +42,13 @@ class SymbolEnableDialog extends MyDialog
   private  Button mBTpoint;
   private  Button mBTline;
   private  Button mBTarea;
+  private  Button mBTreload;
   // private  Button mBTsave;
   // private  Button mBTcancel;
   // private  Button mBTok;
 
   private Activity mParent;
+  private TopoDroidApp mApp;
 
   private ListView    mList;
   private SymbolAdapter mPointAdapter;
@@ -54,10 +56,11 @@ class SymbolEnableDialog extends MyDialog
   private SymbolAdapter mAreaAdapter;
 
 
-  SymbolEnableDialog( Context context, Activity parent )
+  SymbolEnableDialog( Context context, Activity parent, TopoDroidApp app )
   {
     super( context, R.string.SymbolEnableDialog );
     mParent  = parent;
+    mApp     = app;
     mType    = DrawingActivity.SYMBOL_LINE; // default symbols are lines
   }
 
@@ -80,7 +83,14 @@ class SymbolEnableDialog extends MyDialog
     mBTline  = (Button) findViewById(R.id.symbol_line );
     mBTpoint = (Button) findViewById(R.id.symbol_point);
     mBTarea  = (Button) findViewById(R.id.symbol_area );
+    mBTreload = (Button) findViewById(R.id.symbol_reload );
 
+    if ( TDSetting.mLevelOverAdvanced ) {
+      mBTreload.setOnClickListener( this );
+    } else {
+      mBTreload.setVisibility( View.GONE );
+    }
+ 
     mBTline.setOnClickListener( this );
     if ( TDSetting.mLevelOverBasic ) {
       mBTpoint.setOnClickListener( this );
@@ -96,7 +106,6 @@ class SymbolEnableDialog extends MyDialog
 
   boolean createAdapters()
   {
-
     mPointAdapter = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
     mLineAdapter  = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
     mAreaAdapter  = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
@@ -174,6 +183,12 @@ class SymbolEnableDialog extends MyDialog
         break;
       case R.id.symbol_area:
         if ( TDSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_AREA;
+        break;
+      case R.id.symbol_reload:
+        mApp.installSymbols( true );
+        DrawingBrushPaths.reloadAllLibraries( mContext.getResources() );
+        createAdapters();
+        updateList();
         break;
       default:
         break;

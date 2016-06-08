@@ -929,8 +929,6 @@
   <string name="pref_area_border_summary">Прозорість границь області за замовчуванням</string>
   <string name="pref_auto_section_pt_title">Точки перерізів</string>
   <string name="pref_auto_section_pt_summary">Додати точки перерізів до линій перерізів</string>
-  <string name="pref_cont_join_title">Продовжувати для з\'єднання</string>
-  <string name="pref_cont_join_summary">Продовжити лінію до з\'єднання з іншою лінією</string>
 
   <string name="pref_sketchUsesSplays_title">Абрис бокових замірів</string>
   <string name="pref_sketchUsesSplays_summary">Поверхня абрису використовує бокові заміри</string>

@@ -890,8 +890,6 @@
   <string name="pref_recent_nr_summary">Nombres d\'outils dernièrements utilisés à afficher dans le seclectionneur d\'outils</string>
   <string name="pref_area_border_title">Visibilité bordure</string>
   <string name="pref_area_border_summary">Visibilité de la bordure</string>
-  <string name="pref_cont_join_title">Continuation ligne</string>
-  <string name="pref_cont_join_summary">Continuer une ligne les rejoint entre elles</string>
 
   <string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string>
   <string name="pref_sketchUsesSplays_summary">Dessiner les surface en utilisant les visées latérales</string>

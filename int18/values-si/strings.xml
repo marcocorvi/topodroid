@@ -830,8 +830,6 @@
   <string name="pref_recent_nr_summary">Število zdnjih pripomočkov v zbiralniku</string>
   <string name="pref_area_border_title">Vidnost površinskih robov</string> 
   <string name="pref_area_border_summary">Prednastavitev vidnosti površinskih robov</string>
-  <string name="pref_cont_join_title">Nadaljevanje zveze</string>
-  <string name="pref_cont_join_summary">Nadaljevanje črte z povezanimi črtami</string>
 
   <string name="pref_sketchUsesSplays_title">Skica stranskih vizur</string>
   <string name="pref_sketchUsesSplays_summary">Skica površine z uporabo stranskih vizur</string>

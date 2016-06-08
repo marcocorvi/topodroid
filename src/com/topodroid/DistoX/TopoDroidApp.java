@@ -580,6 +580,8 @@ public class TopoDroidApp extends Application
 
     // ***** DRAWING TOOLS SYMBOLS
     // TDLog.Profile("TDApp symbols");
+
+    // if one of the symbol dirs does not exists all of then are restored
     String version = mDData.getValue( "version" );
     if ( version == null || ( ! version.equals(VERSION) ) ) {
       mDData.setValue( "version", VERSION );
@@ -1932,13 +1934,13 @@ public class TopoDroidApp extends Application
       } else { // version .equals SYMBOL_VERSION
         return;
       }
-      mDData.setValue( "symbol_version", SYMBOL_VERSION );
     }
     if ( install ) {
       deleteObsoleteSymbols();
       InputStream is = getResources().openRawResource( R.raw.symbols );
       symbolsUncompress( is, overwrite );
     }
+    mDData.setValue( "symbol_version", SYMBOL_VERSION );
   }
 
   private void deleteObsoleteSymbols()
@@ -1952,7 +1954,7 @@ public class TopoDroidApp extends Application
 
   private void symbolsUncompress( InputStream fis, boolean overwrite )
   {
-    // Log.v(TAG, "symbol uncompress ...");
+    // Log.v( "DistoX", "symbol uncompress ...");
     TDPath.symbolsCheckDirs();
     try {
       // byte buffer[] = new byte[36768];
@@ -1962,7 +1964,7 @@ public class TopoDroidApp extends Application
       while ( ( ze = zin.getNextEntry() ) != null ) {
         String filepath = ze.getName();
         if ( filepath.endsWith("README") ) continue;
-        // Log.v( TAG, "ZipEntry " + filepath );
+        // Log.v(  "DistoX", "ZipEntry " + filepath );
         if ( ! ze.isDirectory() ) {
           if ( filepath.startsWith( "symbol" ) ) {
             filepath = filepath.substring( 7 );

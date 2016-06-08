@@ -146,6 +146,13 @@ public class DrawingBrushPaths
     }
   }
 
+  static void reloadAllLibraries( Resources res ) 
+  {
+    reloadPointLibrary( res );
+    reloadLineLibrary( res );
+    reloadAreaLibrary( res );
+  }
+
   static void reloadPointLibrary( Resources res )
   {
     mPointLib = new SymbolPointLibrary( res );

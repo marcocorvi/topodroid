@@ -1763,7 +1763,7 @@ public class SketchActivity extends ItemDrawer
       new ExportDialog( this, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
     } else if ( p++ == pos ) { // PALETTE 
       DrawingBrushPaths.makePaths( getResources() );
-      (new SymbolEnableDialog( this, this )).show();
+      (new SymbolEnableDialog( this, this, mApp )).show();
     } else if ( p++ == pos ) { // DELETE
       askDelete();
     } else if ( p++ == pos ) { // SETTINGS

@@ -972,8 +972,6 @@
   <string name="pref_area_border_summary">Linie um Flächen herum anzeigen</string>
   <string name="pref_auto_section_pt_title">Querschnittspunkte hnzufügen</string>
   <string name="pref_auto_section_pt_summary">Querschnittspunkt zu Querschnitten hinzufügen</string>
-  <string name="pref_cont_join_title">Linien fortsetzen</string>
-  <string name="pref_cont_join_summary">Linien verbinden beim fortsetzen</string>
 
   <!-- Experimental 3D Drawing Feature: -->
   <!-- TODO string name="pref_sketchUsesSplays_title">Sketch splays</string -->

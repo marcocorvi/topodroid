@@ -610,7 +610,7 @@ public class TopoDroidActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // PALETTE
       DrawingBrushPaths.makePaths( getResources() );
-      (new SymbolEnableDialog( this, this )).show();
+      (new SymbolEnableDialog( this, this, mApp )).show();
     } else { 
       Intent intent;
       if ( p++ == pos ) { // SETTINGS

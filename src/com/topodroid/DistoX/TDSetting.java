@@ -135,7 +135,6 @@ class TDSetting
     "DISTOX_THERION_SPLAYS",
     "DISTOX_RECENT_NR",           // 82 number of most recent items (item picker)
     "DISTOX_AREA_BORDER",         // 83 area border visibility
-    "DISTOX_CONT_JOIN",           // 84 line continuation is join
     "DISTOX_ORTHO_LRUD",          // 86 orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_SECTION_STATIONS",    //
 
@@ -366,7 +365,6 @@ class TDSetting
 
   static boolean mUnscaledPoints = false;
   static boolean mAreaBorder     = true;
-  static boolean mContJoin       = false;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // 3D
@@ -708,7 +706,6 @@ class TDSetting
     mRecentNr   = tryInt( prefs, key[k++], "4" );               // DISTOX_RECENT_NR choice: 3, 4, 5, 6
 
     mAreaBorder = prefs.getBoolean( key[k++], true );         // DISTOX_AREA_BORDER
-    mContJoin   = prefs.getBoolean( key[k++], false );        // DISTOX_CONT_JOIN
 
     mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0");  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
@@ -1030,8 +1027,6 @@ class TDSetting
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAreaBorder = prefs.getBoolean( k, true );  // DISTOX_AREA_BORDER
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mContJoin = prefs.getBoolean( k, false );   // DISTOX_CONT_JOIN
 
     } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_ORTHO_LRUD
       mOrthogonalLRUDAngle  = tryFloat( prefs, k, "0");
@@ -1300,7 +1295,6 @@ class TDSetting
     //B if ( name.equals( "DISTOX_THERION_SPLAYS" )
     //C if ( name.equals( "DISTOX_RECENT_NR" )
     //B if ( name.equals( "DISTOX_AREA_BORDER" )
-    //B if ( name.equals( "DISTOX_CONT_JOIN" ) 
     if ( name.equals( "DISTOX_ORTHO_LRUD" ) ) return parseFloatValue( value, mOrthogonalLRUDAngle, 0, 90 );
 
     // if ( name.equals( "DISTOX_WALLS_TYPE" )
