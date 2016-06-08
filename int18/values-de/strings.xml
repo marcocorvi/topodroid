@@ -7,6 +7,7 @@
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
     <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string>
+    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
 
     <string name="POINT">PUNKTE</string>
     <string name="LINE">LINIEN</string>
@@ -506,6 +507,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importieren</string>
+    <!-- TODO string name="btn_install">Install</string -->
 
 
 <!-- FIXME_SKETCH_3D -->    

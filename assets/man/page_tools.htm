@@ -18,11 +18,12 @@ It is likely you do not need many of them, or maybe you need different ones. You
 <li>on the file system</li>
 </ul>
 
-The drawing tool dialog is the interface through which you select the tool with which you draw next. There are three different interfaces,
+The drawing tool dialog is the interface through which you select the tool with which you draw next. There are four different interfaces,
 <ul>
 <li>most-recently used tools [default]</li>
 <li>a list of the tools with their names</li>
-<li>the tools symbols arranged on a grid</li>
+<li>the tools arranged on a grid</li>
+<li>all the tools arranged on a triple-grid</li>
 </ul>
 
 Each sketch carries its own palette.  When you close the sketch it is saved with a header listing the enabled tools. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
@@ -32,6 +33,8 @@ The sketch palette is specified through the "PALETTE" menu of the sketch window.
 Except for the "system" tools, TopoDroid loads the drawing tool from files stored in the "symbols" subdirectory of the base "TopoDroid" home. The system tools are the "user" and "label" points, "user" and "wall" lines, "user" and "water" areas. These are always enabled.<br><p>
 
 The PALETTE menu of the main window defines the drawing tool files to load. In the coming dialog you select the tools that are loaded.  The list of files to load is saved in the project database. As for the sketch-level palette, you have to do this independently for points, lines, and areas<br><p>
+
+Through the button <b>Install</b> of this dialog you can also re-install the drawing tools.<br><p>
 
 At a even higher level, namely that of the base "TopoDroid" directory, you can customize the tool files.
 You can modify them, delete those you do not need, and add new ones (for tools not included in the program).

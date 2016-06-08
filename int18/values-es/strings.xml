@@ -7,6 +7,7 @@
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
+    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
 
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
@@ -473,6 +474,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importar</string>
+    <!-- TODO string name="btn_install">Install</string -->
 
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>

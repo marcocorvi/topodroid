@@ -8,6 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
       >
         <Button android:id="@+id/symbol_point"
                 android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
             android:layout_height="wrap_content" 
             android:background="@drawable/button"
             style="@style/button_default"
-            android:text="@string/menu_reload"
+            android:text="@string/btn_install"
+            android:layout_marginTop="10sp"
           />
 
           <!-- Button android:id="@+id/symbol_sync"

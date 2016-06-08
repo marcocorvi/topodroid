@@ -18,6 +18,8 @@ import android.app.Dialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.DialogInterface;
+// import android.content.DialogInterface.OnClickListener;
 
 import android.view.Window;
 
@@ -185,10 +187,17 @@ class SymbolEnableDialog extends MyDialog
         if ( TDSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_AREA;
         break;
       case R.id.symbol_reload:
-        mApp.installSymbols( true );
-        DrawingBrushPaths.reloadAllLibraries( mContext.getResources() );
-        createAdapters();
-        updateList();
+        TopoDroidAlertDialog.makeAlert( mContext, mContext.getResources(), R.string.symbols_ask,
+          new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick( DialogInterface dialog, int btn ) {
+              mApp.installSymbols( true );
+              DrawingBrushPaths.reloadAllLibraries( mContext.getResources() );
+              createAdapters();
+              updateList();
+            }
+          }
+        );
         break;
       default:
         break;

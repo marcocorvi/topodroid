@@ -7,6 +7,7 @@
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
     <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить объекты рисунков?</string>
+    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
 
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛИНИЯ</string>
@@ -478,6 +479,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импорт</string>
+    <!-- TODO string name="btn_install">Install</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
