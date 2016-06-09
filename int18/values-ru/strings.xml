@@ -47,7 +47,7 @@
     <string name="failed_snap_to_line">Отсутствует ближайшая точка-линии для закрепления границы зоны</string>
     <string name="failed_snap_to_point">Отсутствует ближайшая точка для закрепления объекта</string>
 
-    <string name="calibration_title">Корекция измерений</string>
+    <string name="calibration_title">Корекция измерений выполненых вручную</string>
     <string name="calibration_length">Рулетка</string>
     <string name="calibration_azimuth">Компас</string>
     <string name="calibration_clino">Клинометр</string>
@@ -597,7 +597,7 @@
     <!-- UNUSED string name="help_save">Сохранить нзменения информации о съёмке</string -->
     <string name="help_save_calib">Сохранить измерения информации о калибровке</string>
     <string name="help_export_survey">Экспорт съёмки</string>
-    <string name="help_loc">GPS местоположение</string>
+    <string name="help_loc">GPS привязка</string>
     <string name="help_delete_survey">Удалить съёмку</string>
     <string name="help_delete_calib">Удалить калибровку</string>
     <string name="help_detach">Очистить текущий выбор DistoX</string>
@@ -646,13 +646,13 @@
     <string name="title_edit">Редактировать</string>
     <string name="title_erase">Удалить</string>
     <string name="title_fixed">Гео-привязанные точки</string>
-    <string name="title_fixed_edit">Редактировать местоположение</string>
+    <string name="title_fixed_edit">Редактировать привязку</string>
     <string name="title_fixed_import">Импортировать фиксированную точку</string>
     <string name="title_fixed_gps">Фиксированная точка: GPS</string>
     <string name="title_fixed_add">Фиксированная точка: вставить</string>
     <string name="title_manual">TopoDroid Инструкция</string>
     <string name="title_mode">Режим просмотра</string>
-    <string name="title_move">Подвижный</string>
+    <string name="title_move">Перемещение</string>
     <string name="title_note">Заметки</string>
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
@@ -693,9 +693,9 @@
   <!-- UNUSED string name="pref_bootloader_title">Загрузчик</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Вкл Загрузчик</string -->
   <string name="pref_mkeyboard_title">Клавиатура</string>
-  <string name="pref_mkeyboard_summary">Вкл\Выкл сторонние клавиатуры </string>
+  <string name="pref_mkeyboard_summary">Вкл/Выкл сторонние клавиатуры </string>
   <string name="pref_cosurvey_title">Совместная съёмка</string>
-  <string name="pref_cosurvey_summary">Вкл/Выкл Совм. съёмку</string>
+  <string name="pref_cosurvey_summary">Вкл/Выкл Совместную съёмку</string>
   <string name="pref_export_shots_title">Формат экспорта данных</string>
   <string name="pref_export_shots_summary">Формат экспорта данных по умолчанию</string>
   <string name="pref_export_plot_title">Формат экспорта абрисов по умолчанию</string>
@@ -708,14 +708,14 @@
   <string name="pref_size_buttons_summary">Размер кнопок панели инструментов</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введите размер кнопок панели инструментов [pixels]</string -->
   <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
-  <string name="pref_leg_shots_summary">Минимальное кол-во замеров на отрезке</string>
+  <string name="pref_leg_shots_summary">Минимальное кол-во повторяющихся замеров на отрезке</string>
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
   <string name="pref_ortho_lrud_title">Угол луча для ЛПВН</string>
-  <string name="pref_ortho_lrud_summary">Минимальный угол между бок. лучем и напр. на пикет для признания ЛПВН</string>
-  <string name="pref_ortho_lrud_message">ЛПВН мин. угол между пикетом и бок. лучем</string>
+  <string name="pref_ortho_lrud_summary">Минимальный угол между бок. лучом и напр. на пикет для признания ЛПВН</string>
+  <string name="pref_ortho_lrud_message">ЛПВН мин. угол между пикетом и бок. лучом</string>
   <string name="pref_survex_eol_title">Прерывание линии Survex/Topo</string>
-  <string name="pref_survex_eol_summary">Прерывание линии Survex/Topo</string>
+  <string name="pref_survex_eol_summary">Формат окончания строки Survex/Topo</string>
   <string name="pref_survex_splay_title">Конечный пикет луча Survex</string>
   <string name="pref_survex_splay_summary">Добавить пикет ДО к бок. замерам в Survex</string>
   <string name="pref_survex_lrud_title">Survex ЛПВН</string>
@@ -781,7 +781,7 @@
   <string name="pref_vert_splay_message">Порог угла бок. замеров показанных пунктиром в плане</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновить список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Принудительно обновить список</string -->
-  <string name="pref_survey_stations_title">Настройки нумерации пикетов</string>
+  <string name="pref_survey_stations_title">Настройки авто-нумерации пикетов</string>
   <string name="pref_survey_stations_summary">Авто нумерация пикетов</string>
   <string name="pref_accel_thr_title">Максимальное допустимое ускорение</string>
   <string name="pref_accel_thr_summary">Максимальное допустимое ускорение при замере</string>
@@ -793,9 +793,9 @@
   <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
   <string name="pref_dip_thr_message">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
-  <string name="pref_leg_title">Допустимое отклонениие измерений отрезков</string>
-  <string name="pref_leg_summary">Точность измерений пикетов отрезка</string>
-  <string name="pref_leg_message">Точность измерений пикетов отрезка</string>
+  <string name="pref_leg_title">Допустимое расхождение измерений отрезков</string>
+  <string name="pref_leg_summary">Допустимое расхождение в повторных измерениях между пикетами</string>
+  <string name="pref_leg_message">Допустимое расхождение в повторных измерениях между пикетами</string>
   <string name="pref_backsight_title">Обратный замер</string>
   <string name="pref_backsight_summary">Поле для ввода обратного замера в диалоге ручного ввода замера</string>
   <string name="pref_prev_next_title">Кнопки Пред/След</string>
@@ -808,12 +808,12 @@
   <string name="pref_team_title">Группа съёмки</string>
   <string name="pref_team_summary">Группа съёмки</string>
   <string name="pref_team_message">Группа съёмки по умолчанию</string>
-  <string name="pref_ethr_title">Вертикальный порог бокового замера</string>
-  <string name="pref_ethr_summary">Область верт. проэкции (бок. замер)</string>
-  <string name="pref_ethr_message">Угол около 90 для верт. проэкции бок. замера [град]</string>
-  <string name="pref_vthr_title">Вертикальный порог для отрезков</string>
-  <string name="pref_vthr_summary">Верт. порог ЛПВН/ЗВСЮ</string>
-  <string name="pref_vthr_message">Допустимый наклон отрезка между ЛПВН/ЗВСЮ</string>
+  <string name="pref_ethr_title">Порог вертикальности бокового замера</string>
+  <string name="pref_ethr_summary">Угловой диапазон верт. проэкции (бок. замер)</string>
+  <string name="pref_ethr_message">Угол около 90 для проэкции бок. замера на верт. плоскость [град]</string>
+  <string name="pref_vthr_title">Порог вертикальности для отрезков</string>
+  <string name="pref_vthr_summary">Угловой. порог ЛПВН/ЗВСЮ</string>
+  <string name="pref_vthr_message">Допустимый угол отрезка для перехода от ЛПВН к ЗВСЮ</string>
   <string name="pref_plan_vthr_title">Порог угла бок. замеров в плане</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Порог угла  бок. замера в плане</string -->
   <string name="pref_plan_vthr_message">Порог угла  бок. замеров отображаемых в плане</string>
@@ -850,7 +850,7 @@
   <string name="pref_drawing_unit_summary">Размер символов точек</string>
   <string name="pref_drawing_unit_message">Базовый размер символов точек [требуется перезапуск программы]</string>
   <string name="pref_unscaled_points_title">Не-увеличеваемые значки точек</string>
-  <string name="pref_unscaled_points_summary">Значки точек не увеличеваемы</string>
+  <string name="pref_unscaled_points_summary">Не масштабировать значки точек</string>
   <string name="pref_segment_title">Шаг точек в линии</string>
   <!-- UNUSED string name="pref_segment_summary">Шаг точек на линии</string -->
   <string name="pref_segment_message">Минимальное расстояние между точками в линии</string>
@@ -914,15 +914,15 @@
 
   <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
-  <string name="pref_section_stations_title">Пикеты на сечениях</string>
-  <string name="pref_section_stations_summary">Сечение пикеты привязки</string>
+  <string name="pref_section_stations_title">Пикеты на поперечных сечениях</string>
+  <string name="pref_section_stations_summary">Пикеты привязки поперечных сечений</string>
   <string name="pref_station_size_title">Размер номера пикетов</string>
   <string name="pref_station_size_summary">Размер номера пикетов</string>
   <string name="pref_station_size_message">Размер подписи пикетов</string>
-  <string name="pref_zoom_controls_title">Управление зума кнопками</string>
+  <string name="pref_zoom_controls_title">Отображение кнопки зума</string>
   <string name="pref_zoom_controls_summary">Управление зумом через мультитач</string>
-  <string name="pref_side_drag_title">Перетаскивание за сторону</string>
-  <string name="pref_side_drag_summary">Включить перетаскивание за сторону в окне абриса</string>
+  <string name="pref_side_drag_title">Перетаскивание за край</string>
+  <string name="pref_side_drag_summary">Включить перетаскивание за край в окне абриса</string>
   <string name="pref_unit_grid_title">Единицы изм. сетки в абрисах</string>
   <string name="pref_unit_grid_summary">Шаг сетки в абрисах</string>
   <string name="pref_recent_nr_title">Кол-во. недавних инструментов</string>
