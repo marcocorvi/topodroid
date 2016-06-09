@@ -621,6 +621,10 @@ public class TopoDroidApp extends Application
     DistoXConnectionError[3] = getResources().getString( R.string.distox_err_headtail_eof );
     DistoXConnectionError[4] = getResources().getString( R.string.distox_err_connected );
 
+    if ( mDevice != null ) {
+      createComm();
+    }
+
     DisplayMetrics dm = getResources().getDisplayMetrics();
     float density  = dm.density;
     mDisplayWidth  = dm.widthPixels;
@@ -1127,9 +1131,11 @@ public class TopoDroidApp extends Application
   public int downloadDataBatch( Handler /* ILister */ lister ) // FIXME LISTER
   {
     mSecondLastShotId = lastShotId();
-    TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + mDevice + " comm " + mComm.toString() );
     int ret = 0;
-    if ( mComm != null && mDevice != null ) {
+    if ( mComm == null || mDevice == null ) {
+      TDLog.Error( "Comm or Device null ");
+    } else {
+      TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + mDevice + " comm " + mComm.toString() );
       ret = mComm.downloadData( mDevice.mAddress, lister );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
@@ -1137,8 +1143,6 @@ public class TopoDroidApp extends Application
       //   List<DistoXDBlock> list = mData.selectAllShots( mSID, STATUS_NORMAL );
       //   assign Stations( list );
       // }
-    } else {
-      TDLog.Error( "Comm or Device is null ");
     }
     return ret;
   }
@@ -2302,7 +2306,10 @@ public class TopoDroidApp extends Application
 
   int uploadFirmware( String filename )
   {
-    if ( mComm == null || mDevice == null ) return -1;
+    if ( mComm == null || mDevice == null ) {
+      TDLog.Error( "Comm or Device null");
+      return -1;
+    }
     String pathname = TDPath.getBinFile( filename );
     TDLog.LogFile( "Firmware upload address " + mDevice.mAddress );
     TDLog.LogFile( "Firmware upload file " + pathname );

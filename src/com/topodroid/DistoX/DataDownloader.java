@@ -39,11 +39,15 @@ class DataDownloader
   void setConnected( boolean connected ) { mConnected = connected; }
   void setDownload( boolean download ) { mDownload = download; }
 
-  // int mStatus = 0; // 0 disconnected, 1 connecting, 2 connected
+  // int mStatus = 0; // 0 disconnected, 1 connected, 2 connecting
   int getStatus()
   {
     if ( ! mDownload ) return 0;
-    if ( ! mConnected ) return 2;
+    if ( ! mConnected ) {
+      if ( TDSetting.mAutoReconnect ) return 2;
+      return 0;
+    }
+    // setDownload( false );
     return 1;
   }
 
