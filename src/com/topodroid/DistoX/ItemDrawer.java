@@ -93,6 +93,7 @@ public class ItemDrawer extends Activity
   //
   protected void loadRecentSymbols( DataHelper data )
   {
+    // Log.v("DistoX", "load recent tools");
     DrawingBrushPaths.mPointLib.setRecentSymbols( mRecentPoint );
     DrawingBrushPaths.mLineLib.setRecentSymbols( mRecentLine );
     DrawingBrushPaths.mAreaLib.setRecentSymbols( mRecentArea );
@@ -122,29 +123,52 @@ public class ItemDrawer extends Activity
 
   protected void saveRecentSymbols( DataHelper data )
   {
+    // Log.v("DistoX", "save recent tools");
+    boolean first = false;
     if ( mRecentPoint[0] != null ) {
-      StringBuilder points = new StringBuilder( mRecentPoint[0].mThName );
-      for ( int k=1; k<NR_RECENT; ++k ) {
-        if ( mRecentPoint[k] == null ) break;
-        points.append( " " + mRecentPoint[k].mThName );
+      StringBuilder points = new StringBuilder( );
+      first = false;
+      for ( int k=NR_RECENT-1; k>=0; --k ) {
+        if ( mRecentPoint[k] != null ) {
+          if ( first ) {
+            points.append( " " + mRecentPoint[k].mThName );
+          } else {
+            first = true;
+            points.append( mRecentPoint[k].mThName );
+          }
+        }
       }
       data.setValue( "recent_points", points.toString() );
     }
 
     if ( mRecentLine[0] != null ) {
-      StringBuilder lines = new StringBuilder( mRecentLine[0].mThName );
-      for ( int k=1; k<NR_RECENT; ++k ) {
-        if ( mRecentLine[k] == null ) break;
-        lines.append( " " + mRecentLine[k].mThName );
+      StringBuilder lines = new StringBuilder( );
+      first = false;
+      for ( int k=NR_RECENT-1; k>=0; --k ) {
+        if ( mRecentLine[k] != null ) {
+          if ( first ) {
+            lines.append( " " + mRecentLine[k].mThName );
+          } else {
+            first = true;
+            lines.append( mRecentLine[k].mThName );
+          }
+        }
       }
       data.setValue( "recent_lines", lines.toString() );
     }
 
     if ( mRecentArea[0] != null ) { 
-      StringBuilder areas = new StringBuilder( mRecentArea[0].mThName );
-      for ( int k=1; k<NR_RECENT; ++k ) {
-        if ( mRecentArea[k] == null ) break;
-        areas.append( mRecentArea[k].mThName );
+      StringBuilder areas = new StringBuilder( );
+      first = false;
+      for ( int k=NR_RECENT-1; k>=0; --k ) {
+        if ( mRecentArea[k] != null ) {
+          if ( first ) {
+            areas.append( " " + mRecentArea[k].mThName );
+          } else {
+            first = true;
+            areas.append( mRecentArea[k].mThName );
+          }
+        }
       }
       data.setValue( "recent_areas", areas.toString() );
     }

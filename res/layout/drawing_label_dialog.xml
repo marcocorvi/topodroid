@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="wrap_content" 
+    android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="6dp"
@@ -17,7 +17,7 @@
    					  
     <EditText android:id="@+id/label_text"
       android:layout_marginTop="2dp"
-      android:layout_width="150dp"
+      android:layout_width="fill_parent"
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:inputType="text"
