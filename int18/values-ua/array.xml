@@ -17,7 +17,7 @@
      <item name="1">Тимчасово</item>
      <item name="2">Постійно</item>
   </string-array>
-  
+
   <string-array name="stationNames">
      <item name="alpha">Буквенно-цифрові</item>
      <item name="number">Цифрові</item>
@@ -58,7 +58,7 @@
      <item name="basic">Базовий</item>
      <item name="normal">Нормальний</item>
      <item name="advanced">Просунутий</item>
-     <item name="expert">Експерний</item>
+     <item name="expert">Експертний</item>
      <!-- item name="complete">Повний</item -->
   </string-array>
 
