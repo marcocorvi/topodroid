@@ -645,7 +645,7 @@
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редагувати</string>
     <string name="title_erase">Видалити</string>
-    <string name="title_fixed">Гео-прив'язані точки</string>
+    <string name="title_fixed">Гео-прив\'язані точки</string>
     <string name="title_fixed_edit">Редагувати прив\'язку</string>
     <string name="title_fixed_import">Імпортувати фіксовану точку</string>
     <string name="title_fixed_gps">Фіксована точка: GPS</string>
@@ -658,13 +658,13 @@
     <string name="title_photo_comment">Опис Фото</string>
     <string name="title_plot_save">Зберегти абрис як</string>
     <string name="title_plot_reload">Перезавантажити абрис</string>
-    <string name="title_profile_flip">Розвернути розріз ?</string>
+    <string name="title_profile_flip">Розвернути розріз?</string>
     <string name="title_projection">Проекція розрізу на азимут %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абриси в зйомці</string>
     <string name="title_select">Вибрати</string>
     <string name="title_shift">Зсув</string>
-    <string name="title_shot_delete">Видалити відрізок ?</string>
+    <string name="title_shot_delete">Видалити відрізок?</string>
     <string name="title_sensor_edit">Сенсор</string>
 
     <string name="title_stats">Статистика</string>
