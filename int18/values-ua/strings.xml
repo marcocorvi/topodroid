@@ -7,7 +7,7 @@
     <string name="double_back">Натисніть "НАЗАД" ще раз для виходу</string>
 
     <string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете перевстановити об\'єкти малюнків?</string>
-    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
+    <string name="symbols_ask">Ви хочете переінсталювати інструменти малювання?</string>
 
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛІНІЯ</string>
@@ -28,7 +28,7 @@
     <string name="thp_user">користувацький</string>
     <string name="thp_label">лейбл</string>
     <!-- string name="thl_danger">небезпека</string -->
-    <string name="thl_user">пользовательский</string>
+    <string name="thl_user">користувацький</string>
     <string name="thl_wall">стіна</string>
     <!-- string name="tha_danger">небезпека</string -->
     <string name="tha_user">користувацький</string>
@@ -47,7 +47,7 @@
     <string name="failed_snap_to_line">Відсутня найближча точка-лінії для закріплення межі зони</string>
     <string name="failed_snap_to_point">Відсутня найближча точка для закріплення об\'єкта</string>
 
-    <string name="calibration_title">Корекція вимірюваннь</string>
+    <string name="calibration_title">Корекція вимірюваннь зроблених вручну</string>
     <string name="calibration_length">Рулетка</string>
     <string name="calibration_azimuth">Компас</string>
     <string name="calibration_clino">Клинометр</string>
@@ -192,7 +192,7 @@
     <!-- UNUSED string name="scale">масштаб</string -->
     <!-- UNUSED string name="reversed">зворотний</string -->
     <string name="options">опції</string>
-    <string name="outline">контур</string>
+    <string name="outline">контур стін</string>
     <string name="out">зовнішній</string>
     <string name="in">внутрішній</string>
     <!-- UNUSED string name="none">none</string -->
@@ -201,7 +201,7 @@
     <string name="hidden_add">Приховати нитку ходу до цього пікету</string>
     <string name="hidden_del">Показати середню лінію</string>
     <string name="splays_toggle">Показати/приховати бок. заміри</string>
-    <string name="fixed">збережений</string>
+    <string name="fixed">фіксований репер</string>
     <string name="painted">нарисованний</string>
 
     <string name="bad_cwd">Назва проекта не може співпадати зі шляхом до папки</string>
@@ -479,7 +479,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Імпорт</string>
-    <!-- TODO string name="btn_install">Install</string -->
+    <string name="btn_install">Встановити</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
@@ -553,7 +553,7 @@
     <string name="help_display_calib">Режим показу видалених пікетов</string>
     <string name="help_validate">Перевірити калібрування</string>
     <string name="help_overview">Перегляд карти</string>
-    <string name="help_plot">Вікно абрисов</string>
+    <string name="help_plot">Вікно абрисів</string>
     <string name="help_note">Редагувати замітки зйомки</string>
     <string name="help_bluetooth">Скидання з\'єднання Bluetooth</string>
     <string name="help_remote">Дистанційне управління DistoX</string>
@@ -597,7 +597,7 @@
     <!-- UNUSED string name="help_save">Зберегти зміну інформації про зйомцку</string -->
     <string name="help_save_calib">Зберегти інформацію про калибровку</string>
     <string name="help_export_survey">Експорт зйомки</string>
-    <string name="help_loc">GPS місцеположення</string>
+    <string name="help_loc">GPS прив\'язка</string>
     <string name="help_delete_survey">Видалити зйомку</string>
     <string name="help_delete_calib">Видалити калібровку</string>
     <string name="help_detach">Очистити поточний вибір DistoX</string>
@@ -631,8 +631,8 @@
     <string name="help_refine_triangle">Уточнити поверхню вздовж довгої сторони</string>
   
 
-    <!--TODO string name="title_azimut">Направлення разветки</string -->
-    <!--TODO string name="title_calib">Калибровки</string -->
+    <string name="title_azimut">Напрям розвідки</string>
+    <string name="title_calib">Калібрування</string>
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
@@ -645,8 +645,8 @@
     <string name="title_draw_point">ТОЧКА %1$s</string>
     <string name="title_edit">Редагувати</string>
     <string name="title_erase">Видалити</string>
-    <string name="title_fixed">Фіксовані точки</string>
-    <string name="title_fixed_edit">Редагувати місцеположення</string>
+    <string name="title_fixed">Гео-прив'язані точки</string>
+    <string name="title_fixed_edit">Редагувати прив\'язку</string>
     <string name="title_fixed_import">Імпортувати фіксовану точку</string>
     <string name="title_fixed_gps">Фіксована точка: GPS</string>
     <string name="title_fixed_add">Фіксована точка: вставити</string>
@@ -668,7 +668,8 @@
     <string name="title_sensor_edit">Сенсор</string>
 
     <string name="title_stats">Статистика</string>
-    <string name="title_survey">Опис зйомки</string>
+    <string name="title_step">Крок</string>
+    <string name="title_survey">Властивості зйомки</string>
     <string name="title_survey_new">Новая зйомка</string>
     <string name="title_survey_export">Експорт зйомки як</string>
     <string name="title_survey_rename">Переименовать зйомку</string>
@@ -693,9 +694,9 @@
   <!-- UNUSED string name="pref_bootloader_title">Завантажувач</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Вкл завантажувач</string -->
   <string name="pref_mkeyboard_title">Клавіатура</string>
-  <string name="pref_mkeyboard_summary">Вкл\Викл сторонні клавіатури </string>
+  <string name="pref_mkeyboard_summary">Вкл/Викл сторонні клавіатури </string>
   <string name="pref_cosurvey_title">Спільна зйомка</string>
-  <string name="pref_cosurvey_summary">Вкл/Викл спільну. зйомку</string>
+  <string name="pref_cosurvey_summary">Вкл/Викл спільну зйомку</string>
   <string name="pref_export_shots_title">Формат експорту даних</string>
   <string name="pref_export_shots_summary">Формат експорту даних за замовчуванням</string>
   <string name="pref_export_plot_title">Формат експорту абрисов за замовчуванням</string>
@@ -708,14 +709,14 @@
   <string name="pref_size_buttons_summary">Розмір кнопок панелі інструментів</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введіть Розмір кнопок панелі инструментів [pixels]</string -->
   <string name="pref_leg_shots_title">Мін. к-сть замірів між пікетами</string>
-  <string name="pref_leg_shots_summary">Мінімальна к-сть замірів на відрізку</string>
+  <string name="pref_leg_shots_summary">Мінімальна к-сть повторюваних замірів на відрізку</string>
   <string name="pref_station_prefix_title">Експортувати префікси пікетов</string>
   <string name="pref_station_prefix_summary">Експортувати префікси пікетів для cSurvey</string>
   <string name="pref_ortho_lrud_title">Кут променю для ЛПВН</string>
-  <string name="pref_ortho_lrud_summary">Мінімальний кут між бок. лучем и напр. на пікет для признания ЛПВН</string>
+  <string name="pref_ortho_lrud_summary">Мінімальний кут між бок. променем и напр. на пікет для признания ЛПВН</string>
   <string name="pref_ortho_lrud_message">ЛПВН мsн. кут між пікетом і бок. променем</string>
   <string name="pref_survex_eol_title">Переривання лінії Survex/Topo</string>
-  <string name="pref_survex_eol_summary">переривання лінії Survex/Topo</string>
+  <string name="pref_survex_eol_summary">Формат кінця рядка Survex/Topo</string>
   <string name="pref_survex_splay_title">Кінцевий пікет променя Survex</string>
   <string name="pref_survex_splay_summary">Додати пікет ДО к бок. замірам в Survex</string>
   <string name="pref_survex_lrud_title">Survex ЛПВН</string>
@@ -781,7 +782,7 @@
   <string name="pref_vert_splay_message">Поріг кута бок. замірів показаних пунктиром в плані</string>
   <!-- UNUSED string name="pref_list_refresh_title">Обновити список</string -->
   <!-- UNUSED string name="pref_list_refresh_summary">Примусово обновити список</string -->
-  <string name="pref_survey_stations_title">Налаштування нумерації пікетів</string>
+  <string name="pref_survey_stations_title">Налаштування авто-нумерації пікетів</string>
   <string name="pref_survey_stations_summary">Авто нумерації пікетів</string>
   <string name="pref_accel_thr_title">Максимально допустиме прискорення</string>
   <string name="pref_accel_thr_summary">Максимально допустиме прискорення при замірі</string>
@@ -793,9 +794,9 @@
   <string name="pref_dip_thr_summary">Максимально допустиме відхилення кута магнітного поля при замірі</string>
   <string name="pref_dip_thr_message">Максимально допустиме відхилення кута магнітного поля при замірі</string>
 
-  <string name="pref_leg_title">Допустиме відхилення замірів відрізків</string>
-  <string name="pref_leg_summary">Точність замірів пікетів відрізка</string>
-  <string name="pref_leg_message">Точність замірів пікетів відрізка</string>
+  <string name="pref_leg_title">Допустиме рохходження замірів відрізків</string>
+  <string name="pref_leg_summary">Допустиме розходження в повторних вимірах між пікетами</string>
+  <string name="pref_leg_message">Допустиме розходження в повторних вимірах між пікетами</string>
   <string name="pref_backsight_title">зворотний замір</string>
   <string name="pref_backsight_summary">Поле для введення зворотного заміра в диалозі ручного введення заміру</string>
   <string name="pref_prev_next_title">Кнопки Поперед/Наступ</string>
@@ -808,12 +809,12 @@
   <string name="pref_team_title">Группа зйомки</string>
   <string name="pref_team_summary">Группа зйомки</string>
   <string name="pref_team_message">Группа зйомки за замовчуванням</string>
-  <string name="pref_ethr_title">Вертикальний поріг бокового заміру</string>
-  <string name="pref_ethr_summary">Область верт. проекції (бок. замір)</string>
-  <string name="pref_ethr_message">Кут близько 90 для верт. проекції бок. заміру [град]</string>
-  <string name="pref_vthr_title">Вертикальний поріг для відрізків</string>
-  <string name="pref_vthr_summary">Верт. поріг ЛПВН/ЗВСЮ</string>
-  <string name="pref_vthr_message">Допустимий нахил відрізка між ЛПВН/ЗВСЮ</string>
+  <string name="pref_ethr_title">Поріг вертикальності бокового заміру</string>
+  <string name="pref_ethr_summary">Кутовий діапазон проекції (бок. замір)</string>
+  <string name="pref_ethr_message">Кут близько 90 для верт. проекції бок. заміру на вертикальній площині [град]</string>
+  <string name="pref_vthr_title">Поріг вертикальності для відрізків</string>
+  <string name="pref_vthr_summary">Кутовий поріг ЛПВН/ЗВСЮ</string>
+  <string name="pref_vthr_message">Допустимий кут відрізка між ЛПВН/ЗВСЮ</string>
   <string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Поріг кута  бок. заміру в плані</string -->
   <string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string>
@@ -850,7 +851,7 @@
   <string name="pref_drawing_unit_summary">Розмір символів точок</string>
   <string name="pref_drawing_unit_message">Базовий розмір символів точок [потрібен перезапуск програми]</string>
   <string name="pref_unscaled_points_title">Не-збільшувані значки точок</string>
-  <string name="pref_unscaled_points_summary">Значки точок не збільшувані</string>
+  <string name="pref_unscaled_points_summary">Не масштабувати знаки точок</string>
   <string name="pref_segment_title">Крок точок в лінію</string>
   <!-- UNUSED string name="pref_segment_summary">Крок точок на лінії</string -->
   <string name="pref_segment_message">Мінімальна відстань між точками в лінії</string>
@@ -901,7 +902,7 @@
   <string name="pref_checkAttached_summary">Перевіряти належність пікетов</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Області xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Зберігати області як в xtherion</string -->
-  <!-- UNUSED string name="pref_therion_splays_title">Бокові заміри в Therion</string -->
+  <string name="pref_therion_splays_title">Бокові заміри в Therion</string>
   <string name="pref_therion_splays_summary">Додати лінії бокових замірів в файл th2</string>
   <string name="pref_autoStations_title">Точки пікетів Therion</string>
   <string name="pref_autoStations_summary">Додавати точки пікетів в експорт абрису</string>
@@ -914,15 +915,15 @@
 
   <string name="pref_picker_type_title">Вид меню і рисования</string>
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
-  <string name="pref_section_stations_title">Пікети на перерізах</string>
+  <string name="pref_section_stations_title">Пікети на поперечних перерізах</string>
   <string name="pref_section_stations_summary">Переріз пікета привязки</string>
   <string name="pref_station_size_title">Розмір номера пікетів</string>
   <string name="pref_station_size_summary">Розмір номера пікетів</string>
   <string name="pref_station_size_message">Розмір подписи пікетів</string>
-  <string name="pref_zoom_controls_title">Управління зума кнопками</string>
+  <string name="pref_zoom_controls_title">Відображення кнопки зума</string>
   <string name="pref_zoom_controls_summary">Управління зумом через мультитач</string>
-  <string name="pref_side_drag_title">Перетягування за сторону</string>
-  <string name="pref_side_drag_summary">Включити перетескування за сторону у вікні абрису</string>
+  <string name="pref_side_drag_title">Перетягування за край</string>
+  <string name="pref_side_drag_summary">Включити перетаскування за край у вікні абрису</string>
   <string name="pref_unit_grid_title">Одиниці вим. сітки в абрисах</string>
   <string name="pref_unit_grid_summary">Крок сітки в абрисах</string>
   <string name="pref_recent_nr_title">К-сть недавніх інструментів</string>
