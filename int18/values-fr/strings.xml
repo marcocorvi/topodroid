@@ -8,7 +8,7 @@
     <string name="double_back">Appuyez RETOUR une nouvelle fois pour sortir</string>
 
     <string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez vous réinstaller les symboles de dessins ?</string>
-    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
+    <string name="symbols_ask">Souhaitez vous réinstaller les outils de dessin ?</string>
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
@@ -462,7 +462,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importer</string>
-    <!-- TODO string name="btn_install">Install</string -->
+    <string name="btn_install">Installer</string>
 
 
 <!-- FIXME_SKETCH_3D -->    
@@ -506,12 +506,12 @@
     <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">SUIVANT</string -->
-    <string name="no_shot_between_stations">pas de points entre less stations</string>
-    <string name="few_line_points">La ligena trop peu de points</string>
+    <string name="no_shot_between_stations">pas de points entre les stations</string>
+    <string name="few_line_points">La ligne a trop peu de points</string>
     <string name="line_delete">supprimer ligne</string>
-    <string name="flip_shots">Inverser les Points</string>
+    <string name="flip_shots">Inverser les points</string>
 
-    <!-- TODO string name="menu_head">HEAD</string -->
+    <!-- OK SKETCH3D non utilisé string name="menu_head">HEAD</string -->
     <!-- string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
@@ -769,7 +769,7 @@
   <string name="pref_azimuth_manual_title">Définition manuelle "extension"</string>
   <string name="pref_azimuth_manual_summary">Définir manuellement les extensions D/G des visées</string>
 
-  <string name="pref_team_title">Équipe péleo</string>
+  <string name="pref_team_title">Équipe spéleo</string>
   <string name="pref_team_summary">Nom équipe de Spéleo</string>
   <string name="pref_team_message">Nom équipe de topographie</string>
 
@@ -866,8 +866,8 @@
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Aire Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string -->
-  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
-  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
+  <string name="pref_therion_splays_title">Visées latérales Therion</string>
+  <string name="pref_therion_splays_summary">Ajouter les lignes u:splay aux fichiers th2</string>
   <string name="pref_autoStations_title">Stations auto</string>
   <string name="pref_autoStations_summary">Ajouter les stations automatiquement</string>
   <string name="pref_loopClosure_title">Bouclage</string>
