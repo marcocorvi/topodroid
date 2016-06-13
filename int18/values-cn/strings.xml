@@ -7,7 +7,7 @@
     <string name="double_back">双击返回键退出</string>
 
     <string name="version_ask">升级到新版.\n要重装绘图工具?</string>
-    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
+    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
 
     <string name="POINT">点图例</string>
     <string name="LINE">线图例</string>

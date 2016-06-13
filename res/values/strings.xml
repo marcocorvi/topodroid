@@ -7,7 +7,7 @@
     <string name="double_back">Click BACK again to exit</string>
 
     <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string>
-    <string name="symbols_ask">Do you want to reinstall drawing tools?</string>
+    <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string>
 
     <string name="POINT">POINT</string>
     <string name="LINE">LINE</string>

@@ -91,7 +91,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "24";
+  static String SYMBOL_VERSION = "25";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -168,7 +168,7 @@ public class TopoDroidApp extends Application
   // -----------------------------------------------------
 
   private SharedPreferences mPrefs;
-  boolean askSymbolUpdate = false; // by default do not ask
+  // FIXME INSTALL_SYMBOL boolean askSymbolUpdate = false; // by default do not ask
 
   static final int STATUS_NORMAL  = 0;   // item (shot, plot, fixed) status
   static final int STATUS_DELETED = 1;  
@@ -586,7 +586,7 @@ public class TopoDroidApp extends Application
     if ( version == null || ( ! version.equals(VERSION) ) ) {
       mDData.setValue( "version", VERSION );
       // FIXME MANUAL installManual( );  // must come before installSymbols
-      installSymbols( false ); // this updates symbol_version in the database
+      // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
       installFirmware( false );
       // installUserManual( );
       updateDefaultPreferences(); // reset a few default preference values
@@ -1924,26 +1924,35 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // SYMBOLS
 
+  // FIXME INSTALL_SYMBOL
+  // void installSymbols( boolean overwrite )
+  // {
+  //   boolean install = overwrite;
+  //   askSymbolUpdate = false;
+  //   if ( ! overwrite ) { // check whether to install
+  //     String version = mDData.getValue( "symbol_version" );
+  //     // Log.v("DistoX", "symbol version <" + version + "> SYMBOL_VERSION <" + SYMBOL_VERSION + ">" );
+  //     if ( version == null ) {
+  //       install = true;
+  //     } else if ( ! version.equals(SYMBOL_VERSION) ) {
+  //       askSymbolUpdate = true;
+  //     } else { // version .equals SYMBOL_VERSION
+  //       return;
+  //     }
+  //   }
+  //   if ( install ) {
+  //     deleteObsoleteSymbols();
+  //     InputStream is = getResources().openRawResource( R.raw.symbols );
+  //     symbolsUncompress( is, overwrite );
+  //   }
+  //   mDData.setValue( "symbol_version", SYMBOL_VERSION );
+  // }
+
   void installSymbols( boolean overwrite )
   {
-    boolean install = overwrite;
-    askSymbolUpdate = false;
-    if ( ! overwrite ) { // check whether to install
-      String version = mDData.getValue( "symbol_version" );
-      // Log.v("DistoX", "symbol version <" + version + "> SYMBOL_VERSION <" + SYMBOL_VERSION + ">" );
-      if ( version == null ) {
-        install = true;
-      } else if ( ! version.equals(SYMBOL_VERSION) ) {
-        askSymbolUpdate = true;
-      } else { // version .equals SYMBOL_VERSION
-        return;
-      }
-    }
-    if ( install ) {
-      deleteObsoleteSymbols();
-      InputStream is = getResources().openRawResource( R.raw.symbols );
-      symbolsUncompress( is, overwrite );
-    }
+    deleteObsoleteSymbols();
+    InputStream is = getResources().openRawResource( R.raw.symbols );
+    symbolsUncompress( is, overwrite );
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
   }
 

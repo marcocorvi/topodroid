@@ -7,7 +7,7 @@
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
 
     <string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string>
-    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
+    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
 
     <string name="POINT">PUNTO</string>
     <string name="LINE">LINEA</string>

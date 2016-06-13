@@ -8,7 +8,7 @@
     <string name="double_back">Appuyez RETOUR une nouvelle fois pour sortir</string>
 
     <string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez vous réinstaller les symboles de dessins ?</string>
-    <!-- TODO string name="symbols_ask">Do you want to reinstall drawing tools?</string -->
+    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>

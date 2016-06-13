@@ -686,19 +686,20 @@ public class TopoDroidActivity extends Activity
       mTopoDroidAbout.show();
     }
 
-    if ( mApp.askSymbolUpdate ) {
-      // (new TopoDroidVersionDialog(this, mApp)).show();
-      // FIXME SYMBOL if symbol have not been updated TopoDroid exits
-      // if ( mApp.askSymbolUpdate ) finish();
-      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.version_ask,
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick( DialogInterface dialog, int btn ) {
-            mApp.installSymbols( true );
-          }
-      } );
-    }
-    // mApp.installSymbols( true );
+    // FIXME INSTALL_SYMBOL
+    // if ( mApp.askSymbolUpdate ) {
+    //   // (new TopoDroidVersionDialog(this, mApp)).show();
+    //   // FIXME SYMBOL if symbol have not been updated TopoDroid exits
+    //   // if ( mApp.askSymbolUpdate ) finish();
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.version_ask,
+    //     new DialogInterface.OnClickListener() {
+    //       @Override
+    //       public void onClick( DialogInterface dialog, int btn ) {
+    //         mApp.installSymbols( true );
+    //       }
+    //   } );
+    // }
+    // // mApp.installSymbols( true );
 
     // setTitleColor( 0x006d6df6 );
 
