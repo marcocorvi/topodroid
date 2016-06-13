@@ -7,6 +7,7 @@
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
     <string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string>
+    <!-- REPLACED string name="symbols_ask">Zeichenwerkzeuge neu installieren?</string -->
     <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
 
     <string name="POINT">PUNKTE</string>
@@ -300,9 +301,9 @@
     <string name="connected_none">Nicht verbunden</string>
     <string name="connected_already">Bereits verbunden</string>
 
-    <string name="not_available">BT nicht verfügbar</string>
+    <string name="not_available">Bluetooth nicht verfügbar</string>
     <!-- UNUSED string name="not_connected">Nicht verbinden</string -->
-    <string name="not_enabled">BT nicht aktiviert</string>
+    <string name="not_enabled">Bluetooth nicht aktiviert</string>
     <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
     <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
     <string name="photo">Foto</string>
@@ -507,7 +508,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importieren</string>
-    <!-- TODO string name="btn_install">Install</string -->
+    <string name="btn_install">Neu installieren</string>
 
 
 <!-- FIXME_SKETCH_3D -->    
@@ -938,7 +939,7 @@
   <!-- UNUSED string name="pref_device_title">Device</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
   <!-- UNUSED string name="pref_device_message">DistoX address name</string -->
-  <!-- OK string name="pref_checkBT_title">Bluetooth</string -->
+  <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
   <string name="pref_checkAttached_title">Messlinien-Check</string>
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
