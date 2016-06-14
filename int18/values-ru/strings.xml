@@ -6,9 +6,9 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
-    <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить объекты рисунков?</string>
+    <string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string>
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
-    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
+    <string name="symbols_ask">Установить инструменты рисования v.%1$s?\n(Текущая v.%2$s)</string>
 
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛИНИЯ</string>
