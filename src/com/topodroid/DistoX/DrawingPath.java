@@ -110,6 +110,9 @@ public class DrawingPath extends RectF
     cx = dx - cx;
     x1 = dx - x1;
     x2 = dx - x2;
+    float r1 = dx - left;
+    left = dx - right;
+    right = r1;
     boolean flip_path = false;
     if ( mType != DRAWING_PATH_POINT ) return;
     DrawingPointPath dpp = (DrawingPointPath)this;

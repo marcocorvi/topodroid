@@ -76,6 +76,7 @@ public class ShotDialog extends MyDialog
   private MyCheckBox mCBlegNext;
   private MyCheckBox mCBallSplay;
   private MyCheckBox mCBrenumber;
+  private MyCheckBox mCBhighlight;
 
   private Button mButtonReverse;
 
@@ -309,12 +310,13 @@ public class ShotDialog extends MyDialog
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, 10, 20, 10 );
 
-    mRBdup      = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
-    mRBsurf     = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
-    mCBleg      = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
-    mCBlegNext  = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
-    mCBallSplay = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
-    mCBrenumber = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
+    mRBdup       = new MyCheckBox( mContext, size, R.drawable.iz_dup_ok, R.drawable.iz_dup_no );
+    mRBsurf      = new MyCheckBox( mContext, size, R.drawable.iz_surface_ok, R.drawable.iz_surface_no );
+    mCBleg       = new MyCheckBox( mContext, size, R.drawable.iz_leg2_ok, R.drawable.iz_leg2_no );
+    mCBlegNext   = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
+    mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
+    mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
+    mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
     layout4.addView( mRBdup, lp );
     layout4.addView( mRBsurf, lp );
@@ -322,6 +324,7 @@ public class ShotDialog extends MyDialog
     layout4.addView( mCBlegNext, lp );
     layout4.addView( mCBallSplay, lp );
     layout4.addView( mCBrenumber );
+    layout4.addView( mCBhighlight );
 
     mCBleg.setOnClickListener( this );
     mCBlegNext.setOnClickListener( this );
@@ -423,10 +426,17 @@ public class ShotDialog extends MyDialog
     String comment = mETcomment.getText().toString();
     if ( comment != null ) mBlk.mComment = comment;
 
-    boolean renumber = false;
-    if ( shot_from.length() > 0 && shot_to.length() > 0 ) {
-      renumber = mCBrenumber.isChecked();
-      all_splay = false;
+    boolean renumber  = false;
+    boolean highlight = false;
+    if ( shot_from.length() > 0 ) {
+      if ( shot_to.length() > 0 ) {
+        renumber = mCBrenumber.isChecked();
+        all_splay = false;
+      } else {  
+        if ( mCBhighlight.isChecked() ) {
+          mParent.highlightBlock( mBlk );
+        }
+      }
     }
 
     if ( all_splay ) {

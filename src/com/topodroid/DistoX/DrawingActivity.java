@@ -442,6 +442,8 @@ public class DrawingActivity extends ItemDrawer
       } else {
         dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
       }
+      
+      if ( mApp.getHighlightedSplayId() == blk.mId ) { dpath.setPaint( DrawingBrushPaths.highlightPaint ); }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
       if ( blk.isMultiBad() ) {
@@ -3362,7 +3364,11 @@ public class DrawingActivity extends ItemDrawer
     // if ( compute ) {
       List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
-      computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      if ( mPlot2 != null ) {
+        computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      }
     // }
     // if ( reference ) {
     //   if ( mType == (int)PlotInfo.PLOT_PLAN ) {

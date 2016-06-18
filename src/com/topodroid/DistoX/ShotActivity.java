@@ -1316,6 +1316,7 @@ public class ShotActivity extends Activity
     }
   }
 
+  void highlightBlock( DistoXDBlock blk ) { mApp.setHighlightedSplay( blk ); }
   
   // this method is called by ShotDialog() with to.length() == 0 ie to == ""
   // and blk splay shot

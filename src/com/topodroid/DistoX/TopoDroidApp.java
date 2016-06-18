@@ -118,6 +118,11 @@ public class TopoDroidApp extends Application
   static float mManualCalibrationAzimuth = 0;
   static float mManualCalibrationClino   = 0;
 
+  DistoXDBlock mHighlightedSplay = null;
+  void setHighlightedSplay( DistoXDBlock blk ) { mHighlightedSplay = blk; }
+  long getHighlightedSplayId( ) { return (mHighlightedSplay == null)? -1 : mHighlightedSplay.mId; }
+  
+
   static private void resetManualCalibrations() 
   {
     mManualCalibrationLength  = 0; 
@@ -587,6 +592,7 @@ public class TopoDroidApp extends Application
       mDData.setValue( "version", VERSION );
       // FIXME MANUAL installManual( );  // must come before installSymbols
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
+      if ( mDData.getValue( "symbol_version" ) == null ) installSymbols( true );
       installFirmware( false );
       // installUserManual( );
       updateDefaultPreferences(); // reset a few default preference values
@@ -630,6 +636,8 @@ public class TopoDroidApp extends Application
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;
     mScaleFactor   = (mDisplayHeight / 320.0f) * density;
+
+    mHighlightedSplay = null;
 
     // mManual = getResources().getString( R.string.topodroid_man );
   }
