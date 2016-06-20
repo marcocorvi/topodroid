@@ -200,6 +200,9 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     OnClickListener edit1 = new OnClickListener() {
         public void onClick( View v ) { mParent.onBlockClick( holder.blk, holder.pos ); }
     };
+    OnLongClickListener edit10 = new OnLongClickListener() {
+        public boolean onLongClick( View v ) { mParent.highlightBlock( holder.blk ); return true; }
+    };
     OnClickListener edit2 = new OnClickListener() {
         public void onClick( View v ) { mParent.onBlockLongClick( holder.blk ); }
     };
@@ -207,6 +210,8 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     holder.tvTo.setOnClickListener( toggle );
     holder.tvLength.setOnClickListener( edit1 );
     holder.tvCompass.setOnClickListener( edit1 );
+    holder.tvLength.setOnLongClickListener( edit10 );
+    holder.tvCompass.setOnLongClickListener( edit10 );
     holder.tvClino.setOnClickListener( edit2 );
     holder.tvNote.setOnClickListener( edit2 );
 

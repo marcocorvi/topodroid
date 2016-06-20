@@ -278,6 +278,7 @@ public class SymbolLine extends Symbol
               } else if ( vals[k].startsWith("x") ) {
                 try {
                   mStyleX = Integer.parseInt( vals[k].substring(1) );
+                  if ( mStyleX <= 0 ) mStyleX = ItemDrawer.POINT_MAX; // FIXME INT_MAX
                 } catch ( NumberFormatException e ) { }
               }
             }

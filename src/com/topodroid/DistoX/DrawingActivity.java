@@ -201,6 +201,7 @@ public class DrawingActivity extends ItemDrawer
   // 1: bezier interpolator
 
   private String mSectionName;
+  private String mMoveTo; // station of highlighted splay
 
   private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
   private DrawingSurface  mDrawingSurface;
@@ -645,9 +646,42 @@ public class DrawingActivity extends ItemDrawer
 
   // ---------------------------------------------------------------------------------------
 
+  private void moveTo( int type, String move_to )
+  {
+    // if ( move_to == null ) return;
+    NumStation st = mNum.getStation( move_to );
+    if ( st != null ) {
+      if ( type == PlotInfo.PLOT_PLAN ) {
+        mZoom     = mPlot1.zoom;
+        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.e );
+        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.s );
+        saveReference( mPlot1, mPid1 );
+        // resetReference( mPlot1 );
+        // mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+        return;
+      } else if ( type == PlotInfo.PLOT_EXTENDED ) {
+        mZoom     = mPlot2.zoom;
+        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.h );
+        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.v );
+        saveReference( mPlot2, mPid2 );
+        // resetReference( mPlot2 );
+        return;
+      } else { // if ( type == PlotInfo.PLOT_PROFILE ) 
+        float cosp = TDMath.cosd( mPlot2.azimuth );
+        float sinp = TDMath.sind( mPlot2.azimuth );
+        mZoom     = mPlot2.zoom;
+        mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.e * cosp + st.s * sinp );
+        mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.v );
+        saveReference( mPlot2, mPid2 );
+        return;
+      }
+    }
+  }
+
   // this is called only for PLAN / PROFILE
   private void computeReferences( int type, float xoff, float yoff, float zoom, boolean can_toast )
   {
+    // Log.v("DistoX", "computeReferences()" );
     if ( ! PlotInfo.isSketch2D( type ) ) return;
     mDrawingSurface.clearReferences( type );
 
@@ -963,6 +997,7 @@ public class DrawingActivity extends ItemDrawer
   {
     super.onCreate(savedInstanceState);
     // TDLog.TimeStart();
+    // Log.v("DistoX", "onCreate()" );
 
     mApp  = (TopoDroidApp)getApplication();
     mData = mApp.mData; // new DataHelper( this ); 
@@ -1060,6 +1095,8 @@ public class DrawingActivity extends ItemDrawer
     mTo      = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );
     mAzimuth = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
     mClino   = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_CLINO );
+    mMoveTo  = extras.getString( TopoDroidTag.TOPODROID_PLOT_MOVE_TO );
+    if ( mMoveTo.length() == 0 ) mMoveTo = null;
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
     mContinueLine = CONT_NO;
@@ -1140,6 +1177,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void doResume()
     {
+      // Log.v("DistoX", "doResume()" );
       PlotInfo info = mApp.mData.getPlotInfo( mSid, mName );
       mOffset.x = info.xoffset;
       mOffset.y = info.yoffset;
@@ -1173,6 +1211,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void doStart( boolean do_load )
     {
+      // Log.v("DistoX", "doStart()" );
       // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
       mCurrentPoint = ( DrawingBrushPaths.mPointLib.isSymbolEnabled( "label" ) )? 1 : 0;
       mCurrentLine  = ( DrawingBrushPaths.mLineLib.isSymbolEnabled( "wall" ) )? 1 : 0;
@@ -1333,6 +1372,7 @@ public class DrawingActivity extends ItemDrawer
 
     private void loadFiles( long type, List<DistoXDBlock> list )
     {
+      // Log.v("DistoX", "load files()" );
       
       String filename1  = null;
       String filename1b = null;
@@ -1396,6 +1436,8 @@ public class DrawingActivity extends ItemDrawer
         computeReferences( mPlot2.type, mOffset.x, mOffset.y, mZoom, true );
         computeReferences( mPlot1.type, mOffset.x, mOffset.y, mZoom, true );
 
+        doMoveTo();
+
         mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       } else {
         mTo = ( PlotInfo.isSection( type ) )? mPlot3.view : "";
@@ -1426,6 +1468,7 @@ public class DrawingActivity extends ItemDrawer
 
    private void updateReference()
    {
+     // Log.v("DistoX", "updateReference()" );
      if ( mType == PlotInfo.PLOT_PLAN ) {
        saveReference( mPlot1, mPid1 );
      } else if ( PlotInfo.isProfile( mType ) ) {
@@ -1435,6 +1478,7 @@ public class DrawingActivity extends ItemDrawer
 
    private void saveReference( PlotInfo plot, long pid )
    {
+     // Log.v("DistoX", "saveReference()" );
      // Log.v("DistoX", "save pid " + pid + " ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
      plot.xoffset = mOffset.x;
      plot.yoffset = mOffset.y;
@@ -1956,7 +2000,7 @@ public class DrawingActivity extends ItemDrawer
                 }
               }
               
-              if ( mPointCnt > mLinePointStep ) {
+              if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
                 if ( ! ( mSymbol == SYMBOL_LINE && mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) 
                      && TDSetting.mLineStyle == TDSetting.LINE_STYLE_BEZIER
                      && ( mSymbol == SYMBOL_AREA || ! DrawingBrushPaths.mLineLib.isStyleStraight( mCurrentLinePath.mLineType ) )
@@ -3326,10 +3370,22 @@ public class DrawingActivity extends ItemDrawer
   //   return super.onOptionsItemSelected( item );
   // }
 
+  private void doMoveTo()
+  {
+    if ( mMoveTo != null ) {
+      // Log.v("DistoX", "do move to" );
+      moveTo( mPlot1.type, mMoveTo );
+      moveTo( mPlot2.type, mMoveTo );
+      mMoveTo = null;
+    }
+  }
+
   private void doComputeReferences()
   {
+    // Log.v("DistoX", "doComputeReferences()" );
     List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
+    // doMoveTo();
     if ( mType == (int)PlotInfo.PLOT_PLAN ) {
       computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
@@ -3343,6 +3399,7 @@ public class DrawingActivity extends ItemDrawer
 
   public void refreshDisplay( int nr, boolean toast )
   {
+    // Log.v("DistoX", "refreshDisplay()" );
     setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -3361,9 +3418,11 @@ public class DrawingActivity extends ItemDrawer
 
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
+    // Log.v("DistoX", "updateDisplay()" );
     // if ( compute ) {
       List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
+      // doMoveTo();
       // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
       computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
       if ( mPlot2 != null ) {
@@ -3582,14 +3641,15 @@ public class DrawingActivity extends ItemDrawer
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
 
-  void exportAsCsx( PrintWriter pw )
+  void exportAsCsx( PrintWriter pw, String prefix )
   {
+    // Log.v("DistoX", "export as CSX <<" + prefix + ">>" );
     pw.format("  <plan>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN );
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, prefix );
     pw.format("    <plot />\n");
     pw.format("  </plan>\n");
     pw.format("  <profile>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED ); 
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, prefix ); 
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");
   }

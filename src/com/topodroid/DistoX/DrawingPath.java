@@ -104,9 +104,10 @@ public class DrawingPath extends RectF
   
   public void flipXAxis()
   {
-    float offx = 2 * ( DrawingUtil.CENTER_X + cx );
-    float offc = 2 * ( DrawingUtil.CENTER_X - cx );
-    float dx = 2 * DrawingUtil.CENTER_X;
+    float x0 = TopoDroidApp.mDisplayWidth / 2;
+    float offx = 2 * ( x0 + cx );
+    float offc = 2 * ( x0 - cx );
+    float dx = 2 * x0;
     cx = dx - cx;
     x1 = dx - x1;
     x2 = dx - x2;
@@ -119,7 +120,7 @@ public class DrawingPath extends RectF
     if ( dpp.mOrientation != 0 ) {
       dpp.mOrientation = 360 - dpp.mOrientation;
       flip_path = true;
-      offx = 2 * ( DrawingUtil.CENTER_X );
+      offx = 2 * x0;
     } else {
       offx = offc;
     }
@@ -302,7 +303,7 @@ public class DrawingPath extends RectF
 
   void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR DrawingPath toDataStream executed"); }
 
-  public void toCsurvey( PrintWriter pw ) { }
+  public void toCsurvey( PrintWriter pw, String prefix ) { }
 
   // ICanvasCommand interface
   //

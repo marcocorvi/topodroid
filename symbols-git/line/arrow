@@ -10,18 +10,18 @@ name-ru стрелка
 name-bg стрелка
 name-ua стрілка
 th_name arrow
-style straight x4
+style straight x0
 color 0xcccccc 0xff
 width 1
 csurvey 5 1 2 2
 effect
   moveTo 0 0
-  lineTo 10 0
-  lineTo 10 3
-  lineTo 13 0
-  lineTo 13 -1
-  lineTo 10 -4
-  lineTo 10 -1
+  lineTo 15 0
+  lineTo 15 7
+  lineTo 20 0
+  lineTo 20 -1
+  lineTo 15 -8
+  lineTo 15 -1
   lineTo 0 -1
 endeffect
 endsymbol

@@ -913,7 +913,7 @@ public class DrawingCommandManager
     }
     if ( mBitmapScale <= 0.05 ) return null;
     if ( bitmap == null ) return null;
-    Log.v( "DistoX", "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
+    // Log.v( "DistoX", "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
     Canvas c = new Canvas (bitmap);
     // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
     c.drawColor( TDSetting.mBitmapBgcolor );
@@ -1916,7 +1916,7 @@ public class DrawingCommandManager
     DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mCurrentStack, mUserStations, mStations );
   }
 
-  void exportAsCsx( PrintWriter pw )
+  void exportAsCsx( PrintWriter pw, String prefix )
   {
     synchronized( mCurrentStack ) {
       pw.format("    <layers>\n");
@@ -1936,7 +1936,7 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath ap = (DrawingAreaPath)p;
           if ( DrawingBrushPaths.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
-          ap.toCsurvey( pw );
+          ap.toCsurvey( pw, prefix );
         }
       }
       pw.format("        </items>\n");
@@ -1952,11 +1952,11 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
-          lp.toCsurvey( pw );
+          lp.toCsurvey( pw, prefix );
         } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath ap = (DrawingAreaPath)p;
           if ( DrawingBrushPaths.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
-          ap.toCsurvey( pw );
+          ap.toCsurvey( pw, prefix );
         } 
       }
       pw.format("        </items>\n");
@@ -1972,7 +1972,7 @@ public class DrawingCommandManager
 	if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
 	  DrawingLinePath lp = (DrawingLinePath)p;
 	  if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
-	  lp.toCsurvey( pw );
+	  lp.toCsurvey( pw, prefix );
         }
       }
       pw.format("        </items>\n");
@@ -1988,7 +1988,7 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
-          lp.toCsurvey( pw );
+          lp.toCsurvey( pw, prefix );
         }
       }
       pw.format("        </items>\n");
@@ -2004,7 +2004,7 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
           if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
-          lp.toCsurvey( pw );
+          lp.toCsurvey( pw, prefix );
         }
         // if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
         //   // linetype: 0 line, 1 spline, 2 bezier
@@ -2036,7 +2036,7 @@ public class DrawingCommandManager
         if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath pp = (DrawingPointPath)p;
           if ( DrawingBrushPaths.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
-          pp.toCsurvey( pw );
+          pp.toCsurvey( pw, prefix );
         }
       }
       pw.format("        </items>\n");

@@ -24,6 +24,7 @@ class TopoDroidTag
   public static final String TOPODROID_PLOT_ZOOM    = "plot_zoom";
   public static final String TOPODROID_PLOT_AZIMUTH = "plot_azimuth";
   public static final String TOPODROID_PLOT_CLINO   = "plot_clino";
+  public static final String TOPODROID_PLOT_MOVE_TO = "plot_move_to";
   public static final String TOPODROID_PLOT_XOFF    = "plot_xoff";
   public static final String TOPODROID_PLOT_YOFF    = "plot_yoff";
   public static final String TOPODROID_HELP_PAGE    = "help_page";

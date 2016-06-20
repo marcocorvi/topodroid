@@ -319,7 +319,7 @@ class TopoDroidExporter
 
       // ============= SKETCHES
       if ( sketch != null ) {
-        sketch.exportAsCsx( pw );
+        sketch.exportAsCsx( pw, cave );
       } else {
         pw.format("  <plan>\n");
         exportEmptyCsxSketch( pw );

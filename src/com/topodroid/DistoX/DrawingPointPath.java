@@ -232,14 +232,15 @@ public class DrawingPointPath extends DrawingPath
   }
 
   // @Override
-  public void toCsurvey( PrintWriter pw )
+  public void toCsurvey( PrintWriter pw, String prefix )
   { 
     int size = mScale - SCALE_XS;
     int layer  = DrawingBrushPaths.getPointCsxLayer( mPointType );
     int type   = DrawingBrushPaths.getPointCsxType( mPointType );
     int cat    = DrawingBrushPaths.getPointCsxCategory( mPointType );
     String csx = DrawingBrushPaths.getPointCsx( mPointType );
-    pw.format("<item layer=\"%d\" type=\"%d\" category=\"%d\" transparency=\"0.00\" data=\"", layer, type, cat );
+    pw.format("<item layer=\"%d\" cave=\"%s\" type=\"%d\" category=\"%d\" transparency=\"0.00\" data=\"",
+      layer, prefix, type, cat );
 
     pw.format("&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot; &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;[]&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xml:space=&quot;preserve&quot; style=&quot;shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;&lt;defs&gt;&lt;style type=&quot;text/css&quot;&gt;&lt;![CDATA[ .str0 {stroke:#1F1A17;stroke-width:0.2} .fil0 {fill:none} ]]&gt;&lt;/style&gt;&lt;/defs&gt;&lt;g id=&quot;Livello_%d&quot;&gt;", layer );
     pw.format("%s", csx );

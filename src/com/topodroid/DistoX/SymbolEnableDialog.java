@@ -87,7 +87,7 @@ class SymbolEnableDialog extends MyDialog
     mBTarea  = (Button) findViewById(R.id.symbol_area );
     mBTreload = (Button) findViewById(R.id.symbol_reload );
 
-    if ( TDSetting.mLevelOverAdvanced ) {
+    if ( TDSetting.mLevelOverNormal ) {
       mBTreload.setOnClickListener( this );
     } else {
       mBTreload.setVisibility( View.GONE );

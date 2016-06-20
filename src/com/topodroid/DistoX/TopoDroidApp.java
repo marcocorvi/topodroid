@@ -91,7 +91,7 @@ public class TopoDroidApp extends Application
 {
   String mCWD;  // current work directory
 
-  static String SYMBOL_VERSION = "25";
+  static String SYMBOL_VERSION = "26";
   static String VERSION = "0.0.0"; 
   static int VERSION_CODE = 0;
   static int MAJOR = 0;
@@ -636,6 +636,10 @@ public class TopoDroidApp extends Application
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;
     mScaleFactor   = (mDisplayHeight / 320.0f) * density;
+    // FIXME it would be nice to have this, but it breaks all existing sketches
+    //       therefore must stick with initial choice
+    // DrawingUtil.CENTER_X = mDisplayWidth  / 2;
+    // DrawingUtil.CENTER_Y = mDisplayHeight / 2;
 
     mHighlightedSplay = null;
 

@@ -76,7 +76,7 @@ public class ShotDialog extends MyDialog
   private MyCheckBox mCBlegNext;
   private MyCheckBox mCBallSplay;
   private MyCheckBox mCBrenumber;
-  private MyCheckBox mCBhighlight;
+  // private MyCheckBox mCBhighlight;
 
   private Button mButtonReverse;
 
@@ -316,7 +316,7 @@ public class ShotDialog extends MyDialog
     mCBlegNext   = new MyCheckBox( mContext, size, R.drawable.iz_legnext_ok, R.drawable.iz_legnext_no );
     mCBallSplay  = new MyCheckBox( mContext, size, R.drawable.iz_splays_ok, R.drawable.iz_splays_no );
     mCBrenumber  = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
-    mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
+    // mCBhighlight = new MyCheckBox( mContext, size, R.drawable.iz_highlight_ok, R.drawable.iz_highlight_no );
 
     layout4.addView( mRBdup, lp );
     layout4.addView( mRBsurf, lp );
@@ -324,7 +324,7 @@ public class ShotDialog extends MyDialog
     layout4.addView( mCBlegNext, lp );
     layout4.addView( mCBallSplay, lp );
     layout4.addView( mCBrenumber );
-    layout4.addView( mCBhighlight );
+    // layout4.addView( mCBhighlight );
 
     mCBleg.setOnClickListener( this );
     mCBlegNext.setOnClickListener( this );
@@ -432,10 +432,10 @@ public class ShotDialog extends MyDialog
       if ( shot_to.length() > 0 ) {
         renumber = mCBrenumber.isChecked();
         all_splay = false;
-      } else {  
-        if ( mCBhighlight.isChecked() ) {
-          mParent.highlightBlock( mBlk );
-        }
+      // } else {  
+      //   if ( mCBhighlight.isChecked() ) {
+      //     mParent.highlightBlock( mBlk );
+      //   }
       }
     }
 

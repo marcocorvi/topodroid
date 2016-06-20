@@ -977,7 +977,7 @@ public class ShotActivity extends Activity
     Button b = (Button)view;
     if ( b == mButton1[ BTN_PLOT ] ) {
       if ( mRecentPlot != null ) {
-        startExistingPlot( mRecentPlot, mRecentPlotType );
+        startExistingPlot( mRecentPlot, mRecentPlotType, null );
       }
     }
     return true;
@@ -1070,7 +1070,7 @@ public class ShotActivity extends Activity
 
     if ( mPIDp >= 0 ) {
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
-      startDrawingActivity( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN );
+      startDrawingActivity( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, null );
     // } else {
     //   Toast.makeText( this, R.string.plot_duplicate_name, Toast.LENGTH_LONG).show();
     }
@@ -1131,17 +1131,16 @@ public class ShotActivity extends Activity
   }
 /* END SKETCH_3D */
 
-  public void startExistingPlot( String name, long type ) // name = plot/sketch3d name
+  public void startExistingPlot( String name, long type, String station ) // name = plot/sketch3d name
   {
     // TDLog.Log( TDLog.LOG_SHOT, "start Existing Plot \"" + name + "\" type " + type + " sid " + mApp.mSID );
-
     if ( type != PlotInfo.PLOT_SKETCH_3D ) {
       PlotInfo plot1 =  mApp.mData.getPlotInfo( mApp.mSID, name+"p" );
       if ( plot1 != null ) {
         mRecentPlot     = name;
         mRecentPlotType = type;
         PlotInfo plot2 =  mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
-        startDrawingActivity( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type );
+        startDrawingActivity( plot1.start, plot1.name, plot1.id, plot2.name, plot2.id, type, station );
         return;
       } else {
         mRecentPlot = null;
@@ -1159,7 +1158,7 @@ public class ShotActivity extends Activity
   }
 
   private void startDrawingActivity( String start, String plot1_name, long plot1_id,
-                                                   String plot2_name, long plot2_id, long type )
+                                                   String plot2_name, long plot2_id, long type, String station )
   {
     if ( mApp.mSID < 0 || plot1_id < 0 || plot2_id < 0 ) {
       Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
@@ -1168,7 +1167,7 @@ public class ShotActivity extends Activity
     
     // notice when starting the DrawingActivity the remote device is disconnected 
     // FIXME mApp.disconnectRemoteDevice();
-
+    
     Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingActivity.class );
     drawIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mApp.mSID );
     drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME, plot1_name );
@@ -1178,6 +1177,7 @@ public class ShotActivity extends Activity
     drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TO, "" );
     drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_AZIMUTH, 0.0f );
     drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO, 0.0f );
+    drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_MOVE_TO, ((station==null)? "" : station) );
     // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_ID, plot1_id ); // not necessary
     // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_ID2, plot2_id ); // not necessary
 
@@ -1316,7 +1316,14 @@ public class ShotActivity extends Activity
     }
   }
 
-  void highlightBlock( DistoXDBlock blk ) { mApp.setHighlightedSplay( blk ); }
+  void highlightBlock( DistoXDBlock blk ) 
+  {
+    mApp.setHighlightedSplay( blk );
+    // now if there is a plot open it
+    if ( mRecentPlot != null ) {
+      startExistingPlot( mRecentPlot, mRecentPlotType, blk.mFrom );
+    }
+  }
   
   // this method is called by ShotDialog() with to.length() == 0 ie to == ""
   // and blk splay shot

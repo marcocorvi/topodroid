@@ -21,8 +21,8 @@ import android.graphics.Path;
 class DrawingUtil
 {
   static final float SCALE_FIX = 20.0f; 
-  public static final float CENTER_X = 100f;
-  public static final float CENTER_Y = 120f;
+  public static float CENTER_X = 100f;
+  public static float CENTER_Y = 120f;
 
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
 

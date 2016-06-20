@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Locale;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -242,28 +242,39 @@ public class DrawingLinePath extends DrawingPointLinePath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw )
+  public void toCsurvey( PrintWriter pw, String prefix )
   {
     int layer  = DrawingBrushPaths.getLineCsxLayer( mLineType );
     int type   = DrawingBrushPaths.getLineCsxType( mLineType );
     int cat    = DrawingBrushPaths.getLineCsxCategory( mLineType );
     int pen    = DrawingBrushPaths.getLineCsxPen( mLineType );
     // linetype: 0 line, 1 spline, 2 bezier
-    pw.format("          <item layer=\"%d\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\" mergemode=\"0\">\n",
-      layer, type, cat );
+    pw.format("          <item layer=\"%d\" cave=\"%s\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\" mergemode=\"0\">\n",
+      layer, prefix, type, cat );
     pw.format("            <pen type=\"%d\" />\n", pen);
     pw.format("            <points data=\"");
     boolean b = true;
     // for ( LinePoint pt : mPoints ) 
-    LinePoint pt = mFirst; 
-    // NOTE do not skip tick-point if want to save section with tick
-    // if ( mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
-    for ( ; pt != null; pt = pt.mNext ) 
-    {
-      float x = DrawingUtil.sceneToWorldX( pt.mX );
-      float y = DrawingUtil.sceneToWorldY( pt.mY );
-      pw.format(Locale.US, "%.2f %.2f ", x, y );
-      if ( b ) { pw.format("B "); b = false; }
+    if ( ! mReversed ) {
+      // NOTE do not skip tick-point if want to save section with tick
+      // if ( mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
+      LinePoint pt = mFirst; 
+      for ( ; pt != null; pt = pt.mNext ) 
+      {
+        float x = DrawingUtil.sceneToWorldX( pt.mX );
+        float y = DrawingUtil.sceneToWorldY( pt.mY );
+        pw.format(Locale.US, "%.2f %.2f ", x, y );
+        if ( b ) { pw.format("B "); b = false; }
+      }
+    } else {
+      LinePoint pt = mLast;
+      for ( ; pt != null; pt = pt.mPrev ) 
+      {
+        float x = DrawingUtil.sceneToWorldX( pt.mX );
+        float y = DrawingUtil.sceneToWorldY( pt.mY );
+        pw.format(Locale.US, "%.2f %.2f ", x, y );
+        if ( b ) { pw.format("B "); b = false; }
+      }
     }
     pw.format("\" />\n");
     pw.format("          </item>\n");

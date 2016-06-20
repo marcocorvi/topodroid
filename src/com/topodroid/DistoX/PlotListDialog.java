@@ -152,7 +152,7 @@ public class PlotListDialog extends MyDialog
     if ( b == mBtnPlotNew ) {
       hide();
       int idx = 1 + mApp.mData.maxPlotIndex( mApp.mSID );
-      new PlotNewDialog( mParent, mParent, idx ).show();
+      new PlotNewDialog( mParent, mApp, mParent, idx ).show();
 
     // FIXME_SKETCH_3D
     } else if ( mApp.mSketches && b == mBtnSketch3dNew ) {
@@ -208,7 +208,7 @@ public class PlotListDialog extends MyDialog
       }
 
       // long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
-      mParent.startExistingPlot( plot_name, plot_type ); // context of current SID
+      mParent.startExistingPlot( plot_name, plot_type, null ); // context of current SID
     } else {
       String sketch_name = value.substring( from+1, to );
       mParent.startSketchActivity( sketch_name ); // context of current SID

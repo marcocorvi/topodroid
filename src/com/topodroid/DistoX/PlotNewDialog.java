@@ -36,6 +36,7 @@ public class PlotNewDialog extends MyDialog
                            implements View.OnClickListener
                            , View.OnLongClickListener
 {
+  private TopoDroidApp mApp;
   private INewPlot mMaker;
   // private boolean notDone;
 
@@ -48,9 +49,10 @@ public class PlotNewDialog extends MyDialog
   private int mIndex;
   private MyKeyboard mKeyboard = null;
 
-  public PlotNewDialog( Context context, INewPlot maker, int index )
+  public PlotNewDialog( Context context, TopoDroidApp app, INewPlot maker, int index )
   {
     super( context, R.string.PlotNewDialog );
+    mApp    = app;
     mMaker  = maker;
     mIndex  = index;
     // notDone = true;
@@ -69,6 +71,9 @@ public class PlotNewDialog extends MyDialog
     // mEditProject = (EditText) findViewById(R.id.plot_project);
 
     mEditName.setText( Integer.toString( mIndex ) );
+    // if current station is set:
+    String station = mApp.getCurrentOrLastStation();
+    if ( station != null ) mEditStart.setText( station );
     mEditStart.setOnLongClickListener( this );
 
     mBtnOK = (Button) findViewById(R.id.button_ok );

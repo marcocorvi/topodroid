@@ -201,6 +201,10 @@ public class DrawingSurface extends SurfaceView
 
   public int getDisplayMode( ) { return commandManager.getDisplayMode(); }
 
+  /** apply
+   *  X -> (x+dx)*s = x*s + dx*s
+   *  Y -> (y+dy)*s = y*s + dy*s
+   */
   public void setTransform( float dx, float dy, float s )
   {
     commandManager.setTransform( dx, dy, s );
@@ -600,13 +604,13 @@ public class DrawingSurface extends SurfaceView
   // -----------------------------------------------------------------------------
   // EXPORT
 
-  void exportAsCsx( PrintWriter pw, long type )
+  void exportAsCsx( PrintWriter pw, long type, String prefix )
   {
     if ( PlotInfo.isProfile( type ) ) {
       // FIXME OK PROFILE to check
-      mCommandManager2.exportAsCsx( pw );
+      mCommandManager2.exportAsCsx( pw, prefix );
     } else if ( type == PlotInfo.PLOT_PLAN ) {
-      mCommandManager1.exportAsCsx( pw );
+      mCommandManager1.exportAsCsx( pw, prefix );
     } else { // should never happen, but it happens for X-Sections
       pw.format("    <layers>\n");
       pw.format("      <layer name=\"Base\" type=\"0\">\n");

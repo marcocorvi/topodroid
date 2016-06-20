@@ -17,6 +17,8 @@ import android.util.Log;
 
 public class ItemDrawer extends Activity
 {
+  static final int POINT_MAX = 32678;
+
   public static final int SYMBOL_POINT = 1;
   public static final int SYMBOL_LINE  = 2;
   public static final int SYMBOL_AREA  = 3;
@@ -200,7 +202,8 @@ public class ItemDrawer extends Activity
       if ( update_recent ) {
         updateRecentLine( mCurrentLine );
       }
-      mLinePointStep = TDSetting.mLineType * DrawingBrushPaths.mLineLib.getStyleX( mCurrentLine );
+      mLinePointStep = DrawingBrushPaths.mLineLib.getStyleX( mCurrentLine );
+      if ( mLinePointStep != POINT_MAX ) mLinePointStep *= TDSetting.mLineType;
     }
 
     public void pointSelected( int p, boolean update_recent )
