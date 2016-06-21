@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
-    <string name="no_manual">Cannot retrieve user manual from the web</string>
+    <string name="no_manual">Não é possível recuperar o manual do usuário da internet</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Click BACK again to exit</string>
+    <string name="double_back">Clicar VOLTAR novamente para sair</string>
 
-    <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string>
-    <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string>
+    <string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar as ferramentas de desenho?</string>
+    <string name="symbols_ask">Instalar ferramenta de desenho. v.%1$s?\n(Current v.%2$s)</string>
 
-    <string name="POINT">POINT</string>
-    <string name="LINE">LINE</string>
-    <string name="AREA">AREA</string>
-    <string name="HELP">HELP</string>
-    <string name="STATION">STATION </string>
+    <string name="POINT">PONTO</string>
+    <string name="LINE">LINHA</string>
+    <string name="AREA">ÁREA</string>
+    <string name="HELP">AJUDA</string>
+    <string name="STATION">BASE</string>
 
-    <string name="cut">CUT</string>
-    <string name="copy">COPY</string>
-    <string name="paste">PASTE</string>
-    <string name="copied">Copied %1$s to clipboard</string>
+    <string name="cut">CORTA</string>
+    <string name="copy">CÓPIA</string>
+    <string name="paste">COLA</string>
+    <string name="copied">Copiado %1$s na prancheta</string>
 
     <string name="memoryA3">DistoX A3 memory</string>
     <string name="memoryX310">DistoX X310 memory</string>
