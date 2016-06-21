@@ -15,9 +15,9 @@
     <string name="HELP">AJUDA</string>
     <string name="STATION">BASE</string>
 
-    <string name="cut">CORTA</string>
-    <string name="copy">CÓPIA</string>
-    <string name="paste">COLA</string>
+    <string name="cut">CORTAR</string>
+    <string name="copy">COPIAR</string>
+    <string name="paste">COLAR</string>
     <string name="copied">Copiado %1$s na prancheta</string>
 
     <string name="memoryA3">DistoX A3 memory</string>
