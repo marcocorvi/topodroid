@@ -287,7 +287,7 @@ public class ShotActivity extends Activity
   public void updateDisplay( )
   {
     // Log.v( "DistoX", "update Display() " );
-
+    highlightBlock( null );
     DataHelper data = mApp.mData;
     if ( data != null && mApp.mSID >= 0 ) {
       List<DistoXDBlock> list = data.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_NORMAL );
@@ -1320,7 +1320,7 @@ public class ShotActivity extends Activity
   {
     mApp.setHighlightedSplay( blk );
     // now if there is a plot open it
-    if ( mRecentPlot != null ) {
+    if ( blk != null && mRecentPlot != null ) {
       startExistingPlot( mRecentPlot, mRecentPlotType, blk.mFrom );
     }
   }

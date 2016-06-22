@@ -10,7 +10,7 @@ th_name wall:clay
 group wall
 color 0xff0000 0xff
 width 1
-csurvey 5 8 3 1
+csurvey 5 4 1 1
 effect
   moveTo 0 0
   lineTo 27 0

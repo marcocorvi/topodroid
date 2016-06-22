@@ -14,5 +14,5 @@ group rock-border
 style straight x2
 color 0x66ffcc 0xff
 width 1
-csurvey 3 1 2 2
+csurvey 3 1 3 2
 endsymbol

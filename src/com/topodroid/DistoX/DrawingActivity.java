@@ -444,7 +444,7 @@ public class DrawingActivity extends ItemDrawer
         dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
       }
       
-      if ( mApp.getHighlightedSplayId() == blk.mId ) { dpath.setPaint( DrawingBrushPaths.highlightPaint ); }
+      if ( mApp.getHighlightedSplayId() == blk.mId ) { dpath.setPaint( DrawingBrushPaths.errorPaint ); }
     } else {
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
       if ( blk.isMultiBad() ) {
@@ -2037,7 +2037,7 @@ public class DrawingActivity extends ItemDrawer
                         }
                         boolean addline = true;
                         if ( mContinueLine > CONT_NO && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
-                          DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
+                          DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine, mZoom );
                           if ( line != null ) {
                             // Log.v( "DistoX", "[B] continuing line type " + mCurrentLine );
                             if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
@@ -2186,7 +2186,7 @@ public class DrawingActivity extends ItemDrawer
                       boolean addline= true;
                       if ( mContinueLine > CONT_NO && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                         // Log.v( "DistoX", "[N] try to continue line type " + mCurrentLine );
-                        DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine );
+                        DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine, mZoom );
                         if ( line != null ) {
                           // Log.v( "DistoX", "[N] continuing line type " + mCurrentLine );
                           if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {

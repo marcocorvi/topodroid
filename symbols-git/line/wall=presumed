@@ -12,6 +12,6 @@ th_name wall:presumed
 group wall
 color 0xff0000 0xff
 width 1
-csurvey 5 8 3 1
+csurvey 5 4 1 8
 dash 15 5
 endsymbol

@@ -11,6 +11,6 @@ name-ua переріз
 th_name section
 color 0xffffff 0x99
 width 1
-csurvey 5 1 2 3
+csurvey 5 9 96 3
 dash 5 10
 endsymbol

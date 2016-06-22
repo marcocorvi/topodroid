@@ -425,7 +425,11 @@ public class DrawingSurface extends SurfaceView
 
   // @param lp   point
   // @param type line type
-  DrawingLinePath getLineToContinue( LinePoint lp, int type ) { return commandManager.getLineToContinue( lp, type ); }
+  // @param zoom canvas zoom
+  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom ) 
+  {
+    return commandManager.getLineToContinue( lp, type, zoom );
+  }
  
   /** add the points of the first line to the second line
    */

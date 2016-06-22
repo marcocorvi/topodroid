@@ -10,7 +10,7 @@ th_name wall:blocks
 group wall
 color 0xff0000 0xff
 width 1
-csurvey 5 8 3 1
+csurvey 5 4 1 1
 dash 24 8
 effect
   moveTo 0 0

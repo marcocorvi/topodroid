@@ -1049,10 +1049,14 @@ public class DrawingCommandManager
     return length;
   }
 
-  DrawingLinePath getLineToContinue( LinePoint lp, int type )
+  // line points are scene-coords
+  // continuation is checked in canvas-coords: canvas = offset + scene * zoom
+  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom )
   {
     String group = DrawingBrushPaths.mLineLib.getLineGroup( type );
     if ( group == null ) return null;
+
+    float delta = 2 * TDSetting.mCloseness / zoom;
 
     DrawingLinePath ret = null;
     synchronized( mCurrentStack ) {
@@ -1067,7 +1071,7 @@ public class DrawingCommandManager
           // if ( linePath.mLineType == type ) 
           if ( group.equals( DrawingBrushPaths.mLineLib.getLineGroup( linePath.mLineType ) ) )
           {
-            if ( linePath.mFirst.distance( lp ) < 20 || linePath.mLast.distance( lp ) < 20 ) {
+            if ( linePath.mFirst.distance( lp ) < delta || linePath.mLast.distance( lp ) < delta ) {
               if ( ret != null ) return null; // ambiguity
               ret = linePath;
             }
