@@ -280,17 +280,21 @@ public class DrawingPath extends RectF
     }
   }
 
+  /** FIXME apparently this is called when mPaint is still null
+   */
   protected void drawPath( Path path, Canvas canvas )
   {
     if ( mType == DRAWING_PATH_AREA ) {
-      canvas.save();
-      canvas.clipPath( path );
-      canvas.drawPaint( mPaint );
-      canvas.restore();
+      if ( mPaint != null ) {
+        canvas.save();
+        canvas.clipPath( path );
+        canvas.drawPaint( mPaint );
+        canvas.restore();
+      }
     } else {
       if ( mType == DRAWING_PATH_SPLAY && mBlock != null && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) ) {
         canvas.drawPath( path, DrawingBrushPaths.fixedBluePaint );
-      } else {
+      } else if ( mPaint != null ) {
         canvas.drawPath( path, mPaint );
       }
     }
