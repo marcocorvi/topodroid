@@ -97,7 +97,15 @@ class TopoDroidExporter
     String cave = info.name.toUpperCase();
 
     String prefix = "";
-    if ( TDSetting.mExportStationsPrefix ) prefix = cave + "-";
+    String branch = "";
+    if ( TDSetting.mExportStationsPrefix ) {
+      if ( sketch != null && sketch.getName() != null ) {
+        branch = sketch.getName();
+        prefix = cave + "-" + branch + "-";
+      } else {
+        prefix = cave + "-";
+      }
+    }
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
@@ -139,7 +147,11 @@ class TopoDroidExporter
         pw.format( " comment=\"%s\"\n", info.comment );
       }
       pw.format(" >\n");
-      pw.format("        <branches />\n");
+      pw.format("        <branches>\n");
+      if ( branch != null ) {
+        pw.format("          <branch name=\"%s\">\n          </branch>\n", branch );
+      }
+      pw.format("        </branches>\n");
       pw.format("      </caveinfo>\n");
       pw.format("    </caveinfos>\n");
 
@@ -179,7 +191,8 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\"", cave, prefix, f, prefix, t );
+              pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\"",
+                cave, branch, prefix, f, prefix, t );
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
@@ -202,7 +215,8 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s(%d)\" to=\"%s%s\"", cave, prefix, to, cntSplay, prefix, to );
+            pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s(%d)\" to=\"%s%s\"",
+              cave, branch, prefix, to, cntSplay, prefix, to );
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -217,7 +231,8 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\"", cave, prefix, f, prefix, t );
+              pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\"",
+                cave, branch, prefix, f, prefix, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -239,7 +254,8 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s(%d)\"", cave, prefix, from, prefix, from, cntSplay );
+            pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s(%d)\"",
+              cave, branch, prefix, from, prefix, from, cntSplay );
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -252,7 +268,8 @@ class TopoDroidExporter
             pw.format(" />\n");
           } else { // BOTH FROM AND TO STATIONS
             if ( leg.mCnt > 0 && ref_item != null ) {
-              pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\" ", cave, prefix, f, prefix, t );
+              pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\" ",
+                cave, branch, prefix, f, prefix, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -287,7 +304,8 @@ class TopoDroidExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        pw.format("<segment id=\"\" cave=\"%s\" from=\"%s%s\" to=\"%s%s\" ", cave, prefix, f, prefix, t );
+        pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\" ",
+          cave, branch, prefix, f, prefix, t );
         if ( extend == -1 ) pw.format(" direction=\"1\"");
         if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");
@@ -319,7 +337,7 @@ class TopoDroidExporter
 
       // ============= SKETCHES
       if ( sketch != null ) {
-        sketch.exportAsCsx( pw, cave );
+        sketch.exportAsCsx( pw, cave, branch );
       } else {
         pw.format("  <plan>\n");
         exportEmptyCsxSketch( pw );

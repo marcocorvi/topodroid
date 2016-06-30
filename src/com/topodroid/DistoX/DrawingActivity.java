@@ -277,6 +277,8 @@ public class DrawingActivity extends ItemDrawer
   String mFullName2;
   String mFullName3;
 
+  String getName() { return (mName != null)? mName : ""; }
+
   private PlotInfo mPlot1;
   private PlotInfo mPlot2;
   private PlotInfo mPlot3;
@@ -3641,15 +3643,15 @@ public class DrawingActivity extends ItemDrawer
     mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
 
-  void exportAsCsx( PrintWriter pw, String prefix )
+  void exportAsCsx( PrintWriter pw, String cave, String branch )
   {
-    // Log.v("DistoX", "export as CSX <<" + prefix + ">>" );
+    // Log.v("DistoX", "export as CSX <<" + cave + ">>" );
     pw.format("  <plan>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, prefix );
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_PLAN, cave, branch );
     pw.format("    <plot />\n");
     pw.format("  </plan>\n");
     pw.format("  <profile>\n");
-    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, prefix ); 
+    mDrawingSurface.exportAsCsx( pw, PlotInfo.PLOT_EXTENDED, cave, branch ); 
     pw.format("    <plot />\n");
     pw.format("  </profile>\n");
   }

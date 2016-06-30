@@ -242,15 +242,15 @@ public class DrawingLinePath extends DrawingPointLinePath
   }
 
   @Override
-  public void toCsurvey( PrintWriter pw, String cave )
+  public void toCsurvey( PrintWriter pw, String cave, String branch )
   {
     int layer  = DrawingBrushPaths.getLineCsxLayer( mLineType );
     int type   = DrawingBrushPaths.getLineCsxType( mLineType );
     int cat    = DrawingBrushPaths.getLineCsxCategory( mLineType );
     int pen    = DrawingBrushPaths.getLineCsxPen( mLineType );
     // linetype: 0 line, 1 spline, 2 bezier
-    pw.format("          <item layer=\"%d\" cave=\"%s\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\" mergemode=\"0\">\n",
-      layer, cave, type, cat );
+    pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\" mergemode=\"0\">\n",
+      layer, cave, branch, type, cat );
     pw.format("            <pen type=\"%d\" />\n", pen);
     pw.format("            <points data=\"");
     boolean b = true;
