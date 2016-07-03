@@ -90,6 +90,25 @@ class TopoDroidExporter
     leg.reset();
   }
 
+  static private void writeCsxSegment( PrintWriter pw, String cave, String branch, String prefix, String f, String t )
+  {
+    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\"",
+      cave, branch, prefix, f, prefix, t );
+  }
+
+  static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String branch, String prefix, String t, int cnt )
+  {
+    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s(%d)\" to=\"%s%s\"",
+      cave, branch, prefix, t, cnt, prefix, t );
+  }
+
+  static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String branch, String prefix, String f, int cnt )
+  {
+    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s(%d)\"",
+      cave, branch, prefix, f, prefix, f, cnt );
+  }
+
+
   static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch,
                                    String origin, String filename )
   {
@@ -191,8 +210,7 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\"",
-                cave, branch, prefix, f, prefix, t );
+              writeCsxSegment( pw, cave, branch, prefix, f, t );
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
@@ -215,8 +233,7 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s(%d)\" to=\"%s%s\"",
-              cave, branch, prefix, to, cntSplay, prefix, to );
+            writeCsxTSplaySegment( pw, cave, branch, prefix, to, cntSplay );
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -231,8 +248,7 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\"",
-                cave, branch, prefix, f, prefix, t );
+              writeCsxSegment( pw, cave, branch, prefix, f, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -254,8 +270,7 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s(%d)\"",
-              cave, branch, prefix, from, prefix, from, cntSplay );
+            writeCsxFSplaySegment( pw, cave, branch, prefix, from, cntSplay );
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -268,8 +283,7 @@ class TopoDroidExporter
             pw.format(" />\n");
           } else { // BOTH FROM AND TO STATIONS
             if ( leg.mCnt > 0 && ref_item != null ) {
-              pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\" ",
-                cave, branch, prefix, f, prefix, t );
+              writeCsxSegment( pw, cave, branch, prefix, f, t );
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -304,8 +318,7 @@ class TopoDroidExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\" ",
-          cave, branch, prefix, f, prefix, t );
+        writeCsxSegment( pw, cave, branch, prefix, f, t );
         if ( extend == -1 ) pw.format(" direction=\"1\"");
         if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");
