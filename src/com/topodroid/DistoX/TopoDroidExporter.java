@@ -117,14 +117,16 @@ class TopoDroidExporter
 
     String prefix = "";
     String branch = "";
-    if ( TDSetting.mExportStationsPrefix ) {
-      if ( sketch != null && sketch.getName() != null ) {
-        branch = sketch.getName();
-        prefix = cave + "-" + branch + "-";
-      } else {
-        prefix = cave + "-";
-      }
+    if ( sketch != null && sketch.getName() != null ) {
+      branch = sketch.getName();
     }
+    // if ( TDSetting.mExportStationsPrefix ) {
+    //   if ( branch.length() > 0 ) {
+    //     prefix = cave + "-" + branch + "-";
+    //   } else {
+    //     prefix = cave + "-";
+    //   }
+    // }
 
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );

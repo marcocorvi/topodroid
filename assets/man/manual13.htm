@@ -108,9 +108,7 @@ Data are corrected with magnetic declination.<br><p>
 <b>Therion</b><br>
 <i>Therion</i> is the cave map drafting program of choice for TopoDroid.<br><p>
 
-With version 3.1 TopoDroid saves sketches "natively" in its binary format.<br>
-Previous versions used Therion format.
-The conversion from Therion to binary is "automatic" when you open a sketch: if TopoDroid does not find the binary file, it looks for the Therion file.<br><p>
+Sketches are exported to therion format with a scale 1:39.37<br><p>
 
 By default TopoDroid, unlike "xtherion", does not add an extra point coinciding with the first point, to closed area borders.
 There is an option to add this extra point.<br><p>
@@ -119,12 +117,20 @@ Another option tells TopoDroid to include "station" points in the Therion scrap 
 
 A third option specifies to add the splays to the scrap (as lines of type "u:splay") [default: off].<br><p>
 
+<b>Note</b>. With version 3.1 TopoDroid saves sketches "natively" in its binary format.<br>
+Previous versions used Therion format.
+The conversion from Therion to binary is "automatic" when you open a sketch: if TopoDroid does not find the binary file, it looks for the Therion file.<br><p>
+
 <b>cSurvey</b><br>
 These exports contain both the plan and profile sketches, as well as the survey data.
-The sketch items are distributed on suitable <i>cSurvey</i> layers.<br><p>
+
+The cSurvey "cave" attribute is set with the survey name, and the "branch" attribute with the sketch name.
+The midline legs and splays and the sketch items share these attributes.<br><p>
 
 If your survey has only one sketch this is a complete export of your work (except for the cross-sections).
 If the survey has more than one sketch, you must export each sketch individually and merge the exports with <i>cSurvey</i>.<br><p>
+
+The sketch items are distributed on suitable <i>cSurvey</i> layers.<br><p>
 
 <b>DXF</b><br>
 Sketches can be exported as 2D DXF files with layers for each point, line and area type in addition to the layers of the data 3D DXF.<br><p>

@@ -119,7 +119,7 @@ class TDSetting
     "DISTOX_BACKSIGHT",           // 65
     "DISTOX_MAG_ANOMALY",         // 66 whether to compensate magnetic anomaly
     "DISTOX_VERT_SPLAY",          // 68 over this splay are shown with dashed line
-    "DISTOX_STATION_PREFIX",      // 69 whether to add cave-name prefix to stations (cSurvey)
+    // "DISTOX_STATION_PREFIX",      // 69 whether to add cave-name prefix to stations (cSurvey)
     "DISTOX_STATION_NAMES",
     "DISTOX_ZOOM_CTRL",           // 71
     "DISTOX_SIDE_DRAG",           // 72 whether to enable side-drag
@@ -193,7 +193,7 @@ class TDSetting
   static float mOrthogonalLRUDAngle  = 0;     // angle
   static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
 
-  static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey export
+  // static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey export
 
   // static boolean mXTherionAreas = false;
   static boolean mAutoStations = true; // whether to add stations automatically to scrap therion files
@@ -683,7 +683,7 @@ class TDSetting
     setMagAnomaly(   prefs.getBoolean( key[k++], false ) ); // DISTOX_MAG_ANOMALY
 
     mVertSplay = tryFloat( prefs, key[k++], "50" );               // DISTOX_VERT_SPLAY
-    mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
+    // mExportStationsPrefix =  prefs.getBoolean( key[k++], false ); // DISTOX_STATION_PREFIX
     mStationNames = (prefs.getString( key[k++], "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
 
     // setZoomControls( prefs.getBoolean( key[k++], false ) ); // DISTOX_ZOOM_CONTROLS
@@ -991,8 +991,8 @@ class TDSetting
       setMagAnomaly( prefs.getBoolean( k, false ) );
     } else if ( k.equals( key[ nk++ ] ) ) {
       mVertSplay = tryFloat( prefs, k, "50" );
-    } else if ( k.equals( key[ nk++ ] ) ) {
-      mExportStationsPrefix =  prefs.getBoolean( k, false ); // DISTOX_STATION_PREFIX
+    // } else if ( k.equals( key[ nk++ ] ) ) {
+    //   mExportStationsPrefix =  prefs.getBoolean( k, false ); // DISTOX_STATION_PREFIX
     } else if ( k.equals( key[ nk++ ] ) ) {
       mStationNames = (prefs.getString( k, "alpha").equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
     } else if ( k.equals( key[ nk++ ] ) ) {

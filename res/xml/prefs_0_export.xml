@@ -61,7 +61,7 @@
        android:defaultValue="false"
      / -->
 
-   <!-- CheckBoxPreference
+   <!-- UNUSED CheckBoxPreference
        android:key="DISTOX_STATION_PREFIX"
        android:summary="@string/pref_station_prefix_summary"
        android:title="@string/pref_station_prefix_title"
