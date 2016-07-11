@@ -664,17 +664,17 @@ public class GMActivity extends Activity
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
-      if ( k == BTN_DOWNLOAD )    { mBMdownload = MyButton.getButtonBackground( res, izons[k] ); }
-      else if ( k == BTN_TOGGLE ) { mBMtoggle   = MyButton.getButtonBackground( res, izons[k] ); }
-      else if ( k == BTN_COVER )  { mBMcover    = MyButton.getButtonBackground( res, izons[k] ); }
-      else if ( k == BTN_READ )   { mBMread     = MyButton.getButtonBackground( res, izons[k] ); }
-      else if ( k == BTN_WRITE )  { mBMwrite    = MyButton.getButtonBackground( res, izons[k] ); }
+      if ( k == BTN_DOWNLOAD )    { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      else if ( k == BTN_TOGGLE ) { mBMtoggle   = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      else if ( k == BTN_COVER )  { mBMcover    = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      else if ( k == BTN_READ )   { mBMread     = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      else if ( k == BTN_WRITE )  { mBMwrite    = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
-    mBMdownload_on = MyButton.getButtonBackground( res, izonsno[BTN_DOWNLOAD] );
-    mBMtoggle_no   = MyButton.getButtonBackground( res, izonsno[BTN_TOGGLE] );
-    mBMcover_no    = MyButton.getButtonBackground( res, izonsno[BTN_COVER] );
-    mBMread_no     = MyButton.getButtonBackground( res, izonsno[BTN_READ] );
-    mBMwrite_no    = MyButton.getButtonBackground( res, izonsno[BTN_WRITE] );
+    mBMdownload_on = MyButton.getButtonBackground( mApp, res, izonsno[BTN_DOWNLOAD] );
+    mBMtoggle_no   = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
+    mBMcover_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
+    mBMread_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_READ] );
+    mBMwrite_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_WRITE] );
 
     enableWrite( false );
 
@@ -687,7 +687,7 @@ public class GMActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     closeMenu();

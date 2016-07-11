@@ -604,6 +604,7 @@
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Skizzenelemente anzeigen</string>
     <string name="help_rename">Ändere Vermessungsname</string>
+    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
     <string name="help_stats">Vermessungs-Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <!-- UNUSED string name="help_tdr2th2">Erstelle th2 Dateien der Skizzen</string -->
@@ -719,6 +720,7 @@
     <string name="title_survey_new">Neue Vermessung</string>
     <string name="title_survey_export">Vermessung speichern als</string>
     <string name="title_survey_rename">Benenne Vermessung um in</string>
+    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 

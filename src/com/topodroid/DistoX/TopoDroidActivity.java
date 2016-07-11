@@ -744,7 +744,7 @@ public class TopoDroidActivity extends Activity
     // mNrButton1 = 3 + ( TDSetting.mLevelOverAdvanced ? 2 : 0 );
     mButton1 = new Button[mNrButton1];
 
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( getResources(), R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
     for (int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }

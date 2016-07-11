@@ -140,7 +140,7 @@ public class FixedActivity extends Activity
     // NO MENU
     // mImage = (Button) findViewById( R.id.handle );
     // mImage.setOnClickListener( this );
-    // mImage.setBackgroundDrawable( MyButton.getButtonBackground( getResources(), R.drawable.iz_menu ) );
+    // mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
     // mMenu = (ListView) findViewById( R.id.menu );
     // setMenuAdapter();
     // closeMenu();

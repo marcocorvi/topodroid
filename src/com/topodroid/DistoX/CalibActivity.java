@@ -167,11 +167,11 @@ public class CalibActivity extends Activity
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
-      if ( k == 1 )      { mBMopen = MyButton.getButtonBackground( res, izons[k] ); }
-      else if ( k == 2 ) { mBMread = MyButton.getButtonBackground( res, izons[k] ); }
+      if ( k == 1 )      { mBMopen = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      else if ( k == 2 ) { mBMread = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
-    mBMopen_no = MyButton.getButtonBackground( res, izonsno[1] );
-    mBMread_no = MyButton.getButtonBackground( res, izonsno[2] );
+    mBMopen_no = MyButton.getButtonBackground( mApp, res, izonsno[1] );
+    mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[2] );
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
     // mButtonView2 = new HorizontalButtonView( mButton2 );
@@ -218,7 +218,7 @@ public class CalibActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );

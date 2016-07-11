@@ -94,6 +94,7 @@ public class DataHelper extends DataSetObservable
   // private SQLiteStatement updatePlotStmt     = null;
   private SQLiteStatement updatePlotViewStmt = null;
   private SQLiteStatement updatePlotHideStmt = null;
+  private SQLiteStatement updatePlotNameStmt = null;
 
 // FIXME_SKETCH_3D
   private SQLiteStatement updateSketchStmt = null;
@@ -391,6 +392,7 @@ public class DataHelper extends DataSetObservable
     // updatePlotStmt     = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
     updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
     updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+    updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
     // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
 
     updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
@@ -2285,6 +2287,14 @@ public class DataHelper extends DataSetObservable
        if (!cursor.isClosed()) cursor.close();
      }
      return prefix + Integer.toString(max);
+   }
+
+   public void updatePlotName( long sid, long pid, String name )
+   {
+     updatePlotNameStmt.bindString( 1, name );
+     updatePlotNameStmt.bindLong( 2, sid );
+     updatePlotNameStmt.bindLong( 3, pid );
+     try { updatePlotNameStmt.execute(); } catch (SQLiteException e) { logError("plot name", e); }
    }
  
    public PlotInfo getPlotInfo( long sid, String name )

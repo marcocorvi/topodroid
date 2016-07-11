@@ -764,7 +764,7 @@ public class SketchActivity extends ItemDrawer
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );
     closeMenu();

@@ -24,11 +24,11 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class TDPath
 {
-  final static int NR_BACKUP = 3;
+  final static int NR_BACKUP = 5;
   final static String BCK_SUFFIX = ".bck";
 
   final static String CSV = ".csv";
@@ -489,6 +489,27 @@ public class TDPath
     file2 = new File( filename + "0" );
     file1 = new File( filename );
     if ( file1.exists() ) {
+      file1.renameTo( file2 );
+    }
+  }
+
+  static void renamePlotFiles( String old_name, String new_name )
+  {
+    String old_tdr = TDPath.getTdrFile( old_name + ".tdr" );
+    String new_tdr = TDPath.getTdrFile( new_name + ".tdr" );
+    File file1;
+    File file2;
+    file1 = new File( old_tdr );
+    file2 = new File( new_tdr );
+    if ( file1.exists() && ! file2.exists() ) {
+      file1.renameTo( file2 );
+    }
+    old_tdr = old_tdr + TDPath.BCK_SUFFIX;
+    new_tdr = new_tdr + TDPath.BCK_SUFFIX;
+    for ( int i=0; ; ++i ) { 
+      file1 = new File( old_tdr + Integer.toString(i) );
+      file2 = new File( new_tdr + Integer.toString(i) );
+      if ( ( ! file1.exists() ) || file2.exists() ) break;
       file1.renameTo( file2 );
     }
   }

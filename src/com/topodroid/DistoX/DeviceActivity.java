@@ -230,14 +230,14 @@ public class DeviceActivity extends Activity
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
       if ( k == IDX_TOGGLE ) {
-        mBMtoggle    = MyButton.getButtonBackground( res, izons[k] );
-        mBMtoggle_no = MyButton.getButtonBackground( res, izonsno[k] );
+        mBMtoggle    = MyButton.getButtonBackground( mApp, res, izons[k] );
+        mBMtoggle_no = MyButton.getButtonBackground( mApp, res, izonsno[k] );
       } else if ( k == IDX_CALIB ) {
-        mBMcalib    = MyButton.getButtonBackground( res, izons[k] );
-        mBMcalib_no = MyButton.getButtonBackground( res, izonsno[k] );
+        mBMcalib    = MyButton.getButtonBackground( mApp, res, izons[k] );
+        mBMcalib_no = MyButton.getButtonBackground( mApp, res, izonsno[k] );
       } else if ( k == IDX_READ ) {
-        mBMread    = MyButton.getButtonBackground( res, izons[k] );
-        mBMread_no = MyButton.getButtonBackground( res, izonsno[k] );
+        mBMread    = MyButton.getButtonBackground( mApp, res, izons[k] );
+        mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[k] );
       }
     }
 
@@ -257,7 +257,7 @@ public class DeviceActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( res );

@@ -511,6 +511,7 @@
     <string name="help_edit">Način urejanje</string>
     <string name="help_refs">Izberi referenco za načrt</string>
     <string name="help_rename">Spremeni ime načrta</string>
+    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
     <string name="help_stats">Statistika načrta</string>
     <string name="help_save_plot">Izvozi skico</string>
     <!-- UNUSED string name="help_tdr2th2">Pretvorba formata skice iz binarega v th2</string -->
@@ -598,6 +599,7 @@
     <string name="title_survey_new">Nov načrt</string>
     <string name="title_survey_export">Izvozi načrt kot</string>
     <string name="title_survey_rename">Preimenuj načrt</string>
+    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
     <string name="title_calib_export">Izvozi kalibracijo kot</string>
     <!-- string name="title_zoom">Zoom</string -->
 

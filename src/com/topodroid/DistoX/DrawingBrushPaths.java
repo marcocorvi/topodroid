@@ -131,7 +131,7 @@ public class DrawingBrushPaths
         "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false );
     }
     // if ( mSymbolHighlight == null ) {
-    //   mSymbolHighlight = MyButton.getButtonBackground( res, R.drawable.symbol_highlight );
+    //   mSymbolHighlight = MyButton.getButtonBackground( mApp, res, R.drawable.symbol_highlight );
     // }
 
     if ( mPointLib == null ) mPointLib = new SymbolPointLibrary( res );

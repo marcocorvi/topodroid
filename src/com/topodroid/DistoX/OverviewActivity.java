@@ -407,12 +407,12 @@ public class OverviewActivity extends ItemDrawer
       for ( int k=0; k<mNrButton1; ++k ) {
         mButton1[k] = MyButton.getButton( this, this, izons[k] );
         if ( k == 0 ) 
-          mBMselect = MyButton.getButtonBackground( res, izons[k] );
+          mBMselect = MyButton.getButtonBackground( mApp, res, izons[k] );
         // FIXME_OVER } else if ( k == 2 ) { // IC_PLAN = 2;
         // FIXME_OVER   mBMplan = bm;
       }
-      mBMselectOn = MyButton.getButtonBackground( res, R.drawable.iz_measure_on );
-      // FIXME_OVER mBMextend  = MyButton.getButtonBackground( res, izons[IC_EXTEND] ); 
+      mBMselectOn = MyButton.getButtonBackground( mApp, res, R.drawable.iz_measure_on );
+      // FIXME_OVER mBMextend  = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 
 
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
@@ -433,7 +433,7 @@ public class OverviewActivity extends ItemDrawer
 
       mImage = (Button) findViewById( R.id.handle );
       mImage.setOnClickListener( this );
-      mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
+      mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
       mMenu = (ListView) findViewById( R.id.menu );
       setMenuAdapter( res );
       closeMenu();

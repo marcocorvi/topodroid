@@ -62,6 +62,7 @@
   <string name="PlotListDialog">page_plot_list.htm</string>
   <string name="PlotNewDialog">page_new_plot.htm</string>
   <string name="PlotRecoverDialog">page_backup.htm</string>
+  <string name="PlotRenameDialog">page_plot_rename.htm</string>
   <string name="ProjectionDialog">page_projection.htm</string>
   <string name="SensorEditDialog">page_sensors_edit.htm</string>
   <string name="ShotDeleteDialog">page_shot_edit2.htm</string>

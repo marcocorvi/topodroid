@@ -577,6 +577,7 @@
     <string name="help_edit">Editing mode</string>
     <string name="help_refs">Choose sketching references</string>
     <string name="help_rename">Change survey name</string>
+    <string name="help_plot_rename">Change sketch name</string>
     <string name="help_stats">Survey statistics dialog</string>
     <string name="help_save_plot">Export sketch</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
@@ -682,6 +683,7 @@
     <string name="title_survey_new">New survey</string>
     <string name="title_survey_export">Export survey</string>
     <string name="title_survey_rename">Rename survey</string>
+    <string name="title_plot_rename">Rename sketch</string>
     <string name="title_calib_export">Export calibration</string>
     <!-- string name="title_zoom">Zoom</string -->
 

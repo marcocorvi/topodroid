@@ -90,22 +90,20 @@ class TopoDroidExporter
     leg.reset();
   }
 
-  static private void writeCsxSegment( PrintWriter pw, String cave, String branch, String prefix, String f, String t )
+  // segments have only the attribute "cave", no attribute "branch"
+  static private void writeCsxSegment( PrintWriter pw, String cave, String f, String t )
   {
-    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s\"",
-      cave, branch, prefix, f, prefix, t );
+    pw.format("<segment id=\"\" cave=\"%s\" from=\"%s\" to=\"%s\"", cave, f, t );
   }
 
-  static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String branch, String prefix, String t, int cnt )
+  static private void writeCsxTSplaySegment( PrintWriter pw, String cave, String t, int cnt )
   {
-    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s(%d)\" to=\"%s%s\"",
-      cave, branch, prefix, t, cnt, prefix, t );
+    pw.format("<segment id=\"\" cave=\"%s\" from=\"%s(%d)\" to=\"%s\"", cave, t, cnt, t );
   }
 
-  static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String branch, String prefix, String f, int cnt )
+  static private void writeCsxFSplaySegment( PrintWriter pw, String cave, String f, int cnt )
   {
-    pw.format("<segment id=\"\" cave=\"%s\" branch=\"%s\" from=\"%s%s\" to=\"%s%s(%d)\"",
-      cave, branch, prefix, f, prefix, f, cnt );
+    pw.format("<segment id=\"\" cave=\"%s\" from=\"%s\" to=\"%s(%d)\"", cave, f, f, cnt );
   }
 
 
@@ -115,7 +113,7 @@ class TopoDroidExporter
     // Log.v("DistoX", "export as csurvey: " + filename );
     String cave = info.name.toUpperCase();
 
-    String prefix = "";
+    // String prefix = "";
     String branch = "";
     if ( sketch != null && sketch.getName() != null ) {
       branch = sketch.getName();
@@ -141,7 +139,7 @@ class TopoDroidExporter
 
 // ++++++++++++++++ PROPERTIES
       // FIXME origin = origin of Num
-      pw.format("  <properties id=\"\" name=\"\" origin=\"%s%s\" ", prefix, origin );
+      pw.format("  <properties id=\"\" name=\"\" origin=\"%s\" ", origin ); // prefix
       // pw.format(      "name=\"\" description=\"\" club=\"\" team=\"\" ");
       pw.format(      "calculatemode=\"1\" calculatetype=\"2\" " );
       pw.format(      "ringcorrectionmode=\"2\" nordcorrectionmode=\"0\" inversionmode=\"1\" ");
@@ -178,8 +176,8 @@ class TopoDroidExporter
 
    // ============== ORIGIN
       if ( origin != null )  {
-        pw.format("    <gps enabled=\"0\" refpointonorigin=\"%s%s\" geo=\"WGS84\" format=\"\" sendtotherion=\"0\" />\n",
-                  prefix,  origin );
+        pw.format("    <gps enabled=\"0\" refpointonorigin=\"%s\" geo=\"WGS84\" format=\"\" sendtotherion=\"0\" />\n", origin );
+        // prefix
       }
 
       pw.format("  </properties>\n");
@@ -212,7 +210,7 @@ class TopoDroidExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, cave, branch, prefix, f, t );
+              writeCsxSegment( pw, cave, f, t ); // branch prefix
 
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
@@ -235,7 +233,7 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            writeCsxTSplaySegment( pw, cave, branch, prefix, to, cntSplay );
+            writeCsxTSplaySegment( pw, cave, to, cntSplay ); // branch prefix
             ++ cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -250,7 +248,7 @@ class TopoDroidExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // ONLY FROM STATION : splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              writeCsxSegment( pw, cave, branch, prefix, f, t );
+              writeCsxSegment( pw, cave, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -272,7 +270,7 @@ class TopoDroidExporter
             if ( item.mExtend != extend ) {
               extend = item.mExtend;
             }
-            writeCsxFSplaySegment( pw, cave, branch, prefix, from, cntSplay );
+            writeCsxFSplaySegment( pw, cave, from, cntSplay ); // branch prefix
             ++cntSplay;
             pw.format(" splay=\"1\" exclude=\"1\"");
             if ( extend == -1 ) pw.format(" direction=\"1\"");
@@ -285,7 +283,7 @@ class TopoDroidExporter
             pw.format(" />\n");
           } else { // BOTH FROM AND TO STATIONS
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsxSegment( pw, cave, branch, prefix, f, t );
+              writeCsxSegment( pw, cave, f, t ); // branch prefix
               if ( extend == -1 ) pw.format(" direction=\"1\"");
               if ( dup || sur /* || bck */ ) {
                 pw.format(" exclude=\"1\"");
@@ -320,7 +318,7 @@ class TopoDroidExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeCsxSegment( pw, cave, branch, prefix, f, t );
+        writeCsxSegment( pw, cave, f, t ); // branch prefix
         if ( extend == -1 ) pw.format(" direction=\"1\"");
         if ( dup || sur /* || bck */ ) {
            pw.format(" exclude=\"1\"");

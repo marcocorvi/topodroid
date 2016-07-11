@@ -556,6 +556,7 @@
     <string name="help_edit">Mode d\'édition</string>
     <string name="help_refs">Choix des références de dessin</string>
     <string name="help_rename">Change survey name</string>
+    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
     <string name="help_stats">Statistiques du relevé</string>
     <string name="help_save_plot">Exporte le croquis</string>
     <!-- UNUSED string name="help_tdr2th2">Converti dessin vers format th2</string -->
@@ -655,6 +656,7 @@
     <string name="title_survey_new">Nouveau relevé</string>
     <string name="title_survey_export">Exporter le relevé sous</string>
     <string name="title_survey_rename">Renommer le relevé sous</string>
+    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
     <string name="title_calib_export">Exporter la calibration sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
     

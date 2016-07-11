@@ -144,17 +144,20 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_plus,          // 23
                       };
   private static int menus[] = {
-                        R.string.menu_export,
-                        R.string.menu_stats,
+                        R.string.menu_export,     // 0
+                        R.string.menu_stats,      // 1
                         R.string.menu_reload,
                         R.string.menu_zoom_fit,
                         R.string.menu_delete,
-                        R.string.menu_palette,
+                        R.string.menu_rename,
+                        R.string.menu_palette,    // 6
                         R.string.menu_overview,
                         R.string.menu_options,
                         R.string.menu_help,
-                        R.string.menu_area
+                        R.string.menu_area        // 10
                      };
+
+  private static final int MENU_AREA = 10;
 
   private static int help_icons[] = { 
                         R.string.help_draw,
@@ -182,6 +185,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_recover,
                         R.string.help_zoom_fit,
                         R.string.help_trash,
+                        R.string.help_plot_rename,
                         R.string.help_symbol,
                         R.string.help_overview,
                         R.string.help_prefs,
@@ -271,13 +275,62 @@ public class DrawingActivity extends ItemDrawer
 
   private String mName;   // current-plot name
   String mName1;          // first name (PLAN)
-  String mName2;  // second name (EXTENDED/PROJECTED)
-  String mName3;  // third name (SECTION)
-  String mFullName1; // accessible by the SaveThread
+  String mName2;          // second name (EXTENDED/PROJECTED)
+  String mName3;          // third name (SECTION)
+  String mFullName1;      // accessible by the SaveThread
   String mFullName2;
   String mFullName3;
 
   String getName() { return (mName != null)? mName : ""; }
+
+  String getPlotName() 
+  {
+    if ( PlotInfo.isAnySection( mType ) ) {
+      return mName3;
+    } else if ( PlotInfo.isProfile( mType ) ) {
+      return mName2.substring(0, mName2.length()-1);
+    } else if ( mType == PlotInfo.PLOT_PLAN ) { 
+      return mName1.substring(0, mName1.length()-1);
+    }
+    return "";
+  }
+
+  void renamePlot( String name ) 
+  {
+    if ( name == null || name.length() == 0 ) {
+      return;
+    }
+    if ( PlotInfo.isAnySection( mType ) ) {
+      TDLog.Error("X-Sections rename not implemented");
+    } else if ( PlotInfo.isProfile( mType ) || mType == PlotInfo.PLOT_PLAN ) { 
+      String name1 = name + "p";
+      String name2 = name + "s";
+      // Log.v("DistoX", "rename plot to: " + name1 + " " + name2 );
+      // check if plot name name2 exists
+      if ( mApp.mData.getPlotInfo( mApp.mSID, name2 ) == null &&
+           mApp.mData.getPlotInfo( mApp.mSID, name1 ) == null ) {
+        mApp.mData.updatePlotName( mApp.mSID, mPid1, name1 );
+        mApp.mData.updatePlotName( mApp.mSID, mPid2, name2 );
+        mName1 = name1;
+        mName2 = name2;
+        mPlot1.name = name1;
+        mPlot2.name = name2;
+        mName = ( PlotInfo.isProfile( mType ) )?  mName2 : mName1;
+        // rename files
+        String fullName1 = mApp.mySurvey + "-" + mName1;
+        String fullName2 = mApp.mySurvey + "-" + mName2;
+
+        TDPath.renamePlotFiles( mFullName1, fullName1 );
+        TDPath.renamePlotFiles( mFullName2, fullName2 );
+
+        mFullName1 = fullName1;
+        mFullName2 = fullName2;
+      } else {
+        Toast.makeText( this, R.string.plot_duplicate_name, Toast.LENGTH_SHORT ).show();
+        // Log.v("DistoX", "plot name already exists");
+      }
+    }
+  }
 
   private PlotInfo mPlot1;
   private PlotInfo mPlot2;
@@ -949,15 +1002,15 @@ public class DrawingActivity extends ItemDrawer
     for ( int k=0; k<mNrButton1; ++k ) {
       ic = ( k <3 )? k : off+k;
       mButton1[k] = MyButton.getButton( this, this, izons[ic] );
-      if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( res, izons[ic] ); }
-      else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( res, izons[ic] ); }
+      if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
+      else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
     }
     mBMdial = BitmapFactory.decodeResource( res, izons[IC_DIAL] );
-    mBMextend        = MyButton.getButtonBackground( res, izons[IC_EXTEND] ); 
-    mBMdownload_on   = MyButton.getButtonBackground( res, R.drawable.iz_download_on );
-    mBMdownload_wait = MyButton.getButtonBackground( res, R.drawable.iz_download_wait );
-    mBMleft          = MyButton.getButtonBackground( res, R.drawable.iz_left );
-    mBMright         = MyButton.getButtonBackground( res, R.drawable.iz_right );
+    mBMextend        = MyButton.getButtonBackground( mApp, res, izons[IC_EXTEND] ); 
+    mBMdownload_on   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_on );
+    mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
+    mBMleft          = MyButton.getButtonBackground( mApp, res, R.drawable.iz_left );
+    mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
     setRefAzimuth( TDAzimuth.mRefAzimuth, TDAzimuth.mFixedExtend );
 
     mButton2 = new Button[ mNrButton2 ]; // DRAW
@@ -965,10 +1018,10 @@ public class DrawingActivity extends ItemDrawer
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton2[k] = MyButton.getButton( this, this, ((k==0)? izons_ok[ic] : izons[ic]) );
-      if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = MyButton.getButtonBackground( res, ((k==0)? izons_ok[ic] : izons[ic]));
+      if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = MyButton.getButtonBackground( mApp, res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
-    mBMcontinue_cont = MyButton.getButtonBackground( res, izons[IC_CONTINUE_CONT] );
-    mBMcontinue_join = MyButton.getButtonBackground( res, izons[IC_CONTINUE_JOIN] );
+    mBMcontinue_cont = MyButton.getButtonBackground( mApp, res, izons[IC_CONTINUE_CONT] );
+    mBMcontinue_join = MyButton.getButtonBackground( mApp, res, izons[IC_CONTINUE_JOIN] );
 
     mButton3 = new Button[ mNrButton3 ];      // EDIT
     off = (mNrButton1-3) + (mNrButton2-3); 
@@ -976,10 +1029,10 @@ public class DrawingActivity extends ItemDrawer
       ic = ( k < 3 )? k : off+k;
       mButton3[k] = MyButton.getButton( this, this, ((k==2)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_JOIN ) 
-        mBMjoin = MyButton.getButtonBackground( res, ((k==2)? izons_ok[ic] : izons[ic]) );
+        mBMjoin = MyButton.getButtonBackground( mApp, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
-    mBMjoin_no = MyButton.getButtonBackground( res, izons[IC_JOIN_NO] );
-    mBMadd     = MyButton.getButtonBackground( res, izons[IC_ADD] );
+    mBMjoin_no = MyButton.getButtonBackground( mApp, res, izons[IC_JOIN_NO] );
+    mBMadd     = MyButton.getButtonBackground( mApp, res, izons[IC_ADD] );
 
     mButton5 = new Button[ mNrButton5 ];    // ERASE
     off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
@@ -1050,7 +1103,7 @@ public class DrawingActivity extends ItemDrawer
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
     // mImage.setBackgroundResource( icons00[ IC_MENU ] );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( getResources(), izons[IC_MENU] ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), izons[IC_MENU] ) );
     mMenu = (ListView) findViewById( R.id.menu );
     // HOVER
     mMenu.setOnItemClickListener( this );
@@ -3497,7 +3550,7 @@ public class DrawingActivity extends ItemDrawer
 
     mMenuAdapter.add( res.getString( menus[0] ) );  // EXPORT
     if ( PlotInfo.isAnySection( type ) ) {
-      mMenuAdapter.add( res.getString( menus[8] ) );  // AREA
+      mMenuAdapter.add( res.getString( menus[MENU_AREA] ) );  // AREA
     } else {
       mMenuAdapter.add( res.getString( menus[1] ) );  // INFO
     }
@@ -3505,13 +3558,14 @@ public class DrawingActivity extends ItemDrawer
     mMenuAdapter.add( res.getString( menus[3] ) );  // ZOOM_FIT
     if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( type ) ) {
       mMenuAdapter.add( res.getString( menus[4] ) ); // DELETE
+      mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME
     }
-    mMenuAdapter.add( res.getString( menus[5] ) ); // PALETTE
+    mMenuAdapter.add( res.getString( menus[6] ) ); // PALETTE
     if ( PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[6] ) ); // OVERVIEW
+      mMenuAdapter.add( res.getString( menus[7] ) ); // OVERVIEW
     }
-    mMenuAdapter.add( res.getString( menus[7] ) ); // OPTIONS
-    mMenuAdapter.add( res.getString( menus[8] ) ); // HELP
+    mMenuAdapter.add( res.getString( menus[8] ) ); // OPTIONS
+    mMenuAdapter.add( res.getString( menus[9] ) ); // HELP
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -3559,6 +3613,8 @@ public class DrawingActivity extends ItemDrawer
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // DELETE
         askDelete();
+      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME
+        (new PlotRenameDialog( this, this, mApp )).show();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
         (new SymbolEnableDialog( this, this, mApp )).show();

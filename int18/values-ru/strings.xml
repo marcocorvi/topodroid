@@ -570,6 +570,7 @@
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Вид окна абриса</string>
     <string name="help_rename">Изменить название съёмки</string>
+    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
@@ -673,6 +674,7 @@
     <string name="title_survey_new">Новая съёмка</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
     <string name="title_survey_rename">Переименовать съёмку</string>
+    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- OK string name="title_zoom">Зум</string -->
 

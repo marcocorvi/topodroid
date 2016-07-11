@@ -767,16 +767,16 @@ public class ShotActivity extends Activity
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
-      if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( res, izons[k] ); }
-      else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( res, izons[k] ); }
+      if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial );
-    mBMplot_no       = MyButton.getButtonBackground( res, R.drawable.iz_plot_no );
-    mBMdownload_on   = MyButton.getButtonBackground( res, R.drawable.iz_download_on );
-    mBMdownload_wait = MyButton.getButtonBackground( res, R.drawable.iz_download_wait );
-    mBMdownload_no   = MyButton.getButtonBackground( res, R.drawable.iz_download_no );
-    mBMleft          = MyButton.getButtonBackground( res, R.drawable.iz_left );
-    mBMright         = MyButton.getButtonBackground( res, R.drawable.iz_right );
+    mBMplot_no       = MyButton.getButtonBackground( mApp, res, R.drawable.iz_plot_no );
+    mBMdownload_on   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_on );
+    mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
+    mBMdownload_no   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_no );
+    mBMleft          = MyButton.getButtonBackground( mApp, res, R.drawable.iz_left );
+    mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
 
     if ( TDSetting.mLevelOverBasic ) {
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
@@ -805,7 +805,7 @@ public class ShotActivity extends Activity
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
-    mImage.setBackgroundDrawable( MyButton.getButtonBackground( res, R.drawable.iz_menu ) );
+    mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );
