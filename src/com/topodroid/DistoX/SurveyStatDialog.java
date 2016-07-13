@@ -36,6 +36,9 @@ public class SurveyStatDialog extends MyDialog
     private TextView mTextStation;
     private TextView mTextLoop;
     private TextView mTextComponent;
+    private TextView mTextStddevM;
+    private TextView mTextStddevG;
+    private TextView mTextStddevDip;
 
  
     SurveyStat mStat;
@@ -68,6 +71,9 @@ public class SurveyStatDialog extends MyDialog
         mTextStation   = (TextView) findViewById(R.id.stat_station);
         mTextLoop      = (TextView) findViewById(R.id.stat_loop);
         mTextComponent = (TextView) findViewById(R.id.stat_component);
+        mTextStddevM   = (TextView) findViewById(R.id.stat_stddev_m);
+        mTextStddevG   = (TextView) findViewById(R.id.stat_stddev_g);
+        mTextStddevDip = (TextView) findViewById(R.id.stat_stddev_dip);
 
         // mBtnBack = (Button) findViewById(R.id.btn_back);
         // mBtnBack.setOnClickListener( this );
@@ -82,6 +88,10 @@ public class SurveyStatDialog extends MyDialog
         mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation ) );
         mTextLoop.setText( String.format( res.getString(R.string.stat_loop), mStat.countLoop ) );
         mTextComponent.setText( String.format( res.getString(R.string.stat_component), mStat.countComponent ) );
+
+        mTextStddevM.setText( String.format( res.getString(R.string.stat_stddev_m), mStat.stddevM ) );
+        mTextStddevG.setText( String.format( res.getString(R.string.stat_stddev_g), mStat.stddevG ) );
+        mTextStddevDip.setText( String.format( res.getString(R.string.stat_stddev_dip), mStat.stddevDip, mStat.averageDip ) );
 
     }
 

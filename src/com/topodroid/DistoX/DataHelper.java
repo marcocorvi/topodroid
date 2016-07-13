@@ -289,9 +289,51 @@ public class DataHelper extends DataSetObservable
     stat.countStation   = 0;
     stat.countLoop      = 0;
     stat.countComponent = 0;
+    stat.averageM   = 0;
+    stat.averageG   = 0;
+    stat.averageDip = 0;
+    stat.stddevM    = 0;
+    stat.stddevG    = 0;
+    stat.stddevDip  = 0;
+    int nrMGDip = 0;
 
     if ( myDB == null ) return stat;
+
     Cursor cursor = myDB.query( SHOT_TABLE,
+			        new String[] { "flag", "acceleration", "magnetic", "dip" },
+                                "surveyId=? AND status=0 AND acceleration > 1 ",
+                                new String[] { Long.toString(sid) },
+                                null, null, null );
+    if (cursor.moveToFirst()) {
+      do {
+        float a = (float)( cursor.getDouble(1) );
+        if ( a > 0.1f ) {
+          ++nrMGDip;
+          float m = (float)( cursor.getDouble(2) );
+          float d = (float)( cursor.getDouble(3) );
+          stat.averageM   += m;
+          stat.averageG   += a;
+          stat.averageDip += d;
+          stat.stddevM    += m * m;
+          stat.stddevG    += a * a;
+          stat.stddevDip  += d * d;
+        }
+      } while ( cursor.moveToNext() );
+      if ( nrMGDip > 0 ) {
+        stat.averageM   /= nrMGDip;
+        stat.averageG   /= nrMGDip;
+        stat.averageDip /= nrMGDip;
+        stat.stddevM    = (float)Math.sqrt( stat.stddevM / nrMGDip - stat.averageM * stat.averageM );
+        stat.stddevG    = (float)Math.sqrt( stat.stddevG / nrMGDip - stat.averageG * stat.averageG );
+        stat.stddevDip  = (float)Math.sqrt( stat.stddevDip / nrMGDip - stat.averageDip * stat.averageDip );
+        stat.stddevM *= 100/stat.averageM;
+        stat.stddevG *= 100/stat.averageG;
+      }
+    }
+    if (cursor != null && !cursor.isClosed()) cursor.close();
+
+    // count components
+    cursor = myDB.query( SHOT_TABLE,
 			        new String[] { "flag", "distance", "fStation", "tStation" },
                                 "surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ", 
                                 new String[] { Long.toString(sid) },
@@ -344,6 +386,7 @@ public class DataHelper extends DataSetObservable
             ++ nc;
           }
         }
+
       } while ( cursor.moveToNext() );
     }
     if (cursor != null && !cursor.isClosed()) cursor.close();
@@ -372,55 +415,56 @@ public class DataHelper extends DataSetObservable
 
   public void compileStatements()
   {
-    // clearStationsStmt = myDB.compileStatement( "UPDATE shots SET fStation=\"\", tStation=\"\" where id>? and surveyId=?" );
-    // updateShotDBCStmt = myDB.compileStatement( "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
-    updateShotStmtFull   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
-    updateShotStmt       = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
+    if ( myDB != null ) {
+      // clearStationsStmt = myDB.compileStatement( "UPDATE shots SET fStation=\"\", tStation=\"\" where id>? and surveyId=?" );
+      // updateShotDBCStmt = myDB.compileStatement( "UPDATE shots SET distance=?, bearing=?, clino=? WHERE surveyId=? AND id=?" );
+      updateShotStmtFull   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
+      updateShotStmt       = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
 
-    updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
-    updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
-    updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
-    // shiftShotsIdStmt   = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
-    // updateShotLegStmt  = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
-    // updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
+      updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
+      updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
+      updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
+      // shiftShotsIdStmt   = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
+      // updateShotLegStmt  = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
+      // updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
 
-    updateShotNameAndExtendStmt =
-      myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
-    updateShotAMDRStmt   =
-      myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
+      updateShotNameAndExtendStmt =
+        myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
+      updateShotAMDRStmt   =
+        myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
 
-    // updatePlotStmt     = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
-    updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
-    updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
-    updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
-    // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
+      // updatePlotStmt     = myDB.compileStatement( "UPDATE plots set xoffset=?, yoffset=?, zoom=? WHERE surveyId=? AND id=?" );
+      updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+      updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+      updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
+      // dropPlotStmt    = myDB.compileStatement( "DELETE FROM plots WHERE surveyId=? AND id=?" );
 
-    updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+      updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
 
-    // deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
-    // updatePhotoStmt  = myDB.compileStatement( "UPDATE photos set comment=? WHERE surveyId=? AND id=?" );
-    // deletePhotoStmt  = myDB.compileStatement( "DELETE FROM photos WHERE surveyId=? AND id=?" );
-    // deleteSensorStmt = myDB.compileStatement( "UPDATE sensors set status=1 WHERE surveyId=? AND id=?" );
-    // updateSensorStmt = myDB.compileStatement( "UPDATE sensors set comment=? WHERE surveyId=? AND id=?" );
+      // deleteSketchStmt = myDB.compileStatement( "UPDATE sketches set status=1 WHERE surveyId=? AND id=?" );
+      // updatePhotoStmt  = myDB.compileStatement( "UPDATE photos set comment=? WHERE surveyId=? AND id=?" );
+      // deletePhotoStmt  = myDB.compileStatement( "DELETE FROM photos WHERE surveyId=? AND id=?" );
+      // deleteSensorStmt = myDB.compileStatement( "UPDATE sensors set status=1 WHERE surveyId=? AND id=?" );
+      // updateSensorStmt = myDB.compileStatement( "UPDATE sensors set comment=? WHERE surveyId=? AND id=?" );
 
-    transferShotStmt   = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
-    transferPlotStmt   = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
-    transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
-    // transferSensorStmt  = myDB.compileStatement( "UPDATE sensors set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
-    // transferPhotoStmt   = myDB.compileStatement( "UPDATE photos set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
-    // transferFixedStmt   = myDB.compileStatement( "UPDATE fixeds set surveyId=? WHERE surveyId=? AND id=?" );
-    // transferStationStmt = myDB.compileStatement( "UPDATE stations set surveyId=? WHERE surveyId=? AND name=?" );
+      transferShotStmt   = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
+      transferPlotStmt   = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
+      transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+      // transferSensorStmt  = myDB.compileStatement( "UPDATE sensors set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+      // transferPhotoStmt   = myDB.compileStatement( "UPDATE photos set surveyId=?, shotId=? WHERE surveyId=? AND id=?" );
+      // transferFixedStmt   = myDB.compileStatement( "UPDATE fixeds set surveyId=? WHERE surveyId=? AND id=?" );
+      // transferStationStmt = myDB.compileStatement( "UPDATE stations set surveyId=? WHERE surveyId=? AND name=?" );
 
-    // dropFixedStmt       = myDB.compileStatement( "DELETE FROM fixeds where surveyId=? and station=? and status=1" );
-    // updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
-    // updateFixedStatusStmt  = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
-    // updateFixedCommentStmt = myDB.compileStatement( "UPDATE fixeds set station=?, comment=? WHERE surveyId=? AND id=?" );
-    // updateFixedAltStmt     = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
-    // updateFixedDataStmt    = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
+      // dropFixedStmt       = myDB.compileStatement( "DELETE FROM fixeds where surveyId=? and station=? and status=1" );
+      // updateFixedStationStmt = myDB.compileStatement( "UPDATE fixeds set station=? WHERE surveyId=? AND id=?" );
+      // updateFixedStatusStmt  = myDB.compileStatement( "UPDATE fixeds set status=? WHERE surveyId=? AND id=?" );
+      // updateFixedCommentStmt = myDB.compileStatement( "UPDATE fixeds set station=?, comment=? WHERE surveyId=? AND id=?" );
+      // updateFixedAltStmt     = myDB.compileStatement( "UPDATE fixeds set altitude=?, altimetric=? WHERE surveyId=? AND id=?" );
+      // updateFixedDataStmt    = myDB.compileStatement( "UPDATE fixeds set longitude=?, latitude=?, altitude=? WHERE surveyId=? AND id=?" );
 
-    updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
-    // deleteStationStmt        = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
-
+      updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
+      // deleteStationStmt        = myDB.compileStatement( "DELETE FROM stations WHERE surveyId=? AND name=?" );
+    }
     // Log.v("DistoX", "compile statements done");
   }
 
@@ -599,12 +643,12 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
 
-    // if ( updateShotStmtFull == null )
-    //   updateShotStmtFull = myDB.compileStatement(
-    //     "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
-    // if ( updateShotStmt == null )
-    //   updateShotStmt = myDB.compileStatement(
-    //     "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
+    if ( updateShotStmtFull == null ) {
+      updateShotStmtFull = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
+    }
+    if ( updateShotStmt == null ) {
+      updateShotStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
+    }
 
     // StringWriter sw = new StringWriter();
     // PrintWriter pw = new PrintWriter( sw );
@@ -689,6 +733,9 @@ public class DataHelper extends DataSetObservable
     // myDB.execSQL( sw.toString() );
 
     if ( tStation == null ) tStation = "";
+    if ( updateShotNameStmt == null ) {
+      updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
+    }
     updateShotNameStmt.bindString( 1, fStation );
     updateShotNameStmt.bindString( 2, tStation );
     updateShotNameStmt.bindLong(   3, sid );
@@ -729,6 +776,9 @@ public class DataHelper extends DataSetObservable
     // pw.format( Locale.US, "UPDATE shots SET extend=%d WHERE surveyId=%d AND id=%d", extend, sid, id );
     // myDB.execSQL( sw.toString() );
 
+    if ( updateShotExtendStmt == null ) {
+      updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
+    }
     updateShotExtendStmt.bindLong( 1, extend );
     updateShotExtendStmt.bindLong( 2, sid );
     updateShotExtendStmt.bindLong( 3, id );
@@ -768,6 +818,9 @@ public class DataHelper extends DataSetObservable
     // pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
     // myDB.execSQL( sw.toString() );
 
+    if ( updateShotCommentStmt == null ) {
+      updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
+    }
     updateShotCommentStmt.bindString( 1, comment );
     updateShotCommentStmt.bindLong( 2, sid );
     updateShotCommentStmt.bindLong( 3, id );
@@ -817,9 +870,10 @@ public class DataHelper extends DataSetObservable
     // if ( myDB == null ) return;
     boolean success = false;
     try {
-      // if ( updateShotNameAndExtendStmt == null ) 
-      //   updateShotNameAndExtendStmt = myDB.compileStatement(
-      //     "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
+      if ( updateShotNameAndExtendStmt == null ) {
+        updateShotNameAndExtendStmt =
+          myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, leg=? WHERE surveyId=? AND id=?" );
+      }
 
       // myDB.execSQL("PRAGMA synchronous=OFF");
       myDB.setLockingEnabled( false );
@@ -946,6 +1000,10 @@ public class DataHelper extends DataSetObservable
     //            "UPDATE shots SET acceleration=%.6f, magnetic=%.6f, dip=%.4f, roll=%.6f WHERE surveyId=%d AND id=%d",
     //            acc, mag, dip, r, sid, id );
     // myDB.execSQL( sw.toString() );
+    if ( updateShotAMDRStmt == null ) {
+      updateShotAMDRStmt   =
+        myDB.compileStatement( "UPDATE shots SET acceleration=?, magnetic=?, dip=?, roll=? WHERE surveyId=? AND id=?" );
+    }
 
     updateShotAMDRStmt.bindDouble( 1, acc );
     updateShotAMDRStmt.bindDouble( 2, mag );
@@ -1023,8 +1081,9 @@ public class DataHelper extends DataSetObservable
         DistoXDBlock blk = selectShot( old_id, old_sid );
         if ( blk == null ) continue;
 
-        if ( transferShotStmt == null )
+        if ( transferShotStmt == null ) {
           transferShotStmt = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
+        }
         transferShotStmt.bindLong(1, sid);
         transferShotStmt.bindLong(2, myNextId);
         transferShotStmt.bindLong(3, old_sid);
@@ -1199,6 +1258,9 @@ public class DataHelper extends DataSetObservable
     // pw.format( Locale.US, "UPDATE plots set view=\"%s\" WHERE surveyId=%d AND id=%d", view, sid, pid );
     // myDB.execSQL( sw.toString() );
 
+    if ( updatePlotViewStmt == null ) {
+      updatePlotViewStmt = myDB.compileStatement( "UPDATE plots set view=? WHERE surveyId=? AND id=?" );
+    }
     updatePlotViewStmt.bindString( 1, view );
     updatePlotViewStmt.bindLong( 2, sid );
     updatePlotViewStmt.bindLong( 3, pid );
@@ -1215,6 +1277,9 @@ public class DataHelper extends DataSetObservable
     // pw.format( Locale.US, "UPDATE plots set hide=\"%s\" WHERE surveyId=%d AND id=%d", hide, sid, pid );
     // myDB.execSQL( sw.toString() );
 
+    if ( updatePlotHideStmt == null ) {
+      updatePlotHideStmt = myDB.compileStatement( "UPDATE plots set hide=? WHERE surveyId=? AND id=?" );
+    }
     updatePlotHideStmt.bindString( 1, hide );
     updatePlotHideStmt.bindLong( 2, sid );
     updatePlotHideStmt.bindLong( 3, pid );
@@ -2291,6 +2356,9 @@ public class DataHelper extends DataSetObservable
 
    public void updatePlotName( long sid, long pid, String name )
    {
+     if ( updatePlotNameStmt == null ) {
+       updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
+     }
      updatePlotNameStmt.bindString( 1, name );
      updatePlotNameStmt.bindLong( 2, sid );
      updatePlotNameStmt.bindLong( 3, pid );
@@ -2492,8 +2560,9 @@ public class DataHelper extends DataSetObservable
        
    private void transferPlot( long sid, long old_sid, long pid )
    {
-     // if ( transferPlotStmt == null )
-     //   transferPlotStmt = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
+     if ( transferPlotStmt == null ) {
+       transferPlotStmt = myDB.compileStatement( "UPDATE plots set surveyId=? WHERE surveyId=? AND id=?" );
+     }
      transferPlotStmt.bindLong( 1, sid );
      transferPlotStmt.bindLong( 2, old_sid );
      transferPlotStmt.bindLong( 3, pid );
@@ -2502,8 +2571,9 @@ public class DataHelper extends DataSetObservable
 
    private void transferSketch( long sid, long old_sid, long pid )
    {
-     // if ( transferSketchStmt == null )
-     //   transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+     if ( transferSketchStmt == null ) {
+       transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+     }
      transferSketchStmt.bindLong( 1, sid );
      transferSketchStmt.bindLong( 2, old_sid );
      transferSketchStmt.bindLong( 3, pid );
@@ -2827,8 +2897,9 @@ public class DataHelper extends DataSetObservable
                             double east, double south, double vert, double azimuth, double clino )
   {
     if ( myDB == null ) return;
-    // if ( updateSketchStmt == null )
-    //   updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+    if ( updateSketchStmt == null ) {
+      updateSketchStmt = myDB.compileStatement( "UPDATE sketches set st1=?, st2=?, xoffsettop=?, yoffsettop=?, zoomtop=?, xoffsetside=?, yoffsetside=?, zoomside=?, xoffset3d=?, yoffset3d=?, zoom3d=?, east=?, south=?, vert=?, azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+    }
     updateSketchStmt.bindString( 1, st1 );
     updateSketchStmt.bindString( 2, st2 );
     updateSketchStmt.bindDouble( 3, xofftop );
@@ -3436,9 +3507,9 @@ public class DataHelper extends DataSetObservable
        //            comment, flag, sid, name );
        // myDB.execSQL( sw.toString() );
 
-       // if ( updateStationCommentStmt == null )
-       //   updateStationCommentStmt = myDB.compileStatement( 
-       //     "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
+       if ( updateStationCommentStmt == null ) {
+          updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
+       }
        updateStationCommentStmt.bindString( 1, comment );
        updateStationCommentStmt.bindLong(   2, flag );
        updateStationCommentStmt.bindLong(   3, sid );

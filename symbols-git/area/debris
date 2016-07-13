@@ -1,10 +1,10 @@
-symbol area
+﻿symbol area
 name debris
 name-cn 碎石堆
 name-es pedrera
 name-pt escombros
 name-it detriti
-name-fr debris
+name-fr débris_rocheux
 name-de Schuttfläche
 name-ru щебень
 name-bg чакъл

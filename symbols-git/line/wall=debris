@@ -1,12 +1,22 @@
-symbol line
+﻿symbol line
+
 name wall_debris
+
 name-cn 碎石洞壁
+
 name-es paredes_descompuestas
+
+name-fr parois_brisée_débris
 name-de Schuttwand
+
 name-bg стена_чакъл
+
 name-ru стена_щебень_осадки
+
 name-ua стіна_щебінь_опади
+
 th_name wall:debris
+
 group wall
 color 0xff0000 0xff
 width 1
@@ -22,5 +32,7 @@ effect
   lineTo 6 6
   lineTo 8 2
   lineTo 1 1
+
 endeffect
+
 endsymbol

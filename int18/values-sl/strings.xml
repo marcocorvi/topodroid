@@ -63,7 +63,7 @@
     <string name="calib_validation">Ovrednoti kalibracijo</string>
     <!-- UNUSED string name="connect_failed">Comunicazione DistoX fallita</string -->
     <!-- UNUSED string name="data"> dati</string -->
-    <string name="using">Uporabi 1$s %2$s</string>
+    <string name="using">Uporabi %1$s</string>
     <string name="calib_error">Napaka %1$f stopinj</string>
     <string name="calib_stddev">Napaka stddev: %1$.4f stopinj</string>
     <string name="calib_max_error">Maksimalna napaka %1$.4f stopinj</string>
@@ -371,6 +371,9 @@
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Podatki načrta</string>
+    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f percent</string -->
+    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
+    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
     <string name="stat_component">Komponente %1$d</string>
     <string name="stat_depth">Globina %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Dvojne vizure %1$d %2$.1f %3$s</string>

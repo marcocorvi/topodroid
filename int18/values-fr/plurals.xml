@@ -14,7 +14,7 @@
 
   <plurals name="read_calib_data">
     <item quantity="zero">Aucune donnée d\'étalonnage</item>
-    <item quantity="one">Lecture de une donnée (%2$d paquets)</item>
+    <item quantity="one">Lecture d\'une donnée (%2$d paquets)</item>
 	<item quantity="other">Lecture de %1$d données (%2$d paquets)</item>
   </plurals>
 </resources>

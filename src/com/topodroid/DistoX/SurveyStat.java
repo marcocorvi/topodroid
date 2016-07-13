@@ -26,4 +26,11 @@ class SurveyStat
   public int countStation;
   public int countLoop;
   public int countComponent;
+
+  public float averageM;
+  public float averageG;
+  public float averageDip;
+  public float stddevM;
+  public float stddevG;
+  public float stddevDip;
 }

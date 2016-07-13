@@ -1,10 +1,10 @@
-symbol area
+﻿symbol area
 name blocks
 name-cn 堵塞
 name-es bloques
 name-pt blocos
 name-it blocchi
-name-fr blocs
+name-fr gros_blocs
 name-de Blöcke
 name-ru глыбы
 name-bg ск._блокове
