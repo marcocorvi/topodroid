@@ -387,9 +387,9 @@
     <!-- OK string name="zoom_in_out">Увеличить/уменьшить/string -->
 
     <string name="survey_info">Статистика съёмки</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+    <string name="stat_stddev_m">M ст.откл %1$.1f процентов</string>
+    <string name="stat_stddev_g">G ст.откл %1$.1f процентов</string>
+    <string name="stat_stddev_dip">Накл. ст.откл %1$.1f град. (среднее %2$.1f град.)</string>
     <string name="stat_component">Компоненты %1$d</string>
     <string name="stat_depth">Глубина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дублированные пикеты %1$d длинна: %2$.1f %3$s</string>
