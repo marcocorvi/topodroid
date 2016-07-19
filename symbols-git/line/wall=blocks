@@ -1,7 +1,8 @@
-symbol line
+﻿symbol line
 name wall_blocks
 name-cn 块石洞壁
 name-es paredes_estratificadas
+name-fr paroi_de_gros_blocs
 name-de Geschichtete_Wand
 name-bg стена_блокаж
 name-ru стена_из_блоков

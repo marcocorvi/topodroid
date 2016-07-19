@@ -1,7 +1,8 @@
-symbol line
+﻿symbol line
 name wall_clay
 name-cn 粘土洞壁
 name-es paredes_de_barro
+name-fr paroi_argileuse
 name-de Lehmwand
 name-bg стена_глина
 name-ru стена_в_глине
@@ -16,7 +17,6 @@ effect
   lineTo 27 0
   lineTo 27 1
   lineTo 0 1
-
   moveTo 2 6
   cubicTo 2 6 8 -1 12 6
   cubicTo 12 7 17 14 22 7

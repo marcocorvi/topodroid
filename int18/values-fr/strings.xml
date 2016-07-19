@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
-    <!-- string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
+    <!-- string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Impossible de récupérer le manuel depuis Internet</string>
 
     <string name="app_name">TopoDroid</string>
@@ -535,7 +535,7 @@
     <!-- UNUSED string name="help_database">Application Database viewer (SQliteViewer)</string -->
     <string name="help_prefs">Modifie les préférences</string>
     <string name="help_log">Active/désactive les options de journalisation</string>
-    <string name="help_join_survey">Rejoindre les relevées</string>
+    <string name="help_join_survey">Joindre les relevés</string>
     <string name="help_info_topodroid">Infos TopoDroid</string>
     <string name="help_download">Télécharge les données</string>
     <!-- UNUSED string name="help_splay">Affecte automatiquement les stations aux visées latérales</string -->
@@ -671,6 +671,11 @@
   <string name="pref_locale_title">Langue</string>
   <string name="pref_locale_summary">Langue</string>
 
+  <string name="pref_export_plot_title">Format export dessins</string>
+  <string name="pref_export_plot_summary">Format par défaut d\'exportation des dessins</string>
+  <string name="pref_therion_maps_title">Cartes Therion en premier</string>
+  <string name="pref_therion_maps_summary">Export des Cartes Therion avant les données topographiques</string>
+
   <string name="pref_raw_data_title">Données brutes</string>
   <string name="pref_raw_data_summary">Afficher les données brutes</string>
   <!-- UNUSED string name="pref_bootloader_title">Chargeur de démarrage</string -->
@@ -711,6 +716,14 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Nombre max. de tentatives</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Nombre max. de tentatives</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Nombre max. de tentatives</string -->
+  
+  <string name="pref_wait_laser_title">Pause laser [ms]</string>
+  <string name="pref_wait_laser_summary">Temporisation après allumage du laser [ms]</string>
+  <string name="pref_wait_shot_title">Pause visée [ms]</string>
+  <string name="pref_wait_shot_summary">Temporisation après la mesure [ms]</string>
+  <string name="pref_wait_data_title">Pause données [ms]</string>
+  <string name="pref_wait_data_summary">Temporisation après un chargement de données [ms]</string>
+  
   <string name="pref_conn_mode_title">Mode de connexion</string>
   <string name="pref_conn_mode_summary">Comment connecter le DistoX</string>
   <string name="pref_auto_reconnect_title">Reconnexion automatique</string>
@@ -724,7 +737,7 @@
   <string name="pref_z6_workaround_title">Contournement Z6</string>
   <string name="pref_z6_workaround_summary">Contournement Z6 téléchargement données</string>
   <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nom CRS</string>
+  <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84...)</string>
   <string name="pref_crs_message">Saisissez le nom CRS tel que dans Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
@@ -740,14 +753,14 @@
   <!-- UNUSED string name="pref_cwd_summary">Répertoire TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Saisissez le répertoire de TopoDroid</string -->
   <string name="pref_pt_color_map_title">Couleur carte PocketTopo</string>
-  <string name="pref_pt_color_map_summary">Couleur carte PocketTopo(PocketTopo import)</string>
+  <string name="pref_pt_color_map_summary">Couleur carte PocketTopo (PocketTopo import)</string>
   <string name="pref_text_size_title">Taille du texte</string>
   <string name="pref_text_size_summary">Taille du texte des éléments de liste</string>
   <string name="pref_text_size_message">Taille du texte dans les listes</string>
   <string name="pref_closeness_title">Radius de sélection</string>
   <!-- UNUSED string name="pref_closeness_summary">Portée de la zone de sélection</string -->
   <string name="pref_closeness_message">Portée de la zone de sélection</string>
-  <string name="pref_vert_splay_title">Seuil incl. visée latérales pointillés</string>
+  <string name="pref_vert_splay_title">Seuil incl. visées latérales pointillés</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Seuil inclinaison visées latérales pointillé</string -->
   <string name="pref_vert_splay_message">Seuil d\'inclinaison des visées latérales pointillés</string>
   <string name="pref_survey_stations_title">Stations du relevé</string>
@@ -763,15 +776,16 @@
   <string name="pref_dip_thr_message">Tolérance des visées : inclinaison</string>
 
   <string name="pref_leg_title">Tolérance du cheminement</string>
-  <string name="pref_leg_summary">Tolérance au long des visées de cheminement</string>
-  <string name="pref_leg_message">Tolérance au long des visées de cheminement</string>
+  <string name="pref_leg_summary">Tolérance le long des visées de cheminement</string>
+  <string name="pref_leg_message">Tolérance le long des visées de cheminement</string>
   <string name="pref_backsight_title">Visée inverse</string>
   <string name="pref_backsight_summary">Afficher les champs de saisie inverse dans la boîte de dialogue de nouvelle visée</string>
   <string name="pref_mag_anomaly_title">Anomalie magnétique</string>
   <string name="pref_mag_anomaly_summary">Compensation anomalie magnétique locale</string>
   <string name="pref_azimuth_manual_title">Définition manuelle "extension"</string>
   <string name="pref_azimuth_manual_summary">Définir manuellement les extensions D/G des visées</string>
-
+  <string name="pref_prev_next_title">Icônes Précédent/Suivant</string>
+  <string name="pref_prev_next_summary">Boutons Précédent/Suivant dans la boîte de dialogue de nouvelle visée</string>
   <string name="pref_team_title">Équipe spéleo</string>
   <string name="pref_team_summary">Nom équipe de Spéleo</string>
   <string name="pref_team_message">Nom équipe de topographie</string>
@@ -880,26 +894,28 @@
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
   <string name="pref_LRExtend_title">Estimer dist. latérales G/D</string>
-  <string name="pref_LRExtend_summary">Estimer les extensions gauche/droite(Compass/VisualTopo import)</string>
+  <string name="pref_LRExtend_summary">Estimer les extensions gauche/droite (Compass/VisualTopo import)</string>
 
   <string name="pref_picker_type_title">Sélectionneur de symbole</string>
   <string name="pref_picker_type_summary">Type sélectionneur symbole</string>
+  <string name="pref_section_stations_title">Stations X-Section</string>
+  <string name="pref_section_stations_summary">Base de référence pour X-Section</string>
   <string name="pref_station_size_title">Taille nom de station</string>
   <string name="pref_station_size_summary">Taille du texte des stations</string>
   <string name="pref_station_size_message">Taille du texte des stations</string>
   <string name="pref_zoom_controls_title">Contrôle du zoom</string>
-  <string name="pref_zoom_controls_summary">Contrôle du zoom mode multi-touche</string>
+  <string name="pref_zoom_controls_summary">Contrôle du zoom mode multitouches</string>
   <string name="pref_side_drag_title">Déroulement latéral</string>
   <string name="pref_side_drag_summary">Activer le déroulement latéral dans le fenêtre de croquis</string>
   <string name="pref_unit_grid_title">Unités du croquis</string>
   <string name="pref_unit_grid_summary">Taille grille du croquis</string>
   <string name="pref_recent_nr_title">Nombre d\'outils récents</string>
-  <string name="pref_recent_nr_summary">Nombres d\'outils dernièrements utilisés à afficher dans le seclectionneur d\'outils</string>
+  <string name="pref_recent_nr_summary">Nombres d\'outils dernièrement utilisés à afficher dans le sélectionneur d\'outils</string>
   <string name="pref_area_border_title">Visibilité bordure</string>
   <string name="pref_area_border_summary">Visibilité de la bordure</string>
 
   <string name="pref_sketchUsesSplays_title">Dessiner les visées latérales</string>
-  <string name="pref_sketchUsesSplays_summary">Dessiner les surface en utilisant les visées latérales</string>
+  <string name="pref_sketchUsesSplays_summary">Dessiner les surfaces en utilisant les visées latérales</string>
   <string name="pref_sketchLineStep_title">Paramètres de ligne</string>
   <string name="pref_sketchLineStep_summary">Distance entre les points d\'une ligne</string>
   <string name="pref_sketchLineStep_message">Distance entre les points d\'une ligne</string>
@@ -908,7 +924,7 @@
   <string name="pref_sketchBorderStep_message">Distance entre les points d\'édition de ligne</string>
   <string name="pref_sketchSectionStep_title">Paramètres de section</string>
   <string name="pref_sketchSectionStep_summary">Distance entre sections</string>
-  <string name="pref_sketchSectionStep_message">Distance entre sections intermédiaire</string>
+  <string name="pref_sketchSectionStep_message">Distance entre sections intermédiaires</string>
   <string name="pref_sketchDeltaExtrude_title">Extrude delta</string>
   <string name="pref_sketchDeltaExtrude_summary">Extrude delta</string>
   <string name="pref_sketchDeltaExtrude_message">Extrude delta</string>
@@ -986,7 +1002,7 @@
     <string name="welcome_title">Bienvenue dans TopoDroid %1$s</string>
 
     <string name="welcome_text">
-\nTopodroid est une application Open Source pour réaliser des relevé topographique des cavités souterraines avec un DistoX.
+\nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX.
 \n\nAucune garantie : en utilisant ce logiciel vous acceptez que l\'auteur ne puisse être responsable d\'une quelconque perte de données, dommages ou quoi que ce soit.
 \n\nAide disponible via la touche MENU.
 \nDocumentation : http://sites.google.com/site/speleoapps
@@ -1002,19 +1018,19 @@
 \n[1] Choisissez l\'envoi d\'un firmware ou l\'export dans un fichier.
 \n[2] Choisissez le fichier à envoyer ou sauvegarder. Les fichiers firmware se trouvent dans le répertoire \'bin\'.
 \n[3] Soyez certain de charger un firmware compatible avec votre DistoX.
-\n[4] Placer le DistoX2 en mode bootloader: appuyez sur PLUS et MOINS  PLUS en l\'allumant avec la touche DIST.
+\n[4] Allumez le DistoX2 en mode bootloader en appuyant simultanément sur les touches PLUS, MOINS et ON/DIST.
 \n[5] Appuyez sur le bouton OK.
 \n[6] Confirmez et patientez jusqu\'à la fin de l\'opération.
 \n[7] Etteignez le DistoX2 avec la touche CLR.
 \n
    </string>
-   <string name="firmware_none">Aauncun firmware</string>
+   <string name="firmware_none">Auncun firmware</string>
    <string name="firmware_file">Firmware</string>
    <string name="firmware_file_exists">Fichier firmware existant</string>
    <string name="firmware_file_missing">Fichier firmware manquant</string>
    <string name="ask_dump">Sauvegarder firmware ?</string>
    <string name="ask_upload">Envoyer firmware ?</string>
-   <string name="ask_upload_not_compatible">Fichier firmware inconsistant.\nEnvoyer quand même ?</string>
+   <string name="ask_upload_not_compatible">Le firmware semble incorrect.\nEnvoyer quand même ?</string>
    <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
-   <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>
+   <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>  
 </resources>

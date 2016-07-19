@@ -506,7 +506,7 @@ public class ShotActivity extends Activity
       }
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
       if ( mApp.mBTAdapter.isEnabled() ) {
-        startActivity( new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceActivity.class ) );
+        startActivity( new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class ) );
       }
     } else  if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, TopoDroidPreferences.class );

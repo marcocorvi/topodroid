@@ -212,6 +212,7 @@ public class DeviceActivity extends Activity
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
+    TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
 
     mDevice  = mApp.mDevice;
@@ -268,7 +269,7 @@ public class DeviceActivity extends Activity
 
   private void updateList( )
   {
-    // TDLog.Log(TDLog.LOG_MAIN, "updateList" );
+    TDLog.Debug("device activity update list" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
     if ( TDSetting.mLevelOverExperimental ) { // FIXME TD_DistoX
@@ -498,9 +499,11 @@ public class DeviceActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    TDLog.Debug("device activity on resume" );
     registerReceiver( mPairReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
     mApp.mDeviceActivityVisible = true;
+    TDLog.Debug("device activity on resume done" );
   }
 
   @Override
@@ -721,7 +724,7 @@ public class DeviceActivity extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // SCAN
-      Intent scanIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceList.class );
+      Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
       scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
       startActivityForResult( scanIntent, REQUEST_DEVICE );
       Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
@@ -808,7 +811,7 @@ public class DeviceActivity extends Activity
   {
     int mustOpen = 0;
     mApp.setCalibFromName( name );
-    Intent calibIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, CalibActivity.class );
+    Intent calibIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, CalibActivity.class );
     calibIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
     startActivity( calibIntent );
   }

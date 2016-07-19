@@ -852,7 +852,7 @@ public class GMActivity extends Activity
           }
         // }
       // } else if ( b == mButton1[7] ) { // disto
-      //   Intent deviceIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceActivity.class );
+      //   Intent deviceIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class );
       //   startActivity( deviceIntent );
       }
     }

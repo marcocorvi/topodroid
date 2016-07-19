@@ -220,7 +220,7 @@ public class DistoXComm extends TopoDroidComm
 
   /** close the socket and delete it
    * the connection becomes unusable
-   * As a matter of fact tghis is alwyas called with wait_thread = true
+   * As a matter of fact this is alwyas called with wait_thread = true
    */
   private void destroySocket( ) // boolean wait_thread )
   {

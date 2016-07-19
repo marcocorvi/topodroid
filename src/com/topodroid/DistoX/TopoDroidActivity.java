@@ -209,8 +209,8 @@ public class TopoDroidActivity extends Activity
           Toast.makeText( this, R.string.no_bt, Toast.LENGTH_SHORT ).show();
         } else {
           if ( mApp.mBTAdapter.isEnabled() ) {
-             intent = new Intent( Intent.ACTION_EDIT ).setClass( this, DeviceActivity.class );
-            startActivity( intent );
+            TDLog.Debug( "start device window");
+            startActivity( new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class ) );
           } else {
             Toast.makeText( this, R.string.not_enabled, Toast.LENGTH_SHORT ).show();
           }
@@ -250,7 +250,7 @@ public class TopoDroidActivity extends Activity
   void startSurvey( String value, int mustOpen ) // , long old_sid, long old_id )
   {
     mApp.setSurveyFromName( value, false ); // open survey activity: tell app to update survey name+id, no forward
-    Intent surveyIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, SurveyActivity.class );
+    Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyActivity.class );
     surveyIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen );
     // surveyIntent.putExtra( TopoDroidTag.TOPODROID_OLDSID, old_sid );
     // surveyIntent.putExtra( TopoDroidTag.TOPODROID_OLDID,  old_id );
