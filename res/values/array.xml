@@ -79,6 +79,8 @@
      <item name="bulgarian">Български</item>
      <item name="chinese">中文</item>
      <item name="ukrainian">Українська</item>
+      <item name="persion">Persian</item>
+
   </string-array>
   <string-array name="localeValue">
      <item name="default"></item>
@@ -93,6 +95,7 @@
      <item name="bulgarian">bg</item>
      <item name="chinese">cn</item>
      <item name="ukrainian">ua</item>
+      <item name="persian">fa</item>
   </string-array>
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
