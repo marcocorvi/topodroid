@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- manual>https://sites.google.com/site/speleoapps/home/topodroid/docs/TopoDroid-2.2.4.pdf</manual -->
+    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+
+    <string name="app_name">TopoDroid</string>
+
+    <string name="version_ask">به روز رسانی نسخه جدید TopoDroid.\nتمایل به نصب دوباره دارید?</string>
+    <string name="version_title">به روز رسانی</string>
+
+    <string name="POINT">نقطه</string>
+    <string name="LINE">خط</string>
+    <string name="AREA">محیط</string>
+    <string name="HELP">کمک</string>
+    <string name="STATION">ایستگاه </string>
+
+    <string name="memoryA3">DistoX A3 حافظه</string>
+    <string name="memoryX310">DistoX X310 حافظه</string>
+    <string name="memory_data">DistoX داده</string>
+
+    <string name="td_symbol_text">شما نیاز به نصب ابزار ترسیم دارید?\nشما می تونید بعدا به کمک TdSymbol این کار را انجام دهید</string>
+    <string name="td_symbol_ask">دوباره از من نپرس</string>
+
+    <string name="thp_user">کاربر</string>
+    <string name="thp_label">برچسب</string>
+    <!-- string name="thp_danger">danger</string -->
+    <string name="thl_user">کاربر</string>
+    <string name="thl_wall">دیوار</string>
+    <string name="tha_user">کاربر</string>
+    <string name="tha_water">آب</string>
+
+    <string name="missing_area">محیط</string>
+    <string name="missing_hint">لطفا, ابزار را فعال یا نصب بفرمایید</string>
+    <string name="missing_line">خط</string>
+    <string name="missing_point">نقطه</string>
+    <!-- string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
+    <string name="missing_station">ایستگاه نیست</string>
+    <string name="missing_symbols">ابزار ترسیم وجود ندارد.\nدر هر صورت ذخیره شود ?</string>
+    <string name="missing_title">نماده ها (سیمبول) نیست</string>
+    <string name="missing_warning">ابزار ترسیم نصب نشده.\n</string>
+    <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
+    <string name="failed_snap_to_point">No close point to snap the point to</string>
+
+    <string name="calib_new">کالیبره جدید</string>
+    <string name="calib_exists">کالیبره موجود است</string>
+    <string name="calib_delete">حذف کالیبره</string>
+    <string name="calib_device_mismatch">اخطا: کالیبره دستگاه مشکل دارد</string>
+    <string name="calib_no_name">نام اجباری است</string>
+    <string name="calib_gm_undelete">دیتای کالیبره حذف شده بازیابی شود?</string>
+    <string name="calib_saved">ذخیره کالیبره</string>
+    <string name="calib_updated">به روزرسانی کالیبره</string>
+    <string name="calib_compute_groups">محاسبه گروهی اطلاعات کالیبره ...</string>
+    <string name="calib_compute_coeffs">محاسبه ضرایب کالیبره ...</string>
+    <!-- string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
+    <string name="calib_write_coeffs">نوشتن ضرایب کالیبره ...</string>
+    <string name="connect_failed">خزا در اتصال</string>
+    <string name="data"> داده</string>
+    <string name="using">استفاده کنید %1$s %2$s</string>
+    <string name="calib_error">خطای: %1$.4f درجه</string>
+    <string name="calib_max_error">خطا. حداکثر: %1$.4f درجه</string>
+    <string name="calib_iter">تکرار: %1$d</string>
+    <string name="calib_saturated_values">اخطار: %1$d اطلاعات اشباح شده</string>
+    <string name="algorithm">الگوریتم:</string>
+    <string name="auto">اتوماتیک</string>
+    <string name="linear">خطی</string>
+    <string name="non_linear">غیرخطی</string>
+   
+    <string name="device_algo_failed">خطا در تعیین اتوماتیک الگوریتم\nاز الگوریتم خطی استفاده کنید</string>
+    <string name="device_busy">دستگاه مشغول است</string>
+    <string name="device_illegal_addr">عدم دسترسی به حافظه</string>
+    <string name="device_info">Device info</string>
+    <string name="device_model_set">شما واقعا می خاهید مدل دستگاه را تغییر بدهید</string>
+    <string name="device_none">هیچ DistoX انتخاب نشده است</string>
+    <string name="device_pairing">جفت شدن: \یغام ها (نوتفیکیشن) چک بفرمایید</string>
+    <string name="device_reset">ریست حافظه DistoX</string>
+    <string name="device_code">DistoX کد %1$4d</string>
+    <string name="device_firmware">Firmware  %1$d.%2$d</string>
+    <string name="device_hardware">Hardware  %1$d.%2$d</string>
+    <string name="device_status_angle">واحد زاویه %1$s</string>
+    <string name="device_status_compass">Compass/clino %1$s</string>
+    <string name="device_status_calib">Mode %1$s</string>
+    <string name="device_status_silent">بی صدا %1$s</string>
+    <string name="bt_reset">ریست اتصال بلوتوس</string>
+    <string name="save_as">ذخیره با نام</string>
+    <string name="nickname">اسم مناسب</string>
+
+    <string name="comment">توضیحات</string>
+    <string name="flag">Flag</string>
+    <string name="backshot">backshot</string>
+    <string name="duplicate">تکراری</string>
+    <!-- string name="regular">regular</string -->
+    <string name="surface">سطح</string>
+    <string name="extend">گسترده</string>
+    <string name="extend_ignore">هیچکدام</string>
+    <string name="extend_left">چپ</string>
+    <string name="extend_right">راست</string>
+    <string name="extend_vert">عمودی</string>
+    <string name="external_prompt">ورود انداره گیره</string>
+    <string name="splay_at_to">LRUD at TO station</string>
+
+    <string name="few_data">اطلاعات کافی نیست</string>
+    <string name="few_plots">طرح کافی نیست</string>
+
+    <string name="import_title">ایمپورت فایل</string>
+    <string name="import_wait">ایمپورت فایل... لطفا صبر کنید...</string>
+    <string name="import_already">بررسی اطلاعات ایمپورت شده</string>
+    <string name="import_none">فابلی برای ایمپورت نیست</string>
+    <string name="import_zip_ok">ایمپورت فایل زیپ با موفقیت انجام شد</string>
+    <string name="import_zip_wait">ایمپورت فایل زیپ ممکن است زمان بر باشد. لطفا صبر کنید ...</string>
+    <string name="sketch_loading">لود طرح ... لطفا صبر کنید...</string>
+    <string name="sketch_saving">ذخیره طرح ... لطفا صبر کنید...</string>
+    <string name="lookup_wait">جستجوی اینترنت ... لطفا صبر کنید...</string>
+ 
+
+    <string name="head_tail">حافظه: </string>
+    <string name="head_tail_failed">خطا در خواندن نقطه حافظه DistoX memory</string>
+    <string name="head_tail_store_failed">خطا در ذخیره نقطه در DistoX memory</string>
+    <string name="illegal_data_value">Illegal data value</string>
+    <string name="label_title">برچسب</string>
+    <string name="label_text">عنوان برچسب را وارد کنید</string>
+    <string name="altitude">ارتفاع. </string>
+    <string name="latitude">عرض جغر. </string>
+    <string name="longitude">Long. </string>
+    <string name="altitude_hint">WGS84 ارتفاع. [متر]</string>
+    <string name="altitude_wgs84">WGS84 ارتفاع</string>
+    <string name="latitude_hint">عرض جغر. dd:mm:ss.sss</string>
+    <string name="longitude_hint">طول جغر. dd:mm:ss.sss</string>
+    <string name="loop_closure_errors">خطا در حلقه بسته شده</string>
+    <string name="loop_none">بدون حلقه</string>
+    <!-- string name="line_delete">Delete line</string -->
+
+    <string name="error_azimuth_required">سمت باید واردشود</string>
+    <string name="error_length_required">طول باید وارد شود</string>
+    <string name="error_clino_required">Clino باید وارد شود</string>
+    <string name="error_comment_required">توضیحات باید وارد شود</string>
+    <string name="error_begin_required">شروع آدرس باید واردشود</string>
+    <string name="error_declination_number">Declination باید عدد باشد</string>
+    <string name="error_end_required">آدرس نهایی باید وارد شود</string>
+    <string name="error_from_required">ایستگاه شروع باید وارد شود</string>
+    <string name="error_group_required">شماره گروه باید وارد شود</string>
+    <string name="error_group_non_integer">شماره گروه باید یک عدد integer باشد</string>
+    <string name="error_alt_required">ارتفاع باید وارد شود</string>
+    <string name="error_invalid_number">عدد اشتباه است</string>
+    <string name="error_lat_required">عرض جغرافیایی باید وارد شود</string>
+    <string name="error_long_required">طول جغرافیایی باید وارد شود</string>
+    <string name="error_name_required">نام باید وارد شود</string>
+    <string name="error_start_required">منبع جایگاه باید وار شود</string>
+    <string name="error_station_already_fixed">جایگاهی با این مختصات وجود دارد</string>
+    <string name="error_station_required">جایگاه باید وارد شود</string>
+    <string name="error_station_non_existing">جایگاه پیدا نشد</string>
+    <string name="error_sensor_required">سنسور باید وارد شود</string>
+    <string name="error_value_required">مقدار باید وارد شود</string>
+    
+    <string name="group_title">مقداردهی گروهی دادهای کالیبره</string>
+    <string name="group_policy_four">مجوز: گروه برای چهار</string>
+    <string name="group_policy_sixteen">مجوز: چهار گروه از چهار, بقیه تنها</string>
+    <string name="group_policy_distance">مجوز: گروه بندی بر اساس فاصله های گوشه</string>
+    <string name="group_reset">ریست گروه</string>
+
+    <string name="scale">مقیاس</string>
+    <string name="reversed">برعکس</string>
+    <string name="options">آپشن</string>
+    <string name="outline">راس</string>
+    <string name="out">خارج</string>
+    <string name="in">داخل</string>
+    <string name="none">هیچ کدام</string>
+    <string name="barrier_add">خط وسط صفحه نمایش شکسته شود ?</string>
+    <string name="barrier_del">نمایش وسط خط ادامه پیدا کند?</string>
+
+    <string name="bad_cwd">پروژه در مسیر وجود ندارد</string>
+
+    <string name="no_bt">بدون بلوتوس</string>
+    <string name="no_calib">بدون کالیبره</string>
+    <string name="no_calibration">کالیبره انتخاب نشده</string>
+    <string name="no_capture_app">بدون برنامه گرفتن تصاویر</string>
+    <string name="no_cave3d">Cave3D نصب نشده است</string>
+    <string name="no_db">بدون دیتابیس</string>
+    <string name="no_device_address">دستگاه انتخاب نشده است</string>
+    <string name="no_device_found">دستگاه پیدا نشد</string>
+    <string name="no_geomag">خطا در گرفتن GeoMag</string>
+    <string name="no_gms">دیتاهای کالیبره وجود ندارد.\nاز دکمه دانلود استفاده بفرمایید</string>
+    <string name="no_leg_intersection">Section line crosses no leg</string>
+    <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>
+    <string name="no_photos">Survey has no photo</string>
+    <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
+    <string name="no_proj4">Proj4 not installed</string>
+    <string name="no_sensors">Survey has no measurement</string>
+    <string name="no_shots">Survey has no shots.\nUse Download button to get some</string>
+    <string name="no_survey">No survey selected.</string>
+    <!-- UNUSED string name="no_tdsymbol">TdSymbol not installed</string -->
+    <string name="no_thmanager">ThManager app not installed</string>
+    <string name="no_db_viewer">DB_viewer app not found</string>
+    <string name="no_undelete">No item to recover</string>
+
+    <string name="menu_3d">3 D</string>
+    <string name="menu_about">درباره</string>
+    <string name="menu_attach">کانکت</string>
+    <string name="menu_calib">کالیبره کردن</string>
+    <!-- UNUSED string name="menu_attached">Connected</string -->
+    <!-- UNUSED string name="menu_ready">Ready</string -->
+    <string name="menu_delete">حذف</string>
+    <string name="menu_detach">دیسکانکت</string>
+    <string name="menu_display">نمایش</string>
+    <string name="menu_distox">DISTOX</string>
+    <string name="menu_export">خروجی</string>
+    <string name="menu_firmware">FIRMWARE</string>
+    <string name="menu_recover">RECOVER</string>
+    <string name="menu_reload">خواندن مجدد</string>
+    <string name="menu_help">راهنما</string>
+    <string name="menu_join_survey">CO-SURVEY</string>
+    <string name="menu_logs">LOGS</string>
+    <!-- string name="menu_manual">Manual</string -->
+    <string name="menu_options">تنظیمات</string>
+    <string name="menu_overview">OVERVIEW</string>
+    <string name="menu_palette">PALETTE</string>
+    <string name="menu_photo">عکس</string>
+    <string name="menu_sensor">سنسور</string>
+    <string name="menu_scan">SCAN</string>
+    <string name="menu_station">جایگاه</string>
+    <string name="menu_stats">STATS</string>
+    <string name="menu_survey">SURVEY INFO</string>
+    <string name="menu_sync">SYNC</string>
+
+    <string name="popup_join_pt">Snap to nearby point</string>
+    <string name="popup_snap_ln">Snap to nearby line</string>
+    <string name="popup_split_pt">نقطه تکراری</string>
+    <string name="popup_split_ln">بریدن خط در نقطه</string>
+    <string name="popup_sharp_pt">Straighten segment</string>
+    <string name="popup_curve_pt">Smoothen segment</string>
+    <string name="popup_remove_pt">حذف نقطه</string>
+
+    <string name="connected_none">بدون اتصال</string>
+    <string name="connected_already">خواندن مجدد اتصال</string>
+
+    <string name="not_available">دکمه فعال نیست</string>
+    <string name="not_enabled">دکمه فعال نیست</string>
+    <string name="not_implemented">Not implemented yet</string>
+    <string name="null_bitmap">امکان ساختن تصویر وجود ندارد [OOM error]</string>
+    <string name="photo">عکس</string>
+    <string name="photo_comment_prompt">توضیحات عکس را وارد فرمایید</string>
+    <string name="photo_name">جایگاه/نام</string>
+    <string name="photo_photo">تصویر</string>
+    <string name="photo_sensor">سنسور</string>
+    <string name="photo_external">اندازه گیری</string>
+    <string name="photo_sensor_prompt">تصویر یا سنسور را انتخاب کنید</string>
+    <string name="photo_shot">اضافه کردن شات</string>
+    <string name="photo_survey">جداکردن بررسی</string>
+    <string name="picture_no_station">نام ایستگاه باید وارد شود</string>
+    <string name="plot_delete">طرح حذف شود ?</string>
+    <string name="plot_duplicate_name">نام طرح تکراری است</string>
+    <string name="plot_name">نام طرح</string>
+    <string name="plot_new">طرح جدید</string>
+    <string name="plot_not_found">طرح \یدا نشد</string>
+    <!-- string name="plot_null_name">Missing sketch name</string -->
+    <!-- string name="plot_null_start">Missing base station</string -->
+    <string name="plot_recover">Reload sketch from backup?</string>
+    <string name="plot_start">Origin station</string>
+    <!-- string name="plot_view">Viewed station</string -->
+    <!-- UNUSED string name="read_">Read </string -->
+    <string name="read_data">Read %1$d data</string>
+    <string name="read_fail_with_code">Read failure: error code </string>
+    <string name="read_failed">Failed DistoX-read</string>
+    <!-- string name="reading_file_failed">Failed file-read</string -->
+    <string name="saved_file_">ذخیره کردن فایل\ </string>
+    <string name="saving_">ذخیره کردن </string>
+    <string name="saving_file_failed">فایل ذخیره نشد</string>
+    <string name="scrap_name">نام طرح</string>
+    <string name="splay">splay</string>
+    <string name="too_many_leg_intersection">Section line crosses many legs</string>
+
+    <string name="sensor">سنسور</string>
+    <!-- string name="sensor_accelerometer">accelerometer</string -->
+    <string name="sensor_gravity">جاذبه</string>
+    <!-- string name="sensor_humidity">humidity</string -->
+    <string name="sensor_light">نور</string>
+    <string name="sensor_magnetic_field">magnetic field</string>
+    <!-- string name="sensor_orientation">orientation</string -->
+    <string name="sensor_pressure">pressure</string>
+    <string name="sensor_proximity">proximity</string>
+    <string name="sensor_temperature">temperature</string>
+    <string name="sensor_extern">external</string>
+    <string name="sensor_type">type</string>
+    <string name="sensor_value">value</string>
+    <string name="sensor_comment">comment</string>
+
+    <!-- string name="shot_clino">clino</string -->
+    <!-- string name="shot_compass">compass</string -->
+    <string name="shot_from">از</string>
+    <string name="shot_info">ورود اطلاعات شات</string>
+    <string name="shot_leg">repeated leg</string>
+    <string name="shot_all_splay">splay group</string>
+    <!-- string name="shot_length">length</string -->
+    <string name="shot_note">note</string>
+    <string name="shot_reverse">برعکس</string>
+    <string name="shot_to">به</string>
+
+    <string name="make_surface">Surface exists. Replace it?</string>
+
+    <string name="sketch3d_name">نام</string>
+    <string name="sketch3d_new">مدل 3D جدید</string>
+    <string name="sketch3d_next">جایگاه بعدی</string>
+    <string name="sketch3d_null_name">Missing 3D sketch name</string>
+    <string name="sketch3d_null_next">Missing 3D sketch next station</string>
+    <string name="sketch3d_null_start">Missing 3D sketch base station</string>
+    <string name="sketch3d_start">base station</string>
+
+    <string name="station">جایگاه</string>
+    <string name="station_ask">Insert station in sketch?</string>
+    <string name="station_set">Continue survey from here?</string>
+    <!-- string name="station_base">reference station</string -->
+    <!-- string name="station_next">next station</string -->
+    <string name="station_viewed">viewed station</string>
+    <string name="survey_exists">Survey already exists</string>
+    <string name="survey_date">yyyy.mm.dd</string>
+    <string name="survey_delete">Delete survey ?</string>
+    <string name="survey_split">Split survey ?</string>
+    <string name="survey_not_attached">WARNING: unattached shots</string>
+    <string name="declination">Magn. decl.</string>
+    <string name="description">description</string>
+    <string name="name">نام</string>
+    <string name="team">تیم</string>
+    <!-- string name="toggle_device">Toggle device calibration mode</string -->
+    <string name="toggle_failed">Failed to toggle DistoX</string>
+    <string name="toggle_ok">Toggled DistoX calibration mode</string>
+    <string name="undelete_text">Tap item to recover</string>
+    <string name="visible_border">visible border</string>
+    <string name="vthreshold">vert. threshold</string>
+    <string name="wait_scan">Scanning: wait ...</string>
+    <string name="write_failed">Failed DistoX-write</string>
+    <string name="write_ok">نوشتن اطلاعات کالیبره در DistoX</string>
+    <string name="zip_saved">ذخیره شده </string>
+    <string name="zip_failed">بررسی زیپ نشد</string>
+    <string name="unzip_fail">بررسی از فشرده خارج نشد</string>
+    <!-- string name="zoom_in_out">Zoom in/out</string -->
+
+    <string name="survey_info">درباره بررسی</string>
+    <string name="stat_component">توضیحات %1$d</string>
+    <string name="stat_depth">عمق %1$.1f %2$.1f"</string>
+    <string name="stat_duplicate">شات تکراری %1$d %2$.1f</string>
+    <string name="stat_leg">Legs %1$d %2$.1f</string>
+    <string name="stat_length">طول %1$.1f</string>
+    <string name="stat_loop">Loops %1$d</string>
+    <string name="stat_shot">Shots  %1$d,   Duplicate %2$d,   Surface %3$d</string>
+    <string name="stat_splay">Splays %1$d</string>
+    <string name="stat_station">Stations %1$d</string>
+    <string name="stat_surface">Surface shots %1$d %2$.1f</string>
+    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <string name="shot_title">SHOT %1$s - %2$s"</string>
+    <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
+
+    <string name="hide_blank">Blank shots</string>
+    <string name="hide_leg">Repeated leg shots</string>
+    <string name="hide_ids">Shot IDs</string>
+    <string name="hide_splay">Splay shots</string>
+
+    <string name="surveys">بررسی</string>
+    <string name="calibs">کالیبره</string>
+
+    <string name="plan">پلان</string>
+    <string name="extended">EXTENDED</string>
+    <string name="v_section">V-SECTION</string>
+    <string name="h_section">H-SECTION</string>
+
+    <string name="distox_err_ok">OK</string>
+    <string name="distox_err_headtail">Failed DistoX memory-read</string>
+    <string name="distox_err_headtail_io">DistoX memory I/O error</string>
+    <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
+    <string name="distox_err_connected">Device already connected</string>
+
+    <string name="ask_close">برنامه بسته شود?</string>
+    <string name="ask_reset">حافظه DistoX ریست شود?</string>
+    <string name="ask_close_survey">بررسی بسته شود?</string>
+    
+
+    <string name="button_add"       >اضافه       </string>
+    <string name="button_back"      >عقب         </string>
+    <string name="button_cancel"    >انصراف      </string>
+    <string name="button_convert"   >کانورت      </string>
+    <string name="button_delete"    >حذف         </string>
+    <string name="button_eval"      >Eval      </string>
+    <string name="button_eval_cal"  >Eval w. calib.</string>
+    <string name="button_geomag"    >GeoMag    </string>
+    <string name="button_altitude">Ortometric Alt.</string>
+    <string name="button_gps_start" >GPS       </string>
+    <!-- string name="button_gps_stop"  >Stop      </string -->
+    <!-- string name="button_manual"    >Manual    </string -->
+    <!-- string name="button_measure"   >Measure   </string -->
+    <string name="button_photo"   >Photo</string>
+    <string name="button_sensor"  >Sensors</string>
+    <string name="button_direction">Azimuth/Clino</string>
+    <string name="button_plot"    >Sketch</string>
+    <string name="button_ok"        >خوب        </string>
+    <string name="button_no"        >خیر        </string>
+    <string name="button_open"      >بازکردن      </string>
+    <string name="button_read"      >خواندن      </string>
+    <string name="button_dump"      >Dump     </string>
+    <string name="button_reset"     >ریست     </string>
+    <string name="button_clear"     >حذف     </string>
+    <string name="button_save"      >ذخیره      </string>
+    <string name="button_select"    >انتخاب    </string>
+    <string name="button_store"     >Store     </string>
+    <string name="button_start"     >شروع</string>
+    <string name="button_stop"      >توقف</string>
+    <string name="button_upload"    >آپلود    </string>
+    <string name="button_yes"       >بله       </string>
+
+    <string name="button_sharp"     >Sharp</string>
+    <string name="button_rock"      >صخره</string>
+<!--
+    <string name="button_close"     >Close     </string>
+    <string name="button_erase"     >Erase     </string>
+    <string name="button_next"      >Next      </string>
+    <string name="button_prev"      >Previous  </string>
+    <string name="button_split"     >Split     </string>
+    <string name="button_toggle"    >Toggle CAL mode  </string>
+-->
+    <string name="button_write"     >آپلود</string>
+
+    <string name="mode_leg">Legs</string>
+    <string name="mode_splay">Splays</string>
+    <string name="mode_station">Stations</string>
+    <string name="mode_grid">Grid</string>
+    <string name="mode_fixed">Fix refs</string>
+
+    <string name="remote_title">دستگاه کنترل از راه دور</string>
+    <string name="remote_on">Laser ON</string>
+    <string name="remote_off">Laser OFF</string>
+    <string name="remote_measure">Measure</string>
+    <string name="remote_reset">Reset BT</string>
+    <string name="download">دانلود</string>
+
+<!--
+    <string name="btn_3d">3D</string>
+-->
+    <string name="btn_compass">قطب نما</string>
+    <string name="btn_csurvey">cSurvey</string>
+    <string name="btn_csv">CSV</string>
+    <string name="btn_dxf">DXF</string>
+    <string name="btn_kml">KML</string>
+    <string name="btn_oziexplorer">OziExplorer</string>
+    <string name="btn_man">دستی</string>
+    <string name="btn_symbol">ابزار ترسیم</string>
+    <string name="btn_png">PNG</string>
+    <string name="btn_pockettopo">PocketTopo</string>
+    <string name="btn_survex">Survex</string>
+    <string name="btn_therion">Therion</string>
+    <string name="btn_vtopo">VisualTopo</string>
+    <string name="btn_walls">Walls</string>
+    <string name="btn_svg">SVG</string>
+    <string name="btn_zip">Zip</string>
+
+<!-- FIXME_SKETCH_3D -->    
+    <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <string name="title_sketch_edit">تغییر سطح  3D </string>
+    <string name="title_sketch_shot">شات جدید</string>
+    <string name="title_sketch_refs">حالت نمایش</string>
+    <string name="title_sketch_section_type">انتخاب نوع</string>
+    <string name="title_sketch_select">انتخاب ایتم</string>
+
+    <string name="sketch_mode_single">تک شات</string>
+    <string name="sketch_mode_ngbh">Nearby shots</string>
+    <string name="sketch_mode_all">همه شات ها</string>
+    <string name="sketch_delete">حذف مدل 3D ?</string>
+    <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
+
+    <string name="btn_head">head</string>
+    <string name="btn_stretch">Stretch</string>
+    <string name="btn_extrude">Extrude</string>
+    <string name="btn_erase">حذف</string>
+    <string name="btn_cut">بریدن</string>
+    <string name="btn_vertical">عمودی</string>
+    <string name="btn_horizontal">افقی</string>
+
+    <!-- select buttin labels -->
+    <string name="btn_section">Section</string>
+    <string name="btn_step">Step</string>
+    <string name="btn_shot">Shot</string>
+    <string name="btn_join">Join</string>
+
+    <string name="button_redraw">Redraw</string>
+    <string name="button_erase">Erase</string>
+    <string name="btn_surface">surface</string>
+
+    <string name="station_next">NEXT</string>
+    <string name="no_shot_between_stations">no_shot_between_stations</string>
+    <string name="few_line_points">Line has too few points</string>
+    <string name="line_delete">line_delete</string>
+
+    <string name="menu_head">HEAD</string>
+    <string name="menu_save_th2">SAVE TH2</string>
+<!-- END_SKETCH_3D -->    
+
+    <string name="help_help">راهنمایی</string>
+    <string name="help_manual">راهنمای کاربر</string>
+    <string name="help_more">Show the secondary actions</string>
+    <string name="help_less">Return to the primary actions</string>
+    
+    <string name="help_coeff">Show calibration coefficients</string>
+    <string name="help_continue">Continue drawing a line</string>
+    <string name="help_current_station">Saved stations</string>
+    <string name="help_device">Enter device activity</string>
+    <string name="help_add_topodroid">Create new survey/calibration</string>
+    <string name="help_import">Import zip archive or survey file</string>
+    <string name="help_symbol">Enable/disable drawing tools</string>
+    <string name="help_therion">Therion manager app</string>
+    <string name="help_database">Database viewer app (SQliteViewer)</string>
+    <string name="help_prefs">Edit preferences</string>
+    <string name="help_log">Enable/disable logging settings</string>
+    <string name="help_join_survey">Join surveying</string>
+    <string name="help_info_topodroid">TopoDroid info</string>
+    <string name="help_download">Download data</string>
+    <string name="help_splay">Assign stations to splays automatically</string>
+    <string name="help_display">Choose display mode</string>
+    <string name="help_display_calib">Toggle display of deleted shots</string>
+    <string name="help_overview">Overview activity</string>
+    <string name="help_plot">Enter sketch activity</string>
+    <string name="help_note">Edit survey notes</string>
+    <string name="help_bluetooth">Reset bluetooth connection</string>
+    <string name="help_remote">Remote DistoX control</string>
+    <string name="help_add_shot">Add a shot entering the data manually</string>
+    <string name="help_info_shot">Survey statistics</string>
+    <string name="help_survey_info">Survey informations</string>
+    <string name="help_undelete">Recover deleted items</string>
+    <string name="help_photo">Photos dialog</string>
+    <string name="help_sensor">Measurements dialog</string>
+    <string name="help_3d">3D viewer app (Cave3D)</string>
+    <string name="help_draw">Enter drawing mode</string>
+    <string name="help_edit">Enter editing mode</string>
+    <string name="help_refs">Choose sketching references</string>
+    <string name="help_stats">Survey statistics dialog</string>
+    <string name="help_save_plot">Export sketch</string>
+    <string name="help_toggle_plot">Switch between plan and extended sect.</string>
+    <string name="help_trash">Delete sketch</string>
+    <string name="help_undo">Undo last drawing action</string>
+    <string name="help_redo">Redo last drawing action</string>
+    <string name="help_symbol_plot">Select the current drawing tool</string>
+    <!-- string name="help_clear">Clear selection</string -->
+    <string name="help_eraser">Erase drawings</string>
+    <string name="help_previous">Previous item in the selection</string>
+    <string name="help_next">Next item in the selection</string>
+    <string name="help_recover">Reload sketch from backup</string>
+   
+    <string name="help_line_point">Line point actions: join, split, cut, remove</string>
+<!--
+    <string name="help_to_point">Move selected point to join with the nearest point</string>
+    <string name="help_split_point">Split the point into two [line/area]</string>
+    <string name="help_split_line">Split the line into two at the point</string>
+    <string name="help_kink">Use a straight line at the point [line/area]</string>
+-->
+    <string name="help_note_plot">Edit the properties of the selected sketch item</string>
+    <string name="help_save">Save changes to survey info</string>
+    <string name="help_save_calib">Save changes to calibration info</string>
+    <string name="help_export_survey">Export survey</string>
+    <string name="help_loc">GPS location</string>
+    <string name="help_delete_survey">Delete survey</string>
+    <string name="help_delete_calib">Delete calibration</string>
+    <string name="help_detach">Clear current DistoX choice</string>
+    <string name="help_firmware">DistoX2 firmware updater</string>
+    <string name="help_toggle">Toggle DistoX calibration/normal mode</string>
+    <string name="help_sdcard">DistoX memory functions</string>
+    <string name="help_read">Read and display DistoX calibration coefficients</string>
+    <string name="help_info_device">Device info</string>
+    <string name="help_scan">Scan for new DistoX devices</string>
+    <string name="help_open_calib">Open calibration</string>
+    <string name="help_export_calib">Export calibration</string>
+    <string name="help_group">Assign group numbers automatically</string>
+    <string name="help_cover">Display angle distribution of calibration data</string>
+    <string name="help_compute">Compute calibration</string>
+    <string name="help_write">Write calibration coefficients to the DistoX</string>
+<!-- FIXME_SKETCH_3D -->
+    <string name="help_refs_model">حالت نمایش</string>
+    <string name="help_one_model">Fit 3d model to view</string>
+    <string name="help_surface">Make surface</string>
+    <string name="help_save_model">Export 3D model</string>
+    <string name="help_trash_model">Delete 3D model</string>
+    <string name="help_head_model">Orient 3D model</string>
+    <string name="help_erase_model">Erase region</string>
+    <string name="help_cut_model">Cut region</string>
+    <string name="help_stretch_model">Stretch region</string>
+    <string name="help_extrude_model">Extrude region</string>
+    <string name="help_refine_center">Refine surface at triangle centers</string>
+    <string name="help_refine_sides">Refine surface at triangle sides</string>
+    <string name="help_refine_point">Refine surface at point</string>
+    <string name="help_refine_triangle">Refine surface al the long sides</string>
+  
+
+    <string name="title_calib">Calibrations</string>
+    <string name="title_coverage">Calibration data distibution</string>
+    <string name="title_coeff">Calibration coefficients</string>
+    <string name="title_current_station">جایگاه ها ذخیره شد</string>
+    <string name="title_device">DistoX دستگاه</string>
+    <string name="title_discover">اتصال به دستگاه DistoX ... انتظار</string>
+    <string name="title_draw_area">AREA %1$s</string>
+    <string name="title_draw_line">خطا %1$s</string>
+    <string name="title_draw_point">موقعیت %1$s</string>
+    <string name="title_edit">ویرایش</string>
+    <string name="title_erase">حذف</string>
+    <string name="title_location">موقعیت</string>
+    <string name="title_location_gps">موقعیت *</string>
+    <string name="title_manual">راهنمای کاربر TopoDroid</string>
+    <string name="title_mode">نوع نمایش</string>
+    <string name="title_move">انتقال</string>
+    <string name="title_note">Survey notes</string>
+    <string name="title_photo">Photo/Measurements</string>
+    <string name="title_photo_comment">Photo comment</string>
+    <string name="title_plot_save">Save sketch as</string>
+    <string name="title_refs">Sketch References</string>
+    <string name="title_scraps">Survey sketches</string>
+    <string name="title_shift">Shift</string>
+    <string name="title_shot_delete">حذف شات ?</string>
+    <string name="title_stats">Statistics</string>
+    <string name="title_survey">Survey Info</string>
+    <string name="title_survey_export">Export survey as</string>
+    <string name="title_calib_export">Export calibration as</string>
+    <!-- string name="title_zoom">Zoom</string -->
+
+  <string name="pref_cat_survey">SURVEY SETTINGS</string>
+  <string name="pref_cat_drawing">SKETCH SETTINGS</string>
+  <string name="pref_cat_calib">CALIBRATION SETTINGS</string>
+  <string name="pref_cat_device">DEVICE SETTINGS</string>
+  <string name="pref_cat_sketch">3D MODEL SETTINGS</string>
+  <string name="pref_cat_log">LOG SETTINGS</string>
+
+  <string name="pref_locale_title">زبان</string>
+  <string name="pref_locale_summary">زبان</string>
+
+  <string name="pref_raw_data_title">Raw data</string>
+  <string name="pref_raw_data_summary">Show raw data</string>
+  <string name="pref_bootloader_title">Bootloader</string>
+  <string name="pref_bootloader_summary">Enable/Disable bootloader</string>
+  <string name="pref_cosurvey_title">Co-surveying service</string>
+  <string name="pref_cosurvey_summary">Enable/Disable co-surveying service</string>
+  <string name="pref_export_shots_title">Data export format</string>
+  <string name="pref_export_shots_summary">Default data export format</string>
+  <string name="pref_extra_buttons_title">Level of features</string>
+  <string name="pref_extra_buttons_summary">Level of enabled features</string>
+  <string name="pref_size_buttons_title">Buttons size</string>
+  <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
+  <string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string>
+
+  <string name="pref_leg_shots_title">Minimum leg shots</string>
+  <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
+
+  <string name="pref_sock_type_title">Socket</string>
+  <string name="pref_sock_type_summary">Socket create</string>
+  <!-- string name="pref_device_type_title">Disto type</string -->
+  <!-- string name="pref_device_type_summary">Model of the DistoX</string -->
+  <string name="pref_comm_retry_title">Connection retry</string>
+  <string name="pref_comm_retry_summary">Connection retries number</string>
+  <string name="pref_comm_retry_dialogtitle">Connection retries number</string>
+  <string name="pref_comm_retry_message">Connection retries number</string>
+  <string name="pref_conn_mode_title">Data connection type</string>
+  <string name="pref_conn_mode_summary">Type of the connection with DistoX</string>
+  <string name="pref_auto_reconnect_title">Auto reconnect</string>
+  <string name="pref_auto_reconnect_summary">Reconnect when connection is lostX</string>
+  <string name="pref_z6_workaround_title">Z6 workaround</string>
+  <string name="pref_z6_workaround_summary">Z6 workaround data download</string>
+  <string name="pref_crs_title">C R S </string>
+  <string name="pref_crs_summary">CRS name</string>
+  <string name="pref_crs_message">Enter the CRS name as in Proj4</string>
+  <string name="pref_gps_averaging_title">GPS Averaging</string>
+  <string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string>
+
+  <string name="pref_plot_screen_title">SKETCH SCREEN</string>
+  <string name="pref_tool_screen_title">DRAWING TOOLS</string>
+  <string name="pref_location_title">LOCATION</string>
+  <string name="pref_accuracy_title">ACCURACY</string>
+  <string name="pref_shot_data_title">SHOT DATA</string>
+  <string name="pref_shot_units_title">DATA UNITS</string>
+  <string name="pref_cwd_title">WORK DIRECTORY</string>
+  <string name="pref_cwd_summary">TopoDroid work directory</string>
+  <string name="pref_cwd_message">Enter TopoDroid work directory</string>
+  <string name="pref_text_size_title">Text size</string>
+  <string name="pref_text_size_summary">List items text size</string>
+  <string name="pref_text_size_message">Size of text in lists</string>
+  <string name="pref_closeness_title">Selection radius</string>
+  <string name="pref_closeness_summary">Sketch item selection radius</string>
+  <string name="pref_closeness_message">Sketch item selection radius</string>
+  <string name="pref_altitude_title">Altitude</string>
+  <string name="pref_altitude_summary">Select altitude type</string>
+  <string name="pref_altimetric_title">Orthometric atitude lookup</string>
+  <string name="pref_altimetric_summary">Internet lookup of orthometric altitude</string>
+  <string name="pref_survey_stations_title">Survey stations</string>
+  <string name="pref_survey_stations_summary">Automatic survey stations</string>
+  <string name="pref_accel_thr_title">Acceleration tolerance</string>
+  <string name="pref_accel_thr_summary">Tolerance over the shots accelerations</string>
+  <string name="pref_accel_thr_message">Tolerance over the shots accelerations</string>
+  <string name="pref_mag_thr_title">Magnetic tolerance</string>
+  <string name="pref_mag_thr_summary">Tolerance over the shots magnetic field</string>
+  <string name="pref_mag_thr_message">Tolerance over the shots magnetic field</string>
+  <string name="pref_dip_thr_title">Magnetic dip tolerance</string>
+  <string name="pref_dip_thr_summary">Tolerance over the shots magnetic dip</string>
+  <string name="pref_dip_thr_message">Tolerance over the shots magnetic dip</string>
+
+  <string name="pref_leg_title">Leg tolerance</string>
+  <string name="pref_leg_summary">Tolerance among the shots of a leg</string>
+  <string name="pref_leg_message">Tolerance among the shots of a leg</string>
+  <string name="pref_backsight_title">Backsight</string>
+  <string name="pref_backsight_summary">Backsight fields in the new-shot dialog</string>
+  <string name="pref_mag_anomaly_title">Magnetic Anomaly</string>
+  <string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string>
+
+  <string name="pref_team_title">Team</string>
+  <string name="pref_team_summary">Surveying team</string>
+  <string name="pref_team_message">Default surveying team</string>
+
+  <string name="pref_ethr_title">Extend threshold</string>
+  <string name="pref_ethr_summary">Splay shot extend threshold</string>
+  <string name="pref_ethr_message">Threshold to compute splay shot extend</string>
+  <string name="pref_vthr_title">Shot vertical threshold</string>
+  <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
+  <string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string>
+  <string name="pref_plan_vthr_title">Splay vertical threshold</string>
+  <string name="pref_plan_vthr_summary">Splay vertical threshold in plan</string>
+  <string name="pref_plan_vthr_message">Hide in the plan splays with high inclination</string>
+  <string name="pref_init_station_title">Initial station name</string>
+  <string name="pref_init_station_summary">Default initial station name</string>
+  <string name="pref_init_station_message">Default initial station name</string>
+
+  <string name="pref_hthr_title">Cross-section h-threshold</string>
+  <string name="pref_hthr_summary">Threshold for horizontal cross-sections</string>
+  <string name="pref_hthr_message">Shot clino over which cross-sections are horizontal</string>
+  <string name="pref_bitmap_scale_title">PNG resolution</string>
+  <string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string>
+  <string name="pref_bitmap_scale_message">Image resolution of sketch PNG export</string>
+  <string name="pref_thumbnail_title">Thumbnails size</string>
+  <string name="pref_thumbnail_summary">Size of thumbnail images</string>
+  <string name="pref_thumbnail_message">Size of thumbnail images</string>
+  <string name="pref_shot_timer_title">Shot direction timer</string>
+  <string name="pref_shot_timer_summary">Seconds to wait before measuring the shot direction</string>
+  <string name="pref_shot_timer_message">Seconds before measuring the shot direction</string>
+  <string name="pref_beep_volume_title">Timer-beep volume</string>
+  <string name="pref_beep_volume_summary">Percent timer-beep volume</string>
+  <string name="pref_beep_volume_message">Percent timer-beep volume</string>
+  <string name="pref_drawing_unit_title">Point tools scale</string>
+  <string name="pref_drawing_unit_summary">Scale of the point tools</string>
+  <string name="pref_drawing_unit_message">Scale of the point drawing tools</string>
+  <string name="pref_segment_title">Line-point spacing</string>
+  <string name="pref_segment_summary">Minimum line-point distance</string>
+  <string name="pref_segment_message">Minimum distance between points on a line</string>
+  <string name="pref_linestyle_title">Line style</string>
+  <string name="pref_linestyle_summary">Line drawing style</string>
+  <string name="pref_lineacc_title">Bezier accuracy</string>
+  <string name="pref_lineacc_summary">Bezier interpolation accuracy</string>
+  <string name="pref_lineacc_message">Bezier cubic interpolation accuracy</string>
+  <string name="pref_linecorner_title">Bezier corner threshold</string>
+  <string name="pref_linecorner_summary">Bezier corner threshold</string>
+  <string name="pref_linecorner_message">Bezier corner detection threshold</string>
+  <string name="pref_calib_algo_title">Algorithm</string>
+  <string name="pref_calib_algo_summary">Calibration algorithm</string>
+  <string name="pref_group_by_title">Group policy</string>
+  <string name="pref_group_by_summary">Policy to group calibration data</string>
+  <string name="pref_group_title">Group tolerance</string>
+  <string name="pref_group_summary">Tolerance among shots in the same group</string>
+  <string name="pref_group_message">Tolerance among shots in the same group</string>
+  <string name="pref_error_title">Error</string>
+  <string name="pref_error_summary">Minimum calibration error</string>
+  <string name="pref_error_dialogtitle">Calibration error</string>
+  <string name="pref_error_message">Minimum calibration error</string>
+  <string name="pref_iter_title">Iterations</string>
+  <string name="pref_iter_summary">Maximum number of iterations</string>
+  <string name="pref_iter_dialogtitle">Calibration iterations</string>
+  <string name="pref_iter_message">Calibration iterations</string>
+  <string name="pref_label_size_title">Labels size</string>
+  <string name="pref_label_size_summary">Size of the labels</string>
+  <string name="pref_label_size_message">Size of the labels</string>
+  <string name="pref_arrow_length_title">Section line tick size</string>
+  <string name="pref_arrow_length_summary">Size of the section line tick</string>
+  <string name="pref_arrow_length_message">Size of the section line tick</string>
+  <string name="pref_dot_radius_title">Green dots size</string>
+  <string name="pref_dot_radius_summary">Green dots size</string>
+  <string name="pref_dot_radius_message">Size of the green dots</string>
+  <string name="pref_line_thickness_title">Line width</string>
+  <string name="pref_line_thickness_summary">Drawing line width</string>
+  <string name="pref_line_thickness_message">Drawing line width</string>
+  <string name="pref_fixed_thickness_title">Survey line width</string>
+  <string name="pref_fixed_thickness_summary">Survey line width</string>
+  <string name="pref_fixed_thickness_message">Survey line width</string>
+  <string name="pref_device_title">Device</string>
+  <string name="pref_device_summary">DistoX address name</string>
+  <string name="pref_device_message">DistoX address name</string>
+  <string name="pref_checkBT_title">Bluetooth</string>
+  <string name="pref_checkBT_summary">Enable/disable bluetooth</string>
+  <string name="pref_checkAttached_title">Midline check</string>
+  <string name="pref_checkAttached_summary">Check if stations are attached</string>
+  <string name="pref_autoStations_title">Sketch stations</string>
+  <string name="pref_autoStations_summary">Add stations automatically</string>
+  <string name="pref_loopClosure_title">Loop closure</string>
+  <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
+  <string name="pref_splayExtend_title">Estimate splay extend</string>
+  <string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string>
+
+  <string name="pref_picker_type_title">Drawing tool picker</string>
+  <string name="pref_picker_type_summary">Drawing tool picker type</string>
+  <string name="pref_station_size_title">Station name size</string>
+  <string name="pref_station_size_summary">Size of the station names</string>
+  <string name="pref_station_size_message">Size of the station names</string>
+
+  <string name="pref_sketchUsesSplays_title">Sketch splays</string>
+  <string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string>
+  <string name="pref_sketchLineStep_title">Max side</string>
+  <string name="pref_sketchLineStep_summary">Maximum size of a triangle side</string>
+  <string name="pref_sketchLineStep_message">Maximum size of a triangle side [m]</string>
+  <string name="pref_sketchBorderStep_title">Border step</string>
+  <string name="pref_sketchBorderStep_summary">Distance between edit-line points</string>
+  <string name="pref_sketchBorderStep_message">Distance between edit-line points</string>
+  <string name="pref_sketchSectionStep_title">Section step</string>
+  <string name="pref_sketchSectionStep_summary">Distance between sections</string>
+  <string name="pref_sketchSectionStep_message">Distance between intermediate sections</string>
+  <string name="pref_sketchDeltaExtrude_title">Extrude scale</string>
+  <string name="pref_sketchDeltaExtrude_summary">Extrude scale factor</string>
+  <string name="pref_sketchDeltaExtrude_message">Extrude scale factor</string>
+  <string name="pref_sketchCompassReadings_title">Compass readings</string>
+  <string name="pref_sketchCompassReadings_summary">Number of readings to average</string>
+  <string name="pref_sketchCompassReadings_message">Number of compass readings to average</string>
+
+  <string name="pref_unit_length_title">Length units</string>
+  <string name="pref_unit_length_summary">Display units for lengths</string>
+  <string name="pref_unit_angle_title">Angle units</string>
+  <string name="pref_unit_angle_summary">Display units for angles</string>
+  <string name="pref_unit_location_title">Location units</string>
+  <string name="pref_unit_location_summary">Display units for locations</string>
+
+  <string name="pref_log_stream_summary">Log output stream</string>
+  <string name="pref_log_stream_title">Log stream</string>
+  <string name="pref_log_bt">Bluetooth</string>
+  <string name="pref_log_bezier">Bezier curves</string>
+  <string name="pref_log_calib">Calibration</string>
+  <string name="pref_log_comm">BT communication</string>
+  <string name="pref_log_csurvey">cSurvey</string>
+  <string name="pref_log_data">Survey data</string>
+  <string name="pref_log_db">Database</string>
+  <string name="pref_log_debug">Debug</string>
+  <string name="pref_log_device">Device window</string>
+  <string name="pref_log_distox">DistoX</string>
+  <string name="pref_log_err">خطا</string>
+  <string name="pref_log_fixed">GPS نقاط</string>
+  <string name="pref_log_input">User input</string>
+  <string name="pref_log_loc">موقعیت</string>
+  <string name="pref_log_num">Data reduction</string>
+  <string name="pref_log_photo">عکس</string>
+  <string name="pref_log_plot">Sketches</string>
+  <string name="pref_log_proto">DistoX protocol</string>
+  <string name="pref_log_ptopo">PocketTopo</string>
+  <string name="pref_log_sensor">سنسور</string>
+  <string name="pref_log_shot">Shots</string>
+  <string name="pref_log_sync">Cosurveying</string>
+  <string name="pref_log_survey">Surveys</string>
+  <string name="pref_log_therion">Therion</string>
+  <string name="pref_log_units">واحدها</string>
+  <string name="pref_log_zip">ZIP</string>
+
+  <string name="line_bezier">Bezier</string>
+  <string name="line_fine">خوب</string>
+  <string name="line_normal">نورمال</string>
+  <string name="line_coarse">coarse</string>
+  <string name="units_ddmmss">ddmmss</string>
+  <string name="units_dd">degrees</string>
+  <string name="units_grads">grads</string>
+  <string name="units_meters">متر</string>
+  <string name="units_feet">فوت</string>
+  <string name="alt_wgs">ellipsoid</string>
+  <string name="alt_ortho">orthometric</string>
+  <string name="splay_extend">estimate splay extend</string>
+
+    <string name="welcome_title">خوش آمدید به TopoDroid %1$s</string>
+    <string name="welcome_text">
+\nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
+\n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
+\n\nVisit http://sites.google.com/site/speleoapps for complementary apps and docs.
+\nSend comments, bug reports, feature requests, to marco.corvi@gmail.com
+\n
+    </string>
+
+  <string name="firmware_title">Firmware Updater</string>
+  <string name="firmware_file_title">Firmware Files</string>
+  <string name="firmware_text">
+\n[1] Select either to upload a firmware or to dump the firmware to a file.
+\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
+\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
+\n[5] Tap the OK button.
+\n[6] Confirm to continue and wait till the process is done.
+\n[7] Turn off the DistoX2 with the CLR key.
+\n
+   </string>
+   <string name="firmware_none">بدون فایل firmware</string>
+   <string name="firmware_file">فایل firmware</string>
+   <string name="firmware_file_exists">فایل firmware وجود داد</string>
+   <string name="firmware_file_missing">فایل firmware وجود ندارد</string>
+   <string name="ask_dump">Dump firmware?</string>
+   <string name="ask_upload">firmware آپلود شود?</string>
+   <string name="ask_upload_not_compatible">فایل Firmware به نظر صحیح نمی آید.\nدر هر صورت آپلود شود?</string>
+   <string name="firmware_file_dumped">ذخیره فایل firmware  %1$s اندازه %2$d</string>
+   <string name="firmware_file_uploaded">آپلود فایل  firmware %1$s اندازه %2$d</string>
+   
+
+</resources>
