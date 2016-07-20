@@ -164,7 +164,7 @@ public class DeviceActivity extends Activity
       mTvAddress.setTextColor( 0xffff0000 );
       mTvAddress.setText( R.string.no_device_address );
     }
-
+    TDLog.Debug("set state updates list");
     updateList();
   }  
 
@@ -253,8 +253,10 @@ public class DeviceActivity extends Activity
     // mList.setLongClickable( true );
     mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
+    TDLog.Debug("device activity layout done");
 
     setState();
+    TDLog.Debug("device activity state done");
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -265,6 +267,7 @@ public class DeviceActivity extends Activity
     closeMenu();
     // HOVER
     mMenu.setOnItemClickListener( this );
+    TDLog.Debug("device activity create done");
   }
 
   private void updateList( )
