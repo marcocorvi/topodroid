@@ -1,4 +1,4 @@
-symbol area
+﻿symbol area
 name ice
 name-cn 冰
 name-es hielo
@@ -9,6 +9,7 @@ name-de Eisfläche
 name-ru лед
 name-bg лед
 name-ua лід
+name-fa یخ
 th_name ice
 color 0xcccccc 0x66
 csurvey 1 48 0 1

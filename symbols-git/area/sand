@@ -1,4 +1,4 @@
-symbol area
+﻿symbol area
 name sand
 name-cn 沙子
 name-es arena
@@ -9,6 +9,7 @@ name-de Sandfläche
 name-ru песок
 name-bg пясък
 name-ua пісок
+name-fa شن
 th_name sand
 color 0xffff66 0x66
 csurvey 1 48 0 3
