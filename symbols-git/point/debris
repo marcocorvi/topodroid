@@ -1,10 +1,11 @@
-symbol point
+﻿symbol point
 name debris
 name-cn 碎石
 name-es pedrera
 name-pt entulho
 name-it detrito
 name-fr débris
+name-fa آوار
 name-de Schutt
 name-ru щебень
 name-ua щебінь

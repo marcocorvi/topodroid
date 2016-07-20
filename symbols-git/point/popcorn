@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name popcorn
 name-cn 石葡萄
 name-es espeleotema_coralinoidea
@@ -7,6 +7,7 @@ name-it cavolfiore
 name-fr choux-fleur
 name-de Blumenkohlsinter
 name-ru коралиты
+name-fa پاپکرن
 name-bg дендрити
 name-ua коралиты
 th_name popcorn

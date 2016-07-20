@@ -1,10 +1,11 @@
-symbol point
+﻿symbol point
 name breakdown-choke
 name-cn 坍塌堵塞
 name-es obstruido
 name-pt estrangulamento
 name-it ostruzione
 name-fr trémie
+name-fa سقوط_ناگهانی
 name-de Versturz
 name-ru блокировано_обвалом
 name-bg блокирано_от_срутище

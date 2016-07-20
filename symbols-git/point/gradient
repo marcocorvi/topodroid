@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name gradient
 name-cn 坡向
 name-es pendiente
@@ -8,6 +8,7 @@ name-fr pente
 name-de Gefälle
 name-ru уклон
 name-bg наклон
+name-fa شیب
 name-ua нахил
 th_name gradient
 orientation yes

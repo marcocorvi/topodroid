@@ -1,10 +1,11 @@
-symbol point
+﻿symbol point
 name sand
 name-cn 砂
 name-es arena
 name-pt areia
 name-it sabbia
 name-fr sable
+name-fa شن
 name-de Sand
 name-ru песок
 name-bg пясък

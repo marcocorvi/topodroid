@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name root
 name-cn 树根
 name-es raices
@@ -7,6 +7,7 @@ name-fr racine
 name-de Wurzel
 name-ru корни_деревьев
 name-bg корен
+name-fa ریشه
 name-ua корні
 th_name root
 orientation no

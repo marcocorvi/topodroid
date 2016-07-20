@@ -1,10 +1,11 @@
-symbol point
+﻿symbol point
 name blocks
 name-cn 块石
 name-es bloques
 name-pt blocos
 name-it blocchi
 name-fr blocs
+name-fa بلوک
 name-de Blöcke
 name-ru блоки
 name-bg ск._блок

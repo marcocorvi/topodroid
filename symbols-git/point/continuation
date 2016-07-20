@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name continuation
 name-cn 延续未知
 name-es continuación
@@ -6,6 +6,7 @@ name-pt continuaзгo
 name-it prosecuzione
 name-fr continuation
 name-de Fortsetzung
+name-fa ادامه
 name-ru продолжение
 name-bg продължение
 name-ua продовження

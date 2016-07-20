@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name guano
 name-cn 粪石
 name-es guano
@@ -6,6 +6,7 @@ name-es guano
 name-pt guano
 name-it guano
 name-fr guano
+name-fa گودی
 name-de Guano
 name-ru гуано
 name-bg гуано

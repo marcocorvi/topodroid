@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name paleo
 name-cn 古生物遗迹
 name-es paleolítico
@@ -6,6 +6,7 @@ name-it paleo
 name-fr paléolithique
 name-de Paläontologischer_Fund
 name-ru палео
+name-fa سرخپوش
 name-bg палео_находка
 name-ua палео
 th_name paleo-material

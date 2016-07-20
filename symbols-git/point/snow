@@ -1,9 +1,10 @@
-symbol point
+﻿symbol point
 name snow
 name-cn 雪
 name-es nieve
 name-pt neve
 name-it neve
+name-fa برف
 name-fr neige
 name-de Schnee
 name-ru снег

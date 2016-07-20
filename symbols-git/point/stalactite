@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name stalactite
 name-cn 石钟乳
 name-es estalactita
@@ -6,6 +6,7 @@ name-pt estalactite
 name-it stalattite
 name-fr stalactite
 name-de Stalaktit
+name-fa چکنده
 name-ru сталактит
 name-bg сталактит
 name-ua сталактит

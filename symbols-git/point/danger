@@ -1,10 +1,11 @@
-symbol point
+﻿symbol point
 name danger
 name-cn 危险
 name-es peligro
 name-pt perigo
 name-it pericolo
 name-fr danger
+name-fa خطر
 name-de Gefahr
 name-ru опасность
 name-bg опасност

@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name dig
 name-cn 挖掘痕迹
 name-es excavar
@@ -6,6 +6,7 @@ name-pt escavação
 name-it scavo
 name-fr désobstruction
 name-de Grabung
+name-fa حفره
 name-ru раскоп
 name-bg изкоп
 name-ua розкоп

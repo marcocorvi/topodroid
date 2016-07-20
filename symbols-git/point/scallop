@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name scallop
 name-cn 波痕
 name-es golpe_gubia
@@ -6,6 +6,7 @@ name-it scallop
 name-fr coups_de_gouge
 name-de Fließfacette
 name-ru фасетки
+name-fa گوش_ماهی
 name-bg фасетки
 name-ua фасетки
 th_name scallop
