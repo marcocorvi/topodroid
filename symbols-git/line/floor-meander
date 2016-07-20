@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name floor-meander
 name-cn 地缝
 name-es meandro_desfondado
@@ -8,6 +8,7 @@ name-de Bodenmäander
 name-ru меандр_в_полу
 name-bg меандър_в_пода
 name-ua меандр_в_підлозі
+name-fa طبقه_پر_پیچ_خم
 th_name floor-meander
 group floor-meander
 color 0xcc0000 0xff

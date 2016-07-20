@@ -1,0 +1,30 @@
+﻿symbol line
+
+name wall_clay
+
+name-cn 粘土洞壁
+name-es paredes_de_barro
+
+name-de Lehmwand
+name-fa دیوار_رسی
+name-bg стена_глина
+name-ru стена_в_глине
+name-ua стіна_в_глині
+th_name wall:clay
+group wall
+color 0xff0000 0xff
+width 1
+csurvey 5 4 1 1
+effect
+  moveTo 0 0
+  lineTo 27 0
+  lineTo 27 1
+  lineTo 0 1
+
+  moveTo 2 6
+  cubicTo 2 6 8 -1 12 6
+  cubicTo 12 7 17 14 22 7
+  cubicTo 22 8 17 15 12 8
+  cubicTo 12 7 8 0 2 7
+endeffect
+endsymbol

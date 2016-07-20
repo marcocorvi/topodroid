@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name flute
 name-cn 沟槽
 name-es concrecciones
@@ -8,6 +8,7 @@ name-de Kolk
 name-ru мармит
 name-bg карен_жлеб
 name-ua флейта
+name-fa شیار
 th_name flute
 orientation no
 color 0x6666ff

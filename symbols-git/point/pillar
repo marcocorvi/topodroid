@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name pillar
 name-cn 石柱
 name-es columna
@@ -6,6 +6,7 @@ name-pt pilar
 name-it colonna
 name-fr pilier
 name-de Säule
+name-fa ستون
 name-ru колонна
 name-bg сталактон
 name-ua колона

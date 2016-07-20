@@ -1,4 +1,4 @@
-symbol area
+﻿symbol area
 name snow
 name-cn 雪
 name-es nieve
@@ -9,6 +9,7 @@ name-de Schneefläche
 name-ru снег
 name-bg сняг
 name-ua сніг
+name-fa برف
 th_name snow
 color 0xffffff 0x66
 csurvey 1 48 0 1

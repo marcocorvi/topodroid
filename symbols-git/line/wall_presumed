@@ -1,0 +1,18 @@
+﻿symbol line
+name presumed
+name-cn 推断的洞壁
+name-es contorno_estimado
+name-it parete_stimata
+name-fr supposé
+name-de Vermutetete_Wand
+name-ru предположительный
+name-bg предполагаема
+name-ua ймовірний
+name-fa احتمال_داشتن
+th_name wall:presumed
+group wall
+color 0xff0000 0xff
+width 1
+csurvey 5 4 1 8
+dash 15 5
+endsymbol

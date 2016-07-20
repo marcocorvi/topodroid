@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name chimney
 name-cn 天井
 name-es chimenea
@@ -9,6 +9,7 @@ name-de Schlot
 name-ru колодец
 name-bg комин
 name-ua колодязь
+name-fa دودکش
 th_name chimney
 group chimney
 color 0xcc00cc 0xff

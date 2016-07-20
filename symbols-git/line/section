@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name section
 name-cn 截面
 name-es sección
@@ -8,6 +8,7 @@ name-de Schnitt
 name-ru сечение
 name-bg сечение
 name-ua переріз
+name-fa بخش
 th_name section
 color 0xffffff 0x99
 width 1

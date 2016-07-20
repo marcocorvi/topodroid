@@ -1,4 +1,4 @@
-symbol area
+﻿symbol area
 name pebbles
 name-cn 鹅卵石
 name-es canto_rodado
@@ -9,6 +9,7 @@ name-de Kiesfläche
 name-ru галька
 name-bg камъчета
 name-ua галька
+name-fa سنگریزه
 th_name pebbles
 color 0xff9900 0x66
 csurvey 1 48 0 4

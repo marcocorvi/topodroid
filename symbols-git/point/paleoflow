@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name paleoflow
 name-cn 古水流指向
 name-it paleoflusso
@@ -6,6 +6,7 @@ name-es paleoflujo
 name-fr écoulement_fossile
 name-de Ehemaliges_Gerinne
 name-ru палео_поток
+name-fa جریان_سرخپوش
 name-bg палео_поток
 name-ua палео_поток
 th_name paleoflow

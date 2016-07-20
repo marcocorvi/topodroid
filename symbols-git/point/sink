@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name sink
 name-cn 消水
 name-es sumidero
@@ -8,6 +8,7 @@ name-fr perte
 name-de Schluckloch
 name-ru понор
 name-bg понор
+name-fa فرو_رفتگی
 name-ua провал
 th_name sink
 orientation no

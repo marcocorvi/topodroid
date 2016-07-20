@@ -1,9 +1,10 @@
-symbol point
+﻿symbol point
 name narrow-end
 name-cn 狭窄末端
 name-es gatera
 name-pt término_estreito
 name-it termine
+name-fa پایان_باریک
 name-fr passage_impénétrable
 name-de Schmale_Engstelle
 name-ru узкий_ход

@@ -1,10 +1,11 @@
-symbol point
+﻿symbol point
 name ice
 name-cn 冰
 name-es hielo
 name-pt gelo
 name-it ghiaccio
 name-fr glace
+name-fa یخ
 name-de Eis
 name-ru лед
 name-bg лед

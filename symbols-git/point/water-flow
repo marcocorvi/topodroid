@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name water-flow
 name-cn 水流
 name-es curso_activo
@@ -6,6 +6,7 @@ name-pt fluxo_бgua
 name-it flusso_d'acqua
 name-fr circulation_d'eau
 name-de Gerinne
+name-fa جریان_آب
 name-ru водоток
 name-bg течаща_вода
 name-ua водотік

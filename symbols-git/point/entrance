@@ -1,10 +1,11 @@
-symbol point
+﻿symbol point
 name entrance
 name-cn 洞口
 name-es entrada
 name-pt entrada
 name-it ingresso
 name-fr entrée
+name-fa مدخل_ورودی
 name-de Eingang
 name-ru вход
 name-bg вход

@@ -1,0 +1,38 @@
+﻿symbol line
+
+name wall_sand
+
+name-cn 砂积洞壁
+
+name-es paredes_de_arena
+name-fr parois_sabloneuses
+
+
+name-de Sandwand
+
+name-bg стена_пясък
+
+name-ru стена_песок
+
+name-ua стіна_пісок
+
+name-fa شن
+th_name wall:sand
+group 
+wall
+color 0xff0000 0xff
+width 1
+csurvey 5 4 1 1
+effect
+  moveTo 0 0
+  lineTo 27 0
+  lineTo 27 1
+  lineTo 0 1
+  lineTo 0 8
+  lineTo 9 8
+  lineTo 9 9
+  lineTo 0 9
+
+endeffect
+
+endsymbol

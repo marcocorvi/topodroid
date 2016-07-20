@@ -1,4 +1,4 @@
-symbol point
+﻿symbol point
 name anchor
 name-cn 锚点
 name-es columna
@@ -7,6 +7,7 @@ name-it ancoraggio
 name-fr amarrage
 name-de Seilbefestigung
 name-ru крюк
+name-fa لنگر
 name-bg закрепване
 name-ua гак
 name-sl sidro

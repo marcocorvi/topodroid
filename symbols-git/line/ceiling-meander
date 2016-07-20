@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name ceiling-meander
 name-cn 天沟
 name-es techo_meandro
@@ -8,6 +8,7 @@ name-de Deckenmäander
 name-ru меандр_в_потолке
 name-bg меандър_в_тавана
 name-ua меандр_в_стелі
+name-fa سقف_پر_پیچ_خم
 th_name ceiling-meander
 group ceiling-meander
 color 0xcc00cc 0xff
