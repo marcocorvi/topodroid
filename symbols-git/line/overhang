@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name overhang
 name-cn 洞顶凸坎
 name-es escarpe
@@ -9,6 +9,7 @@ name-de Überhang
 name-ru нависание
 name-bg надвес
 name-ua нависання
+name-fa برآمدگی
 th_name overhang
 group overhang
 color 0xff0066 0xff

@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name slope
 name-cn 斜坡
 name-es desnivel
@@ -9,6 +9,7 @@ name-de Abhang
 name-ru склон
 name-bg наклон
 name-ua нахил
+name-fa شیب
 th_name slope
 group slope
 color 0xffcc00 0xff

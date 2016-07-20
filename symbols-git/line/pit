@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name pit
 name-cn 竖井
 name-es pozo
@@ -9,6 +9,7 @@ name-de Schacht
 name-ru яма
 name-bg отвес
 name-ua яма
+name-fa چاه
 th_name pit
 group pit
 color 0xff00ff 0xff

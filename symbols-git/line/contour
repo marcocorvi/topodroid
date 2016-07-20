@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name contour
 name-cn 等高线
 name-es curvas_de_nivel
@@ -9,6 +9,7 @@ name-de Höhenlinie
 name-ru контур
 name-bg контур
 name-ua контур
+name-fa حد_فاصل
 th_name contour
 group contour
 color 0x33cc66 0xff

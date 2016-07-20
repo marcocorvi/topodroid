@@ -1,4 +1,4 @@
-symbol line
+﻿symbol line
 name arrow
 name-cn 箭头
 name-es flecha
@@ -9,6 +9,7 @@ name-de Pfeil
 name-ru стрелка
 name-bg стрелка
 name-ua стрілка
+name-fa پیکان
 th_name arrow
 style straight x0
 color 0xcccccc 0xff
