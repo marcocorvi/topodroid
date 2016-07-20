@@ -209,7 +209,7 @@ public class TopoDroidActivity extends Activity
           Toast.makeText( this, R.string.no_bt, Toast.LENGTH_SHORT ).show();
         } else {
           if ( mApp.mBTAdapter.isEnabled() ) {
-            TDLog.Debug( "start device window");
+            // TDLog.Debug( "start device window");
             startActivity( new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class ) );
           } else {
             Toast.makeText( this, R.string.not_enabled, Toast.LENGTH_SHORT ).show();

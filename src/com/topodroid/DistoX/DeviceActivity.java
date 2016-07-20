@@ -164,7 +164,7 @@ public class DeviceActivity extends Activity
       mTvAddress.setTextColor( 0xffff0000 );
       mTvAddress.setText( R.string.no_device_address );
     }
-    TDLog.Debug("set state updates list");
+    // TDLog.Debug("set state updates list");
     updateList();
   }  
 
@@ -212,7 +212,7 @@ public class DeviceActivity extends Activity
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    TDLog.Debug("device activity on create");
+    // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
 
     mDevice  = mApp.mDevice;
@@ -253,10 +253,10 @@ public class DeviceActivity extends Activity
     // mList.setLongClickable( true );
     mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
-    TDLog.Debug("device activity layout done");
+    // TDLog.Debug("device activity layout done");
 
     setState();
-    TDLog.Debug("device activity state done");
+    // TDLog.Debug("device activity state done");
 
     mImage = (Button) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -267,12 +267,12 @@ public class DeviceActivity extends Activity
     closeMenu();
     // HOVER
     mMenu.setOnItemClickListener( this );
-    TDLog.Debug("device activity create done");
+    // TDLog.Debug("device activity create done");
   }
 
   private void updateList( )
   {
-    TDLog.Debug("device activity update list" );
+    // TDLog.Debug("device activity update list" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
     if ( TDSetting.mLevelOverExperimental ) { // FIXME TD_DistoX
@@ -502,11 +502,11 @@ public class DeviceActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    TDLog.Debug("device activity on resume" );
+    // TDLog.Debug("device activity on resume" );
     registerReceiver( mPairReceiver, new IntentFilter( BluetoothDevice.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
     mApp.mDeviceActivityVisible = true;
-    TDLog.Debug("device activity on resume done" );
+    // TDLog.Debug("device activity on resume done" );
   }
 
   @Override
