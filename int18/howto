@@ -6,9 +6,9 @@ Howto add a translation
 
 [3] add the directory int18/values-XX for your translation (replace "XX" with the two-letter country code of the language)
 
-[4] copy res/values/strings.xml and res/values/array.xml in the translation directory.
+[4] copy res/values/strings.xml res/values/array.xml and res/values/plurals.xml in the translation directory.
 
-[5] edit the two files and replace the english strings with the translations in your language save them with utf-8 encoding
+[5] edit the three files and replace the english strings with the translations in your language save them with utf-8 encoding
 
 NOTES:
 (A) do not change the order of the strings. 
@@ -18,12 +18,15 @@ it is the same for all translations and makes maintenance easier
 you may leave these untranslated
 
 (C) some strings (eg. name of programs, digits) do not need to be translated:
-you can comment them in the translation
+you can comment them in the translation (please use the mark "OK", eg, <!--OK string ... </string -->")
 
 (D) the array strings with name xxxValue MUST not be translated:
 you can delete them from the translation file
 
-(E) i will not change a translated string, 
+[E] plurals strings may need different "numbers" in your language than in english
+use al those that apply
+
+[O] i will not change a translated string, 
 however i do update the translation file to keep them uptodate with the default file (english):
 i may add a new string: in this case the new string is added in comment with a a mark TODO.
 you should translated it and remove the comment and the mark
@@ -37,26 +40,24 @@ i may change the english string of a translated string:
 i may put the translated string in comment with a mark FIXME
 after checking the english and possibly updating the translation remove the comment and the mark
 
-(F) as a guideline strings should be short and concise: there is no much space on the display and the user do not like to read long messages
+[H] as a guideline strings should be short and concise: there is no much space on the display and the user do not like to read long messages
 
-(G) i am aware that it can be difficult to find a good translation for a string in english without knowing the context where the string is used. if you have doubts you may check the translation in another language (that you know) or write me an email
+[I] i am aware that it can be difficult to find a good translation for a string in english without knowing the context where the string is used. if you have doubts you may check the translation in another language (that you know) or write me an email
 
-(H) Pay special attention to format strings, ie, strings with the percent marking the format arguments. A mistake in the format may crash the app.
+[J] Pay special attention to format strings, ie, strings with the percent marking the format arguments. A mistake in the format may crash the app.
 
-[6] strings that can have different presentations according to a number, are contained in the file plurals.xml
+[K] fill in all the case that are relevant to your language
 
-(A) fill in all the case that are relevant to your language
+[L] add your name and email to the welcome message in the translation file strings.xml
 
-[7] add your name and email to the welcome message in the translation file strings.xml
-
-[8] push your translation files to github and let me know 
+[M] push your translation files to github and let me know 
 I need to add a s-link to your translations so that they are included in the app
 
-[9] add a translation to the symbol files in symbols-git:
+[N] add a translation to the symbol files in symbols-git:
 you need to add one line with name-XX (where XX is the two-letter iso code of the language)
 save the file with utf-8 encoding
 
 NOTE replace spaces in the name with underscore
 
-[10] push the new symbols file to github and let me know
+[O] push the new symbols file to github and let me know
 i need to increase the symbols version in the code otherwise topodroid will not install the new files
