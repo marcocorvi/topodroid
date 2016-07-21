@@ -46,19 +46,19 @@ public class DrawingPointLinePath extends DrawingPath
   /* DEBUG
    * counts how many points this line overlaps with another line
    */
-  // int overlap( DrawingPointLinePath other ) 
-  // {
-  //   int ret = 0;
-  //   for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
-  //     for ( LinePoint l2 = other.mFirst; l2 != null; l2 = l2.mNext ) {
-  //       if ( Math.abs( l1.mX - l2.mX ) < 0.001f && Math.abs( l1.mY - l2.mY ) < 0.001f ) {
-  //         ++ ret;
-  //         break;
-  //       }
-  //     }
-  //   }
-  //   return ret;
-  // }
+  int overlap( DrawingPointLinePath other ) 
+  {
+    int ret = 0;
+    for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
+      for ( LinePoint l2 = other.mFirst; l2 != null; l2 = l2.mNext ) {
+        if ( Math.abs( l1.mX - l2.mX ) < 0.001f && Math.abs( l1.mY - l2.mY ) < 0.001f ) {
+          ++ ret;
+          break;
+        }
+      }
+    }
+    return ret;
+  }
 
   // void dump() // DEBUG
   // {

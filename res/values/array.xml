@@ -95,7 +95,7 @@
      <item name="bulgarian">bg</item>
      <item name="chinese">cn</item>
      <item name="ukrainian">ua</item>
-      <item name="persian">fa</item>
+     <item name="persian">fa</item>
   </string-array>
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->

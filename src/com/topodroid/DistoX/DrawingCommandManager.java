@@ -83,40 +83,52 @@ public class DrawingCommandManager
   List<DrawingStationName> getStations()     { return mStations;     } 
   List<DrawingStationPath> getUserStations() { return mUserStations; }
 
-  // void checkLines()
-  // {
-  //   synchronized( mCurrentStack ) {
-  //     int size = mCurrentStack.size();
-  //     for ( int i1 = 0; i1 < size; ++i1 ) {
-  //       ICanvasCommand cmd1 = mCurrentStack.get( i1 );
-  //       DrawingPath path1 = (DrawingPath)cmd1;
-  //       if ( path1.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
-  //       DrawingLinePath line1 = (DrawingLinePath)path1;
-  //       for ( int i2 = i1+1; i2 < size; ++i2 ) {
-  //         ICanvasCommand cmd2 = mCurrentStack.get( i2 );
-  //         DrawingPath path2 = (DrawingPath)cmd2;
-  //         if ( path2.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
-  //         DrawingLinePath line2 = (DrawingLinePath)path2;
-  //         if ( line1.overlap( line2 ) > 1 ) {
-  //           Log.v("DistoX", "LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
-  //           // for ( int i=0; i<size; ++i ) {
-  //           //   ICanvasCommand cmd = mCurrentStack.get( i );
-  //           //   DrawingPath path = (DrawingPath)cmd;
-  //           //   if ( path.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
-  //           //   DrawingLinePath line = (DrawingLinePath)path;
-  //           //   line.dump();
-  //           // }
-  //           Log.v("DistoX", "LINE1 ");
-  //           line1.dump();
-  //           Log.v("DistoX", "LINE2 ");
-  //           line2.dump();
-  //           throw new RuntimeException();
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  /* Check if any line overlaps another of the same type
+   * In case of overlap the overlapped line is removed
+   */
+  void checkLines()
+  {
+    synchronized( mCurrentStack ) {
+      int size = mCurrentStack.size();
+      for ( int i1 = 0; i1 < size; ++i1 ) {
+        ICanvasCommand cmd1 = mCurrentStack.get( i1 );
+        DrawingPath path1 = (DrawingPath)cmd1;
+        if ( path1.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+        DrawingLinePath line1 = (DrawingLinePath)path1;
+        for ( int i2 = 0; i2 < size; ++i2 ) {
+          if ( i2 == i1 ) continue;
+          ICanvasCommand cmd2 = mCurrentStack.get( i2 );
+          DrawingPath path2 = (DrawingPath)cmd2;
+          if ( path2.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+          DrawingLinePath line2 = (DrawingLinePath)path2;
+          // if every point in line2 overlaps a point in line1 
+          if ( line1.overlap( line1 ) == line2.size() ) {
+            TDLog.Error("LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
+            // for ( int i=0; i<size; ++i ) {
+            //   ICanvasCommand cmd = mCurrentStack.get( i );
+            //   DrawingPath path = (DrawingPath)cmd;
+            //   if ( path.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
+            //   DrawingLinePath line = (DrawingLinePath)path;
+            //   line.dump();
+            // }
+            // Log.v("DistoX", "LINE1 ");
+            // line1.dump();
+            // Log.v("DistoX", "LINE2 ");
+            // line2.dump();
+            doDeletePath( line2 );
+            -- size;
+            -- i2;
+            // throw new RuntimeException();
+            if ( i2 < i1 ) --i1;
+          }
+        }
+      }
+    }
+  }
 
+  /* Flip the X-axis
+   * flip the drawing about the vertical direction
+   */
   private void flipXAxis( List<DrawingPath> paths )
   {
     final Iterator i1 = paths.iterator();
@@ -163,6 +175,9 @@ public class DrawingCommandManager
     }
   }
 
+  /* Shift the drawing
+   * translate the drawing by (x,y)
+   */
   void shiftDrawing( float x, float y )
   {
     // if ( mStations != null ) {
@@ -260,12 +275,16 @@ public class DrawingCommandManager
 
   void setSecondReference( DrawingPath path ) { synchronized( mGridStack1 ) { mSecondReference = path; } }
 
+  /* the next index for the ID of the area border
+   */
   int getNextAreaIndex()
   {
     ++mMaxAreaIndex;
     return mMaxAreaIndex;
   }
 
+  /* return the list of shots that intesect the segment (p1--p2)
+   */
   List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
     List< DrawingPath > ret = new ArrayList< DrawingPath >();
@@ -279,6 +298,9 @@ public class DrawingCommandManager
     return ret;
   }
 
+  /* Get the station at (x,y)
+   * Return the station inside the square centered at (x,y) of side 2*mCloseness
+   */
   DrawingStationName getStationAt( float x, float y ) // x,y canvas coords
   {
     // Log.v("DistoX", "get station at " + x + " " + y );
@@ -318,6 +340,9 @@ public class DrawingCommandManager
   //   return null;
   // }
 
+  /* Set the transform matrix for the canvas rendering of the drawing
+   * The matrix is diag(s*dx, s*dy)
+   */
   public void setTransform( float dx, float dy, float s )
   {
     mMatrix = new Matrix();
@@ -480,8 +505,12 @@ public class DrawingCommandManager
     return ret;
   }
 
-  // called from synchronized( CurrentStack ) context
-  // called only by eraseAt
+  /* Split the line at the point lp
+   * The erase command is updated with the removal of the original line and the insert
+   * of the two new pieces
+   // called from synchronized( CurrentStack ) context
+   // called only by eraseAt
+   */
   private void doSplitLine( DrawingLinePath line, LinePoint lp, EraseCommand eraseCmd )
   {
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType );
@@ -603,7 +632,7 @@ public class DrawingCommandManager
     return false;
   }
 
-  void deletePath( DrawingPath path, EraseCommand eraseCmd )
+  private void doDeletePath( DrawingPath path )
   {
     synchronized( mCurrentStack ) {
       mCurrentStack.remove( path );
@@ -612,6 +641,11 @@ public class DrawingCommandManager
       mSelection.removePath( path );
       clearSelected();
     }
+  }
+
+  void deletePath( DrawingPath path, EraseCommand eraseCmd )
+  {
+    doDeletePath( path );
     // checkLines();
     eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
@@ -640,8 +674,6 @@ public class DrawingCommandManager
       deletePath( line, cmd );
     }
   }
-
-  
 
   void sharpenLine( DrawingLinePath line ) 
   {
@@ -1028,12 +1060,14 @@ public class DrawingCommandManager
             synchronized( mSelection ) {
               mSelection.insertPath( path );
             }
-          } else if ( action.mType == EraseAction.ERASE_MODIFY ) {
+          } else if ( action.mType == EraseAction.ERASE_MODIFY ) { // undo modify
+            synchronized( mSelection ) {
+              mSelection.removePath( path );
+            }
             synchronized( mCurrentStack ) {
               action.restorePoints( true );
             }
             synchronized( mSelection ) {
-              mSelection.removePath( path );
               mSelection.insertPath( path );
             }
           }
