@@ -6,7 +6,7 @@
     <string name="app_name">TopoDroid</string>
 
     <string name="version_ask">به روز رسانی نسخه جدید TopoDroid.\nتمایل به نصب دوباره دارید?</string>
-    <string name="version_title">به روز رسانی</string>
+    <!-- UNUSED string name="version_title">به روز رسانی</string -->
 
     <string name="POINT">نقطه</string>
     <string name="LINE">خط</string>
@@ -16,10 +16,7 @@
 
     <string name="memoryA3">DistoX A3 حافظه</string>
     <string name="memoryX310">DistoX X310 حافظه</string>
-    <string name="memory_data">DistoX داده</string>
-
-    <string name="td_symbol_text">شما نیاز به نصب ابزار ترسیم دارید?\nشما می تونید بعدا به کمک TdSymbol این کار را انجام دهید</string>
-    <string name="td_symbol_ask">دوباره از من نپرس</string>
+    <!-- UNUSED string name="memory_data">DistoX داده</string -->
 
     <string name="thp_user">کاربر</string>
     <string name="thp_label">برچسب</string>
@@ -29,15 +26,15 @@
     <string name="tha_user">کاربر</string>
     <string name="tha_water">آب</string>
 
-    <string name="missing_area">محیط</string>
-    <string name="missing_hint">لطفا, ابزار را فعال یا نصب بفرمایید</string>
-    <string name="missing_line">خط</string>
-    <string name="missing_point">نقطه</string>
+    <!-- UNUSED string name="missing_area">محیط</string -->
+    <!-- UNUSED string name="missing_hint">لطفا, ابزار را فعال یا نصب بفرمایید</string -->
+    <!-- UNUSED string name="missing_line">خط</string -->
+    <!-- UNUSED string name="missing_point">نقطه</string -->
     <!-- string name="missing_save">Sketch has missing drawing tools.\nNot saving it.</string -->
     <string name="missing_station">ایستگاه نیست</string>
-    <string name="missing_symbols">ابزار ترسیم وجود ندارد.\nدر هر صورت ذخیره شود ?</string>
-    <string name="missing_title">نماده ها (سیمبول) نیست</string>
-    <string name="missing_warning">ابزار ترسیم نصب نشده.\n</string>
+    <!-- UNUSED string name="missing_symbols">ابزار ترسیم وجود ندارد.\nدر هر صورت ذخیره شود ?</string -->
+    <!-- UNUSED string name="missing_title">نماده ها (سیمبول) نیست</string -->
+    <!-- UNUSED string name="missing_warning">ابزار ترسیم نصب نشده.\n</string -->
     <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
     <string name="failed_snap_to_point">No close point to snap the point to</string>
 
@@ -53,13 +50,13 @@
     <string name="calib_compute_coeffs">محاسبه ضرایب کالیبره ...</string>
     <!-- string name="calib_read_coeffs">Reading calibration coefficients ...</string -->
     <string name="calib_write_coeffs">نوشتن ضرایب کالیبره ...</string>
-    <string name="connect_failed">خزا در اتصال</string>
-    <string name="data"> داده</string>
-    <string name="using">استفاده کنید %1$s %2$s</string>
+    <!-- UNUSED string name="connect_failed">خزا در اتصال</string -->
+    <!-- UNUSED string name="data"> داده</string -->
+    <string name="using">استفاده کنید %1$s</string>
     <string name="calib_error">خطای: %1$.4f درجه</string>
     <string name="calib_max_error">خطا. حداکثر: %1$.4f درجه</string>
     <string name="calib_iter">تکرار: %1$d</string>
-    <string name="calib_saturated_values">اخطار: %1$d اطلاعات اشباح شده</string>
+    <!-- UNUSED string name="calib_saturated_values">اخطار: %1$d اطلاعات اشباح شده</string -->
     <string name="algorithm">الگوریتم:</string>
     <string name="auto">اتوماتیک</string>
     <string name="linear">خطی</string>
@@ -71,58 +68,58 @@
     <string name="device_info">Device info</string>
     <string name="device_model_set">شما واقعا می خاهید مدل دستگاه را تغییر بدهید</string>
     <string name="device_none">هیچ DistoX انتخاب نشده است</string>
-    <string name="device_pairing">جفت شدن: \یغام ها (نوتفیکیشن) چک بفرمایید</string>
+    <!-- UNUSED string name="device_pairing">جفت شدن: \یغام ها (نوتفیکیشن) چک بفرمایید</string -->
     <string name="device_reset">ریست حافظه DistoX</string>
     <string name="device_code">DistoX کد %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
-    <string name="device_status_angle">واحد زاویه %1$s</string>
-    <string name="device_status_compass">Compass/clino %1$s</string>
+    <!-- UNUSED string name="device_status_angle">واحد زاویه %1$s</string -->
+    <!-- UNUSED string name="device_status_compass">Compass/clino %1$s</string -->
     <string name="device_status_calib">Mode %1$s</string>
-    <string name="device_status_silent">بی صدا %1$s</string>
+    <!-- UNUSED string name="device_status_silent">بی صدا %1$s</string -->
     <string name="bt_reset">ریست اتصال بلوتوس</string>
     <string name="save_as">ذخیره با نام</string>
     <string name="nickname">اسم مناسب</string>
 
     <string name="comment">توضیحات</string>
-    <string name="flag">پرچم</string>
-    <string name="backshot">backshot</string>
-    <string name="duplicate">تکراری</string>
+    <!-- UNUSED string name="flag">پرچم</string -->
+    <!-- UNUSED string name="backshot">backshot</string -->
+    <!-- UNUSED string name="duplicate">تکراری</string -->
     <!-- string name="regular">regular</string -->
-    <string name="surface">سطح</string>
-    <string name="extend">گسترده</string>
-    <string name="extend_ignore">هیچکدام</string>
+    <!-- UNUSED string name="surface">سطح</string -->
+    <!-- UNUSED string name="extend">گسترده</string -->
+    <!-- UNUSED string name="extend_ignore">هیچکدام</string -->
     <string name="extend_left">چپ</string>
     <string name="extend_right">راست</string>
     <string name="extend_vert">عمودی</string>
-    <string name="external_prompt">ورود انداره گیره</string>
+    <!-- UNUSED string name="external_prompt">ورود انداره گیره</string -->
     <string name="splay_at_to">LRUD at TO station</string>
 
     <string name="few_data">اطلاعات کافی نیست</string>
-    <string name="few_plots">طرح کافی نیست</string>
+    <!-- UNUSED string name="few_plots">طرح کافی نیست</string -->
 
     <string name="import_title">ایمپورت فایل</string>
-    <string name="import_wait">ایمپورت فایل... لطفا صبر کنید...</string>
+    <!-- UNUSED string name="import_wait">ایمپورت فایل... لطفا صبر کنید...</string -->
     <string name="import_already">بررسی اطلاعات ایمپورت شده</string>
     <string name="import_none">فابلی برای ایمپورت نیست</string>
     <string name="import_zip_ok">ایمپورت فایل زیپ با موفقیت انجام شد</string>
     <string name="import_zip_wait">ایمپورت فایل زیپ ممکن است زمان بر باشد. لطفا صبر کنید ...</string>
-    <string name="sketch_loading">لود طرح ... لطفا صبر کنید...</string>
-    <string name="sketch_saving">ذخیره طرح ... لطفا صبر کنید...</string>
-    <string name="lookup_wait">جستجوی اینترنت ... لطفا صبر کنید...</string>
+    <!-- UNUSED string name="sketch_loading">لود طرح ... لطفا صبر کنید...</string -->
+    <!-- UNUSED string name="sketch_saving">ذخیره طرح ... لطفا صبر کنید...</string -->
+    <!-- UNUSED string name="lookup_wait">جستجوی اینترنت ... لطفا صبر کنید...</string -->
  
 
-    <string name="head_tail">حافظه: </string>
+    <!-- UNUSED string name="head_tail">حافظه: </string -->
     <string name="head_tail_failed">خطا در خواندن نقطه حافظه DistoX memory</string>
     <string name="head_tail_store_failed">خطا در ذخیره نقطه در DistoX memory</string>
     <string name="illegal_data_value">Illegal data value</string>
     <string name="label_title">برچسب</string>
     <string name="label_text">عنوان برچسب را وارد کنید</string>
-    <string name="altitude">ارتفاع. </string>
+    <!-- UNUSED string name="altitude">ارتفاع. </string -->
     <string name="latitude">عرض جغر. </string>
     <string name="longitude">طولانی. </string>
-    <string name="altitude_hint">WGS84 ارتفاع. [متر]</string>
-    <string name="altitude_wgs84">WGS84 ارتفاع</string>
+    <!-- UNUSED string name="altitude_hint">WGS84 ارتفاع. [متر]</string -->
+    <!-- UNUSED string name="altitude_wgs84">WGS84 ارتفاع</string -->
     <string name="latitude_hint">عرض جغر. dd:mm:ss.sss</string>
     <string name="longitude_hint">طول جغر. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">خطا در حلقه بسته شده</string>
@@ -145,7 +142,7 @@
     <string name="error_long_required">طول جغرافیایی باید وارد شود</string>
     <string name="error_name_required">نام باید وارد شود</string>
     <string name="error_start_required">منبع جایگاه باید وار شود</string>
-    <string name="error_station_already_fixed">جایگاهی با این مختصات وجود دارد</string>
+    <!-- UNUSED string name="error_station_already_fixed">جایگاهی با این مختصات وجود دارد</string -->
     <string name="error_station_required">جایگاه باید وارد شود</string>
     <string name="error_station_non_existing">جایگاه پیدا نشد</string>
     <string name="error_sensor_required">سنسور باید وارد شود</string>
@@ -157,13 +154,13 @@
     <string name="group_policy_distance">مجوز: گروه بندی بر اساس فاصله های گوشه</string>
     <string name="group_reset">ریست گروه</string>
 
-    <string name="scale">مقیاس</string>
-    <string name="reversed">برعکس</string>
+    <!-- UNUSED string name="scale">مقیاس</string -->
+    <!-- UNUSED string name="reversed">برعکس</string -->
     <string name="options">آپشن</string>
     <string name="outline">راس</string>
     <string name="out">خارج</string>
     <string name="in">داخل</string>
-    <string name="none">هیچ کدام</string>
+    <!-- UNUSED string name="none">هیچ کدام</string -->
     <string name="barrier_add">خط وسط صفحه نمایش شکسته شود ?</string>
     <string name="barrier_del">نمایش وسط خط ادامه پیدا کند?</string>
 
@@ -177,7 +174,7 @@
     <string name="no_db">بدون دیتابیس</string>
     <string name="no_device_address">دستگاه انتخاب نشده است</string>
     <string name="no_device_found">دستگاه پیدا نشد</string>
-    <string name="no_geomag">خطا در گرفتن GeoMag</string>
+    <!-- UNUSED string name="no_geomag">خطا در گرفتن GeoMag</string -->
     <string name="no_gms">دیتاهای کالیبره وجود ندارد.\nاز دکمه دانلود استفاده بفرمایید</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_paired_device">دستگاه وصل نیست.\nجستجو و اتصال DistoX</string>
@@ -185,7 +182,7 @@
     <string name="no_plots">طرحی نیست\nاز طریق دکمه add اضافه کنید</string>
     <string name="no_proj4">Proj4 نصب نیست</string>
     <string name="no_sensors">Survey has no measurement</string>
-    <string name="no_shots">شات بررسی نشد.\nبرای مشاهده اطلاعات از دکمه دانلود استفاده کنید</string>
+    <!-- UNUSED string name="no_shots">شات بررسی نشد.\nبرای مشاهده اطلاعات از دکمه دانلود استفاده کنید</string -->
     <string name="no_survey">نقشه انتخاب نشده است.</string>
     <!-- UNUSED string name="no_tdsymbol">TdSymbol not installed</string -->
     <string name="no_thmanager">ThManager برنامه نصب نیست</string>
@@ -195,7 +192,7 @@
     <string name="menu_3d">3 بعدی</string>
     <string name="menu_about">درباره</string>
     <string name="menu_attach">کانکت</string>
-    <string name="menu_calib">کالیبره کردن</string>
+    <!-- UNUSED string name="menu_calib">کالیبره کردن</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_delete">حذف</string>
@@ -216,7 +213,7 @@
     <string name="menu_photo">عکس</string>
     <string name="menu_sensor">سنسور</string>
     <string name="menu_scan">اسکن</string>
-    <string name="menu_station">جایگاه</string>
+    <!-- UNUSED string name="menu_station">جایگاه</string -->
     <string name="menu_stats">وضعیت</string>
     <string name="menu_survey">اطلاعات نقشه برداری</string>
     <string name="menu_sync">SYNC</string>
@@ -234,41 +231,41 @@
 
     <string name="not_available">دکمه فعال نیست</string>
     <string name="not_enabled">دکمه فعال نیست</string>
-    <string name="not_implemented">هنوز اجرا نشده است</string>
+    <!-- UNUSED string name="not_implemented">هنوز اجرا نشده است</string -->
     <string name="null_bitmap">امکان ساختن تصویر وجود ندارد [OOM error]</string>
     <string name="photo">عکس</string>
     <string name="photo_comment_prompt">توضیحات عکس را وارد فرمایید</string>
-    <string name="photo_name">جایگاه/نام</string>
-    <string name="photo_photo">تصویر</string>
-    <string name="photo_sensor">سنسور</string>
-    <string name="photo_external">اندازه گیری</string>
-    <string name="photo_sensor_prompt">تصویر یا سنسور را انتخاب کنید</string>
-    <string name="photo_shot">اضافه کردن شات</string>
-    <string name="photo_survey">جداکردن بررسی</string>
-    <string name="picture_no_station">نام ایستگاه باید وارد شود</string>
+    <!-- UNUSED string name="photo_name">جایگاه/نام</string -->
+    <!-- UNUSED string name="photo_photo">تصویر</string -->
+    <!-- UNUSED string name="photo_sensor">سنسور</string -->
+    <!-- UNUSED string name="photo_external">اندازه گیری</string -->
+    <!-- UNUSED string name="photo_sensor_prompt">تصویر یا سنسور را انتخاب کنید</string -->
+    <!-- UNUSED string name="photo_shot">اضافه کردن شات</string -->
+    <!-- UNUSED string name="photo_survey">جداکردن بررسی</string -->
+    <!-- UNUSED string name="picture_no_station">نام ایستگاه باید وارد شود</string -->
     <string name="plot_delete">طرح حذف شود ?</string>
     <string name="plot_duplicate_name">نام طرح تکراری است</string>
-    <string name="plot_name">نام طرح</string>
+    <!-- UNUSED string name="plot_name">نام طرح</string -->
     <string name="plot_new">طرح جدید</string>
     <string name="plot_not_found">طرح \یدا نشد</string>
     <!-- string name="plot_null_name">Missing sketch name</string -->
     <!-- string name="plot_null_start">Missing base station</string -->
-    <string name="plot_recover">باز کردن دوباره طرح از پشتیبان?</string>
+    <!-- UNUSED string name="plot_recover">باز کردن دوباره طرح از پشتیبان?</string -->
     <string name="plot_start">ایستگاه اول</string>
     <!-- string name="plot_view">Viewed station</string -->
     <!-- UNUSED string name="read_">Read </string -->
-    <string name="read_data">Read %1$d data</string>
-    <string name="read_fail_with_code">خطا در خواندن: error code </string>
+    <!-- UNUSED string name="read_data">Read %1$d data</string -->
+    <!-- UNUSED string name="read_fail_with_code">خطا در خواندن: error code </string -->
     <string name="read_failed">Failed DistoX-read</string>
     <!-- string name="reading_file_failed">Failed file-read</string -->
-    <string name="saved_file_">ذخیره کردن فایل\ </string>
+    <!-- UNUSED string name="saved_file_">ذخیره کردن فایل\ </string -->
     <string name="saving_">ذخیره کردن </string>
     <string name="saving_file_failed">فایل ذخیره نشد</string>
-    <string name="scrap_name">نام طرح</string>
+    <!-- UNUSED string name="scrap_name">نام طرح</string -->
     <string name="splay">splay</string>
     <string name="too_many_leg_intersection">Section line crosses many legs</string>
 
-    <string name="sensor">سنسور</string>
+    <!-- UNUSED string name="sensor">سنسور</string -->
     <!-- string name="sensor_accelerometer">accelerometer</string -->
     <string name="sensor_gravity">جاذبه</string>
     <!-- string name="sensor_humidity">humidity</string -->
@@ -276,7 +273,7 @@
     <string name="sensor_magnetic_field">میدان مغناطیسی</string>
     <!-- string name="sensor_orientation">orientation</string -->
     <string name="sensor_pressure">فشار</string>
-    <string name="sensor_proximity">نزدیکی</string>
+    <!-- UNUSED string name="sensor_proximity">نزدیکی</string -->
     <string name="sensor_temperature">دما</string>
     <string name="sensor_extern">خارجی</string>
     <string name="sensor_type">نوع</string>
@@ -287,8 +284,8 @@
     <!-- string name="shot_compass">compass</string -->
     <string name="shot_from">از</string>
     <string name="shot_info">ورود اطلاعات شات</string>
-    <string name="shot_leg">تکرار مرحله</string>
-    <string name="shot_all_splay">باز کردن گروه</string>
+    <!-- UNUSED string name="shot_leg">تکرار مرحله</string -->
+    <!-- UNUSED string name="shot_all_splay">باز کردن گروه</string -->
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">یاداشت</string>
     <string name="shot_reverse">برعکس</string>
@@ -299,19 +296,19 @@
     <string name="sketch3d_name">نام</string>
     <string name="sketch3d_new">مدل 3D جدید</string>
     <string name="sketch3d_next">جایگاه بعدی</string>
-    <string name="sketch3d_null_name">3D مفقود شدن نام طرح</string>
-    <string name="sketch3d_null_next">مفقود شدن طرح سه بعدی قسمت بعدی</string>
-    <string name="sketch3d_null_start">مفقود شدن طرح سه بعدی قسمت پایه</string>
-    <string name="sketch3d_start">قسمت پایه</string>
+    <!-- UNUSED string name="sketch3d_null_name">3D مفقود شدن نام طرح</string -->
+    <!-- UNUSED string name="sketch3d_null_next">مفقود شدن طرح سه بعدی قسمت بعدی</string -->
+    <!-- UNUSED string name="sketch3d_null_start">مفقود شدن طرح سه بعدی قسمت پایه</string -->
+    <!-- UNUSED string name="sketch3d_start">قسمت پایه</string -->
 
     <string name="station">جایگاه</string>
     <string name="station_ask">قسمت جدید در طرح اضافه شود؟</string>
     <string name="station_set">نقشه کشی را از اینجا ادامه می دهید؟</string>
     <!-- string name="station_base">reference station</string -->
     <!-- string name="station_next">next station</string -->
-    <string name="station_viewed">مشاهده ایستگاه</string>
+    <!-- UNUSED string name="station_viewed">مشاهده ایستگاه</string -->
     <string name="survey_exists">نقشه در حال موجود است</string>
-    <string name="survey_date">yyyy.mm.dd</string>
+    <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">نقشه پاک شود ؟</string>
     <string name="survey_split">نقشه تقسیم شود ؟</string>
     <string name="survey_not_attached">اخطار : عکسها اضافه نشده</string>
@@ -324,7 +321,7 @@
     <string name="toggle_ok">Toggled DistoX calibration mode</string>
     <string name="undelete_text">برای بازیابی گزینه را انتخاب کنید</string>
     <string name="visible_border">بردار قابل مشاهده</string>
-    <string name="vthreshold">vert. threshold</string>
+    <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <string name="wait_scan">در حال اسکن : لطفا صبر کنید ...</string>
     <string name="write_failed">مشکل در DistoX-write</string>
     <string name="write_ok">نوشتن اطلاعات کالیبره در DistoX</string>
@@ -353,12 +350,12 @@
     <string name="hide_ids">Id شات ها</string>
     <string name="hide_splay">بازکردن شات ها</string>
 
-    <string name="surveys">بررسی</string>
-    <string name="calibs">کالیبره</string>
+    <!-- UNUSED string name="surveys">بررسی</string -->
+    <!-- UNUSED string name="calibs">کالیبره</string -->
 
     <string name="plan">پلان</string>
     <string name="extended">EXTENDED</string>
-    <string name="v_section">V-SECTION</string>
+    <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">H-SECTION</string>
 
     <string name="distox_err_ok">تایید</string>
@@ -367,45 +364,45 @@
     <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
     <string name="distox_err_connected">دستگاه متصل است</string>
 
-    <string name="ask_close">برنامه بسته شود?</string>
+    <!-- UNUSED string name="ask_close">برنامه بسته شود?</string -->
     <string name="ask_reset">حافظه DistoX ریست شود?</string>
-    <string name="ask_close_survey">بررسی بسته شود?</string>
+    <!-- UNUSED string name="ask_close_survey">بررسی بسته شود?</string -->
     
 
-    <string name="button_add"       >اضافه       </string>
+    <!-- UNUSED string name="button_add"       >اضافه       </string -->
     <string name="button_back"      >عقب         </string>
     <string name="button_cancel"    >انصراف      </string>
     <string name="button_convert"   >کانورت      </string>
     <string name="button_delete"    >حذف         </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
-    <string name="button_geomag"    >GeoMag    </string>
-    <string name="button_altitude">Ortometric Alt.</string>
+    <!-- UNUSED string name="button_geomag"    >GeoMag    </string -->
+    <!-- UNUSED string name="button_altitude">Ortometric Alt.</string -->
     <string name="button_gps_start" >GPS       </string>
     <!-- string name="button_gps_stop"  >Stop      </string -->
     <!-- string name="button_manual"    >Manual    </string -->
     <!-- string name="button_measure"   >Measure   </string -->
     <string name="button_photo"   >عکس</string>
-    <string name="button_sensor"  >سنسورها</string>
-    <string name="button_direction">سمت/شیب</string>
+    <!-- UNUSED string name="button_sensor"  >سنسورها</string -->
+    <!-- UNUSED string name="button_direction">سمت/شیب</string -->
     <string name="button_plot"    >طرح</string>
     <string name="button_ok"        >خوب        </string>
-    <string name="button_no"        >خیر        </string>
+    <!-- UNUSED string name="button_no"        >خیر        </string -->
     <string name="button_open"      >بازکردن      </string>
     <string name="button_read"      >خواندن      </string>
     <string name="button_dump"      >زباله     </string>
     <string name="button_reset"     >ریست     </string>
     <string name="button_clear"     >حذف     </string>
     <string name="button_save"      >ذخیره      </string>
-    <string name="button_select"    >انتخاب    </string>
+    <!-- UNUSED string name="button_select"    >انتخاب    </string -->
     <string name="button_store"     >Store     </string>
-    <string name="button_start"     >شروع</string>
-    <string name="button_stop"      >توقف</string>
+    <!-- UNUSED string name="button_start"     >شروع</string -->
+    <!-- UNUSED string name="button_stop"      >توقف</string -->
     <string name="button_upload"    >آپلود    </string>
-    <string name="button_yes"       >بله       </string>
+    <!-- UNUSED string name="button_yes"       >بله       </string -->
 
-    <string name="button_sharp"     >شارپ</string>
-    <string name="button_rock"      >صخره</string>
+    <!-- UNUSED string name="button_sharp"     >شارپ</string -->
+    <!-- UNUSED string name="button_rock"      >صخره</string -->
 <!--
     <string name="button_close"     >Close     </string>
     <string name="button_erase"     >Erase     </string>
@@ -418,44 +415,44 @@
 
     <string name="mode_leg"> ها پایه</string>
     <string name="mode_splay">گسترده</string>
-    <string name="mode_station">ایستگاه ها</string>
+    <!-- UNUSED string name="mode_station">ایستگاه ها</string -->
     <string name="mode_grid">جدول</string>
     <string name="mode_fixed">Fix refs</string>
 
-    <string name="remote_title">دستگاه کنترل از راه دور</string>
+    <!-- UNUSED string name="remote_title">دستگاه کنترل از راه دور</string -->
     <string name="remote_on">لیزر روشن</string>
     <string name="remote_off">لیزر خاموش</string>
-    <string name="remote_measure">مقیاس</string>
+    <!-- UNUSED string name="remote_measure">مقیاس</string -->
     <string name="remote_reset">Reset BT</string>
-    <string name="download">دانلود</string>
+    <!-- UNUSED string name="download">دانلود</string -->
 
 <!--
     <string name="btn_3d">3D</string>
 -->
-    <string name="btn_compass">قطب نما</string>
-    <string name="btn_csurvey">cSurvey</string>
-    <string name="btn_csv">CSV</string>
-    <string name="btn_dxf">DXF</string>
-    <string name="btn_kml">KML</string>
-    <string name="btn_oziexplorer">OziExplorer</string>
-    <string name="btn_man">دستی</string>
-    <string name="btn_symbol">ابزار ترسیم</string>
-    <string name="btn_png">PNG</string>
-    <string name="btn_pockettopo">PocketTopo</string>
-    <string name="btn_survex">Survex</string>
-    <string name="btn_therion">Therion</string>
-    <string name="btn_vtopo">VisualTopo</string>
-    <string name="btn_walls">Walls</string>
-    <string name="btn_svg">SVG</string>
-    <string name="btn_zip">Zip</string>
+    <!-- UNUSED string name="btn_compass">قطب نما</string -->
+    <!-- UNUSED string name="btn_csurvey">cSurvey</string -->
+    <!-- UNUSED string name="btn_csv">CSV</string -->
+    <!-- UNUSED string name="btn_dxf">DXF</string -->
+    <!-- UNUSED string name="btn_kml">KML</string -->
+    <!-- UNUSED string name="btn_oziexplorer">OziExplorer</string -->
+    <!-- UNUSED string name="btn_man">دستی</string -->
+    <!-- UNUSED string name="btn_symbol">ابزار ترسیم</string -->
+    <!-- UNUSED string name="btn_png">PNG</string -->
+    <!-- UNUSED string name="btn_pockettopo">PocketTopo</string -->
+    <!-- UNUSED string name="btn_survex">Survex</string -->
+    <!-- UNUSED string name="btn_therion">Therion</string -->
+    <!-- UNUSED string name="btn_vtopo">VisualTopo</string -->
+    <!-- UNUSED string name="btn_walls">Walls</string -->
+    <!-- UNUSED string name="btn_svg">SVG</string -->
+    <!-- UNUSED string name="btn_zip">Zip</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_edit">تغییر سطح  3D </string>
+    <!-- UNUSED string name="title_sketch_edit">تغییر سطح  3D </string -->
     <string name="title_sketch_shot">شات جدید</string>
     <string name="title_sketch_refs">حالت نمایش</string>
-    <string name="title_sketch_section_type">انتخاب نوع</string>
-    <string name="title_sketch_select">انتخاب ایتم</string>
+    <!-- UNUSED string name="title_sketch_section_type">انتخاب نوع</string -->
+    <!-- UNUSED string name="title_sketch_select">انتخاب ایتم</string -->
 
     <string name="sketch_mode_single">تک شات</string>
     <string name="sketch_mode_ngbh">Nearby shots</string>
@@ -463,37 +460,37 @@
     <string name="sketch_delete">حذف مدل 3D ?</string>
     <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
 
-    <string name="btn_head">عنوان</string>
-    <string name="btn_stretch">Stretch</string>
-    <string name="btn_extrude">Extrude</string>
-    <string name="btn_erase">حذف</string>
-    <string name="btn_cut">بریدن</string>
-    <string name="btn_vertical">عمودی</string>
-    <string name="btn_horizontal">افقی</string>
+    <!-- UNUSED string name="btn_head">عنوان</string -->
+    <!-- UNUSED string name="btn_stretch">Stretch</string -->
+    <!-- UNUSED string name="btn_extrude">Extrude</string -->
+    <!-- UNUSED string name="btn_erase">حذف</string -->
+    <!-- UNUSED string name="btn_cut">بریدن</string -->
+    <!-- UNUSED string name="btn_vertical">عمودی</string -->
+    <!-- UNUSED string name="btn_horizontal">افقی</string -->
 
     <!-- select buttin labels -->
-    <string name="btn_section">قسمت</string>
-    <string name="btn_step">مرحله</string>
-    <string name="btn_shot">شات</string>
-    <string name="btn_join">ملحق شدن</string>
+    <!-- UNUSED string name="btn_section">قسمت</string -->
+    <!-- UNUSED string name="btn_step">مرحله</string -->
+    <!-- UNUSED string name="btn_shot">شات</string -->
+    <!-- UNUSED string name="btn_join">ملحق شدن</string -->
 
-    <string name="button_redraw">Redraw</string>
-    <string name="button_erase">پاک کردن</string>
-    <string name="btn_surface">نما</string>
+    <!-- UNUSED string name="button_redraw">Redraw</string -->
+    <!-- UNUSED string name="button_erase">پاک کردن</string -->
+    <!-- UNUSED string name="btn_surface">نما</string -->
 
-    <string name="station_next">بعدی</string>
+    <!-- UNUSED string name="station_next">بعدی</string -->
     <string name="no_shot_between_stations">no_shot_between_stations</string>
     <string name="few_line_points">Line has too few points</string>
     <string name="line_delete">پاک کردن خط</string>
 
     <string name="menu_head">عنوان</string>
-    <string name="menu_save_th2">ذخیره TH2</string>
+    <!-- UNUSED string name="menu_save_th2">ذخیره TH2</string -->
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">راهنمایی</string>
-    <string name="help_manual">راهنمای کاربر</string>
-    <string name="help_more">نمایش عملیات دوم</string>
-    <string name="help_less">برگشت به عملیات اصلی</string>
+    <!-- UNUSED string name="help_manual">راهنمای کاربر</string -->
+    <!-- UNUSED string name="help_more">نمایش عملیات دوم</string -->
+    <!-- UNUSED string name="help_less">برگشت به عملیات اصلی</string -->
     
     <string name="help_coeff">نمایش ضریب کالیبره</string>
     <string name="help_continue">ادامه برای طراحی خط</string>
@@ -502,14 +499,14 @@
     <string name="help_add_topodroid">ساخت نقشه جدید/کالیبره</string>
     <string name="help_import">دریافت فایل فشرده و یا نقشه</string>
     <string name="help_symbol">فعال/غیرفعال کردن ابزار طراحی</string>
-    <string name="help_therion">Therion manager app</string>
-    <string name="help_database">نمایش برنامه دیتابیس (SQliteViewer)</string>
+    <!-- UNUSED string name="help_therion">Therion manager app</string -->
+    <!-- UNUSED string name="help_database">نمایش برنامه دیتابیس (SQliteViewer)</string -->
     <string name="help_prefs">ویرایش تنظیمات</string>
     <string name="help_log">فعال/غیرفعال کردن تنظیمات ورود</string>
     <string name="help_join_survey">اضافه کردن نقشه برداری</string>
     <string name="help_info_topodroid">TopoDroid اطلاعات</string>
     <string name="help_download">دریافت اطلاعات</string>
-    <string name="help_splay">Assign stations to splays automatically</string>
+    <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
     <string name="help_display">انتخاب حالت نمایش</string>
     <string name="help_display_calib">نمایش وضعیت شات های پاک شده</string>
     <string name="help_overview">بازبینی فعالیت ها</string>
@@ -548,7 +545,7 @@
     <string name="help_kink">Use a straight line at the point [line/area]</string>
 -->
     <string name="help_note_plot">ویرایش خواص طرح انتخاب شده</string>
-    <string name="help_save">ذخیره تغییرات اطلاعات نقشه</string>
+    <!-- UNUSED string name="help_save">ذخیره تغییرات اطلاعات نقشه</string -->
     <string name="help_save_calib">ذخیره تغییرات اطلاعات کالیبره</string>
     <string name="help_export_survey">خارج کردن نقشه</string>
     <string name="help_loc">GPS مکان</string>
@@ -568,16 +565,16 @@
     <string name="help_compute">Compute calibration</string>
     <string name="help_write">نوشتن ضرایب کالیبره در DistoX</string>
 <!-- FIXME_SKETCH_3D -->
-    <string name="help_refs_model">حالت نمایش</string>
+    <!-- UNUSED string name="help_refs_model">حالت نمایش</string -->
     <string name="help_one_model">Fit 3d model to view</string>
     <string name="help_surface">ایجاد سطح</string>
     <string name="help_save_model">خارج کردن مدل سه بعدی</string>
     <string name="help_trash_model">حذف مدل سه بعدی</string>
     <string name="help_head_model">Orient 3D model</string>
-    <string name="help_erase_model">پاک کردن ناحیه</string>
+    <!-- UNUSED string name="help_erase_model">پاک کردن ناحیه</string -->
     <string name="help_cut_model">برش ناحیه</string>
     <string name="help_stretch_model">طرح ناحیه</string>
-    <string name="help_extrude_model">بیرون آمدن از ناحیه</string>
+    <!-- UNUSED string name="help_extrude_model">بیرون آمدن از ناحیه</string -->
     <string name="help_refine_center">اصلاح سطح مراکز مثلث</string>
     <string name="help_refine_sides">اصلاح سطح کناره های مثلث</string>
     <string name="help_refine_point">اصلاح سطح نقاط</string>
@@ -595,8 +592,8 @@
     <string name="title_draw_point">موقعیت %1$s</string>
     <string name="title_edit">ویرایش</string>
     <string name="title_erase">حذف</string>
-    <string name="title_location">موقعیت</string>
-    <string name="title_location_gps">موقعیت *</string>
+    <!-- UNUSED string name="title_location">موقعیت</string -->
+    <!-- UNUSED string name="title_location_gps">موقعیت *</string -->
     <string name="title_manual">راهنمای کاربر TopoDroid</string>
     <string name="title_mode">نوع نمایش</string>
     <string name="title_move">انتقال</string>
@@ -626,8 +623,8 @@
 
   <string name="pref_raw_data_title">داده های خام</string>
   <string name="pref_raw_data_summary">نمایش داده های خام</string>
-  <string name="pref_bootloader_title">بوت لودر</string>
-  <string name="pref_bootloader_summary">فعال/غیرفعال بوت لودر</string>
+  <!-- UNUSED string name="pref_bootloader_title">بوت لودر</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">فعال/غیرفعال بوت لودر</string -->
   <string name="pref_cosurvey_title">شرکت - خدمات نقشه کشی</string>
   <string name="pref_cosurvey_summary">فعال/غیرفعال شرکت خدمات نقشه کشی</string>
   <string name="pref_export_shots_title">فرمت خروجی اطلاعات</string>
@@ -636,7 +633,7 @@
   <string name="pref_extra_buttons_summary">سطح امکانات فعال</string>
   <string name="pref_size_buttons_title">سایز دکمه</string>
   <string name="pref_size_buttons_summary">سایز دکمه های نوار عملیات</string>
-  <string name="pref_size_buttons_message">ورود سایز دکمه های نوار عملیات به پیکسل</string>
+  <!-- UNUSED string name="pref_size_buttons_message">ورود سایز دکمه های نوار عملیات به پیکسل</string -->
 
   <string name="pref_leg_shots_title">حدال شات های پایه</string>
   <string name="pref_leg_shots_summary">حداقل تعداد شات در یک بخش</string>
@@ -645,10 +642,10 @@
   <string name="pref_sock_type_summary">ساکت سوکت</string>
   <!-- string name="pref_device_type_title">Disto type</string -->
   <!-- string name="pref_device_type_summary">Model of the DistoX</string -->
-  <string name="pref_comm_retry_title">تلاش مجدد برای اتصال</string>
-  <string name="pref_comm_retry_summary">تعداد تلاش مجدد برای اتصال</string>
-  <string name="pref_comm_retry_dialogtitle">تعداد اتصال مجدد</string>
-  <string name="pref_comm_retry_message">تعداد اتصال مجدد</string>
+  <!-- UNUSED string name="pref_comm_retry_title">تلاش مجدد برای اتصال</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">تعداد تلاش مجدد برای اتصال</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">تعداد اتصال مجدد</string -->
+  <!-- UNUSED string name="pref_comm_retry_message">تعداد اتصال مجدد</string -->
   <string name="pref_conn_mode_title">نوع اتصال داده</string>
   <string name="pref_conn_mode_summary">نوع اتصال به DistoX</string>
   <string name="pref_auto_reconnect_title">اتصال مجدد خودکار</string>
@@ -658,28 +655,26 @@
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS نام</string>
   <string name="pref_crs_message">Enter the CRS name as in Proj4</string>
-  <string name="pref_gps_averaging_title">GPS Averaging</string>
-  <string name="pref_gps_averaging_summary">چگونگی استفاده از GPSAveraging</string>
 
   <string name="pref_plot_screen_title">SKETCH SCREEN</string>
-  <string name="pref_tool_screen_title">ابزار طراحی</string>
+  <!-- UNUSED string name="pref_tool_screen_title">ابزار طراحی</string -->
   <string name="pref_location_title">مکان</string>
   <string name="pref_accuracy_title">دقت</string>
   <string name="pref_shot_data_title">داده های شات</string>
   <string name="pref_shot_units_title">داده های واحد</string>
   <string name="pref_cwd_title">فهرست کار</string>
-  <string name="pref_cwd_summary">TopoDroid فهرست کار</string>
-  <string name="pref_cwd_message">ورود TopoDroid فهرست کار</string>
+  <!-- UNUSED string name="pref_cwd_summary">TopoDroid فهرست کار</string -->
+  <!-- UNUSED string name="pref_cwd_message">ورود TopoDroid فهرست کار</string -->
   <string name="pref_text_size_title">اندازه متن</string>
   <string name="pref_text_size_summary">لیست گزینه های اندازه متن</string>
   <string name="pref_text_size_message">لیست های اندازه متن</string>
   <string name="pref_closeness_title">محدوده انتخاب</string>
-  <string name="pref_closeness_summary">محدوده انتخاب طرح</string>
+  <!-- UNUSED string name="pref_closeness_summary">محدوده انتخاب طرح</string -->
   <string name="pref_closeness_message">محدوده انتخاب طرح</string>
-  <string name="pref_altitude_title">ارتفاع</string>
-  <string name="pref_altitude_summary">انتخاب نوع ارتفاع</string>
-  <string name="pref_altimetric_title">Orthometric atitude lookup</string>
-  <string name="pref_altimetric_summary">Internet lookup of orthometric altitude</string>
+  <!-- UNUSED string name="pref_altitude_title">ارتفاع</string -->
+  <!-- UNUSED string name="pref_altitude_summary">انتخاب نوع ارتفاع</string -->
+  <!-- UNUSED string name="pref_altimetric_title">Orthometric atitude lookup</string -->
+  <!-- UNUSED string name="pref_altimetric_summary">Internet lookup of orthometric altitude</string -->
   <string name="pref_survey_stations_title">ایستگاه نقشه کشی</string>
   <string name="pref_survey_stations_summary">ایستگاه نقشه کشی خودکار</string>
   <string name="pref_accel_thr_title">تحمل شتاب</string>
@@ -711,7 +706,7 @@
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
   <string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string>
   <string name="pref_plan_vthr_title">باز کردن عمودی آستانه</string>
-  <string name="pref_plan_vthr_summary">باز کردن عمودی آستانه در نقشه</string>
+  <!-- UNUSED string name="pref_plan_vthr_summary">باز کردن عمودی آستانه در نقشه</string -->
   <string name="pref_plan_vthr_message">Hide in the plan splays with high inclination</string>
   <string name="pref_init_station_title">نام ایستگاه اولیه</string>
   <string name="pref_init_station_summary">نام پیش فرض ایستگاه اولیه</string>
@@ -736,7 +731,7 @@
   <string name="pref_drawing_unit_summary">Scale of the point tools</string>
   <string name="pref_drawing_unit_message">Scale of the point drawing tools</string>
   <string name="pref_segment_title">Line-point spacing</string>
-  <string name="pref_segment_summary">Minimum line-point distance</string>
+  <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
   <string name="pref_segment_message">Minimum distance between points on a line</string>
   <string name="pref_linestyle_title">شیوه خط</string>
   <string name="pref_linestyle_summary">شیوه طراحی خط</string>
@@ -765,10 +760,10 @@
   <string name="pref_label_size_summary">اندازه برچسب</string>
   <string name="pref_label_size_message">اندازه برچسب</string>
   <string name="pref_arrow_length_title">Section line tick size</string>
-  <string name="pref_arrow_length_summary">Size of the section line tick</string>
+  <!-- UNUSED string name="pref_arrow_length_summary">Size of the section line tick</string -->
   <string name="pref_arrow_length_message">Size of the section line tick</string>
   <string name="pref_dot_radius_title">اندازه نقطه های سبز</string>
-  <string name="pref_dot_radius_summary">اندازه نقطه های سبز</string>
+  <!-- UNUSED string name="pref_dot_radius_summary">اندازه نقطه های سبز</string -->
   <string name="pref_dot_radius_message">اندازه نقطه های سبز</string>
   <string name="pref_line_thickness_title">عرض خط</string>
   <string name="pref_line_thickness_summary">طراحی عرض خط</string>
@@ -776,9 +771,9 @@
   <string name="pref_fixed_thickness_title">عرض خط نقشه برداری</string>
   <string name="pref_fixed_thickness_summary">عرض خط نقشه برداری</string>
   <string name="pref_fixed_thickness_message">عرض خط نقشه برداری</string>
-  <string name="pref_device_title">دستگاه</string>
-  <string name="pref_device_summary">DistoX address name</string>
-  <string name="pref_device_message">DistoX address name</string>
+  <!-- UNUSED string name="pref_device_title">دستگاه</string -->
+  <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
+  <!-- UNUSED string name="pref_device_message">DistoX address name</string -->
   <string name="pref_checkBT_title">بلوتوث</string>
   <string name="pref_checkBT_summary">فعال/غیرفعال کردن بلوتوث</string>
   <string name="pref_checkAttached_title">چک کردن خط وسط</string>
@@ -787,8 +782,8 @@
   <string name="pref_autoStations_summary">اضافه کردن خوکار ایستگاه</string>
   <string name="pref_loopClosure_title">بسته شدن حلقه</string>
   <string name="pref_loopClosure_summary">حل خطای بسته شدن حلقه</string>
-  <string name="pref_splayExtend_title">نمایش براورد گسترش</string>
-  <string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string>
+  <!-- UNUSED string name="pref_splayExtend_title">نمایش براورد گسترش</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
 
   <string name="pref_picker_type_title">انتخاب ابزار طراحی</string>
   <string name="pref_picker_type_summary">نوع انتخاب ابزار طراحی</string>
@@ -850,18 +845,18 @@
   <string name="pref_log_units">واحدها</string>
   <string name="pref_log_zip">ZIP</string>
 
-  <string name="line_bezier">Bezier</string>
-  <string name="line_fine">خوب</string>
-  <string name="line_normal">نرمال</string>
-  <string name="line_coarse">درشت</string>
-  <string name="units_ddmmss">ddmmss</string>
-  <string name="units_dd">درجه</string>
-  <string name="units_grads">grads</string>
-  <string name="units_meters">متر</string>
-  <string name="units_feet">فوت</string>
-  <string name="alt_wgs">بیضی</string>
-  <string name="alt_ortho">orthometric</string>
-  <string name="splay_extend">estimate splay extend</string>
+  <!-- UNUSED string name="line_bezier">Bezier</string -->
+  <!-- UNUSED string name="line_fine">خوب</string -->
+  <!-- UNUSED string name="line_normal">نرمال</string -->
+  <!-- UNUSED string name="line_coarse">درشت</string -->
+  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+  <!-- UNUSED string name="units_dd">درجه</string -->
+  <!-- UNUSED string name="units_grads">grads</string -->
+  <!-- UNUSED string name="units_meters">متر</string -->
+  <!-- UNUSED string name="units_feet">فوت</string -->
+  <!-- UNUSED string name="alt_wgs">بیضی</string -->
+  <!-- UNUSED string name="alt_ortho">orthometric</string -->
+  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
     <string name="welcome_title">خوش آمدید به TopoDroid %1$s</string>
     <string name="welcome_text">
