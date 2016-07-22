@@ -7,7 +7,7 @@
     <string name="double_back">Натиснете отново за да излезете</string>
 
     <string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string>
-    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
+    <string name="symbols_ask">Инсталиране на елементи за рисуване v.%1$s?\n(Текущи v.%2$s)</string>
 
     <string name="POINT">Точка</string>
     <string name="LINE">Линия</string>
@@ -390,9 +390,9 @@
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Информация за картировката</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+    <string name="stat_stddev_m">M станд. отклонение %1$.1f %</string>
+    <string name="stat_stddev_g">G станд. отклонение  %1$.1f %</string>
+    <string name="stat_stddev_dip">Магн. наклон ст. откл.  %1$.1f градуса (средно %2$.1f градуса)</string>
     <string name="stat_component">Компоненти %1$d</string>
     <string name="stat_depth">Дълбочина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дублирани отсечки %1$d %2$.1f %3$s</string>
@@ -489,7 +489,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импортиране</string>
-    <!-- TODO string name="btn_install">Install</string -->
+    <string name="btn_install">Инсталиране</string>
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
@@ -578,8 +578,8 @@
     <string name="help_draw">Вкл. на режим на скициране</string>
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
-    <string name="help_rename">Смяна на името на картировката</string>
-    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
+    <string name="help_rename">Преименуване на картировката</string>
+    <string name="help_plot_rename">Преименуване на скицата</string>
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертиране на двоични файлове на скици в th2</string -->
@@ -683,7 +683,7 @@
     <string name="title_survey_new">Нова картировка</string>
     <string name="title_survey_export">Експортиране на картировка като</string>
     <string name="title_survey_rename">Преименуване като</string>
-    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
+    <string name="title_plot_rename">Преименуване на скица</string>
     <string name="title_calib_export">Експортиране на калибрация като</string>
     <!-- string name="title_zoom">Приближаване</string -->
 
