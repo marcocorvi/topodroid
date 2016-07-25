@@ -21,8 +21,8 @@
   </string-array>
 
   <string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
+     <item name="none">Nincs</item>
+     <item name="convex">Konvex</item>
   </string-array>
   <string-array name="wallsTypeValue">
      <item name="none">0</item>
@@ -39,9 +39,9 @@
   </string-array>
 
   <string-array name="zoomCtrl">
-     <item name="0">Off</item>
-     <item name="1">Temporary</item>
-     <item name="2">Permanent</item>
+     <item name="0">Ki</item>
+     <item name="1">Időszakos</item>
+     <item name="2">Állandó</item>
   </string-array>
   <string-array name="zoomCtrlValue">
      <item name="0">0</item>
@@ -50,12 +50,12 @@
   </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">Alphanumeric</item>
-     <item name="number">Numeric</item>
+     <item name="alpha">Betűk_és_számok</item>
+     <item name="number">Számok</item>
   </string-array>
   <string-array name="stationNamesValue">
-     <item name="alpha">alpha</item>
-     <item name="number">number</item>
+     <item name="alpha">betű_és_szám</item>
+     <item name="number">szám</item>
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
@@ -79,7 +79,8 @@
      <item name="bulgarian">Български</item>
      <item name="chinese">中文</item>
      <item name="ukrainian">Українська</item>
-      <item name="persion">Persian</item>
+     <item name="persian">Persian</item>
+     <item name="hungarian">Hungarian</item>
 
   </string-array>
   <string-array name="localeValue">
@@ -96,11 +97,12 @@
      <item name="chinese">cn</item>
      <item name="ukrainian">ua</item>
      <item name="persian">fa</item>
+     <item name="hungarian">hu</item>
   </string-array>
 
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <string-array name="exportShots">
-     <item name="none">none</item>
+     <item name="none">mégse</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <!-- item name="csurvey">cSurvey</item -->
@@ -129,7 +131,7 @@
   </string-array>
 
   <string-array name="exportPlot">
-     <item name="none">none</item>
+     <item name="none">mégse</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
@@ -175,10 +177,10 @@
   </string-array>
 
   <string-array name="extraButtons">
-     <item name="basic">Basic</item>
-     <item name="normal">Normal</item>
-     <item name="advanced">Advanced</item>
-     <item name="expert">Expert</item>
+     <item name="basic">Alap</item>
+     <item name="normal">Normál</item>
+     <item name="advanced">Haladó</item>
+     <item name="expert">Profi</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
   <string-array name="extraButtonsValue">
@@ -190,11 +192,11 @@
   </string-array>
 
   <string-array name="sizeButtons">
-     <item name="small">Small</item>
-     <item name="normal">Normal</item>
-     <item name="medium">Medium</item>
-     <item name="large">Large</item>
-     <item name="huge">Huge</item>
+     <item name="small">Kicsi</item>
+     <item name="normal">Normál</item>
+     <item name="medium">Közepes</item>
+     <item name="large">Nagy</item>
+     <item name="huge">Óriási</item>
   </string-array>
   <string-array name="sizeButtonsValue">
      <item name="small">0</item>
@@ -214,8 +216,8 @@
   </string-array>
 
   <string-array name="connMode">
-     <item name="batch">On-demand</item>
-     <item name="continuous">Continuous</item>
+     <item name="batch">Ha_szükséges</item>
+     <item name="continuous">Folyamatos</item>
   </string-array>
   <string-array name="connModeValue">
      <item name="batch">0</item>
@@ -321,10 +323,10 @@
   </string-array -->
 
   <string-array name="lineStyle">
-     <item name="none">Fine</item>
-     <item name="two">Normal</item>
-     <item name="three">Coarse</item>
-     <item name="bezier">Bezier</item>
+     <item name="none">Finom</item>
+     <item name="two">Normál</item>
+     <item name="three">Durva</item>
+     <item name="bezier">Bézier</item>
   </string-array>
   <string-array name="lineStyleValue">
      <item name="none">1</item>
@@ -345,12 +347,12 @@
   </string-array>
 
   <string-array name="unitLength">
-     <item name="meters">meters</item>
-     <item name="feet">feet</item>
+     <item name="meters">méter</item>
+     <item name="feet">láb</item>
   </string-array>
   <string-array name="unitLengthValue">
-     <item name="meters">meters</item>
-     <item name="feet">feet</item>
+     <item name="meters">méter</item>
+     <item name="feet">láb</item>
   </string-array>
   <!-- string-array name="unitLengthNumber">
      <item name="meters">1</item>
