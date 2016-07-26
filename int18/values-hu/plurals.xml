@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <plurals name="calib_saturated_values">
+    <item quantity="one">WARNING. One saturated data</item>
+    <item quantity="other" >WARNING. %1$d saturated data</item>
+  </plurals>
+  <plurals name="read_data">
+    <item quantity="zero">No data read</item>
+    <item quantity="other">Read %1$d data</item>
+  </plurals>
+  <plurals name="read_calib_data">
+    <item quantity="zero">No calibration data read</item>
+    <item quantity="other">Read %1$d data (%2$d packets)</item>
+  </plurals>
+</resources>

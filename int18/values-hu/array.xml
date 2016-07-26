@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <string-array name="unitGrid">
+     <item name="meter">méter</item>
+     <item name="yard">yard</item>
+  </string-array>
+  <string-array name="unitGridValue">
+     <item name="meter">1.0</item>
+     <item name="yard">0.914</item>
+  </string-array>
+
+  <string-array name="survexEol">
+     <item name="lf">Linux</item>
+     <item name="lfcr">Windows</item>
+  </string-array>
+  <string-array name="survexEolValue">
+     <item name="lf">LF</item>
+     <item name="lfcr">LFCR</item>
+  </string-array>
+
+  <string-array name="wallsType">
+     <item name="none">Nincs</item>
+     <item name="convex">Konvex</item>
+  </string-array>
+  <string-array name="wallsTypeValue">
+     <item name="none">0</item>
+     <item name="convex">1</item>
+  </string-array>
+
+  <string-array name="acadVersion">
+     <item name="9">AutoCAD 6</item>
+     <item name="13">AutoCAD 12</item>
+  </string-array>
+  <string-array name="acadVersionValue">
+     <item name="9">9</item>
+     <item name="13">13</item>
+  </string-array>
+
+  <string-array name="zoomCtrl">
+     <item name="0">Ki</item>
+     <item name="1">Időszakos</item>
+     <item name="2">Állandó</item>
+  </string-array>
+  <string-array name="zoomCtrlValue">
+     <item name="0">0</item>
+     <item name="1">1</item>
+     <item name="2">2</item>
+  </string-array>
+
+  <string-array name="stationNames">
+     <item name="alpha">Betűk_és_számok</item>
+     <item name="number">Számok</item>
+  </string-array>
+  <string-array name="stationNamesValue">
+     <item name="alpha">betű_és_szám</item>
+     <item name="number">szám</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="extend_name">
+     <item>Left</item>
+     <item>Vertical</item>
+     <item>Right</item>
+     <item>None</item>
+  </string-array -->
+
+  <!-- DISTOX_LOCALE -->
+  <string-array name="locale">
+     <item name="default">default</item>
+     <item name="english">English</item>
+     <item name="french">Français</item>
+     <item name="spanish">Español</item>
+     <item name="italian">Italiano</item>
+     <item name="russian">Русский</item>
+     <item name="german">Deutsch</item>
+     <item name="portuguese">Português</item>
+     <item name="slovenian">Slovenščina</item>
+     <item name="bulgarian">Български</item>
+     <item name="chinese">中文</item>
+     <item name="ukrainian">Українська</item>
+     <item name="persian">Persian</item>
+     <item name="hungarian">Hungarian</item>
+
+  </string-array>
+  <string-array name="localeValue">
+     <item name="default"></item>
+     <item name="english">en</item>
+     <item name="french">fr</item>
+     <item name="spanish">es</item>
+     <item name="italian">it</item>
+     <item name="russian">ru</item>
+     <item name="german">de</item>
+     <item name="portuguese">pt</item>
+     <item name="slovenian">sl</item>
+     <item name="bulgarian">bg</item>
+     <item name="chinese">cn</item>
+     <item name="ukrainian">ua</item>
+     <item name="persian">fa</item>
+     <item name="hungarian">hu</item>
+  </string-array>
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <string-array name="exportShots">
+     <item name="none">mégse</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <!-- item name="csurvey">cSurvey</item -->
+     <item name="pockettopo">PocketTopo</item>
+     <item name="polygon">Polygon</item>
+     <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array>
+  <string-array name="exportShotsValue">
+     <item name="none">-1</item>
+     <item name="therion">0</item>
+     <item name="compass">2</item>
+     <!-- item name="csurvey">7</item -->
+     <item name="pockettopo">8</item>
+     <item name="polygon">16</item>
+     <item name="survex">3</item>
+     <item name="topo">17</item>
+     <item name="visualtopo">4</item>
+     <item name="walls">9</item>
+     <item name="csv">5</item>
+     <item name="dxf">6</item>
+  </string-array>
+
+  <string-array name="exportPlot">
+     <item name="none">mégse</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array>
+  <string-array name="exportPlotValue">
+     <item name="none">-1</item>
+     <item name="therion">14</item>
+     <item name="csurvey">7</item>
+     <item name="dxf">6</item>
+     <item name="svg">13</item>
+     <item name="png">12</item>
+  </string-array>
+
+   
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- UNUSED string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array>
+  <string-array name="exportSketchValue">
+     <item name="therion">0</item>
+     <item name="csurvey">7</item>
+     <item name="dxf">6</item>
+     <item name="png">11</item>
+     <item name="svg">12</item>
+  </string-array -->
+
+  <string-array name="legShots">
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="four">4</item>
+  </string-array>
+  <string-array name="legShotsValue">
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="four">4</item>
+  </string-array>
+
+  <string-array name="extraButtons">
+     <item name="basic">Alap</item>
+     <item name="normal">Normál</item>
+     <item name="advanced">Haladó</item>
+     <item name="expert">Profi</item>
+     <!-- item name="complete">Complete</item -->
+  </string-array>
+  <string-array name="extraButtonsValue">
+     <item name="basic">0</item>
+     <item name="normal">1</item>
+     <item name="advanced">2</item>
+     <item name="expert">3</item>
+     <!-- item name="complete">4</item -->
+  </string-array>
+
+  <string-array name="sizeButtons">
+     <item name="small">Kicsi</item>
+     <item name="normal">Normál</item>
+     <item name="medium">Közepes</item>
+     <item name="large">Nagy</item>
+     <item name="huge">Óriási</item>
+  </string-array>
+  <string-array name="sizeButtonsValue">
+     <item name="small">0</item>
+     <item name="normal">1</item>
+     <item name="medium">3</item>
+     <item name="large">4</item>
+     <item name="huge">2</item>
+  </string-array>
+
+  <string-array name="logStream">
+     <item name="android">System log</item>
+     <item name="file">File log</item>
+  </string-array>
+  <string-array name="logStreamValue">
+     <item name="android">0</item>
+     <item name="file">1</item>
+  </string-array>
+
+  <string-array name="connMode">
+     <item name="batch">Ha_szükséges</item>
+     <item name="continuous">Folyamatos</item>
+  </string-array>
+  <string-array name="connModeValue">
+     <item name="batch">0</item>
+     <item name="continuous">1</item>
+  </string-array>
+
+  <string-array name="sockType">
+     <item name="default">Default</item>
+     <item name="Insecure">Insecure</item>
+     <!-- item name="Port">Port</item -->
+     <!-- item name="InsecurePort">Insecure/Port</item -->
+  </string-array>
+  <string-array name="sockTypeValue">
+     <item name="default">0</item>
+     <item name="Insecure">1</item>
+     <!-- item name="Port">2</item -->
+     <!-- item name="InsecurePort">3</item -->
+  </string-array>
+
+  <string-array name="surveyStations">
+     <item name="no">No</item>
+     <item name="for">Splays, forward leg</item>
+     <item name="back">Splays, backward leg</item>
+     <item name="for2">Forward leg, splays</item>
+     <item name="back2">Backward leg, splays</item>
+     <item name="anomaly">Backsight</item>
+     <item name="tripod">Tripod</item>
+  </string-array>
+  <string-array name="surveyStationsValue">
+     <item name="no">0</item>
+     <item name="for">1</item>
+     <item name="back">2</item>
+     <item name="for2">3</item>
+     <item name="back2">4</item>
+     <item name="anomaly">5</item>
+     <item name="tripod">6</item>
+  </string-array>
+
+  <string-array name="pickerType">
+     <item name="recent">Most recent</item>
+     <item name="list">List</item>
+     <item name="grid">Grid</item>
+     <item name="grid3">Triple grid</item>
+  </string-array>
+  <string-array name="pickerTypeValue">
+     <item name="recent">0</item>
+     <item name="list">1</item>
+     <item name="grid">2</item>
+     <item name="grid3">3</item>
+  </string-array>
+
+  <string-array name="sectionStations">
+     <item name="both">Both</item>
+     <item name="from">Behind</item>
+     <item name="to">In front</item>
+  </string-array>
+  <string-array name="sectionStationsValue">
+     <item name="both">3</item>
+     <item name="from">1</item>
+     <item name="to">2</item>
+  </string-array>
+
+  <string-array name="recentNr">
+     <item name="3">3</item>
+     <item name="4">4</item>
+     <item name="5">5</item>
+     <item name="6">6</item>
+  </string-array>
+
+  <!-- string-array name="deviceType">
+     <item name="none">None</item>
+     <item name="A3">A3</item>
+     <item name="X310">X310</item>
+  </string-array>
+  <string-array name="deviceTypeValue">
+     <item name="none">0</item>
+     <item name="A3">1</item>
+     <item name="X310">2</item>
+  </string-array -->
+
+  <string-array name="deviceBT">
+     <item name="0">Disabled</item>
+     <item name="1">Check on start</item>
+     <item name="2">Enabled</item>
+  </string-array>
+  <string-array name="deviceBTValue">
+     <item name="0">0</item>
+     <item name="1">1</item>
+     <item name="2">2</item>
+  </string-array>
+
+  <!-- string-array name="exportType">
+     <item name="th">Therion</item>
+     <item name="dat">Compass</item>
+     <item name="svx">Survex</item>
+     <item name="tro">VisualTopo</item>
+  </string-array>
+  <string-array name="exportTypeValue">
+     <item name="th">th</item>
+     <item name="dat">dat</item>
+     <item name="svx">svx</item>
+     <item name="tro">tro</item>
+  </string-array -->
+
+  <string-array name="lineStyle">
+     <item name="none">Finom</item>
+     <item name="two">Normál</item>
+     <item name="three">Durva</item>
+     <item name="bezier">Bézier</item>
+  </string-array>
+  <string-array name="lineStyleValue">
+     <item name="none">1</item>
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="bezier">0</item>
+  </string-array>
+
+  <string-array name="groupBy">
+     <item name="distance">Distance</item>
+     <item name="four">Four at a time</item>
+     <item name="only16">Only first 16</item>
+  </string-array>
+  <string-array name="groupByValue">
+     <item name="distance">0</item>
+     <item name="four">1</item>
+     <item name="only16">2</item>
+  </string-array>
+
+  <string-array name="unitLength">
+     <item name="meters">méter</item>
+     <item name="feet">láb</item>
+  </string-array>
+  <string-array name="unitLengthValue">
+     <item name="meters">méter</item>
+     <item name="feet">láb</item>
+  </string-array>
+  <!-- string-array name="unitLengthNumber">
+     <item name="meters">1</item>
+     <item name="feet">3.28084</item>
+  </string-array -->
+
+  <string-array name="unitAngle">
+     <item name="degrees">decimal degrees</item>
+     <item name="grads">decimal grads</item>
+  </string-array>
+  <string-array name="unitAngleValue">
+     <item name="degrees">degrees</item>
+     <item name="grads">grads</item>
+  </string-array>
+
+  <string-array name="unitLocation">
+     <item name="degrees">decimal degrees</item>
+     <item name="ddmmss">degree, minute, seconds</item>
+  </string-array>
+  <string-array name="unitLocationValue">
+     <item name="degrees">degrees</item>
+     <item name="ddmmss">ddmmss</item>
+  </string-array>
+
+  <string-array name="calibAlgo">
+     <item name="auto">Auto</item>
+     <item name="linear">Linear</item>
+     <item name="nonlinear">Non-linear</item>
+     <!-- item name="minimum">Minimum</item -->
+  </string-array>
+  <string-array name="calibAlgoValue">
+     <item name="auto">0</item>
+     <item name="linear">1</item>
+     <item name="nonlinear">2</item>
+     <!-- item name="minimum">3</item -->
+  </string-array>
+
+</resources>

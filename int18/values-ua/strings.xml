@@ -6,8 +6,8 @@
     <string name="app_name">TopoDroid</string>
     <string name="double_back">Натисніть "НАЗАД" ще раз для виходу</string>
 
-    <string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете перевстановити об\'єкти малюнків?</string>
-    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
+    <string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете переінсталювати інструменти малюнків?</string>
+    <string name="symbols_ask">Встановити інструменти малювання v.%1$s?\n(Поточна v.%2$s)</string>
     <!-- REPLACED string name="symbols_ask">Ви хочете переінсталювати інструменти малювання?</string -->
 
     <string name="POINT">ТОЧКА</string>
@@ -80,7 +80,7 @@
     <string name="auto">авто</string>
     <string name="linear">лінійний</string>
     <string name="non_linear">не-лінійний</string>
-   
+
     <string name="device_algo_failed">Алгоритм автовизначення не спрацював\nВикористовую лінійний алгоритм</string>
     <string name="device_address">Адреса %1$s</string>
     <string name="device_busy">Пристрій зайнятий</string>
@@ -142,7 +142,7 @@
     <string name="import_zip_wait">Імпорт zip файлу може зайняти багато часу. Почекайте &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Збереження абрису &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Немає точки MobileTopographer</string>
- 
+
 
     <!-- UNUSED string name="head_tail">Пам'ять: </string -->
     <string name="head_tail_failed">Помилка зчитування індекса пам\'яті DistoX</string>
@@ -188,7 +188,7 @@
     <string name="error_station_non_existing">Неіснуючий пікет</string>
     <string name="error_sensor_required">Вимагається датчик</string>
     <string name="error_value_required">Вимагається значення</string>
-    
+
     <string name="group_title">Присвоїти номера груп калібрувальним вимірам</string>
     <string name="group_policy_four">Правило: групувати по четирьох</string>
     <string name="group_policy_sixteen">Правило: чотири групи по четири, інші по одному</string>
@@ -392,9 +392,9 @@
     <!-- OK string name="zoom_in_out">Збільшити/зменшити</string -->
 
     <string name="survey_info">Статистика зйомки</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+    <string name="stat_stddev_m">M ст.відх. %1$.1f відсотків</string>
+    <string name="stat_stddev_g">G ст.відх. %1$.1f відсотків</string>
+    <string name="stat_stddev_dip">Нахил ст.відх. %1$.1f град. (середнє %2$.1f град.)</string>
     <string name="stat_component">Компоненти %1$d</string>
     <string name="stat_depth">Глибина %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Дубльовані пікети %1$d довжина: %2$.1f %3$s</string>
@@ -490,7 +490,7 @@
     <string name="btn_import">Імпорт</string>
     <string name="btn_install">Встановити</string>
 
-<!-- FIXME_SKETCH_3D -->    
+<!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <!-- UNUSED string name="title_sketch_edit">Змінити 3D поверхню</string -->
     <string name="title_sketch_shot">Новий пікет</string>
@@ -536,12 +536,12 @@
 
     <string name="menu_head">Head</string>
     <!-- UNUSED string name="menu_save_th2">збер th2</string -->
-<!-- END_SKETCH_3D -->    
+<!-- END_SKETCH_3D -->
 
     <string name="help_help">Допомога</string>
     <!-- UNUSED string name="help_manual">Інструкція</string -->
     <string name="help_measure">Виміряти відстань</string>
-    
+
     <string name="help_coeff">Показать коэфіцієнти калібрування</string>
     <string name="help_continue">Продовжити малювати лінію</string>
     <string name="help_current_station">Збережені пікети</string>
@@ -578,7 +578,7 @@
     <string name="help_edit">Перейти в режим редагування</string>
     <string name="help_refs">Вид вікна абрису</string>
     <string name="help_rename">Змінити назву зйомки</string>
-    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
+    <string name="help_plot_rename">Перейменувати абрис</string>
     <string name="help_stats">Інструмент статистики по зйомці</string>
     <string name="help_save_plot">Экспорт абрисів</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертувати бінарні файли абрисів в формат th2</string -->
@@ -594,7 +594,7 @@
     <string name="help_next">Наступний елемент у вибірці</string>
     <string name="help_recover">Відновити абрис из бекапу</string>
     <string name="help_zoom_fit">Вмістити абрис в екран</string>
-   
+
     <string name="help_line_point">Дії з лініями і точками: з\'єднати, розірвати, обрізати, видалити</string>
 <!-- OK
     <string name="help_to_point">Притянгнути вибрану точку до найближчої точки</string>
@@ -639,7 +639,7 @@
     <string name="help_refine_sides">Уточнити поверхню в сторонах трикутників</string>
     <string name="help_refine_point">Уточнити поверхню в точке</string>
     <string name="help_refine_triangle">Уточнити поверхню вздовж довгої сторони</string>
-  
+
 
     <string name="title_azimut">Напрям розвідки</string>
     <string name="title_calib">Калібрування</string>
@@ -683,8 +683,8 @@
     <string name="title_survey_new">Новая зйомка</string>
     <string name="title_survey_export">Експорт зйомки як</string>
     <string name="title_survey_rename">Переименовать зйомку</string>
-    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
-    <string name="title_calib_export">Экспорт калібрування як</string>
+    <string name="title_plot_rename">Перейменувати абрис</string>
+    <string name="title_calib_export">Експорт калібрування як</string>
     <!-- OK string name="title_zoom">Зум</string -->
 
   <string name="pref_cat_survey">Налаштування топозйомки </string>
@@ -939,7 +939,7 @@
   <string name="pref_unit_grid_summary">Крок сітки в абрисах</string>
   <string name="pref_recent_nr_title">К-сть недавніх інструментів</string>
   <string name="pref_recent_nr_summary">К-сть елементів в списку недавно використаних інструментів</string>
-  <string name="pref_area_border_title">Прозорість границь області</string> 
+  <string name="pref_area_border_title">Прозорість границь області</string>
   <string name="pref_area_border_summary">Прозорість границь області за замовчуванням</string>
   <string name="pref_auto_section_pt_title">Точки перерізів</string>
   <string name="pref_auto_section_pt_summary">Додати точки перерізів до линій перерізів</string>
@@ -1055,6 +1055,6 @@
    <string name="ask_upload_not_compatible">Неможливо перевірити сумісність ПЗ.\nЗавантажити прошивку?</string>
    <string name="firmware_file_dumped">Збережений файл прошивки %1$s розмір %2$d</string>
    <string name="firmware_file_uploaded">Загружений файл прошивки %1$s записано %2$d / %3$d</string>
-   
+
 
 </resources>
