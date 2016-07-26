@@ -131,6 +131,11 @@
     <string name="import_failed">Файлът не е импортиран</string>
     <string name="file_not_found">Файлът не е намерен</string>
     <string name="import_calib_ok">Успешно импортиране на калибрация</string>
+    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
+    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
+    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
+    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
+    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->

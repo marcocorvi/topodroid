@@ -120,6 +120,12 @@
     <string name="import_none">Ni podatkov za uvoz</string>
     <string name="import_failed">Neuspel uvoz podatkov</string>
     <string name="file_not_found">Datoteka ni najdena</string>
+    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
+    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
+    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
+    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
+    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
+    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
     <string name="import_zip_ok">ZIP uspešno uvožen</string>
     <string name="import_zip_wait">Uvoz ZIP-a zahteva čas. Počakaj&#8230;</string>
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->

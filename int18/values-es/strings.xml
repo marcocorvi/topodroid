@@ -127,6 +127,11 @@
     <string name="import_failed">Fallo al importar archivo</string>
     <string name="file_not_found">Archivo no encontrado</string>
     <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
+    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
+    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
+    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
+    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
+    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
     <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->

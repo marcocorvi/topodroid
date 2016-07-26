@@ -94,13 +94,14 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_eraser_ok,
                         R.drawable.iz_select_ok };
 
-  private static int IC_DOWNLOAD = 3;
-  private static int IC_PLAN     = 7;
-  private static int IC_DIAL     = 8;
-  private static int IC_JOIN     = 15;
-  private static int IC_JOIN_NO  = 20;
-  private static int IC_MENU     = 18;
-  private static int IC_EXTEND   = 19;
+  private static int IC_DOWNLOAD  = 3;
+  private static int IC_BLUETOOTH = 4;
+  private static int IC_PLAN      = 7;
+  private static int IC_DIAL      = 8;
+  private static int IC_JOIN      = 15;
+  private static int IC_JOIN_NO   = 20;
+  private static int IC_MENU      = 18;
+  private static int IC_EXTEND    = 19;
   private static int IC_CONTINUE_NO   = 12;  // index of continue-no icon
   private static int IC_CONTINUE_CONT = 21;     // index of continue icon
   private static int IC_CONTINUE_JOIN = 22;     // index of continue icon
@@ -378,6 +379,8 @@ public class DrawingActivity extends ItemDrawer
   private HorizontalButtonView mButtonView3;
   private HorizontalButtonView mButtonView5;
 
+  private BitmapDrawable mBMbluetooth;
+  private BitmapDrawable mBMbluetooth_no;
   private BitmapDrawable mBMdownload;
   private BitmapDrawable mBMdownload_on;
   private BitmapDrawable mBMdownload_wait;
@@ -1003,6 +1006,7 @@ public class DrawingActivity extends ItemDrawer
       ic = ( k <3 )? k : off+k;
       mButton1[k] = MyButton.getButton( this, this, izons[ic] );
       if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
+      else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
     }
     mBMdial = BitmapFactory.decodeResource( res, izons[IC_DIAL] );
@@ -1011,6 +1015,7 @@ public class DrawingActivity extends ItemDrawer
     mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
     mBMleft          = MyButton.getButtonBackground( mApp, res, R.drawable.iz_left );
     mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
+    mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
     setRefAzimuth( TDAzimuth.mRefAzimuth, TDAzimuth.mFixedExtend );
 
     mButton2 = new Button[ mNrButton2 ]; // DRAW
@@ -2946,25 +2951,25 @@ public class DrawingActivity extends ItemDrawer
       recomputeProfileReference();
     }
 
+
+  // this is the same as in ShotActivity
   void doBluetooth( Button b )
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
-    mDataDownloader.setDownload( false );
-    mDataDownloader.stopDownloadData();
-    setConnectionStatus( mDataDownloader.getStatus() );
-    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
-      switch ( mApp.distoType() ) {
-        case Device.DISTO_A3:
-          mApp.resetComm();
-          Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-          break;
-        case Device.DISTO_X310:
-          CutNPaste.showPopupBT( this, this, mApp, b );
-          // (new DeviceRemoteDialog( this, this, mApp )).show();
-          break;
+    // Log.v( "DistoX", "Reset button, mode " + TDSetting.mConnectionMode );
+    
+    if ( ! mDataDownloader.isDownloading() ) {
+      // Log.v( "DistoX", "Reset button, not downloading, mode " + TDSetting.mConnectionMode );
+      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
+        CutNPaste.showPopupBT( this, this, mApp, b );
+      } else {
+        mDataDownloader.setDownload( false );
+        mDataDownloader.stopDownloadData();
+        setConnectionStatus( mDataDownloader.getStatus() );
+        mApp.resetComm();
+        Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
       }
-    } else {
-      mApp.resetComm();
+    // } else { // downloading: nothing
     }
   }
 
@@ -3437,7 +3442,7 @@ public class DrawingActivity extends ItemDrawer
 
   private void doComputeReferences()
   {
-    // Log.v("DistoX", "doComputeReferences()" );
+    // Log.v("DistoX", "doComputeReferences() type " + mType );
     List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
     // doMoveTo();
@@ -3454,7 +3459,7 @@ public class DrawingActivity extends ItemDrawer
 
   public void refreshDisplay( int nr, boolean toast )
   {
-    // Log.v("DistoX", "refreshDisplay()" );
+    // Log.v("DistoX", "refreshDisplay() type " + mType + " nr " + nr );
     setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -3473,39 +3478,50 @@ public class DrawingActivity extends ItemDrawer
 
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
-    // Log.v("DistoX", "updateDisplay()" );
+    // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
     // if ( compute ) {
+      // List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
+      // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
+      // // doMoveTo();
+      // // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      // computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      // if ( mPlot2 != null ) {
+      //   computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      // }
+    // }
+    if ( mType != (int)PlotInfo.PLOT_PLAN && ! PlotInfo.isProfile( mType ) ) {
+      resetReference( mPlot3 );
+    } else {
       List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
-      // doMoveTo();
-      // computeReferences( (int)mType, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-      if ( mPlot2 != null ) {
-        computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      if ( mType == (int)PlotInfo.PLOT_PLAN ) {
+        if ( mPlot2 != null ) {
+          computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+        }
+        computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+        resetReference( mPlot1 );
+      } else if ( PlotInfo.isProfile( mType ) ) {
+        computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+        if ( mPlot2 != null ) {
+          computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+        }
+        resetReference( mPlot2 );
+      } else {
       }
-    // }
-    // if ( reference ) {
-    //   if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-    //     resetReference( mPlot1 );
-    //   } else if ( PlotInfo.isProfile( mType ) ) {
-    //     resetReference( mPlot2 );
-    //   } else {
-    //     resetReference( mPlot3 );
-    //   }
-    // }
+    }
   }
 
   // forward adding data to the ShotActivity
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    updateDisplay( /* true, false */ );
+    updateDisplay( /* true, true */ );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
-    updateDisplay( /* true, false */ );
+    updateDisplay( /* true, true */ );
   }
 
   @Override
@@ -3716,16 +3732,20 @@ public class DrawingActivity extends ItemDrawer
   { 
     if ( mApp.mDevice == null ) {
       mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMadd );
+      mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth_no );
     } else {
       switch ( status ) {
         case 1:
           mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_on );
+          mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth_no );
           break;
         case 2:
           mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload_wait );
+          mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth_no );
           break;
         default:
           mButton1[ BTN_DOWNLOAD ].setBackgroundDrawable( mBMdownload );
+          mButton1[ BTN_BLUETOOTH ].setBackgroundDrawable( mBMbluetooth );
       }
     }
   }

@@ -833,11 +833,27 @@ public class DeviceActivity extends Activity
     if ( ! file.exists() ) {
       Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
     } else {
-      int ret = TopoDroidExporter.importCalibFromCsv( mApp.mDData, filename, mDevice.mAddress );
-      if ( ret != 0 ) { 
-        Toast.makeText(this, R.string.import_failed, Toast.LENGTH_SHORT).show();
-      } else {
-        Toast.makeText(this, R.string.import_calib_ok, Toast.LENGTH_SHORT).show();
+      switch ( TopoDroidExporter.importCalibFromCsv( mApp.mDData, filename, mDevice.mAddress ) ) {
+        case 0:
+          Toast.makeText(this, R.string.import_calib_ok, Toast.LENGTH_SHORT).show();
+          break;
+        case -1:
+          Toast.makeText(this, R.string.import_calib_no_header, Toast.LENGTH_SHORT).show();
+          break;
+        case -2:
+          Toast.makeText(this, R.string.import_calib_already, Toast.LENGTH_SHORT).show();
+          break;
+        case -3:
+          Toast.makeText(this, R.string.import_calib_mismatch, Toast.LENGTH_SHORT).show();
+          break;
+        case -4:
+          Toast.makeText(this, R.string.import_calib_no_data, Toast.LENGTH_SHORT).show();
+          break;
+        case -5:
+          Toast.makeText(this, R.string.import_calib_io_error, Toast.LENGTH_SHORT).show();
+          break;
+        default:
+          Toast.makeText(this, R.string.import_failed, Toast.LENGTH_SHORT).show();
       }
     }
   }

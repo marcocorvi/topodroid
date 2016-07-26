@@ -132,6 +132,11 @@
     <string name="import_none">Відсутній файл для импорту</string>
     <string name="import_failed">Не вдалося імпортувати файл</string>
     <string name="file_not_found">Файл не виявлено</string>
+    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
+    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
+    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
+    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
+    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
     <string name="import_calib_ok">Калібрування успішно імпортовано</string>
     <string name="import_zip_ok">Успішно імпортований zip файл</string>
     <string name="import_zip_wait">Імпорт zip файлу може зайняти багато часу. Почекайте &#8230;</string>

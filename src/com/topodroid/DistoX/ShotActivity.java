@@ -94,9 +94,10 @@ public class ShotActivity extends Activity
                         , ILister
                         , INewPlot
 {
-  final static int BTN_DOWNLOAD = 0;
-  final static int BTN_PLOT     = 3;
-  final static int BTN_AZIMUTH  = 7;
+  final static int BTN_DOWNLOAD  = 0;
+  final static int BTN_BLUETOOTH = 1;
+  final static int BTN_PLOT      = 3;
+  final static int BTN_AZIMUTH   = 7;
 
   private static int izons[] = {
                         R.drawable.iz_download,
@@ -713,6 +714,8 @@ public class ShotActivity extends Activity
   ArrayAdapter< String > mMenuAdapter;
   boolean onMenu = false;
 
+  BitmapDrawable mBMbluetooth;
+  BitmapDrawable mBMbluetooth_no;
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
   BitmapDrawable mBMdownload_wait;
@@ -768,6 +771,7 @@ public class ShotActivity extends Activity
     for ( int k=0; k<mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
       if ( k == BTN_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[k] ); }
+      else if ( k == BTN_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[k] ); }
       else if ( k == BTN_PLOT ) { mBMplot     = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial );
@@ -777,6 +781,7 @@ public class ShotActivity extends Activity
     mBMdownload_no   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_no );
     mBMleft          = MyButton.getButtonBackground( mApp, res, R.drawable.iz_left );
     mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
+    mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
 
     if ( TDSetting.mLevelOverBasic ) {
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
@@ -952,20 +957,21 @@ public class ShotActivity extends Activity
   void doBluetooth( Button b )
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
-    if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
-      if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
+    // Log.v( "DistoX", "Reset button, mode " + TDSetting.mConnectionMode );
+    
+    if ( ! mDataDownloader.isDownloading() ) {
+      // Log.v( "DistoX", "Reset button, not downloading, mode " + TDSetting.mConnectionMode );
+      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
+        CutNPaste.showPopupBT( this, this, mApp, b );
+      } else {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
+        mApp.resetComm();
+        Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
       }
-      CutNPaste.showPopupBT( this, this, mApp, b );
-      return;
+    // } else { // downloading: nothing
     }
-    mDataDownloader.setDownload( false );
-    mDataDownloader.stopDownloadData();
-    setConnectionStatus( mDataDownloader.getStatus() );
-    mApp.resetComm();
-    Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
   }
 
   @Override 
@@ -1455,17 +1461,21 @@ public class ShotActivity extends Activity
     if ( mApp.mDevice == null ) {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
       mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_no );
+      mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth_no );
     } else {
       // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
       switch ( status ) {
         case 1:
           mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_on );
+          mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth_no );
           break;
         case 2:
           mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload_wait );
+          mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth_no );
           break;
         default:
           mButton1[BTN_DOWNLOAD].setBackgroundDrawable( mBMdownload );
+          mButton1[BTN_BLUETOOTH].setBackgroundDrawable( mBMbluetooth );
       }
     }
   }
