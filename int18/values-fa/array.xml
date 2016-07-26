@@ -16,48 +16,25 @@
      <item name="experimental">تجربی</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
-  <string-array name="extraButtonsValue">
-     <item name="basic">0</item>
-     <item name="normal">1</item>
-     <item name="advanced">2</item>
-     <item name="experimental">3</item>
-     <!-- item name="complete">4</item -->
-  </string-array>
 
   <string-array name="sizeButtons">
      <item name="small1">کوچیک</item>
      <item name="large">بزرگ</item>
-  </string-array>
-  <string-array name="sizeButtonsValue">
-     <item name="small">1</item>
-     <item name="large">2</item>
   </string-array>
 
   <string-array name="logStream">
      <item name="android">لاگ سیستمی</item>
      <item name="file">لاگ فایلی</item>
   </string-array>
-  <string-array name="logStreamValue">
-     <item name="android">0</item>
-     <item name="file">1</item>
-  </string-array>
 
   <string-array name="connMode">
      <item name="batch">در صورت نیاز</item>
      <item name="continuous">مداوم</item>
   </string-array>
-  <string-array name="connModeValue">
-     <item name="batch">0</item>
-     <item name="continuous">1</item>
-  </string-array>
 
   <string-array name="altitudeType">
     <item name="wgs84">بیضی شکل</item>
     <item name="asl">اتومتریک</item>
-  </string-array>
-  <string-array name="altitudeTypeValue">
-    <item name="wgs84">0</item>
-    <item name="asl">1</item>
   </string-array>
 
   <string-array name="sockType">
@@ -65,12 +42,6 @@
      <item name="Insecure">Insecure</item>
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
-  </string-array>
-  <string-array name="sockTypeValue">
-     <item name="default">0</item>
-     <item name="Insecure">1</item>
-     <!-- item name="Port">2</item -->
-     <!-- item name="InsecurePort">3</item -->
   </string-array>
 
   <string-array name="surveyStations">
@@ -81,44 +52,22 @@
      <item name="back2">عقب leg, گسترده</item>
      <item name="anomaly">دید عقب</item>
   </string-array>
-  <string-array name="surveyStationsValue">
-     <item name="no">0</item>
-     <item name="for">1</item>
-     <item name="back">2</item>
-     <item name="for2">3</item>
-     <item name="back2">4</item>
-     <item name="anomaly">5</item>
-  </string-array>
 
   <string-array name="pickerType">
      <item name="list">لیست</item>
      <item name="grid">جدول</item>
-  </string-array>
-  <string-array name="pickerTypeValue">
-     <item name="list">0</item>
-     <item name="grid">1</item>
   </string-array>
 
   <!-- string-array name="deviceType">
      <item name="none">None</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
-  </string-array>
-  <string-array name="deviceTypeValue">
-     <item name="none">0</item>
-     <item name="A3">1</item>
-     <item name="X310">2</item>
   </string-array -->
 
   <string-array name="deviceBT">
      <item name="0">غیرفعال</item>
      <item name="1">چک در شروع</item>
      <item name="2">فعال</item>
-  </string-array>
-  <string-array name="deviceBTValue">
-     <item name="0">0</item>
-     <item name="1">1</item>
-     <item name="2">2</item>
   </string-array>
 
   <string-array name="exportType">
@@ -128,13 +77,6 @@
      <item name="tro">VisualTopo</item>
      <!-- item name="tlx">TopoLinux</item -->
   </string-array>
-  <string-array name="exportTypeValue">
-     <item name="th">th</item>
-     <item name="dat">dat</item>
-     <item name="svx">svx</item>
-     <item name="tro">tro</item>
-     <!-- item name="tlx">tlx</item -->
-  </string-array>
 
   <string-array name="lineStyle">
      <item name="none">خوب</item>
@@ -142,29 +84,14 @@
      <item name="two">درشت</item>
      <item name="bezier">بزیر</item>
   </string-array>
-  <string-array name="lineStyleValue">
-     <item name="none">1</item>
-     <item name="two">2</item>
-     <item name="three">3</item>
-     <item name="bezier">0</item>
-  </string-array>
 
   <string-array name="groupBy">
      <item name="distance">فاصله</item>
      <item name="four">برای یک زمان</item>
      <item name="only16">در شروع ۱۶</item>
   </string-array>
-  <string-array name="groupByValue">
-     <item name="distance">0</item>
-     <item name="four">1</item>
-     <item name="only16">2</item>
-  </string-array>
 
   <string-array name="unitLength">
-     <item name="meters">متر</item>
-     <item name="feet">فوت</item>
-  </string-array>
-  <string-array name="unitLengthValue">
      <item name="meters">متر</item>
      <item name="feet">فوت</item>
   </string-array>
@@ -173,29 +100,16 @@
      <item name="degrees">درجه اعشاری</item>
      <item name="grads">گرادیان اعشاری</item>
   </string-array>
-  <string-array name="unitAngleValue">
-     <item name="degrees">درجه</item>
-     <item name="grads">گرادیان</item>
-  </string-array>
 
   <string-array name="unitLocation">
      <item name="degrees">درجه اعشاری</item>
      <item name="ddmmss">درجه, دقیقه, ثانیه</item>
-  </string-array>
-  <string-array name="unitLocationValue">
-     <item name="degrees">درجه</item>
-     <item name="ddmmss">ddmmss</item>
   </string-array>
 
   <string-array name="calibAlgo">
      <item name="auto">اتوماتیک</item>
      <item name="linear">خطی</item>
      <item name="nonlinear">بدون خط</item>
-  </string-array>
-  <string-array name="calibAlgoValue">
-     <item name="auto">0</item>
-     <item name="linear">1</item>
-     <item name="nonlinear">2</item>
   </string-array>
 
 </resources>

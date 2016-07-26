@@ -79,7 +79,7 @@
   </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
-     <item name="none">Nessuno</item>
+     <item name="none">None</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
   </string-array -->
