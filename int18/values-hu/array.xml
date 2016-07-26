@@ -110,7 +110,7 @@
   </string-array>
 
   <string-array name="sockType">
-     <item name="default">Default</item>
+     <item name="default">Alapbeállítás</item>
      <item name="Insecure">Insecure</item>
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
@@ -123,7 +123,7 @@
      <item name="for2">Forward leg, splays</item>
      <item name="back2">Backward leg, splays</item>
      <item name="anomaly">Backsight</item>
-     <item name="tripod">Tripod</item>
+     <item name="tripod">Állvány</item>
   </string-array>
 
   <string-array name="pickerType">
@@ -173,9 +173,9 @@
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distance</item>
-     <item name="four">Four at a time</item>
-     <item name="only16">Only first 16</item>
+     <item name="distance">Távolság</item>
+     <item name="four">Négyet egy pontból</item>
+     <item name="only16">Csak az első 16</item>
   </string-array>
 
   <string-array name="unitLength">
@@ -189,13 +189,13 @@
   </string-array -->
 
   <string-array name="unitAngle">
-     <item name="degrees">decimal degrees</item>
-     <item name="grads">decimal grads</item>
+     <item name="degrees">fok tizedes értékekkel</item>
+     <item name="grads">újfok tizedes értékekkel</item>
   </string-array>
 
   <string-array name="unitLocation">
-     <item name="degrees">decimal degrees</item>
-     <item name="ddmmss">degree, minute, seconds</item>
+     <item name="degrees">fok tizedes értékekkel</item>
+     <item name="ddmmss">fok, perc, másodperc</item>
   </string-array>
 
   <string-array name="calibAlgo">
