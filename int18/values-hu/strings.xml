@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
-    <string name="no_manual">Cannot retrieve user manual from the web</string>
+    <string name="no_manual">Cannot retrieve user manual from the web*Nem lehet letölteni a kézikönyvet az internetről</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Click BACK again to exit</string>
+    <string name="double_back">Click BACK again to exit* Nyomd meg mégegyszer a kilépéshez</string>
 
-    <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string>
-    <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string>
+    <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?*A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string>
+    <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)*Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
 
-    <string name="POINT">POINT</string>
-    <string name="LINE">LINE</string>
-    <string name="AREA">AREA</string>
-    <string name="HELP">HELP</string>
-    <string name="STATION">STATION </string>
+    <string name="POINT">POINT*PONT</string>
+    <string name="LINE">LINE*VONAL</string>
+    <string name="AREA">AREA*TERÜLET</string>
+    <string name="HELP">HELP*Segítség</string>
+    <string name="STATION">STATION*MÉRÉSI PONT</string>
 
-    <string name="cut">CUT</string>
-    <string name="copy">COPY</string>
-    <string name="paste">PASTE</string>
-    <string name="copied">Copied %1$s to clipboard</string>
+    <string name="cut">CUT*VÁGÁS</string>
+    <string name="copy">COPY*MÁSOLÁS</string>
+    <string name="paste">PASTE*BEILLESZTÉS</string>
+    <string name="copied">Copied %1$s to clipboard* %1$s másolva a vágólapra</string>
 
-    <string name="memoryA3">DistoX A3 memory</string>
-    <string name="memoryX310">DistoX X310 memory</string>
+    <string name="memoryA3">DistoX A3 memory*DistoX A3 memória </string>
+    <string name="memoryX310">DistoX X310 memory*DistoX X310 memória</string>
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
-    <string name="thp_user">user</string>
-    <string name="thp_label">label</string>
+    <string name="thp_user">user*felhasználó</string>
+    <string name="thp_label">label*cinke</string>
     <!-- string name="thp_danger">danger</string -->
-    <string name="thl_user">user</string>
-    <string name="thl_wall">wall</string>
-    <string name="tha_user">user</string>
-    <string name="tha_water">water</string>
+    <string name="thl_user">user*felhasználó</string>
+    <string name="thl_wall">wall*fal</string>
+    <string name="tha_user">user*felhasználó</string>
+    <string name="tha_water">water*víz</string>
 
-    <string name="make_walls">Walls</string>
-    <string name="missing_station">Missing station</string>
+    <string name="make_walls">Walls*Falak</string>
+    <string name="missing_station">Missing station*Hiányzó mérési pont</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -42,23 +42,23 @@
     <!-- UNUSED string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
     <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
     <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
-    <string name="failed_snap_to_line">No close line-point to snap the area border to</string>
-    <string name="failed_snap_to_point">No close point to snap the point to</string>
+    <string name="failed_snap_to_line">No close line-point to snap the area border to*Nincs közeli vonal-pont, melyhez a terület határa illeszthető</string>
+    <string name="failed_snap_to_point">No close point to snap the point to*Nincs közeli pont, amihez a pont illeszthető</string>
 
-    <string name="calibration_title">Instruments calibration</string>
-    <string name="calibration_length">Tape</string>
-    <string name="calibration_azimuth">Compass</string>
-    <string name="calibration_clino">Clino</string>
+    <string name="calibration_title">Instruments calibration*Eszközök kalibrálása</string>
+    <string name="calibration_length">Tape*Mérőszalag</string>
+    <string name="calibration_azimuth">Compass*Tájoló</string>
+    <string name="calibration_clino">Clino*Lejtszögmérő</string>
 
-    <string name="calib_new">New Calibration</string>
-    <string name="calib_exists">Calibration already exists</string>
-    <string name="calib_delete">Delete calibration </string>
-    <string name="calib_device_mismatch">WARNING: Calibration-Device mismatch</string>
-    <string name="calib_no_name">The name is mandatory</string>
-    <string name="calib_gm_policy">Policy</string>
-    <string name="calib_gm_undelete">Undelete calibration data?</string>
-    <string name="calib_saved">Saved calibration</string>
-    <string name="calib_updated">Updated calibration</string>
+    <string name="calib_new">New Calibration*Új kalibráció</string>
+    <string name="calib_exists">Calibration already exists*Kalibráció neve foglalt</string>
+    <string name="calib_delete">Delete calibration*Kalibráció törlése</string>
+    <string name="calib_device_mismatch">WARNING: Calibration-Device mismatch*FIGYELEM: A kalibrációs fájl másik eszközzel készült</string>
+    <string name="calib_no_name">The name is mandatory*Név megadása kötelező</string>
+    <string name="calib_gm_policy">Policy*Eljárás</string>
+    <string name="calib_gm_undelete">Undelete calibration data?*Helyreállítja a kalibrációs adatokat</string>
+    <string name="calib_saved">Saved calibration*Mentett kalibráció</string>
+    <string name="calib_updated">Updated calibration*Az eszköz kalibrációja frissítve</string>
     <string name="calib_compute_groups">Computing calibration data groups &#8230;</string>
     <string name="calib_compute_coeffs">Computing calibration coefficients &#8230;</string>
     <!-- string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
