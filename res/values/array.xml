@@ -5,10 +5,12 @@
   <string-array name="unitGrid">
      <item name="meter">meter</item>
      <item name="yard">yard</item>
+     <item name="two_tf">2 feet</item>
   </string-array>
   <string-array name="unitGridValue">
      <item name="meter">1.0</item>
      <item name="yard">0.914</item>
+     <item name="two_tf">0.6096</item>
   </string-array>
 
   <string-array name="survexEol">

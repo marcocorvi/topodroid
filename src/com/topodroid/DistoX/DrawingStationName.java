@@ -206,9 +206,10 @@ public class DrawingStationName extends DrawingPointPath
   public void flipXAxis( float z )
   {
     super.flipXAxis(z);
+    // mPath.offset( -2 * cx, 0 );
+
     if ( mXSectionType != PlotInfo.PLOT_NULL ) {
-      // FIXME FLIP
-      mDX = -mDX;
+      mDX = - mDX; // FLIP flip direction
     }
   }
 

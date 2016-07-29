@@ -2,10 +2,11 @@
 
 <resources>
 
-  <string-array name="unitGrid">
+  <!-- FIXME string-array name="unitGrid">
      <item name="meter">метры</item>
      <item name="yard">ярды</item>
-  </string-array>
+     <item name="two_tf">2 feet</item>
+  </string-array -->
 
   <string-array name="wallsType">
      <item name="none">Нету</item>

@@ -49,6 +49,7 @@ public class DrawingStationPath extends DrawingPath
     cx = x;
     cy = y;
     mName = name;
+    setBBox( cx-10, cx+10, cy-10, cy+10 );
 
     mScale = DrawingPointPath.SCALE_NONE; // scale
     // mPath = null;
@@ -79,7 +80,7 @@ public class DrawingStationPath extends DrawingPath
   void setScale( int scale )
   {
     if ( scale != mScale ) {
-      TDLog.Error( "set scale " + scale );
+      // TDLog.Error( "set scale " + scale );
       mScale = scale;
       // station point does not have text
       float f = 1.0f;

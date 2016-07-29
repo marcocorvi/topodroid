@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
+  <!-- TODO string-array name="unitGrid">
+     <item name="meter">meter</item>
+     <item name="yard">yard</item>
+     <item name="two_tf">2 feet</item>
+  </string-array -->
   
   <string-array name="extend_name">
      <item>چپ</item>

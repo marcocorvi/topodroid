@@ -104,11 +104,8 @@ public class DrawingPath extends RectF
   
   public void flipXAxis( float z )
   {
-    float x0 = TopoDroidApp.mDisplayWidth / 2;
-    float offx = 2 * ( x0 + cx );
-    float offc = 2 * ( x0 - cx );
-    float dx = 2 * x0;
-    float oldcx = cx;
+    float dx = 2 * DrawingUtil.CENTER_X;
+    float offx = dx - 2 * cx; // OK for non-orientable points
     cx = dx - cx;
     x1 = dx - x1;
     x2 = dx - x2;
@@ -116,26 +113,30 @@ public class DrawingPath extends RectF
     left = dx - right;
     right = r1;
     boolean flip_path = false;
-    if ( mType != DRAWING_PATH_POINT ) return;
-    DrawingPointPath dpp = (DrawingPointPath)this;
-    if ( dpp.mOrientation != 0 ) {
-      dpp.mOrientation = 360 - dpp.mOrientation;
-      flip_path = true;
-      offx = 2 * x0;
-    } else {
-      offx = offc;
-    }
-    // Log.v("DistoX", "x0 " + x0 + " offx " + offx + " Cx " + oldcx + " -> " + cx);
-    if ( mPath != null ) {
-      if ( flip_path ) {
-        float m[] = new float[9]; // { -1, 0, 0, 0, 1, 0, 0, 0, 1 };
-        android.graphics.Matrix mat = new android.graphics.Matrix();
-        mat.getValues( m );
-        m[0] = -m[0];
-        mat.setValues( m );
-        mPath.transform( mat );
+    if ( mType == DRAWING_PATH_POINT ) {
+      DrawingPointPath dpp = (DrawingPointPath)this;
+      if ( dpp.mOrientation != 0 ) {
+        dpp.mOrientation = 360 - dpp.mOrientation;
+        flip_path = true;
+        offx = dx;
+      } else {
       }
-      mPath.offset( offx, 0 );
+      // Log.v("DistoX", "x0 " + x0 + " offx " + offx + " Cx " + oldcx + " -> " + cx);
+      if ( mPath != null ) {
+        if ( flip_path ) {
+          float m[] = new float[9]; // { -1, 0, 0, 0, 1, 0, 0, 0, 1 };
+          android.graphics.Matrix mat = new android.graphics.Matrix();
+          mat.getValues( m );
+          m[0] = -m[0];
+          mat.setValues( m );
+          mPath.transform( mat );
+        }
+        mPath.offset( offx, 0 );
+      }
+    } else if ( mType == DRAWING_PATH_STATION ) {
+      if ( mPath != null ) {
+        mPath.offset( offx, 0 );
+      }
     }
   }
 

@@ -174,6 +174,11 @@ public class DrawingCommandManager
       }
       mSelection = selection;
     }
+    synchronized( mUserStations ) {
+      for ( DrawingStationPath p : mUserStations ) {
+        p.flipXAxis(z);
+      }
+    }
   }
 
   /* Shift the drawing
