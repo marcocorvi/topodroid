@@ -33,7 +33,7 @@ public class LinePoint extends BezierPoint
   LinePoint mPrev;  // previous LinePoint on the line
   LinePoint mNext;  // next LinePoint on the line
 
-  void flipXAxis()
+  void flipXAxis(float z)
   {
     float dx = 2 * DrawingUtil.CENTER_X;
     mX1 = dx - mX1;

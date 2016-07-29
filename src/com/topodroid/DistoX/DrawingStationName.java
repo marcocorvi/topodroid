@@ -203,10 +203,13 @@ public class DrawingStationName extends DrawingPointPath
   }
 
   @Override
-  public void flipXAxis()
+  public void flipXAxis( float z )
   {
-    super.flipXAxis();
-    if ( mXSectionType != PlotInfo.PLOT_NULL ) mDX = -mDX;
+    super.flipXAxis(z);
+    if ( mXSectionType != PlotInfo.PLOT_NULL ) {
+      // FIXME FLIP
+      mDX = -mDX;
+    }
   }
 
 }

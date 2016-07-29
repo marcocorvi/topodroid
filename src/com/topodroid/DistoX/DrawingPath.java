@@ -102,12 +102,13 @@ public class DrawingPath extends RectF
     return true;
   }
   
-  public void flipXAxis()
+  public void flipXAxis( float z )
   {
     float x0 = TopoDroidApp.mDisplayWidth / 2;
     float offx = 2 * ( x0 + cx );
     float offc = 2 * ( x0 - cx );
     float dx = 2 * x0;
+    float oldcx = cx;
     cx = dx - cx;
     x1 = dx - x1;
     x2 = dx - x2;
@@ -124,15 +125,18 @@ public class DrawingPath extends RectF
     } else {
       offx = offc;
     }
-    if ( flip_path && mPath != null ) {
-      float m[] = new float[9]; // { -1, 0, 0, 0, 1, 0, 0, 0, 1 };
-      android.graphics.Matrix mat = new android.graphics.Matrix();
-      mat.getValues( m );
-      m[0] = -m[0];
-      mat.setValues( m );
-      mPath.transform( mat );
+    // Log.v("DistoX", "x0 " + x0 + " offx " + offx + " Cx " + oldcx + " -> " + cx);
+    if ( mPath != null ) {
+      if ( flip_path ) {
+        float m[] = new float[9]; // { -1, 0, 0, 0, 1, 0, 0, 0, 1 };
+        android.graphics.Matrix mat = new android.graphics.Matrix();
+        mat.getValues( m );
+        m[0] = -m[0];
+        mat.setValues( m );
+        mPath.transform( mat );
+      }
+      mPath.offset( offx, 0 );
     }
-    mPath.offset( offx, 0 );
   }
 
   // get the path color (or white)

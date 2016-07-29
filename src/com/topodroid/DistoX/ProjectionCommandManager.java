@@ -100,28 +100,29 @@ public class ProjectionCommandManager
   //   }
   // }
 
-  private void flipXAxis( List<DrawingPath> paths )
+  private void flipXAxes( List<DrawingPath> paths )
   {
+    final float z = 1/mScale;
     final Iterator i1 = paths.iterator();
     while ( i1.hasNext() ){
       final DrawingPath drawingPath = (DrawingPath) i1.next();
-      drawingPath.flipXAxis();
+      drawingPath.flipXAxis( z );
     }
   }
 
-  void flipXAxis()
+  void flipXAxis(float z)
   {
     synchronized( mGridStack1 ) {
-      flipXAxis( mGridStack1 );
-      flipXAxis( mGridStack10 );
-      flipXAxis( mGridStack100 );
+      flipXAxes( mGridStack1 );
+      flipXAxes( mGridStack10 );
+      flipXAxes( mGridStack100 );
     }
-    synchronized( mLegsStack )   { flipXAxis( mLegsStack ); }
-    synchronized( mSplaysStack ) { flipXAxis( mSplaysStack ); }
+    synchronized( mLegsStack )   { flipXAxes( mLegsStack ); }
+    synchronized( mSplaysStack ) { flipXAxes( mSplaysStack ); }
  
     synchronized( mStations ) {
       for ( DrawingStationName st : mStations ) {
-        st.flipXAxis();
+        st.flipXAxis(z);
       }
     }
     if ( mCurrentStack != null ) {
@@ -131,7 +132,7 @@ public class ProjectionCommandManager
         while ( i.hasNext() ){
           final ICanvasCommand cmd = (ICanvasCommand) i.next();
           if ( cmd.commandType() == 0 ) {
-            cmd.flipXAxis();
+            cmd.flipXAxis(z);
             DrawingPath path = (DrawingPath)cmd;
             if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;

@@ -247,10 +247,10 @@ public class DrawingSurface extends SurfaceView
     }
   }
 
-  void flipProfile()
+  void flipProfile( float z )
   {
     if ( mCommandManager2 == null ) return;
-    mCommandManager2.flipXAxis();
+    mCommandManager2.flipXAxis( z );
   }
 
   // static Handler previewDoneHandler = new Handler()

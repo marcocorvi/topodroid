@@ -2931,7 +2931,7 @@ public class DrawingActivity extends ItemDrawer
     // @note barrier shots are not flipped; hiding shots are flipped
     public void flipProfile( boolean flip_shots )
     {
-      mDrawingSurface.flipProfile( );
+      mDrawingSurface.flipProfile( mZoom );
       if ( flip_shots ) {
         DistoXDBlock blk;
         for ( NumShot sh : mNum.getShots() ) {

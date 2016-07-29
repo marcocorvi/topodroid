@@ -81,11 +81,11 @@ public class DrawingPointLinePath extends DrawingPath
     
 
   @Override
-  public void flipXAxis()
+  public void flipXAxis( float z )
   {
-    super.flipXAxis();
+    super.flipXAxis(z);
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) {
-      lp.flipXAxis();
+      lp.flipXAxis(z);
     }
     retracePath();
   }

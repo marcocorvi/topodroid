@@ -24,7 +24,7 @@ public interface ICanvasCommand {
 
     // public void undoCommand();
 
-    public void flipXAxis();
+    public void flipXAxis(float z);
     public void shiftPathBy( float x, float y );
     public void computeBounds( RectF bounds, boolean b );
 
