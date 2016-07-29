@@ -343,7 +343,6 @@ class ItemPickerDialog extends MyDialog
           mPointAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_POINT, i, p, use_text ) );
         }
       }
-      mPointAdapter.setSelectedItem( mSelectedPoint );
     }
 
     mLineAdapter  = new ItemAdapter( mContext, this, DrawingActivity.SYMBOL_LINE,
@@ -355,7 +354,6 @@ class ItemPickerDialog extends MyDialog
         mLineAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_LINE, j, l, use_text ) );
       }
     }
-    mLineAdapter.setSelectedItem( mSelectedLine ); 
 
     // if ( TDSetting.mLevelOverBasic )
     {
@@ -368,8 +366,10 @@ class ItemPickerDialog extends MyDialog
           mAreaAdapter.add( new ItemSymbol( mContext, this, DrawingActivity.SYMBOL_AREA, k, a, use_text ) );
         }
       }
-      mAreaAdapter.setSelectedItem( mSelectedArea );
     }
+    mPointAdapter.setSelectedItem( mSelectedPoint );
+    mLineAdapter.setSelectedItem( mSelectedLine ); 
+    mAreaAdapter.setSelectedItem( mSelectedArea );
   }
 
   private void updateList()
@@ -416,6 +416,7 @@ class ItemPickerDialog extends MyDialog
         }
       }
     } else {
+      setShowSelected();
       mGrid.setAdapter( mPointAdapter );
       mGrid.invalidate();
       mGridL.setAdapter( mLineAdapter );
@@ -423,6 +424,28 @@ class ItemPickerDialog extends MyDialog
       mGridA.setAdapter( mAreaAdapter );
       mGridA.invalidate();
     }
+  }
+ 
+  // used by triple grid GRID_3
+  private void setShowSelected()
+  {
+      switch ( mItemType ) {
+        case DrawingActivity.SYMBOL_POINT:
+          mPointAdapter.setShowSelected( true );
+          mLineAdapter.setShowSelected( false );
+          mAreaAdapter.setShowSelected( false );
+        break;
+        case DrawingActivity.SYMBOL_LINE:
+          mPointAdapter.setShowSelected( false );
+          mLineAdapter.setShowSelected( true );
+          mAreaAdapter.setShowSelected( false );
+        break;
+        case DrawingActivity.SYMBOL_AREA:
+          mPointAdapter.setShowSelected( false );
+          mLineAdapter.setShowSelected( false );
+          mAreaAdapter.setShowSelected( true );
+        break;
+      }
   }
 
   private void setTheTitle()
@@ -492,6 +515,7 @@ class ItemPickerDialog extends MyDialog
         break;
     }
     // cancel();
+    setShowSelected();
     setTheTitle();
   }
 

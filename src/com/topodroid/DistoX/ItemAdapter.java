@@ -36,6 +36,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private IItemPicker mParent;
   private int mPos;    
   private int mType;
+  private boolean mShowSelected;
 
 
   /** get the item at a certain position in the list of symbols 
@@ -56,6 +57,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     mParent = parent;
     mPos    = -1;
     mType   = type;
+    mShowSelected = true;
 
     if ( items != null ) {
       mItems = items;
@@ -89,8 +91,17 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     }
   }
 
+  void setShowSelected( boolean s ) 
+  { 
+    mShowSelected = s;
+    if ( mPos >= 0 ) {
+      mItems.get( mPos ).setChecked( mShowSelected );
+    }
+  }
+
   // ItemSymbol get( int pos ) { return mItems.get(pos); }
   int getSelectedPos() { return mPos; }
+
   // ItemSymbol getSelectedItem() { return ( mPos >= 0 && mPos < mItems.size() )? mItems.get(mPos) : null; }
   // public int size() { return mItems.size(); }
 
