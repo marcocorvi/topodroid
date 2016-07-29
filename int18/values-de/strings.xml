@@ -274,6 +274,7 @@
     <string name="menu_recover">WIEDERHERSTELLEN</string>
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename">UMBENENNEN</string>
+    <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">HILFE</string>
     <string name="menu_join_survey">CO-VERMESSUNG</string>
     <string name="menu_logs">LOGS</string>
@@ -612,12 +613,13 @@
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Skizzenelemente anzeigen</string>
     <string name="help_rename">Ändere Vermessungsname</string>
-    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
+    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
+    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
     <string name="help_stats">Vermessungs-Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <!-- UNUSED string name="help_tdr2th2">Erstelle th2 Dateien der Skizzen</string -->
     <string name="help_toggle_plot">Zwischen der Draufsicht und Seitenansicht wechseln</string>
-    <string name="help_trash">Die Skizze löschen</string>
+    <!-- UNUSED string name="help_trash">Die Skizze löschen</string -->
     <string name="help_undo">Letzte Aktion rückgängig machen</string>
     <string name="help_redo">Letzte Aktion wiederholen</string>
     <string name="help_symbol_plot">Zeichenwerkzeug auswählen</string>

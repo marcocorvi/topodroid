@@ -42,12 +42,15 @@ public class PlotListDialog extends MyDialog
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
 {
-  private ShotActivity mParent;
+  private ShotActivity    mParent;
+  private DrawingActivity mParent2;
   private TopoDroidApp mApp;
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnPlotNew;
   // private Button mBtnBack;
+
+  private boolean mDoNew;
 
   // FIXME_SKETCH_3D
   private Button mBtnSketch3dNew;
@@ -57,11 +60,13 @@ public class PlotListDialog extends MyDialog
   // private ListView mList;
   private GridView mList;
 
-  public PlotListDialog( Context context, ShotActivity parent, TopoDroidApp app )
+  public PlotListDialog( Context context, ShotActivity parent, TopoDroidApp app, DrawingActivity parent2 )
   {
     super( context, R.string.PlotListDialog );
-    mParent = parent;
+    mParent  = parent;
+    mParent2 = parent2;
     mApp = app;
+    mDoNew = ( mParent2 == null );
   }
 
   @Override
@@ -81,12 +86,17 @@ public class PlotListDialog extends MyDialog
     mBtnPlotNew     = (Button) findViewById(R.id.plot_new);
     // mBtnBack = (Button) findViewById(R.id.btn_back);
 
-    mBtnPlotNew.setOnClickListener( this );
+    if ( mDoNew ) {
+      mBtnPlotNew.setOnClickListener( this );
+    } else {
+      mBtnPlotNew.setEnabled( false );
+      mBtnPlotNew.setVisibility( View.GONE );
+    }
     // mBtnBack.setOnClickListener( this );
 
     // FIXME_SKETCH_3D
       mBtnSketch3dNew = (Button) findViewById(R.id.sketch3d_new);
-      if ( mApp.mSketches ) {
+      if ( mApp.mSketches && mDoNew ) {
         mBtnSketch3dNew.setOnClickListener( this );
       } else {
         mBtnSketch3dNew.setEnabled( false );
@@ -151,12 +161,15 @@ public class PlotListDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnPlotNew ) {
       hide();
-      int idx = 1 + mApp.mData.maxPlotIndex( mApp.mSID );
-      new PlotNewDialog( mParent, mApp, mParent, idx ).show();
-
+      if ( mParent != null ) {
+        int idx = 1 + mApp.mData.maxPlotIndex( mApp.mSID );
+        new PlotNewDialog( mParent, mApp, mParent, idx ).show();
+      }
     // FIXME_SKETCH_3D
     } else if ( mApp.mSketches && b == mBtnSketch3dNew ) {
-      new Sketch3dNewDialog( mParent, mParent, mApp ).show();
+      if ( mParent != null ) {
+        new Sketch3dNewDialog( mParent, mParent, mApp ).show();
+      }
     // END_SKETCH_3D //
 
     // } else if ( b == mBtnBack ) {
@@ -208,10 +221,16 @@ public class PlotListDialog extends MyDialog
       }
 
       // long plot_type = (( position % 2 ) == 0 )? PlotInfo.PLOT_PLAN : PlotInfo.PLOT_EXTENDED;
-      mParent.startExistingPlot( plot_name, plot_type, null ); // context of current SID
+      if ( mParent != null ) {
+        mParent.startExistingPlot( plot_name, plot_type, null ); // context of current SID
+      } else {
+        mParent2.switchNameAndType( plot_name, plot_type ); // context of current SID
+      }
     } else {
-      String sketch_name = value.substring( from+1, to );
-      mParent.startSketchActivity( sketch_name ); // context of current SID
+      if ( mParent != null ) {
+        String sketch_name = value.substring( from+1, to );
+        mParent.startSketchActivity( sketch_name ); // context of current SID
+      }
     }
     dismiss();
   }

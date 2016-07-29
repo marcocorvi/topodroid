@@ -258,6 +258,7 @@
     <string name="menu_recover">RESTAURAR</string>
     <string name="menu_reload">RECARREGAR</string>
     <string name="menu_rename">RENOMEAR</string>
+    <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">AJUDA</string>
     <string name="menu_join_survey">MAPA COLABORATIVO</string>
     <string name="menu_logs">REGISTROS</string>
@@ -589,12 +590,14 @@
     <string name="help_edit">Modalidade editing</string>
     <string name="help_refs">Escoler referências do esboço</string>
     <string name="help_rename">Mudar nome do mapa</string>
+    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
+    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
     <string name="help_stats">Diálogo estatísticas do mapa</string>
     <string name="help_save_plot">Exportar esboço</string>
     <string name="help_save_plot">Export sketch</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Pular entre vista em plata ou secção</string>
-    <string name="help_trash">apagar esboço</string>
+    <!-- UNUSED string name="help_trash">apagar esboço</string -->
     <string name="help_undo">Apagar última ação de desenho</string>
     <string name="help_redo">Refazer última ação de desenho</string>
     <string name="help_symbol_plot">Selecionar a ferramenta de desenho atual</string>

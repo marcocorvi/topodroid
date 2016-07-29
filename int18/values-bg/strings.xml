@@ -255,6 +255,7 @@
     <string name="menu_recover">Възстановяване</string>
     <string name="menu_reload">Препрочитане</string>
     <string name="menu_rename">Преименуване</string>
+    <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">Помощ</string>
     <string name="menu_join_survey">Ко-картиране</string>
     <string name="menu_logs">Лог файлове</string>
@@ -584,12 +585,13 @@
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
     <string name="help_rename">Преименуване на картировката</string>
-    <string name="help_plot_rename">Преименуване на скицата</string>
+    <!-- FIXME string name="help_plot_rename">Преименуване на скицата</string -->
+    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертиране на двоични файлове на скици в th2</string -->
     <string name="help_toggle_plot">Превключване на хор. план/верт. разрез</string>
-    <string name="help_trash">Изтриване на скица</string>
+    <!-- UNUSED string name="help_trash">Изтриване на скица</string -->
     <string name="help_undo">Изтриване на действие от скицата</string>
     <string name="help_redo">Възстановяване на действие от скицата</string>
     <string name="help_symbol_plot">Избор на елемент за рисуване</string>

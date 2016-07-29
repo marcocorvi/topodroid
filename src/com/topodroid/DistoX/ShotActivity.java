@@ -1025,7 +1025,7 @@ public class ShotActivity extends Activity
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
         new ShotDisplayDialog( this, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SKETCH
-        new PlotListDialog( this, this, mApp ).show();
+        new PlotListDialog( this, this, mApp, null ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // NOTE
         if ( mApp.mySurvey != null ) {
           (new DistoXAnnotations( this, mApp.mySurvey )).show();

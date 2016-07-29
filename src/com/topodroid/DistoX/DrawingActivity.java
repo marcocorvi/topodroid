@@ -149,7 +149,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.menu_stats,      // 1
                         R.string.menu_reload,
                         R.string.menu_zoom_fit,
-                        R.string.menu_delete,
+                        R.string.menu_switch,
                         R.string.menu_rename,
                         R.string.menu_palette,    // 6
                         R.string.menu_overview,
@@ -185,7 +185,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_stats,
                         R.string.help_recover,
                         R.string.help_zoom_fit,
-                        R.string.help_trash,
+                        R.string.help_plot_switch,
                         R.string.help_plot_rename,
                         R.string.help_symbol,
                         R.string.help_overview,
@@ -612,6 +612,12 @@ public class DrawingActivity extends ItemDrawer
     }
   }
 
+  void switchExistingPlot( String plot_name, long plot_type ) // context of current SID
+  {
+    doSaveTdr();
+
+
+  }
 
   // called by doPause 
   private void doSaveTdr( )
@@ -1183,6 +1189,37 @@ public class DrawingActivity extends ItemDrawer
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
     } 
+  }
+
+  // called by PlotListDialog
+  void switchNameAndType( String name, long t ) // SWITCH
+  {
+    mZoom     = mApp.mScaleFactor;    // canvas zoom
+    mOffset.x = 0;
+    mOffset.y = 0;
+    PlotInfo p1 = mApp.mData.getPlotInfo( mApp.mSID, name+"p" );
+    if ( p1 != null ) {
+      // PlotInfo plot2 =  mApp.mData.getPlotInfo( mApp.mSID, name+"s" );
+      mName1 = name+"p";
+      mName2 = name+"s";
+      mFullName1 = mApp.mySurvey + "-" + mName1;
+      mFullName2 = mApp.mySurvey + "-" + mName2;
+      mFullName3 = null;
+      mType  = t;
+      mName    = (mType == PlotInfo.PLOT_PLAN)? mName1 : mName2;
+
+      mFrom    = p1.start;
+      mTo      = "";
+      mAzimuth = 0;
+      mClino   = 0;
+      mMoveTo  = null;
+      mSectionName  = null; // resetStatus
+      mShiftDrawing = false;
+      mContinueLine = CONT_NO;
+      mModified     = false;
+
+      doStart( true );
+    }
   }
 
     @Override
@@ -2605,7 +2642,7 @@ public class DrawingActivity extends ItemDrawer
       finish();
     }
 
-    private void askDelete()
+    void askDelete()
     {
       TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.plot_delete,
         new DialogInterface.OnClickListener() {
@@ -3573,8 +3610,8 @@ public class DrawingActivity extends ItemDrawer
     mMenuAdapter.add( res.getString( menus[2] ) );  // RELOAD
     mMenuAdapter.add( res.getString( menus[3] ) );  // ZOOM_FIT
     if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[4] ) ); // DELETE
-      mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME
+      mMenuAdapter.add( res.getString( menus[4] ) ); // SWITCH
+      mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
     mMenuAdapter.add( res.getString( menus[6] ) ); // PALETTE
     if ( PlotInfo.isSketch2D( type ) ) {
@@ -3627,9 +3664,11 @@ public class DrawingActivity extends ItemDrawer
         mOffset.y = TopoDroidApp.mDisplayHeight / (2*mZoom) - (b.top + b.bottom) / 2;
         // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // DELETE
-        askDelete();
-      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME
+      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // SWITCH
+        // TODO sketch switch 
+        new PlotListDialog( this, null, mApp, this ).show();
+      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
+        //   askDelete();
         (new PlotRenameDialog( this, this, mApp )).show();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );

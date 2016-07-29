@@ -240,6 +240,7 @@
     <string name="menu_recover">POPRAVI</string>
     <string name="menu_reload">NALOŽI</string>
     <string name="menu_rename">PREIMENUJ</string>
+    <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">POMOČ</string>
     <string name="menu_join_survey">PRIDR.NAČRT</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
@@ -520,12 +521,13 @@
     <string name="help_edit">Način urejanje</string>
     <string name="help_refs">Izberi referenco za načrt</string>
     <string name="help_rename">Spremeni ime načrta</string>
-    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
+    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
+    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
     <string name="help_stats">Statistika načrta</string>
     <string name="help_save_plot">Izvozi skico</string>
     <!-- UNUSED string name="help_tdr2th2">Pretvorba formata skice iz binarega v th2</string -->
     <string name="help_toggle_plot">Preidi iz tlorisa na iztg.profil.</string>
-    <string name="help_trash">Odstrani skico</string>
+    <!-- UNUSED string name="help_trash">Odstrani skico</string -->
     <string name="help_undo">Izbriši zadnji aktivnost  skice</string>
     <string name="help_redo">Ponovi zadnjo aktivnost skice</string>
     <string name="help_symbol_plot">Izberi prototip za skico</string>

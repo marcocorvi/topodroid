@@ -244,6 +244,7 @@
 <string name="menu_recover">RECUPÉRER</string>
 <string name="menu_reload">RECHARGER</string>
 <string name="menu_rename">RENOMMER</string>
+    <!-- TODO string name="menu_switch">SWITCH</string -->
 <string name="menu_help">AIDE</string>
 <string name="menu_join_survey">CO-RELEVÉ</string>
 <string name="menu_logs">JOURNALISATION</string>
@@ -565,11 +566,13 @@
     <string name="help_edit">Mode d\'édition</string>
     <string name="help_refs">Choix des références de dessin</string>
     <string name="help_rename">Change le nom de la topographie</string>
+    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
+    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
     <string name="help_stats">Statistiques du relevé</string>
     <string name="help_save_plot">Exporte le croquis</string>
     <!-- UNUSED string name="help_tdr2th2">Converti dessin vers format th2</string -->
     <string name="help_toggle_plot">Bascule entre plan et section étendue</string>
-    <string name="help_trash">Supprime le croquis</string>
+    <!-- UNUSED string name="help_trash">Supprime le croquis</string -->
     <string name="help_undo">Annule la dernière action</string>
     <string name="help_redo">Rétabli la dernière action</string>
     <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>

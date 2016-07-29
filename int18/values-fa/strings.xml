@@ -212,6 +212,8 @@
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">بازیابی</string>
     <string name="menu_reload">خواندن مجدد</string>
+    <!-- TODO string name="menu_rename">RENANE</string -->
+    <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">راهنما</string>
     <string name="menu_join_survey">CO-SURVEY</string>
     <string name="menu_logs">کارنامه عملیات</string>
@@ -533,10 +535,13 @@
     <string name="help_draw">وارد کردن حالت طراحی</string>
     <string name="help_edit">وارد کردن حالت ویرایش</string>
     <string name="help_refs">انتخاب منابع طراحی</string>
+    <!-- TODO string name="help_rename">Rename survey</string -->
+    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
+    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
     <string name="help_stats">پنجره امار نقشه کشی</string>
     <string name="help_save_plot">خروج طرح</string>
     <string name="help_toggle_plot">سوییچ بین نقشه و بخش های خارجی.</string>
-    <string name="help_trash">پاک کردن طرح</string>
+    <!-- UNUSED string name="help_trash">پاک کردن طرح</string -->
     <string name="help_undo">برگشت به آخرین عملیات طراحی</string>
     <string name="help_redo">رفتن به اخرین عملیات طراحی</string>
     <string name="help_symbol_plot">انتخاب ابزار طراحی فعلی</string>

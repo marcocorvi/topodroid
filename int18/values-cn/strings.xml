@@ -251,6 +251,7 @@
     <string name="menu_recover">恢复</string>
     <string name="menu_reload">重新导入</string>
     <string name="menu_rename">重命名</string>
+    <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">帮助</string>
     <string name="menu_join_survey">联合测量</string>
     <string name="menu_logs">日志设定</string>
@@ -579,12 +580,13 @@
     <string name="help_edit">编辑模式</string>
     <string name="help_refs">选择草图参考</string>
     <string name="help_rename">修改测量名称</string>
-    <!-- TODO string name="help_plot_rename">Change sketch name</string -->
+    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
+    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
     <string name="help_stats">测量点对话框</string>
     <string name="help_save_plot">输出草图</string>
     <!-- UNUSED string name="help_tdr2th2">转换二进制草图文件到th2</string -->
     <string name="help_toggle_plot">在平面图和侧面图之间切换</string>
-    <string name="help_trash">删除草图</string>
+    <!-- UNUSED string name="help_trash">删除草图</string -->
     <string name="help_undo">取消上一次操作</string>
     <string name="help_redo">重做上一次操作</string>
     <string name="help_symbol_plot">选择最近使用的绘图工具</string>

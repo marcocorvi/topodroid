@@ -31,7 +31,7 @@ public class PlotRenameDialog extends MyDialog
 {
   private EditText mEtName;
   private Button   mBtnOK;
-  // private Button   mBtnCancel;
+  private Button   mBtnDelete;
 
   private DrawingActivity mParent;
   private TopoDroidApp mApp;
@@ -52,10 +52,10 @@ public class PlotRenameDialog extends MyDialog
     setContentView(R.layout.plot_rename_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
     mBtnOK  = (Button) findViewById(R.id.btn_ok );
-    // mBtnCancel = (Button) findViewById(R.id.btn_cancel );
+    mBtnDelete = (Button) findViewById(R.id.btn_delete );
 
     mBtnOK.setOnClickListener( this );
-    // mBtnCancel.setOnClickListener( this );
+    mBtnDelete.setOnClickListener( this );
 
     mEtName = (EditText) findViewById( R.id.et_name );
     mEtName.setText( mParent.getPlotName( ) );
@@ -70,8 +70,8 @@ public class PlotRenameDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnOK ) {
       mParent.renamePlot( mEtName.getText().toString() );
-    // } else if ( b == mBtnCancel ) {
-    //   // nothing
+    } else if ( b == mBtnDelete ) {
+      mParent.askDelete();
     }
     dismiss();
   }
