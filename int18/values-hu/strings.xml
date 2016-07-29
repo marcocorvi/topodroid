@@ -81,9 +81,9 @@
     <string name="non_linear">non-linear*nem lineáris</string>
     <string name="algo_minimum">minimum*minimum</string>
    
-    <string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string>
-    <string name="device_address">Address %1$s</string>
-    <string name="device_busy">Device busy</string>
+    <string name="device_algo_failed">Algorithm auto-determination failed*Az algoritmus automatikus kiválasztása nem sikerült\nUsing linear algorithm</string>
+    <string name="device_address">Address %1$s *Cím %1$s</string>
+    <string name="device_busy">Device busy*Az eszköz használatban</string>
     <string name="device_illegal_addr">Illegal memory address</string>
     <string name="device_info">Device info</string>
     <string name="device_model_set">Do you really want to change the model of the device</string>
