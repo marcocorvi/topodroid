@@ -131,7 +131,7 @@
     <string name="import_already">Survey already imported*A felmérés már importálva</string>
     <string name="import_none">No file to import*Nincs importálható fájl</string>
     <string name="import_failed">File import failed*Fájl importálása nem sikerült</string>
-    <string name="file_not_found">File not found*Fájl nem található meg</string>
+    <string name="file_not_found">File not found*Fájl nem található</string>
     <string name="import_calib_ok">Successfully imported calibration*Kalibráció importálása sikerült</string>
     <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
     <!-- TODO string name="import_calib_already">Calib. already exists</string -->
@@ -139,30 +139,30 @@
     <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
     <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
     <string name="import_zip_ok">Successfully imported zip file*Zip fájl importálása sikerült</string>
-    <string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string>
+    <string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;*A zip fájl importálása több időt vesz igénybe. Kérem várjon &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
-    <string name="MT_points_none">No MobileTopographer point</string>
+    <string name="MT_points_none">No MobileTopographer point*Nincs MobileTopographer pont</string>
  
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
-    <string name="head_tail_failed">Failed to read DistoX memory index</string>
-    <string name="head_tail_store_failed">Failed to store DistoX memory index</string>
+    <string name="head_tail_failed">Failed to read DistoX memory index*Nem sikerült kiolvasni a DistoX memória indexét</string>
+    <string name="head_tail_store_failed">Failed to store DistoX memory index* Nem sikerült eltárolni a DistoX memória indexét</string>
     <!-- string name="pairing_failed">Pairing failed</string -->
 
-    <string name="illegal_data_value">Illegal data value</string>
-    <string name="label_title">LABEL</string>
-    <string name="label_text">Enter the label text</string>
+    <string name="illegal_data_value">Illegal data value*Helytelen adat érték</string>
+    <string name="label_title">LABEL*CÍMKE</string>
+    <string name="label_text">Enter the label text*Írd be címke feliratot.<I/string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H ellipsoid </string>
-    <string name="h_geoid">H geoid </string>
-    <string name="latitude">Latitude </string>
-    <string name="longitude">Longitude </string>
-    <string name="h_ellipsoid_hint">H ellip. [meters]</string>
-    <string name="h_geoid_hint">H geoid [meters]</string>
-    <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
-    <string name="longitude_hint">Long. dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">Loop closure errors</string>
-    <string name="loop_none">no loop</string>
+    <string name="h_ellipsoid">H ellipsoid*Ellipszoid magasság</string>
+    <string name="h_geoid">H geoid*Geoid magasság</string>
+    <string name="latitude">Latitude*Szélesség</string>
+    <string name="longitude">Longitude*Hosszúság</string>
+    <string name="h_ellipsoid_hint">H ellip. [meters]*Ellipszoid mag. [méter]</string>
+    <string name="h_geoid_hint">H geoid [meters]*Geoid mag. [méter]</string>
+    <string name="latitude_hint">Lat. dd:mm:ss.sss*Szélesség ff:pp:mm.mmm</string>
+    <string name="longitude_hint">Long. dd:mm:ss.sss*Hosszúság ff:pp:mm.mmm</string>
+    <string name="loop_closure_errors">Loop closure errors*Hurokzárási hibák</string>
+    <string name="loop_none">no loop*nincs hurok</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
     <string name="error_azimuth_required">Azimuth required</string>
