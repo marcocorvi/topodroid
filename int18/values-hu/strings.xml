@@ -165,13 +165,13 @@
     <string name="loop_none">no loop*nincs hurok</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
-    <string name="error_azimuth_required">Azimuth required</string>
-    <string name="error_length_required">Length required</string>
-    <string name="error_clino_required">Clino required</string>
-    <string name="error_comment_required">Comment required</string>
-    <string name="error_begin_required">Start address required</string>
-    <string name="error_declination_number">Declination must be a number</string>
-    <string name="error_end_required">Final address required</string>
+    <string name="error_azimuth_required">Azimuth required*Azimut szükséges</string>
+    <string name="error_length_required">Length required*Hossz szükséges</string>
+    <string name="error_clino_required">Clino required*Lejtszög szükséges</string>
+    <string name="error_comment_required">Comment required*Megjegyzés szükséges</string>
+    <string name="error_begin_required">Start address required*Kezdő cím szükséges???</string>
+    <string name="error_declination_number">Declination must be a number*A deklinációt számként kell megadni</string>
+    <string name="error_end_required">Final address required*</string>
     <string name="error_from_required">First station required</string>
     <string name="error_group_required">Group number required</string>
     <string name="error_group_non_integer">Group must be integer number</string>
