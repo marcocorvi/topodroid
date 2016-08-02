@@ -37,7 +37,7 @@
   </string-array>
 
   <!-- TODO string-array name="exportShots">
-     <item name="none">none</item>
+     <item name="none">无</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <!== item name="csurvey">cSurvey</item ==>
@@ -52,7 +52,7 @@
   </string-array -->
 
   <!-- TODO string-array name="exportPlot">
-     <item name="none">none</item>
+     <item name="none">无</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
@@ -114,9 +114,9 @@
   </string-array>
 
   <!-- TODO string-array name="sectionStations">
-     <item name="both">both</item>
-     <item name="from">behind</item>
-     <item name="to">in front</item>
+     <item name="both">两者</item>
+     <item name="from">后面</item>
+     <item name="to">前面</item>
   </string-array -->
 
   <!-- UNUSED string-array name="deviceType">
