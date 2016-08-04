@@ -253,9 +253,9 @@
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_recover">Восстановить</string>
     <string name="menu_reload">Перезагрузить</string>
-    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
+    <string name="menu_rename_delete">ПЕРЕИМЕНОВАТЬ/УДАЛИТЬ</string>
     <string name="menu_rename">ПЕРЕИМЕНОВАТЬ</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <string name="menu_switch">ПЕРЕКЛЮЧИТЬ</string>
     <string name="menu_help">Помощь</string>
     <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
     <string name="menu_logs">Журнал</string>
@@ -580,8 +580,8 @@
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Вид окна абриса</string>
     <string name="help_rename">Изменить название съёмки</string>
-    <!-- FIXME string name="help_plot_rename">Переименовать абрис</string -->
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <string name="help_plot_rename">Переименовать/Удалить абрис</string>
+    <string name="help_plot_switch">Переключить абрис</string>
     <string name="help_stats">Инструмент статистики по съёмке</string>
     <string name="help_save_plot">Экспорт абрисов</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
