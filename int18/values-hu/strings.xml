@@ -253,6 +253,7 @@
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECOVER</string>
     <string name="menu_reload">RELOAD</string>
+    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">RENAME</string>
     <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">HELP</string>

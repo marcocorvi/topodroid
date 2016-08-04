@@ -250,6 +250,7 @@
     <string name="menu_firmware">固件</string>
     <string name="menu_recover">恢复</string>
     <string name="menu_reload">重新导入</string>
+    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">重命名</string>
     <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">帮助</string>

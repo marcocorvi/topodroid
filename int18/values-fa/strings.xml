@@ -212,6 +212,7 @@
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">بازیابی</string>
     <string name="menu_reload">خواندن مجدد</string>
+    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <!-- TODO string name="menu_rename">RENANE</string -->
     <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">راهنما</string>

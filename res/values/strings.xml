@@ -253,7 +253,8 @@
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECOVER</string>
     <string name="menu_reload">RELOAD</string>
-    <string name="menu_rename">RENAME/DELETE</string>
+    <string name="menu_rename_delete">RENAME/DELETE</string>
+    <string name="menu_rename">RENAME</string>
     <string name="menu_switch">SWITCH</string>
     <string name="menu_help">HELP</string>
     <string name="menu_join_survey">CO-SURVEY</string>

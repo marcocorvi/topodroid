@@ -252,6 +252,7 @@
     <!-- OK ENGLISH string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_reload">RICARICA</string>
+    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">RENOMINA</string>
     <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">AIUTO</string>

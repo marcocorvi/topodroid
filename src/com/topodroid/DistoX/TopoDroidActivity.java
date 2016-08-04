@@ -114,34 +114,36 @@ public class TopoDroidActivity extends Activity
   private static int izons[] = {
                           R.drawable.iz_disto2b, // iz_disto,
                           R.drawable.iz_plus,
-                          R.drawable.iz_import
+                          R.drawable.iz_import,
+                          R.drawable.iz_tools
                           // FIXME THMANAGER
                           // R.drawable.iz_therion,
                           // R.drawable.iz_database
                           };
 
   private static int menus[] = { 
-                          R.string.menu_palette,
-                          R.string.menu_options,
+                          // R.string.menu_palette,
                           R.string.menu_logs,
                           R.string.menu_join_survey,
                           R.string.menu_about,
+                          R.string.menu_options,
                           R.string.menu_help
                           };
 
   private static int help_icons[] = { R.string.help_device,
                           R.string.help_add_topodroid,
-                          R.string.help_import
+                          R.string.help_import,
+                          R.string.help_symbol
                           // FIXME THMANAGER
                           // R.string.help_therion,
                           // R.string.help_database
                           };
   private static int help_menus[] = {
-                          R.string.help_symbol,   
-                          R.string.help_prefs,
+                          // R.string.help_symbol,
                           R.string.help_log,
                           R.string.help_join_survey,
                           R.string.help_info_topodroid,
+                          R.string.help_prefs,
                           R.string.help_help
                         };
 
@@ -220,6 +222,9 @@ public class TopoDroidActivity extends Activity
         (new SurveyNewDialog( this, this, -1, -1 )).show(); 
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         (new ImportDialog( this, this, mApp )).show();
+      } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
+        DrawingBrushPaths.makePaths( getResources() );
+        (new SymbolEnableDialog( this, this, mApp )).show();
 
       // FIXME THMANAGER
       // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
@@ -585,12 +590,12 @@ public class TopoDroidActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[2] ) );
-    if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[3] ) );
+    // mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[1] ) );
+    mMenuAdapter.add( res.getString( menus[2] ) );
+    mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
-    mMenuAdapter.add( res.getString( menus[5] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -608,26 +613,26 @@ public class TopoDroidActivity extends Activity
     closeMenu();
     // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
     int p = 0;
-    if ( p++ == pos ) { // PALETTE
-      DrawingBrushPaths.makePaths( getResources() );
-      (new SymbolEnableDialog( this, this, mApp )).show();
-    } else { 
+    // if ( p++ == pos ) { // PALETTE
+    //   DrawingBrushPaths.makePaths( getResources() );
+    //   (new SymbolEnableDialog( this, this, mApp )).show();
+    // } else { 
       Intent intent;
-      if ( p++ == pos ) { // SETTINGS
+      if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( this, TopoDroidPreferences.class );
-        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
         startActivity( intent );
-      } else { 
-        if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
-          intent = new Intent( this, TopoDroidPreferences.class );
-          intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
-          startActivity( intent );
-        } else {  
-          if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
-            (new ConnectDialog( this, mApp )).show();
+      } else {  
+        if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
+          (new ConnectDialog( this, mApp )).show();
+        } else { 
+          if ( p++ == pos ) { // ABOUT
+            (new TopoDroidAbout( this )).show();
           } else { 
-            if ( p++ == pos ) { // ABOUT
-              (new TopoDroidAbout( this )).show();
+            if ( p++ == pos ) { // SETTINGS
+              intent = new Intent( this, TopoDroidPreferences.class );
+              intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
+              startActivity( intent );
             } else { 
               if ( p++ == pos ) { // HELP
                 (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
@@ -636,7 +641,7 @@ public class TopoDroidActivity extends Activity
           }
         }
       }
-    }
+    // }
     // updateDisplay();
   }
 
@@ -733,7 +738,7 @@ public class TopoDroidActivity extends Activity
     setTheTitle();
   }
   
-  int mNrButton1 = 3;
+  int mNrButton1 = 4;
 
   void resetButtonBar()
   {

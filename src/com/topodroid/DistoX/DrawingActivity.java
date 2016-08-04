@@ -150,7 +150,7 @@ public class DrawingActivity extends ItemDrawer
                         R.string.menu_reload,
                         R.string.menu_zoom_fit,
                         R.string.menu_switch,
-                        R.string.menu_rename,
+                        R.string.menu_rename_delete,
                         R.string.menu_palette,    // 6
                         R.string.menu_overview,
                         R.string.menu_options,

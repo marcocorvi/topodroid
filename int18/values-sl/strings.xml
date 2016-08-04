@@ -239,6 +239,7 @@
     <!-- OK ENGLISH string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">POPRAVI</string>
     <string name="menu_reload">NALOŽI</string>
+    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">PREIMENUJ</string>
     <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">POMOČ</string>

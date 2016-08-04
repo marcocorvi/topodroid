@@ -253,6 +253,7 @@
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_recover">Відновити</string>
     <string name="menu_reload">Перезавантажити</string>
+    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">ПЕРЕЙМЕНУВАТИ</string>
     <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">Допомога</string>

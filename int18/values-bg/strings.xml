@@ -254,6 +254,7 @@
     <string name="menu_firmware">Фърмуер</string>
     <string name="menu_recover">Възстановяване</string>
     <string name="menu_reload">Препрочитане</string>
+    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">Преименуване</string>
     <!-- TODO string name="menu_switch">SWITCH</string -->
     <string name="menu_help">Помощ</string>
