@@ -75,7 +75,7 @@
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
     <!-- UNUSED string name="device_status_angle">واحد زاویه %1$s</string -->
     <!-- UNUSED string name="device_status_compass">Compass/clino %1$s</string -->
-    <string name="device_status_calib">Mode %1$s</string>
+    <!-- FIXME string name="device_status_calib">Mode %1$s</string -->
     <!-- UNUSED string name="device_status_silent">بی صدا %1$s</string -->
     <string name="bt_reset">ریست اتصال بلوتوس</string>
     <string name="save_as">ذخیره با نام</string>
@@ -344,16 +344,16 @@
 
     <string name="survey_info">درباره بررسی</string>
     <string name="stat_component">توضیحات %1$d</string>
-    <string name="stat_depth">عمق %1$.1f %2$.1f"</string>
-    <string name="stat_duplicate">شات تکراری %1$d %2$.1f</string>
-    <string name="stat_leg">Legs %1$d %2$.1f</string>
-    <string name="stat_length">طول %1$.1f</string>
+    <!-- FIXME string name="stat_depth">عمق %1$.1f %2$.1f"</string -->
+    <!-- FIXME string name="stat_duplicate">شات تکراری %1$d %2$.1f</string -->
+    <!-- FIXME string name="stat_leg">Legs %1$d %2$.1f</string -->
+    <!-- FIXME string name="stat_length">طول %1$.1f</string -->
     <string name="stat_loop">Loops %1$d</string>
     <string name="stat_shot">Shots  %1$d,   Duplicate %2$d,   Surface %3$d</string>
     <string name="stat_splay">Splays %1$d</string>
     <string name="stat_station">Stations %1$d</string>
-    <string name="stat_surface">Surface shots %1$d %2$.1f</string>
-    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string>
+    <!-- FIXME string name="stat_surface">Surface shots %1$d %2$.1f</string -->
+    <!-- FIXME string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f"</string -->
     <string name="shot_title">SHOT %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
 
@@ -903,7 +903,7 @@
    <string name="ask_upload">firmware آپلود شود?</string>
    <string name="ask_upload_not_compatible">فایل Firmware به نظر صحیح نمی آید.\nدر هر صورت آپلود شود?</string>
    <string name="firmware_file_dumped">ذخیره فایل firmware  %1$s اندازه %2$d</string>
-   <string name="firmware_file_uploaded">آپلود فایل  firmware %1$s اندازه %2$d</string>
+   <!-- FIXME string name="firmware_file_uploaded">آپلود فایل  firmware %1$s اندازه %2$d</string -->
    
 
 </resources>

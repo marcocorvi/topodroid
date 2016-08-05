@@ -151,7 +151,7 @@
 
     <string name="illegal_data_value">Illegal data value*Helytelen adat érték</string>
     <string name="label_title">LABEL*CÍMKE</string>
-    <string name="label_text">Enter the label text*Írd be címke feliratot.<I/string>
+    <string name="label_text">Enter the label text*Írd be címke feliratot.</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">H ellipsoid*Ellipszoid magasság</string>
     <string name="h_geoid">H geoid*Geoid magasság</string>

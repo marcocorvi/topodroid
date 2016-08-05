@@ -89,7 +89,7 @@
     <string name="device_hardware">Hardware %1$d.%2$d</string>
     <!-- UNUSED string name="device_status_angle">Koti  %1$s</string -->
     <!-- UNUSED string name="device_status_compass">Kompas/Naklonomer %1$s</string -->
-    <string name="device_status_calib">Način %1$s</string>
+    <!-- FIXME string name="device_status_calib">Način %1$s</string -->
     <!-- UNUSED string name="device_status_silent">Tiho %1$s</string -->
     <string name="bt_reset">Resetiranje povezave bluetooth</string>
     <string name="save_as">Shrani kot</string>
