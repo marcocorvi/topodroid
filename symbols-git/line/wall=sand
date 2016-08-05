@@ -1,21 +1,12 @@
 ﻿symbol line
-
 name wall_sand
-
 name-cn 砂积洞壁
-
 name-es paredes_de_arena
 name-fr parois_sabloneuses
-
-
 name-de Sandwand
-
 name-bg стена_пясък
-
 name-ru стена_песок
-
 name-ua стіна_пісок
-
 th_name wall:sand
 group 
 wall
@@ -31,7 +22,5 @@ effect
   lineTo 9 8
   lineTo 9 9
   lineTo 0 9
-
 endeffect
-
 endsymbol

@@ -145,11 +145,11 @@
     <string name="import_failed">Import fehlgeschlagen</string>
     <string name="file_not_found">Datei nicht gefunden</string>
     <string name="import_calib_ok">Kalibrierung erfolgreich importiert</string>
-    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
-    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
-    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
-    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
-    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
+    <string name="import_calib_no_header">Kalibrierungsdatei: Ungültiger Header</string>
+    <string name="import_calib_already">Kalibrierung existiert bereits</string>
+    <string name="import_calib_mismatch">Kalibrierungsgerät falsch</string>
+    <string name="import_calib_no_data">Kalibrierungsdatei: Keine Daten</string>
+    <string name="import_calib_io_error">Kalibrierungsdatei: Lesefehler</string>
     <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
     <string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string>
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
@@ -273,9 +273,9 @@
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">WIEDERHERSTELLEN</string>
     <string name="menu_reload">FRÜHERE VERSION</string>
-    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
+    <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
     <string name="menu_rename">UMBENENNEN</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <string name="menu_switch">WECHSELN</string>
     <string name="menu_help">HILFE</string>
     <string name="menu_join_survey">CO-VERMESSUNG</string>
     <string name="menu_logs">LOGS</string>
@@ -413,9 +413,9 @@
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Vermessungsinfo</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+    <string name="stat_stddev_m">Mag. Stdabweichung %1$.1f %</string>
+    <string name="stat_stddev_g">Grav. Stdabweichung %1$.1f %</string>
+    <string name="stat_stddev_dip">Mag. Neigung Stdabweichung %1$.1f °. (durchschn. %2$.1f °)</string>
     <string name="stat_component">Komponenten %1$d</string>
     <string name="stat_depth">Tiefe %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
@@ -614,8 +614,8 @@
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Skizzenelemente anzeigen</string>
     <string name="help_rename">Ändere Vermessungsname</string>
-    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <string name="help_plot_rename">Skizze umbenennen/löschen</string>
+    <string name="help_plot_switch">Skizze wechseln</string>
     <string name="help_stats">Vermessungs-Statistiken</string>
     <string name="help_save_plot">Die Skizze speichern</string>
     <!-- UNUSED string name="help_tdr2th2">Erstelle th2 Dateien der Skizzen</string -->
@@ -731,7 +731,7 @@
     <string name="title_survey_new">Neue Vermessung</string>
     <string name="title_survey_export">Vermessung speichern als</string>
     <string name="title_survey_rename">Benenne Vermessung um in</string>
-    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
+    <string name="title_plot_rename">Skizze umbenennen</string>
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 

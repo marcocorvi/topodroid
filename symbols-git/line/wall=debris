@@ -1,35 +1,19 @@
 ﻿symbol line
-
 name wall_debris
-
 name-cn 碎石洞壁
-
 name-es paredes_descompuestas
-
 name-fr paroi_de_débris_rocheux_fracturés
-
 name-de Schuttwand
-
 name-bg стена_чакъл
-
 name-ru стена_щебень_осадки
-
 name-ua стіна_щебінь_опади
-
 th_name wall:debris
-
 group wall
-
 color 0xff0000 0xff
-
 width 1
-
 csurvey 5 4 1 1
-
 dash 10 2
-
 effect
-  
 moveTo 0 0
   lineTo 10 2
   lineTo 6 8
@@ -39,7 +23,5 @@ moveTo 0 0
   lineTo 6 6
   lineTo 8 2
   lineTo 1 1
-
 endeffect
-
 endsymbol
