@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <resources>
 
@@ -7,43 +7,150 @@
      <item name="yard">yard</item>
      <item name="two_tf">2 feet</item>
   </string-array -->
-
-  <!-- string-array name="connMode">
-     <item name="batch">Por pedido</item>
-     <item name="continuous">Contínuo</item>
+  <!-- TODO string-array name="survexEol">
+     <item name="lf">Linux</item>
+     <item name="lfcr">Windows</item>
+  </string-array -->
+  <!-- TODO string-array name="wallsType">
+     <item name="none">None</item>
+     <item name="convex">Convex</item>
+  </string-array -->
+  <!-- TODO string-array name="acadVersion">
+     <item name="9">AutoCAD 6</item>
+     <item name="13">AutoCAD 12</item>
+  </string-array -->
+  <!-- TODO string-array name="zoomCtrl">
+     <item name="0">Off</item>
+     <item name="1">Temporary</item>
+     <item name="2">Permanent</item>
+  </string-array -->
+  <!-- TODO string-array name="stationNames">
+     <item name="alpha">Alphanumeric</item>
+     <item name="number">Numeric</item>
   </string-array -->
 
 
+  <!-- TODO string-array name="exportShots">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <!++ item name="csurvey">cSurvey</item ++>
+     <item name="pockettopo">PocketTopo</item>
+     <item name="polygon">Polygon</item>
+     <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array -->
+  <!-- TODO string-array name="exportPlot">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array -->
+  <!-- UNUSED string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array -->
+
+  <!-- UNUSED string-array name="legShots">
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="four">4</item>
+  </string-array -->
+
+  <!-- TODO string-array name="extraButtons">
+     <item name="basic">Basic</item>
+     <item name="normal">Normal</item>
+     <item name="advanced">Advanced</item>
+     <item name="expert">Expert</item>
+     <!++ item name="complete">Complete</item ++>
+  </string-array -->
+  <!-- TODO string-array name="sizeButtons">
+     <item name="small">Small</item>
+     <item name="normal">Normal</item>
+     <item name="medium">Medium</item>
+     <item name="large">Large</item>
+     <item name="huge">Huge</item>
+  </string-array -->
+  <!-- TODO string-array name="logStream">
+     <item name="android">System log</item>
+     <item name="file">File log</item>
+  </string-array -->
+
+  <!-- FIXME string-array name="connMode">
+     <item name="batch">Por pedido</item>
+     <item name="continuous">Continuo</item>
+  </string-array -->
+
   <string-array name="sockType">
-     <item name="default">Por omissão</item>
+     <item name="default">Por omissao</item>
      <item name="Insecure">Inseguro</item>
+     <!-- item name="Port">Port</item -->
+     <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
 
 
-  <string-array name="exportType">
-     <item name="th">Therion</item>
-     <item name="dat">Compass</item>
-     <item name="svx">Survex</item>
-     <item name="tro">VisualTopo</item>
-     <!-- item name="tlx">TopoLinux</item -->
-  </string-array>
+
+  <!-- TODO string-array name="surveyStations">
+     <item name="no">No</item>
+     <item name="for">Splays, forward leg</item>
+     <item name="back">Splays, backward leg</item>
+     <item name="for2">Forward leg, splays</item>
+     <item name="back2">Backward leg, splays</item>
+     <item name="anomaly">Backsight</item>
+     <item name="tripod">Tripod</item>
+  </string-array -->
+
+  <!-- TODO string-array name="pickerType">
+     <item name="recent">Most recent</item>
+     <item name="list">List</item>
+     <item name="grid">Grid</item>
+     <item name="grid3">Triple grid</item>
+  </string-array -->
+
+  <!-- TODO string-array name="sectionStations">
+     <item name="both">Both</item>
+     <item name="from">Behind</item>
+     <item name="to">In front</item>
+  </string-array -->
+
+  <!-- OK string-array name="recentNr">
+     <item name="3">3</item>
+     <item name="4">4</item>
+     <item name="5">5</item>
+     <item name="6">6</item>
+  </string-array -->
+
+  <!-- TODO string-array name="deviceBT">
+     <item name="0">Disabled</item>
+     <item name="1">Check on start</item>
+     <item name="2">Enabled</item>
+  </string-array -->
 
   <string-array name="lineStyle">
      <item name="none">Sem estilo</item>
      <item name="two">Normal</item>
      <item name="two">Grosseira</item>
-     <item name="bezier">Bezier (curva paramétrica)</item>
+     <item name="bezier">Bezier (curva parametrica)</item>
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distância</item>
+     <item name="distance">Distancia</item>
      <item name="four">4 de cada vez</item>
-     <item name="only16">Só os primeiros 16</item>
+     <item name="only16">So os primeiros 16</item>
   </string-array>
 
   <string-array name="unitLength">
      <item name="meters">metros</item>
-     <item name="feet">pés</item>
+     <item name="feet">pes</item>
   </string-array>
 
   <string-array name="unitAngle">
@@ -55,5 +162,12 @@
      <item name="degrees">graus decimais</item>
      <item name="ddmmss">graus, minutos, segundos</item>
   </string-array>
+
+  <!-- TODO string-array name="calibAlgo">
+     <item name="auto">Auto</item>
+     <item name="linear">Linear</item>
+     <item name="nonlinear">Non-linear</item>
+     <!++ item name="minimum">Minimum</item ++>
+  </string-array -->
 
 </resources>
