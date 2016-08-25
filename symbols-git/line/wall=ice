@@ -1,19 +1,11 @@
 ﻿symbol line
-
 namewall_ice
-
 name-cn 冰积洞壁
-
 name-es paredes_de_hielo
-
 name-fr parois_glacées
-
 name-de Eiswand
-
 name-bg стена_лед
-
 name-ru стена_во_льду
-
 name-ua стіна_в_льоду
 th_name wall:ice
 color 0xff0000 0xff
