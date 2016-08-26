@@ -2,56 +2,56 @@
 
 <resources>
 
-  <!-- TODO string-array name="unitGrid">
-     <item name="meter">meter</item>
-     <item name="yard">yard</item>
-     <item name="two_tf">2 feet</item>
-  </string-array -->
-  <!-- TODO string-array name="survexEol">
+  <string-array name="unitGrid">
+     <item name="meter">metro</item>
+     <item name="yard">jarda</item>
+     <item name="two_tf">2 pés</item>
+  </string-array>
+  <string-array name="survexEol">
      <item name="lf">Linux</item>
      <item name="lfcr">Windows</item>
-  </string-array -->
-  <!-- TODO string-array name="wallsType">
-     <item name="none">None</item>
-     <item name="convex">Convex</item>
-  </string-array -->
-  <!-- TODO string-array name="acadVersion">
+  </string-array>
+  <string-array name="wallsType">
+     <item name="none">Nenhum</item>
+     <item name="convex">Convexo</item>
+  </string-array>
+  <string-array name="acadVersion">
      <item name="9">AutoCAD 6</item>
      <item name="13">AutoCAD 12</item>
-  </string-array -->
-  <!-- TODO string-array name="zoomCtrl">
+  </string-array>
+  <string-array name="zoomCtrl">
      <item name="0">Off</item>
-     <item name="1">Temporary</item>
-     <item name="2">Permanent</item>
-  </string-array -->
-  <!-- TODO string-array name="stationNames">
-     <item name="alpha">Alphanumeric</item>
-     <item name="number">Numeric</item>
-  </string-array -->
+     <item name="1">Temporário</item>
+     <item name="2">Permanente</item>
+  </string-array>
+  <string-array name="stationNames">
+     <item name="alpha">Alfanumérico</item>
+     <item name="number">Numérico</item>
+  </string-array>
 
 
-  <!-- TODO string-array name="exportShots">
-     <item name="none">none</item>
+  <string-array name="exportShots">
+     <item name="none">Nenhum</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
-     <!++ item name="csurvey">cSurvey</item ++>
+     <!-- item name="csurvey">cSurvey</item -->
      <item name="pockettopo">PocketTopo</item>
-     <item name="polygon">Polygon</item>
+     <item name="polygon">Polígono</item>
      <item name="survex">Survex</item>
      <item name="topo">Topo</item>
      <item name="visualtopo">VisualTopo</item>
-     <item name="walls">Walls</item>
+     <item name="walls">Paredes</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array -->
-  <!-- TODO string-array name="exportPlot">
-     <item name="none">none</item>
+  </string-array>
+  <string-array name="exportPlot">
+     <item name="none">Nenhum</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
      <item name="png">PNG</item>
-  </string-array -->
+  </string-array>
   <!-- UNUSED string-array name="exportSketch">
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
@@ -66,61 +66,61 @@
      <item name="four">4</item>
   </string-array -->
 
-  <!-- TODO string-array name="extraButtons">
-     <item name="basic">Basic</item>
+  <string-array name="extraButtons">
+     <item name="basic">Básico</item>
      <item name="normal">Normal</item>
-     <item name="advanced">Advanced</item>
-     <item name="expert">Expert</item>
-     <!++ item name="complete">Complete</item ++>
-  </string-array -->
-  <!-- TODO string-array name="sizeButtons">
-     <item name="small">Small</item>
+     <item name="advanced">Avançado</item>
+     <item name="expert">Experiente</item>
+     <!-- item name="complete">Completo</item -->
+  </string-array>
+  <string-array name="sizeButtons">
+     <item name="small">Pequeno</item>
      <item name="normal">Normal</item>
-     <item name="medium">Medium</item>
-     <item name="large">Large</item>
-     <item name="huge">Huge</item>
-  </string-array -->
-  <!-- TODO string-array name="logStream">
-     <item name="android">System log</item>
-     <item name="file">File log</item>
-  </string-array -->
+     <item name="medium">Médio</item>
+     <item name="large">Grande</item>
+     <item name="huge">Enorme</item>
+  </string-array>
+  <string-array name="logStream">
+     <item name="android">Log de sistema</item>
+     <item name="file">Arquivo de log</item>
+  </string-array>
 
-  <!-- FIXME string-array name="connMode">
+  <string-array name="connMode">
      <item name="batch">Por pedido</item>
-     <item name="continuous">Continuo</item>
-  </string-array -->
+     <item name="continuous">Contínuo</item>
+  </string-array>
 
   <string-array name="sockType">
-     <item name="default">Por omissao</item>
+     <item name="default">Padrão</item>
      <item name="Insecure">Inseguro</item>
-     <!-- item name="Port">Port</item -->
-     <!-- item name="InsecurePort">Insecure/Port</item -->
+     <!-- item name="Port">Porta</item -->
+     <!-- item name="InsecurePort">Inseguro/Porta</item -->
   </string-array>
 
 
 
-  <!-- TODO string-array name="surveyStations">
-     <item name="no">No</item>
-     <item name="for">Splays, forward leg</item>
-     <item name="back">Splays, backward leg</item>
-     <item name="for2">Forward leg, splays</item>
-     <item name="back2">Backward leg, splays</item>
-     <item name="anomaly">Backsight</item>
-     <item name="tripod">Tripod</item>
-  </string-array -->
+  <string-array name="surveyStations">
+     <item name="no">Não</item>
+     <item name="for">Splays, próxima visada</item>
+     <item name="back">Splays, visada anterior</item>
+     <item name="for2">Próxima visada, splays</item>
+     <item name="back2">Visada anterior, splays</item>
+     <item name="anomaly">Visada inversa</item>
+     <item name="tripod">Tripé</item>
+  </string-array>
 
-  <!-- TODO string-array name="pickerType">
-     <item name="recent">Most recent</item>
-     <item name="list">List</item>
-     <item name="grid">Grid</item>
-     <item name="grid3">Triple grid</item>
-  </string-array -->
+  <string-array name="pickerType">
+     <item name="recent">Mais recente</item>
+     <item name="list">Lista</item>
+     <item name="grid">Grelha</item>
+     <item name="grid3">Grelha tripla</item>
+  </string-array>
 
-  <!-- TODO string-array name="sectionStations">
-     <item name="both">Both</item>
-     <item name="from">Behind</item>
-     <item name="to">In front</item>
-  </string-array -->
+  <string-array name="sectionStations">
+     <item name="both">Ambos</item>
+     <item name="from">De</item>
+     <item name="to">Para</item>
+  </string-array>
 
   <!-- OK string-array name="recentNr">
      <item name="3">3</item>
@@ -129,33 +129,33 @@
      <item name="6">6</item>
   </string-array -->
 
-  <!-- TODO string-array name="deviceBT">
-     <item name="0">Disabled</item>
-     <item name="1">Check on start</item>
-     <item name="2">Enabled</item>
-  </string-array -->
+  <string-array name="deviceBT">
+     <item name="0">Desativado</item>
+     <item name="1">Check na inicialização</item>
+     <item name="2">Habilitado</item>
+  </string-array>
 
   <string-array name="lineStyle">
      <item name="none">Sem estilo</item>
      <item name="two">Normal</item>
      <item name="two">Grosseira</item>
-     <item name="bezier">Bezier (curva parametrica)</item>
+     <item name="bezier">Bezier (curva paramétrica)</item>
   </string-array>
 
   <string-array name="groupBy">
-     <item name="distance">Distancia</item>
+     <item name="distance">Distância</item>
      <item name="four">4 de cada vez</item>
-     <item name="only16">So os primeiros 16</item>
+     <item name="only16">Só os primeiros 16</item>
   </string-array>
 
   <string-array name="unitLength">
      <item name="meters">metros</item>
-     <item name="feet">pes</item>
+     <item name="feet">pés</item>
   </string-array>
 
   <string-array name="unitAngle">
      <item name="degrees">graus</item>
-     <item name="grads">radianos</item>
+     <item name="grads">rad</item>
   </string-array>
 
   <string-array name="unitLocation">
@@ -163,11 +163,11 @@
      <item name="ddmmss">graus, minutos, segundos</item>
   </string-array>
 
-  <!-- TODO string-array name="calibAlgo">
-     <item name="auto">Auto</item>
+  <string-array name="calibAlgo">
+     <item name="auto">Automático</item>
      <item name="linear">Linear</item>
-     <item name="nonlinear">Non-linear</item>
-     <!++ item name="minimum">Minimum</item ++>
-  </string-array -->
+     <item name="nonlinear">Não linear</item>
+     <!-- item name="minimum">Mínimo</item -->
+  </string-array>
 
 </resources>
