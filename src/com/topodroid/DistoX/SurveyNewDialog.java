@@ -54,7 +54,7 @@ public class SurveyNewDialog extends MyDialog
 
   private Button mBTsave;
   private Button mBTopen;
-  // private Button mBTback;
+  private Button mBTback;
 
   private TopoDroidApp mApp;
   private SurveyInfo info;
@@ -100,10 +100,10 @@ public class SurveyNewDialog extends MyDialog
 
     mBTsave = (Button) findViewById( R.id.surveySave );
     mBTopen = (Button) findViewById( R.id.surveyOpen );
-    // mBTback = (Button) findViewById( R.id.surveyBack );
+    mBTback = (Button) findViewById( R.id.surveyCancel );
     mBTsave.setOnClickListener( this );
     mBTopen.setOnClickListener( this );
-    // mBTback.setOnClickListener( this );
+    mBTback.setOnClickListener( this );
   }
 
   // ------------------------------------------
@@ -120,10 +120,9 @@ public class SurveyNewDialog extends MyDialog
     CutNPaste.dismissPopup();
     Button b = (Button)view;
 
-    // if ( b == mBTback ) {
-    //  // Log.v( TopoDroidApp.TAG, "new survey back ");
-    //  dismiss();
-    //}
+    if ( b == mBTback ) {
+      dismiss();
+    }
     if ( b == mEditDate ) {
       String date = mEditDate.getText().toString();
       int y = TopoDroidUtil.dateParseYear( date );

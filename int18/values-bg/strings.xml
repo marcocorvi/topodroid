@@ -73,7 +73,6 @@
     <string name="calib_ave_std">Точност: %1$.4f %2$.4f градуси</string>
     <string name="calib_precision">Прецизност</string>
     <string name="calib_iter">Повторения: %1$d</string>
-    <!-- PLURAL string name="calib_saturated_values">ПРЕДУПРЕЖДЕНИЕ: %1$d наситени данни</string -->
     <string name="algorithm">Алгоритъм:</string>
     <string name="auto">автоматичен</string>
     <string name="linear">линеен</string>

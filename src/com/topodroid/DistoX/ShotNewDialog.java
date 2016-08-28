@@ -73,7 +73,7 @@ public class ShotNewDialog extends MyDialog
   private CheckBox mCBsplayAtTo;
   private Button   mBtnOk;
   private Button   mBtnSave;
-  // private Button   mBtnBack;
+  private Button   mBtnBack;
   private Button   mBtnSensor;
 
   TimerTask mTimer;
@@ -204,7 +204,7 @@ public class ShotNewDialog extends MyDialog
 
     mBtnOk    = (Button) findViewById(R.id.button_ok_shot_name );
     mBtnSave  = (Button) findViewById(R.id.button_save_shot_name );
-    // mBtnBack  = (Button) findViewById(R.id.button_back_shot_name );
+    mBtnBack  = (Button) findViewById(R.id.button_cancel_name );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
@@ -239,7 +239,7 @@ public class ShotNewDialog extends MyDialog
 
     mBtnOk.setOnClickListener( this );
     mBtnSave.setOnClickListener( this );
-    // mBtnBack.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
 
   }
 
@@ -431,8 +431,8 @@ public class ShotNewDialog extends MyDialog
     } else if ( b == mBtnSensor ) {
       mTimer = new TimerTask( mContext, this );
       mTimer.execute();
-    // } else if ( b == mBtnBack ) {
-    //   dismiss();
+    } else if ( b == mBtnBack ) {
+      dismiss();
     }
   }
 

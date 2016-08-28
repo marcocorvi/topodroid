@@ -57,7 +57,7 @@ public class CurrentStationDialog extends MyDialog
   private Button mBtnPop;
   private Button mBtnOK;
   private Button mBtnClear;
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
 
   private CheckBox mBtnFixed;
   private CheckBox mBtnPainted;
@@ -96,15 +96,15 @@ public class CurrentStationDialog extends MyDialog
 
     mBtnPush    = (Button) findViewById(R.id.button_push);
     mBtnPop     = (Button) findViewById(R.id.button_pop );
-    mBtnOK      = (Button) findViewById(R.id.button_ok );
+    mBtnOK      = (Button) findViewById(R.id.button_current );
     mBtnClear   = (Button) findViewById(R.id.button_clear );
-    // mBtnCancel = (Button) findViewById(R.id.button_cancel);
+    mBtnCancel = (Button) findViewById(R.id.button_cancel);
 
     mBtnPush.setOnClickListener( this ); // STORE
     mBtnPop.setOnClickListener( this );  // DELETE
     mBtnOK.setOnClickListener( this );   // OK-SAVE
     mBtnClear.setOnClickListener( this );   // CLEAR
-    // mBtnCancel.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
@@ -248,7 +248,7 @@ public class CurrentStationDialog extends MyDialog
       mParent.updateDisplay();
 
     // } else if ( b == mBtnCancel ) {
-    //   /* nothing */
+    //   /* nothing : dismiss */
     }
     dismiss();
   }
