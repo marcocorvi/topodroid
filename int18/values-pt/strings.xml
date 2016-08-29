@@ -73,7 +73,7 @@
     <string name="calib_ave_std">Exatidão: %1$.4f ± %2$.4f graus</string>
     <string name="calib_precision">Precisão</string>
     <string name="calib_iter">Interações: %1$d</string>
-    <string name="calib_reset">Resetabelecer a calibração DistoX ?</string>
+    <string name="calib_reset">Restabelecer a calibração DistoX ?</string>
     
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -84,9 +84,9 @@
     <string name="device_algo_failed">Determinação automática do algoritmo sem êxito\nUtilizando algoritmo linear</string>
     <string name="device_address">Endereço %1$s</string>
     <string name="device_busy">Dispositivo ocupado</string>
-    <string name="device_illegal_addr">Edereço de memória não válido</string>
+    <string name="device_illegal_addr">Endereço de memória não válido</string>
     <string name="device_info">Informações sobre o dispositivo</string>
-    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo ?</string>
+    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo?</string>
     <string name="device_none">Nenhum DistoX selecionado</string>
     <!-- string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset memória DistoX</string>
@@ -99,8 +99,8 @@
     <string name="device_status_compass_off">Bússola/clinômetro: off</string>
     <string name="device_status_calib">Modalidade: calibração</string>
     <string name="device_status_normal">Modalidade: normal</string>
-    <string name="device_status_silent_on">Silencioso: on</string>
-    <string name="device_status_silent_off">Silencioso: off</string>
+    <string name="device_status_silent_on">Silencioso: ON</string>
+    <string name="device_status_silent_off">Silencioso: OFF</string>
     <string name="bt_reset">Reset conexão Bluetooth</string>
     <string name="save_as">Salvar como</string>
     <string name="nickname">Apelido</string>
@@ -149,7 +149,7 @@
  
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
-    <string name="head_tail_failed">Falha ao ler a memória índice DistoX</string>
+    <string name="head_tail_failed">Falha ao ler o índice de memória DistoX</string>
     <string name="head_tail_store_failed">Falha ao salvar o índice de memória DistoX</string>
     <!-- string name="pairing_failed">Pairing failed</string -->
 
@@ -180,7 +180,7 @@
     <string name="error_group_required">Número do grupo necessário</string>
     <string name="error_group_non_integer">O grupo deve ser um número inteiro</string>
     <string name="error_alt_required">Altitude necessária</string>
-    <string name="error_invalid_number">número inválido</string>
+    <string name="error_invalid_number">Número inválido</string>
     <string name="error_lat_required">Latitude necessária</string>
     <string name="error_long_required">Longitude necessária</string>
     <string name="error_name_required">Nome necessário</string>
@@ -204,11 +204,11 @@
     <string name="out">Fora</string>
     <string name="in">Dentro</string>
     <!-- UNUSED string name="none">none</string -->
-    <string name="barrier_add">Esconder as seguintes visadas</string>
-    <string name="barrier_del">Mostrar as seguintes visadas</string>
+    <string name="barrier_add">Esconder as visadas seguintes</string>
+    <string name="barrier_del">Mostrar as visadas seguintes</string>
     <string name="hidden_add">Esconder as visadas anteriores</string>
     <string name="hidden_del">Mostrar as visadas anteriores</string>
-    <string name="splays_toggle">Mudar exibição da tela splay</string>
+    <string name="splays_toggle">Mudar exibição da tela Splay</string>
     <string name="fixed">fixo</string>
     <string name="painted">pintado</string>
 
@@ -219,7 +219,7 @@
     <string name="no_bt">Nenhum Bluetooth</string>
     <string name="no_calib">Nenhuma calibração</string>
     <string name="no_calibration">Nenhuma calibração selecionada</string>
-    <string name="no_capture_app">Nenhum aplicativo de catura de imagem</string>
+    <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
@@ -230,7 +230,7 @@
     <string name="no_location_data">Nenhum dado de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nEscanear e associar um DistoX</string>
     <string name="no_photos">O mapa não tem foto</string>
-    <string name="no_plots">O mapa não tem esboço,\nutilize a função ADICIONAR para cria-lo</string>
+    <string name="no_plots">O mapa não tem esboço,\n utilize a função ADICIONAR para cria-lo</string>
     <string name="no_profile_overview">Nenhuma visão global para os perfis projetados</string>
     <string name="no_proj4">Proj4 não instalado</string>
     <string name="no_sensors">Não há medições para o mapa</string>
@@ -240,8 +240,8 @@
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
     <string name="no_db_viewer">DB_viewer não encontrado</string>
     <string name="no_undelete">Nenhum item a ser restaurado</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
+    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Altitude %4$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
@@ -279,8 +279,8 @@
     <string name="menu_validate">VALIDAR</string>
     <string name="menu_zoom_fit">AJUSTE DE ZOOM</string>
 
-    <string name="popup_join_pt">Aganchar ao ponto próximo</string>
-    <string name="popup_snap_ln">Aganchar a linha próxima</string>
+    <string name="popup_join_pt">Aganchar ao ponto mais próximo</string>
+    <string name="popup_snap_ln">Aganchar a linha mais próxima</string>
     <string name="popup_split_pt">Duplicar ponto</string>
     <string name="popup_split_ln">Corta a linha no ponto</string>
     <string name="popup_sharp_pt">Endereitar segmento</string>
@@ -290,12 +290,12 @@
     <string name="connected_none">Não conectado</string>
     <string name="connected_already">Já conectado</string>
 
-    <string name="not_available">BT não disponível</string>
-    <string name="not_enabled">BT não habilitado</string>
+    <string name="not_available">Bluetooth não disponível</string>
+    <string name="not_enabled">Bluetooth não disponível</string>
 
     <!-- string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Não é possível criar uma imagem [OOM error]</string>
-    <string name="photo">foto</string>
+    <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Inserir comentário da foto</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
     <!-- UNUSED string name="photo_photo">photo</string -->
