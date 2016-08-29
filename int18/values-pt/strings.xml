@@ -4,7 +4,7 @@
     <string name="no_manual">Não é possível recuperar o manual do usuário da internet</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Clicar VOLTAR novamente para sair</string>
+    <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
     <string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar as ferramentas de desenho?</string>
     <string name="symbols_ask">Instalar ferramenta de desenho. v.%1$s?\n(Current v.%2$s)</string>
@@ -30,7 +30,7 @@
     <string name="thl_user">usuário</string>
     <string name="thl_wall">parede</string>
     <string name="tha_user">usuário</string>
-    <string name="tha_water">águar</string>
+    <string name="tha_water">água</string>
 
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base ausente</string>
@@ -46,13 +46,13 @@
     <string name="failed_snap_to_point">Nenhum ponto para agarrar o ponto</string>
 
     <string name="calibration_title">Calibração de dispositivos</string>
-    <string name="calibration_length">Fita</string>
+    <string name="calibration_length">Régua</string>
     <string name="calibration_azimuth">Bússola</string>
     <string name="calibration_clino">Clinômetro</string>
 
     <string name="calib_new">Nova calibração</string>
     <string name="calib_exists">Já existe uma calibração</string>
-    <string name="calib_delete">Apaga calibração </string>
+    <string name="calib_delete">Apagar calibração </string>
     <string name="calib_device_mismatch">ATENÇÃO: Dispositivo de calibração incompatível</string>
     <string name="calib_no_name">O nome é obrigatório</string>
     <string name="calib_gm_policy">Policy</string>
@@ -101,7 +101,7 @@
     <string name="device_status_normal">Modalidade: normal</string>
     <string name="device_status_silent_on">Silencioso: on</string>
     <string name="device_status_silent_off">Silencioso: off</string>
-    <string name="bt_reset">Reset conexão bluetooth</string>
+    <string name="bt_reset">Reset conexão Bluetooth</string>
     <string name="save_as">Salvar como</string>
     <string name="nickname">Apelido</string>
     <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
@@ -130,9 +130,9 @@
     <string name="few_calibs">Calibrações não suficientes</string>
 
     <string name="calib_import_title">Importação calibração</string>
-    <string name="import_title">Importação Survey</string>
+    <string name="import_title">Importação mapa</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
-    <string name="import_already">Survey já importado</string>
+    <string name="import_already">Mapa já importado</string>
     <string name="import_none">Nenhum arquivo a ser importado</string>
     <string name="import_failed">Importação de arquivo falhada</string>
     <string name="file_not_found">Arquivo não encontrado</string>
@@ -230,7 +230,7 @@
     <string name="no_location_data">Nenhum dado de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nEscanear e associar um DistoX</string>
     <string name="no_photos">O mapa não tem foto</string>
-    <string name="no_plots">O mapa não tem esboço\nUtilize a função Adicionar para cria-lo</string>
+    <string name="no_plots">O mapa não tem esboço,\nutilize a função ADICIONAR para cria-lo</string>
     <string name="no_profile_overview">Nenhuma visão global para os perfis projetados</string>
     <string name="no_proj4">Proj4 não instalado</string>
     <string name="no_sensors">Não há medições para o mapa</string>
@@ -377,7 +377,7 @@
     <string name="survey_split">Dividir o mapa ?</string>
     <string name="survey_not_attached">ATENÇÃO: visadas não conectadas</string>
     <string name="cannot_rename">Não é possível renomear o mapa</string>
-    <string name="declination">Decl. magn.</string>
+    <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
     <string name="name">nome</string>
     <string name="team">team</string>
@@ -403,13 +403,13 @@
     <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
     <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
     <string name="stat_component">Componentes %1$d</string>
-    <string name="stat_depth">Depth %1$.1f %2$s %3$.1f %4$s"</string>
+    <string name="stat_depth">Profundidade %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Leituras duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visadas %1$d %2$.1f %3$s</string>
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
     <string name="stat_loop">Anéis %1$d</string>
     <string name="stat_origin">Base zero: %1$s</string>
-    <string name="stat_shot">Leituras  %1$d,   Duplicate %2$d,   Surface %3$d</string>
+    <string name="stat_shot">Leituras  %1$d,   Duplicadas %2$d,   Superfície %3$d</string>
     <string name="stat_splay">Splays %1$d</string>
     <string name="stat_station">Bases %1$d</string>
     <string name="stat_surface">Superfície leituras %1$d %2$.1f %3$s</string>
@@ -418,10 +418,10 @@
     <string name="shot_title">LEITURA %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
 
-    <string name="hide_blank">Blank shots</string>
-    <string name="hide_leg">Repeated leg shots</string>
-    <string name="hide_ids">Shot IDs</string>
-    <string name="hide_splay">Splay shots</string>
+    <string name="hide_blank">Visadas brancas</string>
+    <string name="hide_leg">Visadas principais repetidas</string>
+    <string name="hide_ids">IDs visadas</string>
+    <string name="hide_splay">Visadas auxiliares Splay</string>
 
     <string name="plan">PLANTA</string>
     <string name="extended">SECÇÃO</string>
@@ -577,15 +577,15 @@
     <string name="help_overview">Visão global das atividades</string>
     <string name="help_plot">Inserir atividade de esboço</string>
     <string name="help_note">Editar anotações do mapa</string>
-    <string name="help_bluetooth">Resetar conexão bluetooth</string>
+    <string name="help_bluetooth">Resetar conexão Bluetooth</string>
     <string name="help_remote">Controlo remotado do DistoX</string>
-    <string name="help_add_shot">Adiionar uma visada inserendo os dados manualmente</string>
+    <string name="help_add_shot">Adicionar uma visada inserendo os dados manualmente</string>
     <string name="help_info_shot">Estatísticas do mapa</string>
-    <string name="help_survey_info">informações do mapa</string>
+    <string name="help_survey_info">Informações sobre o mapa</string>
     <string name="help_undelete">Restaurar itens apagados</string>
-    <string name="help_photo">Diálogo fotos</string>
-    <string name="help_sensor">Diálogo misurações</string>
-    <string name="help_3d">App visualização 3D (Cave3D)</string>
+    <string name="help_photo">Fotos</string>
+    <string name="help_sensor">Medições</string>
+    <string name="help_3d">Visualizador 3D (Cave3D)</string>
     <string name="help_move">Modalidade Mover/zoom</string>
     <string name="help_draw">Modalidade desenho</string>
     <string name="help_edit">Modalidade editing</string>
@@ -703,7 +703,7 @@
 
   <string name="pref_cat_survey">DADOS DO MAPA</string>
   <string name="pref_cat_drawing">ESBOÇAR</string>
-  <string name="pref_cat_import_export">IMPORTAR_EXPORTAR</string>
+  <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
   <string name="pref_cat_sketch">MODELOS 3D</string>
@@ -718,7 +718,7 @@
   <!-- string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <string name="pref_cosurvey_title">serviço de mapeamento cooperativo</string>
+  <string name="pref_cosurvey_title">Serviço de mapeamento cooperativo</string>
   <string name="pref_cosurvey_summary">Habilitar serviço de mapeamento cooperativo</string>
   <string name="pref_export_shots_title">Exportação dados padrão</string>
   <string name="pref_export_shots_summary">Exportação formato de dados padrão</string>
@@ -851,7 +851,7 @@
   <string name="pref_hthr_title">Limiar secção horizontal</string>
   <string name="pref_hthr_summary">Limiares secções horizontais</string>
   <string name="pref_hthr_message">Limiar inclinação visadas para secções horizontais</string>
-  <string name="pref_bitmap_scale_title">rResolução PNG</string>
+  <string name="pref_bitmap_scale_title">Resolução PNG</string>
   <string name="pref_bitmap_scale_summary">Resolução imagem PNG dos esboços</string>
   <string name="pref_bitmap_scale_message">Resolução imagem do esboço PNG exportado</string>
   <string name="pref_bitmap_bgcolor_title">Cor de fundo PNG</string>
@@ -871,7 +871,7 @@
   <string name="pref_beep_volume_title">Volume bip do temporizador</string>
   <string name="pref_beep_volume_summary">Volume percentual do bip do temporizador</string>
   <string name="pref_beep_volume_message">Volume percentual do bip do temporizador</string>
-  <string name="pref_drawing_unit_title">Escada siímbolos gráficos</string>
+  <string name="pref_drawing_unit_title">Escada símbolos gráficos</string>
   <string name="pref_drawing_unit_summary">Escada siímbolos gráficos</string>
   <string name="pref_drawing_unit_message">Escada siímbolos gráficos</string>
   <string name="pref_unscaled_points_title">Pontos ícone sem zoom</string>
@@ -937,15 +937,15 @@
   <string name="pref_LRExtend_title">Estimativa extensão Direita/Esquerda</string>
   <string name="pref_LRExtend_summary">Estimativa extensão LR (importação Compass/VisualTopo)</string>
 
-  <string name="pref_picker_type_title">Drawing tool picker</string>
-  <string name="pref_picker_type_summary">Drawing tool picker type</string>
+  <string name="pref_picker_type_title">Selecionador ferramenta desenho</string>
+  <string name="pref_picker_type_summary">Tipo de selecionador ferramenta desenho</string>
   <string name="pref_section_stations_title">Bases secção X</string>
   <string name="pref_section_stations_summary">Bases de referência secção X</string>
   <string name="pref_station_size_title">Tamanho nome das bases</string>
   <string name="pref_station_size_summary">Tamanho nome das bases</string>
   <string name="pref_station_size_message">Tamanho nome das bases</string>
-  <string name="pref_zoom_controls_title">Regulações zoom</string>
-  <string name="pref_zoom_controls_summary">Regulações zoom no toque múltiplo</string>
+  <string name="pref_zoom_controls_title">Regulação zoom</string>
+  <string name="pref_zoom_controls_summary">Regulação zoom no toque múltiplo</string>
   <string name="pref_side_drag_title">Side drag</string>
   <string name="pref_side_drag_summary">Hábilitar side-drag na janela do esboço</string>
   <string name="pref_unit_grid_title">Unidades do esboço</string>
