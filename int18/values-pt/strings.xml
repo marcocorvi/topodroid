@@ -4,7 +4,7 @@
     <string name="no_manual">Não é possível recuperar o manual do usuário da internet</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Clicar VOLTAR novamente para sair</string>
+    <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
     <string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar as ferramentas de desenho?</string>
     <string name="symbols_ask">Instalar ferramenta de desenho. v.%1$s?\n(Current v.%2$s)</string>
@@ -30,7 +30,7 @@
     <string name="thl_user">usuário</string>
     <string name="thl_wall">parede</string>
     <string name="tha_user">usuário</string>
-    <string name="tha_water">águar</string>
+    <string name="tha_water">água</string>
 
     <string name="make_walls">Paredes</string>
     <string name="missing_station">Base ausente</string>
@@ -46,13 +46,13 @@
     <string name="failed_snap_to_point">Nenhum ponto para agarrar o ponto</string>
 
     <string name="calibration_title">Calibração de dispositivos</string>
-    <string name="calibration_length">Fita</string>
+    <string name="calibration_length">Régua</string>
     <string name="calibration_azimuth">Bússola</string>
     <string name="calibration_clino">Clinômetro</string>
 
     <string name="calib_new">Nova calibração</string>
     <string name="calib_exists">Já existe uma calibração</string>
-    <string name="calib_delete">Apaga calibração </string>
+    <string name="calib_delete">Apagar calibração </string>
     <string name="calib_device_mismatch">ATENÇÃO: Dispositivo de calibração incompatível</string>
     <string name="calib_no_name">O nome é obrigatório</string>
     <string name="calib_gm_policy">Policy</string>
@@ -73,7 +73,7 @@
     <string name="calib_ave_std">Exatidão: %1$.4f ± %2$.4f graus</string>
     <string name="calib_precision">Precisão</string>
     <string name="calib_iter">Interações: %1$d</string>
-    <string name="calib_reset">Resetabelecer a calibração DistoX ?</string>
+    <string name="calib_reset">Restabelecer a calibração DistoX ?</string>
     
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -84,9 +84,9 @@
     <string name="device_algo_failed">Determinação automática do algoritmo sem êxito\nUtilizando algoritmo linear</string>
     <string name="device_address">Endereço %1$s</string>
     <string name="device_busy">Dispositivo ocupado</string>
-    <string name="device_illegal_addr">Edereço de memória não válido</string>
+    <string name="device_illegal_addr">Endereço de memória não válido</string>
     <string name="device_info">Informações sobre o dispositivo</string>
-    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo ?</string>
+    <string name="device_model_set">Quer realmente mudar o modelo do dispositivo?</string>
     <string name="device_none">Nenhum DistoX selecionado</string>
     <!-- string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset memória DistoX</string>
@@ -99,9 +99,9 @@
     <string name="device_status_compass_off">Bússola/clinômetro: off</string>
     <string name="device_status_calib">Modalidade: calibração</string>
     <string name="device_status_normal">Modalidade: normal</string>
-    <string name="device_status_silent_on">Silencioso: on</string>
-    <string name="device_status_silent_off">Silencioso: off</string>
-    <string name="bt_reset">Reset conexão bluetooth</string>
+    <string name="device_status_silent_on">Silencioso: ON</string>
+    <string name="device_status_silent_off">Silencioso: OFF</string>
+    <string name="bt_reset">Reset conexão Bluetooth</string>
     <string name="save_as">Salvar como</string>
     <string name="nickname">Apelido</string>
     <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
@@ -130,9 +130,9 @@
     <string name="few_calibs">Calibrações não suficientes</string>
 
     <string name="calib_import_title">Importação calibração</string>
-    <string name="import_title">Importação Survey</string>
+    <string name="import_title">Importação mapa</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
-    <string name="import_already">Survey já importado</string>
+    <string name="import_already">Mapa já importado</string>
     <string name="import_none">Nenhum arquivo a ser importado</string>
     <string name="import_failed">Importação de arquivo falhada</string>
     <string name="file_not_found">Arquivo não encontrado</string>
@@ -149,7 +149,7 @@
  
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
-    <string name="head_tail_failed">Falha ao ler a memória índice DistoX</string>
+    <string name="head_tail_failed">Falha ao ler o índice de memória DistoX</string>
     <string name="head_tail_store_failed">Falha ao salvar o índice de memória DistoX</string>
     <!-- string name="pairing_failed">Pairing failed</string -->
 
@@ -180,7 +180,7 @@
     <string name="error_group_required">Número do grupo necessário</string>
     <string name="error_group_non_integer">O grupo deve ser um número inteiro</string>
     <string name="error_alt_required">Altitude necessária</string>
-    <string name="error_invalid_number">número inválido</string>
+    <string name="error_invalid_number">Número inválido</string>
     <string name="error_lat_required">Latitude necessária</string>
     <string name="error_long_required">Longitude necessária</string>
     <string name="error_name_required">Nome necessário</string>
@@ -204,11 +204,11 @@
     <string name="out">Fora</string>
     <string name="in">Dentro</string>
     <!-- UNUSED string name="none">none</string -->
-    <string name="barrier_add">Esconder as seguintes visadas</string>
-    <string name="barrier_del">Mostrar as seguintes visadas</string>
+    <string name="barrier_add">Esconder as visadas seguintes</string>
+    <string name="barrier_del">Mostrar as visadas seguintes</string>
     <string name="hidden_add">Esconder as visadas anteriores</string>
     <string name="hidden_del">Mostrar as visadas anteriores</string>
-    <string name="splays_toggle">Mudar exibição da tela splay</string>
+    <string name="splays_toggle">Mudar exibição da tela Splay</string>
     <string name="fixed">fixo</string>
     <string name="painted">pintado</string>
 
@@ -219,7 +219,7 @@
     <string name="no_bt">Nenhum Bluetooth</string>
     <string name="no_calib">Nenhuma calibração</string>
     <string name="no_calibration">Nenhuma calibração selecionada</string>
-    <string name="no_capture_app">Nenhum aplicativo de catura de imagem</string>
+    <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
@@ -230,7 +230,7 @@
     <string name="no_location_data">Nenhum dado de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nEscanear e associar um DistoX</string>
     <string name="no_photos">O mapa não tem foto</string>
-    <string name="no_plots">O mapa não tem esboço\nUtilize a função Adicionar para cria-lo</string>
+    <string name="no_plots">O mapa não tem esboço,\n utilize a função ADICIONAR para cria-lo</string>
     <string name="no_profile_overview">Nenhuma visão global para os perfis projetados</string>
     <string name="no_proj4">Proj4 não instalado</string>
     <string name="no_sensors">Não há medições para o mapa</string>
@@ -240,8 +240,8 @@
     <string name="no_thmanager">O aplicativo ThManager não está instalado</string>
     <string name="no_db_viewer">DB_viewer não encontrado</string>
     <string name="no_undelete">Nenhum item a ser restaurado</string>
-    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Bearing %4$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Clino %4$.1f"</string>
+    <string name="format_measure_plan">D %1$.2f Dx %2$.2f Dy %3$.2f Altitude %4$.1f"</string>
+    <string name="format_measure_profile">D %1$.2f Dx %2$.2f Dy %3$.2f Inclinação %4$.1f"</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
@@ -279,8 +279,8 @@
     <string name="menu_validate">VALIDAR</string>
     <string name="menu_zoom_fit">AJUSTE DE ZOOM</string>
 
-    <string name="popup_join_pt">Aganchar ao ponto próximo</string>
-    <string name="popup_snap_ln">Aganchar a linha próxima</string>
+    <string name="popup_join_pt">Aganchar ao ponto mais próximo</string>
+    <string name="popup_snap_ln">Aganchar a linha mais próxima</string>
     <string name="popup_split_pt">Duplicar ponto</string>
     <string name="popup_split_ln">Corta a linha no ponto</string>
     <string name="popup_sharp_pt">Endereitar segmento</string>
@@ -290,12 +290,12 @@
     <string name="connected_none">Não conectado</string>
     <string name="connected_already">Já conectado</string>
 
-    <string name="not_available">BT não disponível</string>
-    <string name="not_enabled">BT não habilitado</string>
+    <string name="not_available">Bluetooth não disponível</string>
+    <string name="not_enabled">Bluetooth não disponível</string>
 
     <!-- string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Não é possível criar uma imagem [OOM error]</string>
-    <string name="photo">foto</string>
+    <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Inserir comentário da foto</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
     <!-- UNUSED string name="photo_photo">photo</string -->
@@ -377,7 +377,7 @@
     <string name="survey_split">Dividir o mapa ?</string>
     <string name="survey_not_attached">ATENÇÃO: visadas não conectadas</string>
     <string name="cannot_rename">Não é possível renomear o mapa</string>
-    <string name="declination">Decl. magn.</string>
+    <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
     <string name="name">nome</string>
     <string name="team">team</string>
@@ -403,13 +403,13 @@
     <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
     <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
     <string name="stat_component">Componentes %1$d</string>
-    <string name="stat_depth">Depth %1$.1f %2$s %3$.1f %4$s"</string>
+    <string name="stat_depth">Profundidade %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Leituras duplicadas %1$d %2$.1f %3$s</string>
     <string name="stat_leg">Visadas %1$d %2$.1f %3$s</string>
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
     <string name="stat_loop">Anéis %1$d</string>
     <string name="stat_origin">Base zero: %1$s</string>
-    <string name="stat_shot">Leituras  %1$d,   Duplicate %2$d,   Surface %3$d</string>
+    <string name="stat_shot">Leituras  %1$d,   Duplicadas %2$d,   Superfície %3$d</string>
     <string name="stat_splay">Splays %1$d</string>
     <string name="stat_station">Bases %1$d</string>
     <string name="stat_surface">Superfície leituras %1$d %2$.1f %3$s</string>
@@ -418,10 +418,10 @@
     <string name="shot_title">LEITURA %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
 
-    <string name="hide_blank">Blank shots</string>
-    <string name="hide_leg">Repeated leg shots</string>
-    <string name="hide_ids">Shot IDs</string>
-    <string name="hide_splay">Splay shots</string>
+    <string name="hide_blank">Visadas brancas</string>
+    <string name="hide_leg">Visadas principais repetidas</string>
+    <string name="hide_ids">IDs visadas</string>
+    <string name="hide_splay">Visadas auxiliares Splay</string>
 
     <string name="plan">PLANTA</string>
     <string name="extended">SECÇÃO</string>
@@ -541,8 +541,8 @@
     <!-- string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
-    <string name="no_shot_between_stations">nenhuma visada entre as bases</string>
-    <string name="few_line_points">A linha possui muito poucos pontos</string>
+    <string name="no_shot_between_stations">Nenhuma visada entre as bases</string>
+    <string name="few_line_points">A linha possui muitos poucos pontos</string>
     <string name="line_delete">Apagar linha</string>
     <string name="flip_shots">Mexer visadas</string>
 
@@ -577,23 +577,23 @@
     <string name="help_overview">Visão global das atividades</string>
     <string name="help_plot">Inserir atividade de esboço</string>
     <string name="help_note">Editar anotações do mapa</string>
-    <string name="help_bluetooth">Resetar conexão bluetooth</string>
+    <string name="help_bluetooth">Resetar conexão Bluetooth</string>
     <string name="help_remote">Controlo remotado do DistoX</string>
-    <string name="help_add_shot">Adiionar uma visada inserendo os dados manualmente</string>
+    <string name="help_add_shot">Adicionar uma visada inserendo os dados manualmente</string>
     <string name="help_info_shot">Estatísticas do mapa</string>
-    <string name="help_survey_info">informações do mapa</string>
+    <string name="help_survey_info">Informações sobre o mapa</string>
     <string name="help_undelete">Restaurar itens apagados</string>
-    <string name="help_photo">Diálogo fotos</string>
-    <string name="help_sensor">Diálogo misurações</string>
-    <string name="help_3d">App visualização 3D (Cave3D)</string>
-    <string name="help_move">Modalidade Mover/zoom</string>
+    <string name="help_photo">Fotos</string>
+    <string name="help_sensor">Medições</string>
+    <string name="help_3d">Visualizador 3D (Cave3D)</string>
+    <string name="help_move">Modalidade Mover/Zoom</string>
     <string name="help_draw">Modalidade desenho</string>
     <string name="help_edit">Modalidade editing</string>
     <string name="help_refs">Escoler referências do esboço</string>
     <string name="help_rename">Mudar nome do mapa</string>
     <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
     <!-- TODO string name="help_plot_switch">Switch sketch</string -->
-    <string name="help_stats">Diálogo estatísticas do mapa</string>
+    <string name="help_stats">Estatísticas do mapa</string>
     <string name="help_save_plot">Exportar esboço</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Pular entre vista em plata ou secção</string>
@@ -664,7 +664,7 @@
     <string name="title_current_station">Base salvas</string>
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>
-    <string name="title_draw">Dresenhar</string>
+    <string name="title_draw">Desenhar</string>
     <string name="title_draw_area">ÁREA %1$s</string>
     <string name="title_draw_line">LINHA %1$s</string>
     <string name="title_draw_point">PONTO %1$s</string>
@@ -703,7 +703,7 @@
 
   <string name="pref_cat_survey">DADOS DO MAPA</string>
   <string name="pref_cat_drawing">ESBOÇAR</string>
-  <string name="pref_cat_import_export">IMPORTAR_EXPORTAR</string>
+  <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
   <string name="pref_cat_sketch">MODELOS 3D</string>
@@ -718,7 +718,7 @@
   <!-- string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <string name="pref_cosurvey_title">serviço de mapeamento cooperativo</string>
+  <string name="pref_cosurvey_title">Serviço de mapeamento cooperativo</string>
   <string name="pref_cosurvey_summary">Habilitar serviço de mapeamento cooperativo</string>
   <string name="pref_export_shots_title">Exportação dados padrão</string>
   <string name="pref_export_shots_summary">Exportação formato de dados padrão</string>
@@ -732,13 +732,13 @@
   <string name="pref_size_buttons_summary">Tamanho da barra dos botões</string>
   <!-- string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
 
-  <string name="pref_leg_shots_title">Tiros mínimos por cada visada</string>
-  <string name="pref_leg_shots_summary">Número mínimo de tiros por cada visada</string>
+  <string name="pref_leg_shots_title">Medições mínimas por cada visada principal</string>
+  <string name="pref_leg_shots_summary">Número mínimo de medições por cada visada principal</string>
   <string name="pref_station_prefix_title">Prefixos das bases em cSurvey</string>
   <string name="pref_station_prefix_summary">Exportar prefixo das bases em cSurvey</string>
   <string name="pref_ortho_lrud_title">Ângulo splay LRUD</string>
-  <string name="pref_ortho_lrud_summary">Ângulo mínimo da splay-poligonal para uma splay LRUD</string>
-  <string name="pref_ortho_lrud_message">Ângulo mínimo de uma splay-poligonal LRUD</string>
+  <string name="pref_ortho_lrud_summary">Ângulo mínimo de uma Splay/Leg para uma Splay LRUD</string>
+  <string name="pref_ortho_lrud_message">Ângulo mínimo de uma visada principal/auxiliaria para uma visada auxiliaria LRUD</string>
   <string name="pref_survex_eol_title">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_splay_title">Base de splay do Survex</string>
@@ -817,13 +817,13 @@
   <string name="pref_dip_thr_summary">Tolerância valores imersão magnética</string>
   <string name="pref_dip_thr_message">Tolerância valores imersão magnética</string>
 
-  <string name="pref_leg_title">Tolerância Leg visadas</string>
-  <string name="pref_leg_summary">Tolerância entre os tiros de uma visada</string>
-  <string name="pref_leg_message">Tolerância entre os tiros de uma visada</string>
+  <string name="pref_leg_title">Tolerância visadas principais</string>
+  <string name="pref_leg_summary">Tolerância entre as medições de uma visada principal</string>
+  <string name="pref_leg_message">Tolerância entre as medições de uma visada principal</string>
   <string name="pref_backsight_title">Backsight</string>
   <string name="pref_backsight_summary">Campos Backsight na janela de nova visada</string>
   <string name="pref_prev_next_title">Botões Prec/Suces</string>
-  <string name="pref_prev_next_summary">Botões Prec/Suces na janela de tiro</string>
+  <string name="pref_prev_next_summary">Botões Prec/Suces na janela de medição</string>
   <string name="pref_mag_anomaly_title">Anomalia magnética</string>
   <string name="pref_mag_anomaly_summary">Compensação anomalia magnética local</string>
   <string name="pref_azimuth_manual_title">"Extender" manual</string>
@@ -841,7 +841,7 @@
   <string name="pref_vthr_message">Limite inclinação vertical visadas entre LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Limiar Splay na planta</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string -->
-  <string name="pref_plan_vthr_message">Esconder Splays com grande inclinação na planta</string>
+  <string name="pref_plan_vthr_message">Esconder visadas auxiliares com grande inclinação na planta</string>
   <string name="pref_init_station_title">Nome base inicial</string>
   <string name="pref_init_station_summary">Nome padrão da base inicial</string>
   <string name="pref_init_station_message">Nome padrão da base inicial</string>
@@ -851,7 +851,7 @@
   <string name="pref_hthr_title">Limiar secção horizontal</string>
   <string name="pref_hthr_summary">Limiares secções horizontais</string>
   <string name="pref_hthr_message">Limiar inclinação visadas para secções horizontais</string>
-  <string name="pref_bitmap_scale_title">rResolução PNG</string>
+  <string name="pref_bitmap_scale_title">Resolução PNG</string>
   <string name="pref_bitmap_scale_summary">Resolução imagem PNG dos esboços</string>
   <string name="pref_bitmap_scale_message">Resolução imagem do esboço PNG exportado</string>
   <string name="pref_bitmap_bgcolor_title">Cor de fundo PNG</string>
@@ -871,9 +871,9 @@
   <string name="pref_beep_volume_title">Volume bip do temporizador</string>
   <string name="pref_beep_volume_summary">Volume percentual do bip do temporizador</string>
   <string name="pref_beep_volume_message">Volume percentual do bip do temporizador</string>
-  <string name="pref_drawing_unit_title">Escada siímbolos gráficos</string>
-  <string name="pref_drawing_unit_summary">Escada siímbolos gráficos</string>
-  <string name="pref_drawing_unit_message">Escada siímbolos gráficos</string>
+  <string name="pref_drawing_unit_title">Escada símbolos gráficos</string>
+  <string name="pref_drawing_unit_summary">Escada símbolos gráficos</string>
+  <string name="pref_drawing_unit_message">Escada símbolos gráficos</string>
   <string name="pref_unscaled_points_title">Pontos ícone sem zoom</string>
   <string name="pref_unscaled_points_summary">Pontos ícone não estão zoomados</string>
   <string name="pref_segment_title">Espaço entre os pontos nas linhas</string>
@@ -882,8 +882,8 @@
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo linha</string>
   <string name="pref_lineacc_title">Exatidão das curvas Bezier</string>
-  <string name="pref_lineacc_summary">Exatidão de interpolação das curvas Bezier</string>
-  <string name="pref_lineacc_message">Exatidão de interpolação das curvas Bezier</string>
+  <string name="pref_lineacc_summary">Exatidão da interpolação das curvas Bezier</string>
+  <string name="pref_lineacc_message">Exatidão da interpolação das curvas Bezier</string>
   <string name="pref_linecorner_title">Ângulos das curvas Bezier</string>
   <string name="pref_linecorner_summary">Limiar dos ângulos das curvas Bezier</string>
   <string name="pref_linecorner_message">Limiar dos ângulos das curvas Bezier</string>
@@ -895,7 +895,7 @@
   <string name="pref_group_summary">Tolerância entre os dados do mesmo grupo</string>
   <string name="pref_group_message">Tolerância entre os dados do mesmo grupo</string>
   <string name="pref_error_title">Erro algoritmo</string>
-  <string name="pref_error_summary">Erro minimo de calibração</string>
+  <string name="pref_error_summary">Erro mínimo de calibração</string>
   <string name="pref_error_dialogtitle">Erro de calibração</string>
   <string name="pref_error_message">Erro de calibração</string>
   <string name="pref_iter_title">Iterações de algoritmo</string>
@@ -926,7 +926,7 @@
   <string name="pref_checkAttached_summary">Verificar se as bases estão conectadas</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
-  <string name="pref_therion_splays_title">Splays Therion</string>
+  <string name="pref_therion_splays_title">Visadas auxiliares Therion</string>
   <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
   <string name="pref_autoStations_title">Bases Therion</string>
   <string name="pref_autoStations_summary">Adicionar bases automaticamente aos arquivos de Therion</string>
@@ -934,20 +934,20 @@
   <string name="pref_loopClosure_summary">Compensação erro de fechamento do anel</string>
   <!-- string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- string name="pref_splayExtend_summary">Estimate splay extend</string -->
-  <string name="pref_LRExtend_title">Estimativa extensão Direita/Esquerda</string>
-  <string name="pref_LRExtend_summary">Estimativa extensão LR (importação Compass/VisualTopo)</string>
+  <string name="pref_LRExtend_title">Estimativa extensão L/R</string>
+  <string name="pref_LRExtend_summary">Estimativa extensão Direita/Esquerda (importação Compass/VisualTopo)</string>
 
-  <string name="pref_picker_type_title">Drawing tool picker</string>
-  <string name="pref_picker_type_summary">Drawing tool picker type</string>
+  <string name="pref_picker_type_title">Selecionador ferramenta desenho</string>
+  <string name="pref_picker_type_summary">Tipo de selecionador ferramenta desenho</string>
   <string name="pref_section_stations_title">Bases secção X</string>
   <string name="pref_section_stations_summary">Bases de referência secção X</string>
   <string name="pref_station_size_title">Tamanho nome das bases</string>
   <string name="pref_station_size_summary">Tamanho nome das bases</string>
   <string name="pref_station_size_message">Tamanho nome das bases</string>
-  <string name="pref_zoom_controls_title">Regulações zoom</string>
-  <string name="pref_zoom_controls_summary">Regulações zoom no toque múltiplo</string>
-  <string name="pref_side_drag_title">Side drag</string>
-  <string name="pref_side_drag_summary">Hábilitar side-drag na janela do esboço</string>
+  <string name="pref_zoom_controls_title">Regulação zoom</string>
+  <string name="pref_zoom_controls_summary">Regulação zoom no toque múltiplo</string>
+  <string name="pref_side_drag_title">Arrastar lateralmente</string>
+  <string name="pref_side_drag_summary">Hábilitar o arrasta lateral na janela do esboço</string>
   <string name="pref_unit_grid_title">Unidades do esboço</string>
   <string name="pref_unit_grid_summary">Tamanho das celas da grelha do esboço</string>
   <string name="pref_recent_nr_title">Número ferramentas recentes</string>
@@ -957,8 +957,8 @@
   <string name="pref_auto_section_pt_title">Pontos secção</string>
   <string name="pref_auto_section_pt_summary">Adicionar ponto de secção às linhas de secção</string>
 
-  <string name="pref_sketchUsesSplays_title">Splays esboço</string>
-  <string name="pref_sketchUsesSplays_summary">Superfície esboço usa splays</string>
+  <string name="pref_sketchUsesSplays_title">Visadas auxiliares esboço</string>
+  <string name="pref_sketchUsesSplays_summary">Superfície esboço usa visadas auxiliares</string>
   <string name="pref_sketchLineStep_title">Lado máximo</string>
   <string name="pref_sketchLineStep_summary">Tamanho máximo do lado do triângulo</string>
   <string name="pref_sketchLineStep_message">Tamanho máximo do lado do triângulo [m]</string>
@@ -985,12 +985,12 @@
   <string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string>
   <string name="pref_walls_type_title">Tipos paredes</string>
   <string name="pref_walls_type_summary">Tipos paredes</string>
-  <string name="pref_walls_plan_thr_title">Inclinação para splay em planta</string>
+  <string name="pref_walls_plan_thr_title">Inclinação para visadas auxiliares em planta</string>
   <string name="pref_walls_plan_thr_summary">Inclinação máxima para paredes em planta</string>
   <string name="pref_walls_plan_thr_message">Inclinação máxima para paredes em planta [deg]</string>
-  <string name="pref_walls_extended_thr_title">Inclinação Splay em secção</string>
-  <string name="pref_walls_extended_thr_summary">Inclinação máxima de splay para paredes em secção</string>
-  <string name="pref_walls_extended_thr_message">Inclinação máxima de splay para paredes em secção [deg]</string>
+  <string name="pref_walls_extended_thr_title">Inclinação visadas auxiliares em secção</string>
+  <string name="pref_walls_extended_thr_summary">Inclinação máxima de visadas auxiliares para paredes em secção</string>
+  <string name="pref_walls_extended_thr_message">Inclinação máxima de visadas auxiliares para paredes em secção [deg]</string>
   <string name="pref_walls_xclose_title">Gestão espaço</string>
   <string name="pref_walls_xclose_summary">Separação mínima dos pontos ao longo da visada</string>
   <string name="pref_walls_xclose_message">Separação mínima dos pontos ao longo da visada [m]</string>
@@ -1064,7 +1064,7 @@
 \nPágina principal: botão MENU
 \nDocumentos: http://sites.google.com/site/speleoapps
 \nComentários, relatórios de bug, implementação de funções: marco.corvi@gmail.com
-\nTranslation by Angelo Roncolato angelo.roncolato.110@gmail.com
+\nTradução de Angelo Roncolato: angelo.roncolato.110@gmail.com
 \n
     </string>
 
