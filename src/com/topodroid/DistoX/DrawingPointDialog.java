@@ -48,6 +48,7 @@ public class DrawingPointDialog extends MyDialog
   private OrientationWidget mOrientationWidget;
  
   private Button   mBtnOk;
+  private Button   mBtnCancel;
 
   public DrawingPointDialog( DrawingActivity context, DrawingPointPath point )
   {
@@ -96,7 +97,9 @@ public class DrawingPointDialog extends MyDialog
     }
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnOk.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
   }
 
   public void onClick(View v) 
@@ -122,6 +125,8 @@ public class DrawingPointDialog extends MyDialog
       if ( DrawingBrushPaths.mPointLib.pointHasText( mPoint.mPointType ) ) {
         mPoint.setText( mETtext.getText().toString().trim() );
       }
+    } else if ( b == mBtnCancel ) {
+      // nothing
     }
     dismiss();
   }

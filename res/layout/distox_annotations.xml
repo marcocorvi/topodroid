@@ -55,6 +55,7 @@
           style="@style/button_default"
           android:text="@string/button_cancel"
       />
+
     </LinearLayout>
 
 </LinearLayout>

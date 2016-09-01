@@ -37,6 +37,7 @@ public class DrawingAreaDialog extends MyDialog
   private OrientationWidget mOrientationWidget; 
 
   private Button   mBtnOk;
+  private Button mBtnCancel;
 
   public DrawingAreaDialog( DrawingActivity context, DrawingAreaPath line )
   {
@@ -63,7 +64,9 @@ public class DrawingAreaDialog extends MyDialog
     // NOTE area do not have options
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnOk.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
   }
 
   public void onClick(View v) 
@@ -76,6 +79,8 @@ public class DrawingAreaDialog extends MyDialog
       if ( mOrientable ) {
         mArea.setOrientation( mOrientationWidget.mOrient );
       }
+    } else if ( b == mBtnCancel ) {
+      // nothing
     }
     dismiss();
   }

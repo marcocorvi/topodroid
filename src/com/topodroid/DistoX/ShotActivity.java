@@ -1324,9 +1324,11 @@ public class ShotActivity extends Activity
 
   void highlightBlock( DistoXDBlock blk ) 
   {
+    // Log.v("DistoX", "highlight block " + ( (blk==null)? "null" : blk.mFrom ) );
     mApp.setHighlightedSplay( blk );
     // now if there is a plot open it
     if ( blk != null && mRecentPlot != null ) {
+      // Log.v("DistoX", "highlight " + blk.mFrom );
       startExistingPlot( mRecentPlot, mRecentPlotType, blk.mFrom );
     }
   }

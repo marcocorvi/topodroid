@@ -193,7 +193,7 @@
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_ok"
-        />
+      />
       <Button android:id="@+id/btn_save"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
@@ -201,7 +201,15 @@
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_save"
-        />
+      />
+      <Button android:id="@+id/btn_back"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_marginLeft="10sp" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_back"
+      />
     </LinearLayout>
 
   <android.inputmethodservice.KeyboardView

@@ -36,7 +36,7 @@ public class DrawingShotDialog extends MyDialog
 {
   private TextView mLabel;
   private Button mBtnOK;
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
   private EditText mETfrom;
   private EditText mETto;
   private EditText mETcomment;
@@ -84,7 +84,7 @@ public class DrawingShotDialog extends MyDialog
                                 R.xml.my_keyboard_base, R.xml.my_keyboard_qwerty );
 
     mBtnOK     = (Button) findViewById(R.id.btn_ok);
-    // mBtnCancel = (Button) findViewById(R.id.button_cancel);
+    mBtnCancel = (Button) findViewById(R.id.btn_cancel);
 
     mRBleft    = (CheckBox) findViewById( R.id.left );
     mRBvert    = (CheckBox) findViewById( R.id.vert );
@@ -135,7 +135,7 @@ public class DrawingShotDialog extends MyDialog
     }
 
     mBtnOK.setOnClickListener( this );
-    // mBtnCancel.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
 
     if ( mBlock != null ) {
       mETfrom.setText( mBlock.mFrom );
@@ -232,6 +232,8 @@ public class DrawingShotDialog extends MyDialog
       mParent.drawWallsAt( mBlock );
       dismiss();
 
+    } else if ( b == mBtnCancel ) {
+      dismiss();
     } else if ( b == mBtnOK ) {
       long extend = mBlock.mExtend;
       long flag   = mBlock.mFlag;

@@ -47,6 +47,7 @@ public class DrawingLineDialog extends MyDialog
   // private RadioButton mBtnOutlineNone;
 
   private Button mBtnOk;
+  private Button mBtnCancel;
 
   private MyCheckBox mReversed;
   private MyCheckBox mBtnSharp;
@@ -100,7 +101,9 @@ public class DrawingLineDialog extends MyDialog
     mBtnOutlineIn.setOnClickListener( this );
 
     mBtnOk = (Button) findViewById( R.id.button_ok );
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnOk.setOnClickListener( this );
+    mBtnCancel.setOnClickListener( this );
 
     int size = TopoDroidApp.getScaledSize( mContext );
     mReversed = new MyCheckBox( mContext, size, R.drawable.iz_reverse_ok, R.drawable.iz_reverse_no );
@@ -161,6 +164,8 @@ public class DrawingLineDialog extends MyDialog
       if ( mBtnClose.isChecked() ) {
         mParent.closeLine( mLine );
       }
+    } else if ( b == mBtnCancel ) {
+      // nothing
     }
     dismiss();
   }
