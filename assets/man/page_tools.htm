@@ -4,7 +4,10 @@
 
 The drawing tools bundled in the program include 9 areas, 16 lines and 46 points.<br><p>
 
-When the app starts the first time it installs the drawing tools files in the "symbol" directory. There are files for points (iconic symbols, like "entrance", or "stalagmite"), lines (like "wall", or "pit"), and areas (regions shown with a transparent color). If you have upgraded the app to a new version it asks if you want to reinstall the drawing tools.<br><p>
+When the app starts the first time it installs the drawing tools files in the "symbol" directory. There are files for points (iconic symbols, like "entrance", or "stalagmite"), lines (like "wall", or "pit"), and areas (regions shown with a transparent color).<br><p>
+
+New versions of the drawing tools are not automatically installed, but there is button to update them.
+The coming dialog tells you the installed and the current version and asks whether to update the drawing tools.<br><p>
 
 
 
@@ -16,6 +19,8 @@ It is likely you do not need many of them, or maybe you need different ones. You
 <li>on the file system</li>
 </ul>
 
+<b>Drawing tool dialog</b><br>
+
 The drawing tool dialog is the interface through which you select the tool with which you draw next. There are four different interfaces,
 <ul>
 <li>most-recently used tools [default]</li>
@@ -24,19 +29,27 @@ The drawing tool dialog is the interface through which you select the tool with 
 <li>all the tools arranged on a triple-grid</li>
 </ul>
 
-Each sketch carries its own palette.  When you close the sketch it is saved with a header listing the enabled tools. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
+<b>Sketch palette</b><br>
+
+Each sketch has its own palette.  When you close the sketch it is saved with a header listing its palette. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
 
 The sketch palette is specified through the "PALETTE" menu of the sketch window. This opens a dialog that lets you decide which tool enable in the sketch palette. You switch on and off the tools to your need then close the dialog (with the <u>back</u> button) to save the changes. You have to do this independently for points, lines and areas.<br><p>
 
+<b>Global palette</b><br>
+
 Except for the "system" tools, TopoDroid loads the drawing tool from files stored in the "symbols" subdirectory of the base "TopoDroid" home. The system tools are the "user" and "label" points, "user" and "wall" lines, "user" and "water" areas. These are always enabled.<br><p>
 
-The PALETTE menu of the main window defines the drawing tool files to load. In the coming dialog you select the tools that are loaded.  The list of files to load is saved in the project database. As for the sketch-level palette, you have to do this independently for points, lines, and areas<br><p>
+The palette button of the main window defines the drawing tool files to load. In the coming dialog you select the tools that are loaded.  The list of files to load is saved in the project database. As for the sketch-level palette, you have to do this independently for points, lines, and areas<br><p>
 
 When the drawing tools are updated, TopoDroid does not install the new tools, automatically.
 However, at level above normal, the tool-enable dialog has a button to install the tools.<br><p>
 
+<b>Custom drawing tools</b><br>
+
 At a even higher level, namely that of the base "TopoDroid" directory, you can customize the tool files.
 You can modify them, delete those you do not need, and add new ones (for tools not included in the program).
 Even if TopoDroid comes with many drawing tools preinstalled, it can happen that it does not contains the tools you need (or you do not like the one provided). The tool files are plain text files, and you can write your own tool file(s). After you put them in the symbol subdirectories, TopoDroid will see and use them. The syntax of the tool files is described in a page on the speleoapps website.<br><p>
+
+The "system" drawing tools cannot be modified, not deleted.<br><p>
 
 </body></html>

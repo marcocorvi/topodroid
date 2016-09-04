@@ -3,18 +3,18 @@
 
 The survey shot window displays the list of the shots of the survey.<br><p>
 
-TopoDroid differentiates among four kinds of shots:
+TopoDroid distiguishes among four kinds of shots (displayed with different colors):
 <ol>
-<li>"blank" shots, ie, shots with the stations not set yet</li>
-<li>"splay": it has only one station, usually the "From" station</li>
-<li>"leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
-<li>"repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
+<li>[red] "blank" shots, ie, shots with the stations not set yet</li>
+<li>[blue] "splay": it has only one station, usually the "From" station</li>
+<li>[white] "leg" (the first shot of a group of repeated measurements): this shot has both the "From" and the "To" station set</li>
+<li>[grey] "repeated-leg" (the following shots of a group of leg shots): these shots do not need to have the stations set</li>
 </ol><p>
-Each kind of shots is displayed with a different color: "legs" are white, "repeated-legs" grey, "splays" blue, "blank" red. Furthermore the background color is blueish for the last downloaded shots, and reddish for <a href="page_accuracy.htm">unreliable</a> shots, ie. shots with "abnormal" field intensities (only DistoX2).<br>
+Furthermore the background color is blueish for the last downloaded shots, and reddish for <a href="page_accuracy.htm">unreliable</a> shots, ie. shots with "abnormal" field intensities (only DistoX2).<br>
 <img src="shots_list.png" alt="shots list"/><p>
 
 <h4>ACTIONS</h4>
-<ul>
+<ul style="margin-top:0">
 <li>tap on a shot distance/azimuth: shot <a href="page_shot_edit1.htm">edit dialog</a></li>
 <li>tap on a shot clino: shot <a href="page_shot_edit2.htm">secondary actions</a></li>
 <li>tap on a station: show/hide splays at the station</li>
@@ -22,49 +22,51 @@ Each kind of shots is displayed with a different color: "legs" are white, "repea
 </ul><br><p>
 
 <h4>BUTTONS</h4>
-<ul>
+<ul style="margin-top:0">
 <li>DistoX data <a href="page_download.htm">download</a>. Hidden if no DistoX selected</li>
 <li><a href="page_bluetooth.htm">Bluetooth</a></li>
 <li>Data <a href="page_displaymode.htm">display mode</a></li>
-<li><u>Sketch</u> list. A long tap opens immediately the most recent sketch</li>
+<li><u>Sketch</u> list dialog. A long tap opens immediately the most recent sketch</li>
 <li>Survey <a href="page_survey_notes.htm">notes</a></li>
-<li><a href="page_azimuth.htm">extend reference</a></li>
+<li>Add a shot <a href="page_man_data.htm">manually</a></li>
 <li><a href="page_saved_station.htm">saved stations</a></li>
+<li><a href="page_azimuth.htm">extend reference</a></li>
 <li><u>Add</u> <a href="page_man_data.htm">manual</a> shot data dialog</li>
 </ul><br><p>
 
 <h4>Sketch dialog</h4>
-Through the Sketch dialog you create a new sketch or open an existing one. There is a button to create a new sketch, and a two-column list of the current survey sketches (items in the left column open a sketch with its plan view, the right column items open sketches in profile view; once open in a view you can switch to the other from within the sketch window).<br><p>
-
+Through the Sketch dialog you create a new sketch or open an existing one. There is a button to create a new sketch, and a two-column list of the current survey sketches. Items in the left column open a sketch in plan view, those in the right column open it in profile view. Once open in a view you can switch to the other from within the sketch window.<br><p>
+<!--
 If the 3D modelling is enabled there is also a button to create a new 3D model, and the existing 3D models are listed after the sketches.<br><p>
+-->
 
 <h4>MENUS</h4>
-<ul>
+<ul style="margin-top:0">
 <li><u>Survey info</u>: survey information window</li>
 <li><u>Recover</u>: deleted item (shot or sketch) recovery</li>
 <li><u>Photo</u>: pictures taken for this survey</li>
 <li><u>Sensor</u>: sensor data taken for this survey</li>
 <li><u>3D</u>: 3D survey display (need <i>Cave3D</i>)</li>
-<li><u>DistoX</u>: device window</li>
+<li><u>DistoX</u>: switches to the device window</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ul><br><p>
 
 <h4>SURVEY SETTINGS</h4>
-<ul>
+<ul style="margin-top:0">
   <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with. [default unset]</li>
   <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station naming policy.</a> [default "splays+foresight"]</li>
   <li><i>Station names</i> specifies the type of the station names, either alphanumeric or numeric [default "alphanumeric"]</li>
   <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog. [default unset]</li>
   <li><i>Thumbnail size</i>: size of the photo thumbnails [default 200, min 80, max 400]</li>
-  <li><i>DATA UNITS >></i>
+  <li><i>DATA UNITS</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Length units</i>: either meters or feet [default meters]</li>
     <li><i>Angle units</i>: either degrees or grads [default degrees]</li>
-    <li><i>Sketch grid-cell unit</i>: either meters or yards [default meters]</li>
+    <li><i>Sketch grid-cell unit</i>: either meters, or yards, or 2-ft [default meters]</li>
     </ul>
   </li>
-  <li><i>SHOT DATA >></i>
+  <li><i>SHOT DATA</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Leg tolerance</i>: the angular tolerance (percent) between consecutive shots of a leg [default 0.05, min 0]</li>
     <li><i>Minimum leg shots</i>: minimum number of close consecutive shots for a leg.[default 2, min 2, max 4]</li>

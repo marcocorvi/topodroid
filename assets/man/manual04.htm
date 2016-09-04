@@ -2,18 +2,26 @@
 <h3>[4] CALIBRATION WINDOW</h3>
 
 Tapping the <u>Calibration</u> menu in the <i>Device</i> window shows the lists of the 
-<a href="page_calib_dialog.htm">calibrations</a> of the current DistoX, through which you can 
-create a new calibration or open an existing one. In both cases you are led to the <i>Calibration</i> window.<br><p>
+<a href="page_calib_dialog.htm">calibrations</a> of the current DistoX. You can open a calibration or
+create a new one. In both cases you are led to the <i>Calibration</i> window.<br><p>
+
+The calibration window has text fields for
+<ul style="margin-top=0">
+<li>the name. Each calibration must have a unique name</li>
+<li>the date.</li>
+<li>a description</li>
+</ul>
+and radiobuttons for the calibration algorithm. By default this is set to "auto" (ie, let TopoDroid decide which algorithm to use).<br><p>
 
 <h4>BUTTONS</h4>
-<ul>
+<ul style="margin-top=0">
 <li><u>Save</u> the calibration informations to the database</li>
 <li><u>Open</u> the calibration data window</li>
 <li><u>Display</u> the calibration coefficients. This shows the coefficients previously computed, and stored in the database</li>
 </ul><br><p>
 
 <h4>MENUS</h4>
-<ul>
+<ul style="margin-top=0">
 <li>Calibration <a href="page_calib_import.htm">export</a></li>
 <li><u>Delete</u> the calibration and its data from the database (non-recoverable action)</li>
 <li><u>Settings</u></li>
@@ -21,7 +29,7 @@ create a new calibration or open an existing one. In both cases you are led to t
 </ul><br><p>
 
 <h4>CALIBRATION SETTINGS</h4>
-<ul>
+<ul style="margin-top=0">
 <li><i>Group policy</i>: how to split the calibration data into <a href="page_groups.htm">groups</a> [default "group by 4"]</li>
 <li><i>Group tolerance</i>: the maximum angular distance between consecutive data for them to be in the same group when the "distance-based" group-policy is used [default 40 min 0]</li>
 <li><i>Error</i>: the computation of the coefficients ends if the variation of every coefficient during an iteration step is smaller than this value [default 10<sup>-6</sup>i, min 0].</li>
