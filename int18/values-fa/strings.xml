@@ -652,6 +652,19 @@
 
   <string name="pref_leg_shots_title">حدال شات های پایه</string>
   <string name="pref_leg_shots_summary">حداقل تعداد شات در یک بخش</string>
+  <!-- TODO string name="pref_station_prefix_title">Prefijo estación de exportación</string -->
+  <!-- TODO string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string -->
+  <!-- TODO string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string -->
+  <!-- TODO string name="pref_ortho_lrud_summary">Ángulo mínimo para tomas laterales</string -->
+  <!-- TODO string name="pref_ortho_lrud_message">Ángulo mínimo de tomas laterales</string -->
+  <!-- TODO string name="pref_survex_eol_title">Terminación de línea Survex/Topo</string -->
+  <!-- TODO string name="pref_survex_eol_summary">Terminación de línea Survex/Topo</string -->
+  <!-- TODO string name="pref_survex_splay_title">Estación toma lateral Survex</string -->
+  <!-- TODO string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string -->
+  <!-- TODO string name="pref_survex_lrud_title">LRUD Survex</string -->
+  <!-- TODO string name="pref_survex_lrud_summary">Añadir toma lateral a exportación Survex</string -->
+  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
+  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
 
   <string name="pref_sock_type_title">سوکت</string>
   <string name="pref_sock_type_summary">ساکت سوکت</string>

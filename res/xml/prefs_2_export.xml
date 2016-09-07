@@ -100,6 +100,13 @@
        android:defaultValue="false"
      />
 
+   <CheckBoxPreference
+       android:key="DISTOX_SVG_GRID"
+       android:summary="@string/pref_svg_grid_summary"
+       android:title="@string/pref_svg_grid_title"
+       android:defaultValue="false"
+     />
+
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_BITMAP_SCALE"
        android:title="@string/pref_bitmap_scale_title"

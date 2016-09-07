@@ -14,7 +14,8 @@ package com.topodroid.DistoX;
 
 import java.util.Locale;
 
-import java.util.ArrayList;
+import java.util.List;
+// import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -29,6 +30,28 @@ import java.io.IOException;
 class DrawingSvg
 {
   private static final float grad2rad = TDMath.GRAD2RAD;
+
+  private static void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String color, float opacity )
+  {
+    if ( grid != null && grid.size() > 0 ) {
+      StringWriter sw = new StringWriter();
+      PrintWriter pw  = new PrintWriter(sw);
+      pw.format(Locale.US, "<g style=\"fill:none;stroke-opacity:%.1f;stroke-width=\"1\";stroke:#666666\" >\n", opacity );
+      for ( DrawingPath p : grid ) {
+        pw.format(Locale.US, "  <path stroke-width=\"1\" stroke=\"#%s\" d=\"", color );
+        pw.format(Locale.US, "M %.2f %.2f", p.x1, p.y1 );
+        pw.format(Locale.US, " L %.2f %.2f", p.x2, p.y2 );
+        pw.format("\" />\n");
+      }
+      pw.format("</g>\n");
+      try {
+        out.write( sw.getBuffer().toString() );
+        out.flush();
+      } catch ( IOException e ) {
+        TDLog.Error( "SVG grid io-exception " + e.getMessage() );
+      }
+    }
+  }
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
@@ -113,6 +136,11 @@ class DrawingSvg
 
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) { 
+          if ( TDSetting.mSvgGrid ) {
+            printSvgGrid( out, plot.GetGrid1(),   "999999", 0.4f );
+            printSvgGrid( out, plot.GetGrid10(),  "666666", 0.6f );
+            printSvgGrid( out, plot.GetGrid100(), "333333", 0.8f );
+          }
           // FIXME OK PROFILE
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
@@ -258,7 +286,7 @@ class DrawingSvg
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TDLog.Error( "SVG io-exception " + e.toString() );
+      TDLog.Error( "SVG io-exception " + e.getMessage() );
     }
   }
 

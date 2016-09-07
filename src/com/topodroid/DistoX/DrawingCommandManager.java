@@ -60,6 +60,10 @@ public class DrawingCommandManager
   private List<DrawingPath>    mGridStack10;
   private List<DrawingPath>    mGridStack100;
 
+  List<DrawingPath> GetGrid1()   { return mGridStack1; }
+  List<DrawingPath> GetGrid10()  { return mGridStack10; }
+  List<DrawingPath> GetGrid100() { return mGridStack100; }
+
   private List<DrawingPath>        mLegsStack;
   private List<DrawingPath>        mSplaysStack;
   private List<ICanvasCommand>     mCurrentStack;

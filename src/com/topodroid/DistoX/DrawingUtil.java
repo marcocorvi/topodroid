@@ -62,6 +62,10 @@ class DrawingUtil
     dpath.mPath.moveTo( x1, y1 );
     dpath.mPath.lineTo( x2, y2 );
     dpath.setBBox( x1, x2, y1, y2 );
+    dpath.x1 = x1; // endpoints
+    dpath.y1 = y1; // endpoints
+    dpath.x2 = x2; // endpoints
+    dpath.y2 = y2; // endpoints
     surface.addGridPath( dpath, k );
   }
 

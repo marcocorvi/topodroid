@@ -738,6 +738,8 @@
   <string name="pref_survex_splay_summary">Добавяне на ДО в края на стран. изм. в Survex</string>
   <string name="pref_survex_lrud_title">Survex Ляво/Дясно/Горе/Долу</string>
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
+  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
+  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>

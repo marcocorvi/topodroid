@@ -779,6 +779,8 @@
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex-Export</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
+  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
+  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
 
   <string name="pref_sock_type_title">Anschlussart</string>
   <string name="pref_sock_type_summary">Socket erzeugen</string>
