@@ -424,7 +424,7 @@
     <string name="profile">PROJECT.*VET. OLDALNÉZET </string>
     <string name="extended_profile">Extended profile*Kiterített Oldalnézet</string>
     <!-- UNUSED string name="v_section">V-SECTION</string -->
-    <string name="h_section">H-SECTION*Keresztszelvény</string>
+    <string name="h_section">H-SECTION*Keresztszelvény???</string>
 
     <string name="distox_err_ok">OK*OK</string>
     <string name="distox_err_headtail">Failed DistoX memory-read*Nem sikerült a DistoX memóriájának kiolvasása</string>
@@ -458,41 +458,41 @@
     <string name="button_open"      >Open      *Megnyit</string>
     <string name="button_read"      >Read      *Olvas  </string>
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
-    <string name="button_dump"      >Dump      *</string>
-    <string name="button_reset"     >Reset     </string>
-    <string name="button_left"      >LEFT</string>
-    <string name="button_right"     >RIGHT</string>
-    <string name="button_clear"     >Clear     </string>
-    <string name="button_save"      >Save      </string>
+    <string name="button_dump"      >Dump      *???</string>
+    <string name="button_reset"     >Reset     *Visszaállít</string>
+    <string name="button_left"      >LEFT*BAL</string>
+    <string name="button_right"     >RIGHT*JOBB</string>
+    <string name="button_clear"     >Clear     *Kiürít???</string>
+    <string name="button_save"      >Save      *Ment</string>
     <!-- string name="button_select"    >Select    </string -->
-    <string name="button_store"     >Store     </string>
+    <string name="button_store"     >Store     *Tárol</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
-    <string name="button_upload"    >Upload    </string>
-    <string name="button_view"      >View      </string>
+    <string name="button_upload"    >Upload    *Feltölt</string>
+    <string name="button_view"      >View      *Megtekint</string>
 
 
-    <string name="button_write"     >Upload</string>
-    <string name="button_xsection"  >X-Section</string>
+    <string name="button_write"     >Upload*Feltölt</string>
+    <string name="button_xsection"  >X-Section*Keresztszelvény</string>
 
-    <string name="mode_leg">Legs</string>
-    <string name="mode_splay">Splays</string>
-    <string name="mode_station">Stations</string>
-    <string name="mode_grid">Grid</string>
-    <string name="mode_fixed">Fix refs</string>
+    <string name="mode_leg">Legs*Segédmérések</string>
+    <string name="mode_splay">Splays*Segédpontok</string>
+    <string name="mode_station">Stations*Mérési pontok</string>
+    <string name="mode_grid">Grid*Rács</string>
+    <string name="mode_fixed">Fix refs*???</string>
 
     <!-- string name="remote_title">Device Remote Control</string -->
-    <string name="remote_on">Laser ON</string>
-    <string name="remote_off">Laser OFF</string>
+    <string name="remote_on">Laser ON*Lézer BE</string>
+    <string name="remote_off">Laser OFF*Lézer KI</string>
     <!-- string name="remote_measure">Measure</string -->
-    <string name="remote_reset">Reset BT</string>
+    <string name="remote_reset">Reset BT*BT újraindítása</string>
     <!-- UNUSED string name="download">Download</string -->
 
-    <string name="popup_do_splay">Splay shot</string>
-    <string name="popup_do_leg">Leg shots</string>
+    <string name="popup_do_splay">Splay shot*???</string>
+    <string name="popup_do_leg">Leg shots*???</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <string name="btn_import">Import</string>
+    <string name="btn_import">Import*</string>
     <string name="btn_install">Install</string>
 
 <!-- FIXME_SKETCH_3D -->    
