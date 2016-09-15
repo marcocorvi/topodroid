@@ -785,7 +785,7 @@
   <string name="pref_tool_point_title">PONTOS</string>
   <string name="pref_location_title">LOCALIZAÇÃO</string>
   <string name="pref_accuracy_title">EXATIDÃO</string>
-  <string name="pref_shot_data_title">DADOS TIRO</string>
+  <string name="pref_shot_data_title">DADOS VISADAS</string>
   <string name="pref_shot_units_title">UNIDADES</string>
   <string name="pref_cwd_title">Directory de trabalho</string>
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
