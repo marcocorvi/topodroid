@@ -5,7 +5,7 @@
   <string-array name="unitGrid">
      <item name="meter">metro</item>
      <item name="yard">jarda</item>
-     <item name="two_tf">2 pés</item>
+     <item name="two_tf">pés</item>
   </string-array>
   <string-array name="survexEol">
      <item name="lf">Linux</item>

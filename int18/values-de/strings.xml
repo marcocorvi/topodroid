@@ -141,7 +141,7 @@
     <string name="import_title">Daten Importieren</string>
     <!-- UNUSED string name="import_wait">Importieren&#8230; bitte warten&#8230;</string -->
     <string name="import_already">Vermessung bereits importiert</string>
-    <string name="import_none">Keine Daten importieren</string>
+    <string name="import_none">Keine Daten importiert</string>
     <string name="import_failed">Import fehlgeschlagen</string>
     <string name="file_not_found">Datei nicht gefunden</string>
     <string name="import_calib_ok">Kalibrierung erfolgreich importiert</string>
@@ -779,8 +779,8 @@
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex-Export</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
-  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
-  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
+  <string name="pref_svg_grid_title">SVG Gitter</string>
+  <string name="pref_svg_grid_summary">Gitter zu SVG hinzufügen</string>
 
   <string name="pref_sock_type_title">Anschlussart</string>
   <string name="pref_sock_type_summary">Socket erzeugen</string>
