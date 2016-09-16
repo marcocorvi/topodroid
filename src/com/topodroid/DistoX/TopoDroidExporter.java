@@ -2331,17 +2331,19 @@ class TopoDroidExporter
       out.printf("0\nENDSEC\n");
 
       out.printf("0\nSECTION\n2\nBLOCKS\n");
-      out.printf("0\nBLOCK\n");
-      out.printf("8\nPOINT\n");
-      out.printf("2\npoint\n70\n64\n");
-      out.printf("10\n0.0\n20\n0.0\n30\n0.0\n");
-      out.printf("0\nLINE\n8\nPOINT\n");
-      out.printf("  10\n  -0.3\n  20\n 0.0\n  30\n0.0\n");
-      out.printf("  11\n  0.3\n  21\n 0.0\n  31\n0.0\n");
-      out.printf("0\nLINE\n8\nPOINT\n");
-      out.printf("  10\n  0.0\n  20\n -0.3\n  30\n0.0\n");
-      out.printf("  11\n  0.0\n  21\n 0.3\n  31\n0.0\n");
-      out.printf("0\nENDBLK\n");
+      if ( TDSetting.mDxfBlocks ) { // DXF_BLOCKS
+        out.printf("0\nBLOCK\n");
+        out.printf("8\nPOINT\n");
+        out.printf("2\npoint\n70\n0\n"); // flag 0
+        out.printf("10\n0.0\n20\n0.0\n30\n0.0\n");
+        out.printf("0\nLINE\n8\nPOINT\n");
+        out.printf("  10\n  -0.3\n  20\n 0.0\n  30\n0.0\n");
+        out.printf("  11\n  0.3\n  21\n 0.0\n  31\n0.0\n");
+        out.printf("0\nLINE\n8\nPOINT\n");
+        out.printf("  10\n  0.0\n  20\n -0.3\n  30\n0.0\n");
+        out.printf("  11\n  0.0\n  21\n 0.3\n  31\n0.0\n");
+        out.printf("0\nENDBLK\n");
+      }
       out.printf("0\nENDSEC\n");
 
       out.printf("0\nSECTION\n2\nENTITIES\n");
@@ -2382,11 +2384,12 @@ class TopoDroidExporter
           out.printf("0\nLINE\n8\nSPLAY\n");
           out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n", f.e, -f.s, -f.v );
           out.printf(Locale.US, "11\n%.2f\n21\n%.2f\n31\n%.2f\n", sh.e, -sh.s, -sh.v );
-
-          out.printf("0\nINSERT\n8\nPOINT\n2\npoint\n");
-          // out.printf("41\n1\n42\n1\n") // point scale
-          // out.printf("50\n0\n");  // orientation
-          out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", sh.e, -sh.s, -sh.v );
+          if ( TDSetting.mDxfBlocks ) {
+            out.printf("0\nINSERT\n8\nPOINT\n2\npoint\n");
+            // out.printf("41\n1\n42\n1\n") // point scale
+            // out.printf("50\n0\n");  // orientation
+            out.printf(Locale.US, "10\n%.2f\n20\n%.2f\n30\n%.2f\n40\n0.3\n", sh.e, -sh.s, -sh.v );
+          }
         }
    
         for ( NumStation st : num.getStations() ) {

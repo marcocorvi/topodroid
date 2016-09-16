@@ -351,10 +351,10 @@ class DrawingDxf
         ++handle; writeBeginTable( out, "UCS", handle, 0 );
         writeEndTable( out );
         
-        if ( VERSION >= 13 ) {
-          ++handle; writeBeginTable( out, "STYLE", handle, 0 );
-          writeEndTable( out );
-        }
+        // if ( VERSION >= 13 ) { // FIXME why was STYLE repeated ?
+        //   ++handle; writeBeginTable( out, "STYLE", handle, 0 );
+        //   writeEndTable( out );
+        // }
 
         ++handle; writeBeginTable( out, "APPID", handle, 1 );
         {
@@ -398,8 +398,9 @@ class DrawingDxf
           writeString( out, 0, "BLOCK" );
           ++handle; writeAcDb( out, handle, "AcDbEntity", "AcDbBlockBegin" );
           writeString( out, 8, "POINT" );
-          writeString( out, 2, block );
-          writeInt( out, 70, 64 );       // flag 64 = this definition is referenced
+          writeString( out, 2, block ); // block name, can be repeated with '3'
+          writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+                                        // 16=ext. dependent, 32=ext. resolved (ignored), 64=referenced xref (ignored)
           writeString( out, 10, "0.0" );
           writeString( out, 20, "0.0" );
           writeString( out, 30, "0.0" );
@@ -667,12 +668,12 @@ class DrawingDxf
               printString( pw5, 8, layer );
               // printInt(  pw5, 39, 1 );         // line thickness
               printInt( pw5, 66, 1 ); // group 1
-              printInt( pw5, 70, 0 ); // flag
+              printInt( pw5, 70, 8 ); // polyline flag 8 = 3D polyline, 1 = closed 
               for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
                 printString( pw5, 0, "VERTEX" );
                 if ( VERSION >= 13 ) {
                   ++handle; printAcDb( pw5, handle, "AcDbVertex", "AcDb3dPolylineVertex" );
-                  printInt( pw5, 70, 32 );
+                  printInt( pw5, 70, 32 ); // flag 32 = 3D polyline vertex
                 }
                 printString( pw5, 8, layer );
                 printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );

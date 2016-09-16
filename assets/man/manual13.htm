@@ -62,14 +62,19 @@ Fixed points are exported as lat-long.<br><p>
 <b>Survex</b> (.svx)<br>
 Survey data can be exported as <i>Survex</i> files.<br>
 Data units are according to the user options.<br>
-Settings:
-<ul style="margin-top=0">
+Settings:<ul style="margin-top=0">
 <li>line termination can be either Unix or Windows</li>
 <li>splay shots can be exported with a named TO station (named as the FROM station with a letter appended)</li>
-</ul><br><p>
+<li>add LRUD to export</li>
+</ul><p>
 
 <b>Topo</b> (.cav)<br>
 Survey data can be exported as <i>Topo</i> files.<br><p>
+
+Settings:<ul style="margin-top=0">
+<li>line termination can be either Unix or Windows</li>
+</ul><p>
+
 
 <b>VisualTopo</b> (.tro)<br>
 <i>VisualTopo</i> data file are supported both in input and in export.<br>
@@ -113,12 +118,11 @@ Data are corrected with magnetic declination.<br><p>
 
 Sketches are exported to therion format with a scale 1:39.37<br><p>
 
-By default TopoDroid, unlike "xtherion", does not add an extra point coinciding with the first point, to closed area borders.
-There is an option to add this extra point.<br><p>
-
-Another option tells TopoDroid to include "station" points in the Therion scrap [default: on].<br><p>
-
-A third option specifies to add the splays to the scrap (as lines of type "u:splay") [default: off].<br><p>
+Settings:<ul style="margin-top=0">
+<li>extra point for area borders.  By default TopoDroid, unlike "xtherion", does not add an extra point coinciding with the first point, to closed area borders.</li>
+<li>"station" points. [default: on].</li>
+<li>add splays to the scrap (as lines of type "u:splay") [default: off].</li>
+</ul><p>
 
 <b>Note</b>. With version 3.1 TopoDroid saves sketches "natively" in its binary format.<br>
 Previous versions used Therion format.
@@ -140,14 +144,26 @@ Sketches can be exported as 2D DXF files with layers for each point, line and ar
 
 The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
 
+Settings:<ul style="margin-top=0">
+<li>scale of the DXF</li>
+<li>AutoCAD version (6 or 12)</li>
+</ul><p>
+
 <b>SVG</b> (.svg)<br>
 Sketches can be exported as SVG files.<br><p>
+
+Settings:<ul style="margin-top=0">
+<li>grid added to the export (cell size in the current grid units).</li>
+</ul><p>
 
 <b>PNG</b> (.png)<br>
 Image file in PNG format is used only to export sketches.<br><p>
 
-The image resolution can be changed through a setting: a resolution of 1 means that 1 m = 40 pixels.
-If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds (or it gets so small that the program gives up trying).<br><p>
+Settings:<ul style="margin-top=0">
+<li>image resolution (1 means that 1 m = 40 pixels).
+If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds (or it gets so small that the program gives up trying).</li>
+<li>background color. Enter three numbers between 0 (black) and 255 (saturated) for red, green, and blue, respectively.</li>
+</ul><p>
 
 <h4>CALIBRATION EXPORT</h4>
 

@@ -399,8 +399,8 @@
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Informações do mapa</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f percent</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f percent</string -->
+    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
+    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f %%</string -->
     <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidade %1$.1f %2$s %3$.1f %4$s"</string>

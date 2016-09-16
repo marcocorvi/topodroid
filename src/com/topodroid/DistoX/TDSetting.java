@@ -146,6 +146,8 @@ class TDSetting
     "DISTOX_WALLS_XSTEP",         // 91
     "DISTOX_WALLS_CONCAVE",       // 92
 
+    "DISTOX_DXF_BLOCKS", // DXF_BLOCKS
+
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
     // "DISTOX_SKETCH_BERDER_STEP",
     // "DISTOX_SKETCH_SECTION_STEP", // 
@@ -154,7 +156,10 @@ class TDSetting
     "DISTOX_ALGO_MIN_BETA",
     "DISTOX_ALGO_MIN_GAMMA",
     "DISTOX_ALGO_MIN_DELTA",
+
   };
+
+  static boolean mDxfBlocks = true; // DXF_BLOCKS
 
   static float mAlgoMinAlpha = 0.1f;
   static float mAlgoMinBeta  = 4.0f;
@@ -723,6 +728,8 @@ class TDSetting
     mWallsXStep       = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_WALLS_XSTEP
     mWallsConcave     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_WALLS_CONCAVE
 
+    mDxfBlocks        =  prefs.getBoolean( key[k++], true );  // DXF_BLOCKS
+
     mAlgoMinAlpha     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_ALGO_MIN_ALPHA
     mAlgoMinBeta      = tryFloat( prefs, key[k++], "4.0" );   // DISTOX_ALGO_MIN_BETA
     mAlgoMinGamma     = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_ALGO_MIN_GAMMA
@@ -1055,6 +1062,9 @@ class TDSetting
       mWallsConcave = tryFloat( prefs, k, "0.1" ); // DISTOX_WALLS_CONCAVE
  
     } else if ( k.equals( key[ nk++ ] ) ) {
+      mDxfBlocks = prefs.getBoolean( k, true ); // DXF_BLOCKS
+
+    } else if ( k.equals( key[ nk++ ] ) ) {
       mAlgoMinAlpha   = tryFloat( prefs, k, "0.1" );   // DISTOX_ALGO_MIN_ALPHA
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAlgoMinBeta    = tryFloat( prefs, k, "4.0" );   // DISTOX_ALGO_MIN_BETA
@@ -1309,6 +1319,8 @@ class TDSetting
     if ( name.equals( "DISTOX_WALLS_XCLOSE"       ) ) return parseFloatValue( value, mWallsXClose, 0 );
     if ( name.equals( "DISTOX_WALLS_XSTEP"        ) ) return parseFloatValue( value, mWallsXStep, 0 );
     if ( name.equals( "DISTOX_WALLS_CONCAVE"      ) ) return parseFloatValue( value, mWallsConcave, 0 );
+
+    // if ( name.equals( "DISTOX_DXF_BLOCKS" )  // DXF_BLOCKS
 
     if ( name.equals( "DISTOX_ALGO_MIN_ALPHA"     ) ) return parseFloatValue( value, mAlgoMinAlpha, 0, 1 );
     if ( name.equals( "DISTOX_ALGO_MIN_BETA"      ) ) return parseFloatValue( value, mAlgoMinBeta,  0 );

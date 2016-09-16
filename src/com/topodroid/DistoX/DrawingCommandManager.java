@@ -1297,6 +1297,9 @@ public class DrawingCommandManager
             float x, y;
             LinePoint lp = sp.mPoint;
             DrawingPath item = sp.mItem;
+            LinePoint lp1 = sp.mLP1;
+            LinePoint lp2 = sp.mLP2;
+
             if ( lp != null ) { // line-point
               x = lp.mX;
               y = lp.mY;
@@ -1319,12 +1322,18 @@ public class DrawingCommandManager
               canvas.drawPath( path, DrawingBrushPaths.highlightPaint3 );
             }
             if ( item.mType == DrawingPath.DRAWING_PATH_LINE ) {
+              Paint paint = DrawingBrushPaths.fixedYellowPaint;
               DrawingLinePath line = (DrawingLinePath) item;
               lp = line.mFirst;
+              LinePoint lpn = lp1;
+              if ( lp == lp1 ) {
+                paint = DrawingBrushPaths.fixedOrangePaint;
+                lpn = lp2;
+              }
               path = new Path();
               path.moveTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
               path.lineTo( lp.mX, lp.mY );
-              for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+              for ( lp = lp.mNext; lp != lpn && lp != null; lp = lp.mNext ) {
                 if ( lp.has_cp ) {
                   path.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
                 } else {
@@ -1332,8 +1341,33 @@ public class DrawingCommandManager
                 }
               }
               path.transform( mMatrix );
-              canvas.drawPath( path, DrawingBrushPaths.fixedYellowPaint );
-             
+              canvas.drawPath( path, paint );
+              if ( lp != lp2 ) {
+                path = new Path();
+                path.moveTo( lp.mX, lp.mY );
+                for ( lp = lp.mNext; lp != lp2 && lp != null; lp = lp.mNext ) {
+                  if ( lp.has_cp ) {
+                    path.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+                  } else {
+                    path.lineTo( lp.mX, lp.mY );
+                  }
+                }
+                path.transform( mMatrix );
+                canvas.drawPath( path, DrawingBrushPaths.fixedOrangePaint );
+              }
+              if ( lp != null && lp.mNext != null ) {
+                path = new Path();
+                path.moveTo( lp.mX, lp.mY );
+                for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+                  if ( lp.has_cp ) {
+                    path.cubicTo( lp.mX1, lp.mY1, lp.mX2, lp.mY2, lp.mX, lp.mY );
+                  } else {
+                    path.lineTo( lp.mX, lp.mY );
+                  }
+                }
+                path.transform( mMatrix );
+                canvas.drawPath( path, DrawingBrushPaths.fixedYellowPaint );
+              }
             }
           }
           radius = radius/3; // 2/zoom;
@@ -1443,6 +1477,78 @@ public class DrawingCommandManager
     // checkLines();
   }
 
+  boolean setRangeAt( float x, float y, float zoom )
+  {
+    SelectionPoint sp1 = mSelected.mHotItem;
+    if ( sp1 == null ) {
+      // Log.v("DistoX", "set range at: hotItem is null" );
+      return false;
+    }
+    DrawingPath item = sp1.mItem;
+    if ( item.mType != DrawingPath.DRAWING_PATH_LINE && item.mType != DrawingPath.DRAWING_PATH_AREA ) {
+      // Log.v("DistoX", "set range at: item not line/area" );
+      // mSelected.clear();
+      return false;
+    }
+    float radius = TDSetting.mCloseCutoff + TDSetting.mCloseness / zoom;
+    SelectionPoint sp2 = null;
+    synchronized ( mSelected ) {
+      sp2 = mSelection.selectOnItemAt( item, x, y, 4*radius );
+    }
+    if ( sp2 == null ) {
+      // Log.v("DistoX", "set range at: select on Item return null");
+      mSelected.clear();
+      return false;
+    }
+    // range is sp1 -- sp2
+    LinePoint lp1 = sp1.mPoint;
+    LinePoint lp2 = sp2.mPoint;
+    int cnt = 0;
+    LinePoint lp = lp1;
+    for ( ; lp != null; lp=lp.mNext ) { ++cnt; if ( lp == lp2 ) break; }
+    if ( lp == null ) {
+      cnt = 0;
+      for ( lp=lp1; lp != null; lp=lp.mPrev ) { ++cnt; if ( lp == lp2 ) break; }
+      if ( lp == null ) { // error
+        // Log.v("DistoX", "set range at: error");
+        return false;
+      }
+      lp = lp1; lp1 = lp2; lp2 = lp; // swap lp1 <--> lp2
+    } 
+    LinePoint lp0 = lp1;
+    float d1 = 0;
+    float d2 = 0;
+    int c1 = 0;
+    int c2 = 0;
+    for ( int c = cnt/2; c > 0; --c ) {
+      ++ c1;
+      lp = lp0.mNext; 
+      d1 += lp0.distance( lp );
+      lp0 = lp;
+    }
+    LinePoint lp4 = lp0;
+    for ( LinePoint lp3 = lp0.mNext; lp3 != lp2 && lp3 != null; lp3=lp3.mNext) {
+      ++ c2;
+      d2 += lp4.distance( lp3 );
+      lp4 = lp3;
+    }
+    // Log.v("DistoX", "set range d1 " + d1 + " d2 " + d2 + " C " + cnt + " " + c1 + " " + c2 );
+     
+    // now make the range sp1 -- sp2 and the hotItem the midpoint
+    SelectionPoint sp = mSelection.getPoint( lp0 ); 
+    sp.mLP1 = lp1;
+    sp.mLP2 = lp2;
+    sp.mD1 = d1;
+    sp.mD2 = d2;
+
+    mSelected.clear();
+    mSelected.addPoint( sp );
+    mSelected.mHotItem = sp;
+
+    return true;
+  }
+
+    
   public SelectionSet getItemsAt( float x, float y, float zoom )
   {
     // Log.v( "DistoX", "getItemAt " + x + " " + y + " zoom " + zoom + " selection pts " + mSelection.mPoints.size() );
@@ -1522,6 +1628,7 @@ public class DrawingCommandManager
         x = spmin.mItem.cx - x;
         y = spmin.mItem.cy - y;
       }
+      // sp.shiftBy( x, y, 0f );
       sp.shiftBy( x, y );
     }
     return true;
@@ -1903,10 +2010,19 @@ public class DrawingCommandManager
   }
 
   SelectionPoint hotItem() { return mSelected.mHotItem; }
-  void shiftHotItem( float dx, float dy ) 
+
+  // void shiftHotItem( float dx, float dy, float range ) 
+  void shiftHotItem( float dx, float dy )
   { 
     synchronized( mSelection ) {
+      // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
+      DrawingPath path = sp.mItem;
+      // if ( path.mType == DrawingPath.DRAWING_PATH_POINT || DrawingActivity.mEditRadius == 0 ) {
+      //   mSelection.checkBucket( sp );
+      // } else {
+      //   mSelection.rebucketLinePath( (DrawingPointLinePath)path );
+      // }
       mSelection.checkBucket( sp );
     }
   }

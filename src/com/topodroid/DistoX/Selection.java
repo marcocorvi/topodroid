@@ -253,6 +253,36 @@ class Selection
     }
   }
 
+  // FXIME use buckets
+  SelectionPoint getPoint( LinePoint lp )
+  {
+    for ( SelectionPoint sp : mPoints ) {
+      if ( sp.mPoint == lp ) return sp;
+    }
+    return null;
+  }
+
+
+  SelectionPoint bucketSelectOnItemAt( DrawingPath item, float x, float y, float radius )
+  {  
+    float min_distance = radius;
+    SelectionPoint ret = null;
+    for ( SelectionBucket bucket : mBuckets ) {
+      if ( bucket.contains( x, y, radius, radius ) ) {
+        for ( SelectionPoint sp : bucket.mPoints ) {
+          if ( sp.mItem == item ) {
+            float d = sp.distance( x, y );
+            if ( d < min_distance ) {
+              min_distance = d;
+              ret = sp;
+            }
+          }
+        }
+      }
+    }
+    return ret;
+  }
+
   void bucketSelectAt( float x, float y, float radius, SelectionSet sel, boolean legs, boolean splays, boolean stations )
   {
     // Log.v("DistoX", "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
@@ -272,6 +302,11 @@ class Selection
         }
       }
     }
+  }
+  
+  SelectionPoint  selectOnItemAt( DrawingPath item, float x, float y, float radius )
+  {
+    return bucketSelectOnItemAt( item, x, y, radius );
   }
 
   void selectAt( SelectionSet sel, float x, float y, float radius, boolean legs, boolean splays, boolean stations )
@@ -312,11 +347,32 @@ class Selection
   void checkBucket( SelectionPoint sp ) 
   {
     if ( sp == null ) return;
-    SelectionBucket sb = sp.mBucket;
-    if ( sb != null && ! sb.contains( sp.X(), sp.Y() ) ) {
-      // find the bucket that contains sp and assign it to sp
-      sb = getBucket( sp.X(), sp.Y() );
-      sp.setBucket( sb ); // this removes sp from its old bucket and add it to the new bucket
+    if ( sp.mLP1 != null || sp.mLP2 != null ) {
+      rebucketLinePath( (DrawingPointLinePath)sp.mItem );
+    } else {
+      SelectionBucket sb = sp.mBucket;
+      if ( sb != null && ! sb.contains( sp.X(), sp.Y() ) ) {
+        // find the bucket that contains sp and assign it to sp
+        sb = getBucket( sp.X(), sp.Y() );
+        sp.setBucket( sb ); // this removes sp from its old bucket and add it to the new bucket
+      }
+    }
+  }
+
+  void rebucketLinePath( DrawingPointLinePath line )
+  {
+    for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {
+      for ( SelectionPoint sp : mPoints ) {
+        if ( sp.mPoint == lp ) {
+          SelectionBucket sb = sp.mBucket;
+          if ( sb != null && ! sb.contains( sp.X(), sp.Y() ) ) {
+            // find the bucket that contains sp and assign it to sp
+            sb = getBucket( sp.X(), sp.Y() );
+            sp.setBucket( sb ); // this removes sp from its old bucket and add it to the new bucket
+          }
+          break;
+        }
+      }
     }
   }
 

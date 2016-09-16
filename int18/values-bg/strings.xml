@@ -396,8 +396,8 @@
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Информация за картировката</string>
-    <string name="stat_stddev_m">M станд. отклонение %1$.1f %</string>
-    <string name="stat_stddev_g">G станд. отклонение  %1$.1f %</string>
+    <string name="stat_stddev_m">M станд. отклонение %1$.1f %%</string>
+    <string name="stat_stddev_g">G станд. отклонение  %1$.1f %%</string>
     <string name="stat_stddev_dip">Магн. наклон ст. откл.  %1$.1f градуса (средно %2$.1f градуса)</string>
     <string name="stat_component">Компоненти %1$d</string>
     <string name="stat_depth">Дълбочина %1$.1f %2$s %3$.1f %4$s"</string>

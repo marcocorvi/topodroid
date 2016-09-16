@@ -1043,8 +1043,10 @@ class SketchModel
     return mSelected.mHotItem;
   }
 
+  // void shiftHotItem( float dx, float dy, float range )
   void shiftHotItem( float dx, float dy )
   {
+    // mSelected.shiftHotItem( dx, dy, range );
     mSelected.shiftHotItem( dx, dy );
   }
 

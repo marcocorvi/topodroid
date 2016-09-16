@@ -448,6 +448,9 @@ public class DrawingSurface extends SurfaceView
 
   SelectionSet getItemsAt( float x, float y, float zoom ) { return commandManager.getItemsAt( x, y, zoom ); }
 
+  // set line range at the hot-item
+  boolean setRangeAt( float x, float y, float zoom ) { return commandManager.setRangeAt( x, y, zoom ); }
+
   boolean moveHotItemToNearestPoint() { return commandManager.moveHotItemToNearestPoint(); }
   
   int snapHotItemToNearestLine() { return commandManager.snapHotItemToNearestLine(); }
@@ -456,6 +459,7 @@ public class DrawingSurface extends SurfaceView
   
   SelectionPoint hotItem() { return commandManager.hotItem(); }
 
+  // void shiftHotItem( float dx, float dy, float range ) { commandManager.shiftHotItem( dx, dy, range ); }
   void shiftHotItem( float dx, float dy ) { commandManager.shiftHotItem( dx, dy ); }
 
   SelectionPoint nextHotItem() { return commandManager.nextHotItem(); }

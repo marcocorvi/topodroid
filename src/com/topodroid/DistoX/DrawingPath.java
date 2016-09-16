@@ -285,7 +285,8 @@ public class DrawingPath extends RectF
     }
   }
 
-  /** FIXME apparently this is called when mPaint is still null
+  /** FIXME apparently this can be called when mPaint is still null
+   *        and when fixedBluePaint is null
    */
   protected void drawPath( Path path, Canvas canvas )
   {
@@ -297,7 +298,9 @@ public class DrawingPath extends RectF
         canvas.restore();
       }
     } else {
-      if ( mType == DRAWING_PATH_SPLAY && mBlock != null && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) ) {
+      if ( mType == DRAWING_PATH_SPLAY 
+           && mBlock != null && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) 
+           && DrawingBrushPaths.fixedBluePaint != null ) {
         canvas.drawPath( path, DrawingBrushPaths.fixedBluePaint );
       } else if ( mPaint != null ) {
         canvas.drawPath( path, mPaint );

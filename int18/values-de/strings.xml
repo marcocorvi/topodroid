@@ -413,8 +413,8 @@
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Vermessungsinfo</string>
-    <string name="stat_stddev_m">Mag. Stdabweichung %1$.1f %</string>
-    <string name="stat_stddev_g">Grav. Stdabweichung %1$.1f %</string>
+    <string name="stat_stddev_m">Mag. Stdabweichung %1$.1f %%</string>
+    <string name="stat_stddev_g">Grav. Stdabweichung %1$.1f %%</string>
     <string name="stat_stddev_dip">Mag. Neigung Stdabweichung %1$.1f °. (durchschn. %2$.1f °)</string>
     <string name="stat_component">Komponenten %1$d</string>
     <string name="stat_depth">Tiefe %1$.1f %2$s %3$.1f %4$s"</string>

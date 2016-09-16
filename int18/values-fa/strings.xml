@@ -343,6 +343,10 @@
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">درباره بررسی</string>
+    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
+    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f %%</string -->
+    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+
     <string name="stat_component">توضیحات %1$d</string>
     <!-- FIXME string name="stat_depth">عمق %1$.1f %2$.1f"</string -->
     <!-- FIXME string name="stat_duplicate">شات تکراری %1$d %2$.1f</string -->

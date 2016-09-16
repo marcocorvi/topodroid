@@ -133,6 +133,14 @@
        android:inputType="numberDecimal"
        android:defaultValue="1.0" / -->
 
+   <!-- CheckBoxPreference
+       android:key="DISTOX_DXF_BLOCKS"
+       android:summary="@string/pref_dxf_blocks_summary"
+       android:title="@string/pref_dxf_blocks_title"
+       android:defaultValue="true"
+     / -->
+
+
   <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_ACAD_VERSION"
        android:title="@string/pref_acad_version_title"

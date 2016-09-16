@@ -98,14 +98,16 @@ public class DrawingActivity extends ItemDrawer
   private static int IC_BLUETOOTH = 4;
   private static int IC_PLAN      = 7;
   private static int IC_DIAL      = 8;
+  private static int IC_MENU      = 18+1;
+  private static int IC_EXTEND    = 18+2;
   private static int IC_JOIN      = 15;
-  private static int IC_JOIN_NO   = 20;
-  private static int IC_MENU      = 18;
-  private static int IC_EXTEND    = 19;
+  private static int IC_BORDER_NO = 18;
+  private static int IC_JOIN_NO       = 18+3;
   private static int IC_CONTINUE_NO   = 12;  // index of continue-no icon
-  private static int IC_CONTINUE_CONT = 21;     // index of continue icon
-  private static int IC_CONTINUE_JOIN = 22;     // index of continue icon
-  private static int IC_ADD = 23;
+  private static int IC_CONTINUE_CONT = 18+4;     // index of continue icon
+  private static int IC_CONTINUE_JOIN = 18+5;     // index of continue icon
+  private static int IC_ADD           = 18+6;
+  private static int IC_BORDER_OK     = 18+7;
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -115,6 +117,10 @@ public class DrawingActivity extends ItemDrawer
   private static int BTN_CONTINUE = 6;  // index of mButton2 continue button
   private static int BTN_JOIN = 5;      // index of mButton3 join button
   private static int BTN_REMOVE = 7;    // index of mButton3 remove
+  private static int BTN_BORDER = 8;
+
+  // protected static int mEditRadius = 0; 
+  private boolean mDoEditRange = false;
 
   private View mZoomView;
 
@@ -137,12 +143,14 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_join,
                         R.drawable.iz_note,          
                         R.drawable.iz_delete,        // 17
-                        R.drawable.iz_menu,          // 18
-                        R.drawable.iz_extended,      // 19
-                        R.drawable.iz_join_no,       // 20
-                        R.drawable.iz_continue_cont, // 21
-                        R.drawable.iz_continue_join, // 22
-                        R.drawable.iz_plus,          // 23
+                        R.drawable.iz_range_no,      // 18
+                        R.drawable.iz_menu,          // 18+1
+                        R.drawable.iz_extended,      // 18+2
+                        R.drawable.iz_join_no,       // 18+3
+                        R.drawable.iz_continue_cont, // 18+4
+                        R.drawable.iz_continue_join, // 18+5
+                        R.drawable.iz_plus,          // 18+6
+                        R.drawable.iz_range_ok,      // 18+7
                       };
   private static int menus[] = {
                         R.string.menu_export,     // 0
@@ -349,7 +357,7 @@ public class DrawingActivity extends ItemDrawer
   private float mClino   = 0.0f;
   private PointF mOffset  = new PointF( 0f, 0f );
   private PointF mDisplayCenter;
-  private float mZoom  = 1.0f;
+  protected float mZoom  = 1.0f;
 
   private boolean mModified; // whether the sketch has been modified 
 
@@ -372,7 +380,7 @@ public class DrawingActivity extends ItemDrawer
   private Button[] mButton5; // eraser
   private int mNrButton1 = 9;          // main-primary
   private int mNrButton2 = 7;          // draw
-  private int mNrButton3 = 8;          // edit
+  private int mNrButton3 = 9;          // edit
   private int mNrButton5 = 5;          // erase
   private HorizontalButtonView mButtonView1;
   private HorizontalButtonView mButtonView2;
@@ -386,6 +394,8 @@ public class DrawingActivity extends ItemDrawer
   private BitmapDrawable mBMdownload_wait;
   private BitmapDrawable mBMjoin;
   private BitmapDrawable mBMjoin_no;
+  private BitmapDrawable mBMedit_ok;
+  private BitmapDrawable mBMedit_no;
   private BitmapDrawable mBMplan;
   private BitmapDrawable mBMextend;
   private BitmapDrawable mBMcontinue_no;
@@ -1042,8 +1052,15 @@ public class DrawingActivity extends ItemDrawer
       if ( ic == IC_JOIN ) 
         mBMjoin = MyButton.getButtonBackground( mApp, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
+    // mButton3[ BTN_BORDER ] = new Button( this );
+    mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
+    // mButton3[ BTN_BORDER ].setOnClickListener( this );
+    mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
+    // mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
     mBMjoin_no = MyButton.getButtonBackground( mApp, res, izons[IC_JOIN_NO] );
     mBMadd     = MyButton.getButtonBackground( mApp, res, izons[IC_ADD] );
+    mBMedit_ok = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
+    mBMedit_no = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
 
     mButton5 = new Button[ mNrButton5 ];    // ERASE
     off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
@@ -1130,6 +1147,7 @@ public class DrawingActivity extends ItemDrawer
     if ( TDSetting.mLevelOverBasic ) {
       mButton1[BTN_PLOT].setOnLongClickListener( this );
       mButton3[BTN_REMOVE].setOnLongClickListener( this );
+      mButton3[BTN_BORDER].setOnLongClickListener( this );
     }
  
     setConnectionStatus( mDataDownloader.getStatus() );
@@ -1608,13 +1626,24 @@ public class DrawingActivity extends ItemDrawer
 
     private void doSelectAt( float x_scene, float y_scene )
     {
+      // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode );
       if ( mMode == MODE_EDIT ) {
+        if ( mDoEditRange ) {
+          // mDoEditRange = false;
+          // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
+          if ( mDrawingSurface.setRangeAt( x_scene, y_scene, mZoom ) ) {
+            mMode = MODE_SHIFT;
+            return;
+          }
+        } 
         // float d0 = TopoDroidApp.mCloseCutoff + TopoDroidApp.mCloseness / mZoom;
         SelectionSet selection = mDrawingSurface.getItemsAt( x_scene, y_scene, mZoom );
         // Log.v( TopoDroidApp.TAG, "selection at " + x_scene + " " + y_scene + " items " + selection.size() );
         // Log.v( TopoDroidApp.TAG, " zoom " + mZoom + " radius " + d0 );
         if ( selection.mPoints.size() > 0 ) {
-          mMode = MODE_SHIFT;
+          if ( ! mDoEditRange ) {
+            mMode = MODE_SHIFT;
+          }
           setButton3( selection.mHotItem.type() );
         }
       }
@@ -2002,6 +2031,7 @@ public class DrawingActivity extends ItemDrawer
                    || (mMode == MODE_SHIFT && mShiftMove) ) {
             moveCanvas( x_shift, y_shift );
           } else if ( mMode == MODE_SHIFT ) {
+            // mDrawingSurface.shiftHotItem( x_scene - mStartX, y_scene - mStartY, mEditRadius * 10 / mZoom );
             mDrawingSurface.shiftHotItem( x_scene - mStartX, y_scene - mStartY );
             mStartX = x_scene;
             mStartY = y_scene;
@@ -3047,6 +3077,10 @@ public class DrawingActivity extends ItemDrawer
             }
           }
         }
+      // } else if ( b == mButton3[ BTN_BORDER ] ) {
+      //   mDoEditRange = ~ mDoEditRange;
+      //   mEditRadius += 2;
+      //   mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
       }
       return true;
     }
@@ -3236,6 +3270,18 @@ public class DrawingActivity extends ItemDrawer
             }
             askDeleteItem( p, t, name );
           }
+        }
+      } else if ( b == mButton3[ k3++ ] ) {
+        // if ( mEditRadius > 0 ) {
+        //   mEditRadius --;
+        //   mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
+        // }
+        if ( mDoEditRange ) {
+          mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
+          mDoEditRange = false;
+        } else {
+          mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_ok );
+          mDoEditRange = true;
         }
       }
     }

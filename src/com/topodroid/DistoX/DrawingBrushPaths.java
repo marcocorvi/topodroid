@@ -105,6 +105,7 @@ public class DrawingBrushPaths
   static Paint fixedBluePaint  = null;
   static Paint fixedRedPaint  = null;
   static Paint fixedYellowPaint  = null;
+  static Paint fixedOrangePaint  = null;
   static Paint fixedSplayPaint = null;
   static Paint fixedSplay2Paint = null;  // cross-section splay2 (at viewed station)
   static Paint fixedSplay3Paint = null;  // dash splay
@@ -236,6 +237,13 @@ public class DrawingBrushPaths
       fixedYellowPaint.setStrokeJoin(Paint.Join.ROUND);
       fixedYellowPaint.setStrokeCap(Paint.Cap.ROUND);
       fixedYellowPaint.setColor(0xFFffff00); // YELLOW
+
+      fixedOrangePaint = new Paint();
+      fixedOrangePaint.setDither(true);
+      fixedOrangePaint.setStyle(Paint.Style.STROKE);
+      fixedOrangePaint.setStrokeJoin(Paint.Join.ROUND);
+      fixedOrangePaint.setStrokeCap(Paint.Cap.ROUND);
+      fixedOrangePaint.setColor(0xFFff9966); // ORANGE
 
       fixedSplayPaint = new Paint();
       fixedSplayPaint.setDither(true);

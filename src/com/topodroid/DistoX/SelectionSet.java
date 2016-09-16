@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
-// import android.util.Log;
+import android.util.Log;
 
 class SelectionSet
 {
@@ -28,15 +28,27 @@ class SelectionSet
   }
 
   void reset()
-  {
+  { 
+    // Log.v("DistoX", "selection set reset()");
+    clearHotItemRange();
     mIndex = -1;
     mHotItem = null;
   }
 
-  // shit the hot item and return it (or return null)
+  void clearHotItemRange()
+  {
+    if ( mHotItem != null ) {
+      mHotItem.mLP1 = null;
+      mHotItem.mLP2 = null;
+    }
+  }
+
+  // shift the hot item and return it (or return null)
+  // SelectionPoint shiftHotItem( float dx, float dy, float range )
   SelectionPoint shiftHotItem( float dx, float dy )
   {
     if ( mHotItem == null ) return null;
+    // mHotItem.shiftBy( dx, dy, range );
     mHotItem.shiftBy( dx, dy );
     return mHotItem;
   }
@@ -65,6 +77,7 @@ class SelectionSet
 
   void clear() 
   { 
+    // Log.v("DistoX", "selection set clear()");
     mPoints.clear(); 
     reset();
   }

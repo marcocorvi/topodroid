@@ -39,7 +39,7 @@ Segments of Bezier lines have two control points. These are stored with the segm
 To clear the selection tap somewhere else in the canvas. To move the editing point, drag it with the finger. The item can be deleted (removed) or its <a href="page_item_edit.htm">properties</a> changed ("tool" button). Editing applies also to shots and stations.
 <br><p>
 
-<h4>Point-wise editing [A]</h4>
+<h4>Point-wise edit actions [A]</h4>
 
 The second to the right button applies only to drawing items and has a drop-down menu of advanced editing actions.
 <ul style="margin-top=0">
@@ -51,6 +51,18 @@ The second to the right button applies only to drawing items and has a drop-down
 <li><i>Smooth the line segment</i> inserts control points. These are put at 1/3 and 2/3 along the segment. Further editing can move them and give any wanted curvature to the segment. [lines, areas]</li>
 <li><i>Remove the line/area point</i> [lines, areas]</li>
 </ul><br><p>
+
+<h4>Range selection modes</h4>
+Lines and areas points can be selected individually (point selection mode) or as a range.
+To select a range on a line, the last button in the "edit" button-bar must be on.
+You select first one endpoint of the range, then the other endpoint.
+<br><p>
+
+The range is highlighted orange. Its midpoint gets the big green dot, and it controls how the line range is deformed:
+the points on the range are shifted by an amount that depends on the distance from the midpoint. 
+As a rule of thumb the middle third of the range is moved and the first and last thirds reamin almost unchanged.
+<br><p>
+
 
 
 <a href="page_sketch_station.htm">Sketch station editing</a><br>
