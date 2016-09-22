@@ -493,31 +493,31 @@
     <string name="popup_do_leg">Leg shots*???</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <string name="btn_import">Import*</string>
-    <string name="btn_install">Install</string>
+    <string name="btn_import">Import*Importálás</string>
+    <string name="btn_install">Install*Telepítés</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <string name="title_sketch_new">New 3D sketch</string>
+    <string name="title_sketch_new">New 3D sketch*Új 3D vázlat</string>
     <!-- string name="title_sketch_edit">Edit 3D surface</string -->
-    <string name="title_sketch_shot">New shot</string>
-    <string name="title_sketch_refs">View mode</string>
+    <string name="title_sketch_shot">New shot*Új mérés</string>
+    <string name="title_sketch_refs">View mode*Nézet mód???</string>
     <!-- string name="title_sketch_section_type">Sections type</string -->
     <!-- string name="title_sketch_select">Select item</string -->
 
-    <string name="sketch_mode_single">Single shot</string>
-    <string name="sketch_mode_ngbh">Nearby shots</string>
-    <string name="sketch_mode_all">All shots</string>
-    <string name="sketch_delete">Delete 3D model ?</string>
-    <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string>
-    <string name="length">Length [m]</string>
-    <string name="azimuth">Azimuth [deg]</string>
-    <string name="clino">Clino [deg]</string>
+    <string name="sketch_mode_single">Single shot-Szimpla méré???</string>
+    <string name="sketch_mode_ngbh">Nearby shots*Közeli mérések</string>
+    <string name="sketch_mode_all">All shots*Minden mérés</string>
+    <string name="sketch_delete">Delete 3D model ?*Törli a 3D modellt?</string>
+    <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.*Nincs pontosítás???. Csökkentsd az oldal max. hosszát a további pontosításhoz???</string>
+    <string name="length">Length [m]*Hossz [m]</string>
+    <string name="azimuth">Azimuth [deg]*Irányszög [fok]</string>
+    <string name="clino">Clino [deg]*Lejtszög [fok]</string>
 
-    <string name="orientation">orientation</string>
-    <string name="contents">contents</string>
-    <string name="error_distribution">error distribution</string>
-    <string name="angle_distribution">angular distribution</string>
+    <string name="orientation">orientation*irány</string>
+    <string name="contents">contents*tartalom</string>
+    <string name="error_distribution">error distribution*hiba eloszlás</string>
+    <string name="angle_distribution">angular distribution*szög eloszlás???</string>
 
     <!-- string name="btn_head">head</string -->
     <!-- string name="btn_stretch">Stretch</string -->
@@ -538,41 +538,41 @@
     <!-- string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
-    <string name="no_shot_between_stations">no_shot_between_stations</string>
-    <string name="few_line_points">Line has too few points</string>
-    <string name="line_delete">line_delete</string>
-    <string name="flip_shots">Flip shots</string>
+    <string name="no_shot_between_stations">no_shot_between_stations*nincs_mérés_a_pontok_között</string>
+    <string name="few_line_points">Line has too few points*A vonalnak túl kevés pontja van</string>
+    <string name="line_delete">line_delete*vonal_törlése</string>
+    <string name="flip_shots">Flip shots*mérések_megfordítása??? </string>
 
-    <string name="menu_head">HEAD</string>
+    <string name="menu_head">HEAD*FEJLÉC???</string>
     <!-- string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
-    <string name="help_help">This help</string>
+    <string name="help_help">This help*Ez a help</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
-    <string name="help_measure">Measure distances</string>
+    <string name="help_measure">Measure distances*Távolságmérés</string>
     
-    <string name="help_coeff">Show calibration coefficients</string>
-    <string name="help_continue">Continue drawing a line</string>
-    <string name="help_contour">Contour editing</string>
-    <string name="help_current_station">Saved stations</string>
-    <string name="help_azimuth">"Extend" reference</string>
-    <string name="help_device">Enter device activity</string>
-    <string name="help_add_topodroid">Create new survey/calibration</string>
-    <string name="help_import">Import zip archive or survey file</string>
-    <string name="help_symbol">Enable/disable drawing tools</string>
+    <string name="help_coeff">Show calibration coefficients*Mutassa a kalibrációs együtthatókat</string>
+    <string name="help_continue">Continue drawing a line*Vonal folytatása</string>
+    <string name="help_contour">Contour editing*Körvonal szerkesztése</string>
+    <string name="help_current_station">Saved stations*Elmentett mérési pontok</string>
+    <string name="help_azimuth">"Extend" reference*Hivatkozás bővítése???</string>
+    <string name="help_device">Enter device activity*Eszköz aktivitás bevitele??? </string>
+    <string name="help_add_topodroid">Create new survey/calibration*Új felmérés/kalibráció létrehozása</string>
+    <string name="help_import">Import zip archive or survey file*ZIP archívum, vagy felmérés importálása</string>
+    <string name="help_symbol">Enable/disable drawing tools*Rajzeszközök engedélyezése/tiltása</string>
     <!-- UNUSED string name="help_therion">Therion manager app</string -->
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
-    <string name="help_prefs">Edit preferences</string>
-    <string name="help_log">Enable/disable logging settings</string>
-    <string name="help_join_survey">Join surveying</string>
-    <string name="help_info_topodroid">TopoDroid info</string>
-    <string name="help_download">Download data</string>
+    <string name="help_prefs">Edit preferences*Preferenciák szerkesztése???</string>
+    <string name="help_log">Enable/disable logging settings*Naplózási beállítások engedélyezése/tiltása</string>
+    <string name="help_join_survey">Join surveying*Együttes felmérés???</string>
+    <string name="help_info_topodroid">TopoDroid info*TopoDroid információk</string>
+    <string name="help_download">Download data*Adatok letöltése</string>
     <!-- string name="help_splay">Assign stations to splays automatically</string -->
-    <string name="help_display">Choose display mode</string>
-    <string name="help_display_calib">Toggle display of deleted shots</string>
-    <string name="help_validate">Validate calibration</string>
-    <string name="help_overview">Overview activity</string>
-    <string name="help_plot">Enter sketch activity</string>
+    <string name="help_display">Choose display mode*Képernyő mód választása</string>
+    <string name="help_display_calib">Toggle display of deleted shots*törölt mérések láthatóak/nem??? </string>
+    <string name="help_validate">Validate calibration*Kalibráció érvényesítése???</string>
+    <string name="help_overview">Overview activity*Aktivitás áttekintése</string>
+    <string name="help_plot">Enter sketch activity*</string>
     <string name="help_note">Edit survey notes</string>
     <string name="help_bluetooth">Reset bluetooth connection</string>
     <string name="help_remote">Remote DistoX control</string>
