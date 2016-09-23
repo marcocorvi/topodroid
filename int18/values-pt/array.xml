@@ -3,8 +3,8 @@
 <resources>
 
   <string-array name="unitGrid">
-     <item name="meter">metro</item>
-     <item name="yard">jarda</item>
+     <item name="meter">metros</item>
+     <item name="yard">jardas</item>
      <item name="two_tf">pés</item>
   </string-array>
   <string-array name="survexEol">
@@ -132,7 +132,7 @@
   <string-array name="deviceBT">
      <item name="0">Desativado</item>
      <item name="1">Check na inicialização</item>
-     <item name="2">Habilitado</item>
+     <item name="2">Ativado</item>
   </string-array>
 
   <string-array name="lineStyle">
@@ -155,7 +155,7 @@
 
   <string-array name="unitAngle">
      <item name="degrees">graus</item>
-     <item name="grads">rad</item>
+     <item name="grads">rads</item>
   </string-array>
 
   <string-array name="unitLocation">
