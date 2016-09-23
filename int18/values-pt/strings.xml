@@ -794,7 +794,7 @@
   <string name="pref_pt_color_map_summary">Mapa das cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tamanho texto</string>
   <string name="pref_text_size_summary">Tamanho do texto da lista dos itens</string>
-  <string name="pref_text_size_message">Tamanho do texo nas listas</string>
+  <string name="pref_text_size_message">Tamanho do texto na lista dos mapas e das visadas</string>
   <string name="pref_closeness_title">Raio de seleção</string>
   <!-- UNUSED string name="pref_closeness_summary">Sketch item selection radius</string -->
   <string name="pref_closeness_message">Raio do item de seleção objetos do esboço</string>
