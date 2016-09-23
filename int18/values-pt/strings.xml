@@ -765,7 +765,7 @@
   <string name="pref_conn_mode_title">Tipo de conexão dos dados</string>
   <string name="pref_conn_mode_summary">Tipo de conexão com DistoX</string>
   <string name="pref_auto_reconnect_title">Reconexão automática</string>
-  <string name="pref_auto_reconnect_summary">Reconectar quando conexão foi perdida</string>
+  <string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string>
   <string name="pref_auto_pair_title">Pareamento automático</string>
   <string name="pref_auto_pair_summary">Parear com o dispositivo após o escaneamento</string>
   <string name="pref_socket_delay_title">Delay conexão</string>
@@ -837,7 +837,7 @@
 
   <string name="pref_ethr_title">Limiar vertical Splay</string>
   <string name="pref_ethr_summary">Limiar vertical Splay</string>
-  <string name="pref_ethr_message">Ângulo vertical Splay [deg]</string>
+  <string name="pref_ethr_message">Ângulo máximo aceitável para considerar como vertical uma visada Splay [deg]</string>
   <string name="pref_vthr_title">Limiar vertical visadas</string>
   <string name="pref_vthr_summary">Limite vertical LRUD/WENS</string>
   <string name="pref_vthr_message">Limite inclinação vertical visadas entre LRUD/WENS</string>
@@ -854,11 +854,11 @@
   <string name="pref_hthr_summary">Limiares secções horizontais</string>
   <string name="pref_hthr_message">Limiar inclinação visadas para secções horizontais</string>
   <string name="pref_bitmap_scale_title">Resolução PNG</string>
-  <string name="pref_bitmap_scale_summary">Resolução imagem PNG dos esboços</string>
-  <string name="pref_bitmap_scale_message">Resolução imagem do esboço PNG exportado</string>
+  <string name="pref_bitmap_scale_summary">Resolução imagem PNG esboços</string>
+  <string name="pref_bitmap_scale_message">Resolução imagem PNG do esboço exportado</string>
   <string name="pref_bitmap_bgcolor_title">Cor de fundo PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Cor de fundo da imagem dos esboços no PNG</string>
-  <string name="pref_bitmap_bgcolor_message">Cor de fundo na exportação do esboço em PNG</string>
+  <string name="pref_bitmap_bgcolor_summary">Cor de fundo da imagem PNG dos esboços</string>
+  <string name="pref_bitmap_bgcolor_message">Cor de fundo da imagem PNG do esboço exportado</string>
   <string name="pref_acad_version_title">Versão AutoCAD</string>
   <string name="pref_acad_version_summary">Versão AutoCAD</string>
   <string name="pref_dxf_scale_title">Escada esboço DXF</string>
@@ -876,9 +876,9 @@
   <string name="pref_drawing_unit_title">Escada símbolos gráficos</string>
   <string name="pref_drawing_unit_summary">Escada símbolos gráficos</string>
   <string name="pref_drawing_unit_message">Escada símbolos gráficos</string>
-  <string name="pref_unscaled_points_title">Pontos ícone sem zoom</string>
-  <string name="pref_unscaled_points_summary">Pontos ícone não estão zoomados</string>
-  <string name="pref_segment_title">Espaço entre os pontos nas linhas</string>
+  <string name="pref_unscaled_points_title">Zoom etiqueta pontos</string>
+  <string name="pref_unscaled_points_summary">Desabilitar zoom da etiqueta dos pontos</string>
+  <string name="pref_segment_title">Espaço entre segmentos</string>
   <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
   <string name="pref_segment_message">Distância mínima entre pontos de uma linha</string>
   <string name="pref_linestyle_title">Estilo linha</string>
@@ -916,9 +916,9 @@
   <string name="pref_line_thickness_title">Espessura linha</string>
   <string name="pref_line_thickness_summary">Espessura linhas do desenho</string>
   <string name="pref_line_thickness_message">Espessura linhas do desenho</string>
-  <string name="pref_fixed_thickness_title">Espessura linhas de trena</string>
-  <string name="pref_fixed_thickness_summary">Espessura linhas de trena</string>
-  <string name="pref_fixed_thickness_message">Espessura linhas de trena</string>
+  <string name="pref_fixed_thickness_title">Espessura linha de trena</string>
+  <string name="pref_fixed_thickness_summary">Espessura linha de trena</string>
+  <string name="pref_fixed_thickness_message">Espessura linha de trena</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
   <!-- UNUSED string name="pref_device_message">DistoX address name</string -->
@@ -943,13 +943,13 @@
   <string name="pref_picker_type_summary">Tipo de selecionador ferramenta desenho</string>
   <string name="pref_section_stations_title">Bases secção X</string>
   <string name="pref_section_stations_summary">Bases de referência secção X</string>
-  <string name="pref_station_size_title">Tamanho nome das bases</string>
-  <string name="pref_station_size_summary">Tamanho nome das bases</string>
-  <string name="pref_station_size_message">Tamanho nome das bases</string>
+  <string name="pref_station_size_title">Tamanho etiqueta bases</string>
+  <string name="pref_station_size_summary">Tamanho etiqueta das bases</string>
+  <string name="pref_station_size_message">Tamanho etiqueta das bases</string>
   <string name="pref_zoom_controls_title">Regulação zoom</string>
   <string name="pref_zoom_controls_summary">Regulação zoom no toque múltiplo</string>
   <string name="pref_side_drag_title">Arrastar lateralmente</string>
-  <string name="pref_side_drag_summary">Hábilitar o arrasta lateral na janela do esboço</string>
+  <string name="pref_side_drag_summary">Hábilitar o arrastamento lateral na área de desenho do esboço</string>
   <string name="pref_unit_grid_title">Unidades do esboço</string>
   <string name="pref_unit_grid_summary">Tamanho das celas da grelha do esboço</string>
   <string name="pref_recent_nr_title">Número ferramentas recentes</string>
@@ -977,12 +977,12 @@
   <string name="pref_sketchCompassReadings_summary">Número de leituras para fazer a média</string>
   <string name="pref_sketchCompassReadings_message">Número de leituras para fazer a média</string>
 
-  <string name="pref_unit_length_title">Unidades distâncias</string>
-  <string name="pref_unit_length_summary">Unidades distâncias</string>
-  <string name="pref_unit_angle_title">Unidades ângulos</string>
-  <string name="pref_unit_angle_summary">Unidades ângulos</string>
-  <string name="pref_unit_location_title">Unidades posicionamento</string>
-  <string name="pref_unit_location_summary">Unidades posicionamento</string>
+  <string name="pref_unit_length_title">Unidade distâncias</string>
+  <string name="pref_unit_length_summary">Unidade distâncias</string>
+  <string name="pref_unit_angle_title">Unidade ângulos</string>
+  <string name="pref_unit_angle_summary">Unidade ângulos</string>
+  <string name="pref_unit_location_title">Unidade coordenadas</string>
+  <string name="pref_unit_location_summary">Unidade coordenadas</string>
 
   <string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string>
   <string name="pref_walls_type_title">Tipos paredes</string>
