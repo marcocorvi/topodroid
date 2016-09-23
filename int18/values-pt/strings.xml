@@ -119,7 +119,7 @@
     <!-- UNUSED string name="extend_ignore">None</string -->
     <string name="extend_left">Esquerda</string>
     <string name="extend_right">Direita</string>
-    <string name="extend_vert">Vert</string>
+    <string name="extend_vert">Vertical</string>
     <!-- string name="external_prompt">Inserir medição</string -->
     <string name="splay_at_to">Dados LRUD na báse de chegada</string>
 
@@ -230,7 +230,7 @@
     <string name="no_location_data">Nenhum dado de posição</string>
     <string name="no_paired_device">Nenhum dispositivo associado.\nEscanear e associar um DistoX</string>
     <string name="no_photos">O mapa não tem foto</string>
-    <string name="no_plots">O mapa não tem esboço,\n utilize a função ADICIONAR para cria-lo</string>
+    <string name="no_plots">O mapa não tem esboço,\n utilize a função "Novo Esboço" para cria-lo</string>
     <string name="no_profile_overview">Nenhuma visão global para os perfis projetados</string>
     <string name="no_proj4">Proj4 não instalado</string>
     <string name="no_sensors">Não há medições para o mapa</string>
@@ -408,9 +408,9 @@
     <string name="stat_leg">Visadas %1$d %2$.1f %3$s</string>
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
     <string name="stat_loop">Anéis %1$d</string>
-    <string name="stat_origin">Base zero: %1$s</string>
+    <string name="stat_origin">Base de origem: %1$s</string>
     <string name="stat_shot">Leituras  %1$d,   Duplicadas %2$d,   Superfície %3$d</string>
-    <string name="stat_splay">Splays %1$d</string>
+    <string name="stat_splay">Visadas auxiliares %1$d</string>
     <string name="stat_station">Bases %1$d</string>
     <string name="stat_surface">Superfície leituras %1$d %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
@@ -443,7 +443,7 @@
 
     <!-- UNUSED string name="button_add"       >Adicionar     </string -->
     <string name="button_back"      >Voltar      </string>
-    <string name="button_cancel"    >Anular    </string>
+    <string name="button_cancel"    >Cancelar    </string>
     <string name="button_convert"   >Converter   </string>
     <string name="button_current"   >Atual   </string>
     <string name="button_delete"    >Apagar    </string>
