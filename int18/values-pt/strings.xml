@@ -105,9 +105,9 @@
     <string name="save_as">Salvar como</string>
     <string name="nickname">Apelido</string>
     <!-- TODO string name="device_status_angle_grad">Unidade ângulos: grad</string -->
-    <!-- TODO string name="device_status_angle_degree">Unidades ângulos: graus</string -->
-    <!-- TODO string name="device_status_compass_on">Bússola/clinomêtro: ON</string -->
-    <!-- TODO string name="device_status_compass_off">Bússola/clinomêtro: OFF</string -->
+    <!-- TODO string name="device_status_angle_degree">Unidade ângulos: graus</string -->
+    <!-- TODO string name="device_status_compass_on">Bússola/clinômetro: ON</string -->
+    <!-- TODO string name="device_status_compass_off">Bússola/clinômetro: OFF</string -->
 
     <string name="comment">Comentário</string>
     <!-- UNUSED string name="flag">Flag</string -->
@@ -139,7 +139,7 @@
     <string name="import_calib_ok">Calibração importada com sucesso</string>
     <string name="import_zip_ok">Arquivo zip importado com sucesso</string>
     <string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string>
-    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
+    <!-- TODO string name="import_calib_no_header">Arquivo calibração: cabeçalho errado</string -->
     <!-- TODO string name="import_calib_already">A calibração já existe</string -->
     <!-- TODO string name="import_calib_mismatch">Dispositivo de calibração incompatível</string -->
     <!-- TODO string name="import_calib_no_data">Arquivo calibração: nenhum dado</string -->
@@ -259,7 +259,7 @@
     <string name="menu_reload">RECARREGAR</string>
     <!-- TODO string name="menu_rename_delete">RENOMEAR/APAGAR</string -->
     <string name="menu_rename">RENOMEAR</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <!-- TODO string name="menu_switch">ALTERNAR</string -->
     <string name="menu_help">AJUDA</string>
     <string name="menu_join_survey">MAPA COLABORATIVO</string>
     <string name="menu_logs">REGISTROS</string>
@@ -399,9 +399,9 @@
     <!-- string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Informações do mapa</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f %%</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+    <!-- TODO string name="stat_stddev_m">Desvio aceleração %1$.1f %%</string -->
+    <!-- TODO string name="stat_stddev_g">Desvio campo magnético %1$.1f %%</string -->
+    <!-- TODO string name="stat_stddev_dip">Desvio Dip %1$.1f graus (média %2$.1f graus)</string -->
     <string name="stat_component">Componentes %1$d</string>
     <string name="stat_depth">Profundidade %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Leituras duplicadas %1$d %2$.1f %3$s</string>
