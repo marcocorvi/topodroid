@@ -130,11 +130,11 @@
     <string name="import_failed">Файлът не е импортиран</string>
     <string name="file_not_found">Файлът не е намерен</string>
     <string name="import_calib_ok">Успешно импортиране на калибрация</string>
-    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
-    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
-    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
-    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
-    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
+    <string name="import_calib_no_header">Калибр. файл: невалиден файл</string>
+    <string name="import_calib_already">Калибр. вече съществува</string>
+    <string name="import_calib_mismatch">Калибр. устройството не съвпада</string>
+    <string name="import_calib_no_data">Калибр. файл: няма данни</string>
+    <string name="import_calib_io_error">Калибр. файл: грешка при четене</string>
     <string name="import_zip_ok">Успешно импортиране на zip файл</string>
     <string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string>
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
@@ -253,9 +253,9 @@
     <string name="menu_firmware">Фърмуер</string>
     <string name="menu_recover">Възстановяване</string>
     <string name="menu_reload">Препрочитане</string>
-    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
+    <string name="menu_rename_delete">Преименуване/Изтриване</string>
     <string name="menu_rename">Преименуване</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <string name="menu_switch">Смяна</string>
     <string name="menu_help">Помощ</string>
     <string name="menu_join_survey">Ко-картиране</string>
     <string name="menu_logs">Лог файлове</string>
@@ -585,8 +585,8 @@
     <string name="help_edit">Вкл. на режим на редактиране</string>
     <string name="help_refs">Избор на данни, които да се показват</string>
     <string name="help_rename">Преименуване на картировката</string>
-    <!-- FIXME string name="help_plot_rename">Преименуване на скицата</string -->
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <string name="help_plot_rename">Преименуване на скицата</string>
+    <string name="help_plot_switch">Превключване на друга скица</string>
     <string name="help_stats">Статистика за картировката</string>
     <string name="help_save_plot">Експортиране на скица</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертиране на двоични файлове на скици в th2</string -->
@@ -738,8 +738,8 @@
   <string name="pref_survex_splay_summary">Добавяне на ДО в края на стран. изм. в Survex</string>
   <string name="pref_survex_lrud_title">Survex Ляво/Дясно/Горе/Долу</string>
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
-  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
-  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
+  <string name="pref_svg_grid_title">SVG мрежа</string>
+  <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
