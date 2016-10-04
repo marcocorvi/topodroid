@@ -150,7 +150,7 @@ class FirmwareDialog extends MyDialog
           // // Log.v( "DistoX", "HW " + hw + " FW " + fw );
           // // Toast.makeText( mParent, "HARDWARE " + hw, Toast.LENGTH_LONG ).show();
           // askUpload( filename, areCompatible(hw,fw) );
-          askUpload( filename, (fw == 21 || fw == 22 || fw == 23 || fw == 24 ) );
+          askUpload( filename, (fw == 21 || fw == 22 || fw == 23 || fw == 24 || fw == 25 ) );
         }
         break;
     }

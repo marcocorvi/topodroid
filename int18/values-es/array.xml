@@ -166,4 +166,10 @@
      <item name="nonlinear">no lineal</item>
   </string-array>
 
+  <!-- TODO string-array name="rawCData">
+     <item name="none">None</item>
+     <item name="dec">Decimal</item>
+     <item name="hex">Hex</item>
+  </string-array -->
+
 </resources>

@@ -2472,7 +2472,7 @@ public class DrawingActivity extends ItemDrawer
       if ( plot == null  ) { // if there does not exist xsection xs-name create it
         float azimuth = 0;
         float clino   = 0;
-        List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, name, true ); // select legs
+        List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, name, true ); // select "independent" legs
         if ( legs.size() == 1 ) { // XSection always look "away" for terminal station
           DistoXDBlock leg0 = legs.get(0);
           if ( name.equals( leg0.mFrom ) ) {

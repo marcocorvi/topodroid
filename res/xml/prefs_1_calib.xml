@@ -46,6 +46,15 @@
      / -->
 
      <!-- com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_RAW_CDATA"
+       android:summary="@string/pref_raw_data_summary"
+       android:title="@string/pref_raw_data_title"
+       android:defaultValue="0"
+       android:entries="@array/rawCData"
+       android:entryValues="@array/rawCDataValue"
+     / -->
+
+     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_CALIB_ALGO"
        android:summary="@string/pref_calib_algo_summary"
        android:title="@string/pref_calib_algo_title"

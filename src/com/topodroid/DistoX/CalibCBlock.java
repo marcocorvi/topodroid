@@ -153,8 +153,10 @@ public class CalibCBlock
     computeBearingAndClino();
     pw.format(Locale.US, "%d <%d> %5.1f %5.1f %5.1f %6.4f",
       mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TDMath.RAD2GRAD );
-    if ( TDSetting.mRawData ) {
+    if ( TDSetting.mRawCData == 1 ) {
       pw.format( "  %d %d %d  %d %d %d", gx, gy, gz, mx, my, mz );
+    } else if ( TDSetting.mRawCData == 2 ) {
+      pw.format( "  %04x %04x %04x  %04x %04x %04x", gx & 0xffff, gy & 0xffff, gz & 0xffff, mx & 0xffff, my & 0xffff, mz & 0xffff );
     }
     return sw.getBuffer().toString();
   }

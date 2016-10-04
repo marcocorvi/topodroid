@@ -1931,6 +1931,8 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
+   // select shots (either legs or splays) at a station
+   // in the case of legs, select only "independent" legs (one for each neighbor station)
    public List<DistoXDBlock> selectShotsAt( long sid, String station, boolean leg )
    {
      List< DistoXDBlock > list = new ArrayList< DistoXDBlock >();
@@ -1942,13 +1944,32 @@ public class DataHelper extends DataSetObservable
                      null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
-         int fl = cursor.getString(1).length();
-         int tl = cursor.getString(2).length();
-         if ( ( leg && fl > 0 && tl > 0 )                                       // legs only
-           || ( !leg && ( ( fl > 0 && tl ==0 ) || ( fl == 0 && tl > 0 ) ) ) ) { // splay only
-           DistoXDBlock block = new DistoXDBlock();
-           fillBlock( sid, block, cursor );
-           list.add( block );
+         String fs = cursor.getString(1);
+         int fl = fs.length();
+         String ts = cursor.getString(2);
+         int tl = ts.length();
+         if ( leg ) { // legs only
+           if ( fl > 0 && tl > 0 ) { // add block only if "independent"
+             boolean independent = true;
+             for ( DistoXDBlock blk : list ) {
+               if (  ( fs.equals( blk.mFrom ) && ts.equals( blk.mTo   ) )
+                  || ( fs.equals( blk.mTo   ) && ts.equals( blk.mFrom ) ) ) {
+                 independent = false;
+                 break;
+               }
+             }
+             if ( independent ) {
+               DistoXDBlock block = new DistoXDBlock();
+               fillBlock( sid, block, cursor );
+               list.add( block );
+             }
+           }
+         } else { // splays only
+           if ( ( fl > 0 && tl ==0 ) || ( fl == 0 && tl > 0 ) ) { 
+             DistoXDBlock block = new DistoXDBlock();
+             fillBlock( sid, block, cursor );
+             list.add( block );
+           }
          }
        } while (cursor.moveToNext());
      }

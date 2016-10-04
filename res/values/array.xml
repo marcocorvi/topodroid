@@ -392,4 +392,15 @@
      <!-- item name="minimum">3</item -->
   </string-array>
 
+  <string-array name="rawCData">
+     <item name="none">None</item>
+     <item name="dec">Decimal</item>
+     <item name="hex">Hex</item>
+  </string-array>
+  <string-array name="rawCDataValue">
+     <item name="none">0</item>
+     <item name="dec">1</item>
+     <item name="hex">2</item>
+  </string-array>
+
 </resources>

@@ -77,7 +77,7 @@ class TDSetting
     "DISTOX_GROUP_DISTANCE",      // 32
     "DISTOX_CALIB_EPS",           // 33
     "DISTOX_CALIB_MAX_IT",        // 34
-    "DISTOX_RAW_DATA",            // 35
+    "DISTOX_RAW_CDATA",           // 35
     "DISTOX_CALIB_ALGO",          // 36
 
     "DISTOX_AUTO_STATIONS",       // 37
@@ -236,7 +236,8 @@ class TDSetting
   // static final String GROUP_BY  = "1";     // GROUP_BY_FOUR
   static int mGroupBy = GROUP_BY_FOUR;  // how to group calib data
 
-  static boolean mRawData = false;   // whether to display calibration raw data as well
+  // static boolean mRawData = false;   // whether to display calibration raw data as well
+  static int   mRawCData  = 0;
   static int   mCalibAlgo = 0;   // calibration algorithm: 0 auto, 1 linear, 2 non-linear
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -641,7 +642,8 @@ class TDSetting
     mCalibEps      = tryFloat( prefs, key[k++], CALIB_EPS );
     mCalibMaxIt    = tryInt(   prefs, key[k++], "200"     ); // DISTOX_CALIB_MAX_IT
 
-    mRawData       = prefs.getBoolean( key[k++], false );    // DISTOX_RAW_DATA 20
+    // mRawData       = prefs.getBoolean( key[k++], false );    // DISTOX_RAW_DATA 20
+    mRawCData      = tryInt( prefs, key[k++], "0" );         // DISTOX_RAW_CDATA 20
     mCalibAlgo     = tryInt( prefs, key[k++], "0" );         // choice: 0, 1, 2
 
     // -------------------  DRAWING PREFERENCES -def----fallback------min/max
@@ -891,7 +893,8 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCalibMaxIt    = tryInt(   prefs, k, "200" );   // DISTOX_CALIB_MAX_IT
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mRawData       = prefs.getBoolean( k, false );  // DISTOX_RAW_DATA
+      // mRawData       = prefs.getBoolean( k, false );  // DISTOX_RAW_DATA
+      mRawCData      = tryInt( prefs, k, "0" );       // DISTOX_RAW_iCDATA
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCalibAlgo     = tryInt( prefs, k, "0" );       // DISTOX_CALIB_ALGO
 
@@ -1238,7 +1241,8 @@ class TDSetting
     if ( name.equals( "DISTOX_GROUP_DISTANCE" ) ) return parseFloatValue( value, mGroupDistance, 0 );
     if ( name.equals( "DISTOX_CALIB_EPS"      ) ) return parseFloatValue( value, mCalibEps, 0.000001f );
     if ( name.equals( "DISTOX_CALIB_MAX_IT"   ) ) return parseIntValue( value, mCalibMaxIt, 10 );
-    //B if ( name.equals( "DISTOX_RAW_DATA" )
+    // //B if ( name.equals( "DISTOX_RAW_DATA" )
+    //C if ( name.equals( "DISTOX_RAW_CDATA" )
     //C if ( name.equals( "DISTOX_CALIB_ALGO" )
 
     //S if ( name.equals( "DISTOX_DEVICE" )

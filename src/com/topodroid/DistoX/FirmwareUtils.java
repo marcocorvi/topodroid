@@ -32,9 +32,9 @@ class FirmwareUtils
     (byte)0x35, (byte)0xf8, (byte)0x00, (byte)0xf0, (byte)0x34, (byte)0xf8, (byte)0x24, (byte)0x4e,
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
-  //                                    2.1    2.2    2.3   2.4
-  // signatures differ in bytes 7- 6   f834   f83a   f990  fa0a
-  //                           17-16   0c40   0c40   0c50  0c30
+  //                                   2.1   2.2   2.3   2.4   2.5
+  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fb7e
+  //                           17-16  0c40  0c40  0c50  0c30  0c40
 
   // static boolean areCompatible( int hw, int fw )
   // {
@@ -47,7 +47,7 @@ class FirmwareUtils
   // }
 
   // try to guess firmware version reading bytes from the file
-  // return 0 (failure) or 21, 22, 23
+  // return 0 (failure) or one of 21 22 23 24 25
   //
   static int readFirmwareFirmware( File fp )
   {
@@ -69,18 +69,23 @@ class FirmwareUtils
         if ( buf[k] != signature[k] ) return 0;
       }
       if ( buf[7] == (byte)0xf8 ) {
-        if ( buf[6] == (byte)0x34 ) {
+        if ( buf[6] == (byte)0x34 && buf[16] == (byte)0x40 ) {
           return 21;
-        } else if ( buf[6] == (byte)0x3a ) {
+        } 
+        if ( buf[6] == (byte)0x3a && buf[16] == (byte)0x40 ) {
           return 22;
         }
       } else if ( buf[7] == (byte)0xf9 ) {
-        if ( buf[6] == (byte)0x90 ) {
+        if ( buf[6] == (byte)0x90 && buf[16] == (byte)0x50 ) {
           return 23;
         }
       } else if ( buf[7] == (byte)0xfa ) {
-        if ( buf[6] == (byte)0x0a ) {
+        if ( buf[6] == (byte)0x0a && buf[16] == (byte)0x30 ) {
           return 24;
+        }
+      } else if ( buf[7] == (byte)0xfb ) {
+        if ( buf[6] == (byte)0x7e && buf[16] == (byte)0x40 ) {
+          return 25;
         }
       }
     } catch ( IOException e ) {
