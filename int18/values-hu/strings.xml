@@ -700,25 +700,25 @@
     <!-- string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">SURVEY DATA*FELMÉRÉSI ADAT</string>
-  <string name="pref_cat_drawing">SKETCHING</string>
-  <string name="pref_cat_import_export">IMPORT_EXPORT</string>
-  <string name="pref_cat_calib">CALIBRATIONS</string>
-  <string name="pref_cat_device">DEVICES</string>
-  <string name="pref_cat_sketch">3D MODELS</string>
-  <string name="pref_cat_log">LOGS</string>
+  <string name="pref_cat_drawing">SKETCHING*VÁZLAT</string>
+  <string name="pref_cat_import_export">IMPORT_EXPORT*IMPORT_EXPORT</string>
+  <string name="pref_cat_calib">CALIBRATIONS*KALIBRÁCIÓK</string>
+  <string name="pref_cat_device">DEVICES*ESZKÖZÖK</string>
+  <string name="pref_cat_sketch">3D MODELS*3D MODELLEK</string>
+  <string name="pref_cat_log">LOGS*NAPLÓFÁJLOK???</string>
 
-  <string name="pref_locale_title">Language</string>
-  <string name="pref_locale_summary">Language</string>
+  <string name="pref_locale_title">Language*Nyelv</string>
+  <string name="pref_locale_summary">Language*Nyelv</string>
 
-  <string name="pref_raw_data_title">Raw data</string>
-  <string name="pref_raw_data_summary">Show raw data</string>
+  <string name="pref_raw_data_title">Raw data*Nyers adat</string>
+  <string name="pref_raw_data_summary">Show raw data*Mutassa a nyers adatot</string>
   <!-- string name="pref_bootloader_title">Bootloader</string -->
   <!-- string name="pref_bootloader_summary">Enable bootloader</string -->
-  <string name="pref_mkeyboard_title">Keyboard</string>
-  <string name="pref_mkeyboard_summary">Enable custom keyboards</string>
-  <string name="pref_cosurvey_title">Co-surveying service</string>
-  <string name="pref_cosurvey_summary">Enable co-surveying service</string>
-  <string name="pref_export_shots_title">Default data export</string>
+  <string name="pref_mkeyboard_title">Keyboard*Billentyűzet</string>
+  <string name="pref_mkeyboard_summary">Enable custom keyboards*Engedélyezze az egyedi billentyűzeteket</string>
+  <string name="pref_cosurvey_title">Co-surveying service*Együttes felmérés</string>
+  <string name="pref_cosurvey_summary">Enable co-surveying service*Együttes felmérés engedélyezése</string>
+  <string name="pref_export_shots_title">Default data export*</string>
   <string name="pref_export_shots_summary">Default data export format</string>
   <string name="pref_export_plot_title">Default sketch export</string>
   <string name="pref_export_plot_summary">Default sketch export format</string>
