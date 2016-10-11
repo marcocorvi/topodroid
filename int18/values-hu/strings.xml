@@ -1014,33 +1014,33 @@
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
   <string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string>
 
-  <string name="pref_log_stream_summary">Log output stream</string>
-  <string name="pref_log_stream_title">Log stream</string>
+  <string name="pref_log_stream_summary">Log output stream???</string>
+  <string name="pref_log_stream_title">Log stream???</string>
   <string name="pref_log_bt">Bluetooth</string>
-  <string name="pref_log_bezier">Bezier curves</string>
-  <string name="pref_log_calib">Calibration</string>
-  <string name="pref_log_comm">BT communication</string>
-  <string name="pref_log_csurvey">cSurvey</string>
-  <string name="pref_log_data">Survey data</string>
-  <string name="pref_log_db">Database</string>
-  <string name="pref_log_debug">Debug</string>
-  <string name="pref_log_device">Device window</string>
+  <string name="pref_log_bezier">Bézier görbe</string>
+  <string name="pref_log_calib">Kalibráció</string>
+  <string name="pref_log_comm">BT kapcsolat</string>
+  <string name="pref_log_csurvey">cSurvey???</string>
+  <string name="pref_log_data">Felmérési adat</string>
+  <string name="pref_log_db">Adatbázis</string>
+  <string name="pref_log_debug">Hibakeresés???</string>
+  <string name="pref_log_device">Eszköz ablak</string>
   <string name="pref_log_distox">DistoX</string>
-  <string name="pref_log_err">Error</string>
-  <string name="pref_log_fixed">GPS points</string>
-  <string name="pref_log_input">User input</string>
-  <string name="pref_log_loc">Location</string>
-  <string name="pref_log_num">Data reduction</string>
-  <string name="pref_log_photo">Photo</string>
-  <string name="pref_log_plot">Sketches</string>
-  <string name="pref_log_proto">DistoX protocol</string>
+  <string name="pref_log_err">Hiba</string>
+  <string name="pref_log_fixed">GPS pontok</string>
+  <string name="pref_log_input">Felhasználói adatbevitel</string>
+  <string name="pref_log_loc">Helyszín</string>
+  <string name="pref_log_num">Adat redukció???</string>
+  <string name="pref_log_photo">Fotó</string>
+  <string name="pref_log_plot">Vázlatok</string>
+  <string name="pref_log_proto">DistoX protokol</string>
   <string name="pref_log_ptopo">PocketTopo</string>
-  <string name="pref_log_sensor">Sensors</string>
-  <string name="pref_log_shot">Shots</string>
-  <string name="pref_log_sync">Cosurveying</string>
-  <string name="pref_log_survey">Surveys</string>
+  <string name="pref_log_sensor">Szenzorok</string>
+  <string name="pref_log_shot">Mérések</string>
+  <string name="pref_log_sync">Együttes felmérés</string>
+  <string name="pref_log_survey">Felmérések</string>
   <string name="pref_log_therion">Therion</string>
-  <string name="pref_log_units">Units</string>
+  <string name="pref_log_units">Mértékegységek</string>
   <string name="pref_log_zip">ZIP</string>
 
   <!-- string name="line_bezier">Bezier</string -->
@@ -1058,10 +1058,10 @@
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
-\nTopoDroid is an Open Source Android app for surveying caves with the DistoX.
-\n\nNo warranty: by using it you agree that the author is not responsible for any loss of data you might incur or damage whatsoever.
-\n\nHelp: menu "help"
-\nMan pages: MENU key
+\nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX-el történő barlangfelmérésre.
+\n\nNINCS GARANCIA: A SZOFTWER HASZNÁLATÁVAL ÖN ELFOGADJA AZT, HOGY A SZERZŐ NEM VÁLALL FELELŐSSÉGET A SZÁMÍTÓGÉPRENDSZERÉBEN VAGY MÁS ESZKÖZBEN KELETKEZŐ KÁRÉRT VAGY ADATVESZTÉSÉRT.
+\n\nSEGÍTSÉG: menü "segítség"
+\nFelhasználői kézikönyv: MENÜ gomb
 \nDocs: http://sites.google.com/site/speleoapps
 \nComments, bug reports, feature requests: marco.corvi@gmail.com
 \nHungarian translation by ...
@@ -1080,14 +1080,14 @@
 \n[7] Turn off the DistoX2 with the CLR key.
 \n
    </string>
-   <string name="firmware_none">no firmware file</string>
-   <string name="firmware_file">firmware file</string>
-   <string name="firmware_file_exists">Existing firmware file</string>
-   <string name="firmware_file_missing">Missing firmware file</string>
+   <string name="firmware_none">nincs firmware fájl</string>
+   <string name="firmware_file">firmware fájl</string>
+   <string name="firmware_file_exists">Meglévő firmware fájl</string>
+   <string name="firmware_file_missing">Hiányzó firmware fájl</string>
    <string name="ask_dump">Dump firmware?</string>
-   <string name="ask_upload">Upload firmware?</string>
-   <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyways?</string>
-   <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
-   <string name="firmware_file_uploaded">Uploaded firmware file %1$s written %2$d / %3$d</string>
+   <string name="ask_upload">Feltölti a firmware-t?</string>
+   <string name="ask_upload_not_compatible">Firmware fájl nem tűnik megfelelőnek \nMindenképpen feltölti?</string>
+   <string name="firmware_file_dumped">Mentett firmware fájl %1$s méret %2$d</string>
+   <string name="firmware_file_uploaded">Feltöltött firmware fájl %1$s írás %2$d / %3$d</string>
    
 </resources>
