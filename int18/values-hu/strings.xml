@@ -1061,30 +1061,30 @@
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX-el történő barlangfelmérésre.
 \n\nNINCS GARANCIA: A SZOFTWER HASZNÁLATÁVAL ÖN ELFOGADJA AZT, HOGY A SZERZŐ NEM VÁLALL FELELŐSSÉGET A SZÁMÍTÓGÉPRENDSZERÉBEN VAGY MÁS ESZKÖZBEN KELETKEZŐ KÁRÉRT VAGY ADATVESZTÉSÉRT.
 \n\nSEGÍTSÉG: menü "segítség"
-\nFelhasználői kézikönyv: MENÜ gomb
-\nDocs: http://sites.google.com/site/speleoapps
-\nComments, bug reports, feature requests: marco.corvi@gmail.com
-\nHungarian translation by ...
+\nFelhasználói kézikönyv: MENÜ gomb
+\nDokumentumok: http://sites.google.com/site/speleoapps
+\nHozzászólások, bug bejelentés, új funkció igények: marco.corvi@gmail.com
+\nA magyar fordítás Sűrű Péter munkája.
 \n
     </string>
 
-  <string name="firmware_title">Firmware Updater</string>
-  <string name="firmware_file_title">Firmware Files</string>
+  <string name="firmware_title">Firmware Frissítő</string>
+  <string name="firmware_file_title">Firmware Fájlok</string>
   <string name="firmware_text">
-\n[1] Select either to upload a firmware or to dump the firmware to a file.
-\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
-\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
-\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
-\n[5] Tap the OK button.
-\n[6] Confirm to continue and wait till the process is done.
-\n[7] Turn off the DistoX2 with the CLR key.
+\n[1] Válaszd ki, hogy firmware-t szeretnél feltölteni, vagy az aktuális firmware-ről szeretnél biztonsági másolatot.
+\n[2] Válaszd ki a feltöltendő, vagy mentendő fájlt. A firmware fájlokat a bin könyvtárban találod.
+\n[3] Ellenőrizd, hogy a feltöltendő firmware verziója kompatibilis-e a DistoX hardware verziójával.
+\n[4] Tedd a DistoX2-t bootloader üzemmódba: nyomd be a PLUS, MINUS gombot, miközben bekapcsolod a DIST gomb segítségével.
+\n[5] Nyomd meg az OK gombot.
+\n[6] Erősítsd meg a választ és várj, míg a folyamat befejeződik.
+\n[7] Kapcsolja ki a DistoX2-t a CLR gombbal.
 \n
    </string>
    <string name="firmware_none">nincs firmware fájl</string>
    <string name="firmware_file">firmware fájl</string>
    <string name="firmware_file_exists">Meglévő firmware fájl</string>
    <string name="firmware_file_missing">Hiányzó firmware fájl</string>
-   <string name="ask_dump">Dump firmware?</string>
+   <string name="ask_dump">Készít biztonsági másolatot a firmware-ről?</string>
    <string name="ask_upload">Feltölti a firmware-t?</string>
    <string name="ask_upload_not_compatible">Firmware fájl nem tűnik megfelelőnek \nMindenképpen feltölti?</string>
    <string name="firmware_file_dumped">Mentett firmware fájl %1$s méret %2$d</string>
