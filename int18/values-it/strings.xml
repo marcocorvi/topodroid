@@ -7,7 +7,7 @@
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
 
     <string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string>
-    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
+    <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
 
     <string name="POINT">PUNTO</string>
     <string name="LINE">LINEA</string>
@@ -130,11 +130,11 @@
     <string name="import_failed">Importazione file fallita</string>
     <string name="file_not_found">File non trovato</string>
     <string name="import_calib_ok">Calibrazione importata con successo</string>
-    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
-    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
-    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
-    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
-    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
+    <string name="import_calib_no_header">Calib. file: intestazione errata</string>
+    <string name="import_calib_already">Calib. gia\' esistente</string>
+    <string name="import_calib_mismatch">Calib. device disallineato</string>
+    <string name="import_calib_no_data">Calib. file: no dati</string>
+    <string name="import_calib_io_error">Calib. file: errore in lettura</string>
     <string name="import_zip_ok">ZIP importato con successo</string>
     <string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string>
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
@@ -252,9 +252,9 @@
     <!-- OK ENGLISH string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_reload">RICARICA</string>
-    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
-    <string name="menu_rename">RENOMINA</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
+    <string name="menu_rename">RINOMINA</string>
+    <string name="menu_switch">SCAMBIA</string>
     <string name="menu_help">AIUTO</string>
     <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
@@ -394,9 +394,9 @@
     <!-- OK ENGLISH string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Info rilievo</string>
-    <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
-    <!-- TODO string name="stat_stddev_g">G stddev %1$.1f %%</string -->
-    <!-- TODO string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string -->
+    <!-- OK ENGLISH string name="stat_stddev_m">M stddev %1$.1f %%</string -->
+    <!-- OK ENGLISH string name="stat_stddev_g">G stddev %1$.1f %%</string -->
+    <string name="stat_stddev_dip">Dip stddev %1$.1f gradi (media %2$.1f gradi)</string>
     <string name="stat_component">Componenti %1$d</string>
     <string name="stat_depth">Profondità %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Battute doppie %1$d %2$.1f %3$s</string>
@@ -492,7 +492,7 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importa</string>
-    <!-- TODO string name="btn_install">Install</string -->
+    <string name="btn_install">Installa</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
@@ -585,8 +585,8 @@
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
     <string name="help_rename">Modifica il nome del rilievo</string>
-    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <string name="help_plot_rename">Rinomina/Cancella disegno</string>
+    <string name="help_plot_switch">Scambia disegno</string>
     <string name="help_stats">Statistiche rilievo</string>
     <string name="help_save_plot">Esporta disegno</string>
     <!-- UNUSED string name="help_tdr2th2">Conversione formato disegno da binario a th2</string -->
@@ -696,9 +696,9 @@
     <string name="title_survey_new">Nuovo rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
-    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
+    <string name="title_plot_rename">Rinomina disegno</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
-    <!-- string name="title_zoom">Zoom</string -->
+    <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_drawing">OPZIONI DISEGNO</string>
@@ -743,8 +743,8 @@
   <string name="pref_survex_splay_summary">Survex - Aggiungi stazione A agli splay</string>
   <string name="pref_survex_lrud_title">Survex - LRUD</string>
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
-  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
-  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
+  <string name="pref_svg_grid_title">Griglia SVG</string>
+  <string name="pref_svg_grid_summary">Aggiungi griglia alla export SVG</string>
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>

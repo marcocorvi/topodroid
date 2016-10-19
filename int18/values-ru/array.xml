@@ -161,10 +161,10 @@
      <item name="nonlinear">не-линейно</item>
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
-  </string-array -->
+  <string-array name="rawCData">
+     <item name="none">Нет</item>
+     <item name="dec">Десятичный</item>
+     <item name="hex">Шестнадцатиричный</item>
+  </string-array>
 
 </resources>

@@ -168,10 +168,10 @@
      <item name="nonlinear">Nicht-linear</item>
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
+  <string-array name="rawCData">
+     <item name="none">Keine</item>
+     <item name="dec">Dezimal</item>
      <item name="hex">Hex</item>
-  </string-array -->
+  </string-array>
 
 </resources>

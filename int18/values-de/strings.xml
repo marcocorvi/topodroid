@@ -747,8 +747,8 @@
   <string name="pref_locale_title">Sprache</string>
   <string name="pref_locale_summary">Sprache</string>
 
-  <string name="pref_raw_data_title">Rohdaten</string>
-  <string name="pref_raw_data_summary">Rohdaten zeigen</string>
+  <string name="pref_raw_data_title">Rohdaten anzeigen</string>
+  <string name="pref_raw_data_summary">Rohdaten anzeigen</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Die Bootloader ermöglichen</string -->
   <string name="pref_mkeyboard_title">Tastatur</string>
