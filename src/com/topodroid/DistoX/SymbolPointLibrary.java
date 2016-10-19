@@ -122,7 +122,7 @@ class SymbolPointLibrary extends SymbolLibrary
       for ( File file : files ) {
         SymbolPoint symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TDLog.Error( "point with null ThName" );
+          TDLog.Error( "point with null ThName " + file.getName() );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {

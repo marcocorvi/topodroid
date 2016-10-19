@@ -103,7 +103,7 @@ class SymbolLineLibrary extends SymbolLibrary
       for ( File file : files ) {
         SymbolLine symbol = new SymbolLine( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TDLog.Error( "line with null ThName" );
+          TDLog.Error( "line with null ThName " + file.getName() );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {

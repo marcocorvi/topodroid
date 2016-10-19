@@ -108,6 +108,7 @@ public class DrawingActivity extends ItemDrawer
   private static int IC_CONTINUE_JOIN = 18+5;     // index of continue icon
   private static int IC_ADD           = 18+6;
   private static int IC_BORDER_OK     = 18+7;
+  private static int IC_BORDER_BOX    = 18+8; 
 
   private static int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -120,7 +121,7 @@ public class DrawingActivity extends ItemDrawer
   private static int BTN_BORDER = 8;
 
   // protected static int mEditRadius = 0; 
-  private boolean mDoEditRange = false;
+  private int mDoEditRange = 0; // 0 no, 1 smooth, 2 boxed
 
   private View mZoomView;
 
@@ -151,6 +152,7 @@ public class DrawingActivity extends ItemDrawer
                         R.drawable.iz_continue_join, // 18+5
                         R.drawable.iz_plus,          // 18+6
                         R.drawable.iz_range_ok,      // 18+7
+                        R.drawable.iz_range_box,     // 18+8
                       };
   private static int menus[] = {
                         R.string.menu_export,     // 0
@@ -394,6 +396,7 @@ public class DrawingActivity extends ItemDrawer
   private BitmapDrawable mBMdownload_wait;
   private BitmapDrawable mBMjoin;
   private BitmapDrawable mBMjoin_no;
+  private BitmapDrawable mBMedit_box;
   private BitmapDrawable mBMedit_ok;
   private BitmapDrawable mBMedit_no;
   private BitmapDrawable mBMplan;
@@ -1059,6 +1062,7 @@ public class DrawingActivity extends ItemDrawer
     // mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
     mBMjoin_no = MyButton.getButtonBackground( mApp, res, izons[IC_JOIN_NO] );
     mBMadd     = MyButton.getButtonBackground( mApp, res, izons[IC_ADD] );
+    mBMedit_box= MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_BOX] );
     mBMedit_ok = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_OK] ); 
     mBMedit_no = MyButton.getButtonBackground( mApp, res, izons[IC_BORDER_NO] );
 
@@ -1606,7 +1610,7 @@ public class DrawingActivity extends ItemDrawer
      mOffset.x = plot.xoffset; 
      mOffset.y = plot.yoffset; 
      mZoom     = plot.zoom;    
-     // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+     // Log.v("DistoX", "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom ); // DATA_DOWNLOAD
      mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
    }
 
@@ -1628,10 +1632,10 @@ public class DrawingActivity extends ItemDrawer
     {
       // Log.v("DistoX", "select at: edit-range " + mDoEditRange + " mode " + mMode );
       if ( mMode == MODE_EDIT ) {
-        if ( mDoEditRange ) {
+        if ( mDoEditRange > 0 ) {
           // mDoEditRange = false;
           // mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
-          if ( mDrawingSurface.setRangeAt( x_scene, y_scene, mZoom ) ) {
+          if ( mDrawingSurface.setRangeAt( x_scene, y_scene, mZoom, mDoEditRange ) ) {
             mMode = MODE_SHIFT;
             return;
           }
@@ -1641,7 +1645,7 @@ public class DrawingActivity extends ItemDrawer
         // Log.v( TopoDroidApp.TAG, "selection at " + x_scene + " " + y_scene + " items " + selection.size() );
         // Log.v( TopoDroidApp.TAG, " zoom " + mZoom + " radius " + d0 );
         if ( selection.mPoints.size() > 0 ) {
-          if ( ! mDoEditRange ) {
+          if ( mDoEditRange == 0 ) {
             mMode = MODE_SHIFT;
           }
           setButton3( selection.mHotItem.type() );
@@ -2233,8 +2237,7 @@ public class DrawingActivity extends ItemDrawer
                         float clino = 0;
 
                         float azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TDMath.RAD2GRAD );
-                        if ( azimuth >= 360.0f ) azimuth -= 360;
-                        if ( azimuth < 0.0f ) azimuth += 360;
+                        azimuth = TDMath.in360( azimuth );
 
                         DistoXDBlock blk = null;
                         float intersection = 0;
@@ -2262,8 +2265,7 @@ public class DrawingActivity extends ItemDrawer
                               extend = -1;
                             }
                             float dc = (extend == blk.mExtend)? clino - blk.mClino : 180 - clino - blk.mClino ;
-                            if ( dc < 0 ) dc += 360;
-                            if ( dc > 360 ) dc -= 360;
+                            dc = TDMath.in360( dc );
                             if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
                               azimuth = blk.mBearing + 180; if ( azimuth >= 360 ) azimuth -= 360;
                               from = blk.mTo;
@@ -2276,8 +2278,7 @@ public class DrawingActivity extends ItemDrawer
                             // }
                           } else {
                             float da = azimuth - blk.mBearing;
-                            if ( da < 0 ) da += 360;
-                            if ( da > 360 ) da -= 360;
+                            da = TDMath.in360( da );
                             if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
                               from = blk.mTo;
                               to   = blk.mFrom;
@@ -2285,8 +2286,7 @@ public class DrawingActivity extends ItemDrawer
                           }
                         } else { // null block
                           azimuth = 90 + (float)(Math.atan2( l2.mX-l1.mX, -l2.mY+l1.mY ) * TDMath.RAD2GRAD );
-                          if ( azimuth >= 360.0f ) azimuth -= 360;
-                          if ( azimuth < 0.0f ) azimuth += 360;
+                          azimuth = TDMath.in360( azimuth );
                         }
                         // Log.v("DistoX", "new section " + from + " - " + to );
                         // cross-section does not exists yet
@@ -2546,9 +2546,8 @@ public class DrawingActivity extends ItemDrawer
 
     void toggleStationHidden( String name, boolean is_hidden )
     {
-      // Log.v("DistoX", "toggle station " + name + " hidden " + is_hidden );
-
-      String hide = mPlot1.hide;
+      String hide = mPlot1.hide.trim();
+      // Log.v("DistoX", "toggle station " + name + " hidden " + is_hidden + " hide: <" + hide + ">" );
       String new_hide = "";
       boolean add = false;
       boolean drop = false;
@@ -2559,13 +2558,15 @@ public class DrawingActivity extends ItemDrawer
         String[] hidden = hide.split( "\\s+" );
         int k = 0;
         for (; k < hidden.length; ++k ) {
-          if ( hidden[k].equals( name ) ) { // N.B. hidden[k] != null
-            drop = true;
-          } else {
-            new_hide = new_hide + " " + hidden[k];
+          if ( hidden[k].length() > 0 ) {
+            if ( hidden[k].equals( name ) ) { // N.B. hidden[k] != null
+              drop = true;
+            } else {
+              new_hide = new_hide + " " + hidden[k];
+            }
           }
         }
-        new_hide.trim();
+        if ( new_hide.length() > 0 ) new_hide = new_hide.trim();
         add = ! drop;
       }
       int h = 0;
@@ -2590,19 +2591,19 @@ public class DrawingActivity extends ItemDrawer
         h = -1; // un-hide
         // Log.v( "DistoX", "dropStationHidden " + name + " hide <" + new_hide + ">" );
       }
-      // Log.v("DistoX", "toggle station hidden: hide " + hide + " H " + h );
+      // Log.v("DistoX", "toggle station hidden: hide <" + hide + "> H " + h );
 
       if ( h != 0 ) {
         mNum.setStationHidden( name, h );
-        computeReferences( (int)mType, 0, 0, mZoom, false );
+        recomputeReferences( mZoom, false );
       }
     }
     //  mNum.setStationHidden( name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
 
     void toggleStationBarrier( String name, boolean is_barrier ) 
     {
-      // Log.v("DistoX", "toggle station " + name + " barrier " + is_barrier );
-      String view = mPlot1.view;
+      String view = mPlot1.view.trim();
+      // Log.v("DistoX", "toggle station " + name + " barrier " + is_barrier + " view: <" + view + ">" );
       String new_view = "";
       boolean add = false;
       boolean drop = false;
@@ -2613,13 +2614,15 @@ public class DrawingActivity extends ItemDrawer
         String[] barrier = view.split( " " );
         int k = 0;
         for (; k < barrier.length; ++k ) {
-          if ( barrier[k].equals( name ) ) { // N.B. barrier[k] != null
-            drop = true;
-          } else {
-            new_view = new_view + " " + barrier[k];
+          if ( barrier[k].length() > 0 ) {
+            if ( barrier[k].equals( name ) ) { // N.B. barrier[k] != null
+              drop = true;
+            } else {
+              new_view = new_view + " " + barrier[k];
+            }
           }
         }
-        new_view.trim();
+        if ( new_view.length() > 0 ) new_view = new_view.trim();
         add = ! drop;
       }
       int h = 0;
@@ -2630,7 +2633,7 @@ public class DrawingActivity extends ItemDrawer
         } else {
           view = view + " " + name;
         }
-        // Log.v( TopoDroidApp.TAG, "addStationBarrier " + name + " view <" + view + ">" );
+        // Log.v( "DistoX", "addStationBarrier " + name + " view <" + view + ">" );
         mData.updatePlotView( mPid1, mSid, view );
         mData.updatePlotView( mPid2, mSid, view );
         mPlot1.view = view;
@@ -2643,11 +2646,11 @@ public class DrawingActivity extends ItemDrawer
         mPlot2.view = new_view;
         h = -1;
       }
-      // Log.v("DistoX", "toggle station barrier: view " + view + " H " + h );
+      // Log.v("DistoX", "toggle station barrier: view <" + view + "> H " + h );
 
       if ( h != 0 ) {
         mNum.setStationBarrier( name, h );
-        computeReferences( (int)mType, 0, 0, mZoom, false );
+        recomputeReferences( mZoom, false );
       }
     }
    
@@ -3078,7 +3081,7 @@ public class DrawingActivity extends ItemDrawer
           }
         }
       // } else if ( b == mButton3[ BTN_BORDER ] ) {
-      //   mDoEditRange = ~ mDoEditRange;
+      //   mDoEditRange = ( mDoEditRange + 1 ) % 3;
       //   mEditRadius += 2;
       //   mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
       }
@@ -3186,12 +3189,12 @@ public class DrawingActivity extends ItemDrawer
         }
 
       } else if ( b == mButton3[k3++] ) { // prev
-        mMode = MODE_SHIFT;
-        SelectionPoint pt = mDrawingSurface.prevHotItem();
+        SelectionPoint pt = mDrawingSurface.prevHotItem( );
+        if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
         if ( pt != null ) setButton3( pt.type() );
       } else if ( b == mButton3[k3++] ) { // next
-        mMode = MODE_SHIFT;
-        SelectionPoint pt = mDrawingSurface.nextHotItem();
+        SelectionPoint pt = mDrawingSurface.nextHotItem( );
+        if ( mDoEditRange == 0 ) mMode = MODE_SHIFT;
         if ( pt != null ) setButton3( pt.type() );
       } else if ( b == mButton3[k3++] ) { // item/point editing: move, split, remove, etc.
         // Log.v( TopoDroidApp.TAG, "Button3[5] inLinePoint " + inLinePoint );
@@ -3276,12 +3279,17 @@ public class DrawingActivity extends ItemDrawer
         //   mEditRadius --;
         //   mButton3[ BTN_BORDER ].setText( Integer.toString( mEditRadius ) );
         // }
-        if ( mDoEditRange ) {
-          mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
-          mDoEditRange = false;
-        } else {
-          mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_ok );
-          mDoEditRange = true;
+        mDoEditRange = ( mDoEditRange + 1 ) % 3;
+        switch ( mDoEditRange ) {
+          case 0:
+            mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_no );
+            break;
+          case 1:
+            mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_ok );
+            break;
+          case 2:
+            mButton3[ BTN_BORDER ].setBackgroundDrawable( mBMedit_box );
+            break;
         }
       }
     }
@@ -3542,7 +3550,7 @@ public class DrawingActivity extends ItemDrawer
 
   public void refreshDisplay( int nr, boolean toast )
   {
-    // Log.v("DistoX", "refreshDisplay() type " + mType + " nr " + nr );
+    // Log.v("DistoX", "refreshDisplay() type " + mType + " nr " + nr ); // DATA_DOWNLOAD
     setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -3577,33 +3585,46 @@ public class DrawingActivity extends ItemDrawer
     } else {
       List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
-      if ( mType == (int)PlotInfo.PLOT_PLAN ) {
-        if ( mPlot2 != null ) {
-          computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-        }
-        computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-        resetReference( mPlot1 );
-      } else if ( PlotInfo.isProfile( mType ) ) {
-        computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-        if ( mPlot2 != null ) {
-          computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
-        }
-        resetReference( mPlot2 );
-      } else {
-      }
+      recomputeReferences( mApp.mScaleFactor, false );
+      // if ( mType == (int)PlotInfo.PLOT_PLAN ) {
+      //   if ( mPlot2 != null ) {
+      //     computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      //   }
+      //   computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      //   // resetReference( mPlot1 ); // DATA_DOWNLOAD
+      // } else if ( PlotInfo.isProfile( mType ) ) {
+      //   computeReferences( (int)mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      //   if ( mPlot2 != null ) {
+      //     computeReferences( (int)mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, false );
+      //   }
+      //   // resetReference( mPlot2 ); // DATA_DOWNLOAD
+      // } else {
+      // }
     }
+  }
+
+  private void recomputeReferences( float zoom, boolean flag )
+  {
+    if ( mType == (int)PlotInfo.PLOT_PLAN ) {
+      if ( mPlot2 != null ) computeReferences( mPlot2.type, 0, 0, zoom, flag );
+    } else if ( PlotInfo.isProfile( mType ) ) {
+      computeReferences( mPlot1.type, 0, 0, zoom, flag );
+    }
+    computeReferences( (int)mType, 0, 0, zoom, flag );
   }
 
   // forward adding data to the ShotActivity
   @Override
-  public void updateBlockList( DistoXDBlock blk )
+  public void updateBlockList( DistoXDBlock blk ) 
   {
+    // Log.v("DistoX", "updateBlockList block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
     updateDisplay( /* true, true */ );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
+    // Log.v("DistoX", "updateBlockList block id " + blk_id ); // DATA_DOWNLOAD
     updateDisplay( /* true, true */ );
   }
 

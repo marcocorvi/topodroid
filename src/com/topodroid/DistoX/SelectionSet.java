@@ -53,7 +53,7 @@ class SelectionSet
     return mHotItem;
   }
 
-  SelectionPoint nextHotItem()
+  SelectionPoint nextHotItem( )
   {
     if ( mPoints.size() > 0 ) {
       mIndex = ( mIndex + 1 ) % mPoints.size();
@@ -62,7 +62,7 @@ class SelectionSet
     return mHotItem;
   }
 
-  SelectionPoint prevHotItem()
+  SelectionPoint prevHotItem( )
   {
     if ( mPoints.size() > 0 ) {
       mIndex = ( mIndex + mPoints.size() - 1 ) % mPoints.size();

@@ -321,14 +321,14 @@ class ItemRecentDialog extends MyDialog
       if ( b == mRecentL[k] ) { setFirstLine(k); return true; }
       if ( b == mRecentA[k] ) { setFirstArea(k); return true; }
     }
-    if ( b == mBTsize ) {
-      if ( mScale < DrawingPointPath.SCALE_XL ) {
-        ++ mScale;
-        mParent.setPointScale( mScale );
-        setTheTitle();
-      }
-      return true;
-    }
+    // if ( b == mBTsize ) {
+    //   if ( mScale < DrawingPointPath.SCALE_XL ) {
+    //     ++ mScale;
+    //     mParent.setPointScale( mScale );
+    //     setTheTitle();
+    //   }
+    //   return true;
+    // }
     return false;
   }
 
@@ -339,11 +339,13 @@ class ItemRecentDialog extends MyDialog
     // Log.v("DistoX", "ItemPicker onClick()" );
     Button b = (Button)view;
     if ( b == mBTsize ) {
-      if ( mScale > DrawingPointPath.SCALE_XS ) {
-        -- mScale;
-        mParent.setPointScale( mScale );
-        setTheTitle();
+      if ( mScale < DrawingPointPath.SCALE_XL ) {
+        ++ mScale;
+      } else { 
+        mScale = DrawingPointPath.SCALE_XS;
       }
+      mParent.setPointScale( mScale );
+      setTheTitle();
       return;
     } else if ( b == mBTpoint ) {
       new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_POINT ). show();

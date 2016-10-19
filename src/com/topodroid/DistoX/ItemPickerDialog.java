@@ -193,17 +193,17 @@ class ItemPickerDialog extends MyDialog
       mBTarea.setOnClickListener( this );
     }
     mBTsize.setOnClickListener( this );
-    mBTsize.setOnLongClickListener( new View.OnLongClickListener() {
-      @Override
-      public boolean onLongClick( View v ) {
-        if ( mScale < DrawingPointPath.SCALE_XL ) {
-          ++mScale;
-          mParent.setPointScale( mScale );
-          setTheTitle();
-        }
-        return true;
-      }
-    } );
+    // mBTsize.setOnLongClickListener( new View.OnLongClickListener() {
+    //   @Override
+    //   public boolean onLongClick( View v ) {
+    //     if ( mScale < DrawingPointPath.SCALE_XL ) {
+    //       ++mScale;
+    //       mParent.setPointScale( mScale );
+    //       setTheTitle();
+    //     }
+    //     return true;
+    //   }
+    // } );
 
     // mBTleft.setOnClickListener( this );
     // mBTright.setOnClickListener( this );
@@ -642,11 +642,13 @@ class ItemPickerDialog extends MyDialog
         }
         break;
       case R.id.size:
-        if ( mScale > DrawingPointPath.SCALE_XS ) {
-          -- mScale;
-          mParent.setPointScale( mScale );
-          setTheTitle();
+        if ( mScale < DrawingPointPath.SCALE_XL ) {
+          ++ mScale;
+        } else {
+          mScale = DrawingPointPath.SCALE_XS;
         }
+        mParent.setPointScale( mScale );
+        setTheTitle();
         break;
     }
 

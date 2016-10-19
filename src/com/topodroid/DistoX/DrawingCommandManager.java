@@ -1477,7 +1477,7 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  boolean setRangeAt( float x, float y, float zoom )
+  boolean setRangeAt( float x, float y, float zoom, int type )
   {
     SelectionPoint sp1 = mSelected.mHotItem;
     if ( sp1 == null ) {
@@ -1510,7 +1510,7 @@ public class DrawingCommandManager
       cnt = 0;
       for ( lp=lp1; lp != null; lp=lp.mPrev ) { ++cnt; if ( lp == lp2 ) break; }
       if ( lp == null ) { // error
-        // Log.v("DistoX", "set range at: error");
+        // Log.v("DistoX", "set range at: error lp==null");
         return false;
       }
       lp = lp1; lp1 = lp2; lp2 = lp; // swap lp1 <--> lp2
@@ -1540,6 +1540,7 @@ public class DrawingCommandManager
     sp.mLP2 = lp2;
     sp.mD1 = d1;
     sp.mD2 = d2;
+    sp.mRangeType = type;
 
     mSelected.clear();
     mSelected.addPoint( sp );

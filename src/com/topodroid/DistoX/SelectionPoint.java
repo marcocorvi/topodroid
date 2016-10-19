@@ -29,6 +29,7 @@ class SelectionPoint
   private int mMin; // whether to shift the point (0) or a CP (1 or 2)
   SelectionBucket mBucket = null;
 
+  int mRangeType; // range shift type
   LinePoint mLP1 = null; // range shift
   LinePoint mLP2 = null;
   float mD1;
@@ -130,27 +131,41 @@ class SelectionPoint
           //   }
           // }
           if ( mLP2 != null ) {
-            float d0 = 0;
-            LinePoint lp0 = mPoint;
-            for ( LinePoint lp = mPoint.mNext; lp != mLP2 && lp != null; lp=lp.mNext ) {
-              d0 += lp0.distance( lp );
-              float d = 2*d0/(0.1f+mD2);
-              d = d*d;
-              d = 1/(1+d*d);
-              lp.shiftBy( d*dx, d*dy );
-              lp0 = lp;
+            if ( mRangeType == 1 ) {
+              float d0 = 0;
+              LinePoint lp0 = mPoint;
+              for ( LinePoint lp = mPoint.mNext; lp != mLP2 && lp != null; lp=lp.mNext ) {
+                d0 += lp0.distance( lp );
+                float d = 2*d0/(0.1f+mD2);
+                d = d*d;
+                d = 1/(1+d*d);
+                lp.shiftBy( d*dx, d*dy );
+                lp0 = lp;
+              }
+            } else {
+              for ( LinePoint lp = mPoint.mNext; lp != mLP2 && lp != null; lp=lp.mNext ) {
+                lp.shiftBy( dx, dy );
+              }
+              mLP2.shiftBy( dx, dy );
             }
           }
           if ( mLP1 != null ) {
-            float d0 = 0;
-	    LinePoint lp0 = mPoint;
-            for ( LinePoint lp = mPoint.mPrev; lp != mLP1 && lp != null; lp=lp.mPrev ) {
-              d0 += lp0.distance( lp );
-              float d = 2*d0/(0.1f+mD1);
-              d = d*d;
-              d = 1/(1+d*d);
-              lp.shiftBy( d*dx, d*dy );
-              lp0 = lp;
+            if ( mRangeType == 1 ) {
+              float d0 = 0;
+	      LinePoint lp0 = mPoint;
+              for ( LinePoint lp = mPoint.mPrev; lp != mLP1 && lp != null; lp=lp.mPrev ) {
+                d0 += lp0.distance( lp );
+                float d = 2*d0/(0.1f+mD1);
+                d = d*d;
+                d = 1/(1+d*d);
+                lp.shiftBy( d*dx, d*dy );
+                lp0 = lp;
+              }
+            } else {
+              for ( LinePoint lp = mPoint.mPrev; lp != mLP1 && lp != null; lp=lp.mPrev ) {
+                lp.shiftBy( dx, dy );
+              }
+              mLP1.shiftBy( dx, dy );
             }
           }
           break;

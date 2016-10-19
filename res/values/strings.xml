@@ -441,7 +441,7 @@
     <string name="button_back"      >Back      </string>
     <string name="button_cancel"    >Cancel    </string>
     <string name="button_convert"   >Convert   </string>
-    <string name="button_current"   >Current   </string>
+    <string name="button_current"   >Active    </string>
     <string name="button_delete"    >Delete    </string>
     <string name="button_eval"      >Eval      </string>
     <string name="button_eval_cal"  >Eval w. calib.</string>
@@ -596,7 +596,7 @@
     <!-- UNUSED string name="help_trash">Delete sketch</string -->
     <string name="help_undo">Undo last drawing action</string>
     <string name="help_redo">Redo last drawing action</string>
-    <string name="help_symbol_plot">Select the current drawing tool</string>
+    <string name="help_symbol_plot">Select the active drawing tool</string>
     <string name="help_delete_item">Delete sketch item</string>
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erasing mode</string>
@@ -620,14 +620,14 @@
     <string name="help_loc">GPS location</string>
     <string name="help_delete_survey">Delete survey</string>
     <string name="help_delete_calib">Delete calibration</string>
-    <string name="help_detach">Clear current DistoX choice</string>
+    <string name="help_detach">Clear active DistoX choice</string>
     <string name="help_firmware">DistoX2 firmware updater</string>
     <string name="help_toggle">Toggle DistoX calibration/normal mode</string>
     <string name="help_sdcard">DistoX memory functions</string>
     <string name="help_read">Read and display DistoX calibration coefficients</string>
     <string name="help_info_device">Device info</string>
     <string name="help_scan">Scan for new DistoX devices</string>
-    <string name="help_pair">Pair the current DistoX device</string>
+    <string name="help_pair">Pair the active DistoX device</string>
     <string name="help_open_calib">Open calibration</string>
     <string name="help_export_calib">Export calibration</string>
     <string name="help_group">Assign group numbers automatically</string>

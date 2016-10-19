@@ -150,7 +150,7 @@ class SymbolAreaLibrary extends SymbolLibrary
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
         if ( symbol.mThName == null ) {
-          TDLog.Error( "area with null ThName" );
+          TDLog.Error( "area with null ThName " + file.getName() );
           continue;
         }
         if ( ! hasSymbolByFilename( symbol.mThName ) ) {

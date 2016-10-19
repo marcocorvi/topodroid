@@ -11,7 +11,9 @@
     android:layout_height="wrap_content"
     android:textSize="14sp"
     android:typeface="monospace"
-    android:paddingRight="1dp"
+    android:padding="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:gravity="left"
   />
 
@@ -24,6 +26,8 @@
     android:textSize="14sp"
     android:typeface="monospace"
     android:padding="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -36,6 +40,8 @@
     android:textSize="14sp"
     android:typeface="monospace"
     android:padding="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -48,6 +54,8 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -60,6 +68,8 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -72,6 +82,8 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:gravity="right"
   />
 
@@ -84,6 +96,8 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:paddingLeft="1dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
   />
 
 </LinearLayout>
