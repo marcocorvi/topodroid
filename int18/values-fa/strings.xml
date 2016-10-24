@@ -164,7 +164,7 @@
     <string name="group_reset">ریست گروه</string>
 
     <!-- UNUSED string name="scale">مقیاس</string -->
-    <!-- UNUSED string name="reversed">برعکس</string -->
+    <string name="reversed">برعکس</string>
     <string name="options">آپشن</string>
     <string name="outline">راس</string>
     <string name="out">خارج</string>
@@ -550,6 +550,8 @@
     <string name="help_undo">برگشت به آخرین عملیات طراحی</string>
     <string name="help_redo">رفتن به اخرین عملیات طراحی</string>
     <string name="help_symbol_plot">انتخاب ابزار طراحی فعلی</string>
+    <!-- TODO string name="help_delete_item">Delete drawing items</string -->
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">پاک کردن طراحی</string>
     <string name="help_previous">انتخاب آیتم قبلی</string>

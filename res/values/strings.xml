@@ -194,7 +194,7 @@
     <string name="group_reset">Reset groups</string>
 
     <!-- UNUSED string name="scale">scale</string -->
-    <!-- UNUSED string name="reversed">reverse</string -->
+    <string name="reversed">reversed</string>
     <string name="options">options</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
@@ -598,6 +598,7 @@
     <string name="help_redo">Redo last drawing action</string>
     <string name="help_symbol_plot">Select the active drawing tool</string>
     <string name="help_delete_item">Delete sketch item</string>
+    <string name="help_range">Moving a portion of line</string>
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erasing mode</string>
     <string name="help_previous">Previous item in the selection</string>

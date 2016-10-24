@@ -14,6 +14,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.app.Dialog;
 // import android.app.Activity;
@@ -24,6 +26,7 @@ import android.graphics.*;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 
@@ -42,6 +45,8 @@ public class DrawingStationDialog extends MyDialog
     private Button mBtnXSection;
     private Button mBtnXDelete;
     // private Button mBtnCancel;
+    private CheckBox mCBdirect;
+    private CheckBox mCBinverse;
 
     private DrawingActivity mActivity;
     private DrawingStationName mStation; // num station point
@@ -50,10 +55,11 @@ public class DrawingStationDialog extends MyDialog
     private String mStationName;
     private boolean mIsBarrier;
     private boolean mIsHidden;
+    private List<DistoXDBlock> mBlk;
 
     public DrawingStationDialog( Context context, DrawingActivity activity, DrawingStationName station,
                                  DrawingStationPath path,
-                                 boolean is_barrier, boolean is_hidden )
+                                 boolean is_barrier, boolean is_hidden, List<DistoXDBlock> blk )
     {
       super( context, R.string.DrawingStationDialog );
       mActivity = activity;
@@ -62,6 +68,7 @@ public class DrawingStationDialog extends MyDialog
       mStationName = mStation.mName;
       mIsBarrier = is_barrier; 
       mIsHidden  = is_hidden; 
+      mBlk       = blk;
     }
 
     @Override
@@ -72,10 +79,10 @@ public class DrawingStationDialog extends MyDialog
       String title = mContext.getResources().getString(R.string.STATION) + " " + mStationName;
       initLayout( R.layout.drawing_station_dialog, title );
 
-      mLabel     = (TextView) findViewById(R.id.station_text);
+      mLabel        = (TextView) findViewById(R.id.station_text);
       mBarrierLabel = (TextView) findViewById(R.id.barrier_text);
       mHiddenLabel  = (TextView) findViewById(R.id.hidden_text);
-      mCoords    = (TextView) findViewById(R.id.coords);
+      mCoords       = (TextView) findViewById(R.id.coords);
       mCoords.setText( mStation.getCoordsString() );
 
       mBtnBreak  = (Button) findViewById(R.id.btn_break );
@@ -87,39 +94,97 @@ public class DrawingStationDialog extends MyDialog
       mBtnSet    = (Button) findViewById(R.id.btn_set);
       // mBtnCancel = (Button) findViewById(R.id.button_cancel);
 
-      if ( TDSetting.mAutoStations ) {
+      mCBdirect  = (CheckBox) findViewById( R.id.cb_direct );
+      mCBinverse = (CheckBox) findViewById( R.id.cb_inverse );
+      mCBdirect.setChecked( true );
+      mCBinverse.setChecked( false );
+
+      if ( mActivity.isAnySection() ) {
         mBtnOK.setVisibility( View.GONE );
-        mLabel.setVisibility( View.GONE );
-      } else {
-        mBtnOK.setOnClickListener( this );
-      }
-      mBtnSet.setOnClickListener( this );
-      mBtnBreak.setOnClickListener( this );
-      mBtnHidden.setOnClickListener( this );
-      mBtnSplays.setOnClickListener( this );
-    
-      if ( TDSetting.mLevelOverAdvanced ) {
-        mBtnXSection.setOnClickListener( this );
-        if ( mStation.mXSectionType != PlotInfo.PLOT_NULL ) {
-          mBtnXDelete.setOnClickListener( this );
-        } else {
-          mBtnXDelete.setVisibility( View.GONE );
-        }
-      } else {
+        mBtnSet.setVisibility( View.GONE );
+        mBtnBreak.setVisibility( View.GONE );
+        mBtnHidden.setVisibility( View.GONE );
         mBtnXSection.setVisibility( View.GONE );
         mBtnXDelete.setVisibility( View.GONE );
+        mBarrierLabel.setVisibility( View.GONE );
+        mHiddenLabel.setVisibility( View.GONE );
+        mLabel.setVisibility( View.GONE );
+        ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
+        mBtnSplays.setOnClickListener( this );
+        mCBdirect.setVisibility( View.GONE );
+        mCBinverse.setVisibility( View.GONE );
+      } else {
+        if ( TDSetting.mAutoStations ) {
+          mBtnOK.setVisibility( View.GONE );
+          mLabel.setVisibility( View.GONE );
+        } else {
+          mBtnOK.setOnClickListener( this );
+        }
+        mBtnSet.setOnClickListener( this );
+        mBtnBreak.setOnClickListener( this );
+        mBtnHidden.setOnClickListener( this );
+        mBtnSplays.setOnClickListener( this );
+    
+        if ( TDSetting.mLevelOverAdvanced ) {
+          int leg_size = mBlk.size();
+          String direct  = null;
+          String inverse = null;
+          if ( leg_size == 1 ) {
+            DistoXDBlock leg0 = mBlk.get(0);
+            direct  = leg0.mFrom + ">" + leg0.mTo;
+            inverse = leg0.mTo   + ">" + leg0.mFrom;
+          } else if ( leg_size == 2 ) {
+            DistoXDBlock leg0 = mBlk.get(0);
+            DistoXDBlock leg1 = mBlk.get(1);
+            String from = leg0.mFrom;
+            if ( from.equals( mStationName ) ) from = leg0.mTo;
+            String to = leg1.mTo;
+            if ( to.equals( mStationName ) ) to = leg0.mFrom;
+            direct = from + ">" + to; // skip mStationName in the middle
+            inverse = to + ">" + from;
+          }
+          if ( inverse != null ) {
+            mBtnXSection.setOnClickListener( this );
+            if ( mStation.mXSectionType != PlotInfo.PLOT_NULL ) {
+              mBtnXDelete.setOnClickListener( this );
+              mCBdirect.setVisibility( View.GONE );
+              mCBinverse.setVisibility( View.GONE );
+            } else {
+              mBtnXDelete.setVisibility( View.GONE );
+              mCBdirect.setText( direct );
+              mCBinverse.setText( inverse );
+              mCBdirect.setOnClickListener( new View.OnClickListener() {
+                @Override public void onClick( View v ) {
+                  mCBdirect.setChecked( true );
+                  mCBinverse.setChecked( false );
+                } } );
+              mCBinverse.setOnClickListener( new View.OnClickListener() {
+                @Override public void onClick( View v ) {
+                  mCBinverse.setChecked( true );
+                  mCBdirect.setChecked( false );
+                } } );
+            }
+          } else {
+            mBtnXSection.setVisibility( View.GONE );
+            mBtnXDelete.setVisibility( View.GONE );
+            mCBdirect.setVisibility( View.GONE );
+            mCBinverse.setVisibility( View.GONE );
+          }
+        } else {
+          mBtnXSection.setVisibility( View.GONE );
+          mBtnXDelete.setVisibility( View.GONE );
+          mCBdirect.setVisibility( View.GONE );
+          mCBinverse.setVisibility( View.GONE );
+        }
+
+        // mBtnCancel.setOnClickListener( this );
+        if ( mIsBarrier ) {
+          mBarrierLabel.setText( mContext.getResources().getString(R.string.barrier_del) );
+        }
+        if ( mIsHidden ) {
+          mHiddenLabel.setText( mContext.getResources().getString(R.string.hidden_del) );
+        }
       }
-
-      // mBtnCancel.setOnClickListener( this );
-
-      if ( mIsBarrier ) {
-        mBarrierLabel.setText( mContext.getResources().getString(R.string.barrier_del) );
-      }
-
-      if ( mIsHidden ) {
-        mHiddenLabel.setText( mContext.getResources().getString(R.string.hidden_del) );
-      }
-
     }
 
     public void onClick(View view)
@@ -140,7 +205,7 @@ public class DrawingStationDialog extends MyDialog
       } else if (view.getId() == R.id.btn_splays ) {
         mActivity.toggleStationSplays( mStationName );
       } else if (view.getId() == R.id.btn_xsection ) {
-        mActivity.openXSection( mStation, mStationName, mActivity.getPlotType() );
+        mActivity.openXSection( mStation, mStationName, mActivity.getPlotType(), mCBinverse.isChecked() );
       } else if (view.getId() == R.id.btn_xdelete ) {
         mActivity.deleteXSection( mStation, mStationName, mActivity.getPlotType() );
       }

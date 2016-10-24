@@ -18,6 +18,7 @@ class DisplayMode
   static final int DISPLAY_SPLAY   = 0x02;
   static final int DISPLAY_STATION = 0x04;
   static final int DISPLAY_GRID    = 0x08;
+  static final int DISPLAY_SECTION = 0x0d;
   static final int DISPLAY_ALL     = 0x0f;
   // private static final int DISPLAY_MAX     = 4;
 }

@@ -194,7 +194,7 @@
     <string name="group_reset">Reset groups*Újra csoportosítás</string>
 
     <!-- UNUSED string name="scale">scale</string -->
-    <!-- UNUSED string name="reversed">reverse</string -->
+    <!-- TODO string name="reversed">reversed</string -->
     <string name="options">options*beállítások</string>
     <string name="outline">outline*körvonal</string>
     <string name="out">out*kint???</string>
@@ -599,6 +599,7 @@
     <string name="help_redo">Redo last drawing action*Utolsó rajzi változtatás visszaállítása</string>
     <string name="help_symbol_plot">Select the current drawing tool*Legutóbbi rajzeszköz kiválasztása</string>
     <string name="help_delete_item">Delete sketch item*Vázlat elem törlése</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erasing mode*Radír mód</string>
     <string name="help_previous">Previous item in the selection*Előző elem a kiválasztásban</string>

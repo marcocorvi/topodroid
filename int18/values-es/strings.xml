@@ -190,7 +190,7 @@
     <string name="group_reset">Resetear grupos</string>
 
     <!-- UNUSED string name="scale">Escala</string -->
-    <!-- UNUSED string name="reversed">Inverso</string -->
+    <string name="reversed">Inverso</string>
     <string name="options">Nota</string>
     <string name="outline">Contorno</string>
     <string name="out">Fuera</string>
@@ -545,6 +545,7 @@
     <string name="help_redo">Rehacer última acción de dibujo</string>
     <string name="help_symbol_plot">Seleccionar el símbolos</string>
     <string name="help_delete_item">Eliminar simbolos del dibujo</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujo</string>
     <string name="help_previous">Anterior elemento de la selección</string>

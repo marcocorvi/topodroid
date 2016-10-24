@@ -196,7 +196,7 @@
     <string name="group_reset">Скинути групи</string>
 
     <!-- UNUSED string name="scale">масштаб</string -->
-    <!-- UNUSED string name="reversed">зворотний</string -->
+    <string name="reversed">зворотний</string>
     <string name="options">опції</string>
     <string name="outline">контур стін</string>
     <string name="out">зовнішній</string>
@@ -591,6 +591,7 @@
     <string name="help_redo">Повтор останньої дії</string>
     <string name="help_symbol_plot">Вибрати інструмент малювання</string>
     <string name="help_delete_item">Видалити елемент абрису</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- OK string name="help_clear">Очистити вибір</string -->
     <string name="help_eraser">Стерти малюнки</string>
     <string name="help_previous">Попередній вибраний елемент</string>

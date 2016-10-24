@@ -422,11 +422,11 @@ class DrawingIO
                       if ( path != null ) {
                         if ( type.equals("section") ) { // section line only in non-section scraps
                           if ( is_not_section ) {
-                            path.makeStraight( true );
+                            path.makeStraight( false ); // FIXME true = with arrow
                           }
                         } else {
-                          path.computeUnitNormal();
-                        }
+                          path.computeUnitNormal(); // for section-line already done by makeStraight
+                        } 
                         surface.addDrawingPath( path );
                       }
                       break;

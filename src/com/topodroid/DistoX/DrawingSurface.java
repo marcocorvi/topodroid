@@ -338,7 +338,7 @@ public class DrawingSurface extends SurfaceView
         }
       }
     }
-    commandManager.addStation( st, selectable );
+    commandManager.addStation( st, selectable ); // NOTE make this always true if you want station selectable on all sections
     return st;
   }
 
@@ -350,7 +350,7 @@ public class DrawingSurface extends SurfaceView
     // NOTE No station_XSection in X-Sections
     DrawingStationName st = new DrawingStationName( name, x, y );
     st.setPaint( DrawingBrushPaths.fixedStationPaint );
-    commandManager.addStation( st, false );
+    commandManager.addStation( st, false ); // NOTE make this true for selectable station in all sections
     return st;
   }
 
@@ -382,6 +382,11 @@ public class DrawingSurface extends SurfaceView
   public void addGridPath( DrawingPath path, int k ) { commandManager.addGrid( path, k ); }
 
   public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
+
+  public void deleteSectionPoint( String scrap_name )
+  {
+    commandManager.deleteSectionPoint( scrap_name, null ); // null eraseCommand
+  }
   
   // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
 
@@ -683,6 +688,16 @@ public class DrawingSurface extends SurfaceView
       mSplayStations.add( station );
     }
   }
+
+  void setStationSplays( String station, boolean on )
+  {
+    if ( station == null ) return;
+    if ( mSplayStations.contains( station ) ) {
+      if ( ! on ) mSplayStations.remove( station );
+    } else {
+      if ( on ) mSplayStations.add( station );
+    }
+  }
   
   void setStationXSections( List<PlotInfo> xsection_plan, List<PlotInfo> xsection_ext, long type2 )
   {
@@ -701,6 +716,7 @@ public class DrawingSurface extends SurfaceView
     isDrawing = true;
     EraseCommand cmd = new EraseCommand();
     commandManager.deleteSectionLine( line, scrap, cmd );
+    commandManager.deleteSectionPoint( scrap, cmd );
     commandManager.addEraseCommand( cmd );
   }
 

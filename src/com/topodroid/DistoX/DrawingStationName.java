@@ -41,6 +41,10 @@ public class DrawingStationName extends DrawingPointPath
   float mAzimuth, mClino;
   float mDX, mDY;     // X-section direction
 
+  // get coords for a "section" point
+  float getXSectionX( float r ) { return cx - ((mXSectionType == PlotInfo.PLOT_NULL)? 0 : r * mDY); }
+  float getXSectionY( float r ) { return cy + ((mXSectionType == PlotInfo.PLOT_NULL)? 0 : r * mDX); }
+
   public DrawingStationName( String name, float x, float y )
   {
     super( DrawingBrushPaths.mPointLib.mPointLabelIndex,
@@ -123,7 +127,7 @@ public class DrawingStationName extends DrawingPointPath
         Path path = new Path();
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX, cy+mDY );
-        canvas.drawPath( path, mPaint );
+        canvas.drawPath( path, DrawingBrushPaths.mStationSymbol.mPaint );
       }
     }
   }
@@ -141,7 +145,7 @@ public class DrawingStationName extends DrawingPointPath
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX, cy+mDY );
         path.transform( matrix );
-        canvas.drawPath( path, mPaint );
+        canvas.drawPath( path, DrawingBrushPaths.mStationSymbol.mPaint );
       }
     }
   }

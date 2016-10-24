@@ -147,10 +147,22 @@
         android:text="@string/button_xsection"
       />
 
-      <Button android:id="@+id/btn_xdelete"
+      <CheckBox android:id="@+id/cb_direct"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginRight="10dp"
+        android:text="@string/reversed"
+      />
+      <CheckBox android:id="@+id/cb_inverse"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginRight="10dp"
+        android:text="@string/reversed"
+      />
+
+      <Button android:id="@+id/btn_xdelete"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_delete"

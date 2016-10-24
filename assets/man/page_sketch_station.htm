@@ -2,12 +2,13 @@
 
 <h4>Sketch station</h4>
 
-This dialog has four actions:
+This dialog has these actions:
 <ul>
 <li>make the station "active", ie, continue the survey from this station.</li>
 <li>hide the midline display "after" the station</li>
 <li>hide the midline display "before" the station</li>
 <li>toggle the display of the splay shots at the station</li>
+<li>cross-section buttons (only for stations with one or two legs)</li>
 </ul>
 
 
@@ -29,5 +30,17 @@ This is useful when the survey is complicated or goes over itself. In this case 
 Stations beyond a "barrier" station, are not automatically saved as Therion station points. Therefore, by choosing the sketch origin station inside the scrap and marking stations as barrier you can avoid spurious stations in the scrap file.<br><p>
 
 <img src="hiding_stations.png" alt="hiding stations"><br><p>
+
+<b>At-station cross-section</b><br>
+Cross sections can be created at stations with one or two legs.<br><p>
+
+With one leg the cross-section plane is perpendicular to the leg.
+With two it is the bisecant of the angles between the legs.
+The user can select from which side of this plane the cross-section is taken.<br><p>
+
+Cross-section in plan-view are always vertical.<br><p>
+
+Cross-sections in profile-view are either vertical (if the inclination of the leg(s) is less that a certain value) or hiorizontal (in this case they can be either seen from above or from below).<br><p>
+
 
 </body></html>

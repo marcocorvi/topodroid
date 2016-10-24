@@ -186,7 +186,7 @@
 <string name="group_reset">Remise à zéro des groupes</string>
 
 <!-- UNUSED string name="scale">échelle</string -->
-<!-- UNUSED string name="reversed">inverser</string -->
+<string name="reversed">inverser</string>
 <string name="options">options</string>
 <string name="outline">contours</string>
 <string name="out">externe</string>
@@ -578,6 +578,7 @@
     <string name="help_redo">Rétabli la dernière action</string>
     <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>
     <string name="help_delete_item">Supprimer Objet topo</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Efface un/des éléments du croquis</string>
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>

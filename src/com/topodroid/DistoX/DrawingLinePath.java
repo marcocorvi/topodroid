@@ -312,7 +312,7 @@ public class DrawingLinePath extends DrawingPointLinePath
 
     // for ( LinePoint pt : mPoints ) 
     LinePoint pt = mFirst; 
-    if ( mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
+    // if ( mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
     for ( ; pt != null; pt = pt.mNext ) 
     {
       pt.toTherion( pw );

@@ -137,7 +137,7 @@ class TDSetting
     "DISTOX_RECENT_NR",           // 82 number of most recent items (item picker)
     "DISTOX_AREA_BORDER",         // 83 area border visibility
     "DISTOX_ORTHO_LRUD",          // 86 orthogonal LRUD ( >=1 disable, min 0 )
-    "DISTOX_SECTION_STATIONS",    //
+    // "DISTOX_SECTION_STATIONS",    //
 
     "DISTOX_WALLS_TYPE",          // 87
     "DISTOX_WALLS_PLAN_THR",      // 88
@@ -369,7 +369,8 @@ class TDSetting
   static float mDotRadius      = 5;
   static float mArrowLength    = 8;
 
-  static int mSectionStations = 3; // 1: From, 2: To, 3: both
+  // NOTE not used, but could set a default for section splays
+  // static int mSectionStations = 3; // 1: From, 2: To, 3: both
 
   static boolean mUnscaledPoints = false;
   static boolean mAreaBorder     = true;
@@ -721,7 +722,7 @@ class TDSetting
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
 
-    mSectionStations  = tryInt( prefs, key[k++], "3");         // DISTOX_SECTION_STATIONS
+    // mSectionStations  = tryInt( prefs, key[k++], "3");         // DISTOX_SECTION_STATIONS
 
     mWallsType        = tryInt(   prefs, key[k++], "0" );     // DISTOX_WALLS_TYPE choice: 0, 1
     mWallsPlanThr     = tryFloat( prefs, key[k++], "70"  );   // DISTOX_WALLS_PLAN_THR
@@ -1048,8 +1049,8 @@ class TDSetting
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
 
-    } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_SECTION_STATIONS
-      mSectionStations = tryInt( prefs, k, "3");
+    // } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_SECTION_STATIONS
+    //   mSectionStations = tryInt( prefs, k, "3");
 
     } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_WALLS_TYPE
       mWallsType = tryInt(prefs, k, "0" );

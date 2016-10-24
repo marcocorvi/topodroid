@@ -184,7 +184,7 @@
     <string name="group_reset">Briši skupine</string>
 
     <!-- UNUSED string name="scale">scala</string -->
-    <!-- UNUSED string name="reversed">reversa</string -->
+    <!-- TODO string name="reversed">reversed</string -->
     <string name="options">opcije</string>
     <string name="outline">obris</string>
     <string name="out">zunaj</string>
@@ -533,6 +533,7 @@
     <string name="help_redo">Ponovi zadnjo aktivnost skice</string>
     <string name="help_symbol_plot">Izberi prototip za skico</string>
     <string name="help_delete_item">Izbriši objekt skice</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Način brisanja</string>
     <string name="help_previous">Predhodni objekt izbora</string>

@@ -191,7 +191,7 @@
     <string name="group_reset">重置分组</string>
 
     <!-- UNUSED string name="scale">比例</string -->
-    <!-- UNUSED string name="reversed">反向</string -->
+    <string name="reversed">反向</string>
     <string name="options">选项</string>
     <string name="outline">轮廓</string>
     <string name="out">出</string>
@@ -592,6 +592,7 @@
     <string name="help_redo">重做上一次操作</string>
     <string name="help_symbol_plot">选择最近使用的绘图工具</string>
     <string name="help_delete_item">删除草图项</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- string name="help_clear">清除选择</string -->
     <string name="help_eraser">简易模式</string>
     <string name="help_previous">已选项目</string>

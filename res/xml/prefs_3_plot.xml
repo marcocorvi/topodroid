@@ -36,14 +36,14 @@
        android:entryValues="@array/zoomCtrlValue"
        />
 
-     <com.topodroid.DistoX.MyListPreference
+     <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_SECTION_STATIONS"
        android:summary="@string/pref_section_stations_summary"
        android:title="@string/pref_section_stations_title"
        android:defaultValue="3"
        android:entries="@array/sectionStations"
        android:entryValues="@array/sectionStationsValue"
-     />
+     / -->
 
      <CheckBoxPreference
        android:key="DISTOX_CHECK_ATTACHED"

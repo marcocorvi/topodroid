@@ -55,6 +55,7 @@ public class DrawingBrushPaths
   static int getLineCsxType( int index ) { return mLineLib.lineCsxType( index ); }
   static int getLineCsxCategory( int index ) { return mLineLib.lineCsxCategory( index ); }
   static int getLineCsxPen( int index ) { return mLineLib.lineCsxPen( index ); }
+  static String getLineGroup( int index ) { return mLineLib.getLineGroup( index ); }
 
   static int getAreaCsxLayer( int index ) { return mAreaLib.areaCsxLayer( index ); }
   static int getAreaCsxType( int index ) { return mAreaLib.areaCsxType( index ); }

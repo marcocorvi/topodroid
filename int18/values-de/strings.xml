@@ -209,7 +209,7 @@
     <string name="group_reset">Gruppierung zurücksetzen</string>
 
     <!-- UNUSED string name="scale">Ausmaß</string -->
-    <!-- UNUSED string name="reversed">umkehren</string -->
+    <string name="reversed">umkehren</string>
     <string name="options">Einstellungen</string>
     <string name="outline">Linientyp (Therion)</string>
     <string name="out">draußen</string>
@@ -625,6 +625,7 @@
     <string name="help_redo">Letzte Aktion wiederholen</string>
     <string name="help_symbol_plot">Zeichenwerkzeug auswählen</string>
     <string name="help_delete_item">Lösche Element</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- UNUSED string name="help_clear">Die Auswahl löschen</string -->
 
     <string name="help_previous">Vorheriger Punkt</string>

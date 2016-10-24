@@ -31,7 +31,7 @@ class DrawingSvg
 {
   private static final float grad2rad = TDMath.GRAD2RAD;
 
-  private static void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String color, float opacity )
+  private static void printSvgGrid( BufferedWriter out, List<DrawingPath> grid, String color, float opacity, float xoff, float yoff )
   {
     if ( grid != null && grid.size() > 0 ) {
       StringWriter sw = new StringWriter();
@@ -39,8 +39,8 @@ class DrawingSvg
       pw.format(Locale.US, "<g style=\"fill:none;stroke-opacity:%.1f;stroke-width=\"1\";stroke:#666666\" >\n", opacity );
       for ( DrawingPath p : grid ) {
         pw.format(Locale.US, "  <path stroke-width=\"1\" stroke=\"#%s\" d=\"", color );
-        pw.format(Locale.US, "M %.2f %.2f", p.x1, p.y1 );
-        pw.format(Locale.US, " L %.2f %.2f", p.x2, p.y2 );
+        pw.format(Locale.US, "M %.2f %.2f",  xoff+p.x1, yoff+p.y1 );
+        pw.format(Locale.US, " L %.2f %.2f", xoff+p.x2, yoff+p.y2 );
         pw.format("\" />\n");
       }
       pw.format("</g>\n");
@@ -55,6 +55,8 @@ class DrawingSvg
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
+    String wall_group = DrawingBrushPaths.getLineGroup( DrawingBrushPaths.mLineLib.mLineWallIndex );
+
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
           ymin=10000f, ymax=-10000f;
@@ -64,7 +66,8 @@ class DrawingSvg
 
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
-        if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
+        String group = DrawingBrushPaths.getLineGroup( lp.lineType() );
+        if ( group != null && group.equals( wall_group ) ) {
           // ArrayList< LinePoint > pts = lp.mPoints;
           // for ( LinePoint pt : pts ) 
           for ( LinePoint pt = lp.mFirst; pt != null; pt = pt.mNext ) {
@@ -90,6 +93,8 @@ class DrawingSvg
     }
     int width = (int)(xmax - xmin) + 200;
     int height = (int)(ymax - ymin) + 200;
+    float xoff = 100 + xmin;
+    float yoff = 100 + ymin;
 
     try {
 
@@ -137,9 +142,9 @@ class DrawingSvg
         // centerline data
         if ( PlotInfo.isSketch2D( type ) ) { 
           if ( TDSetting.mSvgGrid ) {
-            printSvgGrid( out, plot.GetGrid1(),   "999999", 0.4f );
-            printSvgGrid( out, plot.GetGrid10(),  "666666", 0.6f );
-            printSvgGrid( out, plot.GetGrid100(), "333333", 0.8f );
+            printSvgGrid( out, plot.GetGrid1(),   "999999", 0.4f, xoff, yoff );
+            printSvgGrid( out, plot.GetGrid10(),  "666666", 0.6f, xoff, yoff );
+            printSvgGrid( out, plot.GetGrid100(), "333333", 0.8f, xoff, yoff );
           }
           // FIXME OK PROFILE
           out.write("<g style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
@@ -155,16 +160,16 @@ class DrawingSvg
  
               pw4.format("  <path stroke-width=\"1\" stroke=\"black\" d=\"");
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x  = DrawingUtil.toSceneX( f.e ); 
-                float y  = DrawingUtil.toSceneY( f.s );
-                float x1 = DrawingUtil.toSceneX( t.e );
-                float y1 = DrawingUtil.toSceneY( t.s );
+                float x  = xoff + DrawingUtil.toSceneX( f.e ); 
+                float y  = yoff + DrawingUtil.toSceneY( f.s );
+                float x1 = xoff + DrawingUtil.toSceneX( t.e );
+                float y1 = yoff + DrawingUtil.toSceneY( t.s );
                 pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
               } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-                float x  = DrawingUtil.toSceneX( f.h );
-                float y  = DrawingUtil.toSceneY( f.v );
-                float x1 = DrawingUtil.toSceneX( t.h );
-                float y1 = DrawingUtil.toSceneY( t.v );
+                float x  = xoff + DrawingUtil.toSceneX( f.h );
+                float y  = yoff + DrawingUtil.toSceneY( f.v );
+                float x1 = xoff + DrawingUtil.toSceneX( t.h );
+                float y1 = yoff + DrawingUtil.toSceneY( t.v );
                 pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
               }
             // }
@@ -182,14 +187,14 @@ class DrawingSvg
               pw41.format("  <path stroke-width=\"1\" stroke=\"grey\" d=\"");
               float dh = blk.mLength * (float)Math.cos( blk.mClino * grad2rad )*SCALE_FIX;
               if ( type == PlotInfo.PLOT_PLAN ) {
-                float x = DrawingUtil.toSceneX( f.e ); 
-                float y = DrawingUtil.toSceneY( f.s );
+                float x = xoff + DrawingUtil.toSceneX( f.e ); 
+                float y = yoff + DrawingUtil.toSceneY( f.s );
                 float de =   dh * (float)Math.sin( blk.mBearing * grad2rad);
                 float ds = - dh * (float)Math.cos( blk.mBearing * grad2rad);
                 pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x + de, (y+ds) );
               } else if ( PlotInfo.isProfile( type ) ) { // FIXME OK PROFILE
-                float x = DrawingUtil.toSceneX( f.h );
-                float y = DrawingUtil.toSceneY( f.v );
+                float x = xoff + DrawingUtil.toSceneX( f.h );
+                float y = yoff + DrawingUtil.toSceneY( f.v );
                 float dv = - blk.mLength * (float)Math.sin( blk.mClino * grad2rad )*SCALE_FIX;
                 pw41.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x+dh*blk.mExtend, (y+dv) );
               }
@@ -216,12 +221,12 @@ class DrawingSvg
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
             DrawingStationPath st = (DrawingStationPath)path;
             pw5.format("<text font-size=\"20\" font=\"sans-serif\" fill=\"black\" stroke=\"none\" text-amchor=\"middle\"");
-            pw5.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", st.cx, st.cy );
+            pw5.format(Locale.US, " x=\"%.2f\" y=\"%.2f\">", xoff + st.cx, yoff + st.cy );
             pw5.format("%s</text>\n", st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath) path;
-            pw5.format("  <path stroke=\"%s\" stroke-width=\"2\" fill=\"none\"", color_str );
             String th_name = DrawingBrushPaths.mLineLib.getSymbolThName( line.mLineType ); 
+            pw5.format("  <path stroke=\"%s\" stroke-width=\"2\" fill=\"none\" class=\"%s\"", color_str, th_name );
             if ( th_name.equals( "arrow" ) ) pw5.format(" marker-end=\"url(#Triangle)\"");
             else if ( th_name.equals( "section" ) ) pw5.format(" stroke-dasharray=\"5 3 \"");
             else if ( th_name.equals( "fault" ) ) pw5.format(" stroke-dasharray=\"8 4 \"");
@@ -229,18 +234,18 @@ class DrawingSvg
             else if ( th_name.equals( "ceiling-meander" ) ) pw5.format(" stroke-dasharray=\"6 2 \"");
             pw5.format(" d=\"");
             LinePoint p = line.mFirst;
-            pw5.format(Locale.US, "M %.2f %.2f", p.mX, p.mY );
+            pw5.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
             for ( p = p.mNext; p != null; p = p.mNext ) { 
-              pw5.format(Locale.US, " L %.2f %.2f", p.mX, p.mY );
+              pw5.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
             }
             pw5.format("\" />\n");
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;
             pw5.format("  <path stroke=\"black\" stroke-width=\"1\" fill=\"%s\" fill-opacity=\"0.5\" d=\"", color_str );
             LinePoint p = area.mFirst;
-            pw5.format(Locale.US, "M %.2f %.2f", p.mX, p.mY );
+            pw5.format(Locale.US, "M %.2f %.2f", xoff+p.mX, yoff+p.mY );
             for ( p = p.mNext; p != null; p = p.mNext ) { 
-              pw5.format(Locale.US, " L %.2f %.2f", p.mX, p.mY );
+              pw5.format(Locale.US, " L %.2f %.2f", xoff+p.mX, yoff+p.mY );
             }
             pw5.format(" Z\" />\n");
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
@@ -251,24 +256,24 @@ class DrawingSvg
             pw5.format("<!-- point %s -->\n", name );
             if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
-              pw5.format(Locale.US, "<text x=\"%.2f\" y=\".2f\" ", point.cx, -point.cy );
+              pw5.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
               pw5.format(" style=\"fill:black;stroke:black;stroke-width:0.3\">%s</text>\n", label.mText );
             // } else if ( name.equals("continuation") ) {
-            //   pw5.format(Locale.US, "<text x=\"%.2f\" y=\".2f\" ", point.cx, -point.cy );
+            //   pw5.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
             //   pw5.format(" style=\"fill:none;stroke:black;stroke-width:0.3\">\?</text>\n" );
             // } else if ( name.equals("danger") ) {
-            //   pw5.format(Locale.US, "<text x=\"%.2f\" y=\".2f\" ", point.cx, -point.cy );
+            //   pw5.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
             //   pw5.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
             } else {
               SymbolPoint sp = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex( idx );
               if ( sp != null ) {
                 pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(10),rotate(%.2f)\" \n", 
-                  point.cx, point.cy, point.mOrientation );
+                  xoff+point.cx, yoff+point.cy, point.mOrientation );
                 pw5.format(" style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
                 pw5.format("%s\n", sp.mSvg );
                 pw5.format("</g>\n");
               } else {
-                pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"10\" ", point.cx, -point.cy );
+                pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"10\" ", xoff+point.cx, yoff+point.cy );
                 pw5.format(" style=\"fill:none;stroke:black;stroke-width:0.1\" />\n");
               }
             }

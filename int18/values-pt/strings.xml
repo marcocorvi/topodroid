@@ -198,7 +198,7 @@
     <string name="group_reset">Reset grupos</string>
 
     <!-- UNUSED string name="scale">Escada</string -->
-    <!-- UNUSED string name="reversed">Inverter</string -->
+    <string name="reversed">Inverter</string>
     <string name="options">Opções</string>
     <string name="outline">Perfil</string>
     <string name="out">Fora</string>
@@ -602,6 +602,7 @@
     <string name="help_redo">Refazer última ação de desenho</string>
     <string name="help_symbol_plot">Selecionar a ferramenta de desenho atual</string>
     <string name="help_delete_item">Apagar objeto do esboço</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Modalidade de cancelamento</string>
     <string name="help_previous">Objeto anterior na seleção</string>

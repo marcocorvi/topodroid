@@ -653,11 +653,11 @@ public class DrawingCommandManager
     }
   }
 
-  void deletePath( DrawingPath path, EraseCommand eraseCmd )
+  void deletePath( DrawingPath path, EraseCommand eraseCmd ) // called by DrawingSurface
   {
     doDeletePath( path );
     // checkLines();
-    eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
+    if ( eraseCmd != null ) eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
 
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
@@ -879,6 +879,31 @@ public class DrawingCommandManager
     // checkLines();
   }
 
+  public void deleteSectionPoint( String scrap_name, EraseCommand cmd )
+  {
+    int index = DrawingBrushPaths.mPointLib.mPointSectionIndex;
+    synchronized( mCurrentStack ) {
+      for ( ICanvasCommand icc : mCurrentStack ) { // FIXME reverse_iterator
+        if ( icc.commandType() == 0 ) { // DrawingPath
+          DrawingPath path = (DrawingPath)icc;
+          if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+            DrawingPointPath dpp = (DrawingPointPath) path;
+            if ( dpp.mPointType == index ) {
+              String vals[] = dpp.mOptions.split(" ");
+              int len = vals.length;
+              for ( int k = 0; k < len; ++k ) {
+                if ( scrap_name.equals( vals[k] ) ) {
+                  deletePath( path, cmd );
+                  return;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   // called by DrawingSurface.getBitmap()
   public RectF getBitmapBounds()
   {
@@ -1097,7 +1122,7 @@ public class DrawingCommandManager
   // continuation is checked in canvas-coords: canvas = offset + scene * zoom
   DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom )
   {
-    String group = DrawingBrushPaths.mLineLib.getLineGroup( type );
+    String group = DrawingBrushPaths.getLineGroup( type );
     if ( group == null ) return null;
 
     float delta = 2 * TDSetting.mCloseness / zoom;
@@ -1113,7 +1138,7 @@ public class DrawingCommandManager
         if ( drawingPath.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath linePath = (DrawingLinePath)drawingPath;
           // if ( linePath.mLineType == type ) 
-          if ( group.equals( DrawingBrushPaths.mLineLib.getLineGroup( linePath.mLineType ) ) )
+          if ( group.equals( DrawingBrushPaths.getLineGroup( linePath.mLineType ) ) )
           {
             if ( linePath.mFirst.distance( lp ) < delta || linePath.mLast.distance( lp ) < delta ) {
               if ( ret != null ) return null; // ambiguity
@@ -1233,6 +1258,18 @@ public class DrawingCommandManager
           final ICanvasCommand cmd = (ICanvasCommand) i.next();
           if ( cmd.commandType() == 0 ) {
             cmd.draw( canvas, mMatrix, mScale, mBBox );
+            DrawingPath path = (DrawingPath)cmd;
+            if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+              DrawingLinePath line = (DrawingLinePath)path;
+              if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) { // add tick to section-lines
+                LinePoint lp = line.mFirst;
+                Path path1 = new Path();
+                path1.moveTo( lp.mX, lp.mY );
+                path1.lineTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
+                path1.transform( mMatrix );
+                canvas.drawPath( path1, DrawingBrushPaths.mStationSymbol.mPaint );
+              }
+            }
           }
         }
       }

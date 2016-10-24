@@ -188,7 +188,8 @@ public class DrawingActivity extends ItemDrawer
                         R.string.help_next,
                         R.string.help_line_point, 
                         R.string.help_note_plot,
-                        R.string.help_delete_item
+                        R.string.help_delete_item,
+                        R.string.help_range
                       };
   private static int help_menus[] = {
                         R.string.help_save_plot,
@@ -364,6 +365,7 @@ public class DrawingActivity extends ItemDrawer
   private boolean mModified; // whether the sketch has been modified 
 
   long getPlotType()   { return mType; }
+  boolean isAnySection() { return PlotInfo.isAnySection( mType ); }
 
   private float mBorderRight      = 4096;
   private float mBorderLeft       = 0;
@@ -407,6 +409,10 @@ public class DrawingActivity extends ItemDrawer
   private BitmapDrawable mBMadd;
   private BitmapDrawable mBMleft;
   private BitmapDrawable mBMright;
+  private BitmapDrawable mBMsplayNone;
+  private BitmapDrawable mBMsplayFront;
+  private BitmapDrawable mBMsplayBack;
+  private BitmapDrawable mBMsplayBoth;
   private Bitmap mBMdial;
 
   HorizontalListView mListView;
@@ -978,6 +984,9 @@ public class DrawingActivity extends ItemDrawer
     mTouchMode    = MODE_MOVE;
     setMenuAdapter( getResources(), mType );
   }
+
+  private int mSavedMode;
+  private int mSplayMode;
   
   private void popInfo()
   {
@@ -988,13 +997,43 @@ public class DrawingActivity extends ItemDrawer
     mTo      = "";
     mAzimuth = plot.azimuth;
     mClino   = plot.clino;
+    mDrawingSurface.setDisplayMode( mSavedMode );
     // Log.v("DistoX", "pop " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
     resetStatus();
     mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
-    mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
+    // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
+    mButton1[BTN_PLOT].setOnLongClickListener( this );
     mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
+
+  private void updateSplays( int mode )
+  {
+    mSplayMode = mode;
+    switch (mSplayMode) {
+      case 0:
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayNone );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, false );
+        mDrawingSurface.setStationSplays( mFrom, false );
+        break;
+      case 1:
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayFront );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, true );
+        mDrawingSurface.setStationSplays( mFrom, false );
+        break;
+      case 2:
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayBoth );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, true );
+        mDrawingSurface.setStationSplays( mFrom, true );
+        break;
+      case 3:
+        mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayBack );
+        if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, false );
+        mDrawingSurface.setStationSplays( mFrom, true );
+        break;
+    }
+  }
+
 
   private void pushInfo( long type, String name, String from, String to, float azimuth, float clino )
   {
@@ -1007,11 +1046,15 @@ public class DrawingActivity extends ItemDrawer
     mTo      = to;
     mAzimuth = azimuth;
     mClino   = clino;
+    mSavedMode = mDrawingSurface.getDisplayMode();
+    mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION );
     resetStatus();
     doStart( true );
+    updateSplays( 2 ); // both splays
     mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
-    mButton1[ BTN_PLOT ].setVisibility( View.GONE );
+    // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
+    mButton1[BTN_PLOT].setOnLongClickListener( null );
     mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
@@ -1036,6 +1079,10 @@ public class DrawingActivity extends ItemDrawer
     mBMright         = MyButton.getButtonBackground( mApp, res, R.drawable.iz_right );
     mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
     setRefAzimuth( TDAzimuth.mRefAzimuth, TDAzimuth.mFixedExtend );
+    mBMsplayNone     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_none );
+    mBMsplayFront    = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_front );
+    mBMsplayBack     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_back );
+    mBMsplayBoth     = MyButton.getButtonBackground( mApp, res, R.drawable.iz_splay_both );
 
     mButton2 = new Button[ mNrButton2 ]; // DRAW
     off = (mNrButton1 - 3); 
@@ -1451,10 +1498,10 @@ public class DrawingActivity extends ItemDrawer
         int splay_station = 3; // could use a boolean
         if ( b.mFrom.equals( mFrom ) ) {
           splay_station = 1;
-          if ( TDSetting.mSectionStations == 2 ) continue;
+          // if ( TDSetting.mSectionStations == 2 ) continue;
         } else if ( b.mFrom.equals( mTo ) ) {
           splay_station = 2;
-          if ( TDSetting.mSectionStations == 1 ) continue;
+          // if ( TDSetting.mSectionStations == 1 ) continue;
         } else {
           continue;
         }
@@ -1475,14 +1522,10 @@ public class DrawingActivity extends ItemDrawer
         // Log.v("DistoX", "splay " + d + " " + b.mBearing + " " + b.mClino + " coord " + X + " " + Y + " " + Z );
         if ( splay_station == 1 ) {
           // N.B. this must be guaranteed for X_SECTION
-          x += xfrom;
-          y += yfrom;
-          addFixedSectionSplay( b, xfrom, yfrom, x, y, 0, 0, false );
+          addFixedSectionSplay( b, xfrom, yfrom, xfrom+x, yfrom+y, 0, 0, false );
           // Log.v("DistoX", "Splay(F) " + x + " " + y );
         } else { // if ( splay_station == 2
-          x += xto;
-          y += yto;
-          addFixedSectionSplay( b, xto, yto, x, y, 0, 0, true );
+          addFixedSectionSplay( b, xto, yto, xto+x, yto+y, 0, 0, true );
           // Log.v("DistoX", "Splay(T) " + x + " " + y );
         }
       }
@@ -2214,7 +2257,7 @@ public class DrawingActivity extends ItemDrawer
                     //
                     if ( mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                       mCurrentLinePath.addOption("-direction both");
-                      mCurrentLinePath.makeStraight( true ); // true = with arrow
+                      mCurrentLinePath.makeStraight( false ); // true = with arrow
                       boolean h_section = PlotInfo.isProfile( mType );
                      
                       // NOTE here l1 is the end-point and l2 the start-point (not considering the tick)
@@ -2224,7 +2267,7 @@ public class DrawingActivity extends ItemDrawer
                       //         L1->L2 = atan2( (L2-L1).x, -(L2-l1).y )  Y is point downward North upward
                       //         azimuth = dir(L1->L2) + 90
                       //
-                      LinePoint l2 = mCurrentLinePath.mFirst.mNext;
+                      LinePoint l2 = mCurrentLinePath.mFirst; // .mNext;
                       LinePoint l1 = l2.mNext;
                       // Log.v("DistoX", "section line L1 " + l1.mX + " " + l1.mY + " L2 " + l2.mX + " " + l2.mY );
 
@@ -2297,10 +2340,10 @@ public class DrawingActivity extends ItemDrawer
                         if ( TDSetting.mAutoSectionPt && section_id != null ) {
                           float x5 = mCurrentLinePath.mLast.mX + mCurrentLinePath.mDx * 20; 
                           float y5 = mCurrentLinePath.mLast.mY + mCurrentLinePath.mDy * 20; 
-                          String scrap = mApp.mySurvey + "-" + section_id;
+                          String scrap_option = "-scrap " + mApp.mySurvey + "-" + section_id;
                           DrawingPointPath section_pt = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointSectionIndex,
                                                                             x5, y5, DrawingPointPath.SCALE_M, 
-                                                                            "-scrap " + scrap );
+                                                                            scrap_option );
                           mDrawingSurface.addDrawingPath( section_pt );
                         }
 
@@ -2450,11 +2493,20 @@ public class DrawingActivity extends ItemDrawer
       File th2 = new File( TDPath.getSurveyPlotTh2File( mApp.mySurvey, xsname ) );
       if ( th2.exists() ) th2.delete(); 
       // TODO delete backup files
+
+      deleteSectionPoint( xsname ); 
+    }
+
+    private void deleteSectionPoint( String sn )
+    {
+      if ( sn == null ) return;
+      String scrap_name = mApp.mySurvey + "-" + sn;
+      mDrawingSurface.deleteSectionPoint( scrap_name ); // this section-point delete cannot be undone
     }
 
     // X-SECTION AT A STATION
     // @param name station name
-    void openXSection( DrawingStationName st, String name, long type ) 
+    void openXSection( DrawingStationName st, String name, long type, boolean inverse ) 
     {
       long xtype = -1;
       String xsname = null;
@@ -2473,9 +2525,11 @@ public class DrawingActivity extends ItemDrawer
         float azimuth = 0;
         float clino   = 0;
         List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, name, true ); // select "independent" legs
-        if ( legs.size() == 1 ) { // XSection always look "away" for terminal station
+        if ( legs.size() == 1 ) { 
+          // one-leg: normal  = direction FROM - TO
+          //          inverse = direction TO - FROM
           DistoXDBlock leg0 = legs.get(0);
-          if ( name.equals( leg0.mFrom ) ) {
+          if ( inverse ) { // name.equals( leg0.mFrom ) ) 
             azimuth = leg0.mBearing + 180; 
             clino   = - leg0.mClino;
           } else {
@@ -2483,6 +2537,8 @@ public class DrawingActivity extends ItemDrawer
             clino   = leg0.mClino;
           }
         } else if ( legs.size() == 2 ) {
+          // two-leg: normal  = FROM_0 - STATION - TO_1
+          //          inverse = TO_1 - STATION - FROM_0
           DistoXDBlock leg0 = legs.get(0);
           DistoXDBlock leg1 = legs.get(1);
           float b0 = leg0.mBearing;
@@ -2500,7 +2556,10 @@ public class DrawingActivity extends ItemDrawer
           azimuth = (b1 + b0)/2;
           if ( Math.abs( b1 - b0 ) > 180 ) azimuth += 180;
           clino = ( c0 + c1 ) / 2;
-          
+          if ( inverse ) {
+            azimuth += 180;
+            clino = -clino;
+          }
         } else {
           // Log.v("DistoX", "X_SECTION Too many legs" );
           Toast.makeText( this, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
@@ -2511,8 +2570,8 @@ public class DrawingActivity extends ItemDrawer
         if ( PlotInfo.isProfile( type ) ) {
           clino = ( clino >  TDSetting.mVertSplay )?  90
                 : ( clino < -TDSetting.mVertSplay )? -90 : 0;
-        // } else { // type == PlotInfo.PLOT_PLAN
-        //   clino = 0;
+        } else { // type == PlotInfo.PLOT_PLAN
+          clino = 0;
         }
         // Log.v("DistoX", "new X section azimuth " + azimuth + " clino " + clino );
 
@@ -2522,6 +2581,15 @@ public class DrawingActivity extends ItemDrawer
         // add x-section to station-name
 
         st.setXSection( azimuth, clino, type );
+        if ( TDSetting.mAutoSectionPt ) { // insert section point
+          float x5 = st.getXSectionX( 4 ); // FIXME offset
+          float y5 = st.getXSectionY( 4 );
+	  String scrap_option = "-scrap " + mApp.mySurvey + "-" + xsname;
+	  DrawingPointPath section_pt = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointSectionIndex,
+							    x5, y5, DrawingPointPath.SCALE_M, 
+							    scrap_option );
+	  mDrawingSurface.addDrawingPath( section_pt );
+        }
       }
       if ( plot != null ) {
         // Log.v("DistoX", "invoke X section " + plot.name + " <" + plot.start + "> " + plot.azimuth + " " + plot.clino );
@@ -3155,6 +3223,10 @@ public class DrawingActivity extends ItemDrawer
           startSaveTdrTask( mType, PlotSave.TOGGLE, MAX_TASK_FINAL, TDPath.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
+        } else if ( PlotInfo.isSection( mType ) ) {
+          updateSplays( (mSplayMode + 1)%4 );
+        } else if ( PlotInfo.isXSection( mType ) ) {
+          updateSplays( (mSplayMode + 2)%4 );
         }
       } else if ( b == mButton1[k1++] ) { //  AZIMUTH
         if ( PlotInfo.isSketch2D( mType ) ) { 
@@ -3216,7 +3288,8 @@ public class DrawingActivity extends ItemDrawer
               DrawingStationPath path = mDrawingSurface.getStationPath( sn.mName );
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
-              new DrawingStationDialog( this, this, sn, path, barrier, hidden ).show();
+              List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, sn.mName, true ); // select "independent" legs
+              new DrawingStationDialog( this, this, sn, path, barrier, hidden, legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               new DrawingPointDialog( this, (DrawingPointPath)(sp.mItem) ).show();
@@ -3761,6 +3834,7 @@ public class DrawingActivity extends ItemDrawer
         startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 5 + ( TDSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
+        Log.v("DistoX", "Help menu, nn " + nn );
         (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, help_menus.length ) ).show();
       }
   }

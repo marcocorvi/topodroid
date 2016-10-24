@@ -193,7 +193,7 @@
     <string name="group_reset">Cancella i gruppi</string>
 
     <!-- UNUSED string name="scale">scala</string -->
-    <!-- UNUSED string name="reversed">reversa</string -->
+    <string name="reversed">inversa</string>
     <string name="options">opzioni</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
@@ -596,6 +596,7 @@
     <string name="help_redo">Ripeti ultima azione di disegno</string>
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
     <string name="help_delete_item">Cancella elemento del disegno</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>

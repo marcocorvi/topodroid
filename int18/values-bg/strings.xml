@@ -194,7 +194,7 @@
     <string name="group_reset">Изчистване на групите</string>
 
     <!-- UNUSED string name="scale">мащаб</string -->
-    <!-- UNUSED string name="reversed">обръщане</string -->
+    <string name="reversed">обръщане</string>
     <string name="options">опции</string>
     <string name="outline">контур</string>
     <string name="out">вън</string>
@@ -596,6 +596,7 @@
     <string name="help_redo">Възстановяване на действие от скицата</string>
     <string name="help_symbol_plot">Избор на елемент за рисуване</string>
     <string name="help_delete_item">Изтриване на елемент от скицата</string>
+    <!-- TODO string name="help_range">Moving a portion of line</string -->
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Изтриване на елемент</string>
     <string name="help_previous">Предишен избран елемент</string>
