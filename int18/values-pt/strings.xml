@@ -249,6 +249,7 @@
     <string name="menu_attach">CONECTAR</string>
     <!-- string name="menu_attached">Conectado</string -->
     <!-- string name="menu_ready">Pronto</string -->
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
     <string name="menu_display">DISPLAY</string>
@@ -259,7 +260,7 @@
     <string name="menu_reload">RECARREGAR</string>
     <!-- TODO string name="menu_rename_delete">RENOMEAR/APAGAR</string -->
     <string name="menu_rename">RENOMEAR</string>
-    <!-- TODO string name="menu_switch">ALTERNAR</string -->
+    <!-- FIXME string name="menu_switch">ALTERNAR</string -->
     <string name="menu_help">AJUDA</string>
     <string name="menu_join_survey">MAPA COLABORATIVO</string>
     <string name="menu_logs">REGISTROS</string>
@@ -444,6 +445,7 @@
     <!-- UNUSED string name="button_add"       >Adicionar     </string -->
     <string name="button_back"      >Voltar      </string>
     <string name="button_cancel"    >Cancelar    </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Converter   </string>
     <string name="button_current"   >Atual   </string>
     <string name="button_delete"    >Apagar    </string>
@@ -554,6 +556,7 @@
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Medir distâncias</string>
     
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_continue">Continuar a desenhar uma linha</string>
     <string name="help_contour">Modificar perfil</string>

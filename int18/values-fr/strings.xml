@@ -235,6 +235,7 @@
 <string name="menu_attach">CONNECTER</string>
 <!-- string name="menu_attached">Connecté</string -->
 <!-- string name="menu_ready">Prêt</string -->
+    <!-- TODO string name="menu_close">CLOSE</string -->
 <string name="menu_delete">SUPPRIMER</string>
 <string name="menu_detach">DÉCONNECTER</string>
 <string name="menu_display">AFFICHAGE</string>
@@ -245,7 +246,7 @@
 <string name="menu_reload">RECHARGER</string>
     <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
 <string name="menu_rename">RENOMMER</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
 <string name="menu_help">AIDE</string>
 <string name="menu_join_survey">CO-RELEVÉ</string>
 <string name="menu_logs">JOURNALISATION</string>
@@ -421,6 +422,7 @@
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Convertir   </string>
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
@@ -531,6 +533,7 @@
     <!-- UNUSED string name="help_manual">Manuel Utilisateur</string -->
     <string name="help_measure">Mesurer les distances</string>
 
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Montrer les coefficients de calibration</string>
     <string name="help_continue">Continuer une ligne</string>
     <string name="help_current_station">Stations enregistrées</string>

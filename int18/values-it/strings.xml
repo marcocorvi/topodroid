@@ -244,6 +244,7 @@
     <string name="menu_attach">CONNETTI</string>
     <!-- string name="menu_attached">Connected</string -->
     <!-- string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <string name="menu_display">DISPLAY</string>
@@ -254,7 +255,7 @@
     <string name="menu_reload">RICARICA</string>
     <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
     <string name="menu_rename">RINOMINA</string>
-    <string name="menu_switch">SCAMBIA</string>
+    <string name="menu_switch">CAMBIA/CHIUDI</string>
     <string name="menu_help">AIUTO</string>
     <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
@@ -439,6 +440,7 @@
     <!-- UNUSED string name="button_add"       >Aggiungi  </string -->
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Converti  </string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
@@ -549,6 +551,7 @@
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Misurare le distanze</string>
     
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_continue">Continuare il disegno di una linea</string>
     <string name="help_current_station">Capisaldi salvati</string>

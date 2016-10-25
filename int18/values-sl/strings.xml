@@ -231,6 +231,7 @@
     <string name="menu_about">INFO</string>
     <!-- OK string name="menu_area">AREA</string -->
     <string name="menu_attach">PRIPNI</string>
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">BRIŠI</string>
     <string name="menu_detach">ODPNI</string>
     <string name="menu_display">PRIKAŽI</string>
@@ -241,7 +242,7 @@
     <string name="menu_reload">NALOŽI</string>
     <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">PREIMENUJ</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">POMOČ</string>
     <string name="menu_join_survey">PRIDR.NAČRT</string> <!-- rilievo cooperativo -->
     <string name="menu_logs">LOGS</string>
@@ -420,6 +421,7 @@
     <!-- UNUSED string name="button_add"       >Aggiungi  </string -->
     <string name="button_back"      >Nazaj  </string>
     <string name="button_cancel"    >Briši   </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Pretvori </string>
     <string name="button_current"   >Trenuten   </string>
     <string name="button_delete"    >Odstrani   </string>
@@ -487,6 +489,7 @@
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Meriti razdaljo</string>
     
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Koeficient kalibracije</string>
     <string name="help_current_station">Shranjene merilne točke</string>
     <string name="help_azimuth">Referenčna točka smeri  "extend"</string>

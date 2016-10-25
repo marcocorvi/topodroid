@@ -245,6 +245,7 @@
     <string name="menu_attach">CONNECT*KAPCSOL</string>
     <!-- string name="menu_attached">Connected</string -->
     <!-- string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">DELETE*TÖRÖL</string>
     <string name="menu_detach">DISCONNECT*SZÉTKAPCSOL</string>
     <string name="menu_display">DISPLAY*KÉPERNYŐ</string>
@@ -255,7 +256,7 @@
     <string name="menu_reload">RELOAD*ÚJRATÖLT</string>
     <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">RENAME*ÁTNEVEZ</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">HELP*SÚGÓ</string>
     <string name="menu_join_survey">CO-SURVEY*EGYÜTTES FELMÉRÉS???</string>
     <string name="menu_logs">LOGS*???</string>
@@ -441,6 +442,7 @@
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_back"      >Back      *Vissza    </string>
     <string name="button_cancel"    >Cancel    *Kilép     </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Convert   *Átalakít  </string>
     <string name="button_current"   >Current   * ???      </string>
     <string name="button_delete"    >Delete    *Töröl     </string>
@@ -551,6 +553,7 @@
     <!-- UNUSED string name="help_manual">User manual</string -->
     <string name="help_measure">Measure distances*Távolságmérés</string>
     
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Show calibration coefficients*Mutassa a kalibrációs együtthatókat</string>
     <string name="help_continue">Continue drawing a line*Vonal folytatása</string>
     <string name="help_contour">Contour editing*Körvonal szerkesztése</string>

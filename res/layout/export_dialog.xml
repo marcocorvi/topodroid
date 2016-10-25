@@ -23,9 +23,17 @@
       <Button android:id="@+id/button_ok"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
+          android:layout_marginRight="15dp" 
           android:background="@drawable/button"
           style="@style/button_default"
           android:text="@string/button_save"
+      />
+      <Button android:id="@+id/button_back"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/button"
+          style="@style/button_default"
+          android:text="@string/button_back"
       />
     </LinearLayout>
    		

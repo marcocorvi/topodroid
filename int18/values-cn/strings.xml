@@ -242,6 +242,7 @@
     <string name="menu_attach">连接</string>
     <!-- string name="menu_attached">连接</string -->
     <!-- string name="menu_ready">就绪</string -->
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">删除</string>
     <string name="menu_detach">断开连接</string>
     <string name="menu_display">显示</string>
@@ -252,7 +253,7 @@
     <string name="menu_reload">重新导入</string>
     <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">重命名</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">帮助</string>
     <string name="menu_join_survey">联合测量</string>
     <string name="menu_logs">日志设定</string>
@@ -437,6 +438,7 @@
     <!-- UNUSED string name="button_add"       >添加       </string -->
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >退出    </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >转换   </string>
     <!-- TODO string name="button_current"   >Current   </string -->
     <string name="button_delete"    >删除    </string>
@@ -545,6 +547,7 @@
     <!-- UNUSED string name="help_manual">用户手册</string -->
     <string name="help_measure">测量距离</string>
     
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">显示校准系数</string>
     <string name="help_continue">继续画线</string>
     <string name="help_current_station">保存测量点</string>

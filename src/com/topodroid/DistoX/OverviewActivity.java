@@ -77,6 +77,7 @@ public class OverviewActivity extends ItemDrawer
   // FIXME_OVER private static int BTN_PLOT = 2;
 
   private static int menus[] = {
+                        R.string.menu_close,
                         R.string.menu_options,
                         R.string.menu_help
                      };
@@ -87,6 +88,7 @@ public class OverviewActivity extends ItemDrawer
                         // FIXME_OVER R.string.help_toggle_plot,
                       };
   private static int help_menus[] = {
+                        R.string.help_close,
                         R.string.help_prefs,
                         R.string.help_help
                       };
@@ -948,6 +950,7 @@ public class OverviewActivity extends ItemDrawer
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
+    mMenuAdapter.add( res.getString( menus[2] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -964,7 +967,9 @@ public class OverviewActivity extends ItemDrawer
   {
     closeMenu();
     int p = 0;
-    if ( p++ == pos ) { // OPTIONS
+    if ( p++ == pos ) { // CLOSE
+      super.onBackPressed();
+    } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
       startActivity( intent );

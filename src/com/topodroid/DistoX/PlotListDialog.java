@@ -48,7 +48,8 @@ public class PlotListDialog extends MyDialog
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnPlotNew;
-  // private Button mBtnBack;
+  private Button mBtnClose;
+  private Button mBtnBack;
 
   private boolean mDoNew;
 
@@ -83,16 +84,19 @@ public class PlotListDialog extends MyDialog
     // mList.setDividerHeight( 2 );
     mList.setHorizontalSpacing( 2 );
 
-    mBtnPlotNew     = (Button) findViewById(R.id.plot_new);
-    // mBtnBack = (Button) findViewById(R.id.btn_back);
+    mBtnPlotNew = (Button) findViewById(R.id.plot_new);
+    mBtnClose   = (Button) findViewById(R.id.btn_close);
+    mBtnBack    = (Button) findViewById(R.id.btn_back);
 
     if ( mDoNew ) {
       mBtnPlotNew.setOnClickListener( this );
+      mBtnClose.setVisibility( View.GONE );
     } else {
       mBtnPlotNew.setEnabled( false );
       mBtnPlotNew.setVisibility( View.GONE );
+      mBtnClose.setOnClickListener( this );
     }
-    // mBtnBack.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
 
     // FIXME_SKETCH_3D
       mBtnSketch3dNew = (Button) findViewById(R.id.sketch3d_new);
@@ -165,6 +169,12 @@ public class PlotListDialog extends MyDialog
         int idx = 1 + mApp.mData.maxPlotIndex( mApp.mSID );
         new PlotNewDialog( mParent, mApp, mParent, idx ).show();
       }
+    } else if ( b == mBtnClose ) {
+      if ( mParent2 != null ) {
+        mParent2.doClose();
+      }
+    } else if ( b == mBtnBack ) {
+      /* nothing */
     // FIXME_SKETCH_3D
     } else if ( mApp.mSketches && b == mBtnSketch3dNew ) {
       if ( mParent != null ) {

@@ -239,6 +239,7 @@
     <string name="menu_about">Acerca de..</string>
     <string name="menu_area">Área</string>
     <string name="menu_attach">Conectar</string>
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <string name="menu_display">Pantalla</string>
@@ -249,7 +250,7 @@
     <string name="menu_reload">Importar</string>
     <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <string name="menu_rename">Renombrar</string>
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">Ayuda</string>
     <string name="menu_join_survey">Unir topografías</string>
     <string name="menu_logs">Registros</string>
@@ -432,6 +433,7 @@
     <!-- UNUSED string name="button_add"       >Añadir    </string -->
     <string name="button_back"      >Atras     </string>
     <string name="button_cancel"    >Cancelar  </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Convertir </string>
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
@@ -498,6 +500,7 @@
     <!-- UNUSED string name="help_manual">Manual online</string -->
     <string name="help_measure">Medir distancias</string>
     
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <!-- TODO string name="help_continue">Continue drawing a line</string -->
     <string name="help_current_station">Última estación guardada</string>

@@ -607,6 +607,11 @@ public class DrawingActivity extends ItemDrawer
     }
   };
 
+  void doClose()
+  {
+    super.onBackPressed();
+  }
+
   // doSaveTdr( ) is already called by onPause
   @Override
   public void onBackPressed () // askClose
@@ -3750,7 +3755,7 @@ public class DrawingActivity extends ItemDrawer
     mMenuAdapter.add( res.getString( menus[2] ) );  // RELOAD
     mMenuAdapter.add( res.getString( menus[3] ) );  // ZOOM_FIT
     if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( type ) ) {
-      mMenuAdapter.add( res.getString( menus[4] ) ); // SWITCH
+      mMenuAdapter.add( res.getString( menus[4] ) ); // SWITCH/CLOSE
       mMenuAdapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
     mMenuAdapter.add( res.getString( menus[6] ) ); // PALETTE
@@ -3804,8 +3809,7 @@ public class DrawingActivity extends ItemDrawer
         mOffset.y = TopoDroidApp.mDisplayHeight / (2*mZoom) - (b.top + b.bottom) / 2;
         // Log.v("DistoX", "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // SWITCH
-        // TODO sketch switch 
+      } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // SWITCH/CLOSE
         new PlotListDialog( this, null, mApp, this ).show();
       } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
         //   askDelete();

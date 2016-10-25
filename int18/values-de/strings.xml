@@ -265,6 +265,7 @@
     <string name="menu_about">ÜBER</string>
     <string name="menu_area">FLÄCHE</string>
     <string name="menu_attach">VERBINDEN</string>
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
     <string name="menu_display">ANZEIGEN</string>
@@ -275,7 +276,7 @@
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
     <string name="menu_rename">UMBENENNEN</string>
-    <string name="menu_switch">WECHSELN</string>
+    <!-- FIXME string name="menu_switch">WECHSELN</string -->
     <string name="menu_help">HILFE</string>
     <string name="menu_join_survey">CO-VERMESSUNG</string>
     <string name="menu_logs">LOGS</string>
@@ -465,6 +466,7 @@
     <!-- UNUSED string name="button_add"       >Erstellen       </string -->
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Konvertieren </string>
     <string name="button_current"   >Hier fortsetzen   </string>
     <string name="button_delete"    >Löschen    </string>
@@ -575,6 +577,7 @@
     <!-- UNUSED string name="help_manual">Handbuch</string -->
     <string name="help_measure">Entfernungen messen</string>
 
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
     <string name="help_continue">Linien fortsetzen</string>
     <string name="help_contour">Konturen bearbeiten</string>

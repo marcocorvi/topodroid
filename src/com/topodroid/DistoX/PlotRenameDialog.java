@@ -31,6 +31,7 @@ public class PlotRenameDialog extends MyDialog
 {
   private EditText mEtName;
   private Button   mBtnOK;
+  private Button   mBtnBack;
   private Button   mBtnDelete;
 
   private DrawingActivity mParent;
@@ -51,10 +52,12 @@ public class PlotRenameDialog extends MyDialog
 
     setContentView(R.layout.plot_rename_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-    mBtnOK  = (Button) findViewById(R.id.btn_ok );
+    mBtnOK     = (Button) findViewById(R.id.btn_ok );
+    mBtnBack   = (Button) findViewById(R.id.btn_back );
     mBtnDelete = (Button) findViewById(R.id.btn_delete );
 
     mBtnOK.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
 
     mEtName = (EditText) findViewById( R.id.et_name );
@@ -70,6 +73,8 @@ public class PlotRenameDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnOK ) {
       mParent.renamePlot( mEtName.getText().toString() );
+    } else if ( b == mBtnBack ) {
+      /* nothing */
     } else if ( b == mBtnDelete ) {
       mParent.askDelete();
     }

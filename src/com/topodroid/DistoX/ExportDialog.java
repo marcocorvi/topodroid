@@ -35,6 +35,7 @@ public class ExportDialog extends MyDialog
                           implements AdapterView.OnItemSelectedListener, View.OnClickListener
 {
   private Button   mBtnOk;
+  private Button   mBtnBack;
 
   private IExporter mParent;
   private String[]  mTypes;
@@ -64,7 +65,9 @@ public class ExportDialog extends MyDialog
     spin.setAdapter( adapter );
 
     mBtnOk = (Button) findViewById(R.id.button_ok );
+    mBtnBack = (Button) findViewById(R.id.button_back );
     mBtnOk.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
@@ -81,10 +84,11 @@ public class ExportDialog extends MyDialog
   public void onClick(View v) 
   {
     // Log.v("DistoX", "Selected " + mSelected );
-    if ( (Button)v == mBtnOk && mSelected != null ) {
+    Button b = (Button)v;
+    if ( b == mBtnOk && mSelected != null ) {
       mParent.doExport( mSelected );
-    // } else if ( b == mBtnCancel ) {
-    //   // nothing
+    } else if ( b == mBtnBack ) {
+      /* nothing */
     }
     dismiss();
   }

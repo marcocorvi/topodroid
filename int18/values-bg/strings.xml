@@ -245,6 +245,7 @@
     <string name="menu_attach">Свързване</string>
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
     <string name="menu_display">Дисплей</string>
@@ -255,7 +256,7 @@
     <string name="menu_reload">Препрочитане</string>
     <string name="menu_rename_delete">Преименуване/Изтриване</string>
     <string name="menu_rename">Преименуване</string>
-    <string name="menu_switch">Смяна</string>
+    <!-- FIXME string name="menu_switch">Смяна</string -->
     <string name="menu_help">Помощ</string>
     <string name="menu_join_survey">Ко-картиране</string>
     <string name="menu_logs">Лог файлове</string>
@@ -442,6 +443,7 @@
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >Конверт.  </string>
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
@@ -549,6 +551,7 @@
     <!-- UNUSED string name="help_manual">Ръководство</string -->
     <string name="help_measure">Измерване на разстояния</string>
 
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
     <string name="help_current_station">Записани репери</string>

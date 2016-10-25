@@ -204,6 +204,7 @@
     <!-- UNUSED string name="menu_calib">کالیبره کردن</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
+    <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">حذف</string>
     <string name="menu_detach">دیسکانکت</string>
     <string name="menu_display">نمایش</string>
@@ -214,7 +215,7 @@
     <string name="menu_reload">خواندن مجدد</string>
     <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <!-- TODO string name="menu_rename">RENANE</string -->
-    <!-- TODO string name="menu_switch">SWITCH</string -->
+    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">راهنما</string>
     <string name="menu_join_survey">CO-SURVEY</string>
     <string name="menu_logs">کارنامه عملیات</string>
@@ -388,6 +389,7 @@
     <!-- UNUSED string name="button_add"       >اضافه       </string -->
     <string name="button_back"      >عقب         </string>
     <string name="button_cancel"    >انصراف      </string>
+    <!-- TODO string name="button_close"     >Close     </string -->
     <string name="button_convert"   >کانورت      </string>
     <string name="button_delete"    >حذف         </string>
     <string name="button_eval"      >Eval      </string>
@@ -508,6 +510,7 @@
     <!-- UNUSED string name="help_more">نمایش عملیات دوم</string -->
     <!-- UNUSED string name="help_less">برگشت به عملیات اصلی</string -->
     
+    <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">نمایش ضریب کالیبره</string>
     <string name="help_continue">ادامه برای طراحی خط</string>
     <string name="help_current_station">ذخیره بخش</string>

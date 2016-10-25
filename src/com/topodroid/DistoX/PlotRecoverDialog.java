@@ -53,6 +53,7 @@ public class PlotRecoverDialog extends MyDialog
 
   private TextView mTVfilename;
   private Button mBtnOK;
+  private Button mBtnBack;
 
   private ListView mList;
   ArrayAdapter<String> mAdapter;
@@ -82,8 +83,9 @@ public class PlotRecoverDialog extends MyDialog
     mTVfilename = (TextView) findViewById( R.id.filename );
 
     mBtnOK      = (Button) findViewById(R.id.btn_ok );
+    mBtnBack    = (Button) findViewById(R.id.btn_back );
     mBtnOK.setOnClickListener( this );   // OK-SAVE
-    // mBtnCancel.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );  
 
     updateList();
   }
@@ -157,6 +159,8 @@ public class PlotRecoverDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnOK ) { // OK
       mParent.doRecover( mTVfilename.getText().toString(), mType );
+      dismiss();
+    } else if ( b == mBtnBack ) {
       dismiss();
     }
   }
