@@ -594,7 +594,7 @@
     <string name="help_redo">Повтор последнего действия</string>
     <string name="help_symbol_plot">Выбрать инструмент рисования </string>
     <string name="help_delete_item">Удалить элемент абриса</string>
-    <!-- TODO string name="help_range">Moving a portion of line</string -->
+    <string name="help_range">Переместить сегмент линии</string>
     <!-- OK string name="help_clear">Очистить выбор</string -->
     <string name="help_eraser">Стереть рисунки</string>
     <string name="help_previous">Предыдущий выбранный элемент</string>
