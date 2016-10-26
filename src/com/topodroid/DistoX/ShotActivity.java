@@ -21,7 +21,7 @@ import java.io.FileReader;
 // import java.io.FileWriter;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Stack;
+// import java.util.Stack;
 
 import android.os.Parcelable;
 
@@ -122,6 +122,7 @@ public class ShotActivity extends Activity
 
   private static int menus[] = {
                         R.string.menu_survey,
+                        R.string.menu_close,
                         R.string.menu_recover,
                         R.string.menu_photo,
                         R.string.menu_sensor,
@@ -143,6 +144,7 @@ public class ShotActivity extends Activity
                         };
    private static int help_menus[] = {
                           R.string.help_survey_info,
+                          R.string.help_close,
                           R.string.help_undelete,
                           R.string.help_photo,
                           R.string.help_sensor,
@@ -481,6 +483,9 @@ public class ShotActivity extends Activity
       startActivityForResult( intent, INFO_ACTIVITY_REQUEST_CODE );
     // } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // CURRENT STATION
     //   (new CurrentStationDialog( this, this, mApp )).show();
+
+    } else if ( p++ == pos ) { // CLOSE
+      super.onBackPressed();
 
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // RECOVER
       List< DistoXDBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
@@ -1406,7 +1411,8 @@ public class ShotActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[k++] ) );                                             // menu_survey
+    mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_survey
+    mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close
     if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
     if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor

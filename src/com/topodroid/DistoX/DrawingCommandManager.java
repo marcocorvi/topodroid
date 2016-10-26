@@ -1426,8 +1426,8 @@ public class DrawingCommandManager
       } 
     }
     synchronized( mGridStack1 ) {
-      if ( mFirstReference != null )  mFirstReference.draw( canvas, mMatrix, mScale, mBBox );
-      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale, mBBox );
+      if ( mFirstReference != null )  mFirstReference.draw( canvas, mMatrix, mScale, null );
+      if ( mSecondReference != null ) mSecondReference.draw( canvas, mMatrix, mScale, null );
     }
   }
 

@@ -30,8 +30,6 @@ public class ShotDisplayDialog extends MyDialog
     private CheckBox mCBsplay;    // whether to hide splays
     private CheckBox mCBblank;    // whether to hide blank
     private CheckBox mCBleg;      // whether to hide repeated leg 
-    private Button mBtnOK;
-    // private Button mBtnCancel;
     // private Button mBtnRefresh;
 
     private ShotActivity mParent;
@@ -54,12 +52,9 @@ public class ShotDisplayDialog extends MyDialog
         mCBblank = (CheckBox) findViewById(R.id.cb_mode_blank);
         mCBleg   = (CheckBox) findViewById(R.id.cb_mode_leg);
 
-        mBtnOK     = (Button) findViewById(R.id.button_mode_ok);
-        // mBtnCancel = (Button) findViewById(R.id.button_mode_cancel);
+        ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
+        ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
         // mBtnRefresh = (Button) findViewById(R.id.button_mode_refresh);
-
-        mBtnOK.setOnClickListener( this );
-        // mBtnCancel.setOnClickListener( this );
         // mBtnRefresh.setOnClickListener( this );
 
         mCBids.setChecked(     mParent.getShowIds() );
@@ -74,11 +69,12 @@ public class ShotDisplayDialog extends MyDialog
       // TDLog.Log( TDLog.LOG_INPUT, "ShotDisplayDialog onClick " + view.toString() );
       hide();
       switch (view.getId()) {
-        case R.id.button_mode_ok:
+        case R.id.button_ok:
           setParent();
           break;
-        // case R.id.button_mode_cancel:
-        //   break;
+        case R.id.button_back:
+          /* nothing */
+          break;
         // case R.id.button_mode_refresh:
         //   mParent.updateDisplay( );
         //   break;

@@ -46,6 +46,8 @@ public class PhotoSensorsDialog extends MyDialog
   private MyCheckBox mButtonSurvey;
   private MyCheckBox mButtonDelete;
 
+  private Button mBtnCancel;
+
   /**
    * @param context   context
    * @param calib     calibration activity
@@ -90,6 +92,9 @@ public class PhotoSensorsDialog extends MyDialog
     layout4.addView( mButtonDelete, lp );
 
     layout4.invalidate();
+
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     setTitle( R.string.title_photo );
 
@@ -143,8 +148,9 @@ public class PhotoSensorsDialog extends MyDialog
         } );
       // mParent.doDeleteShot( mBlk.mId );
 
-    // } else if ( b == mButtonCancel ) {
-    //   /* nothing */
+    } else if ( b == mBtnCancel ) {
+      /* nothing */
+      dismiss();
     }
   }
 

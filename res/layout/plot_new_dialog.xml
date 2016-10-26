@@ -98,6 +98,7 @@
       android:layout_below="@id/layout3"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
+      android:layout_gravity="right"
       android:orientation="horizontal" 
       android:layout_marginTop="25dp"
       android:gravity="right"
@@ -105,10 +106,17 @@
       <Button android:id="@+id/button_ok"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_gravity="left"
+        android:layout_marginRight="10dp"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_ok"
+      />
+      <Button android:id="@+id/button_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
       />
     </LinearLayout>
 

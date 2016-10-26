@@ -46,7 +46,7 @@ public class ImportDialog extends MyDialog
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
 
   public ImportDialog( Context context, TopoDroidActivity parent, TopoDroidApp _app )
   {
@@ -67,8 +67,8 @@ public class ImportDialog extends MyDialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    // mBtnCancel = (Button)findViewById( R.id.button_cancel );
-    // mBtnCancel.setOnClickListener( this );
+    mBtnCancel = (Button)findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     File[] files = TDPath.getImportFiles();
     ArrayList<String> names = new ArrayList<String>();

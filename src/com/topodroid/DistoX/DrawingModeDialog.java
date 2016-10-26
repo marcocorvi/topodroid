@@ -31,7 +31,7 @@ public class DrawingModeDialog extends MyDialog
     private CheckBox mCBstation;  // whether to show stations
     private CheckBox mCBgrid;     // whether to show the grid
     private CheckBox mCBfixed;    // whether to show the grid
-    private Button mBtnOK;
+    // private Button mBtnOK;
     // private Button mBtnBack;
 
     private DrawingSurface mSurface;
@@ -57,13 +57,11 @@ public class DrawingModeDialog extends MyDialog
       mCBgrid    = (CheckBox) findViewById(R.id.cb_mode_grid);
       mCBfixed   = (CheckBox) findViewById(R.id.cb_mode_fixed);
 
-      mBtnOK   = (Button) findViewById(R.id.button_ok);
-      mBtnOK.setOnClickListener( this );
-      // mBtnBack = (Button) findViewById(R.id.button_cancel);
-      // mBtnBack.setOnClickListener( this );
+      ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
+      ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
 
       int mode = mSurface.getDisplayMode();
-      if ( mParent.isAnySection() ) {
+      if ( mParent != null && mParent.isAnySection() ) {
         mCBsplay.setVisibility( View.GONE );
       } else {
         mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
@@ -84,7 +82,7 @@ public class DrawingModeDialog extends MyDialog
       switch (view.getId()){
         case R.id.button_ok:
           int mode = DisplayMode.DISPLAY_NONE;
-          if ( ! mParent.isAnySection() ) {
+          if ( mParent != null && ! mParent.isAnySection() ) {
             if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
             if ( mParent != null && TDSetting.mLevelOverNormal ) {
               mParent.mShiftDrawing = mCBfixed.isChecked();
@@ -95,6 +93,9 @@ public class DrawingModeDialog extends MyDialog
           if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
           // TDLog.Error( "Mode " + mode );
           mSurface.setDisplayMode( mode );
+          break;
+        case R.id.button_back:
+          /* nothing */
           break;
         // case R.id.button_mode_cancel:
         //   break;

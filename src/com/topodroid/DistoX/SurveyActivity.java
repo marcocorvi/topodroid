@@ -74,6 +74,7 @@ public class SurveyActivity extends Activity
                         R.string.menu_export,
                         R.string.menu_rename,
                         R.string.menu_delete,
+                        R.string.menu_close,
                         R.string.menu_manual_calibration,
                         R.string.menu_options,
                         R.string.menu_help
@@ -91,6 +92,7 @@ public class SurveyActivity extends Activity
                         R.string.help_export_survey,
                         R.string.help_rename,
                         R.string.help_delete_survey,
+                        R.string.help_close,
                         R.string.help_manual_calibration,
                         R.string.help_prefs,
                         R.string.help_help
@@ -558,12 +560,9 @@ public class SurveyActivity extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
-    mMenuAdapter.add( res.getString( menus[1] ) );
-    mMenuAdapter.add( res.getString( menus[2] ) );
-    mMenuAdapter.add( res.getString( menus[3] ) );
-    mMenuAdapter.add( res.getString( menus[4] ) );
-    mMenuAdapter.add( res.getString( menus[5] ) );
+    for ( int k = 0; k < menus.length; ++k ) {
+      mMenuAdapter.add( res.getString( menus[k] ) );
+    }
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -586,6 +585,8 @@ public class SurveyActivity extends Activity
       new SurveyRenameDialog( this, this ).show();
     } else if ( p++ == pos ) { // DELETE
       askDelete();
+    } else if ( p++ == pos ) { // CLOSE
+      super.onBackPressed();
     } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( this, this ).show();
     } else if ( p++ == pos ) { // OPTIONS

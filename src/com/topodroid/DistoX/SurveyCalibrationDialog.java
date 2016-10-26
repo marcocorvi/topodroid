@@ -33,7 +33,7 @@ class SurveyCalibrationDialog extends MyDialog
   private EditText mETazimuth;
   private EditText mETclino;
   private Button mBTok;
-  // private Button mBTback;
+  private Button mBTback;
 
   SurveyActivity mParent;
   TopoDroidApp mApp;
@@ -65,8 +65,8 @@ class SurveyCalibrationDialog extends MyDialog
 
     mBTok = (Button) findViewById( R.id.button_ok );
     mBTok.setOnClickListener( this );
-    // mBTback = (Button) findViewById( R.id.button_cancel );
-    // mBTback.setOnClickListener( this );
+    mBTback = (Button) findViewById( R.id.button_back );
+    mBTback.setOnClickListener( this );
 
   }
 
@@ -90,6 +90,8 @@ class SurveyCalibrationDialog extends MyDialog
           mApp.mManualCalibrationClino = Float.parseFloat( mETclino.getText().toString() );
         } catch ( NumberFormatException e ) { }
       }
+    } else if ( b == mBTback ) {
+      /* nothing */
     }
     dismiss();
   }

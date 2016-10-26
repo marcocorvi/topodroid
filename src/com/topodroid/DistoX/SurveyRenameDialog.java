@@ -31,7 +31,7 @@ public class SurveyRenameDialog extends MyDialog
 {
   private EditText mEtName;
   private Button   mBtnOK;
-  // private Button   mBtnCancel;
+  private Button   mBtnBack;
 
   private SurveyActivity mParent;
 
@@ -49,11 +49,11 @@ public class SurveyRenameDialog extends MyDialog
 
     setContentView(R.layout.survey_rename_dialog);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-    mBtnOK  = (Button) findViewById(R.id.btn_ok );
-    // mBtnCancel = (Button) findViewById(R.id.btn_cancel );
+    mBtnOK   = (Button) findViewById(R.id.btn_ok );
+    mBtnBack = (Button) findViewById(R.id.btn_back );
 
     mBtnOK.setOnClickListener( this );
-    // mBtnCancel.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
 
     mEtName = (EditText) findViewById( R.id.et_name );
     mEtName.setText( mParent.getSurveyName( ) );
@@ -68,8 +68,8 @@ public class SurveyRenameDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnOK ) {
       mParent.renameSurvey( mEtName.getText().toString() );
-    // } else if ( b == mBtnCancel ) {
-    //   // nothing
+    } else if ( b == mBtnBack ) {
+      /* nothing */
     }
     dismiss();
   }

@@ -44,7 +44,7 @@ public class DrawingStationDialog extends MyDialog
     private Button mBtnSplays;
     private Button mBtnXSection;
     private Button mBtnXDelete;
-    // private Button mBtnCancel;
+    private Button mBtnCancel;
     private CheckBox mCBdirect;
     private CheckBox mCBinverse;
 
@@ -92,7 +92,7 @@ public class DrawingStationDialog extends MyDialog
       mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );
       mBtnOK     = (Button) findViewById(R.id.btn_ok);
       mBtnSet    = (Button) findViewById(R.id.btn_set);
-      // mBtnCancel = (Button) findViewById(R.id.button_cancel);
+      mBtnCancel = (Button) findViewById(R.id.btn_cancel);
 
       mCBdirect  = (CheckBox) findViewById( R.id.cb_direct );
       mCBinverse = (CheckBox) findViewById( R.id.cb_inverse );
@@ -177,7 +177,7 @@ public class DrawingStationDialog extends MyDialog
           mCBinverse.setVisibility( View.GONE );
         }
 
-        // mBtnCancel.setOnClickListener( this );
+        mBtnCancel.setOnClickListener( this );
         if ( mIsBarrier ) {
           mBarrierLabel.setText( mContext.getResources().getString(R.string.barrier_del) );
         }
@@ -196,6 +196,8 @@ public class DrawingStationDialog extends MyDialog
         } else {
           mActivity.removeStationPoint( mStation, mPath );
         }
+      } else if (view.getId() == R.id.btn_cancel ) {
+        /* nothing */
       } else if (view.getId() == R.id.btn_set ) {
         mActivity.setCurrentStationName( mStation.mName );
       } else if (view.getId() == R.id.btn_break ) {

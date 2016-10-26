@@ -38,7 +38,7 @@ public class UndeleteDialog extends MyDialog
   DataHelper mData;
   ShotActivity mParent;
 
-  // private Button mBtnCancel;
+  private Button mBtnCancel;
   // ArrayAdapter< String >  mArrayAdapter;
   MyStringAdapter mArrayAdapter;
   ListView mList;
@@ -98,6 +98,9 @@ public class UndeleteDialog extends MyDialog
     mList.setAdapter( mArrayAdapter );
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
+
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     for ( DistoXDBlock b : mShots ) {
       mArrayAdapter.add( 

@@ -27,7 +27,7 @@ import android.widget.Button;
 
 
 public class SurveyStatDialog extends MyDialog 
-                              // implements View.OnClickListener
+                              implements View.OnClickListener
 {
     private TextView mTextLeg;
     private TextView mTextDuplicate;
@@ -75,8 +75,8 @@ public class SurveyStatDialog extends MyDialog
         mTextStddevG   = (TextView) findViewById(R.id.stat_stddev_g);
         mTextStddevDip = (TextView) findViewById(R.id.stat_stddev_dip);
 
-        // mBtnBack = (Button) findViewById(R.id.btn_back);
-        // mBtnBack.setOnClickListener( this );
+        mBtnBack = (Button) findViewById(R.id.btn_back);
+        mBtnBack.setOnClickListener( this );
 
         mTextLeg.setText( String.format( res.getString(R.string.stat_leg),
                           mStat.countLeg, mStat.lengthLeg * unit, unit_str ) );
@@ -95,15 +95,15 @@ public class SurveyStatDialog extends MyDialog
 
     }
 
-    // @Override
-    // public void onClick(View view)
-    // {
-    //   Button b = (Button)view;
-    //   if ( b == mBtnBack ) {
-    //     // TDLog.Log( TDLog.LOG_STAT, "onClick()" );
-    //     dismiss();
-    //   }
-    // }
+    @Override
+    public void onClick(View view)
+    {
+      Button b = (Button)view;
+      if ( b == mBtnBack ) {
+        /* nothing */
+      }
+      dismiss();
+    }
 }
         
 

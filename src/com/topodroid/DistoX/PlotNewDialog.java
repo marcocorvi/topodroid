@@ -45,6 +45,7 @@ public class PlotNewDialog extends MyDialog
   // private EditText mEditProject;
 
   private Button   mBtnOK;
+  private Button   mBtnBack;
   private CheckBox mCBextended;
   private int mIndex;
   private MyKeyboard mKeyboard = null;
@@ -77,7 +78,9 @@ public class PlotNewDialog extends MyDialog
     mEditStart.setOnLongClickListener( this );
 
     mBtnOK = (Button) findViewById(R.id.button_ok );
+    mBtnBack = (Button) findViewById(R.id.button_back );
     mBtnOK.setOnClickListener( this );
+    mBtnBack.setOnClickListener( this );
     mCBextended = (CheckBox)findViewById( R.id.button_extended );
     mCBextended.setChecked( true );
     // mEditProject.setVisibility( View.INVISIBLE );
@@ -184,6 +187,8 @@ public class PlotNewDialog extends MyDialog
       } else {
         mMaker.doProjectionDialog( name, start );
       }
+    } else if ( b == mBtnBack ) {
+      /* nothing */
     }
     dismiss();
   }

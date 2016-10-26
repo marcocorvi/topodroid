@@ -33,7 +33,7 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 
 public class DistoXStatDialog extends MyDialog 
-                              // implements View.OnClickListener
+                              implements View.OnClickListener
 {
     private DistoXNum mNum;
     private String mOrigin;
@@ -58,7 +58,7 @@ public class DistoXStatDialog extends MyDialog
     private TextView mTextAngleErr;
 
 
-    // private Button mBtnCancel;
+    private Button mBtnBack;
 
     public DistoXStatDialog( Context context, DistoXNum num, String origin, SurveyStat stat )
     {
@@ -121,8 +121,8 @@ public class DistoXStatDialog extends MyDialog
           mList.setAdapter( new ArrayAdapter<String>( mContext, R.layout.row, cls ) );
         }
 
-        // mBtnCancel = (Button) findViewById(R.id.button_cancel);
-        // mBtnCancel.setOnClickListener( this );
+        mBtnBack = (Button) findViewById(R.id.btn_back);
+        mBtnBack.setOnClickListener( this );
 
         mTextOrigin.setText( String.format( res.getString(R.string.stat_origin), mOrigin ) );
 
@@ -151,15 +151,15 @@ public class DistoXStatDialog extends MyDialog
 
     }
 
-    // @Override
-    // public void onClick(View view)
-    // {
-    //   Button b = (Button)view;
-    //   if ( b == mBtnCancel ) {
-    //     // TDLog.Log( TDLog.LOG_INPUT, "StatDialog onClick()" );
-    //     dismiss();
-    //   }
-    // }
+    @Override
+    public void onClick(View view)
+    {
+      Button b = (Button)view;
+      if ( b == mBtnBack ) {
+        /* nothing */
+      }
+      dismiss();
+    }
 }
         
 

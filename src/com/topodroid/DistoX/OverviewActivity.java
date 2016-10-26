@@ -750,6 +750,7 @@ public class OverviewActivity extends ItemDrawer
           DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
           path.setPaint( DrawingBrushPaths.highlightPaint );
           path.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
+          // Log.v("DistoX", "first ref " + mStartX + " " + mStartY );
           mOverviewSurface.setFirstReference( path );
         } else if ( mOnMeasure == 2 ) {
           // FIXME use scene values
@@ -783,6 +784,7 @@ public class OverviewActivity extends ItemDrawer
           path.makePath( mCrossPath, new Matrix(), x, y );
           path.mPath.moveTo( mStartX, mStartY );
           path.mPath.lineTo( x, y );
+          // Log.v("DistoX", "second ref " + x + " " + y );
           mOverviewSurface.setSecondReference( path );
         }
       // ---------------------------------------- MOVE

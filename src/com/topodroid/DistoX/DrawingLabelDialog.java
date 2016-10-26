@@ -28,8 +28,6 @@ public class DrawingLabelDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private EditText mLabel;
-  private Button mBtnOK;
-  // private Button mBtnCancel;
 
   private ILabelAdder mActivity;
   private float mX;
@@ -50,11 +48,9 @@ public class DrawingLabelDialog extends MyDialog
     initLayout( R.layout.drawing_label_dialog, R.string.label_title );
 
     mLabel     = (EditText) findViewById(R.id.label_text);
-    mBtnOK     = (Button) findViewById(R.id.label_ok);
-    // mBtnCancel = (Button) findViewById(R.id.button_cancel);
 
-    mBtnOK.setOnClickListener( this );
-    // mBtnCancel.setOnClickListener( this );
+    ((Button) findViewById(R.id.label_ok)).setOnClickListener( this );
+    ((Button) findViewById(R.id.label_cancel)).setOnClickListener( this );
 
     mLabel.setTextSize( TDSetting.mTextSize );
 
@@ -65,6 +61,8 @@ public class DrawingLabelDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingLabelDialog onClick() " + view.toString() );
     if (view.getId() == R.id.label_ok ) {
       mActivity.addLabel( mLabel.getText().toString(), mX, mY );
+    } else if ( view.getId() == R.id.label_cancel ) {
+      /* nothing */
     }
     dismiss();
   }

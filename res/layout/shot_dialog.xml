@@ -182,13 +182,13 @@
       android:layout_below="@id/layout4"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
+      android:layout_gravity="right"
       android:orientation="horizontal" 
       android:gravity="right"
       >
       <Button android:id="@+id/btn_ok"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_gravity="right"
         android:layout_marginRight="10sp"
         android:background="@drawable/button"
         style="@style/button_default"
@@ -197,7 +197,6 @@
       <Button android:id="@+id/btn_save"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_gravity="right"
         android:background="@drawable/button"
         style="@style/button_default"
         android:text="@string/button_save"
@@ -208,7 +207,7 @@
           android:layout_marginLeft="10sp" 
           android:background="@drawable/button"
           style="@style/button_default"
-          android:text="@string/button_back"
+          android:text="@string/button_cancel"
       />
     </LinearLayout>
 

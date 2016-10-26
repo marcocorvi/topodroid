@@ -54,6 +54,8 @@ public class AzimuthDialDialog extends MyDialog
   private Button mBTleft;
   private Button mBTright;
 
+  private Button mBtnCancel;
+
   private SeekBar mSeekBar;
 
   public AzimuthDialDialog( Context context, ILister parent, float azimuth, Bitmap dial )
@@ -97,6 +99,9 @@ public class AzimuthDialDialog extends MyDialog
     mBTok      = (Button) findViewById(R.id.btn_ok );
     mBTleft    = (Button) findViewById(R.id.btn_left );
     mBTright   = (Button) findViewById(R.id.btn_right );
+
+    mBtnCancel = (Button) findViewById( R.id.button_cancel );
+    mBtnCancel.setOnClickListener( this );
 
     mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
 
@@ -166,7 +171,9 @@ public class AzimuthDialDialog extends MyDialog
     //   updateSeekBar();
     //   updateView();
     // } else 
-    if ( b == mBTazimuth ) {
+    if ( b == mBtnCancel ) {
+      dismiss();
+    } else if ( b == mBTazimuth ) {
       mAzimuth += 90;
       if ( mAzimuth >= 360 ) mAzimuth -= 360;
       updateSeekBar();
