@@ -245,7 +245,7 @@
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
     <string name="menu_attach">СОЕДИНИТЬ</string>
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <string name="menu_close">ЗАКРЫТЬ</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <string name="menu_display">Показать</string>
@@ -254,9 +254,9 @@
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_recover">Восстановить</string>
     <string name="menu_reload">Перезагрузить</string>
-    <string name="menu_rename_delete">ПЕРЕИМЕНОВАТЬ/УДАЛИТЬ</string>
+    <string name="menu_rename_delete">Переименовать/Удалить</string>
     <string name="menu_rename">ПЕРЕИМЕНОВАТЬ</string>
-    <!-- FIXME string name="menu_switch">ПЕРЕКЛЮЧИТЬ</string -->
+    <string name="menu_switch">ЗАКРЫТЬ/ПЕРЕКЛЮЧИТЬ</string>
     <string name="menu_help">Помощь</string>
     <string name="menu_join_survey">СОВМ. СЪЕМКА</string>
     <string name="menu_logs">Журнал</string>
@@ -440,7 +440,7 @@
     <!-- UNUSED string name="button_add"       >Добавить  </string -->
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
-    <!-- TODO string name="button_close"     >Close     </string -->
+    <string name="button_close"     >Закрыть   </string>
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_current"   >Текущий   </string>
     <string name="button_delete"    >Удалить   </string>
@@ -546,7 +546,7 @@
     <!-- UNUSED string name="help_manual">Инструкция</string -->
     <string name="help_measure">Измерить расстояния</string>
     
-    <!-- TODO string name="help_close">Close window</string -->
+    <string name="help_close">Закрыть Окно</string>
     <string name="help_coeff">Показать коэффициенты калибровки</string>
     <string name="help_continue">Продолжить рисовать линию</string>
     <string name="help_current_station">Сохраненные пикеты</string>
