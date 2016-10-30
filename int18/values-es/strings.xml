@@ -678,8 +678,8 @@
   <string name="pref_survex_splay_summary">Añadir a la estación toma lateral en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
   <string name="pref_survex_lrud_summary">Añadir toma lateral a exportación Survex</string>
-  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
-  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
+  <string name="pref_svg_grid_title">SVG parrilla</string>
+  <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG</string>
 
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
@@ -693,8 +693,8 @@
   <string name="pref_wait_laser_summary">Retardo de espera después de girar el láser [ms]</string>
   <string name="pref_wait_shot_title">Espere tras el disparo [ms]</string>
   <string name="pref_wait_shot_summary">Retardo de espera después de la medición [ms]</string>
-  <!-- TODO string name="pref_wait_data_title">Data pause [ms]</string -->
-  <!-- TODO string name="pref_wait_data_summary">Pause after a data download [ms]</string -->
+  <string name="pref_wait_data_title">Pausa de datos [ms]</string>
+  <string name="pref_wait_data_summary">Pausa después de descarga de datos [ms]</string>
   <string name="pref_conn_mode_title">Modo Conexión</string>
   <string name="pref_conn_mode_summary">Modo conexión con DistoX</string>
   <string name="pref_auto_reconnect_title">Autoconectar</string>
@@ -728,13 +728,13 @@
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
   <string name="pref_closeness_title">Selección radio</string>
   <!-- UNUSED string name="pref_closeness_summary">Selección dibujo de elementos radio</string -->
-  <string name="pref_closeness_message">dibujo selección radio</string>
-  <!-- TODO string name="pref_eraseness_title">Eraser radius</string -->
-  <!-- TODO string name="pref_eraseness_message">Sketch item erasing radius</string -->
-  <!-- TODO string name="pref_min_shift_title">Shift sensitivity</string -->
-  <!-- TODO string name="pref_min_shift_message">Shift sensitivity</string -->
-  <!-- TODO string name="pref_pointing_title">Pointing radius</string -->
-  <!-- TODO string name="pref_pointing_message">Pointing radius</string -->
+  <string name="pref_closeness_message">objetos de dibujo selección Radio</string>
+  <string name="pref_eraseness_title">goma de borrar de un radio</string>
+  <string name="pref_eraseness_message">Haz de cancelación de un elemento de diseño</string>
+  <string name="pref_min_shift_title">Sensibilidad \' para el cambio</string>
+  <string name="pref_min_shift_message">Sensibilidad \' para el cambio</string>
+  <string name="pref_pointing_title">Orientación Radio</string>
+  <string name="pref_pointing_message">Orientación del radio</string>
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
@@ -755,8 +755,8 @@
   <string name="pref_leg_message">Precisión entre las mediciones de una visual</string>
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
-  <!-- TODO string name="pref_prev_next_title">Prev/Next buttons</string -->
-  <!-- TODO string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string -->
+  <string name="pref_prev_next_title">Prev/Next botón</string>
+  <string name="pref_prev_next_summary">PREV/NEXT botones en el diálogo de toma</string>
   <string name="pref_mag_anomaly_title">Declinación magnética</string>
   <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
   <string name="pref_azimuth_manual_title">Toma extendida</string>
@@ -858,8 +858,8 @@
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
-  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
-  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
+  <string name="pref_therion_splays_title">Anchuras therion</string>
+  <string name="pref_therion_splays_summary">Añadir líneas en la pantalla de archivo Th2</string>
   <string name="pref_autoStations_title">Estaciones automáticas</string>
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
