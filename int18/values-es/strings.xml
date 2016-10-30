@@ -7,7 +7,7 @@
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string>
-    <!-- TODO string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string -->
+    <string name="symbols_ask">Instalar herramientas de dibujo v.%1$s?\n(Current v.%2$s)</string>
 
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
@@ -87,14 +87,14 @@
     <string name="device_code">DistoX código %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
-    <!-- TODO string name="device_status_angle_grad">Angle units: grad</string -->
-    <!-- TODO string name="device_status_angle_degree">Angle units: degree</string -->
-    <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
-    <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
-    <!-- TODO string name="device_status_calib">Mode: calibration</string -->
-    <!-- TODO string name="device_status_normal">Mode: normal</string -->
-    <!-- TODO string name="device_status_silent_on">Silent: on</string -->
-    <!-- TODO string name="device_status_silent_off">Silent: off</string -->
+    <string name="device_status_angle_grad">Unidad de ángulos: gradiente</string>
+    <string name="device_status_angle_degree">Unidad de ángulos: grados</string>
+    <string name="device_status_compass_on">Compass/clino: on</string>
+    <string name="device_status_compass_off">Compass/clino: off</string>
+    <string name="device_status_calib">Modo: calibración</string>
+    <string name="device_status_normal">Modo: normal</string>
+    <string name="device_status_silent_on">Silencioso: on</string>
+    <string name="device_status_silent_off">Silencioso: off</string>
     <string name="bt_reset">Reinicio conexión bluetooth</string>
     <string name="save_as">Guardar como</string>
     <string name="nickname">Seudónimo</string>
@@ -114,8 +114,8 @@
     <string name="splay_at_to">LRUD en la estación</string>
 
     <string name="few_data">No hay suficientes datos</string>
-    <!-- TODO string name="few_iter">Failed to iterate</string -->
-    <!-- TODO string name="few_groups">Not enough data with group</string -->
+    <string name="few_iter">Interacción fallida</string>
+    <string name="few_groups">No hay suficientes datos del grupo</string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
 
@@ -126,12 +126,12 @@
     <string name="import_none">No hay archivo a importar</string>
     <string name="import_failed">Fallo al importar archivo</string>
     <string name="file_not_found">Archivo no encontrado</string>
-    <!-- TODO string name="import_calib_ok">Successfully imported calibration</string -->
-    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
-    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
-    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
-    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
-    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
+    <string name="import_calib_ok">Calibración importada con éxito</string>
+    <string name="import_calib_no_header">Archivo de calib: Error de cabecera</string>
+    <string name="import_calib_already">Calib. ya existe</string>
+    <string name="import_calib_mismatch">Calib. desajuste dispositivo</string>
+    <string name="import_calib_no_data">Archivo de calib: sin datos</string>
+    <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
     <string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string>
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
@@ -226,7 +226,7 @@
     <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
-    <!-- TODO string name="no_sketch">No 3D sketch</string -->
+    <string name="no_sketch">Sin dibujo 3D</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
     <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_thmanager">ThManager no instalado</string>
@@ -239,7 +239,7 @@
     <string name="menu_about">Acerca de..</string>
     <string name="menu_area">Área</string>
     <string name="menu_attach">Conectar</string>
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <string name="menu_close">Cerrar</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <string name="menu_display">Pantalla</string>
@@ -248,9 +248,9 @@
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_reload">Importar</string>
-    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
+    <string name="menu_rename_delete">Renombrar/Eliminar</string -->
     <string name="menu_rename">Renombrar</string>
-    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
+    <string name="menu_switch">Cambia/Cierra</string>
     <string name="menu_help">Ayuda</string>
     <string name="menu_join_survey">Unir topografías</string>
     <string name="menu_logs">Registros</string>
@@ -268,7 +268,7 @@
     <string name="menu_sync">Sincro</string>
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
-    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
+    <string name="menu_zoom_fit">Ajuste zoom</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -311,7 +311,7 @@
     <string name="read_failed">Error al leer DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
     <string name="saved_file_1">Guardar archivo</string>
-    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
+    <string name="saved_file_2">Guardar archivo %1$s escala %2$.2f</string>
     <string name="saving_">Guardar</string>
     <string name="saving_file_failed">Fallo al guardar archivo</string>
     <!-- UNUSED string name="scrap_name">Nombre de dibujo</string -->
@@ -382,10 +382,10 @@
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
     <string name="unzip_fail">Error al importar archivo</string>
-    <!-- TODO string name="unzip_fail_survey">Failed: survey name mismatch</string -->
-    <!-- TODO string name="unzip_fail_db">Failed: database version mismatch</string -->
-    <!-- TODO string name="unzip_fail_td">Failed: TopoDroid version mismatch</string -->
-    <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
+    <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
+    <string name="unzip_fail_db">Error: la versión de base de datos no coincide</string>
+    <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
+    <string name="zoom_in_out">Zoom aumentar/disminuir</string>
 
     <string name="survey_info">Info Topografía</string>
     <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->
