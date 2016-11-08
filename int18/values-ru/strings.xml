@@ -70,8 +70,8 @@
     <!-- UNUSED string name="connect_failed">Ошибка соединения</string -->
     <!-- UNUSED string name="data">данные</string -->
     <string name="using">Использую %1$s</string>
-    <string name="calib_error">Ошибка: %1$.4f градусов</string>
-    <string name="calib_stddev">Ошибка ст-откл: %1$.4f градусов</string>
+    <string name="calib_error">Средн. Ошибка: %1$.4f градусов</string>
+    <string name="calib_stddev">Ст-откл ошибок: %1$.4f градусов</string>
     <string name="calib_max_error">Макс. ошибка: %1$.4f градусов</string>
     <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градусов</string>
     <string name="calib_precision">Точность</string>

@@ -2,11 +2,11 @@
 
 <resources>
 
-  <!-- FIXME string-array name="unitGrid">
+  <string-array name="unitGrid">
      <item name="meter">metros</item>
      <item name="yard">yarda</item>
-     <item name="two_tf">2 feet</item>
-  </string-array -->
+     <item name="two_tf">2 piés</item>
+  </string-array>
 
   <string-array name="wallsType">
      <item name="none">Nada</item>
@@ -35,7 +35,7 @@
      <item name="none">Nada</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
-     <!-- item name="csurvey">cSurvey</item -->
+     <item name="csurvey">cSurvey</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
@@ -97,7 +97,7 @@
      <item name="for2">Directa, primero anchuras</item>
      <item name="back2">Inversa, primero anchuras</item>
      <item name="anomaly">Punto respaldado</item>
-     <item name="tripod">Tripod</item>
+     <item name="tripod">Tripode</item>
   </string-array>
 
   <string-array name="pickerType">
@@ -107,11 +107,11 @@
      <item name="grid3">Triple grid</item>
   </string-array>
 
-  <!-- TODO string-array name="sectionStations">
-     <item name="both">both</item>
-     <item name="from">behind</item>
-     <item name="to">in front</item>
-  </string-array -->
+  <string-array name="sectionStations">
+     <item name="both">Ambos</item>
+     <item name="from">Detrás</item>
+     <item name="to">Delante</item>
+  </string-array>
 
   <!-- UNUSED string-array name="deviceType">
      <item name="none">Nada</item>
@@ -166,8 +166,8 @@
      <item name="nonlinear">no lineal</item>
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
+  <string-array name="rawCData">
+     <item name="none">Nada</item>
      <item name="dec">Decimal</item>
      <item name="hex">Hex</item>
   </string-array -->
