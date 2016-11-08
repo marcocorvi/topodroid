@@ -405,6 +405,7 @@
     <string name="stat_length">Довжина %1$.1f %2$s</string>
     <string name="stat_loop">Петлі %1$d</string>
     <string name="stat_origin">Нульовий пікет: %1$s</string>
+    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
     <string name="stat_shot">Пікети  %1$d,   Дубльовані %2$d,   Поверхня %3$d</string>
     <string name="stat_splay">Бокові заміри %1$d</string>
     <string name="stat_station">Пікети %1$d</string>

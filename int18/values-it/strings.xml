@@ -405,6 +405,7 @@
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
     <string name="stat_loop">Anelli %1$d</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
+    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
     <string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string>
     <string name="stat_splay">Splay %1$d</string>
     <string name="stat_station">Capisaldi %1$d</string>

@@ -48,6 +48,11 @@
         android:layout_height="wrap_content" 
         android:layout_marginTop="20sp" 
         />
+    <TextView android:id="@+id/text_stat_azimuth"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="20sp" 
+        />
     <TextView android:id="@+id/text_stat_length"
         android:layout_marginTop="5sp"
         android:layout_width="fill_parent"

@@ -43,6 +43,7 @@ import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.Toast;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
@@ -70,6 +71,7 @@ public class ProjectionDialog extends MyDialog
   private ProjectionSurface mDrawingSurface;
   private SeekBar mSeekBar;
   private Button  mBtnOk;
+  private EditText mETazimuth;
   private DistoXNum mNum;
 
   ZoomButtonsController mZoomBtnsCtrl = null;
@@ -91,7 +93,7 @@ public class ProjectionDialog extends MyDialog
   private long   mSid;  // survey id
   private String mName;
   private String mFrom;
-  private float  mAzimuth = 0.0f;
+  private int  mAzimuth = 0;
 
   private float mBorderRight      = 4096;
   private float mBorderLeft       = 0;
@@ -223,7 +225,7 @@ public class ProjectionDialog extends MyDialog
       }
     }
 
-    setTitle( String.format( mContext.getResources().getString(R.string.title_projection), (int)mAzimuth ) );
+    setTitle( String.format( mContext.getResources().getString(R.string.title_projection), mAzimuth ) );
   }
 
   // --------------------------------------------------------------
@@ -274,8 +276,9 @@ public class ProjectionDialog extends MyDialog
     // mIsNotMultitouch = ! getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
 
     setContentView( R.layout.projection_dialog );
-    mSeekBar = (SeekBar) findViewById(R.id.seekbar );
-    mBtnOk   = (Button) findViewById( R.id.btn_ok );
+    mSeekBar   = (SeekBar) findViewById(R.id.seekbar );
+    mETazimuth = (EditText) findViewById( R.id.textform );
+    mBtnOk     = (Button) findViewById( R.id.btn_ok );
     mBtnOk.setOnClickListener( this );
     mZoom = mApp.mScaleFactor;    // canvas zoom
 
@@ -301,16 +304,18 @@ public class ProjectionDialog extends MyDialog
     // ViewGroup vg = mZoomBtnsCtrl.getContainer();
     // switchZoomCtrl( TDSetting.mZoomCtrl );
 
+    // mETazimuth.setText( Integer.toString( mAzimuth ) );
 
     mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
-        mAzimuth = ( (160 + progress)%360 );
+        mAzimuth = (int)( (160 + progress)%360 );
         if ( progress < 10 ) {
           seekbar.setProgress( progress + 360 );
         } else if ( progress > 390 ) {
           seekbar.setProgress( progress - 360 );
         } else {
           computeReferences();
+          mETazimuth.setText( Integer.toString( mAzimuth ) );
         }
         // Log.v("DistoX", "set azimuth " + mAzimuth );
       }
@@ -318,7 +323,39 @@ public class ProjectionDialog extends MyDialog
       public void onStopTrackingTouch(SeekBar seekbar) { }
     } );
 
+    mETazimuth.setOnFocusChangeListener( new View.OnFocusChangeListener() {
+      public void onFocusChange( View v, boolean b ) {
+        if ( ! b ) { // focus lost
+          try {
+            setAzimuth( Integer.parseInt( mETazimuth.getText().toString() ) );
+          } catch ( NumberFormatException e ) { }
+        }
+      }
+    } );
+
+    mETazimuth.setOnKeyListener( new View.OnKeyListener() {
+      public boolean onKey( View v, int code, KeyEvent event )
+      {
+        // Log.v("DistoX", "key code " + code );
+        if ( code == 66 /* KeyEvent.KEYCODE_ENTER */ ) {
+          try {
+            setAzimuth( Integer.parseInt( mETazimuth.getText().toString() ) );
+          } catch ( NumberFormatException e ) { }
+          return true;
+        }
+        return false; 
+      }
+    } );
+
     doStart();
+  }
+
+  void setAzimuth( int a )
+  {
+    mAzimuth = a;
+    if ( mAzimuth < 0 || mAzimuth >= 360 ) mAzimuth = 0;
+    computeReferences();
+    mSeekBar.setProgress( ( mAzimuth < 180 )? 200 + mAzimuth : mAzimuth - 160 );
   }
 
   void setSize( int w, int h )
@@ -350,7 +387,6 @@ public class ProjectionDialog extends MyDialog
         // Log.v("DistoX", "start " + de + " " + ds + " " + dr + " off " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
         computeReferences();
-
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       }
    }
@@ -519,7 +555,7 @@ public class ProjectionDialog extends MyDialog
      Button b = (Button)view;
      mDrawingSurface.stopDrawingThread();
      if ( b == mBtnOk ) {
-       mParent.doProjectedProfile( mName, mFrom, (int)mAzimuth );
+       mParent.doProjectedProfile( mName, mFrom, mAzimuth );
      }
      dismiss();
    }

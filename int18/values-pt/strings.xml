@@ -410,6 +410,7 @@
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
     <string name="stat_loop">Anéis %1$d</string>
     <string name="stat_origin">Base de origem: %1$s</string>
+    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
     <string name="stat_shot">Leituras  %1$d,   Duplicadas %2$d,   Superfície %3$d</string>
     <string name="stat_splay">Visadas auxiliares %1$d</string>
     <string name="stat_station">Bases %1$d</string>

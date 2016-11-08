@@ -3784,7 +3784,11 @@ public class DrawingActivity extends ItemDrawer
         new ExportDialog( this, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
-          new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start, mData.getSurveyStat( mApp.mSID ) ).show();
+          float azimuth = -1;
+          if ( mPlot2 !=  null && PlotInfo.PLOT_PROFILE == mPlot2.type ) {
+            azimuth = mPlot2.azimuth;
+          }
+          new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start, azimuth, mData.getSurveyStat( mApp.mSID ) ).show();
         } else if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
           // Log.v("DistoX", "Section area " + area );

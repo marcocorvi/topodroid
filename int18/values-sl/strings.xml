@@ -390,6 +390,7 @@
     <string name="stat_length">Dolžina %1$.1f %2$s</string>
     <string name="stat_loop">Zanke %1$d</string>
     <string name="stat_origin">Merilna točka 0: %1$s</string>
+    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
     <string name="stat_shot">Vizure  %1$d,   Dvojni %2$d,   Površje %3$d</string>
     <string name="stat_splay">Stranske meritve %1$d</string>
     <string name="stat_station">Merilne točke %1$d</string>

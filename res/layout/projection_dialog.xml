@@ -19,17 +19,30 @@
   <LinearLayout android:id="@+id/layout1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_marginBottom="10dp"
+    >
+    <SeekBar android:id="@+id/seekbar"
+      android:layout_width="fill_parent"
+      android:layout_height="20dp" 
+      android:layout_marginLeft="5dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginBottom="10dp"
+      android:max="400"
+      android:background="#666666"
+      android:progressDrawable="@drawable/progress2"
+    />
+    <LinearLayout android:id="@+id/layout1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
       android:orientation="horizontal"
       >
-      <SeekBar android:id="@+id/seekbar"
+      <EditText android:id="@+id/textform"
         android:layout_width="0dp"
-        android:layout_height="20dp" 
-        android:layout_weight="80" 
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:max="400"
-        android:background="#666666"
-        android:progressDrawable="@drawable/progress2"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:singleLine="true"
+        android:inputType="numberDecimal"
       />
       <Button android:id="@+id/btn_ok"
         android:layout_width="0dp"
@@ -39,6 +52,7 @@
         style="@style/button_default"
         android:text="@string/button_ok"
       />
+    </LinearLayout>
   </LinearLayout>
 
   <RelativeLayout android:id="@+id/layout0"

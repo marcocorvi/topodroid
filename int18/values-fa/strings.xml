@@ -354,6 +354,8 @@
     <!-- FIXME string name="stat_leg">Legs %1$d %2$.1f</string -->
     <!-- FIXME string name="stat_length">طول %1$.1f</string -->
     <string name="stat_loop">Loops %1$d</string>
+    <!-- TODO string name="stat_origin">Origin station: %1$s</string -->
+    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
     <string name="stat_shot">Shots  %1$d,   Duplicate %2$d,   Surface %3$d</string>
     <string name="stat_splay">Splays %1$d</string>
     <string name="stat_station">Stations %1$d</string>

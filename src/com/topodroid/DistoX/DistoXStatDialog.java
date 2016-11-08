@@ -37,9 +37,11 @@ public class DistoXStatDialog extends MyDialog
 {
     private DistoXNum mNum;
     private String mOrigin;
+    private float mAzimuth;
     SurveyStat mStat;
 
     private TextView mTextOrigin;
+    private TextView mTextAzimuth;
     private TextView mTextLength;
     private TextView mTextWENS;
     private TextView mTextZminmax;
@@ -60,11 +62,12 @@ public class DistoXStatDialog extends MyDialog
 
     private Button mBtnBack;
 
-    public DistoXStatDialog( Context context, DistoXNum num, String origin, SurveyStat stat )
+    public DistoXStatDialog( Context context, DistoXNum num, String origin, float azimuth, SurveyStat stat )
     {
       super( context, R.string.DistoXStatDialog );
       mNum    = num;
       mOrigin = origin;
+      mAzimuth = azimuth;
       mStat   = stat;
     }
 
@@ -80,6 +83,7 @@ public class DistoXStatDialog extends MyDialog
         String unit_str = TDSetting.mUnitLengthStr;
 
         mTextOrigin   = (TextView) findViewById(R.id.text_stat_origin);
+        mTextAzimuth  = (TextView) findViewById(R.id.text_stat_azimuth);
         mTextLength   = (TextView) findViewById(R.id.text_stat_length);
         mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
         mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
@@ -125,6 +129,12 @@ public class DistoXStatDialog extends MyDialog
         mBtnBack.setOnClickListener( this );
 
         mTextOrigin.setText( String.format( res.getString(R.string.stat_origin), mOrigin ) );
+
+        if ( mAzimuth < 0 ) {
+          mTextAzimuth.setVisibility( View.GONE );
+        } else {
+          mTextAzimuth.setText( String.format( res.getString(R.string.stat_azimuth), mAzimuth ) );
+        }
 
         mTextLength.setText( String.format( res.getString(R.string.stat_length),
                              mNum.surveyLength() * unit, unit_str ) );
