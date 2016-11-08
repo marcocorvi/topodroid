@@ -248,7 +248,7 @@
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_reload">Importar</string>
-    <string name="menu_rename_delete">Renombrar/Eliminar</string -->
+    <string name="menu_rename_delete">Renombrar/Eliminar</string>
     <string name="menu_rename">Renombrar</string>
     <string name="menu_switch">Cambia/Cierra</string>
     <string name="menu_help">Ayuda</string>

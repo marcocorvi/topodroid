@@ -6,12 +6,10 @@
   </plurals>
   <plurals name="read_data">
     <item quantity="zero">No hay datos leídos</item>
-    <item quantity="other">Leer otros datos</item>
     <item quantity="other">Leer %1$d datos</item>
   </plurals>
   <plurals name="read_calib_data">
     <item quantity="zero">No hay datos leídos</item>
     <item quantity="other">Leer %1$d dados (%2$d packets)</item>
-    <item quantity="other">Leer %1$d datos (%2$d pacchetti)</item>
   </plurals>
 </resources>
