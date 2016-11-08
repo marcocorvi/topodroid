@@ -405,7 +405,7 @@
     <string name="stat_length">Длинна %1$.1f %2$s</string>
     <string name="stat_loop">Петли %1$d</string>
     <string name="stat_origin">Нулевой пикет: %1$s</string>
-    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
+    <string name="stat_azimuth">Азимут проекции разреза-развёртки: %1$.1f</string>
     <string name="stat_shot">Пикеты  %1$d,   Дублированные %2$d,   Поверхность %3$d</string>
     <string name="stat_splay">Боковых замеров %1$d</string>
     <string name="stat_station">Пикеты %1$d</string>
