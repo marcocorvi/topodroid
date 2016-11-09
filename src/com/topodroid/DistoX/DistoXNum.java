@@ -396,7 +396,7 @@ class DistoXNum
   //         if ( sf != null ) {
   //           mLength += block.mLength;
   //           if ( st != null ) { // close loop
-  //             if ( /* TopoDroidApp.mAutoStations || */ ! TopoDroidApp.mLoopClosure ) {
+  //             if ( /* TopoDroidApp.mAutoStations || */ TopoDroidApp.mLoopClosure == 0 ) {
   //               NumStation st1 = new NumStation( block.mTo, sf, block.mLength, block.mBearing+ mDecl , block.mClino, block.mExtend );
   //               st1.addAzimuth( (block.mBearing+ mDecl +180)%360, -block.mExtend );
   //               st1.mDuplicate = true;
@@ -521,6 +521,7 @@ class DistoXNum
     public TmpShot sibling;  // sibling shot with same stations
     public ArrayList<DistoXDBlock> blocks;
     AverageLeg mAvgLeg;
+    TriCluster cluster;
 
     public TmpShot( DistoXDBlock blk, String f, String t, int e, int r )
     { 
@@ -537,7 +538,12 @@ class DistoXNum
       blocks.add( blk );
       mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
       mAvgLeg.set( blk );
+      cluster = null;
     }
+
+    double length()  { return mAvgLeg.length(); } 
+    double bearing() { return mAvgLeg.bearing(); } 
+    double clino()   { return mAvgLeg.clino(); } 
 
     void addBlock( DistoXDBlock blk )
     {
@@ -599,8 +605,298 @@ class DistoXNum
     //     Log.v( TDLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
     //   }
     // }
-
   }
+
+  public class TriCluster
+  {
+    ArrayList<TmpShot> shots;
+    ArrayList<String>  stations;
+
+    TriCluster() 
+    {
+      shots = new ArrayList<TmpShot>();
+      stations = new ArrayList<String>();
+    }
+
+    int nrShots() { return shots.size(); }
+    int nrStations() { return stations.size(); }
+
+    void addTmpShot( TmpShot ts )
+    {
+      shots.add( ts );
+      ts.cluster = this;
+    }
+  
+    void addStation( String st )
+    {
+      if ( ! containsStation( st ) ) stations.add( st );
+    }
+
+    boolean containsStation( String st )
+    {
+      if ( st == null ) return true;
+      for ( String s : stations ) if ( st.equals(s) ) return true;
+      return false;
+    }
+  }
+
+  class TrilaterationLeg
+  {
+    TmpShot shot;
+    double d; // distance [m]
+    double a; // angle [degrees]
+    boolean used; // work flag
+    TrilaterationPoint pi;
+    TrilaterationPoint pj;
+    
+    TrilaterationLeg( TmpShot sh, TrilaterationPoint p1, TrilaterationPoint p2 )
+    {
+      shot = sh;
+      d = sh.length() * Math.cos( sh.clino() * Math.PI / 180.0 );
+      a = sh.bearing();
+      used = false;
+      pi = p1;
+      pj = p2;
+    }
+  }
+  
+  class TrilaterationPoint
+  {
+    String name;
+    // int n;       // nr legs with this point
+    double x, y; // coords x = East, y = North
+    double dx, dy; // coords variations
+    boolean used;    // work flag
+
+    TrilaterationPoint( String n )
+    { 
+      name = n;
+      x = y = dx = dy = 0;
+      used = false;
+    }
+  }
+  
+  public class Trilateration
+  {
+    ArrayList<TrilaterationLeg> legs;
+    ArrayList<TrilaterationPoint> points;
+    double err0;
+    int iter;
+
+    TrilaterationPoint getPoint( String n )
+    {
+      for ( TrilaterationPoint p : points ) if ( n.equals(p.name) ) return p;
+      return null;
+    }
+  
+    Trilateration( TriCluster cl )
+    {
+      legs   = new ArrayList<TrilaterationLeg>();
+      points = new ArrayList<TrilaterationPoint>();
+  
+      // populate
+      for ( String n : cl.stations ) {
+        points.add( new TrilaterationPoint( n ) );
+      }
+      for ( TmpShot sh : cl.shots ) {
+        TrilaterationPoint p1 = getPoint( sh.from );
+        TrilaterationPoint p2 = getPoint( sh.to );
+        legs.add( new TrilaterationLeg( sh, p1, p2 ) );
+      } 
+      // initialize points
+      initialize();
+      // and minimize
+      minimize( 0.001, 0.10, 100000 );
+    }
+
+    void initialize()
+    {
+      double d, a;
+      boolean repeat = true;
+      legs.get(0).pi.used = true;
+      while ( repeat ) {
+        repeat = false;
+        for ( TrilaterationLeg leg : legs ) {
+          if ( ! leg.used ) {
+	    TrilaterationPoint pi = leg.pi;
+	    TrilaterationPoint pj = leg.pj;
+	    d = leg.d;
+	    a = leg.a * Math.PI / 180.0;
+	    if ( pi.used && ! pj.used ) {
+              pj.used = true;
+	      pj.x = pi.x + d * Math.sin( a );
+	      pj.y = pi.y + d * Math.cos( a );
+              leg.used = true;
+	      repeat = true;
+	    } else if ( pj.used && ! pi.used ) {
+              pi.used = true;
+	      pi.x = pj.x - d * Math.sin( a );
+	      pi.y = pj.y - d * Math.cos( a );
+              leg.used = true;
+	      repeat = true;
+	    }
+  	  }
+        }
+      }
+    }
+  
+    private void clearPointsDelta() 
+    {
+      for ( TrilaterationPoint p : points ) { p.dx = p.dy = 0; }
+    }
+  
+    private void addPointsDelta( double delta )
+    {
+      for ( TrilaterationPoint p : points ) {
+        p.x += p.dx * delta;
+        p.y += p.dy * delta;
+      }
+    }
+  
+    private double distance1( TrilaterationPoint p1, TrilaterationPoint p2 )
+    {
+      return Math.sqrt( (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y) );
+    }
+  
+    private double computeError2( )
+    {
+      double error = 0;
+      for ( TrilaterationLeg l : legs ) {
+        double d = ( distance1( l.pi, l.pj ) - l.d );
+        error += d * d;
+      }
+      return error;
+    }
+  
+    // eps: error for one point [m] 0.001
+    // delta: initial delta [m] 0.10
+    // iter_max: max iterations 100000
+    void minimize( double eps, double delta, int iter_max )
+    {
+      eps *= points.size(); // 1 mm per point
+      err0 = computeError2();
+      int n_pts = points.size();
+      for ( iter =0 ; iter < iter_max; ++ iter ) {
+        double err3, e;
+        for ( int m=1; m<n_pts; ++m ) { // compute derivatives D Error / DPx
+          TrilaterationPoint p = points.get( m );
+          if ( m > 1 ) {
+            p.x += delta;
+    	  e = err0 - computeError2();
+            p.x -= delta;
+    	  p.dx = e / ( 1 + e * e );
+          }
+          p.y += delta;
+          e = err0 - computeError2();
+          p.y -= delta;
+          p.dy = e / ( 1 + e * e );
+        }
+        addPointsDelta( delta );
+        err3 = computeError2();
+        if ( err3 >= err0 ) {
+          addPointsDelta( -delta );
+          delta = delta / 2;
+        } else {
+          err0 = err3;
+        }
+        clearPointsDelta();
+        if ( err0 < eps || delta < 0.00000001 ) break;
+      }
+    }
+  }
+  // ------------------------------------------------------------
+
+
+  void makeTrilaterization( List<TmpShot> shots )
+  {
+    ArrayList<TriCluster> clusters = new ArrayList<TriCluster>();
+    for ( TmpShot sh : shots ) sh.cluster = null;
+    boolean repeat = true;
+    while ( repeat ) {
+      repeat = false;
+      for ( TmpShot sh : shots ) {
+        if ( sh.cluster != null ) continue;
+        repeat = true;
+        TriCluster cl = new TriCluster();
+        clusters.add( cl );
+        cl.addTmpShot( sh );
+        cl.addStation( sh.from );
+        cl.addStation( sh.to );
+        // recursively populate the cluster
+        boolean repeat2 = true;
+        while ( repeat2 ) {
+          repeat2 = false;
+          int ns = shots.size();
+          for ( int n1 = 0; n1 < ns; ++n1 ) { // stations
+            TmpShot sh1 = shots.get(n1);
+            if ( sh1.cluster != null ) continue;
+            if ( cl.containsStation( sh1.from ) ) {
+              if ( cl.containsStation( sh1.to ) ) {
+                cl.addTmpShot( sh1 );
+              } else {
+                boolean added = false;
+                for ( int n2 = n1+1; n2 < ns; ++n2 ) {
+                  TmpShot sh2 = shots.get(n2);
+                  if ( sh2.cluster != null ) continue;
+                  if ( ( sh1.to.equals( sh2.from ) && cl.containsStation( sh2.to ) ) ||
+                       ( sh1.to.equals( sh2.to ) && cl.containsStation( sh2.from ) ) ) {
+                    cl.addTmpShot( sh2 );
+                    added = true;
+                  }
+                }
+                if ( added ) {
+                  cl.addStation( sh1.to );
+                  cl.addTmpShot( sh1 );
+                  repeat2 = true;
+                }
+              }
+            } else if ( cl.containsStation( sh1.to ) ) {
+              boolean added = false;
+              for ( int n2 = n1+1; n2 < ns; ++n2 ) {
+                TmpShot sh2 = shots.get(n2);
+                if ( sh2.cluster != null ) continue;
+                if ( ( sh1.from.equals( sh2.from ) && cl.containsStation( sh2.to ) ) ||
+                     ( sh1.from.equals( sh2.to ) && cl.containsStation( sh2.from ) ) ) {
+                  cl.addTmpShot( sh2 );
+                  added = true;
+                }
+              }
+              if ( added ) {
+                cl.addStation( sh1.from );
+                cl.addTmpShot( sh1 );
+                repeat2 = true;
+              }
+            }
+          }         
+          for ( TmpShot sh1 : shots ) { // shots (should not be needed)
+            if ( sh1.cluster != null ) continue;
+            if ( cl.containsStation( sh1.from ) && cl.containsStation( sh1.to ) ) {
+              cl.addTmpShot( sh1 );
+            }
+          }
+        }
+      }
+    }
+    // apply trilaterization with recursive minimization
+    for ( TriCluster cl : clusters ) {
+      if ( cl.nrStations() > 2 ) {
+        Trilateration trilateration = new Trilateration( cl );
+        // use trilaterization.points and legs
+        ArrayList<TrilaterationLeg>   legs   = trilateration.legs; 
+        for ( TrilaterationLeg leg : legs ) {
+          TrilaterationPoint p1 = leg.pi;
+          TrilaterationPoint p2 = leg.pj;
+          // compute azimuth (p2-p1)
+          double dx = p2.x - p1.x; // east
+          double dy = p2.y - p1.y; // north
+          double a = Math.atan2( dy, dx ) * 180 / Math.PI;
+          if ( a < 0 ) a += 360;
+          leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
+        }
+      }
+    }
+  }
+    
 
   public class TmpSplay
   {
@@ -710,6 +1006,11 @@ class DistoXNum
           break;
       }
     }
+
+    if ( TDSetting.mLoopClosure == 3 ) {
+      makeTrilaterization( tmpshots );
+    }
+
     // Log.v( TDLog.TAG,
     //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
     // for ( TmpShot ts : tmpshots ) ts.Dump();
@@ -867,7 +1168,7 @@ class DistoXNum
           sf.addAzimuth( ts.b(), ts.extend );
 
           if ( st != null ) { // loop-closure
-            if ( /* TDSetting.mAutoStations || */ ! TDSetting.mLoopClosure ) { // do not close loop
+            if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == 0 ) { // do not close loop
               // TDLog.Log( TDLog.LOG_NUM, "do not close loop");
               // keep loop open: new station( id=ts.to, from=sf, ... )
               float bearing = ts.b() - sf.mAnomaly;
@@ -945,7 +1246,7 @@ class DistoXNum
     // TDLog.Log( TopoDroiaLog.LOG_NUM, "DistoXNum::compute done leg shots ");
     // Log.v( "DistoX", "DistoXNum::compute done leg shots: stations " + mStations.size() );
 
-    if ( TDSetting.mLoopClosure ) {
+    if ( TDSetting.mLoopClosure == 1 ) {
       // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
       doLoopCompensation( mNodes, mShots );
   

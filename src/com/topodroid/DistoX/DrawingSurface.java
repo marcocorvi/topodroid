@@ -468,6 +468,8 @@ public class DrawingSurface extends SurfaceView
   // void shiftHotItem( float dx, float dy, float range ) { commandManager.shiftHotItem( dx, dy, range ); }
   void shiftHotItem( float dx, float dy ) { commandManager.shiftHotItem( dx, dy ); }
 
+  void rotateHotItem( float dy ) { commandManager.rotateHotItem( dy ); }
+
   SelectionPoint nextHotItem() { return commandManager.nextHotItem(); }
 
   SelectionPoint prevHotItem() { return commandManager.prevHotItem(); }

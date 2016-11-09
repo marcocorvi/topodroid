@@ -66,7 +66,7 @@ class TDSetting
     "DISTOX_ACCEL_PERCENT",           // 24 shot quality thresholds
     "DISTOX_MAG_PERCENT",
     "DISTOX_DIP_THR",             // 26
-    "DISTOX_LOOP_CLOSURE",        // 27 whether to close loop
+    "DISTOX_LOOP_CLOSURE_VALUE",  // 27 whether to close loop
     "DISTOX_CHECK_ATTACHED",      // 28
     "DISTOX_PREV_NEXT",         
 
@@ -305,7 +305,7 @@ class TDSetting
   static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
 
 
-  static boolean mLoopClosure = false;      // whether to do loop closure
+  static int mLoopClosure = 0;      // loop closure: 0 none, 1 normal, 3 triangles
   
   static final  String UNIT_LENGTH         = "meters";
   static final  String UNIT_ANGLE          = "degrees";
@@ -629,7 +629,8 @@ class TDSetting
     mMagneticThr     = tryFloat( prefs, key[k++], "1" );  // DISTOX_MAG_PERCENT
     mDipThr          = tryFloat( prefs, key[k++], "2"   );  // DISTOX_DIP_THR
 
-    mLoopClosure   = prefs.getBoolean( key[k++], false );   // DISTOX_LOOP_CLOSURE
+    // mLoopClosure   = prefs.getBoolean( key[k++], false );   // DISTOX_LOOP_CLOSURE
+    mLoopClosure   = tryInt(   prefs, key[k++], "0" );      
     mCheckAttached = prefs.getBoolean( key[k++], false );   // DISTOX_CHECK_ATTACHED 13
     mPrevNext      = prefs.getBoolean( key[k++], true );    // DISTOX_PREV_NEXT
 
@@ -869,7 +870,8 @@ class TDSetting
       mDipThr          = tryFloat( prefs, k, "2" );      // DISTOX_DIP_THR
   
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_LOOP_CLOSURE
-      mLoopClosure   = prefs.getBoolean( k, false );
+      // mLoopClosure   = prefs.getBoolean( k, false );
+      mLoopClosure   = tryInt( prefs, k, "0" );      
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCheckAttached = prefs.getBoolean( k, false );
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_PREV_NEXT

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<!-- PLOT EDIT -->
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_DOT_RADIUS"
+       android:title="@string/pref_dot_radius_title"
+       android:summary="@string/pref_dot_radius_message"
+       android:dialogTitle="@string/pref_dot_radius_title"
+       android:dialogMessage="@string/pref_dot_radius_message"
+       android:inputType="numberDecimal"
+       android:defaultValue="5" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_CLOSENESS"
+       android:title="@string/pref_closeness_title"
+       android:summary="@string/pref_closeness_message"
+       android:dialogTitle="@string/pref_closeness_title"
+       android:dialogMessage="@string/pref_closeness_message"
+       android:inputType="number"
+       android:defaultValue="24" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_MIN_SHIFT"
+       android:title="@string/pref_min_shift_title"
+       android:summary="@string/pref_min_shift_message"
+       android:dialogTitle="@string/pref_min_shift_title"
+       android:dialogMessage="@string/pref_min_shift_message"
+       android:inputType="number"
+       android:defaultValue="60" />
+
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_POINTING"
+       android:title="@string/pref_pointing_title"
+       android:summary="@string/pref_pointing_message"
+       android:dialogTitle="@string/pref_pointing_title"
+       android:dialogMessage="@string/pref_pointing_message"
+       android:inputType="number"
+       android:defaultValue="16" />
+
+</PreferenceScreen>

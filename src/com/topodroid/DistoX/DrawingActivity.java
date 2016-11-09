@@ -260,6 +260,7 @@ public class DrawingActivity extends ItemDrawer
   static final int MODE_ZOOM  = 4; // used only for touchMode
   static final int MODE_SHIFT = 5; // change point symbol position
   static final int MODE_ERASE = 6;
+  static final int MODE_ROTATE = 7; // selected point rotate
 
   static final int CONT_NO   = 0;  // no continue
   static final int CONT_JOIN = 1;  // continue: join to existing line
@@ -1199,7 +1200,11 @@ public class DrawingActivity extends ItemDrawer
       mButton2[2].setVisibility( View.GONE );
       mButton3[2].setVisibility( View.GONE );
       mButton5[2].setVisibility( View.GONE );
+    } else {
+      mButton3[2].setOnLongClickListener( this );
     }
+    mButton2[0].setOnLongClickListener( this );
+    mButton5[1].setOnLongClickListener( this );
     if ( TDSetting.mLevelOverBasic ) {
       mButton1[BTN_PLOT].setOnLongClickListener( this );
       mButton3[BTN_REMOVE].setOnLongClickListener( this );
@@ -1980,6 +1985,13 @@ public class DrawingActivity extends ItemDrawer
           }
         } else if ( TDSetting.mSideDrag && ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) ) {
           mTouchMode = MODE_ZOOM;
+          SelectionPoint sp = mDrawingSurface.hotItem();
+          if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
+            DrawingPointPath path = (DrawingPointPath)(sp.mItem);
+            if ( DrawingBrushPaths.isPointOrientable(path.mPointType) ) {
+              mTouchMode = MODE_ROTATE;
+            }
+          }
         }
 
         if ( mMode == MODE_DRAW ) {
@@ -2095,6 +2107,11 @@ public class DrawingActivity extends ItemDrawer
             mSaveX = x_canvas; 
             mSaveY = y_canvas;
           }
+        } else if ( mTouchMode == MODE_ROTATE ) {
+          mDrawingSurface.rotateHotItem( 180 * ( y_scene - mStartY ) / TopoDroidApp.mDisplayHeight );
+          mStartX = x_scene;
+          mStartY = y_scene;
+          modified();
         } else { // mTouchMode == MODE_ZOOM
           float newDist = spacing( event );
           if ( newDist > 16.0f && oldDist > 16.0f ) {
@@ -2130,7 +2147,7 @@ public class DrawingActivity extends ItemDrawer
           return true;
         }
 
-        if ( mTouchMode == MODE_ZOOM ) {
+        if ( mTouchMode == MODE_ZOOM || mTouchMode == MODE_ROTATE ) {
           mTouchMode = MODE_MOVE;
         } else {
           float x_shift = x_canvas - mSaveX; // compute shift
@@ -3153,6 +3170,18 @@ public class DrawingActivity extends ItemDrawer
             }
           }
         }
+      } else if ( b == mButton2[0] ) { // drawing properties
+        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_DRAW );
+        startActivity( intent );
+      } else if ( b == mButton5[1] ) { // erase properties
+        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_ERASE );
+        startActivity( intent );
+      } else if ( b == mButton3[2] ) { // edit properties
+        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_EDIT );
+        startActivity( intent );
       // } else if ( b == mButton3[ BTN_BORDER ] ) {
       //   mDoEditRange = ( mDoEditRange + 1 ) % 3;
       //   mEditRadius += 2;

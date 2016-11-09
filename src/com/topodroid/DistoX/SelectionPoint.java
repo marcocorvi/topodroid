@@ -100,6 +100,15 @@ class SelectionPoint
     return mItem.distanceToPoint( xx, yy );
   }
 
+  boolean rotateBy( float dy )
+  {
+    if ( mItem.mType == DrawingPath.DRAWING_PATH_POINT ) {
+      return mItem.rotateBy( dy );
+    }
+    return false;
+  }
+
+
   // void shiftBy( float dx, float dy, float range )
   void shiftBy( float dx, float dy )
   {

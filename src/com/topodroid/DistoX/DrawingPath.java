@@ -237,6 +237,9 @@ public class DrawingPath extends RectF
   // DrawingPath by deafult does not shift
   void shiftBy( float dx, float dy ) { }
 
+  // by default does not rotate (return false)
+  boolean rotateBy( float dy ) { return false; }
+
   public void shiftPathBy( float dx, float dy ) 
   {
     x1 += dx;

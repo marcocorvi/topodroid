@@ -8,6 +8,12 @@
      <item name="two_tf">2 piés</item>
   </string-array>
 
+  <!-- TODO string-array name="loopClosure">
+     <item name="none">None</item>
+     <item name="normal">Normal</item>
+     <item name="triangles">Triangles</item>
+  </string-array -->
+
   <string-array name="wallsType">
      <item name="none">Nada</item>
      <item name="convex">Convexa</item>

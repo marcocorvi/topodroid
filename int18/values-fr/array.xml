@@ -8,6 +8,12 @@
      <item name="two_tf">2 feet</item>
   </string-array -->
 
+  <!-- TODO string-array name="loopClosure">
+     <item name="none">None</item>
+     <item name="normal">Normal</item>
+     <item name="triangles">Triangles</item>
+  </string-array -->
+
 
   <string-array name="survexEol">
      <item name="lf">Linux</item>

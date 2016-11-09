@@ -53,6 +53,12 @@ class SelectionSet
     return mHotItem;
   }
 
+  boolean rotateHotItem( float dy )
+  {
+    if ( mHotItem == null ) return false;
+    return mHotItem.rotateBy( dy );
+  }
+
   SelectionPoint nextHotItem( )
   {
     if ( mPoints.size() > 0 ) {

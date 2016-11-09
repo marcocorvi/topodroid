@@ -795,7 +795,7 @@ class DrawingIO
         pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
       }
     } else if ( type == PlotInfo.PLOT_PROFILE ) {
-      pw.format("scrap %s -projection %s %d -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, project_dir, oneMeter );
+      pw.format("scrap %s -projection [%s %d] -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, project_dir, oneMeter );
     } else {
       pw.format("scrap %s -projection %s -scale [0 0 %.0f 0 0 0 1 0 m]", scrap_name, proj_name, oneMeter );
     }

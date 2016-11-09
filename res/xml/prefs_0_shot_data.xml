@@ -47,11 +47,13 @@
        android:defaultValue="false"
      / -->
 
-     <!-- CheckBoxPreference
-       android:key="DISTOX_LOOP_CLOSURE"
+     <!-- com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_LOOP_CLOSURE_VALUE"
        android:summary="@string/pref_loopClosure_summary"
        android:title="@string/pref_loopClosure_title"
-       android:defaultValue="false"
+       android:defaultValue="0"
+       android:entries="@array/loopClosure"
+       android:entryValues="@array/loopClosureValue"
      / -->
 
      <!-- CheckBoxPreference

@@ -13,6 +13,17 @@
      <item name="two_tf">0.6096</item>
   </string-array>
 
+  <string-array name="loopClosure">
+     <item name="none">None</item>
+     <item name="normal">Normal</item>
+     <item name="triangles">Triangles</item>
+  </string-array>
+  <string-array name="loopClosureValue">
+     <item name="none">0</item>
+     <item name="normal">1</item>
+     <item name="triangles">3</item>
+  </string-array>
+
   <string-array name="survexEol">
      <item name="lf">Linux</item>
      <item name="lfcr">Windows</item>

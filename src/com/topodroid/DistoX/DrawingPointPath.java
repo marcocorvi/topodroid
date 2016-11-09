@@ -125,6 +125,15 @@ public class DrawingPointPath extends DrawingPath
   }
 
   @Override
+  boolean rotateBy( float dy )
+  {
+    if ( ! DrawingBrushPaths.isPointOrientable( mPointType ) ) return false;
+    setOrientation ( mOrientation + dy );
+    return true;
+  }
+
+
+  @Override
   void shiftBy( float dx, float dy )
   {
     cx += dx;

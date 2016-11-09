@@ -2049,6 +2049,13 @@ public class DrawingCommandManager
 
   SelectionPoint hotItem() { return mSelected.mHotItem; }
 
+  void rotateHotItem( float dy )
+  { 
+    synchronized( mSelection ) {
+      mSelected.rotateHotItem( dy );
+    }
+  }
+
   // void shiftHotItem( float dx, float dy, float range ) 
   void shiftHotItem( float dx, float dy )
   { 
@@ -2064,6 +2071,7 @@ public class DrawingCommandManager
       mSelection.checkBucket( sp );
     }
   }
+
   SelectionPoint nextHotItem() { return mSelected.nextHotItem(); }
   SelectionPoint prevHotItem() { return mSelected.prevHotItem(); }
 

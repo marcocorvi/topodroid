@@ -55,8 +55,11 @@ public class TopoDroidPreferences extends PreferenceActivity
   static final int PREF_TOOL_LINE       = 12; 
   static final int PREF_TOOL_POINT      = 13; 
   static final int PREF_PLOT_WALLS      = 14; 
+  static final int PREF_PLOT_DRAW       = 15; 
+  static final int PREF_PLOT_ERASE      = 16; 
+  static final int PREF_PLOT_EDIT       = 17; 
 
-  static final int PREF_CATEGORY_LOG    = 15; // this must be the last
+  static final int PREF_CATEGORY_LOG    = 18; // this must be the last
 
   private int mPrefCategory = PREF_CATEGORY_ALL; // preference category
 
@@ -134,6 +137,15 @@ public class TopoDroidPreferences extends PreferenceActivity
       case PREF_PLOT_WALLS:
         addPreferencesFromResource(R.xml.prefs_3_plot_walls);
         break;
+      case PREF_PLOT_DRAW:
+        addPreferencesFromResource(R.xml.prefs_plot_draw);
+        break;
+      case PREF_PLOT_ERASE:
+        addPreferencesFromResource(R.xml.prefs_plot_erase);
+        break;
+      case PREF_PLOT_EDIT:
+        addPreferencesFromResource(R.xml.prefs_plot_edit);
+        break;
       case PREF_CATEGORY_SKETCH:
         addPreferencesFromResource(R.xml.prefs_sketch);
         break;
@@ -187,6 +199,15 @@ public class TopoDroidPreferences extends PreferenceActivity
       case PREF_PLOT_WALLS:
         addPreferencesFromResource(R.xml.prefs_3_plot_walls);
         break;
+      case PREF_PLOT_DRAW:
+        addPreferencesFromResource(R.xml.prefs_plot_draw);
+        break;
+      case PREF_PLOT_ERASE:
+        addPreferencesFromResource(R.xml.prefs_plot_erase);
+        break;
+      case PREF_PLOT_EDIT:
+        addPreferencesFromResource(R.xml.prefs_plot_edit);
+        break;
       case PREF_CATEGORY_LOG:
         addPreferencesFromResource(R.xml.prefs_log);
         break;
@@ -237,6 +258,15 @@ public class TopoDroidPreferences extends PreferenceActivity
       // case PREF_PLOT_WALLS:
       //   addPreferencesFromResource(R.xml.prefs_2_plot_walls);
       //   break;
+      case PREF_PLOT_DRAW:
+        addPreferencesFromResource(R.xml.prefs_plot_draw);
+        break;
+      case PREF_PLOT_ERASE:
+        addPreferencesFromResource(R.xml.prefs_plot_erase);
+        break;
+      case PREF_PLOT_EDIT:
+        addPreferencesFromResource(R.xml.prefs_plot_edit);
+        break;
       // case PREF_CATEGORY_LOG:
       //   addPreferencesFromResource(R.xml.prefs_log);
       //   break;
@@ -287,6 +317,15 @@ public class TopoDroidPreferences extends PreferenceActivity
       // case PREF_PLOT_WALLS:
       //   addPreferencesFromResource(R.xml.prefs_1_plot_walls);
       //   break;
+      case PREF_PLOT_DRAW:
+        addPreferencesFromResource(R.xml.prefs_plot_draw);
+        break;
+      case PREF_PLOT_ERASE:
+        addPreferencesFromResource(R.xml.prefs_plot_erase);
+        break;
+      case PREF_PLOT_EDIT:
+        addPreferencesFromResource(R.xml.prefs_plot_edit);
+        break;
       // case PREF_CATEGORY_LOG:
       //   addPreferencesFromResource(R.xml.prefs_log);
       //   break;
@@ -337,6 +376,15 @@ public class TopoDroidPreferences extends PreferenceActivity
       // case PREF_PLOT_WALLS:
       //   addPreferencesFromResource(R.xml.prefs_0_plot_walls);
       //   break;
+      case PREF_PLOT_DRAW:
+        addPreferencesFromResource(R.xml.prefs_plot_draw);
+        break;
+      case PREF_PLOT_ERASE:
+        addPreferencesFromResource(R.xml.prefs_plot_erase);
+        break;
+      case PREF_PLOT_EDIT:
+        addPreferencesFromResource(R.xml.prefs_plot_edit);
+        break;
       // case PREF_CATEGORY_LOG:
       //   addPreferencesFromResource(R.xml.prefs_log);
       //   break;
