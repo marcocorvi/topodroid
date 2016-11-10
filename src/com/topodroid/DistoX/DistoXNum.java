@@ -50,7 +50,7 @@ class DistoXNum
     mErr0 = mErr1 = mErr2 = 0;
   }
 
-  void addToStats( TmpShot ts )
+  void addToStats( TriShot ts )
   {
     int size = ts.blocks.size();
     for ( int i = 0; i < size; ++i ) {
@@ -505,316 +505,17 @@ class DistoXNum
   // }
 
 
-  // --------------------------------------------------------
-  public class TmpShot
-  {
-    boolean used;
-    public String from;
-    public String to;
-    public int extend;
-    public int reversed;  // -1 reversed, +1 normal 
-                          // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
-                          // this is checked only in makeShotFromTmp to detect errors
-    public boolean duplicate;
-    public boolean surface;
-    public int     backshot; // 0 forward, +1 sibling forward, -1 sibling backshot
-    public TmpShot sibling;  // sibling shot with same stations
-    public ArrayList<DistoXDBlock> blocks;
-    AverageLeg mAvgLeg;
-    TriCluster cluster;
-
-    public TmpShot( DistoXDBlock blk, String f, String t, int e, int r )
-    { 
-      used = false;
-      from = f;
-      to   = t;
-      extend = e;
-      reversed = r;
-      duplicate = false;
-      surface   = false;
-      backshot  = 0;
-      sibling = null;
-      blocks = new ArrayList<DistoXDBlock>();
-      blocks.add( blk );
-      mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
-      mAvgLeg.set( blk );
-      cluster = null;
-    }
-
-    double length()  { return mAvgLeg.length(); } 
-    double bearing() { return mAvgLeg.bearing(); } 
-    double clino()   { return mAvgLeg.clino(); } 
-
-    void addBlock( DistoXDBlock blk )
-    {
-      blocks.add( blk );
-      mAvgLeg.add( blk );
-    }
-
-    DistoXDBlock getFirstBlock( ) { return blocks.get(0); }
-
-    ArrayList<DistoXDBlock> getBlocks() { return blocks; }
-
-    /** get the temp-shot distance
-     * @note if the temp-shot is reversed the distance is negative
-     */
-    float d()
-    {
-      // float ret = 0.0f;
-      // for ( DistoXDBlock b : blocks ) ret += b.mLength; 
-      // return ret / blocks.size();
-      return mAvgLeg.length();
-    }
-
-    float b()
-    {
-      // DistoXDBlock blk = blocks.get(0);
-      // int size = blocks.size();
-      // float b0 = blk.mBearing;
-      // if ( size == 1 ) {
-      //   return (reversed == -1)? TDMath.in360(b0+180) : b0;
-      // }
-      // float ret = b0;
-      // for ( int k=1; k<size; ++k ) {
-      //   blk = blocks.get(k);
-      //   ret += TDMath.around( blk.mBearing , b0 );
-      // }
-      // return TDMath.in360( ret/size );
-
-      float ret = mAvgLeg.bearing();
-      if ( reversed == -1 ) { ret += 180; if (ret >= 360) ret -= 360; }
-      return ret;
-    }
-
-    float c()
-    {
-      // float ret = 0.0f;
-      // if ( blocks.size() == 1 ) {
-      //   return reversed * blocks.get(0).mClino;
-      // }
-      // for ( DistoXDBlock b : blocks ) ret += b.mClino;
-      // return ret / blocks.size();
-
-      return reversed * mAvgLeg.clino(); 
-    }
-
-    // void Dump()
-    // {
-    //   Log.v( TDLog.TAG, "Shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
-    //   for ( DistoXDBlock b : blocks ) {
-    //     Log.v( TDLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
-    //   }
-    // }
-  }
-
-  public class TriCluster
-  {
-    ArrayList<TmpShot> shots;
-    ArrayList<String>  stations;
-
-    TriCluster() 
-    {
-      shots = new ArrayList<TmpShot>();
-      stations = new ArrayList<String>();
-    }
-
-    int nrShots() { return shots.size(); }
-    int nrStations() { return stations.size(); }
-
-    void addTmpShot( TmpShot ts )
-    {
-      shots.add( ts );
-      ts.cluster = this;
-    }
-  
-    void addStation( String st )
-    {
-      if ( ! containsStation( st ) ) stations.add( st );
-    }
-
-    boolean containsStation( String st )
-    {
-      if ( st == null ) return true;
-      for ( String s : stations ) if ( st.equals(s) ) return true;
-      return false;
-    }
-  }
-
-  class TrilaterationLeg
-  {
-    TmpShot shot;
-    double d; // distance [m]
-    double a; // angle [degrees]
-    boolean used; // work flag
-    TrilaterationPoint pi;
-    TrilaterationPoint pj;
-    
-    TrilaterationLeg( TmpShot sh, TrilaterationPoint p1, TrilaterationPoint p2 )
-    {
-      shot = sh;
-      d = sh.length() * Math.cos( sh.clino() * Math.PI / 180.0 );
-      a = sh.bearing();
-      used = false;
-      pi = p1;
-      pj = p2;
-    }
-  }
-  
-  class TrilaterationPoint
-  {
-    String name;
-    // int n;       // nr legs with this point
-    double x, y; // coords x = East, y = North
-    double dx, dy; // coords variations
-    boolean used;    // work flag
-
-    TrilaterationPoint( String n )
-    { 
-      name = n;
-      x = y = dx = dy = 0;
-      used = false;
-    }
-  }
-  
-  public class Trilateration
-  {
-    ArrayList<TrilaterationLeg> legs;
-    ArrayList<TrilaterationPoint> points;
-    double err0;
-    int iter;
-
-    TrilaterationPoint getPoint( String n )
-    {
-      for ( TrilaterationPoint p : points ) if ( n.equals(p.name) ) return p;
-      return null;
-    }
-  
-    Trilateration( TriCluster cl )
-    {
-      legs   = new ArrayList<TrilaterationLeg>();
-      points = new ArrayList<TrilaterationPoint>();
-  
-      // populate
-      for ( String n : cl.stations ) {
-        points.add( new TrilaterationPoint( n ) );
-      }
-      for ( TmpShot sh : cl.shots ) {
-        TrilaterationPoint p1 = getPoint( sh.from );
-        TrilaterationPoint p2 = getPoint( sh.to );
-        legs.add( new TrilaterationLeg( sh, p1, p2 ) );
-      } 
-      // initialize points
-      initialize();
-      // and minimize
-      minimize( 0.001, 0.10, 100000 );
-    }
-
-    void initialize()
-    {
-      double d, a;
-      boolean repeat = true;
-      legs.get(0).pi.used = true;
-      while ( repeat ) {
-        repeat = false;
-        for ( TrilaterationLeg leg : legs ) {
-          if ( ! leg.used ) {
-	    TrilaterationPoint pi = leg.pi;
-	    TrilaterationPoint pj = leg.pj;
-	    d = leg.d;
-	    a = leg.a * Math.PI / 180.0;
-	    if ( pi.used && ! pj.used ) {
-              pj.used = true;
-	      pj.x = pi.x + d * Math.sin( a );
-	      pj.y = pi.y + d * Math.cos( a );
-              leg.used = true;
-	      repeat = true;
-	    } else if ( pj.used && ! pi.used ) {
-              pi.used = true;
-	      pi.x = pj.x - d * Math.sin( a );
-	      pi.y = pj.y - d * Math.cos( a );
-              leg.used = true;
-	      repeat = true;
-	    }
-  	  }
-        }
-      }
-    }
-  
-    private void clearPointsDelta() 
-    {
-      for ( TrilaterationPoint p : points ) { p.dx = p.dy = 0; }
-    }
-  
-    private void addPointsDelta( double delta )
-    {
-      for ( TrilaterationPoint p : points ) {
-        p.x += p.dx * delta;
-        p.y += p.dy * delta;
-      }
-    }
-  
-    private double distance1( TrilaterationPoint p1, TrilaterationPoint p2 )
-    {
-      return Math.sqrt( (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y) );
-    }
-  
-    private double computeError2( )
-    {
-      double error = 0;
-      for ( TrilaterationLeg l : legs ) {
-        double d = ( distance1( l.pi, l.pj ) - l.d );
-        error += d * d;
-      }
-      return error;
-    }
-  
-    // eps: error for one point [m] 0.001
-    // delta: initial delta [m] 0.10
-    // iter_max: max iterations 100000
-    void minimize( double eps, double delta, int iter_max )
-    {
-      eps *= points.size(); // 1 mm per point
-      err0 = computeError2();
-      int n_pts = points.size();
-      for ( iter =0 ; iter < iter_max; ++ iter ) {
-        double err3, e;
-        for ( int m=1; m<n_pts; ++m ) { // compute derivatives D Error / DPx
-          TrilaterationPoint p = points.get( m );
-          if ( m > 1 ) {
-            p.x += delta;
-    	  e = err0 - computeError2();
-            p.x -= delta;
-    	  p.dx = e / ( 1 + e * e );
-          }
-          p.y += delta;
-          e = err0 - computeError2();
-          p.y -= delta;
-          p.dy = e / ( 1 + e * e );
-        }
-        addPointsDelta( delta );
-        err3 = computeError2();
-        if ( err3 >= err0 ) {
-          addPointsDelta( -delta );
-          delta = delta / 2;
-        } else {
-          err0 = err3;
-        }
-        clearPointsDelta();
-        if ( err0 < eps || delta < 0.00000001 ) break;
-      }
-    }
-  }
-  // ------------------------------------------------------------
-
-
-  void makeTrilaterization( List<TmpShot> shots )
+  /** correct temporary shots using trilateration
+   * @param shots temporary shot list
+   */
+  void makeTrilateration( List<TriShot> shots )
   {
     ArrayList<TriCluster> clusters = new ArrayList<TriCluster>();
-    for ( TmpShot sh : shots ) sh.cluster = null;
+    for ( TriShot sh : shots ) sh.cluster = null;
     boolean repeat = true;
     while ( repeat ) {
       repeat = false;
-      for ( TmpShot sh : shots ) {
+      for ( TriShot sh : shots ) {
         if ( sh.cluster != null ) continue;
         repeat = true;
         TriCluster cl = new TriCluster();
@@ -828,7 +529,7 @@ class DistoXNum
           repeat2 = false;
           int ns = shots.size();
           for ( int n1 = 0; n1 < ns; ++n1 ) { // stations
-            TmpShot sh1 = shots.get(n1);
+            TriShot sh1 = shots.get(n1);
             if ( sh1.cluster != null ) continue;
             if ( cl.containsStation( sh1.from ) ) {
               if ( cl.containsStation( sh1.to ) ) {
@@ -836,7 +537,7 @@ class DistoXNum
               } else {
                 boolean added = false;
                 for ( int n2 = n1+1; n2 < ns; ++n2 ) {
-                  TmpShot sh2 = shots.get(n2);
+                  TriShot sh2 = shots.get(n2);
                   if ( sh2.cluster != null ) continue;
                   if ( ( sh1.to.equals( sh2.from ) && cl.containsStation( sh2.to ) ) ||
                        ( sh1.to.equals( sh2.to ) && cl.containsStation( sh2.from ) ) ) {
@@ -853,7 +554,7 @@ class DistoXNum
             } else if ( cl.containsStation( sh1.to ) ) {
               boolean added = false;
               for ( int n2 = n1+1; n2 < ns; ++n2 ) {
-                TmpShot sh2 = shots.get(n2);
+                TriShot sh2 = shots.get(n2);
                 if ( sh2.cluster != null ) continue;
                 if ( ( sh1.from.equals( sh2.from ) && cl.containsStation( sh2.to ) ) ||
                      ( sh1.from.equals( sh2.to ) && cl.containsStation( sh2.from ) ) ) {
@@ -868,7 +569,7 @@ class DistoXNum
               }
             }
           }         
-          for ( TmpShot sh1 : shots ) { // shots (should not be needed)
+          for ( TriShot sh1 : shots ) { // shots (should not be needed)
             if ( sh1.cluster != null ) continue;
             if ( cl.containsStation( sh1.from ) && cl.containsStation( sh1.to ) ) {
               cl.addTmpShot( sh1 );
@@ -877,13 +578,12 @@ class DistoXNum
         }
       }
     }
-    // apply trilaterization with recursive minimization
+    // apply trilateration with recursive minimization
     for ( TriCluster cl : clusters ) {
       if ( cl.nrStations() > 2 ) {
         Trilateration trilateration = new Trilateration( cl );
-        // use trilaterization.points and legs
-        ArrayList<TrilaterationLeg>   legs   = trilateration.legs; 
-        for ( TrilaterationLeg leg : legs ) {
+        // use trilateration.points and legs
+        for ( TrilaterationLeg leg : trilateration.legs ) {
           TrilaterationPoint p1 = leg.pi;
           TrilaterationPoint p2 = leg.pj;
           // compute azimuth (p2-p1)
@@ -896,49 +596,15 @@ class DistoXNum
       }
     }
   }
-    
-
-  public class TmpSplay
-  {
-    boolean used;
-    public String from;   // splay station (usually "from")
-    public int extend;
-    public int reversed;  // -1 reversed, +1 normal 
-                          // NOTE splay temp-shot can be reversed - leg temp-shot are always normal
-                          // this is checked only in makeShotFromTmp to detect errors
-    public DistoXDBlock block;
-
-    public TmpSplay( DistoXDBlock blk, String f, int e, int r )
-    { 
-      used = false;
-      from = f;
-      extend = e;
-      reversed = r;
-      block = blk;
-    }
-
-    float d() { return block.mLength; }
-
-    float b()
-    {
-      if ( reversed == 1 ) return block.mBearing+ mDecl ;
-      float ret = block.mBearing + 180;
-      if ( ret >= 360 ) ret -= 360;
-      return ret;
-    }
-
-    float c() { return reversed * block.mClino; }
-  }
 
   // ================================================================
-
 
   /** make a NumShot from a temporary shot
    * @param sf    from station
    * @param st    to station
    * @param ts    temp shot
    */
-  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TmpShot ts, float anomaly, float mDecl )
+  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TriShot ts, float anomaly, float mDecl )
   {
     if ( ts.reversed != 1 ) {
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
@@ -969,9 +635,9 @@ class DistoXNum
     mClosures = new ArrayList< String >();
     mNodes    = new ArrayList< NumNode >();
 
-    TmpShot lastLeg = null;
-    List<TmpShot> tmpshots  = new ArrayList< TmpShot >();
-    List<TmpSplay> tmpsplays = new ArrayList< TmpSplay >();
+    TriShot lastLeg = null;
+    List<TriShot> tmpshots  = new ArrayList< TriShot >();
+    List<TriSplay> tmpsplays = new ArrayList< TriSplay >();
 
     for ( DistoXDBlock blk : data ) {
       switch ( blk.type() ) {
@@ -979,14 +645,14 @@ class DistoXNum
         case DistoXDBlock.BLOCK_SPLAY:
           lastLeg = null;  // clear last-leg
           if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
-            tmpsplays.add( new TmpSplay( blk, blk.mFrom, (int)(blk.mExtend), +1 ) );
+            tmpsplays.add( new TriSplay( blk, blk.mFrom, (int)(blk.mExtend), +1 ) );
           } else if ( blk.mTo != null && blk.mTo.length() > 0 ) { // reversed splay
-            tmpsplays.add( new TmpSplay( blk, blk.mTo, (int)(blk.mExtend), -1 ) );
+            tmpsplays.add( new TriSplay( blk, blk.mTo, (int)(blk.mExtend), -1 ) );
           }
           break;
 
         case DistoXDBlock.BLOCK_MAIN_LEG:
-          lastLeg = new TmpShot( blk, blk.mFrom, blk.mTo, (int)(blk.mExtend), +1 );
+          lastLeg = new TriShot( blk, blk.mFrom, blk.mTo, (int)(blk.mExtend), +1 );
           lastLeg.duplicate = ( blk.mFlag == DistoXDBlock.BLOCK_DUPLICATE );
           lastLeg.surface   = ( blk.mFlag == DistoXDBlock.BLOCK_SURFACE );
           // lastLeg.backshot  = ( blk.mFlag == DistoXDBlock.BLOCK_BACKSHOT ); // FIXME
@@ -1008,15 +674,15 @@ class DistoXNum
     }
 
     if ( TDSetting.mLoopClosure == 3 ) {
-      makeTrilaterization( tmpshots );
+      makeTrilateration( tmpshots );
     }
 
     // Log.v( TDLog.TAG,
     //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
-    // for ( TmpShot ts : tmpshots ) ts.Dump();
+    // for ( TriShot ts : tmpshots ) ts.Dump();
 
     for ( int i = 0; i < tmpshots.size(); ++i ) {
-      TmpShot ts0 = tmpshots.get( i );
+      TriShot ts0 = tmpshots.get( i );
       addToStats( ts0 );
       DistoXDBlock blk0 = ts0.getFirstBlock();
       blk0.mMultiBad = false;
@@ -1026,10 +692,10 @@ class DistoXNum
       String from = ts0.from;
       String to   = ts0.to;
       // if ( from == null || to == null ) continue; // FIXME
-      TmpShot ts1 = ts0;
+      TriShot ts1 = ts0;
       ts0.backshot = 0;
       for ( int j=i+1; j < tmpshots.size(); ++j ) {
-        TmpShot ts2 = tmpshots.get( j );
+        TriShot ts2 = tmpshots.get( j );
         if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) {
           ts1.sibling = ts2;
           ts1 = ts2;
@@ -1068,7 +734,7 @@ class DistoXNum
         if ( ! TDSetting.mMagAnomaly ) { // (3) remove siblings
           ts1 = ts0.sibling;
           while ( ts1 != null ) {
-            TmpShot ts2 = ts1.sibling;
+            TriShot ts2 = ts1.sibling;
             tmpshots.remove( ts1 );
             ts1 = ts2;
           }
@@ -1088,7 +754,7 @@ class DistoXNum
 
     // Log.v( TDLog.TAG,
     //    "DistoXNum::compute tmp-shots " + tmpshots.size() + " tmp-splays " + tmpsplays.size() );
-    // for ( TmpShot ts : tmpshots ) ts.Dump();
+    // for ( TriShot ts : tmpshots ) ts.Dump();
 
     NumStation start_station = new NumStation( start );
     start_station.mHasCoords = true;
@@ -1101,7 +767,7 @@ class DistoXNum
     boolean repeat = true;
     while ( repeat ) {
       repeat = false;
-      for ( TmpShot ts : tmpshots ) {
+      for ( TriShot ts : tmpshots ) {
         if ( ts.used || ts.backshot != 0 ) continue;
 
         float anomaly = 0;
@@ -1113,7 +779,7 @@ class DistoXNum
             float bfwd = ts.b();
             int   nbck = 0;
             float bbck = 0;
-            for ( TmpShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
+            for ( TriShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
               // TDLog.Log(TDLog.LOG_NUM, "sibling " + ts1.from + " " + ts1.to + " <" + ts1.backshot + ">" );
               if ( ts1.backshot == 1 ) {
                 if ( ts1.b() > ts.b() + 180 ) {
@@ -1307,11 +973,11 @@ class DistoXNum
     // for ( NumStation st : mStations ) {
     //   st.setAzimuths();
     // }
-    for ( TmpSplay ts : tmpsplays ) {
+    for ( TriSplay ts : tmpsplays ) {
       NumStation st = getStation( ts.from );
       if ( st != null ) {
-        float extend = st.computeExtend( ts.b(), ts.extend ) ;
-        mSplays.add( new NumSplay( st, ts.d(), ts.b(), ts.c(), extend, ts.block, mDecl ) );
+        float extend = st.computeExtend( ts.b( mDecl ), ts.extend ) ;
+        mSplays.add( new NumSplay( st, ts.d(), ts.b( mDecl ), ts.c(), extend, ts.block, mDecl ) );
       }
     }
 
