@@ -214,7 +214,7 @@
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
 
-    <string name="no_bt">Нет Блютуза</string>
+    <string name="no_bt">Нет Блютуфа</string>
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calibration">Калибровка не выбрана</string>
     <string name="no_capture_app">Отсутствует приложение для фото</string>
@@ -287,9 +287,9 @@
     <string name="connected_none">Не соединено</string>
     <string name="connected_already">Уже соединено</string>
 
-    <string name="not_available">Блютуз недоступен</string>
+    <string name="not_available">Bluetooth недоступен</string>
     <!-- OK string name="not_connected">Нет соединения</string -->
-    <string name="not_enabled">Блютуз выключен</string>
+    <string name="not_enabled">Bluetooth выключен</string>
     <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <!-- UNUSED string name="photo">фото</string -->
@@ -1051,7 +1051,7 @@
 \n[3] Убедитесь в том что версия прошивки совместима с версией аппаратуры DistoX.
 \n[4] Переключите DistoX2 в режим загрузчика: удерживайте ПЛЮС и МИНУС в момент включения кнопки DIST.
 \n[5] Нажмите кнопку OK и дожитесь завершения процесса.
-\n[6] Подождите пока на DistoX не замигает значек блютуз.
+\n[6] Подождите пока на DistoX не замигает значек Bluetooth.
 \n[7] Выключите DistoX2 используя кнопку CLR.
 \n
    </string>
