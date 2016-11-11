@@ -385,7 +385,7 @@
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
     <string name="unzip_fail_db">Error: la versión de base de datos no coincide</string>
     <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
-    <string name="zoom_in_out">Zoom aumentar/disminuir</string>
+    <!-- NO string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
     <string name="survey_info">Info Topografía</string>
     <!-- TODO string name="stat_stddev_m">M stddev %1$.1f %%</string -->

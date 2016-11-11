@@ -228,7 +228,7 @@ class ItemRecentDialog extends MyDialog
   // void rotatePoint( int angle )
   // {
   //   if ( mPointAdapter == null ) return;
-  //   if ( TDSetting.mLevelOverBasic && mItemType == DrawingActivity.SYMBOL_POINT ) {
+  //   if ( TDSetting.mLevelOverBasic && mItemType == Symbol.POINT ) {
   //     // Log.v( TopoDroidApp.TAG, "rotate point " + mParent.mCurrentPoint );
   //     mPointAdapter.rotatePoint( mParent.mCurrentPoint, angle );
   //   }
@@ -348,11 +348,11 @@ class ItemRecentDialog extends MyDialog
       setTheTitle();
       return;
     } else if ( b == mBTpoint ) {
-      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_POINT ). show();
+      new ItemPickerDialog( mContext, mParent, mPlotType, Symbol.POINT ). show();
     } else if ( b == mBTline ) {
-      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_LINE ). show();
+      new ItemPickerDialog( mContext, mParent, mPlotType, Symbol.LINE ). show();
     } else if ( b == mBTarea ) {
-      new ItemPickerDialog( mContext, mParent, mPlotType, DrawingActivity.SYMBOL_AREA ). show();
+      new ItemPickerDialog( mContext, mParent, mPlotType, Symbol.AREA ). show();
     } else {
       for ( int k=0; k<nrRecent; ++k ) {
         if ( b == mRecentP[k] ) { setPoint(k); break; }

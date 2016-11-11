@@ -1,9 +1,9 @@
-/** @file TopoDroidApp.java
+/** @file TDTag.java
  *
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid application (consts and prefs)
+ * @brief TopoDroid application tags
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-class TopoDroidTag
+class TDTag
 {
   // intent extra-names
   public static final String TOPODROID_PLOT_ID      = "plot_id";

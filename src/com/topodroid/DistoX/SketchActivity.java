@@ -242,13 +242,13 @@ public class SketchActivity extends ItemDrawer
   {
       Resources res = getResources();
       switch ( mSymbol ) {
-      case SketchDef.SYMBOL_POINT:
+      case Symbol.POINT:
         symbolBtn.setText( res.getString(R.string.btn_point ) );
         break;
-      case SketchDef.SYMBOL_AREA:
+      case Symbol.AREA:
         symbolBtn.setText( res.getString(R.string.btn_area ) );
         break;
-      // case SketchDef.SYMBOL_LINE:
+      // case Symbol.LINE:
       default:
         symbolBtn.setText( res.getString(R.string.btn_line ) );
         break;
@@ -262,8 +262,8 @@ public class SketchActivity extends ItemDrawer
     Resources res = getResources();
     // String dir = mInfo.getDirectionString();
     String symbol_name = // ( mIsInSection) ? "section" :
-        ( mSymbol == SketchDef.SYMBOL_POINT )? res.getString(R.string.POINT) + DrawingBrushPaths.mPointLib.getSymbolName( mCurrentPoint )
-      : ( mSymbol == SketchDef.SYMBOL_LINE )? res.getString(R.string.LINE)
+        ( mSymbol == Symbol.POINT )? res.getString(R.string.POINT) + DrawingBrushPaths.mPointLib.getSymbolName( mCurrentPoint )
+      : ( mSymbol == Symbol.LINE )? res.getString(R.string.LINE)
       : res.getString(R.string.AREA) + DrawingBrushPaths.mAreaLib.getSymbolName( mCurrentArea );
 
     setTitle( String.format( res.getString( R.string.title_sketch), 
@@ -307,7 +307,7 @@ public class SketchActivity extends ItemDrawer
         mListView.setAdapter( mButtonView2.mAdapter );
         break;
       case SketchDef.MODE_EDIT:
-        mSymbol = SketchDef.SYMBOL_LINE;
+        mSymbol = Symbol.LINE;
         mListView.setAdapter( mButtonView3.mAdapter );
         break;
       case SketchDef.MODE_SELECT:
@@ -360,7 +360,7 @@ public class SketchActivity extends ItemDrawer
   public void areaSelected( int k, boolean update_recent ) 
   {
     if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
-      mSymbol = SketchDef.SYMBOL_AREA;
+      mSymbol = Symbol.AREA;
       mCurrentArea = k;
     }
     setTheTitle();
@@ -369,7 +369,7 @@ public class SketchActivity extends ItemDrawer
   public void lineSelected( int k, boolean update_recent ) 
   {
     if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mSymbolNr ) {
-      mSymbol = SketchDef.SYMBOL_LINE;
+      mSymbol = Symbol.LINE;
       mCurrentLine = k;
     }
     setTheTitle();
@@ -378,7 +378,7 @@ public class SketchActivity extends ItemDrawer
   public void pointSelected( int p, boolean update_recent )
   {
     if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mSymbolNr ) {
-      mSymbol = SketchDef.SYMBOL_POINT;
+      mSymbol = Symbol.POINT;
       mCurrentPoint = p;
     }
     setTheTitle();
@@ -674,8 +674,8 @@ public class SketchActivity extends ItemDrawer
 
     mData        = mApp.mData; // new DataHelper( this ); 
     Bundle extras = getIntent().getExtras();
-    mSid         = extras.getLong(   TopoDroidTag.TOPODROID_SURVEY_ID );
-    String name  = extras.getString( TopoDroidTag.TOPODROID_SKETCH_NAME );
+    mSid         = extras.getLong(   TDTag.TOPODROID_SURVEY_ID );
+    String name  = extras.getString( TDTag.TOPODROID_SKETCH_NAME );
     mFullName    = mApp.mySurvey + "-" + name;
     // mCompass     = null;
     // mDecl = mData.getSurveyDeclination( mSid );
@@ -1178,12 +1178,12 @@ public class SketchActivity extends ItemDrawer
         mStartY = y_scene;
         // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
         mPointCnt = 0;
-        if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
+        if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
           // mSketchSurface.isDrawing = true;
           mCurrentLinePath = new DrawingLinePath( mCurrentLine );
           mCurrentLinePath.addStartPoint( x_scene, y_scene );
           mCurrentBrush.mouseDown( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
-        } else { // SketchDef.SYMBOL_POINT
+        } else { // Symbol.POINT
           mSaveX = x_canvas;
           mSaveY = y_canvas;
         }
@@ -1252,7 +1252,7 @@ public class SketchActivity extends ItemDrawer
         float x_shift = x_canvas - mSaveX; // compute shift
         float y_shift = y_canvas - mSaveY;
         if ( mMode == SketchDef.MODE_DRAW || mMode == SketchDef.MODE_EDIT ) {
-          if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
+          if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
             if ( x_shift*x_shift + y_shift*y_shift > TDSetting.mLineSegment2 ) {
               ++mPointCnt; // add all points
               mCurrentLinePath.addPoint( x_scene, y_scene );
@@ -1311,7 +1311,7 @@ public class SketchActivity extends ItemDrawer
         else if ( mMode == SketchDef.MODE_DRAW )
         {
           // normal draw
-          if ( mSymbol == SketchDef.SYMBOL_LINE || mSymbol == SketchDef.SYMBOL_AREA ) {
+          if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
             if ( x_shift*x_shift + y_shift*y_shift > TDSetting.mLineSegment2 ) {
@@ -1319,9 +1319,9 @@ public class SketchActivity extends ItemDrawer
             }
             if ( mPointCnt > TDSetting.mLineType ) {
               SketchLinePath line = null;
-              if ( mSymbol == SketchDef.SYMBOL_LINE ) {
+              if ( mSymbol == Symbol.LINE ) {
                 line = new SketchLinePath( DrawingPath.DRAWING_PATH_LINE, mCurrentLine, mInfo.st1, mInfo.st2, mPainter );
-              } else if ( mSymbol == SketchDef.SYMBOL_AREA ) {
+              } else if ( mSymbol == Symbol.AREA ) {
                 line = new SketchLinePath( DrawingPath.DRAWING_PATH_AREA, mCurrentArea, mInfo.st1, mInfo.st2, mPainter );
               }
               ArrayList< LinePoint > pts = new ArrayList< LinePoint >();
@@ -1339,20 +1339,20 @@ public class SketchActivity extends ItemDrawer
                 }                  
               }
 
-              if ( mSymbol == SketchDef.SYMBOL_LINE ) {
+              if ( mSymbol == Symbol.LINE ) {
                 p1 = pts.get(0);
                 p2 = pts.get(pts.size()-1);
                 float len = TDMath.sqrt( (p2.mX-p1.mX)*(p2.mX-p1.mX) + (p2.mY-p1.mY)*(p2.mY-p1.mY) );
                 if ( len < SketchDef.CLOSE_GAP ) {
                   line.close();
                 }
-              } else if ( mSymbol == SketchDef.SYMBOL_AREA ) {
+              } else if ( mSymbol == Symbol.AREA ) {
                 // Log.v("DistoX", "add area type " + mCurrentArea );
                 line.close();
               }
               mModel.addSketchPath( line );
             }
-          } else { // SketchDef.SYMBOL_POINT
+          } else { // Symbol.POINT
             if ( Math.abs( x_shift ) < 16 && Math.abs( y_shift ) < 16 ) {
               // Log.v("DistoX", "point get triangle at " + x_scene + " " + y_scene );
               SketchTriangle tri = doSelectTriangleAt( x_scene, y_scene, null );
@@ -1386,7 +1386,7 @@ public class SketchActivity extends ItemDrawer
         else if ( mMode == SketchDef.MODE_EDIT )
         {
 
-          if ( mSymbol == SketchDef.SYMBOL_LINE /* || mSymbol == SketchDef.SYMBOL_AREA */ ) {
+          if ( mSymbol == Symbol.LINE /* || mSymbol == Symbol.AREA */ ) {
             mCurrentBrush.mouseUp( mSketchSurface.previewPath.mPath, x_canvas, y_canvas );
             mSketchSurface.previewPath.mPath = new Path();
             if ( Math.sqrt( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment || (mPointCnt % TDSetting.mLineType) > 0 ) {
@@ -1837,7 +1837,7 @@ public class SketchActivity extends ItemDrawer
   {
     mModel.doRefinement();
     mEdit   = edit;
-    mSymbol = SketchDef.SYMBOL_LINE;
+    mSymbol = Symbol.LINE;
     mCurrentLine = 0;
     mTouchMode = SketchDef.TOUCH_MOVE;
     setMode( SketchDef.MODE_EDIT );

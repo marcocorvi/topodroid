@@ -178,7 +178,7 @@ public class TD_DistoX
               default: // ack (1 byte)
                 // Log.v("TD_DistoX", "I/O ack recv " + String.format("0x%02x", b) );
                 // ack = ( b & 0x80 ) | 0x55;
-                mData.pollFirst(); // remove head of queue
+                mData.poll(); // pollFirst(); // remove head of queue
                 mIOWaitAck = false;
             }
           } catch ( IOException e ) { 
@@ -199,7 +199,7 @@ public class TD_DistoX
           if ( mIOWaitAck ) {
             try { Thread.sleep( 100 ); } catch ( InterruptedException e ) { }
           } else {
-            octet = mData.peekFirst(); // get head of queue
+            octet = mData.peek(); // peekFirst(); // get head of queue
             if ( octet != null ) {
               try {
                 // Log.v("TD_DistoX", "I/O write octet " + String.format("%02x %02x %02x %02x %02x %02x %02x %02x",
@@ -560,7 +560,7 @@ public class TD_DistoX
       time += 100;
     }
     if ( mData == null || mData.size() == 0 ) return false;
-    MemoryOctet tmp = (MemoryOctet)( mData.pollFirst() );
+    MemoryOctet tmp = (MemoryOctet)( mData.poll() ); // pollFirst() );
     for ( int k=0; k<8; ++k ) octet[k] = tmp.data[k];
     return true;
   }

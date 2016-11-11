@@ -86,7 +86,7 @@ public class UserManualActivity extends Activity
     // get intent extra
     String page = null;
     Bundle extras = getIntent().getExtras();
-    if ( extras != null ) page = extras.getString( TopoDroidTag.TOPODROID_HELP_PAGE );
+    if ( extras != null ) page = extras.getString( TDTag.TOPODROID_HELP_PAGE );
     if ( page == null ) page = "manual00.htm";
 
     setContentView(R.layout.distox_manual_dialog);
@@ -178,7 +178,7 @@ public class UserManualActivity extends Activity
   //   intent.setClass( context, UserManualActivity.class );
   //   String page = context.getResources().getString( class_string );
   //   if ( page != null ) { 
-  //     intent.putExtra( TopoDroidTag.TOPODROID_HELP_PAGE, page );
+  //     intent.putExtra( TDTag.TOPODROID_HELP_PAGE, page );
   //   }
   //   context.startActivity( intent );
   // }
@@ -188,7 +188,7 @@ public class UserManualActivity extends Activity
     // if ( page == null ) return;
     Intent intent = new Intent( Intent.ACTION_VIEW );
     intent.setClass( context, UserManualActivity.class );
-    intent.putExtra( TopoDroidTag.TOPODROID_HELP_PAGE, page );
+    intent.putExtra( TDTag.TOPODROID_HELP_PAGE, page );
     context.startActivity( intent );
   }
 

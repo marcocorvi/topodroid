@@ -66,8 +66,6 @@ public class DeviceActivity extends Activity
                             , OnItemLongClickListener
                             // , RadioGroup.OnCheckedChangeListener
 {
-  private static final int REQUEST_DEVICE    = 1;
-
   private TopoDroidApp mApp;
 
   private TextView mTvAddress;
@@ -217,7 +215,7 @@ public class DeviceActivity extends Activity
 
     mDevice  = mApp.mDevice;
     // mAddress = mDevice.mAddress;
-    // mAddress = getIntent().getExtras().getString(   TopoDroidTag.TOPODROID_DEVICE_ADDR );
+    // mAddress = getIntent().getExtras().getString(   TDTag.TOPODROID_DEVICE_ADDR );
 
     setContentView(R.layout.device_activity);
     mTvAddress = (TextView) findViewById( R.id.device_address );
@@ -614,12 +612,12 @@ public class DeviceActivity extends Activity
     // Log.v("DistoX", "on Activity Result: req. " + request + " res. " + result );
     Bundle extras = (intent != null)? intent.getExtras() : null;
     switch ( request ) {
-      case REQUEST_DEVICE:
+      case TDRequest.REQUEST_DEVICE:
         if ( result == RESULT_OK ) {
-          String address = extras.getString( TopoDroidTag.TOPODROID_DEVICE_ACTION );
+          String address = extras.getString( TDTag.TOPODROID_DEVICE_ACTION );
           // TDLog.Log(TDLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
-            TDLog.Error( "onActivityResult REQUEST_DEVICE: null address");
+            TDLog.Error( "onActivityResult REQUEST DEVICE: null address");
           } else if ( mDevice == null || ! address.equals( mDevice.mAddress ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true );
             mApp.setDevice( address );
@@ -651,7 +649,7 @@ public class DeviceActivity extends Activity
         }
         updateList();
         break;
-      // case REQUEST_ENABLE_BT:
+      // case TDRequest.REQUEST_ENABLE_BT:
       //   if ( result == Activity.RESULT_OK ) {
       //     // nothing to do: scanBTDevices(); is called by menu CONNECT
       //   } else {
@@ -728,8 +726,8 @@ public class DeviceActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // SCAN
       Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
-      scanIntent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
-      startActivityForResult( scanIntent, REQUEST_DEVICE );
+      scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
+      startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
       Toast.makeText(this, R.string.wait_scan, Toast.LENGTH_LONG).show();
     } else if ( p++ == pos ) { // PAIR
       pairDevice();
@@ -815,7 +813,7 @@ public class DeviceActivity extends Activity
     int mustOpen = 0;
     mApp.setCalibFromName( name );
     Intent calibIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, CalibActivity.class );
-    calibIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
+    calibIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
     startActivity( calibIntent );
   }
 

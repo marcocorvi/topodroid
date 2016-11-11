@@ -19,17 +19,13 @@ public class ItemDrawer extends Activity
 {
   static final int POINT_MAX = 32678;
 
-  public static final int SYMBOL_POINT = 1;
-  public static final int SYMBOL_LINE  = 2;
-  public static final int SYMBOL_AREA  = 3;
-
   int mCurrentPoint;
   int mCurrentLine;
   int mCurrentArea;
   protected int mPointScale;
   protected int mLinePointStep = 1;
 
-  int mSymbol = SYMBOL_LINE; // kind of symbol being drawn
+  int mSymbol = Symbol.LINE; // kind of symbol being drawn
 
   // -----------------------------------------------------------
   static Symbol mRecentPoint[] = { null, null, null, null, null, null };
@@ -181,7 +177,7 @@ public class ItemDrawer extends Activity
 
     public void areaSelected( int k, boolean update_recent ) 
     {
-      mSymbol = SYMBOL_AREA;
+      mSymbol = Symbol.AREA;
       if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
         mCurrentArea = k;
       }
@@ -194,7 +190,7 @@ public class ItemDrawer extends Activity
 
     public void lineSelected( int k, boolean update_recent ) 
     {
-      mSymbol = SYMBOL_LINE;
+      mSymbol = Symbol.LINE;
       if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mSymbolNr ) {
         mCurrentLine = k;
       }
@@ -208,7 +204,7 @@ public class ItemDrawer extends Activity
 
     public void pointSelected( int p, boolean update_recent )
     {
-      mSymbol = SYMBOL_POINT;
+      mSymbol = Symbol.POINT;
       if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mSymbolNr ) {
         mCurrentPoint = p;
       }

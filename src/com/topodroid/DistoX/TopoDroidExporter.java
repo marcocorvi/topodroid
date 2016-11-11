@@ -118,6 +118,8 @@ class TopoDroidExporter
     if ( sketch != null && sketch.getName() != null ) {
       branch = sketch.getName();
     }
+
+    // STATIONS_PREFIX
     // if ( TDSetting.mExportStationsPrefix ) {
     //   if ( branch.length() > 0 ) {
     //     prefix = cave + "-" + branch + "-";
@@ -1618,6 +1620,15 @@ class TopoDroidExporter
     pw.format( "\r\n" );
   }
 
+  static private void writeDatFromTo( PrintWriter pw, String prefix, String from, String to )
+  {
+    if ( TDSetting.mExportStationsPrefix ) {
+      pw.format("%s-%s %s-%s ", prefix, from, prefix, to );
+    } else {
+      pw.format("%s %s ", from, to );
+    }
+  }
+
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     // Log.v("DistoX", "export as compass: " + filename );
@@ -1683,7 +1694,7 @@ class TopoDroidExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
+              writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
               duplicate = false;
               ref_item = null; 
@@ -1693,7 +1704,7 @@ class TopoDroidExporter
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
-              pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
+              writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
               duplicate = false;
               ref_item = null; 
@@ -1701,7 +1712,7 @@ class TopoDroidExporter
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
+              writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
             }
             ref_item = item;
@@ -1712,7 +1723,7 @@ class TopoDroidExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         lrud = computeLRUD( ref_item, list, true );
-        pw.format("%s-%s %s-%s ", info.name, ref_item.mFrom, info.name, ref_item.mTo );
+        writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
         printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
       }
       pw.format( "\f\r\n" );

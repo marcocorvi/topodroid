@@ -554,18 +554,18 @@ public class DrawingActivity extends ItemDrawer
     String s1 = mApp.getConnectionStateTitleStr();
     Resources res = getResources();
     if ( mMode == MODE_DRAW ) { 
-      if ( mSymbol == SYMBOL_POINT ) {
+      if ( mSymbol == Symbol.POINT ) {
         setTitle( s1 + String.format( res.getString(R.string.title_draw_point), 
                                  DrawingBrushPaths.mPointLib.getSymbolName(mCurrentPoint) ) );
-      } else if ( mSymbol == SYMBOL_LINE ) {
+      } else if ( mSymbol == Symbol.LINE ) {
         setTitle( s1 + String.format( res.getString(R.string.title_draw_line),
                                  DrawingBrushPaths.mLineLib.getSymbolName(mCurrentLine) ) );
-      } else  {  // if ( mSymbol == SYMBOL_LINE ) 
+      } else  {  // if ( mSymbol == Symbol.LINE ) 
         setTitle( s1 + String.format( res.getString(R.string.title_draw_area),
                                  DrawingBrushPaths.mAreaLib.getSymbolName(mCurrentArea) ) );
       }
-      // boolean visible = ( mSymbol == SYMBOL_LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
-      boolean visible = ( mSymbol == SYMBOL_LINE );
+      // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
+      boolean visible = ( mSymbol == Symbol.LINE );
       mButton2[ BTN_CONTINUE ].setVisibility( visible? View.VISIBLE : View.GONE );
     } else if ( mMode == MODE_MOVE ) {
       setTitle( s1 + res.getString( R.string.title_move ) );
@@ -929,7 +929,7 @@ public class DrawingActivity extends ItemDrawer
   private void setButtonContinue( int continue_line )
   {
     mContinueLine = continue_line;
-    if ( mSymbol == SYMBOL_LINE /* && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex */ ) {
+    if ( mSymbol == Symbol.LINE /* && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex */ ) {
       mButton2[ BTN_CONTINUE ].setVisibility( View.VISIBLE );
       switch ( mContinueLine ) {
         case CONT_NO:
@@ -1224,23 +1224,23 @@ public class DrawingActivity extends ItemDrawer
     // mBezierInterpolator = new BezierInterpolator( );
 
     Bundle extras = getIntent().getExtras();
-    mSid   = extras.getLong( TopoDroidTag.TOPODROID_SURVEY_ID );
+    mSid   = extras.getLong( TDTag.TOPODROID_SURVEY_ID );
     // mDecl = mData.getSurveyDeclination( mSid );
     mDecl = 0; // FIXME do not correct declination in sketches
 
-    mName1 = extras.getString( TopoDroidTag.TOPODROID_PLOT_NAME );
-    mName2 = extras.getString( TopoDroidTag.TOPODROID_PLOT_NAME2 );
+    mName1 = extras.getString( TDTag.TOPODROID_PLOT_NAME );
+    mName2 = extras.getString( TDTag.TOPODROID_PLOT_NAME2 );
     mFullName1 = mApp.mySurvey + "-" + mName1;
     mFullName2 = mApp.mySurvey + "-" + mName2;
     mFullName3 = null;
-    mType = extras.getLong( TopoDroidTag.TOPODROID_PLOT_TYPE );
+    mType = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
 
     mName    = (mType == PlotInfo.PLOT_PLAN)? mName1 : mName2;
-    mFrom    = extras.getString( TopoDroidTag.TOPODROID_PLOT_FROM );
-    mTo      = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );
-    mAzimuth = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
-    mClino   = extras.getFloat( TopoDroidTag.TOPODROID_PLOT_CLINO );
-    mMoveTo  = extras.getString( TopoDroidTag.TOPODROID_PLOT_MOVE_TO );
+    mFrom    = extras.getString( TDTag.TOPODROID_PLOT_FROM );
+    mTo      = extras.getString( TDTag.TOPODROID_PLOT_TO );
+    mAzimuth = extras.getFloat( TDTag.TOPODROID_PLOT_AZIMUTH );
+    mClino   = extras.getFloat( TDTag.TOPODROID_PLOT_CLINO );
+    mMoveTo  = extras.getString( TDTag.TOPODROID_PLOT_MOVE_TO );
     if ( mMoveTo.length() == 0 ) mMoveTo = null;
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
@@ -1248,14 +1248,14 @@ public class DrawingActivity extends ItemDrawer
     mModified     = false;
 
     // if ( PlotInfo.isSection( mType ) ) { 
-    //   mTo      = extras.getString( TopoDroidTag.TOPODROID_PLOT_TO );  // to station ( null for X-section)
-    //   mAzimuth = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
-    //   mClino   = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_CLINO );
+    //   mTo      = extras.getString( TDTag.TOPODROID_PLOT_TO );  // to station ( null for X-section)
+    //   mAzimuth = (float)extras.getLong( TDTag.TOPODROID_PLOT_AZIMUTH );
+    //   mClino   = (float)extras.getLong( TDTag.TOPODROID_PLOT_CLINO );
     //   // Log.v("DistoX", "X-Section " + mFrom + "-" + mTo + " azimuth " + mAzimuth + " clino " + mClino  );
     // } else if ( PlotInfo.isXSection( mType ) ) {
     //   mTo = null;
-    //   mAzimuth = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_AZIMUTH );
-    //   mClino   = (float)extras.getLong( TopoDroidTag.TOPODROID_PLOT_CLINO );
+    //   mAzimuth = (float)extras.getLong( TDTag.TOPODROID_PLOT_AZIMUTH );
+    //   mClino   = (float)extras.getLong( TDTag.TOPODROID_PLOT_CLINO );
     // }
 
     // TDLog.TimeEnd( "on create" );
@@ -1960,7 +1960,7 @@ public class DrawingActivity extends ItemDrawer
         mTouchMode = MODE_MOVE;
         id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
         // int idx = rawEvent.findPointerIndex( id );
-        if ( mSymbol != SYMBOL_POINT ) {
+        if ( mSymbol != Symbol.POINT ) {
           action = MotionEvent.ACTION_DOWN; // force next case
         }
         /* fall through */
@@ -1997,18 +1997,18 @@ public class DrawingActivity extends ItemDrawer
         if ( mMode == MODE_DRAW ) {
           // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
           mPointCnt = 0;
-          if ( mSymbol == SYMBOL_LINE ) {
+          if ( mSymbol == Symbol.LINE ) {
             mCurrentLinePath = new DrawingLinePath( mCurrentLine );
             mCurrentLinePath.addStartPoint( x_scene, y_scene );
             mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
-          } else if ( mSymbol == SYMBOL_AREA ) {
+          } else if ( mSymbol == Symbol.AREA ) {
             // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
             mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
               mName+"-a", TDSetting.mAreaBorder );
             mCurrentAreaPath.addStartPoint( x_scene, y_scene );
             // Log.v("DistoX", "start area start " + x_scene + " " + y_scene );
             mCurrentBrush.mouseDown( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
-          } else { // SYMBOL_POINT
+          } else { // Symbol.POINT
             // mSaveX = x_canvas; // FIXME-000
             // mSaveY = y_canvas;
           }
@@ -2066,7 +2066,7 @@ public class DrawingActivity extends ItemDrawer
           // mSaveX = x_canvas; 
           // mSaveY = y_canvas;
           if ( mMode == MODE_DRAW ) {
-            if ( mSymbol == SYMBOL_LINE ) {
+            if ( mSymbol == Symbol.LINE ) {
               if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
                 if ( ++mPointCnt % mLinePointStep == 0 ) {
                   mCurrentLinePath.addPoint( x_scene, y_scene );
@@ -2075,7 +2075,7 @@ public class DrawingActivity extends ItemDrawer
               } else {
                 save = false;
               }
-            } else if ( mSymbol == SYMBOL_AREA ) {
+            } else if ( mSymbol == Symbol.AREA ) {
               if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
                 if ( ++mPointCnt % mLinePointStep == 0 ) {
                   mCurrentAreaPath.addPoint( x_scene, y_scene );
@@ -2085,7 +2085,7 @@ public class DrawingActivity extends ItemDrawer
               } else {
                 save = false;
               }
-            } else if ( mSymbol == SYMBOL_POINT ) {
+            } else if ( mSymbol == Symbol.POINT ) {
               // if ( ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2 ) {
               //   pointerDown = 0;
               // }
@@ -2153,17 +2153,17 @@ public class DrawingActivity extends ItemDrawer
           float x_shift = x_canvas - mSaveX; // compute shift
           float y_shift = y_canvas - mSaveY;
           if ( mMode == MODE_DRAW ) {
-            if ( mSymbol == SYMBOL_LINE || mSymbol == SYMBOL_AREA ) {
+            if ( mSymbol == Symbol.LINE || mSymbol == Symbol.AREA ) {
 
               mCurrentBrush.mouseUp( mDrawingSurface.previewPath.mPath, x_canvas, y_canvas );
               mDrawingSurface.previewPath.mPath = new Path();
 
-              if ( mSymbol == SYMBOL_LINE ) {
+              if ( mSymbol == Symbol.LINE ) {
                 if (    ( x_shift*x_shift + y_shift*y_shift ) > TDSetting.mLineSegment2
                      || ( mPointCnt % mLinePointStep ) > 0 ) {
                   mCurrentLinePath.addPoint( x_scene, y_scene );
                 }
-              } else if ( mSymbol == SYMBOL_AREA ) {
+              } else if ( mSymbol == Symbol.AREA ) {
                 // Log.v("DistoX",
                 //       "DX " + (x_scene - mCurrentAreaPath.mFirst.mX) + " DY " + (y_scene - mCurrentAreaPath.mFirst.mY ) );
                 if (    PlotInfo.isVertical( mType )
@@ -2197,19 +2197,19 @@ public class DrawingActivity extends ItemDrawer
               }
               
               if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
-                if ( ! ( mSymbol == SYMBOL_LINE && mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) 
+                if ( ! ( mSymbol == Symbol.LINE && mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) 
                      && TDSetting.mLineStyle == TDSetting.LINE_STYLE_BEZIER
-                     && ( mSymbol == SYMBOL_AREA || ! DrawingBrushPaths.mLineLib.isStyleStraight( mCurrentLinePath.mLineType ) )
+                     && ( mSymbol == Symbol.AREA || ! DrawingBrushPaths.mLineLib.isStyleStraight( mCurrentLinePath.mLineType ) )
                    ) {
-                  int nPts = (mSymbol == SYMBOL_LINE )? mCurrentLinePath.size() : mCurrentAreaPath.size() ;
+                  int nPts = (mSymbol == Symbol.LINE )? mCurrentLinePath.size() : mCurrentAreaPath.size() ;
                   if ( nPts > 1 ) {
                     ArrayList< BezierPoint > pts = new ArrayList< BezierPoint >(); // [ nPts ];
                     // ArrayList< LinePoint > lp = 
-                    //   (mSymbol == SYMBOL_LINE )? mCurrentLinePath.mPoints : mCurrentAreaPath.mPoints ;
+                    //   (mSymbol == Symbol.LINE )? mCurrentLinePath.mPoints : mCurrentAreaPath.mPoints ;
                     // for (int k=0; k<nPts; ++k ) {
                     //   pts.add( new BezierPoint( lp.get(k).mX, lp.get(k).mY ) );
                     // }
-                    LinePoint lp = (mSymbol == SYMBOL_LINE )? mCurrentLinePath.mFirst : mCurrentAreaPath.mFirst;
+                    LinePoint lp = (mSymbol == Symbol.LINE )? mCurrentLinePath.mFirst : mCurrentAreaPath.mFirst;
                     for ( ; lp != null; lp = lp.mNext ) {
                       pts.add( new BezierPoint( lp.mX, lp.mY ) );
                     }
@@ -2221,7 +2221,7 @@ public class DrawingActivity extends ItemDrawer
                     if ( k0 > 0 ) {
                       BezierCurve c = curves.get(0);
                       BezierPoint p0 = c.getPoint(0);
-                      if ( mSymbol == SYMBOL_LINE ) {
+                      if ( mSymbol == Symbol.LINE ) {
                         DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine );
                         lp1.addStartPoint( p0.mX, p0.mY );
                         for (int k=0; k<k0; ++k) {
@@ -2253,7 +2253,7 @@ public class DrawingActivity extends ItemDrawer
                           lp1.computeUnitNormal();
                           mDrawingSurface.addDrawingPath( lp1 );
                         }
-                      } else { //  mSymbol == SYMBOL_AREA
+                      } else { //  mSymbol == Symbol.AREA
                         DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
                           mName+"-a", TDSetting.mAreaBorder ); 
                         ap.addStartPoint( p0.mX, p0.mY );
@@ -2271,7 +2271,7 @@ public class DrawingActivity extends ItemDrawer
                     }
                   }
                 } else {
-                  if ( mSymbol == SYMBOL_LINE ) {
+                  if ( mSymbol == Symbol.LINE ) {
                     // N.B.
                     // section direction is in the direction of the tick
                     // and splay reference are taken from the station the section looks towards
@@ -2399,7 +2399,7 @@ public class DrawingActivity extends ItemDrawer
                         mDrawingSurface.addDrawingPath( mCurrentLinePath );
                       }
                     }
-                  } else { //  mSymbol == SYMBOL_AREA
+                  } else { //  mSymbol == Symbol.AREA
                     mCurrentAreaPath.close();
                     mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                     mDrawingSurface.addDrawingPath( mCurrentAreaPath );
@@ -2409,7 +2409,7 @@ public class DrawingActivity extends ItemDrawer
                 // redoBtn.setEnabled(false);
                 // canRedo = false;
               }
-              // if ( mSymbol == SYMBOL_LINE ) {
+              // if ( mSymbol == Symbol.LINE ) {
               //   // Log.v( TopoDroidApp.TAG, "line type " + mCurrentLinePath.mLineType );
               //   if ( mCurrentLinePath.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
               //     // keep only first and last point
@@ -2417,7 +2417,7 @@ public class DrawingActivity extends ItemDrawer
               //     mDrawingSurface.addDrawingPath( mCurrentLinePath );
               //   }
               // }
-            } else { // SYMBOL_POINT
+            } else { // Symbol.POINT
               if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
                                      && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
                 if ( DrawingBrushPaths.mPointLib.pointHasText(mCurrentPoint) ) {
@@ -2616,13 +2616,13 @@ public class DrawingActivity extends ItemDrawer
       if ( plot != null ) {
         // Log.v("DistoX", "invoke X section " + plot.name + " <" + plot.start + "> " + plot.azimuth + " " + plot.clino );
         // Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingActivity.class );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mApp.mSID );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME, plot.name );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, plot.type );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, plot.start );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TO,   "" );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_AZIMUTH, plot.azimuth );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO,   plot.clino );
+        // drawIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, mApp.mSID );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME, plot.name );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TYPE, plot.type );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_FROM, plot.start );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TO,   "" );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_AZIMUTH, plot.azimuth );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_CLINO,   plot.clino );
         // startActivity( drawIntent );
 
         pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino );
@@ -3290,7 +3290,7 @@ public class DrawingActivity extends ItemDrawer
           new ItemPickerDialog(this, this, mType, mSymbol ).show();
         }
       } else if ( b == mButton2[k2++] ) { //  continueBtn
-        if ( mSymbol == SYMBOL_LINE && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+        if ( mSymbol == Symbol.LINE && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
           setButtonContinue( (mContinueLine+1) % CONT_MAX );
         }
 
@@ -3450,7 +3450,7 @@ public class DrawingActivity extends ItemDrawer
           Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
           intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
           intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
-          // startActivityForResult( intent, ShotActivity.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE );
+          // startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           Toast.makeText( this, R.string.no_capture_app, Toast.LENGTH_SHORT ).show();
@@ -3484,13 +3484,13 @@ public class DrawingActivity extends ItemDrawer
       }
       if ( pid >= 0 ) {
         // Intent drawIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DrawingActivity.class );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mApp.mSID );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_NAME, mSectionName );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, type );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, from );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_TO,   to );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_AZIMUTH, azimuth );
-        // drawIntent.putExtra( TopoDroidTag.TOPODROID_PLOT_CLINO, clino );
+        // drawIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, mApp.mSID );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_NAME, mSectionName );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TYPE, type );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_FROM, from );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_TO,   to );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_AZIMUTH, azimuth );
+        // drawIntent.putExtra( TDTag.TOPODROID_PLOT_CLINO, clino );
         // startActivity( drawIntent );
         pushInfo( type, mSectionName, from, to, azimuth, clino );
       }
@@ -3856,12 +3856,12 @@ public class DrawingActivity extends ItemDrawer
         } else {
           updateReference();
           Intent intent = new Intent( this, OverviewActivity.class );
-          intent.putExtra( TopoDroidTag.TOPODROID_SURVEY_ID, mSid );
-          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_FROM, mFrom );
-          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_ZOOM, mZoom );
-          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_TYPE, mType );
-          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_XOFF, mOffset.x );
-          intent.putExtra( TopoDroidTag.TOPODROID_PLOT_YOFF, mOffset.y );
+          intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
+          intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
+          intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
+          intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
+          intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
+          intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
           startActivity( intent );
         }
       } else if ( p++ == pos ) { // OPTIONS

@@ -63,7 +63,7 @@ class SymbolEnableDialog extends MyDialog
     super( context, R.string.SymbolEnableDialog );
     mParent  = parent;
     mApp     = app;
-    mType    = DrawingActivity.SYMBOL_LINE; // default symbols are lines
+    mType    = Symbol.LINE; // default symbols are lines
   }
 
   @Override
@@ -117,7 +117,7 @@ class SymbolEnableDialog extends MyDialog
       if ( point_lib == null ) return false;
       int np = point_lib.mSymbolNr;
       for ( int i=0; i<np; ++i ) {
-        mPointAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_POINT, i, point_lib.getSymbolByIndex( i ) ) );
+        mPointAdapter.add( new EnableSymbol( mParent, Symbol.POINT, i, point_lib.getSymbolByIndex( i ) ) );
       }
     }
 
@@ -125,7 +125,7 @@ class SymbolEnableDialog extends MyDialog
     if ( line_lib == null ) return false;
     int nl = line_lib.mSymbolNr;
     for ( int j=0; j<nl; ++j ) {
-      mLineAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_LINE, j, line_lib.getSymbolByIndex( j ) ) );
+      mLineAdapter.add( new EnableSymbol( mParent, Symbol.LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
 
     if ( TDSetting.mLevelOverBasic ) {
@@ -133,7 +133,7 @@ class SymbolEnableDialog extends MyDialog
       if ( area_lib == null ) return false;
       int na = area_lib.mSymbolNr;
       for ( int k=0; k<na; ++k ) {
-        mAreaAdapter.add( new EnableSymbol( mParent, DrawingActivity.SYMBOL_AREA, k, area_lib.getSymbolByIndex( k ) ) );
+        mAreaAdapter.add( new EnableSymbol( mParent, Symbol.AREA, k, area_lib.getSymbolByIndex( k ) ) );
       }
     }
 
@@ -145,7 +145,7 @@ class SymbolEnableDialog extends MyDialog
   {
     // Log.v( TopoDroidApp.TAG, "SymbolEnableDialog ... updateList type " + mType );
     switch ( mType ) {
-      case DrawingActivity.SYMBOL_POINT:
+      case Symbol.POINT:
         if ( TDSetting.mLevelOverBasic ) {
           mList.setAdapter( mPointAdapter );
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
@@ -153,13 +153,13 @@ class SymbolEnableDialog extends MyDialog
           mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
         }
         break;
-      case DrawingActivity.SYMBOL_LINE:
+      case Symbol.LINE:
         mList.setAdapter( mLineAdapter );
         mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
         mBTline.getBackground().setColorFilter( Color.parseColor( "#ccccff" ), PorterDuff.Mode.LIGHTEN );
         mBTarea.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
         break;
-      case DrawingActivity.SYMBOL_AREA:
+      case Symbol.AREA:
         if ( TDSetting.mLevelOverBasic ) {
           mList.setAdapter( mAreaAdapter );
           mBTpoint.getBackground().setColorFilter( Color.parseColor( "#cccccc" ), PorterDuff.Mode.DARKEN );
@@ -178,13 +178,13 @@ class SymbolEnableDialog extends MyDialog
     int type = -1;
     switch (view.getId()) {
       case R.id.symbol_point:
-        if ( TDSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_POINT;
+        if ( TDSetting.mLevelOverBasic ) type = Symbol.POINT;
         break;
       case R.id.symbol_line:
-        type = DrawingActivity.SYMBOL_LINE;
+        type = Symbol.LINE;
         break;
       case R.id.symbol_area:
-        if ( TDSetting.mLevelOverBasic ) type = DrawingActivity.SYMBOL_AREA;
+        if ( TDSetting.mLevelOverBasic ) type = Symbol.AREA;
         break;
       case R.id.symbol_reload:
         String old_version = mApp.mDData.getValue( "symbol_version" );

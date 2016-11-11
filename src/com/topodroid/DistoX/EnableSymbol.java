@@ -76,10 +76,10 @@ class EnableSymbol implements View.OnClickListener
     mSymbol = symbol;
     mEnabled = mSymbol.isEnabled();
 
-    if ( mType == DrawingActivity.SYMBOL_POINT ) {
+    if ( mType == Symbol.POINT ) {
       sx = 2.0f;
       sy = 2.0f;
-    } else if ( mType == DrawingActivity.SYMBOL_AREA ) {
+    } else if ( mType == Symbol.AREA ) {
       sx = 2.5f;
       sy = 1.7f;
     }

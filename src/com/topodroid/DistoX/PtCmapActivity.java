@@ -98,7 +98,7 @@ public class PtCmapActivity extends Activity
 
     mApp.setPtCmapPreference( cmap );
     Intent intent = new Intent();
-    intent.putExtra( TopoDroidTag.TOPODROID_CMAP, cmap );
+    intent.putExtra( TDTag.TOPODROID_CMAP, cmap );
     setResult( RESULT_OK, intent );
     return true;
   }

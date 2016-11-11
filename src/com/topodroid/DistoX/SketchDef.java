@@ -29,10 +29,6 @@ class SketchDef
     public final static int DISPLAY_ALL = 2;
     public final static int DISPLAY_MAX = 3;
 
-    public static final int SYMBOL_POINT = 1;
-    public static final int SYMBOL_LINE  = 2;
-    public static final int SYMBOL_AREA  = 3;
-
     public static final int MODE_MOVE    = 0;
     public static final int MODE_DRAW    = 1;
     public static final int MODE_EDIT    = 2;  // change the surface as a whole

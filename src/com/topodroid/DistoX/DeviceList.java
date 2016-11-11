@@ -63,7 +63,7 @@ public class DeviceList extends Activity
 
     // setTitleColor( 0x006d6df6 );
 
-    int command = getIntent().getExtras().getInt( TopoDroidTag.TOPODROID_DEVICE_ACTION );
+    int command = getIntent().getExtras().getInt( TDTag.TOPODROID_DEVICE_ACTION );
     // TDLog.Log( TDLog.LOG_BT, "command " + command );
     switch ( command )
     {
@@ -92,7 +92,7 @@ public class DeviceList extends Activity
       // Toast.makeText( mApp.getApplicationContext(), address, Toast.LENGTH_SHORT).show();
       TDLog.Log( TDLog.LOG_BT, "DeviceList item click Address " + address );
       Intent intent = new Intent();
-      intent.putExtra( TopoDroidTag.TOPODROID_DEVICE_ACTION, address );
+      intent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, address );
       setResult( RESULT_OK, intent );
     } else {
       setResult( RESULT_CANCELED );

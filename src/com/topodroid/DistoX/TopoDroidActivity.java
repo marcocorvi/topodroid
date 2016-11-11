@@ -102,8 +102,6 @@ public class TopoDroidActivity extends Activity
 
   private boolean onMenu; // whether menu is displaying
 
-  private static final int REQUEST_ENABLE_BT = 2;
-
   private LinearLayout mLayout;
   private ListView mList;
 
@@ -256,9 +254,9 @@ public class TopoDroidActivity extends Activity
   {
     mApp.setSurveyFromName( value, false ); // open survey activity: tell app to update survey name+id, no forward
     Intent surveyIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, SurveyActivity.class );
-    surveyIntent.putExtra( TopoDroidTag.TOPODROID_SURVEY, mustOpen );
-    // surveyIntent.putExtra( TopoDroidTag.TOPODROID_OLDSID, old_sid );
-    // surveyIntent.putExtra( TopoDroidTag.TOPODROID_OLDID,  old_id );
+    surveyIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen );
+    // surveyIntent.putExtra( TDTag.TOPODROID_OLDSID, old_sid );
+    // surveyIntent.putExtra( TDTag.TOPODROID_OLDID,  old_id );
     startActivity( surveyIntent );
   }
 
@@ -815,7 +813,7 @@ public class TopoDroidActivity extends Activity
       } else {
         if ( TDSetting.mCheckBT == 1 && ! mApp.mBTAdapter.isEnabled() ) {    
           Intent enableIntent = new Intent( BluetoothAdapter.ACTION_REQUEST_ENABLE );
-          startActivityForResult( enableIntent, REQUEST_ENABLE_BT );
+          startActivityForResult( enableIntent, TDRequest.REQUEST_ENABLE_BT );
         } else {
           // nothing to do: scanBTDEvices(); is called by menu CONNECT
         }
@@ -915,7 +913,7 @@ public class TopoDroidActivity extends Activity
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
-      case REQUEST_ENABLE_BT:
+      case TDRequest.REQUEST_ENABLE_BT:
         // mApp.resetLocale(); // apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
           // nothing to do: scanBTDEvices() is called by menu CONNECT

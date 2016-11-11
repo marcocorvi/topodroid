@@ -485,7 +485,7 @@ public class TopoDroidPreferences extends PreferenceActivity
     switch ( request ) {
       case REQUEST_CWD:
         if ( extras != null ) {
-          String cwd = extras.getString( TopoDroidTag.TOPODROID_CWD );
+          String cwd = extras.getString( TDTag.TOPODROID_CWD );
           mCwdPreference.setSummary( cwd );
           // Log.v("DistoX", "got CWD " + cwd );
         }
@@ -498,7 +498,7 @@ public class TopoDroidPreferences extends PreferenceActivity
         break;
       case REQUEST_PT_CMAP:
         if ( extras != null ) {
-          String cmap = extras.getString( TopoDroidTag.TOPODROID_CMAP );
+          String cmap = extras.getString( TDTag.TOPODROID_CMAP );
           // mPtCmapPreference.
         }
         break;

@@ -55,10 +55,10 @@ class ItemSymbol
     mSymbol = symbol;
     mUseText = use_text;
 
-    if ( mType == DrawingActivity.SYMBOL_POINT ) {
+    if ( mType == Symbol.POINT ) {
       sx *= 1.5f; // 2.0f;
       sy *= 1.5f; // 2.0f;
-    } else { // if ( mType == DrawingActivity.SYMBOL_AREA ) 
+    } else { // if ( mType == Symbol.AREA ) 
       sx *= 2.2f;
       sy *= 1.7f;
     }
@@ -91,7 +91,7 @@ class ItemSymbol
     }
 
     // FIXME
-    // if ( mType == DrawingActivity.SYMBOL_POINT ) {
+    // if ( mType == Symbol.POINT ) {
     //   SymbolPoint point = (SymbolPoint) mSymbol;
     //   if ( point.isOrientable() ) {
     //     Button btn = new Button( context );

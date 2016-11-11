@@ -64,8 +64,6 @@ public class PhotoActivity extends Activity
                            implements OnItemClickListener, ILister
 {
   private TopoDroidApp app;
-  // FIXME PHOTO
-  // private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
   private ListView mList;
   // private int mListPos = -1;

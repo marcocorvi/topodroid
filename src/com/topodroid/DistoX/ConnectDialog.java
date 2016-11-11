@@ -44,8 +44,6 @@ public class ConnectDialog extends MyDialog
                            implements View.OnClickListener
                            , OnItemClickListener
 {
-  private static final int REQUEST_DEVICE    = 1;
-
   private TextView mTVaddress;
 
   // private ArrayAdapter<String> mArrayAdapter;

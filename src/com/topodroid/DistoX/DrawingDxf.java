@@ -686,56 +686,71 @@ class DrawingDxf
           } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
             DrawingAreaPath area = (DrawingAreaPath) path;
             String layer = "A_" + DrawingBrushPaths.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
-            printString( pw5, 0, "HATCH" );    // entity type HATCH
-            // ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbHatch" );
-            // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
-            printString( pw5, 8, layer );      // layer (color BYLAYER)
+            if ( VERSION >= 13 ) {
+              printString( pw5, 0, "HATCH" );    // entity type HATCH
+              // ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbHatch" );
+              // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
+              printString( pw5, 8, layer );      // layer (color BYLAYER)
 
-            // printXYZ( pw5, 0f, 0f, 0f );
-            printFloat( pw5, 210, 0f ); // extrusion direction
-            printFloat( pw5, 220, 0f );
-            printFloat( pw5, 230, 1f );
-            printInt( pw5, 70, 1 );            // solid fill
-            printInt( pw5, 71, 1 );            // associative
-            printInt( pw5, 91, 1 );            // nr. boundary paths: 1
-            printInt( pw5, 92, 3 );            // flag: external (bit-0) polyline (bit-1)
-            printInt( pw5, 93, area.size() );  // nr. of edges /  vertices
-            printInt( pw5, 72, 0 );            // edge type (0: default)
-            printInt( pw5, 73, 1 );            // is-closed flag
-            for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
-              printXY( pw5, p.mX * scale, -p.mY * scale );
+              // printXYZ( pw5, 0f, 0f, 0f );
+              printFloat( pw5, 210, 0f ); // extrusion direction
+              printFloat( pw5, 220, 0f );
+              printFloat( pw5, 230, 1f );
+              printInt( pw5, 70, 1 );            // solid fill
+              printInt( pw5, 71, 1 );            // associative
+              printInt( pw5, 91, 1 );            // nr. boundary paths: 1
+              printInt( pw5, 92, 3 );            // flag: external (bit-0) polyline (bit-1)
+              printInt( pw5, 93, area.size() );  // nr. of edges /  vertices
+              printInt( pw5, 72, 0 );            // edge type (0: default)
+              printInt( pw5, 73, 1 );            // is-closed flag
+              for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
+                printXY( pw5, p.mX * scale, -p.mY * scale );
+              }
+
+              // printInt( pw5, 97, 0 );            // nr. source boundary objects
+
+              // printInt( pw5, 75, 1 );            // hatch style (normal)
+              // printInt( pw5, 76, 1 );
+              // printFloat( pw5, 52, 1.5708f );    // hatch pattern angle
+	      // printFloat( pw5, 41, 3f );         // hatch pattern scale
+              // printInt( pw5, 77, 0 );            // hatch pattern double flag (0: not double)
+              // printInt( pw5, 78, 1 );            // nr. pattern lines
+
+              // printFloat( pw5, 53, 1.5708f );    // pattern line angle
+              // printFloat( pw5, 43, 0f );         // pattern base point
+              // printFloat( pw5, 44, 0f );
+              // printFloat( pw5, 45, 1f );         // pattern line offset
+              // printFloat( pw5, 46, 1f );         
+              // printInt( pw5, 79, 0 );            // nr. dash length items
+              // // printFloat( pw5, 49, 3f );         // dash length (repeated nr. times)
+
+              // printFloat( pw5, 47, 1f );         // pixel size
+              // printInt( pw5, 98, 2 );            // nr. seed points
+              // printXYZ( pw5, 0f, 0f, 0f );
+              // printXYZ( pw5, 0f, 0f, 0f );
+              // printInt( pw5, 451, 0 );
+              // printFloat( pw5, 460, 0f );
+              // printFloat( pw5, 461, 0f );
+              // printInt( pw5, 452, 1 );
+              // printFloat( pw5, 462, 1f );
+              // printInt( pw5, 453, 2 );
+              // printFloat( pw5, 463, 0f );
+              // printFloat( pw5, 463, 1f );
+              // printString( pw5, 470, "LINEAR" );    
+            } else {
+              printString( pw5, 0, "POLYLINE" );
+              ++handle; printAcDb( pw5, handle, "AcDbEntity", "AcDbPolyline" );
+              printString( pw5, 8, layer );
+              // printInt(  pw5, 39, 1 );         // line thickness
+              printInt( pw5, 66, 1 ); // group 1
+              printInt( pw5, 70, 9 ); // polyline flag 8 = 3D polyline, 1 = closed 
+              for (LinePoint p = area.mFirst; p != null; p = p.mNext ) { 
+                printString( pw5, 0, "VERTEX" );
+                printString( pw5, 8, layer );
+                printXYZ( pw5, p.mX * scale, -p.mY * scale, 0.0f );
+              }
             }
-
-            // printInt( pw5, 97, 0 );            // nr. source boundary objects
-
-            // printInt( pw5, 75, 1 );            // hatch style (normal)
-            // printInt( pw5, 76, 1 );
-            // printFloat( pw5, 52, 1.5708f );    // hatch pattern angle
-	    // printFloat( pw5, 41, 3f );         // hatch pattern scale
-            // printInt( pw5, 77, 0 );            // hatch pattern double flag (0: not double)
-            // printInt( pw5, 78, 1 );            // nr. pattern lines
-
-            // printFloat( pw5, 53, 1.5708f );    // pattern line angle
-            // printFloat( pw5, 43, 0f );         // pattern base point
-            // printFloat( pw5, 44, 0f );
-            // printFloat( pw5, 45, 1f );         // pattern line offset
-            // printFloat( pw5, 46, 1f );         
-            // printInt( pw5, 79, 0 );            // nr. dash length items
-            // // printFloat( pw5, 49, 3f );         // dash length (repeated nr. times)
-
-            // printFloat( pw5, 47, 1f );         // pixel size
-            // printInt( pw5, 98, 2 );            // nr. seed points
-            // printXYZ( pw5, 0f, 0f, 0f );
-            // printXYZ( pw5, 0f, 0f, 0f );
-            // printInt( pw5, 451, 0 );
-            // printFloat( pw5, 460, 0f );
-            // printFloat( pw5, 461, 0f );
-            // printInt( pw5, 452, 1 );
-            // printFloat( pw5, 462, 1f );
-            // printInt( pw5, 453, 2 );
-            // printFloat( pw5, 463, 0f );
-            // printFloat( pw5, 463, 1f );
-            // printString( pw5, 470, "LINEAR" );    
+            pw5.printf("  0\nSEQEND\n");
           } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
