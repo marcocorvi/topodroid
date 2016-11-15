@@ -696,11 +696,11 @@
 
   <string name="pref_cat_survey">Настройки топосъёмки </string>
   <string name="pref_cat_drawing">Настройки Рисования </string>
-  <string name="pref_cat_import_export">Импорт-Экспорт</string>
+  <string name="pref_cat_import_export">ИМПОРТ-ЭКСПОРТ</string>
   <string name="pref_cat_calib">Настройки Калибровки</string>
   <string name="pref_cat_device">Настройки Устройства</string>
   <!-- UNUSED string name="pref_cat_sketch">Настройки Абриса</string -->
-  <string name="pref_cat_log">настройки журнала</string>
+  <string name="pref_cat_log">Настройки журнала</string>
 
   <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
   <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
@@ -733,7 +733,7 @@
   <string name="pref_ortho_lrud_title">Угол луча для ЛПВН</string>
   <string name="pref_ortho_lrud_summary">Минимальный угол между бок. лучом и напр. на пикет для признания ЛПВН</string>
   <string name="pref_ortho_lrud_message">ЛПВН мин. угол между пикетом и бок. лучом</string>
-  <string name="pref_survex_eol_title">Прерывание линии Survex/Topo</string>
+  <string name="pref_survex_eol_title">Окончание строки для Survex/Topo</string>
   <string name="pref_survex_eol_summary">Формат окончания строки Survex/Topo</string>
   <string name="pref_survex_splay_title">Конечный пикет луча Survex</string>
   <string name="pref_survex_splay_summary">Добавить пикет ДО к бок. замерам в Survex</string>
@@ -847,7 +847,7 @@
   <string name="pref_hthr_title">Порог угла горизонтального сечения</string>
   <string name="pref_hthr_summary">ППорог угла горизонтального сечения</string>
   <string name="pref_hthr_message">Угол при превышении которого сечение становится горизонтальным</string>
-  <string name="pref_bitmap_scale_title">масштаб PNG</string>
+  <string name="pref_bitmap_scale_title">Масштаб PNG</string>
   <string name="pref_bitmap_scale_summary">Масштабный коэффициент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_scale_message">Масштабный коэффициент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string>
@@ -858,6 +858,8 @@
   <string name="pref_dxf_scale_title">Масштаб абриса в DXF</string>
   <string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string>
   <string name="pref_dxf_scale_message">Масштабирующий фактор при экспорте абриса в DXF</string>
+  <string name="pref_dxf_blocks_title">Точки бок. замеров в DXF</string>
+  <string name="pref_dxf_blocks_summary">Точки окончаний боковых замеров в экскорте в DXF</string>
   <string name="pref_thumbnail_title">Размер миниатюры</string>
   <string name="pref_thumbnail_summary">Размер картинки миниатюры</string>
   <string name="pref_thumbnail_message">Размер картинки миниатюры</string>
