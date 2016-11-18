@@ -50,7 +50,7 @@
 
     <string name="calibration_title">Maßband Kalibrierung</string>
     <string name="calibration_length">Maßband-Länge bis Anfang der Skala</string>
-    <string name="calibration_azimuth">Kompass</string>
+    <string name="calibration_azimuth">Kompass/Azimut</string>
     <string name="calibration_clino">Neigungsmesser</string>
 
 <!-- CALIBRATION -->
@@ -424,7 +424,7 @@
     <string name="stat_length">Länge %1$.1f %2$s</string>
     <string name="stat_loop">Kreisschlüsse %1$d</string>
     <string name="stat_origin">Ursprungs-Messpunkt: %1$s</string>
-    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
+    <string name="stat_azimuth">Profilprojektions-Azimut: %1$.1f</string>
     <string name="stat_shot">Messungen  %1$d,   Doppelte %2$d,   Oberfläche %3$d</string>
     <string name="stat_splay">Hilfszüge %1$d</string>
     <string name="stat_station">Messpunkte %1$d</string>
@@ -773,8 +773,8 @@
   <!-- UNUSED string name="pref_size_buttons_message">Eingabe der Größe der Action-bar Buttons [px]</string -->
   <string name="pref_leg_shots_title">Min. Messungen für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
-  <string name="pref_station_prefix_title">Export Messpunkt Prefix</string>
-  <string name="pref_station_prefix_summary">Export cSurvey Messpunkt Prefix</string>
+  <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
+  <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD in Export</string>
   <string name="pref_ortho_lrud_summary">Minimaler Hilfszug-Winkel für LRUD</string>
   <string name="pref_ortho_lrud_message">Minimaler Hilfszug-Winkel für LRUD</string>

@@ -79,7 +79,7 @@
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
     <string name="linear">линейный</string>
-    <string name="non_linear">не-линейный</string>
+    <string name="non_linear">нелинейный</string>
    
     <string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string>
     <string name="device_address">Адрес %1$s</string>
@@ -696,11 +696,11 @@
 
   <string name="pref_cat_survey">Настройки топосъёмки </string>
   <string name="pref_cat_drawing">Настройки Рисования </string>
-  <string name="pref_cat_import_export">Импорт-Экспорт</string>
+  <string name="pref_cat_import_export">ИМПОРТ-ЭКСПОРТ</string>
   <string name="pref_cat_calib">Настройки Калибровки</string>
   <string name="pref_cat_device">Настройки Устройства</string>
   <!-- UNUSED string name="pref_cat_sketch">Настройки Абриса</string -->
-  <string name="pref_cat_log">настройки журнала</string>
+  <string name="pref_cat_log">Настройки журнала</string>
 
   <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
   <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
@@ -730,10 +730,10 @@
   <string name="pref_leg_shots_summary">Минимальное кол-во повторяющихся замеров на отрезке</string>
   <string name="pref_station_prefix_title">Экспортировать префиксы пикетов</string>
   <string name="pref_station_prefix_summary">Экспортировать префиксы пикетов для cSurvey</string>
-  <string name="pref_ortho_lrud_title">Угол луча для ЛПВН</string>
-  <string name="pref_ortho_lrud_summary">Минимальный угол между бок. лучом и напр. на пикет для признания ЛПВН</string>
-  <string name="pref_ortho_lrud_message">ЛПВН мин. угол между пикетом и бок. лучом</string>
-  <string name="pref_survex_eol_title">Прерывание линии Survex/Topo</string>
+  <string name="pref_ortho_lrud_title">Мин. угол бок. замера для ЛПВН</string>
+  <string name="pref_ortho_lrud_summary">Минимальный угол между бок. замером и вектором для расчета ЛПВН при экспорте</string>
+  <string name="pref_ortho_lrud_message">Мин. угол между бок. замером и вектором для расчета ЛПВН </string>
+  <string name="pref_survex_eol_title">Окончание строки для Survex/Topo</string>
   <string name="pref_survex_eol_summary">Формат окончания строки Survex/Topo</string>
   <string name="pref_survex_splay_title">Конечный пикет луча Survex</string>
   <string name="pref_survex_splay_summary">Добавить пикет ДО к бок. замерам в Survex</string>
@@ -768,9 +768,9 @@
   <string name="pref_socket_delay_message">Задержка подключения для сопряжении [0.1 сек]</string>
   <string name="pref_z6_workaround_title">Решение для Z6</string>
   <string name="pref_z6_workaround_summary">Решение для загрузки данных с телефонов Z6</string>
-  <string name="pref_crs_title">CRS система координат </string>
-  <string name="pref_crs_summary">CRS имя</string>
-  <string name="pref_crs_message">Введите имя CRS как в Proj4</string>
+  <string name="pref_crs_title">CRS - система координат </string>
+  <string name="pref_crs_summary">CRS название</string>
+  <string name="pref_crs_message">Введите название CRS как в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
   <string name="pref_plot_screen_title">Настройки экрана абрисов</string>
@@ -814,7 +814,7 @@
   <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
   <string name="pref_dip_thr_message">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
 
-  <string name="pref_leg_title">Допустимое расхождение измерений отрезков</string>
+  <string name="pref_leg_title">Допустимое расхождение повторных измерений</string>
   <string name="pref_leg_summary">Допустимое расхождение в повторных измерениях между пикетами</string>
   <string name="pref_leg_message">Допустимое расхождение в повторных измерениях между пикетами</string>
   <string name="pref_backsight_title">Обратный замер</string>
@@ -830,8 +830,8 @@
   <string name="pref_team_summary">Группа съёмки</string>
   <string name="pref_team_message">Группа съёмки по умолчанию</string>
   <string name="pref_ethr_title">Порог вертикальности бокового замера</string>
-  <string name="pref_ethr_summary">Угловой диапазон верт. проэкции (бок. замер)</string>
-  <string name="pref_ethr_message">Угол около 90 для проэкции бок. замера на верт. плоскость [град]</string>
+  <string name="pref_ethr_summary">Угловой диапазон верт. проекции (бок. замер)</string>
+  <string name="pref_ethr_message">Угол около 90 для проекции бок. замера на верт. плоскость [град]</string>
   <string name="pref_vthr_title">Порог вертикальности для отрезков</string>
   <string name="pref_vthr_summary">Угловой. порог ЛПВН/ЗВСЮ</string>
   <string name="pref_vthr_message">Допустимый угол отрезка для перехода от ЛПВН к ЗВСЮ</string>
@@ -847,7 +847,7 @@
   <string name="pref_hthr_title">Порог угла горизонтального сечения</string>
   <string name="pref_hthr_summary">ППорог угла горизонтального сечения</string>
   <string name="pref_hthr_message">Угол при превышении которого сечение становится горизонтальным</string>
-  <string name="pref_bitmap_scale_title">масштаб PNG</string>
+  <string name="pref_bitmap_scale_title">Масштаб PNG</string>
   <string name="pref_bitmap_scale_summary">Масштабный коэффициент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_scale_message">Масштабный коэффициент абриса при экспорте в PNG</string>
   <string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string>
@@ -858,6 +858,8 @@
   <string name="pref_dxf_scale_title">Масштаб абриса в DXF</string>
   <string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string>
   <string name="pref_dxf_scale_message">Масштабирующий фактор при экспорте абриса в DXF</string>
+  <string name="pref_dxf_blocks_title">Точки бок. замеров в DXF</string>
+  <string name="pref_dxf_blocks_summary">Точки окончаний боковых замеров в экскорте в DXF</string>
   <string name="pref_thumbnail_title">Размер миниатюры</string>
   <string name="pref_thumbnail_summary">Размер картинки миниатюры</string>
   <string name="pref_thumbnail_message">Размер картинки миниатюры</string>
@@ -870,7 +872,7 @@
   <string name="pref_drawing_unit_title">Размер символов точек</string>
   <string name="pref_drawing_unit_summary">Размер символов точек</string>
   <string name="pref_drawing_unit_message">Базовый размер символов точек [требуется перезапуск программы]</string>
-  <string name="pref_unscaled_points_title">Не-увеличеваемые значки точек</string>
+  <string name="pref_unscaled_points_title">Немасштабируемые значки точек</string>
   <string name="pref_unscaled_points_summary">Не масштабировать значки точек</string>
   <string name="pref_segment_title">Шаг точек в линии</string>
   <!-- UNUSED string name="pref_segment_summary">Шаг точек на линии</string -->
@@ -907,7 +909,7 @@
   <string name="pref_dot_radius_title">Радиус зеленых точек</string>
   <!-- UNUSED string name="pref_dot_radius_summary">Размер зеленых точек</string -->
   <string name="pref_dot_radius_message">Размер зеленых точек</string>
-  <string name="pref_line_thickness_title">Толщина линии</string>
+  <string name="pref_line_thickness_title">Толщина линий</string>
   <string name="pref_line_thickness_summary">Толщина линий</string>
   <string name="pref_line_thickness_message">Толщина линий</string>
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
@@ -949,7 +951,7 @@
   <string name="pref_recent_nr_title">Кол-во. недавних инструментов</string>
   <string name="pref_recent_nr_summary">Кол-во элементов в списке недавно использованных инструментов</string>
   <string name="pref_area_border_title">Прозрачность границ области</string> 
-  <string name="pref_area_border_summary">Прозрачность границ области по умолчанию</string>
+  <string name="pref_area_border_summary">Рисовать границы областей прозрачными</string>
   <string name="pref_auto_section_pt_title">Точки сечений</string>
   <string name="pref_auto_section_pt_summary">Добавить точки сечений к линиям сечений</string>
 
@@ -971,8 +973,8 @@
   <string name="pref_sketchCompassReadings_summary">Кол-во осредняемых значений азимутов</string>
   <string name="pref_sketchCompassReadings_message">Кол-во осредняемых значений азимутов</string>
 
-  <string name="pref_unit_length_title">Единицы измерения длинны</string>
-  <string name="pref_unit_length_summary">Показать единицы длинны</string>
+  <string name="pref_unit_length_title">Единицы измерения длины</string>
+  <string name="pref_unit_length_summary">Показать единицы длины</string>
   <string name="pref_unit_angle_title">Единицы измерения углов</string>
   <string name="pref_unit_angle_summary">Показать единицы углов</string>
   <string name="pref_unit_location_title">Формат координат</string>
