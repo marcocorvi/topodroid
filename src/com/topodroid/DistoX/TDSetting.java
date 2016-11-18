@@ -72,7 +72,8 @@ class TDSetting
 
     "DISTOX_UNIT_LOCATION",       // 29 
     "DISTOX_CRS",                 // 30
-
+     
+    // -------------------- CALIB PREFERENCES
     "DISTOX_GROUP_BY",            // 31
     "DISTOX_GROUP_DISTANCE",      // 32
     "DISTOX_CALIB_EPS",           // 33
@@ -80,6 +81,7 @@ class TDSetting
     "DISTOX_RAW_CDATA",           // 35
     "DISTOX_CALIB_ALGO",          // 36
 
+    // -------------------- SKETCH PREFERENCES
     "DISTOX_AUTO_STATIONS",       // 37
     "DISTOX_CLOSENESS",           // 38
     "DISTOX_ERASENESS",           // 38
@@ -97,14 +99,17 @@ class TDSetting
     "DISTOX_LINE_THICKNESS",      // 48
     "DISTOX_AUTO_SECTION_PT",     // 49
 
+    // -------------------- LASER PREFERENCES
     "DISTOX_SHOT_TIMER",          // 50 // bearing-clino timer
     "DISTOX_BEEP_VOLUME",         // 51
     "DISTOX_LEG_SHOTS",           // 52 nr. of shots to make a leg
 
+    // -------------------- 3D-MODEL PREFERENCES
     "DISTOX_SKETCH_LINE_STEP",    // 53
     "DISTOX_DELTA_EXTRUDE",       // 54
     "DISTOX_COMPASS_READINGS",    // 55
 
+    // -------------------- IMPORT-EXPORT PREFERENCES
     "DISTOX_SPLAY_EXTEND",        // 56 whether to set extend to splay shots
     "DISTOX_BITMAP_SCALE",        // 57
     "DISTOX_THUMBNAIL",           // 58

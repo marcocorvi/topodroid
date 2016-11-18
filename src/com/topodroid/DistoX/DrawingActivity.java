@@ -2235,12 +2235,14 @@ public class DrawingActivity extends ItemDrawer
                         if ( mContinueLine > CONT_NO && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
                           DrawingLinePath line = mDrawingSurface.getLineToContinue( mCurrentLinePath.mFirst, mCurrentLine, mZoom );
                           if ( line != null ) {
-                            // Log.v( "DistoX", "[B] continuing line type " + mCurrentLine );
+                            // Log.v( "DistoX", "[B] line type " + mCurrentLine + " continue " + mContinueLine );
                             if ( mContinueLine == CONT_CONT && mCurrentLine == line.mLineType ) {
                               mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                               addline = false;
                             } else {
-                              if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
+                              float d1 = line.mFirst.distance( lp1.mFirst );
+                              float d2 = line.mLast.distance( lp1.mFirst );
+                              if ( d1 < d2 ) {
                                 // line.reversePath();
                                 lp1.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
                               } else {
@@ -2385,7 +2387,9 @@ public class DrawingActivity extends ItemDrawer
                             mDrawingSurface.addLineToLine( mCurrentLinePath, line );
                             addline = false;
                           } else {
-                            if ( line.mFirst.distance( mCurrentLinePath.mFirst ) < 20 ) {
+                            float d1 = line.mFirst.distance( mCurrentLinePath.mFirst );
+                            float d2 = line.mLast.distance( mCurrentLinePath.mFirst );
+                            if ( d1 < d2 ) {
                               // line.reversePath();
                               mCurrentLinePath.moveFirstTo( line.mFirst.mX, line.mFirst.mY );
                             } else {
