@@ -458,10 +458,9 @@ public class SurveyActivity extends Activity
         case TDConst.DISTOX_EXPORT_PLT: // Track file
           filename = mApp.exportSurveyAsPlt( ); // can return ""
           break;
-        // FIXME CSX_EXPORT
-        // case TDConst.DISTOX_EXPORT_CSX:
-        //   filename = mApp.exportSurveyAsCsx( null, null );
-        //   break;
+        case TDConst.DISTOX_EXPORT_CSX: // cSurvey
+          filename = mApp.exportSurveyAsCsx( null, null );
+          break;
         case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
           filename = mApp.exportSurveyAsTop( null, null );
           break;

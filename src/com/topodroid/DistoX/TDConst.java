@@ -41,7 +41,7 @@ class TDConst
 
   static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",
-    // FIXME CSX_EXPORT "cSurvey",
+    "cSurvey",
     "PocketTopo",
     "Polygon",
     "Survex",
@@ -57,7 +57,7 @@ class TDConst
   static final int[] mSurveyExportIndex = { 
     DISTOX_EXPORT_ZIP,
     DISTOX_EXPORT_DAT,
-    // FIXME CSX_EXPORT DISTOX_EXPORT_CSX,
+    DISTOX_EXPORT_CSX,
     DISTOX_EXPORT_TOP,
     DISTOX_EXPORT_PLG,
     DISTOX_EXPORT_SVX,

@@ -14,6 +14,54 @@
      <item name="triangles">Triangles</item>
   </string-array -->
 
+  <!-- TODO string-array name="wallsType">
+     <item name="none">Nada</item>
+     <item name="convex">Convexa</item>
+  </string-array -->
+
+  <!-- TODO string-array name="zoomCtrl">
+     <item name="0">Off</item>
+     <item name="1">Temporal</item>
+     <item name="2">Permanente</item>
+  </string-array -->
+
+  <!-- TODO string-array name="stationNames">
+     <item name="alpha">Alfanuméricas</item>
+     <item name="number">Numéricas</item>
+  </string-array -->
+
+  <!-- UNUSED string-array name="extend_name">
+     <item>Izq.</item>
+     <item>Vert.</item>
+     <item>Drch.</item>
+     <item>- -</item>
+  </string-array -->
+
+  <!-- TODO string-array name="exportShots">
+     <item name="none">Nada</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="pockettopo">PocketTopo</item>
+     <item name="polygon">Polygon</item>
+     <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+  </string-array -->
+
+  <!-- TODO string-array name="exportPlot">
+     <item name="none">Nada</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="png">PNG</item>
+  </string-array -->
+
+
   <string-array name="extend_name">
      <item>چپ</item>
      <item>عمودی</item>

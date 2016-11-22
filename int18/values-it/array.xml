@@ -37,11 +37,11 @@
      <item>- -</item>
   </string-array -->
 
-  <!-- TODO string-array name="exportShots">
-     <item name="none">none</item>
+  <string-array name="exportShots">
+     <item name="none">nessuno</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
-     <!== item name="csurvey">cSurvey</item ==>
+     <item name="csurvey">cSurvey</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
@@ -50,7 +50,7 @@
      <item name="walls">Walls</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="exportPlot">
      <item name="none">nessuno</item>

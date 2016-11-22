@@ -27,10 +27,10 @@
   </string-array>
 
 
-  <string-array name="acadVersion">
+  <!-- string-array name="acadVersion">
      <item name="9">AutoCAD 6</item>
      <item name="13">AutoCAD 12</item>
-  </string-array>
+  </string-array -->
 
 
   <string-array name="zoomCtrl">
@@ -64,7 +64,7 @@
      <item name="none">Aucun</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
-     <!-- item name="csurvey">cSurvey</item -->
+     <item name="csurvey">cSurvey</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>

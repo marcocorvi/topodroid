@@ -288,8 +288,9 @@ class SymbolPoint extends Symbol
     mPath = new Path();
     mPath.moveTo(0,0);
     mDxf  = "  0\nLINE\n  8\nPOINT\n" 
-          // + "  100\nAcDbEntity\n  100\nAcDbLine\n"
-          + "  10\n0.0\n  20\n0.0\n  30\n0.0\n";
+          + "  100\nAcDbEntity\n  100\nAcDbLine\n"
+          + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
+          + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
     mCsx = "";
     mSvg = "";
   }
@@ -348,11 +349,10 @@ class SymbolPoint extends Symbol
             DrawingDxf.printString( pw, 0, "LINE" );
             DrawingDxf.printString( pw, 8, "POINT" );
             DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
-            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
-
+            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 ); // prev point
             x00 = x0 * dxfScale;
             y00 = y0 * dxfScale;
-            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 1 );
+            DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 1 ); // current point
             
             pv1.format(Locale.US, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
@@ -502,9 +502,10 @@ class SymbolPoint extends Symbol
             //           a1, a2 );                               // START and END ANGLES [rad]
             DrawingDxf.printString( pw, 0, "ARC" );
             DrawingDxf.printString( pw, 8, "POINT" );
-            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbEllipse" );
+            DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbCircle" );
             DrawingDxf.printXYZ( pw, cx*dxfScale, -cy*dxfScale, 0.0f, 0 );
             DrawingDxf.printFloat( pw, 40, r*dxfScale );
+            DrawingDxf.printString( pw, 100, "AcDbArc" );
             DrawingDxf.printFloat( pw, 50, a1 * TDMath.RAD2GRAD );
             DrawingDxf.printFloat( pw, 51, a2 * TDMath.RAD2GRAD );
     
@@ -593,9 +594,10 @@ class SymbolPoint extends Symbol
             //           x2*TDMath.GRAD2RAD, (x2+y2)*TDMath.GRAD2RAD );  // START and END PARAMS
             DrawingDxf.printString( pw, 0, "ARC" );
             DrawingDxf.printString( pw, 8, "POINT" );
-            DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbEllipse" );
+            DrawingDxf.printAcDb(pw, -1, "AcDbEntity", "AcDbCircle" );
             DrawingDxf.printXYZ( pw, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, 0.0f, 0 ); // CENTER
             DrawingDxf.printFloat( pw, 40, x1*dxfScale );                                // RADIUS
+            DrawingDxf.printString( pw, 100, "AcDbArc" );
             DrawingDxf.printFloat( pw, 50, x2 );                                         // ANGLES
             DrawingDxf.printFloat( pw, 51, x2+y2 );
 

@@ -41,7 +41,7 @@
      <item name="none">Nada</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
-     <!-- NO item name="csurvey">cSurvey</item -->
+     <item name="csurvey">cSurvey</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
