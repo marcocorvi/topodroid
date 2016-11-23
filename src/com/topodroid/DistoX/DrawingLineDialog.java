@@ -54,10 +54,10 @@ public class DrawingLineDialog extends MyDialog
   private MyCheckBox mBtnRock;
   private MyCheckBox mBtnClose;
 
-  public DrawingLineDialog( DrawingActivity context, DrawingLinePath line, LinePoint lp )
+  public DrawingLineDialog( Context context, DrawingActivity parent, DrawingLinePath line, LinePoint lp )
   {
     super( context, R.string.DrawingLineDialog );
-    mParent  = context;
+    mParent  = parent;
     mLine  = line;
     mPoint = lp;
     mType  = mLine.mLineType;

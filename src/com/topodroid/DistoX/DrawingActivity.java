@@ -2371,7 +2371,7 @@ public class DrawingActivity extends ItemDrawer
                           mDrawingSurface.addDrawingPath( section_pt );
                         }
 
-                        new DrawingLineSectionDialog( this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
+                        new DrawingLineSectionDialog( this, this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
 
                       } else { // empty path list
                         Toast.makeText( this, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
@@ -3330,7 +3330,7 @@ public class DrawingActivity extends ItemDrawer
               new DrawingStationDialog( this, this, sn, path, barrier, hidden, legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
-              new DrawingPointDialog( this, (DrawingPointPath)(sp.mItem) ).show();
+              new DrawingPointDialog( this, this, (DrawingPointPath)(sp.mItem) ).show();
               mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_LINE:
@@ -3341,17 +3341,17 @@ public class DrawingActivity extends ItemDrawer
                 boolean h_section = PlotInfo.isProfile( mType ); // not really necessary
                 String id = line.getOption( "-id" );
                 if ( id != null ) {
-                  new DrawingLineSectionDialog( this, mApp, h_section, true, id, line, null, null, 0, 0 ).show();
+                  new DrawingLineSectionDialog( this, this, mApp, h_section, true, id, line, null, null, 0, 0 ).show();
                 } else {
                   TDLog.Error("edit section line with null id" );
                 }
               } else {
-                new DrawingLineDialog( this, line, sp.mPoint ).show();
+                new DrawingLineDialog( this, this, line, sp.mPoint ).show();
               }
               mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_AREA:
-              new DrawingAreaDialog( this, (DrawingAreaPath)(sp.mItem) ).show();
+              new DrawingAreaDialog( this, this, (DrawingAreaPath)(sp.mItem) ).show();
               mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_FIXED:
@@ -3853,7 +3853,7 @@ public class DrawingActivity extends ItemDrawer
         (new PlotRenameDialog( this, this, mApp )).show();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, this, mApp )).show();
+        (new SymbolEnableDialog( this, mApp )).show();
       } else if ( PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
           Toast.makeText( this, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();

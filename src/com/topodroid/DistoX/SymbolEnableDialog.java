@@ -49,7 +49,7 @@ class SymbolEnableDialog extends MyDialog
   // private  Button mBTcancel;
   // private  Button mBTok;
 
-  private Activity mParent;
+  // private Activity mParent;
   private TopoDroidApp mApp;
 
   private ListView    mList;
@@ -58,10 +58,10 @@ class SymbolEnableDialog extends MyDialog
   private SymbolAdapter mAreaAdapter;
 
 
-  SymbolEnableDialog( Context context, Activity parent, TopoDroidApp app )
+  SymbolEnableDialog( Context context, /* Activity parent, */ TopoDroidApp app )
   {
     super( context, R.string.SymbolEnableDialog );
-    mParent  = parent;
+    // mParent  = parent;
     mApp     = app;
     mType    = Symbol.LINE; // default symbols are lines
   }
@@ -108,16 +108,16 @@ class SymbolEnableDialog extends MyDialog
 
   boolean createAdapters()
   {
-    mPointAdapter = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
-    mLineAdapter  = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
-    mAreaAdapter  = new SymbolAdapter( mParent, R.layout.symbol, new ArrayList<EnableSymbol>() );
+    mPointAdapter = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
+    mLineAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
+    mAreaAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
 
     if ( TDSetting.mLevelOverBasic ) {
       SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
       if ( point_lib == null ) return false;
       int np = point_lib.mSymbolNr;
       for ( int i=0; i<np; ++i ) {
-        mPointAdapter.add( new EnableSymbol( mParent, Symbol.POINT, i, point_lib.getSymbolByIndex( i ) ) );
+        mPointAdapter.add( new EnableSymbol( mContext, Symbol.POINT, i, point_lib.getSymbolByIndex( i ) ) );
       }
     }
 
@@ -125,7 +125,7 @@ class SymbolEnableDialog extends MyDialog
     if ( line_lib == null ) return false;
     int nl = line_lib.mSymbolNr;
     for ( int j=0; j<nl; ++j ) {
-      mLineAdapter.add( new EnableSymbol( mParent, Symbol.LINE, j, line_lib.getSymbolByIndex( j ) ) );
+      mLineAdapter.add( new EnableSymbol( mContext, Symbol.LINE, j, line_lib.getSymbolByIndex( j ) ) );
     }
 
     if ( TDSetting.mLevelOverBasic ) {
@@ -133,7 +133,7 @@ class SymbolEnableDialog extends MyDialog
       if ( area_lib == null ) return false;
       int na = area_lib.mSymbolNr;
       for ( int k=0; k<na; ++k ) {
-        mAreaAdapter.add( new EnableSymbol( mParent, Symbol.AREA, k, area_lib.getSymbolByIndex( k ) ) );
+        mAreaAdapter.add( new EnableSymbol( mContext, Symbol.AREA, k, area_lib.getSymbolByIndex( k ) ) );
       }
     }
 

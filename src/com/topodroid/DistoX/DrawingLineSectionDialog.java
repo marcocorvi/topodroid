@@ -54,12 +54,13 @@ public class DrawingLineSectionDialog extends MyDialog
   private ImageView mIVimage;   // photo image
   boolean mHSection;
   boolean mExists;
-
-  public DrawingLineSectionDialog( DrawingActivity context, TopoDroidApp app, boolean h_section, boolean exists, String id,
+  
+  public DrawingLineSectionDialog( Context context,
+                                   DrawingActivity parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
                                    DrawingLinePath line, String from, String to, float azimuth, float clino )
   {
     super( context, R.string.DrawingLineSectionDialog );
-    mParent = context;
+    mParent = parent;
     mApp  = app;
     mExists = exists;      // whether the section exists or it is being created
     mHSection = h_section; // if the line has "-id" the h_section is taken from the PlotInfo

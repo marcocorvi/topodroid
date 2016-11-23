@@ -92,8 +92,8 @@ public class UndeleteDialog extends MyDialog
     super.onCreate( savedInstanceState );
 
     setContentView(R.layout.undelete_dialog);
-    // mArrayAdapter = new ArrayAdapter<String>( mParent, R.layout.message );
-    mArrayAdapter = new MyStringAdapter( mParent, R.layout.message );
+    // mArrayAdapter = new ArrayAdapter<String>( mContext, R.layout.message );
+    mArrayAdapter = new MyStringAdapter( mContext, R.layout.message );
     mList = (ListView) findViewById(R.id.list_undelete);
     mList.setAdapter( mArrayAdapter );
     mList.setOnItemClickListener( this );

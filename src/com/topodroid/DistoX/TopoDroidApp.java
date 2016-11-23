@@ -548,6 +548,9 @@ public class TopoDroidApp extends Application
 
     mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
     mWelcomeScreen = mPrefs.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
+    if ( mWelcomeScreen ) {
+      setDefaultSocketType();
+    }
 
     // TDLog.Profile("TDApp paths");
     TDPath.setDefaultPaths();
@@ -1005,6 +1008,14 @@ public class TopoDroidApp extends Application
 
   // -----------------------------------------------------------------
   // PREFERENCES
+
+  private void setDefaultSocketType()
+  {
+    String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
+    Editor editor = mPrefs.edit();
+    editor.putString( "DISTOX_SOCK_TYPE", defaultSockType ); 
+    editor.commit();
+  }
 
   private void updateDefaultPreferences()
   {

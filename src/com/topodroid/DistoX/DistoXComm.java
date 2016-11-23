@@ -289,20 +289,20 @@ public class DistoXComm extends TopoDroidComm
         try {
           Class[] classes1 = new Class[]{ int.class };
           Class[] classes2 = new Class[]{ UUID.class };
-          if ( TDSetting.mSockType == TDSetting.TOPODROID_SOCK_DEFAULT ) {
+          if ( TDSetting.mSockType == TDSetting.TD_SOCK_DEFAULT ) {
             // TDLog.Log( TDLog.LOG_COMM, "create Socket() createRfcommSocketToServiceRecord " );
             mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
-          } else if ( TDSetting.mSockType == TDSetting.TOPODROID_SOCK_INSEC ) {
+          } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC ) {
             // TDLog.Log( TDLog.LOG_COMM, "create Socket() createInsecureRfcommSocketToServiceRecord " );
             Method m3 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocketToServiceRecord", classes2 );
             mBTSocket = (BluetoothSocket) m3.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
-          } else if ( TDSetting.mSockType == TDSetting.TOPODROID_SOCK_INSEC_PORT ) {
+          } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC_PORT ) {
             // TDLog.Log( TDLog.LOG_COMM, "create Socket() invoke createInsecureRfcommSocket " );
             Method m1 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocket", classes1 );
             mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, port );
             // mBTSocket = mBTDevice.createInsecureRfcommSocket( port );
             // mBTSocket = (BluetoothSocket) m1.invoke( mBTDevice, UUID.fromString("00001101-0000-1000-8000-00805F9B34FB") );
-          } else if ( TDSetting.mSockType == TDSetting.TOPODROID_SOCK_PORT ) {
+          } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_PORT ) {
             // TDLog.Log( TDLog.LOG_COMM, "create Socket() invoke createRfcommSocket " );
             Method m2 = mBTDevice.getClass().getMethod( "createRfcommSocket", classes1 );
             mBTSocket = (BluetoothSocket) m2.invoke( mBTDevice, port );

@@ -48,7 +48,7 @@ public class DrawingStationDialog extends MyDialog
     private CheckBox mCBdirect;
     private CheckBox mCBinverse;
 
-    private DrawingActivity mActivity;
+    private DrawingActivity mParent;
     private DrawingStationName mStation; // num station point
     private DrawingStationPath mPath;
 
@@ -57,12 +57,12 @@ public class DrawingStationDialog extends MyDialog
     private boolean mIsHidden;
     private List<DistoXDBlock> mBlk;
 
-    public DrawingStationDialog( Context context, DrawingActivity activity, DrawingStationName station,
+    public DrawingStationDialog( Context context, DrawingActivity parent, DrawingStationName station,
                                  DrawingStationPath path,
                                  boolean is_barrier, boolean is_hidden, List<DistoXDBlock> blk )
     {
       super( context, R.string.DrawingStationDialog );
-      mActivity = activity;
+      mParent   = parent;
       mStation  = station;
       mPath     = path;
       mStationName = mStation.mName;
@@ -99,7 +99,7 @@ public class DrawingStationDialog extends MyDialog
       mCBdirect.setChecked( true );
       mCBinverse.setChecked( false );
 
-      if ( mActivity.isAnySection() ) {
+      if ( mParent.isAnySection() ) {
         mBtnOK.setVisibility( View.GONE );
         mBtnSet.setVisibility( View.GONE );
         mBtnBreak.setVisibility( View.GONE );
@@ -192,24 +192,24 @@ public class DrawingStationDialog extends MyDialog
       // TDLog.Log( TDLog.LOG_INPUT, "Drawing Station Dialog onClick() " + view.toString() );
       if (view.getId() == R.id.btn_ok ) {
         if ( mPath == null ) {
-          mActivity.addStationPoint( mStation );
+          mParent.addStationPoint( mStation );
         } else {
-          mActivity.removeStationPoint( mStation, mPath );
+          mParent.removeStationPoint( mStation, mPath );
         }
       } else if (view.getId() == R.id.btn_cancel ) {
         /* nothing */
       } else if (view.getId() == R.id.btn_set ) {
-        mActivity.setCurrentStationName( mStation.mName );
+        mParent.setCurrentStationName( mStation.mName );
       } else if (view.getId() == R.id.btn_break ) {
-        mActivity.toggleStationBarrier( mStationName, mIsBarrier );
+        mParent.toggleStationBarrier( mStationName, mIsBarrier );
       } else if (view.getId() == R.id.btn_hidden ) {
-        mActivity.toggleStationHidden( mStationName, mIsHidden );
+        mParent.toggleStationHidden( mStationName, mIsHidden );
       } else if (view.getId() == R.id.btn_splays ) {
-        mActivity.toggleStationSplays( mStationName );
+        mParent.toggleStationSplays( mStationName );
       } else if (view.getId() == R.id.btn_xsection ) {
-        mActivity.openXSection( mStation, mStationName, mActivity.getPlotType(), mCBinverse.isChecked() );
+        mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mCBinverse.isChecked() );
       } else if (view.getId() == R.id.btn_xdelete ) {
-        mActivity.deleteXSection( mStation, mStationName, mActivity.getPlotType() );
+        mParent.deleteXSection( mStation, mStationName, mParent.getPlotType() );
       }
       dismiss();
     }

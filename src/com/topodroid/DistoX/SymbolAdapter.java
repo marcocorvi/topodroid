@@ -30,15 +30,15 @@ import android.widget.LinearLayout;
 class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 {
   private ArrayList< EnableSymbol > mItems;
-  // private Context mContext;
-  private Activity mActivity;
+  private Context mContext;
+  // private Activity mActivity;
   private LayoutInflater mLayoutInflater;
 
-  SymbolAdapter( Activity ctx, int id, ArrayList< EnableSymbol > items )
+  SymbolAdapter( Context ctx, int id, ArrayList< EnableSymbol > items )
   {
     super( ctx, id, items );
-    // mContext = ctx;
-    mActivity = ctx;
+    mContext = ctx;
+    // mActivity = ctx;
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 
     if ( items != null ) {

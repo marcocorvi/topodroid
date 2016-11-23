@@ -11,6 +11,7 @@
  */
 package com.topodroid.DistoX;
 
+import android.os.Build;
 import android.content.Context;
 import android.provider.Settings.Secure;
 
@@ -259,12 +260,14 @@ class TDSetting
   // static final boolean CHECK_BT = true;
   static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled
 
-  static final int TOPODROID_SOCK_DEFAULT      = 0;    // BT socket type
-  static final int TOPODROID_SOCK_INSEC        = 1;
-  static final int TOPODROID_SOCK_PORT         = 2;
-  static final int TOPODROID_SOCK_INSEC_PORT   = 3;
-  // static final int TOPODROID_SOCK_INSEC_INVOKE = 4;
-  static int mSockType = TOPODROID_SOCK_DEFAULT; // FIXME static
+  static final int TD_SOCK_DEFAULT      = 0;    // BT socket type
+  static final int TD_SOCK_INSEC        = 1;
+  static final int TD_SOCK_PORT         = 2;
+  static final int TD_SOCK_INSEC_PORT   = 3;
+  // static final int TD_SOCK_INSEC_INVOKE = 4;
+  // static int mDefaultSockType = (android.os.Build.MANUFACTURER.equals("samsung") ) ? TD_SOCK_INSEC : TD_SOCK_DEFAULT;
+  static String mDefaultSockStrType = (android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
+  static int mSockType = TD_SOCK_DEFAULT;
 
   static int mCommRetry = 1; 
   static int mCommType  = 0; // 0: on-demand, 1: continuous
@@ -597,7 +600,8 @@ class TDSetting
     int k = NR_PRIMARY_PREFS;;
 
     // ------------------- DEVICE PREFERENCES
-    mSockType       = tryInt( prefs, key[k++], "0" );        // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
+    mSockType       = tryInt( prefs, key[k++], mDefaultSockStrType );        // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
+
     mCommRetry      = tryInt( prefs, key[k++], "1" );        // DISTOX_COMM_RETRY
     mWaitLaser      = tryInt( prefs, key[k++], "1000" );     // DISTOX_WAIT_LASER
     mWaitShot       = tryInt( prefs, key[k++], "4000" );     // DISTOX_WAIT_SHOT
@@ -819,7 +823,7 @@ class TDSetting
 
     // ---------------- SECOINDARY PREFERENCES ---------------------------
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mSockType       = tryInt( prefs, k, "0" );     // "DISTOX_SOCK_TYPE (choice)
+      mSockType       = tryInt( prefs, k, mDefaultSockStrType );     // "DISTOX_SOCK_TYPE (choice)
     } else if ( k.equals( key[ nk++ ] ) ) {
       mCommRetry      = tryInt( prefs, k, "1" );     // DISTOX_COMM_RETRY
     } else if ( k.equals( key[ nk++ ] ) ) {

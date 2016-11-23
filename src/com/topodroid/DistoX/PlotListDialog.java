@@ -167,7 +167,7 @@ public class PlotListDialog extends MyDialog
       hide();
       if ( mParent != null ) {
         int idx = 1 + mApp.mData.maxPlotIndex( mApp.mSID );
-        new PlotNewDialog( mParent, mApp, mParent, idx ).show();
+        new PlotNewDialog( mContext, mApp, mParent, idx ).show();
       }
     } else if ( b == mBtnClose ) {
       if ( mParent2 != null ) {
@@ -178,7 +178,7 @@ public class PlotListDialog extends MyDialog
     // FIXME_SKETCH_3D
     } else if ( mApp.mSketches && b == mBtnSketch3dNew ) {
       if ( mParent != null ) {
-        new Sketch3dNewDialog( mParent, mParent, mApp ).show();
+        new Sketch3dNewDialog( mContext, mParent, mApp ).show();
       }
     // END_SKETCH_3D //
 

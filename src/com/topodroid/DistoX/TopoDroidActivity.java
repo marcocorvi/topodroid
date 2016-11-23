@@ -222,7 +222,7 @@ public class TopoDroidActivity extends Activity
         (new ImportDialog( this, this, mApp )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, this, mApp )).show();
+        (new SymbolEnableDialog( this, mApp )).show();
 
       // FIXME THMANAGER
       // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager

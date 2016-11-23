@@ -39,10 +39,10 @@ public class DrawingAreaDialog extends MyDialog
   private Button   mBtnOk;
   private Button mBtnCancel;
 
-  public DrawingAreaDialog( DrawingActivity context, DrawingAreaPath line )
+  public DrawingAreaDialog( Context context, DrawingActivity parent, DrawingAreaPath line )
   {
     super( context, R.string.DrawingAreaDialog );
-    mParent = context;
+    mParent = parent;
     mArea = line;
     mOrientable = DrawingBrushPaths.mAreaLib.isSymbolOrientable( mArea.mAreaType );
   }

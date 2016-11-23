@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import android.app.Dialog;
 import android.os.Bundle;
 
-// import android.content.Context;
+import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -50,10 +50,10 @@ public class DrawingPointDialog extends MyDialog
   private Button   mBtnOk;
   private Button   mBtnCancel;
 
-  public DrawingPointDialog( DrawingActivity context, DrawingPointPath point )
+  public DrawingPointDialog( Context context, DrawingActivity parent, DrawingPointPath point )
   {
     super( context, R.string.DrawingPointDialog );
-    mParent = context;
+    mParent = parent;
     mPoint  = point;
     mOrientable = DrawingBrushPaths.mPointLib.isSymbolOrientable( mPoint.mPointType );
   }
