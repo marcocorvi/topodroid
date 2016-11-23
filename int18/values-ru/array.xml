@@ -162,9 +162,9 @@
   </string-array>
 
   <string-array name="calibAlgo">
-     <item name="auto">авто</item>
-     <item name="linear">линейно</item>
-     <item name="nonlinear">не-линейно</item>
+     <item name="auto">Авто</item>
+     <item name="linear">Линейный</item>
+     <item name="nonlinear">Нелинейный</item>
   </string-array>
 
   <string-array name="rawCData">
