@@ -48,7 +48,7 @@ public class DrawingStationDialog extends MyDialog
     private CheckBox mCBdirect;
     private CheckBox mCBinverse;
 
-    private DrawingActivity mParent;
+    private DrawingWindow mParent;
     private DrawingStationName mStation; // num station point
     private DrawingStationPath mPath;
 
@@ -57,7 +57,7 @@ public class DrawingStationDialog extends MyDialog
     private boolean mIsHidden;
     private List<DistoXDBlock> mBlk;
 
-    public DrawingStationDialog( Context context, DrawingActivity parent, DrawingStationName station,
+    public DrawingStationDialog( Context context, DrawingWindow parent, DrawingStationName station,
                                  DrawingStationPath path,
                                  boolean is_barrier, boolean is_hidden, List<DistoXDBlock> blk )
     {

@@ -34,10 +34,10 @@ public class PlotRenameDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnDelete;
 
-  private DrawingActivity mParent;
+  private DrawingWindow mParent;
   private TopoDroidApp mApp;
 
-  PlotRenameDialog( Context context, DrawingActivity parent, TopoDroidApp app )
+  PlotRenameDialog( Context context, DrawingWindow parent, TopoDroidApp app )
   {
     super( context, R.string.PlotRenameDialog );
     mParent = parent;

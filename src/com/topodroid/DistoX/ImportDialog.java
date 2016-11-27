@@ -42,13 +42,13 @@ public class ImportDialog extends MyDialog
                           , OnClickListener
 { 
   private TopoDroidApp app;
-  private TopoDroidActivity mParent;
+  private MainWindow mParent;
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   private Button mBtnCancel;
 
-  public ImportDialog( Context context, TopoDroidActivity parent, TopoDroidApp _app )
+  public ImportDialog( Context context, MainWindow parent, TopoDroidApp _app )
   {
     super( context, R.string.ImportDialog );
     mParent  = parent;

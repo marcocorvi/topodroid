@@ -31,7 +31,7 @@ import android.view.KeyEvent;
 public class PhotoCommentDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private ShotActivity mParent;
+  private ShotWindow mParent;
 
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
@@ -43,7 +43,7 @@ public class PhotoCommentDialog extends MyDialog
    * @param group     data group
    * @param data      calibration data (as string)
    */
-  PhotoCommentDialog( Context context, ShotActivity parent )
+  PhotoCommentDialog( Context context, ShotWindow parent )
   {
     super( context, R.string.PhotoCommentDialog );
     mParent = parent;

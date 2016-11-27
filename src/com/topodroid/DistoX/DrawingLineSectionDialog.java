@@ -34,7 +34,7 @@ public class DrawingLineSectionDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingLinePath mLine;
-  private DrawingActivity mParent;
+  private DrawingWindow mParent;
   private TopoDroidApp    mApp;
 
   // private TextView mTVtype;
@@ -56,7 +56,7 @@ public class DrawingLineSectionDialog extends MyDialog
   boolean mExists;
   
   public DrawingLineSectionDialog( Context context,
-                                   DrawingActivity parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
+                                   DrawingWindow parent, TopoDroidApp app, boolean h_section, boolean exists, String id,
                                    DrawingLinePath line, String from, String to, float azimuth, float clino )
   {
     super( context, R.string.DrawingLineSectionDialog );

@@ -107,7 +107,7 @@ class TopoDroidExporter
   }
 
 
-  static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch,
+  static String exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch,
                                    String origin, String filename )
   {
     // Log.v("DistoX", "export as csurvey: " + filename );
@@ -608,7 +608,7 @@ class TopoDroidExporter
   // =======================================================================
   // POCKETTOPO EXPORT PocketTopo
 
-  static String exportSurveyAsTop( long sid, DataHelper data, SurveyInfo info, DrawingActivity sketch, String origin, String filename )
+  static String exportSurveyAsTop( long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String filename )
   {
     // Log.v("DistoX", "export as pockettopo: " + filename );
     PTFile ptfile = new PTFile();

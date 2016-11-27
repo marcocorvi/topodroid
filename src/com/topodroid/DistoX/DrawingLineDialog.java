@@ -35,7 +35,7 @@ public class DrawingLineDialog extends MyDialog
                                implements View.OnClickListener, AdapterView.OnItemSelectedListener
 {
   private DrawingLinePath mLine;
-  private DrawingActivity mParent;
+  private DrawingWindow mParent;
   private LinePoint mPoint;
   private int mType;
 
@@ -54,7 +54,7 @@ public class DrawingLineDialog extends MyDialog
   private MyCheckBox mBtnRock;
   private MyCheckBox mBtnClose;
 
-  public DrawingLineDialog( Context context, DrawingActivity parent, DrawingLinePath line, LinePoint lp )
+  public DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
   {
     super( context, R.string.DrawingLineDialog );
     mParent  = parent;

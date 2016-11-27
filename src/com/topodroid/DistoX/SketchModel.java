@@ -208,7 +208,7 @@ class SketchModel
     // splays   = num.getSplays();
   }
 
-  /** called from SketchActivity
+  /** called from SketchWindow
    * only 3D lines can be highlighted
    */
   // void highlightLineRegion( )

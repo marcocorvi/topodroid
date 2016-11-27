@@ -1,4 +1,4 @@
-/* @file SurveyActivity.java
+/* @file SurveyWindow.java
  *
  * @author marco corvi
  * @date may 2012
@@ -57,7 +57,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 
-public class SurveyActivity extends Activity
+public class SurveyWindow extends Activity
                             implements IExporter
                             , OnItemClickListener
                             , View.OnClickListener
@@ -71,10 +71,10 @@ public class SurveyActivity extends Activity
                         R.drawable.iz_sensor
                      };
   private static int menus[] = {
+                        R.string.menu_close,
                         R.string.menu_export,
                         R.string.menu_rename,
                         R.string.menu_delete,
-                        R.string.menu_close,
                         R.string.menu_manual_calibration,
                         R.string.menu_options,
                         R.string.menu_help
@@ -89,17 +89,17 @@ public class SurveyActivity extends Activity
                         R.string.help_sensor
                         };
   private static int help_menus[] = { 
+                        R.string.help_close,
                         R.string.help_export_survey,
                         R.string.help_rename,
                         R.string.help_delete_survey,
-                        R.string.help_close,
                         R.string.help_manual_calibration,
                         R.string.help_prefs,
                         R.string.help_help
                       };
   // private static int icons00[];
 
-  // private ShotActivity mParent;
+  // private ShotWindow mParent;
   private Context mContext;
 
   private EditText mTextName;
@@ -171,7 +171,7 @@ public class SurveyActivity extends Activity
     super.onCreate( savedInstanceState );
 
     mApp = (TopoDroidApp)getApplication();
-    mApp.mSurveyActivity = this;
+    mApp.mSurveyWindow = this;
 
     mContext = this;
     mustOpen = false;
@@ -340,7 +340,7 @@ public class SurveyActivity extends Activity
   // {
   //   // TDLog.Log( TDLog.LOG_SURVEY, "do OPEN " );
   //   // dismiss();
-  //   Intent openIntent = new Intent( mContext, ShotActivity.class );
+  //   Intent openIntent = new Intent( mContext, ShotWindow.class );
   //   mContext.startActivity( openIntent );
   // }
 
@@ -541,7 +541,7 @@ public class SurveyActivity extends Activity
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.SurveyActivity );
+        String help_page = getResources().getString( R.string.SurveyWindow );
         if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -578,14 +578,14 @@ public class SurveyActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    if ( p++ == pos ) { // EXPORT
+    if ( p++ == pos ) { // CLOSE
+      super.onBackPressed();
+    } else if ( p++ == pos ) { // EXPORT
       new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
     } else if ( p++ == pos ) { // RENAME
       new SurveyRenameDialog( this, this ).show();
     } else if ( p++ == pos ) { // DELETE
       askDelete();
-    } else if ( p++ == pos ) { // CLOSE
-      super.onBackPressed();
     } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
       new SurveyCalibrationDialog( this, this ).show();
     } else if ( p++ == pos ) { // OPTIONS

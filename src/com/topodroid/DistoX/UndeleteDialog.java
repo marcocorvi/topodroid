@@ -36,7 +36,7 @@ public class UndeleteDialog extends MyDialog
 {
   public long mSID;
   DataHelper mData;
-  ShotActivity mParent;
+  ShotWindow mParent;
 
   private Button mBtnCancel;
   // ArrayAdapter< String >  mArrayAdapter;
@@ -45,7 +45,7 @@ public class UndeleteDialog extends MyDialog
   List< DistoXDBlock > mShots;
   List< PlotInfo >     mPlots;
 
-  public UndeleteDialog( Context context, ShotActivity parent, DataHelper data, long sid,
+  public UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
                          List<DistoXDBlock> shots, List<PlotInfo> plots )
   {
     super( context, R.string.UndeleteDialog );

@@ -35,9 +35,9 @@ public class DrawingModeDialog extends MyDialog
     // private Button mBtnBack;
 
     private DrawingSurface mSurface;
-    private DrawingActivity mParent; // used only to decide whether display checkbox "Shift"
+    private DrawingWindow mParent; // used only to decide whether display checkbox "Shift"
 
-    public DrawingModeDialog( Context context, DrawingActivity parent, DrawingSurface surface )
+    public DrawingModeDialog( Context context, DrawingWindow parent, DrawingSurface surface )
     {
       super(context, R.string.DrawingModeDialog );
       mParent  = parent;

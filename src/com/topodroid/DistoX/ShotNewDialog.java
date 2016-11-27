@@ -45,7 +45,7 @@ public class ShotNewDialog extends MyDialog
                            , View.OnLongClickListener
                            , IBearingAndClino
 {
-  // private ShotActivity mParent;
+  // private ShotWindow mParent;
   private TopoDroidApp mApp;
   private ILister mLister;
   private DistoXDBlock mPrevBlk;

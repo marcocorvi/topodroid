@@ -34,7 +34,7 @@ import android.util.Log;
 public class PhotoSensorsDialog extends MyDialog
                                 implements View.OnClickListener
 {
-  private ShotActivity mParent;
+  private ShotWindow mParent;
   private DistoXDBlock mBlk;
 
   private TextView mTVstations;
@@ -54,7 +54,7 @@ public class PhotoSensorsDialog extends MyDialog
    * @param group     data group
    * @param data      calibration data (as string)
    */
-  PhotoSensorsDialog( Context context, ShotActivity parent, DistoXDBlock blk )
+  PhotoSensorsDialog( Context context, ShotWindow parent, DistoXDBlock blk )
   {
     super( context, R.string.PhotoSensorsDialog );
     mParent  = parent;

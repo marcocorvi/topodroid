@@ -413,7 +413,7 @@ class TDSetting
   // static void setZoomControls( boolean ctrl )
   // {
   //   mZoomControls = ctrl;
-  //   // FIXME forward setting to DrawingActivity
+  //   // FIXME forward setting to DrawingWindow
   // }
   static void setZoomControls( String ctrl, boolean is_multitouch )
   {
@@ -767,7 +767,7 @@ class TDSetting
     }
   }
 
-  static void checkPreference( SharedPreferences prefs, String k, TopoDroidActivity activity, TopoDroidApp app )
+  static void checkPreference( SharedPreferences prefs, String k, MainWindow activity, TopoDroidApp app )
   {
     int nk = 0; // key index
     float f;

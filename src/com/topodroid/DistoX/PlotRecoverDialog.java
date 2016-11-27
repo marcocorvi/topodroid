@@ -49,7 +49,7 @@ public class PlotRecoverDialog extends MyDialog
                         , OnItemClickListener
 {
   private TopoDroidApp mApp;
-  private DrawingActivity mParent; 
+  private DrawingWindow mParent; 
 
   private TextView mTVfilename;
   private Button mBtnOK;
@@ -61,7 +61,7 @@ public class PlotRecoverDialog extends MyDialog
   long mType;             // plot type
 
   // type is either 1 or 2
-  public PlotRecoverDialog( Context context, DrawingActivity parent, String filename, long type )
+  public PlotRecoverDialog( Context context, DrawingWindow parent, String filename, long type )
   {
     super( context, R.string.PlotRecoverDialog );
     mParent   = parent;

@@ -2063,7 +2063,7 @@ public class DrawingCommandManager
       // SelectionPoint sp = mSelected.shiftHotItem( dx, dy, range );
       SelectionPoint sp = mSelected.shiftHotItem( dx, dy );
       DrawingPath path = sp.mItem;
-      // if ( path.mType == DrawingPath.DRAWING_PATH_POINT || DrawingActivity.mEditRadius == 0 ) {
+      // if ( path.mType == DrawingPath.DRAWING_PATH_POINT || DrawingWindow.mEditRadius == 0 ) {
       //   mSelection.checkBucket( sp );
       // } else {
       //   mSelection.rebucketLinePath( (DrawingPointLinePath)path );
@@ -2232,8 +2232,8 @@ public class DrawingCommandManager
         //   ArrayList< LinePoint > pts = lp.mPoints;
         //   boolean b = true;
         //   for ( LinePoint pt : pts ) {
-        //     float x = DrawingActivity.sceneToWorldX( pt.mX );
-        //     float y = DrawingActivity.sceneToWorldY( pt.mY );
+        //     float x = DrawingWindow.sceneToWorldX( pt.mX );
+        //     float y = DrawingWindow.sceneToWorldY( pt.mY );
         //     pw.format(Locale.US, "%.2f %.2f ", x, y );
         //     if ( b ) { pw.format("B "); b = false; }
         //   }

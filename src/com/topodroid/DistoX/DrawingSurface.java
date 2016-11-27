@@ -315,7 +315,7 @@ public class DrawingSurface extends SurfaceView
     }
   }
 
-  // called by DrawingActivity::computeReference
+  // called by DrawingWindow::computeReference
   public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y, boolean selectable, List<PlotInfo> xsections )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
@@ -342,7 +342,7 @@ public class DrawingSurface extends SurfaceView
     return st;
   }
 
-  // called by DrawingActivity (for SECTION)
+  // called by DrawingWindow (for SECTION)
   // note: not selectable
   public DrawingStationName addDrawingStationName( String name, float x, float y )
   {
@@ -565,7 +565,7 @@ public class DrawingSurface extends SurfaceView
   // -------------------------------------------------------------------
   // LOAD
 
-  // called by OverviewActivity
+  // called by OverviewWindow
   // @pre th2 != null
   public boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {
@@ -576,7 +576,7 @@ public class DrawingSurface extends SurfaceView
     return false;
   }
 
-  // called by OverviewActivity
+  // called by OverviewWindow
   // @pre tdr != null
   public boolean addloadDataStream( String tdr, String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   {

@@ -214,10 +214,6 @@ public class ItemDrawer extends Activity
       }
     }
 
-
-    protected void setTheTitle() 
-    {
-      // Log.v("DistoX", "ItemDrawer::setTheTitle() ");
-    }
+    protected void setTheTitle() { }
 
 }

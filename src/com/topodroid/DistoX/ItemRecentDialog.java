@@ -56,7 +56,7 @@ class ItemRecentDialog extends MyDialog
   // private  Button mBTok;
   private SeekBar mSeekBar;
 
-  // private DrawingActivity mParent;
+  // private DrawingWindow mParent;
   private ItemDrawer mParent;
 
   //* private ListView    mList = null;
@@ -82,7 +82,7 @@ class ItemRecentDialog extends MyDialog
 
   /**
    * @param context   context
-   * @param parent    DrawingActivity parent
+   * @param parent    DrawingWindow parent
    * @param type      drawing type
    */
   ItemRecentDialog( Context context, ItemDrawer parent, long type )

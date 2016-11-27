@@ -5,18 +5,18 @@
   <string name="PtCmapActivity">page_pt_cmap.htm</string>
   <string name="SensorActivity">page_sensors.htm</string>
   <string name="SensorListActivity">page_sensors_list.htm</string>
-  <string name="SketchActivity">page_todo.htm</string>
+  <string name="SketchWindow">page_todo.htm</string>
 
   <string name="FixedActivity">page_fixed_list.htm</string>
 
-  <string name="TopoDroidActivity">manual02.htm</string>
+  <string name="MainWindow">manual02.htm</string>
   <string name="DeviceActivity">manual03.htm</string>
   <string name="CalibActivity">manual04.htm</string>
   <string name="GMActivity">manual05.htm</string>
-  <string name="SurveyActivity">manual08.htm</string>
-  <string name="ShotActivity">manual07.htm</string>
-  <string name="DrawingActivity">manual09.htm</string>
-  <string name="OverviewActivity">manual12.htm</string>
+  <string name="SurveyWindow">manual08.htm</string>
+  <string name="ShotWindow">manual07.htm</string>
+  <string name="DrawingWindow">manual09.htm</string>
+  <string name="OverviewWindow">manual12.htm</string>
   <string name="CWDActivity">page_cwd.htm</string>
 
   <string name="AzimuthDialDialog">page_azimuth.htm</string>

@@ -1,4 +1,4 @@
-/* @file OverviewActivity.java
+/* @file OverviewWindow.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -36,7 +36,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.view.ViewGroup;
 import android.view.Display;
-import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 // import android.view.ContextMenu;
 // import android.view.ContextMenu.ContextMenuInfo;
@@ -51,6 +50,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import android.util.DisplayMetrics;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
@@ -60,7 +61,7 @@ import java.util.ArrayList;
 
 /**
  */
-public class OverviewActivity extends ItemDrawer
+public class OverviewWindow extends ItemDrawer
                              implements View.OnTouchListener
                                       , View.OnClickListener
                                       , OnItemClickListener
@@ -210,7 +211,9 @@ public class OverviewActivity extends ItemDrawer
 
     // splay = false
     // selectable = false
-    private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, float xoff, float yoff, boolean splay )
+    private void addFixedLine( DistoXDBlock blk, float x1, float y1, float x2, float y2, 
+                               // float xoff, float yoff,
+                               boolean splay )
     {
       DrawingPath dpath = null;
       if ( splay ) {
@@ -226,7 +229,8 @@ public class OverviewActivity extends ItemDrawer
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
         dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
       }
-      DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
+      DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
       mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
     }
 
@@ -251,19 +255,23 @@ public class OverviewActivity extends ItemDrawer
     // }
 
 
-  private void computeReferences( int type, float xoff, float yoff, float zoom )
+  private void computeReferences( int type,
+                                  // float xoff, float yoff,
+                                  float zoom )
   {
-    // Log.v("DistoX", "Overview compute reference. Type " + type );
+    // Log.v("DistoX", "Overview compute reference. off " + xoff + " " + yoff + " zoom " + zoom );
     // FIXME_OVER
     // mOverviewSurface.clearReferences( type );
     mOverviewSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
 
+    // float xoff = 0; float yoff = 0;
+
     if ( type == PlotInfo.PLOT_PLAN ) {
-      DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(),
-                           xoff, yoff, mOverviewSurface );
+      DrawingUtil.addGrid( mNum.surveyEmin(), mNum.surveyEmax(), mNum.surveySmin(), mNum.surveySmax(), mOverviewSurface );
+                           // xoff, yoff, mOverviewSurface );
     } else {
-      DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(),
-                           xoff, yoff, mOverviewSurface );
+      DrawingUtil.addGrid( mNum.surveyHmin(), mNum.surveyHmax(), mNum.surveyVmin(), mNum.surveyVmax(), mOverviewSurface );
+                           // xoff, yoff, mOverviewSurface );
     }
 
     List< NumStation > stations = mNum.getStations();
@@ -275,39 +283,41 @@ public class OverviewActivity extends ItemDrawer
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s),
-                      xoff, yoff, false );
+        addFixedLine( sh.getFirstBlock(), (float)(st1.e), (float)(st1.s), (float)(st2.e), (float)(st2.s), false );
+                      // xoff, yoff, false );
       }
       for ( NumSplay sp : splays ) {
         if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) {
           NumStation st = sp.from;
-          addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), 
-                        xoff, yoff, true );
+          addFixedLine( sp.getBlock(), (float)(st.e), (float)(st.s), (float)(sp.e), (float)(sp.s), true );
+                        // xoff, yoff, true );
         }
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.e) - xoff,
-                                                          DrawingUtil.toSceneY(st.s) - yoff, true, null );
+        // dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.e) - xoff,
+        //                                                   DrawingUtil.toSceneY(st.s) - yoff, true, null );
+        dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.e), DrawingUtil.toSceneY(st.s), true, null );
       }
     } else { // if ( PlotInfo.isProfile( type ) // FIXME OK PROFILE
       for ( NumShot sh : shots ) {
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v),
-                        xoff, yoff, false );
+          addFixedLine( sh.getFirstBlock(), (float)(st1.h), (float)(st1.v), (float)(st2.h), (float)(st2.v), false );
+                        // xoff, yoff, false );
         }
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), 
-                      xoff, yoff, true );
+        addFixedLine( sp.getBlock(), (float)(st.h), (float)(st.v), (float)(sp.h), (float)(sp.v), true );
+                      // xoff, yoff, true );
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;
-        dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h) - xoff,
-                                                          DrawingUtil.toSceneY(st.v) - yoff, true, null );
+        // dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h) - xoff,
+        //                                                   DrawingUtil.toSceneY(st.v) - yoff, true, null );
+        dst = mOverviewSurface.addDrawingStationName( st, DrawingUtil.toSceneX(st.h), DrawingUtil.toSceneY(st.v), true, null );
       }
     }
 
@@ -543,7 +553,8 @@ public class OverviewActivity extends ItemDrawer
           // float decl = mData.getSurveyDeclination( mSid );
           mNum = new DistoXNum( mBlockList, start, null, null, 0.0f );
           mStartStation = mNum.getStation( start );
-          computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
+          // computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
+          computeReferences( (int)type, mZoom );
           // Log.v( "DistoX", "Overview num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );
         } else {
           NumStation st = mNum.getStation( start );
@@ -605,253 +616,253 @@ public class OverviewActivity extends ItemDrawer
    //   // mOverviewSurface.refresh();
    // }
 
-    float mSave0X, mSave0Y;
-    float mSave1X, mSave1Y;
+  float mSave0X, mSave0Y;
+  float mSave1X, mSave1Y;
 
     
-    private void dumpEvent( MotionEventWrap ev )
-    {
-      String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
-      StringBuilder sb = new StringBuilder();
-      int action = ev.getAction();
-      int actionCode = action & MotionEvent.ACTION_MASK;
-      sb.append( "Event action_").append( name[actionCode] );
-      if ( actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP ) {
-        sb.append( "(pid " ).append( action>>MotionEvent.ACTION_POINTER_ID_SHIFT ).append( ")" );
-      }
-      sb.append( " [" );
-      for (int i=0; i<ev.getPointerCount(); ++i ) {
-        sb.append( "#" ).append( i );
-        sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
-        if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
-      }
-      sb.append( "]" );
-      // TDLog.Log(TDLog.LOG_PLOT, sb.toString() );
+  private void dumpEvent( MotionEventWrap ev )
+  {
+    String name[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
+    StringBuilder sb = new StringBuilder();
+    int action = ev.getAction();
+    int actionCode = action & MotionEvent.ACTION_MASK;
+    sb.append( "Event action_").append( name[actionCode] );
+    if ( actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP ) {
+      sb.append( "(pid " ).append( action>>MotionEvent.ACTION_POINTER_ID_SHIFT ).append( ")" );
     }
-    
+    sb.append( " [" );
+    for (int i=0; i<ev.getPointerCount(); ++i ) {
+      sb.append( "#" ).append( i );
+      sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
+      if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
+    }
+    sb.append( "]" );
+    // TDLog.Log(TDLog.LOG_PLOT, sb.toString() );
+  }
+  
 
-    float spacing( MotionEventWrap ev )
-    {
-      int np = ev.getPointerCount();
-      if ( np < 2 ) return 0.0f;
-      float x = ev.getX(1) - ev.getX(0);
-      float y = ev.getY(1) - ev.getY(0);
-      return TDMath.sqrt(x*x + y*y);
+  float spacing( MotionEventWrap ev )
+  {
+    int np = ev.getPointerCount();
+    if ( np < 2 ) return 0.0f;
+    float x = ev.getX(1) - ev.getX(0);
+    float y = ev.getY(1) - ev.getY(0);
+    return TDMath.sqrt(x*x + y*y);
+  }
+
+  void saveEventPoint( MotionEventWrap ev )
+  {
+    int np = ev.getPointerCount();
+    if ( np >= 1 ) {
+      mSave0X = ev.getX(0);
+      mSave0Y = ev.getY(0);
+      if ( np >= 2 ) {
+        mSave1X = ev.getX(1);
+        mSave1Y = ev.getY(1);
+      } else {
+        mSave1X = mSave0X;
+        mSave1Y = mSave0Y;
+      } 
+    }
+  }
+
+  
+  void shiftByEvent( MotionEventWrap ev )
+  {
+    float x0 = 0.0f;
+    float y0 = 0.0f;
+    float x1 = 0.0f;
+    float y1 = 0.0f;
+    int np = ev.getPointerCount();
+    if ( np >= 1 ) {
+      x0 = ev.getX(0);
+      y0 = ev.getY(0);
+      if ( np >= 2 ) {
+        x1 = ev.getX(1);
+        y1 = ev.getY(1);
+      } else {
+        x1 = x0;
+        y1 = y0;
+      } 
+    }
+    float x_shift = ( x0 - mSave0X + x1 - mSave1X ) / 2;
+    float y_shift = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
+    mSave0X = x0;
+    mSave0Y = y0;
+    mSave1X = x1;
+    mSave1Y = y1;
+  
+    if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+      mOffset.x += x_shift / mZoom;                // add shift to offset
+      mOffset.y += y_shift / mZoom; 
+      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
     }
 
-    void saveEventPoint( MotionEventWrap ev )
-    {
-      int np = ev.getPointerCount();
-      if ( np >= 1 ) {
-        mSave0X = ev.getX(0);
-        mSave0Y = ev.getY(0);
-        if ( np >= 2 ) {
-          mSave1X = ev.getX(1);
-          mSave1Y = ev.getY(1);
+  }
+
+  private void moveCanvas( float x_shift, float y_shift )
+  {
+    if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+      mOffset.x += x_shift / mZoom;                // add shift to offset
+      mOffset.y += y_shift / mZoom; 
+      mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+      // mOverviewSurface.refresh();
+    }
+  }
+
+
+  float oldDist = 0;
+  float mStartX = 0;
+  float mStartY = 0;
+
+  public boolean onTouch( View view, MotionEvent rawEvent )
+  {
+    float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mZoom;
+    checkZoomBtnsCtrl();
+
+    MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onTouch() " );
+    // dumpEvent( event );
+
+    float x_canvas = event.getX();
+    float y_canvas = event.getY();
+    // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
+
+    if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
+      mZoomBtnsCtrl.setVisible( true );
+      // mZoomCtrl.show( );
+    }
+    float x_scene = x_canvas/mZoom - mOffset.x;
+    float y_scene = y_canvas/mZoom - mOffset.y;
+    // Log.v("DistoX", "touch scene " + x_scene + " " + y_scene );
+
+    int action = event.getAction() & MotionEvent.ACTION_MASK;
+
+    if (action == MotionEvent.ACTION_POINTER_DOWN) {
+      if ( mOnMeasure == 2 ) mOnMeasure = 1;
+      mTouchMode = MODE_ZOOM;
+      oldDist = spacing( event );
+      saveEventPoint( event );
+    } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+      if ( mOnMeasure == 1 ) mOnMeasure = 2;
+      mTouchMode = MODE_MOVE;
+      /* nothing */
+
+    // ---------------------------------------- DOWN
+
+    } else if (action == MotionEvent.ACTION_DOWN) {
+      mSaveX = x_canvas; // FIXME-000
+      mSaveY = y_canvas;
+      if ( mOnMeasure == 1 ) {
+        mStartX = x_canvas/mZoom - mOffset.x;
+        mStartY = y_canvas/mZoom - mOffset.y;
+        mOnMeasure = 2;
+        // add reference point
+        DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+        path.setPaint( DrawingBrushPaths.highlightPaint );
+        path.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
+        // Log.v("DistoX", "first ref " + mStartX + " " + mStartY );
+        mOverviewSurface.setFirstReference( path );
+      } else if ( mOnMeasure == 2 ) {
+        // FIXME use scene values
+        float x = x_canvas/mZoom - mOffset.x;
+        float y = y_canvas/mZoom - mOffset.y;
+        float dx = (  (x - mStartX) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        float dy = ( -(y - mStartY) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
+        double a = Math.atan2( dx, dy ) * 180 / Math.PI;
+        if ( a < 0 ) a += 360;
+
+        String format;
+        if ( mType == PlotInfo.PLOT_PLAN ) {
+          format = getResources().getString( R.string.format_measure_plan );
         } else {
-          mSave1X = mSave0X;
-          mSave1Y = mSave0Y;
-        } 
-      }
-    }
-
-    
-    void shiftByEvent( MotionEventWrap ev )
-    {
-      float x0 = 0.0f;
-      float y0 = 0.0f;
-      float x1 = 0.0f;
-      float y1 = 0.0f;
-      int np = ev.getPointerCount();
-      if ( np >= 1 ) {
-        x0 = ev.getX(0);
-        y0 = ev.getY(0);
-        if ( np >= 2 ) {
-          x1 = ev.getX(1);
-          y1 = ev.getY(1);
-        } else {
-          x1 = x0;
-          y1 = y0;
-        } 
-      }
-      float x_shift = ( x0 - mSave0X + x1 - mSave1X ) / 2;
-      float y_shift = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
-      mSave0X = x0;
-      mSave0Y = y0;
-      mSave1X = x1;
-      mSave1Y = y1;
-    
-      if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
-        mOffset.x += x_shift / mZoom;                // add shift to offset
-        mOffset.y += y_shift / mZoom; 
-        mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-      }
-
-    }
-
-    private void moveCanvas( float x_shift, float y_shift )
-    {
-      if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
-        mOffset.x += x_shift / mZoom;                // add shift to offset
-        mOffset.y += y_shift / mZoom; 
-        mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-        // mOverviewSurface.refresh();
-      }
-    }
-
-
-    float oldDist = 0;
-    float mStartX = 0;
-    float mStartY = 0;
-
-    public boolean onTouch( View view, MotionEvent rawEvent )
-    {
-      float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mZoom;
-      checkZoomBtnsCtrl();
-
-      MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
-      // TDLog.Log( TDLog.LOG_INPUT, "DrawingActivity onTouch() " );
-      // dumpEvent( event );
-
-      float x_canvas = event.getX();
-      float y_canvas = event.getY();
-      // Log.v("DistoX", "touch canvas " + x_canvas + " " + y_canvas ); 
-
-      if ( mZoomBtnsCtrlOn && y_canvas > DrawingUtil.CENTER_Y*2-20 ) {
-        mZoomBtnsCtrl.setVisible( true );
-        // mZoomCtrl.show( );
-      }
-      float x_scene = x_canvas/mZoom - mOffset.x;
-      float y_scene = y_canvas/mZoom - mOffset.y;
-      // Log.v("DistoX", "touch scene " + x_scene + " " + y_scene );
-
-      int action = event.getAction() & MotionEvent.ACTION_MASK;
-
-      if (action == MotionEvent.ACTION_POINTER_DOWN) {
-        if ( mOnMeasure == 2 ) mOnMeasure = 1;
-        mTouchMode = MODE_ZOOM;
-        oldDist = spacing( event );
-        saveEventPoint( event );
-      } else if ( action == MotionEvent.ACTION_POINTER_UP) {
-        if ( mOnMeasure == 1 ) mOnMeasure = 2;
-        mTouchMode = MODE_MOVE;
-        /* nothing */
-
-      // ---------------------------------------- DOWN
-
-      } else if (action == MotionEvent.ACTION_DOWN) {
-        mSaveX = x_canvas; // FIXME-000
-        mSaveY = y_canvas;
-        if ( mOnMeasure == 1 ) {
-          mStartX = x_canvas/mZoom - mOffset.x;
-          mStartY = y_canvas/mZoom - mOffset.y;
-          mOnMeasure = 2;
-          // add reference point
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
-          path.setPaint( DrawingBrushPaths.highlightPaint );
-          path.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
-          // Log.v("DistoX", "first ref " + mStartX + " " + mStartY );
-          mOverviewSurface.setFirstReference( path );
-        } else if ( mOnMeasure == 2 ) {
-          // FIXME use scene values
-          float x = x_canvas/mZoom - mOffset.x;
-          float y = y_canvas/mZoom - mOffset.y;
-          float dx = (  (x - mStartX) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
-          float dy = ( -(y - mStartY) / DrawingUtil.SCALE_FIX ) / TDSetting.mUnitGrid;
-          double a = Math.atan2( dx, dy ) * 180 / Math.PI;
-          if ( a < 0 ) a += 360;
-
-          String format;
-          if ( mType == PlotInfo.PLOT_PLAN ) {
-            format = getResources().getString( R.string.format_measure_plan );
+          if ( a <= 180 ) {
+            a = 90 - a;
           } else {
-            if ( a <= 180 ) {
-              a = 90 - a;
-            } else {
-              a = a - 270;
-            } 
-            format = getResources().getString( R.string.format_measure_profile );
-          }
-          a *= TDSetting.mUnitAngle;
-
-          String msg = String.format( format, TDMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
-          // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
-          // setTitle( sw.getBuffer().toString() );
-          setTitle( msg );
-          // replace target point
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
-          path.setPaint( DrawingBrushPaths.fixedBluePaint );
-          path.makePath( mCrossPath, new Matrix(), x, y );
-          path.mPath.moveTo( mStartX, mStartY );
-          path.mPath.lineTo( x, y );
-          // Log.v("DistoX", "second ref " + x + " " + y );
-          mOverviewSurface.setSecondReference( path );
+            a = a - 270;
+          } 
+          format = getResources().getString( R.string.format_measure_profile );
         }
-      // ---------------------------------------- MOVE
+        a *= TDSetting.mUnitAngle;
 
-      } else if ( action == MotionEvent.ACTION_MOVE ) {
-        if ( mTouchMode == MODE_MOVE) {
-          float x_shift = x_canvas - mSaveX; // compute shift
-          float y_shift = y_canvas - mSaveY;
-          if ( mOnMeasure == 0 ) {
-            if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
-              mOffset.x += x_shift / mZoom;                // add shift to offset
-              mOffset.y += y_shift / mZoom; 
-              mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-            }
-            mSaveX = x_canvas; 
-            mSaveY = y_canvas;
-          }
-        } else { // mTouchMode == MODE_ZOOM
-          float newDist = spacing( event );
-          if ( newDist > 16.0f && oldDist > 16.0f ) {
-            float factor = newDist/oldDist;
-            if ( factor > 0.05f && factor < 4.0f ) {
-              changeZoom( factor );
-              oldDist = newDist;
-            }
-          }
-          shiftByEvent( event );
-        }
-
-      // ---------------------------------------- UP
-
-      } else if (action == MotionEvent.ACTION_UP) {
-        if ( onMenu ) {
-          closeMenu();
-          return true;
-        }
-
-        if ( mTouchMode == MODE_ZOOM ) {
-          mTouchMode = MODE_MOVE;
-        } else {
-          // NOTHING
-          // if ( mOnMeasure == 0 ) {
-          //   // float x_shift = x_canvas - mSaveX; // compute shift
-          //   // float y_shift = y_canvas - mSaveY;
-          // } else {
-          // }
-        }
+        String msg = String.format( format, TDMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
+        // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
+        // mActivity.setTitle( sw.getBuffer().toString() );
+        setTitle( msg );
+        // replace target point
+        DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
+        path.setPaint( DrawingBrushPaths.fixedBluePaint );
+        path.makePath( mCrossPath, new Matrix(), x, y );
+        path.mPath.moveTo( mStartX, mStartY );
+        path.mPath.lineTo( x, y );
+        // Log.v("DistoX", "second ref " + x + " " + y );
+        mOverviewSurface.setSecondReference( path );
       }
-      return true;
+    // ---------------------------------------- MOVE
+
+    } else if ( action == MotionEvent.ACTION_MOVE ) {
+      if ( mTouchMode == MODE_MOVE) {
+        float x_shift = x_canvas - mSaveX; // compute shift
+        float y_shift = y_canvas - mSaveY;
+        if ( mOnMeasure == 0 ) {
+          if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+            mOffset.x += x_shift / mZoom;                // add shift to offset
+            mOffset.y += y_shift / mZoom; 
+            mOverviewSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+          }
+          mSaveX = x_canvas; 
+          mSaveY = y_canvas;
+        }
+      } else { // mTouchMode == MODE_ZOOM
+        float newDist = spacing( event );
+        if ( newDist > 16.0f && oldDist > 16.0f ) {
+          float factor = newDist/oldDist;
+          if ( factor > 0.05f && factor < 4.0f ) {
+            changeZoom( factor );
+            oldDist = newDist;
+          }
+        }
+        shiftByEvent( event );
+      }
+
+    // ---------------------------------------- UP
+
+    } else if (action == MotionEvent.ACTION_UP) {
+      if ( onMenu ) {
+        closeMenu();
+        return true;
+      }
+
+      if ( mTouchMode == MODE_ZOOM ) {
+        mTouchMode = MODE_MOVE;
+      } else {
+        // NOTHING
+        // if ( mOnMeasure == 0 ) {
+        //   // float x_shift = x_canvas - mSaveX; // compute shift
+        //   // float y_shift = y_canvas - mSaveY;
+        // } else {
+        // }
+      }
     }
+    return true;
+  }
 
 
-    private Button makeButton( String text )
-    {
-      Button myTextView = new Button( this );
-      myTextView.setHeight( 42 );
+  private Button makeButton( String text )
+  {
+    Button myTextView = new Button( this );
+    myTextView.setHeight( 42 );
 
-      myTextView.setText( text );
-      myTextView.setTextColor( 0xffffffff );
-      myTextView.setTextSize( TypedValue.COMPLEX_UNIT_DIP, 16 );
-      myTextView.setBackgroundColor( 0xff333333 );
-      myTextView.setSingleLine( true );
-      myTextView.setGravity( 0x03 ); // left
-      myTextView.setPadding( 4, 4, 4, 4 );
-      // Log.v(TopoDroidApp.TAG, "makeButton " + text );
-      return myTextView;
-    }
+    myTextView.setText( text );
+    myTextView.setTextColor( 0xffffffff );
+    myTextView.setTextSize( TypedValue.COMPLEX_UNIT_DIP, 16 );
+    myTextView.setBackgroundColor( 0xff333333 );
+    myTextView.setSingleLine( true );
+    myTextView.setGravity( 0x03 ); // left
+    myTextView.setPadding( 4, 4, 4, 4 );
+    // Log.v(TopoDroidApp.TAG, "makeButton " + text );
+    return myTextView;
+  }
 
     /* FIXME_OVER
     private void switchPlotType()
@@ -932,7 +943,7 @@ public class OverviewActivity extends ItemDrawer
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.OverviewActivity );
+        String help_page = getResources().getString( R.string.OverviewWindow );
         if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)

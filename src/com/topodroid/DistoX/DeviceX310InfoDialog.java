@@ -32,7 +32,7 @@ class DeviceX310InfoDialog extends MyDialog
   private RadioButton mRBa3;
   private RadioButton mRBx310;
   private Button mBTok;
-  // private Button mBTback;
+  private Button mBTback;
 
   DeviceActivity mParent;
   Device mDevice;
@@ -76,9 +76,9 @@ class DeviceX310InfoDialog extends MyDialog
     mParent.readX310Info( this );
 
     mBTok = (Button) findViewById( R.id.btn_ok );
+    mBTback = (Button) findViewById( R.id.button_cancel );
     mBTok.setOnClickListener( this );
-    // mBTback = (Button) findViewById( R.id.button_cancel );
-    // mBTback.setOnClickListener( this );
+    mBTback.setOnClickListener( this );
   }
 
   public void updateInfo( DeviceX310Info info )
@@ -104,8 +104,8 @@ class DeviceX310InfoDialog extends MyDialog
           }
         }
       );
-    // } else if ( b == mBTback ) {
-    //   dismiss();
+    } else if ( b == mBTback ) {
+      dismiss();
     }
   }
 

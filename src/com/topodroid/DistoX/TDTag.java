@@ -35,9 +35,9 @@ class TDTag
   // END_SKETCH_3D
 
   public static final String TOPODROID_SURVEY      = "survey";
-  public static final String TOPODROID_OLDSID      = "old_sid";    // SurveyActivity
+  public static final String TOPODROID_OLDSID      = "old_sid";    // SurveyWindow
   public static final String TOPODROID_OLDID       = "old_id";
-  public static final String TOPODROID_SURVEY_ID   = "survey_id";  // DrawingActivity
+  public static final String TOPODROID_SURVEY_ID   = "survey_id";  // DrawingWindow
   
   public static final String TOPODROID_DEVICE_ACTION  = "device_action";
   // public static final String TOPODROID_DEVICE_ADDR = "device_addr";

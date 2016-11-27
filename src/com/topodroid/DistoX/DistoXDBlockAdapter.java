@@ -33,12 +33,12 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
                                    // , OnClickListener
 {
   private Context mContext;
-  private ShotActivity mParent;
+  private ShotWindow mParent;
   ArrayList< DistoXDBlock > mItems;
   boolean show_ids;  //!< whether to show data ids
   private LayoutInflater mLayoutInflater;
 
-  public DistoXDBlockAdapter( Context ctx, ShotActivity parent, int id, ArrayList< DistoXDBlock > items )
+  public DistoXDBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DistoXDBlock > items )
   {
     super( ctx, id, items );
     mContext = ctx;
@@ -87,7 +87,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     return ret;
   }
 
-  // called only by ShotActivity updateBlockList( blk )
+  // called only by ShotWindow updateBlockList( blk )
   // this method changes the ArrayList of DistoxDBlock's
   //
   void addDataBlock( DistoXDBlock blk ) 
@@ -96,7 +96,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     // notifyDataSetChanged();
   }
 
-  // called by ShotActivity::updateShotlist
+  // called by ShotWindow::updateShotlist
   //  
   void reviseBlockWithPhotos( List< PhotoInfo > photos )
   {
@@ -277,7 +277,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
   @Override
   public int getItemViewType(int pos) { return AdapterView.ITEM_VIEW_TYPE_IGNORE; }
  
-  // called by ShotActivity::updateShot()
+  // called by ShotWindow::updateShot()
   //
   DistoXDBlock updateBlockView( long blk_id ) 
   {

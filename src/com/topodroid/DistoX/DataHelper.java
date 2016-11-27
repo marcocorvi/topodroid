@@ -2609,7 +2609,7 @@ public class DataHelper extends DataSetObservable
    
    /** N.B. only one location per station
     *       Before inserting a location drop existing deleted fixeds for the station
-    * N.B. this must be called with id == -1L ( currently called only by SurveyActivity )
+    * N.B. this must be called with id == -1L ( currently called only by SurveyWindow )
     */
    public long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
                             String comment, long status )

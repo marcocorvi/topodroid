@@ -50,9 +50,9 @@ public class SketchNewShotDialog extends MyDialog
   private EditText mETazimuth;
   private EditText mETclino;
 
-  private SketchActivity mParent;
+  private SketchWindow mParent;
   private DataHelper     mData;
-  private ShotActivity   mShots;
+  private ShotWindow   mShots;
   private TopoDroidApp   mApp;
   String mFrom;
   boolean manual_shot;
@@ -60,14 +60,14 @@ public class SketchNewShotDialog extends MyDialog
 
   private MyKeyboard mKeyboard;
 
-  SketchNewShotDialog( Context context, SketchActivity parent, TopoDroidApp app, String name )
+  SketchNewShotDialog( Context context, SketchWindow parent, TopoDroidApp app, String name )
   {
     super( context, R.string.SketchNewShotDialog );
 
     mParent = parent;
     mApp    = app;
     mData   = app.mData;
-    mShots  = app.mShotActivity;
+    mShots  = app.mShotWindow;
     mFrom   = name;
     mBlk    = null;
     if ( mFrom == null || mFrom.length() == 0 ) {
@@ -124,25 +124,27 @@ public class SketchNewShotDialog extends MyDialog
 
     // TextView station = (TextView) findViewById(R.id.tv_station );
 
-    mBlk = mShots.getNextBlankLegShot( null );
-    if ( mBlk != null ) {
-      mFrom = mBlk.mFrom;
-      mETfrom.setText( mFrom );
-      mETto.setText( mBlk.mTo );
-      mETlength.setText(  Float.toString( mBlk.mLength ) );
-      mETazimuth.setText( Float.toString( mBlk.mBearing ) );
-      mETclino.setText(   Float.toString( mBlk.mClino ) );
-      mETlength.setEnabled( false );
-      mETazimuth.setEnabled( false );
-      mETclino.setEnabled( false );
-    } else {
-      mETfrom.setText( mFrom );
-      String to = mFrom;
-      List< DistoXDBlock > list = mData.selectAllShots( mApp.mSID, 0 );
-      do {
-          to = DistoXStationName.increment( to ); 
-      } while ( DistoXStationName.listHasName( list, to ) );
-      mETto.setText( to );
+    if ( mShots != null ) {
+      mBlk = mShots.getNextBlankLegShot( null );
+      if ( mBlk != null ) {
+        mFrom = mBlk.mFrom;
+        mETfrom.setText( mFrom );
+        mETto.setText( mBlk.mTo );
+        mETlength.setText(  Float.toString( mBlk.mLength ) );
+        mETazimuth.setText( Float.toString( mBlk.mBearing ) );
+        mETclino.setText(   Float.toString( mBlk.mClino ) );
+        mETlength.setEnabled( false );
+        mETazimuth.setEnabled( false );
+        mETclino.setEnabled( false );
+      } else {
+        mETfrom.setText( mFrom );
+        String to = mFrom;
+        List< DistoXDBlock > list = mData.selectAllShots( mApp.mSID, 0 );
+        do {
+            to = DistoXStationName.increment( to ); 
+        } while ( DistoXStationName.listHasName( list, to ) );
+        mETto.setText( to );
+      }
     }
     mBtnOk.setOnClickListener( this );
     // mBtnCancel.setOnClickListener( this );
@@ -174,8 +176,10 @@ public class SketchNewShotDialog extends MyDialog
       } else {
         // set stations to mBlk
         // mBlk.setName( mFrom, to ); // FIXME
-        mShots.updateShot( mFrom, to, 1, 0, false, null, mBlk ); // null comment ?
-        mBlk.setName( mFrom, to ); // reset block name/type
+        if ( mShots != null ) {
+          mShots.updateShot( mFrom, to, 1, 0, false, null, mBlk ); // null comment ?
+          mBlk.setName( mFrom, to ); // reset block name/type
+        }
         if ( ! splay ) {
           /* updateList = mShots.numberSplays(); // FIXME-EXTEND in may go away ... */
         } else {

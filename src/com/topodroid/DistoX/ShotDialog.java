@@ -51,7 +51,7 @@ public class ShotDialog extends MyDialog
                         implements View.OnClickListener
                                  , View.OnLongClickListener
 {
-  private ShotActivity mParent;
+  private ShotWindow mParent;
   private DistoXDBlock mBlk;
   private DistoXDBlock mPrevBlk;
   private DistoXDBlock mNextBlk;
@@ -121,7 +121,7 @@ public class ShotDialog extends MyDialog
   private static int flagBearing  = MyKeyboard.FLAG_POINT;
   private static int flagClino    = MyKeyboard.FLAG_POINT | MyKeyboard.FLAG_SIGN;
 
-  public ShotDialog( Context context, ShotActivity parent, int pos, DistoXDBlock blk,
+  public ShotDialog( Context context, ShotWindow parent, int pos, DistoXDBlock blk,
                      DistoXDBlock prev, DistoXDBlock next
                    )
   {

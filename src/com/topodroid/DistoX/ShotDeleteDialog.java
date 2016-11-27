@@ -29,7 +29,7 @@ import android.view.KeyEvent;
 public class ShotDeleteDialog extends MyDialog
                               implements View.OnClickListener
 {
-  private ShotActivity mParent;
+  private ShotWindow mParent;
   private DistoXDBlock mBlk;
 
   private TextView mTVstations;
@@ -42,7 +42,7 @@ public class ShotDeleteDialog extends MyDialog
    * @param parent    parent
    * @param blk       shot block
    */
-  ShotDeleteDialog( Context context, ShotActivity parent, DistoXDBlock blk )
+  ShotDeleteDialog( Context context, ShotWindow parent, DistoXDBlock blk )
   {
     super( context, R.string.ShotDeleteDialog );
     mParent  = parent;

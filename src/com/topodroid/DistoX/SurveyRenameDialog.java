@@ -33,9 +33,9 @@ public class SurveyRenameDialog extends MyDialog
   private Button   mBtnOK;
   private Button   mBtnBack;
 
-  private SurveyActivity mParent;
+  private SurveyWindow mParent;
 
-  SurveyRenameDialog( Context context, SurveyActivity parent )
+  SurveyRenameDialog( Context context, SurveyWindow parent )
   {
     super( context, R.string.SurveyRenameDialog );
     mParent = parent;

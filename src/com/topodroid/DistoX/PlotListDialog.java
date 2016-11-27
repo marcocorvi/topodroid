@@ -42,8 +42,8 @@ public class PlotListDialog extends MyDialog
                                 // , OnItemLongClickListener
                                 , View.OnClickListener
 {
-  private ShotActivity    mParent;
-  private DrawingActivity mParent2;
+  private ShotWindow    mParent;
+  private DrawingWindow mParent2;
   private TopoDroidApp mApp;
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
@@ -61,7 +61,7 @@ public class PlotListDialog extends MyDialog
   // private ListView mList;
   private GridView mList;
 
-  public PlotListDialog( Context context, ShotActivity parent, TopoDroidApp app, DrawingActivity parent2 )
+  public PlotListDialog( Context context, ShotWindow parent, TopoDroidApp app, DrawingWindow parent2 )
   {
     super( context, R.string.PlotListDialog );
     mParent  = parent;
@@ -239,7 +239,7 @@ public class PlotListDialog extends MyDialog
     } else {
       if ( mParent != null ) {
         String sketch_name = value.substring( from+1, to );
-        mParent.startSketchActivity( sketch_name ); // context of current SID
+        mParent.startSketchWindow( sketch_name ); // context of current SID
       }
     }
     dismiss();

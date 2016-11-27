@@ -142,7 +142,7 @@ public class ProjectionSurface extends SurfaceView
       }
     }
 
-    // called by DrawingActivity::computeReference
+    // called by DrawingWindow::computeReference
     public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y )
     {
       DrawingStationName st = new DrawingStationName( num_st, x, y );

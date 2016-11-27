@@ -33,6 +33,18 @@ class DrawingUtil
   static float sceneToWorldY( float y ) { return (y - CENTER_Y)/SCALE_FIX; }
 
     
+  static void makePath( DrawingPath dpath, float x1, float y1, float x2, float y2 )
+  {
+    dpath.mPath = new Path();
+    x1 = toSceneX( x1 );
+    y1 = toSceneY( y1 );
+    x2 = toSceneX( x2 );
+    y2 = toSceneY( y2 );
+    dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
+    dpath.mPath.moveTo( x1, y1 );
+    dpath.mPath.lineTo( x2, y2 );
+  }
+
   static void makePath( DrawingPath dpath, float x1, float y1, float x2, float y2, float xoff, float yoff )
   {
     dpath.mPath = new Path();
@@ -67,6 +79,29 @@ class DrawingUtil
     dpath.x2 = x2; // endpoints
     dpath.y2 = y2; // endpoints
     surface.addGridPath( dpath, k );
+  }
+
+  static void addGrid( float xmin, float xmax, float ymin, float ymax, DrawingSurface surface )
+  {
+    xmin = (xmin - 10.0f) / TDSetting.mUnitGrid;
+    xmax = (xmax + 10.0f) / TDSetting.mUnitGrid;
+    ymin = (ymin - 10.0f) / TDSetting.mUnitGrid;
+    ymax = (ymax + 10.0f) / TDSetting.mUnitGrid;
+    float x1 = toSceneX( xmin );
+    float x2 = toSceneX( xmax );
+    float y1 = toSceneY( ymin );
+    float y2 = toSceneY( ymax );
+    // mDrawingSurface.setBounds( toSceneX( xmin ), toSceneX( xmax ), toSceneY( ymin ), toSceneY( ymax ) );
+
+    DrawingPath dpath = null;
+    for ( int x = Math.round(xmin); x <= xmax; x += 1 ) {
+      float x0 = toSceneX( x * TDSetting.mUnitGrid );
+      addGridLine( x, x0, x0, y1, y2, surface );
+    }
+    for ( int y = Math.round(ymin); y <= ymax; y += 1 ) {
+      float y0 = toSceneY( y * TDSetting.mUnitGrid );
+      addGridLine( y, x1, x2, y0, y0, surface );
+    }
   }
 
   static void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )

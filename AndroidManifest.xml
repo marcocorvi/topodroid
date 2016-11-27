@@ -28,7 +28,7 @@
           android:icon="@drawable/icon3" >
           <!-- android:debuggable="false" -->
 
-        <activity android:name=".TopoDroidActivity"
+        <activity android:name=".MainWindow"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
@@ -62,13 +62,13 @@
                   android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".SurveyActivity"
+        <activity android:name=".SurveyWindow"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".ShotActivity"
+        <activity android:name=".ShotWindow"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
@@ -93,7 +93,7 @@
                   android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".DrawingActivity"
+        <activity android:name=".DrawingWindow"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
@@ -103,7 +103,7 @@
            </intent-filter>
         </activity>
 
-        <activity android:name=".OverviewActivity"
+        <activity android:name=".OverviewWindow"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">
@@ -113,7 +113,7 @@
            </intent-filter>
         </activity>
 
-        <activity android:name=".SketchActivity"
+        <activity android:name=".SketchWindow"
                   android:theme="@style/Theme.FullScreen"
                   android:screenOrientation="portrait"
                   android:label="@string/app_name">

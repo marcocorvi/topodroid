@@ -32,9 +32,9 @@ public class ShotDisplayDialog extends MyDialog
     private CheckBox mCBleg;      // whether to hide repeated leg 
     // private Button mBtnRefresh;
 
-    private ShotActivity mParent;
+    private ShotWindow mParent;
 
-    public ShotDisplayDialog( Context context, ShotActivity parent )
+    public ShotDisplayDialog( Context context, ShotWindow parent )
     {
       super( context, R.string.ShotDisplayDialog );
       mParent = parent;

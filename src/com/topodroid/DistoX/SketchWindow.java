@@ -1,4 +1,4 @@
-/* @file SketchActivity.java
+/* @file SketchWindow.java
  *
  * @author marco corvi
  * @date jan 2013
@@ -70,7 +70,7 @@ import android.util.Log;
 
 /**
  */
-public class SketchActivity extends ItemDrawer
+public class SketchWindow extends ItemDrawer
                             implements View.OnTouchListener
                                      , View.OnClickListener
                                      , OnItemClickListener
@@ -1143,7 +1143,7 @@ public class SketchActivity extends ItemDrawer
     float d0 = TDSetting.mCloseCutoff + TDSetting.mCloseness / mInfo.zoom_3d;
 
     MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
-    // TDLog.Log( TDLog.LOG_INPUT, "SketchActivity onTouch() " );
+    // TDLog.Log( TDLog.LOG_INPUT, "SketchWindow onTouch() " );
     // dumpEvent( event );
 
     float x_canvas = event.getX();
@@ -1921,7 +1921,7 @@ public class SketchActivity extends ItemDrawer
       case KeyEvent.KEYCODE_SEARCH:
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
-        String help_page = getResources().getString( R.string.SketchActivity );
+        String help_page = getResources().getString( R.string.SketchWindow );
         if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -1936,18 +1936,18 @@ public class SketchActivity extends ItemDrawer
   @Override
   public void setRefAzimuth( float azimuth, long fixed_extend ) { }
   
-  // forward to the ShotActivity
+  // forward to the ShotWindow
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    mApp.mShotActivity.updateBlockList( blk );
+    mApp.mShotWindow.updateBlockList( blk );
     // FIXME FIXME updateDisplay( true, true );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
-    mApp.mShotActivity.updateBlockList( blk_id );
+    mApp.mShotWindow.updateBlockList( blk_id );
     // FIXME FIXME updateDisplay( true, true );
   }
 

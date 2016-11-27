@@ -68,7 +68,7 @@ class ItemPickerDialog extends MyDialog
   // private  Button mBTok;
   private SeekBar mSeekBar;
 
-  // private DrawingActivity mParent;
+  // private DrawingWindow mParent;
   private ItemDrawer mParent;
 
   //* private ListView    mList = null;
@@ -93,7 +93,7 @@ class ItemPickerDialog extends MyDialog
 
   /**
    * @param context   context
-   * @param parent    DrawingActivity parent
+   * @param parent    DrawingWindow parent
    * @param type      drawing type
    */
   ItemPickerDialog( Context context, ItemDrawer parent, long type, int item_type  )

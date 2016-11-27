@@ -185,10 +185,10 @@ public class TopoDroidApp extends Application
   static DataHelper mData = null;         // database 
   static DeviceHelper mDData = null;      // device/calib database
 
-  static SurveyActivity mSurveyActivity = null;
-  static ShotActivity mShotActivity     = null;
-  // static DrawingActivity mDrawingActivity = null; // FIXME currently not used
-  TopoDroidActivity mActivity = null; 
+  static SurveyWindow mSurveyWindow = null;
+  static ShotWindow mShotWindow     = null;
+  // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
+  MainWindow mActivity = null; 
   TopoDroidPreferences mPrefActivity = null;
 
   static boolean mDeviceActivityVisible = false;
@@ -226,9 +226,11 @@ public class TopoDroidApp extends Application
   static int setListViewHeight( Context context, HorizontalListView listView )
   {
     int size = getScaledSize( context );
-    LayoutParams params = listView.getLayoutParams();
-    params.height = size + 10;
-    listView.setLayoutParams( params );
+    if ( listView != null ) {
+      LayoutParams params = listView.getLayoutParams();
+      params.height = size + 10;
+      listView.setLayoutParams( params );
+    }
     return size;
   }
 
@@ -398,7 +400,7 @@ public class TopoDroidApp extends Application
   // }
 
   // called by DeviceActivity::setState()
-  //           ShotActivity::onResume()
+  //           ShotWindow::onResume()
   public boolean isCommConnected()
   {
     // return mComm != null && mComm.mBTConnected;
@@ -948,13 +950,13 @@ public class TopoDroidApp extends Application
         mySurvey = survey;
         mSecondLastShotId = lastShotId();
         // restoreFixed();
-        if ( mShotActivity != null) {
-          mShotActivity.setTheTitle();
-          mShotActivity.updateDisplay();
+        if ( mShotWindow != null) {
+          mShotWindow.setTheTitle();
+          mShotWindow.updateDisplay();
         }
-        if ( mSurveyActivity != null ) {
-          mSurveyActivity.setTheTitle();
-          mSurveyActivity.updateDisplay();
+        if ( mSurveyWindow != null ) {
+          mSurveyWindow.setTheTitle();
+          mSurveyWindow.updateDisplay();
         }
       }
       return mSID;
@@ -1181,7 +1183,7 @@ public class TopoDroidApp extends Application
   void clearCurrentStations() { mStationName.clearCurrentStations(); }
   String getCurrentOrLastStation( ) { return mStationName.getCurrentOrLastStation( mData, mSID); }
 
-  // called also by ShotActivity::updataBlockList
+  // called also by ShotWindow::updataBlockList
   // this re-assign stations to shots with station(s) already set
   //
   public void assignStationsAfter( DistoXDBlock blk0, List<DistoXDBlock> list )
@@ -1197,7 +1199,7 @@ public class TopoDroidApp extends Application
     mStationName.assignStationsAfter_Default( mData, mSID, blk0, list );
   }
 
-  // called also by ShotActivity::updataBlockList
+  // called also by ShotWindow::updataBlockList
   // @param list blocks whose stations need to be set in the DB
   //
   public void assignStations( List<DistoXDBlock> list )
@@ -1216,7 +1218,7 @@ public class TopoDroidApp extends Application
   // ================================================================
   // EXPORTS
 
-  public String exportSurveyAsCsx( DrawingActivity sketch, String origin )
+  public String exportSurveyAsCsx( DrawingWindow sketch, String origin )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) return null;
@@ -1225,7 +1227,7 @@ public class TopoDroidApp extends Application
     return TopoDroidExporter.exportSurveyAsCsx( mSID, mData, info, sketch, origin, filename );
   }
 
-  public String exportSurveyAsTop( DrawingActivity sketch, String origin )
+  public String exportSurveyAsTop( DrawingWindow sketch, String origin )
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );
     if ( info == null ) {
@@ -1842,15 +1844,15 @@ public class TopoDroidApp extends Application
   void connStateChanged()
   {
     // Log.v( "DistoX", "connStateChanged()" );
-    if ( mSurveyActivity != null ) mSurveyActivity.setTheTitle();
-    if ( mShotActivity  != null) mShotActivity.setTheTitle();
+    if ( mSurveyWindow != null ) mSurveyWindow.setTheTitle();
+    if ( mShotWindow  != null) mShotWindow.setTheTitle();
     if ( mActivity != null ) mActivity.setTheTitle();
   }
 
   void refreshUI()
   {
-    if ( mSurveyActivity != null ) mSurveyActivity.updateDisplay();
-    if ( mShotActivity  != null) mShotActivity.updateDisplay();
+    if ( mSurveyWindow != null ) mSurveyWindow.updateDisplay();
+    if ( mShotWindow  != null) mShotWindow.updateDisplay();
     if ( mActivity != null ) mActivity.updateDisplay();
   }
 

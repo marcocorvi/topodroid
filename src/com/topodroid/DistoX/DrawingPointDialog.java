@@ -33,7 +33,7 @@ public class DrawingPointDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingPointPath mPoint;
-  private DrawingActivity  mParent;
+  private DrawingWindow  mParent;
   private boolean mOrientable;
 
   // private TextView mTVtype;
@@ -50,7 +50,7 @@ public class DrawingPointDialog extends MyDialog
   private Button   mBtnOk;
   private Button   mBtnCancel;
 
-  public DrawingPointDialog( Context context, DrawingActivity parent, DrawingPointPath point )
+  public DrawingPointDialog( Context context, DrawingWindow parent, DrawingPointPath point )
   {
     super( context, R.string.DrawingPointDialog );
     mParent = parent;

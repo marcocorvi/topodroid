@@ -42,11 +42,11 @@ public interface ILister
    *      - DistoXComm.onReceive()
    * 
    * effects:
-   * DrawingACtivity: change button[0] background 
+   * DrawingWindow: change button[0] background 
    * GMACtivity: nothing
    * PhotoActivity: nothing
-   * SHotActivity: change button[0] background
-   * SketchActivity: nothing (TODO)
+   * ShotWindow: change button[0] background
+   * SketchWindow: nothing (TODO)
    */
   public void setConnectionStatus( int status ); // 0 off, 1 on, 2 wait
  
@@ -57,11 +57,11 @@ public interface ILister
    *   - ListerHandler.handleMessage LISTER_REF_AZIMUTH <-- not necessary
    * 
    * implemented
-   * DrawingActivity
-   * GMACtivity: nothing
-   * PhotoACtivity: nothing
-   * ShotACtivity
-   * SketchActivity: TODO
+   * DrawingWindow
+   * GMActivity: nothing
+   * PhotoActivity: nothing
+   * ShotWindow
+   * SketchWindow: TODO
    */
   public void setRefAzimuth( float azimuth, long fixed_extend );
 

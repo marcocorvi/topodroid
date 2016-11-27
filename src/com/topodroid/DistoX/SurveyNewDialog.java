@@ -41,7 +41,7 @@ public class SurveyNewDialog extends MyDialog
                              implements View.OnClickListener
                              , View.OnLongClickListener
 {
-  private TopoDroidActivity mParent;
+  private MainWindow mParent;
 
   private EditText mEditName;
   private Button   mEditDate;
@@ -63,7 +63,7 @@ public class SurveyNewDialog extends MyDialog
   private long mOldId  = -1L;
 
 // -------------------------------------------------------------------
-  public SurveyNewDialog( Context context, TopoDroidActivity parent, long old_sid, long old_id )
+  public SurveyNewDialog( Context context, MainWindow parent, long old_sid, long old_id )
   {
     super( context, R.string.SurveyNewDialog );
     mParent = parent;

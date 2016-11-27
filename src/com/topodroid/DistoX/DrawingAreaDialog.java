@@ -29,7 +29,7 @@ public class DrawingAreaDialog extends MyDialog
                                implements View.OnClickListener
 {
   private DrawingAreaPath mArea;
-  private DrawingActivity mParent;
+  private DrawingWindow mParent;
   private boolean mOrientable;
 
   private CheckBox mCBvisible;
@@ -39,7 +39,7 @@ public class DrawingAreaDialog extends MyDialog
   private Button   mBtnOk;
   private Button mBtnCancel;
 
-  public DrawingAreaDialog( Context context, DrawingActivity parent, DrawingAreaPath line )
+  public DrawingAreaDialog( Context context, DrawingWindow parent, DrawingAreaPath line )
   {
     super( context, R.string.DrawingAreaDialog );
     mParent = parent;

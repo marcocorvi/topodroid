@@ -49,7 +49,7 @@ public class CurrentStationDialog extends MyDialog
                         , OnItemClickListener
 {
   private TopoDroidApp mApp;
-  private ShotActivity mParent;
+  private ShotWindow mParent;
   private EditText mName;
   private EditText mComment;
 
@@ -66,7 +66,7 @@ public class CurrentStationDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
-  public CurrentStationDialog( Context context, ShotActivity parent, TopoDroidApp app )
+  public CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app )
   {
     super( context, R.string.CurrentStationDialog );
     mParent  = parent;

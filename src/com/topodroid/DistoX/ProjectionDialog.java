@@ -66,7 +66,7 @@ public class ProjectionDialog extends MyDialog
   private View mZoomView;
 
   private TopoDroidApp mApp;
-  private ShotActivity mParent;
+  private ShotWindow mParent;
 
   private ProjectionSurface mDrawingSurface;
   private SeekBar mSeekBar;
@@ -78,7 +78,7 @@ public class ProjectionDialog extends MyDialog
   boolean mZoomBtnsCtrlOn = false;
   private float oldDist;  // zoom pointer-spacing
 
-  private int mTouchMode = DrawingActivity.MODE_MOVE;
+  private int mTouchMode = DrawingWindow.MODE_MOVE;
   private float mSaveX;
   private float mSaveY;
   private float mSave0X;
@@ -104,7 +104,7 @@ public class ProjectionDialog extends MyDialog
   List<DistoXDBlock> mList = null;
 
 
-  public ProjectionDialog( Context context, ShotActivity parent, long sid, String name, String from )
+  public ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
   {
     super( context, R.string.ProjectionDialog ); // FIXME
     mParent = parent;
@@ -131,8 +131,8 @@ public class ProjectionDialog extends MyDialog
   @Override
   public void onZoom( boolean zoomin )
   {
-    if ( zoomin ) changeZoom( DrawingActivity.ZOOM_INC );
-    else changeZoom( DrawingActivity.ZOOM_DEC );
+    if ( zoomin ) changeZoom( DrawingWindow.ZOOM_INC );
+    else changeZoom( DrawingWindow.ZOOM_DEC );
   }
 
   private void changeZoom( float f ) 
@@ -149,8 +149,8 @@ public class ProjectionDialog extends MyDialog
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
 
-  public void zoomIn()  { changeZoom( DrawingActivity.ZOOM_INC ); }
-  public void zoomOut() { changeZoom( DrawingActivity.ZOOM_DEC ); }
+  public void zoomIn()  { changeZoom( DrawingWindow.ZOOM_INC ); }
+  public void zoomOut() { changeZoom( DrawingWindow.ZOOM_DEC ); }
   // public void zoomOne() { resetZoom( ); }
 
   // public void zoomView( )
@@ -471,7 +471,7 @@ public class ProjectionDialog extends MyDialog
       checkZoomBtnsCtrl();
 
       MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
-      // TDLog.Log( TDLog.LOG_INPUT, "DrawingActivity onTouch() " );
+      // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onTouch() " );
       // dumpEvent( event );
 
       int act = event.getAction();
@@ -479,7 +479,7 @@ public class ProjectionDialog extends MyDialog
       int id = 0;
 
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
-        mTouchMode = DrawingActivity.MODE_ZOOM;
+        mTouchMode = DrawingWindow.MODE_ZOOM;
         oldDist = spacing( event );
         saveEventPoint( event );
         pointerDown = true;
@@ -487,7 +487,7 @@ public class ProjectionDialog extends MyDialog
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
         int np = event.getPointerCount();
         if ( np > 2 ) return true;
-        mTouchMode = DrawingActivity.MODE_MOVE;
+        mTouchMode = DrawingWindow.MODE_MOVE;
         id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
         // int idx = rawEvent.findPointerIndex( id );
         /* fall through */
@@ -502,14 +502,14 @@ public class ProjectionDialog extends MyDialog
         //                                          + y_canvas + " / " + mBorderBottom );
         if ( y_canvas > mBorderBottom ) {
           if ( mZoomBtnsCtrlOn && x_canvas > mBorderInnerLeft && x_canvas < mBorderInnerRight ) {
-            mTouchMode = DrawingActivity.MODE_ZOOM;
+            mTouchMode = DrawingWindow.MODE_ZOOM;
             mZoomBtnsCtrl.setVisible( true );
             // mZoomCtrl.show( );
           } else if ( TDSetting.mSideDrag ) {
-            mTouchMode = DrawingActivity.MODE_ZOOM;
+            mTouchMode = DrawingWindow.MODE_ZOOM;
           }
         } else if ( TDSetting.mSideDrag && ( x_canvas > mBorderRight || x_canvas < mBorderLeft ) ) {
-          mTouchMode = DrawingActivity.MODE_ZOOM;
+          mTouchMode = DrawingWindow.MODE_ZOOM;
         }
 
         // setTheTitle( );
@@ -519,13 +519,13 @@ public class ProjectionDialog extends MyDialog
 
       // ---------------------------------------- MOVE
       } else if ( action == MotionEvent.ACTION_MOVE ) {
-        if ( mTouchMode == DrawingActivity.MODE_MOVE) {
+        if ( mTouchMode == DrawingWindow.MODE_MOVE) {
           float x_shift = x_canvas - mSaveX; // compute shift
           float y_shift = y_canvas - mSaveY;
           moveCanvas( x_shift, y_shift );
           mSaveX = x_canvas; 
           mSaveY = y_canvas;
-        } else { // mTouchMode == DrawingActivity.MODE_ZOOM
+        } else { // mTouchMode == DrawingWindow.MODE_ZOOM
           float newDist = spacing( event );
           if ( newDist > 16.0f && oldDist > 16.0f ) {
             float factor = newDist/oldDist;
@@ -540,8 +540,8 @@ public class ProjectionDialog extends MyDialog
       // ---------------------------------------- UP
 
       } else if (action == MotionEvent.ACTION_UP) {
-        if ( mTouchMode == DrawingActivity.MODE_ZOOM ) {
-          mTouchMode = DrawingActivity.MODE_MOVE;
+        if ( mTouchMode == DrawingWindow.MODE_ZOOM ) {
+          mTouchMode = DrawingWindow.MODE_MOVE;
         } else {
           float x_shift = x_canvas - mSaveX; // compute shift
           float y_shift = y_canvas - mSaveY;

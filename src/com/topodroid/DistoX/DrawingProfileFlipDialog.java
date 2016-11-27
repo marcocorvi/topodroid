@@ -37,12 +37,12 @@ import android.util.Log;
 public class DrawingProfileFlipDialog extends MyDialog
                            implements View.OnClickListener
 {
-  private DrawingActivity mParent;
+  private DrawingWindow mParent;
   private CheckBox mCBshots;
 
   private Button mBtnOK;
 
-  public DrawingProfileFlipDialog( Context context, DrawingActivity parent )
+  public DrawingProfileFlipDialog( Context context, DrawingWindow parent )
   {
     super( context, R.string.DrawingProfileFlipDialog );
     mParent  = parent;

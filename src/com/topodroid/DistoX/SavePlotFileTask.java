@@ -30,7 +30,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private Context mContext;
   private Handler mHandler;
   private TopoDroidApp mApp;
-  private DrawingActivity mParent;
+  private DrawingWindow mParent;
   private DrawingSurface mSurface;
   private String mFullName;
   private int mType;    // plot type
@@ -38,7 +38,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private int mSuffix;
   private int mRotate;  // nr. backups to rotate
 
-  public SavePlotFileTask( Context context, DrawingActivity parent, Handler handler,
+  public SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
                           TopoDroidApp app, DrawingSurface surface, 
                           String fullname, long type, int proj_dir, int suffix, int rotate )
   {

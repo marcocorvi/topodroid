@@ -52,12 +52,12 @@ public class DrawingShotDialog extends MyDialog
   // private CheckBox mRBbackshot;
   private Button mRBwalls;
 
-  private DrawingActivity mParent;
+  private DrawingWindow mParent;
   private DistoXDBlock mBlock;
 
   MyKeyboard mKeyboard = null;
 
-  public DrawingShotDialog( Context context, DrawingActivity parent, DrawingPath shot )
+  public DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot )
   {
     super(context, R.string.DrawingShotDialog );
     mParent  = parent;

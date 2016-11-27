@@ -35,10 +35,10 @@ class SurveyCalibrationDialog extends MyDialog
   private Button mBTok;
   private Button mBTback;
 
-  SurveyActivity mParent;
+  SurveyWindow mParent;
   TopoDroidApp mApp;
 
-  SurveyCalibrationDialog( Context context, SurveyActivity parent )
+  SurveyCalibrationDialog( Context context, SurveyWindow parent )
   {
     super( context, R.string.SurveyCalibrationDialog );
     mParent = parent;
