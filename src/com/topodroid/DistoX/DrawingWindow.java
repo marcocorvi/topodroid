@@ -779,7 +779,7 @@ public class DrawingWindow extends ItemDrawer
                                   // float xoff, float yoff,
                                   float zoom, boolean can_toast )
   {
-    // Log.v("DistoX", "computeReferences()" );
+    // Log.v("DistoX", "computeReferences() zoom " + zoom );
     if ( ! PlotInfo.isSketch2D( type ) ) return;
     mDrawingSurface.clearReferences( type );
 
@@ -1008,7 +1008,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   private int mSavedMode;
-  private int mSplayMode;
+  // private int mSplayMode;
   
   private void popInfo()
   {
@@ -1031,8 +1031,8 @@ public class DrawingWindow extends ItemDrawer
 
   private void updateSplays( int mode )
   {
-    mSplayMode = mode;
-    switch (mSplayMode) {
+    mApp.mSplayMode = mode;
+    switch ( mode ) {
       case 0:
         mButton1[ BTN_PLOT ].setBackgroundDrawable( mBMsplayNone );
         if ( PlotInfo.isSection( mType ) ) mDrawingSurface.setStationSplays( mTo, false );
@@ -1072,7 +1072,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION );
     resetStatus();
     doStart( true );
-    updateSplays( 2 ); // both splays
+    updateSplays( mApp.mSplayMode );
     mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
     mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
@@ -1745,7 +1745,7 @@ public class DrawingWindow extends ItemDrawer
       block.mFrom = from;
       block.mTo   = to;
       mData.updateShotName( block.mId, mSid, from, to, true );
-      doComputeReferences();
+      doComputeReferences( true );
       mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
 
       modified();
@@ -3286,9 +3286,9 @@ public class DrawingWindow extends ItemDrawer
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         } else if ( PlotInfo.isSection( mType ) ) {
-          updateSplays( (mSplayMode + 1)%4 );
+          updateSplays( (mApp.mSplayMode + 1)%4 );
         } else if ( PlotInfo.isXSection( mType ) ) {
-          updateSplays( (mSplayMode + 2)%4 );
+          updateSplays( (mApp.mSplayMode + 2)%4 );
         }
       } else if ( b == mButton1[k1++] ) { //  AZIMUTH
         if ( PlotInfo.isSketch2D( mType ) ) { 
@@ -3666,7 +3666,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  private void doComputeReferences()
+  private void doComputeReferences( boolean reset )
   {
     // Log.v("DistoX", "doComputeReferences() type " + mType );
     List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
@@ -3677,13 +3677,13 @@ public class DrawingWindow extends ItemDrawer
       // computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       computeReferences( mPlot2.type, mApp.mScaleFactor, true );
       computeReferences( mPlot1.type, mApp.mScaleFactor, true );
-      resetReference( mPlot1 );
+      if ( reset ) resetReference( mPlot1 );
     } else if ( PlotInfo.isProfile( mType ) ) {
       // computeReferences( mPlot1.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       // computeReferences( mPlot2.type, 0.0f, 0.0f, mApp.mScaleFactor, true );
       computeReferences( mPlot1.type, mApp.mScaleFactor, true );
       computeReferences( mPlot2.type, mApp.mScaleFactor, true );
-      resetReference( mPlot2 );
+      if ( reset ) resetReference( mPlot2 );
     }
   }
 
@@ -3693,7 +3693,7 @@ public class DrawingWindow extends ItemDrawer
     setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
-        doComputeReferences();
+        doComputeReferences( false );
       }
       if ( toast ) {
         Toast.makeText( this, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
@@ -3708,7 +3708,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
-    // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
+    // Log.v("DistoX", "updateDisplay() type " + mType );
     // if ( compute ) {
       // List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );

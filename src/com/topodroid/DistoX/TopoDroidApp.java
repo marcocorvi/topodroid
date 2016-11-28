@@ -121,6 +121,7 @@ public class TopoDroidApp extends Application
   DistoXDBlock mHighlightedSplay = null;
   void setHighlightedSplay( DistoXDBlock blk ) { mHighlightedSplay = blk; }
   long getHighlightedSplayId( ) { return (mHighlightedSplay == null)? -1 : mHighlightedSplay.mId; }
+  int mSplayMode = 2; // cross-section splay display mode
   
 
   static private void resetManualCalibrations() 
@@ -188,7 +189,7 @@ public class TopoDroidApp extends Application
   static SurveyWindow mSurveyWindow = null;
   static ShotWindow mShotWindow     = null;
   // static DrawingWindow mDrawingWindow = null; // FIXME currently not used
-  MainWindow mActivity = null; 
+  static MainWindow mActivity = null; 
   TopoDroidPreferences mPrefActivity = null;
 
   static boolean mDeviceActivityVisible = false;

@@ -22,7 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
 
-// import android.widget.Toast;
+import android.widget.Toast;
 import android.util.Log;
 
 public class TopoDroidComm
@@ -143,8 +143,21 @@ public class TopoDroidComm
         } else if ( res == DistoXProtocol.DISTOX_PACKET_M ) {
           // TDLog.Log( TDLog.LOG_DISTOX, "M PACKET" );
           ++nReadPackets;
-          // get G and M from mProto and save them to store
-          mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          if ( hasG ) {
+            // get G and M from mProto and save them to store
+            TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
+                            " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
+            mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          } else {
+            TDLog.Error( "M packet without G packet" );
+            TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+              public void run() {
+                Toast toast = Toast.makeText(mApp, "M packet without G: " + nReadPackets, Toast.LENGTH_SHORT );
+                toast.getView().setBackgroundColor( 0xff993333 );
+                toast.show();
+              }
+            } );
+          }
           hasG = false;
         } else if ( res == DistoXProtocol.DISTOX_PACKET_REPLY ) {
           

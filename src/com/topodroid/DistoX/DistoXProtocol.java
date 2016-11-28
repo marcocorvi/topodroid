@@ -214,16 +214,16 @@ public class DistoXProtocol
     }
   }
 
-  public int handlePacket( ) 
+  private int handlePacket( ) 
   {
+    byte type = (byte)(mBuffer[0] & 0x3f);
     // if ( TDLog.LOG_PROTO ) {
     //   TDLog.Log( TDLog.LOG_PROTO,
-    //     "Proto handle packet " + 
+    //     "packet type " + type + " " + 
     //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
     //     mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
     // }
 
-    byte type = (byte)(mBuffer[0] & 0x3f);
 
     int high, low;
     switch ( type ) {
@@ -268,7 +268,7 @@ public class DistoXProtocol
         if ( mGX > TopoDroidUtil.ZERO ) mGX = mGX - TopoDroidUtil.NEG;
         if ( mGY > TopoDroidUtil.ZERO ) mGY = mGY - TopoDroidUtil.NEG;
         if ( mGZ > TopoDroidUtil.ZERO ) mGZ = mGZ - TopoDroidUtil.NEG;
-        // TDLog.Log( TDLog.LOG_PROTO, "handlePacket " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+        TDLog.Log( TDLog.LOG_PROTO, "handle Packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DISTOX_PACKET_G;
       case 0x03: // m
         mMX = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
@@ -278,7 +278,7 @@ public class DistoXProtocol
         if ( mMX > TopoDroidUtil.ZERO ) mMX = mMX - TopoDroidUtil.NEG;
         if ( mMY > TopoDroidUtil.ZERO ) mMY = mMY - TopoDroidUtil.NEG;
         if ( mMZ > TopoDroidUtil.ZERO ) mMZ = mMZ - TopoDroidUtil.NEG;
-        // TDLog.Log( TDLog.LOG_PROTO, "handlePacket " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+        TDLog.Log( TDLog.LOG_PROTO, "handle Packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DISTOX_PACKET_M;
       case 0x04: // vector data packet
         if ( mDevice.mType == Device.DISTO_X310 ) {
@@ -300,9 +300,13 @@ public class DistoXProtocol
         mReplyBuffer[1] = mBuffer[4];
         mReplyBuffer[2] = mBuffer[5];
         mReplyBuffer[3] = mBuffer[6];
-        // TDLog.Log( TDLog.LOG_PROTO, "handlePacket mReplyBuffer" );
+        // TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
         return DISTOX_PACKET_REPLY;
-      // default:
+      default:
+        TDLog.Error( 
+          "packet error. type " + type + " " + 
+          String.format("%02x %02x %02x %02x %02x %02x %02x %02x", mBuffer[0], mBuffer[1], mBuffer[2],
+          mBuffer[3], mBuffer[4], mBuffer[5], mBuffer[6], mBuffer[7] ) );
       //   return DISTOX_PACKET_NONE;
     }
     return DISTOX_PACKET_NONE;
