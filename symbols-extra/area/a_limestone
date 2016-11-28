@@ -1,6 +1,7 @@
 symbol area
 name limestone
 th_name limestone
+name-ru известняк
 color 0x99ff00 0xcc
 csurvey 1 48 0 3
 orientable
