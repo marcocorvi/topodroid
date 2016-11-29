@@ -41,6 +41,11 @@ public class CalibCBlock
     return ( mx >= 32768 || my >= 32768 || mz >= 32768 );
   }
 
+  boolean isGZero()
+  {
+    return ( gx == 0 && gy == 0 && gz == 0 );
+  }
+
   public CalibCBlock()
   {
     mId = 0;
@@ -77,6 +82,9 @@ public class CalibCBlock
     mId = id;
     mCalibId = cid;
   }
+  // FIXME ZERO-DATA
+  public void setGroupIfNonZero( long g ) { mGroup = isGZero() ? 0 : g; }
+
   public void setGroup( long g ) { mGroup = g; }
   public void setError( float err ) { mError = err; }
 

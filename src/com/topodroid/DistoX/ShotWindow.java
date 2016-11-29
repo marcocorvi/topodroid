@@ -327,11 +327,12 @@ public class ShotWindow extends Activity
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    // FIXME MULTIPLE LIST
     // Log.v("DistoX", "update block list: " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     if ( mDataAdapter != null ) {
       mDataAdapter.addDataBlock( blk );
-      mApp.assignStations( mDataAdapter.mItems );
+      // FIXME 3.3.0
+      // mApp.assignStations( mDataAdapter.mItems );
+      mApp.assignStations( mDataAdapter.getItemsForAssign() );
       mList.post( new Runnable() {
         @Override public void run() {
           mDataAdapter.notifyDataSetChanged();

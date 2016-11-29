@@ -486,7 +486,7 @@ public class GMActivity extends Activity
             c = item.mClino;
           }
           item.setGroup( group );
-          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
+          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
           // N.B. item.calibId == cid
         }
         break;
@@ -494,8 +494,8 @@ public class GMActivity extends Activity
         // TDLog.Log( TDLog.LOG_CALIB, "group by four");
         for ( CalibCBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
-          item.setGroup( group );
-          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
+          item.setGroupIfNonZero( group );
+          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
           ++ cnt;
           if ( (cnt%4) == 0 ) {
             ++group;
@@ -506,8 +506,8 @@ public class GMActivity extends Activity
       case TDSetting.GROUP_BY_ONLY_16:
         for ( CalibCBlock item : list ) {
           if ( start_id >= 0 && item.mId <= start_id ) continue;
-          item.setGroup( group );
-          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString(group) );
+          item.setGroupIfNonZero( group );
+          mApp.mDData.updateGMName( item.mId, item.mCalibId, Long.toString( item.mGroup ) );
           ++ cnt;
           if ( (cnt%4) == 0 || cnt >= 16 ) ++group;
         }
@@ -582,9 +582,10 @@ public class GMActivity extends Activity
     }
     // mList.setAdapter( mDataAdapter );
     if ( n_saturated > 0 ) {
-      Toast.makeText( this, 
-        getResources().getQuantityString( R.plurals.calib_saturated_values, n_saturated, n_saturated),
-        Toast.LENGTH_LONG ).show();
+      Toast toast = Toast.makeText( this, 
+        getResources().getQuantityString( R.plurals.calib_saturated_values, n_saturated, n_saturated), Toast.LENGTH_LONG );
+      toast.getView().setBackgroundColor( 0xff993333 );
+      toast.show();
     }
   }
 

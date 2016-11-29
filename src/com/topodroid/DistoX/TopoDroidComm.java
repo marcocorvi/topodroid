@@ -143,16 +143,15 @@ public class TopoDroidComm
         } else if ( res == DistoXProtocol.DISTOX_PACKET_M ) {
           // TDLog.Log( TDLog.LOG_DISTOX, "M PACKET" );
           ++nReadPackets;
-          if ( hasG ) {
-            // get G and M from mProto and save them to store
-            TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
+          // get G and M from mProto and save them to store
+          TDLog.Log( TDLog.LOG_PROTO, "save G " + mProto.mGX + " " + mProto.mGY + " " + mProto.mGZ + 
                             " M " + mProto.mMX + " " + mProto.mMY + " " + mProto.mMZ );
-            mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
-          } else {
-            TDLog.Error( "M packet without G packet" );
+          mApp.mDData.insertGM( mApp.mCID, mProto.mGX, mProto.mGY, mProto.mGZ, mProto.mMX, mProto.mMY, mProto.mMZ );
+          if ( ! hasG ) {
+            TDLog.Error( "data without G packet " + nReadPackets );
             TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
               public void run() {
-                Toast toast = Toast.makeText(mApp, "M packet without G: " + nReadPackets, Toast.LENGTH_SHORT );
+                Toast toast = Toast.makeText(mApp, "data without G: " + nReadPackets, Toast.LENGTH_SHORT );
                 toast.getView().setBackgroundColor( 0xff993333 );
                 toast.show();
               }

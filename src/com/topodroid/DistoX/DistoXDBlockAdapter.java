@@ -123,6 +123,21 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
     }
   }
 
+  ArrayList< DistoXDBlock > getItemsForAssign()
+  {
+    ArrayList< DistoXDBlock > ret = new ArrayList<DistoXDBlock>();
+    int size = mItems.size();
+    int k = size-1;
+    for ( ; k > 0; --k ) {
+      DistoXDBlock blk = mItems.get(k);
+      if ( blk.mFrom.length() > 0 && blk.mTo.length() > 0 ) break;
+    }
+    for ( ; k < size; ++k ) {
+      ret.add( mItems.get(k) );
+    }
+    return ret;
+  }
+
   public DistoXDBlock get( int pos ) { return mItems.get(pos); }
 
   // public DistoXDBlock getBlockById( long id ) 
