@@ -2,17 +2,17 @@
 
 <resources>
 
-  <!-- FIXME string-array name="unitGrid">
+  <string-array name="unitGrid">
      <item name="meter">Метри</item>
      <item name="yard">Ярдове</item>
-     <item name="two_tf">2 feet</item>
-  </string-array -->
+     <item name="two_tf">2 фута</item>
+  </string-array>
 
-  <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
-     <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
-  </string-array -->
+  <string-array name="loopClosure">
+     <item name="none">Изключено</item>
+     <item name="normal">Нормално</item>
+     <item name="triangles">Триъгълници</item>
+  </string-array>
 
   <string-array name="wallsType">
      <item name="none">Изключени</item>
@@ -179,9 +179,9 @@
      <item name="nonlinear">Нелинеен</item>
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
-  </string-array -->
+  <string-array name="rawCData">
+     <item name="none">Скрити</item>
+     <item name="dec">Десетични</item>
+     <item name="hex">Шестнайсетични</item>
+  </string-array>
 </resources>

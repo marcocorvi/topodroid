@@ -245,7 +245,7 @@
     <string name="menu_attach">Свързване</string>
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <string name="menu_close">Затваряне</string>
     <string name="menu_delete">Изтриване</string>
     <string name="menu_detach">Прек. на връзката</string>
     <string name="menu_display">Дисплей</string>
@@ -256,7 +256,7 @@
     <string name="menu_reload">Препрочитане</string>
     <string name="menu_rename_delete">Преименуване/Изтриване</string>
     <string name="menu_rename">Преименуване</string>
-    <!-- FIXME string name="menu_switch">Смяна</string -->
+    <string name="menu_switch">Смяна/затваряне</string>
     <string name="menu_help">Помощ</string>
     <string name="menu_join_survey">Ко-картиране</string>
     <string name="menu_logs">Лог файлове</string>
@@ -407,7 +407,7 @@
     <string name="stat_length">Дължина %1$.1f %2$s</string>
     <string name="stat_loop">Полигони %1$d</string>
     <string name="stat_origin">Начален репер: %1$s</string>
-    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
+    <string name="stat_azimuth">Азимут на проект. разрез: %1$.1f</string>
     <string name="stat_shot">Отсечки  %1$d,   Дублирани %2$d,   Повърхностни %3$d</string>
     <string name="stat_splay">Странични %1$d</string>
     <string name="stat_station">Репери %1$d</string>
@@ -444,7 +444,7 @@
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
-    <!-- TODO string name="button_close"     >Close     </string -->
+    <string name="button_close"     >Затваряне </string>
     <string name="button_convert"   >Конверт.  </string>
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
@@ -552,7 +552,7 @@
     <!-- UNUSED string name="help_manual">Ръководство</string -->
     <string name="help_measure">Измерване на разстояния</string>
 
-    <!-- TODO string name="help_close">Close window</string -->
+    <string name="help_close">Затваряне на прозореца</string>
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
     <string name="help_current_station">Записани репери</string>
@@ -600,7 +600,7 @@
     <string name="help_redo">Възстановяване на действие от скицата</string>
     <string name="help_symbol_plot">Избор на елемент за рисуване</string>
     <string name="help_delete_item">Изтриване на елемент от скицата</string>
-    <!-- TODO string name="help_range">Moving a portion of line</string -->
+    <string name="help_range">Преместване на част от линия</string>
     <!-- string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Изтриване на елемент</string>
     <string name="help_previous">Предишен избран елемент</string>
