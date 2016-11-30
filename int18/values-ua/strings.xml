@@ -757,6 +757,8 @@
   <string name="pref_wait_shot_summary">Час очікування після виконання замцру [мс]</string>
   <string name="pref_wait_data_title">Пауза скачування [мс]</string>
   <string name="pref_wait_data_summary">Час очікування після скачування даних [мс]</string>
+  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
+  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
   <string name="pref_conn_mode_title">Типи підключення</string>
   <string name="pref_conn_mode_summary">Типи підключення до DistoX</string>
   <string name="pref_auto_reconnect_title">Авто підключення</string>

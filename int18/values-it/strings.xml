@@ -765,6 +765,8 @@
   <string name="pref_wait_shot_summary">Tempo di attesa dopo la misurazione [ms]</string>
   <string name="pref_wait_data_title">Pausa dati [ms]</string>
   <string name="pref_wait_data_summary">Pausa dopo un download [ms]</string>
+  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
+  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
   <string name="pref_conn_mode_title">Tipo connessione</string>
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>

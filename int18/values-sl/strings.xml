@@ -673,6 +673,14 @@
   <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_message">Numero tentativi di connessione</string -->
+  <!-- TODO string name="pref_wait_laser_title">Laser pause [ms]</string -->
+  <!-- TODO string name="pref_wait_laser_summary">Pause after turning laser on [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_title">Shot pause [ms]</string -->
+  <!-- TODO string name="pref_wait_shot_summary">Pause after measuring [ms]</string -->
+  <!-- TODO string name="pref_wait_data_title">Data pause [ms]</string -->
+  <!-- TODO string name="pref_wait_data_summary">Pause after a data download [ms]</string -->
+  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
+  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
   <string name="pref_conn_mode_title">Tip povezave</string>
   <string name="pref_conn_mode_summary">Tip povezave podatkov z DistoX</string>
   <string name="pref_auto_reconnect_title">Samodejna ponovna povezava</string>

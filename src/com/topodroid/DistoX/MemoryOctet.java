@@ -101,16 +101,19 @@ class MemoryOctet
           break;
         case 0x02:
         case 0x03:
-          long X = toInt( data[2], data[1] );
-          long Y = toInt( data[4], data[3] );
-          long Z = toInt( data[6], data[5] );
-          if ( X > TopoDroidUtil.ZERO ) X = X - TopoDroidUtil.NEG;
-          if ( Y > TopoDroidUtil.ZERO ) Y = Y - TopoDroidUtil.NEG;
-          if ( Z > TopoDroidUtil.ZERO ) Z = Z - TopoDroidUtil.NEG;
+          // long X = toInt( data[2], data[1] );
+          // long Y = toInt( data[4], data[3] );
+          // long Z = toInt( data[6], data[5] );
+          // if ( X > TopoDroidUtil.ZERO ) X = X - TopoDroidUtil.NEG;
+          // if ( Y > TopoDroidUtil.ZERO ) Y = Y - TopoDroidUtil.NEG;
+          // if ( Z > TopoDroidUtil.ZERO ) Z = Z - TopoDroidUtil.NEG;
           if ( type == 0x02 ) {
-            pw.format("%4d %c %x %x %x", index, hot? 'G' : 'g', X, Y, Z );
+            pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'G' : 'g',
+               data[1], data[2], data[3], data[4], data[5], data[6] );
           } else {
-            pw.format("%4d %c %x %x %x", index, hot? 'M' : 'm', X, Y, Z );
+            // pw.format("%4d %c %x %x %x", index, hot? 'M' : 'm', X, Y, Z );
+            pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'M' : 'm',
+               data[1], data[2], data[3], data[4], data[5], data[6] );
           }
           break;
         case 0x04:

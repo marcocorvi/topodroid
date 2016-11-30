@@ -53,6 +53,8 @@ class CalibCBlockAdapter extends ArrayAdapter< CalibCBlock >
       tw.setTextColor( b.color() );
       if ( b.isSaturated() ) {
         tw.setBackgroundColor( 0xff990000 );
+      } else if ( b.isGZero() ) {
+        tw.setBackgroundColor( 0xffcc0099 );
       } else if ( b.mStatus == 0 ) {
         tw.setBackgroundColor( 0xff000000 );
       } else {

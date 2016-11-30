@@ -96,9 +96,18 @@
        android:dialogTitle="@string/pref_wait_data_title"
        android:dialogMessage="@string/pref_wait_data_summary"
        android:inputType="number"
-       android:defaultValue="500"
+       android:defaultValue="250"
      / -->
 
+     <!-- com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_WAIT_CONN"
+       android:title="@string/pref_wait_conn_title"
+       android:summary="@string/pref_wait_conn_summary"
+       android:dialogTitle="@string/pref_wait_conn_title"
+       android:dialogMessage="@string/pref_wait_conn_summary"
+       android:inputType="number"
+       android:defaultValue="500"
+     / -->
      <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_WAIT_LASER"
        android:title="@string/pref_wait_laser_title"

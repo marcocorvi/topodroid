@@ -91,7 +91,7 @@ public class TopoDroidComm
           } else {
             try {
               // TDLog.Log( TDLog.LOG_COMM, "RFcomm sleeping 1000 " );
-              Thread.sleep( 1000 );
+              Thread.sleep( TDSetting.mWaitConn );
             } catch (InterruptedException e) {
               // TDLog.Log( TDLog.LOG_COMM, "RFcomm thread sleep interrupt");
             }
@@ -284,7 +284,7 @@ public class TopoDroidComm
         ret |= mProtocol.sendCommand( (byte)cmd ); 
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
         try {
-          Thread.sleep( 100 );
+          Thread.sleep( TDSetting.mWaitCommand );
         } catch ( InterruptedException e ) {
         }
       }

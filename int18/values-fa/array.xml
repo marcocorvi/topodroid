@@ -53,7 +53,7 @@
   </string-array -->
 
   <!-- TODO string-array name="exportPlot">
-     <item name="none">Nada</item>
+     <item name="none">none</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
@@ -73,14 +73,14 @@
      <item name="basic">پایه</item>
      <item name="normal">عادی</item>
      <item name="advanced">پیشرفته</item>
-     <item name="experimental">تجربی</item>
+     <item name="expert">تجربی</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 
-  <string-array name="sizeButtons">
+  <!-- FIXME SEE ENGLISH string-array name="sizeButtons">
      <item name="small1">کوچیک</item>
      <item name="large">بزرگ</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="logStream">
      <item name="android">لاگ سیستمی</item>
@@ -113,11 +113,16 @@
      <item name="anomaly">دید عقب</item>
   </string-array>
 
-  <string-array name="pickerType">
+  <!-- FIXME SEE ENGLISH string-array name="pickerType">
      <item name="list">لیست</item>
      <item name="grid">جدول</item>
-  </string-array>
+  </string-array -->
 
+  <!-- TODO string-array name="sectionStations">
+     <item name="both">Both</item>
+     <item name="from">Behind</item>
+     <item name="to">In front</item>
+  </string-array -->
   <!-- string-array name="deviceType">
      <item name="none">None</item>
      <item name="A3">A3</item>
@@ -141,7 +146,7 @@
   <string-array name="lineStyle">
      <item name="none">خوب</item>
      <item name="two">عادی</item>
-     <item name="two">درشت</item>
+     <item name="three">درشت</item>
      <item name="bezier">بزیر</item>
   </string-array>
 

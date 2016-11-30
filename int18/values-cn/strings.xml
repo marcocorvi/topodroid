@@ -756,6 +756,8 @@
   <!-- TODO string name="pref_wait_shot_summary">为等待测量数据延迟 [毫秒]</string -->
   <!-- TODO string name="pref_wait_data_title">数据暂停间隔 [毫秒]</string -->
   <!-- TODO string name="pref_wait_data_summary">下载数据后暂停 [毫秒]</string -->
+  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
+  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
   <string name="pref_conn_mode_title">数据连接类型</string>
   <string name="pref_conn_mode_summary">DistoX连接类型</string>
   <string name="pref_auto_reconnect_title">自动再连接</string>

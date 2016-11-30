@@ -758,9 +758,9 @@ public class TopoDroidApp extends Application
       fw.flush();
       fw.close();
     } catch ( FileNotFoundException e ) {
-      // FIXME
+      TDLog.Error("manifest write failure: no file");
     } catch ( IOException e ) {
-      // FIXME
+      TDLog.Error("manifest write failure: " + e.getMessage() );
     }
   }
 
