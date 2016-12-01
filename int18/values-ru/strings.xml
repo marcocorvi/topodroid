@@ -73,7 +73,7 @@
     <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градусов</string>
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итерации: %1$d</string>
-    <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
+    <string name="calib_reset">Сбросить калибровку DistoX ?</string>
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -351,7 +351,7 @@
     <string name="shot_info">Введите данные пикета</string>
     <!-- UNUSED string name="shot_length">длинна</string -->
     <string name="shot_note">заметки</string>
-    <!-- TODO string name="shot_not_found">Found no shot</string -->
+    <string name="shot_not_found">Сегмент не найден</string>
     <string name="shot_reverse">развернуть</string>
     <string name="shot_to">№ НА</string>
 
@@ -434,7 +434,7 @@
     <!-- OK string name="distox_err_ok">OK</string -->
     <string name="distox_err_headtail">Ошибка чтения памяти DistoX</string>
     <string name="distox_err_headtail_io">DistoX ошибка I/O </string>
-    <!-- TODO string name="distox_err_headtail_eof">DistoX memory EOF error</string -->
+    <string name="distox_err_headtail_eof">Ошибка чтения памяти DistoX</string>
     <string name="distox_err_connected">Прибор уже подключен</string>
 
     <!-- UNUSED string name="ask_close">Закрыть TopoDroid?</string -->
@@ -503,7 +503,7 @@
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <!-- TODO string name="title_sketch_new">New 3D sketch</string -->
+    <string name="title_sketch_new">Новая 3D модель</string>
     <!-- UNUSED string name="title_sketch_edit">Изменить 3D поверхность</string -->
     <string name="title_sketch_shot">Новый пикет</string>
     <string name="title_sketch_refs">Режим показа</string>
@@ -559,7 +559,7 @@
     <string name="help_close">Закрыть Окно</string>
     <string name="help_coeff">Показать коэффициенты калибровки</string>
     <string name="help_continue">Продолжить рисовать линию</string>
-    <!-- TODO string name="help_contour">Contour editing</string -->
+    <string name="help_contour">Редактировать контуры</string>
     <string name="help_current_station">Сохраненные пикеты</string>
     <string name="help_azimuth">Проекция развертки на референс-азимут</string>
     <string name="help_device">Окно управления устройствами</string>
@@ -663,7 +663,7 @@
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
-    <!-- TODO string name="title_contour">Contour</string -->
+    <string name="title_contour">Контур</string>
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_device">Устройства DistoX</string>
@@ -697,7 +697,7 @@
     <string name="title_sensor_edit">Сенсор</string>
 
     <string name="title_stats">Статистика</string>
-    <!-- TODO string name="title_step">Step</string -->
+    <string name="title_step">Шаг</string>
     <string name="title_survey">Свойства съёмки</string>
     <string name="title_survey_new">Новая съёмка</string>
     <string name="title_survey_export">Экспорт съёмки как</string>
@@ -768,8 +768,8 @@
   <string name="pref_wait_shot_summary">Время ожидания после выполнения измерения [мс]</string>
   <string name="pref_wait_data_title">Пауза скачивания [мс]</string>
   <string name="pref_wait_data_summary">Время ожидания после скачивания данных [мс]</string>
-  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
-  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
+  <string name="pref_wait_conn_title">Пауза готовноти данных [мс]</string>
+  <string name="pref_wait_conn_summary">Время ожидания готовности данных [мс]</string>
   <string name="pref_conn_mode_title">Типы подключения</string>
   <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
   <string name="pref_auto_reconnect_title">Авто подключение</string>
@@ -974,9 +974,9 @@
 
   <string name="pref_sketchUsesSplays_title">Абрис боковых замеров</string>
   <string name="pref_sketchUsesSplays_summary">Поверхность абриса использует боковые замеры</string>
-  <!-- TODO string name="pref_sketchLineStep_title">Max side</string -->
+  <string name="pref_sketchLineStep_title">Макс размер стороны</string>
   <string name="pref_sketchLineStep_summary">Макс размер стороны треугольников</string>
-  <string name="pref_sketchLineStep_message">Макс размер стороны треугольников [m]</string>
+  <string name="pref_sketchLineStep_message">Макс размер стороны треугольников [м]</string>
   <string name="pref_sketchBorderStep_title">Шаг границы</string>
   <string name="pref_sketchBorderStep_summary">Расстоние между точками редактирования линии</string>
   <string name="pref_sketchBorderStep_message">Расстоние между точками редактирования линии</string>
