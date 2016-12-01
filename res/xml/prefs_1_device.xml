@@ -108,6 +108,7 @@
        android:inputType="number"
        android:defaultValue="500"
      / -->
+
      <!-- com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_WAIT_LASER"
        android:title="@string/pref_wait_laser_title"

@@ -99,8 +99,8 @@
     <!-- TODO string name="device_status_angle_degree">Angle units: degree</string -->
     <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
     <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
-<string name="device_status_calib">Mode %1$s</string>
-<string name="device_status_silent">Silencieux %1$s</string>
+    <string name="device_status_calib">Mode %1$s</string>
+    <!-- UNUSED string name="device_status_silent">Silencieux %1$s</string -->
     <!-- TODO string name="device_status_silent_on">Silent: on</string -->
     <!-- TODO string name="device_status_silent_off">Silent: off</string -->
 <string name="bt_reset">Redémarrer la connexion Bluetooth</string>

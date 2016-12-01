@@ -771,7 +771,7 @@ class TDSetting
     }
   }
 
-  static void checkPreference( SharedPreferences prefs, String k, MainWindow activity, TopoDroidApp app )
+  static void checkPreference( SharedPreferences prefs, String k, MainWindow main_window, TopoDroidApp app )
   {
     int nk = 0; // key index
     float f;
@@ -784,16 +784,16 @@ class TDSetting
       if ( level != mActivityLevel ) {
         mActivityLevel = level;
         setActivityBooleans( app );
-        if ( activity != null ) {
-          activity.resetButtonBar();
-          activity.setMenuAdapter( app.getResources() );
+        if ( main_window != null ) {
+          main_window.resetButtonBar();
+          main_window.setMenuAdapter( app.getResources() );
         }  
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_BUTTON_SIZE
       int size = getSizeButtons( tryInt( prefs, k, "1" ) );
       if ( size != mSizeButtons ) {
         mSizeButtons = size;
-        if ( activity != null ) activity.resetButtonBar();
+        if ( main_window != null ) main_window.resetButtonBar();
       }
     } else if ( k.equals( key[ nk++ ] ) ) {              // DISTOX_TEXT_SIZE
       mTextSize = tryInt( prefs, k, "16" );

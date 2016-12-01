@@ -99,7 +99,7 @@ public class MainWindow extends Activity
                                , OnDismissListener
 {
   private TopoDroidApp mApp;
-
+  private Activity mActivity = null;
   private boolean onMenu; // whether menu is displaying
 
   private LinearLayout mLayout;
@@ -160,7 +160,7 @@ public class MainWindow extends Activity
       updateList( list );
       if ( say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
-        Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT ).show();
       } 
     }
   }
@@ -206,23 +206,23 @@ public class MainWindow extends Activity
     {
       if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) { // mBtnDevice
         if ( mApp.mBTAdapter == null ) {
-          Toast.makeText( this, R.string.no_bt, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.no_bt, Toast.LENGTH_SHORT ).show();
         } else {
           if ( mApp.mBTAdapter.isEnabled() ) {
             // TDLog.Debug( "start device window");
-            startActivity( new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class ) );
+            startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
           } else {
-            Toast.makeText( this, R.string.not_enabled, Toast.LENGTH_SHORT ).show();
+            Toast.makeText( mActivity, R.string.not_enabled, Toast.LENGTH_SHORT ).show();
           }
         }
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY/CALIB
         mApp.setSurveyFromName( null, true ); // new-survey dialog: tell app to clear survey name and id
-        (new SurveyNewDialog( this, this, -1, -1 )).show(); 
+        (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
-        (new ImportDialog( this, this, mApp )).show();
+        (new ImportDialog( mActivity, this, mApp )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, mApp )).show();
+        (new SymbolEnableDialog( mActivity, mApp )).show();
 
       // FIXME THMANAGER
       // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER ThManager
@@ -231,7 +231,7 @@ public class MainWindow extends Activity
       //     // intent.putExtra( "survey", mApp.getSurveyThFile() );
       //     startActivity( intent );
       //   } catch ( ActivityNotFoundException e ) {
-      //     Toast.makeText( this, R.string.no_thmanager, Toast.LENGTH_SHORT ).show();
+      //     Toast.makeText( mActivity, R.string.no_thmanager, Toast.LENGTH_SHORT ).show();
       //   }
       // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // DATABASE
       //   try {
@@ -239,7 +239,7 @@ public class MainWindow extends Activity
       //     intent.addCategory("com.kokufu.intent.category.APP_DB_VIEWER");
       //     startActivity( intent );
       //   } catch ( ActivityNotFoundException e ) {
-      //     Toast.makeText( this, R.string.no_db_viewer, Toast.LENGTH_SHORT ).show();
+      //     Toast.makeText( mActivity, R.string.no_db_viewer, Toast.LENGTH_SHORT ).show();
       //   }
       }
     }
@@ -257,13 +257,13 @@ public class MainWindow extends Activity
     surveyIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen );
     // surveyIntent.putExtra( TDTag.TOPODROID_OLDSID, old_sid );
     // surveyIntent.putExtra( TDTag.TOPODROID_OLDID,  old_id );
-    startActivity( surveyIntent );
+    mActivity.startActivity( surveyIntent );
   }
 
   void startSplitSurvey( long old_sid, long old_id )
   {
     mApp.setSurveyFromName( null, false ); // FIXME JOIN-SURVEY
-    (new SurveyNewDialog( this, this, old_sid, old_id )).show(); // WITH SPLIT
+    (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
 
   @Override 
@@ -347,7 +347,7 @@ public class MainWindow extends Activity
           mApp.mData.insertStation( sid, st.name, st.comment, st.flag );
         }
       } catch ( ParserException e ) {
-        // Toast.makeText(this, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
       }
       return sid;
     }
@@ -381,7 +381,7 @@ public class MainWindow extends Activity
         long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
         mApp.mData.insertShots( sid, id, splays );
       } catch ( ParserException e ) {
-        // Toast.makeText(this, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
       }
       return sid;
     }
@@ -415,7 +415,7 @@ public class MainWindow extends Activity
         long id = mApp.mData.insertShots( sid, 1, shots ); // start id = 1
         mApp.mData.insertShots( sid, id, splays );
       } catch ( ParserException e ) {
-        // Toast.makeText(this, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
       }
       return sid;
     }
@@ -483,7 +483,7 @@ public class MainWindow extends Activity
         //   }
         // }
       } catch ( ParserException e ) {
-        // Toast.makeText(this, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(mActivity, R.string.file_parse_fail, Toast.LENGTH_SHORT).show();
       }
       return sid;
     }
@@ -502,9 +502,9 @@ public class MainWindow extends Activity
   
   private class ImportZipTask extends AsyncTask< String, Integer, Long >
   {
-    MainWindow activity;
+    MainWindow parent;
 
-    ImportZipTask( MainWindow act ) { activity = act; }
+    ImportZipTask( MainWindow act ) { parent = act; }
 
     @Override
     protected Long doInBackground( String... str )
@@ -520,20 +520,20 @@ public class MainWindow extends Activity
 
     @Override
     protected void onPostExecute(Long result) {
-      activity.setTheTitle( );
-      activity.updateDisplay( );
+      parent.setTheTitle( );
+      parent.updateDisplay( );
       if ( result < -4 ) {
-        Toast.makeText( activity, R.string.unzip_fail, Toast.LENGTH_SHORT).show();
+        Toast.makeText( parent, R.string.unzip_fail, Toast.LENGTH_SHORT).show();
       } else if ( result == -4 ) {
-        Toast.makeText( activity, R.string.unzip_fail_survey, Toast.LENGTH_SHORT).show();
+        Toast.makeText( parent, R.string.unzip_fail_survey, Toast.LENGTH_SHORT).show();
       } else if ( result == -3 ) {
-        Toast.makeText( activity, R.string.unzip_fail_db, Toast.LENGTH_SHORT).show();
+        Toast.makeText( parent, R.string.unzip_fail_db, Toast.LENGTH_SHORT).show();
       } else if ( result == -2 ) {
-        Toast.makeText( activity, R.string.unzip_fail_td, Toast.LENGTH_SHORT).show();
+        Toast.makeText( parent, R.string.unzip_fail_td, Toast.LENGTH_SHORT).show();
       } else if ( result == -1 ) {
-        Toast.makeText( activity, R.string.import_already, Toast.LENGTH_SHORT).show();
+        Toast.makeText( parent, R.string.import_already, Toast.LENGTH_SHORT).show();
       } else {
-        Toast.makeText( activity, R.string.import_zip_ok, Toast.LENGTH_SHORT).show();
+        Toast.makeText( parent, R.string.import_zip_ok, Toast.LENGTH_SHORT).show();
       }
     }
   }
@@ -541,16 +541,16 @@ public class MainWindow extends Activity
   void importFile( String filename )
   {
     // FIXME connect-title string
-    setTitle( R.string.import_title );
-    setTitleColor( TDConst.COLOR_CONNECTED );
+    mActivity.setTitle( R.string.import_title );
+    mActivity.setTitleColor( TDConst.COLOR_CONNECTED );
     if ( filename.endsWith(".th") ) {
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" );
       if ( mApp.mData.hasSurveyName( name ) ) {
-        Toast.makeText(this, R.string.import_already, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
         return;
       }
-      // Toast.makeText(this, R.string.import_wait, Toast.LENGTH_SHORT).show();
+      // Toast.makeText(mActivity, R.string.import_wait, Toast.LENGTH_SHORT).show();
       new ImportTherionTask().execute( filepath, name );
     } else if ( filename.endsWith(".dat") ) {
       String filepath = TDPath.getImportFile( filename );
@@ -562,7 +562,7 @@ public class MainWindow extends Activity
       String filepath = TDPath.getImportFile( filename );
       new ImportVisualTopoTask().execute( filepath ); 
     } else if ( filename.endsWith(".zip") ) {
-      Toast.makeText(this, R.string.import_zip_wait, Toast.LENGTH_LONG).show();
+      Toast.makeText(mActivity, R.string.import_zip_wait, Toast.LENGTH_LONG).show();
       new ImportZipTask( this ) .execute( filename );
     }
     // FIXME SYNC updateDisplay();
@@ -586,7 +586,7 @@ public class MainWindow extends Activity
   {
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
     // mMenuAdapter.add( res.getString( menus[0] ) );
     if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[0] ) );
@@ -609,31 +609,31 @@ public class MainWindow extends Activity
   private void handleMenu( int pos ) 
   {
     closeMenu();
-    // Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show();
+    // Toast.makeText(mActivity, item.toString(), Toast.LENGTH_SHORT).show();
     int p = 0;
     // if ( p++ == pos ) { // PALETTE
     //   DrawingBrushPaths.makePaths( getResources() );
-    //   (new SymbolEnableDialog( this, this, mApp )).show();
+    //   (new SymbolEnableDialog( mActivity, mApp )).show();
     // } else { 
       Intent intent;
       if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
-        intent = new Intent( this, TopoDroidPreferences.class );
+        intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
         startActivity( intent );
       } else {  
         if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey && p++ == pos ) {  // CO-SURVEY
-          (new ConnectDialog( this, mApp )).show();
+          (new ConnectDialog( mActivity, mApp )).show();
         } else { 
           if ( p++ == pos ) { // ABOUT
-            (new TopoDroidAbout( this )).show();
+            (new TopoDroidAbout( mActivity )).show();
           } else { 
             if ( p++ == pos ) { // SETTINGS
-              intent = new Intent( this, TopoDroidPreferences.class );
+              intent = new Intent( mActivity, TopoDroidPreferences.class );
               intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
               startActivity( intent );
             } else { 
               if ( p++ == pos ) { // HELP
-                (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+                (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
               }
             }
           }
@@ -651,6 +651,7 @@ public class MainWindow extends Activity
     // TDLog.Profile("TDActivity onCreate");
     setContentView(R.layout.topodroid_activity);
     mApp = (TopoDroidApp) getApplication();
+	mActivity = this;
     mApp.mActivity = this;
 
     // mArrayAdapter = new ArrayAdapter<String>( this, R.layout.message );
@@ -749,7 +750,7 @@ public class MainWindow extends Activity
 
     mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
     for (int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, this, izons[k] );
+      mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
     }
 
     // mButtonView1 = new HorizontalImageButtonView( mButton1 );
@@ -935,7 +936,7 @@ public class MainWindow extends Activity
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_ALL );
     startActivity( intent );
     return true;
@@ -952,7 +953,7 @@ public class MainWindow extends Activity
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.MainWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)

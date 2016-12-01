@@ -799,7 +799,7 @@
   <string name="pref_crs_summary">CRS نام</string>
   <string name="pref_crs_message">Enter the CRS name as in Proj4</string>
 
-  <string name="pref_tool_screen_title">ابزار طراحی</string>
+  <!-- UNUSED string name="pref_tool_screen_title">ابزار طراحی</string -->
   <!-- TODO string name="pref_tool_line_title">LINES</string -->
   <!-- TODO string name="pref_tool_point_title">POINTS</string -->
   <string name="pref_location_title">مکان</string>

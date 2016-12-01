@@ -101,6 +101,7 @@ public class SurveyWindow extends Activity
 
   // private ShotWindow mParent;
   private Context mContext;
+  private Activity mActivity = null;
 
   private EditText mTextName;
   private Button mEditDate;
@@ -133,7 +134,7 @@ public class SurveyWindow extends Activity
     if ( mApp.renameCurrentSurvey( mApp.mSID, name, true ) ) {
       mTextName.setText( name );
     } else {
-      Toast.makeText( this, R.string.cannot_rename, Toast.LENGTH_SHORT).show();
+      Toast.makeText( mActivity, R.string.cannot_rename, Toast.LENGTH_SHORT).show();
     }
   } 
     
@@ -172,6 +173,7 @@ public class SurveyWindow extends Activity
 
     mApp = (TopoDroidApp)getApplication();
     mApp.mSurveyWindow = this;
+	mActivity = this;
 
     mContext = this;
     mustOpen = false;
@@ -212,7 +214,7 @@ public class SurveyWindow extends Activity
                : TDSetting.mLevelOverBasic ? 3 : 2;
     mButton1 = new Button[ mNrButton1 ];
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, this, izons[k] );
+      mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
     }
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
@@ -267,7 +269,7 @@ public class SurveyWindow extends Activity
       int y = TopoDroidUtil.dateParseYear( date );
       int m = TopoDroidUtil.dateParseMonth( date );
       int d = TopoDroidUtil.dateParseDay( date );
-      new DatePickerDialog( this, mDateListener, y, m, d ).show();
+      new DatePickerDialog( mActivity, mDateListener, y, m, d ).show();
       return;
     }
 
@@ -275,15 +277,15 @@ public class SurveyWindow extends Activity
     if ( k < mNrButton1 && b == mButton1[k++] ) {  // note
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
-      new SurveyStatDialog( this, mApp.mData.getSurveyStat( mApp.mSID ) ).show();
+      new SurveyStatDialog( mActivity, mApp.mData.getSurveyStat( mApp.mSID ) ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS
-      startActivity( new Intent( this, FixedActivity.class ) );
+      mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // photo camera
-      startActivity( new Intent( this, PhotoActivity.class ) );
+      mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // sensors data
-      startActivity( new Intent( this, SensorListActivity.class ) );
+      mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     }
   }
 
@@ -304,15 +306,15 @@ public class SurveyWindow extends Activity
     Archiver archiver = new Archiver( mApp );
     if ( archiver.archive( ) ) {
       String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
-      Toast.makeText( this, msg, Toast.LENGTH_SHORT).show();
+      Toast.makeText( mActivity, msg, Toast.LENGTH_SHORT).show();
     } else {
-      Toast.makeText( this, R.string.zip_failed, Toast.LENGTH_SHORT).show();
+      Toast.makeText( mActivity, R.string.zip_failed, Toast.LENGTH_SHORT).show();
     }
   }
 
   private void askDelete()
   {
-    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.survey_delete,
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.survey_delete,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -329,9 +331,9 @@ public class SurveyWindow extends Activity
       try {
         Intent intent = new Intent( "Cave3D.intent.action.Launch" );
         intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
-        startActivity( intent );
+        mActivity.startActivity( intent );
       } catch ( ActivityNotFoundException e ) {
-        Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT).show();
+        Toast.makeText( mActivity, R.string.no_cave3d, Toast.LENGTH_SHORT).show();
       }
     }
   }
@@ -340,17 +342,17 @@ public class SurveyWindow extends Activity
   // {
   //   // TDLog.Log( TDLog.LOG_SURVEY, "do OPEN " );
   //   // dismiss();
-  //   Intent openIntent = new Intent( mContext, ShotWindow.class );
-  //   mContext.startActivity( openIntent );
+  //   Intent openIntent = new Intent( mActivity, ShotWindow.class );
+  //   mActivity.startActivity( openIntent );
   // }
 
 
   private void doNotes()
   {
     if ( mApp.mySurvey != null ) {
-      (new DistoXAnnotations( this, mApp.mySurvey )).show();
+      (new DistoXAnnotations( mActivity, mApp.mySurvey )).show();
     } else { // SHOULD NEVER HAPPEN
-      Toast.makeText( mContext, R.string.no_survey, Toast.LENGTH_SHORT).show();
+      Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -422,7 +424,7 @@ public class SurveyWindow extends Activity
   {
     if ( mApp.mSID < 0 ) {
       if ( warn ) {
-        Toast.makeText( mContext, R.string.no_survey, Toast.LENGTH_SHORT).show();
+        Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT).show();
       }
     } else {
       String filename = null;
@@ -481,11 +483,11 @@ public class SurveyWindow extends Activity
       }
       if ( warn ) { 
         if ( filename == null ) {
-          Toast.makeText( mContext, R.string.saving_file_failed, Toast.LENGTH_SHORT).show();
+          Toast.makeText( mActivity, R.string.saving_file_failed, Toast.LENGTH_SHORT).show();
         } else if ( filename.length() == 0 ) {
-          Toast.makeText( mContext, R.string.no_geo_station, Toast.LENGTH_SHORT).show();
+          Toast.makeText( mActivity, R.string.no_geo_station, Toast.LENGTH_SHORT).show();
         } else {
-          Toast.makeText( mContext, mContext.getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
+          Toast.makeText( mActivity, mActivity.getString(R.string.saving_) + filename, Toast.LENGTH_SHORT).show();
         }
       }
     }
@@ -525,9 +527,9 @@ public class SurveyWindow extends Activity
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-    startActivity( intent );
+    mActivity.startActivity( intent );
     return true;
   }
 
@@ -542,7 +544,7 @@ public class SurveyWindow extends Activity
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.SurveyWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -556,8 +558,8 @@ public class SurveyWindow extends Activity
   private void setMenuAdapter( Resources res )
   {
     // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
     for ( int k = 0; k < menus.length; ++k ) {
       mMenuAdapter.add( res.getString( menus[k] ) );
@@ -581,19 +583,19 @@ public class SurveyWindow extends Activity
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
-      new ExportDialog( this, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
+      new ExportDialog( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
     } else if ( p++ == pos ) { // RENAME
-      new SurveyRenameDialog( this, this ).show();
+      new SurveyRenameDialog( mActivity, this ).show();
     } else if ( p++ == pos ) { // DELETE
       askDelete();
     } else if ( p++ == pos ) { // INSTRUMENTS CALIBRATION
-      new SurveyCalibrationDialog( this, this ).show();
+      new SurveyCalibrationDialog( mActivity, this ).show();
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-      startActivity( intent );
+      mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+      (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
     // updateDisplay();
   }
@@ -619,10 +621,10 @@ public class SurveyWindow extends Activity
   //   Handler convert_handler= new Handler(){
   //     @Override
   //     public void handleMessage(Message msg) {
-  //       Toast.makeText( mApp, R.string.converted_tdr2th2, Toast.LENGTH_SHORT).show();
+  //       Toast.makeText( mActivity, R.string.converted_tdr2th2, Toast.LENGTH_SHORT).show();
   //     }
   //   };
-  //   (new ConvertTdr2Th2Task( this, convert_handler, mApp )).execute();
+  //   (new ConvertTdr2Th2Task( mActivity, convert_handler, mApp )).execute();
   // }
 
 }

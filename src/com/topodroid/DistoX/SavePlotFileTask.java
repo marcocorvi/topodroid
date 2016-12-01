@@ -59,12 +59,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   @Override
   protected Boolean doInBackground(Intent... arg0)
   {
-    boolean ret = false;
+    boolean ret1 = true;
+    boolean ret2 = true;
     // boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT ); // TDR BINARY
 
     synchronized( TDPath.mTherionLock ) {
       // Log.v("DistoX", "save scrap files " + mFullName + " suffix " + mSuffix );
 
+      // first pass: export
       if ( mSuffix == PlotSave.EXPORT ) {
         File file2 = new File( TDPath.getTh2FileWithExt( mFullName ) );
         DrawingIO.exportTherion( // mApp.mData, mApp.mSID, 
@@ -93,6 +95,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             Bitmap bitmap = mSurface.getBitmap( mType );
             if ( bitmap == null ) {
               TDLog.Error( "cannot save PNG: null bitmap" );
+              ret1 = false;
             } else {
               float scale = mSurface.getBitmapScale();
               new ExportBitmapToFile( mContext, bitmap, scale, mFullName, false ).execute();
@@ -101,14 +104,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         }
       }
       
+      // second pass: save
       if ( mSuffix != PlotSave.EXPORT ) {
 
         String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;
 
-        if ( mSuffix != PlotSave.EXPORT ) {
-          // Log.v("DistoX", "rotate backups " + filename );
-          TDPath.rotateBackups( filename, mRotate );
-        }
+        // Log.v("DistoX", "rotate backups " + filename );
+        TDPath.rotateBackups( filename, mRotate );
 
         long now  = System.currentTimeMillis();
         long time = now - 600000; // ten minutes before now
@@ -117,30 +119,29 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         File[] files = tmpDir.listFiles();
         for ( File f : files ) {
           if ( f.getName().endsWith("tmp") && f.lastModified() < time ) {
-            // Log.v("DistoX", "delete temp file " + f.getAbsolutePath() );
+            // TDLog.Log( TDLog.LOG_PLOT, "delete temp file " + f.getAbsolutePath() );
             f.delete();
           }
         }
 
         String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
         File file1 = new File( tempname1 );
-        // Log.v("DistoX", "saving binary " + mFullName );
+        // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
         DrawingIO.exportDataStream( mSurface, mType, file1, mFullName, mProjDir );
 
         if ( isCancelled() ) {
-          // Log.v("DistoX", "save cancelled");
+          TDLog.Error( "binary save cancelled " + mFullName );
           file1.delete();
+          ret2 = false;
         } else {
-          // Log.v("DistoX", "save completed");
+          // TDLog.Log( TDLog.LOG_PLOT, "save binary completed" + mFullName );
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
-
           (new File( filename1 )).renameTo( new File( filename1 + TDPath.BCK_SUFFIX ) );
           file1.renameTo( new File( filename1 ) );
         }
       }
-      ret = true;
     }
-    return ret;
+    return ret1 && ret2;
   }
 
   @Override

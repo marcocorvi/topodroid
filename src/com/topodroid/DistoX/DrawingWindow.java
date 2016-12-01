@@ -208,7 +208,7 @@ public class DrawingWindow extends ItemDrawer
   private TopoDroidApp mApp;
   private DataDownloader mDataDownloader;
   private DataHelper mData;
-
+  private Activity mActivity = null;
   long getSID() { return mApp.mSID; }
   String getSurvey() { return mApp.mySurvey; }
 
@@ -341,7 +341,7 @@ public class DrawingWindow extends ItemDrawer
         mFullName1 = fullName1;
         mFullName2 = fullName2;
       } else {
-        Toast.makeText( this, R.string.plot_duplicate_name, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_SHORT ).show();
         // Log.v("DistoX", "plot name already exists");
       }
     }
@@ -483,7 +483,7 @@ public class DrawingWindow extends ItemDrawer
   // public void zoomView( )
   // {
   //   // TDLog.Log( TDLog.LOG_PLOT, "zoomView ");
-  //   DrawingZoomDialog zoom = new DrawingZoomDialog( mDrawingSurface.getContext(), this );
+  //   DrawingZoomDialog zoom = new DrawingZoomDialog( mActivity, this );
   //   zoom.show();
   // }
 
@@ -562,29 +562,29 @@ public class DrawingWindow extends ItemDrawer
     Resources res = getResources();
     if ( mMode == MODE_DRAW ) { 
       if ( mSymbol == Symbol.POINT ) {
-        setTitle( s1 + String.format( res.getString(R.string.title_draw_point), 
+        mActivity.setTitle( s1 + String.format( res.getString(R.string.title_draw_point), 
                                  DrawingBrushPaths.mPointLib.getSymbolName(mCurrentPoint) ) );
       } else if ( mSymbol == Symbol.LINE ) {
-        setTitle( s1 + String.format( res.getString(R.string.title_draw_line),
+        mActivity.setTitle( s1 + String.format( res.getString(R.string.title_draw_line),
                                  DrawingBrushPaths.mLineLib.getSymbolName(mCurrentLine) ) );
       } else  {  // if ( mSymbol == Symbol.LINE ) 
-        setTitle( s1 + String.format( res.getString(R.string.title_draw_area),
+        mActivity.setTitle( s1 + String.format( res.getString(R.string.title_draw_area),
                                  DrawingBrushPaths.mAreaLib.getSymbolName(mCurrentArea) ) );
       }
       // boolean visible = ( mSymbol == Symbol.LINE && mCurrentLine == DrawingBrushPaths.mLineLib.mLineWallIndex );
       boolean visible = ( mSymbol == Symbol.LINE );
       mButton2[ BTN_CONTINUE ].setVisibility( visible? View.VISIBLE : View.GONE );
     } else if ( mMode == MODE_MOVE ) {
-      setTitle( s1 + res.getString( R.string.title_move ) );
+      mActivity.setTitle( s1 + res.getString( R.string.title_move ) );
     } else if ( mMode == MODE_EDIT ) {
-      setTitle( s1 + res.getString( R.string.title_edit ) );
+      mActivity.setTitle( s1 + res.getString( R.string.title_edit ) );
     } else if ( mMode == MODE_SHIFT ) {
-      setTitle( s1 + res.getString( R.string.title_shift ) );
+      mActivity.setTitle( s1 + res.getString( R.string.title_shift ) );
     } else if ( mMode == MODE_ERASE ) {
-      setTitle( s1 + res.getString( R.string.title_erase ) );
+      mActivity.setTitle( s1 + res.getString( R.string.title_erase ) );
     }
     if ( ! mDrawingSurface.isSelectable() ) {
-      setTitle( s1 + getTitle() + " [!s]" );
+      mActivity.setTitle( s1 + mActivity.getTitle() + " [!s]" );
     }
   }
 
@@ -592,7 +592,7 @@ public class DrawingWindow extends ItemDrawer
 
   // private void AlertMissingSymbols()
   // {
-  //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.missing-symbols,
+  //   TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.missing-symbols,
   //     new DialogInterface.OnClickListener() {
   //       @Override
   //       public void onClick( DialogInterface dialog, int btn ) {
@@ -637,7 +637,7 @@ public class DrawingWindow extends ItemDrawer
         super.onBackPressed();
       } else {
         doubleBack = true;
-        doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+        doubleBackToast = Toast.makeText( mActivity, R.string.double_back, Toast.LENGTH_SHORT );
         doubleBackToast.show();
         doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
       }
@@ -661,10 +661,10 @@ public class DrawingWindow extends ItemDrawer
 
       // if ( not_all_symbols ) AlertMissingSymbols();
       // if ( mAllSymbols ) {
-      //   // Toast.makeText( this, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
+      //   // Toast.makeText( mActivity, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
       //   startSaveTdrTask( mType, PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
       // } else { // mAllSymbols is false: FIXME what to do ?
-      //  Toast.makeText( this,
+      //  Toast.makeText( mActivity,
       //    "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
       // }
     }
@@ -719,7 +719,7 @@ public class DrawingWindow extends ItemDrawer
     long tt     = type;
     if ( type == -1 ) {
       try { 
-        (new SavePlotFileTask( this, this, saveHandler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
+        (new SavePlotFileTask( mActivity, this, saveHandler, mApp, mDrawingSurface, mFullName2, mPlot2.type,
                               (int)mPlot2.azimuth, suffix, rotate )).execute();
       } catch ( RejectedExecutionException e ) { }
       name = mFullName1;
@@ -733,7 +733,7 @@ public class DrawingWindow extends ItemDrawer
       name = mFullName3;
     }
     try { 
-      (new SavePlotFileTask( this, this, saveHandler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
+      (new SavePlotFileTask( mActivity, this, saveHandler, mApp, mDrawingSurface, name, tt, azimuth, suffix, rotate )
       ).execute();
     } catch ( RejectedExecutionException e ) { 
       -- mNrSaveTh2Task;
@@ -896,7 +896,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
     if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached && can_toast ) {
-      Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
   }
 
@@ -1088,7 +1088,7 @@ public class DrawingWindow extends ItemDrawer
     int ic = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
       ic = ( k <3 )? k : off+k;
-      mButton1[k] = MyButton.getButton( this, this, izons[ic] );
+      mButton1[k] = MyButton.getButton( mActivity, this, izons[ic] );
       if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
       else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( mApp, res, izons[ic] ); }
@@ -1110,7 +1110,7 @@ public class DrawingWindow extends ItemDrawer
     off = (mNrButton1 - 3); 
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k < 3 )? k : off+k;
-      mButton2[k] = MyButton.getButton( this, this, ((k==0)? izons_ok[ic] : izons[ic]) );
+      mButton2[k] = MyButton.getButton( mActivity, this, ((k==0)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_CONTINUE_NO ) mBMcontinue_no = MyButton.getButtonBackground( mApp, res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
     mBMcontinue_cont = MyButton.getButtonBackground( mApp, res, izons[IC_CONTINUE_CONT] );
@@ -1120,7 +1120,7 @@ public class DrawingWindow extends ItemDrawer
     off = (mNrButton1-3) + (mNrButton2-3); 
     for ( int k=0; k<mNrButton3; ++k ) {
       ic = ( k < 3 )? k : off+k;
-      mButton3[k] = MyButton.getButton( this, this, ((k==2)? izons_ok[ic] : izons[ic]) );
+      mButton3[k] = MyButton.getButton( mActivity, this, ((k==2)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_JOIN ) 
         mBMjoin = MyButton.getButtonBackground( mApp, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
@@ -1139,7 +1139,7 @@ public class DrawingWindow extends ItemDrawer
     off = 9 - 3; // (mNrButton1-3) + (mNrButton2-3) + (mNrButton3-3);
     for ( int k=0; k<mNrButton5; ++k ) {
       ic = ( k < 3 )? k : off+k;
-      mButton5[k] = MyButton.getButton( this, this, ((k==1)? izons_ok[ic] : izons[ic] ) );
+      mButton5[k] = MyButton.getButton( mActivity, this, ((k==1)? izons_ok[ic] : izons[ic] ) );
     }
 
     mButtonView1 = new HorizontalButtonView( mButton1 );
@@ -1156,6 +1156,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "onCreate()" );
 
     mApp  = (TopoDroidApp)getApplication();
+	mActivity = this;
     mData = mApp.mData; // new DataHelper( this ); 
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
@@ -1378,7 +1379,7 @@ public class DrawingWindow extends ItemDrawer
       mZoom     = info.zoom;
       mDrawingSurface.isDrawing = true;
       switchZoomCtrl( TDSetting.mZoomCtrl );
-      // Log.v("DistoX", "do Resume. Save tasks: " + mNrSaveTh2Task );
+      // Log.v("DistoX", "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
       setPlotType( mType );
     }
 
@@ -1602,7 +1603,7 @@ public class DrawingWindow extends ItemDrawer
 
       if ( PlotInfo.isSketch2D( type ) ) {
         if ( list.size() == 0 ) {
-          Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
           if ( mPid1 >= 0 ) mData.dropPlot( mPid1, mSid );
           if ( mPid2 >= 0 ) mData.dropPlot( mPid2, mSid );
           finish();
@@ -1642,8 +1643,8 @@ public class DrawingWindow extends ItemDrawer
       // if ( ! mAllSymbols ) {
       //   String msg = missingSymbols.getMessage( getResources() );
       //   TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
-      //   Toast.makeText( this, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
-      //   // (new MissingDialog( this, this, msg )).show();
+      //   Toast.makeText( mActivity, "Missing symbols \n" + msg, Toast.LENGTH_LONG ).show();
+      //   // (new MissingDialog( mActivity, this, msg )).show();
       //   // finish();
       // }
    }
@@ -2331,7 +2332,7 @@ public class DrawingWindow extends ItemDrawer
                         DistoXDBlock blk = null;
                         float intersection = 0;
                         if ( paths.size() > 1 ) {
-                          Toast.makeText( this, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show();
+                          Toast.makeText( mActivity, R.string.too_many_leg_intersection, Toast.LENGTH_SHORT ).show();
                         } else {
                           DrawingPath p = paths.get(0);
                           blk = p.mBlock;
@@ -2393,10 +2394,10 @@ public class DrawingWindow extends ItemDrawer
                           mDrawingSurface.addDrawingPath( section_pt );
                         }
 
-                        new DrawingLineSectionDialog( this, this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
+                        new DrawingLineSectionDialog( mActivity, this, mApp, h_section, false, section_id, mCurrentLinePath, from, to, azimuth, clino ).show();
 
                       } else { // empty path list
-                        Toast.makeText( this, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
+                        Toast.makeText( mActivity, R.string.no_leg_intersection, Toast.LENGTH_SHORT ).show(); 
                       }
                     } else {
                       boolean addline= true;
@@ -2447,7 +2448,7 @@ public class DrawingWindow extends ItemDrawer
               if ( ( ! pointerDown ) && Math.abs( x_shift ) < TDSetting.mPointingRadius 
                                      && Math.abs( y_shift ) < TDSetting.mPointingRadius ) {
                 if ( DrawingBrushPaths.mPointLib.pointHasText(mCurrentPoint) ) {
-                  DrawingLabelDialog label = new DrawingLabelDialog( mDrawingSurface.getContext(), this, x_scene, y_scene );
+                  DrawingLabelDialog label = new DrawingLabelDialog( mActivity, this, x_scene, y_scene );
                   label.show();
                 } else {
                   mDrawingSurface.addDrawingPath( 
@@ -2493,7 +2494,7 @@ public class DrawingWindow extends ItemDrawer
                 if ( sn != null ) {
                   boolean barrier = mNum.isBarrier( sn.mName );
                   boolean hidden  = mNum.isHidden( sn.mName );
-                  // new DrawingStationDialog( this, this, sn, barrier, hidden ).show();
+                  // new DrawingStationDialog( mActivity, this, sn, barrier, hidden ).show();
                   openXSection( sn, sn.mName, mType );
                 }
               }
@@ -2610,7 +2611,7 @@ public class DrawingWindow extends ItemDrawer
           }
         } else {
           // Log.v("DistoX", "X_SECTION Too many legs" );
-          Toast.makeText( this, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.too_many_legs_xsection, Toast.LENGTH_SHORT ).show();
           return;
         }
         if ( azimuth >= 360 ) azimuth -= 360;
@@ -2793,7 +2794,7 @@ public class DrawingWindow extends ItemDrawer
 
     void askDelete()
     {
-      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.plot_delete,
+      TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.plot_delete,
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
@@ -2844,7 +2845,7 @@ public class DrawingWindow extends ItemDrawer
       if ( mPopupEdit != null ) return;
 
       final Context context = this;
-      LinearLayout popup_layout = new LinearLayout(this);
+      LinearLayout popup_layout = new LinearLayout(mActivity);
       popup_layout.setOrientation(LinearLayout.VERTICAL);
       int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
       int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -2853,7 +2854,7 @@ public class DrawingWindow extends ItemDrawer
       //
       String text = getString(R.string.popup_join_pt);
       int len = text.length();
-      Button myTextView0 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      Button myTextView0 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_POINT ||
@@ -2873,7 +2874,7 @@ public class DrawingWindow extends ItemDrawer
       //
       text = getString(R.string.popup_snap_ln);
       if ( len < text.length() ) len = text.length();
-      Button myTextView1 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      Button myTextView1 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // snap to nearest line
@@ -2899,7 +2900,7 @@ public class DrawingWindow extends ItemDrawer
       //
       text = getString(R.string.popup_split_pt);
       if ( len > text.length() ) len = text.length();
-      Button myTextView2 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      Button myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // split point LINE/AREA
@@ -2914,7 +2915,7 @@ public class DrawingWindow extends ItemDrawer
       //
       text = getString(R.string.popup_split_ln);
       if ( len < text.length() ) len = text.length();
-      Button myTextView3 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      Button myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE ) { // split-line LINE
@@ -2932,7 +2933,7 @@ public class DrawingWindow extends ItemDrawer
       //
       text = getString(R.string.popup_sharp_pt);
       if ( len < text.length() ) len = text.length();
-      Button myTextView4 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      Button myTextView4 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -2953,7 +2954,7 @@ public class DrawingWindow extends ItemDrawer
       //
       text = getString(R.string.popup_curve_pt);
       if ( len < text.length() ) len = text.length();
-      Button myTextView5 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      Button myTextView5 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -2986,7 +2987,7 @@ public class DrawingWindow extends ItemDrawer
       //
       text = getString(R.string.popup_remove_pt);
       if ( len < text.length() ) len = text.length();
-      Button myTextView6 = CutNPaste.makePopupButton( this, text, popup_layout, lWidth, lHeight,
+      Button myTextView6 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
             if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // remove pt
@@ -3149,13 +3150,13 @@ public class DrawingWindow extends ItemDrawer
     if ( ! mDataDownloader.isDownloading() ) {
       // Log.v( "DistoX", "Reset button, not downloading, mode " + TDSetting.mConnectionMode );
       if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
-        CutNPaste.showPopupBT( this, this, mApp, b );
+        CutNPaste.showPopupBT( mActivity, this, mApp, b );
       } else {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         mApp.resetComm();
-        Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, R.string.bt_reset, Toast.LENGTH_SHORT).show();
       }
     // } else { // downloading: nothing
     }
@@ -3166,7 +3167,7 @@ public class DrawingWindow extends ItemDrawer
       Button b = (Button)view;
       if ( b == mButton1[ BTN_PLOT ] ) {
         if ( mType == PlotInfo.PLOT_EXTENDED ) {
-          new DrawingProfileFlipDialog( this, this ).show();
+          new DrawingProfileFlipDialog( mActivity, this ).show();
         } else {
           return false; // not consumed
         }
@@ -3199,17 +3200,17 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( b == mButton2[0] ) { // drawing properties
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_DRAW );
-        startActivity( intent );
+        mActivity.startActivity( intent );
       } else if ( b == mButton5[1] ) { // erase properties
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_ERASE );
-        startActivity( intent );
+        mActivity.startActivity( intent );
       } else if ( b == mButton3[2] ) { // edit properties
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_PLOT_EDIT );
-        startActivity( intent );
+        mActivity.startActivity( intent );
       // } else if ( b == mButton3[ BTN_BORDER ] ) {
       //   mDoEditRange = ( mDoEditRange + 1 ) % 3;
       //   mEditRadius += 2;
@@ -3266,7 +3267,7 @@ public class DrawingWindow extends ItemDrawer
         updateReference();
         if ( mApp.mDevice == null ) {
           // DistoXDBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
-          (new ShotNewDialog( this, mApp, this, null, -1L )).show();
+          (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
@@ -3275,10 +3276,10 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton1[k1++] ) { // BLUETOOTH
         doBluetooth( b );
       } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
-        new DrawingModeDialog( this, this, mDrawingSurface ).show();
+        new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
 
       } else if ( b == mButton1[k1++] ) { //  NOTE
-        (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
+        (new DistoXAnnotations( mActivity, mData.getSurveyFromId(mSid) )).show();
 
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( PlotInfo.isSketch2D( mType ) ) { 
@@ -3295,7 +3296,7 @@ public class DrawingWindow extends ItemDrawer
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialDialog( this, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
+            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
           }
         }
 
@@ -3313,9 +3314,9 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( b == mButton2[k2++] ) { // pointBtn
         if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
-          new ItemRecentDialog(this, this, mType ).show();
+          new ItemRecentDialog(mActivity, this, mType ).show();
         } else {
-          new ItemPickerDialog(this, this, mType, mSymbol ).show();
+          new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         }
       } else if ( b == mButton2[k2++] ) { //  continueBtn
         if ( mSymbol == Symbol.LINE && mCurrentLine != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
@@ -3351,10 +3352,10 @@ public class DrawingWindow extends ItemDrawer
               boolean barrier = mNum.isBarrier( sn.mName );
               boolean hidden  = mNum.isHidden( sn.mName );
               List< DistoXDBlock > legs = mData.selectShotsAt( mApp.mSID, sn.mName, true ); // select "independent" legs
-              new DrawingStationDialog( this, this, sn, path, barrier, hidden, legs ).show();
+              new DrawingStationDialog( mActivity, this, sn, path, barrier, hidden, legs ).show();
               break;
             case DrawingPath.DRAWING_PATH_POINT:
-              new DrawingPointDialog( this, this, (DrawingPointPath)(sp.mItem) ).show();
+              new DrawingPointDialog( mActivity, this, (DrawingPointPath)(sp.mItem) ).show();
               mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_LINE:
@@ -3365,22 +3366,22 @@ public class DrawingWindow extends ItemDrawer
                 boolean h_section = PlotInfo.isProfile( mType ); // not really necessary
                 String id = line.getOption( "-id" );
                 if ( id != null ) {
-                  new DrawingLineSectionDialog( this, this, mApp, h_section, true, id, line, null, null, 0, 0 ).show();
+                  new DrawingLineSectionDialog( mActivity, this, mApp, h_section, true, id, line, null, null, 0, 0 ).show();
                 } else {
                   TDLog.Error("edit section line with null id" );
                 }
               } else {
-                new DrawingLineDialog( this, this, line, sp.mPoint ).show();
+                new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
               }
               mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_AREA:
-              new DrawingAreaDialog( this, this, (DrawingAreaPath)(sp.mItem) ).show();
+              new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(sp.mItem) ).show();
               mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_FIXED:
             case DrawingPath.DRAWING_PATH_SPLAY:
-              new DrawingShotDialog( this, this, (DrawingPath)(sp.mItem) ).show();
+              new DrawingShotDialog( mActivity, this, (DrawingPath)(sp.mItem) ).show();
               break;
           }
         }
@@ -3431,7 +3432,7 @@ public class DrawingWindow extends ItemDrawer
 
     private void askDeleteItem( final DrawingPath p, final int t, final String name )
     {
-      TopoDroidAlertDialog.makeAlert( this, getResources(), 
+      TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
                                 String.format( getResources().getString( R.string.item_delete ), name ), 
         new DialogInterface.OnClickListener() {
           @Override
@@ -3479,9 +3480,9 @@ public class DrawingWindow extends ItemDrawer
           intent.putExtra( MediaStore.EXTRA_OUTPUT, outfileuri );
           intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
           // startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
-          startActivity( intent );
+          mActivity.startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( this, R.string.no_capture_app, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.no_capture_app, Toast.LENGTH_SHORT ).show();
         }
       }
     }
@@ -3542,9 +3543,9 @@ public class DrawingWindow extends ItemDrawer
       Bitmap bitmap = mDrawingSurface.getBitmap( type );
       if ( bitmap != null ) {
         float scale = mDrawingSurface.getBitmapScale();
-        new ExportBitmapToFile(this, bitmap, scale, filename, toast ).execute();
+        new ExportBitmapToFile( mActivity, bitmap, scale, filename, toast ).execute();
       } else if ( toast ) {
-        Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
       }
     }
 
@@ -3553,7 +3554,7 @@ public class DrawingWindow extends ItemDrawer
     {
       String filename = mApp.exportSurveyAsCsx( this, mPlot1.start );
       if ( toast )
-        Toast.makeText( mApp, getString(R.string.saved_file_1) + " " + filename, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, getString(R.string.saved_file_1) + " " + filename, Toast.LENGTH_SHORT ).show();
     }
 
     // used to save "dxf", "svg"
@@ -3579,11 +3580,11 @@ public class DrawingWindow extends ItemDrawer
     {
       // Log.v("DistoX", "save with ext: " + filename + " ext " + ext );
       if ( PlotInfo.isProfile( type ) ) {
-        new ExportPlotToFile(this, mDrawingSurface.mCommandManager2, mNum, type, filename, ext, toast ).execute();
+        new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager2, mNum, type, filename, ext, toast ).execute();
       } else if ( type == PlotInfo.PLOT_PLAN ) {
-        new ExportPlotToFile(this, mDrawingSurface.mCommandManager1, mNum, type, filename, ext, toast ).execute();
+        new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager1, mNum, type, filename, ext, toast ).execute();
       } else {
-        new ExportPlotToFile(this, mDrawingSurface.mCommandManager3, mNum, type, filename, ext, toast ).execute();
+        new ExportPlotToFile( mActivity, mDrawingSurface.mCommandManager3, mNum, type, filename, ext, toast ).execute();
       }
     }
 
@@ -3623,14 +3624,14 @@ public class DrawingWindow extends ItemDrawer
     th2Handler = new Handler(){
       @Override public void handleMessage(Message msg) {
         if (msg.what == 661 ) {
-          Toast.makeText( mApp, getString(R.string.saved_file_1) + " " + filename + ".th2", Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, getString(R.string.saved_file_1) + " " + filename + ".th2", Toast.LENGTH_SHORT ).show();
         } else {
-          Toast.makeText( mApp, R.string.saving_file_failed, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.saving_file_failed, Toast.LENGTH_SHORT ).show();
         }
       }
     };
     try { 
-      (new SavePlotFileTask( this, this, th2Handler, mApp, mDrawingSurface, name, mType, azimuth, suffix, 0 )).execute();
+      (new SavePlotFileTask( mActivity, this, th2Handler, mApp, mDrawingSurface, name, mType, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }
 
@@ -3690,25 +3691,25 @@ public class DrawingWindow extends ItemDrawer
   public void refreshDisplay( int nr, boolean toast )
   {
     // Log.v("DistoX", "refreshDisplay() type " + mType + " nr " + nr ); // DATA_DOWNLOAD
-    setTitleColor( TDConst.COLOR_NORMAL );
+    mActivity.setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         doComputeReferences( false );
       }
       if ( toast ) {
-        Toast.makeText( this, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {
-        // Toast.makeText( this, getString(R.string.read_fail_with_code) + nr, Toast.LENGTH_SHORT ).show();
-        Toast.makeText( this, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( mActivity, getString(R.string.read_fail_with_code) + nr, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
       }
     }
   }
 
   private void updateDisplay( /* boolean compute, boolean reference */ ) // always called with true, false
   {
-    // Log.v("DistoX", "updateDisplay() type " + mType );
+    // Log.v("DistoX", "updateDisplay() type " + mType + " reference " + reference );
     // if ( compute ) {
       // List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       // mNum = new DistoXNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl );
@@ -3778,9 +3779,9 @@ public class DrawingWindow extends ItemDrawer
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
-    startActivity( intent );
+    mActivity.startActivity( intent );
     return true;
   }
 
@@ -3795,7 +3796,7 @@ public class DrawingWindow extends ItemDrawer
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.DrawingWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
         return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -3810,7 +3811,7 @@ public class DrawingWindow extends ItemDrawer
 
   private void setMenuAdapter( Resources res, long type )
   {
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
     // HOVER
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
 
@@ -3854,33 +3855,33 @@ public class DrawingWindow extends ItemDrawer
       int p = 0;
       if ( p++ == pos ) {
         if ( PlotInfo.isSketch2D( mType ) ) { // SWITCH/CLOSE
-          new PlotListDialog( this, null, mApp, this ).show();
+          new PlotListDialog( mActivity, null, mApp, this ).show();
         } else { // CLOSE
           super.onBackPressed();
         }
       } else if ( p++ == pos ) { // EXPORT
-        new ExportDialog( this, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
+        new ExportDialog( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save ).show();
       } else if ( p++ == pos ) { // INFO
         if ( mNum != null ) {
           float azimuth = -1;
           if ( mPlot2 !=  null && PlotInfo.PLOT_PROFILE == mPlot2.type ) {
             azimuth = mPlot2.azimuth;
           }
-          new DistoXStatDialog( mDrawingSurface.getContext(), mNum, mPlot1.start, azimuth, mData.getSurveyStat( mApp.mSID ) ).show();
+          new DistoXStatDialog( mActivity, mNum, mPlot1.start, azimuth, mData.getSurveyStat( mApp.mSID ) ).show();
         } else if ( PlotInfo.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
           // Log.v("DistoX", "Section area " + area );
           Resources res = getResources();
           String msg = String.format( res.getString( R.string.section_area ), area );
-          TopoDroidAlertDialog.makeAlert( this, res, msg, R.string.button_ok, -1, null, null );
+          TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
         }
       } else if ( p++ == pos ) { // RECOVER RELOAD
         if ( PlotInfo.isProfile( mType ) ) {
-          ( new PlotRecoverDialog( this, this, mFullName2, mType ) ).show();
+          ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
         } else if ( mType == PlotInfo.PLOT_PLAN ) {
-          ( new PlotRecoverDialog( this, this, mFullName1, mType ) ).show();
+          ( new PlotRecoverDialog( mActivity, this, mFullName1, mType ) ).show();
         } else {
-          ( new PlotRecoverDialog( this, this, mFullName3, mType ) ).show();
+          ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
         }
       } else if ( p++ == pos ) { // ZOOM_FIT
         RectF b = mDrawingSurface.getBitmapBounds();
@@ -3893,13 +3894,13 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.setTransform( mOffset.x, mOffset.y, mZoom );
       } else if ( TDSetting.mLevelOverBasic && PlotInfo.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
         //   askDelete();
-        (new PlotRenameDialog( this, this, mApp )).show();
+        (new PlotRenameDialog( mActivity, this, mApp )).show();
       } else if ( p++ == pos ) { // PALETTE
         DrawingBrushPaths.makePaths( getResources() );
-        (new SymbolEnableDialog( this, mApp )).show();
+        (new SymbolEnableDialog( mActivity, mApp )).show();
       } else if ( PlotInfo.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
         if ( mType == PlotInfo.PLOT_PROFILE ) {
-          Toast.makeText( this, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.no_profile_overview, Toast.LENGTH_SHORT ).show();
         } else {
           updateReference();
           Intent intent = new Intent( this, OverviewWindow.class );
@@ -3909,17 +3910,17 @@ public class DrawingWindow extends ItemDrawer
           intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
           intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
           intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
-          startActivity( intent );
+          mActivity.startActivity( intent );
         }
       } else if ( p++ == pos ) { // OPTIONS
         updateReference();
-        Intent intent = new Intent( this, TopoDroidPreferences.class );
+        Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
-        startActivity( intent );
+        mActivity.startActivity( intent );
       } else if ( p++ == pos ) { // HELP
         int nn = mNrButton1 + mNrButton2 - 3 + mNrButton5 - 5 + ( TDSetting.mLevelOverBasic? mNrButton3 - 3: 0 );
         // Log.v("DistoX", "Help menu, nn " + nn );
-        (new HelpDialog( this, izons, menus, help_icons, help_menus, nn, help_menus.length ) ).show();
+        (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, help_menus.length ) ).show();
       }
   }
 
