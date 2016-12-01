@@ -73,10 +73,13 @@
     <string name="calib_ave_std">Точност: %1$.4f %2$.4f градуси</string>
     <string name="calib_precision">Прецизност</string>
     <string name="calib_iter">Повторения: %1$d</string>
+    <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
+
     <string name="algorithm">Алгоритъм:</string>
     <string name="auto">автоматичен</string>
     <string name="linear">линеен</string>
     <string name="non_linear">нелинеен</string>
+    <!-- NO string name="algo_minimum">minimum</string -->
 
     <string name="device_algo_failed">Невъзможно автоматично определяне на алгоритъма\nЩе бъде използван линеен</string>
     <string name="device_address">Адрес %1$s</string>
@@ -161,9 +164,6 @@
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
     <string name="loop_none">няма полигон loop</string>
     <!-- UNUSED string name="long_lat">Дълж.-Шир.</string -->
-
-    <!-- string name="line_delete">Изтриване на линия</string -->
-    <string name="flip_shots">Обръщане на отсечките</string>
 
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
@@ -289,6 +289,7 @@
 
     <string name="not_available">Bluetooth не е достъпен</string>
     <string name="not_enabled">Bluetooth не е разрешен</string>
+
     <!-- UNUSED string name="not_implemented">Тази функционалност не достъпна все още</string -->
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
     <!-- UNUSED string name="photo">снимка</string -->
@@ -315,6 +316,7 @@
     <!-- UNUSED string name="read_fail_with_code">Грешка при четене: код </string -->
     <string name="read_failed">Грешка при четене от DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
+
     <string name="saved_file_1">Файлът е записан</string>
     <string name="saved_file_2">Файлът е записан %1$s Мащаб %2$.2f</string>
     <string name="saving_">Записване</string>
@@ -347,6 +349,7 @@
     <string name="shot_info">Въведете данни за отсечката</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
+    <!-- TODO string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">обръщане</string>
     <string name="shot_to">до</string>
 
@@ -363,13 +366,11 @@
     <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата?</string>
     <string name="station_set">Продължаване на картировката от тук?</string>
-
     <!-- string name="station_base">reference station</string -->
     <!-- string name="station_next">next station</string -->
     <!-- UNUSED string name="station_viewed">избран репер</string -->
     <string name="survey_exists">Картировката вече съществува</string>
     <!-- UNUSED string name="survey_date">гггг.мм.дд</string -->
-
     <string name="survey_delete">Изтриване на картировката?</string>
     <string name="survey_split">Разделяне на картировката?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
@@ -378,7 +379,6 @@
     <string name="description">описание</string>
     <string name="name">име</string>
     <string name="team">картировачи</string>
-
     <!-- string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
     <string name="toggle_ok">Включен/изключен режим на калибрация на DistoX</string>
@@ -439,7 +439,6 @@
     <string name="ask_reset">Изчистване на паметта на DistoX?</string>
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
-
 
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->
     <string name="button_back"      >Обратно   </string>
@@ -502,6 +501,7 @@
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <!-- TODO string name="title_sketch_new">New 3D sketch</string -->
     <!-- UNUSED string name="title_sketch_edit">Редакт. 3D повърхност</string -->
     <string name="title_sketch_shot">Нова отсечка</string>
     <string name="title_sketch_refs">Изглед</string>
@@ -516,6 +516,7 @@
     <string name="length">Дължина [метри]</string>
     <string name="azimuth">Азимут [градуси]</string>
     <string name="clino">Наклон [градуси]</string>
+
     <string name="orientation">Ориентация</string>
     <string name="contents">Съдържание</string>
     <string name="error_distribution">Разпределение на грешка</string>
@@ -543,6 +544,7 @@
     <string name="no_shot_between_stations">Няма отсечка м/у реперите</string>
     <string name="few_line_points">Линията има твърде малко точки</string>
     <string name="line_delete">Изтр. на линия</string>
+    <string name="flip_shots">Обръщане на отсечките</string>
 
     <string name="menu_head">Начало</string>
     <!-- UNUSED string name="menu_save_th2">Запис на TH2</string -->
@@ -555,6 +557,7 @@
     <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
+    <!-- TODO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Записани репери</string>
     <string name="help_azimuth">Референтен азимут за разгъване</string>
     <string name="help_device">Управление на устройството</string>
@@ -658,6 +661,7 @@
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
+    <!-- TODO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
@@ -691,6 +695,7 @@
     <string name="title_sensor_edit">Сензор</string>
 
     <string name="title_stats">Статистика</string>
+    <!-- TODO string name="title_step">Step</string -->
     <string name="title_survey">Информация за картировката</string>
     <string name="title_survey_new">Нова картировка</string>
     <string name="title_survey_export">Експортиране на картировка като</string>
@@ -841,6 +846,7 @@
   <string name="pref_vthr_title">Вертикална граница на отсечка</string>
   <string name="pref_vthr_summary">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
   <string name="pref_vthr_message">Граница за считане на мерки за Ляво/Дясно/Горе/Долу или Зап/Изт/Сев/Юг</string>
+
   <string name="pref_plan_vthr_title">Скриване на наклонени измервания</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Граница за скриване на странични измервания в хор. план</string -->
   <string name="pref_plan_vthr_message">Странични измервания с по-голям наклон не се показват в скицата на плана</string>
@@ -864,6 +870,8 @@
   <string name="pref_dxf_scale_title">Мащаб на DXF скици</string>
   <string name="pref_dxf_scale_summary">Мащабен фактор на DXF скици</string>
   <string name="pref_dxf_scale_message">Фактор за мащабиране на експортиране на DXF скици</string>
+  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
+  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
   <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_summary">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_message">Резолюция на мини-картинки</string>

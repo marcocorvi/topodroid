@@ -24,9 +24,12 @@
     <string name="memoryX310">Memoria DistoX X310</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 
+    <!-- TODO string name="thp_user">user</string -->
     <string name="thp_label">Texto</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
+    <!-- TODO string name="thl_user">user</string -->
     <string name="thl_wall">Pared</string>
+    <!-- TODO string name="tha_user">user</string -->
     <string name="tha_water">Agua</string>
 
     <string name="make_walls">Paredes</string>
@@ -70,10 +73,13 @@
     <string name="calib_ave_std">Accuracy: %1$.4f %2$.4f grados</string>
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
+    <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
+
     <string name="algorithm">Algoritmo:</string>
-    <string name="auto">auto</string>
+    <!-- OK string name="auto">auto</string -->
     <string name="linear">lineal</string>
     <string name="non_linear">No lineal</string>
+    <!-- NO string name="algo_minimum">minimum</string -->
    
     <string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string>
     <string name="device_address">Dirección %1$s</string>
@@ -85,12 +91,12 @@
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
     <string name="device_code">DistoX código %1$4d</string>
-    <string name="device_firmware">Firmware  %1$d.%2$d</string>
-    <string name="device_hardware">Hardware  %1$d.%2$d</string>
+    <!-- OK string name="device_firmware">Firmware  %1$d.%2$d</string -->
+    <!-- OK string name="device_hardware">Hardware  %1$d.%2$d</string -->
     <string name="device_status_angle_grad">Unidad de ángulos: gradiente</string>
     <string name="device_status_angle_degree">Unidad de ángulos: grados</string>
-    <string name="device_status_compass_on">Compass/clino: on</string>
-    <string name="device_status_compass_off">Compass/clino: off</string>
+    <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
+    <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
     <string name="device_status_calib">Modo: calibración</string>
     <string name="device_status_normal">Modo: normal</string>
     <string name="device_status_silent_on">Silencioso: on</string>
@@ -137,6 +143,7 @@
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
 
+
     <!-- UNUSED string name="head_tail">Memoria: </string -->
     <string name="head_tail_failed">Error al leer la memoria DistoX</string>
     <string name="head_tail_store_failed">Error al almacenar en la memoria DistoX</string>
@@ -157,9 +164,6 @@
     <string name="loop_closure_errors">Error en cierre de bucle</string>
     <string name="loop_none">No hay Bucle</string>
     <!-- UNUSED string name="long_lat">Longitud-Latitud</string -->
-
-    <string name="line_delete">Eliminar línea</string>
-    <string name="flip_shots">Tomas contínuas</string>
 
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
@@ -208,7 +212,7 @@
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
 
-    <string name="no_bt">No Bluetooth</string>
+    <!-- OK string name="no_bt">No Bluetooth</string -->
     <string name="no_calib">No hay calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <string name="no_capture_app">No hay aplicación para capturar imagen</string>
@@ -239,6 +243,8 @@
     <string name="menu_about">Acerca de..</string>
     <string name="menu_area">Área</string>
     <string name="menu_attach">Conectar</string>
+    <!-- UNUSED string name="menu_attached">Connected</string -->
+    <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_close">Cerrar</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
@@ -282,11 +288,11 @@
     <string name="connected_already">Ya esta conectado</string>
 
     <string name="not_available">BT No disponible</string>
-    <!-- UNUSED string name="not_connected">No conectado</string -->
     <string name="not_enabled">BT No habilitado</string>
+
     <!-- UNUSED string name="not_implemented">No implantado</string -->
     <string name="null_bitmap">Mapa bits nulo</string>
-    <!-- UNUSED string name="photo">Foto</string -->
+    <string name="photo">Foto</string>
     <string name="photo_comment_prompt">Intro. comentario de foto</string>
     <!-- UNUSED string name="photo_name">Estación/nombre</string -->
     <!-- UNUSED string name="photo_photo">Toma con foto</string -->
@@ -310,6 +316,7 @@
     <!-- UNUSED string name="read_fail_with_code">Fallo de lectura: código de error </string -->
     <string name="read_failed">Error al leer DistoX</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
+
     <string name="saved_file_1">Guardar archivo</string>
     <string name="saved_file_2">Guardar archivo %1$s escala %2$.2f</string>
     <string name="saving_">Guardar</string>
@@ -342,11 +349,12 @@
     <string name="shot_info">Introducir datos Toma</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
+    <!-- TODO string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">Toma Inversa</string>
     <string name="shot_to">Toma hasta</string>
-
 <!-- NOT USED -->
     <!-- UNUSED string name="make_surface">Ya existe en superficie ¿Reemplazar?</string -->
+
     <!-- UNUSED string name="sketch3d_name">Nombre</string -->
     <!-- UNUSED string name="sketch3d_new">Nuevo dibujo 3D</string -->
     <!-- UNUSED string name="sketch3d_next">Falta nombre de dibujo 3D</string -->
@@ -371,6 +379,7 @@
     <string name="description">Descripción</string>
     <string name="name">Nombre</string>
     <string name="team">Grupo</string>
+    <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
@@ -420,7 +429,7 @@
     <!-- UNUSED string name="v_section">V-sección</string -->
     <string name="h_section">H-sección</string>
 
-    <string name="distox_err_ok">OK</string>
+    <!-- OK string name="distox_err_ok">OK</string -->
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
     <string name="distox_err_headtail_io">Fallo memoria DistoX I/O</string>
     <string name="distox_err_headtail_eof">Fallo memoria EOF DistoX</string>
@@ -438,9 +447,9 @@
     <string name="button_convert"   >Convertir </string>
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
-    <string name="button_eval"      >Eval      </string>
-    <string name="button_eval_cal"  >Eval w. calib.</string>
-    <string name="button_gps_start" >GPS       </string>
+    <!-- TODO string name="button_eval"      >Eval      </string -->
+    <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
+    <!-- TODO string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
@@ -449,9 +458,10 @@
     <!-- UNUSED string name="button_direction">Rumbo/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
-    <string name="button_ok"        >OK        </string>
+    <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
+    <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>
@@ -491,19 +501,67 @@
 
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>
+
+<!-- FIXME_SKETCH_3D -->    
+    <!-- TODO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
+    <!-- TODO string name="title_sketch_new">New 3D sketch</string -->
+    <!-- string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- TODO string name="title_sketch_shot">New shot</string -->
+    <!-- TODO string name="title_sketch_refs">View mode</string -->
+    <!-- string name="title_sketch_section_type">Sections type</string -->
+    <!-- string name="title_sketch_select">Select item</string -->
+
+    <!-- TODO string name="sketch_mode_single">Single shot</string -->
+    <!-- TODO string name="sketch_mode_ngbh">Nearby shots</string -->
+    <!-- TODO string name="sketch_mode_all">All shots</string -->
+    <!-- TODO string name="sketch_delete">Delete 3D model ?</string -->
+    <!-- TODO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
+    <!-- TODO string name="length">Length [m]</string -->
+    <!-- TODO string name="azimuth">Azimuth [deg]</string -->
     <string name="clino">Clino [deg]</string>
+
     <string name="orientation">orientación</string>
     <string name="contents">contenido</string>
     <string name="error_distribution">error distribucción</string>
     <string name="angle_distribution">distribucción angular</string>
 
+    <!-- UNUSED string name="btn_head">head</string -->
+    <!-- UNUSED string name="btn_stretch">Stretch</string -->
+    <!-- UNUSED string name="btn_extrude">Extrude</string -->
+    <!-- UNUSED string name="btn_erase">erase</string -->
+    <!-- UNUSED string name="btn_cut">cut</string -->
+    <!-- UNUSED string name="btn_vertical">Vertical</string -->
+    <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
+
+    <!-- select buttin labels -->
+    <!-- UNUSED string name="btn_section">Section</string -->
+    <!-- UNUSED string name="btn_step">Step</string -->
+    <!-- UNUSED string name="btn_shot">Shot</string -->
+    <!-- UNUSED string name="btn_join">Join</string -->
+
+    <!-- UNUSED string name="button_redraw">Redraw</string -->
+    <!-- UNUSED string name="button_erase">Erase</string -->
+    <!-- UNUSED string name="btn_surface">surface</string -->
+
+    <!-- UNUSED string name="station_next">NEXT</string -->
+
+    <!-- TODO string name="menu_head">HEAD</string -->
+    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
+<!-- END_SKETCH_3D -->    
+
     <string name="help_help">Ayuda</string>
     <!-- UNUSED string name="help_manual">Manual online</string -->
     <string name="help_measure">Medir distancias</string>
     
+    <!-- TODO string name="no_shot_between_stations">no_shot_between_stations</string -->
+    <!-- TODO string name="few_line_points">Line has too few points</string -->
+    <string name="line_delete">Eliminar línea</string>
+    <string name="flip_shots">Tomas contínuas</string>
+
     <string name="help_close">Cerrar ventana</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_continue">Continuar el dibujo de una línea</string>
+    <!-- TODO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_device">Opciones del dispositivo distoX</string>
@@ -567,6 +625,7 @@
     <string name="help_manual_calibration">Manual instrumentos calibración</string>
     <string name="help_note_plot">Editar propiedades del elemento de dibujo</string>
     <!-- UNUSED string name="help_save">Guardar cambios de la Topografía o calibración</string -->
+    <!-- TODO string name="help_save_calib">Save changes to calibration info</string -->
     <string name="help_export_survey">Exportar Topografía</string>
     <string name="help_loc">Posicionamiento GPS</string>
     <string name="help_delete_survey">Eliminar Topografía</string>
@@ -586,10 +645,29 @@
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
 
+
+<!-- FIXME_SKETCH_3D -->
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
+    <!-- TODO string name="help_one_model">Fit 3d model to view</string -->
+    <!-- TODO string name="help_surface">Make surface</string -->
+    <!-- TODO string name="help_save_model">Export 3D model</string -->
+    <!-- TODO string name="help_trash_model">Delete 3D model</string -->
+    <!-- TODO string name="help_head_model">Orient 3D model</string -->
+    <!-- string name="help_erase_model">Erase region</string -->
+    <!-- TODO string name="help_cut_model">Cut region</string -->
+    <!-- TODO string name="help_stretch_model">Stretch region</string -->
+    <!-- string name="help_extrude_model">Extrude region</string -->
+    <!-- TODO string name="help_refine_center">Refine surface at triangle centers</string -->
+    <!-- TODO string name="help_refine_sides">Refine surface at triangle sides</string -->
+    <!-- TODO string name="help_refine_point">Refine surface at point</string -->
+    <!-- TODO string name="help_refine_triangle">Refine surface al the long sides</string -->
+
+
     <string name="title_azimut">Extensión de referencia</string>
     <string name="title_calib">Calibración</string>
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
+    <!-- TODO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_device">Dispositivo DistoX</string>
@@ -605,6 +683,7 @@
     <string name="title_fixed_import">Punto de importación fijado</string>
     <string name="title_fixed_gps">Punto fijo: GPS</string>
     <string name="title_fixed_add">Punto fijo: insert</string>
+    <!-- TODO string name="title_manual">TopoDroid User Manual</string -->
     <string name="title_mode">Modo de visualización</string>
     <string name="title_move">Mover</string>
     <string name="title_note">Notas</string>
@@ -628,6 +707,7 @@
     <!-- UNUSED string name="title_sketch_select">Seleccionar elemento</string -->
 
     <string name="title_stats">Estadísticas</string>
+    <!-- TODO string name="title_step">Step</string -->
     <string name="title_survey">Info Topografía</string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar Topografías</string>
@@ -641,8 +721,9 @@
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_calib">Opciones de calibración</string>
   <string name="pref_cat_device">Opciones de distoX</string>
-  <!-- UNUSED string name="pref_cat_sketch">Opciones de dibujo</string -->
+  <!-- NO string name="pref_cat_sketch">Opciones de dibujo</string -->
   <string name="pref_cat_log">Opciones de dibujo</string>
+
 
   <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Idioma</string>
@@ -666,6 +747,7 @@
   <string name="pref_size_buttons_title">Tamaño botones</string>
   <string name="pref_size_buttons_summary">Tamaño de los botones de la barra</string>
   <!-- UNUSED string name="pref_size_buttons_message">Introduzca el tamaño de los botones de la barra [pixels]</string -->
+
   <string name="pref_leg_shots_title">Toma visual</string>
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
@@ -715,6 +797,7 @@
   <string name="pref_crs_message">Introducir el CRS nombrar como en Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
+
   <string name="pref_plot_screen_title">Opciones de pantalla de dibujo</string>
   <string name="pref_tool_line_title">Opciones de línea</string>
   <string name="pref_tool_point_title">Opciones de Puntos</string>
@@ -726,6 +809,7 @@
   <!-- UNUSED string name="pref_cwd_summary">Directorio principal TopoDroid</string -->
   <!-- UNUSED string name="pref_cwd_message">Introducir el directorio principal TopoDroid</string -->
   <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
+  <!-- TODO string name="pref_pt_color_map_summary">PocketTopo color map (PocketTopo import)</string -->
   <string name="pref_text_size_title">Tamaño del texto de la lista</string>
   <string name="pref_text_size_summary">Tamaño del texto de las visuales</string>
   <string name="pref_text_size_message">Tamaño del texto de la lista</string>
@@ -741,6 +825,8 @@
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Límite de trazos del borde</string -->
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
+
+
   <string name="pref_survey_stations_title">Sentido de las estaciones topográficas</string>
   <string name="pref_survey_stations_summary">Estaciones topográficas automáticas</string>
   <string name="pref_accel_thr_title">Precisión Aceleración</string>
@@ -764,6 +850,7 @@
   <string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string>
   <string name="pref_azimuth_manual_title">Toma extendida</string>
   <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
+
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de Topógrafos</string>
   <string name="pref_team_message">Equipo de topógrafos por defecto</string>
@@ -774,6 +861,7 @@
   <string name="pref_vthr_title">Precisión toma vertical</string>
   <string name="pref_vthr_summary">Cáculo del límite de la toma vertical</string>
   <string name="pref_vthr_message">límite visual vertical por LRUD/WENS</string>
+
   <string name="pref_plan_vthr_title">Límite visual vertical</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Límite vertical de la visual en planta</string -->
   <string name="pref_plan_vthr_message">límite vertical de la visual en planta</string>
@@ -797,6 +885,8 @@
   <string name="pref_dxf_scale_title">Escala de dibujo DXF</string>
   <string name="pref_dxf_scale_summary">Factor de escala del dibujo DXF</string>
   <string name="pref_dxf_scale_message">Factor de escala exportación del dibujo DXF</string>
+  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
+  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
   <string name="pref_thumbnail_summary">Tamaño de las imágenes en miniatura</string>
   <string name="pref_thumbnail_message">Tamaño de las imágenes en miniatura</string>
@@ -867,6 +957,8 @@
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
+  <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_LRExtend_title">Ampliación izq./drch. estimada</string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
 
@@ -934,17 +1026,31 @@
   <string name="pref_walls_xstep_summary">Separación de punto a lo largo de la pared</string>
   <string name="pref_walls_xstep_message">La separación de los puntos a lo largo de la pared [m]</string>
 
+  <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
+  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
+  <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
+  <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
+  <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
+
   <string name="pref_log_stream_summary">Salida secuencia de registros</string>
   <string name="pref_log_stream_title">Secuencia de registros</string>
-  <string name="pref_log_bt">Bluetooth</string>
+  <!-- OK string name="pref_log_bt">Bluetooth</string -->
   <string name="pref_log_bezier">Curvas Bézier</string>
   <string name="pref_log_calib">Calibración</string>
   <string name="pref_log_comm">Communicación BT</string>
+  <!-- OK string name="pref_log_csurvey">cSurvey</string -->
   <string name="pref_log_data">Datos</string>
   <string name="pref_log_db">Base de datos</string>
   <string name="pref_log_debug">Depurar</string>
   <string name="pref_log_device">Ventana dispositivo</string>
-  <string name="pref_log_distox">DistoX</string>
+  <!-- OK string name="pref_log_distox">DistoX</string -->
   <string name="pref_log_err">Error</string>
   <string name="pref_log_fixed">Puntos fijos</string>
   <string name="pref_log_input">Entrada usuario</string>
@@ -953,10 +1059,12 @@
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
   <string name="pref_log_proto">Protocolo DistoX</string>
+  <!-- OK string name="pref_log_ptopo">PocketTopo</string -->
   <string name="pref_log_sensor">Sensores</string>
   <string name="pref_log_shot">Toma</string>
+  <!-- NO string name="pref_log_sync">Cosurveying</string -->
   <string name="pref_log_survey">Topografía</string>
-  <string name="pref_log_therion">Therion</string>
+  <!-- OK string name="pref_log_therion">Therion</string -->
   <string name="pref_log_units">Unidades</string>
   <string name="pref_log_zip">Zip</string>
 

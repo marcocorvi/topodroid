@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Scarico manuale utente dal web non riuscito</string>
 
     <string name="app_name">TopoDroid</string>
@@ -26,7 +26,7 @@
 
     <string name="thp_user">utente</string>
     <string name="thp_label">testo</string>
-    <!-- string name="thp_danger">pericolo</string -->
+    <!-- UNUSED string name="thp_danger">pericolo</string -->
     <string name="thl_user">utente</string>
     <string name="thl_wall">parete</string>
     <string name="tha_user">utente</string>
@@ -73,10 +73,13 @@
     <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f gradi</string>
     <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
+    <string name="calib_reset">Resetta icalibrazione sul DistoX?</string>
+
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
     <string name="linear">lineare</string>
     <string name="non_linear">non-lineare</string>
+    <!-- NO string name="algo_minimum">minimum</string -->
    
     <string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string>
     <string name="device_address">Indirizzo %1$s</string>
@@ -147,6 +150,7 @@
     <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
     <string name="illegal_data_value">Dati non corretti</string>
+
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -161,8 +165,6 @@
     <string name="loop_closure_errors">Errori chiusura anelli</string>
     <string name="loop_none">Nessun anello</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
-
- 
 
     <string name="error_azimuth_required">Azimuth mancante</string>
     <string name="error_length_required">Lunghezza mancante</string>
@@ -242,15 +244,15 @@
     <string name="menu_about">INFO</string>
     <!-- OK string name="menu_area">AREA</string -->
     <string name="menu_attach">CONNETTI</string>
-    <!-- string name="menu_attached">Connected</string -->
-    <!-- string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <!-- UNUSED string name="menu_attached">Connected</string -->
+    <!-- UNUSED string name="menu_ready">Ready</string -->
+    <string name="menu_close">CHIUDI</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
-    <string name="menu_display">DISPLAY</string>
+    <!-- OK string name="menu_display">DISPLAY</string -->
     <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">ESPORTA</string>
-    <!-- OK ENGLISH string name="menu_firmware">FIRMWARE</string -->
+    <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_reload">RICARICA</string>
     <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
@@ -258,7 +260,7 @@
     <string name="menu_switch">CAMBIA/CHIUDI</string>
     <string name="menu_help">AIUTO</string>
     <string name="menu_join_survey">CO-RILIEVO</string> <!-- rilievo cooperativo -->
-    <string name="menu_logs">LOGS</string>
+    <!-- OK string name="menu_logs">LOGS</string -->
     <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
     <string name="menu_overview">PANORAMICA</string>
@@ -275,7 +277,6 @@
     <string name="menu_validate">CONVALIDA</string>
     <string name="menu_zoom_fit">ADATTA ZOOM</string>
 
-
     <string name="popup_join_pt">Sposta al punto vicino</string>
     <string name="popup_snap_ln">Segui la linea vicina</string>
     <string name="popup_split_pt">Sdoppia il punto</string>
@@ -289,9 +290,10 @@
 
     <string name="not_available">Bluetooth non disponibile</string>
     <string name="not_enabled">BT non attivo</string>
+
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
     <string name="null_bitmap">bitmap non valida</string>
-    <!-- UNUSED string name="photo">foto</string -->
+    <string name="photo">foto</string>
     <string name="photo_comment_prompt">Scrivi il commento</string>
     <!-- UNUSED string name="photo_name">caposaldo/nome</string -->
     <!-- UNUSED string name="photo_photo">foto</string -->
@@ -307,20 +309,21 @@
     <!-- UNUSED string name="plot_name">Nome del disegno</string -->
     <string name="plot_new">Nuovo disegno</string>
     <string name="plot_not_found">Disegno non trovato</string>
-    <!-- string name="plot_null_name">Nome del disegno mancante</string -->
-    <!-- string name="plot_null_start">Caposaldo di riferimento mancante</string -->
+    <!-- UNUSED string name="plot_null_name">Nome del disegno mancante</string -->
+    <!-- UNUSED string name="plot_null_start">Caposaldo di riferimento mancante</string -->
     <!-- UNUSED string name="plot_recover">Ricaricare il disegno dal backup?</string -->
     <string name="plot_start">Caposaldo di origine</string>
-    <!-- string name="plot_view">Caposaldo puntato</string -->
+    <!-- UNUSED string name="plot_view">Caposaldo puntato</string -->
     <!-- UNUSED string name="read_fail_with_code">Lettura fallita. Codice </string -->
     <string name="read_failed">Lettura dati DistoX fallita</string>
     <!-- UNUSED string name="reading_file_failed">Lettura file fallita</string -->
+
     <string name="saved_file_1">Salvato file</string>
     <string name="saved_file_2">Salvato file %1$s Scala %2$.2f</string>
     <string name="saving_">Salvando </string>
     <string name="saving_file_failed">Salvataggio file fallito</string>
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
-    <string name="splay">splay</string>
+    <!-- OK string name="splay">splay</string -->
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
     <string name="too_many_legs_xsection">Troppe battute per una Cross-section</string>
     <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
@@ -329,10 +332,10 @@
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">gravità</string>
-    <!-- string name="sensor_humidity">umidità</string -->
+    <!-- UNUSED string name="sensor_humidity">umidità</string -->
     <string name="sensor_light">luce</string>
     <string name="sensor_magnetic_field">campo magnetico</string>
-    <!-- string name="sensor_orientation">orientazione</string -->
+    <!-- UNUSED string name="sensor_orientation">orientazione</string -->
     <string name="sensor_pressure">pressione</string>
     <string name="sensor_temperature">temperatura</string>
     <string name="sensor_extern">esterno</string>
@@ -340,44 +343,44 @@
     <string name="sensor_value">valore</string>
     <string name="sensor_comment">commento</string>
 
-    <!-- string name="shot_clino">clino</string -->
-    <!-- string name="shot_compass">bussola</string -->
+    <!-- UNUSED string name="shot_clino">clino</string -->
+    <!-- UNUSED string name="shot_compass">bussola</string -->
     <string name="shot_delete">Cancellare la misura?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
-    <!-- string name="shot_length">lunghezza</string -->
+    <!-- UNUSED string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
+    <!-- TODO string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">inverso</string>
     <string name="shot_to">a</string>
 
-    <!-- UNUSED string name="make_surface">Surface exists. Replace it?</string -->
-
-    <!-- UNUSED string name="sketch3d_new">New 3D sketch</string -->
-    <!-- UNUSED string name="sketch3d_next">next station</string -->
-    <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
-    <!-- UNUSED string name="sketch3d_start">base station</string -->
+    <!-- NO string name="make_surface">Surface exists. Replace it?</string -->
 
     <string name="sketch3d_name">model name</string>
+    <!-- NO string name="sketch3d_new">New 3D sketch</string -->
+    <!-- NO string name="sketch3d_next">next station</string -->
+    <!-- NO string name="sketch3d_null_name">Missing 3D sketch name</string -->
+    <!-- NO string name="sketch3d_null_next">Missing 3D sketch next station</string -->
+    <!-- NO string name="sketch3d_null_start">Missing 3D sketch base station</string -->
+    <!-- NO string name="sketch3d_start">base station</string -->
 
     <string name="station">caposaldo</string>
     <string name="station_ask">Inserisci caposaldo ?</string>
     <string name="station_set">Prosegui rilievo da qui?</string>
-    <!-- OK string name="station_base">caposaldo di riferimento</string -->
+    <!-- UNUSED string name="station_base">caposaldo di riferimento</string -->
     <!-- UNUSED string name="station_next">prossimo caposaldo</string -->
     <!-- UNUSED string name="station_viewed">caposaldo puntato</string -->
     <string name="survey_exists">Rilievo già presente</string>
     <!-- UNUSED string name="survey_date">aaaa.mm.gg</string -->
     <string name="survey_delete">Elimina rilievo?</string>
     <string name="survey_split">Dividi rilievo?</string>
-    <string name ="survey_not_attached">ATTENZIONE: dati scollegati</string>
+    <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
     <string name="declination">decl. magn.</string>
     <string name="description">descrizione</string>
     <string name="name">nome</string>
     <string name="team">squadra</string>
-    <!-- string name="toggle_device">Attiva modo calibrazione</string -->
+    <!-- UNUSED string name="toggle_device">Attiva modo calibrazione</string -->
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
@@ -392,11 +395,11 @@
     <string name="unzip_fail_survey">Fallito: Nome rilievo non corrispondente</string>
     <string name="unzip_fail_db">Fallito: Versione database non corrispondente</string>
     <string name="unzip_fail_td">Fallito: Versione TopoDroid non corrispondente</string>
-    <!-- OK ENGLISH string name="zoom_in_out">Zoom in/out</string -->
+    <!-- OK string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Info rilievo</string>
-    <!-- OK ENGLISH string name="stat_stddev_m">M stddev %1$.1f %%</string -->
-    <!-- OK ENGLISH string name="stat_stddev_g">G stddev %1$.1f %%</string -->
+    <!-- OK string name="stat_stddev_m">M stddev %1$.1f %%</string -->
+    <!-- OK string name="stat_stddev_g">G stddev %1$.1f %%</string -->
     <string name="stat_stddev_dip">Dip stddev %1$.1f gradi (media %2$.1f gradi)</string>
     <string name="stat_component">Componenti %1$d</string>
     <string name="stat_depth">Profondità %1$.1f %2$s %3$.1f %4$s"</string>
@@ -410,10 +413,11 @@
     <string name="stat_splay">Splay %1$d</string>
     <string name="stat_station">Capisaldi %1$d</string>
     <string name="stat_surface">Tiri di superficie %1$d %2$.1f %3$s</string>
-    <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
+    <!-- OK string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string -->
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>
     <string name="shot_title">BATTUTA %1$s - %2$s"</string>
     <string name="shot_data">D %1$.2f  N %2$.1f  I %3$.1f"</string>
+
 
     <string name="hide_blank">Dati bianchi</string>
     <string name="hide_leg">Batture ripetute</string>
@@ -422,8 +426,8 @@
 
     <string name="plan">PIANTA</string>
     <string name="extended">SEZIONE LONG.</string>
-    <string name="extended_profile">Profilo esteso</string>
     <string name="profile">PROGETTO.</string>
+    <string name="extended_profile">Profilo esteso</string>
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <string name="h_section">SEZIONE ORIZZ.</string>
 
@@ -448,9 +452,9 @@
     <string name="button_eval"      >Calcola   </string>
     <string name="button_eval_cal"  >Calcola con calibr.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
-    <!-- OK string name="button_gps_stop"  >Stop      </string -->
-    <!-- OK string name="button_manual"    >Manuale   </string -->
-    <!-- OK string name="button_measure"   >Misura    </string -->
+    <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
+    <!-- UNUSED string name="button_manual"    >Manuale   </string -->
+    <!-- UNUSED string name="button_measure"   >Misura    </string -->
     <string name="button_photo"   >Foto</string>
     <!-- UNUSED string name="button_sensor"  >Misure</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
@@ -460,7 +464,7 @@
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
-    <!-- string name="button_dump"      >Scarica   </string -->
+    <string name="button_dump"      >Scarica   </string>
     <string name="button_reset"     >Resetta   </string>
     <string name="button_left"      >SINISTRA</string>
     <string name="button_right"     >DESTRA</string>
@@ -468,8 +472,8 @@
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
     <string name="button_store"     >Scrivi    </string>
-    <!-- OK string name="button_start"     >Start</string -->
-    <!-- OK string name="button_stop"      >Stop</string -->
+    <!-- UNUSED string name="button_start"     >Start</string -->
+    <!-- UNUSED string name="button_stop"      >Stop</string -->
     <!-- OK string name="button_upload"    >Upload   </string -->
     <string name="button_view"      >Visualizza      </string>
 
@@ -499,12 +503,14 @@
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
+    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
     <string name="title_sketch_shot">Nuovo tiro</string>
     <string name="title_sketch_refs">Modo di visualizzazione</string>
-    <!-- string name="title_sketch_section_type">Tipo di sezioni</string -->
-    <!-- string name="title_sketch_select">Seleziona un oggetto</string -->
+    <!-- UNUSED string name="title_sketch_section_type">Tipo di sezioni</string -->
+    <!-- UNUSED string name="title_sketch_select">Seleziona un oggetto</string -->
 
+    <!-- select button labels -->
     <string name="sketch_mode_single">Tiro singolo</string>
     <string name="sketch_mode_ngbh">Tiri vicini</string>
     <string name="sketch_mode_all">Tutti i tiri</string>
@@ -519,23 +525,22 @@
     <string name="error_distribution">distribuzione degli errori</string>
     <string name="angle_distribution">distribuzione degli angoli</string>
 
-    <!-- string name="btn_head">head</string -->
-    <!-- string name="btn_stretch">Stretch</string -->
-    <!-- string name="btn_extrude">Extrude</string -->
-    <!-- string name="btn_erase">erase</string -->
-    <!-- string name="btn_cut">cut</string -->
-    <!-- string name="btn_vertical">Vertical</string -->
-    <!-- string name="btn_horizontal">Horizontal</string -->
+    <!-- UNUSED string name="btn_head">head</string -->
+    <!-- UNUSED string name="btn_stretch">Stretch</string -->
+    <!-- UNUSED string name="btn_extrude">Extrude</string -->
+    <!-- UNUSED string name="btn_erase">erase</string -->
+    <!-- UNUSED string name="btn_cut">cut</string -->
+    <!-- UNUSED string name="btn_vertical">Vertical</string -->
+    <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
 
-    <!-- select button labels -->
     <!-- UNUSED string name="btn_section">Section</string -->
     <!-- UNUSED string name="btn_step">Step</string -->
     <!-- UNUSED string name="btn_shot">Shot</string -->
     <!-- UNUSED string name="btn_join">Join</string -->
 
-    <!-- string name="button_redraw">Redraw</string -->
+    <!-- UNUSED string name="button_redraw">Redraw</string -->
     <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- string name="btn_surface">surface</string -->
+    <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">Nessun tiro tra i capisaldi</string>
@@ -544,9 +549,8 @@
     <string name="flip_shots">Capovolgi battute</string>
 
     <string name="menu_head">CIMA</string>
-    <!-- string name="menu_save_th2">SAVE TH2</string -->
+    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
-
 
     <string name="help_help">Questo aiuto</string>
     <!-- UNUSED string name="help_manual">Manuale online</string -->
@@ -555,6 +559,7 @@
     <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_continue">Continuare il disegno di una linea</string>
+    <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
     <string name="help_azimuth">Riferimento per "extend"</string>
     <string name="help_device">Finestra DistoX</string>
@@ -601,7 +606,7 @@
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
     <string name="help_delete_item">Cancella elemento del disegno</string>
     <!-- TODO string name="help_range">Moving a portion of line</string -->
-    <!-- string name="help_clear">Pulisci selezione</string -->
+    <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
     <string name="help_next">Prossimo oggetto nella selezione</string>
@@ -638,16 +643,16 @@
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
 <!-- FIXME_SKETCH_3D -->
-    <!-- string name="help_refs_model">View mode</string -->
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
     <string name="help_one_model">Fit 3d model to view</string>
     <string name="help_surface">Make surface</string>
     <string name="help_save_model">Export 3D model</string>
     <string name="help_trash_model">Delete 3D model</string>
     <string name="help_head_model">Orient 3D model</string>
-    <!-- string name="help_erase_model">Erase region</string -->
+    <!-- UNUSED string name="help_erase_model">Erase region</string -->
     <string name="help_cut_model">Cut region</string>
     <string name="help_stretch_model">Stretch region</string>
-    <!-- string name="help_extrude_model">Extrude region</string -->
+    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
     <string name="help_refine_center">Refine surface at triangle centers</string>
     <string name="help_refine_sides">Refine surface at triangle sides</string>
     <string name="help_refine_point">Refine surface at point</string>
@@ -658,6 +663,7 @@
     <string name="title_calib">Calibrazioni</string>
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
+    <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
@@ -690,11 +696,11 @@
     <string name="title_shot_delete">Rimuovi battuta ?</string>
     <string name="title_sensor_edit">Sensore</string>
 
-    <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- UNUSED string name="title_sketch_shot">New shot</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
-    <!-- UNUSED string name="title_sketch_select">Select item</string -->
+    <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
+    <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- NO string name="title_sketch_shot">New shot</string -->
+    <!-- NO string name="title_sketch_section_type">Sections type</string -->
+    <!-- NO string name="title_sketch_select">Select item</string -->
 
     <string name="title_stats">Statistiche</string>
     <string name="title_survey">Info rilievo</string>
@@ -735,6 +741,7 @@
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore</string>
   <!-- UNUSED string name="pref_size_buttons_message">Scrivi la dimensione dei bottoni della barra superiore [pixels]</string -->
+
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
@@ -753,8 +760,8 @@
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
-  <!-- string name="pref_device_type_title">Tipo DistoX</string -->
-  <!-- string name="pref_device_type_summary">Modello DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Modello DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Tentativi connesione</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Numero tentativi di connessione</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Numero tentativi di connessione</string -->
@@ -784,6 +791,7 @@
   <string name="pref_crs_message">Scrivi il CRS come in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
+
   <string name="pref_plot_screen_title">OPZIONI DISEGNO</string>
   <string name="pref_tool_line_title">OPZIONI LINEE</string>
   <string name="pref_tool_point_title">OPZIONI PUNTI</string>
@@ -811,6 +819,8 @@
   <string name="pref_vert_splay_title">Soglia splay tratteggiati</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Soglia clino splay tratteggiati</string -->
   <string name="pref_vert_splay_message">Soglia clino splay tratteggiati</string>
+
+
   <string name="pref_survey_stations_title">Capisaldi rilievo</string>
   <string name="pref_survey_stations_summary">Capisaldi rilievo automatici</string>
   <string name="pref_accel_thr_title">Tolleranza accelerazione</string>
@@ -845,6 +855,7 @@
   <string name="pref_vthr_title">Soglia vert.</string>
   <string name="pref_vthr_summary">Soglia inclinazione LRUD/WENS</string>
   <string name="pref_vthr_message">Soglia inclinazione battuta per LRUD/WENS</string>
+
   <string name="pref_plan_vthr_title">Splay soglia verticale</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">soglia verticale per splay in pianta</string -->
   <string name="pref_plan_vthr_message">Soglia verticale per splay in pianta</string>
@@ -868,6 +879,8 @@
   <string name="pref_dxf_scale_title">Scala rilievo DXF</string>
   <string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string>
   <string name="pref_dxf_scale_message">Fattore di scala per export rilievo in formato DXF</string>
+  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
+  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
   <string name="pref_thumbnail_title">Dimensione thumbnails</string>
   <string name="pref_thumbnail_summary">Dimensione immagini thumbnail</string>
   <string name="pref_thumbnail_message">Dimensione immagini thumbnail</string>
@@ -1006,6 +1019,19 @@
   <string name="pref_walls_xstep_title">Passo</string>
   <string name="pref_walls_xstep_summary">Distanza tra punti lungo il tiro</string>
   <string name="pref_walls_xstep_message">Distanza tra punti lungo il tiro [m]</string>
+
+  <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
+  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
+  <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
+  <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
+  <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
   <!-- OK string name="pref_log_stream_summary">Log output stream</string -->
   <!-- OK string name="pref_log_stream_title">Log stream</string -->

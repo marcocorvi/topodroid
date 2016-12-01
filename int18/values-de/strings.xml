@@ -23,7 +23,6 @@
     <string name="memoryA3">DistoX A3 Speicher</string>
     <string name="memoryX310">DistoX X310 Speicher</string>
     <!-- UNUSED string name="memory_data">DistoX Daten</string -->
-
 <!-- names of therion items -->
     <string name="thp_user">Nutzer</string>
     <string name="thp_label">Beschriftung</string>
@@ -43,8 +42,6 @@
     <!-- UNUSED string name="missing_symbols">There are missing drawing tools.\nSave anyway ?</string -->
     <!-- UNUSED string name="missing_title">MISSING SYMBOLS</string -->
     <!-- UNUSED string name="missing_warning">The following drawing tools are missing.\n</string -->
-
-<!-- DRAWING POINT EDITING -->
     <string name="failed_snap_to_line">Kein Linienpunkt zum Verbinden gefunden</string>
     <string name="failed_snap_to_point">Kein Punkt zum Verbinden gefunden</string>
 
@@ -52,14 +49,12 @@
     <string name="calibration_length">Maßband-Länge bis Anfang der Skala</string>
     <string name="calibration_azimuth">Kompass/Azimut</string>
     <string name="calibration_clino">Neigungsmesser</string>
-
 <!-- CALIBRATION -->
     <string name="calib_new">Neue Kalibrierung</string>
     <string name="calib_exists">Kalibrierung bereits vorhanden</string>
     <string name="calib_delete">Kalibrierung löschen</string>
     <string name="calib_device_mismatch">WARNUNG: Kalibrierung stimmt mit Gerät nicht überein</string>
     <string name="calib_no_name">Name erforderlich</string>
-
     <string name="calib_gm_policy">Methode</string>
     <string name="calib_gm_undelete">Kalibrierung wiederherstellen?</string>
     <string name="calib_saved">Kalibrierung gespeichert</string>
@@ -82,10 +77,9 @@
 
     <string name="algorithm">Algorithmus:</string>
     <string name="auto">automatisch</string>
-    <string name="linear">linear</string>
+    <!-- OK string name="linear">linear</string -->
     <string name="non_linear">nicht-linear</string>
-    <string name="algo_minimum">minimum</string>
-       
+    <!-- NO string name="algo_minimum">minimum</string -->
 <!-- DistoX DEVICE STUFF -->
     <string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string>
     <string name="device_address">Adresse %1$s</string>
@@ -135,7 +129,6 @@
     <string name="few_groups">Zu wenige Gruppen</string>
     <!-- UNUSED string name="few_plots">Nicht genügend Skizzen</string -->
     <string name="few_calibs">Nicht genügend Kalibrierungen</string>
-
 <!-- IMPORTING A SURVEY or A ZIP -->
     <string name="calib_import_title">Kalibrierung importieren</string>
     <string name="import_title">Daten Importieren</string>
@@ -162,7 +155,6 @@
     <!-- UNUSED string name="pairing_failed">Verbindung fehlgeschlagen</string -->
 
     <string name="illegal_data_value">Unzulässiger Datenwert</string>
-
 <!-- MISC STRINGS -->
     <string name="label_title">BESCHRIFTUNG</string>
     <string name="label_text">Geben Sie den Beschriftungstext ein</string>
@@ -178,7 +170,6 @@
     <string name="loop_closure_errors">Ringschlussfehler</string>
     <string name="loop_none">Kein Ringschluss</string>
     <!-- UNUSED string name="long_lat">Länge-Breite</string -->
-
 <!-- INPUT FIELDS ERROR STRINGS: BAD VALUE or MISSING VALUE -->
     <string name="error_azimuth_required">Azimut erforderlich</string>
     <string name="error_length_required">Länge erforderlich</string>
@@ -226,7 +217,6 @@
     <string name="bad_cwd">Der Projektname kann nicht der Pfad sein</string>
     <string name="bad_line">Ungültiger Linientyp</string>
     <string name="bad_point">Ungültiger Punkttyp</string>
-
 <!-- ERRORS: MISSING SOMETHING -->
     <string name="no_bt">Bluetooth nicht aktiv</string>
     <string name="no_calib">Keine Kalibrierung</string>
@@ -254,7 +244,6 @@
     <string name="no_undelete">Nichts wiederherzustellen</string>
     <string name="format_measure_plan">Dist %1$.2f Dx %2$.2f Dy %3$.2f Azimut %4$.1f"</string>
     <string name="format_measure_profile">Dist %1$.2f Dx %2$.2f Dy %3$.2f Neigung %4$.1f"</string>
-
 <!-- MENUS 
  detach: disconnect from the DistoX device
  palette: drawing tools dialog
@@ -265,13 +254,15 @@
     <string name="menu_about">ÜBER</string>
     <string name="menu_area">FLÄCHE</string>
     <string name="menu_attach">VERBINDEN</string>
+    <!-- UNUSED string name="menu_attached">Connected</string -->
+    <!-- UNUSED string name="menu_ready">Ready</string -->
     <string name="menu_close">SCHLIEßEN</string>
     <string name="menu_delete">LÖSCHEN</string>
     <string name="menu_detach">TRENNEN</string>
     <string name="menu_display">ANZEIGEN</string>
-    <string name="menu_distox">DISTOX</string>
+    <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">EXPORTIEREN</string>
-    <string name="menu_firmware">FIRMWARE</string>
+    <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">WIEDERHERSTELLEN</string>
     <string name="menu_reload">FRÜHERE VERSION</string>
     <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
@@ -279,15 +270,15 @@
     <string name="menu_switch">WECHSELN/SCHLIEßEN</string>
     <string name="menu_help">HILFE</string>
     <string name="menu_join_survey">CO-VERMESSUNG</string>
-    <string name="menu_logs">LOGS</string>
+    <!-- OK string name="menu_logs">LOGS</string -->
     <string name="menu_manual_calibration">KALIBRIERUNG</string>
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_pair">VERBINDEN</string>
-    <string name="menu_palette">PALETTE</string>
+    <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORWERTE</string>
-    <string name="menu_scan">SCAN</string>
+    <!-- OK string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_station">MESSPUNKTE</string -->
     <string name="menu_stats">STATISTIK</string>
     <string name="menu_survey">INFO</string>
@@ -295,7 +286,6 @@
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKIZZEN</string -->
     <string name="menu_validate">VALIDIEREN</string>
     <string name="menu_zoom_fit">AUF SKIZZE ZOOMEN</string>
-
 <!-- LINE POINT EDITING ACTIONS -->
     <string name="popup_join_pt">Mit nähestem Punkt vereinigen</string>
     <string name="popup_snap_ln">Auf nächste Linie verschieben</string>
@@ -307,10 +297,10 @@
 
     <string name="connected_none">Nicht verbunden</string>
     <string name="connected_already">Bereits verbunden</string>
-
     <string name="not_available">Bluetooth nicht verfügbar</string>
     <!-- UNUSED string name="not_connected">Nicht verbinden</string -->
     <string name="not_enabled">Bluetooth nicht aktiviert</string>
+
     <!-- UNUSED string name="not_implemented">Noch nicht implementiert</string -->
     <string name="null_bitmap">Null Bitmap [OOM Fehler]</string>
     <string name="photo">Foto</string>
@@ -329,10 +319,15 @@
     <!-- UNUSED string name="plot_name">Name der Skizze</string -->
     <string name="plot_new">Neue Skizze</string>
     <string name="plot_not_found">Skizze nicht gefunden</string>
+    <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
+    <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Skizze aus dem Backup laden?</string -->
     <string name="plot_start">Basismesspunkt</string>
+    <!-- UNUSED string name="plot_view">Viewed station</string -->
     <!-- UNUSED string name="read_fail_with_code">Lesefehler: Fehlercode</string -->
     <string name="read_failed">Fehler beim Lesen vom DistoX</string>
+    <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
+
     <string name="saved_file_1">Gespeicherte Datei</string>
     <string name="saved_file_2">Datei %1$s gespeichert mit Faktor %2$.2f</string>
     <string name="saving_">Speichern </string>
@@ -371,14 +366,13 @@
 
     <string name="make_surface">Oberfläche existiert. Ersetzen?</string>
 <!-- NOT USED -->
-
-    <!-- UNUSED string name="sketch3d_name">Name</string -->
-    <!-- UNUSED string name="sketch3d_new">Neue 3D Skizze</string -->
-    <!-- UNUSED string name="sketch3d_next">nächster Messpunkt</string -->
-    <!-- UNUSED string name="sketch3d_null_name">Name der 3D-Skizze fehlt</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Name des nächsten 3D-Messpunktes fehlt</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Name des 3D-Skizzen Startmesspunktes fehlt</string -->
-    <!-- UNUSED string name="sketch3d_start">Startmesspunkt</string -->
+    <!-- NO string name="sketch3d_name">Name</string -->
+    <!-- NO string name="sketch3d_new">Neue 3D Skizze</string -->
+    <!-- NO string name="sketch3d_next">nächster Messpunkt</string -->
+    <!-- NO string name="sketch3d_null_name">Name der 3D-Skizze fehlt</string -->
+    <!-- NO string name="sketch3d_null_next">Name des nächsten 3D-Messpunktes fehlt</string -->
+    <!-- NO string name="sketch3d_null_start">Name des 3D-Skizzen Startmesspunktes fehlt</string -->
+    <!-- NO string name="sketch3d_start">Startmesspunkt</string -->
 
     <string name="station">Messpunkt</string>
     <string name="station_ask">Messpunkt in Skizze anlegen?</string>
@@ -524,34 +518,36 @@
 
 
 <!-- FIXME_SKETCH_3D -->    
-    <!-- TODO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- TODO string name="title_sketch_shot">New shot</string -->
-    <!-- TODO string name="title_sketch_refs">View mode</string -->
-    <!-- string name="title_sketch_section_type">Sections type</string -->
-    <!-- string name="title_sketch_select">Select item</string -->
+    <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
+    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
+    <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- NO string name="title_sketch_shot">New shot</string -->
+    <!-- NO string name="title_sketch_refs">View mode</string -->
+    <!-- NO string name="title_sketch_section_type">Sections type</string -->
+    <!-- NO string name="title_sketch_select">Select item</string -->
 
-    <!-- TODO string name="sketch_mode_single">Single shot</string -->
-    <!-- TODO string name="sketch_mode_ngbh">Nearby shots</string -->
-    <!-- TODO string name="sketch_mode_all">All shots</string -->
-    <!-- TODO string name="sketch_delete">Delete 3D model ?</string -->
-    <!-- TODO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
+    <!-- NO string name="sketch_mode_single">Single shot</string -->
+    <!-- NO string name="sketch_mode_ngbh">Nearby shots</string -->
+    <!-- NO string name="sketch_mode_all">All shots</string -->
+    <!-- NO string name="sketch_delete">Delete 3D model ?</string -->
+    <!-- NO string name="sketch_no_split">No refinement. Decrease side max. length to refine further.</string -->
 
     <!-- TODO string name="length">Length [m]</string -->
     <!-- TODO string name="azimuth">Azimuth [deg]</string -->
     <!-- TODO string name="clino">Clino [deg]</string -->
+
     <!-- TODO string name="orientation">orientation</string -->
     <!-- TODO string name="contents">contents</string -->
     <!-- TODO string name="error_distribution">error distribution</string -->
     <!-- TODO string name="angle_distribution">angular distribution</string -->
 
-    <!-- string name="btn_head">head</string -->
-    <!-- string name="btn_stretch">Stretch</string -->
-    <!-- string name="btn_extrude">Extrude</string -->
-    <!-- string name="btn_erase">erase</string -->
-    <!-- string name="btn_cut">cut</string -->
-    <!-- string name="btn_vertical">Vertical</string -->
-    <!-- string name="btn_horizontal">Horizontal</string -->
+    <!-- UNUSED string name="btn_head">head</string -->
+    <!-- UNUSED string name="btn_stretch">Stretch</string -->
+    <!-- UNUSED string name="btn_extrude">Extrude</string -->
+    <!-- UNUSED string name="btn_erase">erase</string -->
+    <!-- UNUSED string name="btn_cut">cut</string -->
+    <!-- UNUSED string name="btn_vertical">Vertical</string -->
+    <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
 
     <!-- select button labels -->
     <!-- UNUSED string name="btn_section">Section</string -->
@@ -570,9 +566,8 @@
     <string name="flip_shots">Flip shots</string>
 
     <string name="menu_head">HEAD</string>
-    <!-- string name="menu_save_th2">SAVE TH2</string -->
+    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
-
 <!-- HELP STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
     <string name="help_help">Diese Hilfe</string>
     <!-- UNUSED string name="help_manual">Handbuch</string -->
@@ -593,7 +588,6 @@
     <string name="help_prefs">Einstellungen bearbeiten</string>
     <string name="help_log">Logging-Einstellungen aktivieren</string>
     <string name="help_join_survey">Vermessungen verbinden</string>
-
     <string name="help_info_topodroid">TopoDroid Nachrichten</string>
     <string name="help_download">Daten herunterladen</string>
     <!-- UNUSED string name="help_splay">Die Messpunkte automatisch zuweisen</string -->
@@ -614,7 +608,6 @@
     <string name="help_3d">3D-Modell (Benötigt Cave3D)</string>
     <string name="help_move">Move/zoom Modus</string>
     <string name="help_draw">Skizzenmodus</string>
-    <string name="help_eraser">Löschmodus</string>
     <string name="help_edit">Bearbeitungsmodus</string>
     <string name="help_refs">Skizzenelemente anzeigen</string>
     <string name="help_rename">Ändere Vermessungsname</string>
@@ -631,7 +624,7 @@
     <string name="help_delete_item">Lösche Element</string>
     <string name="help_range">Teillinie verschieben</string>
     <!-- UNUSED string name="help_clear">Die Auswahl löschen</string -->
-
+    <string name="help_eraser">Löschmodus</string>
     <string name="help_previous">Vorheriger Punkt</string>
     <string name="help_next">Nächster Punkt</string>
     <string name="help_recover">Die Skizze wiederherstellen</string>
@@ -655,7 +648,6 @@
     <string name="help_delete_calib">Kalibrierung löschen</string>
     <string name="help_detach">Vom DistoX trennen</string>
     <string name="help_firmware">DistoX2 Firmware Update</string>
-
     <string name="help_toggle">DistoX Kalibrier-Modus umschalten</string>
     <string name="help_sdcard">DistoX Speicher</string>
     <string name="help_read">Kalibrierungs-Koeffizienten vom DistoX anzeigen</string>
@@ -670,21 +662,21 @@
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
 
 <!-- FIXME_SKETCH_3D -->
-    <!-- string name="help_refs_model">View mode</string -->
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
     <string name="help_one_model">3D-Modell einpassen</string>
     <string name="help_surface">Oberfläche erzeugen</string>
     <string name="help_save_model">3D-Modell exportieren</string>
     <string name="help_trash_model">3D-Modell löschen</string>
     <string name="help_head_model">3D-Modell drehen</string>
-    <!-- string name="help_erase_model">Erase region</string -->
+    <!-- UNUSED string name="help_erase_model">Erase region</string -->
     <string name="help_cut_model">Region ausschneiden</string>
     <string name="help_stretch_model">Region zeichnen</string>
-    <!-- string name="help_extrude_model">Extrude region</string -->
+    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
     <string name="help_refine_center">Oberfläche verfeinern im Dreieckszentrum</string>
     <string name="help_refine_sides">Oberfläche verfeinern an den Rändern</string>
     <string name="help_refine_point">Oberfläche verfeinern an Punkt</string>
     <string name="help_refine_triangle">Oberfläche verfeinern an den langen Seiten</string>
-  
+
 <!-- TITLES -->
     <string name="title_azimut">Seitenriss-Azimut</string>
     <string name="title_calib">Kalibrierung</string>
@@ -724,11 +716,11 @@
     <string name="title_sensor_edit">Sensordaten</string>
 
 <!-- SKETCH_3D titles -->
-    <!-- UNUSED string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
-    <!-- UNUSED string name="title_sketch_shot">New shot</string -->
-    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
-    <!-- UNUSED string name="title_sketch_select">Select item</string -->
+    <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
+    <!-- NO string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- NO string name="title_sketch_shot">New shot</string -->
+    <!-- NO string name="title_sketch_section_type">Sections type</string -->
+    <!-- NO string name="title_sketch_select">Select item</string -->
 
     <string name="title_stats">Statistik</string>
     <string name="title_step">Schritt</string>
@@ -739,7 +731,6 @@
     <string name="title_plot_rename">Skizze umbenennen</string>
     <string name="title_calib_export">Kalibrierung speichern als</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
-
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
   <string name="pref_cat_survey">Vermessung</string>
   <string name="pref_cat_drawing">Skizzen</string>
@@ -771,6 +762,7 @@
   <string name="pref_size_buttons_title">Button-Größe</string>
   <string name="pref_size_buttons_summary">Größe der Action-bar Buttons</string>
   <!-- UNUSED string name="pref_size_buttons_message">Eingabe der Größe der Action-bar Buttons [px]</string -->
+
   <string name="pref_leg_shots_title">Min. Messungen für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
   <string name="pref_station_prefix_title">Exportiere Messpunkt Prefix</string>
@@ -820,6 +812,7 @@
   <string name="pref_crs_message">Name eingeben wie in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Durchschnitt</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string -->
+
   <string name="pref_plot_screen_title">Skizze</string>
   <string name="pref_tool_line_title">Linien</string>
   <string name="pref_tool_point_title">Symbole</string>
@@ -847,6 +840,8 @@
   <string name="pref_vert_splay_title">Neigung für gestrichelte Linien</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string -->
   <string name="pref_vert_splay_message">Grenzwert ab welchem Hilfslinien gestrichelt dargestellt werden</string>
+
+
   <string name="pref_survey_stations_title">Strategie Vermessung</string>
   <string name="pref_survey_stations_summary">Automatische Vermessungs-Messpunkte</string>
   <string name="pref_accel_thr_title">Beschleunigungstoleranz (%%)</string>
@@ -874,12 +869,14 @@
   <string name="pref_team_title">Vermessungsteam</string>
   <string name="pref_team_summary">Messteam</string>
   <string name="pref_team_message">Standard-Messteam</string>
+
   <string name="pref_ethr_title">Winkel für vertikalen Seitenriss</string>
   <string name="pref_ethr_summary">Grenzwert für vertikale Darstellung</string>
   <string name="pref_ethr_message">Grenzwert für vertikale Darstellung</string>
   <string name="pref_vthr_title">Vertikaler Grenzwert</string>
   <string name="pref_vthr_summary">Winkelgrenzwert für LRUD/WENS</string>
   <string name="pref_vthr_message">Winkelgrenzwert für LRUD/WENS</string>
+
   <string name="pref_plan_vthr_title">Hilfslinien vertikaler Grenzwert</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string -->
   <string name="pref_plan_vthr_message">Winkelgrenzwert für Anzeige der Hilfslinien auf Plan</string>
@@ -888,6 +885,7 @@
   <string name="pref_init_station_message">Standard Startmesspunkt</string>
   <string name="pref_station_names_title">Messpunktnamen</string>
   <string name="pref_station_names_summary">Art der Messpunktnamen</string>
+
   <string name="pref_hthr_title">Winkelgrenzwert für hor. Schnitte</string>
   <string name="pref_hthr_summary">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
   <string name="pref_hthr_message">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
@@ -902,6 +900,8 @@
   <string name="pref_dxf_scale_title">Massstab DXF-Skizze</string>
   <string name="pref_dxf_scale_summary">Massstabsfaktor DXF-Skizze</string>
   <string name="pref_dxf_scale_message">Massstabsfaktor DXF-Skizze Export</string>
+  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
+  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
   <string name="pref_thumbnail_title">Thumbnails Größe</string>
   <string name="pref_thumbnail_summary">Thumbnails Größe</string>
   <string name="pref_thumbnail_message">Thumbnails Größe</string>
@@ -996,25 +996,24 @@
   <string name="pref_area_border_summary">Linie um Flächen herum anzeigen</string>
   <string name="pref_auto_section_pt_title">Querschnittspunkte hnzufügen</string>
   <string name="pref_auto_section_pt_summary">Querschnittspunkt zu Querschnitten hinzufügen</string>
-
   <!-- Experimental 3D Drawing Feature: -->
-  <!-- TODO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
-  <!-- TODO string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
-  <!-- TODO string name="pref_sketchLineStep_title">Max side</string -->
-  <!-- TODO string name="pref_sketchLineStep_summary">Maximum size of a triangle side</string -->
-  <!-- TODO string name="pref_sketchLineStep_message">Distance between line points</string -->
-  <!-- TODO string name="pref_sketchBorderStep_title">Border step</string -->
-  <!-- TODO string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
-  <!-- TODO string name="pref_sketchBorderStep_message">Distance between edit-line points</string -->
-  <!-- TODO string name="pref_sketchSectionStep_title">Section step</string -->
-  <!-- TODO string name="pref_sketchSectionStep_summary">Distance between sections</string -->
-  <!-- TODO string name="pref_sketchSectionStep_message">Distance between intermediate sections</string -->
-  <!-- TODO string name="pref_sketchDeltaExtrude_title">Extrude delta</string -->
-  <!-- TODO string name="pref_sketchDeltaExtrude_summary">Extrude delta</string -->
-  <!-- TODO string name="pref_sketchDeltaExtrude_message">Extrude delta</string -->
-  <!-- TODO string name="pref_sketchCompassReadings_title">Compass readings</string -->
-  <!-- TODO string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
-  <!-- TODO string name="pref_sketchCompassReadings_message">Number of compass readings to average</string -->
+  <!-- NO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
+  <!-- NO string name="pref_sketchUsesSplays_summary">Sketch surface uses splays</string -->
+  <!-- NO string name="pref_sketchLineStep_title">Max side</string -->
+  <!-- NO string name="pref_sketchLineStep_summary">Maximum size of a triangle side</string -->
+  <!-- NO string name="pref_sketchLineStep_message">Distance between line points</string -->
+  <!-- NO string name="pref_sketchBorderStep_title">Border step</string -->
+  <!-- NO string name="pref_sketchBorderStep_summary">Distance between edit-line points</string -->
+  <!-- NO string name="pref_sketchBorderStep_message">Distance between edit-line points</string -->
+  <!-- NO string name="pref_sketchSectionStep_title">Section step</string -->
+  <!-- NO string name="pref_sketchSectionStep_summary">Distance between sections</string -->
+  <!-- NO string name="pref_sketchSectionStep_message">Distance between intermediate sections</string -->
+  <!-- NO string name="pref_sketchDeltaExtrude_title">Extrude delta</string -->
+  <!-- NO string name="pref_sketchDeltaExtrude_summary">Extrude delta</string -->
+  <!-- NO string name="pref_sketchDeltaExtrude_message">Extrude delta</string -->
+  <!-- NO string name="pref_sketchCompassReadings_title">Compass readings</string -->
+  <!-- NO string name="pref_sketchCompassReadings_summary">Number of readings to average</string -->
+  <!-- NO string name="pref_sketchCompassReadings_message">Number of compass readings to average</string -->
 
   <string name="pref_unit_length_title">Längeneinheit</string>
   <string name="pref_unit_length_summary">Masseinheit für Längen</string>
@@ -1088,6 +1087,14 @@
   <!-- UNUSED string name="line_fine">Fein</string -->
   <!-- UNUSED string name="line_normal">Normal</string -->
   <!-- UNUSED string name="line_coarse">Grob</string -->
+  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+  <!-- UNUSED string name="units_dd">degrees</string -->
+  <!-- UNUSED string name="units_grads">grads</string -->
+  <!-- UNUSED string name="units_meters">meters</string -->
+  <!-- UNUSED string name="units_feet">feet</string -->
+  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
+  <!-- UNUSED string name="alt_ortho">orthometric</string -->
+  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
 <!-- WELCOME MESSAGE: IT WOULD BE NICE TO HAVE THIS TRANSLATED -->
     <string name="welcome_title">Willkommen in TopoDroid %1$s</string>

@@ -9,7 +9,6 @@
     <string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете переінсталювати інструменти малюнків?</string>
     <string name="symbols_ask">Встановити інструменти малювання v.%1$s?\n(Поточна v.%2$s)</string>
     <!-- REPLACED string name="symbols_ask">Ви хочете переінсталювати інструменти малювання?</string -->
-
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛІНІЯ</string>
     <string name="AREA">ОБЛАСТЬ</string>
@@ -25,13 +24,11 @@
     <string name="memoryX310">Пам\'ять DistoX X310</string>
     <!-- UNUSED string name="memory_data">DistoX дані</string -->
 
-    <!-- string name="thp_danger">небезпека</string -->
     <string name="thp_user">користувацький</string>
     <string name="thp_label">лейбл</string>
-    <!-- string name="thl_danger">небезпека</string -->
+    <!-- UNUSED string name="thp_danger">небезпека</string -->
     <string name="thl_user">користувацький</string>
     <string name="thl_wall">стіна</string>
-    <!-- string name="tha_danger">небезпека</string -->
     <string name="tha_user">користувацький</string>
     <string name="tha_water">вода</string>
 
@@ -76,10 +73,13 @@
     <string name="calib_ave_std">Точність: %1$.4f +- %2$.4f градусів</string>
     <string name="calib_precision">Точність</string>
     <string name="calib_iter">Ітерації: %1$d</string>
+    <!-- NO string name="calib_reset">Reset DistoX calibration ?</string -->
+
     <string name="algorithm">Алгоритм розрахунку:</string>
     <string name="auto">авто</string>
     <string name="linear">лінійний</string>
     <string name="non_linear">не-лінійний</string>
+    <!-- NO string name="algo_minimum">minimum</string -->
 
     <string name="device_algo_failed">Алгоритм автовизначення не спрацював\nВикористовую лінійний алгоритм</string>
     <string name="device_address">Адреса %1$s</string>
@@ -148,7 +148,9 @@
     <string name="head_tail_failed">Помилка зчитування індекса пам\'яті DistoX</string>
     <string name="head_tail_store_failed">Не вдалось зберегти індекс пам\'яті DistoX</string>
     <!-- UNUSED string name="pairing_failed">Не вдалось з'єднати прилади</string -->
+
     <string name="illegal_data_value">Недопустиме значенння</string>
+
     <string name="label_title">ПІДПИС</string>
     <string name="label_text">Введіть текст підпису</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -158,14 +160,12 @@
     <string name="longitude">Long. </string>
     <string name="h_ellipsoid_hint">H еліпсоїд. [метри]</string>
     <string name="h_geoid_hint">H геоїд [метри]</string>
-    <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
-    <string name="longitude_hint">Long. dd:mm:ss.sss</string>
+    <!-- OK string name="latitude_hint">Lat. dd:mm:ss.sss</string -->
+    <!-- OK string name="longitude_hint">Long. dd:mm:ss.sss</string -->
     <string name="loop_closure_errors">Помилка закриття петлі</string>
     <string name="loop_none">немає петлі</string>
     <!-- UNUSED string name="long_lat">Широта-Довгота</string -->
 
-    <!-- OK string name="line_delete">Видалити лінію</string -->
-    <string name="flip_shots">Розвернути пікети</string>
 
     <string name="error_azimuth_required">Вимагається азимут</string>
     <string name="error_length_required">Вимагається довжина</string>
@@ -245,6 +245,8 @@
     <string name="menu_about">Опис</string>
     <string name="menu_area">ОБЛАСТЬ</string>
     <string name="menu_attach">З\'ЄДНАТИ</string>
+    <!-- UNUSED string name="menu_attached">Connected</string -->
+    <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">Видалити</string>
     <string name="menu_detach">Від\'єднати</string>
@@ -288,11 +290,11 @@
     <string name="connected_already">Уже з\'єднано</string>
 
     <string name="not_available">Bluetooth недоступний</string>
-    <!-- OK string name="not_connected">Немає з'єднання</string -->
     <string name="not_enabled">Bluetooth вимкнений</string>
+    <!-- UNUSED string name="not_connected">Немає з'єднання</string -->
     <!-- UNUSED string name="not_implemented">Поки не реалізовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
-    <!-- UNUSED string name="photo">фото</string -->
+    <string name="photo">фото</string>
     <string name="photo_comment_prompt">Введіть коментар до фото</string>
     <!-- UNUSED string name="photo_name">Пікет/назва</string -->
     <!-- UNUSED string name="photo_photo">фото</string -->
@@ -308,14 +310,15 @@
     <!-- UNUSED string name="plot_name">Назва абрису</string -->
     <string name="plot_new">Новий абрис</string>
     <string name="plot_not_found">Абрис не виявлено</string>
-    <!-- OK string name="plot_null_name">Відсутня назва абрису</string -->
-    <!-- OK string name="plot_null_start">Відсутній базовий пікет</string -->
+    <!-- UNUSED string name="plot_null_name">Відсутня назва абрису</string -->
+    <!-- UNUSED string name="plot_null_start">Відсутній базовий пікет</string -->
     <!-- UNUSED string name="plot_recover">Перезавантажити абрис из бекапу?</string -->
     <string name="plot_start">Початковий пікет</string>
-    <!-- OK string name="plot_view">Переглянутий пікет</string -->
+    <!-- UNUSED string name="plot_view">Переглянутий пікет</string -->
     <!-- UNUSED string name="read_fail_with_code">Помилка зчитування: код помилки </string -->
     <string name="read_failed">Помилка зчитування DistoX</string>
-    <!-- OK string name="reading_file_failed">Читання файлу не вдалося</string -->
+    <!-- UNUSED string name="reading_file_failed">Читання файлу не вдалося</string -->
+
     <string name="saved_file_1">Збережений файл</string>
     <string name="saved_file_2">Масштаб %2$.2f збереженого файлу %1$s</string>
     <string name="saving_">Збереження </string>
@@ -330,10 +333,10 @@
 
     <!-- UNUSED string name="sensor">датчик</string -->
     <string name="sensor_gravity">прискорення</string>
-    <!-- OK string name="sensor_humidity">вологість</string -->
+    <!-- UNUSED string name="sensor_humidity">вологість</string -->
     <string name="sensor_light">освітленість</string>
     <string name="sensor_magnetic_field">мгнітне поле</string>
-    <!-- OK string name="sensor_orientation">орієнтація</string -->
+    <!-- UNUSED string name="sensor_orientation">орієнтація</string -->
     <string name="sensor_pressure">атм. тиск</string>
     <string name="sensor_temperature">температура</string>
     <string name="sensor_extern">зовнішній</string>
@@ -341,13 +344,14 @@
     <string name="sensor_value">значення</string>
     <string name="sensor_comment">коментар</string>
 
-    <!-- OK string name="shot_clino">кут</string -->
-    <!-- OK string name="shot_compass">азимут</string -->
+    <!-- UNUSED string name="shot_clino">кут</string -->
+    <!-- UNUSED string name="shot_compass">азимут</string -->
     <string name="shot_delete">Видалити сегмент ?</string>
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введіть дані пікета</string>
-    <!-- OK string name="shot_length">довжина</string -->
+    <!-- UNUSED string name="shot_length">довжина</string -->
     <string name="shot_note">замітки</string>
+    <!-- TODO string name="shot_not_found">Found no shot</string -->
     <string name="shot_reverse">розвернути</string>
     <string name="shot_to">№ НА</string>
 
@@ -364,8 +368,8 @@
     <string name="station">пікет</string>
     <string name="station_ask">Додати пікет в абрис?</string>
     <string name="station_set">Зробити пікет поточним?</string>
-    <!-- OK string name="station_base">пікет прив'язки</string -->
-    <!-- OK string name="station_next">наступний пікет</string -->
+    <!-- UNUSED string name="station_base">пікет прив'язки</string -->
+    <!-- UNUSED string name="station_next">наступний пікет</string -->
     <!-- UNUSED string name="station_viewed">переглянуті пікети</string -->
     <string name="survey_exists">Зйомка уже існує</string>
     <!-- UNUSED string name="survey_date">ггг.мм.дд</string -->
@@ -377,7 +381,7 @@
     <string name="description">опис</string>
     <string name="name">Назва</string>
     <string name="team">группа топозйомки</string>
-    <!-- OK string name="toggle_device">Перемкнути пристрій в режим калібрування</string -->
+    <!-- UNUSED string name="toggle_device">Перемкнути пристрій в режим калібрування</string -->
     <string name="toggle_failed">Не вдалось перемкнути DistoX</string>
     <string name="toggle_ok">Перемкнути DistoX в режим калібрування</string>
     <string name="undelete_text">Натисніть на елемент щоб відновити</string>
@@ -392,7 +396,7 @@
     <string name="unzip_fail_survey">Помилка: розбіжність назви зйомки</string>
     <string name="unzip_fail_db">Помилка: розбіжність версія бази даних</string>
     <string name="unzip_fail_td">Помилка: розбіжність версія TopoDroid</string>
-    <!-- OK string name="zoom_in_out">Збільшити/зменшити</string -->
+    <!-- UNUSED string name="zoom_in_out">Збільшити/зменшити</string -->
 
     <string name="survey_info">Статистика зйомки</string>
     <string name="stat_stddev_m">M ст.відх. %1$.1f відсотків</string>
@@ -415,6 +419,7 @@
     <string name="shot_title">ПІКЕТИ %1$s - %2$s"</string>
     <string name="shot_data">Довжина %1$.2f  Азимут %2$.1f  Угол %3$.1f"</string>
 
+
     <string name="hide_blank">Пусті пікети</string>
     <string name="hide_leg">Повторні виміри</string>
     <string name="hide_ids">ID пікетів</string>
@@ -422,8 +427,8 @@
 
     <string name="plan">ПЛАН</string>
     <string name="extended">РОЗРІЗ-РОЗГОРТКА</string>
-    <string name="extended_profile">Розріз-розгортка</string>
     <string name="profile">РОЗРІЗ-ПРОЕКЦІЯ</string>
+    <string name="extended_profile">Розріз-розгортка</string>
     <!-- UNUSED string name="v_section">Верт-ПЕРЕРІЗ</string -->
     <string name="h_section">Гор-ПЕРЕРІЗ</string>
 
@@ -447,16 +452,16 @@
     <string name="button_delete"    >Видалити   </string>
     <string name="button_eval"      >Обчислити    </string>
     <string name="button_eval_cal"  >Обчислити з урахув. каліб.</string>
-    <string name="button_gps_start" >GPS       </string>
-    <!-- OK string name="button_gps_stop"  >Стоп      </string -->
-    <!-- OK string name="button_manual"    >Вручну    </string -->
-    <!-- OK string name="button_measure"   >Змінити   </string -->
+    <!-- OK string name="button_gps_start" >GPS       </string -->
+    <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->
+    <!-- UNUSED string name="button_manual"    >Вручну    </string -->
+    <!-- UNUSED string name="button_measure"   >Змінити   </string -->
     <string name="button_photo"   >Фото</string>
     <!-- UNUSED string name="button_sensor"  >Датчики</string -->
     <!-- UNUESD string name="button_direction">Азимут/кут</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"     >Абрис</string>
-    <string name="button_ok"        >OK        </string>
+    <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Відкр     </string>
     <string name="button_read"      >Зчитати   </string>
     <!-- UNUSED string name="button_regroup"   >Перегрупувати   </string -->
@@ -468,6 +473,8 @@
     <string name="button_save"      >Збер.     </string>
     <!-- UNUSED string name="button_select"    >Вибрати   </string -->
     <string name="button_store"     >Записати   </string>
+    <!-- UNUSED string name="button_start"     >Start</string -->
+    <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Вигрузити  </string>
     <string name="button_view"      >Перегляд   </string>
 
@@ -497,6 +504,7 @@
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
+    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
     <!-- UNUSED string name="title_sketch_edit">Змінити 3D поверхню</string -->
     <string name="title_sketch_shot">Новий пікет</string>
     <string name="title_sketch_refs">Режим показу</string>
@@ -508,9 +516,11 @@
     <string name="sketch_mode_all">Всі пікети</string>
     <string name="sketch_delete">Видалити 3D модель ?</string>
     <string name="sketch_no_split">Не точно. Зменшити бокову макс. довжину щоб уточнити.</string>
+
     <string name="length">Довжина [м]</string>
     <string name="azimuth">Азимут [грд]</string>
     <string name="clino">Угол [грд]</string>
+
     <string name="orientation">орієнтація</string>
     <string name="contents">вміст</string>
     <string name="error_distribution">розподілення помилок</string>
@@ -538,6 +548,7 @@
     <string name="no_shot_between_stations">немає заміру між пікетами</string>
     <string name="few_line_points">Занадто мало точок в лінії</string>
     <string name="line_delete">видалити_лінію</string>
+    <string name="flip_shots">Розвернути пікети</string>
 
     <string name="menu_head">Head</string>
     <!-- UNUSED string name="menu_save_th2">збер th2</string -->
@@ -550,6 +561,7 @@
     <!-- TODO string name="help_close">Close window</string -->
     <string name="help_coeff">Показать коэфіцієнти калібрування</string>
     <string name="help_continue">Продовжити малювати лінію</string>
+    <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Збережені пікети</string>
     <string name="help_azimuth">Проекція розгортки на референс-азимут</string>
     <string name="help_device">Вікно управління пристроями</string>
@@ -596,7 +608,7 @@
     <string name="help_symbol_plot">Вибрати інструмент малювання</string>
     <string name="help_delete_item">Видалити елемент абрису</string>
     <!-- TODO string name="help_range">Moving a portion of line</string -->
-    <!-- OK string name="help_clear">Очистити вибір</string -->
+    <!-- UNUSED string name="help_clear">Очистити вибір</string -->
     <string name="help_eraser">Стерти малюнки</string>
     <string name="help_previous">Попередній вибраний елемент</string>
     <string name="help_next">Наступний елемент у вибірці</string>
@@ -604,7 +616,7 @@
     <string name="help_zoom_fit">Вмістити абрис в екран</string>
 
     <string name="help_line_point">Дії з лініями і точками: з\'єднати, розірвати, обрізати, видалити</string>
-<!-- OK
+<!-- UNUSED
     <string name="help_to_point">Притянгнути вибрану точку до найближчої точки</string>
     <string name="help_split_point">Розбити в цій точці на дві [лінії/області]</string>
     <string name="help_split_line">Розбити лінію на дві в цій точці</string>
@@ -653,6 +665,7 @@
     <string name="title_calib">Калібрування</string>
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>
+    <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>
     <string name="title_device">Прилади DistoX</string>
@@ -693,18 +706,16 @@
     <string name="title_survey_rename">Переименовать зйомку</string>
     <string name="title_plot_rename">Перейменувати абрис</string>
     <string name="title_calib_export">Експорт калібрування як</string>
-    <!-- OK string name="title_zoom">Зум</string -->
+    <!-- UNUSED string name="title_zoom">Зум</string -->
 
   <string name="pref_cat_survey">Налаштування топозйомки </string>
   <string name="pref_cat_drawing">Налаштування малювання </string>
   <string name="pref_cat_import_export">Імпорт-Експорт</string>
   <string name="pref_cat_calib">Налаштування Калібрування</string>
   <string name="pref_cat_device">Налаштування Пристрою</string>
-  <!-- UNUSED string name="pref_cat_sketch">Налаштування Абрису</string -->
+  <string name="pref_cat_sketch">Налаштування Абрису</string>
   <string name="pref_cat_log">налаштування журнала</string>
 
-  <!-- OK string name="pref_hide_help_title">Сховати допомогу</string -->
-  <!-- OK string name="pref_hide_help_summary">Сховати кнопку допомоги</string -->
   <string name="pref_locale_title">Мова</string>
   <string name="pref_locale_summary">Мова</string>
 
@@ -727,6 +738,7 @@
   <string name="pref_size_buttons_title">Розмір кнопок</string>
   <string name="pref_size_buttons_summary">Розмір кнопок панелі інструментів</string>
   <!-- UNUSED string name="pref_size_buttons_message">Введіть Розмір кнопок панелі инструментів [pixels]</string -->
+
   <string name="pref_leg_shots_title">Мін. к-сть замірів між пікетами</string>
   <string name="pref_leg_shots_summary">Мінімальна к-сть повторюваних замірів на відрізку</string>
   <string name="pref_station_prefix_title">Експортувати префікси пікетов</string>
@@ -745,8 +757,8 @@
 
   <string name="pref_sock_type_title">Тип з\'єднання</string>
   <string name="pref_sock_type_summary">Socket створити</string>
-  <!-- OK string name="pref_device_type_title">Тип Disto</string -->
-  <!-- OK string name="pref_device_type_summary">Модель DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_title">Тип Disto</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Модель DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Спроб підключення</string  -->
   <!-- UNUSED string name="pref_comm_retry_summary">Число спроб підключення</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">К-сть спроб підключення</string -->
@@ -776,6 +788,7 @@
   <string name="pref_crs_message">Введіть ім\'я CRS як в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Eсереднення даних GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Використовувати GPS Averaging?</string -->
+
   <string name="pref_plot_screen_title">Налаштування екрану абрисів</string>
   <string name="pref_tool_line_title">НАЛАШТУВАННЯ ЛІНІЙ</string>
   <string name="pref_tool_point_title">НАЛАШТУВАННЯ ТОЧОК</string>
@@ -832,12 +845,14 @@
   <string name="pref_team_title">Группа зйомки</string>
   <string name="pref_team_summary">Группа зйомки</string>
   <string name="pref_team_message">Группа зйомки за замовчуванням</string>
+
   <string name="pref_ethr_title">Поріг вертикальності бокового заміру</string>
   <string name="pref_ethr_summary">Кутовий діапазон проекції (бок. замір)</string>
   <string name="pref_ethr_message">Кут близько 90 для верт. проекції бок. заміру на вертикальній площині [град]</string>
   <string name="pref_vthr_title">Поріг вертикальності для відрізків</string>
   <string name="pref_vthr_summary">Кутовий поріг ЛПВН/ЗВСЮ</string>
   <string name="pref_vthr_message">Допустимий кут відрізка між ЛПВН/ЗВСЮ</string>
+
   <string name="pref_plan_vthr_title">Поріг кута бок. замірів в плані</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Поріг кута  бок. заміру в плані</string -->
   <string name="pref_plan_vthr_message">Поріг кута  бок. замірів які відображаються в плані</string>
@@ -861,6 +876,8 @@
   <string name="pref_dxf_scale_title">Масштаб абрису в DXF</string>
   <string name="pref_dxf_scale_summary">Фактор масштаба абрису DXF</string>
   <string name="pref_dxf_scale_message">Масштабурючий фактор при експорті абрису в DXF</string>
+  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
+  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
   <string name="pref_thumbnail_title">Розмір мініатюри</string>
   <string name="pref_thumbnail_summary">Розмір картинки мініатюри</string>
   <string name="pref_thumbnail_message">Розмір картинки мініатюри</string>
@@ -999,6 +1016,19 @@
   <string name="pref_walls_xstep_title">Крок</string>
   <string name="pref_walls_xstep_summary">Інтервал між точками вздовж стіни</string>
   <string name="pref_walls_xstep_message">Інтервал між точками вздовж стіни [м]</string>
+
+  <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
+  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
+  <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
+  <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
+  <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
   <string name="pref_log_stream_summary">Лог потоку виводу</string>
   <string name="pref_log_stream_title">Лог потоку</string>

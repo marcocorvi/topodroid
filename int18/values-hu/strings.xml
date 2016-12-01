@@ -26,7 +26,7 @@
 
     <string name="thp_user">user*felhasználó</string>
     <string name="thp_label">label*cimke</string>
-    <!-- string name="thp_danger">danger</string -->
+    <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">user*felhasználó</string>
     <string name="thl_wall">wall*fal</string>
     <string name="tha_user">user*felhasználó</string>
@@ -61,7 +61,7 @@
     <string name="calib_updated">Updated calibration*Az eszköz kalibrációja frissítve</string>
     <string name="calib_compute_groups">Computing calibration data groups &#8230;*Kalibrációs mérések csoportosítása &#8230;</string>
     <string name="calib_compute_coeffs">Computing calibration coefficients &#8230;*Kalibrációs együttható számítása &#8230;</string>
-    <!-- string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
+    <!-- UNUSED string name="calib_read_coeffs">Reading calibration coefficients &#8230;</string -->
     <string name="calib_write_coeffs">Writing calibration coefficients &#8230;*Kalibrációs együttható felülírása &#8230;</string>
     <string name="calib_validation">Validation of %1$s vs %2$s*Jóváhagyja  %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
@@ -88,7 +88,7 @@
     <string name="device_info">Device info*Eszköz információ</string>
     <string name="device_model_set">Do you really want to change the model of the device ?*Valóban meg akarja változtatni az eszköz típusát?</string>
     <string name="device_none">No DistoX selected*Nincs kiválasztva DistoX</string>
-    <!-- string name="device_paired">Device is paired</string -->
+    <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset DistoX memory*DistoX memóriájának újraindítása</string>
     <string name="device_code">DistoX code %1$4d*Distox kódja %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d*Firmware verzió: %1$d.%2$d</string>
@@ -116,7 +116,7 @@
     <string name="extend_left">Left*Bal</string>
     <string name="extend_right">Right*Jobb</string>
     <string name="extend_vert">Vert*Vertikális</string>
-    <!-- string name="external_prompt">Enter measurement</string -->
+    <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD at TO station*BJFL a mérési pontnál</string>
 
     <string name="few_data">Not enough data*Nincs elegendő adat</string>
@@ -147,9 +147,10 @@
     <!-- UNUSED string name="head_tail">Memory: </string -->
     <string name="head_tail_failed">Failed to read DistoX memory index*Nem sikerült kiolvasni a DistoX memória indexét</string>
     <string name="head_tail_store_failed">Failed to store DistoX memory index* Nem sikerült eltárolni a DistoX memória indexét</string>
-    <!-- string name="pairing_failed">Pairing failed</string -->
+    <!-- UNUSED string name="pairing_failed">Pairing failed</string -->
 
     <string name="illegal_data_value">Illegal data value*Helytelen adat érték</string>
+
     <string name="label_title">LABEL*CÍMKE</string>
     <string name="label_text">Enter the label text*Írd be címke feliratot.</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -243,8 +244,8 @@
     <string name="menu_about">ABOUT*???</string>
     <string name="menu_area">AREA*TERÜLET</string>
     <string name="menu_attach">CONNECT*KAPCSOL</string>
-    <!-- string name="menu_attached">Connected</string -->
-    <!-- string name="menu_ready">Ready</string -->
+    <!-- UNUSED string name="menu_attached">Connected</string -->
+    <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- TODO string name="menu_close">CLOSE</string -->
     <string name="menu_delete">DELETE*TÖRÖL</string>
     <string name="menu_detach">DISCONNECT*SZÉTKAPCSOL</string>
@@ -268,7 +269,7 @@
     <string name="menu_photo">PHOTO*FOTÓ</string>
     <string name="menu_sensor">SENSOR*SZENZOR</string>
     <string name="menu_scan">SCAN*KERESÉS???</string>
-    <!-- string name="menu_station">STATIONS</string -->
+    <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS*STATISZTIKA</string>
     <string name="menu_survey">SURVEY INFO*FELMÉRÉSI INFORMÁCIÓK</string>
     <string name="menu_sync">SYNC*SZINKRONIZÁLÁS</string>
@@ -290,7 +291,7 @@
     <string name="not_available">BT not available*BT nem elérhető</string>
     <string name="not_enabled">BT not enabled*BT nincs bekapcsolva</string>
 
-    <!-- string name="not_implemented">Not implemented yet</string -->
+    <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Cannot create image [OOM error]*Kép létrehozása nem sikerült [OOM error]</string>
     <string name="photo">photo*fotó</string>
     <string name="photo_comment_prompt">Enter the photo comment*Írj megjegyzést a fotóhoz</string>
@@ -298,7 +299,7 @@
     <!-- UNUSED string name="photo_photo">photo</string -->
     <!-- UNUSED string name="photo_sensor">sensor</string -->
     <!-- UNUSED string name="photo_external">measurement</string -->
-    <!-- string name="photo_sensor_prompt">Select photo or sensor</string -->
+    <!-- UNUSED string name="photo_sensor_prompt">Select photo or sensor</string -->
     <!-- UNUSED string name="photo_shot">add shot</string -->
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
@@ -308,14 +309,15 @@
     <!-- UNUSED string name="plot_name">Sketch name</string -->
     <string name="plot_new">New sketch*Új vázlat</string>
     <string name="plot_not_found">Sketch not found*Vázlat nem található</string>
-    <!-- string name="plot_null_name">Missing sketch name</string -->
-    <!-- string name="plot_null_start">Missing base station</string -->
+    <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
+    <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
     <string name="plot_start">Origin station*Kezdőpont???</string>
-    <!-- string name="plot_view">Viewed station</string -->
+    <!-- UNUSED string name="plot_view">Viewed station</string -->
     <!-- UNUSED string name="read_fail_with_code">Read failure: error code </string -->
     <string name="read_failed">Failed DistoX-read*DistoX kiolvasása nem sikerült</string>
-    <!-- string name="reading_file_failed">Failed file-read</string -->
+    <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
+
     <string name="saved_file_1">Saved file*Mentett fájl</string>
     <string name="saved_file_2">Saved file %1$s Scale %2$.2f*Mentett fájl %1$s Scale %2$.2f</string>
     <string name="saving_">Saving*Mentés</string>
@@ -330,10 +332,10 @@
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravity*gravitációs gyorsulás???</string>
-    <!-- string name="sensor_humidity">humidity</string -->
+    <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">light*fényerősség</string>
     <string name="sensor_magnetic_field">magnetic field*mágneses mező</string>
-    <!-- string name="sensor_orientation">orientation</string -->
+    <!-- UNUSED string name="sensor_orientation">orientation</string -->
     <string name="sensor_pressure">pressure*nyomás</string>
     <string name="sensor_temperature">temperature*hőmérséklet</string>
     <string name="sensor_extern">external*külső</string>
@@ -341,12 +343,12 @@
     <string name="sensor_value">value*érték</string>
     <string name="sensor_comment">comment*megjegyzés</string>
 
-    <!-- string name="shot_clino">clino</string -->
-    <!-- string name="shot_compass">compass</string -->
+    <!-- UNUSED string name="shot_clino">clino</string -->
+    <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Delete shot ?*Törli a mérést?</string>
     <string name="shot_from">from*Honnan</string>
     <string name="shot_info">Enter shot data*Írd be a mérés adatait</string>
-    <!-- string name="shot_length">length</string -->
+    <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">note*megjegyzés</string>
     <string name="shot_not_found">Found no shot*Nem található mérés</string>
     <string name="shot_reverse">reverse*visszamérés???</string>
@@ -357,16 +359,16 @@
     <string name="sketch3d_name">name*név</string>
     <string name="sketch3d_new">New 3D model*Új 3D model</string>
     <string name="sketch3d_next">next station*következő mérési pont</string>
-    <!-- string name="sketch3d_null_name">Missing 3D sketch name</string -->
-    <!-- string name="sketch3d_null_next">Missing 3D sketch next station</string -->
-    <!-- string name="sketch3d_null_start">Missing 3D sketch base station</string -->
+    <!-- UNUSED string name="sketch3d_null_name">Missing 3D sketch name</string -->
+    <!-- UNUSED string name="sketch3d_null_next">Missing 3D sketch next station</string -->
+    <!-- UNUSED string name="sketch3d_null_start">Missing 3D sketch base station</string -->
     <!-- UNUSED string name="sketch3d_start">base station</string -->
 
     <string name="station">station*mérési pont</string>
     <string name="station_ask">Insert station in sketch?*Beilleszt mérési pontot a vázlatba? ???</string>
     <string name="station_set">Continue survey from here?*Folytatja innen a felmérést?</string>
-    <!-- string name="station_base">reference station</string -->
-    <!-- string name="station_next">next station</string -->
+    <!-- UNUSED string name="station_base">reference station</string -->
+    <!-- UNUSED string name="station_next">next station</string -->
     <!-- UNUSED string name="station_viewed">viewed station</string -->
     <string name="survey_exists">Survey already exists*A felmérés már létezik</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
@@ -378,7 +380,7 @@
     <string name="description">description*leírás</string>
     <string name="name">name*név</string>
     <string name="team">team*csoport</string>
-    <!-- string name="toggle_device">Toggle device calibration mode</string -->
+    <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Failed to toggle DistoX*Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">Toggled DistoX calibration mode*DistoX átkapcsolva kalibrációs üzemmódba</string>
     <string name="undelete_text">Tap item to recover*Érintse meg az elemet a visszaálításhoz</string>
@@ -393,7 +395,7 @@
     <string name="unzip_fail_survey">Failed: survey name mismatch*Nem sikerült: felmérés neve nem megfelelő</string>
     <string name="unzip_fail_db">Failed: database version mismatch*Nem sikerült: adatbázis verzió nem megfelelő</string>
     <string name="unzip_fail_td">Failed: TopoDroid version mismatch*Nem sikerült TopoDroid verzió nem megfelelő</string>
-    <!-- string name="zoom_in_out">Zoom in/out</string -->
+    <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Survey info*Felmérés info</string>
     <string name="stat_stddev_m">M stddev %1$.1f percent*M norm. szór. %1$.1f százalék</string>
@@ -435,9 +437,9 @@
     <string name="distox_err_headtail_eof">DistoX memory EOF error*A fájl sérült, vagy nem kompatibilis (EOF hiba) ???</string>
     <string name="distox_err_connected">Device already connected*Az eszköz már kapcsolatban</string>
 
-    <!-- string name="ask_close">Close TopoDroid?</string -->
+    <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
     <string name="ask_reset">Reset DistoX memory?*Visszaállítja a DistoX memóriáját?</string>
-    <!-- string name="ask_close_survey">Close survey?</string -->
+    <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?*Bekapcsolja a GPS-t?</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
@@ -450,12 +452,12 @@
     <string name="button_eval"      >Eval      *Kiértékel </string>
     <string name="button_eval_cal"  >Eval w. calib.*Kiértékel és kalibrál ???</string>
     <string name="button_gps_start" >GPS       *GPS       </string>
-    <!-- string name="button_gps_stop"  >Stop      </string -->
-    <!-- string name="button_manual"    >Manual    </string -->
-    <!-- string name="button_measure"   >Measure   </string -->
+    <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
+    <!-- UNUSED string name="button_manual"    >Manual    </string -->
+    <!-- UNUSED string name="button_measure"   >Measure   </string -->
     <string name="button_photo"   >Photo*Fotó</string>
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
-    <!-- string name="button_direction">Azimuth/Clino</string -->
+    <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Sketch*Vázlat</string>
     <string name="button_ok"        >OK        *OK     </string>
@@ -468,7 +470,7 @@
     <string name="button_right"     >RIGHT*JOBB</string>
     <string name="button_clear"     >Clear     *Kiürít???</string>
     <string name="button_save"      >Save      *Ment</string>
-    <!-- string name="button_select"    >Select    </string -->
+    <!-- UNUSED string name="button_select"    >Select    </string -->
     <string name="button_store"     >Store     *Tárol</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -485,10 +487,10 @@
     <string name="mode_grid">Grid*Rács</string>
     <string name="mode_fixed">Fix refs*???</string>
 
-    <!-- string name="remote_title">Device Remote Control</string -->
+    <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser ON*Lézer BE</string>
     <string name="remote_off">Laser OFF*Lézer KI</string>
-    <!-- string name="remote_measure">Measure</string -->
+    <!-- UNUSED string name="remote_measure">Measure</string -->
     <string name="remote_reset">Reset BT*BT újraindítása</string>
     <!-- UNUSED string name="download">Download</string -->
 
@@ -502,17 +504,18 @@
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
     <string name="title_sketch_new">New 3D sketch*Új 3D vázlat</string>
-    <!-- string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
     <string name="title_sketch_shot">New shot*Új mérés</string>
     <string name="title_sketch_refs">View mode*Nézet mód???</string>
-    <!-- string name="title_sketch_section_type">Sections type</string -->
-    <!-- string name="title_sketch_select">Select item</string -->
+    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
+    <!-- UNUSED string name="title_sketch_select">Select item</string -->
 
     <string name="sketch_mode_single">Single shot-Szimpla méré???</string>
     <string name="sketch_mode_ngbh">Nearby shots*Közeli mérések</string>
     <string name="sketch_mode_all">All shots*Minden mérés</string>
     <string name="sketch_delete">Delete 3D model ?*Törli a 3D modellt?</string>
     <string name="sketch_no_split">No refinement. Decrease side max. length to refine further.*Nincs pontosítás???. Csökkentsd az oldal max. hosszát a további pontosításhoz???</string>
+
     <string name="length">Length [m]*Hossz [m]</string>
     <string name="azimuth">Azimuth [deg]*Irányszög [fok]</string>
     <string name="clino">Clino [deg]*Lejtszög [fok]</string>
@@ -522,13 +525,13 @@
     <string name="error_distribution">error distribution*hiba eloszlás</string>
     <string name="angle_distribution">angular distribution*szög eloszlás???</string>
 
-    <!-- string name="btn_head">head</string -->
-    <!-- string name="btn_stretch">Stretch</string -->
-    <!-- string name="btn_extrude">Extrude</string -->
-    <!-- string name="btn_erase">erase</string -->
-    <!-- string name="btn_cut">cut</string -->
-    <!-- string name="btn_vertical">Vertical</string -->
-    <!-- string name="btn_horizontal">Horizontal</string -->
+    <!-- UNUSED string name="btn_head">head</string -->
+    <!-- UNUSED string name="btn_stretch">Stretch</string -->
+    <!-- UNUSED string name="btn_extrude">Extrude</string -->
+    <!-- UNUSED string name="btn_erase">erase</string -->
+    <!-- UNUSED string name="btn_cut">cut</string -->
+    <!-- UNUSED string name="btn_vertical">Vertical</string -->
+    <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
 
     <!-- select buttin labels -->
     <!-- UNUSED string name="btn_section">Section</string -->
@@ -536,9 +539,9 @@
     <!-- UNUSED string name="btn_shot">Shot</string -->
     <!-- UNUSED string name="btn_join">Join</string -->
 
-    <!-- string name="button_redraw">Redraw</string -->
+    <!-- UNUSED string name="button_redraw">Redraw</string -->
     <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- string name="btn_surface">surface</string -->
+    <!-- UNUSED string name="btn_surface">surface</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">no_shot_between_stations*nincs_mérés_a_pontok_között</string>
@@ -547,7 +550,7 @@
     <string name="flip_shots">Flip shots*mérések_megfordítása??? </string>
 
     <string name="menu_head">HEAD*FEJLÉC???</string>
-    <!-- string name="menu_save_th2">SAVE TH2</string -->
+    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">This help*Ez a help</string>
@@ -571,7 +574,7 @@
     <string name="help_join_survey">Join surveying*Együttes felmérés???</string>
     <string name="help_info_topodroid">TopoDroid info*TopoDroid információk</string>
     <string name="help_download">Download data*Adatok letöltése</string>
-    <!-- string name="help_splay">Assign stations to splays automatically</string -->
+    <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
     <string name="help_display">Choose display mode*Képernyő mód választása</string>
     <string name="help_display_calib">Toggle display of deleted shots*törölt mérések láthatóak/nem??? </string>
     <string name="help_validate">Validate calibration*Kalibráció érvényesítése???</string>
@@ -604,7 +607,7 @@
     <string name="help_symbol_plot">Select the current drawing tool*Legutóbbi rajzeszköz kiválasztása</string>
     <string name="help_delete_item">Delete sketch item*Vázlat elem törlése</string>
     <!-- TODO string name="help_range">Moving a portion of line</string -->
-    <!-- string name="help_clear">Clear selection</string -->
+    <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erasing mode*Radír mód</string>
     <string name="help_previous">Previous item in the selection*Előző elem a kiválasztásban</string>
     <string name="help_next">Next item in the selection*Következő elem a kiválasztásban</string>
@@ -641,16 +644,16 @@
     <string name="help_compute">Compute calibration*Kalibráció számítása</string>
     <string name="help_write">Write calibration coefficients to the DistoX*kalibrációs együttható feltöltése a DistoX-be</string>
 <!-- FIXME_SKETCH_3D -->
-    <!-- string name="help_refs_model">View mode</string -->
+    <!-- UNUSED string name="help_refs_model">View mode</string -->
     <string name="help_one_model">Fit 3d model to view*3D modell igazítása a nézethez</string>
     <string name="help_surface">Make surface*felszín létrehozása</string>
     <string name="help_save_model">Export 3D model*3D modell exportálása</string>
     <string name="help_trash_model">Delete 3D model*3D modell törlése</string>
     <string name="help_head_model">Orient 3D model*3D modell tájolása</string>
-    <!-- string name="help_erase_model">Erase region</string -->
+    <!-- UNUSED string name="help_erase_model">Erase region</string -->
     <string name="help_cut_model">Cut region*Terület kivágása</string>
     <string name="help_stretch_model">Stretch region*Terület kiterjesztése</string>
-    <!-- string name="help_extrude_model">Extrude region</string -->
+    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
     <string name="help_refine_center">Refine surface at triangle centers*Felület finomítása a háromszögek középpontjában???</string>
     <string name="help_refine_sides">Refine surface at triangle sides*Felület finomítása a háromszögek oldalai mentén</string>
     <string name="help_refine_point">Refine surface at point*Felület finomítása egy pontban???</string>
@@ -662,7 +665,7 @@
     <string name="title_coverage">Calibration data distribution*Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Calibration coefficients*Kalibrációs együttható</string>
     <string name="title_contour">Contour*Körvonal</string>
-    <!-- string name="title_coord">Enter the point coordinates:</string -->
+    <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations*Elmentett mérési pontok</string>
     <string name="title_device">DistoX devices*DistoX-ek</string>
     <string name="title_discover">Scanning for DistoX devices &#8230; wait*DistoX eszközök keresése &#8230; várj!</string>
@@ -702,7 +705,7 @@
     <string name="title_survey_rename">Rename survey*Felmérés átnevezése</string>
     <string name="title_plot_rename">Rename sketch*Vázlat átnevezése</string>
     <string name="title_calib_export">Export calibration*Kalibráció exportálása</string>
-    <!-- string name="title_zoom">Zoom</string -->
+    <!-- UNUSED string name="title_zoom">Zoom</string -->
 
   <string name="pref_cat_survey">SURVEY DATA*FELMÉRÉSI ADAT</string>
   <string name="pref_cat_drawing">SKETCHING*VÁZLAT</string>
@@ -717,8 +720,8 @@
 
   <string name="pref_raw_data_title">Raw data*Nyers adat</string>
   <string name="pref_raw_data_summary">Show raw data*Mutassa a nyers adatot</string>
-  <!-- string name="pref_bootloader_title">Bootloader</string -->
-  <!-- string name="pref_bootloader_summary">Enable bootloader</string -->
+  <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
   <string name="pref_mkeyboard_title">Keyboard*Billentyűzet</string>
   <string name="pref_mkeyboard_summary">Enable custom keyboards*Engedélyezze az egyedi billentyűzeteket</string>
   <string name="pref_cosurvey_title">Co-surveying service*Együttes felmérés</string>
@@ -733,7 +736,7 @@
   <string name="pref_extra_buttons_summary">Level of enabled features</string>
   <string name="pref_size_buttons_title">Buttons size</string>
   <string name="pref_size_buttons_summary">Size of action-bar buttons</string>
-  <!-- string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
+  <!-- UNUSED string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
 
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
@@ -753,8 +756,8 @@
 
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Socket create</string>
-  <!-- string name="pref_device_type_title">Disto type</string -->
-  <!-- string name="pref_device_type_summary">Model of the DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
@@ -782,8 +785,8 @@
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS name</string>
   <string name="pref_crs_message">Enter the CRS name as in Proj4</string>
-  <!-- string name="pref_gps_averaging_title">GPS Averaging</string -->
-  <!-- string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
+  <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
 
   <string name="pref_plot_screen_title">SKETCH</string>
   <string name="pref_tool_line_title">LINES</string>
@@ -812,6 +815,8 @@
   <string name="pref_vert_splay_title">Splay dash clino threshold</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Splay over this inclination are dashed</string -->
   <string name="pref_vert_splay_message">Splay over this inclination are dashed</string>
+
+
   <string name="pref_survey_stations_title">Stations policy</string>
   <string name="pref_survey_stations_summary">Stations automatic naming policy</string>
   <string name="pref_accel_thr_title">Acceleration tolerance</string>
@@ -846,6 +851,7 @@
   <string name="pref_vthr_title">Leg vertical threshold</string>
   <string name="pref_vthr_summary">Vertical LRUD/WENS threshold</string>
   <string name="pref_vthr_message">Leg inclination threshold between LRUD/WENS</string>
+
   <string name="pref_plan_vthr_title">Splay plan-view threshold</string>
   <!-- UNUSED string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string -->
   <string name="pref_plan_vthr_message">Hide splays with high inclination in the plan-view</string>
@@ -869,6 +875,8 @@
   <string name="pref_dxf_scale_title">DXF sketch scale</string>
   <string name="pref_dxf_scale_summary">DXF sketch scale factor</string>
   <string name="pref_dxf_scale_message">Factor to scale DXF sketch exports</string>
+  <string name="pref_dxf_blocks_title">DXF splay endpoints</string>
+  <string name="pref_dxf_blocks_summary">DXF splay endpoints</string>
   <string name="pref_thumbnail_title">Thumbnails size</string>
   <string name="pref_thumbnail_summary">Size of photo thumbnails</string>
   <string name="pref_thumbnail_message">Size of photo thumbnails</string>
@@ -939,8 +947,8 @@
   <string name="pref_autoStations_summary">Add stations automatically to Therion files</string>
   <string name="pref_loopClosure_title">Loop closure</string>
   <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
-  <!-- string name="pref_splayExtend_title">Estimate splay extend</string -->
-  <!-- string name="pref_splayExtend_summary">Estimate splay extend</string -->
+  <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_LRExtend_title">Estimate Left/Right extend</string>
   <string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string>
 
@@ -1050,17 +1058,17 @@
   <string name="pref_log_units">Mértékegységek</string>
   <string name="pref_log_zip">ZIP</string>
 
-  <!-- string name="line_bezier">Bezier</string -->
-  <!-- string name="line_fine">fine</string -->
-  <!-- string name="line_normal">normal</string -->
-  <!-- string name="line_coarse">coarse</string -->
-  <!-- string name="units_ddmmss">ddmmss</string -->
-  <!-- string name="units_dd">degrees</string -->
-  <!-- string name="units_grads">grads</string -->
-  <!-- string name="units_meters">meters</string -->
-  <!-- string name="units_feet">feet</string -->
-  <!-- string name="alt_wgs">ellipsoid</string -->
-  <!-- string name="alt_ortho">orthometric</string -->
+  <!-- UNUSED string name="line_bezier">Bezier</string -->
+  <!-- UNUSED string name="line_fine">fine</string -->
+  <!-- UNUSED string name="line_normal">normal</string -->
+  <!-- UNUSED string name="line_coarse">coarse</string -->
+  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+  <!-- UNUSED string name="units_dd">degrees</string -->
+  <!-- UNUSED string name="units_grads">grads</string -->
+  <!-- UNUSED string name="units_meters">meters</string -->
+  <!-- UNUSED string name="units_feet">feet</string -->
+  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
+  <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
     <string name="welcome_title">TopoDroid %1$s</string>
