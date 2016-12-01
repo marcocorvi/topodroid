@@ -150,6 +150,7 @@
     <!-- UNUSED string name="pairing_failed">Неуспешно сдвояване</string -->
 
     <string name="illegal_data_value">Невалидни данни</string>
+
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
     <!-- UNUSED string name="altitude">Надм. височина</string -->
@@ -164,6 +165,7 @@
     <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
     <string name="loop_none">няма полигон loop</string>
     <!-- UNUSED string name="long_lat">Дълж.-Шир.</string -->
+
 
     <string name="error_azimuth_required">Необходим азимут</string>
     <string name="error_length_required">Необходима дължина</string>
@@ -292,7 +294,7 @@
 
     <!-- UNUSED string name="not_implemented">Тази функционалност не достъпна все още</string -->
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
-    <!-- UNUSED string name="photo">снимка</string -->
+    <string name="photo">снимка</string>
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
     <!-- UNUSED string name="photo_name">репер/име</string -->
     <!-- UNUSED string name="photo_photo">снимка</string -->
@@ -417,6 +419,7 @@
     <string name="shot_title">Отсечка %1$s - %2$s"</string>
     <string name="shot_data">Дълж. %1$.2f  Азимут %2$.1f  Наклон %3$.1f"</string>
 
+
     <string name="hide_blank">Празни отсечки</string>
     <string name="hide_leg">Повтарящи се отсечки</string>
     <string name="hide_ids">Номера на отсечки</string>
@@ -424,8 +427,8 @@
 
     <string name="plan">План</string>
     <string name="extended">Разг. разрез</string>
-    <string name="extended_profile">Разгънат разрез</string>
     <string name="profile">Проект. разр</string>
+    <string name="extended_profile">Разгънат разрез</string>
     <!-- UNUSED string name="v_section">Верт. сечение</string -->
     <string name="h_section">Хор. сечение</string>
 
@@ -501,7 +504,7 @@
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <!-- TODO string name="title_sketch_new">New 3D sketch</string -->
+    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
     <!-- UNUSED string name="title_sketch_edit">Редакт. 3D повърхност</string -->
     <string name="title_sketch_shot">Нова отсечка</string>
     <string name="title_sketch_refs">Изглед</string>
@@ -513,6 +516,7 @@
     <string name="sketch_mode_all">Всички отсечки</string>
     <string name="sketch_delete">Изтриване на 3D модел?</string>
     <string name="sketch_no_split">Невъзможно изчистване. Намалете макс. дължина на страната за допълнително изчистване.</string>
+
     <string name="length">Дължина [метри]</string>
     <string name="azimuth">Азимут [градуси]</string>
     <string name="clino">Наклон [градуси]</string>
@@ -557,7 +561,7 @@
     <string name="help_close">Затваряне на прозореца</string>
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_continue">Продължаване на линия</string>
-    <!-- TODO string name="help_contour">Contour editing</string -->
+    <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Записани репери</string>
     <string name="help_azimuth">Референтен азимут за разгъване</string>
     <string name="help_device">Управление на устройството</string>
@@ -661,7 +665,7 @@
     <string name="title_calib">Калибрации</string>
     <string name="title_coverage">Разпределение на данните от калибрацията</string>
     <string name="title_coeff">Коефициенти на калибрацията</string>
-    <!-- TODO string name="title_contour">Contour</string -->
+    <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
@@ -695,7 +699,7 @@
     <string name="title_sensor_edit">Сензор</string>
 
     <string name="title_stats">Статистика</string>
-    <!-- TODO string name="title_step">Step</string -->
+    <!-- NO string name="title_step">Step</string -->
     <string name="title_survey">Информация за картировката</string>
     <string name="title_survey_new">Нова картировка</string>
     <string name="title_survey_export">Експортиране на картировка като</string>
@@ -709,7 +713,7 @@
   <string name="pref_cat_import_export">Настройки Импорт/Експорт</string>
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
-  <!-- UNUSED string name="pref_cat_sketch">Настройки 3D модел</string -->
+  <string name="pref_cat_sketch">Настройки 3D модел</string>
   <string name="pref_cat_log">Настройки Лог файл</string>
 
   <string name="pref_locale_title">Език</string>
@@ -753,8 +757,8 @@
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
-  <!-- string name="pref_device_type_title">DistoX тип</string -->
-  <!-- string name="pref_device_type_summary">Модел на DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_title">DistoX тип</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Модел на DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Опити за връзка</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Брой опити за връзка при грешка</string -->
   <!-- UNUSED string name="pref_comm_retry_dialogtitle">Брой опити за връзка при грешка</string -->
@@ -812,6 +816,8 @@
   <string name="pref_vert_splay_title">Наклонени измервания с пунктир</string>
   <!-- UNUSED string name="pref_vert_splay_summary">Странични измервания с по-голям наклон са с пунктир в плана</string -->
   <string name="pref_vert_splay_message">Странични измервания с по-голям наклон са с пунктир в плана</string>
+
+
   <string name="pref_survey_stations_title">Репери</string>
   <string name="pref_survey_stations_summary">Автоматични репери</string>
   <string name="pref_accel_thr_title">Толеранс на акселерометъра</string>
@@ -1010,6 +1016,19 @@
   <string name="pref_walls_xstep_title">Максимално разстояние</string>
   <string name="pref_walls_xstep_summary">Максимално разстояние м/у точки на стената</string>
   <string name="pref_walls_xstep_message">Максимално разстояние м/у точки на стената [m]</string>
+
+  <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string -->
+  <!-- NO string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
+  <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_beta_message">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
+  <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_message">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
+  <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
   <string name="pref_log_stream_summary">Лог файл</string>
   <string name="pref_log_stream_title">Лог файл</string>
