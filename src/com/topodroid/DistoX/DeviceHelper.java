@@ -29,6 +29,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteDiskIOException;
+
+import android.widget.Toast;
 
 import android.util.Log;
 
@@ -101,26 +104,44 @@ public class DeviceHelper extends DataSetObservable
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
 
     try {
-        myDB = openHelper.getWritableDatabase();
-        if ( myDB == null ) {
-          TDLog.Error( "failed get writable database " + database_name );
-          return;
-        }
+      myDB = openHelper.getWritableDatabase();
+      if ( myDB == null ) {
+        TDLog.Error( "failed get writable database " + database_name );
+        return;
+      }
 
-        while ( myDB.isDbLockedByOtherThreads() ) {
-          try {
-            Thread.sleep( 200 );
-          } catch ( InterruptedException e ) {}
-        }
+      while ( myDB.isDbLockedByOtherThreads() ) {
+        try {
+          Thread.sleep( 200 );
+        } catch ( InterruptedException e ) {}
+      }
 
-        updateConfig       = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
+      updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
 
-     } catch ( SQLiteException e ) {
-       myDB = null;
-       TDLog.Error( "DeviceHelper cstr failed to get DB " + e.getMessage() );
-     }
-   }
+    } catch ( SQLiteException e ) {
+      myDB = null;
+      TDLog.Error( "DeviceHelper cstr failed to get DB " + e.getMessage() );
+    }
+  }
   
+  private void logError( String msg, SQLiteException e )
+  {
+    TDLog.Error("DB " + msg + ": " + e.getMessage() );
+  }
+
+
+  private void handleDiskIOError( SQLiteDiskIOException e )
+  {
+    Log.e("DistoX", "DB disk error " + e.getMessage() );
+    TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+      public void run() {
+        Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
+        toast.getView().setBackgroundColor( 0xff993333 );
+        toast.show();
+      }
+    } );
+  }
+
   // ----------------------------------------------------------------------
   // CALIBRATION DATA
 
@@ -132,9 +153,10 @@ public class DeviceHelper extends DataSetObservable
     deleteGMStmt.bindLong( 1, delete? 1 : 0 );
     deleteGMStmt.bindLong( 2, cid );
     deleteGMStmt.bindLong( 3, id );
-    try { deleteGMStmt.execute(); } catch (SQLiteException e ) {
-      TDLog.Error( "Failed GM delete. CID " + cid + " id " + id );
-    }
+    try {
+      deleteGMStmt.execute();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "delete GM " + cid + "/" + id, e ); }
   }
 
   public void doDeleteCalib( long cid ) 
@@ -145,9 +167,12 @@ public class DeviceHelper extends DataSetObservable
     if ( doDeleteCalibStmt == null )
         doDeleteCalibStmt = myDB.compileStatement( "DELETE FROM calibs where id=?" );
     doDeleteGMStmt.bindLong( 1, cid );
-    try { doDeleteGMStmt.execute(); } catch (SQLiteException e ) { }
     doDeleteCalibStmt.bindLong( 1, cid );
-    try { doDeleteCalibStmt.execute(); } catch (SQLiteException e ) { }
+    try {
+      doDeleteGMStmt.execute();
+      doDeleteCalibStmt.execute(); 
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "delete calib", e ); }
   }
 
   public long updateGMName( long gid, long cid, String grp )
@@ -158,9 +183,10 @@ public class DeviceHelper extends DataSetObservable
     updateGMGroupStmt.bindString( 1, grp );
     updateGMGroupStmt.bindLong( 2, cid );
     updateGMGroupStmt.bindLong( 3, gid );
-    try { updateGMGroupStmt.execute(); } catch (SQLiteException e ) {
-      TDLog.Error( "Failed GM update. CID " + cid + " id " + gid + " group " + grp );
-    }
+    try {
+      updateGMGroupStmt.execute();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "update GM " + cid + "/" + gid + " group " + grp, e ); }
     return 0;
   }
 
@@ -172,7 +198,10 @@ public class DeviceHelper extends DataSetObservable
     updateGMErrorStmt.bindDouble( 1, error );
     updateGMErrorStmt.bindLong( 2, cid );
     updateGMErrorStmt.bindLong( 3, id );
-    try { updateGMErrorStmt.execute(); } catch (SQLiteException e ) { }
+    try { 
+      updateGMErrorStmt.execute();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "update GM error", e ); }
     return 0;
   }
 
@@ -192,8 +221,11 @@ public class DeviceHelper extends DataSetObservable
     cv.put( "grp", 0 );
     cv.put( "error", 0.0 );
     cv.put( "status", 0 );
-    /* long ret = */ myDB.insert( GM_TABLE, null, cv ); // insert returns the nr. of records in the table
+    try {
       // this method returns the GM-data ID
+      /* long ret = */ myDB.insert( GM_TABLE, null, cv ); // insert returns the nr. of records in the table
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "insert GM", e ); }
     return myNextCId;
   }
 
@@ -209,9 +241,10 @@ public class DeviceHelper extends DataSetObservable
         // resetAllGMStmt = myDB.compileStatement( "UPDATE gms SET grp=0, error=0 WHERE calibId=? AND id>?" );
      resetAllGMStmt.bindLong( 1, cid );
      resetAllGMStmt.bindLong( 2, start_id );
-     try { resetAllGMStmt.execute(); } catch (SQLiteException e ) { 
-       TDLog.Error( "Failed GM reset. CID " + cid + " from id " + start_id );
-     }
+     try {
+       resetAllGMStmt.execute();
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
    }
 
    public List<CalibCBlock> selectAllGMs( long cid, int status )
@@ -521,9 +554,10 @@ public class DeviceHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          updateConfig.bindString( 1, value );
          updateConfig.bindString( 2, key );
-         try { updateConfig.execute(); } catch (SQLiteException e ) {
-           TDLog.Error( "Failed update config. " + key + " " + value );
-         }
+         try {
+           updateConfig.execute();
+         } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+         } catch (SQLiteException e ) { logError( "update config " + key + "=" + value, e ); }
        } else {
          ContentValues cv = new ContentValues();
          cv.put( "key",     key );
@@ -549,7 +583,10 @@ public class DeviceHelper extends DataSetObservable
        ContentValues cv = new ContentValues();
        cv.put( "key",     name );
        cv.put( "value",   "1" );     // symbols are enabled by default
-       myDB.insert( CONFIG_TABLE, null, cv );
+       try {
+         myDB.insert( CONFIG_TABLE, null, cv );
+       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+       } catch (SQLiteException e ) { logError( "symbol enable " + name, e ); }
      }
      return true;
    }
@@ -609,7 +646,10 @@ public class DeviceHelper extends DataSetObservable
      cv.put( "device",  device );
      cv.put( "comment", comment );
      cv.put( "algo",    algo );
-     myDB.insert( "calibs", null, cv );
+     try {
+       myDB.insert( "calibs", null, cv );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     } catch (SQLiteException e ) { logError( "insert calib info", e ); }
      myNextCId = 0;
      return id;
    }
@@ -643,7 +683,10 @@ public class DeviceHelper extends DataSetObservable
        cv.put( "name",    name );
        cv.put( "day",     "" );
        cv.put( "comment", "" );
-       myDB.insert( CALIB_TABLE, null, cv );
+       try {
+         myDB.insert( CALIB_TABLE, null, cv );
+       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+       } catch (SQLiteException e ) { logError( "set calib name" + name, e ); }
      }
      return id;
    }
@@ -797,7 +840,10 @@ public class DeviceHelper extends DataSetObservable
         cv.put( "tail",    0 );
         cv.put( "name",    name );
         cv.put( "nickname", "" );  // FIXME empty nickname
-        myDB.insert( DEVICE_TABLE, null, cv );
+        try {
+          myDB.insert( DEVICE_TABLE, null, cv );
+        } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+        } catch (SQLiteException e ) { logError( "insert device", e ); }
       }
       if (!cursor.isClosed()) cursor.close(); 
     }
@@ -814,7 +860,10 @@ public class DeviceHelper extends DataSetObservable
     cv.put( "tail",    head_tail[1] );
     cv.put( "name",    name );
     cv.put( "nickname", "" );  // FIXME empty nickname
-    myDB.insert( DEVICE_TABLE, null, cv );
+    try {
+      myDB.insert( DEVICE_TABLE, null, cv );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "insert device H-T", e ); }
   }
 
   public void updateDeviceModel( String address, String model )
@@ -823,7 +872,9 @@ public class DeviceHelper extends DataSetObservable
       updateDeviceModelStmt = myDB.compileStatement( "UPDATE devices set model=? WHERE address=?" );
     updateDeviceModelStmt.bindString( 1, model );
     updateDeviceModelStmt.bindString( 2, address );
-    try { updateDeviceModelStmt.execute(); } catch (SQLiteException e ) { }
+    try { updateDeviceModelStmt.execute(); 
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "update device", e ); }
   }
 
   public void updateDeviceNickname( String address, String nickname )
@@ -832,7 +883,9 @@ public class DeviceHelper extends DataSetObservable
         updateDeviceNicknameStmt = myDB.compileStatement( "UPDATE devices set nickname=? WHERE address=?" );
     updateDeviceNicknameStmt.bindString( 1, nickname );
     updateDeviceNicknameStmt.bindString( 2, address );
-    try { updateDeviceNicknameStmt.execute(); } catch (SQLiteException e ) { }
+    try { updateDeviceNicknameStmt.execute(); 
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "update device nickname", e ); }
   }
 
   public boolean updateDeviceHeadTail( String address, int[] head_tail )
@@ -853,7 +906,9 @@ public class DeviceHelper extends DataSetObservable
         updateDeviceHeadTailStmt.bindLong( 1, head );
         updateDeviceHeadTailStmt.bindLong( 2, tail );
         updateDeviceHeadTailStmt.bindString( 3, address );
-        try { updateDeviceHeadTailStmt.execute(); } catch (SQLiteException e ) { }
+        try { updateDeviceHeadTailStmt.execute();
+        } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+        } catch (SQLiteException e ) { logError( "update device H-T", e ); }
         ret = true;
       } else {
         // insertDeviceHeadTail( address, "DistoX", head_tail, name ); // FIXME name ?
@@ -895,9 +950,10 @@ public class DeviceHelper extends DataSetObservable
      updateCalibStmt.bindString( 2, dev );
      updateCalibStmt.bindString( 3, cmt );
      updateCalibStmt.bindLong( 4, id );
-     try { updateCalibStmt.execute(); } catch (SQLiteException e ) {
-       TDLog.Error( "Failed calib info. Device " + dev + " comment " + cmt );
-     }
+     try {
+       updateCalibStmt.execute(); 
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     } catch (SQLiteException e ) { logError( "update calib", e ); }
      return true;
    }
 
@@ -908,9 +964,10 @@ public class DeviceHelper extends DataSetObservable
         updateCalibAlgoStmt = myDB.compileStatement( "UPDATE calibs SET algo=? WHERE id=?" );
      updateCalibAlgoStmt.bindLong( 1, algo );
      updateCalibAlgoStmt.bindLong( 2, id );
-     try { updateCalibAlgoStmt.execute(); } catch (SQLiteException e ) {
-       TDLog.Error( "Failed calib algo. CID " + id + " algo " + algo );
-     }
+     try {
+       updateCalibAlgoStmt.execute();
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     } catch (SQLiteException e ) { logError( "update calib algo", e ); }
      return true;
    }
 
@@ -922,9 +979,10 @@ public class DeviceHelper extends DataSetObservable
         updateCalibCoeffStmt = myDB.compileStatement( "UPDATE calibs SET coeff=? WHERE id=?" );
      updateCalibCoeffStmt.bindString( 1, coeff );
      updateCalibCoeffStmt.bindLong( 2, id );
-     try { updateCalibCoeffStmt.execute(); } catch (SQLiteException e ) {
-       TDLog.Error( "Failed calib coeff. CID " + id );
-     }
+     try {
+       updateCalibCoeffStmt.execute();
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     } catch (SQLiteException e ) { logError( "update calib coeff", e ); }
      return true;
    }
 
@@ -938,7 +996,10 @@ public class DeviceHelper extends DataSetObservable
      updateCalibErrorStmt.bindDouble( 3, max_error );
      updateCalibErrorStmt.bindLong( 4, iterations );
      updateCalibErrorStmt.bindLong( 5, id );
-     try { updateCalibErrorStmt.execute(); } catch (SQLiteException e ) { }
+     try {
+       updateCalibErrorStmt.execute(); 
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+     } catch (SQLiteException e ) { logError( "update calib error", e ); }
      return true;
    }
 

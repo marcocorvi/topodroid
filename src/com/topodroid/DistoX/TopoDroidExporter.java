@@ -1607,9 +1607,15 @@ class TopoDroidExporter
 
   private static void printShotToDat( PrintWriter pw, AverageLeg leg, LRUD lrud, boolean duplicate, String comment )
   {
-    pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
-      leg.length()*TopoDroidUtil.M2FT, leg.bearing(), leg.clino(),
-      lrud.l*TopoDroidUtil.M2FT, lrud.u*TopoDroidUtil.M2FT, lrud.d*TopoDroidUtil.M2FT, lrud.r*TopoDroidUtil.M2FT );
+    if ( TDSetting.mSwapLR ) {
+      pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+        leg.length()*TopoDroidUtil.M2FT, leg.bearing(), leg.clino(),
+        lrud.r*TopoDroidUtil.M2FT, lrud.u*TopoDroidUtil.M2FT, lrud.d*TopoDroidUtil.M2FT, lrud.l*TopoDroidUtil.M2FT );
+    } else {
+      pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+        leg.length()*TopoDroidUtil.M2FT, leg.bearing(), leg.clino(),
+        lrud.l*TopoDroidUtil.M2FT, lrud.u*TopoDroidUtil.M2FT, lrud.d*TopoDroidUtil.M2FT, lrud.r*TopoDroidUtil.M2FT );
+    }
     leg.reset();
     if ( duplicate ) {
       pw.format(" #|L#");

@@ -959,6 +959,8 @@
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
+  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
+  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
   <string name="pref_LRExtend_title">Ampliación izq./drch. estimada</string>
   <string name="pref_LRExtend_summary">Ampliación L/R estimada (Compass/VisualTopo import)</string>
 

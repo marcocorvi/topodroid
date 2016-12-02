@@ -974,6 +974,8 @@
   <string name="pref_loopClosure_summary">Kreisschlussfehler Kompensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
+  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
+  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
   <string name="pref_LRExtend_title">Links/Rechts-Werte abschätzen</string>
   <string name="pref_LRExtend_summary">Links/Rechts-Werte abschätzen (Compass/VisualTopo Import)</string>
 

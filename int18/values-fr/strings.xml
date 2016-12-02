@@ -948,6 +948,8 @@
   <string name="pref_loopClosure_summary">Compensation d\'erreur de bouclage</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
+  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
+  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
   <string name="pref_LRExtend_title">Estimer dist. latérales G/D</string>
   <string name="pref_LRExtend_summary">Estimer les extensions gauche/droite (Compass/VisualTopo import)</string>
 

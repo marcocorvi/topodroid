@@ -946,6 +946,8 @@
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
   <!-- UNUSED string name="pref_splayExtend_title">估算侧线延展</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">估算侧线延展</string -->
+  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
+  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
   <string name="pref_LRExtend_title">估测左/右延展</string>
   <string name="pref_LRExtend_summary">估测左/右延展 (Compass/VisualTopo 输入)</string>
 

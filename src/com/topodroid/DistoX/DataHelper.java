@@ -32,6 +32,8 @@ import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
 
+import android.widget.Toast;
+
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -474,6 +476,18 @@ public class DataHelper extends DataSetObservable
     TDLog.Error("DB " + msg + ": " + e.getMessage() );
   }
 
+  private void handleDiskIOError( SQLiteDiskIOException e )
+  {
+    Log.e("DistoX", "DB disk error " + e.getMessage() );
+    TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
+      public void run() {
+        Toast toast = Toast.makeText( mContext, "Critical failure: Disk i/o error", Toast.LENGTH_LONG );
+        toast.getView().setBackgroundColor( 0xff993333 );
+        toast.show();
+      }
+    } );
+  }
+
   // --------------------------------------------------------------------
   // SURVEY
   // survey attributes renaming are "rare" actions
@@ -487,8 +501,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyName( id, name );
       }
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey rename " + name, e ); }
     return true;
   }
@@ -509,8 +522,7 @@ public class DataHelper extends DataSetObservable
           listener.onUpdateSurveyInfo( id, date, team, decl, comment, init_station );
         }
       }
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey info", e ); }
   }
 
@@ -536,8 +548,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyDayAndComment( id, date, comment );
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey day+cmt ", e ); }
     return true;
   }
@@ -551,8 +562,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyTeam( id, team );
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey team ", e ); }
   }
 
@@ -565,8 +575,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyInitStation( id, station );
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e) { logError("survey init_station", e ); }
   }
   public void updateSurveyDeclination( long id, double decl, boolean forward )
@@ -578,8 +587,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateSurveyDeclination( id, decl );
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("survey decl", e ); }
   }
 
@@ -600,10 +608,8 @@ public class DataHelper extends DataSetObservable
       myDB.delete( STATION_TABLE, WHERE_SID, clause );
       myDB.delete( SURVEY_TABLE, "id=?", clause );
       myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e ) { 
-      Log.e( "DistoX", e.getMessage() );
-    } catch ( SQLiteException e ) {
-      logError("survey delete", e);
+    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
+    } catch ( SQLiteException e ) { logError("survey delete", e);
     } finally {
       myDB.endTransaction();
     }
@@ -646,7 +652,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotDBC( id, sid, d, b, c );
       }
-    } catch ( SQLiteDiskIOException e ) { 
+    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
       Log.e( "DistoX", "shot " + id + " DBC: " + d + " " + b + " " + c, e );
     } catch ( SQLiteException e ) { // a disk IO error crash is a severe error
       logError( "shot " + id + " DBC: " + d + " " + b + " " + c, e );
@@ -680,9 +686,7 @@ public class DataHelper extends DataSetObservable
     // }
     // try {
     //   myDB.execSQL( sw.toString() );
-    // } catch ( SQLiteDiskIOException e ) { // a disk IO error crash is a severe error
-    //   Log.e( "DistoX", e.getMessage() );
-    // }
+    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
 
     if ( tStation == null ) tStation = "";
     if ( comment != null ) {
@@ -697,8 +701,7 @@ public class DataHelper extends DataSetObservable
       try {
         updateShotStmtFull.execute();
         success = true;
-      } catch ( SQLiteDiskIOException e ) {
-        Log.e( "DistoX", e.getMessage() );
+      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
       } catch ( SQLiteException e ) { logError("Shot updateC " + fStation + " " + tStation, e ); }
     } else {
       updateShotStmt.bindString( 1, fStation );
@@ -711,8 +714,7 @@ public class DataHelper extends DataSetObservable
       try {
         updateShotStmt.execute();
         success = true;
-      } catch ( SQLiteDiskIOException e ) {
-        Log.e( "DistoX", e.getMessage() );
+      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
       } catch ( SQLiteException e ) { logError("Shot update " + fStation + " " + tStation, e ); }
     }
 
@@ -731,8 +733,7 @@ public class DataHelper extends DataSetObservable
     pw.format( Locale.US, "UPDATE shots SET id=id+1 where surveyId=%d and id>=%d", sid, id );
     try {
       myDB.execSQL( sw.toString() ); 
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) {
       logError("Shift id " + id, e);
     }
@@ -763,9 +764,7 @@ public class DataHelper extends DataSetObservable
     //            fStation, tStation, sid, id );
     // try {
     //   myDB.execSQL( sw.toString() );
-    // } catch ( SQLiteDiskIOException e ) { // a disk IO error crash is a severe error
-    //   Log.e( "DistoX", e.getMessage() );
-    // }
+    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
 
     if ( tStation == null ) tStation = "";
     if ( updateShotNameStmt == null ) {
@@ -780,8 +779,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotName( id, sid, fStation, tStation );
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " name " + fStation + " " + tStation, e ); }
   }
 
@@ -801,7 +799,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotLeg( id, sid, leg );
       }
-    } catch ( SQLiteDiskIOException e ) {
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
       Log.e( "DistoX", e.getMessage() );
     } catch (SQLiteException e ) {
       logError("shot " + id + " leg", e );
@@ -828,8 +826,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotExtend( id, sid, extend );
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("shot " + id + " ext", e ); }
   }
 
@@ -849,8 +846,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotFlag( id, sid, flag );
       }
-    } catch ( SQLiteDiskIOException e ) { 
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch (SQLiteException e) { logError("shot " + id + " flag", e ); }
   }
 
@@ -874,8 +870,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotComment( id, sid, comment );
       }
-    } catch ( SQLiteDiskIOException e ) { 
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " cmt", e ); }
   }
 
@@ -887,8 +882,7 @@ public class DataHelper extends DataSetObservable
     try {
       myDB.update( table, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
       ret = true;
-    } catch ( SQLiteDiskIOException e ) { 
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch (SQLiteException e) { logError(table + " " + id + " status ", e ); }
     return ret;
   }
@@ -934,16 +928,15 @@ public class DataHelper extends DataSetObservable
         updateShotNameAndExtendStmt.bindLong(   4, (b.mType == DistoXDBlock.BLOCK_SEC_LEG)? 1 : 0 );
         updateShotNameAndExtendStmt.bindLong(   5, sid );
         updateShotNameAndExtendStmt.bindLong(   6, b.mId );
-        try { 
+        // try { 
           updateShotNameAndExtendStmt.execute();
           success = true;
-        } catch ( SQLiteDiskIOException e ) { 
-          Log.e( "DistoX", e.getMessage() );
-        } catch (SQLiteException e ) { logError("shots name+ext ", e); }
+        // } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
+        // } catch (SQLiteException e ) { logError("shots name+ext ", e); }
       }
       myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e ) { 
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError("shots name+ext ", e); 
     } finally {
       myDB.endTransaction();
       myDB.setLockingEnabled( true );
@@ -1013,10 +1006,8 @@ public class DataHelper extends DataSetObservable
         ++id;
       }
       myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e ) { 
-      Log.e( "DistoX", e.getMessage() );
-    } catch (SQLiteException e ) {
-      logError("parser shot insert", e);
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError("parser shot insert", e);
     } finally {
       ih.close();
       myDB.endTransaction();
@@ -1071,8 +1062,7 @@ public class DataHelper extends DataSetObservable
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotAMDR( sid, id, acc, mag, dip, r );
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("AMDR " + id, e); }
   }
 
@@ -1201,8 +1191,7 @@ public class DataHelper extends DataSetObservable
         ++ myNextId;
         ++ old_id;
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("transfer shots", e); }
   }
 
@@ -1236,8 +1225,7 @@ public class DataHelper extends DataSetObservable
           listener.onInsertShotAt( sid, at, d, b, c, r, extend, DistoXDBlock.BLOCK_SURVEY );
         }
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("insert at " + d + " " + b + " " + c, e ); }
     return at;
   }
@@ -1281,8 +1269,7 @@ public class DataHelper extends DataSetObservable
           listener.onInsertShot( sid,  id, from, to, d, b, c, r, extend, flag, leg, status, shot_type, comment );
         }
       }
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("insert " + from + "/" + to + " " + d + " " + b + " " + c, e); }
     return id;
   }
@@ -1301,9 +1288,8 @@ public class DataHelper extends DataSetObservable
                xoffset, yoffset, zoom, sid, pid );
     try {
       myDB.execSQL( sw.toString() );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
-    }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("update plot", e ); }
 
     // FIXME with the update statement I get a crash on immediate switching Plan/Profile on load
     // updatePlotStmt.bindDouble( 1, xoffset );
@@ -1333,8 +1319,7 @@ public class DataHelper extends DataSetObservable
     updatePlotViewStmt.bindLong( 3, pid );
     try {
       updatePlotViewStmt.execute();
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("plot view", e); }
   }
    
@@ -1356,8 +1341,7 @@ public class DataHelper extends DataSetObservable
     updatePlotHideStmt.bindLong( 3, pid );
     try {
       updatePlotHideStmt.execute();
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("plot hide", e ); }
   }
    
@@ -1368,8 +1352,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return;
     try {
       myDB.delete( PLOT_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(pid) } );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("plot drop", e); }
   }
 
@@ -1386,8 +1369,7 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return;
     try {
       myDB.delete( PLOT_TABLE, WHERE_SID_NAME, new String[]{ Long.toString(sid), name } );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("plot dropN", e); }
   }
   
@@ -2312,8 +2294,7 @@ public class DataHelper extends DataSetObservable
          updateConfig.bindString( 2, key );
          try {
            updateConfig.execute();
-         } catch ( SQLiteDiskIOException e ) {
-           Log.e( "DistoX", e.getMessage() );
+         } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
          } catch (SQLiteException e ) { logError( "config update " + key + " " + value, e ); }
        } else {
          ContentValues cv = new ContentValues();
@@ -2321,8 +2302,7 @@ public class DataHelper extends DataSetObservable
          cv.put( "value",   value );
          try {
            myDB.insert( CONFIG_TABLE, null, cv );
-         } catch ( SQLiteDiskIOException e ) {
-           Log.e( "DistoX", e.getMessage() );
+         } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
          } catch ( SQLiteException e ) { logError("config insert " + key + " " + value, e ); }
        }
        if ( ! cursor.isClosed()) cursor.close();
@@ -2351,8 +2331,7 @@ public class DataHelper extends DataSetObservable
        cv.put( "value",   "0" );     // symbols are enabled by default
        try {
          myDB.insert( CONFIG_TABLE, null, cv );
-       } catch ( SQLiteDiskIOException e ) {
-         Log.e( "DistoX", e.getMessage() );
+       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
        } catch ( SQLiteException e ) { logError("config symbol " + name, e ); }
      }
    }
@@ -2425,8 +2404,7 @@ public class DataHelper extends DataSetObservable
        cv.put( "comment", "" );
        try {
          myDB.insert( table, null, cv );
-       } catch ( SQLiteDiskIOException e ) {
-         Log.e( "DistoX", e.getMessage() );
+       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
        } catch ( SQLiteException e ) { logError("set name " + name, e); }
      }
      return id;
@@ -2477,8 +2455,7 @@ public class DataHelper extends DataSetObservable
      updatePlotNameStmt.bindLong( 3, pid );
      try {
        updatePlotNameStmt.execute();
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e) { logError("plot name", e); }
    }
  
@@ -2557,8 +2534,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "comment",   (comment == null)? "" : comment );
      try {
        myDB.insert( PHOTO_TABLE, null, cv );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("photo insert", e); }
      return id;
    }
@@ -2575,8 +2551,7 @@ public class DataHelper extends DataSetObservable
      vals.put( "comment", comment );
      try {
        myDB.update( PHOTO_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e) { logError("photo update", e); }
      return true;
    }
@@ -2586,8 +2561,7 @@ public class DataHelper extends DataSetObservable
      if ( myDB == null ) return;
      try {
        myDB.delete( PHOTO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e) { logError("photo delete", e); }
    }
 
@@ -2618,8 +2592,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "value",     value );
      try {
        myDB.insert( SENSOR_TABLE, null, cv );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("sensor insert", e); }
      return id;
    }
@@ -2642,8 +2615,7 @@ public class DataHelper extends DataSetObservable
      vals.put( "comment", comment );
      try {
        myDB.update( SENSOR_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("sensor update", e); }
      return true;
    }
@@ -2700,8 +2672,7 @@ public class DataHelper extends DataSetObservable
      transferPlotStmt.bindLong( 3, pid );
      try {
        transferPlotStmt.execute();
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e ) { logError("plot transf", e); }
    }
 
@@ -2715,8 +2686,7 @@ public class DataHelper extends DataSetObservable
      transferSketchStmt.bindLong( 3, pid );
      try {
        transferSketchStmt.execute();
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch (SQLiteException e ) { logError("sketch transf", e); }
    }
 
@@ -2764,8 +2734,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "cs_altitude",  cs_alt );
      try {
        myDB.insert( FIXED_TABLE, null, cv );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("fixed " + station + " insert " + lng + " " + lat + " " + alt, e ); }
      return id;
    }
@@ -2801,8 +2770,7 @@ public class DataHelper extends DataSetObservable
            listener.onInsertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide );
          }
        }
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("plot insert", e); }
      return id;
    }
@@ -2887,8 +2855,7 @@ public class DataHelper extends DataSetObservable
   {
     try {
       myDB.delete( FIXED_TABLE, "surveyId=? and station=? and status=1", new String[]{ Long.toString(sid), station } );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e) { logError("fixed delete", e ); }
   }
   
@@ -2906,8 +2873,7 @@ public class DataHelper extends DataSetObservable
       try {
         myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
         ret = true;
-      } catch ( SQLiteDiskIOException e ) {
-        Log.e( "DistoX", e.getMessage() );
+      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
       } catch (SQLiteException e) { logError("fixed update", e ); }
     }
     return ret;
@@ -2925,8 +2891,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "comment", comment );
     try {
       myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("fixed cmt", e ); }
   }
 
@@ -2938,8 +2903,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "altimetric", asl );
     try {
       myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("fixed alt", e); }
   }
 
@@ -2952,8 +2916,7 @@ public class DataHelper extends DataSetObservable
     vals.put( "altitude",  alt );
     try {
       myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("fixed data", e); }
   }
 
@@ -2974,8 +2937,7 @@ public class DataHelper extends DataSetObservable
     }
     try {
       myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("fixed cs", e); }
   }
 
@@ -3077,8 +3039,7 @@ public class DataHelper extends DataSetObservable
     updateSketchStmt.bindLong( 18, sketch_id );
     try {
       updateSketchStmt.execute();
-    } catch ( SQLiteDiskIOException e ) {
-      Log.e( "DistoX", e.getMessage() );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } catch (SQLiteException e ) { logError("sketch", e); }
   }
   
@@ -3263,8 +3224,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "clino",    clino );
      try {
        myDB.insert( SKETCH_TABLE, null, cv );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("sketch insert", e); }
      return id;
    }
@@ -3679,8 +3639,7 @@ public class DataHelper extends DataSetObservable
        updateStationCommentStmt.bindString( 4, name );
        try {
          updateStationCommentStmt.execute();
-       } catch ( SQLiteDiskIOException e ) {
-         Log.e( "DistoX", e.getMessage() );
+       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
        } catch ( SQLiteException e ) { logError("station update", e ); }
      } else {
        ContentValues cv = new ContentValues();
@@ -3690,8 +3649,7 @@ public class DataHelper extends DataSetObservable
        cv.put( "flag",      flag );
        try {
          myDB.insert( STATION_TABLE, null, cv );
-       } catch ( SQLiteDiskIOException e ) {
-         Log.e( "DistoX", e.getMessage() );
+       } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
        } catch ( SQLiteException e ) { logError("station insert", e ); }
      }
      if (cursor != null && !cursor.isClosed()) cursor.close();
@@ -3737,8 +3695,7 @@ public class DataHelper extends DataSetObservable
      pw.format( Locale.US, "DELETE FROM stations WHERE surveyId=%d AND name=\"%s\"", sid, name );
      try {
        myDB.execSQL( sw.toString() );
-     } catch ( SQLiteDiskIOException e ) {
-       Log.e( "DistoX", e.getMessage() );
+     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
      } catch ( SQLiteException e ) { logError("station delete", e ); }
 
      // if ( deleteStationStmt == null )
@@ -3948,10 +3905,8 @@ public class DataHelper extends DataSetObservable
            // );
 
            db.setTransactionSuccessful();
-         } catch ( SQLiteDiskIOException e ) { 
-           Log.e( "DistoX", e.getMessage() );
-         } catch ( SQLException e ) {
-           TDLog.Error( "createTables exception:" + e.getMessage() );
+         // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+         } catch ( SQLException e ) { TDLog.Error( "createTables exception: " + e.getMessage() );
          } finally {
            db.endTransaction();
            db.setLockingEnabled( true );

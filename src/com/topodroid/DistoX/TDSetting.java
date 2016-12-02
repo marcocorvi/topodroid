@@ -137,6 +137,7 @@ class TDSetting
     "DISTOX_SURVEX_EOL",          // 76 survex end of line
     "DISTOX_SURVEX_SPLAY",
     "DISTOX_SURVEX_LRUD",         // 78
+    "DISTOX_SWAL_LR",             // swap Left-Right in compass export
     "DISTOX_UNSCALED_POINTS",     // 79 unscaled drawing point items
     "DISTOX_UNIT_GRID",           // 80
     // "DISTOX_XTHERION_AREAS",      // 81 save areas a-la xtherion
@@ -153,7 +154,7 @@ class TDSetting
     "DISTOX_WALLS_XSTEP",         // 91
     "DISTOX_WALLS_CONCAVE",       // 92
 
-    "DISTOX_DXF_BLOCKS", // DXF_BLOCKS
+    "DISTOX_DXF_BLOCKS", // DISTOX_DXF_BLOCKS
 
     // "DISTOX_SKETCH_USES_SPLAYS",  // 
     // "DISTOX_SKETCH_BERDER_STEP",
@@ -202,6 +203,7 @@ class TDSetting
   static String mSurvexEol           = "\n";
   static boolean mSurvexSplay        = false;
   static boolean mSurvexLRUD         = false;
+  static boolean mSwapLR             = false; // swap LR in Compass export
   static boolean mOrthogonalLRUD     = false; // whether angle > 0 
   static float mOrthogonalLRUDAngle  = 0;     // angle
   static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
@@ -723,6 +725,7 @@ class TDSetting
     mSurvexEol    = ( prefs.getString(  key[k++], "LF" ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
     mSurvexSplay  =   prefs.getBoolean( key[k++], false );    // DISTOX_SURVEX_SPLAY
     mSurvexLRUD   =   prefs.getBoolean( key[k++], false );    // DISTOX_SURVEX_LRUD
+    mSwapLR       =   prefs.getBoolean( key[k++], false );    // DISTOX_SWAP_LR
     mUnscaledPoints = prefs.getBoolean( key[k++], false );    // DISTOX_UNSCALED_POINTS
     mUnitGrid       = tryFloat(  prefs, key[k++], "1" );      // DISTOX_UNIT_GRID
     // mXTherionAreas  = prefs.getBoolean( key[k++], false );    // DISTOX_XTHERION_AREAS
@@ -734,7 +737,7 @@ class TDSetting
 
     mOrthogonalLRUDAngle  = tryFloat( prefs, key[k++], "0");  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
-    mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
+    mOrthogonalLRUD       = ( mOrthogonalLRUDAngle < 0.000001f ); 
 
     // mSectionStations  = tryInt( prefs, key[k++], "3");         // DISTOX_SECTION_STATIONS
 
@@ -745,7 +748,7 @@ class TDSetting
     mWallsXStep       = tryFloat( prefs, key[k++], "1.0" );   // DISTOX_WALLS_XSTEP
     mWallsConcave     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_WALLS_CONCAVE
 
-    mDxfBlocks        =  prefs.getBoolean( key[k++], true );  // DXF_BLOCKS
+    mDxfBlocks        =  prefs.getBoolean( key[k++], true );  // DISTOX_DXF_BLOCKS
 
     mAlgoMinAlpha     = tryFloat( prefs, key[k++], "0.1" );   // DISTOX_ALGO_MIN_ALPHA
     mAlgoMinBeta      = tryFloat( prefs, key[k++], "4.0" );   // DISTOX_ALGO_MIN_BETA
@@ -1048,6 +1051,8 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {
       mSurvexLRUD = prefs.getBoolean( k, false ); // DISTOX_SURVEX_LRUD
     } else if ( k.equals( key[ nk++ ] ) ) {
+      mSwapLR = prefs.getBoolean( k, false ); // DISTOX_SWAP_LR
+    } else if ( k.equals( key[ nk++ ] ) ) {
       mUnscaledPoints = prefs.getBoolean( k, false ); // DISTOX_UNSCALED_POINTS
     } else if ( k.equals( key[ nk++ ] ) ) { // DISTOX_UNIT_GRID
       mUnitGrid = Float.parseFloat( prefs.getString( k, "1" ) ); 
@@ -1064,7 +1069,7 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_ORTHO_LRUD
       mOrthogonalLRUDAngle  = tryFloat( prefs, k, "0");
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
-      mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
+      mOrthogonalLRUD       = ( mOrthogonalLRUDAngle < 0.000001f ); 
 
     // } else if ( k.equals( key[ nk++ ] ) ) {       // DISTOX_SECTION_STATIONS
     //   mSectionStations = tryInt( prefs, k, "3");
@@ -1083,7 +1088,7 @@ class TDSetting
       mWallsConcave = tryFloat( prefs, k, "0.1" ); // DISTOX_WALLS_CONCAVE
  
     } else if ( k.equals( key[ nk++ ] ) ) {
-      mDxfBlocks = prefs.getBoolean( k, true ); // DXF_BLOCKS
+      mDxfBlocks = prefs.getBoolean( k, true ); // DISTOX_DXF_BLOCKS
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAlgoMinAlpha   = tryFloat( prefs, k, "0.1" );   // DISTOX_ALGO_MIN_ALPHA
@@ -1328,6 +1333,7 @@ class TDSetting
     //C if ( name.equals( "DISTOX_SURVEX_EOL" )
     //B if ( name.equals( "DISTOX_SURVEX_SPLAY" )
     //B if ( name.equals( "DISTOX_SURVEX_LRUD" )
+    //B if ( name.equals( "DISTOX_SWAP_LR" )
     //B if ( name.equals( "DISTOX_UNSCALED_POINTS" )
     //C if ( name.equals( "DISTOX_UNIT_GRID" ) 
     //B if ( name.equals( "DISTOX_XTHERION_AREAS" )
@@ -1343,7 +1349,7 @@ class TDSetting
     if ( name.equals( "DISTOX_WALLS_XSTEP"        ) ) return parseFloatValue( value, mWallsXStep, 0 );
     if ( name.equals( "DISTOX_WALLS_CONCAVE"      ) ) return parseFloatValue( value, mWallsConcave, 0 );
 
-    // if ( name.equals( "DISTOX_DXF_BLOCKS" )  // DXF_BLOCKS
+    // if ( name.equals( "DISTOX_DXF_BLOCKS" )  // DISTOX_DXF_BLOCKS
 
     if ( name.equals( "DISTOX_ALGO_MIN_ALPHA"     ) ) return parseFloatValue( value, mAlgoMinAlpha, 0, 1 );
     if ( name.equals( "DISTOX_ALGO_MIN_BETA"      ) ) return parseFloatValue( value, mAlgoMinBeta,  0 );

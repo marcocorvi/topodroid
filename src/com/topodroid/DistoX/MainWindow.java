@@ -314,6 +314,7 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
   // FILE IMPORT
   
+  // NOTE survey name must be guaranteed not be in the db
   private class ImportTherionTask extends AsyncTask<String, Integer, Long >
   {
     @Override
@@ -372,7 +373,9 @@ public class MainWindow extends Activity
         ParserCompass parser = new ParserCompass( str[0], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
         ArrayList< ParserShot > splays = parser.getSplays();
-
+        if ( mApp.mData.hasSurveyName( parser.mName ) ) {
+          return -1L;
+        }
         sid = mApp.setSurveyFromName( parser.mName, false ); // IMPORT DAT no forward
         mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
         mApp.mData.updateSurveyDeclination( sid, parser.mDeclination, false );
@@ -392,7 +395,11 @@ public class MainWindow extends Activity
     @Override
     protected void onPostExecute(Long result) {
       setTheTitle( );
-      updateDisplay( );
+      if ( result >= 0 ) {
+        updateDisplay( );
+      } else {
+        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
+      }
     }
   }
 
@@ -406,6 +413,9 @@ public class MainWindow extends Activity
         ParserVisualTopo parser = new ParserVisualTopo( str[0], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
         ArrayList< ParserShot > splays = parser.getSplays();
+        if ( mApp.mData.hasSurveyName( parser.mName ) ) {
+          return -1L;
+        }
 
         sid = mApp.setSurveyFromName( parser.mName, false );
         mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
@@ -426,7 +436,11 @@ public class MainWindow extends Activity
     @Override
     protected void onPostExecute(Long result) {
       setTheTitle( );
-      updateDisplay( );
+      if ( result >= 0 ) {
+        updateDisplay( );
+      } else {
+        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
+      }
     }
   }
 
@@ -440,6 +454,9 @@ public class MainWindow extends Activity
         // import PocketTopo (only data for the first trip)
         ParserPocketTopo parser = new ParserPocketTopo( str[0], str[1], true ); // apply_declination = true
         ArrayList< ParserShot > shots  = parser.getShots();
+        if ( mApp.mData.hasSurveyName( parser.mName ) ) {
+          return -1L;
+        }
 
         sid = mApp.setSurveyFromName( parser.mName, false );
         mApp.mData.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle, false );
@@ -494,7 +511,11 @@ public class MainWindow extends Activity
     @Override
     protected void onPostExecute(Long result) {
       setTheTitle( );
-      updateDisplay( );
+      if ( result >= 0 ) {
+        updateDisplay( );
+      } else {
+        Toast.makeText(mActivity, R.string.import_already, Toast.LENGTH_SHORT).show();
+      }
     }
   }
 

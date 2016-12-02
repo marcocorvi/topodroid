@@ -101,6 +101,13 @@
      />
 
    <CheckBoxPreference
+       android:key="DISTOX_SWAP_LR"
+       android:summary="@string/pref_swapLR_summary"
+       android:title="@string/pref_swapLR_title"
+       android:defaultValue="false"
+     />
+
+   <CheckBoxPreference
        android:key="DISTOX_SVG_GRID"
        android:summary="@string/pref_svg_grid_summary"
        android:title="@string/pref_svg_grid_title"

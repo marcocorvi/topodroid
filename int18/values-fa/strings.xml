@@ -955,6 +955,8 @@
   <string name="pref_loopClosure_summary">حل خطای بسته شدن حلقه</string>
   <!-- UNUSED string name="pref_splayExtend_title">نمایش براورد گسترش</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
+  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
+  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
   <!-- TODO string name="pref_LRExtend_title">Estimate Left/Right extend</string -->
   <!-- TODO string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string -->
 
