@@ -686,7 +686,7 @@
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_device">DistoX Geräte</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
+    <string name="title_device_select">DistoX Gerät auswählen</string>
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>
     <string name="title_draw">Zeichnen</string>
     <string name="title_draw_area">FLÄCHE %1$s</string>
@@ -794,8 +794,8 @@
   <string name="pref_wait_shot_summary">Wartezeit nach einer Messung [ms]</string>
   <string name="pref_wait_data_title">Wartezeit nach Download [ms]</string>
   <string name="pref_wait_data_summary">Wartezeit nach dem Download von Daten [ms]</string>
-  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
-  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
+  <string name="pref_wait_conn_title">Wartezeit nach Download-Fehler [ms]</string>
+  <string name="pref_wait_conn_summary">Wartezeit nach Download-Fehler [ms] (Standard: 500)</string>
   <string name="pref_conn_mode_title">Verbindungsart</string>
   <string name="pref_conn_mode_summary">Art der Verbindung mit DistoX</string>
   <string name="pref_auto_reconnect_title">Automatische Verbindung</string>
@@ -899,10 +899,10 @@
   <string name="pref_acad_version_title">AutoCAD-Version</string>
   <string name="pref_acad_version_summary">AutoCAD-Version</string>
   <string name="pref_dxf_scale_title">Massstab DXF-Skizze</string>
-  <string name="pref_dxf_scale_summary">Massstabsfaktor DXF-Skizze</string>
-  <string name="pref_dxf_scale_message">Massstabsfaktor DXF-Skizze Export</string>
-  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
-  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
+  <string name="pref_dxf_scale_summary">Massstab-Faktor DXF-Skizze</string>
+  <string name="pref_dxf_scale_message">Massstab-Faktor DXF-Export</string>
+  <string name="pref_dxf_blocks_title">DXF: Hilfszüge markieren</string>
+  <string name="pref_dxf_blocks_summary">DXF: Enden der Hilfszüge markieren</string>
   <string name="pref_thumbnail_title">Thumbnails Größe</string>
   <string name="pref_thumbnail_summary">Thumbnails Größe</string>
   <string name="pref_thumbnail_message">Thumbnails Größe</string>
@@ -975,8 +975,8 @@
   <string name="pref_loopClosure_summary">Kreisschlussfehler Kompensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <string name="pref_swapLR_title">Links/Rechts-Werte vertauschen in Compass</string>
+  <string name="pref_swapLR_summary">Links/Rechts-Werte vertauschen in Compass Export</string>
   <string name="pref_LRExtend_title">Links/Rechts-Werte abschätzen</string>
   <string name="pref_LRExtend_summary">Links/Rechts-Werte abschätzen (Compass/VisualTopo Import)</string>
 
@@ -997,7 +997,7 @@
   <string name="pref_recent_nr_summary">Anzahl der am häufigsten verwendeten Werkzeuge in der Auswahl</string>
   <string name="pref_area_border_title">Flächenumrandung anzeigen</string> 
   <string name="pref_area_border_summary">Linie um Flächen herum anzeigen</string>
-  <string name="pref_auto_section_pt_title">Querschnittspunkte hnzufügen</string>
+  <string name="pref_auto_section_pt_title">Querschnittspunkte hinzufügen</string>
   <string name="pref_auto_section_pt_summary">Querschnittspunkt zu Querschnitten hinzufügen</string>
   <!-- Experimental 3D Drawing Feature: -->
   <!-- NO string name="pref_sketchUsesSplays_title">Sketch splays</string -->
