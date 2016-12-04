@@ -158,6 +158,11 @@ class Selection
     }
   }
 
+  void rebucket( SelectionPoint sp )
+  {
+    sp.setBucket( getBucket( sp.X(), sp.Y() ) );
+  }
+
   private void insertItem( DrawingPath path, LinePoint pt )
   {
     SelectionPoint sp = new SelectionPoint( path, pt, null );
@@ -253,11 +258,23 @@ class Selection
     }
   }
 
-  // FXIME use buckets
-  SelectionPoint getPoint( LinePoint lp )
+  SelectionPoint getSelectionPoint( LinePoint lp )
   {
-    for ( SelectionPoint sp : mPoints ) {
-      if ( sp.mPoint == lp ) return sp;
+    // for ( SelectionPoint sp : mPoints ) {
+    //   if ( sp.mPoint == lp ) return sp;
+    // }
+    // return null;
+    // FIXED use buckets
+    float x0 = lp.mX;
+    float y0 = lp.mY;
+    for ( SelectionBucket bucket : mBuckets ) {
+      if ( bucket.contains( x0, y0, 10f, 10f ) ) {
+        final Iterator jt = bucket.mPoints.iterator();
+        while( jt.hasNext() ) {
+          SelectionPoint sp = (SelectionPoint)jt.next();
+          if ( lp == sp.mPoint ) return sp;
+        }
+      }
     }
     return null;
   }

@@ -665,6 +665,7 @@
     <!-- UNUSED string name="title_coord">输入点坐标:</string -->
     <string name="title_current_station">保存测量点</string>
     <string name="title_device">DistoX 设备</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">扫码DistoX设备...请稍后</string>
     <!-- TODO string name="title_draw">Draw</string -->
     <string name="title_draw_area">面图例 %1$s</string>

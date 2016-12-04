@@ -667,6 +667,7 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">Ricerca dispositivi DistoX &#8230; attendi</string>
     <string name="title_draw">Disegno</string>
     <string name="title_draw_area">AREA %1$s</string>

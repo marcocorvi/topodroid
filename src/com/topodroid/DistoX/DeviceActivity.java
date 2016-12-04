@@ -273,7 +273,7 @@ public class DeviceActivity extends Activity
     // TDLog.Debug("device activity update list" );
     // mList.setAdapter( mArrayAdapter );
     mArrayAdapter.clear();
-    if ( TDSetting.mLevelOverExperimental ) { // FIXME TD_DistoX
+    if ( TDSetting.mLevelOverExperimental ) { // FIXME VirtualDistoX
       mArrayAdapter.add( "X000" );
     }
     if ( mApp.mBTAdapter != null ) {
@@ -333,7 +333,7 @@ public class DeviceActivity extends Activity
       int k = buf.lastIndexOf(" ");
       String[] vals = item.toString().split(" ", 3 );
       String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
-      // String address = vals[2]; // FIXME TD_DistoX
+      // String address = vals[2]; // FIXME VirtualDistoX
 
       // if ( vals.length != 3 ) { TODO } // FIXME
       // Log.v("DistoX", "Addr/Name <" + vals[2] + ">");
@@ -831,7 +831,7 @@ public class DeviceActivity extends Activity
     if ( ! file.exists() ) {
       Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
     } else {
-      switch ( TopoDroidExporter.importCalibFromCsv( mApp.mDData, filename, mDevice.mAddress ) ) {
+      switch ( TDExporter.importCalibFromCsv( mApp.mDData, filename, mDevice.mAddress ) ) {
         case 0:
           Toast.makeText(this, R.string.import_calib_ok, Toast.LENGTH_SHORT).show();
           break;

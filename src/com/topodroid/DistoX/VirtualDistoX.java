@@ -1,4 +1,4 @@
-/** @file TD_DistoX.java
+/** @file VirtualDistoX.java
  *
  * @author marco corvi
  * @date mar 2016
@@ -33,7 +33,7 @@ import android.preference.PreferenceManager;
 
 import android.util.Log;
 
-public class TD_DistoX 
+public class VirtualDistoX 
 {
   boolean mBound = false; // single client at once
 
@@ -50,7 +50,7 @@ public class TD_DistoX
   {
     octet.data[0] = (byte)( octet.data[0] | mSeqByte );
     mData.add( octet );
-    // Log.v("TD_DistoX", "put octet " + String.format("%02x %02x", octet.data[0], mSeqByte ) );
+    // Log.v("DistoX", "VD put octet " + String.format("%02x %02x", octet.data[0], mSeqByte ) );
     mSeqByte = (byte)( ( mSeqByte == 0 )? 0x80 : 0x00 );
   }
 
@@ -59,7 +59,7 @@ public class TD_DistoX
   // starting by startService()
   public void startServer( Context ctx )
   {
-    Log.v("TD_DistoX", "TD server: start ");
+    // Log.v("DistoX", "VD server: start ");
     mSharedPrefs = PreferenceManager.getDefaultSharedPreferences( ctx );
     loadCalibration();
     mData = new LinkedList< MemoryOctet >();
@@ -68,14 +68,14 @@ public class TD_DistoX
 
   public void stopServer( Context ctx )
   {
-    Log.v("TD_DistoX", "TD server: stop ");
+    // Log.v("DistoX", "VD server: stop ");
     stopServiceThread();
     saveCalibration();
   }
 
   public void bindServer()
   {
-    // Log.v("TD_DistoX", "TD server: bind. bound: " + mBound );
+    // Log.v("DistoX", "VD server: bind. bound: " + mBound );
     if ( ! mBound ) {
       mBound = true;
       startIOThread();
@@ -84,7 +84,7 @@ public class TD_DistoX
 
   public boolean unbindServer()
   {
-    // Log.v("TD_DistoX", "TD server: unbind. bound: " + mBound );
+    // Log.v("DistoX", "VD server: unbind. bound: " + mBound );
     mBound = false;
     stopIOThreads();
     return true;
@@ -101,14 +101,14 @@ public class TD_DistoX
 
   DataInputStream  getInputStream()
   { 
-    // Log.v("TD_DistoX", "TD server: get input stream from " + ((mClientFromServer==null)?"null":"non-null") );
+    // Log.v("DistoX", "VD server: get input stream from " + ((mClientFromServer==null)?"null":"non-null") );
     if ( mClientFromServer != null ) return new DataInputStream( mClientFromServer );
     return null;
   }
 
   DataOutputStream getOutputStream()
   { 
-    // Log.v("TD_DistoX", "TD server: get output stream from " + ((mServerFromClient==null)?"null":"non-null") );
+    // Log.v("DistoX", "VD server: get output stream from " + ((mServerFromClient==null)?"null":"non-null") );
     if ( mServerFromClient != null ) return new DataOutputStream( mServerFromClient );
     return null;
   } 
@@ -122,7 +122,7 @@ public class TD_DistoX
 
   private void startIOThread()
   {
-    Log.v("TD_DistoX", "TD server: start I/O thread");
+    // Log.v("DistoX", "VD server: start I/O thread");
     mServerToClient = new PipedOutputStream();
     mClientToServer = new PipedInputStream();
     mClientFromServer = new PipedInputStream();
@@ -139,7 +139,7 @@ public class TD_DistoX
         while ( ! mCmdDone ) {
           try {
             byte b = (byte)dis.read(); // Byte();
-            // Log.v("TD_DistoX", "I/O on wait ack. recv " + String.format("0x%02x", b) );
+            // Log.v("DistoX", "VD I/O on wait ack. recv " + String.format("0x%02x", b) );
             switch ( b & 0x3f ) {
               case 0x30: // calib off
                 mCalibMode = false;
@@ -176,13 +176,13 @@ public class TD_DistoX
                 for ( int k = 1; k<259; ++k ) b = (byte)dis.read(); // Byte();
                 break;
               default: // ack (1 byte)
-                // Log.v("TD_DistoX", "I/O ack recv " + String.format("0x%02x", b) );
+                // Log.v("DistoX", "VD I/O ack recv " + String.format("0x%02x", b) );
                 // ack = ( b & 0x80 ) | 0x55;
                 mData.poll(); // pollFirst(); // remove head of queue
                 mIOWaitAck = false;
             }
           } catch ( IOException e ) { 
-            TDLog.Error("TD_DistoX I/O read error " + e.getMessage() );
+            TDLog.Error("VD I/O read error " + e.getMessage() );
           }
         }
       }
@@ -202,7 +202,7 @@ public class TD_DistoX
             octet = mData.peek(); // peekFirst(); // get head of queue
             if ( octet != null ) {
               try {
-                // Log.v("TD_DistoX", "I/O write octet " + String.format("%02x %02x %02x %02x %02x %02x %02x %02x",
+                // Log.v("DistoX", "VD I/O write octet " + String.format("%02x %02x %02x %02x %02x %02x %02x %02x",
                 //   octet.data[0], octet.data[1], octet.data[2], octet.data[3], octet.data[4], octet.data[5],
                 //   octet.data[6], octet.data[7] ) );
                 dos.write( octet.data, 0, 8 );
@@ -211,11 +211,11 @@ public class TD_DistoX
                   mIOWaitAck = true;
                 }
               } catch ( IOException e ) {
-                TDLog.Error("TD_DistoX I/O write error " + e.getMessage() );
+                TDLog.Error("VD I/O write error " + e.getMessage() );
                 stopIOThreads();
               }
             } else {
-              // Log.v("TD_DistoX", "I/O no octet to write: sleep");
+              // Log.v("DistoX", "VD I/O no octet to write: sleep");
               try { Thread.sleep( 500 ); } catch ( InterruptedException e ) { }
             }
           }
@@ -274,7 +274,7 @@ public class TD_DistoX
       mCount = 0;
       mServiceThreadDone = false;
       while ( ! mServiceThreadDone ) {
-        // Log.v("TD_DistoX", "service thread running. count " + mCount );
+        // Log.v("DistoX", "VD service thread running. count " + mCount );
         distance = data_available( dataG, dataM );
         if ( distance >= 0 ) {
           if ( ! mSilentMode ) {
@@ -294,14 +294,14 @@ public class TD_DistoX
 
   void startServiceThread()
   {
-    Log.v("TD_DistoX", "TD server: start service thread" );
+    // Log.v("DistoX", "VD server: start service thread" );
     mServiceThread = new ServiceThread();
     mServiceThread.start();
   }
 
   void stopServiceThread()
   {
-    Log.v("TD_DistoX", "TD server: stop service thread" );
+    // Log.v("DistoX", "VD server: stop service thread" );
     if ( mServiceThread == null ) return;
     mServiceThreadDone = true;
     try {

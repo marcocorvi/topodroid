@@ -681,6 +681,7 @@
 
     <string name="title_current_station">جایگاه ها ذخیره شد</string>
     <string name="title_device">DistoX دستگاه</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">اتصال به دستگاه DistoX ... انتظار</string>
     <!-- TODO string name="title_draw">Draw</string -->
     <!-- TODO string name="title_draw_area">AREA %1$s</string -->

@@ -317,7 +317,7 @@ public class DistoXProtocol
     int min_available = ( mDevice.mType == Device.DISTO_X000)? 8 : 1; // FIXME 8 should work in every case
 
     // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet no-timeout " + (no_timeout?"no":"yes") );
-    // Log.v( "TD_DistoX", "Proto read packet no-timeout " + (no_timeout?"no":"yes") );
+    // Log.v( "DistoX", "VD Proto read packet no-timeout " + (no_timeout?"no":"yes") );
     try {
       final int maxtimeout = 8;
       int timeout = 0;
@@ -334,7 +334,7 @@ public class DistoXProtocol
             ++ timeout;
             try {
               // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
-              // Log.v( "TD_DistoX", "Proto read packet sleep " + timeout + "/" + maxtimeout );
+              // Log.v( "DistoX", "VD Proto read packet sleep " + timeout + "/" + maxtimeout );
               Thread.sleep( 100 );
             } catch (InterruptedException e ) {
               TDLog.Error( "Proto read packet InterruptedException" + e.toString() );
@@ -343,14 +343,14 @@ public class DistoXProtocol
         }
       }
       // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet available " + available );
-      // Log.v( "TD_DistoX", "Proto read packet available " + available );
+      // Log.v( "DistoX", "VD Proto read packet available " + available );
       // if ( available > 0 ) 
       if ( available >= min_available ) {
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
           mIn.readFully( mBuffer, 0, 8 );
         }
         byte seq  = (byte)(mBuffer[0] & 0x80); // sequence bit
-        // Log.v( "TD_DistoX", "read packet seq bit " + String.format("%02x %02x %02x", mBuffer[0], seq, mSeqBit ) );
+        // Log.v( "DistoX", "VD read packet seq bit " + String.format("%02x %02x %02x", mBuffer[0], seq, mSeqBit ) );
         boolean ok = ( seq != mSeqBit );
         mSeqBit = seq;
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet

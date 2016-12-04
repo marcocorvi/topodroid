@@ -954,19 +954,17 @@ public class ShotWindow extends Activity
 
   void doBluetooth( Button b )
   {
-    // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
-    // Log.v( "DistoX", "Reset button, mode " + TDSetting.mConnectionMode );
-    
     if ( ! mDataDownloader.isDownloading() ) {
-      // Log.v( "DistoX", "Reset button, not downloading, mode " + TDSetting.mConnectionMode );
-      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
-        CutNPaste.showPopupBT( this, this, mApp, b );
-      } else {
+      if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
+          || TDSetting.mLevelOverAdvanced 
+          || mApp.distoType() == Device.DISTO_X310 ) {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         mApp.resetComm();
         Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+      } else {
+        CutNPaste.showPopupBT( this, this, mApp, b );
       }
     // } else { // downloading: nothing
     }
@@ -1011,12 +1009,21 @@ public class ShotWindow extends Activity
       int k1 = 0;
       // int k2 = 0;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-        if ( mApp.mDevice != null ) {
-          setConnectionStatus( 2 ); // turn arrow orange
-          // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
+        if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
-          mDataDownloader.doDataDownload( );
+          if ( mDataDownloader.isDownloading() ) {
+            (new DeviceSelectDialog( this, mApp, mDataDownloader )).show();
+          } else {
+            mDataDownloader.doDataDownload( );
+          }
+        } else {
+          if ( mApp.mDevice != null ) {
+            setConnectionStatus( 2 ); // turn arrow orange
+            mDataDownloader.toggleDownload();
+            setConnectionStatus( mDataDownloader.getStatus() );
+            mDataDownloader.doDataDownload( );
+          }
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
         doBluetooth( b );

@@ -708,10 +708,13 @@ public class DrawingCommandManager
     // checkLines();
   }
 
-  void closeLine( DrawingLinePath line ) 
+  void closeLine( DrawingLinePath line )
   {
     synchronized( mCurrentStack ) {
+      SelectionPoint sp = mSelection.getSelectionPoint( line.mLast );
       line.makeClose( );
+      // rebucket last line point
+      mSelection.rebucket( sp );
     }
   }
 
@@ -1572,7 +1575,7 @@ public class DrawingCommandManager
     // Log.v("DistoX", "set range d1 " + d1 + " d2 " + d2 + " C " + cnt + " " + c1 + " " + c2 );
      
     // now make the range sp1 -- sp2 and the hotItem the midpoint
-    SelectionPoint sp = mSelection.getPoint( lp0 ); 
+    SelectionPoint sp = mSelection.getSelectionPoint( lp0 ); 
     sp.mLP1 = lp1;
     sp.mLP2 = lp2;
     sp.mD1 = d1;

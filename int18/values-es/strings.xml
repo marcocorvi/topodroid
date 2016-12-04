@@ -671,6 +671,7 @@
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_device">Dispositivo DistoX</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string>
     <string name="title_draw">Dibujo</string>
     <string name="title_draw_area">Área %1$s</string>

@@ -668,6 +668,7 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Shranjene merilne točke</string>
     <string name="title_device">Naprave DistoX</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">Išči naprave DistoX &#8230; počakaj</string>
     <!-- TODO string name="title_draw">Draw</string -->
     <string name="title_draw_area">POVRŠINA %1$s</string>

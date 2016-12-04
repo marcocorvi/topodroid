@@ -669,6 +669,7 @@
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>
     <string name="title_device">Прилади DistoX</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">Пошук приладів DistoX &#8230; почекайте</string>
     <string name="title_draw">Малювати</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>

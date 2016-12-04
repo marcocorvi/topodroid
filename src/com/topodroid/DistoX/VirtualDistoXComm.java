@@ -1,4 +1,4 @@
-/* @file TD_DistoXComm.java
+/* @file VirtualDistoXComm.java
  *
  * @author marco corvi
  * @date jun 2016
@@ -50,22 +50,22 @@ import android.database.DataSetObserver;
 // import android.widget.Toast;
 import android.util.Log;
 
-public class TD_DistoXComm extends TopoDroidComm
+public class VirtualDistoXComm extends TopoDroidComm
 {
   private String mAddress;
-  private TD_DistoX mServer;
+  private VirtualDistoX mServer;
 
   // private static final byte CALIB_BIT = (byte)0x08;
   // public byte[] mCoeff;
 
 // -----------------------------------------------------------
 
-  TD_DistoXComm( TopoDroidApp app, TD_DistoX server )
+  VirtualDistoXComm( TopoDroidApp app, VirtualDistoX server )
   {
     super( app );
     mAddress   = Device.ZERO_ADDRESS;
     mServer    = server;
-    // Log.v( "TD_DistoX", "TD Comm cstr. address " + mAddress );
+    // Log.v( "DistoX", "VD Comm cstr. address " + mAddress );
   }
 
   // public void resume()
@@ -84,7 +84,7 @@ public class TD_DistoXComm extends TopoDroidComm
   {
     super.disconnectRemoteDevice();
     mServer.unbindServer();
-    // Log.v( "TD_DistoX", "TD comm disconnect remote");
+    // Log.v( "DistoX", "VD comm disconnect remote");
   }
 
   /** Toggle device calibration mode
@@ -94,7 +94,7 @@ public class TD_DistoXComm extends TopoDroidComm
    */
   public boolean toggleCalibMode( String address, int type )
   {
-    Log.v("TD_DistoX", "TD comm toggleCalibMode");
+    // Log.v("DistoX", "VD comm toggleCalibMode");
     boolean ret = false;
     if ( createSocket() ) {
       byte[] result = new byte[4];
@@ -112,7 +112,7 @@ public class TD_DistoXComm extends TopoDroidComm
 
   public boolean writeCoeff( String address, byte[] coeff )
   {
-    Log.v("TD_DistoX", "TD comm writeCoeff");
+    // Log.v("DistoX", "VD comm writeCoeff");
     boolean ret = false;
     if ( createSocket() ) {
       ret = mProtocol.writeCalibration( mCoeff );
@@ -124,7 +124,7 @@ public class TD_DistoXComm extends TopoDroidComm
   // called only by CalibReadTask
   public boolean readCoeff( String address, byte[] coeff )
   {
-    Log.v("TD_DistoX", "TD comm readCoeff");
+    // Log.v("DistoX", "VD comm readCoeff");
     boolean ret = false;
     if ( createSocket() ) {
       ret = mProtocol.readCalibration( coeff );
@@ -137,7 +137,7 @@ public class TD_DistoXComm extends TopoDroidComm
   // called by TopoDroidApp.readMemory
   byte[] readMemory( String address, int addr )
   {
-    Log.v("TD_DistoX", "TD comm readMemory");
+    // Log.v("DistoX", "VD comm readMemory");
     return null;
   }
 
@@ -146,7 +146,7 @@ public class TD_DistoXComm extends TopoDroidComm
 
   public boolean connectDevice( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
-    // Log.v("TD_DistoX", "TD comm connect device");
+    // Log.v("DistoX", "VD comm connect device");
     if ( createSocket() ) {
       startRfcommThread( -2, lister );
       return true;
@@ -156,7 +156,7 @@ public class TD_DistoXComm extends TopoDroidComm
 
   public void disconnect()
   {
-    // Log.v("TD_DistoX", "TD comm disconnectDevice");
+    // Log.v("DistoX", "VD comm disconnectDevice");
     cancelRfcommThread();
     destroySocket();
   }
@@ -176,7 +176,7 @@ public class TD_DistoXComm extends TopoDroidComm
         return false;
       }
     } else {
-      TDLog.Error("TD_DistoX comm create socket - server null");
+      TDLog.Error("VD comm create socket - server null");
     }
     clearServer();
     return false;
@@ -184,32 +184,32 @@ public class TD_DistoXComm extends TopoDroidComm
 
   private void destroySocket()
   {    
-    // Log.v("TD_DistoX", "TD comm destroy socket");
+    // Log.v("DistoX", "VD comm destroy socket");
     clearServer();
   }
 
   private void clearServer()
   {
-    // Log.v("TD_DistoX", "TD comm unbind server");
+    // Log.v("DistoX", "VD comm unbind server");
     if ( mServer != null ) mServer.unbindServer( );
   }
 
 
   protected boolean startRfcommThread( int to_read, Handler /* ILister */ lister ) // FIXME LISTER
   {
-    // Log.v( "TD_DistoX", "start RFcomm thread: to_read " + to_read );
+    // Log.v( "DistoX", "VD start RFcomm thread: to_read " + to_read );
     if ( mServer != null ) {
       if ( mRfcommThread == null ) {
         mRfcommThread = new RfcommThread( mProtocol, to_read, lister );
         mRfcommThread.start();
         // TDLog.Log( TDLog.LOG_COMM, "startRFcommThread started");
       } else {
-        // Log.v("TD_DistoX", "startRFcommThread already running");
+        // Log.v("DistoX", "VD startRFcommThread already running");
       }
       return true;
     } else {
       mRfcommThread = null;
-      // Log.e("TD_DistoX", "startRFcommThread: unbound server");
+      // Log.e("DistoX", "VD startRFcommThread: unbound server");
       return false;
     }
   }
@@ -219,7 +219,7 @@ public class TD_DistoXComm extends TopoDroidComm
   public int downloadData( String address, Handler /* ILister */ lister ) // FIXME LISTER
   {
     int ret = 0;
-    // Log.v("TD_DistoX", "TD comm download data");
+    // Log.v("DistoX", "VD comm download data");
     if ( createSocket() ) {
       // download with timeout
       startRfcommThread( -1, lister );

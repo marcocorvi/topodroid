@@ -111,10 +111,11 @@
      <item name="file">File napló</item>
   </string-array>
 
-  <string-array name="connMode">
+  <!-- TODO string-array name="connMode">
      <item name="batch">Ha szükséges</item>
      <item name="continuous">Folyamatos</item>
-  </string-array>
+     <item name="multi">Multi</item>
+  </string-array -->
 
   <string-array name="sockType">
      <item name="default">Alapbeállítás</item>

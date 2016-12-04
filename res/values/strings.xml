@@ -669,6 +669,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_device">DistoX devices</string>
+    <string name="title_device_select">Select DistoX device</string>
     <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>
     <string name="title_draw">Draw</string>
     <string name="title_draw_area">AREA %1$s</string>

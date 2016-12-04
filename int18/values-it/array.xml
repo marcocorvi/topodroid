@@ -85,6 +85,7 @@
   <string-array name="connMode">
      <item name="batch">A richiesta</item>
      <item name="continuous">Continuo</item>
+     <item name="multi">Con selezione</item>
   </string-array>
 
   <!-- UNUSED string-array name="altitudeType">

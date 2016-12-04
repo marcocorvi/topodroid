@@ -111,6 +111,7 @@ public class DrawingLineDialog extends MyDialog
     mBtnRock  = new MyCheckBox( mContext, size, R.drawable.iz_rock_ok,  R.drawable.iz_rock_no  );
     mBtnClose = new MyCheckBox( mContext, size, R.drawable.iz_close_ok, R.drawable.iz_close_no );
     mReversed.setChecked( mLine.isReversed() );
+    mBtnClose.setChecked( mLine.isPathClosed() );
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams( 
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
@@ -163,6 +164,9 @@ public class DrawingLineDialog extends MyDialog
       }
       if ( mBtnClose.isChecked() ) {
         mParent.closeLine( mLine );
+        mLine.setClosed( true );
+      } else {
+        mLine.setClosed( false );
       }
     } else if ( b == mBtnCancel ) {
       // nothing

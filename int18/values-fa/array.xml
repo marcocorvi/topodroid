@@ -87,10 +87,11 @@
      <item name="file">لاگ فایلی</item>
   </string-array>
 
-  <string-array name="connMode">
+  <!-- TODO string-array name="connMode">
      <item name="batch">در صورت نیاز</item>
      <item name="continuous">مداوم</item>
-  </string-array>
+     <item name="multi">Multi</item>
+  </string-array -->
 
   <string-array name="altitudeType">
     <item name="wgs84">بیضی شکل</item>

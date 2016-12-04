@@ -686,6 +686,7 @@
     <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
     <string name="title_current_station">Gespeicherte Messpunkte</string>
     <string name="title_device">DistoX Geräte</string>
+    <!-- TODO string name="title_device_select">Select DistoX device</string -->
     <string name="title_discover">DistoX Geräte suchen&#8230;</string>
     <string name="title_draw">Zeichnen</string>
     <string name="title_draw_area">FLÄCHE %1$s</string>

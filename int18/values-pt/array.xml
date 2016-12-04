@@ -91,10 +91,11 @@
      <item name="file">Arquivo de log</item>
   </string-array>
 
-  <string-array name="connMode">
+  <!-- TODO string-array name="connMode">
      <item name="batch">Por pedido</item>
      <item name="continuous">Contínuo</item>
-  </string-array>
+     <item name="multi">Multi</item>
+  </string-array -->
 
   <string-array name="sockType">
      <item name="default">Padrão</item>

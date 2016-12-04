@@ -83,13 +83,15 @@ class DataDownloader
     // TDLog.Log( TDLog.LOG_COMM, "**** download data. status: " + mStatus );
     if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH ) {
       tryDownloadData( );
-    } else { // TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS
+    } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS ) {
       if ( TDSetting.mAutoReconnect ) {
         new ReconnectTask( this ).execute();
       } else {
         tryConnect();
       }
       notifyConnectionStatus( mConnected );
+    } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
+      tryDownloadData( );
     }
   }
 
@@ -97,7 +99,7 @@ class DataDownloader
   {
     // Log.v("DistoX", "stop Download Data() connected " + mConnected );
     // if ( ! mConnected ) return;
-    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_CONTINUOUS ) {
+    if ( TDSetting.isConnectionModeBatch() ) {
       mApp.disconnectComm();
       notifyConnectionStatus( false );
     }
@@ -130,7 +132,8 @@ class DataDownloader
   }
 
   // BATCH ON-DEMAND DOWNLOAD
-  private void tryDownloadData( )
+  // non-private to allow the DistoX select dialog
+  void tryDownloadData( )
   {
     // mSecondLastShotId = mApp.lastShotId( );
     if ( mApp.mDevice != null && mApp.mBTAdapter.isEnabled() ) {

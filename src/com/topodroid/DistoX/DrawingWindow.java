@@ -531,7 +531,7 @@ public class DrawingWindow extends ItemDrawer
       dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
       if ( blk.isMultiBad() ) {
         dpath.setPaint( DrawingBrushPaths.fixedRedPaint );
-      } else if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_BATCH && blk.isRecent( mApp.mSecondLastShotId ) ) {
+      } else if ( TDSetting.isConnectionModeBatch() && blk.isRecent( mApp.mSecondLastShotId ) ) {
         dpath.setPaint( DrawingBrushPaths.fixedBluePaint );
       } else {
         dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
@@ -3144,19 +3144,17 @@ public class DrawingWindow extends ItemDrawer
   // this is the same as in ShotWindow
   void doBluetooth( Button b )
   {
-    // TDLog.Log( TDLog.LOG_INPUT, "Reset button, mode " + TDSetting.mConnectionMode );
-    // Log.v( "DistoX", "Reset button, mode " + TDSetting.mConnectionMode );
-    
     if ( ! mDataDownloader.isDownloading() ) {
-      // Log.v( "DistoX", "Reset button, not downloading, mode " + TDSetting.mConnectionMode );
-      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 ) {
-        CutNPaste.showPopupBT( mActivity, this, mApp, b );
-      } else {
+      if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
+          || TDSetting.mLevelOverAdvanced 
+          || mApp.distoType() == Device.DISTO_X310 ) {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         mApp.resetComm();
         Toast.makeText(mActivity, R.string.bt_reset, Toast.LENGTH_SHORT).show();
+      } else {
+        CutNPaste.showPopupBT( mActivity, this, mApp, b );
       }
     // } else { // downloading: nothing
     }
@@ -3265,13 +3263,23 @@ public class DrawingWindow extends ItemDrawer
         setConnectionStatus( 2 );
         resetFixedPaint();
         updateReference();
-        if ( mApp.mDevice == null ) {
-          // DistoXDBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
-          (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
-        } else {
+        if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) { // this piece is same as in ShotWindow
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
-          mDataDownloader.doDataDownload( );
+          if ( mDataDownloader.isDownloading() ) {
+            (new DeviceSelectDialog( this, mApp, mDataDownloader )).show();
+          } else {
+            mDataDownloader.doDataDownload( );
+          }
+        } else {
+          if ( mApp.mDevice == null ) {
+            // DistoXDBlock last_blk = null; // mApp.mData.selectLastLegShot( mApp.mSID );
+            (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
+          } else {
+            mDataDownloader.toggleDownload();
+            setConnectionStatus( mDataDownloader.getStatus() );
+            mDataDownloader.doDataDownload( );
+          }
         }
       } else if ( b == mButton1[k1++] ) { // BLUETOOTH
         doBluetooth( b );

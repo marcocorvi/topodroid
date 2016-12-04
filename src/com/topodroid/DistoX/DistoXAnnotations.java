@@ -104,7 +104,6 @@ public class DistoXAnnotations extends MyDialog // Activity
 
     setContentView(R.layout.distox_annotations);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
-
     setTitle( R.string.title_note );
 
     // mTVtitle  = (TextView) findViewById(R.id.note_title );

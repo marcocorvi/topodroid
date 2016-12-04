@@ -231,10 +231,12 @@
   <string-array name="connMode">
      <item name="batch">On-demand</item>
      <item name="continuous">Continuous</item>
+     <item name="multi">Multi</item>
   </string-array>
   <string-array name="connModeValue">
      <item name="batch">0</item>
      <item name="continuous">1</item>
+     <item name="multi">2</item>
   </string-array>
 
   <string-array name="sockType">

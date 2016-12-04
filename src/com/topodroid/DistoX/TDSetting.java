@@ -137,7 +137,7 @@ class TDSetting
     "DISTOX_SURVEX_EOL",          // 76 survex end of line
     "DISTOX_SURVEX_SPLAY",
     "DISTOX_SURVEX_LRUD",         // 78
-    "DISTOX_SWAL_LR",             // swap Left-Right in compass export
+    "DISTOX_SWAP_LR",             // swap Left-Right in compass export
     "DISTOX_UNSCALED_POINTS",     // 79 unscaled drawing point items
     "DISTOX_UNIT_GRID",           // 80
     // "DISTOX_XTHERION_AREAS",      // 81 save areas a-la xtherion
@@ -253,7 +253,11 @@ class TDSetting
   // DEVICE
   final static int CONN_MODE_BATCH      = 0;      // DistoX connection mode
   final static int CONN_MODE_CONTINUOUS = 1;
+  final static int CONN_MODE_MULTI      = 2;
   static int mConnectionMode    = CONN_MODE_BATCH; 
+
+  static boolean isConnectionModeBatch() { return mConnectionMode != CONN_MODE_CONTINUOUS; }
+
   static boolean mZ6Workaround  = true;
 
   static boolean mAutoReconnect = false;
@@ -613,7 +617,7 @@ class TDSetting
     mWaitData       = tryInt( prefs, key[k++], "250" );      // DISTOX_WAIT_DATA
     mWaitConn       = tryInt( prefs, key[k++], "500" );      // DISTOX_WAIT_CONN
     mZ6Workaround   = prefs.getBoolean( key[k++], true  );   // DISTOX_Z6_WORKAROUND
-    mConnectionMode = tryInt( prefs, key[k++], "0" );        // DISTOX_CONN_MODE choice: 0, 1
+    mConnectionMode = tryInt( prefs, key[k++], "0" );        // DISTOX_CONN_MODE choice: 0, 1, 2
     mAutoPair       = prefs.getBoolean( key[ k++ ], true );  // DISTOX_AUTO_PAIR
     mConnectSocketDelay = tryInt(prefs, key[ k++ ], "0" );   // DISTOX_SOCKET_DELAY
     mAutoReconnect     = prefs.getBoolean( key[k++], false ); // DISTOX_AUTO_RECONNECT

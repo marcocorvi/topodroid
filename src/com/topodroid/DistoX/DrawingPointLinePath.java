@@ -131,6 +131,13 @@ public class DrawingPointLinePath extends DrawingPath
 
   void setClosed( boolean closed ) { mClosed = closed; }
   boolean isClosed() { return mClosed; }
+  boolean isPathClosed() 
+  {
+    if ( mSize < 2 ) return false;
+    float dx = (mFirst.mX - mLast.mX)/3;
+    float dy = (mFirst.mY - mLast.mY)/3;
+    return ( dx*dx + dy*dy < 1.0e-7 );
+  }
 
   void setVisible( boolean visible ) { mVisible = visible; }
   boolean isVisible() { return mVisible; }

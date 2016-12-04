@@ -1,4 +1,4 @@
-/** @file TopoDroidExporter.java
+/** @file TDExporter.java
  *
  * @author marco corvi
  * @date jan 2014
@@ -41,7 +41,7 @@ import java.util.Locale;
 
 import android.util.Log;
 
-class TopoDroidExporter
+class TDExporter
 {
   // =======================================================================
   // CSURVEY EXPORT cSurvey
@@ -1637,7 +1637,7 @@ class TopoDroidExporter
 
   static String exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String filename )
   {
-    // Log.v("DistoX", "export as compass: " + filename );
+    // Log.v("DistoX", "export as compass: " + filename + " swap LR " + TDSetting.mSwapLR );
     List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
     try {
       TDPath.checkPath( filename );
