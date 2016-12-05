@@ -67,18 +67,18 @@
     <!-- UNUSED string name="connect_failed">Помилка з'єднання</string -->
     <!-- UNUSED string name="data">дані</string -->
     <string name="using">Використовую %1$s</string>
-    <string name="calib_error">Помилка: %1$.4f градусів</string>
+    <string name="calib_error">Серед. помилка: %1$.4f градусів</string>
     <string name="calib_stddev">Помилка ст-відх: %1$.4f градусів</string>
     <string name="calib_max_error">Макс. помилка: %1$.4f градусів</string>
     <string name="calib_ave_std">Точність: %1$.4f +- %2$.4f градусів</string>
     <string name="calib_precision">Точність</string>
     <string name="calib_iter">Ітерації: %1$d</string>
-    <!-- NO string name="calib_reset">Reset DistoX calibration ?</string -->
+    <string name="calib_reset">Скинути калібрування DistoX?</string>
 
     <string name="algorithm">Алгоритм розрахунку:</string>
     <string name="auto">авто</string>
     <string name="linear">лінійний</string>
-    <string name="non_linear">не-лінійний</string>
+    <string name="non_linear">нелінійний</string>
     <!-- NO string name="algo_minimum">minimum</string -->
 
     <string name="device_algo_failed">Алгоритм автовизначення не спрацював\nВикористовую лінійний алгоритм</string>
@@ -132,11 +132,11 @@
     <string name="import_none">Відсутній файл для импорту</string>
     <string name="import_failed">Не вдалося імпортувати файл</string>
     <string name="file_not_found">Файл не виявлено</string>
-    <!-- TODO string name="import_calib_no_header">Calib. file: bad header</string -->
-    <!-- TODO string name="import_calib_already">Calib. already exists</string -->
-    <!-- TODO string name="import_calib_mismatch">Calib.-device mismatch</string -->
-    <!-- TODO string name="import_calib_no_data">Calib. file: no data</string -->
-    <!-- TODO string name="import_calib_io_error">Calib. file: read error</string -->
+    <string name="import_calib_no_header">Файл каліб.: Поганий заголовок</string>
+    <string name="import_calib_already">Каліб. уже існує</string>
+    <string name="import_calib_mismatch">Каліб.-невідповідність приладу</string>
+    <string name="import_calib_no_data">Каліб. файл: відсутні дані</string>
+    <string name="import_calib_io_error">Каліб. файл: помилка читання</string>
     <string name="import_calib_ok">Калібрування успішно імпортовано</string>
     <string name="import_zip_ok">Успішно імпортований zip файл</string>
     <string name="import_zip_wait">Імпорт zip файлу може зайняти багато часу. Почекайте &#8230;</string>
@@ -203,9 +203,9 @@
     <string name="in">внутрішній</string>
     <!-- UNUSED string name="none">none</string -->
     <string name="barrier_add">Приховати нитку ходу після цього пікету?</string>
-    <string name="barrier_del">Продовжити показ середньої лінії?</string>
+    <string name="barrier_del">Показати нитку ходу після цього пікету?</string>
     <string name="hidden_add">Приховати нитку ходу до цього пікету</string>
-    <string name="hidden_del">Показати середню лінію</string>
+    <string name="hidden_del">Показати нитку ходу до цього пікету</string>
     <string name="splays_toggle">Показати/приховати бок. заміри</string>
     <string name="fixed">фіксований репер</string>
     <string name="painted">нарисованний</string>
@@ -214,7 +214,7 @@
     <string name="bad_line">Недопустимий тип лінії</string>
     <string name="bad_point">Недопустимий тип точки</string>
 
-    <string name="no_bt">Немає Bluetoothу</string>
+    <string name="no_bt">Нема Bluetooth</string>
     <string name="no_calib">Відсутнє калібрування</string>
     <string name="no_calibration">Калібрування не вибране</string>
     <string name="no_capture_app">Відсутній додаток для фото</string>
@@ -247,7 +247,7 @@
     <string name="menu_attach">З\'ЄДНАТИ</string>
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <string name="menu_close">ЗАКРИТИ</string>
     <string name="menu_delete">Видалити</string>
     <string name="menu_detach">Від\'єднати</string>
     <string name="menu_display">Показати</string>
@@ -256,9 +256,9 @@
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_recover">Відновити</string>
     <string name="menu_reload">Перезавантажити</string>
-    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
+    <string name="menu_rename_delete">ПЕРЕЙМЕНУВАТИ/ВИДАЛИТИ</string>
     <string name="menu_rename">ПЕРЕЙМЕНУВАТИ</string>
-    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
+    <string name="menu_switch">ПЕРЕКЛЮЧИТИ/ЗАКРИТИ</string>
     <string name="menu_help">Допомога</string>
     <string name="menu_join_survey">СПІЛ. ЗЙОМКА</string>
     <string name="menu_logs">Журнал</string>
@@ -351,7 +351,7 @@
     <string name="shot_info">Введіть дані пікета</string>
     <!-- UNUSED string name="shot_length">довжина</string -->
     <string name="shot_note">замітки</string>
-    <!-- TODO string name="shot_not_found">Found no shot</string -->
+    <string name="shot_not_found">Сегмент не знайдений</string>
     <string name="shot_reverse">розвернути</string>
     <string name="shot_to">№ НА</string>
 
@@ -409,7 +409,7 @@
     <string name="stat_length">Довжина %1$.1f %2$s</string>
     <string name="stat_loop">Петлі %1$d</string>
     <string name="stat_origin">Нульовий пікет: %1$s</string>
-    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
+    <string name="stat_azimuth">Азимут проекції розрізу-розгортки: %1$.1f</string>
     <string name="stat_shot">Пікети  %1$d,   Дубльовані %2$d,   Поверхня %3$d</string>
     <string name="stat_splay">Бокові заміри %1$d</string>
     <string name="stat_station">Пікети %1$d</string>
@@ -435,7 +435,7 @@
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Помилка зчитування пам\'яті DistoX</string>
     <string name="distox_err_headtail_io">DistoX помилка I/O </string>
-    <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
+    <string name="distox_err_headtail_eof">Помилка зчитування ознаки закінчення файлу DistoX</string>
     <string name="distox_err_connected">Прилад уже підключений</string>
 
     <!-- UNUSED string name="ask_close">Закрити TopoDroid?</string -->
@@ -446,7 +446,7 @@
     <!-- UNUSED string name="button_add"       >Додати  </string -->
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Відміна    </string>
-    <!-- TODO string name="button_close"     >Close     </string -->
+    <string name="button_close"     >Закрити     </string>
     <string name="button_convert"   >Конвертув.</string>
     <string name="button_current"   >Поточний   </string>
     <string name="button_delete"    >Видалити   </string>
@@ -504,7 +504,7 @@
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
-    <!-- NO string name="title_sketch_new">New 3D sketch</string -->
+    <string name="title_sketch_new">Новая 3D модель</string>
     <!-- UNUSED string name="title_sketch_edit">Змінити 3D поверхню</string -->
     <string name="title_sketch_shot">Новий пікет</string>
     <string name="title_sketch_refs">Режим показу</string>
@@ -558,10 +558,10 @@
     <!-- UNUSED string name="help_manual">Інструкція</string -->
     <string name="help_measure">Виміряти відстань</string>
 
-    <!-- TODO string name="help_close">Close window</string -->
+    <string name="help_close">Закрити вікно</string>
     <string name="help_coeff">Показать коэфіцієнти калібрування</string>
     <string name="help_continue">Продовжити малювати лінію</string>
-    <!-- NO string name="help_contour">Contour editing</string -->
+    <string name="help_contour">Редагувати контури</string>
     <string name="help_current_station">Збережені пікети</string>
     <string name="help_azimuth">Проекція розгортки на референс-азимут</string>
     <string name="help_device">Вікно управління пристроями</string>
@@ -576,7 +576,7 @@
     <string name="help_info_topodroid">відомості про TopoDroid</string>
     <string name="help_download">Завантажити дані з DistoX</string>
     <!-- UNUSED string name="help_splay">Автоматично присвоювати номер пікета боковим замірам</string -->
-    <string name="help_display">Вибрати режим перегляду</string>
+    <string name="help_display">Вибрати режим відображення даних</string>
     <string name="help_display_calib">Режим показу видалених пікетов</string>
     <string name="help_validate">Перевірити калібрування</string>
     <string name="help_overview">Перегляд карти</string>
@@ -596,8 +596,8 @@
     <string name="help_edit">Перейти в режим редагування</string>
     <string name="help_refs">Вид вікна абрису</string>
     <string name="help_rename">Змінити назву зйомки</string>
-    <!-- FIXME string name="help_plot_rename">Перейменувати абрис</string -->
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <string name="help_plot_rename">Перейменувати/Видалити абрис</string>
+    <string name="help_plot_switch">Переключити абрис</string>
     <string name="help_stats">Інструмент статистики по зйомці</string>
     <string name="help_save_plot">Экспорт абрисів</string>
     <!-- UNUSED string name="help_tdr2th2">Конвертувати бінарні файли абрисів в формат th2</string -->
@@ -607,7 +607,7 @@
     <string name="help_redo">Повтор останньої дії</string>
     <string name="help_symbol_plot">Вибрати інструмент малювання</string>
     <string name="help_delete_item">Видалити елемент абрису</string>
-    <!-- TODO string name="help_range">Moving a portion of line</string -->
+    <string name="help_range">Помістити сегмент лінії</string>
     <!-- UNUSED string name="help_clear">Очистити вибір</string -->
     <string name="help_eraser">Стерти малюнки</string>
     <string name="help_previous">Попередній вибраний елемент</string>
@@ -645,7 +645,7 @@
     <string name="help_compute">Розрахувати калібрування</string>
     <string name="help_write">Записати коефіцієнти калібрування в DistoX</string>
 <!-- FIXME_SKETCH_3D -->
-    <!-- UNUSED string name="help_refs_model">Режим перегляду</string -->
+    <!-- UNUSED string name="help_refs_model">Режим відображення</string -->
     <string name="help_one_model">Вмістити 3d модель в екран</string>
     <string name="help_surface">Створити поверхню</string>
     <string name="help_save_model">Експорт 3D моделі</string>
@@ -665,11 +665,11 @@
     <string name="title_calib">Калібрування</string>
     <string name="title_coverage">Калібрування и розподіл даних</string>
     <string name="title_coeff">Калібрувальні коефіцієнти</string>
-    <!-- NO string name="title_contour">Contour</string -->
+    <string name="title_contour">Контур</string>
     <!-- UNUSED string name="title_coord">Введіть координати точки:</string -->
     <string name="title_current_station">Збережені пікети</string>
     <string name="title_device">Прилади DistoX</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
+    <string name="title_device_select">Виберіть прилад DistoX</string>
     <string name="title_discover">Пошук приладів DistoX &#8230; почекайте</string>
     <string name="title_draw">Малювати</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
@@ -679,11 +679,11 @@
     <string name="title_erase">Видалити</string>
     <string name="title_fixed">Гео-прив\'язані точки</string>
     <string name="title_fixed_edit">Редагувати прив\'язку</string>
-    <string name="title_fixed_import">Імпортувати фіксовану точку</string>
-    <string name="title_fixed_gps">Фіксована точка: GPS</string>
-    <string name="title_fixed_add">Фіксована точка: вставити</string>
+    <string name="title_fixed_import">Імпортувати координати точки</string>
+    <string name="title_fixed_gps">Гео-прив\'язка пікета: GPS</string>
+    <string name="title_fixed_add">Гео-прив\'язка пікета: вручну</string>
     <string name="title_manual">TopoDroid Інструкція</string>
-    <string name="title_mode">Режим перегляду</string>
+    <string name="title_mode">Режим відображення</string>
     <string name="title_move">Рухомий</string>
     <string name="title_note">Замітки</string>
     <string name="title_photo">Фото/Заміри</string>
@@ -711,7 +711,7 @@
 
   <string name="pref_cat_survey">Налаштування топозйомки </string>
   <string name="pref_cat_drawing">Налаштування малювання </string>
-  <string name="pref_cat_import_export">Імпорт-Експорт</string>
+  <string name="pref_cat_import_export">ІМПОРТ-ЕКСПОРТ</string>
   <string name="pref_cat_calib">Налаштування Калібрування</string>
   <string name="pref_cat_device">Налаштування Пристрою</string>
   <string name="pref_cat_sketch">Налаштування Абрису</string>
@@ -744,17 +744,17 @@
   <string name="pref_leg_shots_summary">Мінімальна к-сть повторюваних замірів на відрізку</string>
   <string name="pref_station_prefix_title">Експортувати префікси пікетов</string>
   <string name="pref_station_prefix_summary">Експортувати префікси пікетів для cSurvey</string>
-  <string name="pref_ortho_lrud_title">Кут променю для ЛПВН</string>
-  <string name="pref_ortho_lrud_summary">Мінімальний кут між бок. променем и напр. на пікет для признания ЛПВН</string>
-  <string name="pref_ortho_lrud_message">ЛПВН мsн. кут між пікетом і бок. променем</string>
-  <string name="pref_survex_eol_title">Переривання лінії Survex/Topo</string>
+  <string name="pref_ortho_lrud_title">Мін. кут бок. заміру для ЛПВН</string>
+  <string name="pref_ortho_lrud_summary">Мін. кут між бок. заміром і вектором для розрахунку ЛПВН при експорті</string>
+  <string name="pref_ortho_lrud_message">мін. кут між бок. заміром і вектором для розрахунку ЛПВН</string>
+  <string name="pref_survex_eol_title">Закінчення рядка для Survex/Topo</string>
   <string name="pref_survex_eol_summary">Формат кінця рядка Survex/Topo</string>
   <string name="pref_survex_splay_title">Кінцевий пікет променя Survex</string>
   <string name="pref_survex_splay_summary">Додати пікет ДО к бок. замірам в Survex</string>
   <string name="pref_survex_lrud_title">Survex ЛПВН</string>
   <string name="pref_survex_lrud_summary">Додати ЛПВН в при експорті в формат Survex</string>
-  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
-  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
+  <string name="pref_svg_grid_title">SVG сітка</string>
+  <string name="pref_svg_grid_summary">Додати сітку в SVG експорт</string>
 
   <string name="pref_sock_type_title">Тип з\'єднання</string>
   <string name="pref_sock_type_summary">Socket створити</string>
@@ -770,8 +770,8 @@
   <string name="pref_wait_shot_summary">Час очікування після виконання замцру [мс]</string>
   <string name="pref_wait_data_title">Пауза скачування [мс]</string>
   <string name="pref_wait_data_summary">Час очікування після скачування даних [мс]</string>
-  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
-  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
+  <string name="pref_wait_conn_title">Пауза готовності данних [ms]</string>
+  <string name="pref_wait_conn_summary">Час очікування до наступної спроби скачування данних [ms]</string>
   <string name="pref_conn_mode_title">Типи підключення</string>
   <string name="pref_conn_mode_summary">Типи підключення до DistoX</string>
   <string name="pref_auto_reconnect_title">Авто підключення</string>
@@ -785,8 +785,8 @@
   <string name="pref_z6_workaround_title">Рішення для Z6</string>
   <string name="pref_z6_workaround_summary">Рішення для завантаження даних з телефонів Z6</string>
   <string name="pref_crs_title">CRS система координат </string>
-  <string name="pref_crs_summary">CRS ім\'я</string>
-  <string name="pref_crs_message">Введіть ім\'я CRS як в Proj4</string>
+  <string name="pref_crs_summary">CRS назва</string>
+  <string name="pref_crs_message">Введіть назву CRS як в Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Eсереднення даних GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Використовувати GPS Averaging?</string -->
 
@@ -831,7 +831,7 @@
   <string name="pref_dip_thr_summary">Максимально допустиме відхилення кута магнітного поля при замірі</string>
   <string name="pref_dip_thr_message">Максимально допустиме відхилення кута магнітного поля при замірі</string>
 
-  <string name="pref_leg_title">Допустиме рохходження замірів відрізків</string>
+  <string name="pref_leg_title">Допустиме рохходження повторних замірів</string>
   <string name="pref_leg_summary">Допустиме розходження в повторних вимірах між пікетами</string>
   <string name="pref_leg_message">Допустиме розходження в повторних вимірах між пікетами</string>
   <string name="pref_backsight_title">зворотний замір</string>
@@ -866,7 +866,7 @@
   <string name="pref_hthr_title">Поріг кута горизонтального перерізу</string>
   <string name="pref_hthr_summary">Поріг кута горизонтального перерізу</string>
   <string name="pref_hthr_message">Кут при перевишенні якого переріз стає горизонтальним</string>
-  <string name="pref_bitmap_scale_title">масштаб PNG</string>
+  <string name="pref_bitmap_scale_title">Масштаб PNG</string>
   <string name="pref_bitmap_scale_summary">Масштабний коефіцієнт абрису при експорті в PNG</string>
   <string name="pref_bitmap_scale_message">Масштабний коефіцієнт абрису при експорті в PNG</string>
   <string name="pref_bitmap_bgcolor_title">Колір фону PNG</string>
@@ -877,8 +877,8 @@
   <string name="pref_dxf_scale_title">Масштаб абрису в DXF</string>
   <string name="pref_dxf_scale_summary">Фактор масштаба абрису DXF</string>
   <string name="pref_dxf_scale_message">Масштабурючий фактор при експорті абрису в DXF</string>
-  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
-  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
+  <string name="pref_dxf_blocks_title">Точки бок. замірів в DXF</string>
+  <string name="pref_dxf_blocks_summary">Точки закінченнь бокових замірів в екскорті в DXF</string>
   <string name="pref_thumbnail_title">Розмір мініатюри</string>
   <string name="pref_thumbnail_summary">Розмір картинки мініатюри</string>
   <string name="pref_thumbnail_message">Розмір картинки мініатюри</string>
@@ -891,7 +891,7 @@
   <string name="pref_drawing_unit_title">Розмір символів точок</string>
   <string name="pref_drawing_unit_summary">Розмір символів точок</string>
   <string name="pref_drawing_unit_message">Базовий розмір символів точок [потрібен перезапуск програми]</string>
-  <string name="pref_unscaled_points_title">Не-збільшувані значки точок</string>
+  <string name="pref_unscaled_points_title">Не-масштабовані значки точок</string>
   <string name="pref_unscaled_points_summary">Не масштабувати знаки точок</string>
   <string name="pref_segment_title">Крок точок в лінію</string>
   <!-- UNUSED string name="pref_segment_summary">Крок точок на лінії</string -->
@@ -928,7 +928,7 @@
   <string name="pref_dot_radius_title">Радіус зелених точок</string>
   <!-- UNUSED string name="pref_dot_radius_summary">Розмір зелених точок</string -->
   <string name="pref_dot_radius_message">Розмір зелених точок</string>
-  <string name="pref_line_thickness_title">Товщина лінії</string>
+  <string name="pref_line_thickness_title">Товщина ліній</string>
   <string name="pref_line_thickness_summary">Товщина ліній</string>
   <string name="pref_line_thickness_message">Товщина ліній</string>
   <string name="pref_fixed_thickness_title">Товщина нитки ходу</string>
@@ -951,8 +951,8 @@
   <string name="pref_loopClosure_summary">Розкидання невязок в петлі</string>
   <!-- UNUSED string name="pref_splayExtend_title">Розгортка бокового заміру</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Розраховувати розгортку бокового заміру</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <string name="pref_swapLR_title">Розвернути ЛП в Компас</string>
+  <string name="pref_swapLR_summary">Розвернути місцями Л і П при експорті в Компас</string>
   <string name="pref_LRExtend_title">Оцінити розмір Ліво/Право </string>
   <string name="pref_LRExtend_summary">Оцінити розмір Ліво/Право (Compass/VisualTopo імпорт)</string>
 
@@ -960,8 +960,8 @@
   <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
   <string name="pref_section_stations_title">Пікети на поперечних перерізах</string>
   <string name="pref_section_stations_summary">Переріз пікета привязки</string>
-  <string name="pref_station_size_title">Розмір номера пікетів</string>
-  <string name="pref_station_size_summary">Розмір номера пікетів</string>
+  <string name="pref_station_size_title">Розмір номерів пікетів</string>
+  <string name="pref_station_size_summary">Розмір номерів пікетів</string>
   <string name="pref_station_size_message">Розмір подписи пікетів</string>
   <string name="pref_zoom_controls_title">Відображення кнопки зума</string>
   <string name="pref_zoom_controls_summary">Управління зумом через мультитач</string>
@@ -972,15 +972,15 @@
   <string name="pref_recent_nr_title">К-сть недавніх інструментів</string>
   <string name="pref_recent_nr_summary">К-сть елементів в списку недавно використаних інструментів</string>
   <string name="pref_area_border_title">Прозорість границь області</string>
-  <string name="pref_area_border_summary">Прозорість границь області за замовчуванням</string>
+  <string name="pref_area_border_summary">Рисовати границі областей прозорими</string>
   <string name="pref_auto_section_pt_title">Точки перерізів</string>
   <string name="pref_auto_section_pt_summary">Додати точки перерізів до линій перерізів</string>
 
   <string name="pref_sketchUsesSplays_title">Абрис бокових замірів</string>
   <string name="pref_sketchUsesSplays_summary">Поверхня абрису використовує бокові заміри</string>
-  <string name="pref_sketchLineStep_title">Max side</string>
+  <string name="pref_sketchLineStep_title">Mаксимальний розмір сторони</string>
   <string name="pref_sketchLineStep_summary">Макс размір сторони трикутників</string>
-  <string name="pref_sketchLineStep_message">Макс размір сторони трикутників [m]</string>
+  <string name="pref_sketchLineStep_message">Макс размір сторони трикутників [м]</string>
   <string name="pref_sketchBorderStep_title">Крок границі</string>
   <string name="pref_sketchBorderStep_summary">Відстань між точками редагування лінії</string>
   <string name="pref_sketchBorderStep_message">Відстань між точками редагування лінії</string>
@@ -1075,7 +1075,7 @@
 \n\nДопомога: кнопка МЕНЮ
 \n\nВідвідайте http://sites.google.com/site/speleoapps з інструкцією і додатковими програмами.
 \nПрисилайте ваші пропозиції, питання, повідомлення про помилки, на marco.corvi@gmail.com
-\nПереклад на Українську мову - Козій Владислав, присилайте листи koziy.vladyslav@gmail.com
+\nПереклад на Українську мову - Козій Владислав, надсилайте листи koziy.vladyslav@gmail.com
 \n
     </string>
 
