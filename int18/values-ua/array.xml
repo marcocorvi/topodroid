@@ -2,17 +2,17 @@
 
 <resources>
 
-  <!-- FIXME string-array name="unitGrid">
+  <string-array name="unitGrid">
      <item name="meter">метри</item>
      <item name="yard">ярди</item>
-     <item name="two_tf">2 feet</item>
-  </string-array -->
+     <item name="two_tf">2 фута</item>
+  </string-array>
 
-  <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
-     <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
-  </string-array -->
+  <string-array name="loopClosure">
+     <item name="none">Викл.</item>
+     <item name="normal">Звичайний</item>
+     <item name="triangles">Tріангуляція</item>
+  </string-array>
 
   <string-array name="wallsType">
      <item name="none">Немає</item>
@@ -83,11 +83,11 @@
      <item name="file">Файл журналу</item>
   </string-array>
 
-  <!-- TODO string-array name="connMode">
+  <string-array name="connMode">
      <item name="batch">На вимогу</item>
      <item name="continuous">Постійний</item>
-     <item name="multi">Multi</item>
-  </string-array -->
+     <item name="multi">Мульти</item>
+  </string-array>
 
   <!-- UNUSED string-array name="altitudeType">
     <item name="wgs84">WGS84 еліпсоїд</item>
@@ -164,14 +164,14 @@
 
   <string-array name="calibAlgo">
      <item name="auto">автоматично</item>
-     <item name="linear">лінійно</item>
-     <item name="nonlinear">не-лінійно</item>
+     <item name="linear">лінійний</item>
+     <item name="nonlinear">нелінійний</item>
   </string-array>
 
-  <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
-     <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
-  </string-array -->
+  <string-array name="rawCData">
+     <item name="none">Ні</item>
+     <item name="dec">Десятковий</item>
+     <item name="hex">Шiстнадцятковий</item>
+  </string-array>
 
 </resources>

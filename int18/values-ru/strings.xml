@@ -667,7 +667,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_device">Устройства DistoX</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
+    <string name="title_device_select">Выберите прибор DistoX</string>
     <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
     <string name="title_draw">Рисовать</string>
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
@@ -769,7 +769,7 @@
   <string name="pref_wait_shot_summary">Время ожидания после выполнения измерения [мс]</string>
   <string name="pref_wait_data_title">Пауза скачивания [мс]</string>
   <string name="pref_wait_data_summary">Время ожидания после скачивания данных [мс]</string>
-  <string name="pref_wait_conn_title">Пауза готовноти данных [мс]</string>
+  <string name="pref_wait_conn_title">Пауза готовности данных [мс]</string>
   <string name="pref_wait_conn_summary">Время ожидания до следующей попытки скачивания данных [мс]</string>
   <string name="pref_conn_mode_title">Типы подключения</string>
   <string name="pref_conn_mode_summary">Типы подключения к DistoX</string>
@@ -950,8 +950,8 @@
   <string name="pref_loopClosure_summary">Разбрасывание невязок в петле</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <string name="pref_swapLR_title">Развернуть ЛП в Compass</string>
+  <string name="pref_swapLR_summary">Поменять местами Л и П при экспорте в Compass</string>
   <string name="pref_LRExtend_title">Оценить размер Лево/Право </string>
   <string name="pref_LRExtend_summary">Оценить размер Лев/Пр (Compass/VisualTopo импорт)</string>
 
