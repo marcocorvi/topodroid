@@ -113,7 +113,7 @@ class SymbolEnableDialog extends MyDialog
     mAreaAdapter  = new SymbolAdapter( mContext, R.layout.symbol, new ArrayList<EnableSymbol>() );
 
     if ( TDSetting.mLevelOverBasic ) {
-      SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
+      SymbolPointLibrary point_lib = BrushManager.mPointLib;
       if ( point_lib == null ) return false;
       int np = point_lib.mSymbolNr;
       for ( int i=0; i<np; ++i ) {
@@ -121,7 +121,7 @@ class SymbolEnableDialog extends MyDialog
       }
     }
 
-    SymbolLineLibrary line_lib   = DrawingBrushPaths.mLineLib;
+    SymbolLineLibrary line_lib   = BrushManager.mLineLib;
     if ( line_lib == null ) return false;
     int nl = line_lib.mSymbolNr;
     for ( int j=0; j<nl; ++j ) {
@@ -129,7 +129,7 @@ class SymbolEnableDialog extends MyDialog
     }
 
     if ( TDSetting.mLevelOverBasic ) {
-      SymbolAreaLibrary area_lib   = DrawingBrushPaths.mAreaLib;
+      SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
       if ( area_lib == null ) return false;
       int na = area_lib.mSymbolNr;
       for ( int k=0; k<na; ++k ) {
@@ -196,7 +196,7 @@ class SymbolEnableDialog extends MyDialog
             @Override
             public void onClick( DialogInterface dialog, int btn ) {
               mApp.installSymbols( true );
-              DrawingBrushPaths.reloadAllLibraries( mContext.getResources() );
+              BrushManager.reloadAllLibraries( mContext.getResources() );
               createAdapters();
               updateList();
             }
@@ -223,17 +223,17 @@ class SymbolEnableDialog extends MyDialog
   {
     if ( TDSetting.mLevelOverBasic ) {
       mPointAdapter.updateSymbols( "p_" );
-      SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
+      SymbolPointLibrary point_lib = BrushManager.mPointLib;
       if ( point_lib != null ) point_lib.makeEnabledList();
     }
 
     mLineAdapter.updateSymbols( "l_" );
-    SymbolLineLibrary line_lib   = DrawingBrushPaths.mLineLib;
+    SymbolLineLibrary line_lib   = BrushManager.mLineLib;
     if ( line_lib  != null ) line_lib.makeEnabledList();
 
     if ( TDSetting.mLevelOverBasic ) {
       mAreaAdapter.updateSymbols( "a_" );
-      SymbolAreaLibrary area_lib   = DrawingBrushPaths.mAreaLib;
+      SymbolAreaLibrary area_lib   = BrushManager.mAreaLib;
       if ( area_lib  != null ) area_lib.makeEnabledList();
     }
   }

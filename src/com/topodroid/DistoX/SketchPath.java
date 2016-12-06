@@ -26,7 +26,7 @@ import android.graphics.Paint;
  */
 public class SketchPath extends SketchShot
 {
-  int mType;       // DrawingBrushPaths.DRAWING_TYPE_POINT LINE AREA
+  int mType;       // BrushManager.DRAWING_TYPE_POINT LINE AREA
   int mThType;     // item therion type
   Paint mPaint;
   SketchSurface mSurface;

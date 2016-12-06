@@ -947,7 +947,7 @@ class TDSetting
         f = Float.parseFloat( prefs.getString( k, "1.4" ) );
         if ( f > 0 && f != mUnit ) {
           mUnit = f;
-          DrawingBrushPaths.reloadPointLibrary( app.getResources() );
+          BrushManager.reloadPointLibrary( app.getResources() );
         }
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {                          // DISTOX_PICKER_TYPE
@@ -959,7 +959,7 @@ class TDSetting
         f = Float.parseFloat( prefs.getString( k, "20" ) ); // DISTOX_STATION_SIZE
         if ( f >= 1 && f != mStationSize ) {
           mStationSize = f;
-          DrawingBrushPaths.setTextSizes( );
+          BrushManager.setTextSizes( );
         }
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -967,7 +967,7 @@ class TDSetting
         f = Float.parseFloat( prefs.getString( k, "24" ) ); // DISTOX_LABEL_SIZE
         if ( f >= 1 && f != mLabelSize ) {
           mLabelSize = f;
-          DrawingBrushPaths.setTextSizes( );
+          BrushManager.setTextSizes( );
         }
       } catch ( NumberFormatException e ) { }
       // FIXME changing label size affects only new labels
@@ -977,7 +977,7 @@ class TDSetting
         f = Float.parseFloat( prefs.getString( k, "1" ) );  // DISTOX_LINE_THICKNESS
         if ( f >= 0.5f && f != mLineThickness ) {
           mLineThickness = f;
-          DrawingBrushPaths.reloadLineLibrary( app.getResources() );
+          BrushManager.reloadLineLibrary( app.getResources() );
         }
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
@@ -1009,7 +1009,7 @@ class TDSetting
         f = Float.parseFloat( prefs.getString( k, "1" ) ); // DISTOX_FIXED_THICKNESS
         if ( f >= 0.5f && f <= 10 && f != mFixedThickness ) {
           mFixedThickness = f;
-          DrawingBrushPaths.setStrokeWidths();
+          BrushManager.setStrokeWidths();
         }
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) { 

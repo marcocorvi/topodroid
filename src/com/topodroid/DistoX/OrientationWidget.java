@@ -78,7 +78,7 @@ class OrientationWidget
     float s225 = TDMath.sind( (mOrient+225) );
     float x1 = d+d*s;
     float y1 = d-d*c;
-    Paint paint = DrawingBrushPaths.fixedBluePaint;
+    Paint paint = BrushManager.fixedBluePaint;
     mCanvas.drawLine( d-d*s, d+d*c, x1, y1, paint );
     mCanvas.drawLine( x1, y1, x1+10*s135, y1-10*c135, paint );
     mCanvas.drawLine( x1, y1, x1+10*s225, y1-10*c225, paint );

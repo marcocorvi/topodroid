@@ -55,7 +55,7 @@ class DrawingSvg
 
   static void write( BufferedWriter out, DistoXNum num, DrawingCommandManager plot, long type )
   {
-    String wall_group = DrawingBrushPaths.getLineGroup( DrawingBrushPaths.mLineLib.mLineWallIndex );
+    String wall_group = BrushManager.getLineGroup( BrushManager.mLineLib.mLineWallIndex );
 
     int handle = 0;
     float xmin=10000f, xmax=-10000f, 
@@ -66,7 +66,7 @@ class DrawingSvg
 
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
-        String group = DrawingBrushPaths.getLineGroup( lp.lineType() );
+        String group = BrushManager.getLineGroup( lp.lineType() );
         if ( group != null && group.equals( wall_group ) ) {
           // ArrayList< LinePoint > pts = lp.mPoints;
           // for ( LinePoint pt : pts ) 
@@ -120,8 +120,8 @@ class DrawingSvg
       // ***** FIXME TODO POINT SYMBOLS
       // {
       //   // // 8 layer (0), 2 block name,
-      //   for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
-      //     SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex(n);
+      //   for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
+      //     SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
 
       //     int block = 1+n; // block_name = 1 + therion_code
       //     writeString( out, 8, "POINT" );
@@ -225,7 +225,7 @@ class DrawingSvg
             pw5.format("%s</text>\n", st.mName );
           } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
             DrawingLinePath line = (DrawingLinePath) path;
-            String th_name = DrawingBrushPaths.mLineLib.getSymbolThName( line.mLineType ); 
+            String th_name = BrushManager.mLineLib.getSymbolThName( line.mLineType ); 
             pw5.format("  <path stroke=\"%s\" stroke-width=\"2\" fill=\"none\" class=\"%s\"", color_str, th_name );
             if ( th_name.equals( "arrow" ) ) pw5.format(" marker-end=\"url(#Triangle)\"");
             else if ( th_name.equals( "section" ) ) pw5.format(" stroke-dasharray=\"5 3 \"");
@@ -252,7 +252,7 @@ class DrawingSvg
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
             int idx = point.mPointType;
-            String name = DrawingBrushPaths.mPointLib.getSymbolThName( idx );
+            String name = BrushManager.mPointLib.getSymbolThName( idx );
             pw5.format("<!-- point %s -->\n", name );
             if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
@@ -265,7 +265,7 @@ class DrawingSvg
             //   pw5.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff+point.cy );
             //   pw5.format(" style=\"fill:none;stroke:red;stroke-width:0.3\">!</text>\n" );
             } else {
-              SymbolPoint sp = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex( idx );
+              SymbolPoint sp = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex( idx );
               if ( sp != null ) {
                 pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f),scale(10),rotate(%.2f)\" \n", 
                   xoff+point.cx, yoff+point.cy, point.mOrientation );

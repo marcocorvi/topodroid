@@ -274,7 +274,7 @@ public class ProjectionCommandManager
   //       final Iterator i = mLegsStack.iterator();
   //       while ( i.hasNext() ){
   //         final DrawingPath path = (DrawingPath) i.next();
-  //         if ( path.mBlock == null || ! path.mBlock.mMultiBad ) {
+  //         if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
   //           path.setPaint( paint );
   //         }
   //       }
@@ -285,7 +285,7 @@ public class ProjectionCommandManager
   //       final Iterator i = mSplaysStack.iterator();
   //       while ( i.hasNext() ){
   //         final DrawingPath path = (DrawingPath) i.next();
-  //         if ( path.mBlock == null || ! path.mBlock.mMultiBad ) {
+  //         if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
   //           path.setPaint( paint );
   //         }
   //       }

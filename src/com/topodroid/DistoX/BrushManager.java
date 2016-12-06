@@ -1,4 +1,4 @@
-/* @file DrawingBrushPaths.java
+/* @file BrushManager.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -30,7 +30,7 @@ import android.content.res.Resources;
 /**
  * gereric brush 
  */
-public class DrawingBrushPaths
+public class BrushManager
 {
   static final int WIDTH_CURRENT = 1;
   static final int WIDTH_FIXED   = 1;

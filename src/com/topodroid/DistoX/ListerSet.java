@@ -26,6 +26,7 @@ public class ListerSet implements ILister
 
   int size() { return mLister.size(); }
 
+  public void setTheTitle() { }
 
   void registerLister( ILister lister )
   {

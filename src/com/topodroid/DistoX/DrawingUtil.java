@@ -61,13 +61,13 @@ class DrawingUtil
   { 
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null );
     int k = 1;
-    Paint paint = DrawingBrushPaths.fixedGridPaint;
+    Paint paint = BrushManager.fixedGridPaint;
     if ( Math.abs( z % 100 ) == 0 ) {
       k = 100;
-      paint = DrawingBrushPaths.fixedGrid100Paint;
+      paint = BrushManager.fixedGrid100Paint;
     } else if ( Math.abs( z % 10 ) == 0 ) {
       k = 10;
-      paint = DrawingBrushPaths.fixedGrid10Paint;
+      paint = BrushManager.fixedGrid10Paint;
     }
     dpath.setPaint( paint );
     dpath.mPath  = new Path();

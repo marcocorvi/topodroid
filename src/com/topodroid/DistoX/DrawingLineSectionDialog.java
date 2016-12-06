@@ -101,7 +101,7 @@ public class DrawingLineSectionDialog extends MyDialog
     setContentView(R.layout.drawing_line_section_dialog);
 
     setTitle( String.format( mParent.getResources().getString( R.string.title_draw_line ),
-              DrawingBrushPaths.mLineLib.getSymbolThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
+              BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) ) + " " + mFrom + " " + mTo );
 
     mTVoptions = (TextView) findViewById( R.id.line_options );
     mTVoptions.setText( "ID " + mId );

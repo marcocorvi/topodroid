@@ -60,15 +60,15 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mAreaType = type;
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
-      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+    if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
+      setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
     mOrientation = 0.0;
-    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
+    if ( BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) {
       // FIXME AREA_ORIENT 
-      mOrientation = DrawingBrushPaths.getAreaOrientation( type );
+      mOrientation = BrushManager.getAreaOrientation( type );
 
-      mLocalShader = DrawingBrushPaths.cloneAreaShader( mAreaType );
+      mLocalShader = BrushManager.cloneAreaShader( mAreaType );
       resetPaint();
       mPaint.setShader( mLocalShader );
     }
@@ -90,8 +90,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
     } catch ( NumberFormatException e ) {
       TDLog.Error( "Drawing Area Path AreaCnt parse Int error: " + id.substring(1) );
     }
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
-      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+    if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
+      setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
   }
 
@@ -109,8 +109,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
       orientation = dis.readFloat( );
       int npt = dis.readInt( );
 
-      // DrawingBrushPaths.mAreaLib.tryLoadMissingArea( fname );
-      type = DrawingBrushPaths.mAreaLib.getSymbolIndexByFilename( fname );
+      // BrushManager.mAreaLib.tryLoadMissingArea( fname );
+      type = BrushManager.mAreaLib.getSymbolIndexByFilename( fname );
       // TDLog.Log( TDLog.LOG_PLOT, "A: " + fname + " " + cnt + " " + visible + " " + orientation + " NP " + npt );
       if ( type < 0 ) {
         if ( missingSymbols != null ) missingSymbols.addAreaFilename( fname );
@@ -119,7 +119,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
 
       DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible );
       ret.mOrientation = orientation;
-      // setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+      // setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
 
       int has_cp;
       float mX1, mY1, mX2, mY2, mX, mY;
@@ -161,8 +161,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
   public void setAreaType( int t ) 
   {
     mAreaType = t;
-    if ( mAreaType < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
-      setPaint( DrawingBrushPaths.mAreaLib.getSymbolPaint( mAreaType ) );
+    if ( mAreaType < BrushManager.mAreaLib.mSymbolNr ) {
+      setPaint( BrushManager.mAreaLib.getSymbolPaint( mAreaType ) );
     }
   }
 
@@ -178,7 +178,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   public void setOrientation( double angle ) 
   { 
     // Log.v( "DistoX", "Area path set orientation " + angle );
-    if ( ! DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) return;
+    if ( ! BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) return;
     mOrientation = angle; 
     while ( mOrientation >= 360.0 ) mOrientation -= 360.0;
     while ( mOrientation < 0.0 ) mOrientation += 360.0;
@@ -201,7 +201,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   private void resetPaint()
   {
     // Log.v("DistoX", "arae path reset paint orientation " + mOrientation );
-    // Bitmap bitmap = DrawingBrushPaths.getAreaBitmap( mAreaType );
+    // Bitmap bitmap = BrushManager.getAreaBitmap( mAreaType );
     // if ( bitmap != null )
     if ( mLocalShader != null ) {
       Matrix mat = new Matrix();
@@ -211,7 +211,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       // Bitmap bitmap1 = Bitmap.createBitmap( bitmap, 0, 0, w, h, mat, true );
       // Bitmap bitmap2 = Bitmap.createBitmap( bitmap1, w/4, h/4, w/2, h/2 );
       // BitmapShader shader = new BitmapShader( bitmap2,
-      //   DrawingBrushPaths.getAreaXMode( mAreaType ), DrawingBrushPaths.getAreaYMode( mAreaType ) );
+      //   BrushManager.getAreaXMode( mAreaType ), BrushManager.getAreaYMode( mAreaType ) );
       // mPaint.setShader( shader );
       mLocalShader.setLocalMatrix( mat );
     }
@@ -240,8 +240,8 @@ public class DrawingAreaPath extends DrawingPointLinePath
       }
     }
     pw.format("endline\n");
-    pw.format("area %s", DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType ) );
-    if ( DrawingBrushPaths.mAreaLib.isSymbolOrientable( mAreaType ) ) {
+    pw.format("area %s", BrushManager.mAreaLib.getSymbolThName( mAreaType ) );
+    if ( BrushManager.mAreaLib.isSymbolOrientable( mAreaType ) ) {
       pw.format(Locale.US, " #orientation %.1f", mOrientation );
     }
     pw.format("\n");
@@ -253,11 +253,11 @@ public class DrawingAreaPath extends DrawingPointLinePath
   @Override
   public void toCsurvey( PrintWriter pw, String cave, String branch )
   {
-    int layer  = DrawingBrushPaths.getAreaCsxLayer( mAreaType );
+    int layer  = BrushManager.getAreaCsxLayer( mAreaType );
     int type   = 3;
-    int cat    = DrawingBrushPaths.getAreaCsxCategory( mAreaType );
-    int pen    = DrawingBrushPaths.getAreaCsxPen( mAreaType );
-    int brush  = DrawingBrushPaths.getAreaCsxBrush( mAreaType );
+    int cat    = BrushManager.getAreaCsxCategory( mAreaType );
+    int pen    = BrushManager.getAreaCsxPen( mAreaType );
+    int brush  = BrushManager.getAreaCsxBrush( mAreaType );
 
     // linetype: 0 spline, 1 bezier, 2 line
     pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"3\" category=\"%d\" linetype=\"2\" mergemode=\"0\">\n",
@@ -297,7 +297,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos ) 
   {
-    String name = DrawingBrushPaths.mAreaLib.getSymbolThName( mAreaType );
+    String name = BrushManager.mAreaLib.getSymbolThName( mAreaType );
     try {
       dos.write( 'A' );
       dos.writeUTF( name );

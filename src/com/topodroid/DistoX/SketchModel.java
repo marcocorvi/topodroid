@@ -663,11 +663,11 @@ class SketchModel
             {
               if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
                 pw2.format("  line %s %s -shot %s %s\n", "3d",
-                                                         DrawingBrushPaths.mLineLib.getSymbolName( line.mThType ),
+                                                         BrushManager.mLineLib.getSymbolName( line.mThType ),
                                                          line.st1, line.st2 );
               } else {
                 pw2.format("  area %s %s -shot %s %s\n", "3d",
-                                                         DrawingBrushPaths.mAreaLib.getSymbolName( line.mThType ),
+                                                         BrushManager.mAreaLib.getSymbolName( line.mThType ),
                                                          line.st1, line.st2 );
               }
             }
@@ -743,7 +743,7 @@ class SketchModel
     if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
 
     // Log.v( "DistoX", "loadTh3 " + filename );
-    DrawingBrushPaths.resetPointOrientations();
+    BrushManager.resetPointOrientations();
     try {
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );
@@ -872,7 +872,7 @@ class SketchModel
           }
         } else if ( vals[k].equals( "point" ) ) {
           // ****** THERION POINT **********************************
-          // int ptType = DrawingBrushPaths.mPointLib.mSymbolNr;
+          // int ptType = BrushManager.mPointLib.mSymbolNr;
           // boolean has_orientation = false;
           // float orientation = 0.0f;
           // int scale = DrawingPointPath.SCALE_M;
@@ -893,11 +893,11 @@ class SketchModel
               // stations are automatic in the 3D model
               continue;
             } else {
-              int ptindex = DrawingBrushPaths.mPointLib.getSymbolIndexByThName( type );
-              // for ( ; ptindex < DrawingBrushPaths.mPointLib.mSymbolNr; ++ptindex ) {
-              //   if ( type.equals( DrawingBrushPaths.mPointLib.getSymbolThName( ptindex ) ) ) break;
+              int ptindex = BrushManager.mPointLib.getSymbolIndexByThName( type );
+              // for ( ; ptindex < BrushManager.mPointLib.mSymbolNr; ++ptindex ) {
+              //   if ( type.equals( BrushManager.mPointLib.getSymbolThName( ptindex ) ) ) break;
               // }
-              if ( ptindex >= 0 && ptindex < DrawingBrushPaths.mPointLib.mSymbolNr ) {
+              if ( ptindex >= 0 && ptindex < BrushManager.mPointLib.mSymbolNr ) {
                 SketchPointPath path = new SketchPointPath( ptindex, fromStation, toStation, x, y, z );
                 addPoint( path );
                 // parse options
@@ -931,17 +931,17 @@ class SketchModel
           }
           if ( ++k < vals.length ) {
             if ( is_line ) {
-              th_type = DrawingBrushPaths.mLineLib.getSymbolIndexByThName( vals[k] );
-              // int lnTypeMax = DrawingBrushPaths.mLineLib.mSymbolNr;
+              th_type = BrushManager.mLineLib.getSymbolIndexByThName( vals[k] );
+              // int lnTypeMax = BrushManager.mLineLib.mSymbolNr;
               // for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
-              //    if ( vals[k].equals( DrawingBrushPaths.mLineLib.getSymbolThName( th_type ) ) ) break;
+              //    if ( vals[k].equals( BrushManager.mLineLib.getSymbolThName( th_type ) ) ) break;
               // }
             } else {
               closed = true;
-              th_type = DrawingBrushPaths.mAreaLib.getSymbolIndexByThName( vals[k] );
-              // int lnTypeMax = DrawingBrushPaths.mAreaLib.mSymbolNr;
+              th_type = BrushManager.mAreaLib.getSymbolIndexByThName( vals[k] );
+              // int lnTypeMax = BrushManager.mAreaLib.mSymbolNr;
               // for ( th_type=0; th_type < lnTypeMax; ++th_type ) {
-              //    if ( vals[k].equals( DrawingBrushPaths.mAreaLib.getSymbolThName( th_type ) ) ) break;
+              //    if ( vals[k].equals( BrushManager.mAreaLib.getSymbolThName( th_type ) ) ) break;
               // }
             }
           }

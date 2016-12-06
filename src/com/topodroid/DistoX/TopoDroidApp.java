@@ -271,12 +271,11 @@ public class TopoDroidApp extends Application
 
   static float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 
-  static boolean isBlockAcceptable( float acc, float mag, float dip )
+  static boolean isBlockMagneticBad( float acc, float mag, float dip )
   {
-    return true
-        && deltaAcc( acc ) < TDSetting.mAccelerationThr
-        && deltaMag( mag ) < TDSetting.mMagneticThr
-        && deltaDip( dip ) < TDSetting.mDipThr
+    return deltaMag( mag ) > TDSetting.mMagneticThr
+        || deltaAcc( acc ) > TDSetting.mAccelerationThr
+        || deltaDip( dip ) > TDSetting.mDipThr
     ;
   }
 
@@ -672,9 +671,9 @@ public class TopoDroidApp extends Application
     resetLocale();
     Resources res = getResources();
     if ( load_symbols ) {
-      DrawingBrushPaths.reloadPointLibrary( res ); // reload symbols
-      DrawingBrushPaths.reloadLineLibrary( res );
-      DrawingBrushPaths.reloadAreaLibrary( res );
+      BrushManager.reloadPointLibrary( res ); // reload symbols
+      BrushManager.reloadLineLibrary( res );
+      BrushManager.reloadAreaLibrary( res );
     }
     if ( mActivity != null ) mActivity.setMenuAdapter( res );
     if ( mPrefActivity != null ) mPrefActivity.reloadPreferences();

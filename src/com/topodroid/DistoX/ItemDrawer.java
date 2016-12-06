@@ -49,20 +49,20 @@ public class ItemDrawer extends Activity
 
   static void updateRecentPoint( int point )
   {
-    // if ( DrawingBrushPaths.mPointLib == null ) return;
-    updateRecent( DrawingBrushPaths.mPointLib.getSymbolByIndex( point ), mRecentPoint );
+    // if ( BrushManager.mPointLib == null ) return;
+    updateRecent( BrushManager.mPointLib.getSymbolByIndex( point ), mRecentPoint );
   }
 
   static void updateRecentLine( int line )
   {
-    // if ( DrawingBrushPaths.mLineLib == null ) return;
-    updateRecent( DrawingBrushPaths.mLineLib.getSymbolByIndex( line ), mRecentLine );
+    // if ( BrushManager.mLineLib == null ) return;
+    updateRecent( BrushManager.mLineLib.getSymbolByIndex( line ), mRecentLine );
   }
 
   static void updateRecentArea( int area )
   {
-    // if ( DrawingBrushPaths.mAreaLib == null ) return;
-    updateRecent( DrawingBrushPaths.mAreaLib.getSymbolByIndex( area ), mRecentArea );
+    // if ( BrushManager.mAreaLib == null ) return;
+    updateRecent( BrushManager.mAreaLib.getSymbolByIndex( area ), mRecentArea );
   }
 
   static void updateRecentPoint( Symbol point ) { updateRecent( point, mRecentPoint ); }
@@ -92,29 +92,29 @@ public class ItemDrawer extends Activity
   protected void loadRecentSymbols( DataHelper data )
   {
     // Log.v("DistoX", "load recent tools");
-    DrawingBrushPaths.mPointLib.setRecentSymbols( mRecentPoint );
-    DrawingBrushPaths.mLineLib.setRecentSymbols( mRecentLine );
-    DrawingBrushPaths.mAreaLib.setRecentSymbols( mRecentArea );
+    BrushManager.mPointLib.setRecentSymbols( mRecentPoint );
+    BrushManager.mLineLib.setRecentSymbols( mRecentLine );
+    BrushManager.mAreaLib.setRecentSymbols( mRecentArea );
 
     String names = data.getValue( "recent_points" );
     if ( names != null ) {
       String points[] = names.split(" ");
       for ( String point : points ) {
-        updateRecent( DrawingBrushPaths.mPointLib.getSymbolByFilename( point ), mRecentPoint );
+        updateRecent( BrushManager.mPointLib.getSymbolByFilename( point ), mRecentPoint );
       }
     }
     names = data.getValue( "recent_lines" );
     if ( names != null ) {
       String lines[] = names.split(" ");
       for ( String line : lines ) {
-        updateRecent( DrawingBrushPaths.mLineLib.getSymbolByFilename( line ), mRecentLine );
+        updateRecent( BrushManager.mLineLib.getSymbolByFilename( line ), mRecentLine );
       }
     }
     names = data.getValue( "recent_areas" );
     if ( names != null ) {
       String areas[] = names.split(" ");
       for ( String area : areas ) {
-        updateRecent( DrawingBrushPaths.mAreaLib.getSymbolByFilename( area ), mRecentArea );
+        updateRecent( BrushManager.mAreaLib.getSymbolByFilename( area ), mRecentArea );
       }
     }
   }
@@ -178,7 +178,7 @@ public class ItemDrawer extends Activity
     public void areaSelected( int k, boolean update_recent ) 
     {
       mSymbol = Symbol.AREA;
-      if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+      if ( k >= 0 && k < BrushManager.mAreaLib.mSymbolNr ) {
         mCurrentArea = k;
       }
       setTheTitle();
@@ -191,21 +191,21 @@ public class ItemDrawer extends Activity
     public void lineSelected( int k, boolean update_recent ) 
     {
       mSymbol = Symbol.LINE;
-      if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mSymbolNr ) {
+      if ( k >= 0 && k < BrushManager.mLineLib.mSymbolNr ) {
         mCurrentLine = k;
       }
       setTheTitle();
       if ( update_recent ) {
         updateRecentLine( mCurrentLine );
       }
-      mLinePointStep = DrawingBrushPaths.mLineLib.getStyleX( mCurrentLine );
+      mLinePointStep = BrushManager.mLineLib.getStyleX( mCurrentLine );
       if ( mLinePointStep != POINT_MAX ) mLinePointStep *= TDSetting.mLineType;
     }
 
     public void pointSelected( int p, boolean update_recent )
     {
       mSymbol = Symbol.POINT;
-      if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mSymbolNr ) {
+      if ( p >= 0 && p < BrushManager.mPointLib.mSymbolNr ) {
         mCurrentPoint = p;
       }
       setTheTitle();
@@ -214,6 +214,6 @@ public class ItemDrawer extends Activity
       }
     }
 
-    protected void setTheTitle() { }
+    public void setTheTitle() { }
 
 }

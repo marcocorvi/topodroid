@@ -62,11 +62,11 @@ public class DrawingPointPath extends DrawingPath
     mOptions = options;
     mScale   = SCALE_NONE;
     mOrientation = 0.0;
-    if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( type ) ) {
-      mOrientation = DrawingBrushPaths.getPointOrientation(type);
+    if ( BrushManager.mPointLib.isSymbolOrientable( type ) ) {
+      mOrientation = BrushManager.getPointOrientation(type);
     }
-    setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
-    // if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
+    setPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+    // if ( ! BrushManager.pointHasText( mPointType ) ) {
       mScale = scale;
     // } else {
     //   mScale = SCALE_M;
@@ -89,8 +89,8 @@ public class DrawingPointPath extends DrawingPath
       scale   = dis.readInt();
       options = dis.readUTF();
 
-      DrawingBrushPaths.mPointLib.tryLoadMissingPoint( fname );
-      type = DrawingBrushPaths.mPointLib.getSymbolIndexByFilename( fname );
+      BrushManager.mPointLib.tryLoadMissingPoint( fname );
+      type = BrushManager.mPointLib.getSymbolIndexByFilename( fname );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + fname + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
         if ( missingSymbols != null ) missingSymbols.addPointFilename( fname ); 
@@ -101,11 +101,11 @@ public class DrawingPointPath extends DrawingPath
       return ret;
 
       // // TODO parse option for "-text"
-      // setPaint( DrawingBrushPaths.mPointLib.getSymbolPaint( mPointType ) );
-      // if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
-      //   DrawingBrushPaths.rotateGradPoint( mPointType, mOrientation );
+      // setPaint( BrushManager.mPointLib.getSymbolPaint( mPointType ) );
+      // if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
+      //   BrushManager.rotateGradPoint( mPointType, mOrientation );
       //   resetPath( 1.0f );
-      //   DrawingBrushPaths.rotateGradPoint( mPointType, -mOrientation );
+      //   BrushManager.rotateGradPoint( mPointType, -mOrientation );
       // }
     } catch ( IOException e ) {
       TDLog.Error( "POINT in error " + e.getMessage() );
@@ -127,7 +127,7 @@ public class DrawingPointPath extends DrawingPath
   @Override
   boolean rotateBy( float dy )
   {
-    if ( ! DrawingBrushPaths.isPointOrientable( mPointType ) ) return false;
+    if ( ! BrushManager.isPointOrientable( mPointType ) ) return false;
     setOrientation ( mOrientation + dy );
     return true;
   }
@@ -191,8 +191,8 @@ public class DrawingPointPath extends DrawingPath
   {
     // Log.v("DistoX", "Reset path " + mOrientation + " scale " + mScale );
     Matrix m = new Matrix();
-    if ( ! DrawingBrushPaths.pointHasText( mPointType ) ) {
-      if ( DrawingBrushPaths.mPointLib.isSymbolOrientable( mPointType ) ) {
+    if ( ! BrushManager.pointHasText( mPointType ) ) {
+      if ( BrushManager.mPointLib.isSymbolOrientable( mPointType ) ) {
         m.postRotate( (float)mOrientation );
       }
       switch ( mScale ) {
@@ -202,7 +202,7 @@ public class DrawingPointPath extends DrawingPath
         case SCALE_XL: f = 2.00f; break;
       }
       m.postScale(f,f);
-      makePath( DrawingBrushPaths.getPointOrigPath( mPointType ), m, cx, cy );
+      makePath( BrushManager.getPointOrigPath( mPointType ), m, cx, cy );
     }
   }
 
@@ -244,10 +244,10 @@ public class DrawingPointPath extends DrawingPath
   public void toCsurvey( PrintWriter pw, String cave, String branch )
   { 
     int size = mScale - SCALE_XS;
-    int layer  = DrawingBrushPaths.getPointCsxLayer( mPointType );
-    int type   = DrawingBrushPaths.getPointCsxType( mPointType );
-    int cat    = DrawingBrushPaths.getPointCsxCategory( mPointType );
-    String csx = DrawingBrushPaths.getPointCsx( mPointType );
+    int layer  = BrushManager.getPointCsxLayer( mPointType );
+    int type   = BrushManager.getPointCsxType( mPointType );
+    int cat    = BrushManager.getPointCsxCategory( mPointType );
+    String csx = BrushManager.getPointCsx( mPointType );
     pw.format("<item layer=\"%d\" cave=\"%s\" branch=\"%s\" type=\"%d\" category=\"%d\" transparency=\"0.00\" data=\"",
       layer, cave, branch, type, cat );
 
@@ -274,7 +274,7 @@ public class DrawingPointPath extends DrawingPath
     PrintWriter pw  = new PrintWriter(sw);
 
     pw.format(Locale.US, "point %.2f %.2f %s", cx*toTherion, -cy*toTherion, 
-                              DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
+                              BrushManager.mPointLib.getSymbolThName(mPointType) );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");
@@ -309,7 +309,7 @@ public class DrawingPointPath extends DrawingPath
   @Override
   void toDataStream( DataOutputStream dos )
   {
-    String name = DrawingBrushPaths.mPointLib.getSymbolThName(mPointType);
+    String name = BrushManager.mPointLib.getSymbolThName(mPointType);
     try {
       dos.write( 'P' );
       dos.writeFloat( cx );

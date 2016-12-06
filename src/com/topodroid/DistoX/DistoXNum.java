@@ -727,8 +727,9 @@ class DistoXNum
           if ( d > dmax ) dmax = d;
           ts1 = ts1.sibling;
         }
-        blk0.mMultiBad = ( ! TDSetting.mMagAnomaly ) && ( dmax > TDSetting.mCloseDistance );
-        
+        if ( ( ! TDSetting.mMagAnomaly ) && ( dmax > TDSetting.mCloseDistance ) ) {
+          blk0.mMultiBad = true;
+        }
         // Log.v( "DistoX", "DMAX " + from + "-" + to + " " + dmax );
         
         if ( ! TDSetting.mMagAnomaly ) { // (3) remove siblings

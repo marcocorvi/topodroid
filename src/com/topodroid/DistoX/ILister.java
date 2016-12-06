@@ -65,5 +65,10 @@ public interface ILister
    */
   public void setRefAzimuth( float azimuth, long fixed_extend );
 
+  /** set the title
+   *
+   */
+  public void setTheTitle();
+
 }
 

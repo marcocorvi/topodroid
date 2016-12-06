@@ -50,14 +50,14 @@ public class DrawingLinePath extends DrawingPointLinePath
   {
     // visible = true,  closed = false
     super( DrawingPath.DRAWING_PATH_LINE, true, false );
-    // DrawingBrushPaths.makePaths( );
+    // BrushManager.makePaths( );
     // mCnt = ++ mCount;
     // TDLog.Log( TDLog.LOG_PATH, "DrawingLinePath " + mCnt + " cstr type " + line_type );
 
     mLineType = line_type;
     mReversed = false;
-    mOutline  = ( mLineType == DrawingBrushPaths.mLineLib.mLineWallIndex )? OUTLINE_OUT : OUTLINE_NONE;
-    setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+    mOutline  = ( mLineType == BrushManager.mLineLib.mLineWallIndex )? OUTLINE_OUT : OUTLINE_NONE;
+    setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
 
   static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y, SymbolsPalette missingSymbols )
@@ -74,8 +74,8 @@ public class DrawingLinePath extends DrawingPointLinePath
       outline = dis.readInt();
       options = dis.readUTF();
 
-      // DrawingBrushPaths.mLineLib.tryLoadMissingArea( fname );
-      type = DrawingBrushPaths.mLineLib.getSymbolIndexByFilename( fname ); 
+      // BrushManager.mLineLib.tryLoadMissingArea( fname );
+      type = BrushManager.mLineLib.getSymbolIndexByFilename( fname ); 
       if ( type < 0 ) {
         if ( missingSymbols != null ) missingSymbols.addLineFilename( fname );
         type = 0;
@@ -218,7 +218,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     if ( reversed != mReversed ) {
       mReversed = reversed;
       // retracePath();
-      setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+      setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
       computeUnitNormal();
     }
   }
@@ -227,7 +227,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   {
     mReversed = ! mReversed;
     // retracePath();
-    setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
     computeUnitNormal();
   }
 
@@ -238,16 +238,16 @@ public class DrawingLinePath extends DrawingPointLinePath
   void setLineType( int type )
   {
     mLineType = type;
-    setPaint( DrawingBrushPaths.mLineLib.getLinePaint( mLineType, mReversed ) );
+    setPaint( BrushManager.mLineLib.getLinePaint( mLineType, mReversed ) );
   }
 
   @Override
   public void toCsurvey( PrintWriter pw, String cave, String branch )
   {
-    int layer  = DrawingBrushPaths.getLineCsxLayer( mLineType );
-    int type   = DrawingBrushPaths.getLineCsxType( mLineType );
-    int cat    = DrawingBrushPaths.getLineCsxCategory( mLineType );
-    int pen    = DrawingBrushPaths.getLineCsxPen( mLineType );
+    int layer  = BrushManager.getLineCsxLayer( mLineType );
+    int type   = BrushManager.getLineCsxType( mLineType );
+    int cat    = BrushManager.getLineCsxCategory( mLineType );
+    int pen    = BrushManager.getLineCsxPen( mLineType );
     // linetype: 0 line, 1 spline, 2 bezier
     pw.format("          <item layer=\"%d\" cave=\"%s\" branch=\"%s\" name=\"\" type=\"%d\" category=\"%d\" linetype=\"0\" mergemode=\"0\">\n",
       layer, cave, branch, type, cat );
@@ -257,7 +257,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     // for ( LinePoint pt : mPoints ) 
     if ( ! mReversed ) {
       // NOTE do not skip tick-point if want to save section with tick
-      // if ( mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
+      // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
       LinePoint pt = mFirst; 
       for ( ; pt != null; pt = pt.mNext ) 
       {
@@ -285,11 +285,11 @@ public class DrawingLinePath extends DrawingPointLinePath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line %s", DrawingBrushPaths.mLineLib.getSymbolThName(mLineType) );
+    pw.format("line %s", BrushManager.mLineLib.getSymbolThName(mLineType) );
     if ( isClosed() ) {
       pw.format(" -close on");
     }
-    if ( mLineType == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
+    if ( mLineType == BrushManager.mLineLib.mLineWallIndex ) {
       if ( mOutline == OUTLINE_IN ) {
         pw.format(" -outline in");
       } else if ( mOutline == OUTLINE_NONE ) {
@@ -312,12 +312,12 @@ public class DrawingLinePath extends DrawingPointLinePath
 
     // for ( LinePoint pt : mPoints ) 
     LinePoint pt = mFirst; 
-    // if ( mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
+    // if ( mLineType == BrushManager.mLineLib.mLineSectionIndex && size() > 2 ) pt = pt.mNext; // skip first point (tick)
     for ( ; pt != null; pt = pt.mNext ) 
     {
       pt.toTherion( pw );
     }
-    if ( mLineType == DrawingBrushPaths.mLineLib.mLineSlopeIndex ) {
+    if ( mLineType == BrushManager.mLineLib.mLineSlopeIndex ) {
       pw.format("  l-size 40\n");
     }
     pw.format("endline\n");
@@ -327,7 +327,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   @Override
   void toDataStream( DataOutputStream dos ) 
   {
-    String name = DrawingBrushPaths.mLineLib.getSymbolThName( mLineType );
+    String name = BrushManager.mLineLib.getSymbolThName( mLineType );
     try {
       dos.write( 'L' );
       dos.writeUTF( name );

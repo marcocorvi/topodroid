@@ -146,16 +146,16 @@ class SketchPainter
 
   void setStrokeWidths()
   {
-    whitePaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    previewPaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    // topLinePaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    // sideLinePaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    borderLinePaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    insidePaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    surfaceForPaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    surfaceBackPaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    // areaPaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    vertexPaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
-    backVertexPaint.setStrokeWidth( DrawingBrushPaths.WIDTH_PREVIEW );
+    whitePaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    previewPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    // topLinePaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    // sideLinePaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    borderLinePaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    insidePaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    surfaceForPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    surfaceBackPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    // areaPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    vertexPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
+    backVertexPaint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
   }
 }

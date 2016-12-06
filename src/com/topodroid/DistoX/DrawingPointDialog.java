@@ -55,7 +55,7 @@ public class DrawingPointDialog extends MyDialog
     super( context, R.string.DrawingPointDialog );
     mParent = parent;
     mPoint  = point;
-    mOrientable = DrawingBrushPaths.mPointLib.isSymbolOrientable( mPoint.mPointType );
+    mOrientable = BrushManager.mPointLib.isSymbolOrientable( mPoint.mPointType );
   }
 
 // -------------------------------------------------------------------
@@ -70,8 +70,8 @@ public class DrawingPointDialog extends MyDialog
     mEToptions = (EditText) findViewById( R.id.point_options );
     mETtext    = (EditText) findViewById( R.id.point_text );
 
-    setTitle( "POINT " + DrawingBrushPaths.mPointLib.getSymbolName( mPoint.mPointType ) );
-    if ( DrawingBrushPaths.mPointLib.pointHasText( mPoint.mPointType ) ) {
+    setTitle( "POINT " + BrushManager.mPointLib.getSymbolName( mPoint.mPointType ) );
+    if ( BrushManager.mPointLib.pointHasText( mPoint.mPointType ) ) {
       mETtext.setText( mPoint.getText() );
     } else {
       mETtext.setEnabled( false );
@@ -122,7 +122,7 @@ public class DrawingPointDialog extends MyDialog
         mPoint.setOrientation( mOrientationWidget.mOrient );
         // Log.v("DistoX", "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
       }
-      if ( DrawingBrushPaths.mPointLib.pointHasText( mPoint.mPointType ) ) {
+      if ( BrushManager.mPointLib.pointHasText( mPoint.mPointType ) ) {
         mPoint.setText( mETtext.getText().toString().trim() );
       }
     } else if ( b == mBtnCancel ) {

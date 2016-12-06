@@ -44,7 +44,7 @@ public class DrawingAreaDialog extends MyDialog
     super( context, R.string.DrawingAreaDialog );
     mParent = parent;
     mArea = line;
-    mOrientable = DrawingBrushPaths.mAreaLib.isSymbolOrientable( mArea.mAreaType );
+    mOrientable = BrushManager.mAreaLib.isSymbolOrientable( mArea.mAreaType );
   }
 
 // -------------------------------------------------------------------
@@ -53,7 +53,7 @@ public class DrawingAreaDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     String title = String.format( mParent.getResources().getString( R.string.title_draw_area ),
-                                  DrawingBrushPaths.mAreaLib.getSymbolName( mArea.mAreaType ) );
+                                  BrushManager.mAreaLib.getSymbolName( mArea.mAreaType ) );
     initLayout( R.layout.drawing_area_dialog, title );
 
     mOrientationWidget = new OrientationWidget( this, mOrientable, mArea.mOrientation );

@@ -219,15 +219,15 @@ public class OverviewWindow extends ItemDrawer
       if ( splay ) {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk );
         if ( blk.mClino > TDSetting.mVertSplay ) {
-          dpath.setPaint( DrawingBrushPaths.fixedSplay4Paint );
+          dpath.setPaint( BrushManager.fixedSplay4Paint );
         } else if ( blk.mClino < -TDSetting.mVertSplay ) {
-          dpath.setPaint( DrawingBrushPaths.fixedSplay3Paint );
+          dpath.setPaint( BrushManager.fixedSplay3Paint );
         } else {
-          dpath.setPaint( DrawingBrushPaths.fixedSplayPaint );
+          dpath.setPaint( BrushManager.fixedSplayPaint );
         }
       } else {
         dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk );
-        dpath.setPaint( DrawingBrushPaths.fixedShotPaint );
+        dpath.setPaint( BrushManager.fixedShotPaint );
       }
       // DrawingUtil.makePath( dpath, x1, y1, x2, y2, xoff, yoff );
       DrawingUtil.makePath( dpath, x1, y1, x2, y2 );
@@ -237,7 +237,7 @@ public class OverviewWindow extends ItemDrawer
     // --------------------------------------------------------------------------------------
 
     @Override
-    protected void setTheTitle()
+    public void setTheTitle()
     {
       // setTitle( res.getString( R.string.title_move ) );
     }
@@ -429,7 +429,7 @@ public class OverviewWindow extends ItemDrawer
       mButtonView1 = new HorizontalButtonView( mButton1 );
       mListView.setAdapter( mButtonView1.mAdapter );
 
-      DrawingBrushPaths.makePaths( getResources() );
+      BrushManager.makePaths( getResources() );
       setTheTitle();
 
       mData         = mApp.mData; // new DataHelper( this ); 
@@ -759,7 +759,7 @@ public class OverviewWindow extends ItemDrawer
         mOnMeasure = 2;
         // add reference point
         DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
-        path.setPaint( DrawingBrushPaths.highlightPaint );
+        path.setPaint( BrushManager.highlightPaint );
         path.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
         // Log.v("DistoX", "first ref " + mStartX + " " + mStartY );
         mOverviewSurface.setFirstReference( path );
@@ -791,7 +791,7 @@ public class OverviewWindow extends ItemDrawer
         setTitle( msg );
         // replace target point
         DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
-        path.setPaint( DrawingBrushPaths.fixedBluePaint );
+        path.setPaint( BrushManager.fixedBluePaint );
         path.makePath( mCrossPath, new Matrix(), x, y );
         path.mPath.moveTo( mStartX, mStartY );
         path.mPath.lineTo( x, y );

@@ -152,6 +152,8 @@ public class GMActivity extends Activity
   BitmapDrawable mBMdownload;
   BitmapDrawable mBMdownload_on;
 
+  public void setTheTitle() { }
+
   // -------------------------------------------------------------------
   // forward survey name to DeviceHelper
 

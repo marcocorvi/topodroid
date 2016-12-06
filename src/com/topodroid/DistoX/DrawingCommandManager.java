@@ -330,9 +330,9 @@ public class DrawingCommandManager
   // {
   //   for ( DrawingPath p : mHighlight ) {
   //     if ( p.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-  //       p.mPaint = DrawingBrushPaths.fixedShotPaint;
+  //       p.mPaint = BrushManager.fixedShotPaint;
   //     } else {
-  //       p.mPaint = DrawingBrushPaths.fixedSplayPaint;
+  //       p.mPaint = BrushManager.fixedSplayPaint;
   //     }
   //   }
   //   mHighlight.clear();
@@ -663,7 +663,7 @@ public class DrawingCommandManager
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
   {
     synchronized( mCurrentStack ) {
-      int index = DrawingBrushPaths.mPointLib.mPointSectionIndex;
+      int index = BrushManager.mPointLib.mPointSectionIndex;
       if ( index >= 0 ) {
         ArrayList<DrawingPath> todo = new ArrayList<DrawingPath>();
         final Iterator i = mCurrentStack.iterator();
@@ -744,7 +744,7 @@ public class DrawingCommandManager
         final Iterator i = mLegsStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
-          if ( path.mBlock == null || ! path.mBlock.mMultiBad ) {
+          if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             path.setPaint( paint );
           }
         }
@@ -755,7 +755,7 @@ public class DrawingCommandManager
         final Iterator i = mSplaysStack.iterator();
         while ( i.hasNext() ){
           final DrawingPath path = (DrawingPath) i.next();
-          if ( path.mBlock == null || ! path.mBlock.mMultiBad ) {
+          if ( path.mBlock == null || ( ! path.mBlock.mMultiBad ) ) {
             path.setPaint( paint );
           }
         }
@@ -815,7 +815,7 @@ public class DrawingCommandManager
   // void setScaleBar( float x0, float y0 ) 
   // {
   //   if ( mCurrentStack.size() > 0 ) return;
-  //   DrawingLinePath scale_bar = new DrawingLinePath( DrawingBrushPaths.mLineLib.mLineSectionIndex );
+  //   DrawingLinePath scale_bar = new DrawingLinePath( BrushManager.mLineLib.mLineSectionIndex );
   //   scale_bar.addStartPoint( x0 - 50, y0 );
   //   scale_bar.addPoint( x0 + 50, y0 );  // 5 meters
   //   synchronized( mCurrentStack ) {
@@ -884,7 +884,7 @@ public class DrawingCommandManager
 
   public void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
-    int index = DrawingBrushPaths.mPointLib.mPointSectionIndex;
+    int index = BrushManager.mPointLib.mPointSectionIndex;
     synchronized( mCurrentStack ) {
       for ( ICanvasCommand icc : mCurrentStack ) { // FIXME reverse_iterator
         if ( icc.commandType() == 0 ) { // DrawingPath
@@ -1125,7 +1125,7 @@ public class DrawingCommandManager
   // continuation is checked in canvas-coords: canvas = offset + scene * zoom
   DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom )
   {
-    String group = DrawingBrushPaths.getLineGroup( type );
+    String group = BrushManager.getLineGroup( type );
     if ( group == null ) return null;
 
     float delta = 2 * TDSetting.mCloseness / zoom;
@@ -1141,7 +1141,7 @@ public class DrawingCommandManager
         if ( drawingPath.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath linePath = (DrawingLinePath)drawingPath;
           // if ( linePath.mLineType == type ) 
-          if ( group.equals( DrawingBrushPaths.getLineGroup( linePath.mLineType ) ) )
+          if ( group.equals( BrushManager.getLineGroup( linePath.mLineType ) ) )
           {
             if ( linePath.mFirst.distance( lp ) < delta || linePath.mLast.distance( lp ) < delta ) {
               if ( ret != null ) return null; // ambiguity
@@ -1264,13 +1264,13 @@ public class DrawingCommandManager
             DrawingPath path = (DrawingPath)cmd;
             if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
               DrawingLinePath line = (DrawingLinePath)path;
-              if ( line.mLineType == DrawingBrushPaths.mLineLib.mLineSectionIndex ) { // add tick to section-lines
+              if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add tick to section-lines
                 LinePoint lp = line.mFirst;
                 Path path1 = new Path();
                 path1.moveTo( lp.mX, lp.mY );
                 path1.lineTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
                 path1.transform( mMatrix );
-                canvas.drawPath( path1, DrawingBrushPaths.mStationSymbol.mPaint );
+                canvas.drawPath( path1, BrushManager.mStationSymbol.mPaint );
               }
             }
           }
@@ -1308,7 +1308,7 @@ public class DrawingCommandManager
               Path path = new Path();
               path.addCircle( x, y, radius, Path.Direction.CCW );
               path.transform( mMatrix );
-              canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
+              canvas.drawPath( path, BrushManager.highlightPaint2 );
             }
           }
         }
@@ -1324,7 +1324,7 @@ public class DrawingCommandManager
         //   Path path = new Path();
         //   path.addCircle( x, y, radius, Path.Direction.CCW );
         //   path.transform( mMatrix );
-        //   canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
+        //   canvas.drawPath( path, BrushManager.highlightPaint2 );
         // }
 
       }
@@ -1350,7 +1350,7 @@ public class DrawingCommandManager
             path = new Path();
             path.addCircle( x, y, radius, Path.Direction.CCW );
             path.transform( mMatrix );
-            canvas.drawPath( path, DrawingBrushPaths.highlightPaint2 );
+            canvas.drawPath( path, BrushManager.highlightPaint2 );
             if ( lp != null && lp.has_cp ) {
               path = new Path();
               path.moveTo( lp.mX1, lp.mY1 );
@@ -1359,15 +1359,15 @@ public class DrawingCommandManager
               path.addCircle( lp.mX1, lp.mY1, radius/2, Path.Direction.CCW );
               path.addCircle( lp.mX2, lp.mY2, radius/2, Path.Direction.CCW );
               path.transform( mMatrix );
-              canvas.drawPath( path, DrawingBrushPaths.highlightPaint3 );
+              canvas.drawPath( path, BrushManager.highlightPaint3 );
             }
             if ( item.mType == DrawingPath.DRAWING_PATH_LINE ) {
-              Paint paint = DrawingBrushPaths.fixedYellowPaint;
+              Paint paint = BrushManager.fixedYellowPaint;
               DrawingLinePath line = (DrawingLinePath) item;
               lp = line.mFirst;
               LinePoint lpn = lp1;
               if ( lp == lp1 ) {
-                paint = DrawingBrushPaths.fixedOrangePaint;
+                paint = BrushManager.fixedOrangePaint;
                 lpn = lp2;
               }
               path = new Path();
@@ -1393,7 +1393,7 @@ public class DrawingCommandManager
                   }
                 }
                 path.transform( mMatrix );
-                canvas.drawPath( path, DrawingBrushPaths.fixedOrangePaint );
+                canvas.drawPath( path, BrushManager.fixedOrangePaint );
               }
               if ( lp != null && lp.mNext != null ) {
                 path = new Path();
@@ -1406,7 +1406,7 @@ public class DrawingCommandManager
                   }
                 }
                 path.transform( mMatrix );
-                canvas.drawPath( path, DrawingBrushPaths.fixedYellowPaint );
+                canvas.drawPath( path, BrushManager.fixedYellowPaint );
               }
             }
           }
@@ -1423,7 +1423,7 @@ public class DrawingCommandManager
             path = new Path();
             path.addCircle( x, y, radius, Path.Direction.CCW );
             path.transform( mMatrix );
-            canvas.drawPath( path, DrawingBrushPaths.highlightPaint );
+            canvas.drawPath( path, BrushManager.highlightPaint );
           }
         }
       } 
@@ -2156,7 +2156,7 @@ public class DrawingCommandManager
         DrawingPath p = (DrawingPath) cmd;
         if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath ap = (DrawingAreaPath)p;
-          if ( DrawingBrushPaths.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
+          if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 1 ) continue;
           ap.toCsurvey( pw, cave, branch );
         }
       }
@@ -2172,11 +2172,11 @@ public class DrawingCommandManager
 
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
-          if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
+          if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
           lp.toCsurvey( pw, cave, branch );
         } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
           DrawingAreaPath ap = (DrawingAreaPath)p;
-          if ( DrawingBrushPaths.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
+          if ( BrushManager.getAreaCsxLayer( ap.mAreaType ) != 2 ) continue;
           ap.toCsurvey( pw, cave, branch );
         } 
       }
@@ -2192,7 +2192,7 @@ public class DrawingCommandManager
 
 	if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
 	  DrawingLinePath lp = (DrawingLinePath)p;
-	  if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
+	  if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 2 ) continue;
 	  lp.toCsurvey( pw, cave, branch );
         }
       }
@@ -2208,7 +2208,7 @@ public class DrawingCommandManager
 
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
-          if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
+          if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 4 ) continue;
           lp.toCsurvey( pw, cave, branch );
         }
       }
@@ -2224,10 +2224,10 @@ public class DrawingCommandManager
 
         if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
           DrawingLinePath lp = (DrawingLinePath)p;
-          if ( DrawingBrushPaths.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
+          if ( BrushManager.getLineCsxLayer( lp.mLineType ) != 5 ) continue;
           lp.toCsurvey( pw, cave, branch );
         }
-        // if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
+        // if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
         //   // linetype: 0 line, 1 spline, 2 bezier
         //   pw.format("          <item layer=\"5\" name=\"\" type=\"4\" category=\"1\" linetype=\"0\" mergemode=\"0\">\n");
         //   pw.format("            <pen type=\"1\" />\n");
@@ -2256,7 +2256,7 @@ public class DrawingCommandManager
 
         if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
           DrawingPointPath pp = (DrawingPointPath)p;
-          if ( DrawingBrushPaths.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
+          if ( BrushManager.getPointCsxLayer( pp.mPointType ) != 6 ) continue;
           pp.toCsurvey( pw, cave, branch );
         }
       }
@@ -2305,7 +2305,7 @@ public class DrawingCommandManager
       DrawingPath p = (DrawingPath)icc;
       if ( p.mType != DrawingPath.DRAWING_PATH_LINE ) continue;
       DrawingLinePath lp = (DrawingLinePath)p;
-      if ( lp.mLineType != DrawingBrushPaths.mLineLib.mLineWallIndex ) continue;
+      if ( lp.mLineType != BrushManager.mLineLib.mLineWallIndex ) continue;
       LinePoint pt = lp.mFirst;
       while ( pt != lp.mLast ) {
         LinePoint pn = pt.mNext;

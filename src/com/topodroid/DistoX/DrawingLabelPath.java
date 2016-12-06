@@ -36,10 +36,10 @@ public class DrawingLabelPath extends DrawingPointPath
 
   public DrawingLabelPath( String text, float off_x, float off_y, int scale, String options )
   {
-    super( DrawingBrushPaths.mPointLib.mPointLabelIndex, off_x, off_y, scale, options );
+    super( BrushManager.mPointLib.mPointLabelIndex, off_x, off_y, scale, options );
     mText = text;
-    // setPaint( DrawingBrushPaths.pointPaint[ DrawingBrushPaths.POINT_LABEL ] );
-    // mPaint = DrawingBrushPaths.pointPaint[ DrawingBrushPaths.POINT_LABEL ];
+    // setPaint( BrushManager.pointPaint[ BrushManager.POINT_LABEL ] );
+    // mPaint = BrushManager.pointPaint[ BrushManager.POINT_LABEL ];
     // paint = new Paint();
     // paint.setDither(true);
     // paint.setColor( 0xffffffff );
@@ -62,7 +62,7 @@ public class DrawingLabelPath extends DrawingPointPath
       ccx = x + dis.readFloat( );
       ccy = y + dis.readFloat( );
       // String th_name = dis.readUTF( );
-      // type = DrawingBrushPaths.getPointLabelIndex();
+      // type = BrushManager.getPointLabelIndex();
       if ( version > 207043 ) orientation = dis.readFloat( );
       scale = dis.readInt( );
       text = dis.readUTF();
@@ -132,7 +132,7 @@ public class DrawingLabelPath extends DrawingPointPath
     if ( scale != mScale ) {
       mScale = scale;
       float f = fontSize();
-      mPaint = new Paint( DrawingBrushPaths.labelPaint );
+      mPaint = new Paint( BrushManager.labelPaint );
       mPaint.setTextSize( TDSetting.mLabelSize * f );
       makeLabelPath( f );
     }
@@ -199,7 +199,7 @@ public class DrawingLabelPath extends DrawingPointPath
       dos.write( 'T' );
       dos.writeFloat( cx );
       dos.writeFloat( cy );
-      // dos.writeUTF( DrawingBrushPaths.mPointLib.getSymbolThName(mPointType) );
+      // dos.writeUTF( BrushManager.mPointLib.getSymbolThName(mPointType) );
       dos.writeFloat( (float)mOrientation ); // from version 2.7.4e
       dos.writeInt( mScale );
       dos.writeUTF( ( mText != null )? mText : "" );

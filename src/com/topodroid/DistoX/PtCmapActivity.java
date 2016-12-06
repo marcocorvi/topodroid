@@ -78,7 +78,7 @@ public class PtCmapActivity extends Activity
     StringBuilder sb = new StringBuilder();
     for ( int k=0; k<7; ++k ) {
       String txt = mETline[k].getText().toString().trim();
-      if ( ! DrawingBrushPaths.mLineLib.hasSymbolByThName( txt ) ) {
+      if ( ! BrushManager.mLineLib.hasSymbolByThName( txt ) ) {
         mETline[k].setError( getResources().getString( R.string.bad_line ) );
         return false;
       }
@@ -87,7 +87,7 @@ public class PtCmapActivity extends Activity
     }
     for ( int k=0; k<7; ++k ) {
       String txt = mETpoint[k].getText().toString().trim();
-      if ( ! DrawingBrushPaths.mPointLib.hasSymbolByThName( txt ) ) {
+      if ( ! BrushManager.mPointLib.hasSymbolByThName( txt ) ) {
         mETpoint[k].setError( getResources().getString( R.string.bad_point ) );
         return false;
       }

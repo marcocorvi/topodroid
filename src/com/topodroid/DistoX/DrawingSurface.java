@@ -324,11 +324,11 @@ public class DrawingSurface extends SurfaceView
 
     DrawingStationName st = new DrawingStationName( num_st, x, y );
     if ( num_st.mHidden == 1 ) {
-      st.setPaint( DrawingBrushPaths.fixedStationHiddenPaint );
+      st.setPaint( BrushManager.fixedStationHiddenPaint );
     } else if ( num_st.mHidden == -1 || num_st.mBarrierAndHidden ) {
-      st.setPaint( DrawingBrushPaths.fixedStationBarrierPaint );
+      st.setPaint( BrushManager.fixedStationBarrierPaint );
     } else {
-      st.setPaint( DrawingBrushPaths.fixedStationPaint );
+      st.setPaint( BrushManager.fixedStationPaint );
     }
     if ( xsections != null ) {
       for ( PlotInfo plot : xsections ) {
@@ -349,7 +349,7 @@ public class DrawingSurface extends SurfaceView
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
     // NOTE No station_XSection in X-Sections
     DrawingStationName st = new DrawingStationName( name, x, y );
-    st.setPaint( DrawingBrushPaths.fixedStationPaint );
+    st.setPaint( BrushManager.fixedStationPaint );
     commandManager.addStation( st, false ); // NOTE make this true for selectable station in all sections
     return st;
   }
@@ -547,15 +547,15 @@ public class DrawingSurface extends SurfaceView
     palette.addPointFilename("user"); // make sure local palette contains "user" symnbols
     palette.addLineFilename("user");
     palette.addAreaFilename("user");
-    for ( Symbol p : DrawingBrushPaths.mPointLib.getSymbols() ) if ( p.isEnabled() ) {
+    for ( Symbol p : BrushManager.mPointLib.getSymbols() ) if ( p.isEnabled() ) {
       String fname = p.getFilename();
       if ( ! fname.equals("user") ) palette.addPointFilename( fname );
     }
-    for ( Symbol p : DrawingBrushPaths.mLineLib.getSymbols() ) if ( p.isEnabled() ) {
+    for ( Symbol p : BrushManager.mLineLib.getSymbols() ) if ( p.isEnabled() ) {
       String fname = p.getFilename();
       if ( ! fname.equals("user") ) palette.addLineFilename( fname );
     }
-    for ( Symbol p : DrawingBrushPaths.mAreaLib.getSymbols() ) if ( p.isEnabled() ) {
+    for ( Symbol p : BrushManager.mAreaLib.getSymbols() ) if ( p.isEnabled() ) {
       String fname = p.getFilename();
       if ( ! fname.equals("user") ) palette.addAreaFilename( fname );
     }

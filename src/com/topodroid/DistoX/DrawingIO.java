@@ -70,11 +70,11 @@ class DrawingIO
     boolean is_not_section = true;
 
     // TDLog.Log( TDLog.LOG_PLOT, "Load Therion file " + filename + " delta " + dx + " " + dy );
-    // DrawingBrushPaths.makePaths( );
-    DrawingBrushPaths.resetPointOrientations();
+    // BrushManager.makePaths( );
+    BrushManager.resetPointOrientations();
 
-    // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + DrawingBrushPaths.mOrientation[0]
-    //                      + " 7: " + DrawingBrushPaths.mOrientation[7] );
+    // TDLog.Log( TDLog.LOG_PLOT, "after reset 0: " + BrushManager.mOrientation[0]
+    //                      + " 7: " + BrushManager.mOrientation[7] );
 
     synchronized( TDPath.mTherionLock ) {
       try {
@@ -92,7 +92,7 @@ class DrawingIO
                 for ( int k=1; k<syms.length; ++k ) {
                   if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addPointFilename( syms[k] );
                 }
-                DrawingBrushPaths.mPointLib.makeEnabledListFromPalette( localPalette );
+                BrushManager.mPointLib.makeEnabledListFromPalette( localPalette );
               }
             } else if ( line.startsWith( "#L " ) ) { // LINE PALETTE
               if ( localPalette != null ) {
@@ -102,7 +102,7 @@ class DrawingIO
                 for ( int k=1; k<syms.length; ++k ) {
                   if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addLineFilename( syms[k] );
                 }
-                DrawingBrushPaths.mLineLib.makeEnabledListFromPalette( localPalette );
+                BrushManager.mLineLib.makeEnabledListFromPalette( localPalette );
               }
             } else if ( line.startsWith( "#A " ) ) { // AREA PALETTE
               if ( localPalette != null ) {
@@ -112,7 +112,7 @@ class DrawingIO
                 for ( int k=1; k<syms.length; ++k ) {
                   if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addAreaFilename( syms[k] );
                 }
-                DrawingBrushPaths.mAreaLib.makeEnabledListFromPalette( localPalette );
+                BrushManager.mAreaLib.makeEnabledListFromPalette( localPalette );
               }
             }
             continue;
@@ -140,7 +140,7 @@ class DrawingIO
             if ( vals.length < 4 ) {
               TDLog.Error( "bad point cmd: " + line );
             } else {
-              int ptType = DrawingBrushPaths.mPointLib.mSymbolNr;
+              int ptType = BrushManager.mPointLib.mSymbolNr;
               boolean has_orientation = false;
               float orientation = 0.0f;
               int scale = DrawingPointPath.SCALE_M;
@@ -210,13 +210,13 @@ class DrawingIO
                 }
               }
 
-              DrawingBrushPaths.mPointLib.tryLoadMissingPoint( type );
+              BrushManager.mPointLib.tryLoadMissingPoint( type );
               // map pre 3.1.1 thnames to 3.1.1 names
               String thname = type;
               if ( thname.equals( "user" ) )        { thname = "u:user"; }
               else if ( thname.equals( "danger" ) ) { thname = "u:danger"; }
               else if ( thname.equals( "archeo" ) ) { thname = "archeo-material"; }
-              ptType = DrawingBrushPaths.mPointLib.getSymbolIndexByThName( thname );
+              ptType = BrushManager.mPointLib.getSymbolIndexByThName( thname );
               // Log.v("DistoX", "type " + type + " thname " + thname + " " + ptType );
               if ( ptType < 0 ) {
                 if ( missingSymbols != null ) missingSymbols.addPointFilename( type ); // add "type" to the missing point-types
@@ -224,11 +224,11 @@ class DrawingIO
                 // continue;
               }
 
-              if ( ptType == DrawingBrushPaths.mPointLib.mPointLabelIndex ) {
+              if ( ptType == BrushManager.mPointLib.mPointLabelIndex ) {
                 if ( label_text != null ) {
                   // "danger" is no longer mapped on a label 
                   // if ( label_text.equals( "!" ) ) {    // "danger" point
-                  //   DrawingPointPath path = new DrawingPointPath( DrawingBrushPaths.mPointLib.mPointDangerIndex, x, y, scale, options );
+                  //   DrawingPointPath path = new DrawingPointPath( BrushManager.mPointLib.mPointDangerIndex, x, y, scale, options );
                   //   surface.addDrawingPath( path );
                   // } else {                             // regular label
                     DrawingLabelPath path = new DrawingLabelPath( label_text, x, y, scale, options );
@@ -238,12 +238,12 @@ class DrawingIO
                     surface.addDrawingPath( path );
                   // }
                 }
-              } else if ( has_orientation && DrawingBrushPaths.mPointLib.isSymbolOrientable(ptType) ) {
+              } else if ( has_orientation && BrushManager.mPointLib.isSymbolOrientable(ptType) ) {
                 // TDLog.Log( TDLog.LOG_PLOT, "[2] point " + ptType + " has orientation " + orientation );
-                DrawingBrushPaths.rotateGradPoint( ptType, orientation );
+                BrushManager.rotateGradPoint( ptType, orientation );
                 DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
                 surface.addDrawingPath( path );
-                DrawingBrushPaths.rotateGradPoint( ptType, -orientation );
+                BrushManager.rotateGradPoint( ptType, -orientation );
               } else {
                 DrawingPointPath path = new DrawingPointPath( ptType, x, y, scale, options );
                 surface.addDrawingPath( path );
@@ -260,7 +260,7 @@ class DrawingIO
                 if ( vals.length >= 8 && vals[6].equals("-visibility") && vals[7].equals("off") ) {
                   visible = false;
                 }
-                int arType = DrawingBrushPaths.mAreaLib.mSymbolNr;
+                int arType = BrushManager.mAreaLib.mSymbolNr;
                 DrawingAreaPath path = new DrawingAreaPath( arType, vals[3], visible );
 
                 // TODO insert new area-path
@@ -281,10 +281,10 @@ class DrawingIO
                       line = readLine( br ); // area statement
                       String[] vals2 = line.split( " " );
                       if ( vals2.length >= 2 ) {
-                        DrawingBrushPaths.mAreaLib.tryLoadMissingArea( vals2[1] );
+                        BrushManager.mAreaLib.tryLoadMissingArea( vals2[1] );
                         String thname = vals2[1];
                         if ( thname.equals( "user" ) ) { thname = "u:user"; }
-                        arType = DrawingBrushPaths.mAreaLib.getSymbolIndexByThName( thname );
+                        arType = BrushManager.mAreaLib.getSymbolIndexByThName( thname );
                         if ( arType < 0 ) {
                           if ( missingSymbols != null ) missingSymbols.addAreaFilename( vals2[1] );
                           arType = 0; // SymbolAreaLibrary.mAreaUserIndex; // FIXME
@@ -381,13 +381,13 @@ class DrawingIO
                   } 
                 }
                 
-                int lnTypeMax = DrawingBrushPaths.mLineLib.mSymbolNr;
+                int lnTypeMax = BrushManager.mLineLib.mSymbolNr;
                 int lnType = lnTypeMax;
                 DrawingLinePath path = null;
-                DrawingBrushPaths.mLineLib.tryLoadMissingLine( type );
+                BrushManager.mLineLib.tryLoadMissingLine( type );
                 String thname = type;
                 if ( thname.equals( "user" ) ) { thname = "u:user"; }
-                lnType = DrawingBrushPaths.mLineLib.getSymbolIndexByThName( thname );
+                lnType = BrushManager.mLineLib.getSymbolIndexByThName( thname );
                 if ( lnType < 0 ) {
                   if ( missingSymbols != null ) missingSymbols.addLineFilename( type );
                   lnType = 0; // SymbolLineLibrary.mLineUserIndex; // FIXME
@@ -551,8 +551,8 @@ class DrawingIO
   {
     int version = 0;
     boolean in_scrap = false;
-    // DrawingBrushPaths.makePaths( );
-    DrawingBrushPaths.resetPointOrientations();
+    // BrushManager.makePaths( );
+    BrushManager.resetPointOrientations();
     DrawingPath path = null;
     int project_dir = 0;
     float north_x1, north_y1, north_x2, north_y2;
@@ -685,9 +685,9 @@ class DrawingIO
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
       if ( type == PlotInfo.PLOT_PROFILE ) dos.writeInt( proj_dir );
-      DrawingBrushPaths.mPointLib.toDataStream( dos );
-      DrawingBrushPaths.mLineLib.toDataStream( dos );
-      DrawingBrushPaths.mAreaLib.toDataStream( dos );
+      BrushManager.mPointLib.toDataStream( dos );
+      BrushManager.mLineLib.toDataStream( dos );
+      BrushManager.mAreaLib.toDataStream( dos );
 
       dos.write('I');
       dos.writeFloat( bbox.left );
@@ -753,11 +753,11 @@ class DrawingIO
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     pw.format("#P ");
-    DrawingBrushPaths.mPointLib.writePalette( pw );
+    BrushManager.mPointLib.writePalette( pw );
     pw.format("\n#L ");
-    DrawingBrushPaths.mLineLib.writePalette( pw );
+    BrushManager.mLineLib.writePalette( pw );
     pw.format("\n#A ");
-    DrawingBrushPaths.mAreaLib.writePalette( pw );
+    BrushManager.mAreaLib.writePalette( pw );
     pw.format("\n");
     out.write( sw.getBuffer().toString() );
   }

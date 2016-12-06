@@ -396,7 +396,7 @@ class DrawingDxf
 
       if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
         DrawingLinePath lp = (DrawingLinePath)p;
-        if ( lp.lineType() == DrawingBrushPaths.mLineLib.mLineWallIndex ) {
+        if ( lp.lineType() == BrushManager.mLineLib.mLineWallIndex ) {
           // ArrayList< LinePoint > pts = lp.mPoints;
           // for ( LinePoint pt : pts ) 
           for ( LinePoint pt = lp.mFirst; pt != null; pt = pt.mNext ) {
@@ -547,8 +547,8 @@ class DrawingDxf
         }
         writeEndTable( out );
 
-        SymbolLineLibrary linelib = DrawingBrushPaths.mLineLib;
-        SymbolAreaLibrary arealib = DrawingBrushPaths.mAreaLib;
+        SymbolLineLibrary linelib = BrushManager.mLineLib;
+        SymbolAreaLibrary arealib = BrushManager.mAreaLib;
         int nr_layers = 7 + linelib.mSymbolNr + arealib.mSymbolNr;
         ++handle; writeBeginTable( out, "LAYER", handle, nr_layers );
         {
@@ -692,10 +692,10 @@ class DrawingDxf
           }
           writeEndTable( out );
 
-          ++handle; writeBeginTable( out, "BLOCK_RECORD", handle, DrawingBrushPaths.mPointLib.mSymbolNr );
+          ++handle; writeBeginTable( out, "BLOCK_RECORD", handle, BrushManager.mPointLib.mSymbolNr );
           {
-            for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
-              String block = "P_" + DrawingBrushPaths.mPointLib.getSymbolThName(n).replace(':','-');
+            for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
+              String block = "P_" + BrushManager.mPointLib.getSymbolThName(n).replace(':','-');
               writeString( out, 0, "BLOCK_RECORD" );
               ++handle; writeAcDb( out, handle, AcDbSymbolTR, "AcDbBlockTableRecord" );
               writeString( out, 2, block );
@@ -711,8 +711,8 @@ class DrawingDxf
       writeSection( out, "BLOCKS" );
       {
         // // 8 layer (0), 2 block name,
-        for ( int n = 0; n < DrawingBrushPaths.mPointLib.mSymbolNr; ++ n ) {
-          SymbolPoint pt = (SymbolPoint)DrawingBrushPaths.mPointLib.getSymbolByIndex(n);
+        for ( int n = 0; n < BrushManager.mPointLib.mSymbolNr; ++ n ) {
+          SymbolPoint pt = (SymbolPoint)BrushManager.mPointLib.getSymbolByIndex(n);
           String block = "P_" + pt.getThName().replace(':','-');
 
           writeString( out, 0, "BLOCK" );
@@ -724,7 +724,7 @@ class DrawingDxf
           writeXYZ( out, 0, 0, 0, 0 );
 
           out.write( pt.getDxf() );
-          // out.write( DrawingBrushPaths.mPointLib.getPoint(n).getDxf() );
+          // out.write( BrushManager.mPointLib.getPoint(n).getDxf() );
 
           writeString( out, 0, "ENDBLK" );
           // if ( mVersion13 ) {
@@ -863,7 +863,7 @@ class DrawingDxf
           else if ( path.mType == DrawingPath.DRAWING_PATH_LINE )
           {
             DrawingLinePath line = (DrawingLinePath)path;
-            String layer = "L_" + DrawingBrushPaths.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
+            String layer = "L_" + BrushManager.mLineLib.getSymbolThName( line.lineType() ).replace(':','-');
             int flag = 0;
             if ( checkSpline( line ) ) {
               handle = printSpline( pw5, line, scale, handle, layer, false );
@@ -876,7 +876,7 @@ class DrawingDxf
           {
             DrawingAreaPath area = (DrawingAreaPath) path;
             // Log.v("DistoX", "area size " + area.size() );
-            String layer = "A_" + DrawingBrushPaths.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
+            String layer = "A_" + BrushManager.mAreaLib.getSymbolThName( area.areaType() ).replace(':','-');
             if ( checkSpline( area ) ) {
               handle = printSpline( pw5, area, scale, handle, layer, true );
             } else {
@@ -941,8 +941,8 @@ class DrawingDxf
           {
             // FIXME point scale factor is 0.3
             DrawingPointPath point = (DrawingPointPath) path;
-            String block = "P_" + DrawingBrushPaths.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
-            if ( point.mPointType == DrawingBrushPaths.getPointLabelIndex() ) {
+            String block = "P_" + BrushManager.mPointLib.getSymbolThName( point.mPointType ).replace(':','-');
+            if ( point.mPointType == BrushManager.getPointLabelIndex() ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
               handle = printText( pw5, handle, label.mText,  point.cx * scale, -point.cy * scale, (float)label.mOrientation,
                                   LABEL_SCALE, "POINT", my_style );

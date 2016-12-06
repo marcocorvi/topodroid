@@ -47,7 +47,7 @@ public class DrawingStationName extends DrawingPointPath
 
   public DrawingStationName( String name, float x, float y )
   {
-    super( DrawingBrushPaths.mPointLib.mPointLabelIndex,
+    super( BrushManager.mPointLib.mPointLabelIndex,
            x, // scene coordinate
            y, 
            DrawingPointPath.SCALE_M, null );
@@ -65,7 +65,7 @@ public class DrawingStationName extends DrawingPointPath
 
   public DrawingStationName( NumStation num_st, float x, float y )
   {
-    super( DrawingBrushPaths.mPointLib.mPointLabelIndex,
+    super( BrushManager.mPointLib.mPointLabelIndex,
            x, // scene coordinate
            y, 
            DrawingPointPath.SCALE_M, null );
@@ -75,7 +75,7 @@ public class DrawingStationName extends DrawingPointPath
     mXSectionType = PlotInfo.PLOT_NULL;
 
     // TDLog.Log( TDLog.LOG_PLOT, "DrawingStationName cstr " + mName + " " + x + " " + y );
-    if ( num_st.mDuplicate ) mPaint = DrawingBrushPaths.duplicateStationPaint;
+    if ( num_st.mDuplicate ) mPaint = BrushManager.duplicateStationPaint;
     setCenter( x, y ); // scene coords
     mDuplicate = num_st.mDuplicate;
     
@@ -127,7 +127,7 @@ public class DrawingStationName extends DrawingPointPath
         Path path = new Path();
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX, cy+mDY );
-        canvas.drawPath( path, DrawingBrushPaths.mStationSymbol.mPaint );
+        canvas.drawPath( path, BrushManager.mStationSymbol.mPaint );
       }
     }
   }
@@ -145,7 +145,7 @@ public class DrawingStationName extends DrawingPointPath
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX, cy+mDY );
         path.transform( matrix );
-        canvas.drawPath( path, DrawingBrushPaths.mStationSymbol.mPaint );
+        canvas.drawPath( path, BrushManager.mStationSymbol.mPaint );
       }
     }
   }

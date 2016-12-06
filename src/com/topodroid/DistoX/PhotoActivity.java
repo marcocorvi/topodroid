@@ -99,6 +99,8 @@ public class PhotoActivity extends Activity
 
   @Override
   public void setRefAzimuth( float azimuth, long fixed_extend ) { }
+    
+  public void setTheTitle() { }
 
   // ----------------------------------------------------------------------
 

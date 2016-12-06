@@ -52,7 +52,7 @@ public class DistoXDBlock
   int    mType;   
   int mShotType;  // 0: DistoX, 1: manual
   boolean mWithPhoto;
-  boolean mMultiBad;
+  boolean mMultiBad; // whether it disagree with siblings
 
   public static final int BLOCK_BLANK      = 0;
   public static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
@@ -73,6 +73,22 @@ public class DistoXDBlock
   public boolean isSurface() { return mFlag == BLOCK_SURFACE; }
   public boolean isDuplicate() { return mFlag == BLOCK_DUPLICATE; }
   // public boolean isBackshot() { return mFlag == BLOCK_BACKSHOT; }
+
+  void setTypeBlankLeg( ) { if ( mType == BLOCK_BLANK ) mType = BLOCK_BLANK_LEG; }
+  boolean isTypeBlank() { return mType == BLOCK_BLANK || mType == BLOCK_BLANK_LEG; }
+  static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
+
+  public int type() { return mType; }
+
+  boolean isMagneticBad( )
+  {
+    if ( mAcceleration == 0.0f || mMagnetic == 0.0f ) return false;
+    return TopoDroidApp.isBlockMagneticBad( mAcceleration, mMagnetic, mDip );
+  }
+
+  boolean isRecent( long id ) { return mId >= id; }
+
+  boolean isMultiBad() { return mMultiBad; }
 
 
   // used by PocketTopo parser only
@@ -167,14 +183,6 @@ public class DistoXDBlock
   //     mExtend = EXTEND_LEFT;
   //   }
   // }
-
-  void setTypeBlankLeg( ) { if ( mType == BLOCK_BLANK ) mType = BLOCK_BLANK_LEG; }
-
-  boolean isTypeBlank() { return mType == BLOCK_BLANK || mType == BLOCK_BLANK_LEG; }
-  
-  static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
-
-  public int type() { return mType; }
 
   // {
   //   if ( mFrom == null || mFrom.length() == 0 ) {
@@ -313,16 +321,6 @@ public class DistoXDBlock
       TopoDroidApp.deltaDip( mDip ) * TDSetting.mUnitAngle
     );
   }
-
-  boolean isAcceptable( )
-  {
-    if ( mAcceleration == 0.0f || mMagnetic == 0.0f ) return true;
-    return TopoDroidApp.isBlockAcceptable( mAcceleration, mMagnetic, mDip );
-  }
-
-  boolean isRecent( long id ) { return mId >= id; }
-
-  boolean isMultiBad() { return mMultiBad; }
 
 }
 

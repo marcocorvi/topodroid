@@ -299,9 +299,18 @@ public class ShotWindow extends Activity
     }
   }
 
-  void setTheTitle()
+  public void setTheTitle()
   {
-    setTitle( mApp.getConnectionStateTitleStr() + mApp.mySurvey );
+    StringBuilder sb = new StringBuilder();
+    if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
+      sb.append( "{" );
+      if ( mApp.mDevice != null ) sb.append( mApp.mDevice.getNickname() );
+      sb.append( "} " );
+    }
+    sb.append( mApp.getConnectionStateTitleStr() );
+    sb.append( mApp.mySurvey );
+
+    setTitle( sb.toString() );
     // FIXME setTitleColor( TDConst.COLOR_NORMAL );
   }
 
@@ -782,6 +791,7 @@ public class ShotWindow extends Activity
     mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bt_no );
 
     if ( TDSetting.mLevelOverBasic ) {
+      mButton1[ BTN_DOWNLOAD ].setOnLongClickListener( this );
       mButton1[ BTN_PLOT ].setOnLongClickListener( this );
     }
 
@@ -977,7 +987,17 @@ public class ShotWindow extends Activity
     if ( CutNPaste.dismissPopupBT() ) return true;
 
     Button b = (Button)view;
-    if ( b == mButton1[ BTN_PLOT ] ) {
+    if ( b == mButton1[ BTN_DOWNLOAD ] ) {
+      mDataDownloader.toggleDownload();
+      setConnectionStatus( mDataDownloader.getStatus() );
+      if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
+          && mDataDownloader.isDownloading() 
+          && mApp.mDData.getDevices().size() > 1 ) {
+        (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+      } else {
+        mDataDownloader.doDataDownload( );
+      }
+    } else if ( b == mButton1[ BTN_PLOT ] ) {
       if ( mRecentPlot != null ) {
         startExistingPlot( mRecentPlot, mRecentPlotType, null );
       }
@@ -1009,21 +1029,11 @@ public class ShotWindow extends Activity
       int k1 = 0;
       // int k2 = 0;
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-        if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI ) {
+        if ( mApp.mDevice != null ) {
+          setConnectionStatus( 2 ); // turn arrow orange
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
-          if ( mDataDownloader.isDownloading() ) {
-            (new DeviceSelectDialog( this, mApp, mDataDownloader )).show();
-          } else {
-            mDataDownloader.doDataDownload( );
-          }
-        } else {
-          if ( mApp.mDevice != null ) {
-            setConnectionStatus( 2 ); // turn arrow orange
-            mDataDownloader.toggleDownload();
-            setConnectionStatus( mDataDownloader.getStatus() );
-            mDataDownloader.doDataDownload( );
-          }
+          mDataDownloader.doDataDownload( );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
         doBluetooth( b );

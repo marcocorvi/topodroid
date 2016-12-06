@@ -257,14 +257,14 @@ public class SketchWindow extends ItemDrawer
 */  
 
   @Override
-  protected void setTheTitle()
+  public void setTheTitle()
   {
     Resources res = getResources();
     // String dir = mInfo.getDirectionString();
     String symbol_name = // ( mIsInSection) ? "section" :
-        ( mSymbol == Symbol.POINT )? res.getString(R.string.POINT) + DrawingBrushPaths.mPointLib.getSymbolName( mCurrentPoint )
+        ( mSymbol == Symbol.POINT )? res.getString(R.string.POINT) + BrushManager.mPointLib.getSymbolName( mCurrentPoint )
       : ( mSymbol == Symbol.LINE )? res.getString(R.string.LINE)
-      : res.getString(R.string.AREA) + DrawingBrushPaths.mAreaLib.getSymbolName( mCurrentArea );
+      : res.getString(R.string.AREA) + BrushManager.mAreaLib.getSymbolName( mCurrentArea );
 
     setTitle( String.format( res.getString( R.string.title_sketch), 
       mInfo.getShotString(),
@@ -359,7 +359,7 @@ public class SketchWindow extends ItemDrawer
   
   public void areaSelected( int k, boolean update_recent ) 
   {
-    if ( k >= 0 && k < DrawingBrushPaths.mAreaLib.mSymbolNr ) {
+    if ( k >= 0 && k < BrushManager.mAreaLib.mSymbolNr ) {
       mSymbol = Symbol.AREA;
       mCurrentArea = k;
     }
@@ -368,7 +368,7 @@ public class SketchWindow extends ItemDrawer
 
   public void lineSelected( int k, boolean update_recent ) 
   {
-    if ( k >= 0 && k < DrawingBrushPaths.mLineLib.mSymbolNr ) {
+    if ( k >= 0 && k < BrushManager.mLineLib.mSymbolNr ) {
       mSymbol = Symbol.LINE;
       mCurrentLine = k;
     }
@@ -377,7 +377,7 @@ public class SketchWindow extends ItemDrawer
 
   public void pointSelected( int p, boolean update_recent )
   {
-    if ( p >= 0 && p < DrawingBrushPaths.mPointLib.mSymbolNr ) {
+    if ( p >= 0 && p < BrushManager.mPointLib.mSymbolNr ) {
       mSymbol = Symbol.POINT;
       mCurrentPoint = p;
     }
@@ -655,9 +655,9 @@ public class SketchWindow extends ItemDrawer
 
     // setCurrentPaint();
     mCurrentBrush = new DrawingPenBrush();
-    mCurrentPoint = 0; // DrawingBrushPaths.POINT_LABEL;
-    mCurrentLine  = 0; // DrawingBrushPaths.mLineLib.mLineWallIndex;
-    mCurrentArea  = 0; // DrawingBrushPaths.AREA_WATER;
+    mCurrentPoint = 0; // BrushManager.POINT_LABEL;
+    mCurrentLine  = 0; // BrushManager.mLineLib.mLineWallIndex;
+    mCurrentArea  = 0; // BrushManager.AREA_WATER;
 
     // mSectionType = SketchSection.SECTION_NONE;
     // mIsInSection = false;
@@ -670,7 +670,7 @@ public class SketchWindow extends ItemDrawer
     // mSketchSurface.setOnLongClickListener(this);
     // mSketchSurface.setBuiltInZoomControls(true);
 
-    DrawingBrushPaths.makePaths( getResources() );
+    BrushManager.makePaths( getResources() );
 
     mData        = mApp.mData; // new DataHelper( this ); 
     Bundle extras = getIntent().getExtras();
@@ -847,7 +847,7 @@ public class SketchWindow extends ItemDrawer
   {
     // mSketchSurface.addStation( st.name, st.e, st.s, st.v ); 
     SketchStationName stn = new SketchStationName( st.name, st.e, st.s, st.v );
-    stn.mPaint = DrawingBrushPaths.fixedStationPaint;
+    stn.mPaint = BrushManager.fixedStationPaint;
     mModel.addFixedStation( stn );
   }
 
@@ -871,12 +871,12 @@ public class SketchWindow extends ItemDrawer
     SketchFixedPath path = null;
     if ( splay ) {
       path = new SketchFixedPath( DrawingPath.DRAWING_PATH_SPLAY, blk,
-                                  DrawingBrushPaths.fixedSplayPaint,
+                                  BrushManager.fixedSplayPaint,
                                   null );
     } else {
       path = new SketchFixedPath( DrawingPath.DRAWING_PATH_FIXED, blk,
-                             is_reference? DrawingBrushPaths.highlightPaint : DrawingBrushPaths.fixedShotPaint,
-                             DrawingBrushPaths.fixedBluePaint );
+                             is_reference? BrushManager.highlightPaint : BrushManager.fixedShotPaint,
+                             BrushManager.fixedBluePaint );
     }
     if ( path != null ) {
       // path.setEndPoints( x1, y1, x2, y2 ); // scene coords
@@ -1360,7 +1360,7 @@ public class SketchWindow extends ItemDrawer
                 Vector p = tri.get3dPoint( x_scene, y_scene );
                 // Log.v("DistoX", "new point " + mCurrentPoint + " at " + p.x + " " + p.y + " " + p.z );
                 SketchPointPath path = new SketchPointPath( mCurrentPoint, mInfo.st1, mInfo.st2, p.x, p.y, p.z );
-                SymbolPointLibrary point_lib = DrawingBrushPaths.mPointLib;
+                SymbolPointLibrary point_lib = BrushManager.mPointLib;
                 if ( point_lib.isSymbolOrientable( mCurrentPoint ) ) {
                   float angle = (float)( point_lib.getPointOrientation( mCurrentPoint ) ); // degrees
                   // Log.v("DistoX", "point " + mCurrentPoint + " angle " + angle );
@@ -1763,7 +1763,7 @@ public class SketchWindow extends ItemDrawer
       // new SketchSaveDialog( this, this ).show();
       new ExportDialog( this, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
     } else if ( p++ == pos ) { // PALETTE 
-      DrawingBrushPaths.makePaths( getResources() );
+      BrushManager.makePaths( getResources() );
       (new SymbolEnableDialog( this, mApp )).show();
     } else if ( p++ == pos ) { // DELETE
       askDelete();

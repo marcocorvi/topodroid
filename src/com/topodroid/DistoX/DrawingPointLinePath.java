@@ -498,7 +498,7 @@ public class DrawingPointLinePath extends DrawingPath
   //   // for ( LinePoint lp : mPoints ) {
   //   //   Path path1 = new Path( path );
   //   //   path1.offset( lp.mX, lp.mY );
-  //   //   canvas.drawPath( path1, DrawingBrushPaths.highlightPaint );
+  //   //   canvas.drawPath( path1, BrushManager.highlightPaint );
   //   // }
   // }
 
@@ -512,7 +512,7 @@ public class DrawingPointLinePath extends DrawingPath
   //   //   Path path1 = new Path( path );
   //   //   path1.offset( lp.mX, lp.mY );
   //   //   path1.transform( matrix );
-  //   //   canvas.drawPath( path1, DrawingBrushPaths.highlightPaint );
+  //   //   canvas.drawPath( path1, BrushManager.highlightPaint );
   //   // }
   // }
 }

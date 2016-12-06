@@ -104,9 +104,9 @@ class ItemPickerDialog extends MyDialog
     mPlotType = type;
     mItemType = item_type; // mParent.mSymbol;
  
-    mPointLib = DrawingBrushPaths.mPointLib;
-    mLineLib = DrawingBrushPaths.mLineLib;
-    mAreaLib = DrawingBrushPaths.mAreaLib;
+    mPointLib = BrushManager.mPointLib;
+    mLineLib = BrushManager.mLineLib;
+    mAreaLib = BrushManager.mAreaLib;
 
     mScale = mParent.getPointScale();
     mSelectedPoint = mParent.mCurrentPoint;
@@ -495,7 +495,7 @@ class ItemPickerDialog extends MyDialog
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
           // Log.v( TDLog.TAG, "set TypeAndItem type line pos " + index + " index " + is.mIndex );
-          if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != DrawingBrushPaths.mLineLib.mLineSectionIndex ) {
+          if ( mPlotType != PlotInfo.PLOT_SECTION || is.mIndex != BrushManager.mLineLib.mLineSectionIndex ) {
             mSelectedLine = is.mIndex;
             // mParent.lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
           } else {
@@ -527,7 +527,7 @@ class ItemPickerDialog extends MyDialog
         // if ( TDSetting.mLevelOverBasic ) 
         {
           // mParent.pointSelected( mSelectedPoint, false );
-          // mSeekBar.setEnabled( DrawingBrushPaths.mPointLib.isPointOrientable( mSelectedPoint ) );
+          // mSeekBar.setEnabled( BrushManager.mPointLib.isPointOrientable( mSelectedPoint ) );
           if ( mPointAdapter != null ) setTypeAndItem( mItemType, mPointAdapter.getSelectedPos() );
         }
         break;

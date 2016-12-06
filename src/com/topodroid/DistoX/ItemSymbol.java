@@ -164,7 +164,7 @@ class ItemSymbol
     } else {
       mButton.setBackgroundColor( checked? 0xff444444 /* Color.DKGRAY */ : Color.BLACK ); // was 99333333
       // if ( checked ) {
-      //   mButton.setBackgroundDrawable( DrawingBrushPaths.mSymbolHighlight );
+      //   mButton.setBackgroundDrawable( BrushManager.mSymbolHighlight );
       // } else {
       //   mButton.setBackgroundColor( Color.BLACK ); 
       // }

@@ -59,10 +59,10 @@ public class SketchLinePath extends SketchPath
 
     if ( path_type == DrawingPath.DRAWING_PATH_LINE ) {
       mPaint = painter.greenPaint;
-      // mPaint = DrawingBrushPaths.mLineLib.getSymbolPaint( mThType );
+      // mPaint = BrushManager.mLineLib.getSymbolPaint( mThType );
     } else if ( path_type == DrawingPath.DRAWING_PATH_AREA ) {
       // mPaint = painter.areaPaint;
-      mPaint = DrawingBrushPaths.mAreaLib.getSymbolPaint( mThType );
+      mPaint = BrushManager.mAreaLib.getSymbolPaint( mThType );
     } else {
       mPaint = painter.whitePaint;
     }
@@ -185,14 +185,14 @@ public class SketchLinePath extends SketchPath
     PrintWriter pw  = new PrintWriter(sw);
     if ( mType == DrawingPath.DRAWING_PATH_LINE ) {
       pw.format("line %s %s -shot %s %s", 
-        "3d", DrawingBrushPaths.mLineLib.getSymbolThName(mThType), st1, st2 );
+        "3d", BrushManager.mLineLib.getSymbolThName(mThType), st1, st2 );
       if ( mClosed ) {
         pw.format(" -close on");
       }
     } else if ( mType == DrawingPath.DRAWING_PATH_AREA ) {
       // area border is closed by default
       pw.format("area %s %s -shot %s %s", 
-        "3d", DrawingBrushPaths.mAreaLib.getSymbolThName(mThType), st1, st2 );
+        "3d", BrushManager.mAreaLib.getSymbolThName(mThType), st1, st2 );
     }
     if ( mOptions != null && mOptions.length() > 0 ) {
       pw.format(" %s", mOptions );
@@ -202,7 +202,7 @@ public class SketchLinePath extends SketchPath
     for ( Vector pt : mLine.points ) {
       pt.toTherion( pw );
     }
-    // if ( mThType == DrawingBrushPaths.mLineLib.mLineSlopeIndex ) {
+    // if ( mThType == BrushManager.mLineLib.mLineSlopeIndex ) {
     //   pw.format("  l-size 40\n");
     // }
     if ( mType == DrawingPath.DRAWING_PATH_LINE ) {

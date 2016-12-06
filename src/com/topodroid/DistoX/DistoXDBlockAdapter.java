@@ -278,7 +278,7 @@ class DistoXDBlockAdapter extends ArrayAdapter< DistoXDBlock >
       tvFrom.setBackgroundColor( 0xff000033 ); // dark-blue
       tvTo.setBackgroundColor( 0xff000033 ); // dark-blue
     } 
-    if ( ! blk.isAcceptable( ) ) {
+    if ( blk.isMagneticBad( ) ) {
       tvLength.setBackgroundColor( 0xff330000 ); // dark-red
       tvCompass.setBackgroundColor( 0xff330000 ); // dark-red
       tvClino.setBackgroundColor( 0xff330000 ); // dark-red

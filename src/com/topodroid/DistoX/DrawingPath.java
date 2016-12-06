@@ -66,7 +66,7 @@ public class DrawingPath extends RectF
     mOptions  = null;
     mBlock = blk; 
     // mBBox  = new RectF();
-    mPaint = DrawingBrushPaths.errorPaint;
+    mPaint = BrushManager.errorPaint;
     // dir = 4;
     // x1 = y1 = 0.0f;
     // x2 = y2 = 1.0f;
@@ -303,8 +303,8 @@ public class DrawingPath extends RectF
     } else {
       if ( mType == DRAWING_PATH_SPLAY 
            && mBlock != null && mBlock.isRecent( TopoDroidApp.mSecondLastShotId ) 
-           && DrawingBrushPaths.fixedBluePaint != null ) {
-        canvas.drawPath( path, DrawingBrushPaths.fixedBluePaint );
+           && BrushManager.fixedBluePaint != null ) {
+        canvas.drawPath( path, BrushManager.fixedBluePaint );
       } else if ( mPaint != null ) {
         canvas.drawPath( path, mPaint );
       }

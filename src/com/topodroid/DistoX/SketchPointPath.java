@@ -56,8 +56,8 @@ public class SketchPointPath extends SketchPath
     // mOptions = "";
     mOrientation = null;
     mLabel = null;
-    mPaint = DrawingBrushPaths.mPointLib.getSymbolPaint( mThType );
-    mPath = new Path( DrawingBrushPaths.getPointOrigPath( mThType ) );
+    mPaint = BrushManager.mPointLib.getSymbolPaint( mThType );
+    mPath = new Path( BrushManager.getPointOrigPath( mThType ) );
     Matrix m = new Matrix();
     m.setScale( 0.02f, 0.02f );
     mPath.transform( m );
@@ -89,7 +89,7 @@ public class SketchPointPath extends SketchPath
 
     pw.format(Locale.US, "point %.2f %.2f %.2f %s -shot %s %s",
               mXpos*toTherion, -mYpos*toTherion, -mZpos*toTherion,
-                              DrawingBrushPaths.mPointLib.getSymbolThName(mThType), st1, st2 );
+                              BrushManager.mPointLib.getSymbolThName(mThType), st1, st2 );
     if ( mOrientation != null ) {
       pw.format(Locale.US, " -orientation %.2f %.2f %.2f",
          mOrientation.x*toTherion, -mOrientation.y*toTherion, -mOrientation.z*toTherion );

@@ -70,12 +70,12 @@ public class DrawingLineDialog extends MyDialog
     super.onCreate(savedInstanceState);
 
     String title = String.format( mParent.getResources().getString( R.string.title_draw_line ),
-                                  DrawingBrushPaths.mLineLib.getSymbolName( mLine.mLineType ) );
+                                  BrushManager.mLineLib.getSymbolName( mLine.mLineType ) );
     initLayout( R.layout.drawing_line_dialog, title );
 
     mETtype = (Spinner) findViewById( R.id.line_type );
-    // mETtype.setText( DrawingBrushPaths.mLineLib.getSymbolThName( mLine.mLineType ) );
-    ArrayAdapter adapter = new ArrayAdapter<String>( mContext, R.layout.menu, DrawingBrushPaths.mLineLib.getSymbolNames() );
+    // mETtype.setText( BrushManager.mLineLib.getSymbolThName( mLine.mLineType ) );
+    ArrayAdapter adapter = new ArrayAdapter<String>( mContext, R.layout.menu, BrushManager.mLineLib.getSymbolNames() );
     mETtype.setAdapter( adapter );
     mETtype.setSelection( mType );
     mETtype.setOnItemSelectedListener( this );

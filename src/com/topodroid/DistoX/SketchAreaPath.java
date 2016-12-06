@@ -91,7 +91,7 @@ public class SketchAreaPath extends SketchPath
       pt.toTherion( pw );
     }
     pw.format("endline\n");
-    pw.format("area %s\n", DrawingBrushPaths.mAreaLib.getSymbolThName( mThType ) );
+    pw.format("area %s\n", BrushManager.mAreaLib.getSymbolThName( mThType ) );
     pw.format("  a%d\n", mAreaCnt );
     pw.format("endarea\n");
     return sw.getBuffer().toString();

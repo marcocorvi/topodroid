@@ -79,6 +79,12 @@ class Device
     mTail = 0;
   }
 
+  public String getNickname()
+  {
+    if ( mNickname != null && mNickname.length() > 0 ) return mNickname;
+    return mName;
+  }
+
   public String toString() 
   { 
     if ( mNickname != null && mNickname.length() > 0 ) {

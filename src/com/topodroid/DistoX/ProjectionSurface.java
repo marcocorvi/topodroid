@@ -146,7 +146,7 @@ public class ProjectionSurface extends SurfaceView
     public DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y )
     {
       DrawingStationName st = new DrawingStationName( num_st, x, y );
-      st.setPaint( DrawingBrushPaths.duplicateStationPaint );
+      st.setPaint( BrushManager.duplicateStationPaint );
       mCommandManager.addStation( st );
       return st;
     }

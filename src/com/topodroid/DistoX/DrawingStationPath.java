@@ -54,7 +54,7 @@ public class DrawingStationPath extends DrawingPath
     mScale = DrawingPointPath.SCALE_NONE; // scale
     // mPath = null;
     setScale( scale );
-    mPaint = DrawingBrushPaths.mStationSymbol.mPaint;
+    mPaint = BrushManager.mStationSymbol.mPaint;
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
   }
 
@@ -73,7 +73,7 @@ public class DrawingStationPath extends DrawingPath
     mScale = DrawingPointPath.SCALE_NONE; // scale
     // mPath = null;
     setScale( scale );
-    mPaint = DrawingBrushPaths.mStationSymbol.mPaint;
+    mPaint = BrushManager.mStationSymbol.mPaint;
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
   }
 
@@ -92,7 +92,7 @@ public class DrawingStationPath extends DrawingPath
       }
       Matrix m = new Matrix();
       m.postScale(f,f);
-      makePath( DrawingBrushPaths.mStationSymbol.mPath, m, cx, cy ); // mXpos, mYpos );
+      makePath( BrushManager.mStationSymbol.mPath, m, cx, cy ); // mXpos, mYpos );
     }  
   }
       

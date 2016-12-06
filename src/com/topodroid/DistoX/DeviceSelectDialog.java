@@ -1,9 +1,9 @@
 /* @file DeviceActivity.java
  *
  * @author marco corvi
- * @date nov 2011
+ * @date nov 2016
  *
- * @brief TopoDroid DistoX device activity
+ * @brief TopoDroid DistoX device selection dialog (for multi-DistoX)
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -42,16 +42,18 @@ public class DeviceSelectDialog extends MyDialog
   private Context mContext;
   private TopoDroidApp mApp;
   private DataDownloader mDownloader;
+  private ILister mLister;
 
   private ListView mList;
 
   // ---------------------------------------------------------------
-  DeviceSelectDialog( Context context, TopoDroidApp app, DataDownloader downloader )
+  DeviceSelectDialog( Context context, TopoDroidApp app, DataDownloader downloader, ILister lister )
   {
     super( context, R.string.DeviceSelectDialog );
     mContext = context;
     mApp = app;
     mDownloader = downloader;
+    mLister = lister;
     // Log.v("DistoX", "device select dialog created");
   }
 
@@ -100,6 +102,7 @@ public class DeviceSelectDialog extends MyDialog
     String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
     // String address = vals[2]; // FIXME VirtualDistoX
     mApp.setDevice( address );
+    mLister.setTheTitle();
     mDownloader.doDataDownload();
   }
 

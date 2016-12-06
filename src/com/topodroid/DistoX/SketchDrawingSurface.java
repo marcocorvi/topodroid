@@ -143,7 +143,7 @@ public class SketchDrawingSurface extends SurfaceView
     // public SketchStationName addStation( String name, float x, float y, float z )
     // {
     //   SketchStationName st = new SketchStationName(name, x, y, z );
-    //   st.mPaint = DrawingBrushPaths.fixedStationPaint;
+    //   st.mPaint = BrushManager.fixedStationPaint;
     //   mModel.addFixedStation( st );
     //   return st;
     // }

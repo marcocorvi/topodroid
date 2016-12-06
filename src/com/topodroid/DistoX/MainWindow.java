@@ -221,7 +221,7 @@ public class MainWindow extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         (new ImportDialog( mActivity, this, mApp )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
-        DrawingBrushPaths.makePaths( getResources() );
+        BrushManager.makePaths( getResources() );
         (new SymbolEnableDialog( mActivity, mApp )).show();
 
       // FIXME THMANAGER
@@ -633,7 +633,7 @@ public class MainWindow extends Activity
     // Toast.makeText(mActivity, item.toString(), Toast.LENGTH_SHORT).show();
     int p = 0;
     // if ( p++ == pos ) { // PALETTE
-    //   DrawingBrushPaths.makePaths( getResources() );
+    //   BrushManager.makePaths( getResources() );
     //   (new SymbolEnableDialog( mActivity, mApp )).show();
     // } else { 
       Intent intent;
@@ -732,7 +732,7 @@ public class MainWindow extends Activity
     //   @Override
     //   protected Void doInBackground(Void... arg0) 
     //   { 
-    //     DrawingBrushPaths.doMakePaths( );
+    //     BrushManager.doMakePaths( );
     //     WorldMagneticModel.loadEGM9615( mApp );
     //     // int n_terms = MagUtil.CALCULATE_NUMTERMS( 12 );
     //     // WorldMagneticModel.loadWMM( mApp, n_terms );
@@ -745,10 +745,10 @@ public class MainWindow extends Activity
       public void run() {
         mApp.startupStep2();
         Resources res = getResources();
-        DrawingBrushPaths.reloadPointLibrary( res ); // reload symbols
-        DrawingBrushPaths.reloadLineLibrary( res );
-        DrawingBrushPaths.reloadAreaLibrary( res );
-        DrawingBrushPaths.doMakePaths( );
+        BrushManager.reloadPointLibrary( res ); // reload symbols
+        BrushManager.reloadLineLibrary( res );
+        BrushManager.reloadAreaLibrary( res );
+        BrushManager.doMakePaths( );
         WorldMagneticModel.loadEGM9615( mApp );
       }
     };
