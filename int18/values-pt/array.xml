@@ -8,9 +8,9 @@
      <item name="two_tf">pés</item>
   </string-array>
   <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
+     <item name="none">Nenhum</item>
      <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
+     <item name="triangles">Triângulos</item>
   </string-array -->
 
   <string-array name="survexEol">
@@ -94,7 +94,7 @@
   <!-- TODO string-array name="connMode">
      <item name="batch">Por pedido</item>
      <item name="continuous">Contínuo</item>
-     <item name="multi">Multi</item>
+     <item name="multi">Múltiplo</item>
   </string-array -->
 
   <string-array name="sockType">
@@ -178,9 +178,9 @@
   </string-array>
 
   <!-- TODO string-array name="rawCData">
-     <item name="none">None</item>
+     <item name="none">Nenhum</item>
      <item name="dec">Decimal</item>
-     <item name="hex">Hex</item>
+     <item name="hex">Hexadecimal</item>
   </string-array -->
 
 </resources>
