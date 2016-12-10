@@ -937,6 +937,10 @@
   <string name="pref_checkBT_summary">启用/停用 蓝牙</string>
   <string name="pref_checkAttached_title">中间线检查</string>
   <string name="pref_checkAttached_summary">检测如果测量点相连接</string>
+  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
+  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
+  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
+  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion 区域</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">保存 xtherion 区域</string -->
   <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->

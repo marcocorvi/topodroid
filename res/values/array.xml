@@ -189,6 +189,21 @@
      <item name="four">4</item>
   </string-array>
 
+  <string-array name="backupNumber">
+     <item name="four">4</item>
+     <item name="five">5</item>
+     <item name="six">6</item>
+     <item name="seven">7</item>
+     <item name="eight">8</item>
+  </string-array>
+  <string-array name="backupNumberValue">
+     <item name="four">4</item>
+     <item name="five">5</item>
+     <item name="six">6</item>
+     <item name="seven">7</item>
+     <item name="eight">8</item>
+  </string-array>
+
   <string-array name="extraButtons">
      <item name="basic">Basic</item>
      <item name="normal">Normal</item>

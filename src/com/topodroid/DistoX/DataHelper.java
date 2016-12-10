@@ -766,9 +766,10 @@ public class DataHelper extends DataSetObservable
     //   myDB.execSQL( sw.toString() );
     // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
 
+    if ( fStation == null ) fStation = "";
     if ( tStation == null ) tStation = "";
     if ( updateShotNameStmt == null ) {
-      updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
+      updateShotNameStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
     }
     updateShotNameStmt.bindString( 1, fStation );
     updateShotNameStmt.bindString( 2, tStation );

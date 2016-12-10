@@ -944,6 +944,10 @@
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
+  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
+  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
+  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
+  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Splay Therion</string>

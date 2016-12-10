@@ -52,6 +52,21 @@
        android:defaultValue="false"
      />
 
+     <com.topodroid.DistoX.MyListPreference
+       android:key="DISTOX_BACKUP_NUMBER"
+       android:summary="@string/pref_backup_number_summary"
+       android:title="@string/pref_backup_number_title"
+       android:defaultValue="5"
+       android:entries="@array/backupNumber"
+       android:entryValues="@array/backupNumberValue"
+     />
+     <com.topodroid.DistoX.MyEditPreference
+       android:key="DISTOX_BACKUP_INTERVAL"
+       android:summary="@string/pref_backup_interval_summary"
+       android:title="@string/pref_backup_interval_title"
+       android:defaultValue="60"
+     />
+
     <Preference
        android:key="DISTOX_TOOL_POINT"
        android:title="@string/pref_tool_point_title"

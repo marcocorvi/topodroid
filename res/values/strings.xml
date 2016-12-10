@@ -941,6 +941,10 @@
   <string name="pref_checkBT_summary">Enable bluetooth check at start-up</string>
   <string name="pref_checkAttached_title">Midline check</string>
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
+  <string name="pref_backup_number_title">Backup number</string>
+  <string name="pref_backup_number_summary">Number of sketch files backups</string>
+  <string name="pref_backup_interval_title">Backup interval</string>
+  <string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_therion_splays_title">Therion splays</string>

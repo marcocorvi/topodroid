@@ -100,6 +100,8 @@ class TDSetting
     "DISTOX_LABEL_SIZE",          // 47
     "DISTOX_LINE_THICKNESS",      // 48
     "DISTOX_AUTO_SECTION_PT",     // 49
+    "DISTOX_BACKUP_NUMBER",
+    "DISTOX_BACKUP_INTERVAL",
 
     // -------------------- LASER PREFERENCES
     "DISTOX_SHOT_TIMER",          // 50 // bearing-clino timer
@@ -383,6 +385,8 @@ class TDSetting
   static float mFixedThickness = 1;    // width of fixed lines
   static float mLineThickness  = 1;    // witdh of drawing lines
   static boolean mAutoSectionPt = false;
+  static int   mBackupNumber   = 5;
+  static int   mBackupInterval = 60;
   static float mDotRadius      = 5;
   static float mArrowLength    = 8;
 
@@ -685,6 +689,8 @@ class TDSetting
     mLabelSize     = tryFloat( prefs, key[k++], "24" );             // DISTOX_LABEL_SIZE
     mLineThickness = tryFloat( prefs, key[k++], "1"  );             // DISTOX_LINE_THICKNESS
     mAutoSectionPt = prefs.getBoolean( key[k++], false );           // DISTOX_AUTO_SECTION_PT
+    mBackupNumber  = tryInt(   prefs, key[k++], "5" );              // DISTOX_BACKUP_NUMBER
+    mBackupInterval = tryInt(  prefs, key[k++], "60" );             // DISTOX_BACKUP_INTERVAL
 
     mTimerCount    = tryInt(   prefs, key[k++], "10" );             // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs, key[k++], "50" );             // DISTOX_BEEP_VOLUME
@@ -982,6 +988,10 @@ class TDSetting
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( key[ nk++ ] ) ) {
       mAutoSectionPt = prefs.getBoolean( k, false ); // DISTOX_AUTO_SECTION_PT
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mBackupNumber  = tryInt( prefs, k, "5" );      // DISTOX_BACKUP_NUMBER
+    } else if ( k.equals( key[ nk++ ] ) ) {
+      mBackupInterval = tryInt( prefs, k, "60" );    // DISTOX_BACKUP_INTERVAL
 
     } else if ( k.equals( key[ nk++ ] ) ) {
       mTimerCount       = tryInt( prefs, k, "10" );  // DISTOX_SHOT_TIMER
@@ -1297,6 +1307,9 @@ class TDSetting
     if ( name.equals( "DISTOX_STATION_SIZE"   ) ) return parseFloatValue( value, mStationSize,   1 );
     if ( name.equals( "DISTOX_LABEL_SIZE"     ) ) return parseFloatValue( value, mLabelSize,     1 );
     if ( name.equals( "DISTOX_LINE_THICKNESS" ) ) return parseFloatValue( value, mLineThickness, 1, 10 );
+
+    if ( name.equals( "DISTOX_BACKUP_NUMBER"  ) ) return parseIntValue( value, mBackupNumber,    4, 10 );
+    if ( name.equals( "DISTOX_BACKUP_INTERVAL") ) return parseIntValue( value, mBackupInterval,  5, 600 );
 
     // if ( name.equals( "DISTOX_TEAM" )
     if ( name.equals( "DISTOX_SHOT_TIMER"     ) ) return parseIntValue( value, mTimerCount, 0 );

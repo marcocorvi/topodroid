@@ -939,6 +939,10 @@
   <string name="pref_checkBT_summary">Activer/désactiver Bluetooth</string>
   <string name="pref_checkAttached_title">Vérification du cheminement</string>
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
+  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
+  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
+  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
+  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Aire Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string -->
   <string name="pref_therion_splays_title">Visées latérales Therion</string>

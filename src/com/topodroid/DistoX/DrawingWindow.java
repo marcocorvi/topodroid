@@ -366,6 +366,7 @@ public class DrawingWindow extends ItemDrawer
   protected float mZoom  = 1.0f;
 
   private boolean mModified; // whether the sketch has been modified 
+  private long mBackupTime;  // last time of backup
 
   long getPlotType()   { return mType; }
   boolean isAnySection() { return PlotInfo.isAnySection( mType ); }
@@ -427,8 +428,6 @@ public class DrawingWindow extends ItemDrawer
   boolean onMenu;
 
   private int mNrSaveTh2Task = 0;
-  private final int MAX_TASK_NORMAL = 4;
-  private final int MAX_TASK_FINAL  = 6;
 
   // ----------------------------------------------------------------
 
@@ -436,14 +435,25 @@ public class DrawingWindow extends ItemDrawer
 
   private void modified()
   {
-    if ( ! mModified ) {
-      mModified = true;
-      startSaveTdrTask( mType, PlotSave.MODIFIED, MAX_TASK_NORMAL, 1 );
-    // } else {
-    //   if ( mSaveTh2File != null ) {
-    //     mSaveTh2File.setModified( true );
-    //   }
+    long now = System.currentTimeMillis()/1000;
+    if ( now < mBackupTime ) {
+      // Log.v("DistoX", "time " + now + " < " + mBackupTime );
+      return;
     }
+    if ( mModified ) {
+      // Log.v("DistoX", "already modified true");
+      return;
+    }
+    mModified = true;
+    mBackupTime = System.currentTimeMillis()/1000 + TDSetting.mBackupInterval;
+    startSaveTdrTask( mType, PlotSave.MODIFIED, TDSetting.mBackupNumber, 1 );
+  }
+
+  private void resetModified()
+  {
+    mModified = false;
+    mBackupTime = System.currentTimeMillis()/1000 + TDSetting.mBackupInterval;
+    // Log.v("DistoX", "reset modified false, time " + mBackupTime );
   }
 
   // -------------------------------------------------------------------
@@ -637,7 +647,7 @@ public class DrawingWindow extends ItemDrawer
     if ( dismissPopups() ) return;
     if ( PlotInfo.isAnySection( mType ) ) {
       mModified = true; // force saving
-      startSaveTdrTask( mType, PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
+      startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       popInfo();
       doStart( false );
     } else {
@@ -667,18 +677,18 @@ public class DrawingWindow extends ItemDrawer
     if ( mDrawingSurface != null ) {
       // Log.v("DistoX", "do save type " + mType );
       mModified = true; // force saving
-      startSaveTdrTask( mType, PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
+      startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
 
       // if ( not_all_symbols ) AlertMissingSymbols();
       // if ( mAllSymbols ) {
       //   // Toast.makeText( mActivity, R.string.sketch_saving, Toast.LENGTH_SHORT ).show();
-      //   startSaveTdrTask( mType, PlotSave.SAVE, MAX_TASK_FINAL, TDPath.NR_BACKUP );
+      //   startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       // } else { // mAllSymbols is false: FIXME what to do ?
       //  Toast.makeText( mActivity,
       //    "NOT SAVING " + mFullName1 + " " + mFullName2, Toast.LENGTH_LONG ).show();
       // }
     }
-    mModified = false;
+    resetModified();
   }
 
   static Handler saveHandler = null;
@@ -691,7 +701,7 @@ public class DrawingWindow extends ItemDrawer
   private void startSaveTdrTask( final long type, int suffix, int maxTasks, int rotate )
   {
     // Log.v("DistoX", "start save Th2 task. type " + type + " suffix " + suffix 
-    //               + " maxTasks " + maxTasks + " rotate " + rotate ); 
+    //                + " maxTasks " + maxTasks + " rotate " + rotate ); 
     if ( suffix != PlotSave.EXPORT ) {
       if ( ! mModified ) return;
       if ( mNrSaveTh2Task > maxTasks ) return;
@@ -701,7 +711,7 @@ public class DrawingWindow extends ItemDrawer
         public void handleMessage(Message msg) {
           -- mNrSaveTh2Task;
           if ( mModified ) {
-            startSaveTdrTask( type, PlotSave.HANDLER, MAX_TASK_NORMAL, 0 ); 
+            startSaveTdrTask( type, PlotSave.HANDLER, TDSetting.mBackupNumber, 0 ); 
           } else {
             // mApp.mShotWindow.enableSketchButton( true );
             mApp.mEnableZip = true;
@@ -711,7 +721,7 @@ public class DrawingWindow extends ItemDrawer
       ++ mNrSaveTh2Task;
       // mApp.mShotWindow.enableSketchButton( false );
       mApp.mEnableZip = false;
-      mModified = false;
+      resetModified();
     } else {
       // Log.v("DISTOX", "exporting plot ...");
       saveHandler = new Handler(){
@@ -1011,7 +1021,7 @@ public class DrawingWindow extends ItemDrawer
     mSectionName  = null; 
     mShiftDrawing = false;
     mContinueLine = CONT_NO;
-    mModified     = false;
+    resetModified();
     setMode( MODE_MOVE );
     mTouchMode    = MODE_MOVE;
     setMenuAdapter( getResources(), mType );
@@ -1273,7 +1283,7 @@ public class DrawingWindow extends ItemDrawer
     mSectionName  = null; // resetStatus
     mShiftDrawing = false;
     mContinueLine = CONT_NO;
-    mModified     = false;
+    resetModified();
 
     // if ( PlotInfo.isSection( mType ) ) { 
     //   mTo      = extras.getString( TDTag.TOPODROID_PLOT_TO );  // to station ( null for X-section)
@@ -1325,7 +1335,7 @@ public class DrawingWindow extends ItemDrawer
       mSectionName  = null; // resetStatus
       mShiftDrawing = false;
       mContinueLine = CONT_NO;
-      mModified     = false;
+      resetModified();
 
       doStart( true );
     }
@@ -3302,7 +3312,7 @@ public class DrawingWindow extends ItemDrawer
 
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( PlotInfo.isSketch2D( mType ) ) { 
-          startSaveTdrTask( mType, PlotSave.TOGGLE, MAX_TASK_FINAL, TDPath.NR_BACKUP ); 
+          startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
         } else if ( PlotInfo.isSection( mType ) ) {
@@ -3375,7 +3385,7 @@ public class DrawingWindow extends ItemDrawer
               break;
             case DrawingPath.DRAWING_PATH_POINT:
               new DrawingPointDialog( mActivity, this, (DrawingPointPath)(sp.mItem) ).show();
-              mModified = true;
+              // mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_LINE:
               DrawingLinePath line = (DrawingLinePath)(sp.mItem);
@@ -3392,11 +3402,11 @@ public class DrawingWindow extends ItemDrawer
               } else {
                 new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
               }
-              mModified = true;
+              // mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_AREA:
               new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(sp.mItem) ).show();
-              mModified = true;
+              // mModified = true;
               break;
             case DrawingPath.DRAWING_PATH_FIXED:
             case DrawingPath.DRAWING_PATH_SPLAY:
@@ -4107,7 +4117,7 @@ public class DrawingWindow extends ItemDrawer
     }
     makeWall( pos, x0, y0, x1, y1, len, uu, vv );
     makeWall( neg, x0, y0, x1, y1, len, uu, vv );
-    mModified = true;
+    modified();
   }
 
   void addPointsToLine( DrawingLinePath line, float x0, float y0, float xx, float yy )

@@ -950,6 +950,10 @@
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Comprobación de la poligonal principal</string>
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
+  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
+  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
+  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
+  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <string name="pref_therion_splays_title">Anchuras therion</string>

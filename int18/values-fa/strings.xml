@@ -948,6 +948,10 @@
   <string name="pref_checkBT_summary">فعال/غیرفعال کردن بلوتوث</string>
   <string name="pref_checkAttached_title">چک کردن خط وسط</string>
   <string name="pref_checkAttached_summary">بررسی اتصال ایستگاه</string>
+  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
+  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
+  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
+  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
   <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
   <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
   <string name="pref_autoStations_title">ایستگاه طرح</string>

@@ -941,6 +941,10 @@
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
+  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
+  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
+  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
+  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Площи експорт в xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string -->
   <string name="pref_therion_splays_title">Therion странични измервания</string>
