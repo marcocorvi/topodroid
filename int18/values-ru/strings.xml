@@ -561,7 +561,7 @@
     <string name="help_continue">Продолжить рисовать линию</string>
     <string name="help_contour">Редактировать контуры</string>
     <string name="help_current_station">Сохраненные пикеты</string>
-    <string name="help_azimuth">Проекция развертки на референс-азимут</string>
+    <string name="help_azimuth">Направление развёртки разреза</string>
     <string name="help_device">Окно управления устройствами</string>
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или файла съёмки</string>
@@ -659,7 +659,7 @@
     <string name="help_refine_triangle">Уточнить поверхность вдоль длинной стороны</string>
   
 
-    <string name="title_azimut">Направление развертки</string>
+    <string name="title_azimut">Направление развёртки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
@@ -689,7 +689,7 @@
     <string name="title_plot_save">Сохранить абрис как</string>
     <string name="title_plot_reload">Перезагрузить абрис</string>
     <string name="title_profile_flip">Развернуть разрез ?</string>
-    <string name="title_projection">Проекция разреза на азимут %1$d</string>
+    <string name="title_projection">Проекция разреза на вертикальную плоскость Аз. %1$d</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_select">Выбрать</string>
@@ -840,7 +840,7 @@
   <string name="pref_mag_anomaly_title">Магнитная Аномалия</string>
   <string name="pref_mag_anomaly_summary">Компенсация локальной Магнитной Аномалии</string>
   <string name="pref_azimuth_manual_title">Устанавливать "развертку" вручную</string>
-  <string name="pref_azimuth_manual_summary">Задавать направление развертки отрезков вручную</string>
+  <string name="pref_azimuth_manual_summary">Задавать направление развёртки отрезков вручную</string>
 
   <string name="pref_team_title">Группа съёмки</string>
   <string name="pref_team_summary">Группа съёмки</string>
