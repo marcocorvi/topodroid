@@ -575,7 +575,7 @@
     <string name="help_download">Загрузить данные с DistoX</string>
     <!-- UNUSED string name="help_splay">Автоматически присваивать номер пикет боковым измерениям</string -->
     <string name="help_display">Выбрать режим отображения данных</string>
-    <string name="help_display_calib">Режим показа удаленных пикетов</string>
+    <string name="help_display_calib">Показать удаленные измерения</string>
     <string name="help_validate">Проверить калибровку</string>
     <string name="help_overview">Обзор карты</string>
     <string name="help_plot">Окно абрисов</string>
@@ -659,7 +659,7 @@
     <string name="help_refine_triangle">Уточнить поверхность вдоль длинной стороны</string>
   
 
-    <string name="title_azimut">Направление разветки</string>
+    <string name="title_azimut">Направление развертки</string>
     <string name="title_calib">Калибровки</string>
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
