@@ -940,10 +940,10 @@
   <string name="pref_checkBT_summary">Вкл/Выкл bluetooth</string>
   <string name="pref_checkAttached_title">Проверка нитки хода</string>
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
+  <string name="pref_backup_number_title">Кол-во резервных копий</string>
+  <string name="pref_backup_number_summary">Количество резервных копий абрисов</string>
+  <string name="pref_backup_interval_title">Интервал сохранения</string>
+  <string name="pref_backup_interval_summary">Минимальный временной интервал между двумя резервными копиями [с]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Области xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string -->
   <string name="pref_therion_splays_title">Боковые замеры в Therion</string>
