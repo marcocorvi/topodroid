@@ -35,6 +35,8 @@ import android.os.Debug;
 
 import android.app.Application;
 import android.app.Activity;
+import android.app.Dialog;
+
 import android.content.ActivityNotFoundException;
 // import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -64,7 +66,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.app.Dialog;
 import android.widget.Button;
 import android.widget.LinearLayout;
 

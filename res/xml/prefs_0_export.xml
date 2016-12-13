@@ -77,6 +77,13 @@
        android:inputType="numberDecimal"
        android:defaultValue="0" / -->
 
+   <!-- CheckBoxPreference
+       android:key="DISTOX_SWAP_LR"
+       android:summary="@string/pref_swapLR_summary"
+       android:title="@string/pref_swapLR_title"
+       android:defaultValue="false"
+     / -->
+
   <!-- com.topodroid.DistoX.MyListPreference
        android:key="DISTOX_SURVEX_EOL"
        android:title="@string/pref_survex_eol_title"
@@ -97,13 +104,6 @@
        android:key="DISTOX_SURVEX_LRUD"
        android:summary="@string/pref_survex_lrud_summary"
        android:title="@string/pref_survex_lrud_title"
-       android:defaultValue="false"
-     / -->
-
-   <!-- CheckBoxPreference
-       android:key="DISTOX_SWAP_LR"
-       android:summary="@string/pref_swapLR_summary"
-       android:title="@string/pref_swapLR_title"
        android:defaultValue="false"
      / -->
 

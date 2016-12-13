@@ -50,6 +50,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.KeyEvent;
+// for FRAGMENT
+import android.view.ViewGroup;
+import android.view.LayoutInflater;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

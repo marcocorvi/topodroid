@@ -742,9 +742,9 @@
 
   <string name="pref_leg_shots_title">Minimum leg shots</string>
   <string name="pref_leg_shots_summary">Minimum number of shots per leg</string>
-  <string name="pref_station_prefix_title">Station prefix</string>
+  <string name="pref_station_prefix_title">Compass station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix (compass)</string>
-  <string name="pref_ortho_lrud_title">LRUD splay angle</string>
+  <string name="pref_ortho_lrud_title">Compass LRUD splay angle</string>
   <string name="pref_ortho_lrud_summary">Minimum splay-leg angle for an LRUD splay</string>
   <string name="pref_ortho_lrud_message">LRUD minimum splay-leg angle</string>
   <string name="pref_survex_eol_title">Survex/Topo line termination</string>
@@ -955,7 +955,7 @@
   <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
-  <string name="pref_swapLR_title">Swap LR in Compass</string>
+  <string name="pref_swapLR_title">Compass swap LR</string>
   <string name="pref_swapLR_summary">Swap LR in Compass export</string>
   <string name="pref_LRExtend_title">Estimate Left/Right extend</string>
   <string name="pref_LRExtend_summary">Estimate LR extend (Compass/VisualTopo import)</string>

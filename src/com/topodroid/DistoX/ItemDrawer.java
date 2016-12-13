@@ -19,6 +19,8 @@ public class ItemDrawer extends Activity
 {
   static final int POINT_MAX = 32678;
 
+  protected Activity mActivity = null;
+
   int mCurrentPoint;
   int mCurrentLine;
   int mCurrentArea;

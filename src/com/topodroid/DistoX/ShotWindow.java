@@ -62,6 +62,10 @@ import android.view.View.OnLongClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.KeyEvent;
+// for FRAGMENT
+import android.view.ViewGroup;
+import android.view.LayoutInflater;
+
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -156,6 +160,7 @@ public class ShotWindow extends Activity
 
   private TopoDroidApp mApp;
   private DataDownloader mDataDownloader;
+  private Activity mActivity;
 
   boolean mSplay = true;  //!< whether to hide splay shots
   boolean mLeg   = true;  //!< whether to hide leg extra shots
@@ -268,13 +273,13 @@ public class ShotWindow extends Activity
         updateDisplay( );
       }
       if ( toast ) {
-        Toast.makeText( this, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
-        // Toast.makeText( this, " read_data: " + nr, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( mActivity, " read_data: " + nr, Toast.LENGTH_SHORT ).show();
       }
     } else if ( nr < 0 ) {
       if ( toast ) {
-        // Toast.makeText( this, getString(R.string.read_fail_with_code) + nr, Toast.LENGTH_SHORT ).show();
-        Toast.makeText( this, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
+        // Toast.makeText( mActivity, getString(R.string.read_fail_with_code) + nr, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
       }
     }
   }
@@ -295,7 +300,7 @@ public class ShotWindow extends Activity
       
       setTheTitle( );
     } else {
-      Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT ).show();
     }
   }
 
@@ -310,7 +315,7 @@ public class ShotWindow extends Activity
     sb.append( mApp.getConnectionStateTitleStr() );
     sb.append( mApp.mySurvey );
 
-    setTitle( sb.toString() );
+    mActivity.setTitle( sb.toString() );
     // FIXME setTitleColor( TDConst.COLOR_NORMAL );
   }
 
@@ -365,7 +370,7 @@ public class ShotWindow extends Activity
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
     if ( list.size() == 0 ) {
-      // Toast.makeText( this, R.string.no_shots, Toast.LENGTH_SHORT ).show();
+      // Toast.makeText( mActivity, R.string.no_shots, Toast.LENGTH_SHORT ).show();
       return;
     }
     processShotList( list );
@@ -465,9 +470,9 @@ public class ShotWindow extends Activity
   {
     mShotId = blk.mId;
     if ( TDSetting.mLevelOverNormal ) {
-      (new PhotoSensorsDialog(this, this, blk ) ).show();
+      (new PhotoSensorsDialog(mActivity, this, blk ) ).show();
     } else {
-      (new ShotDeleteDialog( this, this, blk ) ).show();
+      (new ShotDeleteDialog( mActivity, this, blk ) ).show();
     }
   }
 
@@ -493,36 +498,36 @@ public class ShotWindow extends Activity
       List< DistoXDBlock > shots = mApp.mData.selectAllShots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
       List< PlotInfo > plots     = mApp.mData.selectAllPlots( mApp.mSID, TopoDroidApp.STATUS_DELETED );
       if ( shots.size() == 0 && plots.size() == 0 ) {
-        Toast.makeText( this, R.string.no_undelete, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, R.string.no_undelete, Toast.LENGTH_SHORT ).show();
       } else {
-        (new UndeleteDialog(this, this, mApp.mData, mApp.mSID, shots, plots ) ).show();
+        (new UndeleteDialog(mActivity, this, mApp.mData, mApp.mSID, shots, plots ) ).show();
       }
       // updateDisplay( );
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PHOTO
-      startActivity( new Intent( this, PhotoActivity.class ) );
+      mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // SENSORS
-      startActivity( new Intent( this, SensorListActivity.class ) );
+      mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     } else if ( TDSetting.mLevelOverBasic && p++ == pos ) { // 3D
       if ( mApp.exportSurveyAsTh() != null ) { // make sure to have survey exported as therion
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
           intent.putExtra( "survey", TDPath.getSurveyThFile( mApp.mySurvey ) );
-          startActivity( intent );
+          mActivity.startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
-          Toast.makeText( this, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.no_cave3d, Toast.LENGTH_SHORT ).show();
         }
       }
     } else if ( TDSetting.mLevelOverNormal && p++ == pos ) { // DEVICE
       if ( mApp.mBTAdapter.isEnabled() ) {
-        startActivity( new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class ) );
+        mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
       }
     } else  if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-      startActivity( intent );
+      mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // int nn = mNrButton1; //  + ( TopoDroidApp.mLevelOverNormal ?  mNrButton2 : 0 );
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+      (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
   }
 
@@ -568,14 +573,14 @@ public class ShotWindow extends Activity
       //   TDLog.Log( TDLog.LOG_SHOT, "prev leg " + prevBlock.mFrom + " " + prevBlock.mTo );
       // }
     // }
-    (new ShotDialog( this, this, pos, blk, prevBlock, nextBlock )).show();
+    (new ShotDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
   }
 
 // ---------------------------------------------------------------
 
   void askPhotoComment( )
   {
-    (new PhotoCommentDialog(this, this) ).show();
+    (new PhotoCommentDialog(mActivity, this) ).show();
   }
 
 
@@ -594,7 +599,7 @@ public class ShotWindow extends Activity
       intent.putExtra( "outputFormat", Bitmap.CompressFormat.JPEG.toString() );
       startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_ACTIVITY );
     } catch ( ActivityNotFoundException e ) {
-      Toast.makeText( this, "No image capture mApp", Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, "No image capture mApp", Toast.LENGTH_SHORT ).show();
     }
   }
 
@@ -602,7 +607,7 @@ public class ShotWindow extends Activity
   {
     mSensorId = mApp.mData.nextSensorId( mApp.mSID );
     TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
-    Intent intent = new Intent( this, SensorActivity.class );
+    Intent intent = new Intent( mActivity, SensorActivity.class );
     startActivityForResult( intent, TDRequest.SENSOR_ACTIVITY );
   }
 
@@ -753,6 +758,7 @@ public class ShotWindow extends Activity
     mApp = (TopoDroidApp) getApplication();
     mApp.mShotWindow = this; // FIXME
     mDataDownloader = mApp.mDataDownloader; // new DataDownloader( this, mApp );
+    mActivity = this;
 
     mShowSplay   = new ArrayList< String >();
     mDataAdapter = new DistoXDBlockAdapter( this, this, R.layout.row, new ArrayList<DistoXDBlock>() );
@@ -933,7 +939,7 @@ public class ShotWindow extends Activity
       return;
     }
     doubleBack = true;
-    doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+    doubleBackToast = Toast.makeText( mActivity, R.string.double_back, Toast.LENGTH_SHORT );
     doubleBackToast.show();
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
@@ -965,16 +971,16 @@ public class ShotWindow extends Activity
   void doBluetooth( Button b )
   {
     if ( ! mDataDownloader.isDownloading() ) {
-      if ( TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
-          || TDSetting.mLevelOverAdvanced 
-          || mApp.distoType() == Device.DISTO_X310 ) {
+      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 
+	     && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
+	  ) {
+        CutNPaste.showPopupBT( mActivity, this, mApp, b );
+      } else {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         mApp.resetComm();
-        Toast.makeText(this, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-      } else {
-        CutNPaste.showPopupBT( this, this, mApp, b );
+        Toast.makeText(mActivity, R.string.bt_reset, Toast.LENGTH_SHORT).show();
       }
     // } else { // downloading: nothing
     }
@@ -1031,6 +1037,7 @@ public class ShotWindow extends Activity
       if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
         if ( mApp.mDevice != null ) {
           setConnectionStatus( 2 ); // turn arrow orange
+          // TDLog.Log( TDLog.LOG_INPUT, "Download button, mode " + TDSetting.mConnectionMode );
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( );
@@ -1038,12 +1045,12 @@ public class ShotWindow extends Activity
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
         doBluetooth( b );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY 
-        new ShotDisplayDialog( this, this ).show();
+        new ShotDisplayDialog( mActivity, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SKETCH
-        new PlotListDialog( this, this, mApp, null ).show();
+        new PlotListDialog( mActivity, this, mApp, null ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // NOTE
         if ( mApp.mySurvey != null ) {
-          (new DistoXAnnotations( this, mApp.mySurvey )).show();
+          (new DistoXAnnotations( mActivity, mApp.mySurvey )).show();
         }
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
@@ -1051,11 +1058,11 @@ public class ShotWindow extends Activity
           // mSecondLastShotId = mApp.lastShotId( );
           DistoXDBlock last_blk = mApp.mData.selectLastLegShot( mApp.mSID );
           // Log.v( "DistoX", "last blk: " + last_blk.toString() );
-          (new ShotNewDialog( this, mApp, this, last_blk, -1L )).show();
+          (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // STATIONS
         if ( TDSetting.mLevelOverNormal ) {
-          (new CurrentStationDialog( this, this, mApp )).show();
+          (new CurrentStationDialog( mActivity, this, mApp )).show();
           // ArrayList<DistoXDBlock> list = numberSplays(); // SPLAYS splays numbering no longer active
           // if ( list != null && list.size() > 0 ) {
           //   updateDisplay( );
@@ -1066,7 +1073,7 @@ public class ShotWindow extends Activity
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
           } else {
-            (new AzimuthDialDialog( this, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
+            (new AzimuthDialDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
           }
         }
       }
@@ -1093,7 +1100,7 @@ public class ShotWindow extends Activity
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
       startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, null );
     // } else {
-    //   Toast.makeText( this, R.string.plot_duplicate_name, Toast.LENGTH_LONG).show();
+    //   Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_LONG).show();
     }
     // updateDisplay( );
   }
@@ -1104,7 +1111,7 @@ public class ShotWindow extends Activity
     // FIXME xoffset yoffset, east south and vert (downwards)
     if ( st2 != null ) {
       if ( ! mApp.mData.hasShot( mApp.mSID, st1, st2 ) ) {
-        Toast.makeText( this, R.string.no_shot_between_stations, Toast.LENGTH_SHORT).show();
+        Toast.makeText( mActivity, R.string.no_shot_between_stations, Toast.LENGTH_SHORT).show();
         return;
       }
     } else {
@@ -1125,19 +1132,19 @@ public class ShotWindow extends Activity
         startSketchWindow( name );
       }
     } else {
-      Toast.makeText( this, "no to station", Toast.LENGTH_SHORT).show();
+      Toast.makeText( mActivity, "no to station", Toast.LENGTH_SHORT).show();
     }
   }
  
   void startSketchWindow( String name )
   {
     if ( mApp.mSID < 0 ) {
-      Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT ).show();
       return;
     }
 
     if ( ! mApp.mData.hasSketch3d( mApp.mSID, name ) ) {
-      Toast.makeText( this, R.string.no_sketch, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.no_sketch, Toast.LENGTH_SHORT ).show();
       return;
     }
 
@@ -1175,14 +1182,14 @@ public class ShotWindow extends Activity
       }
 /* END SKETCH_3D */
     }
-    Toast.makeText( this, R.string.plot_not_found, Toast.LENGTH_SHORT).show();
+    Toast.makeText( mActivity, R.string.plot_not_found, Toast.LENGTH_SHORT).show();
   }
 
   private void startDrawingWindow( String start, String plot1_name, long plot1_id,
                                                    String plot2_name, long plot2_id, long type, String station )
   {
     if ( mApp.mSID < 0 || plot1_id < 0 || plot2_id < 0 ) {
-      Toast.makeText( this, R.string.no_survey, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.no_survey, Toast.LENGTH_SHORT ).show();
       return;
     }
     
@@ -1314,9 +1321,9 @@ public class ShotWindow extends Activity
     int ret = mApp.mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg?1:0, comment, true );
 
     if ( ret == -1 ) {
-      Toast.makeText( this, R.string.no_db, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.no_db, Toast.LENGTH_SHORT ).show();
     // } else if ( ret == -2 ) {
-    //   Toast.makeText( this, R.string.makes_cycle, Toast.LENGTH_SHORT ).show();
+    //   Toast.makeText( mActivity, R.string.makes_cycle, Toast.LENGTH_SHORT ).show();
     } else {
       // update same shots of the given block
       List< DistoXDBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
@@ -1360,9 +1367,9 @@ public class ShotWindow extends Activity
         int ret = mApp.mData.updateShot( blk.mId, mApp.mSID, from, to, extend, flag, leg?1:0, comment, true );
 
         if ( ret == -1 ) {
-          Toast.makeText( this, R.string.no_db, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.no_db, Toast.LENGTH_SHORT ).show();
         // } else if ( ret == -2 ) {
-        //   Toast.makeText( this, R.string.makes_cycle, Toast.LENGTH_SHORT ).show();
+        //   Toast.makeText( mActivity, R.string.makes_cycle, Toast.LENGTH_SHORT ).show();
         } else {
           // // update same shots of the given block: SHOULD NOT HAPPEN
           // List< DistoXDBlock > blk_list = mApp.mData.selectShotsAfterId( blk.mId, mApp.mSID, 0L );
@@ -1385,9 +1392,9 @@ public class ShotWindow extends Activity
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SURVEY );
-    startActivity( intent );
+    mActivity.startActivity( intent );
     return true;
   }
 
@@ -1402,7 +1409,7 @@ public class ShotWindow extends Activity
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.ShotWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -1418,11 +1425,11 @@ public class ShotWindow extends Activity
   {
     int k = 0;
     // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close
     mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_survey
+    mMenuAdapter.add( res.getString( menus[k++] ) );                                      // menu_close
     if ( TDSetting.mLevelOverBasic  ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_recover
     if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDSetting.mLevelOverNormal ) mMenuAdapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
@@ -1529,7 +1536,7 @@ public class ShotWindow extends Activity
   // ------------------------------------------------------------------
   public void doProjectionDialog( String name, String start )
   {
-    new ProjectionDialog( this, this, mApp.mSID, name, start ).show();
+    new ProjectionDialog( mActivity, this, mApp.mSID, name, start ).show();
   }
 
   void doProjectedProfile( String name, String start, int azimuth )

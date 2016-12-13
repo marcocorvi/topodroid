@@ -37,6 +37,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.KeyEvent;
+// for FRAGMENT
+import android.view.ViewGroup;
+import android.view.LayoutInflater;
+
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Button;
@@ -332,7 +336,7 @@ public class SketchWindow extends ItemDrawer
 
   private void alertMakeSurface( )
   {
-    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.make_surface,
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.make_surface,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -345,7 +349,7 @@ public class SketchWindow extends ItemDrawer
 
   // private void alertMissingSymbols()
   // {
-  //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.missing-symbols,
+  //   TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.missing-symbols,
   //     new DialogInterface.OnClickListener() {
   //       @Override
   //       public void onClick( DialogInterface dialog, int btn ) {
@@ -439,13 +443,12 @@ public class SketchWindow extends ItemDrawer
 
   // void savePng()
   // {
-  //   final Activity currentActivity  = this;
   //   Bitmap bitmap = mSketchSurface.getBitmap();
   //   if ( bitmap == null ) {
-  //     Toast.makeText( this, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
+  //     Toast.makeText( mActivity, R.string.null_bitmap, Toast.LENGTH_SHORT ).show();
   //   } else {
-  //     new ExportBitmapToFile(this, mSaveHandler, mSketchSurface.getBitmap(), mFullName ).execute();
-  //     Toast.makeText( this, getString(R.string.saved_file_1) + mFullName + ".png", Toast.LENGTH_SHORT ).show();
+  //     new ExportBitmapToFile( mActivity, mSaveHandler, mSketchSurface.getBitmap(), mFullName ).execute();
+  //     Toast.makeText( mActivity, getString(R.string.saved_file_1) + mFullName + ".png", Toast.LENGTH_SHORT ).show();
   //   }
   // }
 
@@ -496,7 +499,7 @@ public class SketchWindow extends ItemDrawer
   void saveTh3()
   {
     if ( doSaveTh3( false /* ! mAllSymbols */ ) ) {
-      Toast.makeText( this, getString(R.string.saved_file_1) + " " + mFullName + ".th2", Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, getString(R.string.saved_file_1) + " " + mFullName + ".th2", Toast.LENGTH_SHORT ).show();
     }
   }
 
@@ -547,7 +550,7 @@ public class SketchWindow extends ItemDrawer
   // void doSaveTh3AndReload()
   // {
   //   if ( mFullName != null && mSketchSurface != null ) {
-  //     Toast.makeText( this, "save th3 and reload ... wait", Toast.LENGTH_SHORT ).show();
+  //     Toast.makeText( mActivity, "save th3 and reload ... wait", Toast.LENGTH_SHORT ).show();
   //     Handler saveHandler = new Handler(){
   //       @Override
   //       public void handleMessage(Message msg) {
@@ -560,7 +563,7 @@ public class SketchWindow extends ItemDrawer
   //     };
   //     new SaveTh3File(this, saveHandler, mModel, mFullName ).execute();
   //   } else {
-  //     Toast.makeText( this, "FAIL save th3 and reload", Toast.LENGTH_SHORT ).show();
+  //     Toast.makeText( mActivity, "FAIL save th3 and reload", Toast.LENGTH_SHORT ).show();
   //   }
   // }
 
@@ -574,7 +577,7 @@ public class SketchWindow extends ItemDrawer
   {
     // TDLog.Log( TDLog.LOG_PLOT, " savingTh3 " + mFullName );
     if ( mFullName != null && mSketchSurface != null ) {
-      new SaveTh3File(this, mSaveHandler, mModel, mFullName ).execute();
+      new SaveTh3File( mActivity, mSaveHandler, mModel, mFullName ).execute();
     }
     return false;
   }
@@ -630,7 +633,7 @@ public class SketchWindow extends ItemDrawer
       //   alertMissingSymbols();
       // }
       // if ( mAllSymbols ) {
-        new SaveDxfFile(this, mSaveHandler, mModel, mFullName ).execute();
+        new SaveDxfFile( mActivity, mSaveHandler, mModel, mFullName ).execute();
       // }
     }
   }
@@ -651,6 +654,7 @@ public class SketchWindow extends ItemDrawer
     setContentView(R.layout.sketch_activity);
     mApp = (TopoDroidApp)getApplication();
     mDataDownloader = null; // FIXME set the DataDownloader
+    mActivity = this;
     // mInfo.zoom = mApp.mScaleFactor;    // canvas zoom
 
     // setCurrentPaint();
@@ -688,7 +692,7 @@ public class SketchWindow extends ItemDrawer
 
     List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
     if ( list.size() == 0 ) {
-      Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
       finish();
     } else {
       prepareReferences( list );
@@ -704,7 +708,7 @@ public class SketchWindow extends ItemDrawer
       // if ( ! mAllSymbols ) {
       //   // FIXME FIXME
       //   String msg = missingSymbols.getMessage( getResources() );
-      //   (new MissingDialog( this, msg )).show();
+      //   (new MissingDialog( mActivity, msg )).show();
       // }
 
       setSurfaceTransform( 0, 0 );
@@ -725,28 +729,28 @@ public class SketchWindow extends ItemDrawer
     int ic  = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
       ic = ( k == 0 )? 0 : off+k;
-      mButton1[k] = MyButton.getButton( this, this, izons[ic] );
+      mButton1[k] = MyButton.getButton( mActivity, this, izons[ic] );
     }
 
     mButton2 = new Button[ mNrButton2 ];
     off = 2 + mNrButton1;
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k == 0 )? 1 : off+k;
-      mButton2[k] = MyButton.getButton( this, this, izons[ic] );
+      mButton2[k] = MyButton.getButton( mActivity, this, izons[ic] );
     }
 
     mButton3 = new Button[ mNrButton3 ];
     off = 1 + mNrButton1 + mNrButton2;
     for ( int k=0; k<mNrButton3; ++k ) {
       ic = ( k == 0 )? 2 : off+k;
-      mButton3[k] = MyButton.getButton( this, this, izons[ic] );
+      mButton3[k] = MyButton.getButton( mActivity, this, izons[ic] );
     }
 
     mButton4 = new Button[ mNrButton4 ];
     off = 0 + mNrButton1 + mNrButton2 + mNrButton3;
     for ( int k=0; k<mNrButton4; ++k ) {
       ic = ( k == 0 )? 3 : off+k;
-      mButton4[k] = MyButton.getButton( this, this, izons[ic] );
+      mButton4[k] = MyButton.getButton( mActivity, this, izons[ic] );
     }
     mButtonView1 = new HorizontalButtonView( mButton1 );  // MOVE
     mButtonView2 = new HorizontalButtonView( mButton2 );  // DRAW
@@ -958,7 +962,7 @@ public class SketchWindow extends ItemDrawer
     // mSketchSurface.clearReferences();
     mNum = new DistoXNum( list, mInfo.start, null, null, mDecl ); // FIXME null: no barrier no hiding
     if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
-      Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     }
     mModel = new SketchModel( mInfo, mNum, mPainter );
     mSketchSurface.setModel( mModel );
@@ -992,19 +996,19 @@ public class SketchWindow extends ItemDrawer
 
   //   // SketchPointPath point = mSketchSurface.getPointAt( x_scene, y_scene );
   //   // if ( point != null ) {
-  //   //   // new DrawingPointDialog( this, point ).show();
+  //   //   // new DrawingPointDialog( mActivity, this, point ).show();
   //   //   return;
   //   // } 
 
   //   // SketchLinePath line = mSketchSurface.getLineAt( x_scene, y_scene );
   //   // if ( line != null ) {
-  //   //   // new DrawingLineDialog( this, line ).show();
+  //   //   // new DrawingLineDialog( mActivity, this, line ).show();
   //   //   return;
   //   // }
   //   // 
   //   // SketchAreaPath area = mSketchSurface.getAreaAt( x_scene, y_scene );
   //   // if ( area != null ) {
-  //   //   // new DrawingAreaDialog( this, area ).show();
+  //   //   // new DrawingAreaDialog( mActivity, this, area ).show();
   //   //   return;
   //   // }
   // }
@@ -1169,7 +1173,7 @@ public class SketchWindow extends ItemDrawer
     else if (action == MotionEvent.ACTION_DOWN)
     {
       if ( mMode == SketchDef.MODE_MOVE /* || mMode == SketchDef.MODE_EDIT */ ) {
-        // setTitle( R.string.title_move );
+        // mActivity.setTitle( R.string.title_move );
         mSaveX = x_canvas;
         mSaveY = y_canvas;
         return false;
@@ -1218,7 +1222,7 @@ public class SketchWindow extends ItemDrawer
       } else if ( mMode == SketchDef.MODE_STEP ) {
         SketchFixedPath path = doSelectShotAt( x_scene, y_scene ); 
         if ( path == null ) {
-          Toast.makeText( this, R.string.shot_not_found, Toast.LENGTH_SHORT ).show();
+          Toast.makeText( mActivity, R.string.shot_not_found, Toast.LENGTH_SHORT ).show();
         } else {
           DistoXDBlock blk = path.mBlock;
           if ( blk != null ) {
@@ -1374,7 +1378,7 @@ public class SketchWindow extends ItemDrawer
                 mModel.addPoint( path );
                 if ( point_lib.pointHasText( mCurrentPoint ) ) {
                   // TODO text dialog
-                  new DrawingLabelDialog( this, this, x_scene, y_scene ).show();
+                  new DrawingLabelDialog( mActivity, this, x_scene, y_scene ).show();
                 }
               // } else {
               //   Log.v("DistoX", "no triangle found");
@@ -1503,7 +1507,7 @@ public class SketchWindow extends ItemDrawer
                     refines.add( new SketchRefinement( tri10, u1, u12, w120 ) );
                   }
                   if ( skipped_triangle ) {
-                    Toast.makeText( this, R.string.few_line_points, Toast.LENGTH_SHORT ).show();
+                    Toast.makeText( mActivity, R.string.few_line_points, Toast.LENGTH_SHORT ).show();
                   } else {
 
                     // Log.v("DistoX", "refinements " + refines.size() );
@@ -1568,7 +1572,7 @@ public class SketchWindow extends ItemDrawer
 
   private void askDeleteLine( final SketchLinePath line )
   {
-    TopoDroidAlertDialog.makeAlert( this, getResources(),
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(),
                            getResources().getString( R.string.line_delete ) + " ?",
       new DialogInterface.OnClickListener() {
         @Override
@@ -1619,7 +1623,7 @@ public class SketchWindow extends ItemDrawer
     //   } else if ( mSelect == SketchDef.SELECT_JOIN ) {
     //     setSelect( SketchDef.SELECT_SECTION );
     //   }
-    //   // FIXME (new SketchSelectDialog(this, this)).show();
+    //   // FIXME (new SketchSelectDialog(mActivity, this)).show();
     // } else 
 
     if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton4[0] ) {
@@ -1631,7 +1635,7 @@ public class SketchWindow extends ItemDrawer
       // doSaveTh3AndReload( ); // save to th3
       // mSketchSurface.isDrawing = true;
     } else if ( b == mButton1[2] ) { // display mode. cycle (NGBH, SINGLE, ALL)
-      (new SketchModeDialog( this, mModel )).show();
+      (new SketchModeDialog( mActivity, mModel )).show();
     } else if ( b == mButton1[3] ) { // surface
       if ( mModel.mCurrentSurface != null ) {
         alertMakeSurface( );
@@ -1643,18 +1647,18 @@ public class SketchWindow extends ItemDrawer
         // TODO if there is an empty shot use it, else try to download the data
         //      with the Asynch task that download the data.
         //      if there is an empty shot assign it
-        setTitleColor( TDConst.COLOR_CONNECTED );
+        mActivity.setTitleColor( TDConst.COLOR_CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME LISTER
         new DataDownloadTask( mApp, handler ).execute();
         // new DataDownloadTask( mApp, this ).execute();
       } else {
-        Toast.makeText( this, R.string.device_none, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, R.string.device_none, Toast.LENGTH_SHORT ).show();
       }
     } else if ( b == mButton1[5] ) { // notes
-      (new DistoXAnnotations( this, mData.getSurveyFromId(mSid) )).show();
+      (new DistoXAnnotations( mActivity, mData.getSurveyFromId(mSid) )).show();
     } else if ( b == mButton1[6] ) { // info
       // float azimuth = -1;
-      new DistoXStatDialog( mSketchSurface.getContext(), mNum, mInfo.start, -1, mData.getSurveyStat( mApp.mSID ) ).show();
+      new DistoXStatDialog( mActivity, mNum, mInfo.start, -1, mData.getSurveyStat( mApp.mSID ) ).show();
 
     } else if ( b == mButton2[1] ) { // undo
       mModel.undo();
@@ -1662,9 +1666,9 @@ public class SketchWindow extends ItemDrawer
       mModel.redo();
     } else if ( b == mButton2[3] ) { // symbols
       if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
-        new ItemRecentDialog(this, this, mType ).show();
+        new ItemRecentDialog(mActivity, this, mType ).show();
       } else {
-        new ItemPickerDialog(this, this, mType, mSymbol ).show();
+        new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
       }
 
     } else if ( b == mButton3[1] ) { // refine triangles
@@ -1672,7 +1676,7 @@ public class SketchWindow extends ItemDrawer
       // Log.v("DistoX", "refine to max side ");
       int split = mModel.refineToMaxSide( TDSetting.mSketchSideSize );
       if ( split == 0 ) { 
-        Toast.makeText( this, getString(R.string.sketch_no_split), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, getString(R.string.sketch_no_split), Toast.LENGTH_SHORT ).show();
       }
     } else if ( b == mButton3[2] ) { // refine_center
       mModel.refineSurfaceAtCenters();
@@ -1734,8 +1738,8 @@ public class SketchWindow extends ItemDrawer
   private void setMenuAdapter( Resources res )
   {
     // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -1760,26 +1764,26 @@ public class SketchWindow extends ItemDrawer
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // EXPORT
-      // new SketchSaveDialog( this, this ).show();
-      new ExportDialog( this, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
+      // new SketchSaveDialog( mActivity, this ).show();
+      new ExportDialog( mActivity, this, TDConst.mSketchExportTypes, R.string.title_plot_save ).show();
     } else if ( p++ == pos ) { // PALETTE 
       BrushManager.makePaths( getResources() );
-      (new SymbolEnableDialog( this, mApp )).show();
+      (new SymbolEnableDialog( mActivity, mApp )).show();
     } else if ( p++ == pos ) { // DELETE
       askDelete();
     } else if ( p++ == pos ) { // SETTINGS
-      Intent optionsIntent = new Intent( this, TopoDroidPreferences.class );
+      Intent optionsIntent = new Intent( mActivity, TopoDroidPreferences.class );
       optionsIntent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
-      startActivity( optionsIntent );
+      mActivity.startActivity( optionsIntent );
     } else if ( p++ == pos ) { // HEADING
       setMode( SketchDef.MODE_MOVE );
       // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
-      // mCompass = new SketchCompassSensor( this, sm, TDSetting.mCompassReadings );
-      mTimer = new TimerTask( this, this );
+      // mCompass = new SketchCompassSensor( mActivity, sm, TDSetting.mCompassReadings );
+      mTimer = new TimerTask( mActivity, this );
       mTimer.execute();
     } else if ( p++ == pos ) { // HELP
       int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
+      (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, nn, menus.length ) ).show();
     }
   }
 
@@ -1791,7 +1795,7 @@ public class SketchWindow extends ItemDrawer
 
   private void askDelete()
   {
-    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.sketch_delete,
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.sketch_delete,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -1903,9 +1907,9 @@ public class SketchWindow extends ItemDrawer
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_SKETCH );
-    startActivity( intent );
+    mActivity.startActivity( intent );
     return true;
   }
 
@@ -1922,7 +1926,7 @@ public class SketchWindow extends ItemDrawer
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.SketchWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -1954,15 +1958,15 @@ public class SketchWindow extends ItemDrawer
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
-    setTitleColor( TDConst.COLOR_NORMAL );
+    mActivity.setTitleColor( TDConst.COLOR_NORMAL );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
         List<DistoXDBlock> list = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
         recreateNum( list );
       }
-      Toast.makeText( this, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, getResources().getQuantityString(R.plurals.read_data, nr, nr ), Toast.LENGTH_SHORT ).show();
     } else if ( nr < 0 ) {
-      Toast.makeText( this, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
+      Toast.makeText( mActivity, mApp.DistoXConnectionError[ -nr ], Toast.LENGTH_SHORT ).show();
     }
   }
    

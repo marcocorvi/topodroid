@@ -1176,7 +1176,7 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX", "onCreate()" );
 
     mApp  = (TopoDroidApp)getApplication();
-	mActivity = this;
+    mActivity = this;
     mData = mApp.mData; // new DataHelper( this ); 
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
@@ -3166,16 +3166,17 @@ public class DrawingWindow extends ItemDrawer
   void doBluetooth( Button b )
   {
     if ( ! mDataDownloader.isDownloading() ) {
-      if (   TDSetting.mConnectionMode == TDSetting.CONN_MODE_MULTI
-          || TDSetting.mLevelOverAdvanced 
-          || mApp.distoType() == Device.DISTO_X310 ) {
+	// FIXME
+      if ( TDSetting.mLevelOverAdvanced && mApp.distoType() == Device.DISTO_X310 
+	      && TDSetting.mConnectionMode != TDSetting.CONN_MODE_MULTI
+	  ) {
+        CutNPaste.showPopupBT( mActivity, this, mApp, b );
+      } else {
         mDataDownloader.setDownload( false );
         mDataDownloader.stopDownloadData();
         setConnectionStatus( mDataDownloader.getStatus() );
         mApp.resetComm();
         Toast.makeText(mActivity, R.string.bt_reset, Toast.LENGTH_SHORT).show();
-      } else {
-        CutNPaste.showPopupBT( mActivity, this, mApp, b );
       }
     // } else { // downloading: nothing
     }

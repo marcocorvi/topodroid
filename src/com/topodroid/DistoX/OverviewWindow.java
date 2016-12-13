@@ -37,6 +37,10 @@ import android.widget.LinearLayout;
 import android.view.ViewGroup;
 import android.view.Display;
 import android.view.KeyEvent;
+// for FRAGMENT
+import android.view.ViewGroup;
+import android.view.LayoutInflater;
+
 // import android.view.ContextMenu;
 // import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Button;
@@ -244,7 +248,7 @@ public class OverviewWindow extends ItemDrawer
 
     // private void AlertMissingSymbols()
     // {
-    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.missing_symbols,
+    //   TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.missing_symbols,
     //     new DialogInterface.OnClickListener() {
     //       @Override
     //       public void onClick( DialogInterface dialog, int btn ) {
@@ -322,7 +326,7 @@ public class OverviewWindow extends ItemDrawer
     }
 
     // if ( (! mNum.surveyAttached) && TDSetting.mCheckAttached ) {
-    //   Toast.makeText( this, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
+    //   Toast.makeText( mActivity, R.string.survey_not_attached, Toast.LENGTH_SHORT ).show();
     // }
   }
     
@@ -398,6 +402,7 @@ public class OverviewWindow extends ItemDrawer
 
       setContentView(R.layout.overview_activity);
       mApp = (TopoDroidApp)getApplication();
+	  mActivity = this;
       // mZoom = mApp.mScaleFactor;    // canvas zoom
 
       mDisplayCenter = new PointF(mApp.mDisplayWidth  / 2, mApp.mDisplayHeight / 2);
@@ -417,7 +422,7 @@ public class OverviewWindow extends ItemDrawer
       Resources res = getResources();
       mButton1 = new Button[ mNrButton1 ];
       for ( int k=0; k<mNrButton1; ++k ) {
-        mButton1[k] = MyButton.getButton( this, this, izons[k] );
+        mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
         if ( k == 0 ) 
           mBMselect = MyButton.getButtonBackground( mApp, res, izons[k] );
         // FIXME_OVER } else if ( k == 2 ) { // IC_PLAN = 2;
@@ -511,7 +516,7 @@ public class OverviewWindow extends ItemDrawer
       // mBlockList = mData.selectAllLegShots( mSid, TopoDroidApp.STATUS_NORMAL );
       mBlockList = mData.selectAllShots( mSid, TopoDroidApp.STATUS_NORMAL );
       if ( mBlockList.size() == 0 ) {
-        Toast.makeText( this, R.string.few_data, Toast.LENGTH_SHORT ).show();
+        Toast.makeText( mActivity, R.string.few_data, Toast.LENGTH_SHORT ).show();
         finish();
       } else {
         loadFiles( mType ); 
@@ -788,7 +793,7 @@ public class OverviewWindow extends ItemDrawer
         String msg = String.format( format, TDMath.sqrt( dx * dx + dy * dy ), dx, dy, a );
         // pw.format("%.2f DX %.2f DY %.2f Bearing %.1f ", 
         // mActivity.setTitle( sw.getBuffer().toString() );
-        setTitle( msg );
+        mActivity.setTitle( msg );
         // replace target point
         DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null );
         path.setPaint( BrushManager.fixedBluePaint );
@@ -850,7 +855,7 @@ public class OverviewWindow extends ItemDrawer
 
   private Button makeButton( String text )
   {
-    Button myTextView = new Button( this );
+    Button myTextView = new Button( mActivity );
     myTextView.setHeight( 42 );
 
     myTextView.setText( text );
@@ -915,7 +920,7 @@ public class OverviewWindow extends ItemDrawer
           mButton1[0].setBackgroundDrawable( mBMselectOn );
         }
       } else if ( b == mButton1[1] ) { // references
-        new DrawingModeDialog( this, null, mOverviewSurface ).show();
+        new DrawingModeDialog( mActivity, null, mOverviewSurface ).show();
 
       // FIXME_OVER } else if ( b == mButton1[2] ) { // toggle plan/extended
       // FIXME_OVER   switchPlotType();
@@ -927,9 +932,9 @@ public class OverviewWindow extends ItemDrawer
   public boolean onSearchRequested()
   {
     // TDLog.Error( "search requested" );
-    Intent intent = new Intent( this, TopoDroidPreferences.class );
+    Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
     intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
-    startActivity( intent );
+    mActivity.startActivity( intent );
     return true;
   }
 
@@ -944,7 +949,7 @@ public class OverviewWindow extends ItemDrawer
         return onSearchRequested();
       case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
         String help_page = getResources().getString( R.string.OverviewWindow );
-        if ( help_page != null ) UserManualActivity.showHelpPage( this, help_page );
+        if ( help_page != null ) UserManualActivity.showHelpPage( mActivity, help_page );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
@@ -958,8 +963,8 @@ public class OverviewWindow extends ItemDrawer
   private void setMenuAdapter( Resources res )
   {
     // HOVER
-    // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-    mMenuAdapter = new ArrayAdapter<String>(this, R.layout.menu );
+    // mMenuAdapter = new MyMenuAdapter( mActivity, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
+    mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
     mMenuAdapter.add( res.getString( menus[0] ) );
     mMenuAdapter.add( res.getString( menus[1] ) );
@@ -983,11 +988,11 @@ public class OverviewWindow extends ItemDrawer
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
     } else if ( p++ == pos ) { // OPTIONS
-      Intent intent = new Intent( this, TopoDroidPreferences.class );
+      Intent intent = new Intent( mActivity, TopoDroidPreferences.class );
       intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_PLOT );
-      startActivity( intent );
+      mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
-      (new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
+      (new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, menus.length ) ).show();
     }
   }
 
