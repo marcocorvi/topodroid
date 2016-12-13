@@ -965,10 +965,10 @@
   <string name="pref_checkBT_summary">Bluetooth (de)aktivieren</string>
   <string name="pref_checkAttached_title">Messlinien-Check</string>
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
+  <string name="pref_backup_number_title">Anzahl Backups</string>
+  <string name="pref_backup_number_summary">Anzahl Skizzenbackups</string>
+  <string name="pref_backup_interval_title">Backup Intervall</string>
+  <string name="pref_backup_interval_summary">Minimales Intervall zwischen zwei Backups [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion Flächen</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string -->
   <string name="pref_therion_splays_title">Therion Hilfszüge</string>
