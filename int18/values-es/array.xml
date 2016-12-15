@@ -8,11 +8,11 @@
      <item name="two_tf">2 piés</item>
   </string-array>
 
-  <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
+  <string-array name="loopClosure">
+     <item name="none">Nada</item>
      <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
-  </string-array -->
+     <item name="triangles">Triangulos</item>
+  </string-array>
 
   <string-array name="wallsType">
      <item name="none">Nada</item>
@@ -81,11 +81,11 @@
      <item name="file">Archivo de registro</item>
   </string-array>
 
-  <!-- TODO string-array name="connMode">
+  <string-array name="connMode">
      <item name="batch">Demanda</item>
      <item name="continuous">Continuo</item>
      <item name="multi">Multi</item>
-  </string-array -->
+  </string-array>
 
   <!-- UNUSED string-array name="altitudeType">
     <item name="wgs84">WGS84</item>
