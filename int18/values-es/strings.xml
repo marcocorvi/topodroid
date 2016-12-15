@@ -24,12 +24,12 @@
     <string name="memoryX310">Memoria DistoX X310</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 
-    <!-- TODO string name="thp_user">user</string -->
+    <string name="thp_user">usuario</string>
     <string name="thp_label">Texto</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
-    <!-- TODO string name="thl_user">user</string -->
+    <string name="thl_user">usuario</string>
     <string name="thl_wall">Pared</string>
-    <!-- TODO string name="tha_user">user</string -->
+    <string name="tha_user">usuario</string>
     <string name="tha_water">Agua</string>
 
     <string name="make_walls">Paredes</string>
@@ -73,7 +73,7 @@
     <string name="calib_ave_std">Accuracy: %1$.4f %2$.4f grados</string>
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
-    <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
+    <string name="calib_reset">¿Restablecer la calibración DistoX?</string>
 
     <string name="algorithm">Algoritmo:</string>
     <!-- OK string name="auto">auto</string -->
@@ -95,8 +95,8 @@
     <!-- OK string name="device_hardware">Hardware  %1$d.%2$d</string -->
     <string name="device_status_angle_grad">Unidad de ángulos: gradiente</string>
     <string name="device_status_angle_degree">Unidad de ángulos: grados</string>
-    <!-- TODO string name="device_status_compass_on">Compass/clino: on</string -->
-    <!-- TODO string name="device_status_compass_off">Compass/clino: off</string -->
+    <string name="device_status_compass_on">Compass/clino: on</string>
+    <string name="device_status_compass_off">Compass/clino: off</string>
     <string name="device_status_calib">Modo: calibración</string>
     <string name="device_status_normal">Modo: normal</string>
     <string name="device_status_silent_on">Silencioso: on</string>
@@ -349,7 +349,7 @@
     <string name="shot_info">Introducir datos Toma</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
-    <!-- TODO string name="shot_not_found">Found no shot</string -->
+    <string name="shot_not_found">No se encontraron tomas</string>
     <string name="shot_reverse">Toma Inversa</string>
     <string name="shot_to">Toma hasta</string>
 <!-- NOT USED -->
@@ -407,7 +407,7 @@
     <string name="stat_length">Desarrollo %1$.1f %2$s</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
-    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
+    <string name="stat_azimuth">Perfil proyección Brújula: %1$.1f</string>
     <string name="stat_shot">Toma  %1$d,   Duplicada %2$d,   Superficie %3$d</string>
     <string name="stat_splay">Toma secundaria %1$d</string>
     <string name="stat_station">Estaciones %1$d</string>
@@ -561,7 +561,7 @@
     <string name="help_close">Cerrar ventana</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_continue">Continuar el dibujo de una línea</string>
-    <!-- TODO string name="help_contour">Contour editing</string -->
+    <string name="help_contour">Editar Contorno</string>
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_device">Opciones del dispositivo distoX</string>
@@ -625,7 +625,7 @@
     <string name="help_manual_calibration">Manual instrumentos calibración</string>
     <string name="help_note_plot">Editar propiedades del elemento de dibujo</string>
     <!-- UNUSED string name="help_save">Guardar cambios de la Topografía o calibración</string -->
-    <!-- TODO string name="help_save_calib">Save changes to calibration info</string -->
+    <string name="help_save_calib">Save changes to calibration info</string>
     <string name="help_export_survey">Exportar Topografía</string>
     <string name="help_loc">Posicionamiento GPS</string>
     <string name="help_delete_survey">Eliminar Topografía</string>
