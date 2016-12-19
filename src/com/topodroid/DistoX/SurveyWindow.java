@@ -66,7 +66,7 @@ public class SurveyWindow extends Activity
                             , View.OnClickListener
 {
   private static int izons[] = { 
-                        R.drawable.iz_save,
+                        R.drawable.iz_note,
                         R.drawable.iz_info, // ic_details,
                         R.drawable.iz_3d,
                         R.drawable.iz_gps,

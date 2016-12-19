@@ -332,6 +332,7 @@ public class ShotWindow extends Activity
   @Override
   public void updateBlockList( long blk_id )
   {
+    // Log.v("DistoX", "Shot window update block list. Id: " + blk_id );
     DistoXDBlock blk = mApp.mData.selectShot( blk_id, mApp.mSID );
     if ( blk != null ) {
       updateBlockList( blk );
@@ -341,7 +342,7 @@ public class ShotWindow extends Activity
   @Override
   public void updateBlockList( DistoXDBlock blk )
   {
-    // Log.v("DistoX", "update block list: " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
+    // Log.v("DistoX", "Shot window update block list: " + blk.mLength + " " + blk.mBearing + " " + blk.mClino );
     if ( mDataAdapter != null ) {
       mDataAdapter.addDataBlock( blk );
       // FIXME 3.3.0

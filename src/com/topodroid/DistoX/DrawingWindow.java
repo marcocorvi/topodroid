@@ -3794,14 +3794,14 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void updateBlockList( DistoXDBlock blk ) 
   {
-    // Log.v("DistoX", "updateBlockList block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
+    // Log.v("DistoX", "Drawing window: update Block List block " + blk.mFrom + " - " + blk.mTo ); // DATA_DOWNLOAD
     updateDisplay( /* true, true */ );
   }
 
   @Override
   public void updateBlockList( long blk_id )
   {
-    // Log.v("DistoX", "updateBlockList block id " + blk_id ); // DATA_DOWNLOAD
+    // Log.v("DistoX", "Drawing window: update Block List block id " + blk_id ); // DATA_DOWNLOAD
     updateDisplay( /* true, true */ );
   }
 
