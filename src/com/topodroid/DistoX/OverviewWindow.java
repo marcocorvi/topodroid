@@ -490,6 +490,7 @@ public class OverviewWindow extends ItemDrawer
     protected synchronized void onStop()
     {
       super.onStop();
+      mOverviewSurface.setDisplayMode( mOverviewSurface.getDisplayMode() & DisplayMode.DISPLAY_ALL );
     }
 
     private void doResume()
@@ -920,7 +921,7 @@ public class OverviewWindow extends ItemDrawer
           mButton1[0].setBackgroundDrawable( mBMselectOn );
         }
       } else if ( b == mButton1[1] ) { // references
-        new DrawingModeDialog( mActivity, null, mOverviewSurface ).show();
+        new OverviewModeDialog( mActivity, this, mOverviewSurface ).show();
 
       // FIXME_OVER } else if ( b == mButton1[2] ) { // toggle plan/extended
       // FIXME_OVER   switchPlotType();

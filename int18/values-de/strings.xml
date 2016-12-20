@@ -501,6 +501,7 @@
     <string name="mode_station">Messpunkte</string>
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Fester Rahmen</string>
+    <!-- TODO string name="mode_outline">Outline only</string -->
 
     <!-- UNUSED string name="remote_title">DistoX Fernbedienung</string -->
     <string name="remote_on">Laser AN</string>

@@ -484,6 +484,7 @@
     <string name="mode_station">测量点</string>
     <string name="mode_grid">网格</string>
     <string name="mode_fixed">与参考匹配</string>
+    <!-- TODO string name="mode_outline">Outline only</string -->
 
     <!-- UNUSED string name="remote_title">设备遥控</string -->
     <string name="remote_on">激光启动</string>

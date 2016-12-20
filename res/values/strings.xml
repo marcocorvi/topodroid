@@ -487,6 +487,7 @@
     <string name="mode_station">Stations</string>
     <string name="mode_grid">Grid</string>
     <string name="mode_fixed">Fix refs</string>
+    <string name="mode_outline">Outline only</string>
 
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser ON</string>

@@ -484,6 +484,7 @@
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadriculas</string>
     <string name="mode_fixed">Desplazar objetos</string>
+    <!-- TODO string name="mode_outline">Outline only</string -->
 
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>

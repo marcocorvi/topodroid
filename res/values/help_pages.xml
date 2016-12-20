@@ -46,6 +46,7 @@
   <string name="DrawingProfileFlipDialog">page_shift.htm</string>
   <string name="DrawingShotDialog">page_drawing_shot.htm</string>
   <string name="DrawingStationDialog">page_sketch_station.htm</string>
+  <string name="OverviewModeDialog">page_overview_refs.htm</string>
   <string name="ExportDialog">manual13.htm</string>
   <string name="FirmwareDialog">page_firmware.htm</string>
   <string name="FirmwareFileDialog">page_firmware.htm</string>

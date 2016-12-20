@@ -486,6 +486,7 @@
     <string name="mode_station">Stations*Mérési pontok</string>
     <string name="mode_grid">Grid*Rács</string>
     <string name="mode_fixed">Fix refs*???</string>
+    <!-- TODO string name="mode_outline">Outline only</string -->
 
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
     <string name="remote_on">Laser ON*Lézer BE</string>

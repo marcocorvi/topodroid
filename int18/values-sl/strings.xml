@@ -489,6 +489,7 @@
     <string name="mode_station">Merilne točke</string>
     <string name="mode_grid">Mreža</string>
     <string name="mode_fixed">Stalne</string>
+    <!-- TODO string name="mode_outline">Outline only</string -->
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <!-- OK string name="remote_on">Laser ON</string -->

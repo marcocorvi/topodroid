@@ -1195,11 +1195,13 @@ public class DrawingCommandManager
       return;
     }
 
-    boolean legs   = (mDisplayMode & DisplayMode.DISPLAY_LEG) != 0;
-    boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
+    boolean legs     = (mDisplayMode & DisplayMode.DISPLAY_LEG     ) != 0;
+    boolean splays   = (mDisplayMode & DisplayMode.DISPLAY_SPLAY   ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
+    boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
+    boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
 
-    if( mGridStack1 != null && ( (mDisplayMode & DisplayMode.DISPLAY_GRID) != 0 ) ) {
+    if( mGridStack1 != null && grids ) {
       synchronized( mGridStack1 ) {
         if ( mScale < 1 ) {
           final Iterator i1 = mGridStack1.iterator();
@@ -1256,21 +1258,37 @@ public class DrawingCommandManager
 
     if ( mCurrentStack != null ){
       synchronized( mCurrentStack ) {
-        final Iterator i = mCurrentStack.iterator();
-        while ( i.hasNext() ){
-          final ICanvasCommand cmd = (ICanvasCommand) i.next();
-          if ( cmd.commandType() == 0 ) {
-            cmd.draw( canvas, mMatrix, mScale, mBBox );
-            DrawingPath path = (DrawingPath)cmd;
-            if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-              DrawingLinePath line = (DrawingLinePath)path;
-              if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add tick to section-lines
-                LinePoint lp = line.mFirst;
-                Path path1 = new Path();
-                path1.moveTo( lp.mX, lp.mY );
-                path1.lineTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
-                path1.transform( mMatrix );
-                canvas.drawPath( path1, BrushManager.mStationSymbol.mPaint );
+        if ( outline ) {
+          final Iterator i = mCurrentStack.iterator();
+          while ( i.hasNext() ){
+            final ICanvasCommand cmd = (ICanvasCommand) i.next();
+            if ( cmd.commandType() == 0 ) {
+              DrawingPath path = (DrawingPath)cmd;
+              if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+                DrawingLinePath line = (DrawingLinePath)path;
+                if ( line.mOutline != DrawingLinePath.OUTLINE_NONE ) {
+                  cmd.draw( canvas, mMatrix, mScale, mBBox );
+                }
+              }
+            }
+          }
+        } else {
+          final Iterator i = mCurrentStack.iterator();
+          while ( i.hasNext() ){
+            final ICanvasCommand cmd = (ICanvasCommand) i.next();
+            if ( cmd.commandType() == 0 ) {
+              cmd.draw( canvas, mMatrix, mScale, mBBox );
+              DrawingPath path = (DrawingPath)cmd;
+              if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+                DrawingLinePath line = (DrawingLinePath)path;
+                if ( line.mLineType == BrushManager.mLineLib.mLineSectionIndex ) { // add tick to section-lines
+                  LinePoint lp = line.mFirst;
+                  Path path1 = new Path();
+                  path1.moveTo( lp.mX, lp.mY );
+                  path1.lineTo( lp.mX+line.mDx*10, lp.mY+line.mDy*10 );
+                  path1.transform( mMatrix );
+                  canvas.drawPath( path1, BrushManager.mStationSymbol.mPaint );
+                }
               }
             }
           }

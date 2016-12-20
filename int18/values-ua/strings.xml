@@ -487,6 +487,7 @@
     <string name="mode_station">Пікети</string>
     <string name="mode_grid">Сітка</string>
     <string name="mode_fixed">Сдвиг відносно нитки</string>
+    <!-- TODO string name="mode_outline">Outline only</string -->
 
     <!-- UNUSED string name="remote_title">Пульт дистанційного управління</string -->
     <string name="remote_on">Лазер ВКЛ</string>
