@@ -350,7 +350,7 @@
     <string name="shot_info">Scrivi i dati</string>
     <!-- UNUSED string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
-    <!-- TODO string name="shot_not_found">Found no shot</string -->
+    <string name="shot_not_found">Nessuna misura trovata</string>
     <string name="shot_reverse">inverso</string>
     <string name="shot_to">a</string>
 
@@ -408,7 +408,7 @@
     <string name="stat_length">Sviluppo %1$.1f %2$s</string>
     <string name="stat_loop">Anelli %1$d</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
-    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
+    <string name="stat_azimuth">Profilo proiezione azimut: %1$.1f</string>
     <string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string>
     <string name="stat_splay">Splay %1$d</string>
     <string name="stat_station">Capisaldi %1$d</string>
@@ -445,7 +445,7 @@
     <!-- UNUSED string name="button_add"       >Aggiungi  </string -->
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
-    <!-- TODO string name="button_close"     >Close     </string -->
+    <string name="button_close"     >Chiudi    </string>
     <string name="button_convert"   >Converti  </string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
@@ -556,7 +556,7 @@
     <!-- UNUSED string name="help_manual">Manuale online</string -->
     <string name="help_measure">Misurare le distanze</string>
     
-    <!-- TODO string name="help_close">Close window</string -->
+    <string name="help_close">Chiusura finestra</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_continue">Continuare il disegno di una linea</string>
     <!-- NO string name="help_contour">Contour editing</string -->
@@ -605,7 +605,7 @@
     <string name="help_redo">Ripeti ultima azione di disegno</string>
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
     <string name="help_delete_item">Cancella elemento del disegno</string>
-    <!-- TODO string name="help_range">Moving a portion of line</string -->
+    <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
     <string name="help_previous">Precedente oggetto nella selezione</string>
@@ -667,8 +667,8 @@
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
     <string name="title_device">Dispositivi DistoX</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
-    <string name="title_discover">Ricerca dispositivi DistoX &#8230; attendi</string>
+    <string name="title_device_select">Seleziona DistoX</string>
+    <string name="title_discover">Ricerca DistoX &#8230; attendi</string>
     <string name="title_draw">Disegno</string>
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINEA %1$s</string>
@@ -773,8 +773,8 @@
   <string name="pref_wait_shot_summary">Tempo di attesa dopo la misurazione [ms]</string>
   <string name="pref_wait_data_title">Pausa dati [ms]</string>
   <string name="pref_wait_data_summary">Pausa dopo un download [ms]</string>
-  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
-  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
+  <string name="pref_wait_conn_title">Ritardo di attesa dati pronti [ms]</string>
+  <string name="pref_wait_conn_summary">Attesa che i dati siano pronti [ms]</string>
   <string name="pref_conn_mode_title">Tipo connessione</string>
   <string name="pref_conn_mode_summary">Tipo di connessione dati col DistoX</string>
   <string name="pref_auto_reconnect_title">Auto reconnessione</string>
@@ -944,10 +944,10 @@
   <string name="pref_checkBT_summary">Attiva/disattiva bluetooth</string>
   <string name="pref_checkAttached_title">Controllo poligonale</string>
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
+  <string name="pref_backup_number_title">Numero Backup</string>
+  <string name="pref_backup_number_summary">Numero di backup di sketch file</string>
+  <string name="pref_backup_interval_title">Intervallo di backup</string>
+  <string name="pref_backup_interval_summary">Intervallo minimo tra 2 backup [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Splay Therion</string>
@@ -956,10 +956,10 @@
   <string name="pref_autoStations_summary">Aggiungi capisaldi automaticamente</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
-  <!-- UNUSED string name="pref_splayExtend_title">Stima extendi per splay</string -->
+  <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <string name="pref_swapLR_title">Scambia LR in Compass</string>
+  <string name="pref_swapLR_summary">Scambia LR nella export Compass</string>
   <string name="pref_LRExtend_title">Stima extend Sx/Dx</string>
   <string name="pref_LRExtend_summary">Stima extend Sx/Dx (Bussola/import VisualTopo)</string>
 
