@@ -775,7 +775,8 @@ class TDSetting
     if ( mLevelOverAdvanced ) {
       String android_id = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
       // Log.v("DistoX", "android_id <" + android_id + ">");
-      if ( "e5582eda21cafac3".equals( android_id ) || "8c894b79b6dce351".equals( android_id ) ) {
+      if ( // "e5582eda21cafac3".equals( android_id ) || // Nexus-4
+           "8c894b79b6dce351".equals( android_id ) ) {   // Samsung Note-3
         mLevelOverExperimental = true;
       }
     }

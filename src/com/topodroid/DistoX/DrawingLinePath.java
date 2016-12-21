@@ -40,6 +40,8 @@ public class DrawingLinePath extends DrawingPointLinePath
   static final int OUTLINE_NONE = 0;
   static final int OUTLINE_UNDEF = -2;
 
+  boolean hasOutline() { return mOutline == OUTLINE_OUT || mOutline == OUTLINE_IN; }
+
   // static int mCount = 0;
   // int mCnt;
   int mLineType;
@@ -82,6 +84,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
 
       DrawingLinePath ret = new DrawingLinePath( type );
+      ret.mOutline  = outline;
       ret.mOptions  = options;
       ret.setReversed( reversed );
 

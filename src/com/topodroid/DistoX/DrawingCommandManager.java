@@ -1201,7 +1201,7 @@ public class DrawingCommandManager
     boolean grids    = (mDisplayMode & DisplayMode.DISPLAY_GRID    ) != 0;
     boolean outline  = (mDisplayMode & DisplayMode.DISPLAY_OUTLINE ) != 0;
 
-    if( mGridStack1 != null && grids ) {
+    if( grids && mGridStack1 != null ) {
       synchronized( mGridStack1 ) {
         if ( mScale < 1 ) {
           final Iterator i1 = mGridStack1.iterator();
@@ -1226,7 +1226,7 @@ public class DrawingCommandManager
       }
     }
 
-    if ( mLegsStack != null && legs ) {
+    if ( legs && mLegsStack != null ) {
       synchronized( mLegsStack ) {
         final Iterator i = mLegsStack.iterator();
         while ( i.hasNext() ){
@@ -1248,7 +1248,7 @@ public class DrawingCommandManager
       }
     }
  
-    if ( mStations != null && stations ) {  
+    if ( stations && mStations != null ) {  
       synchronized( mStations ) {
         for ( DrawingStationName st : mStations ) {
           st.draw( canvas, mMatrix, mScale, mBBox );
@@ -1266,7 +1266,7 @@ public class DrawingCommandManager
               DrawingPath path = (DrawingPath)cmd;
               if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
                 DrawingLinePath line = (DrawingLinePath)path;
-                if ( line.mOutline != DrawingLinePath.OUTLINE_NONE ) {
+                if ( line.hasOutline() ) {
                   cmd.draw( canvas, mMatrix, mScale, mBBox );
                 }
               }
