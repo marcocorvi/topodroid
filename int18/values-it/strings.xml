@@ -486,7 +486,7 @@
     <string name="mode_station">Capisaldi</string>
     <string name="mode_grid">Griglia</string>
     <string name="mode_fixed">[ Bloccati ]</string>
-    <!-- TODO string name="mode_outline">Outline only</string -->
+    <string name="mode_outline">Solo contorno</string>
 
     <!-- UNUSED string name="remote_title">DistoX Remote Control</string -->
     <string name="remote_on">Laser ON</string>

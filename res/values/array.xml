@@ -92,7 +92,6 @@
      <item name="bulgarian">Български</item>
      <item name="chinese">中文</item>
      <item name="ukrainian">Українська</item>
-     <item name="persian">Persian</item>
      <item name="hungarian">Hungarian</item>
 
   </string-array>
@@ -109,7 +108,6 @@
      <item name="bulgarian">bg</item>
      <item name="chinese">cn</item>
      <item name="ukrainian">ua</item>
-     <item name="persian">fa</item>
      <item name="hungarian">hu</item>
   </string-array>
 
