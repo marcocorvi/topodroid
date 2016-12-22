@@ -68,7 +68,7 @@
     <!-- UNUSED string name="data">Dados</string -->
     <string name="using">Usando %1$s</string>
     <string name="calib_error">Erro médio: %1$.4f graus</string>
-    <string name="calib_stddev">Erro stddev: %1$.4f graus</string>
+    <string name="calib_stddev">Erro desvio padrão: %1$.4f graus</string>
     <string name="calib_max_error">Erro máximo: %1$.4f graus</string>
     <string name="calib_ave_std">Exatidão: %1$.4f ± %2$.4f graus</string>
     <string name="calib_precision">Precisão</string>
@@ -246,7 +246,7 @@
     <string name="menu_attach">CONECTAR</string>
     <!-- UNUSED string name="menu_attached">Conectado</string -->
     <!-- UNUSED string name="menu_ready">Pronto</string -->
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <!-- TODO string name="menu_close">FECHAR</string -->
     <string name="menu_delete">APAGAR</string>
     <string name="menu_detach">DESCONECTAR</string>
     <!-- OK string name="menu_display">DISPLAY</string -->
@@ -366,11 +366,11 @@
     <string name="station">base</string>
     <string name="station_ask">Inserir a base no esboço?</string>
     <string name="station_set">Continuar o mapa a partir deste ponto?</string>
-    <!-- UNUSED string name="station_base">reference station</string -->
-    <!-- UNUSED string name="station_next">next station</string -->
-    <!-- UNUSED string name="station_viewed">viewed station</string -->
+    <!-- UNUSED string name="station_base">base de referência</string -->
+    <!-- UNUSED string name="station_next">próxima base</string -->
+    <!-- UNUSED string name="station_viewed">base vista</string -->
     <string name="survey_exists">O mapa já existe</string>
-    <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
+    <!-- UNUSED string name="survey_date">aaaa.mm.dd</string -->
     <string name="survey_delete">Apagar o mapa ?</string>
     <string name="survey_split">Dividir o mapa ?</string>
     <string name="survey_not_attached">ATENÇÃO: visadas não conectadas</string>
@@ -379,12 +379,12 @@
     <string name="description">descrição</string>
     <string name="name">nome</string>
     <!-- TODO string name="team">team</string -->
-    <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
+    <!-- UNUSED string name="toggle_device">Mudar modo de calibração do dispositivo</string -->
     <string name="toggle_failed">Falha ao alternar o DistoX</string>
     <string name="toggle_ok">Modo calibração DistoX alternativo</string>
     <string name="undelete_text">Toque no item para restaura-lo</string>
     <string name="visible_border">Borda visível</string>
-    <!-- UNUSED string name="vthreshold">vert. threshold</string -->
+    <!-- UNUSED string name="vthreshold">Limiar vertical</string -->
     <string name="wait_scan">Escaneando: aguardar &#8230;</string>
     <string name="write_failed">Falha na escritura do DistoX</string>
     <string name="write_ok">Escritura calibração para o DistoX</string>
@@ -394,7 +394,7 @@
     <string name="unzip_fail_survey">Falha: nome do mapa incompatível</string>
     <string name="unzip_fail_db">Falha: versão do database incompatível</string>
     <string name="unzip_fail_td">Falha: versão TopoDroid incompatível</string>
-    <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
+    <!-- UNUSED string name="zoom_in_out">Zoom para frente/para trás</string -->
 
     <string name="survey_info">Informações do mapa</string>
     <!-- TODO string name="stat_stddev_m">Desvio aceleração %1$.1f %%</string -->
@@ -407,7 +407,7 @@
     <string name="stat_length">Comprimento %1$.1f %2$s</string>
     <string name="stat_loop">Anéis %1$d</string>
     <string name="stat_origin">Base de origem: %1$s</string>
-    <!-- TODO string name="stat_azimuth">Profile projection azimuth: %1$.1f</string -->
+    <!-- TODO string name="stat_azimuth">Projeção do azimuth no perfil: %1$.1f</string -->
     <string name="stat_shot">Leituras  %1$d,   Duplicadas %2$d,   Superfície %3$d</string>
     <string name="stat_splay">Visadas auxiliares %1$d</string>
     <string name="stat_station">Bases %1$d</string>
@@ -443,7 +443,7 @@
     <!-- UNUSED string name="button_add"       >Adicionar     </string -->
     <string name="button_back"      >Voltar      </string>
     <string name="button_cancel"    >Cancelar    </string>
-    <!-- TODO string name="button_close"     >Close     </string -->
+    <!-- TODO string name="button_close"     >Fechar     </string -->
     <string name="button_convert"   >Converter   </string>
     <string name="button_current"   >Atual   </string>
     <string name="button_delete"    >Apagar    </string>
@@ -452,23 +452,23 @@
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- UNUSED string name="button_manual"    >Manual    </string -->
-    <!-- UNUSED string name="button_measure"   >Measure   </string -->
+    <!-- UNUSED string name="button_measure"   >Medir   </string -->
     <string name="button_photo"   >Foto</string>
-    <!-- UNUSED string name="button_sensor"  >Sensors</string -->
-    <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
+    <!-- UNUSED string name="button_sensor"  >Sensores</string -->
+    <!-- UNUSED string name="button_direction">Azimuth/Clinômetro</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Esboço</string>
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Abrir      </string>
     <string name="button_read"      >Ler      </string>
-    <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
+    <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Esvaziar     </string>
     <!-- TODO string name="button_reset"     >Reset     </string -->
     <string name="button_left"      >ESQUERDA</string>
     <string name="button_right"     >DIREITA</string>
     <string name="button_clear"     >Limpar     </string>
     <string name="button_save"      >Salvar      </string>
-    <!-- UNUSED string name="button_select"    >Select    </string -->
+    <!-- UNUSED string name="button_select"    >Selecionar    </string -->
     <string name="button_store"     >Armazenar     </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
@@ -484,17 +484,17 @@
     <string name="mode_station">Bases</string>
     <string name="mode_grid">Grelha</string>
     <string name="mode_fixed">Fixar referências</string>
-    <!-- TODO string name="mode_outline">Outline only</string -->
+    <!-- TODO string name="mode_outline">Apenas contorno</string -->
 
-    <!-- UNUSED string name="remote_title">Device Remote Control</string -->
+    <!-- UNUSED string name="remote_title">Controlo dispositivo remoto</string -->
     <!-- OK string name="remote_on">Laser ON</string -->
     <!-- OK string name="remote_off">Laser OFF</string -->
-    <!-- UNUSED string name="remote_measure">Measure</string -->
+    <!-- UNUSED string name="remote_measure">Medir</string -->
     <!-- OK string name="remote_reset">Reset BT</string -->
     <!-- UNUSED string name="download">Download</string -->
 
-    <!-- TODO string name="popup_do_splay">Splay shot</string -->
-    <!-- TODO string name="popup_do_leg">Leg shots</string -->
+    <!-- TODO string name="popup_do_splay">Visada auxiliar</string -->
+    <!-- TODO string name="popup_do_leg">Visada principal</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importar</string>
@@ -503,11 +503,11 @@
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
     <string name="title_sketch_new">Novo esboço 3D</string>
-    <!-- UNUSED string name="title_sketch_edit">Edit 3D surface</string -->
+    <!-- UNUSED string name="title_sketch_edit">Editar superfície 3D</string -->
     <string name="title_sketch_shot">Nova visada</string>
     <string name="title_sketch_refs">Modo de visualização</string>
-    <!-- UNUSED string name="title_sketch_section_type">Sections type</string -->
-    <!-- UNUSED string name="title_sketch_select">Select item</string -->
+    <!-- UNUSED string name="title_sketch_section_type">Tipo de seções</string -->
+    <!-- UNUSED string name="title_sketch_select">Selecionar objeto</string -->
 
     <string name="sketch_mode_single">Tiro único</string>
     <string name="sketch_mode_ngbh">Tiros nas proximidades</string>
@@ -524,23 +524,23 @@
     <string name="error_distribution">Erro de distribuição</string>
     <string name="angle_distribution">Distribuição angular</string>
 
-    <!-- UNUSED string name="btn_head">head</string -->
-    <!-- UNUSED string name="btn_stretch">Stretch</string -->
-    <!-- UNUSED string name="btn_extrude">Extrude</string -->
-    <!-- UNUSED string name="btn_erase">erase</string -->
-    <!-- UNUSED string name="btn_cut">cut</string -->
+    <!-- UNUSED string name="btn_head">Cabeça</string -->
+    <!-- UNUSED string name="btn_stretch">Esticar</string -->
+    <!-- UNUSED string name="btn_extrude">Extruir</string -->
+    <!-- UNUSED string name="btn_erase">Apagar</string -->
+    <!-- UNUSED string name="btn_cut">Cortar</string -->
     <!-- UNUSED string name="btn_vertical">Vertical</string -->
     <!-- UNUSED string name="btn_horizontal">Horizontal</string -->
 
     <!-- select buttin labels -->
-    <!-- UNUSED string name="btn_section">Section</string -->
-    <!-- UNUSED string name="btn_step">Step</string -->
-    <!-- UNUSED string name="btn_shot">Shot</string -->
-    <!-- UNUSED string name="btn_join">Join</string -->
+    <!-- UNUSED string name="btn_section">Seção</string -->
+    <!-- UNUSED string name="btn_step">Passo</string -->
+    <!-- UNUSED string name="btn_shot">Visada</string -->
+    <!-- UNUSED string name="btn_join">Juntar</string -->
 
-    <!-- UNUSED string name="button_redraw">Redraw</string -->
-    <!-- UNUSED string name="button_erase">Erase</string -->
-    <!-- UNUSED string name="btn_surface">surface</string -->
+    <!-- UNUSED string name="button_redraw">Redesenhar</string -->
+    <!-- UNUSED string name="button_erase">Apagar</string -->
+    <!-- UNUSED string name="btn_surface">Superfície</string -->
 
     <!-- UNUSED string name="station_next">NEXT</string -->
     <string name="no_shot_between_stations">Nenhuma visada entre as bases</string>
@@ -549,14 +549,14 @@
     <string name="flip_shots">Mexer visadas</string>
 
     <string name="menu_head">CABEÇALHO</string>
-    <!-- UNUSED string name="menu_save_th2">SAVE TH2</string -->
+    <!-- UNUSED string name="menu_save_th2">SALVAR TH2</string -->
 <!-- END_SKETCH_3D -->    
 
     <string name="help_help">Esta ajuda</string>
-    <!-- UNUSED string name="help_manual">User manual</string -->
+    <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
     
-    <!-- TODO string name="help_close">Close window</string -->
+    <!-- TODO string name="help_close">FEchar janela</string -->
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_continue">Continuar a desenhar uma linha</string>
     <string name="help_contour">Modificar perfil</string>
@@ -566,14 +566,14 @@
     <string name="help_add_topodroid">Criar novo mapa/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo mapa</string>
     <string name="help_symbol">Ativar/desativar ferramentas de desenho</string>
-    <!-- UNUSED string name="help_therion">Therion manager app</string -->
-    <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
+    <!-- UNUSED string name="help_therion">App gerenciamento Therion</string -->
+    <!-- UNUSED string name="help_database">App Visualizador do Database (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
     <string name="help_log">Ativar/desativar configurações de log</string>
     <string name="help_join_survey">Compartilhar mapeamento</string>
     <string name="help_info_topodroid">Informações TopoDroid</string>
     <string name="help_download">Download dos dados</string>
-    <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
+    <!-- UNUSED string name="help_splay">Atribuir bases à visadas auxiliarias automaticamente</string -->
     <string name="help_display">Selecionar modalidade display</string>
     <string name="help_display_calib">Alternar exibição das visadas apagadas</string>
     <string name="help_validate">Validar calibração</string>
@@ -594,19 +594,19 @@
     <string name="help_edit">Modalidade editing</string>
     <string name="help_refs">Escoler referências do esboço</string>
     <string name="help_rename">Mudar nome do mapa</string>
-    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <!-- TODO string name="help_plot_rename">Renomear/Apagar esboço</string -->
+    <!-- TODO string name="help_plot_switch">Alternar esboço</string -->
     <string name="help_stats">Estatísticas do mapa</string>
     <string name="help_save_plot">Exportar esboço</string>
-    <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
+    <!-- UNUSED string name="help_tdr2th2">Converter arquivos de esboço binário em th2</string -->
     <string name="help_toggle_plot">Pular entre vista em plata ou secção</string>
-    <!-- UNUSED string name="help_trash">apagar esboço</string -->
+    <!-- UNUSED string name="help_trash">Apagar esboço</string -->
     <string name="help_undo">Apagar última ação de desenho</string>
     <string name="help_redo">Refazer última ação de desenho</string>
     <string name="help_symbol_plot">Selecionar a ferramenta de desenho atual</string>
     <string name="help_delete_item">Apagar objeto do esboço</string>
-    <!-- TODO string name="help_range">Moving a portion of line</string -->
-    <!-- UNUSED string name="help_clear">Clear selection</string -->
+    <!-- TODO string name="help_range">Mover uma porção de linha</string -->
+    <!-- UNUSED string name="help_clear">Limpar seleção</string -->
     <string name="help_eraser">Modalidade de cancelamento</string>
     <string name="help_previous">Objeto anterior na seleção</string>
     <string name="help_next">Próximo objeto na seleção</string>
