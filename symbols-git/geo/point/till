@@ -1,0 +1,16 @@
+symbol point
+name till
+th_name till
+color 0xccff66
+csurvey 0 0 0 
+path
+  moveTo 0 4
+  lineTo -3 -2
+  lineTo 3 -2
+  lineTo 0 4
+  moveTo -6 0 
+  lineTo -2 0
+  moveTo 6 0
+  lineTo 2 0
+endpath
+endsymbol

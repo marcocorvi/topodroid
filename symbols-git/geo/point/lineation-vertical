@@ -1,0 +1,16 @@
+symbol point
+name lineation-vertical
+th_name lineation-vertical
+color 0x66ff33
+csurvey 0 0 0
+path
+  moveTo -5 0
+  lineTo 0 -5
+  lineTo 5 0
+  lineTo 0 5
+  lineTo -5 0
+  lineTo 5 0
+  moveTo 0 -5
+  lineTo 0 5
+endpath
+endsymbol

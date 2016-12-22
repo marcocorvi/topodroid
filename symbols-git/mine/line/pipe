@@ -1,0 +1,8 @@
+symbol line
+name phone
+th_name phone
+group phone
+color 0x33ff66 0xff
+width 1
+csurvey 2 1 3 5
+endsymbol

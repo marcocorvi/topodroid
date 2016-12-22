@@ -1,0 +1,13 @@
+symbol point
+name lamp
+th_name lamp
+color 0x33ffff
+csurvey 0 0 0
+path
+  moveTo -4 0
+  cubicTo -4 4 4 4 4 0
+  lineTo -4 0
+  lineTo 0 -6 
+  lineTo 4 0
+endpath
+endsymbol

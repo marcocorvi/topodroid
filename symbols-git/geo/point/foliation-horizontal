@@ -1,0 +1,16 @@
+symbol point
+name foliation-horizontal
+th_name foliation-horizontal
+color 0xcccc99
+csurvey 0 0 0 
+path
+  moveTo -6 2 
+  lineTo 6 2
+  moveTo -6 -2 
+  lineTo 6 -2
+  moveTo 2 -6
+  lineTo 2 6
+  moveTo -2 -6
+  lineTo -2 6
+endpath
+endsymbol

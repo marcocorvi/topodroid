@@ -1,0 +1,12 @@
+symbol point
+name door
+th_name door
+color 0xffffff
+csurvey 0 0 0
+orientation yes
+path
+  moveTo -2 4
+  lineTo -2 -4
+  cubicTo 2 -4 2 4 -2 4
+endpath
+endsymbol

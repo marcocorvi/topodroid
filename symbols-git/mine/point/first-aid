@@ -1,0 +1,17 @@
+symbol point
+name first-aid
+th_name fisrt-aid
+color 0xffffff
+csurvey 0 0 0 
+path
+  moveTo -4 -4
+  lineTo 4 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo -4 -4
+  moveTo 0 2
+  lineTo 0 -2
+  moveTo 2 0
+  lineTo -2 0
+endpath
+endsymbol

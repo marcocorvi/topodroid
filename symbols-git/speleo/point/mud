@@ -1,0 +1,16 @@
+symbol point
+name mud
+name-it fango
+th_name mud
+orientation no
+color 0xffcc66
+csurvey 6 6 80
+path
+  moveTo -6 3
+  lineTo 0 -3
+  moveTo -3 3
+  lineTo 3 -3
+  moveTo 0 3
+  lineTo 6 -3
+endpath
+endsymbol

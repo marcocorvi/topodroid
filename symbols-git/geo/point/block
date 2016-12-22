@@ -1,0 +1,20 @@
+symbol point
+name block
+th_name block
+color 0xff6633
+csurvey 0 0 0
+path
+  moveTo -6 2
+  lineTo -6 -2
+  lineTo -2 -2
+  lineTo -2 2
+  lineTo -6 2
+  moveTo -2 0
+  lineTo 2 0
+  moveTo 6 2
+  lineTo 6 -2
+  lineTo 2 -2
+  lineTo 2 2
+  lineTo 6 2
+endpath
+endsymbol

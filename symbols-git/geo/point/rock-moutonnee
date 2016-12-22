@@ -1,0 +1,12 @@
+symbol point
+name rock-moutonnee
+th_name rock-moutonnee
+color 0xcccc99
+csurvey 0 0 0
+path
+  moveTo 0 -6
+  cubicTo 4 -5 4 -1 0 0
+  cubicTo 4 1 4 5 0 6
+  cubicTo 8 6 8 -6 0 -6 
+endpath
+endsymbol

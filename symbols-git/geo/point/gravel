@@ -1,0 +1,17 @@
+symbol point
+name gravel
+th_name gravel
+color 0xcc9966
+csurvey 0 0 0
+path
+  addCircle 0 0 4
+  moveTo -8 0
+  lineTo -4 0
+  moveTo 4 0
+  lineTo 8 0
+  moveTo -3 -3
+  lineTo 3 3
+  moveTo -3 3
+  lineTo 3 -3
+endpath
+endsymbol

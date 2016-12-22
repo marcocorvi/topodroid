@@ -1,0 +1,13 @@
+symbol point
+name ore
+th_name ore
+color 0x66ff99
+csurvey 0 0 0
+path
+  moveTo -6 0
+  cubicTo -3 -3 -3 -3 0 0
+  cubicTo 3 -3 3 -3 6 0
+  moveTo 0 -4
+  lineTo 0 4
+endpath
+endsymbol

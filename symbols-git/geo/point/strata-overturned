@@ -1,0 +1,14 @@
+symbol point
+name strata-overturned
+th_name strata-overturned
+color 0xcccccc
+csurvey 0 0 0
+orientation yes
+path
+  moveTo 6 0
+  lineTo -6 0
+  moveTo 3 0
+  cubicTo 3 3 -3 3 -3 0
+  lineTo -3 -4
+endpath
+endsymbol

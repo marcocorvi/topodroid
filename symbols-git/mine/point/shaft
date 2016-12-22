@@ -1,0 +1,13 @@
+symbol point
+name shaft
+th_name shaft
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo 4 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo -4 -4
+  lineTo 4 -4
+endpath
+endsymbol

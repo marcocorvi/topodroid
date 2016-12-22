@@ -1,0 +1,15 @@
+symbol point
+name lineation-inclined
+th_name lineation-inclined
+color 0x66ff33
+csurvey 0 0 0
+orientation yes
+csurvey 0 0 0
+path
+  moveTo -3 -3
+  lineTo 0 -6
+  lineTo 3 -3
+  moveTo 0 -6
+  lineTo 0 6
+endpath
+endsymbol

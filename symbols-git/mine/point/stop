@@ -1,0 +1,16 @@
+symbol point
+name stop
+th_name stop
+color 0xff0000
+csurvey 0 0 0
+path
+  moveTo -5 -4
+  lineTo 5 -4
+  moveTo -3 -4
+  lineTo -3 4
+  moveTo 3 -4
+  lineTo 3 4
+  moveTo -5 4
+  lineTo 5 4
+endpath
+endsymbol

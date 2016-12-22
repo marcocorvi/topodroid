@@ -1,0 +1,16 @@
+symbol point
+name shaft-closed
+th_name shaft-closed
+color 0xffffff
+csurvey 0 0 0
+path
+  moveTo -4 -4
+  lineTo 4 4
+  lineTo 4 -4
+  lineTo -4 4
+  lineTo -4 -4
+  lineTo 4 -4
+  moveTo 4 4 
+  lineTo -4 4
+endpath
+endsymbol

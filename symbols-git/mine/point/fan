@@ -1,0 +1,13 @@
+symbol point
+name fan
+th_name fan
+color 0xffffff
+csurvey 0 0 0 
+path
+  addCircle 0 0 5
+  moveTo 3 3
+  lineTo -3 -3
+  moveTo 3 -3
+  lineTo -3 3
+endpath
+endsymbol

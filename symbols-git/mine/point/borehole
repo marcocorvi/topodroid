@@ -1,0 +1,9 @@
+symbol point
+name borehole
+th_name borehole
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 4
+endpath
+endsymbol

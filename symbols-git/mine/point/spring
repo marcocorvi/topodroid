@@ -1,0 +1,16 @@
+symbol point
+name spring
+th_name spring
+color 0x33ccff
+csurvey 0 0 0
+orientation yes
+path
+  addCircle 0 0 4
+  addCircle 0 0 1
+  moveTo 0 -4
+  lineTo 0 -8
+  lineTo 3 -5
+  moveTo 0 -8
+  lineTo -3 -5
+endpath
+endsymbol

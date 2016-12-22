@@ -1,0 +1,14 @@
+symbol point
+name air-blue
+th_name air-blue
+color 0x0099ff
+csurvey 0 0 0 
+orientation yes
+path 
+  moveTo 0 5
+  lineTo 0 -5
+  lineTo 3 -2
+  moveTo 0 -5
+  lineTo -3 -2
+endpath
+endsymbol

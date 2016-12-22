@@ -1,0 +1,16 @@
+symbol point
+name fossil
+th_name fossil
+color 0x33ff66
+csurvey 0 0 0 
+path
+  moveTo 6 0
+  lineTo -6 0
+  moveTo 0 6
+  lineTo 0 -6
+  moveTo 4 -4
+  lineTo -4 4
+  moveTo 4 4
+  lineTo -4 -4
+endpath
+endsymbol

@@ -1,0 +1,15 @@
+symbol point
+name water-dam
+th_name water-dam
+color 0x00ccff
+csurvey 0 0 0
+path
+  moveTo 4 4
+  lineTo 4 -4
+  lineTo -4 -4
+  lineTo -4 4
+  lineTo 4 4
+  lineTo 0 -4
+  lineTo -4 4
+endpath
+endsymbol

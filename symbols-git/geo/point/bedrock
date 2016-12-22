@@ -1,0 +1,13 @@
+symbol point
+name bedrock
+th_name bedrock
+color 0xcc9966
+csurvey 0 0 0
+path
+  addCircle 0 0 6
+  moveTo -6 0
+  cubicTo -5 -4 1 -4 0 0
+  moveTo 6 0
+  cubicTo 5 -4 1 -4 0 0
+endpath
+endsymbol

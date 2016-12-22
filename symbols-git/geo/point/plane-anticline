@@ -1,0 +1,13 @@
+symbol point
+name plane-anticline
+th_name plane-anticline
+color 0x33ff99
+csurvey 0 0 0
+path
+  moveTo 0 -6
+  lineTo 4 0
+  lineTo 0 6
+  lineTo -4 0
+  lineTo 0 -6
+endpath
+endsymbol

@@ -1,0 +1,11 @@
+symbol point
+name path
+th_name path
+color 0xffffff
+csurvey 0 0 0
+path
+  addCircle 0 0 3
+  moveTo -6 0
+  lineTo 6 0
+endpath
+endsymbol

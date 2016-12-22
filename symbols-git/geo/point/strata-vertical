@@ -1,0 +1,13 @@
+symbol point
+name strata-vertical
+th_name strata-vertical
+color 0xcccccc
+csurvey 0 0 0
+orientation yes
+path
+  moveTo 6 0
+  lineTo -6 0
+  moveTo 0 -3
+  lineTo 0 3
+endpath
+endsymbol

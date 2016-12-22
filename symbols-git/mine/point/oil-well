@@ -1,0 +1,19 @@
+symbol point
+name gas-well
+th_name gas-well
+color 0x66ff99
+csurvey 0 0 0
+path
+  addCircle 0 0 3
+  moveTo 0 3
+  lineTo 0 5
+  moveTo 2.1 1.5 
+  lineTo 4.2 3
+  moveTo 0 -3
+  lineTo 0 -5
+  moveTo -2.1 -1.5 
+  lineTo -4.2 -3
+  moveTo 4.2 -3
+  lineTo -4.2 3
+endpath
+endsymbol

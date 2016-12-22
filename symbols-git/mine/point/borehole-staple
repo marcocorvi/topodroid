@@ -1,0 +1,11 @@
+symbol point
+name borehole-staple
+th_name borehole-staple
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 4
+  moveTo 3 -3
+  lineTo -3 3
+endpath
+endsymbol

@@ -1,0 +1,12 @@
+symbol point
+name plane-syncline
+th_name plane-syncline
+color 0x33ff99
+csurvey 0 0 0
+path
+  moveTo -4 -6
+  lineTo 4 6
+  moveTo -4 6
+  lineTo 4 -6
+endpath
+endsymbol

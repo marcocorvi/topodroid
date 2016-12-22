@@ -1,0 +1,10 @@
+symbol point
+name sink
+th_name sink
+color 0x33ccff
+csurvey 0 0 0
+path
+  addCircle 0 0 4
+  addCircle 0 0 1
+endpath
+endsymbol

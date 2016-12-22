@@ -1,0 +1,17 @@
+symbol point
+name shaft-abandoned
+th_name shaft-abandoned
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo 4 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo -4 -4
+  lineTo 4 -4
+  moveTo 0 -4
+  lineTo 0 4
+  moveTo -4 0
+  lineTo 4 0
+endpath
+endsymbol

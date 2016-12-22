@@ -1,0 +1,14 @@
+symbol point
+name younging
+th_name younging
+color 0xffffff
+csurvey 0 0 0
+orientation yes
+path
+  moveTo -4 4
+  lineTo 0 0
+  lineTo 4 4
+  moveTo 0 0 
+  lineTo 0 -7
+endpath
+endsymbol

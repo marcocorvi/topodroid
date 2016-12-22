@@ -1,0 +1,14 @@
+symbol point
+name air-red
+th_name air-red
+color 0xff0000
+csurvey 0 0 0 
+orientation yes
+path 
+  moveTo 0 5
+  lineTo 0 -5
+  lineTo 3 -2
+  moveTo 0 -5
+  lineTo -3 -2
+endpath
+endsymbol

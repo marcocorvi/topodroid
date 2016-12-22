@@ -1,0 +1,12 @@
+symbol point
+name regulator
+th_name regulator
+color 0xffffff
+csurvey 0 0 0
+path
+  moveTo -2 4
+  lineTo -2 -4
+  cubicTo 2 -4 2 0 -2 0
+  lineTo  2 4
+endpath
+endsymbol

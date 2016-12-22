@@ -1,0 +1,15 @@
+symbol point
+name joint-inclined
+th_name joint-inclined
+color 0xcccc99
+csurvey 0 0 0
+orientation yes
+path
+  moveTo -6 0
+  lineTo 6 0
+  moveTo 3 0
+  lineTo 3 -4
+  lineTo -3 -4
+  lineTo -3 0
+endpath
+endsymbol

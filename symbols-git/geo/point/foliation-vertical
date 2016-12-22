@@ -1,0 +1,15 @@
+symbol point
+name foliation-vertical
+th_name foliation-vertical
+color 0xcccc99
+csurvey 0 0 0 
+orientation yes
+path
+  moveTo -6 0 
+  lineTo 6 0
+  moveTo 2 3
+  lineTo 2 -3
+  moveTo -2 -3
+  lineTo -2 3
+endpath
+endsymbol

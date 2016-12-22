@@ -1,0 +1,13 @@
+symbol point
+name sand
+th_name sand
+color 0xff9900
+csurvey 0 0 0
+path
+  moveTo -6 0
+  lineTo 6 0
+  moveTo -3 0
+  lineTo 0 -3 
+  lineTo 3 0
+endpath
+endsymbol

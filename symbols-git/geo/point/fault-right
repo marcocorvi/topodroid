@@ -1,0 +1,15 @@
+symbol point
+name fault-right
+th_name fault-right
+color 0xcccc99
+csurvey 0 0 0
+orientation yes
+path
+  moveTo -2 6
+  lineTo -2 -6
+  lineTo -6 -2
+  moveTo 2 -6
+  lineTo 2 6
+  lineTo 6 2
+endpath
+endsymbol

@@ -1,0 +1,13 @@
+symbol point
+name plane-synform
+th_name plane-synform
+color 0x33ff99
+csurvey 0 0 0
+path
+  moveTo -4 -6
+  lineTo 4 6
+  lineTo -4 6
+  lineTo 4 -6
+  lineTo -4 -6
+endpath
+endsymbol

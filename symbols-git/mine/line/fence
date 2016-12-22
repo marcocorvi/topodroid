@@ -1,0 +1,28 @@
+symbol line
+name fence
+th_name fence
+color 0xff00ff 
+width 2
+csurvey 2 1 3 5
+effect
+  moveTo 0 0
+  lineTo 8 0
+  lineTo 5 3
+  lineTo 6 4
+  lineTo 10 0
+  lineTo 14 4
+  lineTo 15 3
+  lineTo 12 0
+  lineTo 35 0
+  lineTo 35 -1
+  lineTo 12 -1
+  lineTo 15 -4
+  lineTo 14 -5
+  lineTo 10 -1
+  lineTo 6 -5
+  lineTo 5 -4
+  lineTo 8 -1
+  lineTo 0 -1
+  lineTo 0 0
+endeffect
+endsymbol

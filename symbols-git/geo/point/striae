@@ -1,0 +1,15 @@
+symbol point
+name striae
+th_name striae
+color 0xcccc99
+csurvey 0 0 0
+orientation yes
+path
+  addCircle 0 0 3
+  moveTo 0 8
+  lineTo 0 -8
+  lineTo 3 -5
+  moveTo 0 -8 
+  lineTo -3 -5
+endpath
+endsymbol

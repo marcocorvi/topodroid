@@ -20,12 +20,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+
+import android.text.TextWatcher;
+import android.text.Editable;
 
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -43,8 +49,10 @@ public class AzimuthDialDialog extends MyDialog
                               , IBearingAndClino
 {
   private ILister mParent;
-  private float mAzimuth;
+  float mAzimuth;
   private Bitmap mBMdial;
+
+  EditText mETazimuth;
 
   // private Button mBTback;
   // private Button mBTfore;
@@ -66,7 +74,7 @@ public class AzimuthDialDialog extends MyDialog
     mBMdial  = dial;
   }
 
-  private void updateView()
+  void updateView()
   {
     Matrix m = new Matrix();
     m.preRotate( mAzimuth - 90 );
@@ -76,9 +84,10 @@ public class AzimuthDialDialog extends MyDialog
     Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, w, w, true );
     Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, w, w, m, true);
     mBTazimuth.setBackgroundDrawable( new BitmapDrawable( mContext.getResources(), bm2 ) );
+    mETazimuth.setText( Integer.toString( (int)mAzimuth ) );
   }
 
-  private void updateSeekBar() { mSeekBar.setProgress( ((int)mAzimuth + 180)%360 ); }
+  void updateSeekBar() { mSeekBar.setProgress( ((int)mAzimuth + 180)%360 ); }
 
 // -------------------------------------------------------------------
   @Override
@@ -104,6 +113,24 @@ public class AzimuthDialDialog extends MyDialog
     mBtnCancel.setOnClickListener( this );
 
     mSeekBar  = (SeekBar) findViewById( R.id.seekbar );
+    mETazimuth = (EditText) findViewById( R.id.et_azimuth );
+    mETazimuth.setOnEditorActionListener( new OnEditorActionListener() {
+      @Override
+      public boolean onEditorAction( TextView v, int action_id, KeyEvent ev )
+      {
+        if ( action_id == EditorInfo.IME_ACTION_DONE ) {
+          try {
+            int azimuth = Integer.parseInt( mETazimuth.getText().toString() );
+            if ( azimuth < 0 || azimuth > 360 ) azimuth = 0;
+            mAzimuth = azimuth;
+            updateSeekBar();
+            updateView();
+          } catch ( NumberFormatException e ) { }
+          return true;
+        }
+        return false;
+      }
+    } );
 
     LinearLayout layout4 = (LinearLayout) findViewById( R.id.layout4 );
     int size = TopoDroidApp.getScaledSize( mContext );
