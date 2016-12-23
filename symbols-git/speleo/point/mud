@@ -1,7 +1,7 @@
 symbol point
 name mud
 name-it fango
-th_name mud
+th_name u:mud
 orientation no
 color 0xffcc66
 csurvey 6 6 80
