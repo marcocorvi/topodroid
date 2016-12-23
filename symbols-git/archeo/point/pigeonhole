@@ -1,0 +1,12 @@
+symbol point
+name pigeonhole
+th_name pigeonhole
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo 4 4
+  lineTo -4 4
+  cubicTo -4 -4 4 -4 4 4
+  addCircle 0 1 1
+endpath
+endsymbol

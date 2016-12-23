@@ -1,0 +1,18 @@
+symbol point
+name pit
+th_name pit
+color 0xff6699
+csurvey 0 0 0
+path
+  moveTo -5 -5
+  lineTo 5 -5
+  lineTo 5 5
+  lineTo -5 5
+  lineTo -5 -5
+  moveTo -3 -3
+  lineTo 3 -3
+  lineTo 3 3
+  lineTo -3 3
+  lineTo -3 -3
+endpath
+endsymbol

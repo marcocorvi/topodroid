@@ -1,0 +1,17 @@
+symbol point
+name fern
+th_name fern
+color 0x33ff66
+csurvey 0 0 0
+path
+  moveTo 0 5
+  lineTo 0 -3
+  cubicTo -2 -4 2 4 0 -3
+  moveTo 0 0 
+  cubicTo 3 -3 3 0 0 0
+  cubicTo -3 -3 -3 0 0 0
+  moveTo 0 3
+  cubicTo 4 -1.5 4 1 0 3
+  cubicTo -4 -1.5 -4 1 0 3
+endpath
+endsymbol

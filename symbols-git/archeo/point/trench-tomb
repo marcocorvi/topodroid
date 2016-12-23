@@ -1,0 +1,12 @@
+symbol
+name trench-tomb
+th_name trench-tomb
+color 0xffff33
+csurvey 0 0 0
+path
+  moveTo 4 -2
+  lineTo 4 2
+  lineTo -4 2
+  lineTo -4 -2
+endpath
+endsymbol

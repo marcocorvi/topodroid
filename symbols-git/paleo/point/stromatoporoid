@@ -1,0 +1,24 @@
+symbol point
+name stromatoporoid
+th_name stromatoporoid
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo 0 -1.4
+  cubicTo 0 -2.4 2.5 -3.5 3.5 -3.5
+  moveTo 1 -1
+  cubicTo 1.7 -1.7 4 -1 5 0
+  moveTo 1.4 0
+  cubicTo 2.4 0 3.5 2.5 3.5 3.5
+  moveTo 1 1
+  cubicTo 1.7 1.7 1 4 0 5
+  moveTo 0 1.4
+  cubicTo 0 2.4 -2.5 3.5 -3.5 3.5
+  moveTo -1 1
+  cubicTo -1.7 1.7 -4 1 -5 0
+  moveTo -1.4 0
+  cubicTo -2.4 0 -3.5 -2.5 -3.5 -3.5
+  moveTo -1 -1
+  cubicTo -1.7 -1.7 -1 -4 0 -5
+endpath
+endsymbol

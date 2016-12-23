@@ -1,0 +1,16 @@
+symbol point
+name winery
+th_name winery
+color 0x9933ff
+csurvey 0 0 0
+path
+  moveTo -2 -4
+  lineTo 2 -4
+  moveTo 0 -4
+  lineTo 0 -2
+  lineTo 3 -2
+  lineTo 0 4
+  lineTo -3 -2
+  lineTo 0 -2
+endpath
+endsymbol

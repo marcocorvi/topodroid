@@ -1,0 +1,19 @@
+symbol point
+name ammonoid
+th_name ammonoid
+color 0xcccccc
+csurvey 0 0 0 
+path
+  moveTo 0 0
+  cubicTo 0 2 -4 3 -4 5
+  cubicTo -4 7 3 7 4 5
+  cubicTo 5 3 3 -3 0 -3
+  cubicTo -3 -3 -4 0 -2 2
+  moveTo -2 -1
+  lineTo 0 0
+  lineTo 0 -2.5
+  moveTo 2.5 0
+  lineTo 0 0
+  lineTo 4 3
+endpath
+endsymbol

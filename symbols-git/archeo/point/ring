@@ -1,0 +1,12 @@
+symbol point
+name ring
+th_name ring
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo -3 -4
+  cubicTo 1 -4 1 4 -3 4
+  moveTo 3 -4
+  cubicTo -1 -4 -1 4 3 4
+endpath
+endsymbol

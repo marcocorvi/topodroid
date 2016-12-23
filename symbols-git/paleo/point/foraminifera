@@ -1,0 +1,11 @@
+symbol point
+name foraminifera
+th_name foraminifera
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 -3 2.6
+  addCircle 2.6 1.5 2.6
+  addCircle -2.6 1.5 2.6
+endpath
+endsymbol

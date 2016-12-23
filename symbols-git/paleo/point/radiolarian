@@ -1,0 +1,21 @@
+symbol point
+name radiolarian
+th_name radiolarian
+color 0xff6699
+csurvey 0 0 0
+path
+  addCircle 0 0 2
+  moveTo 0 2
+  lineTo 0 5
+  moveTo 0 -2
+  lineTo 0 -5
+  moveTo 1 1.7
+  lineTo 2.5 4.3
+  moveTo -1 1.7
+  lineTo -2.5 4.3
+  moveTo 1 -1.7
+  lineTo 2.5 -4.3
+  moveTo -1 -1.7
+  lineTo -2.5 -4.3
+endpath
+endsymbol

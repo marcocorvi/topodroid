@@ -1,10 +1,7 @@
 symbol area
-name limestone
-name-ua вапняк
-name-de Kalk
-name-ru известняк
-th_name limestone
-color 0x99ff00 0xcc
+name dolomite
+th_name dolomite
+color 0x99cccc 0xcc
 csurvey 1 48 0 3
 orientable
 bitmap 40 30

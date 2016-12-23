@@ -1,0 +1,14 @@
+symbol point
+name diatom
+th_name diatom
+color 0xffffff 
+csurvey 0 0 0
+path
+  moveTo -1.5 0
+  lineTo -5 0
+  cubicTo -2 3 3 3 5 0
+  cubicTo 3 -3 -2 -3 -5 0
+  moveTo 5 0
+  lineTo 1.5 0
+endpath
+endsymbol

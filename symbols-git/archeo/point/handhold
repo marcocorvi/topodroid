@@ -1,0 +1,15 @@
+symbol point
+name handhold
+th_name handhold
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo -4 -4
+  lineTo -1 -4
+  lineTo -1 0
+  lineTo 1 0
+  lineTo 1 -4
+  lineTo 4 -4
+  lineTo 4 4
+endpath
+endsymbol

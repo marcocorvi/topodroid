@@ -1,0 +1,25 @@
+symbol point
+name qanat-shaft
+th_name qanat-shaft
+color 0xff6699
+csurvey 0 0 0
+path
+  addCircle 0 0 4
+  moveTo 0 4 
+  lineTo 0 6
+  moveTo 0 -4 
+  lineTo 0 -6
+  moveTo 4 0
+  lineTo 6 0
+  moveTo -4 0
+  lineTo -6 0
+  moveTo 2.8 2.8
+  lineTo 4.2 4.2
+  moveTo -2.8 2.8
+  lineTo -4.2 4.2
+  moveTo 2.8 -2.8
+  lineTo 4.2 -4.2
+  moveTo -2.8 -2.8
+  lineTo -4.2 -4.2
+endpath
+endsymbol

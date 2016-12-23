@@ -1,0 +1,13 @@
+symbol point
+name spicule
+th_name spicule
+color 0xffffff
+csurvey 0 0 0
+path
+  moveTo 4 3
+  lineTo 1 0
+  lineTo 4 -3
+  moveTo 1 0
+  lineTo -5 0
+endpath
+endsymbol

@@ -1,0 +1,23 @@
+symbol point
+name refectory
+th_name refectory
+color 0xff9966
+csurvey 0 0 0
+path
+  moveTo -5 -5
+  lineTo -5 5
+  lineTo 5 5
+  lineTo 5 -5
+  lineTo -5 -5
+  moveTo -5 2
+  lineTo -3 2
+  lineTo -3 5
+  moveTo -1 5
+  lineTo -1 1
+  lineTo 1 1
+  lineTo 1 5
+  moveTo 3 5
+  lineTo 3 2
+  lineTo 5 2
+endpath
+endsymbol

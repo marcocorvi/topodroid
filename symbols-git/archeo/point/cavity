@@ -1,0 +1,14 @@
+symbol point
+name cavity
+th_name cavity
+color 0xffffff
+csurvey 0 0 0
+path
+  moveTo -6 4
+  lineTo 6 4
+  moveTo -4 4
+  lineTo -4 -2
+  cubicTo -4 -6 4 -6 4 -2
+  lineTo 4 4
+endpath
+endsymbol

@@ -1,0 +1,10 @@
+symbol point
+name shaft
+th_name shaft
+color 0xff6699
+csurvey 0 0 0
+path
+  addCircle 0 0 5
+  addCircle 0 0 4
+endpath
+endsymbol

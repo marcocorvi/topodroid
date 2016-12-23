@@ -1,0 +1,11 @@
+symbol point
+name palynomorph
+th_name palynomorph
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 1.5
+  addCircle 3.5 0 2
+  addCircle -3.5 0 2
+endpath
+endsymbol

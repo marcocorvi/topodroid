@@ -1,0 +1,13 @@
+symbol point
+name ceiling-ring
+th_name ceiling-ring
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 5
+  moveTo -3 -4
+  cubicTo 1 -4 1 4 -3 4
+  moveTo 3 -4
+  cubicTo -1 -4 -1 4 3 4
+endpath
+endsymbol

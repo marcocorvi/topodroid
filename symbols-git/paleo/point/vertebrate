@@ -1,0 +1,16 @@
+﻿symbol point
+name vertebrate
+th_name vertebrate
+color 0xcc9966
+csurvey 6 6 80
+path
+  addCircle -5  2 1
+  addCircle -4  4 1
+  addCircle  4 -4 1
+  addCircle  5 -2 1
+  moveTo -4.2  1.8
+  lineTo  3.5 -3.5
+  moveTo  4.2 -1.8
+  lineTo -3.5  3.5
+endpath
+endsymbol

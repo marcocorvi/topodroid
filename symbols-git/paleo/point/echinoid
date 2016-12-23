@@ -1,0 +1,19 @@
+symbol point
+name echinoid
+th_name echinoid
+color 0xcc9966
+csurvey 0 0 0
+path
+  addCircle 0 0 5
+  moveTo 0 -1
+  lineTo 0 -4
+  moveTo -0.9 -0.3
+  lineTo -3.8 -1.2
+  moveTo 0.9 -0.3
+  lineTo 3.8 -1.2
+  moveTo -0.6 0.8
+  lineTo -2.3 3.2
+  moveTo 0.6 0.8
+  lineTo 2.3 3.2
+endpath
+endsymbol

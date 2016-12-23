@@ -1,0 +1,19 @@
+symbol point
+name ventilation-shaft
+th_name ventilation-shaft
+color 0xff6699
+csurvey 0 0 0
+path
+  moveTo -5 -5
+  lineTo 5 -5
+  lineTo 5 5
+  lineTo -5 5
+  lineTo -5 -5
+  moveTo 0 -3
+  lineTo 0 3
+  moveTo 2 1.5
+  lineTo -2 -1.5
+  moveTo -2 1.5
+  lineTo 2 -1.5
+endpath
+endsymbol

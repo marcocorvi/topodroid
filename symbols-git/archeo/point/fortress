@@ -1,0 +1,13 @@
+symbol point
+name fortress
+th_name fortress
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 3
+  moveTo 0 -3
+  lineTo 0 -9
+  lineTo 3 -7
+  lineTo 0 -5
+endpath
+endsymbol

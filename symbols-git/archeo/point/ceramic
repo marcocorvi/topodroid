@@ -1,0 +1,12 @@
+symbol point
+name ceramic
+th_name ceramic
+color 0x66ffcc
+csurvey 0 0 0
+path
+  moveTo -4 -3
+  cubicTo -2 -1 -4 -1 -4 1
+  cubicTo -4 4 4 4 4 1
+  cubicTo 4 -1 2 -1 4 -3
+endpath
+endsymbol

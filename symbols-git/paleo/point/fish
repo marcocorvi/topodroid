@@ -1,0 +1,15 @@
+symbol point
+name fish
+th_name fish
+color 0x6699ff
+csurvey 0 0 0
+path
+  moveTo -6 -3
+  cubicTo -3 0 3 3 6 0
+  cubicTo 3 -3 -3 0 -6 3
+  moveTo 3 2
+  lineTo 1 4
+  moveTo 3 -2
+  lineTo 1 -4
+endpath
+endsymbol

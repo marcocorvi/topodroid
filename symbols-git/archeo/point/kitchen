@@ -1,0 +1,19 @@
+symbol point
+name kitchen
+th_name kitchen
+color 0xff9966
+csurvey 0 0 0
+path
+  moveTo -5 -5
+  lineTo -5 5
+  lineTo 5 5
+  lineTo 5 -5
+  lineTo -5 -5
+  moveTo 1 -5
+  lineTo 1 -2
+  lineTo 5 5
+  moveTo -1 -5
+  lineTo -1 -2
+  lineTo -5 5
+endpath
+endsymbol

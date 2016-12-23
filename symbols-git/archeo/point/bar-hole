@@ -1,0 +1,10 @@
+symbol point
+name bar-hole
+th_name bar-hole
+color 0x66ffcc
+csurvey 0 0 0
+path
+  addCircle 0 0 4
+  addCircle 0 0 1
+endpath
+endsymbol

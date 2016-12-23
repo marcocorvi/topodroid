@@ -1,0 +1,17 @@
+symbol point
+name dovecote
+th_name dovecote
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo -5 -5
+  lineTo -5 5
+  lineTo 5 5
+  lineTo 5 -5
+  lineTo -5 -5
+  moveTo 0 -5
+  lineTo 0 5
+  moveTo -5 0
+  lineTo 5 0
+endpath
+endsymbol

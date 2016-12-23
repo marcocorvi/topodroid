@@ -1,0 +1,14 @@
+symbol
+name tomb
+th_name tomb
+color 0xffff33
+csurvey 0 0 0
+path
+  moveTo 2 -4
+  lineTo 4 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo -4 -4
+  lineTo -2 -4
+endpath
+endsymbol

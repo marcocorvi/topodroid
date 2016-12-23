@@ -1,0 +1,17 @@
+symbol point
+name water-work
+th_name water-work
+color 0x66ccff
+csurvey 0 0 0
+path
+  moveTo -5 -2
+  cubicTo -3 0 -3 1 -2 0
+  cubicTo -1 -1 1 -1 2 0
+  cubicTo 3 1 3 0 5 -2
+  moveTo -5 -5
+  lineTo -5 5 
+  lineTo 5 5
+  lineTo 5 -5
+  lineTo -5 -5
+endpath
+endsymbol

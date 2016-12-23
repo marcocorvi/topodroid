@@ -248,8 +248,11 @@ class SymbolPoint extends Symbol
             }
           } else if ( vals[k].equals("endsymbol") ) {
             if ( name == null ) {
+              TDLog.Error("NULL name " + pathname );
             } else if ( th_name == null ) {
+              TDLog.Error("NULL th_name " + pathname );
             } else if ( path == null ) {
+              TDLog.Error("NULL path " + pathname);
             } else {
               if ( cnt == 0 ) {
                 mName = name;

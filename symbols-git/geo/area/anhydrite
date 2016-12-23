@@ -1,7 +1,7 @@
 symbol area
 name anhydrite
 th_name anhydrite
-color 0x99ff00 0xcc
+color 0xcccccc 0xcc
 csurvey 1 48 0 3
 orientable
 bitmap 40 14

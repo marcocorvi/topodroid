@@ -1,0 +1,15 @@
+symbol point
+name bryozoan
+th_name bryozoan
+color 0x66cc99
+csurvey 0 0 0
+path
+  moveTo -0.7 5
+  lineTo 0.7 5
+  cubicTo 0.7 -1 2 0 4 -3
+  lineTo 3 -4
+  cubicTo 0 -1 0 -1 -3 -4
+  lineTo -4 -3
+  cubicTo -2 0 -1 -0.7 -0.7 5
+endpath
+endsymbol

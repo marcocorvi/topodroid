@@ -1,0 +1,13 @@
+symbol point
+name foothold
+th_name foothold
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo 2 4
+  lineTo 2 2
+  lineTo -3 2
+  cubicTo -3 -3 -3 -3 2 -3
+  lineTo 2 -6
+endpath
+endsymbol

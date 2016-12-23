@@ -1,0 +1,13 @@
+symbol point
+name church
+th_name church
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 3
+  moveTo 0 -3
+  lineTo 0 -9
+  moveTo 3 -6
+  lineTo -3 -6
+endpath
+endsymbol

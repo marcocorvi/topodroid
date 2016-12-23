@@ -1,0 +1,13 @@
+symbol point
+name mosque
+th_name mosque
+color 0xcccccc
+csurvey 0 0 0
+path
+  addCircle 0 0 3
+  moveTo 0 -3
+  lineTo 0 -5
+  moveTo 3 -8
+  cubicTo 3 -5 -3 -5 -3 -8
+endpath
+endsymbol

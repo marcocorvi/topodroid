@@ -1,0 +1,15 @@
+symbol point
+name cut-marks
+th_name cut-marks
+color 0xffffff
+csurvey 0 0 0
+orientation yes
+path
+  moveTo -1 6
+  lineTo -1 -6
+  lineTo -4 -3
+  moveTo 1 -6
+  lineTo 1 6
+  lineTo 4 3
+endpath
+endsymbol

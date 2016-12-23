@@ -1,0 +1,14 @@
+symbol point
+name stromatolite
+th_name stromatolite
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo -5 2
+  cubicTo -5 -4 5 -4 5 2
+  moveTo -3 2
+  cubicTo -3 -2 3 -2 3 2
+  moveTo -1 2
+  cubicTo -1 -0 1 -0 1 2
+endpath
+endsymbol

@@ -1,0 +1,15 @@
+symbol point
+name temple
+th_name temple
+color 0xcccccc
+csurvey 0 0 0
+path
+  moveTo -4 3
+  lineTo 4 3
+  cubicTo 4 0 -4 0 -4 3
+  moveTo 2 1
+  cubicTo 2 -1 -2 -1 -2 1
+  moveTo 0 -1
+  lineTo 0 -5
+endpath
+endsymbol

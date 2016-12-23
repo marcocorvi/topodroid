@@ -1,0 +1,19 @@
+symbol point
+name well
+th_name well
+color 0x66ccff
+csurvey 0 0 0
+path
+  moveTo -5 -5
+  lineTo 5 -5
+  lineTo 5 5
+  lineTo -5 5
+  lineTo -5 -5
+  moveTo 3 -2
+  cubicTo 3 0 0 0 0 -2
+  cubicTo 0 0 -3 0 -3 -2
+  moveTo 3 2
+  cubicTo 3 4 0 4 0 2
+  cubicTo 0 4 -3 4 -3 2
+endpath
+endsymbol

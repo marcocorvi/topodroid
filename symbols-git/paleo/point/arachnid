@@ -1,0 +1,22 @@
+symbol point
+name arachnid
+th_name arachnid
+color 0xffcc66
+csurvey 0 0 0
+path
+  addCircle 0 -1 1
+  addCircle 0 1.5 1.5
+  moveTo 5 -2.5
+  lineTo 1.5 0 
+  lineTo 4 -4
+  moveTo -5 -2.5
+  lineTo -1.5 0 
+  lineTo -4 -4
+  moveTo 2 5
+  lineTo 0.5 0 
+  lineTo 3 4
+  moveTo -2 5
+  lineTo -0.5 0 
+  lineTo -3 4
+endpath
+endsymbol

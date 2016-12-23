@@ -1,0 +1,19 @@
+symbol point
+name echinoderm
+th_name echinoderm
+color 0xcc6699 
+csurvey 0 0 0
+path
+  moveTo 1 -1
+  lineTo 0 -5
+  lineTo -1 -1
+  lineTo -4.7 -1.5
+  lineTo -1 0
+  lineTo -2.9 4
+  lineTo 0 1 
+  lineTo 2.9 4
+  lineTo 1 0
+  lineTo 4.7 -1.5
+  lineTo 1 -1
+endpath
+endsymbol

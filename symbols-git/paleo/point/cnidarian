@@ -1,0 +1,21 @@
+symbol point
+name cnidarian
+th_name cnidarian
+color 0x66cc99
+csurvey 0 0 0
+path
+  moveTo -1 0 
+  lineTo -1.5 5
+  lineTo 1.5 5
+  lineTo 1 0
+  cubicTo 2 -1 2 -1 3 -2
+  moveTo 0.5 0
+  lineTo 1.5 -2.3
+  moveTo 0 0
+  lineTo 0 -2.5
+  moveTo -0.5 0
+  lineTo -1.5 -2.3
+  moveTo -1 0
+  cubicTo -2 -1 -2 -1 -3 -2
+endpath
+endsymbol

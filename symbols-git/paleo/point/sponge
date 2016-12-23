@@ -1,0 +1,15 @@
+symbol point
+name sponge
+th_name sponge
+color 0xcc9966
+csurvey 0 0 0
+path
+  moveTo 2 0
+  lineTo -2 0
+  lineTo -4 -3
+  lineTo -3 -2
+  cubicTo -2 -5 -1 -5 -1 -0.5
+  cubicTo -1.5 -5 0.5 -6 0 -1
+  cubicTo 1.5 -6 3 -7 2 0
+endpath
+endsymbol
