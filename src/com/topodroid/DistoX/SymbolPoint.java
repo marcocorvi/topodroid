@@ -97,7 +97,7 @@ class SymbolPoint extends Symbol
     super( tn1, fname );
     mName = n1;
     mDxf    = null;
-    makePaint( c1 );
+    makePaint( c1, Paint.Style.STROKE ); // FIXME style
     if ( path != null ) {
       makePath( path );
     } else {
@@ -115,7 +115,7 @@ class SymbolPoint extends Symbol
     super( tn1, fname ); // FIXME fname
     mName = n1;
     mDxf    = null;
-    makePaint( c1 );
+    makePaint( c1, Paint.Style.STROKE ); //FIXME style
     if ( path != null ) {
       makePath( path );
     } else {
@@ -155,8 +155,10 @@ class SymbolPoint extends Symbol
    *      symbol point
    *      name NAME
    *      th_name THERION_NAME
-   *      orientation yes|no
+   *      has_text yes | NO
+   *      orientation yes | NO
    *      color 0xHHHHHH_COLOR
+   *      style fill | STROKE 
    *      path
    *        MULTILINE_PATH_STRING
    *      endpath
@@ -169,6 +171,7 @@ class SymbolPoint extends Symbol
     String name    = null;
     String th_name = null;
     int color      = 0;
+    Paint.Style style = Paint.Style.STROKE;
     String path    = null;
     int cnt = 0;
 
@@ -215,6 +218,17 @@ class SymbolPoint extends Symbol
                 mHasText = ( vals[k].equals("yes") || vals[k].equals("1") );
               }
             }
+          } else if ( vals[k].equals("style") ) {
+            if ( cnt == 0 ) {
+              ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+              if ( k < s ) {
+                if ( vals[k].equals("fill") ) {
+                //  style = Paint.Style.FILL;
+                // } else if ( vals[k].equals("fill-stroke") ) {
+                  style = Paint.Style.FILL_AND_STROKE;
+                }
+              }
+            }
           } else if ( vals[k].equals("color") ) {
             ++k; while ( k < s && vals[k].length() == 0 ) ++k;
             if ( k < s ) {
@@ -257,7 +271,7 @@ class SymbolPoint extends Symbol
               if ( cnt == 0 ) {
                 mName = name;
                 mThName = th_name;
-                makePaint( color );
+                makePaint( color, style );
                 makePath( path );
                 mOrigPath = new Path( mPath );
                 // mPoint1 = new SymbolPointBasic( name, th_name, fname, color, path );
@@ -628,12 +642,12 @@ class SymbolPoint extends Symbol
     mSvg = "<path d=\"" + sv1.getBuffer().toString() + "\"/> " + sv3.getBuffer().toString();
   }
 
-  private void makePaint( int color )
+  private void makePaint( int color, Paint.Style style )
   {
     mPaint = new Paint();
     mPaint.setDither(true);
     mPaint.setColor( color );
-    mPaint.setStyle(Paint.Style.STROKE);
+    mPaint.setStyle( style );
     mPaint.setStrokeJoin(Paint.Join.ROUND);
     mPaint.setStrokeCap(Paint.Cap.ROUND);
     mPaint.setStrokeWidth( 1 );

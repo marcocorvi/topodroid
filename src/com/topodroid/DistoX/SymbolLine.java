@@ -139,9 +139,13 @@ public class SymbolLine extends Symbol
    *      symbol line
    *      name NAME
    *      th_name THERION_NAME
+   *      group GROUP_NAME
    *      color 0xHHHHHH_COLOR 0xAA_ALPHA
    *      width WIDTH
+   *      dash x1 y1 x2 y2 ...
+   *      style straight | xN
    *      effect
+   *        command: moveTo lineTo cubicTo addCircle
    *      endeffect
    *      endsymbol
    */
@@ -393,7 +397,7 @@ public class SymbolLine extends Symbol
                   } catch ( NumberFormatException e ) {
                     TDLog.Error( filename + " parse lineTo point error: " + line );
                   }
-                } else if ( vals[k].equals("circle") ) { 
+                } else if ( vals[k].equals("addCircle") ) { 
                   try {
                     kval = k;
                     float x = nextFloat( vals, s, unit );
