@@ -5,6 +5,7 @@ name-es paredes_descompuestas
 name-pt parede_de_detrito
 name-fr paroi_de_débris_rocheux_fracturés
 name-de Schuttwand
+name-fa آوار_دیوار
 name-bg стена_чакъл
 name-ru стена_щебень_осадки
 name-ua стіна_щебінь_опади
@@ -15,7 +16,7 @@ width 1
 csurvey 5 4 1 1
 dash 10 2
 effect
-moveTo 0 0
+  moveTo 0 0
   lineTo 10 2
   lineTo 6 8
   lineTo 0 1

@@ -6,6 +6,7 @@ name-pt parede_de_gelo
 name-fr parois_glacées
 name-de Eiswand
 name-bg стена_лед
+name-fa دیوار_یخی
 name-ru стена_во_льду
 name-ua стіна_в_льоду
 th_name wall:ice
@@ -17,7 +18,6 @@ effect
   lineTo 27 0
   lineTo 27 1
   lineTo 0 1
-
   moveTo 5 7
   lineTo 14 7
   lineTo 14 8

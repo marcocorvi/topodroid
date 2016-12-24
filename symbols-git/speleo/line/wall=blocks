@@ -8,6 +8,7 @@ name-de Geschichtete_Wand
 name-bg стена_блокаж
 name-ru стена_из_блоков
 name-ua стіна_із_блоків
+name-fa دیوار_بلوکی
 th_name wall:blocks
 group wall
 color 0xff0000 0xff
