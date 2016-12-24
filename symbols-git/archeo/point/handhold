@@ -1,5 +1,6 @@
 symbol point
 name handhold
+name-it maniglia
 th_name handhold
 color 0xcccccc
 csurvey 0 0 0

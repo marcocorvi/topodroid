@@ -1,5 +1,6 @@
 symbol point
 name cut-pillar
+name-it pilastro_tronco
 th_name cut-pillar
 color 0xcccccc
 csurvey 0 0 0

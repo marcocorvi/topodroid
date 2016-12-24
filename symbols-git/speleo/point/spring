@@ -11,11 +11,16 @@ name-ru источник
 name-bg извор
 name-ua джерело
 th_name spring
-orientation no
+orientation yes
 color 0x6666ff
 csurvey 6 6 80
 path
-  moveTo -5 3
-  cubicTo -5 -1 5 -1 5 3
+  addCircle 0 0 4
+  addCircle 0 0 1
+  moveTo 0 0
+  lineTo 0 -8
+  lineTo 3 -5
+  moveTo 0 -8
+  lineTo -3 -5
 endpath
 endsymbol

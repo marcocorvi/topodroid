@@ -1,0 +1,29 @@
+symbol point
+name crustacean
+th_name crustacean
+color 0xff9900
+csurvey 0 0 0
+path
+  addCircle 0 -1 2
+  moveTo 1 1
+  cubicTo 4 -1 3 -4 2 -5
+  cubicTo 3 -2 2 -2 1 1
+  cubicTo 3 0 3 1 4 -2
+  moveTo -1 1
+  cubicTo -4 -1 -3 -4 -2 -5
+  cubicTo -3 -2 -2 -2 -1 1
+  cubicTo -3 0 -3 1 -4 -2
+  moveTo 0 1
+  cubicTo 1 1 1 1 3 2
+  moveTo 0 1
+  cubicTo 1.5 2 2 2 3 3
+  moveTo 0 1
+  cubicTo 2 3 2 1 2 4
+  moveTo 0 1
+  cubicTo -1 1 -1 1 -3 2
+  moveTo 0 1
+  cubicTo -1.5 2 -2 2 -3 3
+  moveTo 0 1
+  cubicTo -2 3 -2 1 -2 4
+endpath
+endsymbol

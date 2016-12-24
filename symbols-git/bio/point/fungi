@@ -1,0 +1,15 @@
+symbol point
+name fungi
+th_name fungi
+color 0xffcc66
+csurvey 0 0 0
+path
+  moveTo -4 -1
+  cubicTo -4 -5 4 -5 4 -1
+  lineTo -4 -1
+  moveTo -1.5 -1
+  lineTo -1.5 4
+  lineTo 1.5 4
+  lineTo 1.5 -1
+endpath
+endsymbol

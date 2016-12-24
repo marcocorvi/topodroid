@@ -1,5 +1,6 @@
 symbol point
 name ventilation-shaft
+name_in camino_di_ventilazione
 th_name ventilation-shaft
 color 0xff6699
 csurvey 0 0 0

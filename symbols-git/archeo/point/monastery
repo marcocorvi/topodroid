@@ -1,5 +1,6 @@
 symbol point
 name monastery
+name-it monastero
 th_name monastery
 color 0xcccccc
 csurvey 0 0 0

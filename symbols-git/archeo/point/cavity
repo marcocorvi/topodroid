@@ -1,5 +1,6 @@
 symbol point
 name cavity
+name-it cavita`
 th_name cavity
 color 0xffffff
 csurvey 0 0 0

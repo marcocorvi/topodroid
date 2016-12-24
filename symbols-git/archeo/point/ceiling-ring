@@ -1,5 +1,6 @@
 symbol point
 name ceiling-ring
+name-it anello_a_soffitto
 th_name ceiling-ring
 color 0xcccccc
 csurvey 0 0 0

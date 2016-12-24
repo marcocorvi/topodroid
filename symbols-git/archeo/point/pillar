@@ -1,5 +1,6 @@
 symbol point
 name pillar
+name-it pilastro
 th_name pillar
 color 0xcccccc
 csurvey 0 0 0

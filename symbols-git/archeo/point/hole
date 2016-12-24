@@ -1,5 +1,6 @@
 symbol point
 name hole
+name-it buco
 th_name hole
 color 0x66ffcc
 csurvey 0 0 0

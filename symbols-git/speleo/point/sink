@@ -15,7 +15,7 @@ orientation no
 color 0x6666ff
 csurvey 6 6 80
 path
-  moveTo -5 -3
-  cubicTo -5 1 5 1 5 -3
+  addCircle 0 0 5
+  addCircle 0 0 1
 endpath
 endsymbol

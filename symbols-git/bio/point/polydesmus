@@ -1,0 +1,33 @@
+symbol point
+name polydesmus
+th_name polydesmus
+color 0xffffff
+csurvey 0 0 0
+path
+  addCircle 0 -5 0.5
+  moveTo -0.5 -5
+  lineTo -0.5 6
+  lineTo 0.5 6
+  lineTo 0.5 -5
+  moveTo -2 -4
+  lineTo -0.5 -4
+  moveTo 2 -4
+  lineTo 0.5 -4
+  moveTo -2 -2
+  lineTo -0.5 -2
+  moveTo 2 -2
+  lineTo 0.5 -2
+  moveTo -2 0
+  lineTo -0.5 0
+  moveTo 2 0
+  lineTo 0.5 0
+  moveTo -2 2
+  lineTo -0.5 2
+  moveTo 2 2
+  lineTo 0.5 2
+  moveTo -2 4
+  lineTo -0.5 4
+  moveTo 2 4
+  lineTo 0.5 4
+endpath
+endsymbol

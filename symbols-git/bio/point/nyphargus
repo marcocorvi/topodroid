@@ -1,0 +1,24 @@
+symbol point
+name nyphargus
+th_name nyphargus
+color 0x6699ff
+csurvey 0 0 0
+path
+  moveTo -4 0
+  cubicTo -2 -2 -2 -2 0 0
+  cubicTo 2 2 3 1 5 -2
+  moveTo -4 0
+  cubicTo -4 1 -4 1 -3 1
+  cubicTo -1 -1 -1 0 1 2
+  cubicTo 4 2 3 1 5 -2
+  moveTo -2 0
+  lineTo -2 3
+  lineTo -0.5 4
+  moveTo -0.5 1
+  lineTo -1 2
+  lineTo 0 3.5
+  moveTo 1 2
+  lineTo 0.5 3
+  lineTo 1 3.5
+endpath
+endsymbol

@@ -1,18 +1,17 @@
 symbol point
 name wood
+name-it legno
 th_name wood
-color 0xffcc66
+color 0xcc9966
 csurvey 0 0 0
 path
-  moveTo 0 0
-  lineTo 0 -4
-  moveTo 0 0
-  lineTo 3.8 -1.2
-  moveTo 0 0
-  lineTo -3.8 -1.2
-  moveTo 0 0
-  lineTo 2.3 3.2 
-  moveTo 0 0
-  lineTo -2.3 3.2 
+  moveTo 0 5
+  lineTo 0 0
+  moveTo -4.7 1.5
+  lineTo 0 0 
+  lineTo 4.7 1.5
+  moveTo -2.9 -4
+  lineTo 0 0
+  lineTo 2.9 -4
 endpath
 endsymbol

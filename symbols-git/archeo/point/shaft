@@ -1,5 +1,6 @@
 symbol point
 name shaft
+name-it passaggio_verticale
 th_name shaft
 color 0xff6699
 csurvey 0 0 0

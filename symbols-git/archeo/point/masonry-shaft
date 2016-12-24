@@ -1,7 +1,7 @@
 symbol point
-name pit
-name-it pozzo
-th_name pit
+name masonry-shaft
+name-it pozzo_in_muratura
+th_name masonry-shaft
 color 0xff6699
 csurvey 0 0 0
 path
@@ -10,10 +10,6 @@ path
   lineTo 5 5
   lineTo -5 5
   lineTo -5 -5
-  moveTo -3 -3
-  lineTo 3 -3
-  lineTo 3 3
-  lineTo -3 3
-  lineTo -3 -3
+  addCircle 0 0 4
 endpath
 endsymbol

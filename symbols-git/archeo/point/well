@@ -1,5 +1,6 @@
 symbol point
 name well
+name-it pozzo_idrico
 th_name well
 color 0x66ccff
 csurvey 0 0 0

@@ -1,5 +1,6 @@
 symbol point
 name winery
+name-it cantina
 th_name winery
 color 0x9933ff
 csurvey 0 0 0

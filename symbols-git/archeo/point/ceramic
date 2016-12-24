@@ -1,5 +1,6 @@
 symbol point
 name ceramic
+name-it ceramica
 th_name ceramic
 color 0x66ffcc
 csurvey 0 0 0
