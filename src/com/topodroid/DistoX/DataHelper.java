@@ -511,7 +511,7 @@ public class DataHelper extends DataSetObservable
   {
     ContentValues vals = new ContentValues();
     vals.put( "day", date );
-    vals.put( "team", team );
+    vals.put( "team", ((team != null)? team : "") );
     vals.put( "declination", decl );
     vals.put( "comment", ((comment != null)? comment : "") );
     vals.put( "init_station", ((init_station != null)? init_station : "") );

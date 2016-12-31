@@ -753,6 +753,10 @@
   <string name="pref_survex_lrud_summary">Ajout LRUD à l\'export Survex</string>
   <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
   <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
+  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
+  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
+  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
+  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
 
   <!-- UNUSED string name="pref_csv_length_title">Unité de long. CSV</string -->
   <!-- UNUSED string name="pref_csv_length_summary">Unité de long. export CSV</string -->

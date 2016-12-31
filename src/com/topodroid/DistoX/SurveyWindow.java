@@ -404,12 +404,11 @@ public class SurveyWindow extends Activity
 
     // FIXME FORCE NAMES WITHOUT SPACES
     // name = TopoDroidUtil.noSpaces( name );
-    if ( date != null ) { date = date.trim(); }
-    if ( team != null ) { team = team.trim(); }
-    if ( comment != null ) { comment = comment.trim(); }
+    if ( date != null ) { date = date.trim(); } else { date = ""; }
+    if ( team != null ) { team = team.trim(); } else { team = ""; }
+    if ( comment != null ) { comment = comment.trim(); } else { comment = ""; }
 
     // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
-    if ( team == null ) team = "";
     mApp.mData.updateSurveyInfo( mApp.mSID, date, team, decl, comment, mInitStation, true );
   }
 

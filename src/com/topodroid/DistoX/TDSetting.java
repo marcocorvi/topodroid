@@ -124,6 +124,8 @@ class TDSetting
     "DISTOX_EXPORT_PLOT",        // 63
     "DISTOX_THERION_MAPS",
     "DISTOX_SVG_GRID",           // export grid in SVG 
+    "DISTOX_KML_STATIONS",     
+    "DISTOX_KML_SPLAYS",
 
     "DISTOX_SPLAY_VERT_THRS",     // 64 over mSplayVertThrs splays are not displayed in plan view
     "DISTOX_BACKSIGHT",           // 65
@@ -299,6 +301,8 @@ class TDSetting
   static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   static boolean mTherionMaps   = false;
   static boolean mSvgGrid       = false;
+  static boolean mKmlStations   = true;
+  static boolean mKmlSplays     = false;
 
   static int     mSurveyStations  = 1;     // automatic survey stations: 0 no, 1 forward-after-splay, 2 backward-after-splay
   static boolean mShotAfterSplays = true;  //                            3 forward-before-splay, 4 backward-before-splay
@@ -714,6 +718,8 @@ class TDSetting
     mExportPlotFormat  = tryInt(   prefs, key[k++], "-1" );   // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
     mTherionMaps       = prefs.getBoolean( key[k++], false ); // DISTOX_THERION_MAPS
     mSvgGrid           = prefs.getBoolean( key[k++], false ); // DISTOX_SVG_GRID
+    mKmlStations       = prefs.getBoolean( key[k++], true );  // DISTOX_KML_STATIONS
+    mKmlSplays         = prefs.getBoolean( key[k++], false ); // DISTOX_KML_SPLAYS
     mSplayVertThrs     = tryFloat( prefs, key[k++], "80"  );  // DISTOX_SPLAY_VERT_THRS
 
     mBacksight     = prefs.getBoolean( key[k++], false );   // DISTOX_BACKSIGHT
@@ -1032,7 +1038,11 @@ class TDSetting
     } else if ( k.equals( key[ nk++ ] ) ) { 
       mTherionMaps = prefs.getBoolean( k, false );   // DISTOX_THERION_MAPS
     } else if ( k.equals( key[ nk++ ] ) ) { 
-      mSvgGrid = prefs.getBoolean( k, false );   // DISTOX_SVG_GRID
+      mSvgGrid = prefs.getBoolean( k, false );       // DISTOX_SVG_GRID
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mKmlStations = prefs.getBoolean( k, true );    // DISTOX_KML_STATIONS
+    } else if ( k.equals( key[ nk++ ] ) ) { 
+      mKmlSplays = prefs.getBoolean( k, false );     // DISTOX_KML_SPLAYS
 
     } else if ( k.equals( key[ nk++ ] ) ) {          // DISTOX_SPLAY_VERT_THRS
       mSplayVertThrs = tryFloat( prefs, k, "80" );
@@ -1332,6 +1342,8 @@ class TDSetting
     //C if ( name.equals( "DISTOX_EXPORT_PLOT" )
     //B if ( name.equals( "DISTOX_THERION_MAPS" )
     //B if ( name.equals( "DISTOX_SVG_GRID" )
+    //B if ( name.equals( "DISTOX_KML_STATIONS" )
+    //B if ( name.equals( "DISTOX_KML_SPLAYS" )
 
     if ( name.equals( "DISTOX_SPLAY_VERT_THRS"  ) ) return parseFloatValue( value, mSplayVertThrs, 0, 91 );
     //B if ( name.equals( "DISTOX_BACKSIGHT" )

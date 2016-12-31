@@ -114,6 +114,20 @@
        android:defaultValue="false"
      />
 
+   <CheckBoxPreference
+       android:key="DISTOX_KML_STATIONS"
+       android:summary="@string/pref_kml_stations_summary"
+       android:title="@string/pref_kml_stations_title"
+       android:defaultValue="true"
+     />
+
+   <CheckBoxPreference
+       android:key="DISTOX_KML_SPLAYS"
+       android:summary="@string/pref_kml_splays_summary"
+       android:title="@string/pref_kml_splays_title"
+       android:defaultValue="false"
+     />
+
   <com.topodroid.DistoX.MyEditPreference
        android:key="DISTOX_BITMAP_SCALE"
        android:title="@string/pref_bitmap_scale_title"

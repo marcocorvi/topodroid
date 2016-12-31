@@ -410,7 +410,12 @@ class TDExporter
     for ( NumStation st : num.getStations() ) {
       st.s = lat - st.s * s_radius;
       st.e = lng + st.e * e_radius;
-      st.v = (asl - st.v)*asl_factor;
+      st.v = (asl - st.v) * asl_factor;
+    }
+    for ( NumSplay sp : num.getSplays() ) {
+      sp.s = lat - sp.s * s_radius;
+      sp.e = lng + sp.e * e_radius;
+      sp.v = (asl - sp.v) * asl_factor;
     }
     return num;
   }
@@ -425,7 +430,7 @@ class TDExporter
     }
     List<NumStation> stations = num.getStations();
     List<NumShot>    shots = num.getShots();
-    // List<NumSplay>   splays = num.getSplays();
+    List<NumSplay>   splays = num.getSplays();
 
     // now write the KML
     try {
@@ -477,16 +482,18 @@ class TDExporter
       pw.format("  </LineStyle>\n");
       pw.format("</Style>\n");
       
-      for ( NumStation st : stations ) {
-        pw.format("<Placemark>\n");
-        pw.format("  <name>%s</name>\n", st.name );
-        pw.format("  <styleUrl>#station</styleUrl>\n");
-        pw.format("  <MultiGeometry>\n");
-          pw.format("  <Point id=\"%s\">\n", st.name );
-          pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
-          pw.format("  </Point>\n");
-        pw.format("  </MultiGeometry>\n");
-        pw.format("</Placemark>\n");
+      if ( TDSetting.mKmlStations ) {
+        for ( NumStation st : stations ) {
+          pw.format("<Placemark>\n");
+          pw.format("  <name>%s</name>\n", st.name );
+          pw.format("  <styleUrl>#station</styleUrl>\n");
+          pw.format("  <MultiGeometry>\n");
+            pw.format("  <Point id=\"%s\">\n", st.name );
+            pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", st.e, st.s, st.v );
+            pw.format("  </Point>\n");
+          pw.format("  </MultiGeometry>\n");
+          pw.format("</Placemark>\n");
+        }
       }
 
       pw.format("<Placemark>\n");
@@ -513,24 +520,26 @@ class TDExporter
       pw.format("  </MultiGeometry>\n");
       pw.format("</Placemark>\n");
 
-      // pw.format("<Placemark>\n");
-      // pw.format("  <name>splays</name>\n" );
-      // pw.format("  <styleUrl>#splay</styleUrl>\n");
-      // pw.format("  <MultiGeometry>\n");
-      // pw.format("    <altitudeMode>absolute</altitudeMode>\n");
-      // for ( NumSplay sp : splays ) {
-      //   NumStation from = sp.from;
-      //   pw.format("    <LineString id=\"%s-\">\n", from.name );
-      //   // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
-      //   // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-      //   pw.format("      <coordinates>\n");
-      //   pw.format(Locale.US, "        %f,%f,%f\n", from.e, from.s, from.v );
-      //   pw.format(Locale.US, "        %f,%f,%f\n", to.e, to.s, to.v );
-      //   pw.format("      </coordinates>\n");
-      //   pw.format("    </LineString>\n");
-      // }
-      // pw.format("  </MultiGeometry>\n");
-      // pw.format("</Placemark>\n");
+      if ( TDSetting.mKmlSplays ) {
+        pw.format("<Placemark>\n");
+        pw.format("  <name>splays</name>\n" );
+        pw.format("  <styleUrl>#splay</styleUrl>\n");
+        pw.format("  <MultiGeometry>\n");
+        pw.format("    <altitudeMode>absolute</altitudeMode>\n");
+        for ( NumSplay sp : splays ) {
+          NumStation from = sp.from;
+          pw.format("    <LineString id=\"%s-\">\n", from.name );
+          // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
+          // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
+          pw.format("      <coordinates>\n");
+          pw.format(Locale.US, "        %f,%f,%f\n", from.e, from.s, from.v );
+          pw.format(Locale.US, "        %f,%f,%f\n", sp.e, sp.s, sp.v );
+          pw.format("      </coordinates>\n");
+          pw.format("    </LineString>\n");
+        }
+        pw.format("  </MultiGeometry>\n");
+        pw.format("</Placemark>\n");
+      }
 
       pw.format("</Document>\n");
       pw.format("</kml>\n");
