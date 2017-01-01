@@ -35,6 +35,8 @@ import android.widget.GridView;
 // import android.view.KeyEvent;
 import android.inputmethodservice.KeyboardView;
 
+import android.text.method.KeyListener; 
+
 import android.net.Uri;
 
 // import android.widget.Toast;
@@ -49,10 +51,10 @@ public class FixedDialog extends MyDialog
   private FixedInfo mFxd;
 
   // private TextView mTVdata;
-  private TextView mTVlng;
-  private TextView mTVlat;
-  private TextView mTValt;
-  private TextView mTVasl;
+  private EditText mTVlng;
+  private EditText mTVlat;
+  private EditText mTValt;
+  private EditText mTVasl;
 
   private TextView mETstation;
   private EditText mETcomment;
@@ -68,7 +70,9 @@ public class FixedDialog extends MyDialog
   private TextView mTVcrs;
   private TextView mTVcs_coords;
 
-  private Button   mButtonCancel;
+  private MyKeyboard mKeyboard;
+
+  // private Button   mButtonCancel;
 
   private WorldMagneticModel mWMM;
 
@@ -117,10 +121,10 @@ public class FixedDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_FIXED, "FixedDialog onCreate" );
     initLayout( R.layout.fixed_dialog, R.string.title_fixed_edit );
 
-    mTVlng = (TextView) findViewById( R.id.fix_lng );
-    mTVlat = (TextView) findViewById( R.id.fix_lat );
-    mTValt = (TextView) findViewById( R.id.fix_alt );
-    mTVasl = (TextView) findViewById( R.id.fix_asl );
+    mTVlng = (EditText) findViewById( R.id.fix_lng );
+    mTVlat = (EditText) findViewById( R.id.fix_lat );
+    mTValt = (EditText) findViewById( R.id.fix_alt );
+    mTVasl = (EditText) findViewById( R.id.fix_asl );
 
     mTVdecl = (EditText) findViewById( R.id.fix_decl );
     {
@@ -147,11 +151,40 @@ public class FixedDialog extends MyDialog
     mButtonDrop    = (Button) findViewById(R.id.fix_drop );
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
-
-    mTVlng.setText( String.format( Locale.US, "%.6f", mFxd.lng ) );
-    mTVlat.setText( String.format( Locale.US, "%.6f", mFxd.lat ) );
+    int flag = MyKeyboard.FLAG_POINT_DEGREE;
+    if ( TDSetting.mUnitLocation == TDConst.DEGREE ) {
+      mTVlng.setText( FixedInfo.double2degree( mFxd.lng ) );
+      mTVlat.setText( FixedInfo.double2degree( mFxd.lat ) );
+    } else { // TDConst.DDMMSS
+      mTVlng.setText( FixedInfo.double2ddmmss( mFxd.lng ) );
+      mTVlat.setText( FixedInfo.double2ddmmss( mFxd.lat ) );
+    }
     mTValt.setText( String.format( Locale.US, "%.0f", mFxd.alt ) );
     mTVasl.setText( String.format( Locale.US, "%.0f", mFxd.asl ) );
+
+    
+    mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
+                                R.xml.my_keyboard, -1 );
+    if ( TDSetting.mKeyboard ) {
+      MyKeyboard.registerEditText( mKeyboard, mTValt, MyKeyboard.FLAG_POINT );
+      MyKeyboard.registerEditText( mKeyboard, mTVasl, MyKeyboard.FLAG_POINT );
+      MyKeyboard.registerEditText( mKeyboard, mTVlng, flag );
+      MyKeyboard.registerEditText( mKeyboard, mTVlat, flag );
+      // mKeyboard.hide();
+    } else {
+      mKeyboard.hide();
+    }
+
+    KeyListener mKLlng = mTVlng.getKeyListener();
+    KeyListener mKLlat = mTVlat.getKeyListener();
+    KeyListener mKLalt = mTValt.getKeyListener();
+    KeyListener mKLasl = mTVasl.getKeyListener();
+
+    boolean editable = ( mFxd.source == FixedInfo.SRC_MANUAL );
+    MyKeyboard.setEditable( mTValt, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT );
+    MyKeyboard.setEditable( mTVasl, mKeyboard, mKLasl, editable, MyKeyboard.FLAG_POINT );
+    MyKeyboard.setEditable( mTVlng, mKeyboard, mKLlng, editable, flag );
+    MyKeyboard.setEditable( mTVlat, mKeyboard, mKLlat, editable, flag );
     
     mButtonDrop.setOnClickListener( this );
     mButtonView.setOnClickListener( this );

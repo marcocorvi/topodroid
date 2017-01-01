@@ -44,8 +44,8 @@ import java.util.HashMap;
 public class DataHelper extends DataSetObservable
 {
 
-  static final String DB_VERSION = "27";
-  static final int DATABASE_VERSION = 27;
+  static final String DB_VERSION = "28";
+  static final int DATABASE_VERSION = 28;
   static final int DATABASE_VERSION_MIN = 21; // was 14
 
   private static final String CONFIG_TABLE = "configs";
@@ -139,7 +139,7 @@ public class DataHelper extends DataSetObservable
   private ArrayList<DataListener> mListeners;
 
   private static String[] mFixedFields = { 
-    "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status",
+    "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
     "cs_name", "cs_longitude", "cs_latitude", "cs_altitude"
   };
 
@@ -1567,10 +1567,11 @@ public class DataHelper extends DataSetObservable
                                  cursor.getDouble(5), // geoid height
                                  cursor.getString(6),
                                  // skip status
-                                 cursor.getString(8),
-                                 cursor.getDouble(9),
+                                 cursor.getLong(8),   // source type
+                                 cursor.getString(9),
                                  cursor.getDouble(10),
-                                 cursor.getDouble(11)
+                                 cursor.getDouble(11),
+                                 cursor.getDouble(12)
         ) );
       } while (cursor.moveToNext());
     }
@@ -1600,10 +1601,11 @@ public class DataHelper extends DataSetObservable
                                   cursor.getDouble(5),
                                   cursor.getString(6),
                                   // skip status
-                                  cursor.getString(8),
-                                  cursor.getDouble(9),
+                                  cursor.getLong(8),
+                                  cursor.getString(9),
                                   cursor.getDouble(10),
-                                  cursor.getDouble(11)
+                                  cursor.getDouble(11),
+                                  cursor.getDouble(12)
          ) );
        } while (cursor.moveToNext());
      }
@@ -2702,15 +2704,16 @@ public class DataHelper extends DataSetObservable
     * N.B. this must be called with id == -1L ( currently called only by SurveyWindow )
     */
    public long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
-                            String comment, long status )
+                            String comment, long status, long source )
    {
-     return insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, "", 0, 0, 0 );
+     return insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, source, "", 0, 0, 0 );
    }
 
    private long insertFixed( long sid, long id, String station, double lng, double lat, double alt, double asl,
-                            String comment, long status,
+                            String comment, long status, long source,
                             String cs, double cs_lng, double cs_lat, double cs_alt )
    {
+     // Log.v("DistoX", "insert fixed id " + id + " station " + station );
      if ( id != -1L ) return id;
      if ( myDB == null ) return -1L;
      long fid = getFixedId( sid, station );
@@ -2733,6 +2736,7 @@ public class DataHelper extends DataSetObservable
      cv.put( "cs_longitude", cs_lng );
      cv.put( "cs_latitude",  cs_lat );
      cv.put( "cs_altitude",  cs_alt );
+     cv.put( "source",     source );
      try {
        myDB.insert( FIXED_TABLE, null, cv );
      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -3393,7 +3397,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, \"%s\", %.6f, %.6f, %.1f );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.6f, %.6f, %.1f );\n",
              FIXED_TABLE,
              sid,
              cursor.getLong(0),
@@ -3404,10 +3408,11 @@ public class DataHelper extends DataSetObservable
              cursor.getDouble(5),
              cursor.getString(6),
              cursor.getLong(7),   // status
-             cursor.getString(8), // cs_name
-             cursor.getDouble(9),
+             cursor.getLong(8),   // source type
+             cursor.getString(9), // cs_name
              cursor.getDouble(10),
-             cursor.getDouble(11)
+             cursor.getDouble(11),
+             cursor.getDouble(12)
            );
          } while (cursor.moveToNext());
        }
@@ -3507,8 +3512,11 @@ public class DataHelper extends DataSetObservable
            // len = v.lastIndexOf( ')' );
            // scanline1.skipSpaces( );
            // TDLog.Log( TDLog.LOG_DB, "loafFromFile " + table + " " + v );
+
            skip_sid = scanline1.longValue( );
            id = scanline1.longValue( );
+           // Log.v("DistoX", "table " + table + " id " + id + " v " + v );
+
            if ( table.equals(PHOTO_TABLE) ) { // FIXME PHOTO
              shotid  = scanline1.longValue( );
              title   = scanline1.stringValue( );
@@ -3585,6 +3593,7 @@ public class DataHelper extends DataSetObservable
              double asl = scanline1.doubleValue( );
              comment    = scanline1.stringValue( );
              status     = scanline1.longValue( );
+             long source = scanline1.longValue( );
              double cs_lng = 0;
              double cs_lat = 0;
              double cs_alt = 0;
@@ -3594,7 +3603,8 @@ public class DataHelper extends DataSetObservable
                cs_lat = scanline1.doubleValue( );
                cs_alt = scanline1.doubleValue( );
              }
-             insertFixed( sid, id, station, lng, lat, alt, asl, comment, status, cs, cs_lng, cs_lat, cs_alt );
+             // use id == -1L to force DB get a new id
+             insertFixed( sid, -1L, station, lng, lat, alt, asl, comment, status, source, cs, cs_lng, cs_lat, cs_alt );
              // TDLog.Log( TDLog.LOG_DB, "loadFromFile fixed " + sid + " " + id + " " + station  );
            } else if ( table.equals(STATION_TABLE) ) {
              // N.B. ONLY IF db_version > 19
@@ -3793,7 +3803,8 @@ public class DataHelper extends DataSetObservable
              +   " cs_name TEXT, "
              +   " cs_longitude REAL, "
              +   " cs_latitude REAL, "
-             +   " cs_altitude REAL "
+             +   " cs_altitude REAL, "
+             +   " source INTEGER "    // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
              // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -3956,6 +3967,8 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE fixeds ADD COLUMN cs_latitude REAL default 0" );
              db.execSQL( "ALTER TABLE fixeds ADD COLUMN cs_altitude REAL default 0" );
            case 27:
+             db.execSQL( "ALTER TABLE fixeds ADD COLUMN source INTEGER default 0" );
+           case 28:
              /* current version */
            default:
              break;

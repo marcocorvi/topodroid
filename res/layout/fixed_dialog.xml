@@ -24,7 +24,7 @@
         android:text="@string/longitude"
         />
 
-      <TextView android:id="@+id/fix_lng" 
+      <EditText android:id="@+id/fix_lng" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content" 
@@ -51,7 +51,7 @@
         android:text="@string/latitude"
         />
 
-      <TextView android:id="@id/fix_lat" 
+      <EditText android:id="@id/fix_lat" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content" 
@@ -75,7 +75,7 @@
         android:layout_gravity="left"
         android:text="@string/h_ellipsoid"
         />
-      <TextView android:id="@id/fix_alt" 
+      <EditText android:id="@id/fix_alt" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content" 
@@ -99,7 +99,7 @@
         android:layout_gravity="left"
         android:text="@string/h_geoid"
         />
-      <TextView android:id="@id/fix_asl" 
+      <EditText android:id="@id/fix_asl" 
         android:layout_width="0dp"
         android:layout_weight="40"
         android:layout_height="wrap_content" 
@@ -243,4 +243,17 @@
           />
       </LinearLayout>
     </LinearLayout>
+
+  <android.inputmethodservice.KeyboardView
+    android:id="@+id/keyboardview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="bottom"
+    android:visibility="gone"
+  />
+
 </RelativeLayout>

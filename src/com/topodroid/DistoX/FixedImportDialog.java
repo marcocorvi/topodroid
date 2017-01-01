@@ -222,7 +222,7 @@ public class FixedImportDialog extends MyDialog
       String comment = mETcomment.getText().toString();
       if ( comment == null ) comment = "";
       if ( isSet ) {
-        mParent.addFixedPoint( station, mLng, mLat, mHEll, mHGeo, comment );
+        mParent.addFixedPoint( station, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MOBILE_TOP );
       dismiss();
       } else {
         do_toast = true;

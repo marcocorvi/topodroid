@@ -177,21 +177,23 @@ public class FixedActivity extends Activity
                              double lat,
                              double alt,  // meters
                              double asl,
-                             String comment
+                             String comment,
+                             long source
                            )
   {
     if ( comment == null ) comment = "";
-    FixedInfo f = addLocation( name, lng, lat, alt, asl, comment );
+    FixedInfo f = addLocation( name, lng, lat, alt, asl, comment, source );
     if ( f != null ) {
       mFixedAdapter.add( f );
       mList.invalidate();
     }
   }
 
-  private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo, String comment )
+  private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo,
+                                 String comment, long source )
   {
-    long id = mApp.mData.insertFixed( mApp.mSID, -1L, station, lng, lat, h_ell, h_geo, comment, 0L );
-    return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment ); 
+    long id = mApp.mData.insertFixed( mApp.mSID, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
+    return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source ); 
   }
 
 

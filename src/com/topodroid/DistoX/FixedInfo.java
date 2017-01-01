@@ -18,7 +18,12 @@ import java.util.Locale;
  */
 class FixedInfo extends MagLatLong
 {
-  Long   id;       // fixed id
+  final static long SRC_UNKNOWN    = 0L;
+  final static long SRC_TOPODROID  = 1L;
+  final static long SRC_MANUAL     = 2L;
+  final static long SRC_MOBILE_TOP = 3L;
+  long   id;       // fixed id
+  long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
   String name;     // station name, or whatever
   // double lat;      // latitude [decimal deg]
   // double lng;      // longitude [decimal deg]
@@ -30,7 +35,8 @@ class FixedInfo extends MagLatLong
   double cs_lat;
   double cs_alt;
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, 
+                    String cmt, long src )
   {
     id = _id;
     name = n;
@@ -39,13 +45,15 @@ class FixedInfo extends MagLatLong
     alt = h_ellip;
     asl = h_geoid;
     comment = cmt;
+    source  = src;
     cs = null;
     cs_lng = 0;
     cs_lat = 0;
     cs_alt = 0;
   }
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt,
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
+                    String cmt, long src,
                     String name_cs, double lng_cs, double lat_cs, double alt_cs )
   {
     id = _id;
@@ -55,6 +63,7 @@ class FixedInfo extends MagLatLong
     alt = h_ellip;
     asl = h_geoid;
     comment = cmt;
+    source  = src;
     cs      = name_cs;
     cs_lng  = lng_cs;
     cs_lat  = lat_cs;
@@ -108,7 +117,7 @@ class FixedInfo extends MagLatLong
     return ( TDSetting.mUnitLocation == TDConst.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
   }
 
-  static private String double2ddmmss( double x )
+  static String double2ddmmss( double x )
   {
     int dp = (int)x;
     x = 60*(x - dp);
@@ -119,7 +128,7 @@ class FixedInfo extends MagLatLong
     return String.format(Locale.US, "%d°%02d'%02d.%02d", dp, mp, sp, ds );
   }
 
-  static private String double2degree( double x )
+  static String double2degree( double x )
   {
     return String.format(Locale.US, "%.6f", x );
   }

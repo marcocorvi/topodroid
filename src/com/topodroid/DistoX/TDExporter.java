@@ -505,14 +505,11 @@ class TDExporter
         NumStation from = sh.from;
         NumStation to   = sh.to;
         if ( from.mHasCoords && to.mHasCoords ) {
-          pw.format("    <LineString id=\"%s-%s\">\n", from.name, to.name );
+          pw.format("    <LineString id=\"%s-%s\"> <coordinates>\n", from.name, to.name );
           // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
           // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-          pw.format("      <coordinates>\n");
-          pw.format(Locale.US, "        %f,%f,%f\n", from.e, from.s, from.v );
-          pw.format(Locale.US, "        %f,%f,%f\n", to.e, to.s, to.v );
-          pw.format("      </coordinates>\n");
-          pw.format("    </LineString>\n");
+          pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, to.e, to.s, to.v );
+          pw.format("    </coordinates> </LineString>\n");
         } else {
           // Log.v("DistoX", "missing coords " + from.name + " " + from.mHasCoords + " " + to.name + " " + to.mHasCoords );
         }
@@ -528,14 +525,11 @@ class TDExporter
         pw.format("    <altitudeMode>absolute</altitudeMode>\n");
         for ( NumSplay sp : splays ) {
           NumStation from = sp.from;
-          pw.format("    <LineString id=\"%s-\">\n", from.name );
+          pw.format("    <LineString> <coordinates>\n");
           // pw.format("      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
           // pw.format("      <extrude>1</extrude>\n"); // extends the line down to the ground
-          pw.format("      <coordinates>\n");
-          pw.format(Locale.US, "        %f,%f,%f\n", from.e, from.s, from.v );
-          pw.format(Locale.US, "        %f,%f,%f\n", sp.e, sp.s, sp.v );
-          pw.format("      </coordinates>\n");
-          pw.format("    </LineString>\n");
+          pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", from.e, from.s, from.v, sp.e, sp.s, sp.v );
+          pw.format("    </coordinates> </LineString>\n");
         }
         pw.format("  </MultiGeometry>\n");
         pw.format("</Placemark>\n");

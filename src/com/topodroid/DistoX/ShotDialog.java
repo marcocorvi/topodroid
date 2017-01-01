@@ -170,35 +170,6 @@ public class ShotDialog extends MyDialog
     shot_comment = blk.mComment;
   }
 
-  private void setEditable( EditText et, KeyListener kl, boolean editable, int flag )
-  {
-    if ( TDSetting.mKeyboard ) {
-      et.setKeyListener( null );
-      et.setClickable( true );
-      et.setFocusable( editable );
-      if ( editable ) {
-        MyKeyboard.registerEditText( mKeyboard, et, flag );
-        // et.setKeyListener( mKeyboard );
-        et.setBackgroundResource( android.R.drawable.edit_text );
-      } else {
-        MyKeyboard.registerEditText( mKeyboard, et, flag | MyKeyboard.FLAG_NOEDIT );
-        et.setBackgroundColor( 0xff999999 );
-      }
-    } else {
-      if ( editable ) {
-        et.setKeyListener( kl );
-        et.setBackgroundResource( android.R.drawable.edit_text );
-        et.setClickable( true );
-        et.setFocusable( true );
-      } else {
-        // et.setFocusable( false );
-        // et.setClickable( false );
-        et.setKeyListener( null );
-        et.setBackgroundColor( 0xff999999 );
-      }
-    }
-  }
-
   private void updateView()
   {
     // mTVdata.setText( shot_data );
@@ -247,9 +218,9 @@ public class ShotDialog extends MyDialog
     mButtonPrev.setEnabled( mPrevBlk != null );
 
     // do at the very end
-    setEditable( mETdistance, mKLdistance, shot_manual, flagDistance );
-    setEditable( mETbearing,  mKLbearing,  shot_manual, flagBearing );
-    setEditable( mETclino,    mKLclino,    shot_manual, flagClino );
+    MyKeyboard.setEditable( mETdistance, mKeyboard, mKLdistance, shot_manual, flagDistance );
+    MyKeyboard.setEditable( mETbearing,  mKeyboard, mKLbearing,  shot_manual, flagBearing );
+    MyKeyboard.setEditable( mETclino,    mKeyboard, mKLclino,    shot_manual, flagClino );
   }
 
 

@@ -157,7 +157,7 @@ public class FixedGpsDialog extends MyDialog
     }
     String comment = mETcomment.getText().toString();
     if ( comment == null ) comment = "";
-    mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment );
+    mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_TOPODROID );
   }
 
   @Override

@@ -449,5 +449,33 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
     // Log.d(TAG, "onPress? primaryCode=" + primaryCode);
   }
 
+  static void setEditable( EditText et, MyKeyboard kbd, KeyListener kl, boolean editable, int flag )
+  {
+    if ( TDSetting.mKeyboard ) {
+      et.setKeyListener( null );
+      et.setClickable( true );
+      et.setFocusable( editable );
+      if ( editable ) {
+        registerEditText( kbd, et, flag );
+        // et.setKeyListener( mKeyboard );
+        et.setBackgroundResource( android.R.drawable.edit_text );
+      } else {
+        registerEditText( kbd, et, flag | FLAG_NOEDIT );
+        et.setBackgroundColor( 0xff999999 );
+      }
+    } else {
+      if ( editable ) {
+        et.setKeyListener( kl );
+        et.setBackgroundResource( android.R.drawable.edit_text );
+        et.setClickable( true );
+        et.setFocusable( true );
+      } else {
+        // et.setFocusable( false );
+        // et.setClickable( false );
+        et.setKeyListener( null );
+        et.setBackgroundColor( 0xff999999 );
+      }
+    }
+  }
 }
 
