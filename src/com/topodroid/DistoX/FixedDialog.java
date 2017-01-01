@@ -71,6 +71,7 @@ public class FixedDialog extends MyDialog
   private TextView mTVcs_coords;
 
   private MyKeyboard mKeyboard;
+  private boolean editable;
 
   // private Button   mButtonCancel;
 
@@ -180,7 +181,7 @@ public class FixedDialog extends MyDialog
     KeyListener mKLalt = mTValt.getKeyListener();
     KeyListener mKLasl = mTVasl.getKeyListener();
 
-    boolean editable = ( mFxd.source == FixedInfo.SRC_MANUAL );
+    editable = ( mFxd.source == FixedInfo.SRC_MANUAL );
     MyKeyboard.setEditable( mTValt, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT );
     MyKeyboard.setEditable( mTVasl, mKeyboard, mKLasl, editable, MyKeyboard.FLAG_POINT );
     MyKeyboard.setEditable( mTVlng, mKeyboard, mKLlng, editable, flag );
@@ -197,6 +198,10 @@ public class FixedDialog extends MyDialog
 
   public void onClick(View v) 
   {
+    if ( TDSetting.mKeyboard && mKeyboard.isVisible() ) {
+      mKeyboard.hide();
+    }
+
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "FixedDialog onClick() button " + b.getText().toString() );
 
@@ -224,6 +229,16 @@ public class FixedDialog extends MyDialog
       mFxd.name = station;
       mFxd.comment = comment;
       mParent.updateFixedNameComment( mFxd, station, comment );
+
+      if ( editable ) {
+        double lat = FixedInfo.string2double( mTVlat.getText().toString() );
+        double lng = FixedInfo.string2double( mTVlng.getText().toString() );
+        double alt = Double.parseDouble( mTValt.getText().toString() );
+        double asl = Double.parseDouble( mTVasl.getText().toString() );
+        if ( lat != mFxd.lat || lng != mFxd.lng || alt != mFxd.alt || asl != mFxd.asl ) {
+          mParent.updateFixedData( mFxd, lng, lat, alt, asl );
+        }
+      }
       dismiss();
     } else if ( b == mButtonConvert ) {
       String cs_to = mFxd.hasCSCoords() ? mFxd.cs : TDSetting.mCRS;
@@ -243,6 +258,12 @@ public class FixedDialog extends MyDialog
   @Override
   public void onBackPressed()
   {
+    if ( TDSetting.mKeyboard ) {
+      if ( mKeyboard.isVisible() ) {
+        mKeyboard.hide();
+        return;
+      }
+    }
     dismiss();
   }
 

@@ -2925,6 +2925,20 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError("fixed data", e); }
   }
 
+  public void updateFixedData( long id, long sid, double lng, double lat, double alt, double asl )
+  {
+    if ( myDB == null ) return;
+    ContentValues vals = new ContentValues();
+    vals.put( "longitude", lng );
+    vals.put( "latitude",  lat );
+    vals.put( "altitude",  alt );
+    vals.put( "altimetric", asl );
+    try {
+      myDB.update( FIXED_TABLE, vals, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError("fixed data", e); }
+  }
+
   public void updateFixedCS( long id, long sid, String cs, double lng, double lat, double alt )
   {
     if ( myDB == null ) return;

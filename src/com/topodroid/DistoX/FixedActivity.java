@@ -229,6 +229,13 @@ public class FixedActivity extends Activity
   {
     return mApp.mData.hasFixed( mApp.mSID, station );
   }
+
+  void updateFixedData( FixedInfo fxd, double lng, double lat, double alt, double asl )
+  {
+    mApp.mData.updateFixedData( fxd.id, mApp.mSID, lng, lat, alt, asl );
+    // mList.invalidate();
+    refreshList();
+  }
  
   void updateFixedNameComment( FixedInfo fxd, String name, String comment )
   {
