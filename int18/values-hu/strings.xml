@@ -1036,7 +1036,7 @@
   <string name="pref_walls_xstep_summary">Point separation along the wall*Pontok maximális távolsága a kontúr mentén</string>
   <string name="pref_walls_xstep_message">Separation of points along the wall [m]*Pontok maximális távolsága a kontúr mentén [m]</string>
 
-  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
+  <string name="pref_algo_min_alpha_title">Min-algo alpha*</string>
   <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor</string>
   <string name="pref_algo_min_alpha_message">Min-algo adjustment factor (in [0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
