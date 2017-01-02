@@ -1003,12 +1003,12 @@
   <string name="pref_sketchSectionStep_title">Section step*Szelvény köz</string>
   <string name="pref_sketchSectionStep_summary">Distance between sections*Szelvények távolsága</string>
   <string name="pref_sketchSectionStep_message">Distance between intermediate sections*Köztes szelvények távolsága</string>
-  <string name="pref_sketchDeltaExtrude_title">Extrude scale*</string>
-  <string name="pref_sketchDeltaExtrude_summary">Extrude scale factor</string>
-  <string name="pref_sketchDeltaExtrude_message">Extrude scale factor</string>
-  <string name="pref_sketchCompassReadings_title">Compass readings</string>
-  <string name="pref_sketchCompassReadings_summary">Number of readings to average</string>
-  <string name="pref_sketchCompassReadings_message">Number of compass readings to average</string>
+  <string name="pref_sketchDeltaExtrude_title">Extrude scale*Kihúzás mértéke</string>
+  <string name="pref_sketchDeltaExtrude_summary">Extrude scale factor*Kihúzási tényező</string>
+  <string name="pref_sketchDeltaExtrude_message">Extrude scale factor*Kihúzási tényező</string>
+  <string name="pref_sketchCompassReadings_title">Compass readings*Tájoló leolvasások</string>
+  <string name="pref_sketchCompassReadings_summary">Number of readings to average*Leolvasások száma az átlagoláshoz</string>
+  <string name="pref_sketchCompassReadings_message">Number of compass readings to average*Tájoló leolvasások az átlagoláshoz</string>
 
   <string name="pref_unit_length_title">Length units*Hossz mértékegység</string>
   <string name="pref_unit_length_summary">Display units for lengths*Hosszak megjelenítési egysége</string>
