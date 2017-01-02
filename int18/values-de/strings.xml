@@ -481,6 +481,7 @@
     <string name="button_read"      >Lesen      </string>
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
+    <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
     <string name="button_right"     >RECHTS</string>
@@ -516,6 +517,15 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importieren</string>
     <string name="btn_install">Neu installieren</string>
+
+    <!-- TODO string name="symbol_archeo">Archeo</string -->
+    <!-- TODO string name="symbol_bio">Biology</string -->
+    <!-- TODO string name="symbol_geo">Geology</string -->
+    <!-- TODO string name="symbol_mine">Mining</string -->
+    <!-- TODO string name="symbol_paleo">Paleo</string -->
+    <!-- TODO string name="symbol_speleo">Speleo</string -->
+
+    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
 
 
 <!-- FIXME_SKETCH_3D -->    

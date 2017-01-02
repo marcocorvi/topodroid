@@ -463,6 +463,7 @@
     <string name="button_read"      >Leer      </string>
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
+    <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >Resetear  </string>
     <string name="button_left"      >Izquierdo</string>
     <string name="button_right"     >Derecho</string>
@@ -499,6 +500,15 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Importar</string>
     <string name="btn_install">Instalar</string>
+
+    <!-- TODO string name="symbol_archeo">Archeo</string -->
+    <!-- TODO string name="symbol_bio">Biology</string -->
+    <!-- TODO string name="symbol_geo">Geology</string -->
+    <!-- TODO string name="symbol_mine">Mining</string -->
+    <!-- TODO string name="symbol_paleo">Paleo</string -->
+    <!-- TODO string name="symbol_speleo">Speleo</string -->
+
+    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
 
     <string name="length">Longitud [m]</string>
     <string name="azimuth">Rumbo [deg]</string>

@@ -28,21 +28,21 @@
                 android:text="@string/AREA"
                 android:textSize="14sp"
         />
-        <LinearLayout 
+        <!-- LinearLayout 
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
           android:gravity="right"
-          >
+          -->
           	
-          <Button android:id="@+id/symbol_reload"
+          <!-- Button android:id="@+id/symbol_reload"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:background="@drawable/button"
             style="@style/button_default"
             android:text="@string/btn_install"
             android:layout_marginTop="10sp"
-          />
+          / -->
 
           <!-- Button android:id="@+id/symbol_sync"
             android:layout_width="wrap_content" 
@@ -60,7 +60,7 @@
             android:background="@drawable/ic_cancel"
           / -->
 
-        </LinearLayout>
+        <!-- /LinearLayout -->
 
       </LinearLayout>
       <ListView android:id="@+id/symbol_list"

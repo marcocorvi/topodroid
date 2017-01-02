@@ -466,6 +466,7 @@
     <string name="button_read"      >Четене    </string>
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
+    <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
     <string name="button_right"     >Надясно</string>
@@ -502,6 +503,15 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Импортиране</string>
     <string name="btn_install">Инсталиране</string>
+
+    <!-- TODO string name="symbol_archeo">Archeo</string -->
+    <!-- TODO string name="symbol_bio">Biology</string -->
+    <!-- TODO string name="symbol_geo">Geology</string -->
+    <!-- TODO string name="symbol_mine">Mining</string -->
+    <!-- TODO string name="symbol_paleo">Paleo</string -->
+    <!-- TODO string name="symbol_speleo">Speleo</string -->
+
+    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>

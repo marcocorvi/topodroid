@@ -465,7 +465,8 @@
     <string name="button_open"      >Open      </string>
     <string name="button_read"      >Read      </string>
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
-    <string name="button_dump"      >Dump     </string>
+    <string name="button_dump"      >Dump      </string>
+    <string name="button_replace"   >Replace   </string>
     <string name="button_reset"     >Reset     </string>
     <string name="button_left"      >LEFT</string>
     <string name="button_right"     >RIGHT</string>
@@ -502,6 +503,15 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Import</string>
     <string name="btn_install">Install</string>
+
+    <string name="symbol_archeo">Archeo</string>
+    <string name="symbol_bio">Biology</string>
+    <string name="symbol_geo">Geology</string>
+    <string name="symbol_mine">Mining</string>
+    <string name="symbol_paleo">Paleo</string>
+    <string name="symbol_speleo">Speleo</string>
+
+    <string name="symbol_reload">Drawing Tools</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>

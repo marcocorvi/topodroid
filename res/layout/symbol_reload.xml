@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      >
+      
+  <TextView android:id="@+id/symbol_version"
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:layout_marginRight="10sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="10sp"
+  />
+
+  <CheckBox android:id="@+id/symbol_speleo"
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content" 
+     android:layout_marginRight="10sp"
+     android:layout_marginLeft="10sp"
+     android:layout_marginTop="10sp"
+     android:text="@string/symbol_speleo"
+     />
+          	
+  <CheckBox android:id="@+id/symbol_mine"
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content" 
+     android:layout_marginRight="10sp"
+     android:layout_marginLeft="10sp"
+     android:layout_marginTop="10sp"
+     android:text="@string/symbol_mine"
+     />
+          	
+  <CheckBox android:id="@+id/symbol_geo"
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content" 
+     android:layout_marginRight="10sp"
+     android:layout_marginLeft="10sp"
+     android:layout_marginTop="10sp"
+     android:text="@string/symbol_geo"
+     />
+          	
+  <CheckBox android:id="@+id/symbol_archeo"
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content" 
+     android:layout_marginRight="10sp"
+     android:layout_marginLeft="10sp"
+     android:layout_marginTop="10sp"
+     android:text="@string/symbol_archeo"
+     />
+          	
+  <CheckBox android:id="@+id/symbol_paleo"
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content" 
+     android:layout_marginRight="10sp"
+     android:layout_marginLeft="10sp"
+     android:layout_marginTop="10sp"
+     android:text="@string/symbol_paleo"
+     />
+
+  <CheckBox android:id="@+id/symbol_bio"
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content" 
+     android:layout_marginRight="10sp"
+     android:layout_marginLeft="10sp"
+     android:layout_marginTop="10sp"
+     android:text="@string/symbol_bio"
+     />
+          	
+          	
+  <LinearLayout 
+     android:orientation="horizontal"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent"
+     android:layout_marginTop="20sp"
+     >
+      <Button android:id="@+id/button_add"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:background="@drawable/button"
+            style="@style/button_default"
+            android:text="@string/btn_install"
+            android:layout_marginLeft="10sp"
+      />
+
+      <Button android:id="@+id/button_replace"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:background="@drawable/button"
+            style="@style/button_default"
+            android:text="@string/button_replace"
+            android:layout_marginLeft="10sp"
+      />
+
+      <Button android:id="@+id/button_cancel"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:background="@drawable/button"
+            style="@style/button_default"
+            android:text="@string/button_cancel"
+            android:layout_marginLeft="10sp"
+      />
+
+  </LinearLayout>
+</LinearLayout>

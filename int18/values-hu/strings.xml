@@ -465,6 +465,7 @@
     <string name="button_read"      >Read      *Olvas  </string>
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump      *Biztonsági tár???</string>
+    <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >Reset     *Visszaállít</string>
     <string name="button_left"      >LEFT*BAL</string>
     <string name="button_right"     >RIGHT*JOBB</string>
@@ -500,6 +501,15 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">Import*Importálás</string>
     <string name="btn_install">Install*Telepítés</string>
+
+    <!-- TODO string name="symbol_archeo">Archeo</string -->
+    <!-- TODO string name="symbol_bio">Biology</string -->
+    <!-- TODO string name="symbol_geo">Geology</string -->
+    <!-- TODO string name="symbol_mine">Mining</string -->
+    <!-- TODO string name="symbol_paleo">Paleo</string -->
+    <!-- TODO string name="symbol_speleo">Speleo</string -->
+
+    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>

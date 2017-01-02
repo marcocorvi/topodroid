@@ -121,7 +121,7 @@ public class MainWindow extends Activity
                           };
 
   private static int menus[] = { 
-                          // R.string.menu_palette,
+                          R.string.menu_palette,
                           R.string.menu_logs,
                           R.string.menu_join_survey,
                           R.string.menu_about,
@@ -138,7 +138,7 @@ public class MainWindow extends Activity
                           // R.string.help_database
                           };
   private static int help_menus[] = {
-                          // R.string.help_symbol,
+                          R.string.help_symbol,
                           R.string.help_log,
                           R.string.help_join_survey,
                           R.string.help_info_topodroid,
@@ -610,12 +610,12 @@ public class MainWindow extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
-    // mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[0] ) );
-    if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[1] ) );
-    mMenuAdapter.add( res.getString( menus[2] ) );
+    mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
+    if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
     mMenuAdapter.add( res.getString( menus[4] ) );
+    mMenuAdapter.add( res.getString( menus[5] ) );
     mMenu.setAdapter( mMenuAdapter );
     mMenu.invalidate();
   }
@@ -638,7 +638,9 @@ public class MainWindow extends Activity
     //   (new SymbolEnableDialog( mActivity, mApp )).show();
     // } else { 
       Intent intent;
-      if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
+      if ( p++ == pos ) { // PALETTE
+        (new SymbolReload( mActivity, mApp )).show();
+      } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TopoDroidPreferences.class );
         intent.putExtra( TopoDroidPreferences.PREF_CATEGORY, TopoDroidPreferences.PREF_CATEGORY_LOG );
         startActivity( intent );

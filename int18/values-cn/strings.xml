@@ -463,6 +463,7 @@
     <string name="button_read"      >读取      </string>
     <!-- UNUSED string name="button_regroup"   >重组   </string -->
     <string name="button_dump"      >删除     </string>
+    <!-- TODO string name="button_replace"   >Replace   </string -->
     <string name="button_reset"     >重置     </string>
     <string name="button_left"      >左</string>
     <string name="button_right"     >右</string>
@@ -499,6 +500,15 @@
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">输入</string>
     <!-- TODO string name="btn_install">Install</string -->
+
+    <!-- TODO string name="symbol_archeo">Archeo</string -->
+    <!-- TODO string name="symbol_bio">Biology</string -->
+    <!-- TODO string name="symbol_geo">Geology</string -->
+    <!-- TODO string name="symbol_mine">Mining</string -->
+    <!-- TODO string name="symbol_paleo">Paleo</string -->
+    <!-- TODO string name="symbol_speleo">Speleo</string -->
+
+    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->

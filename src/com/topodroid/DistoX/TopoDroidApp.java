@@ -1417,9 +1417,14 @@ public class TopoDroidApp extends Application
   void installSymbols( boolean overwrite )
   {
     deleteObsoleteSymbols();
-    InputStream is = getResources().openRawResource( R.raw.symbols );
-    symbolsUncompress( is, overwrite );
+    installSymbols( R.raw.symbols, overwrite );
     mDData.setValue( "symbol_version", SYMBOL_VERSION );
+  }
+
+  void installSymbols( int res, boolean overwrite )
+  {
+    InputStream is = getResources().openRawResource( res );
+    symbolsUncompress( is, overwrite );
   }
 
   static private void deleteObsoleteSymbols()
@@ -1429,6 +1434,43 @@ public class TopoDroidApp extends Application
       File file = new File( TDPath.APP_LINE_PATH + line );
       if ( file.exists() ) file.delete();
     }
+  }
+
+  private void clearSymbolsDir( String dirname )
+  {
+    // Log.v("DistoX", "clear " + dirname );
+    File dir = new File( dirname );
+    File [] files = dir.listFiles();
+    for ( int i=0; i<files.length; ++i ) {
+      if ( files[i].isDirectory() ) continue;
+      files[i].delete();
+    }
+  }
+    
+  private void clearSymbols( )
+  {
+    clearSymbolsDir( TDPath.APP_POINT_PATH );
+    clearSymbolsDir( TDPath.APP_LINE_PATH );
+    clearSymbolsDir( TDPath.APP_AREA_PATH );
+  }  
+
+  void reloadSymbols( boolean clear, boolean speleo, boolean mine, boolean geo, boolean archeo, boolean paleo, boolean bio )
+  {
+    // Log.v("DistoX", "Reload symbols " + speleo + " " + mine + " " + geo + " " + archeo + " " + paleo + " " + bio + " clear " + clear );
+    if ( clear ) {
+      if (speleo || mine || geo || archeo || paleo || bio ) {
+        clearSymbols();
+      }
+    }
+    if ( speleo ) installSymbols( R.raw.symbols, true );
+    if ( mine   ) installSymbols( R.raw.symbols_mine,   true );
+    if ( geo    ) installSymbols( R.raw.symbols_geo,    true );
+    if ( archeo ) installSymbols( R.raw.symbols_archeo, true );
+    if ( paleo  ) installSymbols( R.raw.symbols_paleo,  true );
+    if ( bio    ) installSymbols( R.raw.symbols_bio,    true );
+    mDData.setValue( "symbol_version", SYMBOL_VERSION );
+    BrushManager.reloadAllLibraries( getResources() );
+    // BrushManager.makePaths( getResources() );
   }
 
   static private void symbolsUncompress( InputStream fis, boolean overwrite )
@@ -1446,7 +1488,8 @@ public class TopoDroidApp extends Application
         // Log.v(  "DistoX", "ZipEntry " + filepath );
         if ( ! ze.isDirectory() ) {
           if ( filepath.startsWith( "symbol" ) ) {
-            filepath = filepath.substring( 7 );
+            int pos  = 1 + filepath.indexOf('/');
+            filepath = filepath.substring( pos );
           }
           String pathname = TDPath.getSymbolFile( filepath );
           File file = new File( pathname );
