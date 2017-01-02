@@ -610,7 +610,7 @@ public class MainWindow extends Activity
     // mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
     mMenuAdapter = new ArrayAdapter<String>(mActivity, R.layout.menu );
 
-    mMenuAdapter.add( res.getString( menus[0] ) );
+    if ( TDSetting.mLevelOverNormal   ) mMenuAdapter.add( res.getString( menus[0] ) );
     if ( TDSetting.mLevelOverAdvanced ) mMenuAdapter.add( res.getString( menus[1] ) );
     if ( TDSetting.mLevelOverAdvanced && mApp.mCosurvey ) mMenuAdapter.add( res.getString( menus[2] ) );
     mMenuAdapter.add( res.getString( menus[3] ) );
@@ -638,7 +638,7 @@ public class MainWindow extends Activity
     //   (new SymbolEnableDialog( mActivity, mApp )).show();
     // } else { 
       Intent intent;
-      if ( p++ == pos ) { // PALETTE
+      if ( TDSetting.mLevelOverNormal && p++ == pos ) { // PALETTE
         (new SymbolReload( mActivity, mApp )).show();
       } else if ( TDSetting.mLevelOverAdvanced && p++ == pos ) { // LOGS
         intent = new Intent( mActivity, TopoDroidPreferences.class );
