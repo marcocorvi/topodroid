@@ -153,11 +153,11 @@
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H элипсоид. </string>
+    <string name="h_ellipsoid">H эллипсоид </string>
     <string name="h_geoid">H геоид </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="h_ellipsoid_hint">H элипсоид. [метры]</string>
+    <string name="h_ellipsoid_hint">H эллипсоид [метры]</string>
     <string name="h_geoid_hint">H геоид [метры]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
