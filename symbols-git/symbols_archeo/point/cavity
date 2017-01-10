@@ -5,11 +5,11 @@ th_name cavity
 color 0xffffff
 csurvey 0 0 0
 path
-  moveTo -6 4
-  lineTo 6 4
-  moveTo -4 4
-  lineTo -4 -2
-  cubicTo -4 -6 4 -6 4 -2
-  lineTo 4 4
+  moveTo -8 5
+  lineTo 8 5
+  moveTo -5 5
+  lineTo -5 -3
+  cubicTo -5 -8 5 -8 5 -3
+  lineTo 5 5
 endpath
 endsymbol

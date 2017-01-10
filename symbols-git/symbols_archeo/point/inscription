@@ -5,11 +5,11 @@ th_name inscription
 color 0xff00cc
 csurvey 0 0 0
 path
-  moveTo 0 4
-  lineTo 0 -6
-  moveTo 4 -5
-  lineTo 4 -2
-  cubicTo 4 1 -4 1 -4 -2
-  lineTo -4 -5
+  moveTo 0 6
+  lineTo 0 -9
+  moveTo 6 -7.5
+  lineTo 6 -3
+  cubicTo 6 1.5 -6 1.5 -6 -3
+  lineTo -6 -7.5
 endpath
 endsymbol

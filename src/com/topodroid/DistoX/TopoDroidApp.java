@@ -1271,6 +1271,17 @@ public class TopoDroidApp extends Application
     return TDExporter.exportSurveyAsCav( mSID, mData, info, filename );
   }
 
+  public String exportSurveyAsGrt()
+  {
+    SurveyInfo info = mData.selectSurveyInfo( mSID );
+    if ( info == null ) {
+      TDLog.Error("Export GRT null survey info. sid " + mSID );
+      return null;
+    }
+    String filename = TDPath.getSurveyGrtFile( mySurvey );
+    return TDExporter.exportSurveyAsGrt( mSID, mData, info, filename );
+  }
+
   public String exportSurveyAsSvx()
   {
     SurveyInfo info = mData.selectSurveyInfo( mSID );

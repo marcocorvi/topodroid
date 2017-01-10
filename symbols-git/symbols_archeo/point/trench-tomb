@@ -5,9 +5,9 @@ th_name trench-tomb
 color 0xffff33
 csurvey 0 0 0
 path
-  moveTo 4 -2
-  lineTo 4 2
-  lineTo -4 2
-  lineTo -4 -2
+  moveTo 6 -3
+  lineTo 6 3
+  lineTo -6 3
+  lineTo -6 -3
 endpath
 endsymbol

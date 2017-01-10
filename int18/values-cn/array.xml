@@ -43,11 +43,12 @@
      <item name="four">4</item>
   </string-array>
 
-  <!-- TODO string-array name="exportShots">
+  <string-array name="exportShots">
      <item name="none">无</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
+     <item name="grottolf">Grottolf</item>
      <item name="pockettopo">PocketTopo</item>
      <item name="polygon">Polygon</item>
      <item name="survex">Survex</item>
@@ -56,16 +57,16 @@
      <item name="walls">Walls</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array -->
+  </string-array>
 
-  <!-- TODO string-array name="exportPlot">
+  <string-array name="exportPlot">
      <item name="none">无</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
      <item name="png">PNG</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="extraButtons">
      <item name="basic">基本模式</item>

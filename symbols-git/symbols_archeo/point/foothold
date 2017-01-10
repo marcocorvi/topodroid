@@ -5,10 +5,10 @@ th_name foothold
 color 0xcccccc
 csurvey 0 0 0
 path
-  moveTo 2 4
-  lineTo 2 2
-  lineTo -3 2
-  cubicTo -3 -3 -3 -3 2 -3
-  lineTo 2 -6
+  moveTo 3 6
+  lineTo 3 3
+  lineTo -4.5 3
+  cubicTo -4.5 -4.5 -4.5 -4.5 3 -4.5
+  lineTo 3 -9
 endpath
 endsymbol

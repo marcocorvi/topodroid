@@ -5,11 +5,11 @@ th_name cistern
 color 0x66ccff
 csurvey 0 0 0
 path
-  moveTo -5 -3
-  lineTo -2 5
-  lineTo 2 5
-  lineTo 5 -3
-  lineTo -5 -3
-  cubicTo -5 -7 5 -7 5 -3
+  moveTo -7.5 -4.5
+  lineTo -3 7.5
+  lineTo 3 7.5
+  lineTo 7.5 -4.5
+  lineTo -7.5 -4.5
+  cubicTo -7.5 -10.5 7.5 -10.5 7.5 -4.5
 endpath
 endsymbol

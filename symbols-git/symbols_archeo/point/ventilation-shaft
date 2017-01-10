@@ -5,16 +5,16 @@ th_name ventilation-shaft
 color 0xff6699
 csurvey 0 0 0
 path
-  moveTo -5 -5
-  lineTo 5 -5
-  lineTo 5 5
-  lineTo -5 5
-  lineTo -5 -5
-  moveTo 0 -3
-  lineTo 0 3
-  moveTo 2 1.5
-  lineTo -2 -1.5
-  moveTo -2 1.5
-  lineTo 2 -1.5
+  moveTo -7.5 -7.5
+  lineTo 7.5 -7.5
+  lineTo 7.5 7.5
+  lineTo -7.5 7.5
+  lineTo -7.5 -7.5
+  moveTo 0 -4.5
+  lineTo 0 4.5
+  moveTo 3 2.25
+  lineTo -3 -2.25
+  moveTo -3 2.25
+  lineTo 3 -2.25
 endpath
 endsymbol

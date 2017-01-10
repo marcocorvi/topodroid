@@ -5,13 +5,13 @@ th_name wood
 color 0xcc9966
 csurvey 0 0 0
 path
-  moveTo 0 5
+  moveTo 0 7.5
   lineTo 0 0
-  moveTo -4.7 1.5
+  moveTo -7.0 2.25
   lineTo 0 0 
-  lineTo 4.7 1.5
-  moveTo -2.9 -4
+  lineTo 7.0 2.25
+  moveTo -4.3 -6
   lineTo 0 0
-  lineTo 2.9 -4
+  lineTo 4.3 -6
 endpath
 endsymbol

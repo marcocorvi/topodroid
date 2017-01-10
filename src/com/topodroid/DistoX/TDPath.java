@@ -36,6 +36,7 @@ public class TDPath
   final static String CAVE = ".cave";
   final static String CAV = ".cav";
   final static String DAT = ".dat";
+  final static String GRT = ".grt";
   final static String DXF = ".dxf";
   final static String KML = ".kml";
   final static String PLT = ".plt";
@@ -79,6 +80,7 @@ public class TDPath
   private static String PATH_CSV;    //  = PATH_BASE + "csv/";   // CSV text
   private static String PATH_CSX;    //  = PATH_BASE + "csx/";   // cSurvey
   private static String PATH_DAT;    //  = PATH_BASE + "dat/";   // Compass
+  private static String PATH_GRT;    //  = PATH_BASE + "grt/";   // Grottolf
   private static String PATH_DUMP;   //  = PATH_BASE + "dump/";  // DistoX memory dumps
   private static String PATH_DXF;    //  = PATH_BASE + "dxf/";
   private static String PATH_KML;    //  = PATH_BASE + "kml/";
@@ -141,6 +143,9 @@ public class TDPath
 
     PATH_DAT = PATH_BASE + "dat/";
     // FIXME checkDirs( PATH_DAT );
+
+    PATH_GRT = PATH_BASE + "grt/";
+    // FIXME checkDirs( PATH_GRT );
 
     PATH_CAVE = PATH_BASE + "cave/";
     // FIXME checkDirs( PATH_CAVE );
@@ -294,6 +299,7 @@ public class TDPath
   static String getCaveFile( String name )   { return PATH_CAVE + name; }
   static String getCavFile( String name )    { return PATH_CAV + name; }
   static String getDatFile( String name )    { return PATH_DAT + name; }
+  static String getGrtFile( String name )    { return PATH_GRT + name; }
   static String getDxfFile( String name )    { return PATH_DXF + name; }
   static String getKmlFile( String name )    { return PATH_KML + name; }
   static String getPltFile( String name )    { return PATH_PLT + name; }
@@ -352,6 +358,7 @@ public class TDPath
   static String getSurveyCaveFile( String survey ) { return getFile( PATH_CAVE, survey, CAVE ); }
   static String getSurveyCavFile( String survey ) { return getFile( PATH_CAV, survey, CAV ); }
   static String getSurveyDatFile( String survey ) { return getFile( PATH_DAT, survey, DAT ); }
+  static String getSurveyGrtFile( String survey ) { return getFile( PATH_GRT, survey, GRT ); }
   static String getSurveyDxfFile( String survey ) { return getFile( PATH_DXF, survey, DXF ); }
   static String getSurveyKmlFile( String survey ) { return getFile( PATH_KML, survey, KML ); }
   static String getSurveyPltFile( String survey ) { return getFile( PATH_PLT, survey, PLT ); }
@@ -466,6 +473,7 @@ public class TDPath
     t = new File( getCaveFile( survey + CAVE ) ); if ( t.exists() ) t.delete();
     t = new File( getCavFile( survey + CAV ) ); if ( t.exists() ) t.delete();
     t = new File( getDatFile( survey + DAT ) ); if ( t.exists() ) t.delete();
+    t = new File( getGrtFile( survey + GRT ) ); if ( t.exists() ) t.delete();
     t = new File( getDxfFile( survey + DXF ) ); if ( t.exists() ) t.delete();
     t = new File( getKmlFile( survey + KML ) ); if ( t.exists() ) t.delete();
     t = new File( getPltFile( survey + PLT ) ); if ( t.exists() ) t.delete();

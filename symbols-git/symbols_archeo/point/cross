@@ -5,9 +5,9 @@ th_name cross
 color 0xff00ff
 csurvey 0 0 0
 path
-  moveTo 0 4
-  lineTo 0 -4
-  moveTo 4 0
-  lineTo -4 0
+  moveTo 0 6
+  lineTo 0 -6
+  moveTo 6 0
+  lineTo -6 0
 endpath
 endsymbol

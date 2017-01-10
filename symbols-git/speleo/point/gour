@@ -1,0 +1,13 @@
+symbol point
+name gour
+name-it gour
+th_name gour
+orientation yes
+color 0xff9933
+csurvey 6 6 80
+path
+  arcTo -8 -4 0 4 0 180
+  arcTo 0 -4 8 4 0 180 
+endpath
+endsymbol
+

@@ -475,7 +475,10 @@ public class SurveyWindow extends Activity
           filename = mApp.exportSurveyAsPlg();
           break;
         case TDConst.DISTOX_EXPORT_CAV: // Topo
-          filename = mApp.exportSurveyAsCav( );
+          filename = mApp.exportSurveyAsCav();
+          break;
+        case TDConst.DISTOX_EXPORT_GRT: // Grottolf
+          filename = mApp.exportSurveyAsGrt();
           break;
 
         case TDConst.DISTOX_EXPORT_TH:

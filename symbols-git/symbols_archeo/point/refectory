@@ -5,20 +5,20 @@ th_name refectory
 color 0xff9966
 csurvey 0 0 0
 path
-  moveTo -5 -5
-  lineTo -5 5
-  lineTo 5 5
-  lineTo 5 -5
-  lineTo -5 -5
-  moveTo -5 2
-  lineTo -3 2
-  lineTo -3 5
-  moveTo -1 5
-  lineTo -1 1
-  lineTo 1 1
-  lineTo 1 5
-  moveTo 3 5
-  lineTo 3 2
-  lineTo 5 2
+  moveTo -7.5 -7.5
+  lineTo -7.5 7.5
+  lineTo 7.5 7.5
+  lineTo 7.5 -7.5
+  lineTo -7.5 -7.5
+  moveTo -7.5 3
+  lineTo -4.5 3
+  lineTo -4.5 7.5
+  moveTo -1.5 7.5
+  lineTo -1.5 1.5
+  lineTo 1.5 1.5
+  lineTo 1.5 7.5
+  moveTo 4.5 7.5
+  lineTo 4.5 3
+  lineTo 7.5 3
 endpath
 endsymbol

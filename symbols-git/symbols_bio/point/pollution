@@ -1,0 +1,15 @@
+symbol point
+name pollution
+name-it inquinamento
+th_name pollution
+orientation no
+color 0xff0000
+csurvey 6 6 80
+path
+  moveTo -3.5 3.5
+  lineTo 3.5 -3.5
+  moveTo -3.5 -3.5
+  lineTo 3.5 3.5
+  addCircle 0 0 5
+endpath
+endsymbol

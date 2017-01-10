@@ -5,9 +5,9 @@ th_name pigeonhole
 color 0xcccccc
 csurvey 0 0 0
 path
-  moveTo 4 4
-  lineTo -4 4
-  cubicTo -4 -4 4 -4 4 4
-  addCircle 0 1 1
+  moveTo 6 6
+  lineTo -6 6
+  cubicTo -6 -6 6 -6 6 6
+  addCircle 0 1.5 1.5
 endpath
 endsymbol

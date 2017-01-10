@@ -5,9 +5,9 @@ th_name ring
 color 0xcccccc
 csurvey 0 0 0
 path
-  moveTo -3 -4
-  cubicTo 1 -4 1 4 -3 4
-  moveTo 3 -4
-  cubicTo -1 -4 -1 4 3 4
+  moveTo -4.5 -6
+  cubicTo 1.5 -6 1.5 6 -4.5 6
+  moveTo 4.5 -6
+  cubicTo -1.5 -6 -1.5 6 4.5 6
 endpath
 endsymbol

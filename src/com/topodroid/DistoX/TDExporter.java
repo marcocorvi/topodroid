@@ -1541,6 +1541,56 @@ class TDExporter
   // -----------------------------------------------------------------------
   // COMPASS EXPORT 
 
+  static private LRUDprofile computeLRUDprofile( DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
+  {
+    LRUDprofile lrud = new LRUDprofile( b.mBearing );
+    float n0  = TDMath.cosd( b.mBearing );
+    float e0  = TDMath.sind( b.mBearing );
+    float cc0 = TDMath.cosd( b.mClino );
+    float sc0 = TDMath.sind( b.mClino );
+    float cb0 = n0;
+    float sb0 = e0;
+    String station = ( at_from ) ? b.mFrom : b.mTo;
+    
+    for ( DistoXDBlock item : list ) {
+      String from = item.mFrom;
+      String to   = item.mTo;
+      if ( from == null || from.length() == 0 ) { // skip blank
+        // if ( to == null || to.length() == 0 ) continue;
+        continue;
+      } else { // skip leg
+        if ( to != null && to.length() > 0 ) continue;
+      }
+      if ( station.equals( from ) ) {
+        float cb = TDMath.cosd( item.mBearing );
+        float sb = TDMath.sind( item.mBearing );
+        float cc = TDMath.cosd( item.mClino );
+        float sc = TDMath.sind( item.mClino );
+        float len = item.mLength;
+
+        // skip splays too close to shot direction // FIXME setting
+        // this test aims to use only splays that are "orthogonal" to the shot
+        if ( TDSetting.mOrthogonalLRUD ) {
+          float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
+          if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
+        }
+
+        float z1 = len * sc;
+        float n1 = len * cc * cb;
+        float e1 = len * cc * sb;
+        if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
+        else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
+
+        float rl = e1 * n0 - n1 * e0;
+        if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
+        else            { if ( -rl > lrud.l ) lrud.l = -rl; }
+        lrud.addData( z1, rl, len );
+      }
+    }
+    // Log.v("DistoX", "<" + b.mFrom + "-" + b.mTo + "> at " + station + ": " + lrud.l + " " + lrud.r );
+    return lrud;
+  }
+
   static private LRUD computeLRUD( DistoXDBlock b, List<DistoXDBlock> list, boolean at_from )
   {
     LRUD lrud = new LRUD();
@@ -1742,6 +1792,124 @@ class TDExporter
       return filename;
     } catch ( IOException e ) {
       TDLog.Error( "Failed Compass export: " + e.getMessage() );
+      return null;
+    }
+  }
+
+  // =======================================================================
+  // GROTTOLF EXPORT
+
+  // write RLDU and the cross-section points
+  static private void writeGrtProfile( PrintWriter pw, LRUDprofile lrud )
+  {
+    pw.format(Locale.US, "%.2f %.2f %.2f %.2f\n", lrud.r, lrud.l, lrud.d, lrud.u );
+    pw.format(Locale.US, "# %d %.1f\n", lrud.size(), lrud.bearing );
+    int size = lrud.size();
+    for ( int k = 0; k<size; ++k ) {
+      pw.format(Locale.US, "# %.1f %.2f\n", lrud.getClino(k), lrud.getDistance(k) );
+    }
+  }
+
+  static private void writeGrtLeg( PrintWriter pw, AverageLeg leg, String fr, String to, boolean first,
+                                   DistoXDBlock item, List<DistoXDBlock> list )
+  {
+    LRUDprofile lrud = null;
+    if ( first ) {
+      pw.format(Locale.US, "%s %s 0.000 0.000 0.000 ", fr, fr );
+      lrud = computeLRUDprofile( item, list, true );
+      writeGrtProfile( pw, lrud );
+    }
+    pw.format(Locale.US, "%s %s %.1f %.1f %.2f ", fr, to, leg.bearing(), leg.clino(), leg.length() );
+    lrud = computeLRUDprofile( item, list, false );
+    writeGrtProfile( pw, lrud );
+    leg.reset();
+  }
+
+  static private void writeGrtFix( PrintWriter pw, String station, List<FixedInfo> fixed )
+  {
+    if ( fixed.size() > 0 ) {
+      for ( FixedInfo fix : fixed ) {
+        if ( station.equals( fix.name ) ) {
+          pw.format(Locale.US, "%.8f %.8f %.1f\n", fix.lng, fix.lat, fix.asl );
+          return;
+        }
+      }
+    }
+    pw.format("0.00 0.00 0.00\n");
+  }
+
+  static String exportSurveyAsGrt( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    try {
+      TDPath.checkPath( filename );
+      FileWriter fw = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+  
+      pw.format("%s\n", info.name );
+      pw.format(";\n");
+      pw.format("; %s created by TopoDroid v %s \n", TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
+      pw.format(Locale.US, "360.00 360.00 %.2f 1.00\n", info.declination ); // degrees degrees decl. meters
+
+      List< FixedInfo > fixed = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      boolean first = true; // first station
+      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      // int extend = 1;
+      AverageLeg leg = new AverageLeg(0);
+      DistoXDBlock ref_item = null;
+      String ref_from = null;
+      String ref_to   = null;
+      for ( DistoXDBlock item : list ) {
+        String from    = item.mFrom;
+        String to      = item.mTo;
+        if ( from == null || from.length() == 0 ) {
+          if ( to == null || to.length() == 0 ) { // no station: not exported
+            if ( ref_item != null &&
+               ( item.mType == DistoXDBlock.BLOCK_SEC_LEG || item.isRelativeDistance( ref_item ) ) ) {
+              leg.add( item.mLength, item.mBearing, item.mClino );
+            }
+          } else { // only TO station
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              if ( first ) writeGrtFix( pw, ref_from, fixed );
+              writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+              first = false;
+              ref_item = null; 
+              ref_from = null;
+              ref_to   = null;
+            }
+          }
+        } else { // with FROM station
+          if ( to == null || to.length() == 0 ) { // splay shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
+              if ( first ) writeGrtFix( pw, ref_from, fixed );
+              writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+              first = false;
+              ref_item = null; 
+              ref_from = null;
+              ref_to   = null;
+            }
+          } else {
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              if ( first ) writeGrtFix( pw, ref_from, fixed );
+              writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+              first = false;
+            }
+            ref_item = item;
+            ref_from = from;
+            ref_to   = to;
+            leg.set( item.mLength, item.mBearing, item.mClino );
+          }
+        }
+      }
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        if ( first ) writeGrtFix( pw, ref_from, fixed );
+        writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+      }
+
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed Walls export: " + e.getMessage() );
       return null;
     }
   }

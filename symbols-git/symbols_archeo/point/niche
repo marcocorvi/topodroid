@@ -5,10 +5,10 @@ th_name niche
 color 0x66ffcc
 csurvey 0 0 0
 path
-  moveTo 3 4
-  lineTo -3 4
-  lineTo -3 -1
-  cubicTo -3 -4 3 -4 3 -1
-  lineTo 3 4
+  moveTo 4.5 6
+  lineTo -4.5 6
+  lineTo -4.5 -1.5
+  cubicTo -4.5 -6 4.5 -6 4.5 -1.5
+  lineTo 4.5 6
 endpath
 endsymbol

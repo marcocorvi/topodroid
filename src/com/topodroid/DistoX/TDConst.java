@@ -36,12 +36,14 @@ class TDConst
 
   static final int DISTOX_EXPORT_PLG = 16; // Polygon
   static final int DISTOX_EXPORT_CAV = 17; // Topo
+  static final int DISTOX_EXPORT_GRT = 18; // Grottolf
 
   static final int DISTOX_EXPORT_ZIP = 20;
 
   static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",
     "cSurvey",
+    "Grottolf",
     "PocketTopo",
     "Polygon",
     "Survex",
@@ -58,6 +60,7 @@ class TDConst
     DISTOX_EXPORT_ZIP,
     DISTOX_EXPORT_DAT,
     DISTOX_EXPORT_CSX,
+    DISTOX_EXPORT_GRT,
     DISTOX_EXPORT_TOP,
     DISTOX_EXPORT_PLG,
     DISTOX_EXPORT_SVX,

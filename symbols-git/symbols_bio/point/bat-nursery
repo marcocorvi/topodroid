@@ -1,7 +1,7 @@
 symbol point
-name bat
-th_name bat
-color 0xffcc33
+name bat-nursery
+th_name bat-nursery
+color 0xff33ff
 csurvey 0 0 0
 path
   addCircle 0 -2 1

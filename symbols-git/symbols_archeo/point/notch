@@ -5,14 +5,14 @@ th_name notch
 color 0x33ffcc
 csurvey 0 0 0
 path
-  moveTo -3 -5
-  lineTo -3 4
-  lineTo 3 4
-  lineTo 3 -5
-  lineTo -3 -5
-  moveT0 3 3
-  lineTo -3 3
-  moveTo 3 -1
-  lineTo -3 -1
+  moveTo -4.5 -7.5
+  lineTo -4.5 6
+  lineTo 4.5 6
+  lineTo 4.5 -7.5
+  lineTo -4.5 -7.5
+  moveT0 4.5 4.5
+  lineTo -4.5 4.5
+  moveTo 4.5 -1.5
+  lineTo -4.5 -1.5
 endpath
 endsymbol

@@ -5,16 +5,16 @@ th_name apiary
 color 0xff9966
 csurvey 0 0 0
 path
-  moveTo -5 -5
-  lineTo -5 5
-  lineTo 5 5
-  lineTo 5 -5
-  lineTo -5 -5
-  moveTo -2 -5
-  lineTo -2 5
-  moveTo 0 -5
-  lineTo 0 5
-  moveTo 2 -5
-  lineTo 2 5
+  moveTo -7 -7
+  lineTo -7 7
+  lineTo 7 7
+  lineTo 7 -7
+  lineTo -7 -7
+  moveTo -3 -7
+  lineTo -3 7
+  moveTo 0 -7
+  lineTo 0 7
+  moveTo 3 -7
+  lineTo 3 7
 endpath
 endsymbol

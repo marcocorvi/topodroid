@@ -5,15 +5,15 @@ th_name pit
 color 0xff6699
 csurvey 0 0 0
 path
-  moveTo -5 -5
-  lineTo 5 -5
-  lineTo 5 5
-  lineTo -5 5
-  lineTo -5 -5
-  moveTo -3 -3
-  lineTo 3 -3
-  lineTo 3 3
-  lineTo -3 3
-  lineTo -3 -3
+  moveTo -7.5 -7.5
+  lineTo 7.5 -7.5
+  lineTo 7.5 7.5
+  lineTo -7.5 7.5
+  lineTo -7.5 -7.5
+  moveTo -4.5 -4.5
+  lineTo 4.5 -4.5
+  lineTo 4.5 4.5
+  lineTo -4.5 4.5
+  lineTo -4.5 -4.5
 endpath
 endsymbol

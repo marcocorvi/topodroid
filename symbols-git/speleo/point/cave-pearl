@@ -1,0 +1,12 @@
+symbol point
+name cave-pearl
+name-it pisolite
+th_name cave-pearl
+orientation no
+color 0xffffff
+csurvey 6 6 80
+path
+  addCircle -4 1 2
+  addCircle 4 -1 2
+endpath
+endsymbol
