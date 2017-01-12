@@ -73,13 +73,13 @@
     <string name="calib_ave_std">准确度: %1$.4f ± %2$.4f 度</string>
     <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
-    <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
+    <!-- TODO string name="calib_reset">重置 DistoX 校准 ?</string -->
 
     <string name="algorithm">算法:</string>
     <string name="auto">自动</string>
     <string name="linear">线性</string>
     <string name="non_linear">非线性</string>
-    <!-- NO string name="algo_minimum">minimum</string -->
+    <!-- NO string name="algo_minimum">最小量</string -->
    
     <string name="device_algo_failed">自动算法失败\n使用线性算法...</string>
     <!-- TODO string name="device_address">Address %1$s</string -->
@@ -245,7 +245,7 @@
     <string name="menu_attach">连接</string>
     <!-- UNUSED string name="menu_attached">连接</string -->
     <!-- UNUSED string name="menu_ready">就绪</string -->
-    <!-- TODO string name="menu_close">CLOSE</string -->
+    <!-- TODO string name="menu_close">关闭</string -->
     <string name="menu_delete">删除</string>
     <string name="menu_detach">断开连接</string>
     <string name="menu_display">显示</string>
@@ -254,9 +254,9 @@
     <string name="menu_firmware">固件</string>
     <string name="menu_recover">恢复</string>
     <string name="menu_reload">重新导入</string>
-    <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
+    <!-- TODO string name="menu_rename_delete">重命名/删除</string -->
     <string name="menu_rename">重命名</string>
-    <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
+    <!-- TODO string name="menu_switch">切换/关闭</string -->
     <string name="menu_help">帮助</string>
     <string name="menu_join_survey">联合测量</string>
     <string name="menu_logs">日志设定</string>
@@ -274,7 +274,7 @@
     <string name="menu_sync">同步</string>
     <!-- UNUSED string name="menu_tdr2th2">TH2 草图</string -->
     <string name="menu_validate">验证</string>
-    <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
+    <!-- TODO string name="menu_zoom_fit">适合屏幕</string -->
 
     <string name="popup_join_pt">接至附近点</string>
     <string name="popup_snap_ln">接至附近线</string>
@@ -318,7 +318,7 @@
     <!-- UNUSED string name="reading_file_failed">文件读取失败</string -->
 
     <string name="saved_file_1">保存文件</string>
-    <!-- TODO string name="saved_file_2">Saved file %1$s Scale %2$.2f</string -->
+    <!-- TODO string name="saved_file_2">保存 %1$s 比例尺 %2$.2f</string -->
     <string name="saving_">保存中 </string>
     <string name="saving_file_failed">文件保存失败</string>
     <!-- UNUSED string name="scrap_name">草图名称</string -->
@@ -349,7 +349,7 @@
     <string name="shot_info">输入测量数据</string>
     <!-- UNUSED string name="shot_length">主线测量</string -->
     <string name="shot_note">备注</string>
-    <!-- TODO string name="shot_not_found">Found no shot</string -->
+    <!-- TODO string name="shot_not_found">发现无测量</string -->
     <string name="shot_reverse">反测</string>
     <string name="shot_to">测到</string>
 
@@ -499,20 +499,20 @@
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_import">输入</string>
-    <!-- TODO string name="btn_install">Install</string -->
+    <!-- TODO string name="btn_install">安装</string -->
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <!-- TODO string name="symbol_archeo">考古学</string -->
+    <!-- TODO string name="symbol_bio">生物学</string -->
+    <!-- TODO string name="symbol_geo">地质学</string -->
+    <!-- TODO string name="symbol_mine">采矿学</string -->
+    <!-- TODO string name="symbol_paleo">古生物学</string -->
+    <!-- TODO string name="symbol_speleo">洞穴学</string -->
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <!-- TODO string name="symbol_reload">绘图工具</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
-    <string name="title_sketch_new">New 3D sketch</string>
+    <string name="title_sketch_new">新建 3D 草图</string>
     <!-- UNUSED string name="title_sketch_edit">编辑 3D 表面</string -->
     <string name="title_sketch_shot">新侧线测量</string>
     <string name="title_sketch_refs">查看模式</string>
@@ -555,7 +555,7 @@
     <string name="no_shot_between_stations">两测量点间无数据</string>
     <string name="few_line_points">线间的点太少</string>
     <string name="line_delete">删除线</string>
-    <string name="flip_shots">Flip shots</string>
+    <string name="flip_shots">点击测量</string>
 
     <string name="menu_head">顶端</string>
     <!-- UNUSED string name="menu_save_th2">保存 TH2</string -->
@@ -565,10 +565,10 @@
     <!-- UNUSED string name="help_manual">用户手册</string -->
     <string name="help_measure">测量距离</string>
     
-    <!-- TODO string name="help_close">Close window</string -->
+    <!-- TODO string name="help_close">关闭窗口</string -->
     <string name="help_coeff">显示校准系数</string>
     <string name="help_continue">继续画线</string>
-    <!-- TODO string name="help_contour">Contour editing</string -->
+    <!-- TODO string name="help_contour">轮廓编辑</string -->
     <string name="help_current_station">保存测量点</string>
     <string name="help_azimuth">"延伸" 参照</string>
     <string name="help_device">输入设备激活</string>
@@ -603,8 +603,8 @@
     <string name="help_edit">编辑模式</string>
     <string name="help_refs">选择草图参考</string>
     <string name="help_rename">修改测量名称</string>
-    <!-- TODO string name="help_plot_rename">Rename/Delete sketch</string -->
-    <!-- TODO string name="help_plot_switch">Switch sketch</string -->
+    <!-- TODO string name="help_plot_rename">重命名/删除草图</string -->
+    <!-- TODO string name="help_plot_switch">切换草图</string -->
     <string name="help_stats">测量点对话框</string>
     <string name="help_save_plot">输出草图</string>
     <!-- UNUSED string name="help_tdr2th2">转换二进制草图文件到th2</string -->
@@ -614,7 +614,7 @@
     <string name="help_redo">重做上一次操作</string>
     <string name="help_symbol_plot">选择最近使用的绘图工具</string>
     <string name="help_delete_item">删除草图项</string>
-    <!-- TODO string name="help_range">Moving a portion of line</string -->
+    <!-- TODO string name="help_range">移动线的某部分</string -->
     <!-- UNUSED string name="help_clear">清除选择</string -->
     <string name="help_eraser">简易模式</string>
     <string name="help_previous">已选项目</string>
@@ -672,13 +672,13 @@
     <string name="title_calib">校准</string>
     <string name="title_coverage">校准数据分布</string>
     <string name="title_coeff">校准系数</string>
-    <!-- TODO string name="title_contour">Contour</string -->
+    <!-- TODO string name="title_contour">轮廓</string -->
     <!-- UNUSED string name="title_coord">输入点坐标:</string -->
     <string name="title_current_station">保存测量点</string>
     <string name="title_device">DistoX 设备</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
+    <!-- TODO string name="title_device_select">选择DistoX设备</string -->
     <string name="title_discover">扫码DistoX设备...请稍后</string>
-    <!-- TODO string name="title_draw">Draw</string -->
+    <!-- TODO string name="title_draw">绘图</string -->
     <string name="title_draw_area">面图例 %1$s</string>
     <string name="title_draw_line">线图例 %1$s</string>
     <string name="title_draw_point">点图例 %1$s</string>
@@ -698,7 +698,7 @@
     <string name="title_plot_save">输出草图</string>
     <string name="title_plot_reload">重装草图</string>
     <string name="title_profile_flip">剖面草图 ?</string>
-    <!-- TODO string name="title_projection">Projected profile azimuth %1$d</string -->
+    <!-- TODO string name="title_projection">投影轮廓方位 %1$d</string -->
     <string name="title_refs">参考草图</string>
     <string name="title_scraps">测量草图</string>
     <!-- TODO string name="title_select">选择</string -->
@@ -760,12 +760,12 @@
   <string name="pref_survex_splay_summary">在Survex中添加侧线的测量点</string>
   <string name="pref_survex_lrud_title">Survex左右上下</string>
   <string name="pref_survex_lrud_summary">添加左右上下到 Survex 输出</string>
-  <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
-  <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
-  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
-  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
-  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
-  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
+  <!-- TODO string name="pref_svg_grid_title">SVG 网格</string -->
+  <!-- TODO string name="pref_svg_grid_summary">添加网格到SVG输出</string -->
+  <!-- TODO string name="pref_kml_stations_title">KML 测点</string -->
+  <!-- TODO string name="pref_kml_stations_summary">添加测点名到KML输出</string -->
+  <!-- TODO string name="pref_kml_splays_title">KML侧线</string -->
+  <!-- TODO string name="pref_kml_splays_summary">添加侧线到KML输出</string -->
 
   <string name="pref_sock_type_title">接口</string>
   <string name="pref_sock_type_summary">接口生成</string>
@@ -888,8 +888,8 @@
   <string name="pref_dxf_scale_title">DXF 草图比例</string>
   <string name="pref_dxf_scale_summary">DXF 草图比例系数</string>
   <string name="pref_dxf_scale_message">草图输出中DXF比例系数</string>
-  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
-  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
+  <!-- TODO string name="pref_dxf_blocks_title">DXF 侧线终点</string -->
+  <!-- TODO string name="pref_dxf_blocks_summary">DXF 侧线终点</string -->
   <string name="pref_thumbnail_title">缩略图大小</string>
   <string name="pref_thumbnail_summary">照片缩略图尺寸</string>
   <string name="pref_thumbnail_message">照片缩略图尺寸</string>
@@ -952,22 +952,22 @@
   <string name="pref_checkBT_summary">启用/停用 蓝牙</string>
   <string name="pref_checkAttached_title">中间线检查</string>
   <string name="pref_checkAttached_summary">检测如果测量点相连接</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
+  <!-- TODO string name="pref_backup_number_title">备份数字</string -->
+  <!-- TODO string name="pref_backup_number_summary">草图文件数字备份</string -->
+  <!-- TODO string name="pref_backup_interval_title">备份间隔</string -->
+  <!-- TODO string name="pref_backup_interval_summary">两个备份之间的最小间隔 [s]</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion 区域</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">保存 xtherion 区域</string -->
-  <!-- TODO string name="pref_therion_splays_title">Therion splays</string -->
-  <!-- TODO string name="pref_therion_splays_summary">Add u:splay lines to th2 files</string -->
+  <!-- TODO string name="pref_therion_splays_title">Therion 侧线</string -->
+  <!-- TODO string name="pref_therion_splays_summary">添加 u:splay 侧线线条到 th2文件</string -->
   <string name="pref_autoStations_title">Therion 测量点</string>
   <string name="pref_autoStations_summary">自动添加测量点到Therion文件</string>
   <string name="pref_loopClosure_title">闭合圈测</string>
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
   <!-- UNUSED string name="pref_splayExtend_title">估算侧线延展</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">估算侧线延展</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <!-- TODO string name="pref_swapLR_title">在Compass里调换LR</string -->
+  <!-- TODO string name="pref_swapLR_summary">在Compass输出中调换LR</string -->
   <string name="pref_LRExtend_title">估测左/右延展</string>
   <string name="pref_LRExtend_summary">估测左/右延展 (Compass/VisualTopo 输入)</string>
 
@@ -1048,16 +1048,16 @@
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_message">Min-algo group G^M.x weight</string -->
 
-  <!-- TODO string name="pref_log_stream_summary">Log output stream</string -->
-  <!-- TODO string name="pref_log_stream_title">Log stream</string -->
-  <!-- TODO string name="pref_log_bt">Bluetooth</string -->
-  <!-- TODO string name="pref_log_bezier">Bezier curves</string -->
-  <!-- TODO string name="pref_log_calib">Calibration</string -->
-  <!-- TODO string name="pref_log_comm">BT communication</string -->
+  <!-- TODO string name="pref_log_stream_summary">日志输出流</string -->
+  <!-- TODO string name="pref_log_stream_title">日志流</string -->
+  <!-- TODO string name="pref_log_bt">蓝牙</string -->
+  <!-- TODO string name="pref_log_bezier">贝塞尔曲线</string -->
+  <!-- TODO string name="pref_log_calib">校准</string -->
+  <!-- TODO string name="pref_log_comm">蓝牙通讯</string -->
   <!-- OK string name="pref_log_csurvey">cSurvey</string -->
   <string name="pref_log_data">测量数据</string>
   <string name="pref_log_db">数据库</string>
-  <string name="pref_log_debug">Debug</string>
+  <string name="pref_log_debug">故障排除</string>
   <string name="pref_log_device">设备窗口</string>
   <!-- OK string name="pref_log_distox">DistoX</string -->
   <string name="pref_log_err">错误</string>
