@@ -481,7 +481,7 @@
     <string name="button_read"      >Lesen      </string>
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
-    <!-- TODO string name="button_replace"   >Replace   </string -->
+    <string name="button_replace"   >Ersetzen   </string>
     <string name="button_reset"     >Zurücksetzen</string>
     <string name="button_left"      >LINKS</string>
     <string name="button_right"     >RECHTS</string>
@@ -502,7 +502,7 @@
     <string name="mode_station">Messpunkte</string>
     <string name="mode_grid">Gitter</string>
     <string name="mode_fixed">Fester Rahmen</string>
-    <!-- TODO string name="mode_outline">Outline only</string -->
+    <string name="mode_outline">Nur Umriss</string>
 
     <!-- UNUSED string name="remote_title">DistoX Fernbedienung</string -->
     <string name="remote_on">Laser AN</string>
@@ -518,14 +518,14 @@
     <string name="btn_import">Importieren</string>
     <string name="btn_install">Neu installieren</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <string name="symbol_archeo">Archäologie</string>
+    <string name="symbol_bio">Biologie</string>
+    <string name="symbol_geo">Geologie</string>
+    <string name="symbol_mine">Bergbau</string>
+    <string name="symbol_paleo">Paläontologie</string>
+    <string name="symbol_speleo">Speläologie</string>
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <string name="symbol_reload">Zeichenwerkzeuge</string>
 
 
 <!-- FIXME_SKETCH_3D -->    
@@ -790,10 +790,10 @@
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
   <string name="pref_svg_grid_title">SVG Gitter</string>
   <string name="pref_svg_grid_summary">Gitter zu SVG hinzufügen</string>
-  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
-  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
-  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
-  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
+  <string name="pref_kml_stations_title">KML Stationen</string>
+  <string name="pref_kml_stations_summary">Stationen zu KML Export hinzufügen</string>
+  <string name="pref_kml_splays_title">KML Hilfslinien</string>
+  <string name="pref_kml_splays_summary">Hilfslinien zu KML Export hinzufügen</string>
 
   <string name="pref_sock_type_title">Anschlussart</string>
   <string name="pref_sock_type_summary">Socket erzeugen</string>
