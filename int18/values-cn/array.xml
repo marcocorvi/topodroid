@@ -5,13 +5,13 @@
   <!-- FIXME string-array name="unitGrid">
      <item name="meter">米</item>
      <item name="yard">码</item>
-     <item name="two_tf">2 feet</item>
+     <item name="two_tf">2 英尺</item>
   </string-array -->
 
   <!-- TODO string-array name="loopClosure">
-     <item name="none">None</item>
-     <item name="normal">Normal</item>
-     <item name="triangles">Triangles</item>
+     <item name="none">无</item>
+     <item name="normal">正常</item>
+     <item name="triangles">三角形</item>
   </string-array -->
 
   <string-array name="wallsType">
@@ -72,15 +72,15 @@
      <item name="normal">正常模式</item>
      <item name="advanced">高级模式</item>
      <item name="expert">开发模式</item>
-     <!-- item name="complete">Complete</item -->
+     <!-- item name="complete">完全模式</item -->
   </string-array>
 
   <string-array name="sizeButtons">
      <item name="small">小</item>
-     <item name="normal">Normal</item>
-     <item name="medium">Medium</item>
+     <item name="normal">正常</item>
+     <item name="medium">中等</item>
      <item name="large">大</item>
-     <item name="huge">Huge</item>
+     <item name="huge">特大</item>
   </string-array>
 
   <string-array name="logStream">
@@ -91,9 +91,8 @@
   <!-- TODO string-array name="connMode">
      <item name="batch">按需</item>
      <item name="continuous">保持连接</item>
-     <item name="multi">Multi</item>
+     <item name="multi">多功能连接</item>
   </string-array -->
-
   <!-- UNUSED string-array name="altitudeType">
     <item name="wgs84">WGS84</item>
     <item name="asl">海拔</item>
@@ -110,15 +109,15 @@
      <item name="back">射线, 后测主线</item>
      <item name="for2">前测主线, 射线</item>
      <item name="back2">后测主线, 射线</item>
-     <item name="anomaly">后视</item>
-     <item name="tripod">Tripod</item>
+     <item name="anomaly">后测</item>
+     <item name="tripod">脚架测量</item>
   </string-array>
 
   <string-array name="pickerType">
      <item name="recent">最近</item>
      <item name="list">列表</item>
      <item name="grid">网格</item>
-     <item name="grid3">Triple grid</item>
+     <item name="grid3">全部显示</item>
   </string-array>
 
   <!-- TODO string-array name="sectionStations">
