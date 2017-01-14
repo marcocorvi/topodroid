@@ -153,11 +153,11 @@
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H элипсоид. </string>
+    <string name="h_ellipsoid">H эллипсоид </string>
     <string name="h_geoid">H геоид </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="h_ellipsoid_hint">H элипсоид. [метры]</string>
+    <string name="h_ellipsoid_hint">H эллипсоид [метры]</string>
     <string name="h_geoid_hint">H геоид [метры]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
@@ -465,7 +465,7 @@
     <string name="button_read"      >Считать   </string>
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
-    <!-- TODO string name="button_replace"   >Replace   </string -->
+    <string name="button_replace"   >Замена   </string>
     <string name="button_reset"     >Сброс     </string>
     <string name="button_left"      >ЛЕВО</string>
     <string name="button_right"     >ПРАВО</string>
@@ -503,14 +503,14 @@
     <string name="btn_import">Импорт</string>
     <string name="btn_install">Установитъ</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <string name="symbol_archeo">Архео.</string>
+    <string name="symbol_bio">Биология</string>
+    <string name="symbol_geo">Геология</string>
+    <string name="symbol_mine">Шахты</string>
+    <string name="symbol_paleo">Палео</string>
+    <string name="symbol_speleo">Спелео</string>
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <string name="symbol_reload">Инструменты Рисования</string>
 
 <!-- FIXME_SKETCH_3D -->    
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
@@ -767,10 +767,10 @@
   <string name="pref_svg_grid_summary">Добавить сетку в SVG экспорт</string>
   <!-- TODO string name="pref_svg_in_html_title">SVG in HTML</string -->
   <!-- TODO string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
-  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
-  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
-  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
-  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
+  <string name="pref_kml_stations_title">Пикеты в KML</string>
+  <string name="pref_kml_stations_summary">Добавить пикеты в экспорт KML</string>
+  <string name="pref_kml_splays_title">Бок. замеры в KML</string>
+  <string name="pref_kml_splays_summary">Добавить боковые замеры в экспорт KML</string>
 
   <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Socket создать</string>
