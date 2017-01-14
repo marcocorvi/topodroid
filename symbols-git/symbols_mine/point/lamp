@@ -4,10 +4,10 @@ th_name lamp
 color 0x33ffff
 csurvey 0 0 0
 path
-  moveTo -4 0
-  cubicTo -4 4 4 4 4 0
-  lineTo -4 0
-  lineTo 0 -6 
-  lineTo 4 0
+  moveTo -6 0
+  cubicTo -6 6 6 6 6 0
+  lineTo -6 0
+  lineTo 0 -9 
+  lineTo 6 0
 endpath
 endsymbol

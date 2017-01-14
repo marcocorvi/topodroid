@@ -6,6 +6,6 @@ color 0xff6699
 csurvey 0 0 0
 path
   addCircle 0 0 7.5
-  addCircle 0 0 6
+  addCircle 0 0 5
 endpath
 endsymbol

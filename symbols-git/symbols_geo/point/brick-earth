@@ -4,14 +4,14 @@ th_name brick-earth
 color 0xcc9966
 csurvey 0 0 0
 path
-  moveTo -8 0
-  lineTo -3 0
-  moveTo 3 0 
-  lineTo 8 0
-  moveTo -3 3
-  lineTo -3 -3
-  lineTo 3 -3
-  lineTo 3 3
-  lineTo -3 3
+  moveTo -12 0
+  lineTo -4.5 0
+  moveTo 4.5 0 
+  lineTo 12 0
+  moveTo -4.5 4.5
+  lineTo -4.5 -4.5
+  lineTo 4.5 -4.5
+  lineTo 4.5 4.5
+  lineTo -4.5 4.5
 endpath
 endsymbol

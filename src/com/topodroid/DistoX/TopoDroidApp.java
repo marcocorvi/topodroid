@@ -861,6 +861,9 @@ public class TopoDroidApp extends Application
             old = new File( TDPath.getSurveyPlotSvgFile( mySurvey, p.name ) );
             nev = new File( TDPath.getSurveyPlotSvgFile( name, p.name ) );
             if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
+            old = new File( TDPath.getSurveyPlotHtmFile( mySurvey, p.name ) ); // SVG in HTML
+            nev = new File( TDPath.getSurveyPlotHtmFile( name, p.name ) );
+            if ( old.exists() && ! nev.exists() ) old.renameTo( nev );
             old = new File( TDPath.getSurveyPlotPngFile( mySurvey, p.name ) );
             nev = new File( TDPath.getSurveyPlotPngFile( name, p.name ) );
             if ( old.exists() && ! nev.exists() ) old.renameTo( nev );

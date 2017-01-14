@@ -4,13 +4,13 @@ th_name till
 color 0xccff66
 csurvey 0 0 0 
 path
-  moveTo 0 4
-  lineTo -3 -2
-  lineTo 3 -2
-  lineTo 0 4
-  moveTo -6 0 
-  lineTo -2 0
-  moveTo 6 0
-  lineTo 2 0
+  moveTo 0 6
+  lineTo -4.5 -3
+  lineTo 4.5 -3
+  lineTo 0 6
+  moveTo -9 0 
+  lineTo -3 0
+  moveTo 9 0
+  lineTo 3 0
 endpath
 endsymbol

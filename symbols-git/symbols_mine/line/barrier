@@ -1,13 +1,14 @@
 symbol line
 name barrier
 th_name barrier
+group barrier
 color 0xffcc33 
 width 2
 csurvey 2 1 3 5
 effect
   moveTo 0 0
-  lineTo 4 4
-  lineTo 8 0
+  lineTo 6 6
+  lineTo 12 0
   lineTo 0 0
 endeffect
 endsymbol

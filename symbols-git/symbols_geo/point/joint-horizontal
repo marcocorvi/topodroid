@@ -4,14 +4,14 @@ th_name joint-horizontal
 color 0xcccc99
 csurvey 0 0 0
 path
-  moveTo -6 0
-  lineTo 6 0
-  moveTo 0 -6
-  lineTo 0 6
-  moveTo 3 -3
-  lineTo 3 3
-  lineTo -3 3
-  lineTo -3 -3
-  lineTo 3 -3
+  moveTo -7 0
+  lineTo 7 0
+  moveTo 0 -7
+  lineTo 0 7
+  moveTo 4 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo -4 -4
+  lineTo 4 -4
 endpath
 endsymbol

@@ -4,10 +4,10 @@ th_name marine
 color 0x6699ff
 csurvey 0 0 0
 path
-  moveTo -5 3
-  lineTo -5 -3
-  lineTo 0 3
-  lineTo 5 -3
-  lineTo 5 3
+  moveTo -7.5 4.5
+  lineTo -7.5 -4.5
+  lineTo 0 4.5
+  lineTo 7.5 -4.5
+  lineTo 7.5 4.5
 endpath
 endsymbol

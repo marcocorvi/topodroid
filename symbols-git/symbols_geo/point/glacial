@@ -4,14 +4,14 @@ th_name glacial
 color 0x99ccff
 csurvey 0 0 0
 path
-  addCircle 0 0 4
-  moveTo -7 0
-  lineTo -4 0
-  moveTo 4 0
-  lineTo 7 0
-  moveTo 0 4
-  lineTo -3 -2
-  lineTo 3 -2
-  lineTo 0 4
+  addCircle 0 0 6
+  moveTo -10.5 0
+  lineTo -6 0
+  moveTo 6 0
+  lineTo 10.5 0
+  moveTo 0 6
+  lineTo -4.5 -3
+  lineTo 4.5 -3
+  lineTo 0 6
 endpath
 endsymbol

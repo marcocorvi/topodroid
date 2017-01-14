@@ -1,13 +1,13 @@
 symbol point
 name borehole-abandoned
 th_name borehole-abandoned
-color 0xcccccc
+color 0xff9933
 csurvey 0 0 0
 path
-  addCircle 0 0 4
-  moveTo 0 4
-  lineTo 0 -4
-  moveTo 4 0
-  lineTo -4 0
+  addCircle 0 0 6
+  moveTo 0 6
+  lineTo 0 -6
+  moveTo 6 0
+  lineTo -6 0
 endpath
 endsymbol

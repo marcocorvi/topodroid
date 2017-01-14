@@ -53,6 +53,7 @@ public class TDPath
   final static String TRO = ".tro";
   final static String TXT = ".txt";
   final static String ZIP = ".zip";
+  final static String HTML = ".html";
     
 
   // ------------------------------------------------------------
@@ -324,6 +325,7 @@ public class TDPath
 
   static String getSurveyPlotDxfFile( String survey, String name ) { return PATH_DXF + survey + "-" + name + DXF ; }
   static String getSurveyPlotSvgFile( String survey, String name ) { return PATH_SVG + survey + "-" + name + SVG ; }
+  static String getSurveyPlotHtmFile( String survey, String name ) { return PATH_SVG + survey + "-" + name + HTML ; }
   static String getSurveyPlotTdrFile( String survey, String name ) { return PATH_TDR + survey + "-" + name + TDR ; }
   static String getSurveyPlotTh2File( String survey, String name ) { return PATH_TH2 + survey + "-" + name + TH2 ; }
   static String getSurveyPlotPngFile( String survey, String name ) { return PATH_PNG + survey + "-" + name + PNG ; }
@@ -345,7 +347,13 @@ public class TDPath
   static String getTh2FileWithExt( String name ) { return getFile( PATH_TH2, name, TH2 ); }
   static String getTh3FileWithExt( String name ) { return getFile( PATH_TH3, name, TH3 ); }
   static String getDxfFileWithExt( String name ) { return getFile( PATH_DXF, name, DXF ); }
-  static String getSvgFileWithExt( String name ) { return getFile( PATH_SVG, name, SVG ); }
+  static String getSvgFileWithExt( String name ) 
+  { 
+    if ( TDSetting.mSvgInHtml ) {
+      return getFile( PATH_SVG, name, HTML );
+    }
+    return getFile( PATH_SVG, name, SVG );
+  }
   static String getPngFileWithExt( String name ) { return getFile( PATH_PNG, name, PNG ); }
 
   static String getSurveyZipFile( String survey ) { return getFile( PATH_ZIP, survey, ZIP ); }
@@ -566,6 +574,7 @@ public class TDPath
       t = new File( getSurveyPlotPngFile( survey, p.name ) ); if ( t.exists() ) t.delete();
       t = new File( getSurveyPlotDxfFile( survey, p.name ) ); if ( t.exists() ) t.delete();
       t = new File( getSurveyPlotSvgFile( survey, p.name ) ); if ( t.exists() ) t.delete();
+      t = new File( getSurveyPlotHtmFile( survey, p.name ) ); if ( t.exists() ) t.delete(); // SVG in HTML
     }
   }
 

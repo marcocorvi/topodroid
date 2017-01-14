@@ -4,13 +4,13 @@ th_name foliation-horizontal
 color 0xcccc99
 csurvey 0 0 0 
 path
-  moveTo -6 2 
-  lineTo 6 2
-  moveTo -6 -2 
-  lineTo 6 -2
-  moveTo 2 -6
-  lineTo 2 6
-  moveTo -2 -6
-  lineTo -2 6
+  moveTo -7 2 
+  lineTo 7 2
+  moveTo -7 -2 
+  lineTo 7 -2
+  moveTo 2 -7
+  lineTo 2 7
+  moveTo -2 -7
+  lineTo -2 7
 endpath
 endsymbol

@@ -98,8 +98,9 @@ class DrawingSvg
 
     try {
 
-      // SVG_IN_HTML
-      // out.write("<html>\n<body>\n");
+      if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
+        out.write("<!DOCTYPE html>\n<html>\n<body>\n");
+      }
 
       // header
       out.write( "<svg width=\"" + width + "\" height=\"" + height + "\"\n" );
@@ -113,9 +114,12 @@ class DrawingSvg
       out.write( "    </marker>\n"); 
       out.write( "  </defs>\n");
 
-      // out.write( "<g transform=\"translate(" + (int)( 100 + ((xmin < 0)? -xmin : 0) ) + ","
-      //            + (int)( 100 + ((ymin < 0)? -ymin : 0) ) + ")\" >\n" );
-      out.write( "<g>\n");
+      if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
+        out.write( "<g transform=\"translate(" + (int)( 100 + ((xmin < 0)? -xmin : 0) ) + ","
+                   + (int)( 100 + ((ymin < 0)? -ymin : 0) ) + ")\" >\n" );
+      } else {
+        out.write( "<g>\n");
+      }
 
       // ***** FIXME TODO POINT SYMBOLS
       // {
@@ -285,8 +289,9 @@ class DrawingSvg
       out.write("</g>\n");
       out.write("</svg>\n");
 
-      // SVG_IN_HTML
-      // out.write("</body></html>\n");
+      if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
+        out.write("</body>\n</html>\n");
+      }
 
       out.flush();
     } catch ( IOException e ) {

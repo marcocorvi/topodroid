@@ -4,15 +4,15 @@ th_name ladder
 color 0xcccccc
 csurvey 0 0 0
 path
-  moveTo -2 -5
-  lineTo -2 5
-  moveTo 2 -5
-  lineTo 2 5
-  moveTo -2 3
-  lineTo 2 3
-  moveTo -2 0
-  lineTo 2 0
-  moveTo -2 -3
-  lineTo 2 -3
+  moveTo -3 -7.5
+  lineTo -3 7.5
+  moveTo 3 -7.5
+  lineTo 3 7.5
+  moveTo -3 4.5
+  lineTo 3 4.5
+  moveTo -3 0
+  lineTo 3 0
+  moveTo -3 -4.5
+  lineTo 3 -4.5
 endpath
 endsymbol

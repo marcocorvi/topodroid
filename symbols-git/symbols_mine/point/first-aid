@@ -4,14 +4,14 @@ th_name fisrt-aid
 color 0xffffff
 csurvey 0 0 0 
 path
-  moveTo -4 -4
-  lineTo 4 -4
-  lineTo 4 4
-  lineTo -4 4
-  lineTo -4 -4
-  moveTo 0 2
-  lineTo 0 -2
-  moveTo 2 0
-  lineTo -2 0
+  moveTo -6 -6
+  lineTo 6 -6
+  lineTo 6 6
+  lineTo -6 6
+  lineTo -6 -6
+  moveTo 0 3
+  lineTo 0 -3
+  moveTo 3 0
+  lineTo -3 0
 endpath
 endsymbol

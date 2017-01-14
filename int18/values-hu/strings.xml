@@ -764,6 +764,8 @@
   <string name="pref_survex_lrud_summary">Add LRUD to Survex export*BJFL értékek hozzáadása Survex exportnál</string>
   <!-- TODO string name="pref_svg_grid_title">SVG grid</string -->
   <!-- TODO string name="pref_svg_grid_summary">Add grid to SVG export</string -->
+  <!-- TODO string name="pref_svg_in_html_title">SVG in HTML</string -->
+  <!-- TODO string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
   <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
   <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
   <!-- TODO string name="pref_kml_splays_title">KML splays</string -->

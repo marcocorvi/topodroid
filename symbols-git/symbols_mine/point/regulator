@@ -4,9 +4,9 @@ th_name regulator
 color 0xffffff
 csurvey 0 0 0
 path
-  moveTo -2 4
-  lineTo -2 -4
-  cubicTo 2 -4 2 0 -2 0
-  lineTo  2 4
+  moveTo -3 6
+  lineTo -3 -6
+  cubicTo 3 -6 3 0 -3 0
+  lineTo  3 6
 endpath
 endsymbol

@@ -1,13 +1,13 @@
 symbol point
 name borehole-closed
 th_name borehole-closed
-color 0xcccccc
+color 0xff9933
 csurvey 0 0 0
 path
-  addCircle 0 0 4
-  moveTo 3 -3
-  lineTo -3 3
-  moveTo 3 3
-  lineTo -3 -3
+  addCircle 0 0 6
+  moveTo 4.5 -4.5
+  lineTo -4.5 4.5
+  moveTo 4.5 4.5
+  lineTo -4.5 -4.5
 endpath
 endsymbol

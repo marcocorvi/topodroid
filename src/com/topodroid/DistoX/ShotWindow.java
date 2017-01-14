@@ -1099,7 +1099,7 @@ public class ShotWindow extends Activity
 
     if ( mPIDp >= 0 ) {
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed
-      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, null );
+      startDrawingWindow( start, name+"p", mPIDp, name+"s", mPIDs, PlotInfo.PLOT_PLAN, start );
     // } else {
     //   Toast.makeText( mActivity, R.string.plot_duplicate_name, Toast.LENGTH_LONG).show();
     }

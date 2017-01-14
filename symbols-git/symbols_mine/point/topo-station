@@ -4,10 +4,10 @@ th_name topo-station
 color 0xff9999
 csurvey 0 0 0
 path
-  addCircle 0 0 1
-  moveTo 0 -5
-  lineTo -3.5 2
-  lineTo 3.5 2
-  lineTo 0 -5
+  addCircle 0 0 2
+  moveTo 0 -7.5
+  lineTo -5.25 3
+  lineTo 5.25 3
+  lineTo 0 -7.5
 endpath
 endsymbol

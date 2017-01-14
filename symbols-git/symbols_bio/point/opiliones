@@ -4,24 +4,24 @@ th_name opiliones
 color 0xff9966
 csurvey 0 0 0
 path
-  addCircle 0 0 2
-  moveTo 1.4 -1.4 
-  lineTo 2.4 -2.4
-  lineTo 4 -6
-  moveTo -1.4 -1.4 
-  lineTo -2.4 -2.4
-  lineTo -4 -6
-  moveTo 1.4 1.4
-  lineTo 4 6
-  moveTo -1.4 1.4
-  lineTo -4 6
-  moveTo 4 -2
-  lineTo 2 0
-  lineTo 3 1.5
-  lineTo 4 2
-  moveTo -4 -2
-  lineTo -2 0
-  lineTo -3 1.5
+  moveTo -2 0
+  cubicTo -2 1 2 1 2 0
+  cubicTo 2 -1 -2 -1 -2 0
+  moveTo -1 3
+  lineTo -6 0
+  lineTo -7 -7
+  lineTo -2 -5
+  lineTo -1 -1 
+  lineTo -2 -4
+  lineTo -6 -4
   lineTo -4 2
+  moveTo 1 3
+  lineTo 6 0
+  lineTo 7 -7
+  lineTo 2 -5
+  lineTo 1 -1 
+  lineTo 2 -4
+  lineTo 6 -4
+  lineTo 4 2
 endpath
 endsymbol

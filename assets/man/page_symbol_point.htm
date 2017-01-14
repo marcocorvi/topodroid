@@ -17,7 +17,6 @@ The point tool file contains lines specifying the property of the drawing tool.
 <li>translated names, eg, "name-es ..." [optional]</li>
 <li>"th_name NAME", where NAME is the Therion name, and must be the same as the filename [mandatory]</li>
 <li>"color rgb" (rgb in hex format) [mandatory]</li>
-<li>"close-horizontal" [optional, false if missing]</li>
 <li>"orientation FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
 <li>"has_text FLAG" [optional, false if missing, true if FLAG is '1' or 'yes']</li>
 <li>"csurvey LAYER TYPE CATEGORY"</li>
@@ -26,8 +25,8 @@ The point tool file contains lines specifying the property of the drawing tool.
 <li>"moveTo X Y"</li>
 <li>"lineTo X Y"</li>
 <li>"cubicTo X1 Y1 X2 Y2 X Y"</li>
-<li>"addCircle X Y R"</li>
-<li>"arcTo X0 Y0 X1 Y1 FROM_ANGLE TO_ANGLE" (direction is CCW)</li>
+<li>"addCircle X Y R": (X,Y) center, R radius</li>
+<li>"arcTo X0 Y0 X1 Y1 FROM_ANGLE SPAN_ANGLE": (X0,Y0 - X1,Y1) bounding rectangle, angles in degrees, 0 along X-axis, direction is CW</li>
 </ul>
 <li>"endpath" marks the end of the tool path</li>
 <li>"endsymbol"</li>

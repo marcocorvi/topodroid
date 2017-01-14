@@ -4,10 +4,10 @@ th_name ore
 color 0x66ff99
 csurvey 0 0 0
 path
-  moveTo -6 0
-  cubicTo -3 -3 -3 -3 0 0
-  cubicTo 3 -3 3 -3 6 0
-  moveTo 0 -4
-  lineTo 0 4
+  moveTo -9 0
+  cubicTo -4.5 -4.5 -4.5 -4.5 0 0
+  cubicTo 4.5 -4.5 4.5 -4.5 9 0
+  moveTo 0 -6
+  lineTo 0 6
 endpath
 endsymbol

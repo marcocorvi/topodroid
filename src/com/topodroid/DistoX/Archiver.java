@@ -107,6 +107,7 @@ public class Archiver
         addEntry( zos, new File( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotDxfFile( survey, plt.name ) ) );
         addEntry( zos, new File( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
+        addEntry( zos, new File( TDPath.getSurveyPlotHtmFile( survey, plt.name ) ) ); // SVG in HTML
         addEntry( zos, new File( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
         if ( plt.type == PlotInfo.PLOT_PLAN ) {
           addEntry( zos, new File( TDPath.getSurveyCsxFile( survey, plt.name ) ) );

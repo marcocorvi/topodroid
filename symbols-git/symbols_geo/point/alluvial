@@ -4,8 +4,8 @@ th_name alluvial
 color 0x3399ff
 csurvey 0 0 0
 path
-  moveTo -6 0
-  cubicTo -3 -3 -3 -3 0 0
-  cubicTo 3 -3 3 -3 6 0
+  moveTo -9 0
+  cubicTo -4.5 -4.5 -4.5 -4.5 0 0
+  cubicTo 4.5 -4.5 4.5 -4.5 9 0
 endpath
 endsymbol

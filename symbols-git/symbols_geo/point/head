@@ -4,11 +4,11 @@ th_name head
 color 0xcccccc
 csurvey 0 0 0
 path
-  moveTo 4 -4
-  cubicTo 0 -8 -6 -4 -6 0 
-  cubicTo -6 4 0 8 4 4
-  moveTo -2 -8
-  lineTo -2 2
-  cubicTo -2 -2 2 -2 2 2
+  moveTo 6 -6
+  cubicTo 0 -12 -9 -6 -9 0 
+  cubicTo -9 6 0 12 6 6
+  moveTo -3 -12
+  lineTo -3 3
+  cubicTo -3 -3 3 -3 3 3
 endpath
 endsymbol

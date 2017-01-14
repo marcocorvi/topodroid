@@ -4,8 +4,8 @@ th_name path
 color 0xffffff
 csurvey 0 0 0
 path
-  addCircle 0 0 3
-  moveTo -6 0
-  lineTo 6 0
+  addCircle 0 0 4.5
+  moveTo -9 0
+  lineTo 9 0
 endpath
 endsymbol

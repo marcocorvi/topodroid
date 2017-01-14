@@ -114,6 +114,13 @@
        android:defaultValue="false"
      />
 
+   <!-- CheckBoxPreference
+       android:key="DISTOX_SVG_IN_HTML"
+       android:summary="@string/pref_svg_in_html_summary"
+       android:title="@string/pref_svg_in_html_title"
+       android:defaultValue="false"
+     / -->
+
    <CheckBoxPreference
        android:key="DISTOX_KML_STATIONS"
        android:summary="@string/pref_kml_stations_summary"

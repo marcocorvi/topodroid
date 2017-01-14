@@ -5,11 +5,11 @@ orientation yes
 color 0xcccc99
 csurvey 0 0 0 
 path
-  moveTo -6 0 
-  lineTo 6 0
-  moveTo 2 -4
+  moveTo -7 0 
+  lineTo 7 0
+  moveTo 2 -5
   lineTo 2 0
-  moveTo -2 -4
+  moveTo -2 -5
   lineTo -2 0
 endpath
 endsymbol

@@ -4,10 +4,10 @@ th_name overcast
 color 0xffffff
 csurvey 0 0 0
 path
-  moveTo -4 -4
-  lineTo 4 4
-  lineTo 4 -4
-  lineTo -4 4
-  lineTo -4 -4
+  moveTo -6 -6
+  lineTo 6 6
+  lineTo 6 -6
+  lineTo -6 6
+  lineTo -6 -6
 endpath
 endsymbol

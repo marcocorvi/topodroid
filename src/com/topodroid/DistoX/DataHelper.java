@@ -86,11 +86,11 @@ public class DataHelper extends DataSetObservable
   // private SQLiteStatement updateShotLegStmt = null;
   private SQLiteStatement updateStationCommentStmt = null;
   // private SQLiteStatement deleteStationStmt = null;
-  private SQLiteStatement updateShotNameStmt = null;
+  // private SQLiteStatement updateShotNameStmt = null;
   private SQLiteStatement updateShotNameAndExtendStmt = null;
-  private SQLiteStatement updateShotExtendStmt = null;
+  // private SQLiteStatement updateShotExtendStmt = null;
   // private SQLiteStatement updateShotFlagStmt = null;
-  private SQLiteStatement updateShotCommentStmt = null;
+  // private SQLiteStatement updateShotCommentStmt = null;
   private SQLiteStatement updateShotAMDRStmt = null;
   // private SQLiteStatement shiftShotsIdStmt = null;
 
@@ -424,9 +424,9 @@ public class DataHelper extends DataSetObservable
       updateShotStmtFull   = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=?, comment=? WHERE surveyId=? AND id=?" );
       updateShotStmt       = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=?, extend=?, flag=?, leg=? WHERE surveyId=? AND id=?" );
 
-      updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
-      updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
-      updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
+      // updateShotNameStmt    = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
+      // updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
+      // updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
       // shiftShotsIdStmt   = myDB.compileStatement( "UPDATE shots SET id=id+1 where surveyId=? and id>=?" );
       // updateShotLegStmt  = myDB.compileStatement( "UPDATE shots SET leg=? WHERE surveyId=? AND id=?" );
       // updateShotFlagStmt = myDB.compileStatement( "UPDATE shots SET flag=? WHERE surveyId=? AND id=?" );
@@ -758,25 +758,14 @@ public class DataHelper extends DataSetObservable
   public void updateShotName( long id, long sid, String fStation, String tStation, boolean forward )
   {
     if ( myDB == null ) return;
-    // StringWriter sw = new StringWriter();
-    // PrintWriter pw = new PrintWriter( sw );
-    // pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
-    //            fStation, tStation, sid, id );
-    // try {
-    //   myDB.execSQL( sw.toString() );
-    // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); }
-
     if ( fStation == null ) fStation = "";
     if ( tStation == null ) tStation = "";
-    if ( updateShotNameStmt == null ) {
-      updateShotNameStmt = myDB.compileStatement( "UPDATE shots SET fStation=?, tStation=? WHERE surveyId=? AND id=?" );
-    }
-    updateShotNameStmt.bindString( 1, fStation );
-    updateShotNameStmt.bindString( 2, tStation );
-    updateShotNameStmt.bindLong(   3, sid );
-    updateShotNameStmt.bindLong(   4, id );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET fStation=\"%s\", tStation=\"%s\" WHERE surveyId=%d AND id=%d",
+               fStation, tStation, sid, id );
     try {
-      updateShotNameStmt.execute();
+      myDB.execSQL( sw.toString() );
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotName( id, sid, fStation, tStation );
       }
@@ -787,11 +776,6 @@ public class DataHelper extends DataSetObservable
   public void updateShotLeg( long id, long sid, long leg, boolean forward )
   {
     // if ( myDB == null ) return;
-    // updateShotLegStmt.bindLong(   1, leg );
-    // updateShotLegStmt.bindLong(   2, sid );
-    // updateShotLegStmt.bindLong(   3, id );
-    // updateShotLegStmt.execute(); 
-
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET leg=%d WHERE surveyId=%d AND id=%d", leg, sid, id );
@@ -811,19 +795,11 @@ public class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return;
 
-    // StringWriter sw = new StringWriter();
-    // PrintWriter pw = new PrintWriter( sw );
-    // pw.format( Locale.US, "UPDATE shots SET extend=%d WHERE surveyId=%d AND id=%d", extend, sid, id );
-    // myDB.execSQL( sw.toString() );
-
-    if ( updateShotExtendStmt == null ) {
-      updateShotExtendStmt  = myDB.compileStatement( "UPDATE shots SET extend=? WHERE surveyId=? AND id=?" );
-    }
-    updateShotExtendStmt.bindLong( 1, extend );
-    updateShotExtendStmt.bindLong( 2, sid );
-    updateShotExtendStmt.bindLong( 3, id );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET extend=%d WHERE surveyId=%d AND id=%d", extend, sid, id );
     try {
-      updateShotExtendStmt.execute();
+      myDB.execSQL( sw.toString() );
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotExtend( id, sid, extend );
       }
@@ -833,12 +809,6 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotFlag( long id, long sid, long flag, boolean forward )
   {
-    // if ( myDB == null ) return;
-    // updateShotFlagStmt.bindLong( 1, flag );
-    // updateShotFlagStmt.bindLong( 2, sid );
-    // updateShotFlagStmt.bindLong( 3, id );
-    // updateShotFlagStmt.execute();
-
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET flag=%d WHERE surveyId=%d AND id=%d", flag, sid, id );
@@ -855,19 +825,11 @@ public class DataHelper extends DataSetObservable
   {
     // if ( myDB == null ) return;
     if ( comment == null ) comment = "";
-    // StringWriter sw = new StringWriter();
-    // PrintWriter pw = new PrintWriter( sw );
-    // pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
-    // myDB.execSQL( sw.toString() );
-
-    if ( updateShotCommentStmt == null ) {
-      updateShotCommentStmt = myDB.compileStatement( "UPDATE shots SET comment=? WHERE surveyId=? AND id=?" );
-    }
-    updateShotCommentStmt.bindString( 1, comment );
-    updateShotCommentStmt.bindLong( 2, sid );
-    updateShotCommentStmt.bindLong( 3, id );
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET comment=\"%s\" WHERE surveyId=%d AND id=%d", comment, sid, id );
     try {
-      updateShotCommentStmt.execute();
+      myDB.execSQL( sw.toString() );
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotComment( id, sid, comment );
       }

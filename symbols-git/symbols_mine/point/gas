@@ -4,14 +4,14 @@ th_name gas
 color 0xffff33
 csurvey 0 0 0
 path
-  moveTo 0 -3
-  lineTo 3 0
-  lineTo 0 3
-  lineTo -3 0
-  lineTo 0 -3
-  lineTo 0 -6
-  lineTo 2 -4
-  moveTo 0 -6
-  lineTo -2 -4
+  moveTo 0 -4.5
+  lineTo 4.5 0
+  lineTo 0 4.5
+  lineTo -4.5 0
+  lineTo 0 -4.5
+  lineTo 0 -9
+  lineTo 3 -6
+  moveTo 0 -9
+  lineTo -3 -6
 endpath
 endsymbol

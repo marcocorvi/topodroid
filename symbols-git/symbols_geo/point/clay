@@ -4,13 +4,13 @@ th_name clay
 color 0xff9933
 csurvey 0 0 0 
 path
-  moveTo -3 -2
-  lineTo 3 -2
-  lineTo 0 3
-  lineTo -3 -2
-  moveTo -7 0
-  lineTo -1.8 0
-  moveTo 1.8 0
-  lineTo 7 0
+  moveTo -4.5 -3
+  lineTo 4.5 -3
+  lineTo 0 4.5
+  lineTo -4.5 -3
+  moveTo -10.5 0
+  lineTo -2.7 0
+  moveTo 2.7 0
+  lineTo 10.5 0
 endpath
 endsymbol

@@ -4,9 +4,9 @@ th_name rock-moutonnee
 color 0xcccc99
 csurvey 0 0 0
 path
-  moveTo 0 -6
-  cubicTo 4 -5 4 -1 0 0
-  cubicTo 4 1 4 5 0 6
-  cubicTo 8 6 8 -6 0 -6 
+  moveTo 0 -9
+  cubicTo 6 -7.5 6 -1.5 0 0
+  cubicTo 6 1.5 6 7.5 0 9
+  cubicTo 12 9 12 -9 0 -9
 endpath
 endsymbol
