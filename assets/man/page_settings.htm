@@ -3,18 +3,44 @@
 
 <b>GENERAL SETTINGS</b><br>
 <ul>
-<li>Work directory. Default "unset" (ie "TopoDroid")</li>
-<li>Text size &gt;= 1. Default 14</li>
-<li>Buttons size {small, big}. Default small</li>
-<li>Activity level {basic,normal,advanced,experimental}. Default normal</li>
-<li>Cosurveying service. Default NO</li>
-<li>Language {en,es,fr,de,it,ru,bg}. Default "unset" (i.e. locale)</li>
+<li><a href="page_cwd.htm">Work directory.</a> Default "unset" (ie "TopoDroid")</li>
+<li>Text size: size of the text in lists. &gt;= 1. Default 14</li>
+<li>Buttons size {small, normal, medium, large, huge}. Default normal</li>
+<li>Level of features {basic, normal, advanced, expert}. Default normal</li>
+<li>Keyboard. Enable <a href="page_keypad.htm">custom keyboards</a> instead of Andrid default keyboard.</li>
+<li>Cosurveying service. Default OFF</li>
+<li><a href="page_language.htm">Language</a> {default,en,fr,es,it,ru,de,pg,slo,bg,cn,ukr,hu}. Default "default" (i.e. locale)</li>
 </ul><br><p>
 
-<b>SURVEY SETTINGS</b><br>
+<b>IMPORT/EXPORT SETTINGS</b><br>
 <ul>
-<li>Team. Default "unset"</li>
-<li>Survey stations naming policy {none, splay+fore, splay+back, fore+splay, back+splay, back+splay+fore}. Default "splay+fore".</li>
+<li><a href="page_pt_cmap.htm">PocketTopo color map</a> Map PocketTopo colours to TopoDroid objecs</li>
+<li>Estimate LR extend on import of Compass and Visual Topo files, Default YES</li>
+<li>Default data export type {th,svx,dat,srv,top,tro,dxf,svg,csv} default th</li>
+<li>Default scetch export type {none,th,csx,dxf,svg,png} default th</li>
+<li>Therion maps first: export therion maps before survey data. default OFF</li>
+<li>Therion stations: Add station points to Therion scraps. Default YES</li>
+<li>Therion splays: Add splay lines to Therion scraps. Default YES</li>
+<li>Compass station prefix. Default NO</li>
+<li>Compass LRUD splay angle. LRUD minimum splay-leg angle.</li>
+<li>Compass swap LR. Swap L and R on Compass export.</li>
+<li>Survex/Topo line termination {Linux,Windows}. Default Linux</li>
+<li>Survex splays TO station. Default NO</li>
+<li>Survex LRUD. Add LRUD to Survex export. Default NO</li>
+<li>SVG grid. Add grid to SVG export. Default OFF</li>
+<li>KML stations. Add stations to KML export Default ON</li>
+<li>KML splays. Add splays to KML export Default OFF</li>
+<li>PNG resolution [0.5, 10]. Default 1.5 [x200 px]</li>
+<li>PNG background color (RGB in 0-100). Default "0 0 0" [black]</li>
+<li>DXF sketch scale. Default 1</li>
+<li>DXF splay endpoints. Default ON</li>
+<!--li>AutoCAD version {6,12}. Default 6</li-->
+</ul><br><p>
+
+<b>SURVEY DATA</b><br>
+<ul>
+<li>Team. Default survey team. Default "unset"</li>
+<li>Stations Policy: Survey stations naming policy {none, splay+fore, splay+back, fore+splay, back+splay, back+splay+fore, tripod}. Default "splay+fore".</li>
 <li>Station names {alphanumeric,numeric}. Default alphanumeric</li>
 <li>Initial station name. Default "unset"</li>
 <li>Photo thumbnails size [80,400]. Default 200 pxl</li>
@@ -23,41 +49,45 @@ UNITS
 <ul>
 <li>Length units {m,ft}. Default m</li>
 <li>Angle units {deg,grad}. Default deg</li>
-<li>Sketch grid units {m,yd}. Default m</li>
+<li>Sketch grid units {m,yd,2ft}. Default m</li>
 </ul>
-SHOTS
+SHOT DATA
 <ul>
-<li>Leg shot closeness &gt; 0 [percent]. Default 0.05 (5%)</li>
-<li>Minimum number of shots per leg &gt;=2. Default 2</li>
-<li>Limit for splay extend "vertical" [0,90]. Default 10 deg</li>
-<li>Leg V threshold [0,90]. Default 80 deg</li>
-<li>Settable "extend" reference. Default NO</li>
+<li>Leg tolerance. Tolerance among the shots of same leg &gt; 0 [percent]. Default 0.05 (5%)</li>
+<li>Minimum Leg shots. Minimum number of shots per leg &gt;=2. Default 2</li>
+<li>Splay vertical threshold. Limit for splay extend "vertical" [0,90]. Default 10 deg</li>
+<li>Leg vertical threshold. Leg V threshold [0,90]. Default 80 deg</li>
+<li>Settable "extend" reference. Settable or fixed extend L/R reference. Default NO</li>
 <li>Loop closure. Default "none"</li>
+<li>Prev/Next buttons. Default ON</li>
 <li>Backsight in user entered shot dialog. Default NO</li>
 <li>Magnetic anomaly compensation. Default NO</li>
 <li>Shot direction delay (timer). Default 10 s</li>
-<li>Shot direction timer volume [10,100]. Default 50 percent</li>
+<li>Shot direction timer beep volume [10,100]. Default 50 percent</li>
 </ul>
 LOCATION
 <ul>
 <li>Location units {ddmmss, dec.deg}. Default ddmmss</li>
+<li>CRS. Name of CRS like in Proj4. Default Long-Lat</li>
 </ul>
 ACCURACY
 <ul>
-<li>Accel. threshold &gt; 0. Default 400</li>
-<li>Magn. threshold &gt; 0. Default 300</li>
-<li>Dip threshold &gt; 0. Default 3 deg</li>
+<li>Acceleration tolerance &gt; 0. Default 400</li>
+<li>Magnetic field tolerance &gt; 0. Default 300</li>
+<li>Magnetic Dip tolerance &gt; 0. Default 3 deg</li>
 </ul>
 <br><p>
 
-<b>SKETCH SETTINGS</b><br>
+<b>SKETCHING</b><br>
 <ul>
-<li>Drawing tool picker {recent,list,grid}. Default recent</li>
+<li>Drawing tool picker {recent,list,grid,triple grid}. Default recent</li>
 <li>Recent tool number {3, 4, 5, 6}. Default 4</li>
-<li>Side drag. Default NO</li>
+<li>Side drag. Enable side dreg in sketch window. Default OFF</li>
 <li>Zoom controls {off,temporary,permanent}. Default permanent</li>
-<li>Check dangling shots. Default NO</li>
-<li>Save areas in xtherion-"style". Default NO</li>
+<li>Midline check. Check if stations are attached to midline. Default ON</li>
+<li>Backup number. Default 5</li>
+<li>Backup interval. Default 60</li>
+<!--li>Save areas in xtherion-"style". Default NO</li-->
 </ul>
 POINT TOOLS
 <ul>
@@ -69,20 +99,24 @@ LINE TOOLS
 <ul>
 <li>Lines width (N.B. wall line are twice this). Default 1 px</li>
 <li>Line style {Bezier,fine,normal,coarse}. Default normal</li>
-<li>Minimum distance between line points. Default 10 px</li>
+<li>Line-point spacing. Minimum distance between line points. Default 10 px</li>
 <li>Section lines "direction tick" size [1,20]. Default 8 [x unit]</li>
+<li>Section points. Add Therion section point to section line. Default ON</li>
 <li>Area border visibility. Default YES</li>
 <li>Bezier line accuracy. Default 1</li>
 <li>Bezier line corner threshold. Default 20</li>
 </ul>
 SKETCH ITEMS
 <ul>
-<li>Survey lines width [0.5,10]. Default 1 px</li>
-<li>Station names size. Default 24 px</li>
+<li>Survey line width [0.5,10]. Default 1 px</li>
+<li>Station name size. Default 24 px</li>
 <li>Green dots radius [0.5,100]. Default 5 px</li>
 <li>Selection radius &gt;= 0. Default 24</li>
+<li>Eraser size. Default 36</li>
+<li>Shift sensitivity. Default 60</li>
+<li>Pointing radius. Default 16</li>
 <li>Splay plan-view threshold [0,90]. Default 80 deg</li>
-<li>Dashed splay clino threshold [0,90]. Default 50 deg</li>
+<li>Splay dashed clino threshold [0,90]. Default 50 deg</li>
 <li>Cross-section H threshold [0,90]. Default 70 deg</li>
 </ul>
 AUTO-WALLS
@@ -96,39 +130,26 @@ AUTO-WALLS
 </ul>
 <br><p>
 
-<b>IMPORT/EXPORT SETTINGS</b><br>
+<b>DEVICES</b><br>
 <ul>
-<li>PocketTopo color map</li>
-<li>Estimate LR extend on import, Default YES</li>
-<li>Default data export type {th,svx,dat,srv,top,tro,dxf,svg,csv} default th</li>
-<li>Add stations to Therion scraps. Default YES</li>
-<li>cSurvey station prefix. Default NO</li>
-<li>Survex line termination {Linux,Windows}. Default Linux</li>
-<li>Survex splays TO station. Default NO</li>
-<li>Survex LRUD. Default NO</li>
-<li>CSV length units {m,ft}. Default meters</li>
-<li>PNG resolution [0.5, 10]. Default 1.5 [x200 px]</li>
-<li>PNG background color (RGB in 0-100). Default "0 0 0" [black]</li>
-<li>DXF sketch scale. Default 1</li>
-<li>AutoCAD version {6,12}. Default 6</li>
-</ul><br><p>
-
-<b>DEVICE SETTINGS</b><br>
-<ul>
-<li>Check if BT is enabled. Default YES</li>
+<li>Bluetooth. Check if BT is enabled on start. Default YES</li>
 <li>Connection data mode {on-demand,continuous}. Default on-demand</li>
 <li>Auto reconnect (in continuous mode). Default FALSE</li>
 <li>BT socket type {normal,insecure}. Default normal</li>
 <li>Z6 workaround. Default YES</li>
-<li>Connection setup retries &gt;= 0. Default 0</li>
+<li>Connection delay &gt;= 0. Default 2</li>
 <li>Autopairing. Default YES</li>
+<li>Data pause [ms]. Default 50</li>
+<li>Data ready wait delay [ms]. Default 100</li>
+<li>Laser pause [ms]. Default 1000</li>
+<li>Shot pause [ms]. Default 4000</li>
 </ul><br><p>
 
 <b>CALIBRATION SETTINGS</b><br>
 <ul>
 <li>Group policy {4x4+M,Nx4,distance). Default Nx4
-<li>Group distance threshold. Default 40 [deg]</li>
-<li>Calibration epsilon. Default 0.000001</li>
+<li>Group tolerance. Default 40 [deg]</li>
+<li>Calibration epsilon. Algorithm error. Default 0.000001</li>
 <li>Calibration maximum iterations. Default 200</li>
 <li>Show calibration raw data. Default NO</li>
 <li>Calibration algorithm {auto,linear,non-linear}. Default auto</li>
