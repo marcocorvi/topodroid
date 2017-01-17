@@ -171,7 +171,7 @@ public class FixedAddDialog extends MyDialog
       return;
     } else if ( b == mBtnView ) {
       if ( getLngLat() ) {
-        Uri uri = Uri.parse( "geo:" + mLat + "," + mLng );
+        Uri uri = Uri.parse( "geo:" + mLat + "," + mLng + "?q=" + mLat + "," + mLng );
         mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
       }
     } else if ( b == mBtnOK ) {

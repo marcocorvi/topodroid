@@ -229,7 +229,7 @@ public class FixedImportDialog extends MyDialog
       }
     } else if ( b == mBtnView ) {
       if ( isSet ) {
-        Uri uri = Uri.parse( "geo:" + mLat + "," + mLng );
+        Uri uri = Uri.parse( "geo:" + mLat + "," + mLng + "?q=" + mLat + "," + mLng );
         mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
       } else {
         do_toast = true;

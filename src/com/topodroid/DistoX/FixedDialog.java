@@ -245,7 +245,7 @@ public class FixedDialog extends MyDialog
       mParent.tryProj4( this, cs_to, mFxd );
       return;
     } else if ( b == mButtonView ) {
-      Uri uri = Uri.parse( "geo:" + mFxd.lat + "," + mFxd.lng );
+      Uri uri = Uri.parse( "geo:" + mFxd.lat + "," + mFxd.lng + "?q=" + mFxd.lat + "," + mFxd.lng );
       mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
     } else if ( b == mButtonDrop ) {
       mParent.dropFixed( mFxd );
