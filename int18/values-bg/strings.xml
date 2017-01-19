@@ -73,7 +73,7 @@
     <string name="calib_ave_std">Точност: %1$.4f %2$.4f градуси</string>
     <string name="calib_precision">Прецизност</string>
     <string name="calib_iter">Повторения: %1$d</string>
-    <!-- TODO string name="calib_reset">Reset DistoX calibration ?</string -->
+    <string name="calib_reset">Нулиране на DistoX калибрация?</string>
 
     <string name="algorithm">Алгоритъм:</string>
     <string name="auto">автоматичен</string>
@@ -351,7 +351,7 @@
     <string name="shot_info">Въведете данни за отсечката</string>
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
-    <!-- TODO string name="shot_not_found">Found no shot</string -->
+    <string name="shot_not_found">Не е намерена отсечка</string>
     <string name="shot_reverse">обръщане</string>
     <string name="shot_to">до</string>
 
@@ -466,7 +466,7 @@
     <string name="button_read"      >Четене    </string>
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
-    <!-- TODO string name="button_replace"   >Replace   </string -->
+    <string name="button_replace"   >Подмяна   </string>
     <string name="button_reset"     >Нулиране   </string>
     <string name="button_left"      >Наляво</string>
     <string name="button_right"     >Надясно</string>
@@ -488,7 +488,7 @@
     <string name="mode_station">Реперни точки</string>
     <string name="mode_grid">Мащабна мрежа</string>
     <string name="mode_fixed">Преместване на скица</string>
-    <!-- TODO string name="mode_outline">Outline only</string -->
+    <string name="mode_outline">Само очертания</string>
 
     <!-- UNUSED string name="remote_title">Дист. управление</string -->
     <string name="remote_on">Вкл. лазер</string>
@@ -504,14 +504,14 @@
     <string name="btn_import">Импортиране</string>
     <string name="btn_install">Инсталиране</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <string name="symbol_archeo">Археология</string>
+    <string name="symbol_bio">Биология</string>
+    <string name="symbol_geo">Геология</string>
+    <string name="symbol_mine">Минни разр.</string>
+    <string name="symbol_paleo">Палео</string>
+    <string name="symbol_speleo">Спелео</string>
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <string name="symbol_reload">Символи за рисуване</string>
 
 <!-- FIXME_SKETCH_3D -->
     <string name="title_sketch">[%1$s] %2$s %3$s %4$s</string>
@@ -680,7 +680,7 @@
     <!-- UNUSED string name="title_coord">Въведете координати на точката:</string -->
     <string name="title_current_station">Записани репери</string>
     <string name="title_device">DistoX устройства</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
+    <string name="title_device_select">Изберете DistoX</string>
     <string name="title_discover">Сканиране за DistoX устройства…</string>
     <string name="title_draw">Рисуване</string>
     <string name="title_draw_area">Площ %1$s</string>
@@ -766,12 +766,12 @@
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
   <string name="pref_svg_grid_title">SVG мрежа</string>
   <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
-  <!-- TODO string name="pref_svg_in_html_title">SVG in HTML</string -->
-  <!-- TODO string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
-  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
-  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
-  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
-  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
+  <string name="pref_svg_in_html_title">SVG в HTML</string>
+  <string name="pref_svg_in_html_summary">Вмъкване на SVG експорт в HTML</string>
+  <string name="pref_kml_stations_title">KML репери</string>
+  <string name="pref_kml_stations_summary">Добавяне на реперите в KML експорт</string>
+  <string name="pref_kml_splays_title">KML странични измервания</string>
+  <string name="pref_kml_splays_summary">Добавяне на странични измервания в KML експорт</string>
 
   <string name="pref_sock_type_title">Bluetooth режим</string>
   <string name="pref_sock_type_summary">Bluetooth режим</string>
@@ -787,8 +787,8 @@
   <string name="pref_wait_shot_summary">Изчакване след измерване [ms]</string>
   <string name="pref_wait_data_title">Пауза след изтегляне [ms]</string>
   <string name="pref_wait_data_summary">Пауза след изтегляне на отсечка [ms]</string>
-  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
-  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
+  <string name="pref_wait_conn_title">Изчакване за данни [ms]</string>
+  <string name="pref_wait_conn_summary">Изчакване за готови данни [ms]</string>
   <string name="pref_conn_mode_title">Тип на връзката за данни</string>
   <string name="pref_conn_mode_summary">Тип на връзката за данни с DistoX</string>
   <string name="pref_auto_reconnect_title">Автоматично възст. на връзка</string>
@@ -894,8 +894,8 @@
   <string name="pref_dxf_scale_title">Мащаб на DXF скици</string>
   <string name="pref_dxf_scale_summary">Мащабен фактор на DXF скици</string>
   <string name="pref_dxf_scale_message">Фактор за мащабиране на експортиране на DXF скици</string>
-  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
-  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
+  <string name="pref_dxf_blocks_title">DXF странични краища</string>
+  <string name="pref_dxf_blocks_summary">DXF краища на странични измервания</string>
   <string name="pref_thumbnail_title">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_summary">Резолюция на мини-картинки</string>
   <string name="pref_thumbnail_message">Резолюция на мини-картинки</string>
@@ -958,10 +958,10 @@
   <string name="pref_checkBT_summary">Разрешаване/забраняване на Bluetooth</string>
   <string name="pref_checkAttached_title">Проверка на антена</string>
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
+  <string name="pref_backup_number_title">Брой архиви</string>
+  <string name="pref_backup_number_summary">Брой резервни архиви на скица</string>
+  <string name="pref_backup_interval_title">Интервал на архивиране</string>
+  <string name="pref_backup_interval_summary">Минимален интервал между два архива на скица [s]</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Площи експорт в xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string -->
   <string name="pref_therion_splays_title">Therion странични измервания</string>
@@ -972,8 +972,8 @@
   <string name="pref_loopClosure_summary">Дали да се корегира грешката при затваряне на полигони</string>
   <!-- UNUSED string name="pref_splayExtend_title">Разгъване на странични отсечки</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Разгъване на странични отсечки(измервания) наляво/надясно във вертикалния разрез</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <string name="pref_swapLR_title">Размяна на LR в Compass</string>
+  <string name="pref_swapLR_summary">Размяна на измервания LR в Compass експорт</string>
   <string name="pref_LRExtend_title">Приблизително Ляво/Дясно при импорт</string>
   <string name="pref_LRExtend_summary">Приблизителна оценка на Ляво/Дясно (импорт от Compass/VisualTopo)</string>
 
