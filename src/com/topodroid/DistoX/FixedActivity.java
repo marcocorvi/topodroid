@@ -257,7 +257,9 @@ public class FixedActivity extends Activity
 
   // private final static int LOCATION_REQUEST = 1;
   private static int CRS_CONVERSION_REQUEST = 2; // not final ?
+  private static int CRS_INPUT_REQUEST = 3;      // not final ?
   private FixedDialog mFixedDialog = null;
+  private FixedAddDialog mFixedAddDialog = null;
 
   void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
   {
@@ -266,6 +268,7 @@ public class FixedActivity extends Activity
       Intent intent = new Intent( "Proj4.intent.action.Launch" );
       // Intent intent = new Intent( Intent.ACTION_DEFAULT, "com.topodroid.Proj4.intent.action.Launch" );
       intent.putExtra( "version", "1.1" );      // Proj4 version
+      intent.putExtra( "request", "CRS_CONVERSION_REQUEST" ); // Proj4 request
       intent.putExtra( "cs_from", "Long-Lat" ); // NOTE MUST USE SAME NAME AS Proj4
       intent.putExtra( "cs_to", cs_to ); 
       intent.putExtra( "longitude", fxd.lng );
@@ -277,6 +280,22 @@ public class FixedActivity extends Activity
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedDialog = null;
+      Toast.makeText( mContext, R.string.no_proj4, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  void getProj4Coords( FixedAddDialog dialog )
+  {
+    try {
+      Intent intent = new Intent( "Proj4.intent.action.Launch" );
+      // Intent intent = new Intent( Intent.ACTION_DEFAULT, "com.topodroid.Proj4.intent.action.Launch" );
+      intent.putExtra( "version", "1.1" );      // Proj4 version
+      intent.putExtra( "request", "CRS_INPUT_REQUEST" ); // Proj4 request
+      mFixedAddDialog = dialog;
+      TDLog.Log( TDLog.LOG_LOC, "COORD. INPUT REQUEST " );
+      startActivityForResult( intent, CRS_INPUT_REQUEST );
+    } catch ( ActivityNotFoundException e ) {
+      mFixedAddDialog = null;
       Toast.makeText( mContext, R.string.no_proj4, Toast.LENGTH_SHORT).show();
     }
   }
@@ -303,6 +322,13 @@ public class FixedActivity extends Activity
           mFixedDialog.setConvertedCoords( cs, lng, lat, alt );
           mFixedDialog = null;
         }
+      } else if ( reqCode == CRS_INPUT_REQUEST ) {
+        Bundle bundle = intent.getExtras();
+        double lng = bundle.getDouble( "longitude");
+        double lat = bundle.getDouble( "latitude");
+        double alt = bundle.getDouble( "altitude");
+        mFixedAddDialog.setCoords( lng, lat, alt );
+        mFixedAddDialog = null;
       }
     }
   }

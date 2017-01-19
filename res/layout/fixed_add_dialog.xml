@@ -153,6 +153,14 @@
         style="@style/button_default"
         android:text="@string/button_view"
         />
+      <Button android:id="@+id/button_proj4"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        android:layout_marginLeft="10dp"
+        style="@style/button_default"
+        android:text="Proj4"
+        />
       <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

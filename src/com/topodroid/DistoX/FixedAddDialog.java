@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import java.util.Locale;
+
 import android.net.Uri;
 
 import android.app.Dialog;
@@ -50,6 +52,7 @@ public class FixedAddDialog extends MyDialog
   private Button   mBtnNS;
   private Button   mBtnEW;
   private Button   mBtnOK;
+  private Button   mBtnProj4;
   private Button   mBtnView;
 
   private double  mLng, mLat, mHEll, mHGeo;
@@ -111,6 +114,8 @@ public class FixedAddDialog extends MyDialog
     mBtnEW.setOnClickListener( this );
     mBtnOK = (Button) findViewById(R.id.button_ok);
     mBtnOK.setOnClickListener( this );
+    mBtnProj4 = (Button) findViewById(R.id.button_proj4);
+    mBtnProj4.setOnClickListener( this );
     mBtnView = (Button) findViewById(R.id.button_view);
     mBtnView.setOnClickListener( this );
   }
@@ -149,6 +154,13 @@ public class FixedAddDialog extends MyDialog
     return true;
   }
 
+  void setCoords( double lng, double lat, double alt )
+  {
+    mETlng.setText(  FixedInfo.double2string( lng ) );
+    mETlat.setText(  FixedInfo.double2string( lat ) );
+    mEThell.setText( String.format( Locale.US, "%.1f", alt ) );
+  }
+
   @Override
   public void onClick(View v) 
   {
@@ -174,6 +186,9 @@ public class FixedAddDialog extends MyDialog
         Uri uri = Uri.parse( "geo:" + mLat + "," + mLng + "?q=" + mLat + "," + mLng );
         mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
       }
+    } else if ( b == mBtnProj4 ) {
+      mParent.getProj4Coords( this );
+      return;
     } else if ( b == mBtnOK ) {
       String name = mETstation.getText().toString();
       if ( name == null || name.length() == 0 ) {
