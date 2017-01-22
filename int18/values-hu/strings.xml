@@ -4,7 +4,7 @@
     <string name="no_manual">Cannot retrieve user manual from the web*Nem lehet letölteni a kézikönyvet az internetről</string>
 
     <string name="app_name">TopoDroid</string>
-    <string name="double_back">Click BACK again to exit* Nyomd meg mégegyszer a kilépéshez</string>
+    <string name="double_back">Click BACK again to exit* Nyomd meg vissza gombot újra a kilépéshez</string>
 
     <string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?*A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string>
     <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)*Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
@@ -12,7 +12,7 @@
     <string name="POINT">POINT*PONT</string>
     <string name="LINE">LINE*VONAL</string>
     <string name="AREA">AREA*TERÜLET</string>
-    <string name="HELP">HELP*Segítség</string>
+    <string name="HELP">HELP*SEGÍTSÉG</string>
     <string name="STATION">STATION*MÉRÉSI PONT</string>
 
     <string name="cut">CUT*VÁGÁS</string>
@@ -72,7 +72,7 @@
     <string name="calib_max_error">Max. error: %1$.4f degrees*Max. hiba: %1$.4f fok</string>
     <string name="calib_ave_std">Accuracy: %1$.4f ± %2$.4f degrees*Pontosság: %1$.4f ± %2$.4f fok</string>
     <string name="calib_precision">Precision*Precizitás</string>
-    <string name="calib_iter">Iterations: %1$d*Iterációk: %1$d</string>
+    <string name="calib_iter">Iterations: %1$d*Iterációk száma: %1$d</string>
     <string name="calib_reset">Reset DistoX calibration ?*Visszaállítja a DistoX kalibrációját?</string>
     
     <string name="algorithm">Algorithm:*Algoritmus:</string>
@@ -90,7 +90,7 @@
     <string name="device_none">No DistoX selected*Nincs kiválasztva DistoX</string>
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset DistoX memory*DistoX memóriájának újraindítása</string>
-    <string name="device_code">DistoX code %1$4d*Distox kódja %1$4d</string>
+    <string name="device_code">DistoX code %1$4d*DistoX kódja %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d*Firmware verzió: %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d*Hardware verzió: %1$d.%2$d</string>
     <string name="device_status_angle_grad">Angle units: grad*Szög mértékegysége: újfok</string>
