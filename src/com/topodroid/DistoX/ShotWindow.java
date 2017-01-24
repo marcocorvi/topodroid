@@ -625,6 +625,11 @@ public class ShotWindow extends Activity
   {
     (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
   }
+  void insertLRUDatStation( String station, float bearing, float clino,
+                            String left, String right, String up, String down )
+  {
+    mApp.insertLRUDatStation( station, bearing, clino, left, right, up, down );
+  }
 
   // called by PhotoSensorDialog to split the survey
   // void askSurvey( )
@@ -654,9 +659,25 @@ public class ShotWindow extends Activity
     mApp.mActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
   }
 
-  void doDeleteShot( long id )
+  void doDeleteShot( long id, DistoXDBlock blk, boolean leg )
   {
-    mApp.mData.deleteShot( id, mApp.mSID, true );
+    mApp.mData.deleteShot( id, mApp.mSID, true ); // forward = true
+    if ( blk != null && blk.type() == DistoXDBlock.BLOCK_MAIN_LEG ) {
+      if ( leg ) { // delete whole leg
+        for ( ++id; ; ++id ) {
+          DistoXDBlock b = mApp.mData.selectShot( id, mApp.mSID );
+          if ( b == null || b.type() != DistoXDBlock.BLOCK_SEC_LEG ) break;
+          mApp.mData.deleteShot( id, mApp.mSID, true ); // forward = true
+        }
+      } else { // set station to next leg shot
+        ++id;
+        DistoXDBlock b = mApp.mData.selectShot( id, mApp.mSID );
+        if ( b != null && b.type() == DistoXDBlock.BLOCK_SEC_LEG ) {
+          mApp.mData.updateShot( id, mApp.mSID, blk.mFrom, blk.mTo, blk.mExtend, blk.mFlag, 0, blk.mComment, true ); // forward = true
+          mApp.mData.updateShotStatus( id, mApp.mSID, 0, true ); // status normal, forward = true
+        }
+      }
+    }
     updateDisplay( ); 
   }
 

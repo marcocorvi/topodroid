@@ -385,6 +385,7 @@
     <string name="toggle_failed">Не вдалось перемкнути DistoX</string>
     <string name="toggle_ok">Перемкнути DistoX в режим калібрування</string>
     <string name="undelete_text">Натисніть на елемент щоб відновити</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">видима межа</string>
     <!-- UNUSED string name="vthreshold">верт. поріг</string -->
     <string name="wait_scan">Сканування: чекайте &#8230;</string>
@@ -443,7 +444,7 @@
     <!-- UNUSED string name="ask_close_survey">Закрити зйомку?</string -->
     <string name="ask_gps_service">Включить сервіс GPS?</string>
 
-    <!-- UNUSED string name="button_add"       >Додати  </string -->
+    <string name="button_add"       >Додати  </string>
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Відміна    </string>
     <string name="button_close"     >Закрити     </string>

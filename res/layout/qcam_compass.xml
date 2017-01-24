@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:id="@+id/layout">
+        <com.topodroid.DistoX.QCamDrawingSurface
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/drawingSurface"
+        />
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          >
+	  <Button android:id="@+id/buttonClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_eval"
+            android:layout_gravity="left"
+            />
+          <TextView android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+          <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            >
+	    <Button android:id="@+id/buttonSave"
+              android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+              android:layout_marginRight="20dp"
+              android:text="@string/button_save"
+              android:layout_gravity="right"
+              />
+	    <Button android:id="@+id/buttonQuit"
+              android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+              android:text="@string/button_close"
+              android:layout_gravity="right"
+              />
+          </LinearLayout>
+        </LinearLayout>
+
+</RelativeLayout>

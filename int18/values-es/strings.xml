@@ -383,6 +383,7 @@
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">Borde visible</string>
     <!-- UNUSED string name="vthreshold">Precisión</string -->
     <string name="wait_scan">Buscando: espere&#8230;</string>
@@ -440,7 +441,7 @@
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">Establecer servicio de GPS?</string>
 
-    <!-- UNUSED string name="button_add"       >Añadir    </string -->
+    <string name="button_add"       >Añadir    </string>
     <string name="button_back"      >Atras     </string>
     <string name="button_cancel"    >Cancelar  </string>
     <string name="button_close"     >Cerrar     </string>

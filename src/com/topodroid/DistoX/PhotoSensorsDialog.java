@@ -18,9 +18,6 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import android.widget.TextView;
-// import android.widget.EditText;
-import android.widget.Button;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -28,6 +25,11 @@ import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.CheckBox;
 
 import android.util.Log;
 
@@ -39,6 +41,15 @@ public class PhotoSensorsDialog extends MyDialog
 
   private TextView mTVstations;
   private TextView mTVdata;
+
+  private RadioButton mRBfrom;
+  private RadioButton mRBto;
+  private EditText mETleft;
+  private EditText mETright;
+  private EditText mETup;
+  private EditText mETdown;
+  private Button mBTok;
+  private CheckBox mCBleg;
 
   private MyCheckBox mButtonPhoto;
   private MyCheckBox mButtonSensor;
@@ -79,6 +90,18 @@ public class PhotoSensorsDialog extends MyDialog
       LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
     lp.setMargins( 0, 10, 20, 10 );
 
+    mRBfrom  = (RadioButton)findViewById( R.id.station_from );
+    mRBto    = (RadioButton)findViewById( R.id.station_to );
+    mETleft  = (EditText)findViewById( R.id.shot_left );
+    mETright = (EditText)findViewById( R.id.shot_right );
+    mETup    = (EditText)findViewById( R.id.shot_up );
+    mETdown  = (EditText)findViewById( R.id.shot_down );
+    mBTok    = (Button)findViewById( R.id.btn_ok );
+    mBTok.setOnClickListener( this );
+
+    mCBleg = (CheckBox) findViewById( R.id.leg );
+    mCBleg.setChecked( false );
+
     mButtonPhoto  = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
     mButtonSensor = new MyCheckBox( mContext, size, R.drawable.iz_sensor, R.drawable.iz_sensor ); 
     mButtonShot   = new MyCheckBox( mContext, size, R.drawable.iz_add_leg, R.drawable.iz_add_leg );
@@ -103,12 +126,18 @@ public class PhotoSensorsDialog extends MyDialog
     mTVstations.setText( mBlk.Name() );
     mTVdata.setText( mBlk.dataString( mContext.getResources().getString(R.string.shot_data) ) );
 
+    mRBfrom.setText( mBlk.mFrom );
+    mRBto.setText( mBlk.mTo );
+    mRBfrom.setChecked( true );
+
     mButtonPhoto.setOnClickListener( this );
     mButtonSensor.setOnClickListener( this );
     // mButtonExternal.setOnClickListener( this );
     mButtonShot.setOnClickListener( this );
     mButtonSurvey.setOnClickListener( this );
     mButtonDelete.setOnClickListener( this );
+
+    if ( mBlk.type() != DistoXDBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
   }
 
   public void onClick(View v) 
@@ -116,7 +145,17 @@ public class PhotoSensorsDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
 
-    if ( b == mButtonPhoto ) {       // PHOTO
+    if ( b == mBTok ) { // AT-STATION LRUD
+      String station = ( mRBto.isChecked() )? mBlk.mTo : mBlk.mFrom;
+      // check the data
+      mParent.insertLRUDatStation( station, mBlk.mBearing, mBlk.mClino, 
+        mETleft.getText().toString().replace(',','.') ,
+        mETright.getText().toString().replace(',','.') ,
+        mETup.getText().toString().replace(',','.') ,
+        mETdown.getText().toString().replace(',','.') 
+      );
+      dismiss();
+    } else if ( b == mButtonPhoto ) {       // PHOTO
       mParent.askPhotoComment( );
       dismiss();
     } else if ( b == mButtonSensor ) { // SENSOIR
@@ -142,7 +181,7 @@ public class PhotoSensorsDialog extends MyDialog
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doDeleteShot( mBlk.mId );
+            mParent.doDeleteShot( mBlk.mId, mBlk, mCBleg.isChecked() );
             dismiss();
           }
         } );

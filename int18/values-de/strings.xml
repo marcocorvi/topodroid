@@ -394,6 +394,7 @@
     <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
     <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
     <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">Sichtbare Grenze</string>
     <!-- UNUSED string name="vthreshold">Vertikale Schwelle</string -->
     <string name="wait_scan">Scannen: warten&#8230;</string>
@@ -458,7 +459,7 @@
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
 
-    <!-- UNUSED string name="button_add"       >Erstellen       </string -->
+    <string name="button_add"       >Erstellen       </string>
     <string name="button_back"      >Zurück    </string>
     <string name="button_cancel"    >Abbrechen </string>
     <string name="button_close"     >Schließen     </string>

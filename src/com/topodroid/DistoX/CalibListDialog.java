@@ -143,6 +143,8 @@ public class CalibListDialog extends MyDialog
   {
     CharSequence item = ((TextView) view).getText();
     String name = item.toString();
+    int len = name.indexOf(" ");
+    name = name.substring(0, len);
     // TDLog.Log(  TDLog.LOG_INPUT, "CalibListDialog onItemClick() " + name );
     // TODO open calibration activity
     mParent.openCalibration( name );

@@ -387,6 +387,7 @@
     <string name="toggle_failed">Neuspela aktivacija kalibracije</string>
     <string name="toggle_ok">DistoX v opciji kalibracija</string>
     <string name="undelete_text">Izberi objekt za ponvono uporabo</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">Vidni robovi</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
     <string name="wait_scan">Scanning:počakaj	&#8230;</string>
@@ -445,10 +446,10 @@
      <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
 
-    <!-- UNUSED string name="button_add"       >Aggiungi  </string -->
+    <!-- TODO string name="button_add">Insert  </string -->
     <string name="button_back"      >Nazaj  </string>
     <string name="button_cancel"    >Briši   </string>
-    <!-- TODO string name="button_close"     >Close     </string -->
+    <!-- TODO string name="button_close">Close     </string -->
     <string name="button_convert"   >Pretvori </string>
     <string name="button_current"   >Trenuten   </string>
     <string name="button_delete"    >Odstrani   </string>

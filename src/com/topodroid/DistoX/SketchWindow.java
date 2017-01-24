@@ -1779,7 +1779,7 @@ public class SketchWindow extends ItemDrawer
       setMode( SketchDef.MODE_MOVE );
       // SensorManager sm = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
       // mCompass = new SketchCompassSensor( mActivity, sm, TDSetting.mCompassReadings );
-      mTimer = new TimerTask( mActivity, this );
+      mTimer = new TimerTask( mActivity, this, TimerTask.Y_AXIS );
       mTimer.execute();
     } else if ( p++ == pos ) { // HELP
       int nn = mNrButton1 + mNrButton2 - 3 + mNrButton3 - 3 + mNrButton4 - 3;

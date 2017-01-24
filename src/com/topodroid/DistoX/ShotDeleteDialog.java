@@ -19,6 +19,7 @@ import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -35,6 +36,7 @@ public class ShotDeleteDialog extends MyDialog
   private TextView mTVstations;
   private TextView mTVdata;
   private Button   mButtonDelete;
+  private CheckBox mCBleg;
   // private Button   mButtonCancel;
 
   /**
@@ -62,6 +64,9 @@ public class ShotDeleteDialog extends MyDialog
     mButtonDelete = (Button) findViewById(R.id.shot_delete );
     // mButtonCancel = (Button) findViewById(R.id.button_cancel );
 
+    mCBleg = (CheckBox) findViewById( R.id.leg );
+    mCBleg.setChecked( false );
+
     setTitle( R.string.title_shot_delete );
 
     mTVstations = (TextView) findViewById( R.id.shot_shot_stations );
@@ -71,6 +76,9 @@ public class ShotDeleteDialog extends MyDialog
 
     mButtonDelete.setOnClickListener( this );
     // mButtonCancel.setOnClickListener( this );
+
+    if ( mBlk.type() != DistoXDBlock.BLOCK_MAIN_LEG ) mCBleg.setVisibility( View.GONE );
+
   }
 
   public void onClick(View v) 
@@ -78,7 +86,7 @@ public class ShotDeleteDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
     if ( b == mButtonDelete ) {
-      mParent.doDeleteShot( mBlk.mId );
+      mParent.doDeleteShot( mBlk.mId, mBlk, mCBleg.isChecked() );
     // } else if ( b == mButtonCancel ) {
     //   /* nothing */
     }

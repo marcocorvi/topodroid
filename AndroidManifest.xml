@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="303008"
-      android:versionName="3.3.0h"
+      android:versionCode="303010"
+      android:versionName="3.3.0j"
     >
     <uses-sdk
        android:minSdkVersion="8"
@@ -19,6 +19,11 @@
     <!-- uses-permission android:name="android.permission.INTERNET"/ -->
     <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
     <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
 
     <application
           android:name=".TopoDroidApp"

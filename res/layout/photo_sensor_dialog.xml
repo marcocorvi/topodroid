@@ -29,13 +29,104 @@
     />
   </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout4"
-      android:layout_width="fill_parent" 
-      android:layout_height="50sp"
-      android:paddingLeft="10sp"
-      android:paddingRight="10sp"
+  <LinearLayout android:id="@+id/layout5a"
+    android:layout_width="fill_parent" 
+    android:layout_height="50sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:orientation="horizontal" 
+    >
+    <RadioGroup 
+      android:id="@+id/station"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
       android:orientation="horizontal" 
+      >
+      <RadioButton android:id="@+id/station_from"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
       />
+      <RadioButton android:id="@+id/station_to"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+      />
+    </RadioGroup>
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:gravity="right"
+      android:layout_marginTop="25sp" 
+      >
+      <Button android:id="@+id/btn_ok"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@drawable/button"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+        android:singleLine="true"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout5b"
+    android:layout_width="fill_parent" 
+    android:layout_height="50sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:orientation="horizontal" 
+    >
+    <EditText android:id="@+id/shot_left" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A4;"
+      android:nextFocusRight="@+id/shot_right"
+      android:singleLine="true"
+      />
+    <EditText android:id="@id/shot_right" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A6;"
+      android:nextFocusRight="@+id/shot_up"
+      android:singleLine="true"
+      />
+    <EditText android:id="@id/shot_up" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A5;"
+      android:nextFocusRight="@+id/shot_down"
+      android:singleLine="true"
+      />
+    <EditText android:id="@id/shot_down" 
+      android:maxLines="1" 
+      android:layout_width="0dp"
+      android:layout_weight="25"
+      android:layout_height="wrap_content" 
+      android:hint="&#x21A7;"
+      android:singleLine="true"
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout4"
+    android:layout_width="fill_parent" 
+    android:layout_height="50sp"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp"
+    android:orientation="horizontal" 
+    />
+
+  <CheckBox android:id="@+id/leg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+      	android:text="@string/delete_whole_leg"
+        />
+
 
   <LinearLayout 
     android:layout_width="fill_parent" 

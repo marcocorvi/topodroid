@@ -460,7 +460,7 @@ public class DeviceHelper extends DataSetObservable
    {
      List<String> ret = new ArrayList<String>();
      Cursor cursor = myDB.query( CALIB_TABLE,
-                                new String[] { "name" }, // columns
+                                new String[] { "name", "day" }, // columns
                                 "device=?",
                                 new String[] { device },
                                 null,  // groupBy
@@ -469,7 +469,7 @@ public class DeviceHelper extends DataSetObservable
      if (cursor != null ) {
        if ( cursor.moveToFirst() ) {
          do {
-           ret.add( new String(cursor.getString(0)) );
+           ret.add( cursor.getString(0) + " - " + cursor.getString(1) );
          } while (cursor.moveToNext());
        }
        if ( !cursor.isClosed()) cursor.close();

@@ -357,6 +357,9 @@ class ConnectionHandler extends Handler
        case DataListener.SHOT_COMMENT:
          mApp.mData.updateShotComment( Integer.parseInt(data[0]), mSID, data[2], false );
          break;
+       case DataListener.SHOT_STATUS:
+         mApp.mData.updateShotStatus( Integer.parseInt(data[0]), mSID, Integer.parseInt(data[2]), false );
+         break;
        case DataListener.SHOT_DELETE:
          mApp.mData.deleteShot( Integer.parseInt(data[0]), mSID, false );
          break;
@@ -501,6 +504,11 @@ class ConnectionHandler extends Handler
   public void onUpdateShotComment( long id, long sid, String comment ) 
   {
     enqueue( DataListener.SHOT_COMMENT, String.format( "%d|%d|%s|", (int)id, (int)sid, comment ) );
+  }
+
+  public void onUpdateShotStatus( long id, long sid, long status )
+  {
+    enqueue( DataListener.SHOT_STATUS, String.format( "%d|%d|%d|", (int)id, (int)sid, (int)status ) );
   }
 
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double roll ) 

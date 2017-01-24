@@ -18,5 +18,6 @@ class TDRequest
   static final int INFO_ACTIVITY     = 3;
   // private static final int EXTERNAL_ACTIVITY = 4;
   static final int REQUEST_DEVICE    = 5;
+  static final int QCAM_COMPASS      = 6;
   static final int CAPTURE_IMAGE_ACTIVITY = 100;
 }

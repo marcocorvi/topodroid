@@ -29,6 +29,12 @@
         />
   </LinearLayout>
 
+  <CheckBox android:id="@+id/leg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+      	android:text="@string/delete_whole_leg"
+        />
+
   <Button android:id="@+id/shot_delete"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 

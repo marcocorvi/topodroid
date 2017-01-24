@@ -385,6 +385,7 @@
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
     <string name="toggle_ok">Включен/изключен режим на калибрация на DistoX</string>
     <string name="undelete_text">Изберете какво искате да възстановите</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">видима граница</string>
     <!-- UNUSED string name="vthreshold">вертикална граница</string -->
     <string name="wait_scan">Сканиране, моля изчакайте…</string>
@@ -443,7 +444,7 @@
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
 
-    <!-- UNUSED string name="button_add"       >Добавяне  </string -->
+    <string name="button_add"       >Добавяне  </string>
     <string name="button_back"      >Обратно   </string>
     <string name="button_cancel"    >Отказ     </string>
     <string name="button_close"     >Затваряне </string>

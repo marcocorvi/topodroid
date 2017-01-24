@@ -50,4 +50,7 @@ class TDTag
   public static final String TOPODROID_CWD = "topodroid.cwd";
   public static final String TOPODROID_CMAP = "topodroid.cmap";
 
+  public static final String TOPODROID_BEARING = "topodroid.bearing";
+  public static final String TOPODROID_CLINO = "topodroid.clino";
+
 }

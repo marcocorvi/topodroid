@@ -62,6 +62,7 @@ public interface DataListener
 
   static final byte SHOT_INSERT   = (byte)21;
   static final byte SHOT_INSERTAT = (byte)23;
+  static final byte SHOT_STATUS   = (byte)24;
 
   public void onUpdateShot( long id, long sid, String fStation, String tStation,
                             long extend, long flag, long leg, String comment );
@@ -77,6 +78,8 @@ public interface DataListener
   public void onUpdateShotFlag( long id, long sid, long flag );
 
   public void onUpdateShotComment( long id, long sid, String comment );
+
+  public void onUpdateShotStatus( long id, long sid, long status );
 
   public void onUpdateShotAMDR( long sid, long id, double acc, double mag, double dip, double r );
 

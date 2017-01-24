@@ -4236,4 +4236,24 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  @Override
+  protected void onActivityResult( int reqCode, int resCode, Intent data )
+  {
+    switch ( reqCode ) {
+      case TDRequest.QCAM_COMPASS:
+        if ( resCode == Activity.RESULT_OK ) {
+          try {
+            Bundle extras = data.getExtras();
+            float b = Float.parseFloat( extras.getString( TDTag.TOPODROID_BEARING ) );
+            float c = Float.parseFloat( extras.getString( TDTag.TOPODROID_CLINO ) );
+            mShotNewDialog.setBearingAndClino( b, c );
+          } catch ( NumberFormatException e ) { }
+        }
+        mShotNewDialog = null;
+        break;
+    }
+  }
+
+  ShotNewDialog mShotNewDialog = null;
+
 }

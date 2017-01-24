@@ -384,6 +384,7 @@
     <string name="toggle_failed">Failed to toggle DistoX*Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">Toggled DistoX calibration mode*DistoX átkapcsolva kalibrációs üzemmódba</string>
     <string name="undelete_text">Tap item to recover*Érintse meg az elemet a visszaálításhoz</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">visible border*látható határ</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
     <string name="wait_scan">Scanning: wait &#8230;*Keresés: várj &#8230;</string>
@@ -442,7 +443,7 @@
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?*Bekapcsolja a GPS-t?</string>
 
-    <!-- UNUSED string name="button_add"       >Add       </string -->
+    <!-- TODO string name="button_add"       >Add       </string -->
     <string name="button_back"      >Back      *Vissza    </string>
     <string name="button_cancel"    >Cancel    *Kilép     </string>
     <!-- TODO string name="button_close"     >Close     </string -->

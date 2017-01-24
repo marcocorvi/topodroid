@@ -292,13 +292,13 @@ public class DataHelper extends DataSetObservable
     stat.countStation   = 0;
     stat.countLoop      = 0;
     stat.countComponent = 0;
-    stat.averageM   = 0;
-    stat.averageG   = 0;
-    stat.averageDip = 0;
-    stat.stddevM    = 0;
-    stat.stddevG    = 0;
-    stat.stddevDip  = 0;
-    int nrMGDip = 0;
+    stat.averageM = 0;
+    stat.averageG = 0;
+    stat.averageD = 0;
+    stat.stddevM  = 0;
+    stat.stddevG  = 0;
+    stat.stddevD  = 0;
+    stat.nrMGD = 0;
 
     if ( myDB == null ) return stat;
 
@@ -307,30 +307,40 @@ public class DataHelper extends DataSetObservable
                                 "surveyId=? AND status=0 AND acceleration > 1 ",
                                 new String[] { Long.toString(sid) },
                                 null, null, null );
+    int nrMGD = 0;
     if (cursor.moveToFirst()) {
+      int nr = cursor.getCount();
+      stat.G = new float[ nr ];
+      stat.M = new float[ nr ];
+      stat.D = new float[ nr ];
       do {
+        int k = 0;
         float a = (float)( cursor.getDouble(1) );
         if ( a > 0.1f ) {
-          ++nrMGDip;
           float m = (float)( cursor.getDouble(2) );
           float d = (float)( cursor.getDouble(3) );
-          stat.averageM   += m;
-          stat.averageG   += a;
-          stat.averageDip += d;
-          stat.stddevM    += m * m;
-          stat.stddevG    += a * a;
-          stat.stddevDip  += d * d;
+          stat.averageM += m;
+          stat.averageG += a;
+          stat.averageD += d;
+          stat.stddevM  += m * m;
+          stat.stddevG  += a * a;
+          stat.stddevD  += d * d;
+          stat.G[nrMGD]  = a;
+          stat.M[nrMGD]  = m;
+          stat.D[nrMGD]  = d;
+          ++nrMGD;
         }
       } while ( cursor.moveToNext() );
-      if ( nrMGDip > 0 ) {
-        stat.averageM   /= nrMGDip;
-        stat.averageG   /= nrMGDip;
-        stat.averageDip /= nrMGDip;
-        stat.stddevM    = (float)Math.sqrt( stat.stddevM / nrMGDip - stat.averageM * stat.averageM );
-        stat.stddevG    = (float)Math.sqrt( stat.stddevG / nrMGDip - stat.averageG * stat.averageG );
-        stat.stddevDip  = (float)Math.sqrt( stat.stddevDip / nrMGDip - stat.averageDip * stat.averageDip );
-        stat.stddevM *= 100/stat.averageM;
-        stat.stddevG *= 100/stat.averageG;
+      stat.nrMGD = nrMGD;
+      if ( nrMGD > 0 ) {
+        stat.averageM /= nrMGD;
+        stat.averageG /= nrMGD;
+        stat.averageD /= nrMGD;
+        stat.stddevM   = (float)Math.sqrt( stat.stddevM / nrMGD - stat.averageM * stat.averageM );
+        stat.stddevG   = (float)Math.sqrt( stat.stddevG / nrMGD - stat.averageG * stat.averageG );
+        stat.stddevD   = (float)Math.sqrt( stat.stddevD / nrMGD - stat.averageD * stat.averageD );
+        stat.stddevM  *= 100/stat.averageM;
+        stat.stddevG  *= 100/stat.averageG;
       }
     }
     if (cursor != null && !cursor.isClosed()) cursor.close();
@@ -832,6 +842,20 @@ public class DataHelper extends DataSetObservable
       myDB.execSQL( sw.toString() );
       if ( forward ) { // synchronized( mListeners )
         for ( DataListener listener : mListeners ) listener.onUpdateShotComment( id, sid, comment );
+      }
+    } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
+    } catch ( SQLiteException e ) { logError("shot " + id + " cmt", e ); }
+  }
+
+  void updateShotStatus( long id, long sid, long status, boolean forward )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE shots SET status=%d WHERE surveyId=%d AND id=%d", status, sid, id );
+    try {
+      myDB.execSQL( sw.toString() );
+      if ( forward ) { // synchronized( mListeners )
+        for ( DataListener listener : mListeners ) listener.onUpdateShotStatus( id, sid, status );
       }
     } catch ( SQLiteDiskIOException e ) {  handleDiskIOError( e );
     } catch ( SQLiteException e ) { logError("shot " + id + " cmt", e ); }

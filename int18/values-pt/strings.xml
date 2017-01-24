@@ -383,6 +383,7 @@
     <string name="toggle_failed">Falha ao alternar o DistoX</string>
     <string name="toggle_ok">Modo calibração DistoX alternativo</string>
     <string name="undelete_text">Toque no item para restaura-lo</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">Borda visível</string>
     <!-- UNUSED string name="vthreshold">Limiar vertical</string -->
     <string name="wait_scan">Escaneando: aguardar &#8230;</string>
@@ -440,7 +441,7 @@
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
 
-    <!-- UNUSED string name="button_add"       >Adicionar     </string -->
+    <string name="button_add"       >Adicionar   </string>
     <string name="button_back"      >Voltar      </string>
     <string name="button_cancel"    >Cancelar    </string>
     <!-- TODO string name="button_close"     >Fechar     </string -->

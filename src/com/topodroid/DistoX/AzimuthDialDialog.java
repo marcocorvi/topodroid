@@ -206,7 +206,7 @@ public class AzimuthDialDialog extends MyDialog
       updateSeekBar();
       updateView();
     } else if ( b == mBTsensor ) {
-      mTimer = new TimerTask( mContext, this );
+      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS );
       mTimer.execute();
     } else if ( b == mBTok ) {
       mParent.setRefAzimuth( mAzimuth, 0 );

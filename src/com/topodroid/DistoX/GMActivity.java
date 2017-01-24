@@ -1033,9 +1033,14 @@ public class GMActivity extends Activity
       mBlkStatus = 1 - mBlkStatus;       // 0 --> 1;  1 --> 0
       updateDisplay( );
     } else if ( p++ == pos ) { // VALIDATE
-      // Toast.makeText( this, "UNDER CONSTRUCTION", Toast.LENGTH_SHORT ).show();
       List< String > list = mApp.mDData.selectDeviceCalibs( mApp.mDevice.mAddress );
-      list.remove( mApp.myCalib );
+      for ( String str : list ) {
+        int len = str.indexOf(' ');
+        if ( mApp.myCalib.equals( str.substring(0,len) ) ) {
+          list.remove( str );
+          break;
+        }
+      }
       if ( list.size() == 0 ) {
         Toast.makeText( this, R.string.few_calibs, Toast.LENGTH_SHORT ).show();
       } else {

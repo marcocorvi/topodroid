@@ -94,6 +94,8 @@ public class CalibValidateListDialog extends MyDialog
   {
     CharSequence item = ((TextView) view).getText();
     String name = item.toString();
+    int len = name.indexOf(" ");
+    name = name.substring(0, len);
     // TDLog.Log(  TDLog.LOG_INPUT, "CalibValidate ListDialog onItemClick() " + name );
     // TODO open calibration activity
     mParent.validateCalibration( name );

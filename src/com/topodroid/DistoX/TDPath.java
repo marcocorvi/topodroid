@@ -385,7 +385,7 @@ public class TDPath
             if ( pathname.isDirectory() ) return false;
             if ( ne == 0 ) return true;
             for ( int n = 0; n < ne; ++n ) {
-              if ( pathname.getName().endsWith( ext[n] ) ) return true;
+              if ( pathname.getName().toLowerCase().endsWith( ext[n] ) ) return true;
             }
             return false;
           }

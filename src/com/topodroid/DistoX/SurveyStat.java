@@ -27,10 +27,16 @@ class SurveyStat
   public int countLoop;
   public int countComponent;
 
-  public float averageM;
-  public float averageG;
-  public float averageDip;
-  public float stddevM;
-  public float stddevG;
-  public float stddevDip;
+  float averageM;
+  float averageG;
+  float averageD;
+  float stddevM;
+  float stddevG;
+  float stddevD;
+
+  float[] G; // accelerations
+  float[] M; // magn. fields
+  float[] D; // magn. dips
+
+  int nrMGD;
 }

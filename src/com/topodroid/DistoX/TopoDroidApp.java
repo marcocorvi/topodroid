@@ -1571,6 +1571,12 @@ public class TopoDroidApp extends Application
   }
 
   // ---------------------------------------------------------
+  void insertLRUDatStation( String station, float bearing, float clino,
+                            String left, String right, String up, String down )
+  {
+    // could return the long
+    addManualSplays( -1L, station, left, right, up, down, bearing, false );
+  }
 
   private long addManualSplays( long at, String splay_station, String left, String right, String up, String down,
                                 float bearing, boolean horizontal )

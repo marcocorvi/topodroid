@@ -20,9 +20,15 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
+import android.util.Log;
+
 public class TimerTask extends AsyncTask<String, Integer, Long >
                        implements SensorEventListener
 {
+  final static int X_AXIS = 1; // short side of phone heading right
+  final static int Y_AXIS = 2; // long side of phone heading top
+  final static int Z_AXIS = 3; // coming out of the screen
+
   int mCntAcc;
   int mCntMag;
   float mValAcc[] = new float[3];
@@ -30,17 +36,21 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   Context mContext; 
   IBearingAndClino mParent;
   boolean mRun;
+  int mAxis;
 
-  TimerTask( Context context, IBearingAndClino parent )
+  TimerTask( Context context, IBearingAndClino parent, int axis )
   {
     mContext = context;
     mParent  = parent;
-    mRun = true;
+    mRun     = true;
+    mAxis    = axis;
+    // Log.v("DistoX", "Timer Task axis " + axis );
   }
 
   @Override
   protected Long doInBackground( String... str )
   {
+    // Log.v("DistoX", "Timer Task does in background");
     int count = TDSetting.mTimerCount;
     int duration = 100; // ms
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
@@ -90,6 +100,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   protected void onPostExecute(Long result) 
   {
+    // Log.v("DistoX", "Timer Task on post exec");
     if ( mCntAcc > 0 && mCntMag > 0 && mRun ) {
       mValAcc[0] /= mCntAcc;
       mValAcc[1] /= mCntAcc;
@@ -126,6 +137,7 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
 
   private void computeBearingAndClino( )
   {
+    // Log.v("DistoX", "Timer Task compute B & C ");
     Vector g = new Vector( mValAcc[0], mValAcc[1], mValAcc[2] );
     Vector m = new Vector( mValMag[0], mValMag[1], mValMag[2] );
     g.normalize();
@@ -135,8 +147,29 @@ public class TimerTask extends AsyncTask<String, Integer, Long >
     Vector n = g.cross( w ); // north
     w.normalize();
     n.normalize();
-    float b0 = TDMath.atan2( -w.y, n.y );
-    float c0 = - TDMath.atan2( g.y, TDMath.sqrt(w.y*w.y+n.y*n.y) );
+    float b0 = 0;
+    float c0 = 0;
+    switch ( mAxis ) {
+      case X_AXIS:
+      case -X_AXIS:
+        b0 = TDMath.atan2( -w.x, n.x );
+        c0 = - TDMath.atan2( g.x, TDMath.sqrt(w.x*w.x+n.x*n.x) );
+        break;
+      case Y_AXIS:
+      case -Y_AXIS:
+        b0 = TDMath.atan2( -w.y, n.y );
+        c0 = - TDMath.atan2( g.y, TDMath.sqrt(w.y*w.y+n.y*n.y) );
+        break;
+      case Z_AXIS:
+      case -Z_AXIS:
+        b0 = TDMath.atan2( -w.z, n.z );
+        c0 = - TDMath.atan2( g.z, TDMath.sqrt(w.z*w.z+n.z*n.z) );
+        break;
+    }
+    if ( mAxis < 0 ) { // opposite of standard android axes
+      b0 += TDMath.M_PI;
+      c0 = -c0;
+    }
     if ( b0 < 0.0f ) b0 += TDMath.M_2PI;
     // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
     b0 = 360 - b0 * 360.0f / TDMath.M_2PI;

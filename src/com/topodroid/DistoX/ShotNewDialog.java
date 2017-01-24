@@ -23,6 +23,7 @@ import android.widget.RadioButton;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import android.text.InputType;
 import android.inputmethodservice.KeyboardView;
@@ -75,6 +76,7 @@ public class ShotNewDialog extends MyDialog
   private Button   mBtnSave;
   private Button   mBtnBack;
   private Button   mBtnSensor;
+  private Button   mBtnCamera;
 
   TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
@@ -88,6 +90,11 @@ public class ShotNewDialog extends MyDialog
     notDone  = true;
     mAt      = at;
     mTimer   = null;
+  }
+
+  private boolean checkCameraHardware()
+  {
+    return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
   }
 
 // -------------------------------------------------------------------
@@ -215,18 +222,29 @@ public class ShotNewDialog extends MyDialog
     // lp.setMargins( 0, -10, 20, 10 );
 
     mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass, R.drawable.iz_compass ); 
-    mCBsplayAtTo = new CheckBox( mContext );
-    mCBsplayAtTo.setText( R.string.splay_at_to );
     layout4.addView( mBtnSensor );
-    layout4.addView( mCBsplayAtTo );
-
     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBtnSensor.getLayoutParams();
     params.setMargins( 0, -10, 40, 10 );
     mBtnSensor.setLayoutParams( params );
+    mBtnSensor.setOnClickListener( this );
+
+    if ( TDSetting.mLevelOverAdvanced && checkCameraHardware() ) {
+      
+      mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
+      layout4.addView( mBtnCamera );
+      params = (LinearLayout.LayoutParams) mBtnCamera.getLayoutParams();
+      params.setMargins( 0, -10, 40, 10 );
+      mBtnCamera.setLayoutParams( params );
+      mBtnCamera.setOnClickListener( this );
+    }
+
+    mCBsplayAtTo = new CheckBox( mContext );
+    mCBsplayAtTo.setText( R.string.splay_at_to );
+    layout4.addView( mCBsplayAtTo );
+
 
     // mCBsplayAtTo = (CheckBox) findViewById( R.id.splay_at_to );
     // mBtnSensor = (Button) findViewById(R.id.button_sensor );
-    mBtnSensor.setOnClickListener( this );
 
     mRadioLeft  = (RadioButton) findViewById(R.id.radio_left );
     mRadioVert  = (RadioButton) findViewById(R.id.radio_vert );
@@ -263,6 +281,7 @@ public class ShotNewDialog extends MyDialog
   // implements
   public void setBearingAndClino( float b, float c )
   {
+    Log.v("DistoX", "ShotNewDialog set B " + b + " C " + c );
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   }
@@ -429,8 +448,10 @@ public class ShotNewDialog extends MyDialog
         dismiss();
       }
     } else if ( b == mBtnSensor ) {
-      mTimer = new TimerTask( mContext, this );
+      mTimer = new TimerTask( mContext, this, TimerTask.Y_AXIS );
       mTimer.execute();
+    } else if ( b == mBtnCamera && TDSetting.mLevelOverAdvanced ) {
+      new QCamCompass( mContext, this).show();
     } else if ( b == mBtnBack ) {
       dismiss();
     }

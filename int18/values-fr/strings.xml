@@ -385,6 +385,7 @@
     <string name="toggle_failed">Échec du changement de mode du DistoX</string>
     <string name="toggle_ok">DistoX en mode étalonnage</string>
     <string name="undelete_text">Sélectionner un élément pour le récupérer</string>
+    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
     <string name="visible_border">Bordure visible</string>
     <!-- UNUSED string name="vthreshold">Seuil vertical</string -->
     <string name="wait_scan">Recherche : patientez…</string>
@@ -442,7 +443,7 @@
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <!-- TODO string name="ask_gps_service">Set GPS service?</string -->
 
-    <!-- UNUSED string name="button_add"       >Ajouter       </string -->
+    <string name="button_add"       >Ajouter       </string>
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
     <!-- TODO string name="button_close"     >Close     </string -->

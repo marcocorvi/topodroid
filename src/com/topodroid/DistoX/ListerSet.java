@@ -70,6 +70,5 @@ public class ListerSet implements ILister
     for ( ILister lister : mLister ) lister.setRefAzimuth( azimuth, fixed_extend );
   }
 
-
 }
 
