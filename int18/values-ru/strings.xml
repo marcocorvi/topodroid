@@ -385,7 +385,7 @@
     <string name="toggle_failed">Не удалось переключить DistoX</string>
     <string name="toggle_ok">Переключить DistoX в режим калибровки</string>
     <string name="undelete_text">Нажмите на элемент чтобы восстановить</string>
-    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
+    <string name="delete_whole_leg">Удалить замер</string>
     <string name="visible_border">видимая граница</string>
     <!-- UNUSED string name="vthreshold">верт. порог</string -->
     <string name="wait_scan">Сканирование: ждите &#8230;</string>
