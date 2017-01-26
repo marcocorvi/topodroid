@@ -29,7 +29,6 @@ public class QCamBox extends View
   QCamBox( Context context )
   {
     super( context );
-
     mWhite = new Paint();
     mWhite.setColor( 0xffffffff );
     mWhite.setStrokeWidth( 2 );

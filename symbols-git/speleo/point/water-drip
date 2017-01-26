@@ -1,0 +1,19 @@
+symbol point
+name water-drip
+name-it stillicidio
+th_name u:water-drip
+orientation no
+color 0x6666ff
+csurvey 6 6 80
+path
+  moveTo 0 -8
+  lineTo 0 -4
+  moveTo 0 -2
+  lineTo 0 2
+  moveTo 0 4
+  lineTo 0 8
+  lineTo 4 4
+  moveTo 0 8
+  lineTo -4 4
+endpath
+endsymbol

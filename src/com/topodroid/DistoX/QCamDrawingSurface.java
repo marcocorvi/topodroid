@@ -50,8 +50,8 @@ public class QCamDrawingSurface extends SurfaceView
 
   private Boolean mDoDraw;
   SurfaceHolder mHolder;
-  // int mWidth;            // canvas width
-  // int mHeight;           // canvas height
+  int mWidth;            // canvas width
+  int mHeight;           // canvas height
 
   Camera mCamera = null;
   Camera.PreviewCallback mPreviewCallback;

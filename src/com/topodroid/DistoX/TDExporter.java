@@ -1642,7 +1642,7 @@ class TDExporter
 
   /** Centerline data are exported in Compass format as follows
    *    SURVEY NAME: survey_name
-   *    SURVEY DATE: mm dd yyyy
+   *    SURVEY DATE: mm dd yyyy COMMENT: desription
    *    SURVEY TEAM:
    *    team_line
    *    DECLINATION: declination  FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00
@@ -1717,7 +1717,7 @@ class TDExporter
       }
       pw.format("SURVEY DATE: %02d %02d %04d", m, d, y ); // format "MM DD YYYY"
       if ( info.comment != null ) {
-        pw.format(" COMMENT %s", info.comment );
+        pw.format(" COMMENT: %s", info.comment );
       }
       pw.format("\r\n");
 

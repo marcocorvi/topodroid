@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:id="@+id/layout">
+	android:orientation="vertical" 
+        android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+        android:id="@+id/layout">
         <com.topodroid.DistoX.QCamDrawingSurface
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -12,35 +14,50 @@
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
+          android:layout_alignParentBottom="true"
+          android:layout_gravity="bottom"
+          android:gravity="bottom"
           >
-	  <Button android:id="@+id/buttonClick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_eval"
-            android:layout_gravity="left"
-            />
           <TextView android:id="@+id/data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="24dp"
             />
           <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
             android:gravity="right"
             >
+	    <Button android:id="@+id/buttonClick"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/button"
+              style="@style/button_default"
+              android:text="@string/button_eval"
+              android:gravity="right"
+              android:layout_marginBottom="15dp"
+            />
 	    <Button android:id="@+id/buttonSave"
               android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-              android:layout_marginRight="20dp"
+              android:background="@drawable/button"
+              style="@style/button_default"
               android:text="@string/button_save"
-              android:layout_gravity="right"
+              android:gravity="right"
+              android:layout_marginBottom="15dp"
               />
 	    <Button android:id="@+id/buttonQuit"
               android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
-              android:text="@string/button_close"
-              android:layout_gravity="right"
+              android:background="@drawable/button"
+              style="@style/button_default"
+              android:text="@string/button_cancel"
+              android:gravity="right"
+              android:layout_marginBottom="15dp"
               />
           </LinearLayout>
         </LinearLayout>
