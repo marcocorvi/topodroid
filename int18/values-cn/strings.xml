@@ -462,6 +462,7 @@
     <string name="button_ok"        >同意        </string>
     <string name="button_open"      >打开      </string>
     <string name="button_read"      >读取      </string>
+    <!-- TODO string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >重组   </string -->
     <string name="button_dump"      >删除     </string>
     <!-- TODO string name="button_replace"   >Replace   </string -->

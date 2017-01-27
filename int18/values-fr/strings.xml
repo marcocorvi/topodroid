@@ -464,6 +464,7 @@
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Ouvrir    </string>
     <string name="button_read"      >Lecture      </string>
+    <!-- TODO string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Dump     </string>
     <!-- TODO string name="button_replace"   >Replace   </string -->

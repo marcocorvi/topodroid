@@ -1,5 +1,6 @@
 symbol point
 name block
+name-it blocco
 th_name block
 color 0xff6633
 csurvey 0 0 0

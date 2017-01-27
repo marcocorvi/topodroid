@@ -58,6 +58,7 @@ public class QCamDrawingSurface extends SurfaceView
   Camera.PictureCallback mRaw;
   Camera.PictureCallback mJpeg;
   Camera.ShutterCallback mShutter;
+  byte[] mJpegData;
 
   public QCamDrawingSurface(Context context, AttributeSet attrs) 
   {
@@ -72,6 +73,7 @@ public class QCamDrawingSurface extends SurfaceView
 
     mQCam = null;
     mCamera   = null;
+    mJpegData = null;
 
     createCallbacks();
   }
@@ -103,6 +105,13 @@ public class QCamDrawingSurface extends SurfaceView
   {
     // Log.v( TAG, "surface destroyed " );
     close();
+  }
+
+  void takePicture()
+  {
+    if ( mCamera != null ) {
+      mCamera.takePicture( mShutter, mRaw, null, mJpeg);
+    }
   }
 
   public void close()
@@ -196,6 +205,7 @@ public class QCamDrawingSurface extends SurfaceView
     mJpeg = new PictureCallback() {
       public void onPictureTaken( byte[] data, Camera c ) { 
         // Log.v( "DistoX", "Picture JPEG callback data " + ((data==null)? "null" : data.length) );
+        mJpegData = data;
       }
     };
     mPreviewCallback = new PreviewCallback() { // called every time startPreview

@@ -1,5 +1,6 @@
 symbol point
 name strata-overturned
+name-it strati_rovesciati
 th_name strata-overturned
 color 0xcccccc
 csurvey 0 0 0

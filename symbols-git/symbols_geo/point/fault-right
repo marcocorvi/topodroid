@@ -1,7 +1,8 @@
 symbol point
 name fault-right
+name-it faglia_destra
 th_name fault-right
-color 0xcccc99
+color 0xff6666
 csurvey 0 0 0
 orientation yes
 path

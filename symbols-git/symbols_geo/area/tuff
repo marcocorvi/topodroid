@@ -1,5 +1,6 @@
 symbol area
 name tuff
+name-it tufo
 th_name tuff
 color 0xff9966 0xcc
 csurvey 1 48 0 3

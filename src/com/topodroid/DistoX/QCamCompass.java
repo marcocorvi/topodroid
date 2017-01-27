@@ -85,6 +85,8 @@ public class QCamCompass extends Dialog
     mClino   = c;
     mTVdata.setText( String.format("%.2f %.2f", mBearing, mClino ) );
     mHasBearingAndClino = true;
+    // take snapshot
+    mSurface.takePicture();
   }
 
   @Override
@@ -96,8 +98,11 @@ public class QCamCompass extends Dialog
       timer.execute();
       return;
     } else if ( b == buttonSave ) {
-      if ( mHasBearingAndClino && mShotNewDialog != null ) {
-        mShotNewDialog.setBearingAndClino( mBearing, mClino );
+      if ( mHasBearingAndClino ) {
+        if ( mShotNewDialog != null ) {
+          mShotNewDialog.setBearingAndClino( mBearing, mClino );
+          mShotNewDialog.mJpegData = mSurface.mJpegData;
+        }
       }
     } else if ( b == buttonCancel ) {
     }

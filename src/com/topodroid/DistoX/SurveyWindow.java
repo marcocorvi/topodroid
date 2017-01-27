@@ -480,6 +480,9 @@ public class SurveyWindow extends Activity
         case TDConst.DISTOX_EXPORT_GRT: // Grottolf
           filename = mApp.exportSurveyAsGrt();
           break;
+        case TDConst.DISTOX_EXPORT_GTX: // GHTopo
+          filename = mApp.exportSurveyAsGtx();
+          break;
 
         case TDConst.DISTOX_EXPORT_TH:
         default:

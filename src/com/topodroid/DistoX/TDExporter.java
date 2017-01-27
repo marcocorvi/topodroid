@@ -1797,6 +1797,100 @@ class TDExporter
   }
 
   // =======================================================================
+  // GHTOPO EXPORT
+
+  // one of 6 14 31 83 115 164 211
+  static int randomColor()
+  {
+    return 211;
+  }
+
+  static String exportSurveyAsGtx( long sid, DataHelper data, SurveyInfo info, String filename )
+  {
+    try {
+      TDPath.checkPath( filename );
+      FileWriter fw = new FileWriter( filename );
+      PrintWriter pw = new PrintWriter( fw );
+
+      pw.format("<Genaral>\n");
+      pw.format("<Cavite FolderName=\"%s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObservcations=\"\"/>\n",
+                info.name );
+      pw.format("</General>\n");
+
+      List<DistoXDBlock> list = data.selectAllShots( sid, TopoDroidApp.STATUS_NORMAL );
+      TRobot trobot = new TRobot( list );
+      trobot.dump(); // DEBUG
+
+      List< FixedInfo > fixeds = data.selectAllFixed( sid, TopoDroidApp.STATUS_NORMAL );
+      pw.format("<Entrances>\n");
+      int ce = 0;
+      for ( FixedInfo fixed : fixeds ) {
+        ++ ce;
+        TRobotPoint pt = trobot.getPoint( fixed.name );
+        if ( pt != null ) {
+          pw.format(Locale.US, "<Entrance X=\"%.10f\" Y=\"%.10f\" Z=\"%.2f\" ", fixed.lng, fixed.lat, fixed.alt );
+          pw.format("Name=\"%s\" Numero=\"%d\" Comments=\"%s\" RefPoint=\"%d\" RefSerie=\"%d\" IdTerrain=\"\" />\n",
+                 fixed.name, ce, fixed.comment, pt.mNumber, pt.mSeries.mNumber );
+        }
+      }
+      pw.format("</Entrances>\n");
+
+      pw.format("<Networks>\n");
+      pw.format("<Network Name=\"%s\" Type=\"0\" ColorB=\"0\" ColorG=\"0\" ColorR=\"255\" Numero=\"1\" Comments=\"\"/>\n",
+                 info.name );
+      pw.format("</Networks>\n");
+
+      pw.format("<Codes>\n");
+      pw.format("<Code PsiL=\"0.05\" PsiP=\"1\" PsiAz=\"1\" Numero=\"1\"\n");
+      pw.format("  Comment=\"%s created by TopoDroid v %s\"\n",
+                TopoDroidUtil.getDateString("yyyy/MM/dd"), TopoDroidApp.VERSION );
+      pw.format("  FactLong=\"1\" ClinoUnit=\"360\" AngleLimite=\"100\" CompassUnit=\"360\" \n");
+      pw.format("  FuncCorrAzCo=\"0\" FuncCorrIncCo=\"0\" FuncCorrAzErrMax=\"0\" FuncCorrIncErrMax=\"0\" \n");
+      pw.format("  FuncCorrAzPosErrMax=\"0\" FuncCorrIncPosErrMax=\"0\" />\n");
+      pw.format("</Codes>\n");
+
+      pw.format("<Seances>\n");
+      pw.format("<Trip Date=\"%s\" Color=\"%d\" Numero=\"1\" Comments=\"%s\" ",
+        info.date, randomColor(), info.comment );
+      pw.format("Surveyor1=\"%s\" Surveyor2=\"\" Declination=\"0\" Inclination=\"0\" ModeDeclination=\"0\" />\n",
+        info.team );
+      pw.format("</Seances>\n");
+
+      pw.format("<Series>\n");
+      for ( TRobotSeries series : trobot.mSeries ) {
+        TRobotPoint dep = series.mBegin;
+        TRobotPoint arr = series.mEnd;
+        pw.format("<Serie Name=\"\" Color=\"#000000\" PtArr=\"%d\" PtDep=\"%d\" Chance=\"0\" Numero=\"%d\" ",
+                 arr.mNumber, dep.mNumber, series.mNumber );
+        pw.format("SerArr=\"%d\" SerDep=\"%d\" Network=\"1\" Raideur=\"1\" Entrance=\"0\" Obstacle=\"0\" ",
+                 arr.mSeries.mNumber, dep.mSeries.mNumber );
+        pw.format("Comments=\"\">\n");
+        pw.format("<Stations>\n");
+        TRobotPoint from = series.mBegin;
+        for ( TRobotPoint pt : series.mPoints ) {
+          // get leg from-pt and print it
+          from = pt;
+        }
+        pw.format("</Stations>\n");
+        pw.format("</Serie>\n");
+      }
+      pw.format("</Series>\n");
+
+      pw.format("<AntennaShots>\n");
+      // for all splays
+      pw.format("</AntennaShots>\n");
+
+
+      fw.flush();
+      fw.close();
+      return filename;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed Walls export: " + e.getMessage() );
+      return null;
+    }
+  }
+
+  // =======================================================================
   // GROTTOLF EXPORT
 
   // write RLDU and the cross-section points

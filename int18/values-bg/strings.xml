@@ -465,6 +465,7 @@
     <string name="button_ok"        >OK        </string>
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
+    <!-- TODO string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
     <string name="button_replace"   >Подмяна   </string>

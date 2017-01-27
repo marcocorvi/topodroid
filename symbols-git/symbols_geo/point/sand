@@ -1,5 +1,6 @@
 symbol point
 name sand
+name-it sabbia
 th_name sand
 color 0xff9900
 csurvey 0 0 0

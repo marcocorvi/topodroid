@@ -1,5 +1,6 @@
 symbol point
 name clay
+name-it argilla
 th_name clay
 color 0xff9933
 csurvey 0 0 0 

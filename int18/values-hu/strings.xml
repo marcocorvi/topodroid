@@ -464,6 +464,7 @@
     <string name="button_ok"        >OK        *OK     </string>
     <string name="button_open"      >Open      *Megnyit</string>
     <string name="button_read"      >Read      *Olvas  </string>
+    <!-- TODO string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump      *Biztonsági tár???</string>
     <!-- TODO string name="button_replace"   >Replace   </string -->

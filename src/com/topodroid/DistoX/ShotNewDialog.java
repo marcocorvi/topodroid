@@ -14,6 +14,10 @@ package com.topodroid.DistoX;
 import java.util.Locale;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.RadioButton;
@@ -77,6 +81,7 @@ public class ShotNewDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnSensor;
   private Button   mBtnCamera;
+  byte[] mJpegData; // camera jpeg data
 
   TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
@@ -90,6 +95,7 @@ public class ShotNewDialog extends MyDialog
     notDone  = true;
     mAt      = at;
     mTimer   = null;
+    mJpegData = null;
   }
 
   private boolean checkCameraHardware()
@@ -437,6 +443,23 @@ public class ShotNewDialog extends MyDialog
         TDLog.Error( "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
       }
       if ( blk != null ) {
+        if ( mJpegData != null ) { 
+          Log.v("DistoX", "save Jpeg image size " + mJpegData.length );
+          long photo_id = mApp.mData.nextPhotoId( mApp.mSID );
+          File imagefile = new File( TDPath.getSurveyJpgFile( mApp.mySurvey, Long.toString(photo_id ) ) );
+          try {
+            FileOutputStream fos = new FileOutputStream( imagefile );
+            fos.write( mJpegData );
+            fos.flush();
+            fos.close();
+            mApp.mData.insertPhoto( mApp.mSID, photo_id, blk.mId,
+                                    "",
+                                    TopoDroidUtil.currentDate(),
+                                    "snap " + shot_from + " " + shot_to ); // FIXME TITLE has to go
+          } catch ( IOException e ) {
+            TDLog.Error( "IO exception " + e.getMessage() );
+          }
+        }
         resetData( shot_to );
         if ( mLister !=  null ) {
           mLister.refreshDisplay( 1, false );

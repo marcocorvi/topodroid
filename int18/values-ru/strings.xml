@@ -464,6 +464,7 @@
     <!-- OK string name="button_ok"        >OK        </string -->
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
+    <!-- TODO string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
     <string name="button_replace"   >Замена   </string>

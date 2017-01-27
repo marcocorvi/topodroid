@@ -1,5 +1,6 @@
 symbol point
 name joint-inclined
+name-it giunto-inclinato
 th_name joint-inclined
 color 0xcccc99
 csurvey 0 0 0

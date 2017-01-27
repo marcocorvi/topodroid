@@ -50,6 +50,15 @@
               android:gravity="right"
               android:layout_marginBottom="15dp"
               />
+	    <Button android:id="@+id/buttonRedo"
+              android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+              android:background="@drawable/button"
+              style="@style/button_default"
+              android:text="@string/button_redo"
+              android:gravity="right"
+              android:layout_marginBottom="15dp"
+              />
 	    <Button android:id="@+id/buttonQuit"
               android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"

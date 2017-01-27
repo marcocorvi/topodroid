@@ -1,5 +1,6 @@
 symbol point
 name strata-inclined
+name-it strati_inclinati
 th_name strata-inclined
 color 0xcccccc
 csurvey 0 0 0

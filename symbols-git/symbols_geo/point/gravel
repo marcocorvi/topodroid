@@ -1,5 +1,6 @@
 symbol point
 name gravel
+name-it ghiaia
 th_name gravel
 color 0xcc9966
 csurvey 0 0 0

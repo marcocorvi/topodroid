@@ -1,5 +1,6 @@
 symbol point
 name strata-horizontal
+name-it strati_orizzontali
 th_name strata-horizontal
 color 0xcccccc
 csurvey 0 0 0
