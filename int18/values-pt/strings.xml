@@ -383,7 +383,7 @@
     <string name="toggle_failed">Falha ao alternar o DistoX</string>
     <string name="toggle_ok">Modo calibração DistoX alternativo</string>
     <string name="undelete_text">Toque no item para restaura-lo</string>
-    <!-- TODO string name="delete_whole_leg">Delete whole leg</string -->
+    <!-- TODO string name="delete_whole_leg">Excluir visada inteira</string -->
     <string name="visible_border">Borda visível</string>
     <!-- UNUSED string name="vthreshold">Limiar vertical</string -->
     <string name="wait_scan">Escaneando: aguardar &#8230;</string>
@@ -427,7 +427,7 @@
     <string name="extended">SECÇÃO</string>
     <string name="profile">PROJETO.</string>
     <string name="extended_profile">Secção estendida</string>
-    <!-- UNUSED string name="v_section">V-SECTION</string -->
+    <!-- UNUSED string name="v_section">SECÇÃO VERTICAL</string -->
     <string name="h_section">H-SECÇÃO</string>
 
     <!-- OK string name="distox_err_ok">OK</string -->
@@ -464,7 +464,7 @@
     <string name="button_read"      >Ler      </string>
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Esvaziar     </string>
-    <!-- TODO string name="button_replace"   >Replace   </string -->
+    <!-- TODO string name="button_replace"   >Substituir   </string -->
     <!-- TODO string name="button_reset"     >Reset     </string -->
     <string name="button_left"      >ESQUERDA</string>
     <string name="button_right"     >DIREITA</string>
@@ -472,8 +472,8 @@
     <string name="button_save"      >Salvar      </string>
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
     <string name="button_store"     >Armazenar     </string>
-    <!-- UNUSED string name="button_start"     >Start</string -->
-    <!-- UNUSED string name="button_stop"      >Stop</string -->
+    <!-- UNUSED string name="button_start"     >Iniciar</string -->
+    <!-- UNUSED string name="button_stop"      >Páre</string -->
     <!-- TODO string name="button_upload"    >Upload    </string -->
     <string name="button_view"      >Vista      </string>
 
@@ -502,14 +502,14 @@
     <string name="btn_import">Importar</string>
     <string name="btn_install">Instalar</string>
 
-    <!-- TODO string name="symbol_archeo">Archeo</string -->
-    <!-- TODO string name="symbol_bio">Biology</string -->
-    <!-- TODO string name="symbol_geo">Geology</string -->
-    <!-- TODO string name="symbol_mine">Mining</string -->
-    <!-- TODO string name="symbol_paleo">Paleo</string -->
-    <!-- TODO string name="symbol_speleo">Speleo</string -->
+    <!-- TODO string name="symbol_archeo">Arqueologia</string -->
+    <!-- TODO string name="symbol_bio">Biologia</string -->
+    <!-- TODO string name="symbol_geo">Geologia</string -->
+    <!-- TODO string name="symbol_mine">Mineração</string -->
+    <!-- TODO string name="symbol_paleo">Paleologia</string -->
+    <!-- TODO string name="symbol_speleo">Espeleologia</string -->
 
-    <!-- TODO string name="symbol_reload">Drawing Tools</string -->
+    <!-- TODO string name="symbol_reload">Ferramentas de desenho</string -->
 
 <!-- FIXME_SKETCH_3D -->    
     <!-- OK string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
@@ -553,7 +553,7 @@
     <!-- UNUSED string name="button_erase">Apagar</string -->
     <!-- UNUSED string name="btn_surface">Superfície</string -->
 
-    <!-- UNUSED string name="station_next">NEXT</string -->
+    <!-- UNUSED string name="station_next">PRÓXIMO</string -->
     <string name="no_shot_between_stations">Nenhuma visada entre as bases</string>
     <string name="few_line_points">A linha possui muitos poucos pontos</string>
     <string name="line_delete">Apagar linha</string>
@@ -567,7 +567,7 @@
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
     
-    <!-- TODO string name="help_close">FEchar janela</string -->
+    <!-- TODO string name="help_close">Fechar janela</string -->
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_continue">Continuar a desenhar uma linha</string>
     <string name="help_contour">Modificar perfil</string>
@@ -577,7 +577,7 @@
     <string name="help_add_topodroid">Criar novo mapa/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo mapa</string>
     <string name="help_symbol">Ativar/desativar ferramentas de desenho</string>
-    <!-- UNUSED string name="help_therion">App gerenciamento Therion</string -->
+    <!-- UNUSED string name="help_therion">App Gerenciamento Therion</string -->
     <!-- UNUSED string name="help_database">App Visualizador do Database (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
     <string name="help_log">Ativar/desativar configurações de log</string>
@@ -626,14 +626,14 @@
    
     <string name="help_line_point">Ações de linhas e pontos: juntar, separar, cortar, remover</string>
 <!--
-    <string name="help_to_point">Move selected point to join with the nearest point</string>
-    <string name="help_split_point">Split the point into two [line/area]</string>
-    <string name="help_split_line">Split the line into two at the point</string>
-    <string name="help_kink">Use a straight line at the point [line/area]</string>
+    <string name="help_to_point">Mover o ponto selecionado para junta-lo ao ponto mais próximo</string>
+    <string name="help_split_point">Dividir o ponto em dois [linha/área]</string>
+    <string name="help_split_line">Dividir a linha em dois no ponto [linha/área]</string>
+    <string name="help_kink">Utilizar uma linha reta no ponto [linha/área]</string>
 -->
     <string name="help_manual_calibration">Calibração manual dos instrumentos</string>
     <string name="help_note_plot">Editar as propriedades dos itens dos esboços selecionados</string>
-    <!-- UNUSED string name="help_save">Save changes to survey info</string -->
+    <!-- UNUSED string name="help_save">Salvar mudanças nas informações do mapa</string -->
     <string name="help_save_calib">Salvar alterações nas informações de calibração</string>
     <string name="help_export_survey">Exportar mapa</string>
     <string name="help_loc">Posição GPS</string>
@@ -654,16 +654,16 @@
     <string name="help_compute">Calcular calibração</string>
     <string name="help_write">Gravar coeficientes de calibração no DistoX</string>
 <!-- FIXME_SKETCH_3D -->
-    <!-- UNUSED string name="help_refs_model">View mode</string -->
+    <!-- UNUSED string name="help_refs_model">Modo de visualização</string -->
     <string name="help_one_model">Expandir o modelo 3D à vista</string>
     <string name="help_surface">Criar superfície</string>
     <string name="help_save_model">Exportar modelo 3D</string>
     <string name="help_trash_model">apagar modelo 3D</string>
     <string name="help_head_model">Orientar modelo 3D</string>
-    <!-- UNUSED string name="help_erase_model">Erase region</string -->
+    <!-- UNUSED string name="help_erase_model">Apagar região</string -->
     <string name="help_cut_model">Cortar região</string>
     <string name="help_stretch_model">Esticar região</string>
-    <!-- UNUSED string name="help_extrude_model">Extrude region</string -->
+    <!-- UNUSED string name="help_extrude_model">Extruir região</string -->
     <string name="help_refine_center">Aperfeiçoar superfície respeito aos centros do triângulo</string>
     <string name="help_refine_sides">Aperfeiçoar superfície respeito aos lados dos triângulo</string>
     <string name="help_refine_point">Aperfeiçoar superfície respeito ao ponto</string>
@@ -675,10 +675,10 @@
     <string name="title_coverage">Distribuição dos dados de calibração</string>
     <string name="title_coeff">Coeficientes de calibração</string>
     <string name="title_contour">Perfís</string>
-    <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
+    <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base salvas</string>
     <string name="title_device">Dispositivos DistoX</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
+    <!-- TODO string name="title_device_select">Selecionar o dispositivo DistoX</string -->
     <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>
     <string name="title_draw">Desenhar</string>
     <string name="title_draw_area">ÁREA %1$s</string>
