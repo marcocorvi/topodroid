@@ -967,10 +967,10 @@
   <string name="pref_autoStations_summary">Adicionar bases automaticamente aos arquivos de Therion</string>
   <string name="pref_loopClosure_title">Fechamento anéis</string>
   <string name="pref_loopClosure_summary">Compensação erro de fechamento do anel</string>
-  <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
-  <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
-  <!-- TODO string name="pref_swapLR_title">Swap LR in Compass</string -->
-  <!-- TODO string name="pref_swapLR_summary">Swap LR in Compass export</string -->
+  <!-- UNUSED string name="pref_splayExtend_title">Estimação extensão visada auxiliar</string -->
+  <!-- UNUSED string name="pref_splayExtend_summary">Estimação extensão visada auxiliar</string -->
+  <!-- TODO string name="pref_swapLR_title">Troca LR em bússola</string -->
+  <!-- TODO string name="pref_swapLR_summary">Troca LR na exportação da bússola</string -->
   <string name="pref_LRExtend_title">Estimativa extensão L/R</string>
   <string name="pref_LRExtend_summary">Estimativa extensão Direita/Esquerda (importação Compass/VisualTopo)</string>
 
@@ -1081,17 +1081,17 @@
   <string name="pref_log_zip">ZIP</string>
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
-  <!-- UNUSED string name="line_fine">fine</string -->
+  <!-- UNUSED string name="line_fine">fino</string -->
   <!-- UNUSED string name="line_normal">normal</string -->
-  <!-- UNUSED string name="line_coarse">coarse</string -->
+  <!-- UNUSED string name="line_coarse">grosseiro</string -->
   <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
-  <!-- UNUSED string name="units_dd">degrees</string -->
+  <!-- UNUSED string name="units_dd">graus</string -->
   <!-- UNUSED string name="units_grads">grads</string -->
-  <!-- UNUSED string name="units_meters">meters</string -->
-  <!-- UNUSED string name="units_feet">feet</string -->
-  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
-  <!-- UNUSED string name="alt_ortho">orthometric</string -->
-  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
+  <!-- UNUSED string name="units_meters">metros</string -->
+  <!-- UNUSED string name="units_feet">pés</string -->
+  <!-- UNUSED string name="alt_wgs">elipsoide</string -->
+  <!-- UNUSED string name="alt_ortho">Ortométrico</string -->
+  <!-- UNUSED string name="splay_extend">Estimar extensão visada auxiliar</string -->
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
