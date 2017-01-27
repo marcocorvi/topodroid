@@ -714,7 +714,7 @@
     <string name="title_survey_new">Novo mapa</string>
     <string name="title_survey_export">Exportar mapa</string>
     <string name="title_survey_rename">Renomear mapa</string>
-    <!-- TODO string name="title_plot_rename">Rename sketch</string -->
+    <!-- TODO string name="title_plot_rename">Renomear esboço</string -->
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
@@ -732,7 +732,7 @@
   <string name="pref_raw_data_title">Dados brutos</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
-  <!-- UNUSED string name="pref_bootloader_summary">Enable bootloader</string -->
+  <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
   <string name="pref_cosurvey_title">Serviço de mapeamento cooperativo</string>
@@ -747,7 +747,7 @@
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
   <string name="pref_size_buttons_title">Tamanho botões</string>
   <string name="pref_size_buttons_summary">Tamanho da barra dos botões</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Enter the size of action-bar buttons [pixels]</string -->
+  <!-- UNUSED string name="pref_size_buttons_message">Inserir o tamanho dos botões da barra de ação [pixels]</string -->
 
   <string name="pref_leg_shots_title">Medições mínimas por cada visada principal</string>
   <string name="pref_leg_shots_summary">Número mínimo de medições por cada visada principal</string>
@@ -764,29 +764,29 @@
   <string name="pref_survex_lrud_summary">Adicionar LRUD à exportação do Survex</string>
   <!-- TODO string name="pref_svg_grid_title">Grelha SVG</string -->
   <!-- TODO string name="pref_svg_grid_summary">Adicionar grelha ao arquivo SVG exportado</string -->
-  <!-- TODO string name="pref_svg_in_html_title">SVG in HTML</string -->
-  <!-- TODO string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
-  <!-- TODO string name="pref_kml_stations_title">KML stations</string -->
-  <!-- TODO string name="pref_kml_stations_summary">Add stations to KML export</string -->
-  <!-- TODO string name="pref_kml_splays_title">KML splays</string -->
-  <!-- TODO string name="pref_kml_splays_summary">Add splays to KML export</string -->
+  <!-- TODO string name="pref_svg_in_html_title">SVG em HTML</string -->
+  <!-- TODO string name="pref_svg_in_html_summary">Incorporar arquivo de exportação SVG em HTML</string -->
+  <!-- TODO string name="pref_kml_stations_title">Bases KML</string -->
+  <!-- TODO string name="pref_kml_stations_summary">Adicionar bases ao arquivo de exportação KML</string -->
+  <!-- TODO string name="pref_kml_splays_title">Visadas auxiliares KML</string -->
+  <!-- TODO string name="pref_kml_splays_summary">Adicionar visadas auxiliares ao arquivo de exportação KML</string -->
 
   <string name="pref_sock_type_title">Soquete</string>
   <string name="pref_sock_type_summary">Criar soquete</string>
-  <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
-  <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
-  <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
-  <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
-  <!-- UNUSED string name="pref_comm_retry_message">Connection retries number</string -->
+  <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->
+  <!-- UNUSED string name="pref_device_type_summary">Modelo de DistoX</string -->
+  <!-- UNUSED string name="pref_comm_retry_title">Tentativa de conexão</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">Número de tentativas de conexão</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Número de tentativas de conexão</string -->
+  <!-- UNUSED string name="pref_comm_retry_message">Número de tentativas de conexãor</string -->
   <string name="pref_wait_laser_title">Pausa do laser [ms]</string>
   <string name="pref_wait_laser_summary">Pausa após a ligação do laser [ms]</string>
   <string name="pref_wait_shot_title">Pausa do tiro [ms]</string>
   <string name="pref_wait_shot_summary">Pausa após a misuração [ms]</string>
   <string name="pref_wait_data_title">Pausa dos dados [ms]</string>
   <string name="pref_wait_data_summary">Pausa após download dos dados [ms]</string>
-  <!-- TODO string name="pref_wait_conn_title">Data ready wait delay [ms]</string -->
-  <!-- TODO string name="pref_wait_conn_summary">Delay waiting for data to be ready [ms]</string -->
+  <!-- TODO string name="pref_wait_conn_title">Tempo de espera para os dados prontos [ms]</string -->
+  <!-- TODO string name="pref_wait_conn_summary">Tempo de espera para os dados prontos [ms]</string -->
   <string name="pref_conn_mode_title">Tipo de conexão dos dados</string>
   <string name="pref_conn_mode_summary">Tipo de conexão com DistoX</string>
   <string name="pref_auto_reconnect_title">Reconexão automática</string>
@@ -802,8 +802,8 @@
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nome CRS</string>
   <string name="pref_crs_message">Inserir o nome do CRS como no Proj4</string>
-  <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
-  <!-- UNUSED string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
+  <!-- UNUSED string name="pref_gps_averaging_title">Média GPS</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Utilizar a média GPS</string -->
 
   <string name="pref_plot_screen_title">ESBOÇO</string>
   <string name="pref_tool_line_title">LINHAS</string>
@@ -813,16 +813,16 @@
   <string name="pref_shot_data_title">DADOS VISADAS</string>
   <string name="pref_shot_units_title">UNIDADES</string>
   <string name="pref_cwd_title">Directory de trabalho</string>
-  <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
-  <!-- UNUSED string name="pref_cwd_message">Enter TopoDroid work directory</string -->
+  <!-- UNUSED string name="pref_cwd_summary">Directory de trabalho work directory</string -->
+  <!-- UNUSED string name="pref_cwd_message">Inserir a directory de trabalho TopoDroid</string -->
   <string name="pref_pt_color_map_title">Mapa das cores do PocketTopo</string>
   <string name="pref_pt_color_map_summary">Mapa das cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tamanho texto</string>
   <string name="pref_text_size_summary">Tamanho do texto da lista dos itens</string>
   <string name="pref_text_size_message">Tamanho do texto na lista dos mapas e das visadas</string>
   <string name="pref_closeness_title">Raio de seleção</string>
-  <!-- UNUSED string name="pref_closeness_summary">Sketch item selection radius</string -->
-  <string name="pref_closeness_message">Raio do item de seleção objetos do esboço</string>
+  <!-- UNUSED string name="pref_closeness_summary">Raio da ferramenta de seleção do esboço</string -->
+  <string name="pref_closeness_message">Raio da ferramenta de seleção objetos do esboço</string>
   <string name="pref_eraseness_title">Tamanho borracha para apagar </string>
   <string name="pref_eraseness_message">Raio da borracha para apagar objetos do desenho</string>
   <string name="pref_min_shift_title">Mudar sensibilidade</string>
@@ -830,7 +830,7 @@
   <string name="pref_pointing_title">Raio apontador</string>
   <string name="pref_pointing_message">Mudar sensibilidade</string>
   <string name="pref_vert_splay_title">Limite Splays tracejados</string>
-  <!-- UNUSED string name="pref_vert_splay_summary">Splay over this inclination are dashed</string -->
+  <!-- UNUSED string name="pref_vert_splay_summary">Visadas auxiliares acima desta inclinação serão tracejadas</string -->
   <string name="pref_vert_splay_message">Limite clino Splays tracejados</string>
 
 
@@ -869,7 +869,7 @@
   <string name="pref_vthr_summary">Limite vertical LRUD/WENS</string>
   <string name="pref_vthr_message">Limite inclinação vertical visadas entre LRUD/WENS</string>
   <string name="pref_plan_vthr_title">Limiar Splay na planta</string>
-  <!-- UNUSED string name="pref_plan_vthr_summary">Splay vertical threshold in plan-view</string -->
+  <!-- UNUSED string name="pref_plan_vthr_summary">Limiar vertical na planta</string -->
   <string name="pref_plan_vthr_message">Esconder visadas auxiliares com grande inclinação na planta</string>
   <string name="pref_init_station_title">Nome base inicial</string>
   <string name="pref_init_station_summary">Nome padrão da base inicial</string>
@@ -891,8 +891,8 @@
   <string name="pref_dxf_scale_title">Escada esboço DXF</string>
   <string name="pref_dxf_scale_summary">Fator de escada esboço DXF</string>
   <string name="pref_dxf_scale_message">Fator de escada na expórtação do esboço em DXF</string>
-  <!-- TODO string name="pref_dxf_blocks_title">DXF splay endpoints</string -->
-  <!-- TODO string name="pref_dxf_blocks_summary">DXF splay endpoints</string -->
+  <!-- TODO string name="pref_dxf_blocks_title">Ponto de chegada da visada auxiliar DXF</string -->
+  <!-- TODO string name="pref_dxf_blocks_summary">Ponto de chegada da visada auxiliar DXFs</string -->
   <string name="pref_thumbnail_title">Tamanho dos Thumbnails</string>
   <string name="pref_thumbnail_summary">Tamanho das fotos thumbnails</string>
   <string name="pref_thumbnail_message">Tamanho das fotos thumbnails</string>
@@ -908,8 +908,8 @@
   <string name="pref_unscaled_points_title">Zoom etiqueta pontos</string>
   <string name="pref_unscaled_points_summary">Desabilitar zoom da etiqueta dos pontos</string>
   <string name="pref_segment_title">Espaço entre segmentos</string>
-  <!-- UNUSED string name="pref_segment_summary">Minimum line-point distance</string -->
-  <string name="pref_segment_message">Distância mínima entre pontos de uma linha</string>
+  <!-- UNUSED string name="pref_segment_summary">Distância mínima linha-ponto</string -->
+  <string name="pref_segment_message">Distância mínima linha-ponto</string>
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo linha</string>
   <string name="pref_lineacc_title">Exatidão das curvas Bezier</string>
@@ -937,10 +937,10 @@
   <string name="pref_label_size_summary">Tamanho etiquetas</string>
   <string name="pref_label_size_message">Tamanho etiquetas</string>
   <string name="pref_arrow_length_title">Tamanho linhas de secção</string>
-  <!-- UNUSED string name="pref_arrow_length_summary">Size of the section line tick</string -->
+  <!-- UNUSED string name="pref_arrow_length_summary">Tamanho da linha de corte</string -->
   <string name="pref_arrow_length_message">Tamanho linhas de secção</string>
   <string name="pref_dot_radius_title">Raios pontos de seleção</string>
-  <!-- UNUSED string name="pref_dot_radius_summary">Green dots size</string -->
+  <!-- UNUSED string name="pref_dot_radius_summary">Tamanho dos pontos verdes</string -->
   <string name="pref_dot_radius_message">Tamanho dos pontos de seleção</string>
   <string name="pref_line_thickness_title">Espessura linha</string>
   <string name="pref_line_thickness_summary">Espessura linhas do desenho</string>
@@ -948,19 +948,19 @@
   <string name="pref_fixed_thickness_title">Espessura linha de trena</string>
   <string name="pref_fixed_thickness_summary">Espessura linha de trena</string>
   <string name="pref_fixed_thickness_message">Espessura linha de trena</string>
-  <!-- UNUSED string name="pref_device_title">Device</string -->
-  <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
-  <!-- UNUSED string name="pref_device_message">DistoX address name</string -->
+  <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
+  <!-- UNUSED string name="pref_device_summary">Nome endereço DistoX</string -->
+  <!-- UNUSED string name="pref_device_message">Nome endereço DistoX</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Habilitar check do Bluetooth na abertura do aplicativo</string>
   <string name="pref_checkAttached_title">Verificação linha de trena</string>
   <string name="pref_checkAttached_summary">Verificar se as bases estão conectadas</string>
-  <!-- TODO string name="pref_backup_number_title">Backup number</string -->
-  <!-- TODO string name="pref_backup_number_summary">Number of sketch files backups</string -->
-  <!-- TODO string name="pref_backup_interval_title">Backup interval</string -->
-  <!-- TODO string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
+  <!-- TODO string name="pref_backup_number_title">Número Backup</string -->
+  <!-- TODO string name="pref_backup_number_summary">Número dos arquivos de backup do esboço</string -->
+  <!-- TODO string name="pref_backup_interval_title">Intervalos de Backup</string -->
+  <!-- TODO string name="pref_backup_interval_summary">Intervalo mínimo entre dois backups [s]</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Salvar áreas de xtherion</string -->
   <string name="pref_therion_splays_title">Visadas auxiliares Therion</string>
   <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
   <string name="pref_autoStations_title">Bases Therion</string>
